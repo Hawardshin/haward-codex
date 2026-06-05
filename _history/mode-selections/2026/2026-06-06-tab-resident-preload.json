@@ -1,0 +1,16 @@
+{
+  "date": "2026-06-06",
+  "request_id": "2026-06-06-tab-resident-preload",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request changes desktop UI runtime behavior, memory use, and performance contracts, so it needs requirements, spec, implementation, validation, and resource/omission records.",
+  "non_quick_gates": [
+    "web_first_intake",
+    "requirements_record",
+    "spec_plan_tasks_validation_traceability",
+    "resource_check",
+    "omission_check",
+    "evaluation"
+  ]
+}

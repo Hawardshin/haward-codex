@@ -1,17 +1,17 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-05T16:34:19.490Z",
+  "generatedAt": "2026-06-05T16:50:37.607Z",
   "summary": {
-    "documents": 2313,
+    "documents": 2320,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 944
+        "count": 946
       },
       {
         "category": "web-search",
-        "count": 372
+        "count": 373
       },
       {
         "category": "plan",
@@ -19,19 +19,19 @@
       },
       {
         "category": "request-trace",
-        "count": 301
+        "count": 302
       },
       {
         "category": "work-timing",
-        "count": 223
+        "count": 224
       },
       {
         "category": "user-request",
-        "count": 85
+        "count": 86
       },
       {
         "category": "work-summary",
-        "count": 52
+        "count": 53
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6125497,
+    "totalSourceBytes": 6134145,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,118 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-06-tab-resident-preload-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-tab-resident-preload-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Tab Resident Preload Evaluation Input",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 tab resident preload\", \"status\": \"passed\", \"installation occurred\": false, \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 tab resident preload.json\" , \"omission check targets\": ",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;request id&quot;: &quot;2026 06 06 tab resident preload&quot;, &quot;status&quot;: &quot;passed&quot;, &quot;installation occurred&quot;: false, &quot;resource risk occurred&quot;: true, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 06 06 tab resident preload.json&quot; , &quot;omission check targets&quot;: &quot; history/omission checks/2026/2026 06 06 tab resident preload.json&quot; , &quot;mode sel</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1254,
+      "updatedAt": "2026-06-05T16:50:32.196Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-tab-resident-preload-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-tab-resident-preload.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: 탭 상주 선마운트 최적화",
+      "excerpt": "평가: 탭 상주 선마운트 최적화 결론 구현은 사용자 요구와 맞다. 탭 클릭 시점의 조건부 mount를 줄이고, 시작 후 idle 시간에 주요 탭을 renderer 메모리에 resident로 올리는 구조로 바꿨다. 확인한 점 주요 탭 condition이 section === ... 직접 mount gate에서 shouldRenderSection ... 로 전환됐다. 숨겨진 탭은 MountedSectionPanel 로 state를 유지한다. desktop/source 런타임 표면은 active sec",
+      "html": "<p>평가: 탭 상주 선마운트 최적화 결론 구현은 사용자 요구와 맞다. 탭 클릭 시점의 조건부 mount를 줄이고, 시작 후 idle 시간에 주요 탭을 renderer 메모리에 resident로 올리는 구조로 바꿨다. 확인한 점 주요 탭 condition이 section === ... 직접 mount gate에서 shouldRenderSection ... 로 전환됐다. 숨겨진 탭은 MountedSectionPanel 로 state를 유지한다. desktop/source 런타임 표면은 active section일 때만 launch request와 active flag를 받는다. workspace monitor 테스트와 체크가 통과했다. 전체 d</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1137,
+      "updatedAt": "2026-06-05T16:50:32.196Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-tab-resident-preload-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-tab-resident-preload.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: 탭 상주 선마운트 최적화",
+      "excerpt": "요청 결과 추적: 탭 상주 선마운트 최적화 요청 탭 이동 시 느린 마운트/불러오기 비용을 줄이기 위해 앱 시작 후 주요 탭을 미리 불러와 메모리에 두는 전역적 구조를 고려하고 구현해 달라는 요청. 결과 구현: platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx 스타일: platform desktop app/renderer/workspace monitor/app/globals.css 테스트: platform desk",
+      "html": "<p>요청 결과 추적: 탭 상주 선마운트 최적화 요청 탭 이동 시 느린 마운트/불러오기 비용을 줄이기 위해 앱 시작 후 주요 탭을 미리 불러와 메모리에 두는 전역적 구조를 고려하고 구현해 달라는 요청. 결과 구현: platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx 스타일: platform desktop app/renderer/workspace monitor/app/globals.css 테스트: platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs 요구사항: platform des</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1065,
+      "updatedAt": "2026-06-05T16:50:32.195Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-tab-resident-preload-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-tab-resident-preload.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 탭 상주 선마운트 최적화",
+      "excerpt": "작업 요약: 탭 상주 선마운트 최적화 Workspace Monitor의 주요 탭을 클릭할 때마다 새로 마운트하지 않도록 resident section 상태와 idle 선마운트 계획을 추가했다. 탭 pointerdown과 activation 시 대상 섹션을 즉시 resident로 표시하고, 이후 idle 시간에 나머지 visible section을 순차적으로 메모리에 올린다. 변경 MonitorShell.tsx : residentSectionIds , residentSectionMountPlan ,",
+      "html": "<p>작업 요약: 탭 상주 선마운트 최적화 Workspace Monitor의 주요 탭을 클릭할 때마다 새로 마운트하지 않도록 resident section 상태와 idle 선마운트 계획을 추가했다. 탭 pointerdown과 activation 시 대상 섹션을 즉시 resident로 표시하고, 이후 idle 시간에 나머지 visible section을 순차적으로 메모리에 올린다. 변경 MonitorShell.tsx : residentSectionIds , residentSectionMountPlan , shouldRenderSection 추가 MonitorShell.tsx : 주요 탭을 MountedSectionPanel 로 래핑 Monito</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1234,
+      "updatedAt": "2026-06-05T16:50:32.195Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-tab-resident-preload-json",
+      "path": "_history/work-timings/2026/2026-06-06-tab-resident-preload.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Tab Resident Preload",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 tab resident preload\", \"phases\": { \"phase\": \"web first intake\", \"duration minutes estimate\": 5 }, { \"phase\": \"source inspection\", \"duration minutes estimate\": 10 }, { \"phase\": \"implementation\", \"duration minutes estimate\": 25 }, {",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;request id&quot;: &quot;2026 06 06 tab resident preload&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;duration minutes estimate&quot;: 5 }, { &quot;phase&quot;: &quot;source inspection&quot;, &quot;duration minutes estimate&quot;: 10 }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;duration minutes estimate&quot;: 25 }, { &quot;phase&quot;: &quot;workspace monitor validation&quot;, &quot;duration minutes estimate&quot;: 5 }, { &quot;p</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 835,
+      "updatedAt": "2026-06-05T16:50:32.195Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-tab-resident-preload-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-tab-resident-preload.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 탭 상주 선마운트 최적화",
+      "excerpt": "사용자 요청 요약: 탭 상주 선마운트 최적화 사용자는 Workspace Monitor 탭 이동이 여전히 매우 느리다고 보고했다. 원인 후보로 탭 이동 때마다 많은 화면이 새로 불러오고 마운트되는 구조를 지적했고, 앱 시작 시 미리 모든 탭을 불러와 메모리에 두거나 전역적으로 보관해 탭 전환 비용을 줄이는 근본적 해결을 요청했다. 수용 기준 클릭 시점의 탭 mount 비용을 줄인다. 데스크톱 앱답게 RAM 사용을 더 허용한다. 구현 완료 후 사용자가 직접 빌드하지 않도록 빌드까지 자동 실행한다.",
+      "html": "<p>사용자 요청 요약: 탭 상주 선마운트 최적화 사용자는 Workspace Monitor 탭 이동이 여전히 매우 느리다고 보고했다. 원인 후보로 탭 이동 때마다 많은 화면이 새로 불러오고 마운트되는 구조를 지적했고, 앱 시작 시 미리 모든 탭을 불러와 메모리에 두거나 전역적으로 보관해 탭 전환 비용을 줄이는 근본적 해결을 요청했다. 수용 기준 클릭 시점의 탭 mount 비용을 줄인다. 데스크톱 앱답게 RAM 사용을 더 허용한다. 구현 완료 후 사용자가 직접 빌드하지 않도록 빌드까지 자동 실행한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 649,
+      "updatedAt": "2026-06-05T16:46:46.755Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-tab-resident-preload-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-tab-resident-preload.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: 탭 상주 선마운트 최적화",
+      "excerpt": "웹 검색 기록: 탭 상주 선마운트 최적화 목적 React 탭 전환에서 state preservation, conditional rendering, memoization, idle/lazy loading, CSS rendering containment 선택지를 확인했다. 검색어 React official docs memo useMemo useTransition performance rendering hidden tabs React official docs preserving and resetting",
+      "html": "<p>웹 검색 기록: 탭 상주 선마운트 최적화 목적 React 탭 전환에서 state preservation, conditional rendering, memoization, idle/lazy loading, CSS rendering containment 선택지를 확인했다. 검색어 React official docs memo useMemo useTransition performance rendering hidden tabs React official docs preserving and resetting state component tree hidden tabs MDN content visibility CSS rendering performan</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2474,
+      "updatedAt": "2026-06-05T16:46:46.755Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-06-native-select-replacement-evaluation-input-json",
       "path": "_history/evaluations/2026/2026-06-06-native-select-replacement-evaluation-input.json",
@@ -37075,31 +37187,31 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 41,
+      "documentsCount": 48,
       "categories": [
         {
           "category": "evaluation",
-          "count": 11
+          "count": 13
         },
         {
           "category": "request-trace",
-          "count": 6
+          "count": 7
         },
         {
           "category": "user-request",
-          "count": 6
+          "count": 7
         },
         {
           "category": "web-search",
-          "count": 6
+          "count": 7
         },
         {
           "category": "work-summary",
-          "count": 6
+          "count": 7
         },
         {
           "category": "work-timing",
-          "count": 6
+          "count": 7
         }
       ],
       "documents": []

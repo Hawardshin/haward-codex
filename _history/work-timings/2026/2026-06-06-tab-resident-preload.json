@@ -1,0 +1,34 @@
+{
+  "date": "2026-06-06",
+  "request_id": "2026-06-06-tab-resident-preload",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes_estimate": 5
+    },
+    {
+      "phase": "source_inspection",
+      "duration_minutes_estimate": 10
+    },
+    {
+      "phase": "implementation",
+      "duration_minutes_estimate": 25
+    },
+    {
+      "phase": "workspace_monitor_validation",
+      "duration_minutes_estimate": 5
+    },
+    {
+      "phase": "records_and_full_build",
+      "duration_minutes_estimate": 20
+    },
+    {
+      "phase": "browser_smoke",
+      "duration_minutes_estimate": 5
+    }
+  ],
+  "bottleneck_candidates": [
+    "Large MonitorShell TSX section wrapping is error-prone and should be extracted if it keeps changing.",
+    "Full internal packaging build dominates close-out elapsed time."
+  ]
+}

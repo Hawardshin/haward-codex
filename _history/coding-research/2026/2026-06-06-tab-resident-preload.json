@@ -1,0 +1,72 @@
+{
+  "date": "2026-06-06",
+  "request_id": "2026-06-06-tab-resident-preload",
+  "technology_stack": [
+    "React",
+    "Next.js renderer",
+    "Tauri desktop shell",
+    "TypeScript",
+    "CSS"
+  ],
+  "technology_official_docs": [
+    "https://react.dev/learn/preserving-and-resetting-state",
+    "https://react.dev/reference/react/useMemo",
+    "https://react.dev/reference/react/lazy",
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/contain",
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility"
+  ],
+  "stack_version_constraints": {
+    "react": "Use existing project dependency versions.",
+    "next": "Use existing workspace-monitor package versions.",
+    "tauri": "No native Rust change in this slice."
+  },
+  "source_types": [
+    "official_docs",
+    "local_source_code",
+    "local_tests",
+    "reference_examples"
+  ],
+  "reference_config_paths": [
+    "agent-platform/configs/research/research-agent-profile.json"
+  ],
+  "issue_discussion_sources": [],
+  "issue_discussion_notes": "No new library or public API risk was introduced. Official React/MDN docs and local source contracts were sufficient for this narrow renderer lifecycle change.",
+  "community_signal_notes": "No community popularity signal was used as factual proof.",
+  "language_options": [
+    "TypeScript React renderer resident tree",
+    "Rust/Tauri native cache",
+    "Web Worker/IndexedDB cache"
+  ],
+  "selected_language": "TypeScript React renderer resident tree",
+  "language_decision_notes": "The bottleneck is component mount and tab render lifecycle, so the renderer is the direct control point. Rust cache remains useful for file IO but cannot keep React tab state mounted.",
+  "architecture_reference_sources": [
+    "https://react.dev/learn/preserving-and-resetting-state",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx existing MountedSectionPanel source behavior"
+  ],
+  "architecture_options": [
+    "Resident mounted section panels with idle preloading",
+    "Immediate all-tab mount on first render",
+    "Lazy import/code splitting only"
+  ],
+  "architecture_decision_notes": "Resident mounted panels with idle preloading best matches the user's memory-first desktop request while avoiding a single startup CPU spike.",
+  "architecture_theory_sources": [
+    "React state preservation documentation",
+    "MDN CSS containment documentation"
+  ],
+  "architecture_practitioner_sources": [
+    "Existing local MountedSectionPanel pattern for source workbench"
+  ],
+  "architecture_tradeoff_notes": "The design trades higher steady-state memory for lower tab transition mount cost. Hidden panels remain mounted but are accessibility-hidden and layout-contained.",
+  "code_reference_sources": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "code_reference_notes": "The source workbench already used MountedSectionPanel to preserve editor state. This slice generalizes that pattern across all primary tabs.",
+  "folder_structure_options": [
+    "Patch existing MonitorShell/CSS/test files",
+    "Create a new resident section manager component"
+  ],
+  "folder_structure_decision_notes": "The existing shell owns section activation, visible sections, and toolbar state, so a narrow patch avoids a speculative abstraction.",
+  "folder_semantics_notes": "No new source folder was created. Spec/history records use the existing project-specific requirements/spec locations.",
+  "maintainability_notes": "If resident section policy gains user settings or memory budgets, extract the scheduler into a small hook."
+}

@@ -1,0 +1,32 @@
+{
+  "date": "2026-06-06",
+  "request_id": "2026-06-06-tab-resident-preload",
+  "checked_items": [
+    {
+      "item": "Run web search before implementation",
+      "status": "done",
+      "evidence": "_history/web-searches/2026/2026-06-06-tab-resident-preload.ko.md"
+    },
+    {
+      "item": "Change tab lifecycle rather than only visual styling",
+      "status": "done",
+      "evidence": "residentSectionIds, residentSectionMountPlan, shouldRenderSection"
+    },
+    {
+      "item": "Use more memory to reduce tab switching mount cost",
+      "status": "done",
+      "evidence": "primary sections are mounted as resident panels"
+    },
+    {
+      "item": "Preserve source editor state and active side-effect gates",
+      "status": "done",
+      "evidence": "MountedSectionPanel source remains, surfaceActive and launchRequest are active-section gated"
+    },
+    {
+      "item": "Run build automatically after implementation",
+      "status": "done",
+      "evidence": "corepack pnpm --dir platform-desktop-app run package:internal"
+    }
+  ],
+  "status": "passed"
+}

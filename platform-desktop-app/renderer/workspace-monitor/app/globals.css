@@ -1254,6 +1254,7 @@ main {
 }
 
 .mounted-section-panel {
+  contain: layout paint style;
   min-width: 0;
   animation: workspace-panel-enter var(--motion-duration-standard) var(--motion-ease-out) both;
 }

@@ -2730,10 +2730,19 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     () => featureGroups.map((group) => featureGroupForLanguage(group, uiLanguage)),
     [uiLanguage]
   );
+  const [residentSectionIds, setResidentSectionIds] = useState<SectionId[]>(() => {
+    const initialResidentSection = normalizeSectionId(initialSection) || "overview";
+    return Array.from(new Set<SectionId>([initialResidentSection, "source"]));
+  });
+  const residentSectionSet = useMemo(() => new Set(residentSectionIds), [residentSectionIds]);
+  const markSectionResident = useCallback((targetSection: SectionId) => {
+    setResidentSectionIds((current) => (current.includes(targetSection) ? current : [...current, targetSection]));
+  }, []);
   const activateSection = useCallback((nextSection: SectionId) => {
+    markSectionResident(nextSection);
     setSection(nextSection);
     setRecentSections((previous) => [nextSection, ...previous.filter((item) => item !== nextSection)].slice(0, 5));
-  }, []);
+  }, [markSectionResident]);
   const selectAgentDetailView = useCallback((view: AgentDetailViewId) => {
     setAgentDetailView(view);
     pendingAgentDetailCommitRef.current?.();
@@ -2971,6 +2980,28 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     const allowed = new Set(currentViewMode.allowedSections);
     return localizedSections.filter((item) => allowed.has(item.id));
   }, [currentViewMode, localizedSections]);
+  const residentSectionMountPlan = useMemo(() => {
+    const allowed = new Set(visibleSections.map((item) => item.id));
+    const primaryOrder: SectionId[] = [
+      "overview",
+      "agents",
+      "tools",
+      "desktop",
+      "source",
+      "history",
+      "documents",
+      "intent",
+      "structure",
+      "projects",
+      "requirements"
+    ];
+    const ordered = [
+      section,
+      ...primaryOrder.filter((id) => allowed.has(id)),
+      ...visibleSections.map((item) => item.id)
+    ];
+    return Array.from(new Set(ordered)).filter((id) => sectionIds.has(id));
+  }, [section, visibleSections]);
   const workVisibleSections = useMemo(() => {
     return visibleSections.filter((item) => !operatorSectionIds.has(item.id));
   }, [visibleSections]);
@@ -3021,6 +3052,57 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const deferredQuery = useDeferredValue(query);
   const normalizedQuery = deferredQuery.trim().toLowerCase();
   const sectionContentReady = true;
+  const shouldRenderSection = useCallback(
+    (targetSection: SectionId) => sectionContentReady && residentSectionSet.has(targetSection),
+    [residentSectionSet, sectionContentReady]
+  );
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return undefined;
+    }
+    const pendingSections = residentSectionMountPlan.filter((id) => !residentSectionSet.has(id));
+    if (pendingSections.length === 0) {
+      return undefined;
+    }
+
+    const idleWindow = window as typeof window & {
+      cancelIdleCallback?: (handle: number) => void;
+      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
+    };
+    let canceled = false;
+    const idleHandles: number[] = [];
+    const timeoutHandles: number[] = [];
+    const scheduleNextResidentSection = () => {
+      if (canceled) {
+        return;
+      }
+      const mountNextResidentSection = () => {
+        if (canceled) {
+          return;
+        }
+        const nextSection = pendingSections.shift();
+        if (nextSection) {
+          markSectionResident(nextSection);
+        }
+        if (pendingSections.length > 0) {
+          scheduleNextResidentSection();
+        }
+      };
+
+      if (idleWindow.requestIdleCallback) {
+        idleHandles.push(idleWindow.requestIdleCallback(mountNextResidentSection, { timeout: 900 }));
+      } else {
+        timeoutHandles.push(window.setTimeout(mountNextResidentSection, 60));
+      }
+    };
+
+    timeoutHandles.push(window.setTimeout(scheduleNextResidentSection, 120));
+    return () => {
+      canceled = true;
+      idleHandles.forEach((handle) => idleWindow.cancelIdleCallback?.(handle));
+      timeoutHandles.forEach((handle) => window.clearTimeout(handle));
+    };
+  }, [markSectionResident, residentSectionMountPlan, residentSectionSet]);
   const { documents: monitorDocuments, historyDays: monitorHistoryDays, statusText: adminHistoryStatusText } =
     useAdminHistoryIndex(snapshot, section);
   const viewFilteredDocuments = useMemo(() => {
@@ -3371,6 +3453,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       });
   }, [currentViewMode.allowedSections, sectionById]);
   const primeSectionActivation = useCallback((targetSection: SectionId) => {
+    markSectionResident(targetSection);
     if (typeof document === "undefined") {
       return;
     }
@@ -3390,7 +3473,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     if (target && titlebarSectionLabelRef.current) {
       titlebarSectionLabelRef.current.textContent = target.label;
     }
-  }, [sectionById]);
+  }, [markSectionResident, sectionById]);
   const openSection = useCallback((targetSection: SectionId, options?: { intentId?: string; flowStepId?: string }) => {
     primeSectionActivation(targetSection);
     setActiveTaskIntentId(options?.intentId || "");
@@ -4961,6 +5044,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           className="desktop-viewport"
           data-active-section={section}
           data-section-content-ready={sectionContentReady ? "true" : "false"}
+          data-resident-section-count={residentSectionIds.length}
           data-primary-work-surface={isPrimaryWorkSurface ? "true" : undefined}
           aria-label={uiLanguage === "ko" ? "데스크톱 앱 작업 화면" : "Desktop app viewport"}
           tabIndex={0}
@@ -5723,8 +5807,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             </>
           )}
 
-          {sectionContentReady && section === "overview" && (
-            <div className="desktop-home-grid">
+          {shouldRenderSection("overview") && (
+            <MountedSectionPanel id="overview" active={section === "overview"}>
+              <div className="desktop-home-grid">
               <span id="overview-home" className="home-route-anchor" aria-hidden="true" />
               <div className="home-menu-surface">
                 <section className={`workspace-home-panel core-home-panel home-${attentionState.tone}`} aria-label="Workspace home">
@@ -6113,320 +6198,336 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                       </div>
                     </section>
               </div>
-            </div>
+              </div>
+            </MountedSectionPanel>
           )}
 
-      {sectionContentReady && section === "desktop" && (
-        <DesktopRuntimePanel
-          agentCatalogCount={agentCatalog.length}
-          blockedTaskCount={collaborationBoard.summary.blockedTasks}
-          sourceFiles={visibleSourceFiles}
-          uiLanguage={uiLanguage}
-          initDefaults={runtimeInitDefaults}
-          providerCredentialReport={providerCredentials}
-          launchRequest={runtimeLaunchRequest}
-          onLaunchRequestConsumed={() => setRuntimeLaunchRequest(null)}
-          onOpenSearchAgentWorkbench={openSearchAgentWorkbench}
-          onOpenSettings={(subsectionId = "quick") => openSettingsTab("execution", subsectionId)}
-          terminalDrawerOpen={terminalDrawerOpen}
-          setTerminalDrawerOpen={setTerminalDrawerOpen}
-        />
-      )}
-
-      {sectionContentReady && section === "tools" && (
-        <ToolStudioPanel
-          language={uiLanguage}
-          requestedMode={requestedToolMode}
-          agentCount={agentCatalog.length}
-          activeTaskCount={collaborationBoard.summary.activeTasks}
-          blockedTaskCount={collaborationBoard.summary.blockedTasks}
-          sourceFileCount={visibleSourceFiles.length}
-          runtimeAdapterId={runtimeInitDefaults.adapterId}
-          providerConfiguredCount={providerCredentials.configuredCount}
-          onOpenAgents={() => openSection("agents")}
-          onOpenSource={() => openSection("source")}
-          onOpenTerminal={openTerminalDrawer}
-          onOpenProviderSettings={() => openSettingsTab("execution", "providers")}
-        />
-      )}
-
-      {sectionContentReady && section === "projects" && (
-        <section className="records-grid">
-          {snapshot.projects.map((project) => (
-            <article className="record-card" key={project.name}>
-              <div className="record-header">
-                <FolderKanban size={18} aria-hidden="true" />
-                <div>
-                  <h2>{project.name}</h2>
-                  <p>{project.path}</p>
-                </div>
-              </div>
-              <p>{project.purpose}</p>
-              <dl>
-                <dt>Status</dt>
-                <dd>{project.status}</dd>
-                <dt>Type</dt>
-                <dd>{project.type}</dd>
-                <dt>Scope</dt>
-                <dd>{project.scope}</dd>
-              </dl>
-            </article>
-          ))}
-        </section>
-      )}
-
-      {sectionContentReady && section === "history" && (
-        <section className="history-board">
-          <div className="history-summary-band">
-            <Metric label="기록 날짜" value={visibleHistoryDays.length} icon={CalendarDays} tone="green" />
-            <Metric label="기록 문서" value={visibleHistoryDays.reduce((total, day) => total + day.documentsCount, 0)} icon={History} tone="blue" />
-            <Metric label="운영 신호" value={visibleUnifiedSummary.totalEvents} icon={Activity} tone="violet" />
-            <Metric label="루트 폴더" value={snapshot.stats.rootFolders} icon={FolderKanban} tone="amber" />
-            <article className="history-latest">
-              <span>최근 기록 날짜</span>
-              <strong>{latestHistoryDate ? formatDay(latestHistoryDate) : "기록 없음"}</strong>
-              <p>{latestHistoryDate || "날짜가 있는 기록이 없습니다."}</p>
-            </article>
-          </div>
-
-          <section className="panel wide unified-ops-panel">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">운영 신호</p>
-                <h2>작업 기록과 모니터링 신호</h2>
-              </div>
-              <Activity size={18} aria-hidden="true" />
-            </div>
-            <OpsEventRail events={visibleUnifiedEvents.slice(0, 24)} />
-          </section>
-
-          <section className="panel wide">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">작업 기록</p>
-                <h2>날짜별 작업 기록</h2>
-                <p className="history-index-status">{adminHistoryStatusText}</p>
-              </div>
-              <span className="result-count">{filteredHistoryDays.length} days</span>
-            </div>
-            <div className="history-filters">
-              <AppChoiceMenu
-                className="history-date-choice"
-                fallbackLabel={uiLanguage === "ko" ? "모든 날짜" : "All dates"}
-                icon={CalendarDays}
-                label={uiLanguage === "ko" ? "기록 날짜" : "History date"}
-                value={historyDate}
-                onChange={setHistoryDate}
-                options={[
-                  {
-                    value: "all",
-                    label: uiLanguage === "ko" ? "모든 날짜" : "All dates",
-                    detail: `${visibleHistoryDays.length} ${uiLanguage === "ko" ? "일" : "days"}`
-                  },
-                  ...visibleHistoryDays.map((day) => ({
-                    value: day.date,
-                    label: day.date,
-                    detail: `${day.documentsCount} ${uiLanguage === "ko" ? "개 문서" : "documents"}`
-                  }))
-                ]}
-              />
-              <AppChoiceMenu
-                className="history-category-choice"
-                fallbackLabel={uiLanguage === "ko" ? "모든 기록 유형" : "All history types"}
-                icon={ListFilter}
-                label={uiLanguage === "ko" ? "기록 유형" : "History type"}
-                value={historyCategory}
-                onChange={setHistoryCategory}
-                options={[
-                  {
-                    value: "all",
-                    label: uiLanguage === "ko" ? "모든 기록 유형" : "All history types",
-                    detail: `${historyCategories.length} ${uiLanguage === "ko" ? "유형" : "types"}`
-                  },
-                  ...historyCategories.map((item) => ({ value: item, label: categoryLabel(item) }))
-                ]}
-              />
-            </div>
-            <div className="history-visual-grid">
-              <HistoryDensityChart days={filteredHistoryDays.slice(0, 28)} />
-              <HistoryCategoryBars categories={historyCategoryTotals.slice(0, 10)} />
-            </div>
-            <HistoryTimeline days={filteredHistoryDays.slice(0, 36)} />
-          </section>
-        </section>
-      )}
-
-      {sectionContentReady && section === "intent" && (
-        <div className="content-grid">
-          <IntentFeatureMapPanel
-            map={intentFeatureMap}
-            full
-            onOpenIntent={() => openSection("intent")}
-            onOpenDocuments={() => {
-              openSection("documents");
-              setCategory("intent-feature-map");
-            }}
+      {shouldRenderSection("desktop") && (
+        <MountedSectionPanel id="desktop" active={section === "desktop"}>
+          <DesktopRuntimePanel
+            agentCatalogCount={agentCatalog.length}
+            blockedTaskCount={collaborationBoard.summary.blockedTasks}
+            sourceFiles={visibleSourceFiles}
+            uiLanguage={uiLanguage}
+            initDefaults={runtimeInitDefaults}
+            providerCredentialReport={providerCredentials}
+            launchRequest={section === "desktop" ? runtimeLaunchRequest : null}
+            onLaunchRequestConsumed={() => setRuntimeLaunchRequest(null)}
+            onOpenSearchAgentWorkbench={openSearchAgentWorkbench}
+            onOpenSettings={(subsectionId = "quick") => openSettingsTab("execution", subsectionId)}
+            terminalDrawerOpen={terminalDrawerOpen}
+            setTerminalDrawerOpen={setTerminalDrawerOpen}
+            surfaceActive={section === "desktop"}
           />
-        </div>
+        </MountedSectionPanel>
       )}
 
-      {sectionContentReady && section === "structure" && (
-        <section className="structure-grid">
-          <StructureBackbonePanel
-            overview={structureOverview}
-            onOpenStructure={() => openSection("structure")}
+      {shouldRenderSection("tools") && (
+        <MountedSectionPanel id="tools" active={section === "tools"}>
+          <ToolStudioPanel
+            language={uiLanguage}
+            requestedMode={requestedToolMode}
+            agentCount={agentCatalog.length}
+            activeTaskCount={collaborationBoard.summary.activeTasks}
+            blockedTaskCount={collaborationBoard.summary.blockedTasks}
+            sourceFileCount={visibleSourceFiles.length}
+            runtimeAdapterId={runtimeInitDefaults.adapterId}
+            providerConfiguredCount={providerCredentials.configuredCount}
+            onOpenAgents={() => openSection("agents")}
             onOpenSource={() => openSection("source")}
+            onOpenTerminal={openTerminalDrawer}
+            onOpenProviderSettings={() => openSettingsTab("execution", "providers")}
           />
-
-          <section className="panel structure-pressure-panel">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Pressure</p>
-                <h2>복잡도 압력점</h2>
-              </div>
-              <AlertTriangle size={18} aria-hidden="true" />
-            </div>
-            <div className="pressure-list">
-              {structureOverview.pressurePoints.map((point) => (
-                <article key={point.id} className={`pressure-${point.priority}`}>
-                  <span>{point.priority}</span>
-                  <strong>{point.signal}</strong>
-                  <p>{point.reason}</p>
-                  <small>{point.nextAction}</small>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="panel wide structure-boundary-panel">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Boundary Rules</p>
-                <h2>어디에 무엇을 둘지</h2>
-              </div>
-              <ShieldCheck size={18} aria-hidden="true" />
-            </div>
-            <div className="boundary-rule-grid">
-              {structureOverview.boundaryRules.map((rule) => (
-                <article key={rule.id}>
-                  <span>{rule.sourcePath}</span>
-                  <strong>{rule.label}</strong>
-                  <p>{rule.rule}</p>
-                  <div className="path-list">
-                    {rule.appliesTo.slice(0, 8).map((item) => (
-                      <span key={item}>{item}</span>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="panel wide">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Root Inventory</p>
-                <h2>루트 폴더 구조</h2>
-              </div>
-              <span className="result-count">{snapshot.folderStructure.rootFolders.length} roots</span>
-            </div>
-            <div className="folder-table">
-              {snapshot.folderStructure.rootFolders.map((folder) => (
-                <article key={`${folder.className}-${folder.path}`}>
-                  <span>{folder.className}</span>
-                  <strong>{folder.path}</strong>
-                  <p>{folder.purpose}</p>
-                  <small>{folder.source}</small>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="panel">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Docs</p>
-                <h2>문서 카테고리</h2>
-              </div>
-              <BookOpenText size={18} aria-hidden="true" />
-            </div>
-            <div className="stack-list">
-              {snapshot.folderStructure.docsCategories.map((folder) => (
-                <article key={folder.id}>
-                  <strong>{folder.path}</strong>
-                  <p>{folder.purpose}</p>
-                  <div className="chip-row">
-                    <span>{folder.documentsCount} docs</span>
-                    <span>{folder.requiredDocumentsCount} required</span>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="panel wide">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Projects</p>
-                <h2>프로젝트 내부 홈</h2>
-              </div>
-              <FolderKanban size={18} aria-hidden="true" />
-            </div>
-            <div className="project-home-grid">
-              {snapshot.folderStructure.projectHomes.map((project) => (
-                <article key={project.name}>
-                  <strong>{project.name}</strong>
-                  <p>{project.purpose}</p>
-                  <div className="path-list">
-                    {project.topLevelDirs.map((item) => (
-                      <span key={item}>{item}</span>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="panel">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">History Sources</p>
-                <h2>히스토리 수집 위치</h2>
-              </div>
-              <History size={18} aria-hidden="true" />
-            </div>
-            <div className="stack-list">
-              {snapshot.folderStructure.historyRoots.map((source) => (
-                <article key={`${source.category}-${source.root}`}>
-                  <strong>{categoryLabel(source.category)}</strong>
-                  <p>{source.root}</p>
-                  <div className="chip-row">
-                    <span>{source.documentsCount} docs</span>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-        </section>
+        </MountedSectionPanel>
       )}
 
-      {sectionContentReady && section === "documents" && (
-        <section className="document-browser">
-          {recentDocuments.map((document) => (
-            <article className="doc-preview" key={document.id}>
-              <div className="doc-meta">
-                <span>{categoryLabel(document.category)}</span>
-                <span>{document.language}</span>
-              </div>
-              <h2>{document.title}</h2>
-              <p className="path">{document.path}</p>
-              <div className="markdown-preview" dangerouslySetInnerHTML={{ __html: document.html }} />
-            </article>
-          ))}
-        </section>
+      {shouldRenderSection("projects") && (
+        <MountedSectionPanel id="projects" active={section === "projects"}>
+          <section className="records-grid">
+            {snapshot.projects.map((project) => (
+              <article className="record-card" key={project.name}>
+                <div className="record-header">
+                  <FolderKanban size={18} aria-hidden="true" />
+                  <div>
+                    <h2>{project.name}</h2>
+                    <p>{project.path}</p>
+                  </div>
+                </div>
+                <p>{project.purpose}</p>
+                <dl>
+                  <dt>Status</dt>
+                  <dd>{project.status}</dd>
+                  <dt>Type</dt>
+                  <dd>{project.type}</dd>
+                  <dt>Scope</dt>
+                  <dd>{project.scope}</dd>
+                </dl>
+              </article>
+            ))}
+          </section>
+        </MountedSectionPanel>
       )}
 
-      {sectionContentReady && (
+      {shouldRenderSection("history") && (
+        <MountedSectionPanel id="history" active={section === "history"}>
+          <section className="history-board">
+            <div className="history-summary-band">
+              <Metric label="기록 날짜" value={visibleHistoryDays.length} icon={CalendarDays} tone="green" />
+              <Metric label="기록 문서" value={visibleHistoryDays.reduce((total, day) => total + day.documentsCount, 0)} icon={History} tone="blue" />
+              <Metric label="운영 신호" value={visibleUnifiedSummary.totalEvents} icon={Activity} tone="violet" />
+              <Metric label="루트 폴더" value={snapshot.stats.rootFolders} icon={FolderKanban} tone="amber" />
+              <article className="history-latest">
+                <span>최근 기록 날짜</span>
+                <strong>{latestHistoryDate ? formatDay(latestHistoryDate) : "기록 없음"}</strong>
+                <p>{latestHistoryDate || "날짜가 있는 기록이 없습니다."}</p>
+              </article>
+            </div>
+
+            <section className="panel wide unified-ops-panel">
+              <div className="panel-heading">
+                <div>
+                  <p className="eyebrow">운영 신호</p>
+                  <h2>작업 기록과 모니터링 신호</h2>
+                </div>
+                <Activity size={18} aria-hidden="true" />
+              </div>
+              <OpsEventRail events={visibleUnifiedEvents.slice(0, 24)} />
+            </section>
+
+            <section className="panel wide">
+              <div className="panel-heading">
+                <div>
+                  <p className="eyebrow">작업 기록</p>
+                  <h2>날짜별 작업 기록</h2>
+                  <p className="history-index-status">{adminHistoryStatusText}</p>
+                </div>
+                <span className="result-count">{filteredHistoryDays.length} days</span>
+              </div>
+              <div className="history-filters">
+                <AppChoiceMenu
+                  className="history-date-choice"
+                  fallbackLabel={uiLanguage === "ko" ? "모든 날짜" : "All dates"}
+                  icon={CalendarDays}
+                  label={uiLanguage === "ko" ? "기록 날짜" : "History date"}
+                  value={historyDate}
+                  onChange={setHistoryDate}
+                  options={[
+                    {
+                      value: "all",
+                      label: uiLanguage === "ko" ? "모든 날짜" : "All dates",
+                      detail: `${visibleHistoryDays.length} ${uiLanguage === "ko" ? "일" : "days"}`
+                    },
+                    ...visibleHistoryDays.map((day) => ({
+                      value: day.date,
+                      label: day.date,
+                      detail: `${day.documentsCount} ${uiLanguage === "ko" ? "개 문서" : "documents"}`
+                    }))
+                  ]}
+                />
+                <AppChoiceMenu
+                  className="history-category-choice"
+                  fallbackLabel={uiLanguage === "ko" ? "모든 기록 유형" : "All history types"}
+                  icon={ListFilter}
+                  label={uiLanguage === "ko" ? "기록 유형" : "History type"}
+                  value={historyCategory}
+                  onChange={setHistoryCategory}
+                  options={[
+                    {
+                      value: "all",
+                      label: uiLanguage === "ko" ? "모든 기록 유형" : "All history types",
+                      detail: `${historyCategories.length} ${uiLanguage === "ko" ? "유형" : "types"}`
+                    },
+                    ...historyCategories.map((item) => ({ value: item, label: categoryLabel(item) }))
+                  ]}
+                />
+              </div>
+              <div className="history-visual-grid">
+                <HistoryDensityChart days={filteredHistoryDays.slice(0, 28)} />
+                <HistoryCategoryBars categories={historyCategoryTotals.slice(0, 10)} />
+              </div>
+            <HistoryTimeline days={filteredHistoryDays.slice(0, 36)} />
+            </section>
+          </section>
+        </MountedSectionPanel>
+      )}
+
+      {shouldRenderSection("intent") && (
+        <MountedSectionPanel id="intent" active={section === "intent"}>
+          <div className="content-grid">
+            <IntentFeatureMapPanel
+              map={intentFeatureMap}
+              full
+              onOpenIntent={() => openSection("intent")}
+              onOpenDocuments={() => {
+                openSection("documents");
+                setCategory("intent-feature-map");
+              }}
+            />
+          </div>
+        </MountedSectionPanel>
+      )}
+
+      {shouldRenderSection("structure") && (
+        <MountedSectionPanel id="structure" active={section === "structure"}>
+          <section className="structure-grid">
+            <StructureBackbonePanel
+              overview={structureOverview}
+              onOpenStructure={() => openSection("structure")}
+              onOpenSource={() => openSection("source")}
+            />
+
+            <section className="panel structure-pressure-panel">
+              <div className="panel-heading">
+                <div>
+                  <p className="eyebrow">Pressure</p>
+                  <h2>복잡도 압력점</h2>
+                </div>
+                <AlertTriangle size={18} aria-hidden="true" />
+              </div>
+              <div className="pressure-list">
+                {structureOverview.pressurePoints.map((point) => (
+                  <article key={point.id} className={`pressure-${point.priority}`}>
+                    <span>{point.priority}</span>
+                    <strong>{point.signal}</strong>
+                    <p>{point.reason}</p>
+                    <small>{point.nextAction}</small>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="panel wide structure-boundary-panel">
+              <div className="panel-heading">
+                <div>
+                  <p className="eyebrow">Boundary Rules</p>
+                  <h2>어디에 무엇을 둘지</h2>
+                </div>
+                <ShieldCheck size={18} aria-hidden="true" />
+              </div>
+              <div className="boundary-rule-grid">
+                {structureOverview.boundaryRules.map((rule) => (
+                  <article key={rule.id}>
+                    <span>{rule.sourcePath}</span>
+                    <strong>{rule.label}</strong>
+                    <p>{rule.rule}</p>
+                    <div className="path-list">
+                      {rule.appliesTo.slice(0, 8).map((item) => (
+                        <span key={item}>{item}</span>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="panel wide">
+              <div className="panel-heading">
+                <div>
+                  <p className="eyebrow">Root Inventory</p>
+                  <h2>루트 폴더 구조</h2>
+                </div>
+                <span className="result-count">{snapshot.folderStructure.rootFolders.length} roots</span>
+              </div>
+              <div className="folder-table">
+                {snapshot.folderStructure.rootFolders.map((folder) => (
+                  <article key={`${folder.className}-${folder.path}`}>
+                    <span>{folder.className}</span>
+                    <strong>{folder.path}</strong>
+                    <p>{folder.purpose}</p>
+                    <small>{folder.source}</small>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="panel">
+              <div className="panel-heading">
+                <div>
+                  <p className="eyebrow">Docs</p>
+                  <h2>문서 카테고리</h2>
+                </div>
+                <BookOpenText size={18} aria-hidden="true" />
+              </div>
+              <div className="stack-list">
+                {snapshot.folderStructure.docsCategories.map((folder) => (
+                  <article key={folder.id}>
+                    <strong>{folder.path}</strong>
+                    <p>{folder.purpose}</p>
+                    <div className="chip-row">
+                      <span>{folder.documentsCount} docs</span>
+                      <span>{folder.requiredDocumentsCount} required</span>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="panel wide">
+              <div className="panel-heading">
+                <div>
+                  <p className="eyebrow">Projects</p>
+                  <h2>프로젝트 내부 홈</h2>
+                </div>
+                <FolderKanban size={18} aria-hidden="true" />
+              </div>
+              <div className="project-home-grid">
+                {snapshot.folderStructure.projectHomes.map((project) => (
+                  <article key={project.name}>
+                    <strong>{project.name}</strong>
+                    <p>{project.purpose}</p>
+                    <div className="path-list">
+                      {project.topLevelDirs.map((item) => (
+                        <span key={item}>{item}</span>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="panel">
+              <div className="panel-heading">
+                <div>
+                  <p className="eyebrow">History Sources</p>
+                  <h2>히스토리 수집 위치</h2>
+                </div>
+                <History size={18} aria-hidden="true" />
+              </div>
+              <div className="stack-list">
+                {snapshot.folderStructure.historyRoots.map((source) => (
+                  <article key={`${source.category}-${source.root}`}>
+                    <strong>{categoryLabel(source.category)}</strong>
+                    <p>{source.root}</p>
+                    <div className="chip-row">
+                      <span>{source.documentsCount} docs</span>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          </section>
+        </MountedSectionPanel>
+      )}
+
+      {shouldRenderSection("documents") && (
+        <MountedSectionPanel id="documents" active={section === "documents"}>
+          <section className="document-browser">
+            {recentDocuments.map((document) => (
+              <article className="doc-preview" key={document.id}>
+                <div className="doc-meta">
+                  <span>{categoryLabel(document.category)}</span>
+                  <span>{document.language}</span>
+                </div>
+                <h2>{document.title}</h2>
+                <p className="path">{document.path}</p>
+                <div className="markdown-preview" dangerouslySetInnerHTML={{ __html: document.html }} />
+              </article>
+            ))}
+          </section>
+        </MountedSectionPanel>
+      )}
+
+      {shouldRenderSection("source") && (
         <MountedSectionPanel id="source" active={section === "source"}>
           <DesktopRuntimePanel
             agentCatalogCount={agentCatalog.length}
@@ -6447,30 +6548,33 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         </MountedSectionPanel>
       )}
 
-      {sectionContentReady && section === "requirements" && (
-        <section className="panel wide">
-          <div className="panel-heading">
-            <div>
-              <p className="eyebrow">Requirements</p>
-              <h2>요구사항 목록</h2>
+      {shouldRenderSection("requirements") && (
+        <MountedSectionPanel id="requirements" active={section === "requirements"}>
+          <section className="panel wide">
+            <div className="panel-heading">
+              <div>
+                <p className="eyebrow">Requirements</p>
+                <h2>요구사항 목록</h2>
+              </div>
+              <span className="result-count">{visibleRequirements.length} total</span>
             </div>
-            <span className="result-count">{visibleRequirements.length} total</span>
-          </div>
-          <div className="requirements-table">
-            {visibleRequirements.map((requirement) => (
-              <article key={`${requirement.id}-${requirement.sourcePath}`}>
-                <strong>{requirement.id}</strong>
-                <span>{requirement.priority}</span>
-                <p>{requirement.requirement}</p>
-                <small>{requirement.sourcePath}</small>
-              </article>
-            ))}
-          </div>
-        </section>
+            <div className="requirements-table">
+              {visibleRequirements.map((requirement) => (
+                <article key={`${requirement.id}-${requirement.sourcePath}`}>
+                  <strong>{requirement.id}</strong>
+                  <span>{requirement.priority}</span>
+                  <p>{requirement.requirement}</p>
+                  <small>{requirement.sourcePath}</small>
+                </article>
+              ))}
+            </div>
+          </section>
+        </MountedSectionPanel>
       )}
 
-      {sectionContentReady && section === "agents" && (
-        <div className="content-grid agents-workspace-grid">
+      {shouldRenderSection("agents") && (
+        <MountedSectionPanel id="agents" active={section === "agents"}>
+          <div className="content-grid agents-workspace-grid">
           <SearchAgentWorkChatPanel
             form={searchAgentRunForm}
             messages={searchAgentChatMessages}
@@ -6682,8 +6786,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
               </div>
             )}
           </details>
-        </div>
-          )}
+          </div>
+        </MountedSectionPanel>
+      )}
         </section>
       </div>
     </main>

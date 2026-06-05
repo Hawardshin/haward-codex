@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T16:34:19.488Z",
+  "generatedAt": "2026-06-05T16:50:37.605Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 448,
-    "evaluations": 24,
+    "evaluations": 23,
     "webSearches": 14,
     "timingRecords": 13,
     "historyDays": 2,
-    "adminHistoryDocuments": 2313,
+    "adminHistoryDocuments": 2320,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7356,6 +7356,214 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-06-tab-resident-preload-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-tab-resident-preload-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Tab Resident Preload Evaluation Input",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 tab resident preload\", \"status\": \"passed\", \"installation occurred\": false, \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 tab resident preload.json\" , \"omission check targets\": ",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;request id&quot;: &quot;2026 06 06 tab resident preload&quot;, &quot;status&quot;: &quot;passed&quot;, &quot;installation occurred&quot;: false, &quot;resource risk occurred&quot;: true, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 06 06 tab resident preload.json&quot; , &quot;omission check targets&quot;: &quot; history/omission checks/2026/2026 06 06 tab resident preload.json&quot; , &quot;mode sel</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1254,
+      "updatedAt": "2026-06-05T16:50:32.196Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-tab-resident-preload-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-tab-resident-preload.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: 탭 상주 선마운트 최적화",
+      "excerpt": "평가: 탭 상주 선마운트 최적화 결론 구현은 사용자 요구와 맞다. 탭 클릭 시점의 조건부 mount를 줄이고, 시작 후 idle 시간에 주요 탭을 renderer 메모리에 resident로 올리는 구조로 바꿨다. 확인한 점 주요 탭 condition이 section === ... 직접 mount gate에서 shouldRenderSection ... 로 전환됐다. 숨겨진 탭은 MountedSectionPanel 로 state를 유지한다. desktop/source 런타임 표면은 active sec",
+      "html": "<p>평가: 탭 상주 선마운트 최적화 결론 구현은 사용자 요구와 맞다. 탭 클릭 시점의 조건부 mount를 줄이고, 시작 후 idle 시간에 주요 탭을 renderer 메모리에 resident로 올리는 구조로 바꿨다. 확인한 점 주요 탭 condition이 section === ... 직접 mount gate에서 shouldRenderSection ... 로 전환됐다. 숨겨진 탭은 MountedSectionPanel 로 state를 유지한다. desktop/source 런타임 표면은 active section일 때만 launch request와 active flag를 받는다. workspace monitor 테스트와 체크가 통과했다. 전체 d</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1137,
+      "updatedAt": "2026-06-05T16:50:32.196Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-tab-resident-preload-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-tab-resident-preload.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: 탭 상주 선마운트 최적화",
+      "excerpt": "요청 결과 추적: 탭 상주 선마운트 최적화 요청 탭 이동 시 느린 마운트/불러오기 비용을 줄이기 위해 앱 시작 후 주요 탭을 미리 불러와 메모리에 두는 전역적 구조를 고려하고 구현해 달라는 요청. 결과 구현: platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx 스타일: platform desktop app/renderer/workspace monitor/app/globals.css 테스트: platform desk",
+      "html": "<p>요청 결과 추적: 탭 상주 선마운트 최적화 요청 탭 이동 시 느린 마운트/불러오기 비용을 줄이기 위해 앱 시작 후 주요 탭을 미리 불러와 메모리에 두는 전역적 구조를 고려하고 구현해 달라는 요청. 결과 구현: platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx 스타일: platform desktop app/renderer/workspace monitor/app/globals.css 테스트: platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs 요구사항: platform des</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1065,
+      "updatedAt": "2026-06-05T16:50:32.195Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-tab-resident-preload-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-tab-resident-preload.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 탭 상주 선마운트 최적화",
+      "excerpt": "작업 요약: 탭 상주 선마운트 최적화 Workspace Monitor의 주요 탭을 클릭할 때마다 새로 마운트하지 않도록 resident section 상태와 idle 선마운트 계획을 추가했다. 탭 pointerdown과 activation 시 대상 섹션을 즉시 resident로 표시하고, 이후 idle 시간에 나머지 visible section을 순차적으로 메모리에 올린다. 변경 MonitorShell.tsx : residentSectionIds , residentSectionMountPlan ,",
+      "html": "<p>작업 요약: 탭 상주 선마운트 최적화 Workspace Monitor의 주요 탭을 클릭할 때마다 새로 마운트하지 않도록 resident section 상태와 idle 선마운트 계획을 추가했다. 탭 pointerdown과 activation 시 대상 섹션을 즉시 resident로 표시하고, 이후 idle 시간에 나머지 visible section을 순차적으로 메모리에 올린다. 변경 MonitorShell.tsx : residentSectionIds , residentSectionMountPlan , shouldRenderSection 추가 MonitorShell.tsx : 주요 탭을 MountedSectionPanel 로 래핑 Monito</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1234,
+      "updatedAt": "2026-06-05T16:50:32.195Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-tab-resident-preload-json",
+      "path": "_history/work-timings/2026/2026-06-06-tab-resident-preload.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Tab Resident Preload",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 tab resident preload\", \"phases\": { \"phase\": \"web first intake\", \"duration minutes estimate\": 5 }, { \"phase\": \"source inspection\", \"duration minutes estimate\": 10 }, { \"phase\": \"implementation\", \"duration minutes estimate\": 25 }, {",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;request id&quot;: &quot;2026 06 06 tab resident preload&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;duration minutes estimate&quot;: 5 }, { &quot;phase&quot;: &quot;source inspection&quot;, &quot;duration minutes estimate&quot;: 10 }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;duration minutes estimate&quot;: 25 }, { &quot;phase&quot;: &quot;workspace monitor validation&quot;, &quot;duration minutes estimate&quot;: 5 }, { &quot;p</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 835,
+      "updatedAt": "2026-06-05T16:50:32.195Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-tab-resident-preload-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-tab-resident-preload/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증: 탭 상주 선마운트 최적화",
+      "excerpt": "검증: 탭 상주 선마운트 최적화 완료된 검증 corepack pnpm dir platform desktop app/renderer/workspace monitor test 결과: 통과, 59개 테스트 pass corepack pnpm dir platform desktop app/renderer/workspace monitor run check 결과: 통과 포함: tsc noEmit , scroll container check, source control design check, history pa",
+      "html": "<h1>검증: 탭 상주 선마운트 최적화</h1>\n<h2>완료된 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code></li>\n<li>결과: 통과, 59개 테스트 pass</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li>결과: 통과</li>\n<li>포함: <code>tsc --noEmit</code>, scroll container check, source control design check, history payload check</li>\n</ul>\n<h2>추가 완료된 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app test</code></li>\n<li>결과: 통과, 22개 테스트 pass</li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code></li>\n<li>결과: 통과</li>\n<li>참고: 개발용 snapshot 복구 후 customer bundle check가 stale public snapshot warning을 보고했다. 내부 패키징 직전 customer renderer build/audit에서는 stale warning 없이 통과했다.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code></li>\n<li>결과: 통과</li>\n<li>생성/검증된 산출물:</li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n<li>패키징 후 developer snapshot 복구 collect</li>\n<li>결과: 통과, developer public snapshot 재생성</li>\n</ul>\n<h2>브라우저 스모크</h2>\n<ul>\n<li>dev 서버: <code>http://127.0.0.1:3210</code></li>\n<li>서버 snapshot 확인: <code>curl -I http://127.0.0.1:3210/workspace-snapshot.json</code> 결과 <code>200 OK</code>, 약 2.7MB JSON 제공 확인</li>\n<li>in-app Browser 결과: 페이지가 <code>Loading workspace snapshot</code> 상태에 머물러 resident DOM까지 도달하지 못했다.</li>\n<li>판단: 이 브라우저 세션의 snapshot load 완료를 검증하지 못했으므로 UI resident count 시각 검증은 미완료로 남긴다. 타입체크, 문자열 계약 테스트, production build, 패키징 검증은 통과했다.</li>\n</ul>\n<h2>UI 확인 관점</h2>\n<ul>\n<li>앱 시작 후 idle 시간에 <code>data-resident-section-count</code>가 증가해야 한다.</li>\n<li>탭 클릭 후 새 tree mount 대신 hidden resident panel 표시 전환이 일어나야 한다.</li>\n<li>source editor와 desktop runtime은 숨겨진 동안 active side effect를 받지 않아야 한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2097,
+      "updatedAt": "2026-06-05T16:50:32.194Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-tab-resident-preload-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-tab-resident-preload/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록: 탭 상주 선마운트 최적화",
+      "excerpt": "작업 목록: 탭 상주 선마운트 최적화 x 웹 근거와 기존 탭 구조 확인 x resident section state와 idle mount scheduler 추가 x pointerdown/click activation에 resident marking 연결 x 주요 탭을 MountedSectionPanel 로 래핑 x desktop/source active side effect gate 유지 x CSS containment 추가 x workspace monitor test/check 실행 x 전체 p",
+      "html": "<h1>작업 목록: 탭 상주 선마운트 최적화</h1>\n<ul>\n<li>[x] 웹 근거와 기존 탭 구조 확인</li>\n<li>[x] resident section state와 idle mount scheduler 추가</li>\n<li>[x] pointerdown/click activation에 resident marking 연결</li>\n<li>[x] 주요 탭을 <code>MountedSectionPanel</code>로 래핑</li>\n<li>[x] desktop/source active side effect gate 유지</li>\n<li>[x] CSS containment 추가</li>\n<li>[x] workspace-monitor test/check 실행</li>\n<li>[x] 전체 platform test/check 실행</li>\n<li>[x] 내부 패키징 빌드 실행</li>\n<li>[x] 최종 검증 기록 갱신</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 505,
+      "updatedAt": "2026-06-05T16:50:32.193Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-tab-resident-preload-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-tab-resident-preload.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 탭 상주 선마운트 최적화",
+      "excerpt": "사용자 요청 요약: 탭 상주 선마운트 최적화 사용자는 Workspace Monitor 탭 이동이 여전히 매우 느리다고 보고했다. 원인 후보로 탭 이동 때마다 많은 화면이 새로 불러오고 마운트되는 구조를 지적했고, 앱 시작 시 미리 모든 탭을 불러와 메모리에 두거나 전역적으로 보관해 탭 전환 비용을 줄이는 근본적 해결을 요청했다. 수용 기준 클릭 시점의 탭 mount 비용을 줄인다. 데스크톱 앱답게 RAM 사용을 더 허용한다. 구현 완료 후 사용자가 직접 빌드하지 않도록 빌드까지 자동 실행한다.",
+      "html": "<p>사용자 요청 요약: 탭 상주 선마운트 최적화 사용자는 Workspace Monitor 탭 이동이 여전히 매우 느리다고 보고했다. 원인 후보로 탭 이동 때마다 많은 화면이 새로 불러오고 마운트되는 구조를 지적했고, 앱 시작 시 미리 모든 탭을 불러와 메모리에 두거나 전역적으로 보관해 탭 전환 비용을 줄이는 근본적 해결을 요청했다. 수용 기준 클릭 시점의 탭 mount 비용을 줄인다. 데스크톱 앱답게 RAM 사용을 더 허용한다. 구현 완료 후 사용자가 직접 빌드하지 않도록 빌드까지 자동 실행한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 649,
+      "updatedAt": "2026-06-05T16:46:46.755Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-tab-resident-preload-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-tab-resident-preload.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: 탭 상주 선마운트 최적화",
+      "excerpt": "웹 검색 기록: 탭 상주 선마운트 최적화 목적 React 탭 전환에서 state preservation, conditional rendering, memoization, idle/lazy loading, CSS rendering containment 선택지를 확인했다. 검색어 React official docs memo useMemo useTransition performance rendering hidden tabs React official docs preserving and resetting",
+      "html": "<p>웹 검색 기록: 탭 상주 선마운트 최적화 목적 React 탭 전환에서 state preservation, conditional rendering, memoization, idle/lazy loading, CSS rendering containment 선택지를 확인했다. 검색어 React official docs memo useMemo useTransition performance rendering hidden tabs React official docs preserving and resetting state component tree hidden tabs MDN content visibility CSS rendering performan</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2474,
+      "updatedAt": "2026-06-05T16:46:46.755Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-tab-resident-preload-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-tab-resident-preload/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적성: 탭 상주 선마운트 최적화",
+      "excerpt": "추적성: 탭 상주 선마운트 최적화 요구사항 연결 요구사항: platform desktop app/docs/requirements/2026 06 06 tab resident preload.ko.md 스펙: platform desktop app/specs/2026 06 06 tab resident preload/spec.ko.md 계획: platform desktop app/specs/2026 06 06 tab resident preload/plan.ko.md 작업: platform desktop a",
+      "html": "<h1>추적성: 탭 상주 선마운트 최적화</h1>\n<h2>요구사항 연결</h2>\n<ul>\n<li>요구사항: <code>platform-desktop-app/docs/requirements/2026-06-06-tab-resident-preload.ko.md</code></li>\n<li>스펙: <code>platform-desktop-app/specs/2026-06-06-tab-resident-preload/spec.ko.md</code></li>\n<li>계획: <code>platform-desktop-app/specs/2026-06-06-tab-resident-preload/plan.ko.md</code></li>\n<li>작업: <code>platform-desktop-app/specs/2026-06-06-tab-resident-preload/tasks.ko.md</code></li>\n<li>검증: <code>platform-desktop-app/specs/2026-06-06-tab-resident-preload/validation.ko.md</code></li>\n</ul>\n<h2>구현 연결</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></li>\n<li>resident section state, idle mount scheduling, pointerdown resident marking, tab panel wrapping</li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li>mounted section containment</li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n<li>resident preload and mounted section contract</li>\n</ul>\n<h2>히스토리 연결</h2>\n<ul>\n<li>웹 검색: <code>_history/web-searches/2026/2026-06-06-tab-resident-preload.ko.md</code></li>\n<li>coding research: <code>_history/coding-research/2026/2026-06-06-tab-resident-preload.json</code></li>\n<li>요청 요약: <code>_history/user-requests/2026/2026-06-06-tab-resident-preload.ko.md</code></li>\n<li>리소스 점검: <code>_history/resource-checks/2026/2026-06-06-tab-resident-preload.json</code></li>\n<li>누락 점검: <code>_history/omission-checks/2026/2026-06-06-tab-resident-preload.json</code></li>\n<li>평가: <code>_history/evaluations/2026/2026-06-06-tab-resident-preload.ko.md</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1460,
+      "updatedAt": "2026-06-05T16:46:46.754Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-tab-resident-preload-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-tab-resident-preload/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "계획: 탭 상주 선마운트 최적화",
+      "excerpt": "계획: 탭 상주 선마운트 최적화 단계 1. 현재 탭 렌더링 조건과 기존 MountedSectionPanel 사용 범위를 확인한다. 2. resident section state, idle mount plan, pointerdown pre resident 처리를 추가한다. 3. 모든 주요 탭의 조건부 렌더를 resident panel로 치환한다. 4. hidden resident panel의 layout 격리를 CSS로 보강한다. 5. 문자열 기반 계약 테스트를 새 resident preload 구",
+      "html": "<h1>계획: 탭 상주 선마운트 최적화</h1>\n<h2>단계</h2>\n<p>1. 현재 탭 렌더링 조건과 기존 <code>MountedSectionPanel</code> 사용 범위를 확인한다.</p>\n<p>2. resident section state, idle mount plan, pointerdown pre-resident 처리를 추가한다.</p>\n<p>3. 모든 주요 탭의 조건부 렌더를 resident panel로 치환한다.</p>\n<p>4. hidden resident panel의 layout 격리를 CSS로 보강한다.</p>\n<p>5. 문자열 기반 계약 테스트를 새 resident preload 구조에 맞게 갱신한다.</p>\n<p>6. workspace-monitor 단위 검증 후 전체 앱 검증과 내부 패키징 빌드를 실행한다.</p>\n<h2>위험과 대응</h2>\n<ul>\n<li>초기 CPU spike: idle callback과 timeout fallback으로 섹션을 순차 마운트한다.</li>\n<li>숨김 탭 부작용: launch request와 active surface flag를 현재 탭으로 제한한다.</li>\n<li>DOM 메모리 증가: 사용자가 요구한 전환 성능 개선을 위해 의도적으로 허용하되, resident count를 DOM attribute로 노출한다.</li>\n<li>JSX 대규모 래핑 오류: <code>tsc --noEmit</code>과 monitor tests로 즉시 검출한다.</li>\n</ul>\n<h2>롤백</h2>\n<p><code>residentSectionIds</code>, <code>residentSectionMountPlan</code>, <code>shouldRenderSection</code>와 각 <code>MountedSectionPanel</code> 치환을 되돌리고 기존 section equality 조건으로 복구한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1221,
+      "updatedAt": "2026-06-05T16:46:46.753Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-tab-resident-preload-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-tab-resident-preload.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: 탭 상주 선마운트 최적화",
+      "excerpt": "요구사항: 탭 상주 선마운트 최적화 사용자 요구 Workspace Monitor 탭 이동이 여전히 매우 느리다. 탭을 이동할 때마다 많은 화면이 새로 불러오고 마운트되는 느낌이 있으므로, 데스크톱 앱답게 시작 후 메모리를 더 사용해서 주요 탭을 미리 올려두고 전환 비용을 줄여야 한다. 기능 요구사항 주요 Workspace Monitor 섹션은 최초 방문 시마다 React tree를 새로 만드는 구조가 아니라, 시작 직후 idle 시간에 순차적으로 resident 상태로 만든다. 사용자가 탭을 누르",
+      "html": "<h1>요구사항: 탭 상주 선마운트 최적화</h1>\n<h2>사용자 요구</h2>\n<p>Workspace Monitor 탭 이동이 여전히 매우 느리다. 탭을 이동할 때마다 많은 화면이 새로 불러오고 마운트되는 느낌이 있으므로, 데스크톱 앱답게 시작 후 메모리를 더 사용해서 주요 탭을 미리 올려두고 전환 비용을 줄여야 한다.</p>\n<h2>기능 요구사항</h2>\n<ul>\n<li>주요 Workspace Monitor 섹션은 최초 방문 시마다 React tree를 새로 만드는 구조가 아니라, 시작 직후 idle 시간에 순차적으로 resident 상태로 만든다.</li>\n<li>사용자가 탭을 누르기 전 <code>pointerdown</code> 시점에도 대상 섹션을 resident로 표시해 클릭 후 첫 렌더 지연을 줄인다.</li>\n<li>숨겨진 섹션은 DOM/React state를 유지하되, <code>hidden</code>과 <code>aria-hidden</code>으로 비활성 탭 접근성을 분리한다.</li>\n<li>source/desktop 런타임 화면처럼 부작용이 있는 표면은 상주 상태에서도 현재 활성 탭일 때만 launch request와 active polling 성격의 동작을 받는다.</li>\n<li>구현 완료 후 테스트, 타입체크, 내부 패키징 빌드를 자동 실행한다.</li>\n</ul>\n<h2>비기능 요구사항</h2>\n<ul>\n<li>초기 메모리 사용량 증가는 의도적으로 허용하되, 모든 섹션을 한 프레임에 동시에 마운트하지 않고 idle scheduling으로 나눈다.</li>\n<li>탭별 상태 보존과 전환 체감 속도를 우선한다.</li>\n<li>기존 source editor state 보존 계약, styled control 계약, history payload 계약이 깨지면 안 된다.</li>\n</ul>\n<h2>제외</h2>\n<ul>\n<li>파일 watcher, 외부 데이터 전체 선적재, 무제한 DOM 생성 정책은 이번 범위에서 제외한다.</li>\n<li>Tauri/Rust native file cache 자체는 이전 Rust resource optimization slice의 책임으로 유지한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1750,
+      "updatedAt": "2026-06-05T16:46:46.752Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-tab-resident-preload-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-tab-resident-preload/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "스펙: 탭 상주 선마운트 최적화",
+      "excerpt": "스펙: 탭 상주 선마운트 최적화 목표 Workspace Monitor의 탭 전환에서 React component mount 비용을 클릭 시점에 지불하지 않도록, 주요 탭을 renderer 메모리에 resident로 유지한다. 초기 진입 후 idle 시간에 탭들을 순차 마운트하고, 숨겨진 탭은 state를 유지한 채 비활성화한다. 언어/런타임 선택 옵션 A: React renderer resident tree. 현재 병목이 탭 클릭 시 React tree 생성과 component mount 비용이므",
+      "html": "<h1>스펙: 탭 상주 선마운트 최적화</h1>\n<h2>목표</h2>\n<p>Workspace Monitor의 탭 전환에서 React component mount 비용을 클릭 시점에 지불하지 않도록, 주요 탭을 renderer 메모리에 resident로 유지한다. 초기 진입 후 idle 시간에 탭들을 순차 마운트하고, 숨겨진 탭은 state를 유지한 채 비활성화한다.</p>\n<h2>언어/런타임 선택</h2>\n<ul>\n<li>옵션 A: React renderer resident tree. 현재 병목이 탭 클릭 시 React tree 생성과 component mount 비용이므로 가장 직접적이다. 선택.</li>\n<li>옵션 B: Rust/Tauri native cache 확장. 파일 IO와 text preload에는 적합하지만 React component mount 비용을 직접 줄이지 못한다. 이전 native resource slice는 유지하되 이번 선택은 아님.</li>\n<li>옵션 C: Web Worker/IndexedDB cache. 데이터 계산에는 도움이 되지만 UI component state와 mount 비용을 해결하지 못하고 동기화 코드가 늘어난다.</li>\n</ul>\n<h2>아키텍처 선택</h2>\n<ul>\n<li>옵션 A: <code>residentSectionIds</code> 전역 상태와 <code>MountedSectionPanel</code>을 사용해 모든 주요 탭을 한 shell 안에 상주시킨다. 기존 패널 컴포넌트와 source state preservation 패턴을 확장하므로 선택했다.</li>\n<li>옵션 B: 모든 탭을 앱 시작 렌더에서 즉시 마운트한다. 전환은 빠르지만 초기 프레임과 CPU spike가 커져 미선택.</li>\n<li>옵션 C: 탭별 lazy import만 강화한다. bundle load에는 좋지만 사용자가 지적한 mount/recompute 비용은 남아 미선택.</li>\n</ul>\n<h2>폴더 구조 선택</h2>\n<ul>\n<li>옵션 A: 기존 Workspace Monitor shell 파일과 테스트/CSS만 좁게 수정한다. 탭 생명주기 책임이 <code>MonitorShell</code>에 있어 선택했다.</li>\n<li>옵션 B: 새 resident section manager component로 분리한다. 장기적으로 가능하지만 이번 변경은 기존 탭 조건부 렌더를 좁게 치환하는 것이 더 안전하다.</li>\n</ul>\n<h2>설계</h2>\n<ul>\n<li><code>residentSectionIds</code>는 초기 섹션과 <code>source</code>를 기본 resident로 시작한다.</li>\n<li><code>residentSectionMountPlan</code>은 현재 보이는 섹션을 우선순위 순서로 정렬한다.</li>\n<li><code>useEffect</code>는 <code>requestIdleCallback</code>이 있으면 idle callback으로, 없으면 짧은 timeout fallback으로 한 섹션씩 resident로 전환한다.</li>\n<li><code>primeSectionActivation</code>과 <code>activateSection</code>은 클릭 전후 모두 <code>markSectionResident</code>를 호출한다.</li>\n<li>각 탭 내용은 <code>shouldRenderSection(&quot;&lt;id&gt;&quot;) &amp;&amp; &lt;MountedSectionPanel ...&gt;</code>로 감싼다.</li>\n<li><code>DesktopRuntimePanel</code>은 <code>surfaceActive={section === ...}</code>와 active tab gated <code>launchRequest</code>를 받는다.</li>\n<li>CSS는 <code>.mounted-section-panel</code>에 <code>contain: layout paint style</code>을 둬 hidden resident panel의 layout/paint 영향을 줄인다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>overview</code>, <code>desktop</code>, <code>tools</code>, <code>projects</code>, <code>history</code>, <code>intent</code>, <code>structure</code>, <code>documents</code>, <code>source</code>, <code>requirements</code>, <code>agents</code>가 resident panel 패턴을 사용한다.</li>\n<li>기존 <code>{sectionContentReady &amp;&amp; section === &quot;...&quot;} </code> 기반 주요 탭 mount gate가 남지 않는다.</li>\n<li>workspace-monitor tests/check가 통과한다.</li>\n<li>platform-desktop-app tests/check와 <code>package:internal</code>이 통과한다.</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>React state preservation guidance: https://react.dev/learn/preserving-and-resetting-state</li>\n<li>React memoization reference: https://react.dev/reference/react/useMemo</li>\n<li>React lazy/code splitting reference: https://react.dev/reference/react/lazy</li>\n<li>MDN CSS containment and rendering performance reference: https://developer.mozilla.org/en-US/docs/Web/CSS/contain</li>\n<li>MDN content-visibility reference: https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility</li>\n</ul>\n<h2>제한</h2>\n<ul>\n<li>이 변경은 전환 시 mount 비용을 줄이는 것이며, 각 탭 내부의 비싼 effect가 활성 상태와 무관하게 실행되면 별도 최적화가 필요하다.</li>\n<li>메모리를 더 쓰는 설계이므로 저사양 환경에서는 resident section count와 idle scheduling을 설정화할 여지가 있다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 3893,
+      "updatedAt": "2026-06-05T16:46:46.752Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-06-native-select-replacement-evaluation-input-json",
       "path": "_history/evaluations/2026/2026-06-06-native-select-replacement-evaluation-input.json",
       "category": "evaluation",
@@ -9804,86 +10012,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-work-timings-2026-2026-06-05-local-history-hook-componentization-json",
-      "path": "_history/work-timings/2026/2026-06-05-local-history-hook-componentization.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 05 Local History Hook Componentization",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request id\": \"local history hook componentization\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"duration seconds\": 45 }, { \"phase id\": \"gap inventory\", \"label\": \"Local gap and source inventory\", \"duration seconds\": 120 }, { \"",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request id&quot;: &quot;local history hook componentization&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;duration seconds&quot;: 45 }, { &quot;phase id&quot;: &quot;gap inventory&quot;, &quot;label&quot;: &quot;Local gap and source inventory&quot;, &quot;duration seconds&quot;: 120 }, { &quot;phase id&quot;: &quot;implementation&quot;, &quot;label&quot;: &quot;Hook split, local cache, and Korean copy&quot;</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 596,
-      "updatedAt": "2026-06-05T12:10:43.431Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-local-history-hook-componentization-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-05-local-history-hook-componentization-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 05 Local History Hook Componentization Evaluation Input",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request id\": \"local history hook componentization\", \"requirements\": \"PDA REQ 044\" , \"implementation targets\": \"platform desktop app/renderer/workspace monitor/components/history/useAdminHistoryIndex.ts\", \"platform desktop app/renderer/workspace monitor/co",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request id&quot;: &quot;local history hook componentization&quot;, &quot;requirements&quot;: &quot;PDA REQ 044&quot; , &quot;implementation targets&quot;: &quot;platform desktop app/renderer/workspace monitor/components/history/useAdminHistoryIndex.ts&quot;, &quot;platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx&quot;, &quot;platform desktop app/renderer/workspace monitor/tes</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 696,
-      "updatedAt": "2026-06-05T12:10:43.430Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-05-local-history-hook-componentization-ko-md",
-      "path": "_history/user-requests/2026/2026-06-05-local-history-hook-componentization.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Local History Hook Componentization",
-      "excerpt": "사용자 요청 요약: Local History Hook Componentization 사용자는 범위가 넓어서 남겨둔 작업을 계속 처리하라고 요청했고, 이어서 로컬 자원을 활용한 성능 개선, 많이 쌓여 유지보수가 어려운 코드 분리, 어색한 한국어 문구 수정을 요구했다.",
-      "html": "<p>사용자 요청 요약: Local History Hook Componentization 사용자는 범위가 넓어서 남겨둔 작업을 계속 처리하라고 요청했고, 이어서 로컬 자원을 활용한 성능 개선, 많이 쌓여 유지보수가 어려운 코드 분리, 어색한 한국어 문구 수정을 요구했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 312,
-      "updatedAt": "2026-06-05T12:10:43.430Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-05-local-history-hook-componentization-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-05-local-history-hook-componentization.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: Local History Hook Componentization",
-      "excerpt": "작업 요약: Local History Hook Componentization 관리자 기록 색인 로딩, 모듈 캐시, idle preload, 문서 병합, 날짜별 그룹 생성을 useAdminHistoryIndex hook으로 분리했다. MonitorShell.tsx 에서 해당 로딩/effect/helper를 제거했다. History 화면의 핵심 한국어 지표와 상태 문구를 자연스럽게 바꿨다. 테스트가 hook 분리, 로컬 캐시, idle preload, Korean copy 회귀를 검증하도록 보강했다.",
-      "html": "<p>작업 요약: Local History Hook Componentization 관리자 기록 색인 로딩, 모듈 캐시, idle preload, 문서 병합, 날짜별 그룹 생성을 useAdminHistoryIndex hook으로 분리했다. MonitorShell.tsx 에서 해당 로딩/effect/helper를 제거했다. History 화면의 핵심 한국어 지표와 상태 문구를 자연스럽게 바꿨다. 테스트가 hook 분리, 로컬 캐시, idle preload, Korean copy 회귀를 검증하도록 보강했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 479,
-      "updatedAt": "2026-06-05T12:10:43.430Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-05-local-history-hook-componentization-ko-md",
-      "path": "_history/web-searches/2026/2026-06-05-local-history-hook-componentization.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "2026 06 05 Local History Hook Componentization Web Search",
-      "excerpt": "2026 06 05 Local History Hook Componentization Web Search 검색 React official performance useMemo useCallback context splitting large components Next.js official lazy loading client components performance web.dev optimize long tasks INP local data parsing JSON performance Korean UX",
-      "html": "<p>2026 06 05 Local History Hook Componentization Web Search 검색 React official performance useMemo useCallback context splitting large components Next.js official lazy loading client components performance web.dev optimize long tasks INP local data parsing JSON performance Korean UX writing guidelines plain language Korean interface copy 확인한 출처 Next.js lazy loa</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1238,
-      "updatedAt": "2026-06-05T12:10:43.429Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-local-history-hook-componentization-traceability-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-local-history-hook-componentization/traceability.ko.md",
       "category": "project-spec",
@@ -9978,38 +10106,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-history-payload-migration-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-05-history-payload-migration-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 05 History Payload Migration Evaluation Input",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request id\": \"history payload migration\", \"requirements\": \"PDA REQ 043\" , \"implementation targets\": \"platform desktop app/renderer/workspace monitor/scripts/collect workspace.mjs\", \"platform desktop app/renderer/workspace monitor/components/MonitorShell.t",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request id&quot;: &quot;history payload migration&quot;, &quot;requirements&quot;: &quot;PDA REQ 043&quot; , &quot;implementation targets&quot;: &quot;platform desktop app/renderer/workspace monitor/scripts/collect workspace.mjs&quot;, &quot;platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx&quot;, &quot;platform desktop app/renderer/workspace monitor/lib/snapshot.ts&quot;, &quot;platfor</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 753,
-      "updatedAt": "2026-06-05T12:01:54.138Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-history-payload-migration-ko-md",
-      "path": "_history/evaluations/2026/2026-06-05-history-payload-migration.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "Evaluation: History Payload Migration",
-      "excerpt": "Evaluation: History Payload Migration 결과 통과. 기본 Workspace Monitor snapshot에서 누적 history 전체를 중복 적재하지 않도록 분리했고, 기존 기록 2,220개는 admin history index.json 관리자 색인으로 마이그레이션했다. 검증 근거 기본 snapshot documents: 650개 inline history documents: 96개 admin history records: 2,220개 기본 documents JSON:",
-      "html": "<p>Evaluation: History Payload Migration 결과 통과. 기본 Workspace Monitor snapshot에서 누적 history 전체를 중복 적재하지 않도록 분리했고, 기존 기록 2,220개는 admin history index.json 관리자 색인으로 마이그레이션했다. 검증 근거 기본 snapshot documents: 650개 inline history documents: 96개 admin history records: 2,220개 기본 documents JSON: 1,651,769 bytes check:history payload , test , check 통과 판단 요청의 핵심인 token/payloa</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 728,
-      "updatedAt": "2026-06-05T12:01:54.138Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
     },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-history-payload-migration-plan-ko-md",
@@ -17658,133 +17754,37 @@
       "historyDate": "2026-06-03",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-platform-source-editor-customization-tasks-en-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-platform-source-editor-customization/tasks.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Tasks: Platform Source Editor Customization",
-      "excerpt": "Tasks: Platform Source Editor Customization | ID | Task | Status | | | | | | TASK WM PSC 001 | Check Monaco official references and current Source Review structure | done | | TASK WM PSC 002 | Add platform templates and path based editing profiles | done | | TASK WM PSC 003 | Imp",
-      "html": "<h1>Tasks: Platform Source Editor Customization</h1>\n<table><thead><tr><th>ID</th><th>Task</th><th>Status</th></tr></thead><tbody><tr><td>TASK-WM-PSC-001</td><td>Check Monaco official references and current Source Review structure</td><td>done</td></tr><tr><td>TASK-WM-PSC-002</td><td>Add platform templates and path-based editing profiles</td><td>done</td></tr><tr><td>TASK-WM-PSC-003</td><td>Implement template insertion and patch-context copy actions</td><td>done</td></tr><tr><td>TASK-WM-PSC-004</td><td>Add desktop workbench styling and responsive CSS</td><td>done</td></tr><tr><td>TASK-WM-PSC-005</td><td>Record requirements, specs, history, and evaluation artifacts</td><td>done</td></tr><tr><td>TASK-WM-PSC-006</td><td>Validate with builds, tests, and Browser smoke</td><td>done</td></tr><tr><td>TASK-WM-PSC-007</td><td>Commit and push</td><td>in_progress</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 658,
-      "updatedAt": "2026-06-03T03:20:41.703Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-platform-source-editor-customization-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-platform-source-editor-customization/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업: 플랫폼 소스 에디터 커스터마이징",
-      "excerpt": "작업: 플랫폼 소스 에디터 커스터마이징 | ID | 작업 | 상태 | | | | | | TASK WM PSC 001 | Monaco 공식 자료와 기존 Source Review 구조 확인 | done | | TASK WM PSC 002 | 플랫폼 템플릿과 경로 기반 편집 프로필 추가 | done | | TASK WM PSC 003 | 템플릿 삽입과 패치 컨텍스트 복사 action 구현 | done | | TASK WM PSC 004 | 데스크톱 workbench 스타일과 responsive CSS ",
-      "html": "<h1>작업: 플랫폼 소스 에디터 커스터마이징</h1>\n<table><thead><tr><th>ID</th><th>작업</th><th>상태</th></tr></thead><tbody><tr><td>TASK-WM-PSC-001</td><td>Monaco 공식 자료와 기존 Source Review 구조 확인</td><td>done</td></tr><tr><td>TASK-WM-PSC-002</td><td>플랫폼 템플릿과 경로 기반 편집 프로필 추가</td><td>done</td></tr><tr><td>TASK-WM-PSC-003</td><td>템플릿 삽입과 패치 컨텍스트 복사 action 구현</td><td>done</td></tr><tr><td>TASK-WM-PSC-004</td><td>데스크톱 workbench 스타일과 responsive CSS 추가</td><td>done</td></tr><tr><td>TASK-WM-PSC-005</td><td>요구사항, 스펙, 히스토리, 평가 기록 작성</td><td>done</td></tr><tr><td>TASK-WM-PSC-006</td><td>빌드, 테스트, 브라우저 smoke 검증</td><td>done</td></tr><tr><td>TASK-WM-PSC-007</td><td>커밋 및 push</td><td>in_progress</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 669,
-      "updatedAt": "2026-06-03T03:20:41.703Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-platform-source-editor-customization-validation-en-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-platform-source-editor-customization/validation.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Validation: Platform Source Editor Customization",
-      "excerpt": "Validation: Platform Source Editor Customization Executed Checks git diff check : passed. corepack pnpm filter workspace monitor run check : passed. corepack pnpm filter workspace monitor test : 16 passed. corepack pnpm filter workspace monitor run build : passed, used for Browse",
-      "html": "<h1>Validation: Platform Source Editor Customization</h1>\n<h2>Executed Checks</h2>\n<ul>\n<li><code>git diff --check</code>: passed.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: passed.</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 16 passed.</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code>: passed, used for Browser smoke with the developer snapshot.</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: passed.</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: <code>within_budget</code>, largest initial chunk 227542 bytes.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check:intent-map</code>: passed.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check:intent-map:customer</code>: passed.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: passed, customer bundle audit ready.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 13 passed.</li>\n<li>Browser smoke: developer static snapshot showed Runtime Source Review <code>source-customization-bar</code>, 6 template options, disabled insert/context buttons without Tauri runtime, and body/viewport overflow 0.</li>\n</ul>\n<h2>Note</h2>\n<ul>\n<li>The customer snapshot intentionally redacts Source Review and shows User View only. Browser smoke used a developer/superadmin snapshot build, and final outputs were returned to customer build.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1262,
-      "updatedAt": "2026-06-03T03:18:55.105Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-platform-source-editor-customization-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-platform-source-editor-customization/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증: 플랫폼 소스 에디터 커스터마이징",
-      "excerpt": "검증: 플랫폼 소스 에디터 커스터마이징 실행 검증 git diff check : 통과. corepack pnpm filter workspace monitor run check : 통과. corepack pnpm filter workspace monitor test : 16개 통과. corepack pnpm filter workspace monitor run build : 통과, developer snapshot으로 Browser smoke에 사용. corepack pnpm filter worksp",
-      "html": "<h1>검증: 플랫폼 소스 에디터 커스터마이징</h1>\n<h2>실행 검증</h2>\n<ul>\n<li><code>git diff --check</code>: 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 16개 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code>: 통과, developer snapshot으로 Browser smoke에 사용.</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: <code>within_budget</code>, largest initial chunk 227542 bytes.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check:intent-map</code>: 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check:intent-map:customer</code>: 통과.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과, customer bundle audit ready.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 13개 통과.</li>\n<li>Browser smoke: developer static snapshot에서 Runtime Source Review의 <code>source-customization-bar</code> 표시, 템플릿 6개 표시, insert/context 버튼은 Tauri runtime 미연결 상태에서 disabled, body/viewport overflow 0 확인.</li>\n</ul>\n<h2>참고</h2>\n<ul>\n<li>customer snapshot에서는 Source Review가 의도적으로 redacted되어 User View만 보인다. Browser smoke는 developer/superadmin snapshot build로 확인했고, 최종 산출물은 다시 customer build로 되돌렸다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1338,
-      "updatedAt": "2026-06-03T03:18:55.105Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-platform-source-editor-customization-traceability-en-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-platform-source-editor-customization/traceability.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Traceability: Platform Source Editor Customization",
-      "excerpt": "Traceability: Platform Source Editor Customization | Item | Link | | | | | User request | UR 2026 06 03 028 | | Requirement | REQ WM 027 | | Implementation | workspace monitor/components/MonitorShell.tsx , workspace monitor/app/globals.css | | Validation | workspace monitor/specs",
-      "html": "<h1>Traceability: Platform Source Editor Customization</h1>\n<table><thead><tr><th>Item</th><th>Link</th></tr></thead><tbody><tr><td>User request</td><td><code>UR-2026-06-03-028</code></td></tr><tr><td>Requirement</td><td><code>REQ-WM-027</code></td></tr><tr><td>Implementation</td><td><code>workspace-monitor/components/MonitorShell.tsx</code>, <code>workspace-monitor/app/globals.css</code></td></tr><tr><td>Validation</td><td><code>workspace-monitor/specs/2026-06-03-platform-source-editor-customization/validation.en.md</code></td></tr><tr><td>Web search</td><td><code>_history/web-searches/2026/2026-06-03-platform-source-editor-customization.ko.md</code></td></tr><tr><td>Evaluation</td><td><code>_history/evaluations/2026/2026-06-03-platform-source-editor-customization-evaluation-input.json</code>, <code>_history/evaluations/2026/2026-06-03-platform-source-editor-customization-evaluation-result.json</code></td></tr></tbody></table>\n<h2>Requirement Mapping</h2>\n<ul>\n<li><code>REQ-WM-027</code> -&gt; Monaco theme/options, <code>sourceTemplates</code>, <code>sourceEditorProfileForPath</code>, <code>insertSourceTemplate</code>, <code>copySourcePatchContext</code>, <code>source-customization-bar</code>.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 875,
-      "updatedAt": "2026-06-03T03:13:29.370Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-platform-source-editor-customization-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-platform-source-editor-customization/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적: 플랫폼 소스 에디터 커스터마이징",
-      "excerpt": "추적: 플랫폼 소스 에디터 커스터마이징 | 항목 | 연결 | | | | | 사용자 요청 | UR 2026 06 03 028 | | 요구사항 | REQ WM 027 | | 구현 | workspace monitor/components/MonitorShell.tsx , workspace monitor/app/globals.css | | 검증 | workspace monitor/specs/2026 06 03 platform source editor customization/validation.ko.md ",
-      "html": "<h1>추적: 플랫폼 소스 에디터 커스터마이징</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>사용자 요청</td><td><code>UR-2026-06-03-028</code></td></tr><tr><td>요구사항</td><td><code>REQ-WM-027</code></td></tr><tr><td>구현</td><td><code>workspace-monitor/components/MonitorShell.tsx</code>, <code>workspace-monitor/app/globals.css</code></td></tr><tr><td>검증</td><td><code>workspace-monitor/specs/2026-06-03-platform-source-editor-customization/validation.ko.md</code></td></tr><tr><td>웹 검색</td><td><code>_history/web-searches/2026/2026-06-03-platform-source-editor-customization.ko.md</code></td></tr><tr><td>평가</td><td><code>_history/evaluations/2026/2026-06-03-platform-source-editor-customization-evaluation-input.json</code>, <code>_history/evaluations/2026/2026-06-03-platform-source-editor-customization-evaluation-result.json</code></td></tr></tbody></table>\n<h2>요구사항 매핑</h2>\n<ul>\n<li><code>REQ-WM-027</code> -&gt; Monaco theme/options, <code>sourceTemplates</code>, <code>sourceEditorProfileForPath</code>, <code>insertSourceTemplate</code>, <code>copySourcePatchContext</code>, <code>source-customization-bar</code>.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 871,
-      "updatedAt": "2026-06-03T03:13:29.370Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 41,
+      "documentsCount": 48,
       "categories": [
         {
           "category": "evaluation",
-          "count": 11
+          "count": 13
         },
         {
           "category": "request-trace",
-          "count": 6
+          "count": 7
         },
         {
           "category": "user-request",
-          "count": 6
+          "count": 7
         },
         {
           "category": "web-search",
-          "count": 6
+          "count": 7
         },
         {
           "category": "work-summary",
-          "count": 6
+          "count": 7
         },
         {
           "category": "work-timing",
-          "count": 6
+          "count": 7
         }
       ],
       "documents": [
@@ -17899,6 +17899,26 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-evaluations-2026-2026-06-06-tab-resident-preload-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-tab-resident-preload-evaluation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Tab Resident Preload Evaluation Input",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 tab resident preload\", \"status\": \"passed\", \"installation occurred\": false, \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 tab resident preload.json\" , \"omission check targets\": ",
+          "updatedAt": "2026-06-05T16:50:32.196Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-tab-resident-preload-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-tab-resident-preload.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "평가: 탭 상주 선마운트 최적화",
+          "excerpt": "평가: 탭 상주 선마운트 최적화 결론 구현은 사용자 요구와 맞다. 탭 클릭 시점의 조건부 mount를 줄이고, 시작 후 idle 시간에 주요 탭을 renderer 메모리에 resident로 올리는 구조로 바꿨다. 확인한 점 주요 탭 condition이 section === ... 직접 mount gate에서 shouldRenderSection ... 로 전환됐다. 숨겨진 탭은 MountedSectionPanel 로 state를 유지한다. desktop/source 런타임 표면은 active sec",
+          "updatedAt": "2026-06-05T16:50:32.196Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-06-button-tonal-hierarchy-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-button-tonal-hierarchy.ko.md",
           "category": "request-trace",
@@ -17956,6 +17976,16 @@
           "title": "요청 결과 추적: 구조/메모리/성능 마이그레이션",
           "excerpt": "요청 결과 추적: 구조/메모리/성능 마이그레이션 요청 전체 구조에 근본 혁신이 필요한지, 메모리와 성능 비효율이 있는지 냉정하게 평가하고 마이그레이션 계획 후 구현. 결과 근본 개선 필요 판정: 대형 React/CSS/Rust 단일 파일과 state boundary 과밀. 즉시 구현 slice: source snapshot payload 축소와 Monaco input state churn 감소. 회귀 방지: performance budget check와 tests 추가. 검증 workspace m",
           "updatedAt": "2026-06-05T15:59:02.047Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-tab-resident-preload-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-tab-resident-preload.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: 탭 상주 선마운트 최적화",
+          "excerpt": "요청 결과 추적: 탭 상주 선마운트 최적화 요청 탭 이동 시 느린 마운트/불러오기 비용을 줄이기 위해 앱 시작 후 주요 탭을 미리 불러와 메모리에 두는 전역적 구조를 고려하고 구현해 달라는 요청. 결과 구현: platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx 스타일: platform desktop app/renderer/workspace monitor/app/globals.css 테스트: platform desk",
+          "updatedAt": "2026-06-05T16:50:32.195Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18019,6 +18049,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-user-requests-2026-2026-06-06-tab-resident-preload-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-tab-resident-preload.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: 탭 상주 선마운트 최적화",
+          "excerpt": "사용자 요청 요약: 탭 상주 선마운트 최적화 사용자는 Workspace Monitor 탭 이동이 여전히 매우 느리다고 보고했다. 원인 후보로 탭 이동 때마다 많은 화면이 새로 불러오고 마운트되는 구조를 지적했고, 앱 시작 시 미리 모든 탭을 불러와 메모리에 두거나 전역적으로 보관해 탭 전환 비용을 줄이는 근본적 해결을 요청했다. 수용 기준 클릭 시점의 탭 mount 비용을 줄인다. 데스크톱 앱답게 RAM 사용을 더 허용한다. 구현 완료 후 사용자가 직접 빌드하지 않도록 빌드까지 자동 실행한다.",
+          "updatedAt": "2026-06-05T16:46:46.755Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-06-button-tonal-hierarchy-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-button-tonal-hierarchy.ko.md",
           "category": "web-search",
@@ -18076,6 +18116,16 @@
           "title": "웹 검색 기록: 구조/메모리/성능 마이그레이션",
           "excerpt": "웹 검색 기록: 구조/메모리/성능 마이그레이션 검색어 Tauri v2 performance best practices Rust WebView memory official docs Next.js static export performance bundle optimization official docs React performance useMemo memo lazy Suspense official docs Rust rayon performance thread pool CPU IO bounded off",
           "updatedAt": "2026-06-05T15:57:46.787Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-tab-resident-preload-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-tab-resident-preload.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: 탭 상주 선마운트 최적화",
+          "excerpt": "웹 검색 기록: 탭 상주 선마운트 최적화 목적 React 탭 전환에서 state preservation, conditional rendering, memoization, idle/lazy loading, CSS rendering containment 선택지를 확인했다. 검색어 React official docs memo useMemo useTransition performance rendering hidden tabs React official docs preserving and resetting",
+          "updatedAt": "2026-06-05T16:46:46.755Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18139,6 +18189,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-06-tab-resident-preload-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-tab-resident-preload.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: 탭 상주 선마운트 최적화",
+          "excerpt": "작업 요약: 탭 상주 선마운트 최적화 Workspace Monitor의 주요 탭을 클릭할 때마다 새로 마운트하지 않도록 resident section 상태와 idle 선마운트 계획을 추가했다. 탭 pointerdown과 activation 시 대상 섹션을 즉시 resident로 표시하고, 이후 idle 시간에 나머지 visible section을 순차적으로 메모리에 올린다. 변경 MonitorShell.tsx : residentSectionIds , residentSectionMountPlan ,",
+          "updatedAt": "2026-06-05T16:50:32.195Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-button-tonal-hierarchy-json",
           "path": "_history/work-timings/2026/2026-06-06-button-tonal-hierarchy.json",
           "category": "work-timing",
@@ -18197,17 +18257,27 @@
           "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 structure performance migration\", \"timings\": { \"phase\": \"web research\", \"duration\": \"approximately 8 minutes\" }, { \"phase\": \"local audit and slice selection\", \"duration\": \"approximately 15 minutes\" }, { \"phase\": \"implementation\", ",
           "updatedAt": "2026-06-05T15:57:46.787Z",
           "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-06-tab-resident-preload-json",
+          "path": "_history/work-timings/2026/2026-06-06-tab-resident-preload.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Tab Resident Preload",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 tab resident preload\", \"phases\": { \"phase\": \"web first intake\", \"duration minutes estimate\": 5 }, { \"phase\": \"source inspection\", \"duration minutes estimate\": 10 }, { \"phase\": \"implementation\", \"duration minutes estimate\": 25 }, {",
+          "updatedAt": "2026-06-05T16:50:32.195Z",
+          "historyDate": "2026-06-06"
         }
       ]
     },
     {
       "date": "2026-06-05",
       "year": "2026",
-      "documentsCount": 55,
+      "documentsCount": 48,
       "categories": [
         {
           "category": "evaluation",
-          "count": 13
+          "count": 10
         },
         {
           "category": "request-trace",
@@ -18215,19 +18285,19 @@
         },
         {
           "category": "user-request",
-          "count": 8
+          "count": 7
         },
         {
           "category": "web-search",
-          "count": 8
+          "count": 7
         },
         {
           "category": "work-summary",
-          "count": 8
+          "count": 7
         },
         {
           "category": "work-timing",
-          "count": 7
+          "count": 6
         },
         {
           "category": "plan",
@@ -18290,26 +18360,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-evaluations-2026-2026-06-05-history-payload-migration-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-05-history-payload-migration-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 05 History Payload Migration Evaluation Input",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request id\": \"history payload migration\", \"requirements\": \"PDA REQ 043\" , \"implementation targets\": \"platform desktop app/renderer/workspace monitor/scripts/collect workspace.mjs\", \"platform desktop app/renderer/workspace monitor/components/MonitorShell.t",
-          "updatedAt": "2026-06-05T12:01:54.138Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-05-history-payload-migration-ko-md",
-          "path": "_history/evaluations/2026/2026-06-05-history-payload-migration.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "Evaluation: History Payload Migration",
-          "excerpt": "Evaluation: History Payload Migration 결과 통과. 기본 Workspace Monitor snapshot에서 누적 history 전체를 중복 적재하지 않도록 분리했고, 기존 기록 2,220개는 admin history index.json 관리자 색인으로 마이그레이션했다. 검증 근거 기본 snapshot documents: 650개 inline history documents: 96개 admin history records: 2,220개 기본 documents JSON:",
-          "updatedAt": "2026-06-05T12:01:54.138Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-05-korean-copy-pass-ko-md",
           "path": "_history/evaluations/2026/2026-06-05-korean-copy-pass.ko.md",
           "category": "evaluation",
@@ -18317,16 +18367,6 @@
           "title": "Evaluation: Korean Copy Pass",
           "excerpt": "Evaluation: Korean Copy Pass 결과: pass. 사용자 요청 반영: 어색한 한국어 혼용 표현을 사용자 고빈도 화면에서 정리했다. task run store , CLI lane , decision inbox , blocker , proposal , native runtime , snapshot 계열 표현을 한국어 문맥에 맞게 바꿨다. Git/CLI/API처럼 유지해야 하는 기술명은 유지하고 버튼/설명 동사는 한국어로 정리했다. 검증: corepack pnpm filter wor",
           "updatedAt": "2026-06-05T12:27:23.072Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-05-local-history-hook-componentization-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-05-local-history-hook-componentization-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 05 Local History Hook Componentization Evaluation Input",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request id\": \"local history hook componentization\", \"requirements\": \"PDA REQ 044\" , \"implementation targets\": \"platform desktop app/renderer/workspace monitor/components/history/useAdminHistoryIndex.ts\", \"platform desktop app/renderer/workspace monitor/co",
-          "updatedAt": "2026-06-05T12:10:43.430Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18510,16 +18550,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-user-requests-2026-2026-06-05-local-history-hook-componentization-ko-md",
-          "path": "_history/user-requests/2026/2026-06-05-local-history-hook-componentization.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: Local History Hook Componentization",
-          "excerpt": "사용자 요청 요약: Local History Hook Componentization 사용자는 범위가 넓어서 남겨둔 작업을 계속 처리하라고 요청했고, 이어서 로컬 자원을 활용한 성능 개선, 많이 쌓여 유지보수가 어려운 코드 분리, 어색한 한국어 문구 수정을 요구했다.",
-          "updatedAt": "2026-06-05T12:10:43.430Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-05-source-workbench-control-primitives-ko-md",
           "path": "_history/user-requests/2026/2026-06-05-source-workbench-control-primitives.ko.md",
           "category": "user-request",
@@ -18587,16 +18617,6 @@
           "title": "2026 06 05 Korean Copy Pass Web Search",
           "excerpt": "2026 06 05 Korean Copy Pass Web Search 요청: 어색한 한국어 UI 문구 정리. 검색/참고: 국립국어원 공공언어/다듬은 말 안내: https://www.korean.go.kr/front/support/supportIntro.do?mn id=163 Microsoft Style Guide, simple words and concise sentences: https://learn.microsoft.com/en us/style guide/word choice/use simpl",
           "updatedAt": "2026-06-05T12:27:23.071Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-05-local-history-hook-componentization-ko-md",
-          "path": "_history/web-searches/2026/2026-06-05-local-history-hook-componentization.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "2026 06 05 Local History Hook Componentization Web Search",
-          "excerpt": "2026 06 05 Local History Hook Componentization Web Search 검색 React official performance useMemo useCallback context splitting large components Next.js official lazy loading client components performance web.dev optimize long tasks INP local data parsing JSON performance Korean UX",
-          "updatedAt": "2026-06-05T12:10:43.429Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18670,16 +18690,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-05-local-history-hook-componentization-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-05-local-history-hook-componentization.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: Local History Hook Componentization",
-          "excerpt": "작업 요약: Local History Hook Componentization 관리자 기록 색인 로딩, 모듈 캐시, idle preload, 문서 병합, 날짜별 그룹 생성을 useAdminHistoryIndex hook으로 분리했다. MonitorShell.tsx 에서 해당 로딩/effect/helper를 제거했다. History 화면의 핵심 한국어 지표와 상태 문구를 자연스럽게 바꿨다. 테스트가 hook 분리, 로컬 캐시, idle preload, Korean copy 회귀를 검증하도록 보강했다.",
-          "updatedAt": "2026-06-05T12:10:43.430Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-05-source-workbench-control-primitives-ko-md",
           "path": "_history/work-summaries/2026/2026-06-05-source-workbench-control-primitives.ko.md",
           "category": "work-summary",
@@ -18740,16 +18750,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-work-timings-2026-2026-06-05-local-history-hook-componentization-json",
-          "path": "_history/work-timings/2026/2026-06-05-local-history-hook-componentization.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 05 Local History Hook Componentization",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request id\": \"local history hook componentization\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"duration seconds\": 45 }, { \"phase id\": \"gap inventory\", \"label\": \"Local gap and source inventory\", \"duration seconds\": 120 }, { \"",
-          "updatedAt": "2026-06-05T12:10:43.431Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-05-source-workbench-control-primitives-json",
           "path": "_history/work-timings/2026/2026-06-05-source-workbench-control-primitives.json",
           "category": "work-timing",
@@ -18798,16 +18798,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2313,
+      "documents": 2320,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 944
+          "count": 946
         },
         {
           "category": "web-search",
-          "count": 372
+          "count": 373
         },
         {
           "category": "plan",
@@ -18815,19 +18815,19 @@
         },
         {
           "category": "request-trace",
-          "count": 301
+          "count": 302
         },
         {
           "category": "work-timing",
-          "count": 223
+          "count": 224
         },
         {
           "category": "user-request",
-          "count": 85
+          "count": 86
         },
         {
           "category": "work-summary",
-          "count": 52
+          "count": 53
         },
         {
           "category": "daily-history",
@@ -18838,7 +18838,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6125497,
+      "totalSourceBytes": 6134145,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18863,11 +18863,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 38,
+      "evidenceEvents": 37,
       "decisionEvents": 0,
       "openSignals": 20,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T16:34:12.479Z",
+      "latestEventAt": "2026-06-05T16:50:32.196Z",
       "historyDays": 2
     },
     "lanes": [
@@ -18879,7 +18879,12 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 24
+        "count": 23
+      },
+      {
+        "id": "traceability",
+        "label": "traceability",
+        "count": 15
       },
       {
         "id": "delivery",
@@ -18894,11 +18899,6 @@
       {
         "id": "intake",
         "label": "intake",
-        "count": 14
-      },
-      {
-        "id": "traceability",
-        "label": "traceability",
         "count": 14
       },
       {
@@ -18926,7 +18926,12 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 24
+        "count": 23
+      },
+      {
+        "id": "trace",
+        "label": "trace",
+        "count": 15
       },
       {
         "id": "intake",
@@ -18936,11 +18941,6 @@
       {
         "id": "summary",
         "label": "summary",
-        "count": 14
-      },
-      {
-        "id": "trace",
-        "label": "trace",
         "count": 14
       },
       {
@@ -18977,6 +18977,111 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-tab-resident-preload-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "ready",
+        "title": "2026 06 06 Tab Resident Preload Evaluation Input",
+        "detail": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 tab resident preload\", \"status\": \"passed\", \"installation occurred\": false, \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 tab resident preload.json\" , \"omission check targets\": ",
+        "path": "_history/evaluations/2026/2026-06-06-tab-resident-preload-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:50:32.196Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-tab-resident-preload-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "평가: 탭 상주 선마운트 최적화",
+        "detail": "평가: 탭 상주 선마운트 최적화 결론 구현은 사용자 요구와 맞다. 탭 클릭 시점의 조건부 mount를 줄이고, 시작 후 idle 시간에 주요 탭을 renderer 메모리에 resident로 올리는 구조로 바꿨다. 확인한 점 주요 탭 condition이 section === ... 직접 mount gate에서 shouldRenderSection ... 로 전환됐다. 숨겨진 탭은 MountedSectionPanel 로 state를 유지한다. desktop/source 런타임 표면은 active sec",
+        "path": "_history/evaluations/2026/2026-06-06-tab-resident-preload.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:50:32.196Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-tab-resident-preload-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Tab Resident Preload",
+        "detail": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 tab resident preload\", \"phases\": { \"phase\": \"web first intake\", \"duration minutes estimate\": 5 }, { \"phase\": \"source inspection\", \"duration minutes estimate\": 10 }, { \"phase\": \"implementation\", \"duration minutes estimate\": 25 }, {",
+        "path": "_history/work-timings/2026/2026-06-06-tab-resident-preload.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:50:32.195Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-tab-resident-preload-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "요청 결과 추적: 탭 상주 선마운트 최적화",
+        "detail": "요청 결과 추적: 탭 상주 선마운트 최적화 요청 탭 이동 시 느린 마운트/불러오기 비용을 줄이기 위해 앱 시작 후 주요 탭을 미리 불러와 메모리에 두는 전역적 구조를 고려하고 구현해 달라는 요청. 결과 구현: platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx 스타일: platform desktop app/renderer/workspace monitor/app/globals.css 테스트: platform desk",
+        "path": "_history/request-traces/2026/2026-06-06-tab-resident-preload.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:50:32.195Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-tab-resident-preload-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약: 탭 상주 선마운트 최적화",
+        "detail": "작업 요약: 탭 상주 선마운트 최적화 Workspace Monitor의 주요 탭을 클릭할 때마다 새로 마운트하지 않도록 resident section 상태와 idle 선마운트 계획을 추가했다. 탭 pointerdown과 activation 시 대상 섹션을 즉시 resident로 표시하고, 이후 idle 시간에 나머지 visible section을 순차적으로 메모리에 올린다. 변경 MonitorShell.tsx : residentSectionIds , residentSectionMountPlan ,",
+        "path": "_history/work-summaries/2026/2026-06-06-tab-resident-preload.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:50:32.195Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-tab-resident-preload-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: 탭 상주 선마운트 최적화",
+        "detail": "웹 검색 기록: 탭 상주 선마운트 최적화 목적 React 탭 전환에서 state preservation, conditional rendering, memoization, idle/lazy loading, CSS rendering containment 선택지를 확인했다. 검색어 React official docs memo useMemo useTransition performance rendering hidden tabs React official docs preserving and resetting",
+        "path": "_history/web-searches/2026/2026-06-06-tab-resident-preload.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:46:46.755Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-tab-resident-preload-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "ready",
+        "title": "사용자 요청 요약: 탭 상주 선마운트 최적화",
+        "detail": "사용자 요청 요약: 탭 상주 선마운트 최적화 사용자는 Workspace Monitor 탭 이동이 여전히 매우 느리다고 보고했다. 원인 후보로 탭 이동 때마다 많은 화면이 새로 불러오고 마운트되는 구조를 지적했고, 앱 시작 시 미리 모든 탭을 불러와 메모리에 두거나 전역적으로 보관해 탭 전환 비용을 줄이는 근본적 해결을 요청했다. 수용 기준 클릭 시점의 탭 mount 비용을 줄인다. 데스크톱 앱답게 RAM 사용을 더 허용한다. 구현 완료 후 사용자가 직접 빌드하지 않도록 빌드까지 자동 실행한다.",
+        "path": "_history/user-requests/2026/2026-06-06-tab-resident-preload.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:46:46.755Z"
+      },
       {
         "id": "history-history-evaluations-2026-2026-06-06-native-select-replacement-evaluation-input-json",
         "sourceType": "history",
@@ -20311,111 +20416,6 @@
         "language": "ko",
         "date": "2026-06-05",
         "timestamp": "2026-06-05T12:12:07.014Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-05-local-history-hook-componentization-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "warning",
-        "status": "work-timing",
-        "title": "2026 06 05 Local History Hook Componentization",
-        "detail": "{ \"date\": \"2026 06 05\", \"request id\": \"local history hook componentization\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"duration seconds\": 45 }, { \"phase id\": \"gap inventory\", \"label\": \"Local gap and source inventory\", \"duration seconds\": 120 }, { \"",
-        "path": "_history/work-timings/2026/2026-06-05-local-history-hook-componentization.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T12:10:43.431Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-local-history-hook-componentization-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 05 Local History Hook Componentization Evaluation Input",
-        "detail": "{ \"date\": \"2026 06 05\", \"request id\": \"local history hook componentization\", \"requirements\": \"PDA REQ 044\" , \"implementation targets\": \"platform desktop app/renderer/workspace monitor/components/history/useAdminHistoryIndex.ts\", \"platform desktop app/renderer/workspace monitor/co",
-        "path": "_history/evaluations/2026/2026-06-05-local-history-hook-componentization-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T12:10:43.430Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-05-local-history-hook-componentization-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: Local History Hook Componentization",
-        "detail": "사용자 요청 요약: Local History Hook Componentization 사용자는 범위가 넓어서 남겨둔 작업을 계속 처리하라고 요청했고, 이어서 로컬 자원을 활용한 성능 개선, 많이 쌓여 유지보수가 어려운 코드 분리, 어색한 한국어 문구 수정을 요구했다.",
-        "path": "_history/user-requests/2026/2026-06-05-local-history-hook-componentization.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T12:10:43.430Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-05-local-history-hook-componentization-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: Local History Hook Componentization",
-        "detail": "작업 요약: Local History Hook Componentization 관리자 기록 색인 로딩, 모듈 캐시, idle preload, 문서 병합, 날짜별 그룹 생성을 useAdminHistoryIndex hook으로 분리했다. MonitorShell.tsx 에서 해당 로딩/effect/helper를 제거했다. History 화면의 핵심 한국어 지표와 상태 문구를 자연스럽게 바꿨다. 테스트가 hook 분리, 로컬 캐시, idle preload, Korean copy 회귀를 검증하도록 보강했다.",
-        "path": "_history/work-summaries/2026/2026-06-05-local-history-hook-componentization.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T12:10:43.430Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-05-local-history-hook-componentization-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "2026 06 05 Local History Hook Componentization Web Search",
-        "detail": "2026 06 05 Local History Hook Componentization Web Search 검색 React official performance useMemo useCallback context splitting large components Next.js official lazy loading client components performance web.dev optimize long tasks INP local data parsing JSON performance Korean UX",
-        "path": "_history/web-searches/2026/2026-06-05-local-history-hook-componentization.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T12:10:43.429Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-history-payload-migration-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 05 History Payload Migration Evaluation Input",
-        "detail": "{ \"date\": \"2026 06 05\", \"request id\": \"history payload migration\", \"requirements\": \"PDA REQ 043\" , \"implementation targets\": \"platform desktop app/renderer/workspace monitor/scripts/collect workspace.mjs\", \"platform desktop app/renderer/workspace monitor/components/MonitorShell.t",
-        "path": "_history/evaluations/2026/2026-06-05-history-payload-migration-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T12:01:54.138Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-history-payload-migration-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "Evaluation: History Payload Migration",
-        "detail": "Evaluation: History Payload Migration 결과 통과. 기본 Workspace Monitor snapshot에서 누적 history 전체를 중복 적재하지 않도록 분리했고, 기존 기록 2,220개는 admin history index.json 관리자 색인으로 마이그레이션했다. 검증 근거 기본 snapshot documents: 650개 inline history documents: 96개 admin history records: 2,220개 기본 documents JSON:",
-        "path": "_history/evaluations/2026/2026-06-05-history-payload-migration.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T12:01:54.138Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23356,7 +23356,7 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 14
+        "documentsCount": 15
       },
       {
         "category": "web-search",
@@ -23376,7 +23376,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 24
+        "documentsCount": 23
       },
       {
         "category": "daily-history",
@@ -23470,7 +23470,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 70,
+        "documentCount": 71,
         "sourceFileCount": 5
       },
       {
