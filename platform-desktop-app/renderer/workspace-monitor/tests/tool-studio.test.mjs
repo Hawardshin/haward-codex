@@ -56,6 +56,8 @@ const sourceControlsSmoke = fs.readFileSync(
 );
 const historyPayloadCheck = fs.readFileSync(path.join(projectRoot, "scripts", "check-history-payload.mjs"), "utf8");
 const adminHistoryHook = fs.readFileSync(path.join(projectRoot, "components", "history", "useAdminHistoryIndex.ts"), "utf8");
+const tauriLib = fs.readFileSync(path.resolve(projectRoot, "..", "..", "src-tauri", "src", "lib.rs"), "utf8");
+const tauriCargo = fs.readFileSync(path.resolve(projectRoot, "..", "..", "src-tauri", "Cargo.toml"), "utf8");
 const css = fs.readFileSync(path.join(projectRoot, "app", "globals.css"), "utf8");
 const packageJson = JSON.parse(fs.readFileSync(path.join(projectRoot, "package.json"), "utf8"));
 
@@ -380,6 +382,20 @@ test("Desktop source workbench prepares native OS workspace resources", () => {
   assert.match(monitorShell, /workspaceWarmupReport\.cachedBytes/);
   assert.match(monitorShell, /await prepareWorkspaceOsResources\(\{ forceRefresh: true \}\)/);
   assert.match(monitorShell, /void warmWorkspaceOsResources\(\{ forceRefresh: true \}\)/);
+  assert.match(monitorShell, /memoryBudgetBytes: number/);
+  assert.match(monitorShell, /parallelWorkers: number/);
+  assert.match(monitorShell, /CPU 병렬/);
+  assert.match(monitorShell, /preloadStrategy/);
+  assert.match(monitorShell, /scanDurationMs \+ workspaceResourceReport\.preloadDurationMs/);
+  assert.match(tauriCargo, /rayon = "1\.12\.0"/);
+  assert.match(tauriCargo, /sysinfo = \{ version = "0\.39\.3", default-features = false, features = \["system"\] \}/);
+  assert.match(tauriLib, /use rayon::prelude::\*/);
+  assert.match(tauriLib, /use sysinfo::System/);
+  assert.match(tauriLib, /WorkspaceResourceProfile/);
+  assert.match(tauriLib, /rayon_parallel_cpu_ram_budget/);
+  assert.match(tauriLib, /MAX_WORKSPACE_PRELOAD_WORKERS/);
+  assert.match(tauriLib, /build_workspace_thread_pool/);
+  assert.match(tauriLib, /selected[\s\S]*?par_iter\(\)[\s\S]*?filter_map\(read_workspace_preload_candidate\)/);
 });
 
 test("Workspace monitor sidebar and source editor defaults avoid clipped editing controls", () => {

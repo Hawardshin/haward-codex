@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-06",
+  "request_id": "2026-06-06-rust-desktop-resource-optimization",
+  "resource_risk_occurred": true,
+  "status": "passed",
+  "resources_touched": [
+    "Tauri managed Rust memory state",
+    "Rayon bounded CPU worker pool",
+    "OS filesystem scan",
+    "OS filesystem read",
+    "OS memory telemetry through sysinfo",
+    "macOS app signing verification",
+    "DMG verification"
+  ],
+  "limits": {
+    "max_workspace_source_scan_entries": 40000,
+    "max_workspace_preload_text_files": 2048,
+    "default_workspace_preload_text_bytes": 128000000,
+    "min_workspace_preload_text_bytes": 32000000,
+    "max_workspace_preload_text_bytes": 512000000,
+    "max_workspace_preload_workers": 16
+  },
+  "lifecycle_controls": [
+    "Only one warmup per active root is reused while warming.",
+    "Cache is cleared on workspace change and write.",
+    "Parallel work uses a bounded Rayon pool instead of unbounded thread spawning.",
+    "Preload memory budget is clamped by available OS memory and hard maximum.",
+    "Package build process exited successfully."
+  ]
+}

@@ -618,6 +618,34 @@
       "rollback_path": "corepack pnpm --filter workspace-monitor remove @radix-ui/react-slot class-variance-authority; remove Button component/import/test; rerun workspace-monitor checks.",
       "installation_record_path": "_history/installations/2026/2026-06-05-workspace-monitor-button-libs.ko.md",
       "commit": "pending"
+    },
+    {
+      "id": "2026-06-06-rust-desktop-resource-optimization-rust-crates",
+      "date": "2026-06-06",
+      "status": "installed",
+      "name": "platform-desktop-app Rust desktop resource crates",
+      "scope": "project",
+      "owning_project": "platform-desktop-app",
+      "package_manager": "cargo",
+      "install_command": "cargo add rayon@1.12.0 sysinfo@0.39.3",
+      "environment_path": "platform-desktop-app/src-tauri",
+      "dependency_record_paths": [
+        "platform-desktop-app/src-tauri/Cargo.toml",
+        "platform-desktop-app/src-tauri/Cargo.lock"
+      ],
+      "version_or_lock_status": "rayon@1.12.0 and sysinfo@0.39.3 recorded in Cargo.toml/Cargo.lock; sysinfo uses default-features=false and features=[\"system\"].",
+      "security_review": "Project-local Rust dependencies only; no global install, credential access, browser cookie access, or new network client added. sysinfo is limited to the system feature for CPU/RAM telemetry.",
+      "license_review": "cargo info reports rayon license MIT OR Apache-2.0 and sysinfo license MIT.",
+      "verification": [
+        "cargo info rayon@1.12.0: license MIT OR Apache-2.0, rust-version 1.80",
+        "cargo info sysinfo@0.39.3: license MIT, rust-version 1.95",
+        "cargo tree --manifest-path platform-desktop-app/src-tauri/Cargo.toml -i sysinfo -e features: system feature path confirmed",
+        "cargo tree --manifest-path platform-desktop-app/src-tauri/Cargo.toml -i rayon -e features: direct dependency confirmed",
+        "corepack pnpm --dir platform-desktop-app run package:internal: passed with app/DMG build and verification"
+      ],
+      "rollback_path": "Remove rayon and sysinfo from platform-desktop-app/src-tauri/Cargo.toml; revert WorkspaceResourceProfile/Rayon preload/sysinfo budget code and renderer report fields; regenerate Cargo.lock and rerun package checks.",
+      "installation_record_path": "_history/installations/2026/2026-06-06-rust-desktop-resource-optimization-rust-crates.ko.md",
+      "commit": "pending"
     }
   ]
 }

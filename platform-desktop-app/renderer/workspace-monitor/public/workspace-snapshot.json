@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T13:53:04.178Z",
+  "generatedAt": "2026-06-05T15:47:29.542Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,12 +13,12 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 444,
-    "evaluations": 23,
+    "evaluations": 22,
     "webSearches": 14,
     "timingRecords": 12,
-    "historyDays": 1,
-    "adminHistoryDocuments": 2272,
-    "adminHistoryDays": 6,
+    "historyDays": 2,
+    "adminHistoryDocuments": 2285,
+    "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
     "modeOptions": 35,
@@ -7332,6 +7332,310 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-06-rust-desktop-resource-optimization-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-rust-desktop-resource-optimization-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Rust Desktop Resource Optimization Evaluation Input",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 rust desktop resource optimization\", \"status\": \"passed\", \"installation occurred\": true, \"installation record targets\": \" history/installations/2026/2026 06 06 rust desktop resource optimization rust crates.ko.md\" , \"resource risk ",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;request id&quot;: &quot;2026 06 06 rust desktop resource optimization&quot;, &quot;status&quot;: &quot;passed&quot;, &quot;installation occurred&quot;: true, &quot;installation record targets&quot;: &quot; history/installations/2026/2026 06 06 rust desktop resource optimization rust crates.ko.md&quot; , &quot;resource risk occurred&quot;: true, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 0</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 988,
+      "updatedAt": "2026-06-05T15:47:08.794Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: Rust 데스크톱 자원 최적화",
+      "excerpt": "평가: Rust 데스크톱 자원 최적화 판정 요청 충족. 단순 렌더 최적화가 아니라 Rust/Tauri 프로세스에서 CPU parallelism과 OS memory telemetry를 사용하도록 source workspace cache 경로를 바꿨고, 내부 패키징 빌드까지 완료했다. 증거 rayon 기반 bounded parallel worker pool 추가. sysinfo 기반 total/available/used memory, memory budget report 추가. preload 상한을 ",
+      "html": "<p>평가: Rust 데스크톱 자원 최적화 판정 요청 충족. 단순 렌더 최적화가 아니라 Rust/Tauri 프로세스에서 CPU parallelism과 OS memory telemetry를 사용하도록 source workspace cache 경로를 바꿨고, 내부 패키징 빌드까지 완료했다. 증거 rayon 기반 bounded parallel worker pool 추가. sysinfo 기반 total/available/used memory, memory budget report 추가. preload 상한을 2,048 files / 512MB hard cap으로 확장하고 available memory 기반 budget을 적용. renderer UI에</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1717,
+      "updatedAt": "2026-06-05T15:47:08.794Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Rust 데스크톱 자원 최적화",
+      "excerpt": "요청 결과 추적: Rust 데스크톱 자원 최적화 요청 Rust를 최대한 활용하고 데스크톱 CPU/RAM 자원을 실제로 사용해 탭 전환과 source workspace 준비를 최적화하라는 요청. 결과 Rust WorkspaceResourceProfile 추가. rayon bounded worker pool로 entry build와 preload read 병렬화. sysinfo 기반 memory budget과 resource telemetry 추가. renderer source workspace UI",
+      "html": "<p>요청 결과 추적: Rust 데스크톱 자원 최적화 요청 Rust를 최대한 활용하고 데스크톱 CPU/RAM 자원을 실제로 사용해 탭 전환과 source workspace 준비를 최적화하라는 요청. 결과 Rust WorkspaceResourceProfile 추가. rayon bounded worker pool로 entry build와 preload read 병렬화. sysinfo 기반 memory budget과 resource telemetry 추가. renderer source workspace UI와 tests 업데이트. 내부 패키징 빌드 통과. 산물 platform desktop app/src tauri/src/lib.rs platfor</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1302,
+      "updatedAt": "2026-06-05T15:47:08.793Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Rust 데스크톱 자원 최적화",
+      "excerpt": "작업 요약: Rust 데스크톱 자원 최적화 Workspace Monitor의 source workspace cache를 Rust/Tauri native path에서 더 공격적으로 준비하도록 바꿨다. rayon 으로 entry build와 preload read를 병렬화했고, sysinfo 로 OS memory telemetry를 읽어 preload budget과 UI 표시를 추가했다. UI에는 cache 파일/바이트뿐 아니라 worker 수, RAM budget/free RAM, CPU 병렬 수,",
+      "html": "<p>작업 요약: Rust 데스크톱 자원 최적화 Workspace Monitor의 source workspace cache를 Rust/Tauri native path에서 더 공격적으로 준비하도록 바꿨다. rayon 으로 entry build와 preload read를 병렬화했고, sysinfo 로 OS memory telemetry를 읽어 preload budget과 UI 표시를 추가했다. UI에는 cache 파일/바이트뿐 아니라 worker 수, RAM budget/free RAM, CPU 병렬 수, preload strategy, native scan/preload 시간이 표시된다. readiness와 workspace monitor te</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 709,
+      "updatedAt": "2026-06-05T15:47:08.793Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-rust-desktop-resource-optimization-json",
+      "path": "_history/work-timings/2026/2026-06-06-rust-desktop-resource-optimization.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Rust Desktop Resource Optimization",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 rust desktop resource optimization\", \"timings\": { \"phase\": \"web research and crate metadata\", \"duration\": \"approximately 15 minutes\" }, { \"phase\": \"implementation\", \"duration\": \"approximately 35 minutes\" }, { \"phase\": \"test fix an",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;request id&quot;: &quot;2026 06 06 rust desktop resource optimization&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;web research and crate metadata&quot;, &quot;duration&quot;: &quot;approximately 15 minutes&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;duration&quot;: &quot;approximately 35 minutes&quot; }, { &quot;phase&quot;: &quot;test fix and internal package build&quot;, &quot;duration&quot;: &quot;approximately 30 minutes&quot; }, { &quot;phase&quot;: </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 519,
+      "updatedAt": "2026-06-05T15:47:08.793Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: Rust 데스크톱 자원 최적화",
+      "excerpt": "웹 검색 기록: Rust 데스크톱 자원 최적화 목적 Rust/Tauri 경로에서 CPU parallelism과 RAM aware preload를 실제로 구현할 때 어떤 공식 API와 crate가 적합한지 확인했다. 검색어 Tauri v2 Rust commands async state manage official docs performance Tauri v2 sidecar state Rust official docs CPU heavy task background thread Rust rayon pa",
+      "html": "<p>웹 검색 기록: Rust 데스크톱 자원 최적화 목적 Rust/Tauri 경로에서 CPU parallelism과 RAM aware preload를 실제로 구현할 때 어떤 공식 API와 crate가 적합한지 확인했다. 검색어 Tauri v2 Rust commands async state manage official docs performance Tauri v2 sidecar state Rust official docs CPU heavy task background thread Rust rayon parallel iterators official docs CPU bound workloads Rust sysinfo crate CPU memory</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2785,
+      "updatedAt": "2026-06-05T15:47:08.792Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Rust 데스크톱 자원 최적화",
+      "excerpt": "사용자 요청 요약: Rust 데스크톱 자원 최적화 사용자는 Workspace Monitor/source editor 계열 탭 전환이 늦게 불러오는 방식처럼 느껴진다고 지적했고, 단순 렌더 최적화가 아니라 실제 데스크톱 앱답게 Rust와 운영체제 CPU/RAM 자원을 적극 사용해 최적화하라고 요청했다. 추가 지속 요구로 구현 완료 후 사용자가 별도로 빌드하지 않도록 내부 빌드까지 자동 실행해야 한다.",
+      "html": "<p>사용자 요청 요약: Rust 데스크톱 자원 최적화 사용자는 Workspace Monitor/source editor 계열 탭 전환이 늦게 불러오는 방식처럼 느껴진다고 지적했고, 단순 렌더 최적화가 아니라 실제 데스크톱 앱답게 Rust와 운영체제 CPU/RAM 자원을 적극 사용해 최적화하라고 요청했다. 추가 지속 요구로 구현 완료 후 사용자가 별도로 빌드하지 않도록 내부 빌드까지 자동 실행해야 한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 485,
+      "updatedAt": "2026-06-05T15:47:08.791Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-rust-desktop-resource-optimization-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-rust-desktop-resource-optimization/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업: Rust 데스크톱 자원 최적화",
+      "excerpt": "작업: Rust 데스크톱 자원 최적화 x Web first 조사 수행 x Rust crate 설치 범위, 라이선스, rollback 확인 x rayon / sysinfo Cargo dependency 추가 x WorkspaceResourceProfile report 계약 추가 x entry build와 preload read 병렬화 x OS memory 기반 preload budget 산정 x renderer telemetry 표시 추가 x readiness/workspace monitor tes",
+      "html": "<h1>작업: Rust 데스크톱 자원 최적화</h1>\n<ul>\n<li>[x] Web-first 조사 수행</li>\n<li>[x] Rust crate 설치 범위, 라이선스, rollback 확인</li>\n<li>[x] <code>rayon</code>/<code>sysinfo</code> Cargo dependency 추가</li>\n<li>[x] <code>WorkspaceResourceProfile</code> report 계약 추가</li>\n<li>[x] entry build와 preload read 병렬화</li>\n<li>[x] OS memory 기반 preload budget 산정</li>\n<li>[x] renderer telemetry 표시 추가</li>\n<li>[x] readiness/workspace-monitor test 업데이트</li>\n<li>[x] 내부 패키징 빌드 실행</li>\n<li>[x] 기록, 평가, trace 정리</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 492,
+      "updatedAt": "2026-06-05T15:47:08.790Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-rust-desktop-resource-optimization-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-rust-desktop-resource-optimization/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적: Rust 데스크톱 자원 최적화",
+      "excerpt": "추적: Rust 데스크톱 자원 최적화 | 요구 | 구현 | 검증 | | | | | | Rust와 OS 자원 적극 사용 | WorkspaceResourceProfile , rayon bounded thread pool, sysinfo memory telemetry | readiness test, workspace monitor test, package build | | 탭 이동 전 source data 준비 | 기존 warmup/cache 경로에 parallel preload와 expanded bu",
+      "html": "<h1>추적: Rust 데스크톱 자원 최적화</h1>\n<table><thead><tr><th>요구</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>Rust와 OS 자원 적극 사용</td><td><code>WorkspaceResourceProfile</code>, <code>rayon</code> bounded thread pool, <code>sysinfo</code> memory telemetry</td><td>readiness test, workspace-monitor test, package build</td></tr><tr><td>탭 이동 전 source data 준비</td><td>기존 warmup/cache 경로에 parallel preload와 expanded budget 적용</td><td>package build와 Rust tests</td></tr><tr><td>메모리 실제 사용</td><td><code>memory_budget_bytes</code>, 2,048 file / 512MB hard cap, available RAM clamp</td><td>UI telemetry test, resource check</td></tr><tr><td>CPU 사용</td><td><code>parallel_workers</code>, Rayon <code>par_iter</code> entry/preload path</td><td>tool-studio test native contract</td></tr><tr><td>완료 후 빌드</td><td><code>package:internal</code> 실행</td><td><code>.app</code>/<code>.dmg</code> 생성 및 verify</td></tr></tbody></table>\n<h2>연결 기록</h2>\n<ul>\n<li>요구사항: <code>platform-desktop-app/docs/requirements/2026-06-06-rust-desktop-resource-optimization.ko.md</code></li>\n<li>웹 검색: <code>_history/web-searches/2026/2026-06-06-rust-desktop-resource-optimization.ko.md</code></li>\n<li>설치 기록: <code>_history/installations/2026/2026-06-06-rust-desktop-resource-optimization-rust-crates.ko.md</code></li>\n<li>평가: <code>_history/evaluations/2026/2026-06-06-rust-desktop-resource-optimization.ko.md</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1170,
+      "updatedAt": "2026-06-05T15:47:08.790Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-rust-desktop-resource-optimization-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-rust-desktop-resource-optimization/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증: Rust 데스크톱 자원 최적화",
+      "excerpt": "검증: Rust 데스크톱 자원 최적화 실행 결과 cargo info rayon@1.12.0 : 라이선스 MIT OR Apache 2.0 , rust version 1.80 . cargo info sysinfo@0.39.3 : 라이선스 MIT , rust version 1.95 . cargo tree manifest path platform desktop app/src tauri/Cargo.toml i sysinfo e features : system feature 경로 확인. cargo tree ",
+      "html": "<h1>검증: Rust 데스크톱 자원 최적화</h1>\n<h2>실행 결과</h2>\n<ul>\n<li><code>cargo info rayon@1.12.0</code>: 라이선스 <code>MIT OR Apache-2.0</code>, rust-version <code>1.80</code>.</li>\n<li><code>cargo info sysinfo@0.39.3</code>: 라이선스 <code>MIT</code>, rust-version <code>1.95</code>.</li>\n<li><code>cargo tree --manifest-path platform-desktop-app/src-tauri/Cargo.toml -i sysinfo -e features</code>: <code>system</code> feature 경로 확인.</li>\n<li><code>cargo tree --manifest-path platform-desktop-app/src-tauri/Cargo.toml -i rayon -e features</code>: direct dependency 확인.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code>: 통과. workspace monitor check/test, customer build/audit, intent-map checks, desktop app test/check, Rust test/build, Tauri release app/DMG build, codesign verify, hdiutil verify 포함.</li>\n</ul>\n<h2>생성 산물</h2>\n<ul>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>\n<h2>남은 확인</h2>\n<ul>\n<li>실제 사용 중 workspace별 체감 지연은 앱 실행 후 source tab 이동 시 native duration과 cache hit telemetry로 추가 측정한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1110,
+      "updatedAt": "2026-06-05T15:47:08.790Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-rust-desktop-resource-optimization-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-rust-desktop-resource-optimization/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "계획: Rust 데스크톱 자원 최적화",
+      "excerpt": "계획: Rust 데스크톱 자원 최적화 단계 1. 공식 문서와 crate metadata로 Tauri command, Rayon, sysinfo 사용 가능성을 확인한다. 2. 기존 WorkspaceResourceStore 와 source workspace renderer 계약을 읽는다. 3. Rust cache build에 resource profile, bounded Rayon pool, parallel preload를 추가한다. 4. renderer type/UI/test/readiness 계약",
+      "html": "<h1>계획: Rust 데스크톱 자원 최적화</h1>\n<h2>단계</h2>\n<p>1. 공식 문서와 crate metadata로 Tauri command, Rayon, sysinfo 사용 가능성을 확인한다.</p>\n<p>2. 기존 <code>WorkspaceResourceStore</code>와 source workspace renderer 계약을 읽는다.</p>\n<p>3. Rust cache build에 resource profile, bounded Rayon pool, parallel preload를 추가한다.</p>\n<p>4. renderer type/UI/test/readiness 계약을 새 telemetry에 맞춘다.</p>\n<p>5. dependency 설치 기록과 rollback 계획을 남긴다.</p>\n<p>6. <code>package:internal</code>까지 실행해 <code>.app</code>/<code>.dmg</code> 생성과 검증을 확인한다.</p>\n<h2>리스크 관리</h2>\n<ul>\n<li>RAM 사용은 hard cap과 available-memory based budget으로 제한한다.</li>\n<li>worker 수는 <code>available_parallelism</code>과 hard cap 16 사이에서 제한한다.</li>\n<li>file watcher는 범위에서 제외하고 기존 refresh/warmup invalidation을 유지한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 837,
+      "updatedAt": "2026-06-05T15:47:08.789Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-rust-desktop-resource-optimization-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-rust-desktop-resource-optimization/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "스펙: Rust 데스크톱 자원 최적화",
+      "excerpt": "스펙: Rust 데스크톱 자원 최적화 목표 Workspace Monitor의 source workspace 준비 경로가 Tauri/Rust에서 CPU parallelism과 OS memory telemetry를 사용한다. 탭 진입 시 renderer가 뒤늦게 파일을 읽는 느낌을 줄이고, 데스크톱 앱 프로세스가 먼저 파일 목록과 텍스트 내용을 준비한다. 설계 결정 Rust dependency로 rayon 을 추가해 line count entry build와 preload read를 bounded t",
+      "html": "<h1>스펙: Rust 데스크톱 자원 최적화</h1>\n<h2>목표</h2>\n<p>Workspace Monitor의 source workspace 준비 경로가 Tauri/Rust에서 CPU parallelism과 OS memory telemetry를 사용한다. 탭 진입 시 renderer가 뒤늦게 파일을 읽는 느낌을 줄이고, 데스크톱 앱 프로세스가 먼저 파일 목록과 텍스트 내용을 준비한다.</p>\n<h2>설계 결정</h2>\n<ul>\n<li>Rust dependency로 <code>rayon</code>을 추가해 line count entry build와 preload read를 bounded thread pool에서 병렬 처리한다.</li>\n<li>Rust dependency로 <code>sysinfo</code>를 추가해 total/available/used memory를 읽고 preload memory budget 산정에 사용한다.</li>\n<li><code>WorkspaceResourceProfile</code>을 cache/report 계약에 추가해 CPU thread 수, parallel worker 수, memory budget, scan/build/preload 시간을 renderer로 전달한다.</li>\n<li>preload 상한은 2,048 files / 512MB hard cap으로 확장하되, 실제 budget은 OS available memory의 일부를 사용하도록 clamp한다.</li>\n<li>renderer source workspace UI는 OS cache 상태에 worker 수, free RAM, CPU 병렬 수, native duration을 함께 표시한다.</li>\n</ul>\n<h2>언어/런타임 선택</h2>\n<ul>\n<li>옵션 A: Rust/Tauri in-process cache. 장점은 OS thread와 native file IO, process memory를 직접 사용하고 기존 command/state boundary를 재사용한다. 선택.</li>\n<li>옵션 B: TypeScript renderer/worker cache. 장점은 UI와 가까우나 OS resource telemetry와 filesystem authority가 약하고 탭 렌더링 경합을 키울 수 있다. 미선택.</li>\n<li>옵션 C: Python/Node sidecar indexer. 장점은 분리 가능하나 프로세스 lifecycle, install surface, IPC 비용이 늘어난다. 미선택.</li>\n</ul>\n<h2>아키텍처 선택</h2>\n<ul>\n<li>옵션 A: 기존 <code>WorkspaceResourceStore</code>에 bounded Rayon preload를 추가한다. 기존 Tauri command/report 계약과 cache invalidation을 유지할 수 있어 선택했다.</li>\n<li>옵션 B: 별도 local daemon/index DB를 둔다. 대형 workspace에는 유리하지만 이번 병목에는 과하고 복구/종료/동기화 책임이 늘어난다.</li>\n<li>옵션 C: renderer IndexedDB preload를 둔다. 새로고침 지속성은 생기지만 native desktop resource 요구와 맞지 않는다.</li>\n</ul>\n<h2>폴더 구조 선택</h2>\n<ul>\n<li>옵션 A: 현재 Rust command가 모여 있는 <code>src-tauri/src/lib.rs</code>에 좁게 확장한다. 현재 프로젝트가 단일 Tauri lib 중심이라 선택했다.</li>\n<li>옵션 B: 새 Rust module로 분리한다. 장기적으로 좋지만 이번 변경은 기존 state/report 구조와 강하게 결합되어 있어 추후 cache 기능이 더 커질 때 분리한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>rayon</code>과 <code>sysinfo</code>가 Cargo manifest/lock에 기록된다.</li>\n<li>Rust cache build가 <code>WorkspaceResourceProfile</code>, <code>parallel_workers</code>, <code>memory_budget_bytes</code>, phase duration fields를 반환한다.</li>\n<li>readiness와 workspace-monitor tests가 새 native resource contract를 확인한다.</li>\n<li><code>package:internal</code>이 <code>.app</code>와 <code>.dmg</code>를 생성하고 검증한다.</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>Tauri v2 Rust command bridge: https://v2.tauri.app/develop/calling-rust/</li>\n<li>Rayon parallel iterator/thread pool 문서: https://docs.rs/rayon/</li>\n<li>sysinfo system memory/CPU telemetry 문서: https://docs.rs/sysinfo/0.39.3</li>\n<li>Tokio <code>spawn_blocking</code>은 검토했지만 이번 코드는 기존 sync Tauri command/background thread 경로 안에서 bounded Rayon pool을 쓰는 쪽이 더 작다: https://docs.rs/tokio/latest/tokio/task/fn.spawn_blocking.html</li>\n<li><code>memmap2</code>는 검토했지만 현재 대상은 큰 단일 파일 random access보다 여러 텍스트 파일 bounded preload라 unsafe mmap까지 도입하지 않았다: https://docs.rs/memmap2/</li>\n</ul>\n<h2>제한</h2>\n<ul>\n<li>scan traversal 자체는 bounded sequential walk이고, entry build와 preload read가 병렬화 대상이다.</li>\n<li>memory budget은 runtime available memory 기반 추정치라 OS pressure 변화와 완전히 동기화되지는 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 3815,
+      "updatedAt": "2026-06-05T15:47:08.789Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-rust-desktop-resource-optimization-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-rust-desktop-resource-optimization.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: Rust 데스크톱 자원 최적화",
+      "excerpt": "요구사항: Rust 데스크톱 자원 최적화 사용자 요구 소스 탭 전환과 코드 편집 워크플로가 렌더러에서 늦게 불러오는 방식 때문에 느리게 느껴진다. 데스크톱 앱의 장점에 맞게 Rust/Tauri 쪽에서 CPU와 RAM을 실제로 사용해 워크스페이스 파일 목록과 주요 텍스트 내용을 선제 준비해야 한다. 기능 요구사항 Workspace Monitor의 native source workspace 경로는 Rust 프로세스 메모리에 텍스트 파일 cache를 준비한다. cache 준비는 단일 스레드 반복 작업에",
+      "html": "<h1>요구사항: Rust 데스크톱 자원 최적화</h1>\n<h2>사용자 요구</h2>\n<p>소스 탭 전환과 코드 편집 워크플로가 렌더러에서 늦게 불러오는 방식 때문에 느리게 느껴진다. 데스크톱 앱의 장점에 맞게 Rust/Tauri 쪽에서 CPU와 RAM을 실제로 사용해 워크스페이스 파일 목록과 주요 텍스트 내용을 선제 준비해야 한다.</p>\n<h2>기능 요구사항</h2>\n<ul>\n<li>Workspace Monitor의 native source workspace 경로는 Rust 프로세스 메모리에 텍스트 파일 cache를 준비한다.</li>\n<li>cache 준비는 단일 스레드 반복 작업에만 의존하지 않고 CPU parallelism을 사용한다.</li>\n<li>메모리 예산은 고정 상수만 보지 않고 OS의 사용 가능 RAM을 반영한다.</li>\n<li>UI는 OS cache, 병렬 worker 수, 메모리 budget, native scan/preload 시간을 노출한다.</li>\n<li>구현 완료 후 내부 <code>.app</code>/<code>.dmg</code> 패키징 빌드까지 자동 실행한다.</li>\n</ul>\n<h2>비기능 요구사항</h2>\n<ul>\n<li>cache는 bounded memory budget 안에서 동작해야 한다.</li>\n<li>OS 자원 사용량은 Rust report field와 renderer 표시로 추적 가능해야 한다.</li>\n<li>새 dependency는 project-local Rust dependency로 제한하고 설치 기록, 라이선스, rollback을 남긴다.</li>\n<li>기존 public/customer snapshot과 readiness test 계약이 깨지면 안 된다.</li>\n</ul>\n<h2>제외</h2>\n<ul>\n<li>파일 watcher 기반 live invalidation은 이번 범위에서 제외한다.</li>\n<li>전체 저장소 파일을 무제한으로 RAM에 올리는 동작은 제외한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1487,
+      "updatedAt": "2026-06-05T15:47:08.788Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: 소스 컨트롤 Playwright 스모크",
+      "excerpt": "평가: 소스 컨트롤 Playwright 스모크 결과 이전의 dev 서버 Playwright 검증 실패를 그대로 두지 않고, dev 서버와 static export 경로를 분리했다. Tauri가 임베드하는 static export 산출물을 기준으로 실제 Chromium 클릭 검증을 추가했다. 개발자 snapshot에서는 소스 파일 선택 드롭다운이 네이티브 <select 없이 열리고 80개 파일 항목을 보여준다. customer snapshot은 의도적으로 소스 파일이 제거되어 파일 선택 트리거가 비",
+      "html": "<p>평가: 소스 컨트롤 Playwright 스모크 결과 이전의 dev 서버 Playwright 검증 실패를 그대로 두지 않고, dev 서버와 static export 경로를 분리했다. Tauri가 임베드하는 static export 산출물을 기준으로 실제 Chromium 클릭 검증을 추가했다. 개발자 snapshot에서는 소스 파일 선택 드롭다운이 네이티브 &lt;select 없이 열리고 80개 파일 항목을 보여준다. customer snapshot은 의도적으로 소스 파일이 제거되어 파일 선택 트리거가 비활성화된다. 이 상태는 고객 번들 안전성의 결과이며, 개발자 기능 검증은 developer snapshot을 주입한 static smoke로 수</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1558,
+      "updatedAt": "2026-06-05T15:31:10.538Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: 소스 컨트롤 Playwright 스모크",
+      "excerpt": "요청 결과 추적: 소스 컨트롤 Playwright 스모크 요청 사용자는 이전 검증 한계 설명을 받아들이지 않고, 가능한 데스크톱/운영체제 자원을 사용해 소스 컨트롤 불편함과 기본 드롭다운 문제를 끝까지 검증하라고 요구했다. 결과 원인 분리: Next dev 서버 Playwright 경로에서는 snapshot fetch가 시작되지 않아 Loading workspace snapshot 에 머물렀다. 실제 산출물 검증: Tauri가 임베드하는 out/ 정적 export를 로컬 static server로",
+      "html": "<p>요청 결과 추적: 소스 컨트롤 Playwright 스모크 요청 사용자는 이전 검증 한계 설명을 받아들이지 않고, 가능한 데스크톱/운영체제 자원을 사용해 소스 컨트롤 불편함과 기본 드롭다운 문제를 끝까지 검증하라고 요구했다. 결과 원인 분리: Next dev 서버 Playwright 경로에서는 snapshot fetch가 시작되지 않아 Loading workspace snapshot 에 머물렀다. 실제 산출물 검증: Tauri가 임베드하는 out/ 정적 export를 로컬 static server로 띄워 소스 화면 렌더링을 확인했다. 개발자 데이터 검증: developer snapshot을 주입한 static export에서 source </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1546,
+      "updatedAt": "2026-06-05T15:31:10.537Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 소스 컨트롤 Playwright 스모크",
+      "excerpt": "작업 요약: 소스 컨트롤 Playwright 스모크 변경 workspace monitor 에 smoke:source controls 스크립트를 추가했다. 스모크는 out/ 정적 export를 임시 디렉터리에 복사하고 개발자 snapshot을 주입한 뒤 Chromium에서 소스 화면을 연다. 스모크는 네이티브 <select 제거, 공용 버튼 프리미티브 수, 파일 선택 트리거 활성화, 메뉴 오픈, 파일 항목 수, 컨트롤 크기, 페이지 에러 부재를 확인한다. 기존 tool studio.test.mjs ",
+      "html": "<p>작업 요약: 소스 컨트롤 Playwright 스모크 변경 workspace monitor 에 smoke:source controls 스크립트를 추가했다. 스모크는 out/ 정적 export를 임시 디렉터리에 복사하고 개발자 snapshot을 주입한 뒤 Chromium에서 소스 화면을 연다. 스모크는 네이티브 &lt;select 제거, 공용 버튼 프리미티브 수, 파일 선택 트리거 활성화, 메뉴 오픈, 파일 항목 수, 컨트롤 크기, 페이지 에러 부재를 확인한다. 기존 tool studio.test.mjs 가 새 스모크 스크립트와 핵심 검증 토큰을 고정하도록 보강했다. 검증 corepack pnpm dir platform desktop app/re</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1582,
+      "updatedAt": "2026-06-05T15:31:10.537Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-source-controls-playwright-smoke-json",
+      "path": "_history/work-timings/2026/2026-06-06-source-controls-playwright-smoke.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Source Controls Playwright Smoke",
+      "excerpt": "{ \"task\": \"source controls playwright smoke\", \"date\": \"2026 06 06\", \"timings\": { \"phase\": \"web first intake\", \"elapsed minutes\": 2, \"notes\": \"Checked official Next.js and Playwright documentation relevant to hydration/static export and click verification.\" }, { \"phase\": \"dev serv",
+      "html": "<p>{ &quot;task&quot;: &quot;source controls playwright smoke&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;elapsed minutes&quot;: 2, &quot;notes&quot;: &quot;Checked official Next.js and Playwright documentation relevant to hydration/static export and click verification.&quot; }, { &quot;phase&quot;: &quot;dev server diagnosis&quot;, &quot;elapsed minutes&quot;: 14, &quot;notes&quot;: &quot;Confirmed the dev server path di</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1080,
+      "updatedAt": "2026-06-05T15:31:10.536Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 소스 컨트롤 실제 실행 검증",
+      "excerpt": "사용자 요청 요약: 소스 컨트롤 실제 실행 검증 날짜: 2026 06 06 범위: platform desktop app/renderer/workspace monitor 요지 사용자는 데스크톱 앱의 장점을 살려 운영체제 자원과 메모리를 적극 사용하고, 탭 이동 지연, 사이드바 잘림, 코드 편집 불편함, 기본 버튼/드롭다운 느낌을 전반적으로 개선하라고 요구했다. 후속으로 이전 검증 한계를 받아들이지 말고 가능한 자원을 써서 실제로 끝까지 확인하라고 요구했다. 이번 기록의 초점 이전 구현 중 Playw",
+      "html": "<p>사용자 요청 요약: 소스 컨트롤 실제 실행 검증 날짜: 2026 06 06 범위: platform desktop app/renderer/workspace monitor 요지 사용자는 데스크톱 앱의 장점을 살려 운영체제 자원과 메모리를 적극 사용하고, 탭 이동 지연, 사이드바 잘림, 코드 편집 불편함, 기본 버튼/드롭다운 느낌을 전반적으로 개선하라고 요구했다. 후속으로 이전 검증 한계를 받아들이지 말고 가능한 자원을 써서 실제로 끝까지 확인하라고 요구했다. 이번 기록의 초점 이전 구현 중 Playwright dev 서버 검증이 Loading workspace snapshot 에서 멈춘 문제를 분리하고, 정적 export와 개발자 snaps</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 880,
+      "updatedAt": "2026-06-05T15:31:10.535Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: 소스 컨트롤 Playwright 스모크",
+      "excerpt": "웹 검색 기록: 소스 컨트롤 Playwright 스모크 날짜: 2026 06 06 작업: Next dev 검증 한계 분리와 정적 export 기반 Playwright 스모크 추가 검색 Next.js app router client component useEffect not running hydration official docs Next.js static export output export official docs app router Playwright page waitForSelector of",
+      "html": "<p>웹 검색 기록: 소스 컨트롤 Playwright 스모크 날짜: 2026 06 06 작업: Next dev 검증 한계 분리와 정적 export 기반 Playwright 스모크 추가 검색 Next.js app router client component useEffect not running hydration official docs Next.js static export output export official docs app router Playwright page waitForSelector official docs locator wait timeout 확인한 출처 Next.js Server and Client Components 공식 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1761,
+      "updatedAt": "2026-06-05T15:31:10.535Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-05-source-workbench-control-primitives-ko-md",
       "path": "_history/evaluations/2026/2026-06-05-source-workbench-control-primitives.ko.md",
       "category": "evaluation",
@@ -9524,102 +9828,6 @@
       "workspaceArea": "_history/work-summaries"
     },
     {
-      "id": "history-evaluations-2026-2026-06-05-agent-identity-labels-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-05-agent-identity-labels-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 05 Agent Identity Labels Evaluation Input",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"agent identity labels\", \"user request summary\": \"Make the 3D agent characters smaller and make it easier to identify which agent or mode each character represents.\", \"requirements\": \"REQ WM 074\" , \"implementation targets\": \"platform deskto",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request slug&quot;: &quot;agent identity labels&quot;, &quot;user request summary&quot;: &quot;Make the 3D agent characters smaller and make it easier to identify which agent or mode each character represents.&quot;, &quot;requirements&quot;: &quot;REQ WM 074&quot; , &quot;implementation targets&quot;: &quot;platform desktop app/renderer/workspace monitor/components/workbench/AgentCollaborationScene.ts</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1881,
-      "updatedAt": "2026-06-05T04:28:36.841Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-agent-identity-labels-ko-md",
-      "path": "_history/evaluations/2026/2026-06-05-agent-identity-labels.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: Agent Identity Labels",
-      "excerpt": "평가: Agent Identity Labels 결론 통과. 캐릭터는 더 작아졌고, desktop/mobile에서 어떤 에이전트나 모드인지 식별할 수 있는 label/legend가 추가되었다. 확인 Agents desktop은 캐릭터 위에 112px compact label을 표시한다. Agents mobile은 캐릭터 위 label을 28px code chip으로 줄이고, horizontal identity strip에서 code와 compact name을 연결한다. Tool Studio는 캐릭터",
-      "html": "<p>평가: Agent Identity Labels 결론 통과. 캐릭터는 더 작아졌고, desktop/mobile에서 어떤 에이전트나 모드인지 식별할 수 있는 label/legend가 추가되었다. 확인 Agents desktop은 캐릭터 위에 112px compact label을 표시한다. Agents mobile은 캐릭터 위 label을 28px code chip으로 줄이고, horizontal identity strip에서 code와 compact name을 연결한다. Tool Studio는 캐릭터 scale을 0.82로 줄이고, 네 모드 legend를 표시한다. desktop/mobile Playwright screenshot QA에서 </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 815,
-      "updatedAt": "2026-06-05T04:28:36.841Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-plans-2026-2026-06-05-agent-identity-labels-ko-md",
-      "path": "_history/plans/2026/2026-06-05-agent-identity-labels.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "계획: Agent Identity Labels",
-      "excerpt": "계획: Agent Identity Labels 1. avatar/label 식별 UI 근거와 recognition rather than recall 기준을 확인한다. 2. Agents 협업 3D 캐릭터 scale을 줄이고 desktop label을 추가한다. 3. Agents mobile은 code chip과 identity strip으로 겹침 없이 식별하게 한다. 4. Tool Studio 캐릭터 맵 character scale을 줄이고 mode legend를 추가한다. 5. tests, typ",
-      "html": "<p>계획: Agent Identity Labels 1. avatar/label 식별 UI 근거와 recognition rather than recall 기준을 확인한다. 2. Agents 협업 3D 캐릭터 scale을 줄이고 desktop label을 추가한다. 3. Agents mobile은 code chip과 identity strip으로 겹침 없이 식별하게 한다. 4. Tool Studio 캐릭터 맵 character scale을 줄이고 mode legend를 추가한다. 5. tests, type check, check, build, customer build, perf budget, Browser/Playwright screensho</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 498,
-      "updatedAt": "2026-06-05T04:28:36.840Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-05-agent-identity-labels-json",
-      "path": "_history/work-timings/2026/2026-06-05-agent-identity-labels.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 05 Agent Identity Labels",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"agent identity labels\", \"timings\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"note\": \"Checked avatar label, icon, and recognition rather than recall guidance before local edits.\" }, { \"phase\": \"implementation\", \"status\": \"compl",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request slug&quot;: &quot;agent identity labels&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;note&quot;: &quot;Checked avatar label, icon, and recognition rather than recall guidance before local edits.&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;note&quot;: &quot;Reduced Agents and Tool Studio character scale; added desktop la</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 731,
-      "updatedAt": "2026-06-05T04:28:36.840Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-05-agent-identity-labels-ko-md",
-      "path": "_history/user-requests/2026/2026-06-05-agent-identity-labels.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Agent Identity Labels",
-      "excerpt": "사용자 요청 요약: Agent Identity Labels 사용자는 캐릭터 디자인에서 어떤 에이전트인지 쉽게 알 수 있어야 하며, 더 작은 크기로 조정하라고 요청했다. 범위는 Workspace Monitor Agents 협업 3D scene과 Tool Studio 캐릭터 맵의 캐릭터 크기, 식별 label, mode legend로 정했다.",
-      "html": "<p>사용자 요청 요약: Agent Identity Labels 사용자는 캐릭터 디자인에서 어떤 에이전트인지 쉽게 알 수 있어야 하며, 더 작은 크기로 조정하라고 요청했다. 범위는 Workspace Monitor Agents 협업 3D scene과 Tool Studio 캐릭터 맵의 캐릭터 크기, 식별 label, mode legend로 정했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 344,
-      "updatedAt": "2026-06-05T04:28:36.839Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-05-agent-identity-labels-ko-md",
-      "path": "_history/web-searches/2026/2026-06-05-agent-identity-labels.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: Agent Identity Labels",
-      "excerpt": "웹 검색 기록: Agent Identity Labels 검색 Material Design avatar badge label UI identify user role icon label official Apple Human Interface Guidelines labels icons badges identify controls official Nielsen Norman Group icon labels usability recognition interface site:nngroup.com icon la",
-      "html": "<p>웹 검색 기록: Agent Identity Labels 검색 Material Design avatar badge label UI identify user role icon label official Apple Human Interface Guidelines labels icons badges identify controls official Nielsen Norman Group icon labels usability recognition interface site:nngroup.com icon labels improve usability recognition rather than recall 확인한 출처 Apple Human Interfa</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1629,
-      "updatedAt": "2026-06-05T04:28:36.839Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agent-character-design-traceability-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agent-character-design/traceability.ko.md",
       "category": "project-spec",
@@ -9666,118 +9874,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-05-character-design-refinement-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-05-character-design-refinement.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: Character Design Refinement",
-      "excerpt": "작업 요약: Character Design Refinement 3D 에이전트 캐릭터를 더 귀여운 마스코트 비율로 정제했다. Agents와 Tool Studio 양쪽에 작은 점눈, 작은 코, 더 낮은 muzzle, 둥근 귀/손발/꼬리, 축소된 visor/chest panel을 적용했다. 기능적 상태 신호와 성능 계약은 유지했다. 테스트, 타입 체크, check, 일반 빌드, 고객 빌드, 성능 예산, desktop/mobile screenshot QA를 완료했다.",
-      "html": "<p>작업 요약: Character Design Refinement 3D 에이전트 캐릭터를 더 귀여운 마스코트 비율로 정제했다. Agents와 Tool Studio 양쪽에 작은 점눈, 작은 코, 더 낮은 muzzle, 둥근 귀/손발/꼬리, 축소된 visor/chest panel을 적용했다. 기능적 상태 신호와 성능 계약은 유지했다. 테스트, 타입 체크, check, 일반 빌드, 고객 빌드, 성능 예산, desktop/mobile screenshot QA를 완료했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 465,
-      "updatedAt": "2026-06-05T03:20:41.139Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-character-design-refinement-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-05-character-design-refinement-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 05 Character Design Refinement Evaluation Input",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"character design refinement\", \"user request summary\": \"Improve the 3D character design using cute character references, with better mascot proportions and less hard edged equipment feel.\", \"requirements\": \"REQ WM 073\" , \"implementation tar",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request slug&quot;: &quot;character design refinement&quot;, &quot;user request summary&quot;: &quot;Improve the 3D character design using cute character references, with better mascot proportions and less hard edged equipment feel.&quot;, &quot;requirements&quot;: &quot;REQ WM 073&quot; , &quot;implementation targets&quot;: &quot;platform desktop app/renderer/workspace monitor/components/workbench/Age</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1851,
-      "updatedAt": "2026-06-05T03:20:41.138Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-character-design-refinement-ko-md",
-      "path": "_history/evaluations/2026/2026-06-05-character-design-refinement.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: Character Design Refinement",
-      "excerpt": "평가: Character Design Refinement 결론 통과. 캐릭터가 기존 장비형 인상보다 더 단순하고 둥근 귀여운 마스코트로 읽히도록 개선되었다. 확인 Agents 협업 scene과 Tool Studio 캐릭터 맵 모두에 작은 점눈, 작은 코, 낮은 muzzle, 더 둥근 귀/손발/꼬리 비율이 적용되었다. visor와 chest panel은 얼굴보다 강하게 보이지 않도록 축소되어 상태 보조 신호로 남았다. role/status 신호, lazy mount, offscreen pause, ",
-      "html": "<p>평가: Character Design Refinement 결론 통과. 캐릭터가 기존 장비형 인상보다 더 단순하고 둥근 귀여운 마스코트로 읽히도록 개선되었다. 확인 Agents 협업 scene과 Tool Studio 캐릭터 맵 모두에 작은 점눈, 작은 코, 낮은 muzzle, 더 둥근 귀/손발/꼬리 비율이 적용되었다. visor와 chest panel은 얼굴보다 강하게 보이지 않도록 축소되어 상태 보조 신호로 남았다. role/status 신호, lazy mount, offscreen pause, reduced motion 경계는 유지했다. desktop/mobile Playwright screenshot QA에서 nonblank canv</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 870,
-      "updatedAt": "2026-06-05T03:20:41.138Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-05-character-design-refinement-ko-md",
-      "path": "_history/request-traces/2026/2026-06-05-character-design-refinement.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 추적: Character Design Refinement",
-      "excerpt": "요청 추적: Character Design Refinement 요청 캐릭터 디자인을 더 좋게 개선. 귀여운 레퍼런스 캐릭터 방향을 반영. 결과 REQ WM 073 의 세부 acceptance를 확장했다. Agents AgentCharacter 에 작은 점눈, 작은 코, 더 낮은 muzzle, 둥근 귀/손발/꼬리, 통통한 몸통 비율, 축소된 visor/chest panel을 적용했다. Tool Studio Three.js character map에도 같은 geometry 기준을 적용했다. stati",
-      "html": "<p>요청 추적: Character Design Refinement 요청 캐릭터 디자인을 더 좋게 개선. 귀여운 레퍼런스 캐릭터 방향을 반영. 결과 REQ WM 073 의 세부 acceptance를 확장했다. Agents AgentCharacter 에 작은 점눈, 작은 코, 더 낮은 muzzle, 둥근 귀/손발/꼬리, 통통한 몸통 비율, 축소된 visor/chest panel을 적용했다. Tool Studio Three.js character map에도 같은 geometry 기준을 적용했다. static tests와 desktop/mobile screenshot QA를 갱신했다. 검증 corepack pnpm filter workspace m</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 994,
-      "updatedAt": "2026-06-05T03:20:41.138Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-05-character-design-refinement-json",
-      "path": "_history/work-timings/2026/2026-06-05-character-design-refinement.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 05 Character Design Refinement",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"character design refinement\", \"timings\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"note\": \"Checked baby schema research and official Miffy, Kirby, and Disney Big Hero 6 references before final character refinements.\" }, { \"pha",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request slug&quot;: &quot;character design refinement&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;note&quot;: &quot;Checked baby schema research and official Miffy, Kirby, and Disney Big Hero 6 references before final character refinements.&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;note&quot;: &quot;Refined Agents and Tool S</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 762,
-      "updatedAt": "2026-06-05T03:20:41.137Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-plans-2026-2026-06-05-character-design-refinement-ko-md",
-      "path": "_history/plans/2026/2026-06-05-character-design-refinement.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "계획: Character Design Refinement",
-      "excerpt": "계획: Character Design Refinement 1. 귀여움을 만드는 레퍼런스와 연구 근거를 확인한다. 2. Agents 협업 3D 캐릭터에서 얼굴, 귀, 몸통, 손발, 꼬리 비율을 정제한다. 3. Tool Studio manual Three.js 캐릭터 맵에 같은 얼굴/비율 기준을 맞춘다. 4. static tests에 eye/nose와 geometry 기준을 추가한다. 5. tests, type check, check, build, customer build, perf budget, ",
-      "html": "<p>계획: Character Design Refinement 1. 귀여움을 만드는 레퍼런스와 연구 근거를 확인한다. 2. Agents 협업 3D 캐릭터에서 얼굴, 귀, 몸통, 손발, 꼬리 비율을 정제한다. 3. Tool Studio manual Three.js 캐릭터 맵에 같은 얼굴/비율 기준을 맞춘다. 4. static tests에 eye/nose와 geometry 기준을 추가한다. 5. tests, type check, check, build, customer build, perf budget, Browser/Playwright screenshot smoke로 회귀를 확인한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 490,
-      "updatedAt": "2026-06-05T03:20:41.136Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-05-character-design-refinement-ko-md",
-      "path": "_history/web-searches/2026/2026-06-05-character-design-refinement.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: Character Design Refinement",
-      "excerpt": "웹 검색 기록: Character Design Refinement 검색 baby schema cute character design large head small body round cheeks research official Miffy design simple eyes rounded body character reference official Kirby round character design reference Nintendo official Baymax soft robot rounded hug",
-      "html": "<p>웹 검색 기록: Character Design Refinement 검색 baby schema cute character design large head small body round cheeks research official Miffy design simple eyes rounded body character reference official Kirby round character design reference Nintendo official Baymax soft robot rounded huggable character reference Disney 확인한 출처 Baby schema 연구: https://pmc.ncbi.nlm.nih</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1658,
-      "updatedAt": "2026-06-05T03:20:41.136Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-docs-requirements-2026-06-01-workspace-monitor-en-md",
@@ -17634,137 +17730,204 @@
       "historyDate": "2026-06-03",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-03-code-editor-surface-ko-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-03-code-editor-surface.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "코드 편집 surface 요구사항",
-      "excerpt": "코드 편집 surface 요구사항 배경 설치형 플랫폼은 코드 복사, 코드 검토, scoped editing, backup save gate가 필요하다. VS Code 전체 제품을 복제하는 대신, VS Code editor 기능의 오픈소스 핵심인 Monaco를 앱 안의 코드 편집 surface로 사용한다. 요구사항 REQ PDA CODE 001 : desktop runtime 화면은 <textarea 가 아니라 VS Code 계열 코드 편집 경험에 가까운 editor surface를 제공해야 한다.",
-      "html": "<h1>코드 편집 surface 요구사항</h1>\n<h2>배경</h2>\n<p>설치형 플랫폼은 코드 복사, 코드 검토, scoped editing, backup save gate가 필요하다. VS Code 전체 제품을 복제하는 대신, VS Code editor 기능의 오픈소스 핵심인 Monaco를 앱 안의 코드 편집 surface로 사용한다.</p>\n<h2>요구사항</h2>\n<ul>\n<li><code>REQ-PDA-CODE-001</code>: desktop runtime 화면은 <code>&lt;textarea&gt;</code>가 아니라 VS Code 계열 코드 편집 경험에 가까운 editor surface를 제공해야 한다.</li>\n<li><code>REQ-PDA-CODE-002</code>: editor는 기존 Tauri <code>read_workspace_text_file</code>/<code>write_workspace_text_file</code> scoped file access와 backup save gate를 유지해야 한다.</li>\n<li><code>REQ-PDA-CODE-003</code>: 사용자는 현재 draft 또는 source viewer의 파일 내용을 클립보드로 복사할 수 있어야 한다.</li>\n<li><code>REQ-PDA-CODE-004</code>: editor는 open draft, dirty draft, diff summary, save current, save all, revert, close draft 흐름을 유지해야 한다.</li>\n<li><code>REQ-PDA-CODE-005</code>: 신규 오픈소스 dependency가 필요하면 project-local로 설치하고 license/security/rollback을 기록해야 한다. 이미 설치된 dependency를 쓰는 경우에는 실제 설치가 없었음을 기록한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>VS Code 제품 바이너리 설치 또는 브랜드/marketplace 통합</li>\n<li>language server, extension marketplace, debugger, git commit UI</li>\n<li>전체 <code>MonitorShell.tsx</code> 컴포넌트 분리</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1378,
-      "updatedAt": "2026-06-03T02:26:34.013Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-code-editor-surface-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-code-editor-surface/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Monaco 코드 편집 surface 스펙",
-      "excerpt": "Monaco 코드 편집 surface 스펙 목표 설치형 플랫폼의 desktop runtime 화면에 Monaco 기반 다중 파일 코드 편집기를 연결한다. 범위 Monaco editor dynamic import language mapping current draft copy action source viewer copy action 기존 draft queue/diff/save/revert 흐름 유지 CSS workbench 보강 결정 VS Code 전체가 아니라 Monaco Editor를 사용한다",
-      "html": "<h1>Monaco 코드 편집 surface 스펙</h1>\n<h2>목표</h2>\n<p>설치형 플랫폼의 desktop runtime 화면에 Monaco 기반 다중 파일 코드 편집기를 연결한다.</p>\n<h2>범위</h2>\n<ul>\n<li>Monaco editor dynamic import</li>\n<li>language mapping</li>\n<li>current draft copy action</li>\n<li>source viewer copy action</li>\n<li>기존 draft queue/diff/save/revert 흐름 유지</li>\n<li>CSS workbench 보강</li>\n</ul>\n<h2>결정</h2>\n<ul>\n<li>VS Code 전체가 아니라 Monaco Editor를 사용한다.</li>\n<li>신규 dependency 설치는 하지 않는다. 기존 <code>@monaco-editor/react</code>와 <code>monaco-editor</code>를 사용한다.</li>\n<li>실제 파일 쓰기는 계속 Tauri command를 통한다.</li>\n<li>저장 전 백업 생성 gate는 그대로 유지한다.</li>\n</ul>\n<h2>성공 기준</h2>\n<ul>\n<li>desktop runtime source editor가 Monaco 기반 editor로 렌더링된다.</li>\n<li>copy current draft와 source viewer copy가 동작한다.</li>\n<li>TypeScript check, tests, build가 통과한다.</li>\n<li>Browser에서 Monaco editor가 빈 영역 없이 표시된다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 931,
-      "updatedAt": "2026-06-03T02:26:34.013Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-app-shell-ui-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-app-shell-ui/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "데스크톱 앱 셸 UI 추적성",
-      "excerpt": "데스크톱 앱 셸 UI 추적성 | 요구사항 | 구현 대상 | 검증 | | | | | | REQ PDA UI 001 | workspace monitor/components/MonitorShell.tsx , workspace monitor/app/globals.css | typecheck, build, 시각 검증 | | REQ PDA UI 002 | Settings dialog state/render/CSS | typecheck, 시각 검증 | | REQ PDA UI 003 | Overview home",
-      "html": "<h1>데스크톱 앱 셸 UI 추적성</h1>\n<table><thead><tr><th>요구사항</th><th>구현 대상</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-UI-001</td><td><code>workspace-monitor/components/MonitorShell.tsx</code>, <code>workspace-monitor/app/globals.css</code></td><td>typecheck, build, 시각 검증</td></tr><tr><td>REQ-PDA-UI-002</td><td>Settings dialog state/render/CSS</td><td>typecheck, 시각 검증</td></tr><tr><td>REQ-PDA-UI-003</td><td>Overview home render/CSS</td><td>build, 시각 검증</td></tr><tr><td>REQ-PDA-UI-004</td><td>activity rail/sidebar render/CSS</td><td>typecheck, 시각 검증</td></tr><tr><td>REQ-PDA-UI-005</td><td>responsive CSS</td><td>브라우저 데스크톱/모바일 확인</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 551,
-      "updatedAt": "2026-06-03T02:23:00.406Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-03-desktop-app-shell-ui-ko-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-03-desktop-app-shell-ui.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "데스크톱 앱 셸 UI 요구사항",
-      "excerpt": "데스크톱 앱 셸 UI 요구사항 배경 현재 설치형 플랫폼 UI는 Tauri로 감쌌더라도 브라우저 대시보드처럼 보인다. 설치형 앱은 설정, 탐색, 작업 실행, decision inbox, runtime 상태를 데스크톱 앱답게 분리해야 한다. 요구사항 REQ PDA UI 001 : 앱은 웹 페이지형 상단 히어로/필터 중심 구조가 아니라 titlebar, activity rail, sidebar, content viewport를 가진 데스크톱 앱 셸로 보여야 한다. REQ PDA UI 002 : view",
-      "html": "<h1>데스크톱 앱 셸 UI 요구사항</h1>\n<h2>배경</h2>\n<p>현재 설치형 플랫폼 UI는 Tauri로 감쌌더라도 브라우저 대시보드처럼 보인다. 설치형 앱은 설정, 탐색, 작업 실행, decision inbox, runtime 상태를 데스크톱 앱답게 분리해야 한다.</p>\n<h2>요구사항</h2>\n<ul>\n<li><code>REQ-PDA-UI-001</code>: 앱은 웹 페이지형 상단 히어로/필터 중심 구조가 아니라 titlebar, activity rail, sidebar, content viewport를 가진 데스크톱 앱 셸로 보여야 한다.</li>\n<li><code>REQ-PDA-UI-002</code>: view mode, language mode, pinned section 같은 구성 설정은 기본 화면에 길게 노출하지 않고 설정 대화상자에서 바꿀 수 있어야 한다.</li>\n<li><code>REQ-PDA-UI-003</code>: 홈 화면은 모든 내부 기능을 한 번에 펼치지 않고 workspace, task timeline, decision inbox, recent artifacts, optional capability 상태를 우선 보여야 한다.</li>\n<li><code>REQ-PDA-UI-004</code>: 개발자/슈퍼어드민 기능은 activity rail과 sidebar에서 접근 가능해야 하며, 사용자용 기본 작업 흐름과 시각적으로 분리되어야 한다.</li>\n<li><code>REQ-PDA-UI-005</code>: 화면은 데스크톱과 모바일 폭에서 텍스트 겹침 없이 사용할 수 있어야 한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>실제 OS 파일 선택 dialog 구현</li>\n<li>새 Tauri command 추가</li>\n<li>외부 오픈소스 앱 코드 복사 또는 라이선스 이식</li>\n<li><code>MonitorShell.tsx</code> 대규모 컴포넌트 분리</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1393,
-      "updatedAt": "2026-06-03T02:23:00.405Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-app-shell-ui-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-app-shell-ui/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "데스크톱 앱 셸 UI 구현 계획",
-      "excerpt": "데스크톱 앱 셸 UI 구현 계획 1. 기존 MonitorShell 의 navigation/state 구조를 유지하면서 settings dialog 상태와 단축키를 추가한다. 2. main 내부 렌더를 desktop app shell 구조로 감싼다. 3. topbar, view mode bar, core rail, section tab groups를 activity rail/sidebar/titlebar로 재배치한다. 4. settings dialog에 view mode, language mode,",
-      "html": "<h1>데스크톱 앱 셸 UI 구현 계획</h1>\n<p>1. 기존 <code>MonitorShell</code>의 navigation/state 구조를 유지하면서 settings dialog 상태와 단축키를 추가한다.</p>\n<p>2. <code>main</code> 내부 렌더를 <code>desktop-app-shell</code> 구조로 감싼다.</p>\n<p>3. topbar, view-mode bar, core rail, section tab groups를 activity rail/sidebar/titlebar로 재배치한다.</p>\n<p>4. settings dialog에 view mode, language mode, pinned section 관리를 넣는다.</p>\n<p>5. overview 콘텐츠를 desktop home 구조로 줄이고 긴 내부 패널은 각 섹션으로 이동시킨다.</p>\n<p>6. CSS를 shell, dialog, overview home, 모바일 대응에 맞춰 수정한다.</p>\n<p>7. typecheck/test/build와 시각 검증을 수행한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 679,
-      "updatedAt": "2026-06-03T02:23:00.405Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-app-shell-ui-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-app-shell-ui/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "데스크톱 앱 셸 UI 스펙",
-      "excerpt": "데스크톱 앱 셸 UI 스펙 목표 workspace monitor 기반 화면을 설치형 플랫폼의 실제 데스크톱 앱 셸처럼 보이도록 재구성한다. 범위 앱 titlebar 좌측 activity rail 보조 sidebar 설정 대화상자 홈 화면 정보 구조 축소 반응형 CSS 조정 결정 UI 구현은 기존 workspace monitor 에 유지한다. platform desktop app/src 에 새 프론트엔드 앱을 만들지 않는다. 외부 오픈소스 앱은 직접 클론/복사하지 않고 패턴 참고로만 사용한다. 설정",
-      "html": "<h1>데스크톱 앱 셸 UI 스펙</h1>\n<h2>목표</h2>\n<p><code>workspace-monitor</code> 기반 화면을 설치형 플랫폼의 실제 데스크톱 앱 셸처럼 보이도록 재구성한다.</p>\n<h2>범위</h2>\n<ul>\n<li>앱 titlebar</li>\n<li>좌측 activity rail</li>\n<li>보조 sidebar</li>\n<li>설정 대화상자</li>\n<li>홈 화면 정보 구조 축소</li>\n<li>반응형 CSS 조정</li>\n</ul>\n<h2>결정</h2>\n<ul>\n<li>UI 구현은 기존 <code>workspace-monitor</code>에 유지한다.</li>\n<li><code>platform-desktop-app/src</code>에 새 프론트엔드 앱을 만들지 않는다.</li>\n<li>외부 오픈소스 앱은 직접 클론/복사하지 않고 패턴 참고로만 사용한다.</li>\n<li>설정 변경은 모달 대화상자에서 처리한다.</li>\n</ul>\n<h2>성공 기준</h2>\n<ul>\n<li>기본 화면이 데스크톱 앱 셸처럼 보인다.</li>\n<li>view/language/pinned 설정이 설정 대화상자 안에 있다.</li>\n<li>overview가 모든 패널을 펼치지 않고 주요 흐름 중심으로 축소된다.</li>\n<li>TypeScript check, test, build가 통과한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 904,
-      "updatedAt": "2026-06-03T02:23:00.405Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
-      "date": "2026-06-05",
+      "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 96,
+      "documentsCount": 13,
       "categories": [
         {
           "category": "evaluation",
-          "count": 23
+          "count": 3
         },
         {
           "category": "request-trace",
-          "count": 14
-        },
-        {
-          "category": "web-search",
-          "count": 14
-        },
-        {
-          "category": "work-summary",
-          "count": 14
+          "count": 2
         },
         {
           "category": "user-request",
-          "count": 13
+          "count": 2
+        },
+        {
+          "category": "web-search",
+          "count": 2
+        },
+        {
+          "category": "work-summary",
+          "count": 2
         },
         {
           "category": "work-timing",
+          "count": 2
+        }
+      ],
+      "documents": [
+        {
+          "id": "history-evaluations-2026-2026-06-06-rust-desktop-resource-optimization-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-rust-desktop-resource-optimization-evaluation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Rust Desktop Resource Optimization Evaluation Input",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 rust desktop resource optimization\", \"status\": \"passed\", \"installation occurred\": true, \"installation record targets\": \" history/installations/2026/2026 06 06 rust desktop resource optimization rust crates.ko.md\" , \"resource risk ",
+          "updatedAt": "2026-06-05T15:47:08.794Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "평가: Rust 데스크톱 자원 최적화",
+          "excerpt": "평가: Rust 데스크톱 자원 최적화 판정 요청 충족. 단순 렌더 최적화가 아니라 Rust/Tauri 프로세스에서 CPU parallelism과 OS memory telemetry를 사용하도록 source workspace cache 경로를 바꿨고, 내부 패키징 빌드까지 완료했다. 증거 rayon 기반 bounded parallel worker pool 추가. sysinfo 기반 total/available/used memory, memory budget report 추가. preload 상한을 ",
+          "updatedAt": "2026-06-05T15:47:08.794Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "평가: 소스 컨트롤 Playwright 스모크",
+          "excerpt": "평가: 소스 컨트롤 Playwright 스모크 결과 이전의 dev 서버 Playwright 검증 실패를 그대로 두지 않고, dev 서버와 static export 경로를 분리했다. Tauri가 임베드하는 static export 산출물을 기준으로 실제 Chromium 클릭 검증을 추가했다. 개발자 snapshot에서는 소스 파일 선택 드롭다운이 네이티브 <select 없이 열리고 80개 파일 항목을 보여준다. customer snapshot은 의도적으로 소스 파일이 제거되어 파일 선택 트리거가 비",
+          "updatedAt": "2026-06-05T15:31:10.538Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: Rust 데스크톱 자원 최적화",
+          "excerpt": "요청 결과 추적: Rust 데스크톱 자원 최적화 요청 Rust를 최대한 활용하고 데스크톱 CPU/RAM 자원을 실제로 사용해 탭 전환과 source workspace 준비를 최적화하라는 요청. 결과 Rust WorkspaceResourceProfile 추가. rayon bounded worker pool로 entry build와 preload read 병렬화. sysinfo 기반 memory budget과 resource telemetry 추가. renderer source workspace UI",
+          "updatedAt": "2026-06-05T15:47:08.793Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: 소스 컨트롤 Playwright 스모크",
+          "excerpt": "요청 결과 추적: 소스 컨트롤 Playwright 스모크 요청 사용자는 이전 검증 한계 설명을 받아들이지 않고, 가능한 데스크톱/운영체제 자원을 사용해 소스 컨트롤 불편함과 기본 드롭다운 문제를 끝까지 검증하라고 요구했다. 결과 원인 분리: Next dev 서버 Playwright 경로에서는 snapshot fetch가 시작되지 않아 Loading workspace snapshot 에 머물렀다. 실제 산출물 검증: Tauri가 임베드하는 out/ 정적 export를 로컬 static server로",
+          "updatedAt": "2026-06-05T15:31:10.537Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: Rust 데스크톱 자원 최적화",
+          "excerpt": "사용자 요청 요약: Rust 데스크톱 자원 최적화 사용자는 Workspace Monitor/source editor 계열 탭 전환이 늦게 불러오는 방식처럼 느껴진다고 지적했고, 단순 렌더 최적화가 아니라 실제 데스크톱 앱답게 Rust와 운영체제 CPU/RAM 자원을 적극 사용해 최적화하라고 요청했다. 추가 지속 요구로 구현 완료 후 사용자가 별도로 빌드하지 않도록 내부 빌드까지 자동 실행해야 한다.",
+          "updatedAt": "2026-06-05T15:47:08.791Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: 소스 컨트롤 실제 실행 검증",
+          "excerpt": "사용자 요청 요약: 소스 컨트롤 실제 실행 검증 날짜: 2026 06 06 범위: platform desktop app/renderer/workspace monitor 요지 사용자는 데스크톱 앱의 장점을 살려 운영체제 자원과 메모리를 적극 사용하고, 탭 이동 지연, 사이드바 잘림, 코드 편집 불편함, 기본 버튼/드롭다운 느낌을 전반적으로 개선하라고 요구했다. 후속으로 이전 검증 한계를 받아들이지 말고 가능한 자원을 써서 실제로 끝까지 확인하라고 요구했다. 이번 기록의 초점 이전 구현 중 Playw",
+          "updatedAt": "2026-06-05T15:31:10.535Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: Rust 데스크톱 자원 최적화",
+          "excerpt": "웹 검색 기록: Rust 데스크톱 자원 최적화 목적 Rust/Tauri 경로에서 CPU parallelism과 RAM aware preload를 실제로 구현할 때 어떤 공식 API와 crate가 적합한지 확인했다. 검색어 Tauri v2 Rust commands async state manage official docs performance Tauri v2 sidecar state Rust official docs CPU heavy task background thread Rust rayon pa",
+          "updatedAt": "2026-06-05T15:47:08.792Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: 소스 컨트롤 Playwright 스모크",
+          "excerpt": "웹 검색 기록: 소스 컨트롤 Playwright 스모크 날짜: 2026 06 06 작업: Next dev 검증 한계 분리와 정적 export 기반 Playwright 스모크 추가 검색 Next.js app router client component useEffect not running hydration official docs Next.js static export output export official docs app router Playwright page waitForSelector of",
+          "updatedAt": "2026-06-05T15:31:10.535Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: Rust 데스크톱 자원 최적화",
+          "excerpt": "작업 요약: Rust 데스크톱 자원 최적화 Workspace Monitor의 source workspace cache를 Rust/Tauri native path에서 더 공격적으로 준비하도록 바꿨다. rayon 으로 entry build와 preload read를 병렬화했고, sysinfo 로 OS memory telemetry를 읽어 preload budget과 UI 표시를 추가했다. UI에는 cache 파일/바이트뿐 아니라 worker 수, RAM budget/free RAM, CPU 병렬 수,",
+          "updatedAt": "2026-06-05T15:47:08.793Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: 소스 컨트롤 Playwright 스모크",
+          "excerpt": "작업 요약: 소스 컨트롤 Playwright 스모크 변경 workspace monitor 에 smoke:source controls 스크립트를 추가했다. 스모크는 out/ 정적 export를 임시 디렉터리에 복사하고 개발자 snapshot을 주입한 뒤 Chromium에서 소스 화면을 연다. 스모크는 네이티브 <select 제거, 공용 버튼 프리미티브 수, 파일 선택 트리거 활성화, 메뉴 오픈, 파일 항목 수, 컨트롤 크기, 페이지 에러 부재를 확인한다. 기존 tool studio.test.mjs ",
+          "updatedAt": "2026-06-05T15:31:10.537Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-06-rust-desktop-resource-optimization-json",
+          "path": "_history/work-timings/2026/2026-06-06-rust-desktop-resource-optimization.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Rust Desktop Resource Optimization",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 rust desktop resource optimization\", \"timings\": { \"phase\": \"web research and crate metadata\", \"duration\": \"approximately 15 minutes\" }, { \"phase\": \"implementation\", \"duration\": \"approximately 35 minutes\" }, { \"phase\": \"test fix an",
+          "updatedAt": "2026-06-05T15:47:08.793Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-06-source-controls-playwright-smoke-json",
+          "path": "_history/work-timings/2026/2026-06-06-source-controls-playwright-smoke.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Source Controls Playwright Smoke",
+          "excerpt": "{ \"task\": \"source controls playwright smoke\", \"date\": \"2026 06 06\", \"timings\": { \"phase\": \"web first intake\", \"elapsed minutes\": 2, \"notes\": \"Checked official Next.js and Playwright documentation relevant to hydration/static export and click verification.\" }, { \"phase\": \"dev serv",
+          "updatedAt": "2026-06-05T15:31:10.536Z",
+          "historyDate": "2026-06-06"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-05",
+      "year": "2026",
+      "documentsCount": 83,
+      "categories": [
+        {
+          "category": "evaluation",
+          "count": 19
+        },
+        {
+          "category": "request-trace",
+          "count": 13
+        },
+        {
+          "category": "work-summary",
+          "count": 13
+        },
+        {
+          "category": "user-request",
           "count": 12
         },
         {
+          "category": "web-search",
+          "count": 12
+        },
+        {
+          "category": "work-timing",
+          "count": 10
+        },
+        {
           "category": "plan",
-          "count": 5
+          "count": 3
         },
         {
           "category": "daily-history",
@@ -17780,26 +17943,6 @@
           "title": "2026 06 05",
           "excerpt": "2026 06 05 구현 완료 후 자동 빌드 규칙 사용자가 매번 직접 빌드하지 않도록, 의미 있는 구현 작업 close out에서 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 지시를 추가했다. build 명령이 없거나 안전하지 않거나 비용이 과도하거나 변경 범위 밖이면 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/평가 기록을 연결했다. W",
           "updatedAt": "2026-06-05T12:54:26.573Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-05-agent-identity-labels-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-05-agent-identity-labels-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 05 Agent Identity Labels Evaluation Input",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"agent identity labels\", \"user request summary\": \"Make the 3D agent characters smaller and make it easier to identify which agent or mode each character represents.\", \"requirements\": \"REQ WM 074\" , \"implementation targets\": \"platform deskto",
-          "updatedAt": "2026-06-05T04:28:36.841Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-05-agent-identity-labels-ko-md",
-          "path": "_history/evaluations/2026/2026-06-05-agent-identity-labels.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: Agent Identity Labels",
-          "excerpt": "평가: Agent Identity Labels 결론 통과. 캐릭터는 더 작아졌고, desktop/mobile에서 어떤 에이전트나 모드인지 식별할 수 있는 label/legend가 추가되었다. 확인 Agents desktop은 캐릭터 위에 112px compact label을 표시한다. Agents mobile은 캐릭터 위 label을 28px code chip으로 줄이고, horizontal identity strip에서 code와 compact name을 연결한다. Tool Studio는 캐릭터",
-          "updatedAt": "2026-06-05T04:28:36.841Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -17830,26 +17973,6 @@
           "title": "평가: 구현 완료 후 자동 빌드 규칙",
           "excerpt": "평가: 구현 완료 후 자동 빌드 규칙 결과 사용자의 지속 지시를 durable instruction과 Codex runtime adapter에 반영했다. 의미 있는 구현 작업은 최종 응답 전에 담당 프로젝트의 build/package 명령을 실행해야 한다. build 명령이 없거나 부적절한 경우 이유와 가장 강한 대체 검증을 기록하도록 예외 조건을 명시했다. memory bootstrap manifest에 이 규칙을 persistent instruction hot context로 연결했다. 검증 ",
           "updatedAt": "2026-06-05T12:57:00.892Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-05-character-design-refinement-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-05-character-design-refinement-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 05 Character Design Refinement Evaluation Input",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"character design refinement\", \"user request summary\": \"Improve the 3D character design using cute character references, with better mascot proportions and less hard edged equipment feel.\", \"requirements\": \"REQ WM 073\" , \"implementation tar",
-          "updatedAt": "2026-06-05T03:20:41.138Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-05-character-design-refinement-ko-md",
-          "path": "_history/evaluations/2026/2026-06-05-character-design-refinement.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: Character Design Refinement",
-          "excerpt": "평가: Character Design Refinement 결론 통과. 캐릭터가 기존 장비형 인상보다 더 단순하고 둥근 귀여운 마스코트로 읽히도록 개선되었다. 확인 Agents 협업 scene과 Tool Studio 캐릭터 맵 모두에 작은 점눈, 작은 코, 낮은 muzzle, 더 둥근 귀/손발/꼬리 비율이 적용되었다. visor와 chest panel은 얼굴보다 강하게 보이지 않도록 축소되어 상태 보조 신호로 남았다. role/status 신호, lazy mount, offscreen pause, ",
-          "updatedAt": "2026-06-05T03:20:41.138Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18013,16 +18136,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-plans-2026-2026-06-05-agent-identity-labels-ko-md",
-          "path": "_history/plans/2026/2026-06-05-agent-identity-labels.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "계획: Agent Identity Labels",
-          "excerpt": "계획: Agent Identity Labels 1. avatar/label 식별 UI 근거와 recognition rather than recall 기준을 확인한다. 2. Agents 협업 3D 캐릭터 scale을 줄이고 desktop label을 추가한다. 3. Agents mobile은 code chip과 identity strip으로 겹침 없이 식별하게 한다. 4. Tool Studio 캐릭터 맵 character scale을 줄이고 mode legend를 추가한다. 5. tests, typ",
-          "updatedAt": "2026-06-05T04:28:36.840Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-plans-2026-2026-06-05-auto-build-after-implementation-mode-ko-md",
           "path": "_history/plans/2026/2026-06-05-auto-build-after-implementation-mode.ko.md",
           "category": "plan",
@@ -18030,16 +18143,6 @@
           "title": "작업 모드 선택: 구현 완료 후 자동 빌드 규칙",
           "excerpt": "작업 모드 선택: 구현 완료 후 자동 빌드 규칙 선택 work mode: governance 이유 사용자의 지시는 앞으로 모든 구현 작업의 close out 행동을 바꾸는 지속 운영 규칙이다. persistent instructions , AGENTS.md , memory bootstrap anchor, 요구사항, 스펙, 평가 기록에 영향을 준다. 소스 기능 구현은 아니므로 빌드 실행 규칙 자체는 문서화하고, 이번 변경은 docs/config 검증으로 닫는다. 범위 포함: durable instr",
           "updatedAt": "2026-06-05T12:53:35.043Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-plans-2026-2026-06-05-character-design-refinement-ko-md",
-          "path": "_history/plans/2026/2026-06-05-character-design-refinement.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "계획: Character Design Refinement",
-          "excerpt": "계획: Character Design Refinement 1. 귀여움을 만드는 레퍼런스와 연구 근거를 확인한다. 2. Agents 협업 3D 캐릭터에서 얼굴, 귀, 몸통, 손발, 꼬리 비율을 정제한다. 3. Tool Studio manual Three.js 캐릭터 맵에 같은 얼굴/비율 기준을 맞춘다. 4. static tests에 eye/nose와 geometry 기준을 추가한다. 5. tests, type check, check, build, customer build, perf budget, ",
-          "updatedAt": "2026-06-05T03:20:41.136Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18080,16 +18183,6 @@
           "title": "요청 결과 추적: 구현 완료 후 자동 빌드",
           "excerpt": "요청 결과 추적: 구현 완료 후 자동 빌드 요청 구현 후 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동 수행. 결과 durable instruction과 Codex adapter에 구현 완료 후 build/package 실행 규칙을 추가했다. memory bootstrap manifest에 해당 규칙을 persistent instruction anchor 용도로 반영했다. 산출물 docs/instructions/persistent instructions.md docs/instruction",
           "updatedAt": "2026-06-05T12:57:42.657Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-05-character-design-refinement-ko-md",
-          "path": "_history/request-traces/2026/2026-06-05-character-design-refinement.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 추적: Character Design Refinement",
-          "excerpt": "요청 추적: Character Design Refinement 요청 캐릭터 디자인을 더 좋게 개선. 귀여운 레퍼런스 캐릭터 방향을 반영. 결과 REQ WM 073 의 세부 acceptance를 확장했다. Agents AgentCharacter 에 작은 점눈, 작은 코, 더 낮은 muzzle, 둥근 귀/손발/꼬리, 통통한 몸통 비율, 축소된 visor/chest panel을 적용했다. Tool Studio Three.js character map에도 같은 geometry 기준을 적용했다. stati",
-          "updatedAt": "2026-06-05T03:20:41.138Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18200,16 +18293,6 @@
           "title": "요청 결과 추적: Workspace Monitor 탭 전환과 소스 편집 UX",
           "excerpt": "요청 결과 추적: Workspace Monitor 탭 전환과 소스 편집 UX 요청 탭 전환 렉 완화. 사이드바 잘림 완화. 코드 편집 UX 개선. 구현 후 빌드 자동 수행. 결과 탭 전환 지연 커밋 제거. 소스 편집 패널 마운트 유지와 숨김 상태 resource guard 추가. 사이드바/소스 편집 CSS와 Monaco 기본값 개선. 테스트/체크/빌드/브라우저 스모크 완료. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 05 workspace",
           "updatedAt": "2026-06-05T13:13:07.875Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-05-agent-identity-labels-ko-md",
-          "path": "_history/user-requests/2026/2026-06-05-agent-identity-labels.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: Agent Identity Labels",
-          "excerpt": "사용자 요청 요약: Agent Identity Labels 사용자는 캐릭터 디자인에서 어떤 에이전트인지 쉽게 알 수 있어야 하며, 더 작은 크기로 조정하라고 요청했다. 범위는 Workspace Monitor Agents 협업 3D scene과 Tool Studio 캐릭터 맵의 캐릭터 크기, 식별 label, mode legend로 정했다.",
-          "updatedAt": "2026-06-05T04:28:36.839Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18333,16 +18416,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-web-searches-2026-2026-06-05-agent-identity-labels-ko-md",
-          "path": "_history/web-searches/2026/2026-06-05-agent-identity-labels.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: Agent Identity Labels",
-          "excerpt": "웹 검색 기록: Agent Identity Labels 검색 Material Design avatar badge label UI identify user role icon label official Apple Human Interface Guidelines labels icons badges identify controls official Nielsen Norman Group icon labels usability recognition interface site:nngroup.com icon la",
-          "updatedAt": "2026-06-05T04:28:36.839Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-05-auto-build-after-implementation-ko-md",
           "path": "_history/web-searches/2026/2026-06-05-auto-build-after-implementation.ko.md",
           "category": "web-search",
@@ -18350,16 +18423,6 @@
           "title": "웹 검색 기록: 구현 완료 후 자동 빌드 규칙",
           "excerpt": "웹 검색 기록: 구현 완료 후 자동 빌드 규칙 요청 사용자가 매번 직접 빌드하지 않도록, 구현이 끝나면 에이전트가 빌드까지 자동으로 실행하라는 지속 지시를 남기는 작업. 검색 software development best practice run build before delivery after implementation 확인한 출처 Octopus Deploy, \"Do You Build Your Binaries Once?\", https://octopus.com/blog/build your binar",
           "updatedAt": "2026-06-05T12:53:35.042Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-05-character-design-refinement-ko-md",
-          "path": "_history/web-searches/2026/2026-06-05-character-design-refinement.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: Character Design Refinement",
-          "excerpt": "웹 검색 기록: Character Design Refinement 검색 baby schema cute character design large head small body round cheeks research official Miffy design simple eyes rounded body character reference official Kirby round character design reference Nintendo official Baymax soft robot rounded hug",
-          "updatedAt": "2026-06-05T03:20:41.136Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18493,16 +18556,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-05-character-design-refinement-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-05-character-design-refinement.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: Character Design Refinement",
-          "excerpt": "작업 요약: Character Design Refinement 3D 에이전트 캐릭터를 더 귀여운 마스코트 비율로 정제했다. Agents와 Tool Studio 양쪽에 작은 점눈, 작은 코, 더 낮은 muzzle, 둥근 귀/손발/꼬리, 축소된 visor/chest panel을 적용했다. 기능적 상태 신호와 성능 계약은 유지했다. 테스트, 타입 체크, check, 일반 빌드, 고객 빌드, 성능 예산, desktop/mobile screenshot QA를 완료했다.",
-          "updatedAt": "2026-06-05T03:20:41.139Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
           "path": "_history/work-summaries/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
           "category": "work-summary",
@@ -18613,16 +18666,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-work-timings-2026-2026-06-05-agent-identity-labels-json",
-          "path": "_history/work-timings/2026/2026-06-05-agent-identity-labels.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 05 Agent Identity Labels",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"agent identity labels\", \"timings\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"note\": \"Checked avatar label, icon, and recognition rather than recall guidance before local edits.\" }, { \"phase\": \"implementation\", \"status\": \"compl",
-          "updatedAt": "2026-06-05T04:28:36.840Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-05-auto-build-after-implementation-json",
           "path": "_history/work-timings/2026/2026-06-05-auto-build-after-implementation.json",
           "category": "work-timing",
@@ -18630,16 +18673,6 @@
           "title": "2026 06 05 Auto Build After Implementation",
           "excerpt": "{ \"task id\": \"2026 06 05 auto build after implementation\", \"title\": \"Auto build after implementation durable rule\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"created at\": \"2026 06 05\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"s",
           "updatedAt": "2026-06-05T12:54:26.572Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-05-character-design-refinement-json",
-          "path": "_history/work-timings/2026/2026-06-05-character-design-refinement.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 05 Character Design Refinement",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"character design refinement\", \"timings\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"note\": \"Checked baby schema research and official Miffy, Kirby, and Disney Big Hero 6 references before final character refinements.\" }, { \"pha",
-          "updatedAt": "2026-06-05T03:20:41.137Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18741,16 +18774,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2272,
-      "days": 6,
+      "documents": 2285,
+      "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 933
+          "count": 936
         },
         {
           "category": "web-search",
-          "count": 366
+          "count": 368
         },
         {
           "category": "plan",
@@ -18758,19 +18791,19 @@
         },
         {
           "category": "request-trace",
-          "count": 295
+          "count": 297
         },
         {
           "category": "work-timing",
-          "count": 217
+          "count": 219
         },
         {
           "category": "user-request",
-          "count": 79
+          "count": 81
         },
         {
           "category": "work-summary",
-          "count": 46
+          "count": 48
         },
         {
           "category": "daily-history",
@@ -18781,7 +18814,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6085093,
+      "totalSourceBytes": 6102005,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18806,12 +18839,12 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 37,
+      "evidenceEvents": 36,
       "decisionEvents": 0,
-      "openSignals": 15,
+      "openSignals": 16,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T13:52:28.067Z",
-      "historyDays": 1
+      "latestEventAt": "2026-06-05T15:47:08.794Z",
+      "historyDays": 2
     },
     "lanes": [
       {
@@ -18822,12 +18855,17 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 23
+        "count": 22
       },
       {
         "id": "delivery",
         "label": "delivery",
-        "count": 14
+        "count": 15
+      },
+      {
+        "id": "traceability",
+        "label": "traceability",
+        "count": 15
       },
       {
         "id": "evidence",
@@ -18835,14 +18873,9 @@
         "count": 14
       },
       {
-        "id": "traceability",
-        "label": "traceability",
-        "count": 14
-      },
-      {
         "id": "intake",
         "label": "intake",
-        "count": 13
+        "count": 14
       },
       {
         "id": "monitoring",
@@ -18852,7 +18885,7 @@
       {
         "id": "planning",
         "label": "planning",
-        "count": 5
+        "count": 3
       },
       {
         "id": "history",
@@ -18869,27 +18902,27 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 23
+        "count": 22
       },
       {
         "id": "summary",
         "label": "summary",
-        "count": 14
+        "count": 15
       },
       {
         "id": "trace",
         "label": "trace",
+        "count": 15
+      },
+      {
+        "id": "intake",
+        "label": "intake",
         "count": 14
       },
       {
         "id": "web-search",
         "label": "web search",
         "count": 14
-      },
-      {
-        "id": "intake",
-        "label": "intake",
-        "count": 13
       },
       {
         "id": "timing",
@@ -18899,7 +18932,7 @@
       {
         "id": "plan",
         "label": "plan",
-        "count": 5
+        "count": 3
       },
       {
         "id": "history",
@@ -18920,6 +18953,201 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-rust-desktop-resource-optimization-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "ready",
+        "title": "2026 06 06 Rust Desktop Resource Optimization Evaluation Input",
+        "detail": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 rust desktop resource optimization\", \"status\": \"passed\", \"installation occurred\": true, \"installation record targets\": \" history/installations/2026/2026 06 06 rust desktop resource optimization rust crates.ko.md\" , \"resource risk ",
+        "path": "_history/evaluations/2026/2026-06-06-rust-desktop-resource-optimization-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T15:47:08.794Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "평가: Rust 데스크톱 자원 최적화",
+        "detail": "평가: Rust 데스크톱 자원 최적화 판정 요청 충족. 단순 렌더 최적화가 아니라 Rust/Tauri 프로세스에서 CPU parallelism과 OS memory telemetry를 사용하도록 source workspace cache 경로를 바꿨고, 내부 패키징 빌드까지 완료했다. 증거 rayon 기반 bounded parallel worker pool 추가. sysinfo 기반 total/available/used memory, memory budget report 추가. preload 상한을 ",
+        "path": "_history/evaluations/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T15:47:08.794Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-rust-desktop-resource-optimization-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Rust Desktop Resource Optimization",
+        "detail": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 rust desktop resource optimization\", \"timings\": { \"phase\": \"web research and crate metadata\", \"duration\": \"approximately 15 minutes\" }, { \"phase\": \"implementation\", \"duration\": \"approximately 35 minutes\" }, { \"phase\": \"test fix an",
+        "path": "_history/work-timings/2026/2026-06-06-rust-desktop-resource-optimization.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T15:47:08.793Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "요청 결과 추적: Rust 데스크톱 자원 최적화",
+        "detail": "요청 결과 추적: Rust 데스크톱 자원 최적화 요청 Rust를 최대한 활용하고 데스크톱 CPU/RAM 자원을 실제로 사용해 탭 전환과 source workspace 준비를 최적화하라는 요청. 결과 Rust WorkspaceResourceProfile 추가. rayon bounded worker pool로 entry build와 preload read 병렬화. sysinfo 기반 memory budget과 resource telemetry 추가. renderer source workspace UI",
+        "path": "_history/request-traces/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T15:47:08.793Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약: Rust 데스크톱 자원 최적화",
+        "detail": "작업 요약: Rust 데스크톱 자원 최적화 Workspace Monitor의 source workspace cache를 Rust/Tauri native path에서 더 공격적으로 준비하도록 바꿨다. rayon 으로 entry build와 preload read를 병렬화했고, sysinfo 로 OS memory telemetry를 읽어 preload budget과 UI 표시를 추가했다. UI에는 cache 파일/바이트뿐 아니라 worker 수, RAM budget/free RAM, CPU 병렬 수,",
+        "path": "_history/work-summaries/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T15:47:08.793Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: Rust 데스크톱 자원 최적화",
+        "detail": "웹 검색 기록: Rust 데스크톱 자원 최적화 목적 Rust/Tauri 경로에서 CPU parallelism과 RAM aware preload를 실제로 구현할 때 어떤 공식 API와 crate가 적합한지 확인했다. 검색어 Tauri v2 Rust commands async state manage official docs performance Tauri v2 sidecar state Rust official docs CPU heavy task background thread Rust rayon pa",
+        "path": "_history/web-searches/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T15:47:08.792Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "ready",
+        "title": "사용자 요청 요약: Rust 데스크톱 자원 최적화",
+        "detail": "사용자 요청 요약: Rust 데스크톱 자원 최적화 사용자는 Workspace Monitor/source editor 계열 탭 전환이 늦게 불러오는 방식처럼 느껴진다고 지적했고, 단순 렌더 최적화가 아니라 실제 데스크톱 앱답게 Rust와 운영체제 CPU/RAM 자원을 적극 사용해 최적화하라고 요청했다. 추가 지속 요구로 구현 완료 후 사용자가 별도로 빌드하지 않도록 내부 빌드까지 자동 실행해야 한다.",
+        "path": "_history/user-requests/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T15:47:08.791Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "needs_attention",
+        "title": "평가: 소스 컨트롤 Playwright 스모크",
+        "detail": "평가: 소스 컨트롤 Playwright 스모크 결과 이전의 dev 서버 Playwright 검증 실패를 그대로 두지 않고, dev 서버와 static export 경로를 분리했다. Tauri가 임베드하는 static export 산출물을 기준으로 실제 Chromium 클릭 검증을 추가했다. 개발자 snapshot에서는 소스 파일 선택 드롭다운이 네이티브 <select 없이 열리고 80개 파일 항목을 보여준다. customer snapshot은 의도적으로 소스 파일이 제거되어 파일 선택 트리거가 비",
+        "path": "_history/evaluations/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T15:31:10.538Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "요청 결과 추적: 소스 컨트롤 Playwright 스모크",
+        "detail": "요청 결과 추적: 소스 컨트롤 Playwright 스모크 요청 사용자는 이전 검증 한계 설명을 받아들이지 않고, 가능한 데스크톱/운영체제 자원을 사용해 소스 컨트롤 불편함과 기본 드롭다운 문제를 끝까지 검증하라고 요구했다. 결과 원인 분리: Next dev 서버 Playwright 경로에서는 snapshot fetch가 시작되지 않아 Loading workspace snapshot 에 머물렀다. 실제 산출물 검증: Tauri가 임베드하는 out/ 정적 export를 로컬 static server로",
+        "path": "_history/request-traces/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T15:31:10.537Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약: 소스 컨트롤 Playwright 스모크",
+        "detail": "작업 요약: 소스 컨트롤 Playwright 스모크 변경 workspace monitor 에 smoke:source controls 스크립트를 추가했다. 스모크는 out/ 정적 export를 임시 디렉터리에 복사하고 개발자 snapshot을 주입한 뒤 Chromium에서 소스 화면을 연다. 스모크는 네이티브 <select 제거, 공용 버튼 프리미티브 수, 파일 선택 트리거 활성화, 메뉴 오픈, 파일 항목 수, 컨트롤 크기, 페이지 에러 부재를 확인한다. 기존 tool studio.test.mjs ",
+        "path": "_history/work-summaries/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T15:31:10.537Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-source-controls-playwright-smoke-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Source Controls Playwright Smoke",
+        "detail": "{ \"task\": \"source controls playwright smoke\", \"date\": \"2026 06 06\", \"timings\": { \"phase\": \"web first intake\", \"elapsed minutes\": 2, \"notes\": \"Checked official Next.js and Playwright documentation relevant to hydration/static export and click verification.\" }, { \"phase\": \"dev serv",
+        "path": "_history/work-timings/2026/2026-06-06-source-controls-playwright-smoke.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T15:31:10.536Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: 소스 컨트롤 Playwright 스모크",
+        "detail": "웹 검색 기록: 소스 컨트롤 Playwright 스모크 날짜: 2026 06 06 작업: Next dev 검증 한계 분리와 정적 export 기반 Playwright 스모크 추가 검색 Next.js app router client component useEffect not running hydration official docs Next.js static export output export official docs app router Playwright page waitForSelector of",
+        "path": "_history/web-searches/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T15:31:10.535Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: 소스 컨트롤 실제 실행 검증",
+        "detail": "사용자 요청 요약: 소스 컨트롤 실제 실행 검증 날짜: 2026 06 06 범위: platform desktop app/renderer/workspace monitor 요지 사용자는 데스크톱 앱의 장점을 살려 운영체제 자원과 메모리를 적극 사용하고, 탭 이동 지연, 사이드바 잘림, 코드 편집 불편함, 기본 버튼/드롭다운 느낌을 전반적으로 개선하라고 요구했다. 후속으로 이전 검증 한계를 받아들이지 말고 가능한 자원을 써서 실제로 끝까지 확인하라고 요구했다. 이번 기록의 초점 이전 구현 중 Playw",
+        "path": "_history/user-requests/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T15:31:10.535Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-05-source-workbench-control-primitives-json",
         "sourceType": "history",
@@ -20164,201 +20392,6 @@
         "language": "ko",
         "date": "2026-06-05",
         "timestamp": "2026-06-05T04:28:36.842Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-agent-identity-labels-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 05 Agent Identity Labels Evaluation Input",
-        "detail": "{ \"date\": \"2026 06 05\", \"request slug\": \"agent identity labels\", \"user request summary\": \"Make the 3D agent characters smaller and make it easier to identify which agent or mode each character represents.\", \"requirements\": \"REQ WM 074\" , \"implementation targets\": \"platform deskto",
-        "path": "_history/evaluations/2026/2026-06-05-agent-identity-labels-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T04:28:36.841Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-agent-identity-labels-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "평가: Agent Identity Labels",
-        "detail": "평가: Agent Identity Labels 결론 통과. 캐릭터는 더 작아졌고, desktop/mobile에서 어떤 에이전트나 모드인지 식별할 수 있는 label/legend가 추가되었다. 확인 Agents desktop은 캐릭터 위에 112px compact label을 표시한다. Agents mobile은 캐릭터 위 label을 28px code chip으로 줄이고, horizontal identity strip에서 code와 compact name을 연결한다. Tool Studio는 캐릭터",
-        "path": "_history/evaluations/2026/2026-06-05-agent-identity-labels.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T04:28:36.841Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-05-agent-identity-labels-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 05 Agent Identity Labels",
-        "detail": "{ \"date\": \"2026 06 05\", \"request slug\": \"agent identity labels\", \"timings\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"note\": \"Checked avatar label, icon, and recognition rather than recall guidance before local edits.\" }, { \"phase\": \"implementation\", \"status\": \"compl",
-        "path": "_history/work-timings/2026/2026-06-05-agent-identity-labels.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T04:28:36.840Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-05-agent-identity-labels-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "계획: Agent Identity Labels",
-        "detail": "계획: Agent Identity Labels 1. avatar/label 식별 UI 근거와 recognition rather than recall 기준을 확인한다. 2. Agents 협업 3D 캐릭터 scale을 줄이고 desktop label을 추가한다. 3. Agents mobile은 code chip과 identity strip으로 겹침 없이 식별하게 한다. 4. Tool Studio 캐릭터 맵 character scale을 줄이고 mode legend를 추가한다. 5. tests, typ",
-        "path": "_history/plans/2026/2026-06-05-agent-identity-labels.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T04:28:36.840Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-05-agent-identity-labels-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: Agent Identity Labels",
-        "detail": "웹 검색 기록: Agent Identity Labels 검색 Material Design avatar badge label UI identify user role icon label official Apple Human Interface Guidelines labels icons badges identify controls official Nielsen Norman Group icon labels usability recognition interface site:nngroup.com icon la",
-        "path": "_history/web-searches/2026/2026-06-05-agent-identity-labels.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T04:28:36.839Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-05-agent-identity-labels-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: Agent Identity Labels",
-        "detail": "사용자 요청 요약: Agent Identity Labels 사용자는 캐릭터 디자인에서 어떤 에이전트인지 쉽게 알 수 있어야 하며, 더 작은 크기로 조정하라고 요청했다. 범위는 Workspace Monitor Agents 협업 3D scene과 Tool Studio 캐릭터 맵의 캐릭터 크기, 식별 label, mode legend로 정했다.",
-        "path": "_history/user-requests/2026/2026-06-05-agent-identity-labels.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T04:28:36.839Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-05-character-design-refinement-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "작업 요약: Character Design Refinement",
-        "detail": "작업 요약: Character Design Refinement 3D 에이전트 캐릭터를 더 귀여운 마스코트 비율로 정제했다. Agents와 Tool Studio 양쪽에 작은 점눈, 작은 코, 더 낮은 muzzle, 둥근 귀/손발/꼬리, 축소된 visor/chest panel을 적용했다. 기능적 상태 신호와 성능 계약은 유지했다. 테스트, 타입 체크, check, 일반 빌드, 고객 빌드, 성능 예산, desktop/mobile screenshot QA를 완료했다.",
-        "path": "_history/work-summaries/2026/2026-06-05-character-design-refinement.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T03:20:41.139Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-character-design-refinement-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 05 Character Design Refinement Evaluation Input",
-        "detail": "{ \"date\": \"2026 06 05\", \"request slug\": \"character design refinement\", \"user request summary\": \"Improve the 3D character design using cute character references, with better mascot proportions and less hard edged equipment feel.\", \"requirements\": \"REQ WM 073\" , \"implementation tar",
-        "path": "_history/evaluations/2026/2026-06-05-character-design-refinement-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T03:20:41.138Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-character-design-refinement-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "평가: Character Design Refinement",
-        "detail": "평가: Character Design Refinement 결론 통과. 캐릭터가 기존 장비형 인상보다 더 단순하고 둥근 귀여운 마스코트로 읽히도록 개선되었다. 확인 Agents 협업 scene과 Tool Studio 캐릭터 맵 모두에 작은 점눈, 작은 코, 낮은 muzzle, 더 둥근 귀/손발/꼬리 비율이 적용되었다. visor와 chest panel은 얼굴보다 강하게 보이지 않도록 축소되어 상태 보조 신호로 남았다. role/status 신호, lazy mount, offscreen pause, ",
-        "path": "_history/evaluations/2026/2026-06-05-character-design-refinement.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T03:20:41.138Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-05-character-design-refinement-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 추적: Character Design Refinement",
-        "detail": "요청 추적: Character Design Refinement 요청 캐릭터 디자인을 더 좋게 개선. 귀여운 레퍼런스 캐릭터 방향을 반영. 결과 REQ WM 073 의 세부 acceptance를 확장했다. Agents AgentCharacter 에 작은 점눈, 작은 코, 더 낮은 muzzle, 둥근 귀/손발/꼬리, 통통한 몸통 비율, 축소된 visor/chest panel을 적용했다. Tool Studio Three.js character map에도 같은 geometry 기준을 적용했다. stati",
-        "path": "_history/request-traces/2026/2026-06-05-character-design-refinement.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T03:20:41.138Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-05-character-design-refinement-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 05 Character Design Refinement",
-        "detail": "{ \"date\": \"2026 06 05\", \"request slug\": \"character design refinement\", \"timings\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"note\": \"Checked baby schema research and official Miffy, Kirby, and Disney Big Hero 6 references before final character refinements.\" }, { \"pha",
-        "path": "_history/work-timings/2026/2026-06-05-character-design-refinement.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T03:20:41.137Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-05-character-design-refinement-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: Character Design Refinement",
-        "detail": "웹 검색 기록: Character Design Refinement 검색 baby schema cute character design large head small body round cheeks research official Miffy design simple eyes rounded body character reference official Kirby round character design reference Nintendo official Baymax soft robot rounded hug",
-        "path": "_history/web-searches/2026/2026-06-05-character-design-refinement.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T03:20:41.136Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-05-character-design-refinement-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "계획: Character Design Refinement",
-        "detail": "계획: Character Design Refinement 1. 귀여움을 만드는 레퍼런스와 연구 근거를 확인한다. 2. Agents 협업 3D 캐릭터에서 얼굴, 귀, 몸통, 손발, 꼬리 비율을 정제한다. 3. Tool Studio manual Three.js 캐릭터 맵에 같은 얼굴/비율 기준을 맞춘다. 4. static tests에 eye/nose와 geometry 기준을 추가한다. 5. tests, type check, check, build, customer build, perf budget, ",
-        "path": "_history/plans/2026/2026-06-05-character-design-refinement.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T03:20:41.136Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -22649,11 +22682,11 @@
       "project": "platform-desktop-app",
       "language": "toml",
       "extension": "toml",
-      "sizeBytes": 566,
-      "lineCount": 21,
-      "updatedAt": "2026-06-03T16:55:06.114Z",
+      "sizeBytes": 665,
+      "lineCount": 23,
+      "updatedAt": "2026-06-05T15:36:19.922Z",
       "truncated": false,
-      "content": "[package]\nname = \"agent-workspace-platform-desktop\"\nversion = \"0.1.0\"\ndescription = \"Desktop shell for the personal agent-building platform\"\nauthors = [\"Personal Agent Platform\"]\nedition = \"2021\"\n\n[lib]\nname = \"agent_workspace_platform_desktop_lib\"\ncrate-type = [\"staticlib\", \"cdylib\", \"rlib\"]\n\n[build-dependencies]\ntauri-build = { version = \"2\", features = [] }\n\n[dependencies]\ntauri = { version = \"2\", features = [] }\nserde = { version = \"1\", features = [\"derive\"] }\nserde_json = \"1\"\nreqwest = { version = \"0.13.4\", features = [\"json\"] }\ntauri-plugin-dialog = \"2\"\n"
+      "content": "[package]\nname = \"agent-workspace-platform-desktop\"\nversion = \"0.1.0\"\ndescription = \"Desktop shell for the personal agent-building platform\"\nauthors = [\"Personal Agent Platform\"]\nedition = \"2021\"\n\n[lib]\nname = \"agent_workspace_platform_desktop_lib\"\ncrate-type = [\"staticlib\", \"cdylib\", \"rlib\"]\n\n[build-dependencies]\ntauri-build = { version = \"2\", features = [] }\n\n[dependencies]\ntauri = { version = \"2\", features = [] }\nserde = { version = \"1\", features = [\"derive\"] }\nserde_json = \"1\"\nreqwest = { version = \"0.13.4\", features = [\"json\"] }\ntauri-plugin-dialog = \"2\"\nrayon = \"1.12.0\"\nsysinfo = { version = \"0.39.3\", default-features = false, features = [\"system\"] }\n"
     },
     {
       "id": "platform-desktop-app-src-tauri-src-main-rs",
@@ -22709,11 +22742,11 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 45344,
-      "lineCount": 1045,
-      "updatedAt": "2026-06-05T13:34:08.207Z",
+      "sizeBytes": 45870,
+      "lineCount": 1054,
+      "updatedAt": "2026-06-05T15:42:28.450Z",
       "truncated": true,
-      "content": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/paths.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/definitions.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/runner.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/readiness/desktop-build-pipeline.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-doctor.mjs\")), true);\n  assert.equal(existsSync(join(root, \"configs/reference-platform-advantage-registry.json\")), true);\n\n  const config = readJson(\"src-tauri/tauri.conf.json\");\n  assert.equal(config.productName, \"Agent Workspace Platform\");\n  assert.equal(config.identifier, \"com.personalagentplatform.desktop\");\n  assert.equal(config.build.frontendDist, \"../renderer/workspace-monitor/out\");\n  assert.equal(config.app.withGlobalTauri, true);\n  assert.equal(config.bundle.macOS.hardenedRuntime, true);\n  assert.equal(config.bundle.resources[\"../runtime-contracts/installer-shell-runtime-contract.json\"], \"runtime-contracts/installer-shell-runtime-contract.json\");\n});\n\ntest(\"desktop docs expose bilingual one-command build and release paths\", () => {\n  const rootPkg = readJson(\"../package.json\");\n  const pkg = readJson(\"package.json\");\n  const readme = readFileSync(join(root, \"README.md\"), \"utf8\");\n  const readmeKo = readFileSync(join(root, \"README.ko.md\"), \"utf8\");\n  const readmeEn = readFileSync(join(root, \"README.en.md\"), \"utf8\");\n  const releaseKo = readFileSync(join(root, \"docs/release-runbook.ko.md\"), \"utf8\");\n  const releaseEn = readFileSync(join(root, \"docs/release-runbook.en.md\"), \"utf8\");\n  const pipelineEntrypoint = readFileSync(join(root, \"scripts/desktop-pipeline.mjs\"), \"utf8\");\n  const pipelineDefinitions = readFileSync(join(root, \"scripts/desktop-pipeline/definitions.mjs\"), \"utf8\");\n  const pipelineRunner = readFileSync(join(root, \"scripts/desktop-pipeline/runner.mjs\"), \"utf8\");\n  const buildPipelineReadiness = readFileSync(join(root, \"scripts/readiness/desktop-build-pipeline.mjs\"), \"utf8\");\n  const pipelineStructure = `${pipelineEntrypoint}\\n${pipelineDefinitions}\\n${pipelineRunner}`;\n  const requirementsKo = readFileSync(join(root, \"docs/requirements/2026-06-02-installable-desktop.ko.md\"), \"utf8\");\n  const requirementsEn = readFileSync(join(root, \"docs/requirements/2026-06-02-installable-desktop.en.md\"), \"utf8\");\n\n  assert.match(requirementsKo, /PDA-REQ-038/);\n  assert.match(requirementsEn, /PDA-REQ-038/);\n  assert.match(requirementsKo, /PDA-REQ-039/);\n  assert.match(requirementsEn, /PDA-REQ-039/);\n  for (const scriptName of [\n    \"desktop:setup\",\n    \"desktop:setup:verify\",\n    \"desktop:verify:quick\",\n    \"desktop:verify\",\n    \"desktop:renderer:build\",\n    \"desktop:package:internal\",\n    \"desktop:release:report\",\n    \"desktop:doctor\"\n  ]) {\n    assert.ok(rootPkg.scripts[scriptName]);\n  }\n  for (const scriptName of [\"doctor\", \"setup\", \"verify:quick\", \"verify\", \"package:internal\", \"deploy:public:report\", \"pipeline:dry-run\"]) {\n    assert.ok(pkg.scripts[scriptName]);\n  }\n  for (const command of [\n    \"corepack pnpm run desktop:setup:verify\",\n    \"corepack pnpm run desktop:verify\",\n    \"corepack pnpm run desktop:package:internal\",\n    \"corepack pnpm run desktop:release:report\",\n    \"corepack pnpm run desktop:doctor\"\n  ]) {\n    const pattern = new RegExp(command.replace(/[.*+?^${}()|[\\]\\\\]/g, \"\\\\$&\"));\n    assert.match(readme, pattern);\n    assert.match(readmeKo, pattern);\n    assert.match(readmeEn, pattern);\n    assert.match(releaseKo, pattern);\n    assert.match(releaseEn, pattern);\n  }\n  assert.match(pipelineEntrypoint, /desktop-pipeline\\/runner\\.mjs/);\n  assert.match(buildPipelineReadiness, /checkDesktopBuildPipeline/);\n  assert.match(buildPipelineReadiness, /desktopBuildPipelineRequiredFiles/);\n  assert.match(buildPipelineReadiness, /desktop:doctor/);\n  for (const token of [\"package-internal\", \"public-report\", \"commonVerifySteps\", \"Tauri internal package build\", \"codesign\", \"hdiutil\"]) {\n    assert.match(pipelineStructure, new RegExp(token));\n  }\n  assert.match(releaseKo, /Developer ID/);\n  assert.match(releaseKo, /notarization/);\n  assert.match(releaseEn, /Developer ID/);\n  assert.match(releaseEn, /notarization/);\n});\n\ntest(\"desktop registry points to macOS and Windows execution profiles\", () => {\n  const registry = readJson(\"configs/desktop-distribution-registry.json\");\n  const serialized = JSON.stringify(registry);\n\n  assert.equal(registry.recommended_initial_path.id, \"tauri_first_cross_platform_shell\");\n  assert.match(serialized, /configs\\/macos-execution-profile\\.json/);\n  assert.match(serialized, /configs\\/windows-execution-profile\\.json/);\n  assert.match(serialized, /configs\\/product-feature-registry\\.json/);\n});\n\ntest(\"product feature registry makes agent platform primary\", () => {\n  const registry = readJson(\"configs/product-feature-registry.json\");\n  const serialized = JSON.stringify(registry);\n\n  assert.equal(registry.product_position.primary_product, \"agent_capability_platform\");\n  assert.equal(registry.product_position.monitoring_role, \"supporting_observability\");\n  for (const featureId of [\n    \"agent_orchestration\",\n    \"agent_factory\"\n  ]) {\n    assert.ok(registry.product_position.primary_feature_ids.includes(featureId));\n    assert.equal(registry.feature_layers.find((feature) => feature.id === featureId)?.role, \"primary\");\n  }\n  for (const featureId of [\n    \"root_tool_management\",\n    \"work_visibility\",\n    \"agent_work_environment\",\n    \"agent_development_environment\",\n    \"learning_improvement_loop\"\n  ]) {\n    assert.ok(registry.product_position.supporting_feature_ids.includes(featureId));\n    assert.equal(registry.feature_layers.find((feature) => feature.id === featureId)?.role, \"supporting\");\n  }\n  assert.equal(registry.feature_layers.find((feature) => feature.id === \"observability_monitoring\")?.role, \"supporting\");\n  assert.match(serialized, /CLI Orchestration/);\n  assert.match(serialized, /Agent Core/);\n  assert.match(serialized, /Root Tool Management/);\n  assert.match(serialized, /Work Visibility/);\n  assert.match(serialized, /Search Agent Work Chat/);\n  assert.match(serialized, /Learning & Evaluation Loop/);\n  assert.match(serialized, /Production Agent Blueprints/);\n  assert.match(serialized, /awslabs_agentcore_samples/);\n  assert.match(serialized, /agentcore_blueprint_gate/);\n  assert.match(serialized, /supporting observability/);\n  assert.match(serialized, /operator_surfaces_are_separate/);\n  assert.deepEqual(registry.desktop_home_surface.primary_navigation_sections, [\"overview\", \"agents\", \"desktop\", \"source\", \"intent\"]);\n  assert.deepEqual(registry.desktop_home_surface.operator_center_sections, [\n    \"projects\",\n    \"history\",\n    \"structure\",\n    \"documents\",\n    \"requirements\"\n  ]);\n});\n\ntest(\"product gap registry keeps unresolved user-request gaps visible\", () => {\n  const registry = readJson(\"configs/product-gap-registry.json\");\n  const serialized = JSON.stringify(registry);\n  const requirementsKo = readFileSync(join(root, \"docs/requirements/2026-06-02-installable-desktop.ko.md\"), \"utf8\");\n  const requirementsEn = readFileSync(join(root, \"docs/requirements/2026-06-02-installable-desktop.en.md\"), \"utf8\");\n\n  assert.equal(registry.name, \"product-gap-registry\");\n  assert.match(requirementsKo, /PDA-REQ-037/);\n  assert.match(requirementsEn, /PDA-REQ-037/);\n  assert.equal(registry.coverage_summary.audited_request_count, 14);\n  for (const requestId of [\n    \"UR-2026-06-03-024\",\n    \"UR-2026-06-03-025\",\n    \"UR-2026-06-03-026\",\n    \"UR-2026-06-03-027\",\n    \"UR-2026-06-03-028\",\n    \"UR-2026-06-03-029\",\n    \"UR-2026-06-03-030\",\n    \"UR-2026-06-03-031\",\n    \"UR-2026-06-03-032\",\n    \"UR-2026-06-03-033\",\n    \"UR-2026-06-03-034\",\n    \"UR-2026-06-03-035\",\n    \"UR-2026-06-03-036\",\n    \"UR-2026-06-04-001\"\n  ]) {\n    assert.ok(registry.request_coverage.some((item) => item.request_id === requestId));\n  }\n\n  const agentFactoryGap = registry.gap_items.find((item) => item.gap_id === \"agent_factory_creation_wizard\");\n  assert.equal(agentFactoryGap.status, \"implemented_product_slice\");\n  assert.equal(agentFactoryGap.priority, \"p0_product_gap\");\n  assert.match(JSON.stringify(agentFactoryGap.acceptance_to_close), /Desktop Agent Core view/);\n  assert.match(JSON.stringify(agentFactoryGap.current_evidence), /create_agent_factory_proposal/);\n\n  const learningGap = registry.gap_items.find((item) => item.gap_id === \"learning_feedback_automation_loop\");\n  assert.equal(learningGap.status, \"implemented_product_slice\");\n  assert.equal(learningGap.priority, \"p0_product_gap\");\n  assert.match(JSON.stringify(learningGap.acceptance_to_close), /improvement candidates/);\n  assert.match(JSON.stringify(learningGap.current_evidence), /record_learning_improvement_decision/);\n\n  const nativeGitGap = registry.gap_items.find((item) => item.gap_id === \"native_workspace_git_operations\");\n  assert.equal(nativeGitGap.status, \"implemented_product_slice\");\n  assert.match(JSON.stringify(nativeGitGap.current_evidence), /run_desktop_git_action/);\n\n  const clipboardGap = registry.gap_items.find((item) => item.gap_id === \"clipboard_browser_qa\");\n  assert.equal(clipboardGap.status, \"implemented_test_coverage\");\n  assert.match(JSON.stringify(clipboardGap.current_evidence), /clipboard\\.test\\.mjs/);\n\n  const ptyGap = registry.gap_items.find((item) => item.gap_id === \"interactive_pty_terminal_surface\");\n  assert.equal(ptyGap.status, \"closed_by_product_decision\");\n  assert.match(JSON.stringify(ptyGap.current_evidence), /pty-terminal-decision/);\n\n  const request35 = registry.request_coverage.find((item) => item.request_id === \"UR-2026-06-03-035\");\n  assert.equal(request35.coverage, \"covered\");\n  assert.deepEqual(request35.remaining_gap_ids, []);\n  const request25 = registry.request_coverage.find((item) => item.request_id === \"UR-2026-06-03-025\");\n  assert.equal(request25.coverage, \"covered\");\n  assert.deepEqual(request25.remaining_gap_ids, []);\n  const request29 = registry.request_coverage.find((item) => item.request_id === \"UR-2026-06-03-029\");\n  assert.equal(request29.coverage, \"covered\");\n  assert.deepEqual(request29.remaining_gap_ids, []);\n  const request33 = registry.request_coverage.find((item) => item.request_id === \"UR-2026-06-03-033\");\n  assert.equal(request33.coverage, \"covered\");\n  assert.deepEqual(request33.remaining_gap_ids, []);\n  assert.match(serialized, /componentized_desktop_ui_architecture/);\n  assert.match(serialized, /public_distribution_gates/);\n  assert.match(serialized, /monitoring polish/);\n});\n\ntest(\"execution profiles keep optional CLI adapters non-blocking\", () => {\n  for (const profilePath of [\"configs/macos-execution-profile.json\", \"configs/windows-execution-profile.json\"]) {\n    const profile = readJson(profilePath);\n    const serialized = JSON.stringify(profile);\n\n    assert.match(serialized, /capability_missing/);\n    assert.match(serialized, /workspace/);\n    assert.ok(profile.smoke_tests.length >= 5);\n  }\n});\n\ntest(\"desktop registry records multi-CLI supervisor contract\", () => {\n  const registry = readJson(\"configs/desktop-distribution-registry.json\");\n  const serialized = JSON.stringify(registry);\n\n  assert.match(serialized, /platform-first host runtime/);\n  assert.match(serialized, /optional guest adapters/);\n  assert.match(serialized, /multi_cli_supervisor/);\n  assert.match(serialized, /Claude Code CLI/);\n  assert.match(serialized, /Gemini CLI/);\n  assert.match(serialized, /Codex CLI/);\n  assert.match(serialized, /OpenCode/);\n  assert.match(serialized, /Claw Code/);\n});\n\ntest(\"Claude Code design transfer registry uses public-source boundary\", () => {\n  const registry = readJson(\"configs/claude-code-design-transfer-registry.json\");\n  const serialized = JSON.stringify(registry);\n\n  assert.equal(registry.source_boundary.policy, \"public_sources_only\");\n  assert.match(serialized, /leaked_or_non_public_material/);\n  assert.match(serialized, /Permissioned Tool Execution/);\n  assert.match(serialized, /Plan Before Edit/);\n  assert.match(serialized, /Subagent Context Isolation/);\n  assert.match(serialized, /Skill On-Demand Packaging/);\n  assert.ok(registry.transfer_patterns.length >= 8);\n});\n\ntest(\"reference platform advantage registry transfers researched strengths into product patterns\", () => {\n  const registry = readJson(\"configs/reference-platform-advantage-registry.json\");\n  const serialized = JSON.stringify(registry);\n\n  assert.equal(registry.source_boundary.policy, \"public_sources_only\");\n  assert.match(serialized, /workbench-activity-rail-editor-terminal/);\n  assert.match(serialized, /codex-style-thread-workbench/);\n  assert.match(serialized, /claude-desktop-connector-first-chat/);\n  assert.match(serialized, /background-agent-task-lifecycle/);\n  assert.match(serialized, /permission-hooks-checkpoints/);\n  assert.match(serialized, /native-install-runtime-boundary/);\n  assert.match(serialized, /command-palette-extension-catalog/);\n  assert.match(serialized, /agentcore-style-production-agent-blueprints/);\n  assert.match(serialized, /claw-style-command-orchestration/);\n  assert.match(serialized, /manifest-parity-gap-audits/);\n  assert.match(serialized, /security-first-agentic-boundaries/);\n  assert.match(serialized, /VS Code/);\n  assert.match(serialized, /Codex app/);\n  assert.match(serialized, /Claude Desktop/);\n  assert.match(serialized, /claude_desktop_local_mcp_extensions/);\n  assert.match(serialized, /GitHub Copilot cloud agent/);\n  assert.match(serialized, /OpenHands/);\n  assert.match(serialized, /Claw Code/);\n  assert.ok(registry.transfer_patterns.length >= 10);\n});\n\ntest(\"runtime data boundary separates customer app from platform source\", () => {\n  const registry = readJson(\"configs/runtime-data-boundary-registry.json\");\n  const serialized = JSON.stringify(registry);\n\n  assert.match(serialized, /installer_shell_runtime_contract/);\n  assert.equal(registry.customer_visibility_policy.default_customer_visibility, \"installed_app_only\");\n  assert.match(serialized, /platform source repository/);\n  assert.match(serialized, /hidden_in_installed_product/);\n  assert.match(serialized, /platform_data_store/);\n  assert.match(serialized, /log_store/);\n  assert.match(serialized, /agent_workspace/);\n  assert.match(serialized, /support_diagnostic/);\n  assert.equal(registry.agent_workspace_policy.definition_home, \"agent-platform/configs/agents/\");\n  assert.ok(registry.log_taxonomy.length >= 5);\n  assert.ok(registry.installer_payload_policy.disallowed.some((item) => item.includes(\"development repository source tree\")));\n  assert.ok(registry.installer_payload_policy.disallowed.some((item) => item.includes(\"_private/\")));\n});\n\ntest(\"installer shell runtime contract is bundled and enforceable\", () => {\n  const contract = readJson(\"runtime-contracts/installer-shell-runtime-contract.json\");\n  const serialized = JSON.stringify(contract);\n  const pkg = readJson(\"package.json\");\n  const lib = readFileSync(join(root, \"src-tauri/src/lib.rs\"), \"utf8\");\n  const cargoToml = readFileSync(join(root, \"src-tauri/Cargo.toml\"), \"utf8\");\n  const defaultCapability = readFileSync(join(root, \"src-tauri/capabilities/default.json\"), \"utf8\");\n\n  assert.equal(contract.installer_shell_contract.launch_model, \"installed_app_owns_shell_runtime\");\n  assert.equal(contract.installer_shell_contract.shell_role, \"primary_platform_host\");\n  assert.equal(contract.installer_shell_contract.external_cli_role, \"optional_guest_adapter_lane\");\n  assert.match(pkg.scripts.check, /check-runtime-contract\\.mjs/);\n  assert.match(pkg.scripts[\"runtime:contract\"], /check-runtime-contract\\.mjs/);\n  for (const requiredGate of [\n    \"web_first_intake\",\n    \"memory_bootstrap\",\n    \"work_mode_selection\",\n    \"runtime_data_boundary\",\n    \"cli_adapter_boundary\",\n    \"sensitive_file_boundary\",\n    \"omission_check\",\n    \"resource_check\",\n    \"work_evaluation\"\n  ]) {\n    assert.match(serialized, new RegExp(requiredGate));\n  }\n  for (const target of [\n    \"user_request_summary\",\n    \"request_trace\",\n    \"decision_inbox\",\n    \"task_run_store\",\n    \"structured_evidence\",\n    \"validation_and_evaluation\",\n    \"work_timing\",\n    \"support_diagnostic\",\n    \"agent_factory_proposals\",\n    \"learning_feedback_decisions\",\n    \"provider_credential_state\",\n    \"accumulated_data_index\"\n  ]) {\n    assert.match(serialized, new RegExp(target));\n  }\n  assert.match(lib, /get_installer_shell_runtime_contract/);\n  assert.match(lib, /get_accumulated_data_overview/);\n  assert.equal(contract.runtime_command_surface.accumulated_data_command, \"get_accumulated_data_overview\");\n  assert.ok(contract.runtime_command_surface.agent_run_presets.some((preset) => preset.preset_id === \"research_insight_agent\"));\n  assert.match(JSON.stringify(contract.runtime_command_surface.agent_run_presets), /research-insight-planner-agent/);\n  const agentFactoryTarget = contract.data_accumulation_targets.find((target) => target.target_id === \"agent_factory_proposals\");\n  assert.equal(agentFactoryTarget.record_type, \"agent_factory_proposal\");\n  assert.equal(agentFactoryTarget.directory, \"app_data/runtime-data/agent-factory/proposals\");\n  const learningFeedbackTarget = contract.data_accumulation_targets.find((target) => target.target_id === \"learning_feedback_decisions\");\n  assert.equal(learningFeedbackTarget.record_type, \"learning_feedback_decision\");\n  assert.equal(learningFeedbackTarget.directory, \"app_data/runtime-data/learning-feedback/decisions\");\n  assert.ok(contract.runtime_command_surface.agent_factory_commands.includes(\"create_agent_factory_proposal\"));\n  assert.ok(contract.runtime_command_surface.learning_feedback_commands.includes(\"record_learning_improvement_decision\"));\n  for (const preferencesCommand of [\"get_desktop_preferences\", \"save_desktop_preferences\"]) {\n    assert.match(lib, new RegExp(preferencesCommand));\n    assert.ok(contract.runtime_command_surface.preferences_commands.includes(preferencesCommand));\n  }\n  for (const providerCredentialCommand of [\n    \"list_provider_credentials\",\n    \"save_provider_credential\",\n    \"clear_provider_credential\",\n    \"open_provider_auth_url\",\n    \"run_provider_agent_task\"\n  ]) {\n    assert.match(lib, new RegExp(providerCredentialCommand));\n    assert.ok(contract.runtime_command_surface.provider_credential_commands.includes(providerCredentialCommand));\n  }\n  const providerCredentialTarget = contract.data_accumulation_targets.find((target) => target.target_id === \"provider_credential_state\");\n  assert.equal(providerCredentialTarget.record_type, \"local_secret_config\");\n  assert.equal(providerCredentialTarget.directory, \"app_config/provider-credentials\");\n  assert.equal(providerCredentialTarget.support_export_policy, \"excluded_and_redacted\");\n  assert.match(lib, /DesktopPreferencesReport/);\n  assert.match(lib, /DESKTOP_PREFERENCES_SCHEMA_VERSION/);\n  assert.match(lib, /desktop-preferences\\.v1\\.json/);\n  for (const workspaceHostCommand of [\n    \"get_desktop_workspace_state\",\n    \"set_desktop_workspace_path\",\n    \"choose_desktop_workspace_folder\",\n    \"clone_desktop_workspace\",\n    \"get_desktop_git_status\",\n    \"run_desktop_git_action\"\n  ]) {\n    assert.match(lib, new RegExp(workspaceHostCommand));\n    assert.ok(contract.runtime_command_surface.workspace_host_commands.includes(workspaceHostCommand));\n  }\n  assert.match(cargoToml, /tauri-plugin-dialog/);\n  assert.match(defaultCapability, /dialog:default/);\n  assert.match(lib, /DialogExt/);\n  assert.match(lib, /tauri_plugin_dialog::init/);\n  assert.match(lib, /blocking_pick_folder/);\n  assert.match(lib, /WorkspaceResourceWarmupReport/);\n  assert.match(lib, /start_background_warmup/);\n  assert.match(lib, /workspace-resource-warmup/);\n  assert.match(lib, /MAX_WORKSPACE_PRELOAD_TEXT_FILES: usize = 512/);\n  assert.match(lib, /MAX_WORKSPACE_PRELOAD_TEXT_BYTES: usize = 128_000_000/);\n  const accumulatedIndexTarget = contract.data_accumulation_targets.find((target) => target.target_id === \"accumulated_data_index\");\n  assert.equal(accumulatedIndexTarget.record_type, \"runtime_data_index_manifest\");\n  assert.equal(accumulatedIndexTarget.directory, \"app_data/runtime-data/indexes\");\n  assert.match(accumulatedIndexTarget.runtime_store, /accumulated-data-overview\\.v1\\.json/);\n  assert.match(lib, /resolve_installer_shell_runtime_contract_path/);\n  assert.match(lib, /InstallerShellRuntimeContractReport/);\n});\n\ntest(\"service readiness registry records production service blockers\", () => {\n  const registry = readJson(\"configs/service-readiness-registry.json\");\n  const serialized = JSON.stringify(registry);\n\n  assert.match(serialized, /service_levels/);\n  assert.match(serialized, /public_release_blockers/);\n  assert.match(serialized, /runtime_surface_contract/);\n  assert.match(serialized, /get_service_readiness_report/);\n  assert.match(serialized, /Signed Distribution/);\n  assert.match(serialized, /Update & Recovery/);\n  assert.match(serialized, /Workspace Onboarding/);\n  assert.match(serialized, /Provider Accounts/);\n  assert.match(serialized, /Production Agent Blueprints/);\n  assert.match(serialized, /production_agent_blueprints/);\n  assert.match(serialized, /direct model-task execution readiness/);\n  assert.match(serialized, /updater_i"
+      "content": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/paths.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/definitions.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/runner.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/readiness/desktop-build-pipeline.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-doctor.mjs\")), true);\n  assert.equal(existsSync(join(root, \"configs/reference-platform-advantage-registry.json\")), true);\n\n  const config = readJson(\"src-tauri/tauri.conf.json\");\n  assert.equal(config.productName, \"Agent Workspace Platform\");\n  assert.equal(config.identifier, \"com.personalagentplatform.desktop\");\n  assert.equal(config.build.frontendDist, \"../renderer/workspace-monitor/out\");\n  assert.equal(config.app.withGlobalTauri, true);\n  assert.equal(config.bundle.macOS.hardenedRuntime, true);\n  assert.equal(config.bundle.resources[\"../runtime-contracts/installer-shell-runtime-contract.json\"], \"runtime-contracts/installer-shell-runtime-contract.json\");\n});\n\ntest(\"desktop docs expose bilingual one-command build and release paths\", () => {\n  const rootPkg = readJson(\"../package.json\");\n  const pkg = readJson(\"package.json\");\n  const readme = readFileSync(join(root, \"README.md\"), \"utf8\");\n  const readmeKo = readFileSync(join(root, \"README.ko.md\"), \"utf8\");\n  const readmeEn = readFileSync(join(root, \"README.en.md\"), \"utf8\");\n  const releaseKo = readFileSync(join(root, \"docs/release-runbook.ko.md\"), \"utf8\");\n  const releaseEn = readFileSync(join(root, \"docs/release-runbook.en.md\"), \"utf8\");\n  const pipelineEntrypoint = readFileSync(join(root, \"scripts/desktop-pipeline.mjs\"), \"utf8\");\n  const pipelineDefinitions = readFileSync(join(root, \"scripts/desktop-pipeline/definitions.mjs\"), \"utf8\");\n  const pipelineRunner = readFileSync(join(root, \"scripts/desktop-pipeline/runner.mjs\"), \"utf8\");\n  const buildPipelineReadiness = readFileSync(join(root, \"scripts/readiness/desktop-build-pipeline.mjs\"), \"utf8\");\n  const pipelineStructure = `${pipelineEntrypoint}\\n${pipelineDefinitions}\\n${pipelineRunner}`;\n  const requirementsKo = readFileSync(join(root, \"docs/requirements/2026-06-02-installable-desktop.ko.md\"), \"utf8\");\n  const requirementsEn = readFileSync(join(root, \"docs/requirements/2026-06-02-installable-desktop.en.md\"), \"utf8\");\n\n  assert.match(requirementsKo, /PDA-REQ-038/);\n  assert.match(requirementsEn, /PDA-REQ-038/);\n  assert.match(requirementsKo, /PDA-REQ-039/);\n  assert.match(requirementsEn, /PDA-REQ-039/);\n  for (const scriptName of [\n    \"desktop:setup\",\n    \"desktop:setup:verify\",\n    \"desktop:verify:quick\",\n    \"desktop:verify\",\n    \"desktop:renderer:build\",\n    \"desktop:package:internal\",\n    \"desktop:release:report\",\n    \"desktop:doctor\"\n  ]) {\n    assert.ok(rootPkg.scripts[scriptName]);\n  }\n  for (const scriptName of [\"doctor\", \"setup\", \"verify:quick\", \"verify\", \"package:internal\", \"deploy:public:report\", \"pipeline:dry-run\"]) {\n    assert.ok(pkg.scripts[scriptName]);\n  }\n  for (const command of [\n    \"corepack pnpm run desktop:setup:verify\",\n    \"corepack pnpm run desktop:verify\",\n    \"corepack pnpm run desktop:package:internal\",\n    \"corepack pnpm run desktop:release:report\",\n    \"corepack pnpm run desktop:doctor\"\n  ]) {\n    const pattern = new RegExp(command.replace(/[.*+?^${}()|[\\]\\\\]/g, \"\\\\$&\"));\n    assert.match(readme, pattern);\n    assert.match(readmeKo, pattern);\n    assert.match(readmeEn, pattern);\n    assert.match(releaseKo, pattern);\n    assert.match(releaseEn, pattern);\n  }\n  assert.match(pipelineEntrypoint, /desktop-pipeline\\/runner\\.mjs/);\n  assert.match(buildPipelineReadiness, /checkDesktopBuildPipeline/);\n  assert.match(buildPipelineReadiness, /desktopBuildPipelineRequiredFiles/);\n  assert.match(buildPipelineReadiness, /desktop:doctor/);\n  for (const token of [\"package-internal\", \"public-report\", \"commonVerifySteps\", \"Tauri internal package build\", \"codesign\", \"hdiutil\"]) {\n    assert.match(pipelineStructure, new RegExp(token));\n  }\n  assert.match(releaseKo, /Developer ID/);\n  assert.match(releaseKo, /notarization/);\n  assert.match(releaseEn, /Developer ID/);\n  assert.match(releaseEn, /notarization/);\n});\n\ntest(\"desktop registry points to macOS and Windows execution profiles\", () => {\n  const registry = readJson(\"configs/desktop-distribution-registry.json\");\n  const serialized = JSON.stringify(registry);\n\n  assert.equal(registry.recommended_initial_path.id, \"tauri_first_cross_platform_shell\");\n  assert.match(serialized, /configs\\/macos-execution-profile\\.json/);\n  assert.match(serialized, /configs\\/windows-execution-profile\\.json/);\n  assert.match(serialized, /configs\\/product-feature-registry\\.json/);\n});\n\ntest(\"product feature registry makes agent platform primary\", () => {\n  const registry = readJson(\"configs/product-feature-registry.json\");\n  const serialized = JSON.stringify(registry);\n\n  assert.equal(registry.product_position.primary_product, \"agent_capability_platform\");\n  assert.equal(registry.product_position.monitoring_role, \"supporting_observability\");\n  for (const featureId of [\n    \"agent_orchestration\",\n    \"agent_factory\"\n  ]) {\n    assert.ok(registry.product_position.primary_feature_ids.includes(featureId));\n    assert.equal(registry.feature_layers.find((feature) => feature.id === featureId)?.role, \"primary\");\n  }\n  for (const featureId of [\n    \"root_tool_management\",\n    \"work_visibility\",\n    \"agent_work_environment\",\n    \"agent_development_environment\",\n    \"learning_improvement_loop\"\n  ]) {\n    assert.ok(registry.product_position.supporting_feature_ids.includes(featureId));\n    assert.equal(registry.feature_layers.find((feature) => feature.id === featureId)?.role, \"supporting\");\n  }\n  assert.equal(registry.feature_layers.find((feature) => feature.id === \"observability_monitoring\")?.role, \"supporting\");\n  assert.match(serialized, /CLI Orchestration/);\n  assert.match(serialized, /Agent Core/);\n  assert.match(serialized, /Root Tool Management/);\n  assert.match(serialized, /Work Visibility/);\n  assert.match(serialized, /Search Agent Work Chat/);\n  assert.match(serialized, /Learning & Evaluation Loop/);\n  assert.match(serialized, /Production Agent Blueprints/);\n  assert.match(serialized, /awslabs_agentcore_samples/);\n  assert.match(serialized, /agentcore_blueprint_gate/);\n  assert.match(serialized, /supporting observability/);\n  assert.match(serialized, /operator_surfaces_are_separate/);\n  assert.deepEqual(registry.desktop_home_surface.primary_navigation_sections, [\"overview\", \"agents\", \"desktop\", \"source\", \"intent\"]);\n  assert.deepEqual(registry.desktop_home_surface.operator_center_sections, [\n    \"projects\",\n    \"history\",\n    \"structure\",\n    \"documents\",\n    \"requirements\"\n  ]);\n});\n\ntest(\"product gap registry keeps unresolved user-request gaps visible\", () => {\n  const registry = readJson(\"configs/product-gap-registry.json\");\n  const serialized = JSON.stringify(registry);\n  const requirementsKo = readFileSync(join(root, \"docs/requirements/2026-06-02-installable-desktop.ko.md\"), \"utf8\");\n  const requirementsEn = readFileSync(join(root, \"docs/requirements/2026-06-02-installable-desktop.en.md\"), \"utf8\");\n\n  assert.equal(registry.name, \"product-gap-registry\");\n  assert.match(requirementsKo, /PDA-REQ-037/);\n  assert.match(requirementsEn, /PDA-REQ-037/);\n  assert.equal(registry.coverage_summary.audited_request_count, 14);\n  for (const requestId of [\n    \"UR-2026-06-03-024\",\n    \"UR-2026-06-03-025\",\n    \"UR-2026-06-03-026\",\n    \"UR-2026-06-03-027\",\n    \"UR-2026-06-03-028\",\n    \"UR-2026-06-03-029\",\n    \"UR-2026-06-03-030\",\n    \"UR-2026-06-03-031\",\n    \"UR-2026-06-03-032\",\n    \"UR-2026-06-03-033\",\n    \"UR-2026-06-03-034\",\n    \"UR-2026-06-03-035\",\n    \"UR-2026-06-03-036\",\n    \"UR-2026-06-04-001\"\n  ]) {\n    assert.ok(registry.request_coverage.some((item) => item.request_id === requestId));\n  }\n\n  const agentFactoryGap = registry.gap_items.find((item) => item.gap_id === \"agent_factory_creation_wizard\");\n  assert.equal(agentFactoryGap.status, \"implemented_product_slice\");\n  assert.equal(agentFactoryGap.priority, \"p0_product_gap\");\n  assert.match(JSON.stringify(agentFactoryGap.acceptance_to_close), /Desktop Agent Core view/);\n  assert.match(JSON.stringify(agentFactoryGap.current_evidence), /create_agent_factory_proposal/);\n\n  const learningGap = registry.gap_items.find((item) => item.gap_id === \"learning_feedback_automation_loop\");\n  assert.equal(learningGap.status, \"implemented_product_slice\");\n  assert.equal(learningGap.priority, \"p0_product_gap\");\n  assert.match(JSON.stringify(learningGap.acceptance_to_close), /improvement candidates/);\n  assert.match(JSON.stringify(learningGap.current_evidence), /record_learning_improvement_decision/);\n\n  const nativeGitGap = registry.gap_items.find((item) => item.gap_id === \"native_workspace_git_operations\");\n  assert.equal(nativeGitGap.status, \"implemented_product_slice\");\n  assert.match(JSON.stringify(nativeGitGap.current_evidence), /run_desktop_git_action/);\n\n  const clipboardGap = registry.gap_items.find((item) => item.gap_id === \"clipboard_browser_qa\");\n  assert.equal(clipboardGap.status, \"implemented_test_coverage\");\n  assert.match(JSON.stringify(clipboardGap.current_evidence), /clipboard\\.test\\.mjs/);\n\n  const ptyGap = registry.gap_items.find((item) => item.gap_id === \"interactive_pty_terminal_surface\");\n  assert.equal(ptyGap.status, \"closed_by_product_decision\");\n  assert.match(JSON.stringify(ptyGap.current_evidence), /pty-terminal-decision/);\n\n  const request35 = registry.request_coverage.find((item) => item.request_id === \"UR-2026-06-03-035\");\n  assert.equal(request35.coverage, \"covered\");\n  assert.deepEqual(request35.remaining_gap_ids, []);\n  const request25 = registry.request_coverage.find((item) => item.request_id === \"UR-2026-06-03-025\");\n  assert.equal(request25.coverage, \"covered\");\n  assert.deepEqual(request25.remaining_gap_ids, []);\n  const request29 = registry.request_coverage.find((item) => item.request_id === \"UR-2026-06-03-029\");\n  assert.equal(request29.coverage, \"covered\");\n  assert.deepEqual(request29.remaining_gap_ids, []);\n  const request33 = registry.request_coverage.find((item) => item.request_id === \"UR-2026-06-03-033\");\n  assert.equal(request33.coverage, \"covered\");\n  assert.deepEqual(request33.remaining_gap_ids, []);\n  assert.match(serialized, /componentized_desktop_ui_architecture/);\n  assert.match(serialized, /public_distribution_gates/);\n  assert.match(serialized, /monitoring polish/);\n});\n\ntest(\"execution profiles keep optional CLI adapters non-blocking\", () => {\n  for (const profilePath of [\"configs/macos-execution-profile.json\", \"configs/windows-execution-profile.json\"]) {\n    const profile = readJson(profilePath);\n    const serialized = JSON.stringify(profile);\n\n    assert.match(serialized, /capability_missing/);\n    assert.match(serialized, /workspace/);\n    assert.ok(profile.smoke_tests.length >= 5);\n  }\n});\n\ntest(\"desktop registry records multi-CLI supervisor contract\", () => {\n  const registry = readJson(\"configs/desktop-distribution-registry.json\");\n  const serialized = JSON.stringify(registry);\n\n  assert.match(serialized, /platform-first host runtime/);\n  assert.match(serialized, /optional guest adapters/);\n  assert.match(serialized, /multi_cli_supervisor/);\n  assert.match(serialized, /Claude Code CLI/);\n  assert.match(serialized, /Gemini CLI/);\n  assert.match(serialized, /Codex CLI/);\n  assert.match(serialized, /OpenCode/);\n  assert.match(serialized, /Claw Code/);\n});\n\ntest(\"Claude Code design transfer registry uses public-source boundary\", () => {\n  const registry = readJson(\"configs/claude-code-design-transfer-registry.json\");\n  const serialized = JSON.stringify(registry);\n\n  assert.equal(registry.source_boundary.policy, \"public_sources_only\");\n  assert.match(serialized, /leaked_or_non_public_material/);\n  assert.match(serialized, /Permissioned Tool Execution/);\n  assert.match(serialized, /Plan Before Edit/);\n  assert.match(serialized, /Subagent Context Isolation/);\n  assert.match(serialized, /Skill On-Demand Packaging/);\n  assert.ok(registry.transfer_patterns.length >= 8);\n});\n\ntest(\"reference platform advantage registry transfers researched strengths into product patterns\", () => {\n  const registry = readJson(\"configs/reference-platform-advantage-registry.json\");\n  const serialized = JSON.stringify(registry);\n\n  assert.equal(registry.source_boundary.policy, \"public_sources_only\");\n  assert.match(serialized, /workbench-activity-rail-editor-terminal/);\n  assert.match(serialized, /codex-style-thread-workbench/);\n  assert.match(serialized, /claude-desktop-connector-first-chat/);\n  assert.match(serialized, /background-agent-task-lifecycle/);\n  assert.match(serialized, /permission-hooks-checkpoints/);\n  assert.match(serialized, /native-install-runtime-boundary/);\n  assert.match(serialized, /command-palette-extension-catalog/);\n  assert.match(serialized, /agentcore-style-production-agent-blueprints/);\n  assert.match(serialized, /claw-style-command-orchestration/);\n  assert.match(serialized, /manifest-parity-gap-audits/);\n  assert.match(serialized, /security-first-agentic-boundaries/);\n  assert.match(serialized, /VS Code/);\n  assert.match(serialized, /Codex app/);\n  assert.match(serialized, /Claude Desktop/);\n  assert.match(serialized, /claude_desktop_local_mcp_extensions/);\n  assert.match(serialized, /GitHub Copilot cloud agent/);\n  assert.match(serialized, /OpenHands/);\n  assert.match(serialized, /Claw Code/);\n  assert.ok(registry.transfer_patterns.length >= 10);\n});\n\ntest(\"runtime data boundary separates customer app from platform source\", () => {\n  const registry = readJson(\"configs/runtime-data-boundary-registry.json\");\n  const serialized = JSON.stringify(registry);\n\n  assert.match(serialized, /installer_shell_runtime_contract/);\n  assert.equal(registry.customer_visibility_policy.default_customer_visibility, \"installed_app_only\");\n  assert.match(serialized, /platform source repository/);\n  assert.match(serialized, /hidden_in_installed_product/);\n  assert.match(serialized, /platform_data_store/);\n  assert.match(serialized, /log_store/);\n  assert.match(serialized, /agent_workspace/);\n  assert.match(serialized, /support_diagnostic/);\n  assert.equal(registry.agent_workspace_policy.definition_home, \"agent-platform/configs/agents/\");\n  assert.ok(registry.log_taxonomy.length >= 5);\n  assert.ok(registry.installer_payload_policy.disallowed.some((item) => item.includes(\"development repository source tree\")));\n  assert.ok(registry.installer_payload_policy.disallowed.some((item) => item.includes(\"_private/\")));\n});\n\ntest(\"installer shell runtime contract is bundled and enforceable\", () => {\n  const contract = readJson(\"runtime-contracts/installer-shell-runtime-contract.json\");\n  const serialized = JSON.stringify(contract);\n  const pkg = readJson(\"package.json\");\n  const lib = readFileSync(join(root, \"src-tauri/src/lib.rs\"), \"utf8\");\n  const cargoToml = readFileSync(join(root, \"src-tauri/Cargo.toml\"), \"utf8\");\n  const defaultCapability = readFileSync(join(root, \"src-tauri/capabilities/default.json\"), \"utf8\");\n\n  assert.equal(contract.installer_shell_contract.launch_model, \"installed_app_owns_shell_runtime\");\n  assert.equal(contract.installer_shell_contract.shell_role, \"primary_platform_host\");\n  assert.equal(contract.installer_shell_contract.external_cli_role, \"optional_guest_adapter_lane\");\n  assert.match(pkg.scripts.check, /check-runtime-contract\\.mjs/);\n  assert.match(pkg.scripts[\"runtime:contract\"], /check-runtime-contract\\.mjs/);\n  for (const requiredGate of [\n    \"web_first_intake\",\n    \"memory_bootstrap\",\n    \"work_mode_selection\",\n    \"runtime_data_boundary\",\n    \"cli_adapter_boundary\",\n    \"sensitive_file_boundary\",\n    \"omission_check\",\n    \"resource_check\",\n    \"work_evaluation\"\n  ]) {\n    assert.match(serialized, new RegExp(requiredGate));\n  }\n  for (const target of [\n    \"user_request_summary\",\n    \"request_trace\",\n    \"decision_inbox\",\n    \"task_run_store\",\n    \"structured_evidence\",\n    \"validation_and_evaluation\",\n    \"work_timing\",\n    \"support_diagnostic\",\n    \"agent_factory_proposals\",\n    \"learning_feedback_decisions\",\n    \"provider_credential_state\",\n    \"accumulated_data_index\"\n  ]) {\n    assert.match(serialized, new RegExp(target));\n  }\n  assert.match(lib, /get_installer_shell_runtime_contract/);\n  assert.match(lib, /get_accumulated_data_overview/);\n  assert.equal(contract.runtime_command_surface.accumulated_data_command, \"get_accumulated_data_overview\");\n  assert.ok(contract.runtime_command_surface.agent_run_presets.some((preset) => preset.preset_id === \"research_insight_agent\"));\n  assert.match(JSON.stringify(contract.runtime_command_surface.agent_run_presets), /research-insight-planner-agent/);\n  const agentFactoryTarget = contract.data_accumulation_targets.find((target) => target.target_id === \"agent_factory_proposals\");\n  assert.equal(agentFactoryTarget.record_type, \"agent_factory_proposal\");\n  assert.equal(agentFactoryTarget.directory, \"app_data/runtime-data/agent-factory/proposals\");\n  const learningFeedbackTarget = contract.data_accumulation_targets.find((target) => target.target_id === \"learning_feedback_decisions\");\n  assert.equal(learningFeedbackTarget.record_type, \"learning_feedback_decision\");\n  assert.equal(learningFeedbackTarget.directory, \"app_data/runtime-data/learning-feedback/decisions\");\n  assert.ok(contract.runtime_command_surface.agent_factory_commands.includes(\"create_agent_factory_proposal\"));\n  assert.ok(contract.runtime_command_surface.learning_feedback_commands.includes(\"record_learning_improvement_decision\"));\n  for (const preferencesCommand of [\"get_desktop_preferences\", \"save_desktop_preferences\"]) {\n    assert.match(lib, new RegExp(preferencesCommand));\n    assert.ok(contract.runtime_command_surface.preferences_commands.includes(preferencesCommand));\n  }\n  for (const providerCredentialCommand of [\n    \"list_provider_credentials\",\n    \"save_provider_credential\",\n    \"clear_provider_credential\",\n    \"open_provider_auth_url\",\n    \"run_provider_agent_task\"\n  ]) {\n    assert.match(lib, new RegExp(providerCredentialCommand));\n    assert.ok(contract.runtime_command_surface.provider_credential_commands.includes(providerCredentialCommand));\n  }\n  const providerCredentialTarget = contract.data_accumulation_targets.find((target) => target.target_id === \"provider_credential_state\");\n  assert.equal(providerCredentialTarget.record_type, \"local_secret_config\");\n  assert.equal(providerCredentialTarget.directory, \"app_config/provider-credentials\");\n  assert.equal(providerCredentialTarget.support_export_policy, \"excluded_and_redacted\");\n  assert.match(lib, /DesktopPreferencesReport/);\n  assert.match(lib, /DESKTOP_PREFERENCES_SCHEMA_VERSION/);\n  assert.match(lib, /desktop-preferences\\.v1\\.json/);\n  for (const workspaceHostCommand of [\n    \"get_desktop_workspace_state\",\n    \"set_desktop_workspace_path\",\n    \"choose_desktop_workspace_folder\",\n    \"clone_desktop_workspace\",\n    \"get_desktop_git_status\",\n    \"run_desktop_git_action\"\n  ]) {\n    assert.match(lib, new RegExp(workspaceHostCommand));\n    assert.ok(contract.runtime_command_surface.workspace_host_commands.includes(workspaceHostCommand));\n  }\n  assert.match(cargoToml, /tauri-plugin-dialog/);\n  assert.match(defaultCapability, /dialog:default/);\n  assert.match(lib, /DialogExt/);\n  assert.match(lib, /tauri_plugin_dialog::init/);\n  assert.match(lib, /blocking_pick_folder/);\n  assert.match(lib, /WorkspaceResourceWarmupReport/);\n  assert.match(lib, /start_background_warmup/);\n  assert.match(lib, /workspace-resource-warmup/);\n  assert.match(cargoToml, /rayon = \"1\\.12\\.0\"/);\n  assert.match(cargoToml, /sysinfo = \\{ version = \"0\\.39\\.3\", default-features = false, features = \\[\"system\"\\] \\}/);\n  assert.match(lib, /WorkspaceResourceProfile/);\n  assert.match(lib, /MAX_WORKSPACE_PRELOAD_TEXT_FILES: usize = 2_048/);\n  assert.match(lib, /MAX_WORKSPACE_PRELOAD_TEXT_BYTES: usize = 512_000_000/);\n  assert.match(lib, /MAX_WORKSPACE_PRELOAD_WORKERS: usize = 16/);\n  assert.match(lib, /workspace_resource_profile/);\n  assert.match(lib, /rayon_parallel_cpu_ram_budget/);\n  assert.match(lib, /build_workspace_thread_pool/);\n  assert.match(lib, /parallel_workers/);\n  assert.match(lib, /memory_budget_bytes/);\n  const accumulatedIndexTarget = contract.data_accumulation_targets.find((target) => target.target_id === \"accumulated_data_index\");\n  assert.equal(accumulatedIndexTarget.record_type, \"runtime_data_index_manifest\");\n  assert.equal(accumulatedIndexTarget.directory, \"app_data/runtime-data/indexes\");\n  assert.match(accumulatedIndexTarget.runtime_store, /accumulated-data-overview\\.v1\\.json/);\n  assert.match(lib, /resolve_installer_shell_runtime_contract_path/);\n  assert.match(lib, /InstallerShellRuntimeContractReport/);\n});\n\ntest(\"service readiness registry records production service blockers\", () => {\n  const registry = readJson(\"configs/service-readiness-registry.json\");\n  const serialized = JSON.stringify(registry);\n\n  assert.match(serialized, /service_levels/);\n  assert.match(serialized, /public_release_blockers/);\n  assert.match("
     },
     {
       "id": "presentation-agent-src-presentation-agent-init-py",
@@ -23156,12 +23189,12 @@
       {
         "category": "work-summary",
         "root": "_history/work-summaries",
-        "documentsCount": 14
+        "documentsCount": 15
       },
       {
         "category": "user-request",
         "root": "_history/user-requests",
-        "documentsCount": 13
+        "documentsCount": 14
       },
       {
         "category": "intent-feature-map",
@@ -23171,7 +23204,7 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 14
+        "documentsCount": 15
       },
       {
         "category": "web-search",
@@ -23186,12 +23219,12 @@
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 5
+        "documentsCount": 3
       },
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 23
+        "documentsCount": 22
       },
       {
         "category": "daily-history",
@@ -23285,7 +23318,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 71,
+        "documentCount": 70,
         "sourceFileCount": 5
       },
       {
@@ -23417,7 +23450,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-src-tauri-src-lib-rs",
         "label": "Large source surface",
-        "signal": "9,253 lines in platform-desktop-app/src-tauri/src/lib.rs",
+        "signal": "9,511 lines in platform-desktop-app/src-tauri/src/lib.rs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits.",
         "priority": "high",
@@ -23435,7 +23468,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,045 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,054 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23465,8 +23498,8 @@
         "path": "platform-desktop-app/src-tauri/src/lib.rs",
         "project": "platform-desktop-app",
         "language": "rust",
-        "lineCount": 9253,
-        "sizeBytes": 308156,
+        "lineCount": 9511,
+        "sizeBytes": 317349,
         "recommendation": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits."
       },
       {
@@ -23481,8 +23514,8 @@
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1045,
-        "sizeBytes": 45344,
+        "lineCount": 1054,
+        "sizeBytes": 45870,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       }
     ]

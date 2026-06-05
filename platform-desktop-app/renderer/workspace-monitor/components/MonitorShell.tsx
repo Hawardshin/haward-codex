@@ -1708,6 +1708,18 @@ type WorkspaceResourcePrepareReport = {
   cachedBytes: number;
   preloadFileLimit: number;
   preloadByteLimit: number;
+  memoryBudgetBytes: number;
+  cpuThreads: number;
+  availableParallelism: number;
+  parallelWorkers: number;
+  totalMemoryBytes: number;
+  availableMemoryBytes: number;
+  usedMemoryBytes: number;
+  scanDurationMs: number;
+  entryBuildDurationMs: number;
+  preloadDurationMs: number;
+  preloadStrategy: string;
+  systemSupported: boolean;
   warmupStatus: string;
   truncated: boolean;
   catalog: WorkspaceTextFileListReport;
@@ -1722,6 +1734,18 @@ type WorkspaceResourceWarmupReport = {
   finishedAt: string;
   cachedTextFiles: number;
   cachedBytes: number;
+  memoryBudgetBytes: number;
+  cpuThreads: number;
+  availableParallelism: number;
+  parallelWorkers: number;
+  totalMemoryBytes: number;
+  availableMemoryBytes: number;
+  usedMemoryBytes: number;
+  scanDurationMs: number;
+  entryBuildDurationMs: number;
+  preloadDurationMs: number;
+  preloadStrategy: string;
+  systemSupported: boolean;
   error: string;
 };
 
@@ -8703,6 +8727,18 @@ function DesktopRuntimePanel({
         finishedAt: new Date().toISOString(),
         cachedTextFiles: 0,
         cachedBytes: 0,
+        memoryBudgetBytes: 0,
+        cpuThreads: 0,
+        availableParallelism: 0,
+        parallelWorkers: 0,
+        totalMemoryBytes: 0,
+        availableMemoryBytes: 0,
+        usedMemoryBytes: 0,
+        scanDurationMs: 0,
+        entryBuildDurationMs: 0,
+        preloadDurationMs: 0,
+        preloadStrategy: "",
+        systemSupported: false,
         error: message
       });
       return null;
@@ -8737,6 +8773,18 @@ function DesktopRuntimePanel({
         finishedAt: report.generatedAt,
         cachedTextFiles: report.cachedTextFiles,
         cachedBytes: report.cachedBytes,
+        memoryBudgetBytes: report.memoryBudgetBytes,
+        cpuThreads: report.cpuThreads,
+        availableParallelism: report.availableParallelism,
+        parallelWorkers: report.parallelWorkers,
+        totalMemoryBytes: report.totalMemoryBytes,
+        availableMemoryBytes: report.availableMemoryBytes,
+        usedMemoryBytes: report.usedMemoryBytes,
+        scanDurationMs: report.scanDurationMs,
+        entryBuildDurationMs: report.entryBuildDurationMs,
+        preloadDurationMs: report.preloadDurationMs,
+        preloadStrategy: report.preloadStrategy,
+        systemSupported: report.systemSupported,
         error: ""
       });
       setRuntimeSourceFiles(report.catalog.files);
@@ -10439,9 +10487,9 @@ function DesktopRuntimePanel({
           <span>OS 캐시</span>
           <strong>
             {workspaceResourceReport
-              ? `${workspaceResourceReport.cachedTextFiles.toLocaleString("ko-KR")} / ${formatBytes(workspaceResourceReport.cachedBytes)}`
+              ? `${workspaceResourceReport.cachedTextFiles.toLocaleString("ko-KR")} / ${formatBytes(workspaceResourceReport.cachedBytes)} / ${workspaceResourceReport.parallelWorkers} workers`
               : workspaceWarmupReport
-                ? `${workspaceWarmupReport.status} / ${workspaceWarmupReport.cachedTextFiles.toLocaleString("ko-KR")} / ${formatBytes(workspaceWarmupReport.cachedBytes)}`
+                ? `${workspaceWarmupReport.status} / ${workspaceWarmupReport.cachedTextFiles.toLocaleString("ko-KR")} / ${formatBytes(workspaceWarmupReport.cachedBytes)} / ${workspaceWarmupReport.parallelWorkers || "-"} workers`
               : workspaceResourceBusy
                 ? copy.loading
                 : "not prepared"}
@@ -10449,7 +10497,20 @@ function DesktopRuntimePanel({
         </article>
         <article>
           <span>메모리 예산</span>
-          <strong>{formatBytes(workspaceResourceReport?.preloadByteLimit ?? 128_000_000)}</strong>
+          <strong>
+            {formatBytes(workspaceResourceReport?.memoryBudgetBytes ?? workspaceWarmupReport?.memoryBudgetBytes ?? 128_000_000)}
+            {workspaceResourceReport?.availableMemoryBytes ? ` / ${formatBytes(workspaceResourceReport.availableMemoryBytes)} free` : ""}
+          </strong>
+        </article>
+        <article>
+          <span>CPU 병렬</span>
+          <strong>
+            {workspaceResourceReport
+              ? `${workspaceResourceReport.parallelWorkers}/${workspaceResourceReport.cpuThreads} threads`
+              : workspaceWarmupReport?.cpuThreads
+                ? `${workspaceWarmupReport.parallelWorkers}/${workspaceWarmupReport.cpuThreads} threads`
+                : "runtime profile pending"}
+          </strong>
         </article>
         <article>
           <span>{copy.openedDrafts}</span>
@@ -10471,6 +10532,8 @@ function DesktopRuntimePanel({
             <strong>{dirtyDraftEntries.length} {copy.dirty}</strong>
             <span>{sourceCatalogLabel}</span>
             {workspaceResourceReport && <span>{formatBytes(workspaceResourceReport.cachedBytes)} cached</span>}
+            {workspaceResourceReport && <span>{workspaceResourceReport.preloadStrategy}</span>}
+            {workspaceResourceReport && <span>{workspaceResourceReport.scanDurationMs + workspaceResourceReport.preloadDurationMs} ms native</span>}
             {workspaceWarmupReport?.status === "warming" && <span>native warming</span>}
           </div>
         </div>
