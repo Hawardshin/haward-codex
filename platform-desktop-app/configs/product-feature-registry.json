@@ -409,6 +409,7 @@
       "primary_section": "desktop",
       "primary_surfaces": [
         "Workspace Host",
+        "Resident Workspace Resource Cache",
         "Accumulated Data",
         "Runtime Data & Support",
         "Task Run Store"
@@ -422,6 +423,7 @@
       "automation_targets": [
         "workspace import",
         "repository clone",
+        "shared native workspace warmup",
         "workspace state persistence",
         "data store indexing",
         "support bundle export"
@@ -435,6 +437,7 @@
       ],
       "validation_gates": [
         "workspace boundary commands reject unsafe paths",
+        "resident desktop/source panels share native workspace warmup and prepare requests",
         "accumulated data manifest is persisted",
         "customer bundle excludes platform source"
       ]
@@ -748,6 +751,7 @@
     "New feature work updates requirements, specs, validation, history, and request traces.",
     "AgentCore-style blueprint choices map reference samples to runnable local product flows.",
     "Desktop Runtime starts from run configurations and tool-window status instead of making the user scan a web dashboard.",
+    "Resident desktop/source panels share native warmup and source-catalog prepare requests instead of duplicating OS work.",
     "AWS deployment remains optional; the installed desktop app owns task state and accumulated records."
   ],
   "validation_gates": [

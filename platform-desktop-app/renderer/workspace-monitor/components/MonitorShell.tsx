@@ -2120,6 +2120,115 @@ type WorkspaceResourceWarmupReport = {
   error: string;
 };
 
+type SharedWorkspacePrepareResult = {
+  prepareReport: WorkspaceResourcePrepareReport | null;
+  fallbackReport: WorkspaceTextFileListReport | null;
+};
+
+type SharedWorkspaceRequestCache<T> = {
+  key: string;
+  result: T;
+  storedAtMs: number;
+};
+
+type SharedWorkspaceRequestInFlight<T> = {
+  key: string;
+  promise: Promise<T>;
+};
+
+const SHARED_WORKSPACE_PREPARE_CACHE_TTL_MS = 30_000;
+const SHARED_WORKSPACE_WARMUP_CACHE_TTL_MS = 8_000;
+let sharedWorkspacePrepareCache: SharedWorkspaceRequestCache<SharedWorkspacePrepareResult> | null = null;
+let sharedWorkspacePrepareInFlight: SharedWorkspaceRequestInFlight<SharedWorkspacePrepareResult> | null = null;
+let sharedWorkspaceWarmupCache: SharedWorkspaceRequestCache<WorkspaceResourceWarmupReport> | null = null;
+let sharedWorkspaceWarmupInFlight: SharedWorkspaceRequestInFlight<WorkspaceResourceWarmupReport> | null = null;
+
+function sharedWorkspacePrepareKey(filter: string, forceRefresh: boolean) {
+  return JSON.stringify({ filter, forceRefresh, limit: 240, preloadContents: true });
+}
+
+function sharedWorkspaceWarmupKey(forceRefresh: boolean) {
+  return JSON.stringify({ forceRefresh });
+}
+
+function isFreshSharedCache<T>(cache: SharedWorkspaceRequestCache<T> | null, key: string, ttlMs: number) {
+  return Boolean(cache && cache.key === key && Date.now() - cache.storedAtMs <= ttlMs);
+}
+
+async function prepareWorkspaceOsResourcesShared(
+  tauriInvoke: TauriInvoke,
+  options: { filter: string; forceRefresh: boolean }
+): Promise<SharedWorkspacePrepareResult> {
+  const filter = options.filter.trim();
+  const key = sharedWorkspacePrepareKey(filter, options.forceRefresh);
+  if (!options.forceRefresh && isFreshSharedCache(sharedWorkspacePrepareCache, key, SHARED_WORKSPACE_PREPARE_CACHE_TTL_MS)) {
+    return sharedWorkspacePrepareCache!.result;
+  }
+  if (sharedWorkspacePrepareInFlight?.key === key) {
+    return sharedWorkspacePrepareInFlight.promise;
+  }
+
+  const promise = tauriInvoke<WorkspaceResourcePrepareReport>("prepare_workspace_os_resources", {
+    filter: filter || null,
+    limit: 240,
+    preloadContents: true,
+    forceRefresh: options.forceRefresh
+  })
+    .then((prepareReport) => ({ prepareReport, fallbackReport: null }))
+    .catch(async (caught) => {
+      const message = String(caught instanceof Error ? caught.message : caught);
+      if (!/unknown command|command not found|prepare_workspace_os_resources/i.test(message)) {
+        throw caught;
+      }
+      const fallbackReport = await tauriInvoke<WorkspaceTextFileListReport>("list_workspace_text_files", {
+        filter: filter || null,
+        limit: 240
+      });
+      return { prepareReport: null, fallbackReport };
+    })
+    .then((result) => {
+      sharedWorkspacePrepareCache = { key, result, storedAtMs: Date.now() };
+      return result;
+    })
+    .finally(() => {
+      if (sharedWorkspacePrepareInFlight?.key === key) {
+        sharedWorkspacePrepareInFlight = null;
+      }
+    });
+
+  sharedWorkspacePrepareInFlight = { key, promise };
+  return promise;
+}
+
+async function warmWorkspaceOsResourcesShared(
+  tauriInvoke: TauriInvoke,
+  options: { forceRefresh: boolean }
+): Promise<WorkspaceResourceWarmupReport> {
+  const key = sharedWorkspaceWarmupKey(options.forceRefresh);
+  if (!options.forceRefresh && isFreshSharedCache(sharedWorkspaceWarmupCache, key, SHARED_WORKSPACE_WARMUP_CACHE_TTL_MS)) {
+    return sharedWorkspaceWarmupCache!.result;
+  }
+  if (sharedWorkspaceWarmupInFlight?.key === key) {
+    return sharedWorkspaceWarmupInFlight.promise;
+  }
+
+  const promise = tauriInvoke<WorkspaceResourceWarmupReport>("warm_workspace_os_resources", {
+    forceRefresh: options.forceRefresh
+  })
+    .then((result) => {
+      sharedWorkspaceWarmupCache = { key, result, storedAtMs: Date.now() };
+      return result;
+    })
+    .finally(() => {
+      if (sharedWorkspaceWarmupInFlight?.key === key) {
+        sharedWorkspaceWarmupInFlight = null;
+      }
+    });
+
+  sharedWorkspaceWarmupInFlight = { key, promise };
+  return promise;
+}
+
 type WorkspaceResourceSnapshotCache = {
   cacheStatus: string;
   rootPath: string;
@@ -9463,9 +9572,7 @@ function DesktopRuntimePanel({
     }
 
     try {
-      const report = await tauriInvoke<WorkspaceResourceWarmupReport>("warm_workspace_os_resources", {
-        forceRefresh: Boolean(options.forceRefresh)
-      });
+      const report = await warmWorkspaceOsResourcesShared(tauriInvoke, { forceRefresh: Boolean(options.forceRefresh) });
       setWorkspaceWarmupReport(report);
       if (report.status === "warming") {
         scheduleWorkspaceWarmupPoll();
@@ -9516,69 +9623,60 @@ function DesktopRuntimePanel({
     setWorkspaceResourceBusy(true);
     setError("");
     try {
-      const report = await tauriInvoke<WorkspaceResourcePrepareReport>("prepare_workspace_os_resources", {
-        filter: sourceFilter.trim() || null,
-        limit: 240,
-        preloadContents: true,
+      const result = await prepareWorkspaceOsResourcesShared(tauriInvoke, {
+        filter: sourceFilter,
         forceRefresh: Boolean(options.forceRefresh)
       });
-      setWorkspaceResourceReport(report);
-      setWorkspaceWarmupReport({
-        schemaVersion: report.schemaVersion,
-        status: report.warmupStatus || "ready",
-        source: report.source,
-        rootPath: report.rootPath,
-        startedAt: report.generatedAt,
-        finishedAt: report.generatedAt,
-        cachedTextFiles: report.cachedTextFiles,
-        cachedBytes: report.cachedBytes,
-        memoryBudgetBytes: report.memoryBudgetBytes,
-        cpuThreads: report.cpuThreads,
-        availableParallelism: report.availableParallelism,
-        parallelWorkers: report.parallelWorkers,
-        totalMemoryBytes: report.totalMemoryBytes,
-        availableMemoryBytes: report.availableMemoryBytes,
-        usedMemoryBytes: report.usedMemoryBytes,
-        scanDurationMs: report.scanDurationMs,
-        entryBuildDurationMs: report.entryBuildDurationMs,
-        preloadDurationMs: report.preloadDurationMs,
-        preloadStrategy: report.preloadStrategy,
-        systemSupported: report.systemSupported,
-        error: ""
-      });
-      setRuntimeSourceFiles(report.catalog.files);
-      setSourceCatalogReport(report.catalog);
-      void refreshDesktopResourceSnapshot();
-      const firstPath = report.catalog.files[0]?.path || "";
-      if (!sourcePathInput && firstPath) {
-        setSelectedSourcePath(firstPath);
-        setSourcePathInput(firstPath);
+      if (result.prepareReport) {
+        const report = result.prepareReport;
+        setWorkspaceResourceReport(report);
+        setWorkspaceWarmupReport({
+          schemaVersion: report.schemaVersion,
+          status: report.warmupStatus || "ready",
+          source: report.source,
+          rootPath: report.rootPath,
+          startedAt: report.generatedAt,
+          finishedAt: report.generatedAt,
+          cachedTextFiles: report.cachedTextFiles,
+          cachedBytes: report.cachedBytes,
+          memoryBudgetBytes: report.memoryBudgetBytes,
+          cpuThreads: report.cpuThreads,
+          availableParallelism: report.availableParallelism,
+          parallelWorkers: report.parallelWorkers,
+          totalMemoryBytes: report.totalMemoryBytes,
+          availableMemoryBytes: report.availableMemoryBytes,
+          usedMemoryBytes: report.usedMemoryBytes,
+          scanDurationMs: report.scanDurationMs,
+          entryBuildDurationMs: report.entryBuildDurationMs,
+          preloadDurationMs: report.preloadDurationMs,
+          preloadStrategy: report.preloadStrategy,
+          systemSupported: report.systemSupported,
+          error: ""
+        });
+        setRuntimeSourceFiles(report.catalog.files);
+        setSourceCatalogReport(report.catalog);
+        void refreshDesktopResourceSnapshot();
+        const firstPath = report.catalog.files[0]?.path || "";
+        if (!sourcePathInput && firstPath) {
+          setSelectedSourcePath(firstPath);
+          setSourcePathInput(firstPath);
+        }
+        return report;
       }
-      return report;
-    } catch (caught) {
-      const message = errorMessage(caught);
-      if (/unknown command|command not found|prepare_workspace_os_resources/i.test(message)) {
-        try {
-          const fallbackReport = await tauriInvoke<WorkspaceTextFileListReport>("list_workspace_text_files", {
-            filter: sourceFilter.trim() || null,
-            limit: 240
-          });
-          setWorkspaceResourceReport(null);
-          setRuntimeSourceFiles(fallbackReport.files);
-          setSourceCatalogReport(fallbackReport);
-          const firstPath = fallbackReport.files[0]?.path || "";
-          if (!sourcePathInput && firstPath) {
-            setSelectedSourcePath(firstPath);
-            setSourcePathInput(firstPath);
-          }
-          return null;
-        } catch (fallbackCaught) {
-          setError(errorMessage(fallbackCaught));
-          setWorkspaceResourceReport(null);
-          return null;
+      if (result.fallbackReport) {
+        const fallbackReport = result.fallbackReport;
+        setWorkspaceResourceReport(null);
+        setRuntimeSourceFiles(fallbackReport.files);
+        setSourceCatalogReport(fallbackReport);
+        const firstPath = fallbackReport.files[0]?.path || "";
+        if (!sourcePathInput && firstPath) {
+          setSelectedSourcePath(firstPath);
+          setSourcePathInput(firstPath);
         }
       }
-      setError(message);
+      return null;
+    } catch (caught) {
+      setError(errorMessage(caught));
       setWorkspaceResourceReport(null);
       return null;
     } finally {

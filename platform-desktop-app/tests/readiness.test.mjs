@@ -171,6 +171,8 @@ test("product feature registry makes agent platform primary", () => {
   assert.match(serialized, /Search Agent Work Chat/);
   assert.match(serialized, /Learning & Evaluation Loop/);
   assert.match(serialized, /Production Agent Blueprints/);
+  assert.match(serialized, /Resident Workspace Resource Cache/);
+  assert.match(serialized, /shared native workspace warmup/);
   assert.match(serialized, /awslabs_agentcore_samples/);
   assert.match(serialized, /agentcore_blueprint_gate/);
   assert.match(serialized, /supporting observability/);

@@ -1,0 +1,45 @@
+{
+  "schema_version": "2026-06-01",
+  "request_id": "2026-06-06-shared-workspace-resource-cache",
+  "checked_at": "2026-06-06T08:06:26+0900",
+  "resource_risk_occurred": true,
+  "scope": "React renderer shared native workspace request cache plus validation servers, browser tab, and packaging process lifecycle.",
+  "resource_findings": [
+    {
+      "resource": "workspace warmup native request",
+      "status": "deduped",
+      "evidence": "warmWorkspaceOsResourcesShared shares same-key in-flight promise and 8 second non-force cache."
+    },
+    {
+      "resource": "workspace prepare native request",
+      "status": "deduped",
+      "evidence": "prepareWorkspaceOsResourcesShared shares same-key in-flight promise and 30 second non-force cache."
+    },
+    {
+      "resource": "force refresh",
+      "status": "bounded",
+      "evidence": "forceRefresh is part of the request key and bypasses non-force cache reuse."
+    },
+    {
+      "resource": "fallback source catalog command",
+      "status": "preserved",
+      "evidence": "Unknown prepare command still falls back to list_workspace_text_files."
+    },
+    {
+      "resource": "static browser smoke server",
+      "status": "stopped",
+      "evidence": "127.0.0.1:48219 http.server session was interrupted after Browser smoke and latency audit."
+    },
+    {
+      "resource": "Browser smoke tab",
+      "status": "closed",
+      "evidence": "In-app Browser smoke tab returned browser_smoke_tab_closed."
+    },
+    {
+      "resource": "internal packaging process",
+      "status": "completed",
+      "evidence": "package:internal exited 0 after Tauri app/dmg bundle, codesign verification, and hdiutil verification."
+    }
+  ],
+  "leak_assessment": "No long-running validation server, browser tab, or packaging process was left active. The cache is module-level and bounded by a single result per request family plus TTL, not an unbounded map."
+}

@@ -581,6 +581,12 @@ test("Monitor section switches prewarm heavy surfaces and preserve source editor
   assert.match(monitorShell, /onOpenSettings=\{openExecutionSettings\}/);
   assert.match(monitorShell, /surfaceActive=\{section === "source"\}/);
   assert.match(monitorShell, /if \(!surfaceActive \|\| !launchRequest/);
+  assert.match(monitorShell, /SharedWorkspaceRequestInFlight/);
+  assert.match(monitorShell, /sharedWorkspacePrepareInFlight/);
+  assert.match(monitorShell, /sharedWorkspaceWarmupInFlight/);
+  assert.match(monitorShell, /SHARED_WORKSPACE_PREPARE_CACHE_TTL_MS/);
+  assert.match(monitorShell, /prepareWorkspaceOsResourcesShared\(tauriInvoke/);
+  assert.match(monitorShell, /warmWorkspaceOsResourcesShared\(tauriInvoke/);
   assert.doesNotMatch(monitorShell, /\{sectionContentReady && section === "desktop" && \(/);
   assert.doesNotMatch(monitorShell, /\{sectionContentReady && section === "tools" && \(/);
   assert.doesNotMatch(monitorShell, /\{sectionContentReady && section === "agents" && \(/);

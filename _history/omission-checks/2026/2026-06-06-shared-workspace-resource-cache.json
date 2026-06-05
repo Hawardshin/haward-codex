@@ -1,0 +1,44 @@
+{
+  "schema_version": "2026-06-01",
+  "request_id": "2026-06-06-shared-workspace-resource-cache",
+  "checked_at": "2026-06-06T08:06:26+0900",
+  "selected_mode": "standard",
+  "coverage": [
+    {
+      "instruction": "Continue development and improve desktop performance instead of stopping at planning.",
+      "status": "covered",
+      "evidence": "Implemented shared native workspace request cache in MonitorShell."
+    },
+    {
+      "instruction": "Use OS/native desktop resources and reduce tab switching lag.",
+      "status": "covered",
+      "evidence": "Resident desktop/source panels now share native warmup and source prepare calls instead of duplicating OS work."
+    },
+    {
+      "instruction": "Run build automatically after implementation.",
+      "status": "covered",
+      "evidence": "package:internal completed and generated app/dmg artifacts."
+    },
+    {
+      "instruction": "Do not skip broad-scope evidence and validation.",
+      "status": "covered",
+      "evidence": "Web-first research, requirements, spec, plan, tasks, traceability, validation, resource and omission records were created."
+    },
+    {
+      "instruction": "Do not introduce unrelated destructive changes.",
+      "status": "covered",
+      "evidence": "No destructive git command was used and changes stayed inside platform-desktop-app plus required history/research records."
+    }
+  ],
+  "remaining_gaps": [
+    {
+      "gap": "This slice removes duplicate native request work between resident panels, but does not redesign the entire runtime state architecture.",
+      "reason": "The smallest safe step for this turn was the duplicated warmup/prepare request boundary already visible in the current source."
+    },
+    {
+      "gap": "Public macOS release remains blocked by signing/notarization/updater clean-machine inputs.",
+      "reason": "These are external credential and distribution prerequisites, not internal package blockers."
+    }
+  ],
+  "result": "covered"
+}

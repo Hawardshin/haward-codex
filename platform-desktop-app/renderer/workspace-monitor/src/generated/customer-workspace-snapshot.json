@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T22:53:55.362Z",
+  "generatedAt": "2026-06-05T23:07:43.771Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -257,6 +257,7 @@
         "primarySection": "desktop",
         "primarySurfaces": [
           "Workspace Host",
+          "Resident Workspace Resource Cache",
           "Accumulated Data",
           "Runtime Data & Support",
           "Task Run Store"
@@ -265,6 +266,7 @@
         "automationTargets": [
           "workspace import",
           "repository clone",
+          "shared native workspace warmup",
           "workspace state persistence",
           "data store indexing",
           "support bundle export"
@@ -522,6 +524,7 @@
       "New feature work updates requirements, specs, validation, history, and request traces.",
       "AgentCore-style blueprint choices map reference samples to runnable local product flows.",
       "Desktop Runtime starts from run configurations and tool-window status instead of making the user scan a web dashboard.",
+      "Resident desktop/source panels share native warmup and source-catalog prepare requests instead of duplicating OS work.",
       "AWS deployment remains optional; the installed desktop app owns task state and accumulated records."
     ],
     "validationGates": []
@@ -1529,7 +1532,7 @@
       "queuedPatterns": 0,
       "activeRecommendations": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-05T22:53:18.502Z"
+      "latestInsightAt": "2026-06-05T23:07:18.989Z"
     },
     "inferenceStages": [],
     "signalGroups": []
@@ -1544,7 +1547,7 @@
       "totalImprovementPackages": 0,
       "totalFitnessChecks": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-05T22:53:18.502Z"
+      "latestInsightAt": "2026-06-05T23:07:18.989Z"
     },
     "operatingModel": [],
     "structuralPrinciples": [],
