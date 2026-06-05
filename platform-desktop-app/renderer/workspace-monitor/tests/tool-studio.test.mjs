@@ -399,3 +399,16 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(css, /@media \(max-width: 420px\) \{[\s\S]*?\.activity-rail nav \{[\s\S]*?display: flex;[\s\S]*?overflow-x: auto;/);
   assert.doesNotMatch(css, /@media \(max-width: 420px\) \{[\s\S]*?\.activity-rail nav \{[\s\S]*?grid-template-columns: repeat\(5/);
 });
+
+test("Activity rail exposes readable destination labels in collapsed and mobile layouts", () => {
+  assert.match(monitorShell, /<span>\{item\.shortLabel\}<\/span>/);
+  assert.match(monitorShell, /aria-current=\{section === item\.id \? "page" : undefined\}/);
+  assert.match(monitorShell, /aria-label=\{uiLanguage === "ko" \? "작업공간 홈" : "Workspace Home"\}/);
+  assert.match(monitorShell, /aria-label=\{uiLanguage === "ko" \? "운영 센터 열기" : "Open Operator Center"\}/);
+  assert.match(monitorShell, /aria-label=\{uiLanguage === "ko" \? "설정" : "Settings"\}/);
+  assert.match(css, /\.desktop-app-shell \{[\s\S]*?grid-template-columns: 76px minmax\(0, 1fr\);/);
+  assert.match(css, /\.activity-rail nav button \{[\s\S]*?display: grid;[\s\S]*?grid-template-rows: auto auto;[\s\S]*?min-height: 56px;/);
+  assert.match(css, /\.activity-rail nav button span \{[\s\S]*?position: static;[\s\S]*?text-overflow: ellipsis;[\s\S]*?white-space: nowrap;/);
+  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.activity-rail nav button \{[\s\S]*?flex: 0 0 58px;[\s\S]*?min-height: 48px;/);
+  assert.match(css, /@media \(max-width: 420px\) \{[\s\S]*?\.activity-rail nav button \{[\s\S]*?flex-basis: 58px;/);
+});

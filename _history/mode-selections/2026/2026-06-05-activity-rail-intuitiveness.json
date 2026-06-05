@@ -1,0 +1,16 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-activity-rail-intuitiveness",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "rationale": "Frontend UX implementation changes durable UI behavior, requirements, specs, tests, and validation records. No dependency installation is required.",
+  "non_quick_gates": [
+    "web_first_intake",
+    "requirements_update",
+    "spec_driven_artifacts",
+    "omission_check",
+    "resource_check",
+    "evaluation_record"
+  ]
+}

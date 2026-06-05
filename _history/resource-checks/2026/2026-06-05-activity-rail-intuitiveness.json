@@ -1,0 +1,26 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-activity-rail-intuitiveness",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "resource": "static validation server",
+      "risk": "A local server may remain running after browser smoke.",
+      "mitigation": "Track the process id and stop it before close-out."
+    },
+    {
+      "resource": "in-app Browser session",
+      "risk": "Browser verification can retain stale page state after rebuild.",
+      "mitigation": "Open rebuilt static export URL and verify computed styles after interaction."
+    }
+  ],
+  "validation_result": {
+    "static_server": "Server stopped after validation.",
+    "browser_session": "Used only local static export at 127.0.0.1:3352.",
+    "screenshot_artifacts": [
+      "platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-activity-rail-intuitiveness-desktop.png",
+      "platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-activity-rail-intuitiveness-mobile.png"
+    ]
+  },
+  "status": "passed"
+}

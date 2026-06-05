@@ -4696,6 +4696,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             onPointerDown={() => primeSectionActivation("overview")}
             onClick={() => openSection("overview")}
             title={uiLanguage === "ko" ? "작업공간 홈" : "Workspace Home"}
+            aria-label={uiLanguage === "ko" ? "작업공간 홈" : "Workspace Home"}
           >
             <Bot size={22} aria-hidden="true" />
           </button>
@@ -4722,10 +4723,17 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             type="button"
             onClick={() => setOperatorCenterOpen(true)}
             title={uiLanguage === "ko" ? "운영 센터 열기" : "Open Operator Center"}
+            aria-label={uiLanguage === "ko" ? "운영 센터 열기" : "Open Operator Center"}
           >
             <ShieldCheck size={19} aria-hidden="true" />
           </button>
-          <button className="activity-settings" type="button" onClick={() => openSettingsTab("appearance")} title={uiLanguage === "ko" ? "설정" : "Settings"}>
+          <button
+            className="activity-settings"
+            type="button"
+            onClick={() => openSettingsTab("appearance")}
+            title={uiLanguage === "ko" ? "설정" : "Settings"}
+            aria-label={uiLanguage === "ko" ? "설정" : "Settings"}
+          >
             <Settings size={19} aria-hidden="true" />
           </button>
         </aside>

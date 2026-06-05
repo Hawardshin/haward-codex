@@ -1,0 +1,22 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-activity-rail-intuitiveness",
+  "timezone": "Asia/Seoul",
+  "phase_timings": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Recognition, icon label, navigation rail, and sidebar references checked before implementation."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Activity rail labels exposed in default and mobile layouts."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Tests, typecheck, check, build, build:customer, perf budget, and browser rail smoke passed."
+    }
+  ]
+}

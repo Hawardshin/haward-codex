@@ -61,6 +61,7 @@
 | REQ-WM-060 | The Agents detail Collaboration work surface shall visualize agent collaboration as 3D characters, task lanes, and connection lines, using `@react-three/fiber` and `@react-three/drei` through client-side lazy mounting so the default chat surface, tab switching, and closed disclosure performance are not disturbed. It shall render as a nonblank canvas without horizontal overflow at 390px mobile width. | must | React Three Fiber/Drei exact dependency audit, lazy import static test, desktop/mobile canvas nonblank pixel smoke, in-app Browser visual smoke, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-061 | The Agents detail disclosure shall not stack Blueprints, Builder, Learning, Collaboration, Flow, Inventory, and Runtime on one screen. It shall provide a detail workspace switcher that renders exactly one active workspace at a time. The default detail view shall start on Collaboration, and switching to another detail view shall remove the 3D canvas and prior feature DOM. | must | one-active-workspace static test, in-app Browser switcher smoke, mobile 390px selected-tab/overflow smoke, canvas absence assertion after Builder switch, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run perf:budget` |
 | REQ-WM-062 | Agents detail selection shall update the selected button and pressed feedback immediately on click, while 3D canvas, form, and table workspace replacement shall commit after the first paint so button response is not tied to heavy panel mounting. Rapid detail clicks shall render only the latest selected workspace, and scheduled mounts shall be canceled when the disclosure closes or the user leaves Agents. | must | deferred agent detail switch static test, in-app Browser switcher smoke, stale canvas absence assertion, pending state audit, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
+| REQ-WM-063 | The default activity rail shall not require users to remember icon meanings; it shall show compact text labels with icons so primary destinations are chosen by recognition. In the default desktop width, expanded width, 720px-and-down top rail, and 420px-and-down horizontal scrolling rail, labels shall remain readable and button targets shall stay at least 44px. | must | activity rail readable labels static test, desktop/mobile Browser rail smoke, active label/current state assertion, horizontal overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
 
 ## Scope
 
@@ -105,6 +106,7 @@
 - React Three Fiber/Drei 3D agent-character collaboration scene in the Agents detail Collaboration work surface
 - Agents detail workspace switcher with exactly one active detail workspace rendered at a time
 - Immediate Agents detail button feedback with first-paint staged active workspace commits
+- Icon-plus-compact-label destination buttons in the default activity rail and mobile scrolling rail
 - Vercel deployment docs
 
 ## Non-Goals

@@ -496,14 +496,14 @@ main {
 
 .desktop-app-shell {
   display: grid;
-  grid-template-columns: 62px minmax(0, 1fr);
+  grid-template-columns: 76px minmax(0, 1fr);
   min-height: 100vh;
   min-height: 100dvh;
   overflow: visible;
 }
 
 .desktop-app-shell.sidebar-expanded {
-  grid-template-columns: 112px minmax(0, 1fr);
+  grid-template-columns: 128px minmax(0, 1fr);
 }
 
 .activity-rail,
@@ -565,11 +565,27 @@ main {
   border-radius: 8px;
 }
 
+.activity-rail nav button {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 3px;
+  width: 58px;
+  min-height: 56px;
+  align-content: center;
+  justify-items: center;
+  padding: 6px 4px;
+}
+
 .desktop-app-shell.sidebar-expanded .activity-rail button {
-  width: 96px;
+  width: 112px;
   justify-content: flex-start;
   gap: 8px;
   padding: 0 10px;
+}
+
+.desktop-app-shell.sidebar-expanded .activity-rail nav button {
+  display: inline-flex;
+  min-height: var(--control-target-size);
 }
 
 .activity-rail button span {
@@ -581,6 +597,22 @@ main {
   white-space: nowrap;
 }
 
+.activity-rail nav button span {
+  position: static;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  clip: auto;
+  color: currentColor;
+  font-size: 10px;
+  font-weight: 820;
+  line-height: 1;
+  letter-spacing: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .desktop-app-shell.sidebar-expanded .activity-rail button span {
   position: static;
   width: auto;
@@ -589,7 +621,7 @@ main {
   color: currentColor;
   font-size: var(--font-size-overline);
   font-weight: 800;
-  white-space: normal;
+  white-space: nowrap;
 }
 
 .activity-rail button:hover,
@@ -13061,6 +13093,12 @@ h3 {
     flex: 0 0 var(--control-target-size);
   }
 
+  .activity-rail nav button {
+    flex: 0 0 58px;
+    width: 58px;
+    min-height: 48px;
+  }
+
   .desktop-app-shell.sidebar-expanded .activity-rail button {
     width: var(--control-target-size);
     justify-content: center;
@@ -13073,6 +13111,15 @@ h3 {
     height: 1px;
     overflow: hidden;
     clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .desktop-app-shell.sidebar-expanded .activity-rail nav button span {
+    position: static;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    clip: auto;
     white-space: nowrap;
   }
 
@@ -15495,7 +15542,8 @@ h3 {
   }
 
   .activity-rail nav button {
-    width: var(--control-target-size);
+    flex-basis: 58px;
+    width: 58px;
     min-width: 0;
   }
 
