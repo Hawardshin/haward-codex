@@ -278,14 +278,18 @@ export function ToolStudioPanel({
 
       const palette = [0x58a6ff, 0x66d9b1, 0xf7c66f, 0xc8b6ff];
       const group = new THREE.Group();
-      const bodyGeometry = new THREE.CylinderGeometry(0.28, 0.34, 0.82, 24);
-      const headGeometry = new THREE.SphereGeometry(0.26, 24, 16);
-      const visorGeometry = new THREE.BoxGeometry(0.3, 0.07, 0.04);
-      const chestPanelGeometry = new THREE.BoxGeometry(0.24, 0.16, 0.04);
-      const footGeometry = new THREE.BoxGeometry(0.18, 0.09, 0.24);
+      const bodyGeometry = new THREE.CapsuleGeometry(0.29, 0.34, 8, 18);
+      const headGeometry = new THREE.SphereGeometry(0.3, 24, 16);
+      const earGeometry = new THREE.SphereGeometry(0.105, 16, 12);
+      const innerEarGeometry = new THREE.SphereGeometry(0.07, 12, 8);
+      const muzzleGeometry = new THREE.SphereGeometry(0.105, 16, 10);
+      const cheekGeometry = new THREE.SphereGeometry(0.043, 10, 8);
+      const visorGeometry = new THREE.BoxGeometry(0.25, 0.064, 0.04);
+      const chestPanelGeometry = new THREE.BoxGeometry(0.21, 0.12, 0.04);
+      const footGeometry = new THREE.SphereGeometry(0.1, 14, 10);
       const handGeometry = new THREE.SphereGeometry(0.07, 12, 10);
-      const antennaGeometry = new THREE.CylinderGeometry(0.012, 0.012, 0.18, 8);
       const statusLightGeometry = new THREE.SphereGeometry(0.045, 12, 10);
+      const tailGeometry = new THREE.SphereGeometry(0.09, 14, 10);
       const roleHaloGeometry = new THREE.TorusGeometry(0.42, 0.016, 8, 48);
       const orbitGeometry = new THREE.TorusGeometry(1.52, 0.012, 8, 80);
       const orbit = new THREE.Mesh(
@@ -323,13 +327,26 @@ export function ToolStudioPanel({
         });
         const body = new THREE.Mesh(bodyGeometry.clone(), material);
         const head = new THREE.Mesh(headGeometry.clone(), shellMaterial.clone());
+        const leftEar = new THREE.Mesh(earGeometry.clone(), shellMaterial.clone());
+        const rightEar = new THREE.Mesh(earGeometry.clone(), shellMaterial.clone());
+        const leftInnerEar = new THREE.Mesh(innerEarGeometry.clone(), visorMaterial.clone());
+        const rightInnerEar = new THREE.Mesh(innerEarGeometry.clone(), visorMaterial.clone());
         const visor = new THREE.Mesh(visorGeometry.clone(), visorMaterial);
+        const muzzle = new THREE.Mesh(muzzleGeometry.clone(), shellMaterial.clone());
+        const cheekMaterial = new THREE.MeshStandardMaterial({
+          color: 0xffd3d0,
+          emissive: 0xff9a96,
+          emissiveIntensity: 0.12,
+          roughness: 0.36
+        });
+        const leftCheek = new THREE.Mesh(cheekGeometry.clone(), cheekMaterial);
+        const rightCheek = new THREE.Mesh(cheekGeometry.clone(), cheekMaterial.clone());
         const chestPanel = new THREE.Mesh(chestPanelGeometry.clone(), panelMaterial);
         const leftFoot = new THREE.Mesh(footGeometry.clone(), shellMaterial.clone());
         const rightFoot = new THREE.Mesh(footGeometry.clone(), shellMaterial.clone());
         const leftHand = new THREE.Mesh(handGeometry.clone(), shellMaterial.clone());
         const rightHand = new THREE.Mesh(handGeometry.clone(), shellMaterial.clone());
-        const antenna = new THREE.Mesh(antennaGeometry.clone(), shellMaterial.clone());
+        const tail = new THREE.Mesh(tailGeometry.clone(), shellMaterial.clone());
         const statusLight = new THREE.Mesh(statusLightGeometry.clone(), new THREE.MeshStandardMaterial({
           color: accent,
           emissive: accent,
@@ -348,31 +365,60 @@ export function ToolStudioPanel({
         character.name = `tool-agent-character-${item.id}`;
         body.name = "tool-agent-character-torso";
         head.name = "tool-agent-character-head";
+        leftEar.name = "tool-agent-character-ear-left";
+        rightEar.name = "tool-agent-character-ear-right";
+        leftInnerEar.name = "tool-agent-character-inner-ear-left";
+        rightInnerEar.name = "tool-agent-character-inner-ear-right";
         visor.name = "tool-agent-character-visor";
+        muzzle.name = "tool-agent-character-muzzle";
+        leftCheek.name = "tool-agent-character-cheek-left";
+        rightCheek.name = "tool-agent-character-cheek-right";
         chestPanel.name = "tool-agent-character-chest-panel";
         statusLight.name = "tool-agent-character-status-light";
+        tail.name = "tool-agent-character-tail";
         roleHalo.name = "tool-agent-character-role-halo";
         body.position.y = 0;
         head.position.y = 0.58;
-        visor.position.set(0, 0.62, 0.23);
+        leftEar.position.set(-0.18, 0.83, 0.01);
+        rightEar.position.set(0.18, 0.83, 0.01);
+        leftEar.scale.set(0.86, 1.16, 0.72);
+        rightEar.scale.set(0.86, 1.16, 0.72);
+        leftInnerEar.position.set(-0.18, 0.83, 0.075);
+        rightInnerEar.position.set(0.18, 0.83, 0.075);
+        leftInnerEar.scale.set(0.52, 0.74, 0.24);
+        rightInnerEar.scale.set(0.52, 0.74, 0.24);
+        visor.position.set(0, 0.63, 0.255);
+        muzzle.position.set(0, 0.515, 0.29);
+        muzzle.scale.set(1.1, 0.68, 0.46);
+        leftCheek.position.set(-0.14, 0.56, 0.3);
+        rightCheek.position.set(0.14, 0.56, 0.3);
+        leftCheek.scale.set(1, 0.65, 0.32);
+        rightCheek.scale.set(1, 0.65, 0.32);
         chestPanel.position.set(0, 0.15, 0.3);
         leftFoot.position.set(-0.14, -0.44, 0.08);
         rightFoot.position.set(0.14, -0.44, 0.08);
         leftHand.position.set(-0.34, 0.08, 0);
         rightHand.position.set(0.34, 0.08, 0);
-        antenna.position.set(0, 0.9, 0);
-        statusLight.position.set(0, 1.02, 0);
+        tail.position.set(0, -0.02, -0.31);
+        statusLight.position.set(0, 0.92, 0.03);
         roleHalo.rotation.x = Math.PI / 2;
         roleHalo.position.y = -0.48;
         character.add(body);
         character.add(head);
+        character.add(leftEar);
+        character.add(rightEar);
+        character.add(leftInnerEar);
+        character.add(rightInnerEar);
         character.add(visor);
+        character.add(muzzle);
+        character.add(leftCheek);
+        character.add(rightCheek);
         character.add(chestPanel);
         character.add(leftFoot);
         character.add(rightFoot);
         character.add(leftHand);
         character.add(rightHand);
-        character.add(antenna);
+        character.add(tail);
         character.add(statusLight);
         character.add(roleHalo);
         group.add(character);

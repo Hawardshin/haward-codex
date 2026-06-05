@@ -40,3 +40,31 @@
 
 - Playwright 캡처 중 Chromium WebGL `ReadPixels` performance warning이 출력되었으나 screenshot readback 과정의 경고이며 앱 런타임 오류는 없었다.
 - `public/workspace-snapshot.json` 및 `src/generated/*workspace-snapshot.json`은 빌드 과정에서 갱신되었지만 이번 캐릭터 디자인 변경 세트에는 포함하지 않는다.
+
+## 귀여운 동물형 마스코트 후속 검증
+
+- 사용자 후속 요구: 캐릭터가 너무 현실적이지 않고 귀여운 동물 느낌을 가져야 한다.
+- 적용 요구사항: `REQ-WM-073`
+- `corepack pnpm --filter workspace-monitor test`: 통과, 46개 테스트
+- `corepack pnpm --filter workspace-monitor exec tsc --noEmit`: 통과
+- `corepack pnpm --filter workspace-monitor run check`: 통과
+  - scroll contract: `scroll_contract_ok`
+  - source control design: `source_control_design_ok`
+- `corepack pnpm --filter workspace-monitor run build`: 통과
+- `corepack pnpm --filter workspace-monitor run build:customer`: 통과
+- `corepack pnpm --filter workspace-monitor run perf:budget`: 통과
+  - largest initial chunk: `734386` bytes, budget `1000000` bytes
+- In-app Browser: `http://127.0.0.1:3364/?section=agents#section-agents` 로드 확인
+  - disclosure click 정밀 검증은 브라우저 런타임 timeout으로 Playwright static export smoke로 보강
+- Playwright static export smoke: 통과
+  - Agents desktop: `canvas[data-agent-collaboration-3d-ready="true"]`, canvas `1246x623`, overflowX `0`
+  - Tool Studio desktop: `canvas[data-agent-3d-ready="true"]`, canvas `369x248`, overflowX `0`
+  - Agents mobile: `canvas[data-agent-collaboration-3d-ready="true"]`, canvas `304x152`, overflowX `0`
+  - Tool Studio mobile: `canvas[data-agent-3d-ready="true"]`, canvas `316x228`, overflowX `0`
+
+## 귀여운 동물형 마스코트 스크린샷
+
+- `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-cute-mascot-character-agents-desktop.png`
+- `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-cute-mascot-character-tools-desktop.png`
+- `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-cute-mascot-character-agents-mobile.png`
+- `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-cute-mascot-character-tools-mobile.png`
