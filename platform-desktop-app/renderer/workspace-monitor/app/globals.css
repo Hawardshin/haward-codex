@@ -9439,6 +9439,7 @@ h3 {
 
 .session-launcher label,
 .source-editor-controls label,
+.source-file-picker-field,
 .source-customization-bar label {
   display: grid;
   gap: 6px;
@@ -9446,6 +9447,7 @@ h3 {
 
 .session-launcher label span,
 .source-editor-controls label span,
+.source-file-picker-field > span,
 .source-customization-bar label span {
   color: var(--muted);
   font-size: var(--font-size-caption);
@@ -10340,7 +10342,8 @@ h3 {
   grid-column: span 2;
 }
 
-.source-editor-controls label {
+.source-editor-controls label,
+.source-file-picker-field {
   min-height: 58px;
   border: 1px solid var(--line);
   background: color-mix(in srgb, var(--surface) 92%, var(--surface-muted) 8%);
@@ -10348,7 +10351,7 @@ h3 {
   padding: 7px 9px;
 }
 
-.source-editor-controls label:not(.source-path-field) {
+.source-editor-controls .source-file-picker-field {
   min-width: 0;
   grid-column: span 2;
 }
@@ -10411,6 +10414,147 @@ h3 {
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, #ffffff 58%, transparent),
     0 8px 16px rgba(15, 23, 42, 0.12);
+}
+
+.source-file-picker-trigger {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  width: 100%;
+  min-width: 0;
+  justify-content: stretch;
+  border-color: color-mix(in srgb, var(--line) 74%, var(--blue) 12%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 94%, #ffffff 3%), color-mix(in srgb, var(--surface-muted) 76%, var(--surface) 24%)),
+    var(--surface);
+  text-align: left;
+}
+
+.source-file-picker-trigger[data-state="open"] {
+  border-color: color-mix(in srgb, var(--blue) 52%, var(--line));
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--blue) 18%, transparent),
+    0 8px 18px rgba(15, 23, 42, 0.12);
+}
+
+.source-file-picker-value {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text);
+  font-weight: 760;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.source-file-picker-caret {
+  color: var(--muted);
+  transition: transform var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.source-file-picker-trigger[data-state="open"] .source-file-picker-caret {
+  transform: rotate(180deg);
+}
+
+.source-editor-action-group {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(104px, 1fr));
+  width: 100%;
+  min-width: 0;
+  align-self: stretch;
+}
+
+.source-file-picker-menu {
+  z-index: 90;
+  width: min(720px, calc(100vw - 32px));
+  max-height: min(430px, 70vh);
+  overflow: auto;
+  padding: 6px;
+  border: 1px solid color-mix(in srgb, var(--line) 78%, var(--blue) 12%);
+  border-radius: 8px;
+  color: var(--text);
+  background: var(--surface);
+  box-shadow: 0 20px 48px rgba(17, 24, 39, 0.2);
+  animation: workspace-menu-enter var(--motion-duration-fast) var(--motion-ease-out) both;
+  scrollbar-gutter: stable;
+}
+
+.source-file-picker-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 8px 8px;
+  color: var(--muted);
+  font-size: var(--font-size-caption);
+  font-weight: 800;
+}
+
+.source-file-picker-label strong {
+  color: var(--text);
+  font-size: var(--font-size-overline);
+}
+
+.source-file-picker-separator {
+  height: 1px;
+  margin: 2px 0 5px;
+  background: var(--line);
+}
+
+.source-file-picker-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px;
+  border-radius: 7px;
+  outline: none;
+  cursor: pointer;
+}
+
+.source-file-picker-item.empty {
+  cursor: default;
+}
+
+.source-file-picker-item > span,
+.source-file-picker-item strong,
+.source-file-picker-item small {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.source-file-picker-item strong {
+  color: var(--text);
+  font-size: var(--font-size-caption);
+}
+
+.source-file-picker-item small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: var(--font-size-overline);
+}
+
+.source-file-picker-item[data-highlighted] {
+  color: var(--control-selected-fg);
+  background: var(--control-selected-bg);
+}
+
+.source-file-picker-item[data-highlighted] strong,
+.source-file-picker-item[data-highlighted] small {
+  color: var(--control-selected-fg);
+}
+
+.source-file-picker-item[data-selected="true"] {
+  background: color-mix(in srgb, var(--surface) 82%, var(--blue) 10%);
+  box-shadow: inset 3px 0 0 var(--blue);
+}
+
+@media (max-width: 720px) {
+  .source-editor-action-group {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .source-customization-bar {
@@ -11687,7 +11831,13 @@ h3 {
 }
 
 .native-source-controls {
-  grid-template-columns: minmax(220px, 1.25fr) minmax(200px, 1fr) repeat(2, minmax(126px, auto));
+  grid-template-columns: minmax(220px, 1.05fr) minmax(260px, 1.15fr) minmax(420px, 1.45fr);
+}
+
+.native-source-controls .source-path-field,
+.native-source-controls .source-file-picker-field,
+.native-source-controls .source-editor-action-group {
+  grid-column: auto;
 }
 
 .native-source-grid {
@@ -12060,13 +12210,14 @@ h3 {
 
 .filesystem-workbench .native-source-controls {
   grid-template-columns:
-    minmax(240px, 1.2fr)
-    minmax(190px, 0.9fr)
-    repeat(2, minmax(124px, auto));
+    minmax(240px, 1.05fr)
+    minmax(220px, 1.1fr)
+    minmax(420px, 1.45fr);
 }
 
 .filesystem-workbench .native-source-controls .source-path-field,
-.filesystem-workbench .native-source-controls label:not(.source-path-field) {
+.filesystem-workbench .native-source-controls .source-file-picker-field,
+.filesystem-workbench .native-source-controls .source-editor-action-group {
   grid-column: auto;
 }
 
@@ -13450,8 +13601,8 @@ h3 {
   }
 
   .filesystem-workbench .native-source-controls .source-path-field,
-  .filesystem-workbench .native-source-controls label:not(.source-path-field),
-  .filesystem-workbench .native-source-controls .source-action-button {
+  .filesystem-workbench .native-source-controls .source-file-picker-field,
+  .filesystem-workbench .native-source-controls .source-editor-action-group {
     grid-column: auto;
   }
 
@@ -14388,7 +14539,8 @@ h3 {
   }
 
   .source-path-field,
-  .source-editor-controls label:not(.source-path-field) {
+  .source-file-picker-field,
+  .source-editor-action-group {
     grid-column: auto;
   }
 

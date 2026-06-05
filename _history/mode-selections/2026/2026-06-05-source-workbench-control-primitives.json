@@ -1,0 +1,12 @@
+{
+  "task": "source workbench control primitives",
+  "date": "2026-06-05",
+  "selected_mode": "ship_first",
+  "reason": "The user requested an immediate UI fix in an existing desktop source workbench and explicitly wanted implementation plus build, not a planning-only answer.",
+  "gates": [
+    "web_first_intake",
+    "bounded source/workspace control scope",
+    "static UI contract tests",
+    "internal package build"
+  ]
+}

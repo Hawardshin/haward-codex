@@ -1,17 +1,17 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-05T13:37:20.652Z",
+  "generatedAt": "2026-06-05T13:53:04.180Z",
   "summary": {
-    "documents": 2266,
+    "documents": 2272,
     "days": 6,
     "categories": [
       {
         "category": "evaluation",
-        "count": 932
+        "count": 933
       },
       {
         "category": "web-search",
-        "count": 365
+        "count": 366
       },
       {
         "category": "plan",
@@ -19,19 +19,19 @@
       },
       {
         "category": "request-trace",
-        "count": 294
+        "count": 295
       },
       {
         "category": "work-timing",
-        "count": 216
+        "count": 217
       },
       {
         "category": "user-request",
-        "count": 78
+        "count": 79
       },
       {
         "category": "work-summary",
-        "count": 45
+        "count": 46
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6079008,
+    "totalSourceBytes": 6085093,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,102 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+      "path": "_history/evaluations/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: 소스 워크벤치 컨트롤 프리미티브",
+      "excerpt": "평가: 소스 워크벤치 컨트롤 프리미티브 결과 사용자가 지적한 소스 작업 화면의 기본 선택 드롭다운을 제거하고 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 명령성 버튼은 공용 Button / ActionGroup 으로 통일해 기본 브라우저 버튼처럼 보이는 문제를 줄였다. CSS 계약과 정적 테스트가 새 구조를 고정한다. 구현 후 내부 .app / .dmg 패키지 빌드와 검증까지 완료했다. 검증 corepack pnpm dir platform desktop app/rende",
+      "html": "<p>평가: 소스 워크벤치 컨트롤 프리미티브 결과 사용자가 지적한 소스 작업 화면의 기본 선택 드롭다운을 제거하고 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 명령성 버튼은 공용 Button / ActionGroup 으로 통일해 기본 브라우저 버튼처럼 보이는 문제를 줄였다. CSS 계약과 정적 테스트가 새 구조를 고정한다. 구현 후 내부 .app / .dmg 패키지 빌드와 검증까지 완료했다. 검증 corepack pnpm dir platform desktop app/renderer/workspace monitor test : 통과, 55개 테스트. corepack pnpm dir platform desktop app</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1254,
+      "updatedAt": "2026-06-05T13:52:28.067Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-05-source-workbench-control-primitives-json",
+      "path": "_history/work-timings/2026/2026-06-05-source-workbench-control-primitives.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 05 Source Workbench Control Primitives",
+      "excerpt": "{ \"task\": \"source workbench control primitives\", \"date\": \"2026 06 05\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first and local inspection\", \"approx minutes\": 12 }, { \"phase\": \"implementation\", \"approx minutes\": 28 }, { \"phase\": \"tests and package build\", \"approx minut",
+      "html": "<p>{ &quot;task&quot;: &quot;source workbench control primitives&quot;, &quot;date&quot;: &quot;2026 06 05&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first and local inspection&quot;, &quot;approx minutes&quot;: 12 }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;approx minutes&quot;: 28 }, { &quot;phase&quot;: &quot;tests and package build&quot;, &quot;approx minutes&quot;: 24 }, { &quot;phase&quot;: &quot;records and closeout&quot;, &quot;approx minutes&quot;: 12 } , &quot;notes&quot;: </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 504,
+      "updatedAt": "2026-06-05T13:52:28.067Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+      "path": "_history/request-traces/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브",
+      "excerpt": "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브 요청 기본 버튼/기본 선택 드롭다운처럼 보이는 소스 작업 UI를 수정. 구현 완료 후 자동 빌드. 결과 소스 파일 선택 드롭다운은 Radix DropdownMenu로 교체. 파일 작업/툴바/워크벤치 탭/탐색기 명령 버튼은 공용 Button / ActionGroup 사용. 기존 소스 편집 UX 요구사항과 스펙에 새 요구사항 REQ DESKTOP UX 2026 06 05 004 추가. 고객용 렌더러 빌드와 내부 Tauri .app / .dmg 패키지 ",
+      "html": "<p>요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브 요청 기본 버튼/기본 선택 드롭다운처럼 보이는 소스 작업 UI를 수정. 구현 완료 후 자동 빌드. 결과 소스 파일 선택 드롭다운은 Radix DropdownMenu로 교체. 파일 작업/툴바/워크벤치 탭/탐색기 명령 버튼은 공용 Button / ActionGroup 사용. 기존 소스 편집 UX 요구사항과 스펙에 새 요구사항 REQ DESKTOP UX 2026 06 05 004 추가. 고객용 렌더러 빌드와 내부 Tauri .app / .dmg 패키지 생성 완료. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 05 workspace mon</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1219,
+      "updatedAt": "2026-06-05T13:52:28.066Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+      "path": "_history/user-requests/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브",
+      "excerpt": "사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 요지: 소스 작업 화면의 버튼과 선택 드롭다운이 기본 브라우저 컨트롤처럼 보여 이상하므로 고쳐 달라는 요청. 지속 조건: 구현 후 사용자가 직접 빌드하지 않도록 자동 빌드까지 수행. 해석 최근 소스 편집 UX 작업의 후속 수정으로 보았다. 핵심 범위는 파일 선택 드롭다운, 소스 작업 버튼, 편집기 툴바 버튼, 워크스페이스 탐색기 명령 버튼이다. 전체 앱의 모든 <select 제거는 이번 요청의 직접 범위 밖으로 두었다.",
+      "html": "<p>사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 요지: 소스 작업 화면의 버튼과 선택 드롭다운이 기본 브라우저 컨트롤처럼 보여 이상하므로 고쳐 달라는 요청. 지속 조건: 구현 후 사용자가 직접 빌드하지 않도록 자동 빌드까지 수행. 해석 최근 소스 편집 UX 작업의 후속 수정으로 보았다. 핵심 범위는 파일 선택 드롭다운, 소스 작업 버튼, 편집기 툴바 버튼, 워크스페이스 탐색기 명령 버튼이다. 전체 앱의 모든 &lt;select 제거는 이번 요청의 직접 범위 밖으로 두었다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 664,
+      "updatedAt": "2026-06-05T13:52:28.065Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 소스 워크벤치 컨트롤 프리미티브",
+      "excerpt": "작업 요약: 소스 워크벤치 컨트롤 프리미티브 MonitorShell.tsx 에서 소스 파일 목록 native <select 를 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 소스 열기/저장/전체 저장/복사 액션, 편집기 툴바, 소스 워크벤치 탭을 공용 Button / ActionGroup 으로 바꿨다. WorkspaceExplorerPane.tsx 의 폴더 선택/새로고침 명령 버튼도 공용 버튼 프리미티브로 통일했다. 드롭다운 메뉴, 선택 항목, 액션 그룹 레이아웃 CSS와",
+      "html": "<p>작업 요약: 소스 워크벤치 컨트롤 프리미티브 MonitorShell.tsx 에서 소스 파일 목록 native &lt;select 를 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 소스 열기/저장/전체 저장/복사 액션, 편집기 툴바, 소스 워크벤치 탭을 공용 Button / ActionGroup 으로 바꿨다. WorkspaceExplorerPane.tsx 의 폴더 선택/새로고침 명령 버튼도 공용 버튼 프리미티브로 통일했다. 드롭다운 메뉴, 선택 항목, 액션 그룹 레이아웃 CSS와 check source control design 계약을 갱신했다. 구현 후 내부 패키지 빌드까지 실행해 .app 와 .dmg 를 다시 만들었</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 921,
+      "updatedAt": "2026-06-05T13:52:28.065Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+      "path": "_history/web-searches/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브",
+      "excerpt": "웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 작업: Workspace Monitor 소스 작업 화면의 네이티브 파일 선택 드롭다운과 기본 버튼 느낌 제거 검색 Radix UI Dropdown Menu React docs DropdownMenu.Trigger Content Item official MDN HTML select element styling customizable select limitations 확인한 출처 Radix UI Dropdown Menu 공식 ",
+      "html": "<p>웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 작업: Workspace Monitor 소스 작업 화면의 네이티브 파일 선택 드롭다운과 기본 버튼 느낌 제거 검색 Radix UI Dropdown Menu React docs DropdownMenu.Trigger Content Item official MDN HTML select element styling customizable select limitations 확인한 출처 Radix UI Dropdown Menu 공식 문서: https://www.radix ui.com/primitives/docs/components/dropdown menu MDN Custom</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1523,
+      "updatedAt": "2026-06-05T13:52:28.064Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
       "path": "_history/evaluations/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
@@ -36323,27 +36419,27 @@
     {
       "date": "2026-06-05",
       "year": "2026",
-      "documentsCount": 485,
+      "documentsCount": 491,
       "categories": [
         {
           "category": "evaluation",
-          "count": 142
+          "count": 143
         },
         {
           "category": "web-search",
-          "count": 69
+          "count": 70
         },
         {
           "category": "work-timing",
-          "count": 67
+          "count": 68
         },
         {
           "category": "request-trace",
-          "count": 65
+          "count": 66
         },
         {
           "category": "user-request",
-          "count": 64
+          "count": 65
         },
         {
           "category": "plan",
@@ -36351,7 +36447,7 @@
         },
         {
           "category": "work-summary",
-          "count": 32
+          "count": 33
         },
         {
           "category": "daily-history",

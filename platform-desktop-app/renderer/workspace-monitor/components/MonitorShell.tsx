@@ -1,5 +1,6 @@
 "use client";
 
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import {
   Activity,
   AlertTriangle,
@@ -9,6 +10,7 @@ import {
   Bot,
   CalendarDays,
   CheckCircle2,
+  ChevronDown,
   ClipboardCheck,
   Clock3,
   Code2,
@@ -8337,6 +8339,13 @@ function DesktopRuntimePanel({
       )
       .slice(0, 80);
   }, [deferredSourceFilter, editableSourceFiles, shouldPrepareSourceWorkspace]);
+  const selectedSourceFileOption = useMemo(
+    () =>
+      filteredEditableSourceFiles.find((file) => file.path === selectedSourcePath) ||
+      sourceCatalogFiles.find((file) => file.path === selectedSourcePath) ||
+      null,
+    [filteredEditableSourceFiles, selectedSourcePath, sourceCatalogFiles]
+  );
   const workspaceExplorerRootLabel =
     desktopWorkspace?.activeWorkspacePath?.split(/[\\/]/).filter(Boolean).pop() ||
     desktopWorkspace?.fallbackWorkspacePath?.split(/[\\/]/).filter(Boolean).pop() ||
@@ -10319,16 +10328,16 @@ function DesktopRuntimePanel({
             <h2>{copy.title}</h2>
             <p>{copy.description}</p>
           </div>
-          <div className="native-workspace-actions">
-            <button type="button" disabled>
+          <ActionGroup className="native-workspace-actions" align="end" density="compact">
+            <Button variant="primary" disabled>
               <FolderOpen size={16} aria-hidden="true" />
               <span>{copy.chooseFolder}</span>
-            </button>
-            <button type="button" disabled>
+            </Button>
+            <Button variant="secondary" disabled>
               <Search size={16} aria-hidden="true" />
               <span>{copy.refreshFiles}</span>
-            </button>
-          </div>
+            </Button>
+          </ActionGroup>
         </section>
 
         <section className="filesystem-workbench-shell source-interaction-prerender" aria-busy="true">
@@ -10351,20 +10360,35 @@ function DesktopRuntimePanel({
           <h2>{copy.title}</h2>
           <p>{copy.description}</p>
         </div>
-        <div className="native-workspace-actions">
-          <button type="button" onClick={chooseDesktopWorkspaceFolder} disabled={!invoke || workspaceHostBusy !== ""}>
+        <ActionGroup className="native-workspace-actions" align="end" density="compact">
+          <Button
+            variant="primary"
+            onClick={chooseDesktopWorkspaceFolder}
+            loading={workspaceHostBusy === "choose"}
+            disabled={!invoke || workspaceHostBusy !== ""}
+          >
             <FolderOpen size={16} aria-hidden="true" />
             <span>{workspaceHostBusy === "choose" ? copy.choosingFolder : copy.chooseFolder}</span>
-          </button>
-          <button type="button" onClick={refreshDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== ""}>
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={refreshDesktopWorkspace}
+            loading={workspaceHostBusy === "refresh"}
+            disabled={!invoke || workspaceHostBusy !== ""}
+          >
             <Activity size={16} aria-hidden="true" />
             <span>{workspaceHostBusy === "refresh" ? copy.loading : copy.refreshWorkspace}</span>
-          </button>
-          <button type="button" onClick={refreshRuntimeSourceFiles} disabled={!invoke || sourceCatalogBusy || workspaceResourceBusy}>
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={refreshRuntimeSourceFiles}
+            loading={sourceCatalogBusy || workspaceResourceBusy}
+            disabled={!invoke || sourceCatalogBusy || workspaceResourceBusy}
+          >
             <Search size={16} aria-hidden="true" />
             <span>{sourceCatalogBusy || workspaceResourceBusy ? copy.loading : copy.refreshFiles}</span>
-          </button>
-        </div>
+          </Button>
+        </ActionGroup>
       </section>
 
       {!invoke && <p className="desktop-error">{copy.noRuntime}</p>}
@@ -10462,87 +10486,133 @@ function DesktopRuntimePanel({
               placeholder="workspace-relative/path.ts"
             />
           </label>
-          <label>
+          <div className="source-file-picker-field">
             <span>{copy.fileList}</span>
-            <select
-              value={selectedSourcePath}
-              onChange={(event) => {
-                setSelectedSourcePath(event.target.value);
-                setSourcePathInput(event.target.value);
-              }}
-            >
-              {filteredEditableSourceFiles.map((file) => (
-                <option key={file.id} value={file.path}>
-                  {file.path}
-                </option>
-              ))}
-            </select>
-          </label>
-          <button className="source-action-button primary" type="button" onClick={loadSourceFile} disabled={!invoke || editorBusy || !sourcePathInput.trim()}>
-            <FileSearch size={15} aria-hidden="true" />
-            <span>{editorBusy ? copy.loading : copy.openSelected}</span>
-          </button>
-          <button className="source-action-button save" type="button" onClick={saveSourceFile} disabled={!invoke || editorBusy || !sourceFile || !currentSourceDirty}>
-            <CheckCircle2 size={15} aria-hidden="true" />
-            <span>{editorBusy ? copy.saving : copy.saveCurrent}</span>
-          </button>
-          <button className="source-action-button save-all" type="button" onClick={saveAllSourceDrafts} disabled={!invoke || editorBusy || saveAllBusy || dirtyDraftEntries.length === 0}>
-            <CheckCircle2 size={15} aria-hidden="true" />
-            <span>{saveAllBusy ? copy.saving : copy.saveAll}</span>
-          </button>
-          <button className="source-action-button secondary" type="button" onClick={copyCurrentSourceDraft} disabled={!sourceFile}>
-            <Copy size={15} aria-hidden="true" />
-            <span>{copy.copyFile}</span>
-          </button>
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger asChild>
+                <Button
+                  variant="secondary"
+                  className="source-file-picker-trigger"
+                  disabled={filteredEditableSourceFiles.length === 0}
+                  aria-label={copy.fileList}
+                  title={selectedSourceFileOption?.path || sourcePathInput || copy.noFiles}
+                >
+                  <FileSearch size={15} aria-hidden="true" />
+                  <span className="source-file-picker-value">{selectedSourceFileOption?.path || sourcePathInput || copy.noFiles}</span>
+                  <ChevronDown size={15} aria-hidden="true" className="source-file-picker-caret" />
+                </Button>
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Portal>
+                <DropdownMenu.Content className="source-file-picker-menu" align="start" sideOffset={6} collisionPadding={12}>
+                  <DropdownMenu.Label className="source-file-picker-label">
+                    <span>{copy.fileList}</span>
+                    <strong>
+                      {filteredEditableSourceFiles.length.toLocaleString("ko-KR")} / {sourceCatalogReport?.totalCount ?? sourceCatalogFiles.length}
+                    </strong>
+                  </DropdownMenu.Label>
+                  <DropdownMenu.Separator className="source-file-picker-separator" />
+                  {filteredEditableSourceFiles.length ? (
+                    filteredEditableSourceFiles.map((file) => (
+                      <DropdownMenu.Item
+                        key={file.id}
+                        className="source-file-picker-item"
+                        data-selected={file.path === selectedSourcePath ? "true" : "false"}
+                        onSelect={() => {
+                          setSelectedSourcePath(file.path);
+                          setSourcePathInput(file.path);
+                        }}
+                      >
+                        <FileSearch size={14} aria-hidden="true" />
+                        <span>
+                          <strong>{file.path}</strong>
+                          <small>
+                            {file.project} / {file.language || file.extension} / {formatBytes(file.sizeBytes)}
+                          </small>
+                        </span>
+                        {file.path === selectedSourcePath && <CheckCircle2 size={14} aria-hidden="true" />}
+                      </DropdownMenu.Item>
+                    ))
+                  ) : (
+                    <DropdownMenu.Item className="source-file-picker-item empty" disabled>
+                      <Search size={14} aria-hidden="true" />
+                      <span>
+                        <strong>{copy.noFiles}</strong>
+                        <small>{sourceFilter || sourceCatalogLabel}</small>
+                      </span>
+                    </DropdownMenu.Item>
+                  )}
+                </DropdownMenu.Content>
+              </DropdownMenu.Portal>
+            </DropdownMenu.Root>
+          </div>
+          <ActionGroup className="source-editor-action-group" align="stretch" density="compact">
+            <Button variant="primary" className="source-action-button primary" onClick={loadSourceFile} loading={editorBusy} disabled={!invoke || editorBusy || !sourcePathInput.trim()}>
+              <FileSearch size={15} aria-hidden="true" />
+              <span>{editorBusy ? copy.loading : copy.openSelected}</span>
+            </Button>
+            <Button variant="secondary" className="source-action-button save" onClick={saveSourceFile} loading={editorBusy} disabled={!invoke || editorBusy || !sourceFile || !currentSourceDirty}>
+              <CheckCircle2 size={15} aria-hidden="true" />
+              <span>{editorBusy ? copy.saving : copy.saveCurrent}</span>
+            </Button>
+            <Button variant="secondary" className="source-action-button save-all" onClick={saveAllSourceDrafts} loading={saveAllBusy} disabled={!invoke || editorBusy || saveAllBusy || dirtyDraftEntries.length === 0}>
+              <CheckCircle2 size={15} aria-hidden="true" />
+              <span>{saveAllBusy ? copy.saving : copy.saveAll}</span>
+            </Button>
+            <Button variant="secondary" className="source-action-button secondary" onClick={copyCurrentSourceDraft} disabled={!sourceFile}>
+              <Copy size={15} aria-hidden="true" />
+              <span>{copy.copyFile}</span>
+            </Button>
+          </ActionGroup>
         </div>
 
-        <div className="source-command-toolbar" aria-label={copy.editorSettings}>
-          <button className="source-tool-button" type="button" onClick={() => runSourceEditorCommand("undo")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+        <ActionGroup className="source-command-toolbar" asToolbar aria-label={copy.editorSettings} density="compact">
+          <Button variant="ghost" size="sm" className="source-tool-button" onClick={() => runSourceEditorCommand("undo")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
             <History size={15} aria-hidden="true" />
             <span>Undo</span>
-          </button>
-          <button className="source-tool-button" type="button" onClick={() => runSourceEditorCommand("redo")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+          </Button>
+          <Button variant="ghost" size="sm" className="source-tool-button" onClick={() => runSourceEditorCommand("redo")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
             <History size={15} aria-hidden="true" />
             <span>Redo</span>
-          </button>
-          <button className="source-tool-button" type="button" onClick={() => runSourceEditorCommand("find")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+          </Button>
+          <Button variant="ghost" size="sm" className="source-tool-button" onClick={() => runSourceEditorCommand("find")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
             <Search size={15} aria-hidden="true" />
             <span>Find</span>
-          </button>
-          <button className="source-tool-button" type="button" onClick={() => runSourceEditorCommand("replace")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+          </Button>
+          <Button variant="ghost" size="sm" className="source-tool-button" onClick={() => runSourceEditorCommand("replace")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
             <Search size={15} aria-hidden="true" />
             <span>Replace</span>
-          </button>
-          <button className="source-tool-button" type="button" onClick={() => runSourceEditorCommand("format")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+          </Button>
+          <Button variant="ghost" size="sm" className="source-tool-button" onClick={() => runSourceEditorCommand("format")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
             <Code2 size={15} aria-hidden="true" />
             <span>Format</span>
-          </button>
-          <button className="source-tool-button" type="button" onClick={() => runSourceEditorCommand("foldAll")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+          </Button>
+          <Button variant="ghost" size="sm" className="source-tool-button" onClick={() => runSourceEditorCommand("foldAll")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
             <Code2 size={15} aria-hidden="true" />
             <span>{copy.foldAll}</span>
-          </button>
-          <button className="source-tool-button" type="button" onClick={() => runSourceEditorCommand("unfoldAll")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
+          </Button>
+          <Button variant="ghost" size="sm" className="source-tool-button" onClick={() => runSourceEditorCommand("unfoldAll")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
             <Code2 size={15} aria-hidden="true" />
             <span>{copy.unfoldAll}</span>
-          </button>
-          <button className="source-tool-button mode" type="button" onClick={() => setSourceEditorViewMode((current) => (current === "edit" ? "diff" : "edit"))} disabled={!sourceFile}>
+          </Button>
+          <Button variant="ghost" size="sm" className="source-tool-button mode" onClick={() => setSourceEditorViewMode((current) => (current === "edit" ? "diff" : "edit"))} disabled={!sourceFile}>
             <FileSearch size={15} aria-hidden="true" />
             <span>{sourceEditorViewMode === "edit" ? copy.diffMode : copy.editMode}</span>
-          </button>
-          <button type="button" onClick={() => setSourceWordWrap((current) => !current)} className={`source-tool-button toggle ${sourceWordWrap ? "active" : ""}`}>
+          </Button>
+          <Button variant="ghost" size="sm" onClick={() => setSourceWordWrap((current) => !current)} className={`source-tool-button toggle ${sourceWordWrap ? "active" : ""}`} aria-pressed={sourceWordWrap}>
             <Code2 size={15} aria-hidden="true" />
             <span>{copy.wordWrap}</span>
-          </button>
-          <button type="button" onClick={() => setSourceMinimapEnabled((current) => !current)} className={`source-tool-button toggle ${sourceMinimapEnabled ? "active" : ""}`}>
+          </Button>
+          <Button variant="ghost" size="sm" onClick={() => setSourceMinimapEnabled((current) => !current)} className={`source-tool-button toggle ${sourceMinimapEnabled ? "active" : ""}`} aria-pressed={sourceMinimapEnabled}>
             <LayoutDashboard size={15} aria-hidden="true" />
             <span>{copy.minimap}</span>
-          </button>
-        </div>
+          </Button>
+        </ActionGroup>
 
         <div className="source-workbench-switcher" role="tablist" aria-label={uiLanguage === "ko" ? "소스 작업 보기" : "Source workbench views"}>
           {!isFileWorkspaceSurface && (
-            <button
-              type="button"
+            <Button
+              variant="ghost"
+              size="sm"
               role="tab"
               aria-selected={sourceWorkbenchView === "files"}
               className={sourceWorkbenchView === "files" ? "active" : ""}
@@ -10551,10 +10621,11 @@ function DesktopRuntimePanel({
               <FolderOpen size={15} aria-hidden="true" />
               <span>{uiLanguage === "ko" ? "파일" : "Files"}</span>
               <small>{filteredEditableSourceFiles.length.toLocaleString("ko-KR")}</small>
-            </button>
+            </Button>
           )}
-          <button
-            type="button"
+          <Button
+            variant="ghost"
+            size="sm"
             role="tab"
             aria-selected={sourceWorkbenchView === "editor"}
             className={sourceWorkbenchView === "editor" ? "active" : ""}
@@ -10563,9 +10634,10 @@ function DesktopRuntimePanel({
             <Code2 size={15} aria-hidden="true" />
             <span>{uiLanguage === "ko" ? "편집" : "Editor"}</span>
             <small>{openDraftEntries.length.toLocaleString("ko-KR")}</small>
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
             role="tab"
             aria-selected={sourceWorkbenchView === "results"}
             className={sourceWorkbenchView === "results" ? "active" : ""}
@@ -10574,7 +10646,7 @@ function DesktopRuntimePanel({
             <CheckCircle2 size={15} aria-hidden="true" />
             <span>{uiLanguage === "ko" ? "저장 결과" : "Save results"}</span>
             <small>{sourceSaveResults.length.toLocaleString("ko-KR")}</small>
-          </button>
+          </Button>
         </div>
 
         <div className={`source-review-grid native-source-grid source-workbench-view-${sourceWorkbenchView}`}>
@@ -10659,25 +10731,26 @@ function DesktopRuntimePanel({
                       {formatBytes(sourceDraft.length)} / max {formatBytes(sourceFile.maxSizeBytes)}
                     </strong>
                   </div>
-                  <div className="source-editor-primary-actions" aria-label={copy.editorSettings}>
-                    <button
+                  <ActionGroup className="source-editor-primary-actions" asToolbar align="end" density="compact" aria-label={copy.editorSettings}>
+                    <Button
+                      variant="secondary"
+                      size="sm"
                       className="save"
-                      type="button"
                       onClick={saveSourceFile}
                       disabled={!invoke || editorBusy || !sourceFile || !currentSourceDirty}
                     >
                       <CheckCircle2 size={14} aria-hidden="true" />
                       <span>{editorBusy ? copy.saving : copy.saveCurrent}</span>
-                    </button>
-                    <button type="button" onClick={() => setSourceEditorViewMode((current) => (current === "edit" ? "diff" : "edit"))}>
+                    </Button>
+                    <Button variant="secondary" size="sm" onClick={() => setSourceEditorViewMode((current) => (current === "edit" ? "diff" : "edit"))}>
                       <FileSearch size={14} aria-hidden="true" />
                       <span>{sourceEditorViewMode === "edit" ? copy.diffMode : copy.editMode}</span>
-                    </button>
-                    <button type="button" onClick={copyCurrentSourceDraft}>
+                    </Button>
+                    <Button variant="secondary" size="sm" onClick={copyCurrentSourceDraft}>
                       <Copy size={14} aria-hidden="true" />
                       <span>{copy.copyFile}</span>
-                    </button>
-                  </div>
+                    </Button>
+                  </ActionGroup>
                 </div>
                 {sourceDiff && (
                   <div className={`source-diff-review ${sourceDiff.dirty ? "dirty" : "clean"}`}>

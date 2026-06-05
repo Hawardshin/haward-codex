@@ -17,6 +17,10 @@ const toolStudio = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "ToolStudioPanel.tsx"),
   "utf8"
 );
+const workspaceExplorerPane = fs.readFileSync(
+  path.join(projectRoot, "components", "workbench", "WorkspaceExplorerPane.tsx"),
+  "utf8"
+);
 const runtimeTerminalDrawer = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "RuntimeTerminalDrawer.tsx"),
   "utf8"
@@ -384,8 +388,30 @@ test("Workspace monitor sidebar and source editor defaults avoid clipped editing
   assert.match(css, /\.desktop-app-shell\.sidebar-expanded \{[\s\S]*?grid-template-columns: 148px minmax\(0, 1fr\);/);
   assert.match(css, /\.desktop-app-shell\.sidebar-expanded \.activity-rail button \{[\s\S]*?width: 132px;/);
   assert.match(css, /\.source-editor-primary-actions \{/);
-  assert.match(css, /\.filesystem-workbench \.native-source-controls \{[\s\S]*?repeat\(2, minmax\(124px, auto\)\);/);
+  assert.match(css, /\.filesystem-workbench \.native-source-controls \{[\s\S]*?minmax\(420px, 1\.45fr\);/);
+  assert.match(css, /\.filesystem-workbench \.native-source-controls \.source-editor-action-group \{[\s\S]*?grid-column: auto;/);
   assert.match(css, /\.monaco-editor-shell \{[\s\S]*?height: clamp\(420px, 64dvh, 720px\);/);
+});
+
+test("Source workbench replaces native select and command buttons with app primitives", () => {
+  assert.match(monitorShell, /from "@radix-ui\/react-dropdown-menu"/);
+  assert.match(monitorShell, /ChevronDown/);
+  assert.match(monitorShell, /<DropdownMenu\.Root>/);
+  assert.match(monitorShell, /className="source-file-picker-trigger"/);
+  assert.match(monitorShell, /className="source-file-picker-menu"/);
+  assert.doesNotMatch(monitorShell, /<select[\s\S]*?value=\{selectedSourcePath\}/);
+  assert.match(monitorShell, /<ActionGroup className="source-editor-action-group"[\s\S]*?density="compact">/);
+  assert.match(monitorShell, /<Button variant="primary" className="source-action-button primary"/);
+  assert.match(monitorShell, /<ActionGroup className="source-command-toolbar"[\s\S]*?asToolbar/);
+  assert.match(monitorShell, /className=\{`source-tool-button toggle \$\{sourceWordWrap \? "active" : ""\}`\}/);
+  assert.match(monitorShell, /<Button[\s\S]*?role="tab"[\s\S]*?aria-selected=\{sourceWorkbenchView === "editor"\}/);
+  assert.match(workspaceExplorerPane, /import \{ ActionGroup \} from "@\/components\/ui\/ActionGroup"/);
+  assert.match(workspaceExplorerPane, /import \{ Button \} from "@\/components\/ui\/Button"/);
+  assert.match(workspaceExplorerPane, /<Button[\s\S]*?variant="outline"[\s\S]*?className="workspace-dropzone"/);
+  assert.match(workspaceExplorerPane, /<ActionGroup className="workspace-explorer-actions"[\s\S]*?direction="column"/);
+  assert.match(css, /\.source-file-picker-menu \{/);
+  assert.match(css, /\.source-file-picker-item\[data-highlighted\]/);
+  assert.match(css, /\.source-editor-action-group \{[\s\S]*?grid-template-columns: repeat\(4, minmax\(104px, 1fr\)\);/);
 });
 
 test("Monitor uses a shared motion system for smooth tab, dialog, and menu transitions", () => {

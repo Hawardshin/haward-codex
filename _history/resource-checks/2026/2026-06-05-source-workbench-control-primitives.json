@@ -1,0 +1,23 @@
+{
+  "task": "source workbench control primitives",
+  "date": "2026-06-05",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "resource": "Next dev server on 127.0.0.1:4210",
+      "status": "started_then_stopped",
+      "evidence": "Started for Playwright check and stopped with Ctrl-C after the check could not reach hydrated source controls."
+    },
+    {
+      "resource": "Playwright Chromium",
+      "status": "closed",
+      "evidence": "Browser instances were closed in finally blocks."
+    },
+    {
+      "resource": "Tauri package build",
+      "status": "completed",
+      "evidence": "package:internal completed .app/.dmg build, codesign verify, and hdiutil verify."
+    }
+  ],
+  "notes": "Playwright dev smoke was limited by the Next dev page remaining at Loading workspace snapshot; static tests and package build covered the implemented UI contract."
+}

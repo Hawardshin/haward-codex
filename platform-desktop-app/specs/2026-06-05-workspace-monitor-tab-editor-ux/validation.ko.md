@@ -2,19 +2,18 @@
 
 ## 명령
 
-- `corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test`: 통과, 53개 테스트.
+- `corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test`: 통과, 55개 테스트.
 - `corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor check`: 통과.
-- `corepack pnpm --dir platform-desktop-app run renderer:build`: 통과, Next production build와 customer bundle audit 성공.
-- `corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort`: 빌드 후 개발용 public snapshot 정상화.
+- `corepack pnpm --dir platform-desktop-app test`: 통과, 22개 테스트.
+- `corepack pnpm --dir platform-desktop-app check`: 통과.
+- `corepack pnpm --dir platform-desktop-app run package:internal`: 통과, Next production build, customer bundle audit, Rust test/build, Tauri `.app`/`.dmg`, codesign verify, DMG verify 성공.
 
 ## 브라우저 스모크
 
-- URL: `http://127.0.0.1:4173`
-- 초기 상태: `activeSection=overview`, `data-section-content-ready=true`, 소스 패널 마운트됨, hidden 상태.
-- 소스 탭 전환: `activeSection=source`, 소스 패널 hidden 해제, 가로 오버플로 없음.
-- 반복 전환: tools -> source 후 소스 패널 계속 마운트됨, 가로 오버플로 없음.
-- 콘솔 에러: 없음.
+- 이번 추가 수정에서 인앱 브라우저 MCP는 호출 가능한 도구로 노출되지 않았다.
+- Playwright로 `http://127.0.0.1:4210` 개발 서버를 열었으나 Next dev 화면이 `Loading workspace snapshot` 상태에서 클라이언트 snapshot fetch를 시작하지 않아 소스 드롭다운 DOM까지 도달하지 못했다.
+- 대신 정적 계약 테스트가 `source-file-picker-trigger`, `source-file-picker-menu`, 공용 Button/ActionGroup 사용, `selectedSourcePath` native select 부재를 검증했다.
 
 ## 제한
 
-- 정적 customer build에는 실제 소스 파일 목록이 없어 Monaco 편집 본문까지는 브라우저에서 확인하지 못했다. Monaco 기본값과 소스 편집 액션은 정적 테스트, 타입 체크, 빌드로 검증했다.
+- Playwright dev 서버 스모크는 Next dev hydration/fetch 제한으로 완료하지 못했다. 최종 패키지 빌드와 codesign/DMG 검증은 성공했다.

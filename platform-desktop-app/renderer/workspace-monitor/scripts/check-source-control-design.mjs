@@ -27,10 +27,14 @@ assertIncludes(monitorShell, "Source action button roles", [
 
 assertIncludes(css, "Source action bar design", [
   ".filesystem-workbench .native-source-controls .source-path-field",
+  ".filesystem-workbench .native-source-controls .source-file-picker-field",
+  ".source-file-picker-menu",
+  ".source-file-picker-item[data-highlighted]",
+  ".source-editor-action-group",
   ".source-action-button.primary",
   ".source-action-button::before",
   ".source-action-button:not(:disabled):hover",
-  "repeat(2, minmax(124px, auto))",
+  "minmax(420px, 1.45fr)",
   ".source-editor-primary-actions",
   "box-shadow:",
   "transform: translateY(-1px);"
@@ -39,7 +43,7 @@ assertIncludes(css, "Source action bar design", [
 assertIncludes(css, "Compact source action bar layout", [
   "  .filesystem-workbench .native-source-controls {\n    grid-template-columns: repeat(2, minmax(0, 1fr));",
   "  .filesystem-workbench-shell {\n    grid-template-columns: 1fr;\n    height: auto;",
-  "  .filesystem-workbench .native-source-controls .source-action-button {\n    grid-column: auto;"
+  "  .filesystem-workbench .native-source-controls .source-editor-action-group {\n    grid-column: auto;"
 ]);
 
 assertIncludes(css, "Source toolbar design", [

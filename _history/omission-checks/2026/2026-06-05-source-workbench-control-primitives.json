@@ -1,0 +1,29 @@
+{
+  "task": "source workbench control primitives",
+  "date": "2026-06-05",
+  "coverage": [
+    {
+      "requirement": "Replace native source file select",
+      "status": "covered",
+      "evidence": "MonitorShell uses DropdownMenu.Root/Trigger/Content/Item and static test asserts no selectedSourcePath native select."
+    },
+    {
+      "requirement": "Avoid default-looking command buttons",
+      "status": "covered",
+      "evidence": "Source action group, command toolbar, workbench tabs, and workspace explorer actions use Button/ActionGroup."
+    },
+    {
+      "requirement": "Update regression checks",
+      "status": "covered",
+      "evidence": "tool-studio.test.mjs and check-source-control-design.mjs validate the new primitives."
+    },
+    {
+      "requirement": "Build automatically after implementation",
+      "status": "covered",
+      "evidence": "package:internal completed and produced verified .app and .dmg artifacts."
+    }
+  ],
+  "known_limits": [
+    "Other settings/history select controls in MonitorShell were not part of this source workbench follow-up."
+  ]
+}

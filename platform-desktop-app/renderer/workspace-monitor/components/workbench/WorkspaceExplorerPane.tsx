@@ -3,6 +3,8 @@
 import { Activity, ChevronRight, Code2, Folder, FolderOpen, Search } from "lucide-react";
 import { useMemo, useState } from "react";
 
+import { ActionGroup } from "@/components/ui/ActionGroup";
+import { Button } from "@/components/ui/Button";
 import type { WorkspaceSourceFile } from "@/lib/snapshot";
 
 type WorkspaceExplorerCopy = {
@@ -98,27 +100,43 @@ export function WorkspaceExplorerPane({
         <span>{catalogLabel}</span>
       </header>
 
-      <button type="button" className="workspace-dropzone" onClick={onChooseFolder} disabled={!runtimeAvailable || workspaceHostBusy !== ""}>
+      <Button
+        variant="outline"
+        className="workspace-dropzone"
+        onClick={onChooseFolder}
+        loading={workspaceHostBusy === "choose"}
+        disabled={!runtimeAvailable || workspaceHostBusy !== ""}
+      >
         <FolderOpen size={18} aria-hidden="true" />
         <strong>{workspaceHostBusy === "choose" ? copy.choosingFolder : copy.uploadDropzone}</strong>
         <span>{copy.uploadDropzoneDetail}</span>
-      </button>
+      </Button>
       <p className="workspace-permission-hint">{copy.permissionDetail}</p>
 
-      <div className="workspace-explorer-actions">
-        <button type="button" onClick={onChooseFolder} disabled={!runtimeAvailable || workspaceHostBusy !== ""}>
+      <ActionGroup className="workspace-explorer-actions" direction="column" density="compact" align="stretch">
+        <Button
+          variant="secondary"
+          onClick={onChooseFolder}
+          loading={workspaceHostBusy === "choose"}
+          disabled={!runtimeAvailable || workspaceHostBusy !== ""}
+        >
           <FolderOpen size={15} aria-hidden="true" />
           <span>{copy.chooseFolder}</span>
-        </button>
-        <button type="button" onClick={onRefreshWorkspace} disabled={!runtimeAvailable || workspaceHostBusy !== ""}>
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={onRefreshWorkspace}
+          loading={workspaceHostBusy === "refresh"}
+          disabled={!runtimeAvailable || workspaceHostBusy !== ""}
+        >
           <Activity size={15} aria-hidden="true" />
           <span>{workspaceHostBusy === "refresh" ? copy.loading : copy.refreshWorkspace}</span>
-        </button>
-        <button type="button" onClick={onRefreshFiles} disabled={!runtimeAvailable || sourceCatalogBusy}>
+        </Button>
+        <Button variant="secondary" onClick={onRefreshFiles} loading={sourceCatalogBusy} disabled={!runtimeAvailable || sourceCatalogBusy}>
           <Search size={15} aria-hidden="true" />
           <span>{sourceCatalogBusy ? copy.loading : copy.refreshFiles}</span>
-        </button>
-      </div>
+        </Button>
+      </ActionGroup>
 
       <div className="workspace-explorer-state" aria-label={copy.workspaceState}>
         <article>

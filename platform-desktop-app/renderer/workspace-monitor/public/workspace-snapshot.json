@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T13:37:20.650Z",
+  "generatedAt": "2026-06-05T13:53:04.178Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 444,
-    "evaluations": 24,
-    "webSearches": 13,
-    "timingRecords": 11,
+    "evaluations": 23,
+    "webSearches": 14,
+    "timingRecords": 12,
     "historyDays": 1,
-    "adminHistoryDocuments": 2266,
+    "adminHistoryDocuments": 2272,
     "adminHistoryDays": 6,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7332,6 +7332,166 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+      "path": "_history/evaluations/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: 소스 워크벤치 컨트롤 프리미티브",
+      "excerpt": "평가: 소스 워크벤치 컨트롤 프리미티브 결과 사용자가 지적한 소스 작업 화면의 기본 선택 드롭다운을 제거하고 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 명령성 버튼은 공용 Button / ActionGroup 으로 통일해 기본 브라우저 버튼처럼 보이는 문제를 줄였다. CSS 계약과 정적 테스트가 새 구조를 고정한다. 구현 후 내부 .app / .dmg 패키지 빌드와 검증까지 완료했다. 검증 corepack pnpm dir platform desktop app/rende",
+      "html": "<p>평가: 소스 워크벤치 컨트롤 프리미티브 결과 사용자가 지적한 소스 작업 화면의 기본 선택 드롭다운을 제거하고 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 명령성 버튼은 공용 Button / ActionGroup 으로 통일해 기본 브라우저 버튼처럼 보이는 문제를 줄였다. CSS 계약과 정적 테스트가 새 구조를 고정한다. 구현 후 내부 .app / .dmg 패키지 빌드와 검증까지 완료했다. 검증 corepack pnpm dir platform desktop app/renderer/workspace monitor test : 통과, 55개 테스트. corepack pnpm dir platform desktop app</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1254,
+      "updatedAt": "2026-06-05T13:52:28.067Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-05-source-workbench-control-primitives-json",
+      "path": "_history/work-timings/2026/2026-06-05-source-workbench-control-primitives.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 05 Source Workbench Control Primitives",
+      "excerpt": "{ \"task\": \"source workbench control primitives\", \"date\": \"2026 06 05\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first and local inspection\", \"approx minutes\": 12 }, { \"phase\": \"implementation\", \"approx minutes\": 28 }, { \"phase\": \"tests and package build\", \"approx minut",
+      "html": "<p>{ &quot;task&quot;: &quot;source workbench control primitives&quot;, &quot;date&quot;: &quot;2026 06 05&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first and local inspection&quot;, &quot;approx minutes&quot;: 12 }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;approx minutes&quot;: 28 }, { &quot;phase&quot;: &quot;tests and package build&quot;, &quot;approx minutes&quot;: 24 }, { &quot;phase&quot;: &quot;records and closeout&quot;, &quot;approx minutes&quot;: 12 } , &quot;notes&quot;: </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 504,
+      "updatedAt": "2026-06-05T13:52:28.067Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+      "path": "_history/request-traces/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브",
+      "excerpt": "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브 요청 기본 버튼/기본 선택 드롭다운처럼 보이는 소스 작업 UI를 수정. 구현 완료 후 자동 빌드. 결과 소스 파일 선택 드롭다운은 Radix DropdownMenu로 교체. 파일 작업/툴바/워크벤치 탭/탐색기 명령 버튼은 공용 Button / ActionGroup 사용. 기존 소스 편집 UX 요구사항과 스펙에 새 요구사항 REQ DESKTOP UX 2026 06 05 004 추가. 고객용 렌더러 빌드와 내부 Tauri .app / .dmg 패키지 ",
+      "html": "<p>요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브 요청 기본 버튼/기본 선택 드롭다운처럼 보이는 소스 작업 UI를 수정. 구현 완료 후 자동 빌드. 결과 소스 파일 선택 드롭다운은 Radix DropdownMenu로 교체. 파일 작업/툴바/워크벤치 탭/탐색기 명령 버튼은 공용 Button / ActionGroup 사용. 기존 소스 편집 UX 요구사항과 스펙에 새 요구사항 REQ DESKTOP UX 2026 06 05 004 추가. 고객용 렌더러 빌드와 내부 Tauri .app / .dmg 패키지 생성 완료. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 05 workspace mon</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1219,
+      "updatedAt": "2026-06-05T13:52:28.066Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+      "path": "_history/user-requests/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브",
+      "excerpt": "사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 요지: 소스 작업 화면의 버튼과 선택 드롭다운이 기본 브라우저 컨트롤처럼 보여 이상하므로 고쳐 달라는 요청. 지속 조건: 구현 후 사용자가 직접 빌드하지 않도록 자동 빌드까지 수행. 해석 최근 소스 편집 UX 작업의 후속 수정으로 보았다. 핵심 범위는 파일 선택 드롭다운, 소스 작업 버튼, 편집기 툴바 버튼, 워크스페이스 탐색기 명령 버튼이다. 전체 앱의 모든 <select 제거는 이번 요청의 직접 범위 밖으로 두었다.",
+      "html": "<p>사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 요지: 소스 작업 화면의 버튼과 선택 드롭다운이 기본 브라우저 컨트롤처럼 보여 이상하므로 고쳐 달라는 요청. 지속 조건: 구현 후 사용자가 직접 빌드하지 않도록 자동 빌드까지 수행. 해석 최근 소스 편집 UX 작업의 후속 수정으로 보았다. 핵심 범위는 파일 선택 드롭다운, 소스 작업 버튼, 편집기 툴바 버튼, 워크스페이스 탐색기 명령 버튼이다. 전체 앱의 모든 &lt;select 제거는 이번 요청의 직접 범위 밖으로 두었다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 664,
+      "updatedAt": "2026-06-05T13:52:28.065Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 소스 워크벤치 컨트롤 프리미티브",
+      "excerpt": "작업 요약: 소스 워크벤치 컨트롤 프리미티브 MonitorShell.tsx 에서 소스 파일 목록 native <select 를 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 소스 열기/저장/전체 저장/복사 액션, 편집기 툴바, 소스 워크벤치 탭을 공용 Button / ActionGroup 으로 바꿨다. WorkspaceExplorerPane.tsx 의 폴더 선택/새로고침 명령 버튼도 공용 버튼 프리미티브로 통일했다. 드롭다운 메뉴, 선택 항목, 액션 그룹 레이아웃 CSS와",
+      "html": "<p>작업 요약: 소스 워크벤치 컨트롤 프리미티브 MonitorShell.tsx 에서 소스 파일 목록 native &lt;select 를 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 소스 열기/저장/전체 저장/복사 액션, 편집기 툴바, 소스 워크벤치 탭을 공용 Button / ActionGroup 으로 바꿨다. WorkspaceExplorerPane.tsx 의 폴더 선택/새로고침 명령 버튼도 공용 버튼 프리미티브로 통일했다. 드롭다운 메뉴, 선택 항목, 액션 그룹 레이아웃 CSS와 check source control design 계약을 갱신했다. 구현 후 내부 패키지 빌드까지 실행해 .app 와 .dmg 를 다시 만들었</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 921,
+      "updatedAt": "2026-06-05T13:52:28.065Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+      "path": "_history/web-searches/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브",
+      "excerpt": "웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 작업: Workspace Monitor 소스 작업 화면의 네이티브 파일 선택 드롭다운과 기본 버튼 느낌 제거 검색 Radix UI Dropdown Menu React docs DropdownMenu.Trigger Content Item official MDN HTML select element styling customizable select limitations 확인한 출처 Radix UI Dropdown Menu 공식 ",
+      "html": "<p>웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 작업: Workspace Monitor 소스 작업 화면의 네이티브 파일 선택 드롭다운과 기본 버튼 느낌 제거 검색 Radix UI Dropdown Menu React docs DropdownMenu.Trigger Content Item official MDN HTML select element styling customizable select limitations 확인한 출처 Radix UI Dropdown Menu 공식 문서: https://www.radix ui.com/primitives/docs/components/dropdown menu MDN Custom</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1523,
+      "updatedAt": "2026-06-05T13:52:28.064Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-05-workspace-monitor-tab-editor-ux-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-05-workspace-monitor-tab-editor-ux/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록: Workspace Monitor 탭 전환과 소스 편집 UX",
+      "excerpt": "작업 목록: Workspace Monitor 탭 전환과 소스 편집 UX x 웹 검색 기록 생성 x memory bootstrap 확인 x ship first 작업 모드 선택 x 탭 전환 지연 상태 제거 x Monaco/3D 모듈 선로딩 추가 x 소스 패널 마운트 유지와 숨김 상태 리소스 가드 추가 x 사이드바 폭과 터미널 오프셋 조정 x 소스 편집 액션/Monaco 기본값/CSS 계약 개선 x 소스 파일 선택기를 Radix DropdownMenu 기반 커스텀 선택기로 교체 x 소스 작업/탐색기 명",
+      "html": "<h1>작업 목록: Workspace Monitor 탭 전환과 소스 편집 UX</h1>\n<ul>\n<li>[x] 웹 검색 기록 생성</li>\n<li>[x] memory bootstrap 확인</li>\n<li>[x] <code>ship_first</code> 작업 모드 선택</li>\n<li>[x] 탭 전환 지연 상태 제거</li>\n<li>[x] Monaco/3D 모듈 선로딩 추가</li>\n<li>[x] 소스 패널 마운트 유지와 숨김 상태 리소스 가드 추가</li>\n<li>[x] 사이드바 폭과 터미널 오프셋 조정</li>\n<li>[x] 소스 편집 액션/Monaco 기본값/CSS 계약 개선</li>\n<li>[x] 소스 파일 선택기를 Radix DropdownMenu 기반 커스텀 선택기로 교체</li>\n<li>[x] 소스 작업/탐색기 명령 버튼을 공용 Button/ActionGroup으로 통일</li>\n<li>[x] 테스트와 정적 감사 갱신</li>\n<li>[x] 빌드와 브라우저 스모크 실행</li>\n<li>[x] 평가와 요청 추적 기록</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 737,
+      "updatedAt": "2026-06-05T13:51:33.020Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-05-workspace-monitor-tab-editor-ux-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-05-workspace-monitor-tab-editor-ux/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증: Workspace Monitor 탭 전환과 소스 편집 UX",
+      "excerpt": "검증: Workspace Monitor 탭 전환과 소스 편집 UX 명령 corepack pnpm dir platform desktop app/renderer/workspace monitor test : 통과, 55개 테스트. corepack pnpm dir platform desktop app/renderer/workspace monitor check : 통과. corepack pnpm dir platform desktop app test : 통과, 22개 테스트. corepack pnpm dir",
+      "html": "<h1>검증: Workspace Monitor 탭 전환과 소스 편집 UX</h1>\n<h2>명령</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code>: 통과, 55개 테스트.</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor check</code>: 통과.</li>\n<li><code>corepack pnpm --dir platform-desktop-app test</code>: 통과, 22개 테스트.</li>\n<li><code>corepack pnpm --dir platform-desktop-app check</code>: 통과.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code>: 통과, Next production build, customer bundle audit, Rust test/build, Tauri <code>.app</code>/<code>.dmg</code>, codesign verify, DMG verify 성공.</li>\n</ul>\n<h2>브라우저 스모크</h2>\n<ul>\n<li>이번 추가 수정에서 인앱 브라우저 MCP는 호출 가능한 도구로 노출되지 않았다.</li>\n<li>Playwright로 <code>http://127.0.0.1:4210</code> 개발 서버를 열었으나 Next dev 화면이 <code>Loading workspace snapshot</code> 상태에서 클라이언트 snapshot fetch를 시작하지 않아 소스 드롭다운 DOM까지 도달하지 못했다.</li>\n<li>대신 정적 계약 테스트가 <code>source-file-picker-trigger</code>, <code>source-file-picker-menu</code>, 공용 Button/ActionGroup 사용, <code>selectedSourcePath</code> native select 부재를 검증했다.</li>\n</ul>\n<h2>제한</h2>\n<ul>\n<li>Playwright dev 서버 스모크는 Next dev hydration/fetch 제한으로 완료하지 못했다. 최종 패키지 빌드와 codesign/DMG 검증은 성공했다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1327,
+      "updatedAt": "2026-06-05T13:51:33.020Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-05-workspace-monitor-tab-editor-ux-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-05-workspace-monitor-tab-editor-ux/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "스펙: Workspace Monitor 탭 전환과 소스 편집 UX",
+      "excerpt": "스펙: Workspace Monitor 탭 전환과 소스 편집 UX 목표 Workspace Monitor에서 탭 이동 시 느린 로딩감을 줄이고, 소스 편집 화면의 상태 보존과 조작 직관성을 높인다. 설계 결정 readySection 과 pendingSectionCommitRef 기반의 섹션 지연 커밋을 제거한다. @monaco editor/react 와 AgentCollaborationScene 은 브라우저 idle 시간에 동적 import로 선로딩한다. 소스 편집 패널은 MountedSection",
+      "html": "<h1>스펙: Workspace Monitor 탭 전환과 소스 편집 UX</h1>\n<h2>목표</h2>\n<p>Workspace Monitor에서 탭 이동 시 느린 로딩감을 줄이고, 소스 편집 화면의 상태 보존과 조작 직관성을 높인다.</p>\n<h2>설계 결정</h2>\n<ul>\n<li><code>readySection</code>과 <code>pendingSectionCommitRef</code> 기반의 섹션 지연 커밋을 제거한다.</li>\n<li><code>@monaco-editor/react</code>와 <code>AgentCollaborationScene</code>은 브라우저 idle 시간에 동적 import로 선로딩한다.</li>\n<li>소스 편집 패널은 <code>MountedSectionPanel</code>로 숨김 상태에서도 유지해 열린 드래프트와 에디터 상태가 탭 이동으로 사라지지 않게 한다.</li>\n<li>숨겨진 소스 패널은 <code>surfaceActive</code>로 런타임 실행 요청 소비와 세션 폴링을 막는다.</li>\n<li>Monaco 기본값은 줄바꿈 켬, 미니맵 끔, 더 큰 글꼴과 높은 편집 영역으로 조정한다.</li>\n<li>사이드바 확장 폭과 터미널 오프셋을 함께 조정한다.</li>\n<li>소스 작업 화면의 파일 목록은 네이티브 <code>&lt;select&gt;</code> 대신 <code>@radix-ui/react-dropdown-menu</code> 기반 선택 메뉴를 사용한다.</li>\n<li>소스 작업, 편집기 툴바, 워크벤치 탭, 작업공간 탐색기 명령은 공용 <code>Button</code>/<code>ActionGroup</code> 프리미티브로 통일한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>data-section-content-ready</code>는 탭 이동 중 <code>false</code> 준비 상태로 떨어지지 않는다.</li>\n<li>소스 패널 DOM은 초기부터 존재하고 비활성 탭에서는 <code>hidden</code>으로 숨겨진다.</li>\n<li>소스 탭 활성화 시 가로 오버플로가 생기지 않는다.</li>\n<li>소스 파일 목록 컨트롤 안에는 <code>selectedSourcePath</code>에 연결된 네이티브 <code>&lt;select&gt;</code>가 남지 않는다.</li>\n<li>소스 작업 명령 버튼은 <code>data-ui-button</code>을 갖는 공용 버튼으로 렌더된다.</li>\n<li>고객용 렌더러 빌드가 성공한다.</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>React 공식 문서는 lazy 컴포넌트 코드가 처음 렌더 시점까지 지연될 수 있음을 설명한다: https://react.dev/reference/react/lazy</li>\n<li>React Suspense는 아직 로드되지 않은 콘텐츠 대신 fallback을 표시하는 패턴을 제공한다: https://react.dev/reference/react/Suspense</li>\n<li>MDN <code>content-visibility</code> 문서는 숨김/렌더링 비용 관리가 브라우저 렌더링과 연결됨을 설명한다: https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2272,
+      "updatedAt": "2026-06-05T13:51:33.019Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: Workspace Monitor 탭 전환과 소스 편집 UX",
+      "excerpt": "요구사항: Workspace Monitor 탭 전환과 소스 편집 UX 요청일: 2026 06 05 소유 프로젝트: platform desktop app 대상 화면: renderer/workspace monitor 요구사항 | ID | 요구사항 | 우선순위 | 수용 기준 | 검증 | | | | | | | | REQ DESKTOP UX 2026 06 05 001 | Workspace Monitor의 주요 탭 전환은 의도적인 첫 페인트 후 렌더 지연으로 체감 로딩을 만들지 않아야 한다. | must |",
+      "html": "<h1>요구사항: Workspace Monitor 탭 전환과 소스 편집 UX</h1>\n<ul>\n<li>요청일: 2026-06-05</li>\n<li>소유 프로젝트: <code>platform-desktop-app</code></li>\n<li>대상 화면: <code>renderer/workspace-monitor</code></li>\n</ul>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>수용 기준</th><th>검증</th></tr></thead><tbody><tr><td>REQ-DESKTOP-UX-2026-06-05-001</td><td>Workspace Monitor의 주요 탭 전환은 의도적인 첫 페인트 후 렌더 지연으로 체감 로딩을 만들지 않아야 한다.</td><td>must</td><td>탭 전환 커밋이 즉시 실행되고, 무거운 모듈은 idle 시간에 선로딩된다.</td><td><code>workspace-monitor test</code>, <code>workspace-monitor check</code>, 브라우저 스모크</td></tr><tr><td>REQ-DESKTOP-UX-2026-06-05-002</td><td>소스 편집 화면은 탭 이동 후에도 열린 편집 상태를 유지해야 한다.</td><td>must</td><td>소스 패널이 숨김 상태에서도 마운트 유지되고, 숨겨진 상태에서는 런타임 실행 요청과 세션 폴링을 소비하지 않는다.</td><td>정적 테스트, 브라우저 DOM 확인</td></tr><tr><td>REQ-DESKTOP-UX-2026-06-05-003</td><td>사이드바 확장 상태와 소스 편집 컨트롤은 가로 잘림 없이 읽고 누를 수 있어야 한다.</td><td>must</td><td>확장 레일 폭, 터미널 오프셋, 소스 액션바, Monaco 기본 옵션이 새 레이아웃 계약에 맞는다.</td><td>CSS 계약 감사, 브라우저 overflow 확인</td></tr><tr><td>REQ-DESKTOP-UX-2026-06-05-004</td><td>소스 작업 화면의 파일 선택기와 명령 버튼은 브라우저 기본 폼 컨트롤처럼 보이면 안 된다.</td><td>must</td><td>파일 목록은 Radix DropdownMenu 기반 커스텀 선택기로 열리고, 소스 작업/탐색기 명령 버튼은 공용 <code>Button</code>/<code>ActionGroup</code> 프리미티브를 사용한다.</td><td><code>check-source-control-design</code>, 정적 테스트, 내부 패키지 빌드</td></tr></tbody></table>\n<h2>범위</h2>\n<ul>\n<li>포함: 탭 전환 지연 제거, Monaco/3D 모듈 선로딩, 소스 패널 마운트 유지, 사이드바 폭 조정, 소스 편집 액션과 Monaco 기본값 개선, 소스 파일 선택기/명령 버튼의 공용 UI 프리미티브 적용.</li>\n<li>제외: Tauri 네이티브 파일 권한 흐름 변경, Monaco 자체 기능 확장, 전체 데스크톱 패키징 정책 변경.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2128,
+      "updatedAt": "2026-06-05T13:51:14.123Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
       "path": "_history/evaluations/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
       "category": "evaluation",
@@ -7844,22 +8004,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "platform-desktop-app-specs-2026-06-05-workspace-monitor-tab-editor-ux-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-05-workspace-monitor-tab-editor-ux/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록: Workspace Monitor 탭 전환과 소스 편집 UX",
-      "excerpt": "작업 목록: Workspace Monitor 탭 전환과 소스 편집 UX x 웹 검색 기록 생성 x memory bootstrap 확인 x ship first 작업 모드 선택 x 탭 전환 지연 상태 제거 x Monaco/3D 모듈 선로딩 추가 x 소스 패널 마운트 유지와 숨김 상태 리소스 가드 추가 x 사이드바 폭과 터미널 오프셋 조정 x 소스 편집 액션/Monaco 기본값/CSS 계약 개선 x 테스트와 정적 감사 갱신 x 빌드와 브라우저 스모크 실행 x 평가와 요청 추적 기록",
-      "html": "<h1>작업 목록: Workspace Monitor 탭 전환과 소스 편집 UX</h1>\n<ul>\n<li>[x] 웹 검색 기록 생성</li>\n<li>[x] memory bootstrap 확인</li>\n<li>[x] <code>ship_first</code> 작업 모드 선택</li>\n<li>[x] 탭 전환 지연 상태 제거</li>\n<li>[x] Monaco/3D 모듈 선로딩 추가</li>\n<li>[x] 소스 패널 마운트 유지와 숨김 상태 리소스 가드 추가</li>\n<li>[x] 사이드바 폭과 터미널 오프셋 조정</li>\n<li>[x] 소스 편집 액션/Monaco 기본값/CSS 계약 개선</li>\n<li>[x] 테스트와 정적 감사 갱신</li>\n<li>[x] 빌드와 브라우저 스모크 실행</li>\n<li>[x] 평가와 요청 추적 기록</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 562,
-      "updatedAt": "2026-06-05T13:13:07.873Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-05-workspace-monitor-tab-editor-ux-traceability-ko-md",
       "path": "platform-desktop-app/specs/2026-06-05-workspace-monitor-tab-editor-ux/traceability.ko.md",
       "category": "project-spec",
@@ -7871,54 +8015,6 @@
       "htmlTruncated": false,
       "sourceBytes": 1004,
       "updatedAt": "2026-06-05T13:13:07.873Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-05-workspace-monitor-tab-editor-ux-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-05-workspace-monitor-tab-editor-ux/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증: Workspace Monitor 탭 전환과 소스 편집 UX",
-      "excerpt": "검증: Workspace Monitor 탭 전환과 소스 편집 UX 명령 corepack pnpm dir platform desktop app/renderer/workspace monitor test : 통과, 53개 테스트. corepack pnpm dir platform desktop app/renderer/workspace monitor check : 통과. corepack pnpm dir platform desktop app run renderer:build : 통과, Next product",
-      "html": "<h1>검증: Workspace Monitor 탭 전환과 소스 편집 UX</h1>\n<h2>명령</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code>: 통과, 53개 테스트.</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor check</code>: 통과.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run renderer:build</code>: 통과, Next production build와 customer bundle audit 성공.</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code>: 빌드 후 개발용 public snapshot 정상화.</li>\n</ul>\n<h2>브라우저 스모크</h2>\n<ul>\n<li>URL: <code>http://127.0.0.1:4173</code></li>\n<li>초기 상태: <code>activeSection=overview</code>, <code>data-section-content-ready=true</code>, 소스 패널 마운트됨, hidden 상태.</li>\n<li>소스 탭 전환: <code>activeSection=source</code>, 소스 패널 hidden 해제, 가로 오버플로 없음.</li>\n<li>반복 전환: tools -&gt; source 후 소스 패널 계속 마운트됨, 가로 오버플로 없음.</li>\n<li>콘솔 에러: 없음.</li>\n</ul>\n<h2>제한</h2>\n<ul>\n<li>정적 customer build에는 실제 소스 파일 목록이 없어 Monaco 편집 본문까지는 브라우저에서 확인하지 못했다. Monaco 기본값과 소스 편집 액션은 정적 테스트, 타입 체크, 빌드로 검증했다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1200,
-      "updatedAt": "2026-06-05T13:13:07.873Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "요구사항: Workspace Monitor 탭 전환과 소스 편집 UX",
-      "excerpt": "요구사항: Workspace Monitor 탭 전환과 소스 편집 UX 요청일: 2026 06 05 소유 프로젝트: platform desktop app 대상 화면: renderer/workspace monitor 요구사항 | ID | 요구사항 | 우선순위 | 수용 기준 | 검증 | | | | | | | | REQ DESKTOP UX 2026 06 05 001 | Workspace Monitor의 주요 탭 전환은 의도적인 첫 페인트 후 렌더 지연으로 체감 로딩을 만들지 않아야 한다. | must |",
-      "html": "<h1>요구사항: Workspace Monitor 탭 전환과 소스 편집 UX</h1>\n<ul>\n<li>요청일: 2026-06-05</li>\n<li>소유 프로젝트: <code>platform-desktop-app</code></li>\n<li>대상 화면: <code>renderer/workspace-monitor</code></li>\n</ul>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>수용 기준</th><th>검증</th></tr></thead><tbody><tr><td>REQ-DESKTOP-UX-2026-06-05-001</td><td>Workspace Monitor의 주요 탭 전환은 의도적인 첫 페인트 후 렌더 지연으로 체감 로딩을 만들지 않아야 한다.</td><td>must</td><td>탭 전환 커밋이 즉시 실행되고, 무거운 모듈은 idle 시간에 선로딩된다.</td><td><code>workspace-monitor test</code>, <code>workspace-monitor check</code>, 브라우저 스모크</td></tr><tr><td>REQ-DESKTOP-UX-2026-06-05-002</td><td>소스 편집 화면은 탭 이동 후에도 열린 편집 상태를 유지해야 한다.</td><td>must</td><td>소스 패널이 숨김 상태에서도 마운트 유지되고, 숨겨진 상태에서는 런타임 실행 요청과 세션 폴링을 소비하지 않는다.</td><td>정적 테스트, 브라우저 DOM 확인</td></tr><tr><td>REQ-DESKTOP-UX-2026-06-05-003</td><td>사이드바 확장 상태와 소스 편집 컨트롤은 가로 잘림 없이 읽고 누를 수 있어야 한다.</td><td>must</td><td>확장 레일 폭, 터미널 오프셋, 소스 액션바, Monaco 기본 옵션이 새 레이아웃 계약에 맞는다.</td><td>CSS 계약 감사, 브라우저 overflow 확인</td></tr></tbody></table>\n<h2>범위</h2>\n<ul>\n<li>포함: 탭 전환 지연 제거, Monaco/3D 모듈 선로딩, 소스 패널 마운트 유지, 사이드바 폭 조정, 소스 편집 액션과 Monaco 기본값 개선.</li>\n<li>제외: Tauri 네이티브 파일 권한 흐름 변경, Monaco 자체 기능 확장, 전체 데스크톱 패키징 정책 변경.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1629,
-      "updatedAt": "2026-06-05T13:13:07.872Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-05-workspace-monitor-tab-editor-ux-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-05-workspace-monitor-tab-editor-ux/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "스펙: Workspace Monitor 탭 전환과 소스 편집 UX",
-      "excerpt": "스펙: Workspace Monitor 탭 전환과 소스 편집 UX 목표 Workspace Monitor에서 탭 이동 시 느린 로딩감을 줄이고, 소스 편집 화면의 상태 보존과 조작 직관성을 높인다. 설계 결정 readySection 과 pendingSectionCommitRef 기반의 섹션 지연 커밋을 제거한다. @monaco editor/react 와 AgentCollaborationScene 은 브라우저 idle 시간에 동적 import로 선로딩한다. 소스 편집 패널은 MountedSection",
-      "html": "<h1>스펙: Workspace Monitor 탭 전환과 소스 편집 UX</h1>\n<h2>목표</h2>\n<p>Workspace Monitor에서 탭 이동 시 느린 로딩감을 줄이고, 소스 편집 화면의 상태 보존과 조작 직관성을 높인다.</p>\n<h2>설계 결정</h2>\n<ul>\n<li><code>readySection</code>과 <code>pendingSectionCommitRef</code> 기반의 섹션 지연 커밋을 제거한다.</li>\n<li><code>@monaco-editor/react</code>와 <code>AgentCollaborationScene</code>은 브라우저 idle 시간에 동적 import로 선로딩한다.</li>\n<li>소스 편집 패널은 <code>MountedSectionPanel</code>로 숨김 상태에서도 유지해 열린 드래프트와 에디터 상태가 탭 이동으로 사라지지 않게 한다.</li>\n<li>숨겨진 소스 패널은 <code>surfaceActive</code>로 런타임 실행 요청 소비와 세션 폴링을 막는다.</li>\n<li>Monaco 기본값은 줄바꿈 켬, 미니맵 끔, 더 큰 글꼴과 높은 편집 영역으로 조정한다.</li>\n<li>사이드바 확장 폭과 터미널 오프셋을 함께 조정한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>data-section-content-ready</code>는 탭 이동 중 <code>false</code> 준비 상태로 떨어지지 않는다.</li>\n<li>소스 패널 DOM은 초기부터 존재하고 비활성 탭에서는 <code>hidden</code>으로 숨겨진다.</li>\n<li>소스 탭 활성화 시 가로 오버플로가 생기지 않는다.</li>\n<li>고객용 렌더러 빌드가 성공한다.</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>React 공식 문서는 lazy 컴포넌트 코드가 처음 렌더 시점까지 지연될 수 있음을 설명한다: https://react.dev/reference/react/lazy</li>\n<li>React Suspense는 아직 로드되지 않은 콘텐츠 대신 fallback을 표시하는 패턴을 제공한다: https://react.dev/reference/react/Suspense</li>\n<li>MDN <code>content-visibility</code> 문서는 숨김/렌더링 비용 관리가 브라우저 렌더링과 연결됨을 설명한다: https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1763,
-      "updatedAt": "2026-06-05T13:13:07.872Z",
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
@@ -9682,102 +9778,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-05-character-design-refinement-ko-md",
-      "path": "_history/user-requests/2026/2026-06-05-character-design-refinement.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Character Design Refinement",
-      "excerpt": "사용자 요청 요약: Character Design Refinement 사용자는 캐릭터 디자인 자체를 더 좋게 개선하라고 요청했다. 앞선 귀여운 레퍼런스 요구를 이어받아 Workspace Monitor Agents 협업 3D scene과 Tool Studio 캐릭터 맵의 비율, 얼굴, 단순한 마스코트 인상을 정제 범위로 정했다.",
-      "html": "<p>사용자 요청 요약: Character Design Refinement 사용자는 캐릭터 디자인 자체를 더 좋게 개선하라고 요청했다. 앞선 귀여운 레퍼런스 요구를 이어받아 Workspace Monitor Agents 협업 3D scene과 Tool Studio 캐릭터 맵의 비율, 얼굴, 단순한 마스코트 인상을 정제 범위로 정했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 347,
-      "updatedAt": "2026-06-05T03:20:41.135Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-cute-mascot-character-ko-md",
-      "path": "_history/evaluations/2026/2026-06-05-cute-mascot-character.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: Cute Mascot Character",
-      "excerpt": "평가: Cute Mascot Character 결론 통과. 캐릭터가 기존의 딱딱한 로봇보다 귀여운 동물형 마스코트로 읽히도록 개선되었다. 확인 Agents 협업 scene과 Tool Studio 캐릭터 맵 모두에 귀, 안쪽 귀, 볼, 작은 muzzle, 꼬리 디테일이 적용되었다. 현실적인 털, 해부학, 과한 표정 animation은 추가하지 않았다. 역할 링, visor, chest/status detail, lazy mount, offscreen pause, reduced motion 경계는 유",
-      "html": "<p>평가: Cute Mascot Character 결론 통과. 캐릭터가 기존의 딱딱한 로봇보다 귀여운 동물형 마스코트로 읽히도록 개선되었다. 확인 Agents 협업 scene과 Tool Studio 캐릭터 맵 모두에 귀, 안쪽 귀, 볼, 작은 muzzle, 꼬리 디테일이 적용되었다. 현실적인 털, 해부학, 과한 표정 animation은 추가하지 않았다. 역할 링, visor, chest/status detail, lazy mount, offscreen pause, reduced motion 경계는 유지했다. desktop/mobile Playwright screenshot QA에서 nonblank canvas와 overflowX 0을 확인했</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 876,
-      "updatedAt": "2026-06-05T03:09:30.225Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-05-cute-mascot-character-ko-md",
-      "path": "_history/request-traces/2026/2026-06-05-cute-mascot-character.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 추적: Cute Mascot Character",
-      "excerpt": "요청 추적: Cute Mascot Character 요청 캐릭터가 너무 현실적이지 않고 귀여운 동물 느낌을 갖도록 개선. 결과 REQ WM 073 추가. Agents AgentCharacter 에 ear, inner ear, muzzle, cheek, tail detail 추가. Tool Studio Three.js character map에도 같은 soft mascot geometry 추가. static tests와 desktop/mobile screenshot QA 갱신. 검증 corepack",
-      "html": "<p>요청 추적: Cute Mascot Character 요청 캐릭터가 너무 현실적이지 않고 귀여운 동물 느낌을 갖도록 개선. 결과 REQ WM 073 추가. Agents AgentCharacter 에 ear, inner ear, muzzle, cheek, tail detail 추가. Tool Studio Three.js character map에도 같은 soft mascot geometry 추가. static tests와 desktop/mobile screenshot QA 갱신. 검증 corepack pnpm filter workspace monitor test corepack pnpm filter workspace monitor exec </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 798,
-      "updatedAt": "2026-06-05T03:09:30.225Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-05-cute-mascot-character-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-05-cute-mascot-character.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: Cute Mascot Character",
-      "excerpt": "작업 요약: Cute Mascot Character 3D 에이전트 캐릭터를 귀여운 동물형 마스코트 쪽으로 조정했다. Agents와 Tool Studio 양쪽에 귀, 안쪽 귀, 볼, 작은 muzzle, 꼬리 디테일을 추가했다. 기능적 상태 신호와 성능 계약은 유지했다. 테스트, 타입 체크, check, 일반 빌드, 고객 빌드, 성능 예산, desktop/mobile screenshot QA를 완료했다.",
-      "html": "<p>작업 요약: Cute Mascot Character 3D 에이전트 캐릭터를 귀여운 동물형 마스코트 쪽으로 조정했다. Agents와 Tool Studio 양쪽에 귀, 안쪽 귀, 볼, 작은 muzzle, 꼬리 디테일을 추가했다. 기능적 상태 신호와 성능 계약은 유지했다. 테스트, 타입 체크, check, 일반 빌드, 고객 빌드, 성능 예산, desktop/mobile screenshot QA를 완료했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 419,
-      "updatedAt": "2026-06-05T03:09:30.225Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-cute-mascot-character-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-05-cute-mascot-character-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 05 Cute Mascot Character Evaluation Input",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"cute mascot character\", \"user request summary\": \"Make the existing 3D agent characters feel cute and animal like rather than realistic or hard edged.\", \"requirements\": \"REQ WM 073\" , \"implementation targets\": \"platform desktop app/renderer",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request slug&quot;: &quot;cute mascot character&quot;, &quot;user request summary&quot;: &quot;Make the existing 3D agent characters feel cute and animal like rather than realistic or hard edged.&quot;, &quot;requirements&quot;: &quot;REQ WM 073&quot; , &quot;implementation targets&quot;: &quot;platform desktop app/renderer/workspace monitor/components/workbench/AgentCollaborationScene.tsx&quot;, &quot;platform </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1543,
-      "updatedAt": "2026-06-05T03:09:30.224Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-05-cute-mascot-character-ko-md",
-      "path": "_history/user-requests/2026/2026-06-05-cute-mascot-character.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Cute Mascot Character",
-      "excerpt": "사용자 요청 요약: Cute Mascot Character 사용자는 기존 캐릭터가 너무 현실적인 방향이 아니라 귀엽고 동물 느낌이 나야 한다고 요청했다. 범위는 Workspace Monitor Agents 협업 3D scene과 Tool Studio 캐릭터 맵의 캐릭터 디자인 후속 개선으로 한정했다.",
-      "html": "<p>사용자 요청 요약: Cute Mascot Character 사용자는 기존 캐릭터가 너무 현실적인 방향이 아니라 귀엽고 동물 느낌이 나야 한다고 요청했다. 범위는 Workspace Monitor Agents 협업 3D scene과 Tool Studio 캐릭터 맵의 캐릭터 디자인 후속 개선으로 한정했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 322,
-      "updatedAt": "2026-06-05T03:09:30.224Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
     },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-docs-requirements-2026-06-01-workspace-monitor-en-md",
@@ -17740,14 +17740,14 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 24
+          "count": 23
         },
         {
           "category": "request-trace",
           "count": 14
         },
         {
-          "category": "user-request",
+          "category": "web-search",
           "count": 14
         },
         {
@@ -17755,12 +17755,12 @@
           "count": 14
         },
         {
-          "category": "web-search",
+          "category": "user-request",
           "count": 13
         },
         {
           "category": "work-timing",
-          "count": 11
+          "count": 12
         },
         {
           "category": "plan",
@@ -17850,26 +17850,6 @@
           "title": "평가: Character Design Refinement",
           "excerpt": "평가: Character Design Refinement 결론 통과. 캐릭터가 기존 장비형 인상보다 더 단순하고 둥근 귀여운 마스코트로 읽히도록 개선되었다. 확인 Agents 협업 scene과 Tool Studio 캐릭터 맵 모두에 작은 점눈, 작은 코, 낮은 muzzle, 더 둥근 귀/손발/꼬리 비율이 적용되었다. visor와 chest panel은 얼굴보다 강하게 보이지 않도록 축소되어 상태 보조 신호로 남았다. role/status 신호, lazy mount, offscreen pause, ",
           "updatedAt": "2026-06-05T03:20:41.138Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-05-cute-mascot-character-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-05-cute-mascot-character-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 05 Cute Mascot Character Evaluation Input",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"cute mascot character\", \"user request summary\": \"Make the existing 3D agent characters feel cute and animal like rather than realistic or hard edged.\", \"requirements\": \"REQ WM 073\" , \"implementation targets\": \"platform desktop app/renderer",
-          "updatedAt": "2026-06-05T03:09:30.224Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-05-cute-mascot-character-ko-md",
-          "path": "_history/evaluations/2026/2026-06-05-cute-mascot-character.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: Cute Mascot Character",
-          "excerpt": "평가: Cute Mascot Character 결론 통과. 캐릭터가 기존의 딱딱한 로봇보다 귀여운 동물형 마스코트로 읽히도록 개선되었다. 확인 Agents 협업 scene과 Tool Studio 캐릭터 맵 모두에 귀, 안쪽 귀, 볼, 작은 muzzle, 꼬리 디테일이 적용되었다. 현실적인 털, 해부학, 과한 표정 animation은 추가하지 않았다. 역할 링, visor, chest/status detail, lazy mount, offscreen pause, reduced motion 경계는 유",
-          "updatedAt": "2026-06-05T03:09:30.225Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -17993,6 +17973,16 @@
           "historyDate": "2026-06-05"
         },
         {
+          "id": "history-evaluations-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+          "path": "_history/evaluations/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "평가: 소스 워크벤치 컨트롤 프리미티브",
+          "excerpt": "평가: 소스 워크벤치 컨트롤 프리미티브 결과 사용자가 지적한 소스 작업 화면의 기본 선택 드롭다운을 제거하고 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 명령성 버튼은 공용 Button / ActionGroup 으로 통일해 기본 브라우저 버튼처럼 보이는 문제를 줄였다. CSS 계약과 정적 테스트가 새 구조를 고정한다. 구현 후 내부 .app / .dmg 패키지 빌드와 검증까지 완료했다. 검증 corepack pnpm dir platform desktop app/rende",
+          "updatedAt": "2026-06-05T13:52:28.067Z",
+          "historyDate": "2026-06-05"
+        },
+        {
           "id": "history-evaluations-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
           "path": "_history/evaluations/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
           "category": "evaluation",
@@ -18103,16 +18093,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-request-traces-2026-2026-06-05-cute-mascot-character-ko-md",
-          "path": "_history/request-traces/2026/2026-06-05-cute-mascot-character.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 추적: Cute Mascot Character",
-          "excerpt": "요청 추적: Cute Mascot Character 요청 캐릭터가 너무 현실적이지 않고 귀여운 동물 느낌을 갖도록 개선. 결과 REQ WM 073 추가. Agents AgentCharacter 에 ear, inner ear, muzzle, cheek, tail detail 추가. Tool Studio Three.js character map에도 같은 soft mascot geometry 추가. static tests와 desktop/mobile screenshot QA 갱신. 검증 corepack",
-          "updatedAt": "2026-06-05T03:09:30.225Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
           "path": "_history/request-traces/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
           "category": "request-trace",
@@ -18183,6 +18163,16 @@
           "historyDate": "2026-06-05"
         },
         {
+          "id": "history-request-traces-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+          "path": "_history/request-traces/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브",
+          "excerpt": "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브 요청 기본 버튼/기본 선택 드롭다운처럼 보이는 소스 작업 UI를 수정. 구현 완료 후 자동 빌드. 결과 소스 파일 선택 드롭다운은 Radix DropdownMenu로 교체. 파일 작업/툴바/워크벤치 탭/탐색기 명령 버튼은 공용 Button / ActionGroup 사용. 기존 소스 편집 UX 요구사항과 스펙에 새 요구사항 REQ DESKTOP UX 2026 06 05 004 추가. 고객용 렌더러 빌드와 내부 Tauri .app / .dmg 패키지 ",
+          "updatedAt": "2026-06-05T13:52:28.066Z",
+          "historyDate": "2026-06-05"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
           "path": "_history/request-traces/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
           "category": "request-trace",
@@ -18233,16 +18223,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-user-requests-2026-2026-06-05-character-design-refinement-ko-md",
-          "path": "_history/user-requests/2026/2026-06-05-character-design-refinement.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: Character Design Refinement",
-          "excerpt": "사용자 요청 요약: Character Design Refinement 사용자는 캐릭터 디자인 자체를 더 좋게 개선하라고 요청했다. 앞선 귀여운 레퍼런스 요구를 이어받아 Workspace Monitor Agents 협업 3D scene과 Tool Studio 캐릭터 맵의 비율, 얼굴, 단순한 마스코트 인상을 정제 범위로 정했다.",
-          "updatedAt": "2026-06-05T03:20:41.135Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-05-continue-operator-surface-qa-ko-md",
           "path": "_history/user-requests/2026/2026-06-05-continue-operator-surface-qa.ko.md",
           "category": "user-request",
@@ -18250,16 +18230,6 @@
           "title": "사용자 요청 요약: Continue Operator Surface QA",
           "excerpt": "사용자 요청 요약: Continue Operator Surface QA 이전 작업에서 멈추지 말고 계속 이어서 진행한다. 남은 탭과 관리 화면을 더 열어보고 덜 된 UI, 스크롤 범위, 작은 버튼, 느린 반응을 계속 개선한다.",
           "updatedAt": "2026-06-05T06:56:15.234Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-05-cute-mascot-character-ko-md",
-          "path": "_history/user-requests/2026/2026-06-05-cute-mascot-character.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: Cute Mascot Character",
-          "excerpt": "사용자 요청 요약: Cute Mascot Character 사용자는 기존 캐릭터가 너무 현실적인 방향이 아니라 귀엽고 동물 느낌이 나야 한다고 요청했다. 범위는 Workspace Monitor Agents 협업 3D scene과 Tool Studio 캐릭터 맵의 캐릭터 디자인 후속 개선으로 한정했다.",
-          "updatedAt": "2026-06-05T03:09:30.224Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18320,6 +18290,16 @@
           "title": "사용자 요청 요약: Smooth Redesign Maintenance",
           "excerpt": "사용자 요청 요약: Smooth Redesign Maintenance 여러 탭을 직접 열어 잘못 구현됐거나 덜 된 UI를 찾아 개선한다. 전체 화면이 아닐 때 깨지는 화면, 버튼 크기, 탭/버튼 지연, 어색한 번역, 과도한 정보 밀도, history 관리 문제를 계속 개선한다. 로컬 자원과 기존 도구를 사용해 성능과 유지보수성을 높인다.",
           "updatedAt": "2026-06-05T06:09:51.369Z",
+          "historyDate": "2026-06-05"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+          "path": "_history/user-requests/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브",
+          "excerpt": "사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 요지: 소스 작업 화면의 버튼과 선택 드롭다운이 기본 브라우저 컨트롤처럼 보여 이상하므로 고쳐 달라는 요청. 지속 조건: 구현 후 사용자가 직접 빌드하지 않도록 자동 빌드까지 수행. 해석 최근 소스 편집 UX 작업의 후속 수정으로 보았다. 핵심 범위는 파일 선택 드롭다운, 소스 작업 버튼, 편집기 툴바 버튼, 워크스페이스 탐색기 명령 버튼이다. 전체 앱의 모든 <select 제거는 이번 요청의 직접 범위 밖으로 두었다.",
+          "updatedAt": "2026-06-05T13:52:28.065Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18453,6 +18433,16 @@
           "historyDate": "2026-06-05"
         },
         {
+          "id": "history-web-searches-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+          "path": "_history/web-searches/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브",
+          "excerpt": "웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 작업: Workspace Monitor 소스 작업 화면의 네이티브 파일 선택 드롭다운과 기본 버튼 느낌 제거 검색 Radix UI Dropdown Menu React docs DropdownMenu.Trigger Content Item official MDN HTML select element styling customizable select limitations 확인한 출처 Radix UI Dropdown Menu 공식 ",
+          "updatedAt": "2026-06-05T13:52:28.064Z",
+          "historyDate": "2026-06-05"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
           "path": "_history/web-searches/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
           "category": "web-search",
@@ -18510,16 +18500,6 @@
           "title": "작업 요약: Character Design Refinement",
           "excerpt": "작업 요약: Character Design Refinement 3D 에이전트 캐릭터를 더 귀여운 마스코트 비율로 정제했다. Agents와 Tool Studio 양쪽에 작은 점눈, 작은 코, 더 낮은 muzzle, 둥근 귀/손발/꼬리, 축소된 visor/chest panel을 적용했다. 기능적 상태 신호와 성능 계약은 유지했다. 테스트, 타입 체크, check, 일반 빌드, 고객 빌드, 성능 예산, desktop/mobile screenshot QA를 완료했다.",
           "updatedAt": "2026-06-05T03:20:41.139Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-05-cute-mascot-character-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-05-cute-mascot-character.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: Cute Mascot Character",
-          "excerpt": "작업 요약: Cute Mascot Character 3D 에이전트 캐릭터를 귀여운 동물형 마스코트 쪽으로 조정했다. Agents와 Tool Studio 양쪽에 귀, 안쪽 귀, 볼, 작은 muzzle, 꼬리 디테일을 추가했다. 기능적 상태 신호와 성능 계약은 유지했다. 테스트, 타입 체크, check, 일반 빌드, 고객 빌드, 성능 예산, desktop/mobile screenshot QA를 완료했다.",
-          "updatedAt": "2026-06-05T03:09:30.225Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18590,6 +18570,16 @@
           "title": "작업 요약: Smooth Redesign Maintenance",
           "excerpt": "작업 요약: Smooth Redesign Maintenance MonitorShell 의 motion helper를 lib/motion.ts 로 분리하고 정적 테스트를 새 위치 기준으로 업데이트했다. 공통 motion token과 keyframes로 탭/메뉴/다이얼로그/세부 작업면 전환을 통일했다. history/admin 문서 preview를 bounded summary로 바꿔 snapshot document payload를 2.29MB로 줄였다. check history payload.mjs ",
           "updatedAt": "2026-06-05T06:09:51.370Z",
+          "historyDate": "2026-06-05"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: 소스 워크벤치 컨트롤 프리미티브",
+          "excerpt": "작업 요약: 소스 워크벤치 컨트롤 프리미티브 MonitorShell.tsx 에서 소스 파일 목록 native <select 를 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 소스 열기/저장/전체 저장/복사 액션, 편집기 툴바, 소스 워크벤치 탭을 공용 Button / ActionGroup 으로 바꿨다. WorkspaceExplorerPane.tsx 의 폴더 선택/새로고침 명령 버튼도 공용 버튼 프리미티브로 통일했다. 드롭다운 메뉴, 선택 항목, 액션 그룹 레이아웃 CSS와",
+          "updatedAt": "2026-06-05T13:52:28.065Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18703,6 +18693,16 @@
           "historyDate": "2026-06-05"
         },
         {
+          "id": "history-work-timings-2026-2026-06-05-source-workbench-control-primitives-json",
+          "path": "_history/work-timings/2026/2026-06-05-source-workbench-control-primitives.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 05 Source Workbench Control Primitives",
+          "excerpt": "{ \"task\": \"source workbench control primitives\", \"date\": \"2026 06 05\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first and local inspection\", \"approx minutes\": 12 }, { \"phase\": \"implementation\", \"approx minutes\": 28 }, { \"phase\": \"tests and package build\", \"approx minut",
+          "updatedAt": "2026-06-05T13:52:28.067Z",
+          "historyDate": "2026-06-05"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-json",
           "path": "_history/work-timings/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.json",
           "category": "work-timing",
@@ -18741,16 +18741,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2266,
+      "documents": 2272,
       "days": 6,
       "categories": [
         {
           "category": "evaluation",
-          "count": 932
+          "count": 933
         },
         {
           "category": "web-search",
-          "count": 365
+          "count": 366
         },
         {
           "category": "plan",
@@ -18758,19 +18758,19 @@
         },
         {
           "category": "request-trace",
-          "count": 294
+          "count": 295
         },
         {
           "category": "work-timing",
-          "count": 216
+          "count": 217
         },
         {
           "category": "user-request",
-          "count": 78
+          "count": 79
         },
         {
           "category": "work-summary",
-          "count": 45
+          "count": 46
         },
         {
           "category": "daily-history",
@@ -18781,7 +18781,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6079008,
+      "totalSourceBytes": 6085093,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18810,7 +18810,7 @@
       "decisionEvents": 0,
       "openSignals": 15,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T13:37:12.427Z",
+      "latestEventAt": "2026-06-05T13:52:28.067Z",
       "historyDays": 1
     },
     "lanes": [
@@ -18822,7 +18822,7 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 24
+        "count": 23
       },
       {
         "id": "delivery",
@@ -18830,8 +18830,8 @@
         "count": 14
       },
       {
-        "id": "intake",
-        "label": "intake",
+        "id": "evidence",
+        "label": "evidence",
         "count": 14
       },
       {
@@ -18840,14 +18840,14 @@
         "count": 14
       },
       {
-        "id": "evidence",
-        "label": "evidence",
+        "id": "intake",
+        "label": "intake",
         "count": 13
       },
       {
         "id": "monitoring",
         "label": "monitoring",
-        "count": 11
+        "count": 12
       },
       {
         "id": "planning",
@@ -18869,12 +18869,7 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 24
-      },
-      {
-        "id": "intake",
-        "label": "intake",
-        "count": 14
+        "count": 23
       },
       {
         "id": "summary",
@@ -18889,12 +18884,17 @@
       {
         "id": "web-search",
         "label": "web search",
+        "count": 14
+      },
+      {
+        "id": "intake",
+        "label": "intake",
         "count": 13
       },
       {
         "id": "timing",
         "label": "timing",
-        "count": 11
+        "count": 12
       },
       {
         "id": "plan",
@@ -18920,6 +18920,96 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-work-timings-2026-2026-06-05-source-workbench-control-primitives-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 05 Source Workbench Control Primitives",
+        "detail": "{ \"task\": \"source workbench control primitives\", \"date\": \"2026 06 05\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first and local inspection\", \"approx minutes\": 12 }, { \"phase\": \"implementation\", \"approx minutes\": 28 }, { \"phase\": \"tests and package build\", \"approx minut",
+        "path": "_history/work-timings/2026/2026-06-05-source-workbench-control-primitives.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T13:52:28.067Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "평가: 소스 워크벤치 컨트롤 프리미티브",
+        "detail": "평가: 소스 워크벤치 컨트롤 프리미티브 결과 사용자가 지적한 소스 작업 화면의 기본 선택 드롭다운을 제거하고 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 명령성 버튼은 공용 Button / ActionGroup 으로 통일해 기본 브라우저 버튼처럼 보이는 문제를 줄였다. CSS 계약과 정적 테스트가 새 구조를 고정한다. 구현 후 내부 .app / .dmg 패키지 빌드와 검증까지 완료했다. 검증 corepack pnpm dir platform desktop app/rende",
+        "path": "_history/evaluations/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T13:52:28.067Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브",
+        "detail": "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브 요청 기본 버튼/기본 선택 드롭다운처럼 보이는 소스 작업 UI를 수정. 구현 완료 후 자동 빌드. 결과 소스 파일 선택 드롭다운은 Radix DropdownMenu로 교체. 파일 작업/툴바/워크벤치 탭/탐색기 명령 버튼은 공용 Button / ActionGroup 사용. 기존 소스 편집 UX 요구사항과 스펙에 새 요구사항 REQ DESKTOP UX 2026 06 05 004 추가. 고객용 렌더러 빌드와 내부 Tauri .app / .dmg 패키지 ",
+        "path": "_history/request-traces/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T13:52:28.066Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브",
+        "detail": "사용자 요청 요약: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 요지: 소스 작업 화면의 버튼과 선택 드롭다운이 기본 브라우저 컨트롤처럼 보여 이상하므로 고쳐 달라는 요청. 지속 조건: 구현 후 사용자가 직접 빌드하지 않도록 자동 빌드까지 수행. 해석 최근 소스 편집 UX 작업의 후속 수정으로 보았다. 핵심 범위는 파일 선택 드롭다운, 소스 작업 버튼, 편집기 툴바 버튼, 워크스페이스 탐색기 명령 버튼이다. 전체 앱의 모든 <select 제거는 이번 요청의 직접 범위 밖으로 두었다.",
+        "path": "_history/user-requests/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T13:52:28.065Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약: 소스 워크벤치 컨트롤 프리미티브",
+        "detail": "작업 요약: 소스 워크벤치 컨트롤 프리미티브 MonitorShell.tsx 에서 소스 파일 목록 native <select 를 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 소스 열기/저장/전체 저장/복사 액션, 편집기 툴바, 소스 워크벤치 탭을 공용 Button / ActionGroup 으로 바꿨다. WorkspaceExplorerPane.tsx 의 폴더 선택/새로고침 명령 버튼도 공용 버튼 프리미티브로 통일했다. 드롭다운 메뉴, 선택 항목, 액션 그룹 레이아웃 CSS와",
+        "path": "_history/work-summaries/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T13:52:28.065Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-05-source-workbench-control-primitives-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브",
+        "detail": "웹 검색 기록: 소스 워크벤치 컨트롤 프리미티브 날짜: 2026 06 05 작업: Workspace Monitor 소스 작업 화면의 네이티브 파일 선택 드롭다운과 기본 버튼 느낌 제거 검색 Radix UI Dropdown Menu React docs DropdownMenu.Trigger Content Item official MDN HTML select element styling customizable select limitations 확인한 출처 Radix UI Dropdown Menu 공식 ",
+        "path": "_history/web-searches/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T13:52:28.064Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-json",
         "sourceType": "history",
@@ -20269,96 +20359,6 @@
         "language": "ko",
         "date": "2026-06-05",
         "timestamp": "2026-06-05T03:20:41.136Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-05-character-design-refinement-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: Character Design Refinement",
-        "detail": "사용자 요청 요약: Character Design Refinement 사용자는 캐릭터 디자인 자체를 더 좋게 개선하라고 요청했다. 앞선 귀여운 레퍼런스 요구를 이어받아 Workspace Monitor Agents 협업 3D scene과 Tool Studio 캐릭터 맵의 비율, 얼굴, 단순한 마스코트 인상을 정제 범위로 정했다.",
-        "path": "_history/user-requests/2026/2026-06-05-character-design-refinement.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T03:20:41.135Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-cute-mascot-character-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "평가: Cute Mascot Character",
-        "detail": "평가: Cute Mascot Character 결론 통과. 캐릭터가 기존의 딱딱한 로봇보다 귀여운 동물형 마스코트로 읽히도록 개선되었다. 확인 Agents 협업 scene과 Tool Studio 캐릭터 맵 모두에 귀, 안쪽 귀, 볼, 작은 muzzle, 꼬리 디테일이 적용되었다. 현실적인 털, 해부학, 과한 표정 animation은 추가하지 않았다. 역할 링, visor, chest/status detail, lazy mount, offscreen pause, reduced motion 경계는 유",
-        "path": "_history/evaluations/2026/2026-06-05-cute-mascot-character.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T03:09:30.225Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-05-cute-mascot-character-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 추적: Cute Mascot Character",
-        "detail": "요청 추적: Cute Mascot Character 요청 캐릭터가 너무 현실적이지 않고 귀여운 동물 느낌을 갖도록 개선. 결과 REQ WM 073 추가. Agents AgentCharacter 에 ear, inner ear, muzzle, cheek, tail detail 추가. Tool Studio Three.js character map에도 같은 soft mascot geometry 추가. static tests와 desktop/mobile screenshot QA 갱신. 검증 corepack",
-        "path": "_history/request-traces/2026/2026-06-05-cute-mascot-character.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T03:09:30.225Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-05-cute-mascot-character-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "작업 요약: Cute Mascot Character",
-        "detail": "작업 요약: Cute Mascot Character 3D 에이전트 캐릭터를 귀여운 동물형 마스코트 쪽으로 조정했다. Agents와 Tool Studio 양쪽에 귀, 안쪽 귀, 볼, 작은 muzzle, 꼬리 디테일을 추가했다. 기능적 상태 신호와 성능 계약은 유지했다. 테스트, 타입 체크, check, 일반 빌드, 고객 빌드, 성능 예산, desktop/mobile screenshot QA를 완료했다.",
-        "path": "_history/work-summaries/2026/2026-06-05-cute-mascot-character.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T03:09:30.225Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-cute-mascot-character-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 05 Cute Mascot Character Evaluation Input",
-        "detail": "{ \"date\": \"2026 06 05\", \"request slug\": \"cute mascot character\", \"user request summary\": \"Make the existing 3D agent characters feel cute and animal like rather than realistic or hard edged.\", \"requirements\": \"REQ WM 073\" , \"implementation targets\": \"platform desktop app/renderer",
-        "path": "_history/evaluations/2026/2026-06-05-cute-mascot-character-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T03:09:30.224Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-05-cute-mascot-character-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: Cute Mascot Character",
-        "detail": "사용자 요청 요약: Cute Mascot Character 사용자는 기존 캐릭터가 너무 현실적인 방향이 아니라 귀엽고 동물 느낌이 나야 한다고 요청했다. 범위는 Workspace Monitor Agents 협업 3D scene과 Tool Studio 캐릭터 맵의 캐릭터 디자인 후속 개선으로 한정했다.",
-        "path": "_history/user-requests/2026/2026-06-05-cute-mascot-character.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T03:09:30.224Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23161,7 +23161,7 @@
       {
         "category": "user-request",
         "root": "_history/user-requests",
-        "documentsCount": 14
+        "documentsCount": 13
       },
       {
         "category": "intent-feature-map",
@@ -23176,12 +23176,12 @@
       {
         "category": "web-search",
         "root": "_history/web-searches",
-        "documentsCount": 13
+        "documentsCount": 14
       },
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 11
+        "documentsCount": 12
       },
       {
         "category": "plan",
@@ -23191,7 +23191,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 24
+        "documentsCount": 23
       },
       {
         "category": "daily-history",
