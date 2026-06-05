@@ -13,6 +13,8 @@ export type WorkspaceStats = {
   webSearches: number;
   timingRecords?: number;
   historyDays: number;
+  adminHistoryDocuments?: number;
+  adminHistoryDays?: number;
   unifiedOpsEvents?: number;
   modeGroups?: number;
   modeOptions?: number;
@@ -200,6 +202,38 @@ export type WorkspaceHistoryDay = {
     count: number;
   }>;
   documents: WorkspaceHistoryDocument[];
+};
+
+export type WorkspaceAdminHistoryIndex = {
+  schemaVersion: string;
+  generatedAt: string;
+  summary: {
+    documents: number;
+    days: number;
+    categories: Array<{
+      category: string;
+      count: number;
+    }>;
+    totalSourceBytes: number;
+    generatedFrom: string[];
+  };
+  migration: {
+    status: string;
+    rule: string;
+    inlineHistoryDocumentLimit?: number;
+    detailPolicy?: string;
+  };
+  documents: WorkspaceDocument[];
+  historyDays: WorkspaceHistoryDay[];
+};
+
+export type WorkspaceAdminHistoryManifest = {
+  schemaVersion: string;
+  sourcePath: string;
+  loadMode: string;
+  inlineHistoryDocuments: number;
+  summary: WorkspaceAdminHistoryIndex["summary"];
+  migration: WorkspaceAdminHistoryIndex["migration"];
 };
 
 export type WorkspaceUnifiedOpsEvent = {
@@ -616,6 +650,7 @@ export type WorkspaceSnapshot = {
   requirements: WorkspaceRequirement[];
   documents: WorkspaceDocument[];
   historyDays: WorkspaceHistoryDay[];
+  adminHistory?: WorkspaceAdminHistoryManifest;
   unifiedOps?: WorkspaceUnifiedOps;
   sourceFiles?: WorkspaceSourceFile[];
   folderStructure: WorkspaceFolderStructure;

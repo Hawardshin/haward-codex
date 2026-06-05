@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T06:56:42.851Z",
+  "generatedAt": "2026-06-05T12:04:29.840Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -17,6 +17,8 @@
     "webSearches": 0,
     "timingRecords": 0,
     "historyDays": 0,
+    "adminHistoryDocuments": 0,
+    "adminHistoryDays": 0,
     "unifiedOpsEvents": 0,
     "modeGroups": 0,
     "modeOptions": 0,
@@ -42,6 +44,23 @@
   "requirements": [],
   "documents": [],
   "historyDays": [],
+  "adminHistory": {
+    "schemaVersion": "2026-06-05.admin-history-index",
+    "sourcePath": "admin-history-index.json",
+    "loadMode": "disabled-customer-snapshot",
+    "inlineHistoryDocuments": 0,
+    "summary": {
+      "documents": 0,
+      "days": 0,
+      "categories": [],
+      "totalSourceBytes": 0,
+      "generatedFrom": []
+    },
+    "migration": {
+      "status": "customer_snapshot_sanitized",
+      "rule": "Internal history records are not bundled into customer snapshots."
+    }
+  },
   "sourceFiles": [],
   "folderStructure": {
     "rootFolders": [],

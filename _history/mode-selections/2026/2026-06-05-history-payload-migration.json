@@ -1,0 +1,17 @@
+{
+  "date": "2026-06-05",
+  "request_id": "history-payload-migration",
+  "selected_work_mode": "standard",
+  "reason": "The request changes platform data flow, generated artifacts, and admin UI behavior, but can be shipped as a bounded implementation slice.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "non_quick_gates": [
+    "web_first_intake",
+    "large_scope_decomposition",
+    "requirements_update",
+    "spec_artifacts",
+    "omission_check",
+    "resource_check",
+    "evaluation"
+  ]
+}

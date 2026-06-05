@@ -6,9 +6,11 @@ import test from "node:test";
 
 import {
   buildAgentCollaborationBoard,
+  buildAdminHistoryIndex,
   buildCustomerSnapshot,
   buildSnapshot,
   buildUnifiedOps,
+  compactDocumentsForSnapshot,
   collectAgentCatalog,
   collectClaudeCodeDesignTransfer,
   collectIntentFeatureMap,
@@ -51,6 +53,47 @@ test("extractHistoryDate reads dated history file paths", () => {
     "2026-06-01"
   );
   assert.equal(extractHistoryDate("_docs/policies/source-collection-policy.ko.md"), "");
+});
+
+test("admin history index keeps all history records outside the default snapshot", () => {
+  const historyDocuments = Array.from({ length: 120 }, (_, index) => ({
+    id: `history-${index}`,
+    path: `_history/work-summaries/2026/2026-06-${String((index % 3) + 1).padStart(2, "0")}-item-${index}.ko.md`,
+    category: "work-summary",
+    language: "ko",
+    title: `History ${index}`,
+    excerpt: "요약",
+    html: "<p>요약</p>",
+    previewMode: "admin-summary",
+    htmlTruncated: false,
+    sourceBytes: 100 + index,
+    updatedAt: `2026-06-05T00:${String(index).padStart(2, "0")}:00.000Z`,
+    historyDate: `2026-06-${String((index % 3) + 1).padStart(2, "0")}`,
+    historyYear: "2026",
+    workspaceArea: "history"
+  }));
+  const baseDocument = {
+    id: "project-doc",
+    path: "platform-desktop-app/docs/readme.ko.md",
+    category: "project-doc",
+    language: "ko",
+    title: "Project",
+    excerpt: "설명",
+    html: "<p>설명</p>",
+    updatedAt: "2026-06-05T01:00:00.000Z",
+    historyDate: "",
+    historyYear: "",
+    workspaceArea: "project"
+  };
+
+  const compacted = compactDocumentsForSnapshot([baseDocument, ...historyDocuments]);
+  const adminIndex = buildAdminHistoryIndex([baseDocument, ...historyDocuments]);
+
+  assert.equal(compacted.filter((document) => document.category === "work-summary").length, 96);
+  assert.equal(compacted.some((document) => document.id === "project-doc"), true);
+  assert.equal(adminIndex.summary.documents, 120);
+  assert.equal(adminIndex.historyDays.length, 3);
+  assert.equal(adminIndex.migration.status, "migrated_to_lazy_admin_index");
 });
 
 test("buildSnapshot reads minimal repository shape", () => {
@@ -181,6 +224,8 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.collaborationBoard.flows.length, 1);
   assert.equal(snapshot.documents.length, 7);
   assert.equal(snapshot.stats.sourceFiles, 1);
+  assert.equal(snapshot.adminHistory.summary.documents, 1);
+  assert.equal(snapshot.adminHistory.inlineHistoryDocuments, 1);
   assert.equal(snapshot.sourceFiles[0].language, "python");
   assert.match(snapshot.sourceFiles[0].content, /hello/);
   assert.equal(snapshot.agentCatalog[0].name, "demo-agent");

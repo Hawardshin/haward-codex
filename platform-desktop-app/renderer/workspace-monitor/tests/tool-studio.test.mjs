@@ -38,6 +38,7 @@ const actionGroupComponent = fs.readFileSync(path.join(projectRoot, "components"
 const collector = fs.readFileSync(path.join(projectRoot, "scripts", "collect-workspace.mjs"), "utf8");
 const scrollCheck = fs.readFileSync(path.join(projectRoot, "scripts", "check-scroll-containers.mjs"), "utf8");
 const surfaceAudit = fs.readFileSync(path.join(projectRoot, "scripts", "audit-monitor-surfaces.mjs"), "utf8");
+const historyPayloadCheck = fs.readFileSync(path.join(projectRoot, "scripts", "check-history-payload.mjs"), "utf8");
 const css = fs.readFileSync(path.join(projectRoot, "app", "globals.css"), "utf8");
 const packageJson = JSON.parse(fs.readFileSync(path.join(projectRoot, "package.json"), "utf8"));
 
@@ -363,12 +364,26 @@ test("Monitor buttons expose instant press feedback before heavy click work", ()
 test("History documents use bounded admin previews instead of loading full records into the UI snapshot", () => {
   assert.equal(packageJson.scripts["check:history-payload"], "node scripts/check-history-payload.mjs");
   assert.match(packageJson.scripts.check, /check-history-payload/);
+  assert.match(collector, /const publicAdminHistoryIndexPath = path\.join\(projectRoot, "public", "admin-history-index\.json"\)/);
+  assert.match(collector, /const MAX_INLINE_HISTORY_DOCUMENTS = 96;/);
   assert.match(collector, /const HISTORY_DOCUMENT_HTML_CHARS = 2200;/);
   assert.match(collector, /function historyAdminPreviewToHtml\(content\)/);
+  assert.match(collector, /export function buildAdminHistoryIndex\(documents\)/);
+  assert.match(collector, /export function compactDocumentsForSnapshot\(documents\)/);
+  assert.match(collector, /migrated_to_lazy_admin_index/);
   assert.match(collector, /isHistoryDocument[\s\S]*?\? historyAdminPreviewToHtml\(content\)/);
   assert.match(collector, /previewMode: isHistoryDocument \? "admin-summary" : "document-preview"/);
   assert.match(collector, /htmlTruncated: isHistoryDocument \? content\.length > HISTORY_ADMIN_EXCERPT_CHARS : content\.length > maxHtmlChars/);
   assert.match(collector, /sourceBytes: stats\.size/);
+  assert.match(historyPayloadCheck, /const adminHistoryIndexPath = path\.join\(projectRoot, "public", "admin-history-index\.json"\)/);
+  assert.match(historyPayloadCheck, /const maxDocumentJsonBytes = 1_900_000;/);
+  assert.match(historyPayloadCheck, /Inline history documents must stay at or below/);
+  assert.match(historyPayloadCheck, /Admin history index day groups must not duplicate document lists/);
+  assert.match(historyPayloadCheck, /Snapshot adminHistory summary must match generated admin-history-index\.json/);
+  assert.match(monitorShell, /fetchAdminHistoryIndex\(controller\)/);
+  assert.match(monitorShell, /new URL\("admin-history-index\.json", window\.location\.href\)/);
+  assert.match(monitorShell, /mergeDocuments\(snapshot\.documents, adminHistoryIndex\?\.documents \|\| \[\]\)/);
+  assert.match(monitorShell, /adminHistoryStatusText\(adminHistoryState, snapshot\)/);
 });
 
 test("Operator Center and task run copy localize high-visibility Korean UI", () => {

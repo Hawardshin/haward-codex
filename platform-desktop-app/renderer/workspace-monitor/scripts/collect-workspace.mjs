@@ -19,9 +19,11 @@ const defaultRepoRoot = path.resolve(projectRoot, "..", "..", "..");
 const snapshotPath = path.join(projectRoot, "src", "generated", "workspace-snapshot.json");
 const customerFallbackSnapshotPath = path.join(projectRoot, "src", "generated", "customer-workspace-snapshot.json");
 const publicSnapshotPath = path.join(projectRoot, "public", "workspace-snapshot.json");
+const publicAdminHistoryIndexPath = path.join(projectRoot, "public", "admin-history-index.json");
 
 const IGNORE_DIRS = new Set([".git", ".next", "node_modules", "out", "target", "__pycache__", ".pytest_cache", "_private", "outputs"]);
-const MAX_DOCUMENTS = 1200;
+const MAX_DOCUMENTS = 650;
+const MAX_INLINE_HISTORY_DOCUMENTS = 96;
 const DEFAULT_DOCUMENT_HTML_CHARS = 5200;
 const HISTORY_DOCUMENT_HTML_CHARS = 2200;
 const HISTORY_ADMIN_EXCERPT_CHARS = 360;
@@ -122,20 +124,26 @@ export function main(argv = process.argv.slice(2)) {
   }
 
   const snapshot = buildSnapshot(repoRoot);
+  const adminHistoryIndex = buildAdminHistoryIndex(snapshot.adminHistorySourceDocuments || []);
+  delete snapshot.adminHistorySourceDocuments;
   const publicSnapshot = options.snapshotMode === "customer" ? buildCustomerSnapshot(snapshot) : snapshot;
   const customerFallbackSnapshot = buildCustomerSnapshot(snapshot);
+  const publicAdminHistoryIndex = options.snapshotMode === "customer" ? emptyAdminHistoryIndex() : adminHistoryIndex;
   writeJson(snapshotPath, snapshot);
   writeJson(customerFallbackSnapshotPath, customerFallbackSnapshot);
   writeJson(publicSnapshotPath, publicSnapshot);
+  writeJson(publicAdminHistoryIndexPath, publicAdminHistoryIndex);
   console.log(
-    `[workspace-monitor] Wrote ${snapshot.documents.length} documents to ${path.relative(repoRoot, snapshotPath)} (${options.snapshotMode} public snapshot)`
+    `[workspace-monitor] Wrote ${snapshot.documents.length} inline documents and ${adminHistoryIndex.summary.documents} admin history records (${options.snapshotMode} public snapshot)`
   );
 }
 
 export function buildSnapshot(repoRoot) {
   const projects = readJson(path.join(repoRoot, "_ops", "projects", "registry.json"), { projects: [] }).projects || [];
   const coordination = readJson(path.join(repoRoot, "_ops", "coordination", "status.json"), { agents: [], tasks: [] });
-  const documents = collectDocuments(repoRoot);
+  const allDocuments = collectDocuments(repoRoot);
+  const adminHistoryIndex = buildAdminHistoryIndex(allDocuments);
+  const documents = compactDocumentsForSnapshot(allDocuments);
   const requirements = collectRequirements(repoRoot);
   const historyDays = buildHistoryDays(documents);
   const viewModeCatalog = collectViewModeCatalog(repoRoot);
@@ -181,6 +189,8 @@ export function buildSnapshot(repoRoot) {
       webSearches: documents.filter((document) => document.category === "web-search").length,
       timingRecords: documents.filter((document) => document.category === "work-timing").length,
       historyDays: historyDays.length,
+      adminHistoryDocuments: adminHistoryIndex.summary.documents,
+      adminHistoryDays: adminHistoryIndex.summary.days,
       unifiedOpsEvents: unifiedOps.summary.totalEvents,
       modeGroups: modeFunctionCatalog.summary.totalGroups,
       modeOptions: modeFunctionCatalog.summary.totalOptions,
@@ -207,6 +217,15 @@ export function buildSnapshot(repoRoot) {
     requirements,
     documents,
     historyDays,
+    adminHistory: {
+      schemaVersion: adminHistoryIndex.schemaVersion,
+      sourcePath: "admin-history-index.json",
+      loadMode: "lazy-admin-surface",
+      inlineHistoryDocuments: documents.filter((document) => HISTORY_CATEGORIES.has(document.category)).length,
+      summary: adminHistoryIndex.summary,
+      migration: adminHistoryIndex.migration
+    },
+    adminHistorySourceDocuments: adminHistoryIndex.documents,
     unifiedOps,
     sourceFiles,
     folderStructure,
@@ -252,6 +271,8 @@ export function buildCustomerSnapshot(snapshot) {
       webSearches: 0,
       timingRecords: 0,
       historyDays: 0,
+      adminHistoryDocuments: 0,
+      adminHistoryDays: 0,
       unifiedOpsEvents: 0,
       modeGroups: 0,
       modeOptions: 0,
@@ -277,6 +298,23 @@ export function buildCustomerSnapshot(snapshot) {
     requirements: [],
     documents: [],
     historyDays: [],
+    adminHistory: {
+      schemaVersion: "2026-06-05.admin-history-index",
+      sourcePath: "admin-history-index.json",
+      loadMode: "disabled-customer-snapshot",
+      inlineHistoryDocuments: 0,
+      summary: {
+        documents: 0,
+        days: 0,
+        categories: [],
+        totalSourceBytes: 0,
+        generatedFrom: []
+      },
+      migration: {
+        status: "customer_snapshot_sanitized",
+        rule: "Internal history records are not bundled into customer snapshots."
+      }
+    },
     sourceFiles: [],
     folderStructure: {
       rootFolders: [],
@@ -1446,7 +1484,89 @@ export function collectDocuments(repoRoot) {
       documents.push(readDocument(repoRoot, filePath, source.category));
     }
   }
-  return documents.sort((left, right) => right.updatedAt.localeCompare(left.updatedAt)).slice(0, MAX_DOCUMENTS);
+  return documents.sort((left, right) => right.updatedAt.localeCompare(left.updatedAt) || left.path.localeCompare(right.path));
+}
+
+export function compactDocumentsForSnapshot(documents) {
+  const historyDocuments = documents.filter((document) => HISTORY_CATEGORIES.has(document.category));
+  const nonHistoryBudget = Math.max(0, MAX_DOCUMENTS - MAX_INLINE_HISTORY_DOCUMENTS);
+  const nonHistoryDocuments = documents
+    .filter((document) => !HISTORY_CATEGORIES.has(document.category))
+    .slice()
+    .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt) || left.path.localeCompare(right.path))
+    .slice(0, nonHistoryBudget);
+  const inlineHistoryDocuments = historyDocuments
+    .slice()
+    .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt) || left.path.localeCompare(right.path))
+    .slice(0, MAX_INLINE_HISTORY_DOCUMENTS);
+
+  return [...nonHistoryDocuments, ...inlineHistoryDocuments].sort(
+    (left, right) => right.updatedAt.localeCompare(left.updatedAt) || left.path.localeCompare(right.path)
+  );
+}
+
+export function buildAdminHistoryIndex(documents) {
+  const historyDocuments = documents
+    .filter((document) => HISTORY_CATEGORIES.has(document.category) && document.historyDate)
+    .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt) || left.path.localeCompare(right.path));
+  const historyDays = buildHistoryDays(historyDocuments);
+  const historyDaySummaries = historyDays.map((day) => ({
+    date: day.date,
+    year: day.year,
+    documentsCount: day.documentsCount,
+    categories: day.categories,
+    documents: []
+  }));
+  const categories = Object.entries(
+    historyDocuments.reduce((counts, document) => {
+      counts[document.category] = (counts[document.category] || 0) + 1;
+      return counts;
+    }, {})
+  )
+    .map(([category, count]) => ({ category, count }))
+    .sort((left, right) => right.count - left.count || left.category.localeCompare(right.category));
+
+  return {
+    schemaVersion: "2026-06-05.admin-history-index",
+    generatedAt: new Date().toISOString(),
+    summary: {
+      documents: historyDocuments.length,
+      days: historyDays.length,
+      categories,
+      totalSourceBytes: historyDocuments.reduce((total, document) => total + (document.sourceBytes || 0), 0),
+      generatedFrom: Array.from(new Set(historyDocuments.map((document) => historyRootForPath(document.path)).filter(Boolean))).sort()
+    },
+    migration: {
+      status: "migrated_to_lazy_admin_index",
+      rule: "Keep durable _history files in place; load the generated index only for admin history and document surfaces.",
+      inlineHistoryDocumentLimit: MAX_INLINE_HISTORY_DOCUMENTS,
+      detailPolicy: "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
+    },
+    documents: historyDocuments,
+    historyDays: historyDaySummaries
+  };
+}
+
+export function emptyAdminHistoryIndex() {
+  return {
+    schemaVersion: "2026-06-05.admin-history-index",
+    generatedAt: new Date().toISOString(),
+    summary: {
+      documents: 0,
+      days: 0,
+      categories: [],
+      totalSourceBytes: 0,
+      generatedFrom: []
+    },
+    migration: {
+      status: "empty",
+      rule: "No internal history records are included in this generated index.",
+      inlineHistoryDocumentLimit: 0,
+      detailPolicy: "No internal history previews are bundled."
+    },
+    documents: [],
+    historyDays: []
+  };
 }
 
 function readDocument(repoRoot, filePath, category) {
@@ -1477,6 +1597,11 @@ function readDocument(repoRoot, filePath, category) {
     historyYear: historyDate ? historyDate.slice(0, 4) : "",
     workspaceArea: workspaceArea(relativePath)
   };
+}
+
+function historyRootForPath(relativePath) {
+  const match = relativePath.match(/^(_history\/[^/]+)(?:\/|$)/);
+  return match ? match[1] : "";
 }
 
 export function buildHistoryDays(documents) {

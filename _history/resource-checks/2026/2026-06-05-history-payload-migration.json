@@ -1,0 +1,21 @@
+{
+  "date": "2026-06-05",
+  "request_id": "history-payload-migration",
+  "resource_risk_occurred": true,
+  "risks": [
+    "large JSON snapshot parsing",
+    "lazy fetch lifecycle",
+    "generated internal admin index accidentally included in customer build"
+  ],
+  "controls": [
+    "default snapshot keeps only 96 inline history documents",
+    "admin history index is fetched once when History/Documents opens",
+    "customer build writes an empty public admin-history-index.json",
+    "check-history-payload validates byte budget and index count consistency"
+  ],
+  "status": "passed_runtime_validation",
+  "cleanup": {
+    "local_static_server_port": 4184,
+    "stopped_after_audit": true
+  }
+}

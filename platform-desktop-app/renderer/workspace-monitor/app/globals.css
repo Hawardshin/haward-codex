@@ -11438,6 +11438,14 @@ h3 {
   padding: 8px;
 }
 
+.history-index-status {
+  max-width: 76ch;
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
 .timeline-docs article {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);

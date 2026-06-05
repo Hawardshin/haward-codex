@@ -1,0 +1,26 @@
+{
+  "date": "2026-06-05",
+  "request_id": "history-payload-migration",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "duration_seconds": 60
+    },
+    {
+      "phase_id": "source_inventory",
+      "label": "Source inventory and payload measurement",
+      "duration_seconds": 180
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Collector, UI, type, and validation updates",
+      "duration_seconds": 900
+    },
+    {
+      "phase_id": "initial_validation",
+      "label": "Collect, test, and check",
+      "duration_seconds": 180
+    }
+  ]
+}

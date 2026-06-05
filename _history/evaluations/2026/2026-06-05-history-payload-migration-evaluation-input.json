@@ -1,0 +1,20 @@
+{
+  "date": "2026-06-05",
+  "request_id": "history-payload-migration",
+  "requirements": ["PDA-REQ-043"],
+  "implementation_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/check-history-payload.mjs"
+  ],
+  "measured_result": {
+    "inline_documents": 650,
+    "inline_history_documents": 96,
+    "admin_history_documents": 2220,
+    "snapshot_document_json_bytes": 1651769,
+    "admin_history_index_bytes": 3207045
+  },
+  "installation_occurred": false,
+  "resource_risk_occurred": true
+}
