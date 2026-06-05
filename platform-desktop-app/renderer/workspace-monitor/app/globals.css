@@ -11869,6 +11869,83 @@ h3 {
   gap: 14px;
 }
 
+.agent-collaboration-theater {
+  min-width: 0;
+  margin: 0 0 14px;
+}
+
+.agent-collaboration-scene-shell,
+.agent-collaboration-scene-loading,
+.agent-collaboration-scene-empty {
+  position: relative;
+  width: 100%;
+  min-height: clamp(280px, 42vh, 520px);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 26% 18%, rgba(88, 166, 255, 0.2), transparent 32%),
+    radial-gradient(circle at 76% 76%, rgba(102, 217, 177, 0.18), transparent 34%),
+    var(--terminal-bg);
+  color: var(--text-on-dark);
+}
+
+.agent-collaboration-scene-shell {
+  border: 1px solid var(--terminal-border);
+  border-radius: 7px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.agent-collaboration-scene-shell canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.agent-collaboration-scene-loading,
+.agent-collaboration-scene-empty {
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--terminal-border);
+  border-radius: 7px;
+  font-size: var(--font-size-body);
+  font-weight: 650;
+}
+
+.agent-collaboration-scene-hud {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 5px 10px;
+  min-width: 150px;
+  max-width: min(240px, calc(100% - 24px));
+  border: 1px solid rgba(201, 209, 217, 0.24);
+  background: rgba(13, 17, 23, 0.74);
+  color: var(--terminal-fg);
+  border-radius: 7px;
+  padding: 9px 10px;
+  backdrop-filter: blur(12px);
+}
+
+.agent-collaboration-scene-hud span,
+.agent-collaboration-scene-hud strong {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.agent-collaboration-scene-hud span {
+  color: var(--terminal-muted);
+  font-size: var(--font-size-caption);
+  font-weight: 650;
+}
+
+.agent-collaboration-scene-hud strong {
+  justify-self: end;
+  color: var(--text-on-dark);
+  font-size: var(--font-size-body-strong);
+  font-weight: 760;
+}
+
 .collaboration-summary {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -15207,6 +15284,19 @@ h3 {
 }
 
 @media (max-width: 720px) {
+  .agent-collaboration-scene-shell,
+  .agent-collaboration-scene-loading,
+  .agent-collaboration-scene-empty {
+    min-height: 300px;
+  }
+
+  .agent-collaboration-scene-hud {
+    top: auto;
+    right: 10px;
+    bottom: 10px;
+    min-width: min(210px, calc(100% - 20px));
+  }
+
   .agent-chat-workspace {
     grid-template-rows: auto minmax(180px, auto) auto auto;
     min-height: 0;

@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-06-05",
+  "work_item": "agent-collaboration-3d-characters",
+  "resource_risk_occurred": true,
+  "risks": [
+    "Long-running static HTTP server for Browser smoke",
+    "WebGL canvas animation lifecycle",
+    "Headless Chromium browser contexts",
+    "New lazy JavaScript chunk"
+  ],
+  "controls": [
+    "R3F canvas mounts only inside opened Agents detail disclosure",
+    "Static server will be stopped before final close-out",
+    "Playwright browser is closed by the smoke script",
+    "perf:budget passed with largest chunk 734386 bytes"
+  ],
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-05-agent-collaboration-3d-characters.json"
+  ]
+}

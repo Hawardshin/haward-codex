@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-06-05",
+  "work_item": "agent-collaboration-3d-characters",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "requirements": [
+    "REQ-WM-038",
+    "REQ-WM-039",
+    "REQ-WM-060"
+  ],
+  "installation_occurred": true,
+  "installation_record_targets": [
+    "_history/installations/2026/2026-06-05-workspace-monitor-react-three-fiber-drei.ko.md",
+    "_ops/installations/registry.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-05-agent-collaboration-3d-characters.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-05-agent-collaboration-3d-characters.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-agent-collaboration-3d-characters.json"
+  ],
+  "validation_commands": [
+    "corepack pnpm audit --prod=false",
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor exec tsc --noEmit",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter workspace-monitor run build",
+    "corepack pnpm --filter workspace-monitor run perf:budget",
+    "desktop/mobile Playwright canvas pixel smoke"
+  ],
+  "status": "passed"
+}

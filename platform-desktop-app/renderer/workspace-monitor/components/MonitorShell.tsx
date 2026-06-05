@@ -375,6 +375,18 @@ const MonacoDiffEditor = dynamic(() => import("@monaco-editor/react").then((modu
   loading: () => <div className="monaco-editor-loading">Loading Monaco diff</div>
 });
 
+const AgentCollaborationScene = dynamic(
+  () => import("@/components/workbench/AgentCollaborationScene").then((module) => module.AgentCollaborationScene),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="agent-collaboration-scene-loading" data-agent-collaboration-scene-loading>
+        Loading agent collaboration scene
+      </div>
+    )
+  }
+);
+
 const monacoEditorOptions: editor.IStandaloneEditorConstructionOptions = {
   automaticLayout: true,
   bracketPairColorization: { enabled: true },
@@ -6234,6 +6246,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                 <h2>에이전트 협업 작업판</h2>
               </div>
               <Network size={18} aria-hidden="true" />
+            </div>
+            <div className="agent-collaboration-theater" data-agent-collaboration-theater>
+              <AgentCollaborationScene board={collaborationBoard} language={uiLanguage} />
             </div>
             <AgentCollaborationBoard board={collaborationBoard} />
           </section>

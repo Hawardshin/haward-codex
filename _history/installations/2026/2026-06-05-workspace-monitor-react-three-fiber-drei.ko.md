@@ -1,0 +1,39 @@
+# workspace-monitor React Three Fiber / Drei 설치 감사 기록
+
+- 날짜: 2026-06-05
+- 상태: installed
+- 소유 프로젝트: `platform-desktop-app/renderer/workspace-monitor`
+- 설치 범위: 프로젝트 로컬 의존성
+- 설치 명령:
+  - `corepack pnpm --filter workspace-monitor add -E @react-three/fiber@9.6.1 @react-three/drei@10.7.7`
+- 의존성 기록 대상:
+  - `platform-desktop-app/renderer/workspace-monitor/package.json`
+  - `pnpm-lock.yaml`
+- 설치 목적:
+  - Agents 화면의 에이전트 협업 보드를 React Three Fiber 기반 3D 캐릭터 협업 장면으로 구현한다.
+  - Drei의 lightweight scene helpers를 사용해 카메라/텍스트/환경 구현 비용을 낮춘다.
+- 사전 보안 검토: 프로젝트 로컬 프론트엔드 패키지이며 global install, native executable, Tauri permission, credential access, network client를 추가하지 않는다. 설치 후 `corepack pnpm audit --prod=false`를 실행한다.
+- 사전 라이선스 검토: npm metadata 기준 `@react-three/fiber@9.6.1`, `@react-three/drei@10.7.7` 모두 MIT 라이선스다.
+- peer dependency 검토:
+  - `@react-three/fiber@9.6.1`: `react >=19 <19.3`, `react-dom >=19 <19.3`, `three >=0.156`
+  - `@react-three/drei@10.7.7`: `react ^19`, `react-dom ^19`, `three >=0.159`, `@react-three/fiber ^9.0.0`
+  - 현재 프로젝트: `react@19.2.6`, `react-dom@19.2.6`, `three@0.184.0`
+- 설치 결과:
+  - `platform-desktop-app/renderer/workspace-monitor/package.json`에 exact dependency가 기록됐다.
+  - `pnpm-lock.yaml`에 resolved transitive dependency가 기록됐다.
+- 검증:
+  - `corepack pnpm --filter workspace-monitor audit --prod=false`: pnpm 10.34.1의 recursive 옵션 조합 오류로 실패
+  - `corepack pnpm audit --prod=false` from `platform-desktop-app/renderer/workspace-monitor`: no known vulnerabilities
+  - `corepack pnpm --filter workspace-monitor test`: 통과, 39 tests
+  - `corepack pnpm --filter workspace-monitor exec tsc --noEmit`: 통과
+  - `corepack pnpm --filter workspace-monitor run check`: 통과
+  - `corepack pnpm --filter workspace-monitor run build:customer`: 통과
+  - `corepack pnpm --filter workspace-monitor run build`: 통과
+  - `corepack pnpm --filter workspace-monitor run perf:budget`: 통과, largest chunk 734,386 bytes, chunkCount 12
+  - in-app Browser desktop visual smoke: canvas ready, overflowX 0
+  - desktop/mobile Playwright canvas nonblank pixel smoke: 통과
+- 롤백 계획: `corepack pnpm --filter workspace-monitor remove @react-three/fiber @react-three/drei`를 실행하고 Agents 3D scene component/import/test를 제거한 뒤 동일 검증 명령을 재실행한다.
+- 외부 확인:
+  - React Three Fiber npm metadata: `https://www.npmjs.com/package/@react-three/fiber`
+  - Drei npm metadata: `https://www.npmjs.com/package/@react-three/drei`
+  - Three.js InstancedMesh 공식 문서: `https://threejs.org/docs/api/en/objects/InstancedMesh`

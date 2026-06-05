@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-06-05",
+  "request": "Agents collaboration UI as 3D characters with open-source install",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "work_mode": "standard",
+  "install_mode": "developer",
+  "view_mode": "superadmin_developer",
+  "reason": "Meaningful frontend implementation with project-local dependency installation, but bounded to one workspace-monitor surface.",
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-agent-collaboration-3d-characters.json"
+  ]
+}

@@ -12,6 +12,10 @@ const toolStudio = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "ToolStudioPanel.tsx"),
   "utf8"
 );
+const agentCollaborationScene = fs.readFileSync(
+  path.join(projectRoot, "components", "workbench", "AgentCollaborationScene.tsx"),
+  "utf8"
+);
 const coreDrilldown = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "CoreFeatureDrilldown.tsx"),
   "utf8"
@@ -42,6 +46,28 @@ test("Tool Studio uses open-source menu primitives and exact dependencies", () =
   assert.match(toolStudio, /from "@radix-ui\/react-context-menu"/);
   assert.match(toolStudio, /<DropdownMenu\.Root>/);
   assert.match(toolStudio, /<ContextMenu\.Root/);
+});
+
+test("Agents collaboration uses lazy open-source 3D character scene", () => {
+  assert.equal(packageJson.dependencies["@react-three/fiber"], "9.6.1");
+  assert.equal(packageJson.dependencies["@react-three/drei"], "10.7.7");
+  assert.match(monitorShell, /const AgentCollaborationScene = dynamic\(/);
+  assert.match(monitorShell, /import\("@\/components\/workbench\/AgentCollaborationScene"\)/);
+  assert.match(monitorShell, /ssr:\s*false/);
+  assert.match(monitorShell, /data-agent-collaboration-theater/);
+  assert.match(monitorShell, /<AgentCollaborationScene board=\{collaborationBoard\} language=\{uiLanguage\} \/>/);
+  assert.match(agentCollaborationScene, /from "@react-three\/fiber"/);
+  assert.match(agentCollaborationScene, /from "@react-three\/drei"/);
+  assert.match(agentCollaborationScene, /useFrame/);
+  assert.match(agentCollaborationScene, /preserveDrawingBuffer: true/);
+  assert.match(agentCollaborationScene, /powerPreference: "high-performance"/);
+  assert.match(agentCollaborationScene, /data-agent-collaboration-3d-ready/);
+  assert.match(agentCollaborationScene, /function AgentCharacter/);
+  assert.match(agentCollaborationScene, /function TaskLaneNode/);
+  assert.match(css, /\.agent-collaboration-theater \{/);
+  assert.match(css, /\.agent-collaboration-scene-shell,[\s\S]*?min-height: clamp\(280px, 42vh, 520px\);/);
+  assert.match(css, /\.agent-collaboration-scene-hud \{/);
+  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.agent-collaboration-scene-shell,/);
 });
 
 test("Three.js scene is lazy-loaded and cleans up WebGL resources", () => {
