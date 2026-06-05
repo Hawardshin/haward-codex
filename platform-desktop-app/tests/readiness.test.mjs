@@ -517,6 +517,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   );
   const customerBundleCheck = readFileSync(join(root, "scripts/check-customer-bundle.mjs"), "utf8");
   const releaseReadinessCheck = readFileSync(join(root, "scripts/check-release-readiness.mjs"), "utf8");
+  const lazyBoundaryCheck = readFileSync(
+    join(root, "renderer/workspace-monitor/scripts/check-lazy-boundary-contract.mjs"),
+    "utf8"
+  );
   const platformPkg = readJson("package.json");
   const monitorPkg = readJson("renderer/workspace-monitor/package.json");
   const viewModes = readJson("../agent-platform/configs/access/view-mode-registry.json");
@@ -533,6 +537,11 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   assert.ok(platformPkg.scripts["service:readiness"]);
   assert.ok(platformPkg.scripts["service:readiness:public:report"]);
   assert.match(monitorPkg.scripts["build:customer"], /--snapshot-mode customer/);
+  assert.match(monitorPkg.scripts.check, /check-lazy-boundary-contract\.mjs/);
+  assert.equal(monitorPkg.scripts["check:lazy-boundaries"], "node scripts/check-lazy-boundary-contract.mjs");
+  for (const scriptToken of ["lazyBoundaryTargets", "lazy_boundary_contract_ok", "MonitorShell must type-only import", "MonitorShell must dynamic import"]) {
+    assert.match(lazyBoundaryCheck, new RegExp(scriptToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
   for (const collectorToken of ["buildCustomerSnapshot", "customer_snapshot_sanitized", "--snapshot-mode", "sourceFiles: []"]) {
     assert.match(monitorCollector, new RegExp(collectorToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }

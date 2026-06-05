@@ -1,0 +1,32 @@
+{
+  "id": "2026-06-06-monitor-performance-guardrails",
+  "date": "2026-06-06",
+  "status": "recorded",
+  "timings": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes": 2
+    },
+    {
+      "phase": "implementation",
+      "duration_minutes": 20
+    },
+    {
+      "phase": "workspace_checks",
+      "duration_minutes": 2
+    },
+    {
+      "phase": "internal_package_build",
+      "duration_minutes": 1
+    },
+    {
+      "phase": "built_output_performance_audits",
+      "duration_minutes": 1
+    },
+    {
+      "phase": "records_and_closeout",
+      "duration_minutes": 10
+    }
+  ],
+  "notes": "Durations are approximate phase-level timings reconstructed from command progress, not stopwatch precision."
+}

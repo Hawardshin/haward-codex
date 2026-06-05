@@ -1,0 +1,117 @@
+{
+  "id": "2026-06-06-monitor-performance-guardrails",
+  "date": "2026-06-06",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "request_summary": "Workspace Monitor tab switching still feels slow; complete deeper desktop performance implementation and build.",
+  "requirements": [
+    "platform-desktop-app/docs/requirements/2026-06-06-monitor-performance-guardrails.ko.md"
+  ],
+  "specs": [
+    "platform-desktop-app/specs/2026-06-06-monitor-performance-guardrails/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-06-monitor-performance-guardrails/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-06-monitor-performance-guardrails/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-06-monitor-performance-guardrails/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-06-monitor-performance-guardrails/traceability.ko.md"
+  ],
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/package.json",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/audit-section-switch-latency.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/check-lazy-boundary-contract.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs"
+  ],
+  "implementation_summary": [
+    "Added a static lazy-boundary contract for heavy MonitorShell workbench panels.",
+    "Added repeated section switch audit support with --runs.",
+    "Added browser long-task telemetry to section switch samples and summary.",
+    "Connected performance contracts to Workspace Monitor check, tests, and desktop readiness."
+  ],
+  "performance_measurement": {
+    "environment": "Next static export served from out/, Chromium headless, viewport 1280x820, CPU throttle 6",
+    "perf_budget": {
+      "largest_chunk_bytes": 734386,
+      "max_initial_chunk_bytes": 1000000,
+      "chunk_count": 38
+    },
+    "section_switch_repeat": {
+      "runs": 3,
+      "settle_average_ms": 303.2,
+      "settle_p95_ms": 705.9,
+      "long_task_max_ms": 354,
+      "long_task_total_p95_ms": 484,
+      "max_resident_panels": 5,
+      "max_mounted_panels": 5
+    },
+    "button_response": {
+      "real_click_feedback_p95_ms": 51,
+      "synthetic_feedback_p95_ms": 1.6,
+      "synthetic_painted_p95_ms": 50.1
+    }
+  },
+  "verification": [
+    {
+      "command": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check:lazy-boundaries",
+      "status": "passed",
+      "notes": "13 targets and 9 modules checked."
+    },
+    {
+      "command": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test",
+      "status": "passed",
+      "notes": "60 node tests passed."
+    },
+    {
+      "command": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+      "status": "passed",
+      "notes": "TypeScript, lazy-boundary, scroll, source-control, and history payload checks passed."
+    },
+    {
+      "command": "corepack pnpm --filter platform-desktop-app test",
+      "status": "passed",
+      "notes": "22 desktop tests passed."
+    },
+    {
+      "command": "corepack pnpm --filter platform-desktop-app check",
+      "status": "passed",
+      "notes": "Runtime, readiness, customer bundle, internal release, and service readiness checks passed."
+    },
+    {
+      "command": "corepack pnpm --filter platform-desktop-app run package:internal",
+      "status": "passed",
+      "notes": "Built and verified internal macOS app and DMG."
+    },
+    {
+      "command": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:budget",
+      "status": "passed",
+      "notes": "Largest chunk 734386 bytes under 1000000 byte budget."
+    },
+    {
+      "command": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:sections:repeat",
+      "status": "passed",
+      "notes": "3 runs, settle p95 705.9ms, long-task max 354ms."
+    },
+    {
+      "command": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:buttons",
+      "status": "passed",
+      "notes": "Real click feedback p95 51ms."
+    }
+  ],
+  "web_search_targets": [
+    "_history/web-searches/2026/2026-06-06-monitor-performance-guardrails.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-06-monitor-performance-guardrails.json",
+    "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails-omission.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-06-monitor-performance-guardrails.json",
+    "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails-resource.json"
+  ],
+  "installation_occurred": false,
+  "cli_pipeline_occurred": false,
+  "result": "pass"
+}

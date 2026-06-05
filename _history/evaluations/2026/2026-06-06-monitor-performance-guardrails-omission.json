@@ -1,0 +1,31 @@
+{
+  "id": "2026-06-06-monitor-performance-guardrails-omission",
+  "date": "2026-06-06",
+  "status": "passed",
+  "checked_user_instructions": [
+    "Do not avoid broad scope.",
+    "Implement, then build automatically.",
+    "Use desktop resources and reduce tab switching latency.",
+    "Review fundamental performance structure."
+  ],
+  "covered_items": [
+    "web-first intake recorded",
+    "requirement recorded",
+    "spec, plan, tasks, validation, traceability recorded",
+    "performance guardrails implemented",
+    "internal package build executed",
+    "built output performance audits executed",
+    "resource cleanup checked"
+  ],
+  "deferred_items": [
+    {
+      "item": "Full MonitorShell/globals.css/Rust module migration",
+      "reason": "A safe follow-up structural migration; this slice implemented regression gates and validated current performance."
+    },
+    {
+      "item": "Public release readiness",
+      "reason": "Still blocked by Developer ID signing, notarization, signed updater, and clean-machine smoke."
+    }
+  ],
+  "result": "pass"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "2026-06-06-monitor-performance-guardrails",
+  "date": "2026-06-06",
+  "status": "passed",
+  "runtime_resources": [
+    {
+      "resource": "127.0.0.1:3348 static server",
+      "opened": true,
+      "closed": true,
+      "cleanup_evidence": "lsof returned no listener."
+    },
+    {
+      "resource": "Chromium performance audit sessions",
+      "opened": true,
+      "closed": true,
+      "cleanup_evidence": "Audit scripts exited successfully."
+    }
+  ],
+  "result": "pass"
+}

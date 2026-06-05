@@ -66,6 +66,14 @@ const buttonResponseAudit = fs.readFileSync(
   path.join(projectRoot, "scripts", "audit-button-response.mjs"),
   "utf8"
 );
+const sectionSwitchAudit = fs.readFileSync(
+  path.join(projectRoot, "scripts", "audit-section-switch-latency.mjs"),
+  "utf8"
+);
+const lazyBoundaryCheck = fs.readFileSync(
+  path.join(projectRoot, "scripts", "check-lazy-boundary-contract.mjs"),
+  "utf8"
+);
 const historyPayloadCheck = fs.readFileSync(path.join(projectRoot, "scripts", "check-history-payload.mjs"), "utf8");
 const adminHistoryHook = fs.readFileSync(path.join(projectRoot, "components", "history", "useAdminHistoryIndex.ts"), "utf8");
 const tauriLib = fs.readFileSync(path.resolve(projectRoot, "..", "..", "src-tauri", "src", "lib.rs"), "utf8");
@@ -502,6 +510,37 @@ test("Monitor section switches prewarm heavy surfaces and preserve source editor
   assert.match(css, /\.mounted-section-panel \{\s+contain: layout paint style;/);
   assert.match(css, /\.mounted-section-panel\[hidden\]/);
   assert.match(css, /\.section-transition-shell \{/);
+});
+
+test("Monitor enforces lazy workbench boundaries and long-task performance telemetry", () => {
+  assert.match(packageJson.scripts.check, /check-lazy-boundary-contract\.mjs/);
+  assert.equal(packageJson.scripts["check:lazy-boundaries"], "node scripts/check-lazy-boundary-contract.mjs");
+  assert.equal(packageJson.scripts["perf:sections:repeat"], "node scripts/audit-section-switch-latency.mjs --runs=3");
+  assert.match(lazyBoundaryCheck, /lazyBoundaryTargets/);
+  assert.match(lazyBoundaryCheck, /MonitorShell must type-only import/);
+  assert.match(lazyBoundaryCheck, /MonitorShell must dynamic import/);
+  assert.match(lazyBoundaryCheck, /MonitorShell must keep an explicit preload path/);
+  assert.match(lazyBoundaryCheck, /void\\\\s\+import/);
+  for (const modulePath of [
+    "@/components/features/OperatorCenterDialog",
+    "@/components/features/ProductFeatureArchitecturePanel",
+    "@/components/workbench/CoreFeatureDrilldown",
+    "@/components/workbench/WorkspaceExplorerPane",
+    "@/components/workbench/NativeGitWorkbench",
+    "@/components/workbench/RuntimeTerminalDrawer",
+    "@/components/workbench/ToolStudioPanel",
+    "@/components/workbench/AgentDetailPanels",
+    "@/components/workbench/AgentBuilderPanels"
+  ]) {
+    assert.match(lazyBoundaryCheck, new RegExp(modulePath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+  assert.match(sectionSwitchAudit, /parsePositiveIntegerArg\("--runs", 1\)/);
+  assert.match(sectionSwitchAudit, /PerformanceObserver/);
+  assert.match(sectionSwitchAudit, /supportedEntryTypes\?\.includes\("longtask"\)/);
+  assert.match(sectionSwitchAudit, /__workspaceMonitorLongTasks/);
+  assert.match(sectionSwitchAudit, /longTaskMaxMs/);
+  assert.match(sectionSwitchAudit, /longTaskTotalP95Ms/);
+  assert.match(sectionSwitchAudit, /sectionStats/);
 });
 
 test("Desktop source workbench prepares native OS workspace resources", () => {

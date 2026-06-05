@@ -1,17 +1,17 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-05T18:30:41.578Z",
+  "generatedAt": "2026-06-05T18:44:01.290Z",
   "summary": {
-    "documents": 2365,
+    "documents": 2378,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 962
+        "count": 966
       },
       {
         "category": "web-search",
-        "count": 378
+        "count": 380
       },
       {
         "category": "plan",
@@ -19,30 +19,30 @@
       },
       {
         "category": "request-trace",
-        "count": 307
+        "count": 308
       },
       {
         "category": "work-timing",
-        "count": 229
+        "count": 230
       },
       {
         "category": "user-request",
-        "count": 91
+        "count": 93
       },
       {
         "category": "work-summary",
-        "count": 58
+        "count": 60
       },
       {
         "category": "daily-history",
-        "count": 6
+        "count": 7
       },
       {
         "category": "intent-feature-map",
         "count": 2
       }
     ],
-    "totalSourceBytes": 6226415,
+    "totalSourceBytes": 6243999,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,214 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-2026-2026-06-06-md",
+      "path": "_history/2026/2026-06-06.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 06",
+      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
+      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 874,
+      "updatedAt": "2026-06-05T18:43:48.366Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-monitor-performance-guardrails-json",
+      "path": "_history/work-timings/2026/2026-06-06-monitor-performance-guardrails.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Monitor Performance Guardrails",
+      "excerpt": "{ \"id\": \"2026 06 06 monitor performance guardrails\", \"date\": \"2026 06 06\", \"status\": \"recorded\", \"timings\": { \"phase\": \"web first intake\", \"duration minutes\": 2 }, { \"phase\": \"implementation\", \"duration minutes\": 20 }, { \"phase\": \"workspace checks\", \"duration minutes\": 2 }, { \"ph",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 monitor performance guardrails&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;status&quot;: &quot;recorded&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;duration minutes&quot;: 2 }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;duration minutes&quot;: 20 }, { &quot;phase&quot;: &quot;workspace checks&quot;, &quot;duration minutes&quot;: 2 }, { &quot;phase&quot;: &quot;internal package build&quot;, &quot;duration minutes&quot;: 1 }, { &quot;phase&quot;: &quot;built outpu</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 726,
+      "updatedAt": "2026-06-05T18:43:48.365Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-monitor-performance-guardrails-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Monitor Performance Guardrails Evaluation Input",
+      "excerpt": "{ \"id\": \"2026 06 06 monitor performance guardrails\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app/renderer/workspace monitor\", \"work mode\": \"standard\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"request summary\": \"Workspace Monitor tab switching ",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 monitor performance guardrails&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app/renderer/workspace monitor&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;view mode&quot;: &quot;superadmin developer&quot;, &quot;install mode&quot;: &quot;developer&quot;, &quot;request summary&quot;: &quot;Workspace Monitor tab switching still feels slow; complete deeper desktop performance implementation and build.&quot;</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4943,
+      "updatedAt": "2026-06-05T18:43:48.364Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-monitor-performance-guardrails-omission-json",
+      "path": "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails-omission.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Monitor Performance Guardrails Omission",
+      "excerpt": "{ \"id\": \"2026 06 06 monitor performance guardrails omission\", \"date\": \"2026 06 06\", \"status\": \"passed\", \"checked user instructions\": \"Do not avoid broad scope.\", \"Implement, then build automatically.\", \"Use desktop resources and reduce tab switching latency.\", \"Review fundamental",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 monitor performance guardrails omission&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;status&quot;: &quot;passed&quot;, &quot;checked user instructions&quot;: &quot;Do not avoid broad scope.&quot;, &quot;Implement, then build automatically.&quot;, &quot;Use desktop resources and reduce tab switching latency.&quot;, &quot;Review fundamental performance structure.&quot; , &quot;covered items&quot;: &quot;web first intake recorded&quot;, &quot;requir</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1071,
+      "updatedAt": "2026-06-05T18:43:48.364Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-monitor-performance-guardrails-resource-json",
+      "path": "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails-resource.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Monitor Performance Guardrails Resource",
+      "excerpt": "{ \"id\": \"2026 06 06 monitor performance guardrails resource\", \"date\": \"2026 06 06\", \"status\": \"passed\", \"resource risk occurred\": true, \"resources touched\": \"local static http server on 127.0.0.1:3348\", \"Playwright/Chromium performance audit browser processes\", \"Tauri release bui",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 monitor performance guardrails resource&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;status&quot;: &quot;passed&quot;, &quot;resource risk occurred&quot;: true, &quot;resources touched&quot;: &quot;local static http server on 127.0.0.1:3348&quot;, &quot;Playwright/Chromium performance audit browser processes&quot;, &quot;Tauri release build artifacts&quot;, &quot;macOS codesign and hdiutil verification&quot; , &quot;cleanup&quot;: &quot;Stopped t</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 679,
+      "updatedAt": "2026-06-05T18:43:48.364Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: Monitor 성능 가드레일 완성",
+      "excerpt": "평가: Monitor 성능 가드레일 완성 결과 통과. 탭 전환 성능 개선이 코드 리뷰나 기억에 의존하지 않도록 lazy boundary contract와 반복 section switch audit를 검증선에 연결했다. built out/ 기준에서 성능 예산, section switch, repeated section switch, button response 감사가 모두 통과했다. internal .app 와 .dmg 패키징, codesign verify, DMG verify가 완료됐다. 핵심 검",
+      "html": "<p>평가: Monitor 성능 가드레일 완성 결과 통과. 탭 전환 성능 개선이 코드 리뷰나 기억에 의존하지 않도록 lazy boundary contract와 반복 section switch audit를 검증선에 연결했다. built out/ 기준에서 성능 예산, section switch, repeated section switch, button response 감사가 모두 통과했다. internal .app 와 .dmg 패키징, codesign verify, DMG verify가 완료됐다. 핵심 검증 수치 perf:sections:repeat : runs 3, settle average 303.2ms, settle p95 705.9ms p</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1255,
+      "updatedAt": "2026-06-05T18:43:48.364Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Monitor 성능 가드레일 완성",
+      "excerpt": "요청 결과 추적: Monitor 성능 가드레일 완성 요청 탭 이동 성능을 근본적으로 다시 보고, 데스크톱 자원을 활용하는 방향으로 구현과 빌드까지 완료한다. 결과 성능 최적화 구현 자체를 무리하게 더 벌리기보다, 이미 적용된 resident/preload/lazy 구조가 되돌아가지 않도록 정적 계약과 반복 성능 감사를 추가했다. 실제 internal package build와 built static output 성능 감사를 완료했다. 주요 파일 platform desktop app/renderer",
+      "html": "<p>요청 결과 추적: Monitor 성능 가드레일 완성 요청 탭 이동 성능을 근본적으로 다시 보고, 데스크톱 자원을 활용하는 방향으로 구현과 빌드까지 완료한다. 결과 성능 최적화 구현 자체를 무리하게 더 벌리기보다, 이미 적용된 resident/preload/lazy 구조가 되돌아가지 않도록 정적 계약과 반복 성능 감사를 추가했다. 실제 internal package build와 built static output 성능 감사를 완료했다. 주요 파일 platform desktop app/renderer/workspace monitor/scripts/check lazy boundary contract.mjs platform desktop app</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1113,
+      "updatedAt": "2026-06-05T18:43:48.363Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Monitor 성능 가드레일 완성",
+      "excerpt": "사용자 요청 요약: Monitor 성능 가드레일 완성 요약 사용자는 탭 간 이동이 여전히 느리다고 지적했고, 데스크톱 앱이므로 CPU/RAM/runtime 자원을 실제로 쓰는 방향으로 근본 성능 문제를 해결하라고 요청했다. 또한 범위가 넓다는 이유로 회피하지 말고 구현과 빌드까지 끝내라고 지시했다. 실행 해석 이전 resident/preload/lazy 작업을 전제로 한다. 남은 핵심은 퇴행 방지와 실제 빌드 산출물 기준 검증이다. public release 준비 완료가 아니라 internal p",
+      "html": "<p>사용자 요청 요약: Monitor 성능 가드레일 완성 요약 사용자는 탭 간 이동이 여전히 느리다고 지적했고, 데스크톱 앱이므로 CPU/RAM/runtime 자원을 실제로 쓰는 방향으로 근본 성능 문제를 해결하라고 요청했다. 또한 범위가 넓다는 이유로 회피하지 말고 구현과 빌드까지 끝내라고 지시했다. 실행 해석 이전 resident/preload/lazy 작업을 전제로 한다. 남은 핵심은 퇴행 방지와 실제 빌드 산출물 기준 검증이다. public release 준비 완료가 아니라 internal package와 local 성능 감사 완료를 목표로 한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 656,
+      "updatedAt": "2026-06-05T18:43:48.363Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: Monitor 성능 가드레일 완성",
+      "excerpt": "웹 검색 기록: Monitor 성능 가드레일 완성 검색 시각 2026 06 06 질의 Next.js official docs dynamic import lazy loading client components React official docs Profiler startTransition useDeferredValue memo performance web.dev optimize long tasks Interaction to Next Paint INP main thread JavaScript Goog",
+      "html": "<p>웹 검색 기록: Monitor 성능 가드레일 완성 검색 시각 2026 06 06 질의 Next.js official docs dynamic import lazy loading client components React official docs Profiler startTransition useDeferredValue memo performance web.dev optimize long tasks Interaction to Next Paint INP main thread JavaScript Google SRE book controlled rollout large scale change risk validation 확인한 강한 출처 Next</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1437,
+      "updatedAt": "2026-06-05T18:43:48.363Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Monitor 성능 가드레일 완성",
+      "excerpt": "작업 요약: Monitor 성능 가드레일 완성 완료 MonitorShell.tsx heavy panel의 type only import, dynamic import, preload path를 검사하는 lazy boundary contract를 추가했다. Workspace Monitor check와 desktop readiness에 lazy boundary contract를 연결했다. section switch audit에 runs=N 반복 실행과 PerformanceObserver long tas",
+      "html": "<p>작업 요약: Monitor 성능 가드레일 완성 완료 MonitorShell.tsx heavy panel의 type only import, dynamic import, preload path를 검사하는 lazy boundary contract를 추가했다. Workspace Monitor check와 desktop readiness에 lazy boundary contract를 연결했다. section switch audit에 runs=N 반복 실행과 PerformanceObserver long task telemetry를 추가했다. monitor/platform tests가 새 계약을 검사하도록 보강했다. internal package bu</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1143,
+      "updatedAt": "2026-06-05T18:43:48.363Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-wide-scope-instruction-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-wide-scope-instruction.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 넓은 범위 작업 지시",
+      "excerpt": "작업 요약: 넓은 범위 작업 지시 완료 내용 사용자의 “범위가 넓다고 두려워하지마” 지시를 지속 지시로 반영했다. docs/instructions/persistent instructions.md , .ko.md , .en.md 에 동일 의미의 원칙을 추가했다. agent platform/configs/memory/bootstrap manifest.json 의 persistent instruction anchor와 large scope rule을 갱신했다. 웹 검색 기록과 사용자 요청 요약을 남겼다",
+      "html": "<p>작업 요약: 넓은 범위 작업 지시 완료 내용 사용자의 “범위가 넓다고 두려워하지마” 지시를 지속 지시로 반영했다. docs/instructions/persistent instructions.md , .ko.md , .en.md 에 동일 의미의 원칙을 추가했다. agent platform/configs/memory/bootstrap manifest.json 의 persistent instruction anchor와 large scope rule을 갱신했다. 웹 검색 기록과 사용자 요청 요약을 남겼다. 해석 앞으로 넓은 범위 작업은 회피하거나 임의 축소하지 않는다. 대신 large scope decomposition, bounded slic</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 728,
+      "updatedAt": "2026-06-05T18:33:37.274Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-wide-scope-instruction-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-wide-scope-instruction.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 넓은 범위 작업 지시",
+      "excerpt": "사용자 요청 요약: 넓은 범위 작업 지시 요약 사용자는 작업 범위가 넓다는 이유로 에이전트가 두려워하거나 축소하지 말라고 지시했다. 반영 넓은 범위는 회피 대상이 아니라 분해, 순서화, 검증, rollback 경계로 다룰 지속 지시로 해석했다. persistent instructions 와 memory bootstrap manifest에 반영했다.",
+      "html": "<p>사용자 요청 요약: 넓은 범위 작업 지시 요약 사용자는 작업 범위가 넓다는 이유로 에이전트가 두려워하거나 축소하지 말라고 지시했다. 반영 넓은 범위는 회피 대상이 아니라 분해, 순서화, 검증, rollback 경계로 다룰 지속 지시로 해석했다. persistent instructions 와 memory bootstrap manifest에 반영했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 405,
+      "updatedAt": "2026-06-05T18:33:37.273Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-wide-scope-instruction-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-wide-scope-instruction.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: 넓은 범위 작업 지시",
+      "excerpt": "웹 검색 기록: 넓은 범위 작업 지시 목적 사용자가 “범위가 넓다고 두려워하지마”라고 지시해, 넓은 변경을 회피하지 않되 안전하게 다루는 원칙을 지속 지시에 반영하기 전 외부 근거를 확인했다. 검색어 official engineering guide large scale change incremental rollout software engineering Google SRE large scale change management incremental rollout risk mitigation soft",
+      "html": "<p>웹 검색 기록: 넓은 범위 작업 지시 목적 사용자가 “범위가 넓다고 두려워하지마”라고 지시해, 넓은 변경을 회피하지 않되 안전하게 다루는 원칙을 지속 지시에 반영하기 전 외부 근거를 확인했다. 검색어 official engineering guide large scale change incremental rollout software engineering Google SRE large scale change management incremental rollout risk mitigation software engineering large scope task decomposition official guide 확인한 출처 | 출처 | 유형 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2554,
+      "updatedAt": "2026-06-05T18:33:37.273Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-work-timings-2026-2026-06-06-workbench-lazy-boundary-expansion-json",
       "path": "_history/work-timings/2026/2026-06-06-workbench-lazy-boundary-expansion.json",
@@ -37907,35 +38115,39 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 93,
+      "documentsCount": 106,
       "categories": [
         {
           "category": "evaluation",
-          "count": 29
-        },
-        {
-          "category": "request-trace",
-          "count": 12
+          "count": 33
         },
         {
           "category": "user-request",
-          "count": 12
+          "count": 14
         },
         {
           "category": "web-search",
-          "count": 12
+          "count": 14
         },
         {
           "category": "work-summary",
-          "count": 12
+          "count": 14
+        },
+        {
+          "category": "request-trace",
+          "count": 13
         },
         {
           "category": "work-timing",
-          "count": 12
+          "count": 13
         },
         {
           "category": "plan",
           "count": 4
+        },
+        {
+          "category": "daily-history",
+          "count": 1
         }
       ],
       "documents": []

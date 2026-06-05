@@ -1,0 +1,24 @@
+{
+  "id": "2026-06-06-monitor-performance-guardrails-resource",
+  "date": "2026-06-06",
+  "status": "passed",
+  "resource_risk_occurred": true,
+  "resources_touched": [
+    "local static http server on 127.0.0.1:3348",
+    "Playwright/Chromium performance audit browser processes",
+    "Tauri release build artifacts",
+    "macOS codesign and hdiutil verification"
+  ],
+  "cleanup": [
+    "Stopped the temporary static server with Ctrl-C.",
+    "Verified no TCP listener remained on port 3348."
+  ],
+  "verification": [
+    {
+      "command": "lsof -tiTCP:3348 -sTCP:LISTEN || true",
+      "status": "passed",
+      "notes": "No listener output."
+    }
+  ],
+  "result": "pass"
+}

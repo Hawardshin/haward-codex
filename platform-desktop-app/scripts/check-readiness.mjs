@@ -68,6 +68,7 @@ const requiredFiles = [
   "scripts/check-release-readiness.mjs",
   "scripts/check-service-readiness.mjs",
   "scripts/readiness/desktop-build-pipeline.mjs",
+  "renderer/workspace-monitor/scripts/check-lazy-boundary-contract.mjs",
   ...desktopBuildPipelineRequiredFiles
 ];
 
@@ -605,6 +606,10 @@ const productFeatureCollector = readFileSync(
 const customerBundleCheck = readFileSync(join(root, "scripts/check-customer-bundle.mjs"), "utf8");
 const releaseReadinessCheck = readFileSync(join(root, "scripts/check-release-readiness.mjs"), "utf8");
 const serviceReadinessCheck = readFileSync(join(root, "scripts/check-service-readiness.mjs"), "utf8");
+const lazyBoundaryCheck = readFileSync(
+  join(root, "renderer/workspace-monitor/scripts/check-lazy-boundary-contract.mjs"),
+  "utf8"
+);
 for (const requiredPhrase of ["buildCustomerSnapshot", "customer_snapshot_sanitized", "--snapshot-mode", "sourceFiles: []"]) {
   if (!monitorCollector.includes(requiredPhrase)) {
     failures.push(`workspace-monitor collector must include customer snapshot token ${requiredPhrase}`);
@@ -622,6 +627,17 @@ for (const requiredPhrase of [
 ]) {
   if (!monitorCollector.includes(requiredPhrase) && !productFeatureCollector.includes(requiredPhrase)) {
     failures.push(`workspace-monitor product feature collector must include ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of [
+  "lazyBoundaryTargets",
+  "lazy_boundary_contract_ok",
+  "MonitorShell must type-only import",
+  "MonitorShell must dynamic import",
+  "MonitorShell must keep an explicit preload path"
+]) {
+  if (!lazyBoundaryCheck.includes(requiredPhrase)) {
+    failures.push(`workspace-monitor lazy boundary contract must include ${requiredPhrase}`);
   }
 }
 for (const requiredPhrase of [

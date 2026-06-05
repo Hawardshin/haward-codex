@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T18:30:41.576Z",
+  "generatedAt": "2026-06-05T18:44:01.287Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 453,
-    "evaluations": 30,
+    "evaluations": 32,
     "webSearches": 12,
-    "timingRecords": 13,
-    "historyDays": 2,
-    "adminHistoryDocuments": 2365,
+    "timingRecords": 11,
+    "historyDays": 1,
+    "adminHistoryDocuments": 2378,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7386,6 +7386,358 @@
   ],
   "documents": [
     {
+      "id": "history-2026-2026-06-06-md",
+      "path": "_history/2026/2026-06-06.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 06",
+      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
+      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 874,
+      "updatedAt": "2026-06-05T18:43:48.366Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-monitor-performance-guardrails-json",
+      "path": "_history/work-timings/2026/2026-06-06-monitor-performance-guardrails.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Monitor Performance Guardrails",
+      "excerpt": "{ \"id\": \"2026 06 06 monitor performance guardrails\", \"date\": \"2026 06 06\", \"status\": \"recorded\", \"timings\": { \"phase\": \"web first intake\", \"duration minutes\": 2 }, { \"phase\": \"implementation\", \"duration minutes\": 20 }, { \"phase\": \"workspace checks\", \"duration minutes\": 2 }, { \"ph",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 monitor performance guardrails&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;status&quot;: &quot;recorded&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;duration minutes&quot;: 2 }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;duration minutes&quot;: 20 }, { &quot;phase&quot;: &quot;workspace checks&quot;, &quot;duration minutes&quot;: 2 }, { &quot;phase&quot;: &quot;internal package build&quot;, &quot;duration minutes&quot;: 1 }, { &quot;phase&quot;: &quot;built outpu</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 726,
+      "updatedAt": "2026-06-05T18:43:48.365Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-monitor-performance-guardrails-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Monitor Performance Guardrails Evaluation Input",
+      "excerpt": "{ \"id\": \"2026 06 06 monitor performance guardrails\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app/renderer/workspace monitor\", \"work mode\": \"standard\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"request summary\": \"Workspace Monitor tab switching ",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 monitor performance guardrails&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app/renderer/workspace monitor&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;view mode&quot;: &quot;superadmin developer&quot;, &quot;install mode&quot;: &quot;developer&quot;, &quot;request summary&quot;: &quot;Workspace Monitor tab switching still feels slow; complete deeper desktop performance implementation and build.&quot;</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4943,
+      "updatedAt": "2026-06-05T18:43:48.364Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-monitor-performance-guardrails-omission-json",
+      "path": "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails-omission.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Monitor Performance Guardrails Omission",
+      "excerpt": "{ \"id\": \"2026 06 06 monitor performance guardrails omission\", \"date\": \"2026 06 06\", \"status\": \"passed\", \"checked user instructions\": \"Do not avoid broad scope.\", \"Implement, then build automatically.\", \"Use desktop resources and reduce tab switching latency.\", \"Review fundamental",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 monitor performance guardrails omission&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;status&quot;: &quot;passed&quot;, &quot;checked user instructions&quot;: &quot;Do not avoid broad scope.&quot;, &quot;Implement, then build automatically.&quot;, &quot;Use desktop resources and reduce tab switching latency.&quot;, &quot;Review fundamental performance structure.&quot; , &quot;covered items&quot;: &quot;web first intake recorded&quot;, &quot;requir</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1071,
+      "updatedAt": "2026-06-05T18:43:48.364Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-monitor-performance-guardrails-resource-json",
+      "path": "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails-resource.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Monitor Performance Guardrails Resource",
+      "excerpt": "{ \"id\": \"2026 06 06 monitor performance guardrails resource\", \"date\": \"2026 06 06\", \"status\": \"passed\", \"resource risk occurred\": true, \"resources touched\": \"local static http server on 127.0.0.1:3348\", \"Playwright/Chromium performance audit browser processes\", \"Tauri release bui",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 monitor performance guardrails resource&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;status&quot;: &quot;passed&quot;, &quot;resource risk occurred&quot;: true, &quot;resources touched&quot;: &quot;local static http server on 127.0.0.1:3348&quot;, &quot;Playwright/Chromium performance audit browser processes&quot;, &quot;Tauri release build artifacts&quot;, &quot;macOS codesign and hdiutil verification&quot; , &quot;cleanup&quot;: &quot;Stopped t</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 679,
+      "updatedAt": "2026-06-05T18:43:48.364Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: Monitor 성능 가드레일 완성",
+      "excerpt": "평가: Monitor 성능 가드레일 완성 결과 통과. 탭 전환 성능 개선이 코드 리뷰나 기억에 의존하지 않도록 lazy boundary contract와 반복 section switch audit를 검증선에 연결했다. built out/ 기준에서 성능 예산, section switch, repeated section switch, button response 감사가 모두 통과했다. internal .app 와 .dmg 패키징, codesign verify, DMG verify가 완료됐다. 핵심 검",
+      "html": "<p>평가: Monitor 성능 가드레일 완성 결과 통과. 탭 전환 성능 개선이 코드 리뷰나 기억에 의존하지 않도록 lazy boundary contract와 반복 section switch audit를 검증선에 연결했다. built out/ 기준에서 성능 예산, section switch, repeated section switch, button response 감사가 모두 통과했다. internal .app 와 .dmg 패키징, codesign verify, DMG verify가 완료됐다. 핵심 검증 수치 perf:sections:repeat : runs 3, settle average 303.2ms, settle p95 705.9ms p</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1255,
+      "updatedAt": "2026-06-05T18:43:48.364Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Monitor 성능 가드레일 완성",
+      "excerpt": "요청 결과 추적: Monitor 성능 가드레일 완성 요청 탭 이동 성능을 근본적으로 다시 보고, 데스크톱 자원을 활용하는 방향으로 구현과 빌드까지 완료한다. 결과 성능 최적화 구현 자체를 무리하게 더 벌리기보다, 이미 적용된 resident/preload/lazy 구조가 되돌아가지 않도록 정적 계약과 반복 성능 감사를 추가했다. 실제 internal package build와 built static output 성능 감사를 완료했다. 주요 파일 platform desktop app/renderer",
+      "html": "<p>요청 결과 추적: Monitor 성능 가드레일 완성 요청 탭 이동 성능을 근본적으로 다시 보고, 데스크톱 자원을 활용하는 방향으로 구현과 빌드까지 완료한다. 결과 성능 최적화 구현 자체를 무리하게 더 벌리기보다, 이미 적용된 resident/preload/lazy 구조가 되돌아가지 않도록 정적 계약과 반복 성능 감사를 추가했다. 실제 internal package build와 built static output 성능 감사를 완료했다. 주요 파일 platform desktop app/renderer/workspace monitor/scripts/check lazy boundary contract.mjs platform desktop app</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1113,
+      "updatedAt": "2026-06-05T18:43:48.363Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Monitor 성능 가드레일 완성",
+      "excerpt": "사용자 요청 요약: Monitor 성능 가드레일 완성 요약 사용자는 탭 간 이동이 여전히 느리다고 지적했고, 데스크톱 앱이므로 CPU/RAM/runtime 자원을 실제로 쓰는 방향으로 근본 성능 문제를 해결하라고 요청했다. 또한 범위가 넓다는 이유로 회피하지 말고 구현과 빌드까지 끝내라고 지시했다. 실행 해석 이전 resident/preload/lazy 작업을 전제로 한다. 남은 핵심은 퇴행 방지와 실제 빌드 산출물 기준 검증이다. public release 준비 완료가 아니라 internal p",
+      "html": "<p>사용자 요청 요약: Monitor 성능 가드레일 완성 요약 사용자는 탭 간 이동이 여전히 느리다고 지적했고, 데스크톱 앱이므로 CPU/RAM/runtime 자원을 실제로 쓰는 방향으로 근본 성능 문제를 해결하라고 요청했다. 또한 범위가 넓다는 이유로 회피하지 말고 구현과 빌드까지 끝내라고 지시했다. 실행 해석 이전 resident/preload/lazy 작업을 전제로 한다. 남은 핵심은 퇴행 방지와 실제 빌드 산출물 기준 검증이다. public release 준비 완료가 아니라 internal package와 local 성능 감사 완료를 목표로 한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 656,
+      "updatedAt": "2026-06-05T18:43:48.363Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: Monitor 성능 가드레일 완성",
+      "excerpt": "웹 검색 기록: Monitor 성능 가드레일 완성 검색 시각 2026 06 06 질의 Next.js official docs dynamic import lazy loading client components React official docs Profiler startTransition useDeferredValue memo performance web.dev optimize long tasks Interaction to Next Paint INP main thread JavaScript Goog",
+      "html": "<p>웹 검색 기록: Monitor 성능 가드레일 완성 검색 시각 2026 06 06 질의 Next.js official docs dynamic import lazy loading client components React official docs Profiler startTransition useDeferredValue memo performance web.dev optimize long tasks Interaction to Next Paint INP main thread JavaScript Google SRE book controlled rollout large scale change risk validation 확인한 강한 출처 Next</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1437,
+      "updatedAt": "2026-06-05T18:43:48.363Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Monitor 성능 가드레일 완성",
+      "excerpt": "작업 요약: Monitor 성능 가드레일 완성 완료 MonitorShell.tsx heavy panel의 type only import, dynamic import, preload path를 검사하는 lazy boundary contract를 추가했다. Workspace Monitor check와 desktop readiness에 lazy boundary contract를 연결했다. section switch audit에 runs=N 반복 실행과 PerformanceObserver long tas",
+      "html": "<p>작업 요약: Monitor 성능 가드레일 완성 완료 MonitorShell.tsx heavy panel의 type only import, dynamic import, preload path를 검사하는 lazy boundary contract를 추가했다. Workspace Monitor check와 desktop readiness에 lazy boundary contract를 연결했다. section switch audit에 runs=N 반복 실행과 PerformanceObserver long task telemetry를 추가했다. monitor/platform tests가 새 계약을 검사하도록 보강했다. internal package bu</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1143,
+      "updatedAt": "2026-06-05T18:43:48.363Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-monitor-performance-guardrails-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-monitor-performance-guardrails/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "계획: Monitor 성능 가드레일 완성",
+      "excerpt": "계획: Monitor 성능 가드레일 완성 단계 1. 현재 성능 최적화 구조를 유지하면서 heavy panel 경계 목록을 확정한다. 2. MonitorShell.tsx 를 대상으로 runtime static import, dynamic import, preload path 계약을 검사하는 스크립트를 만든다. 3. Workspace Monitor check와 tests에 계약을 추가한다. 4. section switch audit에 반복 실행과 long task telemetry를 추가한다. 5. ",
+      "html": "<h1>계획: Monitor 성능 가드레일 완성</h1>\n<h2>단계</h2>\n<p>1. 현재 성능 최적화 구조를 유지하면서 heavy panel 경계 목록을 확정한다.</p>\n<p>2. <code>MonitorShell.tsx</code>를 대상으로 runtime static import, dynamic import, preload path 계약을 검사하는 스크립트를 만든다.</p>\n<p>3. Workspace Monitor check와 tests에 계약을 추가한다.</p>\n<p>4. section switch audit에 반복 실행과 long-task telemetry를 추가한다.</p>\n<p>5. desktop readiness/test가 새 계약을 요구하도록 연결한다.</p>\n<p>6. 전체 check, internal package build, built output performance audits를 실행한다.</p>\n<p>7. 요구사항, 스펙, 검증, 리소스/누락/evaluation 기록을 남기고 commit/push한다.</p>\n<h2>롤백 경계</h2>\n<ul>\n<li>lazy-boundary contract가 과하게 막으면 target 목록이나 preload 검사만 되돌릴 수 있다.</li>\n<li>audit threshold가 환경 변동에 너무 민감하면 threshold와 반복 횟수만 조정할 수 있다.</li>\n<li>UI/runtime source 변경은 이번 슬라이스에서 최소화했으므로 rollback surface는 scripts/tests/check wiring에 집중된다.</li>\n</ul>\n<h2>잔여 마이그레이션</h2>\n<ul>\n<li><code>MonitorShell.tsx</code> domain panel 분리</li>\n<li><code>globals.css</code> feature ownership 분리</li>\n<li><code>src-tauri/src/lib.rs</code> command domain module 분리</li>\n<li>OS-level memory/process telemetry를 release smoke에 연결</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1309,
+      "updatedAt": "2026-06-05T18:43:48.362Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-monitor-performance-guardrails-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-monitor-performance-guardrails/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록: Monitor 성능 가드레일 완성",
+      "excerpt": "작업 목록: Monitor 성능 가드레일 완성 x web first intake로 Next.js/React/web.dev 성능 기준 재확인 x lazy boundary contract script 추가 x Workspace Monitor check에 contract 추가 x section switch audit 반복 실행 옵션 추가 x section switch audit long task telemetry 추가 x monitor tests에 lazy boundary 및 long task audi",
+      "html": "<h1>작업 목록: Monitor 성능 가드레일 완성</h1>\n<ul>\n<li>[x] web-first intake로 Next.js/React/web.dev 성능 기준 재확인</li>\n<li>[x] lazy boundary contract script 추가</li>\n<li>[x] Workspace Monitor check에 contract 추가</li>\n<li>[x] section switch audit 반복 실행 옵션 추가</li>\n<li>[x] section switch audit long-task telemetry 추가</li>\n<li>[x] monitor tests에 lazy boundary 및 long-task audit 계약 추가</li>\n<li>[x] desktop readiness/check test에 새 성능 계약 추가</li>\n<li>[x] <code>workspace-monitor check</code> 실행</li>\n<li>[x] <code>platform-desktop-app check</code> 실행</li>\n<li>[x] <code>platform-desktop-app package:internal</code> 실행</li>\n<li>[x] built <code>out/</code> 기준 <code>perf:budget</code>, <code>perf:sections</code>, <code>perf:sections:repeat</code>, <code>perf:buttons</code> 실행</li>\n<li>[x] 임시 정적 서버 종료 및 listener 정리 확인</li>\n<li>[x] 요구사항/스펙/검증/평가 기록 작성</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 813,
+      "updatedAt": "2026-06-05T18:43:48.362Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-monitor-performance-guardrails-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-monitor-performance-guardrails/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적성: Monitor 성능 가드레일 완성",
+      "excerpt": "추적성: Monitor 성능 가드레일 완성 요구사항 연결 요구사항: platform desktop app/docs/requirements/2026 06 06 monitor performance guardrails.ko.md 스펙: platform desktop app/specs/2026 06 06 monitor performance guardrails/spec.ko.md 계획: platform desktop app/specs/2026 06 06 monitor performance guardrail",
+      "html": "<h1>추적성: Monitor 성능 가드레일 완성</h1>\n<h2>요구사항 연결</h2>\n<ul>\n<li>요구사항: <code>platform-desktop-app/docs/requirements/2026-06-06-monitor-performance-guardrails.ko.md</code></li>\n<li>스펙: <code>platform-desktop-app/specs/2026-06-06-monitor-performance-guardrails/spec.ko.md</code></li>\n<li>계획: <code>platform-desktop-app/specs/2026-06-06-monitor-performance-guardrails/plan.ko.md</code></li>\n<li>작업: <code>platform-desktop-app/specs/2026-06-06-monitor-performance-guardrails/tasks.ko.md</code></li>\n<li>검증: <code>platform-desktop-app/specs/2026-06-06-monitor-performance-guardrails/validation.ko.md</code></li>\n</ul>\n<h2>구현 연결</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/scripts/check-lazy-boundary-contract.mjs</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/scripts/audit-section-switch-latency.mjs</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/package.json</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n<li><code>platform-desktop-app/scripts/check-readiness.mjs</code></li>\n<li><code>platform-desktop-app/tests/readiness.test.mjs</code></li>\n</ul>\n<h2>히스토리 연결</h2>\n<ul>\n<li><code>_history/web-searches/2026/2026-06-06-monitor-performance-guardrails.ko.md</code></li>\n<li><code>_history/user-requests/2026/2026-06-06-monitor-performance-guardrails.ko.md</code></li>\n<li><code>_history/work-summaries/2026/2026-06-06-monitor-performance-guardrails.ko.md</code></li>\n<li><code>_history/request-traces/2026/2026-06-06-monitor-performance-guardrails.ko.md</code></li>\n<li><code>_history/evaluations/2026/2026-06-06-monitor-performance-guardrails.ko.md</code></li>\n<li><code>_history/evaluations/2026/2026-06-06-monitor-performance-guardrails-evaluation-input.json</code></li>\n<li><code>_history/omission-checks/2026/2026-06-06-monitor-performance-guardrails.json</code></li>\n<li><code>_history/resource-checks/2026/2026-06-06-monitor-performance-guardrails.json</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1685,
+      "updatedAt": "2026-06-05T18:43:48.362Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-monitor-performance-guardrails-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-monitor-performance-guardrails/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증: Monitor 성능 가드레일 완성",
+      "excerpt": "검증: Monitor 성능 가드레일 완성 실행 결과 corepack pnpm dir platform desktop app/renderer/workspace monitor run check:lazy boundaries : 통과, 13 targets / 9 modules corepack pnpm dir platform desktop app/renderer/workspace monitor test : 통과, 60 tests corepack pnpm dir platform desktop app/rende",
+      "html": "<h1>검증: Monitor 성능 가드레일 완성</h1>\n<h2>실행 결과</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check:lazy-boundaries</code>: 통과, 13 targets / 9 modules</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code>: 통과, 60 tests</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 22 tests</li>\n<li><code>corepack pnpm --filter platform-desktop-app check</code>: 통과</li>\n<li><code>corepack pnpm --filter platform-desktop-app run package:internal</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:budget</code>: 통과, largest chunk 734386 bytes / 1000000 budget</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:sections</code>: 통과, settle p95 706.5ms, long-task max 358ms</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:sections:repeat</code>: 통과, runs 3, settle p95 705.9ms, settle average 303.2ms, long-task max 354ms</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:buttons</code>: 통과, real click feedback p95 51ms</li>\n</ul>\n<h2>패키징 산출물</h2>\n<ul>\n<li><code>/Users/shinjoungeun/Desktop/Obsidian/brain/codex/platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>/Users/shinjoungeun/Desktop/Obsidian/brain/codex/platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>\n<h2>리소스 확인</h2>\n<ul>\n<li>성능 감사용 local static server는 종료했다.</li>\n<li><code>lsof -tiTCP:3348 -sTCP:LISTEN</code> 결과 listener 없음.</li>\n</ul>\n<h2>잔여 리스크</h2>\n<ul>\n<li>public release는 Developer ID signing, notarization, signed updater, clean-machine smoke가 없으므로 계속 blocked다.</li>\n<li>long task 예산은 현재 headless Chromium/CPU throttle 6 기준이다. 실제 Tauri WebView runtime telemetry는 별도 native smoke로 확장해야 한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1940,
+      "updatedAt": "2026-06-05T18:43:48.362Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-monitor-performance-guardrails-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-monitor-performance-guardrails.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: Monitor 성능 가드레일 완성",
+      "excerpt": "요구사항: Monitor 성능 가드레일 완성 사용자 요구 탭 이동이 여전히 느리므로 근본 원인을 다시 보고, 데스크톱 앱의 CPU/RAM/runtime 자원을 실제로 활용하면서 구현과 빌드까지 끝낸다. 범위가 넓다는 이유로 회피하지 않는다. 범위 이미 구현된 resident tab, preload, lazy boundary, source editor decoupling을 유지한다. 무거운 패널이 다시 정적 import로 돌아와 초기/전환 비용을 키우지 못하도록 정적 계약을 둔다. 탭 전환 감사를 ",
+      "html": "<h1>요구사항: Monitor 성능 가드레일 완성</h1>\n<h2>사용자 요구</h2>\n<p>탭 이동이 여전히 느리므로 근본 원인을 다시 보고, 데스크톱 앱의 CPU/RAM/runtime 자원을 실제로 활용하면서 구현과 빌드까지 끝낸다. 범위가 넓다는 이유로 회피하지 않는다.</p>\n<h2>범위</h2>\n<ul>\n<li>이미 구현된 resident tab, preload, lazy boundary, source editor decoupling을 유지한다.</li>\n<li>무거운 패널이 다시 정적 import로 돌아와 초기/전환 비용을 키우지 못하도록 정적 계약을 둔다.</li>\n<li>탭 전환 감사를 1회성 숫자가 아니라 반복 실행 가능한 예산으로 만든다.</li>\n<li>click-to-visible 시간뿐 아니라 browser main-thread long task도 측정한다.</li>\n<li>성능 계약은 Workspace Monitor check, desktop readiness, tests, internal packaging path에서 검증된다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>MonitorShell.tsx</code>의 heavy workbench panel은 type-only import, <code>next/dynamic</code>, explicit preload path 계약을 만족해야 한다.</li>\n<li><code>workspace-monitor</code> check는 lazy-boundary contract를 실행해야 한다.</li>\n<li>section switch audit는 <code>--runs=N</code> 반복 측정과 long-task summary를 출력해야 한다.</li>\n<li>built <code>out/</code> 산출물 기준으로 <code>perf:budget</code>, <code>perf:sections</code>, <code>perf:sections:repeat</code>, <code>perf:buttons</code>가 통과해야 한다.</li>\n<li><code>platform-desktop-app package:internal</code>이 끝까지 통과해 <code>.app</code>와 <code>.dmg</code>를 생성해야 한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>이번 슬라이스는 <code>MonitorShell.tsx</code> 전면 라우팅 재작성이나 Tauri command module 분해를 직접 수행하지 않는다.</li>\n<li>public macOS release readiness를 주장하지 않는다. Developer ID signing, notarization, updater, clean-machine smoke는 별도 release gate다.</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>Next.js lazy loading guidance: https://nextjs.org/docs/app/guides/lazy-loading</li>\n<li>React transition/deferred rendering guidance: https://react.dev/reference/react/useTransition</li>\n<li>React deferred value guidance: https://react.dev/reference/react/useDeferredValue</li>\n<li>web.dev long task guidance: https://web.dev/articles/optimize-long-tasks</li>\n<li>web.dev INP guidance: https://web.dev/articles/optimize-inp</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2124,
+      "updatedAt": "2026-06-05T18:43:48.361Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-monitor-performance-guardrails-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-monitor-performance-guardrails/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "스펙: Monitor 성능 가드레일 완성",
+      "excerpt": "스펙: Monitor 성능 가드레일 완성 목표 Workspace Monitor의 탭 전환 최적화가 이후 변경으로 퇴행하지 않게 정적 lazy boundary 계약과 runtime 성능 감사를 제품 검증선에 묶는다. 언어/런타임 선택 옵션 A: Node 기반 정적 계약 + Playwright 런타임 감사. 기존 renderer scripts와 CI/check 흐름에 바로 들어가며 Next static export를 실제 브라우저에서 검증할 수 있어 선택했다. 옵션 B: Rust/Tauri nativ",
+      "html": "<h1>스펙: Monitor 성능 가드레일 완성</h1>\n<h2>목표</h2>\n<p>Workspace Monitor의 탭 전환 최적화가 이후 변경으로 퇴행하지 않게 정적 lazy-boundary 계약과 runtime 성능 감사를 제품 검증선에 묶는다.</p>\n<h2>언어/런타임 선택</h2>\n<ul>\n<li>옵션 A: Node 기반 정적 계약 + Playwright 런타임 감사. 기존 renderer scripts와 CI/check 흐름에 바로 들어가며 Next static export를 실제 브라우저에서 검증할 수 있어 선택했다.</li>\n<li>옵션 B: Rust/Tauri native profiler command. OS 자원 측정에는 유리하지만 React import boundary와 WebView long task 회귀를 직접 잡기 어렵다.</li>\n<li>옵션 C: 수동 DevTools 프로파일링. 원인 분석에는 좋지만 반복 가능한 regression gate가 아니므로 미선택.</li>\n</ul>\n<h2>아키텍처 선택</h2>\n<ul>\n<li>옵션 A: <code>scripts/check-lazy-boundary-contract.mjs</code>를 추가하고 <code>workspace-monitor check</code> 및 desktop readiness에서 요구한다. 변경자가 check를 돌리면 즉시 퇴행을 알 수 있어 선택했다.</li>\n<li>옵션 B: ESLint custom rule. 장기적으로 가능하지만 현재 repo의 renderer check 흐름은 Node scripts 중심이다.</li>\n<li>옵션 C: bundle size만 감시. 정적 import 회귀 일부는 잡을 수 있지만 어떤 panel이 계약을 깨는지 진단력이 낮다.</li>\n</ul>\n<h2>폴더 구조 선택</h2>\n<ul>\n<li>옵션 A: Workspace Monitor 전용 script/test와 desktop readiness script를 좁게 수정한다. 성능 계약의 소유권이 monitor에 있어 선택했다.</li>\n<li>옵션 B: platform-wide performance package를 신설한다. 여러 앱으로 확장될 때 유효하지만 현재는 한 renderer만 검증 대상이라 과하다.</li>\n</ul>\n<h2>설계</h2>\n<ul>\n<li>lazy-boundary contract는 heavy target component 이름과 module path 목록을 가진다.</li>\n<li><code>MonitorShell.tsx</code>에서 대상 이름이 runtime import specifier에 등장하면 실패한다. <code>import type</code>은 허용한다.</li>\n<li>각 대상은 <code>dynamic(() =&gt; import(...))</code> 경계를 가져야 한다.</li>\n<li>각 대상 module path는 explicit preload path에 들어가야 한다.</li>\n<li>section switch audit는 <code>--runs=N</code>을 받아 같은 section sequence를 반복한다.</li>\n<li>audit는 브라우저 안에 <code>PerformanceObserver</code> longtask observer를 설치하고 section 전환 사이의 long task count, max, total을 샘플에 기록한다.</li>\n<li>summary는 overall p95뿐 아니라 section별 settle/long-task 통계를 출력한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>lazy boundary check output이 <code>lazy_boundary_contract_ok</code>를 출력한다.</li>\n<li>workspace-monitor <code>check</code>가 lazy boundary check를 실행한다.</li>\n<li>desktop readiness가 lazy boundary script 존재와 핵심 token을 검사한다.</li>\n<li><code>perf:sections:repeat</code>는 <code>audit-section-switch-latency.mjs --runs=3</code>을 실행한다.</li>\n<li>built static export 기준 성능 감사가 resident/mounted panel count와 long-task budget을 모두 통과한다.</li>\n</ul>\n<h2>제한</h2>\n<ul>\n<li>long task 측정은 Chromium PerformanceObserver 지원이 있는 환경에서 가장 신뢰할 수 있다.</li>\n<li>이번 작업은 회귀 방지와 검증 강화가 중심이며, <code>MonitorShell.tsx</code>의 장기 분해는 별도 migration slice로 남긴다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 3098,
+      "updatedAt": "2026-06-05T18:43:48.361Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-wide-scope-instruction-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-wide-scope-instruction.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 넓은 범위 작업 지시",
+      "excerpt": "작업 요약: 넓은 범위 작업 지시 완료 내용 사용자의 “범위가 넓다고 두려워하지마” 지시를 지속 지시로 반영했다. docs/instructions/persistent instructions.md , .ko.md , .en.md 에 동일 의미의 원칙을 추가했다. agent platform/configs/memory/bootstrap manifest.json 의 persistent instruction anchor와 large scope rule을 갱신했다. 웹 검색 기록과 사용자 요청 요약을 남겼다",
+      "html": "<p>작업 요약: 넓은 범위 작업 지시 완료 내용 사용자의 “범위가 넓다고 두려워하지마” 지시를 지속 지시로 반영했다. docs/instructions/persistent instructions.md , .ko.md , .en.md 에 동일 의미의 원칙을 추가했다. agent platform/configs/memory/bootstrap manifest.json 의 persistent instruction anchor와 large scope rule을 갱신했다. 웹 검색 기록과 사용자 요청 요약을 남겼다. 해석 앞으로 넓은 범위 작업은 회피하거나 임의 축소하지 않는다. 대신 large scope decomposition, bounded slic</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 728,
+      "updatedAt": "2026-06-05T18:33:37.274Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-wide-scope-instruction-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-wide-scope-instruction.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 넓은 범위 작업 지시",
+      "excerpt": "사용자 요청 요약: 넓은 범위 작업 지시 요약 사용자는 작업 범위가 넓다는 이유로 에이전트가 두려워하거나 축소하지 말라고 지시했다. 반영 넓은 범위는 회피 대상이 아니라 분해, 순서화, 검증, rollback 경계로 다룰 지속 지시로 해석했다. persistent instructions 와 memory bootstrap manifest에 반영했다.",
+      "html": "<p>사용자 요청 요약: 넓은 범위 작업 지시 요약 사용자는 작업 범위가 넓다는 이유로 에이전트가 두려워하거나 축소하지 말라고 지시했다. 반영 넓은 범위는 회피 대상이 아니라 분해, 순서화, 검증, rollback 경계로 다룰 지속 지시로 해석했다. persistent instructions 와 memory bootstrap manifest에 반영했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 405,
+      "updatedAt": "2026-06-05T18:33:37.273Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-wide-scope-instruction-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-wide-scope-instruction.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: 넓은 범위 작업 지시",
+      "excerpt": "웹 검색 기록: 넓은 범위 작업 지시 목적 사용자가 “범위가 넓다고 두려워하지마”라고 지시해, 넓은 변경을 회피하지 않되 안전하게 다루는 원칙을 지속 지시에 반영하기 전 외부 근거를 확인했다. 검색어 official engineering guide large scale change incremental rollout software engineering Google SRE large scale change management incremental rollout risk mitigation soft",
+      "html": "<p>웹 검색 기록: 넓은 범위 작업 지시 목적 사용자가 “범위가 넓다고 두려워하지마”라고 지시해, 넓은 변경을 회피하지 않되 안전하게 다루는 원칙을 지속 지시에 반영하기 전 외부 근거를 확인했다. 검색어 official engineering guide large scale change incremental rollout software engineering Google SRE large scale change management incremental rollout risk mitigation software engineering large scope task decomposition official guide 확인한 출처 | 출처 | 유형 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2554,
+      "updatedAt": "2026-06-05T18:33:37.273Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "docs-instructions-persistent-instructions-en-md",
+      "path": "_docs/instructions/persistent-instructions.en.md",
+      "category": "workspace-doc",
+      "language": "en",
+      "title": "Persistent Instructions",
+      "excerpt": "Persistent Instructions This document records durable user instructions in English. Active Instructions Manage this repository as a monorepo for a personal agent building platform. The platform's top level purpose is to keep reducing repetitive human work and elapsed work time. R",
+      "html": "<h1>Persistent Instructions</h1>\n<p>This document records durable user instructions in English.</p>\n<h2>Active Instructions</h2>\n<ul>\n<li>Manage this repository as a monorepo for a personal agent-building platform.</li>\n<li>The platform&#039;s top-level purpose is to keep reducing repetitive human work and elapsed work time. Repeated research, comparison, judgment, execution, and verification should first be modeled as the process a human actually performs; when automation value is confirmed, promote the repetition into the smallest suitable prompt, workflow, template, tool, skill, agent, or project feature.</li>\n<li>Automation must not hide human-judgment checkpoints, validation criteria, or rollback boundaries. Automation candidates should be checked through work timing records, bottleneck records, and evaluator results to confirm that they actually reduce repetition and time.</li>\n<li>&quot;Like a human directly doing the work&quot; means modeling the competent human work sequence and artifacts before automation: goal, context, sources, assumptions, option comparison, decision, execution notes, verification, handoff, and review.</li>\n<li>Treat source structure quality as a product quality gate. Keep refactoring continuously while working, but keep each refactor behavior-preserving, scoped, tested, and tied to clearer ownership boundaries.</li>\n<li>Keep the user&#039;s point of view as a product quality gate. For every meaningful product, UI, workflow, documentation, setup, or automation change, identify the user&#039;s goal, first action, expected next feedback, likely confusion points, and success evidence; rework any result that is technically correct but unclear, hard to start, hard to recover from, or not aligned with the user&#039;s actual workflow.</li>\n<li>When the platform detects repeated work, bottlenecks, omissions, validation failures, manual rework, or recurring research/prompt/tool patterns while doing work, use <code>capability-promotion-agent</code> and <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code> to create automatic capability candidates. This is allowed only as bounded black-box processing: the user-facing experience may feel automatic, but internal observations, candidates, evidence, risk, rejected lighter options, validation, rollback or disablement, documentation, evaluation, and commit/push traces must remain auditable.</li>\n<li>Capability promotion must record the direct human work model before idea generation. Generated ideas should reduce or stabilize concrete human process steps, not merely react to the user phrase.</li>\n<li>Capability promotion separates idea generation from idea evaluation. For non-trivial problems, generate several improvement ideas, score them by repetition reduction, time savings, maintenance cost, evidence strength, risk fit, and smallest-asset fit, then record selected, rejected, or queued reasons.</li>\n<li>Capability promotion must check the smallest asset first in this order: <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code>. Destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible changes must not auto-execute without a human checkpoint and rollback plan.</li>\n<li>Sensitive files must be centrally routed to <code>_private/sensitive/</code> or an external secret manager, while AI agents must not read or index <code>_private/</code> contents by default. Ask for a redacted extract first; direct inspection requires explicit one-time permission for the exact path and operation.</li>\n<li>The source of truth for this boundary is <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, and <code>_ops/security/README.ko.md</code>. Run <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code> after changing <code>.gitignore</code>, maps, snapshots, collectors, public artifacts, installer payload rules, or sensitive-file handling rules.</li>\n<li>Keep the workspace operating principles usable from Claude Code, Cursor, Antigravity, Codex, or another AI coding tool the user prefers.</li>\n<li>All agents shall strongly adhere to durable principles. Principles are execution contracts and close-out gates, not decoration; speed, profit, optimism, convenience, or user pressure must not silently bypass required evidence, safety, privacy, legality, quality, provenance, validation, or evaluation.</li>\n<li>Keep <code>_docs/operating-models/tool-agnostic-agent-operating-model.ko.md</code> and <code>_ops/assistant-runtimes/adapter-registry.json</code> as the source of truth for tool-agnostic runtime decisions.</li>\n<li>Treat <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, <code>.cursor/rules/</code>, and <code>.agents/rules/</code> as runtime adapters. Do not copy common policy into separate divergent sources.</li>\n<li>Keep separate projects as root-level <code>kebab-case</code> folders.</li>\n<li>Keep project-specific files inside the owning project folder.</li>\n<li>When a new interest has an independent lifecycle, create a new root project and register it under <code>_ops/projects/</code>.</li>\n<li>Commit every completed meaningful change set.</li>\n<li>Push completed commits to <code>origin/main</code> immediately unless explicitly told not to push.</li>\n<li>Before closing meaningful work, evaluate the result against the initial user instruction and rework real gaps.</li>\n<li>After completing meaningful implementation work, run the o</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 34379,
+      "updatedAt": "2026-06-05T18:33:37.271Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "_docs/instructions"
+    },
+    {
+      "id": "docs-instructions-persistent-instructions-ko-md",
+      "path": "_docs/instructions/persistent-instructions.ko.md",
+      "category": "workspace-doc",
+      "language": "ko",
+      "title": "지속 지시",
+      "excerpt": "지속 지시 이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 한국어로 정리한다. 활성 지시 이 저장소는 개인 에이전트 구축 플랫폼을 위한 monorepo로 운영한다. 플랫폼의 최상위 목적은 사람의 반복 작업과 소요 시간을 계속 줄이는 것이다. 반복되는 조사, 비교, 판단, 실행, 검증은 먼저 인간이 실제로 하는 프로세스로 모델링하고, 자동화 가치가 확인되면 가장 작은 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트 또는 프로젝트 기능으로 승격한다. 자동화는 인간 판단 지점, 검증 기준, ",
+      "html": "<h1>지속 지시</h1>\n<p>이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 한국어로 정리한다.</p>\n<h2>활성 지시</h2>\n<ul>\n<li>이 저장소는 개인 에이전트 구축 플랫폼을 위한 monorepo로 운영한다.</li>\n<li>플랫폼의 최상위 목적은 사람의 반복 작업과 소요 시간을 계속 줄이는 것이다. 반복되는 조사, 비교, 판단, 실행, 검증은 먼저 인간이 실제로 하는 프로세스로 모델링하고, 자동화 가치가 확인되면 가장 작은 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트 또는 프로젝트 기능으로 승격한다.</li>\n<li>자동화는 인간 판단 지점, 검증 기준, rollback 경계를 숨기지 않는다. 자동화 후보는 실제 반복 감소와 시간 절감 효과를 작업 시간 기록, 병목 기록, evaluator 결과로 확인한다.</li>\n<li>“직접 사람이 하는 것처럼”은 사람 말투를 흉내 내는 것이 아니라 유능한 사람이 실제로 일할 때의 목표, 맥락, 출처, 가정, 선택지 비교, 결정, 실행 메모, 검증, 인수인계, 리뷰 순서와 산출물을 먼저 모델링한다는 뜻이다.</li>\n<li>소스 구조 품질을 제품 품질 gate로 다룬다. 작업 중 계속 리팩터링하되, 각 리팩터링은 동작 보존, 작은 범위, 테스트, 더 명확한 소유 경계와 연결되어야 한다.</li>\n<li>사용자 관점을 제품 품질 gate로 계속 적용한다. 의미 있는 제품, UI, workflow, 문서, setup, 자동화 변경마다 사용자의 목표, 첫 행동, 다음에 받아야 할 피드백, 헷갈릴 지점, 성공 근거를 확인하고, 기술적으로는 맞더라도 시작하기 어렵거나 이해하기 어렵거나 복구하기 어렵거나 실제 사용자 흐름과 어긋나는 결과는 재작업한다.</li>\n<li>플랫폼이 작업 중 반복, 병목, 누락, 검증 실패, 수동 재작업, 자주 쓰는 조사/프롬프트/도구 패턴을 발견하면 <code>capability-promotion-agent</code>와 <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code>을 사용해 자동 기능 후보로 만들 수 있다. 이 흐름은 bounded black-box로만 허용한다. 사용자 경험은 자동 개선처럼 보일 수 있지만 내부 observation, candidate, evidence, risk, rejected lighter options, validation, rollback 또는 disablement, documentation, evaluation, commit/push trace는 감사 가능해야 한다.</li>\n<li>capability promotion은 아이디어 생성 전에 사람이 직접 수행하는 작업 모델을 먼저 기록한다. 생성된 아이디어는 사용자 문구만이 아니라 구체적인 human process step을 줄이거나 안정화해야 한다.</li>\n<li>capability promotion은 아이디어 생성과 아이디어 평가를 분리한다. 사소하지 않은 문제는 여러 개선 아이디어를 만들고, 반복 감소, 시간 절감, 유지보수 비용, 근거 강도, 위험 적합성, 가장 작은 자산 적합성으로 평가한 뒤 선택/기각/대기 이유를 남긴다.</li>\n<li>capability promotion은 <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code> 순서로 가장 작은 자산을 먼저 검토한다. destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, irreversible change는 human checkpoint와 rollback 계획 없이 자동 실행하지 않는다.</li>\n<li>민감 파일은 <code>_private/sensitive/</code> 또는 외부 secret manager로 중앙 라우팅하되, AI 에이전트는 <code>_private/</code> 내부를 기본적으로 직접 읽거나 색인하지 않는다. 필요한 정보는 redacted extract를 먼저 요청하고, 직접 열람은 특정 경로와 작업에 대한 명시적 1회 허가가 있을 때만 허용한다.</li>\n<li>민감 파일 경계의 원본은 <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, <code>_ops/security/README.ko.md</code>에 둔다. <code>.gitignore</code>, map, snapshot, collector, public artifact, installer 규칙을 바꾸면 <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code>를 실행한다.</li>\n<li>이 저장소의 운영 원칙은 Codex에만 묶지 않고 Claude Code, Cursor, Antigravity, 또는 사용자가 선호하는 다른 AI 코딩 도구에서도 재사용할 수 있게 유지한다.</li>\n<li>도구 독립형 원칙의 원본은 <code>_docs/operating-models/tool-agnostic-agent-operating-model.ko.md</code>와 <code>_ops/assistant-runtimes/adapter-registry.json</code>에 둔다.</li>\n<li>모든 에이전트는 영속 원칙을 강하게 고수한다. 원칙은 장식 문구가 아니라 실행 계약과 close-out gate이며, 속도, 돈, 낙관, 편의, 사용자 압박은 필요한 근거, 안전, 개인정보, 법, 품질, provenance, 검증, 평가를 무단 생략하는 이유가 될 수 없다.</li>\n<li><code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, <code>.cursor/rules/</code>, <code>.agents/rules/</code>는 도구별 adapter로 취급하고, 공통 정책을 길게 복사해 서로 다른 원본으로 갈라지게 하지 않는다.</li>\n<li>별도 프로젝트는 루트의 <code>kebab-case</code> 폴더로 관리한다.</li>\n<li>프로젝트별 파일은 해당 프로젝트 폴더 안에만 둔다.</li>\n<li>새 관심사나 독립 라이프사이클이 생기면 새 루트 프로젝트로 만들고 <code>_ops/projects/</code>에 등록한다.</li>\n<li>의미 있는 변경 단위가 끝날 때마다 커밋한다.</li>\n<li>커밋 후 별도 지시가 없으면 즉시 <code>origin/main</code>에 push한다.</li>\n<li>의미 있는 작업을 닫기 전 초기 사용자 지시와 결과를 평가하고, 실제 gap은 재작업한다.</li>\n<li>의미 있는 구현 작업을 완료하면 최종 응답 전에 해당 프로젝트의 build 또는 package 명령을 자동으로 실행해 사용자가 직접 빌드하지 않아도 되게 한다. build 명령이 없거나, 안전하지 않거나, 비용이 과도하거나, 변경한 프로젝트 경계 밖이면 그 이유를 기록하고 가능한 가장 강한 대체 검증을 실행한다.</li>\n<li>평가 전에는 완료 작업을 요약하고 관련 이전 작업이나 강한 레퍼런스를 확인한다.</li>\n<li>사용자의 작업과 지시는 요구사항 후보로 보고, 구현 전 관련 요구사항을 정의/검토/수정/기준선화한다.</li>\n<li>공통 요구사항은 <code>_requirements/</code>에, 프로젝트별 요구사항은 해당 프로젝트의 <code>docs/requirements/</code>에 저장한다.</li>\n<li>의미 있는 구현 작업은 spec-driven 구조로 진행해 요구사항을 스펙, 계획, 작업 목록, 검증, traceability 산출물로 바꾼 뒤 코딩한다.</li>\n<li>공통 스펙은 <code>_specs/</code>에, 프로젝트별 스펙은 해당 프로젝트의 <code>specs/</code>에 저장한다.</li>\n<li>활성 프로젝트 스펙이 애매하거나 현재 소스, 테스트, 생성 산출물과 다를 때는 어느 쪽도 바로 수정하지 말고 스펙/소스 조정 workflow를 먼저 실행한다. 이슈를 <code>update_spec</code>, <code>update_source</code>, <code>ask_user</code>, <code>defer</code>로 분류하고, <code>ask_user</code>는 안정적인 질문 ID와 답변 형식이 포함된 <code>clarification_needed</code> 알림으로 사용자에게 질문한 뒤 답변이 기록되기 전까지 관련 스펙이나 소스를 수정하지 않는다.</li>\n<li>커스텀 스킬 생성/수정은 명시적으로 관리하며 <code>_skills/</code> 원본, 검증, 필요한 전진 테스트, 개선 아이디어를 남긴다.</li>\n<li>의미 있는 작업의 최종 평가는 <code>_history/evaluations/YYYY/</code> 아래 파일로 저장한다.</li>\n<li>중요한 계획을 세우는 과정은 <code>_history/plans/YYYY/</code> 아래 파일로 저장한다.</li>\n<li>의미 있는 사용자 요청은 원문 전체가 아니라 요약으로 <code>_history/user-requests/YYYY/</code> 아래에 저장한다.</li>\n<li>의미 있는 요청은 <code>_history/request-traces/YYYY/</code> 아래에서 요청, 결과, 산출물, 평가, 커밋을 연결해 저장한다.</li>\n<li>작업 히스토리는 <code>_history/YYYY/YYYY-MM-DD.md</code>에 기록한다.</li>\n<li>나중에 문서만 보고도 한 일을 쉽게 파악할 수 있도록 <code>_history/work-summaries/YYYY/</code> 아래 빠른 작업 요약을 유지한다.</li>\n<li><code>_ops/</code>를 프롬프트, 워크플로, 맵을 위한 운영 허브로 사용한다.</li>\n<li><code>_docs/</code>는 <code>_docs/registry.json</code>의 카테고리 규칙으로 관리하고, 허용된 index 파일을 제외한 Markdown 문서를 <code>_docs</code> 루트에 직접 두지 않는다. 문서 구조나 필수 문서 경로를 바꾸면 <code>python3 _tools/docs-audit/src/docs_audit.py --check</code>를 실행한다.</li>\n<li>진행 중인 에이전트와 병렬 작업은 <code>_ops/coordination/</code>에서 추적한다.</li>\n<li>인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용은 <code>_research/</code>에 기록한다.</li>\n<li>에이전트와 플랫폼 운영의 근본 철학은 <code>_philosophy/</code>에 기록한다.</li>\n<li>모든 새 사용자 지시는 계획, 저장소 탐색, 파일 수정 전에 웹 검색을 먼저 수행한다.</li>\n<li><code>_ops/prompts/</code>의 모든 재사용 프롬프트 실행도 웹 검색을 먼저 수행한다.</li>\n<li>의미 있는 웹 검색 기록은 <code>_history/web-searches/YYYY/</code>에 저장하고 작업 평가 입력에 <code>web_search_record_targets</code>를 포함한다.</li>\n<li>검색 판단 과정은 검색어, 확인한 출처, 제외한 약한 출처, 계획에 반영한 인사이트, 남은 불확실성 형태의 공개 판단 요약으로 텍스트에 남긴다. 내부 추론 원문은 저장하지 않는다.</li>\n<li>웹 검색이 무관하거나 불가능하면 그 사실을 기록하고 로컬 검증을 강화해 진행한다.</li>\n<li>웹 검색 후 로컬 계획 전에 <code>memory-bootstrap-agent</code>로 필수 메모리 anchor를 확인하고 hot context를 읽는다.</li>\n<li>웹 검색과 메모리 부트스트랩 후에는 `agent-platform/configs/workflows/work-</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 36776,
+      "updatedAt": "2026-06-05T18:33:37.271Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "_docs/instructions"
+    },
+    {
+      "id": "docs-instructions-persistent-instructions-md",
+      "path": "_docs/instructions/persistent-instructions.md",
+      "category": "workspace-doc",
+      "language": "unknown",
+      "title": "Persistent Instructions",
+      "excerpt": "Persistent Instructions 이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 저장한다. 대화 기억에 의존하지 않고, 반복성 있는 지시는 이 문서와 관련 운영 문서에 반영한다. 병렬 문서: 한국어: docs/instructions/persistent instructions.ko.md persistent instructions.ko.md 영어: docs/instructions/persistent instructions.en.md persistent instructions.en.md",
+      "html": "<h1>Persistent Instructions</h1>\n<p>이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 저장한다. 대화 기억에 의존하지 않고, 반복성 있는 지시는 이 문서와 관련 운영 문서에 반영한다.</p>\n<p>병렬 문서:</p>\n<ul>\n<li>한국어: <span class=\"doc-link\">_docs/instructions/persistent-instructions.ko.md</span></li>\n<li>영어: <span class=\"doc-link\">_docs/instructions/persistent-instructions.en.md</span></li>\n</ul>\n<h2>Active Instructions</h2>\n<ul>\n<li>Manage this repository as a monorepo for a personal agent-building platform.</li>\n<li>The platform&#039;s top-level purpose is to keep reducing repetitive human work and elapsed work time by modeling real human research, comparison, judgment, execution, and verification processes, then promoting automation-worthy repetition into the smallest suitable prompt, workflow, template, tool, skill, agent, or project feature.</li>\n<li>Automation must preserve human-judgment checkpoints, validation criteria, and rollback boundaries, and should be checked with timing, bottleneck, and evaluator records when the work is meaningful.</li>\n<li>&quot;Like a human directly doing the work&quot; means modeling the competent human work sequence and artifacts before automation: goal, context, sources, assumptions, option comparison, decision, execution notes, verification, handoff, and review.</li>\n<li>Treat source structure quality as a product quality gate. Keep refactoring continuously while working, but keep each refactor behavior-preserving, scoped, tested, and tied to clearer ownership boundaries.</li>\n<li>Keep the user&#039;s point of view as a product quality gate. For every meaningful product, UI, workflow, documentation, setup, or automation change, identify the user&#039;s goal, first action, expected next feedback, likely confusion points, and success evidence; rework any result that is technically correct but unclear, hard to start, hard to recover from, or not aligned with the user&#039;s actual workflow.</li>\n<li>When the platform detects repeated work, bottlenecks, omissions, validation failures, manual rework, or recurring research/prompt/tool patterns, use <code>capability-promotion-agent</code> and <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code> to create automatic capability candidates. This is bounded black-box processing: user-facing automation may feel smooth, but internal observations, candidates, evidence, risk, rejected lighter options, validation, rollback or disablement, documentation, evaluation, and commit/push traces must remain auditable.</li>\n<li>Capability promotion must record the direct human work model before idea generation. Generated ideas should reduce or stabilize concrete human process steps, not merely react to the user phrase.</li>\n<li>Capability promotion separates idea generation from idea evaluation. For non-trivial problems, generate several improvement ideas, score them by repetition reduction, time savings, maintenance cost, evidence strength, risk fit, and smallest-asset fit, then record selected, rejected, or queued reasons.</li>\n<li>Capability promotion checks the smallest asset first in this order: <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code>. Destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible changes must not auto-execute without a human checkpoint and rollback plan.</li>\n<li>Sensitive files must be centrally routed to <code>_private/sensitive/</code> or an external secret manager, while AI agents must not read or index <code>_private/</code> contents by default. Ask for a redacted extract first; direct inspection requires explicit one-time permission for the exact path and operation.</li>\n<li>The source of truth for this boundary is <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, and <code>_ops/security/README.ko.md</code>. Run <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code> after changing <code>.gitignore</code>, maps, snapshots, collectors, public artifacts, installer payload rules, or sensitive-file handling rules.</li>\n<li>Keep the workspace operating principles tool-agnostic so the same structure can be used from Codex, Claude Code, Cursor, Antigravity, or another user-preferred AI coding tool.</li>\n<li>Treat the installable platform as the primary host runtime. It launches first and owns task state, durable memory, decisions, artifacts, validation, and UI authority; Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, or other commercial/external AI tools attach only as guest adapters through explicit CLI/runtime adapter contracts.</li>\n<li>Treat this repository as the development source that builds the platform, not as the customer-visible product payload. Installed customers should use the app, customer-selected workspaces, app-managed data stores, classified logs, and exports without seeing the platform source tree.</li>\n<li>Separate platform source code from runtime data planes: user workspace data, platform data stores, log stores, cache stores, and agent runtime workspaces. Use <code>platform-desktop-app/configs/runtime-data-boundary-registry.json</code> before adding persistent runtime data, logs, support exports, installer payload behavior, or agent work directories.</li>\n<li>Keep reusable agent definitions grouped under <code>agent-platform/configs/agents/</code>; runtime agent input/output/log/handoff/temp work belongs in the install</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 34108,
+      "updatedAt": "2026-06-05T18:33:37.270Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "_docs/instructions"
+    },
+    {
       "id": "history-work-timings-2026-2026-06-06-workbench-lazy-boundary-expansion-json",
       "path": "_history/work-timings/2026/2026-06-06-workbench-lazy-boundary-expansion.json",
       "category": "work-timing",
@@ -9722,70 +10074,6 @@
       "workspaceArea": "_history/request-traces"
     },
     {
-      "id": "history-work-summaries-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: Rust 데스크톱 자원 최적화",
-      "excerpt": "작업 요약: Rust 데스크톱 자원 최적화 Workspace Monitor의 source workspace cache를 Rust/Tauri native path에서 더 공격적으로 준비하도록 바꿨다. rayon 으로 entry build와 preload read를 병렬화했고, sysinfo 로 OS memory telemetry를 읽어 preload budget과 UI 표시를 추가했다. UI에는 cache 파일/바이트뿐 아니라 worker 수, RAM budget/free RAM, CPU 병렬 수,",
-      "html": "<p>작업 요약: Rust 데스크톱 자원 최적화 Workspace Monitor의 source workspace cache를 Rust/Tauri native path에서 더 공격적으로 준비하도록 바꿨다. rayon 으로 entry build와 preload read를 병렬화했고, sysinfo 로 OS memory telemetry를 읽어 preload budget과 UI 표시를 추가했다. UI에는 cache 파일/바이트뿐 아니라 worker 수, RAM budget/free RAM, CPU 병렬 수, preload strategy, native scan/preload 시간이 표시된다. readiness와 workspace monitor te</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 709,
-      "updatedAt": "2026-06-05T15:47:08.793Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-rust-desktop-resource-optimization-json",
-      "path": "_history/work-timings/2026/2026-06-06-rust-desktop-resource-optimization.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Rust Desktop Resource Optimization",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 rust desktop resource optimization\", \"timings\": { \"phase\": \"web research and crate metadata\", \"duration\": \"approximately 15 minutes\" }, { \"phase\": \"implementation\", \"duration\": \"approximately 35 minutes\" }, { \"phase\": \"test fix an",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;request id&quot;: &quot;2026 06 06 rust desktop resource optimization&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;web research and crate metadata&quot;, &quot;duration&quot;: &quot;approximately 15 minutes&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;duration&quot;: &quot;approximately 35 minutes&quot; }, { &quot;phase&quot;: &quot;test fix and internal package build&quot;, &quot;duration&quot;: &quot;approximately 30 minutes&quot; }, { &quot;phase&quot;: </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 519,
-      "updatedAt": "2026-06-05T15:47:08.793Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: Rust 데스크톱 자원 최적화",
-      "excerpt": "웹 검색 기록: Rust 데스크톱 자원 최적화 목적 Rust/Tauri 경로에서 CPU parallelism과 RAM aware preload를 실제로 구현할 때 어떤 공식 API와 crate가 적합한지 확인했다. 검색어 Tauri v2 Rust commands async state manage official docs performance Tauri v2 sidecar state Rust official docs CPU heavy task background thread Rust rayon pa",
-      "html": "<p>웹 검색 기록: Rust 데스크톱 자원 최적화 목적 Rust/Tauri 경로에서 CPU parallelism과 RAM aware preload를 실제로 구현할 때 어떤 공식 API와 crate가 적합한지 확인했다. 검색어 Tauri v2 Rust commands async state manage official docs performance Tauri v2 sidecar state Rust official docs CPU heavy task background thread Rust rayon parallel iterators official docs CPU bound workloads Rust sysinfo crate CPU memory</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2785,
-      "updatedAt": "2026-06-05T15:47:08.792Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Rust 데스크톱 자원 최적화",
-      "excerpt": "사용자 요청 요약: Rust 데스크톱 자원 최적화 사용자는 Workspace Monitor/source editor 계열 탭 전환이 늦게 불러오는 방식처럼 느껴진다고 지적했고, 단순 렌더 최적화가 아니라 실제 데스크톱 앱답게 Rust와 운영체제 CPU/RAM 자원을 적극 사용해 최적화하라고 요청했다. 추가 지속 요구로 구현 완료 후 사용자가 별도로 빌드하지 않도록 내부 빌드까지 자동 실행해야 한다.",
-      "html": "<p>사용자 요청 요약: Rust 데스크톱 자원 최적화 사용자는 Workspace Monitor/source editor 계열 탭 전환이 늦게 불러오는 방식처럼 느껴진다고 지적했고, 단순 렌더 최적화가 아니라 실제 데스크톱 앱답게 Rust와 운영체제 CPU/RAM 자원을 적극 사용해 최적화하라고 요청했다. 추가 지속 요구로 구현 완료 후 사용자가 별도로 빌드하지 않도록 내부 빌드까지 자동 실행해야 한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 485,
-      "updatedAt": "2026-06-05T15:47:08.791Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-rust-desktop-resource-optimization-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-rust-desktop-resource-optimization/tasks.ko.md",
       "category": "project-spec",
@@ -9880,150 +10168,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: 소스 컨트롤 Playwright 스모크",
-      "excerpt": "평가: 소스 컨트롤 Playwright 스모크 결과 이전의 dev 서버 Playwright 검증 실패를 그대로 두지 않고, dev 서버와 static export 경로를 분리했다. Tauri가 임베드하는 static export 산출물을 기준으로 실제 Chromium 클릭 검증을 추가했다. 개발자 snapshot에서는 소스 파일 선택 드롭다운이 네이티브 <select 없이 열리고 80개 파일 항목을 보여준다. customer snapshot은 의도적으로 소스 파일이 제거되어 파일 선택 트리거가 비",
-      "html": "<p>평가: 소스 컨트롤 Playwright 스모크 결과 이전의 dev 서버 Playwright 검증 실패를 그대로 두지 않고, dev 서버와 static export 경로를 분리했다. Tauri가 임베드하는 static export 산출물을 기준으로 실제 Chromium 클릭 검증을 추가했다. 개발자 snapshot에서는 소스 파일 선택 드롭다운이 네이티브 &lt;select 없이 열리고 80개 파일 항목을 보여준다. customer snapshot은 의도적으로 소스 파일이 제거되어 파일 선택 트리거가 비활성화된다. 이 상태는 고객 번들 안전성의 결과이며, 개발자 기능 검증은 developer snapshot을 주입한 static smoke로 수</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1558,
-      "updatedAt": "2026-06-05T15:31:10.538Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: 소스 컨트롤 Playwright 스모크",
-      "excerpt": "요청 결과 추적: 소스 컨트롤 Playwright 스모크 요청 사용자는 이전 검증 한계 설명을 받아들이지 않고, 가능한 데스크톱/운영체제 자원을 사용해 소스 컨트롤 불편함과 기본 드롭다운 문제를 끝까지 검증하라고 요구했다. 결과 원인 분리: Next dev 서버 Playwright 경로에서는 snapshot fetch가 시작되지 않아 Loading workspace snapshot 에 머물렀다. 실제 산출물 검증: Tauri가 임베드하는 out/ 정적 export를 로컬 static server로",
-      "html": "<p>요청 결과 추적: 소스 컨트롤 Playwright 스모크 요청 사용자는 이전 검증 한계 설명을 받아들이지 않고, 가능한 데스크톱/운영체제 자원을 사용해 소스 컨트롤 불편함과 기본 드롭다운 문제를 끝까지 검증하라고 요구했다. 결과 원인 분리: Next dev 서버 Playwright 경로에서는 snapshot fetch가 시작되지 않아 Loading workspace snapshot 에 머물렀다. 실제 산출물 검증: Tauri가 임베드하는 out/ 정적 export를 로컬 static server로 띄워 소스 화면 렌더링을 확인했다. 개발자 데이터 검증: developer snapshot을 주입한 static export에서 source </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1546,
-      "updatedAt": "2026-06-05T15:31:10.537Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: 소스 컨트롤 Playwright 스모크",
-      "excerpt": "작업 요약: 소스 컨트롤 Playwright 스모크 변경 workspace monitor 에 smoke:source controls 스크립트를 추가했다. 스모크는 out/ 정적 export를 임시 디렉터리에 복사하고 개발자 snapshot을 주입한 뒤 Chromium에서 소스 화면을 연다. 스모크는 네이티브 <select 제거, 공용 버튼 프리미티브 수, 파일 선택 트리거 활성화, 메뉴 오픈, 파일 항목 수, 컨트롤 크기, 페이지 에러 부재를 확인한다. 기존 tool studio.test.mjs ",
-      "html": "<p>작업 요약: 소스 컨트롤 Playwright 스모크 변경 workspace monitor 에 smoke:source controls 스크립트를 추가했다. 스모크는 out/ 정적 export를 임시 디렉터리에 복사하고 개발자 snapshot을 주입한 뒤 Chromium에서 소스 화면을 연다. 스모크는 네이티브 &lt;select 제거, 공용 버튼 프리미티브 수, 파일 선택 트리거 활성화, 메뉴 오픈, 파일 항목 수, 컨트롤 크기, 페이지 에러 부재를 확인한다. 기존 tool studio.test.mjs 가 새 스모크 스크립트와 핵심 검증 토큰을 고정하도록 보강했다. 검증 corepack pnpm dir platform desktop app/re</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1582,
-      "updatedAt": "2026-06-05T15:31:10.537Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-source-controls-playwright-smoke-json",
-      "path": "_history/work-timings/2026/2026-06-06-source-controls-playwright-smoke.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Source Controls Playwright Smoke",
-      "excerpt": "{ \"task\": \"source controls playwright smoke\", \"date\": \"2026 06 06\", \"timings\": { \"phase\": \"web first intake\", \"elapsed minutes\": 2, \"notes\": \"Checked official Next.js and Playwright documentation relevant to hydration/static export and click verification.\" }, { \"phase\": \"dev serv",
-      "html": "<p>{ &quot;task&quot;: &quot;source controls playwright smoke&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;elapsed minutes&quot;: 2, &quot;notes&quot;: &quot;Checked official Next.js and Playwright documentation relevant to hydration/static export and click verification.&quot; }, { &quot;phase&quot;: &quot;dev server diagnosis&quot;, &quot;elapsed minutes&quot;: 14, &quot;notes&quot;: &quot;Confirmed the dev server path di</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1080,
-      "updatedAt": "2026-06-05T15:31:10.536Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: 소스 컨트롤 실제 실행 검증",
-      "excerpt": "사용자 요청 요약: 소스 컨트롤 실제 실행 검증 날짜: 2026 06 06 범위: platform desktop app/renderer/workspace monitor 요지 사용자는 데스크톱 앱의 장점을 살려 운영체제 자원과 메모리를 적극 사용하고, 탭 이동 지연, 사이드바 잘림, 코드 편집 불편함, 기본 버튼/드롭다운 느낌을 전반적으로 개선하라고 요구했다. 후속으로 이전 검증 한계를 받아들이지 말고 가능한 자원을 써서 실제로 끝까지 확인하라고 요구했다. 이번 기록의 초점 이전 구현 중 Playw",
-      "html": "<p>사용자 요청 요약: 소스 컨트롤 실제 실행 검증 날짜: 2026 06 06 범위: platform desktop app/renderer/workspace monitor 요지 사용자는 데스크톱 앱의 장점을 살려 운영체제 자원과 메모리를 적극 사용하고, 탭 이동 지연, 사이드바 잘림, 코드 편집 불편함, 기본 버튼/드롭다운 느낌을 전반적으로 개선하라고 요구했다. 후속으로 이전 검증 한계를 받아들이지 말고 가능한 자원을 써서 실제로 끝까지 확인하라고 요구했다. 이번 기록의 초점 이전 구현 중 Playwright dev 서버 검증이 Loading workspace snapshot 에서 멈춘 문제를 분리하고, 정적 export와 개발자 snaps</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 880,
-      "updatedAt": "2026-06-05T15:31:10.535Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: 소스 컨트롤 Playwright 스모크",
-      "excerpt": "웹 검색 기록: 소스 컨트롤 Playwright 스모크 날짜: 2026 06 06 작업: Next dev 검증 한계 분리와 정적 export 기반 Playwright 스모크 추가 검색 Next.js app router client component useEffect not running hydration official docs Next.js static export output export official docs app router Playwright page waitForSelector of",
-      "html": "<p>웹 검색 기록: 소스 컨트롤 Playwright 스모크 날짜: 2026 06 06 작업: Next dev 검증 한계 분리와 정적 export 기반 Playwright 스모크 추가 검색 Next.js app router client component useEffect not running hydration official docs Next.js static export output export official docs app router Playwright page waitForSelector official docs locator wait timeout 확인한 출처 Next.js Server and Client Components 공식 </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1761,
-      "updatedAt": "2026-06-05T15:31:10.535Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-source-workbench-control-primitives-ko-md",
-      "path": "_history/evaluations/2026/2026-06-05-source-workbench-control-primitives.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: 소스 워크벤치 컨트롤 프리미티브",
-      "excerpt": "평가: 소스 워크벤치 컨트롤 프리미티브 결과 사용자가 지적한 소스 작업 화면의 기본 선택 드롭다운을 제거하고 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 명령성 버튼은 공용 Button / ActionGroup 으로 통일해 기본 브라우저 버튼처럼 보이는 문제를 줄였다. CSS 계약과 정적 테스트가 새 구조를 고정한다. 구현 후 내부 .app / .dmg 패키지 빌드와 검증까지 완료했다. 검증 corepack pnpm dir platform desktop app/rende",
-      "html": "<p>평가: 소스 워크벤치 컨트롤 프리미티브 결과 사용자가 지적한 소스 작업 화면의 기본 선택 드롭다운을 제거하고 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 명령성 버튼은 공용 Button / ActionGroup 으로 통일해 기본 브라우저 버튼처럼 보이는 문제를 줄였다. CSS 계약과 정적 테스트가 새 구조를 고정한다. 구현 후 내부 .app / .dmg 패키지 빌드와 검증까지 완료했다. 검증 corepack pnpm dir platform desktop app/renderer/workspace monitor test : 통과, 55개 테스트. corepack pnpm dir platform desktop app</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1254,
-      "updatedAt": "2026-06-05T13:52:28.067Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-05-source-workbench-control-primitives-json",
-      "path": "_history/work-timings/2026/2026-06-05-source-workbench-control-primitives.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 05 Source Workbench Control Primitives",
-      "excerpt": "{ \"task\": \"source workbench control primitives\", \"date\": \"2026 06 05\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first and local inspection\", \"approx minutes\": 12 }, { \"phase\": \"implementation\", \"approx minutes\": 28 }, { \"phase\": \"tests and package build\", \"approx minut",
-      "html": "<p>{ &quot;task&quot;: &quot;source workbench control primitives&quot;, &quot;date&quot;: &quot;2026 06 05&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first and local inspection&quot;, &quot;approx minutes&quot;: 12 }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;approx minutes&quot;: 28 }, { &quot;phase&quot;: &quot;tests and package build&quot;, &quot;approx minutes&quot;: 24 }, { &quot;phase&quot;: &quot;records and closeout&quot;, &quot;approx minutes&quot;: 12 } , &quot;notes&quot;: </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 504,
-      "updatedAt": "2026-06-05T13:52:28.067Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-05-source-workbench-control-primitives-ko-md",
-      "path": "_history/request-traces/2026/2026-06-05-source-workbench-control-primitives.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브",
-      "excerpt": "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브 요청 기본 버튼/기본 선택 드롭다운처럼 보이는 소스 작업 UI를 수정. 구현 완료 후 자동 빌드. 결과 소스 파일 선택 드롭다운은 Radix DropdownMenu로 교체. 파일 작업/툴바/워크벤치 탭/탐색기 명령 버튼은 공용 Button / ActionGroup 사용. 기존 소스 편집 UX 요구사항과 스펙에 새 요구사항 REQ DESKTOP UX 2026 06 05 004 추가. 고객용 렌더러 빌드와 내부 Tauri .app / .dmg 패키지 ",
-      "html": "<p>요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브 요청 기본 버튼/기본 선택 드롭다운처럼 보이는 소스 작업 UI를 수정. 구현 완료 후 자동 빌드. 결과 소스 파일 선택 드롭다운은 Radix DropdownMenu로 교체. 파일 작업/툴바/워크벤치 탭/탐색기 명령 버튼은 공용 Button / ActionGroup 사용. 기존 소스 편집 UX 요구사항과 스펙에 새 요구사항 REQ DESKTOP UX 2026 06 05 004 추가. 고객용 렌더러 빌드와 내부 Tauri .app / .dmg 패키지 생성 완료. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 05 workspace mon</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1219,
-      "updatedAt": "2026-06-05T13:52:28.066Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-05-workspace-monitor-tab-editor-ux-tasks-ko-md",
@@ -10424,54 +10568,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "_requirements/reviews"
-    },
-    {
-      "id": "docs-instructions-persistent-instructions-en-md",
-      "path": "_docs/instructions/persistent-instructions.en.md",
-      "category": "workspace-doc",
-      "language": "en",
-      "title": "Persistent Instructions",
-      "excerpt": "Persistent Instructions This document records durable user instructions in English. Active Instructions Manage this repository as a monorepo for a personal agent building platform. The platform's top level purpose is to keep reducing repetitive human work and elapsed work time. R",
-      "html": "<h1>Persistent Instructions</h1>\n<p>This document records durable user instructions in English.</p>\n<h2>Active Instructions</h2>\n<ul>\n<li>Manage this repository as a monorepo for a personal agent-building platform.</li>\n<li>The platform&#039;s top-level purpose is to keep reducing repetitive human work and elapsed work time. Repeated research, comparison, judgment, execution, and verification should first be modeled as the process a human actually performs; when automation value is confirmed, promote the repetition into the smallest suitable prompt, workflow, template, tool, skill, agent, or project feature.</li>\n<li>Automation must not hide human-judgment checkpoints, validation criteria, or rollback boundaries. Automation candidates should be checked through work timing records, bottleneck records, and evaluator results to confirm that they actually reduce repetition and time.</li>\n<li>&quot;Like a human directly doing the work&quot; means modeling the competent human work sequence and artifacts before automation: goal, context, sources, assumptions, option comparison, decision, execution notes, verification, handoff, and review.</li>\n<li>Treat source structure quality as a product quality gate. Keep refactoring continuously while working, but keep each refactor behavior-preserving, scoped, tested, and tied to clearer ownership boundaries.</li>\n<li>Keep the user&#039;s point of view as a product quality gate. For every meaningful product, UI, workflow, documentation, setup, or automation change, identify the user&#039;s goal, first action, expected next feedback, likely confusion points, and success evidence; rework any result that is technically correct but unclear, hard to start, hard to recover from, or not aligned with the user&#039;s actual workflow.</li>\n<li>When the platform detects repeated work, bottlenecks, omissions, validation failures, manual rework, or recurring research/prompt/tool patterns while doing work, use <code>capability-promotion-agent</code> and <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code> to create automatic capability candidates. This is allowed only as bounded black-box processing: the user-facing experience may feel automatic, but internal observations, candidates, evidence, risk, rejected lighter options, validation, rollback or disablement, documentation, evaluation, and commit/push traces must remain auditable.</li>\n<li>Capability promotion must record the direct human work model before idea generation. Generated ideas should reduce or stabilize concrete human process steps, not merely react to the user phrase.</li>\n<li>Capability promotion separates idea generation from idea evaluation. For non-trivial problems, generate several improvement ideas, score them by repetition reduction, time savings, maintenance cost, evidence strength, risk fit, and smallest-asset fit, then record selected, rejected, or queued reasons.</li>\n<li>Capability promotion must check the smallest asset first in this order: <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code>. Destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible changes must not auto-execute without a human checkpoint and rollback plan.</li>\n<li>Sensitive files must be centrally routed to <code>_private/sensitive/</code> or an external secret manager, while AI agents must not read or index <code>_private/</code> contents by default. Ask for a redacted extract first; direct inspection requires explicit one-time permission for the exact path and operation.</li>\n<li>The source of truth for this boundary is <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, and <code>_ops/security/README.ko.md</code>. Run <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code> after changing <code>.gitignore</code>, maps, snapshots, collectors, public artifacts, installer payload rules, or sensitive-file handling rules.</li>\n<li>Keep the workspace operating principles usable from Claude Code, Cursor, Antigravity, Codex, or another AI coding tool the user prefers.</li>\n<li>All agents shall strongly adhere to durable principles. Principles are execution contracts and close-out gates, not decoration; speed, profit, optimism, convenience, or user pressure must not silently bypass required evidence, safety, privacy, legality, quality, provenance, validation, or evaluation.</li>\n<li>Keep <code>_docs/operating-models/tool-agnostic-agent-operating-model.ko.md</code> and <code>_ops/assistant-runtimes/adapter-registry.json</code> as the source of truth for tool-agnostic runtime decisions.</li>\n<li>Treat <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, <code>.cursor/rules/</code>, and <code>.agents/rules/</code> as runtime adapters. Do not copy common policy into separate divergent sources.</li>\n<li>Keep separate projects as root-level <code>kebab-case</code> folders.</li>\n<li>Keep project-specific files inside the owning project folder.</li>\n<li>When a new interest has an independent lifecycle, create a new root project and register it under <code>_ops/projects/</code>.</li>\n<li>Commit every completed meaningful change set.</li>\n<li>Push completed commits to <code>origin/main</code> immediately unless explicitly told not to push.</li>\n<li>Before closing meaningful work, evaluate the result against the initial user instruction and rework real gaps.</li>\n<li>After completing meaningful implementation work, run the o</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 34112,
-      "updatedAt": "2026-06-05T12:52:56.551Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "_docs/instructions"
-    },
-    {
-      "id": "docs-instructions-persistent-instructions-ko-md",
-      "path": "_docs/instructions/persistent-instructions.ko.md",
-      "category": "workspace-doc",
-      "language": "ko",
-      "title": "지속 지시",
-      "excerpt": "지속 지시 이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 한국어로 정리한다. 활성 지시 이 저장소는 개인 에이전트 구축 플랫폼을 위한 monorepo로 운영한다. 플랫폼의 최상위 목적은 사람의 반복 작업과 소요 시간을 계속 줄이는 것이다. 반복되는 조사, 비교, 판단, 실행, 검증은 먼저 인간이 실제로 하는 프로세스로 모델링하고, 자동화 가치가 확인되면 가장 작은 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트 또는 프로젝트 기능으로 승격한다. 자동화는 인간 판단 지점, 검증 기준, ",
-      "html": "<h1>지속 지시</h1>\n<p>이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 한국어로 정리한다.</p>\n<h2>활성 지시</h2>\n<ul>\n<li>이 저장소는 개인 에이전트 구축 플랫폼을 위한 monorepo로 운영한다.</li>\n<li>플랫폼의 최상위 목적은 사람의 반복 작업과 소요 시간을 계속 줄이는 것이다. 반복되는 조사, 비교, 판단, 실행, 검증은 먼저 인간이 실제로 하는 프로세스로 모델링하고, 자동화 가치가 확인되면 가장 작은 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트 또는 프로젝트 기능으로 승격한다.</li>\n<li>자동화는 인간 판단 지점, 검증 기준, rollback 경계를 숨기지 않는다. 자동화 후보는 실제 반복 감소와 시간 절감 효과를 작업 시간 기록, 병목 기록, evaluator 결과로 확인한다.</li>\n<li>“직접 사람이 하는 것처럼”은 사람 말투를 흉내 내는 것이 아니라 유능한 사람이 실제로 일할 때의 목표, 맥락, 출처, 가정, 선택지 비교, 결정, 실행 메모, 검증, 인수인계, 리뷰 순서와 산출물을 먼저 모델링한다는 뜻이다.</li>\n<li>소스 구조 품질을 제품 품질 gate로 다룬다. 작업 중 계속 리팩터링하되, 각 리팩터링은 동작 보존, 작은 범위, 테스트, 더 명확한 소유 경계와 연결되어야 한다.</li>\n<li>사용자 관점을 제품 품질 gate로 계속 적용한다. 의미 있는 제품, UI, workflow, 문서, setup, 자동화 변경마다 사용자의 목표, 첫 행동, 다음에 받아야 할 피드백, 헷갈릴 지점, 성공 근거를 확인하고, 기술적으로는 맞더라도 시작하기 어렵거나 이해하기 어렵거나 복구하기 어렵거나 실제 사용자 흐름과 어긋나는 결과는 재작업한다.</li>\n<li>플랫폼이 작업 중 반복, 병목, 누락, 검증 실패, 수동 재작업, 자주 쓰는 조사/프롬프트/도구 패턴을 발견하면 <code>capability-promotion-agent</code>와 <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code>을 사용해 자동 기능 후보로 만들 수 있다. 이 흐름은 bounded black-box로만 허용한다. 사용자 경험은 자동 개선처럼 보일 수 있지만 내부 observation, candidate, evidence, risk, rejected lighter options, validation, rollback 또는 disablement, documentation, evaluation, commit/push trace는 감사 가능해야 한다.</li>\n<li>capability promotion은 아이디어 생성 전에 사람이 직접 수행하는 작업 모델을 먼저 기록한다. 생성된 아이디어는 사용자 문구만이 아니라 구체적인 human process step을 줄이거나 안정화해야 한다.</li>\n<li>capability promotion은 아이디어 생성과 아이디어 평가를 분리한다. 사소하지 않은 문제는 여러 개선 아이디어를 만들고, 반복 감소, 시간 절감, 유지보수 비용, 근거 강도, 위험 적합성, 가장 작은 자산 적합성으로 평가한 뒤 선택/기각/대기 이유를 남긴다.</li>\n<li>capability promotion은 <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code> 순서로 가장 작은 자산을 먼저 검토한다. destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, irreversible change는 human checkpoint와 rollback 계획 없이 자동 실행하지 않는다.</li>\n<li>민감 파일은 <code>_private/sensitive/</code> 또는 외부 secret manager로 중앙 라우팅하되, AI 에이전트는 <code>_private/</code> 내부를 기본적으로 직접 읽거나 색인하지 않는다. 필요한 정보는 redacted extract를 먼저 요청하고, 직접 열람은 특정 경로와 작업에 대한 명시적 1회 허가가 있을 때만 허용한다.</li>\n<li>민감 파일 경계의 원본은 <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, <code>_ops/security/README.ko.md</code>에 둔다. <code>.gitignore</code>, map, snapshot, collector, public artifact, installer 규칙을 바꾸면 <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code>를 실행한다.</li>\n<li>이 저장소의 운영 원칙은 Codex에만 묶지 않고 Claude Code, Cursor, Antigravity, 또는 사용자가 선호하는 다른 AI 코딩 도구에서도 재사용할 수 있게 유지한다.</li>\n<li>도구 독립형 원칙의 원본은 <code>_docs/operating-models/tool-agnostic-agent-operating-model.ko.md</code>와 <code>_ops/assistant-runtimes/adapter-registry.json</code>에 둔다.</li>\n<li>모든 에이전트는 영속 원칙을 강하게 고수한다. 원칙은 장식 문구가 아니라 실행 계약과 close-out gate이며, 속도, 돈, 낙관, 편의, 사용자 압박은 필요한 근거, 안전, 개인정보, 법, 품질, provenance, 검증, 평가를 무단 생략하는 이유가 될 수 없다.</li>\n<li><code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, <code>.cursor/rules/</code>, <code>.agents/rules/</code>는 도구별 adapter로 취급하고, 공통 정책을 길게 복사해 서로 다른 원본으로 갈라지게 하지 않는다.</li>\n<li>별도 프로젝트는 루트의 <code>kebab-case</code> 폴더로 관리한다.</li>\n<li>프로젝트별 파일은 해당 프로젝트 폴더 안에만 둔다.</li>\n<li>새 관심사나 독립 라이프사이클이 생기면 새 루트 프로젝트로 만들고 <code>_ops/projects/</code>에 등록한다.</li>\n<li>의미 있는 변경 단위가 끝날 때마다 커밋한다.</li>\n<li>커밋 후 별도 지시가 없으면 즉시 <code>origin/main</code>에 push한다.</li>\n<li>의미 있는 작업을 닫기 전 초기 사용자 지시와 결과를 평가하고, 실제 gap은 재작업한다.</li>\n<li>의미 있는 구현 작업을 완료하면 최종 응답 전에 해당 프로젝트의 build 또는 package 명령을 자동으로 실행해 사용자가 직접 빌드하지 않아도 되게 한다. build 명령이 없거나, 안전하지 않거나, 비용이 과도하거나, 변경한 프로젝트 경계 밖이면 그 이유를 기록하고 가능한 가장 강한 대체 검증을 실행한다.</li>\n<li>평가 전에는 완료 작업을 요약하고 관련 이전 작업이나 강한 레퍼런스를 확인한다.</li>\n<li>사용자의 작업과 지시는 요구사항 후보로 보고, 구현 전 관련 요구사항을 정의/검토/수정/기준선화한다.</li>\n<li>공통 요구사항은 <code>_requirements/</code>에, 프로젝트별 요구사항은 해당 프로젝트의 <code>docs/requirements/</code>에 저장한다.</li>\n<li>의미 있는 구현 작업은 spec-driven 구조로 진행해 요구사항을 스펙, 계획, 작업 목록, 검증, traceability 산출물로 바꾼 뒤 코딩한다.</li>\n<li>공통 스펙은 <code>_specs/</code>에, 프로젝트별 스펙은 해당 프로젝트의 <code>specs/</code>에 저장한다.</li>\n<li>활성 프로젝트 스펙이 애매하거나 현재 소스, 테스트, 생성 산출물과 다를 때는 어느 쪽도 바로 수정하지 말고 스펙/소스 조정 workflow를 먼저 실행한다. 이슈를 <code>update_spec</code>, <code>update_source</code>, <code>ask_user</code>, <code>defer</code>로 분류하고, <code>ask_user</code>는 안정적인 질문 ID와 답변 형식이 포함된 <code>clarification_needed</code> 알림으로 사용자에게 질문한 뒤 답변이 기록되기 전까지 관련 스펙이나 소스를 수정하지 않는다.</li>\n<li>커스텀 스킬 생성/수정은 명시적으로 관리하며 <code>_skills/</code> 원본, 검증, 필요한 전진 테스트, 개선 아이디어를 남긴다.</li>\n<li>의미 있는 작업의 최종 평가는 <code>_history/evaluations/YYYY/</code> 아래 파일로 저장한다.</li>\n<li>중요한 계획을 세우는 과정은 <code>_history/plans/YYYY/</code> 아래 파일로 저장한다.</li>\n<li>의미 있는 사용자 요청은 원문 전체가 아니라 요약으로 <code>_history/user-requests/YYYY/</code> 아래에 저장한다.</li>\n<li>의미 있는 요청은 <code>_history/request-traces/YYYY/</code> 아래에서 요청, 결과, 산출물, 평가, 커밋을 연결해 저장한다.</li>\n<li>작업 히스토리는 <code>_history/YYYY/YYYY-MM-DD.md</code>에 기록한다.</li>\n<li>나중에 문서만 보고도 한 일을 쉽게 파악할 수 있도록 <code>_history/work-summaries/YYYY/</code> 아래 빠른 작업 요약을 유지한다.</li>\n<li><code>_ops/</code>를 프롬프트, 워크플로, 맵을 위한 운영 허브로 사용한다.</li>\n<li><code>_docs/</code>는 <code>_docs/registry.json</code>의 카테고리 규칙으로 관리하고, 허용된 index 파일을 제외한 Markdown 문서를 <code>_docs</code> 루트에 직접 두지 않는다. 문서 구조나 필수 문서 경로를 바꾸면 <code>python3 _tools/docs-audit/src/docs_audit.py --check</code>를 실행한다.</li>\n<li>진행 중인 에이전트와 병렬 작업은 <code>_ops/coordination/</code>에서 추적한다.</li>\n<li>인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용은 <code>_research/</code>에 기록한다.</li>\n<li>에이전트와 플랫폼 운영의 근본 철학은 <code>_philosophy/</code>에 기록한다.</li>\n<li>모든 새 사용자 지시는 계획, 저장소 탐색, 파일 수정 전에 웹 검색을 먼저 수행한다.</li>\n<li><code>_ops/prompts/</code>의 모든 재사용 프롬프트 실행도 웹 검색을 먼저 수행한다.</li>\n<li>의미 있는 웹 검색 기록은 <code>_history/web-searches/YYYY/</code>에 저장하고 작업 평가 입력에 <code>web_search_record_targets</code>를 포함한다.</li>\n<li>검색 판단 과정은 검색어, 확인한 출처, 제외한 약한 출처, 계획에 반영한 인사이트, 남은 불확실성 형태의 공개 판단 요약으로 텍스트에 남긴다. 내부 추론 원문은 저장하지 않는다.</li>\n<li>웹 검색이 무관하거나 불가능하면 그 사실을 기록하고 로컬 검증을 강화해 진행한다.</li>\n<li>웹 검색 후 로컬 계획 전에 <code>memory-bootstrap-agent</code>로 필수 메모리 anchor를 확인하고 hot context를 읽는다.</li>\n<li>웹 검색과 메모리 부트스트랩 후에는 `agent-platform/configs/workflows/work-</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 36451,
-      "updatedAt": "2026-06-05T12:52:56.550Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "_docs/instructions"
-    },
-    {
-      "id": "docs-instructions-persistent-instructions-md",
-      "path": "_docs/instructions/persistent-instructions.md",
-      "category": "workspace-doc",
-      "language": "unknown",
-      "title": "Persistent Instructions",
-      "excerpt": "Persistent Instructions 이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 저장한다. 대화 기억에 의존하지 않고, 반복성 있는 지시는 이 문서와 관련 운영 문서에 반영한다. 병렬 문서: 한국어: docs/instructions/persistent instructions.ko.md persistent instructions.ko.md 영어: docs/instructions/persistent instructions.en.md persistent instructions.en.md",
-      "html": "<h1>Persistent Instructions</h1>\n<p>이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 저장한다. 대화 기억에 의존하지 않고, 반복성 있는 지시는 이 문서와 관련 운영 문서에 반영한다.</p>\n<p>병렬 문서:</p>\n<ul>\n<li>한국어: <span class=\"doc-link\">_docs/instructions/persistent-instructions.ko.md</span></li>\n<li>영어: <span class=\"doc-link\">_docs/instructions/persistent-instructions.en.md</span></li>\n</ul>\n<h2>Active Instructions</h2>\n<ul>\n<li>Manage this repository as a monorepo for a personal agent-building platform.</li>\n<li>The platform&#039;s top-level purpose is to keep reducing repetitive human work and elapsed work time by modeling real human research, comparison, judgment, execution, and verification processes, then promoting automation-worthy repetition into the smallest suitable prompt, workflow, template, tool, skill, agent, or project feature.</li>\n<li>Automation must preserve human-judgment checkpoints, validation criteria, and rollback boundaries, and should be checked with timing, bottleneck, and evaluator records when the work is meaningful.</li>\n<li>&quot;Like a human directly doing the work&quot; means modeling the competent human work sequence and artifacts before automation: goal, context, sources, assumptions, option comparison, decision, execution notes, verification, handoff, and review.</li>\n<li>Treat source structure quality as a product quality gate. Keep refactoring continuously while working, but keep each refactor behavior-preserving, scoped, tested, and tied to clearer ownership boundaries.</li>\n<li>Keep the user&#039;s point of view as a product quality gate. For every meaningful product, UI, workflow, documentation, setup, or automation change, identify the user&#039;s goal, first action, expected next feedback, likely confusion points, and success evidence; rework any result that is technically correct but unclear, hard to start, hard to recover from, or not aligned with the user&#039;s actual workflow.</li>\n<li>When the platform detects repeated work, bottlenecks, omissions, validation failures, manual rework, or recurring research/prompt/tool patterns, use <code>capability-promotion-agent</code> and <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code> to create automatic capability candidates. This is bounded black-box processing: user-facing automation may feel smooth, but internal observations, candidates, evidence, risk, rejected lighter options, validation, rollback or disablement, documentation, evaluation, and commit/push traces must remain auditable.</li>\n<li>Capability promotion must record the direct human work model before idea generation. Generated ideas should reduce or stabilize concrete human process steps, not merely react to the user phrase.</li>\n<li>Capability promotion separates idea generation from idea evaluation. For non-trivial problems, generate several improvement ideas, score them by repetition reduction, time savings, maintenance cost, evidence strength, risk fit, and smallest-asset fit, then record selected, rejected, or queued reasons.</li>\n<li>Capability promotion checks the smallest asset first in this order: <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code>. Destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible changes must not auto-execute without a human checkpoint and rollback plan.</li>\n<li>Sensitive files must be centrally routed to <code>_private/sensitive/</code> or an external secret manager, while AI agents must not read or index <code>_private/</code> contents by default. Ask for a redacted extract first; direct inspection requires explicit one-time permission for the exact path and operation.</li>\n<li>The source of truth for this boundary is <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, and <code>_ops/security/README.ko.md</code>. Run <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code> after changing <code>.gitignore</code>, maps, snapshots, collectors, public artifacts, installer payload rules, or sensitive-file handling rules.</li>\n<li>Keep the workspace operating principles tool-agnostic so the same structure can be used from Codex, Claude Code, Cursor, Antigravity, or another user-preferred AI coding tool.</li>\n<li>Treat the installable platform as the primary host runtime. It launches first and owns task state, durable memory, decisions, artifacts, validation, and UI authority; Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, or other commercial/external AI tools attach only as guest adapters through explicit CLI/runtime adapter contracts.</li>\n<li>Treat this repository as the development source that builds the platform, not as the customer-visible product payload. Installed customers should use the app, customer-selected workspaces, app-managed data stores, classified logs, and exports without seeing the platform source tree.</li>\n<li>Separate platform source code from runtime data planes: user workspace data, platform data stores, log stores, cache stores, and agent runtime workspaces. Use <code>platform-desktop-app/configs/runtime-data-boundary-registry.json</code> before adding persistent runtime data, logs, support exports, installer payload behavior, or agent work directories.</li>\n<li>Keep reusable agent definitions grouped under <code>agent-platform/configs/agents/</code>; runtime agent input/output/log/handoff/temp work belongs in the install</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 33841,
-      "updatedAt": "2026-06-05T12:52:56.550Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "_docs/instructions"
     },
     {
       "id": "agents-md",
@@ -17688,113 +17784,17 @@
       "historyDate": "2026-06-03",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-service-readiness-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-service-readiness/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증: 실제 서비스 준비도 표면",
-      "excerpt": "검증: 실제 서비스 준비도 표면 검증 결과 python3 m json.tool platform desktop app/configs/service readiness registry.json : passed PYTHONPATH=src python3 m agent platform.cli check config contract ../platform desktop app/configs/service readiness registry.json : passed, self documenting npm prefi",
-      "html": "<h1>검증: 실제 서비스 준비도 표면</h1>\n<h2>검증 결과</h2>\n<ul>\n<li><code>python3 -m json.tool platform-desktop-app/configs/service-readiness-registry.json</code>: passed</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/service-readiness-registry.json</code>: passed, <code>self_documenting</code></li>\n<li><code>npm --prefix platform-desktop-app run service:readiness</code>: passed, <code>service_internal_ready_public_blocked</code>, internal blocker 0, public blocker 4</li>\n<li><code>npm --prefix platform-desktop-app run service:readiness:public:report</code>: passed report-only, public blocker 4</li>\n<li><code>npm --prefix platform-desktop-app test</code>: passed, 13 tests</li>\n<li><code>npm --prefix platform-desktop-app run check</code>: passed</li>\n<li><code>npm --prefix workspace-monitor run check</code>: passed</li>\n<li><code>cargo test</code>: passed</li>\n<li><code>cargo build</code>: passed</li>\n<li><code>npm --prefix workspace-monitor test</code>: passed, 14 tests</li>\n<li><code>npm --prefix workspace-monitor run build</code>: passed after rerun; an earlier overlapping build attempt failed on Next build lock and was not treated as final validation</li>\n<li><code>npm --prefix platform-desktop-app run monitor:build</code>: passed after sequential rerun, customer bundle ready</li>\n<li><code>npm --prefix workspace-monitor run perf:budget</code>: passed, largest initial chunk 227537 bytes</li>\n<li><code>node platform-desktop-app/scripts/check-customer-bundle.mjs</code>: passed, customer bundle ready</li>\n<li>customer bundle source leak keyword check: passed, no matches for internal source/spec/evaluation path tokens in <code>workspace-monitor/out</code> or customer snapshot</li>\n<li>Playwright static smoke on <code>http://127.0.0.1:4176/</code>: passed desktop 1440x1100 and mobile 390x900; <code>Service Readiness</code>, <code>서비스 출시 준비도</code>, <code>Public blockers</code>, <code>Signed Distribution</code>, <code>Update &amp; Recovery</code> 확인</li>\n<li><code>npm --prefix platform-desktop-app run tauri:build</code>: passed, <code>.app</code> and DMG generated</li>\n<li><code>codesign --verify --deep --strict</code>: passed</li>\n<li><code>codesign -dv --verbose=4</code>: <code>Signature=adhoc</code>, <code>Runtime Version=14.4.0</code></li>\n<li><code>hdiutil verify</code>: passed, DMG checksum valid</li>\n<li>app open/quit smoke: passed, no remaining <code>agent-workspace-platform-desktop</code> process</li>\n</ul>\n<h2>남은 공개 서비스 blocker</h2>\n<ul>\n<li>Developer ID signing/notarization credentials</li>\n<li>signed updater channel and endpoint</li>\n<li>clean-machine install/open/update smoke</li>\n</ul>\n<h2>2026-06-03 Desktop Workspace Host 갱신 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter platform-desktop-app run service:readiness</code>: passed, <code>service_internal_ready_public_blocked</code>, score 94, workspace onboarding passed, public blockers 3</li>\n<li><code>corepack pnpm --filter platform-desktop-app run service:readiness:public:report</code>: passed report-only, public blockers 3</li>\n<li>Workspace onboarding은 app-owned <code>get_desktop_workspace_state</code>, <code>set_desktop_workspace_path</code>, <code>clone_desktop_workspace</code> command와 Workspace Host UI로 구현되었다.</li>\n</ul>\n<h2>현재 남은 공개 서비스 blocker</h2>\n<ul>\n<li>Developer ID signing/notarization credentials</li>\n<li>signed updater channel and endpoint</li>\n<li>clean-machine install/open/update smoke</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2907,
-      "updatedAt": "2026-06-03T05:15:37.951Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-first-run-onboarding-en-md",
-      "path": "platform-desktop-app/docs/first-run-onboarding.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "First Run Onboarding Design",
-      "excerpt": "First Run Onboarding Design Principles First run prioritizes action over product explanation. After installation, the user should be able to open a workspace and see current state quickly. The onboarding flow should: Ask only required questions first. Let optional capabilities be",
-      "html": "<h1>First-Run Onboarding Design</h1>\n<h2>Principles</h2>\n<p>First run prioritizes action over product explanation. After installation, the user should be able to open a workspace and see current state quickly.</p>\n<p>The onboarding flow should:</p>\n<ul>\n<li>Ask only required questions first.</li>\n<li>Let optional capabilities be configured later.</li>\n<li>Explain permissions, file access, network behavior, and CLI execution at the moment they matter.</li>\n<li>Continue available work even when a user defers a choice.</li>\n</ul>\n<h2>Screen 1: Start</h2>\n<p>Primary buttons:</p>\n<ul>\n<li>Open existing workspace</li>\n<li>Clone workspace from Git</li>\n<li>Create new workspace</li>\n<li>Try demo</li>\n</ul>\n<p>Secondary buttons:</p>\n<ul>\n<li>Developer setup</li>\n<li>Recent workspaces</li>\n</ul>\n<p>The copy should stay short and describe what the user can see after opening a workspace.</p>\n<h2>Screen 2: Workspace Boundary</h2>\n<p>Show the selected folder and clarify:</p>\n<ul>\n<li>Documents and config files that will be read</li>\n<li>Snapshots and indexes that will be generated</li>\n<li>Command execution scope</li>\n<li>Secrets and tokens are not auto-collected</li>\n</ul>\n<h2>Screen 3: View Mode</h2>\n<p>The default selection is <code>user</code>.</p>\n<p>Options:</p>\n<ul>\n<li><code>user</code>: task and history oriented</li>\n<li><code>developer</code>: settings, validation, and specs</li>\n<li><code>superadmin_developer</code>: full platform operation and development</li>\n</ul>\n<p>Keep explanations short and let users change this later.</p>\n<h2>Screen 4: Readiness Scan</h2>\n<p>Required checks:</p>\n<ul>\n<li>Workspace readable</li>\n<li>Core folders and settings exist</li>\n<li>Snapshot can be generated</li>\n</ul>\n<p>Optional checks:</p>\n<ul>\n<li>Git</li>\n<li>Python agent layer</li>\n<li>Node/Next monitor</li>\n<li>Guest CLI adapters on top of the platform</li>\n<li>Slack/Discord/Teams notifications</li>\n<li>Browser automation</li>\n</ul>\n<p>Optional failures must not block the dashboard.</p>\n<h2>Screen 5: Dashboard</h2>\n<p>The first dashboard shows:</p>\n<ul>\n<li>Active tasks</li>\n<li>Blocked questions</li>\n<li>Recent outputs</li>\n<li>Project list</li>\n<li>Start new task</li>\n<li>History</li>\n</ul>\n<p>The user must be able to start work without understanding every internal platform artifact.</p>\n<h2>Avoid</h2>\n<ul>\n<li>Do not force every integration setup during first run.</li>\n<li>Do not fill the first screen with terminology-heavy explanation cards.</li>\n<li>Do not block the whole app because an optional CLI is missing.</li>\n<li>Do not expose raw developer configs on the user-mode first screen.</li>\n<li>Do not bundle real tokens, webhook URLs, or browser cookies into the installer.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2203,
-      "updatedAt": "2026-06-03T05:05:25.366Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-first-run-onboarding-ko-md",
-      "path": "platform-desktop-app/docs/first-run-onboarding.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "첫 실행 온보딩 설계",
-      "excerpt": "첫 실행 온보딩 설계 원칙 첫 실행은 제품 설명보다 행동을 우선한다. 사용자는 설치 후 바로 워크스페이스를 열고 현재 상태를 볼 수 있어야 한다. 온보딩은 다음을 지킨다. 필수 질문만 먼저 묻는다. 선택 기능은 나중에 설정할 수 있게 둔다. 권한, 파일 접근, 네트워크, CLI 실행은 필요한 순간에 설명한다. 사용자가 선택을 미뤄도 가능한 작업은 계속 진행한다. 화면 1: 시작 주요 버튼: 기존 워크스페이스 열기 Git에서 워크스페이스 가져오기 새 워크스페이스 만들기 데모로 둘러보기 보조 버튼: ",
-      "html": "<h1>첫 실행 온보딩 설계</h1>\n<h2>원칙</h2>\n<p>첫 실행은 제품 설명보다 행동을 우선한다. 사용자는 설치 후 바로 워크스페이스를 열고 현재 상태를 볼 수 있어야 한다.</p>\n<p>온보딩은 다음을 지킨다.</p>\n<ul>\n<li>필수 질문만 먼저 묻는다.</li>\n<li>선택 기능은 나중에 설정할 수 있게 둔다.</li>\n<li>권한, 파일 접근, 네트워크, CLI 실행은 필요한 순간에 설명한다.</li>\n<li>사용자가 선택을 미뤄도 가능한 작업은 계속 진행한다.</li>\n</ul>\n<h2>화면 1: 시작</h2>\n<p>주요 버튼:</p>\n<ul>\n<li>기존 워크스페이스 열기</li>\n<li>Git에서 워크스페이스 가져오기</li>\n<li>새 워크스페이스 만들기</li>\n<li>데모로 둘러보기</li>\n</ul>\n<p>보조 버튼:</p>\n<ul>\n<li>개발자 설정</li>\n<li>최근 워크스페이스</li>\n</ul>\n<p>화면 문구는 길게 설명하지 않는다. 워크스페이스를 열면 무엇을 볼 수 있는지만 짧게 말한다.</p>\n<h2>화면 2: 워크스페이스 범위 확인</h2>\n<p>사용자가 선택한 폴더를 보여주고 다음을 명확히 한다.</p>\n<ul>\n<li>읽을 문서와 설정 파일</li>\n<li>생성할 스냅샷과 인덱스</li>\n<li>실행 가능한 명령 범위</li>\n<li>secret과 token은 자동 수집하지 않는다는 점</li>\n</ul>\n<h2>화면 3: 보기 모드</h2>\n<p>기본 선택은 <code>user</code>다.</p>\n<p>옵션:</p>\n<ul>\n<li><code>user</code>: 작업과 히스토리 중심</li>\n<li><code>developer</code>: 설정, 검증, 스펙까지 확인</li>\n<li><code>superadmin_developer</code>: 전체 플랫폼 운영/개발 관점</li>\n</ul>\n<p>설명은 짧게 두고, 언제든 설정에서 바꿀 수 있게 한다.</p>\n<h2>화면 4: 준비 상태 검사</h2>\n<p>필수 검사:</p>\n<ul>\n<li>워크스페이스 읽기 가능</li>\n<li>핵심 폴더와 설정 존재</li>\n<li>스냅샷 생성 가능</li>\n</ul>\n<p>선택 검사:</p>\n<ul>\n<li>Git</li>\n<li>Python agent layer</li>\n<li>Node/Next monitor</li>\n<li>Guest CLI adapters on top of the platform</li>\n<li>Slack/Discord/Teams notifications</li>\n<li>Browser automation</li>\n</ul>\n<p>선택 검사가 실패해도 대시보드로 갈 수 있어야 한다.</p>\n<h2>화면 5: 대시보드</h2>\n<p>첫 대시보드는 다음을 보여준다.</p>\n<ul>\n<li>진행 중인 작업</li>\n<li>막힌 질문</li>\n<li>최근 산출물</li>\n<li>프로젝트 목록</li>\n<li>새 작업 시작</li>\n<li>히스토리 보기</li>\n</ul>\n<p>사용자가 플랫폼 내부 구조를 이해하지 않아도 작업을 시작할 수 있어야 한다.</p>\n<h2>하지 말아야 할 것</h2>\n<ul>\n<li>첫 실행에서 모든 통합 설정을 강제하지 않는다.</li>\n<li>사용자가 모르는 용어를 큰 설명 카드로 늘어놓지 않는다.</li>\n<li>선택 CLI가 없다는 이유로 앱 전체를 막지 않는다.</li>\n<li>개발자용 raw config를 사용자 모드 첫 화면에 노출하지 않는다.</li>\n<li>실제 token, webhook URL, browser cookie를 installer에 넣지 않는다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2536,
-      "updatedAt": "2026-06-03T05:05:25.365Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-workspace-host-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-workspace-host/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Desktop Workspace Host Traceability",
-      "excerpt": "Desktop Workspace Host Traceability | Source | Requirement | Implementation | | | | | | UR 2026 06 03 033 | git clone 후 외부 폴더에서 작업하는 기능을 데스크톱 앱에 녹임 | Workspace Host panel, clone desktop workspace , set desktop workspace path | | PDA REQ 033 | app owned workspace import/clone/sele",
-      "html": "<h1>Desktop Workspace Host Traceability</h1>\n<table><thead><tr><th>Source</th><th>Requirement</th><th>Implementation</th></tr></thead><tbody><tr><td>UR-2026-06-03-033</td><td>git clone 후 외부 폴더에서 작업하는 기능을 데스크톱 앱에 녹임</td><td>Workspace Host panel, <code>clone_desktop_workspace</code>, <code>set_desktop_workspace_path</code></td></tr><tr><td>PDA-REQ-033</td><td>app-owned workspace import/clone/select/persistence</td><td><code>DesktopWorkspaceStateReport</code>, <code>desktop-workspace-state.v1.json</code>, <code>workspace_root_for_app</code></td></tr><tr><td>Service readiness</td><td>workspace onboarding is runtime-enforced</td><td><code>check-service-readiness.mjs</code>, Rust <code>get_service_readiness_report</code> workspace check</td></tr><tr><td>Runtime contract</td><td>shell command surface owns workspace host</td><td><code>workspace_host_commands</code></td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 695,
-      "updatedAt": "2026-06-03T05:02:58.721Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-workspace-host-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-workspace-host/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Desktop Workspace Host 계획",
-      "excerpt": "Desktop Workspace Host 계획 옵션 비교 옵션 A: 기존처럼 사용자가 외부에서 git clone 후 앱을 그 폴더에서 실행한다. 기각. 설치형 앱의 핵심 기능이 개발자 작업 방식에 묶인다. 옵션 B: 앱 안에서 workspace state를 저장하고 import/clone command를 제공한다. 선택. 기존 source editor/CLI 기능을 app owned workspace 위로 옮길 수 있다. 옵션 C: libgit2 같은 Git library를 추가한다. 보류. 이번",
-      "html": "<h1>Desktop Workspace Host 계획</h1>\n<h2>옵션 비교</h2>\n<ul>\n<li>옵션 A: 기존처럼 사용자가 외부에서 git clone 후 앱을 그 폴더에서 실행한다. 기각. 설치형 앱의 핵심 기능이 개발자 작업 방식에 묶인다.</li>\n<li>옵션 B: 앱 안에서 workspace state를 저장하고 import/clone command를 제공한다. 선택. 기존 source editor/CLI 기능을 app-owned workspace 위로 옮길 수 있다.</li>\n<li>옵션 C: libgit2 같은 Git library를 추가한다. 보류. 이번 slice는 dependency 설치 없이 bounded <code>git</code> capability로 충분하며, Git이 없으면 <code>capability_missing</code>으로 degrade할 수 있다.</li>\n</ul>\n<h2>구현 순서</h2>\n<p>1. Tauri backend에 workspace state report/import/clone command 추가.</p>\n<p>2. source editor와 CLI working dir resolution을 app-selected workspace 우선으로 변경.</p>\n<p>3. Workspace Monitor에 Workspace Host 패널 추가.</p>\n<p>4. runtime contract, readiness, service readiness, requirements 갱신.</p>\n<p>5. Rust/TypeScript/test/build/browser/evaluation 검증.</p>\n<h2>검증 대상</h2>\n<ul>\n<li><code>cargo check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app run runtime:contract</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li>customer build/perf/customer bundle audit</li>\n<li>Browser smoke</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1381,
-      "updatedAt": "2026-06-03T05:02:58.720Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-workspace-host-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-workspace-host/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Desktop Workspace Host 스펙",
-      "excerpt": "Desktop Workspace Host 스펙 목표 사용자가 별도 터미널에서 git clone 을 실행하고 그 폴더에서 도구를 띄우는 개발자 흐름에 의존하지 않게 한다. 설치형 데스크톱 앱이 workspace import, repository clone, active workspace selection, workspace state persistence를 소유한다. source editor와 CLI session/task pipe working directory는 앱이 선택한 workspace를 ",
-      "html": "<h1>Desktop Workspace Host 스펙</h1>\n<h2>목표</h2>\n<ul>\n<li>사용자가 별도 터미널에서 <code>git clone</code>을 실행하고 그 폴더에서 도구를 띄우는 개발자 흐름에 의존하지 않게 한다.</li>\n<li>설치형 데스크톱 앱이 workspace import, repository clone, active workspace selection, workspace state persistence를 소유한다.</li>\n<li>source editor와 CLI session/task pipe working directory는 앱이 선택한 workspace를 우선 사용한다.</li>\n</ul>\n<h2>기능</h2>\n<ul>\n<li><code>get_desktop_workspace_state</code>: app data에 저장된 active workspace state와 managed workspace root, Git capability를 반환한다.</li>\n<li><code>set_desktop_workspace_path</code>: 기존 absolute workspace path를 app-owned workspace profile로 저장한다.</li>\n<li><code>clone_desktop_workspace</code>: Git이 사용 가능할 때 repository를 app data managed workspace root로 bounded clone하고 active workspace로 선택한다.</li>\n<li>Workspace Monitor Desktop Runtime은 <code>Workspace Host</code> 패널에서 import/clone/status/state path/managed root/Git 상태를 보여준다.</li>\n<li>Runtime contract와 readiness/test는 workspace host command surface를 검증한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>native folder picker integration.</li>\n<li>full Git branch/commit/pull/push UI.</li>\n<li>credential helper, private token 저장, SSH key 관리.</li>\n<li>public clean-machine workspace smoke 완료 주장.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>앱 안에서 기존 workspace를 import하거나 repository URL clone을 시작할 수 있다.</li>\n<li>app data에 <code>workspace-host/desktop-workspace-state.v1.json</code> state가 저장된다.</li>\n<li>source editor file listing과 CLI working dir resolution은 app-selected workspace를 우선 사용한다.</li>\n<li>Git이 없으면 clone은 <code>capability_missing</code>으로 degrade하고 앱 전체 실행을 막지 않는다.</li>\n<li>Rust/TypeScript/readiness/runtime contract/service readiness 검증이 통과한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1808,
-      "updatedAt": "2026-06-03T05:02:58.719Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 93,
+      "documentsCount": 96,
       "categories": [
         {
           "category": "evaluation",
-          "count": 29
+          "count": 32
         },
         {
           "category": "request-trace",
@@ -17814,14 +17814,28 @@
         },
         {
           "category": "work-timing",
-          "count": 12
+          "count": 11
         },
         {
           "category": "plan",
           "count": 4
+        },
+        {
+          "category": "daily-history",
+          "count": 1
         }
       ],
       "documents": [
+        {
+          "id": "history-2026-2026-06-06-md",
+          "path": "_history/2026/2026-06-06.md",
+          "category": "daily-history",
+          "language": "unknown",
+          "title": "2026 06 06",
+          "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
+          "updatedAt": "2026-06-05T18:43:48.366Z",
+          "historyDate": "2026-06-06"
+        },
         {
           "id": "history-evaluations-2026-2026-06-06-bounded-tab-resident-performance-evaluation-input-json",
           "path": "_history/evaluations/2026/2026-06-06-bounded-tab-resident-performance-evaluation-input.json",
@@ -17870,6 +17884,46 @@
           "title": "최종 평가",
           "excerpt": "최종 평가 판정 요청한 버튼 크기와 색상/음영 계층 개선은 완료됐다. 선택/검색/결과 버튼이 같은 색으로 붙어 보이는 문제를 줄이기 위해 공통 tonal/shadow 토큰을 적용했고, 짧은 내용의 버튼은 compact하게 조정했다. 검증 근거 렌더러 test/check 통과 데스크톱 앱 test/check 통과 package:internal 통과 Rust test/build 통과 codesign verify 통과 DMG verify 통과 git diff check 통과 제한 인앱 브라우저 스모크는",
           "updatedAt": "2026-06-05T16:21:55.752Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-monitor-performance-guardrails-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails-evaluation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Monitor Performance Guardrails Evaluation Input",
+          "excerpt": "{ \"id\": \"2026 06 06 monitor performance guardrails\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app/renderer/workspace monitor\", \"work mode\": \"standard\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"request summary\": \"Workspace Monitor tab switching ",
+          "updatedAt": "2026-06-05T18:43:48.364Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-monitor-performance-guardrails-omission-json",
+          "path": "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails-omission.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Monitor Performance Guardrails Omission",
+          "excerpt": "{ \"id\": \"2026 06 06 monitor performance guardrails omission\", \"date\": \"2026 06 06\", \"status\": \"passed\", \"checked user instructions\": \"Do not avoid broad scope.\", \"Implement, then build automatically.\", \"Use desktop resources and reduce tab switching latency.\", \"Review fundamental",
+          "updatedAt": "2026-06-05T18:43:48.364Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-monitor-performance-guardrails-resource-json",
+          "path": "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails-resource.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Monitor Performance Guardrails Resource",
+          "excerpt": "{ \"id\": \"2026 06 06 monitor performance guardrails resource\", \"date\": \"2026 06 06\", \"status\": \"passed\", \"resource risk occurred\": true, \"resources touched\": \"local static http server on 127.0.0.1:3348\", \"Playwright/Chromium performance audit browser processes\", \"Tauri release bui",
+          "updatedAt": "2026-06-05T18:43:48.364Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "평가: Monitor 성능 가드레일 완성",
+          "excerpt": "평가: Monitor 성능 가드레일 완성 결과 통과. 탭 전환 성능 개선이 코드 리뷰나 기억에 의존하지 않도록 lazy boundary contract와 반복 section switch audit를 검증선에 연결했다. built out/ 기준에서 성능 예산, section switch, repeated section switch, button response 감사가 모두 통과했다. internal .app 와 .dmg 패키징, codesign verify, DMG verify가 완료됐다. 핵심 검",
+          "updatedAt": "2026-06-05T18:43:48.364Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -17980,16 +18034,6 @@
           "title": "최종 평가",
           "excerpt": "최종 평가 판정 요청한 핵심 변경은 완료됐다. 텍스트 기반 기본 설정은 선택 카드가 먼저 보이도록 바뀌었고, 직접 편집도 유지됐다. 구현 후 내부 패키징 빌드까지 완료했다. 검증 근거 렌더러 test/check 통과 데스크톱 앱 test/check 통과 package:internal 통과 Rust test/build 통과 codesign verify 통과 DMG verify 통과 git diff check 통과 제한 브라우저 스모크는 로컬 개발 서버에서 Loading workspace snapsh",
           "updatedAt": "2026-06-05T16:12:11.045Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: 소스 컨트롤 Playwright 스모크",
-          "excerpt": "평가: 소스 컨트롤 Playwright 스모크 결과 이전의 dev 서버 Playwright 검증 실패를 그대로 두지 않고, dev 서버와 static export 경로를 분리했다. Tauri가 임베드하는 static export 산출물을 기준으로 실제 Chromium 클릭 검증을 추가했다. 개발자 snapshot에서는 소스 파일 선택 드롭다운이 네이티브 <select 없이 열리고 80개 파일 항목을 보여준다. customer snapshot은 의도적으로 소스 파일이 제거되어 파일 선택 트리거가 비",
-          "updatedAt": "2026-06-05T15:31:10.538Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18173,6 +18217,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-request-traces-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: Monitor 성능 가드레일 완성",
+          "excerpt": "요청 결과 추적: Monitor 성능 가드레일 완성 요청 탭 이동 성능을 근본적으로 다시 보고, 데스크톱 자원을 활용하는 방향으로 구현과 빌드까지 완료한다. 결과 성능 최적화 구현 자체를 무리하게 더 벌리기보다, 이미 적용된 resident/preload/lazy 구조가 되돌아가지 않도록 정적 계약과 반복 성능 감사를 추가했다. 실제 internal package build와 built static output 성능 감사를 완료했다. 주요 파일 platform desktop app/renderer",
+          "updatedAt": "2026-06-05T18:43:48.363Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
           "category": "request-trace",
@@ -18220,16 +18274,6 @@
           "title": "요청 결과 추적",
           "excerpt": "요청 결과 추적 요청 기본 설정과 텍스트 설정을 사용자가 바로 선택할 수 있게 만들고, 구현 후 빌드까지 자동 실행한다. 결과 platform desktop app/docs/requirements/2026 06 06 selectable default settings.ko.md platform desktop app/specs/2026 06 06 selectable default settings/ platform desktop app/renderer/workspace monitor/components",
           "updatedAt": "2026-06-05T16:12:11.044Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: 소스 컨트롤 Playwright 스모크",
-          "excerpt": "요청 결과 추적: 소스 컨트롤 Playwright 스모크 요청 사용자는 이전 검증 한계 설명을 받아들이지 않고, 가능한 데스크톱/운영체제 자원을 사용해 소스 컨트롤 불편함과 기본 드롭다운 문제를 끝까지 검증하라고 요구했다. 결과 원인 분리: Next dev 서버 Playwright 경로에서는 snapshot fetch가 시작되지 않아 Loading workspace snapshot 에 머물렀다. 실제 산출물 검증: Tauri가 임베드하는 out/ 정적 export를 로컬 static server로",
-          "updatedAt": "2026-06-05T15:31:10.537Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18283,6 +18327,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-user-requests-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: Monitor 성능 가드레일 완성",
+          "excerpt": "사용자 요청 요약: Monitor 성능 가드레일 완성 요약 사용자는 탭 간 이동이 여전히 느리다고 지적했고, 데스크톱 앱이므로 CPU/RAM/runtime 자원을 실제로 쓰는 방향으로 근본 성능 문제를 해결하라고 요청했다. 또한 범위가 넓다는 이유로 회피하지 말고 구현과 빌드까지 끝내라고 지시했다. 실행 해석 이전 resident/preload/lazy 작업을 전제로 한다. 남은 핵심은 퇴행 방지와 실제 빌드 산출물 기준 검증이다. public release 준비 완료가 아니라 internal p",
+          "updatedAt": "2026-06-05T18:43:48.363Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-06-native-pty-terminal-runtime-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-native-pty-terminal-runtime.ko.md",
           "category": "user-request",
@@ -18313,16 +18367,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: Rust 데스크톱 자원 최적화",
-          "excerpt": "사용자 요청 요약: Rust 데스크톱 자원 최적화 사용자는 Workspace Monitor/source editor 계열 탭 전환이 늦게 불러오는 방식처럼 느껴진다고 지적했고, 단순 렌더 최적화가 아니라 실제 데스크톱 앱답게 Rust와 운영체제 CPU/RAM 자원을 적극 사용해 최적화하라고 요청했다. 추가 지속 요구로 구현 완료 후 사용자가 별도로 빌드하지 않도록 내부 빌드까지 자동 실행해야 한다.",
-          "updatedAt": "2026-06-05T15:47:08.791Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-selectable-default-settings-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-selectable-default-settings.ko.md",
           "category": "user-request",
@@ -18330,16 +18374,6 @@
           "title": "사용자 요청 요약",
           "excerpt": "사용자 요청 요약 기본 설정과 실행 입력이 텍스트만으로 되어 있어 사용자가 어떤 값을 넣어야 할지 알기 어렵다. 텍스트 기반 설정도 여러 선택지를 먼저 제공하고, 사용자가 선택해서 바꿀 수 있게 해 달라는 요청이다.",
           "updatedAt": "2026-06-05T16:12:11.044Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: 소스 컨트롤 실제 실행 검증",
-          "excerpt": "사용자 요청 요약: 소스 컨트롤 실제 실행 검증 날짜: 2026 06 06 범위: platform desktop app/renderer/workspace monitor 요지 사용자는 데스크톱 앱의 장점을 살려 운영체제 자원과 메모리를 적극 사용하고, 탭 이동 지연, 사이드바 잘림, 코드 편집 불편함, 기본 버튼/드롭다운 느낌을 전반적으로 개선하라고 요구했다. 후속으로 이전 검증 한계를 받아들이지 말고 가능한 자원을 써서 실제로 끝까지 확인하라고 요구했다. 이번 기록의 초점 이전 구현 중 Playw",
-          "updatedAt": "2026-06-05T15:31:10.535Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18383,6 +18417,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-user-requests-2026-2026-06-06-wide-scope-instruction-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-wide-scope-instruction.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: 넓은 범위 작업 지시",
+          "excerpt": "사용자 요청 요약: 넓은 범위 작업 지시 요약 사용자는 작업 범위가 넓다는 이유로 에이전트가 두려워하거나 축소하지 말라고 지시했다. 반영 넓은 범위는 회피 대상이 아니라 분해, 순서화, 검증, rollback 경계로 다룰 지속 지시로 해석했다. persistent instructions 와 memory bootstrap manifest에 반영했다.",
+          "updatedAt": "2026-06-05T18:33:37.273Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
           "category": "user-request",
@@ -18410,6 +18454,16 @@
           "title": "웹 검색 기록",
           "excerpt": "웹 검색 기록 쿼리 Apple Human Interface Guidelines buttons visual hierarchy controls macOS settings choices Material Design buttons elevation tonal buttons visual hierarchy choices WAI ARIA button listbox radio group selectable options visual state accessibility Nielsen Norman Group but",
           "updatedAt": "2026-06-05T16:21:55.750Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: Monitor 성능 가드레일 완성",
+          "excerpt": "웹 검색 기록: Monitor 성능 가드레일 완성 검색 시각 2026 06 06 질의 Next.js official docs dynamic import lazy loading client components React official docs Profiler startTransition useDeferredValue memo performance web.dev optimize long tasks Interaction to Next Paint INP main thread JavaScript Goog",
+          "updatedAt": "2026-06-05T18:43:48.363Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18443,16 +18497,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: Rust 데스크톱 자원 최적화",
-          "excerpt": "웹 검색 기록: Rust 데스크톱 자원 최적화 목적 Rust/Tauri 경로에서 CPU parallelism과 RAM aware preload를 실제로 구현할 때 어떤 공식 API와 crate가 적합한지 확인했다. 검색어 Tauri v2 Rust commands async state manage official docs performance Tauri v2 sidecar state Rust official docs CPU heavy task background thread Rust rayon pa",
-          "updatedAt": "2026-06-05T15:47:08.792Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-selectable-default-settings-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-selectable-default-settings.ko.md",
           "category": "web-search",
@@ -18460,16 +18504,6 @@
           "title": "웹 검색 기록",
           "excerpt": "웹 검색 기록 쿼리 WAI ARIA radio group select listbox settings form user choices official Nielsen Norman Group form design dropdown radio buttons settings choices Apple Human Interface Guidelines settings controls radio buttons pickers macOS Material Design selection controls settings r",
           "updatedAt": "2026-06-05T16:12:11.044Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: 소스 컨트롤 Playwright 스모크",
-          "excerpt": "웹 검색 기록: 소스 컨트롤 Playwright 스모크 날짜: 2026 06 06 작업: Next dev 검증 한계 분리와 정적 export 기반 Playwright 스모크 추가 검색 Next.js app router client component useEffect not running hydration official docs Next.js static export output export official docs app router Playwright page waitForSelector of",
-          "updatedAt": "2026-06-05T15:31:10.535Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18503,6 +18537,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-web-searches-2026-2026-06-06-wide-scope-instruction-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-wide-scope-instruction.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: 넓은 범위 작업 지시",
+          "excerpt": "웹 검색 기록: 넓은 범위 작업 지시 목적 사용자가 “범위가 넓다고 두려워하지마”라고 지시해, 넓은 변경을 회피하지 않되 안전하게 다루는 원칙을 지속 지시에 반영하기 전 외부 근거를 확인했다. 검색어 official engineering guide large scale change incremental rollout software engineering Google SRE large scale change management incremental rollout risk mitigation soft",
+          "updatedAt": "2026-06-05T18:33:37.273Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
           "category": "web-search",
@@ -18530,6 +18574,16 @@
           "title": "작업 요약",
           "excerpt": "작업 요약 버튼과 선택 UI의 색상/음영/크기 계층을 조정했다. 선택/검색 표면 토큰 추가 설정 segment/option/pin 버튼 compact 및 active 상태 보강 커맨드 팔레트 검색/결과 버튼 compact 및 shadow 보강 런타임 선택 카드, provider/model 선택 카드 compact 조정 소스 툴바/워크벤치 전환 버튼 tonal 조정 내부 패키징 빌드 완료",
           "updatedAt": "2026-06-05T16:21:55.751Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: Monitor 성능 가드레일 완성",
+          "excerpt": "작업 요약: Monitor 성능 가드레일 완성 완료 MonitorShell.tsx heavy panel의 type only import, dynamic import, preload path를 검사하는 lazy boundary contract를 추가했다. Workspace Monitor check와 desktop readiness에 lazy boundary contract를 연결했다. section switch audit에 runs=N 반복 실행과 PerformanceObserver long tas",
+          "updatedAt": "2026-06-05T18:43:48.363Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18563,16 +18617,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: Rust 데스크톱 자원 최적화",
-          "excerpt": "작업 요약: Rust 데스크톱 자원 최적화 Workspace Monitor의 source workspace cache를 Rust/Tauri native path에서 더 공격적으로 준비하도록 바꿨다. rayon 으로 entry build와 preload read를 병렬화했고, sysinfo 로 OS memory telemetry를 읽어 preload budget과 UI 표시를 추가했다. UI에는 cache 파일/바이트뿐 아니라 worker 수, RAM budget/free RAM, CPU 병렬 수,",
-          "updatedAt": "2026-06-05T15:47:08.793Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-selectable-default-settings-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-selectable-default-settings.ko.md",
           "category": "work-summary",
@@ -18580,16 +18624,6 @@
           "title": "작업 요약",
           "excerpt": "작업 요약 데스크톱 모니터의 텍스트 중심 기본 설정을 선택형 UI로 개선했다. 런타임 터미널 작업 폴더와 초기 입력에 선택 카드 추가 작업 파이프라인 요청에 프리셋 선택 카드 추가 검색 에이전트 제공자/모델 설정을 버튼형 선택으로 변경 모델 datalist 제거 선택 카드 CSS와 정적 테스트 추가 내부 패키징 빌드 완료",
           "updatedAt": "2026-06-05T16:12:11.044Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: 소스 컨트롤 Playwright 스모크",
-          "excerpt": "작업 요약: 소스 컨트롤 Playwright 스모크 변경 workspace monitor 에 smoke:source controls 스크립트를 추가했다. 스모크는 out/ 정적 export를 임시 디렉터리에 복사하고 개발자 snapshot을 주입한 뒤 Chromium에서 소스 화면을 연다. 스모크는 네이티브 <select 제거, 공용 버튼 프리미티브 수, 파일 선택 트리거 활성화, 메뉴 오픈, 파일 항목 수, 컨트롤 크기, 페이지 에러 부재를 확인한다. 기존 tool studio.test.mjs ",
-          "updatedAt": "2026-06-05T15:31:10.537Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18623,6 +18657,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-06-wide-scope-instruction-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-wide-scope-instruction.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: 넓은 범위 작업 지시",
+          "excerpt": "작업 요약: 넓은 범위 작업 지시 완료 내용 사용자의 “범위가 넓다고 두려워하지마” 지시를 지속 지시로 반영했다. docs/instructions/persistent instructions.md , .ko.md , .en.md 에 동일 의미의 원칙을 추가했다. agent platform/configs/memory/bootstrap manifest.json 의 persistent instruction anchor와 large scope rule을 갱신했다. 웹 검색 기록과 사용자 요청 요약을 남겼다",
+          "updatedAt": "2026-06-05T18:33:37.274Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
           "category": "work-summary",
@@ -18650,6 +18694,16 @@
           "title": "2026 06 06 Button Tonal Hierarchy",
           "excerpt": "{ \"date\": \"2026 06 06\", \"phases\": { \"phase\": \"web first intake and source review\", \"elapsed minutes estimate\": 8 }, { \"phase\": \"css implementation\", \"elapsed minutes estimate\": 22 }, { \"phase\": \"validation and package build\", \"elapsed minutes estimate\": 12 }, { \"phase\": \"records ",
           "updatedAt": "2026-06-05T16:21:55.751Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-06-monitor-performance-guardrails-json",
+          "path": "_history/work-timings/2026/2026-06-06-monitor-performance-guardrails.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Monitor Performance Guardrails",
+          "excerpt": "{ \"id\": \"2026 06 06 monitor performance guardrails\", \"date\": \"2026 06 06\", \"status\": \"recorded\", \"timings\": { \"phase\": \"web first intake\", \"duration minutes\": 2 }, { \"phase\": \"implementation\", \"duration minutes\": 20 }, { \"phase\": \"workspace checks\", \"duration minutes\": 2 }, { \"ph",
+          "updatedAt": "2026-06-05T18:43:48.365Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18683,16 +18737,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-rust-desktop-resource-optimization-json",
-          "path": "_history/work-timings/2026/2026-06-06-rust-desktop-resource-optimization.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Rust Desktop Resource Optimization",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 rust desktop resource optimization\", \"timings\": { \"phase\": \"web research and crate metadata\", \"duration\": \"approximately 15 minutes\" }, { \"phase\": \"implementation\", \"duration\": \"approximately 35 minutes\" }, { \"phase\": \"test fix an",
-          "updatedAt": "2026-06-05T15:47:08.793Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-selectable-default-settings-json",
           "path": "_history/work-timings/2026/2026-06-06-selectable-default-settings.json",
           "category": "work-timing",
@@ -18700,16 +18744,6 @@
           "title": "2026 06 06 Selectable Default Settings",
           "excerpt": "{ \"date\": \"2026 06 06\", \"phases\": { \"phase\": \"intake research and source review\", \"elapsed minutes estimate\": 12 }, { \"phase\": \"implementation\", \"elapsed minutes estimate\": 24 }, { \"phase\": \"tests and package build\", \"elapsed minutes estimate\": 10 }, { \"phase\": \"records and close",
           "updatedAt": "2026-06-05T16:12:11.044Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-06-source-controls-playwright-smoke-json",
-          "path": "_history/work-timings/2026/2026-06-06-source-controls-playwright-smoke.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Source Controls Playwright Smoke",
-          "excerpt": "{ \"task\": \"source controls playwright smoke\", \"date\": \"2026 06 06\", \"timings\": { \"phase\": \"web first intake\", \"elapsed minutes\": 2, \"notes\": \"Checked official Next.js and Playwright documentation relevant to hydration/static export and click verification.\" }, { \"phase\": \"dev serv",
-          "updatedAt": "2026-06-05T15:31:10.536Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18753,57 +18787,6 @@
           "historyDate": "2026-06-06"
         }
       ]
-    },
-    {
-      "date": "2026-06-05",
-      "year": "2026",
-      "documentsCount": 3,
-      "categories": [
-        {
-          "category": "evaluation",
-          "count": 1
-        },
-        {
-          "category": "request-trace",
-          "count": 1
-        },
-        {
-          "category": "work-timing",
-          "count": 1
-        }
-      ],
-      "documents": [
-        {
-          "id": "history-evaluations-2026-2026-06-05-source-workbench-control-primitives-ko-md",
-          "path": "_history/evaluations/2026/2026-06-05-source-workbench-control-primitives.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: 소스 워크벤치 컨트롤 프리미티브",
-          "excerpt": "평가: 소스 워크벤치 컨트롤 프리미티브 결과 사용자가 지적한 소스 작업 화면의 기본 선택 드롭다운을 제거하고 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 명령성 버튼은 공용 Button / ActionGroup 으로 통일해 기본 브라우저 버튼처럼 보이는 문제를 줄였다. CSS 계약과 정적 테스트가 새 구조를 고정한다. 구현 후 내부 .app / .dmg 패키지 빌드와 검증까지 완료했다. 검증 corepack pnpm dir platform desktop app/rende",
-          "updatedAt": "2026-06-05T13:52:28.067Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-05-source-workbench-control-primitives-ko-md",
-          "path": "_history/request-traces/2026/2026-06-05-source-workbench-control-primitives.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브",
-          "excerpt": "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브 요청 기본 버튼/기본 선택 드롭다운처럼 보이는 소스 작업 UI를 수정. 구현 완료 후 자동 빌드. 결과 소스 파일 선택 드롭다운은 Radix DropdownMenu로 교체. 파일 작업/툴바/워크벤치 탭/탐색기 명령 버튼은 공용 Button / ActionGroup 사용. 기존 소스 편집 UX 요구사항과 스펙에 새 요구사항 REQ DESKTOP UX 2026 06 05 004 추가. 고객용 렌더러 빌드와 내부 Tauri .app / .dmg 패키지 ",
-          "updatedAt": "2026-06-05T13:52:28.066Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-05-source-workbench-control-primitives-json",
-          "path": "_history/work-timings/2026/2026-06-05-source-workbench-control-primitives.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 05 Source Workbench Control Primitives",
-          "excerpt": "{ \"task\": \"source workbench control primitives\", \"date\": \"2026 06 05\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first and local inspection\", \"approx minutes\": 12 }, { \"phase\": \"implementation\", \"approx minutes\": 28 }, { \"phase\": \"tests and package build\", \"approx minut",
-          "updatedAt": "2026-06-05T13:52:28.067Z",
-          "historyDate": "2026-06-05"
-        }
-      ]
     }
   ],
   "adminHistory": {
@@ -18812,16 +18795,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2365,
+      "documents": 2378,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 962
+          "count": 966
         },
         {
           "category": "web-search",
-          "count": 378
+          "count": 380
         },
         {
           "category": "plan",
@@ -18829,30 +18812,30 @@
         },
         {
           "category": "request-trace",
-          "count": 307
+          "count": 308
         },
         {
           "category": "work-timing",
-          "count": 229
+          "count": 230
         },
         {
           "category": "user-request",
-          "count": 91
+          "count": 93
         },
         {
           "category": "work-summary",
-          "count": 58
+          "count": 60
         },
         {
           "category": "daily-history",
-          "count": 6
+          "count": 7
         },
         {
           "category": "intent-feature-map",
           "count": 2
         }
       ],
-      "totalSourceBytes": 6226415,
+      "totalSourceBytes": 6243999,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18877,12 +18860,12 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 42,
+      "evidenceEvents": 44,
       "decisionEvents": 0,
-      "openSignals": 21,
+      "openSignals": 23,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T18:29:48.846Z",
-      "historyDays": 2
+      "latestEventAt": "2026-06-05T18:43:48.366Z",
+      "historyDays": 1
     },
     "lanes": [
       {
@@ -18893,17 +18876,7 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 30
-      },
-      {
-        "id": "monitoring",
-        "label": "monitoring",
-        "count": 13
-      },
-      {
-        "id": "traceability",
-        "label": "traceability",
-        "count": 13
+        "count": 32
       },
       {
         "id": "delivery",
@@ -18921,9 +18894,24 @@
         "count": 12
       },
       {
+        "id": "traceability",
+        "label": "traceability",
+        "count": 12
+      },
+      {
+        "id": "monitoring",
+        "label": "monitoring",
+        "count": 11
+      },
+      {
         "id": "planning",
         "label": "planning",
         "count": 4
+      },
+      {
+        "id": "history",
+        "label": "history",
+        "count": 1
       }
     ],
     "signalTypes": [
@@ -18935,17 +18923,7 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 30
-      },
-      {
-        "id": "timing",
-        "label": "timing",
-        "count": 13
-      },
-      {
-        "id": "trace",
-        "label": "trace",
-        "count": 13
+        "count": 32
       },
       {
         "id": "intake",
@@ -18958,14 +18936,29 @@
         "count": 12
       },
       {
+        "id": "trace",
+        "label": "trace",
+        "count": 12
+      },
+      {
         "id": "web-search",
         "label": "web search",
         "count": 12
       },
       {
+        "id": "timing",
+        "label": "timing",
+        "count": 11
+      },
+      {
         "id": "plan",
         "label": "plan",
         "count": 4
+      },
+      {
+        "id": "history",
+        "label": "history",
+        "count": 1
       }
     ],
     "sourceTypes": [
@@ -18981,6 +18974,201 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-2026-2026-06-06-md",
+        "sourceType": "history",
+        "signalType": "history",
+        "lane": "history",
+        "severity": "info",
+        "status": "daily-history",
+        "title": "2026 06 06",
+        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
+        "path": "_history/2026/2026-06-06.md",
+        "category": "daily-history",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:43:48.366Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-monitor-performance-guardrails-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Monitor Performance Guardrails",
+        "detail": "{ \"id\": \"2026 06 06 monitor performance guardrails\", \"date\": \"2026 06 06\", \"status\": \"recorded\", \"timings\": { \"phase\": \"web first intake\", \"duration minutes\": 2 }, { \"phase\": \"implementation\", \"duration minutes\": 20 }, { \"phase\": \"workspace checks\", \"duration minutes\": 2 }, { \"ph",
+        "path": "_history/work-timings/2026/2026-06-06-monitor-performance-guardrails.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:43:48.365Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-monitor-performance-guardrails-resource-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "ready",
+        "title": "2026 06 06 Monitor Performance Guardrails Resource",
+        "detail": "{ \"id\": \"2026 06 06 monitor performance guardrails resource\", \"date\": \"2026 06 06\", \"status\": \"passed\", \"resource risk occurred\": true, \"resources touched\": \"local static http server on 127.0.0.1:3348\", \"Playwright/Chromium performance audit browser processes\", \"Tauri release bui",
+        "path": "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails-resource.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:43:48.364Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-monitor-performance-guardrails-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 06 Monitor Performance Guardrails Evaluation Input",
+        "detail": "{ \"id\": \"2026 06 06 monitor performance guardrails\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app/renderer/workspace monitor\", \"work mode\": \"standard\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"request summary\": \"Workspace Monitor tab switching ",
+        "path": "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:43:48.364Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-monitor-performance-guardrails-omission-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 06 Monitor Performance Guardrails Omission",
+        "detail": "{ \"id\": \"2026 06 06 monitor performance guardrails omission\", \"date\": \"2026 06 06\", \"status\": \"passed\", \"checked user instructions\": \"Do not avoid broad scope.\", \"Implement, then build automatically.\", \"Use desktop resources and reduce tab switching latency.\", \"Review fundamental",
+        "path": "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails-omission.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:43:48.364Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "평가: Monitor 성능 가드레일 완성",
+        "detail": "평가: Monitor 성능 가드레일 완성 결과 통과. 탭 전환 성능 개선이 코드 리뷰나 기억에 의존하지 않도록 lazy boundary contract와 반복 section switch audit를 검증선에 연결했다. built out/ 기준에서 성능 예산, section switch, repeated section switch, button response 감사가 모두 통과했다. internal .app 와 .dmg 패키징, codesign verify, DMG verify가 완료됐다. 핵심 검",
+        "path": "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:43:48.364Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "요청 결과 추적: Monitor 성능 가드레일 완성",
+        "detail": "요청 결과 추적: Monitor 성능 가드레일 완성 요청 탭 이동 성능을 근본적으로 다시 보고, 데스크톱 자원을 활용하는 방향으로 구현과 빌드까지 완료한다. 결과 성능 최적화 구현 자체를 무리하게 더 벌리기보다, 이미 적용된 resident/preload/lazy 구조가 되돌아가지 않도록 정적 계약과 반복 성능 감사를 추가했다. 실제 internal package build와 built static output 성능 감사를 완료했다. 주요 파일 platform desktop app/renderer",
+        "path": "_history/request-traces/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:43:48.363Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: Monitor 성능 가드레일 완성",
+        "detail": "웹 검색 기록: Monitor 성능 가드레일 완성 검색 시각 2026 06 06 질의 Next.js official docs dynamic import lazy loading client components React official docs Profiler startTransition useDeferredValue memo performance web.dev optimize long tasks Interaction to Next Paint INP main thread JavaScript Goog",
+        "path": "_history/web-searches/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:43:48.363Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "ready",
+        "title": "사용자 요청 요약: Monitor 성능 가드레일 완성",
+        "detail": "사용자 요청 요약: Monitor 성능 가드레일 완성 요약 사용자는 탭 간 이동이 여전히 느리다고 지적했고, 데스크톱 앱이므로 CPU/RAM/runtime 자원을 실제로 쓰는 방향으로 근본 성능 문제를 해결하라고 요청했다. 또한 범위가 넓다는 이유로 회피하지 말고 구현과 빌드까지 끝내라고 지시했다. 실행 해석 이전 resident/preload/lazy 작업을 전제로 한다. 남은 핵심은 퇴행 방지와 실제 빌드 산출물 기준 검증이다. public release 준비 완료가 아니라 internal p",
+        "path": "_history/user-requests/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:43:48.363Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-monitor-performance-guardrails-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "작업 요약: Monitor 성능 가드레일 완성",
+        "detail": "작업 요약: Monitor 성능 가드레일 완성 완료 MonitorShell.tsx heavy panel의 type only import, dynamic import, preload path를 검사하는 lazy boundary contract를 추가했다. Workspace Monitor check와 desktop readiness에 lazy boundary contract를 연결했다. section switch audit에 runs=N 반복 실행과 PerformanceObserver long tas",
+        "path": "_history/work-summaries/2026/2026-06-06-monitor-performance-guardrails.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:43:48.363Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-wide-scope-instruction-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "작업 요약: 넓은 범위 작업 지시",
+        "detail": "작업 요약: 넓은 범위 작업 지시 완료 내용 사용자의 “범위가 넓다고 두려워하지마” 지시를 지속 지시로 반영했다. docs/instructions/persistent instructions.md , .ko.md , .en.md 에 동일 의미의 원칙을 추가했다. agent platform/configs/memory/bootstrap manifest.json 의 persistent instruction anchor와 large scope rule을 갱신했다. 웹 검색 기록과 사용자 요청 요약을 남겼다",
+        "path": "_history/work-summaries/2026/2026-06-06-wide-scope-instruction.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:33:37.274Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-wide-scope-instruction-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "warning",
+        "status": "web-search",
+        "title": "웹 검색 기록: 넓은 범위 작업 지시",
+        "detail": "웹 검색 기록: 넓은 범위 작업 지시 목적 사용자가 “범위가 넓다고 두려워하지마”라고 지시해, 넓은 변경을 회피하지 않되 안전하게 다루는 원칙을 지속 지시에 반영하기 전 외부 근거를 확인했다. 검색어 official engineering guide large scale change incremental rollout software engineering Google SRE large scale change management incremental rollout risk mitigation soft",
+        "path": "_history/web-searches/2026/2026-06-06-wide-scope-instruction.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:33:37.273Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-wide-scope-instruction-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: 넓은 범위 작업 지시",
+        "detail": "사용자 요청 요약: 넓은 범위 작업 지시 요약 사용자는 작업 범위가 넓다는 이유로 에이전트가 두려워하거나 축소하지 말라고 지시했다. 반영 넓은 범위는 회피 대상이 아니라 분해, 순서화, 검증, rollback 경계로 다룰 지속 지시로 해석했다. persistent instructions 와 memory bootstrap manifest에 반영했다.",
+        "path": "_history/user-requests/2026/2026-06-06-wide-scope-instruction.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:33:37.273Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-06-workbench-lazy-boundary-expansion-json",
         "sourceType": "history",
@@ -20212,21 +20400,6 @@
         "timestamp": "2026-06-05T15:47:08.794Z"
       },
       {
-        "id": "history-history-work-timings-2026-2026-06-06-rust-desktop-resource-optimization-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 06 Rust Desktop Resource Optimization",
-        "detail": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 rust desktop resource optimization\", \"timings\": { \"phase\": \"web research and crate metadata\", \"duration\": \"approximately 15 minutes\" }, { \"phase\": \"implementation\", \"duration\": \"approximately 35 minutes\" }, { \"phase\": \"test fix an",
-        "path": "_history/work-timings/2026/2026-06-06-rust-desktop-resource-optimization.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:47:08.793Z"
-      },
-      {
         "id": "history-history-request-traces-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
         "sourceType": "history",
         "signalType": "trace",
@@ -20240,186 +20413,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T15:47:08.793Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: Rust 데스크톱 자원 최적화",
-        "detail": "작업 요약: Rust 데스크톱 자원 최적화 Workspace Monitor의 source workspace cache를 Rust/Tauri native path에서 더 공격적으로 준비하도록 바꿨다. rayon 으로 entry build와 preload read를 병렬화했고, sysinfo 로 OS memory telemetry를 읽어 preload budget과 UI 표시를 추가했다. UI에는 cache 파일/바이트뿐 아니라 worker 수, RAM budget/free RAM, CPU 병렬 수,",
-        "path": "_history/work-summaries/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:47:08.793Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: Rust 데스크톱 자원 최적화",
-        "detail": "웹 검색 기록: Rust 데스크톱 자원 최적화 목적 Rust/Tauri 경로에서 CPU parallelism과 RAM aware preload를 실제로 구현할 때 어떤 공식 API와 crate가 적합한지 확인했다. 검색어 Tauri v2 Rust commands async state manage official docs performance Tauri v2 sidecar state Rust official docs CPU heavy task background thread Rust rayon pa",
-        "path": "_history/web-searches/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:47:08.792Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "ready",
-        "title": "사용자 요청 요약: Rust 데스크톱 자원 최적화",
-        "detail": "사용자 요청 요약: Rust 데스크톱 자원 최적화 사용자는 Workspace Monitor/source editor 계열 탭 전환이 늦게 불러오는 방식처럼 느껴진다고 지적했고, 단순 렌더 최적화가 아니라 실제 데스크톱 앱답게 Rust와 운영체제 CPU/RAM 자원을 적극 사용해 최적화하라고 요청했다. 추가 지속 요구로 구현 완료 후 사용자가 별도로 빌드하지 않도록 내부 빌드까지 자동 실행해야 한다.",
-        "path": "_history/user-requests/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:47:08.791Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "needs_attention",
-        "title": "평가: 소스 컨트롤 Playwright 스모크",
-        "detail": "평가: 소스 컨트롤 Playwright 스모크 결과 이전의 dev 서버 Playwright 검증 실패를 그대로 두지 않고, dev 서버와 static export 경로를 분리했다. Tauri가 임베드하는 static export 산출물을 기준으로 실제 Chromium 클릭 검증을 추가했다. 개발자 snapshot에서는 소스 파일 선택 드롭다운이 네이티브 <select 없이 열리고 80개 파일 항목을 보여준다. customer snapshot은 의도적으로 소스 파일이 제거되어 파일 선택 트리거가 비",
-        "path": "_history/evaluations/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:31:10.538Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: 소스 컨트롤 Playwright 스모크",
-        "detail": "요청 결과 추적: 소스 컨트롤 Playwright 스모크 요청 사용자는 이전 검증 한계 설명을 받아들이지 않고, 가능한 데스크톱/운영체제 자원을 사용해 소스 컨트롤 불편함과 기본 드롭다운 문제를 끝까지 검증하라고 요구했다. 결과 원인 분리: Next dev 서버 Playwright 경로에서는 snapshot fetch가 시작되지 않아 Loading workspace snapshot 에 머물렀다. 실제 산출물 검증: Tauri가 임베드하는 out/ 정적 export를 로컬 static server로",
-        "path": "_history/request-traces/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:31:10.537Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: 소스 컨트롤 Playwright 스모크",
-        "detail": "작업 요약: 소스 컨트롤 Playwright 스모크 변경 workspace monitor 에 smoke:source controls 스크립트를 추가했다. 스모크는 out/ 정적 export를 임시 디렉터리에 복사하고 개발자 snapshot을 주입한 뒤 Chromium에서 소스 화면을 연다. 스모크는 네이티브 <select 제거, 공용 버튼 프리미티브 수, 파일 선택 트리거 활성화, 메뉴 오픈, 파일 항목 수, 컨트롤 크기, 페이지 에러 부재를 확인한다. 기존 tool studio.test.mjs ",
-        "path": "_history/work-summaries/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:31:10.537Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-source-controls-playwright-smoke-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 06 Source Controls Playwright Smoke",
-        "detail": "{ \"task\": \"source controls playwright smoke\", \"date\": \"2026 06 06\", \"timings\": { \"phase\": \"web first intake\", \"elapsed minutes\": 2, \"notes\": \"Checked official Next.js and Playwright documentation relevant to hydration/static export and click verification.\" }, { \"phase\": \"dev serv",
-        "path": "_history/work-timings/2026/2026-06-06-source-controls-playwright-smoke.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:31:10.536Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: 소스 컨트롤 Playwright 스모크",
-        "detail": "웹 검색 기록: 소스 컨트롤 Playwright 스모크 날짜: 2026 06 06 작업: Next dev 검증 한계 분리와 정적 export 기반 Playwright 스모크 추가 검색 Next.js app router client component useEffect not running hydration official docs Next.js static export output export official docs app router Playwright page waitForSelector of",
-        "path": "_history/web-searches/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:31:10.535Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: 소스 컨트롤 실제 실행 검증",
-        "detail": "사용자 요청 요약: 소스 컨트롤 실제 실행 검증 날짜: 2026 06 06 범위: platform desktop app/renderer/workspace monitor 요지 사용자는 데스크톱 앱의 장점을 살려 운영체제 자원과 메모리를 적극 사용하고, 탭 이동 지연, 사이드바 잘림, 코드 편집 불편함, 기본 버튼/드롭다운 느낌을 전반적으로 개선하라고 요구했다. 후속으로 이전 검증 한계를 받아들이지 말고 가능한 자원을 써서 실제로 끝까지 확인하라고 요구했다. 이번 기록의 초점 이전 구현 중 Playw",
-        "path": "_history/user-requests/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:31:10.535Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-05-source-workbench-control-primitives-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 05 Source Workbench Control Primitives",
-        "detail": "{ \"task\": \"source workbench control primitives\", \"date\": \"2026 06 05\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first and local inspection\", \"approx minutes\": 12 }, { \"phase\": \"implementation\", \"approx minutes\": 28 }, { \"phase\": \"tests and package build\", \"approx minut",
-        "path": "_history/work-timings/2026/2026-06-05-source-workbench-control-primitives.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T13:52:28.067Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-source-workbench-control-primitives-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "평가: 소스 워크벤치 컨트롤 프리미티브",
-        "detail": "평가: 소스 워크벤치 컨트롤 프리미티브 결과 사용자가 지적한 소스 작업 화면의 기본 선택 드롭다운을 제거하고 Radix DropdownMenu 기반 커스텀 파일 선택기로 교체했다. 명령성 버튼은 공용 Button / ActionGroup 으로 통일해 기본 브라우저 버튼처럼 보이는 문제를 줄였다. CSS 계약과 정적 테스트가 새 구조를 고정한다. 구현 후 내부 .app / .dmg 패키지 빌드와 검증까지 완료했다. 검증 corepack pnpm dir platform desktop app/rende",
-        "path": "_history/evaluations/2026/2026-06-05-source-workbench-control-primitives.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T13:52:28.067Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-05-source-workbench-control-primitives-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "ready",
-        "title": "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브",
-        "detail": "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브 요청 기본 버튼/기본 선택 드롭다운처럼 보이는 소스 작업 UI를 수정. 구현 완료 후 자동 빌드. 결과 소스 파일 선택 드롭다운은 Radix DropdownMenu로 교체. 파일 작업/툴바/워크벤치 탭/탐색기 명령 버튼은 공용 Button / ActionGroup 사용. 기존 소스 편집 UX 요구사항과 스펙에 새 요구사항 REQ DESKTOP UX 2026 06 05 004 추가. 고객용 렌더러 빌드와 내부 Tauri .app / .dmg 패키지 ",
-        "path": "_history/request-traces/2026/2026-06-05-source-workbench-control-primitives.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T13:52:28.066Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -22651,9 +22644,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 42531,
-      "lineCount": 1078,
-      "updatedAt": "2026-06-05T18:23:38.051Z",
+      "sizeBytes": 43116,
+      "lineCount": 1094,
+      "updatedAt": "2026-06-05T18:38:27.477Z",
       "truncated": true,
       "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { execFileSync } from \"node:child_process\";\n\nimport {\n  checkDesktopBuildPipeline,\n  desktopBuildPipelineRequiredFiles\n} from \"./readiness/desktop-build-pipeline.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nconst requiredFiles = [\n  \"README.md\",\n  \"README.ko.md\",\n  \"README.en.md\",\n  \"package.json\",\n  \"configs/desktop-distribution-registry.json\",\n  \"configs/product-feature-registry.json\",\n  \"configs/product-gap-registry.json\",\n  \"configs/claude-code-design-transfer-registry.json\",\n  \"configs/reference-platform-advantage-registry.json\",\n  \"configs/runtime-data-boundary-registry.json\",\n  \"configs/service-readiness-registry.json\",\n  \"configs/macos-execution-profile.json\",\n  \"configs/windows-execution-profile.json\",\n  \"configs/user-flow-registry.json\",\n  \"runtime-contracts/installer-shell-runtime-contract.json\",\n  \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n  \"runtime-contracts/installer-shell-bootstrap.en.md\",\n  \"renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx\",\n  \"renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx\",\n  \"rend",
       "previewBytes": 1200
@@ -22885,9 +22878,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 46692,
-      "lineCount": 1072,
-      "updatedAt": "2026-06-05T18:24:31.633Z",
+      "sizeBytes": 47289,
+      "lineCount": 1081,
+      "updatedAt": "2026-06-05T18:38:27.478Z",
       "truncated": true,
       "preview": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/paths.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/definitions.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/runner.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts",
       "previewBytes": 1200
@@ -23360,7 +23353,7 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 13
+        "documentsCount": 12
       },
       {
         "category": "web-search",
@@ -23370,7 +23363,7 @@
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 13
+        "documentsCount": 11
       },
       {
         "category": "plan",
@@ -23380,12 +23373,12 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 30
+        "documentsCount": 32
       },
       {
         "category": "daily-history",
         "root": "_history/2026",
-        "documentsCount": 0
+        "documentsCount": 1
       }
     ]
   },
@@ -23474,7 +23467,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 73,
+        "documentCount": 72,
         "sourceFileCount": 5
       },
       {
@@ -23615,7 +23608,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-scripts-check-readiness-mjs",
         "label": "Large source surface",
-        "signal": "1,078 lines in platform-desktop-app/scripts/check-readiness.mjs",
+        "signal": "1,094 lines in platform-desktop-app/scripts/check-readiness.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23624,7 +23617,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,072 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,081 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23662,16 +23655,16 @@
         "path": "platform-desktop-app/scripts/check-readiness.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1078,
-        "sizeBytes": 42531,
+        "lineCount": 1094,
+        "sizeBytes": 43116,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1072,
-        "sizeBytes": 46692,
+        "lineCount": 1081,
+        "sizeBytes": 47289,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       }
     ]
@@ -26627,6 +26620,7 @@
   },
   "categories": [
     "agent-config",
+    "daily-history",
     "evaluation",
     "plan",
     "project-config",
