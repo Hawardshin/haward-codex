@@ -1,18 +1,20 @@
 :root {
   color-scheme: light;
-  --bg: #f6f7f9;
+  --bg: #f5f5f7;
   --surface: #ffffff;
-  --surface-muted: #edf1f5;
-  --surface-raised: #fbfcfe;
-  --surface-panel: #f8fafc;
+  --surface-muted: #eef0f4;
+  --surface-raised: #fbfbfd;
+  --surface-panel: #f7f8fb;
   --surface-elevated: #ffffff;
-  --line: #d8e0ea;
-  --line-subtle: #e7edf4;
-  --line-strong: #9aa9ba;
-  --line-accent: #81d6be;
-  --text: #17202a;
-  --text-secondary: #435161;
-  --text-tertiary: #667789;
+  --surface-glass: rgba(255, 255, 255, 0.78);
+  --surface-chrome: rgba(255, 255, 255, 0.66);
+  --line: #d5d9e2;
+  --line-subtle: #e8ebf1;
+  --line-strong: #a8b0bd;
+  --line-accent: #7cc9b7;
+  --text: #1d1d1f;
+  --text-secondary: #515864;
+  --text-tertiary: #737b88;
   --text-inverse: #ffffff;
   --muted: var(--text-secondary);
   --text-on-dark: var(--text-inverse);
@@ -20,19 +22,19 @@
   --rail-active: rgba(255, 255, 255, 0.11);
   --titlebar-bg: rgba(246, 247, 249, 0.94);
   --overlay: rgba(17, 24, 39, 0.38);
-  --green: #047857;
-  --blue: #245fc5;
-  --amber: #a45f08;
-  --red: #b42318;
-  --violet: #6d43b8;
+  --green: #008f6a;
+  --blue: #0066cc;
+  --amber: #a05a00;
+  --red: #c9342b;
+  --violet: #6852d6;
   --slate: #475569;
   --rose: #b73570;
   --mint-soft: #e4f7ee;
   --peach-soft: #fff0df;
   --accent-primary: var(--blue);
-  --accent-primary-strong: #1d4f9d;
-  --accent-primary-soft: #e9f1ff;
-  --accent-primary-border: #9eb7e8;
+  --accent-primary-strong: #004e9f;
+  --accent-primary-soft: #eaf3ff;
+  --accent-primary-border: #9cc7f4;
   --accent-success-soft: #e4f7ee;
   --accent-warning-soft: #fff3d7;
   --accent-danger-soft: #fff0f0;
@@ -49,33 +51,34 @@
   --status-danger-border: #e5b4b1;
   --status-danger-text: #9f1d17;
   --control-bg: var(--surface);
-  --control-bg-hover: #f3f6fa;
-  --control-selected-bg: #17202c;
+  --control-bg-hover: #f1f3f7;
+  --control-selected-bg: var(--accent-primary);
   --control-selected-fg: var(--text-inverse);
-  --control-selected-border: var(--line-strong);
-  --action-primary-bg: var(--control-selected-bg);
+  --control-selected-border: #78b6f2;
+  --action-primary-bg: var(--accent-primary);
   --action-primary-fg: var(--control-selected-fg);
-  --action-primary-border: var(--control-selected-border);
+  --action-primary-border: var(--accent-primary);
   --focus-ring: color-mix(in srgb, var(--accent-primary) 74%, #ffffff 10%);
   --focus-ring-inset: color-mix(in srgb, var(--accent-primary) 68%, #ffffff 16%);
-  --terminal-bg: #101923;
-  --terminal-surface: #111827;
-  --terminal-surface-raised: #17212d;
-  --terminal-input-bg: #0d1117;
-  --terminal-border: #303b49;
-  --terminal-border-strong: #5f7488;
-  --terminal-fg: #d7e0ea;
-  --terminal-muted: #aab7c5;
-  --terminal-accent: #58a6ff;
+  --terminal-bg: #11151c;
+  --terminal-surface: #151b23;
+  --terminal-surface-raised: #1b232e;
+  --terminal-input-bg: #0b0f14;
+  --terminal-border: #303844;
+  --terminal-border-strong: #667180;
+  --terminal-fg: #edf2f7;
+  --terminal-muted: #b6c0cc;
+  --terminal-accent: #6cb6ff;
   --scroll-scope-bg: color-mix(in srgb, var(--surface) 82%, var(--surface-muted) 18%);
   --scroll-scope-border: color-mix(in srgb, var(--line) 76%, transparent);
   --scrollbar-track: color-mix(in srgb, var(--surface-muted) 68%, transparent);
   --scrollbar-thumb: #b5c2d1;
   --scrollbar-thumb-hover: #8798aa;
-  --soft-shadow: 0 4px 12px rgba(31, 41, 51, 0.06);
-  --shell-shadow: 0 18px 44px rgba(17, 24, 39, 0.08);
-  --focus-shadow: 0 20px 54px rgba(17, 24, 39, 0.12);
-  --control-shadow: 0 1px 1px rgba(17, 24, 39, 0.06);
+  --soft-shadow: 0 1px 2px rgba(17, 24, 39, 0.04), 0 8px 24px rgba(17, 24, 39, 0.05);
+  --shell-shadow: 0 1px 2px rgba(17, 24, 39, 0.04), 0 18px 48px rgba(17, 24, 39, 0.08);
+  --focus-shadow: 0 1px 2px rgba(17, 24, 39, 0.05), 0 24px 64px rgba(17, 24, 39, 0.1);
+  --control-shadow: 0 1px 1px rgba(17, 24, 39, 0.04);
+  --hairline-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
   --control-hit-size: 40px;
   --control-target-size: 44px;
   --control-compact-target-size: 40px;
@@ -127,15 +130,17 @@
 
 .desktop-app-root.theme-dark {
   color-scheme: dark;
-  --bg: #0f141b;
-  --surface: #171e27;
-  --surface-muted: #222b36;
-  --surface-raised: #1c2430;
-  --surface-panel: #151b24;
-  --surface-elevated: #1a222d;
-  --line: #344252;
-  --line-subtle: #273341;
-  --line-strong: #6f8196;
+  --bg: #0f1115;
+  --surface: #171a20;
+  --surface-muted: #222631;
+  --surface-raised: #1b2029;
+  --surface-panel: #151922;
+  --surface-elevated: #1d222b;
+  --surface-glass: rgba(27, 32, 41, 0.78);
+  --surface-chrome: rgba(22, 26, 34, 0.72);
+  --line: #343a46;
+  --line-subtle: #272d37;
+  --line-strong: #747d8c;
   --line-accent: #58d5b6;
   --text: #ffffff;
   --text-secondary: #d7deea;
@@ -145,11 +150,11 @@
   --rail-active: rgba(255, 255, 255, 0.12);
   --titlebar-bg: rgba(15, 20, 27, 0.94);
   --overlay: rgba(0, 0, 0, 0.54);
-  --green: #66d9b1;
-  --blue: #8ab8ff;
-  --amber: #f7c66f;
-  --red: #ff9a96;
-  --violet: #c8b6ff;
+  --green: #6ee7bf;
+  --blue: #0a84ff;
+  --amber: #ffd166;
+  --red: #ff8f8b;
+  --violet: #b8a6ff;
   --slate: #d7deea;
   --rose: #f6a7c7;
   --mint-soft: color-mix(in srgb, var(--surface-raised) 82%, var(--green) 12%);
@@ -175,12 +180,12 @@
   --status-danger-text: #ffc7c4;
   --control-bg: var(--surface);
   --control-bg-hover: #25303d;
-  --control-selected-bg: #eff6ff;
-  --control-selected-fg: #0b1220;
-  --control-selected-border: #9ec5fe;
-  --action-primary-bg: #eff6ff;
-  --action-primary-fg: #0b1220;
-  --action-primary-border: #9ec5fe;
+  --control-selected-bg: #005db8;
+  --control-selected-fg: #ffffff;
+  --control-selected-border: #2e8bf0;
+  --action-primary-bg: #005db8;
+  --action-primary-fg: #ffffff;
+  --action-primary-border: #2e8bf0;
   --focus-ring: #ffffff;
   --focus-ring-inset: #ffffff;
   --terminal-bg: #0d1117;
@@ -197,24 +202,27 @@
   --scrollbar-track: color-mix(in srgb, var(--surface-muted) 62%, transparent);
   --scrollbar-thumb: #526276;
   --scrollbar-thumb-hover: #718399;
-  --soft-shadow: 0 6px 18px rgba(0, 0, 0, 0.26);
-  --shell-shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
-  --focus-shadow: 0 28px 72px rgba(0, 0, 0, 0.38);
+  --soft-shadow: 0 1px 2px rgba(0, 0, 0, 0.34), 0 12px 34px rgba(0, 0, 0, 0.24);
+  --shell-shadow: 0 1px 2px rgba(0, 0, 0, 0.36), 0 24px 64px rgba(0, 0, 0, 0.32);
+  --focus-shadow: 0 1px 2px rgba(0, 0, 0, 0.38), 0 30px 78px rgba(0, 0, 0, 0.36);
   --control-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  --hairline-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 @media (prefers-color-scheme: dark) {
   .desktop-app-root.theme-system {
     color-scheme: dark;
-    --bg: #0f141b;
-    --surface: #171e27;
-    --surface-muted: #222b36;
-    --surface-raised: #1c2430;
-    --surface-panel: #151b24;
-    --surface-elevated: #1a222d;
-    --line: #344252;
-    --line-subtle: #273341;
-    --line-strong: #6f8196;
+    --bg: #0f1115;
+    --surface: #171a20;
+    --surface-muted: #222631;
+    --surface-raised: #1b2029;
+    --surface-panel: #151922;
+    --surface-elevated: #1d222b;
+    --surface-glass: rgba(27, 32, 41, 0.78);
+    --surface-chrome: rgba(22, 26, 34, 0.72);
+    --line: #343a46;
+    --line-subtle: #272d37;
+    --line-strong: #747d8c;
     --line-accent: #58d5b6;
     --text: #ffffff;
     --text-secondary: #d7deea;
@@ -224,11 +232,11 @@
     --rail-active: rgba(255, 255, 255, 0.12);
     --titlebar-bg: rgba(15, 20, 27, 0.94);
     --overlay: rgba(0, 0, 0, 0.54);
-    --green: #66d9b1;
-    --blue: #8ab8ff;
-    --amber: #f7c66f;
-    --red: #ff9a96;
-    --violet: #c8b6ff;
+    --green: #6ee7bf;
+    --blue: #0a84ff;
+    --amber: #ffd166;
+    --red: #ff8f8b;
+    --violet: #b8a6ff;
     --slate: #d7deea;
     --rose: #f6a7c7;
     --mint-soft: color-mix(in srgb, var(--surface-raised) 82%, var(--green) 12%);
@@ -254,12 +262,12 @@
     --status-danger-text: #ffc7c4;
     --control-bg: var(--surface);
     --control-bg-hover: #25303d;
-    --control-selected-bg: #eff6ff;
-    --control-selected-fg: #0b1220;
-    --control-selected-border: #9ec5fe;
-    --action-primary-bg: #eff6ff;
-    --action-primary-fg: #0b1220;
-    --action-primary-border: #9ec5fe;
+    --control-selected-bg: #005db8;
+    --control-selected-fg: #ffffff;
+    --control-selected-border: #2e8bf0;
+    --action-primary-bg: #005db8;
+    --action-primary-fg: #ffffff;
+    --action-primary-border: #2e8bf0;
     --focus-ring: #ffffff;
     --focus-ring-inset: #ffffff;
     --terminal-bg: #0d1117;
@@ -276,10 +284,11 @@
     --scrollbar-track: color-mix(in srgb, var(--surface-muted) 62%, transparent);
     --scrollbar-thumb: #526276;
     --scrollbar-thumb-hover: #718399;
-    --soft-shadow: 0 6px 18px rgba(0, 0, 0, 0.26);
-    --shell-shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
-    --focus-shadow: 0 28px 72px rgba(0, 0, 0, 0.38);
+    --soft-shadow: 0 1px 2px rgba(0, 0, 0, 0.34), 0 12px 34px rgba(0, 0, 0, 0.24);
+    --shell-shadow: 0 1px 2px rgba(0, 0, 0, 0.36), 0 24px 64px rgba(0, 0, 0, 0.32);
+    --focus-shadow: 0 1px 2px rgba(0, 0, 0, 0.38), 0 30px 78px rgba(0, 0, 0, 0.36);
     --control-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    --hairline-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
 }
 
@@ -13499,6 +13508,138 @@ h3 {
     min-height: 0;
     overflow: visible;
   }
+}
+
+/* Premium visual-system pass: shared material, hierarchy, and control polish. */
+.desktop-app-root {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-muted) 62%, var(--bg) 38%) 0%, var(--bg) 48%, var(--bg) 100%),
+    var(--bg);
+}
+
+.desktop-titlebar {
+  background: var(--surface-chrome);
+  border-bottom-color: color-mix(in srgb, var(--line) 62%, transparent);
+  backdrop-filter: blur(22px) saturate(1.15);
+}
+
+.activity-rail {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--rail-bg) 92%, #ffffff 4%), var(--rail-bg)),
+    var(--rail-bg);
+}
+
+.activity-rail button:hover,
+.activity-rail button.active {
+  background: color-mix(in srgb, var(--rail-active) 82%, var(--line-accent) 10%);
+}
+
+.activity-rail .activity-brand {
+  border-color: color-mix(in srgb, var(--line-accent) 54%, rgba(255, 255, 255, 0.24));
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--line-accent) 86%, #ffffff 6%), color-mix(in srgb, var(--line-accent) 70%, var(--rail-bg) 30%));
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.22), 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+.ui-button,
+.titlebar-context-strip button,
+.agent-chat-actions button,
+.tool-builder-actions button,
+.tool-python-source-actions button,
+.tool-environment-actions button,
+.tool-venv-actions button,
+.tool-deploy-actions button {
+  border-color: color-mix(in srgb, var(--line) 86%, transparent);
+  box-shadow: var(--control-shadow), var(--hairline-shadow);
+}
+
+.ui-button-primary,
+.agent-chat-actions .primary-action-button,
+.home-focus-card button,
+.tool-python-source-actions button[data-tool-python-source-action="terminal"],
+.tool-environment-actions button[data-tool-environment-action="create"],
+.tool-environment-actions button[data-tool-environment-action="install"],
+.tool-venv-actions button[data-tool-venv-action="terminal"],
+.tool-deploy-actions button[data-tool-deploy-action="publish"] {
+  box-shadow: 0 1px 1px color-mix(in srgb, var(--accent-primary) 28%, transparent), 0 10px 24px color-mix(in srgb, var(--accent-primary) 16%, transparent);
+}
+
+.workspace-switcher,
+.sidebar-context-panel,
+.settings-dialog,
+.settings-pane,
+.workspace-home-panel,
+.run-timeline-panel,
+.decision-dock-panel,
+.home-metrics-strip,
+.capability-dock-panel,
+.home-recent-panel,
+.workspace-home-actions button,
+.workspace-home-actions a,
+.home-focus-card,
+.home-navigation-dock,
+.agent-chat-workspace,
+.agent-chat-composer,
+.panel,
+.core-function-panel,
+.mode-switchboard-panel,
+.claude-transfer-panel,
+.philosophy-feature-panel,
+.intent-map-panel,
+.action-evidence-panel,
+.search-agent-run-panel,
+.agent-factory-wizard-panel,
+.learning-feedback-panel,
+.tool-studio-shell,
+.tool-studio-side-pane > section,
+.tool-builder-workbench,
+.tool-environment-workbench,
+.tool-venv-manager,
+.tool-deploy-workbench,
+.collaboration-summary article,
+.collaboration-lane,
+.collaboration-lane article,
+.agent-workload-strip article,
+.agent-flow-map article,
+.agent-map article {
+  border-color: color-mix(in srgb, var(--line) 82%, transparent);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-glass) 92%, var(--surface-elevated) 8%), color-mix(in srgb, var(--surface-raised) 96%, var(--surface-muted) 4%)),
+    var(--surface-raised);
+  box-shadow: var(--soft-shadow), var(--hairline-shadow);
+}
+
+.agent-collaboration-scene-shell,
+.tool-agent-scene-panel,
+.terminal-output-panel,
+.cli-session-panel {
+  border-color: color-mix(in srgb, var(--terminal-border) 86%, transparent);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--terminal-surface) 86%, var(--terminal-accent) 4%), var(--terminal-bg)),
+    var(--terminal-bg);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 18px 48px rgba(1, 4, 9, 0.18);
+}
+
+.agent-collaboration-scene-hud,
+.agent-character-identity,
+.agent-collaboration-identity-strip span,
+.tool-agent-legend span {
+  border-color: rgba(237, 242, 247, 0.2);
+  background: rgba(17, 21, 28, 0.74);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.18), 0 10px 26px rgba(0, 0, 0, 0.2);
+}
+
+.home-focus-command {
+  border-color: color-mix(in srgb, var(--accent-primary-border) 42%, var(--line) 58%);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--surface-panel) 90%, var(--accent-primary) 6%), color-mix(in srgb, var(--surface-panel) 92%, var(--green) 5%)),
+    var(--surface-panel);
+  box-shadow: var(--shell-shadow), var(--hairline-shadow);
+}
+
+.home-focus-command::before {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-primary), color-mix(in srgb, var(--green) 76%, var(--accent-primary) 24%), transparent);
 }
 
 @media (max-width: 720px) {

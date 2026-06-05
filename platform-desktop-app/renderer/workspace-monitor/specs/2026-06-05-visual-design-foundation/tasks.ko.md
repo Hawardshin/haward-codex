@@ -8,4 +8,7 @@
 - [x] static test 계약 추가
 - [x] check/build/perf/visual smoke 검증
 - [x] 평가, 요청 추적, 작업 요약 기록
+- [x] Apple HIG 기반 hierarchy/harmony/consistency 검색과 대범위 분해 기록
+- [x] light/dark token, chrome/glass surface, repeated panel, primary button, 3D/terminal dark surface premium pass 적용
+- [x] desktop home, desktop Agents 3D, mobile Tool Studio screenshot smoke 검증
 - [ ] 커밋 및 push

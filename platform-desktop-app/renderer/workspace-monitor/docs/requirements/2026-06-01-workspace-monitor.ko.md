@@ -84,6 +84,8 @@
 | REQ-WM-071 | Tool Studio 소스는 하나의 거대 컴포넌트 안에 타입, 정적 카탈로그 데이터, UI 렌더링, 3D effect를 모두 섞어두지 않아야 한다. 최소한 public 타입과 정적 Tool Studio catalog는 별도 모듈로 분리하고, 기존 `ToolStudioPanel` export와 mode request 계약은 호환되게 유지해야 한다. | must | Tool Studio module separation static test, type re-export test, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 | REQ-WM-072 | 에이전트 협업 캐릭터는 단순 원통/구 조합이 아니라 역할과 상태를 읽을 수 있는 일관된 로봇형 실루엣을 가져야 한다. Agents 협업 장면과 Tool Studio 캐릭터 맵은 visor, chest/status detail, role halo 같은 공통 디자인 언어를 공유하되, 애니메이션은 산만하지 않고 기존 reduce-motion/offscreen pause 계약을 유지해야 한다. | must | character design static test, desktop/mobile Browser canvas smoke, nonblank screenshot QA, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 | REQ-WM-073 | 에이전트 협업 캐릭터는 너무 현실적이거나 딱딱한 장비처럼 보이면 안 되며, 동물형 마스코트처럼 귀엽고 추상적인 실루엣을 가져야 한다. 귀, 볼, 작은 muzzle, 꼬리 같은 soft detail은 추가할 수 있지만 털/해부학/과한 표정 연출은 피하고, 상태/역할 정보와 성능 계약은 유지해야 한다. | must | cute mascot character static test, desktop/mobile Browser canvas smoke, nonblank screenshot QA, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run perf:budget` 확인 |
+| REQ-WM-074 | 에이전트 협업 캐릭터는 작은 크기에서도 사용자가 어떤 에이전트인지 쉽게 알 수 있도록 agent code, compact name label, mode legend를 제공해야 하며, label은 3D 장면과 Tool Studio 캐릭터 맵에서 화면을 가리거나 overflow를 만들면 안 된다. | must | agent identity label static test, desktop/mobile Playwright label smoke, nonblank canvas QA, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
+| REQ-WM-075 | 데스크톱 제품 UI는 Apple Human Interface Guidelines의 hierarchy, harmony, consistency 방향을 참고해 앱 셸, rail, titlebar, 반복 panel, dark 3D/terminal surface, primary control에 절제된 neutral material, 선명한 foreground, 통일된 border/shadow/control token을 적용해야 하며 JS 초기 비용이나 모바일 overflow를 늘리면 안 된다. | must | premium visual token static review, desktop/mobile Playwright screenshot smoke, canvas nonblank QA, `pnpm test`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 
 ## 범위
 
@@ -147,6 +149,8 @@
 - 전체 페이지, rail, 설정, 터미널, 소스 탐색, Tool Studio 내부 영역의 범위별 스크롤과 절제된 scrollbar 색상/성능 계약
 - Tool Studio public 타입과 정적 catalog data의 별도 모듈화, 기존 export 호환성 유지
 - Agents 협업 장면과 Tool Studio 캐릭터 맵의 공통 로봇형 캐릭터 디자인 언어
+- Agents 협업 장면과 Tool Studio 캐릭터 맵에서 작은 크기로도 역할을 읽을 수 있는 identity label/legend
+- Apple HIG 참고 기준의 hierarchy, harmony, consistency를 반영한 neutral material, dark foreground, 반복 surface/control token
 - Vercel 배포 문서
 
 ## 제외 범위

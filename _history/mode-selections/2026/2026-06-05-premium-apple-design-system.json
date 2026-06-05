@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-06-05",
+  "request": "Apple HIG를 찾아보고 Workspace Monitor 디자인을 고급스럽게 정돈",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "UI source, requirements, spec, validation artifacts changed. No new dependency or installer work was required.",
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-premium-apple-design-system.json"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-06-05",
+  "work_item": "premium-apple-design-system",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "requirements": [
+    "REQ-WM-074",
+    "REQ-WM-075"
+  ],
+  "implementation_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-visual-design-foundation/"
+  ],
+  "validation": [
+    {
+      "command": "corepack pnpm --filter workspace-monitor test",
+      "status": "passed",
+      "notes": "46 tests passed"
+    },
+    {
+      "command": "corepack pnpm --filter workspace-monitor run check",
+      "status": "passed",
+      "notes": "scroll_contract_ok, source_control_design_ok"
+    },
+    {
+      "command": "corepack pnpm --filter workspace-monitor run build",
+      "status": "passed"
+    },
+    {
+      "command": "corepack pnpm --filter workspace-monitor run perf:budget",
+      "status": "passed",
+      "notes": "largest initial chunk 734386 bytes / 1000000 bytes"
+    },
+    {
+      "command": "corepack pnpm --filter workspace-monitor run build:customer",
+      "status": "passed"
+    },
+    {
+      "command": "Playwright static export visual smoke",
+      "status": "passed",
+      "notes": "desktop home, desktop Agents 3D, mobile Tool Studio overflowX 0; primary heights 44-48px; canvas nonblank"
+    }
+  ],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-05-premium-apple-design-system.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-05-premium-apple-design-system.ko.md"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-06-05",
+  "work_item": "premium-apple-design-system",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "resource": "python3 http.server",
+      "port": 3367,
+      "purpose": "static export Playwright visual QA",
+      "status": "stopped",
+      "cleanup": "sent KeyboardInterrupt after screenshots and metrics were collected"
+    },
+    {
+      "resource": "Playwright Chromium",
+      "purpose": "desktop/mobile screenshot and canvas nonblank smoke",
+      "status": "closed",
+      "cleanup": "browser.close() executed in script"
+    }
+  ],
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-05-premium-apple-design-system.json"
+  ]
+}
