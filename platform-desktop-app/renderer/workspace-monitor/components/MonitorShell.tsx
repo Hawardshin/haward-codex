@@ -418,6 +418,17 @@ type ProviderModelCatalogReport = {
   error?: string | null;
 };
 
+type ProviderActionKind = "refresh" | "setup" | "login" | "docs" | "save" | "clear" | "models" | "use";
+
+type ProviderActionFeedback = {
+  providerId: string;
+  action: ProviderActionKind;
+  tone: "error" | "success" | "info";
+  message: string;
+};
+
+const providerPanelFeedbackId = "__provider_accounts_panel__";
+
 type ProviderCredentialInputState = {
   accountHint: string;
   secret: string;
@@ -2923,6 +2934,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [providerCredentialBusy, setProviderCredentialBusy] = useState("");
   const [providerCredentialNotice, setProviderCredentialNotice] = useState("");
   const [providerCredentialError, setProviderCredentialError] = useState("");
+  const [providerActionFeedback, setProviderActionFeedback] = useState<ProviderActionFeedback | null>(null);
   const [providerModelCatalog, setProviderModelCatalog] = useState<ProviderModelCatalogReport | null>(null);
   const [providerModelBusy, setProviderModelBusy] = useState(false);
   const [providerModelBusyProviderId, setProviderModelBusyProviderId] = useState("");
@@ -3879,15 +3891,22 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const openExecutionSettings = useCallback((subsectionId: SettingsSubsectionId = "quick") => {
     openSettingsTab("execution", subsectionId);
   }, [openSettingsTab]);
-  async function refreshProviderModels(providerId = searchAgentRunForm.providerId) {
+  async function refreshProviderModels(providerId = searchAgentRunForm.providerId, userInitiated = false) {
     const provider =
       providerCredentials.providers.find((item) => item.providerId === providerId) ||
       fallbackProviderCredentialReport.providers.find((item) => item.providerId === providerId) ||
       providerCredentials.providers[0] ||
       fallbackProviderCredentialReport.providers[0];
     if (!provider) {
+      const message = uiLanguage === "ko" ? "선택할 모델 제공자가 없습니다." : "No model provider is available.";
       setProviderModelCatalog(null);
-      setProviderModelError(uiLanguage === "ko" ? "선택할 모델 제공자가 없습니다." : "No model provider is available.");
+      setProviderModelError(message);
+      setProviderActionFeedback({
+        providerId: providerPanelFeedbackId,
+        action: "models",
+        tone: "error",
+        message
+      });
       return;
     }
 
@@ -3919,6 +3938,21 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       };
       setProviderModelCatalog(fallbackReport);
       setProviderModelError(fallbackReport.error || "");
+      if (fallbackReport.error) {
+        setProviderActionFeedback({
+          providerId: provider.providerId,
+          action: "models",
+          tone: "error",
+          message: fallbackReport.error
+        });
+      } else if (userInitiated) {
+        setProviderActionFeedback({
+          providerId: provider.providerId,
+          action: "models",
+          tone: "success",
+          message: uiLanguage === "ko" ? `${provider.label} 기본 모델을 확인했습니다.` : `${provider.label} default model checked.`
+        });
+      }
       setProviderModelBusy(false);
       setProviderModelBusyProviderId("");
       return;
@@ -3928,6 +3962,21 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       const report = await tauriInvoke<ProviderModelCatalogReport>("list_provider_models", { providerId: provider.providerId });
       setProviderModelCatalog(report);
       setProviderModelError(report.error || "");
+      if (report.error) {
+        setProviderActionFeedback({
+          providerId: provider.providerId,
+          action: "models",
+          tone: "error",
+          message: report.error
+        });
+      } else if (userInitiated) {
+        setProviderActionFeedback({
+          providerId: provider.providerId,
+          action: "models",
+          tone: "success",
+          message: uiLanguage === "ko" ? `${provider.label} 모델 목록을 확인했습니다.` : `${provider.label} model list checked.`
+        });
+      }
       const suggestedModel = report.models[0]?.id || report.defaultModel || provider.defaultModel;
       if (suggestedModel && !searchAgentRunForm.model.trim()) {
         setSearchAgentRunForm((current) =>
@@ -3955,6 +4004,12 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         error: String(modelError)
       });
       setProviderModelError(String(modelError));
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: "models",
+        tone: "error",
+        message: String(modelError)
+      });
     } finally {
       setProviderModelBusy(false);
       setProviderModelBusyProviderId("");
@@ -3963,8 +4018,15 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const refreshProviderCredentials = async () => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
+      const message = uiLanguage === "ko" ? "네이티브 런타임에서만 계정을 저장할 수 있습니다." : "Provider credentials can only be saved in the native runtime.";
       setProviderCredentials(fallbackProviderCredentialReport);
-      setProviderCredentialError(uiLanguage === "ko" ? "네이티브 런타임에서만 계정을 저장할 수 있습니다." : "Provider credentials can only be saved in the native runtime.");
+      setProviderCredentialError(message);
+      setProviderActionFeedback({
+        providerId: providerPanelFeedbackId,
+        action: "refresh",
+        tone: "error",
+        message
+      });
       return;
     }
     setProviderCredentialBusy("refresh");
@@ -3973,15 +4035,33 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       setProviderCredentials(report);
       setProviderCredentialInputs((current) => providerInputsFromReport(report, current));
       setProviderCredentialError("");
-      setProviderCredentialNotice(uiLanguage === "ko" ? "계정 연결 상태를 새로고침했습니다." : "Provider account status refreshed.");
+      const message = uiLanguage === "ko" ? "계정 연결 상태를 새로고침했습니다." : "Provider account status refreshed.";
+      setProviderCredentialNotice(message);
+      setProviderActionFeedback({
+        providerId: providerPanelFeedbackId,
+        action: "refresh",
+        tone: "success",
+        message
+      });
       void refreshProviderModels(searchAgentRunForm.providerId);
     } catch (credentialError) {
-      setProviderCredentialError(String(credentialError));
+      const message = String(credentialError);
+      setProviderCredentialError(message);
+      setProviderActionFeedback({
+        providerId: providerPanelFeedbackId,
+        action: "refresh",
+        tone: "error",
+        message
+      });
     } finally {
       setProviderCredentialBusy("");
     }
   };
   const updateProviderCredentialInput = (providerId: string, field: keyof ProviderCredentialInputState, value: string) => {
+    setProviderActionFeedback((current) =>
+      current?.providerId === providerId && current.action === "save" ? null : current
+    );
+    setProviderCredentialError("");
     setProviderCredentialInputs((current) => ({
       ...current,
       [providerId]: {
@@ -3995,15 +4075,36 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     const tauriInvoke = getTauriInvoke();
     const input = providerCredentialInputs[provider.providerId] || { accountHint: "", secret: "" };
     if (provider.authMethod === "local_http") {
-      setProviderCredentialNotice(uiLanguage === "ko" ? `${provider.label}는 API 키 저장 없이 로컬 런타임으로 사용합니다.` : `${provider.label} uses the local runtime without saving an API key.`);
+      const message = uiLanguage === "ko" ? `${provider.label}는 API 키 저장 없이 로컬 런타임으로 사용합니다.` : `${provider.label} uses the local runtime without saving an API key.`;
+      setProviderCredentialNotice(message);
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: "save",
+        tone: "info",
+        message
+      });
       return;
     }
     if (!tauriInvoke) {
-      setProviderCredentialError(uiLanguage === "ko" ? "네이티브 앱에서만 저장할 수 있습니다." : "Save is available only in the native app.");
+      const message = uiLanguage === "ko" ? "네이티브 앱에서만 저장할 수 있습니다." : "Save is available only in the native app.";
+      setProviderCredentialError(message);
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: "save",
+        tone: "error",
+        message
+      });
       return;
     }
     if (!input.secret.trim()) {
-      setProviderCredentialError(uiLanguage === "ko" ? `${provider.label} API 키를 입력하세요.` : `Enter a ${provider.label} API key.`);
+      const message = uiLanguage === "ko" ? `${provider.label} API 키를 입력하세요.` : `Enter a ${provider.label} API key.`;
+      setProviderCredentialError(message);
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: "save",
+        tone: "error",
+        message
+      });
       return;
     }
     setProviderCredentialBusy(`save:${provider.providerId}`);
@@ -4025,9 +4126,23 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         }
       }));
       setProviderCredentialError("");
-      setProviderCredentialNotice(uiLanguage === "ko" ? `${provider.label} 연결 정보를 저장했습니다.` : `${provider.label} credentials saved.`);
+      const message = uiLanguage === "ko" ? `${provider.label} 연결 정보를 저장했습니다.` : `${provider.label} credentials saved.`;
+      setProviderCredentialNotice(message);
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: "save",
+        tone: "success",
+        message
+      });
     } catch (credentialError) {
-      setProviderCredentialError(String(credentialError));
+      const message = String(credentialError);
+      setProviderCredentialError(message);
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: "save",
+        tone: "error",
+        message
+      });
     } finally {
       setProviderCredentialBusy("");
     }
@@ -4035,11 +4150,25 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const clearProviderCredential = async (provider: ProviderCredentialSummary) => {
     const tauriInvoke = getTauriInvoke();
     if (provider.authMethod === "local_http") {
-      setProviderCredentialNotice(uiLanguage === "ko" ? `${provider.label}는 삭제할 API 키가 없습니다.` : `${provider.label} has no API key to clear.`);
+      const message = uiLanguage === "ko" ? `${provider.label}는 삭제할 API 키가 없습니다.` : `${provider.label} has no API key to clear.`;
+      setProviderCredentialNotice(message);
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: "clear",
+        tone: "info",
+        message
+      });
       return;
     }
     if (!tauriInvoke) {
-      setProviderCredentialError(uiLanguage === "ko" ? "네이티브 앱에서만 삭제할 수 있습니다." : "Clear is available only in the native app.");
+      const message = uiLanguage === "ko" ? "네이티브 앱에서만 삭제할 수 있습니다." : "Clear is available only in the native app.";
+      setProviderCredentialError(message);
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: "clear",
+        tone: "error",
+        message
+      });
       return;
     }
     setProviderCredentialBusy(`clear:${provider.providerId}`);
@@ -4053,9 +4182,23 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         [provider.providerId]: { accountHint: "", secret: "" }
       }));
       setProviderCredentialError("");
-      setProviderCredentialNotice(uiLanguage === "ko" ? `${provider.label} 연결을 삭제했습니다.` : `${provider.label} credentials cleared.`);
+      const message = uiLanguage === "ko" ? `${provider.label} 연결을 삭제했습니다.` : `${provider.label} credentials cleared.`;
+      setProviderCredentialNotice(message);
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: "clear",
+        tone: "success",
+        message
+      });
     } catch (credentialError) {
-      setProviderCredentialError(String(credentialError));
+      const message = String(credentialError);
+      setProviderCredentialError(message);
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: "clear",
+        tone: "error",
+        message
+      });
     } finally {
       setProviderCredentialBusy("");
     }
@@ -4065,6 +4208,12 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     const fallbackUrl = purpose === "login" ? provider.loginUrl : purpose === "docs" ? provider.docsUrl : provider.setupUrl;
     if (!tauriInvoke) {
       window.open(fallbackUrl, "_blank", "noopener,noreferrer");
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: purpose,
+        tone: "info",
+        message: uiLanguage === "ko" ? `${provider.label} 링크를 브라우저에서 열었습니다.` : `${provider.label} link opened in the browser.`
+      });
       return;
     }
     setProviderCredentialBusy(`open:${provider.providerId}:${purpose}`);
@@ -4074,8 +4223,21 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         purpose
       });
       setProviderCredentialError("");
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: purpose,
+        tone: "success",
+        message: uiLanguage === "ko" ? `${provider.label} 링크를 열었습니다.` : `${provider.label} link opened.`
+      });
     } catch (credentialError) {
-      setProviderCredentialError(String(credentialError));
+      const message = String(credentialError);
+      setProviderCredentialError(message);
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: purpose,
+        tone: "error",
+        message
+      });
       window.open(fallbackUrl, "_blank", "noopener,noreferrer");
     } finally {
       setProviderCredentialBusy("");
@@ -5762,6 +5924,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                         busy={providerCredentialBusy}
                         notice={providerCredentialNotice}
                         error={providerCredentialError}
+                        actionFeedback={providerActionFeedback}
                         runtimeAvailable={Boolean(getTauriInvoke())}
                         providerModelBusy={providerModelBusy}
                         providerModelBusyProviderId={providerModelBusyProviderId}
@@ -5773,7 +5936,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                         onInputChange={updateProviderCredentialInput}
                         onOpenUrl={openProviderAuthUrl}
                         onRefresh={refreshProviderCredentials}
-                        onRefreshModels={refreshProviderModels}
+                        onRefreshModels={(providerId) => refreshProviderModels(providerId, true)}
                         onSave={saveProviderCredential}
                         onUseProvider={(provider, modelId) => {
                           setSearchAgentRunForm((current) => ({
@@ -5786,6 +5949,14 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                               ? `${provider.label}를 에이전트 작업 기본값으로 선택했습니다.`
                               : `${provider.label} selected as the agent work default.`
                           );
+                          setProviderActionFeedback({
+                            providerId: provider.providerId,
+                            action: "use",
+                            tone: "success",
+                            message: uiLanguage === "ko"
+                              ? `${provider.label}를 에이전트 작업 기본값으로 선택했습니다.`
+                              : `${provider.label} selected as the agent work default.`
+                          });
                         }}
                       />
                     )}
@@ -8010,6 +8181,7 @@ function ProviderAccountsPanel({
   busy,
   notice,
   error,
+  actionFeedback,
   runtimeAvailable,
   providerModelBusy,
   providerModelBusyProviderId,
@@ -8031,6 +8203,7 @@ function ProviderAccountsPanel({
   busy: string;
   notice: string;
   error: string;
+  actionFeedback: ProviderActionFeedback | null;
   runtimeAvailable: boolean;
   providerModelBusy: boolean;
   providerModelBusyProviderId: string;
@@ -8106,6 +8279,9 @@ function ProviderAccountsPanel({
         modelCatalog: "모델",
         modelFallback: "기본 모델만 표시",
         noProviders: "해당 조건의 제공자가 없습니다.",
+        errorBadge: "오류",
+        doneBadge: "완료",
+        infoBadge: "상태",
         source: "source",
         key: "key",
         notSaved: "저장 안 됨"
@@ -8168,6 +8344,9 @@ function ProviderAccountsPanel({
         modelCatalog: "Models",
         modelFallback: "Default model only",
         noProviders: "No providers match this filter.",
+        errorBadge: "Error",
+        doneBadge: "Done",
+        infoBadge: "Info",
         source: "source",
         key: "key",
         notSaved: "Not saved"
@@ -8199,6 +8378,28 @@ function ProviderAccountsPanel({
     { icon: KeyRound, label: copy.saveKeyStep, detail: copy.saveKeyDetail },
     { icon: Bot, label: copy.verifyModel, detail: copy.verifyModelDetail }
   ];
+  const feedbackFor = (providerId: string, action: ProviderActionKind) =>
+    actionFeedback?.providerId === providerId && actionFeedback.action === action ? actionFeedback : null;
+  const feedbackBadge = (feedback: ProviderActionFeedback | null) => {
+    if (!feedback) {
+      return null;
+    }
+    const label = feedback.tone === "error" ? copy.errorBadge : feedback.tone === "success" ? copy.doneBadge : copy.infoBadge;
+    return <span className={`provider-button-status status-${feedback.tone}`} aria-hidden="true">{label}</span>;
+  };
+  const feedbackClass = (feedback: ProviderActionFeedback | null) =>
+    feedback ? `has-provider-status status-${feedback.tone}` : "";
+  const ariaForAction = (label: string, feedback: ProviderActionFeedback | null) =>
+    feedback ? `${label}: ${feedback.message}` : label;
+  const panelStatusMessage = actionFeedback?.message || error || notice || (!runtimeAvailable ? copy.nativeOnly : "");
+  const refreshFeedback = feedbackFor(providerPanelFeedbackId, "refresh") || (!runtimeAvailable
+    ? {
+        providerId: providerPanelFeedbackId,
+        action: "refresh" as const,
+        tone: "error" as const,
+        message: copy.nativeOnly
+      }
+    : null);
 
   return (
     <section className="settings-pane wide provider-accounts-pane">
@@ -8249,9 +8450,17 @@ function ProviderAccountsPanel({
           <span>{copy.storage}</span>
           <code>{report.credentialFilePath || copy.nativeOnly}</code>
         </article>
-        <button type="button" onClick={onRefresh} disabled={busy !== ""}>
+        <button
+          type="button"
+          className={feedbackClass(refreshFeedback)}
+          onClick={onRefresh}
+          disabled={busy !== ""}
+          title={refreshFeedback?.message || undefined}
+          aria-label={ariaForAction(copy.refresh, refreshFeedback)}
+        >
           <Activity size={15} aria-hidden="true" />
           <span>{copy.refresh}</span>
+          {feedbackBadge(refreshFeedback)}
         </button>
       </div>
 
@@ -8275,9 +8484,9 @@ function ProviderAccountsPanel({
         </div>
       </div>
 
-      {!runtimeAvailable && <p className="desktop-error">{copy.nativeOnly}</p>}
-      {notice && <p className="decision-resume-notice">{notice}</p>}
-      {error && <p className="desktop-error">{error}</p>}
+      <div className="provider-action-live-region" role={error ? "alert" : "status"} aria-live={error ? "assertive" : "polite"} aria-atomic="true">
+        {panelStatusMessage}
+      </div>
 
       <div className="provider-account-list">
         {visibleProviders.length === 0 && <p className="empty-state">{copy.noProviders}</p>}
@@ -8290,6 +8499,21 @@ function ProviderAccountsPanel({
           const catalogForProvider = providerModelCatalog?.providerId === provider.providerId ? providerModelCatalog : null;
           const preferredModel = catalogForProvider?.models[0]?.id || catalogForProvider?.defaultModel || provider.defaultModel;
           const selectedForWork = selectedProviderId === provider.providerId;
+          const setupFeedback = feedbackFor(provider.providerId, "setup");
+          const loginFeedback = feedbackFor(provider.providerId, "login");
+          const docsFeedback = feedbackFor(provider.providerId, "docs");
+          const saveFeedback = feedbackFor(provider.providerId, "save");
+          const clearFeedback = feedbackFor(provider.providerId, "clear");
+          const useFeedback = feedbackFor(provider.providerId, "use");
+          const modelErrorForProvider = catalogForProvider?.error || (catalogForProvider && providerModelError ? providerModelError : "");
+          const modelFeedback = feedbackFor(provider.providerId, "models") || (modelErrorForProvider
+            ? {
+                providerId: provider.providerId,
+                action: "models" as const,
+                tone: "error" as const,
+                message: modelErrorForProvider
+              }
+            : null);
           const connectionSource = localRuntime
             ? copy.localReady
             : provider.credentialSource === "app_config_file"
@@ -8362,45 +8586,85 @@ function ProviderAccountsPanel({
                 </div>
               )}
               <div className="provider-account-actions">
-                <button type="button" onClick={() => onOpenUrl(provider, "setup")}>
+                <button
+                  type="button"
+                  className={feedbackClass(setupFeedback)}
+                  onClick={() => onOpenUrl(provider, "setup")}
+                  title={setupFeedback?.message || undefined}
+                  aria-label={ariaForAction(localRuntime ? copy.installLocal : copy.setup, setupFeedback)}
+                >
                   <ExternalLink size={15} aria-hidden="true" />
                   <span>{localRuntime ? copy.installLocal : copy.setup}</span>
-                </button>
-                <button type="button" onClick={() => onOpenUrl(provider, "login")}>
-                  <ExternalLink size={15} aria-hidden="true" />
-                  <span>{localRuntime ? copy.installLocal : copy.login}</span>
-                </button>
-                <button type="button" onClick={() => onOpenUrl(provider, "docs")}>
-                  <BookOpenText size={15} aria-hidden="true" />
-                  <span>{copy.docs}</span>
-                </button>
-                <button type="button" onClick={() => onRefreshModels(provider.providerId)} disabled={providerModelBusy || busy !== ""}>
-                  <RefreshCw size={15} aria-hidden="true" />
-                  <span>{modelChecking ? copy.refreshingModels : copy.refreshModels}</span>
+                  {feedbackBadge(setupFeedback)}
                 </button>
                 <button
                   type="button"
+                  className={feedbackClass(loginFeedback)}
+                  onClick={() => onOpenUrl(provider, "login")}
+                  title={loginFeedback?.message || undefined}
+                  aria-label={ariaForAction(localRuntime ? copy.installLocal : copy.login, loginFeedback)}
+                >
+                  <ExternalLink size={15} aria-hidden="true" />
+                  <span>{localRuntime ? copy.installLocal : copy.login}</span>
+                  {feedbackBadge(loginFeedback)}
+                </button>
+                <button
+                  type="button"
+                  className={feedbackClass(docsFeedback)}
+                  onClick={() => onOpenUrl(provider, "docs")}
+                  title={docsFeedback?.message || undefined}
+                  aria-label={ariaForAction(copy.docs, docsFeedback)}
+                >
+                  <BookOpenText size={15} aria-hidden="true" />
+                  <span>{copy.docs}</span>
+                  {feedbackBadge(docsFeedback)}
+                </button>
+                <button
+                  type="button"
+                  className={feedbackClass(modelFeedback)}
+                  onClick={() => onRefreshModels(provider.providerId)}
+                  disabled={providerModelBusy || busy !== ""}
+                  title={modelFeedback?.message || undefined}
+                  aria-label={ariaForAction(copy.refreshModels, modelFeedback)}
+                >
+                  <RefreshCw size={15} aria-hidden="true" />
+                  <span>{modelChecking ? copy.refreshingModels : copy.refreshModels}</span>
+                  {feedbackBadge(modelFeedback)}
+                </button>
+                <button
+                  type="button"
+                  className={feedbackClass(saveFeedback)}
                   onClick={() => onSave(provider)}
-                  disabled={localRuntime || !runtimeAvailable || busy !== "" || !input.secret.trim()}
+                  disabled={localRuntime || !runtimeAvailable || busy !== ""}
+                  title={saveFeedback?.message || undefined}
+                  aria-label={ariaForAction(saving ? copy.saving : copy.save, saveFeedback)}
                 >
                   <KeyRound size={15} aria-hidden="true" />
                   <span>{saving ? copy.saving : copy.save}</span>
+                  {feedbackBadge(saveFeedback)}
                 </button>
                 <button
                   type="button"
+                  className={feedbackClass(clearFeedback)}
                   onClick={() => onClear(provider)}
                   disabled={localRuntime || !runtimeAvailable || busy !== "" || provider.credentialSource !== "app_config_file"}
+                  title={clearFeedback?.message || undefined}
+                  aria-label={ariaForAction(clearing ? copy.clearing : copy.clear, clearFeedback)}
                 >
                   <Trash2 size={15} aria-hidden="true" />
                   <span>{clearing ? copy.clearing : copy.clear}</span>
+                  {feedbackBadge(clearFeedback)}
                 </button>
                 <button
                   type="button"
-                  className={selectedForWork ? "active" : ""}
+                  className={`${selectedForWork ? "active" : ""} ${feedbackClass(useFeedback)}`.trim()}
                   onClick={() => onUseProvider(provider, preferredModel)}
+                  title={useFeedback?.message || undefined}
+                  aria-label={ariaForAction(selectedForWork ? copy.usingForWork : copy.useForWork, useFeedback)}
                 >
                   <Bot size={15} aria-hidden="true" />
                   <span>{selectedForWork ? copy.usingForWork : copy.useForWork}</span>
+                  {feedbackBadge(useFeedback)}
                 </button>
               </div>
               {catalogForProvider && (
@@ -8431,10 +8695,6 @@ function ProviderAccountsPanel({
                     ))}
                   </div>
                 </div>
-              )}
-              {catalogForProvider?.error && <p className="provider-storage-warning">{catalogForProvider.error}</p>}
-              {providerModelError && catalogForProvider && !catalogForProvider.error && (
-                <p className="provider-storage-warning">{providerModelError}</p>
               )}
               <small>{provider.caution}</small>
             </article>

@@ -1,0 +1,103 @@
+{
+  "date": "2026-06-06",
+  "topic": "Provider account action feedback without layout shift",
+  "reference_config_paths": [
+    "agent-platform/configs/research/research-agent-profile.json"
+  ],
+  "technology_stack": [
+    "React",
+    "TypeScript",
+    "CSS",
+    "Tauri existing commands"
+  ],
+  "technology_official_docs": [
+    "https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html",
+    "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-live",
+    "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/status_role"
+  ],
+  "stack_version_constraints": [
+    "Use the existing workspace-monitor renderer stack.",
+    "Do not add a new UI dependency or native command for this narrow feedback change."
+  ],
+  "source_types": [
+    "official_docs",
+    "local_source_code",
+    "local_tests"
+  ],
+  "language_options": [
+    {
+      "language": "TypeScript/React",
+      "fit": "Best fit because the feedback is renderer state tied to existing provider buttons."
+    },
+    {
+      "language": "Rust/Tauri",
+      "fit": "Not selected because native command behavior does not need to change."
+    }
+  ],
+  "selected_language": "TypeScript/React with CSS",
+  "language_decision_notes": "Provider errors are already produced by renderer command handlers; TypeScript state and CSS can express the UI contract without changing Rust storage or command APIs.",
+  "architecture_reference_sources": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "architecture_options": [
+    {
+      "option": "Global toast/status system",
+      "decision": "Rejected for this slice",
+      "reason": "Too broad and would not directly tie the error to the button the user pressed."
+    },
+    {
+      "option": "Provider/action-local feedback state",
+      "decision": "Selected",
+      "reason": "Smallest scoped change; it keeps the error on the relevant button and avoids inserting visible layout text."
+    }
+  ],
+  "architecture_theory_sources": [
+    "WCAG error identification guidance",
+    "ARIA live region guidance"
+  ],
+  "architecture_practitioner_sources": [
+    "Existing provider settings panel and renderer tests"
+  ],
+  "architecture_decision_notes": "Button-local state plus a hidden live region satisfies visual stability and accessibility without broad UI migration.",
+  "architecture_tradeoff_notes": [
+    "A small badge is less verbose than a paragraph, so the full message is exposed through title and aria-label.",
+    "The pattern is currently scoped to provider settings; global error design can be handled later."
+  ],
+  "folder_structure_options": [
+    {
+      "option": "Create a new feedback component folder",
+      "decision": "Rejected",
+      "reason": "The behavior is narrow and local to ProviderAccountsPanel."
+    },
+    {
+      "option": "Keep feedback helpers inside ProviderAccountsPanel",
+      "decision": "Selected",
+      "reason": "Avoids abstraction before reuse and keeps the change easy to audit."
+    }
+  ],
+  "folder_structure_decision_notes": "No source folder was created; only scoped renderer, CSS, tests, and project/history artifacts changed.",
+  "folder_semantics_notes": "Provider action feedback remains part of the provider accounts settings surface.",
+  "maintainability_notes": [
+    "Readiness tokens prevent removing the local feedback contract silently.",
+    "Renderer tests check that visible provider error paragraphs do not return."
+  ],
+  "code_reference_sources": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/scripts/check-readiness.mjs"
+  ],
+  "code_reference_notes": [
+    "Existing provider credential handlers were reused.",
+    "CSS reserves badge space from the initial render to prevent size shifts."
+  ],
+  "issue_discussion_sources": [],
+  "issue_discussion_notes": "No high-signal issue/discussion source was needed for this local UI contract.",
+  "community_signal_notes": "Not used as factual evidence.",
+  "post_research_questions": {
+    "what_changed_the_plan": "Accessibility references reinforced using a hidden live region rather than fully removing status text.",
+    "what_risks_remain": "Only provider settings uses this pattern today.",
+    "what_validation_is_required": "Renderer tests, readiness, Browser layout smoke, and internal package build."
+  }
+}

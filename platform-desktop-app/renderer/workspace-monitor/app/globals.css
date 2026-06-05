@@ -1880,6 +1880,7 @@ main {
 }
 
 .provider-accounts-pane {
+  position: relative;
   gap: 14px;
 }
 
@@ -1981,11 +1982,13 @@ main {
 }
 
 .provider-account-summary button {
+  position: relative;
   display: inline-flex;
   min-height: var(--control-target-size);
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
+  padding-right: calc(9px + 18px);
   font-weight: 850;
 }
 
@@ -2236,6 +2239,77 @@ main {
   box-shadow: var(--choice-shadow);
   padding: 8px var(--control-padding-x);
   font-weight: 850;
+}
+
+.provider-account-actions button {
+  position: relative;
+  min-width: 112px;
+  justify-content: center;
+  padding: 8px calc(var(--control-padding-x) + 18px) 8px var(--control-padding-x);
+}
+
+.provider-account-summary button.status-error,
+.provider-account-actions button.status-error {
+  border-color: color-mix(in srgb, var(--red) 56%, var(--line) 44%);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 88%, var(--red) 7%), color-mix(in srgb, var(--surface-muted) 88%, var(--red) 8%));
+}
+
+.provider-account-summary button.status-success,
+.provider-account-actions button.status-success {
+  border-color: color-mix(in srgb, var(--green) 42%, var(--line) 58%);
+}
+
+.provider-account-summary button.status-info,
+.provider-account-actions button.status-info {
+  border-color: color-mix(in srgb, var(--blue) 42%, var(--line) 58%);
+}
+
+.provider-button-status {
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  z-index: 1;
+  max-width: calc(100% - 8px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-raised);
+  color: var(--muted);
+  padding: 1px 5px;
+  font-size: 9px;
+  font-weight: 950;
+  line-height: 1.2;
+  pointer-events: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.provider-button-status.status-error {
+  border-color: color-mix(in srgb, var(--red) 54%, var(--line) 46%);
+  background: color-mix(in srgb, var(--surface-raised) 78%, var(--red) 16%);
+  color: var(--red);
+}
+
+.provider-button-status.status-success {
+  border-color: color-mix(in srgb, var(--green) 42%, var(--line) 58%);
+  background: color-mix(in srgb, var(--surface-raised) 80%, var(--green) 12%);
+  color: var(--green);
+}
+
+.provider-button-status.status-info {
+  border-color: color-mix(in srgb, var(--blue) 38%, var(--line) 62%);
+  background: color-mix(in srgb, var(--surface-raised) 82%, var(--blue) 10%);
+  color: var(--blue);
+}
+
+.provider-action-live-region {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .provider-account-actions button:hover:not(:disabled),

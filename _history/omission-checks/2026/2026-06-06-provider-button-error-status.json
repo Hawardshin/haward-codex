@@ -1,0 +1,38 @@
+{
+  "date": "2026-06-06",
+  "request_summary": "Show provider action errors on buttons without visible text pushing layout.",
+  "checked_items": [
+    {
+      "item": "Web-first intake completed",
+      "status": "done"
+    },
+    {
+      "item": "Requirements and spec artifacts created",
+      "status": "done"
+    },
+    {
+      "item": "Provider action errors moved from visible text paragraphs to button-local feedback",
+      "status": "done"
+    },
+    {
+      "item": "Button status badge space reserved to avoid layout shift",
+      "status": "done"
+    },
+    {
+      "item": "Hidden live region retained for accessibility",
+      "status": "done"
+    },
+    {
+      "item": "Renderer/platform tests run",
+      "status": "done"
+    },
+    {
+      "item": "Collect/check/browser/internal package build run",
+      "status": "done"
+    }
+  ],
+  "known_gaps": [
+    "Pattern is scoped to provider accounts settings, not every error surface in the app."
+  ],
+  "resume_action": "Commit and push the completed change set."
+}

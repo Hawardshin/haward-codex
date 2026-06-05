@@ -8,6 +8,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
 
 const monitorShell = fs.readFileSync(path.join(projectRoot, "components", "MonitorShell.tsx"), "utf8");
+const providerPanelSource = monitorShell.slice(
+  monitorShell.indexOf("function ProviderAccountsPanel"),
+  monitorShell.indexOf("function DesktopRuntimePanel")
+);
 const motionHelpers = fs.readFileSync(path.join(projectRoot, "lib", "motion.ts"), "utf8");
 const operatorCenterDialog = fs.readFileSync(
   path.join(projectRoot, "components", "features", "OperatorCenterDialog.tsx"),
@@ -185,13 +189,22 @@ test("Provider account settings expose guided login and model setup controls", (
   assert.match(monitorShell, /AI 로그인 설정/);
   assert.match(monitorShell, /provider-login-guide/);
   assert.match(monitorShell, /provider-filter-choice/);
+  assert.match(monitorShell, /ProviderActionFeedback/);
+  assert.match(monitorShell, /actionFeedback=\{providerActionFeedback\}/);
+  assert.match(providerPanelSource, /feedbackBadge/);
+  assert.match(providerPanelSource, /provider-button-status/);
+  assert.match(providerPanelSource, /provider-action-live-region/);
+  assert.match(providerPanelSource, /has-provider-status/);
   assert.match(monitorShell, /onRefreshModels\(provider\.providerId\)/);
   assert.match(monitorShell, /onUseProvider\(provider, preferredModel\)/);
-  assert.match(monitorShell, /className=\{selectedForWork \? "active" : ""\}/);
   assert.match(css, /\.provider-login-guide \{/);
   assert.match(css, /\.provider-filter-choice button\.active,/);
   assert.match(css, /\.provider-model-strip \{/);
   assert.match(css, /\.provider-model-chip-list button\.active/);
+  assert.match(css, /\.provider-button-status \{[\s\S]*?position: absolute;/);
+  assert.match(css, /\.provider-action-live-region \{[\s\S]*?position: absolute;[\s\S]*?width: 1px;/);
+  assert.doesNotMatch(providerPanelSource, /\{error && <p className="desktop-error">\{error\}<\/p>\}/);
+  assert.doesNotMatch(providerPanelSource, /\{notice && <p className="decision-resume-notice">\{notice\}<\/p>\}/);
 });
 
 test("Choice and search controls have compact tonal hierarchy", () => {

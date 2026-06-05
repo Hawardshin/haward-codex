@@ -1,0 +1,55 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-06-provider-button-error-status",
+  "title": "Keep provider button positions stable while showing errors on buttons",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "started_at": null,
+  "ended_at": "2026-06-06T05:26:03+0900",
+  "measurement_note": "Timing record was created after implementation began, so phases are recorded as completed or pending but not measured.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Checked WCAG and MDN guidance for error identification and live regions."
+    },
+    {
+      "phase_id": "source_inventory",
+      "label": "Source inventory",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Inspected ProviderAccountsPanel, provider action handlers, CSS, and renderer tests."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Added provider/action feedback state, button badges, hidden live region, and reserved badge spacing."
+    },
+    {
+      "phase_id": "unit_tests",
+      "label": "Unit tests",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Renderer and platform tests passed after updating provider UI expectations."
+    },
+    {
+      "phase_id": "full_validation",
+      "label": "Collect, check, browser, package",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Collect, renderer/platform checks, Browser layout smoke, and internal package build passed."
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "package_internal",
+    "interpretation": "Internal desktop packaging is expected to be the slowest final validation phase.",
+    "improvement_candidates": [
+      "Keep renderer tests focused on stable UI contracts before packaging.",
+      "Use browser layout smoke to catch visual regressions before Tauri bundling."
+    ]
+  }
+}

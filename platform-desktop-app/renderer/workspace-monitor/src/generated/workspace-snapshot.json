@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T20:07:29.677Z",
+  "generatedAt": "2026-06-05T20:27:42.105Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -12,12 +12,12 @@
     "tasks": 71,
     "completedTasks": 71,
     "documents": 650,
-    "requirements": 458,
-    "evaluations": 31,
+    "requirements": 462,
+    "evaluations": 30,
     "webSearches": 12,
-    "timingRecords": 11,
+    "timingRecords": 12,
     "historyDays": 1,
-    "adminHistoryDocuments": 2424,
+    "adminHistoryDocuments": 2435,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7412,6 +7412,30 @@
       "requirement": "선택 UI는 접근성 의미를 잃지 않도록 role=\"listbox\" 와 role=\"option\" 또는 Radix menu primitive를 사용해야 한다.",
       "priority": "should",
       "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-native-select-replacement.ko.md"
+    },
+    {
+      "id": "REQ-PDA-131",
+      "requirement": "Provider 설정 오류와 작업 결과는 별도 문단으로 레이아웃을 밀지 않고, 해당 액션 버튼 내부 상태로 표시해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-provider-button-error-status.ko.md"
+    },
+    {
+      "id": "REQ-PDA-132",
+      "requirement": "오류, 성공, 정보 상태가 생겨도 provider 액션 버튼의 위치와 크기는 안정적으로 유지되어야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-provider-button-error-status.ko.md"
+    },
+    {
+      "id": "REQ-PDA-133",
+      "requirement": "화면에는 레이아웃을 밀어내는 오류 텍스트를 숨기되, 보조기술에는 상태 변화를 알릴 수 있어야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-provider-button-error-status.ko.md"
+    },
+    {
+      "id": "REQ-PDA-134",
+      "requirement": "저장, 삭제, 새로고침, 모델 확인, 공식 링크, 작업 기본값 선택 액션은 상태 회귀 방지 테스트에 포함되어야 한다.",
+      "priority": "should",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-provider-button-error-status.ko.md"
     }
   ],
   "documents": [
@@ -7425,11 +7449,315 @@
       "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 4506,
-      "updatedAt": "2026-06-05T20:06:38.615Z",
+      "sourceBytes": 5140,
+      "updatedAt": "2026-06-05T20:26:24.795Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-provider-button-error-status-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-provider-button-error-status.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Provider 버튼 오류 상태",
+      "excerpt": "요청 결과 추적: Provider 버튼 오류 상태 요청 오류 텍스트 때문에 버튼 위치가 밀리지 않고, 오류가 났을 때 버튼 자체에 표기되게 해달라는 요청. 결과 Provider action feedback state를 추가했다. Provider 액션 버튼에 오류/완료/정보 badge를 표시한다. provider 설정의 visible error/notice paragraph 삽입을 hidden live region으로 대체했다. Renderer test와 readiness token을 갱신했다. B",
+      "html": "<p>요청 결과 추적: Provider 버튼 오류 상태 요청 오류 텍스트 때문에 버튼 위치가 밀리지 않고, 오류가 났을 때 버튼 자체에 표기되게 해달라는 요청. 결과 Provider action feedback state를 추가했다. Provider 액션 버튼에 오류/완료/정보 badge를 표시한다. provider 설정의 visible error/notice paragraph 삽입을 hidden live region으로 대체했다. Renderer test와 readiness token을 갱신했다. Browser layout smoke와 internal desktop package build까지 완료했다. 산출물 platform desktop</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1337,
+      "updatedAt": "2026-06-05T20:26:24.795Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-provider-button-error-status-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-provider-button-error-status.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: Provider 버튼 오류 상태",
+      "excerpt": "평가: Provider 버튼 오류 상태 결과 Provider 설정 오류가 visible paragraph로 삽입되어 버튼 위치를 밀어내는 흐름을 제거했다. 오류/완료/정보 상태는 해당 버튼 내부 badge, tooltip title, aria label 로 연결했다. hidden live region을 둬서 화면 레이아웃은 고정하면서도 상태 변경을 보조기술에 전달한다. 검증 corepack pnpm filter workspace monitor test passed corepack pnpm filt",
+      "html": "<p>평가: Provider 버튼 오류 상태 결과 Provider 설정 오류가 visible paragraph로 삽입되어 버튼 위치를 밀어내는 흐름을 제거했다. 오류/완료/정보 상태는 해당 버튼 내부 badge, tooltip title, aria label 로 연결했다. hidden live region을 둬서 화면 레이아웃은 고정하면서도 상태 변경을 보조기술에 전달한다. 검증 corepack pnpm filter workspace monitor test passed corepack pnpm filter platform desktop app test passed corepack pnpm filter workspace monitor run c</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1087,
+      "updatedAt": "2026-06-05T20:26:24.794Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-provider-button-error-status-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-provider-button-error-status.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Provider 버튼 오류 상태",
+      "excerpt": "작업 요약: Provider 버튼 오류 상태 Provider 설정 액션의 오류/성공/정보 상태를 버튼 내부 badge로 표시하도록 변경했다. 저장/삭제/새로고침/공식 링크/모델 확인/작업 기본값 선택에 provider/action 단위 feedback을 연결했다. 문단형 오류/공지로 provider row 레이아웃이 밀리는 표시를 제거하고, hidden live region으로 접근성 알림을 유지했다. 버튼은 상태 badge 공간을 항상 예약해 오류 발생 시 위치와 크기가 바뀌지 않게 했다. Re",
+      "html": "<p>작업 요약: Provider 버튼 오류 상태 Provider 설정 액션의 오류/성공/정보 상태를 버튼 내부 badge로 표시하도록 변경했다. 저장/삭제/새로고침/공식 링크/모델 확인/작업 기본값 선택에 provider/action 단위 feedback을 연결했다. 문단형 오류/공지로 provider row 레이아웃이 밀리는 표시를 제거하고, hidden live region으로 접근성 알림을 유지했다. 버튼은 상태 badge 공간을 항상 예약해 오류 발생 시 위치와 크기가 바뀌지 않게 했다. Renderer/platform tests/check, Browser layout smoke, internal Tauri .app / .dmg pa</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 674,
+      "updatedAt": "2026-06-05T20:26:24.794Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-provider-button-error-status-json",
+      "path": "_history/work-timings/2026/2026-06-06-provider-button-error-status.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Provider Button Error Status",
+      "excerpt": "{ \"schema version\": \"2026 06 01\", \"task id\": \"2026 06 06 provider button error status\", \"title\": \"Keep provider button positions stable while showing errors on buttons\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"started at\": null, \"ended at\": \"2026 06 06T05:26:0",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 01&quot;, &quot;task id&quot;: &quot;2026 06 06 provider button error status&quot;, &quot;title&quot;: &quot;Keep provider button positions stable while showing errors on buttons&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;started at&quot;: null, &quot;ended at&quot;: &quot;2026 06 06T05:26:03+0900&quot;, &quot;measurement note&quot;: &quot;Timing record was created after implementation beg</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2174,
+      "updatedAt": "2026-06-05T20:26:24.793Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-provider-button-error-status-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-provider-button-error-status/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증: Provider 버튼 오류 상태",
+      "excerpt": "검증: Provider 버튼 오류 상태 예정 명령 corepack pnpm filter workspace monitor test corepack pnpm filter platform desktop app test corepack pnpm filter workspace monitor run collect corepack pnpm filter workspace monitor check corepack pnpm filter platform desktop app check in app Browser pr",
+      "html": "<h1>검증: Provider 버튼 오류 상태</h1>\n<h2>예정 명령</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code></li>\n<li><code>corepack pnpm --filter workspace-monitor check</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app check</code></li>\n<li>in-app Browser provider button layout smoke</li>\n<li><code>corepack pnpm run desktop:package:internal</code></li>\n</ul>\n<h2>현재 상태</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code> - passed</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code> - passed</li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code> - passed; wrote 650 inline documents and 2435 admin history records.</li>\n<li><code>corepack pnpm --filter workspace-monitor check</code> - passed.</li>\n<li><code>corepack pnpm --filter platform-desktop-app check</code> - passed.</li>\n<li><code>corepack pnpm --filter workspace-monitor build</code> - passed for static Browser smoke.</li>\n<li>in-app Browser smoke at <code>http://127.0.0.1:4173/</code> - passed. Gemini model check button gained <code>완료</code> status while relative position inside <code>.provider-account-actions</code> stayed <code>x=374.875</code>, <code>y=0</code>, <code>width=113.8203125</code>, <code>height=44</code>; visible provider error/notice paragraphs stayed 0.</li>\n<li><code>corepack pnpm run desktop:package:internal</code> - passed; generated <code>.app</code> and <code>.dmg</code>, codesign verification passed, and <code>hdiutil verify</code> reported a valid DMG checksum.</li>\n</ul>\n<h2>수동 확인 항목</h2>\n<ul>\n<li>저장 버튼을 빈 API key로 클릭해도 provider row 아래 visible error paragraph가 생기지 않는다.</li>\n<li>저장 버튼의 좌표와 크기는 오류 상태 전후로 유지된다.</li>\n<li>오류 상태는 버튼 내부 <code>provider-button-status</code> badge와 <code>aria-label</code>에 반영된다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1658,
+      "updatedAt": "2026-06-05T20:26:24.793Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-provider-button-error-status-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-provider-button-error-status/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업: Provider 버튼 오류 상태",
+      "excerpt": "작업: Provider 버튼 오류 상태 x Web first intake와 접근성/레이아웃 근거 확인 x Provider action feedback 타입과 상태 추가 x Provider credential/model/link/default 액션에 오류/성공/정보 feedback 연결 x 버튼 내부 상태 badge와 hidden live region CSS 추가 x 상태 badge 공간을 평상시부터 예약해 레이아웃 이동 방지 x renderer test와 readiness token 갱신 x co",
+      "html": "<h1>작업: Provider 버튼 오류 상태</h1>\n<ul>\n<li>[x] Web-first intake와 접근성/레이아웃 근거 확인</li>\n<li>[x] Provider action feedback 타입과 상태 추가</li>\n<li>[x] Provider credential/model/link/default 액션에 오류/성공/정보 feedback 연결</li>\n<li>[x] 버튼 내부 상태 badge와 hidden live region CSS 추가</li>\n<li>[x] 상태 badge 공간을 평상시부터 예약해 레이아웃 이동 방지</li>\n<li>[x] renderer test와 readiness token 갱신</li>\n<li>[x] collect/check/browser/package 검증 완료</li>\n<li>[x] 평가와 trace 기록 완료</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 531,
+      "updatedAt": "2026-06-05T20:26:24.792Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-provider-button-error-status-ko-md",
+      "path": "_history/plans/2026/2026-06-06-provider-button-error-status.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "계획 기록: Provider 버튼 오류 상태",
+      "excerpt": "계획 기록: Provider 버튼 오류 상태 범위 Provider 설정에서 오류/완료/정보 상태를 버튼 내부에 표시한다. 상태 텍스트가 provider row 아래에 삽입되어 버튼 위치를 밀지 않게 한다. 기존 provider credential/model command 동작은 유지한다. 실행 순서 1. 웹 접근성/레이아웃 근거와 기존 provider panel을 확인한다. 2. 요구사항, 스펙, tasks, validation, traceability를 작성한다. 3. provider actio",
+      "html": "<p>계획 기록: Provider 버튼 오류 상태 범위 Provider 설정에서 오류/완료/정보 상태를 버튼 내부에 표시한다. 상태 텍스트가 provider row 아래에 삽입되어 버튼 위치를 밀지 않게 한다. 기존 provider credential/model command 동작은 유지한다. 실행 순서 1. 웹 접근성/레이아웃 근거와 기존 provider panel을 확인한다. 2. 요구사항, 스펙, tasks, validation, traceability를 작성한다. 3. provider action feedback state와 버튼 badge를 구현한다. 4. renderer tests/readiness를 갱신한다. 5. collect/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 993,
+      "updatedAt": "2026-06-05T20:21:59.755Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-provider-button-error-status-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-provider-button-error-status.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Provider 버튼 오류 상태",
+      "excerpt": "사용자 요청 요약: Provider 버튼 오류 상태 날짜: 2026 06 06 대상: platform desktop app 요약: 사용자가 오류 텍스트 때문에 버튼 위치가 밀리지 않게 하고, 오류가 났을 때 버튼 자체에 표기하는 방식을 요청했다. 해석: Provider 계정 설정 액션의 오류/완료/정보 상태를 버튼 내부 badge와 접근성 상태로 표시하고, visible paragraph 삽입으로 인한 레이아웃 이동을 없앤다. 제외: provider 인증 방식, key 저장소, public rel",
+      "html": "<p>사용자 요청 요약: Provider 버튼 오류 상태 날짜: 2026 06 06 대상: platform desktop app 요약: 사용자가 오류 텍스트 때문에 버튼 위치가 밀리지 않게 하고, 오류가 났을 때 버튼 자체에 표기하는 방식을 요청했다. 해석: Provider 계정 설정 액션의 오류/완료/정보 상태를 버튼 내부 badge와 접근성 상태로 표시하고, visible paragraph 삽입으로 인한 레이아웃 이동을 없앤다. 제외: provider 인증 방식, key 저장소, public release signing은 변경하지 않는다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 581,
+      "updatedAt": "2026-06-05T20:21:59.755Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-provider-button-error-status-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-provider-button-error-status.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Provider 버튼 오류 상태",
+      "excerpt": "Web Search: Provider 버튼 오류 상태 날짜: 2026 06 06 작업: Provider 설정 오류를 레이아웃을 밀지 않는 버튼 내부 상태로 표시 질의 button error state avoid layout shift UX guidance WCAG error identification button status aria live avoid layout shift MDN aria live status button error message 확인한 출처 WCAG 2.2 Understand",
+      "html": "<p>Web Search: Provider 버튼 오류 상태 날짜: 2026 06 06 작업: Provider 설정 오류를 레이아웃을 밀지 않는 버튼 내부 상태로 표시 질의 button error state avoid layout shift UX guidance WCAG error identification button status aria live avoid layout shift MDN aria live status button error message 확인한 출처 WCAG 2.2 Understanding Success Criterion 3.3.1 Error Identification: https://www.w3.org/WAI/WCAG22/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1359,
+      "updatedAt": "2026-06-05T20:21:59.754Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-provider-button-error-status-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-provider-button-error-status/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적성: Provider 버튼 오류 상태",
+      "excerpt": "추적성: Provider 버튼 오류 상태 | 요구사항 | 구현 | 검증 | | | | | | REQ PDA 131 | ProviderActionFeedback , feedbackBadge , provider action buttons | tool studio.test.mjs , Browser smoke | | REQ PDA 132 | provider button status , reserved button padding | Browser bounding box check, CSS token tes",
+      "html": "<h1>추적성: Provider 버튼 오류 상태</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-131</td><td><code>ProviderActionFeedback</code>, <code>feedbackBadge</code>, provider action buttons</td><td><code>tool-studio.test.mjs</code>, Browser smoke</td></tr><tr><td>REQ-PDA-132</td><td><code>provider-button-status</code>, reserved button padding</td><td>Browser bounding box check, CSS token test</td></tr><tr><td>REQ-PDA-133</td><td><code>provider-action-live-region</code>, <code>aria-label</code> feedback</td><td>renderer test, Browser DOM check</td></tr><tr><td>REQ-PDA-134</td><td><code>check-readiness.mjs</code>, <code>readiness.test.mjs</code> tokens</td><td>platform test/check</td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 534,
+      "updatedAt": "2026-06-05T20:21:59.754Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-provider-button-error-status-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-provider-button-error-status/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "계획: Provider 버튼 오류 상태",
+      "excerpt": "계획: Provider 버튼 오류 상태 1. 기존 provider account panel의 오류/notice/model error 표시 위치를 확인한다. 2. 버튼별 action feedback state를 provider/action 단위로 설계한다. 3. 저장/삭제/새로고침/링크/모델 확인/작업 기본값 선택 흐름에서 feedback을 기록한다. 4. CSS에서 버튼 내부 badge와 hidden live region을 추가하고, 상태 공간을 상시 예약한다. 5. renderer test와 r",
+      "html": "<h1>계획: Provider 버튼 오류 상태</h1>\n<p>1. 기존 provider account panel의 오류/notice/model error 표시 위치를 확인한다.</p>\n<p>2. 버튼별 action feedback state를 provider/action 단위로 설계한다.</p>\n<p>3. 저장/삭제/새로고침/링크/모델 확인/작업 기본값 선택 흐름에서 feedback을 기록한다.</p>\n<p>4. CSS에서 버튼 내부 badge와 hidden live region을 추가하고, 상태 공간을 상시 예약한다.</p>\n<p>5. renderer test와 readiness token을 갱신한다.</p>\n<p>6. tests/check, Browser smoke, internal package build를 실행한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 560,
+      "updatedAt": "2026-06-05T20:21:59.753Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-provider-button-error-status-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-provider-button-error-status.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Provider 버튼 오류 상태 요구사항",
+      "excerpt": "Provider 버튼 오류 상태 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | REQ PDA 131 | Provider 설정 오류와 작업 결과는 별도 문단으로 레이아웃을 밀지 않고, 해당 액션 버튼 내부 상태로 표시해야 한다. | must | ProviderActionFeedback , provider button status | | REQ PDA 132 | 오류, 성공, 정보 상태가 생겨도 provider 액션 버튼의 위치와 크기는 안정적으로 유지되어야 한다. | ",
+      "html": "<h1>Provider 버튼 오류 상태 요구사항</h1>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-131</td><td>Provider 설정 오류와 작업 결과는 별도 문단으로 레이아웃을 밀지 않고, 해당 액션 버튼 내부 상태로 표시해야 한다.</td><td>must</td><td><code>ProviderActionFeedback</code>, <code>provider-button-status</code></td></tr><tr><td>REQ-PDA-132</td><td>오류, 성공, 정보 상태가 생겨도 provider 액션 버튼의 위치와 크기는 안정적으로 유지되어야 한다.</td><td>must</td><td>상태 배지 공간 예약 CSS, Browser layout smoke</td></tr><tr><td>REQ-PDA-133</td><td>화면에는 레이아웃을 밀어내는 오류 텍스트를 숨기되, 보조기술에는 상태 변화를 알릴 수 있어야 한다.</td><td>must</td><td><code>provider-action-live-region</code>, <code>role=status/alert</code></td></tr><tr><td>REQ-PDA-134</td><td>저장, 삭제, 새로고침, 모델 확인, 공식 링크, 작업 기본값 선택 액션은 상태 회귀 방지 테스트에 포함되어야 한다.</td><td>should</td><td>renderer test, readiness tokens</td></tr></tbody></table>\n<h2>범위</h2>\n<ul>\n<li>Settings provider accounts 패널의 provider별 action feedback UI를 개선한다.</li>\n<li>기존 native provider credential/model command surface는 유지한다.</li>\n<li>API key 원문을 읽거나 history/test output에 기록하지 않는다.</li>\n</ul>\n<h2>제외</h2>\n<ul>\n<li>Provider OAuth, OS keychain migration, public release signing은 이번 버튼 상태 표시 변경 범위가 아니다.</li>\n<li>다른 설정 패널의 모든 오류 표시 방식을 한 번에 통일하지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1466,
+      "updatedAt": "2026-06-05T20:21:59.752Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-provider-button-error-status-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-provider-button-error-status/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "스펙: Provider 버튼 오류 상태",
+      "excerpt": "스펙: Provider 버튼 오류 상태 목적 Provider 설정에서 오류나 완료 메시지가 별도 텍스트로 추가되어 버튼 위치를 밀어내지 않게 하고, 사용자가 누른 버튼 자체에서 상태를 즉시 확인하게 한다. 기능 범위 Provider 설정 패널에 ProviderActionFeedback 상태를 추가한다. 저장, 삭제, 새로고침, 공식 링크, 모델 확인, 작업 기본값 선택 결과를 provider/action 단위로 기록한다. 버튼 안에 절대 위치 상태 badge를 표시해 오류/완료/정보를 버튼 내부에",
+      "html": "<h1>스펙: Provider 버튼 오류 상태</h1>\n<h2>목적</h2>\n<p>Provider 설정에서 오류나 완료 메시지가 별도 텍스트로 추가되어 버튼 위치를 밀어내지 않게 하고, 사용자가 누른 버튼 자체에서 상태를 즉시 확인하게 한다.</p>\n<h2>기능 범위</h2>\n<ul>\n<li>Provider 설정 패널에 <code>ProviderActionFeedback</code> 상태를 추가한다.</li>\n<li>저장, 삭제, 새로고침, 공식 링크, 모델 확인, 작업 기본값 선택 결과를 provider/action 단위로 기록한다.</li>\n<li>버튼 안에 절대 위치 상태 badge를 표시해 오류/완료/정보를 버튼 내부에 표기한다.</li>\n<li>상태 badge 공간은 평상시부터 예약해 상태 발생 시 버튼 폭이나 위치가 바뀌지 않게 한다.</li>\n<li>시각적으로 보이는 문단형 오류/공지 대신 hidden live region으로 상태를 보조기술에 전달한다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>Provider credential 저장 방식이나 native command API를 변경하지 않는다.</li>\n<li>화면 전체 toast system을 새로 만들지 않는다.</li>\n<li>외부 provider API 검증 호출을 새로 추가하지 않는다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>빈 API key 저장 시 provider row 아래 텍스트가 추가되지 않고 저장 버튼에 오류 상태가 표시된다.</li>\n<li>모델 확인 오류는 provider model strip 위아래에 문단을 삽입하지 않고 모델 확인 버튼에 표시된다.</li>\n<li>버튼 상태 badge가 생겨도 provider action button의 bounding box가 움직이지 않는다.</li>\n<li><code>provider-action-live-region</code>은 상태 메시지를 화면에 보이지 않게 유지하되 <code>role=status</code> 또는 <code>role=alert</code>로 알린다.</li>\n<li>renderer test/readiness가 <code>ProviderActionFeedback</code>, <code>provider-button-status</code>, <code>provider-action-live-region</code>, <code>has-provider-status</code>를 검증한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1749,
+      "updatedAt": "2026-06-05T20:21:59.752Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-easy-ai-login-settings-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-easy-ai-login-settings/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록: 쉬운 AI 로그인 설정",
+      "excerpt": "작업 목록: 쉬운 AI 로그인 설정 x 공식 provider 인증/키 발급 흐름을 확인한다. x 기존 provider account UI와 Tauri command 연결점을 확인한다. x Settings provider panel에 AI 로그인 설정 가이드와 provider 필터를 추가한다. x provider card에 상태 pill, 모델 확인, 작업 기본값 선택, 모델 chip UI를 추가한다. x CSS tonal hierarchy와 compact desktop fallback을 추가한다.",
+      "html": "<h1>작업 목록: 쉬운 AI 로그인 설정</h1>\n<ul>\n<li>[x] 공식 provider 인증/키 발급 흐름을 확인한다.</li>\n<li>[x] 기존 provider account UI와 Tauri command 연결점을 확인한다.</li>\n<li>[x] Settings provider panel에 AI 로그인 설정 가이드와 provider 필터를 추가한다.</li>\n<li>[x] provider card에 상태 pill, 모델 확인, 작업 기본값 선택, 모델 chip UI를 추가한다.</li>\n<li>[x] CSS tonal hierarchy와 compact desktop fallback을 추가한다.</li>\n<li>[x] renderer test/readiness token을 추가한다.</li>\n<li>[x] full validation, collect, internal package build를 실행한다.</li>\n<li>[x] 평가, trace, commit, push를 완료한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 640,
+      "updatedAt": "2026-06-05T20:12:16.055Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-easy-ai-login-settings-json",
+      "path": "_history/work-timings/2026/2026-06-06-easy-ai-login-settings.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Easy Ai Login Settings",
+      "excerpt": "{ \"schema version\": \"2026 06 01\", \"task id\": \"2026 06 06 easy ai login settings\", \"title\": \"Improve AI provider setup settings with official login and API key flow\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"started at\": null, \"ended at\": \"2026 06 06T05:12:00+09",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 01&quot;, &quot;task id&quot;: &quot;2026 06 06 easy ai login settings&quot;, &quot;title&quot;: &quot;Improve AI provider setup settings with official login and API key flow&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;started at&quot;: null, &quot;ended at&quot;: &quot;2026 06 06T05:12:00+0900&quot;, &quot;measurement note&quot;: &quot;Timing record was created after the task began, so pha</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3079,
+      "updatedAt": "2026-06-05T20:12:04.839Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-easy-ai-login-settings-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-easy-ai-login-settings.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: 쉬운 AI 로그인 설정",
+      "excerpt": "평가: 쉬운 AI 로그인 설정 결과 사용자의 “AI 세팅을 로그인으로 쉽게” 요구를 공식 provider 흐름에 맞춰 구현했다. 가짜 WebView/OAuth가 아니라 공식 로그인/키 발급 링크, 앱 저장, 연결 상태, 모델 확인, 작업 기본값 선택을 한 설정 화면으로 묶었다. 버튼은 기존 기본 버튼 느낌을 줄이고 choice 계층, 상태 pill, model chip으로 구분했다. 검증 corepack pnpm filter workspace monitor test passed corepack p",
+      "html": "<p>평가: 쉬운 AI 로그인 설정 결과 사용자의 “AI 세팅을 로그인으로 쉽게” 요구를 공식 provider 흐름에 맞춰 구현했다. 가짜 WebView/OAuth가 아니라 공식 로그인/키 발급 링크, 앱 저장, 연결 상태, 모델 확인, 작업 기본값 선택을 한 설정 화면으로 묶었다. 버튼은 기존 기본 버튼 느낌을 줄이고 choice 계층, 상태 pill, model chip으로 구분했다. 검증 corepack pnpm filter workspace monitor test passed corepack pnpm filter workspace monitor check passed corepack pnpm filter platform desktop </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1228,
+      "updatedAt": "2026-06-05T20:11:28.464Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-easy-ai-login-settings-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-easy-ai-login-settings.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: 쉬운 AI 로그인 설정",
+      "excerpt": "요청 결과 추적: 쉬운 AI 로그인 설정 요청 사용자가 AI 설정 기능을 더 늘리고, 로그인으로 AI provider 설정을 쉽게 할 수 있도록 요청했다. 결과 Settings Core settings Account connection에 AI 로그인 설정 가이드와 provider filter를 추가했다. Provider card에 official login/key/docs, local runtime note, model check, work default selection, model chip U",
+      "html": "<p>요청 결과 추적: 쉬운 AI 로그인 설정 요청 사용자가 AI 설정 기능을 더 늘리고, 로그인으로 AI provider 설정을 쉽게 할 수 있도록 요청했다. 결과 Settings Core settings Account connection에 AI 로그인 설정 가이드와 provider filter를 추가했다. Provider card에 official login/key/docs, local runtime note, model check, work default selection, model chip UI를 추가했다. Renderer tests/readiness tokens와 requirements/spec/history records를 갱신했</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1302,
+      "updatedAt": "2026-06-05T20:11:28.464Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-easy-ai-login-settings-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-easy-ai-login-settings.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 쉬운 AI 로그인 설정",
+      "excerpt": "작업 요약: 쉬운 AI 로그인 설정 platform desktop app Settings provider accounts 화면을 AI 로그인/API key 설정 센터로 개선했다. Provider 설정 화면에 guide, filter, status pill, official login/key/docs actions, model check, agent work default selection을 추가했다. OpenAI/Anthropic/Gemini는 공식 콘솔/API key 흐름으로, Ollama는 l",
+      "html": "<p>작업 요약: 쉬운 AI 로그인 설정 platform desktop app Settings provider accounts 화면을 AI 로그인/API key 설정 센터로 개선했다. Provider 설정 화면에 guide, filter, status pill, official login/key/docs actions, model check, agent work default selection을 추가했다. OpenAI/Anthropic/Gemini는 공식 콘솔/API key 흐름으로, Ollama는 local runtime 흐름으로 분리했다. Renderer/platform tests/check, static browser smoke, int</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 538,
+      "updatedAt": "2026-06-05T20:11:28.463Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-easy-ai-login-settings-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-easy-ai-login-settings/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증: 쉬운 AI 로그인 설정",
+      "excerpt": "검증: 쉬운 AI 로그인 설정 예정 명령 corepack pnpm filter workspace monitor test corepack pnpm filter workspace monitor check corepack pnpm filter platform desktop app test corepack pnpm filter platform desktop app check corepack pnpm filter workspace monitor run collect corepack pnpm run desk",
+      "html": "<h1>검증: 쉬운 AI 로그인 설정</h1>\n<h2>예정 명령</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor check</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code></li>\n<li><code>corepack pnpm run desktop:package:internal</code></li>\n</ul>\n<h2>현재 상태</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code> - passed</li>\n<li><code>corepack pnpm --filter workspace-monitor check</code> - first run failed only because admin history lazy index had not been regenerated yet; TypeScript and renderer contract checks passed before that failure.</li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code> - passed</li>\n<li><code>corepack pnpm --filter workspace-monitor check</code> - passed after collect</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code> - first rerun failed because a model chip button rule used <code>overflow-wrap:anywhere</code>; fixed by moving long-token wrapping to an inner span.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code> - passed after fix</li>\n<li><code>corepack pnpm --filter platform-desktop-app check</code> - passed after fix</li>\n<li>in-app Browser static build smoke at <code>http://127.0.0.1:4173/</code> - passed; Settings &gt; Core settings &gt; Account connection rendered <code>AI 로그인 설정</code>, provider filters, provider rows, and model strip.</li>\n<li><code>corepack pnpm run desktop:package:internal</code> - passed; generated <code>.app</code> and <code>.dmg</code>, verified app signature and DMG checksum.</li>\n</ul>\n<h2>수동 확인 항목</h2>\n<ul>\n<li>Provider setup copy must not imply in-app OAuth where the provider only supports console/API key setup.</li>\n<li>API key inputs remain password fields and saved secrets are not echoed back into the UI.</li>\n<li>Ollama remains labeled as local runtime, not cloud account login.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1749,
+      "updatedAt": "2026-06-05T20:11:28.462Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
     },
     {
       "id": "history-plans-2026-2026-06-06-easy-ai-login-settings-ko-md",
@@ -7506,38 +7834,6 @@
       "previewMode": "document-preview",
       "htmlTruncated": false,
       "sourceBytes": 678,
-      "updatedAt": "2026-06-05T20:05:54.866Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-06-easy-ai-login-settings-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-06-easy-ai-login-settings/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록: 쉬운 AI 로그인 설정",
-      "excerpt": "작업 목록: 쉬운 AI 로그인 설정 x 공식 provider 인증/키 발급 흐름을 확인한다. x 기존 provider account UI와 Tauri command 연결점을 확인한다. x Settings provider panel에 AI 로그인 설정 가이드와 provider 필터를 추가한다. x provider card에 상태 pill, 모델 확인, 작업 기본값 선택, 모델 chip UI를 추가한다. x CSS tonal hierarchy와 compact desktop fallback을 추가한다.",
-      "html": "<h1>작업 목록: 쉬운 AI 로그인 설정</h1>\n<ul>\n<li>[x] 공식 provider 인증/키 발급 흐름을 확인한다.</li>\n<li>[x] 기존 provider account UI와 Tauri command 연결점을 확인한다.</li>\n<li>[x] Settings provider panel에 AI 로그인 설정 가이드와 provider 필터를 추가한다.</li>\n<li>[x] provider card에 상태 pill, 모델 확인, 작업 기본값 선택, 모델 chip UI를 추가한다.</li>\n<li>[x] CSS tonal hierarchy와 compact desktop fallback을 추가한다.</li>\n<li>[x] renderer test/readiness token을 추가한다.</li>\n<li>[ ] full validation, collect, internal package build를 실행한다.</li>\n<li>[ ] 평가, trace, commit, push를 완료한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 640,
-      "updatedAt": "2026-06-05T20:05:54.866Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-06-easy-ai-login-settings-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-06-easy-ai-login-settings/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증: 쉬운 AI 로그인 설정",
-      "excerpt": "검증: 쉬운 AI 로그인 설정 예정 명령 corepack pnpm filter workspace monitor test corepack pnpm filter workspace monitor check corepack pnpm filter platform desktop app test corepack pnpm filter platform desktop app check corepack pnpm filter workspace monitor run collect corepack pnpm run desk",
-      "html": "<h1>검증: 쉬운 AI 로그인 설정</h1>\n<h2>예정 명령</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor check</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code></li>\n<li><code>corepack pnpm run desktop:package:internal</code></li>\n</ul>\n<h2>현재 상태</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code> - passed</li>\n<li><code>corepack pnpm --filter workspace-monitor check</code> - first run failed only because admin history lazy index had not been regenerated yet; TypeScript and renderer contract checks passed before that failure.</li>\n</ul>\n<h2>수동 확인 항목</h2>\n<ul>\n<li>Provider setup copy must not imply in-app OAuth where the provider only supports console/API key setup.</li>\n<li>API key inputs remain password fields and saved secrets are not echoed back into the UI.</li>\n<li>Ollama remains labeled as local runtime, not cloud account login.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 943,
       "updatedAt": "2026-06-05T20:05:54.866Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
@@ -9640,38 +9936,6 @@
       "workspaceArea": "_history/request-traces"
     },
     {
-      "id": "history-plans-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
-      "path": "_history/plans/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "작업 계획: startup resident prewarm 속도 최적화",
-      "excerpt": "작업 계획: startup resident prewarm 속도 최적화 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 근거 사용자는 탭 이동 지연을 다시 지적했고, 데스크톱 앱의 RAM/CPU 활용을 요구했다. 기존 bounded resident work는 hidden mounted panel cap을 세웠지만, 첫 전환의 mount 비용은 여전히 남았다. 실",
-      "html": "<p>작업 계획: startup resident prewarm 속도 최적화 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 근거 사용자는 탭 이동 지연을 다시 지적했고, 데스크톱 앱의 RAM/CPU 활용을 요구했다. 기존 bounded resident work는 hidden mounted panel cap을 세웠지만, 첫 전환의 mount 비용은 여전히 남았다. 실행 계획 1. 공식 React/Next/MDN 문서로 memo, lazy/preload, idle task 근거를 확인한다. 2. residen</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1128,
-      "updatedAt": "2026-06-05T17:44:13.223Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: startup resident prewarm 속도 최적화",
-      "excerpt": "작업 요약: startup resident prewarm 속도 최적화 완료 내용 Workspace Monitor 시작 직후 핵심 섹션을 idle 시간에 bounded resident set으로 prewarm하도록 변경했다. overview 는 active가 아닐 때 resident retention에서 제외해 무거운 home surface가 장기 hidden tree로 남는 비용을 줄였다. Tool Studio panel을 memoized component로 감싸고 Shell에서 전달하는 이동 c",
-      "html": "<p>작업 요약: startup resident prewarm 속도 최적화 완료 내용 Workspace Monitor 시작 직후 핵심 섹션을 idle 시간에 bounded resident set으로 prewarm하도록 변경했다. overview 는 active가 아닐 때 resident retention에서 제외해 무거운 home surface가 장기 hidden tree로 남는 비용을 줄였다. Tool Studio panel을 memoized component로 감싸고 Shell에서 전달하는 이동 callback들을 stable callback으로 바꿨다. resident/prewarm 계약 테스트를 업데이트했다. renderer build</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1187,
-      "updatedAt": "2026-06-05T17:44:13.223Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-startup-resident-prewarm-speed-traceability-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-startup-resident-prewarm-speed/traceability.ko.md",
       "category": "project-spec",
@@ -9752,22 +10016,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-user-requests-2026-2026-06-06-speed-optimization-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-speed-optimization.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: 속도 최적화",
-      "excerpt": "사용자 요청 요약: 속도 최적화 원 요청 사용자는 데스크톱 앱의 탭 전환이 여전히 느리며, OS/CPU/RAM 같은 데스크톱 자원을 적극적으로 활용해 근본적으로 속도를 개선하라고 요청했다. 구현 후 매번 사용자가 직접 빌드하지 않도록 자동으로 빌드와 패키징까지 끝내는 것도 지속 요구사항이다. 해석한 수용 기준 탭 전환 시 첫 mount 지연을 줄인다. 모든 탭을 무제한 마운트해 장기 메모리 비용을 키우지 않는다. 핵심 탭은 시작 후 유휴 시간에 미리 준비한다. 불필요한 hidden rerender",
-      "html": "<p>사용자 요청 요약: 속도 최적화 원 요청 사용자는 데스크톱 앱의 탭 전환이 여전히 느리며, OS/CPU/RAM 같은 데스크톱 자원을 적극적으로 활용해 근본적으로 속도를 개선하라고 요청했다. 구현 후 매번 사용자가 직접 빌드하지 않도록 자동으로 빌드와 패키징까지 끝내는 것도 지속 요구사항이다. 해석한 수용 기준 탭 전환 시 첫 mount 지연을 줄인다. 모든 탭을 무제한 마운트해 장기 메모리 비용을 키우지 않는다. 핵심 탭은 시작 후 유휴 시간에 미리 준비한다. 불필요한 hidden rerender를 줄인다. renderer test/check/build, section performance audit, desktop test/check,</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 792,
-      "updatedAt": "2026-06-05T17:44:13.221Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
       "id": "platform-desktop-app-docs-requirements-2026-06-06-startup-resident-prewarm-speed-ko-md",
       "path": "platform-desktop-app/docs/requirements/2026-06-06-startup-resident-prewarm-speed.ko.md",
       "category": "project-doc",
@@ -9782,134 +10030,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: startup resident prewarm 속도 최적화",
-      "excerpt": "웹 검색 기록: startup resident prewarm 속도 최적화 목적 Workspace Monitor 탭 전환이 아직 느리다는 피드백에 대해, React tree 상주 수를 다시 늘리지 않으면서 시작 직후 핵심 탭을 미리 준비하는 구현 근거를 공식 문서로 확인했다. 검색어 site:react.dev/reference/react memo React official docs performance memo site:react.dev/reference/react/Profiler React off",
-      "html": "<p>웹 검색 기록: startup resident prewarm 속도 최적화 목적 Workspace Monitor 탭 전환이 아직 느리다는 피드백에 대해, React tree 상주 수를 다시 늘리지 않으면서 시작 직후 핵심 탭을 미리 준비하는 구현 근거를 공식 문서로 확인했다. 검색어 site:react.dev/reference/react memo React official docs performance memo site:react.dev/reference/react/Profiler React official docs performance site:nextjs.org/docs lazy loading dynamic import Next.js </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2848,
-      "updatedAt": "2026-06-05T17:44:13.220Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-bounded-tab-resident-performance-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-06-bounded-tab-resident-performance-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Bounded Tab Resident Performance Evaluation Input",
-      "excerpt": "{ \"initial instruction\": \"The desktop app still feels slow when switching tabs; fix the underlying performance issue and build automatically.\", \"result summary\": \"Replaced unbounded visible section resident mounting with a capped resident section window, retained source editor st",
-      "html": "<p>{ &quot;initial instruction&quot;: &quot;The desktop app still feels slow when switching tabs; fix the underlying performance issue and build automatically.&quot;, &quot;result summary&quot;: &quot;Replaced unbounded visible section resident mounting with a capped resident section window, retained source editor state, kept heavy module/data prewarm, memoized desktop/source runtime panels, add</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 4477,
-      "updatedAt": "2026-06-05T17:33:53.969Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-bounded-tab-resident-performance-resource-json",
-      "path": "_history/evaluations/2026/2026-06-06-bounded-tab-resident-performance-resource.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Bounded Tab Resident Performance Resource",
-      "excerpt": "{ \"task\": \"Bounded tab resident performance correction for Workspace Monitor.\", \"work mode\": \"standard\", \"runtime context\": \"React renderer\", \"Next.js static build\", \"Playwright Chromium\", \"Python static server\", \"Tauri/Rust build\", \"renderer memory cache\" , \"resource risks\": { \"",
-      "html": "<p>{ &quot;task&quot;: &quot;Bounded tab resident performance correction for Workspace Monitor.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;runtime context&quot;: &quot;React renderer&quot;, &quot;Next.js static build&quot;, &quot;Playwright Chromium&quot;, &quot;Python static server&quot;, &quot;Tauri/Rust build&quot;, &quot;renderer memory cache&quot; , &quot;resource risks&quot;: { &quot;risk id&quot;: &quot;hidden react tree growth&quot;, &quot;category&quot;: &quot;memory&quot;, &quot;description&quot;: &quot;Hidd</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 3579,
-      "updatedAt": "2026-06-05T17:33:53.968Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-bounded-tab-resident-performance-json",
-      "path": "_history/work-timings/2026/2026-06-06-bounded-tab-resident-performance.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Bounded Tab Resident Performance",
-      "excerpt": "{ \"task id\": \"2026 06 06 bounded tab resident performance\", \"title\": \"Bounded tab resident performance correction\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration",
-      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 bounded tab resident performance&quot;, &quot;title&quot;: &quot;Bounded tab resident performance correction&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;duration seconds&quot;: 90, &quot;measurement&quot;: &quot;estimated&quot;, &quot;bottleneck notes&quot;: &quot;Official React/N</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1631,
-      "updatedAt": "2026-06-05T17:33:34.653Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-bounded-tab-resident-performance-omission-json",
-      "path": "_history/evaluations/2026/2026-06-06-bounded-tab-resident-performance-omission.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Bounded Tab Resident Performance Omission",
-      "excerpt": "{ \"task\": \"Bounded tab resident performance correction for Workspace Monitor.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"reduce tab lag\", \"description\": \"Address continued slow tab switching with a structural fix, not only cosmetic changes.\", \"source\": \"user reque",
-      "html": "<p>{ &quot;task&quot;: &quot;Bounded tab resident performance correction for Workspace Monitor.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;expected items&quot;: { &quot;item id&quot;: &quot;reduce tab lag&quot;, &quot;description&quot;: &quot;Address continued slow tab switching with a structural fix, not only cosmetic changes.&quot;, &quot;source&quot;: &quot;user request&quot;, &quot;required&quot;: true, &quot;status&quot;: &quot;covered&quot;, &quot;evidence&quot;: &quot;platform desktop app/re</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 3041,
-      "updatedAt": "2026-06-05T17:33:34.652Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: bounded tab resident 성능 보정",
-      "excerpt": "요청 결과 추적: bounded tab resident 성능 보정 요청 사용자는 이전 최적화 이후에도 데스크톱 앱 탭 전환이 아직 느리다고 보고했다. 결과 무제한 visible section idle resident mount 제거 source 보존 우선의 최대 5개 resident section cap 적용 admin history data preload 추가 source/runtime panel memo와 stable callback 적용 section switch latency audit 추",
-      "html": "<p>요청 결과 추적: bounded tab resident 성능 보정 요청 사용자는 이전 최적화 이후에도 데스크톱 앱 탭 전환이 아직 느리다고 보고했다. 결과 무제한 visible section idle resident mount 제거 source 보존 우선의 최대 5개 resident section cap 적용 admin history data preload 추가 source/runtime panel memo와 stable callback 적용 section switch latency audit 추가 내부 packaging build까지 완료 산출물 요구사항: platform desktop app/docs/requirements/2026 </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1135,
-      "updatedAt": "2026-06-05T17:33:34.652Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: bounded tab resident 성능 보정",
-      "excerpt": "작업 요약: bounded tab resident 성능 보정 Workspace Monitor 탭 전환이 아직 느리다는 피드백에 대해 이전의 전체 visible section resident 선마운트를 보정했다. 무제한 hidden React tree 누적을 제거하고, active/source/최근 섹션만 최대 5개까지 resident로 유지하도록 바꿨다. 변경 MonitorShell.tsx : resident section cap, source retained section, hidden runt",
-      "html": "<p>작업 요약: bounded tab resident 성능 보정 Workspace Monitor 탭 전환이 아직 느리다는 피드백에 대해 이전의 전체 visible section resident 선마운트를 보정했다. 무제한 hidden React tree 누적을 제거하고, active/source/최근 섹션만 최대 5개까지 resident로 유지하도록 바꿨다. 변경 MonitorShell.tsx : resident section cap, source retained section, hidden runtime memo, stable callbacks 추가 useAdminHistoryIndex.ts : admin history index prel</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1315,
-      "updatedAt": "2026-06-05T17:33:34.652Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
-      "path": "_history/plans/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "작업 계획 기록: bounded tab resident 성능 보정",
-      "excerpt": "작업 계획 기록: bounded tab resident 성능 보정 모드 선택 work mode: standard 선택 이유: UI 성능 구현, resource lifecycle, build/package verification이 포함된 의미 있는 변경이다. view mode: superadmin developer install mode: developer hot anchors agent platform/configs/memory/bootstrap manifest.json agent platform",
-      "html": "<p>작업 계획 기록: bounded tab resident 성능 보정 모드 선택 work mode: standard 선택 이유: UI 성능 구현, resource lifecycle, build/package verification이 포함된 의미 있는 변경이다. view mode: superadmin developer install mode: developer hot anchors agent platform/configs/memory/bootstrap manifest.json agent platform/configs/workflows/work mode registry.json ops/workflows/05 web first intake.md </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 910,
-      "updatedAt": "2026-06-05T17:33:34.651Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-bounded-tab-resident-performance-traceability-ko-md",
@@ -17718,102 +17838,6 @@
       "historyDate": "2026-06-03",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-product-folder-restructure-validation-en-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/validation.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Desktop Product Folder Restructure Validation",
-      "excerpt": "Desktop Product Folder Restructure Validation Results corepack pnpm install lockfile only : passed. corepack pnpm install frozen lockfile : passed. Re linked workspace package symlinks after the move. corepack pnpm filter workspace monitor run check : passed. corepack pnpm filter",
-      "html": "<h1>Desktop Product Folder Restructure Validation</h1>\n<h2>Results</h2>\n<ul>\n<li><code>corepack pnpm install --lockfile-only</code>: passed.</li>\n<li><code>corepack pnpm install --frozen-lockfile</code>: passed. Re-linked workspace package symlinks after the move.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: passed.</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: passed. Generated customer public snapshot and static export.</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: passed. 16 tests passed.</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: passed. Largest chunk 227542 bytes.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: passed. 14 tests passed.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run runtime:contract</code>: passed.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: passed. Internal service readiness score 94; public blockers remain signing/notarization/updater/clean-machine smoke.</li>\n<li><code>python3 _tools/docs-audit/src/docs_audit.py --check</code>: passed.</li>\n<li><code>python3 _tools/structure-audit/src/structure_audit.py --check</code>: passed. Root <code>workspace-monitor/</code> is no longer a registered project and <code>platform-desktop-app/renderer</code> is part of the platform project home.</li>\n<li><code>python3 _tools/workspace-index/src/workspace_index.py --check</code>: passed.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ...</code>: changed desktop/project config self-documenting checks passed.</li>\n</ul>\n<h2>Remaining Gates</h2>\n<ul>\n<li>Public macOS/Windows release still requires Developer ID/code signing, notarization, signed updater, and clean-machine smoke before any public-ready claim.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1584,
-      "updatedAt": "2026-06-03T05:42:54.397Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-product-folder-restructure-tasks-en-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/tasks.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Desktop Product Folder Restructure Tasks",
-      "excerpt": "Desktop Product Folder Restructure Tasks | Task | Status | Output | | | | | | Move root workspace monitor/ to the product renderer path | Complete | platform desktop app/renderer/workspace monitor/ | | Update pnpm workspace, lockfile, and Tauri frontendDist/dev command | Complete",
-      "html": "<h1>Desktop Product Folder Restructure Tasks</h1>\n<table><thead><tr><th>Task</th><th>Status</th><th>Output</th></tr></thead><tbody><tr><td>Move root <code>workspace-monitor/</code> to the product renderer path</td><td>Complete</td><td><code>platform-desktop-app/renderer/workspace-monitor/</code></td></tr><tr><td>Update pnpm workspace, lockfile, and Tauri frontendDist/dev command</td><td>Complete</td><td><code>pnpm-workspace.yaml</code>, <code>pnpm-lock.yaml</code>, <code>tauri.conf.json</code></td></tr><tr><td>Update desktop readiness/customer bundle script paths</td><td>Complete</td><td><code>platform-desktop-app/scripts/</code>, <code>tests/readiness.test.mjs</code></td></tr><tr><td>Update collector repo root and snapshot source paths</td><td>Complete</td><td><code>renderer/workspace-monitor/scripts/collect-workspace.mjs</code></td></tr><tr><td>Update project registry/root policy/docs/maps</td><td>Complete</td><td><code>_ops/projects/</code>, <code>_ops/maps/</code>, <code>_docs/</code>, product docs/configs</td></tr><tr><td>Validate customer snapshot/build/test/perf/audit</td><td>Complete</td><td>validation record</td></tr><tr><td>Record web search, omission, evaluation, and request trace</td><td>Complete</td><td><code>_history/</code> records</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 929,
-      "updatedAt": "2026-06-03T05:42:54.396Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-product-folder-restructure-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "데스크톱 제품 폴더 구조 재편 작업",
-      "excerpt": "데스크톱 제품 폴더 구조 재편 작업 | 작업 | 상태 | 산출물 | | | | | | 루트 workspace monitor/ 를 제품 renderer 경로로 이동 | 완료 | platform desktop app/renderer/workspace monitor/ | | pnpm workspace, lockfile, Tauri frontendDist/dev command 갱신 | 완료 | pnpm workspace.yaml , pnpm lock.yaml , tauri.conf.json | | des",
-      "html": "<h1>데스크톱 제품 폴더 구조 재편 작업</h1>\n<table><thead><tr><th>작업</th><th>상태</th><th>산출물</th></tr></thead><tbody><tr><td>루트 <code>workspace-monitor/</code>를 제품 renderer 경로로 이동</td><td>완료</td><td><code>platform-desktop-app/renderer/workspace-monitor/</code></td></tr><tr><td>pnpm workspace, lockfile, Tauri frontendDist/dev command 갱신</td><td>완료</td><td><code>pnpm-workspace.yaml</code>, <code>pnpm-lock.yaml</code>, <code>tauri.conf.json</code></td></tr><tr><td>desktop readiness/customer bundle scripts 경로 갱신</td><td>완료</td><td><code>platform-desktop-app/scripts/</code>, <code>tests/readiness.test.mjs</code></td></tr><tr><td>collector repo root와 snapshot source paths 갱신</td><td>완료</td><td><code>renderer/workspace-monitor/scripts/collect-workspace.mjs</code></td></tr><tr><td>project registry/root policy/docs/maps 갱신</td><td>완료</td><td><code>_ops/projects/</code>, <code>_ops/maps/</code>, <code>_docs/</code>, product docs/configs</td></tr><tr><td>customer snapshot/build/test/perf/audit 검증</td><td>완료</td><td>validation record</td></tr><tr><td>web search, omission, evaluation, request trace 기록</td><td>완료</td><td><code>_history/</code> records</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 922,
-      "updatedAt": "2026-06-03T05:42:54.396Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-product-folder-restructure-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "데스크톱 제품 폴더 구조 재편 검증",
-      "excerpt": "데스크톱 제품 폴더 구조 재편 검증 실행 결과 corepack pnpm install lockfile only : 통과. corepack pnpm install frozen lockfile : 통과. 이동 후 workspace package symlink를 재연결했다. corepack pnpm filter workspace monitor run check : 통과. corepack pnpm filter workspace monitor run build:customer : 통과. customer p",
-      "html": "<h1>데스크톱 제품 폴더 구조 재편 검증</h1>\n<h2>실행 결과</h2>\n<ul>\n<li><code>corepack pnpm install --lockfile-only</code>: 통과.</li>\n<li><code>corepack pnpm install --frozen-lockfile</code>: 통과. 이동 후 workspace package symlink를 재연결했다.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과. customer public snapshot과 static export 생성.</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과. 16개 테스트 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: 통과. largest chunk 227542 bytes.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과. 14개 테스트 통과.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run runtime:contract</code>: 통과.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과. internal service readiness score 94, public release blockers는 signing/notarization/updater/clean-machine smoke.</li>\n<li><code>python3 _tools/docs-audit/src/docs_audit.py --check</code>: 통과.</li>\n<li><code>python3 _tools/structure-audit/src/structure_audit.py --check</code>: 통과. root <code>workspace-monitor/</code>는 등록 프로젝트가 아니며 <code>platform-desktop-app/renderer</code>가 platform project home에 포함됨.</li>\n<li><code>python3 _tools/workspace-index/src/workspace_index.py --check</code>: 통과.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ...</code>: 변경한 desktop/project config self-documenting checks 통과.</li>\n</ul>\n<h2>알려진 잔여 게이트</h2>\n<ul>\n<li>public macOS/Windows release는 Developer ID/code signing, notarization, signed updater, clean-machine smoke가 남아 있어 아직 public-ready로 주장하지 않는다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1639,
-      "updatedAt": "2026-06-03T05:42:54.396Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-product-folder-restructure-plan-en-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/plan.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Desktop Product Folder Restructure Plan",
-      "excerpt": "Desktop Product Folder Restructure Plan Slices | Slice | Work | Primary Paths | Verification | | | | | | | S1 | Move renderer source | platform desktop app/renderer/workspace monitor/ | git diff name status , structure audit | | S2 | Reconnect runtime/build paths | pnpm workspace",
-      "html": "<h1>Desktop Product Folder Restructure Plan</h1>\n<h2>Slices</h2>\n<table><thead><tr><th>Slice</th><th>Work</th><th>Primary Paths</th><th>Verification</th></tr></thead><tbody><tr><td>S1</td><td>Move renderer source</td><td><code>platform-desktop-app/renderer/workspace-monitor/</code></td><td><code>git diff --name-status</code>, structure audit</td></tr><tr><td>S2</td><td>Reconnect runtime/build paths</td><td><code>pnpm-workspace.yaml</code>, <code>platform-desktop-app/src-tauri/tauri.conf.json</code>, scripts</td><td><code>pnpm install --lockfile-only</code>, app checks</td></tr><tr><td>S3</td><td>Update operational boundaries</td><td><code>_ops/projects/</code>, <code>_docs/</code>, product docs/configs</td><td>docs audit, config contract</td></tr><tr><td>S4</td><td>Validate snapshot/build</td><td>renderer collector/build/test/perf</td><td>customer build, monitor tests, perf budget</td></tr><tr><td>S5</td><td>Record trace/evaluation</td><td>specs, history, web search, evaluation</td><td>omission/evaluation files</td></tr></tbody></table>\n<h2>Parallelization</h2>\n<ul>\n<li>Build, test, and audit commands may run in parallel once they do not write shared files.</li>\n<li>Git state, generated maps, and customer snapshot generation stay serialized.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 950,
-      "updatedAt": "2026-06-03T05:42:54.395Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-product-folder-restructure-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "데스크톱 제품 폴더 구조 재편 계획",
-      "excerpt": "데스크톱 제품 폴더 구조 재편 계획 작업 단위 | Slice | 작업 | 주요 경로 | 검증 | | | | | | | S1 | renderer 소스 이동 | platform desktop app/renderer/workspace monitor/ | git diff name status , structure audit | | S2 | runtime/build 경로 재연결 | pnpm workspace.yaml , platform desktop app/src tauri/tauri.conf.json ,",
-      "html": "<h1>데스크톱 제품 폴더 구조 재편 계획</h1>\n<h2>작업 단위</h2>\n<table><thead><tr><th>Slice</th><th>작업</th><th>주요 경로</th><th>검증</th></tr></thead><tbody><tr><td>S1</td><td>renderer 소스 이동</td><td><code>platform-desktop-app/renderer/workspace-monitor/</code></td><td><code>git diff --name-status</code>, structure audit</td></tr><tr><td>S2</td><td>runtime/build 경로 재연결</td><td><code>pnpm-workspace.yaml</code>, <code>platform-desktop-app/src-tauri/tauri.conf.json</code>, scripts</td><td><code>pnpm install --lockfile-only</code>, app checks</td></tr><tr><td>S3</td><td>운영 경계 갱신</td><td><code>_ops/projects/</code>, <code>_docs/</code>, product docs/configs</td><td>docs audit, config contract</td></tr><tr><td>S4</td><td>snapshot/build 검증</td><td>renderer collector/build/test/perf</td><td>customer build, monitor tests, perf budget</td></tr><tr><td>S5</td><td>trace/evaluation 기록</td><td>specs, history, web search, evaluation</td><td>omission/evaluation files</td></tr></tbody></table>\n<h2>병렬화</h2>\n<ul>\n<li>빌드/테스트/감사 명령은 서로 파일을 쓰지 않는 단계에서 병렬 실행한다.</li>\n<li>git state, generated maps, customer snapshot 생성은 순차 처리한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 956,
-      "updatedAt": "2026-06-03T05:42:54.395Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -17824,7 +17848,11 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 31
+          "count": 30
+        },
+        {
+          "category": "request-trace",
+          "count": 12
         },
         {
           "category": "user-request",
@@ -17839,16 +17867,12 @@
           "count": 12
         },
         {
-          "category": "request-trace",
-          "count": 11
-        },
-        {
           "category": "work-timing",
-          "count": 11
+          "count": 12
         },
         {
           "category": "plan",
-          "count": 6
+          "count": 5
         },
         {
           "category": "daily-history",
@@ -17863,37 +17887,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-          "updatedAt": "2026-06-05T20:06:38.615Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-bounded-tab-resident-performance-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-06-bounded-tab-resident-performance-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Bounded Tab Resident Performance Evaluation Input",
-          "excerpt": "{ \"initial instruction\": \"The desktop app still feels slow when switching tabs; fix the underlying performance issue and build automatically.\", \"result summary\": \"Replaced unbounded visible section resident mounting with a capped resident section window, retained source editor st",
-          "updatedAt": "2026-06-05T17:33:53.969Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-bounded-tab-resident-performance-omission-json",
-          "path": "_history/evaluations/2026/2026-06-06-bounded-tab-resident-performance-omission.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Bounded Tab Resident Performance Omission",
-          "excerpt": "{ \"task\": \"Bounded tab resident performance correction for Workspace Monitor.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"reduce tab lag\", \"description\": \"Address continued slow tab switching with a structural fix, not only cosmetic changes.\", \"source\": \"user reque",
-          "updatedAt": "2026-06-05T17:33:34.652Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-bounded-tab-resident-performance-resource-json",
-          "path": "_history/evaluations/2026/2026-06-06-bounded-tab-resident-performance-resource.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Bounded Tab Resident Performance Resource",
-          "excerpt": "{ \"task\": \"Bounded tab resident performance correction for Workspace Monitor.\", \"work mode\": \"standard\", \"runtime context\": \"React renderer\", \"Next.js static build\", \"Playwright Chromium\", \"Python static server\", \"Tauri/Rust build\", \"renderer memory cache\" , \"resource risks\": { \"",
-          "updatedAt": "2026-06-05T17:33:53.968Z",
+          "updatedAt": "2026-06-05T20:26:24.795Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -17904,6 +17898,16 @@
           "title": "Evaluation: Desktop only UI Boundary",
           "excerpt": "Evaluation: Desktop only UI Boundary 기준 모바일 UI 전환을 제거했는가. 데스크톱 최소 창 크기를 Tauri와 renderer가 동시에 강제하는가. 테스트와 audit가 더 이상 모바일 viewport를 acceptance로 요구하지 않는가. 구현 후 build/package를 실행했는가. 현재 판정 상태: passed 모바일 UI 전용 media block과 모바일 audit page는 제거됐다. Tauri와 renderer가 1280x800 desktop mini",
           "updatedAt": "2026-06-05T19:54:31.328Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-easy-ai-login-settings-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-easy-ai-login-settings.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "평가: 쉬운 AI 로그인 설정",
+          "excerpt": "평가: 쉬운 AI 로그인 설정 결과 사용자의 “AI 세팅을 로그인으로 쉽게” 요구를 공식 provider 흐름에 맞춰 구현했다. 가짜 WebView/OAuth가 아니라 공식 로그인/키 발급 링크, 앱 저장, 연결 상태, 모델 확인, 작업 기본값 선택을 한 설정 화면으로 묶었다. 버튼은 기존 기본 버튼 느낌을 줄이고 choice 계층, 상태 pill, model chip으로 구분했다. 검증 corepack pnpm filter workspace monitor test passed corepack p",
+          "updatedAt": "2026-06-05T20:11:28.464Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18024,6 +18028,16 @@
           "title": "평가: Native Resource Telemetry",
           "excerpt": "평가: Native Resource Telemetry 결과 통과. 앱이 실제로 사용하는 native process/system resource telemetry를 Rust/Tauri command로 노출했다. Monitor UI와 readiness gate가 이를 요구한다. 검증 완료 tsc noEmit : 통과 cargo check : 통과 Workspace Monitor test/check: 통과 Platform desktop test: 통과 service readiness registry c",
           "updatedAt": "2026-06-05T18:56:19.552Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-provider-button-error-status-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-provider-button-error-status.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "평가: Provider 버튼 오류 상태",
+          "excerpt": "평가: Provider 버튼 오류 상태 결과 Provider 설정 오류가 visible paragraph로 삽입되어 버튼 위치를 밀어내는 흐름을 제거했다. 오류/완료/정보 상태는 해당 버튼 내부 badge, tooltip title, aria label 로 연결했다. hidden live region을 둬서 화면 레이아웃은 고정하면서도 상태 변경을 보조기술에 전달한다. 검증 corepack pnpm filter workspace monitor test passed corepack pnpm filt",
+          "updatedAt": "2026-06-05T20:26:24.794Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18177,16 +18191,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
-          "path": "_history/plans/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "작업 계획 기록: bounded tab resident 성능 보정",
-          "excerpt": "작업 계획 기록: bounded tab resident 성능 보정 모드 선택 work mode: standard 선택 이유: UI 성능 구현, resource lifecycle, build/package verification이 포함된 의미 있는 변경이다. view mode: superadmin developer install mode: developer hot anchors agent platform/configs/memory/bootstrap manifest.json agent platform",
-          "updatedAt": "2026-06-05T17:33:34.651Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-desktop-only-ui-boundary-ko-md",
           "path": "_history/plans/2026/2026-06-06-desktop-only-ui-boundary.ko.md",
           "category": "plan",
@@ -18217,13 +18221,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
-          "path": "_history/plans/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
+          "id": "history-plans-2026-2026-06-06-provider-button-error-status-ko-md",
+          "path": "_history/plans/2026/2026-06-06-provider-button-error-status.ko.md",
           "category": "plan",
           "language": "ko",
-          "title": "작업 계획: startup resident prewarm 속도 최적화",
-          "excerpt": "작업 계획: startup resident prewarm 속도 최적화 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 근거 사용자는 탭 이동 지연을 다시 지적했고, 데스크톱 앱의 RAM/CPU 활용을 요구했다. 기존 bounded resident work는 hidden mounted panel cap을 세웠지만, 첫 전환의 mount 비용은 여전히 남았다. 실",
-          "updatedAt": "2026-06-05T17:44:13.223Z",
+          "title": "계획 기록: Provider 버튼 오류 상태",
+          "excerpt": "계획 기록: Provider 버튼 오류 상태 범위 Provider 설정에서 오류/완료/정보 상태를 버튼 내부에 표시한다. 상태 텍스트가 provider row 아래에 삽입되어 버튼 위치를 밀지 않게 한다. 기존 provider credential/model command 동작은 유지한다. 실행 순서 1. 웹 접근성/레이아웃 근거와 기존 provider panel을 확인한다. 2. 요구사항, 스펙, tasks, validation, traceability를 작성한다. 3. provider actio",
+          "updatedAt": "2026-06-05T20:21:59.755Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18237,16 +18241,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: bounded tab resident 성능 보정",
-          "excerpt": "요청 결과 추적: bounded tab resident 성능 보정 요청 사용자는 이전 최적화 이후에도 데스크톱 앱 탭 전환이 아직 느리다고 보고했다. 결과 무제한 visible section idle resident mount 제거 source 보존 우선의 최대 5개 resident section cap 적용 admin history data preload 추가 source/runtime panel memo와 stable callback 적용 section switch latency audit 추",
-          "updatedAt": "2026-06-05T17:33:34.652Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-06-desktop-only-ui-boundary-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-desktop-only-ui-boundary.ko.md",
           "category": "request-trace",
@@ -18254,6 +18248,16 @@
           "title": "Request Trace: Desktop only UI Boundary",
           "excerpt": "Request Trace: Desktop only UI Boundary Request 사용자는 설치형 데스크톱 앱에서 모바일 UI가 필요한지 재검토하고, 최소 창 크기 설정을 활용해 모바일 UI를 삭제하라고 요청했다. Artifacts platform desktop app/src tauri/tauri.conf.json platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspa",
           "updatedAt": "2026-06-05T19:54:31.327Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-easy-ai-login-settings-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-easy-ai-login-settings.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: 쉬운 AI 로그인 설정",
+          "excerpt": "요청 결과 추적: 쉬운 AI 로그인 설정 요청 사용자가 AI 설정 기능을 더 늘리고, 로그인으로 AI provider 설정을 쉽게 할 수 있도록 요청했다. 결과 Settings Core settings Account connection에 AI 로그인 설정 가이드와 provider filter를 추가했다. Provider card에 official login/key/docs, local runtime note, model check, work default selection, model chip U",
+          "updatedAt": "2026-06-05T20:11:28.464Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18284,6 +18288,16 @@
           "title": "요청 결과 추적: Native Resource Telemetry",
           "excerpt": "요청 결과 추적: Native Resource Telemetry 요청 사용자는 남은 작업 전체를 계속 구현하라고 지시했다. 결과 실제 Rust/Tauri process/system resource telemetry를 앱에 추가했다. OS cache 상태뿐 아니라 현재 app RAM/CPU 상태를 source workbench에서 볼 수 있다. readiness gate가 native resource telemetry를 별도 그룹으로 추적한다. 구현 파일 platform desktop app/src",
           "updatedAt": "2026-06-05T18:53:41.663Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-provider-button-error-status-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-provider-button-error-status.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: Provider 버튼 오류 상태",
+          "excerpt": "요청 결과 추적: Provider 버튼 오류 상태 요청 오류 텍스트 때문에 버튼 위치가 밀리지 않고, 오류가 났을 때 버튼 자체에 표기되게 해달라는 요청. 결과 Provider action feedback state를 추가했다. Provider 액션 버튼에 오류/완료/정보 badge를 표시한다. provider 설정의 visible error/notice paragraph 삽입을 hidden live region으로 대체했다. Renderer test와 readiness token을 갱신했다. B",
+          "updatedAt": "2026-06-05T20:26:24.795Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18387,6 +18401,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-user-requests-2026-2026-06-06-provider-button-error-status-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-provider-button-error-status.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: Provider 버튼 오류 상태",
+          "excerpt": "사용자 요청 요약: Provider 버튼 오류 상태 날짜: 2026 06 06 대상: platform desktop app 요약: 사용자가 오류 텍스트 때문에 버튼 위치가 밀리지 않게 하고, 오류가 났을 때 버튼 자체에 표기하는 방식을 요청했다. 해석: Provider 계정 설정 액션의 오류/완료/정보 상태를 버튼 내부 badge와 접근성 상태로 표시하고, visible paragraph 삽입으로 인한 레이아웃 이동을 없앤다. 제외: provider 인증 방식, key 저장소, public rel",
+          "updatedAt": "2026-06-05T20:21:59.755Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-06-public-release-developer-repatch-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-public-release-developer-repatch.ko.md",
           "category": "user-request",
@@ -18434,16 +18458,6 @@
           "title": "사용자 요청 요약: 근본부터 재검토",
           "excerpt": "사용자 요청 요약: 근본부터 재검토 원 요청 사용자는 이전 속도 최적화 이후에도 “너의 근본적인 부분부터 다시 살펴봐”라고 요청했다. 해석 국소 탭 prewarm이나 버튼 조정만 반복하지 말고, 데스크톱 앱의 renderer/runtime 구조 자체를 재검토한다. 성능 병목이 React tree, JS bundle 평가, 데이터 payload, native runtime 중 어디에 남아 있는지 냉정하게 본다. 바로 검증 가능한 구조 개선을 구현하고, 빌드/패키징까지 자동으로 실행한다. 이번 수용 ",
           "updatedAt": "2026-06-05T17:55:21.492Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-06-speed-optimization-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-speed-optimization.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: 속도 최적화",
-          "excerpt": "사용자 요청 요약: 속도 최적화 원 요청 사용자는 데스크톱 앱의 탭 전환이 여전히 느리며, OS/CPU/RAM 같은 데스크톱 자원을 적극적으로 활용해 근본적으로 속도를 개선하라고 요청했다. 구현 후 매번 사용자가 직접 빌드하지 않도록 자동으로 빌드와 패키징까지 끝내는 것도 지속 요구사항이다. 해석한 수용 기준 탭 전환 시 첫 mount 지연을 줄인다. 모든 탭을 무제한 마운트해 장기 메모리 비용을 키우지 않는다. 핵심 탭은 시작 후 유휴 시간에 미리 준비한다. 불필요한 hidden rerender",
-          "updatedAt": "2026-06-05T17:44:13.221Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18517,6 +18531,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-web-searches-2026-2026-06-06-provider-button-error-status-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-provider-button-error-status.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: Provider 버튼 오류 상태",
+          "excerpt": "Web Search: Provider 버튼 오류 상태 날짜: 2026 06 06 작업: Provider 설정 오류를 레이아웃을 밀지 않는 버튼 내부 상태로 표시 질의 button error state avoid layout shift UX guidance WCAG error identification button status aria live avoid layout shift MDN aria live status button error message 확인한 출처 WCAG 2.2 Understand",
+          "updatedAt": "2026-06-05T20:21:59.754Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-06-public-release-developer-repatch-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-public-release-developer-repatch.ko.md",
           "category": "web-search",
@@ -18557,16 +18581,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: startup resident prewarm 속도 최적화",
-          "excerpt": "웹 검색 기록: startup resident prewarm 속도 최적화 목적 Workspace Monitor 탭 전환이 아직 느리다는 피드백에 대해, React tree 상주 수를 다시 늘리지 않으면서 시작 직후 핵심 탭을 미리 준비하는 구현 근거를 공식 문서로 확인했다. 검색어 site:react.dev/reference/react memo React official docs performance memo site:react.dev/reference/react/Profiler React off",
-          "updatedAt": "2026-06-05T17:44:13.220Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-wide-scope-instruction-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-wide-scope-instruction.ko.md",
           "category": "web-search",
@@ -18587,16 +18601,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: bounded tab resident 성능 보정",
-          "excerpt": "작업 요약: bounded tab resident 성능 보정 Workspace Monitor 탭 전환이 아직 느리다는 피드백에 대해 이전의 전체 visible section resident 선마운트를 보정했다. 무제한 hidden React tree 누적을 제거하고, active/source/최근 섹션만 최대 5개까지 resident로 유지하도록 바꿨다. 변경 MonitorShell.tsx : resident section cap, source retained section, hidden runt",
-          "updatedAt": "2026-06-05T17:33:34.652Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-desktop-only-ui-boundary-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-desktop-only-ui-boundary.ko.md",
           "category": "work-summary",
@@ -18604,6 +18608,16 @@
           "title": "Work Summary: Desktop only UI Boundary",
           "excerpt": "Work Summary: Desktop only UI Boundary 완료한 변경 Tauri main window 기본 크기를 1440x900, 최소 크기를 1280x800으로 올렸다. renderer CSS에 데스크톱 최소 canvas token을 추가했다. 720px/420px 모바일 UI media block과 coarse pointer token override를 제거했다. surface audit를 desktop minimum viewport 한 개만 검사하도록 바꿨다. scroll/te",
           "updatedAt": "2026-06-05T19:54:31.327Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-easy-ai-login-settings-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-easy-ai-login-settings.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: 쉬운 AI 로그인 설정",
+          "excerpt": "작업 요약: 쉬운 AI 로그인 설정 platform desktop app Settings provider accounts 화면을 AI 로그인/API key 설정 센터로 개선했다. Provider 설정 화면에 guide, filter, status pill, official login/key/docs actions, model check, agent work default selection을 추가했다. OpenAI/Anthropic/Gemini는 공식 콘솔/API key 흐름으로, Ollama는 l",
+          "updatedAt": "2026-06-05T20:11:28.463Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18634,6 +18648,16 @@
           "title": "작업 요약: Native Resource Telemetry",
           "excerpt": "작업 요약: Native Resource Telemetry 완료 Rust/Tauri get desktop resource snapshot command를 추가했다. report는 현재 app process memory, virtual memory, CPU usage, PID, task count, system memory, CPU threads, workspace cache/warmup 상태를 포함한다. MonitorShell source workbench에 앱 RAM/CPU 상태를 추가했다. a",
           "updatedAt": "2026-06-05T18:56:19.552Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-provider-button-error-status-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-provider-button-error-status.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: Provider 버튼 오류 상태",
+          "excerpt": "작업 요약: Provider 버튼 오류 상태 Provider 설정 액션의 오류/성공/정보 상태를 버튼 내부 badge로 표시하도록 변경했다. 저장/삭제/새로고침/공식 링크/모델 확인/작업 기본값 선택에 provider/action 단위 feedback을 연결했다. 문단형 오류/공지로 provider row 레이아웃이 밀리는 표시를 제거하고, hidden live region으로 접근성 알림을 유지했다. 버튼은 상태 badge 공간을 항상 예약해 오류 발생 시 위치와 크기가 바뀌지 않게 했다. Re",
+          "updatedAt": "2026-06-05T20:26:24.794Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18677,16 +18701,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: startup resident prewarm 속도 최적화",
-          "excerpt": "작업 요약: startup resident prewarm 속도 최적화 완료 내용 Workspace Monitor 시작 직후 핵심 섹션을 idle 시간에 bounded resident set으로 prewarm하도록 변경했다. overview 는 active가 아닐 때 resident retention에서 제외해 무거운 home surface가 장기 hidden tree로 남는 비용을 줄였다. Tool Studio panel을 memoized component로 감싸고 Shell에서 전달하는 이동 c",
-          "updatedAt": "2026-06-05T17:44:13.223Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-wide-scope-instruction-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-wide-scope-instruction.ko.md",
           "category": "work-summary",
@@ -18707,16 +18721,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-bounded-tab-resident-performance-json",
-          "path": "_history/work-timings/2026/2026-06-06-bounded-tab-resident-performance.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Bounded Tab Resident Performance",
-          "excerpt": "{ \"task id\": \"2026 06 06 bounded tab resident performance\", \"title\": \"Bounded tab resident performance correction\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration",
-          "updatedAt": "2026-06-05T17:33:34.653Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-desktop-only-ui-boundary-json",
           "path": "_history/work-timings/2026/2026-06-06-desktop-only-ui-boundary.json",
           "category": "work-timing",
@@ -18724,6 +18728,16 @@
           "title": "2026 06 06 Desktop Only Ui Boundary",
           "excerpt": "{ \"date\": \"2026 06 06\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\" }, { \"phase\": \"source inventory\", \"status\": \"completed\" }, { \"phase\": \"implementation\", \"status\": \"completed\" }, { \"phase\": \"validation\", \"status\": \"completed\" } , \"bo",
           "updatedAt": "2026-06-05T19:54:31.327Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-06-easy-ai-login-settings-json",
+          "path": "_history/work-timings/2026/2026-06-06-easy-ai-login-settings.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Easy Ai Login Settings",
+          "excerpt": "{ \"schema version\": \"2026 06 01\", \"task id\": \"2026 06 06 easy ai login settings\", \"title\": \"Improve AI provider setup settings with official login and API key flow\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"started at\": null, \"ended at\": \"2026 06 06T05:12:00+09",
+          "updatedAt": "2026-06-05T20:12:04.839Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18754,6 +18768,16 @@
           "title": "2026 06 06 Native Resource Telemetry",
           "excerpt": "{ \"id\": \"2026 06 06 native resource telemetry\", \"date\": \"2026 06 06\", \"status\": \"recorded\", \"timings\": { \"phase\": \"web first intake\", \"duration minutes\": 2 }, { \"phase\": \"implementation\", \"duration minutes\": 18 }, { \"phase\": \"quick verification\", \"duration minutes\": 4 }, { \"phase",
           "updatedAt": "2026-06-05T18:56:19.554Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-06-provider-button-error-status-json",
+          "path": "_history/work-timings/2026/2026-06-06-provider-button-error-status.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Provider Button Error Status",
+          "excerpt": "{ \"schema version\": \"2026 06 01\", \"task id\": \"2026 06 06 provider button error status\", \"title\": \"Keep provider button positions stable while showing errors on buttons\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"started at\": null, \"ended at\": \"2026 06 06T05:26:0",
+          "updatedAt": "2026-06-05T20:26:24.793Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18825,36 +18849,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2424,
+      "documents": 2435,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 978
+          "count": 980
         },
         {
           "category": "web-search",
-          "count": 387
+          "count": 388
         },
         {
           "category": "plan",
-          "count": 334
+          "count": 335
         },
         {
           "category": "request-trace",
-          "count": 314
+          "count": 316
         },
         {
           "category": "work-timing",
-          "count": 236
+          "count": 238
         },
         {
           "category": "user-request",
-          "count": 100
+          "count": 101
         },
         {
           "category": "work-summary",
-          "count": 66
+          "count": 68
         },
         {
           "category": "daily-history",
@@ -18865,7 +18889,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6292364,
+      "totalSourceBytes": 6307350,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18890,11 +18914,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 43,
+      "evidenceEvents": 42,
       "decisionEvents": 0,
-      "openSignals": 23,
+      "openSignals": 22,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T20:06:38.615Z",
+      "latestEventAt": "2026-06-05T20:26:24.795Z",
       "historyDays": 1
     },
     "lanes": [
@@ -18906,7 +18930,7 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 31
+        "count": 30
       },
       {
         "id": "delivery",
@@ -18926,17 +18950,17 @@
       {
         "id": "monitoring",
         "label": "monitoring",
-        "count": 11
+        "count": 12
       },
       {
         "id": "traceability",
         "label": "traceability",
-        "count": 11
+        "count": 12
       },
       {
         "id": "planning",
         "label": "planning",
-        "count": 6
+        "count": 5
       },
       {
         "id": "history",
@@ -18953,7 +18977,7 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 31
+        "count": 30
       },
       {
         "id": "intake",
@@ -18966,24 +18990,24 @@
         "count": 12
       },
       {
+        "id": "timing",
+        "label": "timing",
+        "count": 12
+      },
+      {
+        "id": "trace",
+        "label": "trace",
+        "count": 12
+      },
+      {
         "id": "web-search",
         "label": "web search",
         "count": 12
       },
       {
-        "id": "timing",
-        "label": "timing",
-        "count": 11
-      },
-      {
-        "id": "trace",
-        "label": "trace",
-        "count": 11
-      },
-      {
         "id": "plan",
         "label": "plan",
-        "count": 6
+        "count": 5
       },
       {
         "id": "history",
@@ -19005,6 +19029,21 @@
     ],
     "events": [
       {
+        "id": "history-history-request-traces-2026-2026-06-06-provider-button-error-status-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "요청 결과 추적: Provider 버튼 오류 상태",
+        "detail": "요청 결과 추적: Provider 버튼 오류 상태 요청 오류 텍스트 때문에 버튼 위치가 밀리지 않고, 오류가 났을 때 버튼 자체에 표기되게 해달라는 요청. 결과 Provider action feedback state를 추가했다. Provider 액션 버튼에 오류/완료/정보 badge를 표시한다. provider 설정의 visible error/notice paragraph 삽입을 hidden live region으로 대체했다. Renderer test와 readiness token을 갱신했다. B",
+        "path": "_history/request-traces/2026/2026-06-06-provider-button-error-status.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:26:24.795Z"
+      },
+      {
         "id": "history-history-2026-2026-06-06-md",
         "sourceType": "history",
         "signalType": "history",
@@ -19017,7 +19056,157 @@
         "category": "daily-history",
         "language": "unknown",
         "date": "2026-06-06",
-        "timestamp": "2026-06-05T20:06:38.615Z"
+        "timestamp": "2026-06-05T20:26:24.795Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-provider-button-error-status-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "평가: Provider 버튼 오류 상태",
+        "detail": "평가: Provider 버튼 오류 상태 결과 Provider 설정 오류가 visible paragraph로 삽입되어 버튼 위치를 밀어내는 흐름을 제거했다. 오류/완료/정보 상태는 해당 버튼 내부 badge, tooltip title, aria label 로 연결했다. hidden live region을 둬서 화면 레이아웃은 고정하면서도 상태 변경을 보조기술에 전달한다. 검증 corepack pnpm filter workspace monitor test passed corepack pnpm filt",
+        "path": "_history/evaluations/2026/2026-06-06-provider-button-error-status.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:26:24.794Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-provider-button-error-status-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약: Provider 버튼 오류 상태",
+        "detail": "작업 요약: Provider 버튼 오류 상태 Provider 설정 액션의 오류/성공/정보 상태를 버튼 내부 badge로 표시하도록 변경했다. 저장/삭제/새로고침/공식 링크/모델 확인/작업 기본값 선택에 provider/action 단위 feedback을 연결했다. 문단형 오류/공지로 provider row 레이아웃이 밀리는 표시를 제거하고, hidden live region으로 접근성 알림을 유지했다. 버튼은 상태 badge 공간을 항상 예약해 오류 발생 시 위치와 크기가 바뀌지 않게 했다. Re",
+        "path": "_history/work-summaries/2026/2026-06-06-provider-button-error-status.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:26:24.794Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-provider-button-error-status-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Provider Button Error Status",
+        "detail": "{ \"schema version\": \"2026 06 01\", \"task id\": \"2026 06 06 provider button error status\", \"title\": \"Keep provider button positions stable while showing errors on buttons\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"started at\": null, \"ended at\": \"2026 06 06T05:26:0",
+        "path": "_history/work-timings/2026/2026-06-06-provider-button-error-status.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:26:24.793Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-provider-button-error-status-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "ready",
+        "title": "계획 기록: Provider 버튼 오류 상태",
+        "detail": "계획 기록: Provider 버튼 오류 상태 범위 Provider 설정에서 오류/완료/정보 상태를 버튼 내부에 표시한다. 상태 텍스트가 provider row 아래에 삽입되어 버튼 위치를 밀지 않게 한다. 기존 provider credential/model command 동작은 유지한다. 실행 순서 1. 웹 접근성/레이아웃 근거와 기존 provider panel을 확인한다. 2. 요구사항, 스펙, tasks, validation, traceability를 작성한다. 3. provider actio",
+        "path": "_history/plans/2026/2026-06-06-provider-button-error-status.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:21:59.755Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-provider-button-error-status-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "ready",
+        "title": "사용자 요청 요약: Provider 버튼 오류 상태",
+        "detail": "사용자 요청 요약: Provider 버튼 오류 상태 날짜: 2026 06 06 대상: platform desktop app 요약: 사용자가 오류 텍스트 때문에 버튼 위치가 밀리지 않게 하고, 오류가 났을 때 버튼 자체에 표기하는 방식을 요청했다. 해석: Provider 계정 설정 액션의 오류/완료/정보 상태를 버튼 내부 badge와 접근성 상태로 표시하고, visible paragraph 삽입으로 인한 레이아웃 이동을 없앤다. 제외: provider 인증 방식, key 저장소, public rel",
+        "path": "_history/user-requests/2026/2026-06-06-provider-button-error-status.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:21:59.755Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-provider-button-error-status-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Provider 버튼 오류 상태",
+        "detail": "Web Search: Provider 버튼 오류 상태 날짜: 2026 06 06 작업: Provider 설정 오류를 레이아웃을 밀지 않는 버튼 내부 상태로 표시 질의 button error state avoid layout shift UX guidance WCAG error identification button status aria live avoid layout shift MDN aria live status button error message 확인한 출처 WCAG 2.2 Understand",
+        "path": "_history/web-searches/2026/2026-06-06-provider-button-error-status.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:21:59.754Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-easy-ai-login-settings-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Easy Ai Login Settings",
+        "detail": "{ \"schema version\": \"2026 06 01\", \"task id\": \"2026 06 06 easy ai login settings\", \"title\": \"Improve AI provider setup settings with official login and API key flow\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"started at\": null, \"ended at\": \"2026 06 06T05:12:00+09",
+        "path": "_history/work-timings/2026/2026-06-06-easy-ai-login-settings.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:12:04.839Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-easy-ai-login-settings-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "평가: 쉬운 AI 로그인 설정",
+        "detail": "평가: 쉬운 AI 로그인 설정 결과 사용자의 “AI 세팅을 로그인으로 쉽게” 요구를 공식 provider 흐름에 맞춰 구현했다. 가짜 WebView/OAuth가 아니라 공식 로그인/키 발급 링크, 앱 저장, 연결 상태, 모델 확인, 작업 기본값 선택을 한 설정 화면으로 묶었다. 버튼은 기존 기본 버튼 느낌을 줄이고 choice 계층, 상태 pill, model chip으로 구분했다. 검증 corepack pnpm filter workspace monitor test passed corepack p",
+        "path": "_history/evaluations/2026/2026-06-06-easy-ai-login-settings.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:11:28.464Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-easy-ai-login-settings-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "요청 결과 추적: 쉬운 AI 로그인 설정",
+        "detail": "요청 결과 추적: 쉬운 AI 로그인 설정 요청 사용자가 AI 설정 기능을 더 늘리고, 로그인으로 AI provider 설정을 쉽게 할 수 있도록 요청했다. 결과 Settings Core settings Account connection에 AI 로그인 설정 가이드와 provider filter를 추가했다. Provider card에 official login/key/docs, local runtime note, model check, work default selection, model chip U",
+        "path": "_history/request-traces/2026/2026-06-06-easy-ai-login-settings.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:11:28.464Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-easy-ai-login-settings-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약: 쉬운 AI 로그인 설정",
+        "detail": "작업 요약: 쉬운 AI 로그인 설정 platform desktop app Settings provider accounts 화면을 AI 로그인/API key 설정 센터로 개선했다. Provider 설정 화면에 guide, filter, status pill, official login/key/docs actions, model check, agent work default selection을 추가했다. OpenAI/Anthropic/Gemini는 공식 콘솔/API key 흐름으로, Ollama는 l",
+        "path": "_history/work-summaries/2026/2026-06-06-easy-ai-login-settings.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:11:28.463Z"
       },
       {
         "id": "history-history-plans-2026-2026-06-06-easy-ai-login-settings-ko-md",
@@ -20278,171 +20467,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T17:44:13.224Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "작업 계획: startup resident prewarm 속도 최적화",
-        "detail": "작업 계획: startup resident prewarm 속도 최적화 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 근거 사용자는 탭 이동 지연을 다시 지적했고, 데스크톱 앱의 RAM/CPU 활용을 요구했다. 기존 bounded resident work는 hidden mounted panel cap을 세웠지만, 첫 전환의 mount 비용은 여전히 남았다. 실",
-        "path": "_history/plans/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:44:13.223Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "작업 요약: startup resident prewarm 속도 최적화",
-        "detail": "작업 요약: startup resident prewarm 속도 최적화 완료 내용 Workspace Monitor 시작 직후 핵심 섹션을 idle 시간에 bounded resident set으로 prewarm하도록 변경했다. overview 는 active가 아닐 때 resident retention에서 제외해 무거운 home surface가 장기 hidden tree로 남는 비용을 줄였다. Tool Studio panel을 memoized component로 감싸고 Shell에서 전달하는 이동 c",
-        "path": "_history/work-summaries/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:44:13.223Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-speed-optimization-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: 속도 최적화",
-        "detail": "사용자 요청 요약: 속도 최적화 원 요청 사용자는 데스크톱 앱의 탭 전환이 여전히 느리며, OS/CPU/RAM 같은 데스크톱 자원을 적극적으로 활용해 근본적으로 속도를 개선하라고 요청했다. 구현 후 매번 사용자가 직접 빌드하지 않도록 자동으로 빌드와 패키징까지 끝내는 것도 지속 요구사항이다. 해석한 수용 기준 탭 전환 시 첫 mount 지연을 줄인다. 모든 탭을 무제한 마운트해 장기 메모리 비용을 키우지 않는다. 핵심 탭은 시작 후 유휴 시간에 미리 준비한다. 불필요한 hidden rerender",
-        "path": "_history/user-requests/2026/2026-06-06-speed-optimization.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:44:13.221Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-startup-resident-prewarm-speed-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: startup resident prewarm 속도 최적화",
-        "detail": "웹 검색 기록: startup resident prewarm 속도 최적화 목적 Workspace Monitor 탭 전환이 아직 느리다는 피드백에 대해, React tree 상주 수를 다시 늘리지 않으면서 시작 직후 핵심 탭을 미리 준비하는 구현 근거를 공식 문서로 확인했다. 검색어 site:react.dev/reference/react memo React official docs performance memo site:react.dev/reference/react/Profiler React off",
-        "path": "_history/web-searches/2026/2026-06-06-startup-resident-prewarm-speed.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:44:13.220Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-bounded-tab-resident-performance-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Bounded Tab Resident Performance Evaluation Input",
-        "detail": "{ \"initial instruction\": \"The desktop app still feels slow when switching tabs; fix the underlying performance issue and build automatically.\", \"result summary\": \"Replaced unbounded visible section resident mounting with a capped resident section window, retained source editor st",
-        "path": "_history/evaluations/2026/2026-06-06-bounded-tab-resident-performance-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:33:53.969Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-bounded-tab-resident-performance-resource-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "evaluation",
-        "title": "2026 06 06 Bounded Tab Resident Performance Resource",
-        "detail": "{ \"task\": \"Bounded tab resident performance correction for Workspace Monitor.\", \"work mode\": \"standard\", \"runtime context\": \"React renderer\", \"Next.js static build\", \"Playwright Chromium\", \"Python static server\", \"Tauri/Rust build\", \"renderer memory cache\" , \"resource risks\": { \"",
-        "path": "_history/evaluations/2026/2026-06-06-bounded-tab-resident-performance-resource.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:33:53.968Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-bounded-tab-resident-performance-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 Bounded Tab Resident Performance",
-        "detail": "{ \"task id\": \"2026 06 06 bounded tab resident performance\", \"title\": \"Bounded tab resident performance correction\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration",
-        "path": "_history/work-timings/2026/2026-06-06-bounded-tab-resident-performance.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:33:34.653Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-bounded-tab-resident-performance-omission-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Bounded Tab Resident Performance Omission",
-        "detail": "{ \"task\": \"Bounded tab resident performance correction for Workspace Monitor.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"reduce tab lag\", \"description\": \"Address continued slow tab switching with a structural fix, not only cosmetic changes.\", \"source\": \"user reque",
-        "path": "_history/evaluations/2026/2026-06-06-bounded-tab-resident-performance-omission.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:33:34.652Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: bounded tab resident 성능 보정",
-        "detail": "요청 결과 추적: bounded tab resident 성능 보정 요청 사용자는 이전 최적화 이후에도 데스크톱 앱 탭 전환이 아직 느리다고 보고했다. 결과 무제한 visible section idle resident mount 제거 source 보존 우선의 최대 5개 resident section cap 적용 admin history data preload 추가 source/runtime panel memo와 stable callback 적용 section switch latency audit 추",
-        "path": "_history/request-traces/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:33:34.652Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: bounded tab resident 성능 보정",
-        "detail": "작업 요약: bounded tab resident 성능 보정 Workspace Monitor 탭 전환이 아직 느리다는 피드백에 대해 이전의 전체 visible section resident 선마운트를 보정했다. 무제한 hidden React tree 누적을 제거하고, active/source/최근 섹션만 최대 5개까지 resident로 유지하도록 바꿨다. 변경 MonitorShell.tsx : resident section cap, source retained section, hidden runt",
-        "path": "_history/work-summaries/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:33:34.652Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "작업 계획 기록: bounded tab resident 성능 보정",
-        "detail": "작업 계획 기록: bounded tab resident 성능 보정 모드 선택 work mode: standard 선택 이유: UI 성능 구현, resource lifecycle, build/package verification이 포함된 의미 있는 변경이다. view mode: superadmin developer install mode: developer hot anchors agent platform/configs/memory/bootstrap manifest.json agent platform",
-        "path": "_history/plans/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:33:34.651Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -22674,9 +22698,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 45795,
-      "lineCount": 1157,
-      "updatedAt": "2026-06-05T20:03:26.959Z",
+      "sizeBytes": 45909,
+      "lineCount": 1161,
+      "updatedAt": "2026-06-05T20:20:06.635Z",
       "truncated": true,
       "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { execFileSync } from \"node:child_process\";\n\nimport {\n  checkDesktopBuildPipeline,\n  desktopBuildPipelineRequiredFiles\n} from \"./readiness/desktop-build-pipeline.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nconst requiredFiles = [\n  \"README.md\",\n  \"README.ko.md\",\n  \"README.en.md\",\n  \"package.json\",\n  \"configs/desktop-distribution-registry.json\",\n  \"configs/product-feature-registry.json\",\n  \"configs/product-gap-registry.json\",\n  \"configs/claude-code-design-transfer-registry.json\",\n  \"configs/reference-platform-advantage-registry.json\",\n  \"configs/runtime-data-boundary-registry.json\",\n  \"configs/service-readiness-registry.json\",\n  \"configs/macos-execution-profile.json\",\n  \"configs/windows-execution-profile.json\",\n  \"configs/user-flow-registry.json\",\n  \"runtime-contracts/installer-shell-runtime-contract.json\",\n  \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n  \"runtime-contracts/installer-shell-bootstrap.en.md\",\n  \"renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx\",\n  \"renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx\",\n  \"rend",
       "previewBytes": 1200
@@ -22960,9 +22984,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 50712,
-      "lineCount": 1140,
-      "updatedAt": "2026-06-05T20:03:29.992Z",
+      "sizeBytes": 50834,
+      "lineCount": 1144,
+      "updatedAt": "2026-06-05T20:20:10.465Z",
       "truncated": true,
       "preview": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/paths.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/definitions.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/runner.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts",
       "previewBytes": 1200
@@ -23435,7 +23459,7 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 11
+        "documentsCount": 12
       },
       {
         "category": "web-search",
@@ -23445,17 +23469,17 @@
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 11
+        "documentsCount": 12
       },
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 6
+        "documentsCount": 5
       },
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 31
+        "documentsCount": 30
       },
       {
         "category": "daily-history",
@@ -23549,7 +23573,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 69,
+        "documentCount": 70,
         "sourceFileCount": 5
       },
       {
@@ -23690,7 +23714,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-scripts-check-readiness-mjs",
         "label": "Large source surface",
-        "signal": "1,157 lines in platform-desktop-app/scripts/check-readiness.mjs",
+        "signal": "1,161 lines in platform-desktop-app/scripts/check-readiness.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23699,7 +23723,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,140 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,144 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23737,16 +23761,16 @@
         "path": "platform-desktop-app/scripts/check-readiness.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1157,
-        "sizeBytes": 45795,
+        "lineCount": 1161,
+        "sizeBytes": 45909,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1140,
-        "sizeBytes": 50712,
+        "lineCount": 1144,
+        "sizeBytes": 50834,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       }
     ]
