@@ -12,6 +12,7 @@
 - `desktop:package:public` pipeline 추가.
 - macOS `Entitlements.plist` 생성 및 Tauri config 연결.
 - release/service/readiness checks와 tests 갱신.
+- `package-public`은 public preflight를 expensive verification 앞에 둔다.
 
 ## 보안 경계
 
@@ -24,4 +25,5 @@
 - Rust `cargo check` 통과.
 - desktop app tests/check 통과.
 - public preflight report가 updater code path는 통과시키고 외부 credential/env blocker만 남긴다.
+- `desktop:package:public`은 외부 credential/env가 없으면 Workspace Monitor/Rust verification을 다시 돌기 전에 실패한다.
 - internal package build가 계속 `.app`/DMG를 생성하고 검증한다.

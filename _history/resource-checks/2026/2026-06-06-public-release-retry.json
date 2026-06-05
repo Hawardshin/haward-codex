@@ -1,0 +1,33 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-public-release-retry",
+  "resource_risk_occurred": true,
+  "checked_resources": [
+    {
+      "resource": "Apple signing and notarization credentials",
+      "handling": "presence checked only",
+      "result": "missing; no secret values printed or stored"
+    },
+    {
+      "resource": "Tauri updater signing credentials and endpoints",
+      "handling": "presence checked only",
+      "result": "missing; no secret values printed or stored"
+    },
+    {
+      "resource": "public release build subprocess",
+      "handling": "pnpm pipeline",
+      "result": "failed at preflight and left no long-running process"
+    },
+    {
+      "resource": "internal desktop package build",
+      "handling": "Tauri internal package pipeline",
+      "result": "completed app and DMG artifacts with signature and DMG verification"
+    },
+    {
+      "resource": "workspace monitor generated snapshots",
+      "handling": "developer snapshot restored after failed public build attempt",
+      "result": "generated files updated in place; customer snapshot rebuilt during internal packaging"
+    }
+  ],
+  "cleanup": "No server, browser, or persistent subprocess remains from this retry."
+}

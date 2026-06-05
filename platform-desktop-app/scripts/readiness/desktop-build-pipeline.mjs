@@ -126,6 +126,7 @@ function checkDocsAndPipelineStructure(root, failures) {
     "package-public",
     "public-report",
     "commonVerifySteps",
+    "Public release preflight",
     "Tauri internal package build",
     "Tauri public package build",
     "create-updater-manifest",
@@ -136,6 +137,12 @@ function checkDocsAndPipelineStructure(root, failures) {
     if (!desktopPipelineStructure.includes(requiredPhrase)) {
       failures.push(`desktop pipeline structure must include ${requiredPhrase}`);
     }
+  }
+  const packagePublicDefinition = desktopPipelineStructure.slice(desktopPipelineStructure.indexOf('"package-public"'));
+  const packagePublicPreflightIndex = packagePublicDefinition.indexOf("Public release preflight");
+  const packagePublicVerifyIndex = packagePublicDefinition.indexOf("...commonVerifySteps");
+  if (packagePublicPreflightIndex === -1 || packagePublicVerifyIndex === -1 || packagePublicPreflightIndex > packagePublicVerifyIndex) {
+    failures.push("package-public must run Public release preflight before commonVerifySteps so missing credentials fail fast");
   }
   if (!desktopPipelineEntrypoint.includes("./desktop-pipeline/runner.mjs")) {
     failures.push("desktop-pipeline.mjs must remain a thin entrypoint to scripts/desktop-pipeline/runner.mjs");

@@ -12,6 +12,9 @@
 - `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/service-readiness-registry.json`: 통과.
 - `corepack pnpm --filter platform-desktop-app run package:internal`: 통과. `.app`/DMG 생성, codesign verify, hdiutil verify 포함.
 - JSON parse check: 통과.
+- 재시도 `corepack pnpm run desktop:package:public`: Workspace Monitor/Rust 검증은 통과했지만 public preflight에서 외부 signing/updater/notarization env blocker로 실패. 이 결과에 따라 `package-public` preflight를 expensive verification 앞으로 이동했다.
+- fail-fast 재검증 `corepack pnpm run desktop:package:public`: 통과 기준 충족. public preflight에서 즉시 실패했고 Workspace Monitor/Rust/Tauri expensive verification은 실행되지 않았다.
+- `corepack pnpm run desktop:package:internal`: 통과. 내부 `.app`/DMG 생성, app signature verification, DMG checksum verification 포함.
 
 ## 외부 blocker
 

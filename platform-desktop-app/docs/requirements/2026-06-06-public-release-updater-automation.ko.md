@@ -8,6 +8,7 @@
 - `PRU-REQ-004`: internal build는 기존 ad-hoc signing/test path를 유지해야 한다.
 - `PRU-REQ-005`: public build는 static `latest.json` manifest 생성과 macOS codesign/DMG/stapler/Gatekeeper 검증 단계를 pipeline에 포함해야 한다.
 - `PRU-REQ-006`: macOS hardened runtime과 entitlements file 연결이 Tauri config와 readiness check에 고정되어야 한다.
+- `PRU-REQ-007`: public build는 signing/updater/notarization env가 없을 때 expensive renderer/Rust verification 전에 fail fast 해야 한다.
 
 ## 제외
 

@@ -90,9 +90,18 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
   assert.match(buildPipelineReadiness, /checkDesktopBuildPipeline/);
   assert.match(buildPipelineReadiness, /desktopBuildPipelineRequiredFiles/);
   assert.match(buildPipelineReadiness, /desktop:doctor/);
-  for (const token of ["package-internal", "package-public", "public-report", "commonVerifySteps", "Tauri internal package build", "Tauri public package build", "create-updater-manifest", "codesign", "hdiutil"]) {
+  for (const token of ["package-internal", "package-public", "public-report", "commonVerifySteps", "Public release preflight", "Tauri internal package build", "Tauri public package build", "create-updater-manifest", "codesign", "hdiutil"]) {
     assert.match(pipelineStructure, new RegExp(token));
   }
+  const packagePublicDefinition = pipelineDefinitions.slice(pipelineDefinitions.indexOf('"package-public"'));
+  const packagePublicPreflightIndex = packagePublicDefinition.indexOf("Public release preflight");
+  const packagePublicVerifyIndex = packagePublicDefinition.indexOf("...commonVerifySteps");
+  assert.notEqual(packagePublicPreflightIndex, -1);
+  assert.notEqual(packagePublicVerifyIndex, -1);
+  assert.ok(
+    packagePublicPreflightIndex < packagePublicVerifyIndex,
+    "package-public must fail fast on missing public signing/updater/notarization env before expensive verification"
+  );
   assert.match(releaseKo, /Developer ID/);
   assert.match(releaseKo, /notarization/);
   assert.match(releaseEn, /Developer ID/);

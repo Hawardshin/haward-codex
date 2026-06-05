@@ -112,13 +112,13 @@ export const pipelines = {
   "package-public": {
     description: "Run verification, require public signing/updater/notarization environment, and build public updater artifacts through public-release-build/create-updater-manifest.",
     steps: [
-      ...commonVerifySteps,
       pnpmWorkspaceStep("Public release preflight", [
         "--filter",
         "platform-desktop-app",
         "run",
         "release:preflight:public"
       ]),
+      ...commonVerifySteps,
       step("Rust build", "cargo", ["build"], tauriRoot),
       step("Tauri public package build with signed updater artifacts", "node", ["scripts/public-release-build.mjs"], projectRoot),
       step("macOS app signature verification", "codesign", ["--verify", "--deep", "--strict", macosAppArtifact], repoRoot, {

@@ -8,3 +8,4 @@
 | PRU-REQ-004 | unchanged internal package pipeline, base ad-hoc `signingIdentity` | `package:internal` |
 | PRU-REQ-005 | `package-public`, `create-updater-manifest.mjs`, macOS verification steps | desktop tests/check, public dry/report |
 | PRU-REQ-006 | `src-tauri/Entitlements.plist`, `tauri.conf.json` macOS entitlements | readiness tests/check |
+| PRU-REQ-007 | `package-public` preflight before `commonVerifySteps` | readiness test/order check, failed retry output |

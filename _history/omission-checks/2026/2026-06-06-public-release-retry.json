@@ -1,0 +1,28 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-public-release-retry",
+  "checked_at": "2026-06-06",
+  "requested_outcome": "Retry public release packaging and fix remaining blockers that can be fixed locally.",
+  "coverage": [
+    {
+      "item": "web-first intake",
+      "status": "covered",
+      "evidence": "_history/web-searches/2026/2026-06-06-public-release-retry.ko.md"
+    },
+    {
+      "item": "actual public package retry",
+      "status": "covered",
+      "evidence": "_history/request-traces/2026/2026-06-06-public-release-retry.ko.md"
+    },
+    {
+      "item": "local fix for retry inefficiency",
+      "status": "covered",
+      "evidence": "platform-desktop-app/scripts/desktop-pipeline/definitions.mjs"
+    },
+    {
+      "item": "public release credential blocker",
+      "status": "explicitly_deferred",
+      "evidence": "_history/evaluations/2026/2026-06-06-public-release-retry.ko.md"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-public-release-retry",
+  "phases": [
+    {
+      "phase": "web_first_intake_and_credential_inventory",
+      "elapsed": "short"
+    },
+    {
+      "phase": "public_package_retry_before_fix",
+      "elapsed": "long"
+    },
+    {
+      "phase": "fail_fast_pipeline_fix",
+      "elapsed": "short"
+    },
+    {
+      "phase": "validation_and_history",
+      "elapsed": "medium"
+    }
+  ],
+  "bottleneck_notes": [
+    "The first retry spent time on expensive verification before reaching missing public release credentials.",
+    "The pipeline now checks public release credentials before expensive verification."
+  ]
+}
