@@ -129,7 +129,7 @@ const cssContracts = [
   },
   {
     selector: ".monaco-editor-shell",
-    includes: ["height: clamp(340px, 58dvh, 620px);", "min-height: 0;", "overflow: hidden;"]
+    includes: ["height: clamp(420px, 64dvh, 720px);", "min-height: 0;", "overflow: hidden;"]
   },
   {
     selector: ".tool-studio-workbench",

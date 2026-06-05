@@ -30,7 +30,8 @@ assertIncludes(css, "Source action bar design", [
   ".source-action-button.primary",
   ".source-action-button::before",
   ".source-action-button:not(:disabled):hover",
-  "minmax(128px, auto)",
+  "repeat(2, minmax(124px, auto))",
+  ".source-editor-primary-actions",
   "box-shadow:",
   "transform: translateY(-1px);"
 ]);

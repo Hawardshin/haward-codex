@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T12:56:21.668Z",
+  "generatedAt": "2026-06-05T13:13:38.321Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 444,
-    "evaluations": 26,
+    "evaluations": 24,
     "webSearches": 13,
     "timingRecords": 11,
     "historyDays": 1,
-    "adminHistoryDocuments": 2247,
+    "adminHistoryDocuments": 2254,
     "adminHistoryDays": 6,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7332,17 +7332,257 @@
   ],
   "documents": [
     {
-      "id": "history-evaluations-2026-2026-06-05-auto-build-after-implementation-input-json",
-      "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-input.json",
+      "id": "history-evaluations-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+      "path": "_history/evaluations/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
       "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 05 Auto Build After Implementation Input",
-      "excerpt": "{ \"initial instruction\": \"매번 내가 빌드 안하게 구현 다 끝나면 빌드까지 자동으로 해줘.\", \"result summary\": \"Added a durable close out rule requiring meaningful implementation work to run the owning project's build or package command before final response, with explicit exception handling when no appropri",
-      "html": "<p>{ &quot;initial instruction&quot;: &quot;매번 내가 빌드 안하게 구현 다 끝나면 빌드까지 자동으로 해줘.&quot;, &quot;result summary&quot;: &quot;Added a durable close out rule requiring meaningful implementation work to run the owning project&#039;s build or package command before final response, with explicit exception handling when no appropriate build applies.&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;changed files&quot;: &quot;AGENTS.md&quot;, &quot; </p>",
+      "language": "ko",
+      "title": "평가: Workspace Monitor 탭 전환과 소스 편집 UX",
+      "excerpt": "평가: Workspace Monitor 탭 전환과 소스 편집 UX 결과 사용자 요청의 핵심인 탭 이동 렉, 사이드바 잘림감, 소스 편집 불편을 같은 Workspace Monitor 표면에서 처리했다. 탭 전환은 더 이상 scheduleAfterFirstPaint 로 섹션 커밋을 미루지 않는다. 소스 편집 패널은 탭 이동 후에도 마운트가 유지되어 열린 드래프트와 편집 상태가 보존된다. 숨겨진 소스 패널의 런타임 side effect는 surfaceActive 로 막았다. 구현 후 고객용 렌더러 빌드",
+      "html": "<p>평가: Workspace Monitor 탭 전환과 소스 편집 UX 결과 사용자 요청의 핵심인 탭 이동 렉, 사이드바 잘림감, 소스 편집 불편을 같은 Workspace Monitor 표면에서 처리했다. 탭 전환은 더 이상 scheduleAfterFirstPaint 로 섹션 커밋을 미루지 않는다. 소스 편집 패널은 탭 이동 후에도 마운트가 유지되어 열린 드래프트와 편집 상태가 보존된다. 숨겨진 소스 패널의 런타임 side effect는 surfaceActive 로 막았다. 구현 후 고객용 렌더러 빌드까지 실행했다. 검증 corepack pnpm dir platform desktop app/renderer/workspace monitor te</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 5887,
-      "updatedAt": "2026-06-05T12:55:35.485Z",
+      "sourceBytes": 1445,
+      "updatedAt": "2026-06-05T13:13:07.876Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-05-workspace-monitor-tab-editor-ux-json",
+      "path": "_history/work-timings/2026/2026-06-05-workspace-monitor-tab-editor-ux.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 05 Workspace Monitor Tab Editor Ux",
+      "excerpt": "{ \"task\": \"workspace monitor tab/editor/sidebar ux\", \"date\": \"2026 06 05\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"intake research and local inspection\", \"approx minutes\": 18 }, { \"phase\": \"implementation\", \"approx minutes\": 32 }, { \"phase\": \"test build browser validation",
+      "html": "<p>{ &quot;task&quot;: &quot;workspace monitor tab/editor/sidebar ux&quot;, &quot;date&quot;: &quot;2026 06 05&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;intake research and local inspection&quot;, &quot;approx minutes&quot;: 18 }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;approx minutes&quot;: 32 }, { &quot;phase&quot;: &quot;test build browser validation&quot;, &quot;approx minutes&quot;: 18 }, { &quot;phase&quot;: &quot;history records and closeout&quot;, &quot;approx mi</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 577,
+      "updatedAt": "2026-06-05T13:13:07.876Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+      "path": "_history/request-traces/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Workspace Monitor 탭 전환과 소스 편집 UX",
+      "excerpt": "요청 결과 추적: Workspace Monitor 탭 전환과 소스 편집 UX 요청 탭 전환 렉 완화. 사이드바 잘림 완화. 코드 편집 UX 개선. 구현 후 빌드 자동 수행. 결과 탭 전환 지연 커밋 제거. 소스 편집 패널 마운트 유지와 숨김 상태 resource guard 추가. 사이드바/소스 편집 CSS와 Monaco 기본값 개선. 테스트/체크/빌드/브라우저 스모크 완료. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 05 workspace",
+      "html": "<p>요청 결과 추적: Workspace Monitor 탭 전환과 소스 편집 UX 요청 탭 전환 렉 완화. 사이드바 잘림 완화. 코드 편집 UX 개선. 구현 후 빌드 자동 수행. 결과 탭 전환 지연 커밋 제거. 소스 편집 패널 마운트 유지와 숨김 상태 resource guard 추가. 사이드바/소스 편집 CSS와 Monaco 기본값 개선. 테스트/체크/빌드/브라우저 스모크 완료. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 05 workspace monitor tab editor ux.ko.md 스펙: platform desktop app/specs/2026 06 05 workspace</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 976,
+      "updatedAt": "2026-06-05T13:13:07.875Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+      "path": "_history/user-requests/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Workspace Monitor 탭 전환과 소스 편집 UX",
+      "excerpt": "사용자 요청 요약: Workspace Monitor 탭 전환과 소스 편집 UX 사용자는 Workspace Monitor에서 탭 이동 시 매번 불러오는 느낌 때문에 느리고, 사이드바가 묘하게 잘리며, 코드 편집 기능이 불편하고 직관성이 낮다고 지적했다. 사용자는 구현 완료 후 직접 빌드하지 않도록 빌드까지 자동 수행하라는 지속 지시도 이전에 부여했다. 요청 해석 탭 전환의 의도적 렌더 지연 제거. 편집 화면 상태 보존과 조작 흐름 개선. 사이드바/소스 컨트롤의 가로 잘림 완화. 테스트와 빌드까지 수",
+      "html": "<p>사용자 요청 요약: Workspace Monitor 탭 전환과 소스 편집 UX 사용자는 Workspace Monitor에서 탭 이동 시 매번 불러오는 느낌 때문에 느리고, 사이드바가 묘하게 잘리며, 코드 편집 기능이 불편하고 직관성이 낮다고 지적했다. 사용자는 구현 완료 후 직접 빌드하지 않도록 빌드까지 자동 수행하라는 지속 지시도 이전에 부여했다. 요청 해석 탭 전환의 의도적 렌더 지연 제거. 편집 화면 상태 보존과 조작 흐름 개선. 사이드바/소스 컨트롤의 가로 잘림 완화. 테스트와 빌드까지 수행.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 645,
+      "updatedAt": "2026-06-05T13:13:07.875Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Workspace Monitor 탭 전환과 소스 편집 UX",
+      "excerpt": "작업 요약: Workspace Monitor 탭 전환과 소스 편집 UX MonitorShell.tsx 에서 섹션 전환을 첫 페인트 이후로 미루던 상태와 ref를 제거했다. Monaco와 에이전트 3D scene 모듈을 idle 시간에 선로딩하도록 추가했다. 소스 편집 패널을 숨김 상태에서도 마운트 유지하고, 숨겨진 상태에서 런타임 실행 요청과 세션 폴링을 처리하지 않도록 surfaceActive 를 추가했다. 사이드바 확장 폭과 터미널 오프셋을 조정했다. Monaco 기본값을 줄바꿈 켬, 미니맵 ",
+      "html": "<p>작업 요약: Workspace Monitor 탭 전환과 소스 편집 UX MonitorShell.tsx 에서 섹션 전환을 첫 페인트 이후로 미루던 상태와 ref를 제거했다. Monaco와 에이전트 3D scene 모듈을 idle 시간에 선로딩하도록 추가했다. 소스 편집 패널을 숨김 상태에서도 마운트 유지하고, 숨겨진 상태에서 런타임 실행 요청과 세션 폴링을 처리하지 않도록 surfaceActive 를 추가했다. 사이드바 확장 폭과 터미널 오프셋을 조정했다. Monaco 기본값을 줄바꿈 켬, 미니맵 끔, 글꼴 13px, 더 큰 편집 높이로 바꾸고 편집기 바로 위 주요 액션을 추가했다. 정적 테스트와 CSS 감사 스크립트를 새 레이아웃 계약에</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 871,
+      "updatedAt": "2026-06-05T13:13:07.875Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-plans-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+      "path": "_history/plans/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "계획 기록: Workspace Monitor 탭 전환과 소스 편집 UX",
+      "excerpt": "계획 기록: Workspace Monitor 탭 전환과 소스 편집 UX 완료된 계획 1. 탭 mount와 렌더 지연 구조 파악. 2. 사이드바 잘림과 레이아웃 원인 수정. 3. 코드 편집 UX를 더 직접적인 작업 흐름으로 개선. 4. 테스트, 빌드, 브라우저 검증 실행. 5. 기록, 커밋, 푸시. 주요 결정 섹션 전환 지연 로직은 제거했다. 소스 패널은 마운트 유지하되 숨김 상태 side effect는 가드했다. Monaco 기본값은 좁은 화면에서 더 읽기 쉬운 편집 설정으로 바꿨다.",
+      "html": "<p>계획 기록: Workspace Monitor 탭 전환과 소스 편집 UX 완료된 계획 1. 탭 mount와 렌더 지연 구조 파악. 2. 사이드바 잘림과 레이아웃 원인 수정. 3. 코드 편집 UX를 더 직접적인 작업 흐름으로 개선. 4. 테스트, 빌드, 브라우저 검증 실행. 5. 기록, 커밋, 푸시. 주요 결정 섹션 전환 지연 로직은 제거했다. 소스 패널은 마운트 유지하되 숨김 상태 side effect는 가드했다. Monaco 기본값은 좁은 화면에서 더 읽기 쉬운 편집 설정으로 바꿨다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 574,
+      "updatedAt": "2026-06-05T13:13:07.874Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+      "path": "_history/web-searches/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: Workspace Monitor 탭 전환과 소스 편집 UX",
+      "excerpt": "웹 검색 기록: Workspace Monitor 탭 전환과 소스 편집 UX 일시: 2026 06 05 목적: 탭 전환 지연과 숨김/선로딩 UX 개선 전 외부 공식 근거 확인. 확인한 출처 React lazy : https://react.dev/reference/react/lazy React Suspense : https://react.dev/reference/react/Suspense MDN content visibility : https://developer.mozilla.org/en US/do",
+      "html": "<p>웹 검색 기록: Workspace Monitor 탭 전환과 소스 편집 UX 일시: 2026 06 05 목적: 탭 전환 지연과 숨김/선로딩 UX 개선 전 외부 공식 근거 확인. 확인한 출처 React lazy : https://react.dev/reference/react/lazy React Suspense : https://react.dev/reference/react/Suspense MDN content visibility : https://developer.mozilla.org/en US/docs/Web/CSS/content visibility 판단 요약 React lazy/dynamic import는 처음 렌더 시점까지 코드 로딩이</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1351,
+      "updatedAt": "2026-06-05T13:13:07.874Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-05-workspace-monitor-tab-editor-ux-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-05-workspace-monitor-tab-editor-ux/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "계획: Workspace Monitor 탭 전환과 소스 편집 UX",
+      "excerpt": "계획: Workspace Monitor 탭 전환과 소스 편집 UX 실행 순서 1. 탭 지연 렌더링 구조 확인. 2. 섹션 커밋을 즉시 처리하고 모듈 선로딩 추가. 3. 소스 편집 패널 상태 보존과 숨김 상태 리소스 가드 추가. 4. 사이드바와 소스 편집 CSS 계약 조정. 5. 테스트, 타입/정적 체크, 고객용 빌드, 브라우저 스모크 실행. 선택한 구현 옵션 선택: 기존 React/Next/Monaco 구조 유지. 대안으로 전체 탭 패널을 모두 상시 실행하는 방식은 런타임 폴링과 파일 시스템 작업",
+      "html": "<h1>계획: Workspace Monitor 탭 전환과 소스 편집 UX</h1>\n<h2>실행 순서</h2>\n<p>1. 탭 지연 렌더링 구조 확인.</p>\n<p>2. 섹션 커밋을 즉시 처리하고 모듈 선로딩 추가.</p>\n<p>3. 소스 편집 패널 상태 보존과 숨김 상태 리소스 가드 추가.</p>\n<p>4. 사이드바와 소스 편집 CSS 계약 조정.</p>\n<p>5. 테스트, 타입/정적 체크, 고객용 빌드, 브라우저 스모크 실행.</p>\n<h2>선택한 구현 옵션</h2>\n<ul>\n<li>선택: 기존 React/Next/Monaco 구조 유지.</li>\n<li>대안으로 전체 탭 패널을 모두 상시 실행하는 방식은 런타임 폴링과 파일 시스템 작업 중복 위험이 있어 제외했다.</li>\n<li>소스 편집 패널만 마운트 유지하고, 무거운 동적 모듈은 idle 선로딩으로 처리했다.</li>\n</ul>\n<h2>리스크 제어</h2>\n<ul>\n<li>숨겨진 소스 패널이 런타임 요청을 소비하지 않도록 <code>surfaceActive</code>를 추가했다.</li>\n<li>정적 고객 스냅샷에서는 실제 파일이 없어 Monaco 편집 본문이 뜨지 않는 제한을 브라우저 검증에 기록했다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1016,
+      "updatedAt": "2026-06-05T13:13:07.873Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-05-workspace-monitor-tab-editor-ux-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-05-workspace-monitor-tab-editor-ux/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록: Workspace Monitor 탭 전환과 소스 편집 UX",
+      "excerpt": "작업 목록: Workspace Monitor 탭 전환과 소스 편집 UX x 웹 검색 기록 생성 x memory bootstrap 확인 x ship first 작업 모드 선택 x 탭 전환 지연 상태 제거 x Monaco/3D 모듈 선로딩 추가 x 소스 패널 마운트 유지와 숨김 상태 리소스 가드 추가 x 사이드바 폭과 터미널 오프셋 조정 x 소스 편집 액션/Monaco 기본값/CSS 계약 개선 x 테스트와 정적 감사 갱신 x 빌드와 브라우저 스모크 실행 x 평가와 요청 추적 기록",
+      "html": "<h1>작업 목록: Workspace Monitor 탭 전환과 소스 편집 UX</h1>\n<ul>\n<li>[x] 웹 검색 기록 생성</li>\n<li>[x] memory bootstrap 확인</li>\n<li>[x] <code>ship_first</code> 작업 모드 선택</li>\n<li>[x] 탭 전환 지연 상태 제거</li>\n<li>[x] Monaco/3D 모듈 선로딩 추가</li>\n<li>[x] 소스 패널 마운트 유지와 숨김 상태 리소스 가드 추가</li>\n<li>[x] 사이드바 폭과 터미널 오프셋 조정</li>\n<li>[x] 소스 편집 액션/Monaco 기본값/CSS 계약 개선</li>\n<li>[x] 테스트와 정적 감사 갱신</li>\n<li>[x] 빌드와 브라우저 스모크 실행</li>\n<li>[x] 평가와 요청 추적 기록</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 562,
+      "updatedAt": "2026-06-05T13:13:07.873Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-05-workspace-monitor-tab-editor-ux-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-05-workspace-monitor-tab-editor-ux/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적성: Workspace Monitor 탭 전환과 소스 편집 UX",
+      "excerpt": "추적성: Workspace Monitor 탭 전환과 소스 편집 UX | 요구사항 | 구현 | 검증 | | | | | | REQ DESKTOP UX 2026 06 05 001 | MonitorShell.tsx 의 readySection / pendingSectionCommitRef 제거, prewarmWorkSurfaces 추가 | tool studio.test.mjs , 브라우저 스모크 | | REQ DESKTOP UX 2026 06 05 002 | MountedSectionPanel , surf",
+      "html": "<h1>추적성: Workspace Monitor 탭 전환과 소스 편집 UX</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-DESKTOP-UX-2026-06-05-001</td><td><code>MonitorShell.tsx</code>의 <code>readySection</code>/<code>pendingSectionCommitRef</code> 제거, <code>prewarmWorkSurfaces</code> 추가</td><td><code>tool-studio.test.mjs</code>, 브라우저 스모크</td></tr><tr><td>REQ-DESKTOP-UX-2026-06-05-002</td><td><code>MountedSectionPanel</code>, <code>surfaceActive</code> 추가</td><td><code>tool-studio.test.mjs</code>, 브라우저 DOM 확인</td></tr><tr><td>REQ-DESKTOP-UX-2026-06-05-003</td><td><code>globals.css</code> 사이드바/소스 컨트롤/Monaco 높이 조정, 감사 스크립트 갱신</td><td><code>check-scroll-containers.mjs</code>, <code>check-source-control-design.mjs</code>, 브라우저 overflow 확인</td></tr></tbody></table>\n<h2>산출물</h2>\n<ul>\n<li><code>platform-desktop-app/docs/requirements/2026-06-05-workspace-monitor-tab-editor-ux.ko.md</code></li>\n<li><code>platform-desktop-app/specs/2026-06-05-workspace-monitor-tab-editor-ux/</code></li>\n<li><code>_history/request-traces/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md</code></li>\n<li><code>_history/evaluations/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1004,
+      "updatedAt": "2026-06-05T13:13:07.873Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-05-workspace-monitor-tab-editor-ux-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-05-workspace-monitor-tab-editor-ux/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증: Workspace Monitor 탭 전환과 소스 편집 UX",
+      "excerpt": "검증: Workspace Monitor 탭 전환과 소스 편집 UX 명령 corepack pnpm dir platform desktop app/renderer/workspace monitor test : 통과, 53개 테스트. corepack pnpm dir platform desktop app/renderer/workspace monitor check : 통과. corepack pnpm dir platform desktop app run renderer:build : 통과, Next product",
+      "html": "<h1>검증: Workspace Monitor 탭 전환과 소스 편집 UX</h1>\n<h2>명령</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code>: 통과, 53개 테스트.</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor check</code>: 통과.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run renderer:build</code>: 통과, Next production build와 customer bundle audit 성공.</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code>: 빌드 후 개발용 public snapshot 정상화.</li>\n</ul>\n<h2>브라우저 스모크</h2>\n<ul>\n<li>URL: <code>http://127.0.0.1:4173</code></li>\n<li>초기 상태: <code>activeSection=overview</code>, <code>data-section-content-ready=true</code>, 소스 패널 마운트됨, hidden 상태.</li>\n<li>소스 탭 전환: <code>activeSection=source</code>, 소스 패널 hidden 해제, 가로 오버플로 없음.</li>\n<li>반복 전환: tools -&gt; source 후 소스 패널 계속 마운트됨, 가로 오버플로 없음.</li>\n<li>콘솔 에러: 없음.</li>\n</ul>\n<h2>제한</h2>\n<ul>\n<li>정적 customer build에는 실제 소스 파일 목록이 없어 Monaco 편집 본문까지는 브라우저에서 확인하지 못했다. Monaco 기본값과 소스 편집 액션은 정적 테스트, 타입 체크, 빌드로 검증했다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1200,
+      "updatedAt": "2026-06-05T13:13:07.873Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: Workspace Monitor 탭 전환과 소스 편집 UX",
+      "excerpt": "요구사항: Workspace Monitor 탭 전환과 소스 편집 UX 요청일: 2026 06 05 소유 프로젝트: platform desktop app 대상 화면: renderer/workspace monitor 요구사항 | ID | 요구사항 | 우선순위 | 수용 기준 | 검증 | | | | | | | | REQ DESKTOP UX 2026 06 05 001 | Workspace Monitor의 주요 탭 전환은 의도적인 첫 페인트 후 렌더 지연으로 체감 로딩을 만들지 않아야 한다. | must |",
+      "html": "<h1>요구사항: Workspace Monitor 탭 전환과 소스 편집 UX</h1>\n<ul>\n<li>요청일: 2026-06-05</li>\n<li>소유 프로젝트: <code>platform-desktop-app</code></li>\n<li>대상 화면: <code>renderer/workspace-monitor</code></li>\n</ul>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>수용 기준</th><th>검증</th></tr></thead><tbody><tr><td>REQ-DESKTOP-UX-2026-06-05-001</td><td>Workspace Monitor의 주요 탭 전환은 의도적인 첫 페인트 후 렌더 지연으로 체감 로딩을 만들지 않아야 한다.</td><td>must</td><td>탭 전환 커밋이 즉시 실행되고, 무거운 모듈은 idle 시간에 선로딩된다.</td><td><code>workspace-monitor test</code>, <code>workspace-monitor check</code>, 브라우저 스모크</td></tr><tr><td>REQ-DESKTOP-UX-2026-06-05-002</td><td>소스 편집 화면은 탭 이동 후에도 열린 편집 상태를 유지해야 한다.</td><td>must</td><td>소스 패널이 숨김 상태에서도 마운트 유지되고, 숨겨진 상태에서는 런타임 실행 요청과 세션 폴링을 소비하지 않는다.</td><td>정적 테스트, 브라우저 DOM 확인</td></tr><tr><td>REQ-DESKTOP-UX-2026-06-05-003</td><td>사이드바 확장 상태와 소스 편집 컨트롤은 가로 잘림 없이 읽고 누를 수 있어야 한다.</td><td>must</td><td>확장 레일 폭, 터미널 오프셋, 소스 액션바, Monaco 기본 옵션이 새 레이아웃 계약에 맞는다.</td><td>CSS 계약 감사, 브라우저 overflow 확인</td></tr></tbody></table>\n<h2>범위</h2>\n<ul>\n<li>포함: 탭 전환 지연 제거, Monaco/3D 모듈 선로딩, 소스 패널 마운트 유지, 사이드바 폭 조정, 소스 편집 액션과 Monaco 기본값 개선.</li>\n<li>제외: Tauri 네이티브 파일 권한 흐름 변경, Monaco 자체 기능 확장, 전체 데스크톱 패키징 정책 변경.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1629,
+      "updatedAt": "2026-06-05T13:13:07.872Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-05-workspace-monitor-tab-editor-ux-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-05-workspace-monitor-tab-editor-ux/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "스펙: Workspace Monitor 탭 전환과 소스 편집 UX",
+      "excerpt": "스펙: Workspace Monitor 탭 전환과 소스 편집 UX 목표 Workspace Monitor에서 탭 이동 시 느린 로딩감을 줄이고, 소스 편집 화면의 상태 보존과 조작 직관성을 높인다. 설계 결정 readySection 과 pendingSectionCommitRef 기반의 섹션 지연 커밋을 제거한다. @monaco editor/react 와 AgentCollaborationScene 은 브라우저 idle 시간에 동적 import로 선로딩한다. 소스 편집 패널은 MountedSection",
+      "html": "<h1>스펙: Workspace Monitor 탭 전환과 소스 편집 UX</h1>\n<h2>목표</h2>\n<p>Workspace Monitor에서 탭 이동 시 느린 로딩감을 줄이고, 소스 편집 화면의 상태 보존과 조작 직관성을 높인다.</p>\n<h2>설계 결정</h2>\n<ul>\n<li><code>readySection</code>과 <code>pendingSectionCommitRef</code> 기반의 섹션 지연 커밋을 제거한다.</li>\n<li><code>@monaco-editor/react</code>와 <code>AgentCollaborationScene</code>은 브라우저 idle 시간에 동적 import로 선로딩한다.</li>\n<li>소스 편집 패널은 <code>MountedSectionPanel</code>로 숨김 상태에서도 유지해 열린 드래프트와 에디터 상태가 탭 이동으로 사라지지 않게 한다.</li>\n<li>숨겨진 소스 패널은 <code>surfaceActive</code>로 런타임 실행 요청 소비와 세션 폴링을 막는다.</li>\n<li>Monaco 기본값은 줄바꿈 켬, 미니맵 끔, 더 큰 글꼴과 높은 편집 영역으로 조정한다.</li>\n<li>사이드바 확장 폭과 터미널 오프셋을 함께 조정한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>data-section-content-ready</code>는 탭 이동 중 <code>false</code> 준비 상태로 떨어지지 않는다.</li>\n<li>소스 패널 DOM은 초기부터 존재하고 비활성 탭에서는 <code>hidden</code>으로 숨겨진다.</li>\n<li>소스 탭 활성화 시 가로 오버플로가 생기지 않는다.</li>\n<li>고객용 렌더러 빌드가 성공한다.</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>React 공식 문서는 lazy 컴포넌트 코드가 처음 렌더 시점까지 지연될 수 있음을 설명한다: https://react.dev/reference/react/lazy</li>\n<li>React Suspense는 아직 로드되지 않은 콘텐츠 대신 fallback을 표시하는 패턴을 제공한다: https://react.dev/reference/react/Suspense</li>\n<li>MDN <code>content-visibility</code> 문서는 숨김/렌더링 비용 관리가 브라우저 렌더링과 연결됨을 설명한다: https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1763,
+      "updatedAt": "2026-06-05T13:13:07.872Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-05-auto-build-after-implementation-ko-md",
+      "path": "_history/request-traces/2026/2026-06-05-auto-build-after-implementation.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: 구현 완료 후 자동 빌드",
+      "excerpt": "요청 결과 추적: 구현 완료 후 자동 빌드 요청 구현 후 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동 수행. 결과 durable instruction과 Codex adapter에 구현 완료 후 build/package 실행 규칙을 추가했다. memory bootstrap manifest에 해당 규칙을 persistent instruction anchor 용도로 반영했다. 산출물 docs/instructions/persistent instructions.md docs/instruction",
+      "html": "<p>요청 결과 추적: 구현 완료 후 자동 빌드 요청 구현 후 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동 수행. 결과 durable instruction과 Codex adapter에 구현 완료 후 build/package 실행 규칙을 추가했다. memory bootstrap manifest에 해당 규칙을 persistent instruction anchor 용도로 반영했다. 산출물 docs/instructions/persistent instructions.md docs/instructions/persistent instructions.ko.md docs/instructions/persistent instructions.en.md </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1033,
+      "updatedAt": "2026-06-05T12:57:42.657Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "specs-workspace-platform-2026-06-05-auto-build-after-implementation-tasks-ko-md",
+      "path": "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/tasks.ko.md",
+      "category": "shared-spec",
+      "language": "ko",
+      "title": "작업 목록: 구현 완료 후 자동 빌드 규칙",
+      "excerpt": "작업 목록: 구현 완료 후 자동 빌드 규칙 x 웹 검색 기록 생성 x memory bootstrap 확인 x work mode 선택 기록 생성 x persistent instruction 한국어/영어/공통 문서 갱신 x AGENTS.md close out rule 갱신 x memory bootstrap manifest 갱신 x 요구사항 변경/검토 기록 생성 x 스펙/계획/검증/추적성 기록 생성 x 검증 명령 실행 x 평가 기록 생성 x 커밋 및 푸시",
+      "html": "<h1>작업 목록: 구현 완료 후 자동 빌드 규칙</h1>\n<ul>\n<li>[x] 웹 검색 기록 생성</li>\n<li>[x] memory bootstrap 확인</li>\n<li>[x] work_mode 선택 기록 생성</li>\n<li>[x] persistent instruction 한국어/영어/공통 문서 갱신</li>\n<li>[x] <code>AGENTS.md</code> close-out rule 갱신</li>\n<li>[x] memory bootstrap manifest 갱신</li>\n<li>[x] 요구사항 변경/검토 기록 생성</li>\n<li>[x] 스펙/계획/검증/추적성 기록 생성</li>\n<li>[x] 검증 명령 실행</li>\n<li>[x] 평가 기록 생성</li>\n<li>[x] 커밋 및 푸시</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 477,
+      "updatedAt": "2026-06-05T12:57:42.657Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_specs/workspace-platform"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-05-auto-build-after-implementation-omission-json",
+      "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 05 Auto Build After Implementation Omission",
+      "excerpt": "{ \"task\": \"Auto build after implementation durable rule.\", \"work mode\": \"governance\", \"expected items\": { \"item id\": \"persist user rule\", \"description\": \"Persist the user's future instruction that implementation work should run build/package before close out.\", \"source\": \" histor",
+      "html": "<p>{ &quot;task&quot;: &quot;Auto build after implementation durable rule.&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;expected items&quot;: { &quot;item id&quot;: &quot;persist user rule&quot;, &quot;description&quot;: &quot;Persist the user&#039;s future instruction that implementation work should run build/package before close out.&quot;, &quot;source&quot;: &quot; history/user requests/2026/2026 06 05 auto build after implementation.ko.md&quot;, &quot;require</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 6162,
+      "updatedAt": "2026-06-05T12:57:15.245Z",
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
@@ -7357,8 +7597,40 @@
       "html": "<p>평가: 구현 완료 후 자동 빌드 규칙 결과 사용자의 지속 지시를 durable instruction과 Codex runtime adapter에 반영했다. 의미 있는 구현 작업은 최종 응답 전에 담당 프로젝트의 build/package 명령을 실행해야 한다. build 명령이 없거나 부적절한 경우 이유와 가장 강한 대체 검증을 기록하도록 예외 조건을 명시했다. memory bootstrap manifest에 이 규칙을 persistent instruction hot context로 연결했다. 검증 python3 tools/docs audit/src/docs audit.py check : 통과 PYTHONPATH=src python3 m a</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 1843,
-      "updatedAt": "2026-06-05T12:55:26.168Z",
+      "sourceBytes": 2165,
+      "updatedAt": "2026-06-05T12:57:00.892Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-05-auto-build-after-implementation-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-05-auto-build-after-implementation.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 구현 완료 후 자동 빌드",
+      "excerpt": "작업 요약: 구현 완료 후 자동 빌드 구현 완료 후 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 규칙을 추가했다. build가 없거나 부적절한 경우 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/히스토리/평가 기록을 연결했다. 새 히스토리 기록을 반영하도록 Workspace Monitor developer snapshot을 재수집하고 che",
+      "html": "<p>작업 요약: 구현 완료 후 자동 빌드 구현 완료 후 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 규칙을 추가했다. build가 없거나 부적절한 경우 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/히스토리/평가 기록을 연결했다. 새 히스토리 기록을 반영하도록 Workspace Monitor developer snapshot을 재수집하고 check를 통과시켰다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 541,
+      "updatedAt": "2026-06-05T12:57:00.892Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-05-auto-build-after-implementation-input-json",
+      "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 05 Auto Build After Implementation Input",
+      "excerpt": "{ \"initial instruction\": \"매번 내가 빌드 안하게 구현 다 끝나면 빌드까지 자동으로 해줘.\", \"result summary\": \"Added a durable close out rule requiring meaningful implementation work to run the owning project's build or package command before final response, with explicit exception handling when no appropri",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;매번 내가 빌드 안하게 구현 다 끝나면 빌드까지 자동으로 해줘.&quot;, &quot;result summary&quot;: &quot;Added a durable close out rule requiring meaningful implementation work to run the owning project&#039;s build or package command before final response, with explicit exception handling when no appropriate build applies.&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;changed files&quot;: &quot;AGENTS.md&quot;, &quot; </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 6598,
+      "updatedAt": "2026-06-05T12:57:00.891Z",
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
@@ -7370,27 +7642,11 @@
       "language": "ko",
       "title": "검증: 구현 완료 후 자동 빌드 규칙",
       "excerpt": "검증: 구현 완료 후 자동 빌드 규칙 검증 계획 python3 tools/docs audit/src/docs audit.py check PYTHONPATH=src python3 m agent platform.cli check memory bootstrap configs/memory/bootstrap manifest.json PYTHONPATH=src python3 m agent platform.cli check config contract configs/memory/bootstrap manifes",
-      "html": "<h1>검증: 구현 완료 후 자동 빌드 규칙</h1>\n<h2>검증 계획</h2>\n<ul>\n<li><code>python3 _tools/docs-audit/src/docs_audit.py --check</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-05-auto-build-after-implementation-input.json</code></li>\n<li><code>python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-05-auto-build-after-implementation.json</code></li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>결과</h2>\n<ul>\n<li><code>python3 _tools/docs-audit/src/docs_audit.py --check</code>: <code>docs_ready</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json</code>: <code>ready_to_bootstrap</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json</code>: <code>self_documenting</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json</code>: <code>coverage_ready</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-05-auto-build-after-implementation-input.json</code>: <code>ready_to_close</code></li>\n<li><code>python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-05-auto-build-after-implementation.json</code>: <code>ready</code>, timing은 사후 partial 기록이라 phase duration 경고 있음</li>\n<li><code>git diff --check</code>: 통과</li>\n</ul>\n<h2>빌드 적용성</h2>\n<ul>\n<li>이번 변경은 제품 source implementation이 아니라 durable instruction과 memory config 변경이다.</li>\n<li>owning project build/package 대상이 없으므로 전체 제품 빌드 대신 docs audit, memory bootstrap, config contract, omission guard, evaluator를 대체 검증으로 사용한다.</li>\n</ul>",
+      "html": "<h1>검증: 구현 완료 후 자동 빌드 규칙</h1>\n<h2>검증 계획</h2>\n<ul>\n<li><code>python3 _tools/docs-audit/src/docs_audit.py --check</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-05-auto-build-after-implementation-input.json</code></li>\n<li><code>python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-05-auto-build-after-implementation.json</code></li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>결과</h2>\n<ul>\n<li><code>python3 _tools/docs-audit/src/docs_audit.py --check</code>: <code>docs_ready</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json</code>: <code>ready_to_bootstrap</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json</code>: <code>self_documenting</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json</code>: <code>coverage_ready</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-05-auto-build-after-implementation-input.json</code>: <code>ready_to_close</code></li>\n<li><code>python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-05-auto-build-after-implementation.json</code>: <code>ready</code>, timing은 사후 partial 기록이라 phase duration 경고 있음</li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code>: developer public snapshot 재생성, 650 inline documents와 2247 admin history records 기록</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과, customer fallback 관련 stale public snapshot warning은 허용된 prebuild 경고</li>\n<li><code>git diff --check</code>: 통과</li>\n</ul>\n<h2>빌드 적용성</h2>\n<ul>\n<li>이번 변경은 제품 source implementation이 아니라 durable instruction과 memory config 변경이다.</li>\n<li>owning project build/package 대상이 없으므로 전체 제품 빌드 대신 docs audit, memory bootstrap, config contract, omission guard, evaluator, Workspace Monitor check, platform desktop check를 대체 검증으로 사용한다.</li>\n</ul>",
       "previewMode": "document-preview",
       "htmlTruncated": false,
-      "sourceBytes": 2031,
-      "updatedAt": "2026-06-05T12:55:26.168Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-05-auto-build-after-implementation-tasks-ko-md",
-      "path": "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/tasks.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "작업 목록: 구현 완료 후 자동 빌드 규칙",
-      "excerpt": "작업 목록: 구현 완료 후 자동 빌드 규칙 x 웹 검색 기록 생성 x memory bootstrap 확인 x work mode 선택 기록 생성 x persistent instruction 한국어/영어/공통 문서 갱신 x AGENTS.md close out rule 갱신 x memory bootstrap manifest 갱신 x 요구사항 변경/검토 기록 생성 x 스펙/계획/검증/추적성 기록 생성 x 검증 명령 실행 x 평가 기록 생성 커밋 및 푸시",
-      "html": "<h1>작업 목록: 구현 완료 후 자동 빌드 규칙</h1>\n<ul>\n<li>[x] 웹 검색 기록 생성</li>\n<li>[x] memory bootstrap 확인</li>\n<li>[x] work_mode 선택 기록 생성</li>\n<li>[x] persistent instruction 한국어/영어/공통 문서 갱신</li>\n<li>[x] <code>AGENTS.md</code> close-out rule 갱신</li>\n<li>[x] memory bootstrap manifest 갱신</li>\n<li>[x] 요구사항 변경/검토 기록 생성</li>\n<li>[x] 스펙/계획/검증/추적성 기록 생성</li>\n<li>[x] 검증 명령 실행</li>\n<li>[x] 평가 기록 생성</li>\n<li>[ ] 커밋 및 푸시</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 477,
-      "updatedAt": "2026-06-05T12:55:26.167Z",
+      "sourceBytes": 2447,
+      "updatedAt": "2026-06-05T12:57:00.890Z",
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "_specs/workspace-platform"
@@ -7412,22 +7668,6 @@
       "workspaceArea": "_history/2026"
     },
     {
-      "id": "history-evaluations-2026-2026-06-05-auto-build-after-implementation-omission-json",
-      "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 05 Auto Build After Implementation Omission",
-      "excerpt": "{ \"task\": \"Auto build after implementation durable rule.\", \"work mode\": \"governance\", \"expected items\": { \"item id\": \"persist user rule\", \"description\": \"Persist the user's future instruction that implementation work should run build/package before close out.\", \"source\": \" histor",
-      "html": "<p>{ &quot;task&quot;: &quot;Auto build after implementation durable rule.&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;expected items&quot;: { &quot;item id&quot;: &quot;persist user rule&quot;, &quot;description&quot;: &quot;Persist the user&#039;s future instruction that implementation work should run build/package before close out.&quot;, &quot;source&quot;: &quot; history/user requests/2026/2026 06 05 auto build after implementation.ko.md&quot;, &quot;require</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 4288,
-      "updatedAt": "2026-06-05T12:54:26.572Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
       "id": "history-work-timings-2026-2026-06-05-auto-build-after-implementation-json",
       "path": "_history/work-timings/2026/2026-06-05-auto-build-after-implementation.json",
       "category": "work-timing",
@@ -7444,22 +7684,6 @@
       "workspaceArea": "_history/work-timings"
     },
     {
-      "id": "history-request-traces-2026-2026-06-05-auto-build-after-implementation-ko-md",
-      "path": "_history/request-traces/2026/2026-06-05-auto-build-after-implementation.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: 구현 완료 후 자동 빌드",
-      "excerpt": "요청 결과 추적: 구현 완료 후 자동 빌드 요청 구현 후 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동 수행. 결과 durable instruction과 Codex adapter에 구현 완료 후 build/package 실행 규칙을 추가했다. memory bootstrap manifest에 해당 규칙을 persistent instruction anchor 용도로 반영했다. 산출물 docs/instructions/persistent instructions.md docs/instruction",
-      "html": "<p>요청 결과 추적: 구현 완료 후 자동 빌드 요청 구현 후 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동 수행. 결과 durable instruction과 Codex adapter에 구현 완료 후 build/package 실행 규칙을 추가했다. memory bootstrap manifest에 해당 규칙을 persistent instruction anchor 용도로 반영했다. 산출물 docs/instructions/persistent instructions.md docs/instructions/persistent instructions.ko.md docs/instructions/persistent instructions.en.md </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 920,
-      "updatedAt": "2026-06-05T12:53:58.423Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
       "id": "history-user-requests-2026-2026-06-05-auto-build-after-implementation-ko-md",
       "path": "_history/user-requests/2026/2026-06-05-auto-build-after-implementation.ko.md",
       "category": "user-request",
@@ -7474,22 +7698,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-05-auto-build-after-implementation-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-05-auto-build-after-implementation.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: 구현 완료 후 자동 빌드",
-      "excerpt": "작업 요약: 구현 완료 후 자동 빌드 구현 완료 후 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 규칙을 추가했다. build가 없거나 부적절한 경우 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/히스토리/평가 기록을 연결했다.",
-      "html": "<p>작업 요약: 구현 완료 후 자동 빌드 구현 완료 후 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 규칙을 추가했다. build가 없거나 부적절한 경우 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/히스토리/평가 기록을 연결했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 414,
-      "updatedAt": "2026-06-05T12:53:58.423Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
     },
     {
       "id": "specs-workspace-platform-2026-06-05-auto-build-after-implementation-traceability-ko-md",
@@ -9428,38 +9636,6 @@
       "workspaceArea": "_history/work-summaries"
     },
     {
-      "id": "history-evaluations-2026-2026-06-05-tool-studio-source-separation-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-05-tool-studio-source-separation-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 05 Tool Studio Source Separation Evaluation Input",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"tool studio source separation\", \"project\": \"workspace monitor\", \"installation occurred\": false, \"resource risk occurred\": false, \"requirements\": \"REQ WM 071\" , \"mode selection record targets\": \" history/mode selections/2026/2026 06 05 tool",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request slug&quot;: &quot;tool studio source separation&quot;, &quot;project&quot;: &quot;workspace monitor&quot;, &quot;installation occurred&quot;: false, &quot;resource risk occurred&quot;: false, &quot;requirements&quot;: &quot;REQ WM 071&quot; , &quot;mode selection record targets&quot;: &quot; history/mode selections/2026/2026 06 05 tool studio source separation.json&quot; , &quot;omission check targets&quot;: &quot; history/omission c</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1682,
-      "updatedAt": "2026-06-05T02:47:53.816Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-tool-studio-source-separation-ko-md",
-      "path": "_history/evaluations/2026/2026-06-05-tool-studio-source-separation.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: Tool Studio Source Separation",
-      "excerpt": "평가: Tool Studio Source Separation 판정 결과: 통과 요구사항: REQ WM 071 범위: Tool Studio 타입/정적 데이터 모듈 분리와 기존 export 호환성 유지 검증 corepack pnpm filter workspace monitor test : 통과, 46개 테스트 corepack pnpm filter workspace monitor exec tsc noEmit : 통과 corepack pnpm filter workspace monitor run check",
-      "html": "<p>평가: Tool Studio Source Separation 판정 결과: 통과 요구사항: REQ WM 071 범위: Tool Studio 타입/정적 데이터 모듈 분리와 기존 export 호환성 유지 검증 corepack pnpm filter workspace monitor test : 통과, 46개 테스트 corepack pnpm filter workspace monitor exec tsc noEmit : 통과 corepack pnpm filter workspace monitor run check : 통과 corepack pnpm filter workspace monitor run build : 통과 corepack pnpm filter</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 876,
-      "updatedAt": "2026-06-05T02:47:53.816Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-tool-studio-source-separation-tasks-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-tool-studio-source-separation/tasks.ko.md",
       "category": "project-spec",
@@ -9490,22 +9666,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-05-tool-studio-source-separation-json",
-      "path": "_history/work-timings/2026/2026-06-05-tool-studio-source-separation.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 05 Tool Studio Source Separation",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"tool studio source separation\", \"timings\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"note\": \"React, Next.js, and TypeScript official module/code splitting references checked.\" }, { \"phase\": \"implementation\", \"status\": \"complet",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request slug&quot;: &quot;tool studio source separation&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;note&quot;: &quot;React, Next.js, and TypeScript official module/code splitting references checked.&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;note&quot;: &quot;Tool Studio types and static data moved into dedicated modules.&quot; }</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 607,
-      "updatedAt": "2026-06-05T02:47:53.814Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
     },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-tool-studio-source-separation-traceability-ko-md",
@@ -9556,54 +9716,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-plans-2026-2026-06-05-tool-studio-source-separation-ko-md",
-      "path": "_history/plans/2026/2026-06-05-tool-studio-source-separation.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "계획: Tool Studio Source Separation",
-      "excerpt": "계획: Tool Studio Source Separation 1. 공식 React/Next/TypeScript 기준을 확인한다. 2. 대형 Workspace Monitor 소스 파일을 비교해 안전한 slice를 고른다. 3. Tool Studio public type과 static catalog data를 별도 모듈로 분리한다. 4. 기존 ToolStudioPanel export 계약은 re export로 유지한다. 5. tests, type check, check, build, customer ",
-      "html": "<p>계획: Tool Studio Source Separation 1. 공식 React/Next/TypeScript 기준을 확인한다. 2. 대형 Workspace Monitor 소스 파일을 비교해 안전한 slice를 고른다. 3. Tool Studio public type과 static catalog data를 별도 모듈로 분리한다. 4. 기존 ToolStudioPanel export 계약은 re export로 유지한다. 5. tests, type check, check, build, customer build, perf budget으로 회귀를 확인한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 432,
-      "updatedAt": "2026-06-05T02:46:56.471Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-05-tool-studio-source-separation-ko-md",
-      "path": "_history/user-requests/2026/2026-06-05-tool-studio-source-separation.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Tool Studio Source Separation",
-      "excerpt": "사용자 요청 요약: Tool Studio Source Separation 사용자는 소스코드 분리 리팩토링을 요청했다. 이번 응답에서는 Workspace Monitor의 Tool Studio 대형 컴포넌트를 대상으로 타입과 정적 catalog data를 분리하는 1차 slice를 수행했다.",
-      "html": "<p>사용자 요청 요약: Tool Studio Source Separation 사용자는 소스코드 분리 리팩토링을 요청했다. 이번 응답에서는 Workspace Monitor의 Tool Studio 대형 컴포넌트를 대상으로 타입과 정적 catalog data를 분리하는 1차 slice를 수행했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 291,
-      "updatedAt": "2026-06-05T02:46:56.470Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-05-tool-studio-source-separation-ko-md",
-      "path": "_history/web-searches/2026/2026-06-05-tool-studio-source-separation.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: Tool Studio Source Separation",
-      "excerpt": "웹 검색 기록: Tool Studio Source Separation 검색 React official docs lazy loading component code splitting Next.js official docs dynamic imports lazy loading client components TypeScript official modules handbook export import 확인한 출처 React lazy : 컴포넌트 코드를 처음 렌더링할 때까지 지연 로드할 수 있다는 공식 설명을",
-      "html": "<p>웹 검색 기록: Tool Studio Source Separation 검색 React official docs lazy loading component code splitting Next.js official docs dynamic imports lazy loading client components TypeScript official modules handbook export import 확인한 출처 React lazy : 컴포넌트 코드를 처음 렌더링할 때까지 지연 로드할 수 있다는 공식 설명을 확인했다. 이번 작업은 lazy split이 아니라 다음 단계 lazy split을 쉽게 하는 source boundary 정리로 적용했다. </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1238,
-      "updatedAt": "2026-06-05T02:46:56.468Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-scroll-scope-color-speed-tasks-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-scroll-scope-color-speed/tasks.ko.md",
       "category": "project-spec",
@@ -9618,22 +9730,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-      "path": "_history/evaluations/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: Scroll Scope Color Speed",
-      "excerpt": "평가: Scroll Scope Color Speed 판정 결과: 통과 요구사항: REQ WM 070 범위: Workspace Monitor의 스크롤 범위 분리, 절제된 스크롤 색상, 고비용 3D animation pause 검증 corepack pnpm filter workspace monitor test : 통과, 46개 테스트 corepack pnpm filter workspace monitor exec tsc noEmit : 통과 corepack pnpm filter workspace mon",
-      "html": "<p>평가: Scroll Scope Color Speed 판정 결과: 통과 요구사항: REQ WM 070 범위: Workspace Monitor의 스크롤 범위 분리, 절제된 스크롤 색상, 고비용 3D animation pause 검증 corepack pnpm filter workspace monitor test : 통과, 46개 테스트 corepack pnpm filter workspace monitor exec tsc noEmit : 통과 corepack pnpm filter workspace monitor run check : 통과 corepack pnpm filter workspace monitor run build : 통과 corepa</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1175,
-      "updatedAt": "2026-06-05T02:38:30.243Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
     },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-scroll-scope-color-speed-spec-ko-md",
@@ -17634,102 +17730,6 @@
       "historyDate": "",
       "historyYear": "",
       "workspaceArea": "presentation-agent"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-03-pnpm-workspace-migration-traceability-en-md",
-      "path": "_specs/workspace-platform/2026-06-03-pnpm-workspace-migration/traceability.en.md",
-      "category": "shared-spec",
-      "language": "en",
-      "title": "Traceability: pnpm Workspace Migration",
-      "excerpt": "Traceability: pnpm Workspace Migration | Requirement | Implementation Target | Verification | | | | | | REQ WS 088 | pnpm workspace.yaml , pnpm lock.yaml , project package.json | corepack pnpm install frozen lockfile | | REQ WS 089 | root/project packageManager fields | corepack ",
-      "html": "<h1>Traceability: pnpm Workspace Migration</h1>\n<table><thead><tr><th>Requirement</th><th>Implementation Target</th><th>Verification</th></tr></thead><tbody><tr><td>REQ-WS-088</td><td><code>pnpm-workspace.yaml</code>, <code>pnpm-lock.yaml</code>, project <code>package.json</code></td><td><code>corepack pnpm install --frozen-lockfile</code></td></tr><tr><td>REQ-WS-089</td><td>root/project <code>packageManager</code> fields</td><td><code>corepack pnpm --version</code></td></tr><tr><td>REQ-WS-090</td><td>README/config/script command updates</td><td>npm reference audit, pnpm test/check/build</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 424,
-      "updatedAt": "2026-06-02T22:57:41.894Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-03-pnpm-workspace-migration-plan-en-md",
-      "path": "_specs/workspace-platform/2026-06-03-pnpm-workspace-migration/plan.en.md",
-      "category": "shared-spec",
-      "language": "en",
-      "title": "Plan: pnpm Workspace Migration",
-      "excerpt": "Plan: pnpm Workspace Migration 1. Create the installation audit draft. 2. Pin pnpm@10.34.1 through Corepack. 3. Update workspace config and package manifests. 4. Remove npm lockfiles and generate the root pnpm lockfile. 5. Update durable current command docs/configs to pnpm. 6. R",
-      "html": "<h1>Plan: pnpm Workspace Migration</h1>\n<p>1. Create the installation audit draft.</p>\n<p>2. Pin <code>pnpm@10.34.1</code> through Corepack.</p>\n<p>3. Update workspace config and package manifests.</p>\n<p>4. Remove npm lockfiles and generate the root pnpm lockfile.</p>\n<p>5. Update durable current command docs/configs to pnpm.</p>\n<p>6. Run pnpm-based verification.</p>\n<p>7. Update installation audit, omission/evaluation, history summary, then commit and push.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 404,
-      "updatedAt": "2026-06-02T22:57:41.893Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-03-pnpm-workspace-migration-plan-ko-md",
-      "path": "_specs/workspace-platform/2026-06-03-pnpm-workspace-migration/plan.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "계획: pnpm workspace migration",
-      "excerpt": "계획: pnpm workspace migration 1. 설치 감사 초안을 작성한다. 2. pnpm@10.34.1 을 Corepack 기준으로 고정한다. 3. workspace config와 package manifests를 수정한다. 4. npm lockfile을 제거하고 루트 pnpm lockfile을 생성한다. 5. durable docs/configs의 현재 실행 명령을 pnpm으로 바꾼다. 6. pnpm 기반 검증을 실행한다. 7. 설치 감사, omission/evaluation, his",
-      "html": "<h1>계획: pnpm workspace migration</h1>\n<p>1. 설치 감사 초안을 작성한다.</p>\n<p>2. <code>pnpm@10.34.1</code>을 Corepack 기준으로 고정한다.</p>\n<p>3. workspace config와 package manifests를 수정한다.</p>\n<p>4. npm lockfile을 제거하고 루트 pnpm lockfile을 생성한다.</p>\n<p>5. durable docs/configs의 현재 실행 명령을 pnpm으로 바꾼다.</p>\n<p>6. pnpm 기반 검증을 실행한다.</p>\n<p>7. 설치 감사, omission/evaluation, history summary를 갱신하고 commit/push한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 465,
-      "updatedAt": "2026-06-02T22:57:41.893Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-03-pnpm-workspace-migration-spec-en-md",
-      "path": "_specs/workspace-platform/2026-06-03-pnpm-workspace-migration/spec.en.md",
-      "category": "shared-spec",
-      "language": "en",
-      "title": "Spec: pnpm Workspace Migration",
-      "excerpt": "Spec: pnpm Workspace Migration Goal Move npm lockfile based Node projects to a pnpm workspace. Make current verification and installation docs use pnpm. Scope Add root package.json , pnpm workspace.yaml , and pnpm lock.yaml . Change workspace monitor , platform desktop app , and ",
-      "html": "<h1>Spec: pnpm Workspace Migration</h1>\n<h2>Goal</h2>\n<ul>\n<li>Move npm-lockfile-based Node projects to a pnpm workspace.</li>\n<li>Make current verification and installation docs use pnpm.</li>\n</ul>\n<h2>Scope</h2>\n<ul>\n<li>Add root <code>package.json</code>, <code>pnpm-workspace.yaml</code>, and <code>pnpm-lock.yaml</code>.</li>\n<li>Change <code>workspace-monitor</code>, <code>platform-desktop-app</code>, and <code>presentation-agent</code> package manifests plus current execution docs/configs.</li>\n<li>Remove project-level <code>package-lock.json</code> files.</li>\n</ul>\n<h2>Non-Scope</h2>\n<ul>\n<li>Adding new runtime dependencies.</li>\n<li>Changing Rust/Cargo dependencies.</li>\n<li>Retroactively rewriting all historical records.</li>\n</ul>\n<h2>Acceptance Criteria</h2>\n<ul>\n<li><code>corepack pnpm install --frozen-lockfile</code> passes.</li>\n<li><code>workspace-monitor</code> test/check/build/perf/customer checks pass through pnpm.</li>\n<li><code>platform-desktop-app</code> test/check/monitor build pass through pnpm.</li>\n<li><code>presentation-agent</code> resolves through pnpm and browser harness docs use pnpm commands.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 882,
-      "updatedAt": "2026-06-02T22:57:41.893Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-03-pnpm-workspace-migration-traceability-ko-md",
-      "path": "_specs/workspace-platform/2026-06-03-pnpm-workspace-migration/traceability.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "추적성: pnpm workspace migration",
-      "excerpt": "추적성: pnpm workspace migration | 요구사항 | 구현 대상 | 검증 | | | | | | REQ WS 088 | pnpm workspace.yaml , pnpm lock.yaml , project package.json | corepack pnpm install frozen lockfile | | REQ WS 089 | root/project packageManager fields | corepack pnpm version | | REQ WS 090 | README/confi",
-      "html": "<h1>추적성: pnpm workspace migration</h1>\n<table><thead><tr><th>요구사항</th><th>구현 대상</th><th>검증</th></tr></thead><tbody><tr><td>REQ-WS-088</td><td><code>pnpm-workspace.yaml</code>, <code>pnpm-lock.yaml</code>, project <code>package.json</code></td><td><code>corepack pnpm install --frozen-lockfile</code></td></tr><tr><td>REQ-WS-089</td><td>root/project <code>packageManager</code> fields</td><td><code>corepack pnpm --version</code></td></tr><tr><td>REQ-WS-090</td><td>README/config/script command updates</td><td>npm reference audit, pnpm test/check/build</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 408,
-      "updatedAt": "2026-06-02T22:57:41.893Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "requirements-changes-2026-06-03-pnpm-workspace-migration-en-md",
-      "path": "_requirements/changes/2026-06-03-pnpm-workspace-migration.en.md",
-      "category": "requirement",
-      "language": "en",
-      "title": "Requirements Change: pnpm Workspace Migration",
-      "excerpt": "Requirements Change: pnpm Workspace Migration Requirements | ID | Requirement | Priority | Verification | | | | | | | REQ WS 088 | JavaScript/TypeScript projects in the repository shall install and verify dependencies through a pnpm workspace and the root pnpm lock.yaml . | must ",
-      "html": "<h1>Requirements Change: pnpm Workspace Migration</h1>\n<h2>Requirements</h2>\n<table><thead><tr><th>ID</th><th>Requirement</th><th>Priority</th><th>Verification</th></tr></thead><tbody><tr><td>REQ-WS-088</td><td>JavaScript/TypeScript projects in the repository shall install and verify dependencies through a pnpm workspace and the root <code>pnpm-lock.yaml</code>.</td><td>must</td><td><code>corepack pnpm install --frozen-lockfile</code>, project pnpm test/check/build commands</td></tr><tr><td>REQ-WS-089</td><td>The package manager version shall be pinned through <code>packageManager</code> so Corepack can select it reproducibly.</td><td>must</td><td><code>corepack pnpm --version</code> prints the pinned version</td></tr><tr><td>REQ-WS-090</td><td>Current execution docs and durable configs shall guide npm-free pnpm install and verification commands.</td><td>must</td><td>npm command reference audit</td></tr></tbody></table>\n<h2>Rationale</h2>\n<ul>\n<li>A root workspace lockfile is more maintainable and reproducible for the repository&#039;s multiple Node projects.</li>\n<li>The user explicitly requested the pnpm migration.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 914,
-      "updatedAt": "2026-06-02T22:57:41.892Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "_requirements/changes"
     }
   ],
   "historyDays": [
@@ -17740,11 +17740,15 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 26
+          "count": 24
         },
         {
           "category": "request-trace",
-          "count": 13
+          "count": 14
+        },
+        {
+          "category": "work-summary",
+          "count": 14
         },
         {
           "category": "user-request",
@@ -17752,10 +17756,6 @@
         },
         {
           "category": "web-search",
-          "count": 13
-        },
-        {
-          "category": "work-summary",
           "count": 13
         },
         {
@@ -17829,7 +17829,7 @@
           "language": "unknown",
           "title": "2026 06 05 Auto Build After Implementation Input",
           "excerpt": "{ \"initial instruction\": \"매번 내가 빌드 안하게 구현 다 끝나면 빌드까지 자동으로 해줘.\", \"result summary\": \"Added a durable close out rule requiring meaningful implementation work to run the owning project's build or package command before final response, with explicit exception handling when no appropri",
-          "updatedAt": "2026-06-05T12:55:35.485Z",
+          "updatedAt": "2026-06-05T12:57:00.891Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -17839,7 +17839,7 @@
           "language": "unknown",
           "title": "2026 06 05 Auto Build After Implementation Omission",
           "excerpt": "{ \"task\": \"Auto build after implementation durable rule.\", \"work mode\": \"governance\", \"expected items\": { \"item id\": \"persist user rule\", \"description\": \"Persist the user's future instruction that implementation work should run build/package before close out.\", \"source\": \" histor",
-          "updatedAt": "2026-06-05T12:54:26.572Z",
+          "updatedAt": "2026-06-05T12:57:15.245Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -17849,7 +17849,7 @@
           "language": "ko",
           "title": "평가: 구현 완료 후 자동 빌드 규칙",
           "excerpt": "평가: 구현 완료 후 자동 빌드 규칙 결과 사용자의 지속 지시를 durable instruction과 Codex runtime adapter에 반영했다. 의미 있는 구현 작업은 최종 응답 전에 담당 프로젝트의 build/package 명령을 실행해야 한다. build 명령이 없거나 부적절한 경우 이유와 가장 강한 대체 검증을 기록하도록 예외 조건을 명시했다. memory bootstrap manifest에 이 규칙을 persistent instruction hot context로 연결했다. 검증 ",
-          "updatedAt": "2026-06-05T12:55:26.168Z",
+          "updatedAt": "2026-06-05T12:57:00.892Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -17993,16 +17993,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-evaluations-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-          "path": "_history/evaluations/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: Scroll Scope Color Speed",
-          "excerpt": "평가: Scroll Scope Color Speed 판정 결과: 통과 요구사항: REQ WM 070 범위: Workspace Monitor의 스크롤 범위 분리, 절제된 스크롤 색상, 고비용 3D animation pause 검증 corepack pnpm filter workspace monitor test : 통과, 46개 테스트 corepack pnpm filter workspace monitor exec tsc noEmit : 통과 corepack pnpm filter workspace mon",
-          "updatedAt": "2026-06-05T02:38:30.243Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-05-smooth-redesign-maintenance-evaluation-input-json",
           "path": "_history/evaluations/2026/2026-06-05-smooth-redesign-maintenance-evaluation-input.json",
           "category": "evaluation",
@@ -18023,23 +18013,13 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-evaluations-2026-2026-06-05-tool-studio-source-separation-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-05-tool-studio-source-separation-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 05 Tool Studio Source Separation Evaluation Input",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"tool studio source separation\", \"project\": \"workspace monitor\", \"installation occurred\": false, \"resource risk occurred\": false, \"requirements\": \"REQ WM 071\" , \"mode selection record targets\": \" history/mode selections/2026/2026 06 05 tool",
-          "updatedAt": "2026-06-05T02:47:53.816Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-05-tool-studio-source-separation-ko-md",
-          "path": "_history/evaluations/2026/2026-06-05-tool-studio-source-separation.ko.md",
+          "id": "history-evaluations-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+          "path": "_history/evaluations/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
           "category": "evaluation",
           "language": "ko",
-          "title": "평가: Tool Studio Source Separation",
-          "excerpt": "평가: Tool Studio Source Separation 판정 결과: 통과 요구사항: REQ WM 071 범위: Tool Studio 타입/정적 데이터 모듈 분리와 기존 export 호환성 유지 검증 corepack pnpm filter workspace monitor test : 통과, 46개 테스트 corepack pnpm filter workspace monitor exec tsc noEmit : 통과 corepack pnpm filter workspace monitor run check",
-          "updatedAt": "2026-06-05T02:47:53.816Z",
+          "title": "평가: Workspace Monitor 탭 전환과 소스 편집 UX",
+          "excerpt": "평가: Workspace Monitor 탭 전환과 소스 편집 UX 결과 사용자 요청의 핵심인 탭 이동 렉, 사이드바 잘림감, 소스 편집 불편을 같은 Workspace Monitor 표면에서 처리했다. 탭 전환은 더 이상 scheduleAfterFirstPaint 로 섹션 커밋을 미루지 않는다. 소스 편집 패널은 탭 이동 후에도 마운트가 유지되어 열린 드래프트와 편집 상태가 보존된다. 숨겨진 소스 패널의 런타임 side effect는 surfaceActive 로 막았다. 구현 후 고객용 렌더러 빌드",
+          "updatedAt": "2026-06-05T13:13:07.876Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18093,13 +18073,13 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-plans-2026-2026-06-05-tool-studio-source-separation-ko-md",
-          "path": "_history/plans/2026/2026-06-05-tool-studio-source-separation.ko.md",
+          "id": "history-plans-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+          "path": "_history/plans/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
           "category": "plan",
           "language": "ko",
-          "title": "계획: Tool Studio Source Separation",
-          "excerpt": "계획: Tool Studio Source Separation 1. 공식 React/Next/TypeScript 기준을 확인한다. 2. 대형 Workspace Monitor 소스 파일을 비교해 안전한 slice를 고른다. 3. Tool Studio public type과 static catalog data를 별도 모듈로 분리한다. 4. 기존 ToolStudioPanel export 계약은 re export로 유지한다. 5. tests, type check, check, build, customer ",
-          "updatedAt": "2026-06-05T02:46:56.471Z",
+          "title": "계획 기록: Workspace Monitor 탭 전환과 소스 편집 UX",
+          "excerpt": "계획 기록: Workspace Monitor 탭 전환과 소스 편집 UX 완료된 계획 1. 탭 mount와 렌더 지연 구조 파악. 2. 사이드바 잘림과 레이아웃 원인 수정. 3. 코드 편집 UX를 더 직접적인 작업 흐름으로 개선. 4. 테스트, 빌드, 브라우저 검증 실행. 5. 기록, 커밋, 푸시. 주요 결정 섹션 전환 지연 로직은 제거했다. 소스 패널은 마운트 유지하되 숨김 상태 side effect는 가드했다. Monaco 기본값은 좁은 화면에서 더 읽기 쉬운 편집 설정으로 바꿨다.",
+          "updatedAt": "2026-06-05T13:13:07.874Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18129,7 +18109,7 @@
           "language": "ko",
           "title": "요청 결과 추적: 구현 완료 후 자동 빌드",
           "excerpt": "요청 결과 추적: 구현 완료 후 자동 빌드 요청 구현 후 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동 수행. 결과 durable instruction과 Codex adapter에 구현 완료 후 build/package 실행 규칙을 추가했다. memory bootstrap manifest에 해당 규칙을 persistent instruction anchor 용도로 반영했다. 산출물 docs/instructions/persistent instructions.md docs/instruction",
-          "updatedAt": "2026-06-05T12:53:58.423Z",
+          "updatedAt": "2026-06-05T12:57:42.657Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18230,6 +18210,16 @@
           "title": "요청 결과 추적: Tool Studio Source Separation",
           "excerpt": "요청 결과 추적: Tool Studio Source Separation 요청 요약 사용자는 소스코드 분리 리팩토링을 요청했다. 결과 ToolStudioPanel.tsx 에서 public type과 static catalog data를 분리했다. components/workbench/tool studio/types.ts 와 data.ts 를 추가했다. 기존 ToolStudioPanel 에서 ToolStudioMode , ToolStudioModeRequest type re export를 유지해 Mo",
           "updatedAt": "2026-06-05T02:47:53.817Z",
+          "historyDate": "2026-06-05"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+          "path": "_history/request-traces/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: Workspace Monitor 탭 전환과 소스 편집 UX",
+          "excerpt": "요청 결과 추적: Workspace Monitor 탭 전환과 소스 편집 UX 요청 탭 전환 렉 완화. 사이드바 잘림 완화. 코드 편집 UX 개선. 구현 후 빌드 자동 수행. 결과 탭 전환 지연 커밋 제거. 소스 편집 패널 마운트 유지와 숨김 상태 resource guard 추가. 사이드바/소스 편집 CSS와 Monaco 기본값 개선. 테스트/체크/빌드/브라우저 스모크 완료. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 05 workspace",
+          "updatedAt": "2026-06-05T13:13:07.875Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18353,13 +18343,13 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-user-requests-2026-2026-06-05-tool-studio-source-separation-ko-md",
-          "path": "_history/user-requests/2026/2026-06-05-tool-studio-source-separation.ko.md",
+          "id": "history-user-requests-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+          "path": "_history/user-requests/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
           "category": "user-request",
           "language": "ko",
-          "title": "사용자 요청 요약: Tool Studio Source Separation",
-          "excerpt": "사용자 요청 요약: Tool Studio Source Separation 사용자는 소스코드 분리 리팩토링을 요청했다. 이번 응답에서는 Workspace Monitor의 Tool Studio 대형 컴포넌트를 대상으로 타입과 정적 catalog data를 분리하는 1차 slice를 수행했다.",
-          "updatedAt": "2026-06-05T02:46:56.470Z",
+          "title": "사용자 요청 요약: Workspace Monitor 탭 전환과 소스 편집 UX",
+          "excerpt": "사용자 요청 요약: Workspace Monitor 탭 전환과 소스 편집 UX 사용자는 Workspace Monitor에서 탭 이동 시 매번 불러오는 느낌 때문에 느리고, 사이드바가 묘하게 잘리며, 코드 편집 기능이 불편하고 직관성이 낮다고 지적했다. 사용자는 구현 완료 후 직접 빌드하지 않도록 빌드까지 자동 수행하라는 지속 지시도 이전에 부여했다. 요청 해석 탭 전환의 의도적 렌더 지연 제거. 편집 화면 상태 보존과 조작 흐름 개선. 사이드바/소스 컨트롤의 가로 잘림 완화. 테스트와 빌드까지 수",
+          "updatedAt": "2026-06-05T13:13:07.875Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18483,13 +18473,13 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-web-searches-2026-2026-06-05-tool-studio-source-separation-ko-md",
-          "path": "_history/web-searches/2026/2026-06-05-tool-studio-source-separation.ko.md",
+          "id": "history-web-searches-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+          "path": "_history/web-searches/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
           "category": "web-search",
           "language": "ko",
-          "title": "웹 검색 기록: Tool Studio Source Separation",
-          "excerpt": "웹 검색 기록: Tool Studio Source Separation 검색 React official docs lazy loading component code splitting Next.js official docs dynamic imports lazy loading client components TypeScript official modules handbook export import 확인한 출처 React lazy : 컴포넌트 코드를 처음 렌더링할 때까지 지연 로드할 수 있다는 공식 설명을",
-          "updatedAt": "2026-06-05T02:46:56.468Z",
+          "title": "웹 검색 기록: Workspace Monitor 탭 전환과 소스 편집 UX",
+          "excerpt": "웹 검색 기록: Workspace Monitor 탭 전환과 소스 편집 UX 일시: 2026 06 05 목적: 탭 전환 지연과 숨김/선로딩 UX 개선 전 외부 공식 근거 확인. 확인한 출처 React lazy : https://react.dev/reference/react/lazy React Suspense : https://react.dev/reference/react/Suspense MDN content visibility : https://developer.mozilla.org/en US/do",
+          "updatedAt": "2026-06-05T13:13:07.874Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18518,8 +18508,8 @@
           "category": "work-summary",
           "language": "ko",
           "title": "작업 요약: 구현 완료 후 자동 빌드",
-          "excerpt": "작업 요약: 구현 완료 후 자동 빌드 구현 완료 후 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 규칙을 추가했다. build가 없거나 부적절한 경우 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/히스토리/평가 기록을 연결했다.",
-          "updatedAt": "2026-06-05T12:53:58.423Z",
+          "excerpt": "작업 요약: 구현 완료 후 자동 빌드 구현 완료 후 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 규칙을 추가했다. build가 없거나 부적절한 경우 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/히스토리/평가 기록을 연결했다. 새 히스토리 기록을 반영하도록 Workspace Monitor developer snapshot을 재수집하고 che",
+          "updatedAt": "2026-06-05T12:57:00.892Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18623,6 +18613,16 @@
           "historyDate": "2026-06-05"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: Workspace Monitor 탭 전환과 소스 편집 UX",
+          "excerpt": "작업 요약: Workspace Monitor 탭 전환과 소스 편집 UX MonitorShell.tsx 에서 섹션 전환을 첫 페인트 이후로 미루던 상태와 ref를 제거했다. Monaco와 에이전트 3D scene 모듈을 idle 시간에 선로딩하도록 추가했다. 소스 편집 패널을 숨김 상태에서도 마운트 유지하고, 숨겨진 상태에서 런타임 실행 요청과 세션 폴링을 처리하지 않도록 surfaceActive 를 추가했다. 사이드바 확장 폭과 터미널 오프셋을 조정했다. Monaco 기본값을 줄바꿈 켬, 미니맵 ",
+          "updatedAt": "2026-06-05T13:13:07.875Z",
+          "historyDate": "2026-06-05"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-05-agent-character-design-json",
           "path": "_history/work-timings/2026/2026-06-05-agent-character-design.json",
           "category": "work-timing",
@@ -18723,13 +18723,13 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-work-timings-2026-2026-06-05-tool-studio-source-separation-json",
-          "path": "_history/work-timings/2026/2026-06-05-tool-studio-source-separation.json",
+          "id": "history-work-timings-2026-2026-06-05-workspace-monitor-tab-editor-ux-json",
+          "path": "_history/work-timings/2026/2026-06-05-workspace-monitor-tab-editor-ux.json",
           "category": "work-timing",
           "language": "unknown",
-          "title": "2026 06 05 Tool Studio Source Separation",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"tool studio source separation\", \"timings\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"note\": \"React, Next.js, and TypeScript official module/code splitting references checked.\" }, { \"phase\": \"implementation\", \"status\": \"complet",
-          "updatedAt": "2026-06-05T02:47:53.814Z",
+          "title": "2026 06 05 Workspace Monitor Tab Editor Ux",
+          "excerpt": "{ \"task\": \"workspace monitor tab/editor/sidebar ux\", \"date\": \"2026 06 05\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"intake research and local inspection\", \"approx minutes\": 18 }, { \"phase\": \"implementation\", \"approx minutes\": 32 }, { \"phase\": \"test build browser validation",
+          "updatedAt": "2026-06-05T13:13:07.876Z",
           "historyDate": "2026-06-05"
         }
       ]
@@ -18741,36 +18741,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2247,
+      "documents": 2254,
       "days": 6,
       "categories": [
         {
           "category": "evaluation",
-          "count": 929
+          "count": 930
         },
         {
           "category": "web-search",
-          "count": 362
+          "count": 363
         },
         {
           "category": "plan",
-          "count": 327
+          "count": 328
         },
         {
           "category": "request-trace",
-          "count": 291
+          "count": 292
         },
         {
           "category": "work-timing",
-          "count": 213
+          "count": 214
         },
         {
           "category": "user-request",
-          "count": 75
+          "count": 76
         },
         {
           "category": "work-summary",
-          "count": 42
+          "count": 43
         },
         {
           "category": "daily-history",
@@ -18781,7 +18781,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6055949,
+      "totalSourceBytes": 6065535,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18806,11 +18806,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 39,
+      "evidenceEvents": 37,
       "decisionEvents": 0,
-      "openSignals": 16,
+      "openSignals": 15,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T12:55:35.485Z",
+      "latestEventAt": "2026-06-05T13:13:07.876Z",
       "historyDays": 1
     },
     "lanes": [
@@ -18822,12 +18822,17 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 26
+        "count": 24
       },
       {
         "id": "delivery",
         "label": "delivery",
-        "count": 13
+        "count": 14
+      },
+      {
+        "id": "traceability",
+        "label": "traceability",
+        "count": 14
       },
       {
         "id": "evidence",
@@ -18837,11 +18842,6 @@
       {
         "id": "intake",
         "label": "intake",
-        "count": 13
-      },
-      {
-        "id": "traceability",
-        "label": "traceability",
         "count": 13
       },
       {
@@ -18869,21 +18869,21 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 26
-      },
-      {
-        "id": "intake",
-        "label": "intake",
-        "count": 13
+        "count": 24
       },
       {
         "id": "summary",
         "label": "summary",
-        "count": 13
+        "count": 14
       },
       {
         "id": "trace",
         "label": "trace",
+        "count": 14
+      },
+      {
+        "id": "intake",
+        "label": "intake",
         "count": 13
       },
       {
@@ -18921,19 +18921,139 @@
     ],
     "events": [
       {
-        "id": "history-history-evaluations-2026-2026-06-05-auto-build-after-implementation-input-json",
+        "id": "history-history-work-timings-2026-2026-06-05-workspace-monitor-tab-editor-ux-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 05 Workspace Monitor Tab Editor Ux",
+        "detail": "{ \"task\": \"workspace monitor tab/editor/sidebar ux\", \"date\": \"2026 06 05\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"intake research and local inspection\", \"approx minutes\": 18 }, { \"phase\": \"implementation\", \"approx minutes\": 32 }, { \"phase\": \"test build browser validation",
+        "path": "_history/work-timings/2026/2026-06-05-workspace-monitor-tab-editor-ux.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T13:13:07.876Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
         "sourceType": "history",
         "signalType": "evaluation",
         "lane": "verification",
         "severity": "verified",
         "status": "evaluation",
-        "title": "2026 06 05 Auto Build After Implementation Input",
-        "detail": "{ \"initial instruction\": \"매번 내가 빌드 안하게 구현 다 끝나면 빌드까지 자동으로 해줘.\", \"result summary\": \"Added a durable close out rule requiring meaningful implementation work to run the owning project's build or package command before final response, with explicit exception handling when no appropri",
-        "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-input.json",
+        "title": "평가: Workspace Monitor 탭 전환과 소스 편집 UX",
+        "detail": "평가: Workspace Monitor 탭 전환과 소스 편집 UX 결과 사용자 요청의 핵심인 탭 이동 렉, 사이드바 잘림감, 소스 편집 불편을 같은 Workspace Monitor 표면에서 처리했다. 탭 전환은 더 이상 scheduleAfterFirstPaint 로 섹션 커밋을 미루지 않는다. 소스 편집 패널은 탭 이동 후에도 마운트가 유지되어 열린 드래프트와 편집 상태가 보존된다. 숨겨진 소스 패널의 런타임 side effect는 surfaceActive 로 막았다. 구현 후 고객용 렌더러 빌드",
+        "path": "_history/evaluations/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T13:13:07.876Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "요청 결과 추적: Workspace Monitor 탭 전환과 소스 편집 UX",
+        "detail": "요청 결과 추적: Workspace Monitor 탭 전환과 소스 편집 UX 요청 탭 전환 렉 완화. 사이드바 잘림 완화. 코드 편집 UX 개선. 구현 후 빌드 자동 수행. 결과 탭 전환 지연 커밋 제거. 소스 편집 패널 마운트 유지와 숨김 상태 resource guard 추가. 사이드바/소스 편집 CSS와 Monaco 기본값 개선. 테스트/체크/빌드/브라우저 스모크 완료. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 05 workspace",
+        "path": "_history/request-traces/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T13:13:07.875Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "ready",
+        "title": "사용자 요청 요약: Workspace Monitor 탭 전환과 소스 편집 UX",
+        "detail": "사용자 요청 요약: Workspace Monitor 탭 전환과 소스 편집 UX 사용자는 Workspace Monitor에서 탭 이동 시 매번 불러오는 느낌 때문에 느리고, 사이드바가 묘하게 잘리며, 코드 편집 기능이 불편하고 직관성이 낮다고 지적했다. 사용자는 구현 완료 후 직접 빌드하지 않도록 빌드까지 자동 수행하라는 지속 지시도 이전에 부여했다. 요청 해석 탭 전환의 의도적 렌더 지연 제거. 편집 화면 상태 보존과 조작 흐름 개선. 사이드바/소스 컨트롤의 가로 잘림 완화. 테스트와 빌드까지 수",
+        "path": "_history/user-requests/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T13:13:07.875Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약: Workspace Monitor 탭 전환과 소스 편집 UX",
+        "detail": "작업 요약: Workspace Monitor 탭 전환과 소스 편집 UX MonitorShell.tsx 에서 섹션 전환을 첫 페인트 이후로 미루던 상태와 ref를 제거했다. Monaco와 에이전트 3D scene 모듈을 idle 시간에 선로딩하도록 추가했다. 소스 편집 패널을 숨김 상태에서도 마운트 유지하고, 숨겨진 상태에서 런타임 실행 요청과 세션 폴링을 처리하지 않도록 surfaceActive 를 추가했다. 사이드바 확장 폭과 터미널 오프셋을 조정했다. Monaco 기본값을 줄바꿈 켬, 미니맵 ",
+        "path": "_history/work-summaries/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T13:13:07.875Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: Workspace Monitor 탭 전환과 소스 편집 UX",
+        "detail": "웹 검색 기록: Workspace Monitor 탭 전환과 소스 편집 UX 일시: 2026 06 05 목적: 탭 전환 지연과 숨김/선로딩 UX 개선 전 외부 공식 근거 확인. 확인한 출처 React lazy : https://react.dev/reference/react/lazy React Suspense : https://react.dev/reference/react/Suspense MDN content visibility : https://developer.mozilla.org/en US/do",
+        "path": "_history/web-searches/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T13:13:07.874Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "ready",
+        "title": "계획 기록: Workspace Monitor 탭 전환과 소스 편집 UX",
+        "detail": "계획 기록: Workspace Monitor 탭 전환과 소스 편집 UX 완료된 계획 1. 탭 mount와 렌더 지연 구조 파악. 2. 사이드바 잘림과 레이아웃 원인 수정. 3. 코드 편집 UX를 더 직접적인 작업 흐름으로 개선. 4. 테스트, 빌드, 브라우저 검증 실행. 5. 기록, 커밋, 푸시. 주요 결정 섹션 전환 지연 로직은 제거했다. 소스 패널은 마운트 유지하되 숨김 상태 side effect는 가드했다. Monaco 기본값은 좁은 화면에서 더 읽기 쉬운 편집 설정으로 바꿨다.",
+        "path": "_history/plans/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T13:13:07.874Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-05-auto-build-after-implementation-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "요청 결과 추적: 구현 완료 후 자동 빌드",
+        "detail": "요청 결과 추적: 구현 완료 후 자동 빌드 요청 구현 후 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동 수행. 결과 durable instruction과 Codex adapter에 구현 완료 후 build/package 실행 규칙을 추가했다. memory bootstrap manifest에 해당 규칙을 persistent instruction anchor 용도로 반영했다. 산출물 docs/instructions/persistent instructions.md docs/instruction",
+        "path": "_history/request-traces/2026/2026-06-05-auto-build-after-implementation.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:57:42.657Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-05-auto-build-after-implementation-omission-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 05 Auto Build After Implementation Omission",
+        "detail": "{ \"task\": \"Auto build after implementation durable rule.\", \"work mode\": \"governance\", \"expected items\": { \"item id\": \"persist user rule\", \"description\": \"Persist the user's future instruction that implementation work should run build/package before close out.\", \"source\": \" histor",
+        "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json",
         "category": "evaluation",
         "language": "unknown",
         "date": "2026-06-05",
-        "timestamp": "2026-06-05T12:55:35.485Z"
+        "timestamp": "2026-06-05T12:57:15.245Z"
       },
       {
         "id": "history-history-evaluations-2026-2026-06-05-auto-build-after-implementation-ko-md",
@@ -18948,7 +19068,37 @@
         "category": "evaluation",
         "language": "ko",
         "date": "2026-06-05",
-        "timestamp": "2026-06-05T12:55:26.168Z"
+        "timestamp": "2026-06-05T12:57:00.892Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-05-auto-build-after-implementation-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "작업 요약: 구현 완료 후 자동 빌드",
+        "detail": "작업 요약: 구현 완료 후 자동 빌드 구현 완료 후 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 규칙을 추가했다. build가 없거나 부적절한 경우 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/히스토리/평가 기록을 연결했다. 새 히스토리 기록을 반영하도록 Workspace Monitor developer snapshot을 재수집하고 che",
+        "path": "_history/work-summaries/2026/2026-06-05-auto-build-after-implementation.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:57:00.892Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-05-auto-build-after-implementation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 05 Auto Build After Implementation Input",
+        "detail": "{ \"initial instruction\": \"매번 내가 빌드 안하게 구현 다 끝나면 빌드까지 자동으로 해줘.\", \"result summary\": \"Added a durable close out rule requiring meaningful implementation work to run the owning project's build or package command before final response, with explicit exception handling when no appropri",
+        "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:57:00.891Z"
       },
       {
         "id": "history-history-2026-2026-06-05-md",
@@ -18981,36 +19131,6 @@
         "timestamp": "2026-06-05T12:54:26.572Z"
       },
       {
-        "id": "history-history-evaluations-2026-2026-06-05-auto-build-after-implementation-omission-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 05 Auto Build After Implementation Omission",
-        "detail": "{ \"task\": \"Auto build after implementation durable rule.\", \"work mode\": \"governance\", \"expected items\": { \"item id\": \"persist user rule\", \"description\": \"Persist the user's future instruction that implementation work should run build/package before close out.\", \"source\": \" histor",
-        "path": "_history/evaluations/2026/2026-06-05-auto-build-after-implementation-omission.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T12:54:26.572Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-05-auto-build-after-implementation-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "ready",
-        "title": "요청 결과 추적: 구현 완료 후 자동 빌드",
-        "detail": "요청 결과 추적: 구현 완료 후 자동 빌드 요청 구현 후 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동 수행. 결과 durable instruction과 Codex adapter에 구현 완료 후 build/package 실행 규칙을 추가했다. memory bootstrap manifest에 해당 규칙을 persistent instruction anchor 용도로 반영했다. 산출물 docs/instructions/persistent instructions.md docs/instruction",
-        "path": "_history/request-traces/2026/2026-06-05-auto-build-after-implementation.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T12:53:58.423Z"
-      },
-      {
         "id": "history-history-user-requests-2026-2026-06-05-auto-build-after-implementation-ko-md",
         "sourceType": "history",
         "signalType": "intake",
@@ -19021,21 +19141,6 @@
         "detail": "사용자 요청 요약: 구현 완료 후 자동 빌드 요청 구현이 끝날 때마다 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동으로 수행하라는 지속 지시. 해석 의미 있는 구현 작업의 close out에는 담당 프로젝트의 build 또는 package 검증이 포함되어야 한다. build가 없거나 부적절한 작업은 예외 사유와 대체 검증을 기록해야 한다. 이번 변경은 실제 제품 코드 구현이 아니라 workspace 운영 규칙 변경이다.",
         "path": "_history/user-requests/2026/2026-06-05-auto-build-after-implementation.ko.md",
         "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T12:53:58.423Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-05-auto-build-after-implementation-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "작업 요약: 구현 완료 후 자동 빌드",
-        "detail": "작업 요약: 구현 완료 후 자동 빌드 구현 완료 후 담당 프로젝트의 build/package 명령을 자동 실행하는 지속 규칙을 추가했다. build가 없거나 부적절한 경우 이유와 대체 검증을 기록하도록 예외 조건을 명시했다. AGENTS.md , persistent instructions, memory bootstrap manifest, 요구사항/스펙/히스토리/평가 기록을 연결했다.",
-        "path": "_history/work-summaries/2026/2026-06-05-auto-build-after-implementation.ko.md",
-        "category": "work-summary",
         "language": "ko",
         "date": "2026-06-05",
         "timestamp": "2026-06-05T12:53:58.423Z"
@@ -20254,111 +20359,6 @@
         "language": "ko",
         "date": "2026-06-05",
         "timestamp": "2026-06-05T02:47:53.817Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-tool-studio-source-separation-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "evaluation",
-        "title": "2026 06 05 Tool Studio Source Separation Evaluation Input",
-        "detail": "{ \"date\": \"2026 06 05\", \"request slug\": \"tool studio source separation\", \"project\": \"workspace monitor\", \"installation occurred\": false, \"resource risk occurred\": false, \"requirements\": \"REQ WM 071\" , \"mode selection record targets\": \" history/mode selections/2026/2026 06 05 tool",
-        "path": "_history/evaluations/2026/2026-06-05-tool-studio-source-separation-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:47:53.816Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-tool-studio-source-separation-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "평가: Tool Studio Source Separation",
-        "detail": "평가: Tool Studio Source Separation 판정 결과: 통과 요구사항: REQ WM 071 범위: Tool Studio 타입/정적 데이터 모듈 분리와 기존 export 호환성 유지 검증 corepack pnpm filter workspace monitor test : 통과, 46개 테스트 corepack pnpm filter workspace monitor exec tsc noEmit : 통과 corepack pnpm filter workspace monitor run check",
-        "path": "_history/evaluations/2026/2026-06-05-tool-studio-source-separation.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:47:53.816Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-05-tool-studio-source-separation-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 05 Tool Studio Source Separation",
-        "detail": "{ \"date\": \"2026 06 05\", \"request slug\": \"tool studio source separation\", \"timings\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"note\": \"React, Next.js, and TypeScript official module/code splitting references checked.\" }, { \"phase\": \"implementation\", \"status\": \"complet",
-        "path": "_history/work-timings/2026/2026-06-05-tool-studio-source-separation.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:47:53.814Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-05-tool-studio-source-separation-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "계획: Tool Studio Source Separation",
-        "detail": "계획: Tool Studio Source Separation 1. 공식 React/Next/TypeScript 기준을 확인한다. 2. 대형 Workspace Monitor 소스 파일을 비교해 안전한 slice를 고른다. 3. Tool Studio public type과 static catalog data를 별도 모듈로 분리한다. 4. 기존 ToolStudioPanel export 계약은 re export로 유지한다. 5. tests, type check, check, build, customer ",
-        "path": "_history/plans/2026/2026-06-05-tool-studio-source-separation.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:46:56.471Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-05-tool-studio-source-separation-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: Tool Studio Source Separation",
-        "detail": "사용자 요청 요약: Tool Studio Source Separation 사용자는 소스코드 분리 리팩토링을 요청했다. 이번 응답에서는 Workspace Monitor의 Tool Studio 대형 컴포넌트를 대상으로 타입과 정적 catalog data를 분리하는 1차 slice를 수행했다.",
-        "path": "_history/user-requests/2026/2026-06-05-tool-studio-source-separation.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:46:56.470Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-05-tool-studio-source-separation-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: Tool Studio Source Separation",
-        "detail": "웹 검색 기록: Tool Studio Source Separation 검색 React official docs lazy loading component code splitting Next.js official docs dynamic imports lazy loading client components TypeScript official modules handbook export import 확인한 출처 React lazy : 컴포넌트 코드를 처음 렌더링할 때까지 지연 로드할 수 있다는 공식 설명을",
-        "path": "_history/web-searches/2026/2026-06-05-tool-studio-source-separation.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:46:56.468Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-scroll-scope-color-speed-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "평가: Scroll Scope Color Speed",
-        "detail": "평가: Scroll Scope Color Speed 판정 결과: 통과 요구사항: REQ WM 070 범위: Workspace Monitor의 스크롤 범위 분리, 절제된 스크롤 색상, 고비용 3D animation pause 검증 corepack pnpm filter workspace monitor test : 통과, 46개 테스트 corepack pnpm filter workspace monitor exec tsc noEmit : 통과 corepack pnpm filter workspace mon",
-        "path": "_history/evaluations/2026/2026-06-05-scroll-scope-color-speed.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:38:30.243Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23156,7 +23156,7 @@
       {
         "category": "work-summary",
         "root": "_history/work-summaries",
-        "documentsCount": 13
+        "documentsCount": 14
       },
       {
         "category": "user-request",
@@ -23171,7 +23171,7 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 13
+        "documentsCount": 14
       },
       {
         "category": "web-search",
@@ -23191,7 +23191,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 26
+        "documentsCount": 24
       },
       {
         "category": "daily-history",
@@ -23235,7 +23235,7 @@
           "transient tool output"
         ],
         "uiEntry": "Overview, History, Documents, Requirements",
-        "documentCount": 145,
+        "documentCount": 139,
         "sourceFileCount": 0
       },
       {
@@ -23285,7 +23285,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 70,
+        "documentCount": 71,
         "sourceFileCount": 5
       },
       {

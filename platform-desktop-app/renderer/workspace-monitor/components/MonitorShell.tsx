@@ -41,7 +41,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import dynamic from "next/dynamic";
 import type { editor } from "monaco-editor";
-import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
 import { ProductFeatureArchitecturePanel } from "@/components/features/ProductFeatureArchitecturePanel";
 import { OperatorCenterDialog } from "@/components/features/OperatorCenterDialog";
@@ -122,6 +122,28 @@ type Section = {
   purpose: string;
   purposeEn: string;
 };
+
+function MountedSectionPanel({
+  active,
+  children,
+  id
+}: {
+  active: boolean;
+  children: ReactNode;
+  id: SectionId;
+}) {
+  return (
+    <div
+      className="mounted-section-panel"
+      data-mounted-section={id}
+      data-section-visible={active ? "true" : "false"}
+      hidden={!active}
+      aria-hidden={active ? undefined : true}
+    >
+      {children}
+    </div>
+  );
+}
 
 type CommandItem = {
   id: string;
@@ -469,13 +491,16 @@ const monacoEditorOptions: editor.IStandaloneEditorConstructionOptions = {
   bracketPairColorization: { enabled: true },
   copyWithSyntaxHighlighting: true,
   cursorBlinking: "smooth",
+  formatOnPaste: true,
+  formatOnType: true,
   fontFamily: "\"SFMono-Regular\", Consolas, \"Liberation Mono\", monospace",
-  fontSize: 12,
+  fontSize: 13,
   glyphMargin: true,
   guides: { bracketPairs: true, indentation: true },
-  lineHeight: 20,
-  minimap: { enabled: true },
-  padding: { bottom: 10, top: 10 },
+  lineHeight: 22,
+  minimap: { enabled: false },
+  mouseWheelZoom: true,
+  padding: { bottom: 14, top: 12 },
   renderLineHighlight: "all",
   renderWhitespace: "selection",
   rulers: [100, 120],
@@ -483,7 +508,9 @@ const monacoEditorOptions: editor.IStandaloneEditorConstructionOptions = {
   smoothScrolling: true,
   stickyScroll: { enabled: true },
   tabSize: 2,
-  wordWrap: "off"
+  wordWrap: "on",
+  wordWrapColumn: 120,
+  wrappingIndent: "same"
 };
 
 const monacoReadOnlyOptions: editor.IStandaloneEditorConstructionOptions = {
@@ -2434,7 +2461,6 @@ function providerAuthStatusForAdapter(
 export function MonitorShell({ snapshot, initialSection }: { snapshot: WorkspaceSnapshot; initialSection?: string }) {
   const initialResolvedSection = normalizeSectionId(initialSection) || "overview";
   const [section, setSection] = useState<SectionId>(() => initialResolvedSection);
-  const [readySection, setReadySection] = useState<SectionId>(() => initialResolvedSection);
   const [uiLanguage, setUiLanguage] = useState<UiLanguage>("ko");
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
@@ -2465,7 +2491,6 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [commandQuery, setCommandQuery] = useState("");
   const titlebarSectionLabelRef = useRef<HTMLElement>(null);
   const commandInputRef = useRef<HTMLInputElement>(null);
-  const pendingSectionCommitRef = useRef<(() => void) | null>(null);
   const pendingAgentDetailCommitRef = useRef<(() => void) | null>(null);
   const [searchAgentRunForm, setSearchAgentRunForm] = useState<SearchAgentRunForm>(defaultSearchAgentRunForm);
   const [searchAgentChatMessages, setSearchAgentChatMessages] =
@@ -2550,7 +2575,6 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   }, [activateSection, initialSection]);
   useEffect(() => {
     return () => {
-      pendingSectionCommitRef.current?.();
       pendingAgentDetailCommitRef.current?.();
     };
   }, []);
@@ -2560,6 +2584,37 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     }
     const root = document.querySelector<HTMLElement>(".desktop-app-root");
     return root ? installInstantButtonFeedback(root) : undefined;
+  }, []);
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return undefined;
+    }
+
+    const idleWindow = window as typeof window & {
+      cancelIdleCallback?: (handle: number) => void;
+      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
+    };
+    let timeoutId: number | null = null;
+    let idleId: number | null = null;
+    const prewarmWorkSurfaces = () => {
+      void import("@monaco-editor/react");
+      void import("@/components/workbench/AgentCollaborationScene");
+    };
+
+    if (idleWindow.requestIdleCallback) {
+      idleId = idleWindow.requestIdleCallback(prewarmWorkSurfaces, { timeout: 1200 });
+    } else {
+      timeoutId = window.setTimeout(prewarmWorkSurfaces, 450);
+    }
+
+    return () => {
+      if (idleId !== null) {
+        idleWindow.cancelIdleCallback?.(idleId);
+      }
+      if (timeoutId !== null) {
+        window.clearTimeout(timeoutId);
+      }
+    };
   }, []);
   useEffect(() => {
     if (section !== "agents") {
@@ -2790,7 +2845,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
 
   const deferredQuery = useDeferredValue(query);
   const normalizedQuery = deferredQuery.trim().toLowerCase();
-  const sectionContentReady = readySection === section;
+  const sectionContentReady = true;
   const { documents: monitorDocuments, historyDays: monitorHistoryDays, statusText: adminHistoryStatusText } =
     useAdminHistoryIndex(snapshot, section);
   const viewFilteredDocuments = useMemo(() => {
@@ -2899,7 +2954,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const sourceLanguages = useMemo(() => {
     return Array.from(new Set(visibleSourceFiles.map((file) => file.language))).sort();
   }, [visibleSourceFiles]);
-  const sourceQuery = sectionContentReady && section === "source" ? normalizedQuery : "";
+  const sourceQuery = section === "source" ? normalizedQuery : "";
   const filteredSourceFiles = useMemo(() => {
     return visibleSourceFiles.filter((file) => {
       const projectMatches = sourceProject === "all" || file.project === sourceProject;
@@ -3146,13 +3201,8 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     }
     const target = sectionById.get(targetSection);
     const viewport = document.querySelector(".desktop-viewport");
-    const alreadyReady =
-      viewport?.getAttribute("data-active-section") === targetSection &&
-      viewport?.getAttribute("data-section-content-ready") === "true";
     viewport?.setAttribute("data-active-section", targetSection);
-    if (!alreadyReady) {
-      viewport?.setAttribute("data-section-content-ready", "false");
-    }
+    viewport?.setAttribute("data-section-content-ready", "true");
     document.querySelectorAll<HTMLElement>("[data-section-id]").forEach((element) => {
       const isTarget = element.getAttribute("data-section-id") === targetSection;
       element.classList.toggle("active", isTarget);
@@ -3168,31 +3218,21 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   }, [sectionById]);
   const openSection = useCallback((targetSection: SectionId, options?: { intentId?: string; flowStepId?: string }) => {
     primeSectionActivation(targetSection);
-    pendingSectionCommitRef.current?.();
-    pendingSectionCommitRef.current = scheduleAfterFirstPaint(() => {
-      pendingSectionCommitRef.current = null;
-      setActiveTaskIntentId(options?.intentId || "");
-      setActiveTaskFlowStepId(options?.flowStepId || "");
-      if (!currentViewMode.allowedSections.includes(targetSection)) {
-        const modeWithSection =
-          viewModes.find((mode) => mode.id === "superadmin_developer" && mode.allowedSections.includes(targetSection)) ||
-          viewModes.find((mode) => mode.allowedSections.includes(targetSection));
-        if (modeWithSection) {
-          setViewMode(modeWithSection.id);
-        }
+    setActiveTaskIntentId(options?.intentId || "");
+    setActiveTaskFlowStepId(options?.flowStepId || "");
+    if (!currentViewMode.allowedSections.includes(targetSection)) {
+      const modeWithSection =
+        viewModes.find((mode) => mode.id === "superadmin_developer" && mode.allowedSections.includes(targetSection)) ||
+        viewModes.find((mode) => mode.allowedSections.includes(targetSection));
+      if (modeWithSection) {
+        setViewMode(modeWithSection.id);
       }
-      activateSection(targetSection);
-      if (typeof window !== "undefined") {
-        window.history.replaceState(null, "", `#section-${targetSection}`);
-      }
-    });
-  }, [activateSection, currentViewMode.allowedSections, primeSectionActivation, viewModes]);
-  useEffect(() => {
-    if (readySection === section) {
-      return undefined;
     }
-    return scheduleAfterFirstPaint(() => setReadySection(section));
-  }, [readySection, section]);
+    activateSection(targetSection);
+    if (typeof window !== "undefined") {
+      window.history.replaceState(null, "", `#section-${targetSection}`);
+    }
+  }, [activateSection, currentViewMode.allowedSections, primeSectionActivation, viewModes]);
   const togglePinnedSection = (targetSection: SectionId) => {
     setPinnedSections((previous) => {
       if (previous.includes(targetSection)) {
@@ -3217,7 +3257,6 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   }, [currentViewMode.allowedSections, recentSections, sectionById]);
   const currentSectionLabel = sectionById.get(section)?.label || "홈";
   const currentSection = sectionById.get(section);
-  const CurrentSectionIcon = currentSection?.icon || LayoutDashboard;
   const currentFeatureGroup =
     localizedFeatureGroups.find((group) => group.id === currentSection?.group) || localizedFeatureGroups[0];
   const isPrimaryWorkSurface = section === "agents" || section === "tools";
@@ -5510,21 +5549,6 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             </>
           )}
 
-          {!sectionContentReady && (
-            <section
-              className="section-transition-shell"
-              data-section-transition-shell
-              data-section-transition-target={section}
-              aria-label={uiLanguage === "ko" ? `${currentSectionLabel} 화면 준비 중` : `Preparing ${currentSectionLabel}`}
-            >
-              <div>
-                <CurrentSectionIcon size={24} aria-hidden="true" />
-                <span>{currentSectionLabel}</span>
-                <small>{uiLanguage === "ko" ? "화면 준비 중" : "Preparing"}</small>
-              </div>
-            </section>
-          )}
-
           {sectionContentReady && section === "overview" && (
             <div className="desktop-home-grid">
               <span id="overview-home" className="home-route-anchor" aria-hidden="true" />
@@ -6214,22 +6238,25 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         </section>
       )}
 
-      {sectionContentReady && section === "source" && (
-        <DesktopRuntimePanel
-          agentCatalogCount={agentCatalog.length}
-          blockedTaskCount={collaborationBoard.summary.blockedTasks}
-          sourceFiles={visibleSourceFiles}
-          uiLanguage={uiLanguage}
-          initDefaults={runtimeInitDefaults}
-          providerCredentialReport={providerCredentials}
-          launchRequest={runtimeLaunchRequest}
-          onLaunchRequestConsumed={() => setRuntimeLaunchRequest(null)}
-          onOpenSearchAgentWorkbench={openSearchAgentWorkbench}
-          onOpenSettings={(subsectionId = "quick") => openSettingsTab("execution", subsectionId)}
-          terminalDrawerOpen={terminalDrawerOpen}
-          setTerminalDrawerOpen={setTerminalDrawerOpen}
-          surface="files"
-        />
+      {sectionContentReady && (
+        <MountedSectionPanel id="source" active={section === "source"}>
+          <DesktopRuntimePanel
+            agentCatalogCount={agentCatalog.length}
+            blockedTaskCount={collaborationBoard.summary.blockedTasks}
+            sourceFiles={visibleSourceFiles}
+            uiLanguage={uiLanguage}
+            initDefaults={runtimeInitDefaults}
+            providerCredentialReport={providerCredentials}
+            launchRequest={section === "source" ? runtimeLaunchRequest : null}
+            onLaunchRequestConsumed={() => setRuntimeLaunchRequest(null)}
+            onOpenSearchAgentWorkbench={openSearchAgentWorkbench}
+            onOpenSettings={(subsectionId = "quick") => openSettingsTab("execution", subsectionId)}
+            terminalDrawerOpen={terminalDrawerOpen}
+            setTerminalDrawerOpen={setTerminalDrawerOpen}
+            surface="files"
+            surfaceActive={section === "source"}
+          />
+        </MountedSectionPanel>
       )}
 
       {sectionContentReady && section === "requirements" && (
@@ -8141,7 +8168,8 @@ function DesktopRuntimePanel({
   onOpenSettings,
   terminalDrawerOpen,
   setTerminalDrawerOpen,
-  surface = "runtime"
+  surface = "runtime",
+  surfaceActive = true
 }: {
   agentCatalogCount: number;
   blockedTaskCount: number;
@@ -8156,6 +8184,7 @@ function DesktopRuntimePanel({
   terminalDrawerOpen: boolean;
   setTerminalDrawerOpen: (open: boolean) => void;
   surface?: "runtime" | "files";
+  surfaceActive?: boolean;
 }) {
   const copy = nativeWorkspaceCopy[uiLanguage];
   const isFileWorkspaceSurface = surface === "files";
@@ -8231,8 +8260,8 @@ function DesktopRuntimePanel({
   );
   const [runtimeDiagnosticsOpen, setRuntimeDiagnosticsOpen] = useState(false);
   const [runRecordsOpen, setRunRecordsOpen] = useState(false);
-  const [sourceWordWrap, setSourceWordWrap] = useState(false);
-  const [sourceMinimapEnabled, setSourceMinimapEnabled] = useState(true);
+  const [sourceWordWrap, setSourceWordWrap] = useState(true);
+  const [sourceMinimapEnabled, setSourceMinimapEnabled] = useState(false);
   const [sourceSettingsOpen, setSourceSettingsOpen] = useState(false);
   const [interactionContentReady, setInteractionContentReady] = useState(false);
   const [editorBusy, setEditorBusy] = useState(false);
@@ -9254,7 +9283,7 @@ function DesktopRuntimePanel({
   };
 
   useEffect(() => {
-    if (!launchRequest || consumedLaunchRequestIdsRef.current.has(launchRequest.id)) {
+    if (!surfaceActive || !launchRequest || consumedLaunchRequestIdsRef.current.has(launchRequest.id)) {
       return;
     }
     consumedLaunchRequestIdsRef.current.add(launchRequest.id);
@@ -9266,7 +9295,7 @@ function DesktopRuntimePanel({
       void startSessionFromLaunchRequest(launchRequest);
     }
     onLaunchRequestConsumed?.(launchRequest.id);
-  }, [launchRequest?.id]);
+  }, [launchRequest?.id, surfaceActive]);
 
   const startDefaultSearchAgent = async () => {
     await startSessionFromLaunchRequest({
@@ -9813,7 +9842,7 @@ function DesktopRuntimePanel({
       .filter(Boolean)
       .map((entry) => entry.split(":")[0])
       .filter(Boolean);
-    if (!tauriInvoke || runtimeState !== "available" || activeSessionIds.length === 0) {
+    if (!surfaceActive || !tauriInvoke || runtimeState !== "available" || activeSessionIds.length === 0) {
       return undefined;
     }
 
@@ -9872,7 +9901,7 @@ function DesktopRuntimePanel({
       disposed = true;
       window.clearInterval(interval);
     };
-  }, [activeSessionPollKey, runtimeState]);
+  }, [activeSessionPollKey, runtimeState, surfaceActive]);
 
   useEffect(() => {
     if (!selectedSourcePath && sourceFiles[0]) {
@@ -10464,10 +10493,31 @@ function DesktopRuntimePanel({
             {sourceFile ? (
               <div className="source-editor-frame" tabIndex={0} aria-label={uiLanguage === "ko" ? "소스 편집 스크롤 영역" : "Source editor scroll region"}>
                 <div className="source-editor-meta">
-                  <span>{sourceFile.relativePath}</span>
-                  <strong>
-                    {formatBytes(sourceDraft.length)} / max {formatBytes(sourceFile.maxSizeBytes)}
-                  </strong>
+                  <div>
+                    <span>{sourceFile.relativePath}</span>
+                    <strong>
+                      {formatBytes(sourceDraft.length)} / max {formatBytes(sourceFile.maxSizeBytes)}
+                    </strong>
+                  </div>
+                  <div className="source-editor-primary-actions" aria-label={copy.editorSettings}>
+                    <button
+                      className="save"
+                      type="button"
+                      onClick={saveSourceFile}
+                      disabled={!invoke || editorBusy || !sourceFile || !currentSourceDirty}
+                    >
+                      <CheckCircle2 size={14} aria-hidden="true" />
+                      <span>{editorBusy ? copy.saving : copy.saveCurrent}</span>
+                    </button>
+                    <button type="button" onClick={() => setSourceEditorViewMode((current) => (current === "edit" ? "diff" : "edit"))}>
+                      <FileSearch size={14} aria-hidden="true" />
+                      <span>{sourceEditorViewMode === "edit" ? copy.diffMode : copy.editMode}</span>
+                    </button>
+                    <button type="button" onClick={copyCurrentSourceDraft}>
+                      <Copy size={14} aria-hidden="true" />
+                      <span>{copy.copyFile}</span>
+                    </button>
+                  </div>
                 </div>
                 {sourceDiff && (
                   <div className={`source-diff-review ${sourceDiff.dirty ? "dirty" : "clean"}`}>

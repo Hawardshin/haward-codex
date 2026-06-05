@@ -316,30 +316,49 @@ test("Tool Studio 3D scene pauses when offscreen or motion should be reduced", (
   assert.match(toolStudio, /reducedMotionQuery\.removeEventListener\("change", handleReducedMotionChange\)/);
 });
 
-test("Monitor section switches stage heavy content after first paint", () => {
-  assert.match(monitorShell, /const \[readySection, setReadySection\] = useState<SectionId>/);
+test("Monitor section switches prewarm heavy surfaces and preserve source editor state", () => {
+  assert.doesNotMatch(monitorShell, /const \[readySection, setReadySection\] = useState<SectionId>/);
   assert.match(monitorShell, /const titlebarSectionLabelRef = useRef<HTMLElement>\(null\)/);
-  assert.match(monitorShell, /const pendingSectionCommitRef = useRef<\(\(\) => void\) \| null>\(null\)/);
+  assert.doesNotMatch(monitorShell, /const pendingSectionCommitRef = useRef<\(\(\) => void\) \| null>\(null\)/);
+  assert.match(monitorShell, /const prewarmWorkSurfaces = \(\) => \{/);
+  assert.match(monitorShell, /void import\("@monaco-editor\/react"\)/);
+  assert.match(monitorShell, /void import\("@\/components\/workbench\/AgentCollaborationScene"\)/);
   assert.match(monitorShell, /const primeSectionActivation = useCallback\(\(targetSection: SectionId\) => \{/);
-  assert.match(monitorShell, /const alreadyReady =[\s\S]*?data-section-content-ready"\) === "true"/);
   assert.match(monitorShell, /viewport\?\.setAttribute\("data-active-section", targetSection\)/);
-  assert.match(monitorShell, /if \(!alreadyReady\) \{[\s\S]*?viewport\?\.setAttribute\("data-section-content-ready", "false"\)/);
+  assert.match(monitorShell, /viewport\?\.setAttribute\("data-section-content-ready", "true"\)/);
   assert.match(monitorShell, /element\.classList\.toggle\("active", isTarget\)/);
   assert.match(monitorShell, /titlebarSectionLabelRef\.current\.textContent = target\.label/);
   assert.match(monitorShell, /onPointerDown=\{\(\) => primeSectionActivation\(item\.id\)\}/);
-  assert.match(monitorShell, /pendingSectionCommitRef\.current\?\.\(\)/);
-  assert.match(monitorShell, /pendingSectionCommitRef\.current = scheduleAfterFirstPaint\(\(\) => \{/);
-  assert.match(monitorShell, /scheduleAfterFirstPaint\(\(\) => setReadySection\(section\)\)/);
-  assert.match(monitorShell, /const sectionContentReady = readySection === section/);
+  assert.doesNotMatch(monitorShell, /pendingSectionCommitRef\.current\?\.\(\)/);
+  assert.doesNotMatch(monitorShell, /pendingSectionCommitRef\.current = scheduleAfterFirstPaint\(\(\) => \{/);
+  assert.doesNotMatch(monitorShell, /scheduleAfterFirstPaint\(\(\) => setReadySection\(section\)\)/);
+  assert.match(monitorShell, /const sectionContentReady = true/);
   assert.match(monitorShell, /data-section-content-ready=\{sectionContentReady \? "true" : "false"\}/);
-  assert.match(monitorShell, /data-section-transition-shell/);
-  assert.match(monitorShell, /data-section-transition-target=\{section\}/);
-  assert.match(monitorShell, /const sourceQuery = sectionContentReady && section === "source" \? normalizedQuery : ""/);
+  assert.doesNotMatch(monitorShell, /data-section-transition-shell/);
+  assert.match(monitorShell, /const sourceQuery = section === "source" \? normalizedQuery : ""/);
+  assert.match(monitorShell, /function MountedSectionPanel/);
+  assert.match(monitorShell, /<MountedSectionPanel id="source" active=\{section === "source"\}>/);
+  assert.match(monitorShell, /surfaceActive=\{section === "source"\}/);
+  assert.match(monitorShell, /if \(!surfaceActive \|\| !launchRequest/);
   assert.match(monitorShell, /\{sectionContentReady && section === "desktop" && \(/);
   assert.match(monitorShell, /\{sectionContentReady && section === "tools" && \(/);
-  assert.match(monitorShell, /\{sectionContentReady && section === "source" && \(/);
   assert.match(monitorShell, /\{sectionContentReady && section === "agents" && \(/);
+  assert.match(css, /\.mounted-section-panel\[hidden\]/);
   assert.match(css, /\.section-transition-shell \{/);
+});
+
+test("Workspace monitor sidebar and source editor defaults avoid clipped editing controls", () => {
+  assert.match(monitorShell, /fontSize: 13/);
+  assert.match(monitorShell, /minimap: \{ enabled: false \}/);
+  assert.match(monitorShell, /wordWrap: "on"/);
+  assert.match(monitorShell, /const \[sourceWordWrap, setSourceWordWrap\] = useState\(true\)/);
+  assert.match(monitorShell, /const \[sourceMinimapEnabled, setSourceMinimapEnabled\] = useState\(false\)/);
+  assert.match(monitorShell, /className="source-editor-primary-actions"/);
+  assert.match(css, /\.desktop-app-shell\.sidebar-expanded \{[\s\S]*?grid-template-columns: 148px minmax\(0, 1fr\);/);
+  assert.match(css, /\.desktop-app-shell\.sidebar-expanded \.activity-rail button \{[\s\S]*?width: 132px;/);
+  assert.match(css, /\.source-editor-primary-actions \{/);
+  assert.match(css, /\.filesystem-workbench \.native-source-controls \{[\s\S]*?repeat\(2, minmax\(124px, auto\)\);/);
+  assert.match(css, /\.monaco-editor-shell \{[\s\S]*?height: clamp\(420px, 64dvh, 720px\);/);
 });
 
 test("Monitor uses a shared motion system for smooth tab, dialog, and menu transitions", () => {

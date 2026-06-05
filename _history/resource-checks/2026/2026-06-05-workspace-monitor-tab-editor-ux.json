@@ -1,0 +1,20 @@
+{
+  "task": "workspace monitor tab/editor/sidebar ux",
+  "date": "2026-06-05",
+  "resource_risk_occurred": true,
+  "risks": [
+    {
+      "risk": "Hidden mounted source panel could duplicate runtime polling or consume launch requests.",
+      "mitigation": "Added surfaceActive and gated launch request consumption plus active session polling."
+    },
+    {
+      "risk": "Local static server remains open for user verification.",
+      "mitigation": "Server is bound to local port 4173 and intentionally kept available for the final handoff URL."
+    }
+  ],
+  "browser_smoke": {
+    "url": "http://127.0.0.1:4173",
+    "console_errors": 0,
+    "horizontal_overflow": false
+  }
+}

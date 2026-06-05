@@ -1,0 +1,33 @@
+{
+  "task": "workspace monitor tab/editor/sidebar ux",
+  "date": "2026-06-05",
+  "work_mode": "ship_first",
+  "checked_items": [
+    {
+      "item": "web_first_intake",
+      "status": "done",
+      "evidence": "_history/web-searches/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md"
+    },
+    {
+      "item": "tab_latency_fix",
+      "status": "done",
+      "evidence": "readySection and pendingSectionCommitRef removed; prewarmWorkSurfaces added"
+    },
+    {
+      "item": "sidebar_clipping_fix",
+      "status": "done",
+      "evidence": "expanded rail width and terminal offsets updated"
+    },
+    {
+      "item": "code_editor_ux_fix",
+      "status": "done",
+      "evidence": "source panel mount preservation, Monaco defaults, primary editor actions"
+    },
+    {
+      "item": "build_after_implementation",
+      "status": "done",
+      "evidence": "corepack pnpm --dir platform-desktop-app run renderer:build"
+    }
+  ],
+  "missed_items": []
+}

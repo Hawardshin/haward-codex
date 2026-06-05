@@ -866,7 +866,7 @@ main {
 }
 
 .desktop-app-shell.sidebar-expanded {
-  grid-template-columns: 128px minmax(0, 1fr);
+  grid-template-columns: 148px minmax(0, 1fr);
 }
 
 .activity-rail,
@@ -944,7 +944,7 @@ main {
 }
 
 .desktop-app-shell.sidebar-expanded .activity-rail button {
-  width: 112px;
+  width: 132px;
   justify-content: flex-start;
   gap: 8px;
   padding: 0 10px;
@@ -983,11 +983,14 @@ main {
 .desktop-app-shell.sidebar-expanded .activity-rail button span {
   position: static;
   width: auto;
+  max-width: calc(100% - 28px);
   height: auto;
   clip: auto;
   color: currentColor;
   font-size: var(--font-size-overline);
   font-weight: 800;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -1234,6 +1237,15 @@ main {
   padding: 0 clamp(14px, 2.2vw, 26px) 32px;
   scrollbar-gutter: stable;
   scroll-padding-top: 72px;
+}
+
+.mounted-section-panel {
+  min-width: 0;
+  animation: workspace-panel-enter var(--motion-duration-standard) var(--motion-ease-out) both;
+}
+
+.mounted-section-panel[hidden] {
+  display: none !important;
 }
 
 .section-transition-shell {
@@ -9289,7 +9301,7 @@ h3 {
 }
 
 .desktop-app-shell.sidebar-expanded .terminal-drawer {
-  left: 112px;
+  left: 148px;
 }
 
 .terminal-drawer.closed {
@@ -11161,8 +11173,66 @@ h3 {
 
 .source-editor-meta {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px 12px;
+  border: 1px solid color-mix(in srgb, var(--line) 78%, var(--blue) 12%);
+  background: color-mix(in srgb, var(--surface-raised) 88%, var(--blue) 6%);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.source-editor-meta > div:first-child {
+  display: grid;
+  min-width: min(100%, 260px);
+  gap: 3px;
+}
+
+.source-editor-primary-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.source-editor-primary-actions button {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 7px;
+  padding: 6px 9px;
+  font-size: var(--font-size-caption);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.source-editor-primary-actions button.save {
+  border-color: color-mix(in srgb, var(--green) 48%, var(--line));
+  background: color-mix(in srgb, var(--surface) 84%, var(--green) 10%);
+}
+
+.source-editor-primary-actions button:not(:disabled):hover {
+  border-color: color-mix(in srgb, var(--blue) 42%, var(--line));
+  background: color-mix(in srgb, var(--surface) 82%, var(--blue) 8%);
+}
+
+.source-editor-primary-actions button:disabled {
+  opacity: 0.55;
+}
+
+.source-editor-meta strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: var(--font-size-caption);
 }
 
 .source-diff-review {
@@ -11217,8 +11287,8 @@ h3 {
 
 .monaco-editor-shell {
   min-width: 0;
-  height: min(58vh, 620px);
-  height: clamp(340px, 58dvh, 620px);
+  height: min(64vh, 720px);
+  height: clamp(420px, 64dvh, 720px);
   min-height: 0;
   overflow: hidden;
   border: 1px solid var(--terminal-border);
@@ -11617,7 +11687,7 @@ h3 {
 }
 
 .native-source-controls {
-  grid-template-columns: minmax(220px, 1.2fr) minmax(220px, 1.2fr) repeat(4, minmax(120px, auto));
+  grid-template-columns: minmax(220px, 1.25fr) minmax(200px, 1fr) repeat(2, minmax(126px, auto));
 }
 
 .native-source-grid {
@@ -11990,12 +12060,9 @@ h3 {
 
 .filesystem-workbench .native-source-controls {
   grid-template-columns:
-    minmax(210px, 1.05fr)
-    minmax(180px, 0.95fr)
-    minmax(108px, auto)
-    minmax(112px, auto)
-    minmax(128px, auto)
-    minmax(96px, auto);
+    minmax(240px, 1.2fr)
+    minmax(190px, 0.9fr)
+    repeat(2, minmax(124px, auto));
 }
 
 .filesystem-workbench .native-source-controls .source-path-field,
@@ -13217,7 +13284,11 @@ h3 {
   }
 
   .desktop-app-shell.sidebar-expanded {
-    grid-template-columns: 104px minmax(0, 1fr);
+    grid-template-columns: 128px minmax(0, 1fr);
+  }
+
+  .desktop-app-shell.sidebar-expanded .activity-rail button {
+    width: 112px;
   }
 
   .desktop-home-grid {
@@ -13405,7 +13476,7 @@ h3 {
   }
 
   .desktop-app-shell.sidebar-expanded .terminal-drawer {
-    left: 112px;
+    left: 128px;
   }
 
   .adapter-grid,
