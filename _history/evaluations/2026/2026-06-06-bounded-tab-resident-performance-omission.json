@@ -1,0 +1,87 @@
+{
+  "task": "Bounded tab resident performance correction for Workspace Monitor.",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "reduce-tab-lag",
+      "description": "Address continued slow tab switching with a structural fix, not only cosmetic changes.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/specs/2026-06-06-bounded-tab-resident-performance/spec.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "preserve-desktop-resource-use",
+      "description": "Keep desktop-native/resource prewarm behavior while reducing React hidden tree cost.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/history/useAdminHistoryIndex.ts"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "auto-build",
+      "description": "Run build/package verification automatically after implementation.",
+      "source": "persistent_user_preference",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-06-bounded-tab-resident-performance/validation.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/scripts/audit-section-switch-latency.mjs",
+      "purpose": "Repeatable section switch performance audit.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app",
+      "purpose": "Internal macOS app build artifact.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg",
+      "purpose": "Internal DMG build artifact.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "section-performance",
+      "description": "Section switch audit passes with bounded resident/mounted panels.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "perf:sections passed with p95 827.8ms and max resident/mounted count 5."
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "package-internal",
+      "description": "Internal package build passes.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app run package:internal"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Full React component decomposition remains a future larger refactor.",
+    "Existing perf:buttons synthetic selector failure is outside this tab-switch acceptance."
+  ],
+  "notes": [
+    "All user-requested implementation and build steps were covered."
+  ]
+}

@@ -43,11 +43,11 @@ import {
 import type { LucideIcon } from "lucide-react";
 import dynamic from "next/dynamic";
 import type { editor } from "monaco-editor";
-import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { memo, useCallback, useDeferredValue, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
 import { ProductFeatureArchitecturePanel } from "@/components/features/ProductFeatureArchitecturePanel";
 import { OperatorCenterDialog } from "@/components/features/OperatorCenterDialog";
-import { useAdminHistoryIndex } from "@/components/history/useAdminHistoryIndex";
+import { preloadAdminHistoryIndex, useAdminHistoryIndex } from "@/components/history/useAdminHistoryIndex";
 import { ActionGroup } from "@/components/ui/ActionGroup";
 import { Button } from "@/components/ui/Button";
 import {
@@ -91,6 +91,26 @@ type SectionId =
   | "tools"
   | "requirements"
   | "agents";
+
+const maxResidentSectionPanels = 5;
+const retainedResidentSections: SectionId[] = ["source"];
+
+function normalizeResidentSectionIds(candidates: SectionId[], activeSection: SectionId) {
+  const ordered = [activeSection, ...retainedResidentSections, ...candidates];
+  const seen = new Set<SectionId>();
+  const normalized: SectionId[] = [];
+  for (const candidate of ordered) {
+    if (!sectionIds.has(candidate) || seen.has(candidate)) {
+      continue;
+    }
+    seen.add(candidate);
+    normalized.push(candidate);
+    if (normalized.length >= maxResidentSectionPanels) {
+      break;
+    }
+  }
+  return normalized;
+}
 
 type FeatureGroupId = "core" | "workspace" | "knowledge" | "governance";
 type SidebarMode = "expanded" | "collapsed";
@@ -2737,11 +2757,14 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   );
   const [residentSectionIds, setResidentSectionIds] = useState<SectionId[]>(() => {
     const initialResidentSection = normalizeSectionId(initialSection) || "overview";
-    return Array.from(new Set<SectionId>([initialResidentSection, "source"]));
+    return normalizeResidentSectionIds([initialResidentSection, "source"], initialResidentSection);
   });
   const residentSectionSet = useMemo(() => new Set(residentSectionIds), [residentSectionIds]);
   const markSectionResident = useCallback((targetSection: SectionId) => {
-    setResidentSectionIds((current) => (current.includes(targetSection) ? current : [...current, targetSection]));
+    setResidentSectionIds((current) => {
+      const next = normalizeResidentSectionIds([targetSection, ...current], targetSection);
+      return next.length === current.length && next.every((item, index) => item === current[index]) ? current : next;
+    });
   }, []);
   const activateSection = useCallback((nextSection: SectionId) => {
     markSectionResident(nextSection);
@@ -2788,6 +2811,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     const prewarmWorkSurfaces = () => {
       void import("@monaco-editor/react");
       void import("@/components/workbench/AgentCollaborationScene");
+      void preloadAdminHistoryIndex();
     };
 
     if (idleWindow.requestIdleCallback) {
@@ -2985,28 +3009,6 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     const allowed = new Set(currentViewMode.allowedSections);
     return localizedSections.filter((item) => allowed.has(item.id));
   }, [currentViewMode, localizedSections]);
-  const residentSectionMountPlan = useMemo(() => {
-    const allowed = new Set(visibleSections.map((item) => item.id));
-    const primaryOrder: SectionId[] = [
-      "overview",
-      "agents",
-      "tools",
-      "desktop",
-      "source",
-      "history",
-      "documents",
-      "intent",
-      "structure",
-      "projects",
-      "requirements"
-    ];
-    const ordered = [
-      section,
-      ...primaryOrder.filter((id) => allowed.has(id)),
-      ...visibleSections.map((item) => item.id)
-    ];
-    return Array.from(new Set(ordered)).filter((id) => sectionIds.has(id));
-  }, [section, visibleSections]);
   const workVisibleSections = useMemo(() => {
     return visibleSections.filter((item) => !operatorSectionIds.has(item.id));
   }, [visibleSections]);
@@ -3061,53 +3063,6 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     (targetSection: SectionId) => sectionContentReady && residentSectionSet.has(targetSection),
     [residentSectionSet, sectionContentReady]
   );
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      return undefined;
-    }
-    const pendingSections = residentSectionMountPlan.filter((id) => !residentSectionSet.has(id));
-    if (pendingSections.length === 0) {
-      return undefined;
-    }
-
-    const idleWindow = window as typeof window & {
-      cancelIdleCallback?: (handle: number) => void;
-      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
-    };
-    let canceled = false;
-    const idleHandles: number[] = [];
-    const timeoutHandles: number[] = [];
-    const scheduleNextResidentSection = () => {
-      if (canceled) {
-        return;
-      }
-      const mountNextResidentSection = () => {
-        if (canceled) {
-          return;
-        }
-        const nextSection = pendingSections.shift();
-        if (nextSection) {
-          markSectionResident(nextSection);
-        }
-        if (pendingSections.length > 0) {
-          scheduleNextResidentSection();
-        }
-      };
-
-      if (idleWindow.requestIdleCallback) {
-        idleHandles.push(idleWindow.requestIdleCallback(mountNextResidentSection, { timeout: 900 }));
-      } else {
-        timeoutHandles.push(window.setTimeout(mountNextResidentSection, 60));
-      }
-    };
-
-    timeoutHandles.push(window.setTimeout(scheduleNextResidentSection, 120));
-    return () => {
-      canceled = true;
-      idleHandles.forEach((handle) => idleWindow.cancelIdleCallback?.(handle));
-      timeoutHandles.forEach((handle) => window.clearTimeout(handle));
-    };
-  }, [markSectionResident, residentSectionMountPlan, residentSectionSet]);
   const { documents: monitorDocuments, historyDays: monitorHistoryDays, statusText: adminHistoryStatusText } =
     useAdminHistoryIndex(snapshot, section);
   const viewFilteredDocuments = useMemo(() => {
@@ -3654,6 +3609,12 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     }
     setSettingsOpen(true);
   }, []);
+  const consumeRuntimeLaunchRequest = useCallback(() => {
+    setRuntimeLaunchRequest(null);
+  }, []);
+  const openExecutionSettings = useCallback((subsectionId: SettingsSubsectionId = "quick") => {
+    openSettingsTab("execution", subsectionId);
+  }, [openSettingsTab]);
   async function refreshProviderModels(providerId = searchAgentRunForm.providerId) {
     const provider =
       providerCredentials.providers.find((item) => item.providerId === providerId) ||
@@ -5050,6 +5011,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           data-active-section={section}
           data-section-content-ready={sectionContentReady ? "true" : "false"}
           data-resident-section-count={residentSectionIds.length}
+          data-resident-section-limit={maxResidentSectionPanels}
           data-primary-work-surface={isPrimaryWorkSurface ? "true" : undefined}
           aria-label={uiLanguage === "ko" ? "데스크톱 앱 작업 화면" : "Desktop app viewport"}
           tabIndex={0}
@@ -6209,7 +6171,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
 
       {shouldRenderSection("desktop") && (
         <MountedSectionPanel id="desktop" active={section === "desktop"}>
-          <DesktopRuntimePanel
+          <MemoizedDesktopRuntimePanel
             agentCatalogCount={agentCatalog.length}
             blockedTaskCount={collaborationBoard.summary.blockedTasks}
             sourceFiles={visibleSourceFiles}
@@ -6217,9 +6179,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             initDefaults={runtimeInitDefaults}
             providerCredentialReport={providerCredentials}
             launchRequest={section === "desktop" ? runtimeLaunchRequest : null}
-            onLaunchRequestConsumed={() => setRuntimeLaunchRequest(null)}
+            onLaunchRequestConsumed={consumeRuntimeLaunchRequest}
             onOpenSearchAgentWorkbench={openSearchAgentWorkbench}
-            onOpenSettings={(subsectionId = "quick") => openSettingsTab("execution", subsectionId)}
+            onOpenSettings={openExecutionSettings}
             terminalDrawerOpen={terminalDrawerOpen}
             setTerminalDrawerOpen={setTerminalDrawerOpen}
             surfaceActive={section === "desktop"}
@@ -6534,7 +6496,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
 
       {shouldRenderSection("source") && (
         <MountedSectionPanel id="source" active={section === "source"}>
-          <DesktopRuntimePanel
+          <MemoizedDesktopRuntimePanel
             agentCatalogCount={agentCatalog.length}
             blockedTaskCount={collaborationBoard.summary.blockedTasks}
             sourceFiles={visibleSourceFiles}
@@ -6542,9 +6504,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             initDefaults={runtimeInitDefaults}
             providerCredentialReport={providerCredentials}
             launchRequest={section === "source" ? runtimeLaunchRequest : null}
-            onLaunchRequestConsumed={() => setRuntimeLaunchRequest(null)}
+            onLaunchRequestConsumed={consumeRuntimeLaunchRequest}
             onOpenSearchAgentWorkbench={openSearchAgentWorkbench}
-            onOpenSettings={(subsectionId = "quick") => openSettingsTab("execution", subsectionId)}
+            onOpenSettings={openExecutionSettings}
             terminalDrawerOpen={terminalDrawerOpen}
             setTerminalDrawerOpen={setTerminalDrawerOpen}
             surface="files"
@@ -13177,6 +13139,8 @@ function DesktopRuntimePanel({
     </div>
   );
 }
+
+const MemoizedDesktopRuntimePanel = memo(DesktopRuntimePanel);
 
 function mergeSessionReports(
   current: CliSessionReport[],

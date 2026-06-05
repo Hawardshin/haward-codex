@@ -20,6 +20,7 @@
     "smoke:source-controls": "node scripts/check-source-controls-playwright.mjs",
     "perf:budget": "node scripts/check-performance-budget.mjs",
     "perf:buttons": "node scripts/audit-button-response.mjs",
+    "perf:sections": "node scripts/audit-section-switch-latency.mjs",
     "audit:surfaces": "node scripts/audit-monitor-surfaces.mjs",
     "test": "node --test tests/*.test.mjs"
   },

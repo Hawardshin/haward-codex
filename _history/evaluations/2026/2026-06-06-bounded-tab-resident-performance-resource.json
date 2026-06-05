@@ -1,0 +1,108 @@
+{
+  "task": "Bounded tab resident performance correction for Workspace Monitor.",
+  "work_mode": "standard",
+  "runtime_context": [
+    "React renderer",
+    "Next.js static build",
+    "Playwright Chromium",
+    "Python static server",
+    "Tauri/Rust build",
+    "renderer memory cache"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "hidden-react-tree-growth",
+      "category": "memory",
+      "description": "Hidden mounted sections can grow without bound and keep re-rendering.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Resident sections are normalized to active + retained source + recent candidates, capped at 5.",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "perf:sections maxObservedResidentCount=5"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "idle-preload-handles",
+      "category": "timer",
+      "description": "Idle callbacks and timeouts can leak when the shell unmounts.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Existing prewarm effect cancels idle callback or timeout on cleanup.",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "playwright-browser",
+      "category": "browser_context",
+      "description": "Performance audit can leave browser processes open.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Audit script closes the browser after samples. The Python static server was stopped with Ctrl-C after measurement.",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/scripts/audit-section-switch-latency.mjs"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "resident-cap",
+      "resource": "React mounted section panels",
+      "create_path": "markSectionResident -> normalizeResidentSectionIds",
+      "cleanup_path": "Cap drops old resident panels from render tree; source is retained intentionally.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "perf:sections maxObservedMountedPanelCount=5"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "static-server-cleanup",
+      "resource": "python3 http.server",
+      "create_path": "python3 -m http.server 3348 --bind 127.0.0.1",
+      "cleanup_path": "Ctrl-C sent to session 38579; process exited.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "server session exited with code 0"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "section-switch-latency",
+      "metric": "settle p95 and mounted panel count under CPU throttle 6",
+      "tool": "audit-section-switch-latency.mjs",
+      "threshold": "p95 <= 1400ms, resident/mounted panels <= 5",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "settleP95Ms=827.8",
+        "maxObservedResidentCount=5",
+        "maxObservedMountedPanelCount=5"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "bundle-budget",
+      "metric": "largest JS chunk bytes",
+      "tool": "check-performance-budget.mjs",
+      "threshold": "largest chunk <= 1,000,000 bytes",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "largest chunk 734386 bytes"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "Rust/Tauri startup workspace warmup remains in src-tauri and was not removed."
+  ]
+}

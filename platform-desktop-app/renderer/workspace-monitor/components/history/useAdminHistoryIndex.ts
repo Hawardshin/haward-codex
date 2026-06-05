@@ -13,6 +13,13 @@ type AdminHistoryState = {
 let cachedAdminHistoryIndex: WorkspaceAdminHistoryIndex | null = null;
 let adminHistoryIndexPromise: Promise<WorkspaceAdminHistoryIndex> | null = null;
 
+export function preloadAdminHistoryIndex() {
+  if (typeof window === "undefined") {
+    return Promise.resolve(null);
+  }
+  return loadAdminHistoryIndex(null).catch(() => null);
+}
+
 export function useAdminHistoryIndex(snapshot: WorkspaceSnapshot, section: string) {
   const [state, setState] = useState<AdminHistoryState>({ status: "idle", index: null, error: "" });
   const requestedRef = useRef(false);

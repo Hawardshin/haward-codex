@@ -1,0 +1,47 @@
+{
+  "task_id": "2026-06-06-bounded-tab-resident-performance",
+  "title": "Bounded tab resident performance correction",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "duration_seconds": 90,
+      "measurement": "estimated",
+      "bottleneck_notes": "Official React/Next/MDN source confirmation was short."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "duration_seconds": 900,
+      "measurement": "estimated",
+      "bottleneck_notes": "Most time went into reading the large MonitorShell and safely changing resident lifecycle."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification and package build",
+      "status": "completed",
+      "duration_seconds": 1500,
+      "measurement": "estimated",
+      "bottleneck_notes": "Tauri package build and repeated test/check runs dominated elapsed time."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation records",
+      "status": "completed",
+      "duration_seconds": 360,
+      "measurement": "estimated",
+      "bottleneck_notes": "Required omission/resource/evaluation records were created after implementation."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "verification",
+    "notes": "Package build is intentionally expensive but aligns with the user's automatic build preference."
+  },
+  "evidence": [
+    "platform-desktop-app/specs/2026-06-06-bounded-tab-resident-performance/validation.ko.md"
+  ]
+}
