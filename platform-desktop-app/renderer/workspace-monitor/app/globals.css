@@ -13776,6 +13776,7 @@ h3 {
 }
 
 .tool-studio-actions,
+.tool-studio-depth-rail,
 .tool-studio-mode-rail,
 .tool-pane-heading,
 .tool-status-pill {
@@ -13791,6 +13792,7 @@ h3 {
 
 .tool-studio-actions button,
 .tool-pane-heading button,
+.tool-studio-depth-rail button,
 .tool-studio-mode-rail button {
   min-height: var(--control-target-size);
   border: 1px solid var(--line);
@@ -13809,6 +13811,7 @@ h3 {
 }
 
 .tool-studio-actions button:hover,
+.tool-studio-depth-rail button:hover,
 .tool-studio-mode-rail button:hover,
 .tool-pane-heading button:hover {
   background: var(--control-bg-hover);
@@ -13859,6 +13862,43 @@ h3 {
   grid-column: 2;
 }
 
+.tool-studio-depth-rail {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.tool-studio-depth-rail button {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  min-height: 58px;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.tool-studio-depth-rail button.active,
+.tool-studio-mode-rail button.active {
+  border-color: var(--control-selected-border);
+  color: var(--control-selected-fg);
+  background: var(--control-selected-bg);
+}
+
+.tool-studio-depth-rail strong,
+.tool-studio-depth-rail small {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tool-studio-depth-rail small {
+  color: inherit;
+  opacity: 0.76;
+}
+
 .tool-studio-mode-rail {
   gap: 8px;
   overflow-x: auto;
@@ -13875,12 +13915,6 @@ h3 {
   min-height: 54px;
   padding: 8px 10px;
   text-align: left;
-}
-
-.tool-studio-mode-rail button.active {
-  border-color: var(--control-selected-border);
-  color: var(--control-selected-fg);
-  background: var(--control-selected-bg);
 }
 
 .tool-studio-mode-rail strong {
@@ -15318,6 +15352,7 @@ h3 {
   }
 
   .tool-studio-hero,
+  .tool-studio-depth-rail,
   .tool-studio-workbench,
   .tool-studio-side-pane,
   .tool-build-flow,

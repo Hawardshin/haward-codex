@@ -32,6 +32,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { writeClipboardText } from "@/lib/clipboard.mjs";
 
 export type ToolStudioMode = "build" | "environment" | "deploy" | "registry";
+type ToolStudioStage = "create" | "ship";
 export type ToolStudioModeRequest = {
   mode: ToolStudioMode;
   requestId: number;
@@ -54,11 +55,21 @@ type ToolStudioPanelProps = {
 
 type ToolMode = {
   id: ToolStudioMode;
+  stage: ToolStudioStage;
   labelKo: string;
   labelEn: string;
   detailKo: string;
   detailEn: string;
   shortcut: string;
+  icon: LucideIcon;
+};
+
+type ToolStage = {
+  id: ToolStudioStage;
+  labelKo: string;
+  labelEn: string;
+  detailKo: string;
+  detailEn: string;
   icon: LucideIcon;
 };
 
@@ -153,9 +164,29 @@ type VirtualEnvironmentLifecycleStep = {
   icon: LucideIcon;
 };
 
+const toolStudioStages: ToolStage[] = [
+  {
+    id: "create",
+    labelKo: "제작 준비",
+    labelEn: "Create",
+    detailKo: "소스와 실행환경을 먼저 정리합니다.",
+    detailEn: "Start with source and runtime setup.",
+    icon: Wand2
+  },
+  {
+    id: "ship",
+    labelKo: "출시 관리",
+    labelEn: "Ship",
+    detailKo: "배포와 등록 상태만 따로 봅니다.",
+    detailEn: "Focus on deployment and registry state.",
+    icon: Rocket
+  }
+];
+
 const toolModes: ToolMode[] = [
   {
     id: "build",
+    stage: "create",
     labelKo: "툴 만들기",
     labelEn: "Build Tool",
     detailKo: "파이썬 소스, 입력 스키마, 검증 명령을 한 단계씩 정의합니다.",
@@ -165,6 +196,7 @@ const toolModes: ToolMode[] = [
   },
   {
     id: "environment",
+    stage: "create",
     labelKo: "파이썬 환경",
     labelEn: "Python Env",
     detailKo: "venv, requirements, 실행 명령, 격리 경계를 확인합니다.",
@@ -174,6 +206,7 @@ const toolModes: ToolMode[] = [
   },
   {
     id: "deploy",
+    stage: "ship",
     labelKo: "툴 배포",
     labelEn: "Deploy Tool",
     detailKo: "검증, 패키징, 배포 전 점검을 분리된 단계로 진행합니다.",
@@ -183,6 +216,7 @@ const toolModes: ToolMode[] = [
   },
   {
     id: "registry",
+    stage: "ship",
     labelKo: "툴만 관리",
     labelEn: "Tool Registry",
     detailKo: "툴 목록, 소유 경계, 상태, rollback만 관리합니다.",
@@ -594,6 +628,7 @@ export function ToolStudioPanel({
   onOpenTerminal,
   onOpenProviderSettings
 }: ToolStudioPanelProps) {
+  const [stage, setStage] = useState<ToolStudioStage>("create");
   const [mode, setMode] = useState<ToolStudioMode>("build");
   const [selectedToolId, setSelectedToolId] = useState(toolCards[0].id);
   const [selectedBlueprintId, setSelectedBlueprintId] = useState(toolBuilderBlueprints[0].id);
@@ -603,6 +638,8 @@ export function ToolStudioPanel({
   const [selectedDeployTargetId, setSelectedDeployTargetId] = useState(toolDeployTargets[0].id);
   const ko = language === "ko";
   const activeMode = toolModes.find((item) => item.id === mode) || toolModes[0];
+  const activeStage = toolStudioStages.find((item) => item.id === stage) || toolStudioStages[0];
+  const currentStageModes = toolModes.filter((item) => item.stage === activeStage.id);
   const selectedTool = toolCards.find((item) => item.id === selectedToolId) || toolCards[0];
   const selectedBlueprint = toolBuilderBlueprints.find((item) => item.id === selectedBlueprintId) || toolBuilderBlueprints[0];
   const selectedSourceChecklist = ko ? selectedBlueprint.sourceChecklistKo : selectedBlueprint.sourceChecklistEn;
@@ -808,11 +845,21 @@ export function ToolStudioPanel({
   }, []);
 
   const selectMode = (nextMode: ToolStudioMode) => {
+    const nextModeItem = toolModes.find((item) => item.id === nextMode) || toolModes[0];
+    setStage(nextModeItem.stage);
     setMode(nextMode);
     const matchingTool = toolCards.find((item) => item.mode === nextMode);
     if (matchingTool) {
       setSelectedToolId(matchingTool.id);
     }
+  };
+
+  const selectStage = (nextStage: ToolStudioStage) => {
+    if (stage === nextStage) {
+      return;
+    }
+    const firstMode = toolModes.find((item) => item.stage === nextStage) || toolModes[0];
+    selectMode(firstMode.id);
   };
 
   useEffect(() => {
@@ -979,8 +1026,27 @@ export function ToolStudioPanel({
         ))}
       </div>
 
-      <nav className="tool-studio-mode-rail" aria-label={ko ? "툴 스튜디오 단계" : "Tool Studio modes"}>
-        {toolModes.map((item) => (
+      <nav className="tool-studio-depth-rail" aria-label={ko ? "툴 스튜디오 상위 흐름" : "Tool Studio parent stages"} data-tool-stage-rail>
+        {toolStudioStages.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            className={stage === item.id ? "active" : ""}
+            onClick={() => selectStage(item.id)}
+            aria-current={stage === item.id ? "step" : undefined}
+            data-tool-stage-button={item.id}
+          >
+            <item.icon size={16} aria-hidden="true" />
+            <span>
+              <strong>{labelFor(language, item.labelKo, item.labelEn)}</strong>
+              <small>{labelFor(language, item.detailKo, item.detailEn)}</small>
+            </span>
+          </button>
+        ))}
+      </nav>
+
+      <nav className="tool-studio-mode-rail" aria-label={ko ? "툴 스튜디오 세부 단계" : "Tool Studio detail modes"} data-tool-mode-depth={stage}>
+        {currentStageModes.map((item) => (
           <button
             key={item.id}
             type="button"

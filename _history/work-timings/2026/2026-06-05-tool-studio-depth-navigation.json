@@ -1,0 +1,22 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-tool-studio-depth-navigation",
+  "timezone": "Asia/Seoul",
+  "phase_timings": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Hierarchical and nested navigation references checked before implementation."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Tool Studio parent stage and child mode rails implemented."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Tests, typecheck, check, build, build:customer, perf budget, and browser depth smoke passed."
+    }
+  ]
+}

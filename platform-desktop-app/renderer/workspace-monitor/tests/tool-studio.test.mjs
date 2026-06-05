@@ -119,6 +119,16 @@ test("Three.js scene is lazy-loaded and cleans up WebGL resources", () => {
 test("Tool Studio exposes shortcut and interaction contracts", () => {
   assert.match(toolStudio, /data-tool-primary-menu/);
   assert.match(toolStudio, /data-tool-context-menu/);
+  assert.match(toolStudio, /type ToolStudioStage = "create" \| "ship"/);
+  assert.match(toolStudio, /const \[stage, setStage\] = useState<ToolStudioStage>\("create"\)/);
+  assert.match(toolStudio, /const toolStudioStages: ToolStage\[\] = \[/);
+  assert.match(toolStudio, /stage: "create"/);
+  assert.match(toolStudio, /stage: "ship"/);
+  assert.match(toolStudio, /const currentStageModes = toolModes\.filter\(\(item\) => item\.stage === activeStage\.id\)/);
+  assert.match(toolStudio, /const selectStage = \(nextStage: ToolStudioStage\) => \{/);
+  assert.match(toolStudio, /data-tool-stage-rail/);
+  assert.match(toolStudio, /data-tool-stage-button=\{item\.id\}/);
+  assert.match(toolStudio, /data-tool-mode-depth=\{stage\}/);
   assert.match(toolStudio, /data-tool-mode-button=\{item\.id\}/);
   assert.match(toolStudio, /data-agent-3d-canvas/);
   assert.match(toolStudio, /export type ToolStudioMode = "build" \| "environment" \| "deploy" \| "registry"/);
@@ -133,12 +143,16 @@ test("Tool Studio exposes shortcut and interaction contracts", () => {
 
 test("Tool Studio CSS keeps split scroll and stable controls", () => {
   assert.match(css, /\.tool-studio-shell \{/);
+  assert.match(css, /\.tool-studio-depth-rail \{[\s\S]*?grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.tool-studio-depth-rail button \{[\s\S]*?min-height: 58px;/);
+  assert.match(css, /\.tool-studio-depth-rail button\.active,[\s\S]*?\.tool-studio-mode-rail button\.active \{/);
   assert.match(css, /\.tool-studio-workbench \{[\s\S]*?grid-template-columns:/);
   assert.match(css, /\.tool-card-scroll,\n\.tool-detail-scroll,\n\.tool-env-scroll \{[\s\S]*?overflow: auto;/);
   assert.match(css, /\.tool-studio-actions button,[\s\S]*?min-height: var\(--control-target-size\);/);
   assert.match(css, /\.tool-agent-canvas \{[\s\S]*?height: clamp\(220px, 27vh, 320px\);/);
   assert.match(css, /\.tool-agent-canvas \{[\s\S]*?max-height: 320px;/);
   assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-studio-shell \{[\s\S]*?overflow: visible;/);
+  assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-studio-depth-rail,[\s\S]*?\.tool-studio-workbench,/);
 });
 
 test("Monitor section switches stage heavy content after first paint", () => {
