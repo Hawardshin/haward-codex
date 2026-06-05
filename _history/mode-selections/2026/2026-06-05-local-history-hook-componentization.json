@@ -1,0 +1,17 @@
+{
+  "date": "2026-06-05",
+  "request_id": "local-history-hook-componentization",
+  "selected_work_mode": "standard",
+  "reason": "The request changes performance behavior, component ownership, Korean UI copy, requirements, and generated monitor data.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "non_quick_gates": [
+    "web_first_intake",
+    "large_scope_decomposition",
+    "requirements_update",
+    "spec_artifacts",
+    "resource_check",
+    "omission_check",
+    "evaluation"
+  ]
+}

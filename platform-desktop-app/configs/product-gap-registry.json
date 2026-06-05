@@ -455,11 +455,12 @@
       ],
       "feature_layer": "desktop_shell",
       "why_it_matters": "The UI now behaves more like a desktop workbench, but MonitorShell is still a large component. Future feature work will be slower and riskier if shell, dialogs, panels, and workbench surfaces stay merged.",
-      "current_evidence": [
-        "Desktop shell, settings dialog, runtime panel, source workbench, operator center, and product panels are present",
-        "New NativeGitWorkbench ownership is split under renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx",
-        "Request traces explicitly name MonitorShell component split as remaining structural work"
-      ],
+    "current_evidence": [
+      "Desktop shell, settings dialog, runtime panel, source workbench, operator center, and product panels are present",
+      "New NativeGitWorkbench ownership is split under renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx",
+      "Admin history index loading, local caching, idle preload, document merging, and day grouping are split under renderer/workspace-monitor/components/history/useAdminHistoryIndex.ts",
+      "Request traces explicitly name MonitorShell component split as remaining structural work"
+    ],
       "acceptance_to_close": [
         "Split DesktopShell, SidebarNavigation, OverviewHome, SettingsDialog, DesktopRuntimePanel, SourceWorkbench, and OperatorCenter ownership into separate components or modules.",
         "No UI behavior regression in check/test/build/customer snapshot/perf.",

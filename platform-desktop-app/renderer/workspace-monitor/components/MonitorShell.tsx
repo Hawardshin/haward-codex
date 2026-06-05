@@ -45,6 +45,7 @@ import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } f
 
 import { ProductFeatureArchitecturePanel } from "@/components/features/ProductFeatureArchitecturePanel";
 import { OperatorCenterDialog } from "@/components/features/OperatorCenterDialog";
+import { useAdminHistoryIndex } from "@/components/history/useAdminHistoryIndex";
 import { ActionGroup } from "@/components/ui/ActionGroup";
 import { Button } from "@/components/ui/Button";
 import {
@@ -68,7 +69,6 @@ import {
   categoryLabel,
   formatDate,
   formatDay,
-  type WorkspaceAdminHistoryIndex,
   type WorkspaceSnapshot,
   type WorkspaceSourceFile
 } from "@/lib/snapshot";
@@ -2447,11 +2447,6 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [category, setCategory] = useState("all");
   const [historyDate, setHistoryDate] = useState("all");
   const [historyCategory, setHistoryCategory] = useState("all");
-  const [adminHistoryState, setAdminHistoryState] = useState<{
-    status: "idle" | "loading" | "ready" | "error";
-    index: WorkspaceAdminHistoryIndex | null;
-    error: string;
-  }>({ status: "idle", index: null, error: "" });
   const [sourceProject, setSourceProject] = useState("all");
   const [sourceLanguage, setSourceLanguage] = useState("all");
   const [selectedSourceId, setSelectedSourceId] = useState("");
@@ -2479,8 +2474,6 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const commandInputRef = useRef<HTMLInputElement>(null);
   const pendingSectionCommitRef = useRef<(() => void) | null>(null);
   const pendingAgentDetailCommitRef = useRef<(() => void) | null>(null);
-  const adminHistoryRequestedRef = useRef(false);
-  const monitorMountedRef = useRef(true);
   const [searchAgentRunForm, setSearchAgentRunForm] = useState<SearchAgentRunForm>(defaultSearchAgentRunForm);
   const [searchAgentChatMessages, setSearchAgentChatMessages] =
     useState<SearchAgentChatMessage[]>(defaultSearchAgentChatMessages);
@@ -2564,37 +2557,10 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   }, [activateSection, initialSection]);
   useEffect(() => {
     return () => {
-      monitorMountedRef.current = false;
       pendingSectionCommitRef.current?.();
       pendingAgentDetailCommitRef.current?.();
     };
   }, []);
-  useEffect(() => {
-    if (!["history", "documents"].includes(section) || adminHistoryRequestedRef.current) {
-      return undefined;
-    }
-
-    const controller = typeof AbortController === "function" ? new AbortController() : null;
-    adminHistoryRequestedRef.current = true;
-    setAdminHistoryState({ status: "loading", index: null, error: "" });
-    void fetchAdminHistoryIndex(controller)
-      .then((index) => {
-        if (monitorMountedRef.current) {
-          setAdminHistoryState({ status: "ready", index, error: "" });
-        }
-      })
-      .catch((caught) => {
-        if (monitorMountedRef.current) {
-          setAdminHistoryState({
-            status: "error",
-            index: null,
-            error: caught instanceof Error ? caught.message : "관리자 히스토리 색인을 불러오지 못했습니다."
-          });
-        }
-      });
-
-    return undefined;
-  }, [section]);
   useEffect(() => {
     if (typeof document === "undefined") {
       return undefined;
@@ -2832,15 +2798,8 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const deferredQuery = useDeferredValue(query);
   const normalizedQuery = deferredQuery.trim().toLowerCase();
   const sectionContentReady = readySection === section;
-  const adminHistoryIndex = adminHistoryState.status === "ready" ? adminHistoryState.index : null;
-  const monitorDocuments = useMemo(
-    () => mergeDocuments(snapshot.documents, adminHistoryIndex?.documents || []),
-    [adminHistoryIndex, snapshot.documents]
-  );
-  const monitorHistoryDays = useMemo(
-    () => (adminHistoryIndex?.documents?.length ? buildHistoryDaysFromDocuments(adminHistoryIndex.documents) : snapshot.historyDays),
-    [adminHistoryIndex, snapshot.historyDays]
-  );
+  const { documents: monitorDocuments, historyDays: monitorHistoryDays, statusText: adminHistoryStatusText } =
+    useAdminHistoryIndex(snapshot, section);
   const viewFilteredDocuments = useMemo(() => {
     return monitorDocuments.filter(
       (document) =>
@@ -6028,22 +5987,22 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       {sectionContentReady && section === "history" && (
         <section className="history-board">
           <div className="history-summary-band">
-            <Metric label="History Days" value={visibleHistoryDays.length} icon={CalendarDays} tone="green" />
-            <Metric label="History Docs" value={visibleHistoryDays.reduce((total, day) => total + day.documentsCount, 0)} icon={History} tone="blue" />
-            <Metric label="Unified Ops" value={visibleUnifiedSummary.totalEvents} icon={Activity} tone="violet" />
-            <Metric label="Root Folders" value={snapshot.stats.rootFolders} icon={FolderKanban} tone="amber" />
+            <Metric label="기록 날짜" value={visibleHistoryDays.length} icon={CalendarDays} tone="green" />
+            <Metric label="기록 문서" value={visibleHistoryDays.reduce((total, day) => total + day.documentsCount, 0)} icon={History} tone="blue" />
+            <Metric label="운영 신호" value={visibleUnifiedSummary.totalEvents} icon={Activity} tone="violet" />
+            <Metric label="루트 폴더" value={snapshot.stats.rootFolders} icon={FolderKanban} tone="amber" />
             <article className="history-latest">
-              <span>Latest History Date</span>
+              <span>최근 기록 날짜</span>
               <strong>{latestHistoryDate ? formatDay(latestHistoryDate) : "기록 없음"}</strong>
-              <p>{latestHistoryDate || "No dated history records"}</p>
+              <p>{latestHistoryDate || "날짜가 있는 기록이 없습니다."}</p>
             </article>
           </div>
 
           <section className="panel wide unified-ops-panel">
             <div className="panel-heading">
               <div>
-                <p className="eyebrow">Unified Ops</p>
-                <h2>히스토리와 모니터링 통합 stream</h2>
+                <p className="eyebrow">운영 신호</p>
+                <h2>작업 기록과 모니터링 신호</h2>
               </div>
               <Activity size={18} aria-hidden="true" />
             </div>
@@ -6053,9 +6012,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           <section className="panel wide">
             <div className="panel-heading">
               <div>
-                <p className="eyebrow">History</p>
+                <p className="eyebrow">작업 기록</p>
                 <h2>날짜별 작업 기록</h2>
-                <p className="history-index-status">{adminHistoryStatusText(adminHistoryState, snapshot)}</p>
+                <p className="history-index-status">{adminHistoryStatusText}</p>
               </div>
               <span className="result-count">{filteredHistoryDays.length} days</span>
             </div>
@@ -6074,7 +6033,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
               <label className="select-box">
                 <ListFilter size={16} aria-hidden="true" />
                 <select value={historyCategory} onChange={(event) => setHistoryCategory(event.target.value)}>
-                  <option value="all">모든 히스토리 유형</option>
+                  <option value="all">모든 기록 유형</option>
                   {historyCategories.map((item) => (
                     <option key={item} value={item}>
                       {categoryLabel(item)}
@@ -12865,7 +12824,7 @@ function DocumentList({
 
 function HistoryTimeline({ days }: { days: WorkspaceSnapshot["historyDays"] }) {
   if (days.length === 0) {
-    return <p className="empty-state">검색 조건에 맞는 날짜별 히스토리가 없습니다.</p>;
+    return <p className="empty-state">검색 조건에 맞는 날짜별 작업 기록이 없습니다.</p>;
   }
 
   return (
@@ -12877,7 +12836,7 @@ function HistoryTimeline({ days }: { days: WorkspaceSnapshot["historyDays"] }) {
               <span className="date-label">{day.date}</span>
               <h3>{formatDay(day.date)}</h3>
             </div>
-            <strong>{day.documentsCount} docs</strong>
+            <strong>{day.documentsCount}개 기록</strong>
           </header>
           <div className="chip-row">
             {day.categories.map((item) => (
@@ -12911,103 +12870,6 @@ function summarizeCategories(documents: WorkspaceSnapshot["historyDays"][number]
   return Array.from(counts.entries())
     .map(([category, count]) => ({ category, count }))
     .sort((left, right) => right.count - left.count || left.category.localeCompare(right.category));
-}
-
-function mergeDocuments(
-  baseDocuments: WorkspaceSnapshot["documents"],
-  adminDocuments: WorkspaceAdminHistoryIndex["documents"]
-) {
-  if (!adminDocuments.length) {
-    return baseDocuments;
-  }
-  const byId = new Map(baseDocuments.map((document) => [document.id, document]));
-  for (const document of adminDocuments) {
-    byId.set(document.id, document);
-  }
-  return Array.from(byId.values()).sort(
-    (left, right) => right.updatedAt.localeCompare(left.updatedAt) || left.path.localeCompare(right.path)
-  );
-}
-
-function buildHistoryDaysFromDocuments(documents: WorkspaceAdminHistoryIndex["documents"]): WorkspaceSnapshot["historyDays"] {
-  const byDate = new Map<string, WorkspaceSnapshot["historyDays"][number]>();
-  for (const document of documents) {
-    if (!document.historyDate) {
-      continue;
-    }
-    const date = document.historyDate;
-    const day = byDate.get(date) || {
-      date,
-      year: date.slice(0, 4),
-      documentsCount: 0,
-      categories: [],
-      documents: []
-    };
-    day.documents.push({
-      id: document.id,
-      path: document.path,
-      category: document.category,
-      language: document.language,
-      title: document.title,
-      excerpt: document.excerpt,
-      previewMode: document.previewMode,
-      htmlTruncated: document.htmlTruncated,
-      sourceBytes: document.sourceBytes,
-      updatedAt: document.updatedAt,
-      historyDate: document.historyDate
-    });
-    byDate.set(date, day);
-  }
-
-  return Array.from(byDate.values())
-    .map((day) => {
-      const categories = summarizeCategories(day.documents);
-      return {
-        ...day,
-        documentsCount: day.documents.length,
-        categories,
-        documents: day.documents.sort(
-          (left, right) => left.category.localeCompare(right.category) || left.path.localeCompare(right.path)
-        )
-      };
-    })
-    .sort((left, right) => right.date.localeCompare(left.date));
-}
-
-function adminHistoryStatusText(
-  state: {
-    status: "idle" | "loading" | "ready" | "error";
-    index: WorkspaceAdminHistoryIndex | null;
-    error: string;
-  },
-  snapshot: WorkspaceSnapshot
-) {
-  if (state.status === "ready") {
-    const count = state.index?.summary.documents ?? 0;
-    return `관리자 히스토리 색인 ${count.toLocaleString("ko-KR")}개를 불러왔습니다. 기본 snapshot에는 최근 요약만 포함됩니다.`;
-  }
-  if (state.status === "loading") {
-    return "관리자 히스토리 색인을 불러오는 중입니다. 기본 snapshot 요약을 먼저 표시합니다.";
-  }
-  if (state.status === "error") {
-    return `관리자 히스토리 색인을 불러오지 못했습니다. ${state.error}`;
-  }
-  const inlineCount = snapshot.adminHistory?.inlineHistoryDocuments ?? 0;
-  const totalCount = snapshot.adminHistory?.summary.documents ?? inlineCount;
-  return `기본 snapshot 요약 ${inlineCount.toLocaleString("ko-KR")}개 / 관리자 전체 ${totalCount.toLocaleString("ko-KR")}개`;
-}
-
-async function fetchAdminHistoryIndex(controller: AbortController | null) {
-  const historyUrl = new URL("admin-history-index.json", window.location.href);
-  const requestOptions: RequestInit = { cache: "no-cache" };
-  if (controller) {
-    requestOptions.signal = controller.signal;
-  }
-  const response = await fetch(historyUrl, requestOptions);
-  if (!response.ok) {
-    throw new Error(`Admin history request failed with ${response.status}`);
-  }
-  return (await response.json()) as WorkspaceAdminHistoryIndex;
 }
 
 function documentVisibleForMode(

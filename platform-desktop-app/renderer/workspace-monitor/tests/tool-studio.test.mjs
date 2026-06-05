@@ -39,6 +39,7 @@ const collector = fs.readFileSync(path.join(projectRoot, "scripts", "collect-wor
 const scrollCheck = fs.readFileSync(path.join(projectRoot, "scripts", "check-scroll-containers.mjs"), "utf8");
 const surfaceAudit = fs.readFileSync(path.join(projectRoot, "scripts", "audit-monitor-surfaces.mjs"), "utf8");
 const historyPayloadCheck = fs.readFileSync(path.join(projectRoot, "scripts", "check-history-payload.mjs"), "utf8");
+const adminHistoryHook = fs.readFileSync(path.join(projectRoot, "components", "history", "useAdminHistoryIndex.ts"), "utf8");
 const css = fs.readFileSync(path.join(projectRoot, "app", "globals.css"), "utf8");
 const packageJson = JSON.parse(fs.readFileSync(path.join(projectRoot, "package.json"), "utf8"));
 
@@ -380,10 +381,23 @@ test("History documents use bounded admin previews instead of loading full recor
   assert.match(historyPayloadCheck, /Inline history documents must stay at or below/);
   assert.match(historyPayloadCheck, /Admin history index day groups must not duplicate document lists/);
   assert.match(historyPayloadCheck, /Snapshot adminHistory summary must match generated admin-history-index\.json/);
-  assert.match(monitorShell, /fetchAdminHistoryIndex\(controller\)/);
-  assert.match(monitorShell, /new URL\("admin-history-index\.json", window\.location\.href\)/);
-  assert.match(monitorShell, /mergeDocuments\(snapshot\.documents, adminHistoryIndex\?\.documents \|\| \[\]\)/);
-  assert.match(monitorShell, /adminHistoryStatusText\(adminHistoryState, snapshot\)/);
+  assert.match(monitorShell, /from "@\/components\/history\/useAdminHistoryIndex"/);
+  assert.match(monitorShell, /useAdminHistoryIndex\(snapshot, section\)/);
+  assert.doesNotMatch(monitorShell, /function mergeDocuments\(/);
+  assert.doesNotMatch(monitorShell, /function fetchAdminHistoryIndex\(/);
+  assert.match(adminHistoryHook, /let cachedAdminHistoryIndex: WorkspaceAdminHistoryIndex \| null = null;/);
+  assert.match(adminHistoryHook, /let adminHistoryIndexPromise: Promise<WorkspaceAdminHistoryIndex> \| null = null;/);
+  assert.match(adminHistoryHook, /window\.requestIdleCallback\(load, \{ timeout: 5000 \}\)/);
+  assert.match(adminHistoryHook, /new URL\("admin-history-index\.json", window\.location\.href\)/);
+  assert.match(adminHistoryHook, /관리자용 기록/);
+});
+
+test("History admin loading is split into a local cached hook", () => {
+  assert.match(adminHistoryHook, /export function useAdminHistoryIndex\(snapshot: WorkspaceSnapshot, section: string\)/);
+  assert.match(adminHistoryHook, /function loadAdminHistoryIndex\(controller: AbortController \| null\)/);
+  assert.match(adminHistoryHook, /function buildHistoryDaysFromDocuments/);
+  assert.match(adminHistoryHook, /function adminHistoryStatusText/);
+  assert.match(monitorShell, /const \{ documents: monitorDocuments, historyDays: monitorHistoryDays, statusText: adminHistoryStatusText \}/);
 });
 
 test("Operator Center and task run copy localize high-visibility Korean UI", () => {
@@ -394,6 +408,11 @@ test("Operator Center and task run copy localize high-visibility Korean UI", () 
   assert.match(monitorShell, /질문 자동 보류는 초기화 설정에서만 바꿉니다/);
   assert.match(monitorShell, /로그 열기/);
   assert.match(monitorShell, /제한된 stdout\/stderr 미리보기와 실행 기록 JSON/);
+  assert.match(monitorShell, /label="기록 날짜"/);
+  assert.match(monitorShell, /label="기록 문서"/);
+  assert.match(monitorShell, /작업 기록과 모니터링 신호/);
+  assert.match(monitorShell, /모든 기록 유형/);
+  assert.doesNotMatch(monitorShell, /히스토리와 모니터링 통합 stream/);
 });
 
 test("Operator history surfaces keep timeline documents in bounded scroll panes", () => {

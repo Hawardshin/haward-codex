@@ -1,0 +1,26 @@
+{
+  "date": "2026-06-05",
+  "request_id": "local-history-hook-componentization",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "duration_seconds": 45
+    },
+    {
+      "phase_id": "gap_inventory",
+      "label": "Local gap and source inventory",
+      "duration_seconds": 120
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Hook split, local cache, and Korean copy",
+      "duration_seconds": 600
+    },
+    {
+      "phase_id": "initial_validation",
+      "label": "Test and check",
+      "duration_seconds": 120
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "date": "2026-06-05",
+  "request_id": "local-history-hook-componentization",
+  "resource_risk_occurred": true,
+  "risks": [
+    "idle preload can parse a large local JSON file on the main thread",
+    "admin index fetch must not repeat on every tab switch",
+    "component split can accidentally change History/Documents filtering"
+  ],
+  "controls": [
+    "module-level cache and shared promise prevent duplicate fetch/parse work",
+    "History/Documents immediate load is preserved",
+    "idle preload runs only when browser support exists and generated admin history exists",
+    "tests verify the hook split and local cache path"
+  ],
+  "status": "passed_runtime_validation",
+  "cleanup": {
+    "local_static_server_port": 4185,
+    "stopped_after_audit": true
+  }
+}

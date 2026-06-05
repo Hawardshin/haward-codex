@@ -1,17 +1,17 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-05T12:04:29.840Z",
+  "generatedAt": "2026-06-05T12:13:08.611Z",
   "summary": {
-    "documents": 2220,
+    "documents": 2227,
     "days": 6,
     "categories": [
       {
         "category": "evaluation",
-        "count": 922
+        "count": 924
       },
       {
         "category": "web-search",
-        "count": 358
+        "count": 359
       },
       {
         "category": "plan",
@@ -19,19 +19,19 @@
       },
       {
         "category": "request-trace",
-        "count": 287
+        "count": 288
       },
       {
         "category": "work-timing",
-        "count": 210
+        "count": 211
       },
       {
         "category": "user-request",
-        "count": 71
+        "count": 72
       },
       {
         "category": "work-summary",
-        "count": 38
+        "count": 39
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6021151,
+    "totalSourceBytes": 6026544,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,134 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-05-local-history-hook-componentization-ko-md",
+      "path": "_history/evaluations/2026/2026-06-05-local-history-hook-componentization.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Local History Hook Componentization",
+      "excerpt": "Evaluation: Local History Hook Componentization 결과 초기 검증 통과. 관리자 기록 로딩/병합/날짜 그룹 계산을 MonitorShell.tsx 밖으로 분리했고, 로컬 admin history index.json 을 모듈 캐시와 idle preload로 재사용하도록 했다. 검증 근거 corepack pnpm filter workspace monitor test : 52 tests 통과 corepack pnpm filter workspace monitor run ",
+      "html": "<p>Evaluation: Local History Hook Componentization 결과 초기 검증 통과. 관리자 기록 로딩/병합/날짜 그룹 계산을 MonitorShell.tsx 밖으로 분리했고, 로컬 admin history index.json 을 모듈 캐시와 idle preload로 재사용하도록 했다. 검증 근거 corepack pnpm filter workspace monitor test : 52 tests 통과 corepack pnpm filter workspace monitor run check : 통과 build , build:customer , perf:budget , audit:surfaces , git diff chec</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 870,
+      "updatedAt": "2026-06-05T12:12:07.014Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-05-local-history-hook-componentization-ko-md",
+      "path": "_history/request-traces/2026/2026-06-05-local-history-hook-componentization.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Local History Hook Componentization",
+      "excerpt": "Request Trace: Local History Hook Componentization | 항목 | 내용 | | | | | 사용자 요청 | 로컬 자원 활용 성능 개선, 누적 코드 분리, 어색한 한글 수정 | | 요구사항 | PDA REQ 044 | | 구현 | useAdminHistoryIndex hook, History 화면 Korean copy 정리, product gap evidence 업데이트 | | 검증 | test , check , build , build:customer , per",
+      "html": "<p>Request Trace: Local History Hook Componentization | 항목 | 내용 | | | | | 사용자 요청 | 로컬 자원 활용 성능 개선, 누적 코드 분리, 어색한 한글 수정 | | 요구사항 | PDA REQ 044 | | 구현 | useAdminHistoryIndex hook, History 화면 Korean copy 정리, product gap evidence 업데이트 | | 검증 | test , check , build , build:customer , perf:budget , audit:surfaces , git diff check | | 결과 | 관리자 기록 로딩 책임이 MonitorShell에서</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 520,
+      "updatedAt": "2026-06-05T12:12:07.014Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-2026-2026-06-05-md",
+      "path": "_history/2026/2026-06-05.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 05",
+      "excerpt": "2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted W",
+      "html": "<p>2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted Workspace Monitor button target sizing tokens and repeated action controls for mo</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 27434,
+      "updatedAt": "2026-06-05T12:10:43.431Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-05-local-history-hook-componentization-json",
+      "path": "_history/work-timings/2026/2026-06-05-local-history-hook-componentization.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 05 Local History Hook Componentization",
+      "excerpt": "{ \"date\": \"2026 06 05\", \"request id\": \"local history hook componentization\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"duration seconds\": 45 }, { \"phase id\": \"gap inventory\", \"label\": \"Local gap and source inventory\", \"duration seconds\": 120 }, { \"",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request id&quot;: &quot;local history hook componentization&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;duration seconds&quot;: 45 }, { &quot;phase id&quot;: &quot;gap inventory&quot;, &quot;label&quot;: &quot;Local gap and source inventory&quot;, &quot;duration seconds&quot;: 120 }, { &quot;phase id&quot;: &quot;implementation&quot;, &quot;label&quot;: &quot;Hook split, local cache, and Korean copy&quot;</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 596,
+      "updatedAt": "2026-06-05T12:10:43.431Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-05-local-history-hook-componentization-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-05-local-history-hook-componentization-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 05 Local History Hook Componentization Evaluation Input",
+      "excerpt": "{ \"date\": \"2026 06 05\", \"request id\": \"local history hook componentization\", \"requirements\": \"PDA REQ 044\" , \"implementation targets\": \"platform desktop app/renderer/workspace monitor/components/history/useAdminHistoryIndex.ts\", \"platform desktop app/renderer/workspace monitor/co",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request id&quot;: &quot;local history hook componentization&quot;, &quot;requirements&quot;: &quot;PDA REQ 044&quot; , &quot;implementation targets&quot;: &quot;platform desktop app/renderer/workspace monitor/components/history/useAdminHistoryIndex.ts&quot;, &quot;platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx&quot;, &quot;platform desktop app/renderer/workspace monitor/tes</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 696,
+      "updatedAt": "2026-06-05T12:10:43.430Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-05-local-history-hook-componentization-ko-md",
+      "path": "_history/user-requests/2026/2026-06-05-local-history-hook-componentization.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Local History Hook Componentization",
+      "excerpt": "사용자 요청 요약: Local History Hook Componentization 사용자는 범위가 넓어서 남겨둔 작업을 계속 처리하라고 요청했고, 이어서 로컬 자원을 활용한 성능 개선, 많이 쌓여 유지보수가 어려운 코드 분리, 어색한 한국어 문구 수정을 요구했다.",
+      "html": "<p>사용자 요청 요약: Local History Hook Componentization 사용자는 범위가 넓어서 남겨둔 작업을 계속 처리하라고 요청했고, 이어서 로컬 자원을 활용한 성능 개선, 많이 쌓여 유지보수가 어려운 코드 분리, 어색한 한국어 문구 수정을 요구했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 312,
+      "updatedAt": "2026-06-05T12:10:43.430Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-05-local-history-hook-componentization-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-05-local-history-hook-componentization.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Local History Hook Componentization",
+      "excerpt": "작업 요약: Local History Hook Componentization 관리자 기록 색인 로딩, 모듈 캐시, idle preload, 문서 병합, 날짜별 그룹 생성을 useAdminHistoryIndex hook으로 분리했다. MonitorShell.tsx 에서 해당 로딩/effect/helper를 제거했다. History 화면의 핵심 한국어 지표와 상태 문구를 자연스럽게 바꿨다. 테스트가 hook 분리, 로컬 캐시, idle preload, Korean copy 회귀를 검증하도록 보강했다.",
+      "html": "<p>작업 요약: Local History Hook Componentization 관리자 기록 색인 로딩, 모듈 캐시, idle preload, 문서 병합, 날짜별 그룹 생성을 useAdminHistoryIndex hook으로 분리했다. MonitorShell.tsx 에서 해당 로딩/effect/helper를 제거했다. History 화면의 핵심 한국어 지표와 상태 문구를 자연스럽게 바꿨다. 테스트가 hook 분리, 로컬 캐시, idle preload, Korean copy 회귀를 검증하도록 보강했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 479,
+      "updatedAt": "2026-06-05T12:10:43.430Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-05-local-history-hook-componentization-ko-md",
+      "path": "_history/web-searches/2026/2026-06-05-local-history-hook-componentization.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "2026 06 05 Local History Hook Componentization Web Search",
+      "excerpt": "2026 06 05 Local History Hook Componentization Web Search 검색 React official performance useMemo useCallback context splitting large components Next.js official lazy loading client components performance web.dev optimize long tasks INP local data parsing JSON performance Korean UX",
+      "html": "<p>2026 06 05 Local History Hook Componentization Web Search 검색 React official performance useMemo useCallback context splitting large components Next.js official lazy loading client components performance web.dev optimize long tasks INP local data parsing JSON performance Korean UX writing guidelines plain language Korean interface copy 확인한 출처 Next.js lazy loa</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1238,
+      "updatedAt": "2026-06-05T12:10:43.429Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-05-history-payload-migration-evaluation-input-json",
       "path": "_history/evaluations/2026/2026-06-05-history-payload-migration-evaluation-input.json",
@@ -93,22 +221,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-2026-2026-06-05-md",
-      "path": "_history/2026/2026-06-05.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 05",
-      "excerpt": "2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted W",
-      "html": "<p>2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted Workspace Monitor button target sizing tokens and repeated action controls for mo</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 26752,
-      "updatedAt": "2026-06-05T12:00:35.460Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-work-summaries-2026-2026-06-05-history-payload-migration-ko-md",
@@ -35587,27 +35699,27 @@
     {
       "date": "2026-06-05",
       "year": "2026",
-      "documentsCount": 439,
+      "documentsCount": 446,
       "categories": [
         {
           "category": "evaluation",
-          "count": 132
+          "count": 134
         },
         {
           "category": "web-search",
-          "count": 62
+          "count": 63
         },
         {
           "category": "work-timing",
-          "count": 61
+          "count": 62
         },
         {
           "category": "request-trace",
-          "count": 58
+          "count": 59
         },
         {
           "category": "user-request",
-          "count": 57
+          "count": 58
         },
         {
           "category": "plan",
@@ -35615,7 +35727,7 @@
         },
         {
           "category": "work-summary",
-          "count": 25
+          "count": 26
         },
         {
           "category": "daily-history",
