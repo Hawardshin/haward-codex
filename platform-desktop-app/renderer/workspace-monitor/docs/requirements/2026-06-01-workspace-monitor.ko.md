@@ -67,6 +67,7 @@
 | REQ-WM-054 | 탭 간 이동은 어떤 화면으로 전환해도 heavy body mount 때문에 active 탭, 제목, 전환 피드백의 첫 paint가 막히면 안 된다. 섹션 body는 첫 paint 이후 staged mount로 붙어야 하며, Source 검색처럼 대량 데이터를 훑는 작업은 해당 섹션 body가 준비된 뒤에만 실행해야 한다. | must | `readySection` staged mount static test, CPU throttle 6 tab active-response audit, section transition shell smoke, Source query gate audit, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 | REQ-WM-055 | 모든 버튼/버튼형 컨트롤은 React click handler, workbench mount, native 호출, clipboard, modal open, section 이동 같은 실제 작업이 시작되기 전에 capture-phase 즉시 눌림 피드백을 표시해야 한다. 대표 67개 버튼 press sample과 실제 nav click sample은 CPU throttle 6 정적 export audit에서 feedback p95 60ms 이하를 유지해야 한다. | must | instant button feedback static test, `perf:buttons` CPU throttle 6 audit, in-app Browser button smoke, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 | REQ-WM-056 | Tool Studio의 `툴 만들기` 화면은 Python tool source 관리를 별도 하위 작업대로 제공해야 하며, template별 package name, module name, `src/` 편집 대상, `pyproject.toml`, console entry point, smoke test path, init/run/package command, checklist, 소스 계획 복사 액션을 한 곳에서 보여줘야 한다. | must | python source manager static test, copy payload marker audit, desktop/mobile source manager smoke, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
+| REQ-WM-057 | Overview 첫 화면은 동등한 카드 목록이 아니라 하나의 추천 작업, 다음 단계 preview, primary action을 먼저 보여주는 Focus Command Surface여야 하며, 다른 목표와 운영 상태는 별도 dock/strip으로 낮춰야 한다. | must | focus command static test, desktop/mobile Browser smoke, target order assertion, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 
 ## 범위
 
@@ -114,6 +115,7 @@
 - Tool Studio `파이썬 환경` 전용 실행환경 작업대
 - Tool Studio `파이썬 환경` 내부 가상환경 lifecycle 관리 패널
 - Tool Studio `툴 만들기` 내부 Python source/package/pyproject 관리 작업대
+- Overview 첫 화면의 Focus Command Surface와 보조 작업 dock
 - Vercel 배포 문서
 
 ## 제외 범위

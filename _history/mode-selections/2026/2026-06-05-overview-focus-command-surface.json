@@ -1,0 +1,12 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-overview-focus-command-surface",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request is broad and user-facing. It is scoped to a high-impact Overview first-screen redesign with requirements/spec/history/validation records, without new dependency installation.",
+  "web_first_intake": true,
+  "memory_bootstrap": "simulated from hot anchors: AGENTS.md, Workspace Monitor requirements, existing task-intent home flow, responsive UI requirements, prior Tool Studio and no-slow interaction work.",
+  "large_scope_decomposition": "simulated with slice_id=overview-focus-command-surface; excluded full-shell rewrite, section-by-section redesign, new design-system installation, and runtime behavior changes.",
+  "installation_occurred": false
+}

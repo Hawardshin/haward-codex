@@ -1,0 +1,26 @@
+{
+  "schema_version": "2026-06-05",
+  "work_id": "2026-06-05-overview-focus-command-surface",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Checked Apple HIG, Material layout guidance, NN/g progressive disclosure, and Carbon UI shell references."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Added Overview focus command surface, secondary navigation dock, responsive CSS, and static test contracts."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Ran test/check/build:customer/perf plus in-app Browser desktop and Playwright 390px mobile smoke."
+    },
+    {
+      "phase": "close_out",
+      "status": "completed",
+      "notes": "Recorded evaluation, omission/resource checks, request trace, and work summaries."
+    }
+  ]
+}

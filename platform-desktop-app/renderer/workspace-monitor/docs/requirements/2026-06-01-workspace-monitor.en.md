@@ -55,6 +55,7 @@
 | REQ-WM-054 | Tab switching shall never block the first active-tab, title, and transition-feedback paint with heavy body mounts, regardless of destination section. Section bodies shall mount through staged first-paint deferral, and large-data scans such as Source search shall only run after the destination section body is ready. | must | `readySection` staged mount static test, CPU throttle 6 tab active-response audit, section transition shell smoke, Source query gate audit, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-055 | Every button and button-like control shall show capture-phase instant pressed feedback before React click handlers, workbench mounts, native calls, clipboard work, modal opens, or section movement begin. Representative 67-button press samples and real nav click samples shall keep feedback p95 at or below 60ms under a CPU throttle 6 static-export audit. | must | instant button feedback static test, `perf:buttons` CPU throttle 6 audit, in-app Browser button smoke, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-056 | Tool Studio Build Tool shall provide a dedicated Python tool source-management sub-workbench that shows the selected template's package name, module name, `src/` edit targets, `pyproject.toml`, console entry point, smoke test path, init/run/package commands, checklist, and copy-source-plan action in one place. | must | python source manager static test, copy payload marker audit, desktop/mobile source manager smoke, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` |
+| REQ-WM-057 | The Overview first screen shall be a Focus Command Surface, not a flat list of equal cards: it shall show one recommended job, next-step preview, and primary action first, while moving other goals and operating status into a separate dock/strip. | must | focus command static test, desktop/mobile Browser smoke, target order assertion, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` |
 
 ## Scope
 
@@ -93,6 +94,7 @@
 - Open-source developer-tool terminal chrome, tab strip, emulator output, prompt input, and global terminal button routing
 - Separation of button first paint from heavy workbench mount, native refresh, and evidence calculations
 - Python source/package/pyproject management inside Tool Studio Build Tool
+- Focus Command Surface and secondary work dock on the Overview first screen
 - Vercel deployment docs
 
 ## Non-Goals

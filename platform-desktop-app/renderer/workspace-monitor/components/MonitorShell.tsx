@@ -4098,6 +4098,17 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     return activeTaskIntent.flowSteps.find((step) => step.id === activeTaskFlowStepId) || activeTaskIntent.flowSteps[0] || null;
   }, [activeTaskFlowStepId, activeTaskIntent]);
   const ActiveTaskIntentIcon = activeTaskIntent?.icon;
+  const primaryHomeIntent = useMemo(
+    () => activeTaskIntent || taskIntentItems.find((item) => item.id === "build-tool") || taskIntentItems[0] || null,
+    [activeTaskIntent, taskIntentItems]
+  );
+  const primaryHomeFlowStep = useMemo(() => {
+    if (!primaryHomeIntent) {
+      return null;
+    }
+    return primaryHomeIntent.flowSteps.find((step) => step.id === activeTaskFlowStepId) || primaryHomeIntent.flowSteps[0] || null;
+  }, [activeTaskFlowStepId, primaryHomeIntent]);
+  const PrimaryHomeIntentIcon = primaryHomeIntent?.icon;
   const workVisibilityItems = useMemo(
     () => [
       {
@@ -5397,32 +5408,68 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
               <span id="overview-home" className="home-route-anchor" aria-hidden="true" />
               <div className="home-menu-surface">
                 <section className={`workspace-home-panel core-home-panel home-${attentionState.tone}`} aria-label="Workspace home">
-                  <div>
-                    <p className="eyebrow">Core Platform</p>
-                    <h2>
-                      {uiLanguage === "ko"
-                        ? "지금 할 일 하나를 고릅니다"
-                        : "Choose one job to do now"}
-                    </h2>
-                    <p>
-                      {uiLanguage === "ko"
-                        ? "첫 화면은 한 번에 하나의 판단만 남깁니다. 핵심 실행, 설정, 파일, 상태 확인은 서로 다른 행동으로 분리됩니다."
-                        : "The first screen keeps one decision at a time. Core runs, setup, files, and status checks stay as separate actions."}
-                    </p>
-                  </div>
-                  <div className="workspace-home-actions task-intent-grid" aria-label={uiLanguage === "ko" ? "작업 목표 선택" : "Choose work goal"}>
-                    {taskIntentItems.map((item, index) => (
-                      <button key={item.id} type="button" onClick={item.run} data-task-intent={item.id}>
-                        <span className="task-intent-index">{index + 1}</span>
-                        <item.icon size={16} aria-hidden="true" />
-                        <span>
-                          <strong>{item.label}</strong>
-                          <small>{item.detail}</small>
-                        </span>
-                        <em>{item.badge}</em>
-                      </button>
-                    ))}
-                  </div>
+                  <section className="home-focus-command" data-home-focus-command aria-label={uiLanguage === "ko" ? "집중 작업 선택" : "Focused work command"}>
+                    <div className="home-focus-copy">
+                      <p className="eyebrow">Command Surface</p>
+                      <h2>
+                        {uiLanguage === "ko"
+                          ? "한 화면은 하나의 결정을 크게 보여줍니다"
+                          : "One screen shows one decision clearly"}
+                      </h2>
+                      <p>
+                        {uiLanguage === "ko"
+                          ? "추천 작업, 다음 단계, 실행 버튼을 먼저 두고 나머지 기능은 아래 dock으로 낮춥니다."
+                          : "The recommended job, next step, and run action come first; everything else moves into the dock below."}
+                      </p>
+                    </div>
+                    {primaryHomeIntent && PrimaryHomeIntentIcon && (
+                      <article className="home-focus-card" data-home-focus-card={primaryHomeIntent.id}>
+                        <header>
+                          <PrimaryHomeIntentIcon size={22} aria-hidden="true" />
+                          <span>{primaryHomeIntent.actionLabel}</span>
+                          <em>{primaryHomeIntent.badge}</em>
+                        </header>
+                        <strong>{primaryHomeIntent.label}</strong>
+                        <p>{primaryHomeIntent.nextStep}</p>
+                        <ol className="home-focus-flow" aria-label={uiLanguage === "ko" ? "추천 작업 단계" : "Recommended work steps"}>
+                          {primaryHomeIntent.flowSteps.map((step, index) => (
+                            <li key={`${primaryHomeIntent.id}-${step.id}`} className={step.id === primaryHomeFlowStep?.id ? "current" : ""}>
+                              <span>{index + 1}</span>
+                              <strong>{step.label}</strong>
+                            </li>
+                          ))}
+                        </ol>
+                        <button type="button" onClick={primaryHomeIntent.run} data-home-focus-primary>
+                          <ArrowRight size={16} aria-hidden="true" />
+                          <span>{primaryHomeFlowStep?.actionLabel || primaryHomeIntent.actionLabel}</span>
+                        </button>
+                      </article>
+                    )}
+                  </section>
+
+                  <section className="home-navigation-dock" data-home-navigation-dock aria-label={uiLanguage === "ko" ? "작업 목표 dock" : "Work goal dock"}>
+                    <header>
+                      <div>
+                        <p className="eyebrow">{uiLanguage === "ko" ? "작업 dock" : "Work Dock"}</p>
+                        <h3>{uiLanguage === "ko" ? "다른 목표는 여기서 선택합니다" : "Choose another goal here"}</h3>
+                      </div>
+                      <span>{taskIntentItems.length.toLocaleString("ko-KR")}</span>
+                    </header>
+                    <div className="workspace-home-actions task-intent-grid" aria-label={uiLanguage === "ko" ? "작업 목표 선택" : "Choose work goal"}>
+                      {taskIntentItems.map((item, index) => (
+                        <button key={item.id} type="button" onClick={item.run} data-task-intent={item.id}>
+                          <span className="task-intent-index">{index + 1}</span>
+                          <item.icon size={16} aria-hidden="true" />
+                          <span>
+                            <strong>{item.label}</strong>
+                            <small>{item.detail}</small>
+                          </span>
+                          <em>{item.badge}</em>
+                        </button>
+                      ))}
+                    </div>
+                  </section>
+
                   <div className="core-home-status-row" aria-label={uiLanguage === "ko" ? "현재 작업량" : "Current workload"}>
                     {workVisibilityItems.map((item) => (
                       <article key={item.id}>

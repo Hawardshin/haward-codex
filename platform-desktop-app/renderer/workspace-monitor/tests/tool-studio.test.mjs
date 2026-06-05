@@ -260,6 +260,7 @@ test("AgentCore builder supports multi-capability bundles", () => {
 });
 
 test("Monitor home exposes task-intent routes before section names", () => {
+  const focusCommandIndex = monitorShell.indexOf("home-focus-command");
   const taskIntentIndex = monitorShell.indexOf("workspace-home-actions task-intent-grid");
   const statusRowIndex = monitorShell.indexOf("core-home-status-row");
 
@@ -281,19 +282,40 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(monitorShell, /data-task-flow-step=\{step\.id\}/);
   assert.match(monitorShell, /aria-current=\{step\.id === activeTaskFlowStep\?\.id \? "step" : undefined\}/);
   assert.match(monitorShell, /className="task-flow-rail"/);
+  assert.match(monitorShell, /const primaryHomeIntent = useMemo/);
+  assert.match(monitorShell, /taskIntentItems\.find\(\(item\) => item\.id === "build-tool"\)/);
+  assert.match(monitorShell, /const primaryHomeFlowStep = useMemo/);
+  assert.match(monitorShell, /className="home-focus-command"/);
+  assert.match(monitorShell, /data-home-focus-command/);
+  assert.match(monitorShell, /className="home-focus-card"/);
+  assert.match(monitorShell, /data-home-focus-card=\{primaryHomeIntent\.id\}/);
+  assert.match(monitorShell, /className="home-focus-flow"/);
+  assert.match(monitorShell, /data-home-focus-primary/);
+  assert.match(monitorShell, /className="home-navigation-dock"/);
+  assert.match(monitorShell, /data-home-navigation-dock/);
   assert.match(monitorShell, /data-active-section=\{section\}/);
   assert.match(monitorShell, /!isPrimaryWorkSurface && section !== "overview" && \(/);
   assert.match(monitorShell, /taskIntentItems\.map\(\(item\) => \(\{/);
+  assert.ok(focusCommandIndex > -1);
   assert.ok(taskIntentIndex > -1);
   assert.ok(statusRowIndex > -1);
+  assert.ok(focusCommandIndex < taskIntentIndex);
   assert.ok(taskIntentIndex < statusRowIndex);
   assert.match(monitorShell, /group:\s*uiLanguage === "ko" \? "하고 싶은 일" : "Goal"/);
   assert.match(monitorShell, /placeholder=\{uiLanguage === "ko" \? "하고 싶은 일 검색: 툴, 에이전트, 실행, 파일, 설정"/);
+  assert.match(css, /\.core-home-panel \{[\s\S]*?background: transparent;/);
+  assert.match(css, /\.home-focus-command \{[\s\S]*?grid-template-columns: minmax\(0, 0\.9fr\) minmax\(320px, 1\.1fr\);/);
+  assert.match(css, /\.home-focus-card \{[\s\S]*?box-shadow: var\(--soft-shadow\);/);
+  assert.match(css, /\.home-focus-flow \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.home-navigation-dock \{/);
+  assert.match(css, /\.home-navigation-dock \.task-intent-grid \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.task-intent-grid \{[\s\S]*?grid-template-columns: repeat\(auto-fit, minmax\(300px, 1fr\)\);/);
   assert.match(css, /\.workspace-home-actions\.task-intent-grid button \{[\s\S]*?grid-template-columns: auto auto minmax\(0, 1fr\) auto;/);
   assert.match(css, /\.task-handoff-strip \{[\s\S]*?grid-template-columns: auto minmax\(0, 1fr\) auto auto;/);
   assert.match(css, /\.task-flow-rail \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.task-flow-rail button \{[\s\S]*?min-height: 44px;/);
+  assert.match(css, /@media \(max-width: 960px\) \{[\s\S]*?\.home-focus-command,[\s\S]*?\.home-focus-flow,[\s\S]*?\.workspace-home-actions,/);
+  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.home-focus-flow li strong \{[\s\S]*?white-space: normal;/);
   assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.task-flow-rail \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
   assert.match(css, /\.desktop-viewport\[data-active-section="overview"\] \.titlebar-context-strip,[\s\S]*?\.desktop-viewport\[data-active-section="overview"\] \.titlebar-actions,[\s\S]*?\.desktop-viewport\[data-active-section="overview"\] > \.desktop-toolbar \{[\s\S]*?display: none;/);
   assert.match(css, /\.desktop-viewport\[data-active-section="overview"\] \.core-home-status-row \{[\s\S]*?grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
