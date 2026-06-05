@@ -2925,6 +2925,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [providerCredentialError, setProviderCredentialError] = useState("");
   const [providerModelCatalog, setProviderModelCatalog] = useState<ProviderModelCatalogReport | null>(null);
   const [providerModelBusy, setProviderModelBusy] = useState(false);
+  const [providerModelBusyProviderId, setProviderModelBusyProviderId] = useState("");
   const [providerModelError, setProviderModelError] = useState("");
   const viewModes = snapshot.viewModeCatalog?.modes?.length ? snapshot.viewModeCatalog.modes : fallbackViewModes;
   const languageModes = useMemo(() => {
@@ -3892,6 +3893,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
 
     const tauriInvoke = getTauriInvoke();
     setProviderModelBusy(true);
+    setProviderModelBusyProviderId(provider.providerId);
     setProviderModelError("");
     if (!tauriInvoke) {
       const fallbackReport: ProviderModelCatalogReport = {
@@ -3918,6 +3920,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       setProviderModelCatalog(fallbackReport);
       setProviderModelError(fallbackReport.error || "");
       setProviderModelBusy(false);
+      setProviderModelBusyProviderId("");
       return;
     }
 
@@ -3954,6 +3957,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       setProviderModelError(String(modelError));
     } finally {
       setProviderModelBusy(false);
+      setProviderModelBusyProviderId("");
     }
   }
   const refreshProviderCredentials = async () => {
@@ -5759,11 +5763,30 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                         notice={providerCredentialNotice}
                         error={providerCredentialError}
                         runtimeAvailable={Boolean(getTauriInvoke())}
+                        providerModelBusy={providerModelBusy}
+                        providerModelBusyProviderId={providerModelBusyProviderId}
+                        providerModelCatalog={providerModelCatalog}
+                        providerModelError={providerModelError}
+                        selectedProviderId={searchAgentRunForm.providerId}
+                        selectedModel={searchAgentRunForm.model}
                         onClear={clearProviderCredential}
                         onInputChange={updateProviderCredentialInput}
                         onOpenUrl={openProviderAuthUrl}
                         onRefresh={refreshProviderCredentials}
+                        onRefreshModels={refreshProviderModels}
                         onSave={saveProviderCredential}
+                        onUseProvider={(provider, modelId) => {
+                          setSearchAgentRunForm((current) => ({
+                            ...current,
+                            providerId: provider.providerId,
+                            model: modelId || provider.defaultModel
+                          }));
+                          setProviderCredentialNotice(
+                            uiLanguage === "ko"
+                              ? `${provider.label}를 에이전트 작업 기본값으로 선택했습니다.`
+                              : `${provider.label} selected as the agent work default.`
+                          );
+                        }}
                       />
                     )}
 
@@ -7988,11 +8011,19 @@ function ProviderAccountsPanel({
   notice,
   error,
   runtimeAvailable,
+  providerModelBusy,
+  providerModelBusyProviderId,
+  providerModelCatalog,
+  providerModelError,
+  selectedProviderId,
+  selectedModel,
   onClear,
   onInputChange,
   onOpenUrl,
   onRefresh,
-  onSave
+  onRefreshModels,
+  onSave,
+  onUseProvider
 }: {
   uiLanguage: UiLanguage;
   report: ProviderCredentialReport;
@@ -8001,12 +8032,21 @@ function ProviderAccountsPanel({
   notice: string;
   error: string;
   runtimeAvailable: boolean;
+  providerModelBusy: boolean;
+  providerModelBusyProviderId: string;
+  providerModelCatalog: ProviderModelCatalogReport | null;
+  providerModelError: string;
+  selectedProviderId: string;
+  selectedModel: string;
   onClear: (provider: ProviderCredentialSummary) => void | Promise<void>;
   onInputChange: (providerId: string, field: keyof ProviderCredentialInputState, value: string) => void;
   onOpenUrl: (provider: ProviderCredentialSummary, purpose: "setup" | "login" | "docs") => void | Promise<void>;
   onRefresh: () => void | Promise<void>;
+  onRefreshModels: (providerId: string) => void | Promise<void>;
   onSave: (provider: ProviderCredentialSummary) => void | Promise<void>;
+  onUseProvider: (provider: ProviderCredentialSummary, modelId?: string) => void | Promise<void>;
 }) {
+  const [providerFilter, setProviderFilter] = useState<"all" | "needed" | "connected" | "local">("all");
   const copy = uiLanguage === "ko"
     ? {
         title: "제공자 계정 연결",
@@ -8015,8 +8055,26 @@ function ProviderAccountsPanel({
         needed: "필요함",
         nativeOnly: "네이티브 앱에서만 저장됩니다.",
         summary: "저장된 키는 모델 API 직접 작업과 CLI 실행 환경변수 주입에 사용됩니다.",
+        guideEyebrow: "AI 로그인 설정",
+        guideTitle: "공식 계정 로그인부터 API 키 저장까지 한 화면에서 처리",
+        guideDetail: "OpenAI, Claude, Gemini는 공식 콘솔에서 키를 발급하고 이 앱에 저장합니다. Ollama는 로컬 런타임 상태를 확인합니다.",
+        chooseProvider: "제공자 선택",
+        chooseProviderDetail: "연결 필요, 연결됨, 로컬 런타임을 바로 필터링",
+        openOfficial: "공식 로그인",
+        openOfficialDetail: "제공자 계정 확인 후 API 키 페이지로 이동",
+        saveKeyStep: "키 저장",
+        saveKeyDetail: "계정 메모와 API 키를 앱 설정 저장소에 기록",
+        verifyModel: "모델 확인",
+        verifyModelDetail: "로컬 모델 또는 기본 모델을 작업 기본값으로 선택",
         storage: "저장 위치",
         refresh: "새로고침",
+        allProviders: "전체",
+        neededProviders: "설정 필요",
+        connectedProviders: "연결됨",
+        localProviders: "로컬",
+        showCount: "표시",
+        cloudAccounts: "클라우드 계정",
+        localRuntimes: "로컬 런타임",
         setup: "키 발급",
         login: "로그인 열기",
         docs: "공식 문서",
@@ -8024,6 +8082,10 @@ function ProviderAccountsPanel({
         saving: "저장 중",
         clear: "삭제",
         clearing: "삭제 중",
+        refreshModels: "모델 확인",
+        refreshingModels: "모델 확인 중",
+        useForWork: "작업 기본값",
+        usingForWork: "사용 중",
         accountHint: "계정 메모",
         accountPlaceholder: "예: 개인 OpenAI 프로젝트, 회사 Claude Console",
         apiKey: "API key",
@@ -8036,6 +8098,14 @@ function ProviderAccountsPanel({
         authMethod: "인증 방식",
         envVar: "실행 변수",
         defaultModel: "기본 모델",
+        connectionSource: "연결 출처",
+        appStored: "앱 저장",
+        envDetected: "환경변수 감지",
+        localReady: "로컬 준비",
+        keyMissing: "키 필요",
+        modelCatalog: "모델",
+        modelFallback: "기본 모델만 표시",
+        noProviders: "해당 조건의 제공자가 없습니다.",
         source: "source",
         key: "key",
         notSaved: "저장 안 됨"
@@ -8047,8 +8117,26 @@ function ProviderAccountsPanel({
         needed: "Needed",
         nativeOnly: "Saving is available only in the native app.",
         summary: "Saved keys power direct model API work and provider-specific CLI environment injection.",
+        guideEyebrow: "AI login setup",
+        guideTitle: "Handle account login, API key issue, and local saving in one place",
+        guideDetail: "OpenAI, Claude, and Gemini use official consoles for API keys. Ollama checks the local runtime on this computer.",
+        chooseProvider: "Choose provider",
+        chooseProviderDetail: "Filter setup needed, connected, and local runtime entries",
+        openOfficial: "Official login",
+        openOfficialDetail: "Confirm the provider account, then open the API key page",
+        saveKeyStep: "Save key",
+        saveKeyDetail: "Store an account note and API key in the app settings store",
+        verifyModel: "Verify model",
+        verifyModelDetail: "Select a local or default model for agent work",
         storage: "Storage path",
         refresh: "Refresh",
+        allProviders: "All",
+        neededProviders: "Needs setup",
+        connectedProviders: "Connected",
+        localProviders: "Local",
+        showCount: "Showing",
+        cloudAccounts: "Cloud accounts",
+        localRuntimes: "Local runtimes",
         setup: "Get key",
         login: "Open login",
         docs: "Docs",
@@ -8056,6 +8144,10 @@ function ProviderAccountsPanel({
         saving: "Saving",
         clear: "Clear",
         clearing: "Clearing",
+        refreshModels: "Check models",
+        refreshingModels: "Checking models",
+        useForWork: "Use for work",
+        usingForWork: "In use",
         accountHint: "Account note",
         accountPlaceholder: "e.g. personal OpenAI project, company Claude Console",
         apiKey: "API key",
@@ -8068,10 +8160,45 @@ function ProviderAccountsPanel({
         authMethod: "Auth method",
         envVar: "Runtime env",
         defaultModel: "Default model",
+        connectionSource: "Connection source",
+        appStored: "App saved",
+        envDetected: "Env detected",
+        localReady: "Local ready",
+        keyMissing: "Key needed",
+        modelCatalog: "Models",
+        modelFallback: "Default model only",
+        noProviders: "No providers match this filter.",
         source: "source",
         key: "key",
         notSaved: "Not saved"
       };
+  const connectedCount = report.providers.filter((provider) => provider.configured).length;
+  const cloudCount = report.providers.filter((provider) => provider.authMethod !== "local_http").length;
+  const localCount = report.providers.filter((provider) => provider.authMethod === "local_http").length;
+  const visibleProviders = report.providers.filter((provider) => {
+    if (providerFilter === "needed") {
+      return !provider.configured;
+    }
+    if (providerFilter === "connected") {
+      return provider.configured;
+    }
+    if (providerFilter === "local") {
+      return provider.authMethod === "local_http";
+    }
+    return true;
+  });
+  const filterOptions: Array<{ id: "all" | "needed" | "connected" | "local"; label: string; count: number }> = [
+    { id: "all", label: copy.allProviders, count: report.providers.length },
+    { id: "needed", label: copy.neededProviders, count: report.providers.length - connectedCount },
+    { id: "connected", label: copy.connectedProviders, count: connectedCount },
+    { id: "local", label: copy.localProviders, count: localCount }
+  ];
+  const guideSteps = [
+    { icon: ListFilter, label: copy.chooseProvider, detail: copy.chooseProviderDetail },
+    { icon: ExternalLink, label: copy.openOfficial, detail: copy.openOfficialDetail },
+    { icon: KeyRound, label: copy.saveKeyStep, detail: copy.saveKeyDetail },
+    { icon: Bot, label: copy.verifyModel, detail: copy.verifyModelDetail }
+  ];
 
   return (
     <section className="settings-pane wide provider-accounts-pane">
@@ -8084,10 +8211,35 @@ function ProviderAccountsPanel({
         </div>
       </div>
 
+      <div className="provider-login-guide">
+        <div className="provider-login-copy">
+          <span>{copy.guideEyebrow}</span>
+          <strong>{copy.guideTitle}</strong>
+          <p>{copy.guideDetail}</p>
+        </div>
+        <div className="provider-login-steps">
+          {guideSteps.map((step) => (
+            <article key={step.label}>
+              <step.icon size={15} aria-hidden="true" />
+              <strong>{step.label}</strong>
+              <small>{step.detail}</small>
+            </article>
+          ))}
+        </div>
+      </div>
+
       <div className="provider-account-summary">
         <article>
           <span>{copy.status}</span>
           <strong>{report.status}</strong>
+        </article>
+        <article>
+          <span>{copy.cloudAccounts}</span>
+          <strong>{cloudCount}</strong>
+        </article>
+        <article>
+          <span>{copy.localRuntimes}</span>
+          <strong>{localCount}</strong>
         </article>
         <article>
           <span>{copy.source}</span>
@@ -8103,16 +8255,48 @@ function ProviderAccountsPanel({
         </button>
       </div>
 
+      <div className="provider-setup-toolbar">
+        <div className="provider-filter-choice" role="group" aria-label={copy.status}>
+          {filterOptions.map((option) => (
+            <button
+              key={option.id}
+              type="button"
+              className={providerFilter === option.id ? "active" : ""}
+              onClick={() => setProviderFilter(option.id)}
+            >
+              <span>{option.label}</span>
+              <strong>{option.count}</strong>
+            </button>
+          ))}
+        </div>
+        <div className="provider-setup-tallies">
+          <span>{copy.showCount}</span>
+          <strong>{visibleProviders.length}/{report.providers.length}</strong>
+        </div>
+      </div>
+
       {!runtimeAvailable && <p className="desktop-error">{copy.nativeOnly}</p>}
       {notice && <p className="decision-resume-notice">{notice}</p>}
       {error && <p className="desktop-error">{error}</p>}
 
       <div className="provider-account-list">
-        {report.providers.map((provider) => {
+        {visibleProviders.length === 0 && <p className="empty-state">{copy.noProviders}</p>}
+        {visibleProviders.map((provider) => {
           const input = inputs[provider.providerId] || { accountHint: provider.accountHint || "", secret: "" };
           const saving = busy === `save:${provider.providerId}`;
           const clearing = busy === `clear:${provider.providerId}`;
+          const modelChecking = providerModelBusy && providerModelBusyProviderId === provider.providerId;
           const localRuntime = provider.authMethod === "local_http";
+          const catalogForProvider = providerModelCatalog?.providerId === provider.providerId ? providerModelCatalog : null;
+          const preferredModel = catalogForProvider?.models[0]?.id || catalogForProvider?.defaultModel || provider.defaultModel;
+          const selectedForWork = selectedProviderId === provider.providerId;
+          const connectionSource = localRuntime
+            ? copy.localReady
+            : provider.credentialSource === "app_config_file"
+              ? copy.appStored
+              : provider.environmentAvailable
+                ? copy.envDetected
+                : copy.keyMissing;
           return (
             <article key={provider.providerId} className={`provider-account-row ${provider.configured ? "connected" : "missing"}`}>
               <header>
@@ -8122,6 +8306,11 @@ function ProviderAccountsPanel({
                 </div>
                 <em>{provider.configured ? copy.connected : copy.needed}</em>
               </header>
+              <div className="provider-status-pills">
+                <span className={provider.configured ? "ready" : ""}>{connectionSource}</span>
+                <span className={selectedForWork ? "ready" : ""}>{selectedForWork ? copy.usingForWork : copy.useForWork}</span>
+                <span>{localRuntime ? copy.localRuntime : provider.envVar}</span>
+              </div>
               <dl>
                 <div>
                   <dt>{copy.authMethod}</dt>
@@ -8134,6 +8323,10 @@ function ProviderAccountsPanel({
                 <div>
                   <dt>{copy.defaultModel}</dt>
                   <dd><code>{provider.defaultModel}</code></dd>
+                </div>
+                <div>
+                  <dt>{copy.connectionSource}</dt>
+                  <dd>{connectionSource}</dd>
                 </div>
                 <div>
                   <dt>{copy.key}</dt>
@@ -8181,6 +8374,10 @@ function ProviderAccountsPanel({
                   <BookOpenText size={15} aria-hidden="true" />
                   <span>{copy.docs}</span>
                 </button>
+                <button type="button" onClick={() => onRefreshModels(provider.providerId)} disabled={providerModelBusy || busy !== ""}>
+                  <RefreshCw size={15} aria-hidden="true" />
+                  <span>{modelChecking ? copy.refreshingModels : copy.refreshModels}</span>
+                </button>
                 <button
                   type="button"
                   onClick={() => onSave(provider)}
@@ -8197,7 +8394,48 @@ function ProviderAccountsPanel({
                   <Trash2 size={15} aria-hidden="true" />
                   <span>{clearing ? copy.clearing : copy.clear}</span>
                 </button>
+                <button
+                  type="button"
+                  className={selectedForWork ? "active" : ""}
+                  onClick={() => onUseProvider(provider, preferredModel)}
+                >
+                  <Bot size={15} aria-hidden="true" />
+                  <span>{selectedForWork ? copy.usingForWork : copy.useForWork}</span>
+                </button>
               </div>
+              {catalogForProvider && (
+                <div className="provider-model-strip">
+                  <div>
+                    <span>{copy.modelCatalog}</span>
+                    <strong>{catalogForProvider.models.length || 1} / {catalogForProvider.status}</strong>
+                    <small>{catalogForProvider.source || copy.modelFallback}</small>
+                  </div>
+                  <div className="provider-model-chip-list">
+                    {(catalogForProvider.models.length ? catalogForProvider.models : [
+                      {
+                        providerId: provider.providerId,
+                        id: provider.defaultModel,
+                        label: provider.defaultModel,
+                        size: null,
+                        modifiedAt: ""
+                      }
+                    ]).slice(0, 4).map((model) => (
+                      <button
+                        key={model.id}
+                        type="button"
+                        className={selectedForWork && selectedModel === model.id ? "active" : ""}
+                        onClick={() => onUseProvider(provider, model.id)}
+                      >
+                        <span>{model.label || model.id}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {catalogForProvider?.error && <p className="provider-storage-warning">{catalogForProvider.error}</p>}
+              {providerModelError && catalogForProvider && !catalogForProvider.error && (
+                <p className="provider-storage-warning">{providerModelError}</p>
+              )}
               <small>{provider.caution}</small>
             </article>
           );

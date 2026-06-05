@@ -1,0 +1,39 @@
+{
+  "date": "2026-06-06",
+  "request_summary": "Improve AI provider setup settings so users can configure providers through easy login/API key flows.",
+  "checked_items": [
+    {
+      "item": "Web-first intake recorded with official provider docs",
+      "status": "done"
+    },
+    {
+      "item": "Provider setup does not imply unsupported in-app OAuth",
+      "status": "done"
+    },
+    {
+      "item": "Requirements and spec artifacts created",
+      "status": "done"
+    },
+    {
+      "item": "Provider settings UI includes guide, filters, status pills, model check, and work default selection",
+      "status": "done"
+    },
+    {
+      "item": "Renderer/platform tests and checks run",
+      "status": "done"
+    },
+    {
+      "item": "Static browser smoke run for the settings panel",
+      "status": "done"
+    },
+    {
+      "item": "Internal desktop package build run after implementation",
+      "status": "done"
+    }
+  ],
+  "known_gaps": [
+    "Real provider OAuth and OS keychain storage remain out of scope for this slice.",
+    "Public release readiness is still gated by signing, notarization, updater, and clean-machine smoke checks unrelated to this UI change."
+  ],
+  "resume_action": "Commit and push the completed change set."
+}

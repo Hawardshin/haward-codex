@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T19:55:01.978Z",
+  "generatedAt": "2026-06-05T20:07:29.677Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -12,12 +12,12 @@
     "tasks": 71,
     "completedTasks": 71,
     "documents": 650,
-    "requirements": 453,
+    "requirements": 458,
     "evaluations": 31,
     "webSearches": 12,
-    "timingRecords": 12,
+    "timingRecords": 11,
     "historyDays": 1,
-    "adminHistoryDocuments": 2421,
+    "adminHistoryDocuments": 2424,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7330,6 +7330,36 @@
       "sourcePath": "platform-desktop-app/docs/requirements/2026-06-04-provider-direct-agent-work.ko.md"
     },
     {
+      "id": "REQ-PDA-126",
+      "requirement": "설정 화면은 AI provider 연결을 공식 로그인, API key 발급, 앱 저장, 모델 확인, 작업 기본값 선택 순서로 한 화면에서 처리할 수 있어야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-easy-ai-login-settings.ko.md"
+    },
+    {
+      "id": "REQ-PDA-127",
+      "requirement": "OpenAI, Anthropic, Google Gemini는 비공식 웹 세션이나 쿠키가 아니라 공식 콘솔/API key 흐름으로 안내해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-easy-ai-login-settings.ko.md"
+    },
+    {
+      "id": "REQ-PDA-128",
+      "requirement": "Ollama는 cloud login처럼 보이지 않게 로컬 런타임으로 분리하고, 로컬 API endpoint와 모델 확인 흐름을 노출해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-easy-ai-login-settings.ko.md"
+    },
+    {
+      "id": "REQ-PDA-129",
+      "requirement": "사용자는 연결 필요, 연결됨, 로컬 provider를 클릭 기반 필터로 좁혀 설정 대상을 빨리 찾을 수 있어야 한다.",
+      "priority": "should",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-easy-ai-login-settings.ko.md"
+    },
+    {
+      "id": "REQ-PDA-130",
+      "requirement": "모델 확인 결과는 설정 화면에서 바로 보이고, 사용자가 provider/model을 에이전트 작업 기본값으로 선택할 수 있어야 한다.",
+      "priority": "should",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-easy-ai-login-settings.ko.md"
+    },
+    {
       "id": "REQ-PTY-001",
       "requirement": "앱은 OS pseudo terminal을 사용해 live shell session을 시작할 수 있어야 한다.",
       "priority": "must",
@@ -7386,6 +7416,166 @@
   ],
   "documents": [
     {
+      "id": "history-2026-2026-06-06-md",
+      "path": "_history/2026/2026-06-06.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 06",
+      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
+      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4506,
+      "updatedAt": "2026-06-05T20:06:38.615Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-easy-ai-login-settings-ko-md",
+      "path": "_history/plans/2026/2026-06-06-easy-ai-login-settings.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "계획 기록: 쉬운 AI 로그인 설정",
+      "excerpt": "계획 기록: 쉬운 AI 로그인 설정 범위 Settings Execution provider accounts 화면을 AI 로그인/API key setup center로 개선한다. 기존 Tauri provider credential command를 재사용한다. 공식 provider 문서 기준으로 비공식 웹 세션 저장을 피한다. 실행 순서 1. 공식 docs와 기존 provider account 구현을 확인한다. 2. 요구사항/spec/history를 작성한다. 3. renderer panel과 CSS",
+      "html": "<p>계획 기록: 쉬운 AI 로그인 설정 범위 Settings Execution provider accounts 화면을 AI 로그인/API key setup center로 개선한다. 기존 Tauri provider credential command를 재사용한다. 공식 provider 문서 기준으로 비공식 웹 세션 저장을 피한다. 실행 순서 1. 공식 docs와 기존 provider account 구현을 확인한다. 2. 요구사항/spec/history를 작성한다. 3. renderer panel과 CSS를 수정한다. 4. renderer test/readiness token을 추가한다. 5. tests/check/collect/internal </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 898,
+      "updatedAt": "2026-06-05T20:06:32.067Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-easy-ai-login-settings-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-easy-ai-login-settings.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 쉬운 AI 로그인 설정",
+      "excerpt": "사용자 요청 요약: 쉬운 AI 로그인 설정 날짜: 2026 06 06 대상: platform desktop app 요약: 사용자가 AI provider 설정 기능을 더 늘리고, 로그인/계정 설정을 쉽게 할 수 있도록 데스크톱 앱 설정 화면 개선을 요청했다. 해석: 공식 provider 로그인/콘솔 링크, API key 발급/저장, 연결 상태, 모델 확인, 작업 기본값 선택을 한 설정 흐름으로 묶는다. 제외: 민감한 key 원문을 읽거나 기록하지 않는다. 비공식 웹 세션 cookie 기반 로그인을 ",
+      "html": "<p>사용자 요청 요약: 쉬운 AI 로그인 설정 날짜: 2026 06 06 대상: platform desktop app 요약: 사용자가 AI provider 설정 기능을 더 늘리고, 로그인/계정 설정을 쉽게 할 수 있도록 데스크톱 앱 설정 화면 개선을 요청했다. 해석: 공식 provider 로그인/콘솔 링크, API key 발급/저장, 연결 상태, 모델 확인, 작업 기본값 선택을 한 설정 흐름으로 묶는다. 제외: 민감한 key 원문을 읽거나 기록하지 않는다. 비공식 웹 세션 cookie 기반 로그인을 구현하지 않는다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 589,
+      "updatedAt": "2026-06-05T20:06:32.066Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-easy-ai-login-settings-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-easy-ai-login-settings.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: 쉬운 AI 로그인 설정",
+      "excerpt": "Web Search: 쉬운 AI 로그인 설정 날짜: 2026 06 06 작업: platform desktop app 설정 화면에서 AI provider 로그인/API key 설정을 쉽게 만드는 UX 개선 질의 OpenAI API keys official documentation create API key Anthropic API key official documentation console create key Google AI Studio Gemini API key official document",
+      "html": "<p>Web Search: 쉬운 AI 로그인 설정 날짜: 2026 06 06 작업: platform desktop app 설정 화면에서 AI provider 로그인/API key 설정을 쉽게 만드는 UX 개선 질의 OpenAI API keys official documentation create API key Anthropic API key official documentation console create key Google AI Studio Gemini API key official documentation Ollama API official documentation local server 확인한 공식 출처 OpenAI API refere</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1797,
+      "updatedAt": "2026-06-05T20:06:32.065Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-easy-ai-login-settings-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-easy-ai-login-settings/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적성: 쉬운 AI 로그인 설정",
+      "excerpt": "추적성: 쉬운 AI 로그인 설정 | 요구사항 | 구현 | 검증 | | | | | | REQ PDA 126 | ProviderAccountsPanel , provider login guide , guide steps | tool studio.test.mjs , readiness tokens | | REQ PDA 127 | existing setupUrl , loginUrl , docsUrl , official source copy | source review, web search record | |",
+      "html": "<h1>추적성: 쉬운 AI 로그인 설정</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-126</td><td><code>ProviderAccountsPanel</code>, <code>provider-login-guide</code>, guide steps</td><td><code>tool-studio.test.mjs</code>, readiness tokens</td></tr><tr><td>REQ-PDA-127</td><td>existing <code>setupUrl</code>, <code>loginUrl</code>, <code>docsUrl</code>, official-source copy</td><td>source review, web-search record</td></tr><tr><td>REQ-PDA-128</td><td><code>local_http</code>, local runtime note, model refresh button</td><td>renderer test, readiness</td></tr><tr><td>REQ-PDA-129</td><td><code>providerFilter</code>, <code>provider-filter-choice</code></td><td>renderer test</td></tr><tr><td>REQ-PDA-130</td><td><code>providerModelCatalog</code>, <code>provider-model-strip</code>, <code>onUseProvider</code></td><td>renderer test, TypeScript check</td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 629,
+      "updatedAt": "2026-06-05T20:05:54.867Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-easy-ai-login-settings-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-easy-ai-login-settings/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "계획: 쉬운 AI 로그인 설정",
+      "excerpt": "계획: 쉬운 AI 로그인 설정 1. 공식 provider 인증 문서를 확인하고, 앱 내 가짜 OAuth가 아니라 공식 로그인/API key 흐름으로 범위를 정한다. 2. 기존 provider credential/report/model command surface를 inventory한다. 3. ProviderAccountsPanel 을 가이드, 필터, 상태 pill, 모델 확인, 작업 기본값 선택이 있는 설정 센터로 확장한다. 4. CSS와 테스트/readiness 토큰을 추가해 기본 버튼처럼 보이",
+      "html": "<h1>계획: 쉬운 AI 로그인 설정</h1>\n<p>1. 공식 provider 인증 문서를 확인하고, 앱 내 가짜 OAuth가 아니라 공식 로그인/API key 흐름으로 범위를 정한다.</p>\n<p>2. 기존 provider credential/report/model command surface를 inventory한다.</p>\n<p>3. <code>ProviderAccountsPanel</code>을 가이드, 필터, 상태 pill, 모델 확인, 작업 기본값 선택이 있는 설정 센터로 확장한다.</p>\n<p>4. CSS와 테스트/readiness 토큰을 추가해 기본 버튼처럼 보이는 provider 설정 UI 회귀를 막는다.</p>\n<p>5. renderer/platform tests, readiness, collect, internal desktop package build를 실행한다.</p>\n<p>6. history/evaluation/trace를 남기고 commit/push한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 678,
+      "updatedAt": "2026-06-05T20:05:54.866Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-easy-ai-login-settings-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-easy-ai-login-settings/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록: 쉬운 AI 로그인 설정",
+      "excerpt": "작업 목록: 쉬운 AI 로그인 설정 x 공식 provider 인증/키 발급 흐름을 확인한다. x 기존 provider account UI와 Tauri command 연결점을 확인한다. x Settings provider panel에 AI 로그인 설정 가이드와 provider 필터를 추가한다. x provider card에 상태 pill, 모델 확인, 작업 기본값 선택, 모델 chip UI를 추가한다. x CSS tonal hierarchy와 compact desktop fallback을 추가한다.",
+      "html": "<h1>작업 목록: 쉬운 AI 로그인 설정</h1>\n<ul>\n<li>[x] 공식 provider 인증/키 발급 흐름을 확인한다.</li>\n<li>[x] 기존 provider account UI와 Tauri command 연결점을 확인한다.</li>\n<li>[x] Settings provider panel에 AI 로그인 설정 가이드와 provider 필터를 추가한다.</li>\n<li>[x] provider card에 상태 pill, 모델 확인, 작업 기본값 선택, 모델 chip UI를 추가한다.</li>\n<li>[x] CSS tonal hierarchy와 compact desktop fallback을 추가한다.</li>\n<li>[x] renderer test/readiness token을 추가한다.</li>\n<li>[ ] full validation, collect, internal package build를 실행한다.</li>\n<li>[ ] 평가, trace, commit, push를 완료한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 640,
+      "updatedAt": "2026-06-05T20:05:54.866Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-easy-ai-login-settings-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-easy-ai-login-settings/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증: 쉬운 AI 로그인 설정",
+      "excerpt": "검증: 쉬운 AI 로그인 설정 예정 명령 corepack pnpm filter workspace monitor test corepack pnpm filter workspace monitor check corepack pnpm filter platform desktop app test corepack pnpm filter platform desktop app check corepack pnpm filter workspace monitor run collect corepack pnpm run desk",
+      "html": "<h1>검증: 쉬운 AI 로그인 설정</h1>\n<h2>예정 명령</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor check</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code></li>\n<li><code>corepack pnpm run desktop:package:internal</code></li>\n</ul>\n<h2>현재 상태</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code> - passed</li>\n<li><code>corepack pnpm --filter workspace-monitor check</code> - first run failed only because admin history lazy index had not been regenerated yet; TypeScript and renderer contract checks passed before that failure.</li>\n</ul>\n<h2>수동 확인 항목</h2>\n<ul>\n<li>Provider setup copy must not imply in-app OAuth where the provider only supports console/API key setup.</li>\n<li>API key inputs remain password fields and saved secrets are not echoed back into the UI.</li>\n<li>Ollama remains labeled as local runtime, not cloud account login.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 943,
+      "updatedAt": "2026-06-05T20:05:54.866Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-easy-ai-login-settings-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-easy-ai-login-settings.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "쉬운 AI 로그인 설정 요구사항",
+      "excerpt": "쉬운 AI 로그인 설정 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | REQ PDA 126 | 설정 화면은 AI provider 연결을 공식 로그인, API key 발급, 앱 저장, 모델 확인, 작업 기본값 선택 순서로 한 화면에서 처리할 수 있어야 한다. | must | ProviderAccountsPanel , provider login guide | | REQ PDA 127 | OpenAI, Anthropic, Google Gemini는 비공식 웹 세션이나 쿠키",
+      "html": "<h1>쉬운 AI 로그인 설정 요구사항</h1>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-126</td><td>설정 화면은 AI provider 연결을 공식 로그인, API key 발급, 앱 저장, 모델 확인, 작업 기본값 선택 순서로 한 화면에서 처리할 수 있어야 한다.</td><td>must</td><td><code>ProviderAccountsPanel</code>, <code>provider-login-guide</code></td></tr><tr><td>REQ-PDA-127</td><td>OpenAI, Anthropic, Google Gemini는 비공식 웹 세션이나 쿠키가 아니라 공식 콘솔/API key 흐름으로 안내해야 한다.</td><td>must</td><td>provider <code>setupUrl</code>, <code>loginUrl</code>, <code>docsUrl</code></td></tr><tr><td>REQ-PDA-128</td><td>Ollama는 cloud login처럼 보이지 않게 로컬 런타임으로 분리하고, 로컬 API endpoint와 모델 확인 흐름을 노출해야 한다.</td><td>must</td><td><code>local_http</code>, <code>list_provider_models</code>, <code>127.0.0.1:11434</code></td></tr><tr><td>REQ-PDA-129</td><td>사용자는 연결 필요, 연결됨, 로컬 provider를 클릭 기반 필터로 좁혀 설정 대상을 빨리 찾을 수 있어야 한다.</td><td>should</td><td><code>provider-filter-choice</code></td></tr><tr><td>REQ-PDA-130</td><td>모델 확인 결과는 설정 화면에서 바로 보이고, 사용자가 provider/model을 에이전트 작업 기본값으로 선택할 수 있어야 한다.</td><td>should</td><td><code>provider-model-strip</code>, <code>onUseProvider</code></td></tr></tbody></table>\n<h2>공식 근거</h2>\n<ul>\n<li>OpenAI API는 <code>Authorization: Bearer</code> 기반 API key 또는 access token 인증을 사용한다.</li>\n<li>Anthropic Claude API는 Console 계정과 API key 또는 Workload Identity Federation rule을 전제로 한다.</li>\n<li>Google Gemini API는 Google AI Studio에서 Gemini API key를 만들고 <code>GEMINI_API_KEY</code> 등으로 사용할 수 있다.</li>\n<li>Ollama는 설치 후 기본 로컬 API가 <code>http://localhost:11434/api</code>에서 제공된다.</li>\n</ul>\n<h2>범위 결정</h2>\n<ul>\n<li>이번 작업은 앱 내부 OAuth provider를 새로 만들지 않는다.</li>\n<li>공식 provider 페이지를 시스템 브라우저로 열고, 앱에는 사용자가 발급한 key를 직접 저장한다.</li>\n<li>저장된 key 원문을 화면, snapshot, history, support bundle에 기록하지 않는다.</li>\n<li>provider model 확인은 기존 static/default catalog와 Ollama local tags 조회 경로를 재사용한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2117,
+      "updatedAt": "2026-06-05T20:05:54.865Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-easy-ai-login-settings-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-easy-ai-login-settings/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "스펙: 쉬운 AI 로그인 설정",
+      "excerpt": "스펙: 쉬운 AI 로그인 설정 목적 사용자가 AI provider 설정을 “어디서 로그인하고, 어디서 key를 만들고, 저장 후 어떤 모델을 쓰는지” 한 화면에서 판단하고 실행하게 한다. 기능 범위 Settings Execution provider accounts 패널에 AI 로그인 설정 가이드 영역을 추가한다. provider 목록에 전체, 설정 필요, 연결됨, 로컬 필터를 추가한다. provider card에 연결 출처, app/env/local 상태 pill, 공식 로그인/키 발급/문서 링크",
+      "html": "<h1>스펙: 쉬운 AI 로그인 설정</h1>\n<h2>목적</h2>\n<p>사용자가 AI provider 설정을 “어디서 로그인하고, 어디서 key를 만들고, 저장 후 어떤 모델을 쓰는지” 한 화면에서 판단하고 실행하게 한다.</p>\n<h2>기능 범위</h2>\n<ul>\n<li>Settings &gt; Execution &gt; provider accounts 패널에 <code>AI 로그인 설정</code> 가이드 영역을 추가한다.</li>\n<li>provider 목록에 전체, 설정 필요, 연결됨, 로컬 필터를 추가한다.</li>\n<li>provider card에 연결 출처, app/env/local 상태 pill, 공식 로그인/키 발급/문서 링크, 저장/삭제, 모델 확인, 작업 기본값 선택을 배치한다.</li>\n<li>model catalog 결과를 같은 card 안에서 chip 형태로 보여주고, chip 클릭으로 에이전트 작업 provider/model을 선택한다.</li>\n<li>기존 Tauri commands와 fallback provider registry를 재사용한다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>OpenAI/Anthropic/Google OAuth client를 새로 등록하지 않는다.</li>\n<li>ChatGPT/Claude/Gemini 웹앱 세션 cookie를 저장하거나 WebView로 로그인 상태를 훔치지 않는다.</li>\n<li>이번 slice에서 OS keychain 저장소를 새로 도입하지 않는다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>설정 화면 source에 <code>AI 로그인 설정</code>, <code>provider-login-guide</code>, <code>provider-filter-choice</code>, <code>provider-model-strip</code>가 존재한다.</li>\n<li>사용자는 provider별 공식 로그인/키 발급/문서 링크를 열 수 있다.</li>\n<li>사용자는 provider key 저장/삭제/새로고침을 기존 native command로 실행할 수 있다.</li>\n<li>사용자는 모델 확인 후 provider/model을 작업 기본값으로 선택할 수 있다.</li>\n<li>기존 native select 금지와 compact tonal hierarchy 테스트가 유지된다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1656,
+      "updatedAt": "2026-06-05T20:05:54.865Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "platform-desktop-app-specs-2026-06-06-desktop-only-ui-boundary-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-desktop-only-ui-boundary/tasks.ko.md",
       "category": "project-spec",
@@ -7400,22 +7590,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-2026-2026-06-06-md",
-      "path": "_history/2026/2026-06-06.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 06",
-      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 3981,
-      "updatedAt": "2026-06-05T19:54:31.328Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-desktop-only-ui-boundary-ko-md",
@@ -9818,38 +9992,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-user-requests-2026-2026-06-06-still-slow-tab-switch-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-still-slow-tab-switch.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: 탭 전환이 아직 느림",
-      "excerpt": "사용자 요청 요약: 탭 전환이 아직 느림 요약 사용자가 현재 데스크톱 앱의 Workspace Monitor 탭 전환이 여전히 느리다고 보고했다. 이전의 전체 탭 resident/preload 구현 이후에도 체감 지연이 남아 있으므로 근본 원인을 다시 보고 성능 구조를 보정해야 한다. 요구사항 후보 탭 이동 시 hidden 탭의 불필요한 렌더 비용을 줄인다. 데스크톱 앱의 장점인 Rust/native resource warmup과 renderer memory preload는 유지한다. 구현 후 사용",
-      "html": "<p>사용자 요청 요약: 탭 전환이 아직 느림 요약 사용자가 현재 데스크톱 앱의 Workspace Monitor 탭 전환이 여전히 느리다고 보고했다. 이전의 전체 탭 resident/preload 구현 이후에도 체감 지연이 남아 있으므로 근본 원인을 다시 보고 성능 구조를 보정해야 한다. 요구사항 후보 탭 이동 시 hidden 탭의 불필요한 렌더 비용을 줄인다. 데스크톱 앱의 장점인 Rust/native resource warmup과 renderer memory preload는 유지한다. 구현 후 사용자가 직접 빌드하지 않아도 되도록 자동 build/package 검증을 수행한다. 결과 연결 요구사항: platform desktop app/d</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 962,
-      "updatedAt": "2026-06-05T17:33:34.649Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: bounded tab resident 성능 보정",
-      "excerpt": "웹 검색 기록: bounded tab resident 성능 보정 목적 Workspace Monitor 탭 전환이 여전히 느리다는 피드백에 대해 React/Next 성능 기준을 다시 확인하고, 이전의 무제한 resident 선마운트가 남기는 hidden tree 비용을 보정했다. 검색어 React official docs Profiler memo useMemo rendering performance hidden components state preservation Next.js official do",
-      "html": "<p>웹 검색 기록: bounded tab resident 성능 보정 목적 Workspace Monitor 탭 전환이 여전히 느리다는 피드백에 대해 React/Next 성능 기준을 다시 확인하고, 이전의 무제한 resident 선마운트가 남기는 hidden tree 비용을 보정했다. 검색어 React official docs Profiler memo useMemo rendering performance hidden components state preservation Next.js official docs lazy loading dynamic imports client components performance MDN requestIdleCal</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2861,
-      "updatedAt": "2026-06-05T17:33:34.649Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-docs-requirements-2026-06-06-bounded-tab-resident-performance-ko-md",
       "path": "platform-desktop-app/docs/requirements/2026-06-06-bounded-tab-resident-performance.ko.md",
       "category": "project-doc",
@@ -9864,22 +10006,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-native-pty-terminal-runtime-ko-md",
-      "path": "_history/work-timings/2026/2026-06-06-native-pty-terminal-runtime.ko.md",
-      "category": "work-timing",
-      "language": "ko",
-      "title": "작업 타이밍: 네이티브 PTY 터미널 런타임",
-      "excerpt": "작업 타이밍: 네이티브 PTY 터미널 런타임 | 단계 | 기록 | | | | | 웹/코드 조사 | 공식 문서 검색, 기존 pipe first 구현과 PTY deferred decision 확인 | | 구현 | Rust PTY command/store, xterm surface, renderer state/polling 연결 | | 검증 | Rust/frontend/readiness/package/internal artifact verification | | 기록 | requirements/spec",
-      "html": "<p>작업 타이밍: 네이티브 PTY 터미널 런타임 | 단계 | 기록 | | | | | 웹/코드 조사 | 공식 문서 검색, 기존 pipe first 구현과 PTY deferred decision 확인 | | 구현 | Rust PTY command/store, xterm surface, renderer state/polling 연결 | | 검증 | Rust/frontend/readiness/package/internal artifact verification | | 기록 | requirements/spec/history/install/resource/evaluation 기록 | 병목 패키징 빌드는 release compile과 DMG verifi</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 665,
-      "updatedAt": "2026-06-05T17:17:07.972Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-native-pty-terminal-runtime-validation-ko-md",
@@ -17688,102 +17814,6 @@
       "historyDate": "2026-06-03",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-product-folder-restructure-spec-en-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/spec.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Desktop Product Folder Restructure Spec",
-      "excerpt": "Desktop Product Folder Restructure Spec Background The installable platform is no longer a Tauri wrapper around a root level web UI candidate. The desktop product launches first and owns task state, runtime data, the installer shell contract, workspace hosting, source editing, CL",
-      "html": "<h1>Desktop Product Folder Restructure Spec</h1>\n<h2>Background</h2>\n<p>The installable platform is no longer a Tauri wrapper around a root-level web UI candidate. The desktop product launches first and owns task state, runtime data, the installer shell contract, workspace hosting, source editing, CLI adapters, and accumulated data surfaces. The product UI therefore belongs under <code>platform-desktop-app/renderer/workspace-monitor/</code>, not as an independent root project.</p>\n<h2>Requirement</h2>\n<ul>\n<li><code>PDA-REQ-034</code>: remove the independent root <code>workspace-monitor/</code> project and enforce <code>platform-desktop-app/renderer/workspace-monitor/</code> as the product renderer source path.</li>\n</ul>\n<h2>Design Decisions</h2>\n<ul>\n<li>Language/runtime option A: keep the existing TypeScript/Next.js renderer, Rust/Tauri shell, and Python platform tools, changing only the ownership boundary.</li>\n<li>Language/runtime option B: rewrite the renderer as Rust/native UI or a new Electron main/renderer structure.</li>\n<li>Selection: option A. It preserves the existing workbench, Monaco, CLI supervisor, and runtime data UI while correcting product ownership with lower risk and maintenance cost.</li>\n</ul>\n<ul>\n<li>Architecture option A: keep <code>workspace-monitor/</code> as a root project and let Tauri reference that external project.</li>\n<li>Architecture option B: move the renderer to <code>platform-desktop-app/renderer/workspace-monitor/</code> and align Tauri, pnpm, readiness checks, and registries to the same product boundary.</li>\n<li>Selection: option B. It matches the requirement that the installable app is the primary host runtime with UI authority and avoids making the product look like a developer clone/workdir workflow.</li>\n</ul>\n<h2>Scope</h2>\n<ul>\n<li>Move tracked <code>workspace-monitor/</code> source to <code>platform-desktop-app/renderer/workspace-monitor/</code>.</li>\n<li>Update <code>pnpm-workspace.yaml</code>, <code>pnpm-lock.yaml</code>, Tauri <code>frontendDist</code>, dev command, build/audit scripts to the new renderer path.</li>\n<li>Update project registry, root structure policy, repository map, docs, policies, and operating models around the new root boundary.</li>\n<li>Update the snapshot collector and readiness checks to use the new repository root calculation and renderer path.</li>\n</ul>\n<h2>Non-Scope</h2>\n<ul>\n<li>Public signing/notarization, signed updater, and clean-machine install smoke are not completion criteria for this folder restructure.</li>\n<li>Historical specs that recorded past <code>workspace-monitor/</code> paths are not rewritten wholesale. The source of truth for the new structure is the requirement, registry, current docs, generated maps, and readiness checks.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2471,
-      "updatedAt": "2026-06-03T05:42:54.395Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-product-folder-restructure-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-product-folder-restructure/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "데스크톱 제품 폴더 구조 재편 스펙",
-      "excerpt": "데스크톱 제품 폴더 구조 재편 스펙 배경 설치형 플랫폼은 더 이상 루트의 웹 UI 후보를 Tauri가 감싸는 구조가 아니다. 데스크톱 제품이 먼저 실행되고, 작업 상태, 런타임 데이터, 쉘 계약, workspace host, source editor, CLI adapter, accumulated data surface를 소유한다. 따라서 제품 UI도 루트 독립 프로젝트가 아니라 platform desktop app/renderer/workspace monitor/ 아래의 renderer packa",
-      "html": "<h1>데스크톱 제품 폴더 구조 재편 스펙</h1>\n<h2>배경</h2>\n<p>설치형 플랫폼은 더 이상 루트의 웹 UI 후보를 Tauri가 감싸는 구조가 아니다. 데스크톱 제품이 먼저 실행되고, 작업 상태, 런타임 데이터, 쉘 계약, workspace host, source editor, CLI adapter, accumulated data surface를 소유한다. 따라서 제품 UI도 루트 독립 프로젝트가 아니라 <code>platform-desktop-app/renderer/workspace-monitor/</code> 아래의 renderer package여야 한다.</p>\n<h2>요구사항</h2>\n<ul>\n<li><code>PDA-REQ-034</code>: 루트 <code>workspace-monitor/</code> 독립 프로젝트를 제거하고 <code>platform-desktop-app/renderer/workspace-monitor/</code>를 제품 renderer 소스 경로로 강제한다.</li>\n</ul>\n<h2>설계 결정</h2>\n<ul>\n<li>Language/runtime option A: 기존 TypeScript/Next.js renderer, Rust/Tauri shell, Python platform tools를 유지하고 경계만 제품 중심으로 이동한다.</li>\n<li>Language/runtime option B: renderer를 Rust/native UI나 Electron main/renderer 구조로 새로 작성한다.</li>\n<li>선택: option A. 이미 구현된 workbench, Monaco, CLI supervisor, runtime data UI를 유지하면서 제품 소유권만 바로잡는 것이 가장 낮은 위험과 유지보수 비용을 가진다.</li>\n</ul>\n<ul>\n<li>Architecture option A: <code>workspace-monitor/</code>를 루트 프로젝트로 유지하고 Tauri가 외부 프로젝트를 참조한다.</li>\n<li>Architecture option B: renderer를 <code>platform-desktop-app/renderer/workspace-monitor/</code>로 이동하고 Tauri, pnpm, readiness, registry가 같은 제품 경계를 바라보게 한다.</li>\n<li>선택: option B. 설치형 앱의 primary host runtime이 제품 상태와 UI authority를 소유한다는 요구에 맞고, 사용자가 개발자식 git clone/workdir 흐름으로 이해하지 않게 만든다.</li>\n</ul>\n<h2>범위</h2>\n<ul>\n<li><code>workspace-monitor/</code> tracked source를 <code>platform-desktop-app/renderer/workspace-monitor/</code>로 이동한다.</li>\n<li><code>pnpm-workspace.yaml</code>, <code>pnpm-lock.yaml</code>, Tauri <code>frontendDist</code>, dev command, build/audit scripts를 새 renderer 경로로 갱신한다.</li>\n<li>project registry, root structure policy, repository map, docs/policies/operating models에서 루트 프로젝트 경계를 갱신한다.</li>\n<li>snapshot collector와 readiness checks가 새 root 계산과 renderer path를 사용하게 한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>public signing/notarization, signed updater, clean-machine install smoke는 이번 구조 변경의 완료 조건이 아니다.</li>\n<li>historical specs에 기록된 과거 <code>workspace-monitor/</code> 경로를 모두 재작성하지 않는다. 새 구조의 source of truth는 요구사항, registry, current docs, generated maps, readiness checks다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2588,
-      "updatedAt": "2026-06-03T05:42:54.394Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-macos-execution-structure-en-md",
-      "path": "platform-desktop-app/docs/macos-execution-structure.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "macOS Execution Structure",
-      "excerpt": "macOS Execution Structure This document defines the structure for running the platform as an installable macOS app. The source configuration is platform desktop app/configs/macos execution profile.json . Execution Levels 1. Developer Local Run Purpose: quick validation on a devel",
-      "html": "<h1>macOS Execution Structure</h1>\n<p>This document defines the structure for running the platform as an installable macOS app. The source configuration is <code>platform-desktop-app/configs/macos-execution-profile.json</code>.</p>\n<h2>Execution Levels</h2>\n<h3>1. Developer Local Run</h3>\n<ul>\n<li>Purpose: quick validation on a developer Mac with the repository available.</li>\n<li>Allowed: <code>platform-desktop-app/renderer/workspace-monitor</code> dev server, static export preview, future unsigned or ad-hoc signed desktop app.</li>\n<li>Not allowed: calling it public distribution-ready.</li>\n</ul>\n<h3>2. Internal Test App</h3>\n<ul>\n<li>Purpose: use an <code>.app</code> bundle or DMG/ZIP for trusted internal testing.</li>\n<li>Required: dependency installation audit, clean macOS account smoke test, workspace open/create/demo flow, optional CLI missing-capability behavior.</li>\n</ul>\n<h3>3. Public Outside-App-Store App</h3>\n<ul>\n<li>Purpose: normal users can download and open the app without Gatekeeper workarounds.</li>\n<li>Required: Developer ID signing, hardened runtime, minimal entitlements, notarization, stapling where applicable, fresh Mac install/open smoke test, update/rollback/privacy/dependency review.</li>\n</ul>\n<h2>Process Model</h2>\n<p>The initial recommendation is a Tauri-first macOS <code>.app</code> shell.</p>\n<ul>\n<li>Desktop shell: owns the macOS app entry point, native window lifecycle, workspace folder picker, and platform-first host boundary.</li>\n<li>Workspace Monitor UI: reuses dashboard, history, docs, agents, source viewer, and decision inbox screens.</li>\n<li>Agent Platform: owns Python-first agents, research, planning, evaluation, and config checks.</li>\n<li>Guest CLI adapters: Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, GitHub CLI, package managers, and deployment CLIs attach through adapter contracts after the platform is running.</li>\n</ul>\n<p>The core rule is simple: the user launches one app, but internal agent logic and CLI execution stay behind explicit, testable boundaries.</p>\n<h2>macOS Distribution Conditions</h2>\n<ul>\n<li><code>.app</code>: base desktop shell execution unit</li>\n<li>DMG: preferred public distribution candidate</li>\n<li>ZIP: updater or simple archive candidate</li>\n<li>PKG: only when privileged installer or managed deployment semantics are truly needed</li>\n</ul>\n<h2>Permissions And Security</h2>\n<ul>\n<li>Read only a user-selected workspace path.</li>\n<li>Open network access only when update, web research, notification, or remote service behavior is documented.</li>\n<li>Do not run local commands without adapter allowlists, timeouts, output redaction, and visible consent.</li>\n<li>Do not put tokens, webhook URLs, Apple signing credentials, or update private keys in the repository or installer.</li>\n</ul>\n<h2>Not Done Yet</h2>\n<ul>\n<li>Tauri/Electron installation</li>\n<li><code>.app</code> bundle implementation</li>\n<li>Signing certificate preparation</li>\n<li>Notarization execution</li>\n<li>Auto-update implementation</li>\n</ul>\n<p>This document fixes the execution structure and release gates. Actual dependency installation or builds require a separate installation audit.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2820,
-      "updatedAt": "2026-06-03T05:33:44.608Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-macos-execution-structure-ko-md",
-      "path": "platform-desktop-app/docs/macos-execution-structure.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "macOS 실행 구조",
-      "excerpt": "macOS 실행 구조 이 문서는 플랫폼을 macOS에서 실행 가능한 설치형 앱으로 만들 때의 구조를 정의한다. 원천 설정은 platform desktop app/configs/macos execution profile.json 이다. 실행 단계 1. 개발자 로컬 실행 목적: 저장소를 가진 개발자의 Mac에서 빠르게 확인한다. 허용: platform desktop app/renderer/workspace monitor dev server, static export preview, future uns",
-      "html": "<h1>macOS 실행 구조</h1>\n<p>이 문서는 플랫폼을 macOS에서 실행 가능한 설치형 앱으로 만들 때의 구조를 정의한다. 원천 설정은 <code>platform-desktop-app/configs/macos-execution-profile.json</code>이다.</p>\n<h2>실행 단계</h2>\n<h3>1. 개발자 로컬 실행</h3>\n<ul>\n<li>목적: 저장소를 가진 개발자의 Mac에서 빠르게 확인한다.</li>\n<li>허용: <code>platform-desktop-app/renderer/workspace-monitor</code> dev server, static export preview, future unsigned/ad-hoc signed desktop app.</li>\n<li>금지: public distribution-ready라고 표현하는 것.</li>\n</ul>\n<h3>2. 내부 테스트 앱</h3>\n<ul>\n<li>목적: <code>.app</code> bundle 또는 DMG/ZIP을 신뢰된 내부 테스트에 사용한다.</li>\n<li>필요: dependency install audit, clean macOS account smoke test, workspace open/create/demo flow, optional CLI missing-capability behavior.</li>\n</ul>\n<h3>3. 외부 배포 앱</h3>\n<ul>\n<li>목적: 일반 사용자가 다운로드 후 Gatekeeper 우회 없이 실행한다.</li>\n<li>필요: Developer ID signing, hardened runtime, 최소 entitlements, notarization, 가능한 경우 stapling, fresh Mac install/open smoke test, update/rollback/privacy/dependency review.</li>\n</ul>\n<h2>프로세스 모델</h2>\n<p>초기 추천은 Tauri-first macOS <code>.app</code> shell이다.</p>\n<ul>\n<li>Desktop shell: macOS 앱 진입점, native window lifecycle, workspace folder picker, platform-first host boundary를 담당한다.</li>\n<li>Workspace Monitor UI: dashboard, history, docs, agents, source viewer, decision inbox 화면을 재사용한다.</li>\n<li>Agent Platform: Python-first agent, research, planning, evaluation, config check를 담당한다.</li>\n<li>Guest CLI adapters: Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, GitHub CLI, package manager, deployment CLI 등은 플랫폼이 실행된 뒤 adapter contract를 통해 붙는다.</li>\n</ul>\n<p>핵심 원칙은 하나다. 사용자는 하나의 앱을 실행하지만, 내부 agent logic과 CLI 실행은 명확한 경계와 검증 가능한 contract 뒤에 있어야 한다.</p>\n<h2>macOS 배포 조건</h2>\n<ul>\n<li><code>.app</code>: desktop shell의 기본 실행 단위</li>\n<li>DMG: 일반 사용자 배포의 1차 후보</li>\n<li>ZIP: updater 또는 단순 archive 배포 후보</li>\n<li>PKG: privileged installer나 managed deployment가 필요할 때만 검토</li>\n</ul>\n<h2>권한과 보안</h2>\n<ul>\n<li>workspace는 사용자가 선택한 경로만 읽는다.</li>\n<li>network access는 update, web research, notification 등 실제 기능이 필요할 때만 문서화해 연다.</li>\n<li>local command execution은 adapter allowlist, timeout, output redaction, visible consent 없이 실행하지 않는다.</li>\n<li>token, webhook URL, Apple signing credential, update private key는 저장소나 installer에 넣지 않는다.</li>\n</ul>\n<h2>아직 하지 않은 것</h2>\n<ul>\n<li>Tauri/Electron 설치</li>\n<li><code>.app</code> bundle 구현</li>\n<li>signing certificate 준비</li>\n<li>notarization 실행</li>\n<li>auto-update 구현</li>\n</ul>\n<p>이 문서는 실행 구조와 release gate를 고정하는 작업이며, 실제 dependency 설치나 빌드는 별도 설치 감사와 함께 진행해야 한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2906,
-      "updatedAt": "2026-06-03T05:33:44.607Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-architecture-cross-platform-installable-runtime-decision-en-md",
-      "path": "platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Cross Platform Installable Runtime Decision",
-      "excerpt": "Cross Platform Installable Runtime Decision Decision The first installable product architecture for platform desktop app is platform first host runtime , Tauri v2 + Rust desktop shell , project owned workspace monitor renderer , agent platform Python layer , and optional external",
-      "html": "<h1>Cross-Platform Installable Runtime Decision</h1>\n<h2>Decision</h2>\n<p>The first installable product architecture for <code>platform-desktop-app</code> is <strong>platform-first host runtime</strong>, <strong>Tauri v2 + Rust desktop shell</strong>, <strong>project-owned workspace-monitor renderer</strong>, <strong>agent-platform Python layer</strong>, and <strong>optional external CLI guest adapters</strong>.</p>\n<p>This keeps the product from running on top of any one AI coding tool. The platform launches first; Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, and future tools attach as configurable guest lanes on top of it. External AI tools can be execution providers, but task state, durable memory, decision inbox, artifacts, validation, and UI authority remain owned by the platform.</p>\n<h2>Expert Debate Summary</h2>\n<table><thead><tr><th>Perspective</th><th>Position</th><th>Counterpoint</th><th>Resolution</th></tr></thead><tbody><tr><td>Product</td><td>Users need an app-like install and launch path, not only a repository setup.</td><td>A desktop shell can hide the operating system of docs, history, and evaluation.</td><td>The shell owns entry and first-run UX; the existing platform memory, history, and evaluation structure remains the source of truth.</td></tr><tr><td>Desktop packaging</td><td>macOS and Windows trust depend on signing, notarization, install/uninstall, and update behavior.</td><td>Signing credentials and a Windows build host are not available yet.</td><td>Separate local/internal/public execution levels and block production-ready claims until release gates pass.</td></tr><tr><td>Runtime/language</td><td>Tauri/Rust fits a small shell and explicit native boundary better than an Electron-first default.</td><td>Rust is not installed on the current machine and adds build cost.</td><td>Select Tauri-first for the product architecture, but install dependencies only after an audit record. Keep Go as the local service candidate.</td></tr><tr><td>Infrastructure</td><td>CLI execution, watchers, update tasks, and background agents create leak and orphan-process risks.</td><td>Blocking everything upfront slows product progress.</td><td>The first product slice focuses on shell/readiness; sidecars, services, and CLI execution require explicit lifecycle contracts.</td></tr><tr><td>Security/privacy</td><td>Installers must not contain tokens, cookies, private snapshots, or signing keys.</td><td>Convenience pushes toward automatic setup.</td><td>Store secrets through OS credentials, environment variables, or runtime input, never committed defaults.</td></tr><tr><td>UX</td><td>First run should make workspace, mode, missing capability, and task state visible.</td><td>Too many questions block work.</td><td>Optional CLIs are deferred capability cards; decision inbox collects blocked choices while unblocked work continues.</td></tr><tr><td>Principle guardian</td><td>The platform must enforce structure, not rely only on prompts.</td><td>Too many gates slow work.</td><td>Use work modes for overhead control and release/readiness gates for installable software.</td></tr><tr><td>Cost/efficiency</td><td>Avoid duplicated UI and runtimes because the platform exists to reduce repeated human work.</td><td>The existing monitor may need desktop-specific UX later.</td><td>Own <code>platform-desktop-app/renderer/workspace-monitor</code> as the product renderer first and add more desktop-only UI only after real need is proven.</td></tr></tbody></table>\n<h2>Candidate Comparison</h2>\n<table><thead><tr><th>Candidate</th><th>Strengths</th><th>Risks</th><th>Decision</th></tr></thead><tbody><tr><td>Tauri v2 + Rust</td><td>Small shell direction, Rust native boundary, macOS/Windows installer docs, sidecar pattern</td><td>Requires Rust toolchain and OS-specific signing/build learning</td><td>Selected</td></tr><tr><td>Electron</td><td>Mature JS desktop ecosystem, broad packager/updater examples, easier Node integration</td><td>Larger Chromium footprint and strict hardening needed for shell/file access</td><td>Fallback</td></tr><tr><td>Wails + Go</td><td>Go backend with web UI, good local service fit</td><td>Less clear benefit when reusing existing Next.js monitor</td><td>Local daemon candidate</td></tr><tr><td>Native packaging only</td><td>Simpler web/CLI distribution without a shell</td><td>Weaker installable app experience</td><td>Comparison candidate</td></tr></tbody></table>\n<h2>Selected Architecture</h2>\n<pre><code>\nUser\n  -&gt; platform-first host runtime\n  -&gt; Tauri desktop shell (Rust)\n      -&gt; platform-desktop-app/renderer/workspace-monitor static export (TypeScript/Next.js)\n      -&gt; selected workspace snapshot/docs/history\n      -&gt; platform supervisor boundary\n          -&gt; agent-platform Python commands/service/sidecar\n          -&gt; optional guest CLI adapters\n              -&gt; Codex / Gemini CLI / Claude Code CLI / OpenCode / Cursor / Antigravity / other CLIs\n</code></pre>\n<h2>Current Reality</h2>\n<ul>\n<li>Node/npm exists on the current machine.</li>\n<li>Go exists on the current machine.</li>\n<li>Rust/Cargo/Tauri local build path is verified on the current machine.</li>\n<li>Local/internal <code>.app</code> and DMG artifacts can be produced, but they must not be described as public signed installers.</li>\n<li>The current baseline keeps the Tauri product shell, readiness tests, macOS/Windows execution profiles, and release gates while public distribution gates remain closed.</li>\n</ul>\n<h2>Public Release Gates</h2>\n<ul>\n<li>macOS: Developer ID signing, hardened runtime, notarization, stapling when applicable, clean Mac smoke test.</li>\n<li>Windows: code signing, SmartScreen/download trust plan, MSI/NSIS/MSIX selection, clean Windows smoke test.</li>\n<li>Shared: install/open/update/uninstall/rollback tests, privacy review, dependency/license review, optional CLI missing behavior, workspace bou</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 6110,
-      "updatedAt": "2026-06-03T05:33:37.268Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-architecture-cross-platform-installable-runtime-decision-ko-md",
-      "path": "platform-desktop-app/docs/architecture/cross-platform-installable-runtime-decision.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "크로스 플랫폼 설치형 런타임 의사결정",
-      "excerpt": "크로스 플랫폼 설치형 런타임 의사결정 결론 platform desktop app 의 1차 설치형 제품 구조는 플랫폼 first host runtime , Tauri v2 + Rust 데스크톱 셸 , project owned workspace monitor renderer , agent platform Python 계층 , 선택형 외부 CLI guest 어댑터 로 고정한다. 이 결정은 최종 제품이 Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Ant",
-      "html": "<h1>크로스 플랫폼 설치형 런타임 의사결정</h1>\n<h2>결론</h2>\n<p><code>platform-desktop-app</code>의 1차 설치형 제품 구조는 <strong>플랫폼-first host runtime</strong>, <strong>Tauri v2 + Rust 데스크톱 셸</strong>, <strong>project-owned workspace-monitor renderer</strong>, <strong>agent-platform Python 계층</strong>, <strong>선택형 외부 CLI guest 어댑터</strong>로 고정한다.</p>\n<p>이 결정은 최종 제품이 Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity 같은 특정 AI 코딩 도구 위에서 동작하지 않고, 플랫폼 자체가 먼저 실행된 뒤 그 도구들을 플랫폼 위의 설정 가능한 guest lane으로 붙이기 위한 구조다. 외부 AI 도구는 실행 provider일 수 있지만 task state, durable memory, decision inbox, artifact, validation, UI authority는 플랫폼이 소유한다.</p>\n<h2>전문가 토론 요약</h2>\n<table><thead><tr><th>관점</th><th>주장</th><th>반론</th><th>반영</th></tr></thead><tbody><tr><td>제품 책임자</td><td>사용자는 “레포 설치”가 아니라 앱 설치 후 바로 열리는 경험을 원한다.</td><td>설치형 앱만 만들면 내부 운영 규칙과 히스토리 구조가 흐려질 수 있다.</td><td>데스크톱 셸은 진입점만 맡고, 지식/히스토리/평가 구조는 기존 문서와 플랫폼 계층을 유지한다.</td></tr><tr><td>데스크톱 패키징 전문가</td><td>macOS와 Windows는 서명, 공증, 설치/삭제, 업데이트가 제품 신뢰의 핵심이다.</td><td>초기에는 서명 인증서와 Windows 빌드 환경이 없다.</td><td>public-ready를 주장하지 않고, 내부 테스트와 공개 배포 게이트를 분리한다.</td></tr><tr><td>런타임/언어 전문가</td><td>Tauri/Rust는 시스템 WebView를 활용해 Electron보다 작은 셸을 기대할 수 있고, native command boundary를 분명히 만들기 좋다.</td><td>Rust toolchain이 현재 머신에 없고 학습/빌드 비용이 있다.</td><td>최종 셸은 Tauri-first로 고정하되, dependency 설치는 감사 기록 후 진행한다. Go는 장기 실행 local service 후보로 남긴다.</td></tr><tr><td>인프라 전문가</td><td>CLI 실행, 파일 감시, 업데이트, 백그라운드 에이전트는 누수와 좀비 프로세스 위험이 있다.</td><td>모든 기능을 처음부터 막으면 제품이 느려진다.</td><td>첫 제품 slice는 UI 셸과 readiness에 집중하고, sidecar/local service/CLI 실행은 명시적 lifecycle 계약 이후에만 붙인다.</td></tr><tr><td>보안/프라이버시 전문가</td><td>앱 설치물에 토큰, 쿠키, private snapshot, 서명 키를 넣으면 안 된다.</td><td>편의성을 위해 자동 설정 욕구가 생긴다.</td><td>설정은 OS credential/env/runtime input으로 주입하고, installer에는 기본값만 넣는다.</td></tr><tr><td>UX 전문가</td><td>사용자는 첫 실행에서 workspace 선택, 모드 선택, 누락된 기능 상태, 작업 타임라인을 한 번에 이해해야 한다.</td><td>설정 질문이 많으면 흐름이 막힌다.</td><td>optional CLI는 나중에 설정 가능한 capability card로 둔다. 질문은 decision inbox로 모으고, 막히지 않는 작업은 계속한다.</td></tr><tr><td>원칙 수호자</td><td>플랫폼은 프롬프트가 아니라 강제 가능한 구조여야 한다.</td><td>너무 많은 게이트는 느리다.</td><td>work_mode로 무게를 조절하고, 설치형 제품은 release gate와 readiness test로 강제한다.</td></tr><tr><td>비용/효율 전문가</td><td>사람의 반복 업무 시간을 줄이는 것이 목적이므로 중복 UI나 중복 런타임을 피해야 한다.</td><td>기존 monitor UI가 데스크톱 UX에 부족할 수 있다.</td><td>첫 버전은 <code>platform-desktop-app/renderer/workspace-monitor</code>를 제품 renderer로 소유하고, 추가 UI는 실제 필요가 확인될 때만 만든다.</td></tr></tbody></table>\n<h2>후보 비교</h2>\n<table><thead><tr><th>후보</th><th>장점</th><th>위험</th><th>결정</th></tr></thead><tbody><tr><td>Tauri v2 + Rust</td><td>작은 데스크톱 셸 방향, Rust native boundary, macOS/Windows installer 문서화, sidecar 패턴 존재</td><td>Rust toolchain 필요, OS별 빌드/서명 학습 비용</td><td>선택</td></tr><tr><td>Electron</td><td>성숙한 JS 생태계, updater/packager 예시 풍부, Node 통합이 쉬움</td><td>Chromium 포함으로 크기/메모리 부담, shell/file access hardening 필요</td><td>fallback</td></tr><tr><td>Wails + Go</td><td>Go backend와 web UI 결합, local service 친화적</td><td>기존 Next.js monitor를 재사용할 때 Tauri보다 이점이 확실하지 않음</td><td>local daemon 후보</td></tr><tr><td>Native packaging only</td><td>데스크톱 셸 없이 웹/CLI를 배포해 단순화 가능</td><td>사용자가 기대하는 설치형 앱 경험이 약함</td><td>비교 후보</td></tr></tbody></table>\n<h2>선택한 아키텍처</h2>\n<pre><code>\n사용자\n  -&gt; platform-first host runtime\n  -&gt; Tauri desktop shell (Rust)\n      -&gt; platform-desktop-app/renderer/workspace-monitor static export (TypeScript/Next.js)\n      -&gt; selected workspace snapshot/docs/history\n      -&gt; platform supervisor boundary\n          -&gt; agent-platform Python commands/service/sidecar\n          -&gt; optional guest CLI adapters\n              -&gt; Codex / Gemini CLI / Claude Code CLI / OpenCode / Cursor / Antigravity / 기타 CLI\n</code></pre>\n<h2>현재 현실 상태</h2>\n<ul>\n<li>Node/npm은 현재 머신에 존재한다.</li>\n<li>Go는 현재 머신에 존재한다.</li>\n<li>Rust/Cargo/Tauri local build path는 현재 머신에서 검증되어 있다.</li>\n<li>local/internal <code>.app</code>과 DMG 산출물은 만들 수 있지만, 공개 signed installer로 주장하지 않는다.</li>\n<li>현재 기준은 Tauri 제품 shell, readiness test, macOS/Windows execution profile, release gate를 유지하면서 public distribution gate를 닫아 두는 것이다.</li>\n</ul>\n<h2>공개 배포 전 필수 게이트</h2>\n<ul>\n<li>macOS: Developer ID signing, hardened runtime, notarization, 필요 시 stapling, clean Mac smoke test.</li>\n<li>Windows: code signing, SmartScreen/download trust plan, MSI/NSIS/MSIX 선택, clean Windows smoke test.</li>\n<li>공통: install/open/update/uninstall/rollback test, privacy review, dependency/license review, optional CLI missing behavior, workspace boundary test.</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>Tauri v2 배포 문서는 platform-specific installer와 code signing 필요성을 명시한다.</li>\n<li>Tauri Windows installer 문서는 MSI/NSIS 선택과 MSI가 Windows에서 생성되어야 한다는 제약을 명시한다.</li>\n<li>Tauri sidecar 문서는 Python CLI/API server 같은 외부 바이너리 번들링 패턴을 제시한다.</li>\n<li>Apple notarization 문서는 외부 배포 macOS 앱의 Developer ID, hardened runtime, notarization 흐름을 요구한다.</li>\n<li>Microsoft MSIX 문서는 패키지 서명과 배포 신뢰 모델을 강조한다.</li>\n</ul>\n<h2>다음 단계</h2>\n<p>1. macOS local/internal build를 계속 <code>pnpm</code>, <code>cargo</code>, Tauri 검증으로 유지한다.</p>\n<p>2. Windows 빌드 host 또는 CI를 별도로 정의한다.</p>\n<p>3. Developer ID signing, notarization, signed updater, clean-machine smoke test를 public release blocker로 유지한다.</p>\n<p>4. signing/notarization/certificate가 준비되기 전에는 public-ready 표현을 금지한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 6733,
-      "updatedAt": "2026-06-03T05:33:37.267Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -17809,16 +17839,16 @@
           "count": 12
         },
         {
-          "category": "work-timing",
-          "count": 12
-        },
-        {
           "category": "request-trace",
           "count": 11
         },
         {
+          "category": "work-timing",
+          "count": 11
+        },
+        {
           "category": "plan",
-          "count": 5
+          "count": 6
         },
         {
           "category": "daily-history",
@@ -17833,7 +17863,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-          "updatedAt": "2026-06-05T19:54:31.328Z",
+          "updatedAt": "2026-06-05T20:06:38.615Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18167,6 +18197,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-plans-2026-2026-06-06-easy-ai-login-settings-ko-md",
+          "path": "_history/plans/2026/2026-06-06-easy-ai-login-settings.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "계획 기록: 쉬운 AI 로그인 설정",
+          "excerpt": "계획 기록: 쉬운 AI 로그인 설정 범위 Settings Execution provider accounts 화면을 AI 로그인/API key setup center로 개선한다. 기존 Tauri provider credential command를 재사용한다. 공식 provider 문서 기준으로 비공식 웹 세션 저장을 피한다. 실행 순서 1. 공식 docs와 기존 provider account 구현을 확인한다. 2. 요구사항/spec/history를 작성한다. 3. renderer panel과 CSS",
+          "updatedAt": "2026-06-05T20:06:32.067Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-plans-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
           "path": "_history/plans/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
           "category": "plan",
@@ -18317,6 +18357,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-user-requests-2026-2026-06-06-easy-ai-login-settings-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-easy-ai-login-settings.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: 쉬운 AI 로그인 설정",
+          "excerpt": "사용자 요청 요약: 쉬운 AI 로그인 설정 날짜: 2026 06 06 대상: platform desktop app 요약: 사용자가 AI provider 설정 기능을 더 늘리고, 로그인/계정 설정을 쉽게 할 수 있도록 데스크톱 앱 설정 화면 개선을 요청했다. 해석: 공식 provider 로그인/콘솔 링크, API key 발급/저장, 연결 상태, 모델 확인, 작업 기본값 선택을 한 설정 흐름으로 묶는다. 제외: 민감한 key 원문을 읽거나 기록하지 않는다. 비공식 웹 세션 cookie 기반 로그인을 ",
+          "updatedAt": "2026-06-05T20:06:32.066Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-06-monitor-performance-guardrails-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-monitor-performance-guardrails.ko.md",
           "category": "user-request",
@@ -18397,16 +18447,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-still-slow-tab-switch-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-still-slow-tab-switch.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: 탭 전환이 아직 느림",
-          "excerpt": "사용자 요청 요약: 탭 전환이 아직 느림 요약 사용자가 현재 데스크톱 앱의 Workspace Monitor 탭 전환이 여전히 느리다고 보고했다. 이전의 전체 탭 resident/preload 구현 이후에도 체감 지연이 남아 있으므로 근본 원인을 다시 보고 성능 구조를 보정해야 한다. 요구사항 후보 탭 이동 시 hidden 탭의 불필요한 렌더 비용을 줄인다. 데스크톱 앱의 장점인 Rust/native resource warmup과 renderer memory preload는 유지한다. 구현 후 사용",
-          "updatedAt": "2026-06-05T17:33:34.649Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-wide-scope-instruction-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-wide-scope-instruction.ko.md",
           "category": "user-request",
@@ -18427,16 +18467,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: bounded tab resident 성능 보정",
-          "excerpt": "웹 검색 기록: bounded tab resident 성능 보정 목적 Workspace Monitor 탭 전환이 여전히 느리다는 피드백에 대해 React/Next 성능 기준을 다시 확인하고, 이전의 무제한 resident 선마운트가 남기는 hidden tree 비용을 보정했다. 검색어 React official docs Profiler memo useMemo rendering performance hidden components state preservation Next.js official do",
-          "updatedAt": "2026-06-05T17:33:34.649Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-desktop-only-ui-boundary-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-desktop-only-ui-boundary.ko.md",
           "category": "web-search",
@@ -18444,6 +18474,16 @@
           "title": "Web Search: Desktop only UI Boundary",
           "excerpt": "Web Search: Desktop only UI Boundary 날짜: 2026 06 06 요청: 설치형 데스크톱 앱에서 모바일 UI를 제거하고 최소 창 크기 기반으로 데스크톱 작업대를 유지한다. Queries Tauri v2 window minWidth minHeight configuration official docs Tauri v2 window size constraints minWidth minHeight official documentation desktop app responsive ",
           "updatedAt": "2026-06-05T19:51:24.587Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-easy-ai-login-settings-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-easy-ai-login-settings.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: 쉬운 AI 로그인 설정",
+          "excerpt": "Web Search: 쉬운 AI 로그인 설정 날짜: 2026 06 06 작업: platform desktop app 설정 화면에서 AI provider 로그인/API key 설정을 쉽게 만드는 UX 개선 질의 OpenAI API keys official documentation create API key Anthropic API key official documentation console create key Google AI Studio Gemini API key official document",
+          "updatedAt": "2026-06-05T20:06:32.065Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18707,16 +18747,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-native-pty-terminal-runtime-ko-md",
-          "path": "_history/work-timings/2026/2026-06-06-native-pty-terminal-runtime.ko.md",
-          "category": "work-timing",
-          "language": "ko",
-          "title": "작업 타이밍: 네이티브 PTY 터미널 런타임",
-          "excerpt": "작업 타이밍: 네이티브 PTY 터미널 런타임 | 단계 | 기록 | | | | | 웹/코드 조사 | 공식 문서 검색, 기존 pipe first 구현과 PTY deferred decision 확인 | | 구현 | Rust PTY command/store, xterm surface, renderer state/polling 연결 | | 검증 | Rust/frontend/readiness/package/internal artifact verification | | 기록 | requirements/spec",
-          "updatedAt": "2026-06-05T17:17:07.972Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-native-resource-telemetry-json",
           "path": "_history/work-timings/2026/2026-06-06-native-resource-telemetry.json",
           "category": "work-timing",
@@ -18795,7 +18825,7 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2421,
+      "documents": 2424,
       "days": 7,
       "categories": [
         {
@@ -18804,11 +18834,11 @@
         },
         {
           "category": "web-search",
-          "count": 386
+          "count": 387
         },
         {
           "category": "plan",
-          "count": 333
+          "count": 334
         },
         {
           "category": "request-trace",
@@ -18820,7 +18850,7 @@
         },
         {
           "category": "user-request",
-          "count": 99
+          "count": 100
         },
         {
           "category": "work-summary",
@@ -18835,7 +18865,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6288555,
+      "totalSourceBytes": 6292364,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18864,7 +18894,7 @@
       "decisionEvents": 0,
       "openSignals": 23,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T19:54:31.328Z",
+      "latestEventAt": "2026-06-05T20:06:38.615Z",
       "historyDays": 1
     },
     "lanes": [
@@ -18896,7 +18926,7 @@
       {
         "id": "monitoring",
         "label": "monitoring",
-        "count": 12
+        "count": 11
       },
       {
         "id": "traceability",
@@ -18906,7 +18936,7 @@
       {
         "id": "planning",
         "label": "planning",
-        "count": 5
+        "count": 6
       },
       {
         "id": "history",
@@ -18936,14 +18966,14 @@
         "count": 12
       },
       {
-        "id": "timing",
-        "label": "timing",
-        "count": 12
-      },
-      {
         "id": "web-search",
         "label": "web search",
         "count": 12
+      },
+      {
+        "id": "timing",
+        "label": "timing",
+        "count": 11
       },
       {
         "id": "trace",
@@ -18953,7 +18983,7 @@
       {
         "id": "plan",
         "label": "plan",
-        "count": 5
+        "count": 6
       },
       {
         "id": "history",
@@ -18975,21 +19005,6 @@
     ],
     "events": [
       {
-        "id": "history-history-evaluations-2026-2026-06-06-desktop-only-ui-boundary-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "Evaluation: Desktop only UI Boundary",
-        "detail": "Evaluation: Desktop only UI Boundary 기준 모바일 UI 전환을 제거했는가. 데스크톱 최소 창 크기를 Tauri와 renderer가 동시에 강제하는가. 테스트와 audit가 더 이상 모바일 viewport를 acceptance로 요구하지 않는가. 구현 후 build/package를 실행했는가. 현재 판정 상태: passed 모바일 UI 전용 media block과 모바일 audit page는 제거됐다. Tauri와 renderer가 1280x800 desktop mini",
-        "path": "_history/evaluations/2026/2026-06-06-desktop-only-ui-boundary.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T19:54:31.328Z"
-      },
-      {
         "id": "history-history-2026-2026-06-06-md",
         "sourceType": "history",
         "signalType": "history",
@@ -19001,6 +19016,66 @@
         "path": "_history/2026/2026-06-06.md",
         "category": "daily-history",
         "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:06:38.615Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-easy-ai-login-settings-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "계획 기록: 쉬운 AI 로그인 설정",
+        "detail": "계획 기록: 쉬운 AI 로그인 설정 범위 Settings Execution provider accounts 화면을 AI 로그인/API key setup center로 개선한다. 기존 Tauri provider credential command를 재사용한다. 공식 provider 문서 기준으로 비공식 웹 세션 저장을 피한다. 실행 순서 1. 공식 docs와 기존 provider account 구현을 확인한다. 2. 요구사항/spec/history를 작성한다. 3. renderer panel과 CSS",
+        "path": "_history/plans/2026/2026-06-06-easy-ai-login-settings.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:06:32.067Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-easy-ai-login-settings-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: 쉬운 AI 로그인 설정",
+        "detail": "사용자 요청 요약: 쉬운 AI 로그인 설정 날짜: 2026 06 06 대상: platform desktop app 요약: 사용자가 AI provider 설정 기능을 더 늘리고, 로그인/계정 설정을 쉽게 할 수 있도록 데스크톱 앱 설정 화면 개선을 요청했다. 해석: 공식 provider 로그인/콘솔 링크, API key 발급/저장, 연결 상태, 모델 확인, 작업 기본값 선택을 한 설정 흐름으로 묶는다. 제외: 민감한 key 원문을 읽거나 기록하지 않는다. 비공식 웹 세션 cookie 기반 로그인을 ",
+        "path": "_history/user-requests/2026/2026-06-06-easy-ai-login-settings.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:06:32.066Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-easy-ai-login-settings-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: 쉬운 AI 로그인 설정",
+        "detail": "Web Search: 쉬운 AI 로그인 설정 날짜: 2026 06 06 작업: platform desktop app 설정 화면에서 AI provider 로그인/API key 설정을 쉽게 만드는 UX 개선 질의 OpenAI API keys official documentation create API key Anthropic API key official documentation console create key Google AI Studio Gemini API key official document",
+        "path": "_history/web-searches/2026/2026-06-06-easy-ai-login-settings.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:06:32.065Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-desktop-only-ui-boundary-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "Evaluation: Desktop only UI Boundary",
+        "detail": "Evaluation: Desktop only UI Boundary 기준 모바일 UI 전환을 제거했는가. 데스크톱 최소 창 크기를 Tauri와 renderer가 동시에 강제하는가. 테스트와 audit가 더 이상 모바일 viewport를 acceptance로 요구하지 않는가. 구현 후 build/package를 실행했는가. 현재 판정 상태: passed 모바일 UI 전용 media block과 모바일 audit page는 제거됐다. Tauri와 renderer가 1280x800 desktop mini",
+        "path": "_history/evaluations/2026/2026-06-06-desktop-only-ui-boundary.ko.md",
+        "category": "evaluation",
+        "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T19:54:31.328Z"
       },
@@ -20368,51 +20443,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T17:33:34.651Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-bounded-tab-resident-performance-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: bounded tab resident 성능 보정",
-        "detail": "웹 검색 기록: bounded tab resident 성능 보정 목적 Workspace Monitor 탭 전환이 여전히 느리다는 피드백에 대해 React/Next 성능 기준을 다시 확인하고, 이전의 무제한 resident 선마운트가 남기는 hidden tree 비용을 보정했다. 검색어 React official docs Profiler memo useMemo rendering performance hidden components state preservation Next.js official do",
-        "path": "_history/web-searches/2026/2026-06-06-bounded-tab-resident-performance.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:33:34.649Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-still-slow-tab-switch-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: 탭 전환이 아직 느림",
-        "detail": "사용자 요청 요약: 탭 전환이 아직 느림 요약 사용자가 현재 데스크톱 앱의 Workspace Monitor 탭 전환이 여전히 느리다고 보고했다. 이전의 전체 탭 resident/preload 구현 이후에도 체감 지연이 남아 있으므로 근본 원인을 다시 보고 성능 구조를 보정해야 한다. 요구사항 후보 탭 이동 시 hidden 탭의 불필요한 렌더 비용을 줄인다. 데스크톱 앱의 장점인 Rust/native resource warmup과 renderer memory preload는 유지한다. 구현 후 사용",
-        "path": "_history/user-requests/2026/2026-06-06-still-slow-tab-switch.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:33:34.649Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-native-pty-terminal-runtime-ko-md",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "작업 타이밍: 네이티브 PTY 터미널 런타임",
-        "detail": "작업 타이밍: 네이티브 PTY 터미널 런타임 | 단계 | 기록 | | | | | 웹/코드 조사 | 공식 문서 검색, 기존 pipe first 구현과 PTY deferred decision 확인 | | 구현 | Rust PTY command/store, xterm surface, renderer state/polling 연결 | | 검증 | Rust/frontend/readiness/package/internal artifact verification | | 기록 | requirements/spec",
-        "path": "_history/work-timings/2026/2026-06-06-native-pty-terminal-runtime.ko.md",
-        "category": "work-timing",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:17:07.972Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -22644,9 +22674,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 45690,
-      "lineCount": 1153,
-      "updatedAt": "2026-06-05T19:48:39.983Z",
+      "sizeBytes": 45795,
+      "lineCount": 1157,
+      "updatedAt": "2026-06-05T20:03:26.959Z",
       "truncated": true,
       "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { execFileSync } from \"node:child_process\";\n\nimport {\n  checkDesktopBuildPipeline,\n  desktopBuildPipelineRequiredFiles\n} from \"./readiness/desktop-build-pipeline.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nconst requiredFiles = [\n  \"README.md\",\n  \"README.ko.md\",\n  \"README.en.md\",\n  \"package.json\",\n  \"configs/desktop-distribution-registry.json\",\n  \"configs/product-feature-registry.json\",\n  \"configs/product-gap-registry.json\",\n  \"configs/claude-code-design-transfer-registry.json\",\n  \"configs/reference-platform-advantage-registry.json\",\n  \"configs/runtime-data-boundary-registry.json\",\n  \"configs/service-readiness-registry.json\",\n  \"configs/macos-execution-profile.json\",\n  \"configs/windows-execution-profile.json\",\n  \"configs/user-flow-registry.json\",\n  \"runtime-contracts/installer-shell-runtime-contract.json\",\n  \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n  \"runtime-contracts/installer-shell-bootstrap.en.md\",\n  \"renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx\",\n  \"renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx\",\n  \"rend",
       "previewBytes": 1200
@@ -22930,9 +22960,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 50599,
-      "lineCount": 1136,
-      "updatedAt": "2026-06-05T19:48:39.984Z",
+      "sizeBytes": 50712,
+      "lineCount": 1140,
+      "updatedAt": "2026-06-05T20:03:29.992Z",
       "truncated": true,
       "preview": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/paths.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/definitions.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/runner.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts",
       "previewBytes": 1200
@@ -23415,12 +23445,12 @@
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 12
+        "documentsCount": 11
       },
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 5
+        "documentsCount": 6
       },
       {
         "category": "evaluation",
@@ -23519,7 +23549,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 72,
+        "documentCount": 69,
         "sourceFileCount": 5
       },
       {
@@ -23660,7 +23690,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-scripts-check-readiness-mjs",
         "label": "Large source surface",
-        "signal": "1,153 lines in platform-desktop-app/scripts/check-readiness.mjs",
+        "signal": "1,157 lines in platform-desktop-app/scripts/check-readiness.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23669,7 +23699,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,136 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,140 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23707,16 +23737,16 @@
         "path": "platform-desktop-app/scripts/check-readiness.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1153,
-        "sizeBytes": 45690,
+        "lineCount": 1157,
+        "sizeBytes": 45795,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1136,
-        "sizeBytes": 50599,
+        "lineCount": 1140,
+        "sizeBytes": 50712,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       }
     ]

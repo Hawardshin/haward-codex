@@ -1,0 +1,18 @@
+{
+  "date": "2026-06-06",
+  "request": "Make AI provider setup easier in the desktop app settings with more clickable login/setup options.",
+  "selected_work_mode": "standard",
+  "install_mode": "developer",
+  "view_mode": "superadmin_developer",
+  "rationale": "The request changes desktop renderer behavior, provider setup requirements, tests, and packaging validation, but does not require public release/governance mode.",
+  "required_gates": [
+    "web_first_intake",
+    "provider_auth_scope_check",
+    "requirements_update",
+    "spec_artifacts",
+    "implementation",
+    "omission_check",
+    "test_check_build_package",
+    "evaluation"
+  ]
+}

@@ -181,6 +181,19 @@ test("Search agent provider and model settings use explicit choices", () => {
   assert.match(css, /\.agent-provider-choice-grid button,[\s\S]*?box-shadow: var\(--control-shadow\);/);
 });
 
+test("Provider account settings expose guided login and model setup controls", () => {
+  assert.match(monitorShell, /AI 로그인 설정/);
+  assert.match(monitorShell, /provider-login-guide/);
+  assert.match(monitorShell, /provider-filter-choice/);
+  assert.match(monitorShell, /onRefreshModels\(provider\.providerId\)/);
+  assert.match(monitorShell, /onUseProvider\(provider, preferredModel\)/);
+  assert.match(monitorShell, /className=\{selectedForWork \? "active" : ""\}/);
+  assert.match(css, /\.provider-login-guide \{/);
+  assert.match(css, /\.provider-filter-choice button\.active,/);
+  assert.match(css, /\.provider-model-strip \{/);
+  assert.match(css, /\.provider-model-chip-list button\.active/);
+});
+
 test("Choice and search controls have compact tonal hierarchy", () => {
   assert.match(css, /\.settings-segment-list \{[\s\S]*?display: flex;/);
   assert.match(css, /\.settings-segment-list button \{[\s\S]*?min-width: 104px;[\s\S]*?min-height: var\(--control-compact-target-size\);/);

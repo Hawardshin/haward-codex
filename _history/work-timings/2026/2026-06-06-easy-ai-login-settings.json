@@ -1,0 +1,76 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-06-easy-ai-login-settings",
+  "title": "Improve AI provider setup settings with official login and API key flow",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "started_at": null,
+  "ended_at": "2026-06-06T05:12:00+0900",
+  "measurement_note": "Timing record was created after the task began, so phases are recorded as completed but not measured.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Official OpenAI, Anthropic, Google Gemini, and Ollama docs were checked before implementation."
+    },
+    {
+      "phase_id": "source_inventory",
+      "label": "Source inventory",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Existing ProviderAccountsPanel, provider commands, CSS, and readiness tests were inspected."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Created requirement, spec, plan, tasks, validation, traceability, and research records."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Extended provider settings UI with guide, filters, status pills, model refresh, and work default selection."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Ran renderer and platform tests/checks; fixed platform readiness issue around button overflow wrapping."
+    },
+    {
+      "phase_id": "browser_smoke",
+      "label": "Browser smoke",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Opened the static build and verified the settings provider panel DOM."
+    },
+    {
+      "phase_id": "package_internal",
+      "label": "Internal package build",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Ran internal Tauri package build, app signature verification, and DMG verification."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and close-out records",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Added omission, resource, work summary, evaluation, and request trace records."
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "package_internal",
+    "interpretation": "Internal package build is expected to be the slowest phase because it includes renderer build, Rust build, Tauri bundling, codesign, and DMG verification.",
+    "improvement_candidates": [
+      "Keep the prepared renderer path for repeated internal package builds.",
+      "Keep platform readiness CSS checks early so small UI regressions fail before packaging."
+    ]
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "date": "2026-06-06",
+  "topic": "Easy AI provider login/settings UX for platform-desktop-app",
+  "reference_config_paths": [
+    "agent-platform/configs/research/research-agent-profile.json"
+  ],
+  "technology_stack": [
+    "Tauri",
+    "Rust",
+    "React",
+    "TypeScript",
+    "Next.js renderer",
+    "CSS"
+  ],
+  "technology_official_docs": [
+    "https://platform.openai.com/docs/api-reference/authentication/keys",
+    "https://docs.anthropic.com/en/api/getting-started",
+    "https://ai.google.dev/gemini-api/docs/api-key",
+    "https://docs.ollama.com/api/introduction"
+  ],
+  "stack_version_constraints": [
+    "Use the existing platform-desktop-app Tauri commands and renderer package versions.",
+    "Do not introduce a new OAuth library or provider SDK in this slice."
+  ],
+  "source_types": [
+    "official_docs",
+    "local_source_code",
+    "local_tests",
+    "local_requirements_specs"
+  ],
+  "language_options": [
+    {
+      "language": "TypeScript/React",
+      "fit": "Best fit for renderer settings UX and existing ProviderAccountsPanel."
+    },
+    {
+      "language": "Rust/Tauri",
+      "fit": "Best fit for credential storage commands, already implemented; no new native command needed."
+    }
+  ],
+  "selected_language": "TypeScript/React with existing Rust/Tauri command reuse",
+  "language_decision_notes": "The requested change is mainly settings ergonomics. Reusing Rust commands avoids changing credential storage/security boundaries.",
+  "architecture_reference_sources": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "platform-desktop-app/specs/2026-06-04-provider-account-connection/spec.ko.md"
+  ],
+  "architecture_options": [
+    {
+      "option": "Add real OAuth/login backend",
+      "decision": "Rejected for this slice",
+      "reason": "Would require provider app registration, token lifecycle, keychain storage, consent/security review, and public-release planning."
+    },
+    {
+      "option": "Guide official console/API key setup inside existing provider panel",
+      "decision": "Selected",
+      "reason": "Matches official docs, existing commands, and current credential storage boundary."
+    }
+  ],
+  "architecture_theory_sources": [
+    "Least-privilege credential handling: only store user-provided provider API keys, never web session cookies."
+  ],
+  "architecture_practitioner_sources": [
+    "Existing provider account connection implementation and readiness tests."
+  ],
+  "architecture_decision_notes": "The selected architecture improves usability without expanding authentication risk or runtime dependencies.",
+  "architecture_tradeoff_notes": [
+    "API key setup is less seamless than OAuth but is official and already supported.",
+    "OS keychain storage remains a future migration before public release."
+  ],
+  "folder_structure_options": [
+    {
+      "option": "New settings package/folder",
+      "decision": "Rejected",
+      "reason": "ProviderAccountsPanel already owns the UI boundary."
+    },
+    {
+      "option": "Keep changes in existing MonitorShell provider panel and CSS",
+      "decision": "Selected",
+      "reason": "Smallest scoped change and consistent with existing renderer tests."
+    }
+  ],
+  "folder_structure_decision_notes": "No new source folder was created; only specs/history artifacts were added.",
+  "folder_semantics_notes": "Provider setup remains part of workspace-monitor settings, not a separate auth product.",
+  "maintainability_notes": [
+    "New test tokens assert the guide/filter/model setup UI remains present.",
+    "Provider links continue to come from the existing provider registry."
+  ],
+  "code_reference_sources": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "code_reference_notes": [
+    "Provider credential types and commands already existed.",
+    "Existing choice/button tonal hierarchy CSS variables were reused."
+  ],
+  "issue_discussion_sources": [],
+  "issue_discussion_notes": "No community issue source was used because provider authentication behavior is governed by official provider docs and local implementation contracts.",
+  "community_signal_notes": "Not used as factual evidence.",
+  "post_research_questions": {
+    "what_changed_the_plan": "Official docs confirmed API key/console setup should remain the supported path instead of fake in-app OAuth.",
+    "what_risks_remain": "Local app config secret file is not a full OS keychain solution.",
+    "what_validation_is_required": "Renderer tests, TypeScript check, readiness, collect, and internal package build."
+  }
+}

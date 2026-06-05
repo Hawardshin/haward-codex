@@ -1880,12 +1880,87 @@ main {
 }
 
 .provider-accounts-pane {
-  gap: 12px;
+  gap: 14px;
+}
+
+.provider-login-guide {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(360px, 1.1fr);
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--surface) 90%, var(--accent-primary) 7%) 0%, color-mix(in srgb, var(--surface) 92%, var(--green) 5%) 100%);
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: var(--control-shadow);
+}
+
+.provider-login-copy {
+  display: grid;
+  align-content: center;
+  min-width: 0;
+  gap: 5px;
+}
+
+.provider-login-copy span,
+.provider-login-steps article small,
+.provider-setup-tallies span,
+.provider-model-strip span {
+  color: var(--muted);
+  font-size: var(--font-size-overline);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.provider-login-copy strong {
+  color: var(--text);
+  font-size: var(--font-size-lg);
+  overflow-wrap: var(--text-long-token-wrap);
+}
+
+.provider-login-copy p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+  overflow-wrap: break-word;
+}
+
+.provider-login-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.provider-login-steps article {
+  display: grid;
+  min-width: 0;
+  gap: 6px;
+  border: 1px solid color-mix(in srgb, var(--line) 78%, var(--accent-primary) 22%);
+  background: color-mix(in srgb, var(--surface-elevated) 90%, var(--surface-muted) 10%);
+  border-radius: 7px;
+  padding: 9px;
+}
+
+.provider-login-steps article svg {
+  color: var(--accent-primary-strong);
+}
+
+.provider-login-steps article strong,
+.provider-login-steps article small {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.provider-login-steps article small {
+  text-transform: none;
+  line-height: 1.35;
 }
 
 .provider-account-summary {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 0.8fr)) minmax(240px, 1.4fr) auto;
+  grid-template-columns: repeat(5, minmax(112px, 1fr)) minmax(128px, auto);
   gap: 8px;
   align-items: stretch;
 }
@@ -1927,6 +2002,70 @@ main {
 .provider-account-summary code {
   min-width: 0;
   overflow-wrap: var(--text-long-token-wrap);
+}
+
+.provider-setup-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.provider-filter-choice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+
+.provider-filter-choice button,
+.provider-setup-tallies {
+  border: 1px solid var(--line);
+  background: var(--choice-bg);
+  color: var(--text);
+  border-radius: var(--control-radius);
+  box-shadow: var(--choice-shadow);
+}
+
+.provider-filter-choice button {
+  display: inline-flex;
+  min-height: var(--control-compact-target-size);
+  align-items: center;
+  gap: var(--control-gap);
+  padding: 7px 10px;
+  font-weight: 850;
+}
+
+.provider-filter-choice button strong {
+  color: var(--muted);
+  font-size: var(--font-size-caption);
+}
+
+.provider-filter-choice button.active,
+.provider-account-actions button.active,
+.provider-model-chip-list button.active {
+  border-color: var(--control-selected-border);
+  background: var(--choice-selected-bg);
+  color: var(--control-selected-fg);
+  box-shadow: var(--choice-active-shadow);
+}
+
+.provider-filter-choice button.active strong,
+.provider-account-actions button.active svg {
+  color: currentColor;
+}
+
+.provider-setup-tallies {
+  display: grid;
+  min-width: 94px;
+  align-content: center;
+  justify-items: center;
+  padding: 7px 10px;
+}
+
+.provider-setup-tallies strong {
+  font-size: var(--font-size-lg);
 }
 
 .provider-account-list {
@@ -1979,6 +2118,30 @@ main {
 
 .provider-account-row.connected header em {
   border-color: color-mix(in srgb, var(--green) 35%, var(--line) 65%);
+  color: var(--green);
+}
+
+.provider-status-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.provider-status-pills span {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+  overflow-wrap: break-word;
+}
+
+.provider-status-pills span.ready {
+  border-color: color-mix(in srgb, var(--green) 35%, var(--line) 65%);
+  background: color-mix(in srgb, var(--surface) 88%, var(--green) 8%);
   color: var(--green);
 }
 
@@ -2067,17 +2230,78 @@ main {
   align-items: center;
   gap: var(--control-gap);
   border: 1px solid var(--line);
-  background: var(--surface);
+  background: var(--choice-bg);
   color: var(--text);
   border-radius: var(--control-radius);
+  box-shadow: var(--choice-shadow);
   padding: 8px var(--control-padding-x);
   font-weight: 850;
+}
+
+.provider-account-actions button:hover:not(:disabled),
+.provider-filter-choice button:hover:not(:disabled),
+.provider-model-chip-list button:hover:not(:disabled) {
+  border-color: var(--accent-primary-border);
+  background: var(--choice-bg-hover);
 }
 
 .provider-account-actions button:disabled,
 .adapter-card-actions button:disabled,
 .provider-account-summary button:disabled {
   opacity: 0.55;
+}
+
+.provider-model-strip {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.45fr) minmax(0, 1fr);
+  gap: 8px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface) 88%, var(--surface-muted) 12%);
+  border-radius: 7px;
+  padding: 9px;
+}
+
+.provider-model-strip > div:first-child {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.provider-model-strip strong,
+.provider-model-strip small {
+  min-width: 0;
+  overflow-wrap: var(--text-long-token-wrap);
+}
+
+.provider-model-strip small {
+  color: var(--muted);
+}
+
+.provider-model-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: center;
+  min-width: 0;
+}
+
+.provider-model-chip-list button {
+  min-height: 34px;
+  max-width: 100%;
+  border: 1px solid var(--line);
+  background: var(--choice-bg);
+  color: var(--text);
+  border-radius: var(--control-radius);
+  box-shadow: var(--choice-shadow);
+  padding: 6px 9px;
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+}
+
+.provider-model-chip-list button span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .provider-account-row > small,
@@ -14153,6 +14377,7 @@ h3 {
   .task-run-detail-meta,
   .pipe-lane-grid,
   .provider-account-summary,
+  .provider-login-steps,
   .provider-account-row dl,
   .run-board-strip,
   .process-graph,
@@ -14205,6 +14430,9 @@ h3 {
   .agent-provider-run-controls,
   .agent-factory-layout,
   .learning-feedback-layout,
+  .provider-login-guide,
+  .provider-setup-toolbar,
+  .provider-model-strip,
   .provider-account-fields,
   .mode-switchboard-layout {
     grid-template-columns: 1fr;
@@ -14377,6 +14605,7 @@ h3 {
   .task-run-detail-meta,
   .pipe-lane-grid,
   .provider-account-summary,
+  .provider-login-steps,
   .provider-account-row dl,
   .run-board-strip,
   .process-graph,
@@ -14416,6 +14645,9 @@ h3 {
   .learning-decision-controls,
   .mode-option-grid,
   .agent-provider-run-controls,
+  .provider-login-guide,
+  .provider-setup-toolbar,
+  .provider-model-strip,
   .provider-account-fields,
   .mode-switchboard-layout,
   .content-grid,

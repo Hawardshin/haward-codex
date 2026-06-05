@@ -1,0 +1,25 @@
+{
+  "date": "2026-06-06",
+  "resource_risk_occurred": false,
+  "scope": "Renderer settings UI and existing provider command wiring.",
+  "long_running_resources": [
+    {
+      "resource": "local static HTTP server on 127.0.0.1:4173",
+      "purpose": "Browser smoke verification",
+      "status": "terminated"
+    },
+    {
+      "resource": "desktop:package:internal build process",
+      "purpose": "Internal .app and .dmg build",
+      "status": "completed"
+    }
+  ],
+  "sensitive_data_handling": [
+    "No provider API key values were read, pasted, saved, or logged during this work.",
+    "The UI keeps provider API key inputs as password fields."
+  ],
+  "validation": [
+    "No background server or build session remains running.",
+    "Browser smoke used static local output only."
+  ]
+}
