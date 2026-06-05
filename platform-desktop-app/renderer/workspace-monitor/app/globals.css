@@ -81,6 +81,12 @@
   --focus-shadow: 0 1px 2px rgba(17, 24, 39, 0.05), 0 24px 64px rgba(17, 24, 39, 0.1);
   --control-shadow: 0 1px 1px rgba(17, 24, 39, 0.05), 0 5px 14px rgba(17, 24, 39, 0.045);
   --control-hover-shadow: 0 1px 2px rgba(17, 24, 39, 0.07), 0 10px 22px rgba(17, 24, 39, 0.07);
+  --control-press-shadow: inset 0 2px 8px rgba(17, 24, 39, 0.12);
+  --chrome-shadow: 0 1px 0 rgba(255, 255, 255, 0.74), 0 10px 28px rgba(17, 24, 39, 0.055);
+  --rail-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.05), 10px 0 28px rgba(17, 24, 39, 0.11);
+  --section-tab-shadow: 0 1px 1px rgba(17, 24, 39, 0.045), 0 6px 18px rgba(17, 24, 39, 0.05);
+  --section-tab-active-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 12px 28px rgba(0, 102, 204, 0.16), 0 4px 12px rgba(15, 138, 116, 0.1);
+  --surface-edge-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.68);
   --choice-bg: linear-gradient(180deg, #ffffff 0%, #f6f8fb 100%);
   --choice-bg-hover: linear-gradient(180deg, #ffffff 0%, #eef5ff 100%);
   --choice-selected-bg: linear-gradient(135deg, #0b6fcf 0%, #0f8a74 100%);
@@ -246,6 +252,12 @@
   --focus-shadow: 0 1px 2px rgba(0, 0, 0, 0.38), 0 30px 78px rgba(0, 0, 0, 0.36);
   --control-shadow: 0 1px 1px rgba(0, 0, 0, 0.28), 0 8px 20px rgba(0, 0, 0, 0.22);
   --control-hover-shadow: 0 1px 2px rgba(0, 0, 0, 0.38), 0 12px 28px rgba(0, 0, 0, 0.3);
+  --control-press-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.36);
+  --chrome-shadow: 0 1px 0 rgba(255, 255, 255, 0.05), 0 14px 34px rgba(0, 0, 0, 0.32);
+  --rail-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.05), 10px 0 30px rgba(0, 0, 0, 0.34);
+  --section-tab-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), 0 8px 22px rgba(0, 0, 0, 0.22);
+  --section-tab-active-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.11), 0 12px 30px rgba(10, 132, 255, 0.18);
+  --surface-edge-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.08);
   --choice-bg: linear-gradient(180deg, #1f2530 0%, #181d26 100%);
   --choice-bg-hover: linear-gradient(180deg, #243044 0%, #1b2433 100%);
   --choice-selected-bg: linear-gradient(135deg, #005db8 0%, #047857 100%);
@@ -348,6 +360,19 @@
     --shell-shadow: 0 1px 2px rgba(0, 0, 0, 0.36), 0 24px 64px rgba(0, 0, 0, 0.32);
     --focus-shadow: 0 1px 2px rgba(0, 0, 0, 0.38), 0 30px 78px rgba(0, 0, 0, 0.36);
     --control-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    --control-hover-shadow: 0 1px 2px rgba(0, 0, 0, 0.38), 0 12px 28px rgba(0, 0, 0, 0.3);
+    --control-press-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.36);
+    --chrome-shadow: 0 1px 0 rgba(255, 255, 255, 0.05), 0 14px 34px rgba(0, 0, 0, 0.32);
+    --rail-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.05), 10px 0 30px rgba(0, 0, 0, 0.34);
+    --section-tab-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), 0 8px 22px rgba(0, 0, 0, 0.22);
+    --section-tab-active-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.11), 0 12px 30px rgba(10, 132, 255, 0.18);
+    --surface-edge-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    --choice-bg: linear-gradient(180deg, #1f2530 0%, #181d26 100%);
+    --choice-bg-hover: linear-gradient(180deg, #243044 0%, #1b2433 100%);
+    --choice-selected-bg: linear-gradient(135deg, #005db8 0%, #047857 100%);
+    --choice-shadow: 0 1px 1px rgba(0, 0, 0, 0.32), 0 10px 26px rgba(0, 0, 0, 0.24);
+    --choice-active-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.11), 0 12px 30px rgba(10, 132, 255, 0.18);
+    --search-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.24);
     --hairline-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
     --surface-depth-0: var(--surface);
     --surface-depth-1: var(--surface-raised);
@@ -663,6 +688,12 @@ button {
   user-select: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  transition:
+    background var(--motion-duration-fast) var(--motion-ease-standard),
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
+    color var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 button:disabled {
@@ -688,6 +719,7 @@ button:disabled {
 }
 
 .desktop-app-root button:not(:disabled):active {
+  box-shadow: var(--control-press-shadow);
   transform: translateY(var(--control-active-shift));
 }
 
@@ -704,7 +736,7 @@ button:disabled {
   padding: 8px var(--control-padding-x);
   color: var(--text);
   background: var(--control-bg);
-  box-shadow: var(--control-shadow);
+  box-shadow: var(--control-shadow), var(--surface-edge-highlight);
   font: inherit;
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-label);
@@ -780,7 +812,8 @@ button:disabled {
 .ui-button:hover:not(:disabled) {
   border-color: var(--state-hover-border);
   background: var(--state-hover-surface);
-  box-shadow: var(--control-hover-shadow);
+  box-shadow: var(--control-hover-shadow), var(--surface-edge-highlight);
+  transform: translateY(-1px);
 }
 
 .ui-button-primary:hover:not(:disabled) {
@@ -995,7 +1028,7 @@ main {
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--rail-bg) 88%, var(--green) 12%), var(--rail-bg)),
     var(--rail-bg);
-  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.03);
+  box-shadow: var(--rail-shadow);
   padding: var(--space-3) var(--space-2);
 }
 
@@ -1038,6 +1071,23 @@ main {
   align-content: center;
   justify-items: center;
   padding: 6px 4px;
+}
+
+.activity-rail nav button::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  width: 3px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--line-accent);
+  opacity: 0;
+  transform: scaleY(0.72);
+  transform-origin: center;
+  transition:
+    height var(--motion-duration-fast) var(--motion-ease-standard),
+    opacity var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .desktop-app-shell.sidebar-expanded .activity-rail button {
@@ -1093,24 +1143,22 @@ main {
 
 .activity-rail button:hover,
 .activity-rail button.active,
+.activity-rail button[aria-current="page"],
 .activity-rail .activity-brand {
   border-color: rgba(255, 255, 255, 0.18);
   background: var(--rail-active);
   color: var(--text-on-dark);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.18), 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.activity-rail button.active::before {
-  content: "";
-  position: absolute;
-  left: 4px;
-  width: 3px;
-  height: 18px;
-  border-radius: 999px;
-  background: var(--line-accent);
-  transform-origin: center;
-  transition:
-    height var(--motion-duration-fast) var(--motion-ease-standard),
-    transform var(--motion-duration-fast) var(--motion-ease-standard);
+.activity-rail nav button:hover {
+  transform: translateY(-1px);
+}
+
+.activity-rail nav button.active::before,
+.activity-rail nav button[aria-current="page"]::before {
+  opacity: 1;
+  transform: scaleY(1);
 }
 
 .activity-rail .activity-brand {
@@ -1416,6 +1464,7 @@ main {
   border-bottom: 1px solid color-mix(in srgb, var(--hierarchy-border) 72%, transparent);
   background: color-mix(in srgb, var(--titlebar-bg) 92%, var(--surface) 8%);
   backdrop-filter: blur(16px) saturate(1.08);
+  box-shadow: var(--chrome-shadow);
   padding: var(--space-3) 0 var(--space-3);
   -webkit-app-region: drag;
   user-select: none;
@@ -5241,18 +5290,30 @@ h3 {
 }
 
 .section-tab-group {
+  position: relative;
   display: grid;
   gap: 8px;
   min-width: 0;
-  border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  overflow: hidden;
+  border: 1px solid var(--hierarchy-border);
+  background: color-mix(in srgb, var(--surface-depth-1) 84%, transparent);
   border-radius: 8px;
   padding: 10px;
+  box-shadow: var(--surface-shadow-low), var(--surface-edge-highlight);
 }
 
 .section-tab-group.active {
-  border-color: #b6c3d1;
-  background: var(--surface);
+  border-color: var(--hierarchy-border-strong);
+  background: var(--surface-depth-focus);
+  box-shadow: var(--surface-shadow-medium), var(--surface-edge-highlight);
+}
+
+.section-tab-group.active::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), color-mix(in srgb, var(--green) 74%, var(--accent-primary) 26%));
 }
 
 .section-tab-group-heading {
@@ -5287,11 +5348,12 @@ h3 {
   min-height: var(--control-target-size);
   align-items: center;
   gap: var(--control-gap);
-  border: 1px solid var(--line);
-  background: var(--surface);
+  border: 1px solid var(--hierarchy-border);
+  background: var(--choice-bg);
   color: var(--text);
   border-radius: var(--control-radius);
   padding: 8px calc(var(--control-padding-x) + 1px);
+  box-shadow: var(--section-tab-shadow), var(--surface-edge-highlight);
 }
 
 .section-tabs button {
@@ -5300,9 +5362,10 @@ h3 {
 }
 
 .section-tabs button.active {
-  border-color: #a8b5c3;
-  background: linear-gradient(135deg, #25313f 0%, #2f3d4e 100%);
+  border-color: var(--control-selected-border);
+  background: var(--choice-selected-bg);
   color: var(--text-on-dark);
+  box-shadow: var(--section-tab-active-shadow);
 }
 
 .section-tabs button span {
@@ -5314,8 +5377,8 @@ h3 {
 
 .section-tabs button small {
   min-width: 24px;
-  border: 1px solid var(--line);
-  background: var(--surface-muted);
+  border: 1px solid var(--hierarchy-border);
+  background: color-mix(in srgb, var(--surface-muted) 78%, var(--surface) 22%);
   color: var(--muted);
   border-radius: 999px;
   padding: 2px 6px;
@@ -7038,9 +7101,10 @@ h3 {
 
 .panel {
   min-width: 0;
-  border: 1px solid var(--line);
-  background: var(--surface);
+  border: 1px solid var(--hierarchy-border);
+  background: var(--surface-depth-0);
   border-radius: 8px;
+  box-shadow: var(--surface-shadow-low), var(--surface-edge-highlight);
   padding: 18px;
 }
 
@@ -16267,10 +16331,11 @@ h3 {
 .tool-studio-mode-rail button {
   min-width: var(--control-target-size);
   min-height: var(--control-target-size);
-  border: 1px solid var(--line);
+  border: 1px solid var(--hierarchy-border);
   border-radius: var(--control-radius);
   color: var(--text);
-  background: var(--control-bg);
+  background: var(--choice-bg);
+  box-shadow: var(--section-tab-shadow), var(--surface-edge-highlight);
 }
 
 .tool-studio-actions button {
@@ -16286,13 +16351,16 @@ h3 {
 .tool-studio-depth-rail button:hover,
 .tool-studio-mode-rail button:hover,
 .tool-pane-heading button:hover {
-  background: var(--control-bg-hover);
+  border-color: var(--state-hover-border);
+  background: var(--choice-bg-hover);
+  box-shadow: var(--control-hover-shadow), var(--surface-edge-highlight);
 }
 
 .tool-studio-primary-action {
   border-color: var(--action-primary-border) !important;
   color: var(--action-primary-fg) !important;
-  background: var(--action-primary-bg) !important;
+  background: var(--choice-selected-bg) !important;
+  box-shadow: var(--section-tab-active-shadow) !important;
 }
 
 .tool-studio-actions .tool-dropdown-trigger {
@@ -16303,7 +16371,7 @@ h3 {
   padding: 6px 8px 6px 10px;
   text-align: left;
   justify-content: stretch;
-  box-shadow: var(--control-shadow);
+  box-shadow: var(--section-tab-shadow), var(--surface-edge-highlight);
 }
 
 .tool-action-menu-trigger {
@@ -16428,7 +16496,8 @@ h3 {
 .tool-studio-mode-rail button.active {
   border-color: var(--control-selected-border);
   color: var(--control-selected-fg);
-  background: var(--control-selected-bg);
+  background: var(--choice-selected-bg);
+  box-shadow: var(--section-tab-active-shadow);
 }
 
 .tool-studio-depth-rail strong,

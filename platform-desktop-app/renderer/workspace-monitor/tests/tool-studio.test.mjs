@@ -1130,3 +1130,22 @@ test("Activity rail exposes readable destination labels in the desktop shell", (
   assert.doesNotMatch(css, /@media \(max-width: 720px\)/);
   assert.doesNotMatch(css, /@media \(max-width: 420px\)/);
 });
+
+test("Desktop chrome uses elevated navigation and tab states", () => {
+  assert.match(css, /--chrome-shadow:/);
+  assert.match(css, /--rail-shadow:/);
+  assert.match(css, /--control-press-shadow:/);
+  assert.match(css, /--section-tab-shadow:/);
+  assert.match(css, /--section-tab-active-shadow:/);
+  assert.match(css, /--surface-edge-highlight:/);
+  assert.match(css, /\.desktop-titlebar \{[\s\S]*?box-shadow: var\(--chrome-shadow\);/);
+  assert.match(css, /\.activity-rail \{[\s\S]*?box-shadow: var\(--rail-shadow\);/);
+  assert.match(css, /\.activity-rail nav button::before \{/);
+  assert.match(css, /\.activity-rail button\[aria-current="page"\]/);
+  assert.match(css, /\.section-tab-group\.active::before \{/);
+  assert.match(css, /\.section-tabs button,[\s\S]*?\.panel-heading button \{[\s\S]*?background: var\(--choice-bg\);[\s\S]*?box-shadow: var\(--section-tab-shadow\), var\(--surface-edge-highlight\);/);
+  assert.match(css, /\.section-tabs button\.active \{[\s\S]*?background: var\(--choice-selected-bg\);[\s\S]*?box-shadow: var\(--section-tab-active-shadow\);/);
+  assert.match(css, /\.panel \{[\s\S]*?background: var\(--surface-depth-0\);[\s\S]*?box-shadow: var\(--surface-shadow-low\), var\(--surface-edge-highlight\);/);
+  assert.match(css, /\.tool-studio-actions button,[\s\S]*?\.tool-studio-mode-rail button \{[\s\S]*?background: var\(--choice-bg\);[\s\S]*?box-shadow: var\(--section-tab-shadow\), var\(--surface-edge-highlight\);/);
+  assert.match(css, /\.tool-studio-depth-rail button\.active,[\s\S]*?\.tool-studio-mode-rail button\.active \{[\s\S]*?background: var\(--choice-selected-bg\);[\s\S]*?box-shadow: var\(--section-tab-active-shadow\);/);
+});

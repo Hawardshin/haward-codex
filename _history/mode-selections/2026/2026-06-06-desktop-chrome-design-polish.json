@@ -1,0 +1,11 @@
+{
+  "date": "2026-06-06",
+  "task": "desktop chrome design polish",
+  "work_mode": "ship_first",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request changes a desktop product surface and requires implementation, validation, build, package, and trace records.",
+  "web_first_intake": true,
+  "memory_bootstrap": "check-memory-bootstrap passed",
+  "installation_occurred": false
+}
