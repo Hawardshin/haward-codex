@@ -1,0 +1,22 @@
+{
+  "date": "2026-06-06",
+  "request_id": "2026-06-06-structure-performance-migration",
+  "resource_risk_occurred": true,
+  "status": "passed",
+  "resources_touched": [
+    "WebView initial JSON snapshot memory",
+    "Monaco editor input buffer",
+    "React state update frequency",
+    "Tauri package build artifacts"
+  ],
+  "limits": {
+    "max_source_preview_chars_per_file": 1200,
+    "max_source_preview_bytes_total": 220000,
+    "source_draft_ui_sync_ms": 180
+  },
+  "lifecycle_controls": [
+    "Full source text is loaded through runtime commands instead of static snapshot payload.",
+    "Pending source draft sync timer is cleared on unmount, file switch, save, and close.",
+    "Save and copy read from latest editor buffer."
+  ]
+}

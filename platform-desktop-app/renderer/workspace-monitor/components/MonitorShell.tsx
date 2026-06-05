@@ -1858,6 +1858,7 @@ const SESSION_POLL_IDLE_UPDATE_BUCKET_MS = 5000;
 const INBOX_REFRESH_THROTTLE_MS = 4000;
 const SESSION_OUTPUT_SIGNATURE_CHARS = 2048;
 const TASK_RUN_REFRESH_THROTTLE_MS = 5000;
+const SOURCE_DRAFT_UI_SYNC_MS = 180;
 
 const fallbackDesktopAdapters: CliAdapterStatus[] = [
   { adapterId: "claude-code-cli", label: "Claude Code CLI", command: "claude", available: false, lastError: "Desktop runtime unavailable." },
@@ -3016,7 +3017,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       const projectMatches = sourceProject === "all" || file.project === sourceProject;
       const languageMatches = sourceLanguage === "all" || file.language === sourceLanguage;
       const queryMatches =
-        !sourceQuery || `${file.path} ${file.project} ${file.language} ${file.content}`.toLowerCase().includes(sourceQuery);
+        !sourceQuery || `${file.path} ${file.project} ${file.language} ${file.preview ?? ""}`.toLowerCase().includes(sourceQuery);
       return projectMatches && languageMatches && queryMatches;
     });
   }, [sourceLanguage, sourceProject, sourceQuery, visibleSourceFiles]);
@@ -3025,7 +3026,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     if (!selectedSource) {
       return;
     }
-    const copied = await writeClipboardText(selectedSource.content);
+    const copied = await writeClipboardText(selectedSource.preview || selectedSource.path);
     setSourceCopyNotice(copied ? `${selectedSource.path} copied` : "Clipboard unavailable");
   };
   const documentSignalSummary = useMemo(() => {
@@ -8327,6 +8328,9 @@ function DesktopRuntimePanel({
   const [sourceCatalogBusy, setSourceCatalogBusy] = useState(false);
   const [workspaceResourceBusy, setWorkspaceResourceBusy] = useState(false);
   const sourceEditorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
+  const sourceDraftRef = useRef("");
+  const activeSourcePathRef = useRef("");
+  const sourceDraftSyncTimerRef = useRef<number | null>(null);
   const panelMountedRef = useRef(false);
   const activeSessionPollInFlightRef = useRef(false);
   const workspaceWarmupPollRef = useRef<number | null>(null);
@@ -9648,6 +9652,7 @@ function DesktopRuntimePanel({
     setEditorBusy(true);
     setError("");
     setWriteReport(null);
+    clearSourceDraftSyncTimer();
     try {
       const nextFile = await tauriInvoke<WorkspaceTextFile>("read_workspace_text_file", {
         relativePath: targetPath
@@ -9661,6 +9666,8 @@ function DesktopRuntimePanel({
         loadedAt: new Date().toISOString()
       };
       setSourceFile(nextFile);
+      activeSourcePathRef.current = nextFile.relativePath;
+      sourceDraftRef.current = nextFile.content;
       setSourceDraft(nextFile.content);
       setSelectedSourcePath(nextFile.relativePath);
       setSourcePathInput(nextFile.relativePath);
@@ -9683,6 +9690,7 @@ function DesktopRuntimePanel({
     if (!entry) {
       return;
     }
+    clearSourceDraftSyncTimer();
     setSelectedSourcePath(entry.relativePath);
     setSourcePathInput(entry.relativePath);
     setSourceFile({
@@ -9691,6 +9699,8 @@ function DesktopRuntimePanel({
       sizeBytes: entry.sizeBytes,
       maxSizeBytes: entry.maxSizeBytes
     });
+    activeSourcePathRef.current = entry.relativePath;
+    sourceDraftRef.current = entry.content;
     setSourceDraft(entry.content);
     setSourceCopyNotice("");
     setSourceWorkbenchView("editor");
@@ -9714,29 +9724,83 @@ function DesktopRuntimePanel({
     await loadSourceFileByPath(relativePath);
   };
 
-  const updateSourceDraft = (nextContent: string) => {
-    setSourceDraft(nextContent);
-    setSourceCopyNotice("");
-    if (!sourceFile) {
+  const clearSourceDraftSyncTimer = () => {
+    if (sourceDraftSyncTimerRef.current && typeof window !== "undefined") {
+      window.clearTimeout(sourceDraftSyncTimerRef.current);
+    }
+    sourceDraftSyncTimerRef.current = null;
+  };
+
+  const commitSourceDraftState = (nextContent: string, draftFile: WorkspaceTextFile | null, syncVisibleDraft = true) => {
+    if (syncVisibleDraft && (!draftFile || activeSourcePathRef.current === draftFile.relativePath)) {
+      setSourceDraft(nextContent);
+    }
+    if (!draftFile) {
       return;
     }
     setSourceDrafts((current) => {
-      const existing = current[sourceFile.relativePath] || {
-        relativePath: sourceFile.relativePath,
-        baseContent: sourceFile.content,
-        content: sourceFile.content,
-        sizeBytes: sourceFile.sizeBytes,
-        maxSizeBytes: sourceFile.maxSizeBytes,
+      const existing = current[draftFile.relativePath] || {
+        relativePath: draftFile.relativePath,
+        baseContent: draftFile.content,
+        content: draftFile.content,
+        sizeBytes: draftFile.sizeBytes,
+        maxSizeBytes: draftFile.maxSizeBytes,
         loadedAt: new Date().toISOString()
       };
       return {
         ...current,
-        [sourceFile.relativePath]: {
+        [draftFile.relativePath]: {
           ...existing,
           content: nextContent
         }
       };
     });
+  };
+
+  const updateSourceDraft = (nextContent: string, options: { immediate?: boolean } = {}) => {
+    const draftFile = sourceFile;
+    const immediate = options.immediate ?? true;
+    sourceDraftRef.current = nextContent;
+    setSourceCopyNotice("");
+    if (!draftFile) {
+      return;
+    }
+    if (immediate || typeof window === "undefined") {
+      clearSourceDraftSyncTimer();
+      commitSourceDraftState(nextContent, draftFile);
+      return;
+    }
+    if (sourceDraftSyncTimerRef.current) {
+      return;
+    }
+    sourceDraftSyncTimerRef.current = window.setTimeout(() => {
+      sourceDraftSyncTimerRef.current = null;
+      commitSourceDraftState(sourceDraftRef.current, draftFile);
+    }, SOURCE_DRAFT_UI_SYNC_MS);
+  };
+
+  const currentEditorDraftContent = () => sourceEditorRef.current?.getValue() ?? (sourceDraftRef.current || sourceDraft);
+
+  const effectiveSourceDrafts = () => {
+    if (!sourceFile) {
+      return sourceDrafts;
+    }
+    const latestContent = currentEditorDraftContent();
+    const existing = sourceDrafts[sourceFile.relativePath] || {
+      relativePath: sourceFile.relativePath,
+      baseContent: sourceFile.content,
+      content: sourceFile.content,
+      sizeBytes: sourceFile.sizeBytes,
+      maxSizeBytes: sourceFile.maxSizeBytes,
+      loadedAt: new Date().toISOString()
+    };
+    return {
+      ...sourceDrafts,
+      [sourceFile.relativePath]: {
+        ...existing,
+        content: latestContent
+      }
+    };
   };
 
   const handleSourceEditorMount = (editorInstance: editor.IStandaloneCodeEditor) => {
@@ -9752,7 +9816,7 @@ function DesktopRuntimePanel({
 
     if (command === "undo" || command === "redo") {
       editorInstance.trigger("platform-source-toolbar", command, null);
-      updateSourceDraft(editorInstance.getValue());
+      updateSourceDraft(editorInstance.getValue(), { immediate: true });
       editorInstance.focus();
       return;
     }
@@ -9775,7 +9839,7 @@ function DesktopRuntimePanel({
     }
     await action.run();
     if (command === "format") {
-      updateSourceDraft(editorInstance.getValue());
+      updateSourceDraft(editorInstance.getValue(), { immediate: true });
     }
     editorInstance.focus();
   };
@@ -9796,13 +9860,13 @@ function DesktopRuntimePanel({
           forceMoveMarkers: true
         }
       ]);
-      updateSourceDraft(editorInstance.getValue());
+      updateSourceDraft(editorInstance.getValue(), { immediate: true });
       editorInstance.focus();
       setSourceCopyNotice(`${selectedSourceTemplate.label} inserted`);
       return;
     }
 
-    updateSourceDraft(appendSourceTemplate(sourceDraft, templateBody));
+    updateSourceDraft(appendSourceTemplate(currentEditorDraftContent(), templateBody), { immediate: true });
     setSourceCopyNotice(`${selectedSourceTemplate.label} inserted`);
   };
 
@@ -9824,7 +9888,7 @@ function DesktopRuntimePanel({
       "Gate: workspace-scoped backup on save",
       "",
       "--- draft ---",
-      sourceDraft
+      currentEditorDraftContent()
     ].join("\n");
     const copied = await writeClipboardText(context);
     setSourceCopyNotice(copied ? `${sourceFile.relativePath} patch context copied` : "Clipboard unavailable");
@@ -9839,17 +9903,21 @@ function DesktopRuntimePanel({
     setEditorBusy(true);
     setError("");
     try {
+      const latestContent = currentEditorDraftContent();
+      clearSourceDraftSyncTimer();
       const report = await tauriInvoke<WorkspaceWriteReport>("write_workspace_text_file", {
         relativePath: sourceFile.relativePath,
-        content: sourceDraft
+        content: latestContent
       });
       setWriteReport(report);
-      setSourceFile({ ...sourceFile, content: sourceDraft, sizeBytes: report.sizeBytes });
+      setSourceFile({ ...sourceFile, content: latestContent, sizeBytes: report.sizeBytes });
+      sourceDraftRef.current = latestContent;
+      setSourceDraft(latestContent);
       setSourceDrafts((current) => {
         const existing = current[sourceFile.relativePath] || {
           relativePath: sourceFile.relativePath,
           baseContent: sourceFile.content,
-          content: sourceDraft,
+          content: latestContent,
           sizeBytes: report.sizeBytes,
           maxSizeBytes: sourceFile.maxSizeBytes,
           loadedAt: new Date().toISOString()
@@ -9858,8 +9926,8 @@ function DesktopRuntimePanel({
           ...current,
           [sourceFile.relativePath]: {
             ...existing,
-            baseContent: sourceDraft,
-            content: sourceDraft,
+            baseContent: latestContent,
+            content: latestContent,
             sizeBytes: report.sizeBytes,
             lastSavedBackupPath: report.backupPath,
             status: report.status
@@ -9882,16 +9950,21 @@ function DesktopRuntimePanel({
 
   const saveAllSourceDrafts = async () => {
     const tauriInvoke = getTauriInvoke();
-    if (!tauriInvoke || dirtyDraftEntries.length === 0) {
+    const draftSnapshot = effectiveSourceDrafts();
+    const dirtyEntries = Object.values(draftSnapshot)
+      .filter((entry) => entry.content !== entry.baseContent)
+      .sort((left, right) => left.relativePath.localeCompare(right.relativePath));
+    if (!tauriInvoke || dirtyEntries.length === 0) {
       return;
     }
 
     setSaveAllBusy(true);
     setError("");
     try {
+      clearSourceDraftSyncTimer();
       const reportsToAdd: WorkspaceWriteReport[] = [];
-      const nextDrafts: Record<string, SourceDraftEntry> = { ...sourceDrafts };
-      for (const entry of dirtyDraftEntries) {
+      const nextDrafts: Record<string, SourceDraftEntry> = { ...draftSnapshot };
+      for (const entry of dirtyEntries) {
         const report = await tauriInvoke<WorkspaceWriteReport>("write_workspace_text_file", {
           relativePath: entry.relativePath,
           content: entry.content
@@ -9920,6 +9993,7 @@ function DesktopRuntimePanel({
           sizeBytes: currentEntry.sizeBytes,
           maxSizeBytes: currentEntry.maxSizeBytes
         });
+        sourceDraftRef.current = currentEntry.content;
         setSourceDraft(currentEntry.content);
         setSourceCopyNotice("");
       }
@@ -9938,6 +10012,8 @@ function DesktopRuntimePanel({
     if (!sourceFile || !currentDraftEntry) {
       return;
     }
+    clearSourceDraftSyncTimer();
+    sourceDraftRef.current = currentDraftEntry.baseContent;
     setSourceDraft(currentDraftEntry.baseContent);
     setSourceDrafts((current) => ({
       ...current,
@@ -9954,6 +10030,7 @@ function DesktopRuntimePanel({
     if (!currentPath) {
       return;
     }
+    clearSourceDraftSyncTimer();
     const closingActiveDraft = sourceFile?.relativePath === currentPath;
     const nextEntry = openDraftEntries.find((entry) => entry.relativePath !== currentPath) || null;
     setSourceDrafts((current) => {
@@ -9973,9 +10050,13 @@ function DesktopRuntimePanel({
         sizeBytes: nextEntry.sizeBytes,
         maxSizeBytes: nextEntry.maxSizeBytes
       });
+      activeSourcePathRef.current = nextEntry.relativePath;
+      sourceDraftRef.current = nextEntry.content;
       setSourceDraft(nextEntry.content);
     } else {
       setSourceFile(null);
+      activeSourcePathRef.current = "";
+      sourceDraftRef.current = "";
       setSourceDraft("");
       setSourceCopyNotice("");
       setWriteReport(null);
@@ -9994,7 +10075,7 @@ function DesktopRuntimePanel({
     if (!sourceFile) {
       return;
     }
-    const copied = await writeClipboardText(sourceDraft);
+    const copied = await writeClipboardText(currentEditorDraftContent());
     setSourceCopyNotice(copied ? `${sourceFile.relativePath} copied` : "Clipboard unavailable");
   };
 
@@ -10015,6 +10096,7 @@ function DesktopRuntimePanel({
         window.clearTimeout(workspaceWarmupPollRef.current);
         workspaceWarmupPollRef.current = null;
       }
+      clearSourceDraftSyncTimer();
     };
   }, []);
 
@@ -10860,7 +10942,7 @@ function DesktopRuntimePanel({
                       language={monacoLanguageFromPath(sourceFile.relativePath)}
                       loading={<div className="monaco-editor-loading">Loading Monaco editor</div>}
                       onMount={handleSourceEditorMount}
-                      onChange={(value) => updateSourceDraft(value ?? "")}
+                      onChange={(value) => updateSourceDraft(value ?? "", { immediate: false })}
                       options={activeMonacoEditorOptions}
                       path={`file:///${sourceFile.relativePath.replace(/^\/+/, "")}`}
                       theme={platformMonacoTheme}

@@ -28,7 +28,7 @@ const DEFAULT_DOCUMENT_HTML_CHARS = 5200;
 const HISTORY_DOCUMENT_HTML_CHARS = 2200;
 const HISTORY_ADMIN_EXCERPT_CHARS = 360;
 const MAX_SOURCE_FILES = 260;
-const MAX_SOURCE_CHARS = 22000;
+const MAX_SOURCE_PREVIEW_CHARS = 1200;
 const MAX_SOURCE_FILE_BYTES = 180000;
 const SOURCE_DIR_NAMES = ["src", "src-tauri", "tests", "app", "components", "lib", "scripts"];
 const SOURCE_EXTENSIONS = new Set([
@@ -243,6 +243,7 @@ export function buildSnapshot(repoRoot) {
       status: "review_required_before_public_deploy",
       checklist: [
         "Review src/generated/workspace-snapshot.json before making the repository public.",
+        "Remove sourceFiles payloads from public/customer bundles and load full source text through runtime commands.",
         "Run python3 _tools/privacy-audit/src/privacy_audit.py --check before public deploy.",
         "Remove or redact private notes, secrets, raw prompts, or local-only paths that should not be published.",
         "Regenerate the snapshot after any redaction and run pnpm run build again."
@@ -2119,8 +2120,8 @@ function readSourceFile(repoRoot, filePath, project) {
   const relativePath = toPosix(path.relative(repoRoot, filePath));
   const content = fs.readFileSync(filePath, "utf8");
   const stats = fs.statSync(filePath);
-  const truncated = content.length > MAX_SOURCE_CHARS;
-  const preview = truncated ? content.slice(0, MAX_SOURCE_CHARS) : content;
+  const truncated = content.length > MAX_SOURCE_PREVIEW_CHARS;
+  const preview = truncated ? content.slice(0, MAX_SOURCE_PREVIEW_CHARS) : content;
 
   return {
     id: slugify(relativePath),
@@ -2132,7 +2133,8 @@ function readSourceFile(repoRoot, filePath, project) {
     lineCount: content.split(/\r?\n/).length,
     updatedAt: stats.mtime.toISOString(),
     truncated,
-    content: preview
+    preview,
+    previewBytes: Buffer.byteLength(preview, "utf8")
   };
 }
 

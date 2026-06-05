@@ -227,7 +227,9 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.adminHistory.summary.documents, 1);
   assert.equal(snapshot.adminHistory.inlineHistoryDocuments, 1);
   assert.equal(snapshot.sourceFiles[0].language, "python");
-  assert.match(snapshot.sourceFiles[0].content, /hello/);
+  assert.equal(snapshot.sourceFiles[0].content, undefined);
+  assert.match(snapshot.sourceFiles[0].preview, /hello/);
+  assert.equal(snapshot.sourceFiles[0].previewBytes > 0, true);
   assert.equal(snapshot.agentCatalog[0].name, "demo-agent");
   assert.equal(snapshot.agentCatalog[0].tools.length, 1);
   assert.equal(snapshot.agentCatalog[0].docPaths[0], "agent-platform/docs/demo-agent.ko.md");

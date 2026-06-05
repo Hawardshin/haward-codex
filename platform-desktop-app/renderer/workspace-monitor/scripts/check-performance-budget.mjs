@@ -7,7 +7,9 @@ const projectRoot = path.resolve(__dirname, "..");
 const chunkDir = path.join(projectRoot, "out", "_next", "static", "chunks");
 const indexHtmlPath = path.join(projectRoot, "out", "index.html");
 const snapshotModulePath = path.join(projectRoot, "lib", "snapshot.ts");
+const developerSnapshotPath = path.join(projectRoot, "src", "generated", "workspace-snapshot.json");
 const maxInitialChunkBytes = 1_000_000;
+const maxSourcePreviewBytes = 220_000;
 
 function main() {
   if (!fs.existsSync(chunkDir)) {
@@ -49,10 +51,33 @@ function main() {
     throw new Error("Static build must use relative _next asset paths for packaged desktop and subpath contexts.");
   }
 
+  if (fs.existsSync(developerSnapshotPath)) {
+    const developerSnapshot = JSON.parse(fs.readFileSync(developerSnapshotPath, "utf8"));
+    const sourceFiles = Array.isArray(developerSnapshot.sourceFiles) ? developerSnapshot.sourceFiles : [];
+    const filesWithInlineContent = sourceFiles.filter((file) => typeof file.content === "string");
+    if (filesWithInlineContent.length > 0) {
+      throw new Error(
+        `Developer snapshot must not inline source file content. Found ${filesWithInlineContent.length} sourceFiles[].content entries.`
+      );
+    }
+    const previewBytes = sourceFiles.reduce((total, file) => {
+      if (typeof file.preview === "string") {
+        return total + Buffer.byteLength(file.preview, "utf8");
+      }
+      return total;
+    }, 0);
+    if (previewBytes > maxSourcePreviewBytes) {
+      throw new Error(
+        `Developer snapshot source previews are ${previewBytes} bytes, over the ${maxSourcePreviewBytes} byte budget.`
+      );
+    }
+  }
+
   const report = {
     status: "within_budget",
     staticAssetPaths: "relative",
     maxInitialChunkBytes,
+    maxSourcePreviewBytes,
     largestChunk: largest,
     chunkCount: chunks.length
   };

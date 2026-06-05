@@ -1,0 +1,35 @@
+{
+  "date": "2026-06-06",
+  "request_id": "2026-06-06-structure-performance-migration",
+  "status": "bounded",
+  "source_inventory": {
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx": "13314 lines, main React state/render surface",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css": "16729 lines, global style surface",
+    "platform-desktop-app/src-tauri/src/lib.rs": "9510 lines, main Rust command surface",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json": "developer snapshot payload"
+  },
+  "excluded_this_slice": [
+    "Full MonitorShell component decomposition",
+    "Full globals.css stylesheet decomposition",
+    "Rust lib.rs module split",
+    "New persistent index database"
+  ],
+  "selected_slice": {
+    "id": "source-payload-and-editor-input-hot-path",
+    "touch_paths": [
+      "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+      "platform-desktop-app/renderer/workspace-monitor/scripts/check-performance-budget.mjs",
+      "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+      "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+      "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs",
+      "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+    ],
+    "reason": "This slice directly reduces WebView JSON memory and source editor input rerender pressure without destabilizing all app surfaces."
+  },
+  "merge_gates": [
+    "workspace-monitor test/check",
+    "platform-desktop-app test/check",
+    "package:internal",
+    "git diff --check"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "date": "2026-06-06",
+  "request_id": "2026-06-06-structure-performance-migration",
+  "selected_work_mode": "ship_first",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request asks for a broad structure/performance review followed by implementation. The safe path is ship-first bounded migration after web-first research and local measurement.",
+  "gates": [
+    "web_first_intake",
+    "large_scope_decomposition",
+    "performance_hot_path_measurement",
+    "resource_check",
+    "omission_check",
+    "internal_package_build"
+  ]
+}

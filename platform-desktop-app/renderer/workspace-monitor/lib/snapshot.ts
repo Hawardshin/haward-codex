@@ -188,7 +188,8 @@ export type WorkspaceSourceFile = {
   lineCount: number;
   updatedAt: string;
   truncated: boolean;
-  content: string;
+  preview?: string;
+  previewBytes?: number;
 };
 
 export type WorkspaceHistoryDocument = Omit<WorkspaceDocument, "html" | "historyYear" | "workspaceArea">;

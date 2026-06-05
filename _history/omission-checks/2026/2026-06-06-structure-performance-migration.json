@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-06",
+  "request_id": "2026-06-06-structure-performance-migration",
+  "status": "passed",
+  "checked_items": [
+    {
+      "item": "Cold structural assessment",
+      "status": "covered",
+      "evidence": "Requirements/spec records identify MonitorShell, globals.css, lib.rs, snapshot payload, and editor state churn as structural risks."
+    },
+    {
+      "item": "Migration plan",
+      "status": "covered",
+      "evidence": "Spec and large-scope decomposition records define selected slice and deferred larger migrations."
+    },
+    {
+      "item": "Implementation",
+      "status": "covered",
+      "evidence": "Source snapshot content removal, preview budget, Monaco throttled sync implemented."
+    },
+    {
+      "item": "Build after implementation",
+      "status": "covered",
+      "evidence": "package:internal passed with app/DMG build, codesign verify, and hdiutil verify."
+    }
+  ],
+  "open_gaps": [
+    "MonitorShell, globals.css, and src-tauri/lib.rs still need domain decomposition in later slices."
+  ]
+}

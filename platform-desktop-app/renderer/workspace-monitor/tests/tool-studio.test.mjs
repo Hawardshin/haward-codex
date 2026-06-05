@@ -363,6 +363,9 @@ test("Desktop source workbench prepares native OS workspace resources", () => {
   assert.match(monitorShell, /const \[workspaceResourceReport, setWorkspaceResourceReport\] = useState<WorkspaceResourcePrepareReport \| null>\(null\)/);
   assert.match(monitorShell, /const \[workspaceWarmupReport, setWorkspaceWarmupReport\] = useState<WorkspaceResourceWarmupReport \| null>\(null\)/);
   assert.match(monitorShell, /const workspaceWarmupPollRef = useRef<number \| null>\(null\)/);
+  assert.match(monitorShell, /const SOURCE_DRAFT_UI_SYNC_MS = 180/);
+  assert.match(monitorShell, /const sourceDraftRef = useRef\(""\)/);
+  assert.match(monitorShell, /const sourceDraftSyncTimerRef = useRef<number \| null>\(null\)/);
   assert.match(monitorShell, /const \[workspaceResourceBusy, setWorkspaceResourceBusy\] = useState\(false\)/);
   assert.match(monitorShell, /const warmWorkspaceOsResources = async/);
   assert.match(monitorShell, /"warm_workspace_os_resources"/);
@@ -396,6 +399,12 @@ test("Desktop source workbench prepares native OS workspace resources", () => {
   assert.match(tauriLib, /MAX_WORKSPACE_PRELOAD_WORKERS/);
   assert.match(tauriLib, /build_workspace_thread_pool/);
   assert.match(tauriLib, /selected[\s\S]*?par_iter\(\)[\s\S]*?filter_map\(read_workspace_preload_candidate\)/);
+  assert.match(monitorShell, /onChange=\{\(value\) => updateSourceDraft\(value \?\? "", \{ immediate: false \}\)\}/);
+  assert.match(monitorShell, /currentEditorDraftContent\(\)/);
+  assert.match(monitorShell, /effectiveSourceDrafts\(\)/);
+  assert.match(collector, /MAX_SOURCE_PREVIEW_CHARS = 1200/);
+  assert.match(collector, /previewBytes: Buffer\.byteLength\(preview, "utf8"\)/);
+  assert.doesNotMatch(collector, /content: preview/);
 });
 
 test("Workspace monitor sidebar and source editor defaults avoid clipped editing controls", () => {
