@@ -68,6 +68,7 @@
 - 의미 있는 작업은 `_tools/work-timer/` 기준에 따라 `_history/work-timings/YYYY/`에 단계별 소요시간을 기록하고, 가장 오래 걸린 phase와 병목 후보를 확인할 수 있게 한다.
 - `ship_first` 모드에서 비차단 개선을 뒤로 미루면 `_ops/backlog/deferred-improvements.ko.md`나 해당 프로젝트의 동등 백로그에 기록하고 평가 입력에 `deferred_improvement_targets`를 포함한다.
 - 요청 범위가 너무 크거나, 후보 파일이 너무 많거나, 여러 프로젝트를 넘나들거나, “전체를 보고/모든 것 개선”처럼 넓거나, 유용한 컨텍스트를 초과할 위험이 있으면 구현이나 병렬 실행 전에 `large-scope-decomposer-agent`, `agent-platform/configs/planning/large-scope-decomposition-profile.json`, `_ops/workflows/76-large-scope-decomposition.md`를 사용한다.
+- 범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다. 넓은 범위는 두려워할 대상이 아니라 분해, 순서화, 검증, rollback 경계의 문제로 다루며, bounded slice, 병렬 lane, merge gate를 통해 실제 사용자 목표가 처리될 때까지 진행한다.
 - 큰 범위 작업은 source inventory, 제외 기준, 대표 샘플, slice ID, `touch_paths`, 의존성, 산출물, merge gate, 검증, context budget, source provenance, plan evidence를 남겨야 한다. 기본적으로 모든 파일을 읽거나 큰 소스 묶음을 프롬프트에 넣지 말고, map/search/dependency graph/index/sampling/targeted verification으로 줄인다.
 - 작업 속도가 문제되거나 여러 lane으로 나눌 수 있으면 `parallel-work-planner-agent`로 의존성, `touch_paths`, 충돌 제어, coordination target, merge 전략을 먼저 확인한다.
 - 같은 파일, 설정, 생성 맵, git 상태 같은 공유 자원을 건드리는 작업은 명시적 dependency, lock, branch/worktree 규칙 없이 병렬 실행하지 않는다.

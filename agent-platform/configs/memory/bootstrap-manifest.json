@@ -93,9 +93,10 @@
         "single-primary-feature full-screen UI layout principle",
         "single-purpose UI controls and panels for cognitive load control",
         "depth-first tab and drill-down navigation rule",
+        "wide-scope work should not be avoided or prematurely shrunk only because it is wide",
         "post-implementation automatic build or package verification rule"
       ],
-      "last_checked": "2026-06-05"
+      "last_checked": "2026-06-06"
     },
     {
       "id": "docs_registry",
@@ -1199,8 +1200,8 @@
     },
     {
       "id": "large_scope_decomposition_must_precede_execution",
-      "rule": "When a request is too broad, file-heavy, spans many projects, asks to review or improve everything, or creates context pressure, use the large-scope decomposition profile before implementation or parallel work planning.",
-      "reason": "The user explicitly asked for a smarter way to split work when scope is too large or there are too many source files.",
+      "rule": "When a request is too broad, file-heavy, spans many projects, asks to review or improve everything, or creates context pressure, use the large-scope decomposition profile before implementation or parallel work planning. Do not avoid or prematurely shrink work only because the scope is wide; treat wide scope as a decomposition, sequencing, validation, and rollback-boundary problem.",
+      "reason": "The user explicitly asked for a smarter way to split work when scope is too large or there are too many source files, and later clarified not to be afraid of wide scope.",
       "applies_to": [
         "startup_sequence",
         "required_anchor_ids",
