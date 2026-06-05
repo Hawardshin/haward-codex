@@ -1,0 +1,19 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "text-wrapping-contract",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "resource": "static_http_server",
+      "risk": "Long-running process left open after Browser smoke.",
+      "control": "Record server PID/session and stop it after screenshots."
+    },
+    {
+      "resource": "browser_tab",
+      "risk": "Browser automation state can drift between validations.",
+      "control": "Use one local URL and read computed style/overflow only after load."
+    }
+  ],
+  "status": "completed",
+  "result": "Static server was stopped after Browser and screenshot smoke; no long-running validation process intentionally left open."
+}

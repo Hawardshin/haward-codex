@@ -67,6 +67,7 @@
 | REQ-WM-066 | Default desktop product buttons shall use a library-backed shared Button primitive instead of ad hoc CSS combinations, unifying variants, sizes, icon-only controls, `asChild`, loading/disabled states, and representative primary actions in the titlebar, task handoff, and Tool Studio surfaces. | must | Radix Slot/CVA dependency audit, Button component static test, representative action import/use test, desktop/mobile Browser smoke, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-067 | Repeated desktop product action groups shall not recreate ad hoc flex/div structures on each screen. They shall use a shared ActionGroup primitive for alignment, spacing, wrapping, role, and density, and representative titlebar, task handoff, command palette, and Tool Studio action groups shall use that structure. | must | ActionGroup static test, representative action group Browser smoke, desktop/mobile overflow assertion, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-068 | Tool Studio depth and detail functions shall not be expanded all at once. They shall use IntelliJ-style action access: users can reach the same functions through the primary dropdown, an `Alt+Enter` quick action menu, right-click context menus on parent flows/detail modes, `Alt+1/2`, `Alt+←/→`, and existing mode shortcuts. Left-click shall directly select; right-click shall open context actions for the current location. | must | Tool Studio action access static test, Radix dropdown/context menu Browser smoke, keyboard shortcut smoke, desktop/mobile overflow assertion, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
+| REQ-WM-069 | Prose text, button/control labels, and long tokens such as paths, commands, and code shall follow a shared text-wrapping contract. Korean and mixed Korean/English prose shall avoid awkward character-by-character breaks through keep-all/natural wrapping, long tokens shall use anywhere-style overflow wrapping so they do not push the layout, and button labels shall not exceed parent width. | must | Text wrapping static test, desktop/mobile Browser smoke, long-token overflow audit, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
 
 ## Scope
 
@@ -117,6 +118,7 @@
 - Radix Slot/CVA shared Button primitive and representative default action-button migration
 - Shared ActionGroup primitive alignment, spacing, wrapping, role, and density for repeated action clusters
 - Tool Studio detail access through primary dropdown, quick action menu, right-click context menu, and keyboard shortcuts
+- Shared wrapping contract for prose, button/control labels, and long path/command/code tokens
 - Vercel deployment docs
 
 ## Non-Goals

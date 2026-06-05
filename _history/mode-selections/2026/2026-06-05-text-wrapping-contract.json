@@ -1,0 +1,11 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "text-wrapping-contract",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "Workspace Monitor frontend implementation and durable UI contract changes with requirements, specs, tests, browser validation, and commit/push; no new package installation required.",
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-text-wrapping-contract.json"
+  ]
+}

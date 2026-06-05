@@ -1,0 +1,54 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "text-wrapping-contract",
+  "requirements": [
+    "REQ-WM-069"
+  ],
+  "implementation_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/tests/font-loading.test.mjs"
+  ],
+  "validation_commands": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor exec tsc --noEmit",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter workspace-monitor run perf:budget"
+  ],
+  "browser_validation": {
+    "in_app_browser": {
+      "url": "http://127.0.0.1:3360/#section-tools",
+      "body_overflow_x": 0,
+      "root_overflow_x": 0,
+      "root_line_break": "strict",
+      "prose_word_break": "keep-all",
+      "token_overflow_wrap": "anywhere",
+      "button_child_max_width": "100%"
+    },
+    "playwright_static_export": [
+      {
+        "viewport": "1440x1000",
+        "body_overflow_x": 0,
+        "root_overflow_x": 0
+      },
+      {
+        "viewport": "390x844",
+        "body_overflow_x": 0,
+        "root_overflow_x": 0
+      }
+    ]
+  },
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-05-text-wrapping-contract.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-05-text-wrapping-contract.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-text-wrapping-contract.json"
+  ]
+}

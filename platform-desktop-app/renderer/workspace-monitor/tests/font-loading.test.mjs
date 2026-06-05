@@ -56,3 +56,24 @@ test("base typography keeps readable body text defaults", () => {
   assert.match(css, /-moz-osx-font-smoothing: grayscale;/);
   assert.doesNotMatch(css, /letter-spacing:\s*-/);
 });
+
+test("text wrapping contract separates prose, controls, and long tokens", () => {
+  assert.match(css, /--text-measure: 68ch;/);
+  assert.match(css, /\.desktop-app-root \{[\s\S]*?line-break: strict;/);
+  assert.match(
+    css,
+    /\.desktop-app-root :where\(h1, h2, h3, h4, h5, h6, p, li, dd, blockquote, figcaption\) \{[\s\S]*?overflow-wrap: var\(--text-natural-wrap\);[\s\S]*?word-break: keep-all;/
+  );
+  assert.match(
+    css,
+    /\.desktop-app-root :where\(p, li, dd, blockquote, figcaption\) \{[\s\S]*?max-width: min\(100%, var\(--text-measure\)\);[\s\S]*?text-wrap: pretty;/
+  );
+  assert.match(
+    css,
+    /\.desktop-app-root :where\(code, kbd, samp, \.path\) \{[\s\S]*?overflow-wrap: var\(--text-long-token-wrap\);[\s\S]*?word-break: normal;/
+  );
+  assert.match(
+    css,
+    /\.desktop-app-root button > span,[\s\S]*?\.desktop-app-root button > small \{[\s\S]*?max-width: 100%;[\s\S]*?word-break: keep-all;/
+  );
+});

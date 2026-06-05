@@ -93,6 +93,7 @@
   --font-size-work-title: 1.75rem;
   --line-height-tight: 1.18;
   --line-height-copy: 1.55;
+  --text-measure: 68ch;
   --font-weight-label: 820;
   --font-weight-strong: 880;
   --font-family-sans:
@@ -382,6 +383,31 @@ select {
   line-height: 1.35;
 }
 
+.desktop-app-root {
+  line-break: strict;
+}
+
+.desktop-app-root :where(h1, h2, h3, h4, h5, h6, p, li, dd, blockquote, figcaption) {
+  min-width: 0;
+  overflow-wrap: var(--text-natural-wrap);
+  word-break: keep-all;
+}
+
+.desktop-app-root :where(p, li, dd, blockquote, figcaption) {
+  max-width: min(100%, var(--text-measure));
+  text-wrap: pretty;
+}
+
+.desktop-app-root :where(span, strong, small, em, label, summary, dt) {
+  min-width: 0;
+}
+
+.desktop-app-root :where(code, kbd, samp, .path) {
+  min-width: 0;
+  overflow-wrap: var(--text-long-token-wrap);
+  word-break: normal;
+}
+
 button {
   max-width: 100%;
   min-width: var(--control-target-size);
@@ -408,6 +434,7 @@ button:disabled {
 .desktop-app-root button > strong,
 .desktop-app-root button > small {
   min-width: 0;
+  max-width: 100%;
   overflow-wrap: var(--text-natural-wrap);
   word-break: keep-all;
 }
