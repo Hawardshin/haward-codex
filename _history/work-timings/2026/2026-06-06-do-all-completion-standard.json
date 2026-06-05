@@ -1,0 +1,69 @@
+{
+  "schema_version": "2026-06-01",
+  "task_id": "2026-06-06-do-all-completion-standard",
+  "title": "Persist do-all completion standard",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "started_at": null,
+  "ended_at": "2026-06-06T07:33:21+0900",
+  "measurement_note": "Timing record was created after the task began, so phases are recorded as completed but not measured.",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Searched completion and definition-of-done references before changing durable rules."
+    },
+    {
+      "phase_id": "memory_bootstrap",
+      "label": "Memory bootstrap update",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Updated the memory bootstrap manifest so the do-all standard remains discoverable."
+    },
+    {
+      "phase_id": "mode_boundary_planning",
+      "label": "Mode, boundary, and plan",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Classified the work as governance because it changes durable cross-workspace behavior."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Updated AGENTS.md, persistent instructions, omission workflow, and memory bootstrap config."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Ran docs audit, config contract, JSON parse, git diff check, and memory bootstrap check."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and close-out records",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Recorded request summary, web search, request trace, work summary, omission check, and evaluation."
+    },
+    {
+      "phase_id": "commit_push",
+      "label": "Commit and push",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Covered by the current close-out commit and push gate."
+    }
+  ],
+  "bottleneck_analysis": {
+    "current_candidate": "verification",
+    "interpretation": "No exact timings were measured. Verification had the most tool surface because the change touched docs, workflow text, JSON config, and memory bootstrap readiness.",
+    "improvement_candidates": [
+      "Use a small helper for durable-instruction changes that creates mode, timing, omission, evaluation, and trace records together.",
+      "Keep memory bootstrap validation in the same close-out gate whenever persistent behavior changes."
+    ]
+  }
+}

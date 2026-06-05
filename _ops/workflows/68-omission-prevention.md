@@ -9,7 +9,7 @@
 1. Confirm the selected `work_mode`.
 2. If the mode is `quick`, decide whether omission risk is low enough to treat this as advisory.
 3. For non-`quick` work, create an omission check JSON under `_history/evaluations/YYYY/` or the owning project history folder.
-4. Fill `expected_items` from the user request summary, requirements, spec tasks, plan, and acceptance criteria.
+4. Fill `expected_items` from the user request summary, requirements, spec tasks, plan, and acceptance criteria. If the user says “다하기”, “전부”, “모두”, “do all”, or equivalent, expand this into every applicable requested outcome, artifact, validation, build/package step, record, commit, and push.
 5. Fill `artifact_checks` for files, folders, generated artifacts, dashboards, or reports that must exist.
 6. Fill `acceptance_checks` for tests, audits, config checks, manual reviews, browser checks, or grounding checks that define completion.
 7. Run `PYTHONPATH=src python3 -m agent_platform.cli check-omissions <input.json>` from `agent-platform/`.
@@ -25,3 +25,4 @@
 ## Rule
 
 Do not use this workflow as a long narrative checklist. Keep each item short, evidence-linked, and auditable.
+Do not close a “do all” request as complete with only a partial subset covered. If a concrete blocker prevents one part, isolate that part, record the blocker, and include the continuation path.

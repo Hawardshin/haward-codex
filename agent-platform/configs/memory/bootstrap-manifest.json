@@ -39,6 +39,7 @@
       "The web search record layer or prompt-level search contract changes.",
       "The work mode selection or deferred improvement policy changes.",
       "The omission prevention workflow, omission guard agent, or omission_check_targets contract changes.",
+      "The do-all completion standard, acceptance coverage rule, or partial-closeout blocker policy changes.",
       "The resource leak prevention workflow, resource guard agent, or resource_check_targets contract changes.",
       "The work timing, bottleneck visibility, or timing_summary_targets contract changes.",
       "The parallel work planning workflow, planner agent, research merge gate, or coordination lane contract changes.",
@@ -94,6 +95,7 @@
         "single-purpose UI controls and panels for cognitive load control",
         "depth-first tab and drill-down navigation rule",
         "wide-scope work should not be avoided or prematurely shrunk only because it is wide",
+        "do-all requests must cover every applicable requirement, artifact, validation, build, record, commit, and push step",
         "post-implementation automatic build or package verification rule"
       ],
       "last_checked": "2026-06-06"
@@ -1120,8 +1122,8 @@
     },
     {
       "id": "omission_prevention_must_stay_discoverable",
-      "rule": "The omission prevention workflow must remain a warm memory anchor so future sessions assume agents can miss required items and run coverage checks before non-quick close-out.",
-      "reason": "The user explicitly noted that something can be missed, so omission coverage must be enforceable instead of relying on memory.",
+      "rule": "The omission prevention workflow must remain a warm memory anchor so future sessions assume agents can miss required items and run coverage checks before non-quick close-out. When the user asks to do all of it, the check must cover every applicable requested outcome, artifact, validation, build/package step, record, commit, and push before close-out.",
+      "reason": "The user explicitly noted that something can be missed and later instructed to do all of it, so omission coverage must be enforceable instead of relying on memory.",
       "applies_to": [
         "startup_sequence",
         "required_anchor_ids",
@@ -1694,7 +1696,7 @@
       "id": "omission_prevention_workflow",
       "path": "_ops/workflows/68-omission-prevention.md",
       "tier": "warm",
-      "purpose": "Close-out workflow for proving required instructions, requirements, artifacts, and acceptance checks were not silently missed.",
+      "purpose": "Close-out workflow for proving required instructions, requirements, artifacts, acceptance checks, do-all completion items, build/package gates, records, commit, and push were not silently missed.",
       "required": true,
       "load_order": 9
     },

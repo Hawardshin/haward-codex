@@ -1,0 +1,43 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-do-all-completion-standard",
+  "status": "complete",
+  "expected_items": [
+    {
+      "item": "Persist the user's do-all instruction",
+      "status": "covered",
+      "evidence": "AGENTS.md and persistent-instructions files updated"
+    },
+    {
+      "item": "Make omission prevention expand do-all requests",
+      "status": "covered",
+      "evidence": "_ops/workflows/68-omission-prevention.md updated"
+    },
+    {
+      "item": "Update memory bootstrap for durable rule change",
+      "status": "covered",
+      "evidence": "agent-platform/configs/memory/bootstrap-manifest.json updated"
+    },
+    {
+      "item": "Record selected work mode",
+      "status": "covered",
+      "evidence": "_history/mode-selections/2026/2026-06-06-do-all-completion-standard.json records governance mode"
+    },
+    {
+      "item": "Record phase-level work timing",
+      "status": "covered",
+      "evidence": "_history/work-timings/2026/2026-06-06-do-all-completion-standard.json records partial timing"
+    },
+    {
+      "item": "Run required checks",
+      "status": "covered",
+      "evidence": "docs audit, config contract, JSON parse, git diff check, memory bootstrap check, and timing check passed"
+    },
+    {
+      "item": "Commit and push",
+      "status": "covered",
+      "evidence": "covered by the current close-out git commit and push gate"
+    }
+  ],
+  "blocked_items": []
+}
