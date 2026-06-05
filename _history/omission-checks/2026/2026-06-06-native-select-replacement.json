@@ -1,0 +1,24 @@
+{
+  "date": "2026-06-06",
+  "slug": "native-select-replacement",
+  "request_coverage": [
+    {
+      "request": "Improve the default-looking dropdown/button shown in the screenshot.",
+      "status": "covered",
+      "evidence": "Native select controls were removed from MonitorShell and replaced with styled app choices."
+    },
+    {
+      "request": "Do not leave default selection dropdowns.",
+      "status": "covered",
+      "evidence": "Static test asserts no `<select\\b` remains in MonitorShell."
+    },
+    {
+      "request": "Build automatically after implementation.",
+      "status": "covered",
+      "evidence": "`corepack pnpm --dir platform-desktop-app run package:internal` passed."
+    }
+  ],
+  "known_limits": [
+    "In-app Browser could not pass Loading workspace snapshot, so visual smoke was partial."
+  ]
+}

@@ -1,17 +1,17 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-05T16:22:01.518Z",
+  "generatedAt": "2026-06-05T16:34:19.490Z",
   "summary": {
-    "documents": 2306,
+    "documents": 2313,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 942
+        "count": 944
       },
       {
         "category": "web-search",
-        "count": 371
+        "count": 372
       },
       {
         "category": "plan",
@@ -19,19 +19,19 @@
       },
       {
         "category": "request-trace",
-        "count": 300
+        "count": 301
       },
       {
         "category": "work-timing",
-        "count": 222
+        "count": 223
       },
       {
         "category": "user-request",
-        "count": 84
+        "count": 85
       },
       {
         "category": "work-summary",
-        "count": 51
+        "count": 52
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6117288,
+    "totalSourceBytes": 6125497,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,118 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-06-native-select-replacement-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-native-select-replacement-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Native Select Replacement Evaluation Input",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"slug\": \"native select replacement\", \"project\": \"platform desktop app\", \"installation occurred\": false, \"resource risk occurred\": true, \"cli pipeline occurred\": false, \"changed files\": \"platform desktop app/renderer/workspace monitor/components/MonitorShel",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;slug&quot;: &quot;native select replacement&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;installation occurred&quot;: false, &quot;resource risk occurred&quot;: true, &quot;cli pipeline occurred&quot;: false, &quot;changed files&quot;: &quot;platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx&quot;, &quot;platform desktop app/renderer/workspace monitor/app/globals.css&quot;, &quot;plat</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1778,
+      "updatedAt": "2026-06-05T16:34:12.479Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-native-select-replacement-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-native-select-replacement.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: Native Select 교체",
+      "excerpt": "평가: Native Select 교체 날짜: 2026 06 06 결론 요청은 충족됐다. OS 기본 드롭다운을 유발하는 native <select 를 Workspace Monitor 컴포넌트에서 제거했고, 앱 스타일 선택 메뉴와 버튼 그룹으로 교체했다. 검증 workspace monitor 테스트 59개 통과. workspace monitor 타입/스크롤/소스 컨트롤/히스토리 payload 체크 통과. platform desktop app 테스트 22개 통과. platform desktop app ",
+      "html": "<p>평가: Native Select 교체 날짜: 2026 06 06 결론 요청은 충족됐다. OS 기본 드롭다운을 유발하는 native &lt;select 를 Workspace Monitor 컴포넌트에서 제거했고, 앱 스타일 선택 메뉴와 버튼 그룹으로 교체했다. 검증 workspace monitor 테스트 59개 통과. workspace monitor 타입/스크롤/소스 컨트롤/히스토리 payload 체크 통과. platform desktop app 테스트 22개 통과. platform desktop app 내부 readiness 체크 통과. package:internal 통과. .app 과 .dmg 산출물 생성 및 DMG verification 통</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1274,
+      "updatedAt": "2026-06-05T16:34:12.479Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-native-select-replacement-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-native-select-replacement.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Native Select 교체",
+      "excerpt": "Request Trace: Native Select 교체 날짜: 2026 06 06 요청 OS 기본 드롭다운처럼 보이는 선택 버튼이 앱과 어울리지 않으므로 개선. 결과 native <select 제거. 앱 스타일 메뉴/버튼 선택지 도입. 재발 방지 테스트 추가. 내부 패키징 빌드 완료. 주요 산출물 platform desktop app/docs/requirements/2026 06 06 native select replacement.ko.md platform desktop app/specs/202",
+      "html": "<p>Request Trace: Native Select 교체 날짜: 2026 06 06 요청 OS 기본 드롭다운처럼 보이는 선택 버튼이 앱과 어울리지 않으므로 개선. 결과 native &lt;select 제거. 앱 스타일 메뉴/버튼 선택지 도입. 재발 방지 테스트 추가. 내부 패키징 빌드 완료. 주요 산출물 platform desktop app/docs/requirements/2026 06 06 native select replacement.ko.md platform desktop app/specs/2026 06 06 native select replacement/spec.ko.md platform desktop app/specs/2026 06 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1202,
+      "updatedAt": "2026-06-05T16:34:12.479Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-native-select-replacement-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-native-select-replacement.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Native Select 교체",
+      "excerpt": "작업 요약: Native Select 교체 날짜: 2026 06 06 프로젝트: platform desktop app 완료 Workspace Monitor의 남은 native <select 를 제거했다. 문서 필터와 기록 필터를 앱 스타일 Radix 메뉴로 교체했다. Learning Loop 처리/자산 유형과 Decision Inbox 답변 유형을 앱 스타일 버튼 선택지로 교체했다. 공통 AppChoiceMenu , AppChoiceButtonGroup 을 추가했다. 선택/hover/active ",
+      "html": "<p>작업 요약: Native Select 교체 날짜: 2026 06 06 프로젝트: platform desktop app 완료 Workspace Monitor의 남은 native &lt;select 를 제거했다. 문서 필터와 기록 필터를 앱 스타일 Radix 메뉴로 교체했다. Learning Loop 처리/자산 유형과 Decision Inbox 답변 유형을 앱 스타일 버튼 선택지로 교체했다. 공통 AppChoiceMenu , AppChoiceButtonGroup 을 추가했다. 선택/hover/active 상태 음영을 CSS 토큰 기반으로 추가했다. &lt;select 재발 방지 테스트를 추가했다. 검증 workspace monitor test/chec</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 849,
+      "updatedAt": "2026-06-05T16:34:12.478Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-native-select-replacement-json",
+      "path": "_history/work-timings/2026/2026-06-06-native-select-replacement.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Native Select Replacement",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"slug\": \"native select replacement\", \"phases\": { \"phase\": \"web first intake\", \"approx minutes\": 3 }, { \"phase\": \"source inspection\", \"approx minutes\": 8 }, { \"phase\": \"implementation\", \"approx minutes\": 20 }, { \"phase\": \"renderer validation\", \"approx minut",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;slug&quot;: &quot;native select replacement&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;approx minutes&quot;: 3 }, { &quot;phase&quot;: &quot;source inspection&quot;, &quot;approx minutes&quot;: 8 }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;approx minutes&quot;: 20 }, { &quot;phase&quot;: &quot;renderer validation&quot;, &quot;approx minutes&quot;: 6 }, { &quot;phase&quot;: &quot;browser smoke&quot;, &quot;approx minutes&quot;: 5 }, { &quot;phase&quot;: &quot;desktop</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 772,
+      "updatedAt": "2026-06-05T16:34:12.478Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-native-select-replacement-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-native-select-replacement.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Native Select 교체",
+      "excerpt": "사용자 요청 요약: Native Select 교체 날짜: 2026 06 06 요약 사용자는 macOS 기본 드롭다운처럼 보이는 선택 버튼이 앱 UI와 맞지 않고 예쁘지 않다고 지적했다. Provider 선택처럼 보이는 OS 기본 팝업을 포함해, 기본 버튼/드롭다운 느낌을 제거하고 앱 스타일 선택 컨트롤로 개선하기를 요구했다. 수용 기준 native <select 팝업을 주요 화면에서 제거한다. 선택지는 사용자가 바로 이해할 수 있는 버튼 또는 앱 스타일 메뉴로 제공한다. 버튼은 음영, 선택 상태,",
+      "html": "<p>사용자 요청 요약: Native Select 교체 날짜: 2026 06 06 요약 사용자는 macOS 기본 드롭다운처럼 보이는 선택 버튼이 앱 UI와 맞지 않고 예쁘지 않다고 지적했다. Provider 선택처럼 보이는 OS 기본 팝업을 포함해, 기본 버튼/드롭다운 느낌을 제거하고 앱 스타일 선택 컨트롤로 개선하기를 요구했다. 수용 기준 native &lt;select 팝업을 주요 화면에서 제거한다. 선택지는 사용자가 바로 이해할 수 있는 버튼 또는 앱 스타일 메뉴로 제공한다. 버튼은 음영, 선택 상태, hover 상태가 구분되어야 한다. 구현 후 테스트와 내부 빌드까지 자동 실행한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 720,
+      "updatedAt": "2026-06-05T16:34:12.477Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-native-select-replacement-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-native-select-replacement.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Native Select 교체",
+      "excerpt": "Web Search: Native Select 교체 날짜: 2026 06 06 Queries WAI ARIA listbox pattern select replacement accessibility official MDN select element styling limitations native dropdown Apple Human Interface Guidelines pop up buttons menus macOS design Material Design menus selection control",
+      "html": "<p>Web Search: Native Select 교체 날짜: 2026 06 06 Queries WAI ARIA listbox pattern select replacement accessibility official MDN select element styling limitations native dropdown Apple Human Interface Guidelines pop up buttons menus macOS design Material Design menus selection controls dropdown official 확인한 출처 W3C WAI ARIA APG Listbox Pattern: https://www.w3.org/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1614,
+      "updatedAt": "2026-06-05T16:34:12.477Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-06-button-tonal-hierarchy-ko-md",
       "path": "_history/evaluations/2026/2026-06-06-button-tonal-hierarchy.ko.md",
@@ -36963,31 +37075,31 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 34,
+      "documentsCount": 41,
       "categories": [
         {
           "category": "evaluation",
-          "count": 9
+          "count": 11
         },
         {
           "category": "request-trace",
-          "count": 5
+          "count": 6
         },
         {
           "category": "user-request",
-          "count": 5
+          "count": 6
         },
         {
           "category": "web-search",
-          "count": 5
+          "count": 6
         },
         {
           "category": "work-summary",
-          "count": 5
+          "count": 6
         },
         {
           "category": "work-timing",
-          "count": 5
+          "count": 6
         }
       ],
       "documents": []

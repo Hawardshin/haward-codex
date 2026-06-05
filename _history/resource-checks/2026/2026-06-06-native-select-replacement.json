@@ -1,0 +1,28 @@
+{
+  "date": "2026-06-06",
+  "slug": "native-select-replacement",
+  "resource_risk_occurred": true,
+  "resources_touched": [
+    "Next.js dev server",
+    "in-app Browser tab",
+    "Tauri internal package build"
+  ],
+  "checks": [
+    {
+      "resource": "Next.js dev server",
+      "status": "stopped",
+      "evidence": "The dev server session on port 3210 was terminated after Browser smoke."
+    },
+    {
+      "resource": "in-app Browser tab",
+      "status": "closed",
+      "evidence": "The temporary Browser tab was closed after DOM check."
+    },
+    {
+      "resource": "package build process",
+      "status": "completed",
+      "evidence": "package:internal completed and produced app and DMG artifacts."
+    }
+  ],
+  "notes": "Browser content stayed on Loading workspace snapshot, so visual body verification was limited."
+}

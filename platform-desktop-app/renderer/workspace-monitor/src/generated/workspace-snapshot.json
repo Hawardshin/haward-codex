@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T16:22:01.516Z",
+  "generatedAt": "2026-06-05T16:34:19.488Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -12,12 +12,12 @@
     "tasks": 71,
     "completedTasks": 71,
     "documents": 650,
-    "requirements": 444,
-    "evaluations": 23,
+    "requirements": 448,
+    "evaluations": 24,
     "webSearches": 14,
     "timingRecords": 13,
     "historyDays": 2,
-    "adminHistoryDocuments": 2306,
+    "adminHistoryDocuments": 2313,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7328,9 +7328,241 @@
       "requirement": "설정 화면은 Ollama를 API key 입력 폼이 아니라 keyless 로컬 런타임으로 표시하고 설치/문서/endpoint 상태를 보여줘야 한다.",
       "priority": "must",
       "sourcePath": "platform-desktop-app/docs/requirements/2026-06-04-provider-direct-agent-work.ko.md"
+    },
+    {
+      "id": "REQ-PDA-122",
+      "requirement": "Workspace Monitor는 사용자가 직접 선택하는 주요 UI에서 OS native <select 팝업을 노출하지 않아야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-native-select-replacement.ko.md"
+    },
+    {
+      "id": "REQ-PDA-123",
+      "requirement": "짧은 선택지는 열린 상태를 요구하지 않는 앱 스타일 버튼 그룹으로 제공하고, 선택/호버/활성 상태가 색상과 음영으로 구분되어야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-native-select-replacement.ko.md"
+    },
+    {
+      "id": "REQ-PDA-124",
+      "requirement": "날짜/카테고리처럼 길어질 수 있는 선택지는 OS native 메뉴 대신 앱 스타일 커스텀 메뉴를 사용해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-native-select-replacement.ko.md"
+    },
+    {
+      "id": "REQ-PDA-125",
+      "requirement": "선택 UI는 접근성 의미를 잃지 않도록 role=\"listbox\" 와 role=\"option\" 또는 Radix menu primitive를 사용해야 한다.",
+      "priority": "should",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-native-select-replacement.ko.md"
     }
   ],
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-06-native-select-replacement-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-native-select-replacement-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Native Select Replacement Evaluation Input",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"slug\": \"native select replacement\", \"project\": \"platform desktop app\", \"installation occurred\": false, \"resource risk occurred\": true, \"cli pipeline occurred\": false, \"changed files\": \"platform desktop app/renderer/workspace monitor/components/MonitorShel",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;slug&quot;: &quot;native select replacement&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;installation occurred&quot;: false, &quot;resource risk occurred&quot;: true, &quot;cli pipeline occurred&quot;: false, &quot;changed files&quot;: &quot;platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx&quot;, &quot;platform desktop app/renderer/workspace monitor/app/globals.css&quot;, &quot;plat</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1778,
+      "updatedAt": "2026-06-05T16:34:12.479Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-native-select-replacement-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-native-select-replacement.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: Native Select 교체",
+      "excerpt": "평가: Native Select 교체 날짜: 2026 06 06 결론 요청은 충족됐다. OS 기본 드롭다운을 유발하는 native <select 를 Workspace Monitor 컴포넌트에서 제거했고, 앱 스타일 선택 메뉴와 버튼 그룹으로 교체했다. 검증 workspace monitor 테스트 59개 통과. workspace monitor 타입/스크롤/소스 컨트롤/히스토리 payload 체크 통과. platform desktop app 테스트 22개 통과. platform desktop app ",
+      "html": "<p>평가: Native Select 교체 날짜: 2026 06 06 결론 요청은 충족됐다. OS 기본 드롭다운을 유발하는 native &lt;select 를 Workspace Monitor 컴포넌트에서 제거했고, 앱 스타일 선택 메뉴와 버튼 그룹으로 교체했다. 검증 workspace monitor 테스트 59개 통과. workspace monitor 타입/스크롤/소스 컨트롤/히스토리 payload 체크 통과. platform desktop app 테스트 22개 통과. platform desktop app 내부 readiness 체크 통과. package:internal 통과. .app 과 .dmg 산출물 생성 및 DMG verification 통</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1274,
+      "updatedAt": "2026-06-05T16:34:12.479Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-native-select-replacement-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-native-select-replacement.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Native Select 교체",
+      "excerpt": "Request Trace: Native Select 교체 날짜: 2026 06 06 요청 OS 기본 드롭다운처럼 보이는 선택 버튼이 앱과 어울리지 않으므로 개선. 결과 native <select 제거. 앱 스타일 메뉴/버튼 선택지 도입. 재발 방지 테스트 추가. 내부 패키징 빌드 완료. 주요 산출물 platform desktop app/docs/requirements/2026 06 06 native select replacement.ko.md platform desktop app/specs/202",
+      "html": "<p>Request Trace: Native Select 교체 날짜: 2026 06 06 요청 OS 기본 드롭다운처럼 보이는 선택 버튼이 앱과 어울리지 않으므로 개선. 결과 native &lt;select 제거. 앱 스타일 메뉴/버튼 선택지 도입. 재발 방지 테스트 추가. 내부 패키징 빌드 완료. 주요 산출물 platform desktop app/docs/requirements/2026 06 06 native select replacement.ko.md platform desktop app/specs/2026 06 06 native select replacement/spec.ko.md platform desktop app/specs/2026 06 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1202,
+      "updatedAt": "2026-06-05T16:34:12.479Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-native-select-replacement-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-native-select-replacement.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Native Select 교체",
+      "excerpt": "작업 요약: Native Select 교체 날짜: 2026 06 06 프로젝트: platform desktop app 완료 Workspace Monitor의 남은 native <select 를 제거했다. 문서 필터와 기록 필터를 앱 스타일 Radix 메뉴로 교체했다. Learning Loop 처리/자산 유형과 Decision Inbox 답변 유형을 앱 스타일 버튼 선택지로 교체했다. 공통 AppChoiceMenu , AppChoiceButtonGroup 을 추가했다. 선택/hover/active ",
+      "html": "<p>작업 요약: Native Select 교체 날짜: 2026 06 06 프로젝트: platform desktop app 완료 Workspace Monitor의 남은 native &lt;select 를 제거했다. 문서 필터와 기록 필터를 앱 스타일 Radix 메뉴로 교체했다. Learning Loop 처리/자산 유형과 Decision Inbox 답변 유형을 앱 스타일 버튼 선택지로 교체했다. 공통 AppChoiceMenu , AppChoiceButtonGroup 을 추가했다. 선택/hover/active 상태 음영을 CSS 토큰 기반으로 추가했다. &lt;select 재발 방지 테스트를 추가했다. 검증 workspace monitor test/chec</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 849,
+      "updatedAt": "2026-06-05T16:34:12.478Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-native-select-replacement-json",
+      "path": "_history/work-timings/2026/2026-06-06-native-select-replacement.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Native Select Replacement",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"slug\": \"native select replacement\", \"phases\": { \"phase\": \"web first intake\", \"approx minutes\": 3 }, { \"phase\": \"source inspection\", \"approx minutes\": 8 }, { \"phase\": \"implementation\", \"approx minutes\": 20 }, { \"phase\": \"renderer validation\", \"approx minut",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;slug&quot;: &quot;native select replacement&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;approx minutes&quot;: 3 }, { &quot;phase&quot;: &quot;source inspection&quot;, &quot;approx minutes&quot;: 8 }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;approx minutes&quot;: 20 }, { &quot;phase&quot;: &quot;renderer validation&quot;, &quot;approx minutes&quot;: 6 }, { &quot;phase&quot;: &quot;browser smoke&quot;, &quot;approx minutes&quot;: 5 }, { &quot;phase&quot;: &quot;desktop</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 772,
+      "updatedAt": "2026-06-05T16:34:12.478Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-native-select-replacement-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-native-select-replacement.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Native Select 교체",
+      "excerpt": "사용자 요청 요약: Native Select 교체 날짜: 2026 06 06 요약 사용자는 macOS 기본 드롭다운처럼 보이는 선택 버튼이 앱 UI와 맞지 않고 예쁘지 않다고 지적했다. Provider 선택처럼 보이는 OS 기본 팝업을 포함해, 기본 버튼/드롭다운 느낌을 제거하고 앱 스타일 선택 컨트롤로 개선하기를 요구했다. 수용 기준 native <select 팝업을 주요 화면에서 제거한다. 선택지는 사용자가 바로 이해할 수 있는 버튼 또는 앱 스타일 메뉴로 제공한다. 버튼은 음영, 선택 상태,",
+      "html": "<p>사용자 요청 요약: Native Select 교체 날짜: 2026 06 06 요약 사용자는 macOS 기본 드롭다운처럼 보이는 선택 버튼이 앱 UI와 맞지 않고 예쁘지 않다고 지적했다. Provider 선택처럼 보이는 OS 기본 팝업을 포함해, 기본 버튼/드롭다운 느낌을 제거하고 앱 스타일 선택 컨트롤로 개선하기를 요구했다. 수용 기준 native &lt;select 팝업을 주요 화면에서 제거한다. 선택지는 사용자가 바로 이해할 수 있는 버튼 또는 앱 스타일 메뉴로 제공한다. 버튼은 음영, 선택 상태, hover 상태가 구분되어야 한다. 구현 후 테스트와 내부 빌드까지 자동 실행한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 720,
+      "updatedAt": "2026-06-05T16:34:12.477Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-native-select-replacement-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-native-select-replacement.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Native Select 교체",
+      "excerpt": "Web Search: Native Select 교체 날짜: 2026 06 06 Queries WAI ARIA listbox pattern select replacement accessibility official MDN select element styling limitations native dropdown Apple Human Interface Guidelines pop up buttons menus macOS design Material Design menus selection control",
+      "html": "<p>Web Search: Native Select 교체 날짜: 2026 06 06 Queries WAI ARIA listbox pattern select replacement accessibility official MDN select element styling limitations native dropdown Apple Human Interface Guidelines pop up buttons menus macOS design Material Design menus selection controls dropdown official 확인한 출처 W3C WAI ARIA APG Listbox Pattern: https://www.w3.org/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1614,
+      "updatedAt": "2026-06-05T16:34:12.477Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-select-replacement-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-select-replacement/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Native Select 교체",
+      "excerpt": "Traceability: Native Select 교체 | 요구사항 | 구현 | 검증 | | | | | | REQ PDA 122 | MonitorShell.tsx 에서 native <select 제거 | assert.doesNotMatch monitorShell, /<select\\\\b/ | | REQ PDA 123 | AppChoiceButtonGroup , .app choice button group | learning action choice grid , decision answer type ",
+      "html": "<h1>Traceability: Native Select 교체</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-122</td><td><code>MonitorShell.tsx</code>에서 native <code>&lt;select&gt;</code> 제거</td><td><code>assert.doesNotMatch(monitorShell, /&lt;select\\\\b/)</code></td></tr><tr><td>REQ-PDA-123</td><td><code>AppChoiceButtonGroup</code>, <code>.app-choice-button-group</code></td><td><code>learning-action-choice-grid</code>, <code>decision-answer-type-choices</code> 테스트</td></tr><tr><td>REQ-PDA-124</td><td><code>AppChoiceMenu</code>, <code>.app-choice-menu-trigger</code></td><td><code>document-filter-choice</code>, <code>history-date-choice</code> 테스트</td></tr><tr><td>REQ-PDA-125</td><td><code>role=&quot;listbox&quot;</code>, <code>role=&quot;option&quot;</code>, Radix <code>DropdownMenu</code></td><td>TypeScript check, renderer tests</td></tr></tbody></table>\n<h2>변경 파일</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 827,
+      "updatedAt": "2026-06-05T16:34:12.477Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-select-replacement-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-select-replacement/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Native Select 교체",
+      "excerpt": "Validation: Native Select 교체 실행 결과 rg n \"<select\\\\b|\\\\.decision answer controls select|\\\\.learning decision controls select|\\\\.agent provider run controls select|\\\\.agent chat composer select\" ... : source component에는 native select 없음. 테스트 파일의 재발 방지 assertion만 매칭. corepack pnpm d",
+      "html": "<h1>Validation: Native Select 교체</h1>\n<h2>실행 결과</h2>\n<ul>\n<li><code>rg -n &quot;&lt;select\\\\b|\\\\.decision-answer-controls select|\\\\.learning-decision-controls select|\\\\.agent-provider-run-controls select|\\\\.agent-chat-composer select&quot; ...</code>: source component에는 native select 없음. 테스트 파일의 재발 방지 assertion만 매칭.</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code>: passed, 59 tests.</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>: passed.</li>\n<li><code>corepack pnpm --dir platform-desktop-app test</code>: passed, 22 tests.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code>: passed.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code>: passed.</li>\n</ul>\n<h2>Browser Smoke</h2>\n<ul>\n<li>Dev server: <code>http://127.0.0.1:3210/#history</code></li>\n<li>In-app Browser DOM check: <code>document.querySelectorAll(&quot;select&quot;).length === 0</code></li>\n<li>제한: 화면은 <code>Loading workspace snapshot</code>에서 본문까지 진입하지 못했다. 따라서 실제 본문 visual smoke는 완료하지 못했고, 정적 DOM/타입/테스트/내부 패키징으로 보완했다.</li>\n</ul>\n<h2>산출물</h2>\n<ul>\n<li>Internal app: <code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li>Internal DMG: <code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>\n<h2>남은 위험</h2>\n<ul>\n<li>공개 배포 readiness는 기존처럼 Developer ID signing, notarization, updater, clean-machine smoke가 필요하다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1465,
+      "updatedAt": "2026-06-05T16:34:12.477Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-select-replacement-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-select-replacement/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Native Select 교체",
+      "excerpt": "Plan: Native Select 교체 1. Workspace Monitor에서 남은 native <select 위치를 확인한다. 2. 공통 앱 선택 컴포넌트 AppChoiceMenu , AppChoiceButtonGroup 을 추가한다. 3. 문서/기록 필터를 앱 메뉴로 교체한다. 4. Learning Loop와 Decision Inbox의 짧은 선택지를 버튼 그룹으로 교체한다. 5. CSS 충돌을 정리하고 compact/active/hover 상태를 맞춘다. 6. 테스트, 타입 체크, 브라우",
+      "html": "<h1>Plan: Native Select 교체</h1>\n<p>1. Workspace Monitor에서 남은 native <code>&lt;select&gt;</code> 위치를 확인한다.</p>\n<p>2. 공통 앱 선택 컴포넌트 <code>AppChoiceMenu</code>, <code>AppChoiceButtonGroup</code>을 추가한다.</p>\n<p>3. 문서/기록 필터를 앱 메뉴로 교체한다.</p>\n<p>4. Learning Loop와 Decision Inbox의 짧은 선택지를 버튼 그룹으로 교체한다.</p>\n<p>5. CSS 충돌을 정리하고 compact/active/hover 상태를 맞춘다.</p>\n<p>6. 테스트, 타입 체크, 브라우저 smoke, 내부 패키징을 실행한다.</p>\n<h2>근거</h2>\n<ul>\n<li>MDN은 <code>&lt;select&gt;</code>가 CSS로 생산적으로 스타일링하기 어려웠고 완전 제어가 필요하면 커스텀 위젯과 WAI-ARIA 의미 부여가 필요하다고 설명한다.</li>\n<li>WAI-ARIA APG는 listbox/option 패턴을 제공한다.</li>\n<li>Apple HIG와 Material Design 모두 선택 후 현재 선택이 분명히 드러나는 메뉴/선택 컨트롤을 권장한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 882,
+      "updatedAt": "2026-06-05T16:34:12.476Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-select-replacement-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-select-replacement/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Native Select 교체",
+      "excerpt": "Spec: Native Select 교체 목표 Workspace Monitor에서 OS 기본 드롭다운처럼 보이는 선택 UI를 앱 고유 스타일의 선택 컨트롤로 바꾼다. 범위 MonitorShell.tsx 의 문서 필터, 기록 필터, Learning Loop 결정 컨트롤, Decision Inbox 답변 유형. 공통 CSS 선택 메뉴/버튼 그룹 스타일. 재발 방지 테스트. 비범위 공개 릴리스 signing/notarization 개선. 새로운 UI 라이브러리 추가. Provider 실행 로직 변경. ",
+      "html": "<h1>Spec: Native Select 교체</h1>\n<h2>목표</h2>\n<p>Workspace Monitor에서 OS 기본 드롭다운처럼 보이는 선택 UI를 앱 고유 스타일의 선택 컨트롤로 바꾼다.</p>\n<h2>범위</h2>\n<ul>\n<li><code>MonitorShell.tsx</code>의 문서 필터, 기록 필터, Learning Loop 결정 컨트롤, Decision Inbox 답변 유형.</li>\n<li>공통 CSS 선택 메뉴/버튼 그룹 스타일.</li>\n<li>재발 방지 테스트.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>공개 릴리스 signing/notarization 개선.</li>\n<li>새로운 UI 라이브러리 추가.</li>\n<li>Provider 실행 로직 변경.</li>\n</ul>\n<h2>설계</h2>\n<ul>\n<li>짧은 선택지는 <code>AppChoiceButtonGroup</code>으로 표시한다.</li>\n<li>긴 선택지는 기존 Radix dependency를 활용한 <code>AppChoiceMenu</code>로 표시한다.</li>\n<li>선택 버튼은 <code>role=&quot;listbox&quot;</code>와 <code>role=&quot;option&quot;</code>을 사용하고, 현재 선택은 <code>aria-selected</code>로 노출한다.</li>\n<li>hover/open/active 상태는 <code>--choice-bg</code>, <code>--choice-bg-hover</code>, <code>--choice-active-shadow</code> 토큰을 사용한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 917,
+      "updatedAt": "2026-06-05T16:34:12.476Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-select-replacement-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-select-replacement/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Native Select 교체",
+      "excerpt": "Tasks: Native Select 교체 x Web first intake 실행 및 UI 선택 컨트롤 기준 확인 x 남은 native <select 위치 확인 x AppChoiceMenu 추가 x AppChoiceButtonGroup 추가 x 문서 필터 교체 x 기록 날짜/유형 필터 교체 x Learning Loop 처리/자산 유형 교체 x Decision Inbox 답변 유형 교체 x CSS 음영/호버/활성 상태 추가 x <select 재발 방지 테스트 추가 x workspace monitor",
+      "html": "<h1>Tasks: Native Select 교체</h1>\n<ul>\n<li>[x] Web-first intake 실행 및 UI 선택 컨트롤 기준 확인</li>\n<li>[x] 남은 native <code>&lt;select&gt;</code> 위치 확인</li>\n<li>[x] <code>AppChoiceMenu</code> 추가</li>\n<li>[x] <code>AppChoiceButtonGroup</code> 추가</li>\n<li>[x] 문서 필터 교체</li>\n<li>[x] 기록 날짜/유형 필터 교체</li>\n<li>[x] Learning Loop 처리/자산 유형 교체</li>\n<li>[x] Decision Inbox 답변 유형 교체</li>\n<li>[x] CSS 음영/호버/활성 상태 추가</li>\n<li>[x] <code>&lt;select&gt;</code> 재발 방지 테스트 추가</li>\n<li>[x] workspace-monitor test/check 실행</li>\n<li>[x] 전체 desktop app test/check 실행</li>\n<li>[x] 내부 package build 실행</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 579,
+      "updatedAt": "2026-06-05T16:34:12.476Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-native-select-replacement-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-native-select-replacement.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Native Select 교체 요구사항",
+      "excerpt": "Native Select 교체 요구사항 날짜: 2026 06 06 프로젝트: platform desktop app 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | :| | | REQ PDA 122 | Workspace Monitor는 사용자가 직접 선택하는 주요 UI에서 OS native <select 팝업을 노출하지 않아야 한다. | must | tool studio.test.mjs 의 <select\\b 재발 방지 테스트 | | REQ PDA 123 | 짧은 선택지는 열린 상태",
+      "html": "<h1>Native Select 교체 요구사항</h1>\n<p>날짜: 2026-06-06</p>\n<p>프로젝트: <code>platform-desktop-app</code></p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-122</td><td>Workspace Monitor는 사용자가 직접 선택하는 주요 UI에서 OS native <code>&lt;select&gt;</code> 팝업을 노출하지 않아야 한다.</td><td>must</td><td><code>tool-studio.test.mjs</code>의 <code>&lt;select\\b</code> 재발 방지 테스트</td></tr><tr><td>REQ-PDA-123</td><td>짧은 선택지는 열린 상태를 요구하지 않는 앱 스타일 버튼 그룹으로 제공하고, 선택/호버/활성 상태가 색상과 음영으로 구분되어야 한다.</td><td>must</td><td><code>.app-choice-button-group</code>, <code>learning-action-choice-grid</code>, <code>decision-answer-type-choices</code></td></tr><tr><td>REQ-PDA-124</td><td>날짜/카테고리처럼 길어질 수 있는 선택지는 OS native 메뉴 대신 앱 스타일 커스텀 메뉴를 사용해야 한다.</td><td>must</td><td><code>.app-choice-menu-trigger</code>, <code>document-filter-choice</code>, <code>history-date-choice</code></td></tr><tr><td>REQ-PDA-125</td><td>선택 UI는 접근성 의미를 잃지 않도록 <code>role=&quot;listbox&quot;</code>와 <code>role=&quot;option&quot;</code> 또는 Radix menu primitive를 사용해야 한다.</td><td>should</td><td>renderer type check, static tests</td></tr></tbody></table>\n<h2>결정</h2>\n<ul>\n<li>Provider 선택 UI와 같은 OS 기본 팝업 문제를 재발시키지 않기 위해 남아 있던 native <code>&lt;select&gt;</code>를 모두 제거했다.</li>\n<li>긴 목록은 화면을 과하게 늘리지 않도록 Radix <code>DropdownMenu</code> 기반 앱 메뉴로 처리했다.</li>\n<li>짧은 선택지는 클릭 즉시 고를 수 있는 버튼 그룹으로 바꿨다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1493,
+      "updatedAt": "2026-06-05T16:34:12.475Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
     {
       "id": "history-evaluations-2026-2026-06-06-button-tonal-hierarchy-ko-md",
       "path": "_history/evaluations/2026/2026-06-06-button-tonal-hierarchy.ko.md",
@@ -9780,86 +10012,6 @@
       "workspaceArea": "_history/evaluations"
     },
     {
-      "id": "history-work-summaries-2026-2026-06-05-history-payload-migration-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-05-history-payload-migration.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: History Payload Migration",
-      "excerpt": "작업 요약: History Payload Migration Workspace Monitor 기본 snapshot에서 누적 history 전체 중복 적재를 제거했다. 최근 history 96개만 inline으로 유지하고, 전체 2,220개 기록은 admin history index.json 으로 생성했다. History/Documents 섹션 진입 시 관리자 색인을 lazy load해 병합하도록 UI를 변경했다. customer build는 내부 admin history index를 빈 색인으로 대",
-      "html": "<p>작업 요약: History Payload Migration Workspace Monitor 기본 snapshot에서 누적 history 전체 중복 적재를 제거했다. 최근 history 96개만 inline으로 유지하고, 전체 2,220개 기록은 admin history index.json 으로 생성했다. History/Documents 섹션 진입 시 관리자 색인을 lazy load해 병합하도록 UI를 변경했다. customer build는 내부 admin history index를 빈 색인으로 대체하도록 했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 466,
-      "updatedAt": "2026-06-05T12:00:35.460Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-05-history-payload-migration-ko-md",
-      "path": "_history/request-traces/2026/2026-06-05-history-payload-migration.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "Request Trace: History Payload Migration",
-      "excerpt": "Request Trace: History Payload Migration | 항목 | 내용 | | | | | 사용자 요청 | 누적 history 기록을 파일 관리/token 측면에서 마이그레이션하고, 앞으로 더 좋은 표시 방식을 적용 | | 요구사항 | PDA REQ 043 | | 구현 | 기본 snapshot inline history 제한, admin history index.json , History/Documents lazy load | | 검증 | collect , check:histor",
-      "html": "<p>Request Trace: History Payload Migration | 항목 | 내용 | | | | | 사용자 요청 | 누적 history 기록을 파일 관리/token 측면에서 마이그레이션하고, 앞으로 더 좋은 표시 방식을 적용 | | 요구사항 | PDA REQ 043 | | 구현 | 기본 snapshot inline history 제한, admin history index.json , History/Documents lazy load | | 검증 | collect , check:history payload , test , check ; 최종 build/audit 예정 | | 결과 | 기존 history 기록 2,220개는 보존하고</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 551,
-      "updatedAt": "2026-06-05T12:00:35.459Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-05-history-payload-migration-json",
-      "path": "_history/work-timings/2026/2026-06-05-history-payload-migration.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 05 History Payload Migration",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request id\": \"history payload migration\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"duration seconds\": 60 }, { \"phase id\": \"source inventory\", \"label\": \"Source inventory and payload measurement\", \"duration seconds\": 180 }, ",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request id&quot;: &quot;history payload migration&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;duration seconds&quot;: 60 }, { &quot;phase id&quot;: &quot;source inventory&quot;, &quot;label&quot;: &quot;Source inventory and payload measurement&quot;, &quot;duration seconds&quot;: 180 }, { &quot;phase id&quot;: &quot;implementation&quot;, &quot;label&quot;: &quot;Collector, UI, type, and validation up</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 612,
-      "updatedAt": "2026-06-05T11:58:28.379Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-05-history-payload-migration-ko-md",
-      "path": "_history/user-requests/2026/2026-06-05-history-payload-migration.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: History Payload Migration",
-      "excerpt": "사용자 요청 요약: History Payload Migration 사용자는 지금까지 누적된 history 기록이 파일 관리와 token 수 측면에서 부담이 되므로, 기존 기록을 더 좋은 방식으로 마이그레이션하고 앞으로의 기록 표시 방식도 바꾸라고 요청했다. 사용자가 보는 기록은 관리자 페이지에서 확인하면 된다는 전제를 주었다.",
-      "html": "<p>사용자 요청 요약: History Payload Migration 사용자는 지금까지 누적된 history 기록이 파일 관리와 token 수 측면에서 부담이 되므로, 기존 기록을 더 좋은 방식으로 마이그레이션하고 앞으로의 기록 표시 방식도 바꾸라고 요청했다. 사용자가 보는 기록은 관리자 페이지에서 확인하면 된다는 전제를 주었다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 399,
-      "updatedAt": "2026-06-05T11:58:28.378Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-05-history-payload-migration-ko-md",
-      "path": "_history/web-searches/2026/2026-06-05-history-payload-migration.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "2026 06 05 History Payload Migration Web Search",
-      "excerpt": "2026 06 05 History Payload Migration Web Search 검색 JSON Lines format official documentation append only logs SQLite WAL mode official documentation write ahead logging Next.js optimize large JSON payload client performance official documentation WCAG 2.2 admin dashboard content r",
-      "html": "<p>2026 06 05 History Payload Migration Web Search 검색 JSON Lines format official documentation append only logs SQLite WAL mode official documentation write ahead logging Next.js optimize large JSON payload client performance official documentation WCAG 2.2 admin dashboard content readability information overload official 확인한 출처 JSON Lines 공식 문서: log file에 적합한 </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1249,
-      "updatedAt": "2026-06-05T11:58:28.377Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-history-payload-migration-plan-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-history-payload-migration/plan.ko.md",
       "category": "project-spec",
@@ -9906,38 +10058,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-05-operator-surface-scroll-qa-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-05-operator-surface-scroll-qa.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: Operator Surface Scroll QA",
-      "excerpt": "작업 요약: Operator Surface Scroll QA 기본 탭 외 Operator Center 내부 섹션을 Playwright audit 대상으로 추가했다. History timeline docs 가 한 페이지에 길게 펼쳐지는 문제를 내부 scroll pane으로 해결했다. Agents chat context summary가 17px 높이였던 문제를 최소 target size로 수정했다. audit:surfaces package script를 추가했다.",
-      "html": "<p>작업 요약: Operator Surface Scroll QA 기본 탭 외 Operator Center 내부 섹션을 Playwright audit 대상으로 추가했다. History timeline docs 가 한 페이지에 길게 펼쳐지는 문제를 내부 scroll pane으로 해결했다. Agents chat context summary가 17px 높이였던 문제를 최소 target size로 수정했다. audit:surfaces package script를 추가했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 402,
-      "updatedAt": "2026-06-05T06:56:15.237Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-operator-surface-scroll-qa-ko-md",
-      "path": "_history/evaluations/2026/2026-06-05-operator-surface-scroll-qa.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: Operator Surface Scroll QA",
-      "excerpt": "평가: Operator Surface Scroll QA 결과 통과. Operator Center 내부 projects , structure , history , documents , requirements 섹션까지 브라우저 QA 범위에 포함했다. History 날짜별 문서 목록은 내부 scroll pane으로 분리했다. Agents 채팅의 컨텍스트와 실행 계약 summary가 17px 높이로 잡히던 문제를 수정했다. 검증 workspace monitor test : 통과, 50개. workspac",
-      "html": "<p>평가: Operator Surface Scroll QA 결과 통과. Operator Center 내부 projects , structure , history , documents , requirements 섹션까지 브라우저 QA 범위에 포함했다. History 날짜별 문서 목록은 내부 scroll pane으로 분리했다. Agents 채팅의 컨텍스트와 실행 계약 summary가 17px 높이로 잡히던 문제를 수정했다. 검증 workspace monitor test : 통과, 50개. workspace monitor check : 통과. workspace monitor build : 통과. workspace monitor audit:surf</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 918,
-      "updatedAt": "2026-06-05T06:56:15.236Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
     },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-smooth-redesign-maintenance-traceability-ko-md",
@@ -17634,133 +17754,37 @@
       "historyDate": "2026-06-03",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-platform-source-editor-customization-plan-en-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-platform-source-editor-customization/plan.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Plan: Platform Source Editor Customization",
-      "excerpt": "Plan: Platform Source Editor Customization 1. Check official Monaco references and decide whether to keep the existing engine. 2. Inspect the current Source Review implementation and CSS layout. 3. Add templates, path based profiles, patch context copying, and Monaco theme/option",
-      "html": "<h1>Plan: Platform Source Editor Customization</h1>\n<p>1. Check official Monaco references and decide whether to keep the existing engine.</p>\n<p>2. Inspect the current Source Review implementation and CSS layout.</p>\n<p>3. Add templates, path-based profiles, patch-context copying, and Monaco theme/options.</p>\n<p>4. Add a desktop-style control bar and responsive CSS.</p>\n<p>5. Record requirements, specs, history, and evaluation artifacts.</p>\n<p>6. Run type check, build, performance budget, tests, and Browser smoke.</p>\n<p>7. Commit and push to <code>origin/main</code>.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 516,
-      "updatedAt": "2026-06-03T03:13:29.369Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-platform-source-editor-customization-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-platform-source-editor-customization/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "계획: 플랫폼 소스 에디터 커스터마이징",
-      "excerpt": "계획: 플랫폼 소스 에디터 커스터마이징 1. 공식 Monaco 자료를 확인해 기존 엔진을 유지할지 판단한다. 2. 현재 Source Review 구현과 CSS 레이아웃을 확인한다. 3. 템플릿, 경로 기반 프로필, 패치 컨텍스트 복사, Monaco theme/options를 추가한다. 4. 데스크톱식 컨트롤 바와 responsive CSS를 추가한다. 5. 요구사항, 스펙, 히스토리, 평가 기록을 남긴다. 6. 타입 검사, 빌드, 성능 예산, 테스트, 브라우저 smoke를 실행한다. 7. 커밋하고",
-      "html": "<h1>계획: 플랫폼 소스 에디터 커스터마이징</h1>\n<p>1. 공식 Monaco 자료를 확인해 기존 엔진을 유지할지 판단한다.</p>\n<p>2. 현재 Source Review 구현과 CSS 레이아웃을 확인한다.</p>\n<p>3. 템플릿, 경로 기반 프로필, 패치 컨텍스트 복사, Monaco theme/options를 추가한다.</p>\n<p>4. 데스크톱식 컨트롤 바와 responsive CSS를 추가한다.</p>\n<p>5. 요구사항, 스펙, 히스토리, 평가 기록을 남긴다.</p>\n<p>6. 타입 검사, 빌드, 성능 예산, 테스트, 브라우저 smoke를 실행한다.</p>\n<p>7. 커밋하고 <code>origin/main</code>에 push한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 579,
-      "updatedAt": "2026-06-03T03:13:29.368Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-platform-source-editor-customization-spec-en-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-platform-source-editor-customization/spec.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Spec: Platform Source Editor Customization",
-      "excerpt": "Spec: Platform Source Editor Customization Purpose Desktop Source Review must be a developer/superadmin workbench for this platform, not a generic web code viewer. Users should be able to start repeated requirement, spec, validation, Tauri command, agent config, and decision item",
-      "html": "<h1>Spec: Platform Source Editor Customization</h1>\n<h2>Purpose</h2>\n<p>Desktop Source Review must be a developer/superadmin workbench for this platform, not a generic web code viewer. Users should be able to start repeated requirement, spec, validation, Tauri command, agent config, and decision item edits inside the editor, then copy the current draft as patch context for agent handoff.</p>\n<h2>Scope</h2>\n<ul>\n<li>Keep Monaco editor as the existing editing engine.</li>\n<li>Add a platform template selector and <code>Insert Template</code> action to the desktop source editor.</li>\n<li>Recommend Requirements, Spec Work, Runtime Command, Platform Config, Validation, or Source Patch profiles from the current file path.</li>\n<li>Patch-context copy includes path, profile, template, dirty state, diff summary, backup gate, and draft body.</li>\n<li>Monaco theme and editor options provide a desktop workbench tone plus developer defaults such as bracket guides, rulers, sticky scroll, and syntax-aware copy.</li>\n</ul>\n<h2>Non-Goals</h2>\n<ul>\n<li>Do not embed all of VS Code or clone a separate open-source app in this slice.</li>\n<li>Do not add pure-browser source saving without the Tauri scoped write and backup gate.</li>\n<li>Do not implement language servers, Git staging, or advanced multi-cursor automation in this slice.</li>\n</ul>\n<h2>Acceptance Criteria</h2>\n<ul>\n<li>The Runtime Source Review panel renders <code>source-customization-bar</code>.</li>\n<li>Recommended profile and template change by open file path.</li>\n<li>Template insertion updates the Monaco selection or draft tail and is visible in dirty diff.</li>\n<li>Patch-context copy includes metadata needed for agent handoff.</li>\n<li><code>pnpm run check</code>, <code>pnpm run build:customer</code>, <code>pnpm run perf:budget</code>, <code>pnpm test</code>, desktop check/test, and Browser smoke pass.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1671,
-      "updatedAt": "2026-06-03T03:13:29.368Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-platform-source-editor-customization-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-platform-source-editor-customization/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "스펙: 플랫폼 소스 에디터 커스터마이징",
-      "excerpt": "스펙: 플랫폼 소스 에디터 커스터마이징 목적 데스크톱 Source Review는 범용 웹 코드 뷰어가 아니라 이 플랫폼을 구축하는 개발자/슈퍼어드민 작업면이어야 한다. 사용자는 요구사항, 스펙, 검증 기록, Tauri command, agent config, decision item 같은 반복 작업을 에디터 안에서 바로 시작하고, 현재 드래프트를 에이전트에게 넘길 수 있는 패치 컨텍스트로 복사할 수 있어야 한다. 기능 범위 Monaco editor를 기존 편집 엔진으로 유지한다. 데스크톱 sour",
-      "html": "<h1>스펙: 플랫폼 소스 에디터 커스터마이징</h1>\n<h2>목적</h2>\n<p>데스크톱 Source Review는 범용 웹 코드 뷰어가 아니라 이 플랫폼을 구축하는 개발자/슈퍼어드민 작업면이어야 한다. 사용자는 요구사항, 스펙, 검증 기록, Tauri command, agent config, decision item 같은 반복 작업을 에디터 안에서 바로 시작하고, 현재 드래프트를 에이전트에게 넘길 수 있는 패치 컨텍스트로 복사할 수 있어야 한다.</p>\n<h2>기능 범위</h2>\n<ul>\n<li>Monaco editor를 기존 편집 엔진으로 유지한다.</li>\n<li>데스크톱 source editor에 플랫폼 템플릿 selector와 <code>Insert Template</code> action을 추가한다.</li>\n<li>현재 파일 경로를 기준으로 Requirements, Spec Work, Runtime Command, Platform Config, Validation, Source Patch 프로필을 추천한다.</li>\n<li>패치 컨텍스트 복사는 경로, 프로필, 템플릿, dirty 상태, diff 요약, backup gate, 드래프트 본문을 포함한다.</li>\n<li>Monaco theme와 editor option은 데스크톱 workbench tone, bracket/ruler/sticky-scroll 같은 개발자 기본값을 제공한다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>VS Code 전체를 임베드하거나 별도 오픈소스 앱을 클론하지 않는다.</li>\n<li>Tauri scoped write와 backup gate 없는 순수 브라우저 저장 기능을 만들지 않는다.</li>\n<li>언어 서버, Git diff stage, multi-cursor 고급 자동화까지 이번 범위에서 구현하지 않는다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>Runtime Source Review 패널에 <code>source-customization-bar</code>가 표시된다.</li>\n<li>열린 파일 경로에 따라 추천 템플릿과 프로필이 바뀐다.</li>\n<li>템플릿 삽입은 Monaco selection 또는 드래프트 끝에 반영되고 dirty diff에 잡힌다.</li>\n<li>패치 컨텍스트 복사는 에이전트 handoff에 필요한 메타데이터를 포함한다.</li>\n<li><code>pnpm run check</code>, <code>pnpm run build:customer</code>, <code>pnpm run perf:budget</code>, <code>pnpm test</code>, desktop check/test, Browser smoke가 통과한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1933,
-      "updatedAt": "2026-06-03T03:13:29.368Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-desktop-product-layout-hardening-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-desktop-product-layout-hardening/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록",
-      "excerpt": "작업 목록 x Runtime 하단 패널 overflow 원인 확인 x Task Pipe, Run Board, Runtime Data, Service Readiness, Source Editor layout 보강 x .desktop grid .wide full width 규칙 추가 x generated snapshot JS fallback 제거 x customer build, performance budget, tests, readiness, Browser smoke 검증",
-      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] Runtime 하단 패널 overflow 원인 확인</li>\n<li>[x] Task Pipe, Run Board, Runtime Data, Service Readiness, Source Editor layout 보강</li>\n<li>[x] <code>.desktop-grid &gt; .wide</code> full-width 규칙 추가</li>\n<li>[x] generated snapshot JS fallback 제거</li>\n<li>[x] customer build, performance budget, tests, readiness, Browser smoke 검증</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 337,
-      "updatedAt": "2026-06-03T03:03:47.136Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-03-desktop-product-layout-hardening-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-03-desktop-product-layout-hardening/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성",
-      "excerpt": "추적성 | 요구사항 | 구현 | 검증 | | | | | | REQ WM 026 | workspace monitor/app/globals.css full width workbench layout | Browser smoke, pnpm run build:customer | | REQ WM 016 | workspace monitor/components/SnapshotLoader.tsx generated snapshot fallback 제거 | pnpm run perf:budget | | PDA UX 0",
-      "html": "<h1>추적성</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td><code>REQ-WM-026</code></td><td><code>workspace-monitor/app/globals.css</code> full-width workbench layout</td><td>Browser smoke, <code>pnpm run build:customer</code></td></tr><tr><td><code>REQ-WM-016</code></td><td><code>workspace-monitor/components/SnapshotLoader.tsx</code> generated snapshot fallback 제거</td><td><code>pnpm run perf:budget</code></td></tr><tr><td><code>PDA-UX-018</code></td><td>Source editor controls와 review grid 유지</td><td>Browser source panel smoke, platform desktop tests</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 440,
-      "updatedAt": "2026-06-03T03:03:47.136Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 34,
+      "documentsCount": 41,
       "categories": [
         {
           "category": "evaluation",
-          "count": 9
+          "count": 11
         },
         {
           "category": "request-trace",
-          "count": 5
+          "count": 6
         },
         {
           "category": "user-request",
-          "count": 5
+          "count": 6
         },
         {
           "category": "web-search",
-          "count": 5
+          "count": 6
         },
         {
           "category": "work-summary",
-          "count": 5
+          "count": 6
         },
         {
           "category": "work-timing",
-          "count": 5
+          "count": 6
         }
       ],
       "documents": [
@@ -17782,6 +17806,26 @@
           "title": "최종 평가",
           "excerpt": "최종 평가 판정 요청한 버튼 크기와 색상/음영 계층 개선은 완료됐다. 선택/검색/결과 버튼이 같은 색으로 붙어 보이는 문제를 줄이기 위해 공통 tonal/shadow 토큰을 적용했고, 짧은 내용의 버튼은 compact하게 조정했다. 검증 근거 렌더러 test/check 통과 데스크톱 앱 test/check 통과 package:internal 통과 Rust test/build 통과 codesign verify 통과 DMG verify 통과 git diff check 통과 제한 인앱 브라우저 스모크는",
           "updatedAt": "2026-06-05T16:21:55.752Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-native-select-replacement-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-native-select-replacement-evaluation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Native Select Replacement Evaluation Input",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"slug\": \"native select replacement\", \"project\": \"platform desktop app\", \"installation occurred\": false, \"resource risk occurred\": true, \"cli pipeline occurred\": false, \"changed files\": \"platform desktop app/renderer/workspace monitor/components/MonitorShel",
+          "updatedAt": "2026-06-05T16:34:12.479Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-native-select-replacement-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-native-select-replacement.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "평가: Native Select 교체",
+          "excerpt": "평가: Native Select 교체 날짜: 2026 06 06 결론 요청은 충족됐다. OS 기본 드롭다운을 유발하는 native <select 를 Workspace Monitor 컴포넌트에서 제거했고, 앱 스타일 선택 메뉴와 버튼 그룹으로 교체했다. 검증 workspace monitor 테스트 59개 통과. workspace monitor 타입/스크롤/소스 컨트롤/히스토리 payload 체크 통과. platform desktop app 테스트 22개 통과. platform desktop app ",
+          "updatedAt": "2026-06-05T16:34:12.479Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -17865,6 +17909,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-request-traces-2026-2026-06-06-native-select-replacement-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-native-select-replacement.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Request Trace: Native Select 교체",
+          "excerpt": "Request Trace: Native Select 교체 날짜: 2026 06 06 요청 OS 기본 드롭다운처럼 보이는 선택 버튼이 앱과 어울리지 않으므로 개선. 결과 native <select 제거. 앱 스타일 메뉴/버튼 선택지 도입. 재발 방지 테스트 추가. 내부 패키징 빌드 완료. 주요 산출물 platform desktop app/docs/requirements/2026 06 06 native select replacement.ko.md platform desktop app/specs/202",
+          "updatedAt": "2026-06-05T16:34:12.479Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
           "category": "request-trace",
@@ -17912,6 +17966,16 @@
           "title": "사용자 요청 요약",
           "excerpt": "사용자 요청 요약 기본 선택지와 검색/찾기 버튼이 전체적으로 같은 색이라 눈이 불편하고, 내용이 적은 버튼도 너무 크게 보인다. 버튼에 적절한 음영과 색상 계층을 넣고 compact하게 조정해 달라는 요청이다.",
           "updatedAt": "2026-06-05T16:21:55.750Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-native-select-replacement-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-native-select-replacement.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: Native Select 교체",
+          "excerpt": "사용자 요청 요약: Native Select 교체 날짜: 2026 06 06 요약 사용자는 macOS 기본 드롭다운처럼 보이는 선택 버튼이 앱 UI와 맞지 않고 예쁘지 않다고 지적했다. Provider 선택처럼 보이는 OS 기본 팝업을 포함해, 기본 버튼/드롭다운 느낌을 제거하고 앱 스타일 선택 컨트롤로 개선하기를 요구했다. 수용 기준 native <select 팝업을 주요 화면에서 제거한다. 선택지는 사용자가 바로 이해할 수 있는 버튼 또는 앱 스타일 메뉴로 제공한다. 버튼은 음영, 선택 상태,",
+          "updatedAt": "2026-06-05T16:34:12.477Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -17965,6 +18029,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-web-searches-2026-2026-06-06-native-select-replacement-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-native-select-replacement.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: Native Select 교체",
+          "excerpt": "Web Search: Native Select 교체 날짜: 2026 06 06 Queries WAI ARIA listbox pattern select replacement accessibility official MDN select element styling limitations native dropdown Apple Human Interface Guidelines pop up buttons menus macOS design Material Design menus selection control",
+          "updatedAt": "2026-06-05T16:34:12.477Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
           "category": "web-search",
@@ -18012,6 +18086,16 @@
           "title": "작업 요약",
           "excerpt": "작업 요약 버튼과 선택 UI의 색상/음영/크기 계층을 조정했다. 선택/검색 표면 토큰 추가 설정 segment/option/pin 버튼 compact 및 active 상태 보강 커맨드 팔레트 검색/결과 버튼 compact 및 shadow 보강 런타임 선택 카드, provider/model 선택 카드 compact 조정 소스 툴바/워크벤치 전환 버튼 tonal 조정 내부 패키징 빌드 완료",
           "updatedAt": "2026-06-05T16:21:55.751Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-native-select-replacement-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-native-select-replacement.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: Native Select 교체",
+          "excerpt": "작업 요약: Native Select 교체 날짜: 2026 06 06 프로젝트: platform desktop app 완료 Workspace Monitor의 남은 native <select 를 제거했다. 문서 필터와 기록 필터를 앱 스타일 Radix 메뉴로 교체했다. Learning Loop 처리/자산 유형과 Decision Inbox 답변 유형을 앱 스타일 버튼 선택지로 교체했다. 공통 AppChoiceMenu , AppChoiceButtonGroup 을 추가했다. 선택/hover/active ",
+          "updatedAt": "2026-06-05T16:34:12.478Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18065,6 +18149,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-timings-2026-2026-06-06-native-select-replacement-json",
+          "path": "_history/work-timings/2026/2026-06-06-native-select-replacement.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Native Select Replacement",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"slug\": \"native select replacement\", \"phases\": { \"phase\": \"web first intake\", \"approx minutes\": 3 }, { \"phase\": \"source inspection\", \"approx minutes\": 8 }, { \"phase\": \"implementation\", \"approx minutes\": 20 }, { \"phase\": \"renderer validation\", \"approx minut",
+          "updatedAt": "2026-06-05T16:34:12.478Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-rust-desktop-resource-optimization-json",
           "path": "_history/work-timings/2026/2026-06-06-rust-desktop-resource-optimization.json",
           "category": "work-timing",
@@ -18109,31 +18203,31 @@
     {
       "date": "2026-06-05",
       "year": "2026",
-      "documentsCount": 62,
+      "documentsCount": 55,
       "categories": [
         {
           "category": "evaluation",
-          "count": 14
-        },
-        {
-          "category": "work-summary",
-          "count": 10
+          "count": 13
         },
         {
           "category": "request-trace",
-          "count": 9
+          "count": 8
         },
         {
           "category": "user-request",
-          "count": 9
+          "count": 8
         },
         {
           "category": "web-search",
-          "count": 9
+          "count": 8
+        },
+        {
+          "category": "work-summary",
+          "count": 8
         },
         {
           "category": "work-timing",
-          "count": 8
+          "count": 7
         },
         {
           "category": "plan",
@@ -18246,16 +18340,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-evaluations-2026-2026-06-05-operator-surface-scroll-qa-ko-md",
-          "path": "_history/evaluations/2026/2026-06-05-operator-surface-scroll-qa.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: Operator Surface Scroll QA",
-          "excerpt": "평가: Operator Surface Scroll QA 결과 통과. Operator Center 내부 projects , structure , history , documents , requirements 섹션까지 브라우저 QA 범위에 포함했다. History 날짜별 문서 목록은 내부 scroll pane으로 분리했다. Agents 채팅의 컨텍스트와 실행 계약 summary가 17px 높이로 잡히던 문제를 수정했다. 검증 workspace monitor test : 통과, 50개. workspac",
-          "updatedAt": "2026-06-05T06:56:15.236Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-05-source-workbench-control-primitives-ko-md",
           "path": "_history/evaluations/2026/2026-06-05-source-workbench-control-primitives.ko.md",
           "category": "evaluation",
@@ -18333,16 +18417,6 @@
           "title": "요청 결과 추적: Desktop Package Readiness Repair",
           "excerpt": "요청 결과 추적: Desktop Package Readiness Repair 요청 데스크톱 내부 패키징 실패를 전부 수정. 결과 platform desktop app readiness/test 실패 2건을 해결했다. Workspace Monitor check/test에서 드러난 생성 snapshot, CSS, stale test 계약을 함께 정리했다. 내부 패키징 산출물이 정상 생성됐다. 주요 산출물 agent platform/configs/access/view mode registry.json ",
           "updatedAt": "2026-06-05T12:45:23.210Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-05-history-payload-migration-ko-md",
-          "path": "_history/request-traces/2026/2026-06-05-history-payload-migration.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "Request Trace: History Payload Migration",
-          "excerpt": "Request Trace: History Payload Migration | 항목 | 내용 | | | | | 사용자 요청 | 누적 history 기록을 파일 관리/token 측면에서 마이그레이션하고, 앞으로 더 좋은 표시 방식을 적용 | | 요구사항 | PDA REQ 043 | | 구현 | 기본 snapshot inline history 제한, admin history index.json , History/Documents lazy load | | 검증 | collect , check:histor",
-          "updatedAt": "2026-06-05T12:00:35.459Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18426,16 +18500,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-user-requests-2026-2026-06-05-history-payload-migration-ko-md",
-          "path": "_history/user-requests/2026/2026-06-05-history-payload-migration.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: History Payload Migration",
-          "excerpt": "사용자 요청 요약: History Payload Migration 사용자는 지금까지 누적된 history 기록이 파일 관리와 token 수 측면에서 부담이 되므로, 기존 기록을 더 좋은 방식으로 마이그레이션하고 앞으로의 기록 표시 방식도 바꾸라고 요청했다. 사용자가 보는 기록은 관리자 페이지에서 확인하면 된다는 전제를 주었다.",
-          "updatedAt": "2026-06-05T11:58:28.378Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-05-korean-copy-pass-ko-md",
           "path": "_history/user-requests/2026/2026-06-05-korean-copy-pass.ko.md",
           "category": "user-request",
@@ -18513,16 +18577,6 @@
           "title": "웹 검색 기록: Desktop Package Readiness Repair",
           "excerpt": "웹 검색 기록: Desktop Package Readiness Repair 검색 날짜: 2026 06 05 목적: 패키징 실패 원인이 외부 최신 정보보다 로컬 테스트/계약 불일치인지 확인 질의 software regression tests align tests with requirements official docs Node.js assert deepStrictEqual official documentation node:test pnpm Node.js version requirements offi",
           "updatedAt": "2026-06-05T12:45:23.209Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-05-history-payload-migration-ko-md",
-          "path": "_history/web-searches/2026/2026-06-05-history-payload-migration.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "2026 06 05 History Payload Migration Web Search",
-          "excerpt": "2026 06 05 History Payload Migration Web Search 검색 JSON Lines format official documentation append only logs SQLite WAL mode official documentation write ahead logging Next.js optimize large JSON payload client performance official documentation WCAG 2.2 admin dashboard content r",
-          "updatedAt": "2026-06-05T11:58:28.377Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18606,16 +18660,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-05-history-payload-migration-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-05-history-payload-migration.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: History Payload Migration",
-          "excerpt": "작업 요약: History Payload Migration Workspace Monitor 기본 snapshot에서 누적 history 전체 중복 적재를 제거했다. 최근 history 96개만 inline으로 유지하고, 전체 2,220개 기록은 admin history index.json 으로 생성했다. History/Documents 섹션 진입 시 관리자 색인을 lazy load해 병합하도록 UI를 변경했다. customer build는 내부 admin history index를 빈 색인으로 대",
-          "updatedAt": "2026-06-05T12:00:35.460Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-05-korean-copy-pass-ko-md",
           "path": "_history/work-summaries/2026/2026-06-05-korean-copy-pass.ko.md",
           "category": "work-summary",
@@ -18633,16 +18677,6 @@
           "title": "작업 요약: Local History Hook Componentization",
           "excerpt": "작업 요약: Local History Hook Componentization 관리자 기록 색인 로딩, 모듈 캐시, idle preload, 문서 병합, 날짜별 그룹 생성을 useAdminHistoryIndex hook으로 분리했다. MonitorShell.tsx 에서 해당 로딩/effect/helper를 제거했다. History 화면의 핵심 한국어 지표와 상태 문구를 자연스럽게 바꿨다. 테스트가 hook 분리, 로컬 캐시, idle preload, Korean copy 회귀를 검증하도록 보강했다.",
           "updatedAt": "2026-06-05T12:10:43.430Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-05-operator-surface-scroll-qa-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-05-operator-surface-scroll-qa.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: Operator Surface Scroll QA",
-          "excerpt": "작업 요약: Operator Surface Scroll QA 기본 탭 외 Operator Center 내부 섹션을 Playwright audit 대상으로 추가했다. History timeline docs 가 한 페이지에 길게 펼쳐지는 문제를 내부 scroll pane으로 해결했다. Agents chat context summary가 17px 높이였던 문제를 최소 target size로 수정했다. audit:surfaces package script를 추가했다.",
-          "updatedAt": "2026-06-05T06:56:15.237Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18693,16 +18727,6 @@
           "title": "2026 06 05 Auto Build After Implementation",
           "excerpt": "{ \"task id\": \"2026 06 05 auto build after implementation\", \"title\": \"Auto build after implementation durable rule\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"created at\": \"2026 06 05\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"s",
           "updatedAt": "2026-06-05T12:54:26.572Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-05-history-payload-migration-json",
-          "path": "_history/work-timings/2026/2026-06-05-history-payload-migration.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 05 History Payload Migration",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request id\": \"history payload migration\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"duration seconds\": 60 }, { \"phase id\": \"source inventory\", \"label\": \"Source inventory and payload measurement\", \"duration seconds\": 180 }, ",
-          "updatedAt": "2026-06-05T11:58:28.379Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18774,16 +18798,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2306,
+      "documents": 2313,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 942
+          "count": 944
         },
         {
           "category": "web-search",
-          "count": 371
+          "count": 372
         },
         {
           "category": "plan",
@@ -18791,19 +18815,19 @@
         },
         {
           "category": "request-trace",
-          "count": 300
+          "count": 301
         },
         {
           "category": "work-timing",
-          "count": 222
+          "count": 223
         },
         {
           "category": "user-request",
-          "count": 84
+          "count": 85
         },
         {
           "category": "work-summary",
-          "count": 51
+          "count": 52
         },
         {
           "category": "daily-history",
@@ -18814,7 +18838,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6117288,
+      "totalSourceBytes": 6125497,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18839,11 +18863,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 37,
+      "evidenceEvents": 38,
       "decisionEvents": 0,
-      "openSignals": 19,
+      "openSignals": 20,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T16:21:55.752Z",
+      "latestEventAt": "2026-06-05T16:34:12.479Z",
       "historyDays": 2
     },
     "lanes": [
@@ -18855,12 +18879,12 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 23
+        "count": 24
       },
       {
         "id": "delivery",
         "label": "delivery",
-        "count": 15
+        "count": 14
       },
       {
         "id": "evidence",
@@ -18902,16 +18926,16 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 23
-      },
-      {
-        "id": "summary",
-        "label": "summary",
-        "count": 15
+        "count": 24
       },
       {
         "id": "intake",
         "label": "intake",
+        "count": 14
+      },
+      {
+        "id": "summary",
+        "label": "summary",
         "count": 14
       },
       {
@@ -18953,6 +18977,111 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-native-select-replacement-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "evaluation",
+        "title": "2026 06 06 Native Select Replacement Evaluation Input",
+        "detail": "{ \"date\": \"2026 06 06\", \"slug\": \"native select replacement\", \"project\": \"platform desktop app\", \"installation occurred\": false, \"resource risk occurred\": true, \"cli pipeline occurred\": false, \"changed files\": \"platform desktop app/renderer/workspace monitor/components/MonitorShel",
+        "path": "_history/evaluations/2026/2026-06-06-native-select-replacement-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:34:12.479Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-native-select-replacement-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "평가: Native Select 교체",
+        "detail": "평가: Native Select 교체 날짜: 2026 06 06 결론 요청은 충족됐다. OS 기본 드롭다운을 유발하는 native <select 를 Workspace Monitor 컴포넌트에서 제거했고, 앱 스타일 선택 메뉴와 버튼 그룹으로 교체했다. 검증 workspace monitor 테스트 59개 통과. workspace monitor 타입/스크롤/소스 컨트롤/히스토리 payload 체크 통과. platform desktop app 테스트 22개 통과. platform desktop app ",
+        "path": "_history/evaluations/2026/2026-06-06-native-select-replacement.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:34:12.479Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-native-select-replacement-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "Request Trace: Native Select 교체",
+        "detail": "Request Trace: Native Select 교체 날짜: 2026 06 06 요청 OS 기본 드롭다운처럼 보이는 선택 버튼이 앱과 어울리지 않으므로 개선. 결과 native <select 제거. 앱 스타일 메뉴/버튼 선택지 도입. 재발 방지 테스트 추가. 내부 패키징 빌드 완료. 주요 산출물 platform desktop app/docs/requirements/2026 06 06 native select replacement.ko.md platform desktop app/specs/202",
+        "path": "_history/request-traces/2026/2026-06-06-native-select-replacement.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:34:12.479Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-native-select-replacement-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Native Select Replacement",
+        "detail": "{ \"date\": \"2026 06 06\", \"slug\": \"native select replacement\", \"phases\": { \"phase\": \"web first intake\", \"approx minutes\": 3 }, { \"phase\": \"source inspection\", \"approx minutes\": 8 }, { \"phase\": \"implementation\", \"approx minutes\": 20 }, { \"phase\": \"renderer validation\", \"approx minut",
+        "path": "_history/work-timings/2026/2026-06-06-native-select-replacement.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:34:12.478Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-native-select-replacement-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "작업 요약: Native Select 교체",
+        "detail": "작업 요약: Native Select 교체 날짜: 2026 06 06 프로젝트: platform desktop app 완료 Workspace Monitor의 남은 native <select 를 제거했다. 문서 필터와 기록 필터를 앱 스타일 Radix 메뉴로 교체했다. Learning Loop 처리/자산 유형과 Decision Inbox 답변 유형을 앱 스타일 버튼 선택지로 교체했다. 공통 AppChoiceMenu , AppChoiceButtonGroup 을 추가했다. 선택/hover/active ",
+        "path": "_history/work-summaries/2026/2026-06-06-native-select-replacement.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:34:12.478Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-native-select-replacement-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Native Select 교체",
+        "detail": "Web Search: Native Select 교체 날짜: 2026 06 06 Queries WAI ARIA listbox pattern select replacement accessibility official MDN select element styling limitations native dropdown Apple Human Interface Guidelines pop up buttons menus macOS design Material Design menus selection control",
+        "path": "_history/web-searches/2026/2026-06-06-native-select-replacement.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:34:12.477Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-native-select-replacement-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: Native Select 교체",
+        "detail": "사용자 요청 요약: Native Select 교체 날짜: 2026 06 06 요약 사용자는 macOS 기본 드롭다운처럼 보이는 선택 버튼이 앱 UI와 맞지 않고 예쁘지 않다고 지적했다. Provider 선택처럼 보이는 OS 기본 팝업을 포함해, 기본 버튼/드롭다운 느낌을 제거하고 앱 스타일 선택 컨트롤로 개선하기를 요구했다. 수용 기준 native <select 팝업을 주요 화면에서 제거한다. 선택지는 사용자가 바로 이해할 수 있는 버튼 또는 앱 스타일 메뉴로 제공한다. 버튼은 음영, 선택 상태,",
+        "path": "_history/user-requests/2026/2026-06-06-native-select-replacement.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:34:12.477Z"
+      },
       {
         "id": "history-history-evaluations-2026-2026-06-06-button-tonal-hierarchy-ko-md",
         "sourceType": "history",
@@ -20287,111 +20416,6 @@
         "language": "ko",
         "date": "2026-06-05",
         "timestamp": "2026-06-05T12:01:54.138Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-05-history-payload-migration-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: History Payload Migration",
-        "detail": "작업 요약: History Payload Migration Workspace Monitor 기본 snapshot에서 누적 history 전체 중복 적재를 제거했다. 최근 history 96개만 inline으로 유지하고, 전체 2,220개 기록은 admin history index.json 으로 생성했다. History/Documents 섹션 진입 시 관리자 색인을 lazy load해 병합하도록 UI를 변경했다. customer build는 내부 admin history index를 빈 색인으로 대",
-        "path": "_history/work-summaries/2026/2026-06-05-history-payload-migration.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T12:00:35.460Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-05-history-payload-migration-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "Request Trace: History Payload Migration",
-        "detail": "Request Trace: History Payload Migration | 항목 | 내용 | | | | | 사용자 요청 | 누적 history 기록을 파일 관리/token 측면에서 마이그레이션하고, 앞으로 더 좋은 표시 방식을 적용 | | 요구사항 | PDA REQ 043 | | 구현 | 기본 snapshot inline history 제한, admin history index.json , History/Documents lazy load | | 검증 | collect , check:histor",
-        "path": "_history/request-traces/2026/2026-06-05-history-payload-migration.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T12:00:35.459Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-05-history-payload-migration-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 05 History Payload Migration",
-        "detail": "{ \"date\": \"2026 06 05\", \"request id\": \"history payload migration\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"duration seconds\": 60 }, { \"phase id\": \"source inventory\", \"label\": \"Source inventory and payload measurement\", \"duration seconds\": 180 }, ",
-        "path": "_history/work-timings/2026/2026-06-05-history-payload-migration.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T11:58:28.379Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-05-history-payload-migration-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: History Payload Migration",
-        "detail": "사용자 요청 요약: History Payload Migration 사용자는 지금까지 누적된 history 기록이 파일 관리와 token 수 측면에서 부담이 되므로, 기존 기록을 더 좋은 방식으로 마이그레이션하고 앞으로의 기록 표시 방식도 바꾸라고 요청했다. 사용자가 보는 기록은 관리자 페이지에서 확인하면 된다는 전제를 주었다.",
-        "path": "_history/user-requests/2026/2026-06-05-history-payload-migration.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T11:58:28.378Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-05-history-payload-migration-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "2026 06 05 History Payload Migration Web Search",
-        "detail": "2026 06 05 History Payload Migration Web Search 검색 JSON Lines format official documentation append only logs SQLite WAL mode official documentation write ahead logging Next.js optimize large JSON payload client performance official documentation WCAG 2.2 admin dashboard content r",
-        "path": "_history/web-searches/2026/2026-06-05-history-payload-migration.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T11:58:28.377Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-05-operator-surface-scroll-qa-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: Operator Surface Scroll QA",
-        "detail": "작업 요약: Operator Surface Scroll QA 기본 탭 외 Operator Center 내부 섹션을 Playwright audit 대상으로 추가했다. History timeline docs 가 한 페이지에 길게 펼쳐지는 문제를 내부 scroll pane으로 해결했다. Agents chat context summary가 17px 높이였던 문제를 최소 target size로 수정했다. audit:surfaces package script를 추가했다.",
-        "path": "_history/work-summaries/2026/2026-06-05-operator-surface-scroll-qa.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T06:56:15.237Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-operator-surface-scroll-qa-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "평가: Operator Surface Scroll QA",
-        "detail": "평가: Operator Surface Scroll QA 결과 통과. Operator Center 내부 projects , structure , history , documents , requirements 섹션까지 브라우저 QA 범위에 포함했다. History 날짜별 문서 목록은 내부 scroll pane으로 분리했다. Agents 채팅의 컨텍스트와 실행 계약 summary가 17px 높이로 잡히던 문제를 수정했다. 검증 workspace monitor test : 통과, 50개. workspac",
-        "path": "_history/evaluations/2026/2026-06-05-operator-surface-scroll-qa.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T06:56:15.236Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23317,7 +23341,7 @@
       {
         "category": "work-summary",
         "root": "_history/work-summaries",
-        "documentsCount": 15
+        "documentsCount": 14
       },
       {
         "category": "user-request",
@@ -23352,7 +23376,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 23
+        "documentsCount": 24
       },
       {
         "category": "daily-history",
@@ -23446,7 +23470,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 69,
+        "documentCount": 70,
         "sourceFileCount": 5
       },
       {

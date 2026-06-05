@@ -170,6 +170,19 @@ test("Choice and search controls have compact tonal hierarchy", () => {
   assert.match(css, /\.desktop-command-grid button \{[\s\S]*?min-height: 66px;/);
 });
 
+test("Workspace monitor replaces native select dropdowns with styled app choices", () => {
+  assert.doesNotMatch(monitorShell, /<select\b/);
+  assert.match(monitorShell, /function AppChoiceMenu/);
+  assert.match(monitorShell, /function AppChoiceButtonGroup/);
+  assert.match(monitorShell, /document-filter-choice/);
+  assert.match(monitorShell, /history-date-choice/);
+  assert.match(monitorShell, /learning-action-choice-grid/);
+  assert.match(monitorShell, /decision-answer-type-choices/);
+  assert.match(css, /\.app-choice-menu-trigger \{/);
+  assert.match(css, /\.app-choice-button-group button\.active \{/);
+  assert.match(css, /\.decision-answer-controls > button \{/);
+});
+
 test("Agents collaboration uses lazy open-source 3D character scene", () => {
   assert.equal(packageJson.dependencies["@react-three/fiber"], "9.6.1");
   assert.equal(packageJson.dependencies["@react-three/drei"], "10.7.7");

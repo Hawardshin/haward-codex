@@ -1,0 +1,18 @@
+{
+  "date": "2026-06-06",
+  "slug": "native-select-replacement",
+  "project": "platform-desktop-app",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request changes desktop app UI behavior and requires implementation, verification, build, and trace records.",
+  "non_quick_gates": [
+    "web_first_intake",
+    "requirements",
+    "spec",
+    "validation",
+    "omission_check",
+    "resource_check",
+    "evaluation"
+  ]
+}

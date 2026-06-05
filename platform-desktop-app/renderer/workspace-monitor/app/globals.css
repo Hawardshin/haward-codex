@@ -4382,6 +4382,251 @@ h3 {
   width: 100%;
 }
 
+.app-choice-menu-field {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.app-choice-menu-label {
+  color: var(--muted);
+  font-size: var(--font-size-overline);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.app-choice-menu-trigger {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 8px;
+  width: 100%;
+  min-width: 190px;
+  min-height: var(--control-compact-target-size);
+  align-items: center;
+  border: 1px solid color-mix(in srgb, var(--line) 78%, var(--blue) 12%);
+  background: var(--choice-bg);
+  color: var(--text);
+  border-radius: 7px;
+  padding: 7px 9px;
+  box-shadow: var(--control-shadow);
+  text-align: left;
+}
+
+.app-choice-menu-trigger[data-state="open"] {
+  border-color: var(--accent-primary-border);
+  background: var(--choice-bg-hover);
+  box-shadow: var(--control-hover-shadow);
+}
+
+.app-choice-menu-trigger:disabled {
+  opacity: 0.55;
+}
+
+.app-choice-menu-copy {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.app-choice-menu-copy strong,
+.app-choice-menu-copy small {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-choice-menu-copy strong {
+  color: var(--text);
+  font-size: var(--font-size-caption);
+  font-weight: 820;
+}
+
+.app-choice-menu-copy small {
+  color: var(--muted);
+  font-size: var(--font-size-overline);
+  font-weight: 700;
+}
+
+.app-choice-menu-trigger svg:first-child {
+  color: color-mix(in srgb, var(--muted) 68%, var(--blue) 32%);
+}
+
+.app-choice-menu-caret {
+  color: var(--muted);
+  transition: transform var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.app-choice-menu-trigger[data-state="open"] .app-choice-menu-caret {
+  transform: rotate(180deg);
+}
+
+.app-choice-menu {
+  z-index: 90;
+  width: min(340px, calc(100vw - 32px));
+  max-height: min(380px, 68vh);
+  overflow: auto;
+  border: 1px solid color-mix(in srgb, var(--line) 78%, var(--blue) 12%);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 6px;
+  box-shadow: 0 20px 48px rgba(17, 24, 39, 0.2);
+  animation: workspace-menu-enter var(--motion-duration-fast) var(--motion-ease-out) both;
+  scrollbar-gutter: stable;
+}
+
+.app-choice-menu-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 8px 8px;
+  color: var(--muted);
+  font-size: var(--font-size-caption);
+  font-weight: 800;
+}
+
+.app-choice-menu-heading strong {
+  color: var(--text);
+  font-size: var(--font-size-overline);
+}
+
+.app-choice-menu-separator {
+  height: 1px;
+  margin: 2px 0 5px;
+  background: var(--line);
+}
+
+.app-choice-menu-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  min-height: 40px;
+  border-radius: 7px;
+  padding: 7px 8px;
+  outline: none;
+  cursor: pointer;
+}
+
+.app-choice-menu-item > span,
+.app-choice-menu-item strong,
+.app-choice-menu-item small {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-choice-menu-item strong {
+  color: var(--text);
+  font-size: var(--font-size-caption);
+  font-weight: 800;
+}
+
+.app-choice-menu-item small {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: var(--font-size-overline);
+}
+
+.app-choice-menu-item[data-highlighted] {
+  background: var(--control-selected-bg);
+}
+
+.app-choice-menu-item[data-highlighted] strong,
+.app-choice-menu-item[data-highlighted] small {
+  color: var(--control-selected-fg);
+}
+
+.app-choice-menu-item[data-selected="true"] {
+  background: color-mix(in srgb, var(--surface) 82%, var(--blue) 10%);
+  box-shadow: inset 3px 0 0 var(--blue);
+}
+
+.app-choice-button-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(116px, 1fr));
+  gap: 6px;
+  min-width: 0;
+}
+
+.app-choice-button-group.compact {
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+}
+
+.app-choice-button-group button {
+  display: grid;
+  min-width: 0;
+  min-height: 46px;
+  align-content: center;
+  justify-items: start;
+  gap: 2px;
+  border: 1px solid var(--line);
+  background: var(--choice-bg);
+  color: var(--text);
+  border-radius: 7px;
+  padding: 7px 9px;
+  box-shadow: var(--control-shadow);
+  text-align: left;
+}
+
+.app-choice-button-group.compact button {
+  min-height: var(--control-compact-target-size);
+  padding: 6px 8px;
+}
+
+.app-choice-button-group button.active {
+  border-color: var(--accent-primary-border);
+  background: var(--choice-selected-bg);
+  color: var(--text-inverse);
+  box-shadow: var(--choice-active-shadow);
+}
+
+.app-choice-button-group span,
+.app-choice-button-group small {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.app-choice-button-group span {
+  color: currentColor;
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+}
+
+.app-choice-button-group small {
+  color: var(--muted);
+  font-size: var(--font-size-overline);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.app-choice-button-group button.active small {
+  color: currentColor;
+}
+
+.desktop-toolbar .document-filter-choice {
+  width: min(260px, 100%);
+}
+
+.desktop-toolbar .app-choice-menu-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.history-filters .app-choice-menu-field {
+  width: min(280px, 100%);
+}
+
 .content-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.8fr);
@@ -8336,7 +8581,6 @@ h3 {
   text-transform: uppercase;
 }
 
-.agent-provider-run-controls select,
 .agent-provider-run-controls input {
   width: 100%;
   min-width: 0;
@@ -8539,7 +8783,6 @@ h3 {
 
 .agent-chat-composer textarea,
 .agent-chat-composer input,
-.agent-chat-composer select,
 .agent-chat-context-form textarea {
   width: 100%;
   min-height: 0;
@@ -8554,7 +8797,6 @@ h3 {
   resize: vertical;
 }
 
-.agent-provider-run-controls select,
 .agent-provider-run-controls input {
   min-height: var(--control-compact-target-size);
 }
@@ -9247,7 +9489,8 @@ h3 {
 }
 
 .agent-factory-form label,
-.learning-decision-controls label {
+.learning-decision-controls label,
+.learning-choice-field {
   display: grid;
   min-width: 0;
   gap: 5px;
@@ -9273,7 +9516,6 @@ h3 {
 
 .agent-factory-form input,
 .agent-factory-form textarea,
-.learning-decision-controls select,
 .learning-decision-controls textarea {
   width: 100%;
   border: 1px solid var(--line);
@@ -9404,9 +9646,17 @@ h3 {
 
 .learning-decision-controls {
   display: grid;
-  grid-template-columns: minmax(130px, 0.4fr) minmax(150px, 0.4fr) minmax(0, 1fr);
+  grid-template-columns: minmax(180px, 0.7fr) minmax(220px, 0.9fr) minmax(0, 1fr);
   gap: 8px;
   align-items: end;
+}
+
+.learning-action-choice-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.learning-asset-choice-grid {
+  grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
 }
 
 .learning-decision-contract {
@@ -10523,13 +10773,12 @@ h3 {
 
 .decision-answer-controls {
   display: grid;
-  grid-template-columns: minmax(130px, 0.35fr) minmax(0, 1fr) auto;
+  grid-template-columns: minmax(190px, 0.42fr) minmax(0, 1fr) repeat(2, minmax(118px, auto));
   gap: 8px;
   align-items: end;
   margin-top: 12px;
 }
 
-.decision-answer-controls select,
 .decision-answer-controls textarea {
   width: 100%;
   border: 1px solid var(--line);
@@ -10539,18 +10788,17 @@ h3 {
   font: inherit;
 }
 
-.decision-answer-controls select {
-  min-height: var(--control-target-size);
-  padding: 8px 10px;
-}
-
 .decision-answer-controls textarea {
   min-height: 92px;
   padding: 10px;
   resize: vertical;
 }
 
-.decision-answer-controls button {
+.decision-answer-type-choices {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.decision-answer-controls > button {
   display: inline-flex;
   min-height: var(--control-target-size);
   align-items: center;
@@ -10563,7 +10811,7 @@ h3 {
   white-space: nowrap;
 }
 
-.decision-answer-controls button:disabled {
+.decision-answer-controls > button:disabled {
   opacity: 0.55;
 }
 
@@ -13689,6 +13937,8 @@ h3 {
   .settings-option-list button:hover,
   .settings-segment-list button:hover,
   .settings-pin-grid button:hover,
+  .app-choice-menu-trigger:hover,
+  .app-choice-button-group button:hover,
   .runtime-text-choice-grid button:hover,
   .agent-provider-choice-grid button:hover,
   .agent-model-choice-grid button:hover,

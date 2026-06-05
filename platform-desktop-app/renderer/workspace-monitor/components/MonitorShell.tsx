@@ -147,6 +147,124 @@ function MountedSectionPanel({
   );
 }
 
+type AppChoiceOption = {
+  value: string;
+  label: string;
+  detail?: string;
+};
+
+function AppChoiceButtonGroup({
+  className = "",
+  density = "regular",
+  label,
+  onChange,
+  options,
+  value
+}: {
+  className?: string;
+  density?: "regular" | "compact";
+  label: string;
+  onChange: (value: string) => void;
+  options: AppChoiceOption[];
+  value: string;
+}) {
+  const classes = ["app-choice-button-group", density === "compact" ? "compact" : "", className].filter(Boolean).join(" ");
+
+  return (
+    <div className={classes} role="listbox" aria-label={label}>
+      {options.map((option) => {
+        const active = option.value === value;
+        return (
+          <button
+            key={option.value}
+            type="button"
+            className={active ? "active" : ""}
+            role="option"
+            aria-selected={active}
+            title={option.detail || option.label}
+            onClick={() => onChange(option.value)}
+          >
+            <span>{option.label}</span>
+            {option.detail && <small>{option.detail}</small>}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function AppChoiceMenu({
+  className = "",
+  fallbackLabel,
+  icon: Icon,
+  label,
+  onChange,
+  options,
+  value
+}: {
+  className?: string;
+  fallbackLabel?: string;
+  icon?: LucideIcon;
+  label: string;
+  onChange: (value: string) => void;
+  options: AppChoiceOption[];
+  value: string;
+}) {
+  const selectedOption = options.find((option) => option.value === value);
+  const displayLabel = selectedOption?.label || fallbackLabel || label;
+  const classes = ["app-choice-menu-field", className].filter(Boolean).join(" ");
+
+  return (
+    <div className={classes}>
+      <span className="app-choice-menu-label">{label}</span>
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger asChild>
+          <button
+            type="button"
+            className="app-choice-menu-trigger"
+            disabled={options.length === 0}
+            aria-label={label}
+            title={selectedOption?.detail || displayLabel}
+          >
+            {Icon && <Icon size={16} aria-hidden="true" />}
+            <span className="app-choice-menu-copy">
+              <strong>{displayLabel}</strong>
+              {selectedOption?.detail && <small>{selectedOption.detail}</small>}
+            </span>
+            <ChevronDown size={15} aria-hidden="true" className="app-choice-menu-caret" />
+          </button>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Portal>
+          <DropdownMenu.Content className="app-choice-menu" align="start" sideOffset={6} collisionPadding={12}>
+            <DropdownMenu.Label className="app-choice-menu-heading">
+              <span>{label}</span>
+              <strong>{options.length}</strong>
+            </DropdownMenu.Label>
+            <DropdownMenu.Separator className="app-choice-menu-separator" />
+            {options.map((option) => {
+              const active = option.value === value;
+              return (
+                <DropdownMenu.Item
+                  key={option.value}
+                  className="app-choice-menu-item"
+                  data-selected={active ? "true" : "false"}
+                  onSelect={() => onChange(option.value)}
+                >
+                  <span>
+                    <strong>{option.label}</strong>
+                    {option.detail && <small>{option.detail}</small>}
+                  </span>
+                  {active && <CheckCircle2 size={14} aria-hidden="true" />}
+                </DropdownMenu.Item>
+              );
+            })}
+          </DropdownMenu.Content>
+        </DropdownMenu.Portal>
+      </DropdownMenu.Root>
+    </div>
+  );
+}
+
 type CommandItem = {
   id: string;
   label: string;
@@ -5588,19 +5706,18 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
 
               <section className="toolbar desktop-toolbar" aria-label="Document filters">
                 {section !== "source" && (
-                  <>
-                    <label className="select-box">
-                      <ListFilter size={16} aria-hidden="true" />
-                      <select value={category} onChange={(event) => setCategory(event.target.value)}>
-                        <option value="all">모든 문서</option>
-                        {viewCategories.map((item) => (
-                          <option key={item} value={item}>
-                            {categoryLabel(item)}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
-                  </>
+                  <AppChoiceMenu
+                    className="document-filter-choice"
+                    fallbackLabel={uiLanguage === "ko" ? "모든 문서" : "All documents"}
+                    icon={ListFilter}
+                    label={uiLanguage === "ko" ? "문서 필터" : "Document filter"}
+                    value={category}
+                    onChange={setCategory}
+                    options={[
+                      { value: "all", label: uiLanguage === "ko" ? "모든 문서" : "All documents" },
+                      ...viewCategories.map((item) => ({ value: item, label: categoryLabel(item) }))
+                    ]}
+                  />
                 )}
               </section>
             </>
@@ -6093,28 +6210,42 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
               <span className="result-count">{filteredHistoryDays.length} days</span>
             </div>
             <div className="history-filters">
-              <label className="select-box">
-                <CalendarDays size={16} aria-hidden="true" />
-                <select value={historyDate} onChange={(event) => setHistoryDate(event.target.value)}>
-                  <option value="all">모든 날짜</option>
-                  {visibleHistoryDays.map((day) => (
-                    <option key={day.date} value={day.date}>
-                      {day.date} ({day.documentsCount})
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="select-box">
-                <ListFilter size={16} aria-hidden="true" />
-                <select value={historyCategory} onChange={(event) => setHistoryCategory(event.target.value)}>
-                  <option value="all">모든 기록 유형</option>
-                  {historyCategories.map((item) => (
-                    <option key={item} value={item}>
-                      {categoryLabel(item)}
-                    </option>
-                  ))}
-                </select>
-              </label>
+              <AppChoiceMenu
+                className="history-date-choice"
+                fallbackLabel={uiLanguage === "ko" ? "모든 날짜" : "All dates"}
+                icon={CalendarDays}
+                label={uiLanguage === "ko" ? "기록 날짜" : "History date"}
+                value={historyDate}
+                onChange={setHistoryDate}
+                options={[
+                  {
+                    value: "all",
+                    label: uiLanguage === "ko" ? "모든 날짜" : "All dates",
+                    detail: `${visibleHistoryDays.length} ${uiLanguage === "ko" ? "일" : "days"}`
+                  },
+                  ...visibleHistoryDays.map((day) => ({
+                    value: day.date,
+                    label: day.date,
+                    detail: `${day.documentsCount} ${uiLanguage === "ko" ? "개 문서" : "documents"}`
+                  }))
+                ]}
+              />
+              <AppChoiceMenu
+                className="history-category-choice"
+                fallbackLabel={uiLanguage === "ko" ? "모든 기록 유형" : "All history types"}
+                icon={ListFilter}
+                label={uiLanguage === "ko" ? "기록 유형" : "History type"}
+                value={historyCategory}
+                onChange={setHistoryCategory}
+                options={[
+                  {
+                    value: "all",
+                    label: uiLanguage === "ko" ? "모든 기록 유형" : "All history types",
+                    detail: `${historyCategories.length} ${uiLanguage === "ko" ? "유형" : "types"}`
+                  },
+                  ...historyCategories.map((item) => ({ value: item, label: categoryLabel(item) }))
+                ]}
+              />
             </div>
             <div className="history-visual-grid">
               <HistoryDensityChart days={filteredHistoryDays.slice(0, 28)} />
@@ -7309,6 +7440,22 @@ function LearningFeedbackLoopPanel({
   onRecordDecision: () => void;
 }) {
   const ko = language === "ko";
+  const learningActionOptions: AppChoiceOption[] = [
+    { value: "promote", label: ko ? "승격" : "Promote", detail: ko ? "자산으로 만들기" : "Create asset" },
+    { value: "approve", label: ko ? "승인" : "Approve", detail: ko ? "진행 허용" : "Allow work" },
+    { value: "defer", label: ko ? "보류" : "Defer", detail: ko ? "나중에 검토" : "Review later" },
+    { value: "reject", label: ko ? "거절" : "Reject", detail: ko ? "후보 제외" : "Drop candidate" }
+  ];
+  const learningAssetTypeOptions: AppChoiceOption[] = [
+    { value: "prompt", label: "prompt" },
+    { value: "workflow", label: "workflow" },
+    { value: "template", label: "template" },
+    { value: "tool", label: "tool" },
+    { value: "skill", label: "skill" },
+    { value: "agent", label: "agent" },
+    { value: "project_feature", label: "project feature" }
+  ];
+
   return (
     <section className="panel wide learning-feedback-panel">
       <div className="panel-heading">
@@ -7366,27 +7513,28 @@ function LearningFeedbackLoopPanel({
                 ))}
               </div>
               <div className="learning-decision-controls">
-                <label>
+                <div className="learning-choice-field">
                   <span>{ko ? "처리" : "Action"}</span>
-                  <select value={action} onChange={(event) => onActionChange(event.target.value)}>
-                    <option value="promote">{ko ? "승격" : "Promote"}</option>
-                    <option value="approve">{ko ? "승인" : "Approve"}</option>
-                    <option value="defer">{ko ? "보류" : "Defer"}</option>
-                    <option value="reject">{ko ? "거절" : "Reject"}</option>
-                  </select>
-                </label>
-                <label>
+                  <AppChoiceButtonGroup
+                    className="learning-action-choice-grid"
+                    density="compact"
+                    label={ko ? "처리 선택" : "Action choices"}
+                    value={action}
+                    options={learningActionOptions}
+                    onChange={onActionChange}
+                  />
+                </div>
+                <div className="learning-choice-field">
                   <span>{ko ? "자산 유형" : "Asset Type"}</span>
-                  <select value={assetType} onChange={(event) => onAssetTypeChange(event.target.value)}>
-                    <option value="prompt">prompt</option>
-                    <option value="workflow">workflow</option>
-                    <option value="template">template</option>
-                    <option value="tool">tool</option>
-                    <option value="skill">skill</option>
-                    <option value="agent">agent</option>
-                    <option value="project_feature">project feature</option>
-                  </select>
-                </label>
+                  <AppChoiceButtonGroup
+                    className="learning-asset-choice-grid"
+                    density="compact"
+                    label={ko ? "자산 유형 선택" : "Asset type choices"}
+                    value={assetType}
+                    options={learningAssetTypeOptions}
+                    onChange={onAssetTypeChange}
+                  />
+                </div>
                 <label className="wide-field">
                   <span>{ko ? "메모" : "Notes"}</span>
                   <textarea value={notes} onChange={(event) => onNotesChange(event.target.value)} rows={3} />
@@ -12637,15 +12785,38 @@ function DesktopRuntimePanel({
 	                      <span>{uiLanguage === "ko" ? "답변됨" : "answered"}</span>
 	                      <strong>{selectedDecision.answeredAt || (uiLanguage === "ko" ? "대기 중" : "pending")}</strong>
                     </article>
-                  </div>
-                  <div className="decision-answer-controls">
-                    <select value={decisionAnswerType} onChange={(event) => setDecisionAnswerType(event.target.value)}>
-	                      <option value="instruction">{uiLanguage === "ko" ? "지시" : "Instruction"}</option>
-	                      <option value="approve">{uiLanguage === "ko" ? "승인" : "Approve"}</option>
-	                      <option value="edit">{uiLanguage === "ko" ? "수정" : "Edit"}</option>
-	                      <option value="reject">{uiLanguage === "ko" ? "거절" : "Reject"}</option>
-                    </select>
-                    <textarea
+	                  </div>
+	                  <div className="decision-answer-controls">
+	                    <AppChoiceButtonGroup
+	                      className="decision-answer-type-choices"
+	                      density="compact"
+	                      label={uiLanguage === "ko" ? "답변 유형 선택" : "Answer type choices"}
+	                      value={decisionAnswerType}
+	                      onChange={setDecisionAnswerType}
+	                      options={[
+	                        {
+	                          value: "instruction",
+	                          label: uiLanguage === "ko" ? "지시" : "Instruction",
+	                          detail: uiLanguage === "ko" ? "다음 작업 지시" : "Next direction"
+	                        },
+	                        {
+	                          value: "approve",
+	                          label: uiLanguage === "ko" ? "승인" : "Approve",
+	                          detail: uiLanguage === "ko" ? "진행 허용" : "Allow work"
+	                        },
+	                        {
+	                          value: "edit",
+	                          label: uiLanguage === "ko" ? "수정" : "Edit",
+	                          detail: uiLanguage === "ko" ? "변경 요청" : "Request edits"
+	                        },
+	                        {
+	                          value: "reject",
+	                          label: uiLanguage === "ko" ? "거절" : "Reject",
+	                          detail: uiLanguage === "ko" ? "진행 중단" : "Stop work"
+	                        }
+	                      ]}
+	                    />
+	                    <textarea
                       value={decisionAnswer}
                       onChange={(event) => setDecisionAnswer(event.target.value)}
                       rows={4}
