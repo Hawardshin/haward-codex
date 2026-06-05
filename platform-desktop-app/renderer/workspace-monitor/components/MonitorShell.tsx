@@ -5454,7 +5454,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                   <section className="home-navigation-dock" data-home-navigation-dock aria-label={uiLanguage === "ko" ? "작업 목표 dock" : "Work goal dock"}>
                     <header>
                       <div>
-                      <p className="eyebrow">{uiLanguage === "ko" ? "작업 dock" : "Work Dock"}</p>
+                        <p className="eyebrow">{uiLanguage === "ko" ? "작업 dock" : "Work Dock"}</p>
                         <h3>{uiLanguage === "ko" ? "다음 작업 목표" : "Next work goals"}</h3>
                       </div>
                       <span>{taskIntentItems.length.toLocaleString("ko-KR")}</span>
@@ -5463,12 +5463,17 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                       {taskIntentItems.map((item, index) => (
                         <button key={item.id} type="button" onClick={item.run} data-task-intent={item.id}>
                           <span className="task-intent-index">{index + 1}</span>
-                          <item.icon size={16} aria-hidden="true" />
+                          <span className="task-intent-icon" aria-hidden="true">
+                            <item.icon size={16} aria-hidden="true" />
+                          </span>
                           <span>
                             <strong>{item.label}</strong>
                             <small>{item.detail}</small>
                           </span>
                           <em>{item.badge}</em>
+                          <span className="task-intent-action-cue" aria-hidden="true">
+                            <ArrowRight size={14} aria-hidden="true" />
+                          </span>
                         </button>
                       ))}
                     </div>

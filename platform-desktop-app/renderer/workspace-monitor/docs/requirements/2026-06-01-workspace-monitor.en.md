@@ -57,6 +57,7 @@
 | REQ-WM-056 | Tool Studio Build Tool shall provide a dedicated Python tool source-management sub-workbench that shows the selected template's package name, module name, `src/` edit targets, `pyproject.toml`, console entry point, smoke test path, init/run/package commands, checklist, and copy-source-plan action in one place. | must | python source manager static test, copy payload marker audit, desktop/mobile source manager smoke, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-057 | The Overview first screen shall be a Focus Command Surface, not a flat list of equal cards: it shall show one recommended job, next-step preview, and primary action first, while moving other goals and operating status into a separate dock/strip. | must | focus command static test, desktop/mobile Browser smoke, target order assertion, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-058 | The desktop product UI shall use consistent color, typography, shadow, and button-state tokens across the app shell, titlebar, rail, and Overview primary work surface, and shall build hierarchy around real work goals and next actions instead of exposing design-principle copy in the interface. | must | shell visual token static test, meta-copy absence test, desktop/mobile Browser smoke, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` |
+| REQ-WM-059 | Overview work-dock goal buttons shall expose industrial-design control affordance by separating index, feature icon, work description, status badge, and forward action cue so target location and execution result are immediately legible, while mobile keeps only the essential controls without layout breakage. | must | task intent affordance static test, desktop/mobile Browser smoke, action cue count, primary target size, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` |
 
 ## Scope
 
@@ -97,6 +98,7 @@
 - Python source/package/pyproject management inside Tool Studio Build Tool
 - Focus Command Surface and secondary work dock on the Overview first screen
 - Visual design tokens and work-goal-centered copy across the app shell, titlebar, rail, and Overview primary surface
+- Index/icon/status/action-cue affordance for Overview work-dock goal buttons
 - Vercel deployment docs
 
 ## Non-Goals

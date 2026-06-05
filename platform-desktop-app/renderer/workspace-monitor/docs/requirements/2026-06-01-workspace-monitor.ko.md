@@ -69,6 +69,7 @@
 | REQ-WM-056 | Tool Studio의 `툴 만들기` 화면은 Python tool source 관리를 별도 하위 작업대로 제공해야 하며, template별 package name, module name, `src/` 편집 대상, `pyproject.toml`, console entry point, smoke test path, init/run/package command, checklist, 소스 계획 복사 액션을 한 곳에서 보여줘야 한다. | must | python source manager static test, copy payload marker audit, desktop/mobile source manager smoke, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 | REQ-WM-057 | Overview 첫 화면은 동등한 카드 목록이 아니라 하나의 추천 작업, 다음 단계 preview, primary action을 먼저 보여주는 Focus Command Surface여야 하며, 다른 목표와 운영 상태는 별도 dock/strip으로 낮춰야 한다. | must | focus command static test, desktop/mobile Browser smoke, target order assertion, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 | REQ-WM-058 | 데스크톱 제품 UI는 앱 셸, 상단바, 레일, Overview 주 작업면에서 일관된 색상/타이포그래피/그림자/버튼 상태 토큰을 사용해야 하며, 화면에 디자인 원칙 설명 문구를 노출하지 않고 실제 작업 목표와 다음 행동을 중심으로 시각 위계를 만들어야 한다. | must | shell visual token static test, meta-copy absence test, desktop/mobile Browser smoke, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
+| REQ-WM-059 | Overview 작업 dock의 목표 버튼은 산업 디자인 관점의 조작 affordance를 가져야 하며, 번호, 기능 아이콘, 작업 설명, 상태 badge, 진행 화살표를 분리해 손이 갈 위치와 실행 결과가 즉시 보이고 모바일에서는 핵심 조작부만 남아 깨지지 않아야 한다. | must | task intent affordance static test, desktop/mobile Browser smoke, action cue count, primary target size, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 
 ## 범위
 
@@ -118,6 +119,7 @@
 - Tool Studio `툴 만들기` 내부 Python source/package/pyproject 관리 작업대
 - Overview 첫 화면의 Focus Command Surface와 보조 작업 dock
 - 앱 셸/상단바/레일/Overview 주 작업면에 적용되는 시각 디자인 토큰과 실제 작업 중심 카피
+- Overview 작업 dock 목표 버튼의 번호/아이콘/status/action cue affordance
 - Vercel 배포 문서
 
 ## 제외 범위

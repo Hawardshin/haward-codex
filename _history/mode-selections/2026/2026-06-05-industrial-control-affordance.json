@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-06-05",
+  "request": "너는 엄청난 산업 디자이너야",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "Workspace Monitor UI control affordance and requirements changed without new dependency installation.",
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-industrial-control-affordance.json"
+  ]
+}

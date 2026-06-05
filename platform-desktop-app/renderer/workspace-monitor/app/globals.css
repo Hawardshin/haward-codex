@@ -2348,7 +2348,9 @@ main {
   min-width: 0;
   border: 1px solid var(--line-subtle);
   border-radius: 8px;
-  background: color-mix(in srgb, var(--surface) 82%, var(--surface-muted) 18%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 90%, var(--surface-muted) 10%), color-mix(in srgb, var(--surface) 74%, var(--surface-muted) 26%));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text-inverse) 10%, transparent);
   padding: 12px;
 }
 
@@ -2385,9 +2387,13 @@ main {
 }
 
 .home-navigation-dock .workspace-home-actions.task-intent-grid button {
-  min-height: 76px;
+  min-height: 88px;
   border-color: var(--line-subtle);
-  background: color-mix(in srgb, var(--surface-raised) 88%, var(--surface-muted) 12%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-raised) 96%, var(--text-inverse) 4%), color-mix(in srgb, var(--surface-raised) 84%, var(--surface-muted) 16%));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--text-inverse) 9%, transparent),
+    var(--control-shadow);
 }
 
 .workspace-home-actions {
@@ -2408,8 +2414,9 @@ main {
 }
 
 .workspace-home-actions.task-intent-grid button {
+  position: relative;
   display: grid;
-  grid-template-columns: auto auto minmax(0, 1fr) auto;
+  grid-template-columns: 28px 30px minmax(0, 1fr) minmax(34px, auto) 28px;
   align-items: center;
   justify-content: stretch;
   min-height: 92px;
@@ -2418,10 +2425,29 @@ main {
   text-align: left;
 }
 
-.workspace-home-actions.task-intent-grid button > span:not(.task-intent-index) {
+.workspace-home-actions.task-intent-grid button > span:not(.task-intent-index):not(.task-intent-icon):not(.task-intent-action-cue) {
   display: grid;
   gap: 3px;
   min-width: 0;
+}
+
+.task-intent-icon,
+.task-intent-action-cue {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 82%, var(--surface-muted) 18%);
+  color: var(--accent-primary);
+}
+
+.task-intent-action-cue {
+  justify-self: end;
+  border-radius: 999px;
+  color: var(--text-secondary);
+  background: var(--surface);
 }
 
 .workspace-home-actions.task-intent-grid strong,
@@ -2471,9 +2497,24 @@ main {
 
 .workspace-home-actions.task-intent-grid button:hover small,
 .workspace-home-actions.task-intent-grid button:hover em,
+.workspace-home-actions.task-intent-grid button:hover .task-intent-action-cue,
 .workspace-home-actions.task-intent-grid button:focus-visible small,
-.workspace-home-actions.task-intent-grid button:focus-visible em {
+.workspace-home-actions.task-intent-grid button:focus-visible em,
+.workspace-home-actions.task-intent-grid button:focus-visible .task-intent-action-cue {
   color: var(--control-selected-fg);
+}
+
+.workspace-home-actions.task-intent-grid button:hover .task-intent-icon,
+.workspace-home-actions.task-intent-grid button:focus-visible .task-intent-icon {
+  border-color: color-mix(in srgb, var(--control-selected-fg) 36%, transparent);
+  background: color-mix(in srgb, var(--control-selected-fg) 10%, transparent);
+  color: var(--control-selected-fg);
+}
+
+.workspace-home-actions.task-intent-grid button:not(:disabled):active {
+  box-shadow:
+    inset 0 2px 8px rgba(0, 0, 0, 0.16),
+    var(--control-shadow);
 }
 
 .core-home-panel {
@@ -13165,6 +13206,25 @@ h3 {
 
   .home-focus-flow li strong {
     white-space: normal;
+  }
+
+  .workspace-home-actions.task-intent-grid button {
+    grid-template-columns: 28px minmax(0, 1fr) 28px;
+  }
+
+  .task-intent-icon {
+    display: none;
+  }
+
+  .workspace-home-actions.task-intent-grid button em {
+    grid-column: 2;
+    justify-self: start;
+    max-width: 100%;
+  }
+
+  .task-intent-action-cue {
+    grid-column: 3;
+    grid-row: 1 / span 2;
   }
 
   .workspace-home-actions,

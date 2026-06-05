@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-06-05",
+  "work_item": "industrial-control-affordance",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Checked HIG, Material, Carbon, and Fitts's Law related sources."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Updated task-intent button structure and CSS control affordance."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "test, check, build:customer, perf:budget, desktop in-app Browser smoke, and mobile Playwright smoke passed."
+    }
+  ]
+}

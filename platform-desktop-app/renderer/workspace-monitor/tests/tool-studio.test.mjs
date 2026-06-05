@@ -296,6 +296,8 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(monitorShell, /data-home-focus-primary/);
   assert.match(monitorShell, /className="home-navigation-dock"/);
   assert.match(monitorShell, /data-home-navigation-dock/);
+  assert.match(monitorShell, /className="task-intent-icon"/);
+  assert.match(monitorShell, /className="task-intent-action-cue"/);
   assert.match(monitorShell, /data-active-section=\{section\}/);
   assert.match(monitorShell, /!isPrimaryWorkSurface && section !== "overview" && \(/);
   assert.match(monitorShell, /taskIntentItems\.map\(\(item\) => \(\{/);
@@ -322,13 +324,18 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(css, /\.home-focus-card button \{[\s\S]*?min-height: 48px;/);
   assert.match(css, /\.home-navigation-dock \{/);
   assert.match(css, /\.home-navigation-dock \.task-intent-grid \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.home-navigation-dock \.workspace-home-actions\.task-intent-grid button \{[\s\S]*?min-height: 88px;/);
   assert.match(css, /\.task-intent-grid \{[\s\S]*?grid-template-columns: repeat\(auto-fit, minmax\(300px, 1fr\)\);/);
-  assert.match(css, /\.workspace-home-actions\.task-intent-grid button \{[\s\S]*?grid-template-columns: auto auto minmax\(0, 1fr\) auto;/);
+  assert.match(css, /\.workspace-home-actions\.task-intent-grid button \{[\s\S]*?grid-template-columns: 28px 30px minmax\(0, 1fr\) minmax\(34px, auto\) 28px;/);
+  assert.match(css, /\.task-intent-icon,[\s\S]*?\.task-intent-action-cue \{/);
+  assert.match(css, /\.workspace-home-actions\.task-intent-grid button:not\(:disabled\):active \{[\s\S]*?inset 0 2px 8px/);
   assert.match(css, /\.task-handoff-strip \{[\s\S]*?grid-template-columns: auto minmax\(0, 1fr\) auto auto;/);
   assert.match(css, /\.task-flow-rail \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.task-flow-rail button \{[\s\S]*?min-height: 44px;/);
   assert.match(css, /@media \(max-width: 960px\) \{[\s\S]*?\.home-focus-command,[\s\S]*?\.home-focus-flow,[\s\S]*?\.workspace-home-actions,/);
   assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.home-focus-copy h2 \{[\s\S]*?font-size: var\(--font-size-screen-title\);/);
+  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.workspace-home-actions\.task-intent-grid button \{[\s\S]*?grid-template-columns: 28px minmax\(0, 1fr\) 28px;/);
+  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.task-intent-icon \{[\s\S]*?display: none;/);
   assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.home-focus-flow li strong \{[\s\S]*?white-space: normal;/);
   assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.task-flow-rail \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
   assert.match(css, /\.desktop-viewport\[data-active-section="overview"\] \.titlebar-context-strip,[\s\S]*?\.desktop-viewport\[data-active-section="overview"\] \.titlebar-actions,[\s\S]*?\.desktop-viewport\[data-active-section="overview"\] > \.desktop-toolbar \{[\s\S]*?display: none;/);
