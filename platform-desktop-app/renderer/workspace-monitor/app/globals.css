@@ -458,6 +458,7 @@ select {
   .terminal-drawer-main,
   .workspace-explorer-tree,
   .source-editor-frame,
+  .timeline-docs,
   .tool-studio-mode-rail,
   .tool-card-scroll,
   .tool-detail-scroll,
@@ -475,6 +476,7 @@ select {
   .terminal-event-rail,
   .workspace-explorer-tree,
   .source-editor-frame,
+  .timeline-docs,
   .tool-card-scroll,
   .tool-detail-scroll,
   .tool-env-scroll
@@ -498,6 +500,7 @@ select {
   .terminal-drawer-main,
   .workspace-explorer-tree,
   .source-editor-frame,
+  .timeline-docs,
   .tool-studio-mode-rail,
   .tool-card-scroll,
   .tool-detail-scroll,
@@ -523,6 +526,7 @@ select {
   .terminal-drawer-main,
   .workspace-explorer-tree,
   .source-editor-frame,
+  .timeline-docs,
   .tool-studio-mode-rail,
   .tool-card-scroll,
   .tool-detail-scroll,
@@ -547,6 +551,7 @@ select {
   .terminal-drawer-main,
   .workspace-explorer-tree,
   .source-editor-frame,
+  .timeline-docs,
   .tool-studio-mode-rail,
   .tool-card-scroll,
   .tool-detail-scroll,
@@ -8391,6 +8396,26 @@ h3 {
 
 .agent-chat-details summary {
   display: inline-flex;
+  min-height: var(--control-target-size);
+  align-items: center;
+  gap: 8px;
+  border-radius: 7px;
+  cursor: pointer;
+  list-style: none;
+  padding: 6px 8px;
+}
+
+.agent-chat-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.agent-chat-details summary:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--blue) 72%, transparent);
+  outline-offset: 2px;
+}
+
+.agent-chat-details summary {
+  display: inline-flex;
   align-items: center;
   gap: 7px;
   cursor: pointer;
@@ -11405,6 +11430,12 @@ h3 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
+  max-height: clamp(260px, 34dvh, 420px);
+  overflow: auto;
+  border: 1px solid var(--scroll-scope-border);
+  border-radius: 8px;
+  background: var(--scroll-scope-bg);
+  padding: 8px;
 }
 
 .timeline-docs article {

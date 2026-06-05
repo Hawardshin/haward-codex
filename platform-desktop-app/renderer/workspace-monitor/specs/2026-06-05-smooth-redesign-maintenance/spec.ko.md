@@ -16,6 +16,9 @@
 - snapshot 문서에는 `previewMode`, `htmlTruncated`, `sourceBytes` metadata가 있어야 한다.
 - 일반 `check`에서 history payload 예산을 검증한다.
 - 한국어 모드의 Operator Center와 task run 로그 안내는 한국어 중심으로 표시한다.
+- Operator Center 내부 섹션도 브라우저 audit 대상이어야 한다.
+- History timeline 문서 목록은 날짜 카드 내부에서 bounded scroll pane으로 분리되어야 한다.
+- disclosure/summary처럼 버튼 외 클릭 타깃도 최소 작업 타깃 크기를 만족해야 한다.
 
 ## 제외
 

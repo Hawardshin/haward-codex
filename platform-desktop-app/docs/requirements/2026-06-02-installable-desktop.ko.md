@@ -49,6 +49,7 @@
 | PDA-REQ-039 | 설치형 데스크톱 앱의 기본 UI는 한국어 우선 문구와 직관적 클릭 동선을 제공해야 하며, `파일/코드` 섹션은 OS native folder picker, active workspace 표시, runtime file list, 파일 열기, 편집, backup 저장을 앱 안에서 직접 제공해야 한다. 영어 UI 모드는 코드 구조에서 분리 가능해야 한다. | must | Tauri dialog command, Native File Workspace panel, readiness/test, Browser smoke |
 | PDA-REQ-040 | Workspace Monitor의 탭, 메뉴, 다이얼로그, 세부 작업면 전환은 공통 motion token과 `opacity`/`transform` 중심 전환을 사용해야 하며, reduced-motion 설정을 존중하고 탭 active 상태와 버튼 press feedback은 첫 paint 전에 막히지 않아야 한다. | must | `lib/motion.ts`, `globals.css`, tab/button audit, Playwright smoke |
 | PDA-REQ-041 | Workspace Monitor snapshot은 기록과 관리자 문서를 원문 HTML 전체가 아니라 bounded admin preview로 싣고, 원본 경로, source byte, truncation metadata를 남겨 누적 history가 초기 UI payload를 비대하게 만들지 않아야 한다. | must | `collect-workspace.mjs`, `check-history-payload.mjs`, generated snapshot payload budget |
+| PDA-REQ-042 | Workspace Monitor의 기본 탭뿐 아니라 Operator Center 내부 섹션도 브라우저 audit 대상이어야 하며, History timeline 문서 묶음은 날짜 카드 내부의 bounded scroll pane으로 분리되어 mobile/desktop에서 가로 overflow, 작은 클릭 타깃, 잘린 컨트롤이 없어야 한다. | must | `audit-monitor-surfaces.mjs`, `check-scroll-containers.mjs`, Playwright surface audit |
 
 ## 현재 상태
 

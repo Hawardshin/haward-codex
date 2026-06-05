@@ -36,6 +36,8 @@ const coreDrilldown = fs.readFileSync(
 const buttonComponent = fs.readFileSync(path.join(projectRoot, "components", "ui", "Button.tsx"), "utf8");
 const actionGroupComponent = fs.readFileSync(path.join(projectRoot, "components", "ui", "ActionGroup.tsx"), "utf8");
 const collector = fs.readFileSync(path.join(projectRoot, "scripts", "collect-workspace.mjs"), "utf8");
+const scrollCheck = fs.readFileSync(path.join(projectRoot, "scripts", "check-scroll-containers.mjs"), "utf8");
+const surfaceAudit = fs.readFileSync(path.join(projectRoot, "scripts", "audit-monitor-surfaces.mjs"), "utf8");
 const css = fs.readFileSync(path.join(projectRoot, "app", "globals.css"), "utf8");
 const packageJson = JSON.parse(fs.readFileSync(path.join(projectRoot, "package.json"), "utf8"));
 
@@ -377,6 +379,20 @@ test("Operator Center and task run copy localize high-visibility Korean UI", () 
   assert.match(monitorShell, /질문 자동 보류는 초기화 설정에서만 바꿉니다/);
   assert.match(monitorShell, /로그 열기/);
   assert.match(monitorShell, /제한된 stdout\/stderr 미리보기와 실행 기록 JSON/);
+});
+
+test("Operator history surfaces keep timeline documents in bounded scroll panes", () => {
+  assert.equal(packageJson.scripts["audit:surfaces"], "node scripts/audit-monitor-surfaces.mjs");
+  assert.match(surfaceAudit, /const operatorSections = \[/);
+  assert.match(surfaceAudit, /desktop:\$\{section\}/);
+  assert.match(surfaceAudit, /mobile:history/);
+  assert.match(surfaceAudit, /timeline docs must be a bounded scroll pane/);
+  assert.match(css, /\.timeline-docs \{[\s\S]*?max-height: clamp\(260px, 34dvh, 420px\);[\s\S]*?overflow: auto;/);
+  assert.match(css, /\.timeline-docs \{[\s\S]*?background: var\(--scroll-scope-bg\);/);
+  assert.match(scrollCheck, /selector: "\.timeline-docs"/);
+  assert.match(scrollCheck, /max-height: clamp\(260px, 34dvh, 420px\);/);
+  assert.match(css, /\.agent-chat-details summary \{[\s\S]*?min-height: var\(--control-target-size\);/);
+  assert.match(css, /\.agent-chat-details summary::-webkit-details-marker \{[\s\S]*?display: none;/);
 });
 
 test("Tool Studio build mode exposes a dedicated tool builder workbench", () => {

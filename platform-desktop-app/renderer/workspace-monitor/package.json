@@ -19,6 +19,7 @@
     "check:intent-map:customer": "node scripts/check-intent-feature-map.mjs --snapshot public --expect customer",
     "perf:budget": "node scripts/check-performance-budget.mjs",
     "perf:buttons": "node scripts/audit-button-response.mjs",
+    "audit:surfaces": "node scripts/audit-monitor-surfaces.mjs",
     "test": "node --test tests/*.test.mjs"
   },
   "engines": {

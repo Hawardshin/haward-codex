@@ -1,0 +1,21 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "UR-2026-06-05-continue-operator-surface-qa",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "resource": "local_static_http_server",
+      "port": 4182,
+      "status": "stopped_after_validation",
+      "cleanup": "completed before close-out"
+    },
+    {
+      "resource": "playwright_chrome_sessions",
+      "status": "closed",
+      "evidence": "audit-monitor-surfaces.mjs closes browser after desktop and mobile surface checks."
+    }
+  ],
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-05-operator-surface-scroll-qa.json"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "UR-2026-06-05-continue-operator-surface-qa",
+  "status": "passed",
+  "summary": "Continue Workspace Monitor QA into Operator Center surfaces, bounded history scrolling, and disclosure target sizing.",
+  "initial_instruction_alignment": {
+    "continued_work": true,
+    "operator_center_tabs_checked": true,
+    "scroll_scope_improved": true,
+    "small_control_fixed": true,
+    "regression_audit_added": true
+  },
+  "validation_commands": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build",
+    "corepack pnpm --filter workspace-monitor run audit:surfaces -- http://127.0.0.1:4182/#section-overview",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter workspace-monitor run perf:budget"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-05-operator-surface-scroll-qa.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-05-operator-surface-scroll-qa.json"
+  ],
+  "installation_occurred": false
+}

@@ -138,6 +138,10 @@ const cssContracts = [
   {
     selector: ".tool-card-scroll,\n.tool-detail-scroll,\n.tool-env-scroll",
     includes: ["overflow: auto;"]
+  },
+  {
+    selector: ".timeline-docs",
+    includes: ["max-height: clamp(260px, 34dvh, 420px);", "overflow: auto;", "background: var(--scroll-scope-bg);", "border: 1px solid var(--scroll-scope-border);"]
   }
 ];
 
@@ -166,7 +170,8 @@ assertSourceIncludes(css, "Scoped scroll contract", [
   "--scrollbar-thumb:",
   "--scrollbar-thumb-hover:",
   ".desktop-app-root :where(\n  .activity-rail nav,",
-  ".terminal-drawer-main,\n  .workspace-explorer-tree,\n  .source-editor-frame,\n  .tool-studio-mode-rail,",
+  ".terminal-drawer-main,\n  .workspace-explorer-tree,\n  .source-editor-frame,",
+  ".source-editor-frame,\n  .timeline-docs,\n  .tool-studio-mode-rail,",
   "scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);",
   "contain: layout paint style;"
 ]);

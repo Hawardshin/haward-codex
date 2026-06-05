@@ -1,0 +1,34 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "UR-2026-06-05-continue-operator-surface-qa",
+  "check_type": "omission_guard_equivalent",
+  "required_items": [
+    {
+      "item": "Continue beyond the primary tabs.",
+      "status": "covered",
+      "evidence": "audit:surfaces opens six primary sections and five Operator Center sections."
+    },
+    {
+      "item": "Find and fix scroll range problems.",
+      "status": "covered",
+      "evidence": "History timeline documents were converted into bounded scroll panes."
+    },
+    {
+      "item": "Find and fix small control targets.",
+      "status": "covered",
+      "evidence": "Agent chat context summary target height was fixed after audit failure."
+    },
+    {
+      "item": "Do not let the QA method disappear.",
+      "status": "covered",
+      "evidence": "audit-monitor-surfaces.mjs and package audit:surfaces were added."
+    }
+  ],
+  "open_items": [
+    "Full copy audit across every UI string remains a separate slice.",
+    "Runtime execution performance remains separate from renderer surface response."
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-05-operator-surface-scroll-qa.json"
+  ]
+}
