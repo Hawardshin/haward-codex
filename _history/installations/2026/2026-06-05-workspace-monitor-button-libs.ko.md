@@ -1,0 +1,34 @@
+# workspace-monitor Button 라이브러리 설치 감사 기록
+
+- 날짜: 2026-06-05
+- 상태: installed
+- 소유 프로젝트: `platform-desktop-app/renderer/workspace-monitor`
+- 설치 범위: 프로젝트 로컬 의존성
+- 설치 명령:
+  - `corepack pnpm --filter workspace-monitor add -E @radix-ui/react-slot@1.2.4 class-variance-authority@0.7.1`
+- 의존성 기록 대상:
+  - `platform-desktop-app/renderer/workspace-monitor/package.json`
+  - `pnpm-lock.yaml`
+- 설치 목적:
+  - Radix Slot으로 `asChild` 기반 버튼 composition을 제공한다.
+  - class-variance-authority로 버튼 variant/size/state class를 타입 안전하게 관리한다.
+  - 기존 CSS 토큰을 유지하면서 shadcn식 기본 Button API를 도입한다.
+- 보안 검토: 프로젝트 로컬 프론트엔드 패키지이며 global install, native executable, Tauri permission, credential access, network client를 추가하지 않았다. `corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor audit --prod=false` 결과 알려진 취약점 없음.
+- 라이선스 검토: npm metadata 기준 `@radix-ui/react-slot@1.2.4`는 MIT, `class-variance-authority@0.7.1`은 Apache-2.0이다.
+- 검증 결과:
+  - `corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor audit --prod=false`: no known vulnerabilities.
+  - `corepack pnpm --filter workspace-monitor test`: 통과, 42개.
+  - `corepack pnpm --filter workspace-monitor exec tsc --noEmit`: 통과.
+  - `corepack pnpm --filter workspace-monitor run check`: 통과.
+  - `corepack pnpm --filter workspace-monitor run build`: 통과.
+  - `corepack pnpm --filter workspace-monitor run build:customer`: 통과.
+  - `corepack pnpm --filter workspace-monitor run perf:budget`: 통과, largest chunk 734386 bytes, chunkCount 12.
+  - in-app Browser smoke: titlebar/Tool Studio 대표 버튼 5개가 `data-ui-button`으로 렌더링되고 overflow 0.
+  - Playwright desktop/mobile Button smoke: desktop minHeight 44, mobile minHeight 48, root overflow 0.
+  - `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/installations/registry.json`: self_documenting.
+  - `git diff --check`: 통과.
+- 롤백 계획: `corepack pnpm --filter workspace-monitor remove @radix-ui/react-slot class-variance-authority`를 실행하고 Button 컴포넌트/import/test를 제거한 뒤 동일 검증 명령을 재실행한다.
+- 외부 확인:
+  - Radix Slot: `https://www.radix-ui.com/primitives/docs/utilities/slot`
+  - shadcn Button: `https://v3.shadcn.com/docs/components/button`
+  - CVA npm metadata: `class-variance-authority@0.7.1`

@@ -586,6 +586,38 @@
       "rollback_path": "corepack pnpm --filter workspace-monitor remove @react-three/fiber @react-three/drei; remove Agents 3D scene component/import/test; rerun workspace-monitor checks.",
       "installation_record_path": "_history/installations/2026/2026-06-05-workspace-monitor-react-three-fiber-drei.ko.md",
       "commit": "pending"
+    },
+    {
+      "id": "2026-06-05-workspace-monitor-button-libs",
+      "date": "2026-06-05",
+      "status": "installed",
+      "name": "workspace-monitor Button primitive libraries",
+      "scope": "project",
+      "owning_project": "platform-desktop-app/renderer/workspace-monitor",
+      "package_manager": "pnpm",
+      "install_command": "corepack pnpm --filter workspace-monitor add -E @radix-ui/react-slot@1.2.4 class-variance-authority@0.7.1",
+      "environment_path": "platform-desktop-app/renderer/workspace-monitor/node_modules",
+      "dependency_record_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/package.json",
+        "pnpm-lock.yaml"
+      ],
+      "version_or_lock_status": "Exact dependencies @radix-ui/react-slot@1.2.4 and class-variance-authority@0.7.1 recorded in workspace-monitor package.json and pnpm-lock.yaml.",
+      "security_review": "Project-local frontend packages only; no global install, native executable, Tauri permission, credential access, or network client was added. Project-cwd pnpm audit reported no known vulnerabilities.",
+      "license_review": "npm metadata reports MIT for @radix-ui/react-slot@1.2.4 and Apache-2.0 for class-variance-authority@0.7.1.",
+      "verification": [
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor audit --prod=false: no known vulnerabilities",
+        "corepack pnpm --filter workspace-monitor test: passed, 42 tests",
+        "corepack pnpm --filter workspace-monitor exec tsc --noEmit: passed",
+        "corepack pnpm --filter workspace-monitor run check: passed",
+        "corepack pnpm --filter workspace-monitor run build: passed",
+        "corepack pnpm --filter workspace-monitor run build:customer: passed",
+        "corepack pnpm --filter workspace-monitor run perf:budget: within_budget, largest chunk 734386 bytes, chunkCount 12",
+        "Button primitive in-app Browser smoke: representative ui buttons rendered with overflow 0",
+        "Button primitive Playwright desktop/mobile smoke: target sizes >= 44px and overflow 0"
+      ],
+      "rollback_path": "corepack pnpm --filter workspace-monitor remove @radix-ui/react-slot class-variance-authority; remove Button component/import/test; rerun workspace-monitor checks.",
+      "installation_record_path": "_history/installations/2026/2026-06-05-workspace-monitor-button-libs.ko.md",
+      "commit": "pending"
     }
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "schema_version": "2026-06-01",
+  "request_id": "2026-06-05-button-library-baseline",
+  "timings": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Checked official Radix Themes Button, Radix Slot, shadcn Button, React Aria Button, and CVA metadata."
+    },
+    {
+      "phase": "local_context_and_install",
+      "status": "completed",
+      "notes": "Inspected package, button density, installation registry, and installed project-local exact dependencies."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Added Button primitive, CSS variants, representative migration, and static tests."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "audit, test, typecheck, check, build, build:customer, perf budget, in-app Browser smoke, and Playwright desktop/mobile Button smoke passed."
+    }
+  ]
+}

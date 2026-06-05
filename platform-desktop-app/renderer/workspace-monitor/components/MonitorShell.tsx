@@ -45,6 +45,7 @@ import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } f
 
 import { ProductFeatureArchitecturePanel } from "@/components/features/ProductFeatureArchitecturePanel";
 import { OperatorCenterDialog } from "@/components/features/OperatorCenterDialog";
+import { Button } from "@/components/ui/Button";
 import {
   CoreFeatureDrilldown,
   type CoreFeatureDrilldownItem
@@ -4760,17 +4761,17 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                   <strong>{currentFeatureGroup?.label || (uiLanguage === "ko" ? "작업" : "Work")}</strong>
                   <small>{currentSection?.purpose || (uiLanguage === "ko" ? "선택한 화면의 역할을 보여줍니다." : "Shows the role of the selected surface.")}</small>
                 </span>
-                <button type="button" onClick={() => openSection(attentionState.section)} title={attentionState.title}>
+                <Button variant="secondary" onClick={() => openSection(attentionState.section)} title={attentionState.title}>
                   <attentionState.icon size={14} aria-hidden="true" />
                   <span>{attentionState.action}</span>
-                </button>
+                </Button>
               </div>
             )}
             <div className="titlebar-actions">
-              <button type="button" onClick={openTerminalDrawer} title={uiLanguage === "ko" ? "하단 터미널 열기" : "Open bottom terminal"}>
+              <Button variant="secondary" onClick={openTerminalDrawer} title={uiLanguage === "ko" ? "하단 터미널 열기" : "Open bottom terminal"}>
                 <SquareTerminal size={15} aria-hidden="true" />
                 <span>{uiLanguage === "ko" ? "터미널" : "Terminal"}</span>
-              </button>
+              </Button>
               {!isPrimaryWorkSurface && section !== "overview" && (
                 <label className="titlebar-search">
                   <Search size={15} aria-hidden="true" />
@@ -4789,9 +4790,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                   />
                 </label>
               )}
-              <button type="button" onClick={() => setCommandPaletteOpen(true)} title="Command Palette" aria-label="Command Palette">
+              <Button variant="ghost" size="icon" onClick={() => setCommandPaletteOpen(true)} title="Command Palette" aria-label="Command Palette">
                 <Search size={16} aria-hidden="true" />
-              </button>
+              </Button>
             </div>
           </header>
 
@@ -4803,19 +4804,19 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                 <strong>{activeTaskIntent.label}</strong>
                 <em>{activeTaskIntent.nextStep}</em>
               </span>
-              <button type="button" onClick={() => openSection("overview")}>
+              <Button variant="secondary" size="sm" onClick={() => openSection("overview")}>
                 <ArrowLeft size={14} aria-hidden="true" />
                 <span>{uiLanguage === "ko" ? "목표 변경" : "Change goal"}</span>
-              </button>
-              <button type="button" onClick={() => setActiveTaskIntentId("")}>
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => setActiveTaskIntentId("")}>
                 <X size={14} aria-hidden="true" />
                 <span>{uiLanguage === "ko" ? "숨기기" : "Dismiss"}</span>
-              </button>
+              </Button>
               <ol className="task-flow-rail" aria-label={uiLanguage === "ko" ? "작업 흐름" : "Task flow"}>
                 {activeTaskIntent.flowSteps.map((step, index) => (
                   <li key={`${activeTaskIntent.id}-${step.id}`} className={step.id === activeTaskFlowStep?.id ? "current" : ""}>
-                    <button
-                      type="button"
+                    <Button
+                      variant="ghost"
                       onClick={step.run || (() => setActiveTaskFlowStepId(step.id))}
                       data-task-flow-step={step.id}
                       aria-current={step.id === activeTaskFlowStep?.id ? "step" : undefined}
@@ -4823,7 +4824,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                       <span>{index + 1}</span>
                       <strong>{step.label}</strong>
                       {step.actionLabel && <small>{step.actionLabel}</small>}
-                    </button>
+                    </Button>
                   </li>
                 ))}
               </ol>

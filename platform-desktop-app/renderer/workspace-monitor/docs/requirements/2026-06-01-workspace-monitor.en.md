@@ -64,6 +64,7 @@
 | REQ-WM-063 | The default activity rail shall not require users to remember icon meanings; it shall show compact text labels with icons so primary destinations are chosen by recognition. In the default desktop width, expanded width, 720px-and-down top rail, and 420px-and-down horizontal scrolling rail, labels shall remain readable and button targets shall stay at least 44px. | must | activity rail readable labels static test, desktop/mobile Browser rail smoke, active label/current state assertion, horizontal overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-064 | Tool Studio shall not expose Build, Environment, Deploy, and Registry as one flat set of same-depth tabs. It shall first let users choose a parent flow such as Create or Ship, then show only the detail modes for that flow. Direct entry from shortcuts or external task flows into a detail mode shall also synchronize the parent flow selection. | must | Tool Studio parent-stage depth static test, requested mode parent sync test, desktop/mobile Browser depth rail smoke, current child mode count assertion, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-065 | The default Tool Studio dropdown button shall clearly show the selected detail function, parent flow, menu affordance, and open state in one control while preserving `aria-haspopup="menu"`, Radix open state, at least a 44px target, text ellipsis, and overflow-free width below 860px. | must | dropdown trigger static test, Radix `aria-expanded`/`data-state` Browser smoke, desktop/mobile overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
+| REQ-WM-066 | Default desktop product buttons shall use a library-backed shared Button primitive instead of ad hoc CSS combinations, unifying variants, sizes, icon-only controls, `asChild`, loading/disabled states, and representative primary actions in the titlebar, task handoff, and Tool Studio surfaces. | must | Radix Slot/CVA dependency audit, Button component static test, representative action import/use test, desktop/mobile Browser smoke, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
 
 ## Scope
 
@@ -111,6 +112,7 @@
 - Icon-plus-compact-label destination buttons in the default activity rail and mobile scrolling rail
 - Tool Studio parent-child depth navigation from high-level flow to detail modes
 - Tool Studio dropdown trigger state, current selection, parent flow, and mobile-safe width
+- Radix Slot/CVA shared Button primitive and representative default action-button migration
 - Vercel deployment docs
 
 ## Non-Goals

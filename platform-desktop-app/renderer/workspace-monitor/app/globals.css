@@ -421,6 +421,109 @@ button:disabled {
   transform: translateY(var(--control-active-shift));
 }
 
+.ui-button {
+  display: inline-flex;
+  max-width: 100%;
+  min-width: var(--control-target-size);
+  min-height: var(--control-target-size);
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  border: 1px solid var(--line);
+  border-radius: var(--control-radius);
+  padding: 8px var(--control-padding-x);
+  color: var(--text);
+  background: var(--control-bg);
+  box-shadow: var(--control-shadow);
+  font: inherit;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-label);
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ui-button > svg {
+  flex: 0 0 auto;
+}
+
+.ui-button > span,
+.ui-button > strong,
+.ui-button > small {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ui-button-primary {
+  border-color: var(--action-primary-border);
+  color: var(--action-primary-fg);
+  background: var(--action-primary-bg);
+}
+
+.ui-button-secondary {
+  border-color: var(--line);
+  color: var(--text);
+  background: var(--control-bg);
+}
+
+.ui-button-outline {
+  border-color: var(--line-strong);
+  color: var(--text);
+  background: transparent;
+}
+
+.ui-button-ghost {
+  border-color: transparent;
+  color: var(--text);
+  background: transparent;
+  box-shadow: none;
+}
+
+.ui-button-danger {
+  border-color: var(--status-danger-border);
+  color: var(--status-danger-text);
+  background: var(--status-danger-bg);
+}
+
+.ui-button-sm {
+  min-width: var(--control-compact-target-size);
+  min-height: var(--control-compact-target-size);
+  padding: 6px 10px;
+  font-size: var(--font-size-caption);
+}
+
+.ui-button-lg {
+  min-height: 52px;
+  padding: 10px 16px;
+  font-size: var(--font-size-body-strong);
+}
+
+.ui-button-icon {
+  width: var(--control-target-size);
+  min-width: var(--control-target-size);
+  padding: 0;
+  aspect-ratio: 1;
+}
+
+.ui-button:hover {
+  background: var(--control-bg-hover);
+}
+
+.ui-button-primary:hover {
+  background: color-mix(in srgb, var(--action-primary-bg) 88%, var(--accent-primary) 12%);
+}
+
+.ui-button-ghost:hover {
+  border-color: var(--line);
+  background: var(--control-bg-hover);
+}
+
+.ui-button-danger:hover {
+  background: color-mix(in srgb, var(--status-danger-bg) 82%, var(--status-danger-text) 18%);
+}
+
 .desktop-viewport:focus-visible,
 .settings-tab-panel:focus-visible,
 .terminal-drawer-sidebar:focus-visible,

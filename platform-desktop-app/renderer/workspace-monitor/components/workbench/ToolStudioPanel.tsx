@@ -29,6 +29,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { Button } from "@/components/ui/Button";
 import { writeClipboardText } from "@/lib/clipboard.mjs";
 
 export type ToolStudioMode = "build" | "environment" | "deploy" | "registry";
@@ -975,8 +976,8 @@ export function ToolStudioPanel({
         <div className="tool-studio-actions">
           <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>
-              <button
-                type="button"
+              <Button
+                variant="primary"
                 className="tool-studio-primary-action tool-dropdown-trigger"
                 data-tool-primary-menu
                 aria-haspopup="menu"
@@ -991,7 +992,7 @@ export function ToolStudioPanel({
                 <span className="tool-dropdown-trigger-caret" aria-hidden="true">
                   <ChevronDown size={15} aria-hidden="true" />
                 </span>
-              </button>
+              </Button>
             </DropdownMenu.Trigger>
             <DropdownMenu.Portal>
               <DropdownMenu.Content className="tool-menu-content" sideOffset={8} align="end">
@@ -1016,14 +1017,14 @@ export function ToolStudioPanel({
               </DropdownMenu.Content>
             </DropdownMenu.Portal>
           </DropdownMenu.Root>
-          <button type="button" onClick={onOpenAgents}>
+          <Button variant="secondary" onClick={onOpenAgents}>
             <Bot size={16} aria-hidden="true" />
             <span>{ko ? "에이전트 코어" : "Agent Core"}</span>
-          </button>
-          <button type="button" onClick={onOpenTerminal}>
+          </Button>
+          <Button variant="secondary" onClick={onOpenTerminal}>
             <SquareTerminal size={16} aria-hidden="true" />
             <span>{ko ? "실행 콘솔" : "Run Console"}</span>
-          </button>
+          </Button>
         </div>
       </header>
 

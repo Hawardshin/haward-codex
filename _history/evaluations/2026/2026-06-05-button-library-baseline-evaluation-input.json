@@ -1,0 +1,57 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-button-library-baseline",
+  "status": "passed",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "installation_occurred": true,
+  "installation_record_targets": [
+    "_history/installations/2026/2026-06-05-workspace-monitor-button-libs.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-button-library-baseline.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-05-button-library-baseline.ko.md"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-05-button-library-baseline.json"
+  ],
+  "research_targets": [
+    "_history/web-searches/2026/2026-06-05-button-library-baseline.ko.md",
+    "_history/coding-research/2026/2026-06-05-button-library-baseline.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-button-library-baseline/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-button-library-baseline/plan.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-button-library-baseline/tasks.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-button-library-baseline/validation.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-button-library-baseline/traceability.ko.md"
+  ],
+  "implementation_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/components/ui/Button.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/ToolStudioPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/package.json",
+    "pnpm-lock.yaml"
+  ],
+  "artifact_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-button-library-baseline-desktop.png",
+    "platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-button-library-baseline-mobile.png"
+  ],
+  "validation_summary": [
+    "pnpm audit found no known vulnerabilities",
+    "workspace-monitor tests passed: 42 tests",
+    "TypeScript, workspace-monitor check, build, build:customer, and perf budget passed",
+    "in-app Browser and Playwright smoke confirmed representative Button primitive rendering, target size, and overflow 0",
+    "installation registry contract check passed",
+    "git diff --check passed"
+  ],
+  "residual_risks": [
+    "This slice creates and adopts the Button primitive for representative default actions only. Source editor, terminal, settings, and other specialized controls still need staged migration."
+  ]
+}

@@ -20,6 +20,7 @@ const coreDrilldown = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "CoreFeatureDrilldown.tsx"),
   "utf8"
 );
+const buttonComponent = fs.readFileSync(path.join(projectRoot, "components", "ui", "Button.tsx"), "utf8");
 const css = fs.readFileSync(path.join(projectRoot, "app", "globals.css"), "utf8");
 const packageJson = JSON.parse(fs.readFileSync(path.join(projectRoot, "package.json"), "utf8"));
 
@@ -46,6 +47,25 @@ test("Tool Studio uses open-source menu primitives and exact dependencies", () =
   assert.match(toolStudio, /from "@radix-ui\/react-context-menu"/);
   assert.match(toolStudio, /<DropdownMenu\.Root>/);
   assert.match(toolStudio, /<ContextMenu\.Root/);
+});
+
+test("Monitor uses library-backed button variants for primary controls", () => {
+  assert.equal(packageJson.dependencies["@radix-ui/react-slot"], "1.2.4");
+  assert.equal(packageJson.dependencies["class-variance-authority"], "0.7.1");
+  assert.match(buttonComponent, /from "@radix-ui\/react-slot"/);
+  assert.match(buttonComponent, /from "class-variance-authority"/);
+  assert.match(buttonComponent, /export const buttonVariants = cva\("ui-button"/);
+  assert.match(buttonComponent, /variant:\s*\{[\s\S]*?primary:[\s\S]*?secondary:[\s\S]*?ghost:/);
+  assert.match(buttonComponent, /size:\s*\{[\s\S]*?sm:[\s\S]*?md:[\s\S]*?icon:/);
+  assert.match(buttonComponent, /asChild \? Slot : "button"/);
+  assert.match(monitorShell, /import \{ Button \} from "@\/components\/ui\/Button"/);
+  assert.match(monitorShell, /<Button variant="secondary" onClick=\{openTerminalDrawer\}/);
+  assert.match(monitorShell, /<Button variant="ghost" size="icon" onClick=\{\(\) => setCommandPaletteOpen\(true\)\}/);
+  assert.match(toolStudio, /import \{ Button \} from "@\/components\/ui\/Button"/);
+  assert.match(toolStudio, /<Button[\s\S]*?variant="primary"[\s\S]*?data-tool-primary-menu/);
+  assert.match(css, /\.ui-button \{[\s\S]*?min-height: var\(--control-target-size\);/);
+  assert.match(css, /\.ui-button-primary \{[\s\S]*?background: var\(--action-primary-bg\);/);
+  assert.match(css, /\.ui-button-icon \{[\s\S]*?aspect-ratio: 1;/);
 });
 
 test("Agents collaboration uses lazy open-source 3D character scene", () => {

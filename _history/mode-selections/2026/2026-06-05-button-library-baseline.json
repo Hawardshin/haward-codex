@@ -1,0 +1,22 @@
+{
+  "schema_version": "2026-06-02",
+  "request_id": "2026-06-05-button-library-baseline",
+  "selected_work_mode": "standard",
+  "selection_reason": "Meaningful UI source change with project-local dependency installation, shared component API, tests, build validation, and Browser smoke.",
+  "memory_bootstrap": {
+    "status": "simulated",
+    "hot_anchors_checked": [
+      "agent-platform/configs/memory/bootstrap-manifest.json",
+      "agent-platform/configs/workflows/work-mode-registry.json",
+      "_ops/workflows/68-omission-prevention.md",
+      "_ops/workflows/69-resource-leak-prevention.md",
+      "_ops/installations/registry.json"
+    ]
+  },
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "installation_occurred": true,
+  "installation_record_targets": [
+    "_history/installations/2026/2026-06-05-workspace-monitor-button-libs.ko.md"
+  ]
+}

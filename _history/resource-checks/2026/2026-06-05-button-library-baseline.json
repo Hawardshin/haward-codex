@@ -1,0 +1,56 @@
+{
+  "schema_version": "2026-06-02",
+  "request_id": "2026-06-05-button-library-baseline",
+  "resource_risk_occurred": true,
+  "runtime_context": [
+    "pnpm dependency installation",
+    "Node.js validation commands",
+    "Next.js static build",
+    "local static HTTP server for Browser smoke",
+    "browser automation"
+  ],
+  "resource_risks": [
+    {
+      "risk": "project dependency state changes without rollback record",
+      "status": "mitigated",
+      "mitigation": "Installation audit draft created before install and will be finalized after validation."
+    },
+    {
+      "risk": "local static server remains running after smoke",
+      "status": "mitigated",
+      "mitigation": "Stop the smoke server before close-out."
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "resource": "pnpm dependency install",
+      "open_start": "completed",
+      "close_stop": "lockfile/package updated and audit passed"
+    },
+    {
+      "resource": "static HTTP server",
+      "open_start": "started on 127.0.0.1:3357 for static export smoke",
+      "close_stop": "stopped before close-out"
+    }
+  ],
+  "measurement_checks": [
+    {
+      "metric": "dependency audit",
+      "tool": "pnpm audit",
+      "threshold": "no known vulnerabilities",
+      "status": "passed"
+    },
+    {
+      "metric": "validation command completion",
+      "tool": "pnpm/test/build/perf",
+      "threshold": "all commands exit 0",
+      "status": "passed"
+    },
+    {
+      "metric": "Button primitive smoke",
+      "tool": "in-app Browser and Playwright",
+      "threshold": "representative ui buttons render, target >= 44px, overflow 0",
+      "status": "passed"
+    }
+  ]
+}
