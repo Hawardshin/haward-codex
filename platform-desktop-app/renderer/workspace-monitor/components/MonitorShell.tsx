@@ -99,6 +99,7 @@ type SettingsSubsectionId =
 type AppThemeMode = "system" | "light" | "dark";
 type UiLanguage = "ko" | "en";
 type SourceWorkbenchView = "files" | "editor" | "results";
+type AgentDetailViewId = "collaboration" | "blueprint" | "builder" | "learning" | "flow" | "inventory" | "runtime";
 
 type Section = {
   id: SectionId;
@@ -364,6 +365,72 @@ type LearningImprovementDecisionReport = {
   rollbackPlan: string;
   record: unknown;
 };
+
+const agentDetailViews: Array<{
+  id: AgentDetailViewId;
+  labelKo: string;
+  labelEn: string;
+  detailKo: string;
+  detailEn: string;
+  icon: LucideIcon;
+}> = [
+  {
+    id: "collaboration",
+    labelKo: "협업",
+    labelEn: "Collab",
+    detailKo: "3D 작업판",
+    detailEn: "3D board",
+    icon: Network
+  },
+  {
+    id: "blueprint",
+    labelKo: "블루프린트",
+    labelEn: "Blueprints",
+    detailKo: "능력 묶음",
+    detailEn: "Capability map",
+    icon: LayoutDashboard
+  },
+  {
+    id: "builder",
+    labelKo: "생성기",
+    labelEn: "Builder",
+    detailKo: "제안 작성",
+    detailEn: "Proposal",
+    icon: Wrench
+  },
+  {
+    id: "learning",
+    labelKo: "학습",
+    labelEn: "Learning",
+    detailKo: "피드백 루프",
+    detailEn: "Feedback loop",
+    icon: BookOpenText
+  },
+  {
+    id: "flow",
+    labelKo: "흐름",
+    labelEn: "Flow",
+    detailKo: "작업 연결",
+    detailEn: "Work links",
+    icon: GitBranch
+  },
+  {
+    id: "inventory",
+    labelKo: "인벤토리",
+    labelEn: "Inventory",
+    detailKo: "구성 맵",
+    detailEn: "Config map",
+    icon: Bot
+  },
+  {
+    id: "runtime",
+    labelKo: "런타임",
+    labelEn: "Runtime",
+    detailKo: "상태 점검",
+    detailEn: "Status",
+    icon: Layers
+  }
+];
 
 const MonacoEditor = dynamic(() => import("@monaco-editor/react").then((module) => module.default), {
   ssr: false,
@@ -2390,6 +2457,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [operatorCenterOpen, setOperatorCenterOpen] = useState(false);
   const [agentSignalsOpen, setAgentSignalsOpen] = useState(false);
   const [agentDetailsOpen, setAgentDetailsOpen] = useState(false);
+  const [agentDetailView, setAgentDetailView] = useState<AgentDetailViewId>("collaboration");
   const [commandQuery, setCommandQuery] = useState("");
   const titlebarSectionLabelRef = useRef<HTMLElement>(null);
   const commandInputRef = useRef<HTMLInputElement>(null);
@@ -6192,116 +6260,161 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           >
             <summary>
               <span>{uiLanguage === "ko" ? "에이전트 세부 기능 열기" : "Open agent details"}</span>
-              <small>{uiLanguage === "ko" ? "블루프린트, 생성기, 협업판, 인벤토리" : "Blueprints, builder, board, inventory"}</small>
+              <small>{uiLanguage === "ko" ? "한 번에 하나의 세부 작업면만 엽니다" : "Open one detail workspace at a time"}</small>
             </summary>
             {agentDetailsOpen && (
-            <div className="section-secondary-stack">
-          <AgentCoreBlueprintPanel
-            blueprints={agentCoreBlueprints}
-            selectedBlueprintId={selectedAgentCoreBlueprintId}
-            providerCredentialReport={providerCredentials}
-            language={uiLanguage}
-            onSelectBlueprint={setSelectedAgentCoreBlueprintId}
-            onApplyBlueprint={(blueprintId, capabilityIds) => applyAgentCoreBlueprint(blueprintId, "factory", capabilityIds)}
-            onStartPreflight={(blueprintId, capabilityIds) => applyAgentCoreBlueprint(blueprintId, "preflight", capabilityIds)}
-            onCreateProposal={createAgentCoreBlueprintProposal}
-            proposalBusy={agentFactoryBusy}
-            runtimeAvailable={Boolean(getTauriInvoke())}
-          />
+              <div className="section-secondary-stack agent-detail-workspace" data-agent-detail-workspace data-agent-detail-view={agentDetailView}>
+                <div className="agent-detail-switcher" role="tablist" aria-label={uiLanguage === "ko" ? "에이전트 세부 기능" : "Agent detail workspaces"}>
+                  {agentDetailViews.map((item) => {
+                    const Icon = item.icon;
+                    const selected = agentDetailView === item.id;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        role="tab"
+                        id={`agent-detail-tab-${item.id}`}
+                        aria-selected={selected}
+                        aria-controls="agent-detail-active-panel"
+                        data-agent-detail-tab={item.id}
+                        onClick={() => setAgentDetailView(item.id)}
+                      >
+                        <Icon size={16} aria-hidden="true" />
+                        <span>{uiLanguage === "ko" ? item.labelKo : item.labelEn}</span>
+                        <small>{uiLanguage === "ko" ? item.detailKo : item.detailEn}</small>
+                      </button>
+                    );
+                  })}
+                </div>
 
-          <AgentFactoryWizard
-            form={agentFactoryForm}
-            proposal={agentFactoryProposal}
-            busy={agentFactoryBusy}
-            notice={agentFactoryNotice}
-            runtimeAvailable={Boolean(getTauriInvoke())}
-            language={uiLanguage}
-            onChange={updateAgentFactoryForm}
-            onCreateProposal={createAgentFactoryProposal}
-          />
+                <div
+                  id="agent-detail-active-panel"
+                  className="agent-detail-active-surface"
+                  role="tabpanel"
+                  aria-labelledby={`agent-detail-tab-${agentDetailView}`}
+                  data-agent-detail-active-surface
+                >
+                  {agentDetailView === "collaboration" && (
+                    <section className="panel wide">
+                      <div className="panel-heading">
+                        <div>
+                          <p className="eyebrow">Collaboration</p>
+                          <h2>에이전트 협업 작업판</h2>
+                        </div>
+                        <Network size={18} aria-hidden="true" />
+                      </div>
+                      <div className="agent-collaboration-theater" data-agent-collaboration-theater>
+                        <AgentCollaborationScene board={collaborationBoard} language={uiLanguage} />
+                      </div>
+                      <AgentCollaborationBoard board={collaborationBoard} />
+                    </section>
+                  )}
 
-          <LearningFeedbackLoopPanel
-            candidates={learningImprovementCandidates}
-            selectedCandidate={selectedLearningCandidate}
-            selectedCandidateId={selectedLearningCandidate?.id || ""}
-            action={learningDecisionAction}
-            assetType={learningAssetType}
-            notes={learningDecisionNotes}
-            report={learningDecisionReport}
-            busy={learningDecisionBusy}
-            notice={learningDecisionNotice}
-            runtimeAvailable={Boolean(getTauriInvoke())}
-            language={uiLanguage}
-            onSelectCandidate={setSelectedLearningCandidateId}
-            onActionChange={setLearningDecisionAction}
-            onAssetTypeChange={setLearningAssetType}
-            onNotesChange={setLearningDecisionNotes}
-            onRecordDecision={recordLearningDecision}
-          />
+                  {agentDetailView === "blueprint" && (
+                    <AgentCoreBlueprintPanel
+                      blueprints={agentCoreBlueprints}
+                      selectedBlueprintId={selectedAgentCoreBlueprintId}
+                      providerCredentialReport={providerCredentials}
+                      language={uiLanguage}
+                      onSelectBlueprint={setSelectedAgentCoreBlueprintId}
+                      onApplyBlueprint={(blueprintId, capabilityIds) => applyAgentCoreBlueprint(blueprintId, "factory", capabilityIds)}
+                      onStartPreflight={(blueprintId, capabilityIds) => applyAgentCoreBlueprint(blueprintId, "preflight", capabilityIds)}
+                      onCreateProposal={createAgentCoreBlueprintProposal}
+                      proposalBusy={agentFactoryBusy}
+                      runtimeAvailable={Boolean(getTauriInvoke())}
+                    />
+                  )}
 
-          <section className="panel wide">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Collaboration</p>
-                <h2>에이전트 협업 작업판</h2>
+                  {agentDetailView === "builder" && (
+                    <AgentFactoryWizard
+                      form={agentFactoryForm}
+                      proposal={agentFactoryProposal}
+                      busy={agentFactoryBusy}
+                      notice={agentFactoryNotice}
+                      runtimeAvailable={Boolean(getTauriInvoke())}
+                      language={uiLanguage}
+                      onChange={updateAgentFactoryForm}
+                      onCreateProposal={createAgentFactoryProposal}
+                    />
+                  )}
+
+                  {agentDetailView === "learning" && (
+                    <LearningFeedbackLoopPanel
+                      candidates={learningImprovementCandidates}
+                      selectedCandidate={selectedLearningCandidate}
+                      selectedCandidateId={selectedLearningCandidate?.id || ""}
+                      action={learningDecisionAction}
+                      assetType={learningAssetType}
+                      notes={learningDecisionNotes}
+                      report={learningDecisionReport}
+                      busy={learningDecisionBusy}
+                      notice={learningDecisionNotice}
+                      runtimeAvailable={Boolean(getTauriInvoke())}
+                      language={uiLanguage}
+                      onSelectCandidate={setSelectedLearningCandidateId}
+                      onActionChange={setLearningDecisionAction}
+                      onAssetTypeChange={setLearningAssetType}
+                      onNotesChange={setLearningDecisionNotes}
+                      onRecordDecision={recordLearningDecision}
+                    />
+                  )}
+
+                  {agentDetailView === "flow" && (
+                    <section className="panel wide">
+                      <div className="panel-heading">
+                        <div>
+                          <p className="eyebrow">Flow</p>
+                          <h2>에이전트와 작업 연결</h2>
+                        </div>
+                        <GitBranch size={18} aria-hidden="true" />
+                      </div>
+                      <AgentFlowMap flows={collaborationBoard.flows} />
+                    </section>
+                  )}
+
+                  {agentDetailView === "inventory" && (
+                    <section className="panel wide">
+                      <div className="panel-heading">
+                        <div>
+                          <p className="eyebrow">Inventory</p>
+                          <h2>에이전트 구성 맵</h2>
+                        </div>
+                        <Bot size={18} aria-hidden="true" />
+                      </div>
+                      <AgentInventory agents={agentCatalog} />
+                    </section>
+                  )}
+
+                  {agentDetailView === "runtime" && (
+                    <section className="panel wide">
+                      <div className="panel-heading">
+                        <div>
+                          <p className="eyebrow">Runtime</p>
+                          <h2>상태와 작업 흐름</h2>
+                        </div>
+                        <Layers size={18} aria-hidden="true" />
+                      </div>
+                      <div className="agent-visual-grid">
+                        <AgentRuntimeBars runtimeCounts={agentRuntimeCounts} statusCounts={agentStatusCounts} />
+                        <TaskStatusLanes taskStatusCounts={taskStatusCounts} />
+                      </div>
+                      <div className="task-table">
+                        {snapshot.tasks.slice(0, 28).map((task) => (
+                          <article key={task.id}>
+                            <strong>{task.title || task.id}</strong>
+                            <span>{task.status}</span>
+                            <p>
+                              {task.timing_summary
+                                ? `시간 ${task.timing_summary.total || "unknown"} / 병목 ${task.timing_summary.bottleneck || "unknown"}`
+                                : task.next_action || task.evaluation_report || "No next action"}
+                            </p>
+                          </article>
+                        ))}
+                      </div>
+                    </section>
+                  )}
+                </div>
               </div>
-              <Network size={18} aria-hidden="true" />
-            </div>
-            <div className="agent-collaboration-theater" data-agent-collaboration-theater>
-              <AgentCollaborationScene board={collaborationBoard} language={uiLanguage} />
-            </div>
-            <AgentCollaborationBoard board={collaborationBoard} />
-          </section>
-
-          <section className="panel wide">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Flow</p>
-                <h2>에이전트와 작업 연결</h2>
-              </div>
-              <GitBranch size={18} aria-hidden="true" />
-            </div>
-            <AgentFlowMap flows={collaborationBoard.flows} />
-          </section>
-
-          <section className="panel wide">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Inventory</p>
-                <h2>에이전트 구성 맵</h2>
-              </div>
-              <Bot size={18} aria-hidden="true" />
-            </div>
-            <AgentInventory agents={agentCatalog} />
-          </section>
-
-          <section className="panel wide">
-            <div className="panel-heading">
-              <div>
-                <p className="eyebrow">Runtime</p>
-                <h2>상태와 작업 흐름</h2>
-              </div>
-              <Layers size={18} aria-hidden="true" />
-            </div>
-            <div className="agent-visual-grid">
-              <AgentRuntimeBars runtimeCounts={agentRuntimeCounts} statusCounts={agentStatusCounts} />
-              <TaskStatusLanes taskStatusCounts={taskStatusCounts} />
-            </div>
-            <div className="task-table">
-              {snapshot.tasks.slice(0, 28).map((task) => (
-                <article key={task.id}>
-                  <strong>{task.title || task.id}</strong>
-                  <span>{task.status}</span>
-                  <p>
-                    {task.timing_summary
-                      ? `시간 ${task.timing_summary.total || "unknown"} / 병목 ${task.timing_summary.bottleneck || "unknown"}`
-                      : task.next_action || task.evaluation_report || "No next action"}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </section>
-            </div>
             )}
           </details>
         </div>

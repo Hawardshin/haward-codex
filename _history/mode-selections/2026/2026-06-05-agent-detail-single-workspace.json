@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-06-05",
+  "request": "Continue UI improvement to completion",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "work_mode": "standard",
+  "install_mode": "developer",
+  "view_mode": "superadmin_developer",
+  "reason": "Meaningful frontend UI refactor bounded to the Agents detail surface.",
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-agent-detail-single-workspace.json"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-06-05",
+  "work_item": "agent-detail-single-workspace",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Checked Material tabs/navigation, Carbon tabs/disclosure, and progressive disclosure references."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Replaced Agents detail stack with a switcher and one active surface."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Ran tests, typecheck, check, build, perf budget, in-app Browser, and mobile Playwright smoke."
+    }
+  ]
+}

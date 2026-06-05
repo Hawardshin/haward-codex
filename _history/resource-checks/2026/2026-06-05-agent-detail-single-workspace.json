@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-06-05",
+  "work_item": "agent-detail-single-workspace",
+  "resource_risk_occurred": true,
+  "risks": [
+    "Temporary static HTTP server for Browser smoke",
+    "Browser automation session",
+    "Headless Chromium context"
+  ],
+  "controls": [
+    "Temporary server stopped before close-out",
+    "Playwright browser closed by script",
+    "No new long-running worker or subscription added",
+    "Selected detail view unmounts inactive heavy panels"
+  ],
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-05-agent-detail-single-workspace.json"
+  ]
+}

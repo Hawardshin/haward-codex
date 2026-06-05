@@ -70,6 +70,27 @@ test("Agents collaboration uses lazy open-source 3D character scene", () => {
   assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.agent-collaboration-scene-shell,/);
 });
 
+test("Agents details use one active workspace instead of stacking every feature", () => {
+  assert.match(monitorShell, /type AgentDetailViewId = "collaboration" \| "blueprint" \| "builder" \| "learning" \| "flow" \| "inventory" \| "runtime"/);
+  assert.match(monitorShell, /const agentDetailViews: Array/);
+  assert.match(monitorShell, /useState<AgentDetailViewId>\("collaboration"\)/);
+  assert.match(monitorShell, /data-agent-detail-workspace/);
+  assert.match(monitorShell, /role="tablist"/);
+  assert.match(monitorShell, /data-agent-detail-tab=\{item\.id\}/);
+  assert.match(monitorShell, /aria-selected=\{selected\}/);
+  assert.match(monitorShell, /data-agent-detail-active-surface/);
+  assert.match(monitorShell, /agentDetailView === "collaboration"/);
+  assert.match(monitorShell, /agentDetailView === "blueprint"/);
+  assert.match(monitorShell, /agentDetailView === "builder"/);
+  assert.match(monitorShell, /agentDetailView === "learning"/);
+  assert.match(monitorShell, /agentDetailView === "flow"/);
+  assert.match(monitorShell, /agentDetailView === "inventory"/);
+  assert.match(monitorShell, /agentDetailView === "runtime"/);
+  assert.match(css, /\.agent-detail-switcher \{[\s\S]*?grid-template-columns: repeat\(7, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.agent-detail-switcher button\[aria-selected="true"\]/);
+  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.agent-detail-switcher \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
+});
+
 test("Three.js scene is lazy-loaded and cleans up WebGL resources", () => {
   assert.doesNotMatch(toolStudio, /^import\s+.*from "three";/m);
   assert.match(toolStudio, /await import\("three"\)/);

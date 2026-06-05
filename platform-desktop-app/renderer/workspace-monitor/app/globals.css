@@ -3910,6 +3910,77 @@ h3 {
   padding: 12px;
 }
 
+.agent-detail-workspace {
+  gap: 12px;
+}
+
+.agent-detail-switcher {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.agent-detail-switcher button {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 3px 8px;
+  align-items: center;
+  min-width: 0;
+  min-height: 58px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 7px;
+  padding: 9px 10px;
+  text-align: left;
+  box-shadow: var(--control-shadow);
+}
+
+.agent-detail-switcher button svg {
+  grid-row: 1 / span 2;
+  color: var(--muted);
+}
+
+.agent-detail-switcher button span,
+.agent-detail-switcher button small {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agent-detail-switcher button span {
+  font-size: var(--font-size-body-strong);
+  font-weight: 760;
+}
+
+.agent-detail-switcher button small {
+  color: var(--muted);
+  font-size: var(--font-size-caption);
+  font-weight: 620;
+}
+
+.agent-detail-switcher button[aria-selected="true"] {
+  border-color: var(--control-selected-border);
+  background: var(--control-selected-bg);
+  color: var(--control-selected-fg);
+}
+
+.agent-detail-switcher button[aria-selected="true"] svg,
+.agent-detail-switcher button[aria-selected="true"] small {
+  color: color-mix(in srgb, var(--control-selected-fg) 82%, transparent);
+}
+
+.agent-detail-active-surface {
+  min-width: 0;
+}
+
+.agent-detail-active-surface > .panel {
+  margin: 0;
+}
+
 .command-center,
 .ux-spine,
 .core-function-panel,
@@ -12600,6 +12671,7 @@ h3 {
   .structure-grid,
   .history-visual-grid,
   .agent-visual-grid,
+  .agent-detail-switcher,
   .agent-flow-map article,
   .source-layout,
   .command-center,
@@ -15284,6 +15356,28 @@ h3 {
 }
 
 @media (max-width: 720px) {
+  .agent-detail-switcher {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .agent-detail-switcher button {
+    min-height: var(--control-target-size);
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .agent-detail-switcher button::after {
+    content: "›";
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    color: var(--muted);
+    font-size: var(--font-size-body-strong);
+    font-weight: 850;
+  }
+
+  .agent-detail-switcher button[aria-selected="true"]::after {
+    color: var(--control-selected-fg);
+  }
+
   .agent-collaboration-scene-shell,
   .agent-collaboration-scene-loading,
   .agent-collaboration-scene-empty {

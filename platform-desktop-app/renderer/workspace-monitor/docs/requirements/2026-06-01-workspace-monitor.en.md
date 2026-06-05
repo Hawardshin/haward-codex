@@ -59,6 +59,7 @@
 | REQ-WM-058 | The desktop product UI shall use consistent color, typography, shadow, and button-state tokens across the app shell, titlebar, rail, and Overview primary work surface, and shall build hierarchy around real work goals and next actions instead of exposing design-principle copy in the interface. | must | shell visual token static test, meta-copy absence test, desktop/mobile Browser smoke, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-059 | Overview work-dock goal buttons shall expose industrial-design control affordance by separating index, feature icon, work description, status badge, and forward action cue so target location and execution result are immediately legible, while mobile keeps only the essential controls without layout breakage. | must | task intent affordance static test, desktop/mobile Browser smoke, action cue count, primary target size, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-060 | The Agents detail Collaboration work surface shall visualize agent collaboration as 3D characters, task lanes, and connection lines, using `@react-three/fiber` and `@react-three/drei` through client-side lazy mounting so the default chat surface, tab switching, and closed disclosure performance are not disturbed. It shall render as a nonblank canvas without horizontal overflow at 390px mobile width. | must | React Three Fiber/Drei exact dependency audit, lazy import static test, desktop/mobile canvas nonblank pixel smoke, in-app Browser visual smoke, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
+| REQ-WM-061 | The Agents detail disclosure shall not stack Blueprints, Builder, Learning, Collaboration, Flow, Inventory, and Runtime on one screen. It shall provide a detail workspace switcher that renders exactly one active workspace at a time. The default detail view shall start on Collaboration, and switching to another detail view shall remove the 3D canvas and prior feature DOM. | must | one-active-workspace static test, in-app Browser switcher smoke, mobile 390px selected-tab/overflow smoke, canvas absence assertion after Builder switch, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run perf:budget` |
 
 ## Scope
 
@@ -101,6 +102,7 @@
 - Visual design tokens and work-goal-centered copy across the app shell, titlebar, rail, and Overview primary surface
 - Index/icon/status/action-cue affordance for Overview work-dock goal buttons
 - React Three Fiber/Drei 3D agent-character collaboration scene in the Agents detail Collaboration work surface
+- Agents detail workspace switcher with exactly one active detail workspace rendered at a time
 - Vercel deployment docs
 
 ## Non-Goals
