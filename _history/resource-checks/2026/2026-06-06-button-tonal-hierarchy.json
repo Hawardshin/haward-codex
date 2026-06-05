@@ -1,0 +1,24 @@
+{
+  "date": "2026-06-06",
+  "resource_risk_occurred": true,
+  "checks": [
+    {
+      "resource": "Next.js dev server on 127.0.0.1:3210",
+      "status": "closed",
+      "evidence": "Session 83368 was interrupted with Ctrl-C after browser smoke."
+    },
+    {
+      "resource": "in-app browser tab",
+      "status": "closed",
+      "evidence": "tonalButtonTab.close() returned closed."
+    },
+    {
+      "resource": "internal package build process",
+      "status": "completed",
+      "evidence": "package:internal exited 0 and reported completed."
+    }
+  ],
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-06-button-tonal-hierarchy.json"
+  ]
+}

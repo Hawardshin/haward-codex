@@ -139,6 +139,10 @@ test("Runtime text defaults expose selectable choices", () => {
   assert.match(monitorShell, /workingDirOptions=\{workingDirOptions\}/);
   assert.match(monitorShell, /setTaskPipePrompt\(choice\.value\)/);
   assert.match(css, /\.runtime-text-choice-grid \{/);
+  assert.match(css, /--choice-bg:/);
+  assert.match(css, /--choice-shadow:/);
+  assert.match(css, /--choice-active-shadow:/);
+  assert.match(css, /\.runtime-text-choice-grid\.compact button \{[\s\S]*?min-height: 44px;/);
   assert.match(css, /\.task-pipe-controls \.task-prompt-choice-field/);
 });
 
@@ -152,6 +156,18 @@ test("Search agent provider and model settings use explicit choices", () => {
   assert.doesNotMatch(monitorShell, /list="search-agent-model-options"/);
   assert.match(css, /\.agent-provider-choice-grid,/);
   assert.match(css, /\.agent-model-choice-grid button\.active/);
+  assert.match(css, /\.agent-provider-choice-grid button,[\s\S]*?box-shadow: var\(--control-shadow\);/);
+});
+
+test("Choice and search controls have compact tonal hierarchy", () => {
+  assert.match(css, /\.settings-segment-list \{[\s\S]*?display: flex;/);
+  assert.match(css, /\.settings-segment-list button \{[\s\S]*?min-width: 104px;[\s\S]*?min-height: var\(--control-compact-target-size\);/);
+  assert.match(css, /\.settings-option-list button,[\s\S]*?background: var\(--choice-bg\);[\s\S]*?box-shadow: var\(--choice-shadow\);/);
+  assert.match(css, /\.settings-option-list button\.active,[\s\S]*?background: var\(--choice-selected-bg\);[\s\S]*?box-shadow: var\(--choice-active-shadow\);/);
+  assert.match(css, /\.command-palette-results button \{[\s\S]*?min-height: 52px;/);
+  assert.match(css, /\.search-box,[\s\S]*?box-shadow: var\(--search-shadow\);/);
+  assert.match(css, /\.quick-start-flow button,[\s\S]*?min-height: 64px;/);
+  assert.match(css, /\.desktop-command-grid button \{[\s\S]*?min-height: 66px;/);
 });
 
 test("Agents collaboration uses lazy open-source 3D character scene", () => {

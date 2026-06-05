@@ -1,0 +1,34 @@
+{
+  "date": "2026-06-06",
+  "requested_outcomes": [
+    "기본 선택지 클릭/찾기 UI 개선",
+    "내용이 적은 버튼 크기 축소",
+    "버튼 음영과 색상 계층 추가",
+    "구현 후 빌드 실행"
+  ],
+  "coverage": [
+    {
+      "outcome": "기본 선택지 클릭/찾기 UI 개선",
+      "status": "covered",
+      "evidence": "Settings, command palette, runtime choices, model/provider choices, source toolbar controls use tonal surfaces."
+    },
+    {
+      "outcome": "내용이 적은 버튼 크기 축소",
+      "status": "covered",
+      "evidence": "Segment, compact choices, command results, quick command heights were reduced."
+    },
+    {
+      "outcome": "버튼 음영과 색상 계층 추가",
+      "status": "covered",
+      "evidence": "choice/search shadow tokens and active shadow tokens were added and tested."
+    },
+    {
+      "outcome": "구현 후 빌드 실행",
+      "status": "covered",
+      "evidence": "corepack pnpm --dir platform-desktop-app run package:internal completed."
+    }
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-06-button-tonal-hierarchy.json"
+  ]
+}

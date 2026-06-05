@@ -1,0 +1,21 @@
+{
+  "date": "2026-06-06",
+  "phases": [
+    {
+      "phase": "web_first_intake_and_source_review",
+      "elapsed_minutes_estimate": 8
+    },
+    {
+      "phase": "css_implementation",
+      "elapsed_minutes_estimate": 22
+    },
+    {
+      "phase": "validation_and_package_build",
+      "elapsed_minutes_estimate": 12
+    },
+    {
+      "phase": "records_and_closeout",
+      "elapsed_minutes_estimate": 8
+    }
+  ]
+}

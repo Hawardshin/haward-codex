@@ -1,0 +1,17 @@
+{
+  "date": "2026-06-06",
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-06-button-tonal-hierarchy.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-06-button-tonal-hierarchy.json"
+  ],
+  "validation_targets": [
+    "platform-desktop-app/specs/2026-06-06-button-tonal-hierarchy/validation.ko.md"
+  ],
+  "build_completed": true,
+  "package_internal_completed": true
+}

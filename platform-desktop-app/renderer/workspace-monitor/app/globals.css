@@ -77,7 +77,14 @@
   --soft-shadow: 0 1px 2px rgba(17, 24, 39, 0.04), 0 8px 24px rgba(17, 24, 39, 0.05);
   --shell-shadow: 0 1px 2px rgba(17, 24, 39, 0.04), 0 18px 48px rgba(17, 24, 39, 0.08);
   --focus-shadow: 0 1px 2px rgba(17, 24, 39, 0.05), 0 24px 64px rgba(17, 24, 39, 0.1);
-  --control-shadow: 0 1px 1px rgba(17, 24, 39, 0.04);
+  --control-shadow: 0 1px 1px rgba(17, 24, 39, 0.05), 0 5px 14px rgba(17, 24, 39, 0.045);
+  --control-hover-shadow: 0 1px 2px rgba(17, 24, 39, 0.07), 0 10px 22px rgba(17, 24, 39, 0.07);
+  --choice-bg: linear-gradient(180deg, #ffffff 0%, #f6f8fb 100%);
+  --choice-bg-hover: linear-gradient(180deg, #ffffff 0%, #eef5ff 100%);
+  --choice-selected-bg: linear-gradient(135deg, #0b6fcf 0%, #0f8a74 100%);
+  --choice-shadow: 0 1px 1px rgba(17, 24, 39, 0.05), 0 7px 18px rgba(17, 24, 39, 0.055);
+  --choice-active-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 10px 24px rgba(0, 102, 204, 0.18);
+  --search-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.62), 0 7px 20px rgba(17, 24, 39, 0.06);
   --hairline-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
   --control-hit-size: 40px;
   --control-target-size: 44px;
@@ -215,7 +222,14 @@
   --soft-shadow: 0 1px 2px rgba(0, 0, 0, 0.34), 0 12px 34px rgba(0, 0, 0, 0.24);
   --shell-shadow: 0 1px 2px rgba(0, 0, 0, 0.36), 0 24px 64px rgba(0, 0, 0, 0.32);
   --focus-shadow: 0 1px 2px rgba(0, 0, 0, 0.38), 0 30px 78px rgba(0, 0, 0, 0.36);
-  --control-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  --control-shadow: 0 1px 1px rgba(0, 0, 0, 0.28), 0 8px 20px rgba(0, 0, 0, 0.22);
+  --control-hover-shadow: 0 1px 2px rgba(0, 0, 0, 0.38), 0 12px 28px rgba(0, 0, 0, 0.3);
+  --choice-bg: linear-gradient(180deg, #1f2530 0%, #181d26 100%);
+  --choice-bg-hover: linear-gradient(180deg, #243044 0%, #1b2433 100%);
+  --choice-selected-bg: linear-gradient(135deg, #005db8 0%, #047857 100%);
+  --choice-shadow: 0 1px 1px rgba(0, 0, 0, 0.32), 0 10px 26px rgba(0, 0, 0, 0.24);
+  --choice-active-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.11), 0 12px 30px rgba(10, 132, 255, 0.18);
+  --search-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.24);
   --hairline-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
@@ -1582,6 +1596,7 @@ main {
   background: var(--surface);
   border-radius: 7px;
   padding: 0 10px;
+  box-shadow: var(--search-shadow);
 }
 
 .titlebar-search input {
@@ -1658,13 +1673,14 @@ main {
   color: var(--text);
   border-radius: 7px;
   padding: 8px;
+  box-shadow: none;
   text-align: left;
 }
 
 .settings-tab-list button.active {
   border-color: var(--control-selected-border);
-  background: var(--surface);
-  box-shadow: 0 6px 16px rgba(31, 41, 51, 0.07);
+  background: var(--choice-bg);
+  box-shadow: var(--choice-shadow);
 }
 
 .settings-tab-list svg {
@@ -1717,22 +1733,30 @@ main {
 
 .settings-subsection-rail button {
   display: inline-flex;
-  min-width: 148px;
-  max-width: 220px;
-  min-height: var(--control-target-size);
+  min-width: 124px;
+  max-width: 210px;
+  min-height: var(--control-compact-target-size);
   align-items: center;
   gap: var(--control-gap);
   border: 1px solid var(--line);
-  background: var(--surface-raised);
+  background: var(--choice-bg);
   border-radius: var(--control-radius);
-  padding: 8px var(--control-padding-x);
+  padding: 7px 10px;
   color: var(--text);
+  box-shadow: var(--control-shadow);
   text-align: left;
 }
 
 .settings-subsection-rail button.active {
   border-color: var(--accent-primary-border);
-  background: color-mix(in srgb, var(--surface-muted) 70%, var(--accent-primary) 14%);
+  background: var(--choice-selected-bg);
+  color: var(--text-inverse);
+  box-shadow: var(--choice-active-shadow);
+}
+
+.settings-subsection-rail button.active small,
+.settings-subsection-rail button.active strong {
+  color: currentColor;
 }
 
 .settings-subsection-rail button span {
@@ -1798,7 +1822,6 @@ main {
 
 .settings-option-list,
 .settings-pin-grid,
-.settings-segment-list,
 .workspace-home-actions,
 .desktop-run-timeline,
 .desktop-decision-list,
@@ -1807,25 +1830,49 @@ main {
   gap: 8px;
 }
 
+.settings-segment-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
 .settings-option-list button,
 .settings-segment-list button,
 .settings-pin-grid button {
   display: grid;
   min-width: 0;
   border: 1px solid var(--line);
-  background: var(--surface);
+  background: var(--choice-bg);
   color: var(--text);
   border-radius: 7px;
   padding: 9px;
+  box-shadow: var(--choice-shadow);
   text-align: left;
+}
+
+.settings-segment-list button {
+  width: auto;
+  min-width: 104px;
+  min-height: var(--control-compact-target-size);
+  align-items: center;
+  justify-content: center;
+  padding: 7px 11px;
+  text-align: center;
+}
+
+.settings-pin-grid button {
+  min-height: var(--control-compact-target-size);
+  align-items: center;
 }
 
 .settings-option-list button.active,
 .settings-segment-list button.active,
 .settings-pin-grid button.active {
   border-color: var(--control-selected-border);
-  background: var(--control-selected-bg);
+  background: var(--choice-selected-bg);
   color: var(--control-selected-fg);
+  box-shadow: var(--choice-active-shadow);
 }
 
 .settings-option-list button.active small {
@@ -3686,17 +3733,19 @@ h3 {
 .segmented-control button {
   min-height: var(--control-compact-target-size);
   border: 1px solid var(--line);
-  background: var(--surface-raised);
+  background: var(--choice-bg);
   color: var(--text);
   border-radius: 7px;
   padding: 7px 10px;
+  box-shadow: var(--control-shadow);
   font-size: var(--font-size-body);
 }
 
 .segmented-control button.active {
-  border-color: #a8b5c3;
-  background: linear-gradient(135deg, #25313f 0%, #2f3d4e 100%);
+  border-color: var(--control-selected-border);
+  background: var(--choice-selected-bg);
   color: var(--text-on-dark);
+  box-shadow: var(--choice-active-shadow);
 }
 
 .app-control-bar {
@@ -3712,9 +3761,10 @@ h3 {
 .command-palette-search,
 .command-palette-results button {
   border: 1px solid var(--line);
-  background: var(--surface);
+  background: var(--choice-bg);
   color: var(--text);
   border-radius: 8px;
+  box-shadow: var(--choice-shadow);
 }
 
 .command-trigger {
@@ -3772,14 +3822,15 @@ h3 {
 .app-chip-group button {
   display: inline-flex;
   max-width: 142px;
-  min-height: var(--control-compact-target-size);
+  min-height: var(--control-dense-target-size);
   align-items: center;
   gap: 5px;
   border: 1px solid var(--line);
-  background: var(--surface-raised);
+  background: var(--choice-bg);
   color: var(--text);
   border-radius: 999px;
-  padding: 5px 9px;
+  padding: 4px 9px;
+  box-shadow: var(--control-shadow);
 }
 
 .app-chip-group button strong {
@@ -3792,8 +3843,9 @@ h3 {
 
 .app-chip-group button.active {
   border-color: var(--action-primary-border);
-  background: var(--action-primary-bg);
+  background: var(--choice-selected-bg);
   color: var(--action-primary-fg);
+  box-shadow: var(--choice-active-shadow);
 }
 
 .command-palette-backdrop {
@@ -3827,6 +3879,7 @@ h3 {
   gap: 9px;
   align-items: center;
   padding: 8px 10px;
+  box-shadow: var(--search-shadow);
 }
 
 .command-palette-search input {
@@ -3839,12 +3892,13 @@ h3 {
 }
 
 .command-palette-search button {
-  min-height: var(--control-compact-target-size);
+  min-height: var(--control-dense-target-size);
   border: 1px solid var(--line);
-  background: var(--surface-muted);
+  background: var(--choice-bg);
   color: var(--slate);
   border-radius: 7px;
-  padding: 5px 9px;
+  padding: 4px 9px;
+  box-shadow: var(--control-shadow);
   font-size: var(--font-size-caption);
   font-weight: 800;
 }
@@ -3869,8 +3923,8 @@ h3 {
   grid-template-columns: 24px minmax(0, 1fr) auto;
   gap: 9px;
   align-items: start;
-  min-height: 62px;
-  padding: 10px;
+  min-height: 52px;
+  padding: 8px 10px;
   text-align: left;
   white-space: normal;
 }
@@ -4304,9 +4358,10 @@ h3 {
   align-items: center;
   gap: 8px;
   border: 1px solid var(--line);
-  background: var(--surface);
+  background: var(--choice-bg);
   border-radius: 7px;
   padding: 0 11px;
+  box-shadow: var(--search-shadow);
 }
 
 .search-box {
@@ -4433,12 +4488,12 @@ h3 {
   min-width: 0;
   min-height: 58px;
   border: 1px solid var(--line);
-  background: var(--surface);
+  background: var(--choice-bg);
   color: var(--text);
   border-radius: 7px;
   padding: 9px 10px;
   text-align: left;
-  box-shadow: var(--control-shadow);
+  box-shadow: var(--choice-shadow);
 }
 
 .agent-detail-switcher button svg {
@@ -4467,8 +4522,9 @@ h3 {
 
 .agent-detail-switcher button[aria-selected="true"] {
   border-color: var(--control-selected-border);
-  background: var(--control-selected-bg);
+  background: var(--choice-selected-bg);
   color: var(--control-selected-fg);
+  box-shadow: var(--choice-active-shadow);
 }
 
 .agent-detail-switcher button[aria-selected="true"] svg,
@@ -4697,17 +4753,19 @@ h3 {
   gap: 7px;
   align-content: start;
   border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  background: var(--choice-bg);
   color: var(--text);
   border-radius: 8px;
   padding: 12px;
+  box-shadow: var(--choice-shadow);
   text-align: left;
 }
 
 .core-function-grid button.active {
   border-color: var(--action-primary-border);
-  background: var(--action-primary-bg);
+  background: var(--choice-selected-bg);
   color: var(--action-primary-fg);
+  box-shadow: var(--choice-active-shadow);
 }
 
 .core-function-grid svg {
@@ -5231,17 +5289,19 @@ h3 {
   align-items: center;
   gap: 8px;
   border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  background: var(--choice-bg);
   color: var(--text);
   border-radius: 7px;
   padding: 8px 10px;
+  box-shadow: var(--control-shadow);
   text-align: left;
 }
 
 .mode-group-list button.active {
   border-color: var(--action-primary-border);
-  background: var(--action-primary-bg);
+  background: var(--choice-selected-bg);
   color: var(--action-primary-fg);
+  box-shadow: var(--choice-active-shadow);
 }
 
 .mode-group-list button span,
@@ -5349,14 +5409,15 @@ h3 {
 .mode-option-grid button {
   display: inline-flex;
   width: fit-content;
-  min-height: var(--control-target-size);
+  min-height: var(--control-compact-target-size);
   align-items: center;
   gap: 6px;
   border: 1px solid #b7c3cf;
-  background: var(--surface);
+  background: var(--choice-bg);
   color: var(--text);
   border-radius: 7px;
-  padding: 7px 10px;
+  padding: 6px 10px;
+  box-shadow: var(--control-shadow);
   font-size: var(--font-size-body);
 }
 
@@ -6059,17 +6120,18 @@ h3 {
   grid-template-columns: auto minmax(0, 1fr);
   gap: 4px 8px;
   align-items: center;
-  min-height: 72px;
+  min-height: 64px;
   border: 1px solid var(--line);
-  background: var(--surface-raised);
+  background: var(--choice-bg);
   color: var(--text);
   border-radius: 8px;
-  padding: 11px;
+  padding: 9px 10px;
+  box-shadow: var(--choice-shadow);
   text-align: left;
 }
 
 .settings-action-row button {
-  min-height: 50px;
+  min-height: var(--control-target-size);
 }
 
 .quick-start-flow button svg,
@@ -6108,12 +6170,13 @@ h3 {
   grid-template-columns: auto minmax(0, 1fr);
   gap: 4px 8px;
   align-items: center;
-  min-height: 78px;
+  min-height: 66px;
   border: 1px solid var(--line);
-  background: var(--surface-raised);
+  background: var(--choice-bg);
   border-radius: 8px;
-  padding: 11px;
+  padding: 9px 10px;
   color: var(--text);
+  box-shadow: var(--choice-shadow);
   text-align: left;
 }
 
@@ -6980,23 +7043,30 @@ h3 {
 .runtime-text-choice-grid button {
   display: grid;
   min-width: 0;
-  min-height: 64px;
+  min-height: 56px;
   align-content: start;
   justify-items: start;
   gap: 3px;
   border: 1px solid var(--line);
-  background: var(--surface-raised);
+  background: var(--choice-bg);
   color: var(--text);
   border-radius: 7px;
-  padding: 9px 10px;
+  padding: 8px 10px;
+  box-shadow: var(--choice-shadow);
   text-align: left;
   white-space: normal;
 }
 
+.runtime-text-choice-grid.compact button {
+  min-height: 44px;
+  padding: 7px 9px;
+}
+
 .runtime-text-choice-grid button.active {
   border-color: var(--accent-primary-border);
-  background: color-mix(in srgb, var(--surface-raised) 72%, var(--accent-primary) 12%);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent-primary) 26%, transparent);
+  background: var(--choice-selected-bg);
+  color: var(--text-inverse);
+  box-shadow: var(--choice-active-shadow);
 }
 
 .runtime-text-choice-grid span,
@@ -7992,23 +8062,25 @@ h3 {
 
 .search-agent-actions button {
   display: inline-flex;
-  min-height: var(--control-target-size);
+  min-height: var(--control-compact-target-size);
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
   border: 1px solid var(--line-strong);
-  background: var(--surface);
+  background: var(--choice-bg);
   color: var(--text);
   border-radius: var(--control-radius);
-  padding: 8px var(--control-padding-x);
+  padding: 7px 11px;
+  box-shadow: var(--control-shadow);
   font-weight: 800;
   white-space: normal;
 }
 
 .search-agent-actions .primary-action-button {
   border-color: var(--action-primary-border);
-  background: var(--action-primary-bg);
+  background: var(--choice-selected-bg);
   color: var(--action-primary-fg);
+  box-shadow: var(--choice-active-shadow);
 }
 
 .search-agent-contract {
@@ -8274,6 +8346,7 @@ h3 {
   color: var(--text);
   border-radius: 7px;
   padding: 6px 9px;
+  box-shadow: var(--search-shadow);
   font: inherit;
   font-size: var(--font-size-caption);
 }
@@ -8306,7 +8379,7 @@ h3 {
 .agent-provider-choice-grid,
 .agent-model-choice-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
   gap: 6px;
   min-width: 0;
 }
@@ -8320,17 +8393,20 @@ h3 {
   justify-items: start;
   gap: 2px;
   border: 1px solid var(--line);
-  background: var(--surface-raised);
+  background: var(--choice-bg);
   color: var(--text);
   border-radius: 7px;
-  padding: 7px 8px;
+  padding: 6px 8px;
+  box-shadow: var(--control-shadow);
   text-align: left;
 }
 
 .agent-provider-choice-grid button.active,
 .agent-model-choice-grid button.active {
   border-color: var(--accent-primary-border);
-  background: color-mix(in srgb, var(--surface-raised) 76%, var(--accent-primary) 12%);
+  background: var(--choice-selected-bg);
+  color: var(--text-inverse);
+  box-shadow: var(--choice-active-shadow);
 }
 
 .agent-provider-choice-grid span,
@@ -9914,14 +9990,16 @@ h3 {
 
 .terminal-drawer .session-launcher .runtime-text-choice-grid button {
   border-color: var(--terminal-border);
-  background: var(--terminal-surface);
+  background: linear-gradient(180deg, var(--terminal-surface-raised), var(--terminal-surface));
   color: var(--terminal-fg);
   border-radius: 4px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
 }
 
 .terminal-drawer .session-launcher .runtime-text-choice-grid button.active {
   border-color: var(--terminal-accent);
   background: color-mix(in srgb, var(--terminal-surface-raised) 72%, var(--terminal-accent) 18%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 10px 24px rgba(88, 166, 255, 0.18);
 }
 
 .terminal-drawer .session-launcher .runtime-text-choice-grid span {
@@ -10843,15 +10921,16 @@ h3 {
 .source-settings-dialog button {
   display: inline-flex;
   min-width: var(--control-target-size);
-  min-height: var(--control-target-size);
+  min-height: var(--control-compact-target-size);
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
-  border: 1px solid transparent;
-  background: transparent;
+  border: 1px solid var(--line);
+  background: var(--choice-bg);
   border-radius: var(--control-radius);
-  padding: 8px 11px;
+  padding: 7px 10px;
   color: var(--text);
+  box-shadow: var(--control-shadow);
   white-space: normal;
 }
 
@@ -10861,15 +10940,15 @@ h3 {
 
 .source-command-toolbar button:not(:disabled):hover {
   border-color: color-mix(in srgb, var(--line) 72%, var(--blue) 16%);
-  background: color-mix(in srgb, var(--surface) 82%, var(--blue) 8%);
+  background: var(--choice-bg-hover);
+  box-shadow: var(--control-hover-shadow);
 }
 
 .source-command-toolbar button.active {
   border-color: var(--accent-primary-border);
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--surface) 82%, var(--blue) 14%), color-mix(in srgb, var(--surface-muted) 68%, var(--blue) 16%)),
-    var(--surface-muted);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--blue) 18%, transparent);
+  background: var(--choice-selected-bg);
+  color: var(--text-inverse);
+  box-shadow: var(--choice-active-shadow);
 }
 
 .source-command-toolbar button.mode {
@@ -10899,27 +10978,30 @@ h3 {
   position: relative;
   display: inline-flex;
   min-width: var(--control-target-size);
-  min-height: var(--control-target-size);
+  min-height: var(--control-compact-target-size);
   align-items: center;
   justify-content: center;
   gap: 6px;
-  border: 1px solid transparent;
-  background: transparent;
+  border: 1px solid var(--line);
+  background: var(--choice-bg);
   border-radius: 7px;
-  padding: 8px 12px 9px;
+  padding: 7px 11px 8px;
   color: var(--text);
+  box-shadow: var(--control-shadow);
   white-space: nowrap;
 }
 
 .source-workbench-switcher button:not(:disabled):hover {
   border-color: color-mix(in srgb, var(--line) 72%, var(--blue) 14%);
-  background: color-mix(in srgb, var(--surface) 78%, var(--blue) 7%);
+  background: var(--choice-bg-hover);
+  box-shadow: var(--control-hover-shadow);
 }
 
 .source-workbench-switcher button.active {
   border-color: color-mix(in srgb, var(--blue) 42%, var(--line));
-  background: var(--surface);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+  background: var(--choice-selected-bg);
+  color: var(--text-inverse);
+  box-shadow: var(--choice-active-shadow);
 }
 
 .source-workbench-switcher button.active::after {
@@ -10937,6 +11019,11 @@ h3 {
   color: var(--muted);
   font-size: var(--font-size-overline);
   font-weight: 800;
+}
+
+.source-workbench-switcher button.active small,
+.source-command-toolbar button.active svg {
+  color: currentColor;
 }
 
 .source-settings-dialog {
@@ -13551,10 +13638,13 @@ h3 {
   .command-trigger:hover,
   .app-chip-group button:hover,
   .command-palette-results button:hover,
+  .command-palette-search button:hover,
   .section-tab-group:hover,
   .section-tabs button:hover,
   .panel-heading button:hover,
   .segmented-control button:hover,
+  .settings-tab-list button:hover,
+  .settings-subsection-rail button:hover,
   .operator-strip-actions button:hover,
   .source-list button:hover,
   .metric:hover,
@@ -13599,6 +13689,13 @@ h3 {
   .settings-option-list button:hover,
   .settings-segment-list button:hover,
   .settings-pin-grid button:hover,
+  .runtime-text-choice-grid button:hover,
+  .agent-provider-choice-grid button:hover,
+  .agent-model-choice-grid button:hover,
+  .agent-detail-switcher button:hover,
+  .search-agent-actions button:hover,
+  .quick-start-flow button:hover,
+  .settings-action-row button:hover,
   .timeline-step:hover,
   .workspace-home-actions button:hover,
   .workspace-home-actions a:hover,
@@ -13607,8 +13704,8 @@ h3 {
   .desktop-decision-list article:hover,
   .capability-dock-list article:hover {
     transform: none;
-    border-color: #c1ccd8;
-    box-shadow: 0 3px 10px rgba(31, 41, 51, 0.05);
+    border-color: color-mix(in srgb, var(--blue) 30%, var(--line));
+    box-shadow: var(--control-hover-shadow);
   }
 }
 
