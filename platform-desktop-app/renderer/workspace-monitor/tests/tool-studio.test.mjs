@@ -285,6 +285,9 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(monitorShell, /const primaryHomeIntent = useMemo/);
   assert.match(monitorShell, /taskIntentItems\.find\(\(item\) => item\.id === "build-tool"\)/);
   assert.match(monitorShell, /const primaryHomeFlowStep = useMemo/);
+  assert.match(monitorShell, /primaryHomeIntent\.label/);
+  assert.match(monitorShell, /primaryHomeIntent\.detail/);
+  assert.doesNotMatch(monitorShell, /한 화면은 하나의 결정을 크게 보여줍니다/);
   assert.match(monitorShell, /className="home-focus-command"/);
   assert.match(monitorShell, /data-home-focus-command/);
   assert.match(monitorShell, /className="home-focus-card"/);
@@ -304,9 +307,19 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(monitorShell, /group:\s*uiLanguage === "ko" \? "하고 싶은 일" : "Goal"/);
   assert.match(monitorShell, /placeholder=\{uiLanguage === "ko" \? "하고 싶은 일 검색: 툴, 에이전트, 실행, 파일, 설정"/);
   assert.match(css, /\.core-home-panel \{[\s\S]*?background: transparent;/);
+  assert.match(css, /--surface-panel:/);
+  assert.match(css, /--font-size-work-title:/);
+  assert.match(css, /--line-height-tight:/);
+  assert.match(css, /--line-accent:/);
+  assert.match(css, /--focus-shadow:/);
+  assert.match(css, /--font-weight-strong:/);
   assert.match(css, /\.home-focus-command \{[\s\S]*?grid-template-columns: minmax\(0, 0\.9fr\) minmax\(320px, 1\.1fr\);/);
-  assert.match(css, /\.home-focus-card \{[\s\S]*?box-shadow: var\(--soft-shadow\);/);
+  assert.match(css, /\.home-focus-command \{[\s\S]*?min-height: 252px;/);
+  assert.match(css, /\.home-focus-command::before \{[\s\S]*?height: 3px;/);
+  assert.match(css, /\.home-focus-copy h2 \{[\s\S]*?font-size: var\(--font-size-work-title\);/);
+  assert.match(css, /\.home-focus-card \{[\s\S]*?box-shadow: var\(--focus-shadow\);/);
   assert.match(css, /\.home-focus-flow \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.home-focus-card button \{[\s\S]*?min-height: 48px;/);
   assert.match(css, /\.home-navigation-dock \{/);
   assert.match(css, /\.home-navigation-dock \.task-intent-grid \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.task-intent-grid \{[\s\S]*?grid-template-columns: repeat\(auto-fit, minmax\(300px, 1fr\)\);/);
@@ -315,6 +328,7 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(css, /\.task-flow-rail \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.task-flow-rail button \{[\s\S]*?min-height: 44px;/);
   assert.match(css, /@media \(max-width: 960px\) \{[\s\S]*?\.home-focus-command,[\s\S]*?\.home-focus-flow,[\s\S]*?\.workspace-home-actions,/);
+  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.home-focus-copy h2 \{[\s\S]*?font-size: var\(--font-size-screen-title\);/);
   assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.home-focus-flow li strong \{[\s\S]*?white-space: normal;/);
   assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.task-flow-rail \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
   assert.match(css, /\.desktop-viewport\[data-active-section="overview"\] \.titlebar-context-strip,[\s\S]*?\.desktop-viewport\[data-active-section="overview"\] \.titlebar-actions,[\s\S]*?\.desktop-viewport\[data-active-section="overview"\] > \.desktop-toolbar \{[\s\S]*?display: none;/);

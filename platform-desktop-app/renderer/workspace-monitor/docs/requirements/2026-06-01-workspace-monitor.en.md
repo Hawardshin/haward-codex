@@ -56,6 +56,7 @@
 | REQ-WM-055 | Every button and button-like control shall show capture-phase instant pressed feedback before React click handlers, workbench mounts, native calls, clipboard work, modal opens, or section movement begin. Representative 67-button press samples and real nav click samples shall keep feedback p95 at or below 60ms under a CPU throttle 6 static-export audit. | must | instant button feedback static test, `perf:buttons` CPU throttle 6 audit, in-app Browser button smoke, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-056 | Tool Studio Build Tool shall provide a dedicated Python tool source-management sub-workbench that shows the selected template's package name, module name, `src/` edit targets, `pyproject.toml`, console entry point, smoke test path, init/run/package commands, checklist, and copy-source-plan action in one place. | must | python source manager static test, copy payload marker audit, desktop/mobile source manager smoke, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-057 | The Overview first screen shall be a Focus Command Surface, not a flat list of equal cards: it shall show one recommended job, next-step preview, and primary action first, while moving other goals and operating status into a separate dock/strip. | must | focus command static test, desktop/mobile Browser smoke, target order assertion, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` |
+| REQ-WM-058 | The desktop product UI shall use consistent color, typography, shadow, and button-state tokens across the app shell, titlebar, rail, and Overview primary work surface, and shall build hierarchy around real work goals and next actions instead of exposing design-principle copy in the interface. | must | shell visual token static test, meta-copy absence test, desktop/mobile Browser smoke, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` |
 
 ## Scope
 
@@ -95,6 +96,7 @@
 - Separation of button first paint from heavy workbench mount, native refresh, and evidence calculations
 - Python source/package/pyproject management inside Tool Studio Build Tool
 - Focus Command Surface and secondary work dock on the Overview first screen
+- Visual design tokens and work-goal-centered copy across the app shell, titlebar, rail, and Overview primary surface
 - Vercel deployment docs
 
 ## Non-Goals

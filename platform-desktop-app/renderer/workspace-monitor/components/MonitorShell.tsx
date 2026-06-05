@@ -5410,16 +5410,20 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                 <section className={`workspace-home-panel core-home-panel home-${attentionState.tone}`} aria-label="Workspace home">
                   <section className="home-focus-command" data-home-focus-command aria-label={uiLanguage === "ko" ? "집중 작업 선택" : "Focused work command"}>
                     <div className="home-focus-copy">
-                      <p className="eyebrow">Command Surface</p>
+                      <p className="eyebrow">{uiLanguage === "ko" ? "추천 시작점" : "Recommended Start"}</p>
                       <h2>
-                        {uiLanguage === "ko"
-                          ? "한 화면은 하나의 결정을 크게 보여줍니다"
-                          : "One screen shows one decision clearly"}
+                        {primaryHomeIntent
+                          ? primaryHomeIntent.label
+                          : uiLanguage === "ko"
+                            ? "작업 시작"
+                            : "Start work"}
                       </h2>
                       <p>
-                        {uiLanguage === "ko"
-                          ? "추천 작업, 다음 단계, 실행 버튼을 먼저 두고 나머지 기능은 아래 dock으로 낮춥니다."
-                          : "The recommended job, next step, and run action come first; everything else moves into the dock below."}
+                        {primaryHomeIntent
+                          ? primaryHomeIntent.detail
+                          : uiLanguage === "ko"
+                            ? "가장 먼저 처리할 목표를 선택하고 바로 작업 화면으로 이동합니다."
+                            : "Choose the first goal and move directly into the work surface."}
                       </p>
                     </div>
                     {primaryHomeIntent && PrimaryHomeIntentIcon && (
@@ -5450,8 +5454,8 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                   <section className="home-navigation-dock" data-home-navigation-dock aria-label={uiLanguage === "ko" ? "작업 목표 dock" : "Work goal dock"}>
                     <header>
                       <div>
-                        <p className="eyebrow">{uiLanguage === "ko" ? "작업 dock" : "Work Dock"}</p>
-                        <h3>{uiLanguage === "ko" ? "다른 목표는 여기서 선택합니다" : "Choose another goal here"}</h3>
+                      <p className="eyebrow">{uiLanguage === "ko" ? "작업 dock" : "Work Dock"}</p>
+                        <h3>{uiLanguage === "ko" ? "다음 작업 목표" : "Next work goals"}</h3>
                       </div>
                       <span>{taskIntentItems.length.toLocaleString("ko-KR")}</span>
                     </header>

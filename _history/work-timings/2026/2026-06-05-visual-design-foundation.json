@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-06-05",
+  "work_item": "visual-design-foundation",
+  "project": "platform-desktop-app/renderer/workspace-monitor",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Checked Apple HIG, Material, Carbon, and NN/g design references."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Updated shell/home visual tokens, Overview copy, and static tests."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "test, check, build:customer, perf:budget, desktop in-app Browser smoke, and mobile Playwright smoke passed."
+    }
+  ]
+}

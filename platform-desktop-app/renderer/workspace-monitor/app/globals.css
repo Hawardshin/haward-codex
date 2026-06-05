@@ -4,8 +4,12 @@
   --surface: #ffffff;
   --surface-muted: #edf1f5;
   --surface-raised: #fbfcfe;
+  --surface-panel: #f8fafc;
+  --surface-elevated: #ffffff;
   --line: #d8e0ea;
+  --line-subtle: #e7edf4;
   --line-strong: #9aa9ba;
+  --line-accent: #81d6be;
   --text: #17202a;
   --text-secondary: #435161;
   --text-tertiary: #667789;
@@ -64,6 +68,9 @@
   --terminal-muted: #aab7c5;
   --terminal-accent: #58a6ff;
   --soft-shadow: 0 4px 12px rgba(31, 41, 51, 0.06);
+  --shell-shadow: 0 18px 44px rgba(17, 24, 39, 0.08);
+  --focus-shadow: 0 20px 54px rgba(17, 24, 39, 0.12);
+  --control-shadow: 0 1px 1px rgba(17, 24, 39, 0.06);
   --control-hit-size: 40px;
   --control-target-size: 44px;
   --control-compact-target-size: 40px;
@@ -83,6 +90,11 @@
   --font-size-title-lg: 1.125rem;
   --font-size-screen-title: 1.375rem;
   --font-size-display: 1.5rem;
+  --font-size-work-title: 1.75rem;
+  --line-height-tight: 1.18;
+  --line-height-copy: 1.55;
+  --font-weight-label: 820;
+  --font-weight-strong: 880;
   --font-family-sans:
     "Pretendard Variable", Pretendard, "Noto Sans KR", "Apple SD Gothic Neo",
     "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -113,8 +125,12 @@
   --surface: #171e27;
   --surface-muted: #222b36;
   --surface-raised: #1c2430;
+  --surface-panel: #151b24;
+  --surface-elevated: #1a222d;
   --line: #344252;
+  --line-subtle: #273341;
   --line-strong: #6f8196;
+  --line-accent: #58d5b6;
   --text: #ffffff;
   --text-secondary: #d7deea;
   --text-tertiary: #b8c2d0;
@@ -171,6 +187,9 @@
   --terminal-muted: #c9d1d9;
   --terminal-accent: #58a6ff;
   --soft-shadow: 0 6px 18px rgba(0, 0, 0, 0.26);
+  --shell-shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
+  --focus-shadow: 0 28px 72px rgba(0, 0, 0, 0.38);
+  --control-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -180,8 +199,12 @@
     --surface: #171e27;
     --surface-muted: #222b36;
     --surface-raised: #1c2430;
+    --surface-panel: #151b24;
+    --surface-elevated: #1a222d;
     --line: #344252;
+    --line-subtle: #273341;
     --line-strong: #6f8196;
+    --line-accent: #58d5b6;
     --text: #ffffff;
     --text-secondary: #d7deea;
     --text-tertiary: #b8c2d0;
@@ -238,6 +261,9 @@
     --terminal-muted: #c9d1d9;
     --terminal-accent: #58a6ff;
     --soft-shadow: 0 6px 18px rgba(0, 0, 0, 0.26);
+    --shell-shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
+    --focus-shadow: 0 28px 72px rgba(0, 0, 0, 0.38);
+    --control-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -339,7 +365,7 @@ body {
   color: var(--text);
   font-family: var(--font-family-sans);
   font-size: var(--font-size-body);
-  line-height: 1.5;
+  line-height: var(--line-height-copy);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -464,7 +490,7 @@ main {
 .desktop-app-root {
   color: var(--text);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--surface-muted) 82%, var(--bg)) 0%, var(--bg) 38%, var(--bg) 100%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-muted) 74%, var(--bg)) 0%, var(--bg) 42%, var(--bg) 100%),
     var(--bg);
 }
 
@@ -496,6 +522,7 @@ main {
 .activity-rail {
   position: sticky;
   top: 0;
+  z-index: 30;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto auto;
   gap: 12px;
@@ -504,8 +531,11 @@ main {
   height: 100dvh;
   max-height: 100vh;
   max-height: 100dvh;
-  border-right: 1px solid var(--line);
-  background: var(--rail-bg);
+  border-right: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--rail-bg) 88%, var(--green) 12%), var(--rail-bg)),
+    var(--rail-bg);
+  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.03);
   padding: 12px 8px;
 }
 
@@ -523,6 +553,7 @@ main {
 }
 
 .activity-rail button {
+  position: relative;
   display: inline-flex;
   width: 46px;
   min-height: var(--control-target-size);
@@ -569,9 +600,21 @@ main {
   color: var(--text-on-dark);
 }
 
+.activity-rail button.active::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  width: 3px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--line-accent);
+}
+
 .activity-rail .activity-brand {
   border-color: color-mix(in srgb, var(--green) 42%, rgba(255, 255, 255, 0.22));
-  background: color-mix(in srgb, var(--green) 82%, #0b1220 18%);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--green) 82%, #ffffff 8%), color-mix(in srgb, var(--green) 78%, #0b1220 22%));
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
 }
 
 .activity-settings {
@@ -785,7 +828,7 @@ main {
   overflow: visible;
   overflow-x: hidden;
   overscroll-behavior: contain;
-  padding: 0 18px 32px;
+  padding: 0 clamp(14px, 2.2vw, 26px) 32px;
   scrollbar-gutter: stable;
   scroll-padding-top: 72px;
 }
@@ -838,10 +881,10 @@ main {
   gap: 10px 14px;
   align-items: start;
   min-height: 0;
-  border-bottom: 1px solid var(--line);
-  background: var(--titlebar-bg);
-  backdrop-filter: blur(12px);
-  padding: 10px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  background: color-mix(in srgb, var(--titlebar-bg) 92%, var(--surface) 8%);
+  backdrop-filter: blur(16px) saturate(1.08);
+  padding: 10px 0 12px;
 }
 
 .titlebar-section strong {
@@ -922,7 +965,21 @@ main {
   color: var(--text);
   border-radius: var(--control-radius);
   padding: 8px var(--control-padding-x);
+  box-shadow: var(--control-shadow);
   text-decoration: none;
+}
+
+.titlebar-actions > button:hover,
+.desktop-toolbar button:hover,
+.settings-dialog header button:hover,
+.workspace-home-actions button:hover,
+.workspace-home-actions a:hover,
+.home-depth-menu button:hover,
+.home-depth-menu a:hover,
+.home-drilldown-header button:hover,
+.home-drilldown-header a:hover {
+  border-color: var(--line-strong);
+  background: var(--control-bg-hover);
 }
 
 .desktop-viewport[data-primary-work-surface="true"] .desktop-titlebar {
@@ -2102,52 +2159,69 @@ main {
 }
 
 .home-focus-command {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
-  gap: 12px;
+  gap: 16px;
   align-items: stretch;
   min-width: 0;
-  border: 1px solid var(--line);
+  min-height: 252px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--line-accent) 44%, var(--line) 56%);
   border-radius: 8px;
   background:
-    linear-gradient(135deg, color-mix(in srgb, var(--surface) 90%, var(--green) 6%), color-mix(in srgb, var(--surface) 91%, var(--blue) 7%)),
-    var(--surface);
-  padding: 16px;
+    linear-gradient(135deg, color-mix(in srgb, var(--surface-panel) 82%, var(--green) 10%), color-mix(in srgb, var(--surface-panel) 80%, var(--blue) 12%)),
+    var(--surface-panel);
+  box-shadow: var(--shell-shadow);
+  padding: 18px;
+}
+
+.home-focus-command::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--green), var(--blue), var(--amber));
 }
 
 .home-focus-copy {
+  position: relative;
   display: grid;
   align-content: center;
-  gap: 10px;
+  gap: 12px;
   min-width: 0;
+  padding: 8px 10px;
 }
 
 .home-focus-copy h2 {
   max-width: 640px;
   margin: 0;
   color: var(--text);
-  font-size: var(--font-size-screen-title);
-  line-height: 1.18;
+  font-size: var(--font-size-work-title);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-tight);
 }
 
 .home-focus-copy p {
   max-width: 620px;
   margin: 0;
   color: var(--text-secondary);
-  line-height: 1.55;
+  font-size: var(--font-size-body-strong);
+  line-height: var(--line-height-copy);
   overflow-wrap: break-word;
 }
 
 .home-focus-card {
+  position: relative;
   display: grid;
   align-content: start;
-  gap: 10px;
+  gap: 12px;
   min-width: 0;
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in srgb, var(--line) 78%, var(--line-accent) 22%);
   border-radius: 8px;
-  background: var(--surface);
-  box-shadow: var(--soft-shadow);
-  padding: 14px;
+  background: color-mix(in srgb, var(--surface-elevated) 94%, var(--green) 3%);
+  box-shadow: var(--focus-shadow);
+  padding: 16px;
 }
 
 .home-focus-card header {
@@ -2169,7 +2243,7 @@ main {
   color: var(--text-secondary);
   font-size: var(--font-size-caption);
   font-style: normal;
-  font-weight: 900;
+  font-weight: var(--font-weight-label);
   line-height: 1.3;
   text-overflow: ellipsis;
   text-transform: uppercase;
@@ -2178,10 +2252,11 @@ main {
 
 .home-focus-card header em {
   justify-self: end;
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in srgb, var(--line-accent) 46%, var(--line) 54%);
   border-radius: 999px;
-  background: var(--surface-muted);
+  background: color-mix(in srgb, var(--surface-muted) 78%, var(--green) 10%);
   padding: 4px 8px;
+  color: var(--text);
   text-transform: none;
 }
 
@@ -2218,15 +2293,16 @@ main {
   align-items: center;
   min-width: 0;
   min-height: 46px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-subtle);
   border-radius: 8px;
-  background: var(--surface-raised);
+  background: color-mix(in srgb, var(--surface-raised) 88%, var(--surface-muted) 12%);
   padding: 8px;
 }
 
 .home-focus-flow li.current {
-  border-color: var(--status-success-border);
-  background: var(--status-success-bg);
+  border-color: color-mix(in srgb, var(--green) 72%, var(--line) 28%);
+  background: color-mix(in srgb, var(--status-success-bg) 72%, var(--surface) 28%);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--green) 18%, transparent);
 }
 
 .home-focus-flow li span {
@@ -2253,7 +2329,7 @@ main {
 
 .home-focus-card button {
   display: inline-flex;
-  min-height: var(--control-target-size);
+  min-height: 48px;
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
@@ -2262,16 +2338,17 @@ main {
   background: var(--action-primary-bg);
   color: var(--action-primary-fg);
   padding: 8px var(--control-padding-x);
-  font-weight: 900;
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--accent-primary) 18%, transparent);
+  font-weight: var(--font-weight-strong);
 }
 
 .home-navigation-dock {
   display: grid;
   gap: 10px;
   min-width: 0;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-subtle);
   border-radius: 8px;
-  background: var(--surface);
+  background: color-mix(in srgb, var(--surface) 82%, var(--surface-muted) 18%);
   padding: 12px;
 }
 
@@ -2309,6 +2386,8 @@ main {
 
 .home-navigation-dock .workspace-home-actions.task-intent-grid button {
   min-height: 76px;
+  border-color: var(--line-subtle);
+  background: color-mix(in srgb, var(--surface-raised) 88%, var(--surface-muted) 12%);
 }
 
 .workspace-home-actions {
@@ -2387,6 +2466,7 @@ main {
   border-color: var(--control-selected-border);
   background: var(--control-selected-bg);
   color: var(--control-selected-fg);
+  box-shadow: 0 10px 26px color-mix(in srgb, var(--accent-primary) 16%, transparent);
 }
 
 .workspace-home-actions.task-intent-grid button:hover small,
@@ -2411,8 +2491,8 @@ main {
   grid-template-columns: 20px minmax(0, 1fr);
   gap: 4px 8px;
   min-width: 0;
-  border: 1px solid var(--line);
-  background: var(--surface-raised);
+  border: 1px solid var(--line-subtle);
+  background: color-mix(in srgb, var(--surface-raised) 84%, var(--surface-muted) 16%);
   border-radius: 8px;
   padding: 10px;
 }
@@ -12768,7 +12848,7 @@ h3 {
     height: auto;
     max-height: 64px;
     border-right: 0;
-    border-bottom: 1px solid #cfd8e3;
+    border-bottom: 1px solid var(--line);
     padding: 8px;
     overflow: hidden;
   }
@@ -13060,6 +13140,18 @@ h3 {
   .home-focus-command,
   .home-navigation-dock {
     padding: 12px;
+  }
+
+  .home-focus-command {
+    min-height: 0;
+  }
+
+  .home-focus-copy {
+    padding: 0;
+  }
+
+  .home-focus-copy h2 {
+    font-size: var(--font-size-screen-title);
   }
 
   .home-focus-card header {

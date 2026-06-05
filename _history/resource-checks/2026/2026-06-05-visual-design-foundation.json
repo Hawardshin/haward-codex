@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-06-05",
+  "work_item": "visual-design-foundation",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "kind": "local_http_server",
+      "command": "python3 -m http.server 3351 -d platform-desktop-app/renderer/workspace-monitor/out",
+      "status": "stopped",
+      "notes": "Used for static export visual smoke and stopped with Ctrl-C."
+    },
+    {
+      "kind": "browser_session",
+      "tool": "in-app Browser",
+      "status": "completed",
+      "notes": "Used for desktop visual smoke and screenshot."
+    },
+    {
+      "kind": "playwright_chromium",
+      "status": "completed",
+      "notes": "Used for 390px mobile visual smoke and closed after screenshot."
+    }
+  ]
+}
