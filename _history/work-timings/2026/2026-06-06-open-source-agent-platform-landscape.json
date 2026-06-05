@@ -1,0 +1,31 @@
+{
+  "id": "2026-06-06-open-source-agent-platform-landscape",
+  "timezone": "Asia/Seoul",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "name": "web_first_research",
+      "status": "completed",
+      "notes": "Searched broad open-source agent platform, coding agent, desktop AI, workflow orchestration, developer platform, and LLM observability queries."
+    },
+    {
+      "name": "local_platform_feature_extraction",
+      "status": "completed",
+      "notes": "Inspected product-feature-registry, Tauri config, generated snapshot signals, and prior desktop platform research."
+    },
+    {
+      "name": "landscape_synthesis",
+      "status": "completed",
+      "notes": "Grouped repositories by product role and extracted current-platform implications."
+    },
+    {
+      "name": "history_closeout",
+      "status": "completed",
+      "notes": "Recorded web search, request summary, mode selection, omission check, evaluation, request trace, work summary, and daily history entry."
+    }
+  ],
+  "bottleneck_candidates": [
+    "GitHub API rate limit prevented full metadata capture for every candidate.",
+    "The landscape is broad enough that future deep dives should use narrower slices."
+  ]
+}

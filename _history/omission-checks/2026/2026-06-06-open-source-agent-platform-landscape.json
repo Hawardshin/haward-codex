@@ -1,0 +1,32 @@
+{
+  "id": "2026-06-06-open-source-agent-platform-landscape",
+  "user_requests_checked": [
+    {
+      "request": "현재 플랫폼의 특징 뽑아내기",
+      "status": "covered",
+      "evidence": "_research/topics/platform-desktop-app/2026-06-06-open-source-agent-platform-landscape.ko.md#현재-플랫폼-특징"
+    },
+    {
+      "request": "유사 오픈소스 매우 많이 리서치",
+      "status": "covered",
+      "evidence": "Research matrix covers coding agents, frameworks, builders, local desktop apps, workflow orchestration, developer platforms, observability/eval, and sandbox/runtime references."
+    },
+    {
+      "request": "플랫폼에 적용할 수 있는 인사이트",
+      "status": "covered",
+      "evidence": "Differentiation, structural insights, and next implementation candidates are recorded in the research report."
+    },
+    {
+      "request": "웹 검색 먼저",
+      "status": "covered",
+      "evidence": "_history/web-searches/2026/2026-06-06-open-source-agent-platform-landscape.ko.md"
+    },
+    {
+      "request": "빌드 자동 실행",
+      "status": "not_applicable",
+      "evidence": "No product source code changed; this close-out is research/docs only."
+    }
+  ],
+  "blocked_decisions": [],
+  "unblocked_work": "The request was research-focused and did not require user clarification."
+}
