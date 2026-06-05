@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "scroll-scope-color-speed",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "resource": "static_http_server",
+      "risk": "Long-running process left open after Browser smoke.",
+      "control": "Stop the local static server after screenshots."
+    },
+    {
+      "resource": "browser_tab",
+      "risk": "Browser automation can leave stale state.",
+      "control": "Use one local URL and read computed style only after load."
+    },
+    {
+      "resource": "animation_frame_loop",
+      "risk": "3D canvas can keep rendering while offscreen.",
+      "control": "IntersectionObserver, document visibility, viewport checks, and reduced-motion handling pause the frame loop."
+    }
+  ],
+  "status": "completed",
+  "cleanup": [
+    {
+      "resource": "static_http_server",
+      "action": "Stopped with keyboard interrupt after Browser and Playwright smoke."
+    }
+  ]
+}

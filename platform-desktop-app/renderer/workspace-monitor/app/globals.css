@@ -67,6 +67,11 @@
   --terminal-fg: #d7e0ea;
   --terminal-muted: #aab7c5;
   --terminal-accent: #58a6ff;
+  --scroll-scope-bg: color-mix(in srgb, var(--surface) 82%, var(--surface-muted) 18%);
+  --scroll-scope-border: color-mix(in srgb, var(--line) 76%, transparent);
+  --scrollbar-track: color-mix(in srgb, var(--surface-muted) 68%, transparent);
+  --scrollbar-thumb: #b5c2d1;
+  --scrollbar-thumb-hover: #8798aa;
   --soft-shadow: 0 4px 12px rgba(31, 41, 51, 0.06);
   --shell-shadow: 0 18px 44px rgba(17, 24, 39, 0.08);
   --focus-shadow: 0 20px 54px rgba(17, 24, 39, 0.12);
@@ -187,6 +192,11 @@
   --terminal-fg: #e6edf3;
   --terminal-muted: #c9d1d9;
   --terminal-accent: #58a6ff;
+  --scroll-scope-bg: color-mix(in srgb, var(--surface) 82%, var(--surface-muted) 18%);
+  --scroll-scope-border: color-mix(in srgb, var(--line) 76%, transparent);
+  --scrollbar-track: color-mix(in srgb, var(--surface-muted) 62%, transparent);
+  --scrollbar-thumb: #526276;
+  --scrollbar-thumb-hover: #718399;
   --soft-shadow: 0 6px 18px rgba(0, 0, 0, 0.26);
   --shell-shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
   --focus-shadow: 0 28px 72px rgba(0, 0, 0, 0.38);
@@ -261,6 +271,11 @@
     --terminal-fg: #e6edf3;
     --terminal-muted: #c9d1d9;
     --terminal-accent: #58a6ff;
+    --scroll-scope-bg: color-mix(in srgb, var(--surface) 82%, var(--surface-muted) 18%);
+    --scroll-scope-border: color-mix(in srgb, var(--line) 76%, transparent);
+    --scrollbar-track: color-mix(in srgb, var(--surface-muted) 62%, transparent);
+    --scrollbar-thumb: #526276;
+    --scrollbar-thumb-hover: #718399;
     --soft-shadow: 0 6px 18px rgba(0, 0, 0, 0.26);
     --shell-shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
     --focus-shadow: 0 28px 72px rgba(0, 0, 0, 0.38);
@@ -406,6 +421,147 @@ select {
   min-width: 0;
   overflow-wrap: var(--text-long-token-wrap);
   word-break: normal;
+}
+
+.desktop-app-root :where(
+  .activity-rail nav,
+  .desktop-viewport,
+  .sidebar-context-panel,
+  .settings-dialog-backdrop,
+  .settings-tab-list,
+  .settings-tab-panel,
+  .settings-subsection-rail,
+  .session-list,
+  .session-terminal pre,
+  .terminal-event-rail,
+  .terminal-drawer-workbench,
+  .terminal-drawer-sidebar,
+  .terminal-drawer-main,
+  .workspace-explorer-tree,
+  .source-editor-frame,
+  .tool-studio-mode-rail,
+  .tool-card-scroll,
+  .tool-detail-scroll,
+  .tool-env-scroll
+) {
+  overscroll-behavior: contain;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
+
+.desktop-app-root :where(
+  .session-list,
+  .session-terminal pre,
+  .terminal-event-rail,
+  .workspace-explorer-tree,
+  .source-editor-frame,
+  .tool-card-scroll,
+  .tool-detail-scroll,
+  .tool-env-scroll
+) {
+  contain: layout paint style;
+}
+
+.desktop-app-root :where(
+  .activity-rail nav,
+  .desktop-viewport,
+  .sidebar-context-panel,
+  .settings-dialog-backdrop,
+  .settings-tab-list,
+  .settings-tab-panel,
+  .settings-subsection-rail,
+  .session-list,
+  .session-terminal pre,
+  .terminal-event-rail,
+  .terminal-drawer-workbench,
+  .terminal-drawer-sidebar,
+  .terminal-drawer-main,
+  .workspace-explorer-tree,
+  .source-editor-frame,
+  .tool-studio-mode-rail,
+  .tool-card-scroll,
+  .tool-detail-scroll,
+  .tool-env-scroll
+)::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.desktop-app-root :where(
+  .activity-rail nav,
+  .desktop-viewport,
+  .sidebar-context-panel,
+  .settings-dialog-backdrop,
+  .settings-tab-list,
+  .settings-tab-panel,
+  .settings-subsection-rail,
+  .session-list,
+  .session-terminal pre,
+  .terminal-event-rail,
+  .terminal-drawer-workbench,
+  .terminal-drawer-sidebar,
+  .terminal-drawer-main,
+  .workspace-explorer-tree,
+  .source-editor-frame,
+  .tool-studio-mode-rail,
+  .tool-card-scroll,
+  .tool-detail-scroll,
+  .tool-env-scroll
+)::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+.desktop-app-root :where(
+  .activity-rail nav,
+  .desktop-viewport,
+  .sidebar-context-panel,
+  .settings-dialog-backdrop,
+  .settings-tab-list,
+  .settings-tab-panel,
+  .settings-subsection-rail,
+  .session-list,
+  .session-terminal pre,
+  .terminal-event-rail,
+  .terminal-drawer-workbench,
+  .terminal-drawer-sidebar,
+  .terminal-drawer-main,
+  .workspace-explorer-tree,
+  .source-editor-frame,
+  .tool-studio-mode-rail,
+  .tool-card-scroll,
+  .tool-detail-scroll,
+  .tool-env-scroll
+)::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  background: var(--scrollbar-thumb);
+  background-clip: padding-box;
+  border-radius: 999px;
+}
+
+.desktop-app-root :where(
+  .activity-rail nav,
+  .desktop-viewport,
+  .sidebar-context-panel,
+  .settings-dialog-backdrop,
+  .settings-tab-list,
+  .settings-tab-panel,
+  .settings-subsection-rail,
+  .session-list,
+  .session-terminal pre,
+  .terminal-event-rail,
+  .terminal-drawer-workbench,
+  .terminal-drawer-sidebar,
+  .terminal-drawer-main,
+  .workspace-explorer-tree,
+  .source-editor-frame,
+  .tool-studio-mode-rail,
+  .tool-card-scroll,
+  .tool-detail-scroll,
+  .tool-env-scroll
+)::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+  background-clip: padding-box;
 }
 
 button {
@@ -728,11 +884,10 @@ main {
   gap: 6px;
   min-height: 0;
   overflow: auto;
-  scrollbar-width: none;
 }
 
 .activity-rail nav::-webkit-scrollbar {
-  display: none;
+  display: initial;
 }
 
 .activity-rail button {
@@ -895,7 +1050,6 @@ main {
   background: var(--surface);
   border-radius: 8px;
   padding: 12px;
-  scrollbar-width: thin;
 }
 
 .sidebar-context-heading {
@@ -14202,6 +14356,10 @@ h3 {
   gap: 14px;
   min-height: 0;
   overflow: hidden;
+  background: var(--scroll-scope-bg);
+  border: 1px solid var(--scroll-scope-border);
+  border-radius: 8px;
+  padding: 10px;
 }
 
 .tool-studio-list-pane,
@@ -14258,7 +14416,6 @@ h3 {
 .tool-env-scroll {
   min-height: 0;
   overflow: auto;
-  scrollbar-width: thin;
 }
 
 .tool-card-scroll,

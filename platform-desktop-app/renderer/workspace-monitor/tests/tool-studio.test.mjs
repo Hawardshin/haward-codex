@@ -150,6 +150,10 @@ test("Three.js scene is lazy-loaded and cleans up WebGL resources", () => {
   assert.match(toolStudio, /canvas\.setAttribute\("data-agent-3d-ready", "true"\)/);
   assert.match(toolStudio, /canvas\.removeAttribute\("data-agent-3d-ready"\)/);
   assert.match(toolStudio, /window\.cancelAnimationFrame\(animationFrame\)/);
+  assert.match(toolStudio, /document\.hidden/);
+  assert.match(toolStudio, /Boolean\(entry\?\.isIntersecting\) && isCanvasInViewport\(\)/);
+  assert.match(toolStudio, /document\.addEventListener\("visibilitychange", handleDocumentVisibilityChange\)/);
+  assert.match(toolStudio, /document\.removeEventListener\("visibilitychange", handleDocumentVisibilityChange\)/);
   assert.match(toolStudio, /resizeObserver\.disconnect\(\)/);
   assert.match(toolStudio, /renderer\.dispose\(\)/);
   assert.match(toolStudio, /geometry\?\.dispose\(\)/);
@@ -211,6 +215,9 @@ test("Tool Studio CSS keeps split scroll and stable controls", () => {
   assert.match(css, /\.tool-studio-depth-rail button\.active,[\s\S]*?\.tool-studio-mode-rail button\.active \{/);
   assert.match(css, /\.tool-studio-workbench \{[\s\S]*?grid-template-columns:/);
   assert.match(css, /\.tool-card-scroll,\n\.tool-detail-scroll,\n\.tool-env-scroll \{[\s\S]*?overflow: auto;/);
+  assert.match(css, /\.desktop-app-root :where\([\s\S]*?\.tool-card-scroll,[\s\S]*?\.tool-env-scroll[\s\S]*?\) \{[\s\S]*?overscroll-behavior: contain;[\s\S]*?scrollbar-color: var\(--scrollbar-thumb\) var\(--scrollbar-track\);/);
+  assert.match(css, /\.desktop-app-root :where\([\s\S]*?\.workspace-explorer-tree,[\s\S]*?\.source-editor-frame,[\s\S]*?\.tool-card-scroll,[\s\S]*?\.tool-env-scroll[\s\S]*?\) \{[\s\S]*?contain: layout paint style;/);
+  assert.match(css, /\.tool-studio-workbench \{[\s\S]*?background: var\(--scroll-scope-bg\);[\s\S]*?border: 1px solid var\(--scroll-scope-border\);/);
   assert.match(css, /\.tool-studio-actions button,[\s\S]*?min-height: var\(--control-target-size\);/);
   assert.match(css, /\.tool-studio-actions \.tool-dropdown-trigger \{[\s\S]*?grid-template-columns: auto minmax\(0, 1fr\) auto;/);
   assert.match(css, /\.tool-action-menu-trigger kbd \{[\s\S]*?font-family: var\(--font-family-mono\);/);
@@ -222,6 +229,21 @@ test("Tool Studio CSS keeps split scroll and stable controls", () => {
   assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-studio-shell \{[\s\S]*?overflow: visible;/);
   assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-studio-actions \.tool-dropdown-trigger \{[\s\S]*?width: 100%;/);
   assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-studio-depth-rail,[\s\S]*?\.tool-studio-workbench,/);
+});
+
+test("Tool Studio 3D scene pauses when offscreen or motion should be reduced", () => {
+  assert.match(toolStudio, /const reducedMotionQuery = window\.matchMedia\("\(prefers-reduced-motion: reduce\)"\)/);
+  assert.match(toolStudio, /const isCanvasInViewport = \(\) => \{[\s\S]*?canvas\.getBoundingClientRect\(\)/);
+  assert.match(toolStudio, /const visibilityObserver = new IntersectionObserver/);
+  assert.match(toolStudio, /window\.addEventListener\("scroll", requestViewportCheck, \{ passive: true \}\)/);
+  assert.match(toolStudio, /window\.removeEventListener\("scroll", requestViewportCheck\)/);
+  assert.match(toolStudio, /viewportCheckInterval = window\.setInterval\(requestViewportCheck, 400\)/);
+  assert.match(toolStudio, /window\.clearInterval\(viewportCheckInterval\)/);
+  assert.match(toolStudio, /sceneVisible = Boolean\(entry\?\.isIntersecting\)/);
+  assert.match(toolStudio, /canvas\.setAttribute\("data-agent-3d-paused", "true"\)/);
+  assert.match(toolStudio, /canvas\.setAttribute\("data-agent-3d-paused", "false"\)/);
+  assert.match(toolStudio, /visibilityObserver\.disconnect\(\)/);
+  assert.match(toolStudio, /reducedMotionQuery\.removeEventListener\("change", handleReducedMotionChange\)/);
 });
 
 test("Monitor section switches stage heavy content after first paint", () => {

@@ -115,3 +115,22 @@ test("dark color tokens keep readable foreground contrast", () => {
   assertContrast(tokens, "status-danger-text", "status-danger-bg");
   assertContrast(tokens, "action-primary-fg", "action-primary-bg");
 });
+
+test("scroll and surface color tokens keep scope boundaries understated", () => {
+  const lightTokens = readTokens(":root");
+  const darkTokens = {
+    ...readTokens(":root"),
+    ...readTokens(".desktop-app-root.theme-dark")
+  };
+
+  for (const tokens of [lightTokens, darkTokens]) {
+    assert.ok(tokens["scroll-scope-bg"], "missing --scroll-scope-bg");
+    assert.ok(tokens["scroll-scope-border"], "missing --scroll-scope-border");
+    assert.ok(tokens["scrollbar-track"], "missing --scrollbar-track");
+    assert.ok(tokens["scrollbar-thumb"], "missing --scrollbar-thumb");
+    assert.ok(tokens["scrollbar-thumb-hover"], "missing --scrollbar-thumb-hover");
+  }
+
+  assert.equal(lightTokens["scrollbar-thumb"], "#b5c2d1");
+  assert.equal(darkTokens["scrollbar-thumb"], "#526276");
+});

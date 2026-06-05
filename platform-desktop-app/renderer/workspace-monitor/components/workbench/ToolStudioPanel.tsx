@@ -872,8 +872,38 @@ export function ToolStudioPanel({
       resizeObserver.observe(canvas);
       resize();
 
-      const render = (time: number) => {
-        if (disposed) {
+      const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let sceneVisible = true;
+      let viewportCheckFrame = 0;
+      let viewportCheckInterval = 0;
+
+      const isCanvasInViewport = () => {
+        if (document.hidden) {
+          return false;
+        }
+        const rect = canvas.getBoundingClientRect();
+        return (
+          rect.width > 0 &&
+          rect.height > 0 &&
+          rect.bottom > 0 &&
+          rect.right > 0 &&
+          rect.top < window.innerHeight &&
+          rect.left < window.innerWidth
+        );
+      };
+
+      const stopLoop = () => {
+        if (animationFrame) {
+          window.cancelAnimationFrame(animationFrame);
+          animationFrame = 0;
+        }
+        canvas.setAttribute("data-agent-3d-paused", "true");
+      };
+
+      const renderFrame = (time: number) => {
+        if (disposed || !sceneVisible || !isCanvasInViewport()) {
+          sceneVisible = false;
+          stopLoop();
           return;
         }
         const seconds = time * 0.001;
@@ -886,9 +916,89 @@ export function ToolStudioPanel({
         });
         renderer.render(scene, camera);
         canvas.setAttribute("data-agent-3d-ready", "true");
+      };
+
+      const scheduleLoop = () => {
+        if (disposed) {
+          return;
+        }
+        if (document.hidden || reducedMotionQuery.matches || !sceneVisible) {
+          stopLoop();
+          return;
+        }
+        if (animationFrame) {
+          return;
+        }
+        canvas.setAttribute("data-agent-3d-paused", "false");
         animationFrame = window.requestAnimationFrame(render);
       };
-      animationFrame = window.requestAnimationFrame(render);
+
+      const render = (time: number) => {
+        animationFrame = 0;
+        renderFrame(time);
+        scheduleLoop();
+      };
+
+      const requestViewportCheck = () => {
+        if (viewportCheckFrame) {
+          return;
+        }
+        if (document.hidden) {
+          sceneVisible = false;
+          stopLoop();
+          return;
+        }
+        viewportCheckFrame = window.requestAnimationFrame(() => {
+          viewportCheckFrame = 0;
+          sceneVisible = isCanvasInViewport();
+          if (sceneVisible) {
+            resize();
+            renderFrame(performance.now());
+            scheduleLoop();
+          } else {
+            stopLoop();
+          }
+        });
+      };
+
+      const visibilityObserver = new IntersectionObserver(
+        ([entry]) => {
+          sceneVisible = Boolean(entry?.isIntersecting) && isCanvasInViewport();
+          if (sceneVisible) {
+            resize();
+            renderFrame(performance.now());
+            scheduleLoop();
+          } else {
+            stopLoop();
+          }
+        },
+        { threshold: 0.08 }
+      );
+      visibilityObserver.observe(canvas);
+
+      const handleReducedMotionChange = () => {
+        stopLoop();
+        if (sceneVisible) {
+          renderFrame(performance.now());
+          scheduleLoop();
+        }
+      };
+
+      const handleDocumentVisibilityChange = () => {
+        if (document.hidden) {
+          sceneVisible = false;
+          stopLoop();
+        } else {
+          requestViewportCheck();
+        }
+      };
+      reducedMotionQuery.addEventListener("change", handleReducedMotionChange);
+      document.addEventListener("visibilitychange", handleDocumentVisibilityChange);
+      window.addEventListener("scroll", requestViewportCheck, { passive: true });
+      window.addEventListener("resize", requestViewportCheck);
+      viewportCheckInterval = window.setInterval(requestViewportCheck, 400);
+      renderFrame(performance.now());
+      scheduleLoop();
 
       const disposeObject = (object: unknown) => {
         const candidate = object as {
@@ -906,9 +1016,21 @@ export function ToolStudioPanel({
       };
 
       cleanup = () => {
-        window.cancelAnimationFrame(animationFrame);
+        stopLoop();
+        if (viewportCheckFrame) {
+          window.cancelAnimationFrame(viewportCheckFrame);
+        }
+        if (viewportCheckInterval) {
+          window.clearInterval(viewportCheckInterval);
+        }
         resizeObserver.disconnect();
+        visibilityObserver.disconnect();
+        reducedMotionQuery.removeEventListener("change", handleReducedMotionChange);
+        document.removeEventListener("visibilitychange", handleDocumentVisibilityChange);
+        window.removeEventListener("scroll", requestViewportCheck);
+        window.removeEventListener("resize", requestViewportCheck);
         canvas.removeAttribute("data-agent-3d-ready");
+        canvas.removeAttribute("data-agent-3d-paused");
         disposeObject(scene);
         renderer.dispose();
       };

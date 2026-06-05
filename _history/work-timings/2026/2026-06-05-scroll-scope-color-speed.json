@@ -1,0 +1,26 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "scroll-scope-color-speed",
+  "timings": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "note": "Official MDN, WCAG, Material, and web.dev references checked before local edits."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "note": "Scroll scope CSS tokens/contracts and Tool Studio offscreen animation pause added."
+    },
+    {
+      "phase": "initial_validation",
+      "status": "completed",
+      "note": "Tests, TypeScript, and workspace-monitor check passed."
+    },
+    {
+      "phase": "final_validation",
+      "status": "completed",
+      "note": "Build, customer build, perf budget, in-app Browser smoke, Playwright scroll smoke, screenshots, and server cleanup completed."
+    }
+  ]
+}

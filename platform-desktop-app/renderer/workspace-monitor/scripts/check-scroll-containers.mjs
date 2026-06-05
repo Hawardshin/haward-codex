@@ -88,7 +88,7 @@ const cssContracts = [
   },
   {
     selector: ".desktop-viewport",
-    includes: ["min-height: 100dvh;", "height: auto;", "max-height: none;", "overflow: visible;", "overflow-x: hidden;", "scrollbar-gutter: stable;"],
+    includes: ["min-height: 100dvh;", "height: auto;", "max-height: none;", "overflow: visible;", "overflow-x: hidden;", "scrollbar-gutter: stable;", "overscroll-behavior: contain;"],
     excludes: ["  height: 100vh;", "  max-height: 100vh;"]
   },
   {
@@ -130,6 +130,14 @@ const cssContracts = [
   {
     selector: ".monaco-editor-shell",
     includes: ["height: clamp(340px, 58dvh, 620px);", "min-height: 0;", "overflow: hidden;"]
+  },
+  {
+    selector: ".tool-studio-workbench",
+    includes: ["overflow: hidden;", "background: var(--scroll-scope-bg);", "border: 1px solid var(--scroll-scope-border);"]
+  },
+  {
+    selector: ".tool-card-scroll,\n.tool-detail-scroll,\n.tool-env-scroll",
+    includes: ["overflow: auto;"]
   }
 ];
 
@@ -153,6 +161,15 @@ assertSourceIncludes(css, "Mobile source workbench width contract", [
   "  .filesystem-workbench .native-source-controls {\n    grid-template-columns: minmax(0, 1fr);",
   "  .source-command-toolbar,\n  .source-workbench-switcher {\n    display: grid;\n    grid-template-columns: minmax(0, 1fr);\n    width: 100%;"
 ]);
+assertSourceIncludes(css, "Scoped scroll contract", [
+  "--scrollbar-track:",
+  "--scrollbar-thumb:",
+  "--scrollbar-thumb-hover:",
+  ".desktop-app-root :where(\n  .activity-rail nav,",
+  ".terminal-drawer-main,\n  .workspace-explorer-tree,\n  .source-editor-frame,\n  .tool-studio-mode-rail,",
+  "scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);",
+  "contain: layout paint style;"
+]);
 
 console.log(
   JSON.stringify(
@@ -160,7 +177,8 @@ console.log(
       status: "scroll_contract_ok",
       checkedCssContracts: cssContracts.length,
       checkedFocusablePanes: 3,
-      checkedMobileOverrides: 2
+      checkedMobileOverrides: 2,
+      checkedScopedScroll: 1
     },
     null,
     2
