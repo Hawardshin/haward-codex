@@ -58,6 +58,7 @@ const requiredFiles = [
   "src-tauri/tauri.conf.json",
   "src-tauri/Cargo.toml",
   "src-tauri/build.rs",
+  "src-tauri/Entitlements.plist",
   "src-tauri/src/main.rs",
   "src-tauri/src/lib.rs",
   "src-tauri/capabilities/default.json",
@@ -67,6 +68,9 @@ const requiredFiles = [
   "scripts/check-customer-bundle.mjs",
   "scripts/check-release-readiness.mjs",
   "scripts/check-service-readiness.mjs",
+  "scripts/public-release-config.mjs",
+  "scripts/public-release-build.mjs",
+  "scripts/create-updater-manifest.mjs",
   "scripts/readiness/desktop-build-pipeline.mjs",
   "renderer/workspace-monitor/scripts/check-lazy-boundary-contract.mjs",
   ...desktopBuildPipelineRequiredFiles
@@ -111,6 +115,9 @@ if (!tauriConfig.bundle?.targets?.includes("dmg") || !tauriConfig.bundle?.target
 }
 if (tauriConfig.bundle?.macOS?.hardenedRuntime !== true) {
   failures.push("Tauri macOS bundle must enable hardenedRuntime for release-path parity");
+}
+if (tauriConfig.bundle?.macOS?.entitlements !== "Entitlements.plist") {
+  failures.push("Tauri macOS bundle must reference src-tauri/Entitlements.plist");
 }
 const resourceTargets = tauriConfig.bundle?.resources ?? {};
 for (const [source, destination] of [
@@ -180,12 +187,20 @@ for (const commandName of [
 if (!tauriCargo.includes("tauri-plugin-dialog")) {
   failures.push("src-tauri/Cargo.toml must declare tauri-plugin-dialog for native folder selection");
 }
+if (!tauriCargo.includes("tauri-plugin-updater")) {
+  failures.push("src-tauri/Cargo.toml must declare tauri-plugin-updater for signed update artifacts");
+}
 if (!tauriDefaultCapability.includes("dialog:default")) {
   failures.push("src-tauri/capabilities/default.json must allow dialog:default for native folder selection");
 }
 for (const requiredPhrase of ["DialogExt", "tauri_plugin_dialog::init", "blocking_pick_folder"]) {
   if (!tauriLib.includes(requiredPhrase)) {
     failures.push(`src-tauri/src/lib.rs must include native dialog token ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of ["tauri_plugin_updater::Builder", "service-update-channel.json", "Signed updater channel"]) {
+  if (!tauriLib.includes(requiredPhrase)) {
+    failures.push(`src-tauri/src/lib.rs must include updater runtime token ${requiredPhrase}`);
   }
 }
 if (!tauriLib.includes("_ops") || !tauriLib.includes("human-decision-inbox.json")) {
@@ -609,6 +624,9 @@ const productFeatureCollector = readFileSync(
 const customerBundleCheck = readFileSync(join(root, "scripts/check-customer-bundle.mjs"), "utf8");
 const releaseReadinessCheck = readFileSync(join(root, "scripts/check-release-readiness.mjs"), "utf8");
 const serviceReadinessCheck = readFileSync(join(root, "scripts/check-service-readiness.mjs"), "utf8");
+const publicReleaseConfig = readFileSync(join(root, "scripts/public-release-config.mjs"), "utf8");
+const publicReleaseBuild = readFileSync(join(root, "scripts/public-release-build.mjs"), "utf8");
+const updaterManifest = readFileSync(join(root, "scripts/create-updater-manifest.mjs"), "utf8");
 const lazyBoundaryCheck = readFileSync(
   join(root, "renderer/workspace-monitor/scripts/check-lazy-boundary-contract.mjs"),
   "utf8"
@@ -657,9 +675,30 @@ for (const requiredPhrase of ["auditCustomerSnapshot", "scanCustomerDist", "cust
     failures.push(`check-customer-bundle.mjs must include ${requiredPhrase}`);
   }
 }
-for (const requiredPhrase of ["checkReleaseReadiness", "public_release_blocked", "hardenedRuntime", "Developer ID", "notarization"]) {
+for (const requiredPhrase of ["checkReleaseReadiness", "public_release_blocked", "hardenedRuntime", "Developer ID", "notarization", "TAURI_SIGNING_PRIVATE_KEY", "TAURI_UPDATER_PUBLIC_KEY"]) {
   if (!releaseReadinessCheck.includes(requiredPhrase)) {
     failures.push(`check-release-readiness.mjs must include ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of [
+  "createUpdaterArtifacts",
+  "TAURI_UPDATER_ENDPOINTS",
+  "TAURI_RELEASE_ASSET_BASE_URL",
+  "service-update-channel.json",
+  "TAURI_SIGNING_PRIVATE_KEY"
+]) {
+  if (!publicReleaseConfig.includes(requiredPhrase)) {
+    failures.push(`public-release-config.mjs must include ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of ["tauri", "build", "--config", "create-updater-manifest.mjs"]) {
+  if (!publicReleaseBuild.includes(requiredPhrase)) {
+    failures.push(`public-release-build.mjs must include ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of ["latest.json", ".app.tar.gz", ".sig", "platforms", "signature"]) {
+  if (!updaterManifest.includes(requiredPhrase)) {
+    failures.push(`create-updater-manifest.mjs must include ${requiredPhrase}`);
   }
 }
 for (const requiredPhrase of [

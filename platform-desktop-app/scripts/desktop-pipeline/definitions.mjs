@@ -2,6 +2,7 @@ import {
   macosAppArtifact,
   macosDmgArtifact,
   preparedTauriBuildConfig,
+  projectRoot,
   repoRoot,
   tauriRoot
 } from "./paths.mjs";
@@ -108,6 +109,39 @@ export const pipelines = {
       "platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg"
     ]
   },
+  "package-public": {
+    description: "Run verification, require public signing/updater/notarization environment, and build public updater artifacts through public-release-build/create-updater-manifest.",
+    steps: [
+      ...commonVerifySteps,
+      pnpmWorkspaceStep("Public release preflight", [
+        "--filter",
+        "platform-desktop-app",
+        "run",
+        "release:preflight:public"
+      ]),
+      step("Rust build", "cargo", ["build"], tauriRoot),
+      step("Tauri public package build with signed updater artifacts", "node", ["scripts/public-release-build.mjs"], projectRoot),
+      step("macOS app signature verification", "codesign", ["--verify", "--deep", "--strict", macosAppArtifact], repoRoot, {
+        onlyPlatform: "darwin"
+      }),
+      step("macOS DMG verification", "hdiutil", ["verify", macosDmgArtifact], repoRoot, {
+        onlyPlatform: "darwin"
+      }),
+      step("macOS Gatekeeper assessment", "spctl", ["--assess", "--type", "execute", "--verbose", macosAppArtifact], repoRoot, {
+        onlyPlatform: "darwin"
+      }),
+      step("macOS stapled ticket validation", "xcrun", ["stapler", "validate", macosDmgArtifact], repoRoot, {
+        onlyPlatform: "darwin"
+      })
+    ],
+    artifactHints: [
+      "platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app",
+      "platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app.tar.gz",
+      "platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app.tar.gz.sig",
+      "platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg",
+      "platform-desktop-app/src-tauri/target/release/bundle/latest.json"
+    ]
+  },
   "public-report": {
     description: "Report public distribution gates without claiming release readiness.",
     steps: [
@@ -133,6 +167,7 @@ export const helpText = `Usage:
   node scripts/desktop-pipeline.mjs verify [--dry-run]
   node scripts/desktop-pipeline.mjs tauri-build-prepared [--dry-run]
   node scripts/desktop-pipeline.mjs package-internal [--dry-run]
+  node scripts/desktop-pipeline.mjs package-public [--dry-run]
   node scripts/desktop-pipeline.mjs public-report [--dry-run]
 
 Root shortcuts:
@@ -142,5 +177,6 @@ Root shortcuts:
   corepack pnpm run desktop:verify
   corepack pnpm run desktop:renderer:build
   corepack pnpm run desktop:package:internal
+  corepack pnpm run desktop:package:public
   corepack pnpm run desktop:release:report
   corepack pnpm run desktop:doctor`;

@@ -3417,6 +3417,7 @@ pub fn run() {
         .manage(SessionStore::default())
         .manage(PtySessionStore::default())
         .manage(WorkspaceResourceStore::default())
+        .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_dialog::init())
         .setup(|app| {
             let handle = app.handle().clone();
@@ -5259,6 +5260,11 @@ fn service_readiness_report(app: &AppHandle) -> Result<ServiceReadinessReport, S
         .iter()
         .any(|finding| finding.severity == "high");
     let update_channel_configured = service_update_channel_configured(app);
+    let update_channel_detail = if update_channel_configured {
+        "A signed updater channel marker is bundled for this build."
+    } else {
+        "No signed updater manifest or endpoint marker is bundled yet."
+    };
 
     let groups = vec![
         service_readiness_group(
@@ -5519,7 +5525,7 @@ fn service_readiness_report(app: &AppHandle) -> Result<ServiceReadinessReport, S
                     "signed_update_channel",
                     "Signed updater channel is configured",
                     update_channel_configured,
-                    "No signed updater manifest or endpoint marker is bundled yet.",
+                    update_channel_detail,
                     "warning",
                     true,
                     false,

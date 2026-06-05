@@ -7,6 +7,9 @@ export const desktopBuildPipelineRequiredFiles = [
   "scripts/desktop-pipeline/definitions.mjs",
   "scripts/desktop-pipeline/runner.mjs",
   "scripts/tauri-before-build-prepared.mjs",
+  "scripts/public-release-config.mjs",
+  "scripts/public-release-build.mjs",
+  "scripts/create-updater-manifest.mjs",
   "scripts/desktop-doctor.mjs"
 ];
 
@@ -18,8 +21,8 @@ export function checkDesktopBuildPipeline({ root, readJson }) {
 
   requireScripts(pkg, ["check", "test", "verify", "tauri:dev", "tauri:build"], "package.json", failures);
   requireScripts(pkg, ["runtime:contract"], "package.json", failures);
-  requireScripts(pkg, ["setup", "verify:quick", "package:internal", "deploy:public:report", "pipeline:dry-run"], "package.json", failures);
-  requireScripts(pkg, ["customer-bundle:audit", "release:preflight", "release:preflight:public", "release:preflight:public:report"], "package.json", failures);
+  requireScripts(pkg, ["setup", "verify:quick", "package:internal", "package:public", "deploy:public:report", "pipeline:dry-run"], "package.json", failures);
+  requireScripts(pkg, ["customer-bundle:audit", "release:preflight", "release:preflight:public", "release:preflight:public:report", "release:public:config", "release:manifest"], "package.json", failures);
   requireScripts(pkg, ["service:readiness", "service:readiness:public:report"], "package.json", failures);
   requireScripts(rootPkg, [
     "desktop:setup",
@@ -28,6 +31,7 @@ export function checkDesktopBuildPipeline({ root, readJson }) {
     "desktop:verify",
     "desktop:renderer:build",
     "desktop:package:internal",
+    "desktop:package:public",
     "desktop:release:report",
     "desktop:doctor"
   ], "root package.json", failures);
@@ -91,6 +95,7 @@ function checkDocsAndPipelineStructure(root, failures) {
     "corepack pnpm run desktop:setup:verify",
     "corepack pnpm run desktop:verify",
     "corepack pnpm run desktop:package:internal",
+    "corepack pnpm run desktop:package:public",
     "corepack pnpm run desktop:release:report",
     "corepack pnpm run desktop:doctor",
     "docs/release-runbook.ko.md",
@@ -118,9 +123,12 @@ function checkDocsAndPipelineStructure(root, failures) {
 
   for (const requiredPhrase of [
     "package-internal",
+    "package-public",
     "public-report",
     "commonVerifySteps",
     "Tauri internal package build",
+    "Tauri public package build",
+    "create-updater-manifest",
     "codesign",
     "hdiutil",
     "Public distribution remains blocked"

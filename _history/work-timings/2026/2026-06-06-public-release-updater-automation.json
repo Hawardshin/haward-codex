@@ -1,0 +1,26 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-public-release-updater-automation",
+  "phases": [
+    {
+      "phase": "web_first_intake_and_local_inventory",
+      "elapsed": "short"
+    },
+    {
+      "phase": "implementation",
+      "elapsed": "medium"
+    },
+    {
+      "phase": "validation",
+      "elapsed": "medium"
+    },
+    {
+      "phase": "history_and_evaluation",
+      "elapsed": "short"
+    }
+  ],
+  "bottleneck_notes": [
+    "External Apple Developer credentials and updater private key are the remaining public-release bottleneck.",
+    "Internal package validation is intentionally expensive because it builds renderer, Rust, Tauri app, and DMG."
+  ]
+}

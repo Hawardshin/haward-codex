@@ -269,7 +269,7 @@
   "public_release_blockers": [
     "Developer ID signing identity or APPLE_CERTIFICATE credentials are not configured.",
     "Apple notarization credentials are not configured.",
-    "Signed updater channel is not configured.",
+    "Signed updater channel is not configured with TAURI_UPDATER_PUBLIC_KEY, TAURI_SIGNING_PRIVATE_KEY, TAURI_UPDATER_ENDPOINTS, and TAURI_RELEASE_ASSET_BASE_URL.",
     "Clean-machine install/open/update smoke test has not been recorded."
   ],
   "runtime_surface_contract": {

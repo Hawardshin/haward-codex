@@ -1,17 +1,17 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-05T18:56:27.713Z",
+  "generatedAt": "2026-06-05T19:15:24.777Z",
   "summary": {
-    "documents": 2387,
+    "documents": 2396,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 970
+        "count": 974
       },
       {
         "category": "web-search",
-        "count": 381
+        "count": 382
       },
       {
         "category": "plan",
@@ -19,19 +19,19 @@
       },
       {
         "category": "request-trace",
-        "count": 309
+        "count": 310
       },
       {
         "category": "work-timing",
-        "count": 231
+        "count": 232
       },
       {
         "category": "user-request",
-        "count": 94
+        "count": 95
       },
       {
         "category": "work-summary",
-        "count": 61
+        "count": 62
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6255351,
+    "totalSourceBytes": 6264406,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,166 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-2026-2026-06-06-md",
+      "path": "_history/2026/2026-06-06.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 06",
+      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
+      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1974,
+      "updatedAt": "2026-06-05T19:12:42.318Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "2026 06 06 평가: Public Release Updater Automation",
+      "excerpt": "2026 06 06 평가: Public Release Updater Automation 결과 public release updater automation lane을 구현했다. internal build path는 유지했고, public build path는 외부 signing/updater/notarization env가 없으면 실패하도록 만들었다. updater private key와 Apple credential은 repository에 쓰지 않는 구조로 구현했다. 검증 node scripts/",
+      "html": "<p>2026 06 06 평가: Public Release Updater Automation 결과 public release updater automation lane을 구현했다. internal build path는 유지했고, public build path는 외부 signing/updater/notarization env가 없으면 실패하도록 만들었다. updater private key와 Apple credential은 repository에 쓰지 않는 구조로 구현했다. 검증 node scripts/public release config.mjs report only : 통과. corepack pnpm filter platform deskto</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 917,
+      "updatedAt": "2026-06-05T19:12:36.181Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Public Release Updater Automation Evaluation Input",
+      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"user request summary\": \" history/user requests/2026/2026 06 06 public release updater automation.ko.md\", \"requirements targets\": \"platform desktop app/docs/requirements/2026 06 06 public",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 public release updater automation&quot;, &quot;user request summary&quot;: &quot; history/user requests/2026/2026 06 06 public release updater automation.ko.md&quot;, &quot;requirements targets&quot;: &quot;platform desktop app/docs/requirements/2026 06 06 public release updater automation.ko.md&quot; , &quot;spec targets&quot;: &quot;platform desktop app/specs</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2007,
+      "updatedAt": "2026-06-05T19:12:29.833Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-resource-json",
+      "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-resource.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Public Release Updater Automation Resource",
+      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"resource check targets\": \" history/resource checks/2026/2026 06 06 public release updater automation.json\" , \"resource risk occurred\": true, \"result\": \"secret boundary recorded\" }",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 public release updater automation&quot;, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 06 06 public release updater automation.json&quot; , &quot;resource risk occurred&quot;: true, &quot;result&quot;: &quot;secret boundary recorded&quot; }</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 293,
+      "updatedAt": "2026-06-05T19:12:17.395Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-omission-json",
+      "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-omission.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Public Release Updater Automation Omission",
+      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"omission check targets\": \" history/omission checks/2026/2026 06 06 public release updater automation.json\" , \"result\": \"covered with external blockers\", \"notes\": \"Implementation covers p",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 public release updater automation&quot;, &quot;omission check targets&quot;: &quot; history/omission checks/2026/2026 06 06 public release updater automation.json&quot; , &quot;result&quot;: &quot;covered with external blockers&quot;, &quot;notes&quot;: &quot;Implementation covers public release automation except credentials and clean machine smoke, which requi</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 414,
+      "updatedAt": "2026-06-05T19:12:10.576Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-public-release-updater-automation-json",
+      "path": "_history/work-timings/2026/2026-06-06-public-release-updater-automation.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Public Release Updater Automation",
+      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"phases\": { \"phase\": \"web first intake and local inventory\", \"elapsed\": \"short\" }, { \"phase\": \"implementation\", \"elapsed\": \"medium\" }, { \"phase\": \"validation\", \"elapsed\": \"medium\" }, { \"p",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 public release updater automation&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake and local inventory&quot;, &quot;elapsed&quot;: &quot;short&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;elapsed&quot;: &quot;medium&quot; }, { &quot;phase&quot;: &quot;validation&quot;, &quot;elapsed&quot;: &quot;medium&quot; }, { &quot;phase&quot;: &quot;history and evaluation&quot;, &quot;elapsed&quot;: &quot;short&quot; } , &quot;bottleneck notes&quot;: &quot;Ext</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 685,
+      "updatedAt": "2026-06-05T19:12:04.536Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-public-release-updater-automation-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-public-release-updater-automation.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "2026 06 06 Request Trace: Public Release Updater Automation",
+      "excerpt": "2026 06 06 Request Trace: Public Release Updater Automation 요청 사용자의 “다해” 후속 지시. 산출물 platform desktop app/scripts/public release config.mjs platform desktop app/scripts/public release build.mjs platform desktop app/scripts/create updater manifest.mjs platform desktop app/src tauri",
+      "html": "<p>2026 06 06 Request Trace: Public Release Updater Automation 요청 사용자의 “다해” 후속 지시. 산출물 platform desktop app/scripts/public release config.mjs platform desktop app/scripts/public release build.mjs platform desktop app/scripts/create updater manifest.mjs platform desktop app/src tauri/Entitlements.plist platform desktop app/src tauri/Cargo.toml , Cargo.lock platf</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1040,
+      "updatedAt": "2026-06-05T19:11:39.446Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-public-release-updater-automation-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-public-release-updater-automation.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "2026 06 06 Work Summary: Public Release Updater Automation",
+      "excerpt": "2026 06 06 Work Summary: Public Release Updater Automation tauri plugin updater 를 Rust dependency로 추가하고 Tauri builder에 plugin init을 연결했다. public release env validation과 generated Tauri config script를 추가했다. desktop:package:public pipeline, public Tauri build runner, static updater",
+      "html": "<p>2026 06 06 Work Summary: Public Release Updater Automation tauri plugin updater 를 Rust dependency로 추가하고 Tauri builder에 plugin init을 연결했다. public release env validation과 generated Tauri config script를 추가했다. desktop:package:public pipeline, public Tauri build runner, static updater latest.json manifest generator를 추가했다. macOS Entitlements.plist 를 추가하고 Tauri con</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 731,
+      "updatedAt": "2026-06-05T19:11:31.258Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-public-release-updater-automation-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-public-release-updater-automation.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "2026 06 06 사용자 요청 요약: Public Release Updater Automation",
+      "excerpt": "2026 06 06 사용자 요청 요약: Public Release Updater Automation 사용자는 이전 작업 후 남은 것도 모두 처리하라고 지시했다. 직전 완료 보고에서 public release blockers로 signing, notarization, updater, clean machine smoke가 남아 있었으므로, 외부 자격증명을 대신 만들 수 없는 부분을 제외하고 public release automation lane을 구현하는 작업으로 해석했다.",
+      "html": "<p>2026 06 06 사용자 요청 요약: Public Release Updater Automation 사용자는 이전 작업 후 남은 것도 모두 처리하라고 지시했다. 직전 완료 보고에서 public release blockers로 signing, notarization, updater, clean machine smoke가 남아 있었으므로, 외부 자격증명을 대신 만들 수 없는 부분을 제외하고 public release automation lane을 구현하는 작업으로 해석했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 433,
+      "updatedAt": "2026-06-05T19:11:25.787Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-public-release-updater-automation-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-public-release-updater-automation.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "2026 06 06 Web Search: Public Release Updater Automation",
+      "excerpt": "2026 06 06 Web Search: Public Release Updater Automation Query Tauri v2 official updater plugin signing key public key endpoints configuration docs Tauri v2 official macOS code signing notarization DMG Developer ID docs Apple official notarizing macOS software notarytool Develope",
+      "html": "<p>2026 06 06 Web Search: Public Release Updater Automation Query Tauri v2 official updater plugin signing key public key endpoints configuration docs Tauri v2 official macOS code signing notarization DMG Developer ID docs Apple official notarizing macOS software notarytool Developer ID docs Tauri v2 macOS entitlements tauri.conf.json entitlements hardenedRunti</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1888,
+      "updatedAt": "2026-06-05T19:11:01.558Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-work-timings-2026-2026-06-06-native-resource-telemetry-json",
       "path": "_history/work-timings/2026/2026-06-06-native-resource-telemetry.json",
@@ -125,22 +285,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-2026-2026-06-06-md",
-      "path": "_history/2026/2026-06-06.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 06",
-      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1327,
-      "updatedAt": "2026-06-05T18:53:41.666Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-native-resource-telemetry-omission-json",
@@ -38259,31 +38403,31 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 115,
+      "documentsCount": 124,
       "categories": [
         {
           "category": "evaluation",
-          "count": 37
+          "count": 41
         },
         {
           "category": "user-request",
-          "count": 15
+          "count": 16
         },
         {
           "category": "web-search",
-          "count": 15
+          "count": 16
         },
         {
           "category": "work-summary",
-          "count": 15
+          "count": 16
         },
         {
           "category": "request-trace",
-          "count": 14
+          "count": 15
         },
         {
           "category": "work-timing",
-          "count": 14
+          "count": 15
         },
         {
           "category": "plan",

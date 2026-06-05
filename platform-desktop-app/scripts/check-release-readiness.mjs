@@ -3,6 +3,8 @@ import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { buildPublicReleaseConfigReport } from "./public-release-config.mjs";
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 export function checkReleaseReadiness({ mode = "internal", reportOnly = false } = {}) {
@@ -10,6 +12,8 @@ export function checkReleaseReadiness({ mode = "internal", reportOnly = false } 
   const warnings = [];
   const checks = [];
   const tauriConfig = readJson(path.join(root, "src-tauri", "tauri.conf.json"));
+  const tauriCargo = readFileSync(path.join(root, "src-tauri", "Cargo.toml"), "utf8");
+  const tauriLib = readFileSync(path.join(root, "src-tauri", "src", "lib.rs"), "utf8");
   const macos = tauriConfig.bundle?.macOS || {};
   const targets = tauriConfig.bundle?.targets || [];
 
@@ -29,11 +33,13 @@ export function checkReleaseReadiness({ mode = "internal", reportOnly = false } 
   }
 
   if (mode === "public") {
+    const publicConfig = buildPublicReleaseConfigReport({ writeFiles: false });
     const hasConfiguredDeveloperId = Boolean(macos.signingIdentity && macos.signingIdentity !== "-");
+    const hasGeneratedDeveloperId = Boolean(publicConfig.envSummary.macosSigningIdentityPresent);
     const hasCertificateEnv = Boolean(process.env.APPLE_CERTIFICATE && process.env.APPLE_CERTIFICATE_PASSWORD);
     requireCheck(
       checks,
-      hasConfiguredDeveloperId || hasCertificateEnv,
+      hasConfiguredDeveloperId || hasGeneratedDeveloperId || hasCertificateEnv,
       "public release has Developer ID signing identity or APPLE_CERTIFICATE credentials",
       blockers
     );
@@ -49,9 +55,26 @@ export function checkReleaseReadiness({ mode = "internal", reportOnly = false } 
       "public release has Apple notarization credentials",
       blockers
     );
+    requireCheck(checks, tauriCargo.includes("tauri-plugin-updater"), "Tauri updater Rust plugin dependency is installed", blockers);
+    requireCheck(checks, tauriLib.includes("tauri_plugin_updater::Builder"), "Tauri updater Rust plugin is initialized", blockers);
+    requireCheck(checks, tauriLib.includes("service-update-channel.json"), "Bundled service-update-channel marker is checked at runtime", blockers);
+    requireCheck(checks, publicConfig.envSummary.updaterPrivateKeyPresent, "TAURI_SIGNING_PRIVATE_KEY is present for updater artifact signing", blockers);
+    requireCheck(checks, Boolean(publicConfig.envSummary.updaterPublicKeySha25616), "TAURI_UPDATER_PUBLIC_KEY is present for updater verification", blockers);
+    requireCheck(checks, publicConfig.envSummary.updaterEndpointCount > 0, "TAURI_UPDATER_ENDPOINTS has at least one endpoint", blockers);
+    requireCheck(checks, publicConfig.envSummary.releaseAssetBaseUrlPresent, "TAURI_RELEASE_ASSET_BASE_URL is present for static latest.json generation", blockers);
+    for (const publicConfigBlocker of publicConfig.blockers) {
+      if (!blockers.includes(publicConfigBlocker)) {
+        blockers.push(publicConfigBlocker);
+      }
+    }
+    checks.push(...publicConfig.checks.map((check) => ({
+      label: `public config: ${check.detail}`,
+      status: check.status
+    })));
     if (!existsSync(path.join(root, "src-tauri", "Entitlements.plist"))) {
       warnings.push("No Entitlements.plist is configured. This may be acceptable, but public release should document required entitlements explicitly.");
     }
+    warnings.push(...publicConfig.warnings);
   }
 
   const status = blockers.length

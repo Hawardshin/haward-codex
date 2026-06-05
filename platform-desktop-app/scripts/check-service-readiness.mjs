@@ -17,6 +17,7 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
   const serializedRuntimeBoundary = JSON.stringify(runtimeBoundary);
   const serializedUserFlow = JSON.stringify(userFlow);
   const serializedRegistry = JSON.stringify(registry);
+  const tauriCargo = readText("src-tauri/Cargo.toml");
   const tauriLib = readText("src-tauri/src/lib.rs");
   const monitorShell = readText("renderer/workspace-monitor/components/MonitorShell.tsx");
   const agentBuilderPanels = readText("renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx");
@@ -91,11 +92,11 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
     group("signed_distribution", "Signed Distribution", [
       check("internal_release_preflight", "Internal release preflight passes", releaseInternal.blockers.length === 0, releaseInternal.releaseClaim),
       check("hardened_runtime", "Hardened runtime enabled", tauriConfig.bundle?.macOS?.hardenedRuntime === true, "macOS hardened runtime is enabled."),
-      check("public_signing_notarization", "Public signing and notarization configured", releasePublic.blockers.length === 0, releasePublic.blockers.join("; ") || "Public release preflight has no blockers.", mode === "public" ? "blocked" : "warning")
+      check("public_signing_notarization", "Public signing and notarization configured", releasePublic.blockers.length === 0, summarizePublicReleaseBlockers(releasePublic.blockers), mode === "public" ? "blocked" : "warning")
     ]),
     group("update_recovery", "Update & Recovery", [
       check("updater_policy_registry", "Updater is a release gate", serializedRegistry.includes("updater_is_a_release_gate"), "Service readiness registry treats updater as a public release gate."),
-      check("tauri_updater_configured", "Signed updater channel configured", updaterConfigured(pkg, tauriConfig), "Tauri updater plugin and endpoint are not configured yet.", mode === "public" ? "blocked" : "warning"),
+      check("tauri_updater_configured", "Signed updater channel configured", updaterConfigured({ pkg, tauriConfig, tauriCargo, tauriLib, releasePublic }), "Tauri updater plugin, generated public config, endpoint, and signing key are not configured yet.", mode === "public" ? "blocked" : "warning"),
       check("clean_machine_smoke_recorded", "Clean-machine smoke recorded", false, "Clean-machine install/open/update smoke is still pending.", mode === "public" ? "blocked" : "warning")
     ])
   ];
@@ -156,10 +157,40 @@ function check(id, label, passed, detail, fallbackStatus = "blocked") {
   };
 }
 
-function updaterConfigured(pkg, tauriConfig) {
-  const hasDependency = Boolean(pkg.dependencies?.["@tauri-apps/plugin-updater"] || pkg.devDependencies?.["@tauri-apps/plugin-updater"]);
+function updaterConfigured({ pkg, tauriConfig, tauriCargo, tauriLib, releasePublic }) {
+  const hasJsDependency = Boolean(pkg.dependencies?.["@tauri-apps/plugin-updater"] || pkg.devDependencies?.["@tauri-apps/plugin-updater"]);
+  const hasRustDependency = tauriCargo.includes("tauri-plugin-updater");
+  const hasRustPluginInit = tauriLib.includes("tauri_plugin_updater::Builder");
   const endpoints = tauriConfig.plugins?.updater?.endpoints || tauriConfig.plugins?.updater?.pubkey || [];
-  return hasDependency && (Array.isArray(endpoints) ? endpoints.length > 0 : Boolean(endpoints));
+  const baseConfigHasEndpoint = Array.isArray(endpoints) ? endpoints.length > 0 : Boolean(endpoints);
+  const publicEnvHasUpdater = !releasePublic.blockers.some((blocker) => /TAURI_UPDATER|TAURI_SIGNING_PRIVATE_KEY|TAURI_RELEASE_ASSET_BASE_URL|updater/i.test(blocker));
+  return (hasRustDependency || hasJsDependency) && hasRustPluginInit && (baseConfigHasEndpoint || publicEnvHasUpdater);
+}
+
+function summarizePublicReleaseBlockers(blockers) {
+  if (!blockers.length) {
+    return "Public release preflight has no blockers.";
+  }
+  const missing = [];
+  if (blockers.some((blocker) => /Developer ID|APPLE_SIGNING_IDENTITY|APPLE_CERTIFICATE/i.test(blocker))) {
+    missing.push("Developer ID signing identity or Apple certificate");
+  }
+  if (blockers.some((blocker) => /notarization|APPLE_ID|APPLE_API_KEY|APPLE_TEAM_ID/i.test(blocker))) {
+    missing.push("Apple notarization credentials");
+  }
+  if (blockers.some((blocker) => /TAURI_SIGNING_PRIVATE_KEY/i.test(blocker))) {
+    missing.push("Tauri updater signing private key");
+  }
+  if (blockers.some((blocker) => /TAURI_UPDATER_PUBLIC_KEY/i.test(blocker))) {
+    missing.push("Tauri updater public key");
+  }
+  if (blockers.some((blocker) => /TAURI_UPDATER_ENDPOINTS/i.test(blocker))) {
+    missing.push("HTTPS updater endpoint");
+  }
+  if (blockers.some((blocker) => /TAURI_RELEASE_ASSET_BASE_URL/i.test(blocker))) {
+    missing.push("release asset base URL for static latest.json");
+  }
+  return `Missing public release inputs: ${Array.from(new Set(missing)).join("; ")}.`;
 }
 
 function readinessScore(checks) {

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T18:56:27.710Z",
+  "generatedAt": "2026-06-05T19:15:24.775Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 453,
-    "evaluations": 33,
-    "webSearches": 12,
+    "evaluations": 34,
+    "webSearches": 11,
     "timingRecords": 11,
     "historyDays": 1,
-    "adminHistoryDocuments": 2387,
+    "adminHistoryDocuments": 2396,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -34,7 +34,7 @@
     "referencePlatforms": 5,
     "referenceTransferPatterns": 19,
     "structurePressurePoints": 5,
-    "sourceFiles": 128,
+    "sourceFiles": 131,
     "rootFolders": 20
   },
   "projects": [
@@ -7386,6 +7386,326 @@
   ],
   "documents": [
     {
+      "id": "history-2026-2026-06-06-md",
+      "path": "_history/2026/2026-06-06.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 06",
+      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
+      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1974,
+      "updatedAt": "2026-06-05T19:12:42.318Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "2026 06 06 평가: Public Release Updater Automation",
+      "excerpt": "2026 06 06 평가: Public Release Updater Automation 결과 public release updater automation lane을 구현했다. internal build path는 유지했고, public build path는 외부 signing/updater/notarization env가 없으면 실패하도록 만들었다. updater private key와 Apple credential은 repository에 쓰지 않는 구조로 구현했다. 검증 node scripts/",
+      "html": "<p>2026 06 06 평가: Public Release Updater Automation 결과 public release updater automation lane을 구현했다. internal build path는 유지했고, public build path는 외부 signing/updater/notarization env가 없으면 실패하도록 만들었다. updater private key와 Apple credential은 repository에 쓰지 않는 구조로 구현했다. 검증 node scripts/public release config.mjs report only : 통과. corepack pnpm filter platform deskto</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 917,
+      "updatedAt": "2026-06-05T19:12:36.181Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Public Release Updater Automation Evaluation Input",
+      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"user request summary\": \" history/user requests/2026/2026 06 06 public release updater automation.ko.md\", \"requirements targets\": \"platform desktop app/docs/requirements/2026 06 06 public",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 public release updater automation&quot;, &quot;user request summary&quot;: &quot; history/user requests/2026/2026 06 06 public release updater automation.ko.md&quot;, &quot;requirements targets&quot;: &quot;platform desktop app/docs/requirements/2026 06 06 public release updater automation.ko.md&quot; , &quot;spec targets&quot;: &quot;platform desktop app/specs</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2007,
+      "updatedAt": "2026-06-05T19:12:29.833Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-resource-json",
+      "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-resource.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Public Release Updater Automation Resource",
+      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"resource check targets\": \" history/resource checks/2026/2026 06 06 public release updater automation.json\" , \"resource risk occurred\": true, \"result\": \"secret boundary recorded\" }",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 public release updater automation&quot;, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 06 06 public release updater automation.json&quot; , &quot;resource risk occurred&quot;: true, &quot;result&quot;: &quot;secret boundary recorded&quot; }</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 293,
+      "updatedAt": "2026-06-05T19:12:17.395Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-omission-json",
+      "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-omission.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Public Release Updater Automation Omission",
+      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"omission check targets\": \" history/omission checks/2026/2026 06 06 public release updater automation.json\" , \"result\": \"covered with external blockers\", \"notes\": \"Implementation covers p",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 public release updater automation&quot;, &quot;omission check targets&quot;: &quot; history/omission checks/2026/2026 06 06 public release updater automation.json&quot; , &quot;result&quot;: &quot;covered with external blockers&quot;, &quot;notes&quot;: &quot;Implementation covers public release automation except credentials and clean machine smoke, which requi</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 414,
+      "updatedAt": "2026-06-05T19:12:10.576Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-public-release-updater-automation-json",
+      "path": "_history/work-timings/2026/2026-06-06-public-release-updater-automation.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Public Release Updater Automation",
+      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"phases\": { \"phase\": \"web first intake and local inventory\", \"elapsed\": \"short\" }, { \"phase\": \"implementation\", \"elapsed\": \"medium\" }, { \"phase\": \"validation\", \"elapsed\": \"medium\" }, { \"p",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 public release updater automation&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake and local inventory&quot;, &quot;elapsed&quot;: &quot;short&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;elapsed&quot;: &quot;medium&quot; }, { &quot;phase&quot;: &quot;validation&quot;, &quot;elapsed&quot;: &quot;medium&quot; }, { &quot;phase&quot;: &quot;history and evaluation&quot;, &quot;elapsed&quot;: &quot;short&quot; } , &quot;bottleneck notes&quot;: &quot;Ext</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 685,
+      "updatedAt": "2026-06-05T19:12:04.536Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-public-release-updater-automation-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-public-release-updater-automation.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "2026 06 06 Request Trace: Public Release Updater Automation",
+      "excerpt": "2026 06 06 Request Trace: Public Release Updater Automation 요청 사용자의 “다해” 후속 지시. 산출물 platform desktop app/scripts/public release config.mjs platform desktop app/scripts/public release build.mjs platform desktop app/scripts/create updater manifest.mjs platform desktop app/src tauri",
+      "html": "<p>2026 06 06 Request Trace: Public Release Updater Automation 요청 사용자의 “다해” 후속 지시. 산출물 platform desktop app/scripts/public release config.mjs platform desktop app/scripts/public release build.mjs platform desktop app/scripts/create updater manifest.mjs platform desktop app/src tauri/Entitlements.plist platform desktop app/src tauri/Cargo.toml , Cargo.lock platf</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1040,
+      "updatedAt": "2026-06-05T19:11:39.446Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-public-release-updater-automation-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-public-release-updater-automation.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "2026 06 06 Work Summary: Public Release Updater Automation",
+      "excerpt": "2026 06 06 Work Summary: Public Release Updater Automation tauri plugin updater 를 Rust dependency로 추가하고 Tauri builder에 plugin init을 연결했다. public release env validation과 generated Tauri config script를 추가했다. desktop:package:public pipeline, public Tauri build runner, static updater",
+      "html": "<p>2026 06 06 Work Summary: Public Release Updater Automation tauri plugin updater 를 Rust dependency로 추가하고 Tauri builder에 plugin init을 연결했다. public release env validation과 generated Tauri config script를 추가했다. desktop:package:public pipeline, public Tauri build runner, static updater latest.json manifest generator를 추가했다. macOS Entitlements.plist 를 추가하고 Tauri con</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 731,
+      "updatedAt": "2026-06-05T19:11:31.258Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-public-release-updater-automation-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-public-release-updater-automation.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "2026 06 06 사용자 요청 요약: Public Release Updater Automation",
+      "excerpt": "2026 06 06 사용자 요청 요약: Public Release Updater Automation 사용자는 이전 작업 후 남은 것도 모두 처리하라고 지시했다. 직전 완료 보고에서 public release blockers로 signing, notarization, updater, clean machine smoke가 남아 있었으므로, 외부 자격증명을 대신 만들 수 없는 부분을 제외하고 public release automation lane을 구현하는 작업으로 해석했다.",
+      "html": "<p>2026 06 06 사용자 요청 요약: Public Release Updater Automation 사용자는 이전 작업 후 남은 것도 모두 처리하라고 지시했다. 직전 완료 보고에서 public release blockers로 signing, notarization, updater, clean machine smoke가 남아 있었으므로, 외부 자격증명을 대신 만들 수 없는 부분을 제외하고 public release automation lane을 구현하는 작업으로 해석했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 433,
+      "updatedAt": "2026-06-05T19:11:25.787Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-public-release-updater-automation-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-public-release-updater-automation.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "2026 06 06 Web Search: Public Release Updater Automation",
+      "excerpt": "2026 06 06 Web Search: Public Release Updater Automation Query Tauri v2 official updater plugin signing key public key endpoints configuration docs Tauri v2 official macOS code signing notarization DMG Developer ID docs Apple official notarizing macOS software notarytool Develope",
+      "html": "<p>2026 06 06 Web Search: Public Release Updater Automation Query Tauri v2 official updater plugin signing key public key endpoints configuration docs Tauri v2 official macOS code signing notarization DMG Developer ID docs Apple official notarizing macOS software notarytool Developer ID docs Tauri v2 macOS entitlements tauri.conf.json entitlements hardenedRunti</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1888,
+      "updatedAt": "2026-06-05T19:11:01.558Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-public-release-updater-automation-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-public-release-updater-automation/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Public Release Updater Automation Validation",
+      "excerpt": "Public Release Updater Automation Validation 완료된 검증 node scripts/public release config.mjs report only : 통과. 외부 env blocker를 정상 보고. corepack pnpm filter platform desktop app run release:preflight:public:report : 통과. updater code path는 통과, 외부 credential/env blocker를 정상 보고. cargo c",
+      "html": "<h1>Public Release Updater Automation Validation</h1>\n<h2>완료된 검증</h2>\n<ul>\n<li><code>node scripts/public-release-config.mjs --report-only</code>: 통과. 외부 env blocker를 정상 보고.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run release:preflight:public:report</code>: 통과. updater code path는 통과, 외부 credential/env blocker를 정상 보고.</li>\n<li><code>cargo check</code>: 통과.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 22 tests.</li>\n</ul>\n<h2>남은 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app run package:internal</code></li>\n<li>JSON/config contract checks</li>\n</ul>\n<h2>외부 blocker</h2>\n<ul>\n<li>실제 <code>desktop:package:public</code> 성공은 Apple Developer signing/notarization credential, Tauri updater signing private key, release asset base URL, clean-machine smoke 환경이 있어야 가능하다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 841,
+      "updatedAt": "2026-06-05T19:10:51.726Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-public-release-updater-automation-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-public-release-updater-automation/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Public Release Updater Automation Traceability",
+      "excerpt": "Public Release Updater Automation Traceability | Requirement | Implementation | Validation | | | | | | PRU REQ 001 | tauri plugin updater , tauri plugin updater::Builder , public release build.mjs | cargo check , desktop tests | | PRU REQ 002 | public release config.mjs secret bo",
+      "html": "<h1>Public Release Updater Automation Traceability</h1>\n<table><thead><tr><th>Requirement</th><th>Implementation</th><th>Validation</th></tr></thead><tbody><tr><td>PRU-REQ-001</td><td><code>tauri-plugin-updater</code>, <code>tauri_plugin_updater::Builder</code>, <code>public-release-build.mjs</code></td><td><code>cargo check</code>, desktop tests</td></tr><tr><td>PRU-REQ-002</td><td><code>public-release-config.mjs</code> secret boundary, generated marker metadata only</td><td>public config report, code review</td></tr><tr><td>PRU-REQ-003</td><td><code>validatePublicReleaseEnv</code>, <code>release:preflight:public</code></td><td>public preflight report</td></tr><tr><td>PRU-REQ-004</td><td>unchanged internal package pipeline, base ad-hoc <code>signingIdentity</code></td><td><code>package:internal</code></td></tr><tr><td>PRU-REQ-005</td><td><code>package-public</code>, <code>create-updater-manifest.mjs</code>, macOS verification steps</td><td>desktop tests/check, public dry/report</td></tr><tr><td>PRU-REQ-006</td><td><code>src-tauri/Entitlements.plist</code>, <code>tauri.conf.json</code> macOS entitlements</td><td>readiness tests/check</td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 828,
+      "updatedAt": "2026-06-05T19:10:44.222Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-public-release-updater-automation-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-public-release-updater-automation/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Public Release Updater Automation Tasks",
+      "excerpt": "Public Release Updater Automation Tasks x web first intake 기록 x 기존 release/pipeline/readiness 구조 점검 x tauri plugin updater 설치 감사 및 dependency 추가 x public release config/env 검증 script 추가 x public Tauri build runner 추가 x static updater manifest generator 추가 x desktop:package:public",
+      "html": "<h1>Public Release Updater Automation Tasks</h1>\n<ul>\n<li>[x] web-first intake 기록</li>\n<li>[x] 기존 release/pipeline/readiness 구조 점검</li>\n<li>[x] <code>tauri-plugin-updater</code> 설치 감사 및 dependency 추가</li>\n<li>[x] public release config/env 검증 script 추가</li>\n<li>[x] public Tauri build runner 추가</li>\n<li>[x] static updater manifest generator 추가</li>\n<li>[x] <code>desktop:package:public</code> pipeline 추가</li>\n<li>[x] Rust updater plugin init 추가</li>\n<li>[x] macOS Entitlements.plist 추가 및 config 연결</li>\n<li>[x] readiness/test/docs/history 갱신</li>\n<li>[ ] full validation</li>\n<li>[ ] commit/push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 553,
+      "updatedAt": "2026-06-05T19:10:35.123Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-public-release-updater-automation-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-public-release-updater-automation/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Public Release Updater Automation Plan",
+      "excerpt": "Public Release Updater Automation Plan 1. web first intake로 Tauri updater/signing/notarization/entitlements 공식 문서를 확인한다. 2. 기존 release readiness, service readiness, desktop pipeline 구조를 점검한다. 3. updater plugin dependency를 설치 감사와 함께 추가한다. 4. public env validation, generated config",
+      "html": "<h1>Public Release Updater Automation Plan</h1>\n<p>1. web-first intake로 Tauri updater/signing/notarization/entitlements 공식 문서를 확인한다.</p>\n<p>2. 기존 release readiness, service readiness, desktop pipeline 구조를 점검한다.</p>\n<p>3. updater plugin dependency를 설치 감사와 함께 추가한다.</p>\n<p>4. public env validation, generated config, public build, static manifest scripts를 구현한다.</p>\n<p>5. Rust plugin init과 macOS entitlements를 연결한다.</p>\n<p>6. readiness scripts/tests/docs/history를 갱신한다.</p>\n<p>7. <code>cargo check</code>, desktop tests/check, public report, internal package build를 실행한다.</p>\n<p>8. commit/push로 마무리한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 647,
+      "updatedAt": "2026-06-05T19:10:28.365Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-public-release-updater-automation-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-public-release-updater-automation/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Public Release Updater Automation Spec",
+      "excerpt": "Public Release Updater Automation Spec 목표 platform desktop app 에 실제 public release automation lane을 추가한다. internal package lane은 유지하고, public lane은 signing/notarization/updater 환경변수가 있을 때만 Tauri updater artifact와 static manifest를 생성한다. 구현 범위 tauri plugin updater Rust dependency 추",
+      "html": "<h1>Public Release Updater Automation Spec</h1>\n<h2>목표</h2>\n<p><code>platform-desktop-app</code>에 실제 public release automation lane을 추가한다. internal package lane은 유지하고, public lane은 signing/notarization/updater 환경변수가 있을 때만 Tauri updater artifact와 static manifest를 생성한다.</p>\n<h2>구현 범위</h2>\n<ul>\n<li><code>tauri-plugin-updater</code> Rust dependency 추가 및 Tauri plugin init.</li>\n<li>public env 검증과 generated Tauri config 생성 script 추가.</li>\n<li>Tauri public build runner와 <code>latest.json</code> manifest generator 추가.</li>\n<li><code>desktop:package:public</code> pipeline 추가.</li>\n<li>macOS <code>Entitlements.plist</code> 생성 및 Tauri config 연결.</li>\n<li>release/service/readiness checks와 tests 갱신.</li>\n</ul>\n<h2>보안 경계</h2>\n<ul>\n<li><code>TAURI_SIGNING_PRIVATE_KEY</code>, <code>TAURI_SIGNING_PRIVATE_KEY_PASSWORD</code>, Apple credential은 process env에서만 읽는다.</li>\n<li>generated <code>service-update-channel.json</code>는 public endpoint, public key hash, 존재 여부 metadata만 기록한다.</li>\n<li>internal build는 기존 ad-hoc signing identity <code>-</code>와 public blocker reporting을 유지한다.</li>\n</ul>\n<h2>완료 조건</h2>\n<ul>\n<li>Rust <code>cargo check</code> 통과.</li>\n<li>desktop app tests/check 통과.</li>\n<li>public preflight report가 updater code path는 통과시키고 외부 credential/env blocker만 남긴다.</li>\n<li>internal package build가 계속 <code>.app</code>/DMG를 생성하고 검증한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1320,
+      "updatedAt": "2026-06-05T19:10:20.294Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-public-release-updater-automation-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-public-release-updater-automation.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "2026 06 06 Public Release Updater Automation 요구사항",
+      "excerpt": "2026 06 06 Public Release Updater Automation 요구사항 요구사항 PRU REQ 001 : public release path는 Tauri updater plugin을 사용해 signed updater artifact 생성이 가능해야 한다. PRU REQ 002 : updater private key와 Apple signing/notarization credential은 repository나 installer marker에 쓰면 안 된다. PRU REQ 003 : ",
+      "html": "<h1>2026-06-06 Public Release Updater Automation 요구사항</h1>\n<h2>요구사항</h2>\n<ul>\n<li><code>PRU-REQ-001</code>: public release path는 Tauri updater plugin을 사용해 signed updater artifact 생성이 가능해야 한다.</li>\n<li><code>PRU-REQ-002</code>: updater private key와 Apple signing/notarization credential은 repository나 installer marker에 쓰면 안 된다.</li>\n<li><code>PRU-REQ-003</code>: public build는 <code>TAURI_UPDATER_PUBLIC_KEY</code>, <code>TAURI_SIGNING_PRIVATE_KEY</code>, <code>TAURI_UPDATER_ENDPOINTS</code>, <code>TAURI_RELEASE_ASSET_BASE_URL</code>, Apple signing/notarization env가 없으면 명확히 실패해야 한다.</li>\n<li><code>PRU-REQ-004</code>: internal build는 기존 ad-hoc signing/test path를 유지해야 한다.</li>\n<li><code>PRU-REQ-005</code>: public build는 static <code>latest.json</code> manifest 생성과 macOS codesign/DMG/stapler/Gatekeeper 검증 단계를 pipeline에 포함해야 한다.</li>\n<li><code>PRU-REQ-006</code>: macOS hardened runtime과 entitlements file 연결이 Tauri config와 readiness check에 고정되어야 한다.</li>\n</ul>\n<h2>제외</h2>\n<ul>\n<li>Apple Developer 계정 생성, 인증서 발급, notarization credential 생성은 외부 계정 권한이 필요하므로 자동 완료 대상이 아니다.</li>\n<li>clean-machine smoke는 별도 물리/가상 머신과 release asset upload가 필요하므로 이번 구현에서는 gate로 유지한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1260,
+      "updatedAt": "2026-06-05T19:10:10.869Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-release-runbook-en-md",
+      "path": "platform-desktop-app/docs/release-runbook.en.md",
+      "category": "project-doc",
+      "language": "en",
+      "title": "Desktop App Build/Test/Release Runbook",
+      "excerpt": "Desktop App Build/Test/Release Runbook Purpose This document gives one command paths for verifying platform desktop app , building an internal .app /DMG, and checking public release gates. Quick Commands Run these from the repository root. | Purpose | Command | | | | | First setu",
+      "html": "<h1>Desktop App Build/Test/Release Runbook</h1>\n<h2>Purpose</h2>\n<p>This document gives one-command paths for verifying <code>platform-desktop-app</code>, building an internal <code>.app</code>/DMG, and checking public release gates.</p>\n<h2>Quick Commands</h2>\n<p>Run these from the repository root.</p>\n<table><thead><tr><th>Purpose</th><th>Command</th></tr></thead><tbody><tr><td>First setup only</td><td><code>corepack pnpm run desktop:setup</code></td></tr><tr><td>First setup plus developer verification</td><td><code>corepack pnpm run desktop:setup:verify</code></td></tr><tr><td>Fast repeated verification</td><td><code>corepack pnpm run desktop:verify:quick</code></td></tr><tr><td>Full developer verification</td><td><code>corepack pnpm run desktop:verify</code></td></tr><tr><td>Customer renderer build/audit only</td><td><code>corepack pnpm run desktop:renderer:build</code></td></tr><tr><td>Quick setup/build diagnosis</td><td><code>corepack pnpm run desktop:doctor</code></td></tr><tr><td>Build local/internal <code>.app</code> and DMG</td><td><code>corepack pnpm run desktop:package:internal</code></td></tr><tr><td>Check public release gates in report-only mode</td><td><code>corepack pnpm run desktop:release:report</code></td></tr><tr><td>Build public signed updater artifacts</td><td><code>corepack pnpm run desktop:package:public</code></td></tr><tr><td>Preview the command sequence</td><td><code>corepack pnpm --filter platform-desktop-app run pipeline:dry-run</code></td></tr></tbody></table>\n<h2>Internal Test Build</h2>\n<p><code>desktop:package:internal</code> runs:</p>\n<p>1. Workspace Monitor typecheck, tests, and customer build.</p>\n<p>2. Customer bundle audit and developer/customer snapshot boundary checks.</p>\n<p>3. Desktop app Node tests and readiness checks.</p>\n<p>4. Rust <code>cargo test</code> and <code>cargo build</code>.</p>\n<p>5. Prepared-renderer Tauri build for the internal <code>.app</code>/DMG, reusing the already audited renderer output.</p>\n<p>6. On macOS, verify the <code>.app</code> signature with <code>codesign</code> and the DMG with <code>hdiutil verify</code>.</p>\n<p>Direct <code>corepack pnpm --filter platform-desktop-app run tauri:build</code> still runs the Tauri <code>beforeBuildCommand</code>, which builds and audits the customer renderer first. <code>desktop:package:internal</code> re-audits and reuses the renderer output produced by <code>desktop:verify</code>, avoiding a duplicate Next.js build in the package pipeline.</p>\n<p>Expected artifacts:</p>\n<pre><code>\nplatform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app\nplatform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg\n</code></pre>\n<p>These artifacts are for internal testing. The current macOS configuration uses ad-hoc signing, so do not describe them as public-ready.</p>\n<h2>Public Distribution</h2>\n<p>Before public distribution, run:</p>\n<pre><code>\ncorepack pnpm run desktop:release:report\n</code></pre>\n<p>Public distribution is ready only after these gates actually pass:</p>\n<ul>\n<li>Developer ID or equivalent OS signing identity.</li>\n<li>macOS hardened runtime, notarization, and stapling when applicable.</li>\n<li><code>src-tauri/Entitlements.plist</code> explicitly records public distribution entitlements and is referenced by the Tauri config.</li>\n<li>Windows code signing and SmartScreen handling.</li>\n<li>Signed updater channel and update rollback plan.</li>\n<li>Clean-machine install/open/update/uninstall smoke tests.</li>\n<li>Privacy, dependency, and license review.</li>\n<li>Installer payload review proving tokens, webhook URLs, browser cookies, <code>_private/</code> content, and platform source payloads are not bundled.</li>\n</ul>\n<p><code>desktop:package:public</code> requires these environment variables.</p>\n<table><thead><tr><th>Scope</th><th>Environment variables</th></tr></thead><tbody><tr><td>macOS signing</td><td><code>APPLE_SIGNING_IDENTITY</code> or <code>APPLE_CERTIFICATE</code> + <code>APPLE_CERTIFICATE_PASSWORD</code></td></tr><tr><td>notarization</td><td><code>APPLE_ID</code> + <code>APPLE_PASSWORD</code> + <code>APPLE_TEAM_ID</code> or <code>APPLE_API_KEY</code> + <code>APPLE_API_ISSUER</code> + <code>APPLE_API_KEY_PATH</code></td></tr><tr><td>updater verification</td><td><code>TAURI_UPDATER_PUBLIC_KEY</code></td></tr><tr><td>updater signing</td><td><code>TAURI_SIGNING_PRIVATE_KEY</code>, optional <code>TAURI_SIGNING_PRIVATE_KEY_PASSWORD</code></td></tr><tr><td>updater endpoint</td><td><code>TAURI_UPDATER_ENDPOINTS</code></td></tr><tr><td>static manifest asset URL</td><td><code>TAURI_RELEASE_ASSET_BASE_URL</code></td></tr><tr><td>release notes</td><td>optional <code>TAURI_RELEASE_NOTES</code></td></tr></tbody></table>\n<p>The public build generates temporary <code>src-tauri/target/public-release/tauri.public.generated.json</code> and <code>service-update-channel.json</code> files. They contain only public key hash, endpoint, and signing identity presence metadata; the private updater key and Apple credentials are never written. After the build, Tauri updater artifacts <code>.app.tar.gz</code>, <code>.sig</code>, and static <code>latest.json</code> are produced under <code>src-tauri/target/release/bundle/</code>.</p>\n<h2>External References</h2>\n<ul>\n<li>Tauri v2 distribution docs: https://v2.tauri.app/distribute/</li>\n<li>Tauri v2 macOS signing/notarization docs: https://v2.tauri.app/distribute/sign/macos/</li>\n<li>Tauri updater docs: https://v2.tauri.app/plugin/updater/</li>\n<li>Apple macOS code signing/notarization overview: https://support.apple.com/guide/security/app-code-signing-process-sec3ad8e6e53/web</li>\n</ul>\n<h2>Failure Notes</h2>\n<ul>\n<li>If <code>workspace-monitor</code> build fails, inspect TypeScript, snapshot, and customer boundary state under <code>platform-desktop-app/renderer/workspace-monitor/</code>.</li>\n<li>If <code>check-customer-bundle</code> fails, internal source/path/private content is leaking into the customer snapshot or <code>out/</code>.</li>\n<li>If <code>release:public:report</code> is blocked, public signing/notarization/updater/clean-machine gates are still open. That is expected until the release assets are ready.</li>\n<li>If <code>package:public</code> fails on environment blockers, set the variables above first. <code>.env</code> files alone do not work for the updater signing private key.</li>\n<li>If <code>cargo</code> fails, inspect Rust toolchain and Tauri compile errors from `platform-desktop-app/</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 5586,
+      "updatedAt": "2026-06-05T19:08:57.551Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-release-runbook-ko-md",
+      "path": "platform-desktop-app/docs/release-runbook.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "데스크톱 앱 빌드/테스트/배포 Runbook",
+      "excerpt": "데스크톱 앱 빌드/테스트/배포 Runbook 목적 이 문서는 platform desktop app 를 직접 빌드하고 테스트하거나 내부 테스트용 .app /DMG를 만드는 절차를 한 번에 실행할 수 있게 정리한다. 빠른 명령 repository root에서 실행한다. | 목적 | 명령 | | | | | 처음 설정만 실행 | corepack pnpm run desktop:setup | | 처음 설정 + 전체 개발 검증 | corepack pnpm run desktop:setup:verify | | 빠",
+      "html": "<h1>데스크톱 앱 빌드/테스트/배포 Runbook</h1>\n<h2>목적</h2>\n<p>이 문서는 <code>platform-desktop-app</code>를 직접 빌드하고 테스트하거나 내부 테스트용 <code>.app</code>/DMG를 만드는 절차를 한 번에 실행할 수 있게 정리한다.</p>\n<h2>빠른 명령</h2>\n<p>repository root에서 실행한다.</p>\n<table><thead><tr><th>목적</th><th>명령</th></tr></thead><tbody><tr><td>처음 설정만 실행</td><td><code>corepack pnpm run desktop:setup</code></td></tr><tr><td>처음 설정 + 전체 개발 검증</td><td><code>corepack pnpm run desktop:setup:verify</code></td></tr><tr><td>빠른 반복 검증</td><td><code>corepack pnpm run desktop:verify:quick</code></td></tr><tr><td>전체 개발 검증</td><td><code>corepack pnpm run desktop:verify</code></td></tr><tr><td>customer renderer build/audit만 실행</td><td><code>corepack pnpm run desktop:renderer:build</code></td></tr><tr><td>설치/빌드 상태 빠른 진단</td><td><code>corepack pnpm run desktop:doctor</code></td></tr><tr><td>내부 테스트용 <code>.app</code>/DMG 빌드</td><td><code>corepack pnpm run desktop:package:internal</code></td></tr><tr><td>공개 배포 gate report-only 확인</td><td><code>corepack pnpm run desktop:release:report</code></td></tr><tr><td>공개 배포용 signed updater artifact 빌드</td><td><code>corepack pnpm run desktop:package:public</code></td></tr><tr><td>실행될 명령 순서만 확인</td><td><code>corepack pnpm --filter platform-desktop-app run pipeline:dry-run</code></td></tr></tbody></table>\n<h2>내부 테스트 빌드 절차</h2>\n<p><code>desktop:package:internal</code>은 다음 순서로 실행된다.</p>\n<p>1. Workspace Monitor typecheck, test, customer build를 실행한다.</p>\n<p>2. customer bundle audit와 developer/customer snapshot boundary를 검사한다.</p>\n<p>3. Desktop app Node test와 readiness check를 실행한다.</p>\n<p>4. Rust <code>cargo test</code>와 <code>cargo build</code>를 실행한다.</p>\n<p>5. 이미 audit된 renderer output을 재사용하는 prepared-renderer Tauri build로 내부 테스트용 <code>.app</code>/DMG를 만든다.</p>\n<p>6. macOS에서는 <code>.app</code> signature를 <code>codesign</code>으로 검증하고 DMG를 <code>hdiutil verify</code>로 확인한다.</p>\n<p>직접 <code>corepack pnpm --filter platform-desktop-app run tauri:build</code>를 실행하면 Tauri <code>beforeBuildCommand</code>가 customer renderer build/audit를 먼저 실행한다. <code>desktop:package:internal</code>은 <code>desktop:verify</code>에서 만든 renderer output을 다시 감사한 뒤 재사용하므로 같은 Next.js build를 두 번 돌리지 않는다.</p>\n<p>생성 artifact:</p>\n<pre><code>\nplatform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app\nplatform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg\n</code></pre>\n<p>이 artifact는 내부 테스트용이다. 현재 설정은 macOS ad-hoc signing을 사용하므로 일반 사용자 공개 배포 준비 완료로 표현하지 않는다.</p>\n<h2>공개 배포 절차</h2>\n<p>공개 배포 전에 다음 command로 현재 gate를 확인한다.</p>\n<pre><code>\ncorepack pnpm run desktop:release:report\n</code></pre>\n<p>공개 배포가 가능하려면 다음 gate가 실제로 통과해야 한다.</p>\n<ul>\n<li>Developer ID 또는 동등한 OS signing identity 준비</li>\n<li>macOS hardened runtime, notarization, 필요한 경우 stapling</li>\n<li><code>src-tauri/Entitlements.plist</code>에 공개 배포 entitlements가 명시되어 있고 Tauri config가 이를 참조</li>\n<li>Windows code signing과 SmartScreen 대응</li>\n<li>signed updater channel과 update rollback 계획</li>\n<li>clean-machine install/open/update/uninstall smoke test</li>\n<li>privacy, dependency, license review</li>\n<li>installer에 token, webhook URL, browser cookie, <code>_private/</code> 내용, platform source payload가 들어가지 않는지 확인</li>\n</ul>\n<p><code>desktop:package:public</code>은 다음 환경변수를 요구한다.</p>\n<table><thead><tr><th>범위</th><th>환경변수</th></tr></thead><tbody><tr><td>macOS signing</td><td><code>APPLE_SIGNING_IDENTITY</code> 또는 <code>APPLE_CERTIFICATE</code> + <code>APPLE_CERTIFICATE_PASSWORD</code></td></tr><tr><td>notarization</td><td><code>APPLE_ID</code> + <code>APPLE_PASSWORD</code> + <code>APPLE_TEAM_ID</code> 또는 <code>APPLE_API_KEY</code> + <code>APPLE_API_ISSUER</code> + <code>APPLE_API_KEY_PATH</code></td></tr><tr><td>updater verification</td><td><code>TAURI_UPDATER_PUBLIC_KEY</code></td></tr><tr><td>updater signing</td><td><code>TAURI_SIGNING_PRIVATE_KEY</code>, 선택 <code>TAURI_SIGNING_PRIVATE_KEY_PASSWORD</code></td></tr><tr><td>updater endpoint</td><td><code>TAURI_UPDATER_ENDPOINTS</code></td></tr><tr><td>static manifest asset URL</td><td><code>TAURI_RELEASE_ASSET_BASE_URL</code></td></tr><tr><td>release notes</td><td>선택 <code>TAURI_RELEASE_NOTES</code></td></tr></tbody></table>\n<p>public build는 <code>src-tauri/target/public-release/tauri.public.generated.json</code>와 <code>service-update-channel.json</code>를 임시 생성한다. 이 파일에는 public key hash, endpoint, signing identity 존재 여부만 들어가며 private updater key와 Apple credential은 쓰지 않는다. build가 끝나면 Tauri updater artifact <code>.app.tar.gz</code>, <code>.sig</code>, static <code>latest.json</code>가 <code>src-tauri/target/release/bundle/</code> 아래에 생긴다.</p>\n<h2>외부 기준</h2>\n<ul>\n<li>Tauri v2 배포 문서: https://v2.tauri.app/distribute/</li>\n<li>Tauri v2 macOS signing/notarization 문서: https://v2.tauri.app/distribute/sign/macos/</li>\n<li>Tauri updater 문서: https://v2.tauri.app/plugin/updater/</li>\n<li>Apple macOS code signing/notarization 설명: https://support.apple.com/guide/security/app-code-signing-process-sec3ad8e6e53/web</li>\n</ul>\n<h2>실패했을 때</h2>\n<ul>\n<li><code>workspace-monitor</code> build 실패: <code>platform-desktop-app/renderer/workspace-monitor/</code>의 TypeScript, snapshot, customer boundary를 먼저 본다.</li>\n<li><code>check-customer-bundle</code> 실패: customer snapshot이나 <code>out/</code>에 내부 source/path/private content가 들어간 것이다.</li>\n<li><code>release:public:report</code>가 blocked: public signing/notarization/updater/clean-machine gate가 아직 남은 것이다. 이 상태는 정상이며 public-ready라고 말하면 안 된다.</li>\n<li><code>package:public</code>이 env blocker로 실패: 위 환경변수를 먼저 설정한다. <code>.env</code> 파일만으로는 updater signing private key가 동작하지 않는다.</li>\n<li><code>cargo</code> 실패: <code>platform-desktop-app/src-tauri/</code>에서 Rust toolchain과 Tauri command compile error를 확인한다.</li>\n</ul>\n<h2>금지</h2>\n<ul>\n<li>signing/notarization 없이 public-ready라고 표현하지 않는다.</li>\n<li>Apple signing key, updater private key, webhook token, browser cookie를 repository나 installer payload에 넣지 않는다.</li>\n<li>사용자가 선택하지 않은 workspace path를 runtime data나 support bundle에 raw로 노출하지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 5837,
+      "updatedAt": "2026-06-05T19:08:53.553Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-configs-service-readiness-registry-json",
+      "path": "platform-desktop-app/configs/service-readiness-registry.json",
+      "category": "project-config",
+      "language": "unknown",
+      "title": "Service Readiness Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"service readiness registry\", \"purpose\": \"Defines production service readiness gates for the installable desktop platform so internal builds, customer test builds, and public releases are not confused.\", \"reader guide\": { \"summary\": \"Use ",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;service-readiness-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines production-service readiness gates for the installable desktop platform so internal builds, customer test builds, and public releases are not confused.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry when deciding whether the desktop platform is a local/internal build, a controlled customer-test build, or ready for public service release signoff.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read service_levels first to understand which claims are allowed.&quot;,\n      &quot;Read readiness_groups to see the grouped service gaps that must be visible in the app.&quot;,\n      &quot;Read public_release_blockers before using public release language.&quot;,\n      &quot;Read runtime_surface_contract to understand what the installed app must show to operators.&quot;,\n      &quot;Treat updater, signing, notarization, privacy, support, and first-run items as release gates rather than optional notes.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;A release channel, updater, signing, notarization, support, privacy, or onboarding behavior changes.&quot;,\n      &quot;The app starts collecting additional logs, workspace data, or diagnostics.&quot;,\n      &quot;A customer-test or public distribution claim is made.&quot;,\n      &quot;A new OS packaging target is added.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;apple_notarization&quot;,\n      &quot;title&quot;: &quot;Apple Developer: Notarizing macOS software before distribution&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Developer ID signing&quot;,\n        &quot;hardened runtime&quot;,\n        &quot;notarization and stapling gates&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_code_signing&quot;,\n      &quot;title&quot;: &quot;Apple Platform Security: App code signing process in macOS&quot;,\n      &quot;url&quot;: &quot;https://support.apple.com/guide/security/app-code-signing-process-sec3ad8e6e53/web&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;macOS app trust model&quot;,\n        &quot;Gatekeeper distribution expectations&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_updater&quot;,\n      &quot;title&quot;: &quot;Tauri v2 Updater Plugin&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/plugin/updater/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;signed update channel requirement&quot;,\n        &quot;production TLS update endpoint expectation&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;owasp_masvs_storage&quot;,\n      &quot;title&quot;: &quot;OWASP MASVS Storage&quot;,\n      &quot;url&quot;: &quot;https://mas.owasp.org/checklists/MASVS-STORAGE/&quot;,\n      &quot;source_type&quot;: &quot;standard&quot;,\n      &quot;used_for&quot;: [\n        &quot;sensitive data storage and logging boundary&quot;,\n        &quot;privacy-safe diagnostic export&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;runtime_data_boundary&quot;,\n      &quot;title&quot;: &quot;Runtime Data Boundary Registry&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/configs/runtime-data-boundary-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;source versus runtime data separation&quot;,\n        &quot;support diagnostic redaction&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;desktop_user_flow&quot;,\n      &quot;title&quot;: &quot;Desktop User Flow Registry&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/configs/user-flow-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;first-run onboarding&quot;,\n        &quot;workspace chooser&quot;,\n        &quot;decision inbox and recovery behavior&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;internal_build_is_not_public_service&quot;,\n      &quot;rule&quot;: &quot;A local/internal app bundle may be useful for development, but it must not be described as a public service release until public release blockers are cleared.&quot;,\n      &quot;reason&quot;: &quot;Developer ID signing, notarization, updater configuration, and clean-machine smoke tests are trust gates for installed software.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;service_levels&quot;,\n        &quot;public_release_blockers&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;service_gaps_must_be_operator_visible&quot;,\n      &quot;rule&quot;: &quot;Release, updater, privacy, support, onboarding, and workspace-readiness gaps must be visible in the app surface, not only in docs.&quot;,\n      &quot;reason&quot;: &quot;A real service needs operators to see next actions and blockers without reading repository internals.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;runtime_surface_contract&quot;,\n        &quot;readiness_groups&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;support_exports_are_redacted&quot;,\n      &quot;rule&quot;: &quot;Support diagnostics must export bounded metadata and redacted summaries, not raw private workspace contents or secrets.&quot;,\n      &quot;reason&quot;: &quot;Customer support workflows can accidentally become data exfiltration paths if raw logs or source trees are bundled.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;readiness_groups&quot;,\n        &quot;privacy_support_gates&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;updater_is_a_release_gate&quot;,\n      &quot;rule&quot;: &quot;A public service release requires a documented update and rollback path. Until a signed updater or equivalent release channel is c</code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 12120,
+      "updatedAt": "2026-06-05T19:07:25.091Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-resource-telemetry-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-resource-telemetry/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록: Native Resource Telemetry",
+      "excerpt": "작업 목록: Native Resource Telemetry x web first intake 수행 x Rust/Tauri workspace resource 구조 확인 x DesktopResourceSnapshotReport / WorkspaceResourceSnapshotCache 추가 x get desktop resource snapshot Tauri command 추가 x invoke handler 등록 x MonitorShell type/state/refresh/polling/display ",
+      "html": "<h1>작업 목록: Native Resource Telemetry</h1>\n<ul>\n<li>[x] web-first intake 수행</li>\n<li>[x] Rust/Tauri workspace resource 구조 확인</li>\n<li>[x] <code>DesktopResourceSnapshotReport</code>/<code>WorkspaceResourceSnapshotCache</code> 추가</li>\n<li>[x] <code>get_desktop_resource_snapshot</code> Tauri command 추가</li>\n<li>[x] invoke handler 등록</li>\n<li>[x] MonitorShell type/state/refresh/polling/display 추가</li>\n<li>[x] <code>service-readiness-registry.json</code>에 <code>native_resource_telemetry</code> 추가</li>\n<li>[x] <code>check-service-readiness.mjs</code>, readiness tests, monitor tests 보강</li>\n<li>[x] TypeScript/Rust 빠른 compile check 실행</li>\n<li>[x] Workspace Monitor test/check 실행</li>\n<li>[x] Platform desktop test 실행</li>\n<li>[x] shared config contract check 실행</li>\n<li>[x] Platform desktop check 실행</li>\n<li>[x] Internal package build 실행</li>\n<li>[x] Built output performance audit 실행</li>\n<li>[x] 최종 snapshot 수집 및 evaluation 갱신</li>\n<li>[x] commit/push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 857,
+      "updatedAt": "2026-06-05T18:57:49.766Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-work-timings-2026-2026-06-06-native-resource-telemetry-json",
       "path": "_history/work-timings/2026/2026-06-06-native-resource-telemetry.json",
       "category": "work-timing",
@@ -7464,38 +7784,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-06-native-resource-telemetry-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-06-native-resource-telemetry/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록: Native Resource Telemetry",
-      "excerpt": "작업 목록: Native Resource Telemetry x web first intake 수행 x Rust/Tauri workspace resource 구조 확인 x DesktopResourceSnapshotReport / WorkspaceResourceSnapshotCache 추가 x get desktop resource snapshot Tauri command 추가 x invoke handler 등록 x MonitorShell type/state/refresh/polling/display ",
-      "html": "<h1>작업 목록: Native Resource Telemetry</h1>\n<ul>\n<li>[x] web-first intake 수행</li>\n<li>[x] Rust/Tauri workspace resource 구조 확인</li>\n<li>[x] <code>DesktopResourceSnapshotReport</code>/<code>WorkspaceResourceSnapshotCache</code> 추가</li>\n<li>[x] <code>get_desktop_resource_snapshot</code> Tauri command 추가</li>\n<li>[x] invoke handler 등록</li>\n<li>[x] MonitorShell type/state/refresh/polling/display 추가</li>\n<li>[x] <code>service-readiness-registry.json</code>에 <code>native_resource_telemetry</code> 추가</li>\n<li>[x] <code>check-service-readiness.mjs</code>, readiness tests, monitor tests 보강</li>\n<li>[x] TypeScript/Rust 빠른 compile check 실행</li>\n<li>[x] Workspace Monitor test/check 실행</li>\n<li>[x] Platform desktop test 실행</li>\n<li>[x] shared config contract check 실행</li>\n<li>[x] Platform desktop check 실행</li>\n<li>[x] Internal package build 실행</li>\n<li>[x] Built output performance audit 실행</li>\n<li>[ ] 최종 snapshot 수집, evaluation 갱신, commit/push</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 849,
-      "updatedAt": "2026-06-05T18:56:19.550Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-2026-2026-06-06-md",
-      "path": "_history/2026/2026-06-06.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 06",
-      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1327,
-      "updatedAt": "2026-06-05T18:53:41.666Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-native-resource-telemetry-omission-json",
@@ -7639,22 +7927,6 @@
       "updatedAt": "2026-06-05T18:53:41.660Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-configs-service-readiness-registry-json",
-      "path": "platform-desktop-app/configs/service-readiness-registry.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "Service Readiness Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"service readiness registry\", \"purpose\": \"Defines production service readiness gates for the installable desktop platform so internal builds, customer test builds, and public releases are not confused.\", \"reader guide\": { \"summary\": \"Use ",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;service-readiness-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines production-service readiness gates for the installable desktop platform so internal builds, customer test builds, and public releases are not confused.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry when deciding whether the desktop platform is a local/internal build, a controlled customer-test build, or ready for public service release signoff.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read service_levels first to understand which claims are allowed.&quot;,\n      &quot;Read readiness_groups to see the grouped service gaps that must be visible in the app.&quot;,\n      &quot;Read public_release_blockers before using public release language.&quot;,\n      &quot;Read runtime_surface_contract to understand what the installed app must show to operators.&quot;,\n      &quot;Treat updater, signing, notarization, privacy, support, and first-run items as release gates rather than optional notes.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;A release channel, updater, signing, notarization, support, privacy, or onboarding behavior changes.&quot;,\n      &quot;The app starts collecting additional logs, workspace data, or diagnostics.&quot;,\n      &quot;A customer-test or public distribution claim is made.&quot;,\n      &quot;A new OS packaging target is added.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;apple_notarization&quot;,\n      &quot;title&quot;: &quot;Apple Developer: Notarizing macOS software before distribution&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Developer ID signing&quot;,\n        &quot;hardened runtime&quot;,\n        &quot;notarization and stapling gates&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_code_signing&quot;,\n      &quot;title&quot;: &quot;Apple Platform Security: App code signing process in macOS&quot;,\n      &quot;url&quot;: &quot;https://support.apple.com/guide/security/app-code-signing-process-sec3ad8e6e53/web&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;macOS app trust model&quot;,\n        &quot;Gatekeeper distribution expectations&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_updater&quot;,\n      &quot;title&quot;: &quot;Tauri v2 Updater Plugin&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/plugin/updater/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;signed update channel requirement&quot;,\n        &quot;production TLS update endpoint expectation&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;owasp_masvs_storage&quot;,\n      &quot;title&quot;: &quot;OWASP MASVS Storage&quot;,\n      &quot;url&quot;: &quot;https://mas.owasp.org/checklists/MASVS-STORAGE/&quot;,\n      &quot;source_type&quot;: &quot;standard&quot;,\n      &quot;used_for&quot;: [\n        &quot;sensitive data storage and logging boundary&quot;,\n        &quot;privacy-safe diagnostic export&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;runtime_data_boundary&quot;,\n      &quot;title&quot;: &quot;Runtime Data Boundary Registry&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/configs/runtime-data-boundary-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;source versus runtime data separation&quot;,\n        &quot;support diagnostic redaction&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;desktop_user_flow&quot;,\n      &quot;title&quot;: &quot;Desktop User Flow Registry&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/configs/user-flow-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;first-run onboarding&quot;,\n        &quot;workspace chooser&quot;,\n        &quot;decision inbox and recovery behavior&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;internal_build_is_not_public_service&quot;,\n      &quot;rule&quot;: &quot;A local/internal app bundle may be useful for development, but it must not be described as a public service release until public release blockers are cleared.&quot;,\n      &quot;reason&quot;: &quot;Developer ID signing, notarization, updater configuration, and clean-machine smoke tests are trust gates for installed software.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;service_levels&quot;,\n        &quot;public_release_blockers&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;service_gaps_must_be_operator_visible&quot;,\n      &quot;rule&quot;: &quot;Release, updater, privacy, support, onboarding, and workspace-readiness gaps must be visible in the app surface, not only in docs.&quot;,\n      &quot;reason&quot;: &quot;A real service needs operators to see next actions and blockers without reading repository internals.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;runtime_surface_contract&quot;,\n        &quot;readiness_groups&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;support_exports_are_redacted&quot;,\n      &quot;rule&quot;: &quot;Support diagnostics must export bounded metadata and redacted summaries, not raw private workspace contents or secrets.&quot;,\n      &quot;reason&quot;: &quot;Customer support workflows can accidentally become data exfiltration paths if raw logs or source trees are bundled.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;readiness_groups&quot;,\n        &quot;privacy_support_gates&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;updater_is_a_release_gate&quot;,\n      &quot;rule&quot;: &quot;A public service release requires a documented update and rollback path. Until a signed updater or equivalent release channel is c</code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 12004,
-      "updatedAt": "2026-06-05T18:52:02.635Z",
-      "historyDate": "",
-      "historyYear": "",
       "workspaceArea": "platform-desktop-app"
     },
     {
@@ -9754,22 +10026,6 @@
       "workspaceArea": "_history/user-requests"
     },
     {
-      "id": "history-web-searches-2026-2026-06-06-button-tonal-hierarchy-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-button-tonal-hierarchy.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록",
-      "excerpt": "웹 검색 기록 쿼리 Apple Human Interface Guidelines buttons visual hierarchy controls macOS settings choices Material Design buttons elevation tonal buttons visual hierarchy choices WAI ARIA button listbox radio group selectable options visual state accessibility Nielsen Norman Group but",
-      "html": "<p>웹 검색 기록 쿼리 Apple Human Interface Guidelines buttons visual hierarchy controls macOS settings choices Material Design buttons elevation tonal buttons visual hierarchy choices WAI ARIA button listbox radio group selectable options visual state accessibility Nielsen Norman Group button design visual hierarchy contrast UI 확인한 기준 Apple HIG와 Material Design은 버튼의 계</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1043,
-      "updatedAt": "2026-06-05T16:21:55.750Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-button-tonal-hierarchy-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-button-tonal-hierarchy/tasks.ko.md",
       "category": "project-spec",
@@ -9866,118 +10122,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-evaluations-2026-2026-06-06-selectable-default-settings-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-06-selectable-default-settings-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Selectable Default Settings Evaluation Input",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 selectable default settings.json\" , \"omission check targets\": \" history/omission checks/202",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;installation occurred&quot;: false, &quot;installation record targets&quot;: , &quot;resource risk occurred&quot;: true, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 06 06 selectable default settings.json&quot; , &quot;omission check targets&quot;: &quot; history/omission checks/2026/2026 06 06 selectable default settings.json&quot; , &quot;validation targets&quot;: &quot;platform</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 547,
-      "updatedAt": "2026-06-05T16:12:11.045Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-selectable-default-settings-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-selectable-default-settings.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "최종 평가",
-      "excerpt": "최종 평가 판정 요청한 핵심 변경은 완료됐다. 텍스트 기반 기본 설정은 선택 카드가 먼저 보이도록 바뀌었고, 직접 편집도 유지됐다. 구현 후 내부 패키징 빌드까지 완료했다. 검증 근거 렌더러 test/check 통과 데스크톱 앱 test/check 통과 package:internal 통과 Rust test/build 통과 codesign verify 통과 DMG verify 통과 git diff check 통과 제한 브라우저 스모크는 로컬 개발 서버에서 Loading workspace snapsh",
-      "html": "<p>최종 평가 판정 요청한 핵심 변경은 완료됐다. 텍스트 기반 기본 설정은 선택 카드가 먼저 보이도록 바뀌었고, 직접 편집도 유지됐다. 구현 후 내부 패키징 빌드까지 완료했다. 검증 근거 렌더러 test/check 통과 데스크톱 앱 test/check 통과 package:internal 통과 Rust test/build 통과 codesign verify 통과 DMG verify 통과 git diff check 통과 제한 브라우저 스모크는 로컬 개발 서버에서 Loading workspace snapshot 상태에 머물러 본문 시각 확인은 제한됐다. 콘솔 오류는 없었고, 패키징 빌드와 정적 테스트로 UI 계약을 검증했다. 공개 배포 잔여 위험 </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 862,
-      "updatedAt": "2026-06-05T16:12:11.045Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-selectable-default-settings-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-selectable-default-settings.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적",
-      "excerpt": "요청 결과 추적 요청 기본 설정과 텍스트 설정을 사용자가 바로 선택할 수 있게 만들고, 구현 후 빌드까지 자동 실행한다. 결과 platform desktop app/docs/requirements/2026 06 06 selectable default settings.ko.md platform desktop app/specs/2026 06 06 selectable default settings/ platform desktop app/renderer/workspace monitor/components",
-      "html": "<p>요청 결과 추적 요청 기본 설정과 텍스트 설정을 사용자가 바로 선택할 수 있게 만들고, 구현 후 빌드까지 자동 실행한다. 결과 platform desktop app/docs/requirements/2026 06 06 selectable default settings.ko.md platform desktop app/specs/2026 06 06 selectable default settings/ platform desktop app/renderer/workspace monitor/components/workbench/RuntimeTerminalDrawer.tsx platform desktop app/renderer/workspace mon</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 855,
-      "updatedAt": "2026-06-05T16:12:11.044Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-selectable-default-settings-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-selectable-default-settings.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약",
-      "excerpt": "사용자 요청 요약 기본 설정과 실행 입력이 텍스트만으로 되어 있어 사용자가 어떤 값을 넣어야 할지 알기 어렵다. 텍스트 기반 설정도 여러 선택지를 먼저 제공하고, 사용자가 선택해서 바꿀 수 있게 해 달라는 요청이다.",
-      "html": "<p>사용자 요청 요약 기본 설정과 실행 입력이 텍스트만으로 되어 있어 사용자가 어떤 값을 넣어야 할지 알기 어렵다. 텍스트 기반 설정도 여러 선택지를 먼저 제공하고, 사용자가 선택해서 바꿀 수 있게 해 달라는 요청이다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 296,
-      "updatedAt": "2026-06-05T16:12:11.044Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-selectable-default-settings-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-selectable-default-settings.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록",
-      "excerpt": "웹 검색 기록 쿼리 WAI ARIA radio group select listbox settings form user choices official Nielsen Norman Group form design dropdown radio buttons settings choices Apple Human Interface Guidelines settings controls radio buttons pickers macOS Material Design selection controls settings r",
-      "html": "<p>웹 검색 기록 쿼리 WAI ARIA radio group select listbox settings form user choices official Nielsen Norman Group form design dropdown radio buttons settings choices Apple Human Interface Guidelines settings controls radio buttons pickers macOS Material Design selection controls settings radio buttons chips 확인한 기준 WAI ARIA Authoring Practices는 선택형 UI에서 radio group, li</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1291,
-      "updatedAt": "2026-06-05T16:12:11.044Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-selectable-default-settings-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-selectable-default-settings.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약",
-      "excerpt": "작업 요약 데스크톱 모니터의 텍스트 중심 기본 설정을 선택형 UI로 개선했다. 런타임 터미널 작업 폴더와 초기 입력에 선택 카드 추가 작업 파이프라인 요청에 프리셋 선택 카드 추가 검색 에이전트 제공자/모델 설정을 버튼형 선택으로 변경 모델 datalist 제거 선택 카드 CSS와 정적 테스트 추가 내부 패키징 빌드 완료",
-      "html": "<p>작업 요약 데스크톱 모니터의 텍스트 중심 기본 설정을 선택형 UI로 개선했다. 런타임 터미널 작업 폴더와 초기 입력에 선택 카드 추가 작업 파이프라인 요청에 프리셋 선택 카드 추가 검색 에이전트 제공자/모델 설정을 버튼형 선택으로 변경 모델 datalist 제거 선택 카드 CSS와 정적 테스트 추가 내부 패키징 빌드 완료</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 435,
-      "updatedAt": "2026-06-05T16:12:11.044Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-selectable-default-settings-json",
-      "path": "_history/work-timings/2026/2026-06-06-selectable-default-settings.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Selectable Default Settings",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"phases\": { \"phase\": \"intake research and source review\", \"elapsed minutes estimate\": 12 }, { \"phase\": \"implementation\", \"elapsed minutes estimate\": 24 }, { \"phase\": \"tests and package build\", \"elapsed minutes estimate\": 10 }, { \"phase\": \"records and close",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;intake research and source review&quot;, &quot;elapsed minutes estimate&quot;: 12 }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;elapsed minutes estimate&quot;: 24 }, { &quot;phase&quot;: &quot;tests and package build&quot;, &quot;elapsed minutes estimate&quot;: 10 }, { &quot;phase&quot;: &quot;records and closeout&quot;, &quot;elapsed minutes estimate&quot;: 8 } }</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 410,
-      "updatedAt": "2026-06-05T16:12:11.044Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
       "id": "platform-desktop-app-docs-requirements-2026-06-06-selectable-default-settings-ko-md",
       "path": "platform-desktop-app/docs/requirements/2026-06-06-selectable-default-settings.ko.md",
       "category": "project-doc",
@@ -10072,22 +10216,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-structure-performance-migration-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-structure-performance-migration.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: 구조/메모리/성능 마이그레이션",
-      "excerpt": "평가: 구조/메모리/성능 마이그레이션 판정 부분 충족이 아니라, 이번 범위는 충족. 다만 전체 구조의 근본 문제는 한 번의 slice로 끝나지 않는다. 지금 당장 효과가 큰 source snapshot payload와 editor input state churn은 개선했고, 더 큰 분해는 다음 migration으로 남겼다. 냉정한 결론 MonitorShell.tsx 13k lines는 유지보수와 렌더 성능 양쪽에서 좋지 않다. globals.css 16k lines는 스타일 소유권이 약하다. sr",
-      "html": "<p>평가: 구조/메모리/성능 마이그레이션 판정 부분 충족이 아니라, 이번 범위는 충족. 다만 전체 구조의 근본 문제는 한 번의 slice로 끝나지 않는다. 지금 당장 효과가 큰 source snapshot payload와 editor input state churn은 개선했고, 더 큰 분해는 다음 migration으로 남겼다. 냉정한 결론 MonitorShell.tsx 13k lines는 유지보수와 렌더 성능 양쪽에서 좋지 않다. globals.css 16k lines는 스타일 소유권이 약하다. src tauri/src/lib.rs 9.5k lines는 Rust command domain 분리가 필요하다. static snapshot에 so</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1597,
-      "updatedAt": "2026-06-05T15:59:02.047Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-structure-performance-migration-tasks-ko-md",
@@ -13575,38 +13703,6 @@
       "updatedAt": "2026-06-04T19:27:44.203Z",
       "historyDate": "2026-06-05",
       "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-release-runbook-en-md",
-      "path": "platform-desktop-app/docs/release-runbook.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Desktop App Build/Test/Release Runbook",
-      "excerpt": "Desktop App Build/Test/Release Runbook Purpose This document gives one command paths for verifying platform desktop app , building an internal .app /DMG, and checking public release gates. Quick Commands Run these from the repository root. | Purpose | Command | | | | | First setu",
-      "html": "<h1>Desktop App Build/Test/Release Runbook</h1>\n<h2>Purpose</h2>\n<p>This document gives one-command paths for verifying <code>platform-desktop-app</code>, building an internal <code>.app</code>/DMG, and checking public release gates.</p>\n<h2>Quick Commands</h2>\n<p>Run these from the repository root.</p>\n<table><thead><tr><th>Purpose</th><th>Command</th></tr></thead><tbody><tr><td>First setup only</td><td><code>corepack pnpm run desktop:setup</code></td></tr><tr><td>First setup plus developer verification</td><td><code>corepack pnpm run desktop:setup:verify</code></td></tr><tr><td>Fast repeated verification</td><td><code>corepack pnpm run desktop:verify:quick</code></td></tr><tr><td>Full developer verification</td><td><code>corepack pnpm run desktop:verify</code></td></tr><tr><td>Customer renderer build/audit only</td><td><code>corepack pnpm run desktop:renderer:build</code></td></tr><tr><td>Quick setup/build diagnosis</td><td><code>corepack pnpm run desktop:doctor</code></td></tr><tr><td>Build local/internal <code>.app</code> and DMG</td><td><code>corepack pnpm run desktop:package:internal</code></td></tr><tr><td>Check public release gates in report-only mode</td><td><code>corepack pnpm run desktop:release:report</code></td></tr><tr><td>Preview the command sequence</td><td><code>corepack pnpm --filter platform-desktop-app run pipeline:dry-run</code></td></tr></tbody></table>\n<h2>Internal Test Build</h2>\n<p><code>desktop:package:internal</code> runs:</p>\n<p>1. Workspace Monitor typecheck, tests, and customer build.</p>\n<p>2. Customer bundle audit and developer/customer snapshot boundary checks.</p>\n<p>3. Desktop app Node tests and readiness checks.</p>\n<p>4. Rust <code>cargo test</code> and <code>cargo build</code>.</p>\n<p>5. Prepared-renderer Tauri build for the internal <code>.app</code>/DMG, reusing the already audited renderer output.</p>\n<p>6. On macOS, verify the <code>.app</code> signature with <code>codesign</code> and the DMG with <code>hdiutil verify</code>.</p>\n<p>Direct <code>corepack pnpm --filter platform-desktop-app run tauri:build</code> still runs the Tauri <code>beforeBuildCommand</code>, which builds and audits the customer renderer first. <code>desktop:package:internal</code> re-audits and reuses the renderer output produced by <code>desktop:verify</code>, avoiding a duplicate Next.js build in the package pipeline.</p>\n<p>Expected artifacts:</p>\n<pre><code>\nplatform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app\nplatform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg\n</code></pre>\n<p>These artifacts are for internal testing. The current macOS configuration uses ad-hoc signing, so do not describe them as public-ready.</p>\n<h2>Public Distribution</h2>\n<p>Before public distribution, run:</p>\n<pre><code>\ncorepack pnpm run desktop:release:report\n</code></pre>\n<p>Public distribution is ready only after these gates actually pass:</p>\n<ul>\n<li>Developer ID or equivalent OS signing identity.</li>\n<li>macOS hardened runtime, notarization, and stapling when applicable.</li>\n<li>Windows code signing and SmartScreen handling.</li>\n<li>Signed updater channel and update rollback plan.</li>\n<li>Clean-machine install/open/update/uninstall smoke tests.</li>\n<li>Privacy, dependency, and license review.</li>\n<li>Installer payload review proving tokens, webhook URLs, browser cookies, <code>_private/</code> content, and platform source payloads are not bundled.</li>\n</ul>\n<h2>External References</h2>\n<ul>\n<li>Tauri v2 distribution docs: https://v2.tauri.app/distribute/</li>\n<li>Tauri v2 macOS signing/notarization docs: https://v2.tauri.app/distribute/sign/macos/</li>\n<li>Tauri updater docs: https://v2.tauri.app/plugin/updater/</li>\n<li>Apple macOS code signing/notarization overview: https://support.apple.com/guide/security/app-code-signing-process-sec3ad8e6e53/web</li>\n</ul>\n<h2>Failure Notes</h2>\n<ul>\n<li>If <code>workspace-monitor</code> build fails, inspect TypeScript, snapshot, and customer boundary state under <code>platform-desktop-app/renderer/workspace-monitor/</code>.</li>\n<li>If <code>check-customer-bundle</code> fails, internal source/path/private content is leaking into the customer snapshot or <code>out/</code>.</li>\n<li>If <code>release:public:report</code> is blocked, public signing/notarization/updater/clean-machine gates are still open. That is expected until the release assets are ready.</li>\n<li>If <code>cargo</code> fails, inspect Rust toolchain and Tauri compile errors from <code>platform-desktop-app/src-tauri/</code>.</li>\n</ul>\n<h2>Prohibited</h2>\n<ul>\n<li>Do not claim public readiness without signing/notarization evidence.</li>\n<li>Do not store Apple signing keys, updater private keys, webhook tokens, or browser cookies in the repository or installer payload.</li>\n<li>Do not expose raw workspace paths in runtime data or support bundles unless they belong to the user&#039;s selected workspace and pass the redaction policy.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 4132,
-      "updatedAt": "2026-06-04T18:47:36.353Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-release-runbook-ko-md",
-      "path": "platform-desktop-app/docs/release-runbook.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "데스크톱 앱 빌드/테스트/배포 Runbook",
-      "excerpt": "데스크톱 앱 빌드/테스트/배포 Runbook 목적 이 문서는 platform desktop app 를 직접 빌드하고 테스트하거나 내부 테스트용 .app /DMG를 만드는 절차를 한 번에 실행할 수 있게 정리한다. 빠른 명령 repository root에서 실행한다. | 목적 | 명령 | | | | | 처음 설정만 실행 | corepack pnpm run desktop:setup | | 처음 설정 + 전체 개발 검증 | corepack pnpm run desktop:setup:verify | | 빠",
-      "html": "<h1>데스크톱 앱 빌드/테스트/배포 Runbook</h1>\n<h2>목적</h2>\n<p>이 문서는 <code>platform-desktop-app</code>를 직접 빌드하고 테스트하거나 내부 테스트용 <code>.app</code>/DMG를 만드는 절차를 한 번에 실행할 수 있게 정리한다.</p>\n<h2>빠른 명령</h2>\n<p>repository root에서 실행한다.</p>\n<table><thead><tr><th>목적</th><th>명령</th></tr></thead><tbody><tr><td>처음 설정만 실행</td><td><code>corepack pnpm run desktop:setup</code></td></tr><tr><td>처음 설정 + 전체 개발 검증</td><td><code>corepack pnpm run desktop:setup:verify</code></td></tr><tr><td>빠른 반복 검증</td><td><code>corepack pnpm run desktop:verify:quick</code></td></tr><tr><td>전체 개발 검증</td><td><code>corepack pnpm run desktop:verify</code></td></tr><tr><td>customer renderer build/audit만 실행</td><td><code>corepack pnpm run desktop:renderer:build</code></td></tr><tr><td>설치/빌드 상태 빠른 진단</td><td><code>corepack pnpm run desktop:doctor</code></td></tr><tr><td>내부 테스트용 <code>.app</code>/DMG 빌드</td><td><code>corepack pnpm run desktop:package:internal</code></td></tr><tr><td>공개 배포 gate report-only 확인</td><td><code>corepack pnpm run desktop:release:report</code></td></tr><tr><td>실행될 명령 순서만 확인</td><td><code>corepack pnpm --filter platform-desktop-app run pipeline:dry-run</code></td></tr></tbody></table>\n<h2>내부 테스트 빌드 절차</h2>\n<p><code>desktop:package:internal</code>은 다음 순서로 실행된다.</p>\n<p>1. Workspace Monitor typecheck, test, customer build를 실행한다.</p>\n<p>2. customer bundle audit와 developer/customer snapshot boundary를 검사한다.</p>\n<p>3. Desktop app Node test와 readiness check를 실행한다.</p>\n<p>4. Rust <code>cargo test</code>와 <code>cargo build</code>를 실행한다.</p>\n<p>5. 이미 audit된 renderer output을 재사용하는 prepared-renderer Tauri build로 내부 테스트용 <code>.app</code>/DMG를 만든다.</p>\n<p>6. macOS에서는 <code>.app</code> signature를 <code>codesign</code>으로 검증하고 DMG를 <code>hdiutil verify</code>로 확인한다.</p>\n<p>직접 <code>corepack pnpm --filter platform-desktop-app run tauri:build</code>를 실행하면 Tauri <code>beforeBuildCommand</code>가 customer renderer build/audit를 먼저 실행한다. <code>desktop:package:internal</code>은 <code>desktop:verify</code>에서 만든 renderer output을 다시 감사한 뒤 재사용하므로 같은 Next.js build를 두 번 돌리지 않는다.</p>\n<p>생성 artifact:</p>\n<pre><code>\nplatform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app\nplatform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg\n</code></pre>\n<p>이 artifact는 내부 테스트용이다. 현재 설정은 macOS ad-hoc signing을 사용하므로 일반 사용자 공개 배포 준비 완료로 표현하지 않는다.</p>\n<h2>공개 배포 절차</h2>\n<p>공개 배포 전에 다음 command로 현재 gate를 확인한다.</p>\n<pre><code>\ncorepack pnpm run desktop:release:report\n</code></pre>\n<p>공개 배포가 가능하려면 다음 gate가 실제로 통과해야 한다.</p>\n<ul>\n<li>Developer ID 또는 동등한 OS signing identity 준비</li>\n<li>macOS hardened runtime, notarization, 필요한 경우 stapling</li>\n<li>Windows code signing과 SmartScreen 대응</li>\n<li>signed updater channel과 update rollback 계획</li>\n<li>clean-machine install/open/update/uninstall smoke test</li>\n<li>privacy, dependency, license review</li>\n<li>installer에 token, webhook URL, browser cookie, <code>_private/</code> 내용, platform source payload가 들어가지 않는지 확인</li>\n</ul>\n<h2>외부 기준</h2>\n<ul>\n<li>Tauri v2 배포 문서: https://v2.tauri.app/distribute/</li>\n<li>Tauri v2 macOS signing/notarization 문서: https://v2.tauri.app/distribute/sign/macos/</li>\n<li>Tauri updater 문서: https://v2.tauri.app/plugin/updater/</li>\n<li>Apple macOS code signing/notarization 설명: https://support.apple.com/guide/security/app-code-signing-process-sec3ad8e6e53/web</li>\n</ul>\n<h2>실패했을 때</h2>\n<ul>\n<li><code>workspace-monitor</code> build 실패: <code>platform-desktop-app/renderer/workspace-monitor/</code>의 TypeScript, snapshot, customer boundary를 먼저 본다.</li>\n<li><code>check-customer-bundle</code> 실패: customer snapshot이나 <code>out/</code>에 내부 source/path/private content가 들어간 것이다.</li>\n<li><code>release:public:report</code>가 blocked: public signing/notarization/updater/clean-machine gate가 아직 남은 것이다. 이 상태는 정상이며 public-ready라고 말하면 안 된다.</li>\n<li><code>cargo</code> 실패: <code>platform-desktop-app/src-tauri/</code>에서 Rust toolchain과 Tauri command compile error를 확인한다.</li>\n</ul>\n<h2>금지</h2>\n<ul>\n<li>signing/notarization 없이 public-ready라고 표현하지 않는다.</li>\n<li>Apple signing key, updater private key, webhook token, browser cookie를 repository나 installer payload에 넣지 않는다.</li>\n<li>사용자가 선택하지 않은 workspace path를 runtime data나 support bundle에 raw로 노출하지 않는다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 4370,
-      "updatedAt": "2026-06-04T18:47:36.352Z",
-      "historyDate": "",
-      "historyYear": "",
       "workspaceArea": "platform-desktop-app"
     },
     {
@@ -17688,102 +17784,6 @@
       "historyDate": "",
       "historyYear": "",
       "workspaceArea": "_docs/policies"
-    },
-    {
-      "id": "docs-governance-naming-governance-en-md",
-      "path": "_docs/governance/naming-governance.en.md",
-      "category": "workspace-doc",
-      "language": "en",
-      "title": "Naming Governance",
-      "excerpt": "Naming Governance Purpose This document defines shared naming rules for projects, tools, skills, docs, specs, history, configs, and source code. The detailed source of truth is ops/naming/naming policy.json . Default Principles Path names should reveal ownership and artifact type",
-      "html": "<h1>Naming Governance</h1>\n<h2>Purpose</h2>\n<p>This document defines shared naming rules for projects, tools, skills, docs, specs, history, configs, and source code. The detailed source of truth is <code>_ops/naming/naming-policy.json</code>.</p>\n<h2>Default Principles</h2>\n<ul>\n<li>Path names should reveal ownership and artifact type.</li>\n<li>New root projects, tools, skills, workflows, prompts, and spec slugs use <code>kebab-case</code> by default.</li>\n<li>Python packages, modules, and functions use <code>snake_case</code>.</li>\n<li>Important dated records start with <code>YYYY-MM-DD-&lt;lower-kebab-slug&gt;</code>.</li>\n<li>Important bilingual docs use paired <code>name.ko.md</code> and <code>name.en.md</code> files.</li>\n<li>Existing durable paths require a migration plan, trace update, and validation before renaming.</li>\n</ul>\n<h2>Namespace Rules</h2>\n<table><thead><tr><th>Target</th><th>Rule</th><th>Example</th></tr></thead><tbody><tr><td>root project</td><td><code>kebab-case</code></td><td><code>agent-platform/</code>, <code>platform-desktop-app/</code></td></tr><tr><td>reserved operations folder</td><td><code>_</code> + lower-kebab</td><td><code>_docs/</code>, <code>_history/</code></td></tr><tr><td>runtime adapter</td><td><code>.</code> + lower-kebab</td><td><code>.claude/</code>, <code>.cursor/</code></td></tr><tr><td>tool folder</td><td><code>kebab-case</code></td><td><code>_tools/workspace-health/</code></td></tr><tr><td>skill folder</td><td><code>kebab-case</code></td><td><code>_skills/create-validated-skill/</code></td></tr><tr><td>Python package/module</td><td><code>snake_case</code></td><td><code>workspace_health/</code>, <code>naming_audit.py</code></td></tr><tr><td>spec/history slug</td><td><code>YYYY-MM-DD-lower-kebab</code></td><td><code>2026-06-01-naming-conventions-audit/</code></td></tr><tr><td>bilingual docs</td><td><code>name.ko.md</code>, <code>name.en.md</code></td><td><code>naming-governance.en.md</code></td></tr><tr><td>commit</td><td><code>type(scope): summary</code></td><td><code>docs(workspace): add naming governance</code></td></tr></tbody></table>\n<h2>Audit</h2>\n<p>Run this after adding, moving, or changing durable names.</p>\n<pre><code>\npython3 _tools/naming-audit/src/naming_audit.py --check\n</code></pre>\n<p>Repository-wide verification includes naming audit through <code>workspace-health</code>.</p>\n<pre><code>\npython3 _tools/workspace-health/src/workspace_health.py --category governance\n</code></pre>\n<h2>Exceptions</h2>\n<ul>\n<li><code>README.md</code>, <code>README.ko.md</code>, <code>README.en.md</code>: documentation entrypoint convention</li>\n<li><code>AGENTS.md</code>, <code>CLAUDE.md</code>: assistant runtime entrypoint convention</li>\n<li><code>SKILL.md</code>: Codex skill entrypoint convention</li>\n<li><code>__init__.py</code>: Python package marker convention</li>\n</ul>\n<p>Record new exceptions with reasons in <code>_ops/naming/naming-policy.json</code>.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2088,
-      "updatedAt": "2026-06-03T05:30:49.197Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "_docs/governance"
-    },
-    {
-      "id": "docs-governance-naming-governance-ko-md",
-      "path": "_docs/governance/naming-governance.ko.md",
-      "category": "workspace-doc",
-      "language": "ko",
-      "title": "네이밍 거버넌스",
-      "excerpt": "네이밍 거버넌스 목적 이 문서는 프로젝트, 도구, 스킬, 문서, 스펙, 히스토리, 설정, 소스 코드 이름을 일관되게 짓기 위한 공통 규칙이다. 세부 source of truth는 ops/naming/naming policy.json 이다. 기본 원칙 경로 이름은 소유 영역과 산출물 유형을 드러내야 한다. 새 root project, tool, skill, workflow, prompt, spec slug는 기본적으로 kebab case 를 사용한다. Python package/module/func",
-      "html": "<h1>네이밍 거버넌스</h1>\n<h2>목적</h2>\n<p>이 문서는 프로젝트, 도구, 스킬, 문서, 스펙, 히스토리, 설정, 소스 코드 이름을 일관되게 짓기 위한 공통 규칙이다. 세부 source of truth는 <code>_ops/naming/naming-policy.json</code>이다.</p>\n<h2>기본 원칙</h2>\n<ul>\n<li>경로 이름은 소유 영역과 산출물 유형을 드러내야 한다.</li>\n<li>새 root project, tool, skill, workflow, prompt, spec slug는 기본적으로 <code>kebab-case</code>를 사용한다.</li>\n<li>Python package/module/function은 <code>snake_case</code>를 사용한다.</li>\n<li>중요한 날짜 기반 기록은 <code>YYYY-MM-DD-&lt;lower-kebab-slug&gt;</code>로 시작한다.</li>\n<li>중요한 한영 문서는 <code>name.ko.md</code>, <code>name.en.md</code>를 쌍으로 둔다.</li>\n<li>기존 durable path를 바꿀 때는 migration plan, trace update, validation을 먼저 준비한다.</li>\n</ul>\n<h2>네임스페이스별 규칙</h2>\n<table><thead><tr><th>대상</th><th>규칙</th><th>예시</th></tr></thead><tbody><tr><td>root project</td><td><code>kebab-case</code></td><td><code>agent-platform/</code>, <code>platform-desktop-app/</code></td></tr><tr><td>reserved 운영 폴더</td><td><code>_</code> + lower-kebab</td><td><code>_docs/</code>, <code>_history/</code></td></tr><tr><td>runtime adapter</td><td><code>.</code> + lower-kebab</td><td><code>.claude/</code>, <code>.cursor/</code></td></tr><tr><td>tool folder</td><td><code>kebab-case</code></td><td><code>_tools/workspace-health/</code></td></tr><tr><td>skill folder</td><td><code>kebab-case</code></td><td><code>_skills/create-validated-skill/</code></td></tr><tr><td>Python package/module</td><td><code>snake_case</code></td><td><code>workspace_health/</code>, <code>naming_audit.py</code></td></tr><tr><td>spec/history slug</td><td><code>YYYY-MM-DD-lower-kebab</code></td><td><code>2026-06-01-naming-conventions-audit/</code></td></tr><tr><td>bilingual docs</td><td><code>name.ko.md</code>, <code>name.en.md</code></td><td><code>naming-governance.ko.md</code></td></tr><tr><td>commit</td><td><code>type(scope): summary</code></td><td><code>docs(workspace): add naming governance</code></td></tr></tbody></table>\n<h2>감사</h2>\n<p>네이밍 관련 파일이나 폴더를 추가/이동/변경한 뒤 실행한다.</p>\n<pre><code>\npython3 _tools/naming-audit/src/naming_audit.py --check\n</code></pre>\n<p>저장소 전체 검증에서는 <code>workspace-health</code>가 naming audit를 함께 실행한다.</p>\n<pre><code>\npython3 _tools/workspace-health/src/workspace_health.py --category governance\n</code></pre>\n<h2>예외</h2>\n<ul>\n<li><code>README.md</code>, <code>README.ko.md</code>, <code>README.en.md</code>: 문서 entrypoint 관례</li>\n<li><code>AGENTS.md</code>, <code>CLAUDE.md</code>: assistant runtime entrypoint 관례</li>\n<li><code>SKILL.md</code>: Codex skill entrypoint 관례</li>\n<li><code>__init__.py</code>: Python package marker 관례</li>\n</ul>\n<p>예외를 추가할 때는 <code>_ops/naming/naming-policy.json</code>에 이유를 기록한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2219,
-      "updatedAt": "2026-06-03T05:30:49.196Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "_docs/governance"
-    },
-    {
-      "id": "docs-governance-repository-structure-governance-en-md",
-      "path": "_docs/governance/repository-structure-governance.en.md",
-      "category": "workspace-doc",
-      "language": "en",
-      "title": "Repository Structure Governance",
-      "excerpt": "Repository Structure Governance Purpose This document defines how root folders should stay separated as projects, shared operational assets, local only scratch, or generated output. Current Classification agent platform/ , presentation agent/ , and platform desktop app/ are regis",
-      "html": "<h1>Repository Structure Governance</h1>\n<h2>Purpose</h2>\n<p>This document defines how root folders should stay separated as projects, shared operational assets, local-only scratch, or generated output.</p>\n<h2>Current Classification</h2>\n<ul>\n<li><code>agent-platform/</code>, <code>presentation-agent/</code>, and <code>platform-desktop-app/</code> are registered root projects.</li>\n<li><code>_docs/</code>, <code>_ops/</code>, <code>_history/</code>, <code>_requirements/</code>, <code>_specs/</code>, <code>_research/</code>, <code>_skills/</code>, <code>_templates/</code>, <code>_tools/</code>, <code>_philosophy/</code>, and <code>_archive/</code> are shared operational folders.</li>\n<li><code>.claude/</code>, <code>.cursor/</code>, and <code>.agents/</code> are runtime adapter folders. They are not projects and should contain only tool-specific rule entrypoints.</li>\n<li><code>_private/</code> and <code>outputs/</code> are local-only ignored folders. They are not durable sources of truth.</li>\n<li>Durable project artifacts belong under the owning project&#039;s <code>artifacts/</code>, not root <code>outputs/</code>.</li>\n</ul>\n<h2>Improvements Found</h2>\n<p>1. Existing rules generally treated underscore folders as reserved folders but did not explain local-only exceptions such as <code>_private/</code>.</p>\n<p>2. A root <code>outputs/</code> folder was ambiguous by name, even when empty, because it could be mistaken for a durable artifact location.</p>\n<p>3. Project boundary review was document-based and did not include a deterministic root-folder check.</p>\n<p>4. The desktop renderer showed history and project docs but did not include <code>_docs</code> and <code>_philosophy</code>, making structural rules less directly visible.</p>\n<p>5. The first audit pass focused on root folders and did not verify whether project-internal top-level folders were explained in the registry.</p>\n<h2>Applied Structure</h2>\n<ul>\n<li>Root folder classes are managed in <code>_ops/projects/root-structure-policy.json</code>.</li>\n<li>Root folder audit is handled by <code>_tools/structure-audit/</code>.</li>\n<li><code>.gitignore</code> explicitly excludes <code>_private/</code>, <code>outputs/</code>, build outputs, and TypeScript build metadata.</li>\n<li>The project boundary workflow treats local-only scratch and generated output as separate classifications.</li>\n<li><code>platform-desktop-app/renderer/workspace-monitor</code> collects <code>_docs</code> and <code>_philosophy</code> as document categories.</li>\n<li><code>structure-audit</code> now produces registered project top-level folder inventories and warns when durable folders are missing from <code>project_specific_home</code>.</li>\n<li>Patterns declared in <code>generated_output_dirs</code> must also be covered by <code>.gitignore</code>; missing coverage is treated as a gap.</li>\n<li>Runtime adapter folders must be registered in <code>_ops/projects/root-structure-policy.json</code> <code>runtime_adapter_dirs</code>.</li>\n<li>Runtime-specific meaning and setup are managed in <code>_ops/assistant-runtimes/adapter-registry.json</code>.</li>\n</ul>\n<h2>Do Not Do</h2>\n<ul>\n<li>Do not move or rename registered projects without a separate migration plan.</li>\n<li>Do not mass-move existing history, requirements, or evaluation files only to satisfy a new structure preference.</li>\n<li>Do not link <code>_private/</code> content as requirements, evaluation evidence, or knowledge-base material.</li>\n<li>Do not report root <code>outputs/</code> content as a final artifact.</li>\n</ul>\n<h2>Verification Commands</h2>\n<pre><code>\npython3 _tools/structure-audit/src/structure_audit.py --check\npython3 _tools/workspace-index/src/workspace_index.py\npython3 _tools/task-board/src/task_board.py\n</code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 3080,
-      "updatedAt": "2026-06-03T05:30:49.195Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "_docs/governance"
-    },
-    {
-      "id": "docs-governance-repository-structure-governance-ko-md",
-      "path": "_docs/governance/repository-structure-governance.ko.md",
-      "category": "workspace-doc",
-      "language": "ko",
-      "title": "저장소 구조 거버넌스",
-      "excerpt": "저장소 구조 거버넌스 목적 이 문서는 루트 폴더가 늘어날 때 프로젝트, 공통 운영 자산, 로컬 전용 scratch, 생성 산출물이 서로 섞이지 않게 하는 기준이다. 현재 판단 agent platform/ , presentation agent/ , platform desktop app/ 는 등록된 root project다. docs/ , ops/ , history/ , requirements/ , specs/ , research/ , skills/ , templates/ , tools/ , phil",
-      "html": "<h1>저장소 구조 거버넌스</h1>\n<h2>목적</h2>\n<p>이 문서는 루트 폴더가 늘어날 때 프로젝트, 공통 운영 자산, 로컬 전용 scratch, 생성 산출물이 서로 섞이지 않게 하는 기준이다.</p>\n<h2>현재 판단</h2>\n<ul>\n<li><code>agent-platform/</code>, <code>presentation-agent/</code>, <code>platform-desktop-app/</code>는 등록된 root project다.</li>\n<li><code>_docs/</code>, <code>_ops/</code>, <code>_history/</code>, <code>_requirements/</code>, <code>_specs/</code>, <code>_research/</code>, <code>_skills/</code>, <code>_templates/</code>, <code>_tools/</code>, <code>_philosophy/</code>, <code>_archive/</code>는 shared operational folder다.</li>\n<li><code>.claude/</code>, <code>.cursor/</code>, <code>.agents/</code>는 runtime adapter folder다. 프로젝트가 아니며 tool-specific rule entrypoint만 담는다.</li>\n<li><code>_private/</code>와 <code>outputs/</code>는 로컬 전용 ignored folder다. 이 둘은 durable source of truth가 아니다.</li>\n<li>프로젝트별 지속 산출물은 root <code>outputs/</code>가 아니라 owning project의 <code>artifacts/</code> 아래에 둔다.</li>\n</ul>\n<h2>발견한 개선점</h2>\n<p>1. 기존 규칙은 underscore folder를 대체로 reserved folder로 설명했지만, <code>_private/</code> 같은 로컬 전용 예외를 설명하지 않았다.</p>\n<p>2. root <code>outputs/</code>가 비어 있더라도 이름만으로는 durable artifact 위치인지 transient output인지 구분이 어려웠다.</p>\n<p>3. 프로젝트 경계 검토는 문서 중심이었고, root folder를 기계적으로 확인하는 deterministic check가 없었다.</p>\n<p>4. desktop renderer가 <code>_history</code>와 프로젝트 문서는 보여주지만 <code>_docs</code>와 <code>_philosophy</code> 같은 구조 규칙 문서를 snapshot에 포함하지 않아 전체 구조 파악이 덜 직접적이었다.</p>\n<p>5. 최초 감사는 root folder 중심이라 프로젝트 내부 top-level folder가 등록부에 설명되어 있는지 확인하지 못했다.</p>\n<h2>적용한 구조</h2>\n<ul>\n<li>root folder class를 <code>_ops/projects/root-structure-policy.json</code>에서 관리한다.</li>\n<li>root folder audit는 <code>_tools/structure-audit/</code>가 맡는다.</li>\n<li><code>.gitignore</code>는 <code>_private/</code>, <code>outputs/</code>, build output, TypeScript build metadata를 명시적으로 제외한다.</li>\n<li>프로젝트 경계 workflow는 local-only scratch와 generated output을 별도 분류로 다룬다.</li>\n<li><code>platform-desktop-app/renderer/workspace-monitor</code>는 <code>_docs</code>와 <code>_philosophy</code>를 문서 category로 수집한다.</li>\n<li><code>structure-audit</code>는 등록된 프로젝트의 top-level folder inventory를 생성하고, <code>project_specific_home</code>에 없는 durable folder를 warning으로 보고한다.</li>\n<li><code>generated_output_dirs</code>에 선언한 pattern은 <code>.gitignore</code>에도 반영되어야 하며, 누락되면 gap으로 처리한다.</li>\n<li>runtime adapter folder는 <code>_ops/projects/root-structure-policy.json</code>의 <code>runtime_adapter_dirs</code>에 등록되어야 한다.</li>\n<li>runtime adapter의 실제 도구별 의미는 <code>_ops/assistant-runtimes/adapter-registry.json</code>에서 관리한다.</li>\n</ul>\n<h2>변경 금지 기준</h2>\n<ul>\n<li>등록된 프로젝트를 옮기거나 이름을 바꾸는 구조 변경은 별도 migration plan 없이 하지 않는다.</li>\n<li>기존 히스토리, 요구사항, 평가 파일을 새 구조에 맞추기 위해 대량 이동하지 않는다.</li>\n<li><code>_private/</code> 내용은 요구사항, 평가, 근거, 지식 베이스에 연결하지 않는다.</li>\n<li>root <code>outputs/</code>에 남은 산출물을 최종 결과로 보고하지 않는다.</li>\n</ul>\n<h2>검증 명령</h2>\n<pre><code>\npython3 _tools/structure-audit/src/structure_audit.py --check\npython3 _tools/workspace-index/src/workspace_index.py\npython3 _tools/task-board/src/task_board.py\n</code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 3369,
-      "updatedAt": "2026-06-03T05:30:49.195Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "_docs/governance"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-docs-deployment-en-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/docs/deployment.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Vercel Deployment Guide",
-      "excerpt": "Vercel Deployment Guide Assumptions This renderer is primarily bundled into the installable desktop product. Only set up separate web deployment when a deployment review says it is needed. While the repository is private, local usage is the default. Before public deployment, revi",
-      "html": "<h1>Vercel Deployment Guide</h1>\n<h2>Assumptions</h2>\n<ul>\n<li>This renderer is primarily bundled into the installable desktop product.</li>\n<li>Only set up separate web deployment when a deployment review says it is needed.</li>\n<li>While the repository is private, local usage is the default.</li>\n<li>Before public deployment, review the generated snapshot.</li>\n</ul>\n<h2>Vercel Settings</h2>\n<table><thead><tr><th>Setting</th><th>Value</th></tr></thead><tbody><tr><td>Root Directory</td><td><code>platform-desktop-app/renderer/workspace-monitor</code></td></tr><tr><td>Framework Preset</td><td>Next.js</td></tr><tr><td>Install Command</td><td><code>pnpm install --frozen-lockfile</code></td></tr><tr><td>Build Command</td><td><code>pnpm run build</code></td></tr><tr><td>Output Directory</td><td>Next.js default</td></tr></tbody></table>\n<h2>Pre-Deploy Checklist</h2>\n<p>1. Run <code>pnpm run collect</code> to refresh the snapshot.</p>\n<p>2. Review <code>src/generated/workspace-snapshot.json</code> for information that should not be public.</p>\n<p>3. Run <code>pnpm test</code>, <code>pnpm run check</code>, and <code>pnpm run build</code>.</p>\n<p>4. Make the repository public or grant Vercel access to the private repository.</p>\n<p>5. Set the Vercel root directory to <code>platform-desktop-app/renderer/workspace-monitor</code> and deploy.</p>\n<h2>Operating Model</h2>\n<ul>\n<li>After meaningful work, run <code>pnpm run collect</code> and commit the updated snapshot.</li>\n<li>Vercel build also runs best-effort collection through <code>prebuild</code>.</li>\n<li>If Vercel cannot access the parent repository, the committed snapshot is still used for build.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1285,
-      "updatedAt": "2026-06-03T05:30:27.883Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-docs-deployment-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/docs/deployment.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "Vercel 배포 가이드",
-      "excerpt": "Vercel 배포 가이드 전제 이 renderer는 설치형 데스크톱 제품에 포함되는 것이 1차 경로다. 별도 웹 배포가 필요할 때만 platform desktop app/renderer/workspace monitor/ 를 Vercel root directory로 설정한다. 현재 repository가 private이면 로컬 사용을 우선한다. repository를 public으로 바꾼 뒤 배포할 때는 generated snapshot을 먼저 검토한다. Vercel 설정 | 항목 | 값 | | | |",
-      "html": "<h1>Vercel 배포 가이드</h1>\n<h2>전제</h2>\n<ul>\n<li>이 renderer는 설치형 데스크톱 제품에 포함되는 것이 1차 경로다.</li>\n<li>별도 웹 배포가 필요할 때만 <code>platform-desktop-app/renderer/workspace-monitor/</code>를 Vercel root directory로 설정한다.</li>\n<li>현재 repository가 private이면 로컬 사용을 우선한다.</li>\n<li>repository를 public으로 바꾼 뒤 배포할 때는 generated snapshot을 먼저 검토한다.</li>\n</ul>\n<h2>Vercel 설정</h2>\n<table><thead><tr><th>항목</th><th>값</th></tr></thead><tbody><tr><td>Root Directory</td><td><code>platform-desktop-app/renderer/workspace-monitor</code></td></tr><tr><td>Framework Preset</td><td>Next.js</td></tr><tr><td>Install Command</td><td><code>pnpm install --frozen-lockfile</code></td></tr><tr><td>Build Command</td><td><code>pnpm run build</code></td></tr><tr><td>Output Directory</td><td>Next.js 기본값</td></tr></tbody></table>\n<h2>배포 전 체크리스트</h2>\n<p>1. <code>pnpm run collect</code>로 snapshot을 최신화한다.</p>\n<p>2. <code>src/generated/workspace-snapshot.json</code>에 공개하면 안 되는 정보가 들어있는지 확인한다.</p>\n<p>3. <code>pnpm test</code>, <code>pnpm run check</code>, <code>pnpm run build</code>를 실행한다.</p>\n<p>4. repository를 public으로 전환하거나 Vercel에 private repository 접근 권한을 부여한다.</p>\n<p>5. Vercel에서 root directory를 <code>platform-desktop-app/renderer/workspace-monitor</code>로 설정하고 배포한다.</p>\n<h2>운영 방식</h2>\n<ul>\n<li>새 작업이 끝난 뒤 모니터에 반영하려면 <code>pnpm run collect</code>를 실행하고 snapshot을 commit한다.</li>\n<li>Vercel build에서도 <code>prebuild</code>가 best-effort로 collect를 실행한다.</li>\n<li>Vercel 환경에서 parent repository 접근이 제한되면 commit된 snapshot으로 build가 계속된다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1520,
-      "updatedAt": "2026-06-03T05:30:27.882Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -17794,14 +17794,10 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 33
+          "count": 34
         },
         {
           "category": "user-request",
-          "count": 12
-        },
-        {
-          "category": "web-search",
           "count": 12
         },
         {
@@ -17810,6 +17806,10 @@
         },
         {
           "category": "request-trace",
+          "count": 11
+        },
+        {
+          "category": "web-search",
           "count": 11
         },
         {
@@ -17833,7 +17833,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-          "updatedAt": "2026-06-05T18:53:41.666Z",
+          "updatedAt": "2026-06-05T19:12:42.318Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18037,23 +18037,43 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-selectable-default-settings-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-06-selectable-default-settings-evaluation-input.json",
+          "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-evaluation-input.json",
           "category": "evaluation",
           "language": "unknown",
-          "title": "2026 06 06 Selectable Default Settings Evaluation Input",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 selectable default settings.json\" , \"omission check targets\": \" history/omission checks/202",
-          "updatedAt": "2026-06-05T16:12:11.045Z",
+          "title": "2026 06 06 Public Release Updater Automation Evaluation Input",
+          "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"user request summary\": \" history/user requests/2026/2026 06 06 public release updater automation.ko.md\", \"requirements targets\": \"platform desktop app/docs/requirements/2026 06 06 public",
+          "updatedAt": "2026-06-05T19:12:29.833Z",
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-selectable-default-settings-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-selectable-default-settings.ko.md",
+          "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-omission-json",
+          "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-omission.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Public Release Updater Automation Omission",
+          "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"omission check targets\": \" history/omission checks/2026/2026 06 06 public release updater automation.json\" , \"result\": \"covered with external blockers\", \"notes\": \"Implementation covers p",
+          "updatedAt": "2026-06-05T19:12:10.576Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-resource-json",
+          "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-resource.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Public Release Updater Automation Resource",
+          "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"resource check targets\": \" history/resource checks/2026/2026 06 06 public release updater automation.json\" , \"resource risk occurred\": true, \"result\": \"secret boundary recorded\" }",
+          "updatedAt": "2026-06-05T19:12:17.395Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-public-release-updater-automation-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation.ko.md",
           "category": "evaluation",
           "language": "ko",
-          "title": "최종 평가",
-          "excerpt": "최종 평가 판정 요청한 핵심 변경은 완료됐다. 텍스트 기반 기본 설정은 선택 카드가 먼저 보이도록 바뀌었고, 직접 편집도 유지됐다. 구현 후 내부 패키징 빌드까지 완료했다. 검증 근거 렌더러 test/check 통과 데스크톱 앱 test/check 통과 package:internal 통과 Rust test/build 통과 codesign verify 통과 DMG verify 통과 git diff check 통과 제한 브라우저 스모크는 로컬 개발 서버에서 Loading workspace snapsh",
-          "updatedAt": "2026-06-05T16:12:11.045Z",
+          "title": "2026 06 06 평가: Public Release Updater Automation",
+          "excerpt": "2026 06 06 평가: Public Release Updater Automation 결과 public release updater automation lane을 구현했다. internal build path는 유지했고, public build path는 외부 signing/updater/notarization env가 없으면 실패하도록 만들었다. updater private key와 Apple credential은 repository에 쓰지 않는 구조로 구현했다. 검증 node scripts/",
+          "updatedAt": "2026-06-05T19:12:36.181Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18094,16 +18114,6 @@
           "title": "최종 평가: startup resident prewarm 속도 최적화",
           "excerpt": "최종 평가: startup resident prewarm 속도 최적화 결론 작업은 닫을 수 있다. 사용자 요구였던 속도 최적화, bounded memory/resource 사용, 자동 build/package 실행을 모두 수행했다. 결과 p95 section switch latency: 827.8ms에서 652.7ms로 개선. average section settle time: 430ms에서 482ms로 악화. max resident/mounted panel count: 5 유지. internal",
           "updatedAt": "2026-06-05T17:44:48.242Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-structure-performance-migration-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-structure-performance-migration.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: 구조/메모리/성능 마이그레이션",
-          "excerpt": "평가: 구조/메모리/성능 마이그레이션 판정 부분 충족이 아니라, 이번 범위는 충족. 다만 전체 구조의 근본 문제는 한 번의 slice로 끝나지 않는다. 지금 당장 효과가 큰 source snapshot payload와 editor input state churn은 개선했고, 더 큰 분해는 다음 migration으로 남겼다. 냉정한 결론 MonitorShell.tsx 13k lines는 유지보수와 렌더 성능 양쪽에서 좋지 않다. globals.css 16k lines는 스타일 소유권이 약하다. sr",
-          "updatedAt": "2026-06-05T15:59:02.047Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18277,13 +18287,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-selectable-default-settings-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-selectable-default-settings.ko.md",
+          "id": "history-request-traces-2026-2026-06-06-public-release-updater-automation-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-public-release-updater-automation.ko.md",
           "category": "request-trace",
           "language": "ko",
-          "title": "요청 결과 추적",
-          "excerpt": "요청 결과 추적 요청 기본 설정과 텍스트 설정을 사용자가 바로 선택할 수 있게 만들고, 구현 후 빌드까지 자동 실행한다. 결과 platform desktop app/docs/requirements/2026 06 06 selectable default settings.ko.md platform desktop app/specs/2026 06 06 selectable default settings/ platform desktop app/renderer/workspace monitor/components",
-          "updatedAt": "2026-06-05T16:12:11.044Z",
+          "title": "2026 06 06 Request Trace: Public Release Updater Automation",
+          "excerpt": "2026 06 06 Request Trace: Public Release Updater Automation 요청 사용자의 “다해” 후속 지시. 산출물 platform desktop app/scripts/public release config.mjs platform desktop app/scripts/public release build.mjs platform desktop app/scripts/create updater manifest.mjs platform desktop app/src tauri",
+          "updatedAt": "2026-06-05T19:11:39.446Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18367,6 +18377,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-user-requests-2026-2026-06-06-public-release-updater-automation-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-public-release-updater-automation.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "2026 06 06 사용자 요청 요약: Public Release Updater Automation",
+          "excerpt": "2026 06 06 사용자 요청 요약: Public Release Updater Automation 사용자는 이전 작업 후 남은 것도 모두 처리하라고 지시했다. 직전 완료 보고에서 public release blockers로 signing, notarization, updater, clean machine smoke가 남아 있었으므로, 외부 자격증명을 대신 만들 수 없는 부분을 제외하고 public release automation lane을 구현하는 작업으로 해석했다.",
+          "updatedAt": "2026-06-05T19:11:25.787Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-06-root-review-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-root-review.ko.md",
           "category": "user-request",
@@ -18374,16 +18394,6 @@
           "title": "사용자 요청 요약: 근본부터 재검토",
           "excerpt": "사용자 요청 요약: 근본부터 재검토 원 요청 사용자는 이전 속도 최적화 이후에도 “너의 근본적인 부분부터 다시 살펴봐”라고 요청했다. 해석 국소 탭 prewarm이나 버튼 조정만 반복하지 말고, 데스크톱 앱의 renderer/runtime 구조 자체를 재검토한다. 성능 병목이 React tree, JS bundle 평가, 데이터 payload, native runtime 중 어디에 남아 있는지 냉정하게 본다. 바로 검증 가능한 구조 개선을 구현하고, 빌드/패키징까지 자동으로 실행한다. 이번 수용 ",
           "updatedAt": "2026-06-05T17:55:21.492Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-06-selectable-default-settings-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-selectable-default-settings.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약",
-          "excerpt": "사용자 요청 요약 기본 설정과 실행 입력이 텍스트만으로 되어 있어 사용자가 어떤 값을 넣어야 할지 알기 어렵다. 텍스트 기반 설정도 여러 선택지를 먼저 제공하고, 사용자가 선택해서 바꿀 수 있게 해 달라는 요청이다.",
-          "updatedAt": "2026-06-05T16:12:11.044Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18447,16 +18457,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-button-tonal-hierarchy-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-button-tonal-hierarchy.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록",
-          "excerpt": "웹 검색 기록 쿼리 Apple Human Interface Guidelines buttons visual hierarchy controls macOS settings choices Material Design buttons elevation tonal buttons visual hierarchy choices WAI ARIA button listbox radio group selectable options visual state accessibility Nielsen Norman Group but",
-          "updatedAt": "2026-06-05T16:21:55.750Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-monitor-performance-guardrails-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-monitor-performance-guardrails.ko.md",
           "category": "web-search",
@@ -18507,13 +18507,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-selectable-default-settings-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-selectable-default-settings.ko.md",
+          "id": "history-web-searches-2026-2026-06-06-public-release-updater-automation-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-public-release-updater-automation.ko.md",
           "category": "web-search",
           "language": "ko",
-          "title": "웹 검색 기록",
-          "excerpt": "웹 검색 기록 쿼리 WAI ARIA radio group select listbox settings form user choices official Nielsen Norman Group form design dropdown radio buttons settings choices Apple Human Interface Guidelines settings controls radio buttons pickers macOS Material Design selection controls settings r",
-          "updatedAt": "2026-06-05T16:12:11.044Z",
+          "title": "2026 06 06 Web Search: Public Release Updater Automation",
+          "excerpt": "2026 06 06 Web Search: Public Release Updater Automation Query Tauri v2 official updater plugin signing key public key endpoints configuration docs Tauri v2 official macOS code signing notarization DMG Developer ID docs Apple official notarizing macOS software notarytool Develope",
+          "updatedAt": "2026-06-05T19:11:01.558Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18627,13 +18627,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-selectable-default-settings-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-selectable-default-settings.ko.md",
+          "id": "history-work-summaries-2026-2026-06-06-public-release-updater-automation-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-public-release-updater-automation.ko.md",
           "category": "work-summary",
           "language": "ko",
-          "title": "작업 요약",
-          "excerpt": "작업 요약 데스크톱 모니터의 텍스트 중심 기본 설정을 선택형 UI로 개선했다. 런타임 터미널 작업 폴더와 초기 입력에 선택 카드 추가 작업 파이프라인 요청에 프리셋 선택 카드 추가 검색 에이전트 제공자/모델 설정을 버튼형 선택으로 변경 모델 datalist 제거 선택 카드 CSS와 정적 테스트 추가 내부 패키징 빌드 완료",
-          "updatedAt": "2026-06-05T16:12:11.044Z",
+          "title": "2026 06 06 Work Summary: Public Release Updater Automation",
+          "excerpt": "2026 06 06 Work Summary: Public Release Updater Automation tauri plugin updater 를 Rust dependency로 추가하고 Tauri builder에 plugin init을 연결했다. public release env validation과 generated Tauri config script를 추가했다. desktop:package:public pipeline, public Tauri build runner, static updater",
+          "updatedAt": "2026-06-05T19:11:31.258Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18747,13 +18747,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-selectable-default-settings-json",
-          "path": "_history/work-timings/2026/2026-06-06-selectable-default-settings.json",
+          "id": "history-work-timings-2026-2026-06-06-public-release-updater-automation-json",
+          "path": "_history/work-timings/2026/2026-06-06-public-release-updater-automation.json",
           "category": "work-timing",
           "language": "unknown",
-          "title": "2026 06 06 Selectable Default Settings",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"phases\": { \"phase\": \"intake research and source review\", \"elapsed minutes estimate\": 12 }, { \"phase\": \"implementation\", \"elapsed minutes estimate\": 24 }, { \"phase\": \"tests and package build\", \"elapsed minutes estimate\": 10 }, { \"phase\": \"records and close",
-          "updatedAt": "2026-06-05T16:12:11.044Z",
+          "title": "2026 06 06 Public Release Updater Automation",
+          "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"phases\": { \"phase\": \"web first intake and local inventory\", \"elapsed\": \"short\" }, { \"phase\": \"implementation\", \"elapsed\": \"medium\" }, { \"phase\": \"validation\", \"elapsed\": \"medium\" }, { \"p",
+          "updatedAt": "2026-06-05T19:12:04.536Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18795,16 +18795,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2387,
+      "documents": 2396,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 970
+          "count": 974
         },
         {
           "category": "web-search",
-          "count": 381
+          "count": 382
         },
         {
           "category": "plan",
@@ -18812,19 +18812,19 @@
         },
         {
           "category": "request-trace",
-          "count": 309
+          "count": 310
         },
         {
           "category": "work-timing",
-          "count": 231
+          "count": 232
         },
         {
           "category": "user-request",
-          "count": 94
+          "count": 95
         },
         {
           "category": "work-summary",
-          "count": 61
+          "count": 62
         },
         {
           "category": "daily-history",
@@ -18835,7 +18835,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6255351,
+      "totalSourceBytes": 6264406,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18864,7 +18864,7 @@
       "decisionEvents": 0,
       "openSignals": 22,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T18:56:19.554Z",
+      "latestEventAt": "2026-06-05T19:12:42.318Z",
       "historyDays": 1
     },
     "lanes": [
@@ -18876,7 +18876,7 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 33
+        "count": 34
       },
       {
         "id": "delivery",
@@ -18884,14 +18884,14 @@
         "count": 12
       },
       {
-        "id": "evidence",
-        "label": "evidence",
-        "count": 12
-      },
-      {
         "id": "intake",
         "label": "intake",
         "count": 12
+      },
+      {
+        "id": "evidence",
+        "label": "evidence",
+        "count": 11
       },
       {
         "id": "monitoring",
@@ -18923,7 +18923,7 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 33
+        "count": 34
       },
       {
         "id": "intake",
@@ -18936,11 +18936,6 @@
         "count": 12
       },
       {
-        "id": "web-search",
-        "label": "web search",
-        "count": 12
-      },
-      {
         "id": "timing",
         "label": "timing",
         "count": 11
@@ -18948,6 +18943,11 @@
       {
         "id": "trace",
         "label": "trace",
+        "count": 11
+      },
+      {
+        "id": "web-search",
+        "label": "web search",
         "count": 11
       },
       {
@@ -18974,6 +18974,156 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-2026-2026-06-06-md",
+        "sourceType": "history",
+        "signalType": "history",
+        "lane": "history",
+        "severity": "info",
+        "status": "daily-history",
+        "title": "2026 06 06",
+        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
+        "path": "_history/2026/2026-06-06.md",
+        "category": "daily-history",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T19:12:42.318Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-public-release-updater-automation-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "needs_attention",
+        "title": "2026 06 06 평가: Public Release Updater Automation",
+        "detail": "2026 06 06 평가: Public Release Updater Automation 결과 public release updater automation lane을 구현했다. internal build path는 유지했고, public build path는 외부 signing/updater/notarization env가 없으면 실패하도록 만들었다. updater private key와 Apple credential은 repository에 쓰지 않는 구조로 구현했다. 검증 node scripts/",
+        "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T19:12:36.181Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-public-release-updater-automation-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 06 Public Release Updater Automation Evaluation Input",
+        "detail": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"user request summary\": \" history/user requests/2026/2026 06 06 public release updater automation.ko.md\", \"requirements targets\": \"platform desktop app/docs/requirements/2026 06 06 public",
+        "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T19:12:29.833Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-public-release-updater-automation-resource-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "evaluation",
+        "title": "2026 06 06 Public Release Updater Automation Resource",
+        "detail": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"resource check targets\": \" history/resource checks/2026/2026 06 06 public release updater automation.json\" , \"resource risk occurred\": true, \"result\": \"secret boundary recorded\" }",
+        "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-resource.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T19:12:17.395Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-public-release-updater-automation-omission-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 06 Public Release Updater Automation Omission",
+        "detail": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"omission check targets\": \" history/omission checks/2026/2026 06 06 public release updater automation.json\" , \"result\": \"covered with external blockers\", \"notes\": \"Implementation covers p",
+        "path": "_history/evaluations/2026/2026-06-06-public-release-updater-automation-omission.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T19:12:10.576Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-public-release-updater-automation-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Public Release Updater Automation",
+        "detail": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 public release updater automation\", \"phases\": { \"phase\": \"web first intake and local inventory\", \"elapsed\": \"short\" }, { \"phase\": \"implementation\", \"elapsed\": \"medium\" }, { \"phase\": \"validation\", \"elapsed\": \"medium\" }, { \"p",
+        "path": "_history/work-timings/2026/2026-06-06-public-release-updater-automation.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T19:12:04.536Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-public-release-updater-automation-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "2026 06 06 Request Trace: Public Release Updater Automation",
+        "detail": "2026 06 06 Request Trace: Public Release Updater Automation 요청 사용자의 “다해” 후속 지시. 산출물 platform desktop app/scripts/public release config.mjs platform desktop app/scripts/public release build.mjs platform desktop app/scripts/create updater manifest.mjs platform desktop app/src tauri",
+        "path": "_history/request-traces/2026/2026-06-06-public-release-updater-automation.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T19:11:39.446Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-public-release-updater-automation-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "2026 06 06 Work Summary: Public Release Updater Automation",
+        "detail": "2026 06 06 Work Summary: Public Release Updater Automation tauri plugin updater 를 Rust dependency로 추가하고 Tauri builder에 plugin init을 연결했다. public release env validation과 generated Tauri config script를 추가했다. desktop:package:public pipeline, public Tauri build runner, static updater",
+        "path": "_history/work-summaries/2026/2026-06-06-public-release-updater-automation.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T19:11:31.258Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-public-release-updater-automation-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "ready",
+        "title": "2026 06 06 사용자 요청 요약: Public Release Updater Automation",
+        "detail": "2026 06 06 사용자 요청 요약: Public Release Updater Automation 사용자는 이전 작업 후 남은 것도 모두 처리하라고 지시했다. 직전 완료 보고에서 public release blockers로 signing, notarization, updater, clean machine smoke가 남아 있었으므로, 외부 자격증명을 대신 만들 수 없는 부분을 제외하고 public release automation lane을 구현하는 작업으로 해석했다.",
+        "path": "_history/user-requests/2026/2026-06-06-public-release-updater-automation.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T19:11:25.787Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-public-release-updater-automation-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "2026 06 06 Web Search: Public Release Updater Automation",
+        "detail": "2026 06 06 Web Search: Public Release Updater Automation Query Tauri v2 official updater plugin signing key public key endpoints configuration docs Tauri v2 official macOS code signing notarization DMG Developer ID docs Apple official notarizing macOS software notarytool Develope",
+        "path": "_history/web-searches/2026/2026-06-06-public-release-updater-automation.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T19:11:01.558Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-06-native-resource-telemetry-json",
         "sourceType": "history",
@@ -19033,21 +19183,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T18:56:19.552Z"
-      },
-      {
-        "id": "history-history-2026-2026-06-06-md",
-        "sourceType": "history",
-        "signalType": "history",
-        "lane": "history",
-        "severity": "info",
-        "status": "daily-history",
-        "title": "2026 06 06",
-        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-        "path": "_history/2026/2026-06-06.md",
-        "category": "daily-history",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T18:53:41.666Z"
       },
       {
         "id": "history-history-evaluations-2026-2026-06-06-native-resource-telemetry-resource-json",
@@ -20265,21 +20400,6 @@
         "timestamp": "2026-06-05T16:21:55.751Z"
       },
       {
-        "id": "history-history-web-searches-2026-2026-06-06-button-tonal-hierarchy-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록",
-        "detail": "웹 검색 기록 쿼리 Apple Human Interface Guidelines buttons visual hierarchy controls macOS settings choices Material Design buttons elevation tonal buttons visual hierarchy choices WAI ARIA button listbox radio group selectable options visual state accessibility Nielsen Norman Group but",
-        "path": "_history/web-searches/2026/2026-06-06-button-tonal-hierarchy.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T16:21:55.750Z"
-      },
-      {
         "id": "history-history-user-requests-2026-2026-06-06-button-tonal-hierarchy-ko-md",
         "sourceType": "history",
         "signalType": "intake",
@@ -20293,126 +20413,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T16:21:55.750Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-selectable-default-settings-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "evaluation",
-        "title": "2026 06 06 Selectable Default Settings Evaluation Input",
-        "detail": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 selectable default settings.json\" , \"omission check targets\": \" history/omission checks/202",
-        "path": "_history/evaluations/2026/2026-06-06-selectable-default-settings-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T16:12:11.045Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-selectable-default-settings-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "최종 평가",
-        "detail": "최종 평가 판정 요청한 핵심 변경은 완료됐다. 텍스트 기반 기본 설정은 선택 카드가 먼저 보이도록 바뀌었고, 직접 편집도 유지됐다. 구현 후 내부 패키징 빌드까지 완료했다. 검증 근거 렌더러 test/check 통과 데스크톱 앱 test/check 통과 package:internal 통과 Rust test/build 통과 codesign verify 통과 DMG verify 통과 git diff check 통과 제한 브라우저 스모크는 로컬 개발 서버에서 Loading workspace snapsh",
-        "path": "_history/evaluations/2026/2026-06-06-selectable-default-settings.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T16:12:11.045Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-selectable-default-settings-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 06 Selectable Default Settings",
-        "detail": "{ \"date\": \"2026 06 06\", \"phases\": { \"phase\": \"intake research and source review\", \"elapsed minutes estimate\": 12 }, { \"phase\": \"implementation\", \"elapsed minutes estimate\": 24 }, { \"phase\": \"tests and package build\", \"elapsed minutes estimate\": 10 }, { \"phase\": \"records and close",
-        "path": "_history/work-timings/2026/2026-06-06-selectable-default-settings.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T16:12:11.044Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-selectable-default-settings-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적",
-        "detail": "요청 결과 추적 요청 기본 설정과 텍스트 설정을 사용자가 바로 선택할 수 있게 만들고, 구현 후 빌드까지 자동 실행한다. 결과 platform desktop app/docs/requirements/2026 06 06 selectable default settings.ko.md platform desktop app/specs/2026 06 06 selectable default settings/ platform desktop app/renderer/workspace monitor/components",
-        "path": "_history/request-traces/2026/2026-06-06-selectable-default-settings.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T16:12:11.044Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-selectable-default-settings-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록",
-        "detail": "웹 검색 기록 쿼리 WAI ARIA radio group select listbox settings form user choices official Nielsen Norman Group form design dropdown radio buttons settings choices Apple Human Interface Guidelines settings controls radio buttons pickers macOS Material Design selection controls settings r",
-        "path": "_history/web-searches/2026/2026-06-06-selectable-default-settings.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T16:12:11.044Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-selectable-default-settings-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약",
-        "detail": "사용자 요청 요약 기본 설정과 실행 입력이 텍스트만으로 되어 있어 사용자가 어떤 값을 넣어야 할지 알기 어렵다. 텍스트 기반 설정도 여러 선택지를 먼저 제공하고, 사용자가 선택해서 바꿀 수 있게 해 달라는 요청이다.",
-        "path": "_history/user-requests/2026/2026-06-06-selectable-default-settings.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T16:12:11.044Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-selectable-default-settings-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "작업 요약",
-        "detail": "작업 요약 데스크톱 모니터의 텍스트 중심 기본 설정을 선택형 UI로 개선했다. 런타임 터미널 작업 폴더와 초기 입력에 선택 카드 추가 작업 파이프라인 요청에 프리셋 선택 카드 추가 검색 에이전트 제공자/모델 설정을 버튼형 선택으로 변경 모델 datalist 제거 선택 카드 CSS와 정적 테스트 추가 내부 패키징 빌드 완료",
-        "path": "_history/work-summaries/2026/2026-06-06-selectable-default-settings.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T16:12:11.044Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-structure-performance-migration-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "평가: 구조/메모리/성능 마이그레이션",
-        "detail": "평가: 구조/메모리/성능 마이그레이션 판정 부분 충족이 아니라, 이번 범위는 충족. 다만 전체 구조의 근본 문제는 한 번의 slice로 끝나지 않는다. 지금 당장 효과가 큰 source snapshot payload와 editor input state churn은 개선했고, 더 큰 분해는 다음 migration으로 남겼다. 냉정한 결론 MonitorShell.tsx 13k lines는 유지보수와 렌더 성능 양쪽에서 좋지 않다. globals.css 16k lines는 스타일 소유권이 약하다. sr",
-        "path": "_history/evaluations/2026/2026-06-06-structure-performance-migration.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:59:02.047Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -22644,9 +22644,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 43411,
-      "lineCount": 1109,
-      "updatedAt": "2026-06-05T18:51:51.684Z",
+      "sizeBytes": 45293,
+      "lineCount": 1148,
+      "updatedAt": "2026-06-05T19:08:47.259Z",
       "truncated": true,
       "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { execFileSync } from \"node:child_process\";\n\nimport {\n  checkDesktopBuildPipeline,\n  desktopBuildPipelineRequiredFiles\n} from \"./readiness/desktop-build-pipeline.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nconst requiredFiles = [\n  \"README.md\",\n  \"README.ko.md\",\n  \"README.en.md\",\n  \"package.json\",\n  \"configs/desktop-distribution-registry.json\",\n  \"configs/product-feature-registry.json\",\n  \"configs/product-gap-registry.json\",\n  \"configs/claude-code-design-transfer-registry.json\",\n  \"configs/reference-platform-advantage-registry.json\",\n  \"configs/runtime-data-boundary-registry.json\",\n  \"configs/service-readiness-registry.json\",\n  \"configs/macos-execution-profile.json\",\n  \"configs/windows-execution-profile.json\",\n  \"configs/user-flow-registry.json\",\n  \"runtime-contracts/installer-shell-runtime-contract.json\",\n  \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n  \"runtime-contracts/installer-shell-bootstrap.en.md\",\n  \"renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx\",\n  \"renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx\",\n  \"rend",
       "previewBytes": 1200
@@ -22657,11 +22657,11 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 4807,
-      "lineCount": 117,
-      "updatedAt": "2026-06-03T05:26:03.481Z",
+      "sizeBytes": 6659,
+      "lineCount": 140,
+      "updatedAt": "2026-06-05T19:04:13.621Z",
       "truncated": true,
-      "preview": "import { execFileSync } from \"node:child_process\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport path from \"node:path\";\nimport { fileURLToPath } from \"node:url\";\n\nconst root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), \"..\");\n\nexport function checkReleaseReadiness({ mode = \"internal\", reportOnly = false } = {}) {\n  const blockers = [];\n  const warnings = [];\n  const checks = [];\n  const tauriConfig = readJson(path.join(root, \"src-tauri\", \"tauri.conf.json\"));\n  const macos = tauriConfig.bundle?.macOS || {};\n  const targets = tauriConfig.bundle?.targets || [];\n\n  requireCheck(checks, targets.includes(\"app\"), \"bundle target includes app\", blockers);\n  requireCheck(checks, targets.includes(\"dmg\"), \"bundle target includes dmg\", blockers);\n  requireCheck(checks, tauriConfig.build?.frontendDist === \"../renderer/workspace-monitor/out\", \"frontendDist points to customer audited renderer/workspace-monitor/out\", blockers);\n\n  if (mode === \"internal\") {\n    requireCheck(checks, macos.signingIdentity === \"-\", \"internal build uses explicit ad-hoc signing identity\", blockers);\n    requireCheck(checks, macos.hardenedRuntime === true, \"internal build enables hardenedRunt",
+      "preview": "import { execFileSync } from \"node:child_process\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport path from \"node:path\";\nimport { fileURLToPath } from \"node:url\";\n\nimport { buildPublicReleaseConfigReport } from \"./public-release-config.mjs\";\n\nconst root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), \"..\");\n\nexport function checkReleaseReadiness({ mode = \"internal\", reportOnly = false } = {}) {\n  const blockers = [];\n  const warnings = [];\n  const checks = [];\n  const tauriConfig = readJson(path.join(root, \"src-tauri\", \"tauri.conf.json\"));\n  const tauriCargo = readFileSync(path.join(root, \"src-tauri\", \"Cargo.toml\"), \"utf8\");\n  const tauriLib = readFileSync(path.join(root, \"src-tauri\", \"src\", \"lib.rs\"), \"utf8\");\n  const macos = tauriConfig.bundle?.macOS || {};\n  const targets = tauriConfig.bundle?.targets || [];\n\n  requireCheck(checks, targets.includes(\"app\"), \"bundle target includes app\", blockers);\n  requireCheck(checks, targets.includes(\"dmg\"), \"bundle target includes dmg\", blockers);\n  requireCheck(checks, tauriConfig.build?.frontendDist === \"../renderer/workspace-monitor/out\", \"frontendDist points to customer audited renderer/workspace-monitor/out\", blo",
       "previewBytes": 1200
     },
     {
@@ -22683,11 +22683,24 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 14435,
-      "lineCount": 223,
-      "updatedAt": "2026-06-05T18:51:08.569Z",
+      "sizeBytes": 15058,
+      "lineCount": 228,
+      "updatedAt": "2026-06-05T19:05:45.282Z",
       "truncated": true,
-      "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport path from \"node:path\";\nimport { fileURLToPath } from \"node:url\";\n\nimport { checkReleaseReadiness } from \"./check-release-readiness.mjs\";\n\nconst root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), \"..\");\n\nexport function checkServiceReadiness({ mode = \"internal\", reportOnly = false } = {}) {\n  const registry = readJson(\"configs/service-readiness-registry.json\");\n  const tauriConfig = readJson(\"src-tauri/tauri.conf.json\");\n  const pkg = readJson(\"package.json\");\n  const runtimeBoundary = readJson(\"configs/runtime-data-boundary-registry.json\");\n  const userFlow = readJson(\"configs/user-flow-registry.json\");\n  const releaseInternal = checkReleaseReadiness({ mode: \"internal\", reportOnly: true });\n  const releasePublic = checkReleaseReadiness({ mode: \"public\", reportOnly: true });\n  const serializedRuntimeBoundary = JSON.stringify(runtimeBoundary);\n  const serializedUserFlow = JSON.stringify(userFlow);\n  const serializedRegistry = JSON.stringify(registry);\n  const tauriLib = readText(\"src-tauri/src/lib.rs\");\n  const monitorShell = readText(\"renderer/workspace-monitor/components/MonitorShell.tsx\");\n  const agentBuild",
+      "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport path from \"node:path\";\nimport { fileURLToPath } from \"node:url\";\n\nimport { checkReleaseReadiness } from \"./check-release-readiness.mjs\";\n\nconst root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), \"..\");\n\nexport function checkServiceReadiness({ mode = \"internal\", reportOnly = false } = {}) {\n  const registry = readJson(\"configs/service-readiness-registry.json\");\n  const tauriConfig = readJson(\"src-tauri/tauri.conf.json\");\n  const pkg = readJson(\"package.json\");\n  const runtimeBoundary = readJson(\"configs/runtime-data-boundary-registry.json\");\n  const userFlow = readJson(\"configs/user-flow-registry.json\");\n  const releaseInternal = checkReleaseReadiness({ mode: \"internal\", reportOnly: true });\n  const releasePublic = checkReleaseReadiness({ mode: \"public\", reportOnly: true });\n  const serializedRuntimeBoundary = JSON.stringify(runtimeBoundary);\n  const serializedUserFlow = JSON.stringify(userFlow);\n  const serializedRegistry = JSON.stringify(registry);\n  const tauriCargo = readText(\"src-tauri/Cargo.toml\");\n  const tauriLib = readText(\"src-tauri/src/lib.rs\");\n  const monitorShell = readText(\"renderer/workspace-mo",
+      "previewBytes": 1200
+    },
+    {
+      "id": "platform-desktop-app-scripts-create-updater-manifest-mjs",
+      "path": "platform-desktop-app/scripts/create-updater-manifest.mjs",
+      "project": "platform-desktop-app",
+      "language": "javascript",
+      "extension": "mjs",
+      "sizeBytes": 3325,
+      "lineCount": 95,
+      "updatedAt": "2026-06-05T19:03:20.165Z",
+      "truncated": true,
+      "preview": "import { existsSync, mkdirSync, readFileSync, writeFileSync } from \"node:fs\";\nimport path from \"node:path\";\n\nimport { appendAssetUrl, parsePublicReleaseEnv, validatePublicReleaseEnv } from \"./public-release-config.mjs\";\nimport { tauriRoot } from \"./desktop-pipeline/paths.mjs\";\n\nconst appName = \"Agent Workspace Platform\";\nconst macosUpdaterBundle = path.join(\n  tauriRoot,\n  \"target/release/bundle/macos\",\n  `${appName}.app.tar.gz`\n);\nconst macosUpdaterSignature = `${macosUpdaterBundle}.sig`;\nconst defaultManifestPath = path.join(tauriRoot, \"target/release/bundle/latest.json\");\n\nexport function createUpdaterManifest({ env = process.env, outputPath = defaultManifestPath } = {}) {\n  const releaseEnv = parsePublicReleaseEnv(env);\n  const blockers = validatePublicReleaseEnv(releaseEnv).filter((blocker) => {\n    return blocker.includes(\"TAURI_RELEASE_ASSET_BASE_URL\") || blocker.includes(\"TAURI_UPDATER_PUBLIC_KEY\");\n  });\n  if (!releaseEnv.createStaticManifest) {\n    blockers.push(\"Static manifest generation is disabled by TAURI_CREATE_STATIC_UPDATE_MANIFEST=0.\");\n  }\n  if (!existsSync(macosUpdaterBundle)) {\n    blockers.push(`Missing macOS updater bundle: ${macosUpdaterBundle}`);\n  }\n  if ",
       "previewBytes": 1200
     },
     {
@@ -22696,9 +22709,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 8178,
-      "lineCount": 225,
-      "updatedAt": "2026-06-04T18:55:53.720Z",
+      "sizeBytes": 8301,
+      "lineCount": 229,
+      "updatedAt": "2026-06-05T19:04:18.849Z",
       "truncated": true,
       "preview": "import { spawnSync } from \"node:child_process\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport path from \"node:path\";\n\nimport { runCustomerBundleAudit } from \"./check-customer-bundle.mjs\";\nimport { checkReleaseReadiness } from \"./check-release-readiness.mjs\";\nimport { checkServiceReadiness } from \"./check-service-readiness.mjs\";\nimport { projectRoot, repoRoot, tauriRoot } from \"./desktop-pipeline/paths.mjs\";\n\nconst requiredFiles = [\n  \"package.json\",\n  \"src-tauri/tauri.conf.json\",\n  \"renderer/workspace-monitor/package.json\",\n  \"scripts/desktop-pipeline.mjs\",\n  \"scripts/desktop-pipeline/definitions.mjs\",\n  \"scripts/desktop-pipeline/runner.mjs\",\n  \"scripts/tauri-before-build-prepared.mjs\"\n];\n\nfunction main(argv = process.argv.slice(2)) {\n  const jsonOutput = argv.includes(\"--json\");\n  const report = buildDoctorReport();\n\n  if (jsonOutput) {\n    console.log(JSON.stringify(report, null, 2));\n  } else {\n    printHumanReport(report);\n  }\n\n  if (report.summary.failures > 0) {\n    process.exitCode = 1;\n  }\n}\n\nexport function buildDoctorReport() {\n  const checks = [\n    checkFile(\"Root pnpm lockfile\", path.join(repoRoot, \"pnpm-lock.yaml\")),\n    ...requiredFiles.map((relativePath",
       "previewBytes": 1200
@@ -22722,11 +22735,11 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 5009,
-      "lineCount": 147,
-      "updatedAt": "2026-06-04T18:47:23.123Z",
+      "sizeBytes": 6878,
+      "lineCount": 183,
+      "updatedAt": "2026-06-05T19:09:24.683Z",
       "truncated": true,
-      "preview": "import {\n  macosAppArtifact,\n  macosDmgArtifact,\n  preparedTauriBuildConfig,\n  repoRoot,\n  tauriRoot\n} from \"./paths.mjs\";\n\nexport function step(label, command, args, cwd, options = {}) {\n  return { label, command, args, cwd, ...options };\n}\n\nfunction pnpmWorkspaceStep(label, args, options = {}) {\n  return step(label, \"corepack\", [\"pnpm\", ...args], repoRoot, options);\n}\n\nfunction tauriPreparedBuildStep(label) {\n  return pnpmWorkspaceStep(label, [\n    \"--filter\",\n    \"platform-desktop-app\",\n    \"exec\",\n    \"tauri\",\n    \"build\",\n    \"--config\",\n    preparedTauriBuildConfig\n  ]);\n}\n\nconst setupSteps = [\n  pnpmWorkspaceStep(\"Install desktop workspace dependencies\", [\n    \"--filter\",\n    \"platform-desktop-app\",\n    \"--filter\",\n    \"workspace-monitor\",\n    \"install\",\n    \"--frozen-lockfile\"\n  ]),\n  pnpmWorkspaceStep(\"Install Workspace Monitor Playwright browser\", [\n    \"--filter\",\n    \"workspace-monitor\",\n    \"run\",\n    \"install:browsers\"\n  ])\n];\n\nconst quickVerifySteps = [\n  pnpmWorkspaceStep(\"Workspace Monitor type check\", [\"--filter\", \"workspace-monitor\", \"run\", \"check\"]),\n  pnpmWorkspaceStep(\"Workspace Monitor tests\", [\"--filter\", \"workspace-monitor\", \"test\"]),\n  pnpmWorkspaceStep(\"D",
+      "preview": "import {\n  macosAppArtifact,\n  macosDmgArtifact,\n  preparedTauriBuildConfig,\n  projectRoot,\n  repoRoot,\n  tauriRoot\n} from \"./paths.mjs\";\n\nexport function step(label, command, args, cwd, options = {}) {\n  return { label, command, args, cwd, ...options };\n}\n\nfunction pnpmWorkspaceStep(label, args, options = {}) {\n  return step(label, \"corepack\", [\"pnpm\", ...args], repoRoot, options);\n}\n\nfunction tauriPreparedBuildStep(label) {\n  return pnpmWorkspaceStep(label, [\n    \"--filter\",\n    \"platform-desktop-app\",\n    \"exec\",\n    \"tauri\",\n    \"build\",\n    \"--config\",\n    preparedTauriBuildConfig\n  ]);\n}\n\nconst setupSteps = [\n  pnpmWorkspaceStep(\"Install desktop workspace dependencies\", [\n    \"--filter\",\n    \"platform-desktop-app\",\n    \"--filter\",\n    \"workspace-monitor\",\n    \"install\",\n    \"--frozen-lockfile\"\n  ]),\n  pnpmWorkspaceStep(\"Install Workspace Monitor Playwright browser\", [\n    \"--filter\",\n    \"workspace-monitor\",\n    \"run\",\n    \"install:browsers\"\n  ])\n];\n\nconst quickVerifySteps = [\n  pnpmWorkspaceStep(\"Workspace Monitor type check\", [\"--filter\", \"workspace-monitor\", \"run\", \"check\"]),\n  pnpmWorkspaceStep(\"Workspace Monitor tests\", [\"--filter\", \"workspace-monitor\", \"test\"]),\n  pnpmW",
       "previewBytes": 1200
     },
     {
@@ -22756,16 +22769,42 @@
       "previewBytes": 1200
     },
     {
+      "id": "platform-desktop-app-scripts-public-release-build-mjs",
+      "path": "platform-desktop-app/scripts/public-release-build.mjs",
+      "project": "platform-desktop-app",
+      "language": "javascript",
+      "extension": "mjs",
+      "sizeBytes": 1751,
+      "lineCount": 63,
+      "updatedAt": "2026-06-05T19:03:30.103Z",
+      "truncated": true,
+      "preview": "import { spawnSync } from \"node:child_process\";\n\nimport { buildPublicReleaseConfigReport } from \"./public-release-config.mjs\";\nimport { repoRoot } from \"./desktop-pipeline/paths.mjs\";\n\nfunction main(argv = process.argv.slice(2)) {\n  const dryRun = argv.includes(\"--dry-run\");\n  const skipManifest = argv.includes(\"--skip-manifest\");\n  const configReport = buildPublicReleaseConfigReport({ writeFiles: !dryRun });\n  const printableReport = {\n    status: configReport.status,\n    blockers: configReport.blockers,\n    warnings: configReport.warnings,\n    configPath: configReport.configPath,\n    updateChannelMarkerPath: configReport.updateChannelMarkerPath,\n    envSummary: configReport.envSummary,\n    checks: configReport.checks\n  };\n\n  console.log(JSON.stringify(printableReport, null, 2));\n  if (configReport.blockers.length) {\n    process.exit(1);\n  }\n  if (dryRun) {\n    console.log(\"[public-release-build] dry run complete; no Tauri build was started.\");\n    return;\n  }\n\n  run(\"corepack\", [\n    \"pnpm\",\n    \"--filter\",\n    \"platform-desktop-app\",\n    \"exec\",\n    \"tauri\",\n    \"build\",\n    \"--config\",\n    JSON.stringify(configReport.config)\n  ]);\n\n  if (!skipManifest && configReport.envSummary",
+      "previewBytes": 1200
+    },
+    {
+      "id": "platform-desktop-app-scripts-public-release-config-mjs",
+      "path": "platform-desktop-app/scripts/public-release-config.mjs",
+      "project": "platform-desktop-app",
+      "language": "javascript",
+      "extension": "mjs",
+      "sizeBytes": 11979,
+      "lineCount": 312,
+      "updatedAt": "2026-06-05T19:03:05.921Z",
+      "truncated": true,
+      "preview": "import { createHash } from \"node:crypto\";\nimport { existsSync, mkdirSync, readFileSync, writeFileSync } from \"node:fs\";\nimport path from \"node:path\";\n\nimport { projectRoot, tauriRoot } from \"./desktop-pipeline/paths.mjs\";\n\nexport const publicReleaseTargetDir = path.join(tauriRoot, \"target\", \"public-release\");\nexport const publicTauriConfigPath = path.join(publicReleaseTargetDir, \"tauri.public.generated.json\");\nexport const publicUpdateChannelMarkerPath = path.join(publicReleaseTargetDir, \"service-update-channel.json\");\n\nexport function buildPublicReleaseConfigReport({ env = process.env, writeFiles = false } = {}) {\n  const baseConfig = readJson(path.join(tauriRoot, \"tauri.conf.json\"));\n  const releaseEnv = parsePublicReleaseEnv(env);\n  const blockers = validatePublicReleaseEnv(releaseEnv);\n  const warnings = [];\n\n  if (releaseEnv.updaterEndpoints.length > 1) {\n    warnings.push(\"Multiple updater endpoints are configured. Tauri will try later endpoints only after non-2XX responses.\");\n  }\n\n  const marker = buildUpdateChannelMarker(releaseEnv);\n  const config = buildPublicTauriConfig(baseConfig, releaseEnv);\n\n  if (writeFiles && blockers.length === 0) {\n    mkdirSync(publicReleaseTar",
+      "previewBytes": 1200
+    },
+    {
       "id": "platform-desktop-app-scripts-readiness-desktop-build-pipeline-mjs",
       "path": "platform-desktop-app/scripts/readiness/desktop-build-pipeline.mjs",
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 6223,
-      "lineCount": 140,
-      "updatedAt": "2026-06-04T18:47:46.412Z",
+      "sizeBytes": 6569,
+      "lineCount": 148,
+      "updatedAt": "2026-06-05T19:04:28.739Z",
       "truncated": true,
-      "preview": "import { readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\n\nexport const desktopBuildPipelineRequiredFiles = [\n  \"scripts/desktop-pipeline.mjs\",\n  \"scripts/desktop-pipeline/paths.mjs\",\n  \"scripts/desktop-pipeline/definitions.mjs\",\n  \"scripts/desktop-pipeline/runner.mjs\",\n  \"scripts/tauri-before-build-prepared.mjs\",\n  \"scripts/desktop-doctor.mjs\"\n];\n\nexport function checkDesktopBuildPipeline({ root, readJson }) {\n  const failures = [];\n  const pkg = readJson(\"package.json\");\n  const rootPkg = readJson(\"../package.json\");\n  const workspaceMonitorPkg = readJson(\"renderer/workspace-monitor/package.json\");\n\n  requireScripts(pkg, [\"check\", \"test\", \"verify\", \"tauri:dev\", \"tauri:build\"], \"package.json\", failures);\n  requireScripts(pkg, [\"runtime:contract\"], \"package.json\", failures);\n  requireScripts(pkg, [\"setup\", \"verify:quick\", \"package:internal\", \"deploy:public:report\", \"pipeline:dry-run\"], \"package.json\", failures);\n  requireScripts(pkg, [\"customer-bundle:audit\", \"release:preflight\", \"release:preflight:public\", \"release:preflight:public:report\"], \"package.json\", failures);\n  requireScripts(pkg, [\"service:readiness\", \"service:readiness:public:report\"], \"package.json\", fa",
+      "preview": "import { readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\n\nexport const desktopBuildPipelineRequiredFiles = [\n  \"scripts/desktop-pipeline.mjs\",\n  \"scripts/desktop-pipeline/paths.mjs\",\n  \"scripts/desktop-pipeline/definitions.mjs\",\n  \"scripts/desktop-pipeline/runner.mjs\",\n  \"scripts/tauri-before-build-prepared.mjs\",\n  \"scripts/public-release-config.mjs\",\n  \"scripts/public-release-build.mjs\",\n  \"scripts/create-updater-manifest.mjs\",\n  \"scripts/desktop-doctor.mjs\"\n];\n\nexport function checkDesktopBuildPipeline({ root, readJson }) {\n  const failures = [];\n  const pkg = readJson(\"package.json\");\n  const rootPkg = readJson(\"../package.json\");\n  const workspaceMonitorPkg = readJson(\"renderer/workspace-monitor/package.json\");\n\n  requireScripts(pkg, [\"check\", \"test\", \"verify\", \"tauri:dev\", \"tauri:build\"], \"package.json\", failures);\n  requireScripts(pkg, [\"runtime:contract\"], \"package.json\", failures);\n  requireScripts(pkg, [\"setup\", \"verify:quick\", \"package:internal\", \"package:public\", \"deploy:public:report\", \"pipeline:dry-run\"], \"package.json\", failures);\n  requireScripts(pkg, [\"customer-bundle:audit\", \"release:preflight\", \"release:preflight:public\", \"release:preflight:public",
       "previewBytes": 1200
     },
     {
@@ -22813,12 +22852,12 @@
       "project": "platform-desktop-app",
       "language": "toml",
       "extension": "toml",
-      "sizeBytes": 688,
-      "lineCount": 24,
-      "updatedAt": "2026-06-05T16:57:37.935Z",
+      "sizeBytes": 715,
+      "lineCount": 25,
+      "updatedAt": "2026-06-05T19:00:42.508Z",
       "truncated": false,
-      "preview": "[package]\nname = \"agent-workspace-platform-desktop\"\nversion = \"0.1.0\"\ndescription = \"Desktop shell for the personal agent-building platform\"\nauthors = [\"Personal Agent Platform\"]\nedition = \"2021\"\n\n[lib]\nname = \"agent_workspace_platform_desktop_lib\"\ncrate-type = [\"staticlib\", \"cdylib\", \"rlib\"]\n\n[build-dependencies]\ntauri-build = { version = \"2\", features = [] }\n\n[dependencies]\ntauri = { version = \"2\", features = [] }\nserde = { version = \"1\", features = [\"derive\"] }\nserde_json = \"1\"\nreqwest = { version = \"0.13.4\", features = [\"json\"] }\ntauri-plugin-dialog = \"2\"\nrayon = \"1.12.0\"\nsysinfo = { version = \"0.39.3\", default-features = false, features = [\"system\"] }\nportable-pty = \"0.9.0\"\n",
-      "previewBytes": 688
+      "preview": "[package]\nname = \"agent-workspace-platform-desktop\"\nversion = \"0.1.0\"\ndescription = \"Desktop shell for the personal agent-building platform\"\nauthors = [\"Personal Agent Platform\"]\nedition = \"2021\"\n\n[lib]\nname = \"agent_workspace_platform_desktop_lib\"\ncrate-type = [\"staticlib\", \"cdylib\", \"rlib\"]\n\n[build-dependencies]\ntauri-build = { version = \"2\", features = [] }\n\n[dependencies]\ntauri = { version = \"2\", features = [] }\nserde = { version = \"1\", features = [\"derive\"] }\nserde_json = \"1\"\nreqwest = { version = \"0.13.4\", features = [\"json\"] }\ntauri-plugin-dialog = \"2\"\nrayon = \"1.12.0\"\nsysinfo = { version = \"0.39.3\", default-features = false, features = [\"system\"] }\nportable-pty = \"0.9.0\"\ntauri-plugin-updater = \"2\"\n",
+      "previewBytes": 715
     },
     {
       "id": "platform-desktop-app-src-tauri-src-main-rs",
@@ -22839,9 +22878,9 @@
       "project": "platform-desktop-app",
       "language": "json",
       "extension": "json",
-      "sizeBytes": 1856,
-      "lineCount": 62,
-      "updatedAt": "2026-06-04T18:31:34.256Z",
+      "sizeBytes": 1900,
+      "lineCount": 63,
+      "updatedAt": "2026-06-05T19:08:37.173Z",
       "truncated": true,
       "preview": "{\n  \"$schema\": \"https://schema.tauri.app/config/2\",\n  \"productName\": \"Agent Workspace Platform\",\n  \"version\": \"0.1.0\",\n  \"identifier\": \"com.personalagentplatform.desktop\",\n  \"build\": {\n    \"beforeBuildCommand\": \"corepack pnpm run renderer:build\",\n    \"beforeDevCommand\": \"corepack pnpm --dir ../renderer/workspace-monitor run dev\",\n    \"devUrl\": \"http://localhost:3000\",\n    \"frontendDist\": \"../renderer/workspace-monitor/out\"\n  },\n  \"app\": {\n    \"withGlobalTauri\": true,\n    \"windows\": [\n      {\n        \"label\": \"main\",\n        \"title\": \"Agent Workspace Platform\",\n        \"width\": 1280,\n        \"height\": 840,\n        \"minWidth\": 1024,\n        \"minHeight\": 720,\n        \"resizable\": true,\n        \"fullscreen\": false\n      }\n    ],\n    \"security\": {\n      \"csp\": null\n    }\n  },\n  \"bundle\": {\n    \"active\": true,\n    \"targets\": [\n      \"app\",\n      \"dmg\",\n      \"msi\",\n      \"nsis\"\n    ],\n    \"resources\": {\n      \"../runtime-contracts/installer-shell-runtime-contract.json\": \"runtime-contracts/installer-shell-runtime-contract.json\",\n      \"../runtime-contracts/installer-shell-bootstrap.ko.md\": \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n      \"../runtime-contracts/installer-shell-boo",
       "previewBytes": 1200
@@ -22878,9 +22917,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 47662,
-      "lineCount": 1096,
-      "updatedAt": "2026-06-05T18:51:57.442Z",
+      "sizeBytes": 49101,
+      "lineCount": 1115,
+      "updatedAt": "2026-06-05T19:08:41.578Z",
       "truncated": true,
       "preview": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/paths.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/definitions.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/runner.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts",
       "previewBytes": 1200
@@ -23211,7 +23250,7 @@
         "id": "governance",
         "path": "_docs/governance",
         "purpose": "Cross-cutting governance for repository structure and capability promotion.",
-        "documentsCount": 4,
+        "documentsCount": 0,
         "requiredDocumentsCount": 7
       }
     ],
@@ -23358,7 +23397,7 @@
       {
         "category": "web-search",
         "root": "_history/web-searches",
-        "documentsCount": 12
+        "documentsCount": 11
       },
       {
         "category": "work-timing",
@@ -23373,7 +23412,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 33
+        "documentsCount": 34
       },
       {
         "category": "daily-history",
@@ -23417,7 +23456,7 @@
           "transient tool output"
         ],
         "uiEntry": "Overview, History, Documents, Requirements",
-        "documentCount": 133,
+        "documentCount": 129,
         "sourceFileCount": 0
       },
       {
@@ -23467,7 +23506,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 70,
+        "documentCount": 71,
         "sourceFileCount": 5
       },
       {
@@ -23599,7 +23638,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-src-tauri-src-lib-rs",
         "label": "Large source surface",
-        "signal": "10,166 lines in platform-desktop-app/src-tauri/src/lib.rs",
+        "signal": "10,172 lines in platform-desktop-app/src-tauri/src/lib.rs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits.",
         "priority": "high",
@@ -23608,7 +23647,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-scripts-check-readiness-mjs",
         "label": "Large source surface",
-        "signal": "1,109 lines in platform-desktop-app/scripts/check-readiness.mjs",
+        "signal": "1,148 lines in platform-desktop-app/scripts/check-readiness.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23617,7 +23656,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,096 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,115 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23647,24 +23686,24 @@
         "path": "platform-desktop-app/src-tauri/src/lib.rs",
         "project": "platform-desktop-app",
         "language": "rust",
-        "lineCount": 10166,
-        "sizeBytes": 339351,
+        "lineCount": 10172,
+        "sizeBytes": 339595,
         "recommendation": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits."
       },
       {
         "path": "platform-desktop-app/scripts/check-readiness.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1109,
-        "sizeBytes": 43411,
+        "lineCount": 1148,
+        "sizeBytes": 45293,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1096,
-        "sizeBytes": 47662,
+        "lineCount": 1115,
+        "sizeBytes": 49101,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       }
     ]

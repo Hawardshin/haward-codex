@@ -18,6 +18,7 @@ Run these from the repository root.
 | Quick setup/build diagnosis | `corepack pnpm run desktop:doctor` |
 | Build local/internal `.app` and DMG | `corepack pnpm run desktop:package:internal` |
 | Check public release gates in report-only mode | `corepack pnpm run desktop:release:report` |
+| Build public signed updater artifacts | `corepack pnpm run desktop:package:public` |
 | Preview the command sequence | `corepack pnpm --filter platform-desktop-app run pipeline:dry-run` |
 
 ## Internal Test Build
@@ -54,11 +55,26 @@ Public distribution is ready only after these gates actually pass:
 
 - Developer ID or equivalent OS signing identity.
 - macOS hardened runtime, notarization, and stapling when applicable.
+- `src-tauri/Entitlements.plist` explicitly records public distribution entitlements and is referenced by the Tauri config.
 - Windows code signing and SmartScreen handling.
 - Signed updater channel and update rollback plan.
 - Clean-machine install/open/update/uninstall smoke tests.
 - Privacy, dependency, and license review.
 - Installer payload review proving tokens, webhook URLs, browser cookies, `_private/` content, and platform source payloads are not bundled.
+
+`desktop:package:public` requires these environment variables.
+
+| Scope | Environment variables |
+| --- | --- |
+| macOS signing | `APPLE_SIGNING_IDENTITY` or `APPLE_CERTIFICATE` + `APPLE_CERTIFICATE_PASSWORD` |
+| notarization | `APPLE_ID` + `APPLE_PASSWORD` + `APPLE_TEAM_ID` or `APPLE_API_KEY` + `APPLE_API_ISSUER` + `APPLE_API_KEY_PATH` |
+| updater verification | `TAURI_UPDATER_PUBLIC_KEY` |
+| updater signing | `TAURI_SIGNING_PRIVATE_KEY`, optional `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` |
+| updater endpoint | `TAURI_UPDATER_ENDPOINTS` |
+| static manifest asset URL | `TAURI_RELEASE_ASSET_BASE_URL` |
+| release notes | optional `TAURI_RELEASE_NOTES` |
+
+The public build generates temporary `src-tauri/target/public-release/tauri.public.generated.json` and `service-update-channel.json` files. They contain only public key hash, endpoint, and signing identity presence metadata; the private updater key and Apple credentials are never written. After the build, Tauri updater artifacts `.app.tar.gz`, `.sig`, and static `latest.json` are produced under `src-tauri/target/release/bundle/`.
 
 ## External References
 
@@ -72,6 +88,7 @@ Public distribution is ready only after these gates actually pass:
 - If `workspace-monitor` build fails, inspect TypeScript, snapshot, and customer boundary state under `platform-desktop-app/renderer/workspace-monitor/`.
 - If `check-customer-bundle` fails, internal source/path/private content is leaking into the customer snapshot or `out/`.
 - If `release:public:report` is blocked, public signing/notarization/updater/clean-machine gates are still open. That is expected until the release assets are ready.
+- If `package:public` fails on environment blockers, set the variables above first. `.env` files alone do not work for the updater signing private key.
 - If `cargo` fails, inspect Rust toolchain and Tauri compile errors from `platform-desktop-app/src-tauri/`.
 
 ## Prohibited

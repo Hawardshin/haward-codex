@@ -58,6 +58,12 @@ To check public distribution readiness in report-only mode:
 corepack pnpm run desktop:release:report
 ```
 
+To build public artifacts after signing, updater, and notarization environment variables are configured:
+
+```bash
+corepack pnpm run desktop:package:public
+```
+
 To preview the command sequence without running it:
 
 ```bash
@@ -83,12 +89,17 @@ corepack pnpm --filter platform-desktop-app run pipeline:dry-run
 
 `desktop:package:internal` runs `desktop:verify`, then Rust build, prepared-renderer Tauri build, macOS `codesign` verification, and DMG `hdiutil verify`. Direct Tauri builds (`corepack pnpm --filter platform-desktop-app run tauri:build`) still run the renderer build first, but the packaging pipeline reuses the already audited renderer output to avoid a duplicate Next.js build.
 
+`desktop:package:public` runs `desktop:verify` and public preflight, then creates a temporary public Tauri config from `TAURI_UPDATER_PUBLIC_KEY`, `TAURI_SIGNING_PRIVATE_KEY`, `TAURI_UPDATER_ENDPOINTS`, `TAURI_RELEASE_ASSET_BASE_URL`, and Apple signing/notarization environment variables. It builds signed updater artifacts and a static `latest.json` manifest without writing the private updater key or Apple credentials into the repository.
+
 ## Build Pipeline Structure
 
 - `scripts/desktop-pipeline.mjs`: CLI entrypoint
 - `scripts/desktop-pipeline/paths.mjs`: repository, Tauri, artifact, and prepared build config paths
 - `scripts/desktop-pipeline/definitions.mjs`: setup, quick verify, full verify, package, and public report step definitions
 - `scripts/desktop-pipeline/runner.mjs`: dry-run handling, platform skips, subprocess execution, and failure handling
+- `scripts/public-release-config.mjs`: public signing/updater environment validation and generated Tauri config
+- `scripts/public-release-build.mjs`: public Tauri build runner
+- `scripts/create-updater-manifest.mjs`: static updater `latest.json` generator
 
 Internal build artifacts are expected at:
 
@@ -110,8 +121,9 @@ Public distribution remains blocked until these gates pass:
 
 - Developer ID or equivalent OS signing
 - macOS notarization and stapling when applicable
+- macOS entitlements file wiring
 - Windows code signing / SmartScreen handling
-- signed updater channel
+- signed updater channel: `TAURI_UPDATER_PUBLIC_KEY`, `TAURI_SIGNING_PRIVATE_KEY`, `TAURI_UPDATER_ENDPOINTS`
 - clean-machine install/open/update/uninstall smoke tests
 - privacy/dependency/license review
 

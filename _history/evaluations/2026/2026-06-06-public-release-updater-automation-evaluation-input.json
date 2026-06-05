@@ -1,0 +1,51 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-public-release-updater-automation",
+  "user_request_summary": "_history/user-requests/2026/2026-06-06-public-release-updater-automation.ko.md",
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-06-public-release-updater-automation.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-06-public-release-updater-automation/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-06-public-release-updater-automation/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-06-public-release-updater-automation/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-06-public-release-updater-automation/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-06-public-release-updater-automation/traceability.ko.md"
+  ],
+  "web_search_targets": [
+    "_history/web-searches/2026/2026-06-06-public-release-updater-automation.ko.md"
+  ],
+  "coding_research_targets": [
+    "_history/coding-research/2026/2026-06-06-public-release-updater-automation.json"
+  ],
+  "installation_occurred": true,
+  "installation_record_targets": [
+    "_history/installations/2026/2026-06-06-tauri-updater-plugin.ko.md",
+    "_ops/installations/registry.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-06-public-release-updater-automation.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-06-public-release-updater-automation.json"
+  ],
+  "validation_commands": [
+    "node scripts/public-release-config.mjs --report-only",
+    "fake non-secret public env node scripts/public-release-config.mjs --report-only",
+    "corepack pnpm --filter platform-desktop-app run release:preflight:public:report",
+    "cargo check",
+    "corepack pnpm --filter platform-desktop-app test",
+    "corepack pnpm --filter platform-desktop-app run check",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/installations/registry.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/service-readiness-registry.json",
+    "corepack pnpm --filter platform-desktop-app run package:internal",
+    "JSON parse check"
+  ],
+  "external_blockers": [
+    "Apple Developer signing identity/certificate",
+    "Apple notarization credentials",
+    "Tauri updater private/public key and HTTPS update endpoint",
+    "clean-machine install/open/update smoke"
+  ]
+}

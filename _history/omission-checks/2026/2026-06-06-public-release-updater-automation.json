@@ -1,0 +1,33 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-public-release-updater-automation",
+  "checked_at": "2026-06-06",
+  "requested_outcome": "Finish remaining public release automation work after native desktop performance/resource work.",
+  "coverage": [
+    {
+      "item": "web-first intake",
+      "status": "covered",
+      "evidence": "_history/web-searches/2026/2026-06-06-public-release-updater-automation.ko.md"
+    },
+    {
+      "item": "dependency installation audit",
+      "status": "covered",
+      "evidence": "_history/installations/2026/2026-06-06-tauri-updater-plugin.ko.md"
+    },
+    {
+      "item": "public updater automation",
+      "status": "covered",
+      "evidence": "platform-desktop-app/scripts/public-release-build.mjs"
+    },
+    {
+      "item": "secret boundary",
+      "status": "covered",
+      "evidence": "platform-desktop-app/scripts/public-release-config.mjs"
+    },
+    {
+      "item": "external credential blockers",
+      "status": "explicitly_deferred",
+      "evidence": "platform-desktop-app/specs/2026-06-06-public-release-updater-automation/validation.ko.md"
+    }
+  ]
+}

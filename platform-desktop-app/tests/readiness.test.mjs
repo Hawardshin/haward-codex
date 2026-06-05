@@ -30,6 +30,8 @@ test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(config.build.frontendDist, "../renderer/workspace-monitor/out");
   assert.equal(config.app.withGlobalTauri, true);
   assert.equal(config.bundle.macOS.hardenedRuntime, true);
+  assert.equal(config.bundle.macOS.entitlements, "Entitlements.plist");
+  assert.equal(existsSync(join(root, "src-tauri/Entitlements.plist")), true);
   assert.equal(config.bundle.resources["../runtime-contracts/installer-shell-runtime-contract.json"], "runtime-contracts/installer-shell-runtime-contract.json");
 });
 
@@ -60,18 +62,20 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
     "desktop:verify",
     "desktop:renderer:build",
     "desktop:package:internal",
+    "desktop:package:public",
     "desktop:release:report",
     "desktop:doctor"
   ]) {
     assert.ok(rootPkg.scripts[scriptName]);
   }
-  for (const scriptName of ["doctor", "setup", "verify:quick", "verify", "package:internal", "deploy:public:report", "pipeline:dry-run"]) {
+  for (const scriptName of ["doctor", "setup", "verify:quick", "verify", "package:internal", "package:public", "deploy:public:report", "pipeline:dry-run"]) {
     assert.ok(pkg.scripts[scriptName]);
   }
   for (const command of [
     "corepack pnpm run desktop:setup:verify",
     "corepack pnpm run desktop:verify",
     "corepack pnpm run desktop:package:internal",
+    "corepack pnpm run desktop:package:public",
     "corepack pnpm run desktop:release:report",
     "corepack pnpm run desktop:doctor"
   ]) {
@@ -86,7 +90,7 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
   assert.match(buildPipelineReadiness, /checkDesktopBuildPipeline/);
   assert.match(buildPipelineReadiness, /desktopBuildPipelineRequiredFiles/);
   assert.match(buildPipelineReadiness, /desktop:doctor/);
-  for (const token of ["package-internal", "public-report", "commonVerifySteps", "Tauri internal package build", "codesign", "hdiutil"]) {
+  for (const token of ["package-internal", "package-public", "public-report", "commonVerifySteps", "Tauri internal package build", "Tauri public package build", "create-updater-manifest", "codesign", "hdiutil"]) {
     assert.match(pipelineStructure, new RegExp(token));
   }
   assert.match(releaseKo, /Developer ID/);
@@ -390,9 +394,12 @@ test("installer shell runtime contract is bundled and enforceable", () => {
     assert.ok(contract.runtime_command_surface.workspace_host_commands.includes(workspaceHostCommand));
   }
   assert.match(cargoToml, /tauri-plugin-dialog/);
+  assert.match(cargoToml, /tauri-plugin-updater/);
   assert.match(defaultCapability, /dialog:default/);
   assert.match(lib, /DialogExt/);
   assert.match(lib, /tauri_plugin_dialog::init/);
+  assert.match(lib, /tauri_plugin_updater::Builder/);
+  assert.match(lib, /service-update-channel\.json/);
   assert.match(lib, /blocking_pick_folder/);
   assert.match(lib, /WorkspaceResourceWarmupReport/);
   assert.match(lib, /start_background_warmup/);
@@ -565,8 +572,20 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   for (const scriptToken of ["auditCustomerSnapshot", "scanCustomerDist", "customer_bundle_ready", "MAX_DIST_SCAN_FILES"]) {
     assert.match(customerBundleCheck, new RegExp(scriptToken));
   }
-  for (const scriptToken of ["checkReleaseReadiness", "public_release_blocked", "hardenedRuntime", "notarization"]) {
+  for (const scriptToken of ["checkReleaseReadiness", "public_release_blocked", "hardenedRuntime", "notarization", "TAURI_SIGNING_PRIVATE_KEY", "TAURI_UPDATER_PUBLIC_KEY"]) {
     assert.match(releaseReadinessCheck, new RegExp(scriptToken));
+  }
+  const publicReleaseConfig = readFileSync(join(root, "scripts/public-release-config.mjs"), "utf8");
+  const publicReleaseBuild = readFileSync(join(root, "scripts/public-release-build.mjs"), "utf8");
+  const updaterManifest = readFileSync(join(root, "scripts/create-updater-manifest.mjs"), "utf8");
+  for (const scriptToken of ["createUpdaterArtifacts", "TAURI_UPDATER_ENDPOINTS", "TAURI_RELEASE_ASSET_BASE_URL", "service-update-channel.json", "TAURI_SIGNING_PRIVATE_KEY"]) {
+    assert.match(publicReleaseConfig, new RegExp(scriptToken));
+  }
+  for (const scriptToken of ["tauri", "build", "--config", "create-updater-manifest.mjs"]) {
+    assert.match(publicReleaseBuild, new RegExp(scriptToken));
+  }
+  for (const scriptToken of ["latest.json", ".app.tar.gz", ".sig", "platforms", "signature"]) {
+    assert.match(updaterManifest, new RegExp(scriptToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
   const serviceReadinessCheck = readFileSync(join(root, "scripts/check-service-readiness.mjs"), "utf8");
   for (const scriptToken of [

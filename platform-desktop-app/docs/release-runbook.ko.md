@@ -18,6 +18,7 @@ repository root에서 실행한다.
 | 설치/빌드 상태 빠른 진단 | `corepack pnpm run desktop:doctor` |
 | 내부 테스트용 `.app`/DMG 빌드 | `corepack pnpm run desktop:package:internal` |
 | 공개 배포 gate report-only 확인 | `corepack pnpm run desktop:release:report` |
+| 공개 배포용 signed updater artifact 빌드 | `corepack pnpm run desktop:package:public` |
 | 실행될 명령 순서만 확인 | `corepack pnpm --filter platform-desktop-app run pipeline:dry-run` |
 
 ## 내부 테스트 빌드 절차
@@ -54,11 +55,26 @@ corepack pnpm run desktop:release:report
 
 - Developer ID 또는 동등한 OS signing identity 준비
 - macOS hardened runtime, notarization, 필요한 경우 stapling
+- `src-tauri/Entitlements.plist`에 공개 배포 entitlements가 명시되어 있고 Tauri config가 이를 참조
 - Windows code signing과 SmartScreen 대응
 - signed updater channel과 update rollback 계획
 - clean-machine install/open/update/uninstall smoke test
 - privacy, dependency, license review
 - installer에 token, webhook URL, browser cookie, `_private/` 내용, platform source payload가 들어가지 않는지 확인
+
+`desktop:package:public`은 다음 환경변수를 요구한다.
+
+| 범위 | 환경변수 |
+| --- | --- |
+| macOS signing | `APPLE_SIGNING_IDENTITY` 또는 `APPLE_CERTIFICATE` + `APPLE_CERTIFICATE_PASSWORD` |
+| notarization | `APPLE_ID` + `APPLE_PASSWORD` + `APPLE_TEAM_ID` 또는 `APPLE_API_KEY` + `APPLE_API_ISSUER` + `APPLE_API_KEY_PATH` |
+| updater verification | `TAURI_UPDATER_PUBLIC_KEY` |
+| updater signing | `TAURI_SIGNING_PRIVATE_KEY`, 선택 `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` |
+| updater endpoint | `TAURI_UPDATER_ENDPOINTS` |
+| static manifest asset URL | `TAURI_RELEASE_ASSET_BASE_URL` |
+| release notes | 선택 `TAURI_RELEASE_NOTES` |
+
+public build는 `src-tauri/target/public-release/tauri.public.generated.json`와 `service-update-channel.json`를 임시 생성한다. 이 파일에는 public key hash, endpoint, signing identity 존재 여부만 들어가며 private updater key와 Apple credential은 쓰지 않는다. build가 끝나면 Tauri updater artifact `.app.tar.gz`, `.sig`, static `latest.json`가 `src-tauri/target/release/bundle/` 아래에 생긴다.
 
 ## 외부 기준
 
@@ -72,6 +88,7 @@ corepack pnpm run desktop:release:report
 - `workspace-monitor` build 실패: `platform-desktop-app/renderer/workspace-monitor/`의 TypeScript, snapshot, customer boundary를 먼저 본다.
 - `check-customer-bundle` 실패: customer snapshot이나 `out/`에 내부 source/path/private content가 들어간 것이다.
 - `release:public:report`가 blocked: public signing/notarization/updater/clean-machine gate가 아직 남은 것이다. 이 상태는 정상이며 public-ready라고 말하면 안 된다.
+- `package:public`이 env blocker로 실패: 위 환경변수를 먼저 설정한다. `.env` 파일만으로는 updater signing private key가 동작하지 않는다.
 - `cargo` 실패: `platform-desktop-app/src-tauri/`에서 Rust toolchain과 Tauri command compile error를 확인한다.
 
 ## 금지

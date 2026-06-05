@@ -1,0 +1,100 @@
+{
+  "schema_version": "2026-06-06",
+  "topic": "platform-desktop-app public release updater automation",
+  "reference_config_paths": [
+    "agent-platform/configs/research/research-agent-profile.json",
+    "platform-desktop-app/configs/macos-execution-profile.json"
+  ],
+  "technology_stack": [
+    "Tauri v2",
+    "Rust",
+    "Node.js ESM scripts",
+    "macOS Developer ID signing/notarization",
+    "Tauri updater plugin"
+  ],
+  "technology_official_docs": [
+    "https://v2.tauri.app/plugin/updater/",
+    "https://v2.tauri.app/distribute/sign/macos/",
+    "https://v2.tauri.app/reference/config/#macconfig",
+    "https://support.apple.com/guide/security/app-code-signing-process-sec3ad8e6e53/web"
+  ],
+  "stack_version_constraints": {
+    "tauri": "v2",
+    "tauri_plugin_updater": "2.10.1",
+    "rust_min_for_plugin": "1.77.2",
+    "node": ">=20.9.0"
+  },
+  "source_types": [
+    "official_documentation",
+    "crate_metadata",
+    "existing_repository_source",
+    "community_issue_signal"
+  ],
+  "issue_discussion_sources": [
+    "Reddit Tauri updater/signing discussions found through search results"
+  ],
+  "issue_discussion_notes": "Community posts were used only as risk signals that updater signing, entitlements, and environment variable handling are common failure points.",
+  "community_signal_notes": "The implementation adds explicit env validation and generated config files because silent updater-signing misconfiguration is a plausible release risk.",
+  "language_options": [
+    {
+      "option": "Rust-only updater command",
+      "notes": "Best for runtime check/install commands but not enough for packaging/notarization orchestration."
+    },
+    {
+      "option": "JavaScript updater package in renderer",
+      "notes": "Useful for a future in-app update button but adds frontend dependency and permissions before the release artifact path exists."
+    },
+    {
+      "option": "Rust Tauri plugin plus Node release scripts",
+      "notes": "Matches existing desktop pipeline and keeps secrets in environment during packaging."
+    }
+  ],
+  "selected_language": "Rust Tauri plugin plus Node release scripts",
+  "language_decision_notes": "Rust initializes the official updater plugin in the app; Node scripts already own desktop build orchestration and are the right place for env validation, config generation, and manifest generation.",
+  "architecture_reference_sources": [
+    "Tauri updater configuration docs",
+    "Tauri macOS signing/notarization docs",
+    "Existing platform-desktop-app desktop-pipeline scripts"
+  ],
+  "architecture_options": [
+    {
+      "option": "Put updater config directly in base tauri.conf.json",
+      "decision": "rejected",
+      "reason": "Would force public endpoints/keys into every internal build and risks false public-readiness signals."
+    },
+    {
+      "option": "Generate public Tauri config only in package:public",
+      "decision": "selected",
+      "reason": "Keeps internal builds stable and makes public credentials explicit release gates."
+    }
+  ],
+  "architecture_theory_sources": [
+    "Tauri platform-specific/generated configuration support"
+  ],
+  "architecture_practitioner_sources": [
+    "Existing local desktop-pipeline implementation",
+    "Community updater setup friction signals"
+  ],
+  "architecture_tradeoff_notes": "Generated config adds script complexity, but it avoids storing public-release-only settings in the internal config and makes secret boundaries auditable.",
+  "code_reference_sources": [
+    "platform-desktop-app/scripts/desktop-pipeline/definitions.mjs",
+    "platform-desktop-app/scripts/check-release-readiness.mjs",
+    "platform-desktop-app/src-tauri/src/lib.rs"
+  ],
+  "code_reference_notes": "Followed existing pipeline step definitions, JSON report scripts, and Tauri builder plugin initialization style.",
+  "folder_structure_options": [
+    {
+      "option": "Place public scripts under scripts/release/",
+      "decision": "rejected",
+      "reason": "Existing desktop scripts are flat and readiness required files currently point to flat script paths."
+    },
+    {
+      "option": "Place public scripts under platform-desktop-app/scripts/",
+      "decision": "selected",
+      "reason": "Matches existing package scripts and keeps pipeline helpers close to release readiness checks."
+    }
+  ],
+  "folder_structure_decision_notes": "Generated files go under src-tauri/target/public-release so they are not durable repository artifacts.",
+  "folder_semantics_notes": "scripts/ owns deterministic build/check automation; specs/docs own durable process and requirements.",
+  "maintainability_notes": "Public env validation is centralized in public-release-config.mjs and reused by preflight/build/manifest code."
+}

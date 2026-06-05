@@ -88,7 +88,10 @@ function checkPackageScripts() {
     "verify",
     "renderer:build",
     "package:internal",
+    "package:public",
     "deploy:public:report",
+    "release:public:config",
+    "release:manifest",
     "tauri:build:prepared"
   ];
   const missing = [
@@ -189,7 +192,8 @@ function nextCommands(summary) {
   return [
     "corepack pnpm run desktop:verify:quick",
     "corepack pnpm run desktop:verify",
-    "corepack pnpm run desktop:package:internal"
+    "corepack pnpm run desktop:package:internal",
+    "corepack pnpm run desktop:release:report"
   ];
 }
 

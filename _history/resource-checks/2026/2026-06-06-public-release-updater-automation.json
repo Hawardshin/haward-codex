@@ -1,0 +1,28 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-public-release-updater-automation",
+  "resource_risk_occurred": true,
+  "checked_resources": [
+    {
+      "resource": "Tauri updater private key",
+      "handling": "environment_only",
+      "result": "not written to repo or generated marker"
+    },
+    {
+      "resource": "Apple signing/notarization credentials",
+      "handling": "environment_only",
+      "result": "missing credentials remain blockers"
+    },
+    {
+      "resource": "generated public Tauri config",
+      "handling": "src-tauri/target/public-release",
+      "result": "ignored build output path"
+    },
+    {
+      "resource": "subprocess build pipeline",
+      "handling": "spawnSync with inherited env",
+      "result": "no long-running process left open"
+    }
+  ],
+  "cleanup": "No server, browser, or long-running process was started for this slice."
+}
