@@ -1,0 +1,21 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "unified-action-group-ui",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Checked official consistency, interaction-state, HIG, and Radix button references."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Added ActionGroup primitive and migrated representative action clusters."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Ran workspace-monitor tests, typecheck, check, build, customer build, perf budget, Browser smoke, Playwright desktop/mobile smoke, and screenshots."
+    }
+  ]
+}

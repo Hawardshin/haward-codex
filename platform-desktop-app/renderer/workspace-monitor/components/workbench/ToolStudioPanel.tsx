@@ -29,6 +29,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { ActionGroup } from "@/components/ui/ActionGroup";
 import { Button } from "@/components/ui/Button";
 import { writeClipboardText } from "@/lib/clipboard.mjs";
 
@@ -973,7 +974,7 @@ export function ToolStudioPanel({
             </p>
           </div>
         </div>
-        <div className="tool-studio-actions">
+        <ActionGroup className="tool-studio-actions" aria-label={ko ? "툴 스튜디오 액션" : "Tool Studio actions"} align="end" density="compact">
           <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>
               <Button
@@ -1025,7 +1026,7 @@ export function ToolStudioPanel({
             <SquareTerminal size={16} aria-hidden="true" />
             <span>{ko ? "실행 콘솔" : "Run Console"}</span>
           </Button>
-        </div>
+        </ActionGroup>
       </header>
 
       <div className="tool-studio-status-grid" aria-label={ko ? "툴 작업 상태" : "Tool work status"}>

@@ -1,0 +1,15 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "unified-action-group-ui",
+  "resource_risk_occurred": true,
+  "risks": [
+    "Static export server and browser automation must be closed after smoke verification.",
+    "Frontend changes must not introduce root horizontal overflow or delayed action feedback."
+  ],
+  "checks": [
+    "Local static server was used only for Browser and Playwright smoke and is stopped before close-out.",
+    "Desktop/mobile overflow checks passed with rootOverflowX 0 and bodyOverflowX 0.",
+    "Performance budget passed after build with largest initial chunk 734386 bytes."
+  ],
+  "status": "passed"
+}

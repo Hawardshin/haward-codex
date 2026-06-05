@@ -21,6 +21,7 @@ const coreDrilldown = fs.readFileSync(
   "utf8"
 );
 const buttonComponent = fs.readFileSync(path.join(projectRoot, "components", "ui", "Button.tsx"), "utf8");
+const actionGroupComponent = fs.readFileSync(path.join(projectRoot, "components", "ui", "ActionGroup.tsx"), "utf8");
 const css = fs.readFileSync(path.join(projectRoot, "app", "globals.css"), "utf8");
 const packageJson = JSON.parse(fs.readFileSync(path.join(projectRoot, "package.json"), "utf8"));
 
@@ -66,6 +67,25 @@ test("Monitor uses library-backed button variants for primary controls", () => {
   assert.match(css, /\.ui-button \{[\s\S]*?min-height: var\(--control-target-size\);/);
   assert.match(css, /\.ui-button-primary \{[\s\S]*?background: var\(--action-primary-bg\);/);
   assert.match(css, /\.ui-button-icon \{[\s\S]*?aspect-ratio: 1;/);
+});
+
+test("Monitor groups repeated actions with shared action primitives", () => {
+  assert.match(actionGroupComponent, /export const actionGroupVariants = cva\("ui-action-group"/);
+  assert.match(actionGroupComponent, /align:\s*\{[\s\S]*?start:[\s\S]*?end:[\s\S]*?stretch:/);
+  assert.match(actionGroupComponent, /density:\s*\{[\s\S]*?compact:[\s\S]*?spacious:/);
+  assert.match(actionGroupComponent, /role=\{role \|\| \(asToolbar \? "toolbar" : "group"\)\}/);
+  assert.match(monitorShell, /import \{ ActionGroup \} from "@\/components\/ui\/ActionGroup"/);
+  assert.match(monitorShell, /<ActionGroup className="titlebar-actions"[\s\S]*?density="compact">/);
+  assert.match(monitorShell, /<ActionGroup className="task-handoff-actions"[\s\S]*?align="end" density="compact">/);
+  assert.match(monitorShell, /<Button variant="secondary" size="sm" onClick=\{\(\) => setCommandPaletteOpen\(false\)\}>/);
+  assert.match(monitorShell, /<Button key=\{item\.id\} variant="ghost" className="command-palette-result" onClick=\{\(\) => runCommandItem\(item\)\}>/);
+  assert.match(toolStudio, /import \{ ActionGroup \} from "@\/components\/ui\/ActionGroup"/);
+  assert.match(toolStudio, /<ActionGroup className="tool-studio-actions"[\s\S]*?align="end" density="compact">/);
+  assert.match(css, /\.ui-action-group \{[\s\S]*?display: inline-flex;/);
+  assert.match(css, /\.ui-action-group-compact \{[\s\S]*?gap: 6px;/);
+  assert.match(css, /\.task-handoff-strip \{[\s\S]*?grid-template-columns: auto minmax\(0, 1fr\) auto;/);
+  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.task-handoff-actions \{[\s\S]*?width: 100%;/);
+  assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-studio-actions \{[\s\S]*?width: 100%;/);
 });
 
 test("Agents collaboration uses lazy open-source 3D character scene", () => {

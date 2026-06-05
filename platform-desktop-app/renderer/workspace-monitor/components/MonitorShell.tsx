@@ -45,6 +45,7 @@ import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } f
 
 import { ProductFeatureArchitecturePanel } from "@/components/features/ProductFeatureArchitecturePanel";
 import { OperatorCenterDialog } from "@/components/features/OperatorCenterDialog";
+import { ActionGroup } from "@/components/ui/ActionGroup";
 import { Button } from "@/components/ui/Button";
 import {
   CoreFeatureDrilldown,
@@ -4767,7 +4768,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                 </Button>
               </div>
             )}
-            <div className="titlebar-actions">
+            <ActionGroup className="titlebar-actions" aria-label={uiLanguage === "ko" ? "상단 액션" : "Titlebar actions"} density="compact">
               <Button variant="secondary" onClick={openTerminalDrawer} title={uiLanguage === "ko" ? "하단 터미널 열기" : "Open bottom terminal"}>
                 <SquareTerminal size={15} aria-hidden="true" />
                 <span>{uiLanguage === "ko" ? "터미널" : "Terminal"}</span>
@@ -4793,7 +4794,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
               <Button variant="ghost" size="icon" onClick={() => setCommandPaletteOpen(true)} title="Command Palette" aria-label="Command Palette">
                 <Search size={16} aria-hidden="true" />
               </Button>
-            </div>
+            </ActionGroup>
           </header>
 
           {activeTaskIntent && ActiveTaskIntentIcon && section !== "overview" && activeTaskIntent.targetSection === section && (
@@ -4804,14 +4805,16 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                 <strong>{activeTaskIntent.label}</strong>
                 <em>{activeTaskIntent.nextStep}</em>
               </span>
-              <Button variant="secondary" size="sm" onClick={() => openSection("overview")}>
-                <ArrowLeft size={14} aria-hidden="true" />
-                <span>{uiLanguage === "ko" ? "목표 변경" : "Change goal"}</span>
-              </Button>
-              <Button variant="ghost" size="sm" onClick={() => setActiveTaskIntentId("")}>
-                <X size={14} aria-hidden="true" />
-                <span>{uiLanguage === "ko" ? "숨기기" : "Dismiss"}</span>
-              </Button>
+              <ActionGroup className="task-handoff-actions" aria-label={uiLanguage === "ko" ? "목표 액션" : "Goal actions"} align="end" density="compact">
+                <Button variant="secondary" size="sm" onClick={() => openSection("overview")}>
+                  <ArrowLeft size={14} aria-hidden="true" />
+                  <span>{uiLanguage === "ko" ? "목표 변경" : "Change goal"}</span>
+                </Button>
+                <Button variant="ghost" size="sm" onClick={() => setActiveTaskIntentId("")}>
+                  <X size={14} aria-hidden="true" />
+                  <span>{uiLanguage === "ko" ? "숨기기" : "Dismiss"}</span>
+                </Button>
+              </ActionGroup>
               <ol className="task-flow-rail" aria-label={uiLanguage === "ko" ? "작업 흐름" : "Task flow"}>
                 {activeTaskIntent.flowSteps.map((step, index) => (
                   <li key={`${activeTaskIntent.id}-${step.id}`} className={step.id === activeTaskFlowStep?.id ? "current" : ""}>
@@ -4855,9 +4858,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                 }}
                 placeholder={uiLanguage === "ko" ? "하고 싶은 일 검색: 툴, 에이전트, 실행, 파일, 설정" : "Search goals: tool, agent, run, files, setup"}
               />
-              <button type="button" onClick={() => setCommandPaletteOpen(false)}>
+              <Button variant="secondary" size="sm" onClick={() => setCommandPaletteOpen(false)}>
                 {uiLanguage === "ko" ? "닫기" : "Close"}
-              </button>
+              </Button>
             </div>
             <div className="command-palette-meta">
               <span>{filteredCommandItems.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 결과" : "results"}</span>
@@ -4866,7 +4869,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             <div className="command-palette-results">
               {filteredCommandItems.length ? (
                 filteredCommandItems.slice(0, 18).map((item) => (
-                  <button key={item.id} type="button" onClick={() => runCommandItem(item)}>
+                  <Button key={item.id} variant="ghost" className="command-palette-result" onClick={() => runCommandItem(item)}>
                     <item.icon size={17} aria-hidden="true" />
                     <span>
                       <small>{item.group}</small>
@@ -4874,7 +4877,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                       <em>{item.detail}</em>
                     </span>
                     {item.badge && <b>{item.badge}</b>}
-                  </button>
+                  </Button>
                 ))
               ) : (
                 <p className="empty-state">{uiLanguage === "ko" ? "일치하는 명령이 없습니다." : "No matching command."}</p>
