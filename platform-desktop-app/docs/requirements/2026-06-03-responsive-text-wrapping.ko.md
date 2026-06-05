@@ -10,7 +10,7 @@
 - `PDA-REQ-058-2`: 한국어 UI 문구는 가능한 한 어절 단위 줄바꿈을 유지해야 하며, 작은 화면에서 임의의 한글 음절 단위 파편화를 줄여야 한다.
 - `PDA-REQ-058-3`: 파일 경로, code/pre, 로그, Git remote, workspace state 값처럼 긴 토큰은 overflow를 막기 위해 별도 긴 토큰 wrapping 규칙을 유지해야 한다.
 - `PDA-REQ-058-4`: readiness script와 unit test는 global button rule과 generic button label children에 `overflow-wrap: anywhere`가 재도입되는 것을 막아야 한다.
-- `PDA-REQ-058-5`: 브라우저 QA는 mobile viewport에서 버튼 target size, horizontal overflow, visible button text wrapping policy를 확인해야 한다.
+- `PDA-REQ-058-5`: 브라우저 QA는 1280x800 이상 desktop viewport에서 버튼 target size, horizontal overflow, visible button text wrapping policy를 확인해야 한다.
 
 ## 비범위
 

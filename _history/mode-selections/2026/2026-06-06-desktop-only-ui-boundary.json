@@ -1,0 +1,16 @@
+{
+  "date": "2026-06-06",
+  "request": "Remove mobile UI from the installable desktop app and enforce a desktop minimum window contract.",
+  "selected_work_mode": "standard",
+  "install_mode": "developer",
+  "view_mode": "superadmin_developer",
+  "rationale": "The request changes renderer behavior, Tauri configuration, validation contracts, and requirements documents, but does not require full governance or public release work.",
+  "required_gates": [
+    "web_first_intake",
+    "requirements_update",
+    "spec_artifacts",
+    "omission_check",
+    "test_check_build_package",
+    "evaluation"
+  ]
+}

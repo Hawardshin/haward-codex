@@ -12,7 +12,7 @@
 | PDA-REQ-060 | 다중 CLI 터미널은 drawer 전체가 밀리지 않고 session list, selected output, terminal event rail이 각각 스크롤되어야 한다. | must | Browser terminal smoke, readiness token check |
 | PDA-REQ-061 | 설정 dialog는 header와 tab list가 유지되고 settings content pane만 스크롤되어야 한다. | should | Browser settings smoke |
 | PDA-REQ-062 | 주요 scroll pane은 keyboard focus를 받을 수 있어야 한다. | should | `tabIndex={0}` source/readiness check |
-| PDA-REQ-063 | 작은 화면에서는 고정 split height가 내용을 숨기지 않도록 page flow로 풀려야 한다. | should | responsive CSS check |
+| PDA-REQ-063 | 설치형 앱은 1280x800 이상의 데스크톱 최소 창을 전제로 하며, 모바일 page-flow 전환을 스크롤 요구사항으로 유지하지 않는다. | should | desktop-only CSS check |
 | PDA-REQ-064 | 최상위 desktop app shell, activity rail, viewport가 중첩 `100vh`/고정 `min-height`로 내부 pane 스크롤 접근을 가리면 안 된다. | must | `check-scroll-containers.mjs`, Browser smoke |
 
 ## 비범위

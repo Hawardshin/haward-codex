@@ -30,6 +30,10 @@ test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(config.identifier, "com.personalagentplatform.desktop");
   assert.equal(config.build.frontendDist, "../renderer/workspace-monitor/out");
   assert.equal(config.app.withGlobalTauri, true);
+  assert.equal(config.app.windows[0].width, 1440);
+  assert.equal(config.app.windows[0].height, 900);
+  assert.equal(config.app.windows[0].minWidth, 1280);
+  assert.equal(config.app.windows[0].minHeight, 800);
   assert.equal(config.bundle.macOS.hardenedRuntime, true);
   assert.equal(config.bundle.macOS.entitlements, "Entitlements.plist");
   assert.equal(existsSync(join(root, "src-tauri/Entitlements.plist")), true);

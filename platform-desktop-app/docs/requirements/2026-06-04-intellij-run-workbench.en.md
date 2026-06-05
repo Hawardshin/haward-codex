@@ -7,7 +7,7 @@
 | REQ-PDA-091 | The run screen must show runtime, workspace, CLI adapters, provider accounts, and active sessions in a Services-style tool window. | must | `ide-services-window`, `ideServiceRows` |
 | REQ-PDA-092 | The run screen must show runtime gaps, missing adapters, missing provider setup, decision inbox items, dirty drafts, and release blockers in an actionable Problems area. | must | `ide-problems-strip`, `visibleIdeProblems` |
 | REQ-PDA-093 | The run screen must include a compact status bar for runtime, CLI, model, sessions, inbox, and terminal state, and it must remain theme-token based in dark and light modes. | must | `ide-status-bar`, token-based CSS |
-| REQ-PDA-094 | On narrow screens, the tool-window rail, run configurations, Services, and Problems regions must collapse without broken text or unusable buttons. | must | responsive CSS, renderer check, browser smoke |
+| REQ-PDA-094 | At the 1280x800 desktop minimum window, the tool-window rail, run configurations, Services, and Problems regions must remain usable at workbench density without broken text or unusable buttons. | must | desktop CSS, renderer check, browser smoke |
 
 ## Decisions
 

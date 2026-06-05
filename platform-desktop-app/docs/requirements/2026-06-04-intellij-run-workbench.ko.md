@@ -7,7 +7,7 @@
 | REQ-PDA-091 | 실행 화면은 IntelliJ식 Services 도구 창처럼 runtime, workspace, CLI adapters, provider accounts, active sessions 상태를 한 곳에 보여줘야 한다. | must | `ide-services-window`, `ideServiceRows` |
 | REQ-PDA-092 | 실행 화면은 Problems 영역에서 runtime 미연결, 누락 adapter, provider 미설정, decision inbox, dirty drafts, release blocker를 사용자가 바로 조치 가능한 항목으로 보여줘야 한다. | must | `ide-problems-strip`, `visibleIdeProblems` |
 | REQ-PDA-093 | 실행 화면은 상태바로 runtime, CLI, model, sessions, inbox, terminal 상태를 간결하게 보여줘야 하며 다크/라이트 테마 모두에서 흰 배경이 튀면 안 된다. | must | `ide-status-bar`, token-based CSS |
-| REQ-PDA-094 | 좁은 화면에서는 도구 창 레일, 실행 구성, Services, Problems가 한 열로 접혀 텍스트와 버튼이 깨지지 않아야 한다. | must | responsive CSS, renderer check, browser smoke |
+| REQ-PDA-094 | 1280x800 이상 데스크톱 최소 창에서는 도구 창 레일, 실행 구성, Services, Problems가 동시에 작업 가능한 밀도로 보여야 하며 텍스트와 버튼이 깨지지 않아야 한다. | must | desktop CSS, renderer check, browser smoke |
 
 ## 결정
 

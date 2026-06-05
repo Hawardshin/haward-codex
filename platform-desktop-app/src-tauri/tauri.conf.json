@@ -15,10 +15,10 @@
       {
         "label": "main",
         "title": "Agent Workspace Platform",
-        "width": 1280,
-        "height": 840,
-        "minWidth": 1024,
-        "minHeight": 720,
+        "width": 1440,
+        "height": 900,
+        "minWidth": 1280,
+        "minHeight": 800,
         "resizable": true,
         "fullscreen": false
       }

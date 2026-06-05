@@ -10,7 +10,7 @@
 - `REQ-PDA-UI-002`: view mode, language mode, pinned section 같은 구성 설정은 기본 화면에 길게 노출하지 않고 설정 대화상자에서 바꿀 수 있어야 한다.
 - `REQ-PDA-UI-003`: 홈 화면은 모든 내부 기능을 한 번에 펼치지 않고 workspace, task timeline, decision inbox, recent artifacts, optional capability 상태를 우선 보여야 한다.
 - `REQ-PDA-UI-004`: 개발자/슈퍼어드민 기능은 activity rail과 sidebar에서 접근 가능해야 하며, 사용자용 기본 작업 흐름과 시각적으로 분리되어야 한다.
-- `REQ-PDA-UI-005`: 화면은 데스크톱과 모바일 폭에서 텍스트 겹침 없이 사용할 수 있어야 한다.
+- `REQ-PDA-UI-005`: 화면은 1280x800 이상 데스크톱 최소 창에서 텍스트 겹침 없이 사용할 수 있어야 하며, 모바일 폭 전용 UI는 제품 요구사항으로 유지하지 않는다.
 
 ## 비범위
 

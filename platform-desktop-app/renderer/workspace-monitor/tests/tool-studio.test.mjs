@@ -143,7 +143,6 @@ test("Monitor groups repeated actions with shared action primitives", () => {
   assert.match(css, /\.ui-action-group \{[\s\S]*?display: inline-flex;/);
   assert.match(css, /\.ui-action-group-compact \{[\s\S]*?gap: 6px;/);
   assert.match(css, /\.task-handoff-strip \{[\s\S]*?grid-template-columns: auto minmax\(0, 1fr\) auto;/);
-  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.task-handoff-actions \{[\s\S]*?width: 100%;/);
   assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-studio-actions \{[\s\S]*?width: 100%;/);
 });
 
@@ -244,7 +243,6 @@ test("Agents collaboration uses lazy open-source 3D character scene", () => {
   assert.match(css, /\.agent-collaboration-identity-strip \{/);
   assert.match(css, /width: 112px;/);
   assert.match(css, /width: 28px;/);
-  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.agent-collaboration-scene-shell,/);
 });
 
 test("Agents details use one active workspace instead of stacking every feature", () => {
@@ -274,7 +272,6 @@ test("Agents details use one active workspace instead of stacking every feature"
   assert.match(css, /\.agent-detail-workspace\[data-agent-detail-pending="true"\] \.agent-detail-active-surface \{/);
   assert.match(css, /\.agent-detail-switcher \{[\s\S]*?grid-template-columns: repeat\(7, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.agent-detail-switcher button\[aria-selected="true"\]/);
-  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.agent-detail-switcher \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
 });
 
 test("Three.js scene is lazy-loaded and cleans up WebGL resources", () => {
@@ -748,7 +745,8 @@ test("Operator history surfaces keep timeline documents in bounded scroll panes"
   assert.equal(packageJson.scripts["audit:surfaces"], "node scripts/audit-monitor-surfaces.mjs");
   assert.match(surfaceAudit, /const operatorSections = \[/);
   assert.match(surfaceAudit, /desktop:\$\{section\}/);
-  assert.match(surfaceAudit, /mobile:history/);
+  assert.doesNotMatch(surfaceAudit, /mobile:history/);
+  assert.match(surfaceAudit, /viewport: "1280x800"/);
   assert.match(surfaceAudit, /timeline docs must be a bounded scroll pane/);
   assert.match(css, /\.timeline-docs \{[\s\S]*?max-height: clamp\(260px, 34dvh, 420px\);[\s\S]*?overflow: auto;/);
   assert.match(css, /\.timeline-docs \{[\s\S]*?background: var\(--scroll-scope-bg\);/);
@@ -890,8 +888,6 @@ test("AgentCore builder supports multi-capability bundles", () => {
   assert.match(css, /\.agentcore-capability-grid \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.agentcore-resource-grid \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.agentcore-resource-lifecycle \{[\s\S]*?grid-template-columns: repeat\(5, minmax\(0, 1fr\)\);/);
-  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.agentcore-capability-grid \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
-  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.agentcore-resource-grid \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
 });
 
 test("Monitor home exposes task-intent routes before section names", () => {
@@ -964,30 +960,25 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(css, /\.workspace-home-actions\.task-intent-grid button \{[\s\S]*?grid-template-columns: 28px 30px minmax\(0, 1fr\) minmax\(34px, auto\) 28px;/);
   assert.match(css, /\.task-intent-icon,[\s\S]*?\.task-intent-action-cue \{/);
   assert.match(css, /\.workspace-home-actions\.task-intent-grid button:not\(:disabled\):active \{[\s\S]*?inset 0 2px 8px/);
-  assert.match(css, /\.task-handoff-strip \{[\s\S]*?grid-template-columns: auto minmax\(0, 1fr\) auto auto;/);
+  assert.match(css, /\.task-handoff-strip \{[\s\S]*?grid-template-columns: auto minmax\(0, 1fr\) auto;/);
   assert.match(css, /\.task-flow-rail \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.task-flow-rail button \{[\s\S]*?min-height: 44px;/);
   assert.match(css, /@media \(max-width: 960px\) \{[\s\S]*?\.home-focus-command,[\s\S]*?\.home-focus-flow,[\s\S]*?\.workspace-home-actions,/);
-  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.home-focus-copy h2 \{[\s\S]*?font-size: var\(--font-size-screen-title\);/);
-  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.workspace-home-actions\.task-intent-grid button \{[\s\S]*?grid-template-columns: 28px minmax\(0, 1fr\) 28px;/);
-  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.task-intent-icon \{[\s\S]*?display: none;/);
-  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.home-focus-flow li strong \{[\s\S]*?white-space: normal;/);
-  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.task-flow-rail \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
-  assert.match(css, /\.desktop-viewport\[data-active-section="overview"\] \.titlebar-context-strip,[\s\S]*?\.desktop-viewport\[data-active-section="overview"\] \.titlebar-actions,[\s\S]*?\.desktop-viewport\[data-active-section="overview"\] > \.desktop-toolbar \{[\s\S]*?display: none;/);
-  assert.match(css, /\.desktop-viewport\[data-active-section="overview"\] \.core-home-status-row \{[\s\S]*?grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
-  assert.match(css, /@media \(max-width: 420px\) \{[\s\S]*?\.activity-rail nav \{[\s\S]*?display: flex;[\s\S]*?overflow-x: auto;/);
-  assert.doesNotMatch(css, /@media \(max-width: 420px\) \{[\s\S]*?\.activity-rail nav \{[\s\S]*?grid-template-columns: repeat\(5/);
 });
 
-test("Activity rail exposes readable destination labels in collapsed and mobile layouts", () => {
+test("Activity rail exposes readable destination labels in the desktop shell", () => {
   assert.match(monitorShell, /<span>\{item\.shortLabel\}<\/span>/);
   assert.match(monitorShell, /aria-current=\{section === item\.id \? "page" : undefined\}/);
   assert.match(monitorShell, /aria-label=\{uiLanguage === "ko" \? "작업공간 홈" : "Workspace Home"\}/);
   assert.match(monitorShell, /aria-label=\{uiLanguage === "ko" \? "운영 센터 열기" : "Open Operator Center"\}/);
   assert.match(monitorShell, /aria-label=\{uiLanguage === "ko" \? "설정" : "Settings"\}/);
+  assert.match(css, /--desktop-app-min-width: 1280px;/);
+  assert.match(css, /--desktop-app-min-height: 800px;/);
   assert.match(css, /\.desktop-app-shell \{[\s\S]*?grid-template-columns: 76px minmax\(0, 1fr\);/);
+  assert.match(css, /\.desktop-app-shell \{[\s\S]*?min-width: var\(--desktop-app-min-width\);/);
   assert.match(css, /\.activity-rail nav button \{[\s\S]*?display: grid;[\s\S]*?grid-template-rows: auto auto;[\s\S]*?min-height: 56px;/);
   assert.match(css, /\.activity-rail nav button span \{[\s\S]*?position: static;[\s\S]*?text-overflow: ellipsis;[\s\S]*?white-space: nowrap;/);
-  assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.activity-rail nav button \{[\s\S]*?flex: 0 0 58px;[\s\S]*?min-height: 48px;/);
-  assert.match(css, /@media \(max-width: 420px\) \{[\s\S]*?\.activity-rail nav button \{[\s\S]*?flex-basis: 58px;/);
+  assert.doesNotMatch(css, /@media \(pointer: coarse\)/);
+  assert.doesNotMatch(css, /@media \(max-width: 720px\)/);
+  assert.doesNotMatch(css, /@media \(max-width: 420px\)/);
 });

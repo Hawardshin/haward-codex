@@ -110,6 +110,10 @@ if (tauriConfig.build?.frontendDist !== "../renderer/workspace-monitor/out") {
 if (tauriConfig.app?.withGlobalTauri !== true) {
   failures.push("Tauri must expose window.__TAURI__ for the static workspace-monitor desktop bridge");
 }
+const mainWindow = tauriConfig.app?.windows?.find((windowConfig) => windowConfig.label === "main");
+if (!mainWindow || mainWindow.width < 1440 || mainWindow.height < 900 || mainWindow.minWidth < 1280 || mainWindow.minHeight < 800) {
+  failures.push("Tauri main window must use desktop-only dimensions: width>=1440, height>=900, minWidth>=1280, minHeight>=800");
+}
 if (!tauriConfig.bundle?.targets?.includes("dmg") || !tauriConfig.bundle?.targets?.includes("nsis")) {
   failures.push("Tauri bundle targets must include macOS and Windows installer candidates");
 }
@@ -1081,7 +1085,7 @@ for (const requiredButtonToken of [
   "overflow-wrap: var(--text-long-token-wrap)"
 ]) {
   if (!monitorStyles.includes(requiredButtonToken)) {
-    failures.push(`workspace-monitor CSS must preserve responsive button token ${requiredButtonToken}`);
+    failures.push(`workspace-monitor CSS must preserve desktop button token ${requiredButtonToken}`);
   }
 }
 if (/button\s*{[^}]*overflow-wrap:\s*anywhere/s.test(monitorStyles)) {

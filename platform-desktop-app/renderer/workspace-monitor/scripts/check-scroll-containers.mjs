@@ -79,7 +79,7 @@ function assertSourceIncludes(source, label, expectedTokens) {
 const cssContracts = [
   {
     selector: ".desktop-app-shell",
-    includes: ["min-height: 100dvh;", "overflow: visible;"],
+    includes: ["min-width: var(--desktop-app-min-width);", "min-height: 100dvh;", "min-height: max(100dvh, var(--desktop-app-min-height));", "overflow: visible;"],
     excludes: ["  height: 100dvh;", "overflow: hidden;", "min-height: 720px;"]
   },
   {
@@ -155,16 +155,17 @@ for (const contract of cssContracts) {
 assertSourceSliceIncludes(monitorShell, 'className="desktop-viewport"', ["tabIndex={0}"]);
 assertSourceSliceIncludes(terminalDrawer, 'className="terminal-drawer-sidebar"', ["tabIndex={0}"]);
 assertSourceSliceIncludes(terminalDrawer, 'className="terminal-drawer-main"', ["tabIndex={0}", "aria-label"]);
-assertSourceIncludes(css, "Mobile terminal drawer scroll contract", [
-  "grid-template-rows: minmax(220px, 0.42fr) minmax(300px, 0.58fr);",
-  "  .terminal-drawer-sidebar {\n    border-right: 0;\n    border-bottom: 1px solid var(--line);\n    overflow: auto;",
-  "  .terminal-drawer-main {\n    min-width: 0;\n    min-height: 0;\n    overflow: auto;"
+assertSourceIncludes(css, "Desktop-only minimum window contract", [
+  "--desktop-app-min-width: 1280px;",
+  "--desktop-app-min-height: 800px;",
+  "width: max(100%, var(--desktop-app-min-width));",
+  "min-width: var(--desktop-app-min-width);"
 ]);
-assertSourceIncludes(css, "Mobile source workbench width contract", [
-  "  .filesystem-editor-pane .panel-heading {\n    display: grid;\n    grid-template-columns: minmax(0, 1fr);",
-  "  .filesystem-workbench .native-source-controls {\n    grid-template-columns: minmax(0, 1fr);",
-  "  .source-command-toolbar,\n  .source-workbench-switcher {\n    display: grid;\n    grid-template-columns: minmax(0, 1fr);\n    width: 100%;"
-]);
+for (const forbiddenMobileContract of ["@media (pointer: coarse)", "@media (max-width: 720px)", "@media (max-width: 420px)"]) {
+  if (css.includes(forbiddenMobileContract)) {
+    throw new Error(`Desktop renderer must not keep mobile UI contract ${forbiddenMobileContract}.`);
+  }
+}
 assertSourceIncludes(css, "Scoped scroll contract", [
   "--scrollbar-track:",
   "--scrollbar-thumb:",
@@ -182,7 +183,7 @@ console.log(
       status: "scroll_contract_ok",
       checkedCssContracts: cssContracts.length,
       checkedFocusablePanes: 3,
-      checkedMobileOverrides: 2,
+      checkedDesktopOnlyContract: 1,
       checkedScopedScroll: 1
     },
     null,

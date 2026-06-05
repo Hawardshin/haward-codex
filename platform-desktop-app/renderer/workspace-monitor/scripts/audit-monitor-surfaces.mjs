@@ -148,7 +148,7 @@ function collectFailures(results) {
 }
 
 const browser = await chromium.launch({ executablePath: chromeExecutable, headless: true });
-const desktop = await browser.newPage({ viewport: { width: 1280, height: 820 }, deviceScaleFactor: 1 });
+const desktop = await browser.newPage({ viewport: { width: 1280, height: 800 }, deviceScaleFactor: 1 });
 await desktop.goto(targetUrl, { waitUntil: "load" });
 await waitReady(desktop, "overview");
 
@@ -164,12 +164,6 @@ for (const target of operatorSections) {
   results.push(await inspectSurface(desktop, `desktop:${target.section}`));
 }
 
-const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, deviceScaleFactor: 2 });
-await mobile.goto(targetUrl, { waitUntil: "load" });
-await waitReady(mobile, "overview");
-await openOperatorSection(mobile, operatorSections[2]);
-results.push(await inspectSurface(mobile, "mobile:history"));
-
 await browser.close();
 
 const failures = collectFailures(results);
@@ -177,7 +171,8 @@ console.log(
   JSON.stringify(
     {
       targetUrl,
-      viewportCount: 2,
+      viewportCount: 1,
+      viewport: "1280x800",
       surfaces: results.length,
       failures,
       results
