@@ -41,6 +41,18 @@
         "product surface mapping"
       ],
       "last_checked": "2026-06-06"
+    },
+    {
+      "id": "eval_cockpit_research",
+      "title": "Open-source EVAL cockpit research",
+      "path": "_research/topics/platform-desktop-app/2026-06-06-eval-cockpit-open-source.ko.md",
+      "source_type": "internal_research",
+      "used_for": [
+        "EVAL tab candidate list",
+        "token/tool/history comparison scenarios",
+        "future optional eval runner selection"
+      ],
+      "last_checked": "2026-06-06"
     }
   ],
   "structure_rules": [
@@ -321,17 +333,36 @@
       "feature_id": "learning_improvement_loop",
       "label": "Learning & Evaluation Loop",
       "priority": "p1",
-      "primary_section": "intent",
+      "primary_section": "eval",
       "install_policy": "no_new_dependency_now",
       "install_needed_now": false,
       "direct_exploration_required": true,
       "implementation_targets": [
         "Evaluation cockpit",
+        "current work score",
+        "history comparison",
+        "token/tool usage comparison",
         "evidence trail",
         "prompt regression gates",
         "provider cost/latency records"
       ],
       "candidate_repos": [
+        {
+          "id": "openai-evals",
+          "title": "OpenAI Evals",
+          "url": "https://github.com/openai/evals",
+          "verified_by": "web_search_official_github",
+          "watch_targets": ["eval registry", "completion functions", "reporting workflows"],
+          "patterns_to_extract": ["eval dataset shape", "runner contract", "result report structure"]
+        },
+        {
+          "id": "inspect-ai",
+          "title": "Inspect AI",
+          "url": "https://inspect.aisi.org.uk/",
+          "verified_by": "web_search_official_docs",
+          "watch_targets": ["task definitions", "scorers", "logs", "viewer"],
+          "patterns_to_extract": ["task/scorer split", "reproducible eval logs", "score display"]
+        },
         {
           "id": "langfuse",
           "title": "Langfuse",
@@ -355,6 +386,30 @@
           "verified_by": "git_ls_remote",
           "watch_targets": ["prompt tests", "providers", "assertions"],
           "patterns_to_extract": ["prompt regression test", "provider comparison"]
+        },
+        {
+          "id": "deepeval",
+          "title": "DeepEval",
+          "url": "https://github.com/confident-ai/deepeval",
+          "verified_by": "web_search_official_github",
+          "watch_targets": ["pytest integration", "metrics", "agent evals", "reports"],
+          "patterns_to_extract": ["metric taxonomy", "agent/tool-use assertions", "developer test ergonomics"]
+        },
+        {
+          "id": "opik",
+          "title": "Opik",
+          "url": "https://github.com/comet-ml/opik",
+          "verified_by": "web_search_official_github",
+          "watch_targets": ["traces", "scoring", "prompt optimization", "self-hosting"],
+          "patterns_to_extract": ["trace score model", "prompt experiment comparison", "local deployment options"]
+        },
+        {
+          "id": "ragas",
+          "title": "Ragas",
+          "url": "https://github.com/explodinggradients/ragas",
+          "verified_by": "web_search_official_github",
+          "watch_targets": ["RAG metrics", "testset generation", "experiment tracking integrations"],
+          "patterns_to_extract": ["metric provenance", "dataset generation notes", "RAG-specific score grouping"]
         }
       ]
     },

@@ -21,6 +21,10 @@ const productFeatureArchitecturePanel = fs.readFileSync(
   path.join(projectRoot, "components", "features", "ProductFeatureArchitecturePanel.tsx"),
   "utf8"
 );
+const evaluationReportPanel = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "EvaluationReportPanel.tsx"),
+  "utf8"
+);
 const toolStudio = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "ToolStudioPanel.tsx"),
   "utf8"
@@ -92,8 +96,8 @@ const packageJson = JSON.parse(fs.readFileSync(path.join(projectRoot, "package.j
 test("Tool Studio is a first-class monitor section", () => {
   assert.match(monitorShell, /\|\s*"tools"/);
   assert.match(monitorShell, /id:\s*"tools"[\s\S]*?label:\s*"툴 스튜디오"/);
-  assert.match(monitorShell, /allowedSections:\s*\["overview", "agents", "desktop", "source", "intent"\]/);
-  assert.match(monitorShell, /defaultPinnedSections:\s*SectionId\[\]\s*=\s*\["overview", "agents", "desktop", "source", "intent"\]/);
+  assert.match(monitorShell, /allowedSections:\s*\["overview", "agents", "desktop", "eval", "source", "intent"\]/);
+  assert.match(monitorShell, /defaultPinnedSections:\s*SectionId\[\]\s*=\s*\["overview", "agents", "desktop", "eval", "source", "intent"\]/);
   assert.doesNotMatch(monitorShell, /hasLegacyDefault && !next\.includes\("tools"\)/);
   assert.doesNotMatch(monitorShell, /next\.splice\(insertAt, 0, "tools"\)/);
   assert.match(monitorShell, /tools:\s*"Studio"/);
@@ -103,7 +107,37 @@ test("Tool Studio is a first-class monitor section", () => {
   assert.match(monitorShell, /\(\) => import\("@\/components\/workbench\/ToolStudioPanel"\)\.then\(\(module\) => module\.ToolStudioPanel\)/);
   assert.match(monitorShell, /const MemoizedToolStudioPanel = memo\(ToolStudioPanel\)/);
   assert.match(toolStudio, /export type ToolStudioPanelProps = \{/);
-  assert.match(coreDrilldown, /"files" \| "agents" \| "tools" \| "run" \| "learn"/);
+  assert.match(coreDrilldown, /"files" \| "agents" \| "tools" \| "run" \| "eval" \| "learn"/);
+});
+
+test("AI Eval is a first-class resident workbench section", () => {
+  assert.match(monitorShell, /\|\s*"eval"/);
+  assert.match(monitorShell, /id:\s*"eval"[\s\S]*?label:\s*"AI 평가"/);
+  assert.match(monitorShell, /const maxResidentSectionPanels = 6/);
+  assert.match(monitorShell, /retainedResidentSections: SectionId\[\] = \["source", "eval"\]/);
+  assert.match(monitorShell, /startupResidentPreloadSections: SectionId\[\] = \["agents", "desktop", "eval", "source", "tools", "overview"\]/);
+  assert.match(monitorShell, /const EvaluationReportPanel = dynamic<EvaluationReportPanelProps>/);
+  assert.match(monitorShell, /import\("@\/components\/features\/EvaluationReportPanel"\)/);
+  assert.match(monitorShell, /void import\("@\/components\/features\/EvaluationReportPanel"\)/);
+  assert.match(monitorShell, /eval:\s*`\$\{visibleEvaluations\.toLocaleString\("ko-KR"\)\} evals`/);
+  assert.match(monitorShell, /section === "agents" \|\| section === "tools" \|\| section === "eval"/);
+  assert.match(monitorShell, /id:\s*"evaluate-work"[\s\S]*?targetSection:\s*"eval"/);
+  assert.match(monitorShell, /id:\s*"eval"[\s\S]*?cta:\s*uiLanguage === "ko" \? "AI 평가 열기" : "Open AI Eval"/);
+  assert.match(monitorShell, /section === "eval"[\s\S]*?<EvaluationReportPanel/);
+  assert.match(evaluationReportPanel, /data-eval-workbench="open-source-eval-cockpit"/);
+  assert.match(evaluationReportPanel, /Current work evaluation report/);
+  assert.match(evaluationReportPanel, /Token and Cost Tracking/);
+  assert.match(evaluationReportPanel, /OpenAI Evals/);
+  assert.match(evaluationReportPanel, /Inspect AI/);
+  assert.match(evaluationReportPanel, /promptfoo/);
+  assert.match(evaluationReportPanel, /DeepEval/);
+  assert.match(evaluationReportPanel, /Arize Phoenix/);
+  assert.match(evaluationReportPanel, /Opik/);
+  assert.match(evaluationReportPanel, /Langfuse/);
+  assert.match(css, /\.eval-workbench \{/);
+  assert.match(css, /\.eval-score-strip \{/);
+  assert.match(css, /\.eval-tool-grid \{/);
+  assert.match(css, /\.eval-open-source-grid \{/);
 });
 
 test("Tool Studio uses open-source menu primitives and exact dependencies", () => {
@@ -362,25 +396,31 @@ test("Three.js scene is lazy-loaded and cleans up WebGL resources", () => {
   assert.match(toolStudio, /scene\.background = new THREE\.Color\(0x101923\)/);
   assert.match(toolStudio, /camera\.lookAt\(0, -0\.2, 0\)/);
   assert.match(toolStudio, /const bodyGeometry = new THREE\.CapsuleGeometry\(0\.31, 0\.24, 8, 18\)/);
-  assert.match(toolStudio, /const earGeometry = new THREE\.SphereGeometry\(0\.115, 16, 12\)/);
+  assert.match(toolStudio, /const flipperGeometry = new THREE\.SphereGeometry\(0\.115, 16, 10\)/);
+  assert.match(toolStudio, /const whiskerGeometry = new THREE\.BoxGeometry\(0\.18, 0\.008, 0\.008\)/);
   assert.match(toolStudio, /const eyeGeometry = new THREE\.SphereGeometry\(0\.024, 12, 8\)/);
   assert.match(toolStudio, /const noseGeometry = new THREE\.SphereGeometry\(0\.018, 10, 8\)/);
   assert.match(toolStudio, /const muzzleGeometry = new THREE\.SphereGeometry\(0\.115, 16, 10\)/);
   assert.match(toolStudio, /const visorGeometry = new THREE\.BoxGeometry\(0\.18, 0\.034, 0\.04\)/);
   assert.match(toolStudio, /const chestPanelGeometry = new THREE\.BoxGeometry\(0\.18, 0\.095, 0\.04\)/);
   assert.match(toolStudio, /const roleHaloGeometry = new THREE\.TorusGeometry\(0\.42, 0\.016, 8, 48\)/);
-  assert.match(toolStudio, /tool-agent-character-visor/);
-  assert.match(toolStudio, /tool-agent-character-chest-panel/);
-  assert.match(toolStudio, /tool-agent-character-status-light/);
-  assert.match(toolStudio, /tool-agent-character-role-halo/);
-  assert.match(toolStudio, /tool-agent-character-ear-left/);
-  assert.match(toolStudio, /tool-agent-character-eye-left/);
-  assert.match(toolStudio, /tool-agent-character-muzzle/);
-  assert.match(toolStudio, /tool-agent-character-nose/);
-  assert.match(toolStudio, /tool-agent-character-cheek-left/);
-  assert.match(toolStudio, /tool-agent-character-tail/);
+  assert.match(toolStudio, /tool-agent-seal-visor/);
+  assert.match(toolStudio, /tool-agent-seal-chest-panel/);
+  assert.match(toolStudio, /tool-agent-seal-status-light/);
+  assert.match(toolStudio, /tool-agent-seal-role-halo/);
+  assert.match(toolStudio, /tool-agent-seal-flipper-front-left/);
+  assert.match(toolStudio, /tool-agent-seal-flipper-rear-left/);
+  assert.match(toolStudio, /tool-agent-seal-whisker-left-top/);
+  assert.match(toolStudio, /tool-agent-seal-eye-left/);
+  assert.match(toolStudio, /tool-agent-seal-muzzle/);
+  assert.match(toolStudio, /tool-agent-seal-nose/);
+  assert.match(toolStudio, /tool-agent-seal-cheek-left/);
+  assert.match(toolStudio, /tool-agent-seal-tail/);
+  assert.doesNotMatch(toolStudio, /tool-agent-character-ear-left/);
   assert.match(toolStudio, /toolModeSceneColors/);
   assert.match(toolStudio, /character\.scale\.setScalar\(0\.82\)/);
+  assert.match(toolStudio, /물개형 협업 캐릭터 맵/);
+  assert.match(toolStudio, /Seal agent collaboration 3D scene/);
   assert.match(toolStudio, /className="tool-agent-legend"/);
   assert.match(css, /\.tool-agent-legend \{/);
   assert.match(toolStudio, /canvas\.setAttribute\("data-agent-3d-ready", "true"\)/);
@@ -511,10 +551,10 @@ test("Monitor section switches prewarm heavy surfaces and preserve source editor
   assert.match(monitorShell, /setButtonFeedbackReady\(true\)/);
   assert.match(monitorShell, /const sectionContentReady = buttonFeedbackReady/);
   assert.match(monitorShell, /data-section-content-ready=\{sectionContentReady \? "true" : "false"\}/);
-  assert.match(monitorShell, /const maxResidentSectionPanels = 5/);
-  assert.match(monitorShell, /const retainedResidentSections: SectionId\[\] = \["source"\]/);
+  assert.match(monitorShell, /const maxResidentSectionPanels = 6/);
+  assert.match(monitorShell, /const retainedResidentSections: SectionId\[\] = \["source", "eval"\]/);
   assert.match(monitorShell, /const nonRetainedResidentSections: SectionId\[\] = \["overview"\]/);
-  assert.match(monitorShell, /const startupResidentPreloadSections: SectionId\[\] = \["agents", "desktop", "source", "tools", "overview"\]/);
+  assert.match(monitorShell, /const startupResidentPreloadSections: SectionId\[\] = \["agents", "desktop", "eval", "source", "tools", "overview"\]/);
   assert.match(monitorShell, /function normalizeResidentSectionIds\(candidates: SectionId\[\], activeSection: SectionId\)/);
   assert.match(monitorShell, /candidate !== activeSection && nonRetained\.has\(candidate\)/);
   assert.match(monitorShell, /const residentStartupPreloadDoneRef = useRef\(false\)/);

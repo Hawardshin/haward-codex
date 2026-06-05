@@ -11,7 +11,7 @@
       "Treat security_notes as design constraints for future authenticated deployments, not as proof that access control already exists."
     ],
     "owner": "agent-platform",
-    "last_reviewed": "2026-06-02",
+    "last_reviewed": "2026-06-06",
     "update_triggers": [
       "A new UI or dashboard role is added.",
       "workspace-monitor changes how documents, operations, agents, or governance records are displayed.",
@@ -171,6 +171,7 @@
           "CLI orchestration continuity",
           "root tool setup",
           "work visibility",
+          "AI evaluation report",
           "desktop runtime status",
           "decision inbox"
         ],
@@ -200,6 +201,7 @@
         "overview",
         "agents",
         "desktop",
+        "eval",
         "source",
         "intent"
       ],
@@ -231,6 +233,7 @@
           "intent feature map",
           "agent inventory",
           "tool studio",
+          "AI evaluation cockpit",
           "source code",
           "tests and validation",
           "workspace monitor data"
@@ -254,6 +257,7 @@
         "overview",
         "tools",
         "desktop",
+        "eval",
         "projects",
         "history",
         "intent",
@@ -291,6 +295,7 @@
           "intent feature map",
           "agent inventory and runtime status",
           "tool studio and Python tool environment",
+          "AI evaluation cockpit and open-source eval candidates",
           "source code",
           "governance docs",
           "source configs",
@@ -316,6 +321,7 @@
         "overview",
         "tools",
         "desktop",
+        "eval",
         "projects",
         "history",
         "intent",

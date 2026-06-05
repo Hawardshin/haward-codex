@@ -282,8 +282,8 @@ export function ToolStudioPanel({
       const group = new THREE.Group();
       const bodyGeometry = new THREE.CapsuleGeometry(0.31, 0.24, 8, 18);
       const headGeometry = new THREE.SphereGeometry(0.33, 24, 16);
-      const earGeometry = new THREE.SphereGeometry(0.115, 16, 12);
-      const innerEarGeometry = new THREE.SphereGeometry(0.07, 12, 8);
+      const flipperGeometry = new THREE.SphereGeometry(0.115, 16, 10);
+      const whiskerGeometry = new THREE.BoxGeometry(0.18, 0.008, 0.008);
       const eyeGeometry = new THREE.SphereGeometry(0.024, 12, 8);
       const noseGeometry = new THREE.SphereGeometry(0.018, 10, 8);
       const muzzleGeometry = new THREE.SphereGeometry(0.115, 16, 10);
@@ -298,8 +298,8 @@ export function ToolStudioPanel({
       const templateGeometries = [
         bodyGeometry,
         headGeometry,
-        earGeometry,
-        innerEarGeometry,
+        flipperGeometry,
+        whiskerGeometry,
         eyeGeometry,
         noseGeometry,
         muzzleGeometry,
@@ -348,16 +348,21 @@ export function ToolStudioPanel({
         });
         const body = new THREE.Mesh(bodyGeometry.clone(), material);
         const head = new THREE.Mesh(headGeometry.clone(), shellMaterial.clone());
-        const leftEar = new THREE.Mesh(earGeometry.clone(), shellMaterial.clone());
-        const rightEar = new THREE.Mesh(earGeometry.clone(), shellMaterial.clone());
-        const leftInnerEar = new THREE.Mesh(innerEarGeometry.clone(), visorMaterial.clone());
-        const rightInnerEar = new THREE.Mesh(innerEarGeometry.clone(), visorMaterial.clone());
+        const frontLeftFlipper = new THREE.Mesh(flipperGeometry.clone(), shellMaterial.clone());
+        const frontRightFlipper = new THREE.Mesh(flipperGeometry.clone(), shellMaterial.clone());
+        const rearLeftFlipper = new THREE.Mesh(flipperGeometry.clone(), shellMaterial.clone());
+        const rearRightFlipper = new THREE.Mesh(flipperGeometry.clone(), shellMaterial.clone());
         const visor = new THREE.Mesh(visorGeometry.clone(), visorMaterial);
         const eyeMaterial = new THREE.MeshStandardMaterial({ color: 0x101923, roughness: 0.38, metalness: 0.04 });
         const leftEye = new THREE.Mesh(eyeGeometry.clone(), eyeMaterial);
         const rightEye = new THREE.Mesh(eyeGeometry.clone(), eyeMaterial.clone());
         const muzzle = new THREE.Mesh(muzzleGeometry.clone(), shellMaterial.clone());
         const nose = new THREE.Mesh(noseGeometry.clone(), eyeMaterial.clone());
+        const whiskerMaterial = new THREE.MeshStandardMaterial({ color: 0x243445, roughness: 0.48, metalness: 0.02 });
+        const leftWhiskerTop = new THREE.Mesh(whiskerGeometry.clone(), whiskerMaterial);
+        const leftWhiskerBottom = new THREE.Mesh(whiskerGeometry.clone(), whiskerMaterial.clone());
+        const rightWhiskerTop = new THREE.Mesh(whiskerGeometry.clone(), whiskerMaterial.clone());
+        const rightWhiskerBottom = new THREE.Mesh(whiskerGeometry.clone(), whiskerMaterial.clone());
         const cheekMaterial = new THREE.MeshStandardMaterial({
           color: 0xffd3d0,
           emissive: 0xff9a96,
@@ -388,40 +393,44 @@ export function ToolStudioPanel({
         character.scale.setScalar(0.82);
         character.position.set(Math.cos(angle) * 1.55, -0.46, Math.sin(angle) * 1.55);
         character.userData = { mode: item.id };
-        character.name = `tool-agent-character-${item.id}`;
-        body.name = "tool-agent-character-torso";
-        head.name = "tool-agent-character-head";
-        leftEar.name = "tool-agent-character-ear-left";
-        rightEar.name = "tool-agent-character-ear-right";
-        leftInnerEar.name = "tool-agent-character-inner-ear-left";
-        rightInnerEar.name = "tool-agent-character-inner-ear-right";
-        visor.name = "tool-agent-character-visor";
-        leftEye.name = "tool-agent-character-eye-left";
-        rightEye.name = "tool-agent-character-eye-right";
-        muzzle.name = "tool-agent-character-muzzle";
-        nose.name = "tool-agent-character-nose";
-        leftCheek.name = "tool-agent-character-cheek-left";
-        rightCheek.name = "tool-agent-character-cheek-right";
-        chestPanel.name = "tool-agent-character-chest-panel";
-        statusLight.name = "tool-agent-character-status-light";
-        tail.name = "tool-agent-character-tail";
-        roleHalo.name = "tool-agent-character-role-halo";
+        character.name = `tool-agent-seal-${item.id}`;
+        body.name = "tool-agent-seal-body";
+        head.name = "tool-agent-seal-head";
+        frontLeftFlipper.name = "tool-agent-seal-flipper-front-left";
+        frontRightFlipper.name = "tool-agent-seal-flipper-front-right";
+        rearLeftFlipper.name = "tool-agent-seal-flipper-rear-left";
+        rearRightFlipper.name = "tool-agent-seal-flipper-rear-right";
+        visor.name = "tool-agent-seal-visor";
+        leftEye.name = "tool-agent-seal-eye-left";
+        rightEye.name = "tool-agent-seal-eye-right";
+        muzzle.name = "tool-agent-seal-muzzle";
+        nose.name = "tool-agent-seal-nose";
+        leftWhiskerTop.name = "tool-agent-seal-whisker-left-top";
+        leftWhiskerBottom.name = "tool-agent-seal-whisker-left-bottom";
+        rightWhiskerTop.name = "tool-agent-seal-whisker-right-top";
+        rightWhiskerBottom.name = "tool-agent-seal-whisker-right-bottom";
+        leftCheek.name = "tool-agent-seal-cheek-left";
+        rightCheek.name = "tool-agent-seal-cheek-right";
+        chestPanel.name = "tool-agent-seal-chest-panel";
+        statusLight.name = "tool-agent-seal-status-light";
+        tail.name = "tool-agent-seal-tail";
+        roleHalo.name = "tool-agent-seal-role-halo";
         body.position.y = -0.03;
         head.position.y = 0.54;
-        leftEar.position.set(-0.19, 0.78, 0.01);
-        rightEar.position.set(0.19, 0.78, 0.01);
-        leftEar.scale.set(0.88, 1.04, 0.72);
-        rightEar.scale.set(0.88, 1.04, 0.72);
-        leftInnerEar.position.set(-0.19, 0.78, 0.08);
-        rightInnerEar.position.set(0.19, 0.78, 0.08);
-        leftInnerEar.scale.set(0.52, 0.68, 0.24);
-        rightInnerEar.scale.set(0.52, 0.68, 0.24);
         visor.position.set(0, 0.64, 0.31);
         leftEye.position.set(-0.08, 0.595, 0.325);
         rightEye.position.set(0.08, 0.595, 0.325);
         muzzle.position.set(0, 0.47, 0.32);
         muzzle.scale.set(1.22, 0.72, 0.5);
         nose.position.set(0, 0.5, 0.38);
+        leftWhiskerTop.position.set(-0.12, 0.51, 0.405);
+        leftWhiskerTop.rotation.z = 0.16;
+        leftWhiskerBottom.position.set(-0.12, 0.47, 0.405);
+        leftWhiskerBottom.rotation.z = -0.14;
+        rightWhiskerTop.position.set(0.12, 0.51, 0.405);
+        rightWhiskerTop.rotation.z = -0.16;
+        rightWhiskerBottom.position.set(0.12, 0.47, 0.405);
+        rightWhiskerBottom.rotation.z = 0.14;
         leftCheek.position.set(-0.15, 0.515, 0.33);
         rightCheek.position.set(0.15, 0.515, 0.33);
         leftCheek.scale.set(1, 0.66, 0.32);
@@ -431,21 +440,37 @@ export function ToolStudioPanel({
         rightFoot.position.set(0.14, -0.44, 0.08);
         leftHand.position.set(-0.3, 0.04, 0.02);
         rightHand.position.set(0.3, 0.04, 0.02);
+        frontLeftFlipper.position.set(-0.36, -0.1, 0.12);
+        frontLeftFlipper.scale.set(1.45, 0.32, 0.72);
+        frontLeftFlipper.rotation.z = -0.58;
+        frontRightFlipper.position.set(0.36, -0.1, 0.12);
+        frontRightFlipper.scale.set(1.45, 0.32, 0.72);
+        frontRightFlipper.rotation.z = 0.58;
+        rearLeftFlipper.position.set(-0.18, -0.58, -0.02);
+        rearLeftFlipper.scale.set(1.2, 0.28, 0.58);
+        rearLeftFlipper.rotation.z = -0.22;
+        rearRightFlipper.position.set(0.18, -0.58, -0.02);
+        rearRightFlipper.scale.set(1.2, 0.28, 0.58);
+        rearRightFlipper.rotation.z = 0.22;
         tail.position.set(0, -0.07, -0.33);
         statusLight.position.set(0, 0.89, 0.03);
         roleHalo.rotation.x = Math.PI / 2;
         roleHalo.position.y = -0.48;
         character.add(body);
         character.add(head);
-        character.add(leftEar);
-        character.add(rightEar);
-        character.add(leftInnerEar);
-        character.add(rightInnerEar);
+        character.add(frontLeftFlipper);
+        character.add(frontRightFlipper);
+        character.add(rearLeftFlipper);
+        character.add(rearRightFlipper);
         character.add(visor);
         character.add(leftEye);
         character.add(rightEye);
         character.add(muzzle);
         character.add(nose);
+        character.add(leftWhiskerTop);
+        character.add(leftWhiskerBottom);
+        character.add(rightWhiskerTop);
+        character.add(rightWhiskerBottom);
         character.add(leftCheek);
         character.add(rightCheek);
         character.add(chestPanel);
@@ -1558,12 +1583,12 @@ export function ToolStudioPanel({
             <div className="tool-pane-heading">
               <div>
                 <p className="eyebrow">Agent Work</p>
-                <h3>{ko ? "협업 캐릭터 맵" : "3D collaboration map"}</h3>
+                <h3>{ko ? "물개형 협업 캐릭터 맵" : "3D seal collaboration map"}</h3>
               </div>
               <span>{runtimeAdapterId}</span>
             </div>
-            <canvas ref={canvasRef} className="tool-agent-canvas" data-agent-3d-canvas aria-label={ko ? "에이전트 협업 3D 장면" : "Agent collaboration 3D scene"} />
-	            <div className="tool-agent-legend" aria-label={ko ? "캐릭터 역할 구분" : "Character mode identity"}>
+            <canvas ref={canvasRef} className="tool-agent-canvas" data-agent-3d-canvas aria-label={ko ? "물개형 에이전트 협업 3D 장면" : "Seal agent collaboration 3D scene"} />
+	            <div className="tool-agent-legend" aria-label={ko ? "물개 캐릭터 역할 구분" : "Seal character mode identity"}>
               {toolModes.map((item, index) => (
                 <span key={item.id} title={labelFor(language, item.labelKo, item.labelEn)}>
                   <i style={{ backgroundColor: toolModeSceneColors[index % toolModeSceneColors.length] }} aria-hidden="true" />

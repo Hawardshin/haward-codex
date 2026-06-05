@@ -12,7 +12,7 @@
       "Use validation_gates as the acceptance checklist when making a UI, data, or runtime change around these features."
     ],
     "owner": "platform-desktop-app",
-    "last_reviewed": "2026-06-04",
+    "last_reviewed": "2026-06-06",
     "update_triggers": [
       "The desktop home screen or first-run product promise changes.",
       "A feature is promoted from workflow, prompt, template, tool, skill, or agent into a desktop product surface.",
@@ -301,15 +301,18 @@
       "agent_factory",
       "agent_orchestration",
       "root_tool_management",
+      "learning_improvement_loop",
       "work_visibility"
     ],
     "supporting_surfaces": [
-      "observability_monitoring"
+      "observability_monitoring",
+      "open_source_eval_cockpit"
     ],
     "primary_navigation_sections": [
       "overview",
       "agents",
       "desktop",
+      "eval",
       "source",
       "intent"
     ],
@@ -320,7 +323,7 @@
       "documents",
       "requirements"
     ],
-    "home_copy_rule": "The first screen shall emphasize Agent Core, CLI orchestration continuity, Tool Studio for shared root tools, and at-a-glance work visibility before workbench, learning, or observability details.",
+      "home_copy_rule": "The first screen shall emphasize Agent Core, CLI orchestration continuity, Tool Studio for shared root tools, EVAL for current work quality, and at-a-glance work visibility before deeper observability details.",
     "configuration_rule": "Core setup for provider accounts, CLI adapters, root tools, workspace access, and question deferral shall be visible from Home and collected in the execution settings surface."
   },
   "feature_layers": [
@@ -544,8 +547,10 @@
       "status": "implemented_slice",
       "purpose": "Accumulate work history, timing, evaluations, web searches, intent maps, evidence, and improvement records so platform behavior gets better over time.",
       "user_outcome": "The user can see why the platform improved, what evidence drove changes, and which gaps remain.",
-      "primary_section": "intent",
+      "primary_section": "eval",
       "primary_surfaces": [
+        "AI Eval",
+        "Current Work Evaluation Report",
         "Intent Map",
         "Learning History",
         "Evaluations",
@@ -560,6 +565,7 @@
         "platform-desktop-app/renderer/workspace-monitor/scripts/lib/intent-feature-map.mjs",
         "platform-desktop-app/renderer/workspace-monitor/scripts/lib/history-insight-loop.mjs",
         "platform-desktop-app/renderer/workspace-monitor/scripts/lib/fundamental-improvement-structure.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/EvaluationReportPanel.tsx",
         "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"
       ],
       "automation_targets": [
@@ -579,13 +585,17 @@
         "history insight evidence links",
         "fundamental improvement structural principles",
         "fundamental improvement packages",
-        "fundamental improvement fitness checks"
+        "fundamental improvement fitness checks",
+        "current work evaluation score",
+        "token and tool comparability score",
+        "open-source EVAL candidate fit"
       ],
       "validation_gates": [
         "intent maps show source freshness",
         "evaluations cite validation outcomes",
         "new product work creates request trace and work summary",
-        "fundamental improvement structure sanitizes customer snapshots"
+        "fundamental improvement structure sanitizes customer snapshots",
+        "AI Eval tab shows current score, history comparison, token/tool comparison, and open-source EVAL candidates"
       ]
     },
     {

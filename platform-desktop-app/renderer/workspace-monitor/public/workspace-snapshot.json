@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T23:07:43.770Z",
+  "generatedAt": "2026-06-05T23:32:35.404Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -34,7 +34,7 @@
     "referencePlatforms": 5,
     "referenceTransferPatterns": 19,
     "openSourceReferenceLayers": 7,
-    "openSourceReferenceRepos": 24,
+    "openSourceReferenceRepos": 29,
     "historyInsightPatterns": 0,
     "historyInsightRecommendations": 0,
     "fundamentalImprovementPrinciples": 0,
@@ -176,12 +176,14 @@
         "agent_factory",
         "agent_orchestration",
         "root_tool_management",
+        "learning_improvement_loop",
         "work_visibility"
       ],
       "supportingSurfaces": [
-        "observability_monitoring"
+        "observability_monitoring",
+        "open_source_eval_cockpit"
       ],
-      "homeCopyRule": "The first screen shall emphasize Agent Core, CLI orchestration continuity, Tool Studio for shared root tools, and at-a-glance work visibility before workbench, learning, or observability details.",
+      "homeCopyRule": "The first screen shall emphasize Agent Core, CLI orchestration continuity, Tool Studio for shared root tools, EVAL for current work quality, and at-a-glance work visibility before deeper observability details.",
       "configurationRule": "Core setup for provider accounts, CLI adapters, root tools, workspace access, and question deferral shall be visible from Home and collected in the execution settings surface."
     },
     "summary": {
@@ -362,8 +364,10 @@
         "status": "implemented_slice",
         "purpose": "Accumulate work history, timing, evaluations, web searches, intent maps, evidence, and improvement records so platform behavior gets better over time.",
         "userOutcome": "The user can see why the platform improved, what evidence drove changes, and which gaps remain.",
-        "primarySection": "intent",
+        "primarySection": "eval",
         "primarySurfaces": [
+          "AI Eval",
+          "Current Work Evaluation Report",
           "Intent Map",
           "Learning History",
           "Evaluations",
@@ -388,7 +392,10 @@
           "history insight evidence links",
           "fundamental improvement structural principles",
           "fundamental improvement packages",
-          "fundamental improvement fitness checks"
+          "fundamental improvement fitness checks",
+          "current work evaluation score",
+          "token and tool comparability score",
+          "open-source EVAL candidate fit"
         ],
         "validationGates": []
       },
@@ -1164,7 +1171,7 @@
     },
     "summary": {
       "totalLayers": 7,
-      "totalRepositories": 24,
+      "totalRepositories": 29,
       "installReady": 0,
       "directExplorationRequired": 7,
       "highPriority": 7
@@ -1375,17 +1382,42 @@
         "featureId": "learning_improvement_loop",
         "label": "Learning & Evaluation Loop",
         "priority": "p1",
-        "primarySection": "intent",
+        "primarySection": "eval",
         "installPolicy": "no_new_dependency_now",
         "installNeededNow": false,
         "directExplorationRequired": true,
         "implementationTargets": [
           "Evaluation cockpit",
+          "current work score",
+          "history comparison",
+          "token/tool usage comparison",
           "evidence trail",
           "prompt regression gates",
           "provider cost/latency records"
         ],
         "candidateRepos": [
+          {
+            "id": "openai-evals",
+            "title": "OpenAI Evals",
+            "url": "https://github.com/openai/evals",
+            "verifiedBy": "web_search_official_github",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "eval dataset shape",
+              "runner contract"
+            ]
+          },
+          {
+            "id": "inspect-ai",
+            "title": "Inspect AI",
+            "url": "https://inspect.aisi.org.uk/",
+            "verifiedBy": "web_search_official_docs",
+            "watchTargets": [],
+            "patternsToExtract": [
+              "task/scorer split",
+              "reproducible eval logs"
+            ]
+          },
           {
             "id": "langfuse",
             "title": "Langfuse",
@@ -1395,28 +1427,6 @@
             "patternsToExtract": [
               "trace schema",
               "evaluation dataset"
-            ]
-          },
-          {
-            "id": "phoenix",
-            "title": "Phoenix",
-            "url": "https://github.com/Arize-ai/phoenix",
-            "verifiedBy": "official_github_page_and_git_ls_remote",
-            "watchTargets": [],
-            "patternsToExtract": [
-              "LLM trace view",
-              "eval debugging"
-            ]
-          },
-          {
-            "id": "promptfoo",
-            "title": "promptfoo",
-            "url": "https://github.com/promptfoo/promptfoo",
-            "verifiedBy": "git_ls_remote",
-            "watchTargets": [],
-            "patternsToExtract": [
-              "prompt regression test",
-              "provider comparison"
             ]
           }
         ]
@@ -1532,7 +1542,7 @@
       "queuedPatterns": 0,
       "activeRecommendations": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-05T23:07:18.989Z"
+      "latestInsightAt": "2026-06-05T23:32:09.549Z"
     },
     "inferenceStages": [],
     "signalGroups": []
@@ -1547,7 +1557,7 @@
       "totalImprovementPackages": 0,
       "totalFitnessChecks": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-05T23:07:18.989Z"
+      "latestInsightAt": "2026-06-05T23:32:09.549Z"
     },
     "operatingModel": [],
     "structuralPrinciples": [],

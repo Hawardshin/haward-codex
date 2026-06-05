@@ -47,6 +47,7 @@ import { memo, useCallback, useDeferredValue, useEffect, useLayoutEffect, useMem
 
 import type { ProductFeatureArchitecturePanelProps } from "@/components/features/ProductFeatureArchitecturePanel";
 import type { OperatorCenterDialogProps } from "@/components/features/OperatorCenterDialog";
+import type { EvaluationReportPanelProps } from "@/components/features/EvaluationReportPanel";
 import { preloadAdminHistoryIndex, useAdminHistoryIndex } from "@/components/history/useAdminHistoryIndex";
 import { ActionGroup } from "@/components/ui/ActionGroup";
 import { Button } from "@/components/ui/Button";
@@ -89,6 +90,7 @@ import {
 type SectionId =
   | "overview"
   | "desktop"
+  | "eval"
   | "projects"
   | "history"
   | "intent"
@@ -99,10 +101,10 @@ type SectionId =
   | "requirements"
   | "agents";
 
-const maxResidentSectionPanels = 5;
-const retainedResidentSections: SectionId[] = ["source"];
+const maxResidentSectionPanels = 6;
+const retainedResidentSections: SectionId[] = ["source", "eval"];
 const nonRetainedResidentSections: SectionId[] = ["overview"];
-const startupResidentPreloadSections: SectionId[] = ["agents", "desktop", "source", "tools", "overview"];
+const startupResidentPreloadSections: SectionId[] = ["agents", "desktop", "eval", "source", "tools", "overview"];
 
 function normalizeResidentSectionIds(candidates: SectionId[], activeSection: SectionId) {
   const ordered = [activeSection, ...retainedResidentSections, ...candidates];
@@ -680,6 +682,18 @@ const ProductFeatureArchitecturePanel = dynamic<ProductFeatureArchitecturePanelP
   }
 );
 
+const EvaluationReportPanel = dynamic<EvaluationReportPanelProps>(
+  () => import("@/components/features/EvaluationReportPanel").then((module) => module.EvaluationReportPanel),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="panel wide eval-loading" data-eval-loading>
+        Loading evaluation report
+      </div>
+    )
+  }
+);
+
 const CoreFeatureDrilldown = dynamic<CoreFeatureDrilldownProps>(
   () => import("@/components/workbench/CoreFeatureDrilldown").then((module) => module.CoreFeatureDrilldown),
   {
@@ -781,6 +795,7 @@ function preloadDesktopRuntimePanels() {
 function preloadHomeFeaturePanels() {
   void import("@/components/features/OperatorCenterDialog");
   void import("@/components/features/ProductFeatureArchitecturePanel");
+  void import("@/components/features/EvaluationReportPanel");
   void import("@/components/workbench/CoreFeatureDrilldown");
 }
 
@@ -1011,8 +1026,18 @@ function appendSourceTemplate(content: string, templateBody: string) {
 }
 
 const DESKTOP_PREFERENCES_SCHEMA_VERSION = "desktop-preferences.v1";
-const defaultPinnedSections: SectionId[] = ["overview", "agents", "desktop", "source", "intent"];
-const operatorSectionIds = new Set<SectionId>(["projects", "history", "structure", "documents", "requirements"]);
+const defaultPinnedSections: SectionId[] = ["overview", "agents", "desktop", "eval", "source", "intent"];
+type OperatorCenterSection = OperatorCenterDialogProps["sections"][number];
+type OperatorCenterSectionId = OperatorCenterSection["id"];
+const operatorSectionIds = new Set<OperatorCenterSectionId>(["projects", "history", "structure", "documents", "requirements"]);
+
+function isOperatorCenterSection(section: Section): section is Section & { id: OperatorCenterSectionId } {
+  return operatorSectionIds.has(section.id as OperatorCenterSectionId);
+}
+
+function isOperatorSectionId(sectionId: SectionId) {
+  return operatorSectionIds.has(sectionId as OperatorCenterSectionId);
+}
 
 const featureGroups: Array<{
   id: FeatureGroupId;
@@ -1084,6 +1109,17 @@ const sections: Section[] = [
     group: "core",
     purpose: "Claude Code 같은 게스트 CLI 실행 경로, 결정 보류, 연속 실행을 조율합니다.",
     purposeEn: "Coordinate guest CLI lanes, deferred decisions, and continuous runs."
+  },
+  {
+    id: "eval",
+    label: "AI 평가",
+    labelEn: "AI Eval",
+    shortLabel: "EVAL",
+    shortLabelEn: "EVAL",
+    icon: ClipboardCheck,
+    group: "core",
+    purpose: "현재 작업, 히스토리, 토큰/툴 사용, 오픈소스 EVAL 후보를 비교합니다.",
+    purposeEn: "Compare current work, history, token/tool usage, and open-source eval candidates."
   },
   {
     id: "tools",
@@ -1218,7 +1254,7 @@ const fallbackViewModes: MonitorViewMode[] = [
     id: "user",
     label: "User View",
     intent: "Work-first desktop view for running, editing, creating, and improving agents.",
-    allowedSections: ["overview", "agents", "desktop", "source", "intent"],
+    allowedSections: ["overview", "agents", "desktop", "eval", "source", "intent"],
     visibilityRules: {},
     securityNotes: []
   },
@@ -1230,6 +1266,7 @@ const fallbackViewModes: MonitorViewMode[] = [
       "overview",
       "tools",
       "desktop",
+      "eval",
       "projects",
       "history",
       "intent",
@@ -1250,6 +1287,7 @@ const fallbackViewModes: MonitorViewMode[] = [
       "overview",
       "tools",
       "desktop",
+      "eval",
       "projects",
       "history",
       "intent",
@@ -3468,7 +3506,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     };
   }, [section, visibleSections]);
   const workVisibleSections = useMemo(() => {
-    return visibleSections.filter((item) => !operatorSectionIds.has(item.id));
+    return visibleSections.filter((item) => !isOperatorSectionId(item.id));
   }, [visibleSections]);
   const selectViewMode = (modeId: string) => {
     const nextMode = viewModes.find((mode) => mode.id === modeId) || currentViewMode;
@@ -3826,6 +3864,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     () => ({
       overview: attentionState.label,
       desktop: "Runtime",
+      eval: `${visibleEvaluations.toLocaleString("ko-KR")} evals`,
       tools: "Studio",
       projects: snapshot.stats.projects.toLocaleString("ko-KR"),
       history: visibleHistoryDays.length.toLocaleString("ko-KR"),
@@ -3848,23 +3887,31 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       structureOverview.summary.totalPressurePoints,
       viewFilteredDocuments.length,
       visibleHistoryDays.length,
+      visibleEvaluations,
       visibleRequirements.length,
       visibleSourceFiles.length
     ]
   );
   const operatorCenterSections = useMemo(
     () =>
-      sections.filter((item) => operatorSectionIds.has(item.id)).map((item) => ({
-        ...sectionForLanguage(item, uiLanguage),
-        meta: sectionNavMeta[item.id]
-      })),
+      sections.filter(isOperatorCenterSection).map((item) => {
+        const localized = sectionForLanguage(item, uiLanguage);
+        return {
+          id: item.id,
+          label: localized.label,
+          shortLabel: localized.shortLabel,
+          purpose: localized.purpose,
+          icon: localized.icon,
+          meta: sectionNavMeta[item.id]
+        } satisfies OperatorCenterSection;
+      }),
     [sectionNavMeta, uiLanguage]
   );
   const sectionById = useMemo(() => {
     return new Map(localizedSections.map((item) => [item.id, item]));
   }, [localizedSections]);
   const coreFunctionSections = useMemo(() => {
-    return (["overview", "agents", "tools", "desktop", "source", "intent"] as SectionId[])
+    return (["overview", "agents", "tools", "desktop", "eval", "source", "intent"] as SectionId[])
       .map((id) => sectionById.get(id))
       .filter((item): item is Section => {
         return item ? currentViewMode.allowedSections.includes(item.id) : false;
@@ -3921,7 +3968,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     return pinnedSections
       .map((id) => sectionById.get(id))
       .filter((item): item is Section => {
-        return item ? currentViewMode.allowedSections.includes(item.id) && !operatorSectionIds.has(item.id) : false;
+        return item ? currentViewMode.allowedSections.includes(item.id) && !isOperatorSectionId(item.id) : false;
       });
   }, [currentViewMode.allowedSections, pinnedSections, sectionById]);
   const recentVisibleSections = useMemo(() => {
@@ -3935,7 +3982,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const currentSection = sectionById.get(section);
   const currentFeatureGroup =
     localizedFeatureGroups.find((group) => group.id === currentSection?.group) || localizedFeatureGroups[0];
-  const isPrimaryWorkSurface = section === "agents" || section === "tools";
+  const isPrimaryWorkSurface = section === "agents" || section === "tools" || section === "eval";
   const currentThemeLabel =
     themeMode === "system"
       ? uiLanguage === "ko" ? "시스템" : "System"
@@ -4981,6 +5028,33 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         run: () => openSection("desktop", { intentId: "run-work", flowStepId: "lane" })
       },
       {
+        id: "evaluate-work",
+        label: uiLanguage === "ko" ? "작업 평가" : "Evaluate work",
+        detail:
+          uiLanguage === "ko"
+            ? "현재 작업, 히스토리, 토큰/툴 사용, 오픈소스 EVAL 후보를 점수로 비교합니다."
+            : "Score current work, history, token/tool usage, and open-source eval candidates.",
+        actionLabel: "EVAL",
+        badge: `${visibleEvaluations}/${visibleWebSearches}`,
+        targetSection: "eval",
+        nextStep: uiLanguage === "ko" ? "평가 탭에서 현재 작업 점수와 병목을 확인합니다." : "Open the eval tab and review current work score and bottlenecks.",
+        flowSteps:
+          uiLanguage === "ko"
+            ? [
+                { id: "current", label: "현재 작업 점수", actionLabel: "EVAL", run: selectIntentStep("evaluate-work", "eval", "current") },
+                { id: "compare", label: "토큰/툴 비교", actionLabel: "EVAL", run: selectIntentStep("evaluate-work", "eval", "compare") },
+                { id: "opensource", label: "오픈소스 후보", actionLabel: "EVAL", run: selectIntentStep("evaluate-work", "eval", "opensource") }
+              ]
+            : [
+                { id: "current", label: "Current work score", actionLabel: "EVAL", run: selectIntentStep("evaluate-work", "eval", "current") },
+                { id: "compare", label: "Compare tokens/tools", actionLabel: "EVAL", run: selectIntentStep("evaluate-work", "eval", "compare") },
+                { id: "opensource", label: "Open-source candidates", actionLabel: "EVAL", run: selectIntentStep("evaluate-work", "eval", "opensource") }
+              ],
+        icon: ClipboardCheck,
+        keywords: ["eval", "evaluation", "score", "token", "tool", "평가", "점수", "토큰", "툴", "히스토리"],
+        run: () => openSection("eval", { intentId: "evaluate-work", flowStepId: "current" })
+      },
+      {
         id: "open-files",
         label: uiLanguage === "ko" ? "파일/소스 열기" : "Open files",
         detail:
@@ -5078,6 +5152,8 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       rootToolItems.length,
       runtimeInitDefaults.adapterId,
       uiLanguage,
+      visibleEvaluations,
+      visibleWebSearches,
       visibleSourceFiles.length
     ]
   );
@@ -5200,6 +5276,24 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             : ["Enter task intake", "Fan out to needed CLI lanes", "Defer questions and merge results"]
       },
       {
+        id: "eval",
+        label: uiLanguage === "ko" ? "AI 평가" : "AI Eval",
+        kicker: uiLanguage === "ko" ? "품질 루프" : "Quality Loop",
+        title: uiLanguage === "ko" ? "현재 작업과 히스토리 품질을 점수로 봅니다" : "Score current work and history quality",
+        detail:
+          uiLanguage === "ko"
+            ? "평가 기록, 웹 검색, 작업 요약, 토큰/툴 사용 신호를 한 작업대에 모아 다음 병목과 외부 EVAL 적용 후보를 판단합니다."
+            : "Bring eval records, web research, summaries, and token/tool signals into one workbench to judge bottlenecks and external eval candidates.",
+        icon: ClipboardCheck,
+        metric: `${visibleEvaluations.toLocaleString("ko-KR")} evals`,
+        cta: uiLanguage === "ko" ? "AI 평가 열기" : "Open AI Eval",
+        run: () => openSection("eval"),
+        steps:
+          uiLanguage === "ko"
+            ? ["현재 작업 점수 확인", "토큰/툴 사용 비교", "오픈소스 EVAL 후보 판단"]
+            : ["Review current work score", "Compare token/tool usage", "Judge open-source eval candidates"]
+      },
+      {
         id: "files",
         label: uiLanguage === "ko" ? "루트 툴" : "Root Tools",
         kicker: uiLanguage === "ko" ? "공유 기반" : "Shared Base",
@@ -5244,7 +5338,8 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       openSection,
       rootToolItems.length,
       runtimeInitDefaults.adapterId,
-      uiLanguage
+      uiLanguage,
+      visibleEvaluations
     ]
   );
   const homeDrilldownItems = useMemo<Array<{
@@ -6836,6 +6931,26 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             terminalDrawerOpen={terminalDrawerOpen}
             setTerminalDrawerOpen={setTerminalDrawerOpen}
             surfaceActive={section === "desktop"}
+          />
+        </MountedSectionPanel>
+      )}
+
+      {shouldRenderSection("eval") && (
+        <MountedSectionPanel id="eval" active={section === "eval"}>
+          <EvaluationReportPanel
+            language={uiLanguage}
+            documents={viewFilteredDocuments}
+            historyDays={visibleHistoryDays}
+            unifiedEvents={visibleUnifiedEvents}
+            stats={snapshot.stats}
+            activeTasks={collaborationBoard.summary.activeTasks}
+            blockedTasks={collaborationBoard.summary.blockedTasks}
+            openSourceReferences={openSourceFeatureReferences}
+            onOpenDocuments={(nextCategory = "evaluation") => {
+              openSection("documents");
+              setCategory(nextCategory);
+            }}
+            onOpenRuntime={() => openSection("desktop")}
           />
         </MountedSectionPanel>
       )}
