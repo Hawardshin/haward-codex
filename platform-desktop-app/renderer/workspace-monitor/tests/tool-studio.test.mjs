@@ -124,6 +124,36 @@ test("Monitor groups repeated actions with shared action primitives", () => {
   assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-studio-actions \{[\s\S]*?width: 100%;/);
 });
 
+test("Runtime text defaults expose selectable choices", () => {
+  assert.match(runtimeTerminalDrawer, /export type RuntimeTextChoice/);
+  assert.match(runtimeTerminalDrawer, /sessionPromptChoices\?: RuntimeTextChoice\[\]/);
+  assert.match(runtimeTerminalDrawer, /workingDirOptions\?: RuntimeTextChoice\[\]/);
+  assert.match(runtimeTerminalDrawer, /runtime-text-choice-grid/);
+  assert.match(runtimeTerminalDrawer, /onSessionPromptChange\(choice\.value\)/);
+  assert.match(runtimeTerminalDrawer, /onWorkingDirChange\(choice\.value\)/);
+  assert.match(monitorShell, /type RuntimeTextChoice/);
+  assert.match(monitorShell, /const sessionPromptChoices = useMemo<RuntimeTextChoice\[\]>/);
+  assert.match(monitorShell, /const workingDirOptions = useMemo<RuntimeTextChoice\[\]>/);
+  assert.match(monitorShell, /const taskPipePromptChoices = useMemo<RuntimeTextChoice\[\]>/);
+  assert.match(monitorShell, /sessionPromptChoices=\{sessionPromptChoices\}/);
+  assert.match(monitorShell, /workingDirOptions=\{workingDirOptions\}/);
+  assert.match(monitorShell, /setTaskPipePrompt\(choice\.value\)/);
+  assert.match(css, /\.runtime-text-choice-grid \{/);
+  assert.match(css, /\.task-pipe-controls \.task-prompt-choice-field/);
+});
+
+test("Search agent provider and model settings use explicit choices", () => {
+  assert.match(monitorShell, /const modelChoiceOptions = useMemo/);
+  assert.match(monitorShell, /agent-provider-choice-grid/);
+  assert.match(monitorShell, /agent-model-choice-grid/);
+  assert.match(monitorShell, /onClick=\{\(\) => onChange\("providerId", provider\.providerId\)\}/);
+  assert.match(monitorShell, /onClick=\{\(\) => onChange\("model", choice\.value\)\}/);
+  assert.doesNotMatch(monitorShell, /<datalist id="search-agent-model-options">/);
+  assert.doesNotMatch(monitorShell, /list="search-agent-model-options"/);
+  assert.match(css, /\.agent-provider-choice-grid,/);
+  assert.match(css, /\.agent-model-choice-grid button\.active/);
+});
+
 test("Agents collaboration uses lazy open-source 3D character scene", () => {
   assert.equal(packageJson.dependencies["@react-three/fiber"], "9.6.1");
   assert.equal(packageJson.dependencies["@react-three/drei"], "10.7.7");

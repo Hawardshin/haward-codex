@@ -1,0 +1,28 @@
+{
+  "date": "2026-06-06",
+  "requested_outcomes": [
+    "텍스트 기반 기본 설정을 선택형으로 변경",
+    "이상한 모델 선택 드롭다운 제거",
+    "구현 후 자동 빌드 실행"
+  ],
+  "coverage": [
+    {
+      "outcome": "텍스트 기반 기본 설정을 선택형으로 변경",
+      "status": "covered",
+      "evidence": "Runtime terminal and task pipe prompts now expose selectable choices."
+    },
+    {
+      "outcome": "이상한 모델 선택 드롭다운 제거",
+      "status": "covered",
+      "evidence": "Search Agent model datalist was removed and explicit model choice buttons were added."
+    },
+    {
+      "outcome": "구현 후 자동 빌드 실행",
+      "status": "covered",
+      "evidence": "corepack pnpm --dir platform-desktop-app run package:internal completed."
+    }
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-06-selectable-default-settings.json"
+  ]
+}

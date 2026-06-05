@@ -17,6 +17,14 @@ type RuntimeTerminalSessionMode = {
   intent: string;
 };
 
+export type RuntimeTextChoice = {
+  id: string;
+  label: string;
+  detail: string;
+  value: string;
+  badge?: string;
+};
+
 export type RuntimeTerminalSession = {
   sessionId: string;
   taskKind: string;
@@ -69,11 +77,13 @@ type RuntimeTerminalDrawerProps = {
   selectedSessionAdapterId: string;
   sessionInput: string;
   sessionPrompt: string;
+  sessionPromptChoices?: RuntimeTextChoice[];
   sessions: RuntimeTerminalSession[];
   sessionStats: RuntimeTerminalStats;
   sourceDirty: boolean;
   uiLanguage: RuntimeTerminalLanguage;
   workingDir: string;
+  workingDirOptions?: RuntimeTextChoice[];
   onCancelSession: (sessionId: string) => void | Promise<void>;
   onCollapse: () => void;
   onDeferSession: (sessionId: string) => void | Promise<void>;
@@ -205,11 +215,13 @@ export function RuntimeTerminalDrawer({
   selectedSessionAdapterId,
   sessionInput,
   sessionPrompt,
+  sessionPromptChoices = [],
   sessions,
   sessionStats,
   sourceDirty,
   uiLanguage,
   workingDir,
+  workingDirOptions = [],
   onCancelSession,
   onCollapse,
   onDeferSession,
@@ -400,14 +412,50 @@ export function RuntimeTerminalDrawer({
               <span>{copy.changeInit}</span>
             </button>
           </div>
-          <label>
+          <div className="runtime-choice-field">
             <span>{copy.workingDir}</span>
-            <input value={workingDir} onChange={(event) => onWorkingDirChange(event.target.value)} placeholder="workspace root" />
-          </label>
-          <label className="session-prompt-field">
+            {workingDirOptions.length > 0 && (
+              <div className="runtime-text-choice-grid compact" aria-label={uiLanguage === "ko" ? "작업 폴더 선택지" : "Working directory choices"}>
+                {workingDirOptions.map((choice) => (
+                  <button
+                    key={choice.id}
+                    type="button"
+                    className={workingDir === choice.value ? "active" : ""}
+                    aria-pressed={workingDir === choice.value}
+                    onClick={() => onWorkingDirChange(choice.value)}
+                    title={choice.detail}
+                  >
+                    <span>{choice.label}</span>
+                    <small>{choice.detail}</small>
+                    {choice.badge && <em>{choice.badge}</em>}
+                  </button>
+                ))}
+              </div>
+            )}
+            <input aria-label={copy.workingDir} value={workingDir} onChange={(event) => onWorkingDirChange(event.target.value)} placeholder="workspace root" />
+          </div>
+          <div className="runtime-choice-field session-prompt-field">
             <span>{copy.initialInput}</span>
-            <textarea value={sessionPrompt} onChange={(event) => onSessionPromptChange(event.target.value)} rows={4} />
-          </label>
+            {sessionPromptChoices.length > 0 && (
+              <div className="runtime-text-choice-grid" aria-label={uiLanguage === "ko" ? "초기 입력 선택지" : "Initial input choices"}>
+                {sessionPromptChoices.map((choice) => (
+                  <button
+                    key={choice.id}
+                    type="button"
+                    className={sessionPrompt === choice.value ? "active" : ""}
+                    aria-pressed={sessionPrompt === choice.value}
+                    onClick={() => onSessionPromptChange(choice.value)}
+                    title={choice.detail}
+                  >
+                    <span>{choice.label}</span>
+                    <small>{choice.detail}</small>
+                    {choice.badge && <em>{choice.badge}</em>}
+                  </button>
+                ))}
+              </div>
+            )}
+            <textarea aria-label={copy.initialInput} value={sessionPrompt} onChange={(event) => onSessionPromptChange(event.target.value)} rows={4} />
+          </div>
           <button
             type="button"
             onClick={() => {

@@ -62,7 +62,7 @@ import {
   type DesktopGitWorkbenchAction
 } from "@/components/workbench/NativeGitWorkbench";
 import { PathDisclosure } from "@/components/workbench/PathDisclosure";
-import { RuntimeTerminalDrawer } from "@/components/workbench/RuntimeTerminalDrawer";
+import { RuntimeTerminalDrawer, type RuntimeTextChoice } from "@/components/workbench/RuntimeTerminalDrawer";
 import { ToolStudioPanel, type ToolStudioMode, type ToolStudioModeRequest } from "@/components/workbench/ToolStudioPanel";
 import { WorkspaceExplorerPane } from "@/components/workbench/WorkspaceExplorerPane";
 import { writeClipboardText } from "@/lib/clipboard.mjs";
@@ -6623,6 +6623,51 @@ function SearchAgentWorkChatPanel({
   const selectedProviderRuntimeSource = selectedProviderLocal
     ? "127.0.0.1:11434"
     : selectedProvider?.envVar || "provider env";
+  const modelChoiceOptions = useMemo(() => {
+    const choices: Array<{ id: string; label: string; detail: string; value: string; badge?: string }> = [];
+    const seen = new Set<string>();
+    const addChoice = (choice: { id: string; label: string; detail: string; value: string; badge?: string }) => {
+      const normalizedValue = choice.value.trim();
+      if (!normalizedValue || seen.has(normalizedValue)) {
+        return;
+      }
+      seen.add(normalizedValue);
+      choices.push({ ...choice, value: normalizedValue });
+    };
+
+    addChoice({
+      id: "provider-default-model",
+      label: ko ? "기본 모델" : "Default",
+      detail: selectedProvider?.defaultModel || providerModelCatalog?.defaultModel || "",
+      value: selectedProvider?.defaultModel || providerModelCatalog?.defaultModel || "",
+      badge: selectedProvider?.label
+    });
+    modelOptions.slice(0, 5).forEach((model, index) => {
+      addChoice({
+        id: `catalog-model-${model.providerId}-${model.id}`,
+        label: model.label || model.id,
+        detail: model.id,
+        value: model.id,
+        badge: index === 0 ? (ko ? "발견" : "Found") : undefined
+      });
+    });
+    addChoice({
+      id: "current-model-input",
+      label: ko ? "현재 입력" : "Current input",
+      detail: selectedProviderModel,
+      value: selectedProviderModel,
+      badge: ko ? "직접" : "Custom"
+    });
+
+    return choices.slice(0, 6);
+  }, [
+    ko,
+    modelOptions,
+    providerModelCatalog?.defaultModel,
+    selectedProvider?.defaultModel,
+    selectedProvider?.label,
+    selectedProviderModel
+  ]);
 
   return (
     <section className="panel wide search-agent-work-chat-panel">
@@ -6674,32 +6719,44 @@ function SearchAgentWorkChatPanel({
             </label>
             <div className="agent-chat-composer-footer">
               <div className="agent-provider-run-controls" aria-label={ko ? "제공자 실행 설정" : "Provider run settings"}>
-                <label>
+                <div className="agent-provider-choice-field">
                   <span>{ko ? "계정" : "Account"}</span>
-                  <select value={form.providerId} onChange={(event) => onChange("providerId", event.target.value)}>
+                  <div className="agent-provider-choice-grid" role="listbox" aria-label={ko ? "계정 선택" : "Account choices"}>
                     {providerCredentialReport.providers.map((provider) => (
-                      <option key={provider.providerId} value={provider.providerId}>
-                        {provider.label} {provider.authMethod === "local_http" ? (ko ? "로컬" : "local") : provider.configured ? (ko ? "연결됨" : "connected") : (ko ? "미연결" : "not connected")}
-                      </option>
+                      <button
+                        key={provider.providerId}
+                        type="button"
+                        className={form.providerId === provider.providerId ? "active" : ""}
+                        role="option"
+                        aria-selected={form.providerId === provider.providerId}
+                        onClick={() => onChange("providerId", provider.providerId)}
+                      >
+                        <span>{provider.label}</span>
+                        <small>
+                          {provider.authMethod === "local_http"
+                            ? ko
+                              ? "로컬"
+                              : "local"
+                            : provider.configured
+                              ? ko
+                                ? "연결됨"
+                                : "connected"
+                              : ko
+                                ? "미연결"
+                                : "not connected"}
+                        </small>
+                      </button>
                     ))}
-                  </select>
-                </label>
+                  </div>
+                </div>
                 <label>
                   <span>{ko ? "모델" : "Model"}</span>
                   <div className="agent-model-picker">
                     <input
-                      list="search-agent-model-options"
                       value={selectedProviderModel}
                       placeholder={selectedProvider?.defaultModel || "model"}
                       onChange={(event) => onChange("model", event.target.value)}
                     />
-                    <datalist id="search-agent-model-options">
-                      {modelOptions.map((model) => (
-                        <option key={`${model.providerId}-${model.id}`} value={model.id}>
-                          {model.label}
-                        </option>
-                      ))}
-                    </datalist>
                     <button
                       type="button"
                       className="agent-model-refresh-button"
@@ -6711,6 +6768,25 @@ function SearchAgentWorkChatPanel({
                       <RefreshCw size={15} aria-hidden="true" />
                     </button>
                   </div>
+                  {modelChoiceOptions.length > 0 && (
+                    <div className="agent-model-choice-grid" role="listbox" aria-label={ko ? "모델 선택지" : "Model choices"}>
+                      {modelChoiceOptions.map((choice) => (
+                        <button
+                          key={choice.id}
+                          type="button"
+                          className={selectedProviderModel === choice.value ? "active" : ""}
+                          role="option"
+                          aria-selected={selectedProviderModel === choice.value}
+                          onClick={() => onChange("model", choice.value)}
+                          title={choice.detail}
+                        >
+                          <span>{choice.label}</span>
+                          <small>{choice.detail}</small>
+                          {choice.badge && <em>{choice.badge}</em>}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                   <small className={providerModelError ? "agent-model-status warning" : "agent-model-status"}>
                     {modelStatusText}
                   </small>
@@ -8425,6 +8501,151 @@ function DesktopRuntimePanel({
     Boolean(selectedDecision?.sessionId);
   const selectedMode = sessionModePresets.find((mode) => mode.id === selectedSessionModeId) || sessionModePresets[0];
   const selectedTaskPipe = taskPipePresets.find((preset) => preset.taskKind === selectedTaskPipeKind) || taskPipePresets[0] || fallbackTaskPipePresets[0];
+  const sessionPromptChoices = useMemo<RuntimeTextChoice[]>(() => {
+    const modeLabel = (mode: SessionModePreset) => {
+      if (uiLanguage !== "ko") {
+        return mode.label;
+      }
+      return (
+        {
+          research_insight_agent: "검색 에이전트",
+          user_task: "사용자 요청",
+          platform_improvement: "플랫폼 개선",
+          knowledge_accumulation: "지식 축적",
+          review_verify: "검토/검증"
+        }[mode.id] || mode.label
+      );
+    };
+    const modeDetail = (mode: SessionModePreset) => {
+      if (uiLanguage !== "ko") {
+        return mode.intent;
+      }
+      return (
+        {
+          research_insight_agent: "검색, 출처 순위, 실행 계획을 한 번에 시작",
+          user_task: "사용자 요청을 그대로 실행하고 막힌 결정만 보류",
+          platform_improvement: "요구사항, 스펙, 검증을 보존하며 플랫폼 개선",
+          knowledge_accumulation: "로그와 결정을 재사용 가능한 지식으로 구조화",
+          review_verify: "위험, 누락 검증, 근거 부족을 먼저 확인"
+        }[mode.id] || mode.intent
+      );
+    };
+    const preferredModes = [
+      selectedMode,
+      ...sessionModePresets.filter((mode) => ["user_task", "platform_improvement", "review_verify", "knowledge_accumulation"].includes(mode.id))
+    ];
+    const seen = new Set<string>();
+    return preferredModes
+      .filter((mode) => {
+        if (seen.has(mode.prompt)) {
+          return false;
+        }
+        seen.add(mode.prompt);
+        return true;
+      })
+      .slice(0, 5)
+      .map((mode) => ({
+        id: `session-prompt-${mode.id}`,
+        label: modeLabel(mode),
+        detail: modeDetail(mode),
+        value: mode.prompt,
+        badge: mode.id === selectedMode.id ? (uiLanguage === "ko" ? "현재" : "Current") : undefined
+      }));
+  }, [selectedMode, uiLanguage]);
+  const workingDirOptions = useMemo<RuntimeTextChoice[]>(() => {
+    const candidates: RuntimeTextChoice[] = [
+      {
+        id: "runtime-default",
+        label: uiLanguage === "ko" ? "런타임 기본" : "Runtime default",
+        detail: uiLanguage === "ko" ? "앱이 현재 작업공간 루트를 자동 사용" : "Use the current workspace root automatically",
+        value: ""
+      }
+    ];
+    if (desktopWorkspace?.activeWorkspacePath) {
+      candidates.push({
+        id: "active-workspace",
+        label: uiLanguage === "ko" ? "현재 작업공간" : "Active workspace",
+        detail: desktopWorkspace.activeWorkspacePath,
+        value: desktopWorkspace.activeWorkspacePath,
+        badge: desktopWorkspace.activeWorkspaceSource || undefined
+      });
+    }
+    if (desktopWorkspace?.fallbackWorkspacePath && desktopWorkspace.fallbackWorkspacePath !== desktopWorkspace?.activeWorkspacePath) {
+      candidates.push({
+        id: "fallback-workspace",
+        label: uiLanguage === "ko" ? "저장소 루트" : "Repository root",
+        detail: desktopWorkspace.fallbackWorkspacePath,
+        value: desktopWorkspace.fallbackWorkspacePath,
+        badge: uiLanguage === "ko" ? "대체" : "Fallback"
+      });
+    }
+    if (workspaceImportPath.trim() && !candidates.some((candidate) => candidate.value === workspaceImportPath.trim())) {
+      candidates.push({
+        id: "typed-import-path",
+        label: uiLanguage === "ko" ? "입력한 경로" : "Typed path",
+        detail: workspaceImportPath.trim(),
+        value: workspaceImportPath.trim(),
+        badge: uiLanguage === "ko" ? "후보" : "Candidate"
+      });
+    }
+    return candidates.slice(0, 4);
+  }, [
+    desktopWorkspace?.activeWorkspacePath,
+    desktopWorkspace?.activeWorkspaceSource,
+    desktopWorkspace?.fallbackWorkspacePath,
+    uiLanguage,
+    workspaceImportPath
+  ]);
+  const taskPipePromptChoices = useMemo<RuntimeTextChoice[]>(() => {
+    const selectedPresetPrompt =
+      uiLanguage === "ko"
+        ? `${selectedTaskPipe.label} 기준으로 작업을 분해하고 ${selectedTaskPipe.laneCount}개 실행 경로를 초기화해줘. ${selectedTaskPipe.mergeGate} 전에는 소스 영향 결정과 질문을 보류하고, 각 경로의 출력과 병합 조건을 기록해줘.`
+        : `Break down the task with the ${selectedTaskPipe.label} preset and initialize ${selectedTaskPipe.laneCount} run lanes. Hold source-impacting decisions and questions before ${selectedTaskPipe.mergeGate}, then record lane output and merge conditions.`;
+    const choices: RuntimeTextChoice[] = [
+      {
+        id: "selected-task-pipe",
+        label: uiLanguage === "ko" ? "선택 프리셋" : "Selected preset",
+        detail: selectedTaskPipe.intent,
+        value: selectedPresetPrompt,
+        badge: selectedTaskPipe.label
+      },
+      {
+        id: "implementation-pipe",
+        label: uiLanguage === "ko" ? "구현 분해" : "Implementation",
+        detail: uiLanguage === "ko" ? "구현, 리뷰, 검증 경로를 나누어 시작" : "Split implementation, review, and validation lanes",
+        value:
+          uiLanguage === "ko"
+            ? "사용자 요청을 구현 단위, 리뷰 단위, 검증 단위로 나눠서 각 CLI 실행 경로를 초기화해줘. 소스 변경은 병합 게이트 전까지 보류하고 필요한 결정은 결정함으로 보내줘."
+            : "Split the user's request into implementation, review, and validation lanes. Hold source changes before the merge gate and send required decisions to the decision inbox."
+      },
+      {
+        id: "research-pipe",
+        label: uiLanguage === "ko" ? "근거 조사" : "Grounded research",
+        detail: uiLanguage === "ko" ? "검색, 출처 순위, 회의적 검토를 먼저 실행" : "Run search, source ranking, and skeptic review first",
+        value:
+          uiLanguage === "ko"
+            ? "이 요청을 검색, 출처 순위, 근거 추출, 회의적 검토 경로로 나눠 초기화해줘. 구현 전에 강한 출처와 약한 출처를 분리하고 계획 영향만 기록해줘."
+            : "Initialize search, source ranking, evidence extraction, and skeptic review lanes for this request. Separate strong and weak sources before implementation and record only plan-impacting evidence."
+      },
+      {
+        id: "review-pipe",
+        label: uiLanguage === "ko" ? "검토/검증" : "Review and verify",
+        detail: uiLanguage === "ko" ? "버그, 누락 테스트, 롤백 조건을 먼저 점검" : "Check bugs, missing tests, and rollback conditions first",
+        value:
+          uiLanguage === "ko"
+            ? "현재 변경 또는 계획을 검토/검증 파이프라인으로 초기화해줘. 버그, 누락된 테스트, 리소스 누수, 롤백 조건, 사용자 결정 필요 여부를 우선순위로 기록해줘."
+            : "Initialize a review and verification pipeline for the current change or plan. Prioritize bugs, missing tests, resource leaks, rollback conditions, and user-decision needs."
+      }
+    ];
+    const seen = new Set<string>();
+    return choices.filter((choice) => {
+      if (seen.has(choice.value)) {
+        return false;
+      }
+      seen.add(choice.value);
+      return true;
+    });
+  }, [selectedTaskPipe, uiLanguage]);
   useEffect(() => {
     const mode = sessionModePresets.find((item) => item.id === initDefaults.sessionModeId) || sessionModePresets[0];
     setSelectedSessionAdapterId(initDefaults.adapterId);
@@ -11575,10 +11796,31 @@ function DesktopRuntimePanel({
                 <span>초기화 설정 변경</span>
               </button>
             </div>
-            <label className="session-prompt-field">
+            <div className="session-prompt-field task-prompt-choice-field">
 	              <span>{uiLanguage === "ko" ? "작업 요청" : "Task intake"}</span>
-              <textarea value={taskPipePrompt} onChange={(event) => setTaskPipePrompt(event.target.value)} rows={4} />
-            </label>
+              <div className="runtime-text-choice-grid task-prompt-choice-grid" aria-label={uiLanguage === "ko" ? "작업 요청 선택지" : "Task intake choices"}>
+                {taskPipePromptChoices.map((choice) => (
+                  <button
+                    key={choice.id}
+                    type="button"
+                    className={taskPipePrompt === choice.value ? "active" : ""}
+                    aria-pressed={taskPipePrompt === choice.value}
+                    onClick={() => setTaskPipePrompt(choice.value)}
+                    title={choice.detail}
+                  >
+                    <span>{choice.label}</span>
+                    <small>{choice.detail}</small>
+                    {choice.badge && <em>{choice.badge}</em>}
+                  </button>
+                ))}
+              </div>
+              <textarea
+                aria-label={uiLanguage === "ko" ? "작업 요청 직접 편집" : "Edit task intake"}
+                value={taskPipePrompt}
+                onChange={(event) => setTaskPipePrompt(event.target.value)}
+                rows={4}
+              />
+            </div>
             <button type="button" onClick={initTaskPipe} disabled={!invoke || runningAdapterId !== "" || !taskPipePrompt.trim()}>
               <Network size={16} aria-hidden="true" />
 	              <span>{runningAdapterId === "task-pipe" ? (uiLanguage === "ko" ? "초기화 중" : "Initializing") : uiLanguage === "ko" ? "파이프라인 시작" : "Init Pipe"}</span>
@@ -12233,11 +12475,13 @@ function DesktopRuntimePanel({
         selectedSessionAdapterId={selectedSessionAdapterId}
         sessionInput={sessionInput}
         sessionPrompt={sessionPrompt}
+        sessionPromptChoices={sessionPromptChoices}
         sessions={sessions}
         sessionStats={sessionStats}
         sourceDirty={Boolean(sourceDiff?.dirty)}
         uiLanguage={uiLanguage}
         workingDir={workingDir}
+        workingDirOptions={workingDirOptions}
         onCancelSession={cancelSession}
         onCollapse={() => setTerminalDrawerOpen(false)}
         onDeferSession={deferSession}

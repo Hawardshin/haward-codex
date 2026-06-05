@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T15:59:07.286Z",
+  "generatedAt": "2026-06-05T16:12:22.741Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 444,
-    "evaluations": 24,
+    "evaluations": 23,
     "webSearches": 14,
     "timingRecords": 12,
     "historyDays": 2,
-    "adminHistoryDocuments": 2292,
+    "adminHistoryDocuments": 2299,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7332,6 +7332,214 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-06-selectable-default-settings-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-selectable-default-settings-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Selectable Default Settings Evaluation Input",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 selectable default settings.json\" , \"omission check targets\": \" history/omission checks/202",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;installation occurred&quot;: false, &quot;installation record targets&quot;: , &quot;resource risk occurred&quot;: true, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 06 06 selectable default settings.json&quot; , &quot;omission check targets&quot;: &quot; history/omission checks/2026/2026 06 06 selectable default settings.json&quot; , &quot;validation targets&quot;: &quot;platform</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 547,
+      "updatedAt": "2026-06-05T16:12:11.045Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-selectable-default-settings-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-selectable-default-settings.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "최종 평가",
+      "excerpt": "최종 평가 판정 요청한 핵심 변경은 완료됐다. 텍스트 기반 기본 설정은 선택 카드가 먼저 보이도록 바뀌었고, 직접 편집도 유지됐다. 구현 후 내부 패키징 빌드까지 완료했다. 검증 근거 렌더러 test/check 통과 데스크톱 앱 test/check 통과 package:internal 통과 Rust test/build 통과 codesign verify 통과 DMG verify 통과 git diff check 통과 제한 브라우저 스모크는 로컬 개발 서버에서 Loading workspace snapsh",
+      "html": "<p>최종 평가 판정 요청한 핵심 변경은 완료됐다. 텍스트 기반 기본 설정은 선택 카드가 먼저 보이도록 바뀌었고, 직접 편집도 유지됐다. 구현 후 내부 패키징 빌드까지 완료했다. 검증 근거 렌더러 test/check 통과 데스크톱 앱 test/check 통과 package:internal 통과 Rust test/build 통과 codesign verify 통과 DMG verify 통과 git diff check 통과 제한 브라우저 스모크는 로컬 개발 서버에서 Loading workspace snapshot 상태에 머물러 본문 시각 확인은 제한됐다. 콘솔 오류는 없었고, 패키징 빌드와 정적 테스트로 UI 계약을 검증했다. 공개 배포 잔여 위험 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 862,
+      "updatedAt": "2026-06-05T16:12:11.045Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-selectable-default-settings-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-selectable-default-settings.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적",
+      "excerpt": "요청 결과 추적 요청 기본 설정과 텍스트 설정을 사용자가 바로 선택할 수 있게 만들고, 구현 후 빌드까지 자동 실행한다. 결과 platform desktop app/docs/requirements/2026 06 06 selectable default settings.ko.md platform desktop app/specs/2026 06 06 selectable default settings/ platform desktop app/renderer/workspace monitor/components",
+      "html": "<p>요청 결과 추적 요청 기본 설정과 텍스트 설정을 사용자가 바로 선택할 수 있게 만들고, 구현 후 빌드까지 자동 실행한다. 결과 platform desktop app/docs/requirements/2026 06 06 selectable default settings.ko.md platform desktop app/specs/2026 06 06 selectable default settings/ platform desktop app/renderer/workspace monitor/components/workbench/RuntimeTerminalDrawer.tsx platform desktop app/renderer/workspace mon</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 855,
+      "updatedAt": "2026-06-05T16:12:11.044Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-selectable-default-settings-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-selectable-default-settings.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약",
+      "excerpt": "사용자 요청 요약 기본 설정과 실행 입력이 텍스트만으로 되어 있어 사용자가 어떤 값을 넣어야 할지 알기 어렵다. 텍스트 기반 설정도 여러 선택지를 먼저 제공하고, 사용자가 선택해서 바꿀 수 있게 해 달라는 요청이다.",
+      "html": "<p>사용자 요청 요약 기본 설정과 실행 입력이 텍스트만으로 되어 있어 사용자가 어떤 값을 넣어야 할지 알기 어렵다. 텍스트 기반 설정도 여러 선택지를 먼저 제공하고, 사용자가 선택해서 바꿀 수 있게 해 달라는 요청이다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 296,
+      "updatedAt": "2026-06-05T16:12:11.044Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-selectable-default-settings-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-selectable-default-settings.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록",
+      "excerpt": "웹 검색 기록 쿼리 WAI ARIA radio group select listbox settings form user choices official Nielsen Norman Group form design dropdown radio buttons settings choices Apple Human Interface Guidelines settings controls radio buttons pickers macOS Material Design selection controls settings r",
+      "html": "<p>웹 검색 기록 쿼리 WAI ARIA radio group select listbox settings form user choices official Nielsen Norman Group form design dropdown radio buttons settings choices Apple Human Interface Guidelines settings controls radio buttons pickers macOS Material Design selection controls settings radio buttons chips 확인한 기준 WAI ARIA Authoring Practices는 선택형 UI에서 radio group, li</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1291,
+      "updatedAt": "2026-06-05T16:12:11.044Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-selectable-default-settings-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-selectable-default-settings.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약",
+      "excerpt": "작업 요약 데스크톱 모니터의 텍스트 중심 기본 설정을 선택형 UI로 개선했다. 런타임 터미널 작업 폴더와 초기 입력에 선택 카드 추가 작업 파이프라인 요청에 프리셋 선택 카드 추가 검색 에이전트 제공자/모델 설정을 버튼형 선택으로 변경 모델 datalist 제거 선택 카드 CSS와 정적 테스트 추가 내부 패키징 빌드 완료",
+      "html": "<p>작업 요약 데스크톱 모니터의 텍스트 중심 기본 설정을 선택형 UI로 개선했다. 런타임 터미널 작업 폴더와 초기 입력에 선택 카드 추가 작업 파이프라인 요청에 프리셋 선택 카드 추가 검색 에이전트 제공자/모델 설정을 버튼형 선택으로 변경 모델 datalist 제거 선택 카드 CSS와 정적 테스트 추가 내부 패키징 빌드 완료</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 435,
+      "updatedAt": "2026-06-05T16:12:11.044Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-selectable-default-settings-json",
+      "path": "_history/work-timings/2026/2026-06-06-selectable-default-settings.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Selectable Default Settings",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"phases\": { \"phase\": \"intake research and source review\", \"elapsed minutes estimate\": 12 }, { \"phase\": \"implementation\", \"elapsed minutes estimate\": 24 }, { \"phase\": \"tests and package build\", \"elapsed minutes estimate\": 10 }, { \"phase\": \"records and close",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;intake research and source review&quot;, &quot;elapsed minutes estimate&quot;: 12 }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;elapsed minutes estimate&quot;: 24 }, { &quot;phase&quot;: &quot;tests and package build&quot;, &quot;elapsed minutes estimate&quot;: 10 }, { &quot;phase&quot;: &quot;records and closeout&quot;, &quot;elapsed minutes estimate&quot;: 8 } }</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 410,
+      "updatedAt": "2026-06-05T16:12:11.044Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-selectable-default-settings-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-selectable-default-settings.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "선택 가능한 기본 설정 요구사항",
+      "excerpt": "선택 가능한 기본 설정 요구사항 배경 사용자는 기본 설정과 실행 입력이 깡 텍스트로 노출되어 어떤 값을 넣어야 하는지 알기 어렵다고 지적했다. 텍스트 값이 필요한 설정도 먼저 선택지를 제시하고, 필요할 때 직접 수정할 수 있어야 한다. 요구사항 REQ SELECT DEFAULT 001: 런타임 세션의 작업 폴더는 현재 작업공간, 저장소 루트, 런타임 기본값 같은 선택지를 제공해야 한다. REQ SELECT DEFAULT 002: 런타임 세션의 초기 입력은 세션 모드 프리셋을 선택 버튼으로 제공해야",
+      "html": "<h1>선택 가능한 기본 설정 요구사항</h1>\n<h2>배경</h2>\n<p>사용자는 기본 설정과 실행 입력이 깡 텍스트로 노출되어 어떤 값을 넣어야 하는지 알기 어렵다고 지적했다. 텍스트 값이 필요한 설정도 먼저 선택지를 제시하고, 필요할 때 직접 수정할 수 있어야 한다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-SELECT-DEFAULT-001: 런타임 세션의 작업 폴더는 현재 작업공간, 저장소 루트, 런타임 기본값 같은 선택지를 제공해야 한다.</li>\n<li>REQ-SELECT-DEFAULT-002: 런타임 세션의 초기 입력은 세션 모드 프리셋을 선택 버튼으로 제공해야 한다.</li>\n<li>REQ-SELECT-DEFAULT-003: 작업 파이프라인 초기화 요청은 파이프 프리셋과 구현/조사/검토 목적별 선택지를 제공해야 한다.</li>\n<li>REQ-SELECT-DEFAULT-004: 검색 에이전트의 제공자와 모델 설정은 native select/datalist 의존을 줄이고 명시적 선택 버튼을 제공해야 한다.</li>\n<li>REQ-SELECT-DEFAULT-005: 선택 뒤에도 직접 텍스트 편집은 가능해야 한다.</li>\n<li>REQ-SELECT-DEFAULT-006: 긴 경로, 모델명, 설명 텍스트가 버튼 안에서 잘리지 않아야 한다.</li>\n<li>REQ-SELECT-DEFAULT-007: 구현 후 렌더러 검사, 앱 검사, 내부 패키징 빌드를 실행해야 한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>모든 자유 입력 필드를 제거하지 않는다. 계정 비밀값, 저장소 URL, 임의 경로처럼 사용자가 실제로 직접 입력해야 하는 값은 직접 입력을 유지한다.</li>\n<li>공개 배포 서명, notarization, updater, clean-machine smoke 문제는 이번 UI 개선 범위가 아니다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1614,
+      "updatedAt": "2026-06-05T16:12:11.043Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-selectable-default-settings-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-selectable-default-settings/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "구현 계획",
+      "excerpt": "구현 계획 1. RuntimeTerminalDrawer 에 재사용 가능한 RuntimeTextChoice 타입과 선택 그리드 props를 추가한다. 2. DesktopRuntimePanel 에서 세션 프롬프트, 작업 폴더, 파이프라인 요청 선택지를 생성한다. 3. 작업 파이프라인 요청 UI를 텍스트 전용 label에서 선택 카드 + textarea 구조로 바꾼다. 4. 검색 에이전트의 provider select와 model datalist를 명시적 선택 버튼으로 바꾼다. 5. CSS에서 선택 카",
+      "html": "<h1>구현 계획</h1>\n<p>1. <code>RuntimeTerminalDrawer</code>에 재사용 가능한 <code>RuntimeTextChoice</code> 타입과 선택 그리드 props를 추가한다.</p>\n<p>2. <code>DesktopRuntimePanel</code>에서 세션 프롬프트, 작업 폴더, 파이프라인 요청 선택지를 생성한다.</p>\n<p>3. 작업 파이프라인 요청 UI를 텍스트 전용 label에서 선택 카드 + textarea 구조로 바꾼다.</p>\n<p>4. 검색 에이전트의 provider select와 model datalist를 명시적 선택 버튼으로 바꾼다.</p>\n<p>5. CSS에서 선택 카드, 긴 텍스트 줄바꿈, 터미널 테마 오버라이드, 모바일 레이아웃을 보강한다.</p>\n<p>6. 정적 테스트로 선택 UI 계약과 datalist 제거를 고정한다.</p>\n<p>7. 렌더러 검사, 앱 검사, 내부 패키징 빌드, 리소스 정리를 실행한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 767,
+      "updatedAt": "2026-06-05T16:12:11.043Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-selectable-default-settings-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-selectable-default-settings/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "선택 가능한 기본 설정 스펙",
+      "excerpt": "선택 가능한 기본 설정 스펙 목표 기본 실행 설정과 모델 실행 설정에서 사용자가 텍스트를 처음부터 작성하지 않아도 되도록 선택 가능한 프리셋을 제공한다. 선택지는 버튼형 카드로 표시하고, 기존 텍스트 입력은 선택 후 세부 조정용으로 유지한다. 변경 대상 components/workbench/RuntimeTerminalDrawer.tsx components/MonitorShell.tsx app/globals.css tests/tool studio.test.mjs 동작 하단 런타임 터미널 시작 화면:",
+      "html": "<h1>선택 가능한 기본 설정 스펙</h1>\n<h2>목표</h2>\n<p>기본 실행 설정과 모델 실행 설정에서 사용자가 텍스트를 처음부터 작성하지 않아도 되도록 선택 가능한 프리셋을 제공한다. 선택지는 버튼형 카드로 표시하고, 기존 텍스트 입력은 선택 후 세부 조정용으로 유지한다.</p>\n<h2>변경 대상</h2>\n<ul>\n<li><code>components/workbench/RuntimeTerminalDrawer.tsx</code></li>\n<li><code>components/MonitorShell.tsx</code></li>\n<li><code>app/globals.css</code></li>\n<li><code>tests/tool-studio.test.mjs</code></li>\n</ul>\n<h2>동작</h2>\n<ul>\n<li>하단 런타임 터미널 시작 화면:</li>\n<li>작업 폴더 선택지: 런타임 기본, 현재 작업공간, 저장소 루트, 입력한 가져오기 경로 후보</li>\n<li>초기 입력 선택지: 현재 세션 모드와 주요 세션 모드 프리셋</li>\n<li>작업 파이프라인 초기화:</li>\n<li>선택 프리셋, 구현 분해, 근거 조사, 검토/검증 요청 프리셋</li>\n<li>검색 에이전트 실행 설정:</li>\n<li>제공자 계정은 버튼형 선택지</li>\n<li>모델은 기본 모델, 발견된 모델, 현재 직접 입력값을 버튼형 선택지로 제공</li>\n<li>datalist 기반 모델 선택은 제거</li>\n</ul>\n<h2>UI 계약</h2>\n<ul>\n<li>선택 버튼은 <code>aria-pressed</code> 또는 <code>aria-selected</code>를 제공한다.</li>\n<li>선택지는 긴 텍스트를 <code>overflow-wrap: anywhere</code>로 감싼다.</li>\n<li>텍스트 필드는 직접 편집 가능해야 한다.</li>\n<li>터미널 드로어의 어두운 터미널 표면에서는 터미널 색상 토큰을 사용한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1425,
+      "updatedAt": "2026-06-05T16:12:11.043Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-selectable-default-settings-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-selectable-default-settings/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록",
+      "excerpt": "작업 목록 x 런타임 텍스트 선택 타입과 드로어 props 추가 x 작업 폴더 선택지 추가 x 세션 초기 입력 선택지 추가 x 작업 파이프라인 요청 선택지 추가 x 검색 에이전트 제공자 선택 버튼화 x 검색 에이전트 모델 datalist 제거 및 선택 버튼화 x 선택 카드 CSS와 터미널 테마 오버라이드 추가 x 정적 테스트 추가 x 렌더러 test/check 실행 x 앱 test/check 실행 x 내부 패키징 빌드 실행 x 개발 서버와 브라우저 탭 정리",
+      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] 런타임 텍스트 선택 타입과 드로어 props 추가</li>\n<li>[x] 작업 폴더 선택지 추가</li>\n<li>[x] 세션 초기 입력 선택지 추가</li>\n<li>[x] 작업 파이프라인 요청 선택지 추가</li>\n<li>[x] 검색 에이전트 제공자 선택 버튼화</li>\n<li>[x] 검색 에이전트 모델 datalist 제거 및 선택 버튼화</li>\n<li>[x] 선택 카드 CSS와 터미널 테마 오버라이드 추가</li>\n<li>[x] 정적 테스트 추가</li>\n<li>[x] 렌더러 test/check 실행</li>\n<li>[x] 앱 test/check 실행</li>\n<li>[x] 내부 패키징 빌드 실행</li>\n<li>[x] 개발 서버와 브라우저 탭 정리</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 583,
+      "updatedAt": "2026-06-05T16:12:11.043Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-selectable-default-settings-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-selectable-default-settings/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적성",
+      "excerpt": "추적성 | 요구사항 | 구현 | 검증 | | | | | | REQ SELECT DEFAULT 001 | RuntimeTerminalDrawer workingDir 선택지, DesktopRuntimePanel workingDirOptions | Runtime text defaults expose selectable choices , 렌더러 check | | REQ SELECT DEFAULT 002 | sessionPromptChoices , 초기 입력 선택 카드 | Runtime text defau",
+      "html": "<h1>추적성</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-SELECT-DEFAULT-001</td><td><code>RuntimeTerminalDrawer</code> workingDir 선택지, <code>DesktopRuntimePanel</code> workingDirOptions</td><td><code>Runtime text defaults expose selectable choices</code>, 렌더러 check</td></tr><tr><td>REQ-SELECT-DEFAULT-002</td><td><code>sessionPromptChoices</code>, 초기 입력 선택 카드</td><td><code>Runtime text defaults expose selectable choices</code></td></tr><tr><td>REQ-SELECT-DEFAULT-003</td><td><code>taskPipePromptChoices</code>, 작업 요청 선택 카드</td><td><code>Runtime text defaults expose selectable choices</code></td></tr><tr><td>REQ-SELECT-DEFAULT-004</td><td><code>agent-provider-choice-grid</code>, <code>agent-model-choice-grid</code>, datalist 제거</td><td><code>Search agent provider and model settings use explicit choices</code></td></tr><tr><td>REQ-SELECT-DEFAULT-005</td><td>textarea/input 유지 및 선택 버튼 값 주입</td><td>렌더러 type check</td></tr><tr><td>REQ-SELECT-DEFAULT-006</td><td><code>.runtime-text-choice-grid</code>, <code>.agent-model-choice-grid</code> 줄바꿈 CSS</td><td><code>git diff --check</code>, 렌더러 check</td></tr><tr><td>REQ-SELECT-DEFAULT-007</td><td>test/check/package 실행</td><td><code>validation.ko.md</code></td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1003,
+      "updatedAt": "2026-06-05T16:12:11.043Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-selectable-default-settings-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-selectable-default-settings/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증 기록",
+      "excerpt": "검증 기록 통과 corepack pnpm dir platform desktop app/renderer/workspace monitor test corepack pnpm dir platform desktop app/renderer/workspace monitor run check corepack pnpm dir platform desktop app test corepack pnpm dir platform desktop app run check corepack pnpm dir platform desk",
+      "html": "<h1>검증 기록</h1>\n<h2>통과</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app test</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code></li>\n<li>최종 <code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li>최종 <code>corepack pnpm --dir platform-desktop-app run check</code></li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>내부 패키징 산출물</h2>\n<ul>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>\n<h2>브라우저 스모크</h2>\n<ul>\n<li>로컬 개발 서버 <code>http://127.0.0.1:3210</code>을 열고 브라우저 연결을 확인했다.</li>\n<li>페이지 타이틀은 <code>Workspace Monitor</code>로 확인됐다.</li>\n<li>스냅샷 로더가 <code>Loading workspace snapshot</code> 상태에 머물러 새 UI 본문까지 시각 확인하지는 못했다.</li>\n<li>콘솔 오류는 없었고, 개발 서버와 브라우저 탭은 정리했다.</li>\n</ul>\n<h2>남은 경고</h2>\n<ul>\n<li>최종 <code>platform-desktop-app run check</code>는 개발용 public snapshot 복원 후 customer bundle stale 경고를 보고한다.</li>\n<li>내부 패키징 빌드 안에서는 customer snapshot 재생성과 bundle audit이 경고 없이 통과했다.</li>\n<li>공개 배포는 기존과 같이 Developer ID signing, notarization, updater, clean-machine smoke가 남아 있다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1629,
+      "updatedAt": "2026-06-05T16:12:11.043Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-06-structure-performance-migration-ko-md",
       "path": "_history/evaluations/2026/2026-06-06-structure-performance-migration.ko.md",
       "category": "evaluation",
@@ -9700,70 +9908,6 @@
       "workspaceArea": "_history/evaluations"
     },
     {
-      "id": "history-evaluations-2026-2026-06-05-smooth-redesign-maintenance-ko-md",
-      "path": "_history/evaluations/2026/2026-06-05-smooth-redesign-maintenance.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: Smooth Redesign Maintenance",
-      "excerpt": "평가: Smooth Redesign Maintenance 결과 통과. 여러 탭과 메뉴/다이얼로그/모바일 화면을 열어 실제 UI QA를 수행했고, Tools 탭의 29px 아이콘 버튼을 발견해 최소 너비를 보정했다. history snapshot 문서 payload는 2,291,477 bytes로 2,800,000 bytes 예산 안에 들어왔다. 검증 workspace monitor test : 통과, 49개. workspace monitor check : 통과. workspace monitor b",
-      "html": "<p>평가: Smooth Redesign Maintenance 결과 통과. 여러 탭과 메뉴/다이얼로그/모바일 화면을 열어 실제 UI QA를 수행했고, Tools 탭의 29px 아이콘 버튼을 발견해 최소 너비를 보정했다. history snapshot 문서 payload는 2,291,477 bytes로 2,800,000 bytes 예산 안에 들어왔다. 검증 workspace monitor test : 통과, 49개. workspace monitor check : 통과. workspace monitor build : 통과. workspace monitor build:customer : 통과. workspace monitor perf:budget </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1063,
-      "updatedAt": "2026-06-05T06:09:51.369Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-05-smooth-redesign-maintenance-ko-md",
-      "path": "_history/user-requests/2026/2026-06-05-smooth-redesign-maintenance.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Smooth Redesign Maintenance",
-      "excerpt": "사용자 요청 요약: Smooth Redesign Maintenance 여러 탭을 직접 열어 잘못 구현됐거나 덜 된 UI를 찾아 개선한다. 전체 화면이 아닐 때 깨지는 화면, 버튼 크기, 탭/버튼 지연, 어색한 번역, 과도한 정보 밀도, history 관리 문제를 계속 개선한다. 로컬 자원과 기존 도구를 사용해 성능과 유지보수성을 높인다.",
-      "html": "<p>사용자 요청 요약: Smooth Redesign Maintenance 여러 탭을 직접 열어 잘못 구현됐거나 덜 된 UI를 찾아 개선한다. 전체 화면이 아닐 때 깨지는 화면, 버튼 크기, 탭/버튼 지연, 어색한 번역, 과도한 정보 밀도, history 관리 문제를 계속 개선한다. 로컬 자원과 기존 도구를 사용해 성능과 유지보수성을 높인다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 401,
-      "updatedAt": "2026-06-05T06:09:51.369Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-05-smooth-redesign-maintenance-json",
-      "path": "_history/work-timings/2026/2026-06-05-smooth-redesign-maintenance.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 05 Smooth Redesign Maintenance",
-      "excerpt": "{ \"schema version\": \"2026 06 05\", \"request id\": \"UR 2026 06 05 smooth redesign maintenance\", \"phases\": { \"phase\": \"research and decomposition\", \"status\": \"completed\", \"notes\": \"Official React/Next/design references checked and broad scope reduced to a high impact Workspace Monito",
-      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 05&quot;, &quot;request id&quot;: &quot;UR 2026 06 05 smooth redesign maintenance&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;research and decomposition&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Official React/Next/design references checked and broad scope reduced to a high impact Workspace Monitor slice.&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Motio</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 693,
-      "updatedAt": "2026-06-05T06:09:51.368Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-05-smooth-redesign-maintenance-ko-md",
-      "path": "_history/web-searches/2026/2026-06-05-smooth-redesign-maintenance.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: Smooth Redesign Maintenance",
-      "excerpt": "웹 검색 기록: Smooth Redesign Maintenance 질의 React official code splitting lazy Suspense documentation Next.js official lazy loading dynamic import documentation Apple Human Interface Guidelines motion navigation sidebars macOS official Material Design navigation information architect",
-      "html": "<p>웹 검색 기록: Smooth Redesign Maintenance 질의 React official code splitting lazy Suspense documentation Next.js official lazy loading dynamic import documentation Apple Human Interface Guidelines motion navigation sidebars macOS official Material Design navigation information architecture tabs official 확인한 출처 React, Code Splitting: https://legacy.reactjs.org/docs/</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1332,
-      "updatedAt": "2026-06-05T06:09:51.367Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-smooth-redesign-maintenance-plan-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-smooth-redesign-maintenance/plan.ko.md",
       "category": "project-spec",
@@ -9778,54 +9922,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-05-premium-apple-design-system-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-05-premium-apple-design-system.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: Premium Apple Design System",
-      "excerpt": "작업 요약: Premium Apple Design System 완료 Apple HIG, Apple Design Resources, Apple Fonts를 확인해 hierarchy, consistency, typography/resource 기준을 반영했다. Workspace Monitor의 light/dark token, surface, shadow, primary action, terminal/3D dark surface를 더 절제된 premium visual system으로 조정했다. 반복 p",
-      "html": "<p>작업 요약: Premium Apple Design System 완료 Apple HIG, Apple Design Resources, Apple Fonts를 확인해 hierarchy, consistency, typography/resource 기준을 반영했다. Workspace Monitor의 light/dark token, surface, shadow, primary action, terminal/3D dark surface를 더 절제된 premium visual system으로 조정했다. 반복 panel과 control이 같은 material 계층으로 읽히도록 globals.css 에 공통 polish layer를 추가했다. 요구사항/스</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1291,
-      "updatedAt": "2026-06-05T05:40:28.700Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-premium-apple-design-system-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-05-premium-apple-design-system-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 05 Premium Apple Design System Evaluation Input",
-      "excerpt": "{ \"schema version\": \"1.0\", \"date\": \"2026 06 05\", \"work item\": \"premium apple design system\", \"project\": \"platform desktop app/renderer/workspace monitor\", \"requirements\": \"REQ WM 074\", \"REQ WM 075\" , \"implementation targets\": \"platform desktop app/renderer/workspace monitor/app/g",
-      "html": "<p>{ &quot;schema version&quot;: &quot;1.0&quot;, &quot;date&quot;: &quot;2026 06 05&quot;, &quot;work item&quot;: &quot;premium apple design system&quot;, &quot;project&quot;: &quot;platform desktop app/renderer/workspace monitor&quot;, &quot;requirements&quot;: &quot;REQ WM 074&quot;, &quot;REQ WM 075&quot; , &quot;implementation targets&quot;: &quot;platform desktop app/renderer/workspace monitor/app/globals.css&quot;, &quot;platform desktop app/renderer/workspace monitor/docs/requirements/</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1834,
-      "updatedAt": "2026-06-05T05:40:28.699Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-premium-apple-design-system-ko-md",
-      "path": "_history/evaluations/2026/2026-06-05-premium-apple-design-system.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: Premium Apple Design System",
-      "excerpt": "평가: Premium Apple Design System 결과 globals.css 의 light/dark color, surface, line, shadow, primary action, terminal/3D dark surface token을 Apple HIG 참고 기준의 절제된 material 계층으로 재정리했다. titlebar는 translucent chrome, rail은 graphite navigation, repeated panel은 glass/elevated surface로 통일했",
-      "html": "<p>평가: Premium Apple Design System 결과 globals.css 의 light/dark color, surface, line, shadow, primary action, terminal/3D dark surface token을 Apple HIG 참고 기준의 절제된 material 계층으로 재정리했다. titlebar는 translucent chrome, rail은 graphite navigation, repeated panel은 glass/elevated surface로 통일했다. primary action은 blue background와 white foreground를 유지하고, dark surface foregro</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1692,
-      "updatedAt": "2026-06-05T05:40:28.699Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
     },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-visual-design-foundation-traceability-ko-md",
@@ -17634,133 +17730,37 @@
       "historyDate": "2026-06-03",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-product-grade-desktop-posture-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-product-grade-desktop-posture/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "제품급 데스크톱 구조 전환 Spec",
-      "excerpt": "제품급 데스크톱 구조 전환 Spec 목표 현재 설치형 플랫폼을 초기 UI 후보나 PoC가 아니라 제품 기준의 데스크톱 앱 구조로 다루도록 정책, 레지스트리, readiness 출력, 요구사항 문서를 정렬한다. 수용 기준 선택된 경로는 Tauri first product runtime과 workspace monitor product UI source로 표현한다. 현재 source of truth 문서와 검사 스크립트에서 initial UI candidate , Tauri first prototype",
-      "html": "<h1>제품급 데스크톱 구조 전환 Spec</h1>\n<h2>목표</h2>\n<p>현재 설치형 플랫폼을 초기 UI 후보나 PoC가 아니라 제품 기준의 데스크톱 앱 구조로 다루도록 정책, 레지스트리, readiness 출력, 요구사항 문서를 정렬한다.</p>\n<h2>수용 기준</h2>\n<ul>\n<li>선택된 경로는 Tauri-first product runtime과 <code>workspace-monitor</code> product UI source로 표현한다.</li>\n<li>현재 source-of-truth 문서와 검사 스크립트에서 <code>initial UI candidate</code>, <code>Tauri-first prototype</code>, <code>selected_for_first_scaffold</code>, <code>scaffolded_not_public_release_ready</code>, <code>ready_for_dependency_install_audit</code>, <code>service_public_ready_candidate</code>를 제거하거나 supersede한다.</li>\n<li>PoC/prototype 표현은 선택된 제품 경로 금지 규칙이나 새 대체 경로 실험 설명에만 남긴다.</li>\n<li>public-ready는 signing/notarization/updater/smoke/privacy/dependency gate가 끝나기 전까지 gated 또는 blocked로 남긴다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>새 UI 화면 구현</li>\n<li>공개 배포 credential 구성</li>\n<li>historical history/spec 로그 전체 재작성</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1050,
-      "updatedAt": "2026-06-03T02:44:26.019Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-product-grade-desktop-posture-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-product-grade-desktop-posture/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증 계획",
-      "excerpt": "검증 계획 명령 python3 m json.tool platform desktop app/configs/desktop distribution registry.json python3 m json.tool platform desktop app/configs/macos execution profile.json python3 m json.tool platform desktop app/configs/service readiness registry.json cd agent platform && PYTHONP",
-      "html": "<h1>검증 계획</h1>\n<h2>명령</h2>\n<ul>\n<li><code>python3 -m json.tool platform-desktop-app/configs/desktop-distribution-registry.json</code></li>\n<li><code>python3 -m json.tool platform-desktop-app/configs/macos-execution-profile.json</code></li>\n<li><code>python3 -m json.tool platform-desktop-app/configs/service-readiness-registry.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/desktop-distribution-registry.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/macos-execution-profile.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/service-readiness-registry.json</code></li>\n<li><code>python3 _tools/docs-audit/src/docs_audit.py --check</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run check:intent-map:customer</code></li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>기대</h2>\n<ul>\n<li>JSON/config/doc checks가 실패하지 않는다.</li>\n<li>platform readiness status는 <code>desktop_product_structure_ready_public_release_gated</code>를 반환한다.</li>\n<li>service readiness는 internal ready/public blocked를 유지하거나 public signoff pending status를 사용하며, <code>service_public_ready_candidate</code>를 반환하지 않는다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1482,
-      "updatedAt": "2026-06-03T02:44:26.019Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-03-product-grade-desktop-posture-en-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-03-product-grade-desktop-posture.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Product Grade Desktop Structure Requirements",
-      "excerpt": "Product Grade Desktop Structure Requirements Scope These requirements promote platform desktop app/ from initial UI candidate or PoC language to a sellable installable desktop product structure. Requirements | ID | Requirement | Priority | Verification | | | | | | | PDA PROD 001 ",
-      "html": "<h1>Product-Grade Desktop Structure Requirements</h1>\n<h2>Scope</h2>\n<p>These requirements promote <code>platform-desktop-app/</code> from initial UI candidate or PoC language to a sellable installable desktop product structure.</p>\n<h2>Requirements</h2>\n<table><thead><tr><th>ID</th><th>Requirement</th><th>Priority</th><th>Verification</th></tr></thead><tbody><tr><td>PDA-PROD-001</td><td>The selected desktop product path shall stay fixed as Tauri v2/Rust shell, <code>workspace-monitor</code> product UI source, and <code>agent-platform</code> Python layer.</td><td>must</td><td>desktop distribution registry, README</td></tr><tr><td>PDA-PROD-002</td><td>The current <code>platform-desktop-app/</code> product structure shall not be described as a PoC, prototype, initial UI candidate, or scaffold candidate.</td><td>must</td><td>policies, persistent instructions, search check</td></tr><tr><td>PDA-PROD-003</td><td>Electron, Wails, and native-packaging-only shall be re-evaluated only when a recorded release blocker or maintenance case justifies fallback/comparison work.</td><td>should</td><td>distribution registry</td></tr><tr><td>PDA-PROD-004</td><td>Readiness script success states shall separate product-structure readiness from public release gates, and must not imply dependency-audit candidacy or public-release candidacy.</td><td>must</td><td><code>check-readiness.mjs</code>, <code>check-service-readiness.mjs</code>, Tauri report</td></tr><tr><td>PDA-PROD-005</td><td>Public distribution readiness shall remain blocked or gated until signing, notarization, signed updater, clean-machine smoke tests, and privacy/dependency review are complete.</td><td>must</td><td>service readiness, release preflight</td></tr></tbody></table>\n<h2>Out Of Scope</h2>\n<ul>\n<li>Creating public signing/notarization credentials</li>\n<li>Implementing a new desktop UI</li>\n<li>Re-running Electron/Wails comparison</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1592,
-      "updatedAt": "2026-06-03T02:44:26.018Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-03-product-grade-desktop-posture-ko-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-03-product-grade-desktop-posture.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "제품급 데스크톱 구조 요구사항",
-      "excerpt": "제품급 데스크톱 구조 요구사항 범위 platform desktop app/ 의 현재 방향을 초기 UI 후보나 PoC가 아니라 판매 가능한 설치형 데스크톱 제품 구조로 다루기 위한 요구사항이다. 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | PDA PROD 001 | 선택된 데스크톱 제품 경로는 Tauri v2/Rust shell, workspace monitor 제품 UI 원천, agent platform Python layer 구조로 고정해야 한다. | must |",
-      "html": "<h1>제품급 데스크톱 구조 요구사항</h1>\n<h2>범위</h2>\n<p><code>platform-desktop-app/</code>의 현재 방향을 초기 UI 후보나 PoC가 아니라 판매 가능한 설치형 데스크톱 제품 구조로 다루기 위한 요구사항이다.</p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>PDA-PROD-001</td><td>선택된 데스크톱 제품 경로는 Tauri v2/Rust shell, <code>workspace-monitor</code> 제품 UI 원천, <code>agent-platform</code> Python layer 구조로 고정해야 한다.</td><td>must</td><td>desktop distribution registry, README</td></tr><tr><td>PDA-PROD-002</td><td><code>platform-desktop-app/</code>의 현재 제품 구조를 PoC, prototype, initial UI candidate, scaffold 후보로 표현하지 않아야 한다.</td><td>must</td><td>정책/지속 지침/search check</td></tr><tr><td>PDA-PROD-003</td><td>Electron, Wails, native packaging-only는 새 release blocker나 유지보수 근거가 기록될 때만 fallback/comparison route로 재평가해야 한다.</td><td>should</td><td>distribution registry</td></tr><tr><td>PDA-PROD-004</td><td>readiness 스크립트 성공 상태는 제품 구조 준비와 public release gate를 분리해 표현해야 하며, dependency audit 후보나 public release candidate로 오해시키지 않아야 한다.</td><td>must</td><td><code>check-readiness.mjs</code>, <code>check-service-readiness.mjs</code>, Tauri report</td></tr><tr><td>PDA-PROD-005</td><td>공개 배포 readiness는 signing, notarization, signed updater, clean-machine smoke test, privacy/dependency review가 끝나기 전까지 blocked 또는 gated로 남겨야 한다.</td><td>must</td><td>service readiness, release preflight</td></tr></tbody></table>\n<h2>비범위</h2>\n<ul>\n<li>공개 signing/notarization credential 생성</li>\n<li>새 데스크톱 UI 구현</li>\n<li>Electron/Wails 재비교 실행</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1635,
-      "updatedAt": "2026-06-03T02:44:26.018Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-packaging-strategy-en-md",
-      "path": "platform-desktop-app/docs/packaging-strategy.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Installable Software Packaging Strategy",
-      "excerpt": "Installable Software Packaging Strategy Evidence Summary Electron documentation treats application packaging and distribution as a separate topic. Electron Forge provides OS specific installer maker configuration. Tauri documentation provides distribution and OS specific bundling",
-      "html": "<h1>Installable Software Packaging Strategy</h1>\n<h2>Evidence Summary</h2>\n<ul>\n<li>Electron documentation treats application packaging and distribution as a separate topic.</li>\n<li>Electron Forge provides OS-specific installer maker configuration.</li>\n<li>Tauri documentation provides distribution and OS-specific bundling paths.</li>\n<li>Microsoft MSIX documentation explains the Windows application package format and install experience.</li>\n<li>Apple Developer documentation treats notarization as a trust gate for macOS software distributed outside the App Store.</li>\n</ul>\n<h2>Product Strategy And Comparison Routes</h2>\n<h3>Tauri-First Desktop Shell</h3>\n<p>The current product baseline is a Tauri-first desktop shell.</p>\n<ul>\n<li>Strengths: wraps an existing web UI and aligns with smaller bundle goals.</li>\n<li>Risks: Rust/toolchain setup and explicit Python sidecar or local service boundary design.</li>\n<li>Must check: <code>workspace-monitor</code> static export compatibility, update strategy, macOS/Windows signing.</li>\n<li>macOS execution structure: check <code>platform-desktop-app/configs/macos-execution-profile.json</code> first.</li>\n</ul>\n<h3>Go Local Service / Wails Comparison</h3>\n<p>Go is the first candidate for local services and operational CLIs rather than the default desktop shell.</p>\n<ul>\n<li>Strengths: simple cross-platform binaries, fast builds, concurrent file watchers/local daemons, and operational CLIs.</li>\n<li>Risks: if Wails becomes the desktop shell candidate, it still needs the same distribution, security, and installer release-gate comparison as Tauri.</li>\n<li>Must check: local service lifecycle, shutdown/restart behavior, repository path permissions, and IPC/API boundary with Python agents.</li>\n</ul>\n<h3>Electron Fallback</h3>\n<p>Electron has a mature ecosystem and many installer examples.</p>\n<ul>\n<li>Strengths: JavaScript ecosystem, Node integration, and broad installer tooling.</li>\n<li>Risks: larger bundles, Chromium runtime cost, and stricter local-access security hardening.</li>\n<li>Must check: Electron Forge versus electron-builder, sandbox/context isolation, notarization.</li>\n</ul>\n<h3>Native Packaging Only</h3>\n<p>If a desktop shell adds little product value, compare OS installers around a CLI plus local web UI.</p>\n<ul>\n<li>Strengths: smaller product surface.</li>\n<li>Risks: weaker desktop integration and more user understanding of local services.</li>\n</ul>\n<h3>CLI-Neutral Adapter Layer</h3>\n<p>The installable app is not a single CLI wrapper. The platform launches first as the host runtime. It can use multiple CLIs, but they attach through guest adapter contracts in <code>agent-platform/configs/integrations/cli-adapter-registry.json</code>.</p>\n<ul>\n<li>Strengths: Codex CLI, Claude Code, GitHub CLI, package managers, and deployment CLIs can be used when they fit the task.</li>\n<li>Risks: desktop-originated local command execution needs command/path allowlists, timeouts, output redaction, and permission UI.</li>\n<li>Must check: missing-CLI fallback, version checks, user-supplied executable paths, and installation audit boundaries.</li>\n</ul>\n<h2>Language And Runtime Direction</h2>\n<ul>\n<li>Keep the core agent layer Python-first.</li>\n<li>Keep the current desktop shell product runtime Tauri/Rust-first.</li>\n<li>If a separate background service becomes necessary, evaluate Go first.</li>\n<li>If profiling proves a stable parsing/index/search hot path is the bottleneck, evaluate a Rust native module.</li>\n<li>Treat external CLIs as guest adapter capabilities on top of the platform, not runtime bodies.</li>\n<li>Detailed decision criteria live in <code>agent-platform/configs/runtime/language-decision-registry.json</code> and <code>_docs/policies/runtime-language-selection-policy.en.md</code>.</li>\n</ul>\n<h2>Release Gate</h2>\n<p>Before calling a build distributable installable software, complete:</p>\n<ul>\n<li>Framework decision record</li>\n<li>Project-local dependency installation audit</li>\n<li>License and security review</li>\n<li>macOS signing/notarization plan</li>\n<li>macOS execution profile review</li>\n<li>Windows signing and installer format decision</li>\n<li>Install, first-run, update, uninstall, and rollback smoke tests</li>\n<li>Privacy review</li>\n<li>User documentation</li>\n</ul>\n<h2>Current State</h2>\n<p>The Tauri/Rust dependencies and local macOS internal build path are already set up with installation audit records. Public distribution remains blocked until Developer ID signing, notarization, signed updater, clean-machine smoke tests, and privacy/dependency review are complete.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 4143,
-      "updatedAt": "2026-06-03T02:40:54.975Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-packaging-strategy-ko-md",
-      "path": "platform-desktop-app/docs/packaging-strategy.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "설치형 소프트웨어 패키징 전략",
-      "excerpt": "설치형 소프트웨어 패키징 전략 근거 요약 Electron 공식 문서는 앱 패키징과 배포 과정을 별도로 다룬다. Electron Forge는 OS별 installer maker 구성을 제공한다. Tauri 공식 문서는 배포와 OS별 bundler/installer 경로를 제공한다. Microsoft MSIX 문서는 Windows 앱 패키징 형식과 설치 경험을 설명한다. Apple Developer 문서는 macOS 외부 배포 시 notarization을 신뢰 게이트로 다룬다. 제품 전략과 비교 경로",
-      "html": "<h1>설치형 소프트웨어 패키징 전략</h1>\n<h2>근거 요약</h2>\n<ul>\n<li>Electron 공식 문서는 앱 패키징과 배포 과정을 별도로 다룬다.</li>\n<li>Electron Forge는 OS별 installer maker 구성을 제공한다.</li>\n<li>Tauri 공식 문서는 배포와 OS별 bundler/installer 경로를 제공한다.</li>\n<li>Microsoft MSIX 문서는 Windows 앱 패키징 형식과 설치 경험을 설명한다.</li>\n<li>Apple Developer 문서는 macOS 외부 배포 시 notarization을 신뢰 게이트로 다룬다.</li>\n</ul>\n<h2>제품 전략과 비교 경로</h2>\n<h3>Tauri-first desktop shell</h3>\n<p>현재 제품 기준은 Tauri-first desktop shell이다.</p>\n<ul>\n<li>장점: 기존 web UI를 감싸기 쉽고, 작은 번들 목표에 맞다.</li>\n<li>리스크: Rust/toolchain, Python sidecar 또는 local service 경계 설계가 필요하다.</li>\n<li>확인 필요: <code>workspace-monitor</code> static export 호환성, update 전략, macOS/Windows signing.</li>\n<li>macOS 실행 구조: <code>platform-desktop-app/configs/macos-execution-profile.json</code>을 먼저 확인한다.</li>\n</ul>\n<h3>Go local service / Wails 비교</h3>\n<p>Go는 desktop shell의 기본값이라기보다는 local service와 운영 CLI의 1차 후보로 둔다.</p>\n<ul>\n<li>장점: 단순한 cross-platform binary, 빠른 빌드, 동시성 기반 file watcher/local daemon, 운영 CLI에 적합하다.</li>\n<li>리스크: Wails를 desktop shell로 쓰려면 Tauri와 같은 배포/보안/installer release gate를 별도 비교해야 한다.</li>\n<li>확인 필요: local service lifecycle, shutdown/restart, repository path permission, Python agent와의 IPC/API boundary.</li>\n</ul>\n<h3>Electron fallback</h3>\n<p>Electron은 mature ecosystem과 풍부한 installer 사례가 강점이다.</p>\n<ul>\n<li>장점: JavaScript 생태계, Node 통합, installer tooling 자료가 많다.</li>\n<li>리스크: 번들 크기와 Chromium runtime 비용, local access security hardening.</li>\n<li>확인 필요: Electron Forge와 electron-builder 중 선택, sandbox/context isolation, notarization.</li>\n</ul>\n<h3>Native packaging only</h3>\n<p>데스크톱 shell이 제품 가치가 낮으면 CLI와 local web UI를 OS별 installer로 묶는 방식도 비교한다.</p>\n<ul>\n<li>장점: 제품 표면이 작다.</li>\n<li>리스크: 데스크톱 통합 경험이 약하고 사용자가 local service를 이해해야 할 수 있다.</li>\n</ul>\n<h3>CLI-neutral adapter layer</h3>\n<p>설치형 앱은 특정 CLI wrapper가 아니다. 플랫폼이 먼저 실행되는 host runtime이고, 여러 CLI를 쓸 수는 있지만 CLI는 <code>agent-platform/configs/integrations/cli-adapter-registry.json</code>의 guest adapter contract를 통해 붙는다.</p>\n<ul>\n<li>장점: Codex CLI, Claude Code, GitHub CLI, package manager, deployment CLI를 상황에 맞게 쓸 수 있다.</li>\n<li>리스크: desktop shell에서 로컬 명령을 실행하면 command/path allowlist, timeout, output redaction, permission UI가 필요하다.</li>\n<li>확인 필요: missing CLI fallback, version check, user-supplied executable path, 설치 감사 경계.</li>\n</ul>\n<h2>언어/런타임 방향</h2>\n<ul>\n<li>Core agent layer는 Python-first를 유지한다.</li>\n<li>Desktop shell은 현재 Tauri/Rust-first 제품 런타임을 유지한다.</li>\n<li>별도 background service가 필요해지면 Go를 먼저 검토한다.</li>\n<li>성능 병목이 안정된 parsing/index/search hot path로 확인되면 Rust native module을 검토한다.</li>\n<li>외부 CLI는 런타임 본체가 아니라 플랫폼 위의 guest adapter capability로 다룬다.</li>\n<li>상세 판단 기준은 <code>agent-platform/configs/runtime/language-decision-registry.json</code>과 <code>_docs/policies/runtime-language-selection-policy.ko.md</code>를 따른다.</li>\n</ul>\n<h2>Release Gate</h2>\n<p>배포 가능한 설치형 앱이라고 부르기 전에는 다음을 완료한다.</p>\n<ul>\n<li>framework decision record</li>\n<li>project-local dependency install audit</li>\n<li>license/security review</li>\n<li>macOS signing/notarization plan</li>\n<li>macOS execution profile review</li>\n<li>Windows signing/installer format decision</li>\n<li>install/first-run/update/uninstall/rollback smoke tests</li>\n<li>privacy review</li>\n<li>사용자 문서</li>\n</ul>\n<h2>현재 상태</h2>\n<p>Tauri/Rust 의존성과 로컬 macOS 내부 빌드 경로는 설치 감사 기록과 함께 구축되어 있다. 공개 배포는 Developer ID signing, notarization, signed updater, clean-machine smoke test, privacy/dependency review가 끝날 때까지 blocked 상태로 둔다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 4162,
-      "updatedAt": "2026-06-03T02:40:54.974Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 20,
+      "documentsCount": 27,
       "categories": [
         {
           "category": "evaluation",
-          "count": 5
+          "count": 7
         },
         {
           "category": "request-trace",
-          "count": 3
+          "count": 4
         },
         {
           "category": "user-request",
-          "count": 3
+          "count": 4
         },
         {
           "category": "web-search",
-          "count": 3
+          "count": 4
         },
         {
           "category": "work-summary",
-          "count": 3
+          "count": 4
         },
         {
           "category": "work-timing",
-          "count": 3
+          "count": 4
         }
       ],
       "documents": [
@@ -17782,6 +17782,26 @@
           "title": "평가: Rust 데스크톱 자원 최적화",
           "excerpt": "평가: Rust 데스크톱 자원 최적화 판정 요청 충족. 단순 렌더 최적화가 아니라 Rust/Tauri 프로세스에서 CPU parallelism과 OS memory telemetry를 사용하도록 source workspace cache 경로를 바꿨고, 내부 패키징 빌드까지 완료했다. 증거 rayon 기반 bounded parallel worker pool 추가. sysinfo 기반 total/available/used memory, memory budget report 추가. preload 상한을 ",
           "updatedAt": "2026-06-05T15:47:08.794Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-selectable-default-settings-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-selectable-default-settings-evaluation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Selectable Default Settings Evaluation Input",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 selectable default settings.json\" , \"omission check targets\": \" history/omission checks/202",
+          "updatedAt": "2026-06-05T16:12:11.045Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-selectable-default-settings-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-selectable-default-settings.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "최종 평가",
+          "excerpt": "최종 평가 판정 요청한 핵심 변경은 완료됐다. 텍스트 기반 기본 설정은 선택 카드가 먼저 보이도록 바뀌었고, 직접 편집도 유지됐다. 구현 후 내부 패키징 빌드까지 완료했다. 검증 근거 렌더러 test/check 통과 데스크톱 앱 test/check 통과 package:internal 통과 Rust test/build 통과 codesign verify 통과 DMG verify 통과 git diff check 통과 제한 브라우저 스모크는 로컬 개발 서버에서 Loading workspace snapsh",
+          "updatedAt": "2026-06-05T16:12:11.045Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -17825,6 +17845,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-request-traces-2026-2026-06-06-selectable-default-settings-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-selectable-default-settings.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적",
+          "excerpt": "요청 결과 추적 요청 기본 설정과 텍스트 설정을 사용자가 바로 선택할 수 있게 만들고, 구현 후 빌드까지 자동 실행한다. 결과 platform desktop app/docs/requirements/2026 06 06 selectable default settings.ko.md platform desktop app/specs/2026 06 06 selectable default settings/ platform desktop app/renderer/workspace monitor/components",
+          "updatedAt": "2026-06-05T16:12:11.044Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
           "category": "request-trace",
@@ -17852,6 +17882,16 @@
           "title": "사용자 요청 요약: Rust 데스크톱 자원 최적화",
           "excerpt": "사용자 요청 요약: Rust 데스크톱 자원 최적화 사용자는 Workspace Monitor/source editor 계열 탭 전환이 늦게 불러오는 방식처럼 느껴진다고 지적했고, 단순 렌더 최적화가 아니라 실제 데스크톱 앱답게 Rust와 운영체제 CPU/RAM 자원을 적극 사용해 최적화하라고 요청했다. 추가 지속 요구로 구현 완료 후 사용자가 별도로 빌드하지 않도록 내부 빌드까지 자동 실행해야 한다.",
           "updatedAt": "2026-06-05T15:47:08.791Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-selectable-default-settings-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-selectable-default-settings.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약",
+          "excerpt": "사용자 요청 요약 기본 설정과 실행 입력이 텍스트만으로 되어 있어 사용자가 어떤 값을 넣어야 할지 알기 어렵다. 텍스트 기반 설정도 여러 선택지를 먼저 제공하고, 사용자가 선택해서 바꿀 수 있게 해 달라는 요청이다.",
+          "updatedAt": "2026-06-05T16:12:11.044Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -17885,6 +17925,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-web-searches-2026-2026-06-06-selectable-default-settings-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-selectable-default-settings.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록",
+          "excerpt": "웹 검색 기록 쿼리 WAI ARIA radio group select listbox settings form user choices official Nielsen Norman Group form design dropdown radio buttons settings choices Apple Human Interface Guidelines settings controls radio buttons pickers macOS Material Design selection controls settings r",
+          "updatedAt": "2026-06-05T16:12:11.044Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-06-source-controls-playwright-smoke-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-source-controls-playwright-smoke.ko.md",
           "category": "web-search",
@@ -17912,6 +17962,16 @@
           "title": "작업 요약: Rust 데스크톱 자원 최적화",
           "excerpt": "작업 요약: Rust 데스크톱 자원 최적화 Workspace Monitor의 source workspace cache를 Rust/Tauri native path에서 더 공격적으로 준비하도록 바꿨다. rayon 으로 entry build와 preload read를 병렬화했고, sysinfo 로 OS memory telemetry를 읽어 preload budget과 UI 표시를 추가했다. UI에는 cache 파일/바이트뿐 아니라 worker 수, RAM budget/free RAM, CPU 병렬 수,",
           "updatedAt": "2026-06-05T15:47:08.793Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-selectable-default-settings-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-selectable-default-settings.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약",
+          "excerpt": "작업 요약 데스크톱 모니터의 텍스트 중심 기본 설정을 선택형 UI로 개선했다. 런타임 터미널 작업 폴더와 초기 입력에 선택 카드 추가 작업 파이프라인 요청에 프리셋 선택 카드 추가 검색 에이전트 제공자/모델 설정을 버튼형 선택으로 변경 모델 datalist 제거 선택 카드 CSS와 정적 테스트 추가 내부 패키징 빌드 완료",
+          "updatedAt": "2026-06-05T16:12:11.044Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -17945,6 +18005,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-timings-2026-2026-06-06-selectable-default-settings-json",
+          "path": "_history/work-timings/2026/2026-06-06-selectable-default-settings.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Selectable Default Settings",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"phases\": { \"phase\": \"intake research and source review\", \"elapsed minutes estimate\": 12 }, { \"phase\": \"implementation\", \"elapsed minutes estimate\": 24 }, { \"phase\": \"tests and package build\", \"elapsed minutes estimate\": 10 }, { \"phase\": \"records and close",
+          "updatedAt": "2026-06-05T16:12:11.044Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-source-controls-playwright-smoke-json",
           "path": "_history/work-timings/2026/2026-06-06-source-controls-playwright-smoke.json",
           "category": "work-timing",
@@ -17969,31 +18039,31 @@
     {
       "date": "2026-06-05",
       "year": "2026",
-      "documentsCount": 76,
+      "documentsCount": 69,
       "categories": [
         {
           "category": "evaluation",
-          "count": 19
-        },
-        {
-          "category": "work-summary",
-          "count": 12
+          "count": 16
         },
         {
           "category": "request-trace",
           "count": 11
         },
         {
-          "category": "user-request",
+          "category": "work-summary",
           "count": 11
+        },
+        {
+          "category": "user-request",
+          "count": 10
         },
         {
           "category": "web-search",
-          "count": 11
+          "count": 10
         },
         {
           "category": "work-timing",
-          "count": 9
+          "count": 8
         },
         {
           "category": "plan",
@@ -18126,42 +18196,12 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-evaluations-2026-2026-06-05-premium-apple-design-system-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-05-premium-apple-design-system-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 05 Premium Apple Design System Evaluation Input",
-          "excerpt": "{ \"schema version\": \"1.0\", \"date\": \"2026 06 05\", \"work item\": \"premium apple design system\", \"project\": \"platform desktop app/renderer/workspace monitor\", \"requirements\": \"REQ WM 074\", \"REQ WM 075\" , \"implementation targets\": \"platform desktop app/renderer/workspace monitor/app/g",
-          "updatedAt": "2026-06-05T05:40:28.699Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-05-premium-apple-design-system-ko-md",
-          "path": "_history/evaluations/2026/2026-06-05-premium-apple-design-system.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: Premium Apple Design System",
-          "excerpt": "평가: Premium Apple Design System 결과 globals.css 의 light/dark color, surface, line, shadow, primary action, terminal/3D dark surface token을 Apple HIG 참고 기준의 절제된 material 계층으로 재정리했다. titlebar는 translucent chrome, rail은 graphite navigation, repeated panel은 glass/elevated surface로 통일했",
-          "updatedAt": "2026-06-05T05:40:28.699Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-05-smooth-redesign-maintenance-evaluation-input-json",
           "path": "_history/evaluations/2026/2026-06-05-smooth-redesign-maintenance-evaluation-input.json",
           "category": "evaluation",
           "language": "unknown",
           "title": "2026 06 05 Smooth Redesign Maintenance Evaluation Input",
           "excerpt": "{ \"schema version\": \"2026 06 05\", \"request id\": \"UR 2026 06 05 smooth redesign maintenance\", \"status\": \"passed\", \"summary\": \"Improve Workspace Monitor smooth navigation, maintainability, history payload management, and high visibility Korean copy after opening multiple tabs.\", \"i",
-          "updatedAt": "2026-06-05T06:09:51.369Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-05-smooth-redesign-maintenance-ko-md",
-          "path": "_history/evaluations/2026/2026-06-05-smooth-redesign-maintenance.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: Smooth Redesign Maintenance",
-          "excerpt": "평가: Smooth Redesign Maintenance 결과 통과. 여러 탭과 메뉴/다이얼로그/모바일 화면을 열어 실제 UI QA를 수행했고, Tools 탭의 29px 아이콘 버튼을 발견해 최소 너비를 보정했다. history snapshot 문서 payload는 2,291,477 bytes로 2,800,000 bytes 예산 안에 들어왔다. 검증 workspace monitor test : 통과, 49개. workspace monitor check : 통과. workspace monitor b",
           "updatedAt": "2026-06-05T06:09:51.369Z",
           "historyDate": "2026-06-05"
         },
@@ -18396,16 +18436,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-user-requests-2026-2026-06-05-smooth-redesign-maintenance-ko-md",
-          "path": "_history/user-requests/2026/2026-06-05-smooth-redesign-maintenance.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: Smooth Redesign Maintenance",
-          "excerpt": "사용자 요청 요약: Smooth Redesign Maintenance 여러 탭을 직접 열어 잘못 구현됐거나 덜 된 UI를 찾아 개선한다. 전체 화면이 아닐 때 깨지는 화면, 버튼 크기, 탭/버튼 지연, 어색한 번역, 과도한 정보 밀도, history 관리 문제를 계속 개선한다. 로컬 자원과 기존 도구를 사용해 성능과 유지보수성을 높인다.",
-          "updatedAt": "2026-06-05T06:09:51.369Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-05-source-workbench-control-primitives-ko-md",
           "path": "_history/user-requests/2026/2026-06-05-source-workbench-control-primitives.ko.md",
           "category": "user-request",
@@ -18503,16 +18533,6 @@
           "title": "웹 검색 기록: Operator Surface Scroll QA",
           "excerpt": "웹 검색 기록: Operator Surface Scroll QA 질의 WCAG 2.2 target size minimum official 2.5.8 web.dev Interaction to Next Paint optimize long tasks official Radix UI Dropdown Menu accessibility official documentation Apple Human Interface Guidelines text buttons menus macOS official 확인한 출처 ",
           "updatedAt": "2026-06-05T06:56:15.233Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-05-smooth-redesign-maintenance-ko-md",
-          "path": "_history/web-searches/2026/2026-06-05-smooth-redesign-maintenance.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: Smooth Redesign Maintenance",
-          "excerpt": "웹 검색 기록: Smooth Redesign Maintenance 질의 React official code splitting lazy Suspense documentation Next.js official lazy loading dynamic import documentation Apple Human Interface Guidelines motion navigation sidebars macOS official Material Design navigation information architect",
-          "updatedAt": "2026-06-05T06:09:51.367Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18616,16 +18636,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-05-premium-apple-design-system-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-05-premium-apple-design-system.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: Premium Apple Design System",
-          "excerpt": "작업 요약: Premium Apple Design System 완료 Apple HIG, Apple Design Resources, Apple Fonts를 확인해 hierarchy, consistency, typography/resource 기준을 반영했다. Workspace Monitor의 light/dark token, surface, shadow, primary action, terminal/3D dark surface를 더 절제된 premium visual system으로 조정했다. 반복 p",
-          "updatedAt": "2026-06-05T05:40:28.700Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-05-smooth-redesign-maintenance-ko-md",
           "path": "_history/work-summaries/2026/2026-06-05-smooth-redesign-maintenance.ko.md",
           "category": "work-summary",
@@ -18716,16 +18726,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-work-timings-2026-2026-06-05-smooth-redesign-maintenance-json",
-          "path": "_history/work-timings/2026/2026-06-05-smooth-redesign-maintenance.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 05 Smooth Redesign Maintenance",
-          "excerpt": "{ \"schema version\": \"2026 06 05\", \"request id\": \"UR 2026 06 05 smooth redesign maintenance\", \"phases\": { \"phase\": \"research and decomposition\", \"status\": \"completed\", \"notes\": \"Official React/Next/design references checked and broad scope reduced to a high impact Workspace Monito",
-          "updatedAt": "2026-06-05T06:09:51.368Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-05-source-workbench-control-primitives-json",
           "path": "_history/work-timings/2026/2026-06-05-source-workbench-control-primitives.json",
           "category": "work-timing",
@@ -18774,16 +18774,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2292,
+      "documents": 2299,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 938
+          "count": 940
         },
         {
           "category": "web-search",
-          "count": 369
+          "count": 370
         },
         {
           "category": "plan",
@@ -18791,19 +18791,19 @@
         },
         {
           "category": "request-trace",
-          "count": 298
+          "count": 299
         },
         {
           "category": "work-timing",
-          "count": 220
+          "count": 221
         },
         {
           "category": "user-request",
-          "count": 82
+          "count": 83
         },
         {
           "category": "work-summary",
-          "count": 49
+          "count": 50
         },
         {
           "category": "daily-history",
@@ -18814,7 +18814,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6108449,
+      "totalSourceBytes": 6113145,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18839,11 +18839,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 38,
+      "evidenceEvents": 37,
       "decisionEvents": 0,
-      "openSignals": 17,
+      "openSignals": 18,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T15:59:02.047Z",
+      "latestEventAt": "2026-06-05T16:12:11.045Z",
       "historyDays": 2
     },
     "lanes": [
@@ -18855,11 +18855,16 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 24
+        "count": 23
       },
       {
         "id": "delivery",
         "label": "delivery",
+        "count": 15
+      },
+      {
+        "id": "traceability",
+        "label": "traceability",
         "count": 15
       },
       {
@@ -18870,11 +18875,6 @@
       {
         "id": "intake",
         "label": "intake",
-        "count": 14
-      },
-      {
-        "id": "traceability",
-        "label": "traceability",
         "count": 14
       },
       {
@@ -18902,7 +18902,7 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 24
+        "count": 23
       },
       {
         "id": "summary",
@@ -18910,13 +18910,13 @@
         "count": 15
       },
       {
-        "id": "intake",
-        "label": "intake",
-        "count": 14
-      },
-      {
         "id": "trace",
         "label": "trace",
+        "count": 15
+      },
+      {
+        "id": "intake",
+        "label": "intake",
         "count": 14
       },
       {
@@ -18953,6 +18953,111 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-selectable-default-settings-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "evaluation",
+        "title": "2026 06 06 Selectable Default Settings Evaluation Input",
+        "detail": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 selectable default settings.json\" , \"omission check targets\": \" history/omission checks/202",
+        "path": "_history/evaluations/2026/2026-06-06-selectable-default-settings-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:12:11.045Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-selectable-default-settings-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "최종 평가",
+        "detail": "최종 평가 판정 요청한 핵심 변경은 완료됐다. 텍스트 기반 기본 설정은 선택 카드가 먼저 보이도록 바뀌었고, 직접 편집도 유지됐다. 구현 후 내부 패키징 빌드까지 완료했다. 검증 근거 렌더러 test/check 통과 데스크톱 앱 test/check 통과 package:internal 통과 Rust test/build 통과 codesign verify 통과 DMG verify 통과 git diff check 통과 제한 브라우저 스모크는 로컬 개발 서버에서 Loading workspace snapsh",
+        "path": "_history/evaluations/2026/2026-06-06-selectable-default-settings.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:12:11.045Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-selectable-default-settings-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Selectable Default Settings",
+        "detail": "{ \"date\": \"2026 06 06\", \"phases\": { \"phase\": \"intake research and source review\", \"elapsed minutes estimate\": 12 }, { \"phase\": \"implementation\", \"elapsed minutes estimate\": 24 }, { \"phase\": \"tests and package build\", \"elapsed minutes estimate\": 10 }, { \"phase\": \"records and close",
+        "path": "_history/work-timings/2026/2026-06-06-selectable-default-settings.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:12:11.044Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-selectable-default-settings-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "요청 결과 추적",
+        "detail": "요청 결과 추적 요청 기본 설정과 텍스트 설정을 사용자가 바로 선택할 수 있게 만들고, 구현 후 빌드까지 자동 실행한다. 결과 platform desktop app/docs/requirements/2026 06 06 selectable default settings.ko.md platform desktop app/specs/2026 06 06 selectable default settings/ platform desktop app/renderer/workspace monitor/components",
+        "path": "_history/request-traces/2026/2026-06-06-selectable-default-settings.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:12:11.044Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-selectable-default-settings-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록",
+        "detail": "웹 검색 기록 쿼리 WAI ARIA radio group select listbox settings form user choices official Nielsen Norman Group form design dropdown radio buttons settings choices Apple Human Interface Guidelines settings controls radio buttons pickers macOS Material Design selection controls settings r",
+        "path": "_history/web-searches/2026/2026-06-06-selectable-default-settings.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:12:11.044Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-selectable-default-settings-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약",
+        "detail": "사용자 요청 요약 기본 설정과 실행 입력이 텍스트만으로 되어 있어 사용자가 어떤 값을 넣어야 할지 알기 어렵다. 텍스트 기반 설정도 여러 선택지를 먼저 제공하고, 사용자가 선택해서 바꿀 수 있게 해 달라는 요청이다.",
+        "path": "_history/user-requests/2026/2026-06-06-selectable-default-settings.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:12:11.044Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-selectable-default-settings-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "작업 요약",
+        "detail": "작업 요약 데스크톱 모니터의 텍스트 중심 기본 설정을 선택형 UI로 개선했다. 런타임 터미널 작업 폴더와 초기 입력에 선택 카드 추가 작업 파이프라인 요청에 프리셋 선택 카드 추가 검색 에이전트 제공자/모델 설정을 버튼형 선택으로 변경 모델 datalist 제거 선택 카드 CSS와 정적 테스트 추가 내부 패키징 빌드 완료",
+        "path": "_history/work-summaries/2026/2026-06-06-selectable-default-settings.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T16:12:11.044Z"
+      },
       {
         "id": "history-history-evaluations-2026-2026-06-06-structure-performance-migration-ko-md",
         "sourceType": "history",
@@ -20287,111 +20392,6 @@
         "language": "unknown",
         "date": "2026-06-05",
         "timestamp": "2026-06-05T06:09:51.369Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-smooth-redesign-maintenance-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "평가: Smooth Redesign Maintenance",
-        "detail": "평가: Smooth Redesign Maintenance 결과 통과. 여러 탭과 메뉴/다이얼로그/모바일 화면을 열어 실제 UI QA를 수행했고, Tools 탭의 29px 아이콘 버튼을 발견해 최소 너비를 보정했다. history snapshot 문서 payload는 2,291,477 bytes로 2,800,000 bytes 예산 안에 들어왔다. 검증 workspace monitor test : 통과, 49개. workspace monitor check : 통과. workspace monitor b",
-        "path": "_history/evaluations/2026/2026-06-05-smooth-redesign-maintenance.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T06:09:51.369Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-05-smooth-redesign-maintenance-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: Smooth Redesign Maintenance",
-        "detail": "사용자 요청 요약: Smooth Redesign Maintenance 여러 탭을 직접 열어 잘못 구현됐거나 덜 된 UI를 찾아 개선한다. 전체 화면이 아닐 때 깨지는 화면, 버튼 크기, 탭/버튼 지연, 어색한 번역, 과도한 정보 밀도, history 관리 문제를 계속 개선한다. 로컬 자원과 기존 도구를 사용해 성능과 유지보수성을 높인다.",
-        "path": "_history/user-requests/2026/2026-06-05-smooth-redesign-maintenance.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T06:09:51.369Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-05-smooth-redesign-maintenance-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 05 Smooth Redesign Maintenance",
-        "detail": "{ \"schema version\": \"2026 06 05\", \"request id\": \"UR 2026 06 05 smooth redesign maintenance\", \"phases\": { \"phase\": \"research and decomposition\", \"status\": \"completed\", \"notes\": \"Official React/Next/design references checked and broad scope reduced to a high impact Workspace Monito",
-        "path": "_history/work-timings/2026/2026-06-05-smooth-redesign-maintenance.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T06:09:51.368Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-05-smooth-redesign-maintenance-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: Smooth Redesign Maintenance",
-        "detail": "웹 검색 기록: Smooth Redesign Maintenance 질의 React official code splitting lazy Suspense documentation Next.js official lazy loading dynamic import documentation Apple Human Interface Guidelines motion navigation sidebars macOS official Material Design navigation information architect",
-        "path": "_history/web-searches/2026/2026-06-05-smooth-redesign-maintenance.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T06:09:51.367Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-05-premium-apple-design-system-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "작업 요약: Premium Apple Design System",
-        "detail": "작업 요약: Premium Apple Design System 완료 Apple HIG, Apple Design Resources, Apple Fonts를 확인해 hierarchy, consistency, typography/resource 기준을 반영했다. Workspace Monitor의 light/dark token, surface, shadow, primary action, terminal/3D dark surface를 더 절제된 premium visual system으로 조정했다. 반복 p",
-        "path": "_history/work-summaries/2026/2026-06-05-premium-apple-design-system.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T05:40:28.700Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-premium-apple-design-system-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 05 Premium Apple Design System Evaluation Input",
-        "detail": "{ \"schema version\": \"1.0\", \"date\": \"2026 06 05\", \"work item\": \"premium apple design system\", \"project\": \"platform desktop app/renderer/workspace monitor\", \"requirements\": \"REQ WM 074\", \"REQ WM 075\" , \"implementation targets\": \"platform desktop app/renderer/workspace monitor/app/g",
-        "path": "_history/evaluations/2026/2026-06-05-premium-apple-design-system-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T05:40:28.699Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-premium-apple-design-system-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "평가: Premium Apple Design System",
-        "detail": "평가: Premium Apple Design System 결과 globals.css 의 light/dark color, surface, line, shadow, primary action, terminal/3D dark surface token을 Apple HIG 참고 기준의 절제된 material 계층으로 재정리했다. titlebar는 translucent chrome, rail은 graphite navigation, repeated panel은 glass/elevated surface로 통일했",
-        "path": "_history/evaluations/2026/2026-06-05-premium-apple-design-system.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T05:40:28.699Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23332,7 +23332,7 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 14
+        "documentsCount": 15
       },
       {
         "category": "web-search",
@@ -23352,7 +23352,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 24
+        "documentsCount": 23
       },
       {
         "category": "daily-history",
@@ -23446,7 +23446,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 71,
+        "documentCount": 68,
         "sourceFileCount": 5
       },
       {
