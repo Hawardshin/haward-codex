@@ -72,6 +72,7 @@
 | REQ-WM-059 | Overview 작업 dock의 목표 버튼은 산업 디자인 관점의 조작 affordance를 가져야 하며, 번호, 기능 아이콘, 작업 설명, 상태 badge, 진행 화살표를 분리해 손이 갈 위치와 실행 결과가 즉시 보이고 모바일에서는 핵심 조작부만 남아 깨지지 않아야 한다. | must | task intent affordance static test, desktop/mobile Browser smoke, action cue count, primary target size, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 | REQ-WM-060 | Agents 세부 Collaboration 작업면은 에이전트 협업을 3D 캐릭터, 작업 lane, 연결선으로 시각화해야 하며 `@react-three/fiber`와 `@react-three/drei`를 클라이언트 lazy mount로 사용해 기본 채팅 화면, 탭 전환, 닫힌 disclosure 성능을 방해하지 않아야 한다. 390px 모바일에서도 수평 overflow 없이 nonblank canvas로 렌더링되어야 한다. | must | React Three Fiber/Drei exact dependency audit, lazy import static test, desktop/mobile canvas nonblank pixel smoke, in-app Browser visual smoke, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 | REQ-WM-061 | Agents 세부 기능 disclosure는 블루프린트, 생성기, 학습, 협업, 흐름, 인벤토리, 런타임을 한 화면에 모두 쌓지 않아야 하며, 세부 기능 선택기를 통해 한 번에 하나의 active workspace만 렌더링해야 한다. 기본 세부 화면은 Collaboration으로 시작하고, 다른 기능을 선택하면 3D canvas와 이전 기능 DOM은 사라져야 한다. | must | one-active-workspace static test, in-app Browser switcher smoke, mobile 390px selected-tab/overflow smoke, builder 전환 시 canvas absence assertion, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run perf:budget` 확인 |
+| REQ-WM-062 | Agents 세부 기능 선택은 클릭 즉시 선택 버튼과 pressed feedback을 갱신해야 하며, 3D canvas/폼/표 같은 active workspace 교체는 첫 paint 이후 staged commit으로 처리해 버튼 응답을 무거운 패널 mount와 묶지 않아야 한다. 빠르게 여러 세부 기능을 눌러도 최신 선택만 렌더링되어야 하며, 닫힌 disclosure나 다른 섹션에서는 예약된 mount가 취소되어야 한다. | must | deferred agent detail switch static test, in-app Browser switcher smoke, stale canvas absence assertion, pending state audit, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 
 ## 범위
 
@@ -124,6 +125,7 @@
 - Overview 작업 dock 목표 버튼의 번호/아이콘/status/action cue affordance
 - Agents 세부 Collaboration 작업면의 React Three Fiber/Drei 기반 3D 에이전트 캐릭터 협업 장면
 - Agents 세부 기능 선택기와 한 번에 하나만 렌더링되는 active workspace 구조
+- Agents 세부 기능 선택 버튼의 즉시 피드백과 첫 paint 이후 active workspace staged commit
 - Vercel 배포 문서
 
 ## 제외 범위

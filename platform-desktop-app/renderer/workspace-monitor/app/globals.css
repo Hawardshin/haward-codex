@@ -3975,6 +3975,12 @@ h3 {
 
 .agent-detail-active-surface {
   min-width: 0;
+  opacity: 1;
+  transition: opacity 120ms ease;
+}
+
+.agent-detail-workspace[data-agent-detail-pending="true"] .agent-detail-active-surface {
+  opacity: 0.92;
 }
 
 .agent-detail-active-surface > .panel {

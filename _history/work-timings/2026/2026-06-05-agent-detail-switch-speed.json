@@ -1,0 +1,22 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-agent-detail-switch-speed",
+  "timezone": "Asia/Seoul",
+  "phase_timings": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Official web.dev, React, and Next.js performance references checked before implementation."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Agents detail selected state and render state separated."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Tests, typecheck, check, build, build:customer, perf budget, button response audit, browser smoke, and diff check passed."
+    }
+  ]
+}

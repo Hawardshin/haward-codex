@@ -1,0 +1,28 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-agent-detail-switch-speed",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "resource": "first-paint scheduled callback",
+      "risk": "A stale scheduled callback could mount an outdated heavy workspace after rapid clicks or section changes.",
+      "mitigation": "Cancel the previous callback before scheduling the next one, and cancel pending callbacks on unmount, disclosure close, and Agents section exit."
+    },
+    {
+      "resource": "static validation server",
+      "risk": "A local server may remain running after browser smoke.",
+      "mitigation": "Track the process id and stop it before close-out."
+    },
+    {
+      "resource": "in-app Browser session",
+      "risk": "Browser verification can retain stale page state after a rebuild.",
+      "mitigation": "Open the rebuilt static export URL and verify DOM state after interaction."
+    }
+  ],
+  "validation_result": {
+    "scheduled_callback_cleanup": "Static test confirms deferred commit and cleanup paths; browser smoke confirms final selected/render state converges.",
+    "static_server": "Server was stopped after validation.",
+    "browser_session": "Used only local static export at 127.0.0.1:3348."
+  },
+  "status": "passed"
+}

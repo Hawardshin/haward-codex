@@ -2458,10 +2458,12 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [agentSignalsOpen, setAgentSignalsOpen] = useState(false);
   const [agentDetailsOpen, setAgentDetailsOpen] = useState(false);
   const [agentDetailView, setAgentDetailView] = useState<AgentDetailViewId>("collaboration");
+  const [agentDetailRenderView, setAgentDetailRenderView] = useState<AgentDetailViewId>("collaboration");
   const [commandQuery, setCommandQuery] = useState("");
   const titlebarSectionLabelRef = useRef<HTMLElement>(null);
   const commandInputRef = useRef<HTMLInputElement>(null);
   const pendingSectionCommitRef = useRef<(() => void) | null>(null);
+  const pendingAgentDetailCommitRef = useRef<(() => void) | null>(null);
   const [searchAgentRunForm, setSearchAgentRunForm] = useState<SearchAgentRunForm>(defaultSearchAgentRunForm);
   const [searchAgentChatMessages, setSearchAgentChatMessages] =
     useState<SearchAgentChatMessage[]>(defaultSearchAgentChatMessages);
@@ -2529,6 +2531,14 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     setSection(nextSection);
     setRecentSections((previous) => [nextSection, ...previous.filter((item) => item !== nextSection)].slice(0, 5));
   }, []);
+  const selectAgentDetailView = useCallback((view: AgentDetailViewId) => {
+    setAgentDetailView(view);
+    pendingAgentDetailCommitRef.current?.();
+    pendingAgentDetailCommitRef.current = scheduleAfterFirstPaint(() => {
+      setAgentDetailRenderView(view);
+      pendingAgentDetailCommitRef.current = null;
+    });
+  }, []);
   useEffect(() => {
     const nextSection = normalizeSectionId(initialSection);
     if (nextSection) {
@@ -2536,7 +2546,10 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     }
   }, [activateSection, initialSection]);
   useEffect(() => {
-    return () => pendingSectionCommitRef.current?.();
+    return () => {
+      pendingSectionCommitRef.current?.();
+      pendingAgentDetailCommitRef.current?.();
+    };
   }, []);
   useEffect(() => {
     if (typeof document === "undefined") {
@@ -2546,13 +2559,26 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     return root ? installInstantButtonFeedback(root) : undefined;
   }, []);
   useEffect(() => {
+    if (section !== "agents") {
+      pendingAgentDetailCommitRef.current?.();
+      pendingAgentDetailCommitRef.current = null;
+      setAgentDetailRenderView(agentDetailView);
+    }
     if (section !== "agents" && agentSignalsOpen) {
       setAgentSignalsOpen(false);
     }
     if (section !== "agents" && agentDetailsOpen) {
       setAgentDetailsOpen(false);
     }
-  }, [agentDetailsOpen, agentSignalsOpen, section]);
+  }, [agentDetailView, agentDetailsOpen, agentSignalsOpen, section]);
+  useEffect(() => {
+    if (agentDetailsOpen) {
+      return;
+    }
+    pendingAgentDetailCommitRef.current?.();
+    pendingAgentDetailCommitRef.current = null;
+    setAgentDetailRenderView(agentDetailView);
+  }, [agentDetailView, agentDetailsOpen]);
   useEffect(() => {
     let canceled = false;
     const tauriInvoke = getTauriInvoke();
@@ -6263,7 +6289,13 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
               <small>{uiLanguage === "ko" ? "한 번에 하나의 세부 작업면만 엽니다" : "Open one detail workspace at a time"}</small>
             </summary>
             {agentDetailsOpen && (
-              <div className="section-secondary-stack agent-detail-workspace" data-agent-detail-workspace data-agent-detail-view={agentDetailView}>
+              <div
+                className="section-secondary-stack agent-detail-workspace"
+                data-agent-detail-workspace
+                data-agent-detail-view={agentDetailView}
+                data-agent-detail-render-view={agentDetailRenderView}
+                data-agent-detail-pending={agentDetailView === agentDetailRenderView ? "false" : "true"}
+              >
                 <div className="agent-detail-switcher" role="tablist" aria-label={uiLanguage === "ko" ? "에이전트 세부 기능" : "Agent detail workspaces"}>
                   {agentDetailViews.map((item) => {
                     const Icon = item.icon;
@@ -6277,7 +6309,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                         aria-selected={selected}
                         aria-controls="agent-detail-active-panel"
                         data-agent-detail-tab={item.id}
-                        onClick={() => setAgentDetailView(item.id)}
+                        onClick={() => selectAgentDetailView(item.id)}
                       >
                         <Icon size={16} aria-hidden="true" />
                         <span>{uiLanguage === "ko" ? item.labelKo : item.labelEn}</span>
@@ -6291,10 +6323,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                   id="agent-detail-active-panel"
                   className="agent-detail-active-surface"
                   role="tabpanel"
-                  aria-labelledby={`agent-detail-tab-${agentDetailView}`}
+                  aria-busy={agentDetailView !== agentDetailRenderView}
+                  aria-labelledby={`agent-detail-tab-${agentDetailRenderView}`}
                   data-agent-detail-active-surface
                 >
-                  {agentDetailView === "collaboration" && (
+                  {agentDetailRenderView === "collaboration" && (
                     <section className="panel wide">
                       <div className="panel-heading">
                         <div>
@@ -6310,7 +6343,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                     </section>
                   )}
 
-                  {agentDetailView === "blueprint" && (
+                  {agentDetailRenderView === "blueprint" && (
                     <AgentCoreBlueprintPanel
                       blueprints={agentCoreBlueprints}
                       selectedBlueprintId={selectedAgentCoreBlueprintId}
@@ -6325,7 +6358,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                     />
                   )}
 
-                  {agentDetailView === "builder" && (
+                  {agentDetailRenderView === "builder" && (
                     <AgentFactoryWizard
                       form={agentFactoryForm}
                       proposal={agentFactoryProposal}
@@ -6338,7 +6371,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                     />
                   )}
 
-                  {agentDetailView === "learning" && (
+                  {agentDetailRenderView === "learning" && (
                     <LearningFeedbackLoopPanel
                       candidates={learningImprovementCandidates}
                       selectedCandidate={selectedLearningCandidate}
@@ -6359,7 +6392,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                     />
                   )}
 
-                  {agentDetailView === "flow" && (
+                  {agentDetailRenderView === "flow" && (
                     <section className="panel wide">
                       <div className="panel-heading">
                         <div>
@@ -6372,7 +6405,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                     </section>
                   )}
 
-                  {agentDetailView === "inventory" && (
+                  {agentDetailRenderView === "inventory" && (
                     <section className="panel wide">
                       <div className="panel-heading">
                         <div>
@@ -6385,7 +6418,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                     </section>
                   )}
 
-                  {agentDetailView === "runtime" && (
+                  {agentDetailRenderView === "runtime" && (
                     <section className="panel wide">
                       <div className="panel-heading">
                         <div>
