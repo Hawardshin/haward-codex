@@ -7,6 +7,8 @@ use std::collections::{HashMap, HashSet};
 use std::env;
 use std::fs;
 use std::io::{Read, Write};
+#[cfg(unix)]
+use std::os::unix::process::CommandExt;
 use std::path::{Component, Path, PathBuf};
 use std::process::{Child, ChildStdin, Command, Stdio};
 use std::sync::{mpsc, Arc, Mutex};
@@ -238,7 +240,7 @@ struct NativePtySession {
     label: String,
     command: String,
     child: Box<dyn portable_pty::Child + Send + Sync>,
-    master: Box<dyn MasterPty + Send>,
+    master: Option<Box<dyn MasterPty + Send>>,
     writer: Option<Box<dyn Write + Send>>,
     output: Arc<Mutex<NativePtyOutput>>,
     reader_handle: Option<thread::JoinHandle<()>>,
@@ -257,6 +259,18 @@ struct NativePtySession {
 struct NativePtyOutput {
     output: String,
     output_truncated: bool,
+}
+
+impl Drop for CliSession {
+    fn drop(&mut self) {
+        dispose_cli_session_runtime(self, "dropped");
+    }
+}
+
+impl Drop for NativePtySession {
+    fn drop(&mut self) {
+        dispose_native_pty_session_runtime(self, "dropped");
+    }
 }
 
 #[derive(Serialize)]
@@ -1287,6 +1301,8 @@ const SESSION_TIMEOUT_MS: u64 = 300_000;
 const FINISHED_SESSION_RETENTION_MS: u64 = 30 * 60 * 1000;
 const MAX_RETAINED_FINISHED_SESSIONS: usize = 40;
 const MAX_SESSION_INPUT_BYTES: usize = 20_000;
+const SESSION_READER_JOIN_GRACE_MS: u64 = 250;
+const SESSION_READER_JOIN_POLL_MS: u64 = 10;
 const MAX_WORKSPACE_FILE_BYTES: usize = 1_000_000;
 const DEFAULT_WORKSPACE_SOURCE_LIST_LIMIT: usize = 240;
 const MAX_WORKSPACE_SOURCE_LIST_LIMIT: usize = 500;
@@ -1889,8 +1905,7 @@ fn start_cli_adapter_session(
             sessions.insert(session_id, session);
         }
         Err(_) => {
-            let _ = session.child.kill();
-            let _ = session.child.wait();
+            dispose_cli_session_runtime(&mut session, "store_lock_failed");
             return Err("Failed to lock CLI session store.".to_string());
         }
     }
@@ -2041,8 +2056,7 @@ fn start_cli_task_pipeline(
         }
         Err(_) => {
             for (_, mut session) in pending_sessions {
-                let _ = session.child.kill();
-                let _ = session.child.wait();
+                dispose_cli_session_runtime(&mut session, "store_lock_failed");
             }
             return Err("Failed to lock CLI session store.".to_string());
         }
@@ -2089,6 +2103,7 @@ fn create_cli_session(
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())
         .stderr(Stdio::piped());
+    configure_process_group(&mut command);
     for (key, value) in provider_env {
         command.env(key, value);
     }
@@ -2099,8 +2114,7 @@ fn create_cli_session(
     let mut stdin = match child.stdin.take() {
         Some(stdin) => stdin,
         None => {
-            let _ = child.kill();
-            let _ = child.wait();
+            let _ = kill_and_wait_child(&mut child);
             return Err("Failed to capture CLI stdin.".to_string());
         }
     };
@@ -2110,8 +2124,7 @@ fn create_cli_session(
             .and_then(|_| stdin.write_all(b"\n"))
             .and_then(|_| stdin.flush())
         {
-            let _ = child.kill();
-            let _ = child.wait();
+            let _ = kill_and_wait_child(&mut child);
             return Err(format!("Failed to write initial prompt: {error}"));
         }
     }
@@ -2119,16 +2132,14 @@ fn create_cli_session(
     let stdout = match child.stdout.take() {
         Some(stdout) => stdout,
         None => {
-            let _ = child.kill();
-            let _ = child.wait();
+            let _ = kill_and_wait_child(&mut child);
             return Err("Failed to capture CLI stdout.".to_string());
         }
     };
     let stderr = match child.stderr.take() {
         Some(stderr) => stderr,
         None => {
-            let _ = child.kill();
-            let _ = child.wait();
+            let _ = kill_and_wait_child(&mut child);
             return Err("Failed to capture CLI stderr.".to_string());
         }
     };
@@ -2246,8 +2257,7 @@ fn start_native_pty_terminal(
             sessions.insert(session_id, session);
         }
         Err(_) => {
-            let _ = session.child.kill();
-            let _ = session.child.wait();
+            dispose_native_pty_session_runtime(&mut session, "store_lock_failed");
             return Err("Failed to lock native PTY session store.".to_string());
         }
     }
@@ -2337,8 +2347,11 @@ fn resize_native_pty_terminal(
         .get_mut(&session_id)
         .ok_or_else(|| format!("Unknown native PTY session id: {session_id}"))?;
     let size = normalized_pty_size(Some(rows), Some(cols));
-    session
+    let master = session
         .master
+        .as_mut()
+        .ok_or_else(|| "Native PTY master is not available.".to_string())?;
+    master
         .resize(size)
         .map_err(|error| format!("Failed to resize native PTY: {error}"))?;
     session.rows = size.rows;
@@ -2358,12 +2371,7 @@ fn cancel_native_pty_terminal(
     let session = sessions
         .get_mut(&session_id)
         .ok_or_else(|| format!("Unknown native PTY session id: {session_id}"))?;
-    let _ = session.child.kill();
-    let exit_code = session
-        .child
-        .wait()
-        .ok()
-        .map(|status| status.exit_code() as i32);
+    let exit_code = kill_and_wait_pty_child(session.child.as_mut());
     mark_pty_session_finished(session, "canceled", exit_code);
     Ok(poll_native_pty_session_locked(&session_id, session))
 }
@@ -3712,6 +3720,7 @@ fn run_bounded_command_with_cwd(
         .stdin(Stdio::null())
         .stdout(Stdio::piped())
         .stderr(Stdio::piped());
+    configure_process_group(&mut command);
     if let Some(cwd) = cwd {
         command.current_dir(cwd);
     }
@@ -3722,16 +3731,14 @@ fn run_bounded_command_with_cwd(
     let stdout = match child.stdout.take() {
         Some(stdout) => stdout,
         None => {
-            let _ = child.kill();
-            let _ = child.wait();
+            let _ = kill_and_wait_child(&mut child);
             return Err("Failed to capture stdout.".to_string());
         }
     };
     let stderr = match child.stderr.take() {
         Some(stderr) => stderr,
         None => {
-            let _ = child.kill();
-            let _ = child.wait();
+            let _ = kill_and_wait_child(&mut child);
             return Err("Failed to capture stderr.".to_string());
         }
     };
@@ -3748,16 +3755,14 @@ fn run_bounded_command_with_cwd(
             }
             Ok(None) => {
                 if started.elapsed() >= timeout {
-                    let _ = child.kill();
-                    let status = child.wait().ok().and_then(|value| value.code());
+                    let status = kill_and_wait_child(&mut child);
                     let _ = tx.send((status, true));
                     break;
                 }
                 thread::sleep(Duration::from_millis(40));
             }
             Err(_) => {
-                let _ = child.kill();
-                let _ = child.wait();
+                let _ = kill_and_wait_child(&mut child);
                 let _ = tx.send((None, false));
                 break;
             }
@@ -3824,8 +3829,12 @@ fn poll_session_locked(
     if !session.finished {
         auto_defer_session_questions_locked(session_id, session);
     }
-    join_finished_reader(&mut session.stdout_handle);
-    join_finished_reader(&mut session.stderr_handle);
+    if session.finished {
+        finalize_finished_cli_session_runtime(session);
+    } else {
+        join_finished_reader(&mut session.stdout_handle);
+        join_finished_reader(&mut session.stderr_handle);
+    }
     let report = session_report(session_id, session);
     let persist_signature = task_run_persist_signature(&report);
     if session.task_record_path.is_none() || session.last_persist_signature != persist_signature {
@@ -3857,6 +3866,43 @@ fn join_finished_reader(handle: &mut Option<thread::JoinHandle<()>>) {
     }
 }
 
+fn join_reader_with_grace(handle: &mut Option<thread::JoinHandle<()>>) {
+    let deadline = Instant::now() + Duration::from_millis(SESSION_READER_JOIN_GRACE_MS);
+    while handle
+        .as_ref()
+        .map(|value| !value.is_finished())
+        .unwrap_or(false)
+        && Instant::now() < deadline
+    {
+        thread::sleep(Duration::from_millis(SESSION_READER_JOIN_POLL_MS));
+    }
+    join_finished_reader(handle);
+}
+
+fn cli_session_readers_closed(session: &CliSession) -> bool {
+    session.stdout_handle.is_none() && session.stderr_handle.is_none()
+}
+
+fn finalize_finished_cli_session_runtime(session: &mut CliSession) {
+    session.stdin.take();
+    join_reader_with_grace(&mut session.stdout_handle);
+    join_reader_with_grace(&mut session.stderr_handle);
+    if !cli_session_readers_closed(session) {
+        kill_child_process_tree(&mut session.child);
+        join_reader_with_grace(&mut session.stdout_handle);
+        join_reader_with_grace(&mut session.stderr_handle);
+    }
+}
+
+fn dispose_cli_session_runtime(session: &mut CliSession, status: &str) {
+    session.stdin.take();
+    if !session.finished {
+        let exit_code = kill_and_wait_child(&mut session.child);
+        mark_session_finished(session, status, exit_code);
+    }
+    finalize_finished_cli_session_runtime(session);
+}
+
 fn mark_session_finished(
     session: &mut CliSession,
     status: impl Into<String>,
@@ -3871,8 +3917,28 @@ fn mark_session_finished(
     session.stdin.take();
 }
 
-fn kill_and_wait_child(child: &mut Child) -> Option<i32> {
+fn configure_process_group(command: &mut Command) {
+    #[cfg(unix)]
+    {
+        command.process_group(0);
+    }
+}
+
+fn kill_child_process_tree(child: &mut Child) {
+    #[cfg(unix)]
+    {
+        let pid = child.id();
+        if pid > 0 && pid <= i32::MAX as u32 {
+            unsafe {
+                let _ = libc::kill(-(pid as libc::pid_t), libc::SIGKILL);
+            }
+        }
+    }
     let _ = child.kill();
+}
+
+fn kill_and_wait_child(child: &mut Child) -> Option<i32> {
+    kill_child_process_tree(child);
     child.wait().ok().and_then(|exit_status| exit_status.code())
 }
 
@@ -3920,8 +3986,7 @@ fn cleanup_finished_sessions_locked(sessions: &mut HashMap<String, CliSession>) 
 
     for session_id in remove_ids {
         if let Some(mut session) = sessions.remove(&session_id) {
-            join_finished_reader(&mut session.stdout_handle);
-            join_finished_reader(&mut session.stderr_handle);
+            finalize_finished_cli_session_runtime(&mut session);
         }
     }
 }
@@ -3950,16 +4015,14 @@ fn create_native_pty_session(
     let reader = match pair.master.try_clone_reader() {
         Ok(reader) => reader,
         Err(error) => {
-            let _ = child.kill();
-            let _ = child.wait();
+            let _ = kill_and_wait_pty_child(child.as_mut());
             return Err(format!("Failed to clone native PTY reader: {error}"));
         }
     };
     let writer = match pair.master.take_writer() {
         Ok(writer) => writer,
         Err(error) => {
-            let _ = child.kill();
-            let _ = child.wait();
+            let _ = kill_and_wait_pty_child(child.as_mut());
             return Err(format!("Failed to open native PTY writer: {error}"));
         }
     };
@@ -3976,7 +4039,7 @@ fn create_native_pty_session(
         label,
         command: command.to_string(),
         child,
-        master: pair.master,
+        master: Some(pair.master),
         writer: Some(writer),
         output,
         reader_handle: Some(reader_handle),
@@ -4007,17 +4070,16 @@ fn poll_native_pty_session_locked(
             }
             Ok(None) => {}
             Err(_) => {
-                let _ = session.child.kill();
-                let exit_code = session
-                    .child
-                    .wait()
-                    .ok()
-                    .map(|status| status.exit_code() as i32);
+                let exit_code = kill_and_wait_pty_child(session.child.as_mut());
                 mark_pty_session_finished(session, "error", exit_code);
             }
         }
     }
-    join_finished_reader(&mut session.reader_handle);
+    if session.finished {
+        finalize_finished_native_pty_runtime(session);
+    } else {
+        join_finished_reader(&mut session.reader_handle);
+    }
     native_pty_session_report(session_id, session)
 }
 
@@ -4033,6 +4095,30 @@ fn mark_pty_session_finished(
         session.finished_at = Some(Instant::now());
     }
     session.writer.take();
+    session.master.take();
+}
+
+fn finalize_finished_native_pty_runtime(session: &mut NativePtySession) {
+    session.writer.take();
+    session.master.take();
+    join_reader_with_grace(&mut session.reader_handle);
+}
+
+fn dispose_native_pty_session_runtime(session: &mut NativePtySession, status: &str) {
+    session.writer.take();
+    if !session.finished {
+        let exit_code = kill_and_wait_pty_child(session.child.as_mut());
+        mark_pty_session_finished(session, status, exit_code);
+    }
+    finalize_finished_native_pty_runtime(session);
+}
+
+fn kill_and_wait_pty_child(child: &mut (dyn portable_pty::Child + Send + Sync)) -> Option<i32> {
+    let _ = child.kill();
+    child
+        .wait()
+        .ok()
+        .map(|exit_status| exit_status.exit_code() as i32)
 }
 
 fn cleanup_finished_pty_sessions_locked(sessions: &mut HashMap<String, NativePtySession>) {
@@ -4079,7 +4165,7 @@ fn cleanup_finished_pty_sessions_locked(sessions: &mut HashMap<String, NativePty
 
     for session_id in remove_ids {
         if let Some(mut session) = sessions.remove(&session_id) {
-            join_finished_reader(&mut session.reader_handle);
+            finalize_finished_native_pty_runtime(&mut session);
         }
     }
 }

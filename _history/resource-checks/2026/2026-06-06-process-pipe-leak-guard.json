@@ -1,0 +1,42 @@
+{
+  "id": "2026-06-06-process-pipe-leak-guard",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "type": "child_process",
+      "risk": "Immediate child or spawned descendants can remain after cancel/timeout/drop.",
+      "mitigation": "Unix process_group(0), process group SIGKILL, child kill fallback, wait on cleanup."
+    },
+    {
+      "type": "pipe_fd",
+      "risk": "stdin/stdout/stderr or PTY master/writer can keep reader threads alive.",
+      "mitigation": "Explicit stdin/writer/master drop before reader grace join."
+    },
+    {
+      "type": "reader_thread",
+      "risk": "Output reader thread can remain blocked on a pipe held by a descendant.",
+      "mitigation": "join_reader_with_grace followed by process tree cleanup for CLI sessions."
+    },
+    {
+      "type": "memory",
+      "risk": "Unbounded session output or retained finished sessions can grow memory.",
+      "mitigation": "Existing MAX_SESSION_OUTPUT_BYTES and finished retention cleanup remain enforced; new cleanup reduces retained handle/session pressure."
+    },
+    {
+      "type": "pty_handle",
+      "risk": "Native PTY master/writer can remain live after finished/cancel/drop.",
+      "mitigation": "NativePtySession.master is Option and finalized by taking writer/master."
+    }
+  ],
+  "verification": [
+    "cargo check passed",
+    "cargo test passed",
+    "platform-desktop-app test passed",
+    "workspace-monitor collect passed",
+    "desktop:package:internal passed with app/DMG build, codesign verification, and DMG verification"
+  ],
+  "residual_risk": [
+    "Windows process tree cleanup needs a separate job object or platform-specific strategy.",
+    "Automated stress test for FD/RSS deltas is not yet implemented."
+  ]
+}

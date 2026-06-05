@@ -435,6 +435,18 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   assert.match(lib, /MAX_WORKSPACE_PRELOAD_WORKERS: usize = 16/);
   assert.match(lib, /workspace_resource_profile/);
   assert.match(lib, /rayon_parallel_cpu_ram_budget/);
+  assert.match(lib, /SESSION_READER_JOIN_GRACE_MS/);
+  assert.match(lib, /configure_process_group/);
+  assert.match(lib, /command\.process_group\(0\)/);
+  assert.match(lib, /kill_child_process_tree/);
+  assert.match(lib, /libc::kill/);
+  assert.match(lib, /join_reader_with_grace/);
+  assert.match(lib, /dispose_cli_session_runtime/);
+  assert.match(lib, /dispose_native_pty_session_runtime/);
+  assert.match(lib, /impl Drop for CliSession/);
+  assert.match(lib, /impl Drop for NativePtySession/);
+  assert.match(lib, /master: Option<Box<dyn MasterPty \+ Send>>/);
+  assert.match(cargoToml, /libc = "0\.2\.186"/);
   assert.match(lib, /build_workspace_thread_pool/);
   assert.match(lib, /parallel_workers/);
   assert.match(lib, /memory_budget_bytes/);

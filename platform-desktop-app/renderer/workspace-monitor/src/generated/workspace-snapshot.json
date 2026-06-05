@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T20:58:07.226Z",
+  "generatedAt": "2026-06-05T21:09:21.220Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -12,12 +12,12 @@
     "tasks": 71,
     "completedTasks": 71,
     "documents": 650,
-    "requirements": 462,
-    "evaluations": 26,
+    "requirements": 467,
+    "evaluations": 25,
     "webSearches": 13,
-    "timingRecords": 12,
+    "timingRecords": 13,
     "historyDays": 1,
-    "adminHistoryDocuments": 2449,
+    "adminHistoryDocuments": 2457,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7414,6 +7414,36 @@
       "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-native-select-replacement.ko.md"
     },
     {
+      "id": "REQ-PPL-001",
+      "requirement": "CLI 세션은 cancel, timeout, error, store cleanup, drop 경로에서 child process를 wait 또는 kill/wait해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-process-pipe-leak-guard.ko.md"
+    },
+    {
+      "id": "REQ-PPL-002",
+      "requirement": "pipe 기반 CLI 실행은 stdout/stderr reader thread가 끝날 수 있도록 stdin을 먼저 닫고 reader join grace를 적용해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-process-pipe-leak-guard.ko.md"
+    },
+    {
+      "id": "REQ-PPL-003",
+      "requirement": "Unix/macOS에서는 CLI adapter child를 별도 process group으로 시작하고 timeout/cleanup 시 process group kill을 수행해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-process-pipe-leak-guard.ko.md"
+    },
+    {
+      "id": "REQ-PPL-004",
+      "requirement": "PTY 세션은 finished/cancel/drop 경로에서 writer와 master를 drop하고 reader thread를 grace join해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-process-pipe-leak-guard.ko.md"
+    },
+    {
+      "id": "REQ-PPL-005",
+      "requirement": "구현은 readiness/static tests와 Rust compile/test, 내부 패키징 빌드로 검증해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-process-pipe-leak-guard.ko.md"
+    },
+    {
       "id": "REQ-PDA-131",
       "requirement": "Provider 설정 오류와 작업 결과는 별도 문단으로 레이아웃을 밀지 않고, 해당 액션 버튼 내부 상태로 표시해야 한다.",
       "priority": "must",
@@ -7449,11 +7479,235 @@
       "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 6367,
-      "updatedAt": "2026-06-05T20:56:57.049Z",
+      "sourceBytes": 6933,
+      "updatedAt": "2026-06-05T21:08:50.058Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-process-pipe-leak-guard-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-process-pipe-leak-guard-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Process Pipe Leak Guard Evaluation Input",
+      "excerpt": "{ \"id\": \"2026 06 06 process pipe leak guard\", \"installation occurred\": true, \"installation record targets\": \" history/installations/2026/2026 06 06 libc process group cleanup.ko.md\" , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 process pipe leak guard&quot;, &quot;installation occurred&quot;: true, &quot;installation record targets&quot;: &quot; history/installations/2026/2026 06 06 libc process group cleanup.ko.md&quot; , &quot;resource risk occurred&quot;: true, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 06 06 process pipe leak guard.json&quot; , &quot;omission check targets&quot;: &quot; history/omission</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 801,
+      "updatedAt": "2026-06-05T21:08:50.058Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: 프로세스/파이프 누수 방지",
+      "excerpt": "평가: 프로세스/파이프 누수 방지 판정 진행 중. 핵심 Rust runtime 변경과 초기 test/check는 통과했고, 내부 패키징 빌드 완료 후 최종 충족으로 전환한다. 증거 CLI 세션 Drop/finalize/dispose guard 추가. Unix/macOS CLI process group setup 및 group kill cleanup 추가. timeout/error/store cleanup에서 kill/wait 통합. PTY writer/master drop 및 reader grac",
+      "html": "<p>평가: 프로세스/파이프 누수 방지 판정 진행 중. 핵심 Rust runtime 변경과 초기 test/check는 통과했고, 내부 패키징 빌드 완료 후 최종 충족으로 전환한다. 증거 CLI 세션 Drop/finalize/dispose guard 추가. Unix/macOS CLI process group setup 및 group kill cleanup 추가. timeout/error/store cleanup에서 kill/wait 통합. PTY writer/master drop 및 reader grace join 추가. readiness/check readiness runtime token 추가. 검증 corepack pnpm filter p</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 780,
+      "updatedAt": "2026-06-05T21:08:50.058Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: 프로세스/파이프 누수 방지",
+      "excerpt": "요청 결과 추적: 프로세스/파이프 누수 방지 요청 프로세스 관리, pipe 관리, 메모리 누수가 없도록 처리. 결과 CLI/PTY session lifecycle cleanup 강화. Unix process group 기반 cleanup 추가. reader thread grace join과 PTY master/writer explicit drop 추가. readiness tests에 lifecycle contract 추가. 산출물 platform desktop app/docs/requirement",
+      "html": "<p>요청 결과 추적: 프로세스/파이프 누수 방지 요청 프로세스 관리, pipe 관리, 메모리 누수가 없도록 처리. 결과 CLI/PTY session lifecycle cleanup 강화. Unix process group 기반 cleanup 추가. reader thread grace join과 PTY master/writer explicit drop 추가. readiness tests에 lifecycle contract 추가. 산출물 platform desktop app/docs/requirements/2026 06 06 process pipe leak guard.ko.md platform desktop app/specs/2026 06 06</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 807,
+      "updatedAt": "2026-06-05T21:08:50.058Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 프로세스/파이프 누수 방지",
+      "excerpt": "작업 요약: 프로세스/파이프 누수 방지 변경 CLI adapter/command spawn에 Unix process group 설정을 추가했다. timeout/error/store cleanup에서 child kill만 하지 않고 process group kill과 wait를 통합했다. CliSession 과 NativePtySession 에 Drop guard를 추가했다. CLI/PTY finished cleanup에서 stdin, writer, PTY master, reader thread를 ",
+      "html": "<p>작업 요약: 프로세스/파이프 누수 방지 변경 CLI adapter/command spawn에 Unix process group 설정을 추가했다. timeout/error/store cleanup에서 child kill만 하지 않고 process group kill과 wait를 통합했다. CliSession 과 NativePtySession 에 Drop guard를 추가했다. CLI/PTY finished cleanup에서 stdin, writer, PTY master, reader thread를 정리하는 finalize/dispose helper를 추가했다. readiness tests와 check readiness에 lifecycle </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 848,
+      "updatedAt": "2026-06-05T21:08:50.057Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 프로세스/파이프 누수 방지",
+      "excerpt": "사용자 요청 요약: 프로세스/파이프 누수 방지 요약 사용자는 데스크톱 앱의 프로세스 관리, pipe 관리, 메모리 누수가 없도록 처리해 달라고 요청했다. 해석 터미널/CLI 세션의 child process cleanup을 강화한다. stdout/stderr/stdin pipe와 PTY writer/master가 세션 종료 후 남지 않게 한다. reader thread가 끝나지 않는 상태를 bounded하게 정리한다. 구현 후 빌드까지 자동 실행한다. 범위 platform desktop app Ru",
+      "html": "<p>사용자 요청 요약: 프로세스/파이프 누수 방지 요약 사용자는 데스크톱 앱의 프로세스 관리, pipe 관리, 메모리 누수가 없도록 처리해 달라고 요청했다. 해석 터미널/CLI 세션의 child process cleanup을 강화한다. stdout/stderr/stdin pipe와 PTY writer/master가 세션 종료 후 남지 않게 한다. reader thread가 끝나지 않는 상태를 bounded하게 정리한다. 구현 후 빌드까지 자동 실행한다. 범위 platform desktop app Rust/Tauri runtime. CLI adapter session, bounded command runner, native PTY termin</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 681,
+      "updatedAt": "2026-06-05T21:08:50.056Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-process-pipe-leak-guard-json",
+      "path": "_history/work-timings/2026/2026-06-06-process-pipe-leak-guard.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Process Pipe Leak Guard",
+      "excerpt": "{ \"id\": \"2026 06 06 process pipe leak guard\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"name\": \"web first research\", \"status\": \"completed\", \"notes\": \"Checked Rust std process, Unix CommandExt, portable pty, Tauri, and issue/community risk signals.\" }, { \"name\": \"source inspection\", ",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 process pipe leak guard&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;phases&quot;: { &quot;name&quot;: &quot;web first research&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Checked Rust std process, Unix CommandExt, portable pty, Tauri, and issue/community risk signals.&quot; }, { &quot;name&quot;: &quot;source inspection&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Inspected Tauri session stores, bounded command</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1027,
+      "updatedAt": "2026-06-05T21:08:50.056Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+      "path": "_history/plans/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "계획 기록: 프로세스/파이프 누수 방지",
+      "excerpt": "계획 기록: 프로세스/파이프 누수 방지 문제 정의 터미널/CLI 기능은 child process, pipe, reader thread, PTY handle을 소유한다. 데스크톱 앱에서 탭 전환과 터미널 반복 사용이 계속되면 종료 경로가 불완전한 세션은 memory/FD/thread/process 누수로 이어질 수 있다. 결정 Rust/Tauri backend에서 OS resource lifecycle을 닫는다. Renderer에 cleanup 책임을 두지 않는다. CLI adapter는 Unix ",
+      "html": "<p>계획 기록: 프로세스/파이프 누수 방지 문제 정의 터미널/CLI 기능은 child process, pipe, reader thread, PTY handle을 소유한다. 데스크톱 앱에서 탭 전환과 터미널 반복 사용이 계속되면 종료 경로가 불완전한 세션은 memory/FD/thread/process 누수로 이어질 수 있다. 결정 Rust/Tauri backend에서 OS resource lifecycle을 닫는다. Renderer에 cleanup 책임을 두지 않는다. CLI adapter는 Unix process group으로 격리한다. 세션 store cleanup과 Drop guard를 모두 close out 경로로 둔다. reader </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 908,
+      "updatedAt": "2026-06-05T21:08:50.055Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: 프로세스/파이프 누수 방지",
+      "excerpt": "웹 검색 기록: 프로세스/파이프 누수 방지 검색 시각 2026 06 06 KST 질의 Rust std::process ChildStdin ChildStdout pipe deadlock wait drop official docs Tokio process Command kill on drop child stdout memory leak official docs Tauri v2 async command process management sidecar official docs portable pty ru",
+      "html": "<p>웹 검색 기록: 프로세스/파이프 누수 방지 검색 시각 2026 06 06 KST 질의 Rust std::process ChildStdin ChildStdout pipe deadlock wait drop official docs Tokio process Command kill on drop child stdout memory leak official docs Tauri v2 async command process management sidecar official docs portable pty rust process pipe close drop documentation Rust CommandExt process group official </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2427,
+      "updatedAt": "2026-06-05T21:08:50.054Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-process-pipe-leak-guard-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-process-pipe-leak-guard/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability",
+      "excerpt": "Traceability | 요구사항 | 구현 | 검증 | | | | | | REQ PPL 001 | dispose cli session runtime , kill and wait child , impl Drop for CliSession | platform desktop app test , cargo check , readiness token | | REQ PPL 002 | SESSION READER JOIN GRACE MS , join reader with grace , finalize fini",
+      "html": "<h1>Traceability</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PPL-001</td><td><code>dispose_cli_session_runtime</code>, <code>kill_and_wait_child</code>, <code>impl Drop for CliSession</code></td><td><code>platform-desktop-app test</code>, <code>cargo check</code>, readiness token</td></tr><tr><td>REQ-PPL-002</td><td><code>SESSION_READER_JOIN_GRACE_MS</code>, <code>join_reader_with_grace</code>, <code>finalize_finished_cli_session_runtime</code></td><td><code>platform-desktop-app test</code>, readiness token</td></tr><tr><td>REQ-PPL-003</td><td><code>configure_process_group</code>, <code>kill_child_process_tree</code>, <code>libc::kill</code></td><td><code>cargo check</code>, readiness token</td></tr><tr><td>REQ-PPL-004</td><td><code>NativePtySession.master: Option</code>, <code>dispose_native_pty_session_runtime</code>, <code>finalize_finished_native_pty_runtime</code></td><td><code>platform-desktop-app test</code>, <code>cargo check</code>, readiness token</td></tr><tr><td>REQ-PPL-005</td><td>validation, resource check, package build gate</td><td><code>desktop:package:internal</code>, <code>git diff --check</code></td></tr></tbody></table>\n<h2>사용자 요청 연결</h2>\n<ul>\n<li>&quot;프로세스 관리 파이프 관리 메모리 누수 없도록&quot; -&gt; process/pipe/session lifecycle guard.</li>\n<li>이전 &quot;터미널 기능 다시 살펴봐줘&quot; -&gt; native PTY cleanup 강화.</li>\n<li>이전 &quot;매번 내가 빌드 안하게 구현 다 끝나면 빌드까지 자동으로 해줘&quot; -&gt; 내부 패키징 빌드 close-out gate.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1174,
+      "updatedAt": "2026-06-05T21:08:50.054Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-process-pipe-leak-guard-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-process-pipe-leak-guard/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "구현 계획: 프로세스/파이프 누수 방지",
+      "excerpt": "구현 계획: 프로세스/파이프 누수 방지 순서 1. Rust std/process, portable pty, Tauri child process lifecycle 관련 공식 문서와 issue/community 신호를 확인한다. 2. 기존 CLI/PTY session store의 종료 경로를 찾고 직접 kill only 경로를 정리한다. 3. CLI spawn에 Unix process group을 설정하고 timeout/error/store cleanup에서 kill/wait를 통합한다. 4. CLI",
+      "html": "<h1>구현 계획: 프로세스/파이프 누수 방지</h1>\n<h2>순서</h2>\n<p>1. Rust std/process, portable-pty, Tauri child process lifecycle 관련 공식 문서와 issue/community 신호를 확인한다.</p>\n<p>2. 기존 CLI/PTY session store의 종료 경로를 찾고 직접 kill-only 경로를 정리한다.</p>\n<p>3. CLI spawn에 Unix process group을 설정하고 timeout/error/store cleanup에서 kill/wait를 통합한다.</p>\n<p>4. CLI/PTY session struct에 Drop guard와 dispose/finalize helper를 추가한다.</p>\n<p>5. readiness tests에 lifecycle token을 추가해 regressions를 막는다.</p>\n<p>6. Rust/Node tests와 내부 패키징 빌드를 실행한다.</p>\n<p>7. 요구사항, 스펙, 검증, resource/omission/evaluation trace를 남기고 commit/push한다.</p>\n<h2>검증 게이트</h2>\n<ul>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>cd platform-desktop-app/src-tauri &amp;&amp; cargo check</code></li>\n<li><code>cd platform-desktop-app/src-tauri &amp;&amp; cargo test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code></li>\n<li><code>corepack pnpm run desktop:package:internal</code></li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>Rollback</h2>\n<p><code>Cargo.toml</code>의 <code>libc</code> 직접 의존성, process group setup, dispose/finalize helper, readiness token을 되돌린 뒤 <code>cargo check</code>, <code>platform-desktop-app test</code>, <code>desktop:package:internal</code>을 재실행한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1261,
+      "updatedAt": "2026-06-05T21:08:50.053Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-process-pipe-leak-guard-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-process-pipe-leak-guard/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업: 프로세스/파이프 누수 방지",
+      "excerpt": "작업: 프로세스/파이프 누수 방지 x Web first 조사 수행 x process/pipe/PTY cleanup failure mode 확인 x CLI spawn process group 설정 추가 x CLI timeout/error/store cleanup kill/wait 통합 x CLI session Drop/finalize/dispose guard 추가 x PTY master/writer explicit drop 경로 추가 x PTY session Drop/finalize/dispose ",
+      "html": "<h1>작업: 프로세스/파이프 누수 방지</h1>\n<ul>\n<li>[x] Web-first 조사 수행</li>\n<li>[x] process/pipe/PTY cleanup failure mode 확인</li>\n<li>[x] CLI spawn process group 설정 추가</li>\n<li>[x] CLI timeout/error/store cleanup kill/wait 통합</li>\n<li>[x] CLI session Drop/finalize/dispose guard 추가</li>\n<li>[x] PTY master/writer explicit drop 경로 추가</li>\n<li>[x] PTY session Drop/finalize/dispose guard 추가</li>\n<li>[x] readiness/check-readiness lifecycle token 추가</li>\n<li>[ ] 내부 패키징 빌드 실행</li>\n<li>[ ] 기록, 평가, trace 정리</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 513,
+      "updatedAt": "2026-06-05T21:08:50.053Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-process-pipe-leak-guard-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-process-pipe-leak-guard/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증 기록",
+      "excerpt": "검증 기록 현재 통과 corepack pnpm filter platform desktop app test : 통과, 24 tests. cd platform desktop app/src tauri && cargo check : 통과. 예정 cd platform desktop app/src tauri && cargo test corepack pnpm filter workspace monitor run collect corepack pnpm run desktop:package:internal git d",
+      "html": "<h1>검증 기록</h1>\n<h2>현재 통과</h2>\n<ul>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 24 tests.</li>\n<li><code>cd platform-desktop-app/src-tauri &amp;&amp; cargo check</code>: 통과.</li>\n</ul>\n<h2>예정</h2>\n<ul>\n<li><code>cd platform-desktop-app/src-tauri &amp;&amp; cargo test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code></li>\n<li><code>corepack pnpm run desktop:package:internal</code></li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>확인한 코드 계약</h2>\n<ul>\n<li><code>CliSession</code>과 <code>NativePtySession</code>에 Drop guard가 있다.</li>\n<li>CLI session cleanup은 <code>dispose_cli_session_runtime</code>과 <code>finalize_finished_cli_session_runtime</code>을 통과한다.</li>\n<li>Native PTY cleanup은 <code>dispose_native_pty_session_runtime</code>과 <code>finalize_finished_native_pty_runtime</code>을 통과한다.</li>\n<li>Unix/macOS CLI spawn은 <code>process_group(0)</code>을 사용한다.</li>\n<li>timeout/error cleanup은 <code>kill_child_process_tree</code>와 <code>kill_and_wait_child</code>를 사용한다.</li>\n<li>PTY <code>master</code>는 <code>Option</code>으로 전환되어 finished/cancel/drop 시 명시 drop된다.</li>\n</ul>\n<h2>남은 리스크</h2>\n<ul>\n<li>Windows process tree kill은 이번 macOS 중심 변경 범위 밖이다.</li>\n<li>실제 장기 반복 실행에서 FD/RSS 카운터를 자동 측정하는 stress test는 후속 resource diagnostic로 남긴다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1161,
+      "updatedAt": "2026-06-05T21:08:50.053Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-process-pipe-leak-guard-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-process-pipe-leak-guard.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "프로세스/파이프 누수 방지 요구사항",
+      "excerpt": "프로세스/파이프 누수 방지 요구사항 배경 사용자는 데스크톱 앱이 터미널과 CLI 작업을 운영체제 자원으로 적극 활용하되, 프로세스 관리, pipe 관리, 메모리 누수가 없도록 다시 점검하고 구현해 달라고 요청했다. 기존 네이티브 PTY와 pipe first CLI supervisor는 장기 실행 child process, stdin/stdout/stderr pipe, reader thread, PTY master/writer를 소유하므로 세션 종료 경로가 하나라도 빠지면 탭 이동과 터미널 반복 사",
+      "html": "<h1>프로세스/파이프 누수 방지 요구사항</h1>\n<h2>배경</h2>\n<p>사용자는 데스크톱 앱이 터미널과 CLI 작업을 운영체제 자원으로 적극 활용하되, 프로세스 관리, pipe 관리, 메모리 누수가 없도록 다시 점검하고 구현해 달라고 요청했다. 기존 네이티브 PTY와 pipe-first CLI supervisor는 장기 실행 child process, stdin/stdout/stderr pipe, reader thread, PTY master/writer를 소유하므로 세션 종료 경로가 하나라도 빠지면 탭 이동과 터미널 반복 사용 중 리소스가 누적될 수 있다.</p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>판정 기준</th></tr></thead><tbody><tr><td>REQ-PPL-001</td><td>CLI 세션은 cancel, timeout, error, store cleanup, drop 경로에서 child process를 wait 또는 kill/wait해야 한다.</td><td>must</td><td><code>CliSession</code>에 Drop guard와 dispose/finalize 함수가 있고, 직접 <code>kill</code>만 호출하는 cleanup 경로가 남지 않는다.</td></tr><tr><td>REQ-PPL-002</td><td>pipe 기반 CLI 실행은 stdout/stderr reader thread가 끝날 수 있도록 stdin을 먼저 닫고 reader join grace를 적용해야 한다.</td><td>must</td><td><code>SESSION_READER_JOIN_GRACE_MS</code>, <code>join_reader_with_grace</code>, bounded output retention이 있다.</td></tr><tr><td>REQ-PPL-003</td><td>Unix/macOS에서는 CLI adapter child를 별도 process group으로 시작하고 timeout/cleanup 시 process group kill을 수행해야 한다.</td><td>must</td><td><code>CommandExt::process_group(0)</code>와 <code>libc::kill(-pid, SIGKILL)</code> 기반 cleanup이 있다.</td></tr><tr><td>REQ-PPL-004</td><td>PTY 세션은 finished/cancel/drop 경로에서 writer와 master를 drop하고 reader thread를 grace join해야 한다.</td><td>must</td><td><code>NativePtySession.master</code>는 <code>Option</code>으로 소유권 해제 가능하고 <code>dispose_native_pty_session_runtime</code>이 있다.</td></tr><tr><td>REQ-PPL-005</td><td>구현은 readiness/static tests와 Rust compile/test, 내부 패키징 빌드로 검증해야 한다.</td><td>must</td><td>validation record에 <code>platform-desktop-app test</code>, <code>cargo check/test</code>, <code>desktop:package:internal</code> 결과가 남는다.</td></tr></tbody></table>\n<h2>범위 제외</h2>\n<ul>\n<li>Windows job object 기반 process tree cleanup은 이번 macOS 중심 slice의 직접 구현 범위가 아니다.</li>\n<li>실행 중인 사용자 터미널을 선제적으로 종료하는 global reap policy는 이번 범위가 아니다.</li>\n<li>장기 세션별 실제 RSS/FD count telemetry는 후속 resource diagnostic slice로 남긴다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2348,
+      "updatedAt": "2026-06-05T21:08:50.052Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-process-pipe-leak-guard-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-process-pipe-leak-guard/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "프로세스/파이프 누수 방지 스펙",
+      "excerpt": "프로세스/파이프 누수 방지 스펙 목표 platform desktop app 의 CLI adapter session, bounded command runner, native PTY terminal이 동일한 lifecycle 원칙을 갖도록 한다. 세션이 종료되거나 store에서 제거되거나 Rust struct가 drop될 때 child process, stdin/stdout/stderr pipe, PTY writer/master, reader thread가 남지 않아야 한다. 구현 대상 platfor",
+      "html": "<h1>프로세스/파이프 누수 방지 스펙</h1>\n<h2>목표</h2>\n<p><code>platform-desktop-app</code>의 CLI adapter session, bounded command runner, native PTY terminal이 동일한 lifecycle 원칙을 갖도록 한다. 세션이 종료되거나 store에서 제거되거나 Rust struct가 drop될 때 child process, stdin/stdout/stderr pipe, PTY writer/master, reader thread가 남지 않아야 한다.</p>\n<h2>구현 대상</h2>\n<ul>\n<li><code>platform-desktop-app/src-tauri/src/lib.rs</code></li>\n<li><code>platform-desktop-app/src-tauri/Cargo.toml</code></li>\n<li><code>platform-desktop-app/tests/readiness.test.mjs</code></li>\n<li><code>platform-desktop-app/scripts/check-readiness.mjs</code></li>\n</ul>\n<h2>런타임 계약</h2>\n<ul>\n<li><code>CliSession</code>은 Drop guard를 가진다.</li>\n<li><code>NativePtySession</code>은 Drop guard를 가진다.</li>\n<li>CLI command spawn은 Unix에서 새 process group을 설정한다.</li>\n<li>timeout, error, store lock failure, session cleanup은 child kill만 하지 않고 kill/wait 또는 process group kill/wait를 수행한다.</li>\n<li>finished session cleanup은 reader thread가 즉시 완료되지 않으면 짧은 grace wait 후 pipe opener가 남았다고 보고 cleanup을 강화한다.</li>\n</ul>\n<h2>설계</h2>\n<ul>\n<li><code>configure_process_group</code>은 Unix에서 <code>CommandExt::process_group(0)</code>을 호출해 child를 새 process group leader로 만든다.</li>\n<li><code>kill_child_process_tree</code>는 Unix에서 negative pid signal로 process group에 <code>SIGKILL</code>을 보낸 뒤 child kill fallback을 호출한다.</li>\n<li><code>kill_and_wait_child</code>는 process tree kill 후 <code>wait</code>를 호출해 zombie를 피한다.</li>\n<li><code>finalize_finished_cli_session_runtime</code>은 stdin을 drop하고 stdout/stderr reader thread를 grace join한다.</li>\n<li><code>dispose_cli_session_runtime</code>은 아직 finished가 아니면 kill/wait 후 finished marking을 수행하고 finalize를 호출한다.</li>\n<li><code>NativePtySession.master</code>는 <code>Option</code>으로 바꾸어 finished/cancel/drop에서 PTY master를 명시적으로 drop할 수 있게 한다.</li>\n<li><code>finalize_finished_native_pty_runtime</code>은 writer/master drop과 reader grace join을 담당한다.</li>\n</ul>\n<h2>리스크</h2>\n<ul>\n<li>process group kill은 Unix/macOS에만 적용된다. Windows process tree cleanup은 별도 job object 전략이 필요하다.</li>\n<li>natural exit 뒤에도 stdout/stderr reader가 닫히지 않는 경우, descendant process가 pipe를 잡고 있을 가능성이 있어 process group kill을 시도한다.</li>\n<li>reader thread join은 UI command handler를 오래 막지 않도록 250ms grace로 제한한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2370,
+      "updatedAt": "2026-06-05T21:08:50.052Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-native-window-chrome-json",
@@ -9808,102 +10062,6 @@
       "workspaceArea": "_history/evaluations"
     },
     {
-      "id": "history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "최종 평가: Workbench lazy boundary 확장",
-      "excerpt": "최종 평가: Workbench lazy boundary 확장 결론 작업은 닫을 수 있다. 사용자의 남은 성능 후속 요청에 대해 Shell local heavy panels를 lazy boundaries로 확장했고, renderer build, internal package build, section/button performance audits가 모두 통과했다. 결과 Agents detail/build panels가 별도 modules로 분리됐다. Desktop/runtime/home featur",
-      "html": "<p>최종 평가: Workbench lazy boundary 확장 결론 작업은 닫을 수 있다. 사용자의 남은 성능 후속 요청에 대해 Shell local heavy panels를 lazy boundaries로 확장했고, renderer build, internal package build, section/button performance audits가 모두 통과했다. 결과 Agents detail/build panels가 별도 modules로 분리됐다. Desktop/runtime/home feature panels도 runtime static import 대신 dynamic boundary로 연결됐다. startup prewarm은 순차 분</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1294,
-      "updatedAt": "2026-06-05T18:29:48.844Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: Workbench lazy boundary 확장",
-      "excerpt": "요청 결과 추적: Workbench lazy boundary 확장 요청 사용자는 이전 성능 개선 후속으로 “그것들 다”라고 요청했다. 결과 남은 Shell local heavy panels를 lazy boundaries로 확장했다. Agents detail/build panels를 별도 파일로 분리했다. prewarm과 button feedback 측정을 안정화했다. 내부 .app 와 .dmg 패키징을 완료했다. 연결 파일 구현: platform desktop app/renderer/workspa",
-      "html": "<p>요청 결과 추적: Workbench lazy boundary 확장 요청 사용자는 이전 성능 개선 후속으로 “그것들 다”라고 요청했다. 결과 남은 Shell local heavy panels를 lazy boundaries로 확장했다. Agents detail/build panels를 별도 파일로 분리했다. prewarm과 button feedback 측정을 안정화했다. 내부 .app 와 .dmg 패키징을 완료했다. 연결 파일 구현: platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx 구현: platform desktop app/renderer/workspa</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1259,
-      "updatedAt": "2026-06-05T18:29:48.843Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Workbench lazy boundary 확장",
-      "excerpt": "사용자 요청 요약: Workbench lazy boundary 확장 요약 사용자는 이전 성능 개선의 후속으로 남은 것들을 모두 처리하라고 요청했다. 맥락상 탭 전환 지연, renderer mount/import 비용, 데스크톱 자원 활용, 자동 build/package 요구를 포함한다. 해석 이전 MonitorShell root boundary 평가에서 후속으로 남긴 Desktop runtime 및 Agents panel boundary를 구현 대상으로 삼는다. 단순 스타일 변경이 아니라 lazy",
-      "html": "<p>사용자 요청 요약: Workbench lazy boundary 확장 요약 사용자는 이전 성능 개선의 후속으로 남은 것들을 모두 처리하라고 요청했다. 맥락상 탭 전환 지연, renderer mount/import 비용, 데스크톱 자원 활용, 자동 build/package 요구를 포함한다. 해석 이전 MonitorShell root boundary 평가에서 후속으로 남긴 Desktop runtime 및 Agents panel boundary를 구현 대상으로 삼는다. 단순 스타일 변경이 아니라 lazy chunk, resident/prewarm, button feedback 측정을 포함한 구조 변경으로 처리한다. 구현 후 build/packa</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 655,
-      "updatedAt": "2026-06-05T18:29:48.843Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: Workbench lazy boundary 확장",
-      "excerpt": "작업 요약: Workbench lazy boundary 확장 완료 내용 DesktopRuntimePanel , home feature panels, workspace/native/runtime panels, Agents detail/build panels를 next/dynamic boundary로 연결했다. Agents collaboration/inventory/runtime overview를 AgentDetailPanels.tsx 로 분리했다. AgentCore blueprint, agent f",
-      "html": "<p>작업 요약: Workbench lazy boundary 확장 완료 내용 DesktopRuntimePanel , home feature panels, workspace/native/runtime panels, Agents detail/build panels를 next/dynamic boundary로 연결했다. Agents collaboration/inventory/runtime overview를 AgentDetailPanels.tsx 로 분리했다. AgentCore blueprint, agent factory, learning feedback panels를 AgentBuilderPanels.tsx 로 분리했다. startup prewarm</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1124,
-      "updatedAt": "2026-06-05T18:29:48.843Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-      "path": "_history/plans/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "작업 계획: Workbench lazy boundary 확장",
-      "excerpt": "작업 계획: Workbench lazy boundary 확장 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 계획 이전 root boundary 작업에서 다음 병목으로 남긴 DesktopRuntimePanel 과 Agents detail panels를 대상으로 한다. 목표는 모든 탭을 한 번에 재작성하는 것이 아니라, Shell local heavy UI를 실",
-      "html": "<p>작업 계획: Workbench lazy boundary 확장 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 계획 이전 root boundary 작업에서 다음 병목으로 남긴 DesktopRuntimePanel 과 Agents detail panels를 대상으로 한다. 목표는 모든 탭을 한 번에 재작성하는 것이 아니라, Shell local heavy UI를 실제 dynamic chunk boundary로 옮기고 prewarm을 분산해 탭 전환과 버튼 feedback을 개선하는 것이다. 수용 기준 in</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 804,
-      "updatedAt": "2026-06-05T18:29:48.842Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: Workbench lazy boundary 확장",
-      "excerpt": "웹 검색 기록: Workbench lazy boundary 확장 목적 사용자의 “그것들 다” 요청을 이전 root boundary 후속 작업으로 해석하고, React/Next renderer code splitting, main thread responsiveness, long task 완화 기준을 다시 확인했다. 검색어 React official docs lazy memo Profiler startTransition performance Next.js official docs dynamic im",
-      "html": "<p>웹 검색 기록: Workbench lazy boundary 확장 목적 사용자의 “그것들 다” 요청을 이전 root boundary 후속 작업으로 해석하고, React/Next renderer code splitting, main thread responsiveness, long task 완화 기준을 다시 확인했다. 검색어 React official docs lazy memo Profiler startTransition performance Next.js official docs dynamic import lazy loading client components web.dev optimize long tasks main thread resp</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2778,
-      "updatedAt": "2026-06-05T18:29:48.842Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-workbench-lazy-boundary-expansion-traceability-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-workbench-lazy-boundary-expansion/traceability.ko.md",
       "category": "project-spec",
@@ -9998,38 +10156,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-monitor-shell-root-boundary-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Monitor Shell Root Boundary Evaluation Input",
-      "excerpt": "{ \"initial instruction\": \"Review the fundamental/root parts of the desktop app performance issue.\", \"result summary\": \"Identified the remaining root bottleneck as a 14k line MonitorShell monolith with weak section/code boundaries, split Tool Studio into a top level Next dynamic c",
-      "html": "<p>{ &quot;initial instruction&quot;: &quot;Review the fundamental/root parts of the desktop app performance issue.&quot;, &quot;result summary&quot;: &quot;Identified the remaining root bottleneck as a 14k line MonitorShell monolith with weak section/code boundaries, split Tool Studio into a top level Next dynamic chunk, added idle module preload, updated tests, measured performance, and comple</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 5337,
-      "updatedAt": "2026-06-05T17:55:21.496Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "최종 평가: MonitorShell 근본 boundary 재검토",
-      "excerpt": "최종 평가: MonitorShell 근본 boundary 재검토 결론 작업은 닫을 수 있다. 사용자의 “근본부터 다시 보라”는 요청에 대해 남은 구조 병목을 Shell monolith로 식별했고, 가장 위험이 낮은 첫 code boundary로 Tool Studio를 dynamic chunk로 분리했다. 결과 MonitorShell.tsx : 14,191 lines. ToolStudioPanel.tsx : 1,607 lines. Tool Studio runtime static import 제거. ",
-      "html": "<p>최종 평가: MonitorShell 근본 boundary 재검토 결론 작업은 닫을 수 있다. 사용자의 “근본부터 다시 보라”는 요청에 대해 남은 구조 병목을 Shell monolith로 식별했고, 가장 위험이 낮은 첫 code boundary로 Tool Studio를 dynamic chunk로 분리했다. 결과 MonitorShell.tsx : 14,191 lines. ToolStudioPanel.tsx : 1,607 lines. Tool Studio runtime static import 제거. Tool Studio dynamic chunk boundary 추가. idle module preload 연결. internal .app 와 .</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1053,
-      "updatedAt": "2026-06-05T17:55:21.496Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-monitor-shell-root-boundary-traceability-ko-md",
@@ -17742,102 +17868,6 @@
       "historyDate": "2026-06-03",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-deferred-work-coverage-audit-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-deferred-work-coverage-audit/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "미뤄진 작업 커버리지 감사 검증",
-      "excerpt": "미뤄진 작업 커버리지 감사 검증 검증 python3 m json.tool platform desktop app/configs/product gap registry.json 통과 PYTHONPATH=src python3 m agent platform.cli check config contract ../platform desktop app/configs/product gap registry.json 통과 corepack pnpm filter workspace monitor run collect sna",
-      "html": "<h1>미뤄진 작업 커버리지 감사 검증</h1>\n<h2>검증</h2>\n<ul>\n<li><code>python3 -m json.tool platform-desktop-app/configs/product-gap-registry.json</code> 통과</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-gap-registry.json</code> 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run collect -- --snapshot-mode customer</code> 통과</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code> 통과</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code> 통과</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-03-deferred-work-coverage-audit-omission-input.json</code> 통과</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-03-deferred-work-coverage-audit-evaluation-input.json</code> 통과</li>\n<li><code>git diff --check</code> 통과</li>\n</ul>\n<h2>결과</h2>\n<ul>\n<li>제품 gap registry는 self-documenting config contract를 만족했다.</li>\n<li>developer/customer workspace snapshot을 최종 감사 문서 기준으로 재생성했다.</li>\n<li><code>platform-desktop-app</code> test 16개가 통과했다.</li>\n<li><code>platform-desktop-app run check</code>가 runtime contract, readiness, customer bundle, internal release preflight, service readiness를 통과했다.</li>\n<li>omission guard는 <code>coverage_ready</code>와 <code>requires_rework=false</code>를 반환했다.</li>\n<li>work evaluator는 <code>ready_to_close</code>와 <code>requires_rework=false</code>를 반환했다.</li>\n<li>public release gate는 여전히 signing/notarization/updater/clean-machine smoke 때문에 외부 blocker로 남는다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1514,
-      "updatedAt": "2026-06-03T07:13:18.460Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-deferred-work-coverage-audit-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-deferred-work-coverage-audit/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "미뤄진 작업 커버리지 감사 작업",
-      "excerpt": "미뤄진 작업 커버리지 감사 작업 x 웹 검색을 먼저 수행하고 검색 기록 대상으로 남긴다. x memory bootstrap hot anchor와 work mode를 확인한다. x 최근 데스크톱 앱 사용자 요청 UR 2026 06 03 024 부터 UR 2026 06 03 036 까지 재검토한다. x 관련 request trace, spec task, product/runtime/data/workspace/release config, readiness/test를 표본 검토한다. x covered, ",
-      "html": "<h1>미뤄진 작업 커버리지 감사 작업</h1>\n<ul>\n<li>[x] 웹 검색을 먼저 수행하고 검색 기록 대상으로 남긴다.</li>\n<li>[x] memory bootstrap hot anchor와 work mode를 확인한다.</li>\n<li>[x] 최근 데스크톱 앱 사용자 요청 <code>UR-2026-06-03-024</code>부터 <code>UR-2026-06-03-036</code>까지 재검토한다.</li>\n<li>[x] 관련 request trace, spec task, product/runtime/data/workspace/release config, readiness/test를 표본 검토한다.</li>\n<li>[x] covered, partial, missing, stale, external gate를 분류한다.</li>\n<li>[x] 제품 gap registry를 추가한다.</li>\n<li>[x] readiness script와 Node test가 제품 gap registry를 확인하게 한다.</li>\n<li>[x] stale trace/task 문구를 정정한다.</li>\n<li>[x] <code>check-config-contract</code>, <code>check-omissions</code>, <code>platform-desktop-app test/check</code>, <code>git diff --check</code>를 실행한다.</li>\n<li>[x] evaluation, validation, request trace, work summary, timing record를 최종 검증 결과로 갱신한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 909,
-      "updatedAt": "2026-06-03T07:11:28.690Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-02-multi-cli-orchestration-desktop-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "다중 CLI 오케스트레이션 데스크톱 작업",
-      "excerpt": "다중 CLI 오케스트레이션 데스크톱 작업 x 웹 검색과 memory bootstrap 확인 x 기존 platform desktop app 경계와 관련 스펙 검토 x 공유 CLI adapter registry에 네 AI CLI와 interactive contract 추가 x desktop/user flow registry에 multi CLI supervisor, 질문 보류, 데이터 축적 흐름 추가 x project local requirements 보강 x architecture 문서 추가 x re",
-      "html": "<h1>다중 CLI 오케스트레이션 데스크톱 작업</h1>\n<ul>\n<li>[x] 웹 검색과 memory bootstrap 확인</li>\n<li>[x] 기존 <code>platform-desktop-app</code> 경계와 관련 스펙 검토</li>\n<li>[x] 공유 CLI adapter registry에 네 AI CLI와 interactive contract 추가</li>\n<li>[x] desktop/user-flow registry에 multi-CLI supervisor, 질문 보류, 데이터 축적 흐름 추가</li>\n<li>[x] project-local requirements 보강</li>\n<li>[x] architecture 문서 추가</li>\n<li>[x] readiness script와 Node test 보강</li>\n<li>[x] Tauri backend에 <code>list_cli_adapters</code>, <code>run_cli_adapter_health</code>, <code>run_all_cli_adapter_health</code> 구현</li>\n<li>[x] Tauri backend에 <code>start_cli_adapter_session</code>, <code>poll_cli_adapter_session</code>, <code>write_cli_adapter_stdin</code>, <code>send_cli_adapter_defer_message</code>, <code>cancel_cli_adapter_session</code>과 defer 질문의 human decision inbox append 구현</li>\n<li>[x] Tauri backend에 workspace-scoped <code>read_workspace_text_file</code>, <code>write_workspace_text_file</code> 구현</li>\n<li>[x] Tauri backend에 <code>list_human_decision_inbox</code>, <code>answer_human_decision</code> 구현</li>\n<li>[x] Tauri backend에 <code>answer_and_resume_human_decision</code> 구현</li>\n<li>[x] Workspace Monitor에 Desktop 탭, Tauri invoke bridge, browser fallback 구현</li>\n<li>[x] Workspace Monitor에 CLI session console과 scoped source editor 구현</li>\n<li>[x] Workspace Monitor에 CLI setup guide, 작업 모드 프리셋, decision inbox answer UI 구현</li>\n<li>[x] Workspace Monitor에 linked session decision의 <code>Answer &amp; Resume</code> UI 구현</li>\n<li>[x] Workspace Monitor에 reference-app UI 적용: command palette, capability center metadata, run board, process graph, terminal event rail, grouped decision inbox, decision replay, source diff review, evidence/promotion surface 구현</li>\n<li>[x] Workspace Monitor source editor를 multi-file draft queue, indexed file browser, direct path open, dirty state, save current, save all, revert, close, backup result surface로 확장</li>\n<li>[x] 플랫폼-first host runtime 계약을 CLI adapter registry, desktop registry, Desktop 탭 UI, readiness test에 반영</li>\n<li>[x] Tauri backend와 Workspace Monitor에 task intake 기준 pipe-first multi-CLI lane init command/UI 추가</li>\n<li>[x] view mode registry에 <code>desktop</code> section 노출</li>\n<li>[x] history, omission, resource, grounding, evaluation 기록 생성</li>\n<li>[ ] interactive PTY 기반 CLI task supervisor 구현은 후속 스펙에서 진행</li>\n<li>[x] Monaco dependency와 code workbench 구현은 <code>2026-06-03-code-workbench-completion</code> slice에서 완료</li>\n<li>[ ] xterm.js/PTY dependency 설치는 PTY terminal UX를 제품 필수로 결정할 때 설치 감사 후 진행</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2494,
-      "updatedAt": "2026-06-03T07:02:57.954Z",
-      "historyDate": "2026-06-02",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-deferred-work-coverage-audit-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-deferred-work-coverage-audit/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "미뤄진 작업 커버리지 감사 계획",
-      "excerpt": "미뤄진 작업 커버리지 감사 계획 작업 모드 governance Large Scope Decomposition source inventory: 전체 후보 파일 샘플: 8182개 감사 대상 번들 샘플: 1248개 대상: history/user requests/2026/ , history/request traces/2026/ , platform desktop app/specs/ , platform desktop app/configs/ , platform desktop app/scripts/ , plat",
-      "html": "<h1>미뤄진 작업 커버리지 감사 계획</h1>\n<h2>작업 모드</h2>\n<ul>\n<li><code>governance</code></li>\n</ul>\n<h2>Large Scope Decomposition</h2>\n<ul>\n<li>source inventory:</li>\n<li>전체 후보 파일 샘플: 8182개</li>\n<li>감사 대상 번들 샘플: 1248개</li>\n<li>대상: <code>_history/user-requests/2026/</code>, <code>_history/request-traces/2026/</code>, <code>platform-desktop-app/specs/</code>, <code>platform-desktop-app/configs/</code>, <code>platform-desktop-app/scripts/</code>, <code>platform-desktop-app/tests/</code>, 대표 renderer/runtime source</li>\n<li>exclusions:</li>\n<li><code>_private/</code></li>\n<li><code>outputs/</code></li>\n<li><code>node_modules/</code></li>\n<li><code>.next/</code>, <code>out/</code>, <code>dist/</code>, <code>target/</code></li>\n<li>slice IDs:</li>\n<li><code>slice-history-coverage</code>: 최근 사용자 요청과 request trace 재검토</li>\n<li><code>slice-product-configs</code>: product feature/runtime/data/workspace/release 설정 재검토</li>\n<li><code>slice-source-readiness</code>: readiness/test와 대표 UI/runtime token 재검토</li>\n<li><code>slice-gap-ledger</code>: 제품 gap registry와 spec/history 산출물 생성</li>\n<li><code>slice-validation</code>: config contract, omission guard, readiness/test 검증</li>\n<li>touch paths:</li>\n<li><code>platform-desktop-app/configs/product-gap-registry.json</code></li>\n<li><code>platform-desktop-app/scripts/check-readiness.mjs</code></li>\n<li><code>platform-desktop-app/tests/readiness.test.mjs</code></li>\n<li><code>platform-desktop-app/specs/2026-06-03-deferred-work-coverage-audit/</code></li>\n<li><code>_history/</code></li>\n<li>dependencies:</li>\n<li><code>product-feature-registry.json</code></li>\n<li><code>installer-shell-runtime-contract.json</code></li>\n<li><code>check-config-contract</code></li>\n<li><code>check-omissions</code></li>\n<li><code>platform-desktop-app</code> readiness/test scripts</li>\n<li>output targets:</li>\n<li>product gap registry</li>\n<li>audit spec/plan/tasks/validation/traceability</li>\n<li>web search, request trace, omission, evaluation, work summary, timing records</li>\n<li>merge gates:</li>\n<li>config contract passes for the new registry</li>\n<li>platform desktop tests pass</li>\n<li>platform desktop readiness check passes</li>\n<li>omission guard reports no required audit item missing</li>\n<li>context budget:</li>\n<li>Use targeted inventory, search, and representative file inspection rather than reading every file.</li>\n<li>source provenance:</li>\n<li>Web search record and local history/spec/config/source evidence are recorded in <code>_history/</code>.</li>\n</ul>\n<h2>결정</h2>\n<ul>\n<li>감사를 “다 했다고 말하는 문서”가 아니라 readiness가 읽는 제품 gap registry로 고정한다.</li>\n<li>P0 gap은 Agent Factory creation wizard와 Learning feedback automation loop로 둔다.</li>\n<li>PTY/xterm은 현재 pipe-first runtime을 대체하는 필수 조건으로 보지 않고, 제품 결정이 필요한 선택적 UX slice로 둔다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2430,
-      "updatedAt": "2026-06-03T07:02:06.382Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-deferred-work-coverage-audit-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-deferred-work-coverage-audit/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "미뤄진 작업 커버리지 감사 추적성",
-      "excerpt": "미뤄진 작업 커버리지 감사 추적성 | 요청 | 판정 | 증거 | 남은 gap | | | | | | | UR 2026 06 03 024 | partial | desktop shell, settings dialog, timeline, decision inbox, operator split | componentized desktop ui architecture , native workspace git operations | | UR 2026 06 03 025 | covered with test gap ",
-      "html": "<h1>미뤄진 작업 커버리지 감사 추적성</h1>\n<table><thead><tr><th>요청</th><th>판정</th><th>증거</th><th>남은 gap</th></tr></thead><tbody><tr><td>UR-2026-06-03-024</td><td>partial</td><td>desktop shell, settings dialog, timeline, decision inbox, operator split</td><td><code>componentized_desktop_ui_architecture</code>, <code>native_workspace_git_operations</code></td></tr><tr><td>UR-2026-06-03-025</td><td>covered with test gap</td><td>Monaco editor, copy/edit/diff flows</td><td><code>clipboard_browser_qa</code></td></tr><tr><td>UR-2026-06-03-026</td><td>covered with release gate</td><td>product runtime posture, release readiness language</td><td><code>public_distribution_gates</code></td></tr><tr><td>UR-2026-06-03-027</td><td>covered</td><td>layout hardening, perf budget recovery</td><td>없음</td></tr><tr><td>UR-2026-06-03-028</td><td>covered</td><td>templates, profiles, patch context copy, editor options</td><td>없음</td></tr><tr><td>UR-2026-06-03-029</td><td>covered with optional UX follow-up</td><td>runtime file index, tabs, toolbar, diff, settings popup</td><td><code>interactive_pty_terminal_surface</code></td></tr><tr><td>UR-2026-06-03-030</td><td>covered</td><td>installer shell runtime contract, gates, data targets</td><td>없음</td></tr><tr><td>UR-2026-06-03-031</td><td>covered</td><td>Accumulated Data surface</td><td>없음</td></tr><tr><td>UR-2026-06-03-032</td><td>covered</td><td><code>accumulated-data-overview.v1.json</code> manifest</td><td>없음</td></tr><tr><td>UR-2026-06-03-033</td><td>partial</td><td>workspace state/import/clone/source/CLI handoff</td><td><code>native_workspace_git_operations</code></td></tr><tr><td>UR-2026-06-03-034</td><td>covered</td><td>renderer moved under <code>platform-desktop-app/renderer/workspace-monitor/</code></td><td>없음</td></tr><tr><td>UR-2026-06-03-035</td><td>partial</td><td>product feature registry and panel</td><td><code>agent_factory_creation_wizard</code>, <code>learning_feedback_automation_loop</code></td></tr><tr><td>UR-2026-06-03-036</td><td>partial</td><td>work-first nav and Operator Center</td><td><code>agent_factory_creation_wizard</code>, <code>componentized_desktop_ui_architecture</code></td></tr></tbody></table>\n<h2>주요 결론</h2>\n<ul>\n<li>빠진 핵심은 <code>Agent Factory creation wizard</code>와 <code>Learning feedback automation loop</code>다.</li>\n<li>공개 배포 readiness는 기능 미구현이 아니라 외부 signing/notarization/updater/clean-machine gate다.</li>\n<li>Monaco/code workbench, accumulated data format, workspace host, folder restructure, operator separation은 구현된 slice로 본다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2017,
-      "updatedAt": "2026-06-03T07:02:06.382Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-deferred-work-coverage-audit-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-deferred-work-coverage-audit/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "미뤄진 작업 커버리지 감사 스펙",
-      "excerpt": "미뤄진 작업 커버리지 감사 스펙 목표 최근 설치형 데스크톱 에이전트 플랫폼 요청 중 구현된 것, 부분 구현된 것, 아직 제품 기능으로 닫히지 않은 것을 재평가한다. 범위 UR 2026 06 03 024 부터 UR 2026 06 03 036 까지의 데스크톱 앱, 코드 워크벤치, installer shell/runtime, 데이터 축적, workspace host, 제품 기능 아키텍처, Operator Center 분리 요청. history/request traces/2026/ , platform d",
-      "html": "<h1>미뤄진 작업 커버리지 감사 스펙</h1>\n<h2>목표</h2>\n<p>최근 설치형 데스크톱 에이전트 플랫폼 요청 중 구현된 것, 부분 구현된 것, 아직 제품 기능으로 닫히지 않은 것을 재평가한다.</p>\n<h2>범위</h2>\n<ul>\n<li><code>UR-2026-06-03-024</code>부터 <code>UR-2026-06-03-036</code>까지의 데스크톱 앱, 코드 워크벤치, installer shell/runtime, 데이터 축적, workspace host, 제품 기능 아키텍처, Operator Center 분리 요청.</li>\n<li><code>_history/request-traces/2026/</code>, <code>platform-desktop-app/specs/</code>, <code>platform-desktop-app/configs/</code>, readiness/test, 대표 runtime/UI source.</li>\n<li><code>_private/</code>, <code>outputs/</code>, generated build/cache/dependency output은 제외한다.</li>\n</ul>\n<h2>요구사항</h2>\n<ul>\n<li>각 사용자 요청은 구현 증거와 남은 gap ID를 가진다.</li>\n<li>남은 gap은 priority, source request, acceptance criteria, recommended next slice를 가진다.</li>\n<li>Agent Factory creation wizard와 Learning feedback automation loop가 아직 제품 기능으로 닫히지 않았으면 readiness/test가 이를 숨기지 않고 고정한다.</li>\n<li>이미 완료된 작업을 미완료처럼 보이게 하는 stale trace/task 문구는 정정한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>이번 감사에서 Agent Factory wizard 자체를 새로 구현하지 않는다.</li>\n<li>공개 배포 서명, notarization, updater, clean-machine smoke는 외부 release gate로 기록하고 완료 처리하지 않는다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1384,
-      "updatedAt": "2026-06-03T07:02:06.381Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -17848,7 +17878,7 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 26
+          "count": 25
         },
         {
           "category": "user-request",
@@ -17863,11 +17893,11 @@
           "count": 13
         },
         {
-          "category": "request-trace",
-          "count": 12
+          "category": "work-timing",
+          "count": 13
         },
         {
-          "category": "work-timing",
+          "category": "request-trace",
           "count": 12
         },
         {
@@ -17887,7 +17917,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-          "updatedAt": "2026-06-05T20:56:57.049Z",
+          "updatedAt": "2026-06-05T21:08:50.058Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -17951,26 +17981,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-monitor-shell-root-boundary-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Monitor Shell Root Boundary Evaluation Input",
-          "excerpt": "{ \"initial instruction\": \"Review the fundamental/root parts of the desktop app performance issue.\", \"result summary\": \"Identified the remaining root bottleneck as a 14k line MonitorShell monolith with weak section/code boundaries, split Tool Studio into a top level Next dynamic c",
-          "updatedAt": "2026-06-05T17:55:21.496Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "최종 평가: MonitorShell 근본 boundary 재검토",
-          "excerpt": "최종 평가: MonitorShell 근본 boundary 재검토 결론 작업은 닫을 수 있다. 사용자의 “근본부터 다시 보라”는 요청에 대해 남은 구조 병목을 Shell monolith로 식별했고, 가장 위험이 낮은 첫 code boundary로 Tool Studio를 dynamic chunk로 분리했다. 결과 MonitorShell.tsx : 14,191 lines. ToolStudioPanel.tsx : 1,607 lines. Tool Studio runtime static import 제거. ",
-          "updatedAt": "2026-06-05T17:55:21.496Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-native-resource-telemetry-evaluation-input-json",
           "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry-evaluation-input.json",
           "category": "evaluation",
@@ -18018,6 +18028,26 @@
           "title": "2026 06 06 Native Window Chrome",
           "excerpt": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 native window chrome.json\" , \"omission check targets\": \" history/omission checks/2026/2026 ",
           "updatedAt": "2026-06-05T20:56:57.048Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-process-pipe-leak-guard-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-process-pipe-leak-guard-evaluation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Process Pipe Leak Guard Evaluation Input",
+          "excerpt": "{ \"id\": \"2026 06 06 process pipe leak guard\", \"installation occurred\": true, \"installation record targets\": \" history/installations/2026/2026 06 06 libc process group cleanup.ko.md\" , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06",
+          "updatedAt": "2026-06-05T21:08:50.058Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "평가: 프로세스/파이프 누수 방지",
+          "excerpt": "평가: 프로세스/파이프 누수 방지 판정 진행 중. 핵심 Rust runtime 변경과 초기 test/check는 통과했고, 내부 패키징 빌드 완료 후 최종 충족으로 전환한다. 증거 CLI 세션 Drop/finalize/dispose guard 추가. Unix/macOS CLI process group setup 및 group kill cleanup 추가. timeout/error/store cleanup에서 kill/wait 통합. PTY writer/master drop 및 reader grac",
+          "updatedAt": "2026-06-05T21:08:50.058Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18141,16 +18171,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "최종 평가: Workbench lazy boundary 확장",
-          "excerpt": "최종 평가: Workbench lazy boundary 확장 결론 작업은 닫을 수 있다. 사용자의 남은 성능 후속 요청에 대해 Shell local heavy panels를 lazy boundaries로 확장했고, renderer build, internal package build, section/button performance audits가 모두 통과했다. 결과 Agents detail/build panels가 별도 modules로 분리됐다. Desktop/runtime/home featur",
-          "updatedAt": "2026-06-05T18:29:48.844Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-desktop-only-ui-boundary-ko-md",
           "path": "_history/plans/2026/2026-06-06-desktop-only-ui-boundary.ko.md",
           "category": "plan",
@@ -18181,6 +18201,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-plans-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+          "path": "_history/plans/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "계획 기록: 프로세스/파이프 누수 방지",
+          "excerpt": "계획 기록: 프로세스/파이프 누수 방지 문제 정의 터미널/CLI 기능은 child process, pipe, reader thread, PTY handle을 소유한다. 데스크톱 앱에서 탭 전환과 터미널 반복 사용이 계속되면 종료 경로가 불완전한 세션은 memory/FD/thread/process 누수로 이어질 수 있다. 결정 Rust/Tauri backend에서 OS resource lifecycle을 닫는다. Renderer에 cleanup 책임을 두지 않는다. CLI adapter는 Unix ",
+          "updatedAt": "2026-06-05T21:08:50.055Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-plans-2026-2026-06-06-provider-button-error-status-ko-md",
           "path": "_history/plans/2026/2026-06-06-provider-button-error-status.ko.md",
           "category": "plan",
@@ -18198,16 +18228,6 @@
           "title": "2026 06 06 UI 이론 기반 디자인 파운데이션 리팩토링 계획 기록",
           "excerpt": "2026 06 06 UI 이론 기반 디자인 파운데이션 리팩토링 계획 기록 범위 desktop app workspace monitor의 전역 CSS foundation 홈/설정/어댑터/버튼 대표 표면 정적 테스트, readiness, 브라우저 렌더, 내부 패키징 제외 전체 화면별 정보 구조 재설계 별도 design system package 생성 Rust 런타임 변경 Merge gate 테스트 2종 통과 check 2종 통과 브라우저 렌더 overflow 0 내부 패키징 빌드 통과",
           "updatedAt": "2026-06-05T20:42:28.581Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-plans-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-          "path": "_history/plans/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "작업 계획: Workbench lazy boundary 확장",
-          "excerpt": "작업 계획: Workbench lazy boundary 확장 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 계획 이전 root boundary 작업에서 다음 병목으로 남긴 DesktopRuntimePanel 과 Agents detail panels를 대상으로 한다. 목표는 모든 탭을 한 번에 재작성하는 것이 아니라, Shell local heavy UI를 실",
-          "updatedAt": "2026-06-05T18:29:48.842Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18258,6 +18278,16 @@
           "title": "요청 결과 추적: 네이티브 창 크롬 활용",
           "excerpt": "요청 결과 추적: 네이티브 창 크롬 활용 요청 사용자 요청: 네이티브 방식 활용 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 native window chrome.ko.md 스펙: platform desktop app/specs/2026 06 06 native window chrome/spec.ko.md 계획: platform desktop app/specs/2026 06 06 native window chrome/plan.ko.md ",
           "updatedAt": "2026-06-05T20:56:57.048Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: 프로세스/파이프 누수 방지",
+          "excerpt": "요청 결과 추적: 프로세스/파이프 누수 방지 요청 프로세스 관리, pipe 관리, 메모리 누수가 없도록 처리. 결과 CLI/PTY session lifecycle cleanup 강화. Unix process group 기반 cleanup 추가. reader thread grace join과 PTY master/writer explicit drop 추가. readiness tests에 lifecycle contract 추가. 산출물 platform desktop app/docs/requirement",
+          "updatedAt": "2026-06-05T21:08:50.058Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18321,16 +18351,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: Workbench lazy boundary 확장",
-          "excerpt": "요청 결과 추적: Workbench lazy boundary 확장 요청 사용자는 이전 성능 개선 후속으로 “그것들 다”라고 요청했다. 결과 남은 Shell local heavy panels를 lazy boundaries로 확장했다. Agents detail/build panels를 별도 파일로 분리했다. prewarm과 button feedback 측정을 안정화했다. 내부 .app 와 .dmg 패키징을 완료했다. 연결 파일 구현: platform desktop app/renderer/workspa",
-          "updatedAt": "2026-06-05T18:29:48.843Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-desktop-only-ui-boundary-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-desktop-only-ui-boundary.ko.md",
           "category": "user-request",
@@ -18378,6 +18398,16 @@
           "title": "사용자 요청 요약: 네이티브 방식 활용",
           "excerpt": "사용자 요청 요약: 네이티브 방식 활용 요약 사용자는 현재 플랫폼 데스크톱 앱이 웹 렌더링 수준에 머물지 말고 네이티브 데스크톱 방식을 활용하라고 지시했다. 해석 이번 구현 slice에서는 창 자체의 native chrome과 drag region을 우선 적용한다. 이미 Rust resource warmup, PTY, native git, OS telemetry가 존재하므로 이번 변경은 창/크롬 레벨의 네이티브 통합을 보강한다. 결과 대상 platform desktop app/src tauri/t",
           "updatedAt": "2026-06-05T20:53:15.065Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: 프로세스/파이프 누수 방지",
+          "excerpt": "사용자 요청 요약: 프로세스/파이프 누수 방지 요약 사용자는 데스크톱 앱의 프로세스 관리, pipe 관리, 메모리 누수가 없도록 처리해 달라고 요청했다. 해석 터미널/CLI 세션의 child process cleanup을 강화한다. stdout/stderr/stdin pipe와 PTY writer/master가 세션 종료 후 남지 않게 한다. reader thread가 끝나지 않는 상태를 bounded하게 정리한다. 구현 후 빌드까지 자동 실행한다. 범위 platform desktop app Ru",
+          "updatedAt": "2026-06-05T21:08:50.056Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18451,16 +18481,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: Workbench lazy boundary 확장",
-          "excerpt": "사용자 요청 요약: Workbench lazy boundary 확장 요약 사용자는 이전 성능 개선의 후속으로 남은 것들을 모두 처리하라고 요청했다. 맥락상 탭 전환 지연, renderer mount/import 비용, 데스크톱 자원 활용, 자동 build/package 요구를 포함한다. 해석 이전 MonitorShell root boundary 평가에서 후속으로 남긴 Desktop runtime 및 Agents panel boundary를 구현 대상으로 삼는다. 단순 스타일 변경이 아니라 lazy",
-          "updatedAt": "2026-06-05T18:29:48.843Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-desktop-only-ui-boundary-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-desktop-only-ui-boundary.ko.md",
           "category": "web-search",
@@ -18508,6 +18528,16 @@
           "title": "2026 06 06 네이티브 창 크롬 활용 웹 검색",
           "excerpt": "2026 06 06 네이티브 창 크롬 활용 웹 검색 질의 Tauri v2 native window APIs theme color titlebar macOS official docs Tauri v2 commands invoke Rust native desktop app state official docs Apple Human Interface Guidelines macOS materials controls toolbar sidebar official Tauri v2 window effects vib",
           "updatedAt": "2026-06-05T20:53:15.064Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: 프로세스/파이프 누수 방지",
+          "excerpt": "웹 검색 기록: 프로세스/파이프 누수 방지 검색 시각 2026 06 06 KST 질의 Rust std::process ChildStdin ChildStdout pipe deadlock wait drop official docs Tokio process Command kill on drop child stdout memory leak official docs Tauri v2 async command process management sidecar official docs portable pty ru",
+          "updatedAt": "2026-06-05T21:08:50.054Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18581,16 +18611,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: Workbench lazy boundary 확장",
-          "excerpt": "웹 검색 기록: Workbench lazy boundary 확장 목적 사용자의 “그것들 다” 요청을 이전 root boundary 후속 작업으로 해석하고, React/Next renderer code splitting, main thread responsiveness, long task 완화 기준을 다시 확인했다. 검색어 React official docs lazy memo Profiler startTransition performance Next.js official docs dynamic im",
-          "updatedAt": "2026-06-05T18:29:48.842Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-desktop-only-ui-boundary-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-desktop-only-ui-boundary.ko.md",
           "category": "work-summary",
@@ -18638,6 +18658,16 @@
           "title": "네이티브 창 크롬 활용 작업 요약",
           "excerpt": "네이티브 창 크롬 활용 작업 요약 변경 요약 Tauri main window에 native transparent titlebar, hidden title, dark launch background를 추가했다. Tauri capability에 native window dragging permission을 명시했다. Workspace Monitor titlebar에 data tauri drag region=\"deep\" 을 적용하고 버튼/검색/컨텍스트 strip은 false 및 no drag 로 분리했",
           "updatedAt": "2026-06-05T20:56:57.048Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: 프로세스/파이프 누수 방지",
+          "excerpt": "작업 요약: 프로세스/파이프 누수 방지 변경 CLI adapter/command spawn에 Unix process group 설정을 추가했다. timeout/error/store cleanup에서 child kill만 하지 않고 process group kill과 wait를 통합했다. CliSession 과 NativePtySession 에 Drop guard를 추가했다. CLI/PTY finished cleanup에서 stdin, writer, PTY master, reader thread를 ",
+          "updatedAt": "2026-06-05T21:08:50.057Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18711,16 +18741,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: Workbench lazy boundary 확장",
-          "excerpt": "작업 요약: Workbench lazy boundary 확장 완료 내용 DesktopRuntimePanel , home feature panels, workspace/native/runtime panels, Agents detail/build panels를 next/dynamic boundary로 연결했다. Agents collaboration/inventory/runtime overview를 AgentDetailPanels.tsx 로 분리했다. AgentCore blueprint, agent f",
-          "updatedAt": "2026-06-05T18:29:48.843Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-desktop-only-ui-boundary-json",
           "path": "_history/work-timings/2026/2026-06-06-desktop-only-ui-boundary.json",
           "category": "work-timing",
@@ -18768,6 +18788,16 @@
           "title": "2026 06 06 Native Window Chrome",
           "excerpt": "{ \"date\": \"2026 06 06\", \"work item\": \"native window chrome\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first research\", \"started at\": \"2026 06 06T05:40:00+09:00\", \"ended at\": \"2026 06 06T05:50:00+09:00\", \"notes\": \"Checked official Tauri config, window customization, cor",
           "updatedAt": "2026-06-05T20:56:57.047Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-06-process-pipe-leak-guard-json",
+          "path": "_history/work-timings/2026/2026-06-06-process-pipe-leak-guard.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Process Pipe Leak Guard",
+          "excerpt": "{ \"id\": \"2026 06 06 process pipe leak guard\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"name\": \"web first research\", \"status\": \"completed\", \"notes\": \"Checked Rust std process, Unix CommandExt, portable pty, Tauri, and issue/community risk signals.\" }, { \"name\": \"source inspection\", ",
+          "updatedAt": "2026-06-05T21:08:50.056Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18849,36 +18879,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2449,
+      "documents": 2457,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 982
+          "count": 984
         },
         {
           "category": "web-search",
-          "count": 390
+          "count": 391
         },
         {
           "category": "plan",
-          "count": 337
+          "count": 338
         },
         {
           "category": "request-trace",
-          "count": 318
+          "count": 319
         },
         {
           "category": "work-timing",
-          "count": 240
+          "count": 241
         },
         {
           "category": "user-request",
-          "count": 103
+          "count": 104
         },
         {
           "category": "work-summary",
-          "count": 70
+          "count": 71
         },
         {
           "category": "daily-history",
@@ -18889,7 +18919,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6321859,
+      "totalSourceBytes": 6330704,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18914,11 +18944,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 39,
+      "evidenceEvents": 38,
       "decisionEvents": 0,
-      "openSignals": 23,
+      "openSignals": 25,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T20:56:57.049Z",
+      "latestEventAt": "2026-06-05T21:08:50.058Z",
       "historyDays": 1
     },
     "lanes": [
@@ -18930,7 +18960,7 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 26
+        "count": 25
       },
       {
         "id": "delivery",
@@ -18950,7 +18980,7 @@
       {
         "id": "monitoring",
         "label": "monitoring",
-        "count": 12
+        "count": 13
       },
       {
         "id": "traceability",
@@ -18977,7 +19007,7 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 26
+        "count": 25
       },
       {
         "id": "intake",
@@ -18990,14 +19020,14 @@
         "count": 13
       },
       {
-        "id": "web-search",
-        "label": "web search",
+        "id": "timing",
+        "label": "timing",
         "count": 13
       },
       {
-        "id": "timing",
-        "label": "timing",
-        "count": 12
+        "id": "web-search",
+        "label": "web search",
+        "count": 13
       },
       {
         "id": "trace",
@@ -19029,6 +19059,51 @@
     ],
     "events": [
       {
+        "id": "history-history-evaluations-2026-2026-06-06-process-pipe-leak-guard-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "evaluation",
+        "title": "2026 06 06 Process Pipe Leak Guard Evaluation Input",
+        "detail": "{ \"id\": \"2026 06 06 process pipe leak guard\", \"installation occurred\": true, \"installation record targets\": \" history/installations/2026/2026 06 06 libc process group cleanup.ko.md\" , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06",
+        "path": "_history/evaluations/2026/2026-06-06-process-pipe-leak-guard-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T21:08:50.058Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "평가: 프로세스/파이프 누수 방지",
+        "detail": "평가: 프로세스/파이프 누수 방지 판정 진행 중. 핵심 Rust runtime 변경과 초기 test/check는 통과했고, 내부 패키징 빌드 완료 후 최종 충족으로 전환한다. 증거 CLI 세션 Drop/finalize/dispose guard 추가. Unix/macOS CLI process group setup 및 group kill cleanup 추가. timeout/error/store cleanup에서 kill/wait 통합. PTY writer/master drop 및 reader grac",
+        "path": "_history/evaluations/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T21:08:50.058Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "요청 결과 추적: 프로세스/파이프 누수 방지",
+        "detail": "요청 결과 추적: 프로세스/파이프 누수 방지 요청 프로세스 관리, pipe 관리, 메모리 누수가 없도록 처리. 결과 CLI/PTY session lifecycle cleanup 강화. Unix process group 기반 cleanup 추가. reader thread grace join과 PTY master/writer explicit drop 추가. readiness tests에 lifecycle contract 추가. 산출물 platform desktop app/docs/requirement",
+        "path": "_history/request-traces/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T21:08:50.058Z"
+      },
+      {
         "id": "history-history-2026-2026-06-06-md",
         "sourceType": "history",
         "signalType": "history",
@@ -19041,7 +19116,82 @@
         "category": "daily-history",
         "language": "unknown",
         "date": "2026-06-06",
-        "timestamp": "2026-06-05T20:56:57.049Z"
+        "timestamp": "2026-06-05T21:08:50.058Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약: 프로세스/파이프 누수 방지",
+        "detail": "작업 요약: 프로세스/파이프 누수 방지 변경 CLI adapter/command spawn에 Unix process group 설정을 추가했다. timeout/error/store cleanup에서 child kill만 하지 않고 process group kill과 wait를 통합했다. CliSession 과 NativePtySession 에 Drop guard를 추가했다. CLI/PTY finished cleanup에서 stdin, writer, PTY master, reader thread를 ",
+        "path": "_history/work-summaries/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T21:08:50.057Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-process-pipe-leak-guard-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "warning",
+        "status": "ready",
+        "title": "2026 06 06 Process Pipe Leak Guard",
+        "detail": "{ \"id\": \"2026 06 06 process pipe leak guard\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"name\": \"web first research\", \"status\": \"completed\", \"notes\": \"Checked Rust std process, Unix CommandExt, portable pty, Tauri, and issue/community risk signals.\" }, { \"name\": \"source inspection\", ",
+        "path": "_history/work-timings/2026/2026-06-06-process-pipe-leak-guard.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T21:08:50.056Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: 프로세스/파이프 누수 방지",
+        "detail": "사용자 요청 요약: 프로세스/파이프 누수 방지 요약 사용자는 데스크톱 앱의 프로세스 관리, pipe 관리, 메모리 누수가 없도록 처리해 달라고 요청했다. 해석 터미널/CLI 세션의 child process cleanup을 강화한다. stdout/stderr/stdin pipe와 PTY writer/master가 세션 종료 후 남지 않게 한다. reader thread가 끝나지 않는 상태를 bounded하게 정리한다. 구현 후 빌드까지 자동 실행한다. 범위 platform desktop app Ru",
+        "path": "_history/user-requests/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T21:08:50.056Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "계획 기록: 프로세스/파이프 누수 방지",
+        "detail": "계획 기록: 프로세스/파이프 누수 방지 문제 정의 터미널/CLI 기능은 child process, pipe, reader thread, PTY handle을 소유한다. 데스크톱 앱에서 탭 전환과 터미널 반복 사용이 계속되면 종료 경로가 불완전한 세션은 memory/FD/thread/process 누수로 이어질 수 있다. 결정 Rust/Tauri backend에서 OS resource lifecycle을 닫는다. Renderer에 cleanup 책임을 두지 않는다. CLI adapter는 Unix ",
+        "path": "_history/plans/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T21:08:50.055Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-process-pipe-leak-guard-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: 프로세스/파이프 누수 방지",
+        "detail": "웹 검색 기록: 프로세스/파이프 누수 방지 검색 시각 2026 06 06 KST 질의 Rust std::process ChildStdin ChildStdout pipe deadlock wait drop official docs Tokio process Command kill on drop child stdout memory leak official docs Tauri v2 async command process management sidecar official docs portable pty ru",
+        "path": "_history/web-searches/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T21:08:50.054Z"
       },
       {
         "id": "history-history-evaluations-2026-2026-06-06-native-window-chrome-json",
@@ -20347,126 +20497,6 @@
         "language": "unknown",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T18:29:48.844Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "최종 평가: Workbench lazy boundary 확장",
-        "detail": "최종 평가: Workbench lazy boundary 확장 결론 작업은 닫을 수 있다. 사용자의 남은 성능 후속 요청에 대해 Shell local heavy panels를 lazy boundaries로 확장했고, renderer build, internal package build, section/button performance audits가 모두 통과했다. 결과 Agents detail/build panels가 별도 modules로 분리됐다. Desktop/runtime/home featur",
-        "path": "_history/evaluations/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T18:29:48.844Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "ready",
-        "title": "요청 결과 추적: Workbench lazy boundary 확장",
-        "detail": "요청 결과 추적: Workbench lazy boundary 확장 요청 사용자는 이전 성능 개선 후속으로 “그것들 다”라고 요청했다. 결과 남은 Shell local heavy panels를 lazy boundaries로 확장했다. Agents detail/build panels를 별도 파일로 분리했다. prewarm과 button feedback 측정을 안정화했다. 내부 .app 와 .dmg 패키징을 완료했다. 연결 파일 구현: platform desktop app/renderer/workspa",
-        "path": "_history/request-traces/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T18:29:48.843Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: Workbench lazy boundary 확장",
-        "detail": "사용자 요청 요약: Workbench lazy boundary 확장 요약 사용자는 이전 성능 개선의 후속으로 남은 것들을 모두 처리하라고 요청했다. 맥락상 탭 전환 지연, renderer mount/import 비용, 데스크톱 자원 활용, 자동 build/package 요구를 포함한다. 해석 이전 MonitorShell root boundary 평가에서 후속으로 남긴 Desktop runtime 및 Agents panel boundary를 구현 대상으로 삼는다. 단순 스타일 변경이 아니라 lazy",
-        "path": "_history/user-requests/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T18:29:48.843Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "작업 요약: Workbench lazy boundary 확장",
-        "detail": "작업 요약: Workbench lazy boundary 확장 완료 내용 DesktopRuntimePanel , home feature panels, workspace/native/runtime panels, Agents detail/build panels를 next/dynamic boundary로 연결했다. Agents collaboration/inventory/runtime overview를 AgentDetailPanels.tsx 로 분리했다. AgentCore blueprint, agent f",
-        "path": "_history/work-summaries/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T18:29:48.843Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: Workbench lazy boundary 확장",
-        "detail": "웹 검색 기록: Workbench lazy boundary 확장 목적 사용자의 “그것들 다” 요청을 이전 root boundary 후속 작업으로 해석하고, React/Next renderer code splitting, main thread responsiveness, long task 완화 기준을 다시 확인했다. 검색어 React official docs lazy memo Profiler startTransition performance Next.js official docs dynamic im",
-        "path": "_history/web-searches/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T18:29:48.842Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-workbench-lazy-boundary-expansion-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "작업 계획: Workbench lazy boundary 확장",
-        "detail": "작업 계획: Workbench lazy boundary 확장 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 계획 이전 root boundary 작업에서 다음 병목으로 남긴 DesktopRuntimePanel 과 Agents detail panels를 대상으로 한다. 목표는 모든 탭을 한 번에 재작성하는 것이 아니라, Shell local heavy UI를 실",
-        "path": "_history/plans/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T18:29:48.842Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-monitor-shell-root-boundary-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Monitor Shell Root Boundary Evaluation Input",
-        "detail": "{ \"initial instruction\": \"Review the fundamental/root parts of the desktop app performance issue.\", \"result summary\": \"Identified the remaining root bottleneck as a 14k line MonitorShell monolith with weak section/code boundaries, split Tool Studio into a top level Next dynamic c",
-        "path": "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:55:21.496Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "최종 평가: MonitorShell 근본 boundary 재검토",
-        "detail": "최종 평가: MonitorShell 근본 boundary 재검토 결론 작업은 닫을 수 있다. 사용자의 “근본부터 다시 보라”는 요청에 대해 남은 구조 병목을 Shell monolith로 식별했고, 가장 위험이 낮은 첫 code boundary로 Tool Studio를 dynamic chunk로 분리했다. 결과 MonitorShell.tsx : 14,191 lines. ToolStudioPanel.tsx : 1,607 lines. Tool Studio runtime static import 제거. ",
-        "path": "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:55:21.496Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -22698,9 +22728,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 46577,
-      "lineCount": 1174,
-      "updatedAt": "2026-06-05T20:51:03.901Z",
+      "sizeBytes": 47061,
+      "lineCount": 1188,
+      "updatedAt": "2026-06-05T21:04:47.476Z",
       "truncated": true,
       "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { execFileSync } from \"node:child_process\";\n\nimport {\n  checkDesktopBuildPipeline,\n  desktopBuildPipelineRequiredFiles\n} from \"./readiness/desktop-build-pipeline.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nconst requiredFiles = [\n  \"README.md\",\n  \"README.ko.md\",\n  \"README.en.md\",\n  \"package.json\",\n  \"configs/desktop-distribution-registry.json\",\n  \"configs/product-feature-registry.json\",\n  \"configs/product-gap-registry.json\",\n  \"configs/claude-code-design-transfer-registry.json\",\n  \"configs/reference-platform-advantage-registry.json\",\n  \"configs/runtime-data-boundary-registry.json\",\n  \"configs/service-readiness-registry.json\",\n  \"configs/macos-execution-profile.json\",\n  \"configs/windows-execution-profile.json\",\n  \"configs/user-flow-registry.json\",\n  \"runtime-contracts/installer-shell-runtime-contract.json\",\n  \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n  \"runtime-contracts/installer-shell-bootstrap.en.md\",\n  \"renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx\",\n  \"renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx\",\n  \"rend",
       "previewBytes": 1200
@@ -22919,12 +22949,12 @@
       "project": "platform-desktop-app",
       "language": "toml",
       "extension": "toml",
-      "sizeBytes": 715,
-      "lineCount": 25,
-      "updatedAt": "2026-06-05T19:00:42.508Z",
+      "sizeBytes": 732,
+      "lineCount": 26,
+      "updatedAt": "2026-06-05T21:03:19.481Z",
       "truncated": false,
-      "preview": "[package]\nname = \"agent-workspace-platform-desktop\"\nversion = \"0.1.0\"\ndescription = \"Desktop shell for the personal agent-building platform\"\nauthors = [\"Personal Agent Platform\"]\nedition = \"2021\"\n\n[lib]\nname = \"agent_workspace_platform_desktop_lib\"\ncrate-type = [\"staticlib\", \"cdylib\", \"rlib\"]\n\n[build-dependencies]\ntauri-build = { version = \"2\", features = [] }\n\n[dependencies]\ntauri = { version = \"2\", features = [] }\nserde = { version = \"1\", features = [\"derive\"] }\nserde_json = \"1\"\nreqwest = { version = \"0.13.4\", features = [\"json\"] }\ntauri-plugin-dialog = \"2\"\nrayon = \"1.12.0\"\nsysinfo = { version = \"0.39.3\", default-features = false, features = [\"system\"] }\nportable-pty = \"0.9.0\"\ntauri-plugin-updater = \"2\"\n",
-      "previewBytes": 715
+      "preview": "[package]\nname = \"agent-workspace-platform-desktop\"\nversion = \"0.1.0\"\ndescription = \"Desktop shell for the personal agent-building platform\"\nauthors = [\"Personal Agent Platform\"]\nedition = \"2021\"\n\n[lib]\nname = \"agent_workspace_platform_desktop_lib\"\ncrate-type = [\"staticlib\", \"cdylib\", \"rlib\"]\n\n[build-dependencies]\ntauri-build = { version = \"2\", features = [] }\n\n[dependencies]\ntauri = { version = \"2\", features = [] }\nserde = { version = \"1\", features = [\"derive\"] }\nserde_json = \"1\"\nreqwest = { version = \"0.13.4\", features = [\"json\"] }\ntauri-plugin-dialog = \"2\"\nrayon = \"1.12.0\"\nsysinfo = { version = \"0.39.3\", default-features = false, features = [\"system\"] }\nportable-pty = \"0.9.0\"\ntauri-plugin-updater = \"2\"\nlibc = \"0.2.186\"\n",
+      "previewBytes": 732
     },
     {
       "id": "platform-desktop-app-src-tauri-src-main-rs",
@@ -22984,9 +23014,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 51505,
-      "lineCount": 1158,
-      "updatedAt": "2026-06-05T20:51:03.900Z",
+      "sizeBytes": 52119,
+      "lineCount": 1170,
+      "updatedAt": "2026-06-05T21:04:47.475Z",
       "truncated": true,
       "preview": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/paths.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/definitions.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/runner.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts",
       "previewBytes": 1200
@@ -23469,7 +23499,7 @@
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 12
+        "documentsCount": 13
       },
       {
         "category": "plan",
@@ -23479,7 +23509,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 26
+        "documentsCount": 25
       },
       {
         "category": "daily-history",
@@ -23573,7 +23603,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 72,
+        "documentCount": 73,
         "sourceFileCount": 5
       },
       {
@@ -23705,7 +23735,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-src-tauri-src-lib-rs",
         "label": "Large source surface",
-        "signal": "10,172 lines in platform-desktop-app/src-tauri/src/lib.rs",
+        "signal": "10,258 lines in platform-desktop-app/src-tauri/src/lib.rs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits.",
         "priority": "high",
@@ -23714,7 +23744,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-scripts-check-readiness-mjs",
         "label": "Large source surface",
-        "signal": "1,174 lines in platform-desktop-app/scripts/check-readiness.mjs",
+        "signal": "1,188 lines in platform-desktop-app/scripts/check-readiness.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23723,7 +23753,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,158 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,170 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23753,24 +23783,24 @@
         "path": "platform-desktop-app/src-tauri/src/lib.rs",
         "project": "platform-desktop-app",
         "language": "rust",
-        "lineCount": 10172,
-        "sizeBytes": 339595,
+        "lineCount": 10258,
+        "sizeBytes": 342432,
         "recommendation": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits."
       },
       {
         "path": "platform-desktop-app/scripts/check-readiness.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1174,
-        "sizeBytes": 46577,
+        "lineCount": 1188,
+        "sizeBytes": 47061,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1158,
-        "sizeBytes": 51505,
+        "lineCount": 1170,
+        "sizeBytes": 52119,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       }
     ]

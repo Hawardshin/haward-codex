@@ -1,0 +1,38 @@
+{
+  "id": "2026-06-06-process-pipe-leak-guard",
+  "user_requests_checked": [
+    {
+      "request": "프로세스 관리",
+      "status": "covered",
+      "evidence": "CLI process group setup, kill_child_process_tree, kill_and_wait_child, PTY kill/wait helper"
+    },
+    {
+      "request": "파이프 관리",
+      "status": "covered",
+      "evidence": "stdin/writer/master drop, reader grace join, bounded output retention"
+    },
+    {
+      "request": "메모리 누수 없도록",
+      "status": "covered_with_scope",
+      "evidence": "session cleanup prevents retained reader/handle/process state; bounded output remains enforced"
+    },
+    {
+      "request": "빌드 자동 실행",
+      "status": "covered",
+      "evidence": "corepack pnpm run desktop:package:internal passed and produced app/DMG artifacts"
+    }
+  ],
+  "required_artifacts": [
+    "requirements",
+    "spec",
+    "plan",
+    "tasks",
+    "validation",
+    "traceability",
+    "resource_check",
+    "evaluation",
+    "request_trace"
+  ],
+  "blocked_decisions": [],
+  "unblocked_work": "Implementation and verification proceeded without asking the user because the requested direction was clear and reversible."
+}

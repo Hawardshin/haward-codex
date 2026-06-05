@@ -224,11 +224,25 @@ for (const requiredPhrase of [
   "start_background_warmup",
   "workspace-resource-warmup",
   "MAX_WORKSPACE_PRELOAD_TEXT_FILES",
-  "MAX_WORKSPACE_PRELOAD_TEXT_BYTES"
+  "MAX_WORKSPACE_PRELOAD_TEXT_BYTES",
+  "SESSION_READER_JOIN_GRACE_MS",
+  "configure_process_group",
+  "process_group(0)",
+  "kill_child_process_tree",
+  "libc::kill",
+  "join_reader_with_grace",
+  "dispose_cli_session_runtime",
+  "dispose_native_pty_session_runtime",
+  "impl Drop for CliSession",
+  "impl Drop for NativePtySession",
+  "master: Option<Box<dyn MasterPty + Send>>"
 ]) {
   if (!tauriLib.includes(requiredPhrase)) {
     failures.push(`src-tauri/src/lib.rs must include performance token ${requiredPhrase}`);
   }
+}
+if (!tauriCargo.includes('libc = "0.2.186"')) {
+  failures.push("src-tauri/Cargo.toml must declare libc for Unix process-group cleanup");
 }
 for (const requiredPhrase of [
   "CliTaskRunRecordReport",

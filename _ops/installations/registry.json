@@ -675,6 +675,34 @@
       "commit": "pending"
     },
     {
+      "id": "2026-06-06-libc-process-group-cleanup",
+      "date": "2026-06-06",
+      "status": "installed",
+      "name": "platform-desktop-app libc process group cleanup dependency",
+      "scope": "project",
+      "owning_project": "platform-desktop-app",
+      "package_manager": "cargo",
+      "install_command": "Manual Cargo.toml dependency declaration followed by cd platform-desktop-app/src-tauri && cargo check",
+      "environment_path": "platform-desktop-app/src-tauri",
+      "dependency_record_paths": [
+        "platform-desktop-app/src-tauri/Cargo.toml",
+        "platform-desktop-app/src-tauri/Cargo.lock"
+      ],
+      "version_or_lock_status": "libc 0.2.186 declared in Cargo.toml; crate already existed in Cargo.lock transitively so no resolver churn was introduced.",
+      "security_review": "Project-local Rust dependency declaration only. Used to send SIGKILL to the process group created for app-owned CLI child processes. No global install, credential access, browser cookie access, or network client added.",
+      "license_review": "cargo info libc@0.2.186 reports license MIT OR Apache-2.0 and rust-version 1.65; Cargo.lock remains the SBOM source for follow-up audits.",
+      "verification": [
+        "cargo info libc@0.2.186: version 0.2.186, license MIT OR Apache-2.0, rust-version 1.65",
+        "cd platform-desktop-app/src-tauri && cargo check: passed",
+        "cd platform-desktop-app/src-tauri && cargo test: passed",
+        "corepack pnpm --filter platform-desktop-app test: passed, 24 tests",
+        "corepack pnpm run desktop:package:internal: passed with app/DMG build, codesign verification, and DMG verification"
+      ],
+      "rollback_path": "Remove libc from platform-desktop-app/src-tauri/Cargo.toml, revert Unix process group kill code, regenerate lock state if needed, and rerun cargo/platform/package checks.",
+      "installation_record_path": "_history/installations/2026/2026-06-06-libc-process-group-cleanup.ko.md",
+      "commit": "pending"
+    },
+    {
       "id": "2026-06-06-tauri-updater-plugin",
       "date": "2026-06-06",
       "status": "installed",

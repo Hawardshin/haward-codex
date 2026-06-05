@@ -1,0 +1,30 @@
+{
+  "id": "2026-06-06-process-pipe-leak-guard",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "name": "web_first_research",
+      "status": "completed",
+      "notes": "Checked Rust std process, Unix CommandExt, portable-pty, Tauri, and issue/community risk signals."
+    },
+    {
+      "name": "source_inspection",
+      "status": "completed",
+      "notes": "Inspected Tauri session stores, bounded command runner, PTY cleanup, and readiness tests."
+    },
+    {
+      "name": "implementation",
+      "status": "completed",
+      "notes": "Added process group cleanup, Drop guards, finalize/dispose helpers, PTY master drop, readiness gates."
+    },
+    {
+      "name": "verification",
+      "status": "completed",
+      "notes": "platform-desktop-app tests, cargo check/test, registry contract check, workspace collect, and internal package build passed."
+    }
+  ],
+  "bottleneck_candidates": [
+    "Full internal Tauri package build was the longest verification phase.",
+    "Future FD/RSS stress measurement would require a dedicated harness."
+  ]
+}

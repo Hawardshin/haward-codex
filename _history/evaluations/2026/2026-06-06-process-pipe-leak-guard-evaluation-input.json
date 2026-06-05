@@ -1,0 +1,23 @@
+{
+  "id": "2026-06-06-process-pipe-leak-guard",
+  "installation_occurred": true,
+  "installation_record_targets": [
+    "_history/installations/2026/2026-06-06-libc-process-group-cleanup.ko.md"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-06-process-pipe-leak-guard.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-06-process-pipe-leak-guard.json"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-06-process-pipe-leak-guard.ko.md"
+  ],
+  "validation_targets": [
+    "platform-desktop-app/specs/2026-06-06-process-pipe-leak-guard/validation.ko.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-06-process-pipe-leak-guard.ko.md"
+  ]
+}

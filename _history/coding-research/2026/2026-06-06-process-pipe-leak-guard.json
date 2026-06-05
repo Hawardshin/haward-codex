@@ -1,0 +1,105 @@
+{
+  "id": "2026-06-06-process-pipe-leak-guard",
+  "technology_stack": [
+    "Tauri v2 Rust backend",
+    "Rust std::process",
+    "Rust std::os::unix::process::CommandExt",
+    "portable-pty",
+    "React/Next.js renderer readiness tests"
+  ],
+  "technology_official_docs": [
+    "https://doc.rust-lang.org/stable/std/process/index.html",
+    "https://doc.rust-lang.org/std/process/struct.Child.html",
+    "https://doc.rust-lang.org/std/os/unix/process/trait.CommandExt.html",
+    "https://docs.rs/portable-pty/latest/portable_pty/",
+    "https://v2.tauri.app/develop/calling-rust/"
+  ],
+  "stack_version_constraints": {
+    "platform": "macOS/Tauri internal app build",
+    "cargo": "Use existing platform-desktop-app/src-tauri lock state",
+    "libc": "0.2.186 direct declaration; already present in Cargo.lock transitively"
+  },
+  "source_types": [
+    "official docs",
+    "crate docs",
+    "open-source issue",
+    "community Q&A",
+    "existing local source"
+  ],
+  "reference_config_paths": [
+    "agent-platform/configs/research/research-agent-profile.json",
+    "_ops/workflows/66-cli-adapter-integration.md",
+    "_ops/workflows/69-resource-leak-prevention.md"
+  ],
+  "issue_discussion_sources": [
+    "https://github.com/tauri-apps/tauri/issues/4949",
+    "https://stackoverflow.com/questions/49062707/capture-both-stdout-stderr-via-pipe",
+    "https://stackoverflow.com/questions/64398866/why-does-bufreader-hang-when-reading-from-stderr"
+  ],
+  "issue_discussion_notes": [
+    "Tauri issue signal: immediate child kill may not terminate spawned descendants.",
+    "Rust pipe Q&A signal: sequential stdout/stderr pipe reads can block when one pipe fills.",
+    "Pipe deadlock discussions support concurrent bounded reader threads and explicit cleanup."
+  ],
+  "community_signal_notes": "Community sources were treated as failure-mode discovery only; implementation relies on official Rust/Unix/portable-pty APIs.",
+  "language_options": [
+    {
+      "option": "Rust/Tauri backend cleanup",
+      "tradeoffs": "Uses current owner of child processes and PTY handles; can set Unix process group and wait child directly; keeps packaging boundary small."
+    },
+    {
+      "option": "Node sidecar supervisor",
+      "tradeoffs": "Could use Node process tooling but adds another runtime, more pipes, and larger installer surface."
+    }
+  ],
+  "selected_language": "Rust/Tauri backend cleanup",
+  "language_decision_notes": "The leaked resources are owned by Rust structs, so cleanup belongs in Rust Drop/finalize/dispose paths instead of renderer code or a sidecar.",
+  "architecture_reference_sources": [
+    "Rust std::process Child docs",
+    "Rust Unix CommandExt process_group docs",
+    "portable-pty Child docs",
+    "existing platform-desktop-app session stores"
+  ],
+  "architecture_options": [
+    {
+      "option": "Patch each call site independently",
+      "decision": "rejected",
+      "reason": "Easy to miss future cleanup paths and hard to test."
+    },
+    {
+      "option": "Centralized dispose/finalize helpers plus Drop guards",
+      "decision": "selected",
+      "reason": "Gives one lifecycle contract for cancel, timeout, store removal, and unexpected drop."
+    }
+  ],
+  "architecture_theory_sources": [
+    "Rust ownership and Drop semantics from standard library docs",
+    "Unix process group semantics through CommandExt documentation"
+  ],
+  "architecture_practitioner_sources": [
+    "Tauri issue #4949",
+    "Stack Overflow pipe deadlock discussions"
+  ],
+  "architecture_tradeoff_notes": "Centralized cleanup adds small synchronous join grace, but bounds UI blocking to 250ms and avoids unbounded reader/process retention.",
+  "code_reference_sources": [
+    "platform-desktop-app/src-tauri/src/lib.rs existing SessionStore",
+    "platform-desktop-app/src-tauri/src/lib.rs existing PtySessionStore",
+    "platform-desktop-app/tests/readiness.test.mjs runtime contract checks"
+  ],
+  "code_reference_notes": "The existing code already used bounded output and reader threads; this change strengthens cleanup ownership rather than replacing the architecture.",
+  "folder_structure_options": [
+    {
+      "option": "New Rust module for process supervisor",
+      "decision": "deferred",
+      "reason": "Current lib.rs already owns commands and stores; extracting a module would broaden blast radius."
+    },
+    {
+      "option": "Keep scoped helpers near session lifecycle code",
+      "decision": "selected",
+      "reason": "Smallest maintainable change for current source layout."
+    }
+  ],
+  "folder_structure_decision_notes": "No source folders reshaped; specs and records use existing platform-desktop-app conventions.",
+  "folder_semantics_notes": "Runtime lifecycle helpers remain in Tauri backend because they own OS handles.",
+  "maintainability_notes": "Readiness tokens protect lifecycle primitives from accidental removal; future Windows process-tree cleanup can extend helper internals."
+}
