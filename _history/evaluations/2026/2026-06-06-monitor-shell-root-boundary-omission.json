@@ -1,0 +1,107 @@
+{
+  "task": "Review root performance architecture and split the first MonitorShell code boundary.",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "root-review",
+      "description": "Look beyond local tab tuning and identify the root structural performance issue.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-06-monitor-shell-root-boundary/spec.ko.md",
+        "_history/plans/2026/2026-06-06-monitor-shell-root-boundary.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "implement-boundary",
+      "description": "Implement a bounded root-level structural improvement.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/workbench/ToolStudioPanel.tsx"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "auto-build-package",
+      "description": "Run build and package verification automatically after implementation.",
+      "source": "persistent_user_preference",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build",
+        "corepack pnpm --dir platform-desktop-app run package:internal"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Dynamic Tool Studio boundary and idle preload implementation.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/workbench/ToolStudioPanel.tsx",
+      "purpose": "Exported ToolStudioPanelProps contract.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app",
+      "purpose": "Internal macOS app artifact.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg",
+      "purpose": "Internal DMG artifact.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "dynamic-boundary",
+      "description": "Tool Studio runtime code is split behind a dynamic boundary.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Tool Studio strings appear in 0cbtc.g2b83vn.js and 09yq_9dx5v2xh.js",
+        "tool-studio.test.mjs validates dynamic<ToolStudioPanelProps>"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "performance-audit",
+      "description": "Section performance audit passes under resident cap.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "settleAverageMs=458",
+        "settleP95Ms=667.7",
+        "maxObservedResidentCount=5",
+        "maxObservedMountedPanelCount=5"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "package-internal",
+      "description": "Internal package build passes.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app run package:internal"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Full MonitorShell decomposition is still pending; DesktopRuntimePanel and Agents detail panels remain inside the Shell.",
+    "p95 section settle worsened slightly from 652.7ms to 667.7ms even though average improved from 482ms to 458ms."
+  ],
+  "notes": [
+    "The request was handled as a first root-boundary implementation slice, not a claim that all structural performance work is finished."
+  ]
+}

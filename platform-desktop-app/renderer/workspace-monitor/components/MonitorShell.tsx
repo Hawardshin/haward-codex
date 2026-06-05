@@ -67,7 +67,7 @@ import {
   type RuntimeNativePtySession,
   type RuntimeTextChoice
 } from "@/components/workbench/RuntimeTerminalDrawer";
-import { ToolStudioPanel, type ToolStudioMode, type ToolStudioModeRequest } from "@/components/workbench/ToolStudioPanel";
+import type { ToolStudioMode, ToolStudioModeRequest, ToolStudioPanelProps } from "@/components/workbench/ToolStudioPanel";
 import { WorkspaceExplorerPane } from "@/components/workbench/WorkspaceExplorerPane";
 import { writeClipboardText } from "@/lib/clipboard.mjs";
 import { installInstantButtonFeedback, scheduleAfterFirstPaint } from "@/lib/motion";
@@ -624,7 +624,23 @@ const MonacoDiffEditor = dynamic(() => import("@monaco-editor/react").then((modu
   loading: () => <div className="monaco-editor-loading">Loading Monaco diff</div>
 });
 
+const ToolStudioPanel = dynamic<ToolStudioPanelProps>(
+  () => import("@/components/workbench/ToolStudioPanel").then((module) => module.ToolStudioPanel),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="tool-studio-loading" data-tool-studio-loading>
+        Loading Tool Studio
+      </div>
+    )
+  }
+);
+
 const MemoizedToolStudioPanel = memo(ToolStudioPanel);
+
+function preloadToolStudioPanel() {
+  void import("@/components/workbench/ToolStudioPanel");
+}
 
 const AgentCollaborationScene = dynamic(
   () => import("@/components/workbench/AgentCollaborationScene").then((module) => module.AgentCollaborationScene),
@@ -2820,6 +2836,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     const prewarmWorkSurfaces = () => {
       void import("@monaco-editor/react");
       void import("@/components/workbench/AgentCollaborationScene");
+      preloadToolStudioPanel();
       void preloadAdminHistoryIndex();
     };
 

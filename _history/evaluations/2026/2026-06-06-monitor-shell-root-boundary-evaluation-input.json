@@ -1,0 +1,96 @@
+{
+  "initial_instruction": "Review the fundamental/root parts of the desktop app performance issue.",
+  "result_summary": "Identified the remaining root bottleneck as a 14k-line MonitorShell monolith with weak section/code boundaries, split Tool Studio into a top-level Next dynamic chunk, added idle module preload, updated tests, measured performance, and completed internal Tauri packaging.",
+  "work_mode": "standard",
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/ToolStudioPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "verification": [
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test: passed, 59 tests",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check: passed",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build: passed",
+    "chunk inspection: Tool Studio strings moved to separate chunks 0cbtc.g2b83vn.js and 09yq_9dx5v2xh.js",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:sections -- http://127.0.0.1:3351/#section-overview: passed, average 458ms, p95 667.7ms, max resident/mounted 5",
+    "node platform-desktop-app/renderer/workspace-monitor/scripts/audit-tab-response.mjs http://127.0.0.1:3352/#section-overview: completed, p95 367.5ms",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:budget: passed, largest chunk 734386 bytes, chunkCount 22",
+    "corepack pnpm --dir platform-desktop-app test: passed, 22 tests",
+    "corepack pnpm --dir platform-desktop-app run check: passed",
+    "corepack pnpm --dir platform-desktop-app run package:internal: passed, app and dmg built and verified",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort: developer snapshot restored",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check: passed after snapshot restore"
+  ],
+  "references_checked": [
+    "https://react.dev/reference/react/memo",
+    "https://react.dev/reference/react/Profiler",
+    "https://react.dev/reference/react/useDeferredValue",
+    "https://nextjs.org/docs/pages/building-your-application/optimizing/lazy-loading",
+    "https://nextjs.org/docs/app/building-your-application/optimizing/bundle-analyzer",
+    "https://web.dev/articles/optimize-inp",
+    "https://web.dev/articles/off-main-thread"
+  ],
+  "grounding_checks": [
+    "Local code structure, chunk inspection, tests, performance audit, build, and package verification were used as primary evidence.",
+    "Performance interpretation records both improvement and tradeoff: average improved from 482ms to 458ms; p95 worsened from 652.7ms to 667.7ms."
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
+    "_history/plans/2026/2026-06-06-monitor-shell-root-boundary.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
+    "platform-desktop-app/specs/2026-06-06-monitor-shell-root-boundary/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-06-monitor-shell-root-boundary.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary-omission.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-06-monitor-shell-root-boundary.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-06-root-review.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-06-monitor-shell-root-boundary.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-06-monitor-shell-root-boundary/spec.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-06-monitor-shell-root-boundary.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-06-monitor-shell-root-boundary.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-06-monitor-shell-root-boundary.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary-resource.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [
+    "Extract DesktopRuntimePanel from MonitorShell into a dynamic workbench module.",
+    "Split Agents detail panels into active-detail dynamic boundaries.",
+    "Add repeated-run performance reporting to reduce single-run variance."
+  ],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Extract DesktopRuntimePanel next because it is the largest remaining Shell-local panel.",
+    "Create a bundle contract that fails when a tab panel remains statically imported into MonitorShell.",
+    "Track main-thread long tasks during audits, not only section settle time."
+  ]
+}

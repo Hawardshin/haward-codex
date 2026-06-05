@@ -1,0 +1,125 @@
+{
+  "task": "Review root performance architecture and split the first MonitorShell code boundary.",
+  "work_mode": "standard",
+  "runtime_context": [
+    "React renderer",
+    "Next.js dynamic import chunks",
+    "Playwright Chromium",
+    "Python static server",
+    "Tauri/Rust build",
+    "renderer memory cache"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "lazy-chunk-tab-delay",
+      "category": "network_connection",
+      "description": "Moving Tool Studio behind a dynamic chunk can delay first Tools tab entry if the chunk is not warmed.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Added preloadToolStudioPanel to the existing idle work-surface prewarm path.",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "audit-tab-response tools readyMs=367.5"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "resident-tree-growth",
+      "category": "memory",
+      "description": "Resident prewarm must not reintroduce unbounded mounted panel growth.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Resident cap remains 5 and performance audit confirmed max observed mounted/resident panels at 5.",
+      "evidence": [
+        "perf:sections maxObservedResidentCount=5",
+        "perf:sections maxObservedMountedPanelCount=5"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "static-server-lifecycle",
+      "category": "process",
+      "description": "Local static servers used for performance probes must be stopped.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Server on port 3351 was killed by PID after stdin was unavailable; server on 3352 was stopped with Ctrl-C.",
+      "evidence": [
+        "lsof -ti tcp:3351 returned no process after kill",
+        "server session 38447 exited with code 0"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "tauri-package-processes",
+      "category": "process",
+      "description": "Internal packaging launches Rust/Tauri/codesign/hdiutil subprocesses.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "package:internal completed; app signature verification and DMG verification passed.",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app run package:internal"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "dynamic-chunk-preload",
+      "resource": "Tool Studio dynamic JS chunk",
+      "create_path": "dynamic<ToolStudioPanelProps> and preloadToolStudioPanel",
+      "cleanup_path": "Browser module cache owns loaded chunk; no explicit cleanup required.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Tool Studio strings moved to 0cbtc.g2b83vn.js and 09yq_9dx5v2xh.js"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "static-server-cleanup",
+      "resource": "python3 http.server",
+      "create_path": "ports 3351 and 3352",
+      "cleanup_path": "kill PID 88356 for 3351; Ctrl-C session 38447 for 3352.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "server processes stopped before close-out"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "section-switch-latency",
+      "metric": "settle p95 and mounted panel count under CPU throttle 6",
+      "tool": "audit-section-switch-latency.mjs",
+      "threshold": "p95 <= 1400ms, resident/mounted panels <= 5",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "settleAverageMs=458",
+        "settleP95Ms=667.7",
+        "maxObservedResidentCount=5",
+        "maxObservedMountedPanelCount=5"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "bundle-budget",
+      "metric": "largest JS chunk bytes",
+      "tool": "check-performance-budget.mjs",
+      "threshold": "largest chunk <= 1,000,000 bytes",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "largest chunk 734386 bytes",
+        "chunkCount=22"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "Dynamic split increased chunk count from 18 to 22; this is expected for code splitting.",
+    "Largest chunk did not shrink yet because the remaining MonitorShell body is still the dominant bundle."
+  ]
+}

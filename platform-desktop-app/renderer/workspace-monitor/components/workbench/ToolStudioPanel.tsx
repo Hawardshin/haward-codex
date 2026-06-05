@@ -42,7 +42,7 @@ import type { ToolStudioMode, ToolStudioModeRequest, ToolStudioStage } from "./t
 
 export type { ToolStudioMode, ToolStudioModeRequest } from "./tool-studio/types";
 
-type ToolStudioPanelProps = {
+export type ToolStudioPanelProps = {
   language: "ko" | "en";
   requestedMode?: ToolStudioModeRequest | null;
   agentCount: number;

@@ -70,9 +70,11 @@ test("Tool Studio is a first-class monitor section", () => {
   assert.doesNotMatch(monitorShell, /next\.splice\(insertAt, 0, "tools"\)/);
   assert.match(monitorShell, /tools:\s*"Studio"/);
   assert.match(monitorShell, /section === "tools"[\s\S]*?<MemoizedToolStudioPanel/);
-  assert.match(monitorShell, /import \{ ToolStudioPanel, type ToolStudioMode, type ToolStudioModeRequest \} from "@\/components\/workbench\/ToolStudioPanel"/);
+  assert.match(monitorShell, /import type \{ ToolStudioMode, ToolStudioModeRequest, ToolStudioPanelProps \} from "@\/components\/workbench\/ToolStudioPanel"/);
+  assert.match(monitorShell, /const ToolStudioPanel = dynamic<ToolStudioPanelProps>/);
+  assert.match(monitorShell, /\(\) => import\("@\/components\/workbench\/ToolStudioPanel"\)\.then\(\(module\) => module\.ToolStudioPanel\)/);
   assert.match(monitorShell, /const MemoizedToolStudioPanel = memo\(ToolStudioPanel\)/);
-  assert.doesNotMatch(monitorShell, /dynamic\(\(\) => import\("@\/components\/workbench\/ToolStudioPanel"\)/);
+  assert.match(toolStudio, /export type ToolStudioPanelProps = \{/);
   assert.match(coreDrilldown, /"files" \| "agents" \| "tools" \| "run" \| "learn"/);
 });
 
@@ -393,6 +395,7 @@ test("Monitor section switches prewarm heavy surfaces and preserve source editor
   assert.match(monitorShell, /const prewarmWorkSurfaces = \(\) => \{/);
   assert.match(monitorShell, /void import\("@monaco-editor\/react"\)/);
   assert.match(monitorShell, /void import\("@\/components\/workbench\/AgentCollaborationScene"\)/);
+  assert.match(monitorShell, /preloadToolStudioPanel\(\)/);
   assert.match(monitorShell, /void preloadAdminHistoryIndex\(\)/);
   assert.match(monitorShell, /const primeSectionActivation = useCallback\(\(targetSection: SectionId\) => \{/);
   assert.match(monitorShell, /viewport\?\.setAttribute\("data-active-section", targetSection\)/);
@@ -431,6 +434,7 @@ test("Monitor section switches prewarm heavy surfaces and preserve source editor
   assert.match(monitorShell, /<MountedSectionPanel id="source" active=\{section === "source"\}>/);
   assert.match(monitorShell, /<MountedSectionPanel id="agents" active=\{section === "agents"\}>/);
   assert.match(monitorShell, /const MemoizedToolStudioPanel = memo\(ToolStudioPanel\)/);
+  assert.match(monitorShell, /function preloadToolStudioPanel\(\) \{/);
   assert.match(monitorShell, /<MemoizedToolStudioPanel/);
   assert.match(monitorShell, /const openAgentsSection = useCallback\(\(\) => \{/);
   assert.match(monitorShell, /const openSourceSection = useCallback\(\(\) => \{/);
