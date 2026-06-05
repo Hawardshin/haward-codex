@@ -17,6 +17,7 @@
     "check:history-payload": "node scripts/check-history-payload.mjs",
     "check:intent-map": "node scripts/check-intent-feature-map.mjs --snapshot generated --expect developer",
     "check:intent-map:customer": "node scripts/check-intent-feature-map.mjs --snapshot public --expect customer",
+    "smoke:source-controls": "node scripts/check-source-controls-playwright.mjs",
     "perf:budget": "node scripts/check-performance-budget.mjs",
     "perf:buttons": "node scripts/audit-button-response.mjs",
     "audit:surfaces": "node scripts/audit-monitor-surfaces.mjs",

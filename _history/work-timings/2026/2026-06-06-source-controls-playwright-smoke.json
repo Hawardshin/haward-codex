@@ -1,0 +1,31 @@
+{
+  "task": "source controls playwright smoke",
+  "date": "2026-06-06",
+  "timings": [
+    {
+      "phase": "web_first_intake",
+      "elapsed_minutes": 2,
+      "notes": "Checked official Next.js and Playwright documentation relevant to hydration/static export and click verification."
+    },
+    {
+      "phase": "dev_server_diagnosis",
+      "elapsed_minutes": 14,
+      "notes": "Confirmed the dev-server path did not start snapshot fetches in Playwright."
+    },
+    {
+      "phase": "static_export_smoke",
+      "elapsed_minutes": 12,
+      "notes": "Verified customer static export, then developer snapshot static export with a clickable source dropdown."
+    },
+    {
+      "phase": "smoke_script_implementation",
+      "elapsed_minutes": 18,
+      "notes": "Added the reusable Playwright smoke script and static test coverage."
+    },
+    {
+      "phase": "verification_and_package",
+      "elapsed_minutes": 11,
+      "notes": "Ran smoke, workspace monitor checks, package:internal, DMG cleanup after first transient failure, and final app readiness check."
+    }
+  ]
+}

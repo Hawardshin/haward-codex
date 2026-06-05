@@ -1,0 +1,43 @@
+{
+  "task": "source controls playwright smoke",
+  "date": "2026-06-06",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "resource": "Next dev server on 127.0.0.1:4210",
+      "status": "started_then_stopped",
+      "evidence": "Used to reproduce the earlier Loading workspace snapshot failure. Fetch calls stayed empty, then the server was stopped."
+    },
+    {
+      "resource": "Static server on 127.0.0.1:4211",
+      "status": "started_then_stopped",
+      "evidence": "Served workspace-monitor/out with the customer snapshot. The source section rendered and contained no native select controls, but the file picker was disabled because the customer snapshot has no source files."
+    },
+    {
+      "resource": "Static server on 127.0.0.1:4212",
+      "status": "started_then_stopped",
+      "evidence": "Served a temporary out copy with the developer snapshot. The file picker opened with 80 items."
+    },
+    {
+      "resource": "Temporary root static server",
+      "status": "stopped",
+      "evidence": "A mistaken static server briefly exposed the repository root directory listing. Only the _private folder name was visible; no _private contents were opened, listed, read, or summarized."
+    },
+    {
+      "resource": "Playwright Chromium",
+      "status": "closed",
+      "evidence": "The new smoke script closes the browser and temp static server in a finally block."
+    },
+    {
+      "resource": "Tauri DMG temporary mount",
+      "status": "cleaned",
+      "evidence": "The first package run failed during DMG bundling and left /Volumes/dmg.YDoFXE mounted. The mount was detached and stale temporary DMGs were removed before rerunning package:internal."
+    },
+    {
+      "resource": "Internal Tauri package build",
+      "status": "completed",
+      "evidence": "package:internal completed .app/.dmg build, codesign verify, and hdiutil verify after cleanup."
+    }
+  ],
+  "notes": "Runtime resources started for verification were stopped or cleaned up before close-out."
+}

@@ -50,6 +50,10 @@ const actionGroupComponent = fs.readFileSync(path.join(projectRoot, "components"
 const collector = fs.readFileSync(path.join(projectRoot, "scripts", "collect-workspace.mjs"), "utf8");
 const scrollCheck = fs.readFileSync(path.join(projectRoot, "scripts", "check-scroll-containers.mjs"), "utf8");
 const surfaceAudit = fs.readFileSync(path.join(projectRoot, "scripts", "audit-monitor-surfaces.mjs"), "utf8");
+const sourceControlsSmoke = fs.readFileSync(
+  path.join(projectRoot, "scripts", "check-source-controls-playwright.mjs"),
+  "utf8"
+);
 const historyPayloadCheck = fs.readFileSync(path.join(projectRoot, "scripts", "check-history-payload.mjs"), "utf8");
 const adminHistoryHook = fs.readFileSync(path.join(projectRoot, "components", "history", "useAdminHistoryIndex.ts"), "utf8");
 const css = fs.readFileSync(path.join(projectRoot, "app", "globals.css"), "utf8");
@@ -394,6 +398,7 @@ test("Workspace monitor sidebar and source editor defaults avoid clipped editing
 });
 
 test("Source workbench replaces native select and command buttons with app primitives", () => {
+  assert.equal(packageJson.scripts["smoke:source-controls"], "node scripts/check-source-controls-playwright.mjs");
   assert.match(monitorShell, /from "@radix-ui\/react-dropdown-menu"/);
   assert.match(monitorShell, /ChevronDown/);
   assert.match(monitorShell, /<DropdownMenu\.Root>/);
@@ -412,6 +417,10 @@ test("Source workbench replaces native select and command buttons with app primi
   assert.match(css, /\.source-file-picker-menu \{/);
   assert.match(css, /\.source-file-picker-item\[data-highlighted\]/);
   assert.match(css, /\.source-editor-action-group \{[\s\S]*?grid-template-columns: repeat\(4, minmax\(104px, 1fr\)\);/);
+  assert.match(sourceControlsSmoke, /workspace-monitor-source-controls-/);
+  assert.match(sourceControlsSmoke, /sourceSelectCount,\s*0/);
+  assert.match(sourceControlsSmoke, /await trigger\.click\(\)/);
+  assert.match(sourceControlsSmoke, /source_controls_playwright_ok/);
 });
 
 test("Monitor uses a shared motion system for smooth tab, dialog, and menu transitions", () => {

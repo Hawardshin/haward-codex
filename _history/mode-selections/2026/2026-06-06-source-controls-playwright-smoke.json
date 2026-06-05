@@ -1,0 +1,14 @@
+{
+  "task": "source controls playwright smoke",
+  "date": "2026-06-06",
+  "selected_mode": "ship_first",
+  "reason": "The user asked to use the desktop/runtime resources fully, fix the awkward source controls, and run the build automatically after implementation.",
+  "gates": [
+    "web_first_intake",
+    "dev-server failure diagnosis",
+    "static export smoke with developer snapshot",
+    "Playwright source control regression script",
+    "workspace monitor check",
+    "internal package build"
+  ]
+}

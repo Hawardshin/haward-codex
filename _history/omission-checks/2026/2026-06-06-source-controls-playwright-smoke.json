@@ -1,0 +1,35 @@
+{
+  "task": "source controls playwright smoke",
+  "date": "2026-06-06",
+  "coverage": [
+    {
+      "requirement": "Do not leave source dropdown verification at manual or static-only inspection",
+      "status": "covered",
+      "evidence": "Added smoke:source-controls, which serves the static export with a developer snapshot and clicks the source file picker in Playwright Chromium."
+    },
+    {
+      "requirement": "Ensure the old native select is not present",
+      "status": "covered",
+      "evidence": "The smoke asserts .native-source-controls select count is 0."
+    },
+    {
+      "requirement": "Ensure the app primitives are present",
+      "status": "covered",
+      "evidence": "The smoke asserts 4 source action buttons and 3 workspace explorer action buttons with data-ui-button."
+    },
+    {
+      "requirement": "Verify the dropdown is actually usable",
+      "status": "covered",
+      "evidence": "The smoke clicks the trigger, waits for .source-file-picker-menu, confirms 80 file items, and checks usable menu/trigger dimensions."
+    },
+    {
+      "requirement": "Build automatically after implementation",
+      "status": "covered",
+      "evidence": "corepack pnpm --dir platform-desktop-app run package:internal completed and verified the .app and .dmg artifacts."
+    }
+  ],
+  "known_limits": [
+    "The Next dev server Playwright path still showed no fetch/useEffect start in this environment, so the regression target is the static export path that Tauri embeds.",
+    "Public release remains blocked by existing signing, notarization, updater, and clean-machine smoke gates; this task only claims internal package readiness."
+  ]
+}
