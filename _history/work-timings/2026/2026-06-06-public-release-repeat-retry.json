@@ -1,0 +1,26 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-public-release-repeat-retry",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "elapsed": "short"
+    },
+    {
+      "phase": "credential_presence_check",
+      "elapsed": "short"
+    },
+    {
+      "phase": "public_package_retry",
+      "elapsed": "short"
+    },
+    {
+      "phase": "history_and_evaluation",
+      "elapsed": "short"
+    }
+  ],
+  "bottleneck_notes": [
+    "Public release remains blocked by missing Apple Developer ID signing/notarization credentials and Tauri updater signing/endpoint inputs.",
+    "Fail-fast ordering prevents expensive verification when those external inputs are absent."
+  ]
+}
