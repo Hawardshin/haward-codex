@@ -82,6 +82,7 @@
 | REQ-WM-069 | 데스크톱 제품 UI의 문장형 텍스트, 버튼/컨트롤 라벨, 경로/명령/코드 같은 긴 토큰은 같은 줄바꿈 계약을 따라야 한다. 한글/한영 혼합 문장은 글자 단위로 어색하게 깨지지 않도록 `word-break: keep-all`과 자연 줄바꿈을 사용하고, 경로/명령/코드 토큰은 화면을 밀어내지 않도록 `overflow-wrap: anywhere` 계열을 사용해야 하며, 버튼 내부 라벨은 부모 폭을 넘지 않아야 한다. | must | text wrapping static test, desktop/mobile Browser smoke, long-token overflow audit, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 | REQ-WM-070 | 데스크톱 제품 UI는 전체 페이지, activity rail, 설정, 터미널, 소스 탐색, Tool Studio 목록/상세/환경처럼 서로 다른 작업 범위의 스크롤을 분리해야 한다. 각 스크롤 범위는 `overscroll-behavior`, 안정적인 gutter, 절제된 scrollbar 색상 토큰, 필요한 페인트 containment를 가져야 하며, 화면 밖 3D/애니메이션 작업은 상호작용 속도를 방해하지 않도록 정지해야 한다. | must | scoped scroll static test, scroll color token test, Tool Studio 3D pause test, desktop/mobile Browser scroll smoke, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 | REQ-WM-071 | Tool Studio 소스는 하나의 거대 컴포넌트 안에 타입, 정적 카탈로그 데이터, UI 렌더링, 3D effect를 모두 섞어두지 않아야 한다. 최소한 public 타입과 정적 Tool Studio catalog는 별도 모듈로 분리하고, 기존 `ToolStudioPanel` export와 mode request 계약은 호환되게 유지해야 한다. | must | Tool Studio module separation static test, type re-export test, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
+| REQ-WM-072 | 에이전트 협업 캐릭터는 단순 원통/구 조합이 아니라 역할과 상태를 읽을 수 있는 일관된 로봇형 실루엣을 가져야 한다. Agents 협업 장면과 Tool Studio 캐릭터 맵은 visor, chest/status detail, role halo 같은 공통 디자인 언어를 공유하되, 애니메이션은 산만하지 않고 기존 reduce-motion/offscreen pause 계약을 유지해야 한다. | must | character design static test, desktop/mobile Browser canvas smoke, nonblank screenshot QA, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 
 ## 범위
 
@@ -144,6 +145,7 @@
 - 문장형 텍스트, 버튼/컨트롤 라벨, 긴 경로/명령/코드 토큰의 공통 줄바꿈 계약
 - 전체 페이지, rail, 설정, 터미널, 소스 탐색, Tool Studio 내부 영역의 범위별 스크롤과 절제된 scrollbar 색상/성능 계약
 - Tool Studio public 타입과 정적 catalog data의 별도 모듈화, 기존 export 호환성 유지
+- Agents 협업 장면과 Tool Studio 캐릭터 맵의 공통 로봇형 캐릭터 디자인 언어
 - Vercel 배포 문서
 
 ## 제외 범위

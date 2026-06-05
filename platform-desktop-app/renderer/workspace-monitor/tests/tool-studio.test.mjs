@@ -112,6 +112,11 @@ test("Agents collaboration uses lazy open-source 3D character scene", () => {
   assert.match(agentCollaborationScene, /data-agent-collaboration-3d-ready/);
   assert.match(agentCollaborationScene, /function AgentCharacter/);
   assert.match(agentCollaborationScene, /function TaskLaneNode/);
+  assert.match(agentCollaborationScene, /visorPalette/);
+  assert.match(agentCollaborationScene, /agent-character-visor/);
+  assert.match(agentCollaborationScene, /agent-character-chest-panel/);
+  assert.match(agentCollaborationScene, /agent-character-status-light/);
+  assert.match(agentCollaborationScene, /agent-character-role-halo/);
   assert.match(css, /\.agent-collaboration-theater \{/);
   assert.match(css, /\.agent-collaboration-scene-shell,[\s\S]*?min-height: clamp\(280px, 42vh, 520px\);/);
   assert.match(css, /\.agent-collaboration-scene-hud \{/);
@@ -155,6 +160,13 @@ test("Three.js scene is lazy-loaded and cleans up WebGL resources", () => {
   assert.match(toolStudio, /renderer\.setClearColor\(0x101923, 1\)/);
   assert.match(toolStudio, /scene\.background = new THREE\.Color\(0x101923\)/);
   assert.match(toolStudio, /camera\.lookAt\(0, -0\.2, 0\)/);
+  assert.match(toolStudio, /const visorGeometry = new THREE\.BoxGeometry\(0\.3, 0\.07, 0\.04\)/);
+  assert.match(toolStudio, /const chestPanelGeometry = new THREE\.BoxGeometry\(0\.24, 0\.16, 0\.04\)/);
+  assert.match(toolStudio, /const roleHaloGeometry = new THREE\.TorusGeometry\(0\.42, 0\.016, 8, 48\)/);
+  assert.match(toolStudio, /tool-agent-character-visor/);
+  assert.match(toolStudio, /tool-agent-character-chest-panel/);
+  assert.match(toolStudio, /tool-agent-character-status-light/);
+  assert.match(toolStudio, /tool-agent-character-role-halo/);
   assert.match(toolStudio, /canvas\.setAttribute\("data-agent-3d-ready", "true"\)/);
   assert.match(toolStudio, /canvas\.removeAttribute\("data-agent-3d-ready"\)/);
   assert.match(toolStudio, /window\.cancelAnimationFrame\(animationFrame\)/);

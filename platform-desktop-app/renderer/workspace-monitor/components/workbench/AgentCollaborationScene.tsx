@@ -36,6 +36,7 @@ type SceneLink = {
 
 const agentPalette = ["#66d9b1", "#8ab8ff", "#f7c66f", "#ff9a96", "#c4b5fd", "#67e8f9", "#f9a8d4", "#a7f3d0"];
 const lanePalette = ["#58a6ff", "#66d9b1", "#f7c66f", "#ff9a96", "#c4b5fd"];
+const visorPalette = ["#9fd4ff", "#b7f7d4", "#ffe29a", "#ffc4c1", "#ddd6fe", "#a5f3fc", "#fbcfe8", "#bbf7d0"];
 
 const statusColor = (status: string, fallback: string) => {
   const normalized = status.toLowerCase();
@@ -211,39 +212,63 @@ function AgentCollaborationWorld({
 function AgentCharacter({ node, totalAgents }: { node: SceneAgent; totalAgents: number }) {
   const scale = node.agent.activeTaskCount > 0 ? 1.05 : 0.94;
   const workloadHeight = Math.min(0.56, 0.16 + node.agent.taskCount / Math.max(totalAgents, 1) * 0.42);
+  const visorColor = visorPalette[node.index % visorPalette.length];
+  const isActive = node.agent.activeTaskCount > 0;
+  const isBlocked = node.agent.status.toLowerCase().includes("block");
+  const signalColor = isBlocked ? "#ff9a96" : isActive ? "#66d9b1" : node.color;
 
   return (
     <Float floatIntensity={0.2} rotationIntensity={0.12} speed={1.25 + node.index * 0.08}>
       <group position={node.position} scale={[scale, scale, scale]}>
-        <mesh position={[0, 0.02, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <mesh name="agent-character-ground-shadow" position={[0, -0.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <circleGeometry args={[0.58, 42]} />
+          <meshBasicMaterial color="#020617" transparent opacity={0.34} />
+        </mesh>
+        <mesh name="agent-character-role-halo" position={[0, 0.02, 0]} rotation={[-Math.PI / 2, 0, 0]}>
           <torusGeometry args={[0.38, 0.018, 10, 44]} />
           <meshStandardMaterial color={node.color} emissive={node.color} emissiveIntensity={0.32} />
         </mesh>
-        <mesh position={[0, 0.52, 0]}>
-          <capsuleGeometry args={[0.24, 0.44, 8, 16]} />
-          <meshStandardMaterial color={node.color} roughness={0.38} metalness={0.28} />
+        <mesh name="agent-character-foot-left" position={[-0.15, 0.1, 0.08]}>
+          <boxGeometry args={[0.18, 0.12, 0.26]} />
+          <meshStandardMaterial color="#d7e0ea" roughness={0.5} metalness={0.06} />
         </mesh>
-        <mesh position={[0, 0.98, 0]}>
+        <mesh name="agent-character-foot-right" position={[0.15, 0.1, 0.08]}>
+          <boxGeometry args={[0.18, 0.12, 0.26]} />
+          <meshStandardMaterial color="#d7e0ea" roughness={0.5} metalness={0.06} />
+        </mesh>
+        <mesh name="agent-character-torso" position={[0, 0.52, 0]}>
+          <capsuleGeometry args={[0.24, 0.44, 8, 16]} />
+          <meshStandardMaterial color={node.color} emissive={node.color} emissiveIntensity={0.08} roughness={0.34} metalness={0.22} />
+        </mesh>
+        <mesh name="agent-character-chest-panel" position={[0, 0.58, 0.235]}>
+          <boxGeometry args={[0.28, 0.16, 0.035]} />
+          <meshStandardMaterial color="#0d1117" emissive={signalColor} emissiveIntensity={0.18} roughness={0.28} metalness={0.18} />
+        </mesh>
+        <mesh name="agent-character-head" position={[0, 0.98, 0]}>
           <sphereGeometry args={[0.25, 22, 18]} />
           <meshStandardMaterial color="#e6edf3" roughness={0.44} metalness={0.18} />
         </mesh>
-        <mesh position={[-0.085, 1.01, 0.22]}>
-          <sphereGeometry args={[0.032, 10, 8]} />
-          <meshStandardMaterial color="#0d1117" />
+        <mesh name="agent-character-visor" position={[0, 1.02, 0.225]}>
+          <boxGeometry args={[0.28, 0.07, 0.04]} />
+          <meshStandardMaterial color={visorColor} emissive={signalColor} emissiveIntensity={0.28} roughness={0.2} metalness={0.1} />
         </mesh>
-        <mesh position={[0.085, 1.01, 0.22]}>
-          <sphereGeometry args={[0.032, 10, 8]} />
-          <meshStandardMaterial color="#0d1117" />
+        <mesh name="agent-character-antenna-stem" position={[0, 1.25, 0]}>
+          <cylinderGeometry args={[0.012, 0.012, 0.18, 8]} />
+          <meshStandardMaterial color="#d7e0ea" roughness={0.42} />
         </mesh>
-        <mesh position={[-0.34, 0.55, 0]}>
+        <mesh name="agent-character-status-light" position={[0, 1.36, 0]}>
+          <sphereGeometry args={[0.045, 12, 10]} />
+          <meshStandardMaterial color={signalColor} emissive={signalColor} emissiveIntensity={0.58} roughness={0.22} />
+        </mesh>
+        <mesh name="agent-character-left-hand" position={[-0.34, 0.55, 0]}>
           <sphereGeometry args={[0.075, 12, 10]} />
           <meshStandardMaterial color="#d7e0ea" roughness={0.45} />
         </mesh>
-        <mesh position={[0.34, 0.55, 0]}>
+        <mesh name="agent-character-right-hand" position={[0.34, 0.55, 0]}>
           <sphereGeometry args={[0.075, 12, 10]} />
           <meshStandardMaterial color="#d7e0ea" roughness={0.45} />
         </mesh>
-        <mesh position={[0.36, 0.22 + workloadHeight / 2, -0.16]}>
+        <mesh name="agent-character-workload-meter" position={[0.36, 0.22 + workloadHeight / 2, -0.16]}>
           <boxGeometry args={[0.08, workloadHeight, 0.08]} />
           <meshStandardMaterial color={node.color} emissive={node.color} emissiveIntensity={0.24} />
         </mesh>

@@ -280,6 +280,13 @@ export function ToolStudioPanel({
       const group = new THREE.Group();
       const bodyGeometry = new THREE.CylinderGeometry(0.28, 0.34, 0.82, 24);
       const headGeometry = new THREE.SphereGeometry(0.26, 24, 16);
+      const visorGeometry = new THREE.BoxGeometry(0.3, 0.07, 0.04);
+      const chestPanelGeometry = new THREE.BoxGeometry(0.24, 0.16, 0.04);
+      const footGeometry = new THREE.BoxGeometry(0.18, 0.09, 0.24);
+      const handGeometry = new THREE.SphereGeometry(0.07, 12, 10);
+      const antennaGeometry = new THREE.CylinderGeometry(0.012, 0.012, 0.18, 8);
+      const statusLightGeometry = new THREE.SphereGeometry(0.045, 12, 10);
+      const roleHaloGeometry = new THREE.TorusGeometry(0.42, 0.016, 8, 48);
       const orbitGeometry = new THREE.TorusGeometry(1.52, 0.012, 8, 80);
       const orbit = new THREE.Mesh(
         orbitGeometry,
@@ -291,20 +298,83 @@ export function ToolStudioPanel({
 
       toolModes.forEach((item, index) => {
         const angle = (index / toolModes.length) * Math.PI * 2 - Math.PI / 2;
+        const accent = palette[index];
         const material = new THREE.MeshStandardMaterial({
-          color: palette[index],
-          roughness: 0.42,
+          color: accent,
+          emissive: accent,
+          emissiveIntensity: 0.07,
+          roughness: 0.36,
+          metalness: 0.12
+        });
+        const shellMaterial = new THREE.MeshStandardMaterial({ color: 0xe6edf3, roughness: 0.44, metalness: 0.12 });
+        const visorMaterial = new THREE.MeshStandardMaterial({
+          color: 0x9fd4ff,
+          emissive: accent,
+          emissiveIntensity: 0.28,
+          roughness: 0.2,
           metalness: 0.08
         });
+        const panelMaterial = new THREE.MeshStandardMaterial({
+          color: 0x0d1117,
+          emissive: accent,
+          emissiveIntensity: 0.18,
+          roughness: 0.28,
+          metalness: 0.12
+        });
         const body = new THREE.Mesh(bodyGeometry.clone(), material);
-        const head = new THREE.Mesh(headGeometry.clone(), material.clone());
+        const head = new THREE.Mesh(headGeometry.clone(), shellMaterial.clone());
+        const visor = new THREE.Mesh(visorGeometry.clone(), visorMaterial);
+        const chestPanel = new THREE.Mesh(chestPanelGeometry.clone(), panelMaterial);
+        const leftFoot = new THREE.Mesh(footGeometry.clone(), shellMaterial.clone());
+        const rightFoot = new THREE.Mesh(footGeometry.clone(), shellMaterial.clone());
+        const leftHand = new THREE.Mesh(handGeometry.clone(), shellMaterial.clone());
+        const rightHand = new THREE.Mesh(handGeometry.clone(), shellMaterial.clone());
+        const antenna = new THREE.Mesh(antennaGeometry.clone(), shellMaterial.clone());
+        const statusLight = new THREE.Mesh(statusLightGeometry.clone(), new THREE.MeshStandardMaterial({
+          color: accent,
+          emissive: accent,
+          emissiveIntensity: 0.55,
+          roughness: 0.18
+        }));
+        const roleHalo = new THREE.Mesh(roleHaloGeometry.clone(), new THREE.MeshStandardMaterial({
+          color: accent,
+          emissive: accent,
+          emissiveIntensity: 0.26,
+          roughness: 0.36
+        }));
         const character = new THREE.Group();
         character.position.set(Math.cos(angle) * 1.55, -0.46, Math.sin(angle) * 1.55);
         character.userData = { mode: item.id };
+        character.name = `tool-agent-character-${item.id}`;
+        body.name = "tool-agent-character-torso";
+        head.name = "tool-agent-character-head";
+        visor.name = "tool-agent-character-visor";
+        chestPanel.name = "tool-agent-character-chest-panel";
+        statusLight.name = "tool-agent-character-status-light";
+        roleHalo.name = "tool-agent-character-role-halo";
         body.position.y = 0;
         head.position.y = 0.58;
+        visor.position.set(0, 0.62, 0.23);
+        chestPanel.position.set(0, 0.15, 0.3);
+        leftFoot.position.set(-0.14, -0.44, 0.08);
+        rightFoot.position.set(0.14, -0.44, 0.08);
+        leftHand.position.set(-0.34, 0.08, 0);
+        rightHand.position.set(0.34, 0.08, 0);
+        antenna.position.set(0, 0.9, 0);
+        statusLight.position.set(0, 1.02, 0);
+        roleHalo.rotation.x = Math.PI / 2;
+        roleHalo.position.y = -0.48;
         character.add(body);
         character.add(head);
+        character.add(visor);
+        character.add(chestPanel);
+        character.add(leftFoot);
+        character.add(rightFoot);
+        character.add(leftHand);
+        character.add(rightHand);
+        character.add(antenna);
+        character.add(statusLight);
+        character.add(roleHalo);
         group.add(character);
       });
 

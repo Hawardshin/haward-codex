@@ -70,6 +70,7 @@
 | REQ-WM-069 | Prose text, button/control labels, and long tokens such as paths, commands, and code shall follow a shared text-wrapping contract. Korean and mixed Korean/English prose shall avoid awkward character-by-character breaks through keep-all/natural wrapping, long tokens shall use anywhere-style overflow wrapping so they do not push the layout, and button labels shall not exceed parent width. | must | Text wrapping static test, desktop/mobile Browser smoke, long-token overflow audit, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-070 | The desktop product UI shall split scrolling by work scope, including page, activity rail, settings, terminal, source explorer, and Tool Studio list/detail/environment regions. Each scroll scope shall use `overscroll-behavior`, stable gutter, restrained scrollbar color tokens, and paint containment where useful, while offscreen 3D/animated work shall pause so it does not degrade interaction speed. | must | Scoped scroll static test, scroll color token test, Tool Studio 3D pause test, desktop/mobile Browser scroll smoke, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
 | REQ-WM-071 | Tool Studio source shall not keep public types, static catalog data, UI rendering, and 3D effects mixed inside one oversized component. At minimum, public types and static Tool Studio catalog data shall live in separate modules while the existing `ToolStudioPanel` export and mode request contract remain compatible. | must | Tool Studio module separation static test, type re-export test, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
+| REQ-WM-072 | Agent collaboration characters shall not read as plain cylinders and spheres. They shall use a consistent robot-like silhouette that communicates role and status. The Agents collaboration scene and Tool Studio character map shall share details such as visor, chest/status detail, and role halo while keeping motion restrained and preserving existing reduce-motion/offscreen pause contracts. | must | Character design static test, desktop/mobile Browser canvas smoke, nonblank screenshot QA, `pnpm test`, `tsc --noEmit`, `pnpm run check`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` |
 
 ## Scope
 
@@ -123,6 +124,7 @@
 - Shared wrapping contract for prose, button/control labels, and long path/command/code tokens
 - Scope-separated scrolling plus restrained scrollbar color and performance contracts for page, rail, settings, terminal, source explorer, and Tool Studio regions
 - Tool Studio public type and static catalog data modules with existing export compatibility
+- Shared robot-like character design language for the Agents collaboration scene and Tool Studio character map
 - Vercel deployment docs
 
 ## Non-Goals

@@ -1,0 +1,33 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "agent-character-design",
+  "user_request_summary": "Improve the agent character design in the Workspace Monitor UI.",
+  "requirements": [
+    "REQ-WM-072"
+  ],
+  "implementation_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/AgentCollaborationScene.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/ToolStudioPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor exec tsc --noEmit",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter workspace-monitor run perf:budget",
+    "Playwright static export desktop/mobile canvas smoke",
+    "Screenshot QA"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/work-timings/2026/2026-06-05-agent-character-design.json"
+  ],
+  "generated_snapshot_files_excluded": [
+    "platform-desktop-app/renderer/workspace-monitor/public/workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/customer-workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json"
+  ]
+}
