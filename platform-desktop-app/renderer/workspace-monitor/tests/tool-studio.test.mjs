@@ -17,6 +17,14 @@ const toolStudio = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "ToolStudioPanel.tsx"),
   "utf8"
 );
+const runtimeTerminalDrawer = fs.readFileSync(
+  path.join(projectRoot, "components", "workbench", "RuntimeTerminalDrawer.tsx"),
+  "utf8"
+);
+const nativeGitWorkbench = fs.readFileSync(
+  path.join(projectRoot, "components", "workbench", "NativeGitWorkbench.tsx"),
+  "utf8"
+);
 const toolStudioData = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "tool-studio", "data.ts"),
   "utf8"
@@ -407,12 +415,27 @@ test("Operator Center and task run copy localize high-visibility Korean UI", () 
   assert.match(operatorCenterDialog, /\$\{section\.shortLabel\} 열기/);
   assert.match(monitorShell, /질문 자동 보류는 초기화 설정에서만 바꿉니다/);
   assert.match(monitorShell, /로그 열기/);
-  assert.match(monitorShell, /제한된 stdout\/stderr 미리보기와 실행 기록 JSON/);
+  assert.match(monitorShell, /제한된 표준 출력\/오류 미리보기와 실행 기록 JSON/);
   assert.match(monitorShell, /label="기록 날짜"/);
   assert.match(monitorShell, /label="기록 문서"/);
   assert.match(monitorShell, /작업 기록과 모니터링 신호/);
   assert.match(monitorShell, /모든 기록 유형/);
+  assert.match(monitorShell, /작업 실행 저장소/);
+  assert.match(monitorShell, /CLI 실행 경로/);
+  assert.match(monitorShell, /공개 배포 차단 요소/);
+  assert.match(toolStudioData, /표준 출력\/오류와 작업 실행 기록/);
+  assert.match(toolStudio, /빠른 작업 메뉴/);
+  assert.match(toolStudio, /가상 환경 생성/);
+  assert.match(nativeGitWorkbench, /보관 항목을 선택하세요/);
+  assert.match(runtimeTerminalDrawer, /구조화된 터미널 이벤트/);
   assert.doesNotMatch(monitorShell, /히스토리와 모니터링 통합 stream/);
+  assert.doesNotMatch(monitorShell, /task-run store에/);
+  assert.doesNotMatch(monitorShell, /decision inbox로/);
+  assert.doesNotMatch(monitorShell, /CLI lane으로|CLI lane,|CLI lane 실행|CLI lane을/);
+  assert.doesNotMatch(monitorShell, /blocker나|배포 blocker/);
+  assert.doesNotMatch(monitorShell, /Agent proposal 저장|Tauri runtime이|native 런타임|필터와 snapshot/);
+  assert.doesNotMatch(toolStudio, /빠른 액션 메뉴|Smoke 실행|workflow 복사|Registry 반영/);
+  assert.doesNotMatch(nativeGitWorkbench, /Stash를 선택하세요|선택 Stash|전체 Stash|pathspec/);
 });
 
 test("Operator history surfaces keep timeline documents in bounded scroll panes", () => {
@@ -544,7 +567,7 @@ test("AgentCore builder supports multi-capability bundles", () => {
   assert.match(monitorShell, /type AgentCoreCapabilityOption = \{/);
   assert.match(monitorShell, /const agentCoreCapabilityOptions: AgentCoreCapabilityOption\[\] = \[/);
   assert.match(monitorShell, /id:\s*"runtime"[\s\S]*?id:\s*"memory"[\s\S]*?id:\s*"gateway"[\s\S]*?id:\s*"browser"[\s\S]*?id:\s*"code_interpreter"[\s\S]*?id:\s*"identity"[\s\S]*?id:\s*"policy"[\s\S]*?id:\s*"observability"[\s\S]*?id:\s*"evaluation"/);
-  assert.match(monitorShell, /resourceKo:\s*"Runtime"[\s\S]*?resourceKo:\s*"Memory"[\s\S]*?resourceKo:\s*"Gateway"[\s\S]*?resourceKo:\s*"Built-in Tools"/);
+  assert.match(monitorShell, /resourceKo:\s*"런타임"[\s\S]*?resourceKo:\s*"메모리"[\s\S]*?resourceKo:\s*"게이트웨이"[\s\S]*?resourceKo:\s*"기본 제공 도구"/);
   assert.match(monitorShell, /const agentCoreResourceLifecycleSteps = \[/);
   assert.match(monitorShell, /selectedCapabilityIds: string\[\] = blueprint\.capabilities/);
   assert.match(monitorShell, /selectedCapabilities\.map\(\(item\) => item\.localCapability\)/);
@@ -578,7 +601,7 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(monitorShell, /targetSection:\s*"tools"/);
   assert.match(monitorShell, /nextStep:\s*uiLanguage === "ko" \? "빌드 모드에서 Python 소스와 입력 스키마부터 선택합니다\."/);
   assert.match(monitorShell, /id: "source", label: "소스 선택", actionLabel: "툴 만들기", run: selectToolStep\("build", "source"\)/);
-  assert.match(monitorShell, /id: "venv", label: "입력과 venv 확인", actionLabel: "파이썬 환경", run: selectToolStep\("environment", "venv"\)/);
+  assert.match(monitorShell, /id: "venv", label: "입력과 가상 환경 확인", actionLabel: "파이썬 환경", run: selectToolStep\("environment", "venv"\)/);
   assert.match(monitorShell, /setRequestedToolMode\(\(previous\) => \(\{ mode, requestId: \(previous\?\.requestId \|\| 0\) \+ 1 \}\)\)/);
   assert.match(monitorShell, /openSection\("tools", \{ intentId: "build-tool", flowStepId \}\)/);
   assert.match(monitorShell, /id:\s*"build-tool"[\s\S]*?label:\s*uiLanguage === "ko" \? "툴 만들기"/);

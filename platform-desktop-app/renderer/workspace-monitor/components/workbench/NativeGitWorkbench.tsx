@@ -226,7 +226,7 @@ export function NativeGitWorkbench({
     if (!selectedStash) {
       return;
     }
-    if (window.confirm(`${selectedStash.reference} stash를 삭제할까요?`)) {
+    if (window.confirm(`${selectedStash.reference} 보관 항목을 삭제할까요?`)) {
       runAction("drop_stash", { stashRef: selectedStash.reference });
     }
   };
@@ -237,12 +237,12 @@ export function NativeGitWorkbench({
         <div>
           <p className="eyebrow">Native Git Workbench</p>
           <h2>Git 작업대</h2>
-          <p>변경 선택, diff 검토, 커밋, stash, history, fetch/pull/push를 한 작업대에서 처리합니다.</p>
+	          <p>변경 선택, 차이 검토, 커밋, 보관, 기록, fetch/pull/push를 한 작업대에서 처리합니다.</p>
         </div>
         <div className="desktop-actions">
           <button type="button" onClick={() => runAction("refresh")} disabled={!runtimeAvailable || busy !== ""}>
             <Activity size={16} aria-hidden="true" />
-            <span>{busy === "refresh" ? "Refreshing" : "새로고침"}</span>
+	            <span>{busy === "refresh" ? "새로고침 중" : "새로고침"}</span>
           </button>
         </div>
       </div>
@@ -250,23 +250,23 @@ export function NativeGitWorkbench({
 
       <div className="task-run-summary-strip native-git-summary">
         <article>
-          <span>review</span>
+	          <span>검토</span>
           <strong>{reviewState}</strong>
         </article>
         <article>
-          <span>branch</span>
-          <strong>{status?.branch || "pending"}</strong>
+	          <span>브랜치</span>
+	          <strong>{status?.branch || "대기 중"}</strong>
         </article>
         <article>
           <span>upstream</span>
-          <strong>{status?.upstream || "not set"}</strong>
+	          <strong>{status?.upstream || "미설정"}</strong>
         </article>
         <article>
           <span>sync</span>
           <strong>{syncState}</strong>
         </article>
         <article>
-          <span>lines</span>
+	          <span>줄 변경</span>
           <strong>+{includedFiles.length ? includedAdditions : totalAdditions} / -{includedFiles.length ? includedDeletions : totalDeletions}</strong>
         </article>
       </div>
@@ -276,20 +276,20 @@ export function NativeGitWorkbench({
           <header>
             <div>
               <span>{status?.repositoryRoot || workspacePathFallback || "repository pending"}</span>
-              <h3>{activeView === "changes" ? "변경 파일" : activeView === "history" ? "커밋 히스토리" : "Stash"}</h3>
+	              <h3>{activeView === "changes" ? "변경 파일" : activeView === "history" ? "커밋 기록" : "보관 항목"}</h3>
             </div>
             <strong>{status?.clean ? "clean" : status?.conflicted ? "conflict" : "dirty"}</strong>
           </header>
 
           <div className="native-git-view-tabs" role="tablist" aria-label="Git workbench views">
             <button type="button" className={activeView === "changes" ? "active" : ""} onClick={() => setActiveView("changes")}>
-              Changes
+	              변경
             </button>
             <button type="button" className={activeView === "history" ? "active" : ""} onClick={() => setActiveView("history")}>
-              History
+	              기록
             </button>
             <button type="button" className={activeView === "stashes" ? "active" : ""} onClick={() => setActiveView("stashes")}>
-              Stash
+	              보관
             </button>
           </div>
 
@@ -463,7 +463,7 @@ export function NativeGitWorkbench({
                   <div className="native-git-diff-empty">
                     <Clock3 size={18} aria-hidden="true" />
                     <strong>커밋 파일 요약 없음</strong>
-                    <span>아직 표시할 history 데이터가 없습니다.</span>
+	                    <span>아직 표시할 기록 데이터가 없습니다.</span>
                   </div>
                 )}
               </div>
@@ -474,24 +474,24 @@ export function NativeGitWorkbench({
             <>
               <header>
                 <div>
-                  <span>{selectedStash?.reference || "stash"}</span>
-                  <h3>{selectedStash?.message || "Stash를 선택하세요"}</h3>
-                  {selectedStash && <small>{selectedStash.branch || "branch unknown"} / {selectedStash.filesChanged} files</small>}
+	                  <span>{selectedStash?.reference || "보관 항목"}</span>
+	                  <h3>{selectedStash?.message || "보관 항목을 선택하세요"}</h3>
+	                  {selectedStash && <small>{selectedStash.branch || "브랜치 알 수 없음"} / {selectedStash.filesChanged}개 파일</small>}
                 </div>
                 <Archive size={18} aria-hidden="true" />
               </header>
               <div className="native-git-stash-detail">
                 <button type="button" onClick={() => selectedStash && runAction("apply_stash", { stashRef: selectedStash.reference })} disabled={!runtimeAvailable || busy !== "" || !selectedStash}>
                   <Archive size={16} aria-hidden="true" />
-                  <span>Apply</span>
+	                  <span>적용</span>
                 </button>
                 <button type="button" onClick={() => selectedStash && runAction("pop_stash", { stashRef: selectedStash.reference })} disabled={!runtimeAvailable || busy !== "" || !selectedStash}>
                   <RotateCcw size={16} aria-hidden="true" />
-                  <span>Pop</span>
+	                  <span>적용 후 삭제</span>
                 </button>
                 <button type="button" onClick={dropSelectedStash} disabled={!runtimeAvailable || busy !== "" || !selectedStash}>
                   <Trash2 size={16} aria-hidden="true" />
-                  <span>Drop</span>
+	                  <span>삭제</span>
                 </button>
               </div>
             </>
@@ -527,27 +527,27 @@ export function NativeGitWorkbench({
             <span>{busy === "create_branch" ? "Creating" : "브랜치 만들기"}</span>
           </button>
 
-          <label className="wide-field">
-            <span>커밋 요약 / stash 이름</span>
+	          <label className="wide-field">
+	            <span>커밋 요약 / 보관 이름</span>
             <input value={commitMessage} onChange={(event) => onCommitMessageChange(event.target.value)} />
           </label>
           <button className="native-git-commit-button" type="button" onClick={() => runAction("commit_selected", { filePaths: includedFilePaths })} disabled={!runtimeAvailable || busy !== "" || !commitMessage.trim() || includedFilePaths.length === 0}>
             <ClipboardCheck size={16} aria-hidden="true" />
-            <span>{busy === "commit_selected" ? "Committing" : `${includedFilePaths.length}개 선택 커밋`}</span>
+	            <span>{busy === "commit_selected" ? "커밋 중" : `${includedFilePaths.length}개 선택 커밋`}</span>
           </button>
           <button type="button" onClick={() => runAction("commit_all")} disabled={!runtimeAvailable || busy !== "" || !commitMessage.trim() || dirtyCount === 0}>
             <ClipboardCheck size={16} aria-hidden="true" />
-            <span>{busy === "commit_all" ? "Committing" : "전체 변경 커밋"}</span>
+	            <span>{busy === "commit_all" ? "커밋 중" : "전체 변경 커밋"}</span>
           </button>
 
           <div className="native-git-danger-actions">
             <button type="button" onClick={() => runAction("stash_selected", { filePaths: includedFilePaths })} disabled={!runtimeAvailable || busy !== "" || includedFilePaths.length === 0}>
               <Archive size={16} aria-hidden="true" />
-              <span>선택 Stash</span>
+	              <span>선택 보관</span>
             </button>
             <button type="button" onClick={() => runAction("stash_all")} disabled={!runtimeAvailable || busy !== "" || dirtyCount === 0}>
               <Archive size={16} aria-hidden="true" />
-              <span>전체 Stash</span>
+	              <span>전체 보관</span>
             </button>
             <button type="button" onClick={discardSelected} disabled={!runtimeAvailable || busy !== "" || includedFilePaths.length === 0}>
               <Trash2 size={16} aria-hidden="true" />
@@ -557,7 +557,7 @@ export function NativeGitWorkbench({
 
           <div className="native-git-commit-guard">
             <ShieldCheck size={16} aria-hidden="true" />
-            <span>선택 커밋은 체크된 파일 pathspec만 커밋합니다. Stash/Discard는 선택 파일 목록을 검증한 뒤 실행합니다.</span>
+	            <span>선택 커밋은 체크한 파일 경로만 커밋합니다. 보관/버리기는 선택 파일 목록을 검증한 뒤 실행합니다.</span>
           </div>
 
           {(status?.lastCommandOutput || status?.lastCommandError) && (

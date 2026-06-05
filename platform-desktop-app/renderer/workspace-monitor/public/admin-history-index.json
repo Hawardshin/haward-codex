@@ -1,17 +1,17 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-05T12:13:08.611Z",
+  "generatedAt": "2026-06-05T12:27:30.527Z",
   "summary": {
-    "documents": 2227,
+    "documents": 2233,
     "days": 6,
     "categories": [
       {
         "category": "evaluation",
-        "count": 924
+        "count": 925
       },
       {
         "category": "web-search",
-        "count": 359
+        "count": 360
       },
       {
         "category": "plan",
@@ -19,19 +19,19 @@
       },
       {
         "category": "request-trace",
-        "count": 288
+        "count": 289
       },
       {
         "category": "work-timing",
-        "count": 211
+        "count": 212
       },
       {
         "category": "user-request",
-        "count": 72
+        "count": 73
       },
       {
         "category": "work-summary",
-        "count": 39
+        "count": 40
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6026544,
+    "totalSourceBytes": 6030923,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,118 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-05-korean-copy-pass-ko-md",
+      "path": "_history/evaluations/2026/2026-06-05-korean-copy-pass.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Korean Copy Pass",
+      "excerpt": "Evaluation: Korean Copy Pass 결과: pass. 사용자 요청 반영: 어색한 한국어 혼용 표현을 사용자 고빈도 화면에서 정리했다. task run store , CLI lane , decision inbox , blocker , proposal , native runtime , snapshot 계열 표현을 한국어 문맥에 맞게 바꿨다. Git/CLI/API처럼 유지해야 하는 기술명은 유지하고 버튼/설명 동사는 한국어로 정리했다. 검증: corepack pnpm filter wor",
+      "html": "<p>Evaluation: Korean Copy Pass 결과: pass. 사용자 요청 반영: 어색한 한국어 혼용 표현을 사용자 고빈도 화면에서 정리했다. task run store , CLI lane , decision inbox , blocker , proposal , native runtime , snapshot 계열 표현을 한국어 문맥에 맞게 바꿨다. Git/CLI/API처럼 유지해야 하는 기술명은 유지하고 버튼/설명 동사는 한국어로 정리했다. 검증: corepack pnpm filter workspace monitor test : pass, 52 tests. corepack pnpm filter workspace monitor run</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 804,
+      "updatedAt": "2026-06-05T12:27:23.072Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-05-korean-copy-pass-json",
+      "path": "_history/work-timings/2026/2026-06-05-korean-copy-pass.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 05 Korean Copy Pass",
+      "excerpt": "{ \"schema version\": \"2026 06 05\", \"work id\": \"2026 06 05 korean copy pass\", \"phases\": { \"phase\": \"web reference\", \"status\": \"completed\", \"notes\": \"Checked Korean public language and UI writing references.\" }, { \"phase\": \"copy audit\", \"status\": \"completed\", \"notes\": \"Searched high",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 05&quot;, &quot;work id&quot;: &quot;2026 06 05 korean copy pass&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web reference&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Checked Korean public language and UI writing references.&quot; }, { &quot;phase&quot;: &quot;copy audit&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Searched high frequency Korean UI strings for awkward mixed terminology.&quot; }, { &quot;phase&quot;: &quot;impl</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 579,
+      "updatedAt": "2026-06-05T12:27:23.072Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-05-korean-copy-pass-ko-md",
+      "path": "_history/request-traces/2026/2026-06-05-korean-copy-pass.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Korean Copy Pass",
+      "excerpt": "Request Trace: Korean Copy Pass 요청: 한글이 어색한 UI 문구를 고치기. 요구사항: PDA REQ 045. 주요 변경 파일: platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx platform desktop app/renderer/workspace monitor/components/workbench/ToolStudioPanel.tsx platform desktop app/renderer/",
+      "html": "<p>Request Trace: Korean Copy Pass 요청: 한글이 어색한 UI 문구를 고치기. 요구사항: PDA REQ 045. 주요 변경 파일: platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx platform desktop app/renderer/workspace monitor/components/workbench/ToolStudioPanel.tsx platform desktop app/renderer/workspace monitor/components/workbench/tool studio/data.ts platform desktop app/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 901,
+      "updatedAt": "2026-06-05T12:27:23.071Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-05-korean-copy-pass-ko-md",
+      "path": "_history/user-requests/2026/2026-06-05-korean-copy-pass.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "Korean Copy Pass User Request",
+      "excerpt": "Korean Copy Pass User Request 요약: 사용자가 \"한글이 어색한거 다 고치기\"를 요청했다. 범위: Workspace Monitor의 고빈도 한국어 UI 문구, 버튼, 빈 상태, 패널 설명, Git/터미널/툴/에이전트 실행 화면. 제외: 코드 내부 영문 타입, 영문 UI 분기, 명령어/파일명/기술 고유명.",
+      "html": "<p>Korean Copy Pass User Request 요약: 사용자가 &quot;한글이 어색한거 다 고치기&quot;를 요청했다. 범위: Workspace Monitor의 고빈도 한국어 UI 문구, 버튼, 빈 상태, 패널 설명, Git/터미널/툴/에이전트 실행 화면. 제외: 코드 내부 영문 타입, 영문 UI 분기, 명령어/파일명/기술 고유명.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 350,
+      "updatedAt": "2026-06-05T12:27:23.071Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-05-korean-copy-pass-ko-md",
+      "path": "_history/web-searches/2026/2026-06-05-korean-copy-pass.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "2026 06 05 Korean Copy Pass Web Search",
+      "excerpt": "2026 06 05 Korean Copy Pass Web Search 요청: 어색한 한국어 UI 문구 정리. 검색/참고: 국립국어원 공공언어/다듬은 말 안내: https://www.korean.go.kr/front/support/supportIntro.do?mn id=163 Microsoft Style Guide, simple words and concise sentences: https://learn.microsoft.com/en us/style guide/word choice/use simpl",
+      "html": "<p>2026 06 05 Korean Copy Pass Web Search 요청: 어색한 한국어 UI 문구 정리. 검색/참고: 국립국어원 공공언어/다듬은 말 안내: https://www.korean.go.kr/front/support/supportIntro.do?mn id=163 Microsoft Style Guide, simple words and concise sentences: https://learn.microsoft.com/en us/style guide/word choice/use simple words concise sentences Microsoft Windows app writing style: https://learn.mic</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 780,
+      "updatedAt": "2026-06-05T12:27:23.071Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-05-korean-copy-pass-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-05-korean-copy-pass.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Workspace Monitor Korean Copy Pass",
+      "excerpt": "Workspace Monitor Korean Copy Pass PDA REQ 045를 추가해 고빈도 한국어 UI에서 어색한 한영 혼용 표현을 막는 기준을 남겼다. MonitorShell.tsx , Tool Studio, Runtime Terminal Drawer, Native Git Workbench의 사용자 표시 문구를 정리했다. tool studio.test.mjs 에 금지 표현 회귀 검사를 추가했다. 검증: workspace monitor test , workspace monitor chec",
+      "html": "<p>Workspace Monitor Korean Copy Pass PDA REQ 045를 추가해 고빈도 한국어 UI에서 어색한 한영 혼용 표현을 막는 기준을 남겼다. MonitorShell.tsx , Tool Studio, Runtime Terminal Drawer, Native Git Workbench의 사용자 표시 문구를 정리했다. tool studio.test.mjs 에 금지 표현 회귀 검사를 추가했다. 검증: workspace monitor test , workspace monitor check , workspace monitor build 통과.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 451,
+      "updatedAt": "2026-06-05T12:27:23.071Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-2026-2026-06-05-md",
+      "path": "_history/2026/2026-06-05.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 05",
+      "excerpt": "2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted W",
+      "html": "<p>2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted Workspace Monitor button target sizing tokens and repeated action controls for mo</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 27948,
+      "updatedAt": "2026-06-05T12:24:06.562Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
     {
       "id": "history-evaluations-2026-2026-06-05-local-history-hook-componentization-ko-md",
       "path": "_history/evaluations/2026/2026-06-05-local-history-hook-componentization.ko.md",
@@ -93,22 +205,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-2026-2026-06-05-md",
-      "path": "_history/2026/2026-06-05.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 05",
-      "excerpt": "2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted W",
-      "html": "<p>2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted Workspace Monitor button target sizing tokens and repeated action controls for mo</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 27434,
-      "updatedAt": "2026-06-05T12:10:43.431Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-work-timings-2026-2026-06-05-local-history-hook-componentization-json",
@@ -35699,27 +35795,27 @@
     {
       "date": "2026-06-05",
       "year": "2026",
-      "documentsCount": 446,
+      "documentsCount": 452,
       "categories": [
         {
           "category": "evaluation",
-          "count": 134
+          "count": 135
         },
         {
           "category": "web-search",
-          "count": 63
+          "count": 64
         },
         {
           "category": "work-timing",
-          "count": 62
+          "count": 63
         },
         {
           "category": "request-trace",
-          "count": 59
+          "count": 60
         },
         {
           "category": "user-request",
-          "count": 58
+          "count": 59
         },
         {
           "category": "plan",
@@ -35727,7 +35823,7 @@
         },
         {
           "category": "work-summary",
-          "count": 26
+          "count": 27
         },
         {
           "category": "daily-history",

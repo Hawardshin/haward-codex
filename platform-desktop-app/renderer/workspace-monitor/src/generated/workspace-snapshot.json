@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T12:13:08.609Z",
+  "generatedAt": "2026-06-05T12:27:30.524Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 444,
-    "evaluations": 26,
+    "evaluations": 25,
     "webSearches": 12,
     "timingRecords": 12,
     "historyDays": 1,
-    "adminHistoryDocuments": 2227,
+    "adminHistoryDocuments": 2233,
     "adminHistoryDays": 6,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7332,6 +7332,134 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-05-korean-copy-pass-ko-md",
+      "path": "_history/evaluations/2026/2026-06-05-korean-copy-pass.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Korean Copy Pass",
+      "excerpt": "Evaluation: Korean Copy Pass 결과: pass. 사용자 요청 반영: 어색한 한국어 혼용 표현을 사용자 고빈도 화면에서 정리했다. task run store , CLI lane , decision inbox , blocker , proposal , native runtime , snapshot 계열 표현을 한국어 문맥에 맞게 바꿨다. Git/CLI/API처럼 유지해야 하는 기술명은 유지하고 버튼/설명 동사는 한국어로 정리했다. 검증: corepack pnpm filter wor",
+      "html": "<p>Evaluation: Korean Copy Pass 결과: pass. 사용자 요청 반영: 어색한 한국어 혼용 표현을 사용자 고빈도 화면에서 정리했다. task run store , CLI lane , decision inbox , blocker , proposal , native runtime , snapshot 계열 표현을 한국어 문맥에 맞게 바꿨다. Git/CLI/API처럼 유지해야 하는 기술명은 유지하고 버튼/설명 동사는 한국어로 정리했다. 검증: corepack pnpm filter workspace monitor test : pass, 52 tests. corepack pnpm filter workspace monitor run</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 804,
+      "updatedAt": "2026-06-05T12:27:23.072Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-05-korean-copy-pass-json",
+      "path": "_history/work-timings/2026/2026-06-05-korean-copy-pass.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 05 Korean Copy Pass",
+      "excerpt": "{ \"schema version\": \"2026 06 05\", \"work id\": \"2026 06 05 korean copy pass\", \"phases\": { \"phase\": \"web reference\", \"status\": \"completed\", \"notes\": \"Checked Korean public language and UI writing references.\" }, { \"phase\": \"copy audit\", \"status\": \"completed\", \"notes\": \"Searched high",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 05&quot;, &quot;work id&quot;: &quot;2026 06 05 korean copy pass&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web reference&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Checked Korean public language and UI writing references.&quot; }, { &quot;phase&quot;: &quot;copy audit&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Searched high frequency Korean UI strings for awkward mixed terminology.&quot; }, { &quot;phase&quot;: &quot;impl</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 579,
+      "updatedAt": "2026-06-05T12:27:23.072Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-05-korean-copy-pass-ko-md",
+      "path": "_history/request-traces/2026/2026-06-05-korean-copy-pass.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Korean Copy Pass",
+      "excerpt": "Request Trace: Korean Copy Pass 요청: 한글이 어색한 UI 문구를 고치기. 요구사항: PDA REQ 045. 주요 변경 파일: platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx platform desktop app/renderer/workspace monitor/components/workbench/ToolStudioPanel.tsx platform desktop app/renderer/",
+      "html": "<p>Request Trace: Korean Copy Pass 요청: 한글이 어색한 UI 문구를 고치기. 요구사항: PDA REQ 045. 주요 변경 파일: platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx platform desktop app/renderer/workspace monitor/components/workbench/ToolStudioPanel.tsx platform desktop app/renderer/workspace monitor/components/workbench/tool studio/data.ts platform desktop app/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 901,
+      "updatedAt": "2026-06-05T12:27:23.071Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-05-korean-copy-pass-ko-md",
+      "path": "_history/user-requests/2026/2026-06-05-korean-copy-pass.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "Korean Copy Pass User Request",
+      "excerpt": "Korean Copy Pass User Request 요약: 사용자가 \"한글이 어색한거 다 고치기\"를 요청했다. 범위: Workspace Monitor의 고빈도 한국어 UI 문구, 버튼, 빈 상태, 패널 설명, Git/터미널/툴/에이전트 실행 화면. 제외: 코드 내부 영문 타입, 영문 UI 분기, 명령어/파일명/기술 고유명.",
+      "html": "<p>Korean Copy Pass User Request 요약: 사용자가 &quot;한글이 어색한거 다 고치기&quot;를 요청했다. 범위: Workspace Monitor의 고빈도 한국어 UI 문구, 버튼, 빈 상태, 패널 설명, Git/터미널/툴/에이전트 실행 화면. 제외: 코드 내부 영문 타입, 영문 UI 분기, 명령어/파일명/기술 고유명.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 350,
+      "updatedAt": "2026-06-05T12:27:23.071Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-05-korean-copy-pass-ko-md",
+      "path": "_history/web-searches/2026/2026-06-05-korean-copy-pass.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "2026 06 05 Korean Copy Pass Web Search",
+      "excerpt": "2026 06 05 Korean Copy Pass Web Search 요청: 어색한 한국어 UI 문구 정리. 검색/참고: 국립국어원 공공언어/다듬은 말 안내: https://www.korean.go.kr/front/support/supportIntro.do?mn id=163 Microsoft Style Guide, simple words and concise sentences: https://learn.microsoft.com/en us/style guide/word choice/use simpl",
+      "html": "<p>2026 06 05 Korean Copy Pass Web Search 요청: 어색한 한국어 UI 문구 정리. 검색/참고: 국립국어원 공공언어/다듬은 말 안내: https://www.korean.go.kr/front/support/supportIntro.do?mn id=163 Microsoft Style Guide, simple words and concise sentences: https://learn.microsoft.com/en us/style guide/word choice/use simple words concise sentences Microsoft Windows app writing style: https://learn.mic</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 780,
+      "updatedAt": "2026-06-05T12:27:23.071Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-05-korean-copy-pass-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-05-korean-copy-pass.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Workspace Monitor Korean Copy Pass",
+      "excerpt": "Workspace Monitor Korean Copy Pass PDA REQ 045를 추가해 고빈도 한국어 UI에서 어색한 한영 혼용 표현을 막는 기준을 남겼다. MonitorShell.tsx , Tool Studio, Runtime Terminal Drawer, Native Git Workbench의 사용자 표시 문구를 정리했다. tool studio.test.mjs 에 금지 표현 회귀 검사를 추가했다. 검증: workspace monitor test , workspace monitor chec",
+      "html": "<p>Workspace Monitor Korean Copy Pass PDA REQ 045를 추가해 고빈도 한국어 UI에서 어색한 한영 혼용 표현을 막는 기준을 남겼다. MonitorShell.tsx , Tool Studio, Runtime Terminal Drawer, Native Git Workbench의 사용자 표시 문구를 정리했다. tool studio.test.mjs 에 금지 표현 회귀 검사를 추가했다. 검증: workspace monitor test , workspace monitor check , workspace monitor build 통과.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 451,
+      "updatedAt": "2026-06-05T12:27:23.071Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-2026-2026-06-05-md",
+      "path": "_history/2026/2026-06-05.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 05",
+      "excerpt": "2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted W",
+      "html": "<p>2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted Workspace Monitor button target sizing tokens and repeated action controls for mo</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 27948,
+      "updatedAt": "2026-06-05T12:24:06.562Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-02-installable-desktop-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "설치형 데스크톱 앱 요구사항",
+      "excerpt": "설치형 데스크톱 앱 요구사항 범위 플랫폼을 Visual Studio Code처럼 사용자가 설치하는 소프트웨어로 만들기 위한 첫 요구사항이다. 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | PDA REQ 001 | 설치형 앱 제품화는 platform desktop app/ 루트 프로젝트가 소유해야 한다. | must | 프로젝트 등록부와 구조 감사 | | PDA REQ 002 | 레포지토리 setup install mode 와 end user installer pack",
+      "html": "<h1>설치형 데스크톱 앱 요구사항</h1>\n<h2>범위</h2>\n<p>플랫폼을 Visual Studio Code처럼 사용자가 설치하는 소프트웨어로 만들기 위한 첫 요구사항이다.</p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>PDA-REQ-001</td><td>설치형 앱 제품화는 <code>platform-desktop-app/</code> 루트 프로젝트가 소유해야 한다.</td><td>must</td><td>프로젝트 등록부와 구조 감사</td></tr><tr><td>PDA-REQ-002</td><td>레포지토리 setup <code>install_mode</code>와 end-user installer packaging을 문서와 설정에서 구분해야 한다.</td><td>must</td><td>product boundary 문서와 registry 검토</td></tr><tr><td>PDA-REQ-003</td><td>현재 desktop product shell은 <code>platform-desktop-app/renderer/workspace-monitor/</code>를 선택된 제품 UI 원천으로 소유해야 한다.</td><td>should</td><td>desktop distribution registry 확인</td></tr><tr><td>PDA-REQ-004</td><td>Tauri, Electron, native packaging 후보를 비교한 뒤 dependency 설치나 구현을 시작해야 한다.</td><td>must</td><td>packaging strategy와 spec traceability</td></tr><tr><td>PDA-REQ-005</td><td>배포 가능 상태는 signing, notarization/OS trust, install/update/uninstall smoke test, privacy review, dependency/license review가 끝나야 한다.</td><td>must</td><td>release gate checklist</td></tr><tr><td>PDA-REQ-006</td><td>실제 token, webhook URL, browser cookie, private snapshot을 installer에 번들하지 않아야 한다.</td><td>must</td><td>privacy/security review</td></tr><tr><td>PDA-REQ-007</td><td>macOS 실행 가능 구조는 개발자 로컬 실행, 내부 테스트 <code>.app</code>, 외부 배포 앱을 구분하고, <code>.app</code> bundle/process model, workspace 선택, optional CLI adapter, Developer ID signing, hardened runtime, notarization, stapling, update, clean Mac smoke test 기준을 명시해야 한다.</td><td>must</td><td><code>macos-execution-profile.json</code>, macOS 실행 문서, config contract</td></tr><tr><td>PDA-REQ-008</td><td>Windows 실행 가능 구조는 개발자 로컬 실행, 내부 테스트 installer, 공개 signed distribution을 구분하고, MSI/NSIS/MSIX, WebView2, code signing, SmartScreen, update, uninstall, clean Windows smoke test 기준을 명시해야 한다.</td><td>must</td><td><code>windows-execution-profile.json</code>, config contract</td></tr><tr><td>PDA-REQ-009</td><td>현재 구현 제품 shell은 Tauri v2/Rust 데스크톱 셸, project-owned <code>renderer/workspace-monitor</code> 정적 UI, <code>agent-platform</code> Python 계층, optional external CLI adapter 구조를 따라야 한다.</td><td>must</td><td><code>src-tauri/</code>, <code>package.json</code>, desktop distribution registry</td></tr><tr><td>PDA-REQ-010</td><td>Codex, Claude Code, Cursor, Antigravity 같은 AI 코딩 도구는 플랫폼 필수 런타임이 아니라 설정 가능한 선택형 capability로 처리해야 한다.</td><td>must</td><td>CLI adapter registry와 desktop registry 검토</td></tr><tr><td>PDA-REQ-011</td><td>Rust/Tauri dependency 설치 또는 빌드 실행 전에는 설치 감사 기록, license/security 검토, rollback 계획을 남겨야 한다.</td><td>must</td><td>설치 기록과 <code>planned_commands</code> 검토</td></tr><tr><td>PDA-REQ-012</td><td>public-ready 또는 “설치만 하면 됨” 수준의 표현은 macOS/Windows signing, notarization 또는 code-signing, clean-machine smoke test, update/uninstall/rollback test가 끝나기 전까지 금지해야 한다.</td><td>must</td><td>release gate와 평가 기록</td></tr><tr><td>PDA-REQ-013</td><td>설치형 앱은 Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, Claw Code를 첫 AI CLI adapter 후보로 표시하되 어떤 CLI도 앱 실행, 워크스페이스 보기, 히스토리 보기의 필수 런타임으로 만들지 않아야 한다.</td><td>must</td><td>CLI adapter registry, user-flow registry, readiness test</td></tr><tr><td>PDA-REQ-014</td><td>다중 AI CLI 실행은 여러 터미널을 단순히 여는 방식이 아니라 process graph, lane status, bounded terminal output, stdin policy, cancellation, orphan cleanup, merge gate를 가진 platform supervisor가 관리해야 한다.</td><td>must</td><td>multi-CLI architecture doc, CLI pipeline validation, resource check</td></tr><tr><td>PDA-REQ-015</td><td>CLI가 사용자 질문을 만들고 사용자가 부재 중이면 앱은 안전한 defer message를 보낼 수 있는 경우에만 보내고, dependent lane만 멈추며, 결정 항목을 decision inbox에 저장하고, 독립 작업은 계속해야 한다.</td><td>must</td><td><code>ai_cli_orchestration_flow</code>, human decision inbox, omission check</td></tr><tr><td>PDA-REQ-016</td><td>터미널 output은 raw scrollback으로만 보존하지 않고, task event, process event, artifact, decision packet, verification, reusable knowledge candidate로 구조화해 provenance, redaction, validation, retention을 기록해야 한다.</td><td>must</td><td>data accumulation contract, history/evaluation records</td></tr><tr><td>PDA-REQ-017</td><td>소스코드 편집은 처음부터 직접 구현하지 않고 Monaco Editor 같은 성숙한 오픈소스 editor surface를 우선 검토해야 하며, 파일 URI/model lifecycle, dispose, worker/runtime 제약을 제품 acceptance에서 검증해야 한다.</td><td>should</td><td>architecture doc, dependency audit, UI product acceptance</td></tr><tr><td>PDA-REQ-018</td><td>첫 실제 supervisor 구현은 allowlist된 AI CLI에 대해서만 PATH 탐지와 stdin 없는 bounded health/version check를 제공하고, 누락된 CLI는 <code>capability_missing</code>으로 표시해야 한다.</td><td>must</td><td>Tauri commands, Desktop tab, readiness/test</td></tr><tr><td>PDA-REQ-019</td><td>desktop UI는 Tauri runtime이 없을 때도 브라우저에서 안전하게 열려야 하며, CLI 실행 기능은 unavailable fallback으로 degrade해야 한다.</td><td>must</td><td>workspace-monitor build, TypeScript check</td></tr><tr><td>PDA-REQ-020</td><td>CLI supervisor는 dependency 설치 전 slice에서 shell plugin 없이 allowlist된 adapter에 한해 pipe 기반 session start, stdout/stderr polling, bounded stdin write, defer message, cancel을 제공하고, defer 시 감지된 질문을 human decision inbox에 저장해야 한다.</td><td>must</td><td>Tauri commands, Desktop tab, human decision inbox, resource/CLI pipeline check</td></tr><tr><td>PDA-REQ-021</td><td>source editing product slice는 workspace root 안의 상대 경로만 읽고 쓸 수 있어야 하며 <code>_private/</code>, <code>outputs/</code>, workspace 밖 경로, symlink escape를 차단하고 저장 전 backup을 남겨야 한다.</td><td>must</td><td>Tauri file commands, TypeScript check, resource/security review</td></tr><tr><td>PDA-REQ-022</td><td>Desktop product slice는 자동 설치 없이도 사용자가 각 CLI의 설치 힌트, 검증 명령, 공식 참조 링크를 보고, 작업 모드 프리셋으로 session prompt를 만들고, 보류된 human decision inbox 항목을 읽고 답변 상태로 저장할 수 있어야 한다.</td><td>must</td><td>Tauri decision commands, Desktop tab setup/mode/inbox UI, readiness/test</td></tr><tr><td>PDA-REQ-023</td><td>Desktop product slice는 active CLI session에서 생성되어 session metadata가 있는 decision에 대해 사용자가 명시적으로 답변과 재개를 선택하면, decision answer를 저장한 뒤 같은 답변을 해당 session stdin으로 보내고 session report를 갱신해야 한다.</td><td>must</td><td>Tauri answer-and-resume command, Desktop tab Answer &amp; Resume UI, readiness/test</td></tr></tbody></table>\n<p>| PDA-REQ-024 | Desktop product surface는 레퍼런스 UI 적용 결과로 command palette, capability center, run b</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 17730,
+      "updatedAt": "2026-06-05T12:23:55.199Z",
+      "historyDate": "2026-06-02",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-05-local-history-hook-componentization-ko-md",
       "path": "_history/evaluations/2026/2026-06-05-local-history-hook-componentization.ko.md",
       "category": "evaluation",
@@ -7394,22 +7522,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-2026-2026-06-05-md",
-      "path": "_history/2026/2026-06-05.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 05",
-      "excerpt": "2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted W",
-      "html": "<p>2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted Workspace Monitor button target sizing tokens and repeated action controls for mo</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 27434,
-      "updatedAt": "2026-06-05T12:10:43.431Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-work-timings-2026-2026-06-05-local-history-hook-componentization-json",
@@ -7536,22 +7648,6 @@
       "sourceBytes": 1312,
       "updatedAt": "2026-06-05T12:10:43.428Z",
       "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-02-installable-desktop-ko-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "설치형 데스크톱 앱 요구사항",
-      "excerpt": "설치형 데스크톱 앱 요구사항 범위 플랫폼을 Visual Studio Code처럼 사용자가 설치하는 소프트웨어로 만들기 위한 첫 요구사항이다. 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | PDA REQ 001 | 설치형 앱 제품화는 platform desktop app/ 루트 프로젝트가 소유해야 한다. | must | 프로젝트 등록부와 구조 감사 | | PDA REQ 002 | 레포지토리 setup install mode 와 end user installer pack",
-      "html": "<h1>설치형 데스크톱 앱 요구사항</h1>\n<h2>범위</h2>\n<p>플랫폼을 Visual Studio Code처럼 사용자가 설치하는 소프트웨어로 만들기 위한 첫 요구사항이다.</p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>PDA-REQ-001</td><td>설치형 앱 제품화는 <code>platform-desktop-app/</code> 루트 프로젝트가 소유해야 한다.</td><td>must</td><td>프로젝트 등록부와 구조 감사</td></tr><tr><td>PDA-REQ-002</td><td>레포지토리 setup <code>install_mode</code>와 end-user installer packaging을 문서와 설정에서 구분해야 한다.</td><td>must</td><td>product boundary 문서와 registry 검토</td></tr><tr><td>PDA-REQ-003</td><td>현재 desktop product shell은 <code>platform-desktop-app/renderer/workspace-monitor/</code>를 선택된 제품 UI 원천으로 소유해야 한다.</td><td>should</td><td>desktop distribution registry 확인</td></tr><tr><td>PDA-REQ-004</td><td>Tauri, Electron, native packaging 후보를 비교한 뒤 dependency 설치나 구현을 시작해야 한다.</td><td>must</td><td>packaging strategy와 spec traceability</td></tr><tr><td>PDA-REQ-005</td><td>배포 가능 상태는 signing, notarization/OS trust, install/update/uninstall smoke test, privacy review, dependency/license review가 끝나야 한다.</td><td>must</td><td>release gate checklist</td></tr><tr><td>PDA-REQ-006</td><td>실제 token, webhook URL, browser cookie, private snapshot을 installer에 번들하지 않아야 한다.</td><td>must</td><td>privacy/security review</td></tr><tr><td>PDA-REQ-007</td><td>macOS 실행 가능 구조는 개발자 로컬 실행, 내부 테스트 <code>.app</code>, 외부 배포 앱을 구분하고, <code>.app</code> bundle/process model, workspace 선택, optional CLI adapter, Developer ID signing, hardened runtime, notarization, stapling, update, clean Mac smoke test 기준을 명시해야 한다.</td><td>must</td><td><code>macos-execution-profile.json</code>, macOS 실행 문서, config contract</td></tr><tr><td>PDA-REQ-008</td><td>Windows 실행 가능 구조는 개발자 로컬 실행, 내부 테스트 installer, 공개 signed distribution을 구분하고, MSI/NSIS/MSIX, WebView2, code signing, SmartScreen, update, uninstall, clean Windows smoke test 기준을 명시해야 한다.</td><td>must</td><td><code>windows-execution-profile.json</code>, config contract</td></tr><tr><td>PDA-REQ-009</td><td>현재 구현 제품 shell은 Tauri v2/Rust 데스크톱 셸, project-owned <code>renderer/workspace-monitor</code> 정적 UI, <code>agent-platform</code> Python 계층, optional external CLI adapter 구조를 따라야 한다.</td><td>must</td><td><code>src-tauri/</code>, <code>package.json</code>, desktop distribution registry</td></tr><tr><td>PDA-REQ-010</td><td>Codex, Claude Code, Cursor, Antigravity 같은 AI 코딩 도구는 플랫폼 필수 런타임이 아니라 설정 가능한 선택형 capability로 처리해야 한다.</td><td>must</td><td>CLI adapter registry와 desktop registry 검토</td></tr><tr><td>PDA-REQ-011</td><td>Rust/Tauri dependency 설치 또는 빌드 실행 전에는 설치 감사 기록, license/security 검토, rollback 계획을 남겨야 한다.</td><td>must</td><td>설치 기록과 <code>planned_commands</code> 검토</td></tr><tr><td>PDA-REQ-012</td><td>public-ready 또는 “설치만 하면 됨” 수준의 표현은 macOS/Windows signing, notarization 또는 code-signing, clean-machine smoke test, update/uninstall/rollback test가 끝나기 전까지 금지해야 한다.</td><td>must</td><td>release gate와 평가 기록</td></tr><tr><td>PDA-REQ-013</td><td>설치형 앱은 Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, Claw Code를 첫 AI CLI adapter 후보로 표시하되 어떤 CLI도 앱 실행, 워크스페이스 보기, 히스토리 보기의 필수 런타임으로 만들지 않아야 한다.</td><td>must</td><td>CLI adapter registry, user-flow registry, readiness test</td></tr><tr><td>PDA-REQ-014</td><td>다중 AI CLI 실행은 여러 터미널을 단순히 여는 방식이 아니라 process graph, lane status, bounded terminal output, stdin policy, cancellation, orphan cleanup, merge gate를 가진 platform supervisor가 관리해야 한다.</td><td>must</td><td>multi-CLI architecture doc, CLI pipeline validation, resource check</td></tr><tr><td>PDA-REQ-015</td><td>CLI가 사용자 질문을 만들고 사용자가 부재 중이면 앱은 안전한 defer message를 보낼 수 있는 경우에만 보내고, dependent lane만 멈추며, 결정 항목을 decision inbox에 저장하고, 독립 작업은 계속해야 한다.</td><td>must</td><td><code>ai_cli_orchestration_flow</code>, human decision inbox, omission check</td></tr><tr><td>PDA-REQ-016</td><td>터미널 output은 raw scrollback으로만 보존하지 않고, task event, process event, artifact, decision packet, verification, reusable knowledge candidate로 구조화해 provenance, redaction, validation, retention을 기록해야 한다.</td><td>must</td><td>data accumulation contract, history/evaluation records</td></tr><tr><td>PDA-REQ-017</td><td>소스코드 편집은 처음부터 직접 구현하지 않고 Monaco Editor 같은 성숙한 오픈소스 editor surface를 우선 검토해야 하며, 파일 URI/model lifecycle, dispose, worker/runtime 제약을 제품 acceptance에서 검증해야 한다.</td><td>should</td><td>architecture doc, dependency audit, UI product acceptance</td></tr><tr><td>PDA-REQ-018</td><td>첫 실제 supervisor 구현은 allowlist된 AI CLI에 대해서만 PATH 탐지와 stdin 없는 bounded health/version check를 제공하고, 누락된 CLI는 <code>capability_missing</code>으로 표시해야 한다.</td><td>must</td><td>Tauri commands, Desktop tab, readiness/test</td></tr><tr><td>PDA-REQ-019</td><td>desktop UI는 Tauri runtime이 없을 때도 브라우저에서 안전하게 열려야 하며, CLI 실행 기능은 unavailable fallback으로 degrade해야 한다.</td><td>must</td><td>workspace-monitor build, TypeScript check</td></tr><tr><td>PDA-REQ-020</td><td>CLI supervisor는 dependency 설치 전 slice에서 shell plugin 없이 allowlist된 adapter에 한해 pipe 기반 session start, stdout/stderr polling, bounded stdin write, defer message, cancel을 제공하고, defer 시 감지된 질문을 human decision inbox에 저장해야 한다.</td><td>must</td><td>Tauri commands, Desktop tab, human decision inbox, resource/CLI pipeline check</td></tr><tr><td>PDA-REQ-021</td><td>source editing product slice는 workspace root 안의 상대 경로만 읽고 쓸 수 있어야 하며 <code>_private/</code>, <code>outputs/</code>, workspace 밖 경로, symlink escape를 차단하고 저장 전 backup을 남겨야 한다.</td><td>must</td><td>Tauri file commands, TypeScript check, resource/security review</td></tr><tr><td>PDA-REQ-022</td><td>Desktop product slice는 자동 설치 없이도 사용자가 각 CLI의 설치 힌트, 검증 명령, 공식 참조 링크를 보고, 작업 모드 프리셋으로 session prompt를 만들고, 보류된 human decision inbox 항목을 읽고 답변 상태로 저장할 수 있어야 한다.</td><td>must</td><td>Tauri decision commands, Desktop tab setup/mode/inbox UI, readiness/test</td></tr><tr><td>PDA-REQ-023</td><td>Desktop product slice는 active CLI session에서 생성되어 session metadata가 있는 decision에 대해 사용자가 명시적으로 답변과 재개를 선택하면, decision answer를 저장한 뒤 같은 답변을 해당 session stdin으로 보내고 session report를 갱신해야 한다.</td><td>must</td><td>Tauri answer-and-resume command, Desktop tab Answer &amp; Resume UI, readiness/test</td></tr></tbody></table>\n<p>| PDA-REQ-024 | Desktop product surface는 레퍼런스 UI 적용 결과로 command palette, capability center, run b</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 17096,
-      "updatedAt": "2026-06-05T12:09:53.044Z",
-      "historyDate": "2026-06-02",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
     },
@@ -9428,22 +9524,6 @@
       "workspaceArea": "_history/user-requests"
     },
     {
-      "id": "history-web-searches-2026-2026-06-05-text-wrapping-contract-ko-md",
-      "path": "_history/web-searches/2026/2026-06-05-text-wrapping-contract.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: Text Wrapping Contract",
-      "excerpt": "웹 검색 기록: Text Wrapping Contract 검색 날짜: 2026 06 05 목적: 한글/한영 문장, 버튼 라벨, 긴 경로/코드 토큰이 작은 화면에서 깨지지 않는 CSS 계약을 잡기 위한 공식 기준 확인 질의 WCAG text spacing reflow official no loss content horizontal scrolling MDN CSS overflow wrap word break white space text wrap official Material Design typog",
-      "html": "<p>웹 검색 기록: Text Wrapping Contract 검색 날짜: 2026 06 05 목적: 한글/한영 문장, 버튼 라벨, 긴 경로/코드 토큰이 작은 화면에서 깨지지 않는 CSS 계약을 잡기 위한 공식 기준 확인 질의 WCAG text spacing reflow official no loss content horizontal scrolling MDN CSS overflow wrap word break white space text wrap official Material Design typography line length wrapping official guidelines Apple Human Interface Guidelines </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1872,
-      "updatedAt": "2026-06-05T02:16:36.810Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-text-wrapping-contract-traceability-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-text-wrapping-contract/traceability.ko.md",
       "category": "project-spec",
@@ -9490,86 +9570,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-ide-action-navigation-ko-md",
-      "path": "_history/evaluations/2026/2026-06-05-ide-action-navigation.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: IDE Action Navigation",
-      "excerpt": "평가: IDE Action Navigation 결과 REQ WM 068 충족: Tool Studio에 primary dropdown, Alt+Enter quick action menu, stage/mode 우클릭 context menu, Alt+1/2 , Alt+←/→ , 기존 mode shortcut 동기화를 추가했다. 기존 shortcut은 이제 mode만 바꾸지 않고 parent stage와 selected tool까지 selectMode 경로로 맞춘다. 새 설치 없음. 기존 Radix Dr",
-      "html": "<p>평가: IDE Action Navigation 결과 REQ WM 068 충족: Tool Studio에 primary dropdown, Alt+Enter quick action menu, stage/mode 우클릭 context menu, Alt+1/2 , Alt+←/→ , 기존 mode shortcut 동기화를 추가했다. 기존 shortcut은 이제 mode만 바꾸지 않고 parent stage와 selected tool까지 selectMode 경로로 맞춘다. 새 설치 없음. 기존 Radix DropdownMenu/ContextMenu와 Button/ActionGroup primitive를 사용했다. 검증 corepack pnpm fil</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1192,
-      "updatedAt": "2026-06-05T02:09:23.222Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-05-ide-action-navigation-ko-md",
-      "path": "_history/request-traces/2026/2026-06-05-ide-action-navigation.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: IDE Action Navigation",
-      "excerpt": "요청 결과 추적: IDE Action Navigation | 항목 | 내용 | | | | | 요청 | depth나 상세 기능은 IntelliJ처럼 드롭다운, 좌클릭/우클릭, 단축키를 활용 | | 요구사항 | REQ WM 068 | | 구현 | Tool Studio quick action dropdown, stage/mode context menu, Alt+Enter , Alt+1/2 , Alt+←/→ , 기존 mode shortcut 동기화 | | 테스트 | test , tsc noEmit , c",
-      "html": "<p>요청 결과 추적: IDE Action Navigation | 항목 | 내용 | | | | | 요청 | depth나 상세 기능은 IntelliJ처럼 드롭다운, 좌클릭/우클릭, 단축키를 활용 | | 요구사항 | REQ WM 068 | | 구현 | Tool Studio quick action dropdown, stage/mode context menu, Alt+Enter , Alt+1/2 , Alt+←/→ , 기존 mode shortcut 동기화 | | 테스트 | test , tsc noEmit , check , build , build:customer , perf:budget , in app Browser smoke, Playwright d</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 617,
-      "updatedAt": "2026-06-05T02:09:23.222Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-05-ide-action-navigation-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-05-ide-action-navigation.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: IDE Action Navigation",
-      "excerpt": "작업 요약: IDE Action Navigation Tool Studio에 Alt+Enter quick action menu를 추가했다. 상위 흐름 rail과 세부 mode rail을 Radix ContextMenu trigger로 감싸 우클릭 action menu를 제공했다. Alt+1/2 로 parent flow, Alt+←/→ 로 이전/다음 detail mode를 이동하게 했다. 기존 ⌘B , ⌘⇧E , ⌘⏎ , ⌘⌥T shortcut은 selectMode 경로를 사용해 parent stag",
-      "html": "<p>작업 요약: IDE Action Navigation Tool Studio에 Alt+Enter quick action menu를 추가했다. 상위 흐름 rail과 세부 mode rail을 Radix ContextMenu trigger로 감싸 우클릭 action menu를 제공했다. Alt+1/2 로 parent flow, Alt+←/→ 로 이전/다음 detail mode를 이동하게 했다. 기존 ⌘B , ⌘⇧E , ⌘⏎ , ⌘⌥T shortcut은 selectMode 경로를 사용해 parent stage와 selected tool을 함께 동기화한다. 스크린샷 artifact: platform desktop app/renderer/workspa</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 734,
-      "updatedAt": "2026-06-05T02:09:23.222Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-ide-action-navigation-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-05-ide-action-navigation-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 05 Ide Action Navigation Evaluation Input",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"ide action navigation\", \"requirements\": \"REQ WM 068\" , \"implementation paths\": \"platform desktop app/renderer/workspace monitor/components/workbench/ToolStudioPanel.tsx\", \"platform desktop app/renderer/workspace monitor/app/globals.css\", \"",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request slug&quot;: &quot;ide action navigation&quot;, &quot;requirements&quot;: &quot;REQ WM 068&quot; , &quot;implementation paths&quot;: &quot;platform desktop app/renderer/workspace monitor/components/workbench/ToolStudioPanel.tsx&quot;, &quot;platform desktop app/renderer/workspace monitor/app/globals.css&quot;, &quot;platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs&quot; , &quot;v</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1194,
-      "updatedAt": "2026-06-05T02:09:23.221Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-05-ide-action-navigation-json",
-      "path": "_history/work-timings/2026/2026-06-05-ide-action-navigation.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 05 Ide Action Navigation",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"ide action navigation\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"notes\": \"Checked JetBrains, WAI ARIA APG, and Radix references.\" }, { \"phase\": \"implementation\", \"status\": \"completed\", \"notes\": \"Added quick action d",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request slug&quot;: &quot;ide action navigation&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Checked JetBrains, WAI ARIA APG, and Radix references.&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Added quick action dropdown, context menus, and shortcut navigation to Tool Studio.&quot; }, { &quot;phase&quot;: &quot;</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 640,
-      "updatedAt": "2026-06-05T02:09:23.220Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
     },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-ide-action-navigation-validation-ko-md",
@@ -17740,19 +17740,19 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 26
+          "count": 25
         },
         {
           "category": "request-trace",
           "count": 13
         },
         {
-          "category": "work-summary",
+          "category": "user-request",
           "count": 13
         },
         {
-          "category": "user-request",
-          "count": 12
+          "category": "work-summary",
+          "count": 13
         },
         {
           "category": "web-search",
@@ -17779,7 +17779,7 @@
           "language": "unknown",
           "title": "2026 06 05",
           "excerpt": "2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted W",
-          "updatedAt": "2026-06-05T12:10:43.431Z",
+          "updatedAt": "2026-06-05T12:24:06.562Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -17883,23 +17883,13 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-evaluations-2026-2026-06-05-ide-action-navigation-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-05-ide-action-navigation-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 05 Ide Action Navigation Evaluation Input",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"ide action navigation\", \"requirements\": \"REQ WM 068\" , \"implementation paths\": \"platform desktop app/renderer/workspace monitor/components/workbench/ToolStudioPanel.tsx\", \"platform desktop app/renderer/workspace monitor/app/globals.css\", \"",
-          "updatedAt": "2026-06-05T02:09:23.221Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-05-ide-action-navigation-ko-md",
-          "path": "_history/evaluations/2026/2026-06-05-ide-action-navigation.ko.md",
+          "id": "history-evaluations-2026-2026-06-05-korean-copy-pass-ko-md",
+          "path": "_history/evaluations/2026/2026-06-05-korean-copy-pass.ko.md",
           "category": "evaluation",
           "language": "ko",
-          "title": "평가: IDE Action Navigation",
-          "excerpt": "평가: IDE Action Navigation 결과 REQ WM 068 충족: Tool Studio에 primary dropdown, Alt+Enter quick action menu, stage/mode 우클릭 context menu, Alt+1/2 , Alt+←/→ , 기존 mode shortcut 동기화를 추가했다. 기존 shortcut은 이제 mode만 바꾸지 않고 parent stage와 selected tool까지 selectMode 경로로 맞춘다. 새 설치 없음. 기존 Radix Dr",
-          "updatedAt": "2026-06-05T02:09:23.222Z",
+          "title": "Evaluation: Korean Copy Pass",
+          "excerpt": "Evaluation: Korean Copy Pass 결과: pass. 사용자 요청 반영: 어색한 한국어 혼용 표현을 사용자 고빈도 화면에서 정리했다. task run store , CLI lane , decision inbox , blocker , proposal , native runtime , snapshot 계열 표현을 한국어 문맥에 맞게 바꿨다. Git/CLI/API처럼 유지해야 하는 기술명은 유지하고 버튼/설명 동사는 한국어로 정리했다. 검증: corepack pnpm filter wor",
+          "updatedAt": "2026-06-05T12:27:23.072Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18163,13 +18153,13 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-request-traces-2026-2026-06-05-ide-action-navigation-ko-md",
-          "path": "_history/request-traces/2026/2026-06-05-ide-action-navigation.ko.md",
+          "id": "history-request-traces-2026-2026-06-05-korean-copy-pass-ko-md",
+          "path": "_history/request-traces/2026/2026-06-05-korean-copy-pass.ko.md",
           "category": "request-trace",
           "language": "ko",
-          "title": "요청 결과 추적: IDE Action Navigation",
-          "excerpt": "요청 결과 추적: IDE Action Navigation | 항목 | 내용 | | | | | 요청 | depth나 상세 기능은 IntelliJ처럼 드롭다운, 좌클릭/우클릭, 단축키를 활용 | | 요구사항 | REQ WM 068 | | 구현 | Tool Studio quick action dropdown, stage/mode context menu, Alt+Enter , Alt+1/2 , Alt+←/→ , 기존 mode shortcut 동기화 | | 테스트 | test , tsc noEmit , c",
-          "updatedAt": "2026-06-05T02:09:23.222Z",
+          "title": "Request Trace: Korean Copy Pass",
+          "excerpt": "Request Trace: Korean Copy Pass 요청: 한글이 어색한 UI 문구를 고치기. 요구사항: PDA REQ 045. 주요 변경 파일: platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx platform desktop app/renderer/workspace monitor/components/workbench/ToolStudioPanel.tsx platform desktop app/renderer/",
+          "updatedAt": "2026-06-05T12:27:23.071Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18303,6 +18293,16 @@
           "historyDate": "2026-06-05"
         },
         {
+          "id": "history-user-requests-2026-2026-06-05-korean-copy-pass-ko-md",
+          "path": "_history/user-requests/2026/2026-06-05-korean-copy-pass.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "Korean Copy Pass User Request",
+          "excerpt": "Korean Copy Pass User Request 요약: 사용자가 \"한글이 어색한거 다 고치기\"를 요청했다. 범위: Workspace Monitor의 고빈도 한국어 UI 문구, 버튼, 빈 상태, 패널 설명, Git/터미널/툴/에이전트 실행 화면. 제외: 코드 내부 영문 타입, 영문 UI 분기, 명령어/파일명/기술 고유명.",
+          "updatedAt": "2026-06-05T12:27:23.071Z",
+          "historyDate": "2026-06-05"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-05-local-history-hook-componentization-ko-md",
           "path": "_history/user-requests/2026/2026-06-05-local-history-hook-componentization.ko.md",
           "category": "user-request",
@@ -18413,6 +18413,16 @@
           "historyDate": "2026-06-05"
         },
         {
+          "id": "history-web-searches-2026-2026-06-05-korean-copy-pass-ko-md",
+          "path": "_history/web-searches/2026/2026-06-05-korean-copy-pass.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "2026 06 05 Korean Copy Pass Web Search",
+          "excerpt": "2026 06 05 Korean Copy Pass Web Search 요청: 어색한 한국어 UI 문구 정리. 검색/참고: 국립국어원 공공언어/다듬은 말 안내: https://www.korean.go.kr/front/support/supportIntro.do?mn id=163 Microsoft Style Guide, simple words and concise sentences: https://learn.microsoft.com/en us/style guide/word choice/use simpl",
+          "updatedAt": "2026-06-05T12:27:23.071Z",
+          "historyDate": "2026-06-05"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-05-local-history-hook-componentization-ko-md",
           "path": "_history/web-searches/2026/2026-06-05-local-history-hook-componentization.ko.md",
           "category": "web-search",
@@ -18460,16 +18470,6 @@
           "title": "웹 검색 기록: Smooth Redesign Maintenance",
           "excerpt": "웹 검색 기록: Smooth Redesign Maintenance 질의 React official code splitting lazy Suspense documentation Next.js official lazy loading dynamic import documentation Apple Human Interface Guidelines motion navigation sidebars macOS official Material Design navigation information architect",
           "updatedAt": "2026-06-05T06:09:51.367Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-05-text-wrapping-contract-ko-md",
-          "path": "_history/web-searches/2026/2026-06-05-text-wrapping-contract.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: Text Wrapping Contract",
-          "excerpt": "웹 검색 기록: Text Wrapping Contract 검색 날짜: 2026 06 05 목적: 한글/한영 문장, 버튼 라벨, 긴 경로/코드 토큰이 작은 화면에서 깨지지 않는 CSS 계약을 잡기 위한 공식 기준 확인 질의 WCAG text spacing reflow official no loss content horizontal scrolling MDN CSS overflow wrap word break white space text wrap official Material Design typog",
-          "updatedAt": "2026-06-05T02:16:36.810Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18533,13 +18533,13 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-05-ide-action-navigation-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-05-ide-action-navigation.ko.md",
+          "id": "history-work-summaries-2026-2026-06-05-korean-copy-pass-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-05-korean-copy-pass.ko.md",
           "category": "work-summary",
           "language": "ko",
-          "title": "작업 요약: IDE Action Navigation",
-          "excerpt": "작업 요약: IDE Action Navigation Tool Studio에 Alt+Enter quick action menu를 추가했다. 상위 흐름 rail과 세부 mode rail을 Radix ContextMenu trigger로 감싸 우클릭 action menu를 제공했다. Alt+1/2 로 parent flow, Alt+←/→ 로 이전/다음 detail mode를 이동하게 했다. 기존 ⌘B , ⌘⇧E , ⌘⏎ , ⌘⌥T shortcut은 selectMode 경로를 사용해 parent stag",
-          "updatedAt": "2026-06-05T02:09:23.222Z",
+          "title": "Workspace Monitor Korean Copy Pass",
+          "excerpt": "Workspace Monitor Korean Copy Pass PDA REQ 045를 추가해 고빈도 한국어 UI에서 어색한 한영 혼용 표현을 막는 기준을 남겼다. MonitorShell.tsx , Tool Studio, Runtime Terminal Drawer, Native Git Workbench의 사용자 표시 문구를 정리했다. tool studio.test.mjs 에 금지 표현 회귀 검사를 추가했다. 검증: workspace monitor test , workspace monitor chec",
+          "updatedAt": "2026-06-05T12:27:23.071Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18663,13 +18663,13 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-work-timings-2026-2026-06-05-ide-action-navigation-json",
-          "path": "_history/work-timings/2026/2026-06-05-ide-action-navigation.json",
+          "id": "history-work-timings-2026-2026-06-05-korean-copy-pass-json",
+          "path": "_history/work-timings/2026/2026-06-05-korean-copy-pass.json",
           "category": "work-timing",
           "language": "unknown",
-          "title": "2026 06 05 Ide Action Navigation",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"ide action navigation\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"notes\": \"Checked JetBrains, WAI ARIA APG, and Radix references.\" }, { \"phase\": \"implementation\", \"status\": \"completed\", \"notes\": \"Added quick action d",
-          "updatedAt": "2026-06-05T02:09:23.220Z",
+          "title": "2026 06 05 Korean Copy Pass",
+          "excerpt": "{ \"schema version\": \"2026 06 05\", \"work id\": \"2026 06 05 korean copy pass\", \"phases\": { \"phase\": \"web reference\", \"status\": \"completed\", \"notes\": \"Checked Korean public language and UI writing references.\" }, { \"phase\": \"copy audit\", \"status\": \"completed\", \"notes\": \"Searched high",
+          "updatedAt": "2026-06-05T12:27:23.072Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18741,16 +18741,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2227,
+      "documents": 2233,
       "days": 6,
       "categories": [
         {
           "category": "evaluation",
-          "count": 924
+          "count": 925
         },
         {
           "category": "web-search",
-          "count": 359
+          "count": 360
         },
         {
           "category": "plan",
@@ -18758,19 +18758,19 @@
         },
         {
           "category": "request-trace",
-          "count": 288
+          "count": 289
         },
         {
           "category": "work-timing",
-          "count": 211
+          "count": 212
         },
         {
           "category": "user-request",
-          "count": 72
+          "count": 73
         },
         {
           "category": "work-summary",
-          "count": 39
+          "count": 40
         },
         {
           "category": "daily-history",
@@ -18781,7 +18781,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6026544,
+      "totalSourceBytes": 6030923,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18806,11 +18806,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 38,
+      "evidenceEvents": 37,
       "decisionEvents": 0,
       "openSignals": 17,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T12:12:07.014Z",
+      "latestEventAt": "2026-06-05T12:27:23.072Z",
       "historyDays": 1
     },
     "lanes": [
@@ -18822,11 +18822,16 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 26
+        "count": 25
       },
       {
         "id": "delivery",
         "label": "delivery",
+        "count": 13
+      },
+      {
+        "id": "intake",
+        "label": "intake",
         "count": 13
       },
       {
@@ -18837,11 +18842,6 @@
       {
         "id": "evidence",
         "label": "evidence",
-        "count": 12
-      },
-      {
-        "id": "intake",
-        "label": "intake",
         "count": 12
       },
       {
@@ -18869,7 +18869,12 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 26
+        "count": 25
+      },
+      {
+        "id": "intake",
+        "label": "intake",
+        "count": 13
       },
       {
         "id": "summary",
@@ -18880,11 +18885,6 @@
         "id": "trace",
         "label": "trace",
         "count": 13
-      },
-      {
-        "id": "intake",
-        "label": "intake",
-        "count": 12
       },
       {
         "id": "timing",
@@ -18920,6 +18920,111 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-work-timings-2026-2026-06-05-korean-copy-pass-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 05 Korean Copy Pass",
+        "detail": "{ \"schema version\": \"2026 06 05\", \"work id\": \"2026 06 05 korean copy pass\", \"phases\": { \"phase\": \"web reference\", \"status\": \"completed\", \"notes\": \"Checked Korean public language and UI writing references.\" }, { \"phase\": \"copy audit\", \"status\": \"completed\", \"notes\": \"Searched high",
+        "path": "_history/work-timings/2026/2026-06-05-korean-copy-pass.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:27:23.072Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-05-korean-copy-pass-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "Evaluation: Korean Copy Pass",
+        "detail": "Evaluation: Korean Copy Pass 결과: pass. 사용자 요청 반영: 어색한 한국어 혼용 표현을 사용자 고빈도 화면에서 정리했다. task run store , CLI lane , decision inbox , blocker , proposal , native runtime , snapshot 계열 표현을 한국어 문맥에 맞게 바꿨다. Git/CLI/API처럼 유지해야 하는 기술명은 유지하고 버튼/설명 동사는 한국어로 정리했다. 검증: corepack pnpm filter wor",
+        "path": "_history/evaluations/2026/2026-06-05-korean-copy-pass.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:27:23.072Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-05-korean-copy-pass-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "2026 06 05 Korean Copy Pass Web Search",
+        "detail": "2026 06 05 Korean Copy Pass Web Search 요청: 어색한 한국어 UI 문구 정리. 검색/참고: 국립국어원 공공언어/다듬은 말 안내: https://www.korean.go.kr/front/support/supportIntro.do?mn id=163 Microsoft Style Guide, simple words and concise sentences: https://learn.microsoft.com/en us/style guide/word choice/use simpl",
+        "path": "_history/web-searches/2026/2026-06-05-korean-copy-pass.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:27:23.071Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-05-korean-copy-pass-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Korean Copy Pass",
+        "detail": "Request Trace: Korean Copy Pass 요청: 한글이 어색한 UI 문구를 고치기. 요구사항: PDA REQ 045. 주요 변경 파일: platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx platform desktop app/renderer/workspace monitor/components/workbench/ToolStudioPanel.tsx platform desktop app/renderer/",
+        "path": "_history/request-traces/2026/2026-06-05-korean-copy-pass.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:27:23.071Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-05-korean-copy-pass-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "Korean Copy Pass User Request",
+        "detail": "Korean Copy Pass User Request 요약: 사용자가 \"한글이 어색한거 다 고치기\"를 요청했다. 범위: Workspace Monitor의 고빈도 한국어 UI 문구, 버튼, 빈 상태, 패널 설명, Git/터미널/툴/에이전트 실행 화면. 제외: 코드 내부 영문 타입, 영문 UI 분기, 명령어/파일명/기술 고유명.",
+        "path": "_history/user-requests/2026/2026-06-05-korean-copy-pass.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:27:23.071Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-05-korean-copy-pass-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "Workspace Monitor Korean Copy Pass",
+        "detail": "Workspace Monitor Korean Copy Pass PDA REQ 045를 추가해 고빈도 한국어 UI에서 어색한 한영 혼용 표현을 막는 기준을 남겼다. MonitorShell.tsx , Tool Studio, Runtime Terminal Drawer, Native Git Workbench의 사용자 표시 문구를 정리했다. tool studio.test.mjs 에 금지 표현 회귀 검사를 추가했다. 검증: workspace monitor test , workspace monitor chec",
+        "path": "_history/work-summaries/2026/2026-06-05-korean-copy-pass.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:27:23.071Z"
+      },
+      {
+        "id": "history-history-2026-2026-06-05-md",
+        "sourceType": "history",
+        "signalType": "history",
+        "lane": "history",
+        "severity": "info",
+        "status": "daily-history",
+        "title": "2026 06 05",
+        "detail": "2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted W",
+        "path": "_history/2026/2026-06-05.md",
+        "category": "daily-history",
+        "language": "unknown",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:24:06.562Z"
+      },
       {
         "id": "history-history-request-traces-2026-2026-06-05-local-history-hook-componentization-ko-md",
         "sourceType": "history",
@@ -18961,21 +19066,6 @@
         "detail": "{ \"date\": \"2026 06 05\", \"request id\": \"local history hook componentization\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"duration seconds\": 45 }, { \"phase id\": \"gap inventory\", \"label\": \"Local gap and source inventory\", \"duration seconds\": 120 }, { \"",
         "path": "_history/work-timings/2026/2026-06-05-local-history-hook-componentization.json",
         "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T12:10:43.431Z"
-      },
-      {
-        "id": "history-history-2026-2026-06-05-md",
-        "sourceType": "history",
-        "signalType": "history",
-        "lane": "history",
-        "severity": "info",
-        "status": "daily-history",
-        "title": "2026 06 05",
-        "detail": "2026 06 05 Workspace Monitor Fixed the slow code loading path in Source Review by limiting runtime source catalog refresh to the Source surface, removing duplicate file list rendering, deferring source filter work, and collapsing nested Explorer directories by default. Adjusted W",
-        "path": "_history/2026/2026-06-05.md",
-        "category": "daily-history",
         "language": "unknown",
         "date": "2026-06-05",
         "timestamp": "2026-06-05T12:10:43.431Z"
@@ -20269,96 +20359,6 @@
         "language": "ko",
         "date": "2026-06-05",
         "timestamp": "2026-06-05T02:16:36.811Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-05-text-wrapping-contract-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: Text Wrapping Contract",
-        "detail": "웹 검색 기록: Text Wrapping Contract 검색 날짜: 2026 06 05 목적: 한글/한영 문장, 버튼 라벨, 긴 경로/코드 토큰이 작은 화면에서 깨지지 않는 CSS 계약을 잡기 위한 공식 기준 확인 질의 WCAG text spacing reflow official no loss content horizontal scrolling MDN CSS overflow wrap word break white space text wrap official Material Design typog",
-        "path": "_history/web-searches/2026/2026-06-05-text-wrapping-contract.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:16:36.810Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-ide-action-navigation-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "평가: IDE Action Navigation",
-        "detail": "평가: IDE Action Navigation 결과 REQ WM 068 충족: Tool Studio에 primary dropdown, Alt+Enter quick action menu, stage/mode 우클릭 context menu, Alt+1/2 , Alt+←/→ , 기존 mode shortcut 동기화를 추가했다. 기존 shortcut은 이제 mode만 바꾸지 않고 parent stage와 selected tool까지 selectMode 경로로 맞춘다. 새 설치 없음. 기존 Radix Dr",
-        "path": "_history/evaluations/2026/2026-06-05-ide-action-navigation.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:09:23.222Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-05-ide-action-navigation-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: IDE Action Navigation",
-        "detail": "요청 결과 추적: IDE Action Navigation | 항목 | 내용 | | | | | 요청 | depth나 상세 기능은 IntelliJ처럼 드롭다운, 좌클릭/우클릭, 단축키를 활용 | | 요구사항 | REQ WM 068 | | 구현 | Tool Studio quick action dropdown, stage/mode context menu, Alt+Enter , Alt+1/2 , Alt+←/→ , 기존 mode shortcut 동기화 | | 테스트 | test , tsc noEmit , c",
-        "path": "_history/request-traces/2026/2026-06-05-ide-action-navigation.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:09:23.222Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-05-ide-action-navigation-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: IDE Action Navigation",
-        "detail": "작업 요약: IDE Action Navigation Tool Studio에 Alt+Enter quick action menu를 추가했다. 상위 흐름 rail과 세부 mode rail을 Radix ContextMenu trigger로 감싸 우클릭 action menu를 제공했다. Alt+1/2 로 parent flow, Alt+←/→ 로 이전/다음 detail mode를 이동하게 했다. 기존 ⌘B , ⌘⇧E , ⌘⏎ , ⌘⌥T shortcut은 selectMode 경로를 사용해 parent stag",
-        "path": "_history/work-summaries/2026/2026-06-05-ide-action-navigation.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:09:23.222Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-ide-action-navigation-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 05 Ide Action Navigation Evaluation Input",
-        "detail": "{ \"date\": \"2026 06 05\", \"request slug\": \"ide action navigation\", \"requirements\": \"REQ WM 068\" , \"implementation paths\": \"platform desktop app/renderer/workspace monitor/components/workbench/ToolStudioPanel.tsx\", \"platform desktop app/renderer/workspace monitor/app/globals.css\", \"",
-        "path": "_history/evaluations/2026/2026-06-05-ide-action-navigation-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:09:23.221Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-05-ide-action-navigation-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 05 Ide Action Navigation",
-        "detail": "{ \"date\": \"2026 06 05\", \"request slug\": \"ide action navigation\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"notes\": \"Checked JetBrains, WAI ARIA APG, and Radix references.\" }, { \"phase\": \"implementation\", \"status\": \"completed\", \"notes\": \"Added quick action d",
-        "path": "_history/work-timings/2026/2026-06-05-ide-action-navigation.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:09:23.220Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23161,7 +23161,7 @@
       {
         "category": "user-request",
         "root": "_history/user-requests",
-        "documentsCount": 12
+        "documentsCount": 13
       },
       {
         "category": "intent-feature-map",
@@ -23191,7 +23191,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 26
+        "documentsCount": 25
       },
       {
         "category": "daily-history",

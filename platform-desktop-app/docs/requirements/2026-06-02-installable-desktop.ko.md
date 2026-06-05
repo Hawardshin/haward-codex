@@ -52,6 +52,7 @@
 | PDA-REQ-042 | Workspace Monitor의 기본 탭뿐 아니라 Operator Center 내부 섹션도 브라우저 audit 대상이어야 하며, History timeline 문서 묶음은 날짜 카드 내부의 bounded scroll pane으로 분리되어 mobile/desktop에서 가로 overflow, 작은 클릭 타깃, 잘린 컨트롤이 없어야 한다. | must | `audit-monitor-surfaces.mjs`, `check-scroll-containers.mjs`, Playwright surface audit |
 | PDA-REQ-043 | Workspace Monitor는 누적 `_history` 기록을 기본 `workspace-snapshot.json`에 모두 중복 적재하지 않고, 기본 snapshot에는 최근 요약만 싣고 전체 기록은 lazy-loaded `admin-history-index.json` 관리자 색인으로 마이그레이션해야 한다. customer snapshot은 내부 히스토리 색인을 빈 파일로 대체해야 한다. | must | `collect-workspace.mjs`, `admin-history-index.json`, `check-history-payload.mjs`, Workspace Monitor History/Documents lazy load |
 | PDA-REQ-044 | Workspace Monitor에서 커지는 로컬 생성 데이터 로딩, 병합, 파생 색인 계산은 `MonitorShell.tsx` 안에 계속 쌓지 말고 기능별 hook/module로 분리해야 하며, 가능한 로컬 generated resource는 모듈 캐시와 idle preload를 사용해 탭 진입 지연을 줄여야 한다. 한국어 기본 UI는 핵심 화면에서 영어식 지표명과 어색한 한영 혼용 표현을 피해야 한다. | should | `useAdminHistoryIndex.ts`, `MonitorShell.tsx`, Korean copy tests, `test`, `check`, `build` |
+| PDA-REQ-045 | 한국어 기본 UI의 사용자 고빈도 화면은 `task-run store`, `CLI lane`, `decision inbox`, `blocker`, `proposal`, `native runtime`, `snapshot`처럼 영어 명사가 한국어 조사와 섞인 문장을 피하고, 각각 작업 실행 저장소, CLI 실행 경로, 결정함, 차단 요소, 제안, 네이티브 런타임, 스냅샷처럼 일관된 한국어 표현으로 보여야 한다. Git, API, CLI 같은 고유 기술명은 유지하되 동작 설명은 한국어 동사로 끝내야 한다. | should | Korean copy regression tests, Workspace Monitor core/desktop/tool/git surfaces, `test`, `check` |
 
 ## 현재 상태
 

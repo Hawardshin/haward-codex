@@ -137,7 +137,7 @@ const terminalCopy = {
     noOutput: "아직 출력이 없습니다",
     send: "보내기",
     eventList: "터미널 이벤트 목록",
-    noEvents: "구조화된 terminal event가 아직 없습니다."
+    noEvents: "구조화된 터미널 이벤트가 아직 없습니다."
   },
   en: {
     launcher: "Terminal",

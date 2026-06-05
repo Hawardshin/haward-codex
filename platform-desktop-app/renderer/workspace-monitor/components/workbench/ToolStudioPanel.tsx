@@ -175,7 +175,7 @@ export function ToolStudioPanel({
         rightClick: ko ? "현재 위치의 컨텍스트 액션 메뉴 열기" : "Open context actions for the current surface"
       },
       shortcuts: [
-        { keys: "Alt+Enter", action: ko ? "빠른 액션 메뉴" : "Quick action menu" },
+        { keys: "Alt+Enter", action: ko ? "빠른 작업 메뉴" : "Quick action menu" },
         { keys: "Alt+1 / Alt+2", action: ko ? "상위 흐름 선택" : "Choose parent flow" },
         { keys: "Alt+← / Alt+→", action: ko ? "이전/다음 세부 기능" : "Previous/next detail mode" },
         ...toolModes.map((item) => ({
@@ -759,7 +759,7 @@ export function ToolStudioPanel({
             </p>
           </div>
         </div>
-        <ActionGroup className="tool-studio-actions" aria-label={ko ? "툴 스튜디오 액션" : "Tool Studio actions"} align="end" density="compact">
+        <ActionGroup className="tool-studio-actions" aria-label={ko ? "툴 스튜디오 작업" : "Tool Studio actions"} align="end" density="compact">
           <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>
               <Button
@@ -815,17 +815,17 @@ export function ToolStudioPanel({
                 className="tool-action-menu-trigger"
                 data-tool-action-menu-trigger
                 aria-haspopup="menu"
-                title={ko ? "Alt+Enter 빠른 액션" : "Alt+Enter quick actions"}
+                title={ko ? "Alt+Enter 빠른 작업" : "Alt+Enter quick actions"}
               >
                 <Keyboard size={16} aria-hidden="true" />
-                <span>{ko ? "액션" : "Actions"}</span>
+                <span>{ko ? "작업" : "Actions"}</span>
                 <kbd>⌥↵</kbd>
               </Button>
             </DropdownMenu.Trigger>
             <DropdownMenu.Portal>
               <DropdownMenu.Content className="tool-menu-content" sideOffset={8} align="end" data-tool-action-menu>
                 <DropdownMenu.Label className="tool-menu-label">
-                  {ko ? "빠른 액션" : "Quick actions"}
+                  {ko ? "빠른 작업" : "Quick actions"}
                 </DropdownMenu.Label>
                 <DropdownMenu.Item className="tool-menu-item" onSelect={() => selectAdjacentMode(-1)} data-tool-action-menu-item="previous-mode">
                   <ChevronDown size={15} aria-hidden="true" />
@@ -864,7 +864,7 @@ export function ToolStudioPanel({
                 </DropdownMenu.Item>
                 <DropdownMenu.Item className="tool-menu-item" onSelect={copyActionMap} data-tool-action-menu-item="copy-action-map">
                   <Copy size={15} aria-hidden="true" />
-                  <span>{ko ? "액션 맵 복사" : "Copy action map"}</span>
+                  <span>{ko ? "작업 목록 복사" : "Copy action map"}</span>
                 </DropdownMenu.Item>
               </DropdownMenu.Content>
             </DropdownMenu.Portal>
@@ -928,7 +928,7 @@ export function ToolStudioPanel({
                 <ContextMenu.Separator className="tool-menu-separator" />
                 <ContextMenu.Item className="tool-menu-item" onSelect={() => setActionMenuOpen(true)}>
                   <Keyboard size={15} aria-hidden="true" />
-                  <span>{ko ? "빠른 액션 메뉴" : "Quick action menu"}</span>
+                  <span>{ko ? "빠른 작업 메뉴" : "Quick action menu"}</span>
                   <kbd>⌥↵</kbd>
                 </ContextMenu.Item>
               </ContextMenu.Content>
@@ -1101,7 +1101,7 @@ export function ToolStudioPanel({
                 <div className="tool-builder-canvas">
                   <article className="tool-builder-manifest" data-tool-builder-manifest>
                     <header>
-                      <span>{ko ? "Manifest" : "Manifest"}</span>
+                      <span>{ko ? "매니페스트" : "Manifest"}</span>
                       <strong>{selectedBlueprint.manifest}</strong>
                     </header>
                     <dl>
@@ -1114,7 +1114,7 @@ export function ToolStudioPanel({
                         <dd>{selectedBlueprint.schemaPath}</dd>
                       </div>
                       <div>
-                        <dt>{ko ? "Gateway" : "Gateway"}</dt>
+	                        <dt>{ko ? "게이트웨이" : "Gateway"}</dt>
                         <dd>{labelFor(language, selectedBlueprint.gatewayKo, selectedBlueprint.gatewayEn)}</dd>
                       </div>
                     </dl>
@@ -1135,7 +1135,7 @@ export function ToolStudioPanel({
                       <span>{ko ? "패키지 점검" : "Package preflight"}</span>
                     </header>
                     <code>{selectedBlueprint.packageCommand}</code>
-                    <small>{ko ? "README, license, rollback, validation record를 함께 묶습니다." : "Bundles README, license, rollback, and validation records."}</small>
+                    <small>{ko ? "README, 라이선스, 롤백, 검증 기록을 함께 묶습니다." : "Bundles README, license, rollback, and validation records."}</small>
                   </article>
 
                   <article className="tool-builder-outputs" data-tool-builder-outputs>
@@ -1158,7 +1158,7 @@ export function ToolStudioPanel({
                       <h4>{ko ? "소스 관리만 보기" : "Manage only source files"}</h4>
                       <span>
                         {ko
-                          ? "패키지, 모듈, entry point, smoke test를 한 줄 흐름으로 고정합니다."
+	                          ? "패키지, 모듈, 진입점, 스모크 테스트를 한 줄 흐름으로 고정합니다."
                           : "Pin package, module, entry point, and smoke test in one source flow."}
                       </span>
                     </div>
@@ -1206,7 +1206,7 @@ export function ToolStudioPanel({
                     <article className="tool-python-source-card" data-tool-python-source-entrypoint>
                       <header>
                         <PlayCircle size={16} aria-hidden="true" />
-                        <span>{ko ? "entry point" : "entry point"}</span>
+	                          <span>{ko ? "진입점" : "entry point"}</span>
                       </header>
                       <code>{selectedBlueprint.entrypoint}</code>
                       <small>{selectedBlueprint.testPath}</small>
@@ -1215,7 +1215,7 @@ export function ToolStudioPanel({
                     <article className="tool-python-source-card tool-python-source-checklist" data-tool-python-source-checklist>
                       <header>
                         <ShieldCheck size={16} aria-hidden="true" />
-                        <span>{ko ? "소스 체크" : "Source check"}</span>
+	                        <span>{ko ? "소스 점검" : "Source check"}</span>
                       </header>
                       <ul>
                         {selectedSourceChecklist.map((item) => (
@@ -1259,7 +1259,7 @@ export function ToolStudioPanel({
                   </button>
                   <button type="button" onClick={onOpenTerminal} data-tool-builder-action="smoke">
                     <SquareTerminal size={16} aria-hidden="true" />
-                    <span>{ko ? "Smoke 실행" : "Run smoke"}</span>
+	                    <span>{ko ? "스모크 테스트" : "Run smoke"}</span>
                   </button>
                   <button type="button" onClick={() => selectMode("deploy")} data-tool-builder-action="package">
                     <UploadCloud size={16} aria-hidden="true" />
@@ -1273,8 +1273,8 @@ export function ToolStudioPanel({
               </section>
             )}
             {mode === "environment" && (
-              <section className="tool-environment-workbench" data-tool-environment-workbench aria-label={ko ? "Python 실행환경 작업대" : "Python execution environment workbench"}>
-                <div className="tool-environment-profiles" aria-label={ko ? "실행환경 프로필" : "Execution environment profiles"}>
+	              <section className="tool-environment-workbench" data-tool-environment-workbench aria-label={ko ? "Python 실행 환경 작업대" : "Python execution environment workbench"}>
+	                <div className="tool-environment-profiles" aria-label={ko ? "실행 환경 프로필" : "Execution environment profiles"}>
                   {pythonEnvironmentProfiles.map((profile) => (
                     <button
                       key={profile.id}
@@ -1297,11 +1297,11 @@ export function ToolStudioPanel({
                   <article className="tool-environment-runtime" data-tool-environment-runtime>
                     <header>
                       <Cpu size={16} aria-hidden="true" />
-                      <span>{ko ? "Runtime" : "Runtime"}</span>
+	                      <span>{ko ? "런타임" : "Runtime"}</span>
                     </header>
                     <dl>
                       <div>
-                        <dt>{ko ? "Interpreter" : "Interpreter"}</dt>
+	                        <dt>{ko ? "인터프리터" : "Interpreter"}</dt>
                         <dd>{selectedEnvironment.interpreter}</dd>
                       </div>
                       <div>
@@ -1309,11 +1309,11 @@ export function ToolStudioPanel({
                         <dd>{selectedEnvironment.venvPath}</dd>
                       </div>
                       <div>
-                        <dt>{ko ? "Dependencies" : "Dependencies"}</dt>
+	                        <dt>{ko ? "의존성" : "Dependencies"}</dt>
                         <dd>{selectedEnvironment.dependencyFile}</dd>
                       </div>
                       <div>
-                        <dt>{ko ? "Lock / Report" : "Lock / Report"}</dt>
+	                        <dt>{ko ? "잠금 파일 / 보고서" : "Lock / Report"}</dt>
                         <dd>{selectedEnvironment.lockfile}</dd>
                       </div>
                     </dl>
@@ -1334,7 +1334,7 @@ export function ToolStudioPanel({
                       <span>{ko ? "실행 명령" : "Run command"}</span>
                     </header>
                     <code>{selectedEnvironment.runCommand}</code>
-                    <small>{ko ? "stdout, stderr, exit code, artifact 경로를 task-run 기록으로 남깁니다." : "Records stdout, stderr, exit code, and artifact paths in a task-run record."}</small>
+	                    <small>{ko ? "표준 출력, 표준 오류, 종료 코드, 산출물 경로를 작업 실행 기록으로 남깁니다." : "Records stdout, stderr, exit code, and artifact paths in a task-run record."}</small>
                   </article>
 
                   <article className="tool-environment-sandbox" data-tool-environment-sandbox>
@@ -1348,7 +1348,7 @@ export function ToolStudioPanel({
                   <article className="tool-environment-health" data-tool-environment-health>
                     <header>
                       <CheckCircle2 size={16} aria-hidden="true" />
-                      <span>{ko ? "헬스체크" : "Health checks"}</span>
+	                      <span>{ko ? "상태 점검" : "Health checks"}</span>
                     </header>
                     <ul>
                       {selectedEnvironment.healthChecks.map((check) => (
@@ -1412,7 +1412,7 @@ export function ToolStudioPanel({
                     </button>
                     <button type="button" onClick={copyVirtualEnvironmentWorkflow} data-tool-venv-action="copy-workflow">
                       <ScrollText size={16} aria-hidden="true" />
-                      <span>{ko ? "workflow 복사" : "Copy workflow"}</span>
+	                      <span>{ko ? "흐름 복사" : "Copy workflow"}</span>
                     </button>
                   </div>
                 </section>
@@ -1420,7 +1420,7 @@ export function ToolStudioPanel({
                 <div className="tool-environment-actions">
                   <button type="button" onClick={onOpenTerminal} data-tool-environment-action="create">
                     <Cpu size={16} aria-hidden="true" />
-                    <span>{ko ? "venv 생성" : "Create venv"}</span>
+	                    <span>{ko ? "가상 환경 생성" : "Create venv"}</span>
                   </button>
                   <button type="button" onClick={onOpenTerminal} data-tool-environment-action="install">
                     <PackageCheck size={16} aria-hidden="true" />
@@ -1428,7 +1428,7 @@ export function ToolStudioPanel({
                   </button>
                   <button type="button" onClick={onOpenTerminal} data-tool-environment-action="smoke">
                     <SquareTerminal size={16} aria-hidden="true" />
-                    <span>{ko ? "Smoke 실행" : "Run smoke"}</span>
+	                    <span>{ko ? "스모크 테스트" : "Run smoke"}</span>
                   </button>
                   <button type="button" onClick={copyEnvironmentPlan} data-tool-environment-action="copy">
                     <Copy size={16} aria-hidden="true" />
@@ -1462,19 +1462,19 @@ export function ToolStudioPanel({
                   <article className="tool-deploy-release" data-tool-deploy-release>
                     <header>
                       <UploadCloud size={16} aria-hidden="true" />
-                      <span>{ko ? "Release target" : "Release target"}</span>
+	                      <span>{ko ? "배포 대상" : "Release target"}</span>
                     </header>
                     <dl>
                       <div>
-                        <dt>{ko ? "Target" : "Target"}</dt>
+	                        <dt>{ko ? "대상" : "Target"}</dt>
                         <dd>{selectedDeployTarget.target}</dd>
                       </div>
                       <div>
-                        <dt>{ko ? "Artifact" : "Artifact"}</dt>
+	                        <dt>{ko ? "산출물" : "Artifact"}</dt>
                         <dd>{selectedDeployTarget.artifact}</dd>
                       </div>
                       <div>
-                        <dt>{ko ? "Command" : "Command"}</dt>
+	                        <dt>{ko ? "명령" : "Command"}</dt>
                         <dd>{selectedDeployTarget.command}</dd>
                       </div>
                     </dl>
@@ -1483,7 +1483,7 @@ export function ToolStudioPanel({
                   <article className="tool-deploy-preflight" data-tool-deploy-preflight>
                     <header>
                       <ShieldCheck size={16} aria-hidden="true" />
-                      <span>{ko ? "Preflight" : "Preflight"}</span>
+	                      <span>{ko ? "사전 점검" : "Preflight"}</span>
                     </header>
                     <ul>
                       {selectedDeployTarget.preflight.map((item) => (
@@ -1502,11 +1502,11 @@ export function ToolStudioPanel({
                     </header>
                     <dl>
                       <div>
-                        <dt>{ko ? "Auth" : "Auth"}</dt>
+	                        <dt>{ko ? "권한" : "Auth"}</dt>
                         <dd>{labelFor(language, selectedDeployTarget.authKo, selectedDeployTarget.authEn)}</dd>
                       </div>
                       <div>
-                        <dt>{ko ? "Observe" : "Observe"}</dt>
+	                        <dt>{ko ? "관측" : "Observe"}</dt>
                         <dd>{labelFor(language, selectedDeployTarget.observabilityKo, selectedDeployTarget.observabilityEn)}</dd>
                       </div>
                     </dl>
@@ -1515,7 +1515,7 @@ export function ToolStudioPanel({
                   <article className="tool-deploy-rollback" data-tool-deploy-rollback>
                     <header>
                       <ScrollText size={16} aria-hidden="true" />
-                      <span>{ko ? "Rollback" : "Rollback"}</span>
+	                      <span>{ko ? "롤백" : "Rollback"}</span>
                     </header>
                     <code>{selectedDeployTarget.rollback}</code>
                   </article>
@@ -1532,7 +1532,7 @@ export function ToolStudioPanel({
                   </button>
                   <button type="button" onClick={() => selectMode("registry")} data-tool-deploy-action="registry">
                     <GitBranch size={16} aria-hidden="true" />
-                    <span>{ko ? "Registry 반영" : "Update registry"}</span>
+	                    <span>{ko ? "레지스트리 반영" : "Update registry"}</span>
                   </button>
                   <button type="button" onClick={copyDeployPlan} data-tool-deploy-action="copy">
                     <Copy size={16} aria-hidden="true" />
@@ -1563,7 +1563,7 @@ export function ToolStudioPanel({
               <span>{runtimeAdapterId}</span>
             </div>
             <canvas ref={canvasRef} className="tool-agent-canvas" data-agent-3d-canvas aria-label={ko ? "에이전트 협업 3D 장면" : "Agent collaboration 3D scene"} />
-            <div className="tool-agent-legend" aria-label={ko ? "캐릭터 모드 식별" : "Character mode identity"}>
+	            <div className="tool-agent-legend" aria-label={ko ? "캐릭터 역할 구분" : "Character mode identity"}>
               {toolModes.map((item, index) => (
                 <span key={item.id} title={labelFor(language, item.labelKo, item.labelEn)}>
                   <i style={{ backgroundColor: toolModeSceneColors[index % toolModeSceneColors.length] }} aria-hidden="true" />
@@ -1577,7 +1577,7 @@ export function ToolStudioPanel({
             <div className="tool-pane-heading">
               <div>
                 <p className="eyebrow">Python</p>
-                <h3>{ko ? "실행환경" : "Execution env"}</h3>
+	                <h3>{ko ? "실행 환경" : "Execution env"}</h3>
               </div>
               <button type="button" onClick={onOpenProviderSettings} title={ko ? "계정 설정" : "Provider settings"}>
                 <Settings size={15} aria-hidden="true" />

@@ -738,7 +738,7 @@ const sections: Section[] = [
     shortLabelEn: "CLI",
     icon: Network,
     group: "core",
-    purpose: "Claude Code 같은 guest CLI lane, 결정 보류, 연속 실행을 조율합니다.",
+    purpose: "Claude Code 같은 게스트 CLI 실행 경로, 결정 보류, 연속 실행을 조율합니다.",
     purposeEn: "Coordinate guest CLI lanes, deferred decisions, and continuous runs."
   },
   {
@@ -749,7 +749,7 @@ const sections: Section[] = [
     shortLabelEn: "Studio",
     icon: Wrench,
     group: "core",
-    purpose: "툴 제작, 배포, Python 실행환경, venv, 툴 전용 관리를 한 화면 흐름으로 다룹니다.",
+    purpose: "툴 제작, 배포, Python 실행 환경, 가상 환경, 툴 전용 관리를 한 화면 흐름으로 다룹니다.",
     purposeEn: "Build, deploy, and manage tools, Python runtime, venv, and registry in one focused work surface."
   },
   {
@@ -804,7 +804,7 @@ const sections: Section[] = [
     shortLabelEn: "History",
     icon: History,
     group: "governance",
-    purpose: "날짜별 작업 기록과 개선 evidence를 추적합니다.",
+    purpose: "날짜별 작업 기록과 개선 근거를 추적합니다.",
     purposeEn: "Track dated work history and improvement evidence."
   },
   {
@@ -954,13 +954,13 @@ const fallbackLanguageModes: MonitorLanguageMode[] = [
 
 const nativeWorkspaceCopy = {
   ko: {
-    eyebrow: "작업공간 Explorer",
-    title: "파일시스템을 끌어와서 처리하기",
+    eyebrow: "작업공간 탐색기",
+    title: "파일 시스템을 연결해 바로 처리하기",
     description:
-      "VS Code처럼 왼쪽 Explorer가 실제 작업공간 파일시스템을 잡고, 오른쪽 편집기에서 파일을 열어 수정하고 저장합니다.",
+      "왼쪽 탐색기에서 실제 작업공간 파일 시스템을 확인하고, 오른쪽 편집기에서 파일을 열어 수정/저장합니다.",
     chooseFolder: "작업공간 접근 권한 요청",
     choosingFolder: "권한 요청 중",
-    permissionDetail: "native 폴더 선택 창에서 허용하면 이 앱이 해당 작업공간을 바로 읽고 저장합니다.",
+    permissionDetail: "네이티브 폴더 선택 창에서 허용하면 이 앱이 해당 작업공간을 바로 읽고 저장합니다.",
     permissionGranted: "작업공간 접근 권한을 받았습니다.",
     refreshWorkspace: "작업공간 새로고침",
     refreshFiles: "파일 목록 새로고침",
@@ -975,8 +975,8 @@ const nativeWorkspaceCopy = {
     fileList: "파일 목록",
     fileTree: "파일 트리",
     uploadDropzone: "작업공간 접근 권한 요청",
-    uploadDropzoneDetail: "native 폴더 선택 창에서 허용하면 Explorer가 실제 파일시스템을 읽고 편집/저장에 바로 사용합니다.",
-    explorerHint: "Explorer에서 파일을 누르면 오른쪽 편집기에 열립니다.",
+    uploadDropzoneDetail: "네이티브 폴더 선택 창에서 허용하면 탐색기가 실제 파일 시스템을 읽고 편집/저장에 바로 사용합니다.",
+    explorerHint: "탐색기에서 파일을 누르면 오른쪽 편집기에 열립니다.",
     openedDrafts: "열린 파일",
     editorSettings: "편집 설정",
     wordWrap: "줄바꿈",
@@ -985,12 +985,12 @@ const nativeWorkspaceCopy = {
     unfoldAll: "코드 펼치기",
     diffMode: "변경 비교",
     editMode: "편집",
-    noRuntime: "Tauri 런타임이 없어서 저장은 비활성화됩니다. 지금은 snapshot 파일만 볼 수 있습니다.",
+    noRuntime: "Tauri 런타임이 없어서 저장은 비활성화됩니다. 지금은 스냅샷 파일만 볼 수 있습니다.",
     noFiles: "표시할 파일이 없습니다. 작업공간 폴더를 선택하거나 검색어를 바꿔보세요.",
     noFileOpen: "왼쪽 파일 목록에서 파일을 클릭하세요.",
     savedWithBackup: "저장 완료. 백업 파일을 만들었습니다.",
     chooseCanceled: "폴더 선택을 취소했습니다.",
-    fallbackSource: "snapshot fallback",
+    fallbackSource: "스냅샷 대체 데이터",
     runtimeSource: "실제 작업공간",
     dirty: "수정됨",
     clean: "변경 없음",
@@ -1940,7 +1940,7 @@ const defaultSearchAgentChatMessages: SearchAgentChatMessage[] = [
     id: "research-agent-runtime",
     role: "system",
     title: "작업 방식",
-    body: "Ollama 같은 로컬 모델이나 연결된 제공자 계정이 있으면 이 채팅에서 바로 작업하고, 결과는 task-run store에 저장됩니다. CLI lane은 보조 실행 경로입니다.",
+    body: "Ollama 같은 로컬 모델이나 연결된 제공자 계정이 있으면 이 채팅에서 바로 작업하고, 결과는 작업 실행 저장소에 저장됩니다. CLI는 보조 실행 경로로만 사용됩니다.",
     meta: "local/provider model + optional CLI lane + task-run store"
   }
 ];
@@ -1950,55 +1950,55 @@ const agentCoreSampleSourceUrl = "https://github.com/awslabs/agentcore-samples";
 const agentCoreCapabilityOptions: AgentCoreCapabilityOption[] = [
   {
     id: "runtime",
-    labelKo: "Runtime",
+    labelKo: "런타임",
     labelEn: "Runtime",
     detailKo: "긴 작업 실행과 상태 기록",
     detailEn: "Long-running execution and state records",
-    resourceKo: "Runtime",
+    resourceKo: "런타임",
     resourceEn: "Runtime",
-    lifecycleKo: "Create -> Invoke",
+    lifecycleKo: "생성 -> 호출",
     lifecycleEn: "Create -> Invoke",
     localCapability: "local_agent_runtime",
-    guardrailKo: "긴 실행은 task-run record와 취소/복구 경계를 가져야 합니다",
+    guardrailKo: "긴 실행은 작업 실행 기록과 취소/복구 경계를 가져야 합니다",
     guardrailEn: "Long runs need task-run records plus cancel and recovery boundaries"
   },
   {
     id: "memory",
-    labelKo: "Memory",
+    labelKo: "메모리",
     labelEn: "Memory",
     detailKo: "작업 기억과 선호 재사용",
     detailEn: "Reusable task memory and preferences",
-    resourceKo: "Memory",
+    resourceKo: "메모리",
     resourceEn: "Memory",
-    lifecycleKo: "Configure -> Invoke",
+    lifecycleKo: "설정 -> 호출",
     lifecycleEn: "Configure -> Invoke",
     localCapability: "workspace_memory",
-    guardrailKo: "memory 후보는 출처, 만료, 민감정보 제외 기준을 가져야 합니다",
+    guardrailKo: "메모리 후보는 출처, 만료, 민감정보 제외 기준을 가져야 합니다",
     guardrailEn: "Memory candidates need provenance, expiry, and sensitive-data exclusion rules"
   },
   {
     id: "gateway",
-    labelKo: "Gateway",
+    labelKo: "게이트웨이",
     labelEn: "Gateway",
     detailKo: "MCP/API/CLI 도구 연결",
     detailEn: "MCP, API, and CLI tool access",
-    resourceKo: "Gateway",
+    resourceKo: "게이트웨이",
     resourceEn: "Gateway",
-    lifecycleKo: "Configure -> Invoke",
+    lifecycleKo: "설정 -> 호출",
     lifecycleEn: "Configure -> Invoke",
     localCapability: "tool_gateway_catalog",
-    guardrailKo: "도구 호출은 권한 범위와 호출 trace를 남겨야 합니다",
+    guardrailKo: "도구 호출은 권한 범위와 호출 추적 기록을 남겨야 합니다",
     guardrailEn: "Tool calls need scoped authorization and invocation traces"
   },
   {
     id: "browser",
-    labelKo: "Browser",
+    labelKo: "브라우저",
     labelEn: "Browser",
     detailKo: "웹 탐색과 화면 검증",
     detailEn: "Web browsing and visual verification",
-    resourceKo: "Built-in Tools",
+    resourceKo: "기본 제공 도구",
     resourceEn: "Built-in Tools",
-    lifecycleKo: "Invoke -> Observe",
+    lifecycleKo: "호출 -> 관측",
     lifecycleEn: "Invoke -> Observe",
     localCapability: "browser_verification_lane",
     guardrailKo: "브라우저 작업은 사용자가 볼 수 있는 상태와 위험 동작 확인을 분리해야 합니다",
@@ -2006,72 +2006,72 @@ const agentCoreCapabilityOptions: AgentCoreCapabilityOption[] = [
   },
   {
     id: "code_interpreter",
-    labelKo: "Code Interpreter",
+    labelKo: "코드 실행기",
     labelEn: "Code Interpreter",
     detailKo: "Python/JS 실행과 산출물 검증",
     detailEn: "Python/JS execution and artifact checks",
-    resourceKo: "Built-in Tools",
+    resourceKo: "기본 제공 도구",
     resourceEn: "Built-in Tools",
-    lifecycleKo: "Invoke -> Validate",
+    lifecycleKo: "호출 -> 검증",
     lifecycleEn: "Invoke -> Validate",
     localCapability: "sandboxed_code_execution",
-    guardrailKo: "코드 실행은 sandbox, 입력/출력 기록, resource cleanup 기준을 가져야 합니다",
+    guardrailKo: "코드 실행은 샌드박스, 입출력 기록, 자원 정리 기준을 가져야 합니다",
     guardrailEn: "Code execution needs sandboxing, I/O records, and resource cleanup rules"
   },
   {
     id: "identity",
-    labelKo: "Identity",
+    labelKo: "계정/권한",
     labelEn: "Identity",
     detailKo: "계정/권한/커넥터 범위",
     detailEn: "Account, permission, and connector scope",
-    resourceKo: "Identity",
+    resourceKo: "계정/권한",
     resourceEn: "Identity",
-    lifecycleKo: "Configure -> Authorize",
+    lifecycleKo: "설정 -> 승인",
     lifecycleEn: "Configure -> Authorize",
     localCapability: "scoped_identity_broker",
-    guardrailKo: "계정과 connector 권한은 최소 권한과 revoke 경로를 가져야 합니다",
+    guardrailKo: "계정과 커넥터 권한은 최소 권한과 회수 경로를 가져야 합니다",
     guardrailEn: "Accounts and connector permissions need least privilege and revocation paths"
   },
   {
     id: "policy",
-    labelKo: "Policy",
+    labelKo: "정책",
     labelEn: "Policy",
     detailKo: "행동 경계와 승인 규칙",
     detailEn: "Action boundaries and approval rules",
-    resourceKo: "Policy",
+    resourceKo: "정책",
     resourceEn: "Policy",
-    lifecycleKo: "Authorize -> Govern",
+    lifecycleKo: "승인 -> 관리",
     lifecycleEn: "Authorize -> Govern",
     localCapability: "action_policy_gate",
-    guardrailKo: "고위험 action은 정책 gate와 사용자 승인 기록을 통과해야 합니다",
+    guardrailKo: "고위험 작업은 정책 게이트와 사용자 승인 기록을 통과해야 합니다",
     guardrailEn: "High-risk actions must pass policy gates and user approval records"
   },
   {
     id: "observability",
-    labelKo: "Observability",
+    labelKo: "관측",
     labelEn: "Observability",
-    detailKo: "trace, 로그, 병목 관측",
+    detailKo: "추적, 로그, 병목 관측",
     detailEn: "Trace, logs, and bottleneck visibility",
-    resourceKo: "Observability",
+    resourceKo: "관측",
     resourceEn: "Observability",
-    lifecycleKo: "Observe -> Debug",
+    lifecycleKo: "관측 -> 디버그",
     lifecycleEn: "Observe -> Debug",
     localCapability: "agent_observability_trace",
-    guardrailKo: "관측 데이터는 민감정보를 숨기고 task/run/evaluation에 연결돼야 합니다",
+    guardrailKo: "관측 데이터는 민감정보를 숨기고 작업, 실행, 평가 기록에 연결돼야 합니다",
     guardrailEn: "Observability data must redact sensitive values and connect to task, run, and evaluation records"
   },
   {
     id: "evaluation",
-    labelKo: "Evaluations",
+    labelKo: "평가",
     labelEn: "Evaluations",
     detailKo: "품질 게이트와 재작업 판단",
     detailEn: "Quality gates and rework decisions",
-    resourceKo: "Evaluations",
+    resourceKo: "평가",
     resourceEn: "Evaluations",
-    lifecycleKo: "Evaluate -> Improve",
+    lifecycleKo: "평가 -> 개선",
     lifecycleEn: "Evaluate -> Improve",
     localCapability: "evaluation_quality_gate",
-    guardrailKo: "평가는 검증 명령, 근거 gap, rollback 조건을 함께 남겨야 합니다",
+    guardrailKo: "평가는 검증 명령, 근거 부족 항목, 롤백 조건을 함께 남겨야 합니다",
     guardrailEn: "Evaluations need validation commands, grounding gaps, and rollback conditions"
   }
 ];
@@ -2098,18 +2098,18 @@ const agentCoreBlueprints: AgentCoreBlueprint[] = [
     primaryUseEn: "Use when turning the existing search agent into the default sellable work agent.",
     agentId: "production-research-agent",
     factoryLabel: "Production Research Agent",
-    factoryGoalKo: "외부 검색, 저장소 근거, 실행 계획, 검증 기준을 task-run record와 평가 기록으로 남기는 검색 에이전트를 만듭니다.",
+    factoryGoalKo: "외부 검색, 저장소 근거, 실행 계획, 검증 기준을 작업 실행 기록과 평가 기록으로 남기는 검색 에이전트를 만듭니다.",
     factoryGoalEn: "Create a research agent that stores external evidence, repository context, execution plans, and validation criteria as task-run and evaluation records.",
     role: "production research and planning agent with runtime records, validation, and evaluation gates",
     capabilities: ["runtime", "direct_provider_task", "task_run_store", "evaluation", "observability"],
     lifecycle: ["create", "dev", "invoke", "evaluate", "package"],
     outputRecords: ["task-run record", "web-search record", "plan", "validation", "request trace"],
     safetyGates: ["web-first evidence", "source ranking", "secret redaction", "validation before close-out"],
-    defaultObjectiveKo: "AgentCore 샘플 구조를 참고해 기존 검색 에이전트를 production research agent로 제품화하는 실행 계획과 검증 기준을 작성하기",
+    defaultObjectiveKo: "AgentCore 샘플 구조를 참고해 기존 검색 에이전트를 상용 조사 에이전트로 제품화하는 실행 계획과 검증 기준을 작성하기",
     defaultObjectiveEn: "Use AgentCore sample structure to productize the existing search agent as a production research agent with an execution plan and validation criteria.",
-    defaultQuestionsKo: "이 에이전트가 create/dev/invoke/evaluate 흐름에서 어떤 데이터를 남겨야 하는가?\n로컬 provider API 실행과 optional CLI lane의 책임은 어떻게 나눌 것인가?\n배포 전 어떤 검증과 사용자 결정이 필요한가?",
+    defaultQuestionsKo: "이 에이전트가 생성/개발/호출/평가 흐름에서 어떤 데이터를 남겨야 하는가?\n로컬 제공자 API 실행과 선택형 CLI 실행 경로의 책임은 어떻게 나눌 것인가?\n배포 전 어떤 검증과 사용자 결정이 필요한가?",
     defaultQuestionsEn: "What data should this agent leave across create/dev/invoke/evaluate?\nHow should direct provider API work and optional CLI lanes divide responsibility?\nWhat validation and user decisions are required before deployment?",
-    defaultNotesKo: "AgentCore는 AWS 선택형 배포 adapter로 취급하고, 기본 작업 상태와 기록은 데스크톱 앱이 소유합니다.",
+    defaultNotesKo: "AgentCore는 AWS 선택형 배포 어댑터로 취급하고, 기본 작업 상태와 기록은 데스크톱 앱이 소유합니다.",
     defaultNotesEn: "Treat AgentCore as an optional AWS deployment adapter while the desktop app owns default task state and records."
   },
   {
@@ -2117,24 +2117,24 @@ const agentCoreBlueprints: AgentCoreBlueprint[] = [
     label: "Memory-Enabled Work Agent",
     sourceLabel: "awslabs/agentcore-samples · memory",
     sourceUrl: agentCoreSampleSourceUrl,
-    summaryKo: "작업 기록, 사용자 선호, 반복 결정, 검증 결과를 다음 실행에 재사용하는 memory 중심 에이전트입니다.",
+    summaryKo: "작업 기록, 사용자 선호, 반복 결정, 검증 결과를 다음 실행에 재사용하는 메모리 중심 에이전트입니다.",
     summaryEn: "A memory-centered agent that reuses task history, preferences, repeated decisions, and validation outcomes.",
     primaryUseKo: "반복 작업을 줄이고 누적 데이터로 성능이 좋아지는 구조가 필요할 때",
     primaryUseEn: "Use when accumulated data should reduce repeated work and improve future runs.",
     agentId: "memory-enabled-work-agent",
     factoryLabel: "Memory Enabled Work Agent",
-    factoryGoalKo: "task-run store, decision inbox, evaluation history에서 재사용 가능한 메모리를 선별해 다음 작업에 주입하는 에이전트를 만듭니다.",
+    factoryGoalKo: "작업 실행 저장소, 결정함, 평가 기록에서 재사용 가능한 메모리를 선별해 다음 작업에 주입하는 에이전트를 만듭니다.",
     factoryGoalEn: "Create an agent that selects reusable memory from task runs, decisions, and evaluation history for future work.",
     role: "memory curator and context injection agent for repeated workspace tasks",
     capabilities: ["memory", "task_run_store", "decision_inbox", "preference_reuse", "evaluation"],
     lifecycle: ["create", "attach memory", "invoke", "summarize", "evaluate"],
     outputRecords: ["memory candidate", "decision reuse note", "evaluation signal", "improvement candidate"],
     safetyGates: ["private path exclusion", "provenance", "stale memory review", "user-visible memory source"],
-    defaultObjectiveKo: "작업 기록과 결정 기록에서 재사용 가능한 memory 후보를 찾아 다음 에이전트 실행에 안전하게 주입하는 구조 설계하기",
+    defaultObjectiveKo: "작업 기록과 결정 기록에서 재사용 가능한 메모리 후보를 찾아 다음 에이전트 실행에 안전하게 주입하는 구조 설계하기",
     defaultObjectiveEn: "Design how reusable memory candidates from task and decision history can be safely injected into future agent runs.",
-    defaultQuestionsKo: "어떤 기록을 장기 memory로 승격할 수 있는가?\n낡거나 틀린 memory를 어떻게 표시하고 회수할 것인가?\n사용자가 memory 근거를 어디에서 확인해야 하는가?",
+    defaultQuestionsKo: "어떤 기록을 장기 메모리로 승격할 수 있는가?\n낡거나 틀린 메모리를 어떻게 표시하고 회수할 것인가?\n사용자가 메모리 근거를 어디에서 확인해야 하는가?",
     defaultQuestionsEn: "Which records can become long-term memory?\nHow should stale or wrong memory be marked and retired?\nWhere should users inspect memory provenance?",
-    defaultNotesKo: "민감 파일과 raw private content는 memory 후보에서 제외하고, 근거와 만료 정책을 함께 남깁니다.",
+    defaultNotesKo: "민감 파일과 원본 비공개 내용은 메모리 후보에서 제외하고, 근거와 만료 정책을 함께 남깁니다.",
     defaultNotesEn: "Exclude sensitive files and raw private content from memory candidates, and store provenance plus expiry policy."
   },
   {
@@ -2148,18 +2148,18 @@ const agentCoreBlueprints: AgentCoreBlueprint[] = [
     primaryUseEn: "Use when attaching external tools such as filesystem, browser, GitHub, or deployment CLIs safely.",
     agentId: "gateway-tool-agent",
     factoryLabel: "Gateway Tool Agent",
-    factoryGoalKo: "외부 도구를 직접 흩뿌리지 않고 connector/gateway 목록, 권한 범위, 호출 기록으로 관리하는 에이전트를 만듭니다.",
+    factoryGoalKo: "외부 도구를 직접 흩뿌리지 않고 커넥터/게이트웨이 목록, 권한 범위, 호출 기록으로 관리하는 에이전트를 만듭니다.",
     factoryGoalEn: "Create an agent that manages external tools through connector/gateway inventories, permission scopes, and invocation records.",
     role: "tool gateway agent that routes approved connectors and records tool calls",
     capabilities: ["gateway", "mcp", "identity", "tool_catalog", "observability"],
     lifecycle: ["register target", "authorize", "invoke tool", "record trace", "review"],
     outputRecords: ["tool catalog", "auth state", "tool call trace", "policy note"],
     safetyGates: ["connector trust review", "auth state visibility", "least privilege", "tool output provenance"],
-    defaultObjectiveKo: "데스크톱 앱의 파일/터미널/브라우저/외부 API 연결을 AgentCore gateway 패턴처럼 connector catalog와 권한 검토 흐름으로 재구성하기",
+    defaultObjectiveKo: "데스크톱 앱의 파일/터미널/브라우저/외부 API 연결을 AgentCore Gateway 패턴처럼 커넥터 목록과 권한 검토 흐름으로 재구성하기",
     defaultObjectiveEn: "Reshape desktop file, terminal, browser, and API integrations into a connector catalog with permission review, following AgentCore gateway patterns.",
-    defaultQuestionsKo: "어떤 도구가 기본 제공이고 어떤 도구가 optional connector인가?\n권한 요청과 회수는 어디에서 일어나야 하는가?\n도구 호출 기록은 어떤 task-run record에 연결해야 하는가?",
+    defaultQuestionsKo: "어떤 도구가 기본 제공이고 어떤 도구가 선택형 커넥터인가?\n권한 요청과 회수는 어디에서 일어나야 하는가?\n도구 호출 기록은 어떤 작업 실행 기록에 연결해야 하는가?",
     defaultQuestionsEn: "Which tools are built-in and which are optional connectors?\nWhere should permission grant and revocation happen?\nWhich task-run record should tool calls attach to?",
-    defaultNotesKo: "MCP/외부 도구는 설정의 connector catalog와 작업 실행 전 preflight에서 드러나야 합니다.",
+    defaultNotesKo: "MCP/외부 도구는 설정의 커넥터 목록과 작업 실행 전 사전 점검에서 드러나야 합니다.",
     defaultNotesEn: "MCP and external tools should be visible in settings connector catalog and task preflight."
   },
   {
@@ -2180,11 +2180,11 @@ const agentCoreBlueprints: AgentCoreBlueprint[] = [
     lifecycle: ["invoke", "trace", "evaluate", "rework", "accept"],
     outputRecords: ["evaluation report", "trace summary", "validation log", "rollback note"],
     safetyGates: ["unsupported claim check", "validation command required", "rollback plan", "human accept gate"],
-    defaultObjectiveKo: "현재 에이전트 작업 결과가 production 품질 게이트를 통과하려면 어떤 evaluation, trace, validation, rollback 기록이 필요한지 정리하기",
+    defaultObjectiveKo: "현재 에이전트 작업 결과가 상용 품질 게이트를 통과하려면 어떤 평가, 추적, 검증, 롤백 기록이 필요한지 정리하기",
     defaultObjectiveEn: "Define which evaluation, trace, validation, and rollback records are needed for current agent work to pass production quality gates.",
-    defaultQuestionsKo: "어떤 실패가 자동 재작업이고 어떤 실패가 사용자 결정인가?\n검증 명령은 어디에 저장되고 누가 실행하는가?\n평가 결과를 다음 agent improvement로 어떻게 연결하는가?",
+    defaultQuestionsKo: "어떤 실패가 자동 재작업이고 어떤 실패가 사용자 결정인가?\n검증 명령은 어디에 저장되고 누가 실행하는가?\n평가 결과를 다음 에이전트 개선으로 어떻게 연결하는가?",
     defaultQuestionsEn: "Which failures trigger automatic rework and which require user decisions?\nWhere are validation commands stored and who runs them?\nHow should evaluation results feed future agent improvement?",
-    defaultNotesKo: "관측은 메인 기능이 아니라 품질 판단과 개선 루프를 돕는 support layer로 둡니다.",
+    defaultNotesKo: "관측은 메인 기능이 아니라 품질 판단과 개선 루프를 돕는 보조 계층으로 둡니다.",
     defaultNotesEn: "Keep observability as a support layer for quality judgment and improvement, not the main feature."
   }
 ];
@@ -2284,12 +2284,12 @@ const defaultAgentFactoryForm: AgentFactoryForm = {
   goal: "반복되는 작업 기록, 검증 결과, 사용자 피드백을 보고 다음 개선 후보를 제안합니다.",
   role: "bounded capability agent that turns accumulated evidence into small actionable improvements",
   tools: "workspace files\nrequirements/spec records\nvalidation logs\nhuman decision inbox",
-  guardrails: "민감한 파일을 읽지 않습니다\n근거 없는 주장을 사실로 쓰지 않습니다\n승격 전 validation command와 rollback plan을 남깁니다",
+  guardrails: "민감한 파일을 읽지 않습니다\n근거 없는 주장을 사실로 쓰지 않습니다\n승격 전 검증 명령과 롤백 계획을 남깁니다",
   validationCommands: "PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/workspace-improvement-agent.json\nPYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents",
-  outputContract: "JSON 또는 Markdown으로 goal, source evidence, selected smallest asset, validation, rollback을 반환합니다.",
+  outputContract: "JSON 또는 Markdown으로 목표, 소스 근거, 선택한 최소 산출물, 검증, 롤백을 반환합니다.",
   ownerProject: "agent-platform",
   targetPath: "agent-platform/configs/agents/workspace-improvement-agent.json",
-  rollbackPlan: "생성된 agent spec을 비활성화하거나 삭제하고 proposal record를 archived로 표시합니다."
+  rollbackPlan: "생성된 에이전트 명세를 비활성화하거나 삭제하고 제안 기록을 보관 처리합니다."
 };
 
 function buildAgentFactoryFormFromAgentCoreBlueprint(
@@ -2315,17 +2315,17 @@ function buildAgentFactoryFormFromAgentCoreBlueprint(
   const guardrails = [
     ...blueprint.safetyGates,
     ...selectedCapabilities.map((item) => (ko ? item.guardrailKo : item.guardrailEn)),
-    ko ? "에이전트와 Python 실행은 로컬 process/runtime에서 시작합니다" : "Agent and Python execution start in the local process/runtime",
-    ko ? "원격 API나 cloud function은 도구 connector일 뿐 실행 호스트가 아닙니다" : "Remote APIs or cloud functions are tool connectors, not the execution host",
-    ko ? "AWS AgentCore는 선택형 배포 adapter로만 사용합니다" : "Treat AWS AgentCore as an optional deployment adapter",
-    ko ? "앱의 로컬 runtime이 실행, 작업 상태, 기록을 소유합니다" : "The local app runtime owns execution, task state, and records"
+    ko ? "에이전트와 Python 실행은 로컬 프로세스/런타임에서 시작합니다" : "Agent and Python execution start in the local process/runtime",
+    ko ? "원격 API나 클라우드 함수는 도구 커넥터일 뿐 실행 호스트가 아닙니다" : "Remote APIs or cloud functions are tool connectors, not the execution host",
+    ko ? "AWS AgentCore는 선택형 배포 어댑터로만 사용합니다" : "Treat AWS AgentCore as an optional deployment adapter",
+    ko ? "앱의 로컬 런타임이 실행, 작업 상태, 기록을 소유합니다" : "The local app runtime owns execution, task state, and records"
   ];
 
   return {
     agentId: blueprint.agentId,
     label: blueprint.factoryLabel,
     goal: `${ko ? blueprint.factoryGoalKo : blueprint.factoryGoalEn}\n\n${
-      ko ? "동시 capability bundle" : "Multi-capability bundle"
+	      ko ? "동시 능력 묶음" : "Multi-capability bundle"
     }: ${capabilityBundleLabels.length ? capabilityBundleLabels.join(", ") : ko ? "기본값" : "default"}`,
     role: blueprint.role,
     tools: localRuntimeCapabilities.join("\n"),
@@ -2336,7 +2336,7 @@ function buildAgentFactoryFormFromAgentCoreBlueprint(
     ownerProject: "agent-platform",
     targetPath: `agent-platform/configs/agents/${blueprint.agentId}.json`,
     rollbackPlan: ko
-      ? "생성된 agent proposal을 비활성화하거나 archived로 표시하고, 근거/검증/task-run 기록은 검토용으로 보존합니다."
+	      ? "생성된 에이전트 제안을 비활성화하거나 보관 처리하고, 근거/검증/작업 실행 기록은 검토용으로 보존합니다."
       : "Disable or archive the generated agent proposal, keeping evidence, validation, and task-run records for review."
   };
 }
@@ -2979,7 +2979,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         icon: AlertTriangle,
         label: "Needs decision",
         title: `${blockedTasks.toLocaleString("ko-KR")}개 작업이 막혀 있습니다`,
-        detail: "결정함 또는 blocker lane을 확인해야 합니다.",
+        detail: "결정함 또는 차단된 실행 경로를 확인해야 합니다.",
         section: "agents" as SectionId,
         action: "막힘 보기"
       };
@@ -3472,7 +3472,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     const tauriInvoke = getTauriInvoke();
     const input = providerCredentialInputs[provider.providerId] || { accountHint: "", secret: "" };
     if (provider.authMethod === "local_http") {
-      setProviderCredentialNotice(uiLanguage === "ko" ? `${provider.label}는 API key 저장 없이 로컬 런타임으로 사용합니다.` : `${provider.label} uses the local runtime without saving an API key.`);
+      setProviderCredentialNotice(uiLanguage === "ko" ? `${provider.label}는 API 키 저장 없이 로컬 런타임으로 사용합니다.` : `${provider.label} uses the local runtime without saving an API key.`);
       return;
     }
     if (!tauriInvoke) {
@@ -3480,7 +3480,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       return;
     }
     if (!input.secret.trim()) {
-      setProviderCredentialError(uiLanguage === "ko" ? `${provider.label} API key를 입력하세요.` : `Enter a ${provider.label} API key.`);
+      setProviderCredentialError(uiLanguage === "ko" ? `${provider.label} API 키를 입력하세요.` : `Enter a ${provider.label} API key.`);
       return;
     }
     setProviderCredentialBusy(`save:${provider.providerId}`);
@@ -3512,7 +3512,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const clearProviderCredential = async (provider: ProviderCredentialSummary) => {
     const tauriInvoke = getTauriInvoke();
     if (provider.authMethod === "local_http") {
-      setProviderCredentialNotice(uiLanguage === "ko" ? `${provider.label}는 삭제할 API key가 없습니다.` : `${provider.label} has no API key to clear.`);
+      setProviderCredentialNotice(uiLanguage === "ko" ? `${provider.label}는 삭제할 API 키가 없습니다.` : `${provider.label} has no API key to clear.`);
       return;
     }
     if (!tauriInvoke) {
@@ -3595,7 +3595,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       ...current,
       objective: mode === "preflight"
         ? ko
-          ? `${blueprint.label}를 AgentCore-style production lifecycle로 배포하기 전 readiness와 실행 계획을 점검하기`
+          ? `${blueprint.label}를 AgentCore 방식의 상용 라이프사이클로 배포하기 전 준비도와 실행 계획을 점검하기`
           : `Check readiness and execution plan before deploying ${blueprint.label} through an AgentCore-style production lifecycle.`
         : ko
           ? blueprint.defaultObjectiveKo
@@ -3651,9 +3651,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             uiLanguage === "ko"
               ? selectedProviderReady
                 ? selectedProviderLocal
-                  ? `${selectedProvider.label} 로컬 모델로 research-insight-planner-agent 작업을 직접 실행합니다. 결과는 채팅과 task-run store에 남깁니다.`
-                  : `${selectedProvider.label} 계정으로 research-insight-planner-agent 작업을 직접 실행합니다. 결과는 채팅과 task-run store에 남깁니다.`
-                : "연결된 제공자 계정이 없어 CLI lane 실행으로 전환합니다. 계정을 연결하면 같은 버튼이 모델 API 작업을 바로 실행합니다."
+	                  ? `${selectedProvider.label} 로컬 모델로 research-insight-planner-agent 작업을 직접 실행합니다. 결과는 채팅과 작업 실행 저장소에 남깁니다.`
+	                  : `${selectedProvider.label} 계정으로 research-insight-planner-agent 작업을 직접 실행합니다. 결과는 채팅과 작업 실행 저장소에 남깁니다.`
+	                : "연결된 제공자 계정이 없어 CLI 실행 경로로 전환합니다. 계정을 연결하면 같은 버튼이 모델 API 작업을 바로 실행합니다."
               : selectedProviderReady
                 ? selectedProviderLocal
                   ? `Running the research-insight-planner-agent directly with the local ${selectedProvider.label} model. The result is stored in chat and the task-run store.`
@@ -3675,7 +3675,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             title: uiLanguage === "ko" ? "미리보기 모드" : "Preview Mode",
             body:
               uiLanguage === "ko"
-                ? "현재 화면은 브라우저 미리보기라 native 런타임을 호출할 수 없습니다. 설치 앱에서는 같은 버튼이 세션을 시작합니다."
+                ? "현재 화면은 브라우저 미리보기라 네이티브 런타임을 호출할 수 없습니다. 설치 앱에서는 같은 버튼이 세션을 시작합니다."
                 : "This browser preview cannot call the native runtime. In the installed app, the same button starts the session.",
             meta: "native runtime unavailable"
           }
@@ -3713,7 +3713,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
               title: uiLanguage === "ko" ? "실행 기록 저장" : "Run Record Stored",
               body:
                 uiLanguage === "ko"
-                  ? `task-run 기록이 저장됐습니다: ${report.taskRecordPath || "저장 경로 대기"}`
+	                  ? `작업 실행 기록이 저장됐습니다: ${report.taskRecordPath || "저장 경로 대기"}`
                   : `Task-run record stored: ${report.taskRecordPath || "path pending"}`,
               meta: report.persistenceError || `http=${report.httpStatus ?? "n/a"} elapsed=${report.durationMs}ms`
             }
@@ -3731,7 +3731,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
               title: uiLanguage === "ko" ? "제공자 직접 실행 실패" : "Direct Provider Run Failed",
               body:
                 uiLanguage === "ko"
-                  ? `${message} CLI lane으로 이어서 시도합니다.`
+	                  ? `${message} CLI 실행 경로로 이어서 시도합니다.`
                   : `${message} Falling back to the CLI lane.`,
               meta: "provider_api_fallback"
             }
@@ -3793,7 +3793,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     }
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
-      setAgentFactoryNotice(uiLanguage === "ko" ? "Tauri runtime이 없어 proposal 저장을 할 수 없습니다." : "Tauri runtime is unavailable.");
+      setAgentFactoryNotice(uiLanguage === "ko" ? "Tauri 런타임이 없어 제안을 저장할 수 없습니다." : "Tauri runtime is unavailable.");
       return;
     }
     setAgentFactoryBusy(true);
@@ -3817,7 +3817,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       setAgentFactoryProposal(report);
       setAgentFactoryNotice(
         uiLanguage === "ko"
-          ? `Agent proposal 저장됨: ${report.proposalPath}`
+          ? `에이전트 제안 저장됨: ${report.proposalPath}`
           : `Agent proposal saved: ${report.proposalPath}`
       );
     } catch (caught) {
@@ -3839,7 +3839,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           role: "system" as const,
           title: ko ? "AgentCore Quick Builder" : "AgentCore Quick Builder",
           body: ko
-            ? `${blueprint.label}를 기반으로 Agent Core proposal 저장을 시작합니다. 설치 앱에서는 proposal이 앱 데이터 저장소에 바로 남습니다.`
+            ? `${blueprint.label}를 기반으로 에이전트 코어 제안 저장을 시작합니다. 설치 앱에서는 제안이 앱 데이터 저장소에 바로 남습니다.`
             : `Starting an Agent Core proposal from ${blueprint.label}. In the installed app, the proposal is written directly to app data.`,
           meta: `create_agent_factory_proposal / capabilities=${(selectedCapabilityIds || blueprint.capabilities).join(",")}`
         }
@@ -3854,7 +3854,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       return;
     }
     if (!tauriInvoke) {
-      setLearningDecisionNotice(uiLanguage === "ko" ? "Tauri runtime이 없어 decision 저장을 할 수 없습니다." : "Tauri runtime is unavailable.");
+      setLearningDecisionNotice(uiLanguage === "ko" ? "Tauri 런타임이 없어 결정을 저장할 수 없습니다." : "Tauri runtime is unavailable.");
       return;
     }
     setLearningDecisionBusy(true);
@@ -3877,7 +3877,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       setLearningDecisionReport(report);
       setLearningDecisionNotice(
         uiLanguage === "ko"
-          ? `Learning decision 저장됨: ${report.decisionPath}`
+          ? `학습 결정 저장됨: ${report.decisionPath}`
           : `Learning decision saved: ${report.decisionPath}`
       );
     } catch (caught) {
@@ -3904,7 +3904,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         label: uiLanguage === "ko" ? "CLI 어댑터" : "CLI adapters",
         detail:
           uiLanguage === "ko"
-            ? "Codex, Claude Code, Gemini, OpenCode 같은 guest lane"
+            ? "Codex, Claude Code, Gemini, OpenCode 같은 게스트 실행 경로"
             : "Guest lanes such as Codex, Claude Code, Gemini, and OpenCode",
         value: runtimeInitDefaults.adapterId,
         icon: SquareTerminal,
@@ -3957,7 +3957,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         label: uiLanguage === "ko" ? "모델 계정 연결" : "Connect model accounts",
         detail:
           uiLanguage === "ko"
-            ? "에이전트 코어가 직접 모델 작업을 실행하려면 provider 계정을 먼저 연결합니다."
+            ? "에이전트 코어가 직접 모델 작업을 실행하려면 모델 제공자 계정을 먼저 연결합니다."
             : "Connect provider accounts so Agent Core can run model tasks directly.",
         ready: providerCredentials.configuredCount > 0,
         actionLabel: uiLanguage === "ko" ? "계정 설정" : "Accounts",
@@ -3969,7 +3969,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         label: uiLanguage === "ko" ? "에이전트 코어 열기" : "Open Agent Core",
         detail:
           uiLanguage === "ko"
-            ? "커스텀 에이전트, 서브에이전트, blueprint, proposal을 같은 흐름에서 만듭니다."
+            ? "커스텀 에이전트, 서브에이전트, 블루프린트, 제안을 같은 흐름에서 만듭니다."
             : "Create custom agents, subagents, blueprints, and proposals in one flow.",
         ready: agentCatalog.length > 0,
         actionLabel: uiLanguage === "ko" ? "에이전트 만들기" : "Create agent",
@@ -3978,10 +3978,10 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       },
       {
         id: "cli-lane",
-        label: uiLanguage === "ko" ? "CLI lane 선택" : "Choose CLI lane",
+        label: uiLanguage === "ko" ? "CLI 실행 경로 선택" : "Choose CLI lane",
         detail:
           uiLanguage === "ko"
-            ? "Claude Code 같은 외부 CLI는 root tool을 공유하는 선택형 guest adapter로 둡니다."
+            ? "Claude Code 같은 외부 CLI는 루트 도구를 공유하는 선택형 게스트 어댑터로 둡니다."
             : "External CLIs such as Claude Code remain optional guest adapters sharing root tools.",
         ready: Boolean(runtimeInitDefaults.adapterId),
         actionLabel: uiLanguage === "ko" ? "어댑터 설정" : "Adapters",
@@ -4055,7 +4055,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         label: uiLanguage === "ko" ? "툴 만들기" : "Build a tool",
         detail:
           uiLanguage === "ko"
-            ? "Python 소스, 입력 스키마, venv, 배포 점검을 단계별로 진행합니다."
+            ? "Python 소스, 입력 스키마, 가상 환경, 배포 점검을 단계별로 진행합니다."
             : "Move through Python source, input schema, venv, and deploy preflight.",
         actionLabel: uiLanguage === "ko" ? "툴 스튜디오" : "Tool Studio",
         badge: rootToolItems.length.toLocaleString("ko-KR"),
@@ -4065,7 +4065,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           uiLanguage === "ko"
             ? [
                 { id: "source", label: "소스 선택", actionLabel: "툴 만들기", run: selectToolStep("build", "source") },
-                { id: "venv", label: "입력과 venv 확인", actionLabel: "파이썬 환경", run: selectToolStep("environment", "venv") },
+                { id: "venv", label: "입력과 가상 환경 확인", actionLabel: "파이썬 환경", run: selectToolStep("environment", "venv") },
                 { id: "deploy", label: "검증 후 배포", actionLabel: "툴 배포", run: selectToolStep("deploy", "deploy") }
               ]
             : [
@@ -4082,18 +4082,18 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         label: uiLanguage === "ko" ? "작업 실행" : "Run work",
         detail:
           uiLanguage === "ko"
-            ? "선택한 CLI lane이나 에이전트 실행을 끊기지 않는 runtime 흐름으로 시작합니다."
+            ? "선택한 CLI 실행 경로나 에이전트 실행을 끊기지 않는 런타임 흐름으로 시작합니다."
             : "Start the selected CLI lane or agent run in the runtime workbench.",
         actionLabel: "Runtime",
         badge: runtimeInitDefaults.adapterId,
         targetSection: "desktop",
-        nextStep: uiLanguage === "ko" ? "Run Configuration에서 lane을 확인하고 실행을 시작합니다." : "Review the run configuration and start the lane.",
+        nextStep: uiLanguage === "ko" ? "실행 구성에서 경로를 확인하고 실행을 시작합니다." : "Review the run configuration and start the lane.",
         flowSteps:
           uiLanguage === "ko"
             ? [
-                { id: "lane", label: "lane 확인", actionLabel: "Runtime", run: selectIntentStep("run-work", "desktop", "lane") },
-                { id: "start", label: "실행 시작", actionLabel: "Runtime", run: selectIntentStep("run-work", "desktop", "start") },
-                { id: "result", label: "결과와 결정 처리", actionLabel: "Runtime", run: selectIntentStep("run-work", "desktop", "result") }
+	                { id: "lane", label: "실행 경로 확인", actionLabel: "런타임", run: selectIntentStep("run-work", "desktop", "lane") },
+	                { id: "start", label: "실행 시작", actionLabel: "런타임", run: selectIntentStep("run-work", "desktop", "start") },
+	                { id: "result", label: "결과와 결정 처리", actionLabel: "런타임", run: selectIntentStep("run-work", "desktop", "result") }
               ]
             : [
                 { id: "lane", label: "Review lane", actionLabel: "Runtime", run: selectIntentStep("run-work", "desktop", "lane") },
@@ -4118,9 +4118,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         flowSteps:
           uiLanguage === "ko"
             ? [
-                { id: "file", label: "파일 선택", actionLabel: "Source", run: selectIntentStep("open-files", "source", "file") },
-                { id: "context", label: "컨텍스트 확인", actionLabel: "Source", run: selectIntentStep("open-files", "source", "context") },
-                { id: "run", label: "실행에 연결", actionLabel: "Source", run: selectIntentStep("open-files", "source", "run") }
+	                { id: "file", label: "파일 선택", actionLabel: "소스", run: selectIntentStep("open-files", "source", "file") },
+	                { id: "context", label: "컨텍스트 확인", actionLabel: "소스", run: selectIntentStep("open-files", "source", "context") },
+	                { id: "run", label: "실행에 연결", actionLabel: "소스", run: selectIntentStep("open-files", "source", "run") }
               ]
             : [
                 { id: "file", label: "Choose file", actionLabel: "Source", run: selectIntentStep("open-files", "source", "file") },
@@ -4136,7 +4136,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         label: uiLanguage === "ko" ? "막힌 결정 처리" : "Resolve decisions",
         detail:
           uiLanguage === "ko"
-            ? "보류 질문과 blocker를 한곳에서 확인하고 안전한 다음 행동으로 넘깁니다."
+            ? "보류 질문과 차단 요소를 한곳에서 확인하고 안전한 다음 행동으로 넘깁니다."
             : "Review deferred questions and blockers, then move to the next safe action.",
         actionLabel: uiLanguage === "ko" ? "결정함" : "Inbox",
         badge: (attentionItems.length + collaborationBoard.summary.blockedTasks).toLocaleString("ko-KR"),
@@ -4145,9 +4145,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         flowSteps:
           uiLanguage === "ko"
             ? [
-                { id: "questions", label: "보류 질문 확인", actionLabel: "Inbox", run: selectIntentStep("resolve-decisions", "agents", "questions") },
-                { id: "answer", label: "안전한 답변 선택", actionLabel: "Inbox", run: selectIntentStep("resolve-decisions", "agents", "answer") },
-                { id: "resume", label: "작업 재개", actionLabel: "Inbox", run: selectIntentStep("resolve-decisions", "agents", "resume") }
+	                { id: "questions", label: "보류 질문 확인", actionLabel: "결정함", run: selectIntentStep("resolve-decisions", "agents", "questions") },
+	                { id: "answer", label: "안전한 답변 선택", actionLabel: "결정함", run: selectIntentStep("resolve-decisions", "agents", "answer") },
+	                { id: "resume", label: "작업 재개", actionLabel: "결정함", run: selectIntentStep("resolve-decisions", "agents", "resume") }
               ]
             : [
                 { id: "questions", label: "Review pending questions", actionLabel: "Inbox", run: selectIntentStep("resolve-decisions", "agents", "questions") },
@@ -4163,17 +4163,17 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         label: uiLanguage === "ko" ? "설정 점검" : "Check setup",
         detail:
           uiLanguage === "ko"
-            ? "모델 계정, CLI adapter, 질문 보류 기본값이 준비됐는지 확인합니다."
+            ? "모델 계정, CLI 어댑터, 질문 보류 기본값이 준비됐는지 확인합니다."
             : "Check model accounts, CLI adapters, and question handling defaults.",
         actionLabel: uiLanguage === "ko" ? "핵심 설정" : "Core Setup",
         badge: `${coreReadinessCount}/${coreSetupSteps.length}`,
         targetSection: "overview",
-        nextStep: uiLanguage === "ko" ? "빠른 설정에서 계정, CLI adapter, 질문 보류 상태를 확인합니다." : "Check accounts, CLI adapter, and question handling in quick setup.",
+        nextStep: uiLanguage === "ko" ? "빠른 설정에서 계정, CLI 어댑터, 질문 보류 상태를 확인합니다." : "Check accounts, CLI adapter, and question handling in quick setup.",
         flowSteps:
           uiLanguage === "ko"
             ? [
                 { id: "accounts", label: "계정 확인", actionLabel: "설정", run: () => openSettingsTab("execution", "providers") },
-                { id: "adapters", label: "CLI adapter 확인", actionLabel: "설정", run: () => openSettingsTab("execution", "adapter") },
+	                { id: "adapters", label: "CLI 어댑터 확인", actionLabel: "설정", run: () => openSettingsTab("execution", "adapter") },
                 { id: "questions", label: "질문 처리 확인", actionLabel: "설정", run: () => openSettingsTab("execution", "questions") }
               ]
             : [
@@ -4276,7 +4276,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         title: uiLanguage === "ko" ? "커스텀 에이전트를 쉽게 만듭니다" : "Create custom agents easily",
         detail:
           uiLanguage === "ko"
-            ? "역할, 도구, guardrail, 검증 명령을 한 번에 묶어 새 에이전트나 작업별 서브에이전트로 저장합니다."
+            ? "역할, 도구, 가드레일, 검증 명령을 한 번에 묶어 새 에이전트나 작업별 서브에이전트로 저장합니다."
             : "Bundle role, tools, guardrails, and validation commands into reusable agents or per-task subagents.",
         icon: Bot,
         metric: `${agentCatalog.length.toLocaleString("ko-KR")} agents`,
@@ -4284,7 +4284,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         run: () => openSection("agents"),
         steps:
           uiLanguage === "ko"
-            ? ["목표와 역할 선택", "루트 툴과 검증 연결", "proposal 또는 실행 lane으로 넘기기"]
+            ? ["목표와 역할 선택", "루트 툴과 검증 연결", "제안 또는 실행 경로로 넘기기"]
             : ["Choose goal and role", "Attach root tools and validation", "Send to proposal or run lane"]
       },
       {
@@ -4294,15 +4294,15 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         title: uiLanguage === "ko" ? "툴 제작, 배포, Python 환경을 분리해서 다룹니다" : "Build, deploy, and isolate Python tools",
         detail:
           uiLanguage === "ko"
-            ? "툴 만들기, 가상 환경, 배포 점검, registry 관리를 한 흐름에 두되 현재 단계만 크게 보여줍니다."
+            ? "툴 만들기, 가상 환경, 배포 점검, 레지스트리 관리를 한 흐름에 두되 현재 단계만 크게 보여줍니다."
             : "Keep build, virtual env, deploy preflight, and registry in one flow while showing only the current step prominently.",
         icon: Wrench,
-        metric: `${rootToolItems.length.toLocaleString("ko-KR")} tool lanes`,
+        metric: `${rootToolItems.length.toLocaleString("ko-KR")} tools`,
         cta: uiLanguage === "ko" ? "툴 스튜디오 열기" : "Open Tool Studio",
         run: () => openSection("tools"),
         steps:
           uiLanguage === "ko"
-            ? ["Python 소스와 입력 스키마 선택", "venv와 검증 명령 연결", "배포 전 점검과 rollback 기록"]
+            ? ["Python 소스와 입력 스키마 선택", "가상 환경과 검증 명령 연결", "배포 전 점검과 롤백 기록"]
             : ["Choose Python source and input schema", "Attach venv and validation command", "Record preflight and rollback"]
       },
       {
@@ -4312,7 +4312,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         title: uiLanguage === "ko" ? "CLI 작업을 끊기지 않게 이어갑니다" : "Keep CLI work continuous",
         detail:
           uiLanguage === "ko"
-            ? "Codex, Claude Code 같은 CLI lane을 작업 파이프로 묶고, 중간 질문은 decision inbox에 모아 나중에 처리합니다."
+            ? "Codex, Claude Code 같은 CLI 실행 경로를 작업 파이프라인으로 묶고, 중간 질문은 결정함에 모아 나중에 처리합니다."
             : "Bind Codex, Claude Code, and other CLI lanes into task pipes while deferring questions to the decision inbox.",
         icon: Network,
         metric: runtimeInitDefaults.adapterId,
@@ -4320,7 +4320,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         run: () => openSection("desktop"),
         steps:
           uiLanguage === "ko"
-            ? ["작업 intake 입력", "필요 CLI lane fan-out", "질문 보류 후 결과 병합"]
+            ? ["작업 요청 입력", "필요한 CLI 실행 경로로 분산", "질문 보류 후 결과 병합"]
             : ["Enter task intake", "Fan out to needed CLI lanes", "Defer questions and merge results"]
       },
       {
@@ -4330,10 +4330,10 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         title: uiLanguage === "ko" ? "모든 에이전트와 CLI가 같은 툴을 씁니다" : "Agents and CLIs share the same root tools",
         detail:
           uiLanguage === "ko"
-            ? "모델 계정, CLI adapter, 작업공간 파일, decision inbox를 root에서 관리하고 작업별 에이전트가 공유하게 둡니다."
+            ? "모델 계정, CLI 어댑터, 작업공간 파일, 결정함을 루트에서 관리하고 작업별 에이전트가 공유하게 둡니다."
             : "Manage model accounts, CLI adapters, workspace files, and the decision inbox at root so per-task agents share them.",
         icon: Code2,
-        metric: `${coreReadinessCount}/${coreSetupSteps.length} setup`,
+        metric: `${coreReadinessCount}/${coreSetupSteps.length} ready`,
         cta: uiLanguage === "ko" ? "루트 파일/툴" : "Root files/tools",
         run: () => openSection("source"),
         steps:
@@ -4351,7 +4351,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             ? "진행 중 작업, 막힌 결정, 실행 기록, 에이전트 수를 첫 화면과 CLI 화면에서 계속 보여줍니다."
             : "Keep active work, blocked decisions, run records, and agent counts visible on the home and CLI surfaces.",
         icon: Activity,
-        metric: `${collaborationBoard.summary.activeTasks.toLocaleString("ko-KR")} active`,
+        metric: `${collaborationBoard.summary.activeTasks.toLocaleString("ko-KR")} 진행 중`,
         cta: uiLanguage === "ko" ? "CLI 작업량 보기" : "View CLI workload",
         run: () => openSection("desktop"),
         steps:
@@ -4495,7 +4495,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       {
         id: "data",
         label: uiLanguage === "ko" ? "데이터/운영" : "Data",
-        detail: uiLanguage === "ko" ? "필터와 snapshot" : "Filters and snapshot",
+        detail: uiLanguage === "ko" ? "필터와 스냅샷" : "Filters and snapshot",
         icon: Database
       }
     ],
@@ -4587,7 +4587,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         label: uiLanguage === "ko" ? "하단 터미널 열기" : "Open Bottom Terminal",
         detail:
           uiLanguage === "ko"
-            ? "다중 CLI lane, stdout/stderr, decision event를 아래에서 올라오는 패널로 봅니다."
+	            ? "다중 CLI 실행 경로, 표준 출력/오류, 결정 이벤트를 아래에서 올라오는 패널로 봅니다."
             : "Open multi-CLI lanes, stdout/stderr, and decision events in the bottom drawer.",
         group: uiLanguage === "ko" ? "실행" : "Run",
         icon: SquareTerminal,
@@ -5175,7 +5175,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                           </strong>
                           <small>
                             {uiLanguage === "ko"
-                              ? "먼저 계정, CLI lane, 질문 보류, 루트 툴을 맞추면 두 핵심 기능을 바로 쓸 수 있습니다."
+	                              ? "먼저 계정, CLI 실행 경로, 질문 보류, 루트 툴을 맞추면 두 핵심 기능을 바로 쓸 수 있습니다."
                               : "Set accounts, CLI lanes, question deferral, and root tools first to use the two core features immediately."}
                           </small>
                         </div>
@@ -5411,7 +5411,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                           </strong>
                           <small>
                             {uiLanguage === "ko"
-                              ? "테마, 언어, 좌측 레일, 터미널, 실행 기본값은 브라우저 캐시가 아니라 native app config에 저장됩니다."
+                              ? "테마, 언어, 좌측 레일, 터미널, 실행 기본값은 브라우저 캐시가 아니라 네이티브 앱 설정에 저장됩니다."
                               : "Theme, language, rail, terminal, and run defaults are stored in native app config instead of browser cache."}
                           </small>
                         </div>
@@ -5807,7 +5807,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                             </article>
                           ))
                         ) : (
-                          <p className="empty-state">현재 blocker나 handoff가 없습니다.</p>
+	                          <p className="empty-state">현재 차단 요소나 인계 항목이 없습니다.</p>
                         )}
                       </div>
                     </section>
@@ -6728,7 +6728,7 @@ function SearchAgentWorkChatPanel({
                     <strong>{ko ? "근거, 불확실성, 실행 계획, 검증" : "Evidence, uncertainty, plan, validation"}</strong>
                     <small>
                       {ko
-                        ? "질문은 decision inbox로 보류하고, 실행 기록은 task-run store에 남습니다."
+	                        ? "질문은 결정함으로 보류하고, 실행 기록은 작업 실행 저장소에 남습니다."
                         : "Questions go to the decision inbox, and runs are stored in the task-run store."}
                     </small>
                   </div>
@@ -6802,10 +6802,10 @@ function AgentCoreBlueprintPanel({
       <div className="panel-heading">
         <div>
           <p className="eyebrow">AgentCore Quick Builder</p>
-          <h2>{ko ? "Production 에이전트 블루프린트" : "Production Agent Blueprints"}</h2>
+	          <h2>{ko ? "상용 에이전트 블루프린트" : "Production Agent Blueprints"}</h2>
           <p>
             {ko
-              ? "AWS AgentCore 샘플의 runtime, memory, gateway, evaluation 구조를 로컬 Python 실행 중심의 데스크톱 에이전트 생성 흐름으로 바꿉니다."
+	              ? "AWS AgentCore 샘플의 런타임, 메모리, 게이트웨이, 평가 구조를 로컬 Python 실행 중심의 데스크톱 에이전트 생성 흐름으로 바꿉니다."
               : "Translates AWS AgentCore sample runtime, memory, gateway, and evaluation patterns into a desktop agent creation flow centered on local Python execution."}
           </p>
         </div>
@@ -6859,7 +6859,7 @@ function AgentCoreBlueprintPanel({
           </header>
           <p>{ko ? selectedBlueprint.summaryKo : selectedBlueprint.summaryEn}</p>
 
-          <section className="agentcore-capability-bundle" aria-label={ko ? "AgentCore capability bundle" : "AgentCore capability bundle"}>
+	            <section className="agentcore-capability-bundle" aria-label={ko ? "AgentCore 능력 묶음" : "AgentCore capability bundle"}>
             <header>
               <div>
                 <span>{ko ? "동시 능력 묶음" : "Capability Bundle"}</span>
@@ -6902,8 +6902,8 @@ function AgentCoreBlueprintPanel({
                 <span>{ko ? "AgentCore식 리소스 연결" : "AgentCore-style resource wiring"}</span>
                 <strong>{selectedResourceSummary}</strong>
                 <small>
-                  {ko
-                    ? "선택한 능력을 Runtime, Memory, Gateway, Built-in Tools, Identity, Policy, Observability, Evaluations 흐름으로 배치합니다."
+	                  {ko
+	                    ? "선택한 능력을 런타임, 메모리, 게이트웨이, 기본 제공 도구, 계정/권한, 정책, 관측, 평가 흐름으로 배치합니다."
                     : "Maps the selected capabilities into Runtime, Memory, Gateway, Built-in Tools, Identity, Policy, Observability, and Evaluations lanes."}
                 </small>
               </div>
@@ -6986,10 +6986,10 @@ function AgentCoreBlueprintPanel({
             <span>
               {runtimeAvailable
                 ? ko
-                  ? "선택한 블루프린트는 agent proposal record로 저장되고, 이후 설정/검증/실행 단계에서 다시 열 수 있습니다."
+	                  ? "선택한 블루프린트는 에이전트 제안 기록으로 저장되고, 이후 설정/검증/실행 단계에서 다시 열 수 있습니다."
                   : "The selected blueprint is saved as an agent proposal record and can be reopened for setup, validation, and execution."
                 : ko
-                  ? "설치 앱에서는 같은 버튼이 create_agent_factory_proposal을 호출해 앱 데이터 저장소에 바로 기록합니다."
+	                  ? "설치 앱에서는 같은 버튼이 에이전트 제안 생성 작업을 호출해 앱 데이터 저장소에 바로 기록합니다."
                   : "In the installed app, the same button calls create_agent_factory_proposal and writes to app data."}
             </span>
           </div>
@@ -6998,7 +6998,7 @@ function AgentCoreBlueprintPanel({
             <span>Local Python runtime / Apache-2.0 / optional AWS adapter</span>
             <small>
               {ko
-                ? "원본 코드를 제품에 복사하지 않고 구조만 이전합니다. 실제 에이전트와 Python 실행은 로컬 runtime이 맡고, AgentCore CLI와 AWS 자격증명은 선택형 배포/도구 adapter입니다."
+	                ? "원본 코드를 제품에 복사하지 않고 구조만 이전합니다. 실제 에이전트와 Python 실행은 로컬 런타임이 맡고, AgentCore CLI와 AWS 자격증명은 선택형 배포/도구 어댑터입니다."
                 : "The app transfers structure without copying source code. Actual agent and Python execution belong to the local runtime; AgentCore CLI and AWS credentials stay optional deployment/tool adapters."}
             </small>
           </div>
@@ -7036,14 +7036,14 @@ function AgentFactoryWizard({
           <h2>{ko ? "새 에이전트 만들기" : "Create an Agent"}</h2>
           <p>
             {ko
-              ? "목표, 역할, 도구, 안전장치, 검증 기준을 입력하면 앱 데이터 저장소에 agent proposal을 남깁니다."
+	              ? "목표, 역할, 도구, 안전장치, 검증 기준을 입력하면 앱 데이터 저장소에 에이전트 제안을 남깁니다."
               : "Enter goal, role, tools, guardrails, and validation to write an agent proposal into app data."}
           </p>
         </div>
         <div className="desktop-actions">
           <button type="button" onClick={onCreateProposal} disabled={!runtimeAvailable || busy}>
             <Bot size={16} aria-hidden="true" />
-            <span>{busy ? (ko ? "저장 중" : "Saving") : ko ? "Agent proposal 저장" : "Save proposal"}</span>
+	            <span>{busy ? (ko ? "저장 중" : "Saving") : ko ? "에이전트 제안 저장" : "Save proposal"}</span>
           </button>
         </div>
       </div>
@@ -7164,7 +7164,7 @@ function LearningFeedbackLoopPanel({
           <h2>{ko ? "누적 근거에서 개선 후보 만들기" : "Create Improvement Candidates from Evidence"}</h2>
           <p>
             {ko
-              ? "평가, 작업 요약, request trace, blocker, intent map을 후보로 묶고 승인/보류/거절/승격 기록을 앱 데이터에 저장합니다."
+	              ? "평가, 작업 요약, 요청 추적, 차단 요소, 의도 지도를 후보로 묶고 승인/보류/거절/승격 기록을 앱 데이터에 저장합니다."
               : "Group evaluations, summaries, traces, blockers, and intent maps into decisions stored in app data."}
           </p>
         </div>
@@ -7593,7 +7593,7 @@ function PhilosophyFeatureFactoryPanel({
               </article>
             ))
           ) : (
-            <p className="empty-state">철학 기반 기능 추출 registry가 아직 생성되지 않았습니다.</p>
+            <p className="empty-state">철학 기반 기능 추출 레지스트리가 아직 생성되지 않았습니다.</p>
           )}
         </div>
 
@@ -8175,7 +8175,7 @@ function DesktopRuntimePanel({
   const [taskPipePresets, setTaskPipePresets] = useState<CliTaskPipelinePresetReport[]>(fallbackTaskPipePresets);
   const [selectedTaskPipeKind, setSelectedTaskPipeKind] = useState(initDefaults.taskPipeKind);
   const [taskPipePrompt, setTaskPipePrompt] = useState(
-    "이 작업을 pipe graph 기준으로 분해해서 각 CLI lane을 init해줘. source-affecting 결정은 merge gate 전까지 보류하고, 질문은 decision inbox로 보내줘."
+    "이 작업을 파이프라인 그래프 기준으로 분해해서 각 CLI 실행 경로를 초기화해줘. 소스에 영향을 주는 결정은 병합 게이트 전까지 보류하고, 질문은 결정함으로 보내줘."
   );
   const [pipelineReports, setPipelineReports] = useState<CliTaskPipelineInitReport[]>([]);
   const [taskRunRecords, setTaskRunRecords] = useState<CliTaskRunRecordReport[]>([]);
@@ -9948,7 +9948,7 @@ function DesktopRuntimePanel({
       id: "cli-session",
       icon: SquareTerminal,
       title: uiLanguage === "ko" ? "선택한 CLI 세션 시작" : "Start selected CLI session",
-      subtitle: uiLanguage === "ko" ? "선택된 adapter와 모드로 하단 터미널을 올립니다." : "Open the bottom terminal with the selected adapter and mode.",
+      subtitle: uiLanguage === "ko" ? "선택한 어댑터와 모드로 하단 터미널을 올립니다." : "Open the bottom terminal with the selected adapter and mode.",
       detail: `${selectedAdapter?.label || selectedSessionAdapterId} · ${selectedMode.label}`,
       status: runningAdapterId === "session" ? "running" : selectedAdapter?.available ? "ready" : "setup",
       statusLabel:
@@ -9967,8 +9967,8 @@ function DesktopRuntimePanel({
       id: "task-pipe",
       icon: Network,
       title: uiLanguage === "ko" ? "다중 CLI 파이프라인" : "Multi-CLI pipeline",
-      subtitle: uiLanguage === "ko" ? "여러 lane을 fan-out/fan-in 구조로 초기화합니다." : "Initialize multiple lanes with fan-out/fan-in control.",
-      detail: `${selectedTaskPipe.label} · ${selectedTaskPipe.laneCount} lanes · ${selectedTaskPipe.mergeGate}`,
+      subtitle: uiLanguage === "ko" ? "여러 실행 경로를 분산/병합 구조로 초기화합니다." : "Initialize multiple lanes with fan-out/fan-in control.",
+      detail: `${selectedTaskPipe.label} · ${selectedTaskPipe.laneCount} ${uiLanguage === "ko" ? "개 경로" : "lanes"} · ${selectedTaskPipe.mergeGate}`,
       status:
         runningAdapterId === "task-pipe"
           ? "running"
@@ -9979,10 +9979,10 @@ function DesktopRuntimePanel({
         runningAdapterId === "task-pipe"
           ? uiLanguage === "ko" ? "실행 중" : "Running"
           : pipelineStats.missing > 0
-            ? uiLanguage === "ko" ? `${pipelineStats.missing} lane 누락` : `${pipelineStats.missing} lanes missing`
+            ? uiLanguage === "ko" ? `${pipelineStats.missing}개 경로 누락` : `${pipelineStats.missing} lanes missing`
             : uiLanguage === "ko" ? "준비됨" : "Ready",
-      primaryLabel: uiLanguage === "ko" ? "Pipe 시작" : "Start pipe",
-      secondaryLabel: uiLanguage === "ko" ? "Pipe 설정" : "Pipe settings",
+      primaryLabel: uiLanguage === "ko" ? "파이프라인 시작" : "Start pipe",
+      secondaryLabel: uiLanguage === "ko" ? "파이프라인 설정" : "Pipe settings",
       primaryDisabled: !runtimeReady || runningAdapterId !== "",
       onPrimary: initTaskPipe,
       onSecondary: () => onOpenSettings("pipe")
@@ -9991,8 +9991,8 @@ function DesktopRuntimePanel({
       id: "workspace-readiness",
       icon: CheckCircle2,
       title: uiLanguage === "ko" ? "작업공간 준비 상태 점검" : "Check workspace readiness",
-      subtitle: uiLanguage === "ko" ? "CLI, 데이터 경로, 공개 배포 blocker를 한 번에 확인합니다." : "Check CLIs, data paths, and public blockers together.",
-      detail: `${availableCount}/${adapters.length} CLI · ${serviceReadinessStats.publicBlockers} blockers · ${workspacePathLabel}`,
+      subtitle: uiLanguage === "ko" ? "CLI, 데이터 경로, 공개 배포 차단 요소를 한 번에 확인합니다." : "Check CLIs, data paths, and public blockers together.",
+      detail: `${availableCount}/${adapters.length} CLI · ${serviceReadinessStats.publicBlockers} ${uiLanguage === "ko" ? "차단 요소" : "blockers"} · ${workspacePathLabel}`,
       status:
         serviceReadinessStats.publicBlockers > 0
           ? "blocked"
@@ -10130,7 +10130,7 @@ function DesktopRuntimePanel({
     ideProblemItems.push({
       id: `public-blocker-${index}`,
       severity: "warning",
-      title: uiLanguage === "ko" ? "배포 blocker" : "Release blocker",
+      title: uiLanguage === "ko" ? "배포 차단 요소" : "Release blocker",
       detail: blocker,
       actionLabel: uiLanguage === "ko" ? "점검" : "Check",
       onAction: runAllHealthChecks
@@ -10639,16 +10639,18 @@ function DesktopRuntimePanel({
       <div className="content-grid desktop-grid">
         <section className="desktop-hero">
           <div>
-            <p className="eyebrow">Desktop Runtime</p>
-            <h2>Platform-first host</h2>
+            <p className="eyebrow">{uiLanguage === "ko" ? "데스크톱 런타임" : "Desktop Runtime"}</p>
+            <h2>{uiLanguage === "ko" ? "플랫폼이 먼저 실행됩니다" : "Platform-first host"}</h2>
             <p>
-              플랫폼을 먼저 실행하고 그 위에 Codex, Gemini CLI, Claude Code CLI, OpenCode, Claw Code 같은 Guest adapters를 올립니다.
+              {uiLanguage === "ko"
+                ? "플랫폼을 먼저 실행하고 그 위에 Codex, Gemini CLI, Claude Code CLI, OpenCode, Claw Code 같은 게스트 어댑터를 올립니다."
+                : "Run the platform first, then mount Codex, Gemini CLI, Claude Code CLI, OpenCode, Claw Code, and other guest adapters on top."}
             </p>
           </div>
           <div className={`desktop-runtime-state state-${runtimeState}`}>
             <span>{runtimeState}</span>
             <strong>{availableCount} / {adapters.length}</strong>
-            <small>available guest adapters</small>
+            <small>{uiLanguage === "ko" ? "사용 가능한 게스트 어댑터" : "available guest adapters"}</small>
           </div>
         </section>
 
@@ -10677,17 +10679,18 @@ function DesktopRuntimePanel({
     <div className="content-grid desktop-grid">
       <section className="desktop-hero">
         <div>
-          <p className="eyebrow">Desktop Runtime</p>
-          <h2>Platform-first host</h2>
-          <p>
-            플랫폼을 먼저 실행하고 그 위에 Codex, Gemini CLI, Claude Code CLI, OpenCode, Claw Code 같은 Guest adapters를 올립니다.
-            플랫폼은 task state, decision inbox, artifacts, validation, source editing을 소유하고 CLI는 선택 lane으로만 실행됩니다.
-          </p>
+            <p className="eyebrow">{uiLanguage === "ko" ? "데스크톱 런타임" : "Desktop Runtime"}</p>
+            <h2>{uiLanguage === "ko" ? "플랫폼이 먼저 실행됩니다" : "Platform-first host"}</h2>
+            <p>
+              {uiLanguage === "ko"
+                ? "플랫폼을 먼저 실행하고 그 위에 Codex, Gemini CLI, Claude Code CLI, OpenCode, Claw Code 같은 게스트 어댑터를 올립니다. 플랫폼은 작업 상태, 결정함, 산출물, 검증, 소스 편집을 소유하고 CLI는 선택형 실행 경로로만 사용됩니다."
+                : "Run the platform first, then mount Codex, Gemini CLI, Claude Code CLI, OpenCode, Claw Code, and other guest adapters on top. The platform owns task state, the decision inbox, artifacts, validation, and source editing while CLIs run only as optional lanes."}
+            </p>
         </div>
         <div className={`desktop-runtime-state state-${runtimeState}`}>
           <span>{runtimeState}</span>
           <strong>{availableCount} / {adapters.length}</strong>
-          <small>available guest adapters</small>
+            <small>{uiLanguage === "ko" ? "사용 가능한 게스트 어댑터" : "available guest adapters"}</small>
         </div>
       </section>
 
@@ -10696,7 +10699,7 @@ function DesktopRuntimePanel({
           <div className="ide-run-selector">
             <span>
               <PlayCircle size={15} aria-hidden="true" />
-              {uiLanguage === "ko" ? "Run Configuration" : "Run Configuration"}
+	              {uiLanguage === "ko" ? "실행 구성" : "Run Configuration"}
             </span>
             <strong>{uiLanguage === "ko" ? "작업 실행 구성" : "Task run configurations"}</strong>
             <small>{selectedAdapter?.label || selectedSessionAdapterId} / {selectedMode.label} / {workspaceExplorerRootLabel}</small>
@@ -10721,19 +10724,19 @@ function DesktopRuntimePanel({
           <nav className="ide-tool-window-rail" aria-label={uiLanguage === "ko" ? "도구 창" : "Tool windows"}>
             <button type="button" className="active" onClick={() => void startSession()} disabled={!runtimeReady || runningAdapterId !== ""}>
               <PlayCircle size={15} aria-hidden="true" />
-              <span>Run</span>
+              <span>{uiLanguage === "ko" ? "실행" : "Run"}</span>
             </button>
             <button type="button" onClick={() => void refreshAdapters()}>
               <Activity size={15} aria-hidden="true" />
-              <span>Services</span>
+              <span>{uiLanguage === "ko" ? "서비스" : "Services"}</span>
             </button>
             <button type="button" onClick={() => onOpenSettings("questions")}>
               <AlertTriangle size={15} aria-hidden="true" />
-              <span>Problems</span>
+              <span>{uiLanguage === "ko" ? "문제" : "Problems"}</span>
             </button>
             <button type="button" onClick={() => setTerminalDrawerOpen(true)}>
               <SquareTerminal size={15} aria-hidden="true" />
-              <span>Terminal</span>
+              <span>{uiLanguage === "ko" ? "터미널" : "Terminal"}</span>
             </button>
           </nav>
 
@@ -10743,7 +10746,7 @@ function DesktopRuntimePanel({
                 <span>{uiLanguage === "ko" ? "실행 구성" : "Run Configurations"}</span>
                 <strong>{uiLanguage === "ko" ? "에이전트 작업을 여기서 시작" : "Start agent work here"}</strong>
               </div>
-              <small>{ideRunConfigurations.length} configs</small>
+              <small>{uiLanguage === "ko" ? `${ideRunConfigurations.length}개 구성` : `${ideRunConfigurations.length} configs`}</small>
             </div>
             {ideRunConfigurations.map((configuration) => {
               const Icon = configuration.icon;
@@ -10783,7 +10786,7 @@ function DesktopRuntimePanel({
           <aside className="ide-services-window">
             <div className="ide-window-header">
               <div>
-                <span>Services</span>
+	                <span>{uiLanguage === "ko" ? "서비스" : "Services"}</span>
                 <strong>{uiLanguage === "ko" ? "실행 가능한 연결" : "Runnable connections"}</strong>
               </div>
               <button type="button" onClick={() => void refreshAdapters()} disabled={!runtimeReady}>
@@ -10812,10 +10815,10 @@ function DesktopRuntimePanel({
         <div className="ide-problems-strip" aria-label={uiLanguage === "ko" ? "문제 목록" : "Problems"}>
           <div className="ide-window-header">
             <div>
-              <span>Problems</span>
+	              <span>{uiLanguage === "ko" ? "문제" : "Problems"}</span>
               <strong>{visibleIdeProblems.length ? uiLanguage === "ko" ? "지금 막는 항목" : "Current blockers" : uiLanguage === "ko" ? "막힌 항목 없음" : "No blocking items"}</strong>
             </div>
-            <small>{visibleIdeProblems.length} items</small>
+	            <small>{uiLanguage === "ko" ? `${visibleIdeProblems.length}개 항목` : `${visibleIdeProblems.length} items`}</small>
           </div>
           <div className="ide-problem-list">
             {visibleIdeProblems.length > 0 ? (
@@ -10838,7 +10841,7 @@ function DesktopRuntimePanel({
                 <CheckCircle2 size={15} aria-hidden="true" />
                 <div>
                   <strong>{uiLanguage === "ko" ? "실행 전 확인된 주요 문제 없음" : "No major pre-run issues"}</strong>
-                  <span>{uiLanguage === "ko" ? "필요하면 Services에서 CLI와 모델 상태를 다시 점검하세요." : "Refresh Services if you need to recheck CLI and model status."}</span>
+	                  <span>{uiLanguage === "ko" ? "필요하면 서비스에서 CLI와 모델 상태를 다시 점검하세요." : "Refresh Services if you need to recheck CLI and model status."}</span>
                 </div>
               </article>
             )}
@@ -10867,12 +10870,12 @@ function DesktopRuntimePanel({
           <button type="button" onClick={chooseDesktopWorkspaceFolder} disabled={!invoke || workspaceHostBusy !== ""}>
             <FolderOpen size={16} aria-hidden="true" />
             <span>{workspaceHostBusy === "choose" ? copy.choosingFolder : copy.chooseFolder}</span>
-            <small>{desktopWorkspace?.activeWorkspacePath || (uiLanguage === "ko" ? "native 권한 요청" : "native permission request")}</small>
+	            <small>{desktopWorkspace?.activeWorkspacePath || (uiLanguage === "ko" ? "네이티브 권한 요청" : "native permission request")}</small>
           </button>
           <button type="button" onClick={runAllHealthChecks} disabled={!invoke || runningAdapterId !== ""}>
             <CheckCircle2 size={16} aria-hidden="true" />
             <span>{uiLanguage === "ko" ? "CLI 자동 확인" : "Check CLIs"}</span>
-            <small>{availableCount} / {adapters.length} ready</small>
+	            <small>{uiLanguage === "ko" ? `${availableCount} / ${adapters.length} 준비됨` : `${availableCount} / ${adapters.length} ready`}</small>
           </button>
           <button
             type="button"
@@ -10885,8 +10888,8 @@ function DesktopRuntimePanel({
           </button>
           <button type="button" onClick={() => setTerminalDrawerOpen(true)}>
             <SquareTerminal size={16} aria-hidden="true" />
-            <span>{uiLanguage === "ko" ? "바로 하단 터미널 열기" : "Open terminal drawer"}</span>
-            <small>{terminalDrawerOpen ? "open" : "bottom panel"}</small>
+	            <span>{uiLanguage === "ko" ? "하단 터미널 열기" : "Open terminal drawer"}</span>
+	            <small>{terminalDrawerOpen ? (uiLanguage === "ko" ? "열림" : "open") : uiLanguage === "ko" ? "하단 패널" : "bottom panel"}</small>
           </button>
           <button
             type="button"
@@ -10894,7 +10897,7 @@ function DesktopRuntimePanel({
             disabled={!invoke || runningAdapterId !== "" || !adapters.some((adapter) => adapter.adapterId === selectedSessionAdapterId && adapter.available)}
           >
             <PlayCircle size={16} aria-hidden="true" />
-            <span>{uiLanguage === "ko" ? "선택 lane 시작" : "Start selected lane"}</span>
+	            <span>{uiLanguage === "ko" ? "선택한 실행 경로 시작" : "Start selected lane"}</span>
             <small>{adapters.find((adapter) => adapter.adapterId === selectedSessionAdapterId)?.label || selectedSessionAdapterId}</small>
           </button>
         </div>
@@ -10907,21 +10910,21 @@ function DesktopRuntimePanel({
       >
         <summary>
           <span>{uiLanguage === "ko" ? "운영 진단 패널 열기" : "Open runtime diagnostics"}</span>
-          <small>{uiLanguage === "ko" ? "지표, 빠른 실행, 워크스페이스, task pipe, 데이터 경계" : "Metrics, commands, workspace, task pipe, data boundary"}</small>
+	          <small>{uiLanguage === "ko" ? "지표, 빠른 실행, 작업공간, 작업 파이프라인, 데이터 경계" : "Metrics, commands, workspace, task pipe, data boundary"}</small>
         </summary>
         {runtimeDiagnosticsOpen && (
         <div className="section-secondary-stack">
       <section className="metrics-band">
-        <Metric label="Guest Adapters" value={adapters.length} icon={Network} tone="green" />
-        <Metric label="Available" value={availableCount} icon={CheckCircle2} tone="blue" />
-        <Metric label="Task Pipes" value={pipelineReports.length} icon={GitBranch} tone="rose" />
-        <Metric label="Task Runs" value={taskRunRecords.length} icon={FileSearch} tone="blue" />
-        <Metric label="Accumulated" value={accumulatedDataStats.records} icon={Database} tone="slate" />
-        <Metric label="Decision Items" value={decisionPrompts.length + blockedTaskCount + openInboxDecisions.length} icon={Inbox} tone="amber" />
-        <Metric label="Agent Configs" value={agentCatalogCount} icon={Bot} tone="violet" />
-        <Metric label="Auto Deferred" value={sessionStats.autoDeferred} icon={ShieldCheck} tone="slate" />
-        <Metric label="Public Blockers" value={serviceReadinessStats.publicBlockers} icon={AlertTriangle} tone="amber" />
-        <Metric label="Source Files" value={sourceFileCount} icon={Code2} tone="green" />
+	        <Metric label={uiLanguage === "ko" ? "게스트 어댑터" : "Guest Adapters"} value={adapters.length} icon={Network} tone="green" />
+	        <Metric label={uiLanguage === "ko" ? "사용 가능" : "Available"} value={availableCount} icon={CheckCircle2} tone="blue" />
+	        <Metric label={uiLanguage === "ko" ? "작업 파이프라인" : "Task Pipes"} value={pipelineReports.length} icon={GitBranch} tone="rose" />
+	        <Metric label={uiLanguage === "ko" ? "실행 기록" : "Task Runs"} value={taskRunRecords.length} icon={FileSearch} tone="blue" />
+	        <Metric label={uiLanguage === "ko" ? "축적 기록" : "Accumulated"} value={accumulatedDataStats.records} icon={Database} tone="slate" />
+	        <Metric label={uiLanguage === "ko" ? "결정 항목" : "Decision Items"} value={decisionPrompts.length + blockedTaskCount + openInboxDecisions.length} icon={Inbox} tone="amber" />
+	        <Metric label={uiLanguage === "ko" ? "에이전트 설정" : "Agent Configs"} value={agentCatalogCount} icon={Bot} tone="violet" />
+	        <Metric label={uiLanguage === "ko" ? "자동 보류" : "Auto Deferred"} value={sessionStats.autoDeferred} icon={ShieldCheck} tone="slate" />
+	        <Metric label={uiLanguage === "ko" ? "공개 차단 요소" : "Public Blockers"} value={serviceReadinessStats.publicBlockers} icon={AlertTriangle} tone="amber" />
+	        <Metric label={uiLanguage === "ko" ? "소스 파일" : "Source Files"} value={sourceFileCount} icon={Code2} tone="green" />
       </section>
 
       <section className="panel wide desktop-command-panel">
@@ -10935,8 +10938,8 @@ function DesktopRuntimePanel({
         <div className="desktop-command-grid">
           <button type="button" onClick={runAllHealthChecks} disabled={!invoke || runningAdapterId !== ""}>
             <Network size={16} aria-hidden="true" />
-            <span>Check CLI adapters</span>
-            <small>{availableCount} available</small>
+	            <span>{uiLanguage === "ko" ? "CLI 어댑터 확인" : "Check CLI adapters"}</span>
+	            <small>{uiLanguage === "ko" ? `${availableCount}개 사용 가능` : `${availableCount} available`}</small>
           </button>
           <button
             type="button"
@@ -10944,7 +10947,7 @@ function DesktopRuntimePanel({
             disabled={!invoke || runningAdapterId !== "" || !adapters.some((adapter) => adapter.adapterId === selectedSessionAdapterId && adapter.available)}
           >
             <SquareTerminal size={16} aria-hidden="true" />
-            <span>Start selected lane</span>
+	            <span>{uiLanguage === "ko" ? "선택한 실행 경로 시작" : "Start selected lane"}</span>
             <small>{selectedMode.label}</small>
           </button>
           <button
@@ -10958,58 +10961,58 @@ function DesktopRuntimePanel({
           </button>
           <button type="button" onClick={initTaskPipe} disabled={!invoke || runningAdapterId !== ""}>
             <GitBranch size={16} aria-hidden="true" />
-            <span>Init task pipe</span>
+	            <span>{uiLanguage === "ko" ? "작업 파이프라인 시작" : "Init task pipe"}</span>
             <small>{selectedTaskPipe.label}</small>
           </button>
           <button type="button" onClick={refreshDecisionInbox} disabled={!invoke || decisionBusy}>
             <Inbox size={16} aria-hidden="true" />
-            <span>Refresh decisions</span>
-            <small>{openInboxDecisions.length} open</small>
+	            <span>{uiLanguage === "ko" ? "결정함 새로고침" : "Refresh decisions"}</span>
+	            <small>{uiLanguage === "ko" ? `${openInboxDecisions.length}개 열림` : `${openInboxDecisions.length} open`}</small>
           </button>
           <button type="button" onClick={refreshTaskRunRecords} disabled={!invoke || runningAdapterId !== ""}>
             <FileSearch size={16} aria-hidden="true" />
-            <span>Refresh task runs</span>
-            <small>{taskRunRecords.length} records</small>
+	            <span>{uiLanguage === "ko" ? "실행 기록 새로고침" : "Refresh task runs"}</span>
+	            <small>{uiLanguage === "ko" ? `${taskRunRecords.length}개 기록` : `${taskRunRecords.length} records`}</small>
           </button>
           <button type="button" onClick={refreshAccumulatedDataOverview} disabled={!invoke || accumulatedDataBusy}>
             <Database size={16} aria-hidden="true" />
-            <span>Accumulated data</span>
-            <small>{accumulatedDataStats.records} records</small>
+	            <span>{uiLanguage === "ko" ? "축적 데이터" : "Accumulated data"}</span>
+	            <small>{uiLanguage === "ko" ? `${accumulatedDataStats.records}개 기록` : `${accumulatedDataStats.records} records`}</small>
           </button>
           <button type="button" onClick={refreshRuntimeDataBoundary} disabled={!invoke || runtimeDataBusy !== ""}>
             <Activity size={16} aria-hidden="true" />
-            <span>Runtime roots</span>
-            <small>{runtimeDataStats.ready}/{runtimeDataStats.roots || "?"} ready</small>
+	            <span>{uiLanguage === "ko" ? "런타임 루트" : "Runtime roots"}</span>
+	            <small>{uiLanguage === "ko" ? `${runtimeDataStats.ready}/${runtimeDataStats.roots || "?"} 준비됨` : `${runtimeDataStats.ready}/${runtimeDataStats.roots || "?"} ready`}</small>
           </button>
           <button type="button" onClick={runInstallerPayloadAudit} disabled={!invoke || runtimeDataBusy !== ""}>
             <ShieldCheck size={16} aria-hidden="true" />
-            <span>Audit payload</span>
-            <small>{payloadAudit ? `${payloadAudit.flaggedCount} findings` : "not scanned"}</small>
+	            <span>{uiLanguage === "ko" ? "페이로드 감사" : "Audit payload"}</span>
+	            <small>{payloadAudit ? (uiLanguage === "ko" ? `${payloadAudit.flaggedCount}개 발견` : `${payloadAudit.flaggedCount} findings`) : uiLanguage === "ko" ? "미검사" : "not scanned"}</small>
           </button>
           <button type="button" onClick={createSupportDiagnosticBundle} disabled={!invoke || runtimeDataBusy !== ""}>
             <FileSearch size={16} aria-hidden="true" />
-            <span>Support bundle</span>
-            <small>{supportBundle?.status || "redacted export"}</small>
+	            <span>{uiLanguage === "ko" ? "지원 번들" : "Support bundle"}</span>
+	            <small>{supportBundle?.status || (uiLanguage === "ko" ? "민감정보 제거 내보내기" : "redacted export")}</small>
           </button>
           <button type="button" onClick={refreshServiceReadiness} disabled={!invoke || serviceReadinessBusy}>
             <ShieldCheck size={16} aria-hidden="true" />
-            <span>Service readiness</span>
-            <small>{serviceReadiness ? `${serviceReadiness.score} / ${serviceReadiness.publicBlockers.length} blockers` : "not checked"}</small>
+	            <span>{uiLanguage === "ko" ? "서비스 준비도" : "Service readiness"}</span>
+	            <small>{serviceReadiness ? (uiLanguage === "ko" ? `${serviceReadiness.score} / 차단 ${serviceReadiness.publicBlockers.length}개` : `${serviceReadiness.score} / ${serviceReadiness.publicBlockers.length} blockers`) : uiLanguage === "ko" ? "미점검" : "not checked"}</small>
           </button>
           <button type="button" onClick={refreshDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== ""}>
             <FolderKanban size={16} aria-hidden="true" />
-            <span>Workspace host</span>
-            <small>{desktopWorkspace?.status || "not loaded"}</small>
+	            <span>{uiLanguage === "ko" ? "작업공간 호스트" : "Workspace host"}</span>
+	            <small>{desktopWorkspace?.status || (uiLanguage === "ko" ? "불러오지 않음" : "not loaded")}</small>
           </button>
           <button type="button" onClick={deferDetectedQuestions} disabled={!invoke || decisionBusy || pendingQuestionCount === 0}>
             <ShieldCheck size={16} aria-hidden="true" />
-            <span>Defer detected questions</span>
-            <small>{pendingQuestionCount} pending</small>
+	            <span>{uiLanguage === "ko" ? "감지된 질문 보류" : "Defer detected questions"}</span>
+	            <small>{uiLanguage === "ko" ? `${pendingQuestionCount}개 대기` : `${pendingQuestionCount} pending`}</small>
           </button>
           <button type="button" onClick={loadSourceFile} disabled={!invoke || editorBusy || !selectedSourcePath}>
             <GitBranch size={16} aria-hidden="true" />
-            <span>Open source review</span>
-            <small>{sourceDiff?.dirty ? "draft changed" : "ready"}</small>
+	            <span>{uiLanguage === "ko" ? "소스 검토 열기" : "Open source review"}</span>
+	            <small>{sourceDiff?.dirty ? (uiLanguage === "ko" ? "초안 변경됨" : "draft changed") : uiLanguage === "ko" ? "준비됨" : "ready"}</small>
           </button>
         </div>
       </section>
@@ -11027,7 +11030,7 @@ function DesktopRuntimePanel({
             </button>
             <button type="button" onClick={refreshDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== ""}>
               <Activity size={16} aria-hidden="true" />
-              <span>{workspaceHostBusy === "refresh" ? "Refreshing" : "Refresh"}</span>
+	              <span>{workspaceHostBusy === "refresh" ? (uiLanguage === "ko" ? "새로고침 중" : "Refreshing") : uiLanguage === "ko" ? "새로고침" : "Refresh"}</span>
             </button>
           </div>
         </div>
@@ -11035,31 +11038,31 @@ function DesktopRuntimePanel({
 
         <div className="task-run-summary-strip">
           <article>
-            <span>status</span>
-            <strong>{desktopWorkspace?.status || "not-loaded"}</strong>
+	            <span>{uiLanguage === "ko" ? "상태" : "status"}</span>
+	            <strong>{desktopWorkspace?.status || (uiLanguage === "ko" ? "불러오지 않음" : "not-loaded")}</strong>
           </article>
           <article>
-            <span>source</span>
-            <strong>{desktopWorkspace?.activeWorkspaceSource || "pending"}</strong>
+	            <span>{uiLanguage === "ko" ? "출처" : "source"}</span>
+	            <strong>{desktopWorkspace?.activeWorkspaceSource || (uiLanguage === "ko" ? "대기 중" : "pending")}</strong>
           </article>
           <article>
-            <span>git</span>
-            <strong>{desktopWorkspace?.gitAvailable ? "available" : "missing"}</strong>
+	            <span>git</span>
+	            <strong>{desktopWorkspace?.gitAvailable ? (uiLanguage === "ko" ? "사용 가능" : "available") : uiLanguage === "ko" ? "없음" : "missing"}</strong>
           </article>
           <article>
-            <span>operation</span>
-            <strong>{desktopWorkspace?.lastOperation || "none"}</strong>
+	            <span>{uiLanguage === "ko" ? "최근 작업" : "operation"}</span>
+	            <strong>{desktopWorkspace?.lastOperation || (uiLanguage === "ko" ? "없음" : "none")}</strong>
           </article>
           <article>
-            <span>last status</span>
-            <strong>{desktopWorkspace?.lastStatus || "unset"}</strong>
+	            <span>{uiLanguage === "ko" ? "최근 상태" : "last status"}</span>
+	            <strong>{desktopWorkspace?.lastStatus || (uiLanguage === "ko" ? "미설정" : "unset")}</strong>
           </article>
         </div>
 
         <div className="task-pipe-layout">
           <div className="task-pipe-controls">
             <label>
-              <span>Import path</span>
+	              <span>{uiLanguage === "ko" ? "가져올 경로" : "Import path"}</span>
               <input
                 value={workspaceImportPath}
                 onChange={(event) => setWorkspaceImportPath(event.target.value)}
@@ -11068,10 +11071,10 @@ function DesktopRuntimePanel({
             </label>
             <button type="button" onClick={importDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== "" || !workspaceImportPath.trim()}>
               <FolderOpen size={16} aria-hidden="true" />
-              <span>{workspaceHostBusy === "import" ? "Importing" : "Import Workspace"}</span>
+	              <span>{workspaceHostBusy === "import" ? (uiLanguage === "ko" ? "가져오는 중" : "Importing") : uiLanguage === "ko" ? "작업공간 가져오기" : "Import Workspace"}</span>
             </button>
             <label>
-              <span>Repository URL</span>
+	              <span>{uiLanguage === "ko" ? "저장소 URL" : "Repository URL"}</span>
               <input
                 value={workspaceCloneUrl}
                 onChange={(event) => setWorkspaceCloneUrl(event.target.value)}
@@ -11079,7 +11082,7 @@ function DesktopRuntimePanel({
               />
             </label>
             <label>
-              <span>Folder name</span>
+	              <span>{uiLanguage === "ko" ? "폴더 이름" : "Folder name"}</span>
               <input
                 value={workspaceCloneFolder}
                 onChange={(event) => setWorkspaceCloneFolder(event.target.value)}
@@ -11088,26 +11091,26 @@ function DesktopRuntimePanel({
             </label>
             <button type="button" onClick={cloneDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== "" || !workspaceCloneUrl.trim()}>
               <GitBranch size={16} aria-hidden="true" />
-              <span>{workspaceHostBusy === "clone" ? "Cloning" : "Clone Workspace"}</span>
+	              <span>{workspaceHostBusy === "clone" ? (uiLanguage === "ko" ? "복제 중" : "Cloning") : uiLanguage === "ko" ? "작업공간 복제" : "Clone Workspace"}</span>
             </button>
           </div>
 
           <div className="task-pipe-summary">
             <article>
-              <span>active workspace</span>
-              <code>{desktopWorkspace?.activeWorkspacePath || "runtime workspace pending"}</code>
+	              <span>{uiLanguage === "ko" ? "현재 작업공간" : "active workspace"}</span>
+	              <code>{desktopWorkspace?.activeWorkspacePath || (uiLanguage === "ko" ? "런타임 작업공간 대기 중" : "runtime workspace pending")}</code>
             </article>
             <article>
-              <span>managed root</span>
-              <code>{desktopWorkspace?.managedWorkspaceRoot || "app data workspace root pending"}</code>
+	              <span>{uiLanguage === "ko" ? "관리 루트" : "managed root"}</span>
+	              <code>{desktopWorkspace?.managedWorkspaceRoot || (uiLanguage === "ko" ? "앱 데이터 작업공간 루트 대기 중" : "app data workspace root pending")}</code>
             </article>
             <article>
-              <span>state file</span>
-              <code>{desktopWorkspace?.statePath || "workspace state pending"}</code>
+	              <span>{uiLanguage === "ko" ? "상태 파일" : "state file"}</span>
+	              <code>{desktopWorkspace?.statePath || (uiLanguage === "ko" ? "작업공간 상태 대기 중" : "workspace state pending")}</code>
             </article>
             <article>
-              <span>git version</span>
-              <strong>{desktopWorkspace?.gitVersion || "not checked"}</strong>
+	              <span>{uiLanguage === "ko" ? "Git 버전" : "git version"}</span>
+	              <strong>{desktopWorkspace?.gitVersion || (uiLanguage === "ko" ? "미점검" : "not checked")}</strong>
             </article>
           </div>
         </div>
@@ -11129,7 +11132,7 @@ function DesktopRuntimePanel({
       <section className="panel wide task-pipe-panel">
         <div className="panel-heading">
           <div>
-            <p className="eyebrow">Task Pipe Init</p>
+	            <p className="eyebrow">{uiLanguage === "ko" ? "작업 파이프라인 초기화" : "Task Pipe Init"}</p>
             <h2>작업 기준 다중 CLI 초기화</h2>
           </div>
           <GitBranch size={18} aria-hidden="true" />
@@ -11139,12 +11142,12 @@ function DesktopRuntimePanel({
           <div className="task-pipe-controls">
             <div className="settings-controlled-summary">
               <article>
-                <span>Pipe preset</span>
+	                <span>{uiLanguage === "ko" ? "파이프라인 프리셋" : "Pipe preset"}</span>
                 <strong>{selectedTaskPipe.label}</strong>
               </article>
               <article>
-                <span>Question handling</span>
-                <strong>{autoDeferQuestions ? "auto-defer" : "manual"}</strong>
+	                <span>{uiLanguage === "ko" ? "질문 처리" : "Question handling"}</span>
+	                <strong>{autoDeferQuestions ? (uiLanguage === "ko" ? "자동 보류" : "auto-defer") : uiLanguage === "ko" ? "수동" : "manual"}</strong>
               </article>
               <button type="button" onClick={() => onOpenSettings("quick")}>
                 <Settings size={15} aria-hidden="true" />
@@ -11152,36 +11155,36 @@ function DesktopRuntimePanel({
               </button>
             </div>
             <label className="session-prompt-field">
-              <span>Task intake</span>
+	              <span>{uiLanguage === "ko" ? "작업 요청" : "Task intake"}</span>
               <textarea value={taskPipePrompt} onChange={(event) => setTaskPipePrompt(event.target.value)} rows={4} />
             </label>
             <button type="button" onClick={initTaskPipe} disabled={!invoke || runningAdapterId !== "" || !taskPipePrompt.trim()}>
               <Network size={16} aria-hidden="true" />
-              <span>{runningAdapterId === "task-pipe" ? "Initializing" : "Init Pipe"}</span>
+	              <span>{runningAdapterId === "task-pipe" ? (uiLanguage === "ko" ? "초기화 중" : "Initializing") : uiLanguage === "ko" ? "파이프라인 시작" : "Init Pipe"}</span>
             </button>
           </div>
 
           <div className="task-pipe-summary">
             <article>
-              <span>preset</span>
+	              <span>{uiLanguage === "ko" ? "프리셋" : "preset"}</span>
               <strong>{selectedTaskPipe.label}</strong>
               <small>{selectedTaskPipe.intent}</small>
             </article>
             <article>
-              <span>lanes</span>
+	              <span>{uiLanguage === "ko" ? "실행 경로" : "lanes"}</span>
               <strong>{selectedTaskPipe.laneCount}</strong>
               <small>{selectedTaskPipe.adapterIds.join(" / ")}</small>
             </article>
             <article>
-              <span>merge gate</span>
-              <strong>{selectedTaskPipe.mergeGate}</strong>
-              <small>lane output waits for platform acceptance</small>
+	              <span>{uiLanguage === "ko" ? "병합 게이트" : "merge gate"}</span>
+	              <strong>{selectedTaskPipe.mergeGate}</strong>
+	              <small>{uiLanguage === "ko" ? "실행 경로 출력은 플랫폼 승인 뒤에 병합됩니다" : "lane output waits for platform acceptance"}</small>
             </article>
           </div>
         </div>
 
         {pipelineReports.length === 0 ? (
-          <p className="empty-state">아직 init된 task pipe가 없습니다. preset을 선택하고 pipe를 시작하세요.</p>
+	          <p className="empty-state">아직 초기화된 작업 파이프라인이 없습니다. 프리셋을 선택하고 파이프라인을 시작하세요.</p>
         ) : (
           <div className="task-pipe-report-grid">
             {pipelineReports.slice(0, 3).map((report) => (
@@ -11195,9 +11198,9 @@ function DesktopRuntimePanel({
                 </header>
                 <p>{report.workingDir}</p>
                 <div className="adapter-report">
-                  <span>{report.startedSessions} started</span>
-                  <span>{report.missingLanes} missing</span>
-                  <span>{report.pipes.length} pipes</span>
+	                  <span>{uiLanguage === "ko" ? `${report.startedSessions}개 시작` : `${report.startedSessions} started`}</span>
+	                  <span>{uiLanguage === "ko" ? `${report.missingLanes}개 누락` : `${report.missingLanes} missing`}</span>
+	                  <span>{uiLanguage === "ko" ? `${report.pipes.length}개 파이프` : `${report.pipes.length} pipes`}</span>
                 </div>
                 <div className="pipe-lane-grid">
                   {report.lanes.map((lane) => (
@@ -11230,34 +11233,34 @@ function DesktopRuntimePanel({
           <div className="desktop-actions">
             <button type="button" onClick={refreshAccumulatedDataOverview} disabled={!invoke || accumulatedDataBusy}>
               <Database size={15} aria-hidden="true" />
-              <span>{accumulatedDataBusy ? "Refreshing" : "Refresh Index"}</span>
+	            <span>{accumulatedDataBusy ? (uiLanguage === "ko" ? "새로고침 중" : "Refreshing") : uiLanguage === "ko" ? "인덱스 새로고침" : "Refresh Index"}</span>
             </button>
           </div>
         </div>
         {accumulatedDataNotice && <p className="decision-resume-notice">{accumulatedDataNotice}</p>}
         <div className="task-run-summary-strip">
           <article>
-            <span>stores</span>
+	            <span>{uiLanguage === "ko" ? "저장소" : "stores"}</span>
             <strong>{accumulatedDataStats.visibleStores}/{accumulatedDataStats.stores}</strong>
           </article>
           <article>
-            <span>records</span>
+	            <span>{uiLanguage === "ko" ? "기록" : "records"}</span>
             <strong>{accumulatedDataStats.records}</strong>
           </article>
           <article>
-            <span>total size</span>
+	            <span>{uiLanguage === "ko" ? "총 용량" : "total size"}</span>
             <strong>{formatBytes(accumulatedDataStats.bytes)}</strong>
           </article>
           <article>
-            <span>latest</span>
+	            <span>{uiLanguage === "ko" ? "최근" : "latest"}</span>
             <strong>{accumulatedDataStats.latestUpdatedAt ? formatTimeLabel(accumulatedDataStats.latestUpdatedAt) : "idle"}</strong>
           </article>
           <article>
-            <span>scan cap</span>
+	            <span>{uiLanguage === "ko" ? "스캔 한도" : "scan cap"}</span>
             <strong>{accumulatedDataStats.boundedScanMaxFiles || "n/a"}</strong>
           </article>
           <article>
-            <span>format</span>
+	            <span>{uiLanguage === "ko" ? "형식" : "format"}</span>
             <strong>{accumulatedDataOverview?.schemaVersion || "pending"}</strong>
           </article>
         </div>
@@ -11274,7 +11277,7 @@ function DesktopRuntimePanel({
                   <strong>{store.status}</strong>
                 </header>
                 <div className="accumulated-store-stats">
-                  <span>{store.count} records</span>
+	                  <span>{uiLanguage === "ko" ? `${store.count}개 기록` : `${store.count} records`}</span>
                   <span>{formatBytes(store.sizeBytes)}</span>
                   <span>{store.latestUpdatedAt ? formatTimeLabel(store.latestUpdatedAt) : "idle"}</span>
                 </div>
@@ -11295,22 +11298,24 @@ function DesktopRuntimePanel({
           <article className="accumulated-data-map">
             <header>
               <div>
-                <span>{accumulatedDataOverview?.status || "not loaded"}</span>
-                <h3>User-visible data map</h3>
+	                <span>{accumulatedDataOverview?.status || (uiLanguage === "ko" ? "불러오지 않음" : "not loaded")}</span>
+	                <h3>{uiLanguage === "ko" ? "사용자에게 보이는 데이터 지도" : "User-visible data map"}</h3>
               </div>
               <Database size={18} aria-hidden="true" />
             </header>
             <div className="accumulated-summary-list">
               {(accumulatedDataOverview?.summary || [
-                "Run the index to load task runs, decisions, audits, support bundles, and agent workspace records."
+	                uiLanguage === "ko"
+	                  ? "인덱스를 실행하면 작업 실행, 결정, 감사, 지원 번들, 에이전트 작업공간 기록을 불러옵니다."
+	                  : "Run the index to load task runs, decisions, audits, support bundles, and agent workspace records."
               ]).map((item) => (
                 <p key={item}>{item}</p>
               ))}
             </div>
             <div className="task-run-detail-meta">
               <span>{accumulatedDataOverview ? formatTimeLabel(accumulatedDataOverview.generatedAt) : "idle"}</span>
-              <span>{accumulatedDataOverview?.status || "not-loaded"}</span>
-              <span>{accumulatedDataOverview?.formatMigrationStatus || "manifest-pending"}</span>
+	              <span>{accumulatedDataOverview?.status || (uiLanguage === "ko" ? "불러오지 않음" : "not-loaded")}</span>
+	              <span>{accumulatedDataOverview?.formatMigrationStatus || (uiLanguage === "ko" ? "매니페스트 대기" : "manifest-pending")}</span>
             </div>
             <PathDisclosure
               label="인덱스 저장 위치"
@@ -11335,38 +11340,38 @@ function DesktopRuntimePanel({
           <div className="desktop-actions">
             <button type="button" onClick={refreshRuntimeDataBoundary} disabled={!invoke || runtimeDataBusy !== ""}>
               <Activity size={15} aria-hidden="true" />
-              <span>{runtimeDataBusy === "roots" ? "Checking" : "Roots"}</span>
+	              <span>{runtimeDataBusy === "roots" ? (uiLanguage === "ko" ? "점검 중" : "Checking") : uiLanguage === "ko" ? "루트 확인" : "Roots"}</span>
             </button>
             <button type="button" onClick={runInstallerPayloadAudit} disabled={!invoke || runtimeDataBusy !== ""}>
               <ShieldCheck size={15} aria-hidden="true" />
-              <span>{runtimeDataBusy === "payload" ? "Auditing" : "Audit Payload"}</span>
+	              <span>{runtimeDataBusy === "payload" ? (uiLanguage === "ko" ? "감사 중" : "Auditing") : uiLanguage === "ko" ? "페이로드 감사" : "Audit Payload"}</span>
             </button>
             <button type="button" onClick={createSupportDiagnosticBundle} disabled={!invoke || runtimeDataBusy !== ""}>
               <FileSearch size={15} aria-hidden="true" />
-              <span>{runtimeDataBusy === "support" ? "Creating" : "Support Bundle"}</span>
+	              <span>{runtimeDataBusy === "support" ? (uiLanguage === "ko" ? "생성 중" : "Creating") : uiLanguage === "ko" ? "지원 번들" : "Support Bundle"}</span>
             </button>
           </div>
         </div>
         {runtimeDataNotice && <p className="decision-resume-notice">{runtimeDataNotice}</p>}
         <div className="task-run-summary-strip">
           <article>
-            <span>roots</span>
+	            <span>{uiLanguage === "ko" ? "루트" : "roots"}</span>
             <strong>{runtimeDataStats.roots}</strong>
           </article>
           <article>
-            <span>ready</span>
+	            <span>{uiLanguage === "ko" ? "준비됨" : "ready"}</span>
             <strong>{runtimeDataStats.ready}</strong>
           </article>
           <article>
-            <span>created</span>
+	            <span>{uiLanguage === "ko" ? "생성됨" : "created"}</span>
             <strong>{runtimeDataStats.created}</strong>
           </article>
           <article>
-            <span>payload findings</span>
+	            <span>{uiLanguage === "ko" ? "페이로드 발견" : "payload findings"}</span>
             <strong>{payloadAudit?.flaggedCount ?? 0}</strong>
           </article>
           <article>
-            <span>high</span>
+	            <span>{uiLanguage === "ko" ? "높음" : "high"}</span>
             <strong>{runtimeDataStats.highFindings}</strong>
           </article>
         </div>
@@ -11380,7 +11385,7 @@ function DesktopRuntimePanel({
                     <span>{root.plane}</span>
                     <h3>{root.label}</h3>
                   </div>
-                  <strong>{root.created ? "created" : root.exists ? "ready" : "missing"}</strong>
+	                  <strong>{root.created ? (uiLanguage === "ko" ? "생성됨" : "created") : root.exists ? (uiLanguage === "ko" ? "준비됨" : "ready") : uiLanguage === "ko" ? "없음" : "missing"}</strong>
                 </header>
                 <p>{root.purpose}</p>
                 <PathDisclosure label="세부 경로" value={root.path} />
@@ -11391,7 +11396,7 @@ function DesktopRuntimePanel({
               </article>
             ))}
             {!runtimeDataBoundary && (
-              <p className="empty-state">Runtime root 상태가 아직 로드되지 않았습니다.</p>
+	              <p className="empty-state">런타임 루트 상태가 아직 로드되지 않았습니다.</p>
             )}
           </div>
 
@@ -11399,16 +11404,16 @@ function DesktopRuntimePanel({
             <header>
               <div>
                 <span>{payloadAudit?.status || "not-scanned"}</span>
-                <h3>Installer Payload Audit</h3>
+	                <h3>{uiLanguage === "ko" ? "설치 페이로드 감사" : "Installer Payload Audit"}</h3>
               </div>
               <strong>{payloadAudit?.flaggedCount ?? 0}</strong>
             </header>
             <div className="task-run-detail-meta">
-              <span>{payloadAudit ? `${payloadAudit.scannedFiles} files` : "0 files"}</span>
+	              <span>{payloadAudit ? (uiLanguage === "ko" ? `${payloadAudit.scannedFiles}개 파일` : `${payloadAudit.scannedFiles} files`) : uiLanguage === "ko" ? "0개 파일" : "0 files"}</span>
               <span>{payloadAudit ? formatBytes(payloadAudit.scannedBytes) : "0 B"}</span>
               <span>{payloadAudit?.maxScanFiles ?? 0} max</span>
             </div>
-            <PathDisclosure label="감사 리포트 경로" value={payloadAudit?.auditPath || "No audit report yet"} />
+	            <PathDisclosure label="감사 보고서 경로" value={payloadAudit?.auditPath || (uiLanguage === "ko" ? "감사 보고서 없음" : "No audit report yet")} />
             <div className="payload-finding-list">
               {(payloadAudit?.findings || []).slice(0, 6).map((finding) => (
                 <div key={`${finding.ruleId}-${finding.path}`}>
@@ -11418,7 +11423,7 @@ function DesktopRuntimePanel({
                   <code>{finding.path}</code>
                 </div>
               ))}
-              {payloadAudit && payloadAudit.findings.length === 0 && <p className="empty-state">No payload findings.</p>}
+	              {payloadAudit && payloadAudit.findings.length === 0 && <p className="empty-state">{uiLanguage === "ko" ? "페이로드 문제를 찾지 못했습니다." : "No payload findings."}</p>}
             </div>
           </article>
 
@@ -11426,16 +11431,16 @@ function DesktopRuntimePanel({
             <header>
               <div>
                 <span>{supportBundle?.status || "not-created"}</span>
-                <h3>Support Diagnostic Bundle</h3>
+	                <h3>{uiLanguage === "ko" ? "지원 진단 번들" : "Support Diagnostic Bundle"}</h3>
               </div>
-              <strong>{supportBundle?.redacted ? "redacted" : "idle"}</strong>
+	              <strong>{supportBundle?.redacted ? (uiLanguage === "ko" ? "민감정보 제거됨" : "redacted") : uiLanguage === "ko" ? "대기 중" : "idle"}</strong>
             </header>
             <div className="support-bundle-grid">
-              <PathDisclosure label="Manifest" value={supportBundle?.manifestPath || "No manifest yet"} />
-              <PathDisclosure label="Runtime roots" value={supportBundle?.runtimeRootsPath || "No runtime roots export"} />
-              <PathDisclosure label="Payload audit" value={supportBundle?.installerPayloadAuditPath || "No payload audit export"} />
-              <PathDisclosure label="Task run summary" value={supportBundle?.taskRunSummaryPath || "No task-run summary"} />
-              <PathDisclosure label="Recent events" value={supportBundle?.recentEventsPath || "No recent events log"} />
+	              <PathDisclosure label={uiLanguage === "ko" ? "매니페스트" : "Manifest"} value={supportBundle?.manifestPath || (uiLanguage === "ko" ? "매니페스트 없음" : "No manifest yet")} />
+	              <PathDisclosure label={uiLanguage === "ko" ? "런타임 루트" : "Runtime roots"} value={supportBundle?.runtimeRootsPath || (uiLanguage === "ko" ? "런타임 루트 내보내기 없음" : "No runtime roots export")} />
+	              <PathDisclosure label={uiLanguage === "ko" ? "페이로드 감사" : "Payload audit"} value={supportBundle?.installerPayloadAuditPath || (uiLanguage === "ko" ? "페이로드 감사 내보내기 없음" : "No payload audit export")} />
+	              <PathDisclosure label={uiLanguage === "ko" ? "실행 기록 요약" : "Task run summary"} value={supportBundle?.taskRunSummaryPath || (uiLanguage === "ko" ? "실행 기록 요약 없음" : "No task-run summary")} />
+	              <PathDisclosure label={uiLanguage === "ko" ? "최근 이벤트" : "Recent events"} value={supportBundle?.recentEventsPath || (uiLanguage === "ko" ? "최근 이벤트 로그 없음" : "No recent events log")} />
             </div>
           </article>
         </div>
@@ -11450,7 +11455,7 @@ function DesktopRuntimePanel({
           <div className="desktop-actions">
             <button type="button" onClick={refreshServiceReadiness} disabled={!invoke || serviceReadinessBusy}>
               <ShieldCheck size={15} aria-hidden="true" />
-              <span>{serviceReadinessBusy ? "Checking" : "Run Readiness"}</span>
+	              <span>{serviceReadinessBusy ? (uiLanguage === "ko" ? "점검 중" : "Checking") : uiLanguage === "ko" ? "준비도 점검" : "Run Readiness"}</span>
             </button>
           </div>
         </div>
@@ -11468,32 +11473,32 @@ function DesktopRuntimePanel({
           <div>
             <span>{serviceReadiness?.releaseLane || "local_internal"}</span>
             <strong>{serviceReadiness?.status || "not checked"}</strong>
-            <p>{serviceReadiness?.serviceClaim || "서비스 준비도 report를 실행하면 공개 배포 blocker와 다음 조치가 표시됩니다."}</p>
+	            <p>{serviceReadiness?.serviceClaim || "서비스 준비도 보고서를 실행하면 공개 배포 차단 요소와 다음 조치가 표시됩니다."}</p>
           </div>
           <div className="service-score-ring">
             <span>{serviceReadiness?.score ?? 0}</span>
-            <small>score</small>
+	          <small>{uiLanguage === "ko" ? "점수" : "score"}</small>
           </div>
         </div>
         <div className="task-run-summary-strip">
           <article>
-            <span>groups</span>
+	            <span>{uiLanguage === "ko" ? "그룹" : "groups"}</span>
             <strong>{serviceReadinessStats.passedGroups}/{serviceReadinessStats.groups}</strong>
           </article>
           <article>
-            <span>Public blockers</span>
+	            <span>{uiLanguage === "ko" ? "공개 차단 요소" : "Public blockers"}</span>
             <strong>{serviceReadinessStats.publicBlockers}</strong>
           </article>
           <article>
-            <span>warnings</span>
+	            <span>{uiLanguage === "ko" ? "경고" : "warnings"}</span>
             <strong>{serviceReadinessStats.warnings}</strong>
           </article>
           <article>
-            <span>payload findings</span>
+	            <span>{uiLanguage === "ko" ? "페이로드 발견" : "payload findings"}</span>
             <strong>{serviceReadiness?.payloadFlaggedCount ?? 0}</strong>
           </article>
           <article>
-            <span>generated</span>
+	            <span>{uiLanguage === "ko" ? "생성 시각" : "generated"}</span>
             <strong>{serviceReadiness ? formatTimeLabel(serviceReadiness.generatedAt) : "idle"}</strong>
           </article>
         </div>
@@ -11510,8 +11515,8 @@ function DesktopRuntimePanel({
                   <strong>{group.status}</strong>
                 </header>
                 <div className="adapter-report">
-                  <span>{group.passedChecks}/{group.totalChecks} checks</span>
-                  <span>{group.checks.filter((check) => check.requiredForPublic).length} public</span>
+	                  <span>{uiLanguage === "ko" ? `${group.passedChecks}/${group.totalChecks}개 점검` : `${group.passedChecks}/${group.totalChecks} checks`}</span>
+	                  <span>{uiLanguage === "ko" ? `공개 필수 ${group.checks.filter((check) => check.requiredForPublic).length}개` : `${group.checks.filter((check) => check.requiredForPublic).length} public`}</span>
                 </div>
                 <div className="service-check-list">
                   {group.checks.map((check) => (
@@ -11525,15 +11530,15 @@ function DesktopRuntimePanel({
               </article>
             ))}
             {!serviceReadiness && (
-              <p className="empty-state">Run Readiness를 누르면 signed distribution, update/recovery, privacy/logging, onboarding gap을 점검합니다.</p>
+	              <p className="empty-state">준비도 점검을 누르면 서명된 배포, 업데이트/복구, 개인정보/로그, 온보딩 부족 항목을 점검합니다.</p>
             )}
           </div>
 
           <article className="service-next-actions">
             <header>
               <div>
-                <span>{serviceReadiness?.publicBlockers.length || 0} blockers</span>
-                <h3>Public blockers / next actions</h3>
+	                <span>{uiLanguage === "ko" ? `${serviceReadiness?.publicBlockers.length || 0}개 차단 요소` : `${serviceReadiness?.publicBlockers.length || 0} blockers`}</span>
+	                <h3>{uiLanguage === "ko" ? "공개 차단 요소 / 다음 조치" : "Public blockers / next actions"}</h3>
               </div>
               <AlertTriangle size={18} aria-hidden="true" />
             </header>
@@ -11546,10 +11551,10 @@ function DesktopRuntimePanel({
                 </div>
               ))}
               {serviceReadiness && serviceReadiness.nextActions.length === 0 && (
-                <p className="empty-state">No next actions. Public readiness still needs final clean release validation before release language.</p>
+	                <p className="empty-state">{uiLanguage === "ko" ? "다음 조치는 없습니다. 공개 준비 완료라고 표현하기 전 최종 릴리스 검증은 아직 필요합니다." : "No next actions. Public readiness still needs final clean release validation before release language."}</p>
               )}
               {!serviceReadiness && (
-                <p className="empty-state">공개 서비스 blocker는 readiness report 실행 후 표시됩니다.</p>
+	                <p className="empty-state">공개 서비스 차단 요소는 준비도 보고서 실행 후 표시됩니다.</p>
               )}
             </div>
             <code>{serviceReadiness?.payloadAuditPath || "payload audit path pending"}</code>
@@ -11564,41 +11569,41 @@ function DesktopRuntimePanel({
             <h2>저장된 실행 기록과 로그</h2>
           </div>
           <div className="desktop-actions">
-            <button type="button" onClick={refreshTaskRunRecords} disabled={!invoke || runningAdapterId !== ""}>
-              <FileSearch size={15} aria-hidden="true" />
-              <span>Refresh Records</span>
-            </button>
+	            <button type="button" onClick={refreshTaskRunRecords} disabled={!invoke || runningAdapterId !== ""}>
+	              <FileSearch size={15} aria-hidden="true" />
+	              <span>{uiLanguage === "ko" ? "기록 새로고침" : "Refresh Records"}</span>
+	            </button>
             <button type="button" onClick={pruneTaskRunRecords} disabled={!invoke || taskRunBusy || taskRunRecords.length <= 30}>
               <ShieldCheck size={15} aria-hidden="true" />
-              <span>Prune Old</span>
+	              <span>{uiLanguage === "ko" ? "오래된 기록 정리" : "Prune Old"}</span>
             </button>
           </div>
         </div>
         {taskRunPruneNotice && <p className="decision-resume-notice">{taskRunPruneNotice}</p>}
         <div className="task-run-summary-strip">
           <article>
-            <span>records</span>
+	            <span>{uiLanguage === "ko" ? "기록" : "records"}</span>
             <strong>{taskRunRecords.length}</strong>
           </article>
           <article>
-            <span>active</span>
+	            <span>{uiLanguage === "ko" ? "진행 중" : "active"}</span>
             <strong>{taskRunStats.active}</strong>
           </article>
           <article>
-            <span>log bytes</span>
+	            <span>{uiLanguage === "ko" ? "로그 용량" : "log bytes"}</span>
             <strong>{formatBytes(taskRunStats.outputBytes)}</strong>
           </article>
           <article>
-            <span>decisions</span>
+	            <span>{uiLanguage === "ko" ? "결정" : "decisions"}</span>
             <strong>{taskRunStats.decisions}</strong>
           </article>
           <article>
-            <span>truncated</span>
+	            <span>{uiLanguage === "ko" ? "잘림" : "truncated"}</span>
             <strong>{taskRunStats.truncated}</strong>
           </article>
         </div>
         {taskRunRecords.length === 0 ? (
-          <p className="empty-state">아직 저장된 task-run record가 없습니다. 세션이나 task pipe를 실행하면 record.json과 stdout/stderr 로그가 생성됩니다.</p>
+	          <p className="empty-state">아직 저장된 작업 실행 기록이 없습니다. 세션이나 작업 파이프라인을 실행하면 record.json과 표준 출력/오류 로그가 생성됩니다.</p>
         ) : (
           <div className="task-run-store-layout">
             <div className="task-run-grid">
@@ -11616,9 +11621,9 @@ function DesktopRuntimePanel({
                   </header>
                   <div className="task-run-meta">
                     <span>{record.adapterId}</span>
-                    <span>{record.laneId || record.pipelineId || "single lane"}</span>
+	                    <span>{record.laneId || record.pipelineId || (uiLanguage === "ko" ? "단일 실행 경로" : "single lane")}</span>
                     <span>{formatDuration(record.elapsedMs)}</span>
-                    <span>{record.exitCode ?? "no code"}</span>
+	                    <span>{record.exitCode ?? (uiLanguage === "ko" ? "코드 없음" : "no code")}</span>
                   </div>
                   <p>{record.recordPath}</p>
                   <div className="task-run-log-paths">
@@ -11627,8 +11632,8 @@ function DesktopRuntimePanel({
                   </div>
                   <div className="adapter-report">
                     <span>{formatBytes(record.stdoutBytes + record.stderrBytes)}</span>
-                    <span>{record.pendingDecisionPrompts} pending</span>
-                    <span>{record.autoDeferTriggered ? "auto-deferred" : "captured"}</span>
+	                    <span>{uiLanguage === "ko" ? `${record.pendingDecisionPrompts}개 대기` : `${record.pendingDecisionPrompts} pending`}</span>
+	                    <span>{record.autoDeferTriggered ? (uiLanguage === "ko" ? "자동 보류됨" : "auto-deferred") : uiLanguage === "ko" ? "기록됨" : "captured"}</span>
                   </div>
                   <div className="desktop-actions">
                     <button type="button" onClick={() => loadTaskRunDetail(record.taskRunId)} disabled={!invoke || taskRunBusy}>
@@ -11651,24 +11656,24 @@ function DesktopRuntimePanel({
             <article className="task-run-detail">
               <header>
                 <div>
-                  <span>{taskRunDetail?.record.taskRunId || selectedTaskRunRecord?.taskRunId || "no-task-run"}</span>
-                  <h3>{taskRunDetail?.record.taskKind || selectedTaskRunRecord?.taskKind || "Task run detail"}</h3>
+	                  <span>{taskRunDetail?.record.taskRunId || selectedTaskRunRecord?.taskRunId || (uiLanguage === "ko" ? "실행 기록 없음" : "no-task-run")}</span>
+	                  <h3>{taskRunDetail?.record.taskKind || selectedTaskRunRecord?.taskKind || (uiLanguage === "ko" ? "실행 기록 상세" : "Task run detail")}</h3>
                 </div>
                 <strong>{taskRunDetail?.record.status || selectedTaskRunRecord?.status || "idle"}</strong>
               </header>
               {!taskRunDetail ? (
                 <p className="empty-state">
                   {uiLanguage === "ko"
-                    ? "기록을 선택하고 로그 열기를 누르면 제한된 stdout/stderr 미리보기와 실행 기록 JSON이 표시됩니다."
+	                    ? "기록을 선택하고 로그 열기를 누르면 제한된 표준 출력/오류 미리보기와 실행 기록 JSON이 표시됩니다."
                     : "Select a record and open logs to view bounded stdout/stderr previews and the run record JSON."}
                 </p>
               ) : (
                 <>
                   <div className="task-run-detail-meta">
                     <span>{taskRunDetail.record.adapterId}</span>
-                    <span>{taskRunDetail.record.laneId || taskRunDetail.record.pipelineId || "single lane"}</span>
+	                    <span>{taskRunDetail.record.laneId || taskRunDetail.record.pipelineId || (uiLanguage === "ko" ? "단일 실행 경로" : "single lane")}</span>
                     <span>{formatBytes(taskRunDetail.record.stdoutBytes + taskRunDetail.record.stderrBytes)}</span>
-                    <span>{taskRunDetail.maxLogPreviewBytes.toLocaleString("ko-KR")} byte preview</span>
+	                    <span>{uiLanguage === "ko" ? `${taskRunDetail.maxLogPreviewBytes.toLocaleString("ko-KR")}바이트 미리보기` : `${taskRunDetail.maxLogPreviewBytes.toLocaleString("ko-KR")} byte preview`}</span>
                   </div>
                   <div className="task-run-preview-tabs">
                     <article>
@@ -11833,20 +11838,20 @@ function DesktopRuntimePanel({
       >
         <summary>
           <span>{uiLanguage === "ko" ? "실행 기록과 결정함 열기" : "Open run records and decisions"}</span>
-          <small>{uiLanguage === "ko" ? "터미널 출력, decision inbox, 근거 후보" : "Terminal output, decision inbox, evidence candidates"}</small>
+	          <small>{uiLanguage === "ko" ? "터미널 출력, 결정함, 근거 후보" : "Terminal output, decision inbox, evidence candidates"}</small>
         </summary>
         {runRecordsOpen && (
         <div className="section-secondary-stack">
       <section className="panel wide terminal-output-panel">
         <div className="panel-heading">
           <div>
-            <p className="eyebrow">Terminal Output</p>
-            <h2>최근 bounded 실행 결과</h2>
+	            <p className="eyebrow">{uiLanguage === "ko" ? "터미널 출력" : "Terminal Output"}</p>
+	            <h2>{uiLanguage === "ko" ? "최근 범위 제한 실행 결과" : "Latest bounded run output"}</h2>
           </div>
-          <span className="result-count">{reports.length} reports</span>
+	          <span className="result-count">{uiLanguage === "ko" ? `${reports.length}개 보고서` : `${reports.length} reports`}</span>
         </div>
         {reports.length === 0 ? (
-          <p className="empty-state">아직 실행한 CLI health check가 없습니다.</p>
+	          <p className="empty-state">아직 실행한 CLI 상태 점검이 없습니다.</p>
         ) : (
           <div className="terminal-report-list">
             {reports.map((report) => (
@@ -11871,34 +11876,34 @@ function DesktopRuntimePanel({
       <section className="panel wide desktop-decision-panel">
         <div className="panel-heading">
           <div>
-            <p className="eyebrow">Decision Inbox</p>
+	            <p className="eyebrow">{uiLanguage === "ko" ? "결정함" : "Decision Inbox"}</p>
             <h2>보류된 사용자 결정</h2>
           </div>
           <div className="desktop-actions">
             <button type="button" onClick={refreshDecisionInbox} disabled={!invoke || decisionBusy}>
               <Activity size={15} aria-hidden="true" />
-              <span>Refresh</span>
+	              <span>{uiLanguage === "ko" ? "새로고침" : "Refresh"}</span>
             </button>
           </div>
         </div>
 
         <div className="decision-summary-strip">
           <article>
-            <span>open</span>
+	            <span>{uiLanguage === "ko" ? "열림" : "open"}</span>
             <strong>{inboxReport?.openCount ?? 0}</strong>
           </article>
           <article>
-            <span>answered</span>
+	            <span>{uiLanguage === "ko" ? "답변됨" : "answered"}</span>
             <strong>{inboxReport?.answeredCount ?? 0}</strong>
           </article>
           <article>
-            <span>total</span>
+	            <span>{uiLanguage === "ko" ? "전체" : "total"}</span>
             <strong>{inboxReport?.totalCount ?? 0}</strong>
           </article>
         </div>
 
         {!inboxReport || inboxReport.decisions.length === 0 ? (
-          <p className="empty-state">보류된 decision inbox 항목이 없습니다.</p>
+	          <p className="empty-state">보류된 결정함 항목이 없습니다.</p>
         ) : (
           <div className="decision-inbox-layout">
             <div className="decision-list">
@@ -11906,7 +11911,7 @@ function DesktopRuntimePanel({
                 <div key={group.id} className="decision-group">
                   <header>
                     <strong>{group.label}</strong>
-                    <span>{group.openCount} open / {group.answeredCount} answered</span>
+	                    <span>{uiLanguage === "ko" ? `${group.openCount}개 열림 / ${group.answeredCount}개 답변됨` : `${group.openCount} open / ${group.answeredCount} answered`}</span>
                   </header>
                   {group.decisions.slice(0, 6).map((decision) => (
                     <button
@@ -11934,13 +11939,13 @@ function DesktopRuntimePanel({
                     </div>
                     <strong>{selectedDecision.status}</strong>
                   </header>
-                  <p>{selectedDecision.impact || "No impact note"}</p>
-                  <small>{selectedDecision.resumeAction || "No resume action recorded"}</small>
+	                  <p>{selectedDecision.impact || (uiLanguage === "ko" ? "영향 설명 없음" : "No impact note")}</p>
+	                  <small>{selectedDecision.resumeAction || (uiLanguage === "ko" ? "재개 작업 기록 없음" : "No resume action recorded")}</small>
                   {(selectedDecision.sessionId || selectedDecision.adapterId) && (
                     <div className="decision-resume-strip">
-                      <span>{selectedDecision.adapterId || "linked session"}</span>
-                      <strong>{selectedDecision.sessionId || "no session id"}</strong>
-                      <small>{selectedDecisionSession?.status || "not loaded"}</small>
+	                      <span>{selectedDecision.adapterId || (uiLanguage === "ko" ? "연결된 세션" : "linked session")}</span>
+	                      <strong>{selectedDecision.sessionId || (uiLanguage === "ko" ? "세션 ID 없음" : "no session id")}</strong>
+	                      <small>{selectedDecisionSession?.status || (uiLanguage === "ko" ? "불러오지 않음" : "not loaded")}</small>
                     </div>
                   )}
                   {decisionResumeNotice && <p className="decision-resume-notice">{decisionResumeNotice}</p>}
@@ -11952,28 +11957,28 @@ function DesktopRuntimePanel({
                   )}
                   <div className="decision-replay-strip" aria-label="decision replay">
                     <article>
-                      <span>created</span>
+	                      <span>{uiLanguage === "ko" ? "생성됨" : "created"}</span>
                       <strong>{selectedDecision.createdAt || "unknown"}</strong>
                     </article>
                     <article>
-                      <span>blocked</span>
+	                      <span>{uiLanguage === "ko" ? "차단" : "blocked"}</span>
                       <strong>{selectedDecision.blockedWorkCount}</strong>
                     </article>
                     <article>
-                      <span>unblocked</span>
+	                      <span>{uiLanguage === "ko" ? "진행 가능" : "unblocked"}</span>
                       <strong>{selectedDecision.unblockedWorkCount}</strong>
                     </article>
                     <article>
-                      <span>answered</span>
-                      <strong>{selectedDecision.answeredAt || "pending"}</strong>
+	                      <span>{uiLanguage === "ko" ? "답변됨" : "answered"}</span>
+	                      <strong>{selectedDecision.answeredAt || (uiLanguage === "ko" ? "대기 중" : "pending")}</strong>
                     </article>
                   </div>
                   <div className="decision-answer-controls">
                     <select value={decisionAnswerType} onChange={(event) => setDecisionAnswerType(event.target.value)}>
-                      <option value="instruction">Instruction</option>
-                      <option value="approve">Approve</option>
-                      <option value="edit">Edit</option>
-                      <option value="reject">Reject</option>
+	                      <option value="instruction">{uiLanguage === "ko" ? "지시" : "Instruction"}</option>
+	                      <option value="approve">{uiLanguage === "ko" ? "승인" : "Approve"}</option>
+	                      <option value="edit">{uiLanguage === "ko" ? "수정" : "Edit"}</option>
+	                      <option value="reject">{uiLanguage === "ko" ? "거절" : "Reject"}</option>
                     </select>
                     <textarea
                       value={decisionAnswer}
@@ -11986,21 +11991,21 @@ function DesktopRuntimePanel({
                       disabled={!invoke || decisionBusy || !decisionAnswer.trim()}
                     >
                       <CheckCircle2 size={15} aria-hidden="true" />
-                      <span>{decisionBusy ? "Saving" : "Answer"}</span>
+	                      <span>{decisionBusy ? (uiLanguage === "ko" ? "저장 중" : "Saving") : uiLanguage === "ko" ? "답변 저장" : "Answer"}</span>
                     </button>
                     <button
                       type="button"
                       onClick={() => answerDecision(true)}
                       disabled={!invoke || decisionBusy || !decisionAnswer.trim() || !canResumeSelectedDecision}
-                      title={canResumeSelectedDecision ? "Send this answer to the linked CLI session" : "Linked CLI session is not active"}
+	                      title={canResumeSelectedDecision ? (uiLanguage === "ko" ? "이 답변을 연결된 CLI 세션으로 보냅니다" : "Send this answer to the linked CLI session") : uiLanguage === "ko" ? "연결된 CLI 세션이 활성 상태가 아닙니다" : "Linked CLI session is not active"}
                     >
                       <ArrowRight size={15} aria-hidden="true" />
-                      <span>{decisionBusy ? "Resuming" : "Answer & Resume"}</span>
+	                      <span>{decisionBusy ? (uiLanguage === "ko" ? "재개 중" : "Resuming") : uiLanguage === "ko" ? "답변 후 재개" : "Answer & Resume"}</span>
                     </button>
                   </div>
                 </>
               ) : (
-                <p className="empty-state">선택된 decision이 없습니다.</p>
+	                <p className="empty-state">선택된 결정이 없습니다.</p>
               )}
             </article>
           </div>
@@ -12009,7 +12014,7 @@ function DesktopRuntimePanel({
         <div className="decision-candidate-stack">
           <div className="panel-heading compact-heading">
             <div>
-              <p className="eyebrow">Live Candidates</p>
+	              <p className="eyebrow">{uiLanguage === "ko" ? "실시간 후보" : "Live Candidates"}</p>
               <h3>최근 CLI 질문 후보</h3>
             </div>
           </div>
@@ -12032,13 +12037,13 @@ function DesktopRuntimePanel({
       <section className="panel wide evidence-panel">
         <div className="panel-heading">
           <div>
-            <p className="eyebrow">Evidence / Promotion</p>
+	            <p className="eyebrow">{uiLanguage === "ko" ? "근거 / 승격" : "Evidence / Promotion"}</p>
             <h2>근거와 재사용 후보</h2>
           </div>
           <FileSearch size={18} aria-hidden="true" />
         </div>
         {evidenceItems.length === 0 ? (
-          <p className="empty-state">아직 승격할 terminal event, decision, source diff, artifact가 없습니다.</p>
+	          <p className="empty-state">아직 승격할 터미널 이벤트, 결정, 소스 변경, 산출물이 없습니다.</p>
         ) : (
           <div className="evidence-grid">
             {evidenceItems.map((item) => (
