@@ -1,0 +1,33 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-public-release-developer-repatch",
+  "resource_risk_occurred": true,
+  "checked_resources": [
+    {
+      "resource": "developer updater private key",
+      "handling": "generated under ignored src-tauri/target/public-release/dev",
+      "result": "private key content was not written to tracked files"
+    },
+    {
+      "resource": "generated developer env file",
+      "handling": "path-based export",
+      "result": "stores TAURI_SIGNING_PRIVATE_KEY_PATH and public key, not private key content"
+    },
+    {
+      "resource": "Apple signing/notarization credentials",
+      "handling": "not generated",
+      "result": "remain required external blockers for real public distribution"
+    },
+    {
+      "resource": "subprocesses",
+      "handling": "Tauri signer and pnpm checks",
+      "result": "no long-running process left open"
+    },
+    {
+      "resource": "internal desktop package build",
+      "handling": "Tauri internal package pipeline",
+      "result": "completed app and DMG artifacts with signature and DMG verification"
+    }
+  ],
+  "cleanup": "Temporary /tmp dev env was only used for validation; repo dev env lives under ignored target for developer use."
+}

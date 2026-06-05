@@ -58,7 +58,7 @@ export function checkReleaseReadiness({ mode = "internal", reportOnly = false } 
     requireCheck(checks, tauriCargo.includes("tauri-plugin-updater"), "Tauri updater Rust plugin dependency is installed", blockers);
     requireCheck(checks, tauriLib.includes("tauri_plugin_updater::Builder"), "Tauri updater Rust plugin is initialized", blockers);
     requireCheck(checks, tauriLib.includes("service-update-channel.json"), "Bundled service-update-channel marker is checked at runtime", blockers);
-    requireCheck(checks, publicConfig.envSummary.updaterPrivateKeyPresent, "TAURI_SIGNING_PRIVATE_KEY is present for updater artifact signing", blockers);
+    requireCheck(checks, publicConfig.envSummary.updaterPrivateKeyPresent, "TAURI_SIGNING_PRIVATE_KEY or TAURI_SIGNING_PRIVATE_KEY_PATH is present for updater artifact signing", blockers);
     requireCheck(checks, Boolean(publicConfig.envSummary.updaterPublicKeySha25616), "TAURI_UPDATER_PUBLIC_KEY is present for updater verification", blockers);
     requireCheck(checks, publicConfig.envSummary.updaterEndpointCount > 0, "TAURI_UPDATER_ENDPOINTS has at least one endpoint", blockers);
     requireCheck(checks, publicConfig.envSummary.releaseAssetBaseUrlPresent, "TAURI_RELEASE_ASSET_BASE_URL is present for static latest.json generation", blockers);

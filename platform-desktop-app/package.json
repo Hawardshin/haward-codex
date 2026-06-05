@@ -21,6 +21,7 @@
     "release:preflight": "node scripts/check-release-readiness.mjs --mode internal",
     "release:preflight:public": "node scripts/check-release-readiness.mjs --mode public",
     "release:preflight:public:report": "node scripts/check-release-readiness.mjs --mode public --report-only",
+    "release:public:dev-env": "node scripts/public-release-dev-env.mjs --write",
     "release:public:config": "node scripts/public-release-config.mjs --write",
     "release:manifest": "node scripts/create-updater-manifest.mjs",
     "service:readiness": "node scripts/check-service-readiness.mjs --mode internal",

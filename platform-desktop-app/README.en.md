@@ -58,6 +58,12 @@ To check public distribution readiness in report-only mode:
 corepack pnpm run desktop:release:report
 ```
 
+To create a local developer updater signing env scaffold:
+
+```bash
+corepack pnpm run desktop:release:dev-env
+```
+
 To build public artifacts after signing, updater, and notarization environment variables are configured:
 
 ```bash
@@ -89,7 +95,9 @@ corepack pnpm --filter platform-desktop-app run pipeline:dry-run
 
 `desktop:package:internal` runs `desktop:verify`, then Rust build, prepared-renderer Tauri build, macOS `codesign` verification, and DMG `hdiutil verify`. Direct Tauri builds (`corepack pnpm --filter platform-desktop-app run tauri:build`) still run the renderer build first, but the packaging pipeline reuses the already audited renderer output to avoid a duplicate Next.js build.
 
-`desktop:package:public` runs `desktop:verify` and public preflight, then creates a temporary public Tauri config from `TAURI_UPDATER_PUBLIC_KEY`, `TAURI_SIGNING_PRIVATE_KEY`, `TAURI_UPDATER_ENDPOINTS`, `TAURI_RELEASE_ASSET_BASE_URL`, and Apple signing/notarization environment variables. It builds signed updater artifacts and a static `latest.json` manifest without writing the private updater key or Apple credentials into the repository.
+`desktop:release:dev-env` creates a Tauri updater dev key under ignored `src-tauri/target/public-release/dev/` and writes an export file for `TAURI_SIGNING_PRIVATE_KEY_PATH`, `TAURI_UPDATER_PUBLIC_KEY`, `TAURI_UPDATER_ENDPOINTS`, and `TAURI_RELEASE_ASSET_BASE_URL`. It does not create Apple Developer ID signing/notarization credentials and does not mean the app is public-ready.
+
+`desktop:package:public` runs `desktop:verify` and public preflight, then creates a temporary public Tauri config from `TAURI_UPDATER_PUBLIC_KEY`, `TAURI_SIGNING_PRIVATE_KEY` or `TAURI_SIGNING_PRIVATE_KEY_PATH`, `TAURI_UPDATER_ENDPOINTS`, `TAURI_RELEASE_ASSET_BASE_URL`, and Apple signing/notarization environment variables. It builds signed updater artifacts and a static `latest.json` manifest without writing the private updater key or Apple credentials into the repository.
 
 ## Build Pipeline Structure
 
@@ -98,6 +106,7 @@ corepack pnpm --filter platform-desktop-app run pipeline:dry-run
 - `scripts/desktop-pipeline/definitions.mjs`: setup, quick verify, full verify, package, and public report step definitions
 - `scripts/desktop-pipeline/runner.mjs`: dry-run handling, platform skips, subprocess execution, and failure handling
 - `scripts/public-release-config.mjs`: public signing/updater environment validation and generated Tauri config
+- `scripts/public-release-dev-env.mjs`: local developer updater signing env scaffold
 - `scripts/public-release-build.mjs`: public Tauri build runner
 - `scripts/create-updater-manifest.mjs`: static updater `latest.json` generator
 
@@ -123,7 +132,7 @@ Public distribution remains blocked until these gates pass:
 - macOS notarization and stapling when applicable
 - macOS entitlements file wiring
 - Windows code signing / SmartScreen handling
-- signed updater channel: `TAURI_UPDATER_PUBLIC_KEY`, `TAURI_SIGNING_PRIVATE_KEY`, `TAURI_UPDATER_ENDPOINTS`
+- signed updater channel: `TAURI_UPDATER_PUBLIC_KEY`, `TAURI_SIGNING_PRIVATE_KEY` or `TAURI_SIGNING_PRIVATE_KEY_PATH`, `TAURI_UPDATER_ENDPOINTS`
 - clean-machine install/open/update/uninstall smoke tests
 - privacy/dependency/license review
 

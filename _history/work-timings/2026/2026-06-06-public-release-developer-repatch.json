@@ -1,0 +1,26 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-public-release-developer-repatch",
+  "phases": [
+    {
+      "phase": "web_first_intake_and_local_inspection",
+      "elapsed": "short"
+    },
+    {
+      "phase": "implementation",
+      "elapsed": "medium"
+    },
+    {
+      "phase": "validation",
+      "elapsed": "medium"
+    },
+    {
+      "phase": "history_and_evaluation",
+      "elapsed": "short"
+    }
+  ],
+  "bottleneck_notes": [
+    "Real public release remains blocked by Apple Developer ID signing and notarization credentials.",
+    "Updater gate can now be diagnosed locally with a generated dev key path env."
+  ]
+}

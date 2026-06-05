@@ -78,6 +78,7 @@ function checkPackageScripts() {
     "desktop:verify",
     "desktop:renderer:build",
     "desktop:package:internal",
+    "desktop:release:dev-env",
     "desktop:release:report",
     "desktop:doctor"
   ];
@@ -90,6 +91,7 @@ function checkPackageScripts() {
     "package:internal",
     "package:public",
     "deploy:public:report",
+    "release:public:dev-env",
     "release:public:config",
     "release:manifest",
     "tauri:build:prepared"

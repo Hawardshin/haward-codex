@@ -178,5 +178,6 @@ Root shortcuts:
   corepack pnpm run desktop:renderer:build
   corepack pnpm run desktop:package:internal
   corepack pnpm run desktop:package:public
+  corepack pnpm run desktop:release:dev-env
   corepack pnpm run desktop:release:report
   corepack pnpm run desktop:doctor`;

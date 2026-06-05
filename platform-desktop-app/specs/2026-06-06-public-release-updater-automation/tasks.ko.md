@@ -7,6 +7,8 @@
 - [x] public Tauri build runner 추가
 - [x] static updater manifest generator 추가
 - [x] `desktop:package:public` pipeline 추가
+- [x] developer-only updater env scaffold 추가
+- [x] `TAURI_SIGNING_PRIVATE_KEY_PATH` 지원
 - [x] Rust updater plugin init 추가
 - [x] macOS Entitlements.plist 추가 및 config 연결
 - [x] readiness/test/docs/history 갱신

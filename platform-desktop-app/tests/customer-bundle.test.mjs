@@ -1,11 +1,13 @@
 import assert from "node:assert/strict";
-import { mkdtempSync, mkdirSync, writeFileSync } from "node:fs";
+import { mkdtempSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { test } from "node:test";
 
 import { auditCustomerSnapshot, auditCustomerSnapshotWithFallback, scanCustomerDist } from "../scripts/check-customer-bundle.mjs";
 import { checkReleaseReadiness } from "../scripts/check-release-readiness.mjs";
+import { buildPublicReleaseConfigReport } from "../scripts/public-release-config.mjs";
+import { buildPublicReleaseDevEnvReport } from "../scripts/public-release-dev-env.mjs";
 
 function customerSnapshot(overrides = {}) {
   return {
@@ -119,4 +121,51 @@ test("release preflight distinguishes internal and public gates", () => {
   const publicReport = checkReleaseReadiness({ mode: "public", reportOnly: true });
   assert.equal(publicReport.mode, "public");
   assert.ok(publicReport.checks.some((check) => check.label.includes("public release enables hardenedRuntime")));
+});
+
+test("public release config accepts Tauri updater private key path env", () => {
+  const tempRoot = mkdtempSync(path.join(os.tmpdir(), "public-release-config-"));
+  const updaterKeyPath = path.join(tempRoot, "updater.key");
+  const appleApiKeyPath = path.join(tempRoot, "AuthKey_TEST.p8");
+  writeFileSync(updaterKeyPath, "dev-private-key");
+  writeFileSync(appleApiKeyPath, "dev-apple-api-key");
+
+  const report = buildPublicReleaseConfigReport({
+    env: {
+      APPLE_SIGNING_IDENTITY: "Developer ID Application: Example (TEAMID)",
+      APPLE_API_KEY: "KEYID",
+      APPLE_API_ISSUER: "ISSUERID",
+      APPLE_API_KEY_PATH: appleApiKeyPath,
+      TAURI_UPDATER_PUBLIC_KEY: "A".repeat(64),
+      TAURI_SIGNING_PRIVATE_KEY_PATH: updaterKeyPath,
+      TAURI_UPDATER_ENDPOINTS: "https://updates.example.com/agent/latest.json",
+      TAURI_RELEASE_ASSET_BASE_URL: "https://updates.example.com/agent"
+    }
+  });
+
+  assert.equal(report.status, "public_release_config_ready");
+  assert.equal(report.blockers.length, 0);
+  assert.equal(report.envSummary.updaterPrivateKeySource, "path");
+  assert.equal(report.marker.updater.signing_private_key_source, "path");
+});
+
+test("public release dev env writes path-based shell exports without private key content", () => {
+  const tempRoot = mkdtempSync(path.join(os.tmpdir(), "public-release-dev-env-"));
+  const report = buildPublicReleaseDevEnvReport({
+    writeFiles: true,
+    devDir: tempRoot,
+    generateKeyPair: ({ privateKeyPath, publicKeyPath }) => {
+      writeFileSync(privateKeyPath, "PRIVATE-DEV-KEY-CONTENT");
+      writeFileSync(publicKeyPath, "PUBLIC-DEV-KEY-CONTENT");
+    }
+  });
+
+  assert.equal(report.status, "public_release_dev_env_ready");
+  assert.equal(report.blockers.length, 0);
+  assert.equal(report.envSummary.updaterPrivateKeyPathPresent, true);
+  const envFile = readFileSync(report.paths.envFilePath, "utf8");
+  assert.match(envFile, /TAURI_SIGNING_PRIVATE_KEY_PATH/);
+  assert.doesNotMatch(envFile, /TAURI_SIGNING_PRIVATE_KEY=/);
+  assert.doesNotMatch(envFile, /PRIVATE-DEV-KEY-CONTENT/);
+  assert.match(envFile, /PUBLIC-DEV-KEY-CONTENT/);
 });

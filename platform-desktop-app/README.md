@@ -58,6 +58,12 @@ corepack pnpm run desktop:package:internal
 corepack pnpm run desktop:release:report
 ```
 
+로컬 개발자용 updater signing env scaffold를 만들려면:
+
+```bash
+corepack pnpm run desktop:release:dev-env
+```
+
 공개 배포용 signing/updater/notarization 환경변수가 준비된 상태에서 실제 public artifact를 만들려면:
 
 ```bash
@@ -89,7 +95,9 @@ corepack pnpm --filter platform-desktop-app run pipeline:dry-run
 
 `desktop:package:internal`은 `desktop:verify`를 통과한 뒤 Rust build, prepared-renderer Tauri build, macOS `codesign` verification, DMG `hdiutil verify`를 실행합니다. Tauri 직접 빌드(`corepack pnpm --filter platform-desktop-app run tauri:build`)는 여전히 renderer build를 먼저 실행하지만, pipeline 패키징은 이미 audit된 renderer output을 재사용해서 중복 Next.js build를 피합니다.
 
-`desktop:package:public`은 `desktop:verify`와 public preflight를 통과한 뒤 `TAURI_UPDATER_PUBLIC_KEY`, `TAURI_SIGNING_PRIVATE_KEY`, `TAURI_UPDATER_ENDPOINTS`, `TAURI_RELEASE_ASSET_BASE_URL`, Apple signing/notarization 환경변수로 public Tauri config를 임시 생성하고 signed updater artifact와 `latest.json` manifest를 생성합니다. private updater key와 Apple credential은 repository에 쓰지 않습니다.
+`desktop:release:dev-env`는 Tauri updater dev key를 ignored `src-tauri/target/public-release/dev/` 아래에 만들고 `TAURI_SIGNING_PRIVATE_KEY_PATH`, `TAURI_UPDATER_PUBLIC_KEY`, `TAURI_UPDATER_ENDPOINTS`, `TAURI_RELEASE_ASSET_BASE_URL` export 파일을 생성합니다. 이 명령은 Apple Developer ID signing/notarization credential을 만들지 않으며 public-ready 상태를 의미하지 않습니다.
+
+`desktop:package:public`은 `desktop:verify`와 public preflight를 통과한 뒤 `TAURI_UPDATER_PUBLIC_KEY`, `TAURI_SIGNING_PRIVATE_KEY` 또는 `TAURI_SIGNING_PRIVATE_KEY_PATH`, `TAURI_UPDATER_ENDPOINTS`, `TAURI_RELEASE_ASSET_BASE_URL`, Apple signing/notarization 환경변수로 public Tauri config를 임시 생성하고 signed updater artifact와 `latest.json` manifest를 생성합니다. private updater key와 Apple credential은 repository에 쓰지 않습니다.
 
 ## 빌드 Pipeline 구조
 
@@ -98,6 +106,7 @@ corepack pnpm --filter platform-desktop-app run pipeline:dry-run
 - `scripts/desktop-pipeline/definitions.mjs`: setup, quick verify, full verify, package, public report 단계 정의
 - `scripts/desktop-pipeline/runner.mjs`: dry-run, platform skip, subprocess 실행과 실패 처리
 - `scripts/public-release-config.mjs`: public signing/updater env 검증과 Tauri config 생성
+- `scripts/public-release-dev-env.mjs`: local developer updater signing env scaffold 생성
 - `scripts/public-release-build.mjs`: public Tauri build 실행
 - `scripts/create-updater-manifest.mjs`: static updater `latest.json` 생성
 
@@ -123,7 +132,7 @@ platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platfor
 - macOS notarization과 필요한 경우 stapling
 - macOS entitlements file 연결
 - Windows code signing / SmartScreen 대응
-- signed updater channel: `TAURI_UPDATER_PUBLIC_KEY`, `TAURI_SIGNING_PRIVATE_KEY`, `TAURI_UPDATER_ENDPOINTS`
+- signed updater channel: `TAURI_UPDATER_PUBLIC_KEY`, `TAURI_SIGNING_PRIVATE_KEY` 또는 `TAURI_SIGNING_PRIVATE_KEY_PATH`, `TAURI_UPDATER_ENDPOINTS`
 - clean-machine install/open/update/uninstall smoke test
 - privacy/dependency/license review
 

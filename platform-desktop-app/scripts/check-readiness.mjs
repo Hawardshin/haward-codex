@@ -685,7 +685,8 @@ for (const requiredPhrase of [
   "TAURI_UPDATER_ENDPOINTS",
   "TAURI_RELEASE_ASSET_BASE_URL",
   "service-update-channel.json",
-  "TAURI_SIGNING_PRIVATE_KEY"
+  "TAURI_SIGNING_PRIVATE_KEY",
+  "TAURI_SIGNING_PRIVATE_KEY_PATH"
 ]) {
   if (!publicReleaseConfig.includes(requiredPhrase)) {
     failures.push(`public-release-config.mjs must include ${requiredPhrase}`);

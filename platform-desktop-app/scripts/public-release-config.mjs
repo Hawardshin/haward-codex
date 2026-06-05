@@ -50,7 +50,8 @@ export function parsePublicReleaseEnv(env = process.env) {
     hasApiKeyNotaryEnv: Boolean(env.APPLE_API_KEY && env.APPLE_API_ISSUER && env.APPLE_API_KEY_PATH),
     appleApiKeyPath: normalizeMaybePath(env.APPLE_API_KEY_PATH),
     updaterPublicKey: env.TAURI_UPDATER_PUBLIC_KEY || "",
-    updaterPrivateKey: env.TAURI_SIGNING_PRIVATE_KEY || "",
+    updaterPrivateKey: firstValue(env.TAURI_SIGNING_PRIVATE_KEY, env.TAURI_SIGNING_PRIVATE_KEY_PATH),
+    updaterPrivateKeyPath: normalizePathEnv(env.TAURI_SIGNING_PRIVATE_KEY_PATH),
     hasUpdaterPrivateKeyPassword: Boolean(env.TAURI_SIGNING_PRIVATE_KEY_PASSWORD),
     updaterEndpoints,
     releaseAssetBaseUrl: env.TAURI_RELEASE_ASSET_BASE_URL || "",
@@ -76,11 +77,11 @@ export function validatePublicReleaseEnv(releaseEnv) {
     blockers.push("TAURI_UPDATER_PUBLIC_KEY must contain the Tauri updater public key content, not a placeholder or file path.");
   }
   if (isBlankOrPlaceholder(releaseEnv.updaterPrivateKey)) {
-    blockers.push("TAURI_SIGNING_PRIVATE_KEY is required so Tauri can sign updater artifacts.");
+    blockers.push("TAURI_SIGNING_PRIVATE_KEY or TAURI_SIGNING_PRIVATE_KEY_PATH is required so Tauri can sign updater artifacts.");
   }
-  const privateKeyPath = normalizeMaybePath(releaseEnv.updaterPrivateKey);
-  if (privateKeyPath && looksLikeFilesystemPath(releaseEnv.updaterPrivateKey) && !existsSync(privateKeyPath)) {
-    blockers.push(`TAURI_SIGNING_PRIVATE_KEY path does not exist: ${privateKeyPath}`);
+  const privateKeyPath = releaseEnv.updaterPrivateKeyPath || normalizeMaybePath(releaseEnv.updaterPrivateKey);
+  if (privateKeyPath && (releaseEnv.updaterPrivateKeyPath || looksLikeFilesystemPath(releaseEnv.updaterPrivateKey)) && !existsSync(privateKeyPath)) {
+    blockers.push(`Tauri updater private key path does not exist: ${privateKeyPath}`);
   }
   if (releaseEnv.updaterEndpoints.length === 0) {
     blockers.push("TAURI_UPDATER_ENDPOINTS must contain at least one HTTPS update endpoint.");
@@ -145,6 +146,7 @@ export function buildUpdateChannelMarker(releaseEnv) {
       endpoints: releaseEnv.updaterEndpoints,
       public_key_sha256_16: sha256Short(releaseEnv.updaterPublicKey),
       signing_private_key_present: Boolean(releaseEnv.updaterPrivateKey),
+      signing_private_key_source: releaseEnv.updaterPrivateKeyPath ? "path" : releaseEnv.updaterPrivateKey ? "env_content" : "missing",
       signing_private_key_password_present: releaseEnv.hasUpdaterPrivateKeyPassword
     },
     macos: {
@@ -194,7 +196,7 @@ function buildPublicReleaseChecks(releaseEnv, blockers) {
     {
       id: "updater_private_key",
       status: releaseEnv.updaterPrivateKey ? "passed" : "blocked",
-      detail: "TAURI_SIGNING_PRIVATE_KEY for updater artifact signatures"
+      detail: "TAURI_SIGNING_PRIVATE_KEY or TAURI_SIGNING_PRIVATE_KEY_PATH for updater artifact signatures"
     },
     {
       id: "updater_endpoints",
@@ -215,6 +217,7 @@ function summarizePublicReleaseEnv(releaseEnv) {
         : "missing",
     updaterPublicKeySha25616: releaseEnv.updaterPublicKey ? sha256Short(releaseEnv.updaterPublicKey) : null,
     updaterPrivateKeyPresent: Boolean(releaseEnv.updaterPrivateKey),
+    updaterPrivateKeySource: releaseEnv.updaterPrivateKeyPath ? "path" : releaseEnv.updaterPrivateKey ? "env_content" : "missing",
     updaterPrivateKeyPasswordPresent: releaseEnv.hasUpdaterPrivateKeyPassword,
     updaterEndpointCount: releaseEnv.updaterEndpoints.length,
     staticManifestEnabled: releaseEnv.createStaticManifest,
@@ -259,6 +262,17 @@ function normalizeMaybePath(value) {
     return path.join(process.env.HOME || "", value.slice(2));
   }
   return path.resolve(projectRoot, value);
+}
+
+function normalizePathEnv(value) {
+  if (!value || !String(value).trim()) {
+    return "";
+  }
+  const trimmed = String(value).trim();
+  if (trimmed.startsWith("~/")) {
+    return path.join(process.env.HOME || "", trimmed.slice(2));
+  }
+  return path.resolve(projectRoot, trimmed);
 }
 
 function parseUrl(value) {

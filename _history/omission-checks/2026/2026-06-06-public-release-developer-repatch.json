@@ -1,0 +1,28 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-public-release-developer-repatch",
+  "checked_at": "2026-06-06",
+  "requested_outcome": "Repatch public release handling from a developer perspective.",
+  "coverage": [
+    {
+      "item": "web-first intake",
+      "status": "covered",
+      "evidence": "_history/web-searches/2026/2026-06-06-public-release-developer-repatch.ko.md"
+    },
+    {
+      "item": "developer diagnosis path",
+      "status": "covered",
+      "evidence": "platform-desktop-app/scripts/public-release-dev-env.mjs"
+    },
+    {
+      "item": "path-based updater signing env",
+      "status": "covered",
+      "evidence": "platform-desktop-app/scripts/public-release-config.mjs"
+    },
+    {
+      "item": "public release hard gate preserved",
+      "status": "covered",
+      "evidence": "_history/evaluations/2026/2026-06-06-public-release-developer-repatch.ko.md"
+    }
+  ]
+}

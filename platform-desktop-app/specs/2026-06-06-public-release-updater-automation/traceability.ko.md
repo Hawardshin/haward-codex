@@ -9,3 +9,4 @@
 | PRU-REQ-005 | `package-public`, `create-updater-manifest.mjs`, macOS verification steps | desktop tests/check, public dry/report |
 | PRU-REQ-006 | `src-tauri/Entitlements.plist`, `tauri.conf.json` macOS entitlements | readiness tests/check |
 | PRU-REQ-007 | `package-public` preflight before `commonVerifySteps` | readiness test/order check, failed retry output |
+| PRU-REQ-008 | `public-release-dev-env.mjs`, `TAURI_SIGNING_PRIVATE_KEY_PATH` support | dev env script run, sourced preflight report |

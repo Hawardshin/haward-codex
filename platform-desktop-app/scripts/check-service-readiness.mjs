@@ -163,7 +163,7 @@ function updaterConfigured({ pkg, tauriConfig, tauriCargo, tauriLib, releasePubl
   const hasRustPluginInit = tauriLib.includes("tauri_plugin_updater::Builder");
   const endpoints = tauriConfig.plugins?.updater?.endpoints || tauriConfig.plugins?.updater?.pubkey || [];
   const baseConfigHasEndpoint = Array.isArray(endpoints) ? endpoints.length > 0 : Boolean(endpoints);
-  const publicEnvHasUpdater = !releasePublic.blockers.some((blocker) => /TAURI_UPDATER|TAURI_SIGNING_PRIVATE_KEY|TAURI_RELEASE_ASSET_BASE_URL|updater/i.test(blocker));
+  const publicEnvHasUpdater = !releasePublic.blockers.some((blocker) => /TAURI_UPDATER|TAURI_SIGNING_PRIVATE_KEY|TAURI_SIGNING_PRIVATE_KEY_PATH|TAURI_RELEASE_ASSET_BASE_URL|updater/i.test(blocker));
   return (hasRustDependency || hasJsDependency) && hasRustPluginInit && (baseConfigHasEndpoint || publicEnvHasUpdater);
 }
 
@@ -178,8 +178,8 @@ function summarizePublicReleaseBlockers(blockers) {
   if (blockers.some((blocker) => /notarization|APPLE_ID|APPLE_API_KEY|APPLE_TEAM_ID/i.test(blocker))) {
     missing.push("Apple notarization credentials");
   }
-  if (blockers.some((blocker) => /TAURI_SIGNING_PRIVATE_KEY/i.test(blocker))) {
-    missing.push("Tauri updater signing private key");
+  if (blockers.some((blocker) => /TAURI_SIGNING_PRIVATE_KEY|TAURI_SIGNING_PRIVATE_KEY_PATH/i.test(blocker))) {
+    missing.push("Tauri updater signing private key or key path");
   }
   if (blockers.some((blocker) => /TAURI_UPDATER_PUBLIC_KEY/i.test(blocker))) {
     missing.push("Tauri updater public key");

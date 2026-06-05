@@ -8,6 +8,7 @@ export const desktopBuildPipelineRequiredFiles = [
   "scripts/desktop-pipeline/runner.mjs",
   "scripts/tauri-before-build-prepared.mjs",
   "scripts/public-release-config.mjs",
+  "scripts/public-release-dev-env.mjs",
   "scripts/public-release-build.mjs",
   "scripts/create-updater-manifest.mjs",
   "scripts/desktop-doctor.mjs"
@@ -22,7 +23,7 @@ export function checkDesktopBuildPipeline({ root, readJson }) {
   requireScripts(pkg, ["check", "test", "verify", "tauri:dev", "tauri:build"], "package.json", failures);
   requireScripts(pkg, ["runtime:contract"], "package.json", failures);
   requireScripts(pkg, ["setup", "verify:quick", "package:internal", "package:public", "deploy:public:report", "pipeline:dry-run"], "package.json", failures);
-  requireScripts(pkg, ["customer-bundle:audit", "release:preflight", "release:preflight:public", "release:preflight:public:report", "release:public:config", "release:manifest"], "package.json", failures);
+  requireScripts(pkg, ["customer-bundle:audit", "release:preflight", "release:preflight:public", "release:preflight:public:report", "release:public:dev-env", "release:public:config", "release:manifest"], "package.json", failures);
   requireScripts(pkg, ["service:readiness", "service:readiness:public:report"], "package.json", failures);
   requireScripts(rootPkg, [
     "desktop:setup",
@@ -32,6 +33,7 @@ export function checkDesktopBuildPipeline({ root, readJson }) {
     "desktop:renderer:build",
     "desktop:package:internal",
     "desktop:package:public",
+    "desktop:release:dev-env",
     "desktop:release:report",
     "desktop:doctor"
   ], "root package.json", failures);
@@ -96,6 +98,7 @@ function checkDocsAndPipelineStructure(root, failures) {
     "corepack pnpm run desktop:verify",
     "corepack pnpm run desktop:package:internal",
     "corepack pnpm run desktop:package:public",
+    "corepack pnpm run desktop:release:dev-env",
     "corepack pnpm run desktop:release:report",
     "corepack pnpm run desktop:doctor",
     "docs/release-runbook.ko.md",

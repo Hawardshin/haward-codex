@@ -21,6 +21,7 @@ test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline/definitions.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline/runner.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/readiness/desktop-build-pipeline.mjs")), true);
+  assert.equal(existsSync(join(root, "scripts/public-release-dev-env.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/desktop-doctor.mjs")), true);
   assert.equal(existsSync(join(root, "configs/reference-platform-advantage-registry.json")), true);
 
@@ -63,12 +64,13 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
     "desktop:renderer:build",
     "desktop:package:internal",
     "desktop:package:public",
+    "desktop:release:dev-env",
     "desktop:release:report",
     "desktop:doctor"
   ]) {
     assert.ok(rootPkg.scripts[scriptName]);
   }
-  for (const scriptName of ["doctor", "setup", "verify:quick", "verify", "package:internal", "package:public", "deploy:public:report", "pipeline:dry-run"]) {
+  for (const scriptName of ["doctor", "setup", "verify:quick", "verify", "package:internal", "package:public", "deploy:public:report", "release:public:dev-env", "pipeline:dry-run"]) {
     assert.ok(pkg.scripts[scriptName]);
   }
   for (const command of [
@@ -76,6 +78,7 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
     "corepack pnpm run desktop:verify",
     "corepack pnpm run desktop:package:internal",
     "corepack pnpm run desktop:package:public",
+    "corepack pnpm run desktop:release:dev-env",
     "corepack pnpm run desktop:release:report",
     "corepack pnpm run desktop:doctor"
   ]) {
@@ -552,6 +555,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   assert.match(platformPkg.scripts.check, /check-customer-bundle\.mjs/);
   assert.match(platformPkg.scripts.check, /check-release-readiness\.mjs/);
   assert.ok(platformPkg.scripts["release:preflight:public"]);
+  assert.ok(platformPkg.scripts["release:public:dev-env"]);
   assert.ok(platformPkg.scripts["service:readiness"]);
   assert.ok(platformPkg.scripts["service:readiness:public:report"]);
   assert.match(monitorPkg.scripts["build:customer"], /--snapshot-mode customer/);
@@ -585,10 +589,14 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     assert.match(releaseReadinessCheck, new RegExp(scriptToken));
   }
   const publicReleaseConfig = readFileSync(join(root, "scripts/public-release-config.mjs"), "utf8");
+  const publicReleaseDevEnv = readFileSync(join(root, "scripts/public-release-dev-env.mjs"), "utf8");
   const publicReleaseBuild = readFileSync(join(root, "scripts/public-release-build.mjs"), "utf8");
   const updaterManifest = readFileSync(join(root, "scripts/create-updater-manifest.mjs"), "utf8");
-  for (const scriptToken of ["createUpdaterArtifacts", "TAURI_UPDATER_ENDPOINTS", "TAURI_RELEASE_ASSET_BASE_URL", "service-update-channel.json", "TAURI_SIGNING_PRIVATE_KEY"]) {
+  for (const scriptToken of ["createUpdaterArtifacts", "TAURI_UPDATER_ENDPOINTS", "TAURI_RELEASE_ASSET_BASE_URL", "service-update-channel.json", "TAURI_SIGNING_PRIVATE_KEY", "TAURI_SIGNING_PRIVATE_KEY_PATH"]) {
     assert.match(publicReleaseConfig, new RegExp(scriptToken));
+  }
+  for (const scriptToken of ["public_release_dev_env_ready", "TAURI_SIGNING_PRIVATE_KEY_PATH", "private updater key is generated only under ignored src-tauri/target"]) {
+    assert.match(publicReleaseDevEnv, new RegExp(scriptToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
   for (const scriptToken of ["tauri", "build", "--config", "create-updater-manifest.mjs"]) {
     assert.match(publicReleaseBuild, new RegExp(scriptToken));
