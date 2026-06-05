@@ -1693,6 +1693,21 @@ type WorkspaceTextFileListReport = {
   files: WorkspaceSourceFile[];
 };
 
+type WorkspaceResourcePrepareReport = {
+  status: string;
+  source: string;
+  schemaVersion: string;
+  rootPath: string;
+  generatedAt: string;
+  scannedEntries: number;
+  totalCount: number;
+  returnedCount: number;
+  cachedTextFiles: number;
+  cachedBytes: number;
+  truncated: boolean;
+  catalog: WorkspaceTextFileListReport;
+};
+
 type DesktopWorkspaceStateReport = {
   schemaVersion: string;
   status: string;
@@ -8250,6 +8265,7 @@ function DesktopRuntimePanel({
   const [sourceDrafts, setSourceDrafts] = useState<Record<string, SourceDraftEntry>>({});
   const [runtimeSourceFiles, setRuntimeSourceFiles] = useState<WorkspaceSourceFile[]>([]);
   const [sourceCatalogReport, setSourceCatalogReport] = useState<WorkspaceTextFileListReport | null>(null);
+  const [workspaceResourceReport, setWorkspaceResourceReport] = useState<WorkspaceResourcePrepareReport | null>(null);
   const [sourceSaveResults, setSourceSaveResults] = useState<WorkspaceWriteReport[]>([]);
   const [writeReport, setWriteReport] = useState<WorkspaceWriteReport | null>(null);
   const [sourceCopyNotice, setSourceCopyNotice] = useState("");
@@ -8267,6 +8283,7 @@ function DesktopRuntimePanel({
   const [editorBusy, setEditorBusy] = useState(false);
   const [saveAllBusy, setSaveAllBusy] = useState(false);
   const [sourceCatalogBusy, setSourceCatalogBusy] = useState(false);
+  const [workspaceResourceBusy, setWorkspaceResourceBusy] = useState(false);
   const sourceEditorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const panelMountedRef = useRef(false);
   const activeSessionPollInFlightRef = useRef(false);
@@ -8279,7 +8296,7 @@ function DesktopRuntimePanel({
   const shouldPrepareSourceWorkspace = isFileWorkspaceSurface || runtimeDiagnosticsOpen;
   const sourceCatalogFiles = runtimeSourceFiles.length ? runtimeSourceFiles : sourceFiles;
   const sourceFileCount = sourceCatalogFiles.length;
-  const sourceCatalogLabel = runtimeSourceFiles.length ? "runtime" : "snapshot";
+  const sourceCatalogLabel = workspaceResourceReport ? "native cache" : runtimeSourceFiles.length ? "runtime" : "snapshot";
   const editableSourceFiles = useMemo(() => {
     if (!shouldPrepareSourceWorkspace) {
       return [];
@@ -8616,32 +8633,67 @@ function DesktopRuntimePanel({
     }
   };
 
-  const refreshRuntimeSourceFiles = async () => {
+  const prepareWorkspaceOsResources = async (options: { forceRefresh?: boolean } = {}) => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
       setSourceCatalogReport(null);
-      return;
+      setWorkspaceResourceReport(null);
+      return null;
     }
 
     setSourceCatalogBusy(true);
+    setWorkspaceResourceBusy(true);
     setError("");
     try {
-      const report = await tauriInvoke<WorkspaceTextFileListReport>("list_workspace_text_files", {
+      const report = await tauriInvoke<WorkspaceResourcePrepareReport>("prepare_workspace_os_resources", {
         filter: sourceFilter.trim() || null,
-        limit: 240
+        limit: 240,
+        preloadContents: true,
+        forceRefresh: Boolean(options.forceRefresh)
       });
-      setRuntimeSourceFiles(report.files);
-      setSourceCatalogReport(report);
-      const firstPath = report.files[0]?.path || "";
+      setWorkspaceResourceReport(report);
+      setRuntimeSourceFiles(report.catalog.files);
+      setSourceCatalogReport(report.catalog);
+      const firstPath = report.catalog.files[0]?.path || "";
       if (!sourcePathInput && firstPath) {
         setSelectedSourcePath(firstPath);
         setSourcePathInput(firstPath);
       }
+      return report;
     } catch (caught) {
-      setError(errorMessage(caught));
+      const message = errorMessage(caught);
+      if (/unknown command|command not found|prepare_workspace_os_resources/i.test(message)) {
+        try {
+          const fallbackReport = await tauriInvoke<WorkspaceTextFileListReport>("list_workspace_text_files", {
+            filter: sourceFilter.trim() || null,
+            limit: 240
+          });
+          setWorkspaceResourceReport(null);
+          setRuntimeSourceFiles(fallbackReport.files);
+          setSourceCatalogReport(fallbackReport);
+          const firstPath = fallbackReport.files[0]?.path || "";
+          if (!sourcePathInput && firstPath) {
+            setSelectedSourcePath(firstPath);
+            setSourcePathInput(firstPath);
+          }
+          return null;
+        } catch (fallbackCaught) {
+          setError(errorMessage(fallbackCaught));
+          setWorkspaceResourceReport(null);
+          return null;
+        }
+      }
+      setError(message);
+      setWorkspaceResourceReport(null);
+      return null;
     } finally {
       setSourceCatalogBusy(false);
+      setWorkspaceResourceBusy(false);
     }
+  };
+
+  const refreshRuntimeSourceFiles = async () => {
+    await prepareWorkspaceOsResources({ forceRefresh: true });
   };
 
   const refreshDesktopWorkspace = async () => {
@@ -8740,7 +8792,7 @@ function DesktopRuntimePanel({
       setWorkspaceHostNotice(report.status === "folder_selection_canceled" ? copy.chooseCanceled : report.activeWorkspacePath ? copy.permissionGranted : report.status);
       if (report.activeWorkspacePath) {
         if (isFileWorkspaceSurface) {
-          await refreshRuntimeSourceFiles();
+          await prepareWorkspaceOsResources({ forceRefresh: true });
         }
         await refreshDesktopGitStatus();
         void refreshServiceReadiness();
@@ -8775,7 +8827,7 @@ function DesktopRuntimePanel({
       }
       setWorkspaceHostNotice(report.status);
       if (isFileWorkspaceSurface) {
-        await refreshRuntimeSourceFiles();
+        await prepareWorkspaceOsResources({ forceRefresh: true });
       }
       await refreshDesktopGitStatus();
       void refreshServiceReadiness();
@@ -8811,7 +8863,7 @@ function DesktopRuntimePanel({
       }
       setWorkspaceHostNotice(report.status);
       if (isFileWorkspaceSurface) {
-        await refreshRuntimeSourceFiles();
+        await prepareWorkspaceOsResources({ forceRefresh: true });
       }
       await refreshDesktopGitStatus();
       void refreshServiceReadiness();
@@ -8908,7 +8960,7 @@ function DesktopRuntimePanel({
         setSelectedTaskPipeKind(nextTaskPipePresets[0].taskKind);
       }
       if (isFileWorkspaceSurface) {
-        void refreshRuntimeSourceFiles();
+        void prepareWorkspaceOsResources();
       }
     } catch (caught) {
       if (!panelMountedRef.current) {
@@ -9681,6 +9733,7 @@ function DesktopRuntimePanel({
       ].slice(0, 8));
       setSourceCopyNotice("");
       setSourceWorkbenchView("results");
+      void prepareWorkspaceOsResources({ forceRefresh: true });
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -9719,6 +9772,7 @@ function DesktopRuntimePanel({
         ...reportsToAdd,
         ...current.filter((item) => !reportsToAdd.some((report) => report.relativePath === item.relativePath))
       ].slice(0, 8));
+      void prepareWorkspaceOsResources({ forceRefresh: true });
       if (sourceFile && nextDrafts[sourceFile.relativePath]) {
         const currentEntry = nextDrafts[sourceFile.relativePath];
         setSourceFile({
@@ -9826,7 +9880,7 @@ function DesktopRuntimePanel({
       if (isFileWorkspaceSurface) {
         void refreshDesktopWorkspace();
         void refreshDesktopGitStatus();
-        void refreshRuntimeSourceFiles();
+        void prepareWorkspaceOsResources();
         return;
       }
       void refreshDesktopWorkspace();
@@ -10218,9 +10272,9 @@ function DesktopRuntimePanel({
             <Activity size={16} aria-hidden="true" />
             <span>{workspaceHostBusy === "refresh" ? copy.loading : copy.refreshWorkspace}</span>
           </button>
-          <button type="button" onClick={refreshRuntimeSourceFiles} disabled={!invoke || sourceCatalogBusy}>
+          <button type="button" onClick={refreshRuntimeSourceFiles} disabled={!invoke || sourceCatalogBusy || workspaceResourceBusy}>
             <Search size={16} aria-hidden="true" />
-            <span>{sourceCatalogBusy ? copy.loading : copy.refreshFiles}</span>
+            <span>{sourceCatalogBusy || workspaceResourceBusy ? copy.loading : copy.refreshFiles}</span>
           </button>
         </div>
       </section>
@@ -10239,7 +10293,7 @@ function DesktopRuntimePanel({
           files={filteredEditableSourceFiles}
           rootLabel={workspaceExplorerRootLabel}
           runtimeAvailable={Boolean(invoke)}
-          sourceCatalogBusy={sourceCatalogBusy}
+          sourceCatalogBusy={sourceCatalogBusy || workspaceResourceBusy}
           sourceCatalogReport={sourceCatalogReport}
           sourceFilter={sourceFilter}
           workspaceHostBusy={workspaceHostBusy}
@@ -10270,6 +10324,16 @@ function DesktopRuntimePanel({
           </strong>
         </article>
         <article>
+          <span>OS 캐시</span>
+          <strong>
+            {workspaceResourceReport
+              ? `${workspaceResourceReport.cachedTextFiles.toLocaleString("ko-KR")} / ${formatBytes(workspaceResourceReport.cachedBytes)}`
+              : workspaceResourceBusy
+                ? copy.loading
+                : "not prepared"}
+          </strong>
+        </article>
+        <article>
           <span>{copy.openedDrafts}</span>
           <strong>
             {dirtyDraftEntries.length.toLocaleString("ko-KR")} {copy.dirty} / {openDraftEntries.length.toLocaleString("ko-KR")} open
@@ -10288,6 +10352,7 @@ function DesktopRuntimePanel({
             <span>{openDraftEntries.length} open</span>
             <strong>{dirtyDraftEntries.length} {copy.dirty}</strong>
             <span>{sourceCatalogLabel}</span>
+            {workspaceResourceReport && <span>{formatBytes(workspaceResourceReport.cachedBytes)} cached</span>}
           </div>
         </div>
         <div className="source-editor-controls native-source-controls">

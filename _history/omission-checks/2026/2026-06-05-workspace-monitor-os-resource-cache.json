@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-05",
+  "request_id": "2026-06-05-workspace-monitor-os-resource-cache",
+  "status": "passed",
+  "checked_items": [
+    {
+      "item": "Use OS/native desktop resources rather than renderer-only optimization",
+      "status": "covered",
+      "evidence": "Tauri Rust WorkspaceResourceStore and prepare_workspace_os_resources"
+    },
+    {
+      "item": "Keep tab/source UX fast",
+      "status": "covered",
+      "evidence": "Renderer source workbench calls native preparation and shows native cache state"
+    },
+    {
+      "item": "Do not leave stale cache after workspace/file changes",
+      "status": "covered",
+      "evidence": "clear_cache on workspace path, choose folder, clone, and write"
+    },
+    {
+      "item": "Run build automatically after implementation",
+      "status": "covered",
+      "evidence": "package:internal completed"
+    }
+  ],
+  "open_gaps": [
+    "No file watcher was added; manual force refresh handles out-of-app file changes."
+  ]
+}

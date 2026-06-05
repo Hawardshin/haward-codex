@@ -347,6 +347,23 @@ test("Monitor section switches prewarm heavy surfaces and preserve source editor
   assert.match(css, /\.section-transition-shell \{/);
 });
 
+test("Desktop source workbench prepares native OS workspace resources", () => {
+  assert.match(monitorShell, /type WorkspaceResourcePrepareReport = \{/);
+  assert.match(monitorShell, /const \[workspaceResourceReport, setWorkspaceResourceReport\] = useState<WorkspaceResourcePrepareReport \| null>\(null\)/);
+  assert.match(monitorShell, /const \[workspaceResourceBusy, setWorkspaceResourceBusy\] = useState\(false\)/);
+  assert.match(monitorShell, /const prepareWorkspaceOsResources = async/);
+  assert.match(monitorShell, /"prepare_workspace_os_resources"/);
+  assert.match(monitorShell, /preloadContents: true/);
+  assert.match(monitorShell, /forceRefresh: Boolean\(options\.forceRefresh\)/);
+  assert.match(monitorShell, /setWorkspaceResourceReport\(report\)/);
+  assert.match(monitorShell, /setRuntimeSourceFiles\(report\.catalog\.files\)/);
+  assert.match(monitorShell, /setSourceCatalogReport\(report\.catalog\)/);
+  assert.match(monitorShell, /workspaceResourceReport \? "native cache"/);
+  assert.match(monitorShell, /OS 캐시/);
+  assert.match(monitorShell, /formatBytes\(workspaceResourceReport\.cachedBytes\)/);
+  assert.match(monitorShell, /void prepareWorkspaceOsResources\(\{ forceRefresh: true \}\)/);
+});
+
 test("Workspace monitor sidebar and source editor defaults avoid clipped editing controls", () => {
   assert.match(monitorShell, /fontSize: 13/);
   assert.match(monitorShell, /minimap: \{ enabled: false \}/);

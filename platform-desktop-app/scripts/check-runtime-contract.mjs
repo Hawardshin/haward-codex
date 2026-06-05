@@ -208,6 +208,18 @@ for (const workspaceHostToken of [
 ]) {
   failIf(!tauriLib.includes(workspaceHostToken), `src-tauri/src/lib.rs must include ${workspaceHostToken}`);
 }
+for (const sourceEditingCommand of [
+  "prepare_workspace_os_resources",
+  "list_workspace_text_files",
+  "read_workspace_text_file",
+  "write_workspace_text_file"
+]) {
+  failIf(
+    !(contract.runtime_command_surface?.source_editing_commands ?? []).includes(sourceEditingCommand),
+    `runtime_command_surface.source_editing_commands must include ${sourceEditingCommand}`
+  );
+  failIf(!tauriLib.includes(sourceEditingCommand), `src-tauri/src/lib.rs must include ${sourceEditingCommand}`);
+}
 const accumulatedIndexTarget = (contract.data_accumulation_targets ?? []).find((target) => target.target_id === "accumulated_data_index");
 failIf(
   accumulatedIndexTarget?.record_type !== "runtime_data_index_manifest",

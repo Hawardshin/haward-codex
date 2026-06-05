@@ -1,17 +1,17 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-05T13:13:38.324Z",
+  "generatedAt": "2026-06-05T13:27:46.148Z",
   "summary": {
-    "documents": 2254,
+    "documents": 2260,
     "days": 6,
     "categories": [
       {
         "category": "evaluation",
-        "count": 930
+        "count": 931
       },
       {
         "category": "web-search",
-        "count": 363
+        "count": 364
       },
       {
         "category": "plan",
@@ -19,19 +19,19 @@
       },
       {
         "category": "request-trace",
-        "count": 292
+        "count": 293
       },
       {
         "category": "work-timing",
-        "count": 214
+        "count": 215
       },
       {
         "category": "user-request",
-        "count": 76
+        "count": 77
       },
       {
         "category": "work-summary",
-        "count": 43
+        "count": 44
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6065535,
+    "totalSourceBytes": 6073095,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,102 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-05-workspace-monitor-os-resource-cache-ko-md",
+      "path": "_history/evaluations/2026/2026-06-05-workspace-monitor-os-resource-cache.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: Workspace Monitor OS 자원 기반 캐시",
+      "excerpt": "평가: Workspace Monitor OS 자원 기반 캐시 판정 요청 충족. 이전 렌더러 중심 최적화에서 빠졌던 네이티브 OS 자원 사용을 Tauri/Rust managed state와 filesystem scan/read cache로 보강했고, 내부 데스크톱 패키지 빌드까지 완료했다. 증거 WorkspaceResourceStore 와 prepare workspace os resources 추가. list workspace text files / read workspace text file 이 ",
+      "html": "<p>평가: Workspace Monitor OS 자원 기반 캐시 판정 요청 충족. 이전 렌더러 중심 최적화에서 빠졌던 네이티브 OS 자원 사용을 Tauri/Rust managed state와 filesystem scan/read cache로 보강했고, 내부 데스크톱 패키지 빌드까지 완료했다. 증거 WorkspaceResourceStore 와 prepare workspace os resources 추가. list workspace text files / read workspace text file 이 cache aware로 변경됨. workspace 선택/import/clone/write에서 cache invalidation 수행. Works</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1602,
+      "updatedAt": "2026-06-05T13:27:32.750Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-05-workspace-monitor-os-resource-cache-json",
+      "path": "_history/work-timings/2026/2026-06-05-workspace-monitor-os-resource-cache.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 05 Workspace Monitor Os Resource Cache",
+      "excerpt": "{ \"date\": \"2026 06 05\", \"request id\": \"2026 06 05 workspace monitor os resource cache\", \"timings\": { \"phase\": \"web first intake and local inspection\", \"duration\": \"approximately 10 minutes\", \"notes\": \"Checked official Tauri docs and current Rust/renderer command paths.\" }, { \"pha",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request id&quot;: &quot;2026 06 05 workspace monitor os resource cache&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;web first intake and local inspection&quot;, &quot;duration&quot;: &quot;approximately 10 minutes&quot;, &quot;notes&quot;: &quot;Checked official Tauri docs and current Rust/renderer command paths.&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;duration&quot;: &quot;approximately 25 minutes&quot;, &quot;notes&quot;: &quot;Added R</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 896,
+      "updatedAt": "2026-06-05T13:27:32.750Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-05-workspace-monitor-os-resource-cache-ko-md",
+      "path": "_history/request-traces/2026/2026-06-05-workspace-monitor-os-resource-cache.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Workspace Monitor OS 자원 기반 캐시",
+      "excerpt": "요청 결과 추적: Workspace Monitor OS 자원 기반 캐시 요청 실제 데스크톱 앱에서 단순 렌더러 상태 보존이 아니라 운영체제 자원을 사용해 탭 이동/소스 워크벤치 지연을 줄일 것. 결과 Tauri/Rust managed state cache 구현 완료. OS filesystem scan/read 기반 prepare workspace os resources 명령 추가. 렌더러 source workbench가 native cache preparation을 사용하도록 변경. 테스트, 체크",
+      "html": "<p>요청 결과 추적: Workspace Monitor OS 자원 기반 캐시 요청 실제 데스크톱 앱에서 단순 렌더러 상태 보존이 아니라 운영체제 자원을 사용해 탭 이동/소스 워크벤치 지연을 줄일 것. 결과 Tauri/Rust managed state cache 구현 완료. OS filesystem scan/read 기반 prepare workspace os resources 명령 추가. 렌더러 source workbench가 native cache preparation을 사용하도록 변경. 테스트, 체크, 내부 패키지 빌드 완료. 연결 산출물 요구사항: platform desktop app/docs/requirements/2026 06 05 w</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1108,
+      "updatedAt": "2026-06-05T13:27:32.749Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-05-workspace-monitor-os-resource-cache-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-05-workspace-monitor-os-resource-cache.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Workspace Monitor OS 자원 기반 캐시",
+      "excerpt": "작업 요약: Workspace Monitor OS 자원 기반 캐시 완료 Tauri Rust 런타임에 WorkspaceResourceStore managed state를 추가했다. prepare workspace os resources 명령을 추가해 workspace 파일 목록과 제한된 텍스트 파일 내용을 OS 파일시스템에서 미리 읽어 Rust 메모리에 올리도록 했다. list/read/write 명령을 cache aware로 변경하고 workspace 변경/저장 시 cache를 무효화했다. Wor",
+      "html": "<p>작업 요약: Workspace Monitor OS 자원 기반 캐시 완료 Tauri Rust 런타임에 WorkspaceResourceStore managed state를 추가했다. prepare workspace os resources 명령을 추가해 workspace 파일 목록과 제한된 텍스트 파일 내용을 OS 파일시스템에서 미리 읽어 Rust 메모리에 올리도록 했다. list/read/write 명령을 cache aware로 변경하고 workspace 변경/저장 시 cache를 무효화했다. Workspace Monitor source workbench가 native preparation 명령을 호출하고 OS 캐시 상태를 표시하도록 연결했</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1153,
+      "updatedAt": "2026-06-05T13:27:32.749Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-05-workspace-monitor-os-resource-cache-ko-md",
+      "path": "_history/user-requests/2026/2026-06-05-workspace-monitor-os-resource-cache.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Workspace Monitor OS 자원 사용",
+      "excerpt": "사용자 요청 요약: Workspace Monitor OS 자원 사용 날짜: 2026 06 05 요약: 사용자는 이전 렌더러 중심 최적화가 충분하지 않다고 지적하고, 실제 데스크톱 앱이므로 운영체제 자원과 네이티브 런타임을 사용해 탭 이동/소스 워크벤치 지연을 줄이라고 요구했다. 지속 지시: 구현이 끝나면 사용자가 직접 빌드하지 않도록 자동으로 빌드까지 실행해야 한다. 반영 위치: platform desktop app Tauri Rust runtime, Workspace Monitor source ",
+      "html": "<p>사용자 요청 요약: Workspace Monitor OS 자원 사용 날짜: 2026 06 05 요약: 사용자는 이전 렌더러 중심 최적화가 충분하지 않다고 지적하고, 실제 데스크톱 앱이므로 운영체제 자원과 네이티브 런타임을 사용해 탭 이동/소스 워크벤치 지연을 줄이라고 요구했다. 지속 지시: 구현이 끝나면 사용자가 직접 빌드하지 않도록 자동으로 빌드까지 실행해야 한다. 반영 위치: platform desktop app Tauri Rust runtime, Workspace Monitor source workbench, desktop package pipeline.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 590,
+      "updatedAt": "2026-06-05T13:27:32.748Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-05-workspace-monitor-os-resource-cache-ko-md",
+      "path": "_history/web-searches/2026/2026-06-05-workspace-monitor-os-resource-cache.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: Workspace Monitor OS 자원 기반 워크스페이스 캐시",
+      "excerpt": "웹 검색 기록: Workspace Monitor OS 자원 기반 워크스페이스 캐시 목적 사용자가 “실제 데스크톱 앱이니까 단순 렌더가 아니라 운영체제 자원을 쓰라”고 지적했다. Tauri v2에서 Rust 명령과 앱 상태를 쓰는 공식 경로를 확인한 뒤 구현 방향을 정했다. 검색어 Tauri 2 official state managed state commands async file system desktop app Rust docs Tauri 2 official file system plugin c",
+      "html": "<p>웹 검색 기록: Workspace Monitor OS 자원 기반 워크스페이스 캐시 목적 사용자가 “실제 데스크톱 앱이니까 단순 렌더가 아니라 운영체제 자원을 쓰라”고 지적했다. Tauri v2에서 Rust 명령과 앱 상태를 쓰는 공식 경로를 확인한 뒤 구현 방향을 정했다. 검색어 Tauri 2 official state managed state commands async file system desktop app Rust docs Tauri 2 official file system plugin commands Rust desktop app docs Tauri 2 official window state app handle managed s</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2211,
+      "updatedAt": "2026-06-05T13:27:32.747Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-05-workspace-monitor-tab-editor-ux-ko-md",
       "path": "_history/evaluations/2026/2026-06-05-workspace-monitor-tab-editor-ux.ko.md",
@@ -36131,27 +36227,27 @@
     {
       "date": "2026-06-05",
       "year": "2026",
-      "documentsCount": 473,
+      "documentsCount": 479,
       "categories": [
         {
           "category": "evaluation",
-          "count": 140
+          "count": 141
         },
         {
           "category": "web-search",
-          "count": 67
+          "count": 68
         },
         {
           "category": "work-timing",
-          "count": 65
+          "count": 66
         },
         {
           "category": "request-trace",
-          "count": 63
+          "count": 64
         },
         {
           "category": "user-request",
-          "count": 62
+          "count": 63
         },
         {
           "category": "plan",
@@ -36159,7 +36255,7 @@
         },
         {
           "category": "work-summary",
-          "count": 30
+          "count": 31
         },
         {
           "category": "daily-history",

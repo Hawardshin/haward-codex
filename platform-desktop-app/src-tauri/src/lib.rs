@@ -74,6 +74,22 @@ struct SessionStore {
     sessions: Mutex<HashMap<String, CliSession>>,
 }
 
+#[derive(Default)]
+struct WorkspaceResourceStore {
+    cache: Mutex<Option<WorkspaceResourceCache>>,
+}
+
+#[derive(Clone, Default)]
+struct WorkspaceResourceCache {
+    root_path: String,
+    generated_at: String,
+    scanned_entries: usize,
+    truncated: bool,
+    files: Vec<WorkspaceTextFileEntry>,
+    text_files: HashMap<String, WorkspaceTextFile>,
+    cached_bytes: usize,
+}
+
 struct CliSession {
     session_id: String,
     task_run_id: String,
@@ -301,7 +317,7 @@ struct CliTaskRunPruneReport {
     errors: Vec<String>,
 }
 
-#[derive(Serialize)]
+#[derive(Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 struct WorkspaceTextFile {
     relative_path: String,
@@ -310,7 +326,7 @@ struct WorkspaceTextFile {
     max_size_bytes: usize,
 }
 
-#[derive(Serialize)]
+#[derive(Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 struct WorkspaceTextFileEntry {
     id: String,
@@ -325,7 +341,7 @@ struct WorkspaceTextFileEntry {
     content: String,
 }
 
-#[derive(Serialize)]
+#[derive(Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 struct WorkspaceTextFileListReport {
     status: String,
@@ -334,6 +350,23 @@ struct WorkspaceTextFileListReport {
     returned_count: usize,
     truncated: bool,
     files: Vec<WorkspaceTextFileEntry>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct WorkspaceResourcePrepareReport {
+    status: String,
+    source: String,
+    schema_version: String,
+    root_path: String,
+    generated_at: String,
+    scanned_entries: usize,
+    total_count: usize,
+    returned_count: usize,
+    cached_text_files: usize,
+    cached_bytes: usize,
+    truncated: bool,
+    catalog: WorkspaceTextFileListReport,
 }
 
 #[derive(Serialize)]
@@ -1049,6 +1082,9 @@ const DEFAULT_WORKSPACE_SOURCE_LIST_LIMIT: usize = 240;
 const MAX_WORKSPACE_SOURCE_LIST_LIMIT: usize = 500;
 const MAX_WORKSPACE_SOURCE_SCAN_ENTRIES: usize = 8_000;
 const MAX_SOURCE_LIST_LINE_COUNT_BYTES: usize = 128_000;
+const WORKSPACE_RESOURCE_CACHE_SCHEMA_VERSION: &str = "workspace-os-resource-cache.v1";
+const MAX_WORKSPACE_PRELOAD_TEXT_FILES: usize = 80;
+const MAX_WORKSPACE_PRELOAD_TEXT_BYTES: usize = 12_000_000;
 const MAX_DECISION_ANSWER_BYTES: usize = 20_000;
 const MAX_TASK_RUN_RECORDS: usize = 80;
 const MAX_TASK_PROMPT_PREVIEW_CHARS: usize = 280;
@@ -1529,14 +1565,18 @@ fn get_desktop_workspace_state(app: AppHandle) -> Result<DesktopWorkspaceStateRe
 #[tauri::command]
 fn set_desktop_workspace_path(
     app: AppHandle,
+    cache_store: State<'_, WorkspaceResourceStore>,
     path: String,
 ) -> Result<DesktopWorkspaceStateReport, String> {
-    set_desktop_workspace_path_report(&app, &path)
+    let report = set_desktop_workspace_path_report(&app, &path)?;
+    cache_store.clear_cache()?;
+    Ok(report)
 }
 
 #[tauri::command]
 async fn choose_desktop_workspace_folder(
     app: AppHandle,
+    cache_store: State<'_, WorkspaceResourceStore>,
 ) -> Result<DesktopWorkspaceStateReport, String> {
     let Some(folder_path) = app
         .dialog()
@@ -1553,16 +1593,21 @@ async fn choose_desktop_workspace_folder(
     let path = folder_path
         .into_path()
         .map_err(|error| format!("Failed to resolve selected folder path: {error}"))?;
-    set_desktop_workspace_path_report(&app, &path_to_string(&path))
+    let report = set_desktop_workspace_path_report(&app, &path_to_string(&path))?;
+    cache_store.clear_cache()?;
+    Ok(report)
 }
 
 #[tauri::command]
 fn clone_desktop_workspace(
     app: AppHandle,
+    cache_store: State<'_, WorkspaceResourceStore>,
     repository_url: String,
     folder_name: Option<String>,
 ) -> Result<DesktopWorkspaceStateReport, String> {
-    clone_desktop_workspace_report(&app, &repository_url, folder_name.as_deref())
+    let report = clone_desktop_workspace_report(&app, &repository_url, folder_name.as_deref())?;
+    cache_store.clear_cache()?;
+    Ok(report)
 }
 
 #[tauri::command]
@@ -2067,8 +2112,15 @@ fn cancel_cli_adapter_session(
 #[tauri::command]
 fn read_workspace_text_file(
     app: AppHandle,
+    cache_store: State<'_, WorkspaceResourceStore>,
     relative_path: String,
 ) -> Result<WorkspaceTextFile, String> {
+    let root = workspace_root_for_app(Some(&app))?;
+    let normalized = normalize_relative_workspace_path(&relative_path)?;
+    if let Some(file) = cache_store.cached_text_file(&root, &normalized)? {
+        return Ok(file);
+    }
+
     let (path, normalized) = resolve_workspace_file(Some(&app), &relative_path, true)?;
     let metadata = path
         .metadata()
@@ -2080,17 +2132,20 @@ fn read_workspace_text_file(
     }
     let content =
         fs::read_to_string(&path).map_err(|error| format!("Failed to read text file: {error}"))?;
-    Ok(WorkspaceTextFile {
+    let file = WorkspaceTextFile {
         relative_path: normalized,
         size_bytes: content.len(),
         content,
         max_size_bytes: MAX_WORKSPACE_FILE_BYTES,
-    })
+    };
+    cache_store.upsert_text_file(&root, &file)?;
+    Ok(file)
 }
 
 #[tauri::command]
 fn list_workspace_text_files(
     app: AppHandle,
+    cache_store: State<'_, WorkspaceResourceStore>,
     filter: Option<String>,
     limit: Option<usize>,
 ) -> Result<WorkspaceTextFileListReport, String> {
@@ -2099,7 +2154,184 @@ fn list_workspace_text_files(
     let limit = limit
         .unwrap_or(DEFAULT_WORKSPACE_SOURCE_LIST_LIMIT)
         .clamp(1, MAX_WORKSPACE_SOURCE_LIST_LIMIT);
-    let mut stack = vec![root.clone()];
+
+    if let Some(cache) = cache_store.cache_for_root(&root)? {
+        return Ok(workspace_list_report_from_cache(
+            &cache,
+            &normalized_filter,
+            limit,
+            "runtime_workspace_os_cache",
+        ));
+    }
+
+    let cache = build_workspace_resource_cache(&root, false)?;
+    cache_store.replace_cache(cache.clone())?;
+    Ok(workspace_list_report_from_cache(
+        &cache,
+        &normalized_filter,
+        limit,
+        "runtime_workspace_os_scan_cache",
+    ))
+}
+
+#[tauri::command]
+fn prepare_workspace_os_resources(
+    app: AppHandle,
+    cache_store: State<'_, WorkspaceResourceStore>,
+    filter: Option<String>,
+    limit: Option<usize>,
+    preload_contents: Option<bool>,
+    force_refresh: Option<bool>,
+) -> Result<WorkspaceResourcePrepareReport, String> {
+    let root = workspace_root_for_app(Some(&app))?;
+    let normalized_filter = filter.unwrap_or_default().trim().to_lowercase();
+    let limit = limit
+        .unwrap_or(DEFAULT_WORKSPACE_SOURCE_LIST_LIMIT)
+        .clamp(1, MAX_WORKSPACE_SOURCE_LIST_LIMIT);
+    let force_refresh = force_refresh.unwrap_or(false);
+    let cache = if !force_refresh {
+        cache_store.cache_for_root(&root)?
+    } else {
+        None
+    };
+    let cache = match cache {
+        Some(cache) => cache,
+        None => {
+            let cache = build_workspace_resource_cache(&root, preload_contents.unwrap_or(true))?;
+            cache_store.replace_cache(cache.clone())?;
+            cache
+        }
+    };
+    let catalog = workspace_list_report_from_cache(
+        &cache,
+        &normalized_filter,
+        limit,
+        "runtime_workspace_os_prepared_cache",
+    );
+    Ok(workspace_resource_prepare_report(&cache, catalog))
+}
+
+#[tauri::command]
+fn write_workspace_text_file(
+    app: AppHandle,
+    cache_store: State<'_, WorkspaceResourceStore>,
+    relative_path: String,
+    content: String,
+) -> Result<WorkspaceWriteReport, String> {
+    if content.len() > MAX_WORKSPACE_FILE_BYTES {
+        return Err(format!(
+            "Content is too large for the desktop editor. Max size is {MAX_WORKSPACE_FILE_BYTES} bytes."
+        ));
+    }
+    let root = workspace_root_for_app(Some(&app))?;
+    let (path, normalized) = resolve_workspace_file(Some(&app), &relative_path, true)?;
+    let original = fs::read(&path)
+        .map_err(|error| format!("Failed to read original file for backup: {error}"))?;
+    let backup_path = source_backup_path(&root, &normalized)?;
+    if let Some(parent) = backup_path.parent() {
+        fs::create_dir_all(parent)
+            .map_err(|error| format!("Failed to create backup directory: {error}"))?;
+    }
+    fs::write(&backup_path, original)
+        .map_err(|error| format!("Failed to write backup file: {error}"))?;
+    fs::write(&path, content.as_bytes())
+        .map_err(|error| format!("Failed to write workspace file: {error}"))?;
+    cache_store.clear_cache()?;
+    Ok(WorkspaceWriteReport {
+        relative_path: normalized,
+        size_bytes: content.len(),
+        backup_path: backup_path.to_string_lossy().to_string(),
+        status: "written_with_backup".to_string(),
+    })
+}
+
+impl WorkspaceResourceStore {
+    fn cache_for_root(&self, root: &Path) -> Result<Option<WorkspaceResourceCache>, String> {
+        let root_path = path_to_string(root);
+        let cache = self
+            .cache
+            .lock()
+            .map_err(|_| "Workspace resource cache lock is poisoned.".to_string())?;
+        Ok(cache
+            .as_ref()
+            .filter(|cached| cached.root_path == root_path)
+            .cloned())
+    }
+
+    fn replace_cache(&self, cache: WorkspaceResourceCache) -> Result<(), String> {
+        let mut current = self
+            .cache
+            .lock()
+            .map_err(|_| "Workspace resource cache lock is poisoned.".to_string())?;
+        *current = Some(cache);
+        Ok(())
+    }
+
+    fn clear_cache(&self) -> Result<(), String> {
+        let mut current = self
+            .cache
+            .lock()
+            .map_err(|_| "Workspace resource cache lock is poisoned.".to_string())?;
+        *current = None;
+        Ok(())
+    }
+
+    fn cached_text_file(
+        &self,
+        root: &Path,
+        relative_path: &str,
+    ) -> Result<Option<WorkspaceTextFile>, String> {
+        let root_path = path_to_string(root);
+        let cache = self
+            .cache
+            .lock()
+            .map_err(|_| "Workspace resource cache lock is poisoned.".to_string())?;
+        Ok(cache
+            .as_ref()
+            .filter(|cached| cached.root_path == root_path)
+            .and_then(|cached| cached.text_files.get(relative_path).cloned()))
+    }
+
+    fn upsert_text_file(&self, root: &Path, file: &WorkspaceTextFile) -> Result<(), String> {
+        let root_path = path_to_string(root);
+        let mut cache = self
+            .cache
+            .lock()
+            .map_err(|_| "Workspace resource cache lock is poisoned.".to_string())?;
+        let Some(current) = cache.as_mut() else {
+            return Ok(());
+        };
+        if current.root_path != root_path {
+            return Ok(());
+        }
+        current.cached_bytes = current
+            .cached_bytes
+            .saturating_sub(
+                current
+                    .text_files
+                    .get(&file.relative_path)
+                    .map(|cached| cached.size_bytes)
+                    .unwrap_or(0),
+            )
+            .saturating_add(file.size_bytes);
+        current
+            .text_files
+            .insert(file.relative_path.clone(), file.clone());
+        Ok(())
+    }
+}
+
+struct WorkspaceTextFileScanResult {
+    scanned_entries: usize,
+    truncated: bool,
+    files: Vec<WorkspaceTextFileEntry>,
+}
+
+fn scan_workspace_text_file_entries(
+    root: &Path,
+    normalized_filter: &str,
+) -> WorkspaceTextFileScanResult {
+    let mut stack = vec![root.to_path_buf()];
     let mut scanned_entries = 0_usize;
     let mut files = Vec::new();
     let mut truncated = false;
@@ -2147,12 +2379,12 @@ fn list_workspace_text_files(
             }
 
             let path = entry.path();
-            let relative_path = workspace_relative_display_path(&root, &path);
+            let relative_path = workspace_relative_display_path(root, &path);
             if !is_source_editor_text_path(&relative_path) {
                 continue;
             }
             if !normalized_filter.is_empty()
-                && !relative_path.to_lowercase().contains(&normalized_filter)
+                && !relative_path.to_lowercase().contains(normalized_filter)
             {
                 continue;
             }
@@ -2162,7 +2394,7 @@ fn list_workspace_text_files(
                 Err(_) => continue,
             };
             files.push(workspace_text_file_entry(
-                &root,
+                root,
                 &path,
                 &relative_path,
                 &metadata,
@@ -2171,51 +2403,114 @@ fn list_workspace_text_files(
     }
 
     files.sort_by(|left, right| left.path.cmp(&right.path));
-    let total_count = files.len();
-    if total_count > limit {
-        truncated = true;
+    WorkspaceTextFileScanResult {
+        scanned_entries,
+        truncated,
+        files,
     }
+}
+
+fn build_workspace_resource_cache(
+    root: &Path,
+    preload_contents: bool,
+) -> Result<WorkspaceResourceCache, String> {
+    let scan = scan_workspace_text_file_entries(root, "");
+    let mut text_files = HashMap::new();
+    let mut cached_bytes = 0_usize;
+
+    if preload_contents {
+        for entry in scan
+            .files
+            .iter()
+            .filter(|entry| !entry.truncated)
+            .take(MAX_WORKSPACE_PRELOAD_TEXT_FILES)
+        {
+            if cached_bytes >= MAX_WORKSPACE_PRELOAD_TEXT_BYTES {
+                break;
+            }
+            let path = root.join(&entry.path);
+            let metadata = match path.metadata() {
+                Ok(metadata) => metadata,
+                Err(_) => continue,
+            };
+            let size_bytes = metadata.len() as usize;
+            if size_bytes > MAX_WORKSPACE_FILE_BYTES
+                || cached_bytes.saturating_add(size_bytes) > MAX_WORKSPACE_PRELOAD_TEXT_BYTES
+            {
+                continue;
+            }
+            let content = match fs::read_to_string(&path) {
+                Ok(content) => content,
+                Err(_) => continue,
+            };
+            let file = WorkspaceTextFile {
+                relative_path: entry.path.clone(),
+                size_bytes: content.len(),
+                content,
+                max_size_bytes: MAX_WORKSPACE_FILE_BYTES,
+            };
+            cached_bytes = cached_bytes.saturating_add(file.size_bytes);
+            text_files.insert(file.relative_path.clone(), file);
+        }
+    }
+
+    Ok(WorkspaceResourceCache {
+        root_path: path_to_string(root),
+        generated_at: current_unix_millis_label(),
+        scanned_entries: scan.scanned_entries,
+        truncated: scan.truncated,
+        files: scan.files,
+        text_files,
+        cached_bytes,
+    })
+}
+
+fn workspace_list_report_from_cache(
+    cache: &WorkspaceResourceCache,
+    normalized_filter: &str,
+    limit: usize,
+    source: &str,
+) -> WorkspaceTextFileListReport {
+    let mut files: Vec<WorkspaceTextFileEntry> = cache
+        .files
+        .iter()
+        .filter(|entry| {
+            normalized_filter.is_empty() || entry.path.to_lowercase().contains(normalized_filter)
+        })
+        .cloned()
+        .collect();
+    files.sort_by(|left, right| left.path.cmp(&right.path));
+    let total_count = files.len();
+    let truncated = cache.truncated || total_count > limit;
     let files: Vec<WorkspaceTextFileEntry> = files.into_iter().take(limit).collect();
-    Ok(WorkspaceTextFileListReport {
+    WorkspaceTextFileListReport {
         status: "listed".to_string(),
-        source: "runtime_workspace_scan".to_string(),
+        source: source.to_string(),
         total_count,
         returned_count: files.len(),
         truncated,
         files,
-    })
+    }
 }
 
-#[tauri::command]
-fn write_workspace_text_file(
-    app: AppHandle,
-    relative_path: String,
-    content: String,
-) -> Result<WorkspaceWriteReport, String> {
-    if content.len() > MAX_WORKSPACE_FILE_BYTES {
-        return Err(format!(
-            "Content is too large for the desktop editor. Max size is {MAX_WORKSPACE_FILE_BYTES} bytes."
-        ));
+fn workspace_resource_prepare_report(
+    cache: &WorkspaceResourceCache,
+    catalog: WorkspaceTextFileListReport,
+) -> WorkspaceResourcePrepareReport {
+    WorkspaceResourcePrepareReport {
+        status: "prepared".to_string(),
+        source: catalog.source.clone(),
+        schema_version: WORKSPACE_RESOURCE_CACHE_SCHEMA_VERSION.to_string(),
+        root_path: cache.root_path.clone(),
+        generated_at: cache.generated_at.clone(),
+        scanned_entries: cache.scanned_entries,
+        total_count: catalog.total_count,
+        returned_count: catalog.returned_count,
+        cached_text_files: cache.text_files.len(),
+        cached_bytes: cache.cached_bytes,
+        truncated: cache.truncated || catalog.truncated,
+        catalog,
     }
-    let root = workspace_root_for_app(Some(&app))?;
-    let (path, normalized) = resolve_workspace_file(Some(&app), &relative_path, true)?;
-    let original = fs::read(&path)
-        .map_err(|error| format!("Failed to read original file for backup: {error}"))?;
-    let backup_path = source_backup_path(&root, &normalized)?;
-    if let Some(parent) = backup_path.parent() {
-        fs::create_dir_all(parent)
-            .map_err(|error| format!("Failed to create backup directory: {error}"))?;
-    }
-    fs::write(&backup_path, original)
-        .map_err(|error| format!("Failed to write backup file: {error}"))?;
-    fs::write(&path, content.as_bytes())
-        .map_err(|error| format!("Failed to write workspace file: {error}"))?;
-    Ok(WorkspaceWriteReport {
-        relative_path: normalized,
-        size_bytes: content.len(),
-        backup_path: backup_path.to_string_lossy().to_string(),
-        status: "written_with_backup".to_string(),
-    })
 }
 
 #[tauri::command]
@@ -2329,6 +2624,7 @@ fn answer_and_resume_human_decision(
 pub fn run() {
     tauri::Builder::default()
         .manage(SessionStore::default())
+        .manage(WorkspaceResourceStore::default())
         .plugin(tauri_plugin_dialog::init())
         .invoke_handler(tauri::generate_handler![
             app_health,
@@ -2369,6 +2665,7 @@ pub fn run() {
             send_cli_adapter_defer_message,
             defer_all_cli_adapter_questions,
             cancel_cli_adapter_session,
+            prepare_workspace_os_resources,
             list_workspace_text_files,
             read_workspace_text_file,
             write_workspace_text_file,
