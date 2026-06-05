@@ -610,9 +610,7 @@ button:disabled {
   flex: 0 0 auto;
 }
 
-.desktop-app-root button > span,
-.desktop-app-root button > strong,
-.desktop-app-root button > small {
+.desktop-app-root :where(button > span, button > strong, button > small) {
   min-width: 0;
   max-width: 100%;
   overflow-wrap: var(--text-natural-wrap);
@@ -16496,4 +16494,13 @@ h3 {
     min-width: 0;
   }
 
+}
+
+.desktop-app-root button > span,
+.desktop-app-root button > strong,
+.desktop-app-root button > small {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: var(--text-natural-wrap);
+  word-break: keep-all;
 }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T12:27:30.524Z",
+  "generatedAt": "2026-06-05T12:45:54.988Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -14,10 +14,10 @@
     "documents": 650,
     "requirements": 444,
     "evaluations": 25,
-    "webSearches": 12,
-    "timingRecords": 12,
+    "webSearches": 13,
+    "timingRecords": 11,
     "historyDays": 1,
-    "adminHistoryDocuments": 2233,
+    "adminHistoryDocuments": 2238,
     "adminHistoryDays": 6,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7332,6 +7332,118 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+      "path": "_history/evaluations/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: Desktop Package Readiness Repair",
+      "excerpt": "평가: Desktop Package Readiness Repair 결과 내부 패키징 실패는 해결됐다. 활성 요구사항 기준으로 user 기본 navigation을 5개 섹션으로 정렬했고, tools 는 기본 navigation이 아닌 기능/개발 표면으로 남겼다. readiness script, platform tests, Workspace Monitor tests가 같은 계약을 보도록 맞췄다. generated snapshot/admin history index를 재생성해 lazy admin ind",
+      "html": "<p>평가: Desktop Package Readiness Repair 결과 내부 패키징 실패는 해결됐다. 활성 요구사항 기준으로 user 기본 navigation을 5개 섹션으로 정렬했고, tools 는 기본 navigation이 아닌 기능/개발 표면으로 남겼다. readiness script, platform tests, Workspace Monitor tests가 같은 계약을 보도록 맞췄다. generated snapshot/admin history index를 재생성해 lazy admin index 검증을 복구했다. 검증 corepack pnpm filter workspace monitor run check : 통과 corepack p</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1301,
+      "updatedAt": "2026-06-05T12:45:23.211Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+      "path": "_history/request-traces/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Desktop Package Readiness Repair",
+      "excerpt": "요청 결과 추적: Desktop Package Readiness Repair 요청 데스크톱 내부 패키징 실패를 전부 수정. 결과 platform desktop app readiness/test 실패 2건을 해결했다. Workspace Monitor check/test에서 드러난 생성 snapshot, CSS, stale test 계약을 함께 정리했다. 내부 패키징 산출물이 정상 생성됐다. 주요 산출물 agent platform/configs/access/view mode registry.json ",
+      "html": "<p>요청 결과 추적: Desktop Package Readiness Repair 요청 데스크톱 내부 패키징 실패를 전부 수정. 결과 platform desktop app readiness/test 실패 2건을 해결했다. Workspace Monitor check/test에서 드러난 생성 snapshot, CSS, stale test 계약을 함께 정리했다. 내부 패키징 산출물이 정상 생성됐다. 주요 산출물 agent platform/configs/access/view mode registry.json platform desktop app/configs/product feature registry.json platform desktop app/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1788,
+      "updatedAt": "2026-06-05T12:45:23.210Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+      "path": "_history/user-requests/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Desktop Package Readiness Repair",
+      "excerpt": "사용자 요청 요약: Desktop Package Readiness Repair 요청 내부 데스크톱 패키징 실패 원인을 모두 고치고, 기존 생성 변경물도 필요한 범위에서 같이 수정하라는 요청. 해석 pnpm run desktop:package:internal 이 끝까지 통과해야 한다. 이전에 건드리지 않겠다고 보류한 generated snapshot/admin history 출력도 검증에 필요하면 갱신한다. 최신 요구사항과 테스트가 충돌하는 부분은 활성 요구사항 기준으로 정렬한다.",
+      "html": "<p>사용자 요청 요약: Desktop Package Readiness Repair 요청 내부 데스크톱 패키징 실패 원인을 모두 고치고, 기존 생성 변경물도 필요한 범위에서 같이 수정하라는 요청. 해석 pnpm run desktop:package:internal 이 끝까지 통과해야 한다. 이전에 건드리지 않겠다고 보류한 generated snapshot/admin history 출력도 검증에 필요하면 갱신한다. 최신 요구사항과 테스트가 충돌하는 부분은 활성 요구사항 기준으로 정렬한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 541,
+      "updatedAt": "2026-06-05T12:45:23.210Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Desktop Package Readiness Repair",
+      "excerpt": "작업 요약: Desktop Package Readiness Repair user 기본 navigation/view mode/product feature registry를 overview , agents , desktop , source , intent 로 맞췄다. tools 강제 pinned 삽입 로직을 제거하고 Tool Studio는 기능 표면으로 유지했다. readiness가 요구하는 홈/Workspace Explorer/AgentCore copy를 맞췄다. 버튼 텍스트 wrapping CSS",
+      "html": "<p>작업 요약: Desktop Package Readiness Repair user 기본 navigation/view mode/product feature registry를 overview , agents , desktop , source , intent 로 맞췄다. tools 강제 pinned 삽입 로직을 제거하고 Tool Studio는 기능 표면으로 유지했다. readiness가 요구하는 홈/Workspace Explorer/AgentCore copy를 맞췄다. 버튼 텍스트 wrapping CSS와 Workspace Monitor 테스트 계약 충돌을 정리했다. developer/customer generated snapshots와 adm</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 647,
+      "updatedAt": "2026-06-05T12:45:23.210Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+      "path": "_history/web-searches/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: Desktop Package Readiness Repair",
+      "excerpt": "웹 검색 기록: Desktop Package Readiness Repair 검색 날짜: 2026 06 05 목적: 패키징 실패 원인이 외부 최신 정보보다 로컬 테스트/계약 불일치인지 확인 질의 software regression tests align tests with requirements official docs Node.js assert deepStrictEqual official documentation node:test pnpm Node.js version requirements offi",
+      "html": "<p>웹 검색 기록: Desktop Package Readiness Repair 검색 날짜: 2026 06 05 목적: 패키징 실패 원인이 외부 최신 정보보다 로컬 테스트/계약 불일치인지 확인 질의 software regression tests align tests with requirements official docs Node.js assert deepStrictEqual official documentation node:test pnpm Node.js version requirements official documentation 판단 검색 결과는 구현 방향을 바꾸지 않았다. 이번 실패는 로컬 readiness.test.mjs , chec</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1205,
+      "updatedAt": "2026-06-05T12:45:23.209Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "agent-platform-configs-access-view-mode-registry-json",
+      "path": "agent-platform/configs/access/view-mode-registry.json",
+      "category": "agent-config",
+      "language": "unknown",
+      "title": "View Mode Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 02\", \"name\": \"view mode registry\", \"purpose\": \"Defines selectable repository and platform viewing modes so user, developer, and superadmin development surfaces stay distinct from install and work modes.\", \"reader guide\": { \"summary\": \"Use this registr",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-02&quot;,\n  &quot;name&quot;: &quot;view-mode-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines selectable repository and platform viewing modes so user, developer, and superadmin development surfaces stay distinct from install and work modes.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry when choosing what the platform UI or an operator should show. It does not install dependencies and it does not change work close-out strictness.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read mode_boundary first so view_mode is not confused with install_mode or work_mode.&quot;,\n      &quot;Use default_mode for current workspace-monitor behavior unless the user explicitly asks for a simpler lens.&quot;,\n      &quot;Read modes[].visibility_rules to understand which surfaces are foregrounded, collapsed, or hidden.&quot;,\n      &quot;Treat security_notes as design constraints for future authenticated deployments, not as proof that access control already exists.&quot;\n    ],\n    &quot;owner&quot;: &quot;agent-platform&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-02&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;A new UI or dashboard role is added.&quot;,\n      &quot;workspace-monitor changes how documents, operations, agents, or governance records are displayed.&quot;,\n      &quot;The platform adds real authentication, authorization, or per-user publishing rules.&quot;,\n      &quot;The distinction between user, developer, and superadmin operator responsibilities changes.&quot;,\n      &quot;Install mode or work mode rules change in a way that could confuse operators.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;owasp_authorization&quot;,\n      &quot;title&quot;: &quot;OWASP Authorization Cheat Sheet&quot;,\n      &quot;url&quot;: &quot;https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html&quot;,\n      &quot;source_type&quot;: &quot;security_guidance&quot;,\n      &quot;used_for&quot;: [\n        &quot;least privilege&quot;,\n        &quot;deny-by-default future access control design&quot;,\n        &quot;authorization tests as a future gate&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;nist_rbac&quot;,\n      &quot;title&quot;: &quot;NIST Role Based Access Control&quot;,\n      &quot;url&quot;: &quot;https://csrc.nist.gov/projects/role-based-access-control&quot;,\n      &quot;source_type&quot;: &quot;standard_reference&quot;,\n      &quot;used_for&quot;: [\n        &quot;role and permission vocabulary&quot;,\n        &quot;RBAC and ABAC trade-off awareness&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;nextjs_proxy&quot;,\n      &quot;title&quot;: &quot;Next.js Proxy File Convention&quot;,\n      &quot;url&quot;: &quot;https://nextjs.org/docs/app/api-reference/file-conventions/proxy&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;future route or request boundary planning when authenticated monitor deployment is added&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;install_mode_registry&quot;,\n      &quot;title&quot;: &quot;Install Mode Registry&quot;,\n      &quot;path&quot;: &quot;agent-platform/configs/installations/install-mode-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;separating setup profile from viewing profile&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;work_mode_registry&quot;,\n      &quot;title&quot;: &quot;Work Mode Registry&quot;,\n      &quot;path&quot;: &quot;agent-platform/configs/workflows/work-mode-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;separating task governance strictness from viewing profile&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;view_mode_is_not_install_mode&quot;,\n      &quot;rule&quot;: &quot;view_mode controls what a person or UI sees; install_mode controls dependency and environment setup.&quot;,\n      &quot;reason&quot;: &quot;The user/developer installation split already exists and should not be overloaded with UI visibility semantics.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;mode_boundary&quot;,\n        &quot;modes&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;view_mode_is_not_work_mode&quot;,\n      &quot;rule&quot;: &quot;view_mode controls audience lens; work_mode still controls task planning, evidence, evaluation, and close-out strictness.&quot;,\n      &quot;reason&quot;: &quot;A superadmin development view must not weaken governance requirements or replace evaluator gates.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;mode_boundary&quot;,\n        &quot;modes&quot;,\n        &quot;selection_rules&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;superadmin_developer_is_current_default&quot;,\n      &quot;rule&quot;: &quot;The current default view_mode is superadmin_developer because the repository is still being built by the owner and needs governance, agent, history, config, and implementation surfaces visible together.&quot;,\n      &quot;reason&quot;: &quot;The latest user request asked for a superadmin-oriented development mode selector for now.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;default_mode&quot;,\n        &quot;modes[superadmin_developer]&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;security_is_future_enforcement&quot;,\n      &quot;rule&quot;: &quot;View mode filtering is an operator/UI lens until real authentication and authorization are implemented; do not treat hidden UI elements as a security boundary.&quot;,\n      &quot;reason&quot;: &quot;Static repository snapshots can still contain data unless the collector and deployment publication rules enforce removal.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;modes[].security_notes&quot;,\n        &quot;workspace-monitor&quot;\n      ]\n    }\n  ],\n  &quot;field_guide&quot;: [\n    {\n      &quot;field&quot;: &quot;mode_boundary&quot;,\n      &quot;meaning&quot;: &quot;Explains the difference between view_mode, install_mode, and wo</code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 13459,
+      "updatedAt": "2026-06-05T12:39:11.792Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "agent-platform"
+    },
+    {
+      "id": "platform-desktop-app-configs-product-feature-registry-json",
+      "path": "platform-desktop-app/configs/product-feature-registry.json",
+      "category": "project-config",
+      "language": "unknown",
+      "title": "Product Feature Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"product feature registry\", \"purpose\": \"Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, ",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;product-feature-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, workbench, learning, and monitoring are supporting layers.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before changing the desktop home screen, snapshot schema, installer shell runtime, or platform feature navigation.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read product_position first to understand what the product is and what it is not.&quot;,\n      &quot;Read feature_layers to see which capabilities are primary product features and which capabilities are supporting surfaces.&quot;,\n      &quot;Read promotion_loop before adding workflow, prompt, tool, skill, or agent creation features.&quot;,\n      &quot;Read structure_rules before naming a feature, tab, data store, or installer shell behavior as monitoring.&quot;,\n      &quot;Use validation_gates as the acceptance checklist when making a UI, data, or runtime change around these features.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-04&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The desktop home screen or first-run product promise changes.&quot;,\n      &quot;A feature is promoted from workflow, prompt, template, tool, skill, or agent into a desktop product surface.&quot;,\n      &quot;A new Agent Core, CLI orchestration, root tool, workbench, learning, or observability capability is added.&quot;,\n      &quot;Monitoring starts to look like the main product again instead of a support layer.&quot;,\n      &quot;The installer shell runtime contract changes how work state, decisions, evidence, validation, or evaluations are accumulated.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;openai_agents_sdk&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;agent loop, tools, guardrails, handoffs, sessions, and tracing as product-level agent platform primitives&quot;,\n        &quot;workspace and resumable multi-step execution as desktop product capabilities&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;openai_agents_tracing&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK Tracing&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/tracing/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating traces and monitoring as debugging, evaluation, and improvement support rather than the whole product&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;autogen_docs&quot;,\n      &quot;title&quot;: &quot;Microsoft AutoGen&quot;,\n      &quot;url&quot;: &quot;https://microsoft.github.io/autogen/stable/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;multi-agent applications, event-driven multi-agent systems, and no-code prototyping surfaces as platform references&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;langgraph_multi_agent&quot;,\n      &quot;title&quot;: &quot;LangGraph Multi-agent Patterns&quot;,\n      &quot;url&quot;: &quot;https://langchain-ai.github.io/langgraph/tutorials/multi_agent/multi-agent-collaboration/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;subagents, handoffs, skills, routers, custom workflows, context management, and parallel execution trade-offs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;crewai_docs&quot;,\n      &quot;title&quot;: &quot;CrewAI Documentation&quot;,\n      &quot;url&quot;: &quot;https://docs.crewai.com/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;crew-style agent orchestration, flow, knowledge, and task abstractions as product reference points&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_hig_settings&quot;,\n      &quot;title&quot;: &quot;Apple Human Interface Guidelines: Settings&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/design/human-interface-guidelines/settings&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;keeping broad configuration in a dedicated settings area instead of mixing it into the core work surface&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;microsoft_navigation_view&quot;,\n      &quot;title&quot;: &quot;Microsoft Learn: NavigationView&quot;,\n      &quot;url&quot;: &quot;https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop-style navigation with main items and a separated settings item&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_platform_ui_overview&quot;,\n      &quot;title&quot;: &quot;IntelliJ Platform UI Overview&quot;,\n      &quot;url&quot;: &quot;https://plugins.jetbrains.com/docs/intellij/ui-overview.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;IDE-style separation of main editor/work surfaces, tool windows, settings, and modal dialogs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_tool_windows&quot;,\n      &quot;title&quot;: &quot;IntelliJ IDEA Tool Windows&quot;,\n      &quot;url&quot;: &quot;https://www.jetbrains.com/help/idea/tool-windows.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Run, Services, Problems, and status-oriented tool-window model </code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 33968,
+      "updatedAt": "2026-06-05T12:39:11.791Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-05-korean-copy-pass-ko-md",
       "path": "_history/evaluations/2026/2026-06-05-korean-copy-pass.ko.md",
       "category": "evaluation",
@@ -9428,54 +9540,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-work-summaries-2026-2026-06-05-text-wrapping-contract-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-05-text-wrapping-contract.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: Text Wrapping Contract",
-      "excerpt": "작업 요약: Text Wrapping Contract Workspace Monitor 전역 CSS에 문장형 텍스트, 긴 토큰, 버튼 라벨을 분리한 줄바꿈 계약을 추가했다. font loading.test.mjs 에 줄바꿈 계약 회귀 테스트를 추가했다. REQ WM 069와 스펙/검증/추적/평가 기록을 남겼다. desktop/mobile Browser smoke에서 root/body overflowX 0과 computed style 계약을 확인했다.",
-      "html": "<p>작업 요약: Text Wrapping Contract Workspace Monitor 전역 CSS에 문장형 텍스트, 긴 토큰, 버튼 라벨을 분리한 줄바꿈 계약을 추가했다. font loading.test.mjs 에 줄바꿈 계약 회귀 테스트를 추가했다. REQ WM 069와 스펙/검증/추적/평가 기록을 남겼다. desktop/mobile Browser smoke에서 root/body overflowX 0과 computed style 계약을 확인했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 415,
-      "updatedAt": "2026-06-05T02:19:41.131Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-05-text-wrapping-contract-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-05-text-wrapping-contract-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 05 Text Wrapping Contract Evaluation Input",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"text wrapping contract\", \"requirements\": \"REQ WM 069\" , \"implementation targets\": \"platform desktop app/renderer/workspace monitor/app/globals.css\", \"platform desktop app/renderer/workspace monitor/tests/font loading.test.mjs\" , \"validatio",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request slug&quot;: &quot;text wrapping contract&quot;, &quot;requirements&quot;: &quot;REQ WM 069&quot; , &quot;implementation targets&quot;: &quot;platform desktop app/renderer/workspace monitor/app/globals.css&quot;, &quot;platform desktop app/renderer/workspace monitor/tests/font loading.test.mjs&quot; , &quot;validation commands&quot;: &quot;corepack pnpm filter workspace monitor test&quot;, &quot;corepack pnpm filte</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1720,
-      "updatedAt": "2026-06-05T02:19:41.130Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-05-text-wrapping-contract-json",
-      "path": "_history/work-timings/2026/2026-06-05-text-wrapping-contract.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 05 Text Wrapping Contract",
-      "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"text wrapping contract\", \"timings\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"note\": \"Official WCAG, MDN, and typography references checked before local edits.\" }, { \"phase\": \"implementation\", \"status\": \"completed\", \"note\": \"C",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request slug&quot;: &quot;text wrapping contract&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;note&quot;: &quot;Official WCAG, MDN, and typography references checked before local edits.&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;note&quot;: &quot;CSS wrapping contract and static regression test added.&quot; }, { &quot;phase&quot;: &quot;validatio</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 605,
-      "updatedAt": "2026-06-05T02:19:41.129Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-text-wrapping-contract-tasks-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-text-wrapping-contract/tasks.ko.md",
       "category": "project-spec",
@@ -9490,38 +9554,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-plans-2026-2026-06-05-text-wrapping-contract-ko-md",
-      "path": "_history/plans/2026/2026-06-05-text-wrapping-contract.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "작업 계획: Text Wrapping Contract",
-      "excerpt": "작업 계획: Text Wrapping Contract 계획 1. 공식 기준을 확인하고 text wrapping 구현 원칙을 정리한다. 2. globals.css 에 prose, label, long token, button child text 계약을 추가한다. 3. font loading.test.mjs 에 CSS 계약 회귀 테스트를 추가한다. 4. 요구사항과 스펙 추적 파일을 갱신한다. 5. 테스트, 타입체크, check, build, customer build, performance budge",
-      "html": "<p>작업 계획: Text Wrapping Contract 계획 1. 공식 기준을 확인하고 text wrapping 구현 원칙을 정리한다. 2. globals.css 에 prose, label, long token, button child text 계약을 추가한다. 3. font loading.test.mjs 에 CSS 계약 회귀 테스트를 추가한다. 4. 요구사항과 스펙 추적 파일을 갱신한다. 5. 테스트, 타입체크, check, build, customer build, performance budget을 실행한다. 6. 정적 export를 브라우저로 열어 desktop/mobile overflow와 computed style을 확인하고 sc</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 656,
-      "updatedAt": "2026-06-05T02:16:36.812Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-05-text-wrapping-contract-ko-md",
-      "path": "_history/user-requests/2026/2026-06-05-text-wrapping-contract.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Text Wrapping Contract",
-      "excerpt": "사용자 요청 요약: Text Wrapping Contract 요약 사용자는 Workspace Monitor UI에서 텍스트가 줄바꿈으로 이상해지거나 깨지는 현상을 없애길 요청했다. 특히 한 화면에 많은 정보를 담는 과정에서 텍스트가 어색하게 끊기고 비전체화면에서 레이아웃이 망가지는 문제를 줄여야 한다. 해석한 완료 기준 문장형 텍스트와 버튼 라벨은 작은 화면에서도 읽기 좋은 줄바꿈을 유지한다. 경로, 명령, 코드처럼 긴 토큰은 레이아웃을 가로로 밀지 않는다. 변경은 static regression",
-      "html": "<p>사용자 요청 요약: Text Wrapping Contract 요약 사용자는 Workspace Monitor UI에서 텍스트가 줄바꿈으로 이상해지거나 깨지는 현상을 없애길 요청했다. 특히 한 화면에 많은 정보를 담는 과정에서 텍스트가 어색하게 끊기고 비전체화면에서 레이아웃이 망가지는 문제를 줄여야 한다. 해석한 완료 기준 문장형 텍스트와 버튼 라벨은 작은 화면에서도 읽기 좋은 줄바꿈을 유지한다. 경로, 명령, 코드처럼 긴 토큰은 레이아웃을 가로로 밀지 않는다. 변경은 static regression test와 desktop/mobile smoke로 검증된다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 671,
-      "updatedAt": "2026-06-05T02:16:36.811Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
     },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-text-wrapping-contract-traceability-ko-md",
@@ -11618,38 +11650,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-configs-product-feature-registry-json",
-      "path": "platform-desktop-app/configs/product-feature-registry.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "Product Feature Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"product feature registry\", \"purpose\": \"Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, ",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;product-feature-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, workbench, learning, and monitoring are supporting layers.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before changing the desktop home screen, snapshot schema, installer shell runtime, or platform feature navigation.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read product_position first to understand what the product is and what it is not.&quot;,\n      &quot;Read feature_layers to see which capabilities are primary product features and which capabilities are supporting surfaces.&quot;,\n      &quot;Read promotion_loop before adding workflow, prompt, tool, skill, or agent creation features.&quot;,\n      &quot;Read structure_rules before naming a feature, tab, data store, or installer shell behavior as monitoring.&quot;,\n      &quot;Use validation_gates as the acceptance checklist when making a UI, data, or runtime change around these features.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-04&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The desktop home screen or first-run product promise changes.&quot;,\n      &quot;A feature is promoted from workflow, prompt, template, tool, skill, or agent into a desktop product surface.&quot;,\n      &quot;A new Agent Core, CLI orchestration, root tool, workbench, learning, or observability capability is added.&quot;,\n      &quot;Monitoring starts to look like the main product again instead of a support layer.&quot;,\n      &quot;The installer shell runtime contract changes how work state, decisions, evidence, validation, or evaluations are accumulated.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;openai_agents_sdk&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;agent loop, tools, guardrails, handoffs, sessions, and tracing as product-level agent platform primitives&quot;,\n        &quot;workspace and resumable multi-step execution as desktop product capabilities&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;openai_agents_tracing&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK Tracing&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/tracing/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating traces and monitoring as debugging, evaluation, and improvement support rather than the whole product&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;autogen_docs&quot;,\n      &quot;title&quot;: &quot;Microsoft AutoGen&quot;,\n      &quot;url&quot;: &quot;https://microsoft.github.io/autogen/stable/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;multi-agent applications, event-driven multi-agent systems, and no-code prototyping surfaces as platform references&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;langgraph_multi_agent&quot;,\n      &quot;title&quot;: &quot;LangGraph Multi-agent Patterns&quot;,\n      &quot;url&quot;: &quot;https://langchain-ai.github.io/langgraph/tutorials/multi_agent/multi-agent-collaboration/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;subagents, handoffs, skills, routers, custom workflows, context management, and parallel execution trade-offs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;crewai_docs&quot;,\n      &quot;title&quot;: &quot;CrewAI Documentation&quot;,\n      &quot;url&quot;: &quot;https://docs.crewai.com/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;crew-style agent orchestration, flow, knowledge, and task abstractions as product reference points&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_hig_settings&quot;,\n      &quot;title&quot;: &quot;Apple Human Interface Guidelines: Settings&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/design/human-interface-guidelines/settings&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;keeping broad configuration in a dedicated settings area instead of mixing it into the core work surface&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;microsoft_navigation_view&quot;,\n      &quot;title&quot;: &quot;Microsoft Learn: NavigationView&quot;,\n      &quot;url&quot;: &quot;https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop-style navigation with main items and a separated settings item&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_platform_ui_overview&quot;,\n      &quot;title&quot;: &quot;IntelliJ Platform UI Overview&quot;,\n      &quot;url&quot;: &quot;https://plugins.jetbrains.com/docs/intellij/ui-overview.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;IDE-style separation of main editor/work surfaces, tool windows, settings, and modal dialogs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_tool_windows&quot;,\n      &quot;title&quot;: &quot;IntelliJ IDEA Tool Windows&quot;,\n      &quot;url&quot;: &quot;https://www.jetbrains.com/help/idea/tool-windows.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Run, Services, Problems, and status-oriented tool-window model </code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 33983,
-      "updatedAt": "2026-06-04T21:51:02.908Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "agent-platform-configs-access-view-mode-registry-json",
-      "path": "agent-platform/configs/access/view-mode-registry.json",
-      "category": "agent-config",
-      "language": "unknown",
-      "title": "View Mode Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 02\", \"name\": \"view mode registry\", \"purpose\": \"Defines selectable repository and platform viewing modes so user, developer, and superadmin development surfaces stay distinct from install and work modes.\", \"reader guide\": { \"summary\": \"Use this registr",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-02&quot;,\n  &quot;name&quot;: &quot;view-mode-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines selectable repository and platform viewing modes so user, developer, and superadmin development surfaces stay distinct from install and work modes.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry when choosing what the platform UI or an operator should show. It does not install dependencies and it does not change work close-out strictness.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read mode_boundary first so view_mode is not confused with install_mode or work_mode.&quot;,\n      &quot;Use default_mode for current workspace-monitor behavior unless the user explicitly asks for a simpler lens.&quot;,\n      &quot;Read modes[].visibility_rules to understand which surfaces are foregrounded, collapsed, or hidden.&quot;,\n      &quot;Treat security_notes as design constraints for future authenticated deployments, not as proof that access control already exists.&quot;\n    ],\n    &quot;owner&quot;: &quot;agent-platform&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-02&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;A new UI or dashboard role is added.&quot;,\n      &quot;workspace-monitor changes how documents, operations, agents, or governance records are displayed.&quot;,\n      &quot;The platform adds real authentication, authorization, or per-user publishing rules.&quot;,\n      &quot;The distinction between user, developer, and superadmin operator responsibilities changes.&quot;,\n      &quot;Install mode or work mode rules change in a way that could confuse operators.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;owasp_authorization&quot;,\n      &quot;title&quot;: &quot;OWASP Authorization Cheat Sheet&quot;,\n      &quot;url&quot;: &quot;https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html&quot;,\n      &quot;source_type&quot;: &quot;security_guidance&quot;,\n      &quot;used_for&quot;: [\n        &quot;least privilege&quot;,\n        &quot;deny-by-default future access control design&quot;,\n        &quot;authorization tests as a future gate&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;nist_rbac&quot;,\n      &quot;title&quot;: &quot;NIST Role Based Access Control&quot;,\n      &quot;url&quot;: &quot;https://csrc.nist.gov/projects/role-based-access-control&quot;,\n      &quot;source_type&quot;: &quot;standard_reference&quot;,\n      &quot;used_for&quot;: [\n        &quot;role and permission vocabulary&quot;,\n        &quot;RBAC and ABAC trade-off awareness&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;nextjs_proxy&quot;,\n      &quot;title&quot;: &quot;Next.js Proxy File Convention&quot;,\n      &quot;url&quot;: &quot;https://nextjs.org/docs/app/api-reference/file-conventions/proxy&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;future route or request boundary planning when authenticated monitor deployment is added&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;install_mode_registry&quot;,\n      &quot;title&quot;: &quot;Install Mode Registry&quot;,\n      &quot;path&quot;: &quot;agent-platform/configs/installations/install-mode-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;separating setup profile from viewing profile&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;work_mode_registry&quot;,\n      &quot;title&quot;: &quot;Work Mode Registry&quot;,\n      &quot;path&quot;: &quot;agent-platform/configs/workflows/work-mode-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;separating task governance strictness from viewing profile&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;view_mode_is_not_install_mode&quot;,\n      &quot;rule&quot;: &quot;view_mode controls what a person or UI sees; install_mode controls dependency and environment setup.&quot;,\n      &quot;reason&quot;: &quot;The user/developer installation split already exists and should not be overloaded with UI visibility semantics.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;mode_boundary&quot;,\n        &quot;modes&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;view_mode_is_not_work_mode&quot;,\n      &quot;rule&quot;: &quot;view_mode controls audience lens; work_mode still controls task planning, evidence, evaluation, and close-out strictness.&quot;,\n      &quot;reason&quot;: &quot;A superadmin development view must not weaken governance requirements or replace evaluator gates.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;mode_boundary&quot;,\n        &quot;modes&quot;,\n        &quot;selection_rules&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;superadmin_developer_is_current_default&quot;,\n      &quot;rule&quot;: &quot;The current default view_mode is superadmin_developer because the repository is still being built by the owner and needs governance, agent, history, config, and implementation surfaces visible together.&quot;,\n      &quot;reason&quot;: &quot;The latest user request asked for a superadmin-oriented development mode selector for now.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;default_mode&quot;,\n        &quot;modes[superadmin_developer]&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;security_is_future_enforcement&quot;,\n      &quot;rule&quot;: &quot;View mode filtering is an operator/UI lens until real authentication and authorization are implemented; do not treat hidden UI elements as a security boundary.&quot;,\n      &quot;reason&quot;: &quot;Static repository snapshots can still contain data unless the collector and deployment publication rules enforce removal.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;modes[].security_notes&quot;,\n        &quot;workspace-monitor&quot;\n      ]\n    }\n  ],\n  &quot;field_guide&quot;: [\n    {\n      &quot;field&quot;: &quot;mode_boundary&quot;,\n      &quot;meaning&quot;: &quot;Explains the difference between view_mode, install_mode, and wo</code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 13476,
-      "updatedAt": "2026-06-04T21:48:03.012Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "agent-platform"
     },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-tool-studio-ui-spec-ko-md",
@@ -17744,10 +17744,14 @@
         },
         {
           "category": "request-trace",
-          "count": 13
+          "count": 14
         },
         {
           "category": "user-request",
+          "count": 13
+        },
+        {
+          "category": "web-search",
           "count": 13
         },
         {
@@ -17755,16 +17759,12 @@
           "count": 13
         },
         {
-          "category": "web-search",
-          "count": 12
-        },
-        {
           "category": "work-timing",
-          "count": 12
+          "count": 11
         },
         {
           "category": "plan",
-          "count": 7
+          "count": 6
         },
         {
           "category": "daily-history",
@@ -17860,6 +17860,16 @@
           "title": "평가: Cute Mascot Character",
           "excerpt": "평가: Cute Mascot Character 결론 통과. 캐릭터가 기존의 딱딱한 로봇보다 귀여운 동물형 마스코트로 읽히도록 개선되었다. 확인 Agents 협업 scene과 Tool Studio 캐릭터 맵 모두에 귀, 안쪽 귀, 볼, 작은 muzzle, 꼬리 디테일이 적용되었다. 현실적인 털, 해부학, 과한 표정 animation은 추가하지 않았다. 역할 링, visor, chest/status detail, lazy mount, offscreen pause, reduced motion 경계는 유",
           "updatedAt": "2026-06-05T03:09:30.225Z",
+          "historyDate": "2026-06-05"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+          "path": "_history/evaluations/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "평가: Desktop Package Readiness Repair",
+          "excerpt": "평가: Desktop Package Readiness Repair 결과 내부 패키징 실패는 해결됐다. 활성 요구사항 기준으로 user 기본 navigation을 5개 섹션으로 정렬했고, tools 는 기본 navigation이 아닌 기능/개발 표면으로 남겼다. readiness script, platform tests, Workspace Monitor tests가 같은 계약을 보도록 맞췄다. generated snapshot/admin history index를 재생성해 lazy admin ind",
+          "updatedAt": "2026-06-05T12:45:23.211Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -17993,16 +18003,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-evaluations-2026-2026-06-05-text-wrapping-contract-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-05-text-wrapping-contract-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 05 Text Wrapping Contract Evaluation Input",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"text wrapping contract\", \"requirements\": \"REQ WM 069\" , \"implementation targets\": \"platform desktop app/renderer/workspace monitor/app/globals.css\", \"platform desktop app/renderer/workspace monitor/tests/font loading.test.mjs\" , \"validatio",
-          "updatedAt": "2026-06-05T02:19:41.130Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-05-text-wrapping-contract-ko-md",
           "path": "_history/evaluations/2026/2026-06-05-text-wrapping-contract.ko.md",
           "category": "evaluation",
@@ -18083,16 +18083,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-plans-2026-2026-06-05-text-wrapping-contract-ko-md",
-          "path": "_history/plans/2026/2026-06-05-text-wrapping-contract.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "작업 계획: Text Wrapping Contract",
-          "excerpt": "작업 계획: Text Wrapping Contract 계획 1. 공식 기준을 확인하고 text wrapping 구현 원칙을 정리한다. 2. globals.css 에 prose, label, long token, button child text 계약을 추가한다. 3. font loading.test.mjs 에 CSS 계약 회귀 테스트를 추가한다. 4. 요구사항과 스펙 추적 파일을 갱신한다. 5. 테스트, 타입체크, check, build, customer build, performance budge",
-          "updatedAt": "2026-06-05T02:16:36.812Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-plans-2026-2026-06-05-tool-studio-source-separation-ko-md",
           "path": "_history/plans/2026/2026-06-05-tool-studio-source-separation.ko.md",
           "category": "plan",
@@ -18140,6 +18130,16 @@
           "title": "요청 추적: Cute Mascot Character",
           "excerpt": "요청 추적: Cute Mascot Character 요청 캐릭터가 너무 현실적이지 않고 귀여운 동물 느낌을 갖도록 개선. 결과 REQ WM 073 추가. Agents AgentCharacter 에 ear, inner ear, muzzle, cheek, tail detail 추가. Tool Studio Three.js character map에도 같은 soft mascot geometry 추가. static tests와 desktop/mobile screenshot QA 갱신. 검증 corepack",
           "updatedAt": "2026-06-05T03:09:30.225Z",
+          "historyDate": "2026-06-05"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+          "path": "_history/request-traces/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: Desktop Package Readiness Repair",
+          "excerpt": "요청 결과 추적: Desktop Package Readiness Repair 요청 데스크톱 내부 패키징 실패를 전부 수정. 결과 platform desktop app readiness/test 실패 2건을 해결했다. Workspace Monitor check/test에서 드러난 생성 snapshot, CSS, stale test 계약을 함께 정리했다. 내부 패키징 산출물이 정상 생성됐다. 주요 산출물 agent platform/configs/access/view mode registry.json ",
+          "updatedAt": "2026-06-05T12:45:23.210Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18283,6 +18283,16 @@
           "historyDate": "2026-06-05"
         },
         {
+          "id": "history-user-requests-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+          "path": "_history/user-requests/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: Desktop Package Readiness Repair",
+          "excerpt": "사용자 요청 요약: Desktop Package Readiness Repair 요청 내부 데스크톱 패키징 실패 원인을 모두 고치고, 기존 생성 변경물도 필요한 범위에서 같이 수정하라는 요청. 해석 pnpm run desktop:package:internal 이 끝까지 통과해야 한다. 이전에 건드리지 않겠다고 보류한 generated snapshot/admin history 출력도 검증에 필요하면 갱신한다. 최신 요구사항과 테스트가 충돌하는 부분은 활성 요구사항 기준으로 정렬한다.",
+          "updatedAt": "2026-06-05T12:45:23.210Z",
+          "historyDate": "2026-06-05"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-05-history-payload-migration-ko-md",
           "path": "_history/user-requests/2026/2026-06-05-history-payload-migration.ko.md",
           "category": "user-request",
@@ -18343,16 +18353,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-user-requests-2026-2026-06-05-text-wrapping-contract-ko-md",
-          "path": "_history/user-requests/2026/2026-06-05-text-wrapping-contract.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: Text Wrapping Contract",
-          "excerpt": "사용자 요청 요약: Text Wrapping Contract 요약 사용자는 Workspace Monitor UI에서 텍스트가 줄바꿈으로 이상해지거나 깨지는 현상을 없애길 요청했다. 특히 한 화면에 많은 정보를 담는 과정에서 텍스트가 어색하게 끊기고 비전체화면에서 레이아웃이 망가지는 문제를 줄여야 한다. 해석한 완료 기준 문장형 텍스트와 버튼 라벨은 작은 화면에서도 읽기 좋은 줄바꿈을 유지한다. 경로, 명령, 코드처럼 긴 토큰은 레이아웃을 가로로 밀지 않는다. 변경은 static regression",
-          "updatedAt": "2026-06-05T02:16:36.811Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-05-tool-studio-source-separation-ko-md",
           "path": "_history/user-requests/2026/2026-06-05-tool-studio-source-separation.ko.md",
           "category": "user-request",
@@ -18400,6 +18400,16 @@
           "title": "웹 검색 기록: Cute Mascot Character",
           "excerpt": "웹 검색 기록: Cute Mascot Character 검색 cute mascot character design rounded shapes UI design reference official Material Design motion expressive UI character animation official Apple Human Interface Guidelines animation motion character UI official Nielsen Norman Group cuteness baby ",
           "updatedAt": "2026-06-05T03:09:30.224Z",
+          "historyDate": "2026-06-05"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+          "path": "_history/web-searches/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: Desktop Package Readiness Repair",
+          "excerpt": "웹 검색 기록: Desktop Package Readiness Repair 검색 날짜: 2026 06 05 목적: 패키징 실패 원인이 외부 최신 정보보다 로컬 테스트/계약 불일치인지 확인 질의 software regression tests align tests with requirements official docs Node.js assert deepStrictEqual official documentation node:test pnpm Node.js version requirements offi",
+          "updatedAt": "2026-06-05T12:45:23.209Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18523,6 +18533,16 @@
           "historyDate": "2026-06-05"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: Desktop Package Readiness Repair",
+          "excerpt": "작업 요약: Desktop Package Readiness Repair user 기본 navigation/view mode/product feature registry를 overview , agents , desktop , source , intent 로 맞췄다. tools 강제 pinned 삽입 로직을 제거하고 Tool Studio는 기능 표면으로 유지했다. readiness가 요구하는 홈/Workspace Explorer/AgentCore copy를 맞췄다. 버튼 텍스트 wrapping CSS",
+          "updatedAt": "2026-06-05T12:45:23.210Z",
+          "historyDate": "2026-06-05"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-05-history-payload-migration-ko-md",
           "path": "_history/work-summaries/2026/2026-06-05-history-payload-migration.ko.md",
           "category": "work-summary",
@@ -18590,16 +18610,6 @@
           "title": "작업 요약: Smooth Redesign Maintenance",
           "excerpt": "작업 요약: Smooth Redesign Maintenance MonitorShell 의 motion helper를 lib/motion.ts 로 분리하고 정적 테스트를 새 위치 기준으로 업데이트했다. 공통 motion token과 keyframes로 탭/메뉴/다이얼로그/세부 작업면 전환을 통일했다. history/admin 문서 preview를 bounded summary로 바꿔 snapshot document payload를 2.29MB로 줄였다. check history payload.mjs ",
           "updatedAt": "2026-06-05T06:09:51.370Z",
-          "historyDate": "2026-06-05"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-05-text-wrapping-contract-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-05-text-wrapping-contract.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: Text Wrapping Contract",
-          "excerpt": "작업 요약: Text Wrapping Contract Workspace Monitor 전역 CSS에 문장형 텍스트, 긴 토큰, 버튼 라벨을 분리한 줄바꿈 계약을 추가했다. font loading.test.mjs 에 줄바꿈 계약 회귀 테스트를 추가했다. REQ WM 069와 스펙/검증/추적/평가 기록을 남겼다. desktop/mobile Browser smoke에서 root/body overflowX 0과 computed style 계약을 확인했다.",
-          "updatedAt": "2026-06-05T02:19:41.131Z",
           "historyDate": "2026-06-05"
         },
         {
@@ -18713,16 +18723,6 @@
           "historyDate": "2026-06-05"
         },
         {
-          "id": "history-work-timings-2026-2026-06-05-text-wrapping-contract-json",
-          "path": "_history/work-timings/2026/2026-06-05-text-wrapping-contract.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 05 Text Wrapping Contract",
-          "excerpt": "{ \"date\": \"2026 06 05\", \"request slug\": \"text wrapping contract\", \"timings\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"note\": \"Official WCAG, MDN, and typography references checked before local edits.\" }, { \"phase\": \"implementation\", \"status\": \"completed\", \"note\": \"C",
-          "updatedAt": "2026-06-05T02:19:41.129Z",
-          "historyDate": "2026-06-05"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-05-tool-studio-source-separation-json",
           "path": "_history/work-timings/2026/2026-06-05-tool-studio-source-separation.json",
           "category": "work-timing",
@@ -18741,16 +18741,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2233,
+      "documents": 2238,
       "days": 6,
       "categories": [
         {
           "category": "evaluation",
-          "count": 925
+          "count": 926
         },
         {
           "category": "web-search",
-          "count": 360
+          "count": 361
         },
         {
           "category": "plan",
@@ -18758,7 +18758,7 @@
         },
         {
           "category": "request-trace",
-          "count": 289
+          "count": 290
         },
         {
           "category": "work-timing",
@@ -18766,11 +18766,11 @@
         },
         {
           "category": "user-request",
-          "count": 73
+          "count": 74
         },
         {
           "category": "work-summary",
-          "count": 40
+          "count": 41
         },
         {
           "category": "daily-history",
@@ -18781,7 +18781,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6030923,
+      "totalSourceBytes": 6036405,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18806,11 +18806,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 37,
+      "evidenceEvents": 38,
       "decisionEvents": 0,
       "openSignals": 17,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T12:27:23.072Z",
+      "latestEventAt": "2026-06-05T12:45:23.211Z",
       "historyDays": 1
     },
     "lanes": [
@@ -18825,8 +18825,18 @@
         "count": 25
       },
       {
+        "id": "traceability",
+        "label": "traceability",
+        "count": 14
+      },
+      {
         "id": "delivery",
         "label": "delivery",
+        "count": 13
+      },
+      {
+        "id": "evidence",
+        "label": "evidence",
         "count": 13
       },
       {
@@ -18835,24 +18845,14 @@
         "count": 13
       },
       {
-        "id": "traceability",
-        "label": "traceability",
-        "count": 13
-      },
-      {
-        "id": "evidence",
-        "label": "evidence",
-        "count": 12
-      },
-      {
         "id": "monitoring",
         "label": "monitoring",
-        "count": 12
+        "count": 11
       },
       {
         "id": "planning",
         "label": "planning",
-        "count": 7
+        "count": 6
       },
       {
         "id": "history",
@@ -18872,6 +18872,11 @@
         "count": 25
       },
       {
+        "id": "trace",
+        "label": "trace",
+        "count": 14
+      },
+      {
         "id": "intake",
         "label": "intake",
         "count": 13
@@ -18882,24 +18887,19 @@
         "count": 13
       },
       {
-        "id": "trace",
-        "label": "trace",
+        "id": "web-search",
+        "label": "web search",
         "count": 13
       },
       {
         "id": "timing",
         "label": "timing",
-        "count": 12
-      },
-      {
-        "id": "web-search",
-        "label": "web search",
-        "count": 12
+        "count": 11
       },
       {
         "id": "plan",
         "label": "plan",
-        "count": 7
+        "count": 6
       },
       {
         "id": "history",
@@ -18920,6 +18920,81 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-evaluations-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "needs_attention",
+        "title": "평가: Desktop Package Readiness Repair",
+        "detail": "평가: Desktop Package Readiness Repair 결과 내부 패키징 실패는 해결됐다. 활성 요구사항 기준으로 user 기본 navigation을 5개 섹션으로 정렬했고, tools 는 기본 navigation이 아닌 기능/개발 표면으로 남겼다. readiness script, platform tests, Workspace Monitor tests가 같은 계약을 보도록 맞췄다. generated snapshot/admin history index를 재생성해 lazy admin ind",
+        "path": "_history/evaluations/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:45:23.211Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "needs_attention",
+        "title": "요청 결과 추적: Desktop Package Readiness Repair",
+        "detail": "요청 결과 추적: Desktop Package Readiness Repair 요청 데스크톱 내부 패키징 실패를 전부 수정. 결과 platform desktop app readiness/test 실패 2건을 해결했다. Workspace Monitor check/test에서 드러난 생성 snapshot, CSS, stale test 계약을 함께 정리했다. 내부 패키징 산출물이 정상 생성됐다. 주요 산출물 agent platform/configs/access/view mode registry.json ",
+        "path": "_history/request-traces/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:45:23.210Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "ready",
+        "title": "사용자 요청 요약: Desktop Package Readiness Repair",
+        "detail": "사용자 요청 요약: Desktop Package Readiness Repair 요청 내부 데스크톱 패키징 실패 원인을 모두 고치고, 기존 생성 변경물도 필요한 범위에서 같이 수정하라는 요청. 해석 pnpm run desktop:package:internal 이 끝까지 통과해야 한다. 이전에 건드리지 않겠다고 보류한 generated snapshot/admin history 출력도 검증에 필요하면 갱신한다. 최신 요구사항과 테스트가 충돌하는 부분은 활성 요구사항 기준으로 정렬한다.",
+        "path": "_history/user-requests/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:45:23.210Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약: Desktop Package Readiness Repair",
+        "detail": "작업 요약: Desktop Package Readiness Repair user 기본 navigation/view mode/product feature registry를 overview , agents , desktop , source , intent 로 맞췄다. tools 강제 pinned 삽입 로직을 제거하고 Tool Studio는 기능 표면으로 유지했다. readiness가 요구하는 홈/Workspace Explorer/AgentCore copy를 맞췄다. 버튼 텍스트 wrapping CSS",
+        "path": "_history/work-summaries/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:45:23.210Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "needs_attention",
+        "title": "웹 검색 기록: Desktop Package Readiness Repair",
+        "detail": "웹 검색 기록: Desktop Package Readiness Repair 검색 날짜: 2026 06 05 목적: 패키징 실패 원인이 외부 최신 정보보다 로컬 테스트/계약 불일치인지 확인 질의 software regression tests align tests with requirements official docs Node.js assert deepStrictEqual official documentation node:test pnpm Node.js version requirements offi",
+        "path": "_history/web-searches/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-05",
+        "timestamp": "2026-06-05T12:45:23.209Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-05-korean-copy-pass-json",
         "sourceType": "history",
@@ -20284,81 +20359,6 @@
         "language": "ko",
         "date": "2026-06-05",
         "timestamp": "2026-06-05T02:20:06.774Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-05-text-wrapping-contract-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: Text Wrapping Contract",
-        "detail": "작업 요약: Text Wrapping Contract Workspace Monitor 전역 CSS에 문장형 텍스트, 긴 토큰, 버튼 라벨을 분리한 줄바꿈 계약을 추가했다. font loading.test.mjs 에 줄바꿈 계약 회귀 테스트를 추가했다. REQ WM 069와 스펙/검증/추적/평가 기록을 남겼다. desktop/mobile Browser smoke에서 root/body overflowX 0과 computed style 계약을 확인했다.",
-        "path": "_history/work-summaries/2026/2026-06-05-text-wrapping-contract.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:19:41.131Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-05-text-wrapping-contract-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 05 Text Wrapping Contract Evaluation Input",
-        "detail": "{ \"date\": \"2026 06 05\", \"request slug\": \"text wrapping contract\", \"requirements\": \"REQ WM 069\" , \"implementation targets\": \"platform desktop app/renderer/workspace monitor/app/globals.css\", \"platform desktop app/renderer/workspace monitor/tests/font loading.test.mjs\" , \"validatio",
-        "path": "_history/evaluations/2026/2026-06-05-text-wrapping-contract-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:19:41.130Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-05-text-wrapping-contract-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 05 Text Wrapping Contract",
-        "detail": "{ \"date\": \"2026 06 05\", \"request slug\": \"text wrapping contract\", \"timings\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"note\": \"Official WCAG, MDN, and typography references checked before local edits.\" }, { \"phase\": \"implementation\", \"status\": \"completed\", \"note\": \"C",
-        "path": "_history/work-timings/2026/2026-06-05-text-wrapping-contract.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:19:41.129Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-05-text-wrapping-contract-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "작업 계획: Text Wrapping Contract",
-        "detail": "작업 계획: Text Wrapping Contract 계획 1. 공식 기준을 확인하고 text wrapping 구현 원칙을 정리한다. 2. globals.css 에 prose, label, long token, button child text 계약을 추가한다. 3. font loading.test.mjs 에 CSS 계약 회귀 테스트를 추가한다. 4. 요구사항과 스펙 추적 파일을 갱신한다. 5. 테스트, 타입체크, check, build, customer build, performance budge",
-        "path": "_history/plans/2026/2026-06-05-text-wrapping-contract.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:16:36.812Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-05-text-wrapping-contract-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "ready",
-        "title": "사용자 요청 요약: Text Wrapping Contract",
-        "detail": "사용자 요청 요약: Text Wrapping Contract 요약 사용자는 Workspace Monitor UI에서 텍스트가 줄바꿈으로 이상해지거나 깨지는 현상을 없애길 요청했다. 특히 한 화면에 많은 정보를 담는 과정에서 텍스트가 어색하게 끊기고 비전체화면에서 레이아웃이 망가지는 문제를 줄여야 한다. 해석한 완료 기준 문장형 텍스트와 버튼 라벨은 작은 화면에서도 읽기 좋은 줄바꿈을 유지한다. 경로, 명령, 코드처럼 긴 토큰은 레이아웃을 가로로 밀지 않는다. 변경은 static regression",
-        "path": "_history/user-requests/2026/2026-06-05-text-wrapping-contract.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-05",
-        "timestamp": "2026-06-05T02:16:36.811Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -22493,11 +22493,11 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 41463,
+      "sizeBytes": 41454,
       "lineCount": 1045,
-      "updatedAt": "2026-06-04T21:51:02.908Z",
+      "updatedAt": "2026-06-05T12:39:11.792Z",
       "truncated": true,
-      "content": "import { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { execFileSync } from \"node:child_process\";\n\nimport {\n  checkDesktopBuildPipeline,\n  desktopBuildPipelineRequiredFiles\n} from \"./readiness/desktop-build-pipeline.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nconst requiredFiles = [\n  \"README.md\",\n  \"README.ko.md\",\n  \"README.en.md\",\n  \"package.json\",\n  \"configs/desktop-distribution-registry.json\",\n  \"configs/product-feature-registry.json\",\n  \"configs/product-gap-registry.json\",\n  \"configs/claude-code-design-transfer-registry.json\",\n  \"configs/reference-platform-advantage-registry.json\",\n  \"configs/runtime-data-boundary-registry.json\",\n  \"configs/service-readiness-registry.json\",\n  \"configs/macos-execution-profile.json\",\n  \"configs/windows-execution-profile.json\",\n  \"configs/user-flow-registry.json\",\n  \"runtime-contracts/installer-shell-runtime-contract.json\",\n  \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n  \"runtime-contracts/installer-shell-bootstrap.en.md\",\n  \"renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx\",\n  \"renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx\",\n  \"renderer/workspace-monitor/components/workbench/PathDisclosure.tsx\",\n  \"renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx\",\n  \"renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx\",\n  \"docs/architecture/cross-platform-installable-runtime-decision.ko.md\",\n  \"docs/architecture/cross-platform-installable-runtime-decision.en.md\",\n  \"docs/architecture/multi-cli-orchestration-runtime.ko.md\",\n  \"docs/architecture/multi-cli-orchestration-runtime.en.md\",\n  \"docs/architecture/claude-code-design-transfer.ko.md\",\n  \"docs/architecture/claude-code-design-transfer.en.md\",\n  \"docs/architecture/runtime-data-boundary.ko.md\",\n  \"docs/architecture/runtime-data-boundary.en.md\",\n  \"docs/architecture/installer-shell-runtime-contract.ko.md\",\n  \"docs/architecture/installer-shell-runtime-contract.en.md\",\n  \"docs/architecture/native-git-workbench.ko.md\",\n  \"docs/architecture/native-git-workbench.en.md\",\n  \"docs/architecture/pty-terminal-decision.ko.md\",\n  \"docs/architecture/pty-terminal-decision.en.md\",\n  \"docs/release-runbook.ko.md\",\n  \"docs/release-runbook.en.md\",\n  \"specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md\",\n  \"specs/2026-06-02-multi-cli-orchestration-desktop/plan.ko.md\",\n  \"specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md\",\n  \"specs/2026-06-02-multi-cli-orchestration-desktop/validation.ko.md\",\n  \"specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md\",\n  \"src-tauri/tauri.conf.json\",\n  \"src-tauri/Cargo.toml\",\n  \"src-tauri/build.rs\",\n  \"src-tauri/src/main.rs\",\n  \"src-tauri/src/lib.rs\",\n  \"src-tauri/capabilities/default.json\",\n  \"renderer/workspace-monitor/lib/clipboard.mjs\",\n  \"tests/clipboard.test.mjs\",\n  \"scripts/check-runtime-contract.mjs\",\n  \"scripts/check-customer-bundle.mjs\",\n  \"scripts/check-release-readiness.mjs\",\n  \"scripts/check-service-readiness.mjs\",\n  \"scripts/readiness/desktop-build-pipeline.mjs\",\n  ...desktopBuildPipelineRequiredFiles\n];\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\nfunction commandExists(command) {\n  try {\n    execFileSync(command, [\"--version\"], { stdio: \"ignore\" });\n    return true;\n  } catch {\n    return false;\n  }\n}\n\nconst failures = [];\nconst warnings = [];\n\nfor (const file of requiredFiles) {\n  if (!existsSync(join(root, file))) {\n    failures.push(`missing required file: ${file}`);\n  }\n}\n\nfailures.push(...checkDesktopBuildPipeline({ root, readJson }));\n\nconst tauriConfig = readJson(\"src-tauri/tauri.conf.json\");\nif (tauriConfig.identifier !== \"com.personalagentplatform.desktop\") {\n  failures.push(\"src-tauri/tauri.conf.json must use the selected product identifier\");\n}\nif (tauriConfig.build?.frontendDist !== \"../renderer/workspace-monitor/out\") {\n  failures.push(\"Tauri frontendDist must point at renderer/workspace-monitor static output\");\n}\nif (tauriConfig.app?.withGlobalTauri !== true) {\n  failures.push(\"Tauri must expose window.__TAURI__ for the static workspace-monitor desktop bridge\");\n}\nif (!tauriConfig.bundle?.targets?.includes(\"dmg\") || !tauriConfig.bundle?.targets?.includes(\"nsis\")) {\n  failures.push(\"Tauri bundle targets must include macOS and Windows installer candidates\");\n}\nif (tauriConfig.bundle?.macOS?.hardenedRuntime !== true) {\n  failures.push(\"Tauri macOS bundle must enable hardenedRuntime for release-path parity\");\n}\nconst resourceTargets = tauriConfig.bundle?.resources ?? {};\nfor (const [source, destination] of [\n  [\"../runtime-contracts/installer-shell-runtime-contract.json\", \"runtime-contracts/installer-shell-runtime-contract.json\"],\n  [\"../runtime-contracts/installer-shell-bootstrap.ko.md\", \"runtime-contracts/installer-shell-bootstrap.ko.md\"],\n  [\"../runtime-contracts/installer-shell-bootstrap.en.md\", \"runtime-contracts/installer-shell-bootstrap.en.md\"]\n]) {\n  if (resourceTargets[source] !== destination) {\n    failures.push(`Tauri bundle resources must map ${source} to ${destination}`);\n  }\n}\n\nconst tauriLib = readFileSync(join(root, \"src-tauri/src/lib.rs\"), \"utf8\");\nconst tauriCargo = readFileSync(join(root, \"src-tauri/Cargo.toml\"), \"utf8\");\nconst tauriDefaultCapability = readFileSync(join(root, \"src-tauri/capabilities/default.json\"), \"utf8\");\nfor (const commandName of [\n  \"get_installer_shell_runtime_contract\",\n  \"list_cli_adapters\",\n  \"run_cli_adapter_health\",\n  \"run_all_cli_adapter_health\",\n  \"list_cli_task_pipeline_presets\",\n  \"list_cli_task_run_records\",\n  \"read_cli_task_run_record\",\n  \"prune_cli_task_run_records\",\n  \"list_runtime_data_roots\",\n  \"get_accumulated_data_overview\",\n  \"run_installer_payload_audit\",\n  \"create_support_diagnostic_bundle\",\n  \"get_desktop_preferences\",\n  \"save_desktop_preferences\",\n  \"list_provider_credentials\",\n  \"save_provider_credential\",\n  \"clear_provider_credential\",\n  \"open_provider_auth_url\",\n  \"list_provider_models\",\n  \"run_provider_agent_task\",\n  \"get_desktop_workspace_state\",\n  \"set_desktop_workspace_path\",\n  \"choose_desktop_workspace_folder\",\n  \"clone_desktop_workspace\",\n  \"get_desktop_git_status\",\n  \"run_desktop_git_action\",\n  \"start_cli_adapter_session\",\n  \"start_cli_task_pipeline\",\n  \"poll_cli_adapter_session\",\n  \"list_cli_adapter_sessions\",\n  \"write_cli_adapter_stdin\",\n  \"send_cli_adapter_defer_message\",\n  \"defer_all_cli_adapter_questions\",\n  \"cancel_cli_adapter_session\",\n  \"list_workspace_text_files\",\n  \"read_workspace_text_file\",\n  \"write_workspace_text_file\",\n  \"create_agent_factory_proposal\",\n  \"record_learning_improvement_decision\",\n  \"list_human_decision_inbox\",\n  \"answer_human_decision\",\n  \"answer_and_resume_human_decision\"\n]) {\n  if (!tauriLib.includes(commandName)) {\n    failures.push(`src-tauri/src/lib.rs must expose ${commandName}`);\n  }\n}\nif (!tauriCargo.includes(\"tauri-plugin-dialog\")) {\n  failures.push(\"src-tauri/Cargo.toml must declare tauri-plugin-dialog for native folder selection\");\n}\nif (!tauriDefaultCapability.includes(\"dialog:default\")) {\n  failures.push(\"src-tauri/capabilities/default.json must allow dialog:default for native folder selection\");\n}\nfor (const requiredPhrase of [\"DialogExt\", \"tauri_plugin_dialog::init\", \"blocking_pick_folder\"]) {\n  if (!tauriLib.includes(requiredPhrase)) {\n    failures.push(`src-tauri/src/lib.rs must include native dialog token ${requiredPhrase}`);\n  }\n}\nif (!tauriLib.includes(\"_ops\") || !tauriLib.includes(\"human-decision-inbox.json\")) {\n  failures.push(\"src-tauri/src/lib.rs must persist deferred CLI questions to the human decision inbox\");\n}\nfor (const requiredPhrase of [\"MAX_DECISION_SCAN_BYTES\", \"recent_session_output\", \"tail_by_char_boundary\"]) {\n  if (!tauriLib.includes(requiredPhrase)) {\n    failures.push(`src-tauri/src/lib.rs must include performance token ${requiredPhrase}`);\n  }\n}\nfor (const requiredPhrase of [\n  \"CliTaskRunRecordReport\",\n  \"CliTaskRunDetailReport\",\n  \"CliTaskRunPruneReport\",\n  \"persist_session_task_run\",\n  \"read_task_run_detail\",\n  \"prune_task_run_records\",\n  \"read_task_run_records_with_limit\",\n  \"read_bounded_text_preview\",\n  \"MAX_TASK_RUN_LOG_PREVIEW_BYTES\",\n  \"task_run_persist_signature\",\n  \"task_runs_base_path\",\n  \"legacy_task_runs_base_path\",\n  \"runtime_data_store_base_path\",\n  \"support_bundles_base_path\",\n  \"payload_audits_base_path\",\n  \"resolve_installer_shell_runtime_contract_path\",\n  \"InstallerShellRuntimeContractReport\",\n  \"InstallerPayloadAuditReport\",\n  \"SupportDiagnosticBundleReport\",\n  \"RuntimeDataBoundaryReport\",\n  \"AccumulatedDataStoreReport\",\n  \"AccumulatedDataOverviewReport\",\n  \"DesktopWorkspaceStateReport\",\n  \"ProviderCredentialReport\",\n  \"ProviderCredentialSummary\",\n  \"ProviderModelCatalogReport\",\n  \"ProviderModelSummary\",\n  \"DESKTOP_WORKSPACE_STATE_SCHEMA_VERSION\",\n  \"PROVIDER_CREDENTIALS_SCHEMA_VERSION\",\n  \"provider_credentials_path\",\n  \"provider_env_for_adapter\",\n  \"open_provider_auth_url_report\",\n  \"list_provider_models_report\",\n  \"call_ollama_provider_api\",\n  \"run_provider_agent_task_report\",\n  \"provider-credentials.v1.json\",\n  \"Ollama / Local\",\n  \"OLLAMA_BASE_URL\",\n  \"OPENAI_API_KEY\",\n  \"ANTHROPIC_API_KEY\",\n  \"GEMINI_API_KEY\",\n  \"desktop_workspace_state_path\",\n  \"managed_desktop_workspaces_base_path\",\n  \"workspace_root_for_app\",\n  \"redact_repository_url\",\n  \"redact_clone_output\",\n  \"ACCUMULATED_DATA_INDEX_SCHEMA_VERSION\",\n  \"ACCUMULATED_DATA_STORAGE_FORMAT_VERSION\",\n  \"accumulated_data_index_path\",\n  \"accumulated-data-overview.v1.json\",\n  \"format_migration_status\",\n  \"accumulated_data_overview_report\",\n  \"MAX_ACCUMULATED_DATA_SCAN_FILES\",\n  \"MAX_PAYLOAD_SCAN_FILES\",\n  \"platform_artifacts_base_path\",\n  \"record.json\",\n  \"stdout.log\",\n  \"stderr.log\"\n]) {\n  if (!tauriLib.includes(requiredPhrase)) {\n    failures.push(`src-tauri/src/lib.rs must include task run store token ${requiredPhrase}`);\n  }\n}\n\nconst desktopRegistry = readJson(\"configs/desktop-distribution-registry.json\");\nconst companionPaths = JSON.stringify(desktopRegistry);\nif (!companionPaths.includes(\"configs/windows-execution-profile.json\")) {\n  failures.push(\"desktop-distribution-registry must reference the Windows execution profile\");\n}\nif (desktopRegistry.recommended_initial_path?.id !== \"tauri_first_cross_platform_shell\") {\n  failures.push(\"desktop-distribution-registry must record the selected Tauri-first cross-platform path\");\n}\nif (!JSON.stringify(desktopRegistry.selected_platform_architecture ?? {}).includes(\"multi_cli_supervisor\")) {\n  failures.push(\"desktop-distribution-registry must record the multi-CLI supervisor contract\");\n}\nif (!companionPaths.includes(\"configs/product-feature-registry.json\")) {\n  failures.push(\"desktop-distribution-registry must reference the product feature registry\");\n}\n\nconst productFeatureRegistry = readJson(\"configs/product-feature-registry.json\");\nconst productFeatureSerialized = JSON.stringify(productFeatureRegistry);\nif (productFeatureRegistry.product_position?.primary_product !== \"agent_capability_platform\") {\n  failures.push(\"product-feature-registry must keep agent_capability_platform as the primary product\");\n}\nif (productFeatureRegistry.product_position?.monitoring_role !== \"supporting_observability\") {\n  failures.push(\"product-feature-registry must keep monitoring as supporting_observability\");\n}\nfor (const requiredFeatureId of [\n  \"agent_orchestration\",\n  \"agent_factory\",\n  \"root_tool_management\",\n  \"work_visibility\",\n  \"agent_work_environment\",\n  \"agent_development_environment\",\n  \"learning_improvement_loop\",\n  \"observability_monitoring\"\n]) {\n  if (!productFeatureSerialized.includes(requiredFeatureId)) {\n    failures.push(`product-feature-registry must include ${requiredFeatureId}`);\n  }\n}\nfor (const requiredPrimaryId of productFeatureRegistry.product_position?.primary_feature_ids ?? []) {\n  const feature = productFeatureRegistry.feature_layers?.find((item) => item.id === requiredPrimaryId);\n  if (feature?.role !== \"primary\") {\n    failures.push(`product feature ${requiredPrimaryId} must be primary`);\n  }\n}\nconst observabilityFeature = productFeatureRegistry.feature_layers?.find((item) => item.id === \"observability_monitoring\");\nif (observabilityFeature?.role !== \"supporting\") {\n  failures.push(\"observability_monitoring must be a supporting feature\");\n}\nfor (const requiredSupportingId of [\n  \"root_tool_management\",\n  \"work_visibility\",\n  \"agent_work_environment\",\n  \"agent_development_environment\",\n  \"learning_improvement_loop\"\n]) {\n  const feature = productFeatureRegistry.feature_layers?.find((item) => item.id === requiredSupportingId);\n  if (feature?.role !== \"supporting\") {\n    failures.push(`product feature ${requiredSupportingId} must be supporting`);\n  }\n}\nif (!productFeatureSerialized.includes(\"operator_surfaces_are_separate\")) {\n  failures.push(\"product-feature-registry must require operator surfaces to stay separate\");\n}\nif (!productFeatureSerialized.includes(\"two_core_features_are_first\")) {\n  failures.push(\"product-feature-registry must keep the two core features first\");\n}\nfor (const requiredPhrase of [\"awslabs_agentcore_samples\", \"Production Agent Blueprints\", \"agentcore_blueprint_gate\"]) {\n  if (!productFeatureSerialized.includes(requiredPhrase)) {\n    failures.push(`product-feature-registry must include AgentCore production blueprint token ${requiredPhrase}`);\n  }\n}\nconst expectedPrimaryNavigationSections = [\"overview\", \"agents\", \"tools\", \"desktop\", \"source\", \"intent\"];\nconst expectedOperatorCenterSections = [\"projects\", \"history\", \"structure\", \"documents\", \"requirements\"];\nif (JSON.stringify(productFeatureRegistry.desktop_home_surface?.primary_navigation_sections) !== JSON.stringify(expectedPrimaryNavigationSections)) {\n  failures.push(\"product-feature-registry desktop_home_surface must keep work-first primary navigation sections\");\n}\nif (JSON.stringify(productFeatureRegistry.desktop_home_surface?.operator_center_sections) !== JSON.stringify(expectedOperatorCenterSections)) {\n  failures.push(\"product-feature-registry desktop_home_surface must keep operator center sections separated\");\n}\n\nconst productGapRegistry = readJson(\"configs/product-gap-registry.json\");\nconst productGapSerialized = JSON.stringify(productGapRegistry);\nconst installableRequirementsKo = readFileSync(join(root, \"docs/requirements/2026-06-02-installable-desktop.ko.md\"), \"utf8\");\nconst installableRequirementsEn = readFileSync(join(root, \"docs/requirements/2026-06-02-installable-desktop.en.md\"), \"utf8\");\nif (!installableRequirementsKo.includes(\"PDA-REQ-037\") || !installableRequirementsEn.includes(\"PDA-REQ-037\")) {\n  failures.push(\"installable desktop requirements must include PDA-REQ-037 for product gap coverage\");\n}\nfor (const requiredTopLevelField of [\n  \"reader_guide\",\n  \"reference_links\",\n  \"structure_rules\",\n  \"field_guide\",\n  \"audit_scope\",\n  \"coverage_summary\",\n  \"request_coverage\",\n  \"gap_items\"\n]) {\n  if (!(requiredTopLevelField in productGapRegistry)) {\n    failures.push(`product-gap-registry must include ${requiredTopLevelField}`);\n  }\n}\nfor (const requiredRequestId of [\n  \"UR-2026-06-03-024\",\n  \"UR-2026-06-03-025\",\n  \"UR-2026-06-03-026\",\n  \"UR-2026-06-03-027\",\n  \"UR-2026-06-03-028\",\n  \"UR-2026-06-03-029\",\n  \"UR-2026-06-03-030\",\n  \"UR-2026-06-03-031\",\n  \"UR-2026-06-03-032\",\n  \"UR-2026-06-03-033\",\n  \"UR-2026-06-03-034\",\n  \"UR-2026-06-03-035\",\n  \"UR-2026-06-03-036\",\n  \"UR-2026-06-04-001\"\n]) {\n  if (!productGapRegistry.request_coverage?.some((item) => item.request_id === requiredRequestId)) {\n    failures.push(`product-gap-registry must include request coverage for ${requiredRequestId}`);\n  }\n}\nfor (const requiredGapId of [\n  \"agent_factory_creation_wizard\",\n  \"learning_feedback_automation_loop\",\n  \"native_workspace_git_operations\",\n  \"componentized_desktop_ui_architecture\",\n  \"interactive_pty_terminal_surface\",\n  \"clipboard_browser_qa\",\n  \"public_distribution_gates\"\n]) {\n  if (!productGapRegistry.gap_items?.some((item) => item.gap_id === requiredGapId)) {\n    failures.push(`product-gap-registry must include gap ${requiredGapId}`);\n  }\n}\nconst agentFactoryGap = productGapRegistry.gap_items?.find((item) => item.gap_id === \"agent_factory_creation_wizard\");\nif (agentFactoryGap?.status !== \"implemented_product_slice\" || agentFactoryGap?.priority !== \"p0_product_gap\") {\n  failures.push(\"product-gap-registry must mark agent_factory_creation_wizard as an implemented p0 product slice\");\n}\nconst learningLoopGap = productGapRegistry.gap_items?.find((item) => item.gap_id === \"learning_feedback_automation_loop\");\nif (learningLoopGap?.status !== \"implemented_product_slice\" || learningLoopGap?.priority !== \"p0_product_gap\") {\n  failures.push(\"product-gap-registry must mark learning_feedback_automation_loop as an implemented p0 product slice\");\n}\nconst nativeGitGap = productGapRegistry.gap_items?.find((item) => item.gap_id === \"native_workspace_git_operations\");\nif (nativeGitGap?.status !== \"implemented_product_slice\") {\n  failures.push(\"product-gap-registry must mark native_workspace_git_operations as implemented\");\n}\nconst clipboardGap = productGapRegistry.gap_items?.find((item) => item.gap_id === \"clipboard_browser_qa\");\nif (clipboardGap?.status !== \"implemented_test_coverage\") {\n  failures.push(\"product-gap-registry must mark clipboard_browser_qa as implemented test coverage\");\n}\nconst ptyGap = productGapRegistry.gap_items?.find((item) => item.gap_id === \"interactive_pty_terminal_surface\");\nif (ptyGap?.status !== \"closed_by_product_decision\") {\n  failures.push(\"product-gap-registry must close interactive_pty_terminal_surface by product decision\");\n}\nconst agentFeatureCoverage = productGapRegistry.request_coverage?.find((item) => item.request_id === \"UR-2026-06-03-035\");\nif (agentFeatureCoverage?.coverage !== \"covered\") {\n  failures.push(\"UR-2026-06-03-035 coverage must be covered after Agent Core and learning loop implementation\");\n}\nif (agentFeatureCoverage?.remaining_gap_ids?.includes(\"agent_factory_creation_wizard\")) {\n  failures.push(\"UR-2026-06-03-035 coverage must not keep the Agent Core creation wizard gap after implementation\");\n}\nif (agentFeatureCoverage?.remaining_gap_ids?.includes(\"learning_feedback_automation_loop\")) {\n  failures.push(\"UR-2026-06-03-035 coverage must not keep the learning feedback automation gap after implementation\");\n}\nconst clipboardCoverage = productGapRegistry.request_coverage?.find((item) => item.request_id === \"UR-2026-06-03-025\");\nif (clipboardCoverage?.coverage !== \"covered\" || clipboardCoverage?.remaining_gap_ids?.includes(\"clipboard_browser_qa\")) {\n  failures.push(\"UR-2026-06-03-025 coverage must be covered after clipboard QA implementation\");\n}\nconst ptyCoverage = productGapRegistry.request_coverage?.find((item) => item.request_id === \"UR-2026-06-03-029\");\nif (ptyCoverage?.coverage !== \"covered\" || ptyCoverage?.remaining_gap_ids?.includes(\"interactive_pty_terminal_surface\")) {\n  failures.push(\"UR-2026-06-03-029 coverage must be covered after PTY product decision\");\n}\nconst nativeGitCoverage = productGapRegistry.request_coverage?.find((item) => item.request_id === \"UR-2026-06-03-033\");\nif (nativeGitCoverage?.coverage !== \"covered\" || nativeGitCoverage?.remaining_gap_ids?.includes(\"native_workspace_git_operations\")) {\n  failures.push(\"UR-2026-06-03-033 coverage must be covered after native Git workbench implementation\");\n}\nif (!productGapSerialized.includes(\"monitoring polish\") || !productGapSerialized.includes(\"p0_product_gap\")) {\n  failures.push(\"product-gap-registry must explicitly prioritize p0 product gaps over monitoring or cosmetic work\");\n}\n\nconst userFlowRegistry = readJson(\"configs/user-flow-registry.json\");\nconst userFlowSerialized = JSON.stringify(userFlowRegistry);\nfor (const requiredPhrase of [\n  \"ai_cli_orchestration_flow\",\n  \"Claude Code\",\n  \"Gemini CLI\",\n  \"Codex CLI\",\n  \"OpenCode\",\n  \"Claw Code\",\n  \"Codex app-style thread workbench\",\n  \"Claude Desktop-style connector chips\",\n  \"MCP servers\",\n  \"desktop extensions\"\n]) {\n  if (!userFlowSerialized.includes(requiredPhrase)) {\n    failures.push(`user-flow-registry must include ${requiredPhrase}`);\n  }\n}\n\nconst designTransferRegistry = readJson(\"configs/claude-code-design-transfer-registry.json\");\nconst designTransferSerialized = JSON.stringify(designTransferRegistry);\nfor (const requiredPhrase of [\n  \"public_sources_only\",\n  \"leaked_or_non_public_material\",\n  \"permissioned_tool_execution\",\n  \"plan_before_edit\",\n  \"subagent_context_isolation\",\n  \"skill_on_demand_packaging\",\n  \"Claude Code CLI\"\n]) {\n  if (!designTransferSerialized.includes(requiredPhrase)) {\n    failures.push(`claude-code-design-transfer-registry must include ${requiredPhrase}`);\n  }\n}\n\nconst referenceAdvantageRegistry = readJson(\"configs/reference-platform-advantage-registry.json\");\nconst referenceAdvantageSerialized = JSON.stringify(referenceAdvantageRegistry);\nfor (const requiredPhrase of [\n  \"public_sources_only\",\n  \"workbench-activity-rail-editor-terminal\",\n  \"codex-style-thread-workbench\",\n  \"claude-desktop-connector-first-chat\",\n  \"background-agent-task-lifecycle\",\n  \"permission-hooks-checkpoints\",\n  \"native-install-runtime-boundary\",\n  \"command-palette-extension-catalog\",\n  \"agentcore-style-production-agent-blueprints\",\n  \"security-first-agentic-boundaries\",\n  \"Codex app\",\n  \"Claude Desktop\",\n  \"claude_desktop_local_mcp_extensions\"\n]) {\n  if (!referenceAdvantageSerialized.includes(requiredPhrase)) {\n    failures.push(`reference platform advantage transfer must include ${requiredPhrase}`);\n  }\n}\nif ((referenceAdvantageRegistry.transfer_patterns || []).length < 10) {\n  failures.push(\"reference-platform-advantage-registry must include at least 10 transfer patterns\");\n}\n\nconst runtimeBoundaryRegistry = readJson(\"configs/runtime-data-boundary-registry.json\");\nconst runtimeBoundarySerialized = JSON.stringify(runtimeBoundaryRegistry);\nfor (const requiredPhrase of [\n  \"installed_app_only\",\n  \"installer_shell_runtime_contract\",\n  \"hidden_in_installed_product\",\n  \"platform_data_store\",\n  \"log_store\",\n  \"agent_workspace\",\n  "
+      "content": "import { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { execFileSync } from \"node:child_process\";\n\nimport {\n  checkDesktopBuildPipeline,\n  desktopBuildPipelineRequiredFiles\n} from \"./readiness/desktop-build-pipeline.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nconst requiredFiles = [\n  \"README.md\",\n  \"README.ko.md\",\n  \"README.en.md\",\n  \"package.json\",\n  \"configs/desktop-distribution-registry.json\",\n  \"configs/product-feature-registry.json\",\n  \"configs/product-gap-registry.json\",\n  \"configs/claude-code-design-transfer-registry.json\",\n  \"configs/reference-platform-advantage-registry.json\",\n  \"configs/runtime-data-boundary-registry.json\",\n  \"configs/service-readiness-registry.json\",\n  \"configs/macos-execution-profile.json\",\n  \"configs/windows-execution-profile.json\",\n  \"configs/user-flow-registry.json\",\n  \"runtime-contracts/installer-shell-runtime-contract.json\",\n  \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n  \"runtime-contracts/installer-shell-bootstrap.en.md\",\n  \"renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx\",\n  \"renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx\",\n  \"renderer/workspace-monitor/components/workbench/PathDisclosure.tsx\",\n  \"renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx\",\n  \"renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx\",\n  \"docs/architecture/cross-platform-installable-runtime-decision.ko.md\",\n  \"docs/architecture/cross-platform-installable-runtime-decision.en.md\",\n  \"docs/architecture/multi-cli-orchestration-runtime.ko.md\",\n  \"docs/architecture/multi-cli-orchestration-runtime.en.md\",\n  \"docs/architecture/claude-code-design-transfer.ko.md\",\n  \"docs/architecture/claude-code-design-transfer.en.md\",\n  \"docs/architecture/runtime-data-boundary.ko.md\",\n  \"docs/architecture/runtime-data-boundary.en.md\",\n  \"docs/architecture/installer-shell-runtime-contract.ko.md\",\n  \"docs/architecture/installer-shell-runtime-contract.en.md\",\n  \"docs/architecture/native-git-workbench.ko.md\",\n  \"docs/architecture/native-git-workbench.en.md\",\n  \"docs/architecture/pty-terminal-decision.ko.md\",\n  \"docs/architecture/pty-terminal-decision.en.md\",\n  \"docs/release-runbook.ko.md\",\n  \"docs/release-runbook.en.md\",\n  \"specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md\",\n  \"specs/2026-06-02-multi-cli-orchestration-desktop/plan.ko.md\",\n  \"specs/2026-06-02-multi-cli-orchestration-desktop/tasks.ko.md\",\n  \"specs/2026-06-02-multi-cli-orchestration-desktop/validation.ko.md\",\n  \"specs/2026-06-02-multi-cli-orchestration-desktop/traceability.ko.md\",\n  \"src-tauri/tauri.conf.json\",\n  \"src-tauri/Cargo.toml\",\n  \"src-tauri/build.rs\",\n  \"src-tauri/src/main.rs\",\n  \"src-tauri/src/lib.rs\",\n  \"src-tauri/capabilities/default.json\",\n  \"renderer/workspace-monitor/lib/clipboard.mjs\",\n  \"tests/clipboard.test.mjs\",\n  \"scripts/check-runtime-contract.mjs\",\n  \"scripts/check-customer-bundle.mjs\",\n  \"scripts/check-release-readiness.mjs\",\n  \"scripts/check-service-readiness.mjs\",\n  \"scripts/readiness/desktop-build-pipeline.mjs\",\n  ...desktopBuildPipelineRequiredFiles\n];\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\nfunction commandExists(command) {\n  try {\n    execFileSync(command, [\"--version\"], { stdio: \"ignore\" });\n    return true;\n  } catch {\n    return false;\n  }\n}\n\nconst failures = [];\nconst warnings = [];\n\nfor (const file of requiredFiles) {\n  if (!existsSync(join(root, file))) {\n    failures.push(`missing required file: ${file}`);\n  }\n}\n\nfailures.push(...checkDesktopBuildPipeline({ root, readJson }));\n\nconst tauriConfig = readJson(\"src-tauri/tauri.conf.json\");\nif (tauriConfig.identifier !== \"com.personalagentplatform.desktop\") {\n  failures.push(\"src-tauri/tauri.conf.json must use the selected product identifier\");\n}\nif (tauriConfig.build?.frontendDist !== \"../renderer/workspace-monitor/out\") {\n  failures.push(\"Tauri frontendDist must point at renderer/workspace-monitor static output\");\n}\nif (tauriConfig.app?.withGlobalTauri !== true) {\n  failures.push(\"Tauri must expose window.__TAURI__ for the static workspace-monitor desktop bridge\");\n}\nif (!tauriConfig.bundle?.targets?.includes(\"dmg\") || !tauriConfig.bundle?.targets?.includes(\"nsis\")) {\n  failures.push(\"Tauri bundle targets must include macOS and Windows installer candidates\");\n}\nif (tauriConfig.bundle?.macOS?.hardenedRuntime !== true) {\n  failures.push(\"Tauri macOS bundle must enable hardenedRuntime for release-path parity\");\n}\nconst resourceTargets = tauriConfig.bundle?.resources ?? {};\nfor (const [source, destination] of [\n  [\"../runtime-contracts/installer-shell-runtime-contract.json\", \"runtime-contracts/installer-shell-runtime-contract.json\"],\n  [\"../runtime-contracts/installer-shell-bootstrap.ko.md\", \"runtime-contracts/installer-shell-bootstrap.ko.md\"],\n  [\"../runtime-contracts/installer-shell-bootstrap.en.md\", \"runtime-contracts/installer-shell-bootstrap.en.md\"]\n]) {\n  if (resourceTargets[source] !== destination) {\n    failures.push(`Tauri bundle resources must map ${source} to ${destination}`);\n  }\n}\n\nconst tauriLib = readFileSync(join(root, \"src-tauri/src/lib.rs\"), \"utf8\");\nconst tauriCargo = readFileSync(join(root, \"src-tauri/Cargo.toml\"), \"utf8\");\nconst tauriDefaultCapability = readFileSync(join(root, \"src-tauri/capabilities/default.json\"), \"utf8\");\nfor (const commandName of [\n  \"get_installer_shell_runtime_contract\",\n  \"list_cli_adapters\",\n  \"run_cli_adapter_health\",\n  \"run_all_cli_adapter_health\",\n  \"list_cli_task_pipeline_presets\",\n  \"list_cli_task_run_records\",\n  \"read_cli_task_run_record\",\n  \"prune_cli_task_run_records\",\n  \"list_runtime_data_roots\",\n  \"get_accumulated_data_overview\",\n  \"run_installer_payload_audit\",\n  \"create_support_diagnostic_bundle\",\n  \"get_desktop_preferences\",\n  \"save_desktop_preferences\",\n  \"list_provider_credentials\",\n  \"save_provider_credential\",\n  \"clear_provider_credential\",\n  \"open_provider_auth_url\",\n  \"list_provider_models\",\n  \"run_provider_agent_task\",\n  \"get_desktop_workspace_state\",\n  \"set_desktop_workspace_path\",\n  \"choose_desktop_workspace_folder\",\n  \"clone_desktop_workspace\",\n  \"get_desktop_git_status\",\n  \"run_desktop_git_action\",\n  \"start_cli_adapter_session\",\n  \"start_cli_task_pipeline\",\n  \"poll_cli_adapter_session\",\n  \"list_cli_adapter_sessions\",\n  \"write_cli_adapter_stdin\",\n  \"send_cli_adapter_defer_message\",\n  \"defer_all_cli_adapter_questions\",\n  \"cancel_cli_adapter_session\",\n  \"list_workspace_text_files\",\n  \"read_workspace_text_file\",\n  \"write_workspace_text_file\",\n  \"create_agent_factory_proposal\",\n  \"record_learning_improvement_decision\",\n  \"list_human_decision_inbox\",\n  \"answer_human_decision\",\n  \"answer_and_resume_human_decision\"\n]) {\n  if (!tauriLib.includes(commandName)) {\n    failures.push(`src-tauri/src/lib.rs must expose ${commandName}`);\n  }\n}\nif (!tauriCargo.includes(\"tauri-plugin-dialog\")) {\n  failures.push(\"src-tauri/Cargo.toml must declare tauri-plugin-dialog for native folder selection\");\n}\nif (!tauriDefaultCapability.includes(\"dialog:default\")) {\n  failures.push(\"src-tauri/capabilities/default.json must allow dialog:default for native folder selection\");\n}\nfor (const requiredPhrase of [\"DialogExt\", \"tauri_plugin_dialog::init\", \"blocking_pick_folder\"]) {\n  if (!tauriLib.includes(requiredPhrase)) {\n    failures.push(`src-tauri/src/lib.rs must include native dialog token ${requiredPhrase}`);\n  }\n}\nif (!tauriLib.includes(\"_ops\") || !tauriLib.includes(\"human-decision-inbox.json\")) {\n  failures.push(\"src-tauri/src/lib.rs must persist deferred CLI questions to the human decision inbox\");\n}\nfor (const requiredPhrase of [\"MAX_DECISION_SCAN_BYTES\", \"recent_session_output\", \"tail_by_char_boundary\"]) {\n  if (!tauriLib.includes(requiredPhrase)) {\n    failures.push(`src-tauri/src/lib.rs must include performance token ${requiredPhrase}`);\n  }\n}\nfor (const requiredPhrase of [\n  \"CliTaskRunRecordReport\",\n  \"CliTaskRunDetailReport\",\n  \"CliTaskRunPruneReport\",\n  \"persist_session_task_run\",\n  \"read_task_run_detail\",\n  \"prune_task_run_records\",\n  \"read_task_run_records_with_limit\",\n  \"read_bounded_text_preview\",\n  \"MAX_TASK_RUN_LOG_PREVIEW_BYTES\",\n  \"task_run_persist_signature\",\n  \"task_runs_base_path\",\n  \"legacy_task_runs_base_path\",\n  \"runtime_data_store_base_path\",\n  \"support_bundles_base_path\",\n  \"payload_audits_base_path\",\n  \"resolve_installer_shell_runtime_contract_path\",\n  \"InstallerShellRuntimeContractReport\",\n  \"InstallerPayloadAuditReport\",\n  \"SupportDiagnosticBundleReport\",\n  \"RuntimeDataBoundaryReport\",\n  \"AccumulatedDataStoreReport\",\n  \"AccumulatedDataOverviewReport\",\n  \"DesktopWorkspaceStateReport\",\n  \"ProviderCredentialReport\",\n  \"ProviderCredentialSummary\",\n  \"ProviderModelCatalogReport\",\n  \"ProviderModelSummary\",\n  \"DESKTOP_WORKSPACE_STATE_SCHEMA_VERSION\",\n  \"PROVIDER_CREDENTIALS_SCHEMA_VERSION\",\n  \"provider_credentials_path\",\n  \"provider_env_for_adapter\",\n  \"open_provider_auth_url_report\",\n  \"list_provider_models_report\",\n  \"call_ollama_provider_api\",\n  \"run_provider_agent_task_report\",\n  \"provider-credentials.v1.json\",\n  \"Ollama / Local\",\n  \"OLLAMA_BASE_URL\",\n  \"OPENAI_API_KEY\",\n  \"ANTHROPIC_API_KEY\",\n  \"GEMINI_API_KEY\",\n  \"desktop_workspace_state_path\",\n  \"managed_desktop_workspaces_base_path\",\n  \"workspace_root_for_app\",\n  \"redact_repository_url\",\n  \"redact_clone_output\",\n  \"ACCUMULATED_DATA_INDEX_SCHEMA_VERSION\",\n  \"ACCUMULATED_DATA_STORAGE_FORMAT_VERSION\",\n  \"accumulated_data_index_path\",\n  \"accumulated-data-overview.v1.json\",\n  \"format_migration_status\",\n  \"accumulated_data_overview_report\",\n  \"MAX_ACCUMULATED_DATA_SCAN_FILES\",\n  \"MAX_PAYLOAD_SCAN_FILES\",\n  \"platform_artifacts_base_path\",\n  \"record.json\",\n  \"stdout.log\",\n  \"stderr.log\"\n]) {\n  if (!tauriLib.includes(requiredPhrase)) {\n    failures.push(`src-tauri/src/lib.rs must include task run store token ${requiredPhrase}`);\n  }\n}\n\nconst desktopRegistry = readJson(\"configs/desktop-distribution-registry.json\");\nconst companionPaths = JSON.stringify(desktopRegistry);\nif (!companionPaths.includes(\"configs/windows-execution-profile.json\")) {\n  failures.push(\"desktop-distribution-registry must reference the Windows execution profile\");\n}\nif (desktopRegistry.recommended_initial_path?.id !== \"tauri_first_cross_platform_shell\") {\n  failures.push(\"desktop-distribution-registry must record the selected Tauri-first cross-platform path\");\n}\nif (!JSON.stringify(desktopRegistry.selected_platform_architecture ?? {}).includes(\"multi_cli_supervisor\")) {\n  failures.push(\"desktop-distribution-registry must record the multi-CLI supervisor contract\");\n}\nif (!companionPaths.includes(\"configs/product-feature-registry.json\")) {\n  failures.push(\"desktop-distribution-registry must reference the product feature registry\");\n}\n\nconst productFeatureRegistry = readJson(\"configs/product-feature-registry.json\");\nconst productFeatureSerialized = JSON.stringify(productFeatureRegistry);\nif (productFeatureRegistry.product_position?.primary_product !== \"agent_capability_platform\") {\n  failures.push(\"product-feature-registry must keep agent_capability_platform as the primary product\");\n}\nif (productFeatureRegistry.product_position?.monitoring_role !== \"supporting_observability\") {\n  failures.push(\"product-feature-registry must keep monitoring as supporting_observability\");\n}\nfor (const requiredFeatureId of [\n  \"agent_orchestration\",\n  \"agent_factory\",\n  \"root_tool_management\",\n  \"work_visibility\",\n  \"agent_work_environment\",\n  \"agent_development_environment\",\n  \"learning_improvement_loop\",\n  \"observability_monitoring\"\n]) {\n  if (!productFeatureSerialized.includes(requiredFeatureId)) {\n    failures.push(`product-feature-registry must include ${requiredFeatureId}`);\n  }\n}\nfor (const requiredPrimaryId of productFeatureRegistry.product_position?.primary_feature_ids ?? []) {\n  const feature = productFeatureRegistry.feature_layers?.find((item) => item.id === requiredPrimaryId);\n  if (feature?.role !== \"primary\") {\n    failures.push(`product feature ${requiredPrimaryId} must be primary`);\n  }\n}\nconst observabilityFeature = productFeatureRegistry.feature_layers?.find((item) => item.id === \"observability_monitoring\");\nif (observabilityFeature?.role !== \"supporting\") {\n  failures.push(\"observability_monitoring must be a supporting feature\");\n}\nfor (const requiredSupportingId of [\n  \"root_tool_management\",\n  \"work_visibility\",\n  \"agent_work_environment\",\n  \"agent_development_environment\",\n  \"learning_improvement_loop\"\n]) {\n  const feature = productFeatureRegistry.feature_layers?.find((item) => item.id === requiredSupportingId);\n  if (feature?.role !== \"supporting\") {\n    failures.push(`product feature ${requiredSupportingId} must be supporting`);\n  }\n}\nif (!productFeatureSerialized.includes(\"operator_surfaces_are_separate\")) {\n  failures.push(\"product-feature-registry must require operator surfaces to stay separate\");\n}\nif (!productFeatureSerialized.includes(\"two_core_features_are_first\")) {\n  failures.push(\"product-feature-registry must keep the two core features first\");\n}\nfor (const requiredPhrase of [\"awslabs_agentcore_samples\", \"Production Agent Blueprints\", \"agentcore_blueprint_gate\"]) {\n  if (!productFeatureSerialized.includes(requiredPhrase)) {\n    failures.push(`product-feature-registry must include AgentCore production blueprint token ${requiredPhrase}`);\n  }\n}\nconst expectedPrimaryNavigationSections = [\"overview\", \"agents\", \"desktop\", \"source\", \"intent\"];\nconst expectedOperatorCenterSections = [\"projects\", \"history\", \"structure\", \"documents\", \"requirements\"];\nif (JSON.stringify(productFeatureRegistry.desktop_home_surface?.primary_navigation_sections) !== JSON.stringify(expectedPrimaryNavigationSections)) {\n  failures.push(\"product-feature-registry desktop_home_surface must keep work-first primary navigation sections\");\n}\nif (JSON.stringify(productFeatureRegistry.desktop_home_surface?.operator_center_sections) !== JSON.stringify(expectedOperatorCenterSections)) {\n  failures.push(\"product-feature-registry desktop_home_surface must keep operator center sections separated\");\n}\n\nconst productGapRegistry = readJson(\"configs/product-gap-registry.json\");\nconst productGapSerialized = JSON.stringify(productGapRegistry);\nconst installableRequirementsKo = readFileSync(join(root, \"docs/requirements/2026-06-02-installable-desktop.ko.md\"), \"utf8\");\nconst installableRequirementsEn = readFileSync(join(root, \"docs/requirements/2026-06-02-installable-desktop.en.md\"), \"utf8\");\nif (!installableRequirementsKo.includes(\"PDA-REQ-037\") || !installableRequirementsEn.includes(\"PDA-REQ-037\")) {\n  failures.push(\"installable desktop requirements must include PDA-REQ-037 for product gap coverage\");\n}\nfor (const requiredTopLevelField of [\n  \"reader_guide\",\n  \"reference_links\",\n  \"structure_rules\",\n  \"field_guide\",\n  \"audit_scope\",\n  \"coverage_summary\",\n  \"request_coverage\",\n  \"gap_items\"\n]) {\n  if (!(requiredTopLevelField in productGapRegistry)) {\n    failures.push(`product-gap-registry must include ${requiredTopLevelField}`);\n  }\n}\nfor (const requiredRequestId of [\n  \"UR-2026-06-03-024\",\n  \"UR-2026-06-03-025\",\n  \"UR-2026-06-03-026\",\n  \"UR-2026-06-03-027\",\n  \"UR-2026-06-03-028\",\n  \"UR-2026-06-03-029\",\n  \"UR-2026-06-03-030\",\n  \"UR-2026-06-03-031\",\n  \"UR-2026-06-03-032\",\n  \"UR-2026-06-03-033\",\n  \"UR-2026-06-03-034\",\n  \"UR-2026-06-03-035\",\n  \"UR-2026-06-03-036\",\n  \"UR-2026-06-04-001\"\n]) {\n  if (!productGapRegistry.request_coverage?.some((item) => item.request_id === requiredRequestId)) {\n    failures.push(`product-gap-registry must include request coverage for ${requiredRequestId}`);\n  }\n}\nfor (const requiredGapId of [\n  \"agent_factory_creation_wizard\",\n  \"learning_feedback_automation_loop\",\n  \"native_workspace_git_operations\",\n  \"componentized_desktop_ui_architecture\",\n  \"interactive_pty_terminal_surface\",\n  \"clipboard_browser_qa\",\n  \"public_distribution_gates\"\n]) {\n  if (!productGapRegistry.gap_items?.some((item) => item.gap_id === requiredGapId)) {\n    failures.push(`product-gap-registry must include gap ${requiredGapId}`);\n  }\n}\nconst agentFactoryGap = productGapRegistry.gap_items?.find((item) => item.gap_id === \"agent_factory_creation_wizard\");\nif (agentFactoryGap?.status !== \"implemented_product_slice\" || agentFactoryGap?.priority !== \"p0_product_gap\") {\n  failures.push(\"product-gap-registry must mark agent_factory_creation_wizard as an implemented p0 product slice\");\n}\nconst learningLoopGap = productGapRegistry.gap_items?.find((item) => item.gap_id === \"learning_feedback_automation_loop\");\nif (learningLoopGap?.status !== \"implemented_product_slice\" || learningLoopGap?.priority !== \"p0_product_gap\") {\n  failures.push(\"product-gap-registry must mark learning_feedback_automation_loop as an implemented p0 product slice\");\n}\nconst nativeGitGap = productGapRegistry.gap_items?.find((item) => item.gap_id === \"native_workspace_git_operations\");\nif (nativeGitGap?.status !== \"implemented_product_slice\") {\n  failures.push(\"product-gap-registry must mark native_workspace_git_operations as implemented\");\n}\nconst clipboardGap = productGapRegistry.gap_items?.find((item) => item.gap_id === \"clipboard_browser_qa\");\nif (clipboardGap?.status !== \"implemented_test_coverage\") {\n  failures.push(\"product-gap-registry must mark clipboard_browser_qa as implemented test coverage\");\n}\nconst ptyGap = productGapRegistry.gap_items?.find((item) => item.gap_id === \"interactive_pty_terminal_surface\");\nif (ptyGap?.status !== \"closed_by_product_decision\") {\n  failures.push(\"product-gap-registry must close interactive_pty_terminal_surface by product decision\");\n}\nconst agentFeatureCoverage = productGapRegistry.request_coverage?.find((item) => item.request_id === \"UR-2026-06-03-035\");\nif (agentFeatureCoverage?.coverage !== \"covered\") {\n  failures.push(\"UR-2026-06-03-035 coverage must be covered after Agent Core and learning loop implementation\");\n}\nif (agentFeatureCoverage?.remaining_gap_ids?.includes(\"agent_factory_creation_wizard\")) {\n  failures.push(\"UR-2026-06-03-035 coverage must not keep the Agent Core creation wizard gap after implementation\");\n}\nif (agentFeatureCoverage?.remaining_gap_ids?.includes(\"learning_feedback_automation_loop\")) {\n  failures.push(\"UR-2026-06-03-035 coverage must not keep the learning feedback automation gap after implementation\");\n}\nconst clipboardCoverage = productGapRegistry.request_coverage?.find((item) => item.request_id === \"UR-2026-06-03-025\");\nif (clipboardCoverage?.coverage !== \"covered\" || clipboardCoverage?.remaining_gap_ids?.includes(\"clipboard_browser_qa\")) {\n  failures.push(\"UR-2026-06-03-025 coverage must be covered after clipboard QA implementation\");\n}\nconst ptyCoverage = productGapRegistry.request_coverage?.find((item) => item.request_id === \"UR-2026-06-03-029\");\nif (ptyCoverage?.coverage !== \"covered\" || ptyCoverage?.remaining_gap_ids?.includes(\"interactive_pty_terminal_surface\")) {\n  failures.push(\"UR-2026-06-03-029 coverage must be covered after PTY product decision\");\n}\nconst nativeGitCoverage = productGapRegistry.request_coverage?.find((item) => item.request_id === \"UR-2026-06-03-033\");\nif (nativeGitCoverage?.coverage !== \"covered\" || nativeGitCoverage?.remaining_gap_ids?.includes(\"native_workspace_git_operations\")) {\n  failures.push(\"UR-2026-06-03-033 coverage must be covered after native Git workbench implementation\");\n}\nif (!productGapSerialized.includes(\"monitoring polish\") || !productGapSerialized.includes(\"p0_product_gap\")) {\n  failures.push(\"product-gap-registry must explicitly prioritize p0 product gaps over monitoring or cosmetic work\");\n}\n\nconst userFlowRegistry = readJson(\"configs/user-flow-registry.json\");\nconst userFlowSerialized = JSON.stringify(userFlowRegistry);\nfor (const requiredPhrase of [\n  \"ai_cli_orchestration_flow\",\n  \"Claude Code\",\n  \"Gemini CLI\",\n  \"Codex CLI\",\n  \"OpenCode\",\n  \"Claw Code\",\n  \"Codex app-style thread workbench\",\n  \"Claude Desktop-style connector chips\",\n  \"MCP servers\",\n  \"desktop extensions\"\n]) {\n  if (!userFlowSerialized.includes(requiredPhrase)) {\n    failures.push(`user-flow-registry must include ${requiredPhrase}`);\n  }\n}\n\nconst designTransferRegistry = readJson(\"configs/claude-code-design-transfer-registry.json\");\nconst designTransferSerialized = JSON.stringify(designTransferRegistry);\nfor (const requiredPhrase of [\n  \"public_sources_only\",\n  \"leaked_or_non_public_material\",\n  \"permissioned_tool_execution\",\n  \"plan_before_edit\",\n  \"subagent_context_isolation\",\n  \"skill_on_demand_packaging\",\n  \"Claude Code CLI\"\n]) {\n  if (!designTransferSerialized.includes(requiredPhrase)) {\n    failures.push(`claude-code-design-transfer-registry must include ${requiredPhrase}`);\n  }\n}\n\nconst referenceAdvantageRegistry = readJson(\"configs/reference-platform-advantage-registry.json\");\nconst referenceAdvantageSerialized = JSON.stringify(referenceAdvantageRegistry);\nfor (const requiredPhrase of [\n  \"public_sources_only\",\n  \"workbench-activity-rail-editor-terminal\",\n  \"codex-style-thread-workbench\",\n  \"claude-desktop-connector-first-chat\",\n  \"background-agent-task-lifecycle\",\n  \"permission-hooks-checkpoints\",\n  \"native-install-runtime-boundary\",\n  \"command-palette-extension-catalog\",\n  \"agentcore-style-production-agent-blueprints\",\n  \"security-first-agentic-boundaries\",\n  \"Codex app\",\n  \"Claude Desktop\",\n  \"claude_desktop_local_mcp_extensions\"\n]) {\n  if (!referenceAdvantageSerialized.includes(requiredPhrase)) {\n    failures.push(`reference platform advantage transfer must include ${requiredPhrase}`);\n  }\n}\nif ((referenceAdvantageRegistry.transfer_patterns || []).length < 10) {\n  failures.push(\"reference-platform-advantage-registry must include at least 10 transfer patterns\");\n}\n\nconst runtimeBoundaryRegistry = readJson(\"configs/runtime-data-boundary-registry.json\");\nconst runtimeBoundarySerialized = JSON.stringify(runtimeBoundaryRegistry);\nfor (const requiredPhrase of [\n  \"installed_app_only\",\n  \"installer_shell_runtime_contract\",\n  \"hidden_in_installed_product\",\n  \"platform_data_store\",\n  \"log_store\",\n  \"agent_workspace\",\n  \"support_"
     },
     {
       "id": "platform-desktop-app-scripts-check-release-readiness-mjs",
@@ -23171,22 +23171,22 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 13
+        "documentsCount": 14
       },
       {
         "category": "web-search",
         "root": "_history/web-searches",
-        "documentsCount": 12
+        "documentsCount": 13
       },
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 12
+        "documentsCount": 11
       },
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 7
+        "documentsCount": 6
       },
       {
         "category": "evaluation",
@@ -23474,7 +23474,7 @@
         "project": "platform-desktop-app",
         "language": "javascript",
         "lineCount": 1045,
-        "sizeBytes": 41463,
+        "sizeBytes": 41454,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
@@ -23497,7 +23497,6 @@
         "allowedSections": [
           "overview",
           "agents",
-          "tools",
           "desktop",
           "source",
           "intent"
@@ -23702,7 +23701,7 @@
             "id": "user",
             "label": "User View",
             "description": "Show the work-first desktop surfaces for someone running, editing, creating, and improving agents without foregrounding operator or repository-monitoring internals.",
-            "location": "Shows: overview, agents, tools, desktop, source, intent",
+            "location": "Shows: overview, agents, desktop, source, intent",
             "status": "available",
             "sourcePath": "agent-platform/configs/access/view-mode-registry.json"
           },

@@ -666,8 +666,7 @@ function appendSourceTemplate(content: string, templateBody: string) {
 }
 
 const DESKTOP_PREFERENCES_SCHEMA_VERSION = "desktop-preferences.v1";
-const legacyDefaultPinnedSections: SectionId[] = ["overview", "agents", "desktop", "source", "intent"];
-const defaultPinnedSections: SectionId[] = ["overview", "agents", "tools", "desktop", "source", "intent"];
+const defaultPinnedSections: SectionId[] = ["overview", "agents", "desktop", "source", "intent"];
 const operatorSectionIds = new Set<SectionId>(["projects", "history", "structure", "documents", "requirements"]);
 
 const featureGroups: Array<{
@@ -871,7 +870,7 @@ const fallbackViewModes: MonitorViewMode[] = [
     id: "user",
     label: "User View",
     intent: "Work-first desktop view for running, editing, creating, and improving agents.",
-    allowedSections: ["overview", "agents", "tools", "desktop", "source", "intent"],
+    allowedSections: ["overview", "agents", "desktop", "source", "intent"],
     visibilityRules: {},
     securityNotes: []
   },
@@ -954,8 +953,8 @@ const fallbackLanguageModes: MonitorLanguageMode[] = [
 
 const nativeWorkspaceCopy = {
   ko: {
-    eyebrow: "작업공간 탐색기",
-    title: "파일 시스템을 연결해 바로 처리하기",
+    eyebrow: "작업공간 Explorer",
+    title: "파일시스템을 끌어와서 처리하기",
     description:
       "왼쪽 탐색기에서 실제 작업공간 파일 시스템을 확인하고, 오른쪽 편집기에서 파일을 열어 수정/저장합니다.",
     chooseFolder: "작업공간 접근 권한 요청",
@@ -2364,12 +2363,6 @@ function normalizePinnedSections(sectionsToNormalize: unknown): SectionId[] {
   const next = Array.isArray(sectionsToNormalize)
     ? sectionsToNormalize.filter((item): item is SectionId => sectionIds.has(item as SectionId))
     : [];
-  const hasLegacyDefault =
-    next.length > 0 && legacyDefaultPinnedSections.every((sectionId) => next.includes(sectionId));
-  if (hasLegacyDefault && !next.includes("tools")) {
-    const insertAt = Math.max(next.indexOf("agents") + 1, 1);
-    next.splice(insertAt, 0, "tools");
-  }
   return next.slice(0, 6);
 }
 
@@ -5624,7 +5617,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                   <div className="panel-heading">
                     <div>
                       <p className="eyebrow">{uiLanguage === "ko" ? "깊이 이동" : "Drill Down"}</p>
-                      <h2>{uiLanguage === "ko" ? "하나를 고르면 그 기능만 엽니다" : "Pick one path to open one feature"}</h2>
+                      <h2>{uiLanguage === "ko" ? "지금 할 일 하나를 고릅니다" : "Pick one thing to do now"}</h2>
                     </div>
                     <span className="result-count">{homeDrilldownItems.length.toLocaleString("ko-KR")}</span>
                   </div>
@@ -6802,7 +6795,7 @@ function AgentCoreBlueprintPanel({
       <div className="panel-heading">
         <div>
           <p className="eyebrow">AgentCore Quick Builder</p>
-	          <h2>{ko ? "상용 에이전트 블루프린트" : "Production Agent Blueprints"}</h2>
+	          <h2>{ko ? "Production 에이전트 블루프린트" : "Production Agent Blueprints"}</h2>
           <p>
             {ko
 	              ? "AWS AgentCore 샘플의 런타임, 메모리, 게이트웨이, 평가 구조를 로컬 Python 실행 중심의 데스크톱 에이전트 생성 흐름으로 바꿉니다."
@@ -6973,7 +6966,7 @@ function AgentCoreBlueprintPanel({
             </button>
             <button type="button" className="primary-action-button" onClick={() => onApplyBlueprint(selectedBlueprint.id, selectedCapabilityIds)}>
               <Bot size={16} aria-hidden="true" />
-              <span>{ko ? "선택 능력으로 입력 채우기" : "Fill With Bundle"}</span>
+              <span>{ko ? "에이전트 생성 입력 채우기" : "Fill With Bundle"}</span>
             </button>
             <button type="button" onClick={() => onStartPreflight(selectedBlueprint.id, selectedCapabilityIds)}>
               <ClipboardCheck size={16} aria-hidden="true" />
@@ -7043,7 +7036,7 @@ function AgentFactoryWizard({
         <div className="desktop-actions">
           <button type="button" onClick={onCreateProposal} disabled={!runtimeAvailable || busy}>
             <Bot size={16} aria-hidden="true" />
-	            <span>{busy ? (ko ? "저장 중" : "Saving") : ko ? "에이전트 제안 저장" : "Save proposal"}</span>
+            <span>{busy ? (ko ? "저장 중" : "Saving") : ko ? "Agent proposal 저장" : "Save proposal"}</span>
           </button>
         </div>
       </div>

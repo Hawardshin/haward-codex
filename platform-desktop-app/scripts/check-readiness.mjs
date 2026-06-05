@@ -325,7 +325,7 @@ for (const requiredPhrase of ["awslabs_agentcore_samples", "Production Agent Blu
     failures.push(`product-feature-registry must include AgentCore production blueprint token ${requiredPhrase}`);
   }
 }
-const expectedPrimaryNavigationSections = ["overview", "agents", "tools", "desktop", "source", "intent"];
+const expectedPrimaryNavigationSections = ["overview", "agents", "desktop", "source", "intent"];
 const expectedOperatorCenterSections = ["projects", "history", "structure", "documents", "requirements"];
 if (JSON.stringify(productFeatureRegistry.desktop_home_surface?.primary_navigation_sections) !== JSON.stringify(expectedPrimaryNavigationSections)) {
   failures.push("product-feature-registry desktop_home_surface must keep work-first primary navigation sections");

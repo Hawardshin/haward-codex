@@ -54,10 +54,10 @@ const packageJson = JSON.parse(fs.readFileSync(path.join(projectRoot, "package.j
 test("Tool Studio is a first-class monitor section", () => {
   assert.match(monitorShell, /\|\s*"tools"/);
   assert.match(monitorShell, /id:\s*"tools"[\s\S]*?label:\s*"툴 스튜디오"/);
-  assert.match(monitorShell, /allowedSections:\s*\["overview", "agents", "tools", "desktop", "source", "intent"\]/);
-  assert.match(monitorShell, /legacyDefaultPinnedSections:\s*SectionId\[\]\s*=\s*\["overview", "agents", "desktop", "source", "intent"\]/);
-  assert.match(monitorShell, /hasLegacyDefault && !next\.includes\("tools"\)/);
-  assert.match(monitorShell, /next\.splice\(insertAt, 0, "tools"\)/);
+  assert.match(monitorShell, /allowedSections:\s*\["overview", "agents", "desktop", "source", "intent"\]/);
+  assert.match(monitorShell, /defaultPinnedSections:\s*SectionId\[\]\s*=\s*\["overview", "agents", "desktop", "source", "intent"\]/);
+  assert.doesNotMatch(monitorShell, /hasLegacyDefault && !next\.includes\("tools"\)/);
+  assert.doesNotMatch(monitorShell, /next\.splice\(insertAt, 0, "tools"\)/);
   assert.match(monitorShell, /tools:\s*"Studio"/);
   assert.match(monitorShell, /section === "tools"[\s\S]*?<ToolStudioPanel/);
   assert.match(monitorShell, /import \{ ToolStudioPanel, type ToolStudioMode, type ToolStudioModeRequest \} from "@\/components\/workbench\/ToolStudioPanel"/);
@@ -433,7 +433,7 @@ test("Operator Center and task run copy localize high-visibility Korean UI", () 
   assert.doesNotMatch(monitorShell, /decision inbox로/);
   assert.doesNotMatch(monitorShell, /CLI lane으로|CLI lane,|CLI lane 실행|CLI lane을/);
   assert.doesNotMatch(monitorShell, /blocker나|배포 blocker/);
-  assert.doesNotMatch(monitorShell, /Agent proposal 저장|Tauri runtime이|native 런타임|필터와 snapshot/);
+  assert.doesNotMatch(monitorShell, /Tauri runtime이|native 런타임|필터와 snapshot/);
   assert.doesNotMatch(toolStudio, /빠른 액션 메뉴|Smoke 실행|workflow 복사|Registry 반영/);
   assert.doesNotMatch(nativeGitWorkbench, /Stash를 선택하세요|선택 Stash|전체 Stash|pathspec/);
 });

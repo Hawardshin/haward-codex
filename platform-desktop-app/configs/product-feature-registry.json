@@ -309,7 +309,6 @@
     "primary_navigation_sections": [
       "overview",
       "agents",
-      "tools",
       "desktop",
       "source",
       "intent"

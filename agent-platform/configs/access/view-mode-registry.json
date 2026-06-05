@@ -199,7 +199,6 @@
       "allowed_sections": [
         "overview",
         "agents",
-        "tools",
         "desktop",
         "source",
         "intent"

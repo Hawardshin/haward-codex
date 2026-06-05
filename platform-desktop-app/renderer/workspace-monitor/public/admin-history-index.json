@@ -1,17 +1,17 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-05T12:27:30.527Z",
+  "generatedAt": "2026-06-05T12:45:54.991Z",
   "summary": {
-    "documents": 2233,
+    "documents": 2238,
     "days": 6,
     "categories": [
       {
         "category": "evaluation",
-        "count": 925
+        "count": 926
       },
       {
         "category": "web-search",
-        "count": 360
+        "count": 361
       },
       {
         "category": "plan",
@@ -19,7 +19,7 @@
       },
       {
         "category": "request-trace",
-        "count": 289
+        "count": 290
       },
       {
         "category": "work-timing",
@@ -27,11 +27,11 @@
       },
       {
         "category": "user-request",
-        "count": 73
+        "count": 74
       },
       {
         "category": "work-summary",
-        "count": 40
+        "count": 41
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6030923,
+    "totalSourceBytes": 6036405,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,86 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+      "path": "_history/evaluations/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: Desktop Package Readiness Repair",
+      "excerpt": "평가: Desktop Package Readiness Repair 결과 내부 패키징 실패는 해결됐다. 활성 요구사항 기준으로 user 기본 navigation을 5개 섹션으로 정렬했고, tools 는 기본 navigation이 아닌 기능/개발 표면으로 남겼다. readiness script, platform tests, Workspace Monitor tests가 같은 계약을 보도록 맞췄다. generated snapshot/admin history index를 재생성해 lazy admin ind",
+      "html": "<p>평가: Desktop Package Readiness Repair 결과 내부 패키징 실패는 해결됐다. 활성 요구사항 기준으로 user 기본 navigation을 5개 섹션으로 정렬했고, tools 는 기본 navigation이 아닌 기능/개발 표면으로 남겼다. readiness script, platform tests, Workspace Monitor tests가 같은 계약을 보도록 맞췄다. generated snapshot/admin history index를 재생성해 lazy admin index 검증을 복구했다. 검증 corepack pnpm filter workspace monitor run check : 통과 corepack p</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1301,
+      "updatedAt": "2026-06-05T12:45:23.211Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+      "path": "_history/request-traces/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Desktop Package Readiness Repair",
+      "excerpt": "요청 결과 추적: Desktop Package Readiness Repair 요청 데스크톱 내부 패키징 실패를 전부 수정. 결과 platform desktop app readiness/test 실패 2건을 해결했다. Workspace Monitor check/test에서 드러난 생성 snapshot, CSS, stale test 계약을 함께 정리했다. 내부 패키징 산출물이 정상 생성됐다. 주요 산출물 agent platform/configs/access/view mode registry.json ",
+      "html": "<p>요청 결과 추적: Desktop Package Readiness Repair 요청 데스크톱 내부 패키징 실패를 전부 수정. 결과 platform desktop app readiness/test 실패 2건을 해결했다. Workspace Monitor check/test에서 드러난 생성 snapshot, CSS, stale test 계약을 함께 정리했다. 내부 패키징 산출물이 정상 생성됐다. 주요 산출물 agent platform/configs/access/view mode registry.json platform desktop app/configs/product feature registry.json platform desktop app/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1788,
+      "updatedAt": "2026-06-05T12:45:23.210Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+      "path": "_history/user-requests/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Desktop Package Readiness Repair",
+      "excerpt": "사용자 요청 요약: Desktop Package Readiness Repair 요청 내부 데스크톱 패키징 실패 원인을 모두 고치고, 기존 생성 변경물도 필요한 범위에서 같이 수정하라는 요청. 해석 pnpm run desktop:package:internal 이 끝까지 통과해야 한다. 이전에 건드리지 않겠다고 보류한 generated snapshot/admin history 출력도 검증에 필요하면 갱신한다. 최신 요구사항과 테스트가 충돌하는 부분은 활성 요구사항 기준으로 정렬한다.",
+      "html": "<p>사용자 요청 요약: Desktop Package Readiness Repair 요청 내부 데스크톱 패키징 실패 원인을 모두 고치고, 기존 생성 변경물도 필요한 범위에서 같이 수정하라는 요청. 해석 pnpm run desktop:package:internal 이 끝까지 통과해야 한다. 이전에 건드리지 않겠다고 보류한 generated snapshot/admin history 출력도 검증에 필요하면 갱신한다. 최신 요구사항과 테스트가 충돌하는 부분은 활성 요구사항 기준으로 정렬한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 541,
+      "updatedAt": "2026-06-05T12:45:23.210Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Desktop Package Readiness Repair",
+      "excerpt": "작업 요약: Desktop Package Readiness Repair user 기본 navigation/view mode/product feature registry를 overview , agents , desktop , source , intent 로 맞췄다. tools 강제 pinned 삽입 로직을 제거하고 Tool Studio는 기능 표면으로 유지했다. readiness가 요구하는 홈/Workspace Explorer/AgentCore copy를 맞췄다. 버튼 텍스트 wrapping CSS",
+      "html": "<p>작업 요약: Desktop Package Readiness Repair user 기본 navigation/view mode/product feature registry를 overview , agents , desktop , source , intent 로 맞췄다. tools 강제 pinned 삽입 로직을 제거하고 Tool Studio는 기능 표면으로 유지했다. readiness가 요구하는 홈/Workspace Explorer/AgentCore copy를 맞췄다. 버튼 텍스트 wrapping CSS와 Workspace Monitor 테스트 계약 충돌을 정리했다. developer/customer generated snapshots와 adm</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 647,
+      "updatedAt": "2026-06-05T12:45:23.210Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-05-desktop-package-readiness-repair-ko-md",
+      "path": "_history/web-searches/2026/2026-06-05-desktop-package-readiness-repair.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: Desktop Package Readiness Repair",
+      "excerpt": "웹 검색 기록: Desktop Package Readiness Repair 검색 날짜: 2026 06 05 목적: 패키징 실패 원인이 외부 최신 정보보다 로컬 테스트/계약 불일치인지 확인 질의 software regression tests align tests with requirements official docs Node.js assert deepStrictEqual official documentation node:test pnpm Node.js version requirements offi",
+      "html": "<p>웹 검색 기록: Desktop Package Readiness Repair 검색 날짜: 2026 06 05 목적: 패키징 실패 원인이 외부 최신 정보보다 로컬 테스트/계약 불일치인지 확인 질의 software regression tests align tests with requirements official docs Node.js assert deepStrictEqual official documentation node:test pnpm Node.js version requirements official documentation 판단 검색 결과는 구현 방향을 바꾸지 않았다. 이번 실패는 로컬 readiness.test.mjs , chec</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1205,
+      "updatedAt": "2026-06-05T12:45:23.209Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-05-korean-copy-pass-ko-md",
       "path": "_history/evaluations/2026/2026-06-05-korean-copy-pass.ko.md",
@@ -35795,15 +35875,15 @@
     {
       "date": "2026-06-05",
       "year": "2026",
-      "documentsCount": 452,
+      "documentsCount": 457,
       "categories": [
         {
           "category": "evaluation",
-          "count": 135
+          "count": 136
         },
         {
           "category": "web-search",
-          "count": 64
+          "count": 65
         },
         {
           "category": "work-timing",
@@ -35811,11 +35891,11 @@
         },
         {
           "category": "request-trace",
-          "count": 60
+          "count": 61
         },
         {
           "category": "user-request",
-          "count": 59
+          "count": 60
         },
         {
           "category": "plan",
@@ -35823,7 +35903,7 @@
         },
         {
           "category": "work-summary",
-          "count": 27
+          "count": 28
         },
         {
           "category": "daily-history",
