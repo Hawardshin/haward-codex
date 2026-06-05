@@ -263,10 +263,11 @@
         "Command toolbar",
         "Monaco diff review",
         "Editor settings popup",
-        "PTY terminal decision keeps the pipe-first CLI supervisor as the product default and records xterm/PTY as an optional audited extension"
+        "Native PTY terminal surface uses portable-pty, xterm.js, @xterm/addon-fit, raw input, resize, bounded scrollback, and cancel commands",
+        "Pipe-first CLI supervisor remains available for governed task-run records and decision inbox capture"
       ],
       "remaining_gap_ids": [],
-      "notes": "The code workbench is implemented. PTY/xterm was explicitly decided as an optional extension so the current pipe-first supervisor remains the governed desktop terminal model."
+      "notes": "The code workbench is implemented. PTY/xterm is now implemented for live terminal fidelity, while the pipe-first supervisor remains the governed agent-run record model."
     },
     {
       "request_id": "UR-2026-06-03-030",
@@ -472,24 +473,26 @@
     },
     {
       "gap_id": "interactive_pty_terminal_surface",
-      "status": "closed_by_product_decision",
-      "priority": "p2_optional_closed",
+      "status": "implemented_product_slice",
+      "priority": "p1_product_capability",
       "source_requests": [
         "UR-2026-06-03-029"
       ],
       "feature_layer": "agent_work_environment",
-      "why_it_matters": "A PTY/xterm surface can make CLI sessions feel more like a full desktop developer app, but the current bounded pipe-first supervisor is intentionally safer for task-run persistence and decision capture.",
+      "why_it_matters": "A PTY/xterm surface makes the installed desktop app behave like a real developer tool by using OS pseudo terminals, raw input, resize, and ANSI rendering while the bounded pipe-first supervisor remains safer for task-run persistence and decision capture.",
       "current_evidence": [
         "start_cli_adapter_session, poll_cli_adapter_session, stdin, defer, cancel, task pipe, and task run store exist",
-        "platform-desktop-app/docs/architecture/pty-terminal-decision.ko.md records pipe-first CLI supervisor as the default product decision",
-        "platform-desktop-app/docs/architecture/pty-terminal-decision.en.md records xterm.js and Rust PTY crate as an optional audited extension"
+        "start_native_pty_terminal, poll_native_pty_terminal_session, list_native_pty_terminal_sessions, write_native_pty_terminal_input, resize_native_pty_terminal, and cancel_native_pty_terminal exist",
+        "RuntimeTerminalDrawer renders a native PTY view through xterm.js and @xterm/addon-fit",
+        "platform-desktop-app/docs/architecture/pty-terminal-decision.ko.md records PTY as implemented while preserving pipe-first supervisor records",
+        "platform-desktop-app/docs/architecture/pty-terminal-decision.en.md records portable-pty lifecycle, bounded scrollback, and resize policy"
       ],
       "acceptance_to_close": [
-        "Product decision chooses whether PTY is required or optional.",
-        "If required, install audit records xterm.js/PTY dependency scope, license, rollback, and validation.",
-        "PTY lifecycle passes resource guard checks for process, file descriptor, timer, and log retention cleanup."
+        "Native PTY command lifecycle starts, polls, resizes, writes raw input, and cancels sessions.",
+        "Install audit records Rust PTY dependency scope, license, rollback, and validation.",
+        "PTY lifecycle has resource guard coverage for process, reader thread, writer handle, resize observer, timer, and bounded memory retention."
       ],
-      "recommended_next_slice": "closed_by_2026-06-03-deferred-native-git-clipboard-pty",
+      "recommended_next_slice": "2026-06-06-native-pty-terminal-runtime",
       "blocked_by": [],
       "not_blocked_by": []
     },

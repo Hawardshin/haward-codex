@@ -1,17 +1,17 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-05T16:50:37.607Z",
+  "generatedAt": "2026-06-05T17:19:27.072Z",
   "summary": {
-    "documents": 2320,
+    "documents": 2326,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 946
+        "count": 947
       },
       {
         "category": "web-search",
-        "count": 373
+        "count": 374
       },
       {
         "category": "plan",
@@ -19,19 +19,19 @@
       },
       {
         "category": "request-trace",
-        "count": 302
+        "count": 303
       },
       {
         "category": "work-timing",
-        "count": 224
+        "count": 225
       },
       {
         "category": "user-request",
-        "count": 86
+        "count": 87
       },
       {
         "category": "work-summary",
-        "count": 53
+        "count": 54
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6134145,
+    "totalSourceBytes": 6140870,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,102 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-work-timings-2026-2026-06-06-native-pty-terminal-runtime-ko-md",
+      "path": "_history/work-timings/2026/2026-06-06-native-pty-terminal-runtime.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "작업 타이밍: 네이티브 PTY 터미널 런타임",
+      "excerpt": "작업 타이밍: 네이티브 PTY 터미널 런타임 | 단계 | 기록 | | | | | 웹/코드 조사 | 공식 문서 검색, 기존 pipe first 구현과 PTY deferred decision 확인 | | 구현 | Rust PTY command/store, xterm surface, renderer state/polling 연결 | | 검증 | Rust/frontend/readiness/package/internal artifact verification | | 기록 | requirements/spec",
+      "html": "<p>작업 타이밍: 네이티브 PTY 터미널 런타임 | 단계 | 기록 | | | | | 웹/코드 조사 | 공식 문서 검색, 기존 pipe first 구현과 PTY deferred decision 확인 | | 구현 | Rust PTY command/store, xterm surface, renderer state/polling 연결 | | 검증 | Rust/frontend/readiness/package/internal artifact verification | | 기록 | requirements/spec/history/install/resource/evaluation 기록 | 병목 패키징 빌드는 release compile과 DMG verifi</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 665,
+      "updatedAt": "2026-06-05T17:17:07.972Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-native-pty-terminal-runtime-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-native-pty-terminal-runtime.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "최종 평가: 네이티브 PTY 터미널 런타임",
+      "excerpt": "최종 평가: 네이티브 PTY 터미널 런타임 판정 완료. 요구 충족 터미널 재검토: 기존 pipe first 구현의 한계를 확인하고 문서화했다. OS 자원 활용: Rust portable pty 기반 native PTY session을 추가했다. UI 개선: xterm.js 기반 PTY tab을 추가해 <pre 로그 패널과 분리했다. 기존 기능 보존: pipe first CLI supervisor와 decision inbox/task run store는 유지했다. 자동 빌드: package:inte",
+      "html": "<p>최종 평가: 네이티브 PTY 터미널 런타임 판정 완료. 요구 충족 터미널 재검토: 기존 pipe first 구현의 한계를 확인하고 문서화했다. OS 자원 활용: Rust portable pty 기반 native PTY session을 추가했다. UI 개선: xterm.js 기반 PTY tab을 추가해 &lt;pre 로그 패널과 분리했다. 기존 기능 보존: pipe first CLI supervisor와 decision inbox/task run store는 유지했다. 자동 빌드: package:internal 을 실행해 내부 .app 와 .dmg 를 생성했다. 검증 근거 cargo check corepack pnpm dir platform d</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1642,
+      "updatedAt": "2026-06-05T17:17:01.737Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-native-pty-terminal-runtime-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-native-pty-terminal-runtime.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: 네이티브 PTY 터미널 런타임",
+      "excerpt": "요청 결과 추적: 네이티브 PTY 터미널 런타임 요청 터미널 기능 재검토. 데스크톱 앱답게 운영체제 자원을 쓰는 실제 터미널 구현. 구현 후 자동 빌드. 결과 기존 pipe first 터미널의 한계를 확인하고 native PTY path를 추가했다. portable pty 와 xterm.js 기반 live terminal surface를 구현했다. 내부 패키징 빌드까지 완료했다. 주요 파일 platform desktop app/src tauri/src/lib.rs platform desktop a",
+      "html": "<p>요청 결과 추적: 네이티브 PTY 터미널 런타임 요청 터미널 기능 재검토. 데스크톱 앱답게 운영체제 자원을 쓰는 실제 터미널 구현. 구현 후 자동 빌드. 결과 기존 pipe first 터미널의 한계를 확인하고 native PTY path를 추가했다. portable pty 와 xterm.js 기반 live terminal surface를 구현했다. 내부 패키징 빌드까지 완료했다. 주요 파일 platform desktop app/src tauri/src/lib.rs platform desktop app/renderer/workspace monitor/components/workbench/RuntimeTerminalDrawer.tsx pla</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1463,
+      "updatedAt": "2026-06-05T17:16:50.897Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-native-pty-terminal-runtime-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-native-pty-terminal-runtime.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 네이티브 PTY 터미널 런타임",
+      "excerpt": "작업 요약: 네이티브 PTY 터미널 런타임 완료 Rust portable pty dependency를 추가했다. Tauri runtime에 native PTY start/list/poll/write/resize/cancel command를 추가했다. RuntimeTerminalDrawer 에 xterm 기반 PTY tab을 추가했다. MonitorShell 에 PTY 세션 상태, polling, input, resize, cancel 연결을 추가했다. 기존 pipe first CLI supervi",
+      "html": "<p>작업 요약: 네이티브 PTY 터미널 런타임 완료 Rust portable pty dependency를 추가했다. Tauri runtime에 native PTY start/list/poll/write/resize/cancel command를 추가했다. RuntimeTerminalDrawer 에 xterm 기반 PTY tab을 추가했다. MonitorShell 에 PTY 세션 상태, polling, input, resize, cancel 연결을 추가했다. 기존 pipe first CLI supervisor는 task run/decision inbox 경로로 유지했다. product gap registry, runtime contract, a</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1021,
+      "updatedAt": "2026-06-05T17:16:42.887Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-native-pty-terminal-runtime-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-native-pty-terminal-runtime.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 네이티브 PTY 터미널 런타임",
+      "excerpt": "사용자 요청 요약: 네이티브 PTY 터미널 런타임 사용자는 데스크톱 앱의 터미널 기능을 다시 살펴봐 달라고 요청했다. 이전 맥락에서는 단순 렌더링이 아니라 운영체제 자원을 쓰는 데스크톱 앱다운 구현, 탭/기능 지연 개선, 빌드 자동 실행을 요구했다. 이번 작업은 하단 터미널을 실제 OS PTY + xterm surface로 확장하고 기존 pipe first agent run supervisor를 보존하는 방향으로 처리했다.",
+      "html": "<p>사용자 요청 요약: 네이티브 PTY 터미널 런타임 사용자는 데스크톱 앱의 터미널 기능을 다시 살펴봐 달라고 요청했다. 이전 맥락에서는 단순 렌더링이 아니라 운영체제 자원을 쓰는 데스크톱 앱다운 구현, 탭/기능 지연 개선, 빌드 자동 실행을 요구했다. 이번 작업은 하단 터미널을 실제 OS PTY + xterm surface로 확장하고 기존 pipe first agent run supervisor를 보존하는 방향으로 처리했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 502,
+      "updatedAt": "2026-06-05T17:16:33.265Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-native-pty-terminal-runtime-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-native-pty-terminal-runtime.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: 네이티브 PTY 터미널 런타임",
+      "excerpt": "웹 검색 기록: 네이티브 PTY 터미널 런타임 검색 시각 2026 06 06 KST 질의 Tauri v2 command shell sidecar process official docs xterm.js terminal fit addon official docs performance node pty terminal emulator pseudo terminal official docs Rust portable pty crate terminal pty docs 확인한 출처 Tauri v2 Shell/pl",
+      "html": "<p>웹 검색 기록: 네이티브 PTY 터미널 런타임 검색 시각 2026 06 06 KST 질의 Tauri v2 command shell sidecar process official docs xterm.js terminal fit addon official docs performance node pty terminal emulator pseudo terminal official docs Rust portable pty crate terminal pty docs 확인한 출처 Tauri v2 Shell/plugin reference: https://v2.tauri.app/reference/javascript/shell/ xterm.js docs: </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1432,
+      "updatedAt": "2026-06-05T17:07:56.840Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-06-tab-resident-preload-evaluation-input-json",
       "path": "_history/evaluations/2026/2026-06-06-tab-resident-preload-evaluation-input.json",
@@ -37187,31 +37283,31 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 48,
+      "documentsCount": 54,
       "categories": [
         {
           "category": "evaluation",
-          "count": 13
+          "count": 14
         },
         {
           "category": "request-trace",
-          "count": 7
+          "count": 8
         },
         {
           "category": "user-request",
-          "count": 7
+          "count": 8
         },
         {
           "category": "web-search",
-          "count": 7
+          "count": 8
         },
         {
           "category": "work-summary",
-          "count": 7
+          "count": 8
         },
         {
           "category": "work-timing",
-          "count": 7
+          "count": 8
         }
       ],
       "documents": []

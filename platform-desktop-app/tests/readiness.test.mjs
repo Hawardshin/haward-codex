@@ -200,8 +200,8 @@ test("product gap registry keeps unresolved user-request gaps visible", () => {
   assert.match(JSON.stringify(clipboardGap.current_evidence), /clipboard\.test\.mjs/);
 
   const ptyGap = registry.gap_items.find((item) => item.gap_id === "interactive_pty_terminal_surface");
-  assert.equal(ptyGap.status, "closed_by_product_decision");
-  assert.match(JSON.stringify(ptyGap.current_evidence), /pty-terminal-decision/);
+  assert.equal(ptyGap.status, "implemented_product_slice");
+  assert.match(JSON.stringify(ptyGap.current_evidence), /start_native_pty_terminal/);
 
   const request35 = registry.request_coverage.find((item) => item.request_id === "UR-2026-06-03-035");
   assert.equal(request35.coverage, "covered");
@@ -564,7 +564,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     assert.match(nativeGitWorkbenchKo, pattern);
     assert.match(nativeGitWorkbenchEn, pattern);
   }
-  for (const token of ["pipe-first CLI supervisor", "optional extension", "xterm.js", "Rust PTY crate"]) {
+  for (const token of ["pipe-first CLI supervisor", "xterm.js", "Rust PTY crate", "start_native_pty_terminal"]) {
     const pattern = new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
     assert.match(ptyDecisionKo, pattern);
     assert.match(ptyDecisionEn, pattern);
@@ -594,6 +594,12 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "start_cli_task_pipeline",
     "poll_cli_adapter_session",
     "list_cli_adapter_sessions",
+    "start_native_pty_terminal",
+    "poll_native_pty_terminal_session",
+    "list_native_pty_terminal_sessions",
+    "write_native_pty_terminal_input",
+    "resize_native_pty_terminal",
+    "cancel_native_pty_terminal",
     "write_cli_adapter_stdin",
     "send_cli_adapter_defer_message",
     "defer_all_cli_adapter_questions",

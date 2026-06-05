@@ -1,10 +1,10 @@
 "use client";
 
 import { Activity, ArrowRight, Inbox, ListFilter, Settings, ShieldCheck, SquareTerminal, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type RuntimeTerminalLanguage = "ko" | "en";
-type TerminalDrawerView = "start" | "sessions" | "output" | "events";
+type TerminalDrawerView = "start" | "native" | "sessions" | "output" | "events";
 
 type RuntimeTerminalAdapter = {
   adapterId: string;
@@ -49,6 +49,22 @@ export type RuntimeTerminalSession = {
   persistenceError?: string | null;
 };
 
+export type RuntimeNativePtySession = {
+  sessionId: string;
+  label: string;
+  command: string;
+  status: string;
+  exitCode?: number | null;
+  elapsedMs: number;
+  output: string;
+  outputTruncated: boolean;
+  workingDir: string;
+  rows: number;
+  cols: number;
+  pid?: number | null;
+  terminalKind: string;
+};
+
 type RuntimeTerminalStats = {
   active: number;
   deferred: number;
@@ -84,17 +100,25 @@ type RuntimeTerminalDrawerProps = {
   uiLanguage: RuntimeTerminalLanguage;
   workingDir: string;
   workingDirOptions?: RuntimeTextChoice[];
+  nativePtySession: RuntimeNativePtySession | null;
+  nativePtySessions: RuntimeNativePtySession[];
   onCancelSession: (sessionId: string) => void | Promise<void>;
+  onCancelNativePtySession: (sessionId: string) => void | Promise<void>;
   onCollapse: () => void;
   onDeferSession: (sessionId: string) => void | Promise<void>;
   onOpen: () => void;
   onOpenSettings: () => void;
+  onPollNativePtySession: (sessionId: string) => void | Promise<void>;
   onPollSession: (sessionId: string) => void | Promise<void>;
+  onResizeNativePtySession: (sessionId: string, size: { rows: number; cols: number }) => void | Promise<void>;
+  onSelectNativePtySession: (sessionId: string) => void;
   onSelectSession: (sessionId: string) => void;
   onSessionInputChange: (value: string) => void;
   onSessionPromptChange: (value: string) => void;
+  onStartNativePtySession: (size: { rows: number; cols: number }) => void | Promise<void>;
   onStartSession: () => void | Promise<void>;
   onWorkingDirChange: (value: string) => void;
+  onWriteNativePtyInput: (sessionId: string, input: string) => void | Promise<void>;
   onWriteSessionInput: (sessionId: string) => void | Promise<void>;
 };
 
@@ -119,6 +143,14 @@ const terminalCopy = {
     diffPending: "diff 대기",
     clean: "정리됨",
     start: "시작",
+    native: "PTY",
+    nativePty: "네이티브 PTY",
+    nativePtyDetail: "OS pseudo terminal + xterm.js",
+    startNativePty: "PTY 셸 시작",
+    refreshNativePty: "PTY 새로고침",
+    stopNativePty: "PTY 중단",
+    nativePtySurface: "네이티브 PTY 터미널",
+    nativePtyPlaceholder: "PTY 셸을 시작하면 여기에서 실제 터미널 입출력이 렌더링됩니다.",
     blocked: "막힘",
     ready: "준비됨",
     adapter: "어댑터",
@@ -169,6 +201,14 @@ const terminalCopy = {
     diffPending: "diff pending",
     clean: "clean",
     start: "Start",
+    native: "PTY",
+    nativePty: "Native PTY",
+    nativePtyDetail: "OS pseudo terminal + xterm.js",
+    startNativePty: "Start PTY Shell",
+    refreshNativePty: "Poll PTY",
+    stopNativePty: "Stop PTY",
+    nativePtySurface: "Native PTY terminal",
+    nativePtyPlaceholder: "Start a PTY shell to render real terminal I/O here.",
     blocked: "blocked",
     ready: "ready",
     adapter: "Adapter",
@@ -222,17 +262,25 @@ export function RuntimeTerminalDrawer({
   uiLanguage,
   workingDir,
   workingDirOptions = [],
+  nativePtySession,
+  nativePtySessions,
   onCancelSession,
+  onCancelNativePtySession,
   onCollapse,
   onDeferSession,
   onOpen,
   onOpenSettings,
+  onPollNativePtySession,
   onPollSession,
+  onResizeNativePtySession,
+  onSelectNativePtySession,
   onSelectSession,
   onSessionInputChange,
   onSessionPromptChange,
+  onStartNativePtySession,
   onStartSession,
   onWorkingDirChange,
+  onWriteNativePtyInput,
   onWriteSessionInput
 }: RuntimeTerminalDrawerProps) {
   const [terminalDrawerView, setTerminalDrawerView] = useState<TerminalDrawerView>("start");
@@ -245,7 +293,7 @@ export function RuntimeTerminalDrawer({
   const copy = terminalCopy[uiLanguage];
   const selectedAdapter = adapters.find((adapter) => adapter.adapterId === selectedSessionAdapterId);
   const terminalCwd = selectedSession?.workingDir || workingDir || "workspace root";
-  const selectedSessionOutput = selectedSession ? selectedSession.stdout || selectedSession.stderr || copy.noOutput : copy.noSession;
+  const selectedSessionOutput = selectedSession ? formatSessionOutput(selectedSession, copy.noOutput) : copy.noSession;
 
   return (
     <>
@@ -253,7 +301,7 @@ export function RuntimeTerminalDrawer({
         <button type="button" className="terminal-drawer-launcher" onClick={onOpen}>
           <SquareTerminal size={16} aria-hidden="true" />
           <span>{copy.launcher}</span>
-          <strong>{sessions.length}</strong>
+          <strong>{sessions.length + nativePtySessions.length}</strong>
         </button>
       )}
 
@@ -274,7 +322,7 @@ export function RuntimeTerminalDrawer({
           </div>
           <div className="desktop-actions">
             <span className="result-count">
-              {sessions.length} {copy.sessions}
+              {sessions.length + nativePtySessions.length} {copy.sessions}
             </span>
             <button type="button" onClick={onCollapse} title={copy.collapse}>
               <X size={15} aria-hidden="true" />
@@ -311,6 +359,17 @@ export function RuntimeTerminalDrawer({
               <ListFilter size={15} aria-hidden="true" />
               <span>{copy.sessions}</span>
               <small>{sessions.length}</small>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={terminalDrawerView === "native"}
+              className={terminalDrawerView === "native" ? "active" : ""}
+              onClick={() => setTerminalDrawerView("native")}
+            >
+              <SquareTerminal size={15} aria-hidden="true" />
+              <span>{copy.native}</span>
+              <small>{nativePtySession?.status || copy.idle}</small>
             </button>
             <button
               type="button"
@@ -360,6 +419,10 @@ export function RuntimeTerminalDrawer({
               <article>
                 <span>{copy.output}</span>
                 <strong>{formatBytes(sessionStats.outputBytes)}</strong>
+              </article>
+              <article>
+                <span>{copy.native}</span>
+                <strong>{nativePtySessions.length}</strong>
               </article>
               <article>
                 <span>{copy.events}</span>
@@ -472,10 +535,79 @@ export function RuntimeTerminalDrawer({
             </div>
             )}
 
-            {terminalDrawerView !== "start" && sessions.length === 0 ? (
+            {terminalDrawerView === "native" && (
+              <article className="session-terminal native-pty-panel">
+                <header>
+                  <div>
+                    <span>{nativePtySession?.sessionId || copy.nativePty}</span>
+                    <h3>{copy.nativePty}</h3>
+                  </div>
+                  <strong>{nativePtySession?.status || copy.idle}</strong>
+                </header>
+                <div className="terminal-emulator-meta">
+                  <span>{nativePtySession?.terminalKind || "native_pty"}</span>
+                  <code>{nativePtySession?.workingDir || workingDir || "workspace root"}</code>
+                  <strong>{nativePtySession?.pid ? `pid ${nativePtySession.pid}` : `${nativePtySession?.cols || 100}x${nativePtySession?.rows || 28}`}</strong>
+                </div>
+                {nativePtySessions.length > 1 && (
+                  <div className="native-pty-session-strip" aria-label={uiLanguage === "ko" ? "PTY 세션 선택" : "PTY session selector"}>
+                    {nativePtySessions.map((session) => (
+                      <button
+                        key={session.sessionId}
+                        type="button"
+                        className={nativePtySession?.sessionId === session.sessionId ? "active" : ""}
+                        aria-pressed={nativePtySession?.sessionId === session.sessionId}
+                        onClick={() => onSelectNativePtySession(session.sessionId)}
+                      >
+                        <span>{session.label}</span>
+                        <small>{session.status}</small>
+                      </button>
+                    ))}
+                  </div>
+                )}
+                <NativePtyTerminalSurface
+                  ariaLabel={copy.nativePtySurface}
+                  placeholder={copy.nativePtyPlaceholder}
+                  runtimeAvailable={runtimeAvailable}
+                  session={nativePtySession}
+                  startLabel={copy.startNativePty}
+                  onResize={onResizeNativePtySession}
+                  onStart={onStartNativePtySession}
+                  onWrite={onWriteNativePtyInput}
+                />
+                <div className="desktop-actions native-pty-actions">
+                  <button
+                    type="button"
+                    onClick={() => void onStartNativePtySession({ rows: nativePtySession?.rows || 28, cols: nativePtySession?.cols || 100 })}
+                    disabled={!runtimeAvailable}
+                  >
+                    <SquareTerminal size={15} aria-hidden="true" />
+                    <span>{copy.startNativePty}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => nativePtySession && void onPollNativePtySession(nativePtySession.sessionId)}
+                    disabled={!runtimeAvailable || !nativePtySession}
+                  >
+                    <Activity size={15} aria-hidden="true" />
+                    <span>{copy.refreshNativePty}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => nativePtySession && void onCancelNativePtySession(nativePtySession.sessionId)}
+                    disabled={!runtimeAvailable || !nativePtySession || !isWritableSessionStatus(nativePtySession.status)}
+                  >
+                    <ShieldCheck size={15} aria-hidden="true" />
+                    <span>{copy.stopNativePty}</span>
+                  </button>
+                </div>
+              </article>
+            )}
+
+            {terminalDrawerView !== "start" && terminalDrawerView !== "native" && sessions.length === 0 ? (
               <p className="empty-state">{copy.noSessions}</p>
             ) : (
-              terminalDrawerView !== "start" && (
+              terminalDrawerView !== "start" && terminalDrawerView !== "native" && (
               <div className={`session-grid terminal-view-${terminalDrawerView}`}>
                 {terminalDrawerView === "sessions" && (
                 <div className="session-list" tabIndex={0} aria-label={copy.sessionList}>
@@ -552,7 +684,6 @@ export function RuntimeTerminalDrawer({
               <pre className="terminal-emulator-screen" tabIndex={0} aria-label={copy.selectedOutput}>
                 <code>{selectedSessionOutput}</code>
               </pre>
-              {selectedSession?.stderr && selectedSession.stdout && <small>{selectedSession.stderr}</small>}
               <div className="session-input-row terminal-command-row">
                 <span className="terminal-prompt-symbol">$</span>
                 <input
@@ -601,6 +732,227 @@ export function RuntimeTerminalDrawer({
       </section>
     </>
   );
+}
+
+function NativePtyTerminalSurface({
+  ariaLabel,
+  placeholder,
+  runtimeAvailable,
+  session,
+  startLabel,
+  onResize,
+  onStart,
+  onWrite
+}: {
+  ariaLabel: string;
+  placeholder: string;
+  runtimeAvailable: boolean;
+  session: RuntimeNativePtySession | null;
+  startLabel: string;
+  onResize: (sessionId: string, size: { rows: number; cols: number }) => void | Promise<void>;
+  onStart: (size: { rows: number; cols: number }) => void | Promise<void>;
+  onWrite: (sessionId: string, input: string) => void | Promise<void>;
+}) {
+  const hostRef = useRef<HTMLDivElement | null>(null);
+  const terminalRef = useRef<import("@xterm/xterm").Terminal | null>(null);
+  const fitAddonRef = useRef<import("@xterm/addon-fit").FitAddon | null>(null);
+  const lastOutputRef = useRef("");
+  const resizeSignatureRef = useRef("");
+  const pendingInputRef = useRef("");
+  const flushTimerRef = useRef<number | null>(null);
+  const sessionRef = useRef<RuntimeNativePtySession | null>(session);
+  const runtimeAvailableRef = useRef(runtimeAvailable);
+  const onResizeRef = useRef(onResize);
+  const onWriteRef = useRef(onWrite);
+
+  useEffect(() => {
+    sessionRef.current = session;
+    runtimeAvailableRef.current = runtimeAvailable;
+    onResizeRef.current = onResize;
+    onWriteRef.current = onWrite;
+  }, [runtimeAvailable, session, onResize, onWrite]);
+
+  useEffect(() => {
+    let disposed = false;
+    let dataDisposable: { dispose: () => void } | null = null;
+    let resizeObserver: ResizeObserver | null = null;
+
+    const flushInput = () => {
+      if (flushTimerRef.current !== null && typeof window !== "undefined") {
+        window.clearTimeout(flushTimerRef.current);
+        flushTimerRef.current = null;
+      }
+      const input = pendingInputRef.current;
+      pendingInputRef.current = "";
+      const activeSession = sessionRef.current;
+      if (!input || !runtimeAvailableRef.current || !activeSession || !isWritableSessionStatus(activeSession.status)) {
+        return;
+      }
+      void onWriteRef.current(activeSession.sessionId, input);
+    };
+
+    const fitAndResize = () => {
+      const terminal = terminalRef.current;
+      const fitAddon = fitAddonRef.current;
+      if (!terminal || !fitAddon) {
+        return;
+      }
+      try {
+        fitAddon.fit();
+      } catch {
+        return;
+      }
+      const activeSession = sessionRef.current;
+      if (!activeSession || !runtimeAvailableRef.current || !isWritableSessionStatus(activeSession.status)) {
+        return;
+      }
+      const signature = `${activeSession.sessionId}:${terminal.rows}:${terminal.cols}`;
+      if (resizeSignatureRef.current === signature) {
+        return;
+      }
+      resizeSignatureRef.current = signature;
+      void onResizeRef.current(activeSession.sessionId, { rows: terminal.rows, cols: terminal.cols });
+    };
+
+    void (async () => {
+      const [{ Terminal }, { FitAddon }, { WebLinksAddon }] = await Promise.all([
+        import("@xterm/xterm"),
+        import("@xterm/addon-fit"),
+        import("@xterm/addon-web-links")
+      ]);
+      if (disposed || !hostRef.current) {
+        return;
+      }
+      const terminal = new Terminal({
+        allowProposedApi: false,
+        convertEol: false,
+        cursorBlink: true,
+        fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+        fontSize: 13,
+        letterSpacing: 0,
+        lineHeight: 1.15,
+        scrollback: 5000,
+        theme: {
+          background: "#0d1117",
+          foreground: "#d6deeb",
+          cursor: "#7cc9b7",
+          selectionBackground: "#264f78",
+          black: "#0d1117",
+          blue: "#58a6ff",
+          brightBlack: "#6e7681",
+          brightBlue: "#79c0ff",
+          brightCyan: "#56d4dd",
+          brightGreen: "#7ee787",
+          brightMagenta: "#d2a8ff",
+          brightRed: "#ff7b72",
+          brightWhite: "#ffffff",
+          brightYellow: "#f2cc60",
+          cyan: "#39c5cf",
+          green: "#3fb950",
+          magenta: "#bc8cff",
+          red: "#f85149",
+          white: "#d6deeb",
+          yellow: "#d29922"
+        }
+      });
+      const fitAddon = new FitAddon();
+      terminal.loadAddon(fitAddon);
+      terminal.loadAddon(new WebLinksAddon());
+      terminal.open(hostRef.current);
+      terminalRef.current = terminal;
+      fitAddonRef.current = fitAddon;
+      dataDisposable = terminal.onData((data) => {
+        pendingInputRef.current += data;
+        if (data.includes("\r") || data.includes("\u0003")) {
+          flushInput();
+          return;
+        }
+        if (flushTimerRef.current === null && typeof window !== "undefined") {
+          flushTimerRef.current = window.setTimeout(flushInput, 16);
+        }
+      });
+      if (typeof ResizeObserver !== "undefined") {
+        resizeObserver = new ResizeObserver(fitAndResize);
+        resizeObserver.observe(hostRef.current);
+      }
+      fitAndResize();
+      const activeSession = sessionRef.current;
+      if (activeSession?.output) {
+        terminal.write(activeSession.output);
+        lastOutputRef.current = activeSession.output;
+      }
+    })();
+
+    return () => {
+      disposed = true;
+      if (flushTimerRef.current !== null && typeof window !== "undefined") {
+        window.clearTimeout(flushTimerRef.current);
+        flushTimerRef.current = null;
+      }
+      dataDisposable?.dispose();
+      resizeObserver?.disconnect();
+      terminalRef.current?.dispose();
+      terminalRef.current = null;
+      fitAddonRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    const terminal = terminalRef.current;
+    if (!terminal) {
+      return;
+    }
+    if (!session) {
+      terminal.clear();
+      lastOutputRef.current = "";
+      return;
+    }
+    const output = session.output || "";
+    const previous = lastOutputRef.current;
+    if (!previous || !output.startsWith(previous)) {
+      terminal.clear();
+      if (output) {
+        terminal.write(output);
+      }
+    } else if (output.length > previous.length) {
+      terminal.write(output.slice(previous.length));
+    }
+    lastOutputRef.current = output;
+  }, [session?.output, session?.sessionId, session]);
+
+  const startFromSurface = () => {
+    const terminal = terminalRef.current;
+    void onStart({
+      rows: terminal?.rows || session?.rows || 28,
+      cols: terminal?.cols || session?.cols || 100
+    });
+  };
+
+  return (
+    <div className="native-pty-terminal-shell" aria-label={ariaLabel}>
+      <div ref={hostRef} className="native-pty-terminal-host" />
+      {!session && (
+        <div className="native-pty-placeholder">
+          <span>{placeholder}</span>
+          <button type="button" onClick={startFromSurface} disabled={!runtimeAvailable}>
+            <SquareTerminal size={15} aria-hidden="true" />
+            <strong>{startLabel}</strong>
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function formatSessionOutput(session: RuntimeTerminalSession, fallback: string) {
+  const chunks: string[] = [];
+  if (session.stdout) {
+    chunks.push(`[stdout]\n${session.stdout}`);
+  }
+  if (session.stderr) {
+    chunks.push(`[stderr]\n${session.stderr}`);
+  }
+  return chunks.length ? chunks.join("\n\n") : fallback;
 }
 
 function sessionStatusDetail(session: RuntimeTerminalSession) {

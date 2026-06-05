@@ -1,3 +1,4 @@
+use portable_pty::{native_pty_system, CommandBuilder, MasterPty, PtySize};
 use rayon::prelude::*;
 use rayon::{ThreadPool, ThreadPoolBuilder};
 use serde::{Deserialize, Serialize};
@@ -75,6 +76,11 @@ struct PipelineTaskPreset {
 #[derive(Default)]
 struct SessionStore {
     sessions: Mutex<HashMap<String, CliSession>>,
+}
+
+#[derive(Default)]
+struct PtySessionStore {
+    sessions: Mutex<HashMap<String, NativePtySession>>,
 }
 
 struct WorkspaceResourceStore {
@@ -180,6 +186,31 @@ struct CliSessionOutput {
     stderr: String,
     stdout_truncated: bool,
     stderr_truncated: bool,
+}
+
+struct NativePtySession {
+    label: String,
+    command: String,
+    child: Box<dyn portable_pty::Child + Send + Sync>,
+    master: Box<dyn MasterPty + Send>,
+    writer: Option<Box<dyn Write + Send>>,
+    output: Arc<Mutex<NativePtyOutput>>,
+    reader_handle: Option<thread::JoinHandle<()>>,
+    started: Instant,
+    working_dir: PathBuf,
+    status: String,
+    exit_code: Option<i32>,
+    finished: bool,
+    finished_at: Option<Instant>,
+    rows: u16,
+    cols: u16,
+    pid: Option<u32>,
+}
+
+#[derive(Clone, Default)]
+struct NativePtyOutput {
+    output: String,
+    output_truncated: bool,
 }
 
 #[derive(Serialize)]
@@ -305,6 +336,24 @@ struct CliTaskPipelineInitReport {
     max_output_bytes: usize,
     lanes: Vec<CliTaskPipelineLaneReport>,
     pipes: Vec<CliPipeEdgeReport>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct NativePtySessionReport {
+    session_id: String,
+    label: String,
+    command: String,
+    status: String,
+    exit_code: Option<i32>,
+    elapsed_ms: u128,
+    output: String,
+    output_truncated: bool,
+    working_dir: String,
+    rows: u16,
+    cols: u16,
+    pid: Option<u32>,
+    terminal_kind: String,
 }
 
 #[derive(Serialize)]
@@ -2126,6 +2175,154 @@ fn list_cli_adapter_sessions(
 }
 
 #[tauri::command]
+fn start_native_pty_terminal(
+    app: AppHandle,
+    store: State<'_, PtySessionStore>,
+    working_dir: Option<String>,
+    command: Option<String>,
+    rows: Option<u16>,
+    cols: Option<u16>,
+) -> Result<NativePtySessionReport, String> {
+    let working_dir = resolve_workspace_dir(&app, working_dir.as_deref())?;
+    let command = command
+        .map(|value| value.trim().to_string())
+        .filter(|value| !value.is_empty())
+        .unwrap_or_else(default_native_shell);
+    if command.len() > 512 {
+        return Err("PTY command is too long. Max length is 512 bytes.".to_string());
+    }
+
+    let (session_id, mut session, report) =
+        create_native_pty_session(&command, working_dir, rows, cols)?;
+    match store.sessions.lock() {
+        Ok(mut sessions) => {
+            cleanup_finished_pty_sessions_locked(&mut sessions);
+            sessions.insert(session_id, session);
+        }
+        Err(_) => {
+            let _ = session.child.kill();
+            let _ = session.child.wait();
+            return Err("Failed to lock native PTY session store.".to_string());
+        }
+    }
+    Ok(report)
+}
+
+#[tauri::command]
+fn poll_native_pty_terminal_session(
+    store: State<'_, PtySessionStore>,
+    session_id: String,
+) -> Result<NativePtySessionReport, String> {
+    let mut sessions = store
+        .sessions
+        .lock()
+        .map_err(|_| "Failed to lock native PTY session store.".to_string())?;
+    let report = {
+        let session = sessions
+            .get_mut(&session_id)
+            .ok_or_else(|| format!("Unknown native PTY session id: {session_id}"))?;
+        poll_native_pty_session_locked(&session_id, session)
+    };
+    cleanup_finished_pty_sessions_locked(&mut sessions);
+    Ok(report)
+}
+
+#[tauri::command]
+fn list_native_pty_terminal_sessions(
+    store: State<'_, PtySessionStore>,
+) -> Result<Vec<NativePtySessionReport>, String> {
+    let mut sessions = store
+        .sessions
+        .lock()
+        .map_err(|_| "Failed to lock native PTY session store.".to_string())?;
+    let reports: Vec<NativePtySessionReport> = sessions
+        .iter_mut()
+        .map(|(session_id, session)| poll_native_pty_session_locked(session_id, session))
+        .collect();
+    cleanup_finished_pty_sessions_locked(&mut sessions);
+    Ok(reports)
+}
+
+#[tauri::command]
+fn write_native_pty_terminal_input(
+    store: State<'_, PtySessionStore>,
+    session_id: String,
+    input: String,
+) -> Result<NativePtySessionReport, String> {
+    if input.len() > MAX_SESSION_INPUT_BYTES {
+        return Err(format!(
+            "Input is too large. Max input is {MAX_SESSION_INPUT_BYTES} bytes."
+        ));
+    }
+
+    let mut sessions = store
+        .sessions
+        .lock()
+        .map_err(|_| "Failed to lock native PTY session store.".to_string())?;
+    let session = sessions
+        .get_mut(&session_id)
+        .ok_or_else(|| format!("Unknown native PTY session id: {session_id}"))?;
+    if session.finished {
+        return Err("Cannot write input to a finished native PTY session.".to_string());
+    }
+    let writer = session
+        .writer
+        .as_mut()
+        .ok_or_else(|| "Native PTY writer is not available.".to_string())?;
+    writer
+        .write_all(input.as_bytes())
+        .and_then(|_| writer.flush())
+        .map_err(|error| format!("Failed to write native PTY input: {error}"))?;
+    Ok(poll_native_pty_session_locked(&session_id, session))
+}
+
+#[tauri::command]
+fn resize_native_pty_terminal(
+    store: State<'_, PtySessionStore>,
+    session_id: String,
+    rows: u16,
+    cols: u16,
+) -> Result<NativePtySessionReport, String> {
+    let mut sessions = store
+        .sessions
+        .lock()
+        .map_err(|_| "Failed to lock native PTY session store.".to_string())?;
+    let session = sessions
+        .get_mut(&session_id)
+        .ok_or_else(|| format!("Unknown native PTY session id: {session_id}"))?;
+    let size = normalized_pty_size(Some(rows), Some(cols));
+    session
+        .master
+        .resize(size)
+        .map_err(|error| format!("Failed to resize native PTY: {error}"))?;
+    session.rows = size.rows;
+    session.cols = size.cols;
+    Ok(poll_native_pty_session_locked(&session_id, session))
+}
+
+#[tauri::command]
+fn cancel_native_pty_terminal(
+    store: State<'_, PtySessionStore>,
+    session_id: String,
+) -> Result<NativePtySessionReport, String> {
+    let mut sessions = store
+        .sessions
+        .lock()
+        .map_err(|_| "Failed to lock native PTY session store.".to_string())?;
+    let session = sessions
+        .get_mut(&session_id)
+        .ok_or_else(|| format!("Unknown native PTY session id: {session_id}"))?;
+    let _ = session.child.kill();
+    let exit_code = session
+        .child
+        .wait()
+        .ok()
+        .map(|status| status.exit_code() as i32);
+    mark_pty_session_finished(session, "canceled", exit_code);
+    Ok(poll_native_pty_session_locked(&session_id, session))
+}
+
+#[tauri::command]
 fn write_cli_adapter_stdin(
     app: AppHandle,
     store: State<'_, SessionStore>,
@@ -3079,6 +3276,7 @@ fn answer_and_resume_human_decision(
 pub fn run() {
     tauri::Builder::default()
         .manage(SessionStore::default())
+        .manage(PtySessionStore::default())
         .manage(WorkspaceResourceStore::default())
         .plugin(tauri_plugin_dialog::init())
         .setup(|app| {
@@ -3125,6 +3323,12 @@ pub fn run() {
             start_cli_task_pipeline,
             poll_cli_adapter_session,
             list_cli_adapter_sessions,
+            start_native_pty_terminal,
+            poll_native_pty_terminal_session,
+            list_native_pty_terminal_sessions,
+            write_native_pty_terminal_input,
+            resize_native_pty_terminal,
+            cancel_native_pty_terminal,
             write_cli_adapter_stdin,
             send_cli_adapter_defer_message,
             defer_all_cli_adapter_questions,
@@ -3581,6 +3785,190 @@ fn cleanup_finished_sessions_locked(sessions: &mut HashMap<String, CliSession>) 
     }
 }
 
+fn create_native_pty_session(
+    command: &str,
+    working_dir: PathBuf,
+    rows: Option<u16>,
+    cols: Option<u16>,
+) -> Result<(String, NativePtySession, NativePtySessionReport), String> {
+    let size = normalized_pty_size(rows, cols);
+    let pty_system = native_pty_system();
+    let pair = pty_system
+        .openpty(size)
+        .map_err(|error| format!("Failed to open native PTY: {error}"))?;
+
+    let mut command_builder = CommandBuilder::new(command);
+    command_builder.cwd(working_dir.as_os_str());
+    command_builder.env("TERM", "xterm-256color");
+    command_builder.env("COLORTERM", "truecolor");
+
+    let mut child = pair
+        .slave
+        .spawn_command(command_builder)
+        .map_err(|error| format!("Failed to start native PTY command: {error}"))?;
+    let reader = match pair.master.try_clone_reader() {
+        Ok(reader) => reader,
+        Err(error) => {
+            let _ = child.kill();
+            let _ = child.wait();
+            return Err(format!("Failed to clone native PTY reader: {error}"));
+        }
+    };
+    let writer = match pair.master.take_writer() {
+        Ok(writer) => writer,
+        Err(error) => {
+            let _ = child.kill();
+            let _ = child.wait();
+            return Err(format!("Failed to open native PTY writer: {error}"));
+        }
+    };
+
+    let output = Arc::new(Mutex::new(NativePtyOutput::default()));
+    let reader_output = Arc::clone(&output);
+    let reader_handle = thread::spawn(move || {
+        read_native_pty_stream(reader, reader_output, MAX_SESSION_OUTPUT_BYTES);
+    });
+
+    let session_id = new_session_id("native-pty");
+    let label = native_shell_label(command);
+    let mut session = NativePtySession {
+        label,
+        command: command.to_string(),
+        child,
+        master: pair.master,
+        writer: Some(writer),
+        output,
+        reader_handle: Some(reader_handle),
+        started: Instant::now(),
+        working_dir,
+        status: "running".to_string(),
+        exit_code: None,
+        finished: false,
+        finished_at: None,
+        rows: size.rows,
+        cols: size.cols,
+        pid: None,
+    };
+    session.pid = session.child.process_id();
+    let report = poll_native_pty_session_locked(&session_id, &mut session);
+    Ok((session_id, session, report))
+}
+
+fn poll_native_pty_session_locked(
+    session_id: &str,
+    session: &mut NativePtySession,
+) -> NativePtySessionReport {
+    if !session.finished {
+        match session.child.try_wait() {
+            Ok(Some(status)) => {
+                let next_status = if status.success() { "exited" } else { "failed" };
+                mark_pty_session_finished(session, next_status, Some(status.exit_code() as i32));
+            }
+            Ok(None) => {}
+            Err(_) => {
+                let _ = session.child.kill();
+                let exit_code = session
+                    .child
+                    .wait()
+                    .ok()
+                    .map(|status| status.exit_code() as i32);
+                mark_pty_session_finished(session, "error", exit_code);
+            }
+        }
+    }
+    join_finished_reader(&mut session.reader_handle);
+    native_pty_session_report(session_id, session)
+}
+
+fn mark_pty_session_finished(
+    session: &mut NativePtySession,
+    status: impl Into<String>,
+    exit_code: Option<i32>,
+) {
+    session.exit_code = exit_code;
+    session.status = status.into();
+    session.finished = true;
+    if session.finished_at.is_none() {
+        session.finished_at = Some(Instant::now());
+    }
+    session.writer.take();
+}
+
+fn cleanup_finished_pty_sessions_locked(sessions: &mut HashMap<String, NativePtySession>) {
+    let now = Instant::now();
+    let retention = Duration::from_millis(FINISHED_SESSION_RETENTION_MS);
+    let mut finished_sessions: Vec<(String, Instant)> = sessions
+        .iter()
+        .filter_map(|(session_id, session)| {
+            if session.finished {
+                Some((
+                    session_id.clone(),
+                    session.finished_at.unwrap_or(session.started),
+                ))
+            } else {
+                None
+            }
+        })
+        .collect();
+
+    if finished_sessions.is_empty() {
+        return;
+    }
+
+    finished_sessions.sort_by_key(|(_, finished_at)| *finished_at);
+    let mut remove_ids = HashSet::new();
+    for (session_id, finished_at) in &finished_sessions {
+        let age = now.checked_duration_since(*finished_at).unwrap_or_default();
+        if age >= retention {
+            remove_ids.insert(session_id.clone());
+        }
+    }
+
+    let retained_finished = finished_sessions.len().saturating_sub(remove_ids.len());
+    if retained_finished > MAX_RETAINED_FINISHED_SESSIONS {
+        let overflow = retained_finished - MAX_RETAINED_FINISHED_SESSIONS;
+        let overflow_ids: Vec<String> = finished_sessions
+            .iter()
+            .filter(|(session_id, _)| !remove_ids.contains(session_id))
+            .take(overflow)
+            .map(|(session_id, _)| session_id.clone())
+            .collect();
+        remove_ids.extend(overflow_ids);
+    }
+
+    for session_id in remove_ids {
+        if let Some(mut session) = sessions.remove(&session_id) {
+            join_finished_reader(&mut session.reader_handle);
+        }
+    }
+}
+
+fn native_pty_session_report(
+    session_id: &str,
+    session: &NativePtySession,
+) -> NativePtySessionReport {
+    let output = session
+        .output
+        .lock()
+        .map(|value| value.clone())
+        .unwrap_or_default();
+    NativePtySessionReport {
+        session_id: session_id.to_string(),
+        label: session.label.clone(),
+        command: session.command.clone(),
+        status: session.status.clone(),
+        exit_code: session.exit_code,
+        elapsed_ms: session.started.elapsed().as_millis(),
+        output: output.output,
+        output_truncated: output.output_truncated,
+        working_dir: session.working_dir.to_string_lossy().to_string(),
+        rows: session.rows,
+        cols: session.cols,
+        pid: session.pid,
+        terminal_kind: "native_pty".to_string(),
+    }
+}
+
 fn session_report(session_id: &str, session: &CliSession) -> CliSessionReport {
     let output = session
         .output
@@ -3688,6 +4076,90 @@ fn append_session_output(
         target.push_str(&text[..end]);
         *truncated = true;
     }
+}
+
+fn read_native_pty_stream<R: Read>(
+    mut reader: R,
+    output: Arc<Mutex<NativePtyOutput>>,
+    max_output_bytes: usize,
+) {
+    let mut buffer = [0_u8; 4096];
+
+    loop {
+        match reader.read(&mut buffer) {
+            Ok(0) => break,
+            Ok(read_count) => {
+                let text = String::from_utf8_lossy(&buffer[..read_count]).to_string();
+                if let Ok(mut locked) = output.lock() {
+                    append_native_pty_output(&mut locked, &text, max_output_bytes);
+                }
+            }
+            Err(_) => break,
+        }
+    }
+}
+
+fn append_native_pty_output(output: &mut NativePtyOutput, text: &str, max_output_bytes: usize) {
+    let remaining = max_output_bytes.saturating_sub(output.output.len());
+    if remaining == 0 {
+        output.output_truncated = true;
+        return;
+    }
+    if text.len() <= remaining {
+        output.output.push_str(text);
+    } else {
+        let mut end = remaining;
+        while end > 0 && !text.is_char_boundary(end) {
+            end -= 1;
+        }
+        output.output.push_str(&text[..end]);
+        output.output_truncated = true;
+    }
+}
+
+fn normalized_pty_size(rows: Option<u16>, cols: Option<u16>) -> PtySize {
+    PtySize {
+        rows: rows.unwrap_or(28).clamp(8, 80),
+        cols: cols.unwrap_or(100).clamp(24, 240),
+        pixel_width: 0,
+        pixel_height: 0,
+    }
+}
+
+fn default_native_shell() -> String {
+    #[cfg(windows)]
+    {
+        env::var("ComSpec")
+            .map(|value| value.trim().to_string())
+            .ok()
+            .filter(|value| !value.is_empty())
+            .unwrap_or_else(|| "cmd.exe".to_string())
+    }
+    #[cfg(not(windows))]
+    {
+        env::var("SHELL")
+            .map(|value| value.trim().to_string())
+            .ok()
+            .filter(|value| !value.is_empty())
+            .unwrap_or_else(|| {
+                if Path::new("/bin/zsh").exists() {
+                    "/bin/zsh".to_string()
+                } else if Path::new("/bin/bash").exists() {
+                    "/bin/bash".to_string()
+                } else {
+                    "sh".to_string()
+                }
+            })
+    }
+}
+
+fn native_shell_label(command: &str) -> String {
+    Path::new(command)
+        .file_name()
+        .and_then(|value| value.to_str())
+        .filter(|value| !value.trim().is_empty())
+        .unwrap_or(command)
+        .to_string()
 }
 
 fn persist_session_task_run(

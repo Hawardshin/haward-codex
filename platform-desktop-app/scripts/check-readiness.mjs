@@ -416,8 +416,8 @@ if (clipboardGap?.status !== "implemented_test_coverage") {
   failures.push("product-gap-registry must mark clipboard_browser_qa as implemented test coverage");
 }
 const ptyGap = productGapRegistry.gap_items?.find((item) => item.gap_id === "interactive_pty_terminal_surface");
-if (ptyGap?.status !== "closed_by_product_decision") {
-  failures.push("product-gap-registry must close interactive_pty_terminal_surface by product decision");
+if (ptyGap?.status !== "implemented_product_slice") {
+  failures.push("product-gap-registry must mark interactive_pty_terminal_surface as implemented");
 }
 const agentFeatureCoverage = productGapRegistry.request_coverage?.find((item) => item.request_id === "UR-2026-06-03-035");
 if (agentFeatureCoverage?.coverage !== "covered") {
@@ -653,7 +653,7 @@ for (const requiredPhrase of ["Native Git Workbench", "get_desktop_git_status", 
     failures.push(`native Git workbench docs must include ${requiredPhrase}`);
   }
 }
-for (const requiredPhrase of ["pipe-first CLI supervisor", "optional extension", "xterm.js", "Rust PTY crate"]) {
+for (const requiredPhrase of ["pipe-first CLI supervisor", "xterm.js", "Rust PTY crate", "start_native_pty_terminal"]) {
   if (!ptyDecisionKo.includes(requiredPhrase) || !ptyDecisionEn.includes(requiredPhrase)) {
     failures.push(`PTY decision docs must include ${requiredPhrase}`);
   }
@@ -673,6 +673,12 @@ for (const requiredPhrase of [
   "get_service_readiness_report",
   "start_cli_adapter_session",
   "start_cli_task_pipeline",
+  "start_native_pty_terminal",
+  "poll_native_pty_terminal_session",
+  "list_native_pty_terminal_sessions",
+  "write_native_pty_terminal_input",
+  "resize_native_pty_terminal",
+  "cancel_native_pty_terminal",
   "write_cli_adapter_stdin",
   "send_cli_adapter_defer_message",
   "defer_all_cli_adapter_questions",

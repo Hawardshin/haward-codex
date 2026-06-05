@@ -62,7 +62,11 @@ import {
   type DesktopGitWorkbenchAction
 } from "@/components/workbench/NativeGitWorkbench";
 import { PathDisclosure } from "@/components/workbench/PathDisclosure";
-import { RuntimeTerminalDrawer, type RuntimeTextChoice } from "@/components/workbench/RuntimeTerminalDrawer";
+import {
+  RuntimeTerminalDrawer,
+  type RuntimeNativePtySession,
+  type RuntimeTextChoice
+} from "@/components/workbench/RuntimeTerminalDrawer";
 import { ToolStudioPanel, type ToolStudioMode, type ToolStudioModeRequest } from "@/components/workbench/ToolStudioPanel";
 import { WorkspaceExplorerPane } from "@/components/workbench/WorkspaceExplorerPane";
 import { writeClipboardText } from "@/lib/clipboard.mjs";
@@ -1972,6 +1976,7 @@ type SessionModePreset = {
 };
 
 const SESSION_POLL_INTERVAL_MS = 2000;
+const NATIVE_PTY_POLL_INTERVAL_MS = 500;
 const SESSION_POLL_IDLE_UPDATE_BUCKET_MS = 5000;
 const INBOX_REFRESH_THROTTLE_MS = 4000;
 const SESSION_OUTPUT_SIGNATURE_CHARS = 2048;
@@ -8580,6 +8585,8 @@ function DesktopRuntimePanel({
   const [adapters, setAdapters] = useState<CliAdapterStatus[]>(fallbackDesktopAdapters);
   const [reports, setReports] = useState<CliRunReport[]>([]);
   const [sessions, setSessions] = useState<CliSessionReport[]>([]);
+  const [nativePtySessions, setNativePtySessions] = useState<RuntimeNativePtySession[]>([]);
+  const [selectedNativePtySessionId, setSelectedNativePtySessionId] = useState("");
   const [taskPipePresets, setTaskPipePresets] = useState<CliTaskPipelinePresetReport[]>(fallbackTaskPipePresets);
   const [selectedTaskPipeKind, setSelectedTaskPipeKind] = useState(initDefaults.taskPipeKind);
   const [taskPipePrompt, setTaskPipePrompt] = useState(
@@ -8662,6 +8669,7 @@ function DesktopRuntimePanel({
   const sourceDraftSyncTimerRef = useRef<number | null>(null);
   const panelMountedRef = useRef(false);
   const activeSessionPollInFlightRef = useRef(false);
+  const activeNativePtyPollInFlightRef = useRef(false);
   const workspaceWarmupPollRef = useRef<number | null>(null);
   const consumedLaunchRequestIdsRef = useRef<Set<string>>(new Set());
   const lastInboxRefreshAtRef = useRef(0);
@@ -8743,6 +8751,10 @@ function DesktopRuntimePanel({
     [sessions]
   );
   const selectedSession = sessions.find((session) => session.sessionId === selectedSessionId) || sessions[0] || null;
+  const selectedNativePtySession =
+    nativePtySessions.find((session) => session.sessionId === selectedNativePtySessionId) ||
+    nativePtySessions[0] ||
+    null;
   const selectedDecision = (inboxReport?.decisions || []).find((decision) => decision.id === selectedDecisionId) || openInboxDecisions[0] || null;
   const selectedDecisionSession = selectedDecision?.sessionId
     ? sessions.find((session) => session.sessionId === selectedDecision.sessionId) || null
@@ -8976,6 +8988,15 @@ function DesktopRuntimePanel({
         .sort()
         .join("|"),
     [sessions]
+  );
+  const activeNativePtyPollKey = useMemo(
+    () =>
+      nativePtySessions
+        .filter((session) => isActiveSessionStatus(session.status))
+        .map((session) => `${session.sessionId}:${session.status}`)
+        .sort()
+        .join("|"),
+    [nativePtySessions]
   );
   const outputEvents = useMemo(() => {
     const sessionEvents = sessions.flatMap((session) =>
@@ -9528,6 +9549,7 @@ function DesktopRuntimePanel({
         nextHealth,
         nextAdapters,
         nextSessions,
+        nextNativePtySessions,
         nextInbox,
         nextTaskPipePresets,
         nextTaskRunRecords,
@@ -9539,6 +9561,7 @@ function DesktopRuntimePanel({
         tauriInvoke<DesktopHealthStatus>("app_health"),
         tauriInvoke<CliAdapterStatus[]>("list_cli_adapters"),
         tauriInvoke<CliSessionReport[]>("list_cli_adapter_sessions"),
+        tauriInvoke<RuntimeNativePtySession[]>("list_native_pty_terminal_sessions"),
         tauriInvoke<HumanDecisionInboxReport>("list_human_decision_inbox"),
         tauriInvoke<CliTaskPipelinePresetReport[]>("list_cli_task_pipeline_presets"),
         tauriInvoke<CliTaskRunRecordReport[]>("list_cli_task_run_records"),
@@ -9554,6 +9577,7 @@ function DesktopRuntimePanel({
       setHealth(nextHealth);
       setAdapters(nextAdapters);
       setSessions((current) => mergeSessionReports(current, nextSessions, { replaceAll: true }));
+      setNativePtySessions((current) => mergeNativePtyReports(current, nextNativePtySessions, { replaceAll: true }));
       setInboxReport(nextInbox);
       setTaskPipePresets(nextTaskPipePresets.length ? nextTaskPipePresets : fallbackTaskPipePresets);
       replaceTaskRunRecords(nextTaskRunRecords);
@@ -9587,6 +9611,7 @@ function DesktopRuntimePanel({
       setHealth(null);
       setAdapters(fallbackDesktopAdapters);
       setSessions((current) => (current.length ? [] : current));
+      setNativePtySessions((current) => (current.length ? [] : current));
       setTaskPipePresets(fallbackTaskPipePresets);
       replaceTaskRunRecords([]);
       setRuntimeDataBoundary(null);
@@ -9662,6 +9687,11 @@ function DesktopRuntimePanel({
   const upsertSession = (report: CliSessionReport) => {
     setSessions((current) => mergeSessionReports(current, [report], { promote: true }));
     setSelectedSessionId(report.sessionId);
+  };
+
+  const upsertNativePtySession = (report: RuntimeNativePtySession) => {
+    setNativePtySessions((current) => mergeNativePtyReports(current, [report], { promote: true }));
+    setSelectedNativePtySessionId(report.sessionId);
   };
 
   const refreshDecisionInbox = async () => {
@@ -10106,6 +10136,94 @@ function DesktopRuntimePanel({
       const report = await tauriInvoke<CliSessionReport>("cancel_cli_adapter_session", { sessionId });
       upsertSession(report);
       await refreshTaskRunRecords();
+    } catch (caught) {
+      setError(errorMessage(caught));
+    }
+  };
+
+  const startNativePtySession = async (size: { rows: number; cols: number }) => {
+    setTerminalDrawerOpen(true);
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setRuntimeState("unavailable");
+      setError("Tauri desktop runtime is not available in this browser view.");
+      return;
+    }
+
+    setError("");
+    try {
+      const args: Record<string, unknown> = {
+        rows: Math.max(8, Math.min(80, Math.round(size.rows || 28))),
+        cols: Math.max(24, Math.min(240, Math.round(size.cols || 100)))
+      };
+      if (workingDir.trim()) {
+        args.workingDir = workingDir.trim();
+      }
+      const report = await tauriInvoke<RuntimeNativePtySession>("start_native_pty_terminal", args);
+      upsertNativePtySession(report);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    }
+  };
+
+  const pollNativePtySession = async (sessionId: string) => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      return;
+    }
+
+    try {
+      const report = await tauriInvoke<RuntimeNativePtySession>("poll_native_pty_terminal_session", { sessionId });
+      upsertNativePtySession(report);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    }
+  };
+
+  const writeNativePtyInput = async (sessionId: string, input: string) => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke || !input) {
+      return;
+    }
+
+    try {
+      const report = await tauriInvoke<RuntimeNativePtySession>("write_native_pty_terminal_input", {
+        sessionId,
+        input
+      });
+      upsertNativePtySession(report);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    }
+  };
+
+  const resizeNativePtySession = async (sessionId: string, size: { rows: number; cols: number }) => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      return;
+    }
+
+    try {
+      const report = await tauriInvoke<RuntimeNativePtySession>("resize_native_pty_terminal", {
+        sessionId,
+        rows: Math.max(8, Math.min(80, Math.round(size.rows || 28))),
+        cols: Math.max(24, Math.min(240, Math.round(size.cols || 100)))
+      });
+      upsertNativePtySession(report);
+    } catch (caught) {
+      setError(errorMessage(caught));
+    }
+  };
+
+  const cancelNativePtySession = async (sessionId: string) => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      return;
+    }
+
+    try {
+      const report = await tauriInvoke<RuntimeNativePtySession>("cancel_native_pty_terminal", { sessionId });
+      upsertNativePtySession(report);
     } catch (caught) {
       setError(errorMessage(caught));
     }
@@ -10657,6 +10775,53 @@ function DesktopRuntimePanel({
       window.clearInterval(interval);
     };
   }, [activeSessionPollKey, runtimeState, surfaceActive]);
+
+  useEffect(() => {
+    const tauriInvoke = getTauriInvoke();
+    const activeSessionIds = activeNativePtyPollKey
+      .split("|")
+      .filter(Boolean)
+      .map((entry) => entry.split(":")[0])
+      .filter(Boolean);
+    if (!surfaceActive || !tauriInvoke || runtimeState !== "available" || activeSessionIds.length === 0) {
+      return undefined;
+    }
+
+    let disposed = false;
+    const pollActiveNativePtySessions = async () => {
+      if (activeNativePtyPollInFlightRef.current) {
+        return;
+      }
+      activeNativePtyPollInFlightRef.current = true;
+      try {
+        const reports = await Promise.all(
+          activeSessionIds.map((sessionId) =>
+            tauriInvoke<RuntimeNativePtySession>("poll_native_pty_terminal_session", { sessionId }).catch(() => null)
+          )
+        );
+        const nextReports = reports.filter((report): report is RuntimeNativePtySession => Boolean(report));
+        if (disposed || nextReports.length === 0) {
+          return;
+        }
+        setNativePtySessions((current) => mergeNativePtyReports(current, nextReports));
+      } catch (caught) {
+        if (!disposed) {
+          setError(errorMessage(caught));
+        }
+      } finally {
+        activeNativePtyPollInFlightRef.current = false;
+      }
+    };
+
+    void pollActiveNativePtySessions();
+    const interval = window.setInterval(() => {
+      void pollActiveNativePtySessions();
+    }, NATIVE_PTY_POLL_INTERVAL_MS);
+    return () => {
+      disposed = true;
+      window.clearInterval(interval);
+    };
+  }, [activeNativePtyPollKey, runtimeState, surfaceActive]);
 
   useEffect(() => {
     if (!selectedSourcePath && sourceFiles[0]) {
@@ -12735,17 +12900,25 @@ function DesktopRuntimePanel({
         uiLanguage={uiLanguage}
         workingDir={workingDir}
         workingDirOptions={workingDirOptions}
+        nativePtySession={selectedNativePtySession}
+        nativePtySessions={nativePtySessions}
         onCancelSession={cancelSession}
+        onCancelNativePtySession={cancelNativePtySession}
         onCollapse={() => setTerminalDrawerOpen(false)}
         onDeferSession={deferSession}
         onOpen={() => setTerminalDrawerOpen(true)}
         onOpenSettings={onOpenSettings}
+        onPollNativePtySession={pollNativePtySession}
         onPollSession={pollSession}
+        onResizeNativePtySession={resizeNativePtySession}
+        onSelectNativePtySession={setSelectedNativePtySessionId}
         onSelectSession={setSelectedSessionId}
         onSessionInputChange={setSessionInput}
         onSessionPromptChange={setSessionPrompt}
+        onStartNativePtySession={startNativePtySession}
         onStartSession={startSession}
         onWorkingDirChange={setWorkingDir}
+        onWriteNativePtyInput={writeNativePtyInput}
         onWriteSessionInput={writeSessionInput}
       />
 
@@ -13062,6 +13235,63 @@ function mergeSessionReports(
   return [...updated, ...newReports];
 }
 
+function mergeNativePtyReports(
+  current: RuntimeNativePtySession[],
+  reports: RuntimeNativePtySession[],
+  options: { promote?: boolean; replaceAll?: boolean } = {}
+) {
+  if (reports.length === 0) {
+    return current;
+  }
+
+  const currentById = new Map(current.map((session) => [session.sessionId, session]));
+  const reportsById = new Map(reports.map((report) => [report.sessionId, report]));
+  const reportIds = new Set(reports.map((report) => report.sessionId));
+
+  if (options.replaceAll) {
+    let changed = current.length !== reports.length;
+    const next = reports.map((report) => {
+      const existing = currentById.get(report.sessionId);
+      if (existing && areNativePtyReportsRenderEqual(existing, report)) {
+        return existing;
+      }
+      changed = true;
+      return report;
+    });
+    return changed ? next : current;
+  }
+
+  let changed = false;
+  const updated = current.map((session) => {
+    const report = reportsById.get(session.sessionId);
+    if (!report) {
+      return session;
+    }
+    if (areNativePtyReportsRenderEqual(session, report)) {
+      return session;
+    }
+    changed = true;
+    return report;
+  });
+  const newReports = reports.filter((report) => !currentById.has(report.sessionId));
+  if (newReports.length > 0) {
+    changed = true;
+  }
+  if (!changed) {
+    return current;
+  }
+
+  if (options.promote) {
+    const promoted = reports.map((report) => {
+      const existing = currentById.get(report.sessionId);
+      return existing && areNativePtyReportsRenderEqual(existing, report) ? existing : report;
+    });
+    return [...promoted, ...updated.filter((session) => !reportIds.has(session.sessionId))];
+  }
+
+  return [...updated, ...newReports];
+}
+
 function linesFromText(value: string) {
   return value
     .split(/\r?\n/)
@@ -13321,6 +13551,27 @@ function sessionReportRenderSignature(session: CliSessionReport) {
     session.stdoutLogPath || "",
     session.stderrLogPath || "",
     session.persistenceError || ""
+  ].join("\u001f");
+}
+
+function areNativePtyReportsRenderEqual(left: RuntimeNativePtySession, right: RuntimeNativePtySession) {
+  return nativePtyReportRenderSignature(left) === nativePtyReportRenderSignature(right);
+}
+
+function nativePtyReportRenderSignature(session: RuntimeNativePtySession) {
+  return [
+    session.sessionId,
+    session.status,
+    session.exitCode ?? "",
+    Math.floor(session.elapsedMs / SESSION_POLL_IDLE_UPDATE_BUCKET_MS),
+    session.output.length,
+    session.output.slice(-SESSION_OUTPUT_SIGNATURE_CHARS),
+    session.outputTruncated ? "1" : "0",
+    session.workingDir,
+    session.rows,
+    session.cols,
+    session.pid ?? "",
+    session.terminalKind
   ].join("\u001f");
 }
 
