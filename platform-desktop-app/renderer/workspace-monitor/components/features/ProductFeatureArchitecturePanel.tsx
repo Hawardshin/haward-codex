@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 
 import type {
+  WorkspaceFundamentalImprovementStructure,
   WorkspaceHistoryInsightLoop,
   WorkspaceProductFeatureArchitecture,
   WorkspaceReferencePlatformAdvantages
@@ -37,6 +38,7 @@ export type ProductFeatureArchitecturePanelProps = {
   architecture: WorkspaceProductFeatureArchitecture;
   referenceAdvantages?: WorkspaceReferencePlatformAdvantages;
   historyInsights?: WorkspaceHistoryInsightLoop;
+  fundamentalImprovement?: WorkspaceFundamentalImprovementStructure;
   onOpenSection: (section: ProductSectionId) => void;
   onOpenOperatorCenter?: () => void;
 };
@@ -69,6 +71,7 @@ export function ProductFeatureArchitecturePanel({
   architecture,
   referenceAdvantages,
   historyInsights,
+  fundamentalImprovement,
   onOpenSection,
   onOpenOperatorCenter
 }: ProductFeatureArchitecturePanelProps) {
@@ -81,6 +84,10 @@ export function ProductFeatureArchitecturePanel({
   const visibleHistoryInsights = (historyInsights?.signalGroups ?? [])
     .filter((insight) => insight.priority === "p0" || insight.priority === "p1")
     .slice(0, 4);
+  const visibleFundamentalPrinciples = (fundamentalImprovement?.structuralPrinciples ?? [])
+    .filter((principle) => principle.priority === "p0" || principle.priority === "p1")
+    .slice(0, 4);
+  const visibleImprovementPackages = (fundamentalImprovement?.improvementPackages ?? []).slice(0, 3);
 
   return (
     <section className="product-feature-panel" aria-label="Product feature architecture">
@@ -200,6 +207,87 @@ export function ProductFeatureArchitecturePanel({
               );
             })}
           </div>
+        </div>
+      )}
+
+      {fundamentalImprovement && visibleFundamentalPrinciples.length > 0 && (
+        <div className="fundamental-improvement-board" aria-label="Fundamental improvement structure">
+          <header>
+            <div>
+              <p className="eyebrow">근본 개선 구조</p>
+              <h3>히스토리 신호를 구조 원칙, 실행 패키지, fitness check로 전환</h3>
+              <p>
+                {fundamentalImprovement.summary.sourcePatterns.toLocaleString("ko-KR")}개 반복 패턴에서{" "}
+                {fundamentalImprovement.summary.totalStructuralPrinciples.toLocaleString("ko-KR")}개 구조 원칙과{" "}
+                {fundamentalImprovement.summary.totalImprovementPackages.toLocaleString("ko-KR")}개 개선 패키지를 생성합니다.
+              </p>
+            </div>
+            <div className="fundamental-improvement-summary">
+              <span>
+                <BrainCircuit size={14} aria-hidden="true" />
+                {fundamentalImprovement.summary.highPriorityPrinciples} p0
+              </span>
+              <span>
+                <Layers3 size={14} aria-hidden="true" />
+                {fundamentalImprovement.summary.totalImprovementPackages} packages
+              </span>
+              <span>
+                <CheckCircle2 size={14} aria-hidden="true" />
+                {fundamentalImprovement.summary.totalFitnessChecks} checks
+              </span>
+            </div>
+          </header>
+          <div className="fundamental-improvement-stage-row" aria-label="Fundamental improvement operating model">
+            {fundamentalImprovement.operatingModel.slice(0, 6).map((stage) => (
+              <span key={stage.id}>
+                <GitBranch size={13} aria-hidden="true" />
+                {stage.label}
+              </span>
+            ))}
+          </div>
+          <div className="fundamental-improvement-grid">
+            {visibleFundamentalPrinciples.map((principle) => {
+              const section = sectionIds.has(principle.targetSection as ProductSectionId)
+                ? (principle.targetSection as ProductSectionId)
+                : "overview";
+              return (
+                <button
+                  key={principle.id}
+                  type="button"
+                  className="fundamental-improvement-card"
+                  onClick={() => onOpenSection(section)}
+                >
+                  <span className="fundamental-improvement-card-top">
+                    <BrainCircuit size={15} aria-hidden="true" />
+                    <small>{principle.readiness}</small>
+                  </span>
+                  <strong>{principle.label}</strong>
+                  <p>{principle.structuralPrinciple}</p>
+                  <span className="fundamental-improvement-root">{principle.rootCause}</span>
+                  <span className="fundamental-improvement-card-foot">
+                    {principle.signalCount} signals · {principle.ownerFeatureId.replaceAll("_", " ")}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+          {visibleImprovementPackages.length > 0 && (
+            <div className="fundamental-improvement-package-row" aria-label="Improvement packages">
+              {visibleImprovementPackages.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() =>
+                    onOpenSection(sectionIds.has(item.targetSection as ProductSectionId) ? (item.targetSection as ProductSectionId) : "overview")
+                  }
+                >
+                  <span>{item.status.replaceAll("_", " ")}</span>
+                  <strong>{item.title}</strong>
+                  <p>{item.nowAction}</p>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

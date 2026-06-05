@@ -1210,6 +1210,7 @@ type StructureOverview = NonNullable<WorkspaceSnapshot["structureOverview"]>;
 type ProductFeatureArchitecture = NonNullable<WorkspaceSnapshot["productFeatureArchitecture"]>;
 type ReferencePlatformAdvantages = NonNullable<WorkspaceSnapshot["referencePlatformAdvantages"]>;
 type HistoryInsightLoop = NonNullable<WorkspaceSnapshot["historyInsightLoop"]>;
+type FundamentalImprovementStructure = NonNullable<WorkspaceSnapshot["fundamentalImprovementStructure"]>;
 
 const fallbackViewModes: MonitorViewMode[] = [
   {
@@ -1694,6 +1695,24 @@ const emptyHistoryInsightLoop: HistoryInsightLoop = {
   },
   inferenceStages: [],
   signalGroups: []
+};
+
+const emptyFundamentalImprovementStructure: FundamentalImprovementStructure = {
+  sourcePath: "",
+  summary: {
+    sourceDocuments: 0,
+    sourcePatterns: 0,
+    totalStructuralPrinciples: 0,
+    highPriorityPrinciples: 0,
+    totalImprovementPackages: 0,
+    totalFitnessChecks: 0,
+    totalEvidenceLinks: 0,
+    latestInsightAt: ""
+  },
+  operatingModel: [],
+  structuralPrinciples: [],
+  improvementPackages: [],
+  fitnessChecks: []
 };
 
 const sectionIds = new Set<SectionId>(sections.map((section) => section.id));
@@ -2976,6 +2995,8 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const productFeatureArchitecture = snapshot.productFeatureArchitecture ?? emptyProductFeatureArchitecture;
   const referencePlatformAdvantages = snapshot.referencePlatformAdvantages ?? emptyReferencePlatformAdvantages;
   const historyInsightLoop = snapshot.historyInsightLoop ?? emptyHistoryInsightLoop;
+  const fundamentalImprovementStructure =
+    snapshot.fundamentalImprovementStructure ?? emptyFundamentalImprovementStructure;
   const [selectedModeFunctionGroupId, setSelectedModeFunctionGroupId] = useState(
     modeFunctionCatalog.groups[0]?.id || "view_mode"
   );
@@ -6576,6 +6597,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                         architecture={productFeatureArchitecture}
                         referenceAdvantages={referencePlatformAdvantages}
                         historyInsights={historyInsightLoop}
+                        fundamentalImprovement={fundamentalImprovementStructure}
                         onOpenSection={openSection}
                         onOpenOperatorCenter={() => setOperatorCenterOpen(true)}
                       />

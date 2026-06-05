@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T21:22:55.286Z",
+  "generatedAt": "2026-06-05T21:35:59.474Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -35,6 +35,9 @@
     "referenceTransferPatterns": 19,
     "historyInsightPatterns": 0,
     "historyInsightRecommendations": 0,
+    "fundamentalImprovementPrinciples": 0,
+    "fundamentalImprovementPackages": 0,
+    "fundamentalImprovementFitnessChecks": 0,
     "structurePressurePoints": 0,
     "sourceFiles": 0,
     "rootFolders": 0
@@ -378,7 +381,10 @@
           "timing bottlenecks",
           "omission check results",
           "history insight repeated patterns",
-          "history insight evidence links"
+          "history insight evidence links",
+          "fundamental improvement structural principles",
+          "fundamental improvement packages",
+          "fundamental improvement fitness checks"
         ],
         "validationGates": []
       },
@@ -1150,10 +1156,27 @@
       "queuedPatterns": 0,
       "activeRecommendations": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-05T21:20:01.753Z"
+      "latestInsightAt": "2026-06-05T21:30:46.504Z"
     },
     "inferenceStages": [],
     "signalGroups": []
+  },
+  "fundamentalImprovementStructure": {
+    "sourcePath": "",
+    "summary": {
+      "sourceDocuments": 0,
+      "sourcePatterns": 0,
+      "totalStructuralPrinciples": 0,
+      "highPriorityPrinciples": 0,
+      "totalImprovementPackages": 0,
+      "totalFitnessChecks": 0,
+      "totalEvidenceLinks": 0,
+      "latestInsightAt": "2026-06-05T21:30:46.504Z"
+    },
+    "operatingModel": [],
+    "structuralPrinciples": [],
+    "improvementPackages": [],
+    "fitnessChecks": []
   },
   "categories": [],
   "publicReview": {

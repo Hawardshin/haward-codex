@@ -1,0 +1,124 @@
+{
+  "schema_version": "2026-06-06",
+  "task": "Apply a fundamental improvement structure inferred from diverse history to the desktop platform.",
+  "technology_stack": ["Next.js 16", "React 19", "TypeScript 6", "Node.js ESM collector", "Tauri v2/Rust shell"],
+  "technology_official_docs": [
+    "https://nextjs.org/docs",
+    "https://react.dev/reference/react",
+    "https://www.typescriptlang.org/docs/",
+    "https://tauri.app/"
+  ],
+  "stack_version_constraints": {
+    "workspace_monitor": "Use existing package versions from platform-desktop-app/renderer/workspace-monitor/package.json.",
+    "desktop_shell": "Keep selected Tauri v2/Rust shell unchanged."
+  },
+  "source_types": ["official_docs", "architecture_method", "research_method", "community_signal", "local_code_reference"],
+  "reference_config_paths": [
+    "agent-platform/configs/research/research-agent-profile.json",
+    "agent-platform/configs/planning/large-scope-decomposition-profile.json",
+    "platform-desktop-app/configs/product-feature-registry.json"
+  ],
+  "external_sources": [
+    {
+      "url": "https://sre.google/sre-book/postmortem-culture/",
+      "type": "official_docs",
+      "used_for": "History and incidents should produce follow-up actions and shared system learning."
+    },
+    {
+      "url": "https://www.cncf.io/blog/2023/11/20/announcing-the-platform-engineering-maturity-model/",
+      "type": "official_docs",
+      "used_for": "Platform maturity includes product thinking and feedback loops."
+    },
+    {
+      "url": "https://www.continuous-architecture.org/practices/fitness-functions/",
+      "type": "architecture_method",
+      "used_for": "Architecture quality should be preserved by continual fitness checks."
+    },
+    {
+      "url": "https://www.aim42.org/",
+      "type": "architecture_method",
+      "used_for": "Architecture improvement can be framed as analyze, evaluate, improve."
+    },
+    {
+      "url": "https://opentelemetry.io/docs/what-is-opentelemetry/",
+      "type": "official_docs",
+      "used_for": "Observability signals are standardized inputs, not the product itself."
+    }
+  ],
+  "issue_discussion_sources": [
+    {
+      "url": "https://www.reddit.com/r/softwarearchitecture/comments/1qhrbrw/how_do_you_evolve_architecture/",
+      "signal": "Practitioner discussion around balancing architecture evolution and short-term wins.",
+      "evidence_role": "community_signal_only"
+    }
+  ],
+  "issue_discussion_notes": "Community signals supported the need for bounded, incremental architecture evolution but were not treated as factual proof.",
+  "community_signal_notes": "Commercial and community search results repeatedly frame historical incidents or postmortems as reusable memory; this reinforced the implementation direction but did not determine code decisions.",
+  "language_options": [
+    {
+      "language": "Node.js ESM",
+      "fit": "Best fit for existing snapshot collector, tests, and generated JSON pipeline."
+    },
+    {
+      "language": "Rust/Tauri",
+      "fit": "Best for native runtime and process work, but unnecessary for deterministic history-to-structure snapshot calculation."
+    }
+  ],
+  "selected_language": "Node.js ESM plus TypeScript types",
+  "language_decision_notes": "The feature is a deterministic snapshot derivation over existing document metadata. Keeping it in the collector avoids runtime IPC, process lifecycle, and native resource risk while still surfacing the structure inside the Tauri desktop product.",
+  "architecture_reference_sources": [
+    "platform-desktop-app/renderer/workspace-monitor/scripts/lib/history-insight-loop.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"
+  ],
+  "architecture_options": [
+    {
+      "option": "Extend historyInsightLoop directly",
+      "pros": ["Smallest code change", "No new snapshot top-level key"],
+      "cons": ["Mixes repeated signal detection with structural improvement model", "Harder to test sanitization separately"]
+    },
+    {
+      "option": "Add fundamentalImprovementStructure as a derived top-level snapshot model",
+      "pros": ["Clear semantic boundary", "Separate customer sanitization", "Can expose fitness checks and improvement packages"],
+      "cons": ["Adds schema and UI surface"]
+    }
+  ],
+  "architecture_decision_notes": "Choose a new derived top-level model because the user asked for fundamental structure, not another set of pattern cards.",
+  "architecture_theory_sources": [
+    "Continuous Architecture fitness functions",
+    "aim42 analyze/evaluate/improve loop",
+    "Google SRE postmortem learning loop"
+  ],
+  "architecture_practitioner_sources": [
+    "CNCF platform engineering maturity model",
+    "Local Workspace Monitor collector and UI code"
+  ],
+  "architecture_tradeoff_notes": "Theory favors explicit improvement loops and fitness checks; local code favors snapshot-time deterministic derivation. The implementation combines both.",
+  "code_reference_sources": [
+    "platform-desktop-app/renderer/workspace-monitor/scripts/lib/history-insight-loop.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs"
+  ],
+  "code_reference_notes": "Reuse the collector pattern: static rules, deterministic scoring, snapshot stats, customer sanitizer, readiness token checks.",
+  "folder_structure_options": [
+    {
+      "option": "Put new logic inside history-insight-loop.mjs",
+      "decision": "Rejected because it would blur repeated-pattern detection and structural-improvement derivation."
+    },
+    {
+      "option": "Create scripts/lib/fundamental-improvement-structure.mjs",
+      "decision": "Selected because it keeps an inspectable ownership boundary under the existing workspace-monitor collector lib folder."
+    }
+  ],
+  "folder_structure_decision_notes": "The new file belongs to the Workspace Monitor collector, not agent-platform, because it generates desktop snapshot data and UI state.",
+  "folder_semantics_notes": "scripts/lib contains deterministic snapshot derivation modules.",
+  "maintainability_notes": "Keep the model rule-based and evidence-bounded; future ML/vector extraction can replace scoring behind the same snapshot schema.",
+  "validation_plan": [
+    "workspace-monitor collector tests",
+    "TypeScript noEmit",
+    "platform-desktop-app readiness tests",
+    "collect and snapshot check",
+    "Browser smoke for Product Structure board",
+    "desktop:package:internal"
+  ]
+}

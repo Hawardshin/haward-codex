@@ -13,6 +13,7 @@ import {
   compactDocumentsForSnapshot,
   collectAgentCatalog,
   collectClaudeCodeDesignTransfer,
+  collectFundamentalImprovementStructure,
   collectHistoryInsightLoop,
   collectIntentFeatureMap,
   collectPhilosophyFeatureExtraction,
@@ -264,6 +265,11 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.stats.supportingProductFeatures, 6);
   assert.equal(snapshot.stats.historyInsightPatterns >= 1, true);
   assert.equal(snapshot.historyInsightLoop.signalGroups.some((group) => group.id === "build-closeout-gate"), true);
+  assert.equal(snapshot.stats.fundamentalImprovementPrinciples >= 1, true);
+  assert.equal(
+    snapshot.fundamentalImprovementStructure.structuralPrinciples.some((principle) => principle.id === "definition-of-done-is-artifact"),
+    true
+  );
   assert.equal(snapshot.documents.some((document) => document.language === "ko"), true);
 });
 
@@ -301,6 +307,9 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
       supportingProductFeatures: 1,
       historyInsightPatterns: 1,
       historyInsightRecommendations: 1,
+      fundamentalImprovementPrinciples: 1,
+      fundamentalImprovementPackages: 1,
+      fundamentalImprovementFitnessChecks: 1,
       structurePressurePoints: 1,
       sourceFiles: 1,
       rootFolders: 1
@@ -422,6 +431,84 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
         }
       ]
     },
+    fundamentalImprovementStructure: {
+      sourcePath: "historyInsightLoop",
+      summary: {
+        sourceDocuments: 3,
+        sourcePatterns: 1,
+        totalStructuralPrinciples: 1,
+        highPriorityPrinciples: 1,
+        totalImprovementPackages: 1,
+        totalFitnessChecks: 1,
+        totalEvidenceLinks: 1,
+        latestInsightAt: "2026-06-06"
+      },
+      operatingModel: [
+        {
+          id: "signal_intake",
+          label: "Signal intake",
+          purpose: "internal",
+          output: "internal",
+          guard: "internal"
+        }
+      ],
+      structuralPrinciples: [
+        {
+          id: "definition-of-done-is-artifact",
+          label: "Done Gate",
+          labelEn: "Done Gate",
+          priority: "p0",
+          readiness: "active",
+          rootCause: "internal",
+          structuralPrinciple: "internal",
+          platformChange: "internal",
+          targetSection: "structure",
+          ownerFeatureId: "observability_monitoring",
+          signalCount: 3,
+          supportingPatterns: [{ id: "build-closeout-gate", label: "Build Gate", signalStrength: "high", signalCount: 3 }],
+          missingPatternIds: [],
+          evidencePaths: ["_history/work-summaries/2026/x.ko.md"],
+          evidenceTitles: ["internal"],
+          latestEvidenceAt: "2026-06-06",
+          packageBlueprint: {
+            id: "artifact-closeout-gate",
+            title: "Artifact gate",
+            nowAction: "internal",
+            nextAction: "internal",
+            targetAssets: ["internal"],
+            verification: ["internal"],
+            rollback: "internal"
+          }
+        }
+      ],
+      improvementPackages: [
+        {
+          id: "artifact-closeout-gate",
+          principleId: "definition-of-done-is-artifact",
+          title: "Artifact gate",
+          priority: "p0",
+          status: "applied_contract",
+          ownerFeatureId: "observability_monitoring",
+          targetSection: "structure",
+          nowAction: "internal",
+          nextAction: "internal",
+          targetAssets: ["internal"],
+          verification: ["internal"],
+          rollback: "internal",
+          evidencePaths: ["_history/work-summaries/2026/x.ko.md"]
+        }
+      ],
+      fitnessChecks: [
+        {
+          id: "desktop-artifact-fitness",
+          label: "Desktop artifact fitness",
+          command: "internal",
+          validates: "internal",
+          principleIds: ["definition-of-done-is-artifact"],
+          status: "contract"
+        }
+      ]
+    },
     categories: ["project-doc"],
     publicReview: { status: "review_required_before_public_deploy", checklist: [] }
   };
@@ -438,6 +525,9 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.stats.supportingProductFeatures, 1);
   assert.equal(customer.stats.historyInsightPatterns, 0);
   assert.equal(customer.stats.historyInsightRecommendations, 0);
+  assert.equal(customer.stats.fundamentalImprovementPrinciples, 0);
+  assert.equal(customer.stats.fundamentalImprovementPackages, 0);
+  assert.equal(customer.stats.fundamentalImprovementFitnessChecks, 0);
   assert.equal(customer.stats.structurePressurePoints, 0);
   assert.equal(customer.sourceFiles.length, 0);
   assert.equal(customer.documents.length, 0);
@@ -454,6 +544,9 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.productFeatureArchitecture.validationGates.length, 0);
   assert.equal(customer.historyInsightLoop.signalGroups.length, 0);
   assert.equal(customer.historyInsightLoop.inferenceStages.length, 0);
+  assert.equal(customer.fundamentalImprovementStructure.structuralPrinciples.length, 0);
+  assert.equal(customer.fundamentalImprovementStructure.improvementPackages.length, 0);
+  assert.equal(customer.fundamentalImprovementStructure.fitnessChecks.length, 0);
   assert.equal(customer.historyDays.length, 0);
   assert.equal(customer.projects.length, 0);
   assert.equal(customer.publicReview.status, "customer_snapshot_sanitized");
@@ -466,6 +559,89 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
     "source",
     "intent"
   ]);
+});
+
+test("collectFundamentalImprovementStructure promotes history patterns into structural packages", () => {
+  const historyLoop = {
+    sourcePath: "_history/",
+    summary: {
+      sourceDocuments: 12,
+      totalPatterns: 4,
+      appliedPatterns: 4,
+      queuedPatterns: 0,
+      activeRecommendations: 4,
+      totalEvidenceLinks: 4,
+      latestInsightAt: "2026-06-06"
+    },
+    inferenceStages: [],
+    signalGroups: [
+      {
+        id: "build-closeout-gate",
+        label: "Build Gate",
+        signalStrength: "high",
+        signalCount: 5,
+        evidencePaths: ["_history/work-summaries/2026/build.ko.md"],
+        evidenceTitles: ["Build"],
+        latestEvidenceAt: "2026-06-06"
+      },
+      {
+        id: "release-blocker-gate",
+        label: "Release Gate",
+        signalStrength: "high",
+        signalCount: 4,
+        evidencePaths: ["_history/evaluations/2026/release.ko.md"],
+        evidenceTitles: ["Release"],
+        latestEvidenceAt: "2026-06-06"
+      },
+      {
+        id: "web-research-to-spec",
+        label: "Research",
+        signalStrength: "medium",
+        signalCount: 3,
+        evidencePaths: ["_history/web-searches/2026/research.ko.md"],
+        evidenceTitles: ["Research"],
+        latestEvidenceAt: "2026-06-06"
+      },
+      {
+        id: "large-scope-slicing",
+        label: "Large Scope",
+        signalStrength: "medium",
+        signalCount: 3,
+        evidencePaths: ["_history/plans/2026/large.ko.md"],
+        evidenceTitles: ["Large"],
+        latestEvidenceAt: "2026-06-06"
+      },
+      {
+        id: "ui-feedback-to-design-contract",
+        label: "UI Contract",
+        signalStrength: "medium",
+        signalCount: 2,
+        evidencePaths: ["_history/work-summaries/2026/ui.ko.md"],
+        evidenceTitles: ["UI"],
+        latestEvidenceAt: "2026-06-06"
+      },
+      {
+        id: "desktop-native-resource-loop",
+        label: "Native",
+        signalStrength: "medium",
+        signalCount: 2,
+        evidencePaths: ["_history/resource-checks/2026/native.json"],
+        evidenceTitles: ["Native"],
+        latestEvidenceAt: "2026-06-06"
+      }
+    ]
+  };
+
+  const structure = collectFundamentalImprovementStructure(historyLoop);
+
+  assert.equal(structure.summary.totalStructuralPrinciples, 6);
+  assert.equal(structure.summary.totalImprovementPackages, 6);
+  assert.equal(structure.summary.totalFitnessChecks, 4);
+  assert.equal(structure.operatingModel.map((stage) => stage.id).join(","), "signal_intake,structural_diagnosis,principle_selection,package_execution,fitness_check,memory_feedback");
+  assert.equal(structure.structuralPrinciples.some((principle) => principle.id === "history-as-operating-memory"), true);
+  assert.equal(structure.improvementPackages.some((item) => item.id === "operating-memory-snapshot-plane"), true);
+  assert.equal(structure.fitnessChecks.some((check) => check.id === "desktop-artifact-fitness"), true);
+  assert.equal(structure.structuralPrinciples.every((principle) => principle.evidencePaths.length > 0), true);
 });
 
 test("collectHistoryInsightLoop turns repeated history into platform applications", () => {

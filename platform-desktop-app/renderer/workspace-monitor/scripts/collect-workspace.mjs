@@ -17,6 +17,11 @@ import {
   emptyHistoryInsightLoop,
   sanitizeHistoryInsightLoopForCustomer
 } from "./lib/history-insight-loop.mjs";
+import {
+  collectFundamentalImprovementStructure,
+  emptyFundamentalImprovementStructure,
+  sanitizeFundamentalImprovementStructureForCustomer
+} from "./lib/fundamental-improvement-structure.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
@@ -113,7 +118,13 @@ const DOCUMENT_FILES = [
   { category: "runtime-adapter", file: "CLAUDE.md" }
 ];
 
-export { collectHistoryInsightLoop, collectIntentFeatureMap, collectProductFeatureArchitecture, collectReferencePlatformAdvantages };
+export {
+  collectFundamentalImprovementStructure,
+  collectHistoryInsightLoop,
+  collectIntentFeatureMap,
+  collectProductFeatureArchitecture,
+  collectReferencePlatformAdvantages
+};
 
 export function main(argv = process.argv.slice(2)) {
   const options = parseArgs(argv);
@@ -160,6 +171,7 @@ export function buildSnapshot(repoRoot) {
   const productFeatureArchitecture = collectProductFeatureArchitecture(repoRoot);
   const referencePlatformAdvantages = collectReferencePlatformAdvantages(repoRoot);
   const historyInsightLoop = collectHistoryInsightLoop(allDocuments);
+  const fundamentalImprovementStructure = collectFundamentalImprovementStructure(historyInsightLoop);
   const sourceFiles = collectSourceFiles(repoRoot, projects);
   const folderStructure = buildFolderStructure(repoRoot, projects, documents);
   const structureOverview = buildStructureOverview(repoRoot, projects, documents, folderStructure, sourceFiles);
@@ -213,6 +225,9 @@ export function buildSnapshot(repoRoot) {
       referenceTransferPatterns: referencePlatformAdvantages.summary.totalPatterns,
       historyInsightPatterns: historyInsightLoop.summary.totalPatterns,
       historyInsightRecommendations: historyInsightLoop.summary.activeRecommendations,
+      fundamentalImprovementPrinciples: fundamentalImprovementStructure.summary.totalStructuralPrinciples,
+      fundamentalImprovementPackages: fundamentalImprovementStructure.summary.totalImprovementPackages,
+      fundamentalImprovementFitnessChecks: fundamentalImprovementStructure.summary.totalFitnessChecks,
       structurePressurePoints: structureOverview.summary.totalPressurePoints,
       sourceFiles: sourceFiles.length,
       rootFolders: folderStructure.rootFolders.length
@@ -247,6 +262,7 @@ export function buildSnapshot(repoRoot) {
     productFeatureArchitecture,
     referencePlatformAdvantages,
     historyInsightLoop,
+    fundamentalImprovementStructure,
     categories,
     publicReview: {
       status: "review_required_before_public_deploy",
@@ -299,6 +315,9 @@ export function buildCustomerSnapshot(snapshot) {
       referenceTransferPatterns: snapshot.referencePlatformAdvantages?.summary.totalPatterns ?? 0,
       historyInsightPatterns: 0,
       historyInsightRecommendations: 0,
+      fundamentalImprovementPrinciples: 0,
+      fundamentalImprovementPackages: 0,
+      fundamentalImprovementFitnessChecks: 0,
       structurePressurePoints: 0,
       sourceFiles: 0,
       rootFolders: 0
@@ -399,6 +418,9 @@ export function buildCustomerSnapshot(snapshot) {
       snapshot.referencePlatformAdvantages || emptyReferencePlatformAdvantages()
     ),
     historyInsightLoop: sanitizeHistoryInsightLoopForCustomer(snapshot.historyInsightLoop || emptyHistoryInsightLoop()),
+    fundamentalImprovementStructure: sanitizeFundamentalImprovementStructureForCustomer(
+      snapshot.fundamentalImprovementStructure || emptyFundamentalImprovementStructure()
+    ),
     categories: [],
     publicReview: {
       status: "customer_snapshot_sanitized",

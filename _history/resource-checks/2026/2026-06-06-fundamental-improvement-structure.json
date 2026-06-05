@@ -1,0 +1,24 @@
+{
+  "schema_version": "2026-06-06",
+  "task": "fundamental-improvement-structure",
+  "status": "resource_ready",
+  "resource_risk_occurred": true,
+  "risks": [
+    "Browser automation tab",
+    "Static HTTP server on port 3302",
+    "Desktop package subprocesses",
+    "Rust build and Tauri bundle subprocesses"
+  ],
+  "cleanup_actions": [
+    "Closed the Browser tab used for Product Structure smoke verification.",
+    "Killed the static HTTP server listening on tcp:3302.",
+    "desktop:package:internal completed without leaving an active tracked exec session."
+  ],
+  "verification": [
+    {
+      "check": "port_3302",
+      "status": "cleaned",
+      "evidence": "lsof -ti tcp:3302 returned no process after cleanup."
+    }
+  ]
+}

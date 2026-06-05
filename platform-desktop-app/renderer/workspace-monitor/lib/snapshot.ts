@@ -31,6 +31,9 @@ export type WorkspaceStats = {
   referenceTransferPatterns?: number;
   historyInsightPatterns?: number;
   historyInsightRecommendations?: number;
+  fundamentalImprovementPrinciples?: number;
+  fundamentalImprovementPackages?: number;
+  fundamentalImprovementFitnessChecks?: number;
   structurePressurePoints?: number;
   sourceFiles?: number;
   rootFolders: number;
@@ -681,6 +684,82 @@ export type WorkspaceHistoryInsightLoop = {
   }>;
 };
 
+export type WorkspaceFundamentalImprovementStructure = {
+  sourcePath: string;
+  summary: {
+    sourceDocuments: number;
+    sourcePatterns: number;
+    totalStructuralPrinciples: number;
+    highPriorityPrinciples: number;
+    totalImprovementPackages: number;
+    totalFitnessChecks: number;
+    totalEvidenceLinks: number;
+    latestInsightAt: string;
+  };
+  operatingModel: Array<{
+    id: string;
+    label: string;
+    purpose: string;
+    output: string;
+    guard: string;
+  }>;
+  structuralPrinciples: Array<{
+    id: string;
+    label: string;
+    labelEn: string;
+    priority: string;
+    readiness: string;
+    rootCause: string;
+    structuralPrinciple: string;
+    platformChange: string;
+    targetSection: string;
+    ownerFeatureId: string;
+    signalCount: number;
+    supportingPatterns: Array<{
+      id: string;
+      label: string;
+      signalStrength: string;
+      signalCount: number;
+    }>;
+    missingPatternIds: string[];
+    evidencePaths: string[];
+    evidenceTitles: string[];
+    latestEvidenceAt: string;
+    packageBlueprint: {
+      id: string;
+      title: string;
+      nowAction: string;
+      nextAction: string;
+      targetAssets: string[];
+      verification: string[];
+      rollback: string;
+    };
+  }>;
+  improvementPackages: Array<{
+    id: string;
+    principleId: string;
+    title: string;
+    priority: string;
+    status: string;
+    ownerFeatureId: string;
+    targetSection: string;
+    nowAction: string;
+    nextAction: string;
+    targetAssets: string[];
+    verification: string[];
+    rollback: string;
+    evidencePaths: string[];
+  }>;
+  fitnessChecks: Array<{
+    id: string;
+    label: string;
+    command: string;
+    validates: string;
+    principleIds: string[];
+    status: string;
+  }>;
+};
+
 export type WorkspaceSnapshot = {
   schemaVersion: string;
   generatedAt: string;
@@ -714,6 +793,7 @@ export type WorkspaceSnapshot = {
   productFeatureArchitecture?: WorkspaceProductFeatureArchitecture;
   referencePlatformAdvantages?: WorkspaceReferencePlatformAdvantages;
   historyInsightLoop?: WorkspaceHistoryInsightLoop;
+  fundamentalImprovementStructure?: WorkspaceFundamentalImprovementStructure;
   categories: string[];
   publicReview: {
     status: string;

@@ -1,0 +1,66 @@
+{
+  "schema_version": "2026-06-06",
+  "request": "Review diverse history, think through a fundamental improvement structure, and apply it to the platform.",
+  "trigger_conditions": ["broad_language", "large_file_set", "unknown_blast_radius"],
+  "source_inventory": {
+    "candidate_file_count_excluding_private_node_modules_build": 10029,
+    "excluded_by_default": ["_private/**", "**/node_modules/**", "**/.next/**", "**/target/**", "**/out/**", "outputs/**"],
+    "source_value_provenance": ["rg --files inventory", "_ops/projects/registry.json", "platform-desktop-app workspace-monitor collector files"]
+  },
+  "representative_samples": [
+    "platform-desktop-app/renderer/workspace-monitor/scripts/lib/history-insight-loop.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/configs/product-feature-registry.json"
+  ],
+  "sample_limitations": "The sample targets the existing history-to-product snapshot path. It does not inspect unrelated domain projects because the requested application point is the desktop platform.",
+  "slices": [
+    {
+      "slice_id": "fis-collector-model",
+      "scope": "Add deterministic fundamental improvement structure derived from historyInsightLoop.",
+      "touch_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/scripts/lib/fundamental-improvement-structure.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts"
+      ],
+      "dependencies": ["existing historyInsightLoop snapshot model"],
+      "output_targets": ["developer snapshot statistics and top-level structure object"],
+      "verification_steps": ["collector unit tests", "tsc --noEmit"],
+      "risk_level": "medium"
+    },
+    {
+      "slice_id": "fis-ui-surface",
+      "scope": "Expose structural principles and improvement packages in Product Structure.",
+      "touch_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/app/globals.css"
+      ],
+      "dependencies": ["fis-collector-model"],
+      "output_targets": ["desktop Product Structure board"],
+      "verification_steps": ["Browser smoke", "readiness token checks"],
+      "risk_level": "medium"
+    },
+    {
+      "slice_id": "fis-governance-records",
+      "scope": "Record requirements, spec, validation, trace, timing, omission, and resource checks.",
+      "touch_paths": [
+        "platform-desktop-app/docs/requirements/2026-06-06-fundamental-improvement-structure.ko.md",
+        "platform-desktop-app/specs/2026-06-06-fundamental-improvement-structure/",
+        "_history/"
+      ],
+      "dependencies": ["implementation verification results"],
+      "output_targets": ["auditable close-out package"],
+      "verification_steps": ["json.tool", "git diff --check"],
+      "risk_level": "low"
+    }
+  ],
+  "merge_gate": "All slices must pass collector tests, TypeScript, readiness, snapshot check, Browser smoke, and desktop internal package before final close-out.",
+  "human_decision_points": [],
+  "deferred_work": [
+    "Runtime telemetry-backed scoring can replace rule scoring after native task-run metrics are persisted as stable runtime records."
+  ]
+}

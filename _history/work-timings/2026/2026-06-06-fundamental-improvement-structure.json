@@ -1,0 +1,40 @@
+{
+  "schema_version": "2026-06-06",
+  "task": "fundamental-improvement-structure",
+  "timezone": "Asia/Seoul",
+  "spans": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Checked continuous improvement, platform engineering, fitness functions, and postmortem learning sources."
+    },
+    {
+      "phase": "memory_bootstrap_and_scope",
+      "status": "completed",
+      "notes": "Read bootstrap, work mode, large scope, persistent instruction, and project registry anchors."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Added collector model, snapshot wiring, UI board, registry tokens, and tests."
+    },
+    {
+      "phase": "verification",
+      "status": "completed",
+      "notes": "Ran collector tests, TypeScript, readiness tests, collect/check, static Browser smoke, and desktop internal package."
+    },
+    {
+      "phase": "closeout",
+      "status": "completed",
+      "notes": "Prepared omission/resource/evaluation/summary/trace records before commit."
+    }
+  ],
+  "timing_precision": "phase_status_only",
+  "bottleneck_candidates": ["desktop internal package duration"],
+  "verification_summary": {
+    "workspace_monitor_tests": "65 passed",
+    "platform_desktop_tests": "24 passed",
+    "browser_smoke": "passed",
+    "desktop_package_internal": "passed"
+  }
+}

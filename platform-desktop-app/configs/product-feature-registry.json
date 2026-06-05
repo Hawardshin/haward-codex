@@ -556,6 +556,7 @@
         "_history/web-searches/",
         "platform-desktop-app/renderer/workspace-monitor/scripts/lib/intent-feature-map.mjs",
         "platform-desktop-app/renderer/workspace-monitor/scripts/lib/history-insight-loop.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/scripts/lib/fundamental-improvement-structure.mjs",
         "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"
       ],
       "automation_targets": [
@@ -572,12 +573,16 @@
         "timing bottlenecks",
         "omission check results",
         "history insight repeated patterns",
-        "history insight evidence links"
+        "history insight evidence links",
+        "fundamental improvement structural principles",
+        "fundamental improvement packages",
+        "fundamental improvement fitness checks"
       ],
       "validation_gates": [
         "intent maps show source freshness",
         "evaluations cite validation outcomes",
-        "new product work creates request trace and work summary"
+        "new product work creates request trace and work summary",
+        "fundamental improvement structure sanitizes customer snapshots"
       ]
     },
     {

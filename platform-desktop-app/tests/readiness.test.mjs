@@ -563,6 +563,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     join(root, "renderer/workspace-monitor/scripts/lib/history-insight-loop.mjs"),
     "utf8"
   );
+  const fundamentalImprovementCollector = readFileSync(
+    join(root, "renderer/workspace-monitor/scripts/lib/fundamental-improvement-structure.mjs"),
+    "utf8"
+  );
   const customerBundleCheck = readFileSync(join(root, "scripts/check-customer-bundle.mjs"), "utf8");
   const releaseReadinessCheck = readFileSync(join(root, "scripts/check-release-readiness.mjs"), "utf8");
   const lazyBoundaryCheck = readFileSync(
@@ -604,11 +608,14 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "collectHistoryInsightLoop",
     "historyInsightLoop",
     "sanitizeHistoryInsightLoopForCustomer",
+    "collectFundamentalImprovementStructure",
+    "fundamentalImprovementStructure",
+    "sanitizeFundamentalImprovementStructureForCustomer",
     "agent_capability_platform",
     "supporting_observability"
   ]) {
     assert.match(
-      `${monitorCollector}\n${productFeatureCollector}\n${historyInsightCollector}`,
+      `${monitorCollector}\n${productFeatureCollector}\n${historyInsightCollector}\n${fundamentalImprovementCollector}`,
       new RegExp(collectorToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
     );
   }
@@ -622,10 +629,23 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   ]) {
     assert.match(historyInsightCollector, new RegExp(insightToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
+  for (const structureToken of [
+    "history-as-operating-memory",
+    "desktop-native-first-plane",
+    "controls-are-design-contracts",
+    "definition-of-done-is-artifact",
+    "public-private-plane-separation",
+    "FITNESS_CHECK_RULES"
+  ]) {
+    assert.match(fundamentalImprovementCollector, new RegExp(structureToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
   for (const uiToken of ["referenceAdvantages", "reference-advantage-board", "레퍼런스 장점 적용 지도"]) {
     assert.match(productFeaturePanel, new RegExp(uiToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
   for (const uiToken of ["historyInsights", "history-insight-board", "히스토리 인사이트 루프"]) {
+    assert.match(productFeaturePanel, new RegExp(uiToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+  for (const uiToken of ["fundamentalImprovement", "fundamental-improvement-board", "근본 개선 구조"]) {
     assert.match(productFeaturePanel, new RegExp(uiToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
   for (const scriptToken of ["auditCustomerSnapshot", "scanCustomerDist", "customer_bundle_ready", "MAX_DIST_SCAN_FILES"]) {
