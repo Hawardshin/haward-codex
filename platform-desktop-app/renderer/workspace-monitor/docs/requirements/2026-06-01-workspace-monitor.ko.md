@@ -75,6 +75,7 @@
 | REQ-WM-062 | Agents 세부 기능 선택은 클릭 즉시 선택 버튼과 pressed feedback을 갱신해야 하며, 3D canvas/폼/표 같은 active workspace 교체는 첫 paint 이후 staged commit으로 처리해 버튼 응답을 무거운 패널 mount와 묶지 않아야 한다. 빠르게 여러 세부 기능을 눌러도 최신 선택만 렌더링되어야 하며, 닫힌 disclosure나 다른 섹션에서는 예약된 mount가 취소되어야 한다. | must | deferred agent detail switch static test, in-app Browser switcher smoke, stale canvas absence assertion, pending state audit, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 | REQ-WM-063 | 기본 activity rail은 사용자가 아이콘 의미를 기억해야 하는 구조가 아니라, 축약 라벨과 아이콘을 함께 보여줘 주요 목적지를 인식으로 선택할 수 있게 해야 한다. 데스크톱 기본 폭, 확장 폭, 720px 이하 상단 rail, 420px 이하 가로 스크롤 rail 모두에서 라벨은 잘리지 않고 버튼 클릭 타깃은 44px 이상을 유지해야 한다. | must | activity rail readable labels static test, desktop/mobile Browser rail smoke, active label/current state assertion, horizontal overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 | REQ-WM-064 | Tool Studio는 제작/실행환경/배포/registry 세부 기능을 같은 깊이의 탭처럼 모두 펼쳐 놓지 않아야 하며, 먼저 `제작 준비`와 `출시 관리` 같은 상위 흐름을 선택한 뒤 해당 흐름의 세부 모드만 보여줘야 한다. 단축키나 외부 task flow가 세부 모드로 직접 진입해도 parent flow 선택 상태가 함께 맞춰져야 한다. | must | Tool Studio parent-stage depth static test, requested mode parent sync test, desktop/mobile Browser depth rail smoke, current child mode count assertion, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
+| REQ-WM-065 | Tool Studio의 기본 드롭다운 버튼은 현재 선택된 세부 기능, 상위 흐름, 메뉴 affordance, 열림 상태를 한 컨트롤 안에서 명확히 보여줘야 하며 `aria-haspopup="menu"`, Radix open state, 44px 이상 타깃, 텍스트 ellipsis, 860px 이하 overflow 없는 폭 조정을 유지해야 한다. | must | dropdown trigger static test, Radix `aria-expanded`/`data-state` Browser smoke, desktop/mobile overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 
 ## 범위
 
@@ -130,6 +131,7 @@
 - Agents 세부 기능 선택 버튼의 즉시 피드백과 첫 paint 이후 active workspace staged commit
 - 기본 activity rail의 아이콘+축약 라벨 목적지 버튼과 모바일 가로 스크롤 라벨 유지
 - Tool Studio의 상위 흐름 선택 후 세부 모드로 들어가는 parent-child depth navigation
+- Tool Studio 드롭다운 버튼의 현재 선택값, 상위 흐름, 메뉴 상태, 모바일 안전 폭
 - Vercel 배포 문서
 
 ## 제외 범위

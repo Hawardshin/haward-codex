@@ -1,0 +1,26 @@
+{
+  "schema_version": "2026-06-01",
+  "request_id": "2026-06-05-dropdown-trigger-baseline",
+  "timings": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Checked WAI-ARIA APG, Radix UI, Material Design, and Apple HIG menu/button references."
+    },
+    {
+      "phase": "local_context_and_design",
+      "status": "completed",
+      "notes": "Inspected Tool Studio trigger, CSS, tests, and requirements."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Updated trigger structure, CSS, tests, requirements, and spec artifacts."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "test, tsc, check, build, build:customer, perf:budget, in-app Browser smoke, Playwright desktop/mobile screenshot smoke, and git diff --check passed."
+    }
+  ]
+}

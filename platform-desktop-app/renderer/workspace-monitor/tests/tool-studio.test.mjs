@@ -118,6 +118,13 @@ test("Three.js scene is lazy-loaded and cleans up WebGL resources", () => {
 
 test("Tool Studio exposes shortcut and interaction contracts", () => {
   assert.match(toolStudio, /data-tool-primary-menu/);
+  assert.match(toolStudio, /className="tool-studio-primary-action tool-dropdown-trigger"/);
+  assert.match(toolStudio, /aria-haspopup="menu"/);
+  assert.match(toolStudio, /className="tool-dropdown-trigger-icon"/);
+  assert.match(toolStudio, /className="tool-dropdown-trigger-copy"/);
+  assert.match(toolStudio, /className="tool-dropdown-trigger-label"/);
+  assert.match(toolStudio, /className="tool-dropdown-trigger-caret"/);
+  assert.match(toolStudio, /activeStage\.labelKo/);
   assert.match(toolStudio, /data-tool-context-menu/);
   assert.match(toolStudio, /type ToolStudioStage = "create" \| "ship"/);
   assert.match(toolStudio, /const \[stage, setStage\] = useState<ToolStudioStage>\("create"\)/);
@@ -149,9 +156,13 @@ test("Tool Studio CSS keeps split scroll and stable controls", () => {
   assert.match(css, /\.tool-studio-workbench \{[\s\S]*?grid-template-columns:/);
   assert.match(css, /\.tool-card-scroll,\n\.tool-detail-scroll,\n\.tool-env-scroll \{[\s\S]*?overflow: auto;/);
   assert.match(css, /\.tool-studio-actions button,[\s\S]*?min-height: var\(--control-target-size\);/);
+  assert.match(css, /\.tool-studio-actions \.tool-dropdown-trigger \{[\s\S]*?grid-template-columns: auto minmax\(0, 1fr\) auto;/);
+  assert.match(css, /\.tool-dropdown-trigger-label,[\s\S]*?\.tool-dropdown-trigger-copy small \{[\s\S]*?text-overflow: ellipsis;/);
+  assert.match(css, /\.tool-dropdown-trigger\[data-state="open"\] \.tool-dropdown-trigger-caret \{[\s\S]*?transform: rotate\(180deg\);/);
   assert.match(css, /\.tool-agent-canvas \{[\s\S]*?height: clamp\(220px, 27vh, 320px\);/);
   assert.match(css, /\.tool-agent-canvas \{[\s\S]*?max-height: 320px;/);
   assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-studio-shell \{[\s\S]*?overflow: visible;/);
+  assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-studio-actions \.tool-dropdown-trigger \{[\s\S]*?width: 100%;/);
   assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-studio-depth-rail,[\s\S]*?\.tool-studio-workbench,/);
 });
 

@@ -975,10 +975,22 @@ export function ToolStudioPanel({
         <div className="tool-studio-actions">
           <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>
-              <button type="button" className="tool-studio-primary-action" data-tool-primary-menu>
-                <activeMode.icon size={16} aria-hidden="true" />
-                <span>{labelFor(language, activeMode.labelKo, activeMode.labelEn)}</span>
-                <ChevronDown size={15} aria-hidden="true" />
+              <button
+                type="button"
+                className="tool-studio-primary-action tool-dropdown-trigger"
+                data-tool-primary-menu
+                aria-haspopup="menu"
+              >
+                <span className="tool-dropdown-trigger-icon" aria-hidden="true">
+                  <activeMode.icon size={16} aria-hidden="true" />
+                </span>
+                <span className="tool-dropdown-trigger-copy">
+                  <span className="tool-dropdown-trigger-label">{labelFor(language, activeMode.labelKo, activeMode.labelEn)}</span>
+                  <small>{labelFor(language, activeStage.labelKo, activeStage.labelEn)}</small>
+                </span>
+                <span className="tool-dropdown-trigger-caret" aria-hidden="true">
+                  <ChevronDown size={15} aria-hidden="true" />
+                </span>
               </button>
             </DropdownMenu.Trigger>
             <DropdownMenu.Portal>

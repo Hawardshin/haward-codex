@@ -1,0 +1,50 @@
+{
+  "schema_version": "2026-06-02",
+  "work_id": "2026-06-05-dropdown-trigger-baseline",
+  "status": "passed",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "installation_occurred": false,
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-dropdown-trigger-baseline.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-05-dropdown-trigger-baseline.ko.md"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-05-dropdown-trigger-baseline.json"
+  ],
+  "research_targets": [
+    "_history/web-searches/2026/2026-06-05-dropdown-trigger-baseline.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-dropdown-trigger-baseline/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-dropdown-trigger-baseline/plan.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-dropdown-trigger-baseline/tasks.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-dropdown-trigger-baseline/validation.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-dropdown-trigger-baseline/traceability.ko.md"
+  ],
+  "implementation_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/ToolStudioPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md"
+  ],
+  "artifact_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-dropdown-trigger-baseline-desktop-open.png",
+    "platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-dropdown-trigger-baseline-mobile-open.png"
+  ],
+  "validation_summary": [
+    "workspace-monitor tests passed: 41 tests",
+    "TypeScript, workspace-monitor check, build, build:customer, and perf budget passed",
+    "in-app Browser smoke confirmed aria-haspopup menu, aria-expanded/data-state transition, menu visibility, and overflow 0",
+    "Playwright desktop/mobile smoke confirmed 44px-or-larger trigger, caret rotation, menu visibility, and overflow 0",
+    "git diff --check passed"
+  ],
+  "residual_risks": [
+    "This slice improves the Tool Studio primary dropdown trigger only. Other dropdown-like controls should be audited in later UI normalization slices."
+  ]
+}

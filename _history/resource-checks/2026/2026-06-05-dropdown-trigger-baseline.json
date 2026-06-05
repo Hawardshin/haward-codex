@@ -1,0 +1,49 @@
+{
+  "schema_version": "2026-06-02",
+  "request_id": "2026-06-05-dropdown-trigger-baseline",
+  "resource_risk_occurred": true,
+  "runtime_context": [
+    "Node.js validation commands",
+    "Next.js static build",
+    "local static HTTP server for Browser smoke",
+    "in-app Browser automation"
+  ],
+  "resource_risks": [
+    {
+      "risk": "local static server remains running after smoke",
+      "status": "mitigated",
+      "mitigation": "Start server only for smoke and stop it before close-out."
+    },
+    {
+      "risk": "browser automation leaves pages or handles open",
+      "status": "mitigated",
+      "mitigation": "Bounded Playwright smoke closed browser pages/context; local HTTP server was stopped with interrupt."
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "resource": "static HTTP server",
+      "open_start": "started on 127.0.0.1:3356 for static export smoke",
+      "close_stop": "stopped before close-out"
+    },
+    {
+      "resource": "Browser smoke",
+      "open_start": "in-app Browser plus Playwright desktop/mobile smoke",
+      "close_stop": "Playwright browser closed; in-app Browser session left as ordinary verification tab only"
+    }
+  ],
+  "measurement_checks": [
+    {
+      "metric": "validation command completion",
+      "tool": "pnpm/test/build/perf",
+      "threshold": "all commands exit 0",
+      "status": "passed"
+    },
+    {
+      "metric": "dropdown overflow",
+      "tool": "Playwright desktop/mobile smoke",
+      "threshold": "rootOverflow equals 0",
+      "status": "passed"
+    }
+  ]
+}

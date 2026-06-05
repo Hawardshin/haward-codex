@@ -13823,6 +13823,59 @@ h3 {
   background: var(--action-primary-bg) !important;
 }
 
+.tool-studio-actions .tool-dropdown-trigger {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 8px;
+  min-width: 190px;
+  padding: 6px 8px 6px 10px;
+  text-align: left;
+  justify-content: stretch;
+  box-shadow: var(--control-shadow);
+}
+
+.tool-dropdown-trigger-icon,
+.tool-dropdown-trigger-caret {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--action-primary-fg) 14%, transparent);
+}
+
+.tool-dropdown-trigger-copy {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.tool-dropdown-trigger-label,
+.tool-dropdown-trigger-copy small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tool-dropdown-trigger-label {
+  font-weight: 860;
+}
+
+.tool-dropdown-trigger-copy small {
+  color: color-mix(in srgb, var(--action-primary-fg) 76%, transparent);
+  font-size: var(--font-size-micro);
+  font-weight: 760;
+  line-height: 1.25;
+}
+
+.tool-dropdown-trigger-caret {
+  transition: transform 140ms ease;
+}
+
+.tool-dropdown-trigger[data-state="open"] .tool-dropdown-trigger-caret {
+  transform: rotate(180deg);
+}
+
 .tool-studio-status-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -15377,6 +15430,11 @@ h3 {
 
   .tool-studio-hero {
     display: grid;
+  }
+
+  .tool-studio-actions .tool-dropdown-trigger {
+    width: 100%;
+    min-width: 0;
   }
 
   .tool-studio-status-grid {
