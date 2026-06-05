@@ -8,6 +8,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
 
 const monitorShell = fs.readFileSync(path.join(projectRoot, "components", "MonitorShell.tsx"), "utf8");
+const motionHelpers = fs.readFileSync(path.join(projectRoot, "lib", "motion.ts"), "utf8");
+const operatorCenterDialog = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "OperatorCenterDialog.tsx"),
+  "utf8"
+);
 const toolStudio = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "ToolStudioPanel.tsx"),
   "utf8"
@@ -30,6 +35,7 @@ const coreDrilldown = fs.readFileSync(
 );
 const buttonComponent = fs.readFileSync(path.join(projectRoot, "components", "ui", "Button.tsx"), "utf8");
 const actionGroupComponent = fs.readFileSync(path.join(projectRoot, "components", "ui", "ActionGroup.tsx"), "utf8");
+const collector = fs.readFileSync(path.join(projectRoot, "scripts", "collect-workspace.mjs"), "utf8");
 const css = fs.readFileSync(path.join(projectRoot, "app", "globals.css"), "utf8");
 const packageJson = JSON.parse(fs.readFileSync(path.join(projectRoot, "package.json"), "utf8"));
 
@@ -324,16 +330,53 @@ test("Monitor section switches stage heavy content after first paint", () => {
   assert.match(css, /\.section-transition-shell \{/);
 });
 
+test("Monitor uses a shared motion system for smooth tab, dialog, and menu transitions", () => {
+  assert.match(css, /--motion-duration-fast: 140ms;/);
+  assert.match(css, /--motion-duration-standard: 190ms;/);
+  assert.match(css, /@keyframes workspace-panel-enter/);
+  assert.match(css, /@keyframes workspace-menu-enter/);
+  assert.match(css, /\.desktop-viewport\[data-section-content-ready="true"\] :where\(/);
+  assert.match(css, /\.settings-dialog-backdrop \{[\s\S]*?animation: workspace-fade-in/);
+  assert.match(css, /\.settings-dialog \{[\s\S]*?animation: workspace-menu-enter/);
+  assert.match(css, /\.command-palette \{[\s\S]*?animation: workspace-menu-enter/);
+  assert.match(css, /\.tool-menu-content,[\s\S]*?\.tool-context-content \{[\s\S]*?animation: workspace-menu-enter/);
+  assert.match(css, /\.agent-detail-active-surface \{[\s\S]*?transition:[\s\S]*?transform var\(--motion-duration-fast\)/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\) \{/);
+});
+
 test("Monitor buttons expose instant press feedback before heavy click work", () => {
   assert.equal(packageJson.scripts["perf:buttons"], "node scripts/audit-button-response.mjs");
+  assert.match(monitorShell, /from "@\/lib\/motion"/);
   assert.match(monitorShell, /installInstantButtonFeedback\(root\)/);
-  assert.match(monitorShell, /function installInstantButtonFeedback\(root: HTMLElement\)/);
-  assert.match(monitorShell, /root\.addEventListener\("pointerdown", handlePointerDown, true\)/);
-  assert.match(monitorShell, /root\.addEventListener\("keydown", handleKeyDown, true\)/);
-  assert.match(monitorShell, /data-instant-button-feedback", "active"/);
-  assert.match(monitorShell, /data-instant-button-painted", "true"/);
-  assert.match(monitorShell, /data-button-response-active", "true"/);
+  assert.match(motionHelpers, /export function installInstantButtonFeedback\(root: HTMLElement\)/);
+  assert.match(motionHelpers, /export function scheduleAfterFirstPaint\(callback: \(\) => void, delayMs = 0\)/);
+  assert.match(motionHelpers, /root\.addEventListener\("pointerdown", handlePointerDown, true\)/);
+  assert.match(motionHelpers, /root\.addEventListener\("keydown", handleKeyDown, true\)/);
+  assert.match(motionHelpers, /data-instant-button-feedback", "active"/);
+  assert.match(motionHelpers, /data-instant-button-painted", "true"/);
+  assert.match(motionHelpers, /data-button-response-active", "true"/);
   assert.match(css, /\[data-instant-button-feedback="active"\]/);
+});
+
+test("History documents use bounded admin previews instead of loading full records into the UI snapshot", () => {
+  assert.equal(packageJson.scripts["check:history-payload"], "node scripts/check-history-payload.mjs");
+  assert.match(packageJson.scripts.check, /check-history-payload/);
+  assert.match(collector, /const HISTORY_DOCUMENT_HTML_CHARS = 2200;/);
+  assert.match(collector, /function historyAdminPreviewToHtml\(content\)/);
+  assert.match(collector, /isHistoryDocument[\s\S]*?\? historyAdminPreviewToHtml\(content\)/);
+  assert.match(collector, /previewMode: isHistoryDocument \? "admin-summary" : "document-preview"/);
+  assert.match(collector, /htmlTruncated: isHistoryDocument \? content\.length > HISTORY_ADMIN_EXCERPT_CHARS : content\.length > maxHtmlChars/);
+  assert.match(collector, /sourceBytes: stats\.size/);
+});
+
+test("Operator Center and task run copy localize high-visibility Korean UI", () => {
+  assert.match(monitorShell, /<OperatorCenterDialog[\s\S]*?language=\{uiLanguage\}/);
+  assert.match(operatorCenterDialog, /aria-label=\{ko \? "운영 센터" : "Operator Center"\}/);
+  assert.match(operatorCenterDialog, /운영 도구는 주 작업면과 분리됩니다/);
+  assert.match(operatorCenterDialog, /\$\{section\.shortLabel\} 열기/);
+  assert.match(monitorShell, /질문 자동 보류는 초기화 설정에서만 바꿉니다/);
+  assert.match(monitorShell, /로그 열기/);
+  assert.match(monitorShell, /제한된 stdout\/stderr 미리보기와 실행 기록 JSON/);
 });
 
 test("Tool Studio build mode exposes a dedicated tool builder workbench", () => {

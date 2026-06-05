@@ -1,0 +1,11 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "UR-2026-06-05-smooth-redesign-maintenance",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request changed implemented UI behavior, performance checks, source structure, and generated snapshot policy.",
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-05-smooth-redesign-maintenance.json"
+  ]
+}

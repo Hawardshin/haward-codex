@@ -167,6 +167,9 @@ export type WorkspaceDocument = {
   title: string;
   excerpt: string;
   html: string;
+  previewMode?: "admin-summary" | "document-preview" | string;
+  htmlTruncated?: boolean;
+  sourceBytes?: number;
   updatedAt: string;
   historyDate: string;
   historyYear: string;

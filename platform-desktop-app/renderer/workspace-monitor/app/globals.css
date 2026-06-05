@@ -87,6 +87,16 @@
   --control-gap: 7px;
   --control-padding-x: 12px;
   --control-active-shift: 1px;
+  --motion-duration-instant: 80ms;
+  --motion-duration-fast: 140ms;
+  --motion-duration-standard: 190ms;
+  --motion-duration-emphasis: 260ms;
+  --motion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --motion-distance-short: 4px;
+  --motion-distance-medium: 10px;
+  --motion-scale-subtle: 0.985;
   --font-size-micro: 0.6875rem;
   --font-size-overline: 0.6875rem;
   --font-size-caption: 0.75rem;
@@ -802,10 +812,11 @@ button,
 .agent-flow-map article,
 .task-lanes article {
   transition:
-    transform 140ms ease,
-    box-shadow 140ms ease,
-    border-color 140ms ease,
-    background 140ms ease;
+    transform var(--motion-duration-fast) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    background var(--motion-duration-fast) var(--motion-ease-standard),
+    opacity var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .structure-plane-grid article,
@@ -813,18 +824,18 @@ button,
 .pressure-list article,
 .source-hotspot-strip button {
   transition:
-    transform 140ms ease,
-    box-shadow 140ms ease,
-    border-color 140ms ease,
-    background 140ms ease;
+    transform var(--motion-duration-fast) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    background var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .product-feature-card {
   transition:
-    transform 140ms ease,
-    box-shadow 140ms ease,
-    border-color 140ms ease,
-    background 140ms ease;
+    transform var(--motion-duration-fast) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    background var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 main {
@@ -840,6 +851,7 @@ main {
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--surface-muted) 74%, var(--bg)) 0%, var(--bg) 42%, var(--bg) 100%),
     var(--bg);
+  scroll-behavior: smooth;
 }
 
 .desktop-app-shell {
@@ -910,6 +922,11 @@ main {
   background: transparent;
   color: var(--text-on-dark);
   border-radius: 8px;
+  transition:
+    background var(--motion-duration-fast) var(--motion-ease-standard),
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .activity-rail nav button {
@@ -987,6 +1004,10 @@ main {
   height: 18px;
   border-radius: 999px;
   background: var(--line-accent);
+  transform-origin: center;
+  transition:
+    height var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .activity-rail .activity-brand {
@@ -1198,6 +1219,7 @@ main {
 }
 
 .desktop-viewport {
+  animation: workspace-view-enter var(--motion-duration-standard) var(--motion-ease-out) both;
   min-width: 0;
   min-height: 100vh;
   min-height: 100dvh;
@@ -1213,6 +1235,7 @@ main {
 
 .section-transition-shell {
   display: grid;
+  animation: workspace-panel-enter var(--motion-duration-standard) var(--motion-ease-out) both;
   min-height: min(460px, 58vh);
   place-items: center;
   border: 1px solid var(--line);
@@ -1222,10 +1245,12 @@ main {
     var(--surface);
   color: var(--text);
   padding: clamp(28px, 7vh, 64px) 18px;
+  will-change: transform, opacity;
 }
 
 .section-transition-shell > div {
   display: grid;
+  animation: workspace-soft-pulse 1200ms var(--motion-ease-standard) infinite;
   justify-items: center;
   gap: 10px;
   min-width: 0;
@@ -1248,6 +1273,21 @@ main {
   color: var(--text-secondary);
   font-size: var(--font-size-caption);
   font-weight: 800;
+}
+
+.desktop-viewport[data-section-content-ready="true"] :where(
+  .desktop-home-grid,
+  .desktop-grid,
+  .source-browser,
+  .tool-studio-shell,
+  .command-center,
+  .core-function-panel,
+  .mode-switchboard-panel,
+  .intent-map-panel,
+  .agent-chat-workspace
+) {
+  animation: workspace-panel-enter var(--motion-duration-standard) var(--motion-ease-out) both;
+  will-change: transform, opacity;
 }
 
 .desktop-titlebar {
@@ -1543,6 +1583,7 @@ main {
   inset: 0;
   z-index: 60;
   display: grid;
+  animation: workspace-fade-in var(--motion-duration-fast) var(--motion-ease-standard) both;
   align-items: start;
   justify-items: center;
   overflow: auto;
@@ -1553,6 +1594,7 @@ main {
 
 .settings-dialog {
   display: grid;
+  animation: workspace-menu-enter var(--motion-duration-standard) var(--motion-ease-out) both;
   grid-template-rows: auto minmax(0, 1fr);
   width: min(980px, 100%);
   height: min(760px, calc(100vh - 36px));
@@ -1565,6 +1607,8 @@ main {
   border-radius: 8px;
   box-shadow: 0 24px 70px rgba(15, 23, 42, 0.28);
   padding: 14px;
+  transform-origin: top center;
+  will-change: transform, opacity;
 }
 
 .settings-dialog-body {
@@ -3441,6 +3485,65 @@ main {
   }
 }
 
+@keyframes workspace-view-enter {
+  from {
+    opacity: 0.001;
+    transform: translateY(var(--motion-distance-short));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes workspace-panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--motion-distance-medium)) scale(var(--motion-scale-subtle));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes workspace-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes workspace-menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes workspace-soft-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 0.92;
+    transform: translateY(-2px);
+  }
+}
+
 .topbar {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -3683,6 +3786,7 @@ h3 {
   inset: 0;
   z-index: 50;
   display: grid;
+  animation: workspace-fade-in var(--motion-duration-fast) var(--motion-ease-standard) both;
   align-items: start;
   justify-items: center;
   overflow: auto;
@@ -3692,11 +3796,14 @@ h3 {
 
 .command-palette {
   width: min(720px, 100%);
+  animation: workspace-menu-enter var(--motion-duration-standard) var(--motion-ease-out) both;
   border: 1px solid rgba(148, 163, 184, 0.72);
   background: var(--surface);
   border-radius: 10px;
   box-shadow: 0 24px 70px rgba(15, 23, 42, 0.28);
   padding: 12px;
+  transform-origin: top center;
+  will-change: transform, opacity;
 }
 
 .command-palette-search {
@@ -4106,6 +4213,10 @@ h3 {
   border-radius: 8px;
   padding: 12px;
   text-align: left;
+  transition:
+    background var(--motion-duration-fast) var(--motion-ease-standard),
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .operator-section-card span,
@@ -4353,11 +4464,15 @@ h3 {
 .agent-detail-active-surface {
   min-width: 0;
   opacity: 1;
-  transition: opacity 120ms ease;
+  transition:
+    opacity var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
+  will-change: transform, opacity;
 }
 
 .agent-detail-workspace[data-agent-detail-pending="true"] .agent-detail-active-surface {
   opacity: 0.92;
+  transform: translateY(var(--motion-distance-short)) scale(0.996);
 }
 
 .agent-detail-active-surface > .panel {
@@ -14386,6 +14501,7 @@ h3 {
 .tool-pane-heading button,
 .tool-studio-depth-rail button,
 .tool-studio-mode-rail button {
+  min-width: var(--control-target-size);
   min-height: var(--control-target-size);
   border: 1px solid var(--line);
   border-radius: var(--control-radius);
@@ -14476,7 +14592,7 @@ h3 {
 }
 
 .tool-dropdown-trigger-caret {
-  transition: transform 140ms ease;
+  transition: transform var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .tool-dropdown-trigger[data-state="open"] .tool-dropdown-trigger-caret {
@@ -15993,12 +16109,15 @@ h3 {
 .tool-context-content {
   z-index: 80;
   width: min(360px, calc(100vw - 24px));
+  animation: workspace-menu-enter var(--motion-duration-fast) var(--motion-ease-out) both;
   padding: 6px;
   border: 1px solid var(--line);
   border-radius: 8px;
   color: var(--text);
   background: var(--surface);
   box-shadow: 0 18px 42px rgba(17, 24, 39, 0.18);
+  transform-origin: top center;
+  will-change: transform, opacity;
 }
 
 .tool-menu-label {

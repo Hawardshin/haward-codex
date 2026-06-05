@@ -1,0 +1,32 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "UR-2026-06-05-smooth-redesign-maintenance",
+  "status": "passed",
+  "summary": "Improve Workspace Monitor smooth navigation, maintainability, history payload management, and high-visibility Korean copy after opening multiple tabs.",
+  "initial_instruction_alignment": {
+    "multiple_tab_qa": true,
+    "smooth_navigation": true,
+    "button_size_fix": true,
+    "source_separation": true,
+    "history_payload_migration": true,
+    "translation_cleanup": true
+  },
+  "validation_commands": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build",
+    "corepack pnpm --filter workspace-monitor run build:customer",
+    "corepack pnpm --filter workspace-monitor run perf:budget",
+    "corepack pnpm --filter workspace-monitor run perf:buttons -- http://127.0.0.1:4181/#section-overview",
+    "corepack pnpm --filter workspace-monitor exec node scripts/audit-tab-response.mjs http://127.0.0.1:4181/#section-overview",
+    "Playwright desktop/mobile tab smoke against http://127.0.0.1:4181/"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-05-smooth-redesign-maintenance.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-05-smooth-redesign-maintenance.json"
+  ],
+  "installation_occurred": false
+}

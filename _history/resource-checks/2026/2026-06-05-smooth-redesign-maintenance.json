@@ -1,0 +1,26 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "UR-2026-06-05-smooth-redesign-maintenance",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "resource": "local_static_http_server",
+      "port": 4181,
+      "status": "stopped_after_validation",
+      "cleanup": "completed before close-out"
+    },
+    {
+      "resource": "playwright_chrome_sessions",
+      "status": "closed",
+      "evidence": "Playwright scripts called browser.close() after smoke runs."
+    },
+    {
+      "resource": "generated_snapshot_payload",
+      "status": "bounded",
+      "evidence": "check-history-payload reported 2291477 document JSON bytes under the 2800000 byte budget."
+    }
+  ],
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-05-smooth-redesign-maintenance.json"
+  ]
+}

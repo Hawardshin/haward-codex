@@ -1,0 +1,39 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "UR-2026-06-05-smooth-redesign-maintenance",
+  "check_type": "omission_guard_equivalent",
+  "required_items": [
+    {
+      "item": "Open multiple tabs and find broken or unfinished UI.",
+      "status": "covered",
+      "evidence": "Playwright smoke opened overview, agents, tools, desktop, source, intent, Operator Center, Tool Studio menu, and mobile tools."
+    },
+    {
+      "item": "Improve slow tab/button transitions.",
+      "status": "covered",
+      "evidence": "motion helper split, tokenized transitions, perf:buttons p95 51.9ms, tab audit active p95 49.5ms on repeated run."
+    },
+    {
+      "item": "Improve maintainability through source separation.",
+      "status": "covered",
+      "evidence": "motion helpers moved from MonitorShell to lib/motion.ts and tests updated."
+    },
+    {
+      "item": "Improve accumulated history management.",
+      "status": "covered",
+      "evidence": "history admin preview policy and check-history-payload budget added."
+    },
+    {
+      "item": "Fix awkward translation.",
+      "status": "partial_bounded",
+      "evidence": "High-visibility Operator Center and task run log copy localized; full repository translation audit remains excluded from this slice."
+    }
+  ],
+  "open_items": [
+    "Full copy audit across every UI string.",
+    "Runtime process speed improvements outside renderer tab/button response."
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-05-smooth-redesign-maintenance.json"
+  ]
+}

@@ -22,6 +22,9 @@ const publicSnapshotPath = path.join(projectRoot, "public", "workspace-snapshot.
 
 const IGNORE_DIRS = new Set([".git", ".next", "node_modules", "out", "target", "__pycache__", ".pytest_cache", "_private", "outputs"]);
 const MAX_DOCUMENTS = 1200;
+const DEFAULT_DOCUMENT_HTML_CHARS = 5200;
+const HISTORY_DOCUMENT_HTML_CHARS = 2200;
+const HISTORY_ADMIN_EXCERPT_CHARS = 360;
 const MAX_SOURCE_FILES = 260;
 const MAX_SOURCE_CHARS = 22000;
 const MAX_SOURCE_FILE_BYTES = 180000;
@@ -1451,6 +1454,8 @@ function readDocument(repoRoot, filePath, category) {
   const content = fs.readFileSync(filePath, "utf8");
   const stats = fs.statSync(filePath);
   const isMarkdown = filePath.endsWith(".md") || filePath.endsWith(".mdc");
+  const isHistoryDocument = HISTORY_CATEGORIES.has(category);
+  const maxHtmlChars = isHistoryDocument ? HISTORY_DOCUMENT_HTML_CHARS : DEFAULT_DOCUMENT_HTML_CHARS;
   const historyDate = extractHistoryDate(relativePath);
   return {
     id: slugify(relativePath),
@@ -1459,7 +1464,14 @@ function readDocument(repoRoot, filePath, category) {
     language: detectLanguage(relativePath),
     title: isMarkdown ? extractTitle(content, relativePath) : titleFromPath(relativePath),
     excerpt: makeExcerpt(content),
-    html: isMarkdown ? markdownToHtml(content) : jsonPreviewToHtml(content),
+    html: isHistoryDocument
+      ? historyAdminPreviewToHtml(content)
+      : isMarkdown
+        ? markdownToHtml(content, maxHtmlChars)
+        : jsonPreviewToHtml(content, maxHtmlChars),
+    previewMode: isHistoryDocument ? "admin-summary" : "document-preview",
+    htmlTruncated: isHistoryDocument ? content.length > HISTORY_ADMIN_EXCERPT_CHARS : content.length > maxHtmlChars,
+    sourceBytes: stats.size,
     updatedAt: stats.mtime.toISOString(),
     historyDate,
     historyYear: historyDate ? historyDate.slice(0, 4) : "",
@@ -1895,6 +1907,11 @@ export function markdownToHtml(markdown, maxLength = 18000) {
   return html.join("\n");
 }
 
+function historyAdminPreviewToHtml(content) {
+  const excerpt = makeExcerpt(content, HISTORY_ADMIN_EXCERPT_CHARS) || "No preview available.";
+  return `<p>${escapeHtml(excerpt)}</p>`;
+}
+
 export function extractTitle(content, relativePath = "") {
   const heading = content.match(/^#\s+(.+)$/m);
   return heading ? stripMarkdown(heading[1]) : titleFromPath(relativePath);
@@ -2034,11 +2051,11 @@ function inlineMarkdown(value) {
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<span class="doc-link">$1</span>');
 }
 
-function jsonPreviewToHtml(content) {
+function jsonPreviewToHtml(content, maxLength = DEFAULT_DOCUMENT_HTML_CHARS) {
   try {
-    return `<pre><code>${escapeHtml(JSON.stringify(JSON.parse(content), null, 2).slice(0, 12000))}</code></pre>`;
+    return `<pre><code>${escapeHtml(JSON.stringify(JSON.parse(content), null, 2).slice(0, maxLength))}</code></pre>`;
   } catch {
-    return `<pre><code>${escapeHtml(content.slice(0, 12000))}</code></pre>`;
+    return `<pre><code>${escapeHtml(content.slice(0, maxLength))}</code></pre>`;
   }
 }
 
@@ -2100,8 +2117,8 @@ function detectLanguage(relativePath) {
   return "unknown";
 }
 
-function makeExcerpt(content) {
-  return stripMarkdown(content).replace(/\s+/g, " ").trim().slice(0, 280);
+function makeExcerpt(content, maxLength = 280) {
+  return stripMarkdown(content).replace(/\s+/g, " ").trim().slice(0, maxLength);
 }
 
 function stripMarkdown(value) {
