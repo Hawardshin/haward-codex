@@ -81,6 +81,12 @@ type ToolBuilderBlueprint = {
   labelEn: string;
   detailKo: string;
   detailEn: string;
+  packageName: string;
+  moduleName: string;
+  entrypoint: string;
+  pyprojectPath: string;
+  testPath: string;
+  initCommand: string;
   sourcePath: string;
   schemaPath: string;
   runCommand: string;
@@ -90,6 +96,9 @@ type ToolBuilderBlueprint = {
   riskKo: string;
   riskEn: string;
   manifest: string;
+  editTargets: string[];
+  sourceChecklistKo: string[];
+  sourceChecklistEn: string[];
   outputs: string[];
   icon: LucideIcon;
 };
@@ -236,6 +245,12 @@ const toolBuilderBlueprints: ToolBuilderBlueprint[] = [
     labelEn: "Python CLI Tool",
     detailKo: "입력 JSON을 받아 stdout artifact를 만드는 기본 툴",
     detailEn: "Base tool that accepts input JSON and writes stdout artifacts.",
+    packageName: "new-python-tool",
+    moduleName: "new_python_tool",
+    entrypoint: "new-python-tool=new_python_tool.__main__:main",
+    pyprojectPath: "tools/new-python-tool/pyproject.toml",
+    testPath: "tools/new-python-tool/tests/smoke_test.py",
+    initCommand: "uv init --package tools/new-python-tool && uv add --dev pytest",
     sourcePath: "tools/new-python-tool/src/new_python_tool/__main__.py",
     schemaPath: "tools/new-python-tool/schema/input.schema.json",
     runCommand: "python -m new_python_tool --input fixtures/smoke.json",
@@ -245,6 +260,22 @@ const toolBuilderBlueprints: ToolBuilderBlueprint[] = [
     riskKo: "파일 쓰기, 네트워크, secret 접근은 기본 비활성",
     riskEn: "File writes, network, and secret access are disabled by default.",
     manifest: "tool.json",
+    editTargets: [
+      "tools/new-python-tool/src/new_python_tool/__main__.py",
+      "tools/new-python-tool/src/new_python_tool/tool.py",
+      "tools/new-python-tool/tests/smoke_test.py",
+      "tools/new-python-tool/pyproject.toml"
+    ],
+    sourceChecklistKo: [
+      "src/ layout으로 import 경계를 먼저 고정",
+      "console script는 main() 하나만 호출",
+      "schema 예시와 smoke fixture를 같은 입력으로 유지"
+    ],
+    sourceChecklistEn: [
+      "Use a src/ layout to lock the import boundary first.",
+      "Keep the console script pointed at one main() entry.",
+      "Keep schema examples and smoke fixtures on the same input."
+    ],
     outputs: ["stdout.json", "artifacts/", "validation-record.json"],
     icon: FileCode2
   },
@@ -254,6 +285,12 @@ const toolBuilderBlueprints: ToolBuilderBlueprint[] = [
     labelEn: "MCP Wrapper",
     detailKo: "승인된 MCP server의 list/call을 로컬 툴로 감쌉니다",
     detailEn: "Wraps approved MCP server list/call operations as a local tool.",
+    packageName: "mcp-wrapper",
+    moduleName: "mcp_wrapper",
+    entrypoint: "mcp-wrapper=mcp_wrapper.client:main",
+    pyprojectPath: "tools/mcp-wrapper/pyproject.toml",
+    testPath: "tools/mcp-wrapper/tests/smoke_test.py",
+    initCommand: "uv init --package tools/mcp-wrapper && uv add --dev pytest",
     sourcePath: "tools/mcp-wrapper/src/mcp_wrapper/client.py",
     schemaPath: "tools/mcp-wrapper/schema/tool-call.schema.json",
     runCommand: "python -m mcp_wrapper smoke --server local",
@@ -263,6 +300,22 @@ const toolBuilderBlueprints: ToolBuilderBlueprint[] = [
     riskKo: "connector 권한과 호출 trace가 없는 server는 등록 보류",
     riskEn: "Servers without connector scope and call traces remain blocked.",
     manifest: "mcp-tool.json",
+    editTargets: [
+      "tools/mcp-wrapper/src/mcp_wrapper/client.py",
+      "tools/mcp-wrapper/src/mcp_wrapper/schema.py",
+      "tools/mcp-wrapper/tests/smoke_test.py",
+      "tools/mcp-wrapper/pyproject.toml"
+    ],
+    sourceChecklistKo: [
+      "discover와 invoke 코드를 분리",
+      "server id, tool name, input schema를 명시",
+      "호출 trace fixture를 smoke test에 고정"
+    ],
+    sourceChecklistEn: [
+      "Separate discovery code from invocation code.",
+      "Declare server id, tool name, and input schema.",
+      "Pin call-trace fixtures in the smoke test."
+    ],
     outputs: ["tools-list.json", "call-trace.json", "gateway-preflight.json"],
     icon: GitBranch
   },
@@ -272,6 +325,12 @@ const toolBuilderBlueprints: ToolBuilderBlueprint[] = [
     labelEn: "Automation Tool",
     detailKo: "반복 작업을 재사용 가능한 명령/검증 단위로 승격합니다",
     detailEn: "Promotes repeated work into a reusable command and validation unit.",
+    packageName: "automation-tool",
+    moduleName: "automation_tool",
+    entrypoint: "automation-tool=automation_tool.run:main",
+    pyprojectPath: "tools/automation-tool/pyproject.toml",
+    testPath: "tools/automation-tool/tests/smoke_test.py",
+    initCommand: "uv init --package tools/automation-tool && uv add --dev pytest",
     sourcePath: "tools/automation-tool/src/automation_tool/run.py",
     schemaPath: "tools/automation-tool/schema/task.schema.json",
     runCommand: "python -m automation_tool run --dry-run",
@@ -281,6 +340,22 @@ const toolBuilderBlueprints: ToolBuilderBlueprint[] = [
     riskKo: "반복 실행, 비용, 외부 변경은 승인 gate 뒤에 둠",
     riskEn: "Repeated runs, cost, and external mutations stay behind approval gates.",
     manifest: "automation-tool.json",
+    editTargets: [
+      "tools/automation-tool/src/automation_tool/run.py",
+      "tools/automation-tool/src/automation_tool/plan.py",
+      "tools/automation-tool/tests/smoke_test.py",
+      "tools/automation-tool/pyproject.toml"
+    ],
+    sourceChecklistKo: [
+      "dry-run과 실제 실행 함수를 분리",
+      "rollback plan을 출력 계약에 포함",
+      "반복 실행 비용과 외부 변경 gate를 명시"
+    ],
+    sourceChecklistEn: [
+      "Separate dry-run from real execution.",
+      "Include a rollback plan in the output contract.",
+      "Declare repeated-run cost and external mutation gates."
+    ],
     outputs: ["task-run.json", "rollback-plan.md", "operator-summary.md"],
     icon: Wand2
   }
@@ -522,6 +597,7 @@ export function ToolStudioPanel({
   const [mode, setMode] = useState<ToolStudioMode>("build");
   const [selectedToolId, setSelectedToolId] = useState(toolCards[0].id);
   const [selectedBlueprintId, setSelectedBlueprintId] = useState(toolBuilderBlueprints[0].id);
+  const [selectedSourceTarget, setSelectedSourceTarget] = useState(toolBuilderBlueprints[0].editTargets[0]);
   const [selectedEnvironmentId, setSelectedEnvironmentId] = useState(pythonEnvironmentProfiles[0].id);
   const [selectedVenvStepId, setSelectedVenvStepId] = useState(virtualEnvironmentLifecycleSteps[0].id);
   const [selectedDeployTargetId, setSelectedDeployTargetId] = useState(toolDeployTargets[0].id);
@@ -529,6 +605,7 @@ export function ToolStudioPanel({
   const activeMode = toolModes.find((item) => item.id === mode) || toolModes[0];
   const selectedTool = toolCards.find((item) => item.id === selectedToolId) || toolCards[0];
   const selectedBlueprint = toolBuilderBlueprints.find((item) => item.id === selectedBlueprintId) || toolBuilderBlueprints[0];
+  const selectedSourceChecklist = ko ? selectedBlueprint.sourceChecklistKo : selectedBlueprint.sourceChecklistEn;
   const selectedEnvironment = pythonEnvironmentProfiles.find((item) => item.id === selectedEnvironmentId) || pythonEnvironmentProfiles[0];
   const selectedVenvStep = virtualEnvironmentLifecycleSteps.find((item) => item.id === selectedVenvStepId) || virtualEnvironmentLifecycleSteps[0];
   const selectedVenvCommand = selectedVenvStep.command(selectedEnvironment);
@@ -738,15 +815,45 @@ export function ToolStudioPanel({
     }
   };
 
+  useEffect(() => {
+    const nextBlueprint = toolBuilderBlueprints.find((item) => item.id === selectedBlueprintId) || toolBuilderBlueprints[0];
+    setSelectedSourceTarget(nextBlueprint.editTargets[0] || nextBlueprint.sourcePath);
+  }, [selectedBlueprintId]);
+
   const copyBuilderSpec = () => {
     void writeClipboardText(JSON.stringify({
       id: selectedBlueprint.id,
       manifest: selectedBlueprint.manifest,
+      packageName: selectedBlueprint.packageName,
+      moduleName: selectedBlueprint.moduleName,
+      entrypoint: selectedBlueprint.entrypoint,
+      pyprojectPath: selectedBlueprint.pyprojectPath,
       sourcePath: selectedBlueprint.sourcePath,
       schemaPath: selectedBlueprint.schemaPath,
+      testPath: selectedBlueprint.testPath,
+      initCommand: selectedBlueprint.initCommand,
       runCommand: selectedBlueprint.runCommand,
       packageCommand: selectedBlueprint.packageCommand,
+      editTargets: selectedBlueprint.editTargets,
+      sourceChecklist: selectedSourceChecklist,
       outputs: selectedBlueprint.outputs
+    }, null, 2));
+  };
+
+  const copyPythonSourcePlan = () => {
+    void writeClipboardText(JSON.stringify({
+      id: selectedBlueprint.id,
+      packageName: selectedBlueprint.packageName,
+      moduleName: selectedBlueprint.moduleName,
+      entrypoint: selectedBlueprint.entrypoint,
+      pyprojectPath: selectedBlueprint.pyprojectPath,
+      selectedSourceTarget,
+      editTargets: selectedBlueprint.editTargets,
+      initCommand: selectedBlueprint.initCommand,
+      runCommand: selectedBlueprint.runCommand,
+      packageCommand: selectedBlueprint.packageCommand,
+      testPath: selectedBlueprint.testPath,
+      checklist: selectedSourceChecklist
     }, null, 2));
   };
 
@@ -1051,6 +1158,107 @@ export function ToolStudioPanel({
                     </ul>
                   </article>
                 </div>
+
+                <section className="tool-python-source-manager" data-tool-python-source-manager aria-label={ko ? "Python 소스 관리" : "Python source management"}>
+                  <header className="tool-python-source-heading">
+                    <div>
+                      <p className="eyebrow">Python Source</p>
+                      <h4>{ko ? "소스 관리만 보기" : "Manage only source files"}</h4>
+                      <span>
+                        {ko
+                          ? "패키지, 모듈, entry point, smoke test를 한 줄 흐름으로 고정합니다."
+                          : "Pin package, module, entry point, and smoke test in one source flow."}
+                      </span>
+                    </div>
+                    <strong>{selectedBlueprint.packageName}</strong>
+                  </header>
+
+                  <div className="tool-python-source-layout">
+                    <div className="tool-python-source-files" data-tool-python-source-files aria-label={ko ? "편집 대상" : "Edit targets"}>
+                      {selectedBlueprint.editTargets.map((target) => (
+                        <button
+                          key={target}
+                          type="button"
+                          className={target === selectedSourceTarget ? "active" : ""}
+                          onClick={() => setSelectedSourceTarget(target)}
+                          aria-pressed={target === selectedSourceTarget}
+                          data-tool-python-source-target={target}
+                        >
+                          <FileCode2 size={15} aria-hidden="true" />
+                          <span>{target}</span>
+                        </button>
+                      ))}
+                    </div>
+
+                    <article className="tool-python-source-card" data-tool-python-source-pyproject>
+                      <header>
+                        <PackageCheck size={16} aria-hidden="true" />
+                        <span>{ko ? "pyproject" : "pyproject"}</span>
+                      </header>
+                      <dl>
+                        <div>
+                          <dt>{ko ? "파일" : "File"}</dt>
+                          <dd>{selectedBlueprint.pyprojectPath}</dd>
+                        </div>
+                        <div>
+                          <dt>{ko ? "패키지" : "Package"}</dt>
+                          <dd>{selectedBlueprint.packageName}</dd>
+                        </div>
+                        <div>
+                          <dt>{ko ? "모듈" : "Module"}</dt>
+                          <dd>{selectedBlueprint.moduleName}</dd>
+                        </div>
+                      </dl>
+                    </article>
+
+                    <article className="tool-python-source-card" data-tool-python-source-entrypoint>
+                      <header>
+                        <PlayCircle size={16} aria-hidden="true" />
+                        <span>{ko ? "entry point" : "entry point"}</span>
+                      </header>
+                      <code>{selectedBlueprint.entrypoint}</code>
+                      <small>{selectedBlueprint.testPath}</small>
+                    </article>
+
+                    <article className="tool-python-source-card tool-python-source-checklist" data-tool-python-source-checklist>
+                      <header>
+                        <ShieldCheck size={16} aria-hidden="true" />
+                        <span>{ko ? "소스 체크" : "Source check"}</span>
+                      </header>
+                      <ul>
+                        {selectedSourceChecklist.map((item) => (
+                          <li key={item}>
+                            <CheckCircle2 size={14} aria-hidden="true" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </article>
+                  </div>
+
+                  <article className="tool-python-source-command" data-tool-python-source-command>
+                    <header>
+                      <SquareTerminal size={16} aria-hidden="true" />
+                      <span>{ko ? "초기화 명령" : "Init command"}</span>
+                    </header>
+                    <code>{selectedBlueprint.initCommand}</code>
+                  </article>
+
+                  <div className="tool-python-source-actions">
+                    <button type="button" onClick={onOpenSource} data-tool-python-source-action="open">
+                      <FileCode2 size={16} aria-hidden="true" />
+                      <span>{ko ? "선택 파일 열기" : "Open selected"}</span>
+                    </button>
+                    <button type="button" onClick={onOpenTerminal} data-tool-python-source-action="terminal">
+                      <SquareTerminal size={16} aria-hidden="true" />
+                      <span>{ko ? "터미널 열기" : "Open terminal"}</span>
+                    </button>
+                    <button type="button" onClick={copyPythonSourcePlan} data-tool-python-source-action="copy">
+                      <Copy size={16} aria-hidden="true" />
+                      <span>{ko ? "소스 계획 복사" : "Copy source plan"}</span>
+                    </button>
+                  </div>
+                </section>
 
                 <div className="tool-builder-actions">
                   <button type="button" onClick={onOpenSource} data-tool-builder-action="source">

@@ -125,9 +125,20 @@ test("Monitor buttons expose instant press feedback before heavy click work", ()
 
 test("Tool Studio build mode exposes a dedicated tool builder workbench", () => {
   assert.match(toolStudio, /type ToolBuilderBlueprint = \{/);
+  assert.match(toolStudio, /packageName: string;/);
+  assert.match(toolStudio, /moduleName: string;/);
+  assert.match(toolStudio, /entrypoint: string;/);
+  assert.match(toolStudio, /pyprojectPath: string;/);
+  assert.match(toolStudio, /testPath: string;/);
+  assert.match(toolStudio, /initCommand: string;/);
+  assert.match(toolStudio, /editTargets: string\[\];/);
+  assert.match(toolStudio, /sourceChecklistKo: string\[\];/);
+  assert.match(toolStudio, /sourceChecklistEn: string\[\];/);
   assert.match(toolStudio, /const toolBuilderBlueprints: ToolBuilderBlueprint\[\] = \[/);
   assert.match(toolStudio, /id:\s*"python-cli-tool"[\s\S]*?id:\s*"mcp-wrapper-tool"[\s\S]*?id:\s*"automation-tool"/);
   assert.match(toolStudio, /const \[selectedBlueprintId, setSelectedBlueprintId\] = useState/);
+  assert.match(toolStudio, /const \[selectedSourceTarget, setSelectedSourceTarget\] = useState/);
+  assert.match(toolStudio, /const selectedSourceChecklist = ko \? selectedBlueprint\.sourceChecklistKo : selectedBlueprint\.sourceChecklistEn/);
   assert.match(toolStudio, /className="tool-builder-workbench"/);
   assert.match(toolStudio, /data-tool-builder-blueprint=\{blueprint\.id\}/);
   assert.match(toolStudio, /data-tool-builder-manifest/);
@@ -137,11 +148,28 @@ test("Tool Studio build mode exposes a dedicated tool builder workbench", () => 
   assert.match(toolStudio, /data-tool-builder-action="smoke"/);
   assert.match(toolStudio, /data-tool-builder-action="package"/);
   assert.match(toolStudio, /data-tool-builder-action="copy"/);
+  assert.match(toolStudio, /className="tool-python-source-manager"/);
+  assert.match(toolStudio, /data-tool-python-source-manager/);
+  assert.match(toolStudio, /data-tool-python-source-files/);
+  assert.match(toolStudio, /data-tool-python-source-target=\{target\}/);
+  assert.match(toolStudio, /data-tool-python-source-pyproject/);
+  assert.match(toolStudio, /data-tool-python-source-entrypoint/);
+  assert.match(toolStudio, /data-tool-python-source-checklist/);
+  assert.match(toolStudio, /data-tool-python-source-command/);
+  assert.match(toolStudio, /data-tool-python-source-action="open"/);
+  assert.match(toolStudio, /data-tool-python-source-action="terminal"/);
+  assert.match(toolStudio, /data-tool-python-source-action="copy"/);
+  assert.match(toolStudio, /copyPythonSourcePlan/);
   assert.match(toolStudio, /writeClipboardText\(JSON\.stringify/);
   assert.match(css, /\.tool-builder-blueprints \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.tool-builder-canvas \{[\s\S]*?grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.tool-builder-actions \{[\s\S]*?grid-template-columns: repeat\(4, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.tool-python-source-manager \{/);
+  assert.match(css, /\.tool-python-source-layout \{[\s\S]*?grid-template-columns: minmax\(210px, 1\.05fr\) minmax\(0, 0\.95fr\);/);
+  assert.match(css, /\.tool-python-source-checklist ul \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
+  assert.match(css, /\.tool-python-source-actions \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-builder-blueprints,[\s\S]*?\.tool-builder-canvas,[\s\S]*?\.tool-builder-actions,/);
+  assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-python-source-layout,[\s\S]*?\.tool-python-source-actions,[\s\S]*?\.tool-python-source-checklist ul,/);
 });
 
 test("Tool Studio environment mode exposes a Python execution workbench", () => {

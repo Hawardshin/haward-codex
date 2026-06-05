@@ -13694,6 +13694,259 @@ h3 {
   color: var(--action-primary-fg);
 }
 
+.tool-python-source-manager {
+  display: grid;
+  gap: 9px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 92%, var(--green) 5%), var(--surface));
+  padding: 10px;
+}
+
+.tool-python-source-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+
+.tool-python-source-heading h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--font-size-card-title);
+  line-height: 1.3;
+}
+
+.tool-python-source-heading span {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  line-height: 1.35;
+}
+
+.tool-python-source-heading strong {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-muted);
+  color: var(--text);
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  line-height: 1.25;
+  overflow: hidden;
+  padding: 5px 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tool-python-source-layout {
+  display: grid;
+  grid-template-columns: minmax(210px, 1.05fr) minmax(0, 0.95fr);
+  gap: 8px;
+  min-width: 0;
+}
+
+.tool-python-source-files {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.tool-python-source-files button {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 7px;
+  min-height: 38px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--control-radius);
+  background: var(--surface);
+  color: var(--text);
+  padding: 7px 8px;
+  text-align: left;
+}
+
+.tool-python-source-files button.active {
+  border-color: var(--control-selected-border);
+  background: var(--control-selected-bg);
+  color: var(--control-selected-fg);
+}
+
+.tool-python-source-files button svg {
+  color: var(--accent-primary);
+}
+
+.tool-python-source-files button.active svg {
+  color: currentColor;
+}
+
+.tool-python-source-files span {
+  min-width: 0;
+  overflow: hidden;
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tool-python-source-card,
+.tool-python-source-command {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 10px;
+}
+
+.tool-python-source-card header,
+.tool-python-source-command header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.tool-python-source-card header span,
+.tool-python-source-command header span {
+  min-width: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tool-python-source-card dl {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  min-width: 0;
+}
+
+.tool-python-source-card div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.tool-python-source-card dt {
+  color: var(--text-tertiary);
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.tool-python-source-card dd,
+.tool-python-source-card small,
+.tool-python-source-command code,
+.tool-python-source-card code {
+  min-width: 0;
+  margin: 0;
+  color: var(--text);
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.tool-python-source-card code,
+.tool-python-source-command code {
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--terminal-bg);
+  color: var(--terminal-fg);
+  padding: 8px;
+}
+
+.tool-python-source-card small {
+  color: var(--text-secondary);
+}
+
+.tool-python-source-checklist {
+  grid-column: 2 / -1;
+}
+
+.tool-python-source-checklist ul {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tool-python-source-checklist li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 6px;
+  align-items: start;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface-muted);
+  color: var(--text);
+  padding: 7px;
+}
+
+.tool-python-source-checklist li svg {
+  margin-top: 1px;
+  color: var(--green);
+}
+
+.tool-python-source-checklist li span {
+  min-width: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.tool-python-source-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.tool-python-source-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  min-height: var(--control-target-size);
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--control-radius);
+  background: var(--control-bg);
+  color: var(--text);
+  padding: 8px var(--control-padding-x);
+  white-space: nowrap;
+}
+
+.tool-python-source-actions button:not(:disabled):hover {
+  background: var(--control-bg-hover);
+}
+
+.tool-python-source-actions button[data-tool-python-source-action="terminal"] {
+  border-color: var(--action-primary-border);
+  background: var(--action-primary-bg);
+  color: var(--action-primary-fg);
+}
+
 .tool-environment-workbench {
   display: grid;
   gap: 10px;
@@ -14478,6 +14731,9 @@ h3 {
   .tool-builder-blueprints,
   .tool-builder-canvas,
   .tool-builder-actions,
+  .tool-python-source-layout,
+  .tool-python-source-actions,
+  .tool-python-source-checklist ul,
   .tool-environment-profiles,
   .tool-environment-canvas,
   .tool-environment-actions,
@@ -14516,6 +14772,19 @@ h3 {
     grid-row: auto;
   }
 
+  .tool-python-source-heading {
+    display: grid;
+  }
+
+  .tool-python-source-heading strong {
+    justify-self: start;
+    max-width: 100%;
+  }
+
+  .tool-python-source-checklist {
+    grid-column: auto;
+  }
+
   .tool-environment-runtime {
     grid-row: auto;
   }
@@ -14525,6 +14794,10 @@ h3 {
   }
 
   .tool-builder-actions button {
+    width: 100%;
+  }
+
+  .tool-python-source-actions button {
     width: 100%;
   }
 

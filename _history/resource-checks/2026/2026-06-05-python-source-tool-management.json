@@ -1,0 +1,26 @@
+{
+  "schema_version": "2026-06-05",
+  "work_id": "2026-06-05-python-source-tool-management",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "type": "local_http_server",
+      "command": "python3 -m http.server 3349 -d platform-desktop-app/renderer/workspace-monitor/out",
+      "purpose": "Serve static export for Browser smoke",
+      "status": "stopped_after_validation",
+      "cleanup_required": false
+    },
+    {
+      "type": "browser_automation",
+      "surface": "in-app Browser and project-local Playwright",
+      "purpose": "Desktop and 390px mobile visual/overflow smoke",
+      "status": "completed",
+      "cleanup_required": false
+    }
+  ],
+  "checks": [
+    "Desktop source manager rendered with overflowX=0.",
+    "Mobile 390x844 source manager rendered with overflowX=0 and actionHeight=48.",
+    "Server session stopped before close-out."
+  ]
+}

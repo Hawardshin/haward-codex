@@ -1,0 +1,12 @@
+{
+  "schema_version": "2026-06-05",
+  "request_id": "2026-06-05-python-source-tool-management",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request changes a user-facing platform UI and source-management workflow, so requirements, spec, validation, and history records are required. The implementation is bounded to Workspace Monitor Tool Studio and does not install dependencies or execute packaging commands.",
+  "web_first_intake": true,
+  "memory_bootstrap": "simulated from hot anchors: AGENTS.md, Workspace Monitor requirements, Tool Studio build/environment/deploy specs, Python packaging web references, prior tab/button performance changes.",
+  "large_scope_decomposition": "simulated and scoped to the Tool Studio Build Tool Python source manager rather than all tool generation infrastructure.",
+  "installation_occurred": false
+}

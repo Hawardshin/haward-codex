@@ -66,6 +66,7 @@
 | REQ-WM-053 | Tool Studio의 `파이썬 환경` 화면 안에서 가상환경 관리는 별도 관리 패널로 분리되어야 하며, create/activate/install/freeze/rebuild lifecycle step, 선택 step command, evidence, terminal/copy-command/copy-workflow 액션을 제공하고 860px 이하에서도 단계와 액션이 한 열로 접혀야 한다. | must | virtual environment manager static test, desktop/mobile venv manager smoke, action marker and overflow assertion, screenshot artifact, `pnpm run check`, `pnpm test`, `pnpm run build:customer` 확인 |
 | REQ-WM-054 | 탭 간 이동은 어떤 화면으로 전환해도 heavy body mount 때문에 active 탭, 제목, 전환 피드백의 첫 paint가 막히면 안 된다. 섹션 body는 첫 paint 이후 staged mount로 붙어야 하며, Source 검색처럼 대량 데이터를 훑는 작업은 해당 섹션 body가 준비된 뒤에만 실행해야 한다. | must | `readySection` staged mount static test, CPU throttle 6 tab active-response audit, section transition shell smoke, Source query gate audit, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 | REQ-WM-055 | 모든 버튼/버튼형 컨트롤은 React click handler, workbench mount, native 호출, clipboard, modal open, section 이동 같은 실제 작업이 시작되기 전에 capture-phase 즉시 눌림 피드백을 표시해야 한다. 대표 67개 버튼 press sample과 실제 nav click sample은 CPU throttle 6 정적 export audit에서 feedback p95 60ms 이하를 유지해야 한다. | must | instant button feedback static test, `perf:buttons` CPU throttle 6 audit, in-app Browser button smoke, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
+| REQ-WM-056 | Tool Studio의 `툴 만들기` 화면은 Python tool source 관리를 별도 하위 작업대로 제공해야 하며, template별 package name, module name, `src/` 편집 대상, `pyproject.toml`, console entry point, smoke test path, init/run/package command, checklist, 소스 계획 복사 액션을 한 곳에서 보여줘야 한다. | must | python source manager static test, copy payload marker audit, desktop/mobile source manager smoke, overflow assertion, `pnpm run check`, `pnpm test`, `pnpm run build:customer`, `pnpm run perf:budget` 확인 |
 
 ## 범위
 
@@ -112,6 +113,7 @@
 - AgentCore Quick Builder의 multi-capability bundle 선택과 proposal form 반영
 - Tool Studio `파이썬 환경` 전용 실행환경 작업대
 - Tool Studio `파이썬 환경` 내부 가상환경 lifecycle 관리 패널
+- Tool Studio `툴 만들기` 내부 Python source/package/pyproject 관리 작업대
 - Vercel 배포 문서
 
 ## 제외 범위
