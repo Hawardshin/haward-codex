@@ -1,0 +1,24 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "character-design-refinement",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "resource": "static_http_server",
+      "risk": "Long-running process can remain open after visual QA.",
+      "control": "Stop the local static server after Browser and Playwright smoke."
+    },
+    {
+      "resource": "three_canvas_animation_loop",
+      "risk": "3D canvas can waste work when hidden or offscreen.",
+      "control": "Keep existing lazy mount, offscreen pause, document visibility, and reduced-motion controls."
+    }
+  ],
+  "status": "completed",
+  "cleanup": [
+    {
+      "resource": "static_http_server",
+      "action": "Stopped with keyboard interrupt after visual QA."
+    }
+  ]
+}

@@ -228,72 +228,84 @@ function AgentCharacter({ node, totalAgents }: { node: SceneAgent; totalAgents: 
           <torusGeometry args={[0.38, 0.018, 10, 44]} />
           <meshStandardMaterial color={node.color} emissive={node.color} emissiveIntensity={0.32} />
         </mesh>
-        <mesh name="agent-character-foot-left" position={[-0.15, 0.1, 0.08]}>
-          <sphereGeometry args={[0.105, 14, 10]} />
+        <mesh name="agent-character-foot-left" position={[-0.13, 0.085, 0.08]}>
+          <sphereGeometry args={[0.12, 14, 10]} />
           <meshStandardMaterial color="#d7e0ea" roughness={0.5} metalness={0.06} />
         </mesh>
-        <mesh name="agent-character-foot-right" position={[0.15, 0.1, 0.08]}>
-          <sphereGeometry args={[0.105, 14, 10]} />
+        <mesh name="agent-character-foot-right" position={[0.13, 0.085, 0.08]}>
+          <sphereGeometry args={[0.12, 14, 10]} />
           <meshStandardMaterial color="#d7e0ea" roughness={0.5} metalness={0.06} />
         </mesh>
-        <mesh name="agent-character-tail" position={[0, 0.48, -0.25]}>
-          <sphereGeometry args={[0.095, 14, 10]} />
+        <mesh name="agent-character-tail" position={[0, 0.43, -0.29]}>
+          <sphereGeometry args={[0.11, 14, 10]} />
           <meshStandardMaterial color="#d7e0ea" roughness={0.48} metalness={0.04} />
         </mesh>
-        <mesh name="agent-character-torso" position={[0, 0.5, 0]}>
-          <capsuleGeometry args={[0.26, 0.34, 8, 18]} />
+        <mesh name="agent-character-torso" position={[0, 0.46, 0]}>
+          <capsuleGeometry args={[0.29, 0.24, 8, 18]} />
           <meshStandardMaterial color={node.color} emissive={node.color} emissiveIntensity={0.08} roughness={0.34} metalness={0.22} />
         </mesh>
-        <mesh name="agent-character-chest-panel" position={[0, 0.58, 0.235]}>
-          <boxGeometry args={[0.22, 0.12, 0.035]} />
+        <mesh name="agent-character-chest-panel" position={[0, 0.54, 0.265]}>
+          <boxGeometry args={[0.18, 0.09, 0.035]} />
           <meshStandardMaterial color="#0d1117" emissive={signalColor} emissiveIntensity={0.18} roughness={0.28} metalness={0.18} />
         </mesh>
-        <mesh name="agent-character-ear-left" position={[-0.16, 1.19, 0.015]} scale={[0.86, 1.16, 0.72]}>
-          <sphereGeometry args={[0.1, 16, 12]} />
+        <mesh name="agent-character-ear-left" position={[-0.18, 1.17, 0.015]} scale={[0.88, 1.04, 0.72]}>
+          <sphereGeometry args={[0.115, 16, 12]} />
           <meshStandardMaterial color="#e6edf3" roughness={0.52} metalness={0.08} />
         </mesh>
-        <mesh name="agent-character-ear-right" position={[0.16, 1.19, 0.015]} scale={[0.86, 1.16, 0.72]}>
-          <sphereGeometry args={[0.1, 16, 12]} />
+        <mesh name="agent-character-ear-right" position={[0.18, 1.17, 0.015]} scale={[0.88, 1.04, 0.72]}>
+          <sphereGeometry args={[0.115, 16, 12]} />
           <meshStandardMaterial color="#e6edf3" roughness={0.52} metalness={0.08} />
         </mesh>
-        <mesh name="agent-character-inner-ear-left" position={[-0.16, 1.19, 0.075]} scale={[0.52, 0.74, 0.24]}>
+        <mesh name="agent-character-inner-ear-left" position={[-0.18, 1.17, 0.08]} scale={[0.52, 0.68, 0.24]}>
           <sphereGeometry args={[0.074, 12, 8]} />
           <meshStandardMaterial color={visorColor} emissive={signalColor} emissiveIntensity={0.1} roughness={0.42} metalness={0.02} />
         </mesh>
-        <mesh name="agent-character-inner-ear-right" position={[0.16, 1.19, 0.075]} scale={[0.52, 0.74, 0.24]}>
+        <mesh name="agent-character-inner-ear-right" position={[0.18, 1.17, 0.08]} scale={[0.52, 0.68, 0.24]}>
           <sphereGeometry args={[0.074, 12, 8]} />
           <meshStandardMaterial color={visorColor} emissive={signalColor} emissiveIntensity={0.1} roughness={0.42} metalness={0.02} />
         </mesh>
-        <mesh name="agent-character-head" position={[0, 0.97, 0]}>
-          <sphereGeometry args={[0.28, 24, 18]} />
+        <mesh name="agent-character-head" position={[0, 0.94, 0]}>
+          <sphereGeometry args={[0.32, 24, 18]} />
           <meshStandardMaterial color="#e6edf3" roughness={0.44} metalness={0.18} />
         </mesh>
-        <mesh name="agent-character-visor" position={[0, 1.025, 0.242]}>
-          <boxGeometry args={[0.24, 0.064, 0.035]} />
+        <mesh name="agent-character-visor" position={[0, 1.045, 0.29]}>
+          <boxGeometry args={[0.16, 0.028, 0.026]} />
           <meshStandardMaterial color={visorColor} emissive={signalColor} emissiveIntensity={0.28} roughness={0.2} metalness={0.1} />
         </mesh>
-        <mesh name="agent-character-muzzle" position={[0, 0.925, 0.265]} scale={[1.1, 0.68, 0.46]}>
-          <sphereGeometry args={[0.105, 16, 10]} />
+        <mesh name="agent-character-eye-left" position={[-0.075, 1.0, 0.306]}>
+          <sphereGeometry args={[0.026, 12, 8]} />
+          <meshStandardMaterial color="#101923" roughness={0.38} metalness={0.04} />
+        </mesh>
+        <mesh name="agent-character-eye-right" position={[0.075, 1.0, 0.306]}>
+          <sphereGeometry args={[0.026, 12, 8]} />
+          <meshStandardMaterial color="#101923" roughness={0.38} metalness={0.04} />
+        </mesh>
+        <mesh name="agent-character-muzzle" position={[0, 0.895, 0.306]} scale={[1.22, 0.72, 0.5]}>
+          <sphereGeometry args={[0.115, 16, 10]} />
           <meshStandardMaterial color="#f8fafc" roughness={0.5} metalness={0.04} />
         </mesh>
-        <mesh name="agent-character-cheek-left" position={[-0.13, 0.955, 0.27]} scale={[1, 0.65, 0.32]}>
-          <sphereGeometry args={[0.043, 10, 8]} />
+        <mesh name="agent-character-nose" position={[0, 0.925, 0.362]}>
+          <sphereGeometry args={[0.018, 10, 8]} />
+          <meshStandardMaterial color="#101923" roughness={0.42} metalness={0.02} />
+        </mesh>
+        <mesh name="agent-character-cheek-left" position={[-0.145, 0.935, 0.31]} scale={[1, 0.66, 0.32]}>
+          <sphereGeometry args={[0.046, 10, 8]} />
           <meshStandardMaterial color="#ffd3d0" emissive="#ff9a96" emissiveIntensity={0.12} roughness={0.36} />
         </mesh>
-        <mesh name="agent-character-cheek-right" position={[0.13, 0.955, 0.27]} scale={[1, 0.65, 0.32]}>
-          <sphereGeometry args={[0.043, 10, 8]} />
+        <mesh name="agent-character-cheek-right" position={[0.145, 0.935, 0.31]} scale={[1, 0.66, 0.32]}>
+          <sphereGeometry args={[0.046, 10, 8]} />
           <meshStandardMaterial color="#ffd3d0" emissive="#ff9a96" emissiveIntensity={0.12} roughness={0.36} />
         </mesh>
         <mesh name="agent-character-status-light" position={[0, 1.235, 0.02]}>
           <sphereGeometry args={[0.04, 12, 10]} />
           <meshStandardMaterial color={signalColor} emissive={signalColor} emissiveIntensity={0.58} roughness={0.22} />
         </mesh>
-        <mesh name="agent-character-left-hand" position={[-0.34, 0.55, 0]}>
-          <sphereGeometry args={[0.075, 12, 10]} />
+        <mesh name="agent-character-left-hand" position={[-0.3, 0.49, 0.02]}>
+          <sphereGeometry args={[0.08, 12, 10]} />
           <meshStandardMaterial color="#d7e0ea" roughness={0.45} />
         </mesh>
-        <mesh name="agent-character-right-hand" position={[0.34, 0.55, 0]}>
-          <sphereGeometry args={[0.075, 12, 10]} />
+        <mesh name="agent-character-right-hand" position={[0.3, 0.49, 0.02]}>
+          <sphereGeometry args={[0.08, 12, 10]} />
           <meshStandardMaterial color="#d7e0ea" roughness={0.45} />
         </mesh>
         <mesh name="agent-character-workload-meter" position={[0.36, 0.22 + workloadHeight / 2, -0.16]}>

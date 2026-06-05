@@ -1,0 +1,8 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "character-design-refinement",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "Meaningful UI character design source change in the desktop monitor without dependency installation."
+}

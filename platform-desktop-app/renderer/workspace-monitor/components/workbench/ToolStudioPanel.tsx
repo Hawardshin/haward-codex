@@ -278,19 +278,38 @@ export function ToolStudioPanel({
 
       const palette = [0x58a6ff, 0x66d9b1, 0xf7c66f, 0xc8b6ff];
       const group = new THREE.Group();
-      const bodyGeometry = new THREE.CapsuleGeometry(0.29, 0.34, 8, 18);
-      const headGeometry = new THREE.SphereGeometry(0.3, 24, 16);
-      const earGeometry = new THREE.SphereGeometry(0.105, 16, 12);
+      const bodyGeometry = new THREE.CapsuleGeometry(0.31, 0.24, 8, 18);
+      const headGeometry = new THREE.SphereGeometry(0.33, 24, 16);
+      const earGeometry = new THREE.SphereGeometry(0.115, 16, 12);
       const innerEarGeometry = new THREE.SphereGeometry(0.07, 12, 8);
-      const muzzleGeometry = new THREE.SphereGeometry(0.105, 16, 10);
-      const cheekGeometry = new THREE.SphereGeometry(0.043, 10, 8);
-      const visorGeometry = new THREE.BoxGeometry(0.25, 0.064, 0.04);
-      const chestPanelGeometry = new THREE.BoxGeometry(0.21, 0.12, 0.04);
-      const footGeometry = new THREE.SphereGeometry(0.1, 14, 10);
-      const handGeometry = new THREE.SphereGeometry(0.07, 12, 10);
+      const eyeGeometry = new THREE.SphereGeometry(0.024, 12, 8);
+      const noseGeometry = new THREE.SphereGeometry(0.018, 10, 8);
+      const muzzleGeometry = new THREE.SphereGeometry(0.115, 16, 10);
+      const cheekGeometry = new THREE.SphereGeometry(0.046, 10, 8);
+      const visorGeometry = new THREE.BoxGeometry(0.18, 0.034, 0.04);
+      const chestPanelGeometry = new THREE.BoxGeometry(0.18, 0.095, 0.04);
+      const footGeometry = new THREE.SphereGeometry(0.115, 14, 10);
+      const handGeometry = new THREE.SphereGeometry(0.075, 12, 10);
       const statusLightGeometry = new THREE.SphereGeometry(0.045, 12, 10);
-      const tailGeometry = new THREE.SphereGeometry(0.09, 14, 10);
+      const tailGeometry = new THREE.SphereGeometry(0.105, 14, 10);
       const roleHaloGeometry = new THREE.TorusGeometry(0.42, 0.016, 8, 48);
+      const templateGeometries = [
+        bodyGeometry,
+        headGeometry,
+        earGeometry,
+        innerEarGeometry,
+        eyeGeometry,
+        noseGeometry,
+        muzzleGeometry,
+        cheekGeometry,
+        visorGeometry,
+        chestPanelGeometry,
+        footGeometry,
+        handGeometry,
+        statusLightGeometry,
+        tailGeometry,
+        roleHaloGeometry
+      ];
       const orbitGeometry = new THREE.TorusGeometry(1.52, 0.012, 8, 80);
       const orbit = new THREE.Mesh(
         orbitGeometry,
@@ -332,7 +351,11 @@ export function ToolStudioPanel({
         const leftInnerEar = new THREE.Mesh(innerEarGeometry.clone(), visorMaterial.clone());
         const rightInnerEar = new THREE.Mesh(innerEarGeometry.clone(), visorMaterial.clone());
         const visor = new THREE.Mesh(visorGeometry.clone(), visorMaterial);
+        const eyeMaterial = new THREE.MeshStandardMaterial({ color: 0x101923, roughness: 0.38, metalness: 0.04 });
+        const leftEye = new THREE.Mesh(eyeGeometry.clone(), eyeMaterial);
+        const rightEye = new THREE.Mesh(eyeGeometry.clone(), eyeMaterial.clone());
         const muzzle = new THREE.Mesh(muzzleGeometry.clone(), shellMaterial.clone());
+        const nose = new THREE.Mesh(noseGeometry.clone(), eyeMaterial.clone());
         const cheekMaterial = new THREE.MeshStandardMaterial({
           color: 0xffd3d0,
           emissive: 0xff9a96,
@@ -370,37 +393,43 @@ export function ToolStudioPanel({
         leftInnerEar.name = "tool-agent-character-inner-ear-left";
         rightInnerEar.name = "tool-agent-character-inner-ear-right";
         visor.name = "tool-agent-character-visor";
+        leftEye.name = "tool-agent-character-eye-left";
+        rightEye.name = "tool-agent-character-eye-right";
         muzzle.name = "tool-agent-character-muzzle";
+        nose.name = "tool-agent-character-nose";
         leftCheek.name = "tool-agent-character-cheek-left";
         rightCheek.name = "tool-agent-character-cheek-right";
         chestPanel.name = "tool-agent-character-chest-panel";
         statusLight.name = "tool-agent-character-status-light";
         tail.name = "tool-agent-character-tail";
         roleHalo.name = "tool-agent-character-role-halo";
-        body.position.y = 0;
-        head.position.y = 0.58;
-        leftEar.position.set(-0.18, 0.83, 0.01);
-        rightEar.position.set(0.18, 0.83, 0.01);
-        leftEar.scale.set(0.86, 1.16, 0.72);
-        rightEar.scale.set(0.86, 1.16, 0.72);
-        leftInnerEar.position.set(-0.18, 0.83, 0.075);
-        rightInnerEar.position.set(0.18, 0.83, 0.075);
-        leftInnerEar.scale.set(0.52, 0.74, 0.24);
-        rightInnerEar.scale.set(0.52, 0.74, 0.24);
-        visor.position.set(0, 0.63, 0.255);
-        muzzle.position.set(0, 0.515, 0.29);
-        muzzle.scale.set(1.1, 0.68, 0.46);
-        leftCheek.position.set(-0.14, 0.56, 0.3);
-        rightCheek.position.set(0.14, 0.56, 0.3);
-        leftCheek.scale.set(1, 0.65, 0.32);
-        rightCheek.scale.set(1, 0.65, 0.32);
-        chestPanel.position.set(0, 0.15, 0.3);
+        body.position.y = -0.03;
+        head.position.y = 0.54;
+        leftEar.position.set(-0.19, 0.78, 0.01);
+        rightEar.position.set(0.19, 0.78, 0.01);
+        leftEar.scale.set(0.88, 1.04, 0.72);
+        rightEar.scale.set(0.88, 1.04, 0.72);
+        leftInnerEar.position.set(-0.19, 0.78, 0.08);
+        rightInnerEar.position.set(0.19, 0.78, 0.08);
+        leftInnerEar.scale.set(0.52, 0.68, 0.24);
+        rightInnerEar.scale.set(0.52, 0.68, 0.24);
+        visor.position.set(0, 0.64, 0.31);
+        leftEye.position.set(-0.08, 0.595, 0.325);
+        rightEye.position.set(0.08, 0.595, 0.325);
+        muzzle.position.set(0, 0.47, 0.32);
+        muzzle.scale.set(1.22, 0.72, 0.5);
+        nose.position.set(0, 0.5, 0.38);
+        leftCheek.position.set(-0.15, 0.515, 0.33);
+        rightCheek.position.set(0.15, 0.515, 0.33);
+        leftCheek.scale.set(1, 0.66, 0.32);
+        rightCheek.scale.set(1, 0.66, 0.32);
+        chestPanel.position.set(0, 0.1, 0.32);
         leftFoot.position.set(-0.14, -0.44, 0.08);
         rightFoot.position.set(0.14, -0.44, 0.08);
-        leftHand.position.set(-0.34, 0.08, 0);
-        rightHand.position.set(0.34, 0.08, 0);
-        tail.position.set(0, -0.02, -0.31);
-        statusLight.position.set(0, 0.92, 0.03);
+        leftHand.position.set(-0.3, 0.04, 0.02);
+        rightHand.position.set(0.3, 0.04, 0.02);
+        tail.position.set(0, -0.07, -0.33);
+        statusLight.position.set(0, 0.89, 0.03);
         roleHalo.rotation.x = Math.PI / 2;
         roleHalo.position.y = -0.48;
         character.add(body);
@@ -410,7 +439,10 @@ export function ToolStudioPanel({
         character.add(leftInnerEar);
         character.add(rightInnerEar);
         character.add(visor);
+        character.add(leftEye);
+        character.add(rightEye);
         character.add(muzzle);
+        character.add(nose);
         character.add(leftCheek);
         character.add(rightCheek);
         character.add(chestPanel);
@@ -601,6 +633,7 @@ export function ToolStudioPanel({
         canvas.removeAttribute("data-agent-3d-ready");
         canvas.removeAttribute("data-agent-3d-paused");
         disposeObject(scene);
+        templateGeometries.forEach((geometry) => geometry.dispose());
         renderer.dispose();
       };
     };

@@ -68,3 +68,31 @@
 - `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-cute-mascot-character-tools-desktop.png`
 - `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-cute-mascot-character-agents-mobile.png`
 - `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-cute-mascot-character-tools-mobile.png`
+
+## 레퍼런스 기반 캐릭터 디자인 정제 검증
+
+- 사용자 후속 요구: 캐릭터 디자인 자체를 더 좋게 개선하고, 인간이 귀여움을 느끼는 레퍼런스 캐릭터 방향을 반영한다.
+- 적용 요구사항: `REQ-WM-073`
+- 설계 근거:
+  - baby schema 연구: 큰 머리와 둥근 얼굴 신호가 귀여움 인식에 영향을 준다는 기준을 반영
+  - Miffy/Kirby/Baymax 레퍼런스: 단순한 실루엣, 작은 얼굴 요소, 둥근 덩어리감을 우선
+- `corepack pnpm --filter workspace-monitor test`: 통과, 46개 테스트
+- `corepack pnpm --filter workspace-monitor exec tsc --noEmit`: 통과
+- `corepack pnpm --filter workspace-monitor run check`: 통과
+  - scroll contract: `scroll_contract_ok`
+  - source control design: `source_control_design_ok`
+- `corepack pnpm --filter workspace-monitor run build`: 통과
+- `corepack pnpm --filter workspace-monitor run perf:budget`: 통과
+  - largest initial chunk: `734386` bytes, budget `1000000` bytes
+- `corepack pnpm --filter workspace-monitor run build:customer`: 통과
+- In-app Browser: `http://127.0.0.1:3365/?section=agents#section-agents` 로드 확인
+- Playwright static export smoke: 통과
+  - Agents desktop: `canvas[data-agent-collaboration-3d-ready="true"]`, canvas `1246x623`, overflowX `0`, unique sample `106`
+  - Tool Studio mobile: `canvas[data-agent-3d-ready="true"]`, canvas `316x228`, overflowX `0`, unique sample `104`
+  - Agents mobile: `canvas[data-agent-collaboration-3d-ready="true"]`, canvas `304x152`, overflowX `0`, unique sample `105`
+
+## 캐릭터 디자인 정제 스크린샷
+
+- `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-character-design-refinement-agents-desktop.png`
+- `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-character-design-refinement-tools-mobile.png`
+- `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-character-design-refinement-agents-mobile.png`
