@@ -1,0 +1,58 @@
+{
+  "id": "2026-06-06-history-insight-loop",
+  "request": "Extract usable insights and inference processes from accumulated history and apply them to the platform.",
+  "reason": "Broad request spanning history, inference process, platform feature architecture, UI, generated snapshots, and validation.",
+  "source_inventory": [
+    "_history/",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx",
+    "platform-desktop-app/configs/product-feature-registry.json"
+  ],
+  "exclusions": [
+    "_private/",
+    "LLM-based historical summarization",
+    "editable insight-rule UI",
+    "customer exposure of internal history paths"
+  ],
+  "slice_ids": [
+    {
+      "id": "hil-collector",
+      "touch_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/scripts/lib/history-insight-loop.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs"
+      ],
+      "purpose": "Derive deterministic history insight patterns."
+    },
+    {
+      "id": "hil-ui",
+      "touch_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/app/globals.css"
+      ],
+      "purpose": "Expose insights in Product Structure."
+    },
+    {
+      "id": "hil-contract",
+      "touch_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+        "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs",
+        "platform-desktop-app/tests/readiness.test.mjs",
+        "platform-desktop-app/configs/product-feature-registry.json"
+      ],
+      "purpose": "Preserve typed/sanitized/tested platform contract."
+    }
+  ],
+  "merge_gates": [
+    "workspace-monitor test",
+    "workspace-monitor check",
+    "platform-desktop-app test",
+    "Browser Product Structure smoke",
+    "desktop internal package build"
+  ],
+  "source_provenance": [
+    "web search record _history/web-searches/2026/2026-06-06-history-insight-loop.ko.md",
+    "local source inspection via rg/sed",
+    "generated snapshot stats"
+  ]
+}

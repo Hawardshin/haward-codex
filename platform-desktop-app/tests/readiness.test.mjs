@@ -559,6 +559,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     join(root, "renderer/workspace-monitor/scripts/lib/product-feature-architecture.mjs"),
     "utf8"
   );
+  const historyInsightCollector = readFileSync(
+    join(root, "renderer/workspace-monitor/scripts/lib/history-insight-loop.mjs"),
+    "utf8"
+  );
   const customerBundleCheck = readFileSync(join(root, "scripts/check-customer-bundle.mjs"), "utf8");
   const releaseReadinessCheck = readFileSync(join(root, "scripts/check-release-readiness.mjs"), "utf8");
   const lazyBoundaryCheck = readFileSync(
@@ -597,12 +601,31 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "collectReferencePlatformAdvantages",
     "referencePlatformAdvantages",
     "sanitizeReferencePlatformAdvantagesForCustomer",
+    "collectHistoryInsightLoop",
+    "historyInsightLoop",
+    "sanitizeHistoryInsightLoopForCustomer",
     "agent_capability_platform",
     "supporting_observability"
   ]) {
-    assert.match(`${monitorCollector}\n${productFeatureCollector}`, new RegExp(collectorToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    assert.match(
+      `${monitorCollector}\n${productFeatureCollector}\n${historyInsightCollector}`,
+      new RegExp(collectorToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    );
+  }
+  for (const insightToken of [
+    "build-closeout-gate",
+    "web-research-to-spec",
+    "desktop-native-resource-loop",
+    "ui-feedback-to-design-contract",
+    "release-blocker-gate",
+    "INFERENCE_STAGES"
+  ]) {
+    assert.match(historyInsightCollector, new RegExp(insightToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
   for (const uiToken of ["referenceAdvantages", "reference-advantage-board", "레퍼런스 장점 적용 지도"]) {
+    assert.match(productFeaturePanel, new RegExp(uiToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+  for (const uiToken of ["historyInsights", "history-insight-board", "히스토리 인사이트 루프"]) {
     assert.match(productFeaturePanel, new RegExp(uiToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
   for (const scriptToken of ["auditCustomerSnapshot", "scanCustomerDist", "customer_bundle_ready", "MAX_DIST_SCAN_FILES"]) {

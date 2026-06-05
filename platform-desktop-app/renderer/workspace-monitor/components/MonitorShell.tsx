@@ -1209,6 +1209,7 @@ type IntentFeatureMap = NonNullable<WorkspaceSnapshot["intentFeatureMap"]>;
 type StructureOverview = NonNullable<WorkspaceSnapshot["structureOverview"]>;
 type ProductFeatureArchitecture = NonNullable<WorkspaceSnapshot["productFeatureArchitecture"]>;
 type ReferencePlatformAdvantages = NonNullable<WorkspaceSnapshot["referencePlatformAdvantages"]>;
+type HistoryInsightLoop = NonNullable<WorkspaceSnapshot["historyInsightLoop"]>;
 
 const fallbackViewModes: MonitorViewMode[] = [
   {
@@ -1678,6 +1679,21 @@ const emptyReferencePlatformAdvantages: ReferencePlatformAdvantages = {
   referenceLinks: [],
   platformGroups: [],
   transferPatterns: []
+};
+
+const emptyHistoryInsightLoop: HistoryInsightLoop = {
+  sourcePath: "",
+  summary: {
+    sourceDocuments: 0,
+    totalPatterns: 0,
+    appliedPatterns: 0,
+    queuedPatterns: 0,
+    activeRecommendations: 0,
+    totalEvidenceLinks: 0,
+    latestInsightAt: ""
+  },
+  inferenceStages: [],
+  signalGroups: []
 };
 
 const sectionIds = new Set<SectionId>(sections.map((section) => section.id));
@@ -2959,6 +2975,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const structureOverview = snapshot.structureOverview ?? emptyStructureOverview;
   const productFeatureArchitecture = snapshot.productFeatureArchitecture ?? emptyProductFeatureArchitecture;
   const referencePlatformAdvantages = snapshot.referencePlatformAdvantages ?? emptyReferencePlatformAdvantages;
+  const historyInsightLoop = snapshot.historyInsightLoop ?? emptyHistoryInsightLoop;
   const [selectedModeFunctionGroupId, setSelectedModeFunctionGroupId] = useState(
     modeFunctionCatalog.groups[0]?.id || "view_mode"
   );
@@ -6558,6 +6575,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                       <ProductFeatureArchitecturePanel
                         architecture={productFeatureArchitecture}
                         referenceAdvantages={referencePlatformAdvantages}
+                        historyInsights={historyInsightLoop}
                         onOpenSection={openSection}
                         onOpenOperatorCenter={() => setOperatorCenterOpen(true)}
                       />

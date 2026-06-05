@@ -12,6 +12,11 @@ import {
   emptyReferencePlatformAdvantages,
   sanitizeReferencePlatformAdvantagesForCustomer
 } from "./lib/reference-platform-advantages.mjs";
+import {
+  collectHistoryInsightLoop,
+  emptyHistoryInsightLoop,
+  sanitizeHistoryInsightLoopForCustomer
+} from "./lib/history-insight-loop.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
@@ -108,7 +113,7 @@ const DOCUMENT_FILES = [
   { category: "runtime-adapter", file: "CLAUDE.md" }
 ];
 
-export { collectIntentFeatureMap, collectProductFeatureArchitecture, collectReferencePlatformAdvantages };
+export { collectHistoryInsightLoop, collectIntentFeatureMap, collectProductFeatureArchitecture, collectReferencePlatformAdvantages };
 
 export function main(argv = process.argv.slice(2)) {
   const options = parseArgs(argv);
@@ -154,6 +159,7 @@ export function buildSnapshot(repoRoot) {
   const intentFeatureMap = collectIntentFeatureMap(repoRoot);
   const productFeatureArchitecture = collectProductFeatureArchitecture(repoRoot);
   const referencePlatformAdvantages = collectReferencePlatformAdvantages(repoRoot);
+  const historyInsightLoop = collectHistoryInsightLoop(allDocuments);
   const sourceFiles = collectSourceFiles(repoRoot, projects);
   const folderStructure = buildFolderStructure(repoRoot, projects, documents);
   const structureOverview = buildStructureOverview(repoRoot, projects, documents, folderStructure, sourceFiles);
@@ -205,6 +211,8 @@ export function buildSnapshot(repoRoot) {
       supportingProductFeatures: productFeatureArchitecture.summary.supportingFeatures,
       referencePlatforms: referencePlatformAdvantages.summary.platformGroups,
       referenceTransferPatterns: referencePlatformAdvantages.summary.totalPatterns,
+      historyInsightPatterns: historyInsightLoop.summary.totalPatterns,
+      historyInsightRecommendations: historyInsightLoop.summary.activeRecommendations,
       structurePressurePoints: structureOverview.summary.totalPressurePoints,
       sourceFiles: sourceFiles.length,
       rootFolders: folderStructure.rootFolders.length
@@ -238,6 +246,7 @@ export function buildSnapshot(repoRoot) {
     intentFeatureMap,
     productFeatureArchitecture,
     referencePlatformAdvantages,
+    historyInsightLoop,
     categories,
     publicReview: {
       status: "review_required_before_public_deploy",
@@ -288,6 +297,8 @@ export function buildCustomerSnapshot(snapshot) {
       supportingProductFeatures: snapshot.productFeatureArchitecture?.summary.supportingFeatures ?? 0,
       referencePlatforms: snapshot.referencePlatformAdvantages?.summary.platformGroups ?? 0,
       referenceTransferPatterns: snapshot.referencePlatformAdvantages?.summary.totalPatterns ?? 0,
+      historyInsightPatterns: 0,
+      historyInsightRecommendations: 0,
       structurePressurePoints: 0,
       sourceFiles: 0,
       rootFolders: 0
@@ -387,6 +398,7 @@ export function buildCustomerSnapshot(snapshot) {
     referencePlatformAdvantages: sanitizeReferencePlatformAdvantagesForCustomer(
       snapshot.referencePlatformAdvantages || emptyReferencePlatformAdvantages()
     ),
+    historyInsightLoop: sanitizeHistoryInsightLoopForCustomer(snapshot.historyInsightLoop || emptyHistoryInsightLoop()),
     categories: [],
     publicReview: {
       status: "customer_snapshot_sanitized",

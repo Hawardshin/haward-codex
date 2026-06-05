@@ -554,7 +554,9 @@
         "_history/evaluations/",
         "_history/work-timings/",
         "_history/web-searches/",
-        "platform-desktop-app/renderer/workspace-monitor/scripts/lib/intent-feature-map.mjs"
+        "platform-desktop-app/renderer/workspace-monitor/scripts/lib/intent-feature-map.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/scripts/lib/history-insight-loop.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"
       ],
       "automation_targets": [
         "user request structuring",
@@ -568,7 +570,9 @@
         "Now/Next/Later roadmap counts",
         "evaluation pass rate",
         "timing bottlenecks",
-        "omission check results"
+        "omission check results",
+        "history insight repeated patterns",
+        "history insight evidence links"
       ],
       "validation_gates": [
         "intent maps show source freshness",

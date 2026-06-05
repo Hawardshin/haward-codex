@@ -1,0 +1,32 @@
+{
+  "id": "2026-06-06-history-insight-loop",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "type": "snapshot_payload",
+      "risk": "Adding history insight fields could bloat generated JSON.",
+      "mitigation": "Limit evidence paths to 6 per pattern and keep six rule groups. check-history-payload remains under budget."
+    },
+    {
+      "type": "customer_bundle_privacy",
+      "risk": "Internal history evidence paths could leak into customer snapshot.",
+      "mitigation": "sanitizeHistoryInsightLoopForCustomer removes inference stages and signal groups."
+    },
+    {
+      "type": "browser_server",
+      "risk": "Local verification server could remain running.",
+      "mitigation": "Use bounded command session and stop/poll server after Browser smoke."
+    }
+  ],
+  "verification": [
+    "workspace-monitor test passed",
+    "workspace-monitor check passed after developer collect",
+    "platform-desktop-app test passed",
+    "Browser static smoke passed",
+    "local HTTP verification server stopped after smoke",
+    "desktop:package:internal passed with app/DMG build, codesign verification, and DMG verification"
+  ],
+  "residual_risk": [
+    "Rule keywords need maintenance as new history phrasing appears."
+  ]
+}

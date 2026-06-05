@@ -13,6 +13,7 @@ import {
   compactDocumentsForSnapshot,
   collectAgentCatalog,
   collectClaudeCodeDesignTransfer,
+  collectHistoryInsightLoop,
   collectIntentFeatureMap,
   collectPhilosophyFeatureExtraction,
   collectProductFeatureArchitecture,
@@ -207,7 +208,7 @@ test("buildSnapshot reads minimal repository shape", () => {
   );
   fs.writeFileSync(
     path.join(root, "_history", "work-summaries", "2026", "2026-06-01-today.ko.md"),
-    "# 오늘 요약\n\n- 완료"
+    "# 오늘 요약\n\n- desktop:package:internal build 검증 완료"
   );
   fs.writeFileSync(
     path.join(root, "_requirements", "baselines", "requirements.ko.md"),
@@ -261,6 +262,8 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.stats.productFeatures, 8);
   assert.equal(snapshot.stats.primaryProductFeatures, 2);
   assert.equal(snapshot.stats.supportingProductFeatures, 6);
+  assert.equal(snapshot.stats.historyInsightPatterns >= 1, true);
+  assert.equal(snapshot.historyInsightLoop.signalGroups.some((group) => group.id === "build-closeout-gate"), true);
   assert.equal(snapshot.documents.some((document) => document.language === "ko"), true);
 });
 
@@ -296,6 +299,8 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
       productFeatures: 6,
       primaryProductFeatures: 5,
       supportingProductFeatures: 1,
+      historyInsightPatterns: 1,
+      historyInsightRecommendations: 1,
       structurePressurePoints: 1,
       sourceFiles: 1,
       rootFolders: 1
@@ -384,6 +389,39 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
       qualitySignals: ["feature first"],
       validationGates: [{ id: "gate", command: "internal", validates: "internal" }]
     },
+    historyInsightLoop: {
+      sourcePath: "_history/",
+      summary: {
+        sourceDocuments: 3,
+        totalPatterns: 1,
+        appliedPatterns: 1,
+        queuedPatterns: 0,
+        activeRecommendations: 1,
+        totalEvidenceLinks: 1,
+        latestInsightAt: "2026-06-06"
+      },
+      inferenceStages: [{ id: "observe", label: "Observe", input: "history", output: "signals", guards: ["internal"] }],
+      signalGroups: [
+        {
+          id: "build-closeout-gate",
+          label: "Build Gate",
+          labelEn: "Build Gate",
+          repeatedProcess: "internal",
+          inference: "internal",
+          platformApplication: "internal",
+          targetSection: "desktop",
+          assetType: "workflow",
+          status: "applied",
+          priority: "p0",
+          signalStrength: "high",
+          signalCount: 3,
+          sourceCategories: [{ category: "work-summary", count: 3 }],
+          evidencePaths: ["_history/work-summaries/2026/x.ko.md"],
+          evidenceTitles: ["internal"],
+          latestEvidenceAt: "2026-06-06"
+        }
+      ]
+    },
     categories: ["project-doc"],
     publicReview: { status: "review_required_before_public_deploy", checklist: [] }
   };
@@ -398,6 +436,8 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.stats.productFeatures, 2);
   assert.equal(customer.stats.primaryProductFeatures, 1);
   assert.equal(customer.stats.supportingProductFeatures, 1);
+  assert.equal(customer.stats.historyInsightPatterns, 0);
+  assert.equal(customer.stats.historyInsightRecommendations, 0);
   assert.equal(customer.stats.structurePressurePoints, 0);
   assert.equal(customer.sourceFiles.length, 0);
   assert.equal(customer.documents.length, 0);
@@ -412,6 +452,8 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.productFeatureArchitecture.featureLayers[0].validationGates.length, 0);
   assert.equal(customer.productFeatureArchitecture.promotionLoop.recordTargets.length, 0);
   assert.equal(customer.productFeatureArchitecture.validationGates.length, 0);
+  assert.equal(customer.historyInsightLoop.signalGroups.length, 0);
+  assert.equal(customer.historyInsightLoop.inferenceStages.length, 0);
   assert.equal(customer.historyDays.length, 0);
   assert.equal(customer.projects.length, 0);
   assert.equal(customer.publicReview.status, "customer_snapshot_sanitized");
@@ -424,6 +466,53 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
     "source",
     "intent"
   ]);
+});
+
+test("collectHistoryInsightLoop turns repeated history into platform applications", () => {
+  const base = {
+    id: "history",
+    language: "ko",
+    html: "",
+    updatedAt: "2026-06-06T00:00:00.000Z",
+    historyDate: "2026-06-06",
+    historyYear: "2026",
+    workspaceArea: "history"
+  };
+  const loop = collectHistoryInsightLoop([
+    {
+      ...base,
+      path: "_history/work-summaries/2026/2026-06-06-build.ko.md",
+      category: "work-summary",
+      title: "자동 빌드 요약",
+      excerpt: "desktop:package:internal build 검증 완료 .app .dmg 생성"
+    },
+    {
+      ...base,
+      path: "_history/web-searches/2026/2026-06-06-research.ko.md",
+      category: "web-search",
+      title: "웹 검색 기록",
+      excerpt: "web search official source research 근거 스펙"
+    },
+    {
+      ...base,
+      path: "platform-desktop-app/specs/2026-06-06-native/spec.ko.md",
+      category: "project-spec",
+      title: "Rust native resource spec",
+      excerpt: "rust cpu ram memory pty pipe process tauri native"
+    },
+    {
+      ...base,
+      path: "_history/evaluations/2026/2026-06-06-ui.ko.md",
+      category: "evaluation",
+      title: "UI 디자인 평가",
+      excerpt: "ui 버튼 dropdown 탭 사이드바 직관 디자인 overflow 검증"
+    }
+  ]);
+
+  assert.equal(loop.summary.totalPatterns >= 4, true);
+  assert.equal(loop.inferenceStages.map((stage) => stage.id).join(","), "observe,cluster,infer,apply,verify");
+  assert.equal(loop.signalGroups.some((group) => group.id === "desktop-native-resource-loop"), true);
+  assert.equal(loop.signalGroups.every((group) => group.evidencePaths.length > 0), true);
 });
 
 test("collectProductFeatureArchitecture reads primary features and supporting observability", () => {

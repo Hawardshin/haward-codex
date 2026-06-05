@@ -29,6 +29,8 @@ export type WorkspaceStats = {
   supportingProductFeatures?: number;
   referencePlatforms?: number;
   referenceTransferPatterns?: number;
+  historyInsightPatterns?: number;
+  historyInsightRecommendations?: number;
   structurePressurePoints?: number;
   sourceFiles?: number;
   rootFolders: number;
@@ -638,6 +640,47 @@ export type WorkspaceReferencePlatformAdvantages = {
   }>;
 };
 
+export type WorkspaceHistoryInsightLoop = {
+  sourcePath: string;
+  summary: {
+    sourceDocuments: number;
+    totalPatterns: number;
+    appliedPatterns: number;
+    queuedPatterns: number;
+    activeRecommendations: number;
+    totalEvidenceLinks: number;
+    latestInsightAt: string;
+  };
+  inferenceStages: Array<{
+    id: string;
+    label: string;
+    input: string;
+    output: string;
+    guards: string[];
+  }>;
+  signalGroups: Array<{
+    id: string;
+    label: string;
+    labelEn: string;
+    repeatedProcess: string;
+    inference: string;
+    platformApplication: string;
+    targetSection: string;
+    assetType: string;
+    status: string;
+    priority: string;
+    signalStrength: string;
+    signalCount: number;
+    sourceCategories: Array<{
+      category: string;
+      count: number;
+    }>;
+    evidencePaths: string[];
+    evidenceTitles: string[];
+    latestEvidenceAt: string;
+  }>;
+};
+
 export type WorkspaceSnapshot = {
   schemaVersion: string;
   generatedAt: string;
@@ -670,6 +713,7 @@ export type WorkspaceSnapshot = {
   intentFeatureMap?: WorkspaceIntentFeatureMap;
   productFeatureArchitecture?: WorkspaceProductFeatureArchitecture;
   referencePlatformAdvantages?: WorkspaceReferencePlatformAdvantages;
+  historyInsightLoop?: WorkspaceHistoryInsightLoop;
   categories: string[];
   publicReview: {
     status: string;

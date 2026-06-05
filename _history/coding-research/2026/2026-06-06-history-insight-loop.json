@@ -1,0 +1,98 @@
+{
+  "id": "2026-06-06-history-insight-loop",
+  "technology_stack": [
+    "Next.js/React Workspace Monitor",
+    "Node.js snapshot collector",
+    "TypeScript snapshot types",
+    "Tauri packaging pipeline"
+  ],
+  "technology_official_docs": [
+    "https://docs.cloud.google.com/architecture/architecture-decision-records",
+    "https://docs.aws.amazon.com/prescriptive-guidance/latest/architectural-decision-records/welcome.html"
+  ],
+  "stack_version_constraints": {
+    "runtime": "Use existing platform-desktop-app pnpm workspace and Next/Tauri pipeline",
+    "dependencies": "No new package dependency"
+  },
+  "source_types": [
+    "official docs",
+    "academic review",
+    "industry article",
+    "local source",
+    "local generated snapshot"
+  ],
+  "reference_config_paths": [
+    "agent-platform/configs/research/research-agent-profile.json",
+    "_ops/workflows/76-large-scope-decomposition.md",
+    "_ops/workflows/69-resource-leak-prevention.md"
+  ],
+  "issue_discussion_sources": [],
+  "issue_discussion_notes": [
+    "No library issue source was needed because the implementation adds deterministic local collector logic without new dependencies."
+  ],
+  "community_signal_notes": "Community/Reddit search results were not used as factual evidence.",
+  "language_options": [
+    {
+      "option": "Node.js collector plus TypeScript UI",
+      "decision": "selected",
+      "reason": "Matches existing snapshot pipeline and frontend typing with no new runtime."
+    },
+    {
+      "option": "Rust/Tauri history analyzer",
+      "decision": "rejected",
+      "reason": "The history snapshot is already built by Node collector before renderer build; Rust would duplicate IO and type mapping."
+    }
+  ],
+  "selected_language": "Node.js collector plus TypeScript UI",
+  "language_decision_notes": "No new dependencies. Existing tests can validate collector output and customer sanitization.",
+  "architecture_reference_sources": [
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/lib/intent-feature-map.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/lib/product-feature-architecture.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"
+  ],
+  "architecture_options": [
+    {
+      "option": "New top-level section",
+      "decision": "rejected",
+      "reason": "Adds navigation surface for a supporting insight; product structure already owns feature architecture."
+    },
+    {
+      "option": "History insight board inside Product Structure",
+      "decision": "selected",
+      "reason": "Applies history insight directly to platform feature architecture while keeping observability subordinate."
+    }
+  ],
+  "architecture_theory_sources": [
+    "ADR guidance: reusable decision history",
+    "After-action review guidance: lessons become action plans",
+    "Knowledge management patterns: repeated experience becomes reusable pattern"
+  ],
+  "architecture_practitioner_sources": [
+    "Existing workspace monitor snapshot patterns",
+    "Existing customer snapshot sanitization tests"
+  ],
+  "architecture_tradeoff_notes": "Rule-based extraction is transparent and testable but requires keyword updates for new phrasing.",
+  "code_reference_sources": [
+    "collect-workspace.mjs",
+    "product-feature-architecture.mjs",
+    "reference-platform-advantages.mjs",
+    "collector.test.mjs"
+  ],
+  "code_reference_notes": "Implementation mirrors existing collector modules: empty fallback, collector, sanitizer, snapshot type, UI card board, tests.",
+  "folder_structure_options": [
+    {
+      "option": "Place logic inline in collect-workspace.mjs",
+      "decision": "rejected",
+      "reason": "The collector file is already large; a dedicated lib module is easier to test and maintain."
+    },
+    {
+      "option": "Create scripts/lib/history-insight-loop.mjs",
+      "decision": "selected",
+      "reason": "Matches local module pattern for intent and product architecture collectors."
+    }
+  ],
+  "folder_structure_decision_notes": "No new root project or dependency folder is needed.",
+  "folder_semantics_notes": "The feature belongs to workspace-monitor because it transforms workspace records into monitor snapshot data.",
+  "maintainability_notes": "Readiness tokens and collector tests protect the new contract."
+}

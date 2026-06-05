@@ -1,0 +1,31 @@
+{
+  "id": "2026-06-06-history-insight-loop",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "name": "web_first_research",
+      "status": "completed",
+      "notes": "Checked ADR, knowledge management, lessons learned, and AAR references."
+    },
+    {
+      "name": "source_inspection",
+      "status": "completed",
+      "notes": "Inspected workspace-monitor collector, snapshot types, product architecture panel, tests, and product registry."
+    },
+    {
+      "name": "implementation",
+      "status": "completed",
+      "notes": "Added history insight collector, snapshot schema, product UI board, product registry linkage, and tests."
+    },
+    {
+      "name": "verification",
+      "status": "completed",
+      "notes": "workspace-monitor test/check, platform tests, Browser static smoke, and internal package build passed."
+    }
+  ],
+  "bottleneck_candidates": [
+    "Internal Tauri package build",
+    "Browser smoke required static build fallback because Next dev stayed in loading state in the in-app browser.",
+    "Generated snapshot size check"
+  ]
+}

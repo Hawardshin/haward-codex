@@ -6,14 +6,20 @@ import {
   Clock3,
   Code2,
   Eye,
+  FileSearch,
   GitBranch,
   Layers3,
   Network,
+  RefreshCw,
   ShieldCheck,
   SquareTerminal
 } from "lucide-react";
 
-import type { WorkspaceProductFeatureArchitecture, WorkspaceReferencePlatformAdvantages } from "@/lib/snapshot";
+import type {
+  WorkspaceHistoryInsightLoop,
+  WorkspaceProductFeatureArchitecture,
+  WorkspaceReferencePlatformAdvantages
+} from "@/lib/snapshot";
 
 export type ProductSectionId =
   | "overview"
@@ -30,6 +36,7 @@ export type ProductSectionId =
 export type ProductFeatureArchitecturePanelProps = {
   architecture: WorkspaceProductFeatureArchitecture;
   referenceAdvantages?: WorkspaceReferencePlatformAdvantages;
+  historyInsights?: WorkspaceHistoryInsightLoop;
   onOpenSection: (section: ProductSectionId) => void;
   onOpenOperatorCenter?: () => void;
 };
@@ -61,6 +68,7 @@ const featureIcons = {
 export function ProductFeatureArchitecturePanel({
   architecture,
   referenceAdvantages,
+  historyInsights,
   onOpenSection,
   onOpenOperatorCenter
 }: ProductFeatureArchitecturePanelProps) {
@@ -70,6 +78,9 @@ export function ProductFeatureArchitecturePanel({
   const visibleReferencePatterns = referencePatterns
     .filter((pattern) => pattern.priority === "p0" || pattern.status !== "queued_p1")
     .slice(0, 6);
+  const visibleHistoryInsights = (historyInsights?.signalGroups ?? [])
+    .filter((insight) => insight.priority === "p0" || insight.priority === "p1")
+    .slice(0, 4);
 
   return (
     <section className="product-feature-panel" aria-label="Product feature architecture">
@@ -184,6 +195,64 @@ export function ProductFeatureArchitecturePanel({
                     {pattern.sourcePlatforms.slice(0, 3).map((source) => (
                       <em key={source}>{source}</em>
                     ))}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {historyInsights && visibleHistoryInsights.length > 0 && (
+        <div className="history-insight-board" aria-label="History insight inference loop">
+          <header>
+            <div>
+              <p className="eyebrow">히스토리 인사이트 루프</p>
+              <h3>반복된 요청과 검증 기록을 다음 플랫폼 행동으로 전환</h3>
+              <p>
+                {historyInsights.summary.sourceDocuments.toLocaleString("ko-KR")}개 기록에서{" "}
+                {historyInsights.summary.totalPatterns.toLocaleString("ko-KR")}개 반복 패턴을 뽑아 실행면에 연결합니다.
+              </p>
+            </div>
+            <div className="history-insight-summary">
+              <span>
+                <BrainCircuit size={14} aria-hidden="true" />
+                {historyInsights.summary.totalPatterns} patterns
+              </span>
+              <span>
+                <CheckCircle2 size={14} aria-hidden="true" />
+                {historyInsights.summary.appliedPatterns} applied
+              </span>
+              <span>
+                <FileSearch size={14} aria-hidden="true" />
+                {historyInsights.summary.totalEvidenceLinks} evidence
+              </span>
+            </div>
+          </header>
+          <div className="history-insight-stage-row" aria-label="Inference process stages">
+            {historyInsights.inferenceStages.slice(0, 5).map((stage) => (
+              <span key={stage.id}>
+                <RefreshCw size={13} aria-hidden="true" />
+                {stage.label}
+              </span>
+            ))}
+          </div>
+          <div className="history-insight-grid">
+            {visibleHistoryInsights.map((insight) => {
+              const section = sectionIds.has(insight.targetSection as ProductSectionId)
+                ? (insight.targetSection as ProductSectionId)
+                : "overview";
+              return (
+                <button key={insight.id} type="button" className="history-insight-card" onClick={() => onOpenSection(section)}>
+                  <span className="history-insight-card-top">
+                    <BrainCircuit size={15} aria-hidden="true" />
+                    <small>{insight.signalStrength}</small>
+                  </span>
+                  <strong>{insight.label}</strong>
+                  <p>{insight.inference}</p>
+                  <span className="history-insight-application">{insight.platformApplication}</span>
+                  <span className="history-insight-card-foot">
+                    {insight.signalCount} signals · {insight.assetType.replaceAll("_", " ")}
                   </span>
                 </button>
               );
