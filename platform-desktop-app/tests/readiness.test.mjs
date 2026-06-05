@@ -394,6 +394,11 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   assert.match(lib, /DialogExt/);
   assert.match(lib, /tauri_plugin_dialog::init/);
   assert.match(lib, /blocking_pick_folder/);
+  assert.match(lib, /WorkspaceResourceWarmupReport/);
+  assert.match(lib, /start_background_warmup/);
+  assert.match(lib, /workspace-resource-warmup/);
+  assert.match(lib, /MAX_WORKSPACE_PRELOAD_TEXT_FILES: usize = 512/);
+  assert.match(lib, /MAX_WORKSPACE_PRELOAD_TEXT_BYTES: usize = 128_000_000/);
   const accumulatedIndexTarget = contract.data_accumulation_targets.find((target) => target.target_id === "accumulated_data_index");
   assert.equal(accumulatedIndexTarget.record_type, "runtime_data_index_manifest");
   assert.equal(accumulatedIndexTarget.directory, "app_data/runtime-data/indexes");
@@ -584,6 +589,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "send_cli_adapter_defer_message",
     "defer_all_cli_adapter_questions",
     "cancel_cli_adapter_session",
+    "warm_workspace_os_resources",
     "prepare_workspace_os_resources",
     "list_workspace_text_files",
     "read_workspace_text_file",
@@ -793,8 +799,11 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "set_desktop_workspace_path",
     "choose_desktop_workspace_folder",
     "clone_desktop_workspace",
+    "warm_workspace_os_resources",
     "prepare_workspace_os_resources",
     "OS 캐시",
+    "메모리 예산",
+    "native warming",
     "native cache",
     "nativeWorkspaceCopy",
     "native-file-workspace-panel",

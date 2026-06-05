@@ -1,0 +1,30 @@
+{
+  "date": "2026-06-05",
+  "request_id": "2026-06-05-workspace-monitor-aggressive-native-warmup",
+  "status": "passed",
+  "checked_items": [
+    {
+      "item": "Actually use app memory",
+      "status": "covered",
+      "evidence": "512 files / 128MB bounded Rust memory cache"
+    },
+    {
+      "item": "Use OS resources and desktop advantages",
+      "status": "covered",
+      "evidence": "startup workspace-resource-warmup OS thread and Tauri managed state"
+    },
+    {
+      "item": "Show cache/warmup state",
+      "status": "covered",
+      "evidence": "OS cache, memory budget, native warming UI"
+    },
+    {
+      "item": "Build after implementation",
+      "status": "covered",
+      "evidence": "package:internal completed"
+    }
+  ],
+  "open_gaps": [
+    "File watcher is still deferred."
+  ]
+}

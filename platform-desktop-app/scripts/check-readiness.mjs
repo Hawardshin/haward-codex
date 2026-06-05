@@ -158,6 +158,7 @@ for (const commandName of [
   "send_cli_adapter_defer_message",
   "defer_all_cli_adapter_questions",
   "cancel_cli_adapter_session",
+  "warm_workspace_os_resources",
   "prepare_workspace_os_resources",
   "list_workspace_text_files",
   "read_workspace_text_file",
@@ -186,7 +187,16 @@ for (const requiredPhrase of ["DialogExt", "tauri_plugin_dialog::init", "blockin
 if (!tauriLib.includes("_ops") || !tauriLib.includes("human-decision-inbox.json")) {
   failures.push("src-tauri/src/lib.rs must persist deferred CLI questions to the human decision inbox");
 }
-for (const requiredPhrase of ["MAX_DECISION_SCAN_BYTES", "recent_session_output", "tail_by_char_boundary"]) {
+for (const requiredPhrase of [
+  "MAX_DECISION_SCAN_BYTES",
+  "recent_session_output",
+  "tail_by_char_boundary",
+  "WorkspaceResourceWarmupReport",
+  "start_background_warmup",
+  "workspace-resource-warmup",
+  "MAX_WORKSPACE_PRELOAD_TEXT_FILES",
+  "MAX_WORKSPACE_PRELOAD_TEXT_BYTES"
+]) {
   if (!tauriLib.includes(requiredPhrase)) {
     failures.push(`src-tauri/src/lib.rs must include performance token ${requiredPhrase}`);
   }
@@ -707,11 +717,14 @@ for (const requiredPhrase of [
   "agent-chat-thread",
   "Search Agent Pipe",
   "Answer & Resume",
+  "warm_workspace_os_resources",
   "prepare_workspace_os_resources",
   "read_workspace_text_file",
   "write_workspace_text_file",
   "list_workspace_text_files",
   "OS 캐시",
+  "메모리 예산",
+  "native warming",
   "native cache",
   "작업공간 Explorer",
   "파일시스템을 끌어와서 처리하기",

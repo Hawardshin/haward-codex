@@ -1,0 +1,14 @@
+{
+  "date": "2026-06-05",
+  "request_id": "2026-06-05-workspace-monitor-aggressive-native-warmup",
+  "selected_work_mode": "ship_first",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The user explicitly requested stronger native desktop memory/OS resource use and automatic build completion.",
+  "gates": [
+    "web_first_intake",
+    "native_runtime_resource_check",
+    "requirements_spec_trace",
+    "internal_desktop_package_build"
+  ]
+}

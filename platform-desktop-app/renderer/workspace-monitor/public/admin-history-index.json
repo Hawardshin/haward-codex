@@ -1,17 +1,17 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-05T13:27:46.148Z",
+  "generatedAt": "2026-06-05T13:37:20.652Z",
   "summary": {
-    "documents": 2260,
+    "documents": 2266,
     "days": 6,
     "categories": [
       {
         "category": "evaluation",
-        "count": 931
+        "count": 932
       },
       {
         "category": "web-search",
-        "count": 364
+        "count": 365
       },
       {
         "category": "plan",
@@ -19,19 +19,19 @@
       },
       {
         "category": "request-trace",
-        "count": 293
+        "count": 294
       },
       {
         "category": "work-timing",
-        "count": 215
+        "count": 216
       },
       {
         "category": "user-request",
-        "count": 77
+        "count": 78
       },
       {
         "category": "work-summary",
-        "count": 44
+        "count": 45
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6073095,
+    "totalSourceBytes": 6079008,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,102 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
+      "path": "_history/evaluations/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: Workspace Monitor 공격적 네이티브 메모리 워밍",
+      "excerpt": "평가: Workspace Monitor 공격적 네이티브 메모리 워밍 판정 요청 충족. 기존 Rust cache를 더 공격적인 데스크톱 네이티브 경로로 확장했고, 앱 시작 시점부터 OS thread가 워크스페이스 자원을 읽어 앱 메모리에 올리도록 했다. 증거 warm workspace os resources 명령 추가. workspace resource warmup background thread 추가. Tauri setup startup warmup 추가. preload 한도 512 files/1",
+      "html": "<p>평가: Workspace Monitor 공격적 네이티브 메모리 워밍 판정 요청 충족. 기존 Rust cache를 더 공격적인 데스크톱 네이티브 경로로 확장했고, 앱 시작 시점부터 OS thread가 워크스페이스 자원을 읽어 앱 메모리에 올리도록 했다. 증거 warm workspace os resources 명령 추가. workspace resource warmup background thread 추가. Tauri setup startup warmup 추가. preload 한도 512 files/128MB, scan entry 40,000. renderer bootstrap과 workspace 변경/저장 후 background warmup</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1344,
+      "updatedAt": "2026-06-05T13:37:12.427Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-json",
+      "path": "_history/work-timings/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 05 Workspace Monitor Aggressive Native Warmup",
+      "excerpt": "{ \"date\": \"2026 06 05\", \"request id\": \"2026 06 05 workspace monitor aggressive native warmup\", \"timings\": { \"phase\": \"research and inspection\", \"duration\": \"approximately 8 minutes\" }, { \"phase\": \"implementation\", \"duration\": \"approximately 20 minutes\" }, { \"phase\": \"verification",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 05&quot;, &quot;request id&quot;: &quot;2026 06 05 workspace monitor aggressive native warmup&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;research and inspection&quot;, &quot;duration&quot;: &quot;approximately 8 minutes&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;duration&quot;: &quot;approximately 20 minutes&quot; }, { &quot;phase&quot;: &quot;verification and package build&quot;, &quot;duration&quot;: &quot;approximately 12 minutes&quot; }, { &quot;phase&quot;: &quot;recor</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 499,
+      "updatedAt": "2026-06-05T13:37:12.427Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
+      "path": "_history/request-traces/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Workspace Monitor 공격적 네이티브 메모리 워밍",
+      "excerpt": "요청 결과 추적: Workspace Monitor 공격적 네이티브 메모리 워밍 요청 메모리를 실제로 쓰고 운영체제 자원을 최대한 활용해 데스크톱 앱의 장점을 더 살릴 것. 결과 Tauri startup background warmup 추가. renderer bootstrap background warmup 추가. Rust shared memory cache를 512 files/128MB로 확장. source workbench UI에 memory budget/warming 상태 추가. 내부 패키지 ",
+      "html": "<p>요청 결과 추적: Workspace Monitor 공격적 네이티브 메모리 워밍 요청 메모리를 실제로 쓰고 운영체제 자원을 최대한 활용해 데스크톱 앱의 장점을 더 살릴 것. 결과 Tauri startup background warmup 추가. renderer bootstrap background warmup 추가. Rust shared memory cache를 512 files/128MB로 확장. source workbench UI에 memory budget/warming 상태 추가. 내부 패키지 빌드 완료. 연결 산출물 요구사항: platform desktop app/docs/requirements/2026 06 05 workspace </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 901,
+      "updatedAt": "2026-06-05T13:37:12.426Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
+      "path": "_history/user-requests/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 실제 메모리와 OS 자원을 더 적극적으로 사용",
+      "excerpt": "사용자 요청 요약: 실제 메모리와 OS 자원을 더 적극적으로 사용 날짜: 2026 06 05 요약: 사용자는 기존 OS cache 구현도 충분히 공격적이지 않다고 보고, 데스크톱 앱의 장점을 살려 실제 앱 메모리와 운영체제 자원을 최대한 활용하라고 요구했다. 반영: Tauri startup background warmup, renderer bootstrap warmup, 512 files/128MB bounded memory preload, UI memory status. 지속 지시: 구현 완료 ",
+      "html": "<p>사용자 요청 요약: 실제 메모리와 OS 자원을 더 적극적으로 사용 날짜: 2026 06 05 요약: 사용자는 기존 OS cache 구현도 충분히 공격적이지 않다고 보고, 데스크톱 앱의 장점을 살려 실제 앱 메모리와 운영체제 자원을 최대한 활용하라고 요구했다. 반영: Tauri startup background warmup, renderer bootstrap warmup, 512 files/128MB bounded memory preload, UI memory status. 지속 지시: 구현 완료 후 자동 빌드까지 수행.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 517,
+      "updatedAt": "2026-06-05T13:37:12.426Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Workspace Monitor 공격적 네이티브 메모리 워밍",
+      "excerpt": "작업 요약: Workspace Monitor 공격적 네이티브 메모리 워밍 완료 Rust cache store를 Arc shared inner state로 바꿔 background OS thread가 cache를 갱신할 수 있게 했다. warm workspace os resources 명령과 WorkspaceResourceWarmupReport 를 추가했다. Tauri setup에서 앱 시작 즉시 workspace resource warmup thread를 시작한다. renderer bootstra",
+      "html": "<p>작업 요약: Workspace Monitor 공격적 네이티브 메모리 워밍 완료 Rust cache store를 Arc shared inner state로 바꿔 background OS thread가 cache를 갱신할 수 있게 했다. warm workspace os resources 명령과 WorkspaceResourceWarmupReport 를 추가했다. Tauri setup에서 앱 시작 즉시 workspace resource warmup thread를 시작한다. renderer bootstrap, workspace 변경, 저장 후 background warmup을 요청한다. preload 예산을 512개 파일/128MB로 늘리고 sc</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 845,
+      "updatedAt": "2026-06-05T13:37:12.426Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-05-workspace-monitor-aggressive-native-warmup-ko-md",
+      "path": "_history/web-searches/2026/2026-06-05-workspace-monitor-aggressive-native-warmup.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: Workspace Monitor 공격적 네이티브 메모리 워밍",
+      "excerpt": "웹 검색 기록: Workspace Monitor 공격적 네이티브 메모리 워밍 목적 사용자가 “메모리를 실제로 쓰고 운영체제 자원을 최대한 쓰라”고 지시했다. Tauri managed state, Rust command bridge, Rust OS thread 사용 경로를 공식 문서 기준으로 재확인했다. 검색어 Tauri 2 official setup app state background task Rust spawn managed state documentation Tauri 2 official a",
+      "html": "<p>웹 검색 기록: Workspace Monitor 공격적 네이티브 메모리 워밍 목적 사용자가 “메모리를 실제로 쓰고 운영체제 자원을 최대한 쓰라”고 지시했다. Tauri managed state, Rust command bridge, Rust OS thread 사용 경로를 공식 문서 기준으로 재확인했다. 검색어 Tauri 2 official setup app state background task Rust spawn managed state documentation Tauri 2 official async commands state management Rust app handle setup docs Rust std thread spawn </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1807,
+      "updatedAt": "2026-06-05T13:37:12.425Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-05-workspace-monitor-os-resource-cache-ko-md",
       "path": "_history/evaluations/2026/2026-06-05-workspace-monitor-os-resource-cache.ko.md",
@@ -36227,27 +36323,27 @@
     {
       "date": "2026-06-05",
       "year": "2026",
-      "documentsCount": 479,
+      "documentsCount": 485,
       "categories": [
         {
           "category": "evaluation",
-          "count": 141
+          "count": 142
         },
         {
           "category": "web-search",
-          "count": 68
+          "count": 69
         },
         {
           "category": "work-timing",
-          "count": 66
+          "count": 67
         },
         {
           "category": "request-trace",
-          "count": 64
+          "count": 65
         },
         {
           "category": "user-request",
-          "count": 63
+          "count": 64
         },
         {
           "category": "plan",
@@ -36255,7 +36351,7 @@
         },
         {
           "category": "work-summary",
-          "count": 31
+          "count": 32
         },
         {
           "category": "daily-history",

@@ -74,9 +74,32 @@ struct SessionStore {
     sessions: Mutex<HashMap<String, CliSession>>,
 }
 
-#[derive(Default)]
 struct WorkspaceResourceStore {
+    inner: Arc<WorkspaceResourceStoreInner>,
+}
+
+struct WorkspaceResourceStoreInner {
     cache: Mutex<Option<WorkspaceResourceCache>>,
+    warmup: Mutex<WorkspaceResourceWarmupReport>,
+}
+
+impl Default for WorkspaceResourceStore {
+    fn default() -> Self {
+        Self {
+            inner: Arc::new(WorkspaceResourceStoreInner {
+                cache: Mutex::new(None),
+                warmup: Mutex::new(WorkspaceResourceWarmupReport::default()),
+            }),
+        }
+    }
+}
+
+impl Clone for WorkspaceResourceStore {
+    fn clone(&self) -> Self {
+        Self {
+            inner: Arc::clone(&self.inner),
+        }
+    }
 }
 
 #[derive(Clone, Default)]
@@ -365,8 +388,41 @@ struct WorkspaceResourcePrepareReport {
     returned_count: usize,
     cached_text_files: usize,
     cached_bytes: usize,
+    preload_file_limit: usize,
+    preload_byte_limit: usize,
+    warmup_status: String,
     truncated: bool,
     catalog: WorkspaceTextFileListReport,
+}
+
+#[derive(Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct WorkspaceResourceWarmupReport {
+    schema_version: String,
+    status: String,
+    source: String,
+    root_path: String,
+    started_at: String,
+    finished_at: String,
+    cached_text_files: usize,
+    cached_bytes: usize,
+    error: String,
+}
+
+impl Default for WorkspaceResourceWarmupReport {
+    fn default() -> Self {
+        Self {
+            schema_version: WORKSPACE_RESOURCE_CACHE_SCHEMA_VERSION.to_string(),
+            status: "idle".to_string(),
+            source: "not_started".to_string(),
+            root_path: String::new(),
+            started_at: String::new(),
+            finished_at: String::new(),
+            cached_text_files: 0,
+            cached_bytes: 0,
+            error: String::new(),
+        }
+    }
 }
 
 #[derive(Serialize)]
@@ -1080,11 +1136,11 @@ const MAX_SESSION_INPUT_BYTES: usize = 20_000;
 const MAX_WORKSPACE_FILE_BYTES: usize = 1_000_000;
 const DEFAULT_WORKSPACE_SOURCE_LIST_LIMIT: usize = 240;
 const MAX_WORKSPACE_SOURCE_LIST_LIMIT: usize = 500;
-const MAX_WORKSPACE_SOURCE_SCAN_ENTRIES: usize = 8_000;
+const MAX_WORKSPACE_SOURCE_SCAN_ENTRIES: usize = 40_000;
 const MAX_SOURCE_LIST_LINE_COUNT_BYTES: usize = 128_000;
 const WORKSPACE_RESOURCE_CACHE_SCHEMA_VERSION: &str = "workspace-os-resource-cache.v1";
-const MAX_WORKSPACE_PRELOAD_TEXT_FILES: usize = 80;
-const MAX_WORKSPACE_PRELOAD_TEXT_BYTES: usize = 12_000_000;
+const MAX_WORKSPACE_PRELOAD_TEXT_FILES: usize = 512;
+const MAX_WORKSPACE_PRELOAD_TEXT_BYTES: usize = 128_000_000;
 const MAX_DECISION_ANSWER_BYTES: usize = 20_000;
 const MAX_TASK_RUN_RECORDS: usize = 80;
 const MAX_TASK_PROMPT_PREVIEW_CHARS: usize = 280;
@@ -2175,6 +2231,20 @@ fn list_workspace_text_files(
 }
 
 #[tauri::command]
+fn warm_workspace_os_resources(
+    app: AppHandle,
+    cache_store: State<'_, WorkspaceResourceStore>,
+    force_refresh: Option<bool>,
+) -> Result<WorkspaceResourceWarmupReport, String> {
+    let root = workspace_root_for_app(Some(&app))?;
+    cache_store.start_background_warmup(
+        root,
+        force_refresh.unwrap_or(false),
+        "background_workspace_os_warmup",
+    )
+}
+
+#[tauri::command]
 fn prepare_workspace_os_resources(
     app: AppHandle,
     cache_store: State<'_, WorkspaceResourceStore>,
@@ -2199,6 +2269,10 @@ fn prepare_workspace_os_resources(
         None => {
             let cache = build_workspace_resource_cache(&root, preload_contents.unwrap_or(true))?;
             cache_store.replace_cache(cache.clone())?;
+            cache_store.set_warmup_report(workspace_warmup_report_from_cache(
+                &cache,
+                "foreground_workspace_os_prepare",
+            ))?;
             cache
         }
     };
@@ -2208,7 +2282,8 @@ fn prepare_workspace_os_resources(
         limit,
         "runtime_workspace_os_prepared_cache",
     );
-    Ok(workspace_resource_prepare_report(&cache, catalog))
+    let warmup = cache_store.warmup_report()?;
+    Ok(workspace_resource_prepare_report(&cache, catalog, &warmup))
 }
 
 #[tauri::command]
@@ -2249,6 +2324,7 @@ impl WorkspaceResourceStore {
     fn cache_for_root(&self, root: &Path) -> Result<Option<WorkspaceResourceCache>, String> {
         let root_path = path_to_string(root);
         let cache = self
+            .inner
             .cache
             .lock()
             .map_err(|_| "Workspace resource cache lock is poisoned.".to_string())?;
@@ -2260,6 +2336,7 @@ impl WorkspaceResourceStore {
 
     fn replace_cache(&self, cache: WorkspaceResourceCache) -> Result<(), String> {
         let mut current = self
+            .inner
             .cache
             .lock()
             .map_err(|_| "Workspace resource cache lock is poisoned.".to_string())?;
@@ -2269,10 +2346,18 @@ impl WorkspaceResourceStore {
 
     fn clear_cache(&self) -> Result<(), String> {
         let mut current = self
+            .inner
             .cache
             .lock()
             .map_err(|_| "Workspace resource cache lock is poisoned.".to_string())?;
         *current = None;
+        drop(current);
+        self.set_warmup_report(WorkspaceResourceWarmupReport {
+            status: "invalidated".to_string(),
+            source: "cache_cleared".to_string(),
+            finished_at: current_unix_millis_label(),
+            ..WorkspaceResourceWarmupReport::default()
+        })?;
         Ok(())
     }
 
@@ -2283,6 +2368,7 @@ impl WorkspaceResourceStore {
     ) -> Result<Option<WorkspaceTextFile>, String> {
         let root_path = path_to_string(root);
         let cache = self
+            .inner
             .cache
             .lock()
             .map_err(|_| "Workspace resource cache lock is poisoned.".to_string())?;
@@ -2295,6 +2381,7 @@ impl WorkspaceResourceStore {
     fn upsert_text_file(&self, root: &Path, file: &WorkspaceTextFile) -> Result<(), String> {
         let root_path = path_to_string(root);
         let mut cache = self
+            .inner
             .cache
             .lock()
             .map_err(|_| "Workspace resource cache lock is poisoned.".to_string())?;
@@ -2318,6 +2405,99 @@ impl WorkspaceResourceStore {
             .text_files
             .insert(file.relative_path.clone(), file.clone());
         Ok(())
+    }
+
+    fn warmup_report(&self) -> Result<WorkspaceResourceWarmupReport, String> {
+        let report = self
+            .inner
+            .warmup
+            .lock()
+            .map_err(|_| "Workspace resource warmup lock is poisoned.".to_string())?;
+        Ok(report.clone())
+    }
+
+    fn set_warmup_report(&self, report: WorkspaceResourceWarmupReport) -> Result<(), String> {
+        let mut current = self
+            .inner
+            .warmup
+            .lock()
+            .map_err(|_| "Workspace resource warmup lock is poisoned.".to_string())?;
+        *current = report;
+        Ok(())
+    }
+
+    fn start_background_warmup(
+        &self,
+        root: PathBuf,
+        force_refresh: bool,
+        source: &str,
+    ) -> Result<WorkspaceResourceWarmupReport, String> {
+        let root_path = path_to_string(&root);
+        if !force_refresh {
+            if let Some(cache) = self.cache_for_root(&root)? {
+                let report = workspace_warmup_report_from_cache(&cache, "ready_from_memory");
+                self.set_warmup_report(report.clone())?;
+                return Ok(report);
+            }
+        } else {
+            self.clear_cache()?;
+        }
+
+        let current = self.warmup_report()?;
+        if current.status == "warming" && current.root_path == root_path {
+            return Ok(current);
+        }
+
+        let started_at = current_unix_millis_label();
+        let warming = WorkspaceResourceWarmupReport {
+            schema_version: WORKSPACE_RESOURCE_CACHE_SCHEMA_VERSION.to_string(),
+            status: "warming".to_string(),
+            source: source.to_string(),
+            root_path,
+            started_at,
+            finished_at: String::new(),
+            cached_text_files: 0,
+            cached_bytes: 0,
+            error: String::new(),
+        };
+        self.set_warmup_report(warming.clone())?;
+
+        let store = self.clone();
+        let warming_for_thread = warming.clone();
+        thread::Builder::new()
+            .name("workspace-resource-warmup".to_string())
+            .spawn(move || {
+                let result = build_workspace_resource_cache(&root, true);
+                match result {
+                    Ok(cache) => {
+                        let report = workspace_warmup_report_from_cache(
+                            &cache,
+                            "background_workspace_os_warmup",
+                        );
+                        if let Err(error) = store.replace_cache(cache) {
+                            let mut failed = report.clone();
+                            failed.status = "failed".to_string();
+                            failed.error = error;
+                            failed.finished_at = current_unix_millis_label();
+                            let _ = store.set_warmup_report(failed);
+                            return;
+                        }
+                        let _ = store.set_warmup_report(report);
+                    }
+                    Err(error) => {
+                        let mut failed = warming_for_thread;
+                        failed.status = "failed".to_string();
+                        failed.finished_at = current_unix_millis_label();
+                        failed.error = error;
+                        let _ = store.set_warmup_report(failed);
+                    }
+                }
+            })
+            .map_err(|error| {
+                format!("Failed to spawn workspace resource warmup thread: {error}")
+            })?;
+
+        Ok(warming)
     }
 }
 
@@ -2496,6 +2676,7 @@ fn workspace_list_report_from_cache(
 fn workspace_resource_prepare_report(
     cache: &WorkspaceResourceCache,
     catalog: WorkspaceTextFileListReport,
+    warmup: &WorkspaceResourceWarmupReport,
 ) -> WorkspaceResourcePrepareReport {
     WorkspaceResourcePrepareReport {
         status: "prepared".to_string(),
@@ -2508,8 +2689,28 @@ fn workspace_resource_prepare_report(
         returned_count: catalog.returned_count,
         cached_text_files: cache.text_files.len(),
         cached_bytes: cache.cached_bytes,
+        preload_file_limit: MAX_WORKSPACE_PRELOAD_TEXT_FILES,
+        preload_byte_limit: MAX_WORKSPACE_PRELOAD_TEXT_BYTES,
+        warmup_status: warmup.status.clone(),
         truncated: cache.truncated || catalog.truncated,
         catalog,
+    }
+}
+
+fn workspace_warmup_report_from_cache(
+    cache: &WorkspaceResourceCache,
+    source: &str,
+) -> WorkspaceResourceWarmupReport {
+    WorkspaceResourceWarmupReport {
+        schema_version: WORKSPACE_RESOURCE_CACHE_SCHEMA_VERSION.to_string(),
+        status: "ready".to_string(),
+        source: source.to_string(),
+        root_path: cache.root_path.clone(),
+        started_at: cache.generated_at.clone(),
+        finished_at: current_unix_millis_label(),
+        cached_text_files: cache.text_files.len(),
+        cached_bytes: cache.cached_bytes,
+        error: String::new(),
     }
 }
 
@@ -2626,6 +2827,15 @@ pub fn run() {
         .manage(SessionStore::default())
         .manage(WorkspaceResourceStore::default())
         .plugin(tauri_plugin_dialog::init())
+        .setup(|app| {
+            let handle = app.handle().clone();
+            let cache_store = handle.state::<WorkspaceResourceStore>();
+            if let Ok(root) = workspace_root_for_app(Some(&handle)) {
+                let _ =
+                    cache_store.start_background_warmup(root, false, "startup_workspace_os_warmup");
+            }
+            Ok(())
+        })
         .invoke_handler(tauri::generate_handler![
             app_health,
             get_installer_shell_runtime_contract,
@@ -2665,6 +2875,7 @@ pub fn run() {
             send_cli_adapter_defer_message,
             defer_all_cli_adapter_questions,
             cancel_cli_adapter_session,
+            warm_workspace_os_resources,
             prepare_workspace_os_resources,
             list_workspace_text_files,
             read_workspace_text_file,

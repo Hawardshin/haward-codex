@@ -349,8 +349,14 @@ test("Monitor section switches prewarm heavy surfaces and preserve source editor
 
 test("Desktop source workbench prepares native OS workspace resources", () => {
   assert.match(monitorShell, /type WorkspaceResourcePrepareReport = \{/);
+  assert.match(monitorShell, /type WorkspaceResourceWarmupReport = \{/);
   assert.match(monitorShell, /const \[workspaceResourceReport, setWorkspaceResourceReport\] = useState<WorkspaceResourcePrepareReport \| null>\(null\)/);
+  assert.match(monitorShell, /const \[workspaceWarmupReport, setWorkspaceWarmupReport\] = useState<WorkspaceResourceWarmupReport \| null>\(null\)/);
+  assert.match(monitorShell, /const workspaceWarmupPollRef = useRef<number \| null>\(null\)/);
   assert.match(monitorShell, /const \[workspaceResourceBusy, setWorkspaceResourceBusy\] = useState\(false\)/);
+  assert.match(monitorShell, /const warmWorkspaceOsResources = async/);
+  assert.match(monitorShell, /"warm_workspace_os_resources"/);
+  assert.match(monitorShell, /scheduleWorkspaceWarmupPoll/);
   assert.match(monitorShell, /const prepareWorkspaceOsResources = async/);
   assert.match(monitorShell, /"prepare_workspace_os_resources"/);
   assert.match(monitorShell, /preloadContents: true/);
@@ -360,8 +366,12 @@ test("Desktop source workbench prepares native OS workspace resources", () => {
   assert.match(monitorShell, /setSourceCatalogReport\(report\.catalog\)/);
   assert.match(monitorShell, /workspaceResourceReport \? "native cache"/);
   assert.match(monitorShell, /OS 캐시/);
+  assert.match(monitorShell, /메모리 예산/);
+  assert.match(monitorShell, /native warming/);
   assert.match(monitorShell, /formatBytes\(workspaceResourceReport\.cachedBytes\)/);
-  assert.match(monitorShell, /void prepareWorkspaceOsResources\(\{ forceRefresh: true \}\)/);
+  assert.match(monitorShell, /workspaceWarmupReport\.cachedBytes/);
+  assert.match(monitorShell, /await prepareWorkspaceOsResources\(\{ forceRefresh: true \}\)/);
+  assert.match(monitorShell, /void warmWorkspaceOsResources\(\{ forceRefresh: true \}\)/);
 });
 
 test("Workspace monitor sidebar and source editor defaults avoid clipped editing controls", () => {

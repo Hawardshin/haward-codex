@@ -1704,8 +1704,23 @@ type WorkspaceResourcePrepareReport = {
   returnedCount: number;
   cachedTextFiles: number;
   cachedBytes: number;
+  preloadFileLimit: number;
+  preloadByteLimit: number;
+  warmupStatus: string;
   truncated: boolean;
   catalog: WorkspaceTextFileListReport;
+};
+
+type WorkspaceResourceWarmupReport = {
+  schemaVersion: string;
+  status: string;
+  source: string;
+  rootPath: string;
+  startedAt: string;
+  finishedAt: string;
+  cachedTextFiles: number;
+  cachedBytes: number;
+  error: string;
 };
 
 type DesktopWorkspaceStateReport = {
@@ -8266,6 +8281,7 @@ function DesktopRuntimePanel({
   const [runtimeSourceFiles, setRuntimeSourceFiles] = useState<WorkspaceSourceFile[]>([]);
   const [sourceCatalogReport, setSourceCatalogReport] = useState<WorkspaceTextFileListReport | null>(null);
   const [workspaceResourceReport, setWorkspaceResourceReport] = useState<WorkspaceResourcePrepareReport | null>(null);
+  const [workspaceWarmupReport, setWorkspaceWarmupReport] = useState<WorkspaceResourceWarmupReport | null>(null);
   const [sourceSaveResults, setSourceSaveResults] = useState<WorkspaceWriteReport[]>([]);
   const [writeReport, setWriteReport] = useState<WorkspaceWriteReport | null>(null);
   const [sourceCopyNotice, setSourceCopyNotice] = useState("");
@@ -8287,6 +8303,7 @@ function DesktopRuntimePanel({
   const sourceEditorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const panelMountedRef = useRef(false);
   const activeSessionPollInFlightRef = useRef(false);
+  const workspaceWarmupPollRef = useRef<number | null>(null);
   const consumedLaunchRequestIdsRef = useRef<Set<string>>(new Set());
   const lastInboxRefreshAtRef = useRef(0);
   const lastTaskRunRefreshAtRef = useRef(0);
@@ -8633,6 +8650,56 @@ function DesktopRuntimePanel({
     }
   };
 
+  const scheduleWorkspaceWarmupPoll = (delayMs = 900) => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    if (workspaceWarmupPollRef.current) {
+      window.clearTimeout(workspaceWarmupPollRef.current);
+    }
+    workspaceWarmupPollRef.current = window.setTimeout(() => {
+      workspaceWarmupPollRef.current = null;
+      void warmWorkspaceOsResources();
+    }, delayMs);
+  };
+
+  const warmWorkspaceOsResources = async (options: { forceRefresh?: boolean } = {}) => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setWorkspaceWarmupReport(null);
+      return null;
+    }
+
+    try {
+      const report = await tauriInvoke<WorkspaceResourceWarmupReport>("warm_workspace_os_resources", {
+        forceRefresh: Boolean(options.forceRefresh)
+      });
+      setWorkspaceWarmupReport(report);
+      if (report.status === "warming") {
+        scheduleWorkspaceWarmupPoll();
+      }
+      return report;
+    } catch (caught) {
+      const message = errorMessage(caught);
+      if (/unknown command|command not found|warm_workspace_os_resources/i.test(message)) {
+        setWorkspaceWarmupReport(null);
+        return null;
+      }
+      setWorkspaceWarmupReport({
+        schemaVersion: "workspace-os-resource-cache.v1",
+        status: "failed",
+        source: "warm_workspace_os_resources",
+        rootPath: "",
+        startedAt: "",
+        finishedAt: new Date().toISOString(),
+        cachedTextFiles: 0,
+        cachedBytes: 0,
+        error: message
+      });
+      return null;
+    }
+  };
+
   const prepareWorkspaceOsResources = async (options: { forceRefresh?: boolean } = {}) => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
@@ -8652,6 +8719,17 @@ function DesktopRuntimePanel({
         forceRefresh: Boolean(options.forceRefresh)
       });
       setWorkspaceResourceReport(report);
+      setWorkspaceWarmupReport({
+        schemaVersion: report.schemaVersion,
+        status: report.warmupStatus || "ready",
+        source: report.source,
+        rootPath: report.rootPath,
+        startedAt: report.generatedAt,
+        finishedAt: report.generatedAt,
+        cachedTextFiles: report.cachedTextFiles,
+        cachedBytes: report.cachedBytes,
+        error: ""
+      });
       setRuntimeSourceFiles(report.catalog.files);
       setSourceCatalogReport(report.catalog);
       const firstPath = report.catalog.files[0]?.path || "";
@@ -8791,6 +8869,7 @@ function DesktopRuntimePanel({
       }
       setWorkspaceHostNotice(report.status === "folder_selection_canceled" ? copy.chooseCanceled : report.activeWorkspacePath ? copy.permissionGranted : report.status);
       if (report.activeWorkspacePath) {
+        void warmWorkspaceOsResources({ forceRefresh: true });
         if (isFileWorkspaceSurface) {
           await prepareWorkspaceOsResources({ forceRefresh: true });
         }
@@ -8826,6 +8905,7 @@ function DesktopRuntimePanel({
         setWorkingDir(report.activeWorkspacePath);
       }
       setWorkspaceHostNotice(report.status);
+      void warmWorkspaceOsResources({ forceRefresh: true });
       if (isFileWorkspaceSurface) {
         await prepareWorkspaceOsResources({ forceRefresh: true });
       }
@@ -8862,6 +8942,7 @@ function DesktopRuntimePanel({
         setWorkingDir(report.activeWorkspacePath);
       }
       setWorkspaceHostNotice(report.status);
+      void warmWorkspaceOsResources({ forceRefresh: true });
       if (isFileWorkspaceSurface) {
         await prepareWorkspaceOsResources({ forceRefresh: true });
       }
@@ -8959,6 +9040,7 @@ function DesktopRuntimePanel({
       if (!nextTaskPipePresets.some((preset) => preset.taskKind === selectedTaskPipeKind) && nextTaskPipePresets[0]) {
         setSelectedTaskPipeKind(nextTaskPipePresets[0].taskKind);
       }
+      void warmWorkspaceOsResources();
       if (isFileWorkspaceSurface) {
         void prepareWorkspaceOsResources();
       }
@@ -9733,7 +9815,7 @@ function DesktopRuntimePanel({
       ].slice(0, 8));
       setSourceCopyNotice("");
       setSourceWorkbenchView("results");
-      void prepareWorkspaceOsResources({ forceRefresh: true });
+      void warmWorkspaceOsResources({ forceRefresh: true });
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -9772,7 +9854,7 @@ function DesktopRuntimePanel({
         ...reportsToAdd,
         ...current.filter((item) => !reportsToAdd.some((report) => report.relativePath === item.relativePath))
       ].slice(0, 8));
-      void prepareWorkspaceOsResources({ forceRefresh: true });
+      void warmWorkspaceOsResources({ forceRefresh: true });
       if (sourceFile && nextDrafts[sourceFile.relativePath]) {
         const currentEntry = nextDrafts[sourceFile.relativePath];
         setSourceFile({
@@ -9872,6 +9954,10 @@ function DesktopRuntimePanel({
     panelMountedRef.current = true;
     return () => {
       panelMountedRef.current = false;
+      if (workspaceWarmupPollRef.current && typeof window !== "undefined") {
+        window.clearTimeout(workspaceWarmupPollRef.current);
+        workspaceWarmupPollRef.current = null;
+      }
     };
   }, []);
 
@@ -9880,11 +9966,13 @@ function DesktopRuntimePanel({
       if (isFileWorkspaceSurface) {
         void refreshDesktopWorkspace();
         void refreshDesktopGitStatus();
+        void warmWorkspaceOsResources();
         void prepareWorkspaceOsResources();
         return;
       }
       void refreshDesktopWorkspace();
       void refreshDesktopGitStatus();
+      void warmWorkspaceOsResources();
       void refreshAdapters();
     });
   }, [isFileWorkspaceSurface]);
@@ -10328,10 +10416,16 @@ function DesktopRuntimePanel({
           <strong>
             {workspaceResourceReport
               ? `${workspaceResourceReport.cachedTextFiles.toLocaleString("ko-KR")} / ${formatBytes(workspaceResourceReport.cachedBytes)}`
+              : workspaceWarmupReport
+                ? `${workspaceWarmupReport.status} / ${workspaceWarmupReport.cachedTextFiles.toLocaleString("ko-KR")} / ${formatBytes(workspaceWarmupReport.cachedBytes)}`
               : workspaceResourceBusy
                 ? copy.loading
                 : "not prepared"}
           </strong>
+        </article>
+        <article>
+          <span>메모리 예산</span>
+          <strong>{formatBytes(workspaceResourceReport?.preloadByteLimit ?? 128_000_000)}</strong>
         </article>
         <article>
           <span>{copy.openedDrafts}</span>
@@ -10353,6 +10447,7 @@ function DesktopRuntimePanel({
             <strong>{dirtyDraftEntries.length} {copy.dirty}</strong>
             <span>{sourceCatalogLabel}</span>
             {workspaceResourceReport && <span>{formatBytes(workspaceResourceReport.cachedBytes)} cached</span>}
+            {workspaceWarmupReport?.status === "warming" && <span>native warming</span>}
           </div>
         </div>
         <div className="source-editor-controls native-source-controls">

@@ -209,6 +209,7 @@ for (const workspaceHostToken of [
   failIf(!tauriLib.includes(workspaceHostToken), `src-tauri/src/lib.rs must include ${workspaceHostToken}`);
 }
 for (const sourceEditingCommand of [
+  "warm_workspace_os_resources",
   "prepare_workspace_os_resources",
   "list_workspace_text_files",
   "read_workspace_text_file",
