@@ -96,3 +96,32 @@
 - `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-character-design-refinement-agents-desktop.png`
 - `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-character-design-refinement-tools-mobile.png`
 - `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-character-design-refinement-agents-mobile.png`
+
+## 에이전트 식별 라벨 및 작은 크기 검증
+
+- 사용자 후속 요구: 어떤 에이전트인지 쉽게 알 수 있게 하고, 캐릭터는 더 작은 크기로 조정한다.
+- 적용 요구사항: `REQ-WM-074`
+- 설계 근거:
+  - avatar와 entity 표시는 avatar 단독보다 label/badge를 함께 두는 것이 빠른 식별에 유리하다.
+  - recognition rather than recall 원칙에 맞춰 사용자가 캐릭터 모양을 외우지 않고 code/name label로 구분하게 한다.
+- `corepack pnpm --filter workspace-monitor test`: 통과, 46개 테스트
+- `corepack pnpm --filter workspace-monitor exec tsc --noEmit`: 통과
+- `corepack pnpm --filter workspace-monitor run check`: 통과
+  - scroll contract: `scroll_contract_ok`
+  - source control design: `source_control_design_ok`
+- `corepack pnpm --filter workspace-monitor run build`: 통과
+- `corepack pnpm --filter workspace-monitor run perf:budget`: 통과
+  - largest initial chunk: `734386` bytes, budget `1000000` bytes, chunk count `13`
+- `corepack pnpm --filter workspace-monitor run build:customer`: 통과
+- In-app Browser: `http://127.0.0.1:3366/?section=agents#section-agents` 로드 확인
+  - text click 정밀 검증은 runtime timeout으로 Playwright static export smoke로 보강
+- Playwright static export smoke: 통과
+  - Agents desktop: canvas `1246x623`, label `8`, max label width `112`, overflowX `0`
+  - Agents mobile: canvas `304x152`, code chip label `8`, max label width `28`, identity strip `8`, overflowX `0`
+  - Tool Studio mobile: canvas `316x228`, legend `4`, overflowX `0`, `data-agent-3d-paused="false"`
+
+## 에이전트 식별 라벨 스크린샷
+
+- `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-agent-identity-labels-agents-desktop.png`
+- `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-agent-identity-labels-agents-mobile.png`
+- `platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-agent-identity-labels-tools-mobile.png`

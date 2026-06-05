@@ -105,7 +105,7 @@ test("Agents collaboration uses lazy open-source 3D character scene", () => {
   assert.match(monitorShell, /data-agent-collaboration-theater/);
   assert.match(monitorShell, /<AgentCollaborationScene board=\{collaborationBoard\} language=\{uiLanguage\} \/>/);
   assert.match(agentCollaborationScene, /from "@react-three\/fiber"/);
-  assert.match(agentCollaborationScene, /from "@react-three\/drei"/);
+  assert.match(agentCollaborationScene, /import \{ Float, Html, Line \} from "@react-three\/drei"/);
   assert.match(agentCollaborationScene, /useFrame/);
   assert.match(agentCollaborationScene, /preserveDrawingBuffer: true/);
   assert.match(agentCollaborationScene, /powerPreference: "high-performance"/);
@@ -123,9 +123,17 @@ test("Agents collaboration uses lazy open-source 3D character scene", () => {
   assert.match(agentCollaborationScene, /agent-character-nose/);
   assert.match(agentCollaborationScene, /agent-character-cheek-left/);
   assert.match(agentCollaborationScene, /agent-character-tail/);
+  assert.match(agentCollaborationScene, /const compactAgentName/);
+  assert.match(agentCollaborationScene, /data-agent-character-identity/);
+  assert.match(agentCollaborationScene, /agent-collaboration-identity-strip/);
+  assert.match(agentCollaborationScene, /const scale = node\.agent\.activeTaskCount > 0 \? 0\.86 : 0\.78/);
   assert.match(css, /\.agent-collaboration-theater \{/);
   assert.match(css, /\.agent-collaboration-scene-shell,[\s\S]*?min-height: clamp\(280px, 42vh, 520px\);/);
   assert.match(css, /\.agent-collaboration-scene-hud \{/);
+  assert.match(css, /\.agent-character-identity \{/);
+  assert.match(css, /\.agent-collaboration-identity-strip \{/);
+  assert.match(css, /width: 112px;/);
+  assert.match(css, /width: 28px;/);
   assert.match(css, /@media \(max-width: 720px\) \{[\s\S]*?\.agent-collaboration-scene-shell,/);
 });
 
@@ -184,6 +192,10 @@ test("Three.js scene is lazy-loaded and cleans up WebGL resources", () => {
   assert.match(toolStudio, /tool-agent-character-nose/);
   assert.match(toolStudio, /tool-agent-character-cheek-left/);
   assert.match(toolStudio, /tool-agent-character-tail/);
+  assert.match(toolStudio, /toolModeSceneColors/);
+  assert.match(toolStudio, /character\.scale\.setScalar\(0\.82\)/);
+  assert.match(toolStudio, /className="tool-agent-legend"/);
+  assert.match(css, /\.tool-agent-legend \{/);
   assert.match(toolStudio, /canvas\.setAttribute\("data-agent-3d-ready", "true"\)/);
   assert.match(toolStudio, /canvas\.removeAttribute\("data-agent-3d-ready"\)/);
   assert.match(toolStudio, /window\.cancelAnimationFrame\(animationFrame\)/);

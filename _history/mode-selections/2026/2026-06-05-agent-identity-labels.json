@@ -1,0 +1,8 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "agent-identity-labels",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "Meaningful Workspace Monitor UI source change with runtime visual QA and no dependency installation."
+}

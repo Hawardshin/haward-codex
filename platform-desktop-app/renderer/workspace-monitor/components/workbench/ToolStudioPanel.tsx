@@ -61,6 +61,8 @@ function labelFor(language: "ko" | "en", ko: string, en: string) {
   return language === "ko" ? ko : en;
 }
 
+const toolModeSceneColors = ["#58a6ff", "#66d9b1", "#f7c66f", "#c8b6ff"];
+
 function isFormField(target: EventTarget | null) {
   if (!(target instanceof HTMLElement)) {
     return false;
@@ -276,7 +278,7 @@ export function ToolStudioPanel({
       platform.position.y = -1.15;
       scene.add(platform);
 
-      const palette = [0x58a6ff, 0x66d9b1, 0xf7c66f, 0xc8b6ff];
+      const palette = toolModeSceneColors.map((color) => Number.parseInt(color.slice(1), 16));
       const group = new THREE.Group();
       const bodyGeometry = new THREE.CapsuleGeometry(0.31, 0.24, 8, 18);
       const headGeometry = new THREE.SphereGeometry(0.33, 24, 16);
@@ -383,6 +385,7 @@ export function ToolStudioPanel({
           roughness: 0.36
         }));
         const character = new THREE.Group();
+        character.scale.setScalar(0.82);
         character.position.set(Math.cos(angle) * 1.55, -0.46, Math.sin(angle) * 1.55);
         character.userData = { mode: item.id };
         character.name = `tool-agent-character-${item.id}`;
@@ -1560,6 +1563,14 @@ export function ToolStudioPanel({
               <span>{runtimeAdapterId}</span>
             </div>
             <canvas ref={canvasRef} className="tool-agent-canvas" data-agent-3d-canvas aria-label={ko ? "에이전트 협업 3D 장면" : "Agent collaboration 3D scene"} />
+            <div className="tool-agent-legend" aria-label={ko ? "캐릭터 모드 식별" : "Character mode identity"}>
+              {toolModes.map((item, index) => (
+                <span key={item.id} title={labelFor(language, item.labelKo, item.labelEn)}>
+                  <i style={{ backgroundColor: toolModeSceneColors[index % toolModeSceneColors.length] }} aria-hidden="true" />
+                  {labelFor(language, item.labelKo, item.labelEn)}
+                </span>
+              ))}
+            </div>
           </section>
 
           <section className="tool-env-panel">

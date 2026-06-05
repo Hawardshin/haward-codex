@@ -1,6 +1,6 @@
 "use client";
 
-import { Float, Line } from "@react-three/drei";
+import { Float, Html, Line } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import type * as THREE from "three";
@@ -58,9 +58,28 @@ const shortLabel = (value: string, fallback: string) => {
     .join("");
 };
 
+const compactAgentName = (value: string, fallback: string) => {
+  const trimmed = value.trim();
+  if (!trimmed) return fallback;
+  return trimmed.replace(/[-_\s]*agent$/i, "").replace(/[-_]+/g, " ");
+};
+
 export function AgentCollaborationScene({ board, language }: { board: CollaborationBoard; language: UiLanguage }) {
   const agents = board.agents.slice(0, 8);
   const lanes = board.lanes.slice(0, 5);
+  const identityItems = agents.map((agent, index) => {
+    const identityName = agent.name || agent.id;
+    return {
+      id: agent.id || identityName,
+      code: shortLabel(identityName, `A${index + 1}`),
+      color: statusColor(agent.status, agentPalette[index % agentPalette.length]),
+      name: compactAgentName(identityName, `A${index + 1}`),
+      title: agent.role ? `${identityName} · ${agent.role}` : identityName
+    };
+  });
+  const agentIdentitySummary = agents
+    .map((agent, index) => `${shortLabel(agent.name || agent.id, `A${index + 1}`)} ${agent.name || agent.id}`)
+    .join(", ");
 
   if (!agents.length) {
     return (
@@ -81,7 +100,9 @@ export function AgentCollaborationScene({ board, language }: { board: Collaborat
           gl.domElement.setAttribute("role", "img");
           gl.domElement.setAttribute(
             "aria-label",
-            language === "ko" ? "3D 에이전트 협업 작업면" : "3D agent collaboration workspace"
+            language === "ko"
+              ? `3D 에이전트 협업 작업면: ${agentIdentitySummary}`
+              : `3D agent collaboration workspace: ${agentIdentitySummary}`
           );
         }}
       >
@@ -100,6 +121,18 @@ export function AgentCollaborationScene({ board, language }: { board: Collaborat
         <strong>{board.summary.handoffs}</strong>
         <span>{language === "ko" ? "blocked" : "blocked"}</span>
         <strong>{board.summary.blockedTasks}</strong>
+      </div>
+      <div
+        className="agent-collaboration-identity-strip"
+        aria-label={language === "ko" ? "에이전트 코드 식별" : "Agent code identity"}
+      >
+        {identityItems.map((item) => (
+          <span key={item.id} title={item.title}>
+            <i style={{ backgroundColor: item.color }} aria-hidden="true" />
+            <b>{item.code}</b>
+            <strong>{item.name}</strong>
+          </span>
+        ))}
       </div>
     </div>
   );
@@ -210,16 +243,27 @@ function AgentCollaborationWorld({
 }
 
 function AgentCharacter({ node, totalAgents }: { node: SceneAgent; totalAgents: number }) {
-  const scale = node.agent.activeTaskCount > 0 ? 1.05 : 0.94;
+  const scale = node.agent.activeTaskCount > 0 ? 0.86 : 0.78;
   const workloadHeight = Math.min(0.56, 0.16 + node.agent.taskCount / Math.max(totalAgents, 1) * 0.42);
   const visorColor = visorPalette[node.index % visorPalette.length];
   const isActive = node.agent.activeTaskCount > 0;
   const isBlocked = node.agent.status.toLowerCase().includes("block");
   const signalColor = isBlocked ? "#ff9a96" : isActive ? "#66d9b1" : node.color;
+  const identityName = node.agent.name || node.agent.id;
+  const displayName = compactAgentName(identityName, node.label);
+  const identityTitle = node.agent.role ? `${identityName} · ${node.agent.role}` : identityName;
 
   return (
     <Float floatIntensity={0.2} rotationIntensity={0.12} speed={1.25 + node.index * 0.08}>
       <group position={node.position} scale={[scale, scale, scale]}>
+        <Html center className="agent-character-identity-anchor" position={[0, 1.46, 0]} zIndexRange={[30, 0]}>
+          <div className="agent-character-identity" data-agent-character-identity title={identityTitle}>
+            <span className="agent-character-identity-code" style={{ backgroundColor: node.color }}>
+              {node.label}
+            </span>
+            <strong>{displayName}</strong>
+          </div>
+        </Html>
         <mesh name="agent-character-ground-shadow" position={[0, -0.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
           <circleGeometry args={[0.58, 42]} />
           <meshBasicMaterial color="#020617" transparent opacity={0.34} />

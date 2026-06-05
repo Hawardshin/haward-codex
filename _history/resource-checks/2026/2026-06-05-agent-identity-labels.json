@@ -1,0 +1,33 @@
+{
+  "date": "2026-06-05",
+  "request_slug": "agent-identity-labels",
+  "resource_risk_occurred": true,
+  "resources": [
+    {
+      "resource": "static_http_server",
+      "risk": "Long-running process can remain open after visual QA.",
+      "control": "Stop the local static server after Browser and Playwright smoke."
+    },
+    {
+      "resource": "browser_automation",
+      "risk": "Browser checks can leave stale runtime state or screenshots in the wrong folder.",
+      "control": "Use absolute screenshot paths, inspect output, and clean misplaced generated artifacts."
+    },
+    {
+      "resource": "three_canvas_animation_loop",
+      "risk": "3D canvas can waste work when hidden or offscreen.",
+      "control": "Keep existing lazy mount, offscreen pause, document visibility, and reduced-motion controls."
+    }
+  ],
+  "status": "completed",
+  "cleanup": [
+    {
+      "resource": "static_http_server",
+      "action": "Stopped with keyboard interrupt after visual QA."
+    },
+    {
+      "resource": "misplaced_screenshot_artifacts",
+      "action": "Removed nested screenshot path created during the first Playwright run."
+    }
+  ]
+}
