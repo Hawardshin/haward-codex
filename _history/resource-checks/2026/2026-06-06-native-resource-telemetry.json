@@ -1,0 +1,26 @@
+{
+  "id": "2026-06-06-native-resource-telemetry",
+  "date": "2026-06-06",
+  "status": "passed",
+  "runtime_resources": [
+    {
+      "resource": "React telemetry polling interval",
+      "opened": true,
+      "closed": true,
+      "cleanup_evidence": "Effect returns window.clearInterval."
+    },
+    {
+      "resource": "sysinfo process snapshot",
+      "opened": false,
+      "closed": true,
+      "cleanup_evidence": "Short-lived command call; no retained OS handle introduced."
+    },
+    {
+      "resource": "127.0.0.1:3348 static server",
+      "opened": true,
+      "closed": true,
+      "cleanup_evidence": "Stopped after built output performance audits; lsof returned no listener."
+    }
+  ],
+  "result": "pass"
+}

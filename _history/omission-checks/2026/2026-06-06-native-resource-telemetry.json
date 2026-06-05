@@ -1,0 +1,26 @@
+{
+  "id": "2026-06-06-native-resource-telemetry",
+  "date": "2026-06-06",
+  "status": "passed",
+  "mode": "standard",
+  "checklist": [
+    {
+      "item": "web search first",
+      "status": "passed"
+    },
+    {
+      "item": "actual OS resource use visible",
+      "status": "passed"
+    },
+    {
+      "item": "public release blockers not hidden",
+      "status": "passed"
+    },
+    {
+      "item": "build remains required before closeout",
+      "status": "passed",
+      "evidence": "package:internal completed and built output performance audits passed."
+    }
+  ],
+  "result": "pass"
+}

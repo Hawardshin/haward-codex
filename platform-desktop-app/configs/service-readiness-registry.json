@@ -12,7 +12,7 @@
       "Treat updater, signing, notarization, privacy, support, and first-run items as release gates rather than optional notes."
     ],
     "owner": "platform-desktop-app",
-    "last_reviewed": "2026-06-04",
+    "last_reviewed": "2026-06-06",
     "update_triggers": [
       "A release channel, updater, signing, notarization, support, privacy, or onboarding behavior changes.",
       "The app starts collecting additional logs, workspace data, or diagnostics.",
@@ -199,6 +199,12 @@
       "id": "runtime_data",
       "label": "Runtime Data Boundary",
       "intent": "Runtime data, logs, task runs, support bundles, and agent workspace must live outside the platform source tree.",
+      "required_for_public": true
+    },
+    {
+      "id": "native_resource_telemetry",
+      "label": "Native Resource Telemetry",
+      "intent": "The installed desktop app must expose Rust/Tauri process memory, CPU, system memory, and workspace cache state so desktop resource usage is visible and auditable.",
       "required_for_public": true
     },
     {

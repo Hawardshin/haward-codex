@@ -1,17 +1,17 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-05T18:44:01.290Z",
+  "generatedAt": "2026-06-05T18:56:27.713Z",
   "summary": {
-    "documents": 2378,
+    "documents": 2387,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 966
+        "count": 970
       },
       {
         "category": "web-search",
-        "count": 380
+        "count": 381
       },
       {
         "category": "plan",
@@ -19,19 +19,19 @@
       },
       {
         "category": "request-trace",
-        "count": 308
+        "count": 309
       },
       {
         "category": "work-timing",
-        "count": 230
+        "count": 231
       },
       {
         "category": "user-request",
-        "count": 93
+        "count": 94
       },
       {
         "category": "work-summary",
-        "count": 60
+        "count": 61
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6243999,
+    "totalSourceBytes": 6255351,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -63,6 +63,70 @@
   },
   "documents": [
     {
+      "id": "history-work-timings-2026-2026-06-06-native-resource-telemetry-json",
+      "path": "_history/work-timings/2026/2026-06-06-native-resource-telemetry.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Native Resource Telemetry",
+      "excerpt": "{ \"id\": \"2026 06 06 native resource telemetry\", \"date\": \"2026 06 06\", \"status\": \"recorded\", \"timings\": { \"phase\": \"web first intake\", \"duration minutes\": 2 }, { \"phase\": \"implementation\", \"duration minutes\": 18 }, { \"phase\": \"quick verification\", \"duration minutes\": 4 }, { \"phase",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 native resource telemetry&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;status&quot;: &quot;recorded&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;duration minutes&quot;: 2 }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;duration minutes&quot;: 18 }, { &quot;phase&quot;: &quot;quick verification&quot;, &quot;duration minutes&quot;: 4 }, { &quot;phase&quot;: &quot;records&quot;, &quot;duration minutes&quot;: 8 }, { &quot;phase&quot;: &quot;internal package build&quot;, &quot;dur</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 649,
+      "updatedAt": "2026-06-05T18:56:19.554Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-native-resource-telemetry-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Native Resource Telemetry Evaluation Input",
+      "excerpt": "{ \"id\": \"2026 06 06 native resource telemetry\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"request summary\": \"Continue all remaining desktop performance/resource work from th",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 native resource telemetry&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;view mode&quot;: &quot;superadmin developer&quot;, &quot;install mode&quot;: &quot;developer&quot;, &quot;request summary&quot;: &quot;Continue all remaining desktop performance/resource work from the prior turn.&quot;, &quot;requirements&quot;: &quot;platform desktop app/docs/requirements/2026 06 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4509,
+      "updatedAt": "2026-06-05T18:56:19.553Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-native-resource-telemetry-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: Native Resource Telemetry",
+      "excerpt": "평가: Native Resource Telemetry 결과 통과. 앱이 실제로 사용하는 native process/system resource telemetry를 Rust/Tauri command로 노출했다. Monitor UI와 readiness gate가 이를 요구한다. 검증 완료 tsc noEmit : 통과 cargo check : 통과 Workspace Monitor test/check: 통과 Platform desktop test: 통과 service readiness registry c",
+      "html": "<p>평가: Native Resource Telemetry 결과 통과. 앱이 실제로 사용하는 native process/system resource telemetry를 Rust/Tauri command로 노출했다. Monitor UI와 readiness gate가 이를 요구한다. 검증 완료 tsc noEmit : 통과 cargo check : 통과 Workspace Monitor test/check: 통과 Platform desktop test: 통과 service readiness registry config contract: 통과 Platform desktop check: 통과 Internal package build: 통과, .app 와</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 776,
+      "updatedAt": "2026-06-05T18:56:19.552Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-native-resource-telemetry-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-native-resource-telemetry.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Native Resource Telemetry",
+      "excerpt": "작업 요약: Native Resource Telemetry 완료 Rust/Tauri get desktop resource snapshot command를 추가했다. report는 현재 app process memory, virtual memory, CPU usage, PID, task count, system memory, CPU threads, workspace cache/warmup 상태를 포함한다. MonitorShell source workbench에 앱 RAM/CPU 상태를 추가했다. a",
+      "html": "<p>작업 요약: Native Resource Telemetry 완료 Rust/Tauri get desktop resource snapshot command를 추가했다. report는 현재 app process memory, virtual memory, CPU usage, PID, task count, system memory, CPU threads, workspace cache/warmup 상태를 포함한다. MonitorShell source workbench에 앱 RAM/CPU 상태를 추가했다. active runtime surface에서 10초 간격으로 native snapshot을 갱신한다. service readiness regist</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 866,
+      "updatedAt": "2026-06-05T18:56:19.552Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
       "id": "history-2026-2026-06-06-md",
       "path": "_history/2026/2026-06-06.md",
       "category": "daily-history",
@@ -72,11 +136,91 @@
       "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 874,
-      "updatedAt": "2026-06-05T18:43:48.366Z",
+      "sourceBytes": 1327,
+      "updatedAt": "2026-06-05T18:53:41.666Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-native-resource-telemetry-omission-json",
+      "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry-omission.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Native Resource Telemetry Omission",
+      "excerpt": "{ \"id\": \"2026 06 06 native resource telemetry omission\", \"date\": \"2026 06 06\", \"status\": \"passed\", \"checked user instructions\": \"Do all remaining feasible implementation.\", \"Use desktop CPU/RAM/OS resources.\", \"Run builds automatically after implementation.\" , \"covered items\": \"w",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 native resource telemetry omission&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;status&quot;: &quot;passed&quot;, &quot;checked user instructions&quot;: &quot;Do all remaining feasible implementation.&quot;, &quot;Use desktop CPU/RAM/OS resources.&quot;, &quot;Run builds automatically after implementation.&quot; , &quot;covered items&quot;: &quot;web first intake&quot;, &quot;native telemetry command&quot;, &quot;Monitor UI visibility&quot;, &quot;readines</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 693,
+      "updatedAt": "2026-06-05T18:53:41.664Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-native-resource-telemetry-resource-json",
+      "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry-resource.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Native Resource Telemetry Resource",
+      "excerpt": "{ \"id\": \"2026 06 06 native resource telemetry resource\", \"date\": \"2026 06 06\", \"status\": \"passed\", \"resource risk occurred\": true, \"resources touched\": \"Rust sysinfo process/system telemetry\", \"Tauri invoke command surface\", \"React interval polling\" , \"cleanup\": \"No long running ",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 native resource telemetry resource&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;status&quot;: &quot;passed&quot;, &quot;resource risk occurred&quot;: true, &quot;resources touched&quot;: &quot;Rust sysinfo process/system telemetry&quot;, &quot;Tauri invoke command surface&quot;, &quot;React interval polling&quot; , &quot;cleanup&quot;: &quot;No long running server or external process was introduced.&quot;, &quot;Telemetry interval is cleaned up b</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 450,
+      "updatedAt": "2026-06-05T18:53:41.664Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-native-resource-telemetry-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-native-resource-telemetry.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Native Resource Telemetry",
+      "excerpt": "요청 결과 추적: Native Resource Telemetry 요청 사용자는 남은 작업 전체를 계속 구현하라고 지시했다. 결과 실제 Rust/Tauri process/system resource telemetry를 앱에 추가했다. OS cache 상태뿐 아니라 현재 app RAM/CPU 상태를 source workbench에서 볼 수 있다. readiness gate가 native resource telemetry를 별도 그룹으로 추적한다. 구현 파일 platform desktop app/src",
+      "html": "<p>요청 결과 추적: Native Resource Telemetry 요청 사용자는 남은 작업 전체를 계속 구현하라고 지시했다. 결과 실제 Rust/Tauri process/system resource telemetry를 앱에 추가했다. OS cache 상태뿐 아니라 현재 app RAM/CPU 상태를 source workbench에서 볼 수 있다. readiness gate가 native resource telemetry를 별도 그룹으로 추적한다. 구현 파일 platform desktop app/src tauri/src/lib.rs platform desktop app/renderer/workspace monitor/components/Mon</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 972,
+      "updatedAt": "2026-06-05T18:53:41.663Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-native-resource-telemetry-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-native-resource-telemetry.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Native Resource Telemetry",
+      "excerpt": "사용자 요청 요약: Native Resource Telemetry 요약 사용자는 이전 잔여 항목까지 “다 해”라고 지시했다. 이전 맥락은 탭 이동 지연, 데스크톱 자원 사용, Rust/Tauri 활용, 빌드 자동 실행이었다. 실행 해석 이미 구현된 lazy/resident/native cache 위에 실제 app process/system telemetry를 추가한다. 외부 Apple 자격증명 없이 public release를 완료했다고 주장하지 않는다. 구현 가능한 부분은 코드, UI, read",
+      "html": "<p>사용자 요청 요약: Native Resource Telemetry 요약 사용자는 이전 잔여 항목까지 “다 해”라고 지시했다. 이전 맥락은 탭 이동 지연, 데스크톱 자원 사용, Rust/Tauri 활용, 빌드 자동 실행이었다. 실행 해석 이미 구현된 lazy/resident/native cache 위에 실제 app process/system telemetry를 추가한다. 외부 Apple 자격증명 없이 public release를 완료했다고 주장하지 않는다. 구현 가능한 부분은 코드, UI, readiness, tests, build까지 수행한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 556,
+      "updatedAt": "2026-06-05T18:53:41.663Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-native-resource-telemetry-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-native-resource-telemetry.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: Native Resource Telemetry",
+      "excerpt": "웹 검색 기록: Native Resource Telemetry 검색 시각 2026 06 06 질의 Tauri v2 official docs updater plugin code signing notarization macOS Apple official Developer ID notarization hardened runtime command line notarytool docs Tauri v2 official docs system information process memory CPU Rust pl",
+      "html": "<p>웹 검색 기록: Native Resource Telemetry 검색 시각 2026 06 06 질의 Tauri v2 official docs updater plugin code signing notarization macOS Apple official Developer ID notarization hardened runtime command line notarytool docs Tauri v2 official docs system information process memory CPU Rust plugin shell process Rust sysinfo crate official docs process CPU memory refresh A</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1428,
+      "updatedAt": "2026-06-05T18:53:41.662Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "history-work-timings-2026-2026-06-06-monitor-performance-guardrails-json",
@@ -38115,31 +38259,31 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 106,
+      "documentsCount": 115,
       "categories": [
         {
           "category": "evaluation",
-          "count": 33
+          "count": 37
         },
         {
           "category": "user-request",
-          "count": 14
+          "count": 15
         },
         {
           "category": "web-search",
-          "count": 14
+          "count": 15
         },
         {
           "category": "work-summary",
-          "count": 14
+          "count": 15
         },
         {
           "category": "request-trace",
-          "count": 13
+          "count": 14
         },
         {
           "category": "work-timing",
-          "count": 13
+          "count": 14
         },
         {
           "category": "plan",

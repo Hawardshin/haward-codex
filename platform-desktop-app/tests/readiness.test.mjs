@@ -427,6 +427,8 @@ test("service readiness registry records production service blockers", () => {
   assert.match(serialized, /Signed Distribution/);
   assert.match(serialized, /Update & Recovery/);
   assert.match(serialized, /Workspace Onboarding/);
+  assert.match(serialized, /Native Resource Telemetry/);
+  assert.match(serialized, /native_resource_telemetry/);
   assert.match(serialized, /Provider Accounts/);
   assert.match(serialized, /Production Agent Blueprints/);
   assert.match(serialized, /production_agent_blueprints/);
@@ -567,7 +569,15 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     assert.match(releaseReadinessCheck, new RegExp(scriptToken));
   }
   const serviceReadinessCheck = readFileSync(join(root, "scripts/check-service-readiness.mjs"), "utf8");
-  for (const scriptToken of ["checkServiceReadiness", "service_internal_ready_public_blocked", "Signed updater channel", "Workspace Onboarding", "Direct provider task command exposed"]) {
+  for (const scriptToken of [
+    "checkServiceReadiness",
+    "service_internal_ready_public_blocked",
+    "Signed updater channel",
+    "Workspace Onboarding",
+    "Direct provider task command exposed",
+    "Native Resource Telemetry",
+    "desktop_resource_snapshot_command"
+  ]) {
     assert.match(serviceReadinessCheck, new RegExp(scriptToken));
   }
   for (const token of ["writeClipboardText", "clipboard.writeText", "textarea copy path", "execCommand", "setSelectionRange"]) {
@@ -621,6 +631,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "send_cli_adapter_defer_message",
     "defer_all_cli_adapter_questions",
     "cancel_cli_adapter_session",
+    "get_desktop_resource_snapshot",
     "warm_workspace_os_resources",
     "prepare_workspace_os_resources",
     "list_workspace_text_files",
@@ -837,8 +848,12 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "clone_desktop_workspace",
     "warm_workspace_os_resources",
     "prepare_workspace_os_resources",
+    "get_desktop_resource_snapshot",
     "OS 캐시",
     "메모리 예산",
+    "앱 RAM/CPU",
+    "DesktopResourceSnapshotReport",
+    "desktopResourceSnapshot",
     "native warming",
     "native cache",
     "nativeWorkspaceCopy",

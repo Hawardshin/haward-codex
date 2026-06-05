@@ -12,7 +12,7 @@ use std::process::{Child, ChildStdin, Command, Stdio};
 use std::sync::{mpsc, Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
-use sysinfo::System;
+use sysinfo::{get_current_pid, ProcessRefreshKind, ProcessesToUpdate, System};
 use tauri::{AppHandle, Manager, State};
 use tauri_plugin_dialog::DialogExt;
 
@@ -140,6 +140,52 @@ struct WorkspaceResourceProfile {
     preload_file_limit: usize,
     preload_byte_limit: usize,
     preload_strategy: String,
+}
+
+#[derive(Clone, Default, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct WorkspaceResourceSnapshotCache {
+    cache_status: String,
+    root_path: String,
+    generated_at: String,
+    scanned_entries: usize,
+    total_count: usize,
+    cached_text_files: usize,
+    cached_bytes: usize,
+    scan_duration_ms: u64,
+    entry_build_duration_ms: u64,
+    preload_duration_ms: u64,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct DesktopResourceSnapshotReport {
+    status: String,
+    schema_version: String,
+    sampled_at: String,
+    system_supported: bool,
+    app_pid: u32,
+    process_name: String,
+    process_memory_bytes: u64,
+    process_virtual_memory_bytes: u64,
+    process_cpu_usage: f32,
+    process_run_time_seconds: u64,
+    process_task_count: usize,
+    cpu_threads: usize,
+    available_parallelism: usize,
+    parallel_workers: usize,
+    global_cpu_usage: f32,
+    total_memory_bytes: u64,
+    available_memory_bytes: u64,
+    used_memory_bytes: u64,
+    memory_budget_bytes: usize,
+    preload_byte_limit: usize,
+    preload_file_limit: usize,
+    preload_strategy: String,
+    workspace_cache: WorkspaceResourceSnapshotCache,
+    warmup_status: String,
+    warmup_source: String,
+    warmup_error: String,
 }
 
 struct CliSession {
@@ -2546,6 +2592,73 @@ fn prepare_workspace_os_resources(
 }
 
 #[tauri::command]
+fn get_desktop_resource_snapshot(
+    cache_store: State<'_, WorkspaceResourceStore>,
+) -> Result<DesktopResourceSnapshotReport, String> {
+    let profile = workspace_resource_profile();
+    let mut system = System::new();
+    system.refresh_memory();
+    system.refresh_cpu_all();
+
+    let current_pid = get_current_pid().ok();
+    if let Some(pid) = current_pid {
+        let process_refresh = ProcessRefreshKind::nothing()
+            .with_cpu()
+            .with_memory()
+            .with_tasks();
+        system.refresh_processes_specifics(
+            ProcessesToUpdate::Some(&[pid]),
+            false,
+            process_refresh,
+        );
+        thread::sleep(Duration::from_millis(120));
+        system.refresh_cpu_all();
+        system.refresh_processes_specifics(
+            ProcessesToUpdate::Some(&[pid]),
+            false,
+            process_refresh,
+        );
+    }
+
+    let process = current_pid.and_then(|pid| system.process(pid));
+    let warmup = cache_store.warmup_report()?;
+    let workspace_cache = cache_store.snapshot_cache()?;
+
+    Ok(DesktopResourceSnapshotReport {
+        status: "sampled".to_string(),
+        schema_version: "desktop-resource-snapshot.v1".to_string(),
+        sampled_at: current_unix_millis_label(),
+        system_supported: sysinfo::IS_SUPPORTED_SYSTEM,
+        app_pid: current_pid.map(|pid| pid.as_u32()).unwrap_or(0),
+        process_name: process
+            .map(|item| item.name().to_string_lossy().to_string())
+            .unwrap_or_else(|| "unknown".to_string()),
+        process_memory_bytes: process.map(|item| item.memory()).unwrap_or(0),
+        process_virtual_memory_bytes: process.map(|item| item.virtual_memory()).unwrap_or(0),
+        process_cpu_usage: process.map(|item| item.cpu_usage()).unwrap_or(0.0),
+        process_run_time_seconds: process.map(|item| item.run_time()).unwrap_or(0),
+        process_task_count: process
+            .and_then(|item| item.tasks().map(|tasks| tasks.len()))
+            .unwrap_or(0),
+        cpu_threads: profile.cpu_threads,
+        available_parallelism: profile.available_parallelism,
+        parallel_workers: profile.parallel_workers,
+        global_cpu_usage: system.global_cpu_usage(),
+        total_memory_bytes: system.total_memory(),
+        available_memory_bytes: system.available_memory(),
+        used_memory_bytes: system.used_memory(),
+        memory_budget_bytes: profile.memory_budget_bytes,
+        preload_byte_limit: profile.preload_byte_limit,
+        preload_file_limit: profile.preload_file_limit,
+        preload_strategy: profile.preload_strategy,
+        workspace_cache,
+        warmup_status: warmup.status,
+        warmup_source: warmup.source,
+        warmup_error: warmup.error,
+    })
+}
+
+#[tauri::command]
 fn write_workspace_text_file(
     app: AppHandle,
     cache_store: State<'_, WorkspaceResourceStore>,
@@ -2683,6 +2796,32 @@ impl WorkspaceResourceStore {
             .map_err(|_| "Workspace resource warmup lock is poisoned.".to_string())?;
         *current = report;
         Ok(())
+    }
+
+    fn snapshot_cache(&self) -> Result<WorkspaceResourceSnapshotCache, String> {
+        let cache = self
+            .inner
+            .cache
+            .lock()
+            .map_err(|_| "Workspace resource cache lock is poisoned.".to_string())?;
+        Ok(match cache.as_ref() {
+            Some(cache) => WorkspaceResourceSnapshotCache {
+                cache_status: "ready".to_string(),
+                root_path: cache.root_path.clone(),
+                generated_at: cache.generated_at.clone(),
+                scanned_entries: cache.scanned_entries,
+                total_count: cache.files.len(),
+                cached_text_files: cache.text_files.len(),
+                cached_bytes: cache.cached_bytes,
+                scan_duration_ms: cache.scan_duration_ms,
+                entry_build_duration_ms: cache.entry_build_duration_ms,
+                preload_duration_ms: cache.preload_duration_ms,
+            },
+            None => WorkspaceResourceSnapshotCache {
+                cache_status: "empty".to_string(),
+                ..WorkspaceResourceSnapshotCache::default()
+            },
+        })
     }
 
     fn start_background_warmup(
@@ -3333,6 +3472,7 @@ pub fn run() {
             send_cli_adapter_defer_message,
             defer_all_cli_adapter_questions,
             cancel_cli_adapter_session,
+            get_desktop_resource_snapshot,
             warm_workspace_os_resources,
             prepare_workspace_os_resources,
             list_workspace_text_files,
@@ -5112,6 +5252,7 @@ fn service_readiness_report(app: &AppHandle) -> Result<ServiceReadinessReport, S
     let payload_audit = run_installer_payload_audit_report(app)?;
     let workspace_state = desktop_workspace_state_report(app, None, None)?;
     let provider_credentials = provider_credentials_report(app)?;
+    let resource_profile = workspace_resource_profile();
     let roots_ready = runtime_roots.roots.iter().all(|root| root.exists);
     let has_payload_high_findings = payload_audit
         .findings
@@ -5177,6 +5318,48 @@ fn service_readiness_report(app: &AppHandle) -> Result<ServiceReadinessReport, S
                     "Payload scan is bounded",
                     payload_audit.scanned_files <= payload_audit.max_scan_files,
                     &format!("max {} files", payload_audit.max_scan_files),
+                    "blocked",
+                    true,
+                    true,
+                ),
+            ],
+        ),
+        service_readiness_group(
+            "native_resource_telemetry",
+            "Native Resource Telemetry",
+            vec![
+                service_readiness_check(
+                    "resource_profile_supported",
+                    "System resource profile is available",
+                    resource_profile.system_supported,
+                    &format!(
+                        "{} CPU threads, {} workers, {} byte memory budget.",
+                        resource_profile.cpu_threads,
+                        resource_profile.parallel_workers,
+                        resource_profile.memory_budget_bytes
+                    ),
+                    "blocked",
+                    true,
+                    true,
+                ),
+                service_readiness_check(
+                    "resource_profile_uses_memory_budget",
+                    "Native resource cache uses memory budget",
+                    resource_profile.memory_budget_bytes > 0
+                        && resource_profile.preload_byte_limit == resource_profile.memory_budget_bytes,
+                    &resource_profile.preload_strategy,
+                    "blocked",
+                    true,
+                    true,
+                ),
+                service_readiness_check(
+                    "resource_profile_uses_cpu_workers",
+                    "Native resource cache uses CPU workers",
+                    resource_profile.parallel_workers > 0 && resource_profile.cpu_threads > 0,
+                    &format!(
+                        "{} workers from {} threads.",
+                        resource_profile.parallel_workers, resource_profile.cpu_threads
+                    ),
                     "blocked",
                     true,
                     true,

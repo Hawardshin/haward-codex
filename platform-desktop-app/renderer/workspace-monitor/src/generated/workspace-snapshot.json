@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T18:44:01.287Z",
+  "generatedAt": "2026-06-05T18:56:27.710Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 453,
-    "evaluations": 32,
+    "evaluations": 33,
     "webSearches": 12,
     "timingRecords": 11,
     "historyDays": 1,
-    "adminHistoryDocuments": 2378,
+    "adminHistoryDocuments": 2387,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7386,6 +7386,102 @@
   ],
   "documents": [
     {
+      "id": "history-work-timings-2026-2026-06-06-native-resource-telemetry-json",
+      "path": "_history/work-timings/2026/2026-06-06-native-resource-telemetry.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Native Resource Telemetry",
+      "excerpt": "{ \"id\": \"2026 06 06 native resource telemetry\", \"date\": \"2026 06 06\", \"status\": \"recorded\", \"timings\": { \"phase\": \"web first intake\", \"duration minutes\": 2 }, { \"phase\": \"implementation\", \"duration minutes\": 18 }, { \"phase\": \"quick verification\", \"duration minutes\": 4 }, { \"phase",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 native resource telemetry&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;status&quot;: &quot;recorded&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;duration minutes&quot;: 2 }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;duration minutes&quot;: 18 }, { &quot;phase&quot;: &quot;quick verification&quot;, &quot;duration minutes&quot;: 4 }, { &quot;phase&quot;: &quot;records&quot;, &quot;duration minutes&quot;: 8 }, { &quot;phase&quot;: &quot;internal package build&quot;, &quot;dur</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 649,
+      "updatedAt": "2026-06-05T18:56:19.554Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-native-resource-telemetry-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Native Resource Telemetry Evaluation Input",
+      "excerpt": "{ \"id\": \"2026 06 06 native resource telemetry\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"request summary\": \"Continue all remaining desktop performance/resource work from th",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 native resource telemetry&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;view mode&quot;: &quot;superadmin developer&quot;, &quot;install mode&quot;: &quot;developer&quot;, &quot;request summary&quot;: &quot;Continue all remaining desktop performance/resource work from the prior turn.&quot;, &quot;requirements&quot;: &quot;platform desktop app/docs/requirements/2026 06 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4509,
+      "updatedAt": "2026-06-05T18:56:19.553Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-native-resource-telemetry-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: Native Resource Telemetry",
+      "excerpt": "평가: Native Resource Telemetry 결과 통과. 앱이 실제로 사용하는 native process/system resource telemetry를 Rust/Tauri command로 노출했다. Monitor UI와 readiness gate가 이를 요구한다. 검증 완료 tsc noEmit : 통과 cargo check : 통과 Workspace Monitor test/check: 통과 Platform desktop test: 통과 service readiness registry c",
+      "html": "<p>평가: Native Resource Telemetry 결과 통과. 앱이 실제로 사용하는 native process/system resource telemetry를 Rust/Tauri command로 노출했다. Monitor UI와 readiness gate가 이를 요구한다. 검증 완료 tsc noEmit : 통과 cargo check : 통과 Workspace Monitor test/check: 통과 Platform desktop test: 통과 service readiness registry config contract: 통과 Platform desktop check: 통과 Internal package build: 통과, .app 와</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 776,
+      "updatedAt": "2026-06-05T18:56:19.552Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-native-resource-telemetry-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-native-resource-telemetry.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Native Resource Telemetry",
+      "excerpt": "작업 요약: Native Resource Telemetry 완료 Rust/Tauri get desktop resource snapshot command를 추가했다. report는 현재 app process memory, virtual memory, CPU usage, PID, task count, system memory, CPU threads, workspace cache/warmup 상태를 포함한다. MonitorShell source workbench에 앱 RAM/CPU 상태를 추가했다. a",
+      "html": "<p>작업 요약: Native Resource Telemetry 완료 Rust/Tauri get desktop resource snapshot command를 추가했다. report는 현재 app process memory, virtual memory, CPU usage, PID, task count, system memory, CPU threads, workspace cache/warmup 상태를 포함한다. MonitorShell source workbench에 앱 RAM/CPU 상태를 추가했다. active runtime surface에서 10초 간격으로 native snapshot을 갱신한다. service readiness regist</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 866,
+      "updatedAt": "2026-06-05T18:56:19.552Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-resource-telemetry-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-resource-telemetry/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증: Native Resource Telemetry",
+      "excerpt": "검증: Native Resource Telemetry 완료된 검증 corepack pnpm dir platform desktop app/renderer/workspace monitor exec tsc noEmit : 통과 cargo check in platform desktop app/src tauri : 통과 corepack pnpm dir platform desktop app/renderer/workspace monitor test : 통과, 60 tests corepack pnpm dir p",
+      "html": "<h1>검증: Native Resource Telemetry</h1>\n<h2>완료된 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor exec tsc --noEmit</code>: 통과</li>\n<li><code>cargo check</code> in <code>platform-desktop-app/src-tauri</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code>: 통과, 60 tests</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 22 tests</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/service-readiness-registry.json</code>: 통과</li>\n</ul>\n<h2>최종 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter platform-desktop-app check</code>: 통과</li>\n<li><code>corepack pnpm --filter platform-desktop-app run package:internal</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:budget</code>: 통과, largest chunk 734386 bytes / 1000000 budget</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:sections:repeat</code>: 통과, runs 3, settle average 343.3ms, p95 796.4ms, long-task max 587ms</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:buttons</code>: 통과, real click feedback p95 51.4ms</li>\n</ul>\n<h2>패키징 산출물</h2>\n<ul>\n<li><code>/Users/shinjoungeun/Desktop/Obsidian/brain/codex/platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>/Users/shinjoungeun/Desktop/Obsidian/brain/codex/platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>\n<h2>리소스 확인</h2>\n<ul>\n<li>성능 감사용 static server는 종료했다.</li>\n<li><code>lsof -tiTCP:3348 -sTCP:LISTEN</code> 결과 listener 없음.</li>\n</ul>\n<h2>현재 잔여 리스크</h2>\n<ul>\n<li>public signing/notarization/updater/clean-machine smoke는 외부 자격증명과 release infrastructure가 필요하므로 계속 blocked다.</li>\n<li>CPU usage는 command 호출 시점의 short sample이다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1897,
+      "updatedAt": "2026-06-05T18:56:19.551Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-resource-telemetry-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-resource-telemetry/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록: Native Resource Telemetry",
+      "excerpt": "작업 목록: Native Resource Telemetry x web first intake 수행 x Rust/Tauri workspace resource 구조 확인 x DesktopResourceSnapshotReport / WorkspaceResourceSnapshotCache 추가 x get desktop resource snapshot Tauri command 추가 x invoke handler 등록 x MonitorShell type/state/refresh/polling/display ",
+      "html": "<h1>작업 목록: Native Resource Telemetry</h1>\n<ul>\n<li>[x] web-first intake 수행</li>\n<li>[x] Rust/Tauri workspace resource 구조 확인</li>\n<li>[x] <code>DesktopResourceSnapshotReport</code>/<code>WorkspaceResourceSnapshotCache</code> 추가</li>\n<li>[x] <code>get_desktop_resource_snapshot</code> Tauri command 추가</li>\n<li>[x] invoke handler 등록</li>\n<li>[x] MonitorShell type/state/refresh/polling/display 추가</li>\n<li>[x] <code>service-readiness-registry.json</code>에 <code>native_resource_telemetry</code> 추가</li>\n<li>[x] <code>check-service-readiness.mjs</code>, readiness tests, monitor tests 보강</li>\n<li>[x] TypeScript/Rust 빠른 compile check 실행</li>\n<li>[x] Workspace Monitor test/check 실행</li>\n<li>[x] Platform desktop test 실행</li>\n<li>[x] shared config contract check 실행</li>\n<li>[x] Platform desktop check 실행</li>\n<li>[x] Internal package build 실행</li>\n<li>[x] Built output performance audit 실행</li>\n<li>[ ] 최종 snapshot 수집, evaluation 갱신, commit/push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 849,
+      "updatedAt": "2026-06-05T18:56:19.550Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-2026-2026-06-06-md",
       "path": "_history/2026/2026-06-06.md",
       "category": "daily-history",
@@ -7395,11 +7491,171 @@
       "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 874,
-      "updatedAt": "2026-06-05T18:43:48.366Z",
+      "sourceBytes": 1327,
+      "updatedAt": "2026-06-05T18:53:41.666Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-native-resource-telemetry-omission-json",
+      "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry-omission.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Native Resource Telemetry Omission",
+      "excerpt": "{ \"id\": \"2026 06 06 native resource telemetry omission\", \"date\": \"2026 06 06\", \"status\": \"passed\", \"checked user instructions\": \"Do all remaining feasible implementation.\", \"Use desktop CPU/RAM/OS resources.\", \"Run builds automatically after implementation.\" , \"covered items\": \"w",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 native resource telemetry omission&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;status&quot;: &quot;passed&quot;, &quot;checked user instructions&quot;: &quot;Do all remaining feasible implementation.&quot;, &quot;Use desktop CPU/RAM/OS resources.&quot;, &quot;Run builds automatically after implementation.&quot; , &quot;covered items&quot;: &quot;web first intake&quot;, &quot;native telemetry command&quot;, &quot;Monitor UI visibility&quot;, &quot;readines</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 693,
+      "updatedAt": "2026-06-05T18:53:41.664Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-native-resource-telemetry-resource-json",
+      "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry-resource.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Native Resource Telemetry Resource",
+      "excerpt": "{ \"id\": \"2026 06 06 native resource telemetry resource\", \"date\": \"2026 06 06\", \"status\": \"passed\", \"resource risk occurred\": true, \"resources touched\": \"Rust sysinfo process/system telemetry\", \"Tauri invoke command surface\", \"React interval polling\" , \"cleanup\": \"No long running ",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 native resource telemetry resource&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;status&quot;: &quot;passed&quot;, &quot;resource risk occurred&quot;: true, &quot;resources touched&quot;: &quot;Rust sysinfo process/system telemetry&quot;, &quot;Tauri invoke command surface&quot;, &quot;React interval polling&quot; , &quot;cleanup&quot;: &quot;No long running server or external process was introduced.&quot;, &quot;Telemetry interval is cleaned up b</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 450,
+      "updatedAt": "2026-06-05T18:53:41.664Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-native-resource-telemetry-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-native-resource-telemetry.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Native Resource Telemetry",
+      "excerpt": "요청 결과 추적: Native Resource Telemetry 요청 사용자는 남은 작업 전체를 계속 구현하라고 지시했다. 결과 실제 Rust/Tauri process/system resource telemetry를 앱에 추가했다. OS cache 상태뿐 아니라 현재 app RAM/CPU 상태를 source workbench에서 볼 수 있다. readiness gate가 native resource telemetry를 별도 그룹으로 추적한다. 구현 파일 platform desktop app/src",
+      "html": "<p>요청 결과 추적: Native Resource Telemetry 요청 사용자는 남은 작업 전체를 계속 구현하라고 지시했다. 결과 실제 Rust/Tauri process/system resource telemetry를 앱에 추가했다. OS cache 상태뿐 아니라 현재 app RAM/CPU 상태를 source workbench에서 볼 수 있다. readiness gate가 native resource telemetry를 별도 그룹으로 추적한다. 구현 파일 platform desktop app/src tauri/src/lib.rs platform desktop app/renderer/workspace monitor/components/Mon</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 972,
+      "updatedAt": "2026-06-05T18:53:41.663Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-native-resource-telemetry-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-native-resource-telemetry.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Native Resource Telemetry",
+      "excerpt": "사용자 요청 요약: Native Resource Telemetry 요약 사용자는 이전 잔여 항목까지 “다 해”라고 지시했다. 이전 맥락은 탭 이동 지연, 데스크톱 자원 사용, Rust/Tauri 활용, 빌드 자동 실행이었다. 실행 해석 이미 구현된 lazy/resident/native cache 위에 실제 app process/system telemetry를 추가한다. 외부 Apple 자격증명 없이 public release를 완료했다고 주장하지 않는다. 구현 가능한 부분은 코드, UI, read",
+      "html": "<p>사용자 요청 요약: Native Resource Telemetry 요약 사용자는 이전 잔여 항목까지 “다 해”라고 지시했다. 이전 맥락은 탭 이동 지연, 데스크톱 자원 사용, Rust/Tauri 활용, 빌드 자동 실행이었다. 실행 해석 이미 구현된 lazy/resident/native cache 위에 실제 app process/system telemetry를 추가한다. 외부 Apple 자격증명 없이 public release를 완료했다고 주장하지 않는다. 구현 가능한 부분은 코드, UI, readiness, tests, build까지 수행한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 556,
+      "updatedAt": "2026-06-05T18:53:41.663Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-native-resource-telemetry-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-native-resource-telemetry.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: Native Resource Telemetry",
+      "excerpt": "웹 검색 기록: Native Resource Telemetry 검색 시각 2026 06 06 질의 Tauri v2 official docs updater plugin code signing notarization macOS Apple official Developer ID notarization hardened runtime command line notarytool docs Tauri v2 official docs system information process memory CPU Rust pl",
+      "html": "<p>웹 검색 기록: Native Resource Telemetry 검색 시각 2026 06 06 질의 Tauri v2 official docs updater plugin code signing notarization macOS Apple official Developer ID notarization hardened runtime command line notarytool docs Tauri v2 official docs system information process memory CPU Rust plugin shell process Rust sysinfo crate official docs process CPU memory refresh A</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1428,
+      "updatedAt": "2026-06-05T18:53:41.662Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-resource-telemetry-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-resource-telemetry/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적성: Native Resource Telemetry",
+      "excerpt": "추적성: Native Resource Telemetry 요구사항 연결 platform desktop app/docs/requirements/2026 06 06 native resource telemetry.ko.md 구현 연결 platform desktop app/src tauri/src/lib.rs platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx platform desktop app/configs/servic",
+      "html": "<h1>추적성: Native Resource Telemetry</h1>\n<h2>요구사항 연결</h2>\n<ul>\n<li><code>platform-desktop-app/docs/requirements/2026-06-06-native-resource-telemetry.ko.md</code></li>\n</ul>\n<h2>구현 연결</h2>\n<ul>\n<li><code>platform-desktop-app/src-tauri/src/lib.rs</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></li>\n<li><code>platform-desktop-app/configs/service-readiness-registry.json</code></li>\n<li><code>platform-desktop-app/scripts/check-service-readiness.mjs</code></li>\n<li><code>platform-desktop-app/scripts/check-readiness.mjs</code></li>\n<li><code>platform-desktop-app/tests/readiness.test.mjs</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n</ul>\n<h2>히스토리 연결</h2>\n<ul>\n<li><code>_history/web-searches/2026/2026-06-06-native-resource-telemetry.ko.md</code></li>\n<li><code>_history/user-requests/2026/2026-06-06-native-resource-telemetry.ko.md</code></li>\n<li><code>_history/work-summaries/2026/2026-06-06-native-resource-telemetry.ko.md</code></li>\n<li><code>_history/request-traces/2026/2026-06-06-native-resource-telemetry.ko.md</code></li>\n<li><code>_history/evaluations/2026/2026-06-06-native-resource-telemetry.ko.md</code></li>\n<li><code>_history/evaluations/2026/2026-06-06-native-resource-telemetry-evaluation-input.json</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1091,
+      "updatedAt": "2026-06-05T18:53:41.662Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-resource-telemetry-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-resource-telemetry/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "계획: Native Resource Telemetry",
+      "excerpt": "계획: Native Resource Telemetry 단계 1. web first intake로 Tauri updater/signing/sysinfo/process telemetry 자료를 확인한다. 2. 기존 Rust workspace cache와 readiness 구조를 확인한다. 3. 새 dependency 없이 sysinfo 기반 resource snapshot command를 추가한다. 4. MonitorShell type/state/refresh/display를 추가한다. 5. serv",
+      "html": "<h1>계획: Native Resource Telemetry</h1>\n<h2>단계</h2>\n<p>1. web-first intake로 Tauri updater/signing/sysinfo/process telemetry 자료를 확인한다.</p>\n<p>2. 기존 Rust workspace cache와 readiness 구조를 확인한다.</p>\n<p>3. 새 dependency 없이 <code>sysinfo</code> 기반 resource snapshot command를 추가한다.</p>\n<p>4. MonitorShell type/state/refresh/display를 추가한다.</p>\n<p>5. service readiness registry/check/test에 native resource telemetry group을 추가한다.</p>\n<p>6. 요구사항/스펙/히스토리/evaluation 기록을 남긴다.</p>\n<p>7. renderer/Rust/platform 검증과 internal package build를 실행한다.</p>\n<p>8. snapshot을 재수집하고 commit/push한다.</p>\n<h2>롤백 경계</h2>\n<ul>\n<li>UI 표시가 문제를 만들면 MonitorShell 표시와 polling effect만 되돌릴 수 있다.</li>\n<li>Rust snapshot command가 특정 OS에서 문제가 있으면 readiness group은 유지한 채 command 내부를 system-only fallback으로 줄일 수 있다.</li>\n<li>public release blocker 로직은 이번 변경과 분리되어 있으므로 롤백 범위에 넣지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1033,
+      "updatedAt": "2026-06-05T18:53:41.661Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-resource-telemetry-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-resource-telemetry/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "스펙: Native Resource Telemetry",
+      "excerpt": "스펙: Native Resource Telemetry 목표 데스크톱 앱이 실제 OS 자원을 쓰고 있는지 앱 내부에서 볼 수 있도록 Rust/Tauri native resource snapshot을 추가하고, UI와 readiness gate에 연결한다. 언어/런타임 선택 옵션 A: Rust/Tauri command + existing sysinfo . 이미 workspace cache가 Rust에서 CPU/RAM budget을 사용하고 있고, 프로세스/시스템 telemetry를 같은 authori",
+      "html": "<h1>스펙: Native Resource Telemetry</h1>\n<h2>목표</h2>\n<p>데스크톱 앱이 실제 OS 자원을 쓰고 있는지 앱 내부에서 볼 수 있도록 Rust/Tauri native resource snapshot을 추가하고, UI와 readiness gate에 연결한다.</p>\n<h2>언어/런타임 선택</h2>\n<ul>\n<li>옵션 A: Rust/Tauri command + existing <code>sysinfo</code>. 이미 workspace cache가 Rust에서 CPU/RAM budget을 사용하고 있고, 프로세스/시스템 telemetry를 같은 authority에서 읽을 수 있어 선택했다.</li>\n<li>옵션 B: renderer <code>performance.memory</code>/browser API. Chromium/WebView 차이가 있고 프로세스 전체/OS memory를 신뢰성 있게 다루기 어렵다.</li>\n<li>옵션 C: external <code>ps</code>/<code>top</code> command. OS별 parsing과 permission 차이가 커서 app runtime contract로 부적합하다.</li>\n</ul>\n<h2>아키텍처 선택</h2>\n<ul>\n<li>옵션 A: <code>get_desktop_resource_snapshot</code> Tauri command를 추가하고 MonitorShell에서 active surface interval로 갱신한다. 기존 invoke pattern과 상태 strip UI를 재사용하므로 선택했다.</li>\n<li>옵션 B: long-running native telemetry daemon. 장기 관측에는 유리하지만 현재 요구는 UI 가시성과 readiness gate라 과하다.</li>\n<li>옵션 C: package/build-time만 검사. 런타임 자원 사용을 보여주지 못한다.</li>\n</ul>\n<h2>설계</h2>\n<ul>\n<li>Rust report는 <code>DesktopResourceSnapshotReport</code>로 직렬화한다.</li>\n<li>command는 <code>get_current_pid</code>, <code>ProcessRefreshKind</code>, <code>ProcessesToUpdate</code>를 사용해 현재 앱 프로세스 memory/CPU를 샘플링한다.</li>\n<li>CPU usage는 짧은 interval 두 번 refresh해 값을 안정화한다.</li>\n<li>report는 workspace cache snapshot과 warmup status를 같이 포함한다.</li>\n<li>MonitorShell은 <code>DesktopResourceSnapshotReport</code> type과 <code>desktopResourceSnapshot</code> state를 가진다.</li>\n<li>runtime init <code>Promise.all</code>과 active surface interval에서 snapshot을 갱신한다.</li>\n<li>source workbench state strip에 <code>앱 RAM/CPU</code> 항목을 추가한다.</li>\n<li><code>service-readiness-registry.json</code>, <code>check-service-readiness.mjs</code>, readiness tests는 <code>native_resource_telemetry</code> group/token을 요구한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>Rust <code>cargo check</code>가 통과한다.</li>\n<li>Workspace Monitor TypeScript, test, check가 통과한다.</li>\n<li>Platform desktop test/check가 통과한다.</li>\n<li><code>service-readiness-registry.json</code> config contract check가 통과한다.</li>\n<li><code>package:internal</code>이 <code>.app</code>와 <code>.dmg</code>를 생성하고 검증한다.</li>\n</ul>\n<h2>제한</h2>\n<ul>\n<li>CPU usage는 샘플링 시점의 근사값이다.</li>\n<li>public release blocker는 telemetry 구현과 별개로 signing/notarization/updater/smoke 전까지 유지한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2519,
+      "updatedAt": "2026-06-05T18:53:41.661Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-native-resource-telemetry-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-native-resource-telemetry.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: Native Resource Telemetry",
+      "excerpt": "요구사항: Native Resource Telemetry 사용자 요구 사용자는 “다 해”라고 지시했고, 이전 맥락상 데스크톱 앱의 장점을 살려 CPU/RAM/운영체제 자원을 실제로 사용하고 탭/소스 워크벤치 성능을 끝까지 개선하라는 의미로 해석한다. 기능 요구사항 Rust/Tauri runtime은 현재 앱 프로세스의 memory, virtual memory, CPU usage, PID, task count를 보고해야 한다. Rust/Tauri runtime은 system memory, CPU t",
+      "html": "<h1>요구사항: Native Resource Telemetry</h1>\n<h2>사용자 요구</h2>\n<p>사용자는 “다 해”라고 지시했고, 이전 맥락상 데스크톱 앱의 장점을 살려 CPU/RAM/운영체제 자원을 실제로 사용하고 탭/소스 워크벤치 성능을 끝까지 개선하라는 의미로 해석한다.</p>\n<h2>기능 요구사항</h2>\n<ul>\n<li>Rust/Tauri runtime은 현재 앱 프로세스의 memory, virtual memory, CPU usage, PID, task count를 보고해야 한다.</li>\n<li>Rust/Tauri runtime은 system memory, CPU threads, available parallelism, workspace cache memory budget, preload limit, warmup/cache 상태를 같이 보고해야 한다.</li>\n<li>Workspace Monitor source workbench는 native snapshot을 사용자에게 보이는 상태 strip에 표시해야 한다.</li>\n<li>Service readiness registry와 checker는 native resource telemetry를 독립 readiness group으로 다뤄야 한다.</li>\n<li>기존 workspace OS cache, resident tab, lazy boundary, performance audit 계약은 유지한다.</li>\n</ul>\n<h2>비기능 요구사항</h2>\n<ul>\n<li>telemetry polling은 visible/active runtime surface에서만 실행해야 한다.</li>\n<li>hidden surface에서 불필요한 polling을 늘리지 않는다.</li>\n<li>새 dependency를 추가하지 않는다. 기존 <code>sysinfo</code>/<code>rayon</code> 경계 안에서 구현한다.</li>\n<li>implementation 후 renderer test/check, Rust check, desktop test/check, internal package build를 실행한다.</li>\n</ul>\n<h2>제외</h2>\n<ul>\n<li>Apple Developer ID signing, notarization, signed updater endpoint, clean-machine smoke는 자격증명/외부 release infrastructure가 필요하므로 이번 로컬 구현에서 완료라고 주장하지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1591,
+      "updatedAt": "2026-06-05T18:53:41.660Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-configs-service-readiness-registry-json",
+      "path": "platform-desktop-app/configs/service-readiness-registry.json",
+      "category": "project-config",
+      "language": "unknown",
+      "title": "Service Readiness Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"service readiness registry\", \"purpose\": \"Defines production service readiness gates for the installable desktop platform so internal builds, customer test builds, and public releases are not confused.\", \"reader guide\": { \"summary\": \"Use ",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;service-readiness-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines production-service readiness gates for the installable desktop platform so internal builds, customer test builds, and public releases are not confused.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry when deciding whether the desktop platform is a local/internal build, a controlled customer-test build, or ready for public service release signoff.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read service_levels first to understand which claims are allowed.&quot;,\n      &quot;Read readiness_groups to see the grouped service gaps that must be visible in the app.&quot;,\n      &quot;Read public_release_blockers before using public release language.&quot;,\n      &quot;Read runtime_surface_contract to understand what the installed app must show to operators.&quot;,\n      &quot;Treat updater, signing, notarization, privacy, support, and first-run items as release gates rather than optional notes.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;A release channel, updater, signing, notarization, support, privacy, or onboarding behavior changes.&quot;,\n      &quot;The app starts collecting additional logs, workspace data, or diagnostics.&quot;,\n      &quot;A customer-test or public distribution claim is made.&quot;,\n      &quot;A new OS packaging target is added.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;apple_notarization&quot;,\n      &quot;title&quot;: &quot;Apple Developer: Notarizing macOS software before distribution&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Developer ID signing&quot;,\n        &quot;hardened runtime&quot;,\n        &quot;notarization and stapling gates&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_code_signing&quot;,\n      &quot;title&quot;: &quot;Apple Platform Security: App code signing process in macOS&quot;,\n      &quot;url&quot;: &quot;https://support.apple.com/guide/security/app-code-signing-process-sec3ad8e6e53/web&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;macOS app trust model&quot;,\n        &quot;Gatekeeper distribution expectations&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_updater&quot;,\n      &quot;title&quot;: &quot;Tauri v2 Updater Plugin&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/plugin/updater/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;signed update channel requirement&quot;,\n        &quot;production TLS update endpoint expectation&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;owasp_masvs_storage&quot;,\n      &quot;title&quot;: &quot;OWASP MASVS Storage&quot;,\n      &quot;url&quot;: &quot;https://mas.owasp.org/checklists/MASVS-STORAGE/&quot;,\n      &quot;source_type&quot;: &quot;standard&quot;,\n      &quot;used_for&quot;: [\n        &quot;sensitive data storage and logging boundary&quot;,\n        &quot;privacy-safe diagnostic export&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;runtime_data_boundary&quot;,\n      &quot;title&quot;: &quot;Runtime Data Boundary Registry&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/configs/runtime-data-boundary-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;source versus runtime data separation&quot;,\n        &quot;support diagnostic redaction&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;desktop_user_flow&quot;,\n      &quot;title&quot;: &quot;Desktop User Flow Registry&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/configs/user-flow-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;first-run onboarding&quot;,\n        &quot;workspace chooser&quot;,\n        &quot;decision inbox and recovery behavior&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;internal_build_is_not_public_service&quot;,\n      &quot;rule&quot;: &quot;A local/internal app bundle may be useful for development, but it must not be described as a public service release until public release blockers are cleared.&quot;,\n      &quot;reason&quot;: &quot;Developer ID signing, notarization, updater configuration, and clean-machine smoke tests are trust gates for installed software.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;service_levels&quot;,\n        &quot;public_release_blockers&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;service_gaps_must_be_operator_visible&quot;,\n      &quot;rule&quot;: &quot;Release, updater, privacy, support, onboarding, and workspace-readiness gaps must be visible in the app surface, not only in docs.&quot;,\n      &quot;reason&quot;: &quot;A real service needs operators to see next actions and blockers without reading repository internals.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;runtime_surface_contract&quot;,\n        &quot;readiness_groups&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;support_exports_are_redacted&quot;,\n      &quot;rule&quot;: &quot;Support diagnostics must export bounded metadata and redacted summaries, not raw private workspace contents or secrets.&quot;,\n      &quot;reason&quot;: &quot;Customer support workflows can accidentally become data exfiltration paths if raw logs or source trees are bundled.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;readiness_groups&quot;,\n        &quot;privacy_support_gates&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;updater_is_a_release_gate&quot;,\n      &quot;rule&quot;: &quot;A public service release requires a documented update and rollback path. Until a signed updater or equivalent release channel is c</code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 12004,
+      "updatedAt": "2026-06-05T18:52:02.635Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
     },
     {
       "id": "history-work-timings-2026-2026-06-06-monitor-performance-guardrails-json",
@@ -9834,22 +10090,6 @@
       "workspaceArea": "_history/evaluations"
     },
     {
-      "id": "history-request-traces-2026-2026-06-06-structure-performance-migration-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-structure-performance-migration.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: 구조/메모리/성능 마이그레이션",
-      "excerpt": "요청 결과 추적: 구조/메모리/성능 마이그레이션 요청 전체 구조에 근본 혁신이 필요한지, 메모리와 성능 비효율이 있는지 냉정하게 평가하고 마이그레이션 계획 후 구현. 결과 근본 개선 필요 판정: 대형 React/CSS/Rust 단일 파일과 state boundary 과밀. 즉시 구현 slice: source snapshot payload 축소와 Monaco input state churn 감소. 회귀 방지: performance budget check와 tests 추가. 검증 workspace m",
-      "html": "<p>요청 결과 추적: 구조/메모리/성능 마이그레이션 요청 전체 구조에 근본 혁신이 필요한지, 메모리와 성능 비효율이 있는지 냉정하게 평가하고 마이그레이션 계획 후 구현. 결과 근본 개선 필요 판정: 대형 React/CSS/Rust 단일 파일과 state boundary 과밀. 즉시 구현 slice: source snapshot payload 축소와 Monaco input state churn 감소. 회귀 방지: performance budget check와 tests 추가. 검증 workspace monitor test/check 통과. platform desktop app test/check 통과. internal package build</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 614,
-      "updatedAt": "2026-06-05T15:59:02.047Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-structure-performance-migration-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-structure-performance-migration/tasks.ko.md",
       "category": "project-spec",
@@ -9880,86 +10120,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-structure-performance-migration-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-06-structure-performance-migration-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Structure Performance Migration Evaluation Input",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 structure performance migration\", \"status\": \"passed for selected slice\", \"installation occurred\": false, \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 structure performance mig",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;request id&quot;: &quot;2026 06 06 structure performance migration&quot;, &quot;status&quot;: &quot;passed for selected slice&quot;, &quot;installation occurred&quot;: false, &quot;resource risk occurred&quot;: true, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 06 06 structure performance migration.json&quot; , &quot;omission check targets&quot;: &quot; history/omission checks/2026/2026 06 </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 938,
-      "updatedAt": "2026-06-05T15:57:46.788Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-structure-performance-migration-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-structure-performance-migration.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: 구조/메모리/성능 마이그레이션",
-      "excerpt": "웹 검색 기록: 구조/메모리/성능 마이그레이션 검색어 Tauri v2 performance best practices Rust WebView memory official docs Next.js static export performance bundle optimization official docs React performance useMemo memo lazy Suspense official docs Rust rayon performance thread pool CPU IO bounded off",
-      "html": "<p>웹 검색 기록: 구조/메모리/성능 마이그레이션 검색어 Tauri v2 performance best practices Rust WebView memory official docs Next.js static export performance bundle optimization official docs React performance useMemo memo lazy Suspense official docs Rust rayon performance thread pool CPU IO bounded official docs Tauri v2 state management official docs managed state Tauri v2 proces</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1996,
-      "updatedAt": "2026-06-05T15:57:46.787Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-structure-performance-migration-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-structure-performance-migration.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: 구조/메모리/성능 마이그레이션",
-      "excerpt": "작업 요약: 구조/메모리/성능 마이그레이션 전체 구조를 성능/메모리 관점에서 점검했고, 근본 개선은 필요하다고 판정했다. 다만 전면 재작성 대신 실제 hot path를 먼저 줄였다. 이번 구현은 source snapshot full content 제거, bounded preview 전환, preview budget gate 추가, Monaco editor draft 입력의 throttled React sync다. developer snapshot은 source content 0개, preview ",
-      "html": "<p>작업 요약: 구조/메모리/성능 마이그레이션 전체 구조를 성능/메모리 관점에서 점검했고, 근본 개선은 필요하다고 판정했다. 다만 전면 재작성 대신 실제 hot path를 먼저 줄였다. 이번 구현은 source snapshot full content 제거, bounded preview 전환, preview budget gate 추가, Monaco editor draft 입력의 throttled React sync다. developer snapshot은 source content 0개, preview 약 136KB로 내려갔다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 477,
-      "updatedAt": "2026-06-05T15:57:46.787Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-structure-performance-migration-json",
-      "path": "_history/work-timings/2026/2026-06-06-structure-performance-migration.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Structure Performance Migration",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 structure performance migration\", \"timings\": { \"phase\": \"web research\", \"duration\": \"approximately 8 minutes\" }, { \"phase\": \"local audit and slice selection\", \"duration\": \"approximately 15 minutes\" }, { \"phase\": \"implementation\", ",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;request id&quot;: &quot;2026 06 06 structure performance migration&quot;, &quot;timings&quot;: { &quot;phase&quot;: &quot;web research&quot;, &quot;duration&quot;: &quot;approximately 8 minutes&quot; }, { &quot;phase&quot;: &quot;local audit and slice selection&quot;, &quot;duration&quot;: &quot;approximately 15 minutes&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;duration&quot;: &quot;approximately 25 minutes&quot; }, { &quot;phase&quot;: &quot;verification and records&quot;,</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 496,
-      "updatedAt": "2026-06-05T15:57:46.787Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-structure-performance-migration-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-structure-performance-migration.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: 구조/메모리/성능 마이그레이션",
-      "excerpt": "사용자 요청 요약: 구조/메모리/성능 마이그레이션 사용자는 현재 앱의 전체 구조에 근본 혁신이 필요한지, 메모리와 성능 측면에서 비효율이 있는지 냉정하게 평가하고, 마이그레이션 계획을 세운 뒤 가능한 구현을 모두 진행하라고 요청했다.",
-      "html": "<p>사용자 요청 요약: 구조/메모리/성능 마이그레이션 사용자는 현재 앱의 전체 구조에 근본 혁신이 필요한지, 메모리와 성능 측면에서 비효율이 있는지 냉정하게 평가하고, 마이그레이션 계획을 세운 뒤 가능한 구현을 모두 진행하라고 요청했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 326,
-      "updatedAt": "2026-06-05T15:57:46.786Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-structure-performance-migration-traceability-ko-md",
@@ -10024,54 +10184,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-rust-desktop-resource-optimization-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-06-rust-desktop-resource-optimization-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Rust Desktop Resource Optimization Evaluation Input",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 rust desktop resource optimization\", \"status\": \"passed\", \"installation occurred\": true, \"installation record targets\": \" history/installations/2026/2026 06 06 rust desktop resource optimization rust crates.ko.md\" , \"resource risk ",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;request id&quot;: &quot;2026 06 06 rust desktop resource optimization&quot;, &quot;status&quot;: &quot;passed&quot;, &quot;installation occurred&quot;: true, &quot;installation record targets&quot;: &quot; history/installations/2026/2026 06 06 rust desktop resource optimization rust crates.ko.md&quot; , &quot;resource risk occurred&quot;: true, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 0</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 988,
-      "updatedAt": "2026-06-05T15:47:08.794Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: Rust 데스크톱 자원 최적화",
-      "excerpt": "평가: Rust 데스크톱 자원 최적화 판정 요청 충족. 단순 렌더 최적화가 아니라 Rust/Tauri 프로세스에서 CPU parallelism과 OS memory telemetry를 사용하도록 source workspace cache 경로를 바꿨고, 내부 패키징 빌드까지 완료했다. 증거 rayon 기반 bounded parallel worker pool 추가. sysinfo 기반 total/available/used memory, memory budget report 추가. preload 상한을 ",
-      "html": "<p>평가: Rust 데스크톱 자원 최적화 판정 요청 충족. 단순 렌더 최적화가 아니라 Rust/Tauri 프로세스에서 CPU parallelism과 OS memory telemetry를 사용하도록 source workspace cache 경로를 바꿨고, 내부 패키징 빌드까지 완료했다. 증거 rayon 기반 bounded parallel worker pool 추가. sysinfo 기반 total/available/used memory, memory budget report 추가. preload 상한을 2,048 files / 512MB hard cap으로 확장하고 available memory 기반 budget을 적용. renderer UI에</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1717,
-      "updatedAt": "2026-06-05T15:47:08.794Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: Rust 데스크톱 자원 최적화",
-      "excerpt": "요청 결과 추적: Rust 데스크톱 자원 최적화 요청 Rust를 최대한 활용하고 데스크톱 CPU/RAM 자원을 실제로 사용해 탭 전환과 source workspace 준비를 최적화하라는 요청. 결과 Rust WorkspaceResourceProfile 추가. rayon bounded worker pool로 entry build와 preload read 병렬화. sysinfo 기반 memory budget과 resource telemetry 추가. renderer source workspace UI",
-      "html": "<p>요청 결과 추적: Rust 데스크톱 자원 최적화 요청 Rust를 최대한 활용하고 데스크톱 CPU/RAM 자원을 실제로 사용해 탭 전환과 source workspace 준비를 최적화하라는 요청. 결과 Rust WorkspaceResourceProfile 추가. rayon bounded worker pool로 entry build와 preload read 병렬화. sysinfo 기반 memory budget과 resource telemetry 추가. renderer source workspace UI와 tests 업데이트. 내부 패키징 빌드 통과. 산물 platform desktop app/src tauri/src/lib.rs platfor</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1302,
-      "updatedAt": "2026-06-05T15:47:08.793Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-rust-desktop-resource-optimization-tasks-ko-md",
@@ -14426,22 +14538,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "platform-desktop-app-configs-service-readiness-registry-json",
-      "path": "platform-desktop-app/configs/service-readiness-registry.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "Service Readiness Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"service readiness registry\", \"purpose\": \"Defines production service readiness gates for the installable desktop platform so internal builds, customer test builds, and public releases are not confused.\", \"reader guide\": { \"summary\": \"Use ",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;service-readiness-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines production-service readiness gates for the installable desktop platform so internal builds, customer test builds, and public releases are not confused.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry when deciding whether the desktop platform is a local/internal build, a controlled customer-test build, or ready for public service release signoff.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read service_levels first to understand which claims are allowed.&quot;,\n      &quot;Read readiness_groups to see the grouped service gaps that must be visible in the app.&quot;,\n      &quot;Read public_release_blockers before using public release language.&quot;,\n      &quot;Read runtime_surface_contract to understand what the installed app must show to operators.&quot;,\n      &quot;Treat updater, signing, notarization, privacy, support, and first-run items as release gates rather than optional notes.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-04&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;A release channel, updater, signing, notarization, support, privacy, or onboarding behavior changes.&quot;,\n      &quot;The app starts collecting additional logs, workspace data, or diagnostics.&quot;,\n      &quot;A customer-test or public distribution claim is made.&quot;,\n      &quot;A new OS packaging target is added.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;apple_notarization&quot;,\n      &quot;title&quot;: &quot;Apple Developer: Notarizing macOS software before distribution&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Developer ID signing&quot;,\n        &quot;hardened runtime&quot;,\n        &quot;notarization and stapling gates&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_code_signing&quot;,\n      &quot;title&quot;: &quot;Apple Platform Security: App code signing process in macOS&quot;,\n      &quot;url&quot;: &quot;https://support.apple.com/guide/security/app-code-signing-process-sec3ad8e6e53/web&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;macOS app trust model&quot;,\n        &quot;Gatekeeper distribution expectations&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_updater&quot;,\n      &quot;title&quot;: &quot;Tauri v2 Updater Plugin&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/plugin/updater/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;signed update channel requirement&quot;,\n        &quot;production TLS update endpoint expectation&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;owasp_masvs_storage&quot;,\n      &quot;title&quot;: &quot;OWASP MASVS Storage&quot;,\n      &quot;url&quot;: &quot;https://mas.owasp.org/checklists/MASVS-STORAGE/&quot;,\n      &quot;source_type&quot;: &quot;standard&quot;,\n      &quot;used_for&quot;: [\n        &quot;sensitive data storage and logging boundary&quot;,\n        &quot;privacy-safe diagnostic export&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;runtime_data_boundary&quot;,\n      &quot;title&quot;: &quot;Runtime Data Boundary Registry&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/configs/runtime-data-boundary-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;source versus runtime data separation&quot;,\n        &quot;support diagnostic redaction&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;desktop_user_flow&quot;,\n      &quot;title&quot;: &quot;Desktop User Flow Registry&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/configs/user-flow-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;first-run onboarding&quot;,\n        &quot;workspace chooser&quot;,\n        &quot;decision inbox and recovery behavior&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;internal_build_is_not_public_service&quot;,\n      &quot;rule&quot;: &quot;A local/internal app bundle may be useful for development, but it must not be described as a public service release until public release blockers are cleared.&quot;,\n      &quot;reason&quot;: &quot;Developer ID signing, notarization, updater configuration, and clean-machine smoke tests are trust gates for installed software.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;service_levels&quot;,\n        &quot;public_release_blockers&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;service_gaps_must_be_operator_visible&quot;,\n      &quot;rule&quot;: &quot;Release, updater, privacy, support, onboarding, and workspace-readiness gaps must be visible in the app surface, not only in docs.&quot;,\n      &quot;reason&quot;: &quot;A real service needs operators to see next actions and blockers without reading repository internals.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;runtime_surface_contract&quot;,\n        &quot;readiness_groups&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;support_exports_are_redacted&quot;,\n      &quot;rule&quot;: &quot;Support diagnostics must export bounded metadata and redacted summaries, not raw private workspace contents or secrets.&quot;,\n      &quot;reason&quot;: &quot;Customer support workflows can accidentally become data exfiltration paths if raw logs or source trees are bundled.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;readiness_groups&quot;,\n        &quot;privacy_support_gates&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;updater_is_a_release_gate&quot;,\n      &quot;rule&quot;: &quot;A public service release requires a documented update and rollback path. Until a signed updater or equivalent release channel is c</code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 11690,
-      "updatedAt": "2026-06-03T22:18:54.652Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
       "id": "platform-desktop-app-docs-requirements-2026-06-02-installable-desktop-en-md",
       "path": "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
       "category": "project-doc",
@@ -17688,102 +17784,6 @@
       "historyDate": "",
       "historyYear": "",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-configs-claude-code-design-transfer-registry-json",
-      "path": "platform-desktop-app/configs/claude-code-design-transfer-registry.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "Claude Code Design Transfer Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"claude code design transfer registry\", \"purpose\": \"Records which publicly documented Claude Code design patterns are useful to transfer into the platform first desktop app without depending on leaked, private, or unverifiable material.\",",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;claude-code-design-transfer-registry&quot;,\n  &quot;purpose&quot;: &quot;Records which publicly documented Claude Code design patterns are useful to transfer into the platform-first desktop app without depending on leaked, private, or unverifiable material.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry when improving the installable platform with ideas inspired by Claude Code. It is a source-boundary and implementation map, not a clone plan.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read source_boundary first; only public official or otherwise verifiable sources can justify a transfer pattern.&quot;,\n      &quot;Read transfer_patterns to see the reusable design principle, current platform mapping, risk controls, and implementation target.&quot;,\n      &quot;Treat status as product planning state: implemented means surfaced now, queued means designed but not fully built, candidate means useful but not committed.&quot;,\n      &quot;Use risk_controls before turning a pattern into autonomous execution, installer behavior, hooks, or connector access.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-03&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;Official Claude Code documentation changes a relevant design surface.&quot;,\n      &quot;The platform adds a new desktop runtime, CLI adapter, hook, connector, subagent, skill, or memory feature.&quot;,\n      &quot;A transfer pattern becomes executable rather than documentation-only.&quot;,\n      &quot;A source is discovered to be non-public, unverified, or incompatible with the platform source boundary.&quot;,\n      &quot;Workspace Monitor needs a new operator-facing view of design transfer status.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;claude_code_overview&quot;,\n      &quot;title&quot;: &quot;Claude Code Overview&quot;,\n      &quot;url&quot;: &quot;https://code.claude.com/docs/en/overview&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;agentic coding surface shape&quot;,\n        &quot;desktop, CLI, web, IDE, MCP, skills, hooks, and multi-agent capability inventory&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;claude_code_settings&quot;,\n      &quot;title&quot;: &quot;Claude Code Settings&quot;,\n      &quot;url&quot;: &quot;https://code.claude.com/docs/en/settings&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;configuration scopes and precedence&quot;,\n        &quot;permission and policy separation&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;claude_code_memory&quot;,\n      &quot;title&quot;: &quot;How Claude Remembers Your Project&quot;,\n      &quot;url&quot;: &quot;https://code.claude.com/docs/en/memory&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;CLAUDE.md style durable instructions&quot;,\n        &quot;distinguishing contextual memory from enforced settings&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;claude_code_hooks&quot;,\n      &quot;title&quot;: &quot;Hooks Reference&quot;,\n      &quot;url&quot;: &quot;https://code.claude.com/docs/en/hooks&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;event hook lifecycle&quot;,\n        &quot;hook security risk and user-permission boundary&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;claude_code_skills&quot;,\n      &quot;title&quot;: &quot;Extend Claude With Skills&quot;,\n      &quot;url&quot;: &quot;https://code.claude.com/docs/en/slash-commands&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;skills as on-demand capability packaging&quot;,\n        &quot;command-like invocation without loading every reference into startup context&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;claude_code_subagents&quot;,\n      &quot;title&quot;: &quot;Create Custom Subagents&quot;,\n      &quot;url&quot;: &quot;https://code.claude.com/docs/en/sub-agents&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;isolated context windows&quot;,\n        &quot;tool and permission scoping for specialized workers&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;claude_code_mcp&quot;,\n      &quot;title&quot;: &quot;Connect Claude Code to Tools via MCP&quot;,\n      &quot;url&quot;: &quot;https://code.claude.com/docs/en/mcp&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;connector lifecycle and trust boundary&quot;,\n        &quot;tool discovery and context window pressure reduction&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;claude_code_workflows&quot;,\n      &quot;title&quot;: &quot;Claude Code Common Workflows&quot;,\n      &quot;url&quot;: &quot;https://code.claude.com/docs/en/common-workflows&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;plan before editing&quot;,\n        &quot;worktree and parallel session patterns&quot;,\n        &quot;subagent delegation and non-interactive CLI workflows&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;public_sources_only&quot;,\n      &quot;rule&quot;: &quot;No transfer pattern may cite leaked, proprietary, private, or unverifiable material as a design basis.&quot;,\n      &quot;reason&quot;: &quot;The platform must improve from public evidence and local validation, not confidential material.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;source_boundary&quot;,\n        &quot;transfer_patterns&quot;,\n        &quot;reference_links&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;platform_first_not_cli_clone&quot;,\n      &quot;rule&quot;: &quot;Claude Code CLI can be an optional guest adapter or design reference, but the desktop app remains the primary pl</code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 17626,
-      "updatedAt": "2026-06-03T05:29:15.891Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-configs-windows-execution-profile-json",
-      "path": "platform-desktop-app/configs/windows-execution-profile.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "Windows Execution Profile",
-      "excerpt": "{ \"schema version\": \"2026 06 02\", \"name\": \"windows execution profile\", \"purpose\": \"Defines the Windows specific execution structure for running the agent platform as local installable desktop software, from developer launch through signed installer distribution.\", \"reader guide\":",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-02&quot;,\n  &quot;name&quot;: &quot;windows-execution-profile&quot;,\n  &quot;purpose&quot;: &quot;Defines the Windows-specific execution structure for running the agent platform as local installable desktop software, from developer launch through signed installer distribution.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this profile before claiming that the platform can run on Windows, adding Tauri/Electron installer code, launching local agents or CLIs from the desktop shell, or preparing MSI, NSIS, or MSIX releases.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read execution_levels to distinguish developer launch, internal installer testing, and public signed distribution.&quot;,\n      &quot;Read process_model before launching Python agents, local services, or external AI coding CLIs from a desktop app.&quot;,\n      &quot;Read bundle_and_distribution_targets before choosing MSI, NSIS setup exe, or MSIX.&quot;,\n      &quot;Read signing_requirements before public download, enterprise deployment, or Microsoft Store distribution claims.&quot;,\n      &quot;Read smoke_tests before calling a Windows build runnable or release-ready.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-02&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The Windows desktop shell framework changes.&quot;,\n      &quot;Tauri, Electron, Wails, or Windows packaging dependencies are installed.&quot;,\n      &quot;The app starts launching Python agents, local services, file watchers, or external CLIs.&quot;,\n      &quot;Windows installer format, code signing, WebView2, update, uninstall, or smoke-test behavior changes.&quot;,\n      &quot;A Windows install, uninstall, SmartScreen, WebView2, or first-run smoke test fails.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;tauri_windows_installer&quot;,\n      &quot;title&quot;: &quot;Tauri: Windows Installer&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/windows-installer/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;MSI and NSIS installer options&quot;,\n        &quot;Windows build host and WebView2 distribution notes&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_windows_signing&quot;,\n      &quot;title&quot;: &quot;Tauri: Windows Code Signing&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/sign/windows/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Windows code signing requirements&quot;,\n        &quot;SmartScreen warning and Microsoft Store trust notes&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_updater&quot;,\n      &quot;title&quot;: &quot;Tauri: Updater&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/plugin/updater/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;signed updater artifacts&quot;,\n        &quot;Windows MSI and NSIS update artifact planning&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;microsoft_msix_packaging&quot;,\n      &quot;title&quot;: &quot;Microsoft Learn: Packaging MSIX apps&quot;,\n      &quot;url&quot;: &quot;https://learn.microsoft.com/en-us/windows/msix/package/packaging-uwp-apps&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;MSIX packaging comparison&quot;,\n        &quot;Windows packaging signing expectation&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;microsoft_msix_signing&quot;,\n      &quot;title&quot;: &quot;Microsoft Learn: Sign an MSIX package&quot;,\n      &quot;url&quot;: &quot;https://learn.microsoft.com/en-us/windows/msix/package/sign-msix-package-guide&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;MSIX certificate and signing workflow&quot;,\n        &quot;public or enterprise deployment trust requirement&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;desktop_distribution_registry&quot;,\n      &quot;title&quot;: &quot;Desktop Distribution Registry&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/configs/desktop-distribution-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;overall desktop packaging boundary&quot;,\n        &quot;selected Tauri-first desktop shell architecture&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;cli_adapter_registry&quot;,\n      &quot;title&quot;: &quot;CLI Adapter Registry&quot;,\n      &quot;path&quot;: &quot;agent-platform/configs/integrations/cli-adapter-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;optional external CLI execution boundary&quot;,\n        &quot;capability_missing fallback behavior&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;developer_launch_is_not_public_distribution&quot;,\n      &quot;rule&quot;: &quot;A developer-local Windows launch may be unsigned, but a public download or enterprise installer must have a documented code-signing strategy and install/uninstall smoke tests.&quot;,\n      &quot;reason&quot;: &quot;Windows trust, SmartScreen, enterprise deployment, and update expectations differ from local developer runs.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;execution_levels&quot;,\n        &quot;signing_requirements&quot;,\n        &quot;release_gates&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;desktop_shell_owns_user_entry&quot;,\n      &quot;rule&quot;: &quot;The Windows app owns the user entry point, while agent-platform remains the Python-first local platform layer behind a documented service, sidecar, or command boundary.&quot;,\n      &quot;reason&quot;: &quot;The user should install and open one app, but platform internals must remain maintainable and testable.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;process_model&quot;,\n</code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 18167,
-      "updatedAt": "2026-06-03T05:29:00.923Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-configs-macos-execution-profile-json",
-      "path": "platform-desktop-app/configs/macos-execution-profile.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "Macos Execution Profile",
-      "excerpt": "{ \"schema version\": \"2026 06 02\", \"name\": \"macos execution profile\", \"purpose\": \"Defines the macOS specific execution structure for running the agent platform as a local desktop app, from development launch through signed and notarized distribution.\", \"reader guide\": { \"summary\":",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-02&quot;,\n  &quot;name&quot;: &quot;macos-execution-profile&quot;,\n  &quot;purpose&quot;: &quot;Defines the macOS-specific execution structure for running the agent platform as a local desktop app, from development launch through signed and notarized distribution.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this profile before claiming that the platform can run on macOS, adding Tauri/Electron app code, launching local agent services from a desktop shell, or preparing a DMG/ZIP/PKG release.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read execution_levels to distinguish local developer launch from public Gatekeeper-friendly distribution.&quot;,\n      &quot;Read process_model to understand which process owns UI, platform agent execution, workspace data access, and optional CLI adapters.&quot;,\n      &quot;Read bundle_and_distribution_targets before choosing DMG, ZIP, or PKG.&quot;,\n      &quot;Read signing_notarization_requirements before any outside-App-Store distribution claim.&quot;,\n      &quot;Read smoke_tests before calling a macOS build runnable or release-ready.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-03&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The macOS desktop shell framework changes.&quot;,\n      &quot;Tauri, Electron, Wails, or native packaging dependencies are installed.&quot;,\n      &quot;The app starts launching Python agents, local services, file watchers, or external CLIs.&quot;,\n      &quot;Signing, hardened runtime, entitlements, notarization, stapling, update, or installer behavior changes.&quot;,\n      &quot;A macOS smoke test, Gatekeeper test, or first-run test fails.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;apple_notarization&quot;,\n      &quot;title&quot;: &quot;Apple Developer: Notarizing macOS software before distribution&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;outside-App-Store notarization gate&quot;,\n        &quot;public macOS distribution trust requirement&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_hardened_runtime&quot;,\n      &quot;title&quot;: &quot;Apple Developer: Hardened Runtime&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/documentation/security/hardened-runtime&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;hardened runtime requirement before notarization&quot;,\n        &quot;entitlement minimization&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_packaging_mac&quot;,\n      &quot;title&quot;: &quot;Apple Developer: Packaging Mac software for distribution&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/documentation/xcode/packaging-mac-software-for-distribution&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;macOS app packaging and distribution checks&quot;,\n        &quot;clean Mac distribution smoke-test expectation&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;xcode_distribute_outside_store&quot;,\n      &quot;title&quot;: &quot;Xcode Help: Distribute outside the Mac App Store&quot;,\n      &quot;url&quot;: &quot;https://help.apple.com/xcode/mac/current/en.lproj/dev033e997ca.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Developer ID distribution method&quot;,\n        &quot;hardened runtime and notarization workflow&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_distribute&quot;,\n      &quot;title&quot;: &quot;Tauri: Distribute&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Tauri platform-specific installers&quot;,\n        &quot;macOS code signing and notarization path&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_macos_signing&quot;,\n      &quot;title&quot;: &quot;Tauri: macOS Code Signing&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/sign/macos/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Tauri signing, notarization, and stapling workflow&quot;,\n        &quot;ad-hoc signing limitation notes&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_updater&quot;,\n      &quot;title&quot;: &quot;Tauri: Updater&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/plugin/updater/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;future signed update flow&quot;,\n        &quot;update manifest and signature planning&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;electron_code_signing&quot;,\n      &quot;title&quot;: &quot;Electron: Code Signing&quot;,\n      &quot;url&quot;: &quot;https://www.electronjs.org/docs/latest/tutorial/code-signing&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Electron fallback macOS signing and notarization&quot;,\n        &quot;framework comparison&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;electron_auto_updater&quot;,\n      &quot;title&quot;: &quot;Electron: autoUpdater&quot;,\n      &quot;url&quot;: &quot;https://www.electronjs.org/docs/api/auto-updater/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Electron fallback update behavior&quot;,\n        &quot;Squirrel.Mac update implications&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;desktop_distribution_registry&quot;,\n      &quot;title&quot;: &quot;Desktop Distribution Registry&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/configs/desktop-distribution-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n       </code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 19060,
-      "updatedAt": "2026-06-03T05:29:00.922Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-workspace-host-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-workspace-host/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Desktop Workspace Host 작업 목록",
-      "excerpt": "Desktop Workspace Host 작업 목록 | ID | 작업 | 상태 | | | | | | TASK DWH 001 | Web first intake와 local source review | done | | TASK DWH 002 | app data workspace state schema와 Tauri commands 구현 | done | | TASK DWH 003 | source editor/CLI working dir를 app selected workspace 우선으로 변경 | done",
-      "html": "<h1>Desktop Workspace Host 작업 목록</h1>\n<table><thead><tr><th>ID</th><th>작업</th><th>상태</th></tr></thead><tbody><tr><td>TASK-DWH-001</td><td>Web-first intake와 local source review</td><td>done</td></tr><tr><td>TASK-DWH-002</td><td>app-data workspace state schema와 Tauri commands 구현</td><td>done</td></tr><tr><td>TASK-DWH-003</td><td>source editor/CLI working dir를 app-selected workspace 우선으로 변경</td><td>done</td></tr><tr><td>TASK-DWH-004</td><td>Workspace Monitor Workspace Host 패널 구현</td><td>done</td></tr><tr><td>TASK-DWH-005</td><td>runtime contract/readiness/service readiness/requirements 갱신</td><td>done</td></tr><tr><td>TASK-DWH-006</td><td>검증과 평가 기록</td><td>done</td></tr><tr><td>TASK-DWH-007</td><td>commit/push</td><td>done</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 588,
-      "updatedAt": "2026-06-03T05:21:13.063Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-desktop-workspace-host-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-desktop-workspace-host/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Desktop Workspace Host 검증",
-      "excerpt": "Desktop Workspace Host 검증 현재 통과 cargo fmt && cargo check : 통과. corepack pnpm filter workspace monitor run check : 통과. corepack pnpm filter platform desktop app test : 통과, 14 tests. corepack pnpm filter platform desktop app run runtime:contract : 통과. corepack pnpm filter platform ",
-      "html": "<h1>Desktop Workspace Host 검증</h1>\n<h2>현재 통과</h2>\n<ul>\n<li><code>cargo fmt &amp;&amp; cargo check</code>: 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 14 tests.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run runtime:contract</code>: 통과.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run service:readiness</code>: 통과, workspace onboarding passed, public blockers 3.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 16 tests.</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: <code>within_budget</code>, largest initial chunk 227542 bytes.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run customer-bundle:audit</code>: 통과.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run service:readiness:public:report</code>: 통과 report-only, public blockers 3.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json</code>: 통과.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/runtime-data-boundary-registry.json</code>: 통과.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/user-flow-registry.json</code>: 통과.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/service-readiness-registry.json</code>: 통과.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-03-desktop-workspace-host-omission-input.json</code>: <code>coverage_ready</code>.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-03-desktop-workspace-host-resource-input.json</code>: <code>resource_ready</code>.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-03-desktop-workspace-host-evaluation-input.json</code>: <code>ready_to_close</code>.</li>\n<li><code>git diff --check</code>: 통과.</li>\n<li>Browser smoke: Runtime 화면에서 <code>Workspace Host</code>, <code>앱 워크스페이스</code>, <code>Import Workspace</code>, <code>Clone Workspace</code>, <code>managed root</code>, <code>state file</code>, <code>.desktop-workspace-panel</code> 확인. body/doc width 1280/1280, horizontal overflow false.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2319,
-      "updatedAt": "2026-06-03T05:16:57.806Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-service-readiness-validation-en-md",
-      "path": "platform-desktop-app/specs/2026-06-03-service-readiness/validation.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Validation: Real Service Readiness Surface",
-      "excerpt": "Validation: Real Service Readiness Surface Validation Results python3 m json.tool platform desktop app/configs/service readiness registry.json : passed PYTHONPATH=src python3 m agent platform.cli check config contract ../platform desktop app/configs/service readiness registry.jso",
-      "html": "<h1>Validation: Real Service Readiness Surface</h1>\n<h2>Validation Results</h2>\n<ul>\n<li><code>python3 -m json.tool platform-desktop-app/configs/service-readiness-registry.json</code>: passed</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/service-readiness-registry.json</code>: passed, <code>self_documenting</code></li>\n<li><code>npm --prefix platform-desktop-app run service:readiness</code>: passed, <code>service_internal_ready_public_blocked</code>, 0 internal blockers, 4 public blockers</li>\n<li><code>npm --prefix platform-desktop-app run service:readiness:public:report</code>: passed report-only, 4 public blockers</li>\n<li><code>npm --prefix platform-desktop-app test</code>: passed, 13 tests</li>\n<li><code>npm --prefix platform-desktop-app run check</code>: passed</li>\n<li><code>npm --prefix workspace-monitor run check</code>: passed</li>\n<li><code>cargo test</code>: passed</li>\n<li><code>cargo build</code>: passed</li>\n<li><code>npm --prefix workspace-monitor test</code>: passed, 14 tests</li>\n<li><code>npm --prefix workspace-monitor run build</code>: passed after rerun; an earlier overlapping build attempt failed on the Next build lock and was not treated as final validation</li>\n<li><code>npm --prefix platform-desktop-app run monitor:build</code>: passed after sequential rerun, customer bundle ready</li>\n<li><code>npm --prefix workspace-monitor run perf:budget</code>: passed, largest initial chunk 227537 bytes</li>\n<li><code>node platform-desktop-app/scripts/check-customer-bundle.mjs</code>: passed, customer bundle ready</li>\n<li>customer bundle source leak keyword check: passed, no matches for internal source/spec/evaluation path tokens in <code>workspace-monitor/out</code> or customer snapshot</li>\n<li>Playwright static smoke on <code>http://127.0.0.1:4176/</code>: passed desktop 1440x1100 and mobile 390x900; confirmed <code>Service Readiness</code>, <code>서비스 출시 준비도</code>, <code>Public blockers</code>, <code>Signed Distribution</code>, <code>Update &amp; Recovery</code></li>\n<li><code>npm --prefix platform-desktop-app run tauri:build</code>: passed, <code>.app</code> and DMG generated</li>\n<li><code>codesign --verify --deep --strict</code>: passed</li>\n<li><code>codesign -dv --verbose=4</code>: <code>Signature=adhoc</code>, <code>Runtime Version=14.4.0</code></li>\n<li><code>hdiutil verify</code>: passed, DMG checksum valid</li>\n<li>app open/quit smoke: passed, no remaining <code>agent-workspace-platform-desktop</code> process</li>\n</ul>\n<h2>Remaining Public Service Blockers</h2>\n<ul>\n<li>Developer ID signing/notarization credentials</li>\n<li>signed updater channel and endpoint</li>\n<li>clean-machine install/open/update smoke</li>\n</ul>\n<h2>2026-06-03 Desktop Workspace Host Refresh Validation</h2>\n<ul>\n<li><code>corepack pnpm --filter platform-desktop-app run service:readiness</code>: passed, <code>service_internal_ready_public_blocked</code>, score 94, workspace onboarding passed, 3 public blockers</li>\n<li><code>corepack pnpm --filter platform-desktop-app run service:readiness:public:report</code>: passed report-only, 3 public blockers</li>\n<li>Workspace onboarding is now implemented through app-owned <code>get_desktop_workspace_state</code>, <code>set_desktop_workspace_path</code>, <code>clone_desktop_workspace</code> commands and the Workspace Host UI.</li>\n</ul>\n<h2>Current Remaining Public Service Blockers</h2>\n<ul>\n<li>Developer ID signing/notarization credentials</li>\n<li>signed updater channel and endpoint</li>\n<li>clean-machine install/open/update smoke</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2944,
-      "updatedAt": "2026-06-03T05:15:37.952Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -17794,11 +17794,7 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 32
-        },
-        {
-          "category": "request-trace",
-          "count": 12
+          "count": 33
         },
         {
           "category": "user-request",
@@ -17811,6 +17807,10 @@
         {
           "category": "work-summary",
           "count": 12
+        },
+        {
+          "category": "request-trace",
+          "count": 11
         },
         {
           "category": "work-timing",
@@ -17833,7 +17833,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-          "updatedAt": "2026-06-05T18:43:48.366Z",
+          "updatedAt": "2026-06-05T18:53:41.666Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -17977,6 +17977,46 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-evaluations-2026-2026-06-06-native-resource-telemetry-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry-evaluation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Native Resource Telemetry Evaluation Input",
+          "excerpt": "{ \"id\": \"2026 06 06 native resource telemetry\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"request summary\": \"Continue all remaining desktop performance/resource work from th",
+          "updatedAt": "2026-06-05T18:56:19.553Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-native-resource-telemetry-omission-json",
+          "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry-omission.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Native Resource Telemetry Omission",
+          "excerpt": "{ \"id\": \"2026 06 06 native resource telemetry omission\", \"date\": \"2026 06 06\", \"status\": \"passed\", \"checked user instructions\": \"Do all remaining feasible implementation.\", \"Use desktop CPU/RAM/OS resources.\", \"Run builds automatically after implementation.\" , \"covered items\": \"w",
+          "updatedAt": "2026-06-05T18:53:41.664Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-native-resource-telemetry-resource-json",
+          "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry-resource.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Native Resource Telemetry Resource",
+          "excerpt": "{ \"id\": \"2026 06 06 native resource telemetry resource\", \"date\": \"2026 06 06\", \"status\": \"passed\", \"resource risk occurred\": true, \"resources touched\": \"Rust sysinfo process/system telemetry\", \"Tauri invoke command surface\", \"React interval polling\" , \"cleanup\": \"No long running ",
+          "updatedAt": "2026-06-05T18:53:41.664Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-native-resource-telemetry-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "평가: Native Resource Telemetry",
+          "excerpt": "평가: Native Resource Telemetry 결과 통과. 앱이 실제로 사용하는 native process/system resource telemetry를 Rust/Tauri command로 노출했다. Monitor UI와 readiness gate가 이를 요구한다. 검증 완료 tsc noEmit : 통과 cargo check : 통과 Workspace Monitor test/check: 통과 Platform desktop test: 통과 service readiness registry c",
+          "updatedAt": "2026-06-05T18:56:19.552Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-evaluations-2026-2026-06-06-native-select-replacement-evaluation-input-json",
           "path": "_history/evaluations/2026/2026-06-06-native-select-replacement-evaluation-input.json",
           "category": "evaluation",
@@ -17994,26 +18034,6 @@
           "title": "평가: Native Select 교체",
           "excerpt": "평가: Native Select 교체 날짜: 2026 06 06 결론 요청은 충족됐다. OS 기본 드롭다운을 유발하는 native <select 를 Workspace Monitor 컴포넌트에서 제거했고, 앱 스타일 선택 메뉴와 버튼 그룹으로 교체했다. 검증 workspace monitor 테스트 59개 통과. workspace monitor 타입/스크롤/소스 컨트롤/히스토리 payload 체크 통과. platform desktop app 테스트 22개 통과. platform desktop app ",
           "updatedAt": "2026-06-05T16:34:12.479Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-rust-desktop-resource-optimization-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-06-rust-desktop-resource-optimization-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Rust Desktop Resource Optimization Evaluation Input",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 rust desktop resource optimization\", \"status\": \"passed\", \"installation occurred\": true, \"installation record targets\": \" history/installations/2026/2026 06 06 rust desktop resource optimization rust crates.ko.md\" , \"resource risk ",
-          "updatedAt": "2026-06-05T15:47:08.794Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: Rust 데스크톱 자원 최적화",
-          "excerpt": "평가: Rust 데스크톱 자원 최적화 판정 요청 충족. 단순 렌더 최적화가 아니라 Rust/Tauri 프로세스에서 CPU parallelism과 OS memory telemetry를 사용하도록 source workspace cache 경로를 바꿨고, 내부 패키징 빌드까지 완료했다. 증거 rayon 기반 bounded parallel worker pool 추가. sysinfo 기반 total/available/used memory, memory budget report 추가. preload 상한을 ",
-          "updatedAt": "2026-06-05T15:47:08.794Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18074,16 +18094,6 @@
           "title": "최종 평가: startup resident prewarm 속도 최적화",
           "excerpt": "최종 평가: startup resident prewarm 속도 최적화 결론 작업은 닫을 수 있다. 사용자 요구였던 속도 최적화, bounded memory/resource 사용, 자동 build/package 실행을 모두 수행했다. 결과 p95 section switch latency: 827.8ms에서 652.7ms로 개선. average section settle time: 430ms에서 482ms로 악화. max resident/mounted panel count: 5 유지. internal",
           "updatedAt": "2026-06-05T17:44:48.242Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-structure-performance-migration-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-06-structure-performance-migration-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Structure Performance Migration Evaluation Input",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 structure performance migration\", \"status\": \"passed for selected slice\", \"installation occurred\": false, \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 structure performance mig",
-          "updatedAt": "2026-06-05T15:57:46.788Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18247,6 +18257,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-request-traces-2026-2026-06-06-native-resource-telemetry-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-native-resource-telemetry.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: Native Resource Telemetry",
+          "excerpt": "요청 결과 추적: Native Resource Telemetry 요청 사용자는 남은 작업 전체를 계속 구현하라고 지시했다. 결과 실제 Rust/Tauri process/system resource telemetry를 앱에 추가했다. OS cache 상태뿐 아니라 현재 app RAM/CPU 상태를 source workbench에서 볼 수 있다. readiness gate가 native resource telemetry를 별도 그룹으로 추적한다. 구현 파일 platform desktop app/src",
+          "updatedAt": "2026-06-05T18:53:41.663Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-06-native-select-replacement-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-native-select-replacement.ko.md",
           "category": "request-trace",
@@ -18254,16 +18274,6 @@
           "title": "Request Trace: Native Select 교체",
           "excerpt": "Request Trace: Native Select 교체 날짜: 2026 06 06 요청 OS 기본 드롭다운처럼 보이는 선택 버튼이 앱과 어울리지 않으므로 개선. 결과 native <select 제거. 앱 스타일 메뉴/버튼 선택지 도입. 재발 방지 테스트 추가. 내부 패키징 빌드 완료. 주요 산출물 platform desktop app/docs/requirements/2026 06 06 native select replacement.ko.md platform desktop app/specs/202",
           "updatedAt": "2026-06-05T16:34:12.479Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: Rust 데스크톱 자원 최적화",
-          "excerpt": "요청 결과 추적: Rust 데스크톱 자원 최적화 요청 Rust를 최대한 활용하고 데스크톱 CPU/RAM 자원을 실제로 사용해 탭 전환과 source workspace 준비를 최적화하라는 요청. 결과 Rust WorkspaceResourceProfile 추가. rayon bounded worker pool로 entry build와 preload read 병렬화. sysinfo 기반 memory budget과 resource telemetry 추가. renderer source workspace UI",
-          "updatedAt": "2026-06-05T15:47:08.793Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18284,16 +18294,6 @@
           "title": "요청 결과 추적: startup resident prewarm 속도 최적화",
           "excerpt": "요청 결과 추적: startup resident prewarm 속도 최적화 요청 사용자는 \"속도 최적화\"를 요청했으며, 앞선 맥락에서 탭 전환 지연과 데스크톱 자원 활용 부족을 반복 지적했다. 결과 startup idle resident prewarm을 추가했다. resident cap 5와 source state retention을 유지했다. overview hidden retention을 제외했다. Tool Studio rerender 비용을 줄이는 memo/stable callback을 추가",
           "updatedAt": "2026-06-05T17:44:13.224Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-06-structure-performance-migration-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-structure-performance-migration.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: 구조/메모리/성능 마이그레이션",
-          "excerpt": "요청 결과 추적: 구조/메모리/성능 마이그레이션 요청 전체 구조에 근본 혁신이 필요한지, 메모리와 성능 비효율이 있는지 냉정하게 평가하고 마이그레이션 계획 후 구현. 결과 근본 개선 필요 판정: 대형 React/CSS/Rust 단일 파일과 state boundary 과밀. 즉시 구현 slice: source snapshot payload 축소와 Monaco input state churn 감소. 회귀 방지: performance budget check와 tests 추가. 검증 workspace m",
-          "updatedAt": "2026-06-05T15:59:02.047Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18347,6 +18347,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-user-requests-2026-2026-06-06-native-resource-telemetry-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-native-resource-telemetry.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: Native Resource Telemetry",
+          "excerpt": "사용자 요청 요약: Native Resource Telemetry 요약 사용자는 이전 잔여 항목까지 “다 해”라고 지시했다. 이전 맥락은 탭 이동 지연, 데스크톱 자원 사용, Rust/Tauri 활용, 빌드 자동 실행이었다. 실행 해석 이미 구현된 lazy/resident/native cache 위에 실제 app process/system telemetry를 추가한다. 외부 Apple 자격증명 없이 public release를 완료했다고 주장하지 않는다. 구현 가능한 부분은 코드, UI, read",
+          "updatedAt": "2026-06-05T18:53:41.663Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-06-native-select-replacement-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-native-select-replacement.ko.md",
           "category": "user-request",
@@ -18394,16 +18404,6 @@
           "title": "사용자 요청 요약: 탭 전환이 아직 느림",
           "excerpt": "사용자 요청 요약: 탭 전환이 아직 느림 요약 사용자가 현재 데스크톱 앱의 Workspace Monitor 탭 전환이 여전히 느리다고 보고했다. 이전의 전체 탭 resident/preload 구현 이후에도 체감 지연이 남아 있으므로 근본 원인을 다시 보고 성능 구조를 보정해야 한다. 요구사항 후보 탭 이동 시 hidden 탭의 불필요한 렌더 비용을 줄인다. 데스크톱 앱의 장점인 Rust/native resource warmup과 renderer memory preload는 유지한다. 구현 후 사용",
           "updatedAt": "2026-06-05T17:33:34.649Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-06-structure-performance-migration-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-structure-performance-migration.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: 구조/메모리/성능 마이그레이션",
-          "excerpt": "사용자 요청 요약: 구조/메모리/성능 마이그레이션 사용자는 현재 앱의 전체 구조에 근본 혁신이 필요한지, 메모리와 성능 측면에서 비효율이 있는지 냉정하게 평가하고, 마이그레이션 계획을 세운 뒤 가능한 구현을 모두 진행하라고 요청했다.",
-          "updatedAt": "2026-06-05T15:57:46.786Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18487,6 +18487,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-web-searches-2026-2026-06-06-native-resource-telemetry-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-native-resource-telemetry.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: Native Resource Telemetry",
+          "excerpt": "웹 검색 기록: Native Resource Telemetry 검색 시각 2026 06 06 질의 Tauri v2 official docs updater plugin code signing notarization macOS Apple official Developer ID notarization hardened runtime command line notarytool docs Tauri v2 official docs system information process memory CPU Rust pl",
+          "updatedAt": "2026-06-05T18:53:41.662Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-06-native-select-replacement-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-native-select-replacement.ko.md",
           "category": "web-search",
@@ -18514,16 +18524,6 @@
           "title": "웹 검색 기록: startup resident prewarm 속도 최적화",
           "excerpt": "웹 검색 기록: startup resident prewarm 속도 최적화 목적 Workspace Monitor 탭 전환이 아직 느리다는 피드백에 대해, React tree 상주 수를 다시 늘리지 않으면서 시작 직후 핵심 탭을 미리 준비하는 구현 근거를 공식 문서로 확인했다. 검색어 site:react.dev/reference/react memo React official docs performance memo site:react.dev/reference/react/Profiler React off",
           "updatedAt": "2026-06-05T17:44:13.220Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-structure-performance-migration-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-structure-performance-migration.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: 구조/메모리/성능 마이그레이션",
-          "excerpt": "웹 검색 기록: 구조/메모리/성능 마이그레이션 검색어 Tauri v2 performance best practices Rust WebView memory official docs Next.js static export performance bundle optimization official docs React performance useMemo memo lazy Suspense official docs Rust rayon performance thread pool CPU IO bounded off",
-          "updatedAt": "2026-06-05T15:57:46.787Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18607,6 +18607,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-06-native-resource-telemetry-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-native-resource-telemetry.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: Native Resource Telemetry",
+          "excerpt": "작업 요약: Native Resource Telemetry 완료 Rust/Tauri get desktop resource snapshot command를 추가했다. report는 현재 app process memory, virtual memory, CPU usage, PID, task count, system memory, CPU threads, workspace cache/warmup 상태를 포함한다. MonitorShell source workbench에 앱 RAM/CPU 상태를 추가했다. a",
+          "updatedAt": "2026-06-05T18:56:19.552Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-06-native-select-replacement-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-native-select-replacement.ko.md",
           "category": "work-summary",
@@ -18634,16 +18644,6 @@
           "title": "작업 요약: startup resident prewarm 속도 최적화",
           "excerpt": "작업 요약: startup resident prewarm 속도 최적화 완료 내용 Workspace Monitor 시작 직후 핵심 섹션을 idle 시간에 bounded resident set으로 prewarm하도록 변경했다. overview 는 active가 아닐 때 resident retention에서 제외해 무거운 home surface가 장기 hidden tree로 남는 비용을 줄였다. Tool Studio panel을 memoized component로 감싸고 Shell에서 전달하는 이동 c",
           "updatedAt": "2026-06-05T17:44:13.223Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-06-structure-performance-migration-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-structure-performance-migration.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: 구조/메모리/성능 마이그레이션",
-          "excerpt": "작업 요약: 구조/메모리/성능 마이그레이션 전체 구조를 성능/메모리 관점에서 점검했고, 근본 개선은 필요하다고 판정했다. 다만 전면 재작성 대신 실제 hot path를 먼저 줄였다. 이번 구현은 source snapshot full content 제거, bounded preview 전환, preview budget gate 추가, Monaco editor draft 입력의 throttled React sync다. developer snapshot은 source content 0개, preview ",
-          "updatedAt": "2026-06-05T15:57:46.787Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18727,6 +18727,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-timings-2026-2026-06-06-native-resource-telemetry-json",
+          "path": "_history/work-timings/2026/2026-06-06-native-resource-telemetry.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Native Resource Telemetry",
+          "excerpt": "{ \"id\": \"2026 06 06 native resource telemetry\", \"date\": \"2026 06 06\", \"status\": \"recorded\", \"timings\": { \"phase\": \"web first intake\", \"duration minutes\": 2 }, { \"phase\": \"implementation\", \"duration minutes\": 18 }, { \"phase\": \"quick verification\", \"duration minutes\": 4 }, { \"phase",
+          "updatedAt": "2026-06-05T18:56:19.554Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-native-select-replacement-json",
           "path": "_history/work-timings/2026/2026-06-06-native-select-replacement.json",
           "category": "work-timing",
@@ -18754,16 +18764,6 @@
           "title": "2026 06 06 Startup Resident Prewarm Speed",
           "excerpt": "{ \"task id\": \"2026 06 06 startup resident prewarm speed\", \"title\": \"Startup resident prewarm speed optimization\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration s",
           "updatedAt": "2026-06-05T17:44:13.225Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-06-structure-performance-migration-json",
-          "path": "_history/work-timings/2026/2026-06-06-structure-performance-migration.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Structure Performance Migration",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 structure performance migration\", \"timings\": { \"phase\": \"web research\", \"duration\": \"approximately 8 minutes\" }, { \"phase\": \"local audit and slice selection\", \"duration\": \"approximately 15 minutes\" }, { \"phase\": \"implementation\", ",
-          "updatedAt": "2026-06-05T15:57:46.787Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18795,16 +18795,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2378,
+      "documents": 2387,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 966
+          "count": 970
         },
         {
           "category": "web-search",
-          "count": 380
+          "count": 381
         },
         {
           "category": "plan",
@@ -18812,19 +18812,19 @@
         },
         {
           "category": "request-trace",
-          "count": 308
+          "count": 309
         },
         {
           "category": "work-timing",
-          "count": 230
+          "count": 231
         },
         {
           "category": "user-request",
-          "count": 93
+          "count": 94
         },
         {
           "category": "work-summary",
-          "count": 60
+          "count": 61
         },
         {
           "category": "daily-history",
@@ -18835,7 +18835,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6243999,
+      "totalSourceBytes": 6255351,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18860,11 +18860,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 44,
+      "evidenceEvents": 45,
       "decisionEvents": 0,
-      "openSignals": 23,
+      "openSignals": 22,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T18:43:48.366Z",
+      "latestEventAt": "2026-06-05T18:56:19.554Z",
       "historyDays": 1
     },
     "lanes": [
@@ -18876,7 +18876,7 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 32
+        "count": 33
       },
       {
         "id": "delivery",
@@ -18894,13 +18894,13 @@
         "count": 12
       },
       {
-        "id": "traceability",
-        "label": "traceability",
-        "count": 12
-      },
-      {
         "id": "monitoring",
         "label": "monitoring",
+        "count": 11
+      },
+      {
+        "id": "traceability",
+        "label": "traceability",
         "count": 11
       },
       {
@@ -18923,7 +18923,7 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 32
+        "count": 33
       },
       {
         "id": "intake",
@@ -18936,11 +18936,6 @@
         "count": 12
       },
       {
-        "id": "trace",
-        "label": "trace",
-        "count": 12
-      },
-      {
         "id": "web-search",
         "label": "web search",
         "count": 12
@@ -18948,6 +18943,11 @@
       {
         "id": "timing",
         "label": "timing",
+        "count": 11
+      },
+      {
+        "id": "trace",
+        "label": "trace",
         "count": 11
       },
       {
@@ -18975,6 +18975,66 @@
     ],
     "events": [
       {
+        "id": "history-history-work-timings-2026-2026-06-06-native-resource-telemetry-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Native Resource Telemetry",
+        "detail": "{ \"id\": \"2026 06 06 native resource telemetry\", \"date\": \"2026 06 06\", \"status\": \"recorded\", \"timings\": { \"phase\": \"web first intake\", \"duration minutes\": 2 }, { \"phase\": \"implementation\", \"duration minutes\": 18 }, { \"phase\": \"quick verification\", \"duration minutes\": 4 }, { \"phase",
+        "path": "_history/work-timings/2026/2026-06-06-native-resource-telemetry.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:56:19.554Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-native-resource-telemetry-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 06 Native Resource Telemetry Evaluation Input",
+        "detail": "{ \"id\": \"2026 06 06 native resource telemetry\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"request summary\": \"Continue all remaining desktop performance/resource work from th",
+        "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:56:19.553Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-native-resource-telemetry-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "평가: Native Resource Telemetry",
+        "detail": "평가: Native Resource Telemetry 결과 통과. 앱이 실제로 사용하는 native process/system resource telemetry를 Rust/Tauri command로 노출했다. Monitor UI와 readiness gate가 이를 요구한다. 검증 완료 tsc noEmit : 통과 cargo check : 통과 Workspace Monitor test/check: 통과 Platform desktop test: 통과 service readiness registry c",
+        "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:56:19.552Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-native-resource-telemetry-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "작업 요약: Native Resource Telemetry",
+        "detail": "작업 요약: Native Resource Telemetry 완료 Rust/Tauri get desktop resource snapshot command를 추가했다. report는 현재 app process memory, virtual memory, CPU usage, PID, task count, system memory, CPU threads, workspace cache/warmup 상태를 포함한다. MonitorShell source workbench에 앱 RAM/CPU 상태를 추가했다. a",
+        "path": "_history/work-summaries/2026/2026-06-06-native-resource-telemetry.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:56:19.552Z"
+      },
+      {
         "id": "history-history-2026-2026-06-06-md",
         "sourceType": "history",
         "signalType": "history",
@@ -18987,7 +19047,82 @@
         "category": "daily-history",
         "language": "unknown",
         "date": "2026-06-06",
-        "timestamp": "2026-06-05T18:43:48.366Z"
+        "timestamp": "2026-06-05T18:53:41.666Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-native-resource-telemetry-resource-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "ready",
+        "title": "2026 06 06 Native Resource Telemetry Resource",
+        "detail": "{ \"id\": \"2026 06 06 native resource telemetry resource\", \"date\": \"2026 06 06\", \"status\": \"passed\", \"resource risk occurred\": true, \"resources touched\": \"Rust sysinfo process/system telemetry\", \"Tauri invoke command surface\", \"React interval polling\" , \"cleanup\": \"No long running ",
+        "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry-resource.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:53:41.664Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-native-resource-telemetry-omission-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 06 Native Resource Telemetry Omission",
+        "detail": "{ \"id\": \"2026 06 06 native resource telemetry omission\", \"date\": \"2026 06 06\", \"status\": \"passed\", \"checked user instructions\": \"Do all remaining feasible implementation.\", \"Use desktop CPU/RAM/OS resources.\", \"Run builds automatically after implementation.\" , \"covered items\": \"w",
+        "path": "_history/evaluations/2026/2026-06-06-native-resource-telemetry-omission.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:53:41.664Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-native-resource-telemetry-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "요청 결과 추적: Native Resource Telemetry",
+        "detail": "요청 결과 추적: Native Resource Telemetry 요청 사용자는 남은 작업 전체를 계속 구현하라고 지시했다. 결과 실제 Rust/Tauri process/system resource telemetry를 앱에 추가했다. OS cache 상태뿐 아니라 현재 app RAM/CPU 상태를 source workbench에서 볼 수 있다. readiness gate가 native resource telemetry를 별도 그룹으로 추적한다. 구현 파일 platform desktop app/src",
+        "path": "_history/request-traces/2026/2026-06-06-native-resource-telemetry.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:53:41.663Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-native-resource-telemetry-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "ready",
+        "title": "사용자 요청 요약: Native Resource Telemetry",
+        "detail": "사용자 요청 요약: Native Resource Telemetry 요약 사용자는 이전 잔여 항목까지 “다 해”라고 지시했다. 이전 맥락은 탭 이동 지연, 데스크톱 자원 사용, Rust/Tauri 활용, 빌드 자동 실행이었다. 실행 해석 이미 구현된 lazy/resident/native cache 위에 실제 app process/system telemetry를 추가한다. 외부 Apple 자격증명 없이 public release를 완료했다고 주장하지 않는다. 구현 가능한 부분은 코드, UI, read",
+        "path": "_history/user-requests/2026/2026-06-06-native-resource-telemetry.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:53:41.663Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-native-resource-telemetry-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: Native Resource Telemetry",
+        "detail": "웹 검색 기록: Native Resource Telemetry 검색 시각 2026 06 06 질의 Tauri v2 official docs updater plugin code signing notarization macOS Apple official Developer ID notarization hardened runtime command line notarytool docs Tauri v2 official docs system information process memory CPU Rust pl",
+        "path": "_history/web-searches/2026/2026-06-06-native-resource-telemetry.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T18:53:41.662Z"
       },
       {
         "id": "history-history-work-timings-2026-2026-06-06-monitor-performance-guardrails-json",
@@ -20278,141 +20413,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T15:59:02.047Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-structure-performance-migration-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: 구조/메모리/성능 마이그레이션",
-        "detail": "요청 결과 추적: 구조/메모리/성능 마이그레이션 요청 전체 구조에 근본 혁신이 필요한지, 메모리와 성능 비효율이 있는지 냉정하게 평가하고 마이그레이션 계획 후 구현. 결과 근본 개선 필요 판정: 대형 React/CSS/Rust 단일 파일과 state boundary 과밀. 즉시 구현 slice: source snapshot payload 축소와 Monaco input state churn 감소. 회귀 방지: performance budget check와 tests 추가. 검증 workspace m",
-        "path": "_history/request-traces/2026/2026-06-06-structure-performance-migration.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:59:02.047Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-structure-performance-migration-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "ready",
-        "title": "2026 06 06 Structure Performance Migration Evaluation Input",
-        "detail": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 structure performance migration\", \"status\": \"passed for selected slice\", \"installation occurred\": false, \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 structure performance mig",
-        "path": "_history/evaluations/2026/2026-06-06-structure-performance-migration-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:57:46.788Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-structure-performance-migration-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 06 Structure Performance Migration",
-        "detail": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 structure performance migration\", \"timings\": { \"phase\": \"web research\", \"duration\": \"approximately 8 minutes\" }, { \"phase\": \"local audit and slice selection\", \"duration\": \"approximately 15 minutes\" }, { \"phase\": \"implementation\", ",
-        "path": "_history/work-timings/2026/2026-06-06-structure-performance-migration.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:57:46.787Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-structure-performance-migration-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: 구조/메모리/성능 마이그레이션",
-        "detail": "웹 검색 기록: 구조/메모리/성능 마이그레이션 검색어 Tauri v2 performance best practices Rust WebView memory official docs Next.js static export performance bundle optimization official docs React performance useMemo memo lazy Suspense official docs Rust rayon performance thread pool CPU IO bounded off",
-        "path": "_history/web-searches/2026/2026-06-06-structure-performance-migration.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:57:46.787Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-structure-performance-migration-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: 구조/메모리/성능 마이그레이션",
-        "detail": "작업 요약: 구조/메모리/성능 마이그레이션 전체 구조를 성능/메모리 관점에서 점검했고, 근본 개선은 필요하다고 판정했다. 다만 전면 재작성 대신 실제 hot path를 먼저 줄였다. 이번 구현은 source snapshot full content 제거, bounded preview 전환, preview budget gate 추가, Monaco editor draft 입력의 throttled React sync다. developer snapshot은 source content 0개, preview ",
-        "path": "_history/work-summaries/2026/2026-06-06-structure-performance-migration.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:57:46.787Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-structure-performance-migration-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: 구조/메모리/성능 마이그레이션",
-        "detail": "사용자 요청 요약: 구조/메모리/성능 마이그레이션 사용자는 현재 앱의 전체 구조에 근본 혁신이 필요한지, 메모리와 성능 측면에서 비효율이 있는지 냉정하게 평가하고, 마이그레이션 계획을 세운 뒤 가능한 구현을 모두 진행하라고 요청했다.",
-        "path": "_history/user-requests/2026/2026-06-06-structure-performance-migration.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:57:46.786Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-rust-desktop-resource-optimization-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "ready",
-        "title": "2026 06 06 Rust Desktop Resource Optimization Evaluation Input",
-        "detail": "{ \"date\": \"2026 06 06\", \"request id\": \"2026 06 06 rust desktop resource optimization\", \"status\": \"passed\", \"installation occurred\": true, \"installation record targets\": \" history/installations/2026/2026 06 06 rust desktop resource optimization rust crates.ko.md\" , \"resource risk ",
-        "path": "_history/evaluations/2026/2026-06-06-rust-desktop-resource-optimization-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:47:08.794Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "평가: Rust 데스크톱 자원 최적화",
-        "detail": "평가: Rust 데스크톱 자원 최적화 판정 요청 충족. 단순 렌더 최적화가 아니라 Rust/Tauri 프로세스에서 CPU parallelism과 OS memory telemetry를 사용하도록 source workspace cache 경로를 바꿨고, 내부 패키징 빌드까지 완료했다. 증거 rayon 기반 bounded parallel worker pool 추가. sysinfo 기반 total/available/used memory, memory budget report 추가. preload 상한을 ",
-        "path": "_history/evaluations/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:47:08.794Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-rust-desktop-resource-optimization-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: Rust 데스크톱 자원 최적화",
-        "detail": "요청 결과 추적: Rust 데스크톱 자원 최적화 요청 Rust를 최대한 활용하고 데스크톱 CPU/RAM 자원을 실제로 사용해 탭 전환과 source workspace 준비를 최적화하라는 요청. 결과 Rust WorkspaceResourceProfile 추가. rayon bounded worker pool로 entry build와 preload read 병렬화. sysinfo 기반 memory budget과 resource telemetry 추가. renderer source workspace UI",
-        "path": "_history/request-traces/2026/2026-06-06-rust-desktop-resource-optimization.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T15:47:08.793Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -22644,9 +22644,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 43116,
-      "lineCount": 1094,
-      "updatedAt": "2026-06-05T18:38:27.477Z",
+      "sizeBytes": 43411,
+      "lineCount": 1109,
+      "updatedAt": "2026-06-05T18:51:51.684Z",
       "truncated": true,
       "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { execFileSync } from \"node:child_process\";\n\nimport {\n  checkDesktopBuildPipeline,\n  desktopBuildPipelineRequiredFiles\n} from \"./readiness/desktop-build-pipeline.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nconst requiredFiles = [\n  \"README.md\",\n  \"README.ko.md\",\n  \"README.en.md\",\n  \"package.json\",\n  \"configs/desktop-distribution-registry.json\",\n  \"configs/product-feature-registry.json\",\n  \"configs/product-gap-registry.json\",\n  \"configs/claude-code-design-transfer-registry.json\",\n  \"configs/reference-platform-advantage-registry.json\",\n  \"configs/runtime-data-boundary-registry.json\",\n  \"configs/service-readiness-registry.json\",\n  \"configs/macos-execution-profile.json\",\n  \"configs/windows-execution-profile.json\",\n  \"configs/user-flow-registry.json\",\n  \"runtime-contracts/installer-shell-runtime-contract.json\",\n  \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n  \"runtime-contracts/installer-shell-bootstrap.en.md\",\n  \"renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx\",\n  \"renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx\",\n  \"rend",
       "previewBytes": 1200
@@ -22683,9 +22683,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 13289,
-      "lineCount": 203,
-      "updatedAt": "2026-06-05T18:24:00.811Z",
+      "sizeBytes": 14435,
+      "lineCount": 223,
+      "updatedAt": "2026-06-05T18:51:08.569Z",
       "truncated": true,
       "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport path from \"node:path\";\nimport { fileURLToPath } from \"node:url\";\n\nimport { checkReleaseReadiness } from \"./check-release-readiness.mjs\";\n\nconst root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), \"..\");\n\nexport function checkServiceReadiness({ mode = \"internal\", reportOnly = false } = {}) {\n  const registry = readJson(\"configs/service-readiness-registry.json\");\n  const tauriConfig = readJson(\"src-tauri/tauri.conf.json\");\n  const pkg = readJson(\"package.json\");\n  const runtimeBoundary = readJson(\"configs/runtime-data-boundary-registry.json\");\n  const userFlow = readJson(\"configs/user-flow-registry.json\");\n  const releaseInternal = checkReleaseReadiness({ mode: \"internal\", reportOnly: true });\n  const releasePublic = checkReleaseReadiness({ mode: \"public\", reportOnly: true });\n  const serializedRuntimeBoundary = JSON.stringify(runtimeBoundary);\n  const serializedUserFlow = JSON.stringify(userFlow);\n  const serializedRegistry = JSON.stringify(registry);\n  const tauriLib = readText(\"src-tauri/src/lib.rs\");\n  const monitorShell = readText(\"renderer/workspace-monitor/components/MonitorShell.tsx\");\n  const agentBuild",
       "previewBytes": 1200
@@ -22878,9 +22878,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 47289,
-      "lineCount": 1081,
-      "updatedAt": "2026-06-05T18:38:27.478Z",
+      "sizeBytes": 47662,
+      "lineCount": 1096,
+      "updatedAt": "2026-06-05T18:51:57.442Z",
       "truncated": true,
       "preview": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/paths.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/definitions.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/runner.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts",
       "previewBytes": 1200
@@ -23353,7 +23353,7 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 12
+        "documentsCount": 11
       },
       {
         "category": "web-search",
@@ -23373,7 +23373,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 32
+        "documentsCount": 33
       },
       {
         "category": "daily-history",
@@ -23467,7 +23467,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 72,
+        "documentCount": 70,
         "sourceFileCount": 5
       },
       {
@@ -23599,7 +23599,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-src-tauri-src-lib-rs",
         "label": "Large source surface",
-        "signal": "9,983 lines in platform-desktop-app/src-tauri/src/lib.rs",
+        "signal": "10,166 lines in platform-desktop-app/src-tauri/src/lib.rs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits.",
         "priority": "high",
@@ -23608,7 +23608,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-scripts-check-readiness-mjs",
         "label": "Large source surface",
-        "signal": "1,094 lines in platform-desktop-app/scripts/check-readiness.mjs",
+        "signal": "1,109 lines in platform-desktop-app/scripts/check-readiness.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23617,7 +23617,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,081 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,096 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23647,24 +23647,24 @@
         "path": "platform-desktop-app/src-tauri/src/lib.rs",
         "project": "platform-desktop-app",
         "language": "rust",
-        "lineCount": 9983,
-        "sizeBytes": 332247,
+        "lineCount": 10166,
+        "sizeBytes": 339351,
         "recommendation": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits."
       },
       {
         "path": "platform-desktop-app/scripts/check-readiness.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1094,
-        "sizeBytes": 43116,
+        "lineCount": 1109,
+        "sizeBytes": 43411,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1081,
-        "sizeBytes": 47289,
+        "lineCount": 1096,
+        "sizeBytes": 47662,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       }
     ]

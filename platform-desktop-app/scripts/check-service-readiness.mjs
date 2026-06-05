@@ -35,6 +35,26 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
       check("task_runs_outside_source", "Task-run store outside source", tauriLib.includes("runtime_data_store_base_path") && tauriLib.includes("task_runs_base_path"), "Task-run records are stored under app data runtime roots."),
       check("agent_workspace_plane", "Agent workspace plane declared", serializedRuntimeBoundary.includes("agent_workspace"), "Agent runtime work has a plane separate from reusable definitions.")
     ]),
+    group("native_resource_telemetry", "Native Resource Telemetry", [
+      check(
+        "desktop_resource_snapshot_command",
+        "Desktop resource snapshot command exposed",
+        tauriLib.includes("get_desktop_resource_snapshot") && tauriLib.includes("DesktopResourceSnapshotReport"),
+        "Rust runtime reports process memory, process CPU, system memory, and workspace cache state."
+      ),
+      check(
+        "desktop_resource_snapshot_uses_process_telemetry",
+        "Snapshot uses process telemetry",
+        tauriLib.includes("get_current_pid") && tauriLib.includes("ProcessRefreshKind") && tauriLib.includes("process_memory_bytes") && tauriLib.includes("process_cpu_usage"),
+        "The native runtime samples the current app process through sysinfo."
+      ),
+      check(
+        "desktop_resource_snapshot_ui_visible",
+        "Resource telemetry visible in app",
+        monitorShell.includes("DesktopResourceSnapshotReport") && monitorShell.includes("앱 RAM/CPU") && monitorShell.includes("desktopResourceSnapshot"),
+        "Workspace source surface exposes app RAM/CPU and native cache telemetry."
+      )
+    ]),
     group("customer_payload", "Customer Payload", [
       check("customer_snapshot_build", "Customer snapshot build configured", pkg.scripts?.["renderer:build"]?.includes("build:customer"), "Tauri build path uses customer snapshot mode."),
       check("bundle_audit_gate", "Customer bundle audit gate configured", pkg.scripts?.["renderer:build"]?.includes("customer-bundle:audit"), "Customer bundle audit runs after renderer build."),

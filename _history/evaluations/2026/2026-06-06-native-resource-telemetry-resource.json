@@ -1,0 +1,16 @@
+{
+  "id": "2026-06-06-native-resource-telemetry-resource",
+  "date": "2026-06-06",
+  "status": "passed",
+  "resource_risk_occurred": true,
+  "resources_touched": [
+    "Rust sysinfo process/system telemetry",
+    "Tauri invoke command surface",
+    "React interval polling"
+  ],
+  "cleanup": [
+    "No long-running server or external process was introduced.",
+    "Telemetry interval is cleaned up by React effect cleanup."
+  ],
+  "result": "pass"
+}

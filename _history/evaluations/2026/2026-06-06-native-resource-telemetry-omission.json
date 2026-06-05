@@ -1,0 +1,24 @@
+{
+  "id": "2026-06-06-native-resource-telemetry-omission",
+  "date": "2026-06-06",
+  "status": "passed",
+  "checked_user_instructions": [
+    "Do all remaining feasible implementation.",
+    "Use desktop CPU/RAM/OS resources.",
+    "Run builds automatically after implementation."
+  ],
+  "covered_items": [
+    "web-first intake",
+    "native telemetry command",
+    "Monitor UI visibility",
+    "readiness group",
+    "tests and config contract"
+  ],
+  "deferred_items": [
+    {
+      "item": "Public signing/notarization/updater/smoke completion",
+      "reason": "Requires Apple Developer credentials, signed update endpoint, and clean-machine environment."
+    }
+  ],
+  "result": "pass"
+}

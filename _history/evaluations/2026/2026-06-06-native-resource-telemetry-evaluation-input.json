@@ -1,0 +1,119 @@
+{
+  "id": "2026-06-06-native-resource-telemetry",
+  "date": "2026-06-06",
+  "project": "platform-desktop-app",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "request_summary": "Continue all remaining desktop performance/resource work from the prior turn.",
+  "requirements": [
+    "platform-desktop-app/docs/requirements/2026-06-06-native-resource-telemetry.ko.md"
+  ],
+  "specs": [
+    "platform-desktop-app/specs/2026-06-06-native-resource-telemetry/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-06-native-resource-telemetry/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-06-native-resource-telemetry/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-06-native-resource-telemetry/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-06-native-resource-telemetry/traceability.ko.md"
+  ],
+  "changed_files": [
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/configs/service-readiness-registry.json",
+    "platform-desktop-app/scripts/check-service-readiness.mjs",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "implementation_summary": [
+    "Added get_desktop_resource_snapshot native command.",
+    "Added app process/system resource telemetry to MonitorShell.",
+    "Added Native Resource Telemetry readiness group.",
+    "Extended tests and readiness checks for the new contract."
+  ],
+  "verification": [
+    {
+      "command": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor exec tsc --noEmit",
+      "status": "passed"
+    },
+    {
+      "command": "cargo check",
+      "status": "passed"
+    },
+    {
+      "command": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test",
+      "status": "passed",
+      "notes": "60 tests passed."
+    },
+    {
+      "command": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+      "status": "passed"
+    },
+    {
+      "command": "corepack pnpm --filter platform-desktop-app test",
+      "status": "passed",
+      "notes": "22 tests passed."
+    },
+    {
+      "command": "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/service-readiness-registry.json",
+      "status": "passed"
+    },
+    {
+      "command": "corepack pnpm --filter platform-desktop-app check",
+      "status": "passed"
+    },
+    {
+      "command": "corepack pnpm --filter platform-desktop-app run package:internal",
+      "status": "passed",
+      "notes": "Built and verified internal macOS app and DMG."
+    },
+    {
+      "command": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:budget",
+      "status": "passed",
+      "notes": "Largest chunk 734386 bytes under 1000000 byte budget."
+    },
+    {
+      "command": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:sections:repeat",
+      "status": "passed",
+      "notes": "3 runs, settle average 343.3ms, p95 796.4ms, long-task max 587ms."
+    },
+    {
+      "command": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run perf:buttons",
+      "status": "passed",
+      "notes": "Real click feedback p95 51.4ms."
+    }
+  ],
+  "web_search_targets": [
+    "_history/web-searches/2026/2026-06-06-native-resource-telemetry.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-06-native-resource-telemetry.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-06-native-resource-telemetry.json"
+  ],
+  "installation_occurred": false,
+  "cli_pipeline_occurred": false,
+  "performance_measurement": {
+    "environment": "Next static export served from out/, Chromium headless, viewport 1280x820, CPU throttle 6",
+    "section_switch_repeat": {
+      "runs": 3,
+      "settle_average_ms": 343.3,
+      "settle_p95_ms": 796.4,
+      "long_task_max_ms": 587,
+      "long_task_total_p95_ms": 587
+    },
+    "button_response": {
+      "real_click_feedback_p95_ms": 51.4,
+      "synthetic_feedback_p95_ms": 1.6,
+      "synthetic_painted_p95_ms": 51
+    },
+    "bundle_budget": {
+      "largest_chunk_bytes": 734386,
+      "max_initial_chunk_bytes": 1000000,
+      "chunk_count": 38
+    }
+  },
+  "result": "pass"
+}

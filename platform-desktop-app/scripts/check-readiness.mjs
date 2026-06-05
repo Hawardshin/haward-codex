@@ -161,6 +161,7 @@ for (const commandName of [
   "send_cli_adapter_defer_message",
   "defer_all_cli_adapter_questions",
   "cancel_cli_adapter_session",
+  "get_desktop_resource_snapshot",
   "warm_workspace_os_resources",
   "prepare_workspace_os_resources",
   "list_workspace_text_files",
@@ -534,6 +535,8 @@ for (const requiredPhrase of [
   "runtime_surface_contract",
   "get_service_readiness_report",
   "updater_is_a_release_gate",
+  "Native Resource Telemetry",
+  "native_resource_telemetry",
   "Signed Distribution",
   "Update & Recovery",
   "Workspace Onboarding"
@@ -659,7 +662,15 @@ for (const requiredPhrase of ["checkReleaseReadiness", "public_release_blocked",
     failures.push(`check-release-readiness.mjs must include ${requiredPhrase}`);
   }
 }
-for (const requiredPhrase of ["checkServiceReadiness", "service_internal_ready_public_blocked", "Signed updater channel", "Workspace Onboarding", "Production Agent Blueprints"]) {
+for (const requiredPhrase of [
+  "checkServiceReadiness",
+  "service_internal_ready_public_blocked",
+  "Signed updater channel",
+  "Workspace Onboarding",
+  "Production Agent Blueprints",
+  "Native Resource Telemetry",
+  "desktop_resource_snapshot_command"
+]) {
   if (!serviceReadinessCheck.includes(requiredPhrase)) {
     failures.push(`check-service-readiness.mjs must include ${requiredPhrase}`);
   }
@@ -751,11 +762,15 @@ for (const requiredPhrase of [
   "Answer & Resume",
   "warm_workspace_os_resources",
   "prepare_workspace_os_resources",
+  "get_desktop_resource_snapshot",
   "read_workspace_text_file",
   "write_workspace_text_file",
   "list_workspace_text_files",
   "OS 캐시",
   "메모리 예산",
+  "앱 RAM/CPU",
+  "DesktopResourceSnapshotReport",
+  "desktopResourceSnapshot",
   "native warming",
   "native cache",
   "작업공간 Explorer",

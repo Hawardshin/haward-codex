@@ -2054,6 +2054,48 @@ type WorkspaceResourceWarmupReport = {
   error: string;
 };
 
+type WorkspaceResourceSnapshotCache = {
+  cacheStatus: string;
+  rootPath: string;
+  generatedAt: string;
+  scannedEntries: number;
+  totalCount: number;
+  cachedTextFiles: number;
+  cachedBytes: number;
+  scanDurationMs: number;
+  entryBuildDurationMs: number;
+  preloadDurationMs: number;
+};
+
+type DesktopResourceSnapshotReport = {
+  status: string;
+  schemaVersion: string;
+  sampledAt: string;
+  systemSupported: boolean;
+  appPid: number;
+  processName: string;
+  processMemoryBytes: number;
+  processVirtualMemoryBytes: number;
+  processCpuUsage: number;
+  processRunTimeSeconds: number;
+  processTaskCount: number;
+  cpuThreads: number;
+  availableParallelism: number;
+  parallelWorkers: number;
+  globalCpuUsage: number;
+  totalMemoryBytes: number;
+  availableMemoryBytes: number;
+  usedMemoryBytes: number;
+  memoryBudgetBytes: number;
+  preloadByteLimit: number;
+  preloadFileLimit: number;
+  preloadStrategy: string;
+  workspaceCache: WorkspaceResourceSnapshotCache;
+  warmupStatus: string;
+  warmupSource: string;
+  warmupError: string;
+};
+
 type DesktopWorkspaceStateReport = {
   schemaVersion: string;
   status: string;
@@ -8266,6 +8308,7 @@ function DesktopRuntimePanel({
   const [sourceCatalogReport, setSourceCatalogReport] = useState<WorkspaceTextFileListReport | null>(null);
   const [workspaceResourceReport, setWorkspaceResourceReport] = useState<WorkspaceResourcePrepareReport | null>(null);
   const [workspaceWarmupReport, setWorkspaceWarmupReport] = useState<WorkspaceResourceWarmupReport | null>(null);
+  const [desktopResourceSnapshot, setDesktopResourceSnapshot] = useState<DesktopResourceSnapshotReport | null>(null);
   const [sourceSaveResults, setSourceSaveResults] = useState<WorkspaceWriteReport[]>([]);
   const [writeReport, setWriteReport] = useState<WorkspaceWriteReport | null>(null);
   const [sourceCopyNotice, setSourceCopyNotice] = useState("");
@@ -8816,6 +8859,28 @@ function DesktopRuntimePanel({
     }, delayMs);
   };
 
+  const refreshDesktopResourceSnapshot = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setDesktopResourceSnapshot(null);
+      return null;
+    }
+
+    try {
+      const report = await tauriInvoke<DesktopResourceSnapshotReport>("get_desktop_resource_snapshot");
+      if (!panelMountedRef.current) {
+        return null;
+      }
+      setDesktopResourceSnapshot(report);
+      return report;
+    } catch {
+      if (panelMountedRef.current) {
+        setDesktopResourceSnapshot(null);
+      }
+      return null;
+    }
+  };
+
   const warmWorkspaceOsResources = async (options: { forceRefresh?: boolean } = {}) => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
@@ -8909,6 +8974,7 @@ function DesktopRuntimePanel({
       });
       setRuntimeSourceFiles(report.catalog.files);
       setSourceCatalogReport(report.catalog);
+      void refreshDesktopResourceSnapshot();
       const firstPath = report.catalog.files[0]?.path || "";
       if (!sourcePathInput && firstPath) {
         setSelectedSourcePath(firstPath);
@@ -9177,7 +9243,8 @@ function DesktopRuntimePanel({
         nextRuntimeDataBoundary,
         nextAccumulatedDataOverview,
         nextServiceReadiness,
-        nextDesktopWorkspace
+        nextDesktopWorkspace,
+        nextDesktopResourceSnapshot
       ] = await Promise.all([
         tauriInvoke<DesktopHealthStatus>("app_health"),
         tauriInvoke<CliAdapterStatus[]>("list_cli_adapters"),
@@ -9189,7 +9256,8 @@ function DesktopRuntimePanel({
         tauriInvoke<RuntimeDataBoundaryReport>("list_runtime_data_roots"),
         tauriInvoke<AccumulatedDataOverviewReport>("get_accumulated_data_overview"),
         tauriInvoke<ServiceReadinessReport>("get_service_readiness_report"),
-        tauriInvoke<DesktopWorkspaceStateReport>("get_desktop_workspace_state")
+        tauriInvoke<DesktopWorkspaceStateReport>("get_desktop_workspace_state"),
+        tauriInvoke<DesktopResourceSnapshotReport>("get_desktop_resource_snapshot")
       ]);
       if (!panelMountedRef.current) {
         return;
@@ -9208,6 +9276,7 @@ function DesktopRuntimePanel({
       setServiceReadiness(nextServiceReadiness);
       setServiceReadinessNotice("");
       setDesktopWorkspace(nextDesktopWorkspace);
+      setDesktopResourceSnapshot(nextDesktopResourceSnapshot);
       setWorkspaceImportPath(nextDesktopWorkspace.activeWorkspacePath);
       setWorkspaceHostNotice("");
       setDecisionResumeNotice("");
@@ -9243,6 +9312,7 @@ function DesktopRuntimePanel({
       setServiceReadiness(null);
       setServiceReadinessNotice("");
       setDesktopWorkspace(null);
+      setDesktopResourceSnapshot(null);
       setWorkspaceHostNotice("");
       setInboxReport(null);
       setDecisionResumeNotice("");
@@ -10318,16 +10388,29 @@ function DesktopRuntimePanel({
       if (isFileWorkspaceSurface) {
         void refreshDesktopWorkspace();
         void refreshDesktopGitStatus();
+        void refreshDesktopResourceSnapshot();
         void warmWorkspaceOsResources();
         void prepareWorkspaceOsResources();
         return;
       }
       void refreshDesktopWorkspace();
       void refreshDesktopGitStatus();
+      void refreshDesktopResourceSnapshot();
       void warmWorkspaceOsResources();
       void refreshAdapters();
     });
   }, [isFileWorkspaceSurface]);
+
+  useEffect(() => {
+    if (!surfaceActive || runtimeState !== "available") {
+      return undefined;
+    }
+    void refreshDesktopResourceSnapshot();
+    const interval = window.setInterval(() => {
+      void refreshDesktopResourceSnapshot();
+    }, 10_000);
+    return () => window.clearInterval(interval);
+  }, [runtimeState, surfaceActive]);
 
   useEffect(() => {
     const tauriInvoke = getTauriInvoke();
@@ -10852,6 +10935,16 @@ function DesktopRuntimePanel({
               : workspaceWarmupReport?.cpuThreads
                 ? `${workspaceWarmupReport.parallelWorkers}/${workspaceWarmupReport.cpuThreads} threads`
                 : "runtime profile pending"}
+          </strong>
+        </article>
+        <article>
+          <span>앱 RAM/CPU</span>
+          <strong>
+            {desktopResourceSnapshot
+              ? `${formatBytes(desktopResourceSnapshot.processMemoryBytes)} / ${desktopResourceSnapshot.processCpuUsage.toFixed(1)}% / pid ${desktopResourceSnapshot.appPid || "-"}`
+              : invoke
+                ? "native telemetry pending"
+                : "browser preview"}
           </strong>
         </article>
         <article>

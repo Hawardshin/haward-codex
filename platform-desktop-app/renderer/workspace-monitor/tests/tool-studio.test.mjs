@@ -546,8 +546,10 @@ test("Monitor enforces lazy workbench boundaries and long-task performance telem
 test("Desktop source workbench prepares native OS workspace resources", () => {
   assert.match(monitorShell, /type WorkspaceResourcePrepareReport = \{/);
   assert.match(monitorShell, /type WorkspaceResourceWarmupReport = \{/);
+  assert.match(monitorShell, /type DesktopResourceSnapshotReport = \{/);
   assert.match(monitorShell, /const \[workspaceResourceReport, setWorkspaceResourceReport\] = useState<WorkspaceResourcePrepareReport \| null>\(null\)/);
   assert.match(monitorShell, /const \[workspaceWarmupReport, setWorkspaceWarmupReport\] = useState<WorkspaceResourceWarmupReport \| null>\(null\)/);
+  assert.match(monitorShell, /const \[desktopResourceSnapshot, setDesktopResourceSnapshot\] = useState<DesktopResourceSnapshotReport \| null>\(null\)/);
   assert.match(monitorShell, /const workspaceWarmupPollRef = useRef<number \| null>\(null\)/);
   assert.match(monitorShell, /const SOURCE_DRAFT_UI_SYNC_MS = 180/);
   assert.match(monitorShell, /const sourceDraftRef = useRef\(""\)/);
@@ -558,6 +560,8 @@ test("Desktop source workbench prepares native OS workspace resources", () => {
   assert.match(monitorShell, /scheduleWorkspaceWarmupPoll/);
   assert.match(monitorShell, /const prepareWorkspaceOsResources = async/);
   assert.match(monitorShell, /"prepare_workspace_os_resources"/);
+  assert.match(monitorShell, /const refreshDesktopResourceSnapshot = async/);
+  assert.match(monitorShell, /"get_desktop_resource_snapshot"/);
   assert.match(monitorShell, /preloadContents: true/);
   assert.match(monitorShell, /forceRefresh: Boolean\(options\.forceRefresh\)/);
   assert.match(monitorShell, /setWorkspaceResourceReport\(report\)/);
@@ -566,6 +570,9 @@ test("Desktop source workbench prepares native OS workspace resources", () => {
   assert.match(monitorShell, /workspaceResourceReport \? "native cache"/);
   assert.match(monitorShell, /OS 캐시/);
   assert.match(monitorShell, /메모리 예산/);
+  assert.match(monitorShell, /앱 RAM\/CPU/);
+  assert.match(monitorShell, /desktopResourceSnapshot\.processMemoryBytes/);
+  assert.match(monitorShell, /desktopResourceSnapshot\.processCpuUsage\.toFixed\(1\)/);
   assert.match(monitorShell, /native warming/);
   assert.match(monitorShell, /formatBytes\(workspaceResourceReport\.cachedBytes\)/);
   assert.match(monitorShell, /workspaceWarmupReport\.cachedBytes/);
@@ -579,7 +586,12 @@ test("Desktop source workbench prepares native OS workspace resources", () => {
   assert.match(tauriCargo, /rayon = "1\.12\.0"/);
   assert.match(tauriCargo, /sysinfo = \{ version = "0\.39\.3", default-features = false, features = \["system"\] \}/);
   assert.match(tauriLib, /use rayon::prelude::\*/);
-  assert.match(tauriLib, /use sysinfo::System/);
+  assert.match(tauriLib, /use sysinfo::\{get_current_pid, ProcessRefreshKind, ProcessesToUpdate, System\}/);
+  assert.match(tauriLib, /DesktopResourceSnapshotReport/);
+  assert.match(tauriLib, /get_desktop_resource_snapshot/);
+  assert.match(tauriLib, /process_memory_bytes/);
+  assert.match(tauriLib, /process_cpu_usage/);
+  assert.match(tauriLib, /WorkspaceResourceSnapshotCache/);
   assert.match(tauriLib, /WorkspaceResourceProfile/);
   assert.match(tauriLib, /rayon_parallel_cpu_ram_budget/);
   assert.match(tauriLib, /MAX_WORKSPACE_PRELOAD_WORKERS/);
