@@ -1416,6 +1416,22 @@ main {
   background: color-mix(in srgb, var(--titlebar-bg) 92%, var(--surface) 8%);
   backdrop-filter: blur(16px) saturate(1.08);
   padding: var(--space-3) 0 var(--space-3);
+  -webkit-app-region: drag;
+  user-select: none;
+}
+
+.titlebar-section,
+.titlebar-section [data-tauri-drag-region="deep"] {
+  -webkit-app-region: drag;
+}
+
+.titlebar-context-strip,
+.titlebar-context-strip *,
+.titlebar-actions,
+.titlebar-actions *,
+.titlebar-search,
+.titlebar-search * {
+  -webkit-app-region: no-drag;
 }
 
 .titlebar-section strong {

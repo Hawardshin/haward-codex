@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T20:45:17.126Z",
+  "generatedAt": "2026-06-05T20:58:07.226Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 462,
-    "evaluations": 27,
-    "webSearches": 12,
+    "evaluations": 26,
+    "webSearches": 13,
     "timingRecords": 12,
     "historyDays": 1,
-    "adminHistoryDocuments": 2442,
+    "adminHistoryDocuments": 2449,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7440,6 +7440,230 @@
   ],
   "documents": [
     {
+      "id": "history-2026-2026-06-06-md",
+      "path": "_history/2026/2026-06-06.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 06",
+      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
+      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 6367,
+      "updatedAt": "2026-06-05T20:56:57.049Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-native-window-chrome-json",
+      "path": "_history/evaluations/2026/2026-06-06-native-window-chrome.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Native Window Chrome",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 native window chrome.json\" , \"omission check targets\": \" history/omission checks/2026/2026 ",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;installation occurred&quot;: false, &quot;installation record targets&quot;: , &quot;resource risk occurred&quot;: true, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 06 06 native window chrome.json&quot; , &quot;omission check targets&quot;: &quot; history/omission checks/2026/2026 06 06 native window chrome.json&quot; , &quot;mode selection record targets&quot;: &quot; history/mo</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 737,
+      "updatedAt": "2026-06-05T20:56:57.048Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-native-window-chrome-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-native-window-chrome.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: 네이티브 창 크롬 활용",
+      "excerpt": "요청 결과 추적: 네이티브 창 크롬 활용 요청 사용자 요청: 네이티브 방식 활용 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 native window chrome.ko.md 스펙: platform desktop app/specs/2026 06 06 native window chrome/spec.ko.md 계획: platform desktop app/specs/2026 06 06 native window chrome/plan.ko.md ",
+      "html": "<p>요청 결과 추적: 네이티브 창 크롬 활용 요청 사용자 요청: 네이티브 방식 활용 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 native window chrome.ko.md 스펙: platform desktop app/specs/2026 06 06 native window chrome/spec.ko.md 계획: platform desktop app/specs/2026 06 06 native window chrome/plan.ko.md 작업 목록: platform desktop app/specs/2026 06 06 native window chrome/tasks.ko.md 검증</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1207,
+      "updatedAt": "2026-06-05T20:56:57.048Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-native-window-chrome-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-native-window-chrome.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "네이티브 창 크롬 활용 작업 요약",
+      "excerpt": "네이티브 창 크롬 활용 작업 요약 변경 요약 Tauri main window에 native transparent titlebar, hidden title, dark launch background를 추가했다. Tauri capability에 native window dragging permission을 명시했다. Workspace Monitor titlebar에 data tauri drag region=\"deep\" 을 적용하고 버튼/검색/컨텍스트 strip은 false 및 no drag 로 분리했",
+      "html": "<p>네이티브 창 크롬 활용 작업 요약 변경 요약 Tauri main window에 native transparent titlebar, hidden title, dark launch background를 추가했다. Tauri capability에 native window dragging permission을 명시했다. Workspace Monitor titlebar에 data tauri drag region=&quot;deep&quot; 을 적용하고 버튼/검색/컨텍스트 strip은 false 및 no drag 로 분리했다. renderer test와 desktop readiness check가 native chrome 계약을 검증하도록 갱신했다. 검증 work</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 772,
+      "updatedAt": "2026-06-05T20:56:57.048Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-native-window-chrome-json",
+      "path": "_history/work-timings/2026/2026-06-06-native-window-chrome.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Native Window Chrome",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"work item\": \"native window chrome\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first research\", \"started at\": \"2026 06 06T05:40:00+09:00\", \"ended at\": \"2026 06 06T05:50:00+09:00\", \"notes\": \"Checked official Tauri config, window customization, cor",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work item&quot;: &quot;native window chrome&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first research&quot;, &quot;started at&quot;: &quot;2026 06 06T05:40:00+09:00&quot;, &quot;ended at&quot;: &quot;2026 06 06T05:50:00+09:00&quot;, &quot;notes&quot;: &quot;Checked official Tauri config, window customization, core permissions, release notes, and Apple HIG.&quot; }, { &quot;phase&quot;: &quot;source patch&quot;, &quot;sta</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1229,
+      "updatedAt": "2026-06-05T20:56:57.047Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-window-chrome-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-window-chrome/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "네이티브 창 크롬 활용 작업 목록",
+      "excerpt": "네이티브 창 크롬 활용 작업 목록 x Tauri native window chrome 공식 문서 확인 x main window native titlebar config 추가 x window dragging capability 추가 x renderer titlebar drag/no drag 영역 분리 x renderer/static test 갱신 x readiness check 갱신 x renderer test 실행 x desktop app test/check 실행 x browser DOM/CSS ",
+      "html": "<h1>네이티브 창 크롬 활용 작업 목록</h1>\n<ul>\n<li>[x] Tauri native window chrome 공식 문서 확인</li>\n<li>[x] main window native titlebar config 추가</li>\n<li>[x] window dragging capability 추가</li>\n<li>[x] renderer titlebar drag/no-drag 영역 분리</li>\n<li>[x] renderer/static test 갱신</li>\n<li>[x] readiness check 갱신</li>\n<li>[x] renderer test 실행</li>\n<li>[x] desktop app test/check 실행</li>\n<li>[x] browser DOM/CSS 검증 실행</li>\n<li>[x] internal package build 실행</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 439,
+      "updatedAt": "2026-06-05T20:56:57.046Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-window-chrome-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-window-chrome/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "네이티브 창 크롬 활용 검증",
+      "excerpt": "네이티브 창 크롬 활용 검증 예정 검증 corepack pnpm filter workspace monitor test corepack pnpm filter platform desktop app test corepack pnpm filter workspace monitor run collect corepack pnpm filter workspace monitor check corepack pnpm filter platform desktop app check Browser DOM/CSS smoke: ",
+      "html": "<h1>네이티브 창 크롬 활용 검증</h1>\n<h2>예정 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code></li>\n<li><code>corepack pnpm --filter workspace-monitor check</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app check</code></li>\n<li>Browser DOM/CSS smoke:</li>\n<li><code>.desktop-titlebar</code> has <code>data-tauri-drag-region=&quot;deep&quot;</code></li>\n<li><code>.desktop-titlebar</code> computed <code>-webkit-app-region</code> is <code>drag</code></li>\n<li><code>.titlebar-actions</code> and <code>.titlebar-search</code> computed <code>-webkit-app-region</code> are <code>no-drag</code></li>\n<li>document has no horizontal overflow</li>\n<li><code>corepack pnpm run desktop:package:internal</code></li>\n</ul>\n<h2>결과</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 63 tests passed.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 24 tests passed.</li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code>: 통과, developer public snapshot 생성.</li>\n<li><code>corepack pnpm --filter workspace-monitor check</code>: 통과.</li>\n<li><code>lazy_boundary_contract_ok</code></li>\n<li><code>scroll_contract_ok</code></li>\n<li><code>source_control_design_ok</code></li>\n<li><code>history_payload_ok</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app check</code>: 통과.</li>\n<li><code>installer_shell_runtime_contract_ready</code></li>\n<li><code>desktop_product_structure_ready_public_release_gated</code></li>\n<li><code>customer_bundle_ready</code></li>\n<li><code>internal_release_preflight_ready</code></li>\n<li><code>service_internal_ready_public_blocked</code></li>\n<li>Browser DOM/CSS smoke: 통과.</li>\n<li>overview: <code>.desktop-titlebar</code> <code>data-tauri-drag-region=&quot;deep&quot;</code>, computed app region <code>drag</code></li>\n<li>source: <code>.titlebar-actions</code>, <code>.titlebar-search</code>, <code>.titlebar-context-strip</code>, search input, action button computed app region <code>no-drag</code></li>\n<li>source: <code>horizontalOverflow = 0</code></li>\n<li><code>corepack pnpm run desktop:package:internal</code>: 통과.</li>\n<li><code>.app</code>: <code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>.dmg</code>: <code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n<li><code>codesign --verify --deep --strict</code>: 통과</li>\n<li><code>hdiutil verify</code>: VALID</li>\n</ul>\n<h2>공개 배포 주의</h2>\n<ul>\n<li>internal package build는 ad-hoc signing으로 완료했다.</li>\n<li>public release notarization/signing/updater 자격 증명은 여전히 별도 public release gate다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2212,
+      "updatedAt": "2026-06-05T20:56:57.046Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-native-window-chrome-ko-md",
+      "path": "_history/plans/2026/2026-06-06-native-window-chrome.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "2026 06 06 네이티브 창 크롬 활용 계획",
+      "excerpt": "2026 06 06 네이티브 창 크롬 활용 계획 목적 사용자의 “네이티브 방식 활용” 지시를 Tauri desktop runtime에서 즉시 검증 가능한 native window chrome 개선으로 구현한다. 범위 main window native titlebar config native drag region and no drag control separation readiness/test gates browser DOM/CSS verification internal package build 제",
+      "html": "<p>2026 06 06 네이티브 창 크롬 활용 계획 목적 사용자의 “네이티브 방식 활용” 지시를 Tauri desktop runtime에서 즉시 검증 가능한 native window chrome 개선으로 구현한다. 범위 main window native titlebar config native drag region and no drag control separation readiness/test gates browser DOM/CSS verification internal package build 제외 macOS vibrancy/AppKit material tray/global shortcut/file association native Ru</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 618,
+      "updatedAt": "2026-06-05T20:53:15.065Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-native-window-chrome-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-native-window-chrome.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 네이티브 방식 활용",
+      "excerpt": "사용자 요청 요약: 네이티브 방식 활용 요약 사용자는 현재 플랫폼 데스크톱 앱이 웹 렌더링 수준에 머물지 말고 네이티브 데스크톱 방식을 활용하라고 지시했다. 해석 이번 구현 slice에서는 창 자체의 native chrome과 drag region을 우선 적용한다. 이미 Rust resource warmup, PTY, native git, OS telemetry가 존재하므로 이번 변경은 창/크롬 레벨의 네이티브 통합을 보강한다. 결과 대상 platform desktop app/src tauri/t",
+      "html": "<p>사용자 요청 요약: 네이티브 방식 활용 요약 사용자는 현재 플랫폼 데스크톱 앱이 웹 렌더링 수준에 머물지 말고 네이티브 데스크톱 방식을 활용하라고 지시했다. 해석 이번 구현 slice에서는 창 자체의 native chrome과 drag region을 우선 적용한다. 이미 Rust resource warmup, PTY, native git, OS telemetry가 존재하므로 이번 변경은 창/크롬 레벨의 네이티브 통합을 보강한다. 결과 대상 platform desktop app/src tauri/tauri.conf.json platform desktop app/src tauri/capabilities/default.json platform</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 810,
+      "updatedAt": "2026-06-05T20:53:15.065Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-native-window-chrome-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-native-window-chrome.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "2026 06 06 네이티브 창 크롬 활용 웹 검색",
+      "excerpt": "2026 06 06 네이티브 창 크롬 활용 웹 검색 질의 Tauri v2 native window APIs theme color titlebar macOS official docs Tauri v2 commands invoke Rust native desktop app state official docs Apple Human Interface Guidelines macOS materials controls toolbar sidebar official Tauri v2 window effects vib",
+      "html": "<p>2026 06 06 네이티브 창 크롬 활용 웹 검색 질의 Tauri v2 native window APIs theme color titlebar macOS official docs Tauri v2 commands invoke Rust native desktop app state official docs Apple Human Interface Guidelines macOS materials controls toolbar sidebar official Tauri v2 window effects vibrancy macOS official docs site:v2.tauri.app data tauri drag region allow start d</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1935,
+      "updatedAt": "2026-06-05T20:53:15.064Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-window-chrome-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-window-chrome/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "네이티브 창 크롬 활용 추적",
+      "excerpt": "네이티브 창 크롬 활용 추적 요구사항 연결 REQ NATIVE CHROME 001 src tauri/tauri.conf.json , tests/readiness.test.mjs , scripts/check readiness.mjs REQ NATIVE CHROME 002 src tauri/tauri.conf.json , tests/readiness.test.mjs , scripts/check readiness.mjs REQ NATIVE CHROME 003 components/MonitorShell.",
+      "html": "<h1>네이티브 창 크롬 활용 추적</h1>\n<h2>요구사항 연결</h2>\n<ul>\n<li>REQ-NATIVE-CHROME-001 -&gt; <code>src-tauri/tauri.conf.json</code>, <code>tests/readiness.test.mjs</code>, <code>scripts/check-readiness.mjs</code></li>\n<li>REQ-NATIVE-CHROME-002 -&gt; <code>src-tauri/tauri.conf.json</code>, <code>tests/readiness.test.mjs</code>, <code>scripts/check-readiness.mjs</code></li>\n<li>REQ-NATIVE-CHROME-003 -&gt; <code>components/MonitorShell.tsx</code>, <code>tests/tool-studio.test.mjs</code></li>\n<li>REQ-NATIVE-CHROME-004 -&gt; <code>components/MonitorShell.tsx</code>, <code>app/globals.css</code>, <code>tests/tool-studio.test.mjs</code></li>\n<li>REQ-NATIVE-CHROME-005 -&gt; <code>src-tauri/capabilities/default.json</code>, <code>tests/readiness.test.mjs</code>, <code>scripts/check-readiness.mjs</code></li>\n<li>REQ-NATIVE-CHROME-006 -&gt; <code>specs/2026-06-06-native-window-chrome/validation.ko.md</code></li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>Tauri config reference: <code>https://v2.tauri.app/reference/config/</code></li>\n<li>Tauri window customization: <code>https://v2.tauri.app/learn/window-customization/</code></li>\n<li>Tauri core permissions: <code>https://v2.tauri.app/reference/acl/core-permissions/</code></li>\n<li>Apple Human Interface Guidelines: <code>https://developer.apple.com/design/human-interface-guidelines</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1035,
+      "updatedAt": "2026-06-05T20:51:48.624Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-window-chrome-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-window-chrome/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "네이티브 창 크롬 활용 계획",
+      "excerpt": "네이티브 창 크롬 활용 계획 작업 순서 1. Tauri official config와 window customization 문서를 확인한다. 2. main window에 네이티브 투명 타이틀바와 launch background 계약을 추가한다. 3. capability에 window dragging permission을 추가한다. 4. Workspace Monitor titlebar에 drag region을 추가하고 조작 컨트롤은 no drag로 분리한다. 5. renderer test와 desk",
+      "html": "<h1>네이티브 창 크롬 활용 계획</h1>\n<h2>작업 순서</h2>\n<p>1. Tauri official config와 window customization 문서를 확인한다.</p>\n<p>2. main window에 네이티브 투명 타이틀바와 launch background 계약을 추가한다.</p>\n<p>3. capability에 window dragging permission을 추가한다.</p>\n<p>4. Workspace Monitor titlebar에 drag region을 추가하고 조작 컨트롤은 no-drag로 분리한다.</p>\n<p>5. renderer test와 desktop readiness gate를 갱신한다.</p>\n<p>6. browser DOM/CSS 검증과 internal package build까지 실행한다.</p>\n<h2>리스크와 완화</h2>\n<ul>\n<li>리스크: 전체 header를 drag region으로 만들면 버튼 클릭이 뺏길 수 있다.</li>\n<li>완화: 조작 가능한 action/search/context strip에 <code>data-tauri-drag-region=&quot;false&quot;</code>와 <code>-webkit-app-region: no-drag</code>를 함께 둔다.</li>\n</ul>\n<ul>\n<li>리스크: Tauri config schema가 창 옵션을 거부할 수 있다.</li>\n<li>완화: <code>platform-desktop-app</code> test/check와 internal package build를 실행해 schema와 bundling을 검증한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 980,
+      "updatedAt": "2026-06-05T20:51:48.623Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-window-chrome-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-window-chrome/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "네이티브 창 크롬 활용 스펙",
+      "excerpt": "네이티브 창 크롬 활용 스펙 목표 platform desktop app 이 Tauri 기반 데스크톱 앱답게 운영체제 창 크롬을 활용하도록 main window 설정과 Workspace Monitor titlebar 드래그 영역을 명시한다. 변경 대상 platform desktop app/src tauri/tauri.conf.json platform desktop app/src tauri/capabilities/default.json platform desktop app/renderer/worksp",
+      "html": "<h1>네이티브 창 크롬 활용 스펙</h1>\n<h2>목표</h2>\n<p><code>platform-desktop-app</code>이 Tauri 기반 데스크톱 앱답게 운영체제 창 크롬을 활용하도록 main window 설정과 Workspace Monitor titlebar 드래그 영역을 명시한다.</p>\n<h2>변경 대상</h2>\n<ul>\n<li><code>platform-desktop-app/src-tauri/tauri.conf.json</code></li>\n<li><code>platform-desktop-app/src-tauri/capabilities/default.json</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n<li><code>platform-desktop-app/tests/readiness.test.mjs</code></li>\n<li><code>platform-desktop-app/scripts/check-readiness.mjs</code></li>\n</ul>\n<h2>구현 계약</h2>\n<ul>\n<li>Tauri main window:</li>\n<li><code>hiddenTitle: true</code></li>\n<li><code>titleBarStyle: &quot;Transparent&quot;</code></li>\n<li><code>backgroundColor: &quot;#0f1115&quot;</code></li>\n<li>Tauri capability:</li>\n<li><code>core:window:allow-start-dragging</code></li>\n<li>Workspace Monitor:</li>\n<li><code>.desktop-titlebar</code>와 <code>.titlebar-section</code>은 <code>data-tauri-drag-region=&quot;deep&quot;</code>을 가진다.</li>\n<li><code>.titlebar-actions</code>, <code>.titlebar-search</code>, <code>.titlebar-context-strip</code>은 <code>data-tauri-drag-region=&quot;false&quot;</code>를 가진다.</li>\n<li>CSS는 draggable chrome과 no-drag controls를 <code>-webkit-app-region</code>으로 분리한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>정적 테스트가 Tauri native titlebar config, capability permission, renderer drag region, no-drag controls를 검증한다.</li>\n<li>readiness check가 native window chrome config와 drag region token 누락을 실패로 처리한다.</li>\n<li>browser 검증에서 titlebar drag region과 titlebar action/search no-drag computed style이 확인되어야 한다.</li>\n<li>internal package build가 <code>.app</code>와 <code>.dmg</code>를 생성해야 한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1665,
+      "updatedAt": "2026-06-05T20:51:48.623Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-native-window-chrome-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-native-window-chrome.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "네이티브 창 크롬 활용 요구사항",
+      "excerpt": "네이티브 창 크롬 활용 요구사항 배경 사용자는 설치형 데스크톱 앱이 단순 웹 렌더러처럼 동작하지 말고 운영체제와 네이티브 앱 런타임의 장점을 적극 활용하라고 지시했다. 이번 범위는 창 자체의 네이티브 크롬, 드래그 영역, 앱 조작 영역의 충돌 방지를 우선 처리한다. 요구사항 REQ NATIVE CHROME 001: Tauri main window는 데스크톱 전용 최소 크기를 유지하면서 macOS 네이티브 투명 타이틀바를 사용해야 한다. REQ NATIVE CHROME 002: 앱 시작 및 창 배경",
+      "html": "<h1>네이티브 창 크롬 활용 요구사항</h1>\n<h2>배경</h2>\n<p>사용자는 설치형 데스크톱 앱이 단순 웹 렌더러처럼 동작하지 말고 운영체제와 네이티브 앱 런타임의 장점을 적극 활용하라고 지시했다. 이번 범위는 창 자체의 네이티브 크롬, 드래그 영역, 앱 조작 영역의 충돌 방지를 우선 처리한다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-NATIVE-CHROME-001: Tauri main window는 데스크톱 전용 최소 크기를 유지하면서 macOS 네이티브 투명 타이틀바를 사용해야 한다.</li>\n<li>REQ-NATIVE-CHROME-002: 앱 시작 및 창 배경 플래시가 밝은 기본 배경으로 보이지 않도록 main window 배경색을 어두운 앱 크롬 색으로 지정해야 한다.</li>\n<li>REQ-NATIVE-CHROME-003: Workspace Monitor 상단 titlebar는 Tauri 네이티브 window drag region을 제공해야 한다.</li>\n<li>REQ-NATIVE-CHROME-004: 터미널 버튼, 검색 입력, 컨텍스트 액션처럼 실제 조작해야 하는 컨트롤은 window drag region에서 제외되어야 한다.</li>\n<li>REQ-NATIVE-CHROME-005: Tauri capability는 window dragging 권한을 명시적으로 허용해야 한다.</li>\n<li>REQ-NATIVE-CHROME-006: 구현 후 renderer test, desktop readiness test/check, browser DOM/CSS 검증, internal package build를 실행해야 한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>전체 창을 frameless로 바꾸거나 OS window controls를 직접 재구현하지 않는다.</li>\n<li>macOS vibrancy/material effect, system tray, global shortcut, file association은 별도 네이티브 기능 slice로 남긴다.</li>\n<li>성능 캐시/Rust workspace warmup 로직은 기존 구현을 유지하고 이번 slice에서는 창 크롬 계약만 강화한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1674,
+      "updatedAt": "2026-06-05T20:51:48.622Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-work-summaries-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
       "path": "_history/work-summaries/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
       "category": "work-summary",
@@ -7534,22 +7758,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-2026-2026-06-06-md",
-      "path": "_history/2026/2026-06-06.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 06",
-      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에 따라 Workspace Monitor heavy panel lazy boundary contract를 추가했다. section switch a</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 5812,
-      "updatedAt": "2026-06-05T20:42:41.069Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-plans-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
@@ -9824,102 +10032,6 @@
       "workspaceArea": "_history/evaluations"
     },
     {
-      "id": "history-work-timings-2026-2026-06-06-monitor-shell-root-boundary-json",
-      "path": "_history/work-timings/2026/2026-06-06-monitor-shell-root-boundary.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Monitor Shell Root Boundary",
-      "excerpt": "{ \"task id\": \"2026 06 06 monitor shell root boundary\", \"title\": \"MonitorShell root boundary review\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seconds\": 180,",
-      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 monitor shell root boundary&quot;, &quot;title&quot;: &quot;MonitorShell root boundary review&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;duration seconds&quot;: 180, &quot;measurement&quot;: &quot;estimated&quot;, &quot;bottleneck notes&quot;: &quot;Official React, Next.js, and w</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1984,
-      "updatedAt": "2026-06-05T17:55:21.496Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-monitor-shell-root-boundary-omission-json",
-      "path": "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary-omission.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Monitor Shell Root Boundary Omission",
-      "excerpt": "{ \"task\": \"Review root performance architecture and split the first MonitorShell code boundary.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"root review\", \"description\": \"Look beyond local tab tuning and identify the root structural performance issue.\", \"source\": \"u",
-      "html": "<p>{ &quot;task&quot;: &quot;Review root performance architecture and split the first MonitorShell code boundary.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;expected items&quot;: { &quot;item id&quot;: &quot;root review&quot;, &quot;description&quot;: &quot;Look beyond local tab tuning and identify the root structural performance issue.&quot;, &quot;source&quot;: &quot;user request&quot;, &quot;required&quot;: true, &quot;status&quot;: &quot;covered&quot;, &quot;evidence&quot;: &quot;platform deskt</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 3832,
-      "updatedAt": "2026-06-05T17:55:21.495Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-monitor-shell-root-boundary-resource-json",
-      "path": "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary-resource.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Monitor Shell Root Boundary Resource",
-      "excerpt": "{ \"task\": \"Review root performance architecture and split the first MonitorShell code boundary.\", \"work mode\": \"standard\", \"runtime context\": \"React renderer\", \"Next.js dynamic import chunks\", \"Playwright Chromium\", \"Python static server\", \"Tauri/Rust build\", \"renderer memory cac",
-      "html": "<p>{ &quot;task&quot;: &quot;Review root performance architecture and split the first MonitorShell code boundary.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;runtime context&quot;: &quot;React renderer&quot;, &quot;Next.js dynamic import chunks&quot;, &quot;Playwright Chromium&quot;, &quot;Python static server&quot;, &quot;Tauri/Rust build&quot;, &quot;renderer memory cache&quot; , &quot;resource risks&quot;: { &quot;risk id&quot;: &quot;lazy chunk tab delay&quot;, &quot;category&quot;: &quot;networ</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 4356,
-      "updatedAt": "2026-06-05T17:55:21.495Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: MonitorShell 근본 boundary 재검토",
-      "excerpt": "요청 결과 추적: MonitorShell 근본 boundary 재검토 요청 사용자는 “너의 근본적인 부분부터 다시 살펴봐”라고 요청했다. 결과 근본 병목을 MonitorShell monolith와 탭별 code boundary 부족으로 분류했다. Tool Studio를 static runtime import에서 dynamic boundary로 분리했다. idle prewarm으로 Tool Studio module preload를 연결했다. 전체 build/package 검증을 완료했다. 연결 파일",
-      "html": "<p>요청 결과 추적: MonitorShell 근본 boundary 재검토 요청 사용자는 “너의 근본적인 부분부터 다시 살펴봐”라고 요청했다. 결과 근본 병목을 MonitorShell monolith와 탭별 code boundary 부족으로 분류했다. Tool Studio를 static runtime import에서 dynamic boundary로 분리했다. idle prewarm으로 Tool Studio module preload를 연결했다. 전체 build/package 검증을 완료했다. 연결 파일 구현: platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1151,
-      "updatedAt": "2026-06-05T17:55:21.495Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
-      "path": "_history/plans/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "작업 계획: MonitorShell 근본 boundary 재검토",
-      "excerpt": "작업 계획: MonitorShell 근본 boundary 재검토 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 냉정한 평가 현재 Workspace Monitor는 탭이 여러 개지만 renderer code boundary는 거의 하나다. MonitorShell.tsx 가 14k line을 넘고, 많은 탭의 JSX/state/effects가 같은 client ",
-      "html": "<p>작업 계획: MonitorShell 근본 boundary 재검토 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 냉정한 평가 현재 Workspace Monitor는 탭이 여러 개지만 renderer code boundary는 거의 하나다. MonitorShell.tsx 가 14k line을 넘고, 많은 탭의 JSX/state/effects가 같은 client module에서 평가된다. 이전 resident/prewarm 최적화는 mount 비용과 hidden tree 비용을 줄였지만, Shell 자체</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1149,
-      "updatedAt": "2026-06-05T17:55:21.494Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: MonitorShell 근본 boundary 재검토",
-      "excerpt": "작업 요약: MonitorShell 근본 boundary 재검토 완료 내용 MonitorShell.tsx 가 14,191줄이며 탭별 runtime/code boundary가 부족하다는 구조 병목을 확인했다. ToolStudioPanel.tsx 의 props type을 export했다. MonitorShell.tsx 에서 ToolStudioPanel runtime static import를 제거하고 next/dynamic top level boundary로 전환했다. preloadToolStudio",
-      "html": "<p>작업 요약: MonitorShell 근본 boundary 재검토 완료 내용 MonitorShell.tsx 가 14,191줄이며 탭별 runtime/code boundary가 부족하다는 구조 병목을 확인했다. ToolStudioPanel.tsx 의 props type을 export했다. MonitorShell.tsx 에서 ToolStudioPanel runtime static import를 제거하고 next/dynamic top level boundary로 전환했다. preloadToolStudioPanel 을 기존 idle work surface prewarm에 연결했다. 테스트 계약을 dynamic boundary 중심으로 갱신했다. </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1057,
-      "updatedAt": "2026-06-05T17:55:21.494Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-monitor-shell-root-boundary-traceability-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-monitor-shell-root-boundary/traceability.ko.md",
       "category": "project-spec",
@@ -9998,22 +10110,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-root-review-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-root-review.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: 근본부터 재검토",
-      "excerpt": "사용자 요청 요약: 근본부터 재검토 원 요청 사용자는 이전 속도 최적화 이후에도 “너의 근본적인 부분부터 다시 살펴봐”라고 요청했다. 해석 국소 탭 prewarm이나 버튼 조정만 반복하지 말고, 데스크톱 앱의 renderer/runtime 구조 자체를 재검토한다. 성능 병목이 React tree, JS bundle 평가, 데이터 payload, native runtime 중 어디에 남아 있는지 냉정하게 본다. 바로 검증 가능한 구조 개선을 구현하고, 빌드/패키징까지 자동으로 실행한다. 이번 수용 ",
-      "html": "<p>사용자 요청 요약: 근본부터 재검토 원 요청 사용자는 이전 속도 최적화 이후에도 “너의 근본적인 부분부터 다시 살펴봐”라고 요청했다. 해석 국소 탭 prewarm이나 버튼 조정만 반복하지 말고, 데스크톱 앱의 renderer/runtime 구조 자체를 재검토한다. 성능 병목이 React tree, JS bundle 평가, 데이터 payload, native runtime 중 어디에 남아 있는지 냉정하게 본다. 바로 검증 가능한 구조 개선을 구현하고, 빌드/패키징까지 자동으로 실행한다. 이번 수용 기준 남은 root bottleneck을 근거와 함께 밝힌다. 위험이 낮은 첫 root boundary 개선을 구현한다. 성능 수치를 과장하지 </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 837,
-      "updatedAt": "2026-06-05T17:55:21.492Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
     },
     {
       "id": "platform-desktop-app-docs-requirements-2026-06-06-monitor-shell-root-boundary-ko-md",
@@ -17742,102 +17838,6 @@
       "historyDate": "2026-06-03",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-agent-platform-feature-architecture-traceability-en-md",
-      "path": "platform-desktop-app/specs/2026-06-03-agent-platform-feature-architecture/traceability.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Agent Platform Feature Architecture Traceability",
-      "excerpt": "Agent Platform Feature Architecture Traceability | Requirement | Implementation | Validation | | | | | | PDA REQ 035 | configs/product feature registry.json | config contract, readiness/test | | PDA REQ 035 | renderer/workspace monitor/scripts/lib/product feature architecture.mjs",
-      "html": "<h1>Agent Platform Feature Architecture Traceability</h1>\n<table><thead><tr><th>Requirement</th><th>Implementation</th><th>Validation</th></tr></thead><tbody><tr><td>PDA-REQ-035</td><td><code>configs/product-feature-registry.json</code></td><td>config contract, readiness/test</td></tr><tr><td>PDA-REQ-035</td><td><code>renderer/workspace-monitor/scripts/lib/product-feature-architecture.mjs</code></td><td>workspace-monitor collector test</td></tr><tr><td>PDA-REQ-035</td><td><code>renderer/workspace-monitor/lib/snapshot.ts</code></td><td>TypeScript check</td></tr><tr><td>PDA-REQ-035</td><td><code>renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx</code></td><td>Browser smoke, TypeScript check</td></tr><tr><td>PDA-REQ-035</td><td><code>scripts/check-readiness.mjs</code>, <code>tests/readiness.test.mjs</code></td><td>platform-desktop-app test/check</td></tr><tr><td>PDA-REQ-036</td><td><code>agent-platform/configs/access/view-mode-registry.json</code>, <code>renderer/workspace-monitor/scripts/collect-workspace.mjs</code></td><td>config contract, customer build/test</td></tr><tr><td>PDA-REQ-036</td><td><code>renderer/workspace-monitor/components/MonitorShell.tsx</code>, <code>renderer/workspace-monitor/components/features/OperatorCenterDialog.tsx</code></td><td>TypeScript check, Browser smoke</td></tr><tr><td>PDA-REQ-036</td><td><code>configs/product-feature-registry.json</code>, <code>scripts/check-readiness.mjs</code>, <code>tests/readiness.test.mjs</code></td><td>readiness/test</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1157,
-      "updatedAt": "2026-06-03T06:38:13.238Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-agent-platform-feature-architecture-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-agent-platform-feature-architecture/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "에이전트 플랫폼 기능 아키텍처 추적성",
-      "excerpt": "에이전트 플랫폼 기능 아키텍처 추적성 | 요구 | 구현 | 검증 | | | | | | PDA REQ 035 | configs/product feature registry.json | config contract, readiness/test | | PDA REQ 035 | renderer/workspace monitor/scripts/lib/product feature architecture.mjs | workspace monitor collector test | | PDA REQ 035 | ren",
-      "html": "<h1>에이전트 플랫폼 기능 아키텍처 추적성</h1>\n<table><thead><tr><th>요구</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>PDA-REQ-035</td><td><code>configs/product-feature-registry.json</code></td><td>config contract, readiness/test</td></tr><tr><td>PDA-REQ-035</td><td><code>renderer/workspace-monitor/scripts/lib/product-feature-architecture.mjs</code></td><td>workspace-monitor collector test</td></tr><tr><td>PDA-REQ-035</td><td><code>renderer/workspace-monitor/lib/snapshot.ts</code></td><td>TypeScript check</td></tr><tr><td>PDA-REQ-035</td><td><code>renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx</code></td><td>Browser smoke, TypeScript check</td></tr><tr><td>PDA-REQ-035</td><td><code>scripts/check-readiness.mjs</code>, <code>tests/readiness.test.mjs</code></td><td>platform-desktop-app test/check</td></tr><tr><td>PDA-REQ-036</td><td><code>agent-platform/configs/access/view-mode-registry.json</code>, <code>renderer/workspace-monitor/scripts/collect-workspace.mjs</code></td><td>config contract, customer build/test</td></tr><tr><td>PDA-REQ-036</td><td><code>renderer/workspace-monitor/components/MonitorShell.tsx</code>, <code>renderer/workspace-monitor/components/features/OperatorCenterDialog.tsx</code></td><td>TypeScript check, Browser smoke</td></tr><tr><td>PDA-REQ-036</td><td><code>configs/product-feature-registry.json</code>, <code>scripts/check-readiness.mjs</code>, <code>tests/readiness.test.mjs</code></td><td>readiness/test</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1144,
-      "updatedAt": "2026-06-03T06:38:13.238Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-agent-platform-feature-architecture-tasks-en-md",
-      "path": "platform-desktop-app/specs/2026-06-03-agent-platform-feature-architecture/tasks.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Agent Platform Feature Architecture Tasks",
-      "excerpt": "Agent Platform Feature Architecture Tasks | ID | Task | Status | | | | | | TASK APFA 001 | Add product feature registry and doc links | done | | TASK APFA 002 | Extend collector and snapshot schema | done | | TASK APFA 003 | Implement Overview product feature panel | done | | TAS",
-      "html": "<h1>Agent Platform Feature Architecture Tasks</h1>\n<table><thead><tr><th>ID</th><th>Task</th><th>Status</th></tr></thead><tbody><tr><td>TASK-APFA-001</td><td>Add product feature registry and doc links</td><td>done</td></tr><tr><td>TASK-APFA-002</td><td>Extend collector and snapshot schema</td><td>done</td></tr><tr><td>TASK-APFA-003</td><td>Implement Overview product feature panel</td><td>done</td></tr><tr><td>TASK-APFA-004</td><td>Strengthen readiness/tests/check scripts</td><td>done</td></tr><tr><td>TASK-APFA-005</td><td>Validate customer snapshot, build, and browser view</td><td>done</td></tr><tr><td>TASK-APFA-006</td><td>Record history, evaluation, and request trace</td><td>done</td></tr><tr><td>TASK-APFA-007</td><td>Separate default work navigation from Operator Center</td><td>done</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 591,
-      "updatedAt": "2026-06-03T06:38:13.237Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-agent-platform-feature-architecture-validation-en-md",
-      "path": "platform-desktop-app/specs/2026-06-03-agent-platform-feature-architecture/validation.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Agent Platform Feature Architecture Validation",
-      "excerpt": "Agent Platform Feature Architecture Validation Commands cd agent platform && PYTHONPATH=src python3 m agent platform.cli check config contract ../platform desktop app/configs/product feature registry.json cd agent platform && PYTHONPATH=src python3 m agent platform.cli check conf",
-      "html": "<h1>Agent Platform Feature Architecture Validation</h1>\n<h2>Commands</h2>\n<ul>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-feature-registry.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/desktop-distribution-registry.json</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code></li>\n</ul>\n<h2>Manual/Visual Check</h2>\n<ul>\n<li>Verify in the in-app Browser that Overview shows <code>Agent Orchestration</code>, <code>Agent Factory</code>, <code>Learning &amp; Evaluation Loop</code>, and <code>Observability is support</code>.</li>\n<li>Verify in the in-app Browser that the default activity rail/sidebar foregrounds <code>Platform</code>, <code>Run</code>, <code>Factory</code>, <code>Source</code>, and <code>Learn</code>, while <code>Projects</code>, <code>History</code>, <code>Structure</code>, <code>Docs</code>, and <code>Reqs</code> open through Operator Center.</li>\n<li>Verify the customer snapshot keeps feature layers while removing <code>currentAssets</code>, <code>validationGates</code>, and internal record targets.</li>\n<li>Verify the customer snapshot user view <code>allowedSections</code> is <code>overview</code>, <code>desktop</code>, <code>agents</code>, <code>source</code>, and <code>intent</code>.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1311,
-      "updatedAt": "2026-06-03T06:38:13.237Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-agent-platform-feature-architecture-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-agent-platform-feature-architecture/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "에이전트 플랫폼 기능 아키텍처 검증",
-      "excerpt": "에이전트 플랫폼 기능 아키텍처 검증 명령 cd agent platform && PYTHONPATH=src python3 m agent platform.cli check config contract ../platform desktop app/configs/product feature registry.json cd agent platform && PYTHONPATH=src python3 m agent platform.cli check config contract ../platform desktop a",
-      "html": "<h1>에이전트 플랫폼 기능 아키텍처 검증</h1>\n<h2>명령</h2>\n<ul>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-feature-registry.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/desktop-distribution-registry.json</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code></li>\n</ul>\n<h2>수동/시각 검증</h2>\n<ul>\n<li>in-app Browser에서 Overview가 <code>Agent Orchestration</code>, <code>Agent Factory</code>, <code>Learning &amp; Evaluation Loop</code>, <code>Observability is support</code>를 표시하는지 확인한다.</li>\n<li>in-app Browser에서 기본 activity rail/sidebar가 <code>Platform</code>, <code>Run</code>, <code>Factory</code>, <code>Source</code>, <code>Learn</code> 중심이고 <code>Projects</code>, <code>History</code>, <code>Structure</code>, <code>Docs</code>, <code>Reqs</code>는 Operator Center를 통해 열리는지 확인한다.</li>\n<li>고객 snapshot에서 feature layer는 남고 <code>currentAssets</code>, <code>validationGates</code>, 내부 record target은 제거되는지 확인한다.</li>\n<li>customer snapshot의 user view <code>allowedSections</code>가 <code>overview</code>, <code>desktop</code>, <code>agents</code>, <code>source</code>, <code>intent</code>인지 확인한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1335,
-      "updatedAt": "2026-06-03T06:38:13.237Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-agent-platform-feature-architecture-spec-en-md",
-      "path": "platform-desktop-app/specs/2026-06-03-agent-platform-feature-architecture/spec.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Agent Platform Feature Architecture Spec",
-      "excerpt": "Agent Platform Feature Architecture Spec Goal Lock the installable desktop app identity as an agent capability platform, not a monitoring dashboard. Reframe the current shell, source review, runtime data, decision inbox, history, requirements, and monitoring pieces as named produ",
-      "html": "<h1>Agent Platform Feature Architecture Spec</h1>\n<h2>Goal</h2>\n<ul>\n<li>Lock the installable desktop app identity as an agent capability platform, not a monitoring dashboard.</li>\n<li>Reframe the current shell, source review, runtime data, decision inbox, history, requirements, and monitoring pieces as named product feature layers.</li>\n<li>Preserve product feature architecture in customer snapshots while stripping internal source paths and validation internals.</li>\n<li>Keep default navigation focused on work, creation, development, and learning while moving operator, monitoring, document, and governance surfaces into Operator Center.</li>\n</ul>\n<h2>Feature Layers</h2>\n<table><thead><tr><th>ID</th><th>Role</th><th>Summary</th></tr></thead><tbody><tr><td><code>agent_orchestration</code></td><td>primary</td><td>Task pipe, process graph, lanes, decision inbox, and merge gates</td></tr><tr><td><code>agent_work_environment</code></td><td>primary</td><td>App-selected workspace, runtime data, task-run store, support bundle, and accumulated data</td></tr><tr><td><code>agent_development_environment</code></td><td>primary</td><td>Source review, multi-file editor, diff, templates, requirements/spec/validation workbench</td></tr><tr><td><code>agent_factory</code></td><td>primary</td><td>Promotion from repeated work into prompts, workflows, templates, tools, skills, agents, and features</td></tr><tr><td><code>learning_improvement_loop</code></td><td>primary</td><td>Intent map, history, timings, evaluations, and evidence as an improvement loop</td></tr><tr><td><code>observability_monitoring</code></td><td>supporting</td><td>Structure, documents, history, source inventory, and readiness as support observability</td></tr></tbody></table>\n<h2>Requirements</h2>\n<ul>\n<li><code>platform-desktop-app/configs/product-feature-registry.json</code> is the primary/supporting feature source of truth.</li>\n<li>Workspace snapshots include <code>productFeatureArchitecture</code>.</li>\n<li>The Overview home screen shows feature architecture before monitoring details.</li>\n<li>User view and customer snapshots use <code>overview</code>, <code>desktop</code>, <code>agents</code>, <code>source</code>, and <code>intent</code> as the default work sections.</li>\n<li><code>projects</code>, <code>history</code>, <code>structure</code>, <code>documents</code>, and <code>requirements</code> open from Operator Center instead of the primary work navigation.</li>\n<li>Readiness checks fail if monitoring becomes the primary product again.</li>\n</ul>\n<h2>Out Of Scope</h2>\n<ul>\n<li>Installing a new agent runtime framework.</li>\n<li>Public signing/notarization.</li>\n<li>Renaming the <code>renderer/workspace-monitor</code> package.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2186,
-      "updatedAt": "2026-06-03T06:38:13.236Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -17848,10 +17848,14 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 27
+          "count": 26
         },
         {
           "category": "user-request",
+          "count": 13
+        },
+        {
+          "category": "web-search",
           "count": 13
         },
         {
@@ -17860,10 +17864,6 @@
         },
         {
           "category": "request-trace",
-          "count": 12
-        },
-        {
-          "category": "web-search",
           "count": 12
         },
         {
@@ -17887,7 +17887,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-          "updatedAt": "2026-06-05T20:42:41.069Z",
+          "updatedAt": "2026-06-05T20:56:57.049Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -17961,26 +17961,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-monitor-shell-root-boundary-omission-json",
-          "path": "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary-omission.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Monitor Shell Root Boundary Omission",
-          "excerpt": "{ \"task\": \"Review root performance architecture and split the first MonitorShell code boundary.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"root review\", \"description\": \"Look beyond local tab tuning and identify the root structural performance issue.\", \"source\": \"u",
-          "updatedAt": "2026-06-05T17:55:21.495Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-monitor-shell-root-boundary-resource-json",
-          "path": "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary-resource.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Monitor Shell Root Boundary Resource",
-          "excerpt": "{ \"task\": \"Review root performance architecture and split the first MonitorShell code boundary.\", \"work mode\": \"standard\", \"runtime context\": \"React renderer\", \"Next.js dynamic import chunks\", \"Playwright Chromium\", \"Python static server\", \"Tauri/Rust build\", \"renderer memory cac",
-          "updatedAt": "2026-06-05T17:55:21.495Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
           "category": "evaluation",
@@ -18028,6 +18008,16 @@
           "title": "평가: Native Resource Telemetry",
           "excerpt": "평가: Native Resource Telemetry 결과 통과. 앱이 실제로 사용하는 native process/system resource telemetry를 Rust/Tauri command로 노출했다. Monitor UI와 readiness gate가 이를 요구한다. 검증 완료 tsc noEmit : 통과 cargo check : 통과 Workspace Monitor test/check: 통과 Platform desktop test: 통과 service readiness registry c",
           "updatedAt": "2026-06-05T18:56:19.552Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-native-window-chrome-json",
+          "path": "_history/evaluations/2026/2026-06-06-native-window-chrome.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Native Window Chrome",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 native window chrome.json\" , \"omission check targets\": \" history/omission checks/2026/2026 ",
+          "updatedAt": "2026-06-05T20:56:57.048Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18181,13 +18171,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
-          "path": "_history/plans/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
+          "id": "history-plans-2026-2026-06-06-native-window-chrome-ko-md",
+          "path": "_history/plans/2026/2026-06-06-native-window-chrome.ko.md",
           "category": "plan",
           "language": "ko",
-          "title": "작업 계획: MonitorShell 근본 boundary 재검토",
-          "excerpt": "작업 계획: MonitorShell 근본 boundary 재검토 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 냉정한 평가 현재 Workspace Monitor는 탭이 여러 개지만 renderer code boundary는 거의 하나다. MonitorShell.tsx 가 14k line을 넘고, 많은 탭의 JSX/state/effects가 같은 client ",
-          "updatedAt": "2026-06-05T17:55:21.494Z",
+          "title": "2026 06 06 네이티브 창 크롬 활용 계획",
+          "excerpt": "2026 06 06 네이티브 창 크롬 활용 계획 목적 사용자의 “네이티브 방식 활용” 지시를 Tauri desktop runtime에서 즉시 검증 가능한 native window chrome 개선으로 구현한다. 범위 main window native titlebar config native drag region and no drag control separation readiness/test gates browser DOM/CSS verification internal package build 제",
+          "updatedAt": "2026-06-05T20:53:15.065Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18251,16 +18241,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: MonitorShell 근본 boundary 재검토",
-          "excerpt": "요청 결과 추적: MonitorShell 근본 boundary 재검토 요청 사용자는 “너의 근본적인 부분부터 다시 살펴봐”라고 요청했다. 결과 근본 병목을 MonitorShell monolith와 탭별 code boundary 부족으로 분류했다. Tool Studio를 static runtime import에서 dynamic boundary로 분리했다. idle prewarm으로 Tool Studio module preload를 연결했다. 전체 build/package 검증을 완료했다. 연결 파일",
-          "updatedAt": "2026-06-05T17:55:21.495Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-06-native-resource-telemetry-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-native-resource-telemetry.ko.md",
           "category": "request-trace",
@@ -18268,6 +18248,16 @@
           "title": "요청 결과 추적: Native Resource Telemetry",
           "excerpt": "요청 결과 추적: Native Resource Telemetry 요청 사용자는 남은 작업 전체를 계속 구현하라고 지시했다. 결과 실제 Rust/Tauri process/system resource telemetry를 앱에 추가했다. OS cache 상태뿐 아니라 현재 app RAM/CPU 상태를 source workbench에서 볼 수 있다. readiness gate가 native resource telemetry를 별도 그룹으로 추적한다. 구현 파일 platform desktop app/src",
           "updatedAt": "2026-06-05T18:53:41.663Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-native-window-chrome-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-native-window-chrome.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: 네이티브 창 크롬 활용",
+          "excerpt": "요청 결과 추적: 네이티브 창 크롬 활용 요청 사용자 요청: 네이티브 방식 활용 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 native window chrome.ko.md 스펙: platform desktop app/specs/2026 06 06 native window chrome/spec.ko.md 계획: platform desktop app/specs/2026 06 06 native window chrome/plan.ko.md ",
+          "updatedAt": "2026-06-05T20:56:57.048Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18381,6 +18371,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-user-requests-2026-2026-06-06-native-window-chrome-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-native-window-chrome.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: 네이티브 방식 활용",
+          "excerpt": "사용자 요청 요약: 네이티브 방식 활용 요약 사용자는 현재 플랫폼 데스크톱 앱이 웹 렌더링 수준에 머물지 말고 네이티브 데스크톱 방식을 활용하라고 지시했다. 해석 이번 구현 slice에서는 창 자체의 native chrome과 drag region을 우선 적용한다. 이미 Rust resource warmup, PTY, native git, OS telemetry가 존재하므로 이번 변경은 창/크롬 레벨의 네이티브 통합을 보강한다. 결과 대상 platform desktop app/src tauri/t",
+          "updatedAt": "2026-06-05T20:53:15.065Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-06-provider-button-error-status-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-provider-button-error-status.ko.md",
           "category": "user-request",
@@ -18428,16 +18428,6 @@
           "title": "2026 06 06 사용자 요청 요약: Public Release Updater Automation",
           "excerpt": "2026 06 06 사용자 요청 요약: Public Release Updater Automation 사용자는 이전 작업 후 남은 것도 모두 처리하라고 지시했다. 직전 완료 보고에서 public release blockers로 signing, notarization, updater, clean machine smoke가 남아 있었으므로, 외부 자격증명을 대신 만들 수 없는 부분을 제외하고 public release automation lane을 구현하는 작업으로 해석했다.",
           "updatedAt": "2026-06-05T19:11:25.787Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-06-root-review-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-root-review.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: 근본부터 재검토",
-          "excerpt": "사용자 요청 요약: 근본부터 재검토 원 요청 사용자는 이전 속도 최적화 이후에도 “너의 근본적인 부분부터 다시 살펴봐”라고 요청했다. 해석 국소 탭 prewarm이나 버튼 조정만 반복하지 말고, 데스크톱 앱의 renderer/runtime 구조 자체를 재검토한다. 성능 병목이 React tree, JS bundle 평가, 데이터 payload, native runtime 중 어디에 남아 있는지 냉정하게 본다. 바로 검증 가능한 구조 개선을 구현하고, 빌드/패키징까지 자동으로 실행한다. 이번 수용 ",
-          "updatedAt": "2026-06-05T17:55:21.492Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18508,6 +18498,16 @@
           "title": "웹 검색 기록: Native Resource Telemetry",
           "excerpt": "웹 검색 기록: Native Resource Telemetry 검색 시각 2026 06 06 질의 Tauri v2 official docs updater plugin code signing notarization macOS Apple official Developer ID notarization hardened runtime command line notarytool docs Tauri v2 official docs system information process memory CPU Rust pl",
           "updatedAt": "2026-06-05T18:53:41.662Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-native-window-chrome-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-native-window-chrome.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "2026 06 06 네이티브 창 크롬 활용 웹 검색",
+          "excerpt": "2026 06 06 네이티브 창 크롬 활용 웹 검색 질의 Tauri v2 native window APIs theme color titlebar macOS official docs Tauri v2 commands invoke Rust native desktop app state official docs Apple Human Interface Guidelines macOS materials controls toolbar sidebar official Tauri v2 window effects vib",
+          "updatedAt": "2026-06-05T20:53:15.064Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18621,16 +18621,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: MonitorShell 근본 boundary 재검토",
-          "excerpt": "작업 요약: MonitorShell 근본 boundary 재검토 완료 내용 MonitorShell.tsx 가 14,191줄이며 탭별 runtime/code boundary가 부족하다는 구조 병목을 확인했다. ToolStudioPanel.tsx 의 props type을 export했다. MonitorShell.tsx 에서 ToolStudioPanel runtime static import를 제거하고 next/dynamic top level boundary로 전환했다. preloadToolStudio",
-          "updatedAt": "2026-06-05T17:55:21.494Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-native-resource-telemetry-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-native-resource-telemetry.ko.md",
           "category": "work-summary",
@@ -18638,6 +18628,16 @@
           "title": "작업 요약: Native Resource Telemetry",
           "excerpt": "작업 요약: Native Resource Telemetry 완료 Rust/Tauri get desktop resource snapshot command를 추가했다. report는 현재 app process memory, virtual memory, CPU usage, PID, task count, system memory, CPU threads, workspace cache/warmup 상태를 포함한다. MonitorShell source workbench에 앱 RAM/CPU 상태를 추가했다. a",
           "updatedAt": "2026-06-05T18:56:19.552Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-native-window-chrome-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-native-window-chrome.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "네이티브 창 크롬 활용 작업 요약",
+          "excerpt": "네이티브 창 크롬 활용 작업 요약 변경 요약 Tauri main window에 native transparent titlebar, hidden title, dark launch background를 추가했다. Tauri capability에 native window dragging permission을 명시했다. Workspace Monitor titlebar에 data tauri drag region=\"deep\" 을 적용하고 버튼/검색/컨텍스트 strip은 false 및 no drag 로 분리했",
+          "updatedAt": "2026-06-05T20:56:57.048Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18751,16 +18751,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-monitor-shell-root-boundary-json",
-          "path": "_history/work-timings/2026/2026-06-06-monitor-shell-root-boundary.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Monitor Shell Root Boundary",
-          "excerpt": "{ \"task id\": \"2026 06 06 monitor shell root boundary\", \"title\": \"MonitorShell root boundary review\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seconds\": 180,",
-          "updatedAt": "2026-06-05T17:55:21.496Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-native-resource-telemetry-json",
           "path": "_history/work-timings/2026/2026-06-06-native-resource-telemetry.json",
           "category": "work-timing",
@@ -18768,6 +18758,16 @@
           "title": "2026 06 06 Native Resource Telemetry",
           "excerpt": "{ \"id\": \"2026 06 06 native resource telemetry\", \"date\": \"2026 06 06\", \"status\": \"recorded\", \"timings\": { \"phase\": \"web first intake\", \"duration minutes\": 2 }, { \"phase\": \"implementation\", \"duration minutes\": 18 }, { \"phase\": \"quick verification\", \"duration minutes\": 4 }, { \"phase",
           "updatedAt": "2026-06-05T18:56:19.554Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-06-native-window-chrome-json",
+          "path": "_history/work-timings/2026/2026-06-06-native-window-chrome.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Native Window Chrome",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"work item\": \"native window chrome\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first research\", \"started at\": \"2026 06 06T05:40:00+09:00\", \"ended at\": \"2026 06 06T05:50:00+09:00\", \"notes\": \"Checked official Tauri config, window customization, cor",
+          "updatedAt": "2026-06-05T20:56:57.047Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18849,36 +18849,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2442,
+      "documents": 2449,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 981
+          "count": 982
         },
         {
           "category": "web-search",
-          "count": 389
+          "count": 390
         },
         {
           "category": "plan",
-          "count": 336
+          "count": 337
         },
         {
           "category": "request-trace",
-          "count": 317
+          "count": 318
         },
         {
           "category": "work-timing",
-          "count": 239
+          "count": 240
         },
         {
           "category": "user-request",
-          "count": 102
+          "count": 103
         },
         {
           "category": "work-summary",
-          "count": 69
+          "count": 70
         },
         {
           "category": "daily-history",
@@ -18889,7 +18889,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6313996,
+      "totalSourceBytes": 6321859,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -18916,9 +18916,9 @@
       "monitorEvents": 64,
       "evidenceEvents": 39,
       "decisionEvents": 0,
-      "openSignals": 22,
+      "openSignals": 23,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T20:44:11.178Z",
+      "latestEventAt": "2026-06-05T20:56:57.049Z",
       "historyDays": 1
     },
     "lanes": [
@@ -18930,7 +18930,7 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 27
+        "count": 26
       },
       {
         "id": "delivery",
@@ -18938,14 +18938,14 @@
         "count": 13
       },
       {
-        "id": "intake",
-        "label": "intake",
+        "id": "evidence",
+        "label": "evidence",
         "count": 13
       },
       {
-        "id": "evidence",
-        "label": "evidence",
-        "count": 12
+        "id": "intake",
+        "label": "intake",
+        "count": 13
       },
       {
         "id": "monitoring",
@@ -18977,7 +18977,7 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 27
+        "count": 26
       },
       {
         "id": "intake",
@@ -18990,6 +18990,11 @@
         "count": 13
       },
       {
+        "id": "web-search",
+        "label": "web search",
+        "count": 13
+      },
+      {
         "id": "timing",
         "label": "timing",
         "count": 12
@@ -18997,11 +19002,6 @@
       {
         "id": "trace",
         "label": "trace",
-        "count": 12
-      },
-      {
-        "id": "web-search",
-        "label": "web search",
         "count": 12
       },
       {
@@ -19028,6 +19028,126 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-2026-2026-06-06-md",
+        "sourceType": "history",
+        "signalType": "history",
+        "lane": "history",
+        "severity": "info",
+        "status": "daily-history",
+        "title": "2026 06 06",
+        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
+        "path": "_history/2026/2026-06-06.md",
+        "category": "daily-history",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:56:57.049Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-native-window-chrome-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "evaluation",
+        "title": "2026 06 06 Native Window Chrome",
+        "detail": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 native window chrome.json\" , \"omission check targets\": \" history/omission checks/2026/2026 ",
+        "path": "_history/evaluations/2026/2026-06-06-native-window-chrome.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:56:57.048Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-native-window-chrome-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "요청 결과 추적: 네이티브 창 크롬 활용",
+        "detail": "요청 결과 추적: 네이티브 창 크롬 활용 요청 사용자 요청: 네이티브 방식 활용 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 native window chrome.ko.md 스펙: platform desktop app/specs/2026 06 06 native window chrome/spec.ko.md 계획: platform desktop app/specs/2026 06 06 native window chrome/plan.ko.md ",
+        "path": "_history/request-traces/2026/2026-06-06-native-window-chrome.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:56:57.048Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-native-window-chrome-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "네이티브 창 크롬 활용 작업 요약",
+        "detail": "네이티브 창 크롬 활용 작업 요약 변경 요약 Tauri main window에 native transparent titlebar, hidden title, dark launch background를 추가했다. Tauri capability에 native window dragging permission을 명시했다. Workspace Monitor titlebar에 data tauri drag region=\"deep\" 을 적용하고 버튼/검색/컨텍스트 strip은 false 및 no drag 로 분리했",
+        "path": "_history/work-summaries/2026/2026-06-06-native-window-chrome.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:56:57.048Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-native-window-chrome-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Native Window Chrome",
+        "detail": "{ \"date\": \"2026 06 06\", \"work item\": \"native window chrome\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first research\", \"started at\": \"2026 06 06T05:40:00+09:00\", \"ended at\": \"2026 06 06T05:50:00+09:00\", \"notes\": \"Checked official Tauri config, window customization, cor",
+        "path": "_history/work-timings/2026/2026-06-06-native-window-chrome.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:56:57.047Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-native-window-chrome-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "2026 06 06 네이티브 창 크롬 활용 계획",
+        "detail": "2026 06 06 네이티브 창 크롬 활용 계획 목적 사용자의 “네이티브 방식 활용” 지시를 Tauri desktop runtime에서 즉시 검증 가능한 native window chrome 개선으로 구현한다. 범위 main window native titlebar config native drag region and no drag control separation readiness/test gates browser DOM/CSS verification internal package build 제",
+        "path": "_history/plans/2026/2026-06-06-native-window-chrome.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:53:15.065Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-native-window-chrome-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: 네이티브 방식 활용",
+        "detail": "사용자 요청 요약: 네이티브 방식 활용 요약 사용자는 현재 플랫폼 데스크톱 앱이 웹 렌더링 수준에 머물지 말고 네이티브 데스크톱 방식을 활용하라고 지시했다. 해석 이번 구현 slice에서는 창 자체의 native chrome과 drag region을 우선 적용한다. 이미 Rust resource warmup, PTY, native git, OS telemetry가 존재하므로 이번 변경은 창/크롬 레벨의 네이티브 통합을 보강한다. 결과 대상 platform desktop app/src tauri/t",
+        "path": "_history/user-requests/2026/2026-06-06-native-window-chrome.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:53:15.065Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-native-window-chrome-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "2026 06 06 네이티브 창 크롬 활용 웹 검색",
+        "detail": "2026 06 06 네이티브 창 크롬 활용 웹 검색 질의 Tauri v2 native window APIs theme color titlebar macOS official docs Tauri v2 commands invoke Rust native desktop app state official docs Apple Human Interface Guidelines macOS materials controls toolbar sidebar official Tauri v2 window effects vib",
+        "path": "_history/web-searches/2026/2026-06-06-native-window-chrome.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T20:53:15.064Z"
+      },
       {
         "id": "history-history-work-summaries-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
         "sourceType": "history",
@@ -19087,21 +19207,6 @@
         "language": "unknown",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T20:44:06.524Z"
-      },
-      {
-        "id": "history-history-2026-2026-06-06-md",
-        "sourceType": "history",
-        "signalType": "history",
-        "lane": "history",
-        "severity": "info",
-        "status": "daily-history",
-        "title": "2026 06 06",
-        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. Monitor 성능 가드레일 완성 사용자의 탭 이동 지연 재지적에",
-        "path": "_history/2026/2026-06-06.md",
-        "category": "daily-history",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T20:42:41.069Z"
       },
       {
         "id": "history-history-plans-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
@@ -20334,21 +20439,6 @@
         "timestamp": "2026-06-05T18:29:48.842Z"
       },
       {
-        "id": "history-history-work-timings-2026-2026-06-06-monitor-shell-root-boundary-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 Monitor Shell Root Boundary",
-        "detail": "{ \"task id\": \"2026 06 06 monitor shell root boundary\", \"title\": \"MonitorShell root boundary review\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seconds\": 180,",
-        "path": "_history/work-timings/2026/2026-06-06-monitor-shell-root-boundary.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:55:21.496Z"
-      },
-      {
         "id": "history-history-evaluations-2026-2026-06-06-monitor-shell-root-boundary-evaluation-input-json",
         "sourceType": "history",
         "signalType": "evaluation",
@@ -20377,96 +20467,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T17:55:21.496Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-monitor-shell-root-boundary-omission-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Monitor Shell Root Boundary Omission",
-        "detail": "{ \"task\": \"Review root performance architecture and split the first MonitorShell code boundary.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"root review\", \"description\": \"Look beyond local tab tuning and identify the root structural performance issue.\", \"source\": \"u",
-        "path": "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary-omission.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:55:21.495Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-monitor-shell-root-boundary-resource-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Monitor Shell Root Boundary Resource",
-        "detail": "{ \"task\": \"Review root performance architecture and split the first MonitorShell code boundary.\", \"work mode\": \"standard\", \"runtime context\": \"React renderer\", \"Next.js dynamic import chunks\", \"Playwright Chromium\", \"Python static server\", \"Tauri/Rust build\", \"renderer memory cac",
-        "path": "_history/evaluations/2026/2026-06-06-monitor-shell-root-boundary-resource.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:55:21.495Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "ready",
-        "title": "요청 결과 추적: MonitorShell 근본 boundary 재검토",
-        "detail": "요청 결과 추적: MonitorShell 근본 boundary 재검토 요청 사용자는 “너의 근본적인 부분부터 다시 살펴봐”라고 요청했다. 결과 근본 병목을 MonitorShell monolith와 탭별 code boundary 부족으로 분류했다. Tool Studio를 static runtime import에서 dynamic boundary로 분리했다. idle prewarm으로 Tool Studio module preload를 연결했다. 전체 build/package 검증을 완료했다. 연결 파일",
-        "path": "_history/request-traces/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:55:21.495Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "작업 계획: MonitorShell 근본 boundary 재검토",
-        "detail": "작업 계획: MonitorShell 근본 boundary 재검토 분류 소유 프로젝트: platform desktop app 작업 모드: standard view mode: superadmin developer install mode: developer 냉정한 평가 현재 Workspace Monitor는 탭이 여러 개지만 renderer code boundary는 거의 하나다. MonitorShell.tsx 가 14k line을 넘고, 많은 탭의 JSX/state/effects가 같은 client ",
-        "path": "_history/plans/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:55:21.494Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-monitor-shell-root-boundary-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "작업 요약: MonitorShell 근본 boundary 재검토",
-        "detail": "작업 요약: MonitorShell 근본 boundary 재검토 완료 내용 MonitorShell.tsx 가 14,191줄이며 탭별 runtime/code boundary가 부족하다는 구조 병목을 확인했다. ToolStudioPanel.tsx 의 props type을 export했다. MonitorShell.tsx 에서 ToolStudioPanel runtime static import를 제거하고 next/dynamic top level boundary로 전환했다. preloadToolStudio",
-        "path": "_history/work-summaries/2026/2026-06-06-monitor-shell-root-boundary.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:55:21.494Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-root-review-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: 근본부터 재검토",
-        "detail": "사용자 요청 요약: 근본부터 재검토 원 요청 사용자는 이전 속도 최적화 이후에도 “너의 근본적인 부분부터 다시 살펴봐”라고 요청했다. 해석 국소 탭 prewarm이나 버튼 조정만 반복하지 말고, 데스크톱 앱의 renderer/runtime 구조 자체를 재검토한다. 성능 병목이 React tree, JS bundle 평가, 데이터 payload, native runtime 중 어디에 남아 있는지 냉정하게 본다. 바로 검증 가능한 구조 개선을 구현하고, 빌드/패키징까지 자동으로 실행한다. 이번 수용 ",
-        "path": "_history/user-requests/2026/2026-06-06-root-review.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T17:55:21.492Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -22698,9 +22698,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 46062,
-      "lineCount": 1166,
-      "updatedAt": "2026-06-05T20:37:10.631Z",
+      "sizeBytes": 46577,
+      "lineCount": 1174,
+      "updatedAt": "2026-06-05T20:51:03.901Z",
       "truncated": true,
       "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { execFileSync } from \"node:child_process\";\n\nimport {\n  checkDesktopBuildPipeline,\n  desktopBuildPipelineRequiredFiles\n} from \"./readiness/desktop-build-pipeline.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nconst requiredFiles = [\n  \"README.md\",\n  \"README.ko.md\",\n  \"README.en.md\",\n  \"package.json\",\n  \"configs/desktop-distribution-registry.json\",\n  \"configs/product-feature-registry.json\",\n  \"configs/product-gap-registry.json\",\n  \"configs/claude-code-design-transfer-registry.json\",\n  \"configs/reference-platform-advantage-registry.json\",\n  \"configs/runtime-data-boundary-registry.json\",\n  \"configs/service-readiness-registry.json\",\n  \"configs/macos-execution-profile.json\",\n  \"configs/windows-execution-profile.json\",\n  \"configs/user-flow-registry.json\",\n  \"runtime-contracts/installer-shell-runtime-contract.json\",\n  \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n  \"runtime-contracts/installer-shell-bootstrap.en.md\",\n  \"renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx\",\n  \"renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx\",\n  \"rend",
       "previewBytes": 1200
@@ -22906,12 +22906,12 @@
       "project": "platform-desktop-app",
       "language": "json",
       "extension": "json",
-      "sizeBytes": 425,
-      "lineCount": 13,
-      "updatedAt": "2026-06-03T08:10:13.990Z",
+      "sizeBytes": 465,
+      "lineCount": 14,
+      "updatedAt": "2026-06-05T20:50:34.318Z",
       "truncated": false,
-      "preview": "{\n  \"$schema\": \"../gen/schemas/desktop-schema.json\",\n  \"identifier\": \"default\",\n  \"description\": \"Default desktop shell capability. Product work is routed through allowlisted Tauri commands and the bundled installer shell runtime contract; plugin shell sidecars remain excluded until a separate scoped capability is approved.\",\n  \"windows\": [\n    \"main\"\n  ],\n  \"permissions\": [\n    \"core:default\",\n    \"dialog:default\"\n  ]\n}\n",
-      "previewBytes": 425
+      "preview": "{\n  \"$schema\": \"../gen/schemas/desktop-schema.json\",\n  \"identifier\": \"default\",\n  \"description\": \"Default desktop shell capability. Product work is routed through allowlisted Tauri commands and the bundled installer shell runtime contract; plugin shell sidecars remain excluded until a separate scoped capability is approved.\",\n  \"windows\": [\n    \"main\"\n  ],\n  \"permissions\": [\n    \"core:default\",\n    \"core:window:allow-start-dragging\",\n    \"dialog:default\"\n  ]\n}\n",
+      "previewBytes": 465
     },
     {
       "id": "platform-desktop-app-src-tauri-cargo-toml",
@@ -22945,11 +22945,11 @@
       "project": "platform-desktop-app",
       "language": "json",
       "extension": "json",
-      "sizeBytes": 1900,
-      "lineCount": 63,
-      "updatedAt": "2026-06-05T19:47:16.485Z",
+      "sizeBytes": 2007,
+      "lineCount": 66,
+      "updatedAt": "2026-06-05T20:50:34.317Z",
       "truncated": true,
-      "preview": "{\n  \"$schema\": \"https://schema.tauri.app/config/2\",\n  \"productName\": \"Agent Workspace Platform\",\n  \"version\": \"0.1.0\",\n  \"identifier\": \"com.personalagentplatform.desktop\",\n  \"build\": {\n    \"beforeBuildCommand\": \"corepack pnpm run renderer:build\",\n    \"beforeDevCommand\": \"corepack pnpm --dir ../renderer/workspace-monitor run dev\",\n    \"devUrl\": \"http://localhost:3000\",\n    \"frontendDist\": \"../renderer/workspace-monitor/out\"\n  },\n  \"app\": {\n    \"withGlobalTauri\": true,\n    \"windows\": [\n      {\n        \"label\": \"main\",\n        \"title\": \"Agent Workspace Platform\",\n        \"width\": 1440,\n        \"height\": 900,\n        \"minWidth\": 1280,\n        \"minHeight\": 800,\n        \"resizable\": true,\n        \"fullscreen\": false\n      }\n    ],\n    \"security\": {\n      \"csp\": null\n    }\n  },\n  \"bundle\": {\n    \"active\": true,\n    \"targets\": [\n      \"app\",\n      \"dmg\",\n      \"msi\",\n      \"nsis\"\n    ],\n    \"resources\": {\n      \"../runtime-contracts/installer-shell-runtime-contract.json\": \"runtime-contracts/installer-shell-runtime-contract.json\",\n      \"../runtime-contracts/installer-shell-bootstrap.ko.md\": \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n      \"../runtime-contracts/installer-shell-boo",
+      "preview": "{\n  \"$schema\": \"https://schema.tauri.app/config/2\",\n  \"productName\": \"Agent Workspace Platform\",\n  \"version\": \"0.1.0\",\n  \"identifier\": \"com.personalagentplatform.desktop\",\n  \"build\": {\n    \"beforeBuildCommand\": \"corepack pnpm run renderer:build\",\n    \"beforeDevCommand\": \"corepack pnpm --dir ../renderer/workspace-monitor run dev\",\n    \"devUrl\": \"http://localhost:3000\",\n    \"frontendDist\": \"../renderer/workspace-monitor/out\"\n  },\n  \"app\": {\n    \"withGlobalTauri\": true,\n    \"windows\": [\n      {\n        \"label\": \"main\",\n        \"title\": \"Agent Workspace Platform\",\n        \"width\": 1440,\n        \"height\": 900,\n        \"minWidth\": 1280,\n        \"minHeight\": 800,\n        \"hiddenTitle\": true,\n        \"titleBarStyle\": \"Transparent\",\n        \"backgroundColor\": \"#0f1115\",\n        \"resizable\": true,\n        \"fullscreen\": false\n      }\n    ],\n    \"security\": {\n      \"csp\": null\n    }\n  },\n  \"bundle\": {\n    \"active\": true,\n    \"targets\": [\n      \"app\",\n      \"dmg\",\n      \"msi\",\n      \"nsis\"\n    ],\n    \"resources\": {\n      \"../runtime-contracts/installer-shell-runtime-contract.json\": \"runtime-contracts/installer-shell-runtime-contract.json\",\n      \"../runtime-contracts/installer-shell-bootstrap.k",
       "previewBytes": 1200
     },
     {
@@ -22984,9 +22984,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 50997,
-      "lineCount": 1149,
-      "updatedAt": "2026-06-05T20:37:13.809Z",
+      "sizeBytes": 51505,
+      "lineCount": 1158,
+      "updatedAt": "2026-06-05T20:51:03.900Z",
       "truncated": true,
       "preview": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/paths.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/definitions.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/runner.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts",
       "previewBytes": 1200
@@ -23464,7 +23464,7 @@
       {
         "category": "web-search",
         "root": "_history/web-searches",
-        "documentsCount": 12
+        "documentsCount": 13
       },
       {
         "category": "work-timing",
@@ -23479,7 +23479,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 27
+        "documentsCount": 26
       },
       {
         "category": "daily-history",
@@ -23573,7 +23573,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 71,
+        "documentCount": 72,
         "sourceFileCount": 5
       },
       {
@@ -23714,7 +23714,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-scripts-check-readiness-mjs",
         "label": "Large source surface",
-        "signal": "1,166 lines in platform-desktop-app/scripts/check-readiness.mjs",
+        "signal": "1,174 lines in platform-desktop-app/scripts/check-readiness.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23723,7 +23723,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,149 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,158 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23761,16 +23761,16 @@
         "path": "platform-desktop-app/scripts/check-readiness.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1166,
-        "sizeBytes": 46062,
+        "lineCount": 1174,
+        "sizeBytes": 46577,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1149,
-        "sizeBytes": 50997,
+        "lineCount": 1158,
+        "sizeBytes": 51505,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       }
     ]

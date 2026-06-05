@@ -1,0 +1,84 @@
+{
+  "date": "2026-06-06",
+  "topic": "Tauri native window chrome and drag region integration",
+  "reference_config_paths": [
+    "agent-platform/configs/research/research-agent-profile.json",
+    "agent-platform/configs/workflows/work-mode-registry.json",
+    "platform-desktop-app/configs/macos-execution-profile.json"
+  ],
+  "technology_stack": [
+    "Tauri 2.11.2 from Cargo.lock",
+    "Next.js workspace-monitor renderer",
+    "React",
+    "CSS app-region and custom properties"
+  ],
+  "technology_official_docs": [
+    "https://v2.tauri.app/reference/config/",
+    "https://v2.tauri.app/learn/window-customization/",
+    "https://v2.tauri.app/reference/acl/core-permissions/",
+    "https://v2.tauri.app/release/tauri/v2.11.0/",
+    "https://developer.apple.com/design/human-interface-guidelines"
+  ],
+  "stack_version_constraints": [
+    "Cargo.lock resolves tauri to 2.11.2, which is compatible with data-tauri-drag-region deep/false support added in Tauri 2.11.0.",
+    "Keep the existing Tauri-first runtime and Next static renderer architecture.",
+    "Do not add AppKit/vibrancy dependencies in this slice."
+  ],
+  "source_types": [
+    "official_framework_docs",
+    "official_release_notes",
+    "platform_guidelines",
+    "local_source_code",
+    "local_tests"
+  ],
+  "issue_discussion_sources": [
+    "https://github.com/tauri-apps/tauri/issues/4316",
+    "https://github.com/tauri-apps/tauri/pull/15062"
+  ],
+  "issue_discussion_notes": "Tauri docs mention a focus limitation for custom drag regions, and the 2.11.0 release note links the PR that added deep/false drag-region behavior. These are treated as implementation caveats, not user-visible guarantees.",
+  "community_signal_notes": "No community anecdote was used as proof. Non-official search results were ignored after official Tauri documentation covered the needed API behavior.",
+  "language_options": [
+    "Tauri JSON config plus React/CSS drag region attributes",
+    "Rust-created custom window with platform-specific AppKit background handling",
+    "JavaScript startDragging event handlers",
+    "Electron-style custom frame rewrite"
+  ],
+  "selected_language": "Tauri JSON config plus React/CSS drag region attributes",
+  "language_decision_notes": "This option uses the current Tauri runtime, has the smallest blast radius, preserves native window controls, and can be verified by existing package/build gates. Rust/AppKit would be useful for a future vibrancy slice but adds platform-specific dependencies.",
+  "architecture_reference_sources": [
+    "Tauri configuration reference",
+    "Tauri window customization guide",
+    "Tauri core permission reference",
+    "Apple Human Interface Guidelines"
+  ],
+  "architecture_options": [
+    "Native transparent titlebar with renderer drag/no-drag regions",
+    "Full frameless custom titlebar with manual minimize/maximize/close controls",
+    "Rust-built macOS window with AppKit background/material customization"
+  ],
+  "architecture_decision_notes": "Selected native transparent titlebar because it keeps OS window controls and improves desktop integration while avoiding manual reimplementation of window controls. Full frameless chrome is higher risk for accessibility and platform parity.",
+  "architecture_theory_sources": [
+    "Apple Human Interface Guidelines"
+  ],
+  "architecture_practitioner_sources": [
+    "Tauri official config and window customization documentation"
+  ],
+  "architecture_tradeoff_notes": "Native window controls reduce custom interaction debt. Renderer drag/no-drag regions are still necessary because the app has a dense web-rendered titlebar with buttons and search input.",
+  "code_reference_sources": [
+    "platform-desktop-app/src-tauri/tauri.conf.json",
+    "platform-desktop-app/src-tauri/capabilities/default.json",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/scripts/check-readiness.mjs"
+  ],
+  "code_reference_notes": "Existing project pattern keeps Tauri runtime contracts in tauri.conf/capabilities and enforces them with readiness checks, so this change extends those gates instead of adding a new validator.",
+  "folder_structure_options": [
+    "Keep changes in existing Tauri config, renderer shell, tests, and platform spec folder",
+    "Create a new native-window module",
+    "Move all desktop chrome settings into a shared registry"
+  ],
+  "folder_structure_decision_notes": "Kept the slice in existing files because the change is a runtime configuration and top-level shell behavior, not a new domain module.",
+  "folder_semantics_notes": "Requirements and specs are project-specific under platform-desktop-app because the work affects the installable desktop product.",
+  "maintainability_notes": "Readiness checks make the native chrome contract explicit. Future native features such as vibrancy, global shortcuts, tray, and file associations should land as separate slices with their own OS-specific validation."
+}

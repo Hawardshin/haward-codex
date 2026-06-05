@@ -1,0 +1,38 @@
+{
+  "date": "2026-06-06",
+  "request": "Use native desktop app behavior",
+  "coverage_checklist": [
+    {
+      "item": "web_first_intake",
+      "status": "done",
+      "evidence": "_history/web-searches/2026/2026-06-06-native-window-chrome.ko.md"
+    },
+    {
+      "item": "native_runtime_config",
+      "status": "done",
+      "evidence": "platform-desktop-app/src-tauri/tauri.conf.json"
+    },
+    {
+      "item": "native_drag_permission",
+      "status": "done",
+      "evidence": "platform-desktop-app/src-tauri/capabilities/default.json"
+    },
+    {
+      "item": "renderer_drag_no_drag_contract",
+      "status": "done",
+      "evidence": "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+    },
+    {
+      "item": "tests_and_readiness",
+      "status": "done",
+      "evidence": "platform-desktop-app/tests/readiness.test.mjs"
+    },
+    {
+      "item": "build_after_implementation",
+      "status": "done",
+      "evidence": "platform-desktop-app/specs/2026-06-06-native-window-chrome/validation.ko.md"
+    }
+  ],
+  "blocked_items": [],
+  "notes": "A deeper native feature wave remains possible, but this slice directly addresses the window-level native behavior without waiting on broader runtime redesign."
+}

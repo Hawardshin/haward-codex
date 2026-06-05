@@ -138,7 +138,7 @@ test("Monitor groups repeated actions with shared action primitives", () => {
   assert.match(actionGroupComponent, /density:\s*\{[\s\S]*?compact:[\s\S]*?spacious:/);
   assert.match(actionGroupComponent, /role=\{role \|\| \(asToolbar \? "toolbar" : "group"\)\}/);
   assert.match(monitorShell, /import \{ ActionGroup \} from "@\/components\/ui\/ActionGroup"/);
-  assert.match(monitorShell, /<ActionGroup className="titlebar-actions"[\s\S]*?density="compact">/);
+  assert.match(monitorShell, /<ActionGroup className="titlebar-actions"[\s\S]*?density="compact"[\s\S]*?>/);
   assert.match(monitorShell, /<ActionGroup className="task-handoff-actions"[\s\S]*?align="end" density="compact">/);
   assert.match(monitorShell, /<Button variant="secondary" size="sm" onClick=\{\(\) => setCommandPaletteOpen\(false\)\}>/);
   assert.match(monitorShell, /<Button key=\{item\.id\} variant="ghost" className="command-palette-result" onClick=\{\(\) => runCommandItem\(item\)\}>/);
@@ -234,6 +234,15 @@ test("Workspace monitor encodes theory-backed desktop visual hierarchy tokens", 
   assert.match(css, /\.settings-tab-list button:hover:not\(:disabled\):not\(\.active\) \{[\s\S]*?background: var\(--state-hover-surface\);/);
   assert.match(css, /\.task-flow-rail button:hover:not\(:disabled\) \{[\s\S]*?border-color: var\(--state-hover-border\);/);
   assert.match(css, /@media \(hover: hover\) \{[\s\S]*?\.desktop-app-root button:not\(:disabled\):hover \{[\s\S]*?border-color: var\(--state-hover-border\);/);
+});
+
+test("Desktop titlebar uses native Tauri drag regions without stealing controls", () => {
+  assert.match(monitorShell, /<header className="desktop-titlebar" data-tauri-drag-region="deep">/);
+  assert.match(monitorShell, /className="titlebar-section" data-tauri-drag-region="deep"/);
+  assert.match(monitorShell, /<ActionGroup className="titlebar-actions"[\s\S]*?data-tauri-drag-region="false"/);
+  assert.match(monitorShell, /className="titlebar-search" data-tauri-drag-region="false"/);
+  assert.match(css, /\.desktop-titlebar \{[\s\S]*?-webkit-app-region: drag;/);
+  assert.match(css, /\.titlebar-actions,[\s\S]*?\.titlebar-search,[\s\S]*?-webkit-app-region: no-drag;/);
 });
 
 test("Workspace monitor replaces native select dropdowns with styled app choices", () => {

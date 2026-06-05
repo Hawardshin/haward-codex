@@ -5454,16 +5454,16 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           aria-label={uiLanguage === "ko" ? "데스크톱 앱 작업 화면" : "Desktop app viewport"}
           tabIndex={0}
         >
-          <header className="desktop-titlebar">
-            <div className="titlebar-section">
+          <header className="desktop-titlebar" data-tauri-drag-region="deep">
+            <div className="titlebar-section" data-tauri-drag-region="deep">
               {currentSection ? <currentSection.icon size={18} aria-hidden="true" /> : <LayoutDashboard size={18} aria-hidden="true" />}
-              <div>
-                <span>{currentViewMode.label}</span>
-                <strong ref={titlebarSectionLabelRef}>{currentSectionLabel}</strong>
+              <div data-tauri-drag-region="deep">
+                <span data-tauri-drag-region="deep">{currentViewMode.label}</span>
+                <strong ref={titlebarSectionLabelRef} data-tauri-drag-region="deep">{currentSectionLabel}</strong>
               </div>
             </div>
             {!isPrimaryWorkSurface && section !== "overview" && (
-              <div className={`titlebar-context-strip status-${attentionState.tone}`}>
+              <div className={`titlebar-context-strip status-${attentionState.tone}`} data-tauri-drag-region="false">
                 <span>
                   <strong>{currentFeatureGroup?.label || (uiLanguage === "ko" ? "작업" : "Work")}</strong>
                   <small>{currentSection?.purpose || (uiLanguage === "ko" ? "선택한 화면의 역할을 보여줍니다." : "Shows the role of the selected surface.")}</small>
@@ -5474,13 +5474,13 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                 </Button>
               </div>
             )}
-            <ActionGroup className="titlebar-actions" aria-label={uiLanguage === "ko" ? "상단 액션" : "Titlebar actions"} density="compact">
+            <ActionGroup className="titlebar-actions" aria-label={uiLanguage === "ko" ? "상단 액션" : "Titlebar actions"} density="compact" data-tauri-drag-region="false">
               <Button variant="secondary" onClick={openTerminalDrawer} title={uiLanguage === "ko" ? "하단 터미널 열기" : "Open bottom terminal"}>
                 <SquareTerminal size={15} aria-hidden="true" />
                 <span>{uiLanguage === "ko" ? "터미널" : "Terminal"}</span>
               </Button>
               {!isPrimaryWorkSurface && section !== "overview" && (
-                <label className="titlebar-search">
+                <label className="titlebar-search" data-tauri-drag-region="false">
                   <Search size={15} aria-hidden="true" />
                   <input
                     value={query}

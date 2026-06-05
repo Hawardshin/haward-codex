@@ -38,6 +38,12 @@ test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(config.bundle.macOS.entitlements, "Entitlements.plist");
   assert.equal(existsSync(join(root, "src-tauri/Entitlements.plist")), true);
   assert.equal(config.bundle.resources["../runtime-contracts/installer-shell-runtime-contract.json"], "runtime-contracts/installer-shell-runtime-contract.json");
+  assert.equal(config.app.windows[0].hiddenTitle, true);
+  assert.equal(config.app.windows[0].titleBarStyle, "Transparent");
+  assert.equal(config.app.windows[0].backgroundColor, "#0f1115");
+
+  const defaultCapability = readJson("src-tauri/capabilities/default.json");
+  assert.ok(defaultCapability.permissions.includes("core:window:allow-start-dragging"));
 });
 
 test("desktop docs expose bilingual one-command build and release paths", () => {
@@ -412,6 +418,7 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   assert.match(cargoToml, /tauri-plugin-dialog/);
   assert.match(cargoToml, /tauri-plugin-updater/);
   assert.match(defaultCapability, /dialog:default/);
+  assert.match(defaultCapability, /core:window:allow-start-dragging/);
   assert.match(lib, /DialogExt/);
   assert.match(lib, /tauri_plugin_dialog::init/);
   assert.match(lib, /tauri_plugin_updater::Builder/);
@@ -1027,6 +1034,8 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "desktop-app-root theme-",
     "desktop-app-shell sidebar-",
     "data-ui-foundation=\"gestalt-hierarchy-density\"",
+    "data-tauri-drag-region=\"deep\"",
+    "data-tauri-drag-region=\"false\"",
     "claudeCodeDesignTransfer",
     "ClaudeCodeTransferPanel",
     "transfer-pattern-grid",

@@ -114,6 +114,9 @@ const mainWindow = tauriConfig.app?.windows?.find((windowConfig) => windowConfig
 if (!mainWindow || mainWindow.width < 1440 || mainWindow.height < 900 || mainWindow.minWidth < 1280 || mainWindow.minHeight < 800) {
   failures.push("Tauri main window must use desktop-only dimensions: width>=1440, height>=900, minWidth>=1280, minHeight>=800");
 }
+if (mainWindow?.hiddenTitle !== true || mainWindow?.titleBarStyle !== "Transparent" || mainWindow?.backgroundColor !== "#0f1115") {
+  failures.push("Tauri main window must use native transparent titlebar chrome with a dark launch background");
+}
 if (!tauriConfig.bundle?.targets?.includes("dmg") || !tauriConfig.bundle?.targets?.includes("nsis")) {
   failures.push("Tauri bundle targets must include macOS and Windows installer candidates");
 }
@@ -196,6 +199,9 @@ if (!tauriCargo.includes("tauri-plugin-updater")) {
 }
 if (!tauriDefaultCapability.includes("dialog:default")) {
   failures.push("src-tauri/capabilities/default.json must allow dialog:default for native folder selection");
+}
+if (!tauriDefaultCapability.includes("core:window:allow-start-dragging")) {
+  failures.push("src-tauri/capabilities/default.json must allow native window dragging from the desktop titlebar");
 }
 for (const requiredPhrase of ["DialogExt", "tauri_plugin_dialog::init", "blocking_pick_folder"]) {
   if (!tauriLib.includes(requiredPhrase)) {
@@ -1028,6 +1034,8 @@ for (const requiredPhrase of [
   "desktop-app-root theme-",
   "desktop-app-shell sidebar-",
   "data-ui-foundation=\"gestalt-hierarchy-density\"",
+  "data-tauri-drag-region=\"deep\"",
+  "data-tauri-drag-region=\"false\"",
   "ClaudeCodeTransferPanel",
   "claudeCodeDesignTransfer",
   "Claude Code Design Transfer",
