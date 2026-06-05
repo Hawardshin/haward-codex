@@ -172,6 +172,29 @@ test("Runtime text defaults expose selectable choices", () => {
   assert.match(css, /\.task-pipe-controls \.task-prompt-choice-field/);
 });
 
+test("Desktop Runtime exposes an open-source-informed Agent CLI cockpit", () => {
+  assert.match(monitorShell, /data-agent-cli-cockpit="open-source-control-plane"/);
+  assert.match(monitorShell, /Agent CLI Cockpit/);
+  assert.match(monitorShell, /openSourceControlPlanePatterns/);
+  assert.match(monitorShell, /CAO/);
+  assert.match(monitorShell, /Agentify/);
+  assert.match(monitorShell, /ClawX \/ OpenLoaf/);
+  assert.match(monitorShell, /agentCliCockpitRows = adapters\.map/);
+  assert.match(monitorShell, /providerAuthStatusForAdapter\(adapter\.adapterId, providerCredentialReport, uiLanguage\)/);
+  assert.match(monitorShell, /startAdapterFromCockpit/);
+  assert.match(monitorShell, /agent-cli-cockpit-tally/);
+  assert.match(monitorShell, /agent-cli-cockpit-grid/);
+  assert.match(monitorShell, /agent-cli-cockpit-signals/);
+  assert.match(monitorShell, /row\.activeAdapterSessions\.length/);
+  assert.match(monitorShell, /row\.adapterTaskRuns\.length/);
+  assert.match(monitorShell, /row\.adapterDecisionItems/);
+  assert.match(css, /\.agent-cli-cockpit \{/);
+  assert.match(css, /\.agent-cli-pattern-strip \{/);
+  assert.match(css, /\.agent-cli-cockpit-grid \{/);
+  assert.match(css, /\.agent-cli-cockpit-card\.selected/);
+  assert.match(css, /\.agent-cli-cockpit-actions button:disabled/);
+});
+
 test("Search agent provider and model settings use explicit choices", () => {
   assert.match(monitorShell, /const modelChoiceOptions = useMemo/);
   assert.match(monitorShell, /agent-provider-choice-grid/);

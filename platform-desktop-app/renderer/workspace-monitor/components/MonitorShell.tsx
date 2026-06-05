@@ -11329,6 +11329,84 @@ function DesktopRuntimePanel({
     { label: "Inbox", value: `${openInboxDecisions.length}` },
     { label: "Terminal", value: terminalDrawerOpen ? "open" : "docked" }
   ];
+  const cockpitStats = {
+    adapters: adapters.length,
+    available: availableCount,
+    activeSessions: sessionStats.active,
+    decisionItems: openInboxDecisions.length + pendingQuestionCount,
+    taskRuns: taskRunRecords.length
+  };
+  const openSourceControlPlanePatterns = [
+    {
+      id: "cao",
+      label: "CAO",
+      detail: uiLanguage === "ko"
+        ? "격리된 CLI 세션, handoff/assign/send_message, lifecycle 복구"
+        : "isolated CLI sessions, handoff/assign/send_message, lifecycle restore"
+    },
+    {
+      id: "agentify",
+      label: "Agentify",
+      detail: uiLanguage === "ko"
+        ? "로컬 세션, 아티팩트, 탭 상태를 제품 상태로 관리"
+        : "local sessions, artifacts, and tab state as product-owned state"
+    },
+    {
+      id: "clawx-openloaf",
+      label: "ClawX / OpenLoaf",
+      detail: uiLanguage === "ko"
+        ? "프로젝트/에이전트별 작업공간, provider, skill, terminal을 한 워크벤치로 묶음"
+        : "project/agent workspace, providers, skills, and terminals in one workbench"
+    }
+  ];
+  const agentCliCockpitRows = adapters.map((adapter) => {
+    const guide = adapterSetupGuides[adapter.adapterId];
+    const adapterSessions = sessions.filter((session) => session.adapterId === adapter.adapterId);
+    const activeAdapterSessions = adapterSessions.filter((session) => isActiveSessionStatus(session.status));
+    const adapterTaskRuns = taskRunRecords.filter((record) => record.adapterId === adapter.adapterId);
+    const adapterDecisionItems = adapterSessions.reduce(
+      (total, session) => total + session.decisionInboxItems + session.pendingDecisionPrompts,
+      0
+    );
+    const selected = selectedSessionAdapterId === adapter.adapterId;
+    const authStatus = providerAuthStatusForAdapter(adapter.adapterId, providerCredentialReport, uiLanguage);
+    const statusLabel = adapter.available
+      ? uiLanguage === "ko" ? "설치됨" : "Installed"
+      : uiLanguage === "ko" ? "설치 필요" : "Install needed";
+    const readinessLabel = activeAdapterSessions.length
+      ? uiLanguage === "ko" ? "실행 중" : "Running"
+      : selected
+        ? uiLanguage === "ko" ? "선택됨" : "Selected"
+        : adapter.available
+          ? uiLanguage === "ko" ? "시작 가능" : "Startable"
+          : uiLanguage === "ko" ? "대기" : "Waiting";
+    return {
+      adapter,
+      guide,
+      selected,
+      adapterSessions,
+      activeAdapterSessions,
+      adapterTaskRuns,
+      adapterDecisionItems,
+      authStatus,
+      statusLabel,
+      readinessLabel
+    };
+  });
+  const startAdapterFromCockpit = async (adapterId: string) => {
+    const adapter = adapters.find((item) => item.adapterId === adapterId);
+    setSelectedSessionAdapterId(adapterId);
+    await startSessionFromLaunchRequest({
+      id: `agent-cli-cockpit-${adapterId}-${Date.now()}`,
+      label: adapter?.label || adapterId,
+      adapterId,
+      modeId: selectedSessionModeId,
+      taskKind: "user_task",
+      prompt: sessionPrompt,
+      openTerminal: true,
+      autoStart: true
+    });
+  };
 
   if (isFileWorkspaceSurface && !interactionContentReady) {
     return (
@@ -12003,6 +12081,79 @@ function DesktopRuntimePanel({
           <span>{runtimeState}</span>
           <strong>{availableCount} / {adapters.length}</strong>
             <small>{uiLanguage === "ko" ? "사용 가능한 게스트 어댑터" : "available guest adapters"}</small>
+        </div>
+      </section>
+
+      <section className="panel wide agent-cli-cockpit" data-agent-cli-cockpit="open-source-control-plane">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">{uiLanguage === "ko" ? "오픈소스 패턴 적용" : "Open-source pattern transfer"}</p>
+            <h2>{uiLanguage === "ko" ? "Agent CLI Cockpit" : "Agent CLI Cockpit"}</h2>
+          </div>
+          <div className="agent-cli-cockpit-tally" aria-label={uiLanguage === "ko" ? "CLI cockpit 요약" : "CLI cockpit summary"}>
+            <span>{cockpitStats.available}/{cockpitStats.adapters} CLI</span>
+            <span>{cockpitStats.activeSessions} active</span>
+            <span>{cockpitStats.decisionItems} inbox</span>
+            <span>{cockpitStats.taskRuns} runs</span>
+          </div>
+        </div>
+
+        <div className="agent-cli-pattern-strip" aria-label={uiLanguage === "ko" ? "직접 탐구한 오픈소스 패턴" : "Directly inspected open-source patterns"}>
+          {openSourceControlPlanePatterns.map((pattern) => (
+            <article key={pattern.id}>
+              <span>{pattern.label}</span>
+              <strong>{pattern.detail}</strong>
+            </article>
+          ))}
+        </div>
+
+        <div className="agent-cli-cockpit-grid">
+          {agentCliCockpitRows.map((row) => (
+            <article
+              key={row.adapter.adapterId}
+              className={`agent-cli-cockpit-card ${row.selected ? "selected" : ""} ${row.adapter.available ? "available" : "missing"}`}
+            >
+              <header>
+                <div>
+                  <span>{row.statusLabel}</span>
+                  <strong>{row.adapter.label}</strong>
+                </div>
+                <em>{row.readinessLabel}</em>
+              </header>
+              <div className="agent-cli-cockpit-command">
+                <code>{row.adapter.resolvedPath || row.adapter.command}</code>
+                <small>{row.adapter.version || row.adapter.lastError || row.guide?.verifyCommand || row.adapter.command}</small>
+              </div>
+              <div className="agent-cli-cockpit-signals">
+                <span>{row.authStatus}</span>
+                <span>{row.activeAdapterSessions.length}/{row.adapterSessions.length} sessions</span>
+                <span>{row.adapterTaskRuns.length} task-runs</span>
+                <span>{row.adapterDecisionItems} decisions</span>
+              </div>
+              <div className="agent-cli-cockpit-actions">
+                <button
+                  type="button"
+                  onClick={() => setSelectedSessionAdapterId(row.adapter.adapterId)}
+                  className={row.selected ? "active" : ""}
+                >
+                  <CheckCircle2 size={14} aria-hidden="true" />
+                  <span>{row.selected ? uiLanguage === "ko" ? "선택됨" : "Selected" : uiLanguage === "ko" ? "선택" : "Select"}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => void startAdapterFromCockpit(row.adapter.adapterId)}
+                  disabled={!runtimeReady || runningAdapterId !== "" || !row.adapter.available}
+                >
+                  <PlayCircle size={14} aria-hidden="true" />
+                  <span>{uiLanguage === "ko" ? "시작" : "Start"}</span>
+                </button>
+                <button type="button" onClick={() => onOpenSettings(row.adapter.available ? "session" : "adapter")}>
+                  <Settings size={14} aria-hidden="true" />
+                  <span>{row.adapter.available ? uiLanguage === "ko" ? "모드" : "Mode" : uiLanguage === "ko" ? "설치" : "Install"}</span>
+                </button>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 

@@ -6638,6 +6638,199 @@ h3 {
   background: var(--status-danger-bg);
 }
 
+.agent-cli-cockpit {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 12px;
+}
+
+.agent-cli-cockpit .panel-heading {
+  align-items: start;
+}
+
+.agent-cli-cockpit-tally {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.agent-cli-cockpit-tally span,
+.agent-cli-pattern-strip span,
+.agent-cli-cockpit-card header span,
+.agent-cli-cockpit-signals span {
+  color: var(--muted);
+  font-size: var(--font-size-overline);
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.agent-cli-cockpit-tally span,
+.agent-cli-cockpit-card header em,
+.agent-cli-cockpit-signals span {
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  border-radius: 999px;
+  padding: 4px 8px;
+}
+
+.agent-cli-pattern-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.agent-cli-pattern-strip article {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface-raised) 74%, var(--surface));
+  border-radius: 7px;
+  padding: 10px;
+  box-shadow: var(--surface-shadow-subtle);
+}
+
+.agent-cli-pattern-strip strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--text);
+  font-size: var(--font-size-caption);
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+.agent-cli-cockpit-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(190px, 1fr));
+  gap: 10px;
+}
+
+.agent-cli-cockpit-card {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 9px;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: var(--control-shadow);
+}
+
+.agent-cli-cockpit-card.selected {
+  border-color: var(--action-primary-border);
+  background: color-mix(in srgb, var(--action-primary-bg) 12%, var(--surface-raised));
+}
+
+.agent-cli-cockpit-card.available header em {
+  border-color: var(--status-success-border);
+  background: var(--status-success-bg);
+  color: var(--green);
+}
+
+.agent-cli-cockpit-card.missing header em {
+  border-color: var(--status-warning-border);
+  background: var(--status-warning-bg);
+  color: var(--amber);
+}
+
+.agent-cli-cockpit-card header {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.agent-cli-cockpit-card header div {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.agent-cli-cockpit-card header strong {
+  min-width: 0;
+  color: var(--text);
+  font-size: var(--font-size-body-strong);
+  overflow-wrap: break-word;
+}
+
+.agent-cli-cockpit-card header em {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: var(--font-size-overline);
+  font-style: normal;
+  font-weight: 850;
+}
+
+.agent-cli-cockpit-command {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+  border: 1px solid var(--line);
+  background: var(--code-bg);
+  border-radius: 7px;
+  padding: 8px;
+}
+
+.agent-cli-cockpit-command code,
+.agent-cli-cockpit-command small {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agent-cli-cockpit-command code {
+  color: var(--text);
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+}
+
+.agent-cli-cockpit-command small {
+  color: var(--muted);
+}
+
+.agent-cli-cockpit-signals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-content: start;
+}
+
+.agent-cli-cockpit-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.agent-cli-cockpit-actions button {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: var(--control-compact-target-size);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 6px 7px;
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+  box-shadow: var(--control-shadow);
+}
+
+.agent-cli-cockpit-actions button.active,
+.agent-cli-cockpit-actions button:hover:not(:disabled) {
+  border-color: var(--action-primary-border);
+  background: var(--choice-selected-bg);
+}
+
+.agent-cli-cockpit-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.46;
+}
+
 .intellij-run-workbench-panel {
   grid-column: 1 / -1;
   display: grid;

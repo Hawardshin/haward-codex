@@ -1,0 +1,14 @@
+{
+  "date": "2026-06-06",
+  "request": "open-source deep research and direct exploration, then add a feature",
+  "project": "platform-desktop-app",
+  "work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The task required research, implementation, UI validation, package build, and durable trace records, but did not require broad governance changes.",
+  "artifacts": [
+    "platform-desktop-app/docs/requirements/2026-06-06-agent-cli-cockpit.ko.md",
+    "platform-desktop-app/specs/2026-06-06-agent-cli-cockpit/spec.ko.md",
+    "_research/topics/platform-desktop-app/2026-06-06-agent-cli-cockpit-direct-open-source-exploration.ko.md"
+  ]
+}

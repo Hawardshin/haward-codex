@@ -1,0 +1,32 @@
+{
+  "date": "2026-06-06",
+  "project": "platform-desktop-app",
+  "resource_risk_occurred": true,
+  "resource_context": "Temporary open-source clones, local static preview server, Playwright browser session, and Tauri package build were used.",
+  "checks": [
+    {
+      "resource": "temporary_open_source_clones",
+      "status": "released",
+      "detail": "/tmp/agent-platform-os-research.7q12Y4 was removed after recording source URLs and insights."
+    },
+    {
+      "resource": "local_static_preview_server",
+      "status": "stopped",
+      "detail": "Python http.server on 127.0.0.1:3238 was stopped with Ctrl-C."
+    },
+    {
+      "resource": "playwright_browser",
+      "status": "closed",
+      "detail": "The smoke script closed the browser after screenshot capture."
+    },
+    {
+      "resource": "new_long_running_processes",
+      "status": "none_added",
+      "detail": "The feature reuses existing adapter/session/provider/task-run state and does not add background daemons."
+    }
+  ],
+  "memory_or_disk_notes": [
+    "Temporary clone directory was approximately 319MB before removal.",
+    "Generated app/DMG artifacts remain under platform-desktop-app/src-tauri/target/release/bundle as package outputs."
+  ]
+}

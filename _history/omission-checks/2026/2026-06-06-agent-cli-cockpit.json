@@ -1,0 +1,40 @@
+{
+  "date": "2026-06-06",
+  "project": "platform-desktop-app",
+  "request": "Deep research similar open source projects, directly inspect them, then add features.",
+  "checklist": [
+    {
+      "item": "web_first_intake",
+      "status": "passed",
+      "evidence": "_history/web-searches/2026/2026-06-06-agent-cli-cockpit-open-source-direct-exploration.ko.md"
+    },
+    {
+      "item": "direct_open_source_exploration",
+      "status": "passed",
+      "evidence": "Agentify Desktop, ClawX, CLI Agent Orchestrator, and OpenLoaf were cloned to a temporary directory and inspected."
+    },
+    {
+      "item": "feature_implemented",
+      "status": "passed",
+      "evidence": "Desktop Runtime Agent CLI Cockpit added in MonitorShell and CSS."
+    },
+    {
+      "item": "tests_and_checks",
+      "status": "passed",
+      "evidence": "workspace-monitor test/check, platform-desktop-app test/check, perf budget, renderer build, and package build passed."
+    },
+    {
+      "item": "auto_build_after_implementation",
+      "status": "passed",
+      "evidence": "corepack pnpm run desktop:package:internal completed."
+    },
+    {
+      "item": "history_trace",
+      "status": "passed",
+      "evidence": "_history/request-traces/2026/2026-06-06-agent-cli-cockpit.ko.md"
+    }
+  ],
+  "open_items": [
+    "Public release readiness remains blocked by signing, notarization, updater credentials, and clean-machine smoke."
+  ]
+}
