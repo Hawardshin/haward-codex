@@ -8604,6 +8604,91 @@ h3 {
   font-size: var(--font-size-caption);
 }
 
+.subagent-tool-selector {
+  min-width: 0;
+  display: grid;
+  gap: 7px;
+  margin-top: 2px;
+}
+
+.subagent-tool-selector-toolbar {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.terminal-agent-plan-result .subagent-tool-selector-toolbar > span {
+  flex: 1;
+  min-width: 0;
+  color: var(--text);
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+}
+
+.terminal-agent-bridge-actions .subagent-tool-selector-toolbar button {
+  min-height: 26px;
+  padding: 5px 7px;
+  border-radius: 6px;
+  gap: 4px;
+  font-size: 11px;
+  box-shadow: none;
+}
+
+.subagent-tool-selector-list {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+
+.subagent-tool-option {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--surface-raised) 80%, transparent);
+  padding: 6px;
+}
+
+.subagent-tool-option.selected {
+  border-color: var(--status-info-border);
+  background: var(--status-info-bg);
+}
+
+.subagent-tool-option input {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: var(--blue);
+}
+
+.terminal-agent-plan-result .subagent-tool-option span {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+  color: var(--text);
+}
+
+.terminal-agent-plan-result .subagent-tool-option strong,
+.terminal-agent-plan-result .subagent-tool-option small {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.terminal-agent-plan-result .subagent-tool-option strong {
+  font-size: 11px;
+}
+
+.terminal-agent-plan-result .subagent-tool-option small {
+  color: var(--muted);
+  font-size: 10px;
+}
+
 .agent-cli-cockpit {
   grid-column: 1 / -1;
   display: grid;

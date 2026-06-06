@@ -390,9 +390,16 @@ test("Desktop Runtime exposes an open-source-informed Agent CLI cockpit", () => 
   assert.match(monitorShell, /planSubagentTools/);
   assert.match(monitorShell, /executeSubagentTools/);
   assert.match(monitorShell, /fanoutSubagentTools/);
+  assert.match(monitorShell, /selectedSubagentToolNames/);
+  assert.match(monitorShell, /maxSubagentFanoutSelections = 3/);
+  assert.match(monitorShell, /defaultSubagentFanoutSelections = 2/);
+  assert.match(monitorShell, /toggleSubagentToolSelection/);
+  assert.match(monitorShell, /selectedSubagentFanoutToolNames/);
   assert.match(monitorShell, /run_subagent_tool_plan/);
   assert.match(monitorShell, /start_subagent_tool_execution/);
   assert.match(monitorShell, /start_subagent_tool_fanout/);
+  assert.match(monitorShell, /toolNames: selectedSubagentFanoutToolNames/);
+  assert.match(monitorShell, /maxSessions: selectedSubagentFanoutToolNames\.length/);
   assert.match(monitorShell, /data-terminal-agent-bridge="pty-to-agent"/);
   assert.match(monitorShell, /data-terminal-agent-step=\{step\.id\}/);
   assert.match(monitorShell, /data-terminal-agent-action="connect-start"/);
@@ -401,6 +408,10 @@ test("Desktop Runtime exposes an open-source-informed Agent CLI cockpit", () => 
   assert.match(monitorShell, /data-terminal-agent-action="execute-subagent"/);
   assert.match(monitorShell, /data-terminal-agent-action="fanout-subagents"/);
   assert.match(monitorShell, /data-subagent-tool-plan-result/);
+  assert.match(monitorShell, /data-subagent-tool-selector/);
+  assert.match(monitorShell, /data-subagent-tool-selected-count/);
+  assert.match(monitorShell, /data-subagent-tool-option=\{tool\.toolName\}/);
+  assert.match(monitorShell, /data-subagent-tool-checkbox=\{tool\.toolName\}/);
   assert.match(monitorShell, /data-subagent-tool-execution-result/);
   assert.match(monitorShell, /data-subagent-tool-fanout-result/);
   assert.match(monitorShell, /data-desktop-action-feedback="start-terminal-agent-bridge"/);
@@ -428,6 +439,9 @@ test("Desktop Runtime exposes an open-source-informed Agent CLI cockpit", () => 
   assert.match(tauriLib, /use os_pipe::pipe/);
   assert.match(tauriLib, /struct NativePipeProbeRequest/);
   assert.match(tauriLib, /fn run_native_pipe_probe/);
+  assert.match(css, /\.subagent-tool-selector \{/);
+  assert.match(css, /\.subagent-tool-option \{/);
+  assert.match(css, /\.subagent-tool-option\.selected \{/);
   assert.match(tauriLib, /run_native_pipe_probe,/);
   assert.match(tauriLib, /pipe_kind: "os_pipe_stdout_to_stdin"/);
   assert.match(tauriLib, /fn run_subagent_tool_plan/);

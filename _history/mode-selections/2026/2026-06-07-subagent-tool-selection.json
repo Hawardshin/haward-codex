@@ -1,0 +1,23 @@
+{
+  "task": "Subagent Tool Selection",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "Meaningful Desktop Runtime UI behavior change with CLI fan-out execution boundary impact.",
+  "web_first_intake": true,
+  "memory_bootstrap": "simulated from prior bounded fan-out records and active project specs",
+  "non_quick_required_targets": [
+    "requirements",
+    "spec",
+    "plan",
+    "tasks",
+    "validation",
+    "traceability",
+    "omission_check",
+    "resource_check",
+    "evaluation",
+    "request_trace",
+    "work_summary",
+    "timing_summary"
+  ]
+}

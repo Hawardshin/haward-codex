@@ -108,6 +108,8 @@ type SectionId =
 
 const maxResidentSectionPanels = 12;
 const startupSurfaceReadyMinMs = 2600;
+const maxSubagentFanoutSelections = 3;
+const defaultSubagentFanoutSelections = 2;
 const retainedResidentSections: SectionId[] = ["agents", "desktop", "eval", "source", "tools"];
 const nonRetainedResidentSections: SectionId[] = [];
 const startupResidentPreloadSections: SectionId[] = [
@@ -10978,6 +10980,7 @@ function DesktopRuntimePanel({
   const [lastSubagentToolPlan, setLastSubagentToolPlan] = useState<SubagentToolPlanReport | null>(null);
   const [lastSubagentToolExecution, setLastSubagentToolExecution] = useState<CliSessionReport | null>(null);
   const [lastSubagentToolFanout, setLastSubagentToolFanout] = useState<SubagentToolFanoutReport | null>(null);
+  const [selectedSubagentToolNames, setSelectedSubagentToolNames] = useState<string[]>([]);
   const [runtimeDataBoundary, setRuntimeDataBoundary] = useState<RuntimeDataBoundaryReport | null>(null);
   const [payloadAudit, setPayloadAudit] = useState<InstallerPayloadAuditReport | null>(null);
   const [supportBundle, setSupportBundle] = useState<SupportDiagnosticBundleReport | null>(null);
@@ -13474,6 +13477,30 @@ function DesktopRuntimePanel({
     desktopWorkspace?.activeWorkspacePath ||
     desktopWorkspace?.fallbackWorkspacePath ||
     (uiLanguage === "ko" ? "작업공간 선택 필요" : "Workspace needed");
+  const selectedSubagentTools = useMemo(() => {
+    if (!lastSubagentToolPlan) {
+      return [];
+    }
+    const selectedNames = new Set(selectedSubagentToolNames);
+    return lastSubagentToolPlan.subagentTools.filter((tool) => selectedNames.has(tool.toolName));
+  }, [lastSubagentToolPlan, selectedSubagentToolNames]);
+  const selectedSubagentTool = selectedSubagentTools[0] || null;
+  const selectedSubagentFanoutTools = selectedSubagentTools.slice(0, maxSubagentFanoutSelections);
+  const selectedSubagentFanoutToolNames = selectedSubagentFanoutTools.map((tool) => tool.toolName);
+  const toggleSubagentToolSelection = (toolName: string) => {
+    setSelectedSubagentToolNames((current) => {
+      if (current.includes(toolName)) {
+        return current.filter((candidate) => candidate !== toolName);
+      }
+      if (current.length >= maxSubagentFanoutSelections) {
+        return current;
+      }
+      return [...current, toolName];
+    });
+  };
+  const selectDefaultSubagentTools = () => {
+    setSelectedSubagentToolNames(lastSubagentToolPlan?.subagentTools.slice(0, defaultSubagentFanoutSelections).map((tool) => tool.toolName) || []);
+  };
   const getDesktopActionFeedback = (
     id: DesktopActionFeedbackId,
     status: DesktopActionFeedbackStatus,
@@ -13534,7 +13561,7 @@ function DesktopRuntimePanel({
           return {
             label: uiLanguage === "ko" ? "서브에이전트 묶음 실행" : "Subagent fan-out",
             scope: "start_subagent_tool_fanout",
-            detail: uiLanguage === "ko" ? "저장된 계획의 첫 2개 도구를 검증한 뒤 독립 실행 세션으로 시작합니다." : "Validates the first two saved plan tools, then starts independent execution sessions.",
+            detail: uiLanguage === "ko" ? "저장된 계획에서 직접 선택한 2-3개 도구를 검증한 뒤 독립 실행 세션으로 시작합니다." : "Validates 2-3 explicitly selected saved plan tools, then starts independent execution sessions.",
             next: uiLanguage === "ko" ? "하단 터미널과 실행 기록에서 각 세션을 확인하고, 병합은 수동으로 승인하세요." : "Check each session in the terminal and task-run records, then approve merge manually."
           };
         case "reveal-workspace":
@@ -14194,6 +14221,7 @@ function DesktopRuntimePanel({
       }
     });
     setLastSubagentToolPlan(report);
+    setSelectedSubagentToolNames(report.subagentTools.slice(0, defaultSubagentFanoutSelections).map((tool) => tool.toolName));
     setSelectedTaskRunId(report.taskRunId);
     await refreshTaskRunRecords();
   };
@@ -14203,28 +14231,32 @@ function DesktopRuntimePanel({
       setRuntimeState("unavailable");
       throw new Error(runtimeUnavailableErrorMessage);
     }
-    const selectedTool = lastSubagentToolPlan?.subagentTools[0] || null;
-    if (!lastSubagentToolPlan || !selectedTool) {
-      throw new Error(uiLanguage === "ko" ? "먼저 서브에이전트 툴 계획을 생성하세요." : "Create a subagent tool plan first.");
+    if (!lastSubagentToolPlan || !selectedSubagentTool) {
+      throw new Error(uiLanguage === "ko" ? "먼저 서브에이전트 툴 계획을 생성하고 실행할 툴을 선택하세요." : "Create a subagent tool plan and select a tool first.");
     }
-    const report = await tauriInvoke<CliSessionReport>("start_subagent_tool_execution", {
-      input: {
-        planTaskRunId: lastSubagentToolPlan.taskRunId,
-        toolName: selectedTool.toolName,
-        adapterId: terminalAgentBridgeAdapterId,
-        prompt: sessionPrompt.trim() || (uiLanguage === "ko"
-          ? `${selectedTool.agentName} 역할로 현재 manager 작업을 검토하고, 요약/근거/위험/검증/다음 행동만 보고하세요.`
-          : `Run as ${selectedTool.agentName} for the current manager task and report only summary, evidence, risks, validation, and next action.`),
-        workingDir: workingDir.trim() || undefined,
-        autoDeferQuestions
-      }
-    });
-    setLastSubagentToolExecution(report);
-    setSelectedSessionId(report.sessionId);
-    setSessions((current) => [report, ...current.filter((session) => session.sessionId !== report.sessionId)].slice(0, 12));
-    setSelectedTaskRunId(report.taskRunId);
-    setTerminalDrawerOpen(true);
-    await refreshTaskRunRecords();
+    setRunningAdapterId("subagent-execution");
+    try {
+      const report = await tauriInvoke<CliSessionReport>("start_subagent_tool_execution", {
+        input: {
+          planTaskRunId: lastSubagentToolPlan.taskRunId,
+          toolName: selectedSubagentTool.toolName,
+          adapterId: terminalAgentBridgeAdapterId,
+          prompt: sessionPrompt.trim() || (uiLanguage === "ko"
+            ? `${selectedSubagentTool.agentName} 역할로 현재 manager 작업을 검토하고, 요약/근거/위험/검증/다음 행동만 보고하세요.`
+            : `Run as ${selectedSubagentTool.agentName} for the current manager task and report only summary, evidence, risks, validation, and next action.`),
+          workingDir: workingDir.trim() || undefined,
+          autoDeferQuestions
+        }
+      });
+      setLastSubagentToolExecution(report);
+      setSelectedSessionId(report.sessionId);
+      setSessions((current) => [report, ...current.filter((session) => session.sessionId !== report.sessionId)].slice(0, 12));
+      setSelectedTaskRunId(report.taskRunId);
+      setTerminalDrawerOpen(true);
+      await refreshTaskRunRecords();
+    } finally {
+      setRunningAdapterId("");
+    }
   };
   const fanoutSubagentTools = async () => {
     const tauriInvoke = getTauriInvoke();
@@ -14235,19 +14267,22 @@ function DesktopRuntimePanel({
     if (!lastSubagentToolPlan || lastSubagentToolPlan.subagentTools.length === 0) {
       throw new Error(uiLanguage === "ko" ? "먼저 서브에이전트 툴 계획을 생성하세요." : "Create a subagent tool plan first.");
     }
+    if (selectedSubagentFanoutToolNames.length < 2) {
+      throw new Error(uiLanguage === "ko" ? "묶음 실행할 서브에이전트 툴을 2개 이상 선택하세요." : "Select at least two subagent tools for fan-out.");
+    }
     setRunningAdapterId("subagent-fanout");
     try {
       const report = await tauriInvoke<SubagentToolFanoutReport>("start_subagent_tool_fanout", {
         input: {
           planTaskRunId: lastSubagentToolPlan.taskRunId,
-          toolNames: lastSubagentToolPlan.subagentTools.slice(0, 2).map((tool) => tool.toolName),
+          toolNames: selectedSubagentFanoutToolNames,
           adapterId: terminalAgentBridgeAdapterId,
           prompt: sessionPrompt.trim() || (uiLanguage === "ko"
-            ? "첫 2개 서브에이전트는 현재 manager 작업을 각자 역할 관점에서 검토하고, 요약/근거/위험/검증/충돌 또는 의존성/다음 행동만 보고하세요."
-            : "The first two subagents should review the current manager task from their roles and report only summary, evidence, risks, validation, conflicts or dependencies, and next action."),
+            ? "선택된 서브에이전트들은 현재 manager 작업을 각자 역할 관점에서 검토하고, 요약/근거/위험/검증/충돌 또는 의존성/다음 행동만 보고하세요."
+            : "The selected subagents should review the current manager task from their roles and report only summary, evidence, risks, validation, conflicts or dependencies, and next action."),
           workingDir: workingDir.trim() || undefined,
           autoDeferQuestions,
-          maxSessions: 2
+          maxSessions: selectedSubagentFanoutToolNames.length
         }
       });
       const startedSessions = report.lanes
@@ -15048,7 +15083,7 @@ function DesktopRuntimePanel({
                 uiLanguage === "ko" ? "선택한 서브에이전트 도구를 독립 실행 세션으로 시작했습니다." : "Started the selected subagent tool as an independent execution session."
               )
             }
-            disabled={!runtimeReady || !terminalAgentBridgeAdapterReady || !lastSubagentToolPlan?.subagentTools.length}
+            disabled={!runtimeReady || !terminalAgentBridgeAdapterReady || runningAdapterId !== "" || !selectedSubagentTool}
           >
             <Bot size={15} aria-hidden="true" />
             <span>{uiLanguage === "ko" ? "선택 툴 실행" : "Run selected tool"}</span>
@@ -15062,7 +15097,7 @@ function DesktopRuntimePanel({
               void runDesktopAction(
                 "fanout-subagent-tools",
                 fanoutSubagentTools,
-                uiLanguage === "ko" ? "첫 2개 서브에이전트 도구를 묶음 실행 세션으로 시작했습니다." : "Started the first two subagent tools as a bounded fan-out."
+                uiLanguage === "ko" ? "선택한 서브에이전트 도구를 묶음 실행 세션으로 시작했습니다." : "Started selected subagent tools as a bounded fan-out."
               )
             }
             disabled={
@@ -15071,21 +15106,61 @@ function DesktopRuntimePanel({
               runningAdapterId !== "" ||
               !lastSubagentToolPlan ||
               lastSubagentToolPlan.status !== "completed" ||
-              lastSubagentToolPlan.subagentTools.length < 2
+              selectedSubagentFanoutToolNames.length < 2
             }
           >
             <GitBranch size={15} aria-hidden="true" />
-            <span>{uiLanguage === "ko" ? "첫 2개 묶음 실행" : "Run first 2"}</span>
+            <span>{uiLanguage === "ko" ? "선택 묶음 실행" : "Run selected"}</span>
           </button>
           {lastSubagentToolPlan && (
             <div className="terminal-agent-plan-result" data-subagent-tool-plan-result>
               <strong>
-                {lastSubagentToolPlan.subagentToolCount} {uiLanguage === "ko" ? "개 툴" : "tools"} · {lastSubagentToolPlan.planStatus}
+                {lastSubagentToolPlan.subagentToolCount} {uiLanguage === "ko" ? "개 툴" : "tools"} · {lastSubagentToolPlan.planStatus} · {selectedSubagentTools.length}/{maxSubagentFanoutSelections}
               </strong>
               <span>
-                {lastSubagentToolPlan.subagentTools.map((tool) => tool.toolName).slice(0, 3).join(" · ") || lastSubagentToolPlan.command}
+                {selectedSubagentTools.map((tool) => tool.toolName).join(" · ") || lastSubagentToolPlan.command}
               </span>
               <code>{lastSubagentToolPlan.taskRunId}</code>
+              <div className="subagent-tool-selector" data-subagent-tool-selector>
+                <div className="subagent-tool-selector-toolbar">
+                  <span data-subagent-tool-selected-count>
+                    {uiLanguage === "ko" ? "선택" : "Selected"} {selectedSubagentTools.length}/{maxSubagentFanoutSelections}
+                  </span>
+                  <button type="button" onClick={selectDefaultSubagentTools} disabled={lastSubagentToolPlan.subagentTools.length === 0}>
+                    <ListFilter size={13} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "기본" : "Default"}</span>
+                  </button>
+                  <button type="button" onClick={() => setSelectedSubagentToolNames([])} disabled={selectedSubagentTools.length === 0}>
+                    <X size={13} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "해제" : "Clear"}</span>
+                  </button>
+                </div>
+                <div className="subagent-tool-selector-list">
+                  {lastSubagentToolPlan.subagentTools.map((tool) => {
+                    const selected = selectedSubagentToolNames.includes(tool.toolName);
+                    const selectionLimitReached = !selected && selectedSubagentTools.length >= maxSubagentFanoutSelections;
+                    return (
+                      <label
+                        key={tool.toolName}
+                        className={`subagent-tool-option ${selected ? "selected" : ""}`}
+                        data-subagent-tool-option={tool.toolName}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selected}
+                          disabled={selectionLimitReached}
+                          data-subagent-tool-checkbox={tool.toolName}
+                          onChange={() => toggleSubagentToolSelection(tool.toolName)}
+                        />
+                        <span>
+                          <strong>{tool.toolName}</strong>
+                          <small>{tool.agentName}</small>
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           )}
           {lastSubagentToolExecution && (

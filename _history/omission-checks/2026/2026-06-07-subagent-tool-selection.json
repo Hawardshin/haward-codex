@@ -1,0 +1,97 @@
+{
+  "task": "Subagent Tool Selection",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "selector-ui",
+      "description": "Expose explicit subagent tool checkboxes in the plan result.",
+      "source": "deferred improvement",
+      "required": true,
+      "status": "covered",
+      "evidence": ["data-subagent-tool-selector", "data-subagent-tool-checkbox"]
+    },
+    {
+      "item_id": "single-selected-tool",
+      "description": "Single execution uses the first selected tool instead of always the first planned tool.",
+      "source": "user continuation request",
+      "required": true,
+      "status": "covered",
+      "evidence": ["selectedSubagentTool", "executeSubagentTools"]
+    },
+    {
+      "item_id": "fanout-selected-tools",
+      "description": "Fan-out sends selected tool names and selected maxSessions.",
+      "source": "user continuation request",
+      "required": true,
+      "status": "covered",
+      "evidence": ["toolNames: selectedSubagentFanoutToolNames", "maxSessions: selectedSubagentFanoutToolNames.length"]
+    },
+    {
+      "item_id": "selection-cap",
+      "description": "Selection does not exceed the established hard cap of 3.",
+      "source": "bounded fan-out safety boundary",
+      "required": true,
+      "status": "covered",
+      "evidence": ["maxSubagentFanoutSelections = 3"]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-07-subagent-tool-selection.ko.md",
+      "purpose": "Requirement record",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-07-subagent-tool-selection/spec.ko.md",
+      "purpose": "Spec record",
+      "required": true
+    },
+    {
+      "path": "_history/evaluations/2026/2026-06-07-subagent-tool-selection-cli-pipeline.json",
+      "purpose": "CLI pipeline record",
+      "required": true
+    },
+    {
+      "path": "_history/resource-checks/2026/2026-06-07-subagent-tool-selection.json",
+      "purpose": "Resource lifecycle record",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "renderer",
+      "description": "Renderer tests and check pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["workspace-monitor test: 90 tests", "workspace-monitor run check: passed"]
+    },
+    {
+      "check_id": "build-browser",
+      "description": "Build/platform check and Browser smoke pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm -w run desktop:renderer:build: passed",
+        "corepack pnpm --dir platform-desktop-app run check: passed with existing public release warnings",
+        "Browser smoke found pty-to-agent bridge, execute-subagent action, fanout-subagents action, and selected fan-out button text."
+      ]
+    },
+    {
+      "check_id": "guards",
+      "description": "CLI pipeline, resource, omission, and evaluator guards pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-cli-pipeline: pipeline_ready",
+        "check-resources: resource_ready"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "Packaged native runtime smoke is still stronger than Browser preview for actual process launch.",
+    "Selector DOM itself appears after native plan generation; Browser preview shell smoke is paired with static contract tests."
+  ],
+  "notes": [
+    "This slice intentionally keeps manual merge review UI as a later deferred improvement."
+  ]
+}

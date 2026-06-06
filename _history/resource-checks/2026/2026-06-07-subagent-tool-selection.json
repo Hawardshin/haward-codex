@@ -1,0 +1,105 @@
+{
+  "task": "Subagent Tool Selection",
+  "work_mode": "standard",
+  "runtime_context": [
+    "React state for selected subagent tools",
+    "Tauri invoke payload for start_subagent_tool_fanout",
+    "existing CLI adapter subprocess sessions",
+    "workspace-monitor browser smoke"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "selection-overstarts-processes",
+      "category": "process",
+      "description": "Selecting too many tools could start too many CLI sessions.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Frontend hard cap is 3 and Rust command still rejects maxSessions above 3.",
+      "evidence": [
+        "maxSubagentFanoutSelections = 3",
+        "MAX_SUBAGENT_FANOUT_SESSIONS: usize = 3"
+      ]
+    },
+    {
+      "risk_id": "stale-tool-selection",
+      "category": "memory",
+      "description": "A new plan could accidentally execute stale selected tool names from an older plan.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Plan success resets selectedSubagentToolNames from the returned report; render selection filters through current lastSubagentToolPlan.",
+      "evidence": [
+        "setSelectedSubagentToolNames(report.subagentTools.slice(0, defaultSubagentFanoutSelections))",
+        "selectedSubagentTools useMemo"
+      ]
+    },
+    {
+      "risk_id": "preview-native-command-gap",
+      "category": "browser_context",
+      "description": "Browser preview cannot execute native Tauri command.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Browser smoke validates DOM contract only; native execution remains covered by static invoke contract and existing Rust command validation.",
+      "evidence": [
+        "data-subagent-tool-selector",
+        "toolNames: selectedSubagentFanoutToolNames"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "existing-fanout-lifecycle",
+      "resource": "bounded fan-out CLI sessions",
+      "create_path": "fanoutSubagentTools -> start_subagent_tool_fanout",
+      "cleanup_path": "unchanged existing session cancellation and cleanup",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "No Rust session lifecycle changes in this slice."
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "renderer-contract",
+      "metric": "Selector and invoke contract",
+      "tool": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test",
+      "threshold": "90 tests pass",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "90 tests passed"
+      ]
+    },
+    {
+      "check_id": "renderer-check",
+      "metric": "Type and design contracts",
+      "tool": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+      "threshold": "exit code 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "lazy_boundary_contract_ok",
+        "scroll_contract_ok",
+        "source_control_design_ok",
+        "comprehensive_improvement_contract_ok",
+        "history_payload_ok"
+      ]
+    },
+    {
+      "check_id": "browser-smoke-server-cleanup",
+      "metric": "Local development server lifecycle",
+      "tool": "next dev on 127.0.0.1:3224 and lsof",
+      "threshold": "selected fan-out shell observed and no listener remains after Ctrl-C",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Browser smoke found pty-to-agent bridge, execute-subagent action, fanout-subagents action, selected fan-out label, and disabled preview state.",
+        "lsof -nP -iTCP:3224 -sTCP:LISTEN returned no listener after shutdown."
+      ]
+    }
+  ],
+  "notes": [
+    "No installation occurred.",
+    "No new Rust native command was added."
+  ]
+}

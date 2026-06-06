@@ -1,0 +1,172 @@
+{
+  "pipeline_id": "subagent-tool-selection-ui-contract",
+  "purpose": "Route explicitly selected saved subagent tools into the existing bounded fan-out CLI adapter sessions and keep their summaries behind a manual merge gate.",
+  "work_mode": "standard",
+  "risk_level": "medium",
+  "processes": [
+    {
+      "process_id": "selected_subagent_tool_1",
+      "adapter_id": "codex-cli",
+      "command": "codex",
+      "args": ["run", "bounded-subagent-lane"],
+      "cwd": "platform-desktop-app",
+      "env_keys": ["PATH"],
+      "timeout_seconds": 300,
+      "max_output_bytes": 100000,
+      "required": true
+    },
+    {
+      "process_id": "selected_subagent_tool_2",
+      "adapter_id": "codex-cli",
+      "command": "codex",
+      "args": ["run", "bounded-subagent-lane"],
+      "cwd": "platform-desktop-app",
+      "env_keys": ["PATH"],
+      "timeout_seconds": 300,
+      "max_output_bytes": 100000,
+      "required": true
+    },
+    {
+      "process_id": "selected_subagent_tool_3",
+      "adapter_id": "codex-cli",
+      "command": "codex",
+      "args": ["run", "bounded-subagent-lane"],
+      "cwd": "platform-desktop-app",
+      "env_keys": ["PATH"],
+      "timeout_seconds": 300,
+      "max_output_bytes": 100000,
+      "required": false
+    },
+    {
+      "process_id": "manual_merge_gate",
+      "adapter_id": "manager-review",
+      "command": "manual-review",
+      "args": ["subagent_manual_merge_gate"],
+      "cwd": "platform-desktop-app",
+      "env_keys": ["PATH"],
+      "timeout_seconds": 1,
+      "max_output_bytes": 1000,
+      "required": true
+    }
+  ],
+  "pipes": [
+    {
+      "pipe_id": "selected_tool_1_summary_to_merge_gate",
+      "from_process": "selected_subagent_tool_1",
+      "from_stream": "stdout",
+      "to_process": "manual_merge_gate",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "selected_tool_1_summary",
+      "required": true
+    },
+    {
+      "pipe_id": "selected_tool_2_summary_to_merge_gate",
+      "from_process": "selected_subagent_tool_2",
+      "from_stream": "stdout",
+      "to_process": "manual_merge_gate",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "selected_tool_2_summary",
+      "required": true
+    },
+    {
+      "pipe_id": "selected_tool_3_summary_to_merge_gate",
+      "from_process": "selected_subagent_tool_3",
+      "from_stream": "stdout",
+      "to_process": "manual_merge_gate",
+      "to_stream": "stdin",
+      "mode": "artifact",
+      "artifact_id": "selected_tool_3_summary",
+      "required": false
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "selected_tool_1_summary",
+      "kind": "report",
+      "path": "platform-desktop-app/artifacts/subagent-fanout/selected-tool-1-summary.json",
+      "produced_by": "selected_subagent_tool_1",
+      "consumed_by": ["manual_merge_gate"],
+      "required": true,
+      "max_bytes": 100000,
+      "format": "json",
+      "retention_policy": "Task-run records retain summaries until normal task-run pruning.",
+      "cleanup_policy": "No temp file is created by this slice; this artifact models task-run retained output.",
+      "provenance": ["selected_subagent_tool_1 stdout/stderr task-run record"],
+      "validation": ["summary is bounded by max output bytes", "manager reviews before merge"]
+    },
+    {
+      "artifact_id": "selected_tool_2_summary",
+      "kind": "report",
+      "path": "platform-desktop-app/artifacts/subagent-fanout/selected-tool-2-summary.json",
+      "produced_by": "selected_subagent_tool_2",
+      "consumed_by": ["manual_merge_gate"],
+      "required": true,
+      "max_bytes": 100000,
+      "format": "json",
+      "retention_policy": "Task-run records retain summaries until normal task-run pruning.",
+      "cleanup_policy": "No temp file is created by this slice; this artifact models task-run retained output.",
+      "provenance": ["selected_subagent_tool_2 stdout/stderr task-run record"],
+      "validation": ["summary is bounded by max output bytes", "manager reviews before merge"]
+    },
+    {
+      "artifact_id": "selected_tool_3_summary",
+      "kind": "report",
+      "path": "platform-desktop-app/artifacts/subagent-fanout/selected-tool-3-summary.json",
+      "produced_by": "selected_subagent_tool_3",
+      "consumed_by": ["manual_merge_gate"],
+      "required": false,
+      "max_bytes": 100000,
+      "format": "json",
+      "retention_policy": "Task-run records retain summaries until normal task-run pruning.",
+      "cleanup_policy": "No temp file is created by this slice; this artifact models optional task-run retained output.",
+      "provenance": ["selected_subagent_tool_3 stdout/stderr task-run record"],
+      "validation": ["summary is bounded by max output bytes", "manager reviews before merge"]
+    }
+  ],
+  "execution_policy": {
+    "shell_allowed": false,
+    "argv_arrays_required": true,
+    "explicit_pipe_graph_required": true,
+    "explicit_cwd_required": true,
+    "adapter_allowlist": ["codex-cli", "manager-review"]
+  },
+  "safety_controls": [
+    "adapter_allowlist",
+    "argv_arguments",
+    "shell_disabled_by_default",
+    "explicit_cwd_boundary",
+    "environment_allowlist",
+    "secret_redaction",
+    "output_redaction",
+    "permission_scope",
+    "fallback_behavior",
+    "audit_logging"
+  ],
+  "resource_controls": {
+    "timeout_policy": "Each selected CLI session uses the existing SESSION_TIMEOUT_MS lifecycle.",
+    "max_output_bytes": 100000,
+    "cancellation_policy": "Runtime terminal cancel actions call cancel_cli_adapter_session for each session.",
+    "cleanup_policy": "SessionStore cleanup_finished_sessions_locked prunes finished sessions; process Drop kills remaining children.",
+    "orphan_process_policy": "Existing configure_process_group and kill paths apply to each selected lane.",
+    "backpressure_policy": "Each lane is bounded by MAX_SESSION_OUTPUT_BYTES and task-run persistence stores bounded previews."
+  },
+  "merge_strategy": "Manual manager merge gate only; selected lane outputs are compared by the manager after task-run records are reviewed.",
+  "source_provenance": [
+    "OpenAI Agents SDK agents/tools documentation",
+    "Claude Code subagents documentation",
+    "VS Code subagents documentation",
+    "Tauri calling Rust documentation"
+  ],
+  "plan_evidence": [
+    "platform-desktop-app/specs/2026-06-07-subagent-tool-selection/spec.ko.md",
+    "_history/web-searches/2026/2026-06-07-subagent-tool-selection.ko.md"
+  ],
+  "verification": [
+    "PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-07-subagent-tool-selection-cli-pipeline.json"
+  ],
+  "rollback_plan": [
+    "Disable the selector UI and restore first-two fan-out defaults while continuing to use the existing Rust command."
+  ]
+}
