@@ -559,6 +559,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     join(root, "renderer/workspace-monitor/components/features/EvaluationReportPanel.tsx"),
     "utf8"
   );
+  const evaluationReportModel = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/evaluationReportModel.ts"),
+    "utf8"
+  );
   const evaluationRuntimeTelemetry = readFileSync(
     join(root, "renderer/workspace-monitor/components/features/evaluationRuntimeTelemetry.ts"),
     "utf8"
@@ -726,8 +730,13 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   }
   for (const runtimeTelemetryToken of ["buildRuntimeTelemetryModel", "formatRuntimeBytes", "EvalRuntimeTelemetrySignal"]) {
     const pattern = new RegExp(runtimeTelemetryToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
-    assert.match(evaluationReportPanel, pattern);
+    assert.match(`${evaluationReportPanel}\n${evaluationReportModel}`, pattern);
     assert.match(evaluationRuntimeTelemetry, pattern);
+  }
+  for (const reportModelToken of ["buildEvaluationReportModel", "formatEvalPercent", "evalScenarios", "comprehensiveImprovementDimensions"]) {
+    const pattern = new RegExp(reportModelToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    assert.match(evaluationReportPanel, pattern);
+    assert.match(evaluationReportModel, pattern);
   }
 
   for (const commandName of [

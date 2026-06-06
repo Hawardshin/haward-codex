@@ -25,6 +25,10 @@ const evaluationReportPanel = fs.readFileSync(
   path.join(projectRoot, "components", "features", "EvaluationReportPanel.tsx"),
   "utf8"
 );
+const evaluationReportModel = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "evaluationReportModel.ts"),
+  "utf8"
+);
 const evaluationRuntimeTelemetry = fs.readFileSync(
   path.join(projectRoot, "components", "features", "evaluationRuntimeTelemetry.ts"),
   "utf8"
@@ -136,10 +140,14 @@ test("AI Eval is a first-class resident workbench section", () => {
   assert.match(evaluationReportPanel, /data-eval-workbench="open-source-eval-cockpit"/);
   assert.match(evaluationReportPanel, /data-eval-comprehensive-improvement="all-signal-cockpit"/);
   assert.match(evaluationReportPanel, /data-eval-runtime-telemetry/);
-  assert.match(evaluationReportPanel, /buildRuntimeTelemetryModel/);
+  assert.match(evaluationReportPanel, /buildEvaluationReportModel/);
+  assert.match(evaluationReportPanel, /formatEvalPercent/);
   assert.match(evaluationReportPanel, /EvalRuntimeTelemetrySignal/);
-  assert.match(evaluationReportPanel, /nativeRuntimeScore/);
   assert.match(evaluationReportPanel, /runtimeTelemetryAvailable/);
+  assert.match(evaluationReportModel, /export function buildEvaluationReportModel/);
+  assert.match(evaluationReportModel, /export function formatEvalPercent/);
+  assert.match(evaluationReportModel, /buildRuntimeTelemetryModel/);
+  assert.match(evaluationReportModel, /nativeRuntimeScore/);
   assert.match(evaluationRuntimeTelemetry, /export type EvalRuntimeTelemetrySignal/);
   assert.match(evaluationRuntimeTelemetry, /export function buildRuntimeTelemetryModel/);
   assert.match(evaluationRuntimeTelemetry, /formatRuntimeBytes/);
@@ -148,21 +156,21 @@ test("AI Eval is a first-class resident workbench section", () => {
   assert.match(evaluationRuntimeTelemetry, /process\.thread\.count/);
   assert.match(evaluationReportPanel, /Current work evaluation report/);
   assert.match(evaluationReportPanel, /Composite Improvement Cockpit/);
-  assert.match(evaluationReportPanel, /desktop-performance/);
-  assert.match(evaluationReportPanel, /ux-control-clarity/);
-  assert.match(evaluationReportPanel, /native-resource-lifecycle/);
-  assert.match(evaluationReportPanel, /eval-evidence/);
-  assert.match(evaluationReportPanel, /release-packaging/);
-  assert.match(evaluationReportPanel, /open-source-leverage/);
-  assert.match(evaluationReportPanel, /automation-continuity/);
-  assert.match(evaluationReportPanel, /Token and Cost Tracking/);
-  assert.match(evaluationReportPanel, /OpenAI Evals/);
-  assert.match(evaluationReportPanel, /Inspect AI/);
-  assert.match(evaluationReportPanel, /promptfoo/);
-  assert.match(evaluationReportPanel, /DeepEval/);
-  assert.match(evaluationReportPanel, /Arize Phoenix/);
-  assert.match(evaluationReportPanel, /Opik/);
-  assert.match(evaluationReportPanel, /Langfuse/);
+  assert.match(evaluationReportModel, /desktop-performance/);
+  assert.match(evaluationReportModel, /ux-control-clarity/);
+  assert.match(evaluationReportModel, /native-resource-lifecycle/);
+  assert.match(evaluationReportModel, /eval-evidence/);
+  assert.match(evaluationReportModel, /release-packaging/);
+  assert.match(evaluationReportModel, /open-source-leverage/);
+  assert.match(evaluationReportModel, /automation-continuity/);
+  assert.match(evaluationReportModel, /Token and Cost Tracking/);
+  assert.match(evaluationReportModel, /OpenAI Evals/);
+  assert.match(evaluationReportModel, /Inspect AI/);
+  assert.match(evaluationReportModel, /promptfoo/);
+  assert.match(evaluationReportModel, /DeepEval/);
+  assert.match(evaluationReportModel, /Arize Phoenix/);
+  assert.match(evaluationReportModel, /Opik/);
+  assert.match(evaluationReportModel, /Langfuse/);
   assert.match(css, /\.eval-workbench \{/);
   assert.match(css, /\.eval-score-strip \{/);
   assert.match(css, /\.eval-comprehensive-panel \{/);

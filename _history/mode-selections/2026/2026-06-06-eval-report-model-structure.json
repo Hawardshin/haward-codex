@@ -1,0 +1,19 @@
+{
+  "schema_version": "2026-06-02",
+  "task_id": "2026-06-06-eval-report-model-structure",
+  "selected_mode": "standard",
+  "reason": "사용자 요청은 구조개선이며, platform-desktop-app source와 test contract를 바꾸는 의미 있는 구현 작업이다.",
+  "project": "platform-desktop-app",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "resource_risk_occurred": false,
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-06-eval-report-model-structure.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-06-eval-report-model-structure.ko.md"
+  ],
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-06-eval-report-model-structure.ko.md"
+  ]
+}

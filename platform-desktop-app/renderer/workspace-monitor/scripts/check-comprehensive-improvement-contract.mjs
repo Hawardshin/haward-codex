@@ -5,6 +5,10 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
 const evaluationPanel = fs.readFileSync(path.join(projectRoot, "components", "features", "EvaluationReportPanel.tsx"), "utf8");
+const evaluationReportModel = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "evaluationReportModel.ts"),
+  "utf8"
+);
 const runtimeTelemetryModel = fs.readFileSync(
   path.join(projectRoot, "components", "features", "evaluationRuntimeTelemetry.ts"),
   "utf8"
@@ -35,6 +39,18 @@ assertIncludes(evaluationPanel, "Comprehensive improvement panel", [
   'data-eval-runtime-telemetry',
   "Composite Improvement Cockpit",
   "EvalRuntimeTelemetrySignal",
+  "buildEvaluationReportModel",
+  "formatEvalPercent",
+  "comprehensiveImprovementDimensions",
+  "comprehensiveImprovementScore",
+  "priorityDimensions",
+  "riskLaneCount"
+]);
+
+assertIncludes(evaluationReportModel, "Evaluation report score model", [
+  "export function buildEvaluationReportModel",
+  "export function formatEvalPercent",
+  "export const evalScenarios",
   "comprehensiveImprovementDimensions",
   "comprehensiveImprovementScore",
   "buildRuntimeTelemetryModel",
@@ -42,6 +58,10 @@ assertIncludes(evaluationPanel, "Comprehensive improvement panel", [
   "runtimeTelemetryAvailable",
   "priorityDimensions",
   "riskLaneCount",
+  "OpenAI Evals",
+  "Inspect AI",
+  "promptfoo",
+  "DeepEval",
   ...dimensionIds
 ]);
 
@@ -76,7 +96,7 @@ console.log(
     {
       status: "comprehensive_improvement_contract_ok",
       checkedDimensions: dimensionIds.length,
-      checkedSurfaces: 3
+      checkedSurfaces: 4
     },
     null,
     2
