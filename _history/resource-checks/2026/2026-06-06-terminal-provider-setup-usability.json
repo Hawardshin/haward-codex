@@ -1,0 +1,23 @@
+{
+  "date": "2026-06-06",
+  "work_id": "2026-06-06-terminal-provider-setup-usability",
+  "resource_risk_occurred": true,
+  "risk_reason": "The work touches native PTY terminal UI and provider credential setup surfaces, but does not add new timers, workers, subprocess commands, network clients, or credential storage behavior.",
+  "lifecycle_changes": [
+    "No new PTY process lifecycle API was added.",
+    "No new interval, worker, or long-running browser automation was added.",
+    "Provider URL opener behavior remains the existing Tauri command surface."
+  ],
+  "credential_boundary": [
+    "No raw provider key is added to source or docs.",
+    "OpenAI/Gemini login buttons open official API key pages.",
+    "ChatGPT/Gemini web session cookies remain out of scope."
+  ],
+  "cleanup_required": false,
+  "validation_evidence": [
+    "workspace-monitor test/check/build passed",
+    "platform-desktop-app test/check passed",
+    "package:internal passed, including Rust tests/build, Tauri bundle, codesign verify, and DMG verify"
+  ],
+  "status": "resource_ready"
+}

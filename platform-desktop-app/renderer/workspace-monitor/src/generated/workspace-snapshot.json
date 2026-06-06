@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T03:47:10.402Z",
+  "generatedAt": "2026-06-06T03:59:01.737Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 519,
-    "evaluations": 20,
+    "evaluations": 21,
     "webSearches": 13,
     "timingRecords": 14,
     "historyDays": 1,
-    "adminHistoryDocuments": 2639,
+    "adminHistoryDocuments": 2646,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7802,11 +7802,235 @@
       "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 17474,
-      "updatedAt": "2026-06-06T03:46:49.914Z",
+      "sourceBytes": 18199,
+      "updatedAt": "2026-06-06T03:58:52.562Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-terminal-provider-setup-usability-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Terminal and Provider Setup Usability",
+      "excerpt": "Evaluation: Terminal and Provider Setup Usability 날짜: 2026 06 06 판정 Pass for internal development package. 근거 요구사항, 스펙, traceability, web search, coding research, resource check, omission check를 생성했다. workspace monitor test/check/build , platform desktop app test/check , package:",
+      "html": "<p>Evaluation: Terminal and Provider Setup Usability 날짜: 2026 06 06 판정 Pass for internal development package. 근거 요구사항, 스펙, traceability, web search, coding research, resource check, omission check를 생성했다. workspace monitor test/check/build , platform desktop app test/check , package:internal 이 통과했다. .app /DMG 생성, app signature verify, DMG verify가 완료됐다. OpenAI/Ge</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 565,
+      "updatedAt": "2026-06-06T03:58:52.562Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-terminal-provider-setup-usability-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Terminal and Provider Setup Usability",
+      "excerpt": "Request Trace: Terminal and Provider Setup Usability 날짜: 2026 06 06 요청 터미널 기능 사용법과 세팅법 개선. GPT/Gemini 설정을 단순 로그인 흐름으로 시작 가능하게 개선. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/RuntimeTerminalDrawer.tsx platform desktop app/renderer/workspace monitor/com",
+      "html": "<p>Request Trace: Terminal and Provider Setup Usability 날짜: 2026 06 06 요청 터미널 기능 사용법과 세팅법 개선. GPT/Gemini 설정을 단순 로그인 흐름으로 시작 가능하게 개선. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/RuntimeTerminalDrawer.tsx platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx platform desktop app/src tauri/src/lib.rs platform desk</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 723,
+      "updatedAt": "2026-06-06T03:58:52.561Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-terminal-provider-setup-usability-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Terminal and Provider Setup Usability",
+      "excerpt": "Work Summary: Terminal and Provider Setup Usability 날짜: 2026 06 06 변경 터미널 시작 화면에 PTY, 작업 폴더, 검색/클립보드, AI 계정 설정 카드 추가. Provider 설정에 GPT/OpenAI와 Gemini/Google fast lane 추가. OpenAI/Gemini login URL을 공식 API key 페이지로 정리. cloud provider row의 setup/login 중복 버튼을 하나의 로그인/키 발급 action으로 단순화",
+      "html": "<p>Work Summary: Terminal and Provider Setup Usability 날짜: 2026 06 06 변경 터미널 시작 화면에 PTY, 작업 폴더, 검색/클립보드, AI 계정 설정 카드 추가. Provider 설정에 GPT/OpenAI와 Gemini/Google fast lane 추가. OpenAI/Gemini login URL을 공식 API key 페이지로 정리. cloud provider row의 setup/login 중복 버튼을 하나의 로그인/키 발급 action으로 단순화. 터미널과 AI provider 설정 사용법 문서 추가 및 README 연결. 검증 workspace monitor test/check/bui</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 701,
+      "updatedAt": "2026-06-06T03:58:52.561Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-terminal-provider-setup-usability-json",
+      "path": "_history/work-timings/2026/2026-06-06-terminal-provider-setup-usability.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Terminal Provider Setup Usability",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"2026 06 06 terminal provider setup usability\", \"phases\": { \"phase\": \"web research and intake\", \"status\": \"completed\" }, { \"phase\": \"source inspection and implementation\", \"status\": \"completed\" }, { \"phase\": \"validation and packaging\", \"status\":",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 terminal provider setup usability&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web research and intake&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;source inspection and implementation&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;validation and packaging&quot;, &quot;status&quot;: &quot;completed&quot; } }</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 369,
+      "updatedAt": "2026-06-06T03:58:52.561Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-provider-setup-usability-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-provider-setup-usability/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Terminal and Provider Setup Usability",
+      "excerpt": "Validation: Terminal and Provider Setup Usability Commands corepack pnpm filter workspace monitor test passed, 79 tests. corepack pnpm filter workspace monitor run collect passed, 650 inline documents and 2646 admin history records. corepack pnpm filter workspace monitor run chec",
+      "html": "<h1>Validation: Terminal and Provider Setup Usability</h1>\n<h2>Commands</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code> - passed, 79 tests.</li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code> - passed, 650 inline documents and 2646 admin history records.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code> - passed.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code> - passed, 24 tests.</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code> - passed.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code> - passed with existing public release warnings only.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code> - passed.</li>\n</ul>\n<h2>Status</h2>\n<ul>\n<li>Internal package completed.</li>\n<li>Built artifacts:</li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n<li>macOS app <code>codesign --verify --deep --strict</code> passed.</li>\n<li>DMG <code>hdiutil verify</code> passed.</li>\n<li>Public notarization was skipped because Apple notarization env vars are not present; this remains an existing public release gate, not an internal build blocker.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1158,
+      "updatedAt": "2026-06-06T03:58:52.560Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-provider-setup-usability-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-provider-setup-usability/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Terminal and Provider Setup Usability",
+      "excerpt": "Tasks: Terminal and Provider Setup Usability x Web first intake와 coding research 기록 x OpenAI/Gemini official key URL 정리 x Provider fast lane UI 추가 x Provider row primary setup action 단순화 x Terminal start usage cards 추가 x 사용법 문서와 README link 추가 x Static regression tests 보강 x Valid",
+      "html": "<h1>Tasks: Terminal and Provider Setup Usability</h1>\n<ul>\n<li>[x] Web-first intake와 coding research 기록</li>\n<li>[x] OpenAI/Gemini official key URL 정리</li>\n<li>[x] Provider fast lane UI 추가</li>\n<li>[x] Provider row primary setup action 단순화</li>\n<li>[x] Terminal start usage cards 추가</li>\n<li>[x] 사용법 문서와 README link 추가</li>\n<li>[x] Static regression tests 보강</li>\n<li>[x] Validation/build/package 실행</li>\n<li>[ ] Commit/push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 404,
+      "updatedAt": "2026-06-06T03:58:52.559Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-terminal-provider-setup-usability-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-terminal-provider-setup-usability-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Terminal Provider Setup Usability Evaluation Input",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"2026 06 06 terminal provider setup usability\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"installation occurred\": false, \"resource risk occurred\": true, \"resour",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 terminal provider setup usability&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;view mode&quot;: &quot;superadmin developer&quot;, &quot;install mode&quot;: &quot;developer&quot;, &quot;installation occurred&quot;: false, &quot;resource risk occurred&quot;: true, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 06 06 terminal provider s</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1915,
+      "updatedAt": "2026-06-06T03:56:10.654Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-terminal-provider-setup-usability-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request Summary: Terminal and Provider Setup Usability",
+      "excerpt": "User Request Summary: Terminal and Provider Setup Usability 날짜: 2026 06 06 사용자는 터미널 기능의 실제 사용법과 세팅법을 더 기능적으로 만들고, GPT/OpenAI와 Gemini/Google 설정을 단순 로그인 흐름으로 시작할 수 있게 해 달라고 요청했다.",
+      "html": "<p>User Request Summary: Terminal and Provider Setup Usability 날짜: 2026 06 06 사용자는 터미널 기능의 실제 사용법과 세팅법을 더 기능적으로 만들고, GPT/OpenAI와 Gemini/Google 설정을 단순 로그인 흐름으로 시작할 수 있게 해 달라고 요청했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 297,
+      "updatedAt": "2026-06-06T03:56:10.653Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-provider-setup-usability-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-provider-setup-usability/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Terminal and Provider Setup Usability",
+      "excerpt": "Plan: Terminal and Provider Setup Usability 1. 공식 OpenAI/Gemini/xterm 인증 및 terminal docs를 확인한다. 2. 기존 provider credential panel과 native PTY drawer를 확인한다. 3. provider URL, fast lane, 중복 버튼 제거, terminal usage cards, docs link를 구현한다. 4. 정적 회귀 테스트를 보강한다. 5. renderer/platform checks와 ",
+      "html": "<h1>Plan: Terminal and Provider Setup Usability</h1>\n<p>1. 공식 OpenAI/Gemini/xterm 인증 및 terminal docs를 확인한다.</p>\n<p>2. 기존 provider credential panel과 native PTY drawer를 확인한다.</p>\n<p>3. provider URL, fast lane, 중복 버튼 제거, terminal usage cards, docs link를 구현한다.</p>\n<p>4. 정적 회귀 테스트를 보강한다.</p>\n<p>5. renderer/platform checks와 내부 package build를 실행한다.</p>\n<p>6. 기록, 평가, commit, push를 완료한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 454,
+      "updatedAt": "2026-06-06T03:56:10.651Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-provider-setup-usability-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-provider-setup-usability/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Terminal and Provider Setup Usability",
+      "excerpt": "Traceability: Terminal and Provider Setup Usability | Requirement | Evidence | | | | | REQ TPS 001 | RuntimeTerminalDrawer.tsx , .terminal usage guide , tool studio.test.mjs | | REQ TPS 002 | ProviderAccountsPanel , .provider login fast lane , data provider login card | | REQ TPS",
+      "html": "<h1>Traceability: Terminal and Provider Setup Usability</h1>\n<table><thead><tr><th>Requirement</th><th>Evidence</th></tr></thead><tbody><tr><td>REQ-TPS-001</td><td><code>RuntimeTerminalDrawer.tsx</code>, <code>.terminal-usage-guide</code>, <code>tool-studio.test.mjs</code></td></tr><tr><td>REQ-TPS-002</td><td><code>ProviderAccountsPanel</code>, <code>.provider-login-fast-lane</code>, <code>data-provider-login-card</code></td></tr><tr><td>REQ-TPS-003</td><td><code>onOpenUrl(provider, localRuntime ? &quot;setup&quot; : &quot;login&quot;)</code> primary action</td></tr><tr><td>REQ-TPS-004</td><td><code>src-tauri/src/lib.rs</code>, fallback provider report URLs, usage doc official links</td></tr><tr><td>REQ-TPS-005</td><td><code>docs/usage/terminal-and-ai-provider-setup.ko.md</code>, README link</td></tr><tr><td>REQ-TPS-006</td><td>Existing save/clear/list provider commands unchanged; tests and package validation</td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 659,
+      "updatedAt": "2026-06-06T03:56:10.651Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-terminal-provider-setup-usability-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-terminal-provider-setup-usability.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: 터미널 사용법과 AI 제공자 설정 단순화",
+      "excerpt": "요구사항: 터미널 사용법과 AI 제공자 설정 단순화 날짜: 2026 06 06 사용자 요구 터미널 기능의 사용법과 설정법을 기능적으로 알 수 있어야 한다. GPT/OpenAI와 Gemini/Google 설정은 단순 로그인 흐름처럼 시작할 수 있어야 한다. 공식 인증 경계를 위반하거나 비공식 웹 세션을 저장하지 않아야 한다. 구현 후 빌드까지 자동으로 수행해야 한다. 요구사항 REQ TPS 001: 터미널 시작 화면은 PTY, 작업 폴더, 검색/클립보드, AI 계정 설정의 사용 경로를 즉시 보여야 ",
+      "html": "<h1>요구사항: 터미널 사용법과 AI 제공자 설정 단순화</h1>\n<p>날짜: 2026-06-06</p>\n<h2>사용자 요구</h2>\n<ul>\n<li>터미널 기능의 사용법과 설정법을 기능적으로 알 수 있어야 한다.</li>\n<li>GPT/OpenAI와 Gemini/Google 설정은 단순 로그인 흐름처럼 시작할 수 있어야 한다.</li>\n<li>공식 인증 경계를 위반하거나 비공식 웹 세션을 저장하지 않아야 한다.</li>\n<li>구현 후 빌드까지 자동으로 수행해야 한다.</li>\n</ul>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-TPS-001: 터미널 시작 화면은 PTY, 작업 폴더, 검색/클립보드, AI 계정 설정의 사용 경로를 즉시 보여야 한다.</li>\n<li>REQ-TPS-002: OpenAI와 Gemini 설정에는 공식 API key 페이지로 바로 이동하는 <code>로그인/키 발급</code> fast lane이 있어야 한다.</li>\n<li>REQ-TPS-003: provider row는 중복된 <code>키 발급</code>/<code>로그인</code> 버튼을 제거하고 하나의 primary setup action으로 정리해야 한다.</li>\n<li>REQ-TPS-004: OpenAI/Gemini URL과 문서는 공식 API key/authentication 경로를 사용해야 한다.</li>\n<li>REQ-TPS-005: 터미널 세팅, 단축키, OpenAI/Gemini 설정 절차를 durable 문서로 남겨야 한다.</li>\n<li>REQ-TPS-006: 변경은 기존 credential 저장/삭제/env injection contract를 깨지 않아야 한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1243,
+      "updatedAt": "2026-06-06T03:56:10.650Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-provider-setup-usability-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-provider-setup-usability/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Terminal and Provider Setup Usability",
+      "excerpt": "Spec: Terminal and Provider Setup Usability 범위 ProviderAccountsPanel 에 GPT/OpenAI와 Gemini/Google fast lane을 추가한다. OpenAI/Gemini provider URL을 공식 API key 페이지 중심으로 조정한다. provider action row에서 cloud provider의 중복 setup/login 버튼을 하나로 합친다. RuntimeTerminalDrawer 시작 화면에 터미널 사용/세팅 카드 네 개를",
+      "html": "<h1>Spec: Terminal and Provider Setup Usability</h1>\n<h2>범위</h2>\n<ul>\n<li><code>ProviderAccountsPanel</code>에 GPT/OpenAI와 Gemini/Google fast lane을 추가한다.</li>\n<li>OpenAI/Gemini provider URL을 공식 API key 페이지 중심으로 조정한다.</li>\n<li>provider action row에서 cloud provider의 중복 setup/login 버튼을 하나로 합친다.</li>\n<li><code>RuntimeTerminalDrawer</code> 시작 화면에 터미널 사용/세팅 카드 네 개를 추가한다.</li>\n<li><code>platform-desktop-app/docs/usage/terminal-and-ai-provider-setup.ko.md</code>를 추가하고 README에서 연결한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>ChatGPT/Gemini 웹 세션 cookie 저장.</li>\n<li>OpenAI/Gemini key를 자동 발급하거나 브라우저에서 scraping.</li>\n<li>Vertex AI OAuth/ADC production provider flow 구현.</li>\n<li>새 dependency 설치.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>GPT/OpenAI와 Gemini/Google fast lane에서 <code>로그인/키 발급</code> 버튼이 보인다.</li>\n<li>OpenAI/Gemini <code>login_url</code>은 각각 공식 API key page를 가리킨다.</li>\n<li>cloud provider row에는 중복된 setup/login 버튼 대신 하나의 primary setup action이 있다.</li>\n<li>터미널 시작 탭에 PTY, 작업 폴더, 검색/클립보드, AI 계정 카드가 보인다.</li>\n<li>renderer tests/check/build와 desktop package verification이 통과한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1215,
+      "updatedAt": "2026-06-06T03:56:10.650Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-terminal-provider-setup-usability-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Terminal and Provider Setup Usability",
+      "excerpt": "Web Search: Terminal and Provider Setup Usability 날짜: 2026 06 06 Queries site:platform.openai.com/docs OpenAI API authentication API keys project keys 2026 site:ai.google.dev/gemini api/docs Gemini API authentication API key Google login 2026 site:cloud.google.com/vertex ai/gener",
+      "html": "<p>Web Search: Terminal and Provider Setup Usability 날짜: 2026 06 06 Queries site:platform.openai.com/docs OpenAI API authentication API keys project keys 2026 site:ai.google.dev/gemini api/docs Gemini API authentication API key Google login 2026 site:cloud.google.com/vertex ai/generative ai/docs Gemini authentication OAuth application default credentials 2026 t</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2406,
+      "updatedAt": "2026-06-06T03:56:10.649Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-docs-usage-terminal-and-ai-provider-setup-ko-md",
+      "path": "platform-desktop-app/docs/usage/terminal-and-ai-provider-setup.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "터미널과 AI 제공자 설정 사용법",
+      "excerpt": "터미널과 AI 제공자 설정 사용법 목적 데스크톱 앱에서 터미널을 실제 작업 도구로 쓰고, GPT/OpenAI와 Gemini/Google을 빠르게 연결하기 위한 사용자 절차를 고정한다. 터미널 세팅 1. 앱을 실행한 뒤 하단 터미널 버튼을 연다. 2. 시작 탭에서 어댑터, 작업 폴더, 초기 입력을 확인한다. 3. 실제 OS 셸이 필요하면 PTY 탭에서 PTY 셸 시작 을 누른다. 4. PTY 화면에서는 검색, 이전/다음 검색, 선택 복사, 붙여넣기, 화면 정리, 화면 맞춤, 빠른 명령을 사용한다. ",
+      "html": "<h1>터미널과 AI 제공자 설정 사용법</h1>\n<h2>목적</h2>\n<p>데스크톱 앱에서 터미널을 실제 작업 도구로 쓰고, GPT/OpenAI와 Gemini/Google을 빠르게 연결하기 위한 사용자 절차를 고정한다.</p>\n<h2>터미널 세팅</h2>\n<p>1. 앱을 실행한 뒤 하단 <code>터미널</code> 버튼을 연다.</p>\n<p>2. <code>시작</code> 탭에서 어댑터, 작업 폴더, 초기 입력을 확인한다.</p>\n<p>3. 실제 OS 셸이 필요하면 <code>PTY</code> 탭에서 <code>PTY 셸 시작</code>을 누른다.</p>\n<p>4. PTY 화면에서는 검색, 이전/다음 검색, 선택 복사, 붙여넣기, 화면 정리, 화면 맞춤, 빠른 명령을 사용한다.</p>\n<p>5. 자주 쓰는 경로는 <code>시작</code> 탭의 작업 폴더 선택지에서 먼저 고르고, 필요한 경우 직접 입력한다.</p>\n<h2>터미널 단축키</h2>\n<ul>\n<li><code>Cmd/Ctrl+F</code>: PTY 출력 검색 입력으로 이동</li>\n<li><code>Cmd/Ctrl+Shift+C</code>: 선택 영역 복사, 선택이 없으면 현재 출력 복사</li>\n<li><code>Cmd/Ctrl+Shift+V</code>: 클립보드 내용을 PTY에 붙여넣기</li>\n<li><code>Cmd/Ctrl+L</code>: PTY 화면 정리</li>\n</ul>\n<h2>GPT/OpenAI 설정</h2>\n<p>1. <code>설정</code> &gt; <code>초기화</code> &gt; <code>계정 연결</code>을 연다.</p>\n<p>2. <code>GPT / OpenAI</code> 카드에서 <code>로그인/키 발급</code>을 누른다.</p>\n<p>3. 열린 OpenAI Platform API keys 페이지에서 대상 계정으로 로그인하고 프로젝트 API key를 만든다.</p>\n<p>4. 앱의 <code>GPT / OpenAI</code> row에 계정 메모와 API key를 붙여넣고 <code>저장</code>을 누른다.</p>\n<p>5. 저장되면 <code>작업 기본값</code>을 눌러 Agent 작업의 기본 제공자로 선택한다.</p>\n<p>OpenAI API는 공식적으로 API key 인증을 사용한다. 이 앱은 ChatGPT 웹 세션 쿠키나 비공식 브라우저 토큰을 저장하지 않는다.</p>\n<h2>Gemini/Google 설정</h2>\n<p>1. <code>설정</code> &gt; <code>초기화</code> &gt; <code>계정 연결</code>을 연다.</p>\n<p>2. <code>Gemini / Google</code> 카드에서 <code>로그인/키 발급</code>을 누른다.</p>\n<p>3. 열린 Google AI Studio API keys 페이지에서 대상 Google 계정으로 로그인하고 Gemini API key를 만든다.</p>\n<p>4. 앱의 <code>Gemini / Google</code> row에 계정 메모와 API key를 붙여넣고 <code>저장</code>을 누른다.</p>\n<p>5. 저장되면 <code>작업 기본값</code>을 눌러 Agent 작업의 기본 제공자로 선택한다.</p>\n<p>Gemini API의 가장 단순한 로컬 개발 인증 경로는 API key다. Vertex AI OAuth 또는 Application Default Credentials는 별도 production provider flow로 다룬다.</p>\n<h2>보안 경계</h2>\n<ul>\n<li>저장된 키는 로컬 앱 설정 저장소에만 기록되고 UI와 report에는 원문이 남지 않는다.</li>\n<li>공개 배포 전에는 OS keychain 저장소로 교체해야 한다.</li>\n<li>지원 번들이나 customer snapshot에는 원문 credential을 포함하지 않는다.</li>\n<li>provider CLI 실행 시에는 matching adapter에만 <code>OPENAI_API_KEY</code> 또는 <code>GEMINI_API_KEY</code>를 환경변수로 주입한다.</li>\n</ul>\n<h2>공식 근거</h2>\n<ul>\n<li>OpenAI API authentication: https://platform.openai.com/docs/api-reference/authentication</li>\n<li>OpenAI project API keys: https://platform.openai.com/docs/api-reference/project-api-keys</li>\n<li>Gemini API keys: https://ai.google.dev/gemini-api/docs/api-key</li>\n<li>Vertex AI authentication: https://docs.cloud.google.com/vertex-ai/docs/authentication</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 3043,
+      "updatedAt": "2026-06-06T03:54:34.342Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-terminal-command-center-usability-ko-md",
@@ -10593,22 +10817,6 @@
       "workspaceArea": "_history/request-traces"
     },
     {
-      "id": "history-work-summaries-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "2026 06 06 EVAL runtime telemetry source refactor 작업 요약",
-      "excerpt": "2026 06 06 EVAL runtime telemetry source refactor 작업 요약 구현 EvaluationReportPanel.tsx 에서 runtime telemetry type, score 계산, byte formatting, telemetry row construction을 분리했다. 새 evaluationRuntimeTelemetry.ts pure TypeScript module을 추가했다. comprehensive improvement contract check, wor",
-      "html": "<p>2026 06 06 EVAL runtime telemetry source refactor 작업 요약 구현 EvaluationReportPanel.tsx 에서 runtime telemetry type, score 계산, byte formatting, telemetry row construction을 분리했다. 새 evaluationRuntimeTelemetry.ts pure TypeScript module을 추가했다. comprehensive improvement contract check, workspace monitor test, desktop readiness test가 새 helper boundary를 확인하도록 업데이트했다. Ta</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1183,
-      "updatedAt": "2026-06-06T00:48:37.022Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-eval-runtime-telemetry-source-refactor-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-eval-runtime-telemetry-source-refactor/tasks.ko.md",
       "category": "project-spec",
@@ -10705,70 +10913,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-plans-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-      "path": "_history/plans/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "2026 06 06 EVAL runtime telemetry source refactor 계획",
-      "excerpt": "2026 06 06 EVAL runtime telemetry source refactor 계획 선택 이유 사용자가 소스 개선을 요청했다. 가장 최근 변경에서 EVAL runtime telemetry score 계산이 UI component 내부에 커졌으므로, 기능 변화 없이 소스 구조를 개선하기 좋은 위치다. 실행 순서 1. Web first intake와 memory bootstrap. 2. EvaluationReportPanel.tsx runtime telemetry 계산 위치 확인. 3. h",
-      "html": "<p>2026 06 06 EVAL runtime telemetry source refactor 계획 선택 이유 사용자가 소스 개선을 요청했다. 가장 최근 변경에서 EVAL runtime telemetry score 계산이 UI component 내부에 커졌으므로, 기능 변화 없이 소스 구조를 개선하기 좋은 위치다. 실행 순서 1. Web first intake와 memory bootstrap. 2. EvaluationReportPanel.tsx runtime telemetry 계산 위치 확인. 3. helper module 분리. 4. contract/test 업데이트. 5. check/test/build/package/Browser smok</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 560,
-      "updatedAt": "2026-06-06T00:35:29.577Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "2026 06 06 사용자 요청 요약",
-      "excerpt": "2026 06 06 사용자 요청 요약 요청 소스개선. 해석 직전 EVAL runtime telemetry 작업의 source 구조를 개선한다. 새 기능보다 유지보수성, 계산/렌더링 책임 분리, 테스트 가능한 source boundary를 우선한다.",
-      "html": "<p>2026 06 06 사용자 요청 요약 요청 소스개선. 해석 직전 EVAL runtime telemetry 작업의 source 구조를 개선한다. 새 기능보다 유지보수성, 계산/렌더링 책임 분리, 테스트 가능한 source boundary를 우선한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 265,
-      "updatedAt": "2026-06-06T00:35:29.577Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "2026 06 06 EVAL runtime telemetry source refactor 웹 검색 기록",
-      "excerpt": "2026 06 06 EVAL runtime telemetry source refactor 웹 검색 기록 요청 사용자가 \"소스개선\"을 요청했다. 검색 쿼리 React official docs extracting logic into custom hooks or separate functions maintainability useMemo TypeScript handbook modules type only imports official documentation Tauri v2 official docs s",
-      "html": "<p>2026 06 06 EVAL runtime telemetry source refactor 웹 검색 기록 요청 사용자가 &quot;소스개선&quot;을 요청했다. 검색 쿼리 React official docs extracting logic into custom hooks or separate functions maintainability useMemo TypeScript handbook modules type only imports official documentation Tauri v2 official docs state commands frontend backend separation OpenTelemetry process metrics semantic</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1707,
-      "updatedAt": "2026-06-06T00:35:29.575Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "2026 06 06 request to outcome trace",
-      "excerpt": "2026 06 06 request to outcome trace 요청 미뤄둔 작업 진행. 결정 이전 comprehensive improvement close out의 잔여 위험 중 실제 runtime metric 기반 score source 연결을 다음 slice로 선택했다. 산출물 platform desktop app/docs/requirements/2026 06 06 runtime metric eval score.ko.md platform desktop app/specs/2026 06 06 r",
-      "html": "<p>2026 06 06 request to outcome trace 요청 미뤄둔 작업 진행. 결정 이전 comprehensive improvement close out의 잔여 위험 중 실제 runtime metric 기반 score source 연결을 다음 slice로 선택했다. 산출물 platform desktop app/docs/requirements/2026 06 06 runtime metric eval score.ko.md platform desktop app/specs/2026 06 06 runtime metric eval score/ platform desktop app/src tauri/src/lib.rs platform des</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 926,
-      "updatedAt": "2026-06-06T00:28:42.081Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-runtime-metric-eval-score-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-runtime-metric-eval-score/tasks.ko.md",
       "category": "project-spec",
@@ -10783,38 +10927,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "2026 06 06 runtime metric EVAL score 평가",
-      "excerpt": "2026 06 06 runtime metric EVAL score 평가 평가 대상 요청: 미뤄둔 작업 진행. 구현 slice: EVAL 종합 개선 cockpit에 실제 desktop runtime metric을 연결. 완료 기준 평가 성능: process RAM/CPU/cache 상태를 EVAL 점수 입력으로 연결했다. UI/사용성: EVAL 탭에서 runtime telemetry strip과 metric evidence를 직접 볼 수 있게 했다. 네이티브 자원: Rust/Tauri sysinfo",
-      "html": "<p>2026 06 06 runtime metric EVAL score 평가 평가 대상 요청: 미뤄둔 작업 진행. 구현 slice: EVAL 종합 개선 cockpit에 실제 desktop runtime metric을 연결. 완료 기준 평가 성능: process RAM/CPU/cache 상태를 EVAL 점수 입력으로 연결했다. UI/사용성: EVAL 탭에서 runtime telemetry strip과 metric evidence를 직접 볼 수 있게 했다. 네이티브 자원: Rust/Tauri sysinfo snapshot의 semantic process metric을 renderer에 전달한다. 안정성: 새 subprocess/timer를 만들지</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1922,
-      "updatedAt": "2026-06-06T00:26:20.963Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-runtime-metric-eval-score-json",
-      "path": "_history/work-timings/2026/2026-06-06-runtime-metric-eval-score.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Runtime Metric Eval Score",
-      "excerpt": "{ \"task id\": \"2026 06 06 runtime metric eval score\", \"title\": \"Runtime metric EVAL score\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", ",
-      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 runtime metric eval score&quot;, &quot;title&quot;: &quot;Runtime metric EVAL score&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;notes&quot;: &quot;Checked Tauri pr</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1883,
-      "updatedAt": "2026-06-06T00:26:20.963Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-runtime-metric-eval-score-validation-ko-md",
@@ -18079,118 +18191,6 @@
       "historyDate": "2026-06-04",
       "historyYear": "2026",
       "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-04-manager-tool-orchestration-planner-traceability-ko-md",
-      "path": "_specs/workspace-platform/2026-06-04-manager-tool-orchestration-planner/traceability.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "Traceability: Manager Tool Orchestration Planner",
-      "excerpt": "Traceability: Manager Tool Orchestration Planner | 요구사항 | 구현 | 검증 | | | | | | REQ WS 060 | agent platform/src/agent platform/orchestration/manager tool.py | test manager tool orchestration.py , plan agent orchestration | | REQ WS 060 | agent platform/src/agent platform/cli.py | p",
-      "html": "<h1>Traceability: Manager Tool Orchestration Planner</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td><code>REQ-WS-060</code></td><td><code>agent-platform/src/agent_platform/orchestration/manager_tool.py</code></td><td><code>test_manager_tool_orchestration.py</code>, <code>plan-agent-orchestration</code></td></tr><tr><td><code>REQ-WS-060</code></td><td><code>agent-platform/src/agent_platform/cli.py</code></td><td><code>plan-agent-orchestration</code> CLI</td></tr><tr><td><code>REQ-WS-060</code></td><td><code>agent-platform/configs/orchestration/manager-tool-plan-template.json</code></td><td><code>check-config-contract</code>, <code>plan-agent-orchestration</code></td></tr><tr><td><code>REQ-WS-060</code></td><td><code>agent-platform/configs/orchestration/agent-orchestration-registry.json</code></td><td><code>check-agent-orchestration</code></td></tr><tr><td><code>REQ-WS-060</code></td><td><code>agent-platform/configs/agents/agent-orchestrator-agent.json</code></td><td><code>inspect-agent</code></td></tr><tr><td><code>REQ-WS-060</code></td><td><code>agent-platform/docs/agent-orchestration-platform.ko.md</code>, <code>agent-platform/docs/agent-orchestration-platform.en.md</code></td><td>documentation review</td></tr><tr><td><code>REQ-CHANGE-2026-06-04-001</code></td><td><code>_requirements/baselines/2026-05-31-workspace-platform.ko.md</code></td><td>requirements review</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 994,
-      "updatedAt": "2026-06-03T21:52:15.193Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-04-manager-tool-orchestration-planner-plan-ko-md",
-      "path": "_specs/workspace-platform/2026-06-04-manager-tool-orchestration-planner/plan.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "Plan: Manager Tool Orchestration Planner",
-      "excerpt": "Plan: Manager Tool Orchestration Planner 모드 선택 work mode : governance 이유: reusable agent orchestration 도구와 CLI, 요구사항 baseline, registry, 문서, 평가 기록이 바뀐다. 구현 계획 1. 웹 검색으로 최신 manager/subagent/tool 패턴을 확인한다. 2. 기존 REQ WS 060 , agent orchestration registry, agent specs, CLI 패턴을 확인한다. ",
-      "html": "<h1>Plan: Manager Tool Orchestration Planner</h1>\n<h2>모드 선택</h2>\n<ul>\n<li><code>work_mode</code>: <code>governance</code></li>\n<li>이유: reusable agent orchestration 도구와 CLI, 요구사항 baseline, registry, 문서, 평가 기록이 바뀐다.</li>\n</ul>\n<h2>구현 계획</h2>\n<p>1. 웹 검색으로 최신 manager/subagent/tool 패턴을 확인한다.</p>\n<p>2. 기존 <code>REQ-WS-060</code>, agent orchestration registry, agent specs, CLI 패턴을 확인한다.</p>\n<p>3. Python-first 구현을 선택하고 TypeScript/외부 framework 설치는 제외한다.</p>\n<p>4. <code>agent_platform.orchestration.manager_tool</code> 모듈을 추가한다.</p>\n<p>5. <code>plan-agent-orchestration</code> CLI를 추가한다.</p>\n<p>6. <code>manager-tool-plan-template.json</code>을 자기 설명형 config로 추가한다.</p>\n<p>7. <code>agent-orchestrator-agent</code>와 agent orchestration registry에 새 도구를 연결한다.</p>\n<p>8. 단위 테스트, CLI, config contract, agent orchestration check를 실행한다.</p>\n<p>9. history, omission, grounding, evaluation, timing, request trace를 남긴다.</p>\n<h2>아키텍처 옵션</h2>\n<ul>\n<li>옵션 A: framework-neutral deterministic planner</li>\n<li>장점: 설치 불필요, 기존 agent spec/registry와 바로 맞고 테스트 가능하다.</li>\n<li>단점: 실제 LLM 실행, streaming, trace persistence는 아직 없다.</li>\n<li>옵션 B: OpenAI Agents SDK 또는 LangGraph runtime adapter 즉시 설치</li>\n<li>장점: 실제 manager-as-tools 실행까지 빠르게 갈 수 있다.</li>\n<li>단점: 설치 감사, adapter 경계, provider 설정, runtime resource guard가 필요하고 이번 요청의 “쉽게 만들 구조”보다 범위가 커진다.</li>\n</ul>\n<h2>결정</h2>\n<p>옵션 A를 선택한다. 이번 변경은 실행 전 계획 도구이며, 실제 runtime adapter는 별도 요구사항과 설치 감사가 준비된 뒤 붙인다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1707,
-      "updatedAt": "2026-06-03T21:51:56.825Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-04-manager-tool-orchestration-planner-spec-ko-md",
-      "path": "_specs/workspace-platform/2026-06-04-manager-tool-orchestration-planner/spec.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "Spec: Manager Tool Orchestration Planner",
-      "excerpt": "Spec: Manager Tool Orchestration Planner 목표 중앙 manager agent가 여러 specialist subagent를 도구처럼 호출하는 orchestration 구조를 저장소 안에서 쉽게 만들 수 있도록, 실행 전 계획 JSON을 생성하는 CLI와 검증 가능한 입력 템플릿을 추가한다. 요구사항 REQ WS 060 REQ CHANGE 2026 06 04 001 범위 포함: plan agent orchestration CLI registered agent specs",
-      "html": "<h1>Spec: Manager Tool Orchestration Planner</h1>\n<h2>목표</h2>\n<p>중앙 manager agent가 여러 specialist subagent를 도구처럼 호출하는 orchestration 구조를 저장소 안에서 쉽게 만들 수 있도록, 실행 전 계획 JSON을 생성하는 CLI와 검증 가능한 입력 템플릿을 추가한다.</p>\n<h2>요구사항</h2>\n<ul>\n<li><code>REQ-WS-060</code></li>\n<li><code>REQ-CHANGE-2026-06-04-001</code></li>\n</ul>\n<h2>범위</h2>\n<ul>\n<li>포함:</li>\n<li><code>plan-agent-orchestration</code> CLI</li>\n<li>registered agent specs 기반 subagent tool roster 생성</li>\n<li>manager, orchestration pattern, state/handoff/control, human checkpoint, validation command 계획 산출</li>\n<li>manager tool plan input template</li>\n<li>단위 테스트와 문서/요구사항/trace 업데이트</li>\n<li>제외:</li>\n<li>실제 LLM runtime 실행</li>\n<li>LangGraph, CrewAI, OpenAI Agents SDK 설치</li>\n<li>parallel worker, queue, long-running process 실행</li>\n<li>UI graph editor</li>\n</ul>\n<h2>성공 기준</h2>\n<ul>\n<li><code>plan-agent-orchestration</code>이 <code>manager-tool-plan-template.json</code>을 읽고 <code>ready_to_orchestrate</code> JSON을 출력한다.</li>\n<li>요청된 subagent는 <code>run_&lt;agent_name&gt;</code> tool로 표현되고, input/output contract와 tool allow/block 상태가 산출물에 포함된다.</li>\n<li>누락된 manager, 누락된 requested agent, invalid pattern, manager self-call은 <code>rework_required</code>로 분류된다.</li>\n<li>기존 <code>check-agent-orchestration</code>, agent inspect, config contract, unit tests를 통과한다.</li>\n</ul>\n<h2>설계 방향</h2>\n<ul>\n<li>언어/런타임: Python 3.11</li>\n<li>구조: 기존 <code>agent_platform.orchestration</code> package 안에 deterministic planner를 추가한다.</li>\n<li>패턴: <code>supervisor_router</code>를 기본으로 하되 registry의 다른 pattern id도 입력으로 받을 수 있게 한다.</li>\n<li>정책: manager가 route, subagent tool call, merge, evaluation을 소유한다. subagent는 bounded subtask tool로만 계획된다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1778,
-      "updatedAt": "2026-06-03T21:51:48.795Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "requirements-reviews-2026-06-04-manager-tool-orchestration-planner-ko-md",
-      "path": "_requirements/reviews/2026-06-04-manager-tool-orchestration-planner.ko.md",
-      "category": "requirement",
-      "language": "ko",
-      "title": "요구사항 검토: Manager Tool Orchestration Planner",
-      "excerpt": "요구사항 검토: Manager Tool Orchestration Planner 검토 대상 REQ WS 060 확장 REQ CHANGE 2026 06 04 001 검토 결론 상태: accepted 우선순위: must 소유 영역: agent platform , requirements , specs , history 적합성 검토 사용자 의도와 일치: manager가 subagent를 도구처럼 호출하는 구조를 직접 구현한다. 기존 요구사항과 충돌 없음: 기존 agent orchestration regis",
-      "html": "<h1>요구사항 검토: Manager Tool Orchestration Planner</h1>\n<h2>검토 대상</h2>\n<ul>\n<li><code>REQ-WS-060</code> 확장</li>\n<li><code>REQ-CHANGE-2026-06-04-001</code></li>\n</ul>\n<h2>검토 결론</h2>\n<ul>\n<li>상태: <code>accepted</code></li>\n<li>우선순위: <code>must</code></li>\n<li>소유 영역: <code>agent-platform</code>, <code>_requirements</code>, <code>_specs</code>, <code>_history</code></li>\n</ul>\n<h2>적합성 검토</h2>\n<ul>\n<li>사용자 의도와 일치: manager가 subagent를 도구처럼 호출하는 구조를 직접 구현한다.</li>\n<li>기존 요구사항과 충돌 없음: 기존 agent orchestration registry와 <code>agent-orchestrator-agent</code>를 source of truth로 재사용한다.</li>\n<li>검증 가능성 있음: CLI가 JSON plan을 만들고, 단위 테스트와 config/orchestration 검증으로 누락을 확인할 수 있다.</li>\n<li>유지보수성 있음: 외부 runtime framework를 설치하지 않고 framework-neutral 계획 도구로 먼저 구현해 adapter 교체 가능성을 유지한다.</li>\n</ul>\n<h2>남은 리스크</h2>\n<ul>\n<li>이 변경은 실제 LLM 호출, parallel worker 실행, 또는 runtime trace 저장소를 만들지 않는다.</li>\n<li>향후 실제 실행 런타임을 붙일 때는 CLI adapter, resource guard, 설치 감사, observability 저장소가 별도 요구사항으로 필요하다.</li>\n</ul>\n<h2>검토 산출물</h2>\n<ul>\n<li><code>_requirements/changes/2026-06-04-manager-tool-orchestration-planner.ko.md</code></li>\n<li><code>_requirements/baselines/2026-05-31-workspace-platform.ko.md</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1315,
-      "updatedAt": "2026-06-03T21:51:39.797Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "_requirements/reviews"
-    },
-    {
-      "id": "requirements-changes-2026-06-04-manager-tool-orchestration-planner-ko-md",
-      "path": "_requirements/changes/2026-06-04-manager-tool-orchestration-planner.ko.md",
-      "category": "requirement",
-      "language": "ko",
-      "title": "요구사항 변경: Manager Tool Orchestration Planner",
-      "excerpt": "요구사항 변경: Manager Tool Orchestration Planner 변경 ID REQ CHANGE 2026 06 04 001 변경 요약 사용자는 multi agent를 관리하는 방법으로 manager/subagent 구조를 쓰고, subagent를 도구처럼 다루는 agent orchestration tool을 쉽게 만들라고 요청했다. 기존 REQ WS 060 은 agent 생성/오케스트레이션 계약과 검증 게이트를 정의했지만 실제 manager as tools 계획 생성 CLI는 없었다.",
-      "html": "<h1>요구사항 변경: Manager Tool Orchestration Planner</h1>\n<h2>변경 ID</h2>\n<ul>\n<li><code>REQ-CHANGE-2026-06-04-001</code></li>\n</ul>\n<h2>변경 요약</h2>\n<p>사용자는 multi-agent를 관리하는 방법으로 manager/subagent 구조를 쓰고, subagent를 도구처럼 다루는 agent orchestration tool을 쉽게 만들라고 요청했다. 기존 <code>REQ-WS-060</code>은 agent 생성/오케스트레이션 계약과 검증 게이트를 정의했지만 실제 manager-as-tools 계획 생성 CLI는 없었다.</p>\n<h2>반영 요구사항</h2>\n<ul>\n<li><code>REQ-WS-060</code>을 확장해 중앙 manager가 subagent를 tool roster로 호출하는 실행 전 계획을 <code>plan-agent-orchestration</code>으로 만들도록 했다.</li>\n<li>계획 산출물은 manager agent, selected pattern, subagent tool name, input/output contract, allowed/blocked tools, state/handoff/control, human checkpoint, validation command를 포함해야 한다.</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>사용자 요청: <code>UR-2026-06-04-001</code></li>\n<li>외부 참고: OpenAI Agents SDK와 LangChain multi-agent 공식 문서는 manager/agents-as-tools, subagents, router, handoff 패턴을 분리해 설명한다.</li>\n<li>내부 참고: <code>_requirements/reviews/2026-06-02-agent-creation-orchestration-platform.ko.md</code>는 runtime orchestrator 또는 scaffold generator가 향후 개선 후보라고 남겼다.</li>\n</ul>\n<h2>영향 범위</h2>\n<ul>\n<li><code>agent-platform/src/agent_platform/orchestration/manager_tool.py</code></li>\n<li><code>agent-platform/src/agent_platform/cli.py</code></li>\n<li><code>agent-platform/configs/orchestration/manager-tool-plan-template.json</code></li>\n<li><code>agent-platform/configs/orchestration/agent-orchestration-registry.json</code></li>\n<li><code>agent-platform/configs/agents/agent-orchestrator-agent.json</code></li>\n<li><code>agent-platform/docs/agent-orchestration-platform.ko.md</code></li>\n<li><code>_specs/workspace-platform/2026-06-04-manager-tool-orchestration-planner/</code></li>\n</ul>\n<h2>검증</h2>\n<ul>\n<li><code>plan-agent-orchestration</code></li>\n<li><code>check-agent-orchestration</code></li>\n<li><code>check-config-contract</code></li>\n<li><code>inspect-agent</code></li>\n<li><code>python3 -m unittest discover -s tests</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1898,
-      "updatedAt": "2026-06-03T21:51:33.001Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "_requirements/changes"
-    },
-    {
-      "id": "requirements-baselines-2026-05-31-workspace-platform-ko-md",
-      "path": "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
-      "category": "requirement",
-      "language": "ko",
-      "title": "2026 05 31 Workspace Platform 요구사항 기준선",
-      "excerpt": "2026 05 31 Workspace Platform 요구사항 기준선 범위 이 기준선은 2026 05 31 현재 사용자 요청과 완료 작업에서 도출된 공통 workspace/platform 요구사항을 정의한다. 프로젝트 전용 요구사항은 해당 프로젝트의 docs/requirements/ 에 둔다. 기준선 상태 상태: baseline 기준일: 2026 05 31 소유 영역: shared workspace, agent platform/ 출처 요청: history/user requests/2026/2026",
-      "html": "<h1>2026-05-31 Workspace Platform 요구사항 기준선</h1>\n<h2>범위</h2>\n<p>이 기준선은 2026-05-31 현재 사용자 요청과 완료 작업에서 도출된 공통 workspace/platform 요구사항을 정의한다. 프로젝트 전용 요구사항은 해당 프로젝트의 <code>docs/requirements/</code>에 둔다.</p>\n<h2>기준선 상태</h2>\n<ul>\n<li>상태: <code>baseline</code></li>\n<li>기준일: 2026-05-31</li>\n<li>소유 영역: shared workspace, <code>agent-platform/</code></li>\n<li>출처 요청: <code>_history/user-requests/2026/2026-05-31.ko.md</code></li>\n<li>요청-결과 추적: <code>_history/request-traces/2026/2026-05-31.ko.md</code></li>\n</ul>\n<h2>요구사항 목록</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>출처 요청</th><th>우선순위</th><th>상태</th><th>소유 영역</th><th>검증 방법</th><th>관련 산출물</th></tr></thead><tbody><tr><td>REQ-WS-001</td><td>저장소는 개인 에이전트 구축 플랫폼과 여러 프로젝트를 장기 관리하는 monorepo로 운영해야 한다.</td><td>UR-2026-05-31-001, 002</td><td>must</td><td>baseline</td><td>workspace</td><td>README/registry 검토</td><td><code>README.md</code>, <code>_ops/projects/registry.json</code></td></tr><tr><td>REQ-WS-002</td><td>의미 있는 변경은 커밋하고 즉시 <code>origin/main</code>에 push해야 한다.</td><td>UR-2026-05-31-003, 004</td><td>must</td><td>baseline</td><td>workspace</td><td>git log와 push 상태 확인</td><td><code>AGENTS.md</code>, <code>README.md</code></td></tr><tr><td>REQ-WS-003</td><td>모든 새 사용자 지시는 웹 검색으로 시작하고 공개 검색 기록을 남겨야 한다.</td><td>UR-2026-05-31-023, 031</td><td>must</td><td>baseline</td><td>workspace</td><td>웹 검색 기록과 평가 target 확인</td><td><code>_history/web-searches/</code>, <code>_ops/workflows/05-web-first-intake.md</code></td></tr><tr><td>REQ-WS-004</td><td>사용자 요청은 의미 요약으로 저장하고, 요청-결과 추적표에서 산출물/평가/커밋과 연결해야 한다.</td><td>UR-2026-05-31-033, 035</td><td>must</td><td>baseline</td><td>workspace</td><td>request summary와 trace 확인</td><td><code>_history/user-requests/</code>, <code>_history/request-traces/</code></td></tr><tr><td>REQ-WS-005</td><td>요구사항은 사용자 작업에서 도출하고, 검토/변경/기준선화한 뒤 구현과 평가의 기준으로 사용해야 한다.</td><td>UR-2026-05-31-036</td><td>must</td><td>baseline</td><td>workspace</td><td>requirements target과 review file 확인</td><td><code>_requirements/</code>, <code>_docs/policies/requirements-management-policy.ko.md</code></td></tr><tr><td>REQ-WS-006</td><td>의미 있는 작업은 작업 요약, 계획 기록, 평가 보고서, 상세 히스토리를 남겨야 한다.</td><td>UR-2026-05-31-012, 014, 019, 034</td><td>must</td><td>baseline</td><td>workspace</td><td>각 <code>_history/</code> target 확인</td><td><code>_history/work-summaries/</code>, <code>_history/plans/</code>, <code>_history/evaluations/</code></td></tr><tr><td>REQ-WS-007</td><td>작업 결과가 초기 지시와 요구사항에 맞는지 평가하고, gap은 재작업해야 한다.</td><td>UR-2026-05-31-011</td><td>must</td><td>baseline</td><td>agent-platform</td><td><code>evaluate-work</code> 결과 확인</td><td><code>work-evaluator-agent</code>, <code>_ops/workflows/40-evaluate-and-rework.md</code></td></tr><tr><td>REQ-WS-008</td><td>AI가 세팅을 잊지 않도록 세션 시작 시 메모리 부트스트랩 anchor를 확인해야 한다.</td><td>UR-2026-05-31-009, 032</td><td>must</td><td>baseline</td><td>agent-platform</td><td><code>check-memory-bootstrap</code> 결과 확인</td><td><code>agent-platform/configs/memory/bootstrap-manifest.json</code></td></tr><tr><td>REQ-WS-009</td><td>코딩 작업은 Python-first, 조사-first, 오픈소스 검토-first를 기본으로 해야 한다.</td><td>UR-2026-05-31-008, 026, 028, 030</td><td>should</td><td>baseline</td><td>agent-platform/projects</td><td>테스트와 조사 기록 확인</td><td><code>agent-platform/</code>, <code>_docs/policies/open-source-installation-policy.ko.md</code></td></tr><tr><td>REQ-WS-010</td><td>최종 산출물의 사실 주장은 근거 기반으로 검증하고, 지식 베이스는 틀릴 수 있다고 가정해야 한다.</td><td>UR-2026-05-31-017, 022</td><td>must</td><td>baseline</td><td>workspace</td><td>knowledge/grounding checks 확인</td><td><code>knowledge-skeptic-agent</code>, <code>hallucination-guard-agent</code></td></tr><tr><td>REQ-WS-011</td><td>병렬 작업과 진행 중인 에이전트는 한 곳에서 상태를 볼 수 있어야 한다.</td><td>UR-2026-05-31-015</td><td>should</td><td>baseline</td><td><code>_ops</code></td><td>task board check</td><td><code>_ops/coordination/</code></td></tr><tr><td>REQ-WS-012</td><td>프로젝트 전용 산출물은 해당 프로젝트에 두고, 공통 자산만 <code>_</code> 폴더로 승격해야 한다.</td><td>UR-2026-05-31-021</td><td>must</td><td>baseline</td><td>workspace/projects</td><td>project boundary review</td><td><code>_docs/policies/project-boundary-policy.ko.md</code></td></tr><tr><td>REQ-WS-013</td><td>의미 있는 구현 작업은 spec-driven 방식처럼 스펙, 계획, 작업 목록, 검증, traceability 산출물을 거쳐야 한다.</td><td>UR-2026-05-31-037</td><td>must</td><td>baseline</td><td>workspace/projects</td><td>spec target과 evaluator check 확인</td><td><code>_specs/</code>, <code>_docs/policies/spec-driven-development-policy.ko.md</code></td></tr><tr><td>REQ-WS-014</td><td>커스텀 스킬 생성/수정은 명시적인 원본, trigger 예시, 검증, 전진 테스트, 개선 backlog, 평가 target을 남겨야 한다.</td><td>UR-2026-05-31-038</td><td>must</td><td>baseline</td><td>workspace/agent-platform</td><td>skill validation과 evaluator check 확인</td><td><code>_skills/</code>, <code>_docs/policies/skill-lifecycle-policy.ko.md</code>, <code>skill-lifecycle-agent</code></td></tr><tr><td>REQ-WS-015</td><td>소스 코드 작성 전에는 best-fit 아키텍처와 reference architecture를 조사하고 최소 두 개의 구조 후보와 선택 근거를 기록해야 한다.</td><td>UR-2026-05-31-039</td><td>must</td><td>baseline</td><td>agent-platform/projects</td><td><code>complete-coding-research</code> 결과와 architecture fields 확인</td><td><code>_docs/policies/architecture-first-coding-policy.ko.md</code>, <code>coding-research-agent</code></td></tr><tr><td>REQ-WS-016</td><td>대기업 엔지니어링, 공식 연구소, architecture center, 고신뢰 독립 출처 목록은 일반 source taxonomy와 분리된 registry로 관리해야 한다.</td><td>UR-2026-05-31-040</td><td>must</td><td>baseline</td><td>agent-platform/_research</td><td><code>check-config-contract</code>와 source list 확인</td><td><code>agent-platform/configs/research/enterprise-source-registry.json</code>, <code>_research/source-lists/</code></td></tr><tr><td>REQ-WS-017</td><td>중요한 원천값, 설정값, 주장, 리뷰 신호, 가정, 계획 제약은 출처와 접근일을 추적하고, 모든 중요한 계획 단계는 근거와 연결해야 한다.</td><td>UR-2026-05-31-041</td><td>must</td><td>baseline</td><td>agent-platform/_history</td><td><code>plan-from-research</code>, <code>complete-coding-research</code>, <code>evaluate-work</code> 결과 확인</td><td><code>source_value_provenance</code>, <code>plan_evidence</code>, <code>source_provenance_targets</code>, <code>plan_evidence_targets</code></td></tr><tr><td>REQ-WS-018</td><td>웹 검색은 사람이 실제로 검색하듯 세계 기술 블로그, 한국 빅테크 기술 블로그, 인도 기술 소스, 논문 검색 원천, 한국 로컬 리뷰 채널을 폭넓게 사용해야 한다.</td><td>UR-2026-05-31-042, 043</td><td>must</td><td>baseline</td><td>agent-platform/_research</td><td>source discovery registry와 source list 확인</td><td><code>agent-platform/configs/research/source-discovery-registry.json</code>, <code>_research/source-lists/enterprise-high-quality-sites.ko.md</code></td></tr><tr><td>REQ-WS-019</td><td>한국 사용자 리뷰나 로컬 판단이 필요한 조사에서는 Naver Map, Kakao Map, Naver Blog/Search, 공식 페이지를 우선 확인하고 후보 페이지 품질을 평가해야 한다.</td><td>UR-2026-05-31-044</td><td>must</td><td>baseline</td><td><code>_tools</code>/<code>_research</code></td><td>Korean local review tool tests와 source list 확인</td><td><code>_tools/korean-local-review/</code>, <code>_research/source-lists/korean-local-review-sources.ko.md</code></td></tr></tbody></table>\n<p>| REQ-WS-020 | 작업 성격에 따라 <code>quick</code>, <code>standard</code>,</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 74441,
-      "updatedAt": "2026-06-03T21:51:23.300Z",
-      "historyDate": "2026-05-31",
-      "historyYear": "2026",
-      "workspaceArea": "_requirements/baselines"
-    },
-    {
-      "id": "agent-platform-docs-agent-orchestration-platform-en-md",
-      "path": "agent-platform/docs/agent-orchestration-platform.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Agent Creation And Orchestration Platform",
-      "excerpt": "Agent Creation And Orchestration Platform Purpose This platform is not a single chatbot. It is a workspace for turning repeated human work into reusable agents and connecting those agents when a task needs orchestration. A new agent is not just a prompt; it is a reusable capabili",
-      "html": "<h1>Agent Creation And Orchestration Platform</h1>\n<h2>Purpose</h2>\n<p>This platform is not a single chatbot. It is a workspace for turning repeated human work into reusable agents and connecting those agents when a task needs orchestration. A new agent is not just a prompt; it is a reusable capability with input, output, tools, policy, state, handoff, and validation contracts.</p>\n<p>The source setting is <code>agent-platform/configs/orchestration/agent-orchestration-registry.json</code>.</p>\n<h2>Principles</h2>\n<ul>\n<li>Agents need explicit input and output contracts.</li>\n<li>Agent tools, skills, CLIs, and file boundaries must be visible in the spec or workflow.</li>\n<li>Multi-agent work should select a pattern first: supervisor/router, sequential pipeline, parallel fan-out/merge, or handoff network.</li>\n<li>State, handoff, human decisions, observability, resources, and evaluation must not stay implicit.</li>\n<li>The platform should not lock itself to one framework. LangGraph, AutoGen, CrewAI, and the OpenAI Agents SDK are references or implementation candidates; the platform contract stays framework-neutral.</li>\n</ul>\n<h2>Agent Creation Flow</h2>\n<p>1. Capture request intent and project boundary.</p>\n<p>2. Select the smallest fitting blueprint from <code>research_agent</code>, <code>planning_agent</code>, <code>execution_agent</code>, <code>evaluation_agent</code>, <code>integration_agent</code>, or <code>domain_project_agent</code>.</p>\n<p>3. Check research needs and existing agent or tool reuse.</p>\n<p>4. For meaningful changes, record requirements and spec artifacts.</p>\n<p>5. Create the agent spec under <code>agent-platform/configs/agents/</code>.</p>\n<p>6. Declare tools, skills, CLI adapters, and installation needs.</p>\n<p>7. If several agents are connected, record the orchestration pattern and controls.</p>\n<p>8. Run validation commands and save history/evaluation records.</p>\n<h2>Orchestration Patterns</h2>\n<ul>\n<li><code>single_agent</code>: one agent can complete the task independently.</li>\n<li><code>supervisor_router</code>: a supervisor chooses specialized agents by request type or risk.</li>\n<li><code>sequential_pipeline</code>: one stage artifact feeds the next stage, such as research to plan to implementation to evaluation.</li>\n<li><code>parallel_fanout_merge</code>: independent lanes run in parallel and a merge gate reconciles outputs.</li>\n<li><code>handoff_network</code>: specialized agents dynamically transfer control through explicit handoff payloads.</li>\n</ul>\n<h2>Manager-As-Tools Planner</h2>\n<p><code>plan-agent-orchestration</code> does not run an LLM runtime. It reads registered agent specs and creates a JSON plan where one manager calls subagents as bounded tools. The default manager is <code>agent-orchestrator-agent</code>, and the default pattern is <code>supervisor_router</code>.</p>\n<p>The planner has three jobs.</p>\n<ul>\n<li>Keep route, subagent tool calls, merge, and evaluation owned by the manager.</li>\n<li>Expose each subagent as a <code>run_&lt;agent_name&gt;</code> tool with input/output contracts, allowed and blocked tools, policy, and docs targets.</li>\n<li>Make the agent roster, handoff/state/control model, and validation commands inspectable before a runtime adapter such as LangGraph, CrewAI, or the OpenAI Agents SDK is attached.</li>\n</ul>\n<p>Example:</p>\n<pre><code>\ncd agent-platform\nPYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json\n</code></pre>\n<h2>Validation Commands</h2>\n<pre><code>\ncd agent-platform\nPYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json\nPYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json\nPYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents\nPYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/agent-orchestrator-agent.json\n</code></pre>\n<h2>Operational Notes</h2>\n<p>Multi-agent orchestration can become slow or hold resources for a long time. If long-running agents, subprocesses, browsers, queues, caches, streams, file handles, or servers are involved, run the <code>resource-guard-agent</code> and document cleanup paths plus measurement evidence. If work can run in parallel, use <code>parallel-work-planner-agent</code> to define touch paths, dependencies, and merge gates first.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 4001,
-      "updatedAt": "2026-06-03T21:51:13.212Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "agent-platform"
     }
   ],
   "historyDays": [
@@ -18201,7 +18201,7 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 20
+          "count": 21
         },
         {
           "category": "request-trace",
@@ -18225,7 +18225,7 @@
         },
         {
           "category": "plan",
-          "count": 8
+          "count": 7
         },
         {
           "category": "daily-history",
@@ -18240,7 +18240,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-          "updatedAt": "2026-06-06T03:46:49.914Z",
+          "updatedAt": "2026-06-06T03:58:52.562Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18394,16 +18394,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "2026 06 06 runtime metric EVAL score 평가",
-          "excerpt": "2026 06 06 runtime metric EVAL score 평가 평가 대상 요청: 미뤄둔 작업 진행. 구현 slice: EVAL 종합 개선 cockpit에 실제 desktop runtime metric을 연결. 완료 기준 평가 성능: process RAM/CPU/cache 상태를 EVAL 점수 입력으로 연결했다. UI/사용성: EVAL 탭에서 runtime telemetry strip과 metric evidence를 직접 볼 수 있게 했다. 네이티브 자원: Rust/Tauri sysinfo",
-          "updatedAt": "2026-06-06T00:26:20.963Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-storage-architecture-review-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-storage-architecture-review.ko.md",
           "category": "evaluation",
@@ -18431,6 +18421,26 @@
           "title": "평가: Terminal Command Center Usability",
           "excerpt": "평가: Terminal Command Center Usability 날짜: 2026 06 06 결론 요청은 이번 executable slice 기준으로 충족됐다. 기존 native PTY terminal이 단순 xterm 출력면에 가까웠다면, 이제 검색, copy/paste, clear, fit, quick command, shortcut을 갖춘 terminal command center가 됐다. 검증 corepack pnpm audit prod=false : No known vulnerabili",
           "updatedAt": "2026-06-06T03:46:49.914Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-terminal-provider-setup-usability-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-terminal-provider-setup-usability-evaluation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Terminal Provider Setup Usability Evaluation Input",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"2026 06 06 terminal provider setup usability\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"installation occurred\": false, \"resource risk occurred\": true, \"resour",
+          "updatedAt": "2026-06-06T03:56:10.654Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-terminal-provider-setup-usability-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "Evaluation: Terminal and Provider Setup Usability",
+          "excerpt": "Evaluation: Terminal and Provider Setup Usability 날짜: 2026 06 06 판정 Pass for internal development package. 근거 요구사항, 스펙, traceability, web search, coding research, resource check, omission check를 생성했다. workspace monitor test/check/build , platform desktop app test/check , package:",
+          "updatedAt": "2026-06-06T03:58:52.562Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18471,16 +18481,6 @@
           "title": "작업 계획 기록",
           "excerpt": "작업 계획 기록 선택한 모드 standard implementation 계획 1. 웹 검색으로 버튼/명령 피드백 근거 확인 2. 현재 버튼 액션과 notice 구조 확인 3. 액션별 피드백 상태 모델 추가 4. 주요 버튼을 wrapper로 연결 5. CSS와 구조 테스트 추가 6. check/test/build/package 실행 7. 평가, 요청 추적, commit/push 제외 전체 버튼 컴포넌트 교체, 모든 handler 성공/실패 반환 계약 개편, 새 dependency 설치는 제외한다.",
           "updatedAt": "2026-06-06T02:51:44.117Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-plans-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-          "path": "_history/plans/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "2026 06 06 EVAL runtime telemetry source refactor 계획",
-          "excerpt": "2026 06 06 EVAL runtime telemetry source refactor 계획 선택 이유 사용자가 소스 개선을 요청했다. 가장 최근 변경에서 EVAL runtime telemetry score 계산이 UI component 내부에 커졌으므로, 기능 변화 없이 소스 구조를 개선하기 좋은 위치다. 실행 순서 1. Web first intake와 memory bootstrap. 2. EvaluationReportPanel.tsx runtime telemetry 계산 위치 확인. 3. h",
-          "updatedAt": "2026-06-06T00:35:29.577Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18624,16 +18624,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "2026 06 06 request to outcome trace",
-          "excerpt": "2026 06 06 request to outcome trace 요청 미뤄둔 작업 진행. 결정 이전 comprehensive improvement close out의 잔여 위험 중 실제 runtime metric 기반 score source 연결을 다음 slice로 선택했다. 산출물 platform desktop app/docs/requirements/2026 06 06 runtime metric eval score.ko.md platform desktop app/specs/2026 06 06 r",
-          "updatedAt": "2026-06-06T00:28:42.081Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-06-storage-architecture-review-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-storage-architecture-review.ko.md",
           "category": "request-trace",
@@ -18651,6 +18641,16 @@
           "title": "Request Trace: Terminal Command Center Usability",
           "excerpt": "Request Trace: Terminal Command Center Usability 날짜: 2026 06 06 요청 터미널 기능이 너무 부족하므로 근본적으로 수정하고 사용성을 개선. 결과 native PTY terminal command center 구현. xterm SearchAddon 설치 및 검색 기능 추가. copy/paste/clear/fit/quick command/shortcut 추가. 설치 감사, resource check, requirements/spec/validation 기",
           "updatedAt": "2026-06-06T03:46:49.914Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-terminal-provider-setup-usability-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Request Trace: Terminal and Provider Setup Usability",
+          "excerpt": "Request Trace: Terminal and Provider Setup Usability 날짜: 2026 06 06 요청 터미널 기능 사용법과 세팅법 개선. GPT/Gemini 설정을 단순 로그인 흐름으로 시작 가능하게 개선. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/RuntimeTerminalDrawer.tsx platform desktop app/renderer/workspace monitor/com",
+          "updatedAt": "2026-06-06T03:58:52.561Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18734,16 +18734,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "2026 06 06 사용자 요청 요약",
-          "excerpt": "2026 06 06 사용자 요청 요약 요청 소스개선. 해석 직전 EVAL runtime telemetry 작업의 source 구조를 개선한다. 새 기능보다 유지보수성, 계산/렌더링 책임 분리, 테스트 가능한 source boundary를 우선한다.",
-          "updatedAt": "2026-06-06T00:35:29.577Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
           "category": "user-request",
@@ -18781,6 +18771,16 @@
           "title": "사용자 요청 요약: Terminal Command Center Usability",
           "excerpt": "사용자 요청 요약: Terminal Command Center Usability 날짜: 2026 06 06 요지 사용자는 현재 터미널 기능이 너무 부족하므로 근본적으로 수정하고 사용성을 전부 개선하라고 요청했다. 해석 단순 출력 패널이 아니라 실제 desktop terminal처럼 검색, 복사/붙여넣기, 빠른 조작, 단축키, 상태 피드백이 필요하다. 전체 backend multiplexer까지 한 번에 바꾸는 것은 위험하므로, 기존 native PTY runtime 위에 즉시 체감되는 comman",
           "updatedAt": "2026-06-06T03:44:39.332Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-terminal-provider-setup-usability-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "User Request Summary: Terminal and Provider Setup Usability",
+          "excerpt": "User Request Summary: Terminal and Provider Setup Usability 날짜: 2026 06 06 사용자는 터미널 기능의 실제 사용법과 세팅법을 더 기능적으로 만들고, GPT/OpenAI와 Gemini/Google 설정을 단순 로그인 흐름으로 시작할 수 있게 해 달라고 요청했다.",
+          "updatedAt": "2026-06-06T03:56:10.653Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18864,16 +18864,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "2026 06 06 EVAL runtime telemetry source refactor 웹 검색 기록",
-          "excerpt": "2026 06 06 EVAL runtime telemetry source refactor 웹 검색 기록 요청 사용자가 \"소스개선\"을 요청했다. 검색 쿼리 React official docs extracting logic into custom hooks or separate functions maintainability useMemo TypeScript handbook modules type only imports official documentation Tauri v2 official docs s",
-          "updatedAt": "2026-06-06T00:35:29.575Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
           "category": "web-search",
@@ -18911,6 +18901,16 @@
           "title": "Web Search: Terminal Command Center Usability",
           "excerpt": "Web Search: Terminal Command Center Usability 날짜: 2026 06 06 Queries terminal emulator UX best practices command palette tabs scrollback search copy paste split panes xterm.js xterm.js addons search fit web links serialize unicode official documentation Windows Terminal features ",
           "updatedAt": "2026-06-06T03:44:39.331Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-terminal-provider-setup-usability-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: Terminal and Provider Setup Usability",
+          "excerpt": "Web Search: Terminal and Provider Setup Usability 날짜: 2026 06 06 Queries site:platform.openai.com/docs OpenAI API authentication API keys project keys 2026 site:ai.google.dev/gemini api/docs Gemini API authentication API key Google login 2026 site:cloud.google.com/vertex ai/gener",
+          "updatedAt": "2026-06-06T03:56:10.649Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18994,16 +18994,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "2026 06 06 EVAL runtime telemetry source refactor 작업 요약",
-          "excerpt": "2026 06 06 EVAL runtime telemetry source refactor 작업 요약 구현 EvaluationReportPanel.tsx 에서 runtime telemetry type, score 계산, byte formatting, telemetry row construction을 분리했다. 새 evaluationRuntimeTelemetry.ts pure TypeScript module을 추가했다. comprehensive improvement contract check, wor",
-          "updatedAt": "2026-06-06T00:48:37.022Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
           "category": "work-summary",
@@ -19041,6 +19031,16 @@
           "title": "작업 요약: Terminal Command Center Usability",
           "excerpt": "작업 요약: Terminal Command Center Usability 날짜: 2026 06 06 프로젝트: platform desktop app 완료 native PTY terminal에 xterm SearchAddon 기반 search previous/next를 추가했다. command center를 추가해 copy, paste, clear, fit을 버튼으로 제공했다. Ctrl/Meta+F , Ctrl/Meta+Shift+C , Ctrl/Meta+Shift+V , Ctrl/Meta+L sh",
           "updatedAt": "2026-06-06T03:46:49.913Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-terminal-provider-setup-usability-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "Work Summary: Terminal and Provider Setup Usability",
+          "excerpt": "Work Summary: Terminal and Provider Setup Usability 날짜: 2026 06 06 변경 터미널 시작 화면에 PTY, 작업 폴더, 검색/클립보드, AI 계정 설정 카드 추가. Provider 설정에 GPT/OpenAI와 Gemini/Google fast lane 추가. OpenAI/Gemini login URL을 공식 API key 페이지로 정리. cloud provider row의 setup/login 중복 버튼을 하나의 로그인/키 발급 action으로 단순화",
+          "updatedAt": "2026-06-06T03:58:52.561Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19154,16 +19154,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-runtime-metric-eval-score-json",
-          "path": "_history/work-timings/2026/2026-06-06-runtime-metric-eval-score.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Runtime Metric Eval Score",
-          "excerpt": "{ \"task id\": \"2026 06 06 runtime metric eval score\", \"title\": \"Runtime metric EVAL score\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", ",
-          "updatedAt": "2026-06-06T00:26:20.963Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-storage-architecture-review-ko-md",
           "path": "_history/work-timings/2026/2026-06-06-storage-architecture-review.ko.md",
           "category": "work-timing",
@@ -19181,6 +19171,16 @@
           "title": "2026 06 06 Terminal Command Center Usability",
           "excerpt": "{ \"date\": \"2026 06 06\", \"slug\": \"terminal command center usability\", \"phases\": { \"phase\": \"web first intake\", \"approx minutes\": 5 }, { \"phase\": \"source inspection\", \"approx minutes\": 10 }, { \"phase\": \"dependency install audit\", \"approx minutes\": 8 }, { \"phase\": \"implementation\", ",
           "updatedAt": "2026-06-06T03:44:39.332Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-06-terminal-provider-setup-usability-json",
+          "path": "_history/work-timings/2026/2026-06-06-terminal-provider-setup-usability.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Terminal Provider Setup Usability",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"2026 06 06 terminal provider setup usability\", \"phases\": { \"phase\": \"web research and intake\", \"status\": \"completed\" }, { \"phase\": \"source inspection and implementation\", \"status\": \"completed\" }, { \"phase\": \"validation and packaging\", \"status\":",
+          "updatedAt": "2026-06-06T03:58:52.561Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19202,16 +19202,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2639,
+      "documents": 2646,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1019
+          "count": 1021
         },
         {
           "category": "web-search",
-          "count": 418
+          "count": 419
         },
         {
           "category": "plan",
@@ -19219,19 +19219,19 @@
         },
         {
           "category": "request-trace",
-          "count": 346
+          "count": 347
         },
         {
           "category": "work-timing",
-          "count": 267
+          "count": 268
         },
         {
           "category": "user-request",
-          "count": 131
+          "count": 132
         },
         {
           "category": "work-summary",
-          "count": 98
+          "count": 99
         },
         {
           "category": "daily-history",
@@ -19242,7 +19242,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6570671,
+      "totalSourceBytes": 6578372,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19267,11 +19267,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 33,
+      "evidenceEvents": 34,
       "decisionEvents": 0,
-      "openSignals": 19,
+      "openSignals": 20,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T03:46:49.914Z",
+      "latestEventAt": "2026-06-06T03:58:52.562Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19283,7 +19283,7 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 20
+        "count": 21
       },
       {
         "id": "monitoring",
@@ -19313,7 +19313,7 @@
       {
         "id": "planning",
         "label": "planning",
-        "count": 8
+        "count": 7
       },
       {
         "id": "history",
@@ -19330,7 +19330,7 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 20
+        "count": 21
       },
       {
         "id": "timing",
@@ -19360,7 +19360,7 @@
       {
         "id": "plan",
         "label": "plan",
-        "count": 8
+        "count": 7
       },
       {
         "id": "history",
@@ -19381,6 +19381,126 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-terminal-provider-setup-usability-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "Evaluation: Terminal and Provider Setup Usability",
+        "detail": "Evaluation: Terminal and Provider Setup Usability 날짜: 2026 06 06 판정 Pass for internal development package. 근거 요구사항, 스펙, traceability, web search, coding research, resource check, omission check를 생성했다. workspace monitor test/check/build , platform desktop app test/check , package:",
+        "path": "_history/evaluations/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:58:52.562Z"
+      },
+      {
+        "id": "history-history-2026-2026-06-06-md",
+        "sourceType": "history",
+        "signalType": "history",
+        "lane": "history",
+        "severity": "info",
+        "status": "daily-history",
+        "title": "2026 06 06",
+        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
+        "path": "_history/2026/2026-06-06.md",
+        "category": "daily-history",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:58:52.562Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-terminal-provider-setup-usability-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 06 Terminal Provider Setup Usability",
+        "detail": "{ \"date\": \"2026 06 06\", \"work id\": \"2026 06 06 terminal provider setup usability\", \"phases\": { \"phase\": \"web research and intake\", \"status\": \"completed\" }, { \"phase\": \"source inspection and implementation\", \"status\": \"completed\" }, { \"phase\": \"validation and packaging\", \"status\":",
+        "path": "_history/work-timings/2026/2026-06-06-terminal-provider-setup-usability.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:58:52.561Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-terminal-provider-setup-usability-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Terminal and Provider Setup Usability",
+        "detail": "Request Trace: Terminal and Provider Setup Usability 날짜: 2026 06 06 요청 터미널 기능 사용법과 세팅법 개선. GPT/Gemini 설정을 단순 로그인 흐름으로 시작 가능하게 개선. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/RuntimeTerminalDrawer.tsx platform desktop app/renderer/workspace monitor/com",
+        "path": "_history/request-traces/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:58:52.561Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-terminal-provider-setup-usability-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "Work Summary: Terminal and Provider Setup Usability",
+        "detail": "Work Summary: Terminal and Provider Setup Usability 날짜: 2026 06 06 변경 터미널 시작 화면에 PTY, 작업 폴더, 검색/클립보드, AI 계정 설정 카드 추가. Provider 설정에 GPT/OpenAI와 Gemini/Google fast lane 추가. OpenAI/Gemini login URL을 공식 API key 페이지로 정리. cloud provider row의 setup/login 중복 버튼을 하나의 로그인/키 발급 action으로 단순화",
+        "path": "_history/work-summaries/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:58:52.561Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-terminal-provider-setup-usability-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "evaluation",
+        "title": "2026 06 06 Terminal Provider Setup Usability Evaluation Input",
+        "detail": "{ \"date\": \"2026 06 06\", \"work id\": \"2026 06 06 terminal provider setup usability\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"installation occurred\": false, \"resource risk occurred\": true, \"resour",
+        "path": "_history/evaluations/2026/2026-06-06-terminal-provider-setup-usability-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:56:10.654Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-terminal-provider-setup-usability-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "User Request Summary: Terminal and Provider Setup Usability",
+        "detail": "User Request Summary: Terminal and Provider Setup Usability 날짜: 2026 06 06 사용자는 터미널 기능의 실제 사용법과 세팅법을 더 기능적으로 만들고, GPT/OpenAI와 Gemini/Google 설정을 단순 로그인 흐름으로 시작할 수 있게 해 달라고 요청했다.",
+        "path": "_history/user-requests/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:56:10.653Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-terminal-provider-setup-usability-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Terminal and Provider Setup Usability",
+        "detail": "Web Search: Terminal and Provider Setup Usability 날짜: 2026 06 06 Queries site:platform.openai.com/docs OpenAI API authentication API keys project keys 2026 site:ai.google.dev/gemini api/docs Gemini API authentication API key Google login 2026 site:cloud.google.com/vertex ai/gener",
+        "path": "_history/web-searches/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:56:10.649Z"
+      },
       {
         "id": "history-history-evaluations-2026-2026-06-06-terminal-command-center-usability-ko-md",
         "sourceType": "history",
@@ -19408,21 +19528,6 @@
         "path": "_history/request-traces/2026/2026-06-06-terminal-command-center-usability.ko.md",
         "category": "request-trace",
         "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T03:46:49.914Z"
-      },
-      {
-        "id": "history-history-2026-2026-06-06-md",
-        "sourceType": "history",
-        "signalType": "history",
-        "lane": "history",
-        "severity": "info",
-        "status": "daily-history",
-        "title": "2026 06 06",
-        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-        "path": "_history/2026/2026-06-06.md",
-        "category": "daily-history",
-        "language": "unknown",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T03:46:49.914Z"
       },
@@ -20715,111 +20820,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T00:48:37.023Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "2026 06 06 EVAL runtime telemetry source refactor 작업 요약",
-        "detail": "2026 06 06 EVAL runtime telemetry source refactor 작업 요약 구현 EvaluationReportPanel.tsx 에서 runtime telemetry type, score 계산, byte formatting, telemetry row construction을 분리했다. 새 evaluationRuntimeTelemetry.ts pure TypeScript module을 추가했다. comprehensive improvement contract check, wor",
-        "path": "_history/work-summaries/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:48:37.022Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "2026 06 06 EVAL runtime telemetry source refactor 계획",
-        "detail": "2026 06 06 EVAL runtime telemetry source refactor 계획 선택 이유 사용자가 소스 개선을 요청했다. 가장 최근 변경에서 EVAL runtime telemetry score 계산이 UI component 내부에 커졌으므로, 기능 변화 없이 소스 구조를 개선하기 좋은 위치다. 실행 순서 1. Web first intake와 memory bootstrap. 2. EvaluationReportPanel.tsx runtime telemetry 계산 위치 확인. 3. h",
-        "path": "_history/plans/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:35:29.577Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "2026 06 06 사용자 요청 요약",
-        "detail": "2026 06 06 사용자 요청 요약 요청 소스개선. 해석 직전 EVAL runtime telemetry 작업의 source 구조를 개선한다. 새 기능보다 유지보수성, 계산/렌더링 책임 분리, 테스트 가능한 source boundary를 우선한다.",
-        "path": "_history/user-requests/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:35:29.577Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "2026 06 06 EVAL runtime telemetry source refactor 웹 검색 기록",
-        "detail": "2026 06 06 EVAL runtime telemetry source refactor 웹 검색 기록 요청 사용자가 \"소스개선\"을 요청했다. 검색 쿼리 React official docs extracting logic into custom hooks or separate functions maintainability useMemo TypeScript handbook modules type only imports official documentation Tauri v2 official docs s",
-        "path": "_history/web-searches/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:35:29.575Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "2026 06 06 request to outcome trace",
-        "detail": "2026 06 06 request to outcome trace 요청 미뤄둔 작업 진행. 결정 이전 comprehensive improvement close out의 잔여 위험 중 실제 runtime metric 기반 score source 연결을 다음 slice로 선택했다. 산출물 platform desktop app/docs/requirements/2026 06 06 runtime metric eval score.ko.md platform desktop app/specs/2026 06 06 r",
-        "path": "_history/request-traces/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:28:42.081Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-runtime-metric-eval-score-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 06 Runtime Metric Eval Score",
-        "detail": "{ \"task id\": \"2026 06 06 runtime metric eval score\", \"title\": \"Runtime metric EVAL score\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", ",
-        "path": "_history/work-timings/2026/2026-06-06-runtime-metric-eval-score.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:26:20.963Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 runtime metric EVAL score 평가",
-        "detail": "2026 06 06 runtime metric EVAL score 평가 평가 대상 요청: 미뤄둔 작업 진행. 구현 slice: EVAL 종합 개선 cockpit에 실제 desktop runtime metric을 연결. 완료 기준 평가 성능: process RAM/CPU/cache 상태를 EVAL 점수 입력으로 연결했다. UI/사용성: EVAL 탭에서 runtime telemetry strip과 metric evidence를 직접 볼 수 있게 했다. 네이티브 자원: Rust/Tauri sysinfo",
-        "path": "_history/evaluations/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:26:20.963Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23853,12 +23853,12 @@
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 8
+        "documentsCount": 7
       },
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 20
+        "documentsCount": 21
       },
       {
         "category": "daily-history",
@@ -23902,7 +23902,7 @@
           "transient tool output"
         ],
         "uiEntry": "Overview, History, Documents, Requirements",
-        "documentCount": 124,
+        "documentCount": 118,
         "sourceFileCount": 0
       },
       {
@@ -23927,7 +23927,7 @@
           "domain-specific experiments by default"
         ],
         "uiEntry": "Agents, Requirements, Documents",
-        "documentCount": 2,
+        "documentCount": 1,
         "sourceFileCount": 65
       },
       {
@@ -23952,7 +23952,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 71,
+        "documentCount": 73,
         "sourceFileCount": 5
       },
       {
@@ -24133,7 +24133,7 @@
         "project": "platform-desktop-app",
         "language": "rust",
         "lineCount": 10312,
-        "sizeBytes": 343893,
+        "sizeBytes": 344059,
         "recommendation": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits."
       },
       {
@@ -27792,13 +27792,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3791,
+      "sourceDocuments": 3804,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T03:46:49.914Z"
+      "latestInsightAt": "2026-06-06T03:58:52.562Z"
     },
     "inferenceStages": [
       {
@@ -27866,11 +27866,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 454,
+        "signalCount": 455,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 147
+            "count": 148
           },
           {
             "category": "project-spec",
@@ -27925,7 +27925,7 @@
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장"
         ],
-        "latestEvidenceAt": "2026-06-06T03:46:49.914Z"
+        "latestEvidenceAt": "2026-06-06T03:58:52.562Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27939,19 +27939,19 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1735,
+        "signalCount": 1740,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 492
+            "count": 493
           },
           {
             "category": "evaluation",
-            "count": 466
+            "count": 468
           },
           {
             "category": "web-search",
-            "count": 419
+            "count": 420
           },
           {
             "category": "plan",
@@ -27963,7 +27963,7 @@
           },
           {
             "category": "work-timing",
-            "count": 30
+            "count": 31
           },
           {
             "category": "project-doc",
@@ -27975,22 +27975,22 @@
           }
         ],
         "evidencePaths": [
+          "_history/evaluations/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
           "_history/plans/2026/2026-06-02-agent-collaboration-board.ko.md",
           "_history/plans/2026/2026-06-02-source-code-viewer.ko.md",
           "_history/web-searches/2026/2026-06-01-marketing-evidence-research.ko.md",
           "_history/web-searches/2026/2026-05-31-stack-aware-coding-research.ko.md",
-          "_history/plans/2026/2026-05-31-work-mode-routing.ko.md",
-          "_history/plans/2026/2026-05-31-coding-research-source-diversity.ko.md"
+          "_history/plans/2026/2026-05-31-work-mode-routing.ko.md"
         ],
         "evidenceTitles": [
+          "Evaluation: Terminal and Provider Setup Usability",
           "계획: Agent Collaboration Board",
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사",
-          "2026 05 31 작업 모드 라우팅 계획 기록",
-          "계획 히스토리: 코딩 조사 출처 다양성 강화"
+          "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T03:46:49.914Z"
+        "latestEvidenceAt": "2026-06-06T03:58:52.562Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28004,11 +28004,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1002,
+        "signalCount": 1003,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 490
+            "count": 491
           },
           {
             "category": "plan",
@@ -28063,7 +28063,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T03:46:49.914Z"
+        "latestEvidenceAt": "2026-06-06T03:58:52.562Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28077,11 +28077,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 683,
+        "signalCount": 685,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 276
+            "count": 277
           },
           {
             "category": "evaluation",
@@ -28093,7 +28093,7 @@
           },
           {
             "category": "work-summary",
-            "count": 35
+            "count": 36
           },
           {
             "category": "plan",
@@ -28136,7 +28136,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-06T03:46:49.914Z"
+        "latestEvidenceAt": "2026-06-06T03:58:52.562Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28150,26 +28150,26 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1486,
+        "signalCount": 1492,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 641
+            "count": 645
           },
           {
             "category": "evaluation",
-            "count": 520
+            "count": 521
           },
           {
             "category": "user-request",
             "count": 96
           },
           {
-            "category": "request-trace",
-            "count": 55
+            "category": "work-summary",
+            "count": 56
           },
           {
-            "category": "work-summary",
+            "category": "request-trace",
             "count": 55
           },
           {
@@ -28209,7 +28209,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T03:46:49.914Z"
+        "latestEvidenceAt": "2026-06-06T03:58:52.562Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28285,14 +28285,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3791,
+      "sourceDocuments": 3804,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T03:46:49.914Z"
+      "latestInsightAt": "2026-06-06T03:58:52.562Z"
     },
     "operatingModel": [
       {
@@ -28350,53 +28350,53 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3191,
+        "signalCount": 3198,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1735
+            "signalCount": 1740
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1002
+            "signalCount": 1003
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 454
+            "signalCount": 455
           }
         ],
         "missingPatternIds": [],
         "evidencePaths": [
+          "_history/evaluations/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
           "_history/plans/2026/2026-06-02-agent-collaboration-board.ko.md",
           "_history/plans/2026/2026-06-02-source-code-viewer.ko.md",
           "_history/web-searches/2026/2026-06-01-marketing-evidence-research.ko.md",
           "_history/web-searches/2026/2026-05-31-stack-aware-coding-research.ko.md",
           "_history/plans/2026/2026-05-31-work-mode-routing.ko.md",
-          "_history/plans/2026/2026-05-31-coding-research-source-diversity.ko.md",
           "_history/plans/2026/2026-06-02-large-scope-decomposition.ko.md",
           "_history/plans/2026/2026-06-06-eval-cockpit-large-scope-decomposition.ko.md",
           "_history/request-traces/2026/2026-06-06-no-large-scope-postponement.ko.md",
           "_history/work-summaries/2026/2026-06-06-no-large-scope-postponement.ko.md"
         ],
         "evidenceTitles": [
+          "Evaluation: Terminal and Provider Setup Usability",
           "계획: Agent Collaboration Board",
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록",
-          "계획 히스토리: 코딩 조사 출처 다양성 강화",
           "계획 기록: Large Scope Decomposition",
           "계획 기록: AI EVAL cockpit large scope decomposition",
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T03:46:49.914Z",
+        "latestEvidenceAt": "2026-06-06T03:58:52.562Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28425,13 +28425,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 802,
+        "signalCount": 804,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 683
+            "signalCount": 685
           },
           {
             "id": "release-blocker-gate",
@@ -28465,7 +28465,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T03:46:49.914Z",
+        "latestEvidenceAt": "2026-06-06T03:58:52.562Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28494,19 +28494,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2488,
+        "signalCount": 2495,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1486
+            "signalCount": 1492
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1002
+            "signalCount": 1003
           }
         ],
         "missingPatternIds": [],
@@ -28534,7 +28534,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T03:46:49.914Z",
+        "latestEvidenceAt": "2026-06-06T03:58:52.562Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28563,13 +28563,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 573,
+        "signalCount": 574,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 454
+            "signalCount": 455
           },
           {
             "id": "release-blocker-gate",
@@ -28603,7 +28603,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T03:46:49.914Z",
+        "latestEvidenceAt": "2026-06-06T03:58:52.562Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28632,19 +28632,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2737,
+        "signalCount": 2743,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1002
+            "signalCount": 1003
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1735
+            "signalCount": 1740
           }
         ],
         "missingPatternIds": [],
@@ -28655,10 +28655,10 @@
           "_history/work-summaries/2026/2026-06-06-no-large-scope-postponement.ko.md",
           "_history/plans/2026/2026-06-03-user-intent-feature-map.ko.md",
           "_history/plans/2026/2026-06-03-question-deferral.ko.md",
+          "_history/evaluations/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
           "_history/plans/2026/2026-06-02-agent-collaboration-board.ko.md",
           "_history/plans/2026/2026-06-02-source-code-viewer.ko.md",
-          "_history/web-searches/2026/2026-06-01-marketing-evidence-research.ko.md",
-          "_history/web-searches/2026/2026-05-31-stack-aware-coding-research.ko.md"
+          "_history/web-searches/2026/2026-06-01-marketing-evidence-research.ko.md"
         ],
         "evidenceTitles": [
           "계획 기록: Large Scope Decomposition",
@@ -28667,12 +28667,12 @@
           "작업 요약: 큰 범위 작업 미루지 않기",
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능",
+          "Evaluation: Terminal and Provider Setup Usability",
           "계획: Agent Collaboration Board",
           "Source Code Viewer 계획",
-          "웹 검색 기록: 마케팅/설문/정량 근거 조사",
-          "웹 검색 기록: 스택별 코딩 조사"
+          "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T03:46:49.914Z",
+        "latestEvidenceAt": "2026-06-06T03:58:52.562Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28701,7 +28701,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1854,
+        "signalCount": 1859,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28713,7 +28713,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1735
+            "signalCount": 1740
           }
         ],
         "missingPatternIds": [],
@@ -28724,10 +28724,10 @@
           "_history/user-requests/2026/2026-06-06-public-release-developer-repatch.ko.md",
           "platform-desktop-app/specs/2026-06-06-public-release-updater-automation/spec.ko.md",
           "_history/evaluations/2026/2026-06-06-public-release-updater-automation.ko.md",
+          "_history/evaluations/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
           "_history/plans/2026/2026-06-02-agent-collaboration-board.ko.md",
           "_history/plans/2026/2026-06-02-source-code-viewer.ko.md",
-          "_history/web-searches/2026/2026-06-01-marketing-evidence-research.ko.md",
-          "_history/web-searches/2026/2026-05-31-stack-aware-coding-research.ko.md"
+          "_history/web-searches/2026/2026-06-01-marketing-evidence-research.ko.md"
         ],
         "evidenceTitles": [
           "2026 06 06 Request Trace: Public Release Repeat Retry",
@@ -28736,12 +28736,12 @@
           "2026 06 06 User Request: Public Release Developer Repatch",
           "Public Release Updater Automation Spec",
           "2026 06 06 평가: Public Release Updater Automation",
+          "Evaluation: Terminal and Provider Setup Usability",
           "계획: Agent Collaboration Board",
           "Source Code Viewer 계획",
-          "웹 검색 기록: 마케팅/설문/정량 근거 조사",
-          "웹 검색 기록: 스택별 코딩 조사"
+          "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T03:46:49.914Z",
+        "latestEvidenceAt": "2026-06-06T03:58:52.562Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",
@@ -28782,12 +28782,12 @@
         ],
         "rollback": "Remove the derived snapshot field and UI board; keep historyInsightLoop unchanged.",
         "evidencePaths": [
+          "_history/evaluations/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
           "_history/plans/2026/2026-06-02-agent-collaboration-board.ko.md",
           "_history/plans/2026/2026-06-02-source-code-viewer.ko.md",
           "_history/web-searches/2026/2026-06-01-marketing-evidence-research.ko.md",
           "_history/web-searches/2026/2026-05-31-stack-aware-coding-research.ko.md",
-          "_history/plans/2026/2026-05-31-work-mode-routing.ko.md",
-          "_history/plans/2026/2026-05-31-coding-research-source-diversity.ko.md"
+          "_history/plans/2026/2026-05-31-work-mode-routing.ko.md"
         ]
       },
       {

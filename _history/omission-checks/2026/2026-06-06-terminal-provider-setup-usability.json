@@ -1,0 +1,27 @@
+{
+  "date": "2026-06-06",
+  "work_id": "2026-06-06-terminal-provider-setup-usability",
+  "status": "coverage_ready",
+  "required_items": [
+    {
+      "item": "Terminal functional usage and setup guidance",
+      "coverage": "RuntimeTerminalDrawer usage cards and docs/usage guide"
+    },
+    {
+      "item": "GPT/Gemini simple login setup entry",
+      "coverage": "Provider fast lane opens official API key pages"
+    },
+    {
+      "item": "Do not fake unsupported login-only API auth",
+      "coverage": "Usage doc and caution copy keep API key requirement explicit"
+    },
+    {
+      "item": "Automatic build after implementation",
+      "coverage": "package:internal completed with .app and DMG verification"
+    },
+    {
+      "item": "Commit and push meaningful change",
+      "coverage": "Pending after validation"
+    }
+  ]
+}

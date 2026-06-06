@@ -1,0 +1,18 @@
+{
+  "date": "2026-06-06",
+  "work_id": "2026-06-06-terminal-provider-setup-usability",
+  "phases": [
+    {
+      "phase": "web_research_and_intake",
+      "status": "completed"
+    },
+    {
+      "phase": "source_inspection_and_implementation",
+      "status": "completed"
+    },
+    {
+      "phase": "validation_and_packaging",
+      "status": "completed"
+    }
+  ]
+}

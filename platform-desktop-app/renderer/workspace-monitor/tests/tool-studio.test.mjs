@@ -318,6 +318,9 @@ test("Native PTY terminal exposes search, clipboard, and quick command controls"
   assert.match(runtimeTerminalDrawer, /searchAddonRef\.current\.findNext/);
   assert.match(runtimeTerminalDrawer, /searchAddonRef\.current\.findPrevious/);
   assert.match(runtimeTerminalDrawer, /data-terminal-command-center/);
+  assert.match(runtimeTerminalDrawer, /data-terminal-usage-guide/);
+  assert.match(runtimeTerminalDrawer, /terminalGuidePty/);
+  assert.match(runtimeTerminalDrawer, /terminalGuideAccount/);
   assert.match(runtimeTerminalDrawer, /data-terminal-search-input/);
   assert.match(runtimeTerminalDrawer, /data-terminal-action="copy-selection"/);
   assert.match(runtimeTerminalDrawer, /data-terminal-action="paste"/);
@@ -330,6 +333,7 @@ test("Native PTY terminal exposes search, clipboard, and quick command controls"
   assert.match(runtimeTerminalDrawer, /terminal\?\.clear\(\)/);
   assert.match(runtimeTerminalDrawer, /terminalCopySelection|copyTerminalSelection/);
   assert.match(css, /\.native-pty-command-center \{/);
+  assert.match(css, /\.terminal-usage-guide \{/);
   assert.match(css, /\.native-pty-search-control \{/);
   assert.match(css, /\.native-pty-toolbar \{/);
   assert.match(css, /\.native-pty-quick-commands \{/);
@@ -401,6 +405,12 @@ test("Search agent provider and model settings use explicit choices", () => {
 test("Provider account settings expose guided login and model setup controls", () => {
   assert.match(monitorShell, /AI 로그인 설정/);
   assert.match(monitorShell, /provider-login-guide/);
+  assert.match(monitorShell, /provider-login-fast-lane/);
+  assert.match(monitorShell, /data-provider-login-card=\{provider\.providerId\}/);
+  assert.match(monitorShell, /로그인\/키 발급/);
+  assert.match(monitorShell, /https:\/\/platform\.openai\.com\/api-keys/);
+  assert.match(monitorShell, /https:\/\/aistudio\.google\.com\/api-keys/);
+  assert.match(monitorShell, /onOpenUrl\(provider, localRuntime \? "setup" : "login"\)/);
   assert.match(monitorShell, /provider-filter-choice/);
   assert.match(monitorShell, /ProviderActionFeedback/);
   assert.match(monitorShell, /actionFeedback=\{providerActionFeedback\}/);
@@ -411,6 +421,8 @@ test("Provider account settings expose guided login and model setup controls", (
   assert.match(monitorShell, /onRefreshModels\(provider\.providerId\)/);
   assert.match(monitorShell, /onUseProvider\(provider, preferredModel\)/);
   assert.match(css, /\.provider-login-guide \{/);
+  assert.match(css, /\.provider-login-fast-lane \{/);
+  assert.match(css, /\.provider-login-card-actions \{/);
   assert.match(css, /\.provider-filter-choice button\.active,/);
   assert.match(css, /\.provider-model-strip \{/);
   assert.match(css, /\.provider-model-chip-list button\.active/);

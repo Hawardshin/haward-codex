@@ -2588,9 +2588,9 @@ const fallbackProviderCredentialReport: ProviderCredentialReport = {
       storage: "not_configured",
       credentialSource: "not_configured",
       setupUrl: "https://platform.openai.com/api-keys",
-      loginUrl: "https://chatgpt.com/",
-      docsUrl: "https://platform.openai.com/docs/api-reference/authentication/keys",
-      caution: "Use an OpenAI Platform API key for guest CLI/API work; do not embed ChatGPT web session cookies."
+      loginUrl: "https://platform.openai.com/api-keys",
+      docsUrl: "https://platform.openai.com/docs/api-reference/authentication",
+      caution: "Open the OpenAI Platform API keys page, sign in with the target account, create a restricted project key, then save it here. Do not store ChatGPT web session cookies."
     },
     {
       providerId: "anthropic",
@@ -2626,9 +2626,9 @@ const fallbackProviderCredentialReport: ProviderCredentialReport = {
       storage: "not_configured",
       credentialSource: "not_configured",
       setupUrl: "https://aistudio.google.com/api-keys",
-      loginUrl: "https://gemini.google.com/",
+      loginUrl: "https://aistudio.google.com/api-keys",
       docsUrl: "https://ai.google.dev/gemini-api/docs/api-key",
-      caution: "Use a restricted Gemini API key for local adapter work; OAuth desktop setup is handled as a separate provider flow."
+      caution: "Open Google AI Studio API keys, sign in with the target Google account, create a restricted Gemini key, then save it here. Vertex AI OAuth or ADC remains a separate production provider flow."
     }
   ]
 };
@@ -8721,12 +8721,18 @@ function ProviderAccountsPanel({
         nativeOnly: "네이티브 앱에서만 저장됩니다.",
         summary: "저장된 키는 모델 API 직접 작업과 CLI 실행 환경변수 주입에 사용됩니다.",
         guideEyebrow: "AI 로그인 설정",
-        guideTitle: "공식 계정 로그인부터 API 키 저장까지 한 화면에서 처리",
-        guideDetail: "OpenAI, Claude, Gemini는 공식 콘솔에서 키를 발급하고 이 앱에 저장합니다. Ollama는 로컬 런타임 상태를 확인합니다.",
+        guideTitle: "GPT와 Gemini는 로그인 후 키 발급 화면으로 바로 이동",
+        guideDetail: "OpenAI와 Gemini는 공식 API key 페이지에서 로그인하고 키를 만든 뒤 이 앱에 저장합니다. Ollama는 로컬 런타임 상태를 확인합니다.",
+        fastLaneTitle: "빠른 AI 계정 설정",
+        fastLaneDetail: "공식 계정으로 로그인한 뒤 키를 만들고 저장하면 작업 기본값으로 바로 사용할 수 있습니다.",
+        loginSetup: "로그인/키 발급",
+        loginSetupDetail: "공식 API key 페이지 열기",
+        configuredNow: "사용 가능",
+        notConfiguredYet: "설정 필요",
         chooseProvider: "제공자 선택",
         chooseProviderDetail: "연결 필요, 연결됨, 로컬 런타임을 바로 필터링",
-        openOfficial: "공식 로그인",
-        openOfficialDetail: "제공자 계정 확인 후 API 키 페이지로 이동",
+        openOfficial: "공식 로그인/키 발급",
+        openOfficialDetail: "제공자 계정으로 로그인한 공식 키 발급 페이지 열기",
         saveKeyStep: "키 저장",
         saveKeyDetail: "계정 메모와 API 키를 앱 설정 저장소에 기록",
         verifyModel: "모델 확인",
@@ -8786,12 +8792,18 @@ function ProviderAccountsPanel({
         nativeOnly: "Saving is available only in the native app.",
         summary: "Saved keys power direct model API work and provider-specific CLI environment injection.",
         guideEyebrow: "AI login setup",
-        guideTitle: "Handle account login, API key issue, and local saving in one place",
-        guideDetail: "OpenAI, Claude, and Gemini use official consoles for API keys. Ollama checks the local runtime on this computer.",
+        guideTitle: "GPT and Gemini open straight to the signed-in key flow",
+        guideDetail: "OpenAI and Gemini use official API key pages. Sign in there, create a key, then save it in this app. Ollama checks the local runtime.",
+        fastLaneTitle: "Fast AI account setup",
+        fastLaneDetail: "Sign in to the official account, create a key, save it here, then use it as the work default.",
+        loginSetup: "Login / get key",
+        loginSetupDetail: "Open official API key page",
+        configuredNow: "Ready",
+        notConfiguredYet: "Setup needed",
         chooseProvider: "Choose provider",
         chooseProviderDetail: "Filter setup needed, connected, and local runtime entries",
-        openOfficial: "Official login",
-        openOfficialDetail: "Confirm the provider account, then open the API key page",
+        openOfficial: "Official login / key",
+        openOfficialDetail: "Open the signed-in provider key page",
         saveKeyStep: "Save key",
         saveKeyDetail: "Store an account note and API key in the app settings store",
         verifyModel: "Verify model",
@@ -8870,6 +8882,9 @@ function ProviderAccountsPanel({
     { icon: KeyRound, label: copy.saveKeyStep, detail: copy.saveKeyDetail },
     { icon: Bot, label: copy.verifyModel, detail: copy.verifyModelDetail }
   ];
+  const quickLoginProviders = report.providers.filter((provider) =>
+    provider.providerId === "openai" || provider.providerId === "google-gemini"
+  );
   const feedbackFor = (providerId: string, action: ProviderActionKind) =>
     actionFeedback?.providerId === providerId && actionFeedback.action === action ? actionFeedback : null;
   const feedbackBadge = (feedback: ProviderActionFeedback | null) => {
@@ -8919,6 +8934,54 @@ function ProviderAccountsPanel({
             </article>
           ))}
         </div>
+      </div>
+
+      <div className="provider-login-fast-lane" data-provider-login-fast-lane>
+        <div>
+          <span>{copy.fastLaneTitle}</span>
+          <strong>{copy.fastLaneDetail}</strong>
+        </div>
+        {quickLoginProviders.map((provider) => {
+          const loginFeedback = feedbackFor(provider.providerId, "login");
+          const useFeedback = feedbackFor(provider.providerId, "use");
+          const selectedForWork = selectedProviderId === provider.providerId;
+          return (
+            <article key={provider.providerId} data-provider-login-card={provider.providerId} className={provider.configured ? "connected" : "missing"}>
+              <header>
+                <KeyRound size={15} aria-hidden="true" />
+                <div>
+                  <strong>{provider.providerId === "openai" ? "GPT / OpenAI" : provider.label}</strong>
+                  <small>{provider.configured ? copy.configuredNow : copy.notConfiguredYet} · {provider.envVar}</small>
+                </div>
+              </header>
+              <div className="provider-login-card-actions">
+                <button
+                  type="button"
+                  className={feedbackClass(loginFeedback)}
+                  onClick={() => onOpenUrl(provider, "login")}
+                  title={loginFeedback?.message || copy.loginSetupDetail}
+                  aria-label={ariaForAction(`${provider.label} ${copy.loginSetup}`, loginFeedback)}
+                >
+                  <ExternalLink size={15} aria-hidden="true" />
+                  <span>{copy.loginSetup}</span>
+                  {feedbackBadge(loginFeedback)}
+                </button>
+                <button
+                  type="button"
+                  className={`${selectedForWork ? "active" : ""} ${feedbackClass(useFeedback)}`.trim()}
+                  onClick={() => onUseProvider(provider, provider.defaultModel)}
+                  disabled={!provider.configured}
+                  title={useFeedback?.message || undefined}
+                  aria-label={ariaForAction(selectedForWork ? copy.usingForWork : copy.useForWork, useFeedback)}
+                >
+                  <Bot size={15} aria-hidden="true" />
+                  <span>{selectedForWork ? copy.usingForWork : copy.useForWork}</span>
+                  {feedbackBadge(useFeedback)}
+                </button>
+              </div>
+            </article>
+          );
+        })}
       </div>
 
       <div className="provider-account-summary">
@@ -8993,6 +9056,7 @@ function ProviderAccountsPanel({
           const selectedForWork = selectedProviderId === provider.providerId;
           const setupFeedback = feedbackFor(provider.providerId, "setup");
           const loginFeedback = feedbackFor(provider.providerId, "login");
+          const primarySetupFeedback = localRuntime ? setupFeedback : loginFeedback;
           const docsFeedback = feedbackFor(provider.providerId, "docs");
           const saveFeedback = feedbackFor(provider.providerId, "save");
           const clearFeedback = feedbackFor(provider.providerId, "clear");
@@ -9080,25 +9144,14 @@ function ProviderAccountsPanel({
               <div className="provider-account-actions">
                 <button
                   type="button"
-                  className={feedbackClass(setupFeedback)}
-                  onClick={() => onOpenUrl(provider, "setup")}
-                  title={setupFeedback?.message || undefined}
-                  aria-label={ariaForAction(localRuntime ? copy.installLocal : copy.setup, setupFeedback)}
+                  className={feedbackClass(primarySetupFeedback)}
+                  onClick={() => onOpenUrl(provider, localRuntime ? "setup" : "login")}
+                  title={primarySetupFeedback?.message || (localRuntime ? undefined : copy.loginSetupDetail)}
+                  aria-label={ariaForAction(localRuntime ? copy.installLocal : copy.loginSetup, primarySetupFeedback)}
                 >
                   <ExternalLink size={15} aria-hidden="true" />
-                  <span>{localRuntime ? copy.installLocal : copy.setup}</span>
-                  {feedbackBadge(setupFeedback)}
-                </button>
-                <button
-                  type="button"
-                  className={feedbackClass(loginFeedback)}
-                  onClick={() => onOpenUrl(provider, "login")}
-                  title={loginFeedback?.message || undefined}
-                  aria-label={ariaForAction(localRuntime ? copy.installLocal : copy.login, loginFeedback)}
-                >
-                  <ExternalLink size={15} aria-hidden="true" />
-                  <span>{localRuntime ? copy.installLocal : copy.login}</span>
-                  {feedbackBadge(loginFeedback)}
+                  <span>{localRuntime ? copy.installLocal : copy.loginSetup}</span>
+                  {feedbackBadge(primarySetupFeedback)}
                 </button>
                 <button
                   type="button"

@@ -178,6 +178,14 @@ const terminalCopy = {
     terminalSearchMatch: "검색 결과로 이동했습니다.",
     terminalSearchNoMatch: "일치하는 출력이 없습니다.",
     terminalCommandSent: "명령을 보냈습니다.",
+    terminalGuidePty: "PTY 셸",
+    terminalGuidePtyDetail: "실제 OS 셸을 앱 안에서 시작",
+    terminalGuideCwd: "작업 폴더",
+    terminalGuideCwdDetail: "루트/프로젝트/사용자 지정 경로 선택",
+    terminalGuideControls: "검색과 클립보드",
+    terminalGuideControlsDetail: "Cmd/Ctrl+F, Shift+C/V, 화면 정리",
+    terminalGuideAccount: "AI 계정",
+    terminalGuideAccountDetail: "설정에서 GPT/Gemini 키 연결",
     blocked: "막힘",
     ready: "준비됨",
     adapter: "어댑터",
@@ -255,6 +263,14 @@ const terminalCopy = {
     terminalSearchMatch: "Moved to search match.",
     terminalSearchNoMatch: "No matching output.",
     terminalCommandSent: "Command sent.",
+    terminalGuidePty: "PTY shell",
+    terminalGuidePtyDetail: "Start the real OS shell inside the app",
+    terminalGuideCwd: "Working folder",
+    terminalGuideCwdDetail: "Choose root, project, or custom path",
+    terminalGuideControls: "Search and clipboard",
+    terminalGuideControlsDetail: "Cmd/Ctrl+F, Shift+C/V, clear screen",
+    terminalGuideAccount: "AI accounts",
+    terminalGuideAccountDetail: "Connect GPT/Gemini keys in Settings",
     blocked: "blocked",
     ready: "ready",
     adapter: "Adapter",
@@ -353,6 +369,12 @@ export function RuntimeTerminalDrawer({
   const selectedAdapter = adapters.find((adapter) => adapter.adapterId === selectedSessionAdapterId);
   const terminalCwd = selectedSession?.workingDir || workingDir || "workspace root";
   const selectedSessionOutput = selectedSession ? formatSessionOutput(selectedSession, copy.noOutput) : copy.noSession;
+  const terminalUsageCards = [
+    { id: "pty", icon: SquareTerminal, label: copy.terminalGuidePty, detail: copy.terminalGuidePtyDetail },
+    { id: "cwd", icon: ListFilter, label: copy.terminalGuideCwd, detail: copy.terminalGuideCwdDetail },
+    { id: "controls", icon: Search, label: copy.terminalGuideControls, detail: copy.terminalGuideControlsDetail },
+    { id: "account", icon: Settings, label: copy.terminalGuideAccount, detail: copy.terminalGuideAccountDetail }
+  ];
 
   return (
     <>
@@ -515,6 +537,15 @@ export function RuntimeTerminalDrawer({
           <div className="terminal-drawer-main" tabIndex={0} aria-label={uiLanguage === "ko" ? "터미널 작업 영역" : "Terminal work area"}>
             {terminalDrawerView === "start" && (
             <div className="terminal-view-panel terminal-start-panel">
+        <div className="terminal-usage-guide" data-terminal-usage-guide>
+          {terminalUsageCards.map((card) => (
+            <article key={card.id} data-terminal-usage-card={card.id}>
+              <card.icon size={15} aria-hidden="true" />
+              <strong>{card.label}</strong>
+              <small>{card.detail}</small>
+            </article>
+          ))}
+        </div>
         <div className="session-launcher">
           <div className="settings-controlled-summary session-init-summary">
             <article>

@@ -1445,9 +1445,9 @@ static PROVIDER_CREDENTIALS: &[ProviderCredentialDefinition] = &[
         env_var: "OPENAI_API_KEY",
         default_model: "gpt-5.2",
         setup_url: "https://platform.openai.com/api-keys",
-        login_url: "https://chatgpt.com/",
-        docs_url: "https://platform.openai.com/docs/api-reference/authentication/keys",
-        caution: "Use an OpenAI Platform API key for guest CLI/API work; do not embed ChatGPT web session cookies.",
+        login_url: "https://platform.openai.com/api-keys",
+        docs_url: "https://platform.openai.com/docs/api-reference/authentication",
+        caution: "Open the OpenAI Platform API keys page, sign in with the target account, create a restricted project key, then save it here. Do not store ChatGPT web session cookies.",
     },
     ProviderCredentialDefinition {
         provider_id: "anthropic",
@@ -1467,9 +1467,9 @@ static PROVIDER_CREDENTIALS: &[ProviderCredentialDefinition] = &[
         env_var: "GEMINI_API_KEY",
         default_model: "gemini-3.5-flash",
         setup_url: "https://aistudio.google.com/api-keys",
-        login_url: "https://gemini.google.com/",
+        login_url: "https://aistudio.google.com/api-keys",
         docs_url: "https://ai.google.dev/gemini-api/docs/api-key",
-        caution: "Use a restricted Gemini API key for local adapter work; OAuth desktop setup is handled as a separate provider flow.",
+        caution: "Open Google AI Studio API keys, sign in with the target Google account, create a restricted Gemini key, then save it here. Vertex AI OAuth or ADC remains a separate production provider flow.",
     },
 ];
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T03:47:10.406Z",
+  "generatedAt": "2026-06-06T03:59:01.740Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -1550,7 +1550,7 @@
       "queuedPatterns": 0,
       "activeRecommendations": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-06T03:46:49.914Z"
+      "latestInsightAt": "2026-06-06T03:58:52.562Z"
     },
     "inferenceStages": [],
     "signalGroups": []
@@ -1565,7 +1565,7 @@
       "totalImprovementPackages": 0,
       "totalFitnessChecks": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-06T03:46:49.914Z"
+      "latestInsightAt": "2026-06-06T03:58:52.562Z"
     },
     "operatingModel": [],
     "structuralPrinciples": [],

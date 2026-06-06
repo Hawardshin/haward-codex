@@ -150,6 +150,8 @@ platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platfor
 - 한국어: [docs/release-runbook.ko.md](./docs/release-runbook.ko.md)
 - English: [docs/release-runbook.en.md](./docs/release-runbook.en.md)
 
+터미널 기능 사용법과 GPT/Gemini 계정 연결 절차는 [docs/usage/terminal-and-ai-provider-setup.ko.md](./docs/usage/terminal-and-ai-provider-setup.ko.md)를 봅니다.
+
 공개 배포는 다음 gate가 끝나기 전까지 blocked입니다.
 
 - Developer ID 또는 동등한 OS signing

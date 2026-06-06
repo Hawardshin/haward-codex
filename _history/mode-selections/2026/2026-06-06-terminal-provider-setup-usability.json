@@ -1,0 +1,22 @@
+{
+  "date": "2026-06-06",
+  "work_id": "2026-06-06-terminal-provider-setup-usability",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request changes desktop app settings UX, provider credential guidance, terminal usage UI, and user documentation. It is implementation work with credential-boundary and runtime-terminal implications.",
+  "web_first_intake_done": true,
+  "memory_bootstrap_simulated": true,
+  "resource_risk_occurred": true,
+  "installation_occurred": false,
+  "blocking_closeout_targets": [
+    "requirements",
+    "spec",
+    "traceability",
+    "validation",
+    "omission_check",
+    "resource_check",
+    "build_or_package",
+    "commit_and_push"
+  ]
+}
