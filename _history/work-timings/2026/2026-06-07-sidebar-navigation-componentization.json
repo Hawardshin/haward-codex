@@ -1,0 +1,39 @@
+{
+  "task_id": "2026-06-07-sidebar-navigation-componentization",
+  "title": "Sidebar navigation componentization",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Tauri and Next.js official docs checked before local planning."
+    },
+    {
+      "phase_id": "local_gap_selection",
+      "label": "Local gap selection",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Product gap registry selected componentized_desktop_ui_architecture as the executable deferred slice."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "DesktopActivityRail extracted and tests/readiness updated."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Renderer check/test, platform tests, Playwright smoke, build, platform check, and evaluator passed."
+    }
+  ],
+  "notes": [
+    "Timing record was backfilled after implementation had started, so phase durations are unmeasured."
+  ]
+}

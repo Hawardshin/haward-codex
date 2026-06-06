@@ -1,0 +1,84 @@
+{
+  "task": "Sidebar Navigation Componentization",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Next.js renderer component extraction",
+    "Node test runner",
+    "Next.js development server for Playwright smoke",
+    "Playwright Chromium smoke",
+    "Next.js customer production build"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "dev-server-leak",
+      "category": "process",
+      "description": "Playwright smoke uses a temporary Next.js dev server that must be stopped.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Serve on dedicated local port 3233, stop the process after smoke, and verify no listener remains.",
+      "evidence": [
+        "Next dev served http://127.0.0.1:3233",
+        "Ctrl-C stopped the server",
+        "lsof -nP -iTCP:3233 -sTCP:LISTEN returned no listener"
+      ]
+    },
+    {
+      "risk_id": "browser-process-cleanup",
+      "category": "process",
+      "description": "Playwright Chromium must close after DOM smoke verification.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The smoke script closes the browser before exiting.",
+      "evidence": [
+        "Playwright script awaited browser.close()",
+        "Smoke command exited successfully"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "dev-server-cleanup",
+      "resource": "Next.js dev server",
+      "create_path": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor dev --hostname 127.0.0.1 --port 3233",
+      "cleanup_path": "Ctrl-C and lsof no-listener check",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Server started on 127.0.0.1:3233",
+        "No listener remained on TCP 3233"
+      ]
+    },
+    {
+      "check_id": "playwright-browser-cleanup",
+      "resource": "Playwright Chromium",
+      "create_path": "chromium.launch({ headless: true })",
+      "cleanup_path": "browser.close()",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "browser.close() executed before smoke completion"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "activity-rail-dom-smoke",
+      "metric": "Extracted activity rail renders the expected desktop navigation DOM",
+      "tool": "Playwright Chromium",
+      "threshold": "tool-window-stripe rail, at least five nav buttons, current ARIA page, two settings buttons, and editor-plane viewport",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "railZone=tool-window-stripe",
+        "buttonCount=6",
+        "currentLabel=핵심 홈",
+        "settingsButtons=2",
+        "hasViewport=true"
+      ]
+    }
+  ],
+  "notes": [
+    "No installation occurred.",
+    "No new persistent worker, timer, native command, or CLI pipeline was created."
+  ]
+}

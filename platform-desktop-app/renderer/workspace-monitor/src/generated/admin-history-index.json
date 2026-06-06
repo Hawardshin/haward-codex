@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-06T17:46:05.719Z",
+  "generatedAt": "2026-06-06T17:59:13.606Z",
   "summary": {
-    "documents": 2878,
+    "documents": 2886,
     "days": 8,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1080
+        "count": 1082
       },
       {
         "category": "web-search",
-        "count": 448
+        "count": 449
       },
       {
         "category": "request-trace",
-        "count": 377
+        "count": 378
       },
       {
         "category": "plan",
-        "count": 376
+        "count": 377
       },
       {
         "category": "work-timing",
-        "count": 296
+        "count": 297
       },
       {
         "category": "user-request",
-        "count": 162
+        "count": 163
       },
       {
         "category": "work-summary",
-        "count": 129
+        "count": 130
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6884269,
+    "totalSourceBytes": 6897209,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,134 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-07-sidebar-navigation-componentization-evaluator-input-json",
+      "path": "_history/evaluations/2026/2026-06-07-sidebar-navigation-componentization-evaluator-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 07 Sidebar Navigation Componentization Evaluator Input",
+      "excerpt": "{ \"initial instruction\": \"미뤘던 구현 해줘\", \"result summary\": \"Continued the deferred componentized desktop ui architecture work by extracting the Workspace Monitor activity rail/sidebar navigation into DesktopActivityRail and updating renderer/platform readiness tests.\", \"work mode\": ",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;미뤘던 구현 해줘&quot;, &quot;result summary&quot;: &quot;Continued the deferred componentized desktop ui architecture work by extracting the Workspace Monitor activity rail/sidebar navigation into DesktopActivityRail and updating renderer/platform readiness tests.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/renderer/workspace monitor/co</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 5199,
+      "updatedAt": "2026-06-06T17:58:53.732Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+      "path": "_history/evaluations/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Work Evaluation: Sidebar Navigation Componentization",
+      "excerpt": "Work Evaluation: Sidebar Navigation Componentization 결과 MonitorShell 의 좌측 activity rail/sidebar navigation을 DesktopActivityRail 로 분리했고, renderer/platform 테스트가 새 컴포넌트 파일을 직접 확인하도록 갱신했다. 사용자 요청 대응 사용자가 “미뤘던 구현”을 요청했으므로, 제품 gap 레지스트리에서 외부 자산 없이 닫을 수 있는 componentized desktop ui archi",
+      "html": "<p>Work Evaluation: Sidebar Navigation Componentization 결과 MonitorShell 의 좌측 activity rail/sidebar navigation을 DesktopActivityRail 로 분리했고, renderer/platform 테스트가 새 컴포넌트 파일을 직접 확인하도록 갱신했다. 사용자 요청 대응 사용자가 “미뤘던 구현”을 요청했으므로, 제품 gap 레지스트리에서 외부 자산 없이 닫을 수 있는 componentized desktop ui architecture 를 이어서 구현했다. 공개 배포 gate는 signing/notarization/updater/clean machine smoke</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1402,
+      "updatedAt": "2026-06-06T17:58:53.732Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+      "path": "_history/request-traces/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Sidebar Navigation Componentization",
+      "excerpt": "요청 결과 추적: Sidebar Navigation Componentization 요청: “미뤘던 구현 해줘” 소유 프로젝트: platform desktop app 작업 모드: standard 제품 gap: componentized desktop ui architecture 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 sidebar navigation componentization.ko.md Spec: platform desktop a",
+      "html": "<p>요청 결과 추적: Sidebar Navigation Componentization 요청: “미뤘던 구현 해줘” 소유 프로젝트: platform desktop app 작업 모드: standard 제품 gap: componentized desktop ui architecture 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 sidebar navigation componentization.ko.md Spec: platform desktop app/specs/2026 06 07 sidebar navigation componentization/ 코드: platform desktop ap</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1244,
+      "updatedAt": "2026-06-06T17:58:53.732Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Sidebar Navigation Componentization",
+      "excerpt": "작업 요약: Sidebar Navigation Componentization 날짜: 2026 06 07 커밋: 대기 중 요청: 미뤘던 구현 계속 진행 결과 MonitorShell 내부 좌측 activity rail/sidebar navigation을 DesktopActivityRail 컴포넌트로 분리했다. renderer test, platform test, readiness script가 새 컴포넌트 파일을 직접 검증하도록 갱신했다. 제품 gap 레지스트리에 이번 구조 분리 증거를 추가했다. 검",
+      "html": "<p>작업 요약: Sidebar Navigation Componentization 날짜: 2026 06 07 커밋: 대기 중 요청: 미뤘던 구현 계속 진행 결과 MonitorShell 내부 좌측 activity rail/sidebar navigation을 DesktopActivityRail 컴포넌트로 분리했다. renderer test, platform test, readiness script가 새 컴포넌트 파일을 직접 검증하도록 갱신했다. 제품 gap 레지스트리에 이번 구조 분리 증거를 추가했다. 검증 corepack pnpm dir platform desktop app/renderer/workspace monitor run check : </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1051,
+      "updatedAt": "2026-06-06T17:58:53.732Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-plans-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+      "path": "_history/plans/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "작업 계획: Sidebar Navigation Componentization",
+      "excerpt": "작업 계획: Sidebar Navigation Componentization 작업 모드: standard 소유 프로젝트: platform desktop app 제품 gap: componentized desktop ui architecture 실행 계획 1. 웹 검색과 메모리 부트스트랩으로 현재 구현 경계를 확인한다. 2. MonitorShell 의 activity rail/sidebar navigation을 새 DesktopActivityRail 컴포넌트로 분리한다. 3. renderer test",
+      "html": "<p>작업 계획: Sidebar Navigation Componentization 작업 모드: standard 소유 프로젝트: platform desktop app 제품 gap: componentized desktop ui architecture 실행 계획 1. 웹 검색과 메모리 부트스트랩으로 현재 구현 경계를 확인한다. 2. MonitorShell 의 activity rail/sidebar navigation을 새 DesktopActivityRail 컴포넌트로 분리한다. 3. renderer test, platform readiness test, readiness script가 새 컴포넌트 파일을 직접 확인하게 갱신한다. 4. dev ser</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 919,
+      "updatedAt": "2026-06-06T17:57:24.476Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-07-sidebar-navigation-componentization-json",
+      "path": "_history/work-timings/2026/2026-06-07-sidebar-navigation-componentization.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 07 Sidebar Navigation Componentization",
+      "excerpt": "{ \"task id\": \"2026 06 07 sidebar navigation componentization\", \"title\": \"Sidebar navigation componentization\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"measurement\":",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 07 sidebar navigation componentization&quot;, &quot;title&quot;: &quot;Sidebar navigation componentization&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;bottleneck notes&quot;: &quot;Tauri and Next.js official docs checked be</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1357,
+      "updatedAt": "2026-06-06T17:57:24.476Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+      "path": "_history/user-requests/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 미뤘던 구현",
+      "excerpt": "사용자 요청 요약: 미뤘던 구현 날짜: 2026 06 07 원문 요지: “미뤘던 구현 해줘” 해석: 최근 제품 gap 중 외부 자산 없이 닫을 수 있는 componentized desktop ui architecture 구조 부채를 이어서 구현한다. 선택한 조각: MonitorShell 의 좌측 activity rail/sidebar navigation을 DesktopActivityRail 컴포넌트로 분리한다. 비범위: 공개 배포 signing/notarization/updater/clean ma",
+      "html": "<p>사용자 요청 요약: 미뤘던 구현 날짜: 2026 06 07 원문 요지: “미뤘던 구현 해줘” 해석: 최근 제품 gap 중 외부 자산 없이 닫을 수 있는 componentized desktop ui architecture 구조 부채를 이어서 구현한다. 선택한 조각: MonitorShell 의 좌측 activity rail/sidebar navigation을 DesktopActivityRail 컴포넌트로 분리한다. 비범위: 공개 배포 signing/notarization/updater/clean machine smoke는 외부 자산이 필요해 이번 로컬 구현으로 닫지 않는다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 549,
+      "updatedAt": "2026-06-06T17:57:24.475Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+      "path": "_history/web-searches/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: Sidebar Navigation Componentization",
+      "excerpt": "웹 검색 기록: Sidebar Navigation Componentization 날짜: 2026 06 07 작업: 미뤘던 componentized desktop ui architecture 구현의 첫 조각으로 Workspace Monitor의 사이드바 네비게이션을 분리한다. 검색 Tauri v2 shell plugin sidecar command official documentation Tauri v2 command invoke official documentation Next.js 16 App ",
+      "html": "<p>웹 검색 기록: Sidebar Navigation Componentization 날짜: 2026 06 07 작업: 미뤘던 componentized desktop ui architecture 구현의 첫 조각으로 Workspace Monitor의 사이드바 네비게이션을 분리한다. 검색 Tauri v2 shell plugin sidecar command official documentation Tauri v2 command invoke official documentation Next.js 16 App Router official documentation client components 확인한 출처 Tauri Shell plugin: https</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1219,
+      "updatedAt": "2026-06-06T17:50:24.089Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-07-dark-mode-contrast-fix-evaluator-input-json",
       "path": "_history/evaluations/2026/2026-06-07-dark-mode-contrast-fix-evaluator-input.json",
@@ -46115,35 +46243,35 @@
     {
       "date": "2026-06-07",
       "year": "2026",
-      "documentsCount": 75,
+      "documentsCount": 83,
       "categories": [
         {
           "category": "evaluation",
-          "count": 20
+          "count": 22
         },
         {
           "category": "plan",
-          "count": 9
+          "count": 10
         },
         {
           "category": "request-trace",
-          "count": 9
+          "count": 10
         },
         {
           "category": "user-request",
-          "count": 9
+          "count": 10
         },
         {
           "category": "web-search",
-          "count": 9
+          "count": 10
         },
         {
           "category": "work-summary",
-          "count": 9
+          "count": 10
         },
         {
           "category": "work-timing",
-          "count": 9
+          "count": 10
         },
         {
           "category": "daily-history",

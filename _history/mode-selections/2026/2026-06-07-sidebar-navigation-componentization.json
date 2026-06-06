@@ -1,0 +1,21 @@
+{
+  "task": "Sidebar Navigation Componentization",
+  "selected_work_mode": "standard",
+  "selection_reason": "The request continues a meaningful platform-desktop-app implementation gap and changes durable UI structure, tests, requirements, specs, generated snapshots, and history records.",
+  "risk_notes": [
+    "Frontend shell componentization can break navigation or accessibility tokens.",
+    "Playwright smoke uses a temporary local dev server that must be cleaned up."
+  ],
+  "required_closeout_targets": [
+    "web_search_record_targets",
+    "mode_selection_record_targets",
+    "requirements_targets",
+    "spec_targets",
+    "omission_check_targets",
+    "resource_check_targets",
+    "request_trace_targets",
+    "work_summary_targets",
+    "timing_summary_targets",
+    "evaluation"
+  ]
+}

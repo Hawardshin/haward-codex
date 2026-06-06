@@ -1,0 +1,112 @@
+{
+  "task": "Sidebar Navigation Componentization",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "select-deferred-slice",
+      "description": "Identify the locally implementable deferred product gap.",
+      "source": "user request and product-gap-registry",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "Selected componentized_desktop_ui_architecture",
+        "Public distribution gate excluded because it requires external signing and clean-machine assets"
+      ]
+    },
+    {
+      "item_id": "extract-activity-rail",
+      "description": "Move activity rail/sidebar navigation out of MonitorShell.",
+      "source": "requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "DesktopActivityRail owns activity-rail markup",
+        "MonitorShell renders <DesktopActivityRail /> with navigation callbacks"
+      ]
+    },
+    {
+      "item_id": "componentization-tests",
+      "description": "Tests verify the new component boundary directly.",
+      "source": "requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "tool-studio.test.mjs reads components/shell/DesktopActivityRail.tsx",
+        "platform readiness test and check-readiness include DesktopActivityRail tokens"
+      ]
+    },
+    {
+      "item_id": "runtime-smoke",
+      "description": "A real browser smoke verifies the rail renders after extraction.",
+      "source": "frontend verification",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "Playwright smoke found tool-window-stripe rail, 6 nav buttons, active current label, 2 settings buttons, and editor-plane viewport"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/shell/DesktopActivityRail.tsx",
+      "purpose": "Extracted shell navigation component",
+      "required": true,
+      "status": "present"
+    },
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-07-sidebar-navigation-componentization.ko.md",
+      "purpose": "Requirement record",
+      "required": true,
+      "status": "present"
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-07-sidebar-navigation-componentization/spec.ko.md",
+      "purpose": "Spec record",
+      "required": true,
+      "status": "present"
+    },
+    {
+      "path": "_history/web-searches/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+      "purpose": "Web-first search record",
+      "required": true,
+      "status": "present"
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "renderer-static-contracts",
+      "description": "Renderer static checks and tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor run check passed",
+        "workspace-monitor test passed: 90 tests"
+      ]
+    },
+    {
+      "check_id": "platform-tests",
+      "description": "Desktop platform tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app test passed: 30 tests"
+      ]
+    },
+    {
+      "check_id": "browser-smoke",
+      "description": "Playwright smoke verifies activity rail rendering.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "railZone tool-window-stripe",
+        "buttonCount 6",
+        "settingsButtons 2",
+        "hasViewport true"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "This slice does not close the full componentized_desktop_ui_architecture gap; Settings dialog, DesktopRuntimePanel, SourceWorkbench, and OperatorCenter ownership remain follow-up slices.",
+    "The Playwright smoke uses the Next.js renderer, not a packaged Tauri binary."
+  ]
+}

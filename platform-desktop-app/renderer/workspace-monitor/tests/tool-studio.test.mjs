@@ -8,6 +8,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
 
 const monitorShell = fs.readFileSync(path.join(projectRoot, "components", "MonitorShell.tsx"), "utf8");
+const desktopActivityRail = fs.readFileSync(
+  path.join(projectRoot, "components", "shell", "DesktopActivityRail.tsx"),
+  "utf8"
+);
 const providerPanelSource = monitorShell.slice(
   monitorShell.indexOf("function ProviderAccountsPanel"),
   monitorShell.indexOf("function DesktopRuntimePanel")
@@ -781,7 +785,7 @@ test("Tabs expose clear visual selected states and ARIA selection", () => {
 
 test("Desktop shell separates IntelliJ-style tool window stripe and editor plane", () => {
   assert.match(monitorShell, /data-layout-model="intellij-tool-window-editor"/);
-  assert.match(monitorShell, /data-intellij-zone="tool-window-stripe"/);
+  assert.match(desktopActivityRail, /data-intellij-zone="tool-window-stripe"/);
   assert.match(monitorShell, /data-intellij-zone="editor-plane"/);
   assert.match(css, /--ide-tool-window-bg:/);
   assert.match(css, /--ide-tool-window-border:/);
@@ -1122,7 +1126,11 @@ test("Monitor section switches prewarm heavy surfaces and preserve source editor
   assert.match(monitorShell, /viewport\?\.setAttribute\("data-section-content-ready", "true"\)/);
   assert.match(monitorShell, /element\.classList\.toggle\("active", isTarget\)/);
   assert.match(monitorShell, /titlebarSectionLabelRef\.current\.textContent = target\.label/);
-  assert.match(monitorShell, /onPointerDown=\{\(\) => primeSectionActivation\(item\.id\)\}/);
+  assert.match(monitorShell, /<DesktopActivityRail/);
+  assert.match(desktopActivityRail, /export function DesktopActivityRail/);
+  assert.match(desktopActivityRail, /className="activity-rail"/);
+  assert.match(desktopActivityRail, /onPointerDown=\{\(\) => onPrimeSection\(item\.id\)\}/);
+  assert.match(desktopActivityRail, /aria-current=\{activeSectionId === item\.id \? "page" : undefined\}/);
   assert.doesNotMatch(monitorShell, /pendingSectionCommitRef\.current\?\.\(\)/);
   assert.doesNotMatch(monitorShell, /pendingSectionCommitRef\.current = scheduleAfterFirstPaint\(\(\) => \{/);
   assert.doesNotMatch(monitorShell, /scheduleAfterFirstPaint\(\(\) => setReadySection\(section\)\)/);
@@ -1751,11 +1759,11 @@ test("Monitor home exposes task-intent routes before section names", () => {
 });
 
 test("Activity rail exposes readable destination labels in the desktop shell", () => {
-  assert.match(monitorShell, /<span>\{item\.shortLabel\}<\/span>/);
-  assert.match(monitorShell, /aria-current=\{section === item\.id \? "page" : undefined\}/);
-  assert.match(monitorShell, /aria-label=\{uiLanguage === "ko" \? "작업공간 홈" : "Workspace Home"\}/);
-  assert.match(monitorShell, /aria-label=\{uiLanguage === "ko" \? "운영 센터 열기" : "Open Operator Center"\}/);
-  assert.match(monitorShell, /aria-label=\{uiLanguage === "ko" \? "설정" : "Settings"\}/);
+  assert.match(desktopActivityRail, /<span>\{item\.shortLabel\}<\/span>/);
+  assert.match(desktopActivityRail, /aria-current=\{activeSectionId === item\.id \? "page" : undefined\}/);
+  assert.match(desktopActivityRail, /const homeLabel = language === "ko" \? "작업공간 홈" : "Workspace Home"/);
+  assert.match(desktopActivityRail, /const operatorLabel = language === "ko" \? "운영 센터 열기" : "Open Operator Center"/);
+  assert.match(desktopActivityRail, /const settingsLabel = language === "ko" \? "설정" : "Settings"/);
   assert.match(css, /--desktop-app-min-width: 1280px;/);
   assert.match(css, /--desktop-app-min-height: 800px;/);
   assert.match(css, /\.desktop-app-shell \{[\s\S]*?grid-template-columns: 76px minmax\(0, 1fr\);/);

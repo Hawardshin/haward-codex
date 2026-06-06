@@ -558,6 +558,10 @@ test("shared CLI adapter registry defines concrete AI CLI targets", () => {
 test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () => {
   const lib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
   const monitorShell = readFileSync(join(root, "renderer/workspace-monitor/components/MonitorShell.tsx"), "utf8");
+  const desktopActivityRail = readFileSync(
+    join(root, "renderer/workspace-monitor/components/shell/DesktopActivityRail.tsx"),
+    "utf8"
+  );
   const coreFeatureDrilldown = readFileSync(
     join(root, "renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx"),
     "utf8"
@@ -834,6 +838,11 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     assert.match(monitorShell, new RegExp(commandName));
   }
   assert.match(monitorShell, /DesktopRuntimePanel/);
+  assert.match(monitorShell, /<DesktopActivityRail/);
+  assert.match(desktopActivityRail, /export function DesktopActivityRail/);
+  assert.match(desktopActivityRail, /className="activity-rail"/);
+  assert.match(desktopActivityRail, /onPrimeSection\(item\.id\)/);
+  assert.match(desktopActivityRail, /data-section-id=\{item\.id\}/);
   assert.match(monitorShell, /CoreFeatureDrilldown/);
   assert.match(monitorShell, /NativeGitWorkbench/);
   assert.match(nativeGitWorkbench, /NativeGitWorkbench/);

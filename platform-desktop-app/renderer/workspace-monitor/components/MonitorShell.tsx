@@ -51,6 +51,7 @@ import type { ProductFeatureArchitecturePanelProps } from "@/components/features
 import type { OperatorCenterDialogProps } from "@/components/features/OperatorCenterDialog";
 import type { EvaluationReportPanelProps } from "@/components/features/EvaluationReportPanel";
 import { preloadAdminHistoryIndex, useAdminHistoryIndex } from "@/components/history/useAdminHistoryIndex";
+import { DesktopActivityRail } from "@/components/shell/DesktopActivityRail";
 import { SnapshotLoadingShell } from "@/components/SnapshotLoadingShell";
 import { ActionGroup } from "@/components/ui/ActionGroup";
 import { Button } from "@/components/ui/Button";
@@ -7016,58 +7017,16 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         data-ui-foundation="gestalt-hierarchy-density"
         data-layout-model="intellij-tool-window-editor"
       >
-        <aside
-          className="activity-rail"
-          data-intellij-zone="tool-window-stripe"
-          aria-label={uiLanguage === "ko" ? "주요 기능 레일" : "Primary activity rail"}
-        >
-          <button
-            className="activity-brand"
-            type="button"
-            onPointerDown={() => primeSectionActivation("overview")}
-            onClick={() => openSection("overview")}
-            title={uiLanguage === "ko" ? "작업공간 홈" : "Workspace Home"}
-            aria-label={uiLanguage === "ko" ? "작업공간 홈" : "Workspace Home"}
-          >
-            <Bot size={22} aria-hidden="true" />
-          </button>
-          <nav aria-label={uiLanguage === "ko" ? "주요 데스크톱 섹션" : "Pinned desktop sections"}>
-            {workVisibleSections.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                onPointerDown={() => primeSectionActivation(item.id)}
-                onClick={() => openSection(item.id)}
-                className={section === item.id ? "active" : ""}
-                title={item.label}
-                aria-label={item.label}
-                aria-current={section === item.id ? "page" : undefined}
-                data-section-id={item.id}
-              >
-                <item.icon size={19} aria-hidden="true" />
-                <span>{item.shortLabel}</span>
-              </button>
-            ))}
-          </nav>
-          <button
-            className="activity-settings"
-            type="button"
-            onClick={() => setOperatorCenterOpen(true)}
-            title={uiLanguage === "ko" ? "운영 센터 열기" : "Open Operator Center"}
-            aria-label={uiLanguage === "ko" ? "운영 센터 열기" : "Open Operator Center"}
-          >
-            <ShieldCheck size={19} aria-hidden="true" />
-          </button>
-          <button
-            className="activity-settings"
-            type="button"
-            onClick={() => openSettingsTab("appearance")}
-            title={uiLanguage === "ko" ? "설정" : "Settings"}
-            aria-label={uiLanguage === "ko" ? "설정" : "Settings"}
-          >
-            <Settings size={19} aria-hidden="true" />
-          </button>
-        </aside>
+        <DesktopActivityRail
+          language={uiLanguage}
+          activeSectionId={section}
+          homeSectionId="overview"
+          sections={workVisibleSections}
+          onPrimeSection={primeSectionActivation}
+          onOpenSection={openSection}
+          onOpenOperatorCenter={() => setOperatorCenterOpen(true)}
+          onOpenSettings={() => openSettingsTab("appearance")}
+        />
 
         <section
           className="desktop-viewport"

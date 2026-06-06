@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T17:46:05.716Z",
+  "generatedAt": "2026-06-06T17:59:13.603Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 5,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 528,
-    "evaluations": 26,
+    "evaluations": 25,
     "webSearches": 11,
-    "timingRecords": 11,
+    "timingRecords": 12,
     "historyDays": 2,
-    "adminHistoryDocuments": 2878,
+    "adminHistoryDocuments": 2886,
     "adminHistoryDays": 8,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7861,6 +7861,246 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-07-sidebar-navigation-componentization-evaluator-input-json",
+      "path": "_history/evaluations/2026/2026-06-07-sidebar-navigation-componentization-evaluator-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 07 Sidebar Navigation Componentization Evaluator Input",
+      "excerpt": "{ \"initial instruction\": \"미뤘던 구현 해줘\", \"result summary\": \"Continued the deferred componentized desktop ui architecture work by extracting the Workspace Monitor activity rail/sidebar navigation into DesktopActivityRail and updating renderer/platform readiness tests.\", \"work mode\": ",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;미뤘던 구현 해줘&quot;, &quot;result summary&quot;: &quot;Continued the deferred componentized desktop ui architecture work by extracting the Workspace Monitor activity rail/sidebar navigation into DesktopActivityRail and updating renderer/platform readiness tests.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/renderer/workspace monitor/co</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 5199,
+      "updatedAt": "2026-06-06T17:58:53.732Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+      "path": "_history/evaluations/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Work Evaluation: Sidebar Navigation Componentization",
+      "excerpt": "Work Evaluation: Sidebar Navigation Componentization 결과 MonitorShell 의 좌측 activity rail/sidebar navigation을 DesktopActivityRail 로 분리했고, renderer/platform 테스트가 새 컴포넌트 파일을 직접 확인하도록 갱신했다. 사용자 요청 대응 사용자가 “미뤘던 구현”을 요청했으므로, 제품 gap 레지스트리에서 외부 자산 없이 닫을 수 있는 componentized desktop ui archi",
+      "html": "<p>Work Evaluation: Sidebar Navigation Componentization 결과 MonitorShell 의 좌측 activity rail/sidebar navigation을 DesktopActivityRail 로 분리했고, renderer/platform 테스트가 새 컴포넌트 파일을 직접 확인하도록 갱신했다. 사용자 요청 대응 사용자가 “미뤘던 구현”을 요청했으므로, 제품 gap 레지스트리에서 외부 자산 없이 닫을 수 있는 componentized desktop ui architecture 를 이어서 구현했다. 공개 배포 gate는 signing/notarization/updater/clean machine smoke</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1402,
+      "updatedAt": "2026-06-06T17:58:53.732Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+      "path": "_history/request-traces/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Sidebar Navigation Componentization",
+      "excerpt": "요청 결과 추적: Sidebar Navigation Componentization 요청: “미뤘던 구현 해줘” 소유 프로젝트: platform desktop app 작업 모드: standard 제품 gap: componentized desktop ui architecture 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 sidebar navigation componentization.ko.md Spec: platform desktop a",
+      "html": "<p>요청 결과 추적: Sidebar Navigation Componentization 요청: “미뤘던 구현 해줘” 소유 프로젝트: platform desktop app 작업 모드: standard 제품 gap: componentized desktop ui architecture 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 sidebar navigation componentization.ko.md Spec: platform desktop app/specs/2026 06 07 sidebar navigation componentization/ 코드: platform desktop ap</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1244,
+      "updatedAt": "2026-06-06T17:58:53.732Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Sidebar Navigation Componentization",
+      "excerpt": "작업 요약: Sidebar Navigation Componentization 날짜: 2026 06 07 커밋: 대기 중 요청: 미뤘던 구현 계속 진행 결과 MonitorShell 내부 좌측 activity rail/sidebar navigation을 DesktopActivityRail 컴포넌트로 분리했다. renderer test, platform test, readiness script가 새 컴포넌트 파일을 직접 검증하도록 갱신했다. 제품 gap 레지스트리에 이번 구조 분리 증거를 추가했다. 검",
+      "html": "<p>작업 요약: Sidebar Navigation Componentization 날짜: 2026 06 07 커밋: 대기 중 요청: 미뤘던 구현 계속 진행 결과 MonitorShell 내부 좌측 activity rail/sidebar navigation을 DesktopActivityRail 컴포넌트로 분리했다. renderer test, platform test, readiness script가 새 컴포넌트 파일을 직접 검증하도록 갱신했다. 제품 gap 레지스트리에 이번 구조 분리 증거를 추가했다. 검증 corepack pnpm dir platform desktop app/renderer/workspace monitor run check : </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1051,
+      "updatedAt": "2026-06-06T17:58:53.732Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-sidebar-navigation-componentization-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-sidebar-navigation-componentization/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Sidebar Navigation Componentization",
+      "excerpt": "Traceability: Sidebar Navigation Componentization | 항목 | 대상 | | | | | 사용자 요청 | “미뤘던 구현 해줘” | | 제품 gap | componentized desktop ui architecture | | 요구사항 | platform desktop app/docs/requirements/2026 06 07 sidebar navigation componentization.ko.md | | 코드 | platform desktop app/rende",
+      "html": "<h1>Traceability: Sidebar Navigation Componentization</h1>\n<table><thead><tr><th>항목</th><th>대상</th></tr></thead><tbody><tr><td>사용자 요청</td><td>“미뤘던 구현 해줘”</td></tr><tr><td>제품 gap</td><td><code>componentized_desktop_ui_architecture</code></td></tr><tr><td>요구사항</td><td><code>platform-desktop-app/docs/requirements/2026-06-07-sidebar-navigation-componentization.ko.md</code></td></tr><tr><td>코드</td><td><code>platform-desktop-app/renderer/workspace-monitor/components/shell/DesktopActivityRail.tsx</code>, <code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></td></tr><tr><td>테스트</td><td><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code>, <code>platform-desktop-app/tests/readiness.test.mjs</code>, <code>platform-desktop-app/scripts/check-readiness.mjs</code></td></tr><tr><td>검증</td><td>renderer check/test, platform test, Playwright smoke, collect, customer renderer build, platform check 통과</td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 810,
+      "updatedAt": "2026-06-06T17:58:53.732Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-sidebar-navigation-componentization-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-sidebar-navigation-componentization/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Sidebar Navigation Componentization",
+      "excerpt": "Tasks: Sidebar Navigation Componentization x DesktopActivityRail 추가 x MonitorShell 연결 x 테스트/readiness 계약 갱신 x renderer check/test 통과 x collect/build/platform check 통과 x omission/resource/evaluation 기록 완료 commit/push 완료",
+      "html": "<h1>Tasks: Sidebar Navigation Componentization</h1>\n<ul>\n<li>[x] <code>DesktopActivityRail</code> 추가</li>\n<li>[x] <code>MonitorShell</code> 연결</li>\n<li>[x] 테스트/readiness 계약 갱신</li>\n<li>[x] renderer check/test 통과</li>\n<li>[x] collect/build/platform check 통과</li>\n<li>[x] omission/resource/evaluation 기록 완료</li>\n<li>[ ] commit/push 완료</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 298,
+      "updatedAt": "2026-06-06T17:58:53.731Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-sidebar-navigation-componentization-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-sidebar-navigation-componentization/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Sidebar Navigation Componentization",
+      "excerpt": "Validation: Sidebar Navigation Componentization 예정 corepack pnpm dir platform desktop app/renderer/workspace monitor run check corepack pnpm dir platform desktop app/renderer/workspace monitor test corepack pnpm dir platform desktop app/renderer/workspace monitor run collect best",
+      "html": "<h1>Validation: Sidebar Navigation Componentization</h1>\n<h2>예정</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code></li>\n<li><code>corepack pnpm -w run desktop:renderer:build</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code></li>\n</ul>\n<h2>결과</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code>: 통과, 90 tests</li>\n<li><code>corepack pnpm --dir platform-desktop-app test</code>: 통과, 30 tests</li>\n<li>Playwright smoke: 통과, activity rail DOM 렌더링 확인</li>\n<li><code>python3 _tools/docs-audit/src/docs_audit.py --check</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code>: 통과</li>\n<li><code>corepack pnpm -w run desktop:renderer:build</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code>: 통과, 기존 public release gate 경고 유지</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1087,
+      "updatedAt": "2026-06-06T17:58:53.731Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-plans-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+      "path": "_history/plans/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "작업 계획: Sidebar Navigation Componentization",
+      "excerpt": "작업 계획: Sidebar Navigation Componentization 작업 모드: standard 소유 프로젝트: platform desktop app 제품 gap: componentized desktop ui architecture 실행 계획 1. 웹 검색과 메모리 부트스트랩으로 현재 구현 경계를 확인한다. 2. MonitorShell 의 activity rail/sidebar navigation을 새 DesktopActivityRail 컴포넌트로 분리한다. 3. renderer test",
+      "html": "<p>작업 계획: Sidebar Navigation Componentization 작업 모드: standard 소유 프로젝트: platform desktop app 제품 gap: componentized desktop ui architecture 실행 계획 1. 웹 검색과 메모리 부트스트랩으로 현재 구현 경계를 확인한다. 2. MonitorShell 의 activity rail/sidebar navigation을 새 DesktopActivityRail 컴포넌트로 분리한다. 3. renderer test, platform readiness test, readiness script가 새 컴포넌트 파일을 직접 확인하게 갱신한다. 4. dev ser</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 919,
+      "updatedAt": "2026-06-06T17:57:24.476Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-07-sidebar-navigation-componentization-json",
+      "path": "_history/work-timings/2026/2026-06-07-sidebar-navigation-componentization.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 07 Sidebar Navigation Componentization",
+      "excerpt": "{ \"task id\": \"2026 06 07 sidebar navigation componentization\", \"title\": \"Sidebar navigation componentization\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"measurement\":",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 07 sidebar navigation componentization&quot;, &quot;title&quot;: &quot;Sidebar navigation componentization&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;bottleneck notes&quot;: &quot;Tauri and Next.js official docs checked be</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1357,
+      "updatedAt": "2026-06-06T17:57:24.476Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+      "path": "_history/user-requests/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 미뤘던 구현",
+      "excerpt": "사용자 요청 요약: 미뤘던 구현 날짜: 2026 06 07 원문 요지: “미뤘던 구현 해줘” 해석: 최근 제품 gap 중 외부 자산 없이 닫을 수 있는 componentized desktop ui architecture 구조 부채를 이어서 구현한다. 선택한 조각: MonitorShell 의 좌측 activity rail/sidebar navigation을 DesktopActivityRail 컴포넌트로 분리한다. 비범위: 공개 배포 signing/notarization/updater/clean ma",
+      "html": "<p>사용자 요청 요약: 미뤘던 구현 날짜: 2026 06 07 원문 요지: “미뤘던 구현 해줘” 해석: 최근 제품 gap 중 외부 자산 없이 닫을 수 있는 componentized desktop ui architecture 구조 부채를 이어서 구현한다. 선택한 조각: MonitorShell 의 좌측 activity rail/sidebar navigation을 DesktopActivityRail 컴포넌트로 분리한다. 비범위: 공개 배포 signing/notarization/updater/clean machine smoke는 외부 자산이 필요해 이번 로컬 구현으로 닫지 않는다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 549,
+      "updatedAt": "2026-06-06T17:57:24.475Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "platform-desktop-app-configs-product-gap-registry-json",
+      "path": "platform-desktop-app/configs/product-gap-registry.json",
+      "category": "project-config",
+      "language": "unknown",
+      "title": "Product Gap Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"product gap registry\", \"purpose\": \"Track user request coverage, deferred product slices, and release gates for the installable desktop agent platform so unfinished work cannot be hidden behind completed feature architecture.\", \"reader gu",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;product-gap-registry&quot;,\n  &quot;purpose&quot;: &quot;Track user-request coverage, deferred product slices, and release gates for the installable desktop agent platform so unfinished work cannot be hidden behind completed feature architecture.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;This registry is the durable product gap ledger for the desktop agent platform. It records which recent user requests are covered, partial, or still missing as product slices.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Start with coverage_summary to see whether the user&#039;s latest desktop-agent-platform goals are fully closed.&quot;,\n      &quot;Read request_coverage to map each user request ID to implemented evidence and remaining gap IDs.&quot;,\n      &quot;Read gap_items before planning new desktop work; p0_product_gap items should be implemented before cosmetic or monitoring-heavy work.&quot;,\n      &quot;Treat external_release_gate items as release blockers rather than UI feature work.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-03&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;A user asks whether deferred or missing work remains.&quot;,\n      &quot;A p0 or p1 desktop product slice is implemented, descoped, or superseded.&quot;,\n      &quot;Product feature architecture, installer runtime contract, data format, workspace host, or release readiness changes.&quot;,\n      &quot;Public distribution readiness changes, including signing, notarization, updater, or clean-machine smoke tests.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;user_requests_2026_06_03&quot;,\n      &quot;title&quot;: &quot;Structured user request summaries for 2026-06-03&quot;,\n      &quot;source_type&quot;: &quot;local_history&quot;,\n      &quot;path&quot;: &quot;_history/user-requests/2026/2026-06-03.ko.md&quot;,\n      &quot;used_for&quot;: [\n        &quot;Define the request IDs audited by this registry.&quot;,\n        &quot;Map product gaps back to the user&#039;s stated desktop app and agent-platform goals.&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;product_feature_registry&quot;,\n      &quot;title&quot;: &quot;Desktop agent platform product feature registry&quot;,\n      &quot;source_type&quot;: &quot;local_config&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/configs/product-feature-registry.json&quot;,\n      &quot;used_for&quot;: [\n        &quot;Confirm the intended primary product and feature layer roles.&quot;,\n        &quot;Separate primary work surfaces from supporting observability.&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;runtime_contract&quot;,\n      &quot;title&quot;: &quot;Installer shell runtime contract&quot;,\n      &quot;source_type&quot;: &quot;local_contract&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json&quot;,\n      &quot;used_for&quot;: [\n        &quot;Confirm that the installed app owns runtime rules, enforcement gates, and data accumulation targets.&quot;,\n        &quot;Identify whether a gap is runtime-contract, UI, data, or release-readiness work.&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;nist_sp_800_53_sa_11&quot;,\n      &quot;title&quot;: &quot;NIST SP 800-53 SA-11 Developer Testing and Evaluation&quot;,\n      &quot;source_type&quot;: &quot;official_standard&quot;,\n      &quot;url&quot;: &quot;https://csrc.nist.gov/projects/cprt/catalog#/cprt/framework/version/SP_800_53_5_1_1/home?element=SA-11&quot;,\n      &quot;used_for&quot;: [\n        &quot;External check that meaningful software work should preserve testing and evaluation evidence.&quot;,\n        &quot;Support keeping validation handles beside product gap records.&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;atlassian_backlog_refinement&quot;,\n      &quot;title&quot;: &quot;Atlassian Agile backlog refinement guidance&quot;,\n      &quot;source_type&quot;: &quot;official_vendor_guidance&quot;,\n      &quot;url&quot;: &quot;https://www.atlassian.com/agile/scrum/backlog-refinement&quot;,\n      &quot;used_for&quot;: [\n        &quot;External check that deferred work should remain explicit, prioritized, and periodically reviewed.&quot;,\n        &quot;Support treating missing product slices as backlog items with acceptance criteria rather than chat-only notes.&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;request_coverage_required&quot;,\n      &quot;rule&quot;: &quot;Every audited user request must have one request_coverage entry with evidence and remaining_gap_ids.&quot;,\n      &quot;reason&quot;: &quot;The user explicitly asked to re-evaluate whether any requested work was missed.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;request_coverage&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;gap_ids_are_stable&quot;,\n      &quot;rule&quot;: &quot;Gap IDs are stable lower snake_case identifiers and must not be renamed without updating request_coverage and traceability records.&quot;,\n      &quot;reason&quot;: &quot;Stable IDs let readiness tests and future audits detect stale or silently removed gaps.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;gap_items&quot;,\n        &quot;request_coverage.remaining_gap_ids&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;p0_before_cosmetic&quot;,\n      &quot;rule&quot;: &quot;p0_product_gap items should be implemented before new cosmetic UI changes or monitoring-heavy additions.&quot;,\n      &quot;reason&quot;: &quot;The user&#039;s product goal is agent orchestration, work environment, development environment, agent factory, and learning improvement, not monitoring polish.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;gap_items.priority&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;external_gates_not_faked&quot;,\n      &quot;rule&quot;: &quot;External distribution gates stay open until validated w</code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 29382,
+      "updatedAt": "2026-06-06T17:53:38.590Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-sidebar-navigation-componentization-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-sidebar-navigation-componentization/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Sidebar Navigation Componentization",
+      "excerpt": "Plan: Sidebar Navigation Componentization 1. DesktopActivityRail 컴포넌트와 props 타입을 추가한다. 2. MonitorShell 의 기존 <aside className=\"activity rail\" 을 새 컴포넌트 호출로 교체한다. 3. renderer tests와 platform readiness 검사에서 새 shell component를 읽도록 갱신한다. 4. check/test/build/platform 검증을 실행한다. 5. 기록, 평가",
+      "html": "<h1>Plan: Sidebar Navigation Componentization</h1>\n<p>1. <code>DesktopActivityRail</code> 컴포넌트와 props 타입을 추가한다.</p>\n<p>2. <code>MonitorShell</code>의 기존 <code>&lt;aside className=&quot;activity-rail&quot;&gt;</code>을 새 컴포넌트 호출로 교체한다.</p>\n<p>3. renderer tests와 platform readiness 검사에서 새 shell component를 읽도록 갱신한다.</p>\n<p>4. check/test/build/platform 검증을 실행한다.</p>\n<p>5. 기록, 평가, 커밋, 푸시를 완료한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 428,
+      "updatedAt": "2026-06-06T17:50:24.090Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-sidebar-navigation-componentization-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-sidebar-navigation-componentization/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Sidebar Navigation Componentization",
+      "excerpt": "Spec: Sidebar Navigation Componentization 목표 MonitorShell.tsx 의 좌측 활동 레일 렌더링을 components/shell/DesktopActivityRail.tsx 로 분리해 componentized desktop ui architecture 의 첫 실행 가능한 조각을 구현한다. 설계 새 컴포넌트는 \"use client\" React 컴포넌트다. DesktopActivityRail props: language activeSectionId section",
+      "html": "<h1>Spec: Sidebar Navigation Componentization</h1>\n<h2>목표</h2>\n<p><code>MonitorShell.tsx</code>의 좌측 활동 레일 렌더링을 <code>components/shell/DesktopActivityRail.tsx</code>로 분리해 <code>componentized_desktop_ui_architecture</code>의 첫 실행 가능한 조각을 구현한다.</p>\n<h2>설계</h2>\n<ul>\n<li>새 컴포넌트는 <code>&quot;use client&quot;</code> React 컴포넌트다.</li>\n<li><code>DesktopActivityRail</code> props:</li>\n<li><code>language</code></li>\n<li><code>activeSectionId</code></li>\n<li><code>sections</code></li>\n<li><code>onPrimeSection</code></li>\n<li><code>onOpenSection</code></li>\n<li><code>onOpenOperatorCenter</code></li>\n<li><code>onOpenSettings</code></li>\n<li>섹션 item은 <code>id</code>, <code>label</code>, <code>shortLabel</code>, <code>icon</code>만 요구한다.</li>\n<li>기존 <code>.activity-rail</code>, <code>.activity-brand</code>, <code>.activity-settings</code>, <code>data-section-id</code>, <code>aria-current</code> 계약을 유지한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>MonitorShell</code>은 <code>&lt;DesktopActivityRail ... /&gt;</code>을 사용한다.</li>\n<li>새 컴포넌트 파일에 activity rail markup과 section button loop가 있다.</li>\n<li>테스트/readiness가 새 파일을 읽어 componentization 토큰을 검증한다.</li>\n<li>renderer check/test/build와 desktop app check가 통과한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1019,
+      "updatedAt": "2026-06-06T17:50:24.090Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+      "path": "_history/web-searches/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: Sidebar Navigation Componentization",
+      "excerpt": "웹 검색 기록: Sidebar Navigation Componentization 날짜: 2026 06 07 작업: 미뤘던 componentized desktop ui architecture 구현의 첫 조각으로 Workspace Monitor의 사이드바 네비게이션을 분리한다. 검색 Tauri v2 shell plugin sidecar command official documentation Tauri v2 command invoke official documentation Next.js 16 App ",
+      "html": "<p>웹 검색 기록: Sidebar Navigation Componentization 날짜: 2026 06 07 작업: 미뤘던 componentized desktop ui architecture 구현의 첫 조각으로 Workspace Monitor의 사이드바 네비게이션을 분리한다. 검색 Tauri v2 shell plugin sidecar command official documentation Tauri v2 command invoke official documentation Next.js 16 App Router official documentation client components 확인한 출처 Tauri Shell plugin: https</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1219,
+      "updatedAt": "2026-06-06T17:50:24.089Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-07-sidebar-navigation-componentization-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-07-sidebar-navigation-componentization.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: Sidebar Navigation Componentization",
+      "excerpt": "요구사항: Sidebar Navigation Componentization 날짜: 2026 06 07 상태: draft 소유 프로젝트: platform desktop app 배경 사용자는 미뤘던 구현을 계속 진행하라고 요청했다. 제품 gap 레지스트리에서 지금 로컬 구현으로 닫을 수 있는 남은 항목은 componentized desktop ui architecture 구조 부채다. 요구사항 MonitorShell 안에 직접 있던 좌측 활동 레일/사이드바 네비게이션 렌더링을 별도 컴포넌트로 분리한다",
+      "html": "<h1>요구사항: Sidebar Navigation Componentization</h1>\n<ul>\n<li>날짜: 2026-06-07</li>\n<li>상태: draft</li>\n<li>소유 프로젝트: <code>platform-desktop-app</code></li>\n</ul>\n<h2>배경</h2>\n<p>사용자는 미뤘던 구현을 계속 진행하라고 요청했다. 제품 gap 레지스트리에서 지금 로컬 구현으로 닫을 수 있는 남은 항목은 <code>componentized_desktop_ui_architecture</code> 구조 부채다.</p>\n<h2>요구사항</h2>\n<ul>\n<li><code>MonitorShell</code> 안에 직접 있던 좌측 활동 레일/사이드바 네비게이션 렌더링을 별도 컴포넌트로 분리한다.</li>\n<li>분리된 컴포넌트는 현재 섹션, 고정 섹션 목록, 홈/섹션/운영센터/설정 액션을 props로 받아야 한다.</li>\n<li>UI 동작, 즉시 섹션 활성화, 접근성 label, 기존 CSS 클래스는 유지한다.</li>\n<li>테스트와 readiness 검사에서 새 componentization 경계를 직접 확인한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>공개 배포 signing/notarization/updater/clean-machine smoke는 외부 자산이 필요하므로 이번 작업에서 닫지 않는다.</li>\n<li>Settings dialog, DesktopRuntimePanel, SourceWorkbench 전체 분리는 후속 구조화 조각으로 남긴다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1111,
+      "updatedAt": "2026-06-06T17:50:24.089Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-07-dark-mode-contrast-fix-evaluator-input-json",
       "path": "_history/evaluations/2026/2026-06-07-dark-mode-contrast-fix-evaluator-input.json",
       "category": "evaluation",
@@ -10261,70 +10501,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-evaluations-2026-2026-06-06-subagent-tool-use-input-json",
-      "path": "_history/evaluations/2026/2026-06-06-subagent-tool-use-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Subagent Tool Use Input",
-      "excerpt": "{ \"initial instruction\": \"에이전트 서브에이전트 사용 툴\", \"result summary\": \"Added a source backed subagent delegation playbook plus a Desktop Runtime Tauri command that runs the agent platform manager as tools planner and persists the result as a task run record.\", \"work mode\": \"standard\", \"",
-      "html": "<p>{ &quot;initial instruction&quot;: &quot;에이전트 서브에이전트 사용 툴&quot;, &quot;result summary&quot;: &quot;Added a source backed subagent delegation playbook plus a Desktop Runtime Tauri command that runs the agent platform manager as tools planner and persists the result as a task run record.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/configs/tool usage integration registry.js</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 4840,
-      "updatedAt": "2026-06-06T14:37:32.711Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-subagent-tool-use-ko-md",
-      "path": "_history/plans/2026/2026-06-06-subagent-tool-use.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "작업 계획: Subagent Tool Use",
-      "excerpt": "작업 계획: Subagent Tool Use work mode: standard view mode: superadmin developer install mode: developer 1. 웹 우선 조사와 subagent tool discovery 수행. 2. existing manager as tools planner와 task run store 확인. 3. Tool Studio playbook에 subagent delegation loop 추가. 4. Tauri command run subagen",
-      "html": "<p>작업 계획: Subagent Tool Use work mode: standard view mode: superadmin developer install mode: developer 1. 웹 우선 조사와 subagent tool discovery 수행. 2. existing manager as tools planner와 task run store 확인. 3. Tool Studio playbook에 subagent delegation loop 추가. 4. Tauri command run subagent tool plan 추가. 5. Desktop Runtime UI에서 planner command 실행 버튼과 결과 요약 표시. 6. conf</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 546,
-      "updatedAt": "2026-06-06T14:29:52.988Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-subagent-tool-use-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-subagent-tool-use.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Subagent Tool Use",
-      "excerpt": "사용자 요청 요약: Subagent Tool Use 날짜: 2026 06 06 사용자는 agent/subagent를 사용할 수 있는 tool 기능을 요구했다. 해석한 핵심은 agent가 subagent를 도구처럼 위임하고, 그 사용 방식이 플랫폼에 보이며, 실행 가능한 최소 native 경로가 있어야 한다는 것이다. 이번 범위는 Tool Studio playbook, Desktop Runtime 실행 버튼, Tauri planner command, task run 기록까지다. 실제 subagent",
-      "html": "<p>사용자 요청 요약: Subagent Tool Use 날짜: 2026 06 06 사용자는 agent/subagent를 사용할 수 있는 tool 기능을 요구했다. 해석한 핵심은 agent가 subagent를 도구처럼 위임하고, 그 사용 방식이 플랫폼에 보이며, 실행 가능한 최소 native 경로가 있어야 한다는 것이다. 이번 범위는 Tool Studio playbook, Desktop Runtime 실행 버튼, Tauri planner command, task run 기록까지다. 실제 subagent 병렬 실행 runtime은 다음 slice로 남긴다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 520,
-      "updatedAt": "2026-06-06T14:29:52.988Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-subagent-tool-use-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-subagent-tool-use.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: Subagent Tool Use",
-      "excerpt": "웹 검색 기록: Subagent Tool Use 날짜: 2026 06 06 질의 OpenAI Agents SDK handoffs tools agents subagents official documentation Anthropic Claude Code subagents tools official documentation VS Code Copilot coding agent subagents tools official documentation 확인한 출처 OpenAI Agents SDK Handoffs",
-      "html": "<p>웹 검색 기록: Subagent Tool Use 날짜: 2026 06 06 질의 OpenAI Agents SDK handoffs tools agents subagents official documentation Anthropic Claude Code subagents tools official documentation VS Code Copilot coding agent subagents tools official documentation 확인한 출처 OpenAI Agents SDK Handoffs: https://openai.github.io/openai agents python/handoffs/ OpenAI Agents SDK Agen</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1343,
-      "updatedAt": "2026-06-06T14:29:52.987Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-subagent-tool-use-traceability-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-subagent-tool-use/traceability.ko.md",
       "category": "project-spec",
@@ -10403,70 +10579,6 @@
       "historyDate": "",
       "historyYear": "",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "최종 평가: Terminal Agent Bridge",
-      "excerpt": "최종 평가: Terminal Agent Bridge 날짜: 2026 06 06 평가 사용자의 “터미널 연결 기능, 에이전트 기능을 제대로” 요구에 대해 Desktop Runtime에서 PTY 연결과 agent CLI session 시작을 한 흐름으로 묶는 첫 slice를 구현했다. 충족 PTY, CLI adapter, agent session 상태를 bridge 카드로 표시한다. 연결 실행 버튼은 runtime/adapter/prompt가 준비된 경우에만 활성화된다. PTY 연결이 writable",
-      "html": "<p>최종 평가: Terminal Agent Bridge 날짜: 2026 06 06 평가 사용자의 “터미널 연결 기능, 에이전트 기능을 제대로” 요구에 대해 Desktop Runtime에서 PTY 연결과 agent CLI session 시작을 한 흐름으로 묶는 첫 slice를 구현했다. 충족 PTY, CLI adapter, agent session 상태를 bridge 카드로 표시한다. 연결 실행 버튼은 runtime/adapter/prompt가 준비된 경우에만 활성화된다. PTY 연결이 writable 상태가 아니면 agent session을 시작하지 않는다. 기존 start selected lane action도 실패를 action feed</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1263,
-      "updatedAt": "2026-06-06T14:09:58.346Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-terminal-agent-bridge-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-terminal-agent-bridge.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: Terminal Agent Bridge",
-      "excerpt": "요청 결과 추적: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 결과 Desktop Runtime에 PTY CLI adapter agent session bridge UI 추가. createNativePtySession , createCliAdapterSession , startTerminalAgentBridge 추가. 기존 start selected lane action feedback 실패 전파 보강. CSS와 te",
-      "html": "<p>요청 결과 추적: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 결과 Desktop Runtime에 PTY CLI adapter agent session bridge UI 추가. createNativePtySession , createCliAdapterSession , startTerminalAgentBridge 추가. 기존 start selected lane action feedback 실패 전파 보강. CSS와 test contract 추가. 주요 산출물 platform desktop app/renderer/workspace monitor/component</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1289,
-      "updatedAt": "2026-06-06T14:09:58.346Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-terminal-agent-bridge-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-terminal-agent-bridge.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: Terminal Agent Bridge",
-      "excerpt": "작업 요약: Terminal Agent Bridge 날짜: 2026 06 06 Desktop Runtime에 terminal agent bridge 를 추가해 native PTY, CLI adapter, agent session 상태를 한 흐름으로 표시했다. 새 startTerminalAgentBridge 는 PTY를 먼저 만들고 writable 상태가 아니면 agent CLI session을 시작하지 않는다. 기존 선택 실행 버튼도 action feedback용 실행 함수가 실패를 전파하도록 분",
-      "html": "<p>작업 요약: Terminal Agent Bridge 날짜: 2026 06 06 Desktop Runtime에 terminal agent bridge 를 추가해 native PTY, CLI adapter, agent session 상태를 한 흐름으로 표시했다. 새 startTerminalAgentBridge 는 PTY를 먼저 만들고 writable 상태가 아니면 agent CLI session을 시작하지 않는다. 기존 선택 실행 버튼도 action feedback용 실행 함수가 실패를 전파하도록 분리했다. 검증: workspace monitor check/test, desktop renderer build, Browser smoke, de</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 600,
-      "updatedAt": "2026-06-06T14:09:58.346Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-input-json",
-      "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Terminal Agent Bridge Input",
-      "excerpt": "{ \"initial instruction\": \"터미널 연결 기능 에이전트 기능 똑바로.\", \"result summary\": \"Added a Desktop Runtime terminal agent bridge that gates agent CLI session start on native PTY readiness and exposes PTY, adapter, and agent session status in one flow.\", \"work mode\": \"standard\", \"changed files",
-      "html": "<p>{ &quot;initial instruction&quot;: &quot;터미널 연결 기능 에이전트 기능 똑바로.&quot;, &quot;result summary&quot;: &quot;Added a Desktop Runtime terminal agent bridge that gates agent CLI session start on native PTY readiness and exposes PTY, adapter, and agent session status in one flow.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx&quot;</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 4106,
-      "updatedAt": "2026-06-06T14:09:58.345Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-terminal-agent-bridge-validation-ko-md",
@@ -15941,22 +16053,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "platform-desktop-app-configs-product-gap-registry-json",
-      "path": "platform-desktop-app/configs/product-gap-registry.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "Product Gap Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"product gap registry\", \"purpose\": \"Track user request coverage, deferred product slices, and release gates for the installable desktop agent platform so unfinished work cannot be hidden behind completed feature architecture.\", \"reader gu",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;product-gap-registry&quot;,\n  &quot;purpose&quot;: &quot;Track user-request coverage, deferred product slices, and release gates for the installable desktop agent platform so unfinished work cannot be hidden behind completed feature architecture.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;This registry is the durable product gap ledger for the desktop agent platform. It records which recent user requests are covered, partial, or still missing as product slices.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Start with coverage_summary to see whether the user&#039;s latest desktop-agent-platform goals are fully closed.&quot;,\n      &quot;Read request_coverage to map each user request ID to implemented evidence and remaining gap IDs.&quot;,\n      &quot;Read gap_items before planning new desktop work; p0_product_gap items should be implemented before cosmetic or monitoring-heavy work.&quot;,\n      &quot;Treat external_release_gate items as release blockers rather than UI feature work.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-03&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;A user asks whether deferred or missing work remains.&quot;,\n      &quot;A p0 or p1 desktop product slice is implemented, descoped, or superseded.&quot;,\n      &quot;Product feature architecture, installer runtime contract, data format, workspace host, or release readiness changes.&quot;,\n      &quot;Public distribution readiness changes, including signing, notarization, updater, or clean-machine smoke tests.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;user_requests_2026_06_03&quot;,\n      &quot;title&quot;: &quot;Structured user request summaries for 2026-06-03&quot;,\n      &quot;source_type&quot;: &quot;local_history&quot;,\n      &quot;path&quot;: &quot;_history/user-requests/2026/2026-06-03.ko.md&quot;,\n      &quot;used_for&quot;: [\n        &quot;Define the request IDs audited by this registry.&quot;,\n        &quot;Map product gaps back to the user&#039;s stated desktop app and agent-platform goals.&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;product_feature_registry&quot;,\n      &quot;title&quot;: &quot;Desktop agent platform product feature registry&quot;,\n      &quot;source_type&quot;: &quot;local_config&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/configs/product-feature-registry.json&quot;,\n      &quot;used_for&quot;: [\n        &quot;Confirm the intended primary product and feature layer roles.&quot;,\n        &quot;Separate primary work surfaces from supporting observability.&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;runtime_contract&quot;,\n      &quot;title&quot;: &quot;Installer shell runtime contract&quot;,\n      &quot;source_type&quot;: &quot;local_contract&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json&quot;,\n      &quot;used_for&quot;: [\n        &quot;Confirm that the installed app owns runtime rules, enforcement gates, and data accumulation targets.&quot;,\n        &quot;Identify whether a gap is runtime-contract, UI, data, or release-readiness work.&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;nist_sp_800_53_sa_11&quot;,\n      &quot;title&quot;: &quot;NIST SP 800-53 SA-11 Developer Testing and Evaluation&quot;,\n      &quot;source_type&quot;: &quot;official_standard&quot;,\n      &quot;url&quot;: &quot;https://csrc.nist.gov/projects/cprt/catalog#/cprt/framework/version/SP_800_53_5_1_1/home?element=SA-11&quot;,\n      &quot;used_for&quot;: [\n        &quot;External check that meaningful software work should preserve testing and evaluation evidence.&quot;,\n        &quot;Support keeping validation handles beside product gap records.&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;atlassian_backlog_refinement&quot;,\n      &quot;title&quot;: &quot;Atlassian Agile backlog refinement guidance&quot;,\n      &quot;source_type&quot;: &quot;official_vendor_guidance&quot;,\n      &quot;url&quot;: &quot;https://www.atlassian.com/agile/scrum/backlog-refinement&quot;,\n      &quot;used_for&quot;: [\n        &quot;External check that deferred work should remain explicit, prioritized, and periodically reviewed.&quot;,\n        &quot;Support treating missing product slices as backlog items with acceptance criteria rather than chat-only notes.&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;request_coverage_required&quot;,\n      &quot;rule&quot;: &quot;Every audited user request must have one request_coverage entry with evidence and remaining_gap_ids.&quot;,\n      &quot;reason&quot;: &quot;The user explicitly asked to re-evaluate whether any requested work was missed.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;request_coverage&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;gap_ids_are_stable&quot;,\n      &quot;rule&quot;: &quot;Gap IDs are stable lower snake_case identifiers and must not be renamed without updating request_coverage and traceability records.&quot;,\n      &quot;reason&quot;: &quot;Stable IDs let readiness tests and future audits detect stale or silently removed gaps.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;gap_items&quot;,\n        &quot;request_coverage.remaining_gap_ids&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;p0_before_cosmetic&quot;,\n      &quot;rule&quot;: &quot;p0_product_gap items should be implemented before new cosmetic UI changes or monitoring-heavy additions.&quot;,\n      &quot;reason&quot;: &quot;The user&#039;s product goal is agent orchestration, work environment, development environment, agent factory, and learning improvement, not monitoring polish.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;gap_items.priority&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;external_gates_not_faked&quot;,\n      &quot;rule&quot;: &quot;External distribution gates stay open until validated w</code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 29226,
-      "updatedAt": "2026-06-05T17:06:23.037Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
       "id": "platform-desktop-app-docs-architecture-pty-terminal-decision-en-md",
       "path": "platform-desktop-app/docs/architecture/pty-terminal-decision.en.md",
       "category": "project-doc",
@@ -18163,137 +18259,41 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agent-detail-switch-speed-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agent-detail-switch-speed/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "계획: Agent Detail Switch Speed",
-      "excerpt": "계획: Agent Detail Switch Speed 1. 공식 성능 자료에서 클릭 응답과 long task 분리 기준을 확인한다. 2. 현재 Agents detail switcher의 상태와 렌더 조건을 점검한다. 3. 선택 상태와 실제 active workspace render 상태를 분리한다. 4. 첫 paint 이후 commit 예약, 최신 클릭 우선, cleanup 취소를 구현한다. 5. pending 상태와 active workspace 단일 렌더를 정적 테스트에 추가한다. 6. tes",
-      "html": "<h1>계획: Agent Detail Switch Speed</h1>\n<p>1. 공식 성능 자료에서 클릭 응답과 long task 분리 기준을 확인한다.</p>\n<p>2. 현재 Agents detail switcher의 상태와 렌더 조건을 점검한다.</p>\n<p>3. 선택 상태와 실제 active workspace render 상태를 분리한다.</p>\n<p>4. 첫 paint 이후 commit 예약, 최신 클릭 우선, cleanup 취소를 구현한다.</p>\n<p>5. pending 상태와 active workspace 단일 렌더를 정적 테스트에 추가한다.</p>\n<p>6. <code>test</code>, <code>tsc</code>, <code>check</code>, <code>build</code>, <code>build:customer</code>, <code>perf:budget</code>을 실행한다.</p>\n<p>7. 정적 export를 in-app Browser에서 열어 Agents detail switcher를 smoke 검증한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 634,
-      "updatedAt": "2026-06-05T01:06:19.754Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agent-detail-switch-speed-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agent-detail-switch-speed/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "스펙: Agent Detail Switch Speed",
-      "excerpt": "스펙: Agent Detail Switch Speed 목표 Agents 세부 기능 버튼을 눌렀을 때 선택 표시와 눌림 피드백이 즉시 보이게 한다. 3D 협업 장면, 생성 폼, 표 기반 런타임 패널 같은 무거운 active workspace 교체는 첫 paint 이후로 미룬다. 빠른 연속 클릭이나 disclosure 닫기, 섹션 이탈이 stale workspace mount로 이어지지 않게 한다. 요구사항 선택 상태는 agentDetailView 로 즉시 갱신한다. 실제 active workspac",
-      "html": "<h1>스펙: Agent Detail Switch Speed</h1>\n<h2>목표</h2>\n<ul>\n<li>Agents 세부 기능 버튼을 눌렀을 때 선택 표시와 눌림 피드백이 즉시 보이게 한다.</li>\n<li>3D 협업 장면, 생성 폼, 표 기반 런타임 패널 같은 무거운 active workspace 교체는 첫 paint 이후로 미룬다.</li>\n<li>빠른 연속 클릭이나 disclosure 닫기, 섹션 이탈이 stale workspace mount로 이어지지 않게 한다.</li>\n</ul>\n<h2>요구사항</h2>\n<ul>\n<li>선택 상태는 <code>agentDetailView</code>로 즉시 갱신한다.</li>\n<li>실제 active workspace 렌더는 <code>agentDetailRenderView</code>로 분리하고 <code>scheduleAfterFirstPaint</code> 뒤에만 갱신한다.</li>\n<li>새 세부 기능을 선택하면 이전 예약 commit은 취소되고 최신 선택만 commit된다.</li>\n<li>Agents 섹션을 벗어나거나 세부 기능 disclosure가 닫히면 예약 commit을 취소하고 render view를 현재 선택 상태로 정리한다.</li>\n<li>DOM에는 <code>data-agent-detail-view</code>, <code>data-agent-detail-render-view</code>, <code>data-agent-detail-pending</code>이 남아 정적/브라우저 검증에서 pending 상태를 확인할 수 있어야 한다.</li>\n<li>active workspace는 한 번에 하나만 렌더링하며 Builder로 전환된 뒤 Collaboration 3D canvas는 남아 있으면 안 된다.</li>\n</ul>\n<h2>제외</h2>\n<ul>\n<li>React Three Fiber 내부 렌더러 최적화</li>\n<li>Agent Factory, Blueprint, Learning 패널의 비즈니스 로직 변경</li>\n<li>실제 런타임 agent 실행 속도 개선</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1386,
-      "updatedAt": "2026-06-05T01:06:19.754Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agent-detail-single-workspace-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agent-detail-single-workspace/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록",
-      "excerpt": "작업 목록 x 웹 검색 및 UI 패턴 확인 x Agents 세부 기능 view type/metadata 추가 x agentDetailView 상태 추가 x 긴 세부 panel stack을 switcher + active surface로 교체 x desktop/mobile CSS 추가 x 정적 테스트 추가 x test , tsc , check , build , perf:budget 실행 x in app Browser smoke 실행 x 390px mobile Playwright smoke와 scre",
-      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] 웹 검색 및 UI 패턴 확인</li>\n<li>[x] Agents 세부 기능 view type/metadata 추가</li>\n<li>[x] <code>agentDetailView</code> 상태 추가</li>\n<li>[x] 긴 세부 panel stack을 switcher + active surface로 교체</li>\n<li>[x] desktop/mobile CSS 추가</li>\n<li>[x] 정적 테스트 추가</li>\n<li>[x] <code>test</code>, <code>tsc</code>, <code>check</code>, <code>build</code>, <code>perf:budget</code> 실행</li>\n<li>[x] in-app Browser smoke 실행</li>\n<li>[x] 390px mobile Playwright smoke와 screenshots 저장</li>\n<li>[x] 요구사항, 스펙, 평가, 추적 기록 업데이트</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 491,
-      "updatedAt": "2026-06-05T01:00:04.611Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agent-detail-single-workspace-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agent-detail-single-workspace/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성",
-      "excerpt": "추적성 | 항목 | 연결 | | | | | 사용자 요청 | history/user requests/2026/2026 06 05 agent detail single workspace.ko.md | | 요구사항 | REQ WM 037, REQ WM 038, REQ WM 039, REQ WM 061 | | 구현 | components/MonitorShell.tsx , app/globals.css | | 테스트 | tests/tool studio.test.mjs | | 검증 | validation.ko.",
-      "html": "<h1>추적성</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>사용자 요청</td><td><code>_history/user-requests/2026/2026-06-05-agent-detail-single-workspace.ko.md</code></td></tr><tr><td>요구사항</td><td>REQ-WM-037, REQ-WM-038, REQ-WM-039, REQ-WM-061</td></tr><tr><td>구현</td><td><code>components/MonitorShell.tsx</code>, <code>app/globals.css</code></td></tr><tr><td>테스트</td><td><code>tests/tool-studio.test.mjs</code></td></tr><tr><td>검증</td><td><code>validation.ko.md</code>, <code>_history/evaluations/2026/2026-06-05-agent-detail-single-workspace.ko.md</code></td></tr><tr><td>스크린샷</td><td><code>artifacts/screenshots/2026-06-05-agent-detail-switcher-mobile.png</code>, <code>artifacts/screenshots/2026-06-05-agent-detail-builder-mobile.png</code></td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 583,
-      "updatedAt": "2026-06-05T01:00:04.611Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agent-detail-single-workspace-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agent-detail-single-workspace/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증 기록",
-      "excerpt": "검증 기록 명령 corepack pnpm filter workspace monitor test : 통과, 40 tests corepack pnpm filter workspace monitor exec tsc noEmit : 통과 corepack pnpm filter workspace monitor run check : 통과 corepack pnpm filter workspace monitor run build : 통과 corepack pnpm filter workspace monitor run p",
-      "html": "<h1>검증 기록</h1>\n<h2>명령</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 40 tests</li>\n<li><code>corepack pnpm --filter workspace-monitor exec tsc --noEmit</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: 통과, largest chunk 734,386 bytes, chunkCount 12</li>\n</ul>\n<h2>Browser/Playwright</h2>\n<ul>\n<li>in-app Browser:</li>\n<li>Agents 세부 기능 open 후 <code>data-agent-detail-tab</code> 7개</li>\n<li>selected tab 1개</li>\n<li>기본 <code>data-agent-detail-view=&quot;collaboration&quot;</code></li>\n<li>Collaboration에서 canvas ready 확인</li>\n<li>Builder 선택 후 <code>data-agent-detail-view=&quot;builder&quot;</code>, <code>.agent-factory-form</code> visible</li>\n<li>Builder 선택 후 <code>data-agent-collaboration-theater=false</code>, ready canvas false</li>\n<li>overflowX 0</li>\n<li>Mobile 390x844 Playwright:</li>\n<li>Collaboration: detailView <code>collaboration</code>, tabs 7, selectedTabs 1, theater true, overflowX 0</li>\n<li>Builder: detailView <code>builder</code>, selectedTabs 1, theater false, canvas false, builderVisible true, overflowX 0</li>\n</ul>\n<h2>산출물</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-agent-detail-switcher-mobile.png</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-agent-detail-builder-mobile.png</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1307,
-      "updatedAt": "2026-06-05T01:00:04.611Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agent-detail-single-workspace-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agent-detail-single-workspace/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Agents Detail Single Workspace 계획",
-      "excerpt": "Agents Detail Single Workspace 계획 근거 Material guidance는 tabs를 같은 위계의 서로 다른 content group 간 이동에 사용한다. Carbon disclosure guidance는 중첩 disclosure와 stacking이 초점을 흐릴 수 있다고 본다. 이번 Agents 세부 화면은 여러 기능이 한 화면에 모두 쌓여 있어 사용자의 “한 기능은 하나를 한다” 요구와 충돌한다. 실행 1. Agents 세부 기능 ID와 label/icon/detail",
-      "html": "<h1>Agents Detail Single Workspace 계획</h1>\n<h2>근거</h2>\n<ul>\n<li>Material guidance는 tabs를 같은 위계의 서로 다른 content group 간 이동에 사용한다.</li>\n<li>Carbon disclosure guidance는 중첩 disclosure와 stacking이 초점을 흐릴 수 있다고 본다.</li>\n<li>이번 Agents 세부 화면은 여러 기능이 한 화면에 모두 쌓여 있어 사용자의 “한 기능은 하나를 한다” 요구와 충돌한다.</li>\n</ul>\n<h2>실행</h2>\n<p>1. Agents 세부 기능 ID와 label/icon/detail metadata를 정의한다.</p>\n<p>2. <code>agentDetailView</code> 상태를 추가하고 기본값을 <code>collaboration</code>으로 둔다.</p>\n<p>3. 세부 기능 disclosure 내부에 <code>role=&quot;tablist&quot;</code> 선택기를 추가한다.</p>\n<p>4. active workspace 영역에서 선택된 기능만 조건부 렌더링한다.</p>\n<p>5. CSS로 desktop 7열, 960px 이하 2열, 720px 이하 1열 레이아웃을 제공한다.</p>\n<p>6. 정적 테스트와 Browser/Playwright smoke로 one-active-workspace 계약을 검증한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 941,
-      "updatedAt": "2026-06-05T01:00:04.610Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
       "date": "2026-06-07",
       "year": "2026",
-      "documentsCount": 75,
+      "documentsCount": 83,
       "categories": [
         {
           "category": "evaluation",
-          "count": 20
+          "count": 22
         },
         {
           "category": "plan",
-          "count": 9
+          "count": 10
         },
         {
           "category": "request-trace",
-          "count": 9
+          "count": 10
         },
         {
           "category": "user-request",
-          "count": 9
+          "count": 10
         },
         {
           "category": "web-search",
-          "count": 9
+          "count": 10
         },
         {
           "category": "work-summary",
-          "count": 9
+          "count": 10
         },
         {
           "category": "work-timing",
-          "count": 9
+          "count": 10
         },
         {
           "category": "daily-history",
@@ -18409,6 +18409,26 @@
           "title": "Evaluation: Editable Runtime Prompts",
           "excerpt": "Evaluation: Editable Runtime Prompts 날짜: 2026 06 07 판정 통과. 근거 사용자 요구의 핵심인 \"각 프롬프트 변경 가능\"을 세션 prompt와 작업 파이프라인 prompt 양쪽에 적용했다. 저장/초기화가 같은 정규화 경로를 타도록 조정해 Browser smoke에서 발견된 task prompt reset 불일치를 해결했다. Rust preferences 정규화가 허용 key만 보존하도록 테스트를 추가했다. renderer check/test, Rust unit",
           "updatedAt": "2026-06-06T16:28:24.777Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-07-sidebar-navigation-componentization-evaluator-input-json",
+          "path": "_history/evaluations/2026/2026-06-07-sidebar-navigation-componentization-evaluator-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 07 Sidebar Navigation Componentization Evaluator Input",
+          "excerpt": "{ \"initial instruction\": \"미뤘던 구현 해줘\", \"result summary\": \"Continued the deferred componentized desktop ui architecture work by extracting the Workspace Monitor activity rail/sidebar navigation into DesktopActivityRail and updating renderer/platform readiness tests.\", \"work mode\": ",
+          "updatedAt": "2026-06-06T17:58:53.732Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+          "path": "_history/evaluations/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "Work Evaluation: Sidebar Navigation Componentization",
+          "excerpt": "Work Evaluation: Sidebar Navigation Componentization 결과 MonitorShell 의 좌측 activity rail/sidebar navigation을 DesktopActivityRail 로 분리했고, renderer/platform 테스트가 새 컴포넌트 파일을 직접 확인하도록 갱신했다. 사용자 요청 대응 사용자가 “미뤘던 구현”을 요청했으므로, 제품 gap 레지스트리에서 외부 자산 없이 닫을 수 있는 componentized desktop ui archi",
+          "updatedAt": "2026-06-06T17:58:53.732Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18562,6 +18582,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-plans-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+          "path": "_history/plans/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "작업 계획: Sidebar Navigation Componentization",
+          "excerpt": "작업 계획: Sidebar Navigation Componentization 작업 모드: standard 소유 프로젝트: platform desktop app 제품 gap: componentized desktop ui architecture 실행 계획 1. 웹 검색과 메모리 부트스트랩으로 현재 구현 경계를 확인한다. 2. MonitorShell 의 activity rail/sidebar navigation을 새 DesktopActivityRail 컴포넌트로 분리한다. 3. renderer test",
+          "updatedAt": "2026-06-06T17:57:24.476Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-plans-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
           "path": "_history/plans/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
           "category": "plan",
@@ -18649,6 +18679,16 @@
           "title": "Request Trace: Editable Runtime Prompts",
           "excerpt": "Request Trace: Editable Runtime Prompts 날짜: 2026 06 07 요청 사용자 요청: 각 프롬프트를 변경 가능하게. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 editable runtime prompts.ko.md 스펙: platform desktop app/specs/2026 06 07 editable runtime prompts/ 웹 검색 기록: history/web searches/2026/202",
           "updatedAt": "2026-06-06T16:27:39.629Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+          "path": "_history/request-traces/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: Sidebar Navigation Componentization",
+          "excerpt": "요청 결과 추적: Sidebar Navigation Componentization 요청: “미뤘던 구현 해줘” 소유 프로젝트: platform desktop app 작업 모드: standard 제품 gap: componentized desktop ui architecture 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 sidebar navigation componentization.ko.md Spec: platform desktop a",
+          "updatedAt": "2026-06-06T17:58:53.732Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18742,6 +18782,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-user-requests-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+          "path": "_history/user-requests/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: 미뤘던 구현",
+          "excerpt": "사용자 요청 요약: 미뤘던 구현 날짜: 2026 06 07 원문 요지: “미뤘던 구현 해줘” 해석: 최근 제품 gap 중 외부 자산 없이 닫을 수 있는 componentized desktop ui architecture 구조 부채를 이어서 구현한다. 선택한 조각: MonitorShell 의 좌측 activity rail/sidebar navigation을 DesktopActivityRail 컴포넌트로 분리한다. 비범위: 공개 배포 signing/notarization/updater/clean ma",
+          "updatedAt": "2026-06-06T17:57:24.475Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
           "path": "_history/user-requests/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
           "category": "user-request",
@@ -18829,6 +18879,16 @@
           "title": "Web Search: Editable Runtime Prompts",
           "excerpt": "Web Search: Editable Runtime Prompts 날짜: 2026 06 07 검색 VS Code official docs prompt files custom instructions editable prompts OpenAI Agents SDK official docs prompts instructions tools editable agent prompts Claude Code official docs custom slash commands prompts editable files ",
           "updatedAt": "2026-06-06T16:16:15.586Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+          "path": "_history/web-searches/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: Sidebar Navigation Componentization",
+          "excerpt": "웹 검색 기록: Sidebar Navigation Componentization 날짜: 2026 06 07 작업: 미뤘던 componentized desktop ui architecture 구현의 첫 조각으로 Workspace Monitor의 사이드바 네비게이션을 분리한다. 검색 Tauri v2 shell plugin sidecar command official documentation Tauri v2 command invoke official documentation Next.js 16 App ",
+          "updatedAt": "2026-06-06T17:50:24.089Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18922,6 +18982,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: Sidebar Navigation Componentization",
+          "excerpt": "작업 요약: Sidebar Navigation Componentization 날짜: 2026 06 07 커밋: 대기 중 요청: 미뤘던 구현 계속 진행 결과 MonitorShell 내부 좌측 activity rail/sidebar navigation을 DesktopActivityRail 컴포넌트로 분리했다. renderer test, platform test, readiness script가 새 컴포넌트 파일을 직접 검증하도록 갱신했다. 제품 gap 레지스트리에 이번 구조 분리 증거를 추가했다. 검",
+          "updatedAt": "2026-06-06T17:58:53.732Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
           "path": "_history/work-summaries/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
           "category": "work-summary",
@@ -19012,6 +19082,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-work-timings-2026-2026-06-07-sidebar-navigation-componentization-json",
+          "path": "_history/work-timings/2026/2026-06-07-sidebar-navigation-componentization.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 07 Sidebar Navigation Componentization",
+          "excerpt": "{ \"task id\": \"2026 06 07 sidebar navigation componentization\", \"title\": \"Sidebar navigation componentization\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"measurement\":",
+          "updatedAt": "2026-06-06T17:57:24.476Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-07-sidebar-rail-scrollbar-fix-json",
           "path": "_history/work-timings/2026/2026-06-07-sidebar-rail-scrollbar-fix.json",
           "category": "work-timing",
@@ -19056,30 +19136,18 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 21,
+      "documentsCount": 13,
       "categories": [
         {
           "category": "evaluation",
-          "count": 6
+          "count": 3
         },
         {
           "category": "request-trace",
-          "count": 3
+          "count": 2
         },
         {
           "category": "work-summary",
-          "count": 3
-        },
-        {
-          "category": "plan",
-          "count": 2
-        },
-        {
-          "category": "user-request",
-          "count": 2
-        },
-        {
-          "category": "web-search",
           "count": 2
         },
         {
@@ -19088,6 +19156,18 @@
         },
         {
           "category": "daily-history",
+          "count": 1
+        },
+        {
+          "category": "plan",
+          "count": 1
+        },
+        {
+          "category": "user-request",
+          "count": 1
+        },
+        {
+          "category": "web-search",
           "count": 1
         }
       ],
@@ -19123,16 +19203,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-subagent-tool-use-input-json",
-          "path": "_history/evaluations/2026/2026-06-06-subagent-tool-use-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Subagent Tool Use Input",
-          "excerpt": "{ \"initial instruction\": \"에이전트 서브에이전트 사용 툴\", \"result summary\": \"Added a source backed subagent delegation playbook plus a Desktop Runtime Tauri command that runs the agent platform manager as tools planner and persists the result as a task run record.\", \"work mode\": \"standard\", \"",
-          "updatedAt": "2026-06-06T14:37:32.711Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-subagent-tool-use-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-subagent-tool-use.ko.md",
           "category": "evaluation",
@@ -19143,26 +19213,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-input-json",
-          "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Terminal Agent Bridge Input",
-          "excerpt": "{ \"initial instruction\": \"터미널 연결 기능 에이전트 기능 똑바로.\", \"result summary\": \"Added a Desktop Runtime terminal agent bridge that gates agent CLI session start on native PTY readiness and exposes PTY, adapter, and agent session status in one flow.\", \"work mode\": \"standard\", \"changed files",
-          "updatedAt": "2026-06-06T14:09:58.345Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "최종 평가: Terminal Agent Bridge",
-          "excerpt": "최종 평가: Terminal Agent Bridge 날짜: 2026 06 06 평가 사용자의 “터미널 연결 기능, 에이전트 기능을 제대로” 요구에 대해 Desktop Runtime에서 PTY 연결과 agent CLI session 시작을 한 흐름으로 묶는 첫 slice를 구현했다. 충족 PTY, CLI adapter, agent session 상태를 bridge 카드로 표시한다. 연결 실행 버튼은 runtime/adapter/prompt가 준비된 경우에만 활성화된다. PTY 연결이 writable",
-          "updatedAt": "2026-06-06T14:09:58.346Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-subagent-live-execution-ko-md",
           "path": "_history/plans/2026/2026-06-06-subagent-live-execution.ko.md",
           "category": "plan",
@@ -19170,16 +19220,6 @@
           "title": "Work Plan: Subagent Live Execution",
           "excerpt": "Work Plan: Subagent Live Execution 날짜: 2026 06 06 작업 모드 standard 실행 계획 1. 웹 우선 조사와 이전 slice 기록 확인. 2. subagent explorer로 안전한 다음 slice 범위 확인. 3. Rust command를 추가하되 기존 CLI session runner를 재사용. 4. Renderer button/result UI를 추가. 5. Rust/frontend 계약 테스트와 build/check 수행. 6. Browser smo",
           "updatedAt": "2026-06-06T15:00:01.467Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-plans-2026-2026-06-06-subagent-tool-use-ko-md",
-          "path": "_history/plans/2026/2026-06-06-subagent-tool-use.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "작업 계획: Subagent Tool Use",
-          "excerpt": "작업 계획: Subagent Tool Use work mode: standard view mode: superadmin developer install mode: developer 1. 웹 우선 조사와 subagent tool discovery 수행. 2. existing manager as tools planner와 task run store 확인. 3. Tool Studio playbook에 subagent delegation loop 추가. 4. Tauri command run subagen",
-          "updatedAt": "2026-06-06T14:29:52.988Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19203,16 +19243,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-terminal-agent-bridge-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-terminal-agent-bridge.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: Terminal Agent Bridge",
-          "excerpt": "요청 결과 추적: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 결과 Desktop Runtime에 PTY CLI adapter agent session bridge UI 추가. createNativePtySession , createCliAdapterSession , startTerminalAgentBridge 추가. 기존 start selected lane action feedback 실패 전파 보강. CSS와 te",
-          "updatedAt": "2026-06-06T14:09:58.346Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-subagent-live-execution-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-subagent-live-execution.ko.md",
           "category": "user-request",
@@ -19223,16 +19253,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-subagent-tool-use-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-subagent-tool-use.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: Subagent Tool Use",
-          "excerpt": "사용자 요청 요약: Subagent Tool Use 날짜: 2026 06 06 사용자는 agent/subagent를 사용할 수 있는 tool 기능을 요구했다. 해석한 핵심은 agent가 subagent를 도구처럼 위임하고, 그 사용 방식이 플랫폼에 보이며, 실행 가능한 최소 native 경로가 있어야 한다는 것이다. 이번 범위는 Tool Studio playbook, Desktop Runtime 실행 버튼, Tauri planner command, task run 기록까지다. 실제 subagent",
-          "updatedAt": "2026-06-06T14:29:52.988Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-subagent-live-execution-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-subagent-live-execution.ko.md",
           "category": "web-search",
@@ -19240,16 +19260,6 @@
           "title": "Web Search: Subagent Live Execution",
           "excerpt": "Web Search: Subagent Live Execution 날짜: 2026 06 06 Queries Tauri v2 command sidecar process official documentation Command create process stdout stderr timeout OpenAI Agents SDK tools handoffs agents official documentation Claude Code subagents tools official documentation VS Cod",
           "updatedAt": "2026-06-06T15:00:01.465Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-subagent-tool-use-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-subagent-tool-use.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: Subagent Tool Use",
-          "excerpt": "웹 검색 기록: Subagent Tool Use 날짜: 2026 06 06 질의 OpenAI Agents SDK handoffs tools agents subagents official documentation Anthropic Claude Code subagents tools official documentation VS Code Copilot coding agent subagents tools official documentation 확인한 출처 OpenAI Agents SDK Handoffs",
-          "updatedAt": "2026-06-06T14:29:52.987Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19270,16 +19280,6 @@
           "title": "작업 요약: Subagent Tool Use",
           "excerpt": "작업 요약: Subagent Tool Use 날짜: 2026 06 06 Tool Studio에 subagent delegation loop 와 subagent delegation ladder 를 추가했다. Desktop Runtime에는 서브에이전트 툴 계획 버튼을 추가했고, Tauri command run subagent tool plan 은 agent platform:plan agent orchestration 을 bounded Python subprocess로 실행해 결과를 runtime t",
           "updatedAt": "2026-06-06T14:38:03.668Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-06-terminal-agent-bridge-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-terminal-agent-bridge.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: Terminal Agent Bridge",
-          "excerpt": "작업 요약: Terminal Agent Bridge 날짜: 2026 06 06 Desktop Runtime에 terminal agent bridge 를 추가해 native PTY, CLI adapter, agent session 상태를 한 흐름으로 표시했다. 새 startTerminalAgentBridge 는 PTY를 먼저 만들고 writable 상태가 아니면 agent CLI session을 시작하지 않는다. 기존 선택 실행 버튼도 action feedback용 실행 함수가 실패를 전파하도록 분",
-          "updatedAt": "2026-06-06T14:09:58.346Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19311,36 +19311,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2878,
+      "documents": 2886,
       "days": 8,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1080
+          "count": 1082
         },
         {
           "category": "web-search",
-          "count": 448
+          "count": 449
         },
         {
           "category": "request-trace",
-          "count": 377
+          "count": 378
         },
         {
           "category": "plan",
-          "count": 376
+          "count": 377
         },
         {
           "category": "work-timing",
-          "count": 296
+          "count": 297
         },
         {
           "category": "user-request",
-          "count": 162
+          "count": 163
         },
         {
           "category": "work-summary",
-          "count": 129
+          "count": 130
         },
         {
           "category": "daily-history",
@@ -19351,7 +19351,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6884269,
+      "totalSourceBytes": 6897209,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19376,11 +19376,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 37,
+      "evidenceEvents": 36,
       "decisionEvents": 0,
-      "openSignals": 15,
+      "openSignals": 20,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T17:44:19.618Z",
+      "latestEventAt": "2026-06-06T17:58:53.732Z",
       "historyDays": 2
     },
     "lanes": [
@@ -19392,11 +19392,16 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 26
+        "count": 25
       },
       {
         "id": "delivery",
         "label": "delivery",
+        "count": 12
+      },
+      {
+        "id": "monitoring",
+        "label": "monitoring",
         "count": 12
       },
       {
@@ -19412,11 +19417,6 @@
       {
         "id": "intake",
         "label": "intake",
-        "count": 11
-      },
-      {
-        "id": "monitoring",
-        "label": "monitoring",
         "count": 11
       },
       {
@@ -19439,11 +19439,16 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 26
+        "count": 25
       },
       {
         "id": "summary",
         "label": "summary",
+        "count": 12
+      },
+      {
+        "id": "timing",
+        "label": "timing",
         "count": 12
       },
       {
@@ -19459,11 +19464,6 @@
       {
         "id": "plan",
         "label": "plan",
-        "count": 11
-      },
-      {
-        "id": "timing",
-        "label": "timing",
         "count": 11
       },
       {
@@ -19490,6 +19490,126 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-evaluations-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "evaluation",
+        "title": "Work Evaluation: Sidebar Navigation Componentization",
+        "detail": "Work Evaluation: Sidebar Navigation Componentization 결과 MonitorShell 의 좌측 activity rail/sidebar navigation을 DesktopActivityRail 로 분리했고, renderer/platform 테스트가 새 컴포넌트 파일을 직접 확인하도록 갱신했다. 사용자 요청 대응 사용자가 “미뤘던 구현”을 요청했으므로, 제품 gap 레지스트리에서 외부 자산 없이 닫을 수 있는 componentized desktop ui archi",
+        "path": "_history/evaluations/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:58:53.732Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "warning",
+        "status": "request-trace",
+        "title": "요청 결과 추적: Sidebar Navigation Componentization",
+        "detail": "요청 결과 추적: Sidebar Navigation Componentization 요청: “미뤘던 구현 해줘” 소유 프로젝트: platform desktop app 작업 모드: standard 제품 gap: componentized desktop ui architecture 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 sidebar navigation componentization.ko.md Spec: platform desktop a",
+        "path": "_history/request-traces/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:58:53.732Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "warning",
+        "status": "work-summary",
+        "title": "작업 요약: Sidebar Navigation Componentization",
+        "detail": "작업 요약: Sidebar Navigation Componentization 날짜: 2026 06 07 커밋: 대기 중 요청: 미뤘던 구현 계속 진행 결과 MonitorShell 내부 좌측 activity rail/sidebar navigation을 DesktopActivityRail 컴포넌트로 분리했다. renderer test, platform test, readiness script가 새 컴포넌트 파일을 직접 검증하도록 갱신했다. 제품 gap 레지스트리에 이번 구조 분리 증거를 추가했다. 검",
+        "path": "_history/work-summaries/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:58:53.732Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-07-sidebar-navigation-componentization-evaluator-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 07 Sidebar Navigation Componentization Evaluator Input",
+        "detail": "{ \"initial instruction\": \"미뤘던 구현 해줘\", \"result summary\": \"Continued the deferred componentized desktop ui architecture work by extracting the Workspace Monitor activity rail/sidebar navigation into DesktopActivityRail and updating renderer/platform readiness tests.\", \"work mode\": ",
+        "path": "_history/evaluations/2026/2026-06-07-sidebar-navigation-componentization-evaluator-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:58:53.732Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "warning",
+        "status": "plan",
+        "title": "작업 계획: Sidebar Navigation Componentization",
+        "detail": "작업 계획: Sidebar Navigation Componentization 작업 모드: standard 소유 프로젝트: platform desktop app 제품 gap: componentized desktop ui architecture 실행 계획 1. 웹 검색과 메모리 부트스트랩으로 현재 구현 경계를 확인한다. 2. MonitorShell 의 activity rail/sidebar navigation을 새 DesktopActivityRail 컴포넌트로 분리한다. 3. renderer test",
+        "path": "_history/plans/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:57:24.476Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-07-sidebar-navigation-componentization-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 07 Sidebar Navigation Componentization",
+        "detail": "{ \"task id\": \"2026 06 07 sidebar navigation componentization\", \"title\": \"Sidebar navigation componentization\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"measurement\":",
+        "path": "_history/work-timings/2026/2026-06-07-sidebar-navigation-componentization.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:57:24.476Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "warning",
+        "status": "user-request",
+        "title": "사용자 요청 요약: 미뤘던 구현",
+        "detail": "사용자 요청 요약: 미뤘던 구현 날짜: 2026 06 07 원문 요지: “미뤘던 구현 해줘” 해석: 최근 제품 gap 중 외부 자산 없이 닫을 수 있는 componentized desktop ui architecture 구조 부채를 이어서 구현한다. 선택한 조각: MonitorShell 의 좌측 activity rail/sidebar navigation을 DesktopActivityRail 컴포넌트로 분리한다. 비범위: 공개 배포 signing/notarization/updater/clean ma",
+        "path": "_history/user-requests/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:57:24.475Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-07-sidebar-navigation-componentization-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: Sidebar Navigation Componentization",
+        "detail": "웹 검색 기록: Sidebar Navigation Componentization 날짜: 2026 06 07 작업: 미뤘던 componentized desktop ui architecture 구현의 첫 조각으로 Workspace Monitor의 사이드바 네비게이션을 분리한다. 검색 Tauri v2 shell plugin sidecar command official documentation Tauri v2 command invoke official documentation Next.js 16 App ",
+        "path": "_history/web-searches/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:50:24.089Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-07-dark-mode-contrast-fix-json",
         "sourceType": "history",
@@ -20809,126 +20929,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T14:38:03.668Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-subagent-tool-use-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Subagent Tool Use Input",
-        "detail": "{ \"initial instruction\": \"에이전트 서브에이전트 사용 툴\", \"result summary\": \"Added a source backed subagent delegation playbook plus a Desktop Runtime Tauri command that runs the agent platform manager as tools planner and persists the result as a task run record.\", \"work mode\": \"standard\", \"",
-        "path": "_history/evaluations/2026/2026-06-06-subagent-tool-use-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:37:32.711Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-subagent-tool-use-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: Subagent Tool Use",
-        "detail": "사용자 요청 요약: Subagent Tool Use 날짜: 2026 06 06 사용자는 agent/subagent를 사용할 수 있는 tool 기능을 요구했다. 해석한 핵심은 agent가 subagent를 도구처럼 위임하고, 그 사용 방식이 플랫폼에 보이며, 실행 가능한 최소 native 경로가 있어야 한다는 것이다. 이번 범위는 Tool Studio playbook, Desktop Runtime 실행 버튼, Tauri planner command, task run 기록까지다. 실제 subagent",
-        "path": "_history/user-requests/2026/2026-06-06-subagent-tool-use.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:29:52.988Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-subagent-tool-use-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "작업 계획: Subagent Tool Use",
-        "detail": "작업 계획: Subagent Tool Use work mode: standard view mode: superadmin developer install mode: developer 1. 웹 우선 조사와 subagent tool discovery 수행. 2. existing manager as tools planner와 task run store 확인. 3. Tool Studio playbook에 subagent delegation loop 추가. 4. Tauri command run subagen",
-        "path": "_history/plans/2026/2026-06-06-subagent-tool-use.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:29:52.988Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-subagent-tool-use-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: Subagent Tool Use",
-        "detail": "웹 검색 기록: Subagent Tool Use 날짜: 2026 06 06 질의 OpenAI Agents SDK handoffs tools agents subagents official documentation Anthropic Claude Code subagents tools official documentation VS Code Copilot coding agent subagents tools official documentation 확인한 출처 OpenAI Agents SDK Handoffs",
-        "path": "_history/web-searches/2026/2026-06-06-subagent-tool-use.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:29:52.987Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-terminal-agent-bridge-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "최종 평가: Terminal Agent Bridge",
-        "detail": "최종 평가: Terminal Agent Bridge 날짜: 2026 06 06 평가 사용자의 “터미널 연결 기능, 에이전트 기능을 제대로” 요구에 대해 Desktop Runtime에서 PTY 연결과 agent CLI session 시작을 한 흐름으로 묶는 첫 slice를 구현했다. 충족 PTY, CLI adapter, agent session 상태를 bridge 카드로 표시한다. 연결 실행 버튼은 runtime/adapter/prompt가 준비된 경우에만 활성화된다. PTY 연결이 writable",
-        "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:09:58.346Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-terminal-agent-bridge-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "needs_attention",
-        "title": "요청 결과 추적: Terminal Agent Bridge",
-        "detail": "요청 결과 추적: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 결과 Desktop Runtime에 PTY CLI adapter agent session bridge UI 추가. createNativePtySession , createCliAdapterSession , startTerminalAgentBridge 추가. 기존 start selected lane action feedback 실패 전파 보강. CSS와 te",
-        "path": "_history/request-traces/2026/2026-06-06-terminal-agent-bridge.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:09:58.346Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-terminal-agent-bridge-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "needs_attention",
-        "title": "작업 요약: Terminal Agent Bridge",
-        "detail": "작업 요약: Terminal Agent Bridge 날짜: 2026 06 06 Desktop Runtime에 terminal agent bridge 를 추가해 native PTY, CLI adapter, agent session 상태를 한 흐름으로 표시했다. 새 startTerminalAgentBridge 는 PTY를 먼저 만들고 writable 상태가 아니면 agent CLI session을 시작하지 않는다. 기존 선택 실행 버튼도 action feedback용 실행 함수가 실패를 전파하도록 분",
-        "path": "_history/work-summaries/2026/2026-06-06-terminal-agent-bridge.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:09:58.346Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-terminal-agent-bridge-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Terminal Agent Bridge Input",
-        "detail": "{ \"initial instruction\": \"터미널 연결 기능 에이전트 기능 똑바로.\", \"result summary\": \"Added a Desktop Runtime terminal agent bridge that gates agent CLI session start on native PTY readiness and exposes PTY, adapter, and agent session status in one flow.\", \"work mode\": \"standard\", \"changed files",
-        "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:09:58.345Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23186,9 +23186,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 49344,
-      "lineCount": 1249,
-      "updatedAt": "2026-06-06T13:23:35.718Z",
+      "sizeBytes": 49625,
+      "lineCount": 1257,
+      "updatedAt": "2026-06-06T17:52:33.156Z",
       "truncated": true,
       "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { execFileSync } from \"node:child_process\";\n\nimport {\n  checkDesktopBuildPipeline,\n  desktopBuildPipelineRequiredFiles\n} from \"./readiness/desktop-build-pipeline.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nconst requiredFiles = [\n  \"README.md\",\n  \"README.ko.md\",\n  \"README.en.md\",\n  \"package.json\",\n  \"configs/desktop-distribution-registry.json\",\n  \"configs/product-feature-registry.json\",\n  \"configs/product-gap-registry.json\",\n  \"configs/claude-code-design-transfer-registry.json\",\n  \"configs/reference-platform-advantage-registry.json\",\n  \"configs/runtime-data-boundary-registry.json\",\n  \"configs/service-readiness-registry.json\",\n  \"configs/macos-execution-profile.json\",\n  \"configs/windows-execution-profile.json\",\n  \"configs/user-flow-registry.json\",\n  \"runtime-contracts/installer-shell-runtime-contract.json\",\n  \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n  \"runtime-contracts/installer-shell-bootstrap.en.md\",\n  \"renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx\",\n  \"renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx\",\n  \"rend",
       "previewBytes": 1200
@@ -23654,9 +23654,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 58476,
-      "lineCount": 1300,
-      "updatedAt": "2026-06-06T13:24:24.028Z",
+      "sizeBytes": 58955,
+      "lineCount": 1309,
+      "updatedAt": "2026-06-06T17:52:05.152Z",
       "truncated": true,
       "preview": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  for (const featureModule of [\n    \"mod.rs\",\n    \"app_shell.rs\",\n    \"cli.rs\",\n    \"native.rs\",\n    \"workspace.rs\",\n    \"providers.rs\",\n    \"diagnostics.rs\",\n    \"agent_factory.rs\",\n    \"decisions.rs\"\n  ]) {\n    assert.equal(existsSync(join(root, \"src-tauri/src/features\", featureModule)), true);\n  }\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline.mjs\")), true);\n  ",
       "previewBytes": 1200
@@ -24185,7 +24185,7 @@
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 11
+        "documentsCount": 12
       },
       {
         "category": "plan",
@@ -24195,7 +24195,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 26
+        "documentsCount": 25
       },
       {
         "category": "daily-history",
@@ -24289,7 +24289,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 91,
+        "documentCount": 92,
         "sourceFileCount": 14
       },
       {
@@ -24431,7 +24431,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,300 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,309 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -24440,7 +24440,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-scripts-check-readiness-mjs",
         "label": "Large source surface",
-        "signal": "1,249 lines in platform-desktop-app/scripts/check-readiness.mjs",
+        "signal": "1,257 lines in platform-desktop-app/scripts/check-readiness.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -24478,16 +24478,16 @@
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1300,
-        "sizeBytes": 58476,
+        "lineCount": 1309,
+        "sizeBytes": 58955,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
         "path": "platform-desktop-app/scripts/check-readiness.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1249,
-        "sizeBytes": 49344,
+        "lineCount": 1257,
+        "sizeBytes": 49625,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       }
     ]
@@ -28130,13 +28130,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 4192,
+      "sourceDocuments": 4206,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T17:44:19.618Z"
+      "latestInsightAt": "2026-06-06T17:58:53.732Z"
     },
     "inferenceStages": [
       {
@@ -28204,7 +28204,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 501,
+        "signalCount": 503,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -28212,7 +28212,7 @@
           },
           {
             "category": "project-spec",
-            "count": 148
+            "count": 149
           },
           {
             "category": "request-trace",
@@ -28224,7 +28224,7 @@
           },
           {
             "category": "work-summary",
-            "count": 38
+            "count": 39
           },
           {
             "category": "plan",
@@ -28263,7 +28263,7 @@
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장"
         ],
-        "latestEvidenceAt": "2026-06-06T17:35:44.293Z"
+        "latestEvidenceAt": "2026-06-06T17:58:53.732Z"
       },
       {
         "id": "web-research-to-spec",
@@ -28277,11 +28277,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1843,
+        "signalCount": 1846,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 524
+            "count": 525
           },
           {
             "category": "evaluation",
@@ -28289,11 +28289,11 @@
           },
           {
             "category": "web-search",
-            "count": 449
+            "count": 450
           },
           {
             "category": "plan",
-            "count": 221
+            "count": 222
           },
           {
             "category": "request-trace",
@@ -28328,7 +28328,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T17:44:19.617Z"
+        "latestEvidenceAt": "2026-06-06T17:58:53.731Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28342,19 +28342,19 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1073,
+        "signalCount": 1076,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 518
+            "count": 519
           },
           {
             "category": "plan",
-            "count": 312
+            "count": 313
           },
           {
             "category": "request-trace",
-            "count": 98
+            "count": 99
           },
           {
             "category": "project-spec",
@@ -28401,7 +28401,7 @@
           "작업 요약: 큰 범위 작업 미루지 않기",
           "작업 계획 기록: 사용자 의도 기반 기능 지도"
         ],
-        "latestEvidenceAt": "2026-06-06T17:44:19.618Z"
+        "latestEvidenceAt": "2026-06-06T17:58:53.732Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28488,19 +28488,19 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1653,
+        "signalCount": 1662,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 707
+            "count": 711
           },
           {
             "category": "evaluation",
-            "count": 551
+            "count": 553
           },
           {
             "category": "user-request",
-            "count": 114
+            "count": 115
           },
           {
             "category": "work-summary",
@@ -28516,11 +28516,11 @@
           },
           {
             "category": "web-search",
-            "count": 42
+            "count": 43
           },
           {
             "category": "project-doc",
-            "count": 41
+            "count": 42
           },
           {
             "category": "work-timing",
@@ -28547,7 +28547,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T17:44:19.618Z"
+        "latestEvidenceAt": "2026-06-06T17:58:53.732Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28561,7 +28561,7 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 119,
+        "signalCount": 120,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -28577,7 +28577,7 @@
           },
           {
             "category": "user-request",
-            "count": 10
+            "count": 11
           },
           {
             "category": "request-trace",
@@ -28616,21 +28616,21 @@
           "Public Release Updater Automation Spec",
           "2026 06 06 평가: Public Release Updater Automation"
         ],
-        "latestEvidenceAt": "2026-06-06T01:32:08.361Z"
+        "latestEvidenceAt": "2026-06-06T17:57:24.475Z"
       }
     ]
   },
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 4192,
+      "sourceDocuments": 4206,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T17:44:19.618Z"
+      "latestInsightAt": "2026-06-06T17:58:53.732Z"
     },
     "operatingModel": [
       {
@@ -28688,25 +28688,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3417,
+        "signalCount": 3425,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1843
+            "signalCount": 1846
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1073
+            "signalCount": 1076
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 501
+            "signalCount": 503
           }
         ],
         "missingPatternIds": [],
@@ -28734,7 +28734,7 @@
           "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T17:44:19.618Z",
+        "latestEvidenceAt": "2026-06-06T17:58:53.732Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28763,7 +28763,7 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 927,
+        "signalCount": 928,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
@@ -28775,7 +28775,7 @@
             "id": "release-blocker-gate",
             "label": "공개 릴리스 blocker를 fail-fast gate로 유지",
             "signalStrength": "high",
-            "signalCount": 119
+            "signalCount": 120
           }
         ],
         "missingPatternIds": [],
@@ -28803,7 +28803,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T17:03:38.234Z",
+        "latestEvidenceAt": "2026-06-06T17:57:24.475Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28832,19 +28832,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2726,
+        "signalCount": 2738,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1653
+            "signalCount": 1662
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1073
+            "signalCount": 1076
           }
         ],
         "missingPatternIds": [],
@@ -28872,7 +28872,7 @@
           "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T17:44:19.618Z",
+        "latestEvidenceAt": "2026-06-06T17:58:53.732Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28901,19 +28901,19 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 620,
+        "signalCount": 623,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 501
+            "signalCount": 503
           },
           {
             "id": "release-blocker-gate",
             "label": "공개 릴리스 blocker를 fail-fast gate로 유지",
             "signalStrength": "high",
-            "signalCount": 119
+            "signalCount": 120
           }
         ],
         "missingPatternIds": [],
@@ -28941,7 +28941,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T17:35:44.293Z",
+        "latestEvidenceAt": "2026-06-06T17:58:53.732Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28970,19 +28970,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2916,
+        "signalCount": 2922,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1073
+            "signalCount": 1076
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1843
+            "signalCount": 1846
           }
         ],
         "missingPatternIds": [],
@@ -29010,7 +29010,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T17:44:19.618Z",
+        "latestEvidenceAt": "2026-06-06T17:58:53.732Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -29039,19 +29039,19 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1962,
+        "signalCount": 1966,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
             "label": "공개 릴리스 blocker를 fail-fast gate로 유지",
             "signalStrength": "high",
-            "signalCount": 119
+            "signalCount": 120
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1843
+            "signalCount": 1846
           }
         ],
         "missingPatternIds": [],
@@ -29079,7 +29079,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T17:44:19.617Z",
+        "latestEvidenceAt": "2026-06-06T17:58:53.731Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

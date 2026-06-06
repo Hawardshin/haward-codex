@@ -1,0 +1,95 @@
+{
+  "initial_instruction": "미뤘던 구현 해줘",
+  "result_summary": "Continued the deferred componentized_desktop_ui_architecture work by extracting the Workspace Monitor activity rail/sidebar navigation into DesktopActivityRail and updating renderer/platform readiness tests.",
+  "work_mode": "standard",
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/components/shell/DesktopActivityRail.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/configs/product-gap-registry.json",
+    "platform-desktop-app/docs/requirements/2026-06-07-sidebar-navigation-componentization.ko.md",
+    "platform-desktop-app/specs/2026-06-07-sidebar-navigation-componentization/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-07-sidebar-navigation-componentization/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-07-sidebar-navigation-componentization/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-07-sidebar-navigation-componentization/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-07-sidebar-navigation-componentization/traceability.ko.md"
+  ],
+  "verification": [
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check: passed",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test: passed, 90 tests",
+    "corepack pnpm --dir platform-desktop-app test: passed, 30 tests",
+    "Playwright smoke: passed with railZone tool-window-stripe, buttonCount 6, settingsButtons 2, hasViewport true",
+    "lsof -nP -iTCP:3233 -sTCP:LISTEN: no listener after dev server cleanup",
+    "python3 _tools/docs-audit/src/docs_audit.py --check: passed",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort: passed",
+    "corepack pnpm -w run desktop:renderer:build: passed",
+    "corepack pnpm --dir platform-desktop-app run check: passed with existing public release warnings"
+  ],
+  "references_checked": [
+    "Tauri Shell plugin: https://v2.tauri.app/plugin/shell/",
+    "Tauri Sidecar documentation: https://v2.tauri.app/develop/sidecar/",
+    "Next.js Server and Client Components: https://nextjs.org/docs/app/getting-started/server-and-client-components",
+    "platform-desktop-app/configs/product-gap-registry.json",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+  ],
+  "grounding_checks": [
+    "_history/web-searches/2026/2026-06-07-sidebar-navigation-componentization.ko.md records the official references checked before implementation."
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+    "_history/coding-research/2026/2026-06-07-sidebar-navigation-componentization.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-07-sidebar-navigation-componentization.ko.md",
+    "platform-desktop-app/specs/2026-06-07-sidebar-navigation-componentization/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-07-sidebar-navigation-componentization.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-07-sidebar-navigation-componentization.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-07-sidebar-navigation-componentization.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-07-sidebar-navigation-componentization.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-07-sidebar-navigation-componentization.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-07-sidebar-navigation-componentization/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-07-sidebar-navigation-componentization/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-07-sidebar-navigation-componentization/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-07-sidebar-navigation-componentization.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-07-sidebar-navigation-componentization.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-07-sidebar-navigation-componentization.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-07-sidebar-navigation-componentization.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Continue the broader componentized_desktop_ui_architecture work with SettingsDialog extraction as the next low-risk shell componentization slice."
+  ]
+}

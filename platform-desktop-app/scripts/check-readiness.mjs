@@ -658,6 +658,10 @@ for (const operatorSection of expectedOperatorCenterSections) {
 }
 
 const monitorShell = readFileSync(join(root, "renderer/workspace-monitor/components/MonitorShell.tsx"), "utf8");
+const desktopActivityRail = readFileSync(
+  join(root, "renderer/workspace-monitor/components/shell/DesktopActivityRail.tsx"),
+  "utf8"
+);
 const coreFeatureDrilldown = readFileSync(
   join(root, "renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx"),
   "utf8"
@@ -686,7 +690,7 @@ const agentDetailPanels = readFileSync(
   join(root, "renderer/workspace-monitor/components/workbench/AgentDetailPanels.tsx"),
   "utf8"
 );
-const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureDrilldown}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}\n${agentBuilderPanels}\n${agentDetailPanels}`;
+const monitorWorkbenchSource = `${monitorShell}\n${desktopActivityRail}\n${coreFeatureDrilldown}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}\n${agentBuilderPanels}\n${agentDetailPanels}`;
 const monitorStyles = readFileSync(join(root, "renderer/workspace-monitor/app/globals.css"), "utf8");
 const clipboardUtility = readFileSync(join(root, "renderer/workspace-monitor/lib/clipboard.mjs"), "utf8");
 const clipboardTest = readFileSync(join(root, "tests/clipboard.test.mjs"), "utf8");
@@ -819,6 +823,10 @@ for (const requiredPhrase of ["pipe-first CLI supervisor", "xterm.js", "Rust PTY
 }
 for (const requiredPhrase of [
   "DesktopRuntimePanel",
+  "DesktopActivityRail",
+  "className=\"activity-rail\"",
+  "onPrimeSection(item.id)",
+  "data-section-id={item.id}",
   "list_cli_adapters",
   "run_all_cli_adapter_health",
   "run_cli_adapter_health",
