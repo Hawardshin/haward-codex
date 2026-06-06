@@ -10550,6 +10550,10 @@ h3 {
   box-shadow: var(--choice-active-shadow);
 }
 
+.runtime-text-choice-grid button.customized {
+  border-style: dashed;
+}
+
 .runtime-text-choice-grid span,
 .runtime-text-choice-grid small,
 .runtime-text-choice-grid em {
@@ -10583,6 +10587,43 @@ h3 {
   font-weight: 800;
   padding: 2px 6px;
   text-transform: uppercase;
+}
+
+.prompt-edit-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content)) minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+}
+
+.prompt-edit-actions button {
+  display: inline-flex;
+  min-height: var(--control-compact-target-size);
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--control-radius);
+  background: var(--control-bg);
+  color: var(--text);
+  padding: 7px 9px;
+  white-space: nowrap;
+}
+
+.prompt-edit-actions button:not(:disabled):hover {
+  border-color: var(--state-hover-border);
+  background: var(--state-hover-bg);
+}
+
+.prompt-edit-actions small {
+  min-width: 0;
+  color: var(--muted);
+  font-size: var(--font-size-caption);
+  font-weight: 800;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .task-pipe-summary {
@@ -13729,6 +13770,10 @@ h3 {
 
 .terminal-drawer .session-launcher .runtime-text-choice-grid small,
 .terminal-drawer .session-launcher .runtime-text-choice-grid em {
+  color: color-mix(in srgb, var(--terminal-muted) 78%, var(--terminal-bg) 22%);
+}
+
+.terminal-drawer .prompt-edit-actions small {
   color: color-mix(in srgb, var(--terminal-muted) 78%, var(--terminal-bg) 22%);
 }
 

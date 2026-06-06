@@ -33,6 +33,9 @@ export type RuntimeTextChoice = {
   detail: string;
   value: string;
   badge?: string;
+  customized?: boolean;
+  defaultValue?: string;
+  promptKey?: string;
 };
 
 export type RuntimeTerminalSession = {
@@ -103,6 +106,7 @@ export type RuntimeTerminalDrawerProps = {
   selectedSessionAdapterId: string;
   sessionInput: string;
   sessionPrompt: string;
+  sessionPromptChoiceKey?: string;
   sessionPromptChoices?: RuntimeTextChoice[];
   sessions: RuntimeTerminalSession[];
   sessionStats: RuntimeTerminalStats;
@@ -125,9 +129,12 @@ export type RuntimeTerminalDrawerProps = {
   onSelectNativePtySession: (sessionId: string) => void;
   onSelectSession: (sessionId: string) => void;
   onSessionInputChange: (value: string) => void;
+  onSelectSessionPromptChoice?: (choice: RuntimeTextChoice) => void;
   onSessionPromptChange: (value: string) => void;
+  onSaveSessionPromptChoice?: () => void | Promise<void>;
   onStartNativePtySession: (size: { rows: number; cols: number }) => void | Promise<void>;
   onStartSession: () => void | Promise<void>;
+  onResetSessionPromptChoice?: () => void | Promise<void>;
   onWorkingDirChange: (value: string) => void;
   onWriteNativePtyInput: (sessionId: string, input: string) => void | Promise<void>;
   onWriteSessionInput: (sessionId: string) => void | Promise<void>;
@@ -201,6 +208,10 @@ const terminalCopy = {
     initialInput: "초기 입력",
     starting: "시작 중",
     startSession: "세션 시작",
+    savePrompt: "선택 프롬프트 저장",
+    resetPrompt: "기본값",
+    promptDefault: "기본 프롬프트",
+    promptCustomized: "수정된 프롬프트",
     noSessions: "실행 세션이 없습니다. 설정에서 어댑터를 확인한 뒤 세션을 시작하세요.",
     sessionList: "CLI 세션 목록",
     inspect: "보기",
@@ -286,6 +297,10 @@ const terminalCopy = {
     initialInput: "Initial input",
     starting: "Starting",
     startSession: "Start Session",
+    savePrompt: "Save selected prompt",
+    resetPrompt: "Default",
+    promptDefault: "Default prompt",
+    promptCustomized: "Customized prompt",
     noSessions: "No run sessions. Check the adapter in Settings, then start a session.",
     sessionList: "CLI session list",
     inspect: "Inspect",
@@ -333,6 +348,7 @@ export function RuntimeTerminalDrawer({
   selectedSessionAdapterId,
   sessionInput,
   sessionPrompt,
+  sessionPromptChoiceKey,
   sessionPromptChoices = [],
   sessions,
   sessionStats,
@@ -355,9 +371,12 @@ export function RuntimeTerminalDrawer({
   onSelectNativePtySession,
   onSelectSession,
   onSessionInputChange,
+  onSelectSessionPromptChoice,
   onSessionPromptChange,
+  onSaveSessionPromptChoice,
   onStartNativePtySession,
   onStartSession,
+  onResetSessionPromptChoice,
   onWorkingDirChange,
   onWriteNativePtyInput,
   onWriteSessionInput
@@ -374,6 +393,15 @@ export function RuntimeTerminalDrawer({
     runtimeAvailable && Boolean(selectedSession) && sessionInput.trim() !== "" && Boolean(selectedSession && isWritableSessionStatus(selectedSession.status));
   const copy = terminalCopy[uiLanguage];
   const selectedAdapter = adapters.find((adapter) => adapter.adapterId === selectedSessionAdapterId);
+  const selectedPromptChoice =
+    sessionPromptChoices.find((choice) => (choice.promptKey || choice.id) === sessionPromptChoiceKey) ||
+    sessionPromptChoices.find((choice) => choice.value === sessionPrompt) ||
+    null;
+  const selectedPromptDefaultValue = selectedPromptChoice?.defaultValue || selectedPromptChoice?.value || "";
+  const selectedPromptIsCustomized = Boolean(selectedPromptChoice?.customized);
+  const selectedPromptCanReset =
+    Boolean(selectedPromptChoice) &&
+    (selectedPromptIsCustomized || (selectedPromptDefaultValue !== "" && sessionPrompt.trim() !== selectedPromptDefaultValue.trim()));
   const terminalCwd = selectedSession?.workingDir || workingDir || "workspace root";
   const selectedSessionOutput = selectedSession ? formatSessionOutput(selectedSession, copy.noOutput) : copy.noSession;
   const terminalUsageCards = [
@@ -623,19 +651,39 @@ export function RuntimeTerminalDrawer({
                   <button
                     key={choice.id}
                     type="button"
-                    className={sessionPrompt === choice.value ? "active" : ""}
-                    aria-pressed={sessionPrompt === choice.value}
-                    onClick={() => onSessionPromptChange(choice.value)}
+                    className={`${(choice.promptKey || choice.id) === sessionPromptChoiceKey || (!sessionPromptChoiceKey && sessionPrompt === choice.value) ? "active" : ""} ${choice.customized ? "customized" : ""}`.trim()}
+                    aria-pressed={(choice.promptKey || choice.id) === sessionPromptChoiceKey || (!sessionPromptChoiceKey && sessionPrompt === choice.value)}
+                    onClick={() => {
+                      if (onSelectSessionPromptChoice) {
+                        onSelectSessionPromptChoice(choice);
+                      } else {
+                        onSessionPromptChange(choice.value);
+                      }
+                    }}
                     title={choice.detail}
                   >
                     <span>{choice.label}</span>
                     <small>{choice.detail}</small>
                     {choice.badge && <em>{choice.badge}</em>}
+                    {choice.customized && <em>{uiLanguage === "ko" ? "수정" : "Custom"}</em>}
                   </button>
                 ))}
               </div>
             )}
             <textarea aria-label={copy.initialInput} value={sessionPrompt} onChange={(event) => onSessionPromptChange(event.target.value)} rows={4} />
+            {selectedPromptChoice && (
+              <div className="prompt-edit-actions" data-session-prompt-editor>
+                <button type="button" onClick={() => void onSaveSessionPromptChoice?.()} disabled={!sessionPrompt.trim() || !onSaveSessionPromptChoice}>
+                  <Clipboard size={14} aria-hidden="true" />
+                  <span>{copy.savePrompt}</span>
+                </button>
+                <button type="button" onClick={() => void onResetSessionPromptChoice?.()} disabled={!selectedPromptCanReset || !onResetSessionPromptChoice}>
+                  <Eraser size={14} aria-hidden="true" />
+                  <span>{copy.resetPrompt}</span>
+                </button>
+                <small>{selectedPromptIsCustomized ? copy.promptCustomized : copy.promptDefault}</small>
+              </div>
+            )}
           </div>
           <button
             type="button"

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-06T15:57:59.864Z",
+  "generatedAt": "2026-06-06T16:25:42.710Z",
   "summary": {
-    "documents": 2830,
+    "documents": 2834,
     "days": 8,
     "categories": [
       {
@@ -11,23 +11,23 @@
       },
       {
         "category": "web-search",
-        "count": 442
+        "count": 443
+      },
+      {
+        "category": "plan",
+        "count": 371
       },
       {
         "category": "request-trace",
         "count": 371
       },
       {
-        "category": "plan",
-        "count": 370
-      },
-      {
         "category": "work-timing",
-        "count": 290
+        "count": 291
       },
       {
         "category": "user-request",
-        "count": 156
+        "count": 157
       },
       {
         "category": "work-summary",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6808647,
+    "totalSourceBytes": 6813352,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,70 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-work-timings-2026-2026-06-07-editable-runtime-prompts-ko-md",
+      "path": "_history/work-timings/2026/2026-06-07-editable-runtime-prompts.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "Work Timing: Editable Runtime Prompts",
+      "excerpt": "Work Timing: Editable Runtime Prompts 날짜: 2026 06 07 단계별 기록 웹 우선 검색: 공식 문서 중심으로 prompt 재사용과 frontend native boundary 확인. 코드 조사: MonitorShell , RuntimeTerminalDrawer , Rust preferences 정규화, renderer tests 확인. 구현: prompt customization 타입, UI 저장/초기화 액션, Rust whitelist 정규화 추가. 1차 검증:",
+      "html": "<p>Work Timing: Editable Runtime Prompts 날짜: 2026 06 07 단계별 기록 웹 우선 검색: 공식 문서 중심으로 prompt 재사용과 frontend native boundary 확인. 코드 조사: MonitorShell , RuntimeTerminalDrawer , Rust preferences 정규화, renderer tests 확인. 구현: prompt customization 타입, UI 저장/초기화 액션, Rust whitelist 정규화 추가. 1차 검증: renderer check/test와 Rust 단위 테스트 통과. 후속 검증: collect/build/platform check, Brows</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 721,
+      "updatedAt": "2026-06-06T16:16:15.587Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-plans-2026-2026-06-07-editable-runtime-prompts-ko-md",
+      "path": "_history/plans/2026/2026-06-07-editable-runtime-prompts.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Plan History: Editable Runtime Prompts",
+      "excerpt": "Plan History: Editable Runtime Prompts 날짜: 2026 06 07 실행 계획 1. 공식 문서 검색으로 prompt 재사용과 frontend native 저장 경계를 확인한다. 2. MonitorShell 과 RuntimeTerminalDrawer 의 prompt 선택 흐름을 조사한다. 3. runtime preferences에 prompt override map을 추가한다. 4. 세션/작업 파이프라인 prompt choice에 저장/초기화 액션을 붙인다. 5. Rus",
+      "html": "<p>Plan History: Editable Runtime Prompts 날짜: 2026 06 07 실행 계획 1. 공식 문서 검색으로 prompt 재사용과 frontend native 저장 경계를 확인한다. 2. MonitorShell 과 RuntimeTerminalDrawer 의 prompt 선택 흐름을 조사한다. 3. runtime preferences에 prompt override map을 추가한다. 4. 세션/작업 파이프라인 prompt choice에 저장/초기화 액션을 붙인다. 5. Rust preferences 정규화에 prompt whitelist를 추가한다. 6. 정적 테스트, Rust 단위 테스트, build, Browse</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 834,
+      "updatedAt": "2026-06-06T16:16:15.586Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-07-editable-runtime-prompts-ko-md",
+      "path": "_history/user-requests/2026/2026-06-07-editable-runtime-prompts.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: Editable Runtime Prompts",
+      "excerpt": "User Request: Editable Runtime Prompts 날짜: 2026 06 07 요약 사용자는 Desktop Runtime에서 각 프롬프트를 변경 가능하게 만들라고 요청했다. 해석 세션 시작 prompt와 작업 파이프라인 prompt 모두 선택지별로 저장 가능한 override가 필요하다. 변경값은 일회성 입력이 아니라 다음 실행에도 유지되어야 한다. 기존 작업 흐름을 뒤로 미루지 않고 현재 Workspace Monitor 기능에 직접 반영해야 한다.",
+      "html": "<p>User Request: Editable Runtime Prompts 날짜: 2026 06 07 요약 사용자는 Desktop Runtime에서 각 프롬프트를 변경 가능하게 만들라고 요청했다. 해석 세션 시작 prompt와 작업 파이프라인 prompt 모두 선택지별로 저장 가능한 override가 필요하다. 변경값은 일회성 입력이 아니라 다음 실행에도 유지되어야 한다. 기존 작업 흐름을 뒤로 미루지 않고 현재 Workspace Monitor 기능에 직접 반영해야 한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 511,
+      "updatedAt": "2026-06-06T16:16:15.586Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-07-editable-runtime-prompts-ko-md",
+      "path": "_history/web-searches/2026/2026-06-07-editable-runtime-prompts.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Editable Runtime Prompts",
+      "excerpt": "Web Search: Editable Runtime Prompts 날짜: 2026 06 07 검색 VS Code official docs prompt files custom instructions editable prompts OpenAI Agents SDK official docs prompts instructions tools editable agent prompts Claude Code official docs custom slash commands prompts editable files ",
+      "html": "<p>Web Search: Editable Runtime Prompts 날짜: 2026 06 07 검색 VS Code official docs prompt files custom instructions editable prompts OpenAI Agents SDK official docs prompts instructions tools editable agent prompts Claude Code official docs custom slash commands prompts editable files Tauri v2 official docs frontend state local storage invoke settings 확인한 출처 VS Co</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2639,
+      "updatedAt": "2026-06-06T16:16:15.586Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-2026-2026-06-07-md",
       "path": "_history/2026/2026-06-07.md",
@@ -45347,7 +45411,7 @@
     {
       "date": "2026-06-07",
       "year": "2026",
-      "documentsCount": 27,
+      "documentsCount": 31,
       "categories": [
         {
           "category": "evaluation",
@@ -45355,26 +45419,26 @@
         },
         {
           "category": "plan",
-          "count": 3
+          "count": 4
+        },
+        {
+          "category": "user-request",
+          "count": 4
+        },
+        {
+          "category": "web-search",
+          "count": 4
+        },
+        {
+          "category": "work-timing",
+          "count": 4
         },
         {
           "category": "request-trace",
           "count": 3
         },
         {
-          "category": "user-request",
-          "count": 3
-        },
-        {
-          "category": "web-search",
-          "count": 3
-        },
-        {
           "category": "work-summary",
-          "count": 3
-        },
-        {
-          "category": "work-timing",
           "count": 3
         },
         {

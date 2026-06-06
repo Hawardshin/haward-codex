@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T15:57:59.861Z",
+  "generatedAt": "2026-06-06T16:25:42.707Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 5,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 528,
-    "evaluations": 25,
-    "webSearches": 11,
-    "timingRecords": 12,
+    "evaluations": 24,
+    "webSearches": 12,
+    "timingRecords": 13,
     "historyDays": 2,
-    "adminHistoryDocuments": 2830,
+    "adminHistoryDocuments": 2834,
     "adminHistoryDays": 8,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7861,6 +7861,166 @@
   ],
   "documents": [
     {
+      "id": "history-work-timings-2026-2026-06-07-editable-runtime-prompts-ko-md",
+      "path": "_history/work-timings/2026/2026-06-07-editable-runtime-prompts.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "Work Timing: Editable Runtime Prompts",
+      "excerpt": "Work Timing: Editable Runtime Prompts 날짜: 2026 06 07 단계별 기록 웹 우선 검색: 공식 문서 중심으로 prompt 재사용과 frontend native boundary 확인. 코드 조사: MonitorShell , RuntimeTerminalDrawer , Rust preferences 정규화, renderer tests 확인. 구현: prompt customization 타입, UI 저장/초기화 액션, Rust whitelist 정규화 추가. 1차 검증:",
+      "html": "<p>Work Timing: Editable Runtime Prompts 날짜: 2026 06 07 단계별 기록 웹 우선 검색: 공식 문서 중심으로 prompt 재사용과 frontend native boundary 확인. 코드 조사: MonitorShell , RuntimeTerminalDrawer , Rust preferences 정규화, renderer tests 확인. 구현: prompt customization 타입, UI 저장/초기화 액션, Rust whitelist 정규화 추가. 1차 검증: renderer check/test와 Rust 단위 테스트 통과. 후속 검증: collect/build/platform check, Brows</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 721,
+      "updatedAt": "2026-06-06T16:16:15.587Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-plans-2026-2026-06-07-editable-runtime-prompts-ko-md",
+      "path": "_history/plans/2026/2026-06-07-editable-runtime-prompts.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Plan History: Editable Runtime Prompts",
+      "excerpt": "Plan History: Editable Runtime Prompts 날짜: 2026 06 07 실행 계획 1. 공식 문서 검색으로 prompt 재사용과 frontend native 저장 경계를 확인한다. 2. MonitorShell 과 RuntimeTerminalDrawer 의 prompt 선택 흐름을 조사한다. 3. runtime preferences에 prompt override map을 추가한다. 4. 세션/작업 파이프라인 prompt choice에 저장/초기화 액션을 붙인다. 5. Rus",
+      "html": "<p>Plan History: Editable Runtime Prompts 날짜: 2026 06 07 실행 계획 1. 공식 문서 검색으로 prompt 재사용과 frontend native 저장 경계를 확인한다. 2. MonitorShell 과 RuntimeTerminalDrawer 의 prompt 선택 흐름을 조사한다. 3. runtime preferences에 prompt override map을 추가한다. 4. 세션/작업 파이프라인 prompt choice에 저장/초기화 액션을 붙인다. 5. Rust preferences 정규화에 prompt whitelist를 추가한다. 6. 정적 테스트, Rust 단위 테스트, build, Browse</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 834,
+      "updatedAt": "2026-06-06T16:16:15.586Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-07-editable-runtime-prompts-ko-md",
+      "path": "_history/user-requests/2026/2026-06-07-editable-runtime-prompts.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: Editable Runtime Prompts",
+      "excerpt": "User Request: Editable Runtime Prompts 날짜: 2026 06 07 요약 사용자는 Desktop Runtime에서 각 프롬프트를 변경 가능하게 만들라고 요청했다. 해석 세션 시작 prompt와 작업 파이프라인 prompt 모두 선택지별로 저장 가능한 override가 필요하다. 변경값은 일회성 입력이 아니라 다음 실행에도 유지되어야 한다. 기존 작업 흐름을 뒤로 미루지 않고 현재 Workspace Monitor 기능에 직접 반영해야 한다.",
+      "html": "<p>User Request: Editable Runtime Prompts 날짜: 2026 06 07 요약 사용자는 Desktop Runtime에서 각 프롬프트를 변경 가능하게 만들라고 요청했다. 해석 세션 시작 prompt와 작업 파이프라인 prompt 모두 선택지별로 저장 가능한 override가 필요하다. 변경값은 일회성 입력이 아니라 다음 실행에도 유지되어야 한다. 기존 작업 흐름을 뒤로 미루지 않고 현재 Workspace Monitor 기능에 직접 반영해야 한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 511,
+      "updatedAt": "2026-06-06T16:16:15.586Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-07-editable-runtime-prompts-ko-md",
+      "path": "_history/web-searches/2026/2026-06-07-editable-runtime-prompts.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Editable Runtime Prompts",
+      "excerpt": "Web Search: Editable Runtime Prompts 날짜: 2026 06 07 검색 VS Code official docs prompt files custom instructions editable prompts OpenAI Agents SDK official docs prompts instructions tools editable agent prompts Claude Code official docs custom slash commands prompts editable files ",
+      "html": "<p>Web Search: Editable Runtime Prompts 날짜: 2026 06 07 검색 VS Code official docs prompt files custom instructions editable prompts OpenAI Agents SDK official docs prompts instructions tools editable agent prompts Claude Code official docs custom slash commands prompts editable files Tauri v2 official docs frontend state local storage invoke settings 확인한 출처 VS Co</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2639,
+      "updatedAt": "2026-06-06T16:16:15.586Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-editable-runtime-prompts-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-editable-runtime-prompts/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Editable Runtime Prompts",
+      "excerpt": "Traceability: Editable Runtime Prompts 날짜: 2026 06 07 | 요구 | 구현 | 검증 | | | | | | 세션 프롬프트별 수정 | RuntimePromptCustomization.sessionPrompts , sessionPromptChoices , RuntimeTerminalDrawer 저장/초기화 액션 | renderer tests, Browser smoke | | 작업 파이프라인 프롬프트별 수정 | taskPipePromptChoices , taskPi",
+      "html": "<h1>Traceability: Editable Runtime Prompts</h1>\n<p>날짜: 2026-06-07</p>\n<table><thead><tr><th>요구</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>세션 프롬프트별 수정</td><td><code>RuntimePromptCustomization.sessionPrompts</code>, <code>sessionPromptChoices</code>, <code>RuntimeTerminalDrawer</code> 저장/초기화 액션</td><td>renderer tests, Browser smoke</td></tr><tr><td>작업 파이프라인 프롬프트별 수정</td><td><code>taskPipePromptChoices</code>, <code>taskPipePromptKeyForPreset</code>, <code>data-task-pipe-prompt-editor</code></td><td>renderer tests, Browser smoke</td></tr><tr><td>preferences 보존</td><td><code>RuntimeCustomization.prompts</code>, <code>setRuntimeCustomization</code>, Rust <code>DesktopPromptCustomization</code></td><td>renderer check, Rust unit test</td></tr><tr><td>허용 key만 저장</td><td><code>normalizeRuntimePromptCustomization</code>, Rust <code>normalize_prompt_customization</code></td><td>renderer static contract, Rust unit test</td></tr><tr><td>UI 상태 표시</td><td><code>customized</code> class/badge, <code>.prompt-edit-actions</code></td><td>renderer tests, Browser smoke</td></tr></tbody></table>\n<h2>변경 파일</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n<li><code>platform-desktop-app/src-tauri/src/lib.rs</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1259,
+      "updatedAt": "2026-06-06T16:16:15.586Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-editable-runtime-prompts-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-editable-runtime-prompts/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Editable Runtime Prompts",
+      "excerpt": "Validation: Editable Runtime Prompts 날짜: 2026 06 07 완료된 검증 corepack pnpm dir platform desktop app/renderer/workspace monitor run check 결과: 통과. 확인: TypeScript, lazy boundary, scroll contract, source control design, comprehensive improvement contract, history payload. corepack pnpm",
+      "html": "<h1>Validation: Editable Runtime Prompts</h1>\n<p>날짜: 2026-06-07</p>\n<h2>완료된 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li>결과: 통과.</li>\n<li>확인: TypeScript, lazy boundary, scroll contract, source control design, comprehensive improvement contract, history payload.</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code></li>\n<li>결과: 통과.</li>\n<li>확인: 90 tests pass.</li>\n<li><code>cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml desktop_prompt_customization_keeps_only_allowed_prompt_keys</code></li>\n<li>결과: 통과.</li>\n<li>확인: 허용 session/task-pipe prompt key만 보존하고 빈 값/알 수 없는 key 제거.</li>\n</ul>\n<h2>남은 검증</h2>\n<ul>\n<li>snapshot collect.</li>\n<li>renderer production build.</li>\n<li>platform check.</li>\n<li>Browser smoke.</li>\n<li>resource/omission/evaluator guard.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 831,
+      "updatedAt": "2026-06-06T16:16:15.586Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-07-editable-runtime-prompts-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-07-editable-runtime-prompts.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: Editable Runtime Prompts",
+      "excerpt": "요구사항: Editable Runtime Prompts 날짜: 2026 06 07 요구 사용자는 각 프롬프트를 변경 가능하게 만들기를 요구했다. Desktop Runtime의 세션 초기 입력과 작업 파이프라인 초기화 프롬프트는 선택지만 제공하는 수준을 넘어, 선택한 프롬프트별로 직접 수정하고 다시 사용할 수 있어야 한다. 수용 기준 세션 초기 입력 프롬프트 선택지는 각 프롬프트 key를 가진다. 작업 파이프라인 프롬프트 선택지는 각 프롬프트 key를 가진다. 사용자는 현재 선택한 프롬프트의 tex",
+      "html": "<h1>요구사항: Editable Runtime Prompts</h1>\n<p>날짜: 2026-06-07</p>\n<h2>요구</h2>\n<p>사용자는 각 프롬프트를 변경 가능하게 만들기를 요구했다. Desktop Runtime의 세션 초기 입력과 작업 파이프라인 초기화 프롬프트는 선택지만 제공하는 수준을 넘어, 선택한 프롬프트별로 직접 수정하고 다시 사용할 수 있어야 한다.</p>\n<h2>수용 기준</h2>\n<ul>\n<li>세션 초기 입력 프롬프트 선택지는 각 프롬프트 key를 가진다.</li>\n<li>작업 파이프라인 프롬프트 선택지는 각 프롬프트 key를 가진다.</li>\n<li>사용자는 현재 선택한 프롬프트의 textarea 내용을 저장할 수 있다.</li>\n<li>저장된 프롬프트는 같은 key를 다시 선택할 때 기본값 대신 사용된다.</li>\n<li>사용자는 저장된 프롬프트를 기본값으로 되돌릴 수 있다.</li>\n<li>저장된 프롬프트는 데스크톱 runtime preferences에 보존된다.</li>\n<li>네이티브 preferences 정규화는 허용된 프롬프트 key만 저장하고 빈 값과 알 수 없는 key를 제거한다.</li>\n<li>선택/저장/초기화 UI contract와 네이티브 정규화 contract는 테스트로 보호된다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>새 CLI 실행 adapter 추가.</li>\n<li>외부 prompt marketplace 또는 원격 동기화.</li>\n<li>프롬프트 버전 이력 UI.</li>\n<li>provider별 prompt 템플릿 엔진.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1312,
+      "updatedAt": "2026-06-06T16:16:15.585Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-editable-runtime-prompts-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-editable-runtime-prompts/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Editable Runtime Prompts",
+      "excerpt": "Plan: Editable Runtime Prompts 날짜: 2026 06 07 단계 1. 웹 우선 확인 공식 문서에서 프롬프트 파일, custom instruction, agent instruction/tool 구성, frontend native 연결 기준을 확인한다. 2. 현재 코드 확인 MonitorShell , RuntimeTerminalDrawer , runtime preferences 정규화, renderer tests를 확인한다. 3. 프런트엔드 구현 prompt override 타",
+      "html": "<h1>Plan: Editable Runtime Prompts</h1>\n<p>날짜: 2026-06-07</p>\n<h2>단계</h2>\n<p>1. 웹 우선 확인</p>\n<ul>\n<li>공식 문서에서 프롬프트 파일, custom instruction, agent instruction/tool 구성, frontend-native 연결 기준을 확인한다.</li>\n</ul>\n<p>2. 현재 코드 확인</p>\n<ul>\n<li><code>MonitorShell</code>, <code>RuntimeTerminalDrawer</code>, runtime preferences 정규화, renderer tests를 확인한다.</li>\n</ul>\n<p>3. 프런트엔드 구현</p>\n<ul>\n<li>prompt override 타입과 default state를 추가한다.</li>\n<li>세션/작업 파이프라인 prompt choice에 key, default value, customized 상태를 추가한다.</li>\n<li>저장/기본값 액션과 CSS를 추가한다.</li>\n</ul>\n<p>4. 네이티브 정규화 구현</p>\n<ul>\n<li>Rust preferences 구조체에 prompt customization을 추가한다.</li>\n<li>허용 key whitelist와 빈 값 제거 테스트를 추가한다.</li>\n</ul>\n<p>5. 검증</p>\n<ul>\n<li>TypeScript/check, renderer tests, Rust unit test를 실행한다.</li>\n<li>collect, renderer build, platform check를 실행한다.</li>\n<li>Browser smoke로 실제 편집 UI가 렌더링되고 선택 프롬프트 저장 상태가 표시되는지 확인한다.</li>\n<li>omission/resource/evaluator guard를 실행한다.</li>\n</ul>\n<h2>결정</h2>\n<ul>\n<li>별도 프롬프트 파일 편집기를 만들지 않고, 기존 Desktop Runtime의 선택지와 textarea에 저장/초기화 액션을 붙인다.</li>\n<li>프롬프트 key whitelist를 Rust에 둔다. 사용자가 로컬 preferences를 직접 수정하더라도 알 수 없는 key가 실행 설정으로 남지 않게 하기 위해서다.</li>\n<li>외부 dependency 설치는 하지 않는다. 현재 기능은 React state, preferences serialize, Tauri command boundary만으로 충분하다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1606,
+      "updatedAt": "2026-06-06T16:16:15.585Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-editable-runtime-prompts-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-editable-runtime-prompts/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Editable Runtime Prompts",
+      "excerpt": "Spec: Editable Runtime Prompts 날짜: 2026 06 07 목적 Desktop Runtime에서 세션 프롬프트와 작업 파이프라인 프롬프트를 선택지별로 수정, 저장, 초기화할 수 있게 한다. 사용자는 반복 작업에 맞춘 프롬프트를 매번 다시 작성하지 않고 같은 런타임 기본 설정 안에서 재사용해야 한다. 동작 1. RuntimeCustomization 은 prompts.sessionPrompts 와 prompts.taskPipePrompts 를 가진다. 2. 각 prompt ov",
+      "html": "<h1>Spec: Editable Runtime Prompts</h1>\n<p>날짜: 2026-06-07</p>\n<h2>목적</h2>\n<p>Desktop Runtime에서 세션 프롬프트와 작업 파이프라인 프롬프트를 선택지별로 수정, 저장, 초기화할 수 있게 한다. 사용자는 반복 작업에 맞춘 프롬프트를 매번 다시 작성하지 않고 같은 런타임 기본 설정 안에서 재사용해야 한다.</p>\n<h2>동작</h2>\n<p>1. <code>RuntimeCustomization</code>은 <code>prompts.sessionPrompts</code>와 <code>prompts.taskPipePrompts</code>를 가진다.</p>\n<p>2. 각 prompt override는 안정적인 prompt key로 저장한다.</p>\n<p>3. 세션 프롬프트 key는 <code>sessionModePresets</code>의 mode id를 사용한다.</p>\n<p>4. 작업 파이프라인 선택 프리셋 key는 <code>selected-preset:&lt;taskKind&gt;</code> 형식을 사용한다.</p>\n<p>5. 작업 파이프라인 고정 선택지는 <code>implementation-pipe</code>, <code>research-pipe</code>, <code>review-pipe</code>를 사용한다.</p>\n<p>6. 선택 버튼은 저장된 override가 있을 때 <code>customized</code> 상태와 &quot;수정&quot;/&quot;Custom&quot; badge를 보여준다.</p>\n<p>7. textarea 아래에는 &quot;선택 프롬프트 저장&quot;과 &quot;기본값&quot; 액션을 제공한다.</p>\n<p>8. 저장 시 공백을 trim하고 최대 4,000자까지 보존한다.</p>\n<p>9. 저장값이 빈 값이거나 기본값과 같으면 override를 제거한다.</p>\n<p>10. 초기화는 선택 key의 override만 제거하고 textarea를 기본값으로 되돌린다.</p>\n<h2>네이티브 저장 경계</h2>\n<ul>\n<li>Rust <code>DesktopRuntimeCustomization</code>은 <code>DesktopPromptCustomization</code>을 포함한다.</li>\n<li>Rust 정규화는 허용 목록에 있는 session/task-pipe prompt key만 보존한다.</li>\n<li>빈 prompt와 알 수 없는 key는 preferences 저장 전 제거된다.</li>\n<li>저장 길이 제한은 프런트엔드와 Rust 모두 4,000자 기준을 공유한다.</li>\n</ul>\n<h2>UX 경계</h2>\n<ul>\n<li>프롬프트 선택은 현재 선택 key를 바꾸고 textarea를 해당 key의 현재 값으로 갱신한다.</li>\n<li>textarea 편집은 저장 버튼을 누르기 전까지 preferences override를 변경하지 않는다.</li>\n<li>저장 후 현재 선택 key가 초기 프리셋으로 되돌아가지 않아야 한다.</li>\n<li>main tab 전체 scroll owner를 새로 만들지 않고 기존 bounded textarea/control layout을 재사용한다.</li>\n</ul>\n<h2>참고</h2>\n<ul>\n<li>VS Code Custom instructions: https://code.visualstudio.com/docs/copilot/copilot-customization</li>\n<li>VS Code Prompt files: https://code.visualstudio.com/docs/copilot/copilot-customization#_prompt-files-experimental</li>\n<li>OpenAI Agents SDK Agents: https://openai.github.io/openai-agents-js/guides/agents/</li>\n<li>OpenAI Agents SDK Tools: https://openai.github.io/openai-agents-js/guides/tools/</li>\n<li>Claude Code Slash commands: https://code.claude.com/docs/en/slash-commands</li>\n<li>Tauri Calling Rust from the Frontend: https://v2.tauri.app/develop/calling-rust/</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2668,
+      "updatedAt": "2026-06-06T16:16:15.585Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-editable-runtime-prompts-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-editable-runtime-prompts/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Editable Runtime Prompts",
+      "excerpt": "Tasks: Editable Runtime Prompts 날짜: 2026 06 07 x 웹 우선 검색 기록 작성. x Desktop Runtime prompt 선택/textarea 흐름 조사. x RuntimeCustomization.prompts 타입과 기본값 추가. x 세션 프롬프트 choice에 promptKey , defaultValue , customized 추가. x 작업 파이프라인 프롬프트 choice에 key 기반 override 추가. x 선택 프롬프트 저장/기본값 액션 추가. x",
+      "html": "<h1>Tasks: Editable Runtime Prompts</h1>\n<p>날짜: 2026-06-07</p>\n<ul>\n<li>[x] 웹 우선 검색 기록 작성.</li>\n<li>[x] Desktop Runtime prompt 선택/textarea 흐름 조사.</li>\n<li>[x] <code>RuntimeCustomization.prompts</code> 타입과 기본값 추가.</li>\n<li>[x] 세션 프롬프트 choice에 <code>promptKey</code>, <code>defaultValue</code>, <code>customized</code> 추가.</li>\n<li>[x] 작업 파이프라인 프롬프트 choice에 key 기반 override 추가.</li>\n<li>[x] 선택 프롬프트 저장/기본값 액션 추가.</li>\n<li>[x] 저장 후 현재 선택 key가 유지되도록 effect 분리.</li>\n<li>[x] prompt editor CSS 추가.</li>\n<li>[x] Rust preferences에 <code>DesktopPromptCustomization</code> 추가.</li>\n<li>[x] Rust prompt key whitelist 정규화와 단위 테스트 추가.</li>\n<li>[x] renderer static contract tests 갱신.</li>\n<li>[ ] collect/build/platform check 실행.</li>\n<li>[ ] Browser smoke 실행.</li>\n<li>[ ] omission/resource/evaluator guard 실행.</li>\n<li>[ ] commit/push.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 860,
+      "updatedAt": "2026-06-06T16:16:15.585Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-2026-2026-06-07-md",
       "path": "_history/2026/2026-06-07.md",
       "category": "daily-history",
@@ -10277,54 +10437,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-request-traces-2026-2026-06-06-lightweight-cli-install-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-lightweight-cli-install.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "Request Trace: Lightweight CLI Install",
-      "excerpt": "Request Trace: Lightweight CLI Install 날짜: 2026 06 06 요청 CLI도 가벼운 CLI 설치를 도와준다. 산출물 CLI: platform desktop app/tools/awp/awp.py 설치 스크립트: platform desktop app/scripts/install awp cli.mjs 테스트: platform desktop app/tests/awp cli.test.mjs 요구사항: platform desktop app/docs/requirements/2",
-      "html": "<p>Request Trace: Lightweight CLI Install 날짜: 2026 06 06 요청 CLI도 가벼운 CLI 설치를 도와준다. 산출물 CLI: platform desktop app/tools/awp/awp.py 설치 스크립트: platform desktop app/scripts/install awp cli.mjs 테스트: platform desktop app/tests/awp cli.test.mjs 요구사항: platform desktop app/docs/requirements/2026 06 06 lightweight cli install.ko.md 스펙: platform desktop app/specs/2026 06 0</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 989,
-      "updatedAt": "2026-06-06T12:40:49.411Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-lightweight-cli-install-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-lightweight-cli-install.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "Work Summary: Lightweight CLI Install",
-      "excerpt": "Work Summary: Lightweight CLI Install 날짜: 2026 06 06 완료 awp Python stdlib CLI 추가 user local symlink installer 추가 cli:install , cli:doctor package scripts 추가 CLI tests/readiness 추가 /Users/shinjoungeun/.local/bin/awp 설치 완료 test , 설치 registry contract, check , package:internal 검증 통과",
-      "html": "<p>Work Summary: Lightweight CLI Install 날짜: 2026 06 06 완료 awp Python stdlib CLI 추가 user local symlink installer 추가 cli:install , cli:doctor package scripts 추가 CLI tests/readiness 추가 /Users/shinjoungeun/.local/bin/awp 설치 완료 test , 설치 registry contract, check , package:internal 검증 통과 주의 ~/.local/bin 은 현재 PATH에 없다. 명령은 절대경로로 바로 실행 가능하며, shell PATH 등록은 사용자가 원할 때 별</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 542,
-      "updatedAt": "2026-06-06T12:40:49.410Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-lightweight-cli-install-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-lightweight-cli-install.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "Evaluation: Lightweight CLI Install",
-      "excerpt": "Evaluation: Lightweight CLI Install 날짜: 2026 06 06 사용자 요구 대비 요구: CLI도 가벼운 CLI 설치를 도와준다. 결과: awp lightweight CLI를 구현하고 /Users/shinjoungeun/.local/bin/awp 로 설치했다. doctor , cli check , open , reveal , terminal 명령을 제공한다. 설치 평가 외부 dependency 설치 없음. Python 표준 라이브러리만 사용한다. user local sy",
-      "html": "<p>Evaluation: Lightweight CLI Install 날짜: 2026 06 06 사용자 요구 대비 요구: CLI도 가벼운 CLI 설치를 도와준다. 결과: awp lightweight CLI를 구현하고 /Users/shinjoungeun/.local/bin/awp 로 설치했다. doctor , cli check , open , reveal , terminal 명령을 제공한다. 설치 평가 외부 dependency 설치 없음. Python 표준 라이브러리만 사용한다. user local symlink 설치로 rollback이 단순하다. ~/.local/bin 은 현재 PATH에 없으므로 shell 설정 자동 수정은 하지 않았다. 검</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1084,
-      "updatedAt": "2026-06-06T12:40:28.660Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-lightweight-cli-install-validation-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-lightweight-cli-install/validation.ko.md",
       "category": "project-spec",
@@ -10339,22 +10451,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-lightweight-cli-install-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-lightweight-cli-install.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "User Request: Lightweight CLI Install",
-      "excerpt": "User Request: Lightweight CLI Install 날짜: 2026 06 06 요약 사용자는 데스크톱/네이티브 기능 흐름에 이어 가벼운 CLI 설치도 도와달라고 요청했다. 처리 범위 프로젝트 소유의 lightweight companion CLI를 만들고 user local 경로에 설치한다.",
-      "html": "<p>User Request: Lightweight CLI Install 날짜: 2026 06 06 요약 사용자는 데스크톱/네이티브 기능 흐름에 이어 가벼운 CLI 설치도 도와달라고 요청했다. 처리 범위 프로젝트 소유의 lightweight companion CLI를 만들고 user local 경로에 설치한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 305,
-      "updatedAt": "2026-06-06T12:36:30.224Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-lightweight-cli-install-plan-ko-md",
@@ -18163,109 +18259,13 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-no-slow-tab-switch-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-no-slow-tab-switch/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "스펙: 탭 전환 무지연 계약",
-      "excerpt": "스펙: 탭 전환 무지연 계약 목표 Workspace Monitor의 탭 클릭은 어떤 대상 섹션으로 가더라도 active 탭, 제목, 전환 피드백을 먼저 paint해야 한다. Agents, Desktop, Source, Tool Studio 같은 무거운 body는 첫 paint 이후 staged mount로 붙인다. 요구사항 REQ WM 039 : 닫힌 보조 기능군 때문에 주요 탭 전환이 느려지면 안 된다. REQ WM 041 : 버튼 클릭은 heavy workbench mount나 대량 필터링 때",
-      "html": "<h1>스펙: 탭 전환 무지연 계약</h1>\n<h2>목표</h2>\n<p>Workspace Monitor의 탭 클릭은 어떤 대상 섹션으로 가더라도 active 탭, 제목, 전환 피드백을 먼저 paint해야 한다. Agents, Desktop, Source, Tool Studio 같은 무거운 body는 첫 paint 이후 staged mount로 붙인다.</p>\n<h2>요구사항</h2>\n<ul>\n<li><code>REQ-WM-039</code>: 닫힌 보조 기능군 때문에 주요 탭 전환이 느려지면 안 된다.</li>\n<li><code>REQ-WM-041</code>: 버튼 클릭은 heavy workbench mount나 대량 필터링 때문에 첫 응답 paint를 막으면 안 된다.</li>\n<li><code>REQ-WM-054</code>: 섹션 body는 staged mount로 지연하고, Source 검색 같은 대량 스캔은 대상 섹션 body 준비 후 실행한다.</li>\n</ul>\n<h2>설계</h2>\n<ul>\n<li><code>section</code>은 사용자의 클릭 순간 즉시 갱신한다.</li>\n<li><code>readySection</code>은 <code>scheduleAfterFirstPaint</code> 뒤에만 갱신한다.</li>\n<li><code>sectionContentReady = readySection === section</code>일 때만 실제 섹션 body를 mount한다.</li>\n<li>전환 중에는 <code>section-transition-shell</code>만 렌더링해 active 탭과 제목이 먼저 보이게 한다.</li>\n<li>Source query는 <code>sectionContentReady &amp;&amp; section === &quot;source&quot;</code>일 때만 대량 source content 검색을 실행한다.</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>web.dev INP 문서는 사용자 상호작용을 input delay, processing duration, presentation delay로 나누고, 긴 main-thread task를 쪼개 첫 paint를 빠르게 만드는 것을 권장한다.</li>\n<li>React 공식 문서는 <code>useTransition</code>을 UI 일부를 background에서 렌더링하는 Hook으로 설명하고, <code>lazy</code>는 컴포넌트 코드를 실제 렌더 시점까지 지연할 수 있음을 설명한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>실제 데이터 수집기 구조 변경</li>\n<li>새 dependency 설치</li>\n<li>모든 섹션의 완전한 코드 splitting</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1709,
-      "updatedAt": "2026-06-04T23:40:34.057Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-virtual-environment-manager-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-virtual-environment-manager/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증 기록",
-      "excerpt": "검증 기록 명령 corepack pnpm filter workspace monitor test 통과 corepack pnpm filter workspace monitor run check 통과 corepack pnpm filter workspace monitor run build:customer 통과 Browser smoke in app Browser desktop: Tools 화면에서 파이썬 환경 mode를 열고 data tool venv manager 표시를 확인했다. in app Browse",
-      "html": "<h1>검증 기록</h1>\n<h2>명령</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code> 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code> 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code> 통과</li>\n</ul>\n<h2>Browser smoke</h2>\n<ul>\n<li>in-app Browser desktop: Tools 화면에서 <code>파이썬 환경</code> mode를 열고 <code>data-tool-venv-manager</code> 표시를 확인했다.</li>\n<li>in-app Browser desktop: lifecycle step 5개, action 3개, freeze command/evidence, rebuild command/evidence, 수평 overflow 0을 확인했다.</li>\n<li>Playwright mobile 390x844: venv heading/steps/actions가 모두 한 열로 접히고 수평 overflow 0, action 최소 높이 48px임을 확인했다.</li>\n</ul>\n<h2>스크린샷</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-virtual-environment-desktop.png</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-virtual-environment-mobile.png</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 914,
-      "updatedAt": "2026-06-04T23:34:03.455Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-virtual-environment-manager-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-virtual-environment-manager/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록",
-      "excerpt": "작업 목록 x VirtualEnvironmentLifecycleStep 타입과 create/activate/install/freeze/rebuild 단계 추가 x 가상환경 관리 패널 JSX 추가 x command/evidence/action marker 추가 x 860px 이하 1열 접힘 CSS 추가 x static regression test 추가 x workspace monitor check 실행 x workspace monitor build:customer 실행 x desktop/mobile",
-      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] <code>VirtualEnvironmentLifecycleStep</code> 타입과 create/activate/install/freeze/rebuild 단계 추가</li>\n<li>[x] 가상환경 관리 패널 JSX 추가</li>\n<li>[x] command/evidence/action marker 추가</li>\n<li>[x] 860px 이하 1열 접힘 CSS 추가</li>\n<li>[x] static regression test 추가</li>\n<li>[x] <code>workspace-monitor check</code> 실행</li>\n<li>[x] <code>workspace-monitor build:customer</code> 실행</li>\n<li>[x] desktop/mobile Browser smoke와 screenshot 저장</li>\n<li>[x] 평가, 추적, 작업 요약 갱신</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 472,
-      "updatedAt": "2026-06-04T23:34:03.454Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-virtual-environment-manager-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-virtual-environment-manager/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성",
-      "excerpt": "추적성 | 항목 | 연결 | | | | | 요구사항 | REQ WM 053 | | 사용자 요청 | 가상 환경 | | 구현 파일 | components/workbench/ToolStudioPanel.tsx | | 스타일 파일 | app/globals.css | | 테스트 파일 | tests/tool studio.test.mjs | | 검증 파일 | validation.ko.md | | 이력 | history/request traces/2026/2026 06 05 virtual environment ",
-      "html": "<h1>추적성</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>요구사항</td><td>REQ-WM-053</td></tr><tr><td>사용자 요청</td><td><code>가상 환경</code></td></tr><tr><td>구현 파일</td><td><code>components/workbench/ToolStudioPanel.tsx</code></td></tr><tr><td>스타일 파일</td><td><code>app/globals.css</code></td></tr><tr><td>테스트 파일</td><td><code>tests/tool-studio.test.mjs</code></td></tr><tr><td>검증 파일</td><td><code>validation.ko.md</code></td></tr><tr><td>이력</td><td><code>_history/request-traces/2026/2026-06-05-virtual-environment-manager.ko.md</code></td></tr></tbody></table>\n<h2>수락 기준</h2>\n<ul>\n<li><code>data-tool-venv-manager</code>가 <code>environment</code> 모드에서 표시된다.</li>\n<li>lifecycle step 5개와 action 3개가 marker로 검증된다.</li>\n<li>선택 step command와 evidence가 표시된다.</li>\n<li>390px 모바일에서도 수평 overflow가 없다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 659,
-      "updatedAt": "2026-06-04T23:31:59.659Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-virtual-environment-manager-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-virtual-environment-manager/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "구현 계획",
-      "excerpt": "구현 계획 범위 ToolStudioPanel 에 가상환경 lifecycle step 모델을 추가한다. 파이썬 환경 workbench 내부에 가상환경 전용 관리 패널을 추가한다. 단계 선택, command preview, evidence, command/workflow copy action을 구현한다. CSS와 static test로 marker, grid, 모바일 접힘 계약을 고정한다. check/build/Browser smoke로 검증한다. 결정 새 top level tab을 만들지 않고 파이",
-      "html": "<h1>구현 계획</h1>\n<h2>범위</h2>\n<ul>\n<li><code>ToolStudioPanel</code>에 가상환경 lifecycle step 모델을 추가한다.</li>\n<li><code>파이썬 환경</code> workbench 내부에 가상환경 전용 관리 패널을 추가한다.</li>\n<li>단계 선택, command preview, evidence, command/workflow copy action을 구현한다.</li>\n<li>CSS와 static test로 marker, grid, 모바일 접힘 계약을 고정한다.</li>\n<li>check/build/Browser smoke로 검증한다.</li>\n</ul>\n<h2>결정</h2>\n<ul>\n<li>새 top-level tab을 만들지 않고 <code>파이썬 환경</code> 모드 안의 deeper panel로 둔다.</li>\n<li>실제 실행은 terminal 진입점으로 두고, UI는 재현 가능한 명령과 evidence를 먼저 제공한다.</li>\n<li>공식 <code>venv</code> 문서의 disposable/recreate 원칙을 UI 문구와 rebuild step에 반영한다.</li>\n</ul>\n<h2>위험과 대응</h2>\n<ul>\n<li>긴 rebuild 명령이 깨질 수 있다: terminal code block에 <code>overflow-wrap: anywhere</code>를 적용한다.</li>\n<li><code>pyproject.toml</code>에 <code>pip install -r</code>를 잘못 안내할 수 있다: dependency file에 따라 install/rebuild command를 분기한다.</li>\n<li>액션이 과다해질 수 있다: terminal, command copy, workflow copy 세 가지로 제한한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1107,
-      "updatedAt": "2026-06-04T23:31:59.658Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-virtual-environment-manager-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-virtual-environment-manager/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Virtual Environment Manager 스펙",
-      "excerpt": "Virtual Environment Manager 스펙 요구사항 REQ WM 053: Tool Studio 파이썬 환경 화면 안에서 가상환경 lifecycle 관리를 별도 패널로 제공해야 한다. 사용자 결과 사용자는 가상환경만 다루는 가상 환경만 관리 패널을 본다. create, activate, install, freeze, rebuild 단계 중 하나를 선택한다. 선택 단계에 맞는 command, 설명, 검증 evidence를 확인한다. 터미널 열기 , 명령 복사 , workflow 복사 액션",
-      "html": "<h1>Virtual Environment Manager 스펙</h1>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-WM-053: Tool Studio <code>파이썬 환경</code> 화면 안에서 가상환경 lifecycle 관리를 별도 패널로 제공해야 한다.</li>\n</ul>\n<h2>사용자 결과</h2>\n<ul>\n<li>사용자는 가상환경만 다루는 <code>가상 환경만 관리</code> 패널을 본다.</li>\n<li>create, activate, install, freeze, rebuild 단계 중 하나를 선택한다.</li>\n<li>선택 단계에 맞는 command, 설명, 검증 evidence를 확인한다.</li>\n<li><code>터미널 열기</code>, <code>명령 복사</code>, <code>workflow 복사</code> 액션을 분리해서 사용한다.</li>\n<li>860px 이하 화면에서는 단계 버튼과 액션 버튼이 한 열로 접혀 수평 overflow를 만들지 않는다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>실제 <code>.venv</code> 생성 또는 삭제 실행</li>\n<li>dependency resolver 구현</li>\n<li>lockfile diff viewer 구현</li>\n<li>Windows PowerShell activation 명령 자동 분기</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 840,
-      "updatedAt": "2026-06-04T23:31:59.658Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
       "date": "2026-06-07",
       "year": "2026",
-      "documentsCount": 27,
+      "documentsCount": 31,
       "categories": [
         {
           "category": "evaluation",
@@ -18273,26 +18273,26 @@
         },
         {
           "category": "plan",
-          "count": 3
+          "count": 4
+        },
+        {
+          "category": "user-request",
+          "count": 4
+        },
+        {
+          "category": "web-search",
+          "count": 4
+        },
+        {
+          "category": "work-timing",
+          "count": 4
         },
         {
           "category": "request-trace",
           "count": 3
         },
         {
-          "category": "user-request",
-          "count": 3
-        },
-        {
-          "category": "web-search",
-          "count": 3
-        },
-        {
           "category": "work-summary",
-          "count": 3
-        },
-        {
-          "category": "work-timing",
           "count": 3
         },
         {
@@ -18402,6 +18402,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-plans-2026-2026-06-07-editable-runtime-prompts-ko-md",
+          "path": "_history/plans/2026/2026-06-07-editable-runtime-prompts.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "Plan History: Editable Runtime Prompts",
+          "excerpt": "Plan History: Editable Runtime Prompts 날짜: 2026 06 07 실행 계획 1. 공식 문서 검색으로 prompt 재사용과 frontend native 저장 경계를 확인한다. 2. MonitorShell 과 RuntimeTerminalDrawer 의 prompt 선택 흐름을 조사한다. 3. runtime preferences에 prompt override map을 추가한다. 4. 세션/작업 파이프라인 prompt choice에 저장/초기화 액션을 붙인다. 5. Rus",
+          "updatedAt": "2026-06-06T16:16:15.586Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-plans-2026-2026-06-07-subagent-bounded-fanout-ko-md",
           "path": "_history/plans/2026/2026-06-07-subagent-bounded-fanout.ko.md",
           "category": "plan",
@@ -18462,6 +18472,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-user-requests-2026-2026-06-07-editable-runtime-prompts-ko-md",
+          "path": "_history/user-requests/2026/2026-06-07-editable-runtime-prompts.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "User Request: Editable Runtime Prompts",
+          "excerpt": "User Request: Editable Runtime Prompts 날짜: 2026 06 07 요약 사용자는 Desktop Runtime에서 각 프롬프트를 변경 가능하게 만들라고 요청했다. 해석 세션 시작 prompt와 작업 파이프라인 prompt 모두 선택지별로 저장 가능한 override가 필요하다. 변경값은 일회성 입력이 아니라 다음 실행에도 유지되어야 한다. 기존 작업 흐름을 뒤로 미루지 않고 현재 Workspace Monitor 기능에 직접 반영해야 한다.",
+          "updatedAt": "2026-06-06T16:16:15.586Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-07-subagent-bounded-fanout-ko-md",
           "path": "_history/user-requests/2026/2026-06-07-subagent-bounded-fanout.ko.md",
           "category": "user-request",
@@ -18489,6 +18509,16 @@
           "title": "Web Search: Core Feature Connections",
           "excerpt": "Web Search: Core Feature Connections 날짜: 2026 06 07 검색 VS Code workbench command palette activity bar navigation UX official documentation Tauri v2 frontend invoke command official documentation OpenAI Agents SDK manager agents as tools official documentation Claude Code subagent",
           "updatedAt": "2026-06-06T15:52:07.678Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-07-editable-runtime-prompts-ko-md",
+          "path": "_history/web-searches/2026/2026-06-07-editable-runtime-prompts.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: Editable Runtime Prompts",
+          "excerpt": "Web Search: Editable Runtime Prompts 날짜: 2026 06 07 검색 VS Code official docs prompt files custom instructions editable prompts OpenAI Agents SDK official docs prompts instructions tools editable agent prompts Claude Code official docs custom slash commands prompts editable files ",
+          "updatedAt": "2026-06-06T16:16:15.586Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18552,6 +18582,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-work-timings-2026-2026-06-07-editable-runtime-prompts-ko-md",
+          "path": "_history/work-timings/2026/2026-06-07-editable-runtime-prompts.ko.md",
+          "category": "work-timing",
+          "language": "ko",
+          "title": "Work Timing: Editable Runtime Prompts",
+          "excerpt": "Work Timing: Editable Runtime Prompts 날짜: 2026 06 07 단계별 기록 웹 우선 검색: 공식 문서 중심으로 prompt 재사용과 frontend native boundary 확인. 코드 조사: MonitorShell , RuntimeTerminalDrawer , Rust preferences 정규화, renderer tests 확인. 구현: prompt customization 타입, UI 저장/초기화 액션, Rust whitelist 정규화 추가. 1차 검증:",
+          "updatedAt": "2026-06-06T16:16:15.587Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-07-subagent-bounded-fanout-ko-md",
           "path": "_history/work-timings/2026/2026-06-07-subagent-bounded-fanout.ko.md",
           "category": "work-timing",
@@ -18576,30 +18616,30 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 69,
+      "documentsCount": 65,
       "categories": [
         {
           "category": "evaluation",
-          "count": 17
-        },
-        {
-          "category": "request-trace",
-          "count": 9
-        },
-        {
-          "category": "user-request",
-          "count": 9
-        },
-        {
-          "category": "work-summary",
-          "count": 9
+          "count": 16
         },
         {
           "category": "work-timing",
           "count": 9
         },
         {
+          "category": "request-trace",
+          "count": 8
+        },
+        {
+          "category": "user-request",
+          "count": 8
+        },
+        {
           "category": "web-search",
+          "count": 8
+        },
+        {
+          "category": "work-summary",
           "count": 8
         },
         {
@@ -18670,16 +18710,6 @@
           "title": "2026 06 06 Lightweight Cli Install Omission",
           "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"lightweight cli install\", \"omission check targets\": \" history/evaluations/2026/2026 06 06 lightweight cli install omission.json\" , \"required items\": \"web first intake\", \"requirements\", \"spec plan tasks validation traceability\", \"source cli\", \"i",
           "updatedAt": "2026-06-06T12:42:07.612Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-lightweight-cli-install-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-lightweight-cli-install.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "Evaluation: Lightweight CLI Install",
-          "excerpt": "Evaluation: Lightweight CLI Install 날짜: 2026 06 06 사용자 요구 대비 요구: CLI도 가벼운 CLI 설치를 도와준다. 결과: awp lightweight CLI를 구현하고 /Users/shinjoungeun/.local/bin/awp 로 설치했다. doctor , cli check , open , reveal , terminal 명령을 제공한다. 설치 평가 외부 dependency 설치 없음. Python 표준 라이브러리만 사용한다. user local sy",
-          "updatedAt": "2026-06-06T12:40:28.660Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18893,16 +18923,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-lightweight-cli-install-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-lightweight-cli-install.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "Request Trace: Lightweight CLI Install",
-          "excerpt": "Request Trace: Lightweight CLI Install 날짜: 2026 06 06 요청 CLI도 가벼운 CLI 설치를 도와준다. 산출물 CLI: platform desktop app/tools/awp/awp.py 설치 스크립트: platform desktop app/scripts/install awp cli.mjs 테스트: platform desktop app/tests/awp cli.test.mjs 요구사항: platform desktop app/docs/requirements/2",
-          "updatedAt": "2026-06-06T12:40:49.411Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-06-rust-runtime-feature-split-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-rust-runtime-feature-split.ko.md",
           "category": "request-trace",
@@ -18980,16 +19000,6 @@
           "title": "사용자 요청 요약: Intuitive Home Flow",
           "excerpt": "사용자 요청 요약: Intuitive Home Flow 날짜: 2026 06 06 요약: UI/UX를 더 직관적인 흐름으로 개선한다. 처리 범위: 홈 첫 화면의 시작 흐름을 준비, 선택, 실행, 평가 4단계로 명확히 한다.",
           "updatedAt": "2026-06-06T13:48:34.956Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-06-lightweight-cli-install-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-lightweight-cli-install.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "User Request: Lightweight CLI Install",
-          "excerpt": "User Request: Lightweight CLI Install 날짜: 2026 06 06 요약 사용자는 데스크톱/네이티브 기능 흐름에 이어 가벼운 CLI 설치도 도와달라고 요청했다. 처리 범위 프로젝트 소유의 lightweight companion CLI를 만들고 user local 경로에 설치한다.",
-          "updatedAt": "2026-06-06T12:36:30.224Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19153,16 +19163,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-lightweight-cli-install-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-lightweight-cli-install.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "Work Summary: Lightweight CLI Install",
-          "excerpt": "Work Summary: Lightweight CLI Install 날짜: 2026 06 06 완료 awp Python stdlib CLI 추가 user local symlink installer 추가 cli:install , cli:doctor package scripts 추가 CLI tests/readiness 추가 /Users/shinjoungeun/.local/bin/awp 설치 완료 test , 설치 registry contract, check , package:internal 검증 통과",
-          "updatedAt": "2026-06-06T12:40:49.410Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-rust-runtime-feature-split-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-rust-runtime-feature-split.ko.md",
           "category": "work-summary",
@@ -19311,7 +19311,7 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2830,
+      "documents": 2834,
       "days": 8,
       "categories": [
         {
@@ -19320,23 +19320,23 @@
         },
         {
           "category": "web-search",
-          "count": 442
+          "count": 443
+        },
+        {
+          "category": "plan",
+          "count": 371
         },
         {
           "category": "request-trace",
           "count": 371
         },
         {
-          "category": "plan",
-          "count": 370
-        },
-        {
           "category": "work-timing",
-          "count": 290
+          "count": 291
         },
         {
           "category": "user-request",
-          "count": 156
+          "count": 157
         },
         {
           "category": "work-summary",
@@ -19351,7 +19351,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6808647,
+      "totalSourceBytes": 6813352,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19380,7 +19380,7 @@
       "decisionEvents": 0,
       "openSignals": 19,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T15:57:51.949Z",
+      "latestEventAt": "2026-06-06T16:16:15.587Z",
       "historyDays": 2
     },
     "lanes": [
@@ -19392,11 +19392,16 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 25
+        "count": 24
       },
       {
-        "id": "delivery",
-        "label": "delivery",
+        "id": "monitoring",
+        "label": "monitoring",
+        "count": 13
+      },
+      {
+        "id": "evidence",
+        "label": "evidence",
         "count": 12
       },
       {
@@ -19405,24 +19410,19 @@
         "count": 12
       },
       {
-        "id": "monitoring",
-        "label": "monitoring",
-        "count": 12
-      },
-      {
-        "id": "traceability",
-        "label": "traceability",
-        "count": 12
-      },
-      {
-        "id": "evidence",
-        "label": "evidence",
+        "id": "delivery",
+        "label": "delivery",
         "count": 11
       },
       {
         "id": "planning",
         "label": "planning",
-        "count": 10
+        "count": 11
+      },
+      {
+        "id": "traceability",
+        "label": "traceability",
+        "count": 11
       },
       {
         "id": "history",
@@ -19439,7 +19439,12 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 25
+        "count": 24
+      },
+      {
+        "id": "timing",
+        "label": "timing",
+        "count": 13
       },
       {
         "id": "intake",
@@ -19447,29 +19452,24 @@
         "count": 12
       },
       {
-        "id": "summary",
-        "label": "summary",
-        "count": 12
-      },
-      {
-        "id": "timing",
-        "label": "timing",
-        "count": 12
-      },
-      {
-        "id": "trace",
-        "label": "trace",
-        "count": 12
-      },
-      {
         "id": "web-search",
         "label": "web search",
-        "count": 11
+        "count": 12
       },
       {
         "id": "plan",
         "label": "plan",
-        "count": 10
+        "count": 11
+      },
+      {
+        "id": "summary",
+        "label": "summary",
+        "count": 11
+      },
+      {
+        "id": "trace",
+        "label": "trace",
+        "count": 11
       },
       {
         "id": "history",
@@ -19490,6 +19490,66 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-work-timings-2026-2026-06-07-editable-runtime-prompts-ko-md",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "Work Timing: Editable Runtime Prompts",
+        "detail": "Work Timing: Editable Runtime Prompts 날짜: 2026 06 07 단계별 기록 웹 우선 검색: 공식 문서 중심으로 prompt 재사용과 frontend native boundary 확인. 코드 조사: MonitorShell , RuntimeTerminalDrawer , Rust preferences 정규화, renderer tests 확인. 구현: prompt customization 타입, UI 저장/초기화 액션, Rust whitelist 정규화 추가. 1차 검증:",
+        "path": "_history/work-timings/2026/2026-06-07-editable-runtime-prompts.ko.md",
+        "category": "work-timing",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:16:15.587Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-07-editable-runtime-prompts-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Editable Runtime Prompts",
+        "detail": "Web Search: Editable Runtime Prompts 날짜: 2026 06 07 검색 VS Code official docs prompt files custom instructions editable prompts OpenAI Agents SDK official docs prompts instructions tools editable agent prompts Claude Code official docs custom slash commands prompts editable files ",
+        "path": "_history/web-searches/2026/2026-06-07-editable-runtime-prompts.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:16:15.586Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-07-editable-runtime-prompts-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "Plan History: Editable Runtime Prompts",
+        "detail": "Plan History: Editable Runtime Prompts 날짜: 2026 06 07 실행 계획 1. 공식 문서 검색으로 prompt 재사용과 frontend native 저장 경계를 확인한다. 2. MonitorShell 과 RuntimeTerminalDrawer 의 prompt 선택 흐름을 조사한다. 3. runtime preferences에 prompt override map을 추가한다. 4. 세션/작업 파이프라인 prompt choice에 저장/초기화 액션을 붙인다. 5. Rus",
+        "path": "_history/plans/2026/2026-06-07-editable-runtime-prompts.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:16:15.586Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-07-editable-runtime-prompts-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "User Request: Editable Runtime Prompts",
+        "detail": "User Request: Editable Runtime Prompts 날짜: 2026 06 07 요약 사용자는 Desktop Runtime에서 각 프롬프트를 변경 가능하게 만들라고 요청했다. 해석 세션 시작 prompt와 작업 파이프라인 prompt 모두 선택지별로 저장 가능한 override가 필요하다. 변경값은 일회성 입력이 아니라 다음 실행에도 유지되어야 한다. 기존 작업 흐름을 뒤로 미루지 않고 현재 Workspace Monitor 기능에 직접 반영해야 한다.",
+        "path": "_history/user-requests/2026/2026-06-07-editable-runtime-prompts.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:16:15.586Z"
+      },
       {
         "id": "history-history-evaluations-2026-2026-06-07-core-feature-connections-input-json",
         "sourceType": "history",
@@ -20869,66 +20929,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T12:42:07.612Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-lightweight-cli-install-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "Request Trace: Lightweight CLI Install",
-        "detail": "Request Trace: Lightweight CLI Install 날짜: 2026 06 06 요청 CLI도 가벼운 CLI 설치를 도와준다. 산출물 CLI: platform desktop app/tools/awp/awp.py 설치 스크립트: platform desktop app/scripts/install awp cli.mjs 테스트: platform desktop app/tests/awp cli.test.mjs 요구사항: platform desktop app/docs/requirements/2",
-        "path": "_history/request-traces/2026/2026-06-06-lightweight-cli-install.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:40:49.411Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-lightweight-cli-install-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "Work Summary: Lightweight CLI Install",
-        "detail": "Work Summary: Lightweight CLI Install 날짜: 2026 06 06 완료 awp Python stdlib CLI 추가 user local symlink installer 추가 cli:install , cli:doctor package scripts 추가 CLI tests/readiness 추가 /Users/shinjoungeun/.local/bin/awp 설치 완료 test , 설치 registry contract, check , package:internal 검증 통과",
-        "path": "_history/work-summaries/2026/2026-06-06-lightweight-cli-install.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:40:49.410Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-lightweight-cli-install-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "Evaluation: Lightweight CLI Install",
-        "detail": "Evaluation: Lightweight CLI Install 날짜: 2026 06 06 사용자 요구 대비 요구: CLI도 가벼운 CLI 설치를 도와준다. 결과: awp lightweight CLI를 구현하고 /Users/shinjoungeun/.local/bin/awp 로 설치했다. doctor , cli check , open , reveal , terminal 명령을 제공한다. 설치 평가 외부 dependency 설치 없음. Python 표준 라이브러리만 사용한다. user local sy",
-        "path": "_history/evaluations/2026/2026-06-06-lightweight-cli-install.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:40:28.660Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-lightweight-cli-install-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "User Request: Lightweight CLI Install",
-        "detail": "User Request: Lightweight CLI Install 날짜: 2026 06 06 요약 사용자는 데스크톱/네이티브 기능 흐름에 이어 가벼운 CLI 설치도 도와달라고 요청했다. 처리 범위 프로젝트 소유의 lightweight companion CLI를 만들고 user local 경로에 설치한다.",
-        "path": "_history/user-requests/2026/2026-06-06-lightweight-cli-install.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:36:30.224Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -24160,7 +24160,7 @@
       {
         "category": "work-summary",
         "root": "_history/work-summaries",
-        "documentsCount": 12
+        "documentsCount": 11
       },
       {
         "category": "user-request",
@@ -24175,27 +24175,27 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 12
+        "documentsCount": 11
       },
       {
         "category": "web-search",
         "root": "_history/web-searches",
-        "documentsCount": 11
+        "documentsCount": 12
       },
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 12
+        "documentsCount": 13
       },
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 10
+        "documentsCount": 11
       },
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 25
+        "documentsCount": 24
       },
       {
         "category": "daily-history",
@@ -24289,7 +24289,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 85,
+        "documentCount": 86,
         "sourceFileCount": 14
       },
       {
@@ -24422,7 +24422,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-src-tauri-src-lib-rs",
         "label": "Large source surface",
-        "signal": "13,120 lines in platform-desktop-app/src-tauri/src/lib.rs",
+        "signal": "13,234 lines in platform-desktop-app/src-tauri/src/lib.rs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits.",
         "priority": "high",
@@ -24470,8 +24470,8 @@
         "path": "platform-desktop-app/src-tauri/src/lib.rs",
         "project": "platform-desktop-app",
         "language": "rust",
-        "lineCount": 13120,
-        "sizeBytes": 444809,
+        "lineCount": 13234,
+        "sizeBytes": 448616,
         "recommendation": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits."
       },
       {
@@ -28130,13 +28130,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 4108,
+      "sourceDocuments": 4118,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T15:57:51.949Z"
+      "latestInsightAt": "2026-06-06T16:16:15.587Z"
     },
     "inferenceStages": [
       {
@@ -28277,11 +28277,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1823,
+        "signalCount": 1825,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 516
+            "count": 517
           },
           {
             "category": "evaluation",
@@ -28289,7 +28289,7 @@
           },
           {
             "category": "web-search",
-            "count": 443
+            "count": 444
           },
           {
             "category": "plan",
@@ -28328,7 +28328,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T15:52:07.678Z"
+        "latestEvidenceAt": "2026-06-06T16:16:15.586Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28342,7 +28342,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1053,
+        "signalCount": 1054,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -28350,7 +28350,7 @@
           },
           {
             "category": "plan",
-            "count": 306
+            "count": 307
           },
           {
             "category": "request-trace",
@@ -28401,7 +28401,7 @@
           "작업 요약: 큰 범위 작업 미루지 않기",
           "작업 계획 기록: 사용자 의도 기반 기능 지도"
         ],
-        "latestEvidenceAt": "2026-06-06T15:57:51.949Z"
+        "latestEvidenceAt": "2026-06-06T16:16:15.586Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28415,11 +28415,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 799,
+        "signalCount": 803,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 325
+            "count": 328
           },
           {
             "category": "evaluation",
@@ -28451,7 +28451,7 @@
           },
           {
             "category": "work-timing",
-            "count": 18
+            "count": 19
           },
           {
             "category": "daily-history",
@@ -28474,7 +28474,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "Requirement: Native Pipe Runtime Tools"
         ],
-        "latestEvidenceAt": "2026-06-06T15:57:51.949Z"
+        "latestEvidenceAt": "2026-06-06T16:16:15.587Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28623,14 +28623,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 4108,
+      "sourceDocuments": 4118,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T15:57:51.949Z"
+      "latestInsightAt": "2026-06-06T16:16:15.587Z"
     },
     "operatingModel": [
       {
@@ -28688,19 +28688,19 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3372,
+        "signalCount": 3375,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1823
+            "signalCount": 1825
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1053
+            "signalCount": 1054
           },
           {
             "id": "build-closeout-gate",
@@ -28734,7 +28734,7 @@
           "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T15:57:51.949Z",
+        "latestEvidenceAt": "2026-06-06T16:16:15.586Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28763,13 +28763,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 918,
+        "signalCount": 922,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 799
+            "signalCount": 803
           },
           {
             "id": "release-blocker-gate",
@@ -28803,7 +28803,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T15:57:51.949Z",
+        "latestEvidenceAt": "2026-06-06T16:16:15.587Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28832,7 +28832,7 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2673,
+        "signalCount": 2674,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
@@ -28844,7 +28844,7 @@
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1053
+            "signalCount": 1054
           }
         ],
         "missingPatternIds": [],
@@ -28872,7 +28872,7 @@
           "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T15:57:51.949Z",
+        "latestEvidenceAt": "2026-06-06T16:16:15.586Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28970,19 +28970,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2876,
+        "signalCount": 2879,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1053
+            "signalCount": 1054
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1823
+            "signalCount": 1825
           }
         ],
         "missingPatternIds": [],
@@ -29010,7 +29010,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T15:57:51.949Z",
+        "latestEvidenceAt": "2026-06-06T16:16:15.586Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -29039,7 +29039,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1942,
+        "signalCount": 1944,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -29051,7 +29051,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1823
+            "signalCount": 1825
           }
         ],
         "missingPatternIds": [],
@@ -29079,7 +29079,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T15:52:07.678Z",
+        "latestEvidenceAt": "2026-06-06T16:16:15.586Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

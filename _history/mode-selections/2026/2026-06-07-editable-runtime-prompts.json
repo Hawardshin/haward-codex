@@ -1,0 +1,23 @@
+{
+  "task": "Editable Runtime Prompts",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "Meaningful Workspace Monitor runtime behavior and native preference schema change requiring requirements, spec, tests, build, browser smoke, and guards.",
+  "web_first_intake": true,
+  "memory_bootstrap": "simulated from active platform-desktop-app runtime customization, terminal, and desktop preference records",
+  "non_quick_required_targets": [
+    "requirements",
+    "spec",
+    "plan",
+    "tasks",
+    "validation",
+    "traceability",
+    "omission_check",
+    "resource_check",
+    "evaluation",
+    "request_trace",
+    "work_summary",
+    "timing_summary"
+  ]
+}

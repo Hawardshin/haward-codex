@@ -424,8 +424,14 @@ type RuntimeTerminalCustomization = {
   quickCommands: NativePtyQuickCommand[];
 };
 
+type RuntimePromptCustomization = {
+  sessionPrompts: Record<string, string>;
+  taskPipePrompts: Record<string, string>;
+};
+
 type RuntimeCustomization = {
   providerOverrides: RuntimeProviderOverride[];
+  prompts: RuntimePromptCustomization;
   terminal: RuntimeTerminalCustomization;
 };
 
@@ -2696,6 +2702,7 @@ const INBOX_REFRESH_THROTTLE_MS = 4000;
 const SESSION_OUTPUT_SIGNATURE_CHARS = 2048;
 const TASK_RUN_REFRESH_THROTTLE_MS = 5000;
 const SOURCE_DRAFT_UI_SYNC_MS = 180;
+const runtimePromptMaxChars = 4_000;
 
 const fallbackDesktopAdapters: CliAdapterStatus[] = [
   { adapterId: "claude-code-cli", label: "Claude Code CLI", command: "claude", available: false, lastError: "데스크톱 런타임이 필요합니다." },
@@ -2973,6 +2980,10 @@ const defaultRuntimeCustomization: RuntimeCustomization = {
     defaultModel: provider.defaultModel,
     baseUrl: runtimeProviderDefaultBaseUrls[provider.providerId] || ""
   })),
+  prompts: {
+    sessionPrompts: {},
+    taskPipePrompts: {}
+  },
   terminal: {
     shellCommand: "",
     startupCommand: "",
@@ -3454,6 +3465,12 @@ const fallbackTaskPipePresets: CliTaskPipelinePresetReport[] = [
   }
 ];
 
+function renderTaskPipePresetPrompt(preset: CliTaskPipelinePresetReport, language: UiLanguage) {
+  return language === "ko"
+    ? `${preset.label} 기준으로 작업을 분해하고 ${preset.laneCount}개 실행 경로를 초기화해줘. ${preset.mergeGate} 전에는 소스 영향 결정과 질문을 보류하고, 각 경로의 출력과 병합 조건을 기록해줘.`
+    : `Break down the task with the ${preset.label} preset and initialize ${preset.laneCount} run lanes. Hold source-impacting decisions and questions before ${preset.mergeGate}, then record lane output and merge conditions.`;
+}
+
 const defaultRuntimeInitDefaults: RuntimeInitDefaults = {
   adapterId: "codex-cli",
   sessionModeId: sessionModePresets[0].id,
@@ -3596,6 +3613,44 @@ function normalizeRuntimeQuickCommands(commands: unknown): NativePtyQuickCommand
   return normalized.length ? normalized : defaultTerminalQuickCommands;
 }
 
+function taskPipePromptKeyForPreset(taskKind: string) {
+  return `selected-preset:${taskKind}`;
+}
+
+function normalizeRuntimePromptOverrides(prompts: unknown, allowedKeys: string[]): Record<string, string> {
+  const allowed = new Set(allowedKeys);
+  if (!prompts || typeof prompts !== "object") {
+    return {};
+  }
+  const normalized: Record<string, string> = {};
+  for (const [key, value] of Object.entries(prompts as Record<string, unknown>)) {
+    const normalizedKey = trimRuntimeSetting(key, 120);
+    const normalizedValue = trimRuntimeSetting(value, runtimePromptMaxChars);
+    if (allowed.has(normalizedKey) && normalizedValue) {
+      normalized[normalizedKey] = normalizedValue;
+    }
+  }
+  return normalized;
+}
+
+function normalizeRuntimePromptCustomization(prompts: Partial<RuntimePromptCustomization> | null | undefined): RuntimePromptCustomization {
+  return {
+    sessionPrompts: normalizeRuntimePromptOverrides(
+      prompts?.sessionPrompts,
+      sessionModePresets.map((mode) => mode.id)
+    ),
+    taskPipePrompts: normalizeRuntimePromptOverrides(
+      prompts?.taskPipePrompts,
+      [
+        ...fallbackTaskPipePresets.map((preset) => taskPipePromptKeyForPreset(preset.taskKind)),
+        "implementation-pipe",
+        "research-pipe",
+        "review-pipe"
+      ]
+    )
+  };
+}
+
 function normalizeRuntimeCustomization(customization: Partial<RuntimeCustomization> | null | undefined): RuntimeCustomization {
   const overrideMap = new Map<string, Partial<RuntimeProviderOverride>>();
   for (const override of Array.isArray(customization?.providerOverrides) ? customization?.providerOverrides || [] : []) {
@@ -3614,6 +3669,7 @@ function normalizeRuntimeCustomization(customization: Partial<RuntimeCustomizati
   const terminal = customization?.terminal || defaultRuntimeCustomization.terminal;
   return {
     providerOverrides,
+    prompts: normalizeRuntimePromptCustomization(customization?.prompts),
     terminal: {
       shellCommand: trimRuntimeSetting(terminal.shellCommand, 512),
       startupCommand: trimRuntimeSetting(terminal.startupCommand, 2_000),
@@ -8314,6 +8370,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             uiLanguage={uiLanguage}
             initDefaults={runtimeInitDefaults}
             runtimeCustomization={runtimeCustomization}
+            setRuntimeCustomization={setRuntimeCustomization}
             providerCredentialReport={providerCredentials}
             launchRequest={section === "desktop" ? runtimeLaunchRequest : null}
             onLaunchRequestConsumed={consumeRuntimeLaunchRequest}
@@ -8663,6 +8720,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             uiLanguage={uiLanguage}
             initDefaults={runtimeInitDefaults}
             runtimeCustomization={runtimeCustomization}
+            setRuntimeCustomization={setRuntimeCustomization}
             providerCredentialReport={providerCredentials}
             launchRequest={section === "source" ? runtimeLaunchRequest : null}
             onLaunchRequestConsumed={consumeRuntimeLaunchRequest}
@@ -10992,6 +11050,7 @@ function DesktopRuntimePanel({
   uiLanguage,
   initDefaults,
   runtimeCustomization,
+  setRuntimeCustomization,
   providerCredentialReport,
   launchRequest,
   onLaunchRequestConsumed,
@@ -11009,6 +11068,7 @@ function DesktopRuntimePanel({
   uiLanguage: UiLanguage;
   initDefaults: RuntimeInitDefaults;
   runtimeCustomization: RuntimeCustomization;
+  setRuntimeCustomization: (updater: RuntimeCustomization | ((current: RuntimeCustomization) => RuntimeCustomization)) => void;
   providerCredentialReport?: ProviderCredentialReport | null;
   launchRequest?: RuntimeLaunchRequest | null;
   onLaunchRequestConsumed?: (requestId: string) => void;
@@ -11048,6 +11108,7 @@ function DesktopRuntimePanel({
   const [selectedNativePtySessionId, setSelectedNativePtySessionId] = useState("");
   const [taskPipePresets, setTaskPipePresets] = useState<CliTaskPipelinePresetReport[]>(fallbackTaskPipePresets);
   const [selectedTaskPipeKind, setSelectedTaskPipeKind] = useState(initDefaults.taskPipeKind);
+  const [activeTaskPipePromptKey, setActiveTaskPipePromptKey] = useState(taskPipePromptKeyForPreset(initDefaults.taskPipeKind));
   const [taskPipePrompt, setTaskPipePrompt] = useState(
     "이 작업을 파이프라인 그래프 기준으로 분해해서 각 CLI 실행 경로를 초기화해줘. 소스에 영향을 주는 결정은 병합 게이트 전까지 보류하고, 질문은 결정함으로 보내줘."
   );
@@ -11089,6 +11150,7 @@ function DesktopRuntimePanel({
   const [runningAdapterId, setRunningAdapterId] = useState("");
   const [selectedSessionId, setSelectedSessionId] = useState("");
   const [selectedSessionModeId, setSelectedSessionModeId] = useState(initialSessionMode.id);
+  const [activeSessionPromptKey, setActiveSessionPromptKey] = useState(initialSessionMode.id);
   const [selectedSessionAdapterId, setSelectedSessionAdapterId] = useState(initDefaults.adapterId);
   const [workingDir, setWorkingDir] = useState("");
   const [sessionPrompt, setSessionPrompt] = useState(initialSessionMode.prompt);
@@ -11232,6 +11294,8 @@ function DesktopRuntimePanel({
     Boolean(selectedDecision?.sessionId);
   const selectedMode = sessionModePresets.find((mode) => mode.id === selectedSessionModeId) || sessionModePresets[0];
   const selectedTaskPipe = taskPipePresets.find((preset) => preset.taskKind === selectedTaskPipeKind) || taskPipePresets[0] || fallbackTaskPipePresets[0];
+  const sessionPromptOverrides = runtimeCustomization.prompts.sessionPrompts;
+  const taskPipePromptOverrides = runtimeCustomization.prompts.taskPipePrompts;
   const sessionPromptChoices = useMemo<RuntimeTextChoice[]>(() => {
     const modeLabel = (mode: SessionModePreset) => {
       if (uiLanguage !== "ko") {
@@ -11268,21 +11332,79 @@ function DesktopRuntimePanel({
     const seen = new Set<string>();
     return preferredModes
       .filter((mode) => {
-        if (seen.has(mode.prompt)) {
+        if (seen.has(mode.id)) {
           return false;
         }
-        seen.add(mode.prompt);
+        seen.add(mode.id);
         return true;
       })
       .slice(0, 5)
-      .map((mode) => ({
-        id: `session-prompt-${mode.id}`,
-        label: modeLabel(mode),
-        detail: modeDetail(mode),
-        value: mode.prompt,
-        badge: mode.id === selectedMode.id ? (uiLanguage === "ko" ? "현재" : "Current") : undefined
-      }));
-  }, [selectedMode, uiLanguage]);
+      .map((mode) => {
+        const override = sessionPromptOverrides[mode.id] || "";
+        return {
+          id: `session-prompt-${mode.id}`,
+          promptKey: mode.id,
+          label: modeLabel(mode),
+          detail: modeDetail(mode),
+          value: override || mode.prompt,
+          defaultValue: mode.prompt,
+          customized: Boolean(override),
+          badge: mode.id === selectedMode.id ? (uiLanguage === "ko" ? "현재" : "Current") : undefined
+        };
+      });
+  }, [selectedMode, sessionPromptOverrides, uiLanguage]);
+  const activeSessionPromptChoice =
+    sessionPromptChoices.find((choice) => (choice.promptKey || choice.id) === activeSessionPromptKey) ||
+    sessionPromptChoices[0] ||
+    null;
+  const updateRuntimePromptOverride = useCallback(
+    (scope: keyof RuntimePromptCustomization, promptKey: string, value: string, defaultValue: string) => {
+      const normalizedKey = trimRuntimeSetting(promptKey, 120);
+      const normalizedValue = trimRuntimeSetting(value, runtimePromptMaxChars);
+      if (!normalizedKey) {
+        return;
+      }
+      setRuntimeCustomization((current) => {
+        const normalized = normalizeRuntimeCustomization(current);
+        const currentScope = normalized.prompts[scope] || {};
+        const nextScope = { ...currentScope };
+        if (!normalizedValue || normalizedValue === defaultValue.trim()) {
+          delete nextScope[normalizedKey];
+        } else {
+          nextScope[normalizedKey] = normalizedValue;
+        }
+        return {
+          ...normalized,
+          prompts: {
+            ...normalized.prompts,
+            [scope]: nextScope
+          }
+        };
+      });
+    },
+    []
+  );
+  const selectSessionPromptChoice = useCallback((choice: RuntimeTextChoice) => {
+    setActiveSessionPromptKey(choice.promptKey || choice.id);
+    setSessionPrompt(choice.value);
+  }, []);
+  const saveSessionPromptChoice = useCallback(() => {
+    if (!activeSessionPromptChoice) {
+      return;
+    }
+    const promptKey = activeSessionPromptChoice.promptKey || activeSessionPromptChoice.id;
+    updateRuntimePromptOverride("sessionPrompts", promptKey, sessionPrompt, activeSessionPromptChoice.defaultValue || activeSessionPromptChoice.value);
+    setSessionPrompt(trimRuntimeSetting(sessionPrompt, runtimePromptMaxChars));
+  }, [activeSessionPromptChoice, sessionPrompt, updateRuntimePromptOverride]);
+  const resetSessionPromptChoice = useCallback(() => {
+    if (!activeSessionPromptChoice) {
+      return;
+    }
+    const promptKey = activeSessionPromptChoice.promptKey || activeSessionPromptChoice.id;
+    const defaultValue = activeSessionPromptChoice.defaultValue || activeSessionPromptChoice.value;
+    updateRuntimePromptOverride("sessionPrompts", promptKey, defaultValue, defaultValue);
+    setSessionPrompt(defaultValue);
+  }, [activeSessionPromptChoice, updateRuntimePromptOverride]);
   const workingDirOptions = useMemo<RuntimeTextChoice[]>(() => {
     const candidates: RuntimeTextChoice[] = [
       {
@@ -11328,68 +11450,120 @@ function DesktopRuntimePanel({
     workspaceImportPath
   ]);
   const taskPipePromptChoices = useMemo<RuntimeTextChoice[]>(() => {
-    const selectedPresetPrompt =
-      uiLanguage === "ko"
-        ? `${selectedTaskPipe.label} 기준으로 작업을 분해하고 ${selectedTaskPipe.laneCount}개 실행 경로를 초기화해줘. ${selectedTaskPipe.mergeGate} 전에는 소스 영향 결정과 질문을 보류하고, 각 경로의 출력과 병합 조건을 기록해줘.`
-        : `Break down the task with the ${selectedTaskPipe.label} preset and initialize ${selectedTaskPipe.laneCount} run lanes. Hold source-impacting decisions and questions before ${selectedTaskPipe.mergeGate}, then record lane output and merge conditions.`;
-    const choices: RuntimeTextChoice[] = [
+    const selectedPresetKey = taskPipePromptKeyForPreset(selectedTaskPipe.taskKind);
+    const selectedPresetPrompt = renderTaskPipePresetPrompt(selectedTaskPipe, uiLanguage);
+    const choiceDefaults: Array<Omit<RuntimeTextChoice, "customized" | "value"> & { defaultValue: string; promptKey: string }> = [
       {
-        id: "selected-task-pipe",
+        id: `selected-task-pipe-${selectedTaskPipe.taskKind}`,
+        promptKey: selectedPresetKey,
         label: uiLanguage === "ko" ? "선택 프리셋" : "Selected preset",
         detail: selectedTaskPipe.intent,
-        value: selectedPresetPrompt,
+        defaultValue: selectedPresetPrompt,
         badge: selectedTaskPipe.label
       },
       {
         id: "implementation-pipe",
+        promptKey: "implementation-pipe",
         label: uiLanguage === "ko" ? "구현 분해" : "Implementation",
         detail: uiLanguage === "ko" ? "구현, 리뷰, 검증 경로를 나누어 시작" : "Split implementation, review, and validation lanes",
-        value:
+        defaultValue:
           uiLanguage === "ko"
             ? "사용자 요청을 구현 단위, 리뷰 단위, 검증 단위로 나눠서 각 CLI 실행 경로를 초기화해줘. 소스 변경은 병합 게이트 전까지 보류하고 필요한 결정은 결정함으로 보내줘."
             : "Split the user's request into implementation, review, and validation lanes. Hold source changes before the merge gate and send required decisions to the decision inbox."
       },
       {
         id: "research-pipe",
+        promptKey: "research-pipe",
         label: uiLanguage === "ko" ? "근거 조사" : "Grounded research",
         detail: uiLanguage === "ko" ? "검색, 출처 순위, 회의적 검토를 먼저 실행" : "Run search, source ranking, and skeptic review first",
-        value:
+        defaultValue:
           uiLanguage === "ko"
             ? "이 요청을 검색, 출처 순위, 근거 추출, 회의적 검토 경로로 나눠 초기화해줘. 구현 전에 강한 출처와 약한 출처를 분리하고 계획 영향만 기록해줘."
             : "Initialize search, source ranking, evidence extraction, and skeptic review lanes for this request. Separate strong and weak sources before implementation and record only plan-impacting evidence."
       },
       {
         id: "review-pipe",
+        promptKey: "review-pipe",
         label: uiLanguage === "ko" ? "검토/검증" : "Review and verify",
         detail: uiLanguage === "ko" ? "버그, 누락 테스트, 롤백 조건을 먼저 점검" : "Check bugs, missing tests, and rollback conditions first",
-        value:
+        defaultValue:
           uiLanguage === "ko"
             ? "현재 변경 또는 계획을 검토/검증 파이프라인으로 초기화해줘. 버그, 누락된 테스트, 리소스 누수, 롤백 조건, 사용자 결정 필요 여부를 우선순위로 기록해줘."
             : "Initialize a review and verification pipeline for the current change or plan. Prioritize bugs, missing tests, resource leaks, rollback conditions, and user-decision needs."
       }
     ];
     const seen = new Set<string>();
-    return choices.filter((choice) => {
-      if (seen.has(choice.value)) {
-        return false;
-      }
-      seen.add(choice.value);
-      return true;
-    });
-  }, [selectedTaskPipe, uiLanguage]);
+    return choiceDefaults
+      .map((choice) => {
+        const override = taskPipePromptOverrides[choice.promptKey] || "";
+        return {
+          ...choice,
+          value: override || choice.defaultValue,
+          customized: Boolean(override)
+        };
+      })
+      .filter((choice) => {
+        if (seen.has(choice.promptKey)) {
+          return false;
+        }
+        seen.add(choice.promptKey);
+        return true;
+      });
+  }, [selectedTaskPipe, taskPipePromptOverrides, uiLanguage]);
+  const activeTaskPipePromptChoice =
+    taskPipePromptChoices.find((choice) => (choice.promptKey || choice.id) === activeTaskPipePromptKey) ||
+    taskPipePromptChoices[0] ||
+    null;
+  const selectTaskPipePromptChoice = useCallback((choice: RuntimeTextChoice) => {
+    setActiveTaskPipePromptKey(choice.promptKey || choice.id);
+    setTaskPipePrompt(choice.value);
+  }, []);
+  const saveTaskPipePromptChoice = useCallback(() => {
+    if (!activeTaskPipePromptChoice) {
+      return;
+    }
+    const promptKey = activeTaskPipePromptChoice.promptKey || activeTaskPipePromptChoice.id;
+    updateRuntimePromptOverride("taskPipePrompts", promptKey, taskPipePrompt, activeTaskPipePromptChoice.defaultValue || activeTaskPipePromptChoice.value);
+    setTaskPipePrompt(trimRuntimeSetting(taskPipePrompt, runtimePromptMaxChars));
+  }, [activeTaskPipePromptChoice, taskPipePrompt, updateRuntimePromptOverride]);
+  const resetTaskPipePromptChoice = useCallback(() => {
+    if (!activeTaskPipePromptChoice) {
+      return;
+    }
+    const promptKey = activeTaskPipePromptChoice.promptKey || activeTaskPipePromptChoice.id;
+    const defaultValue = activeTaskPipePromptChoice.defaultValue || activeTaskPipePromptChoice.value;
+    updateRuntimePromptOverride("taskPipePrompts", promptKey, defaultValue, defaultValue);
+    setTaskPipePrompt(defaultValue);
+  }, [activeTaskPipePromptChoice, updateRuntimePromptOverride]);
   useEffect(() => {
     const mode = sessionModePresets.find((item) => item.id === initDefaults.sessionModeId) || sessionModePresets[0];
+    const taskPipe = fallbackTaskPipePresets.find((preset) => preset.taskKind === initDefaults.taskPipeKind) || fallbackTaskPipePresets[0];
+    const taskPipePromptKey = taskPipePromptKeyForPreset(taskPipe.taskKind);
     setSelectedSessionAdapterId(initDefaults.adapterId);
     setSelectedSessionModeId(mode.id);
-    setSessionPrompt(mode.prompt);
-    setSelectedTaskPipeKind(initDefaults.taskPipeKind);
+    setActiveSessionPromptKey(mode.id);
+    setSessionPrompt(sessionPromptOverrides[mode.id] || mode.prompt);
+    setSelectedTaskPipeKind(taskPipe.taskKind);
+    setActiveTaskPipePromptKey(taskPipePromptKey);
+    setTaskPipePrompt(taskPipePromptOverrides[taskPipePromptKey] || renderTaskPipePresetPrompt(taskPipe, uiLanguage));
     setAutoDeferQuestions(initDefaults.autoDeferQuestions);
   }, [
     initDefaults.adapterId,
     initDefaults.autoDeferQuestions,
     initDefaults.sessionModeId,
-    initDefaults.taskPipeKind
+    initDefaults.taskPipeKind,
+    uiLanguage
   ]);
+  useEffect(() => {
+    if (activeSessionPromptChoice) {
+      setSessionPrompt(activeSessionPromptChoice.value);
+    }
+  }, [activeSessionPromptChoice?.promptKey, activeSessionPromptChoice?.value]);
+  useEffect(() => {
+    if (activeTaskPipePromptChoice) {
+      setTaskPipePrompt(activeTaskPipePromptChoice.value);
+    }
+  }, [activeTaskPipePromptChoice?.promptKey, activeTaskPipePromptChoice?.value]);
   const pipelineStats = useMemo(() => {
     const latest = pipelineReports[0] || null;
     const started = pipelineReports.reduce((total, report) => total + report.startedSessions, 0);
@@ -15989,12 +16163,12 @@ function DesktopRuntimePanel({
           <div className="task-pipe-controls">
             <div className="settings-controlled-summary">
               <article>
-	                <span>{uiLanguage === "ko" ? "파이프라인 프리셋" : "Pipe preset"}</span>
+                <span>{uiLanguage === "ko" ? "파이프라인 프리셋" : "Pipe preset"}</span>
                 <strong>{selectedTaskPipe.label}</strong>
               </article>
               <article>
-	                <span>{uiLanguage === "ko" ? "질문 처리" : "Question handling"}</span>
-	                <strong>{autoDeferQuestions ? (uiLanguage === "ko" ? "자동 보류" : "auto-defer") : uiLanguage === "ko" ? "수동" : "manual"}</strong>
+                <span>{uiLanguage === "ko" ? "질문 처리" : "Question handling"}</span>
+                <strong>{autoDeferQuestions ? (uiLanguage === "ko" ? "자동 보류" : "auto-defer") : uiLanguage === "ko" ? "수동" : "manual"}</strong>
               </article>
               <button type="button" onClick={() => onOpenSettings("quick")}>
                 <Settings size={15} aria-hidden="true" />
@@ -16002,20 +16176,21 @@ function DesktopRuntimePanel({
               </button>
             </div>
             <div className="session-prompt-field task-prompt-choice-field">
-	              <span>{uiLanguage === "ko" ? "작업 요청" : "Task intake"}</span>
+              <span>{uiLanguage === "ko" ? "작업 요청" : "Task intake"}</span>
               <div className="runtime-text-choice-grid task-prompt-choice-grid" aria-label={uiLanguage === "ko" ? "작업 요청 선택지" : "Task intake choices"}>
                 {taskPipePromptChoices.map((choice) => (
                   <button
                     key={choice.id}
                     type="button"
-                    className={taskPipePrompt === choice.value ? "active" : ""}
-                    aria-pressed={taskPipePrompt === choice.value}
-                    onClick={() => setTaskPipePrompt(choice.value)}
+                    className={`${(choice.promptKey || choice.id) === activeTaskPipePromptKey ? "active" : ""} ${choice.customized ? "customized" : ""}`.trim()}
+                    aria-pressed={(choice.promptKey || choice.id) === activeTaskPipePromptKey}
+                    onClick={() => selectTaskPipePromptChoice(choice)}
                     title={choice.detail}
                   >
                     <span>{choice.label}</span>
                     <small>{choice.detail}</small>
                     {choice.badge && <em>{choice.badge}</em>}
+                    {choice.customized && <em>{uiLanguage === "ko" ? "수정" : "Custom"}</em>}
                   </button>
                 ))}
               </div>
@@ -16025,6 +16200,23 @@ function DesktopRuntimePanel({
                 onChange={(event) => setTaskPipePrompt(event.target.value)}
                 rows={4}
               />
+              {activeTaskPipePromptChoice && (
+                <div className="prompt-edit-actions" data-task-pipe-prompt-editor>
+                  <button type="button" onClick={saveTaskPipePromptChoice} disabled={!taskPipePrompt.trim()}>
+                    <ClipboardCheck size={14} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "선택 프롬프트 저장" : "Save selected prompt"}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={resetTaskPipePromptChoice}
+                    disabled={!activeTaskPipePromptChoice.customized && taskPipePrompt.trim() === (activeTaskPipePromptChoice.defaultValue || activeTaskPipePromptChoice.value).trim()}
+                  >
+                    <RefreshCw size={14} aria-hidden="true" />
+                    <span>{uiLanguage === "ko" ? "기본값" : "Default"}</span>
+                  </button>
+                  <small>{activeTaskPipePromptChoice.customized ? (uiLanguage === "ko" ? "수정된 프롬프트" : "Customized prompt") : uiLanguage === "ko" ? "기본 프롬프트" : "Default prompt"}</small>
+                </div>
+              )}
             </div>
             <button
               type="button"
@@ -16731,6 +16923,7 @@ function DesktopRuntimePanel({
         selectedSessionAdapterId={selectedSessionAdapterId}
         sessionInput={sessionInput}
         sessionPrompt={sessionPrompt}
+        sessionPromptChoiceKey={activeSessionPromptKey}
         sessionPromptChoices={sessionPromptChoices}
         sessions={sessions}
         sessionStats={sessionStats}
@@ -16753,9 +16946,12 @@ function DesktopRuntimePanel({
         onSelectNativePtySession={setSelectedNativePtySessionId}
         onSelectSession={setSelectedSessionId}
         onSessionInputChange={setSessionInput}
+        onSelectSessionPromptChoice={selectSessionPromptChoice}
         onSessionPromptChange={setSessionPrompt}
+        onSaveSessionPromptChoice={saveSessionPromptChoice}
         onStartNativePtySession={startNativePtySession}
         onStartSession={startSession}
+        onResetSessionPromptChoice={resetSessionPromptChoice}
         onWorkingDirChange={setWorkingDir}
         onWriteNativePtyInput={writeNativePtyInput}
         onWriteSessionInput={writeSessionInput}

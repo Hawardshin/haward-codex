@@ -1,0 +1,113 @@
+{
+  "task": "Editable Runtime Prompts",
+  "work_mode": "standard",
+  "runtime_context": [
+    "React prompt customization state",
+    "desktop runtime preferences serialization",
+    "Rust native preference normalization",
+    "Next.js development server for Browser smoke",
+    "in-app Browser DOM and interaction verification"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "prompt-override-stale-selection",
+      "category": "memory",
+      "description": "Saving or resetting a prompt override could reset the active prompt choice back to initialization defaults.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Split initialization effects from active prompt value synchronization and keep active prompt keys stable.",
+      "evidence": [
+        "activeSessionPromptKey",
+        "activeTaskPipePromptKey",
+        "useEffect keyed by active prompt choice value"
+      ]
+    },
+    {
+      "risk_id": "unknown-prompt-key-persistence",
+      "category": "memory",
+      "description": "Manually edited preferences could persist unknown prompt keys.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Normalize prompt overrides in frontend and Rust with explicit allowed key lists.",
+      "evidence": [
+        "normalizeRuntimePromptCustomization",
+        "normalize_prompt_customization",
+        "desktop_prompt_customization_keeps_only_allowed_prompt_keys"
+      ]
+    },
+    {
+      "risk_id": "browser-smoke-server",
+      "category": "process",
+      "description": "Browser smoke uses a local Next.js development server that must be stopped after verification.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Serve on TCP 3224, stop with Ctrl-C, and verify no listener remains.",
+      "evidence": [
+        "Next dev served http://127.0.0.1:3224",
+        "Ctrl-C stopped the session",
+        "lsof -nP -iTCP:3224 -sTCP:LISTEN returned no listener"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "prompt-save-reset-lifecycle",
+      "resource": "runtime prompt override maps",
+      "create_path": "save selected prompt -> updateRuntimePromptOverride",
+      "cleanup_path": "default/reset -> updateRuntimePromptOverride with default value deletes override",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Browser smoke: task prompt customized count 1 after save and 0 after reset",
+        "Browser smoke: session prompt customized count 1 after save and 0 after reset"
+      ]
+    },
+    {
+      "check_id": "dev-server-lifecycle",
+      "resource": "Next.js dev server",
+      "create_path": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor exec next dev -H 127.0.0.1 -p 3224",
+      "cleanup_path": "Ctrl-C and lsof no-listener check",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Server started on 127.0.0.1:3224",
+        "No listener remained on TCP 3224"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "renderer-check",
+      "metric": "Type and design contract checks",
+      "tool": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+      "threshold": "exit code 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "lazy_boundary_contract_ok",
+        "scroll_contract_ok",
+        "source_control_design_ok",
+        "comprehensive_improvement_contract_ok",
+        "history_payload_ok"
+      ]
+    },
+    {
+      "check_id": "browser-smoke",
+      "metric": "Editable prompt lifecycle",
+      "tool": "in-app Browser",
+      "threshold": "task and session prompt save/reset both update customized state",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "data-task-pipe-prompt-editor count 1",
+        "data-session-prompt-editor count 1",
+        "task prompt save/reset customized count 1 -> 0",
+        "session prompt save/reset customized count 1 -> 0"
+      ]
+    }
+  ],
+  "notes": [
+    "No installation occurred.",
+    "No CLI pipeline was added."
+  ]
+}

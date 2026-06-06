@@ -880,8 +880,16 @@ struct DesktopTerminalCustomization {
 
 #[derive(Clone, Deserialize, Serialize)]
 #[serde(default, rename_all = "camelCase")]
+struct DesktopPromptCustomization {
+    session_prompts: HashMap<String, String>,
+    task_pipe_prompts: HashMap<String, String>,
+}
+
+#[derive(Clone, Deserialize, Serialize)]
+#[serde(default, rename_all = "camelCase")]
 struct DesktopRuntimeCustomization {
     provider_overrides: Vec<DesktopProviderOverride>,
+    prompts: DesktopPromptCustomization,
     terminal: DesktopTerminalCustomization,
 }
 
@@ -1102,10 +1110,20 @@ impl Default for DesktopTerminalCustomization {
     }
 }
 
+impl Default for DesktopPromptCustomization {
+    fn default() -> Self {
+        Self {
+            session_prompts: HashMap::new(),
+            task_pipe_prompts: HashMap::new(),
+        }
+    }
+}
+
 impl Default for DesktopRuntimeCustomization {
     fn default() -> Self {
         Self {
             provider_overrides: default_provider_overrides(),
+            prompts: DesktopPromptCustomization::default(),
             terminal: DesktopTerminalCustomization::default(),
         }
     }
@@ -1716,6 +1734,7 @@ const MAX_PROVIDER_MODEL_CHARS: usize = 140;
 const MAX_TERMINAL_COMMAND_CHARS: usize = 512;
 const MAX_TERMINAL_STARTUP_COMMAND_CHARS: usize = 2_000;
 const MAX_TERMINAL_QUICK_COMMANDS: usize = 8;
+const MAX_RUNTIME_PROMPT_CHARS: usize = 4_000;
 const NATIVE_PIPE_PROBE_TIMEOUT_MS: u64 = 5_000;
 const MAX_NATIVE_PIPE_PROBE_TIMEOUT_MS: u64 = 30_000;
 const MAX_NATIVE_PIPE_ARGS: usize = 32;
@@ -8482,6 +8501,7 @@ fn normalize_runtime_customization(
 
     DesktopRuntimeCustomization {
         provider_overrides,
+        prompts: normalize_prompt_customization(customization.prompts),
         terminal: DesktopTerminalCustomization {
             shell_command: truncate_chars(
                 customization.terminal.shell_command.trim(),
@@ -8494,6 +8514,63 @@ fn normalize_runtime_customization(
             quick_commands,
         },
     }
+}
+
+fn normalize_prompt_customization(
+    customization: DesktopPromptCustomization,
+) -> DesktopPromptCustomization {
+    DesktopPromptCustomization {
+        session_prompts: normalize_prompt_override_map(
+            customization.session_prompts,
+            is_allowed_session_prompt_key,
+        ),
+        task_pipe_prompts: normalize_prompt_override_map(
+            customization.task_pipe_prompts,
+            is_allowed_task_pipe_prompt_key,
+        ),
+    }
+}
+
+fn normalize_prompt_override_map(
+    prompts: HashMap<String, String>,
+    allow_key: fn(&str) -> bool,
+) -> HashMap<String, String> {
+    prompts
+        .into_iter()
+        .filter_map(|(key, value)| {
+            let key = key.trim().to_string();
+            let value = truncate_chars(value.trim(), MAX_RUNTIME_PROMPT_CHARS);
+            if key.is_empty() || value.is_empty() || !allow_key(&key) {
+                None
+            } else {
+                Some((key, value))
+            }
+        })
+        .collect()
+}
+
+fn is_allowed_session_prompt_key(key: &str) -> bool {
+    matches!(
+        key,
+        "research_insight_agent"
+            | "user_task"
+            | "platform_improvement"
+            | "knowledge_accumulation"
+            | "review_verify"
+    )
+}
+
+fn is_allowed_task_pipe_prompt_key(key: &str) -> bool {
+    matches!(
+        key,
+        "selected-preset:research_insight_agent_pipe"
+            | "selected-preset:platform_improvement_pipe"
+            | "selected-preset:knowledge_accumulation_pipe"
+            | "selected-preset:review_verify_pipe"
+            | "implementation-pipe"
+            | "research-pipe"
+            | "review-pipe"
+    )
 }
 
 fn safe_short_setting(value: String, max_chars: usize, fallback: &str) -> String {
@@ -13011,6 +13088,43 @@ mod tests {
         );
         assert!(normalize_native_os_action("shutdown").is_err());
         assert!(normalize_native_os_action("rm -rf").is_err());
+    }
+
+    #[test]
+    fn desktop_prompt_customization_keeps_only_allowed_prompt_keys() {
+        let mut session_prompts = HashMap::new();
+        session_prompts.insert("user_task".to_string(), "  custom user prompt  ".to_string());
+        session_prompts.insert("unknown".to_string(), "should be dropped".to_string());
+        session_prompts.insert("review_verify".to_string(), "".to_string());
+
+        let mut task_pipe_prompts = HashMap::new();
+        task_pipe_prompts.insert(
+            "selected-preset:platform_improvement_pipe".to_string(),
+            "  custom pipe prompt  ".to_string(),
+        );
+        task_pipe_prompts.insert("selected-preset:unknown".to_string(), "drop".to_string());
+
+        let normalized = normalize_prompt_customization(DesktopPromptCustomization {
+            session_prompts,
+            task_pipe_prompts,
+        });
+
+        assert_eq!(
+            normalized.session_prompts.get("user_task").map(String::as_str),
+            Some("custom user prompt")
+        );
+        assert!(!normalized.session_prompts.contains_key("unknown"));
+        assert!(!normalized.session_prompts.contains_key("review_verify"));
+        assert_eq!(
+            normalized
+                .task_pipe_prompts
+                .get("selected-preset:platform_improvement_pipe")
+                .map(String::as_str),
+            Some("custom pipe prompt")
+        );
+        assert!(!normalized
+            .task_pipe_prompts
+            .contains_key("selected-preset:unknown"));
     }
 
     #[test]

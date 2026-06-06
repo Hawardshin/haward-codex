@@ -1,0 +1,112 @@
+{
+  "task": "Editable Runtime Prompts",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "session-prompt-editing",
+      "description": "Session prompt presets can be selected, edited, saved, marked customized, and reset to default.",
+      "source": "user request: 각 프롬프트 변경 가능하게",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "data-session-prompt-editor",
+        "onSaveSessionPromptChoice",
+        "Browser smoke session save/reset"
+      ]
+    },
+    {
+      "item_id": "task-pipe-prompt-editing",
+      "description": "Task pipeline prompt presets can be selected, edited, saved, marked customized, and reset to default.",
+      "source": "requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "data-task-pipe-prompt-editor",
+        "saveTaskPipePromptChoice",
+        "Browser smoke task prompt save/reset"
+      ]
+    },
+    {
+      "item_id": "preference-persistence-schema",
+      "description": "Runtime prompt overrides are part of runtime customization preferences.",
+      "source": "spec",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "RuntimePromptCustomization",
+        "DesktopPromptCustomization",
+        "normalizeRuntimePromptCustomization"
+      ]
+    },
+    {
+      "item_id": "native-key-safety",
+      "description": "Native preferences keep only allowed prompt keys and drop empty values.",
+      "source": "spec",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "normalize_prompt_customization",
+        "desktop_prompt_customization_keeps_only_allowed_prompt_keys"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-07-editable-runtime-prompts.ko.md",
+      "purpose": "Requirement record",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-07-editable-runtime-prompts/spec.ko.md",
+      "purpose": "Spec record",
+      "required": true
+    },
+    {
+      "path": "_history/web-searches/2026/2026-06-07-editable-runtime-prompts.ko.md",
+      "purpose": "Web-first search record",
+      "required": true
+    },
+    {
+      "path": "_history/resource-checks/2026/2026-06-07-editable-runtime-prompts.json",
+      "purpose": "Resource lifecycle record for browser/dev-server verification",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "renderer-static-contracts",
+      "description": "Renderer tests and static contract checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor test: 90 tests",
+        "workspace-monitor run check: passed"
+      ]
+    },
+    {
+      "check_id": "native-normalization",
+      "description": "Rust prompt customization normalization test passes.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo test desktop_prompt_customization_keeps_only_allowed_prompt_keys: passed"
+      ]
+    },
+    {
+      "check_id": "build-platform-browser",
+      "description": "Snapshot collect, renderer build, platform check, and browser smoke pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "collect wrote 650 inline documents and 2834 admin history records",
+        "desktop:renderer:build passed",
+        "platform-desktop-app run check passed with existing public release gate warnings",
+        "Browser smoke verified task/session prompt save and reset"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "Browser smoke validates renderer behavior in browser fallback mode, not packaged native preferences file write.",
+    "This slice intentionally does not add a full prompt version history UI."
+  ]
+}
