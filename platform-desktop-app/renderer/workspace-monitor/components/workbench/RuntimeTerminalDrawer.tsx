@@ -1,7 +1,8 @@
 "use client";
 
-import { Activity, ArrowRight, Inbox, ListFilter, Settings, ShieldCheck, SquareTerminal, X } from "lucide-react";
+import { Activity, ArrowRight, ChevronLeft, ChevronRight, Clipboard, ClipboardPaste, Eraser, Inbox, ListFilter, Maximize2, Search, Settings, ShieldCheck, SquareTerminal, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { writeClipboardText } from "@/lib/clipboard.mjs";
 
 type RuntimeTerminalLanguage = "ko" | "en";
 type TerminalDrawerView = "start" | "native" | "sessions" | "output" | "events";
@@ -15,6 +16,13 @@ type RuntimeTerminalAdapter = {
 type RuntimeTerminalSessionMode = {
   label: string;
   intent: string;
+};
+
+type NativePtyQuickCommand = {
+  id: string;
+  label: string;
+  detail: string;
+  input: string;
 };
 
 export type RuntimeTextChoice = {
@@ -151,6 +159,25 @@ const terminalCopy = {
     stopNativePty: "PTY 중단",
     nativePtySurface: "네이티브 PTY 터미널",
     nativePtyPlaceholder: "PTY 셸을 시작하면 여기에서 실제 터미널 입출력이 렌더링됩니다.",
+    terminalSearch: "검색",
+    terminalSearchPlaceholder: "출력 검색",
+    terminalSearchPrevious: "이전",
+    terminalSearchNext: "다음",
+    terminalCopySelection: "선택 복사",
+    terminalCopyOutput: "출력 복사",
+    terminalPaste: "붙여넣기",
+    terminalClear: "화면 정리",
+    terminalFit: "맞춤",
+    terminalQuickCommands: "빠른 명령",
+    terminalCopied: "복사됨",
+    terminalCopyFailed: "복사할 내용이 없거나 권한이 없습니다.",
+    terminalPasted: "붙여넣음",
+    terminalPasteBlocked: "클립보드 읽기 권한이 없거나 붙여넣을 수 없습니다.",
+    terminalCleared: "터미널 화면을 정리했습니다.",
+    terminalFitted: "터미널 크기를 다시 맞췄습니다.",
+    terminalSearchMatch: "검색 결과로 이동했습니다.",
+    terminalSearchNoMatch: "일치하는 출력이 없습니다.",
+    terminalCommandSent: "명령을 보냈습니다.",
     blocked: "막힘",
     ready: "준비됨",
     adapter: "어댑터",
@@ -209,6 +236,25 @@ const terminalCopy = {
     stopNativePty: "Stop PTY",
     nativePtySurface: "Native PTY terminal",
     nativePtyPlaceholder: "Start a PTY shell to render real terminal I/O here.",
+    terminalSearch: "Search",
+    terminalSearchPlaceholder: "Search output",
+    terminalSearchPrevious: "Previous",
+    terminalSearchNext: "Next",
+    terminalCopySelection: "Copy selection",
+    terminalCopyOutput: "Copy output",
+    terminalPaste: "Paste",
+    terminalClear: "Clear screen",
+    terminalFit: "Fit",
+    terminalQuickCommands: "Quick commands",
+    terminalCopied: "Copied",
+    terminalCopyFailed: "Nothing to copy or clipboard permission is blocked.",
+    terminalPasted: "Pasted",
+    terminalPasteBlocked: "Clipboard read is unavailable or this terminal cannot receive input.",
+    terminalCleared: "Terminal screen cleared.",
+    terminalFitted: "Terminal size refit.",
+    terminalSearchMatch: "Moved to search match.",
+    terminalSearchNoMatch: "No matching output.",
+    terminalCommandSent: "Command sent.",
     blocked: "blocked",
     ready: "ready",
     adapter: "Adapter",
@@ -240,6 +286,19 @@ const terminalCopy = {
     noEvents: "No structured terminal events yet."
   }
 } satisfies Record<RuntimeTerminalLanguage, Record<string, string>>;
+
+const nativePtyQuickActions = {
+  ko: [
+    { id: "pwd", label: "현재 위치", detail: "pwd", input: "pwd\n" },
+    { id: "list", label: "파일 목록", detail: "ls -la", input: "ls -la\n" },
+    { id: "git", label: "Git 상태", detail: "git status --short", input: "git status --short\n" }
+  ],
+  en: [
+    { id: "pwd", label: "Current dir", detail: "pwd", input: "pwd\n" },
+    { id: "list", label: "List files", detail: "ls -la", input: "ls -la\n" },
+    { id: "git", label: "Git status", detail: "git status --short", input: "git status --short\n" }
+  ]
+} satisfies Record<RuntimeTerminalLanguage, NativePtyQuickCommand[]>;
 
 export function RuntimeTerminalDrawer({
   adapters,
@@ -567,7 +626,9 @@ export function RuntimeTerminalDrawer({
                 )}
                 <NativePtyTerminalSurface
                   ariaLabel={copy.nativePtySurface}
+                  labels={copy}
                   placeholder={copy.nativePtyPlaceholder}
+                  quickCommands={nativePtyQuickActions[uiLanguage]}
                   runtimeAvailable={runtimeAvailable}
                   session={nativePtySession}
                   startLabel={copy.startNativePty}
@@ -736,7 +797,9 @@ export function RuntimeTerminalDrawer({
 
 function NativePtyTerminalSurface({
   ariaLabel,
+  labels,
   placeholder,
+  quickCommands,
   runtimeAvailable,
   session,
   startLabel,
@@ -745,7 +808,9 @@ function NativePtyTerminalSurface({
   onWrite
 }: {
   ariaLabel: string;
+  labels: Record<string, string>;
   placeholder: string;
+  quickCommands: NativePtyQuickCommand[];
   runtimeAvailable: boolean;
   session: RuntimeNativePtySession | null;
   startLabel: string;
@@ -756,14 +821,20 @@ function NativePtyTerminalSurface({
   const hostRef = useRef<HTMLDivElement | null>(null);
   const terminalRef = useRef<import("@xterm/xterm").Terminal | null>(null);
   const fitAddonRef = useRef<import("@xterm/addon-fit").FitAddon | null>(null);
+  const searchAddonRef = useRef<import("@xterm/addon-search").SearchAddon | null>(null);
   const lastOutputRef = useRef("");
   const resizeSignatureRef = useRef("");
   const pendingInputRef = useRef("");
   const flushTimerRef = useRef<number | null>(null);
+  const noticeTimerRef = useRef<number | null>(null);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const fitAndResizeRef = useRef<() => void>(() => {});
   const sessionRef = useRef<RuntimeNativePtySession | null>(session);
   const runtimeAvailableRef = useRef(runtimeAvailable);
   const onResizeRef = useRef(onResize);
   const onWriteRef = useRef(onWrite);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [terminalNotice, setTerminalNotice] = useState("");
 
   useEffect(() => {
     sessionRef.current = session;
@@ -771,6 +842,15 @@ function NativePtyTerminalSurface({
     onResizeRef.current = onResize;
     onWriteRef.current = onWrite;
   }, [runtimeAvailable, session, onResize, onWrite]);
+
+  useEffect(() => {
+    return () => {
+      if (noticeTimerRef.current !== null && typeof window !== "undefined") {
+        window.clearTimeout(noticeTimerRef.current);
+        noticeTimerRef.current = null;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     let disposed = false;
@@ -813,12 +893,14 @@ function NativePtyTerminalSurface({
       resizeSignatureRef.current = signature;
       void onResizeRef.current(activeSession.sessionId, { rows: terminal.rows, cols: terminal.cols });
     };
+    fitAndResizeRef.current = fitAndResize;
 
     void (async () => {
-      const [{ Terminal }, { FitAddon }, { WebLinksAddon }] = await Promise.all([
+      const [{ Terminal }, { FitAddon }, { WebLinksAddon }, { SearchAddon }] = await Promise.all([
         import("@xterm/xterm"),
         import("@xterm/addon-fit"),
-        import("@xterm/addon-web-links")
+        import("@xterm/addon-web-links"),
+        import("@xterm/addon-search")
       ]);
       if (disposed || !hostRef.current) {
         return;
@@ -856,11 +938,34 @@ function NativePtyTerminalSurface({
         }
       });
       const fitAddon = new FitAddon();
+      const searchAddon = new SearchAddon();
       terminal.loadAddon(fitAddon);
+      terminal.loadAddon(searchAddon);
       terminal.loadAddon(new WebLinksAddon());
       terminal.open(hostRef.current);
       terminalRef.current = terminal;
       fitAddonRef.current = fitAddon;
+      searchAddonRef.current = searchAddon;
+      terminal.attachCustomKeyEventHandler((event) => {
+        const key = event.key.toLowerCase();
+        if ((event.metaKey || event.ctrlKey) && key === "f") {
+          window.setTimeout(() => searchInputRef.current?.focus(), 0);
+          return false;
+        }
+        if ((event.metaKey || event.ctrlKey) && event.shiftKey && key === "c") {
+          void copyTerminalSelection();
+          return false;
+        }
+        if ((event.metaKey || event.ctrlKey) && event.shiftKey && key === "v") {
+          void pasteFromClipboard();
+          return false;
+        }
+        if ((event.metaKey || event.ctrlKey) && key === "l") {
+          clearTerminalScreen();
+          return false;
+        }
+        return true;
+      });
       dataDisposable = terminal.onData((data) => {
         pendingInputRef.current += data;
         if (data.includes("\r") || data.includes("\u0003")) {
@@ -894,6 +999,7 @@ function NativePtyTerminalSurface({
       terminalRef.current?.dispose();
       terminalRef.current = null;
       fitAddonRef.current = null;
+      searchAddonRef.current = null;
     };
   }, []);
 
@@ -928,18 +1034,157 @@ function NativePtyTerminalSurface({
     });
   };
 
+  const canUseActivePty = runtimeAvailable && Boolean(session) && Boolean(session && isWritableSessionStatus(session.status));
+
+  function notify(message: string) {
+    setTerminalNotice(message);
+    if (noticeTimerRef.current !== null && typeof window !== "undefined") {
+      window.clearTimeout(noticeTimerRef.current);
+    }
+    if (typeof window !== "undefined") {
+      noticeTimerRef.current = window.setTimeout(() => {
+        setTerminalNotice("");
+        noticeTimerRef.current = null;
+      }, 2600);
+    }
+  }
+
+  async function copyTerminalSelection() {
+    const terminal = terminalRef.current;
+    const selectedText = terminal?.getSelection() || "";
+    const fallbackOutput = sessionRef.current?.output || "";
+    const copied = await writeClipboardText(selectedText || fallbackOutput);
+    notify(copied ? labels.terminalCopied : labels.terminalCopyFailed);
+  }
+
+  async function pasteFromClipboard() {
+    const activeSession = sessionRef.current;
+    const clipboard = typeof navigator !== "undefined" ? navigator.clipboard : null;
+    if (!clipboard || typeof clipboard.readText !== "function" || !activeSession || !runtimeAvailableRef.current || !isWritableSessionStatus(activeSession.status)) {
+      notify(labels.terminalPasteBlocked);
+      return;
+    }
+    try {
+      const text = await clipboard.readText();
+      if (!text) {
+        notify(labels.terminalPasteBlocked);
+        return;
+      }
+      await onWriteRef.current(activeSession.sessionId, text);
+      terminalRef.current?.focus();
+      notify(labels.terminalPasted);
+    } catch {
+      notify(labels.terminalPasteBlocked);
+    }
+  }
+
+  function clearTerminalScreen() {
+    const terminal = terminalRef.current;
+    terminal?.clear();
+    lastOutputRef.current = sessionRef.current?.output || "";
+    const activeSession = sessionRef.current;
+    if (activeSession && runtimeAvailableRef.current && isWritableSessionStatus(activeSession.status)) {
+      void onWriteRef.current(activeSession.sessionId, "\f");
+    }
+    terminal?.focus();
+    notify(labels.terminalCleared);
+  }
+
+  function fitTerminalScreen() {
+    fitAndResizeRef.current();
+    terminalRef.current?.focus();
+    notify(labels.terminalFitted);
+  }
+
+  function runTerminalSearch(direction: "next" | "previous") {
+    const query = searchQuery.trim();
+    if (!query || !searchAddonRef.current) {
+      searchInputRef.current?.focus();
+      return;
+    }
+    const found = direction === "previous" ? searchAddonRef.current.findPrevious(query) : searchAddonRef.current.findNext(query);
+    notify(found ? labels.terminalSearchMatch : labels.terminalSearchNoMatch);
+  }
+
+  function writeQuickCommand(input: string) {
+    const activeSession = sessionRef.current;
+    if (!activeSession || !runtimeAvailableRef.current || !isWritableSessionStatus(activeSession.status)) {
+      notify(labels.terminalPasteBlocked);
+      return;
+    }
+    void onWriteRef.current(activeSession.sessionId, input);
+    terminalRef.current?.focus();
+    notify(labels.terminalCommandSent);
+  }
+
   return (
     <div className="native-pty-terminal-shell" aria-label={ariaLabel}>
-      <div ref={hostRef} className="native-pty-terminal-host" />
-      {!session && (
-        <div className="native-pty-placeholder">
-          <span>{placeholder}</span>
-          <button type="button" onClick={startFromSurface} disabled={!runtimeAvailable}>
-            <SquareTerminal size={15} aria-hidden="true" />
-            <strong>{startLabel}</strong>
+      <div className="native-pty-command-center" data-terminal-command-center>
+        <label className="native-pty-search-control">
+          <Search size={14} aria-hidden="true" />
+          <span>{labels.terminalSearch}</span>
+          <input
+            ref={searchInputRef}
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                runTerminalSearch(event.shiftKey ? "previous" : "next");
+              }
+            }}
+            placeholder={labels.terminalSearchPlaceholder}
+            data-terminal-search-input
+          />
+        </label>
+        <div className="native-pty-toolbar" role="toolbar" aria-label={labels.nativePtySurface}>
+          <button type="button" onClick={() => runTerminalSearch("previous")} disabled={!searchQuery.trim()} data-terminal-search-action="previous" title={labels.terminalSearchPrevious}>
+            <ChevronLeft size={15} aria-hidden="true" />
+            <span>{labels.terminalSearchPrevious}</span>
+          </button>
+          <button type="button" onClick={() => runTerminalSearch("next")} disabled={!searchQuery.trim()} data-terminal-search-action="next" title={labels.terminalSearchNext}>
+            <ChevronRight size={15} aria-hidden="true" />
+            <span>{labels.terminalSearchNext}</span>
+          </button>
+          <button type="button" onClick={() => void copyTerminalSelection()} data-terminal-action="copy-selection" title={labels.terminalCopySelection}>
+            <Clipboard size={15} aria-hidden="true" />
+            <span>{labels.terminalCopySelection}</span>
+          </button>
+          <button type="button" onClick={() => void pasteFromClipboard()} disabled={!canUseActivePty} data-terminal-action="paste" title={labels.terminalPaste}>
+            <ClipboardPaste size={15} aria-hidden="true" />
+            <span>{labels.terminalPaste}</span>
+          </button>
+          <button type="button" onClick={clearTerminalScreen} data-terminal-action="clear" title={labels.terminalClear}>
+            <Eraser size={15} aria-hidden="true" />
+            <span>{labels.terminalClear}</span>
+          </button>
+          <button type="button" onClick={fitTerminalScreen} data-terminal-action="fit" title={labels.terminalFit}>
+            <Maximize2 size={15} aria-hidden="true" />
+            <span>{labels.terminalFit}</span>
           </button>
         </div>
-      )}
+      </div>
+      <div className="native-pty-quick-commands" data-terminal-quick-commands aria-label={labels.terminalQuickCommands}>
+        <span>{labels.terminalQuickCommands}</span>
+        {quickCommands.map((command) => (
+          <button key={command.id} type="button" onClick={() => writeQuickCommand(command.input)} disabled={!canUseActivePty} data-terminal-quick-command={command.id}>
+            <strong>{command.label}</strong>
+            <small>{command.detail}</small>
+          </button>
+        ))}
+      </div>
+      {terminalNotice && <p className="native-pty-notice" role="status">{terminalNotice}</p>}
+      <div className="native-pty-terminal-stage">
+        <div ref={hostRef} className="native-pty-terminal-host" />
+        {!session && (
+          <div className="native-pty-placeholder">
+            <span>{placeholder}</span>
+            <button type="button" onClick={startFromSurface} disabled={!runtimeAvailable}>
+              <SquareTerminal size={15} aria-hidden="true" />
+              <strong>{startLabel}</strong>
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

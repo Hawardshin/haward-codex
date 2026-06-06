@@ -1,0 +1,34 @@
+{
+  "date": "2026-06-06",
+  "slug": "terminal-command-center-usability",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "approx_minutes": 5
+    },
+    {
+      "phase": "source_inspection",
+      "approx_minutes": 10
+    },
+    {
+      "phase": "dependency_install_audit",
+      "approx_minutes": 8
+    },
+    {
+      "phase": "implementation",
+      "approx_minutes": 25
+    },
+    {
+      "phase": "validation",
+      "approx_minutes": 15
+    },
+    {
+      "phase": "records_package_commit",
+      "approx_minutes": 15
+    }
+  ],
+  "bottlenecks": [
+    "Terminal work touches UI, dependency, resource cleanup, and package validation gates.",
+    "Internal package build is the longest close-out step."
+  ]
+}

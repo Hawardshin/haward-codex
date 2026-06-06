@@ -310,6 +310,32 @@ test("Runtime text defaults expose selectable choices", () => {
   assert.match(css, /\.task-pipe-controls \.task-prompt-choice-field/);
 });
 
+test("Native PTY terminal exposes search, clipboard, and quick command controls", () => {
+  assert.equal(packageJson.dependencies["@xterm/addon-search"], "0.16.0");
+  assert.match(runtimeTerminalDrawer, /import \{ writeClipboardText \} from "@\/lib\/clipboard\.mjs"/);
+  assert.match(runtimeTerminalDrawer, /import\("@xterm\/addon-search"\)/);
+  assert.match(runtimeTerminalDrawer, /new SearchAddon\(\)/);
+  assert.match(runtimeTerminalDrawer, /searchAddonRef\.current\.findNext/);
+  assert.match(runtimeTerminalDrawer, /searchAddonRef\.current\.findPrevious/);
+  assert.match(runtimeTerminalDrawer, /data-terminal-command-center/);
+  assert.match(runtimeTerminalDrawer, /data-terminal-search-input/);
+  assert.match(runtimeTerminalDrawer, /data-terminal-action="copy-selection"/);
+  assert.match(runtimeTerminalDrawer, /data-terminal-action="paste"/);
+  assert.match(runtimeTerminalDrawer, /data-terminal-action="clear"/);
+  assert.match(runtimeTerminalDrawer, /data-terminal-action="fit"/);
+  assert.match(runtimeTerminalDrawer, /data-terminal-quick-commands/);
+  assert.match(runtimeTerminalDrawer, /nativePtyQuickActions/);
+  assert.match(runtimeTerminalDrawer, /terminal\.attachCustomKeyEventHandler/);
+  assert.match(runtimeTerminalDrawer, /clipboard\.readText/);
+  assert.match(runtimeTerminalDrawer, /terminal\?\.clear\(\)/);
+  assert.match(runtimeTerminalDrawer, /terminalCopySelection|copyTerminalSelection/);
+  assert.match(css, /\.native-pty-command-center \{/);
+  assert.match(css, /\.native-pty-search-control \{/);
+  assert.match(css, /\.native-pty-toolbar \{/);
+  assert.match(css, /\.native-pty-quick-commands \{/);
+  assert.match(css, /\.native-pty-terminal-stage \{/);
+});
+
 test("Desktop Runtime exposes an open-source-informed Agent CLI cockpit", () => {
   assert.match(monitorShell, /data-agent-cli-cockpit="open-source-control-plane"/);
   assert.match(monitorShell, /Agent CLI Cockpit/);

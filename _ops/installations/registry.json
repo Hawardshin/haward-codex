@@ -730,6 +730,36 @@
       "rollback_path": "Remove tauri-plugin-updater from Cargo.toml; remove updater plugin init and public release scripts/package scripts; regenerate Cargo.lock and rerun Rust/frontend/package checks.",
       "installation_record_path": "_history/installations/2026/2026-06-06-tauri-updater-plugin.ko.md",
       "commit": "pending"
+    },
+    {
+      "id": "2026-06-06-workspace-monitor-xterm-search-addon",
+      "date": "2026-06-06",
+      "status": "installed",
+      "name": "workspace-monitor xterm search addon",
+      "scope": "project",
+      "owning_project": "platform-desktop-app/renderer/workspace-monitor",
+      "package_manager": "pnpm",
+      "install_command": "corepack pnpm --filter workspace-monitor add -E @xterm/addon-search@0.16.0",
+      "environment_path": "platform-desktop-app/renderer/workspace-monitor",
+      "dependency_record_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/package.json",
+        "pnpm-lock.yaml"
+      ],
+      "version_or_lock_status": "@xterm/addon-search@0.16.0 recorded in package.json and pnpm-lock.yaml.",
+      "security_review": "Project-local frontend dependency only; no global install, native executable, Tauri permission, credential access, browser cookie access, or new network client.",
+      "license_review": "npm metadata reports MIT license.",
+      "verification": [
+        "corepack pnpm audit --prod=false: No known vulnerabilities found",
+        "corepack pnpm --filter workspace-monitor run check: passed",
+        "corepack pnpm --filter workspace-monitor test: passed, 79 tests",
+        "corepack pnpm --filter workspace-monitor run build: passed",
+        "corepack pnpm --filter platform-desktop-app test: passed, 24 tests",
+        "corepack pnpm --filter platform-desktop-app run check: passed with existing public release warnings",
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/installations/registry.json: passed"
+      ],
+      "rollback_path": "Run corepack pnpm --filter workspace-monitor remove @xterm/addon-search; remove RuntimeTerminalDrawer SearchAddon usage and terminal search UI; rerun workspace-monitor/platform checks.",
+      "installation_record_path": "_history/installations/2026/2026-06-06-workspace-monitor-xterm-search-addon.ko.md",
+      "commit": "pending"
     }
   ]
 }

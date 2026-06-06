@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-06",
+  "slug": "terminal-command-center-usability",
+  "resource_risk_occurred": true,
+  "touched_resources": [
+    "xterm terminal instance",
+    "xterm addons",
+    "ResizeObserver",
+    "notice timeout",
+    "clipboard read/write",
+    "existing native PTY input stream"
+  ],
+  "controls": [
+    "No Rust PTY process lifecycle changes were made in this slice.",
+    "SearchAddon is loaded through the same xterm lifecycle and disposed when terminal.dispose() runs.",
+    "ResizeObserver remains disconnected during component cleanup.",
+    "noticeTimerRef is cleared on unmount.",
+    "clipboard paste only writes to an existing writable session.",
+    "quick commands are bounded read-oriented commands."
+  ],
+  "validation": [
+    "workspace-monitor TypeScript check passed",
+    "workspace-monitor test passed",
+    "platform-desktop-app check passed"
+  ],
+  "remaining_risks": [
+    "split panes and persistent transcripts require a separate Rust lifecycle review before implementation."
+  ]
+}

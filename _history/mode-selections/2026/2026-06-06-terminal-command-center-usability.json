@@ -1,0 +1,32 @@
+{
+  "date": "2026-06-06",
+  "request_id": "2026-06-06-terminal-command-center-usability",
+  "selected_work_mode": "ship_first",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The user asked for fundamental terminal feature and usability improvement. The safe executable slice improves the existing native PTY surface with command-center controls, xterm search, clipboard actions, shortcuts, quick commands, tests, and build/package validation.",
+  "scope_boundary": {
+    "included": [
+      "xterm SearchAddon project-local install",
+      "native PTY command center",
+      "search previous/next",
+      "copy selection/output",
+      "paste from clipboard",
+      "clear screen",
+      "fit/resize action",
+      "quick commands",
+      "static regression tests",
+      "build and internal package validation"
+    ],
+    "deferred_but_not_blocking": [
+      "split panes",
+      "persistent terminal transcript store",
+      "profile editor and shell selector",
+      "full tmux-like multiplexer",
+      "visual browser smoke if in-app Browser tooling is unavailable"
+    ]
+  },
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-06-terminal-command-center-usability.json"
+  ]
+}

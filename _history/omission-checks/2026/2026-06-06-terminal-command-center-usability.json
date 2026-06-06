@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-06",
+  "slug": "terminal-command-center-usability",
+  "request_coverage": [
+    {
+      "request": "Terminal functionality is too insufficient.",
+      "status": "covered_by_slice",
+      "evidence": "Native PTY surface now has search, copy, paste, clear, fit, quick commands, and shortcuts."
+    },
+    {
+      "request": "Fundamental fix and usability improvement.",
+      "status": "covered_by_slice",
+      "evidence": "Command center changes the interaction model from passive output box to terminal work surface."
+    },
+    {
+      "request": "Do not make broad scope a reason to defer everything.",
+      "status": "covered",
+      "evidence": "Large-scope decomposition recorded implemented command-center slice and future backend slices."
+    },
+    {
+      "request": "Build automatically after implementation.",
+      "status": "covered",
+      "evidence": "`corepack pnpm --dir platform-desktop-app run package:internal` passed with .app and .dmg artifacts."
+    }
+  ],
+  "known_limits": [
+    "Split panes, named profiles, transcript persistence, and layout persistence are future backend slices."
+  ]
+}

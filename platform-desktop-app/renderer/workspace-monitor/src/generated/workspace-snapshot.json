@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T03:36:32.038Z",
+  "generatedAt": "2026-06-06T03:47:10.402Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -12,12 +12,12 @@
     "tasks": 71,
     "completedTasks": 71,
     "documents": 650,
-    "requirements": 514,
-    "evaluations": 19,
+    "requirements": 519,
+    "evaluations": 20,
     "webSearches": 13,
     "timingRecords": 14,
     "historyDays": 1,
-    "adminHistoryDocuments": 2632,
+    "adminHistoryDocuments": 2639,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7731,6 +7731,36 @@
       "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-storage-architecture-review.ko.md"
     },
     {
+      "id": "REQ-PDA-130",
+      "requirement": "native PTY terminal은 scrollback 검색과 이전/다음 결과 이동을 제공해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-terminal-command-center-usability.ko.md"
+    },
+    {
+      "id": "REQ-PDA-131",
+      "requirement": "terminal은 선택/출력 복사, clipboard paste, clear screen, fit/resize 같은 기본 조작을 버튼과 단축키로 제공해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-terminal-command-center-usability.ko.md"
+    },
+    {
+      "id": "REQ-PDA-132",
+      "requirement": "사용자는 자주 쓰는 진단 명령을 직접 타이핑하지 않고 quick command로 보낼 수 있어야 한다.",
+      "priority": "should",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-terminal-command-center-usability.ko.md"
+    },
+    {
+      "id": "REQ-PDA-133",
+      "requirement": "새 terminal control은 main tab/page scroll owner를 만들지 않고 native PTY bounded surface 안에서 동작해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-terminal-command-center-usability.ko.md"
+    },
+    {
+      "id": "REQ-PDA-134",
+      "requirement": "새 dependency는 project local install audit, license/security review, rollback path를 남겨야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-terminal-command-center-usability.ko.md"
+    },
+    {
       "id": "REQ-TUI-001",
       "requirement": "플랫폼은 웹 조사, 로컬 탐색, 패치 편집, 렌더러 검증, 데스크톱 패키징, 리소스 정리, Git 마감 루프를 데이터로 표현해야 한다.",
       "priority": "must",
@@ -7763,6 +7793,230 @@
   ],
   "documents": [
     {
+      "id": "history-2026-2026-06-06-md",
+      "path": "_history/2026/2026-06-06.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 06",
+      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
+      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 17474,
+      "updatedAt": "2026-06-06T03:46:49.914Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-terminal-command-center-usability-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-terminal-command-center-usability.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: Terminal Command Center Usability",
+      "excerpt": "평가: Terminal Command Center Usability 날짜: 2026 06 06 결론 요청은 이번 executable slice 기준으로 충족됐다. 기존 native PTY terminal이 단순 xterm 출력면에 가까웠다면, 이제 검색, copy/paste, clear, fit, quick command, shortcut을 갖춘 terminal command center가 됐다. 검증 corepack pnpm audit prod=false : No known vulnerabili",
+      "html": "<p>평가: Terminal Command Center Usability 날짜: 2026 06 06 결론 요청은 이번 executable slice 기준으로 충족됐다. 기존 native PTY terminal이 단순 xterm 출력면에 가까웠다면, 이제 검색, copy/paste, clear, fit, quick command, shortcut을 갖춘 terminal command center가 됐다. 검증 corepack pnpm audit prod=false : No known vulnerabilities found corepack pnpm filter workspace monitor run check : 통과 corepack pnpm f</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1713,
+      "updatedAt": "2026-06-06T03:46:49.914Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-terminal-command-center-usability-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-terminal-command-center-usability.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Terminal Command Center Usability",
+      "excerpt": "Request Trace: Terminal Command Center Usability 날짜: 2026 06 06 요청 터미널 기능이 너무 부족하므로 근본적으로 수정하고 사용성을 개선. 결과 native PTY terminal command center 구현. xterm SearchAddon 설치 및 검색 기능 추가. copy/paste/clear/fit/quick command/shortcut 추가. 설치 감사, resource check, requirements/spec/validation 기",
+      "html": "<p>Request Trace: Terminal Command Center Usability 날짜: 2026 06 06 요청 터미널 기능이 너무 부족하므로 근본적으로 수정하고 사용성을 개선. 결과 native PTY terminal command center 구현. xterm SearchAddon 설치 및 검색 기능 추가. copy/paste/clear/fit/quick command/shortcut 추가. 설치 감사, resource check, requirements/spec/validation 기록 추가. 내부 package build 통과, .app 와 .dmg 산출물 생성. 주요 산출물 platform desktop app/docs/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1054,
+      "updatedAt": "2026-06-06T03:46:49.914Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-terminal-command-center-usability-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-terminal-command-center-usability.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Terminal Command Center Usability",
+      "excerpt": "작업 요약: Terminal Command Center Usability 날짜: 2026 06 06 프로젝트: platform desktop app 완료 native PTY terminal에 xterm SearchAddon 기반 search previous/next를 추가했다. command center를 추가해 copy, paste, clear, fit을 버튼으로 제공했다. Ctrl/Meta+F , Ctrl/Meta+Shift+C , Ctrl/Meta+Shift+V , Ctrl/Meta+L sh",
+      "html": "<p>작업 요약: Terminal Command Center Usability 날짜: 2026 06 06 프로젝트: platform desktop app 완료 native PTY terminal에 xterm SearchAddon 기반 search previous/next를 추가했다. command center를 추가해 copy, paste, clear, fit을 버튼으로 제공했다. Ctrl/Meta+F , Ctrl/Meta+Shift+C , Ctrl/Meta+Shift+V , Ctrl/Meta+L shortcut을 xterm surface에 연결했다. pwd , ls la , git status short quick command 버튼을 추가</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1043,
+      "updatedAt": "2026-06-06T03:46:49.913Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-command-center-usability-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-command-center-usability/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Terminal Command Center Usability",
+      "excerpt": "Validation: Terminal Command Center Usability 현재 통과 corepack pnpm audit prod=false : No known vulnerabilities found corepack pnpm filter workspace monitor run check : 통과 corepack pnpm filter workspace monitor test : 통과, 79개 테스트 corepack pnpm filter workspace monitor run build : 통",
+      "html": "<h1>Validation: Terminal Command Center Usability</h1>\n<h2>현재 통과</h2>\n<ul>\n<li><code>corepack pnpm audit --prod=false</code>: No known vulnerabilities found</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 79개 테스트</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code>: 통과</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 24개 테스트</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과, 기존 public signing/updater/clean-machine gate 경고만 유지</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/installations/registry.json</code>: 통과</li>\n</ul>\n<h2>예정</h2>\n<ul>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>내부 패키징</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code>: 통과</li>\n<li>developer snapshot collect: 650 inline documents, 2639 admin history records</li>\n<li>workspace-monitor check/test: 통과, 79개 테스트</li>\n<li>customer renderer build and bundle audit: 통과, staleSnapshots 없음</li>\n<li>platform-desktop-app service/readiness checks: 통과, 기존 public signing/updater/clean-machine gate 경고만 유지</li>\n<li>Rust tests/build: 통과</li>\n<li>Tauri internal package build: 통과</li>\n<li>codesign verify: 통과</li>\n<li>DMG verify: 통과</li>\n<li>산출물: <code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li>산출물: <code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1475,
+      "updatedAt": "2026-06-06T03:46:49.913Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-command-center-usability-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-command-center-usability/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Terminal Command Center Usability",
+      "excerpt": "Tasks: Terminal Command Center Usability x Web first intake. x Large scope decomposition. x Coding research. x Installation audit draft. x @xterm/addon search@0.16.0 project local install. x Native PTY command center implementation. x CSS terminal stage/control implementation. x ",
+      "html": "<h1>Tasks: Terminal Command Center Usability</h1>\n<ul>\n<li>[x] Web-first intake.</li>\n<li>[x] Large-scope decomposition.</li>\n<li>[x] Coding research.</li>\n<li>[x] Installation audit draft.</li>\n<li>[x] <code>@xterm/addon-search@0.16.0</code> project-local install.</li>\n<li>[x] Native PTY command center implementation.</li>\n<li>[x] CSS terminal stage/control implementation.</li>\n<li>[x] Static regression test.</li>\n<li>[x] Initial check/test/build validation.</li>\n<li>[x] Internal package validation.</li>\n<li>[x] Final evaluation ready.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 449,
+      "updatedAt": "2026-06-06T03:46:49.912Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-terminal-command-center-usability-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-terminal-command-center-usability-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Terminal Command Center Usability Evaluation Input",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"2026 06 06 terminal command center usability\", \"project\": \"platform desktop app\", \"work mode\": \"ship first\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"installation occurred\": true, \"installation record targets\": \" histo",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 terminal command center usability&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;work mode&quot;: &quot;ship first&quot;, &quot;view mode&quot;: &quot;superadmin developer&quot;, &quot;install mode&quot;: &quot;developer&quot;, &quot;installation occurred&quot;: true, &quot;installation record targets&quot;: &quot; history/installations/2026/2026 06 06 workspace monitor xterm search addon.ko.md&quot; , &quot;</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2187,
+      "updatedAt": "2026-06-06T03:44:39.333Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-terminal-command-center-usability-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-terminal-command-center-usability.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Terminal Command Center Usability",
+      "excerpt": "사용자 요청 요약: Terminal Command Center Usability 날짜: 2026 06 06 요지 사용자는 현재 터미널 기능이 너무 부족하므로 근본적으로 수정하고 사용성을 전부 개선하라고 요청했다. 해석 단순 출력 패널이 아니라 실제 desktop terminal처럼 검색, 복사/붙여넣기, 빠른 조작, 단축키, 상태 피드백이 필요하다. 전체 backend multiplexer까지 한 번에 바꾸는 것은 위험하므로, 기존 native PTY runtime 위에 즉시 체감되는 comman",
+      "html": "<p>사용자 요청 요약: Terminal Command Center Usability 날짜: 2026 06 06 요지 사용자는 현재 터미널 기능이 너무 부족하므로 근본적으로 수정하고 사용성을 전부 개선하라고 요청했다. 해석 단순 출력 패널이 아니라 실제 desktop terminal처럼 검색, 복사/붙여넣기, 빠른 조작, 단축키, 상태 피드백이 필요하다. 전체 backend multiplexer까지 한 번에 바꾸는 것은 위험하므로, 기존 native PTY runtime 위에 즉시 체감되는 command center를 먼저 구현한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 574,
+      "updatedAt": "2026-06-06T03:44:39.332Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-terminal-command-center-usability-json",
+      "path": "_history/work-timings/2026/2026-06-06-terminal-command-center-usability.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Terminal Command Center Usability",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"slug\": \"terminal command center usability\", \"phases\": { \"phase\": \"web first intake\", \"approx minutes\": 5 }, { \"phase\": \"source inspection\", \"approx minutes\": 10 }, { \"phase\": \"dependency install audit\", \"approx minutes\": 8 }, { \"phase\": \"implementation\", ",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;slug&quot;: &quot;terminal command center usability&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;approx minutes&quot;: 5 }, { &quot;phase&quot;: &quot;source inspection&quot;, &quot;approx minutes&quot;: 10 }, { &quot;phase&quot;: &quot;dependency install audit&quot;, &quot;approx minutes&quot;: 8 }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;approx minutes&quot;: 25 }, { &quot;phase&quot;: &quot;validation&quot;, &quot;approx minutes&quot;: 15 }, { &quot;phas</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 724,
+      "updatedAt": "2026-06-06T03:44:39.332Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-command-center-usability-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-command-center-usability/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Terminal Command Center Usability",
+      "excerpt": "Traceability: Terminal Command Center Usability | 요구사항 | 구현 | 검증 | | | | | | REQ PDA 130 | SearchAddon , search input, previous/next actions | tool studio.test.mjs , workspace monitor check/test | | REQ PDA 131 | copy/paste/clear/fit toolbar, terminal custom key handler | tool st",
+      "html": "<h1>Traceability: Terminal Command Center Usability</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-130</td><td><code>SearchAddon</code>, search input, previous/next actions</td><td><code>tool-studio.test.mjs</code>, workspace-monitor check/test</td></tr><tr><td>REQ-PDA-131</td><td>copy/paste/clear/fit toolbar, terminal custom key handler</td><td><code>tool-studio.test.mjs</code></td></tr><tr><td>REQ-PDA-132</td><td><code>nativePtyQuickActions</code>, quick command buttons</td><td><code>tool-studio.test.mjs</code></td></tr><tr><td>REQ-PDA-133</td><td><code>.native-pty-command-center</code>, <code>.native-pty-terminal-stage</code> bounded surface</td><td><code>check-scroll-containers.mjs</code>, CSS static test</td></tr><tr><td>REQ-PDA-134</td><td>installation record and registry entry</td><td>config contract, install audit</td></tr></tbody></table>\n<h2>변경 파일</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/package.json</code></li>\n<li><code>pnpm-lock.yaml</code></li>\n<li><code>_history/installations/2026/2026-06-06-workspace-monitor-xterm-search-addon.ko.md</code></li>\n<li><code>_ops/installations/registry.json</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1119,
+      "updatedAt": "2026-06-06T03:44:39.332Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-terminal-command-center-usability-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-terminal-command-center-usability.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Terminal Command Center Usability",
+      "excerpt": "Web Search: Terminal Command Center Usability 날짜: 2026 06 06 Queries terminal emulator UX best practices command palette tabs scrollback search copy paste split panes xterm.js xterm.js addons search fit web links serialize unicode official documentation Windows Terminal features ",
+      "html": "<p>Web Search: Terminal Command Center Usability 날짜: 2026 06 06 Queries terminal emulator UX best practices command palette tabs scrollback search copy paste split panes xterm.js xterm.js addons search fit web links serialize unicode official documentation Windows Terminal features command palette panes tabs profiles search GNOME Terminal keyboard shortcuts pro</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2100,
+      "updatedAt": "2026-06-06T03:44:39.331Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-terminal-command-center-usability-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-terminal-command-center-usability.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Terminal Command Center Usability 요구사항",
+      "excerpt": "Terminal Command Center Usability 요구사항 날짜: 2026 06 06 프로젝트: platform desktop app 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | :| | | REQ PDA 130 | native PTY terminal은 scrollback 검색과 이전/다음 결과 이동을 제공해야 한다. | must | @xterm/addon search , SearchAddon.findNext/findPrevious static test | | RE",
+      "html": "<h1>Terminal Command Center Usability 요구사항</h1>\n<p>날짜: 2026-06-06</p>\n<p>프로젝트: <code>platform-desktop-app</code></p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-130</td><td>native PTY terminal은 scrollback 검색과 이전/다음 결과 이동을 제공해야 한다.</td><td>must</td><td><code>@xterm/addon-search</code>, <code>SearchAddon.findNext/findPrevious</code> static test</td></tr><tr><td>REQ-PDA-131</td><td>terminal은 선택/출력 복사, clipboard paste, clear screen, fit/resize 같은 기본 조작을 버튼과 단축키로 제공해야 한다.</td><td>must</td><td><code>data-terminal-action</code>, <code>attachCustomKeyEventHandler</code> static test</td></tr><tr><td>REQ-PDA-132</td><td>사용자는 자주 쓰는 진단 명령을 직접 타이핑하지 않고 quick command로 보낼 수 있어야 한다.</td><td>should</td><td><code>nativePtyQuickActions</code>, <code>data-terminal-quick-command</code> static test</td></tr><tr><td>REQ-PDA-133</td><td>새 terminal control은 main tab/page scroll owner를 만들지 않고 native PTY bounded surface 안에서 동작해야 한다.</td><td>must</td><td>scroll contract check, CSS stage layout</td></tr><tr><td>REQ-PDA-134</td><td>새 dependency는 project-local install audit, license/security review, rollback path를 남겨야 한다.</td><td>must</td><td>installation record, registry contract</td></tr></tbody></table>\n<h2>결정</h2>\n<ul>\n<li>이번 slice는 terminal interaction layer를 근본적으로 보강한다.</li>\n<li>Rust PTY process lifecycle은 기존 구현을 유지하고, split panes/profile persistence는 별도 backend slice로 둔다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1425,
+      "updatedAt": "2026-06-06T03:44:39.331Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-command-center-usability-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-command-center-usability/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Terminal Command Center Usability",
+      "excerpt": "Plan: Terminal Command Center Usability 1. web first intake로 terminal UX와 xterm addon 방식을 확인한다. 2. 기존 native PTY runtime과 drawer 구조를 읽는다. 3. large scope request를 terminal command center slice와 future backend slices로 나눈다. 4. @xterm/addon search 설치 감사 기록을 남기고 project local dependen",
+      "html": "<h1>Plan: Terminal Command Center Usability</h1>\n<p>1. web-first intake로 terminal UX와 xterm addon 방식을 확인한다.</p>\n<p>2. 기존 native PTY runtime과 drawer 구조를 읽는다.</p>\n<p>3. large-scope request를 terminal command center slice와 future backend slices로 나눈다.</p>\n<p>4. <code>@xterm/addon-search</code> 설치 감사 기록을 남기고 project-local dependency로 설치한다.</p>\n<p>5. native PTY surface에 search/copy/paste/clear/fit/quick command를 구현한다.</p>\n<p>6. CSS를 bounded terminal control/stage로 정리한다.</p>\n<p>7. static tests, audit, check/test/build/package를 실행한다.</p>\n<p>8. requirements/spec/trace/evaluation/install/resource 기록을 닫고 commit/push한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 672,
+      "updatedAt": "2026-06-06T03:44:39.331Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-command-center-usability-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-command-center-usability/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Terminal Command Center Usability",
+      "excerpt": "Spec: Terminal Command Center Usability 목표 하단 native PTY terminal을 단순 출력 화면에서 실제 desktop terminal에 가까운 조작면으로 개선한다. 범위 @xterm/addon search@0.16.0 설치. RuntimeTerminalDrawer.tsx 의 native PTY surface command center. 검색, copy, paste, clear, fit, quick command. CSS bounded terminal con",
+      "html": "<h1>Spec: Terminal Command Center Usability</h1>\n<h2>목표</h2>\n<p>하단 native PTY terminal을 단순 출력 화면에서 실제 desktop terminal에 가까운 조작면으로 개선한다.</p>\n<h2>범위</h2>\n<ul>\n<li><code>@xterm/addon-search@0.16.0</code> 설치.</li>\n<li><code>RuntimeTerminalDrawer.tsx</code>의 native PTY surface command center.</li>\n<li>검색, copy, paste, clear, fit, quick command.</li>\n<li>CSS bounded terminal control/stage.</li>\n<li>static regression tests.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>split panes.</li>\n<li>persistent transcript store.</li>\n<li>profile editor/shell selector.</li>\n<li>Rust PTY process lifecycle 변경.</li>\n<li>공개 release signing/notarization/updater.</li>\n</ul>\n<h2>설계</h2>\n<ul>\n<li>Search는 xterm.js official addon 계열인 <code>SearchAddon</code>을 동적 import하고 <code>Terminal.loadAddon</code>으로 연결한다.</li>\n<li>Clipboard write는 기존 <code>writeClipboardText</code> helper를 재사용한다.</li>\n<li>Clipboard read는 browser clipboard API가 있을 때만 시도하고, 실패하면 status message를 보여준다.</li>\n<li>Clear는 xterm viewport를 지우고 running PTY에는 form-feed를 보내 shell 화면도 정리한다.</li>\n<li>Fit은 기존 <code>FitAddon</code>과 resize command path를 재사용한다.</li>\n<li>Quick commands는 <code>pwd</code>, <code>ls -la</code>, <code>git status --short</code>처럼 읽기 중심 진단 명령으로 제한한다.</li>\n<li>Timer, ResizeObserver, xterm instance는 component unmount에서 정리한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1290,
+      "updatedAt": "2026-06-06T03:44:39.331Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "platform-desktop-app-specs-2026-06-06-main-tab-scroll-scope-policy-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-main-tab-scroll-scope-policy/tasks.ko.md",
       "category": "project-spec",
@@ -7777,22 +8031,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-2026-2026-06-06-md",
-      "path": "_history/2026/2026-06-06.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 06",
-      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 16685,
-      "updatedAt": "2026-06-06T03:35:44.387Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
@@ -10579,22 +10817,6 @@
       "workspaceArea": "_history/work-timings"
     },
     {
-      "id": "history-work-summaries-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "2026 06 06 runtime metric EVAL score 작업 요약",
-      "excerpt": "2026 06 06 runtime metric EVAL score 작업 요약 구현 Rust/Tauri desktop resource snapshot에 semantic process metric 배열을 추가했다. MonitorShell 이 desktop runtime snapshot을 공유 state로 관리하고 EVAL panel에 전달하도록 바꿨다. EVAL 종합 개선 cockpit에 native runtime score, 실제 metric evidence, runtime telemetry str",
-      "html": "<p>2026 06 06 runtime metric EVAL score 작업 요약 구현 Rust/Tauri desktop resource snapshot에 semantic process metric 배열을 추가했다. MonitorShell 이 desktop runtime snapshot을 공유 state로 관리하고 EVAL panel에 전달하도록 바꿨다. EVAL 종합 개선 cockpit에 native runtime score, 실제 metric evidence, runtime telemetry strip을 추가했다. static contract check, workspace monitor test, desktop readiness test를</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1028,
-      "updatedAt": "2026-06-06T00:26:20.961Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-runtime-metric-eval-score-validation-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-runtime-metric-eval-score/validation.ko.md",
       "category": "project-spec",
@@ -10609,38 +10831,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-      "path": "_history/plans/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "2026 06 06 runtime metric EVAL score 계획",
-      "excerpt": "2026 06 06 runtime metric EVAL score 계획 선택 이유 직전 작업의 잔여 위험은 종합 개선 점수가 실제 runtime metric보다 문서/계약 근거에 치우쳐 있다는 점이었다. 사용자는 반복적으로 \"데스크톱 앱이 실제 OS 자원, RAM, CPU를 써야 한다\"고 요구했으므로 다음 slice는 runtime metric을 EVAL score에 연결하는 것이 가장 직접적이다. 실행 순서 1. Web first intake와 memory bootstrap. 2. 이전 clos",
-      "html": "<p>2026 06 06 runtime metric EVAL score 계획 선택 이유 직전 작업의 잔여 위험은 종합 개선 점수가 실제 runtime metric보다 문서/계약 근거에 치우쳐 있다는 점이었다. 사용자는 반복적으로 &quot;데스크톱 앱이 실제 OS 자원, RAM, CPU를 써야 한다&quot;고 요구했으므로 다음 slice는 runtime metric을 EVAL score에 연결하는 것이 가장 직접적이다. 실행 순서 1. Web first intake와 memory bootstrap. 2. 이전 close out과 현재 source contract 확인. 3. Rust/Tauri snapshot에 semantic metric 추가. 4. Mon</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 936,
-      "updatedAt": "2026-06-06T00:22:18.057Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "2026 06 06 사용자 요청 요약",
-      "excerpt": "2026 06 06 사용자 요청 요약 요약 사용자는 미뤄둔 작업을 계속 진행하라고 요청했다. 해석 직전 완료 기록에서 남긴 후속 작업 중 실제 runtime metric 기반 score source 연결을 우선 처리한다. 이 선택은 사용자가 반복적으로 요구한 성능 개선, desktop OS 자원 활용, EVAL 탭, build 자동화와 직접 연결된다. 범위 포함: runtime metric을 EVAL score에 연결, 계약/테스트/build/package 검증. 제외: 새 external EVA",
-      "html": "<p>2026 06 06 사용자 요청 요약 요약 사용자는 미뤄둔 작업을 계속 진행하라고 요청했다. 해석 직전 완료 기록에서 남긴 후속 작업 중 실제 runtime metric 기반 score source 연결을 우선 처리한다. 이 선택은 사용자가 반복적으로 요구한 성능 개선, desktop OS 자원 활용, EVAL 탭, build 자동화와 직접 연결된다. 범위 포함: runtime metric을 EVAL score에 연결, 계약/테스트/build/package 검증. 제외: 새 external EVAL runner 설치, telemetry persistence, 모든 UI 전면 리팩터링.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 598,
-      "updatedAt": "2026-06-06T00:22:18.057Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-runtime-metric-eval-score-plan-ko-md",
@@ -10705,70 +10895,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "2026 06 06 runtime metric EVAL score 웹 검색 기록",
-      "excerpt": "2026 06 06 runtime metric EVAL score 웹 검색 기록 요청 사용자가 미뤄둔 작업 진행을 요청했다. 이전 완료 기록의 잔여 위험 중 \"종합 점수가 실제 runtime metric과 약하게 연결되어 있음\"을 다음 구현 slice로 선택했다. 검색 쿼리 Tauri v2 state manager commands process lifecycle official docs Tauri v2 shell plugin process sidecar official docs Playwright",
-      "html": "<p>2026 06 06 runtime metric EVAL score 웹 검색 기록 요청 사용자가 미뤄둔 작업 진행을 요청했다. 이전 완료 기록의 잔여 위험 중 &quot;종합 점수가 실제 runtime metric과 약하게 연결되어 있음&quot;을 다음 구현 slice로 선택했다. 검색 쿼리 Tauri v2 state manager commands process lifecycle official docs Tauri v2 shell plugin process sidecar official docs Playwright performance long tasks web vitals official docs OpenTelemetry semantic conventi</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2335,
-      "updatedAt": "2026-06-06T00:22:18.054Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-comprehensive-improvement-json",
-      "path": "_history/work-timings/2026/2026-06-06-comprehensive-improvement.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Comprehensive Improvement",
-      "excerpt": "{ \"task id\": \"2026 06 06 comprehensive improvement\", \"title\": \"Platform desktop app comprehensive improvement cockpit\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", ",
-      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 comprehensive improvement&quot;, &quot;title&quot;: &quot;Platform desktop app comprehensive improvement cockpit&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2454,
-      "updatedAt": "2026-06-06T00:06:52.599Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-comprehensive-improvement-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-comprehensive-improvement.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "2026 06 06 종합 개선 평가",
-      "excerpt": "2026 06 06 종합 개선 평가 평가 대상 요청: 성능, UI, 기능, 사용성, 디자인 개선을 종합해 실제로 구현. 구현 slice: platform desktop app workspace monitor EVAL 탭 종합 개선 cockpit. 완료 기준 평가 성능: 직접 runtime latency 개선은 이번 slice의 주 구현은 아니지만, 성능을 desktop performance 차원으로 고정하고 후속 telemetry 연결 지점을 만들었다. UI/디자인/사용성: EVAL 탭에 desk",
-      "html": "<p>2026 06 06 종합 개선 평가 평가 대상 요청: 성능, UI, 기능, 사용성, 디자인 개선을 종합해 실제로 구현. 구현 slice: platform desktop app workspace monitor EVAL 탭 종합 개선 cockpit. 완료 기준 평가 성능: 직접 runtime latency 개선은 이번 slice의 주 구현은 아니지만, 성능을 desktop performance 차원으로 고정하고 후속 telemetry 연결 지점을 만들었다. UI/디자인/사용성: EVAL 탭에 desktop dense 종합 개선 panel, 점수 카드, 차원 카드, 우선순위 카드를 추가했다. 기능: 현재 작업 평가를 넘어 7개 개선 차원을 비</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2223,
-      "updatedAt": "2026-06-06T00:06:23.552Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-comprehensive-improvement-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-comprehensive-improvement.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "2026 06 06 종합 개선 request trace",
-      "excerpt": "2026 06 06 종합 개선 request trace 요청 사용자는 전체적인 성능, UI, 기능, 사용성, 디자인 개선을 종합해 구현하라고 요청했다. 결정 대범위 분해 결과 첫 slice는 platform desktop app 의 EVAL 탭 종합 개선 cockpit로 정했다. 새 의존성 설치는 하지 않았다. 새 탭을 만들지 않고 기존 EVAL resident workbench 안에 종합 개선 모델을 추가했다. 산출물 요구사항: platform desktop app/docs/requirement",
-      "html": "<p>2026 06 06 종합 개선 request trace 요청 사용자는 전체적인 성능, UI, 기능, 사용성, 디자인 개선을 종합해 구현하라고 요청했다. 결정 대범위 분해 결과 첫 slice는 platform desktop app 의 EVAL 탭 종합 개선 cockpit로 정했다. 새 의존성 설치는 하지 않았다. 새 탭을 만들지 않고 기존 EVAL resident workbench 안에 종합 개선 모델을 추가했다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 comprehensive improvement.ko.md spec: platform desktop app/specs/20</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1689,
-      "updatedAt": "2026-06-06T00:06:23.552Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-comprehensive-improvement-validation-ko-md",
@@ -18065,102 +18191,6 @@
       "historyDate": "",
       "historyYear": "",
       "workspaceArea": "agent-platform"
-    },
-    {
-      "id": "agent-platform-docs-agent-orchestration-platform-ko-md",
-      "path": "agent-platform/docs/agent-orchestration-platform.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "에이전트 생성 및 오케스트레이션 플랫폼",
-      "excerpt": "에이전트 생성 및 오케스트레이션 플랫폼 목적 이 플랫폼은 단일 챗봇을 만드는 공간이 아니라, 반복되는 인간의 작업을 작은 에이전트로 만들고 필요할 때 여러 에이전트를 연결해 실행하는 작업 공간이다. 새 에이전트는 임시 프롬프트가 아니라 입력, 출력, 도구, 정책, 상태, 핸드오프, 검증 조건을 가진 재사용 가능한 capability로 관리한다. 기준 설정은 agent platform/configs/orchestration/agent orchestration registry.json 이다. 기본 원",
-      "html": "<h1>에이전트 생성 및 오케스트레이션 플랫폼</h1>\n<h2>목적</h2>\n<p>이 플랫폼은 단일 챗봇을 만드는 공간이 아니라, 반복되는 인간의 작업을 작은 에이전트로 만들고 필요할 때 여러 에이전트를 연결해 실행하는 작업 공간이다. 새 에이전트는 임시 프롬프트가 아니라 입력, 출력, 도구, 정책, 상태, 핸드오프, 검증 조건을 가진 재사용 가능한 capability로 관리한다.</p>\n<p>기준 설정은 <code>agent-platform/configs/orchestration/agent-orchestration-registry.json</code>이다.</p>\n<h2>기본 원칙</h2>\n<ul>\n<li>에이전트는 명확한 입력과 출력 계약을 가져야 한다.</li>\n<li>에이전트가 사용할 도구, 스킬, CLI, 파일 범위는 spec 또는 workflow에 드러나야 한다.</li>\n<li>여러 에이전트를 엮을 때는 supervisor/router, 순차 pipeline, 병렬 fan-out/merge, handoff network 같은 패턴을 먼저 고른다.</li>\n<li>상태, 핸드오프, 사람 결정, 관찰성, 리소스, 평가가 암묵적으로 남으면 안 된다.</li>\n<li>특정 프레임워크에 종속하지 않는다. LangGraph, AutoGen, CrewAI, OpenAI Agents SDK 같은 외부 프레임워크는 구현 후보나 참고 자료로 보고, 플랫폼의 계약은 framework-neutral하게 유지한다.</li>\n</ul>\n<h2>새 에이전트 생성 흐름</h2>\n<p>1. 요청 의도와 프로젝트 경계를 정한다.</p>\n<p>2. <code>research_agent</code>, <code>planning_agent</code>, <code>execution_agent</code>, <code>evaluation_agent</code>, <code>integration_agent</code>, <code>domain_project_agent</code> 중 가장 작은 blueprint를 선택한다.</p>\n<p>3. 필요한 조사와 기존 에이전트/도구 재사용 여부를 확인한다.</p>\n<p>4. 의미 있는 변경이면 요구사항과 spec artifacts를 남긴다.</p>\n<p>5. <code>agent-platform/configs/agents/</code>에 agent spec을 만든다.</p>\n<p>6. 도구, 스킬, CLI adapter, 설치 필요성을 명시한다.</p>\n<p>7. 여러 에이전트가 연결되면 orchestration pattern과 controls를 기록한다.</p>\n<p>8. 검증 명령을 실행하고 history/evaluation을 남긴다.</p>\n<h2>오케스트레이션 패턴</h2>\n<ul>\n<li><code>single_agent</code>: 하나의 agent가 독립적으로 끝낼 수 있을 때.</li>\n<li><code>supervisor_router</code>: 요청 유형이나 위험도에 따라 supervisor가 전문 agent를 고를 때.</li>\n<li><code>sequential_pipeline</code>: 조사, 계획, 구현, 평가처럼 단계 산출물이 다음 단계 입력이 될 때.</li>\n<li><code>parallel_fanout_merge</code>: 독립 lane을 병렬로 처리하고 merge gate에서 합칠 때.</li>\n<li><code>handoff_network</code>: 전문 agent 사이에서 동적으로 제어를 넘겨야 할 때.</li>\n</ul>\n<h2>Manager-As-Tools 계획 도구</h2>\n<p><code>plan-agent-orchestration</code>은 실제 LLM runtime을 실행하지 않고, 등록된 agent spec을 읽어 중앙 manager가 subagent를 도구처럼 호출하는 계획 JSON을 만든다. 기본 manager는 <code>agent-orchestrator-agent</code>이고, 기본 패턴은 <code>supervisor_router</code>다.</p>\n<p>이 도구의 역할은 세 가지다.</p>\n<ul>\n<li>manager가 route, subagent tool 호출, merge, evaluation을 계속 소유하게 만든다.</li>\n<li>subagent마다 <code>run_&lt;agent_name&gt;</code> 형태의 tool name, input/output contract, 허용/차단 도구, policy, docs target을 명시한다.</li>\n<li>실제 LangGraph, CrewAI, OpenAI Agents SDK 같은 runtime adapter를 붙이기 전에 agent roster, handoff/state/control, validation command를 검증 가능한 구조로 만든다.</li>\n</ul>\n<p>예시:</p>\n<pre><code>\ncd agent-platform\nPYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json\n</code></pre>\n<h2>검증 명령</h2>\n<pre><code>\ncd agent-platform\nPYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json\nPYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json\nPYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents\nPYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/agent-orchestrator-agent.json\n</code></pre>\n<h2>운영상 주의</h2>\n<p>여러 agent를 연결하는 작업은 느려지거나 리소스를 오래 붙잡을 수 있다. 장시간 실행, subprocess, 브라우저, queue, cache, stream, 파일 핸들, 서버가 생기면 <code>resource-guard-agent</code>로 cleanup path와 측정 근거를 확인한다. 병렬 처리라면 <code>parallel-work-planner-agent</code>로 touch path, dependency, merge gate를 먼저 분리한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 4299,
-      "updatedAt": "2026-06-03T21:51:05.586Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "agent-platform"
-    },
-    {
-      "id": "agent-platform-configs-agents-agent-orchestrator-agent-json",
-      "path": "agent-platform/configs/agents/agent-orchestrator-agent.json",
-      "category": "agent-config",
-      "language": "unknown",
-      "title": "Agent Orchestrator Agent",
-      "excerpt": "{ \"name\": \"agent orchestrator agent\", \"description\": \"Helps create reusable platform agents and select explicit orchestration patterns, lifecycle gates, controls, and validation commands before agents are connected.\", \"runtime\": \"python\", \"skills\": , \"tools\": \"agent platform:chec",
-      "html": "<pre><code>{\n  &quot;name&quot;: &quot;agent-orchestrator-agent&quot;,\n  &quot;description&quot;: &quot;Helps create reusable platform agents and select explicit orchestration patterns, lifecycle gates, controls, and validation commands before agents are connected.&quot;,\n  &quot;runtime&quot;: &quot;python&quot;,\n  &quot;skills&quot;: [],\n  &quot;tools&quot;: [\n    &quot;agent-platform:check-agent-orchestration&quot;,\n    &quot;agent-platform:plan-agent-orchestration&quot;,\n    &quot;agent-platform:list-agents&quot;,\n    &quot;agent-platform:inspect-agent&quot;\n  ],\n  &quot;metadata&quot;: {\n    &quot;status&quot;: &quot;active&quot;,\n    &quot;trigger&quot;: &quot;before creating a new reusable agent, changing agent specs, connecting multiple agents, selecting supervisor/router/pipeline/fanout/handoff patterns, or adding framework-neutral orchestration contracts&quot;,\n    &quot;input_schema&quot;: &quot;agent-platform/configs/orchestration/agent-orchestration-registry.json&quot;,\n    &quot;output_contract&quot;: &quot;selected blueprint, selected orchestration pattern, required controls, validation commands, and affected docs/history targets&quot;,\n    &quot;work_mode_registry&quot;: &quot;agent-platform/configs/workflows/work-mode-registry.json&quot;,\n    &quot;policy&quot;: &quot;Use the agent orchestration registry as the source of truth. Every new reusable agent should select one blueprint, expose input/output/tool/policy/validation metadata, and run check-agent-orchestration plus list/inspect agent checks. Multi-agent work must select a pattern and declare state, handoff, tool access, human checkpoint, observability, resource, and evaluation controls.&quot;,\n    &quot;docs_targets&quot;: [\n      &quot;agent-platform/docs/agent-orchestration-platform.ko.md&quot;,\n      &quot;agent-platform/docs/agent-orchestration-platform.en.md&quot;\n    ],\n    &quot;validation_commands&quot;: [\n      &quot;PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json&quot;,\n      &quot;PYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json&quot;,\n      &quot;PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/agent-orchestrator-agent.json&quot;\n    ]\n  }\n}</code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2012,
-      "updatedAt": "2026-06-03T21:50:52.394Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "agent-platform"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-intellij-run-workbench-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-intellij-run-workbench/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록",
-      "excerpt": "작업 목록 x JetBrains IntelliJ Tool Windows 공식 문서 확인 x Desktop Runtime 실행 구성 상태 모델 추가 x 검색 에이전트, CLI 세션, task pipe, readiness 점검 실행 구성 추가 x Services 도구 창 상태 요약 추가 x Problems 조치 목록과 상태바 추가 x 다크/라이트 테마 토큰 기반 CSS와 responsive collapse 추가 x readiness script token gate 추가 x product feature",
-      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] JetBrains IntelliJ Tool Windows 공식 문서 확인</li>\n<li>[x] Desktop Runtime 실행 구성 상태 모델 추가</li>\n<li>[x] 검색 에이전트, CLI 세션, task pipe, readiness 점검 실행 구성 추가</li>\n<li>[x] Services 도구 창 상태 요약 추가</li>\n<li>[x] Problems 조치 목록과 상태바 추가</li>\n<li>[x] 다크/라이트 테마 토큰 기반 CSS와 responsive collapse 추가</li>\n<li>[x] readiness script token gate 추가</li>\n<li>[x] product feature, user flow, reference advantage registries 업데이트</li>\n<li>[x] 요구사항과 스펙/히스토리 파일 작성</li>\n<li>[x] 전체 검증 명령과 브라우저 스모크 완료</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 630,
-      "updatedAt": "2026-06-03T18:15:11.631Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-intellij-run-workbench-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-intellij-run-workbench/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성",
-      "excerpt": "추적성 | 항목 | 연결 | | | | | 사용자 요청 | IntelliJ 디자인을 참고해 더 많은 기능을 UI에 녹이고 데스크톱 앱답게 만들 것 | | 요구사항 | REQ PDA 089 REQ PDA 094 | | 출처 | JetBrains IntelliJ IDEA Tool Windows, IntelliJ Platform UI Overview | | 구현 | platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx |",
-      "html": "<h1>추적성</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>사용자 요청</td><td>IntelliJ 디자인을 참고해 더 많은 기능을 UI에 녹이고 데스크톱 앱답게 만들 것</td></tr><tr><td>요구사항</td><td><code>REQ-PDA-089</code> - <code>REQ-PDA-094</code></td></tr><tr><td>출처</td><td>JetBrains IntelliJ IDEA Tool Windows, IntelliJ Platform UI Overview</td></tr><tr><td>구현</td><td><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></td></tr><tr><td>스타일</td><td><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></td></tr><tr><td>검증 계약</td><td><code>platform-desktop-app/scripts/check-readiness.mjs</code></td></tr><tr><td>제품 레지스트리</td><td><code>platform-desktop-app/configs/product-feature-registry.json</code></td></tr><tr><td>사용자 흐름</td><td><code>platform-desktop-app/configs/user-flow-registry.json</code></td></tr><tr><td>레퍼런스 전이</td><td><code>platform-desktop-app/configs/reference-platform-advantage-registry.json</code></td></tr><tr><td>최종 평가</td><td><code>_history/evaluations/2026/2026-06-04-intellij-run-workbench.ko.md</code></td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 903,
-      "updatedAt": "2026-06-03T18:12:35.676Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-intellij-run-workbench-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-intellij-run-workbench/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증 계획",
-      "excerpt": "검증 계획 명령 corepack pnpm dir platform desktop app/renderer/workspace monitor run check corepack pnpm filter workspace monitor run build:customer corepack pnpm filter platform desktop app run check corepack pnpm filter platform desktop app test corepack pnpm filter workspace monitor",
-      "html": "<h1>검증 계획</h1>\n<h2>명령</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-feature-registry.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/user-flow-registry.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/reference-platform-advantage-registry.json</code></li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>브라우저 스모크</h2>\n<ul>\n<li>customer build를 로컬 서버로 열고 <code>작업 실행</code> 또는 <code>Run</code> 화면에 진입한다.</li>\n<li><code>Run Configuration</code>, <code>Services</code>, <code>Problems</code>, <code>작업 실행 구성</code>, <code>실행</code>, <code>터미널</code>이 렌더되는지 확인한다.</li>\n<li>패널이 빈 화면이 아니며 버튼 텍스트가 넘치지 않는지 desktop/mobile viewport로 확인한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1193,
-      "updatedAt": "2026-06-03T18:12:35.676Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-intellij-run-workbench-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-intellij-run-workbench/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "구현 계획",
-      "excerpt": "구현 계획 1. JetBrains 공식 문서와 기존 reference registry를 확인한다. 2. Desktop Runtime 상단에 IDE식 Run Configuration, Services, Problems, status bar 패널을 구현한다. 3. 테마 토큰과 responsive CSS를 추가한다. 4. readiness script와 product/user flow/reference registries를 업데이트한다. 5. 요구사항, 스펙, 히스토리, 평가 기록을 남긴다. 6. 타입",
-      "html": "<h1>구현 계획</h1>\n<p>1. JetBrains 공식 문서와 기존 reference registry를 확인한다.</p>\n<p>2. Desktop Runtime 상단에 IDE식 Run Configuration, Services, Problems, status bar 패널을 구현한다.</p>\n<p>3. 테마 토큰과 responsive CSS를 추가한다.</p>\n<p>4. readiness script와 product/user-flow/reference registries를 업데이트한다.</p>\n<p>5. 요구사항, 스펙, 히스토리, 평가 기록을 남긴다.</p>\n<p>6. 타입 검사, desktop check/test, customer build, browser smoke로 검증한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 489,
-      "updatedAt": "2026-06-03T18:12:35.675Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18171,7 +18201,7 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 19
+          "count": 20
         },
         {
           "category": "request-trace",
@@ -18195,7 +18225,7 @@
         },
         {
           "category": "plan",
-          "count": 9
+          "count": 8
         },
         {
           "category": "daily-history",
@@ -18210,7 +18240,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-          "updatedAt": "2026-06-06T03:35:44.387Z",
+          "updatedAt": "2026-06-06T03:46:49.914Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18281,16 +18311,6 @@
           "title": "작업 평가: CLI 설정 안내 개선",
           "excerpt": "작업 평가: CLI 설정 안내 개선 날짜: 2026 06 06 work mode: standard resource risk occurred: true installation occurred: false cli pipeline occurred: false 결과 판정 passed 사용자의 초기 지시에 대한 평가 “CLI 어캐 쓰는지도 전혀 모르겠어”: 설정 모달과 Cockpit에 설치/로그인/검증/첫 실행 순서를 추가해 앱 안에서 CLI 사용 흐름을 볼 수 있게 했다. “세팅이 직관적이지 않아”: 어",
           "updatedAt": "2026-06-06T03:12:20.406Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-comprehensive-improvement-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-comprehensive-improvement.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "2026 06 06 종합 개선 평가",
-          "excerpt": "2026 06 06 종합 개선 평가 평가 대상 요청: 성능, UI, 기능, 사용성, 디자인 개선을 종합해 실제로 구현. 구현 slice: platform desktop app workspace monitor EVAL 탭 종합 개선 cockpit. 완료 기준 평가 성능: 직접 runtime latency 개선은 이번 slice의 주 구현은 아니지만, 성능을 desktop performance 차원으로 고정하고 후속 telemetry 연결 지점을 만들었다. UI/디자인/사용성: EVAL 탭에 desk",
-          "updatedAt": "2026-06-06T00:06:23.552Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18394,6 +18414,26 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-evaluations-2026-2026-06-06-terminal-command-center-usability-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-terminal-command-center-usability-evaluation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Terminal Command Center Usability Evaluation Input",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"2026 06 06 terminal command center usability\", \"project\": \"platform desktop app\", \"work mode\": \"ship first\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"installation occurred\": true, \"installation record targets\": \" histo",
+          "updatedAt": "2026-06-06T03:44:39.333Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-terminal-command-center-usability-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-terminal-command-center-usability.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "평가: Terminal Command Center Usability",
+          "excerpt": "평가: Terminal Command Center Usability 날짜: 2026 06 06 결론 요청은 이번 executable slice 기준으로 충족됐다. 기존 native PTY terminal이 단순 xterm 출력면에 가까웠다면, 이제 검색, copy/paste, clear, fit, quick command, shortcut을 갖춘 terminal command center가 됐다. 검증 corepack pnpm audit prod=false : No known vulnerabili",
+          "updatedAt": "2026-06-06T03:46:49.914Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-evaluations-2026-2026-06-06-tool-usage-integration-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-tool-usage-integration.ko.md",
           "category": "evaluation",
@@ -18464,16 +18504,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-          "path": "_history/plans/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "2026 06 06 runtime metric EVAL score 계획",
-          "excerpt": "2026 06 06 runtime metric EVAL score 계획 선택 이유 직전 작업의 잔여 위험은 종합 개선 점수가 실제 runtime metric보다 문서/계약 근거에 치우쳐 있다는 점이었다. 사용자는 반복적으로 \"데스크톱 앱이 실제 OS 자원, RAM, CPU를 써야 한다\"고 요구했으므로 다음 slice는 runtime metric을 EVAL score에 연결하는 것이 가장 직접적이다. 실행 순서 1. Web first intake와 memory bootstrap. 2. 이전 clos",
-          "updatedAt": "2026-06-06T00:22:18.057Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-storage-architecture-review-ko-md",
           "path": "_history/plans/2026/2026-06-06-storage-architecture-review.ko.md",
           "category": "plan",
@@ -18521,16 +18551,6 @@
           "title": "요청 결과 추적: CLI 설정 안내",
           "excerpt": "요청 결과 추적: CLI 설정 안내 날짜: 2026 06 06 요청: CLI 사용법과 설정이 직관적이지 않다는 지적 소유 프로젝트: platform desktop app 입력 해석 사용자가 CLI 문법을 직접 학습하지 않아도 앱 안에서 설치, 로그인/키, 검증, 실행 순서를 선택형으로 따라갈 수 있어야 한다. 결과 설정 모달에 cli adapter setup guide 를 추가했다. Agent CLI Cockpit에 agent cli setup ladder 와 agent cli command st",
           "updatedAt": "2026-06-06T03:12:20.406Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-06-comprehensive-improvement-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-comprehensive-improvement.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "2026 06 06 종합 개선 request trace",
-          "excerpt": "2026 06 06 종합 개선 request trace 요청 사용자는 전체적인 성능, UI, 기능, 사용성, 디자인 개선을 종합해 구현하라고 요청했다. 결정 대범위 분해 결과 첫 slice는 platform desktop app 의 EVAL 탭 종합 개선 cockpit로 정했다. 새 의존성 설치는 하지 않았다. 새 탭을 만들지 않고 기존 EVAL resident workbench 안에 종합 개선 모델을 추가했다. 산출물 요구사항: platform desktop app/docs/requirement",
-          "updatedAt": "2026-06-06T00:06:23.552Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18621,6 +18641,16 @@
           "title": "Request Trace: Storage Architecture Review",
           "excerpt": "Request Trace: Storage Architecture Review 작성일: 2026 06 06 요청 파일시스템 중심 저장 구조가 성능 저하 원인인지, 내부 DB 사용을 검토해 달라는 요청. 해석 현재 앱의 느림을 저장소 구조 관점에서 재평가하고, desktop app다운 app data/embedded DB 활용 방향을 결정해야 한다. 실행 1. 웹 검색으로 공식 근거 확인 2. 현재 collector와 Rust runtime persistence 조사 3. 하이브리드 저장소 전략 선택",
           "updatedAt": "2026-06-06T02:36:02.919Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-terminal-command-center-usability-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-terminal-command-center-usability.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Request Trace: Terminal Command Center Usability",
+          "excerpt": "Request Trace: Terminal Command Center Usability 날짜: 2026 06 06 요청 터미널 기능이 너무 부족하므로 근본적으로 수정하고 사용성을 개선. 결과 native PTY terminal command center 구현. xterm SearchAddon 설치 및 검색 기능 추가. copy/paste/clear/fit/quick command/shortcut 추가. 설치 감사, resource check, requirements/spec/validation 기",
+          "updatedAt": "2026-06-06T03:46:49.914Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18734,16 +18764,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "2026 06 06 사용자 요청 요약",
-          "excerpt": "2026 06 06 사용자 요청 요약 요약 사용자는 미뤄둔 작업을 계속 진행하라고 요청했다. 해석 직전 완료 기록에서 남긴 후속 작업 중 실제 runtime metric 기반 score source 연결을 우선 처리한다. 이 선택은 사용자가 반복적으로 요구한 성능 개선, desktop OS 자원 활용, EVAL 탭, build 자동화와 직접 연결된다. 범위 포함: runtime metric을 EVAL score에 연결, 계약/테스트/build/package 검증. 제외: 새 external EVA",
-          "updatedAt": "2026-06-06T00:22:18.057Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-storage-architecture-review-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-storage-architecture-review.ko.md",
           "category": "user-request",
@@ -18751,6 +18771,16 @@
           "title": "User Request Summary",
           "excerpt": "User Request Summary 작성일: 2026 06 06 요약 사용자는 앱 성능 문제가 모든 것을 파일시스템으로 처리해서 생기는지 물었고, 회사/desktop app들이 내부 DB를 쓰는 경우가 많지 않은지 검토해 달라고 요청했다. 해석한 요구 현재 platform desktop app의 파일 기반 저장 구조를 냉정하게 평가한다. embedded DB 사용 여부를 외부 근거와 현재 소스로 검토한다. 성능 개선을 위해 파일과 DB의 경계를 정한다. 구현 가능한 migration 계획을 남긴",
           "updatedAt": "2026-06-06T02:33:43.753Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-terminal-command-center-usability-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-terminal-command-center-usability.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: Terminal Command Center Usability",
+          "excerpt": "사용자 요청 요약: Terminal Command Center Usability 날짜: 2026 06 06 요지 사용자는 현재 터미널 기능이 너무 부족하므로 근본적으로 수정하고 사용성을 전부 개선하라고 요청했다. 해석 단순 출력 패널이 아니라 실제 desktop terminal처럼 검색, 복사/붙여넣기, 빠른 조작, 단축키, 상태 피드백이 필요하다. 전체 backend multiplexer까지 한 번에 바꾸는 것은 위험하므로, 기존 native PTY runtime 위에 즉시 체감되는 comman",
+          "updatedAt": "2026-06-06T03:44:39.332Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18864,16 +18894,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "2026 06 06 runtime metric EVAL score 웹 검색 기록",
-          "excerpt": "2026 06 06 runtime metric EVAL score 웹 검색 기록 요청 사용자가 미뤄둔 작업 진행을 요청했다. 이전 완료 기록의 잔여 위험 중 \"종합 점수가 실제 runtime metric과 약하게 연결되어 있음\"을 다음 구현 slice로 선택했다. 검색 쿼리 Tauri v2 state manager commands process lifecycle official docs Tauri v2 shell plugin process sidecar official docs Playwright",
-          "updatedAt": "2026-06-06T00:22:18.054Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-storage-architecture-review-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-storage-architecture-review.ko.md",
           "category": "web-search",
@@ -18881,6 +18901,16 @@
           "title": "Web Search Record: Storage Architecture Review",
           "excerpt": "Web Search Record: Storage Architecture Review 작성일: 2026 06 06 검색 목적 파일시스템 중심 저장 구조가 desktop app 성능 병목이 될 수 있는지, embedded DB/SQLite 같은 내부 DB 사용이 일반적인 선택인지 공식 근거로 확인했다. 검색어 SQLite official appropriate uses embedded database application file format Tauri v2 SQL plugin SQLite offici",
           "updatedAt": "2026-06-06T02:33:43.752Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-terminal-command-center-usability-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-terminal-command-center-usability.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: Terminal Command Center Usability",
+          "excerpt": "Web Search: Terminal Command Center Usability 날짜: 2026 06 06 Queries terminal emulator UX best practices command palette tabs scrollback search copy paste split panes xterm.js xterm.js addons search fit web links serialize unicode official documentation Windows Terminal features ",
+          "updatedAt": "2026-06-06T03:44:39.331Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18994,16 +19024,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "2026 06 06 runtime metric EVAL score 작업 요약",
-          "excerpt": "2026 06 06 runtime metric EVAL score 작업 요약 구현 Rust/Tauri desktop resource snapshot에 semantic process metric 배열을 추가했다. MonitorShell 이 desktop runtime snapshot을 공유 state로 관리하고 EVAL panel에 전달하도록 바꿨다. EVAL 종합 개선 cockpit에 native runtime score, 실제 metric evidence, runtime telemetry str",
-          "updatedAt": "2026-06-06T00:26:20.961Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-storage-architecture-review-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-storage-architecture-review.ko.md",
           "category": "work-summary",
@@ -19011,6 +19031,16 @@
           "title": "Work Summary: Storage Architecture Review",
           "excerpt": "Work Summary: Storage Architecture Review 작성일: 2026 06 06 요약 Desktop app 저장소 구조를 검토해 전체 파일시스템 유지와 전체 DB 전환 모두를 배제하고, durable repository files와 embedded SQLite operational DB를 결합하는 하이브리드 전략을 기록했다. 핵심 결론 정책/요구사항/스펙/철학/히스토리는 파일과 Git을 유지한다. task run, decision inbox, workspace/history",
           "updatedAt": "2026-06-06T02:36:02.919Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-terminal-command-center-usability-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-terminal-command-center-usability.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: Terminal Command Center Usability",
+          "excerpt": "작업 요약: Terminal Command Center Usability 날짜: 2026 06 06 프로젝트: platform desktop app 완료 native PTY terminal에 xterm SearchAddon 기반 search previous/next를 추가했다. command center를 추가해 copy, paste, clear, fit을 버튼으로 제공했다. Ctrl/Meta+F , Ctrl/Meta+Shift+C , Ctrl/Meta+Shift+V , Ctrl/Meta+L sh",
+          "updatedAt": "2026-06-06T03:46:49.913Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19051,16 +19081,6 @@
           "title": "2026 06 06 Cli Setup Guidance",
           "excerpt": "{ \"schema version\": \"work timing.v1\", \"date\": \"2026 06 06\", \"work id\": \"cli setup guidance\", \"measurement quality\": \"partial manual\", \"phases\": { \"phase\": \"web first and memory bootstrap\", \"duration seconds\": 240, \"notes\": \"Web source checks plus repository memory anchors and mod",
           "updatedAt": "2026-06-06T03:12:20.406Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-06-comprehensive-improvement-json",
-          "path": "_history/work-timings/2026/2026-06-06-comprehensive-improvement.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Comprehensive Improvement",
-          "excerpt": "{ \"task id\": \"2026 06 06 comprehensive improvement\", \"title\": \"Platform desktop app comprehensive improvement cockpit\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", ",
-          "updatedAt": "2026-06-06T00:06:52.599Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19154,6 +19174,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-timings-2026-2026-06-06-terminal-command-center-usability-json",
+          "path": "_history/work-timings/2026/2026-06-06-terminal-command-center-usability.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Terminal Command Center Usability",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"slug\": \"terminal command center usability\", \"phases\": { \"phase\": \"web first intake\", \"approx minutes\": 5 }, { \"phase\": \"source inspection\", \"approx minutes\": 10 }, { \"phase\": \"dependency install audit\", \"approx minutes\": 8 }, { \"phase\": \"implementation\", ",
+          "updatedAt": "2026-06-06T03:44:39.332Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-tool-usage-integration-ko-md",
           "path": "_history/work-timings/2026/2026-06-06-tool-usage-integration.ko.md",
           "category": "work-timing",
@@ -19172,16 +19202,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2632,
+      "documents": 2639,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1017
+          "count": 1019
         },
         {
           "category": "web-search",
-          "count": 417
+          "count": 418
         },
         {
           "category": "plan",
@@ -19189,19 +19219,19 @@
         },
         {
           "category": "request-trace",
-          "count": 345
+          "count": 346
         },
         {
           "category": "work-timing",
-          "count": 266
+          "count": 267
         },
         {
           "category": "user-request",
-          "count": 130
+          "count": 131
         },
         {
           "category": "work-summary",
-          "count": 97
+          "count": 98
         },
         {
           "category": "daily-history",
@@ -19212,7 +19242,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6560487,
+      "totalSourceBytes": 6570671,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19237,11 +19267,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 32,
+      "evidenceEvents": 33,
       "decisionEvents": 0,
       "openSignals": 19,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T03:35:44.387Z",
+      "latestEventAt": "2026-06-06T03:46:49.914Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19253,7 +19283,7 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 19
+        "count": 20
       },
       {
         "id": "monitoring",
@@ -19283,7 +19313,7 @@
       {
         "id": "planning",
         "label": "planning",
-        "count": 9
+        "count": 8
       },
       {
         "id": "history",
@@ -19300,7 +19330,7 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 19
+        "count": 20
       },
       {
         "id": "timing",
@@ -19330,7 +19360,7 @@
       {
         "id": "plan",
         "label": "plan",
-        "count": 9
+        "count": 8
       },
       {
         "id": "history",
@@ -19352,6 +19382,36 @@
     ],
     "events": [
       {
+        "id": "history-history-evaluations-2026-2026-06-06-terminal-command-center-usability-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "평가: Terminal Command Center Usability",
+        "detail": "평가: Terminal Command Center Usability 날짜: 2026 06 06 결론 요청은 이번 executable slice 기준으로 충족됐다. 기존 native PTY terminal이 단순 xterm 출력면에 가까웠다면, 이제 검색, copy/paste, clear, fit, quick command, shortcut을 갖춘 terminal command center가 됐다. 검증 corepack pnpm audit prod=false : No known vulnerabili",
+        "path": "_history/evaluations/2026/2026-06-06-terminal-command-center-usability.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:46:49.914Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-terminal-command-center-usability-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Terminal Command Center Usability",
+        "detail": "Request Trace: Terminal Command Center Usability 날짜: 2026 06 06 요청 터미널 기능이 너무 부족하므로 근본적으로 수정하고 사용성을 개선. 결과 native PTY terminal command center 구현. xterm SearchAddon 설치 및 검색 기능 추가. copy/paste/clear/fit/quick command/shortcut 추가. 설치 감사, resource check, requirements/spec/validation 기",
+        "path": "_history/request-traces/2026/2026-06-06-terminal-command-center-usability.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:46:49.914Z"
+      },
+      {
         "id": "history-history-2026-2026-06-06-md",
         "sourceType": "history",
         "signalType": "history",
@@ -19364,7 +19424,82 @@
         "category": "daily-history",
         "language": "unknown",
         "date": "2026-06-06",
-        "timestamp": "2026-06-06T03:35:44.387Z"
+        "timestamp": "2026-06-06T03:46:49.914Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-terminal-command-center-usability-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "작업 요약: Terminal Command Center Usability",
+        "detail": "작업 요약: Terminal Command Center Usability 날짜: 2026 06 06 프로젝트: platform desktop app 완료 native PTY terminal에 xterm SearchAddon 기반 search previous/next를 추가했다. command center를 추가해 copy, paste, clear, fit을 버튼으로 제공했다. Ctrl/Meta+F , Ctrl/Meta+Shift+C , Ctrl/Meta+Shift+V , Ctrl/Meta+L sh",
+        "path": "_history/work-summaries/2026/2026-06-06-terminal-command-center-usability.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:46:49.913Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-terminal-command-center-usability-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 06 Terminal Command Center Usability Evaluation Input",
+        "detail": "{ \"date\": \"2026 06 06\", \"work id\": \"2026 06 06 terminal command center usability\", \"project\": \"platform desktop app\", \"work mode\": \"ship first\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"installation occurred\": true, \"installation record targets\": \" histo",
+        "path": "_history/evaluations/2026/2026-06-06-terminal-command-center-usability-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:44:39.333Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-terminal-command-center-usability-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Terminal Command Center Usability",
+        "detail": "{ \"date\": \"2026 06 06\", \"slug\": \"terminal command center usability\", \"phases\": { \"phase\": \"web first intake\", \"approx minutes\": 5 }, { \"phase\": \"source inspection\", \"approx minutes\": 10 }, { \"phase\": \"dependency install audit\", \"approx minutes\": 8 }, { \"phase\": \"implementation\", ",
+        "path": "_history/work-timings/2026/2026-06-06-terminal-command-center-usability.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:44:39.332Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-terminal-command-center-usability-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: Terminal Command Center Usability",
+        "detail": "사용자 요청 요약: Terminal Command Center Usability 날짜: 2026 06 06 요지 사용자는 현재 터미널 기능이 너무 부족하므로 근본적으로 수정하고 사용성을 전부 개선하라고 요청했다. 해석 단순 출력 패널이 아니라 실제 desktop terminal처럼 검색, 복사/붙여넣기, 빠른 조작, 단축키, 상태 피드백이 필요하다. 전체 backend multiplexer까지 한 번에 바꾸는 것은 위험하므로, 기존 native PTY runtime 위에 즉시 체감되는 comman",
+        "path": "_history/user-requests/2026/2026-06-06-terminal-command-center-usability.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:44:39.332Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-terminal-command-center-usability-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Terminal Command Center Usability",
+        "detail": "Web Search: Terminal Command Center Usability 날짜: 2026 06 06 Queries terminal emulator UX best practices command palette tabs scrollback search copy paste split panes xterm.js xterm.js addons search fit web links serialize unicode official documentation Windows Terminal features ",
+        "path": "_history/web-searches/2026/2026-06-06-terminal-command-center-usability.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:44:39.331Z"
       },
       {
         "id": "history-history-evaluations-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
@@ -20685,111 +20820,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T00:26:20.963Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "2026 06 06 runtime metric EVAL score 작업 요약",
-        "detail": "2026 06 06 runtime metric EVAL score 작업 요약 구현 Rust/Tauri desktop resource snapshot에 semantic process metric 배열을 추가했다. MonitorShell 이 desktop runtime snapshot을 공유 state로 관리하고 EVAL panel에 전달하도록 바꿨다. EVAL 종합 개선 cockpit에 native runtime score, 실제 metric evidence, runtime telemetry str",
-        "path": "_history/work-summaries/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:26:20.961Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "2026 06 06 runtime metric EVAL score 계획",
-        "detail": "2026 06 06 runtime metric EVAL score 계획 선택 이유 직전 작업의 잔여 위험은 종합 개선 점수가 실제 runtime metric보다 문서/계약 근거에 치우쳐 있다는 점이었다. 사용자는 반복적으로 \"데스크톱 앱이 실제 OS 자원, RAM, CPU를 써야 한다\"고 요구했으므로 다음 slice는 runtime metric을 EVAL score에 연결하는 것이 가장 직접적이다. 실행 순서 1. Web first intake와 memory bootstrap. 2. 이전 clos",
-        "path": "_history/plans/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:22:18.057Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "ready",
-        "title": "2026 06 06 사용자 요청 요약",
-        "detail": "2026 06 06 사용자 요청 요약 요약 사용자는 미뤄둔 작업을 계속 진행하라고 요청했다. 해석 직전 완료 기록에서 남긴 후속 작업 중 실제 runtime metric 기반 score source 연결을 우선 처리한다. 이 선택은 사용자가 반복적으로 요구한 성능 개선, desktop OS 자원 활용, EVAL 탭, build 자동화와 직접 연결된다. 범위 포함: runtime metric을 EVAL score에 연결, 계약/테스트/build/package 검증. 제외: 새 external EVA",
-        "path": "_history/user-requests/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:22:18.057Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-runtime-metric-eval-score-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "ready",
-        "title": "2026 06 06 runtime metric EVAL score 웹 검색 기록",
-        "detail": "2026 06 06 runtime metric EVAL score 웹 검색 기록 요청 사용자가 미뤄둔 작업 진행을 요청했다. 이전 완료 기록의 잔여 위험 중 \"종합 점수가 실제 runtime metric과 약하게 연결되어 있음\"을 다음 구현 slice로 선택했다. 검색 쿼리 Tauri v2 state manager commands process lifecycle official docs Tauri v2 shell plugin process sidecar official docs Playwright",
-        "path": "_history/web-searches/2026/2026-06-06-runtime-metric-eval-score.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:22:18.054Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-comprehensive-improvement-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 06 Comprehensive Improvement",
-        "detail": "{ \"task id\": \"2026 06 06 comprehensive improvement\", \"title\": \"Platform desktop app comprehensive improvement cockpit\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", ",
-        "path": "_history/work-timings/2026/2026-06-06-comprehensive-improvement.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:06:52.599Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-comprehensive-improvement-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 종합 개선 평가",
-        "detail": "2026 06 06 종합 개선 평가 평가 대상 요청: 성능, UI, 기능, 사용성, 디자인 개선을 종합해 실제로 구현. 구현 slice: platform desktop app workspace monitor EVAL 탭 종합 개선 cockpit. 완료 기준 평가 성능: 직접 runtime latency 개선은 이번 slice의 주 구현은 아니지만, 성능을 desktop performance 차원으로 고정하고 후속 telemetry 연결 지점을 만들었다. UI/디자인/사용성: EVAL 탭에 desk",
-        "path": "_history/evaluations/2026/2026-06-06-comprehensive-improvement.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:06:23.552Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-comprehensive-improvement-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "2026 06 06 종합 개선 request trace",
-        "detail": "2026 06 06 종합 개선 request trace 요청 사용자는 전체적인 성능, UI, 기능, 사용성, 디자인 개선을 종합해 구현하라고 요청했다. 결정 대범위 분해 결과 첫 slice는 platform desktop app 의 EVAL 탭 종합 개선 cockpit로 정했다. 새 의존성 설치는 하지 않았다. 새 탭을 만들지 않고 기존 EVAL resident workbench 안에 종합 개선 모델을 추가했다. 산출물 요구사항: platform desktop app/docs/requirement",
-        "path": "_history/request-traces/2026/2026-06-06-comprehensive-improvement.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:06:23.552Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23823,12 +23853,12 @@
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 9
+        "documentsCount": 8
       },
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 19
+        "documentsCount": 20
       },
       {
         "category": "daily-history",
@@ -23897,7 +23927,7 @@
           "domain-specific experiments by default"
         ],
         "uiEntry": "Agents, Requirements, Documents",
-        "documentCount": 4,
+        "documentCount": 2,
         "sourceFileCount": 65
       },
       {
@@ -23922,7 +23952,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 70,
+        "documentCount": 71,
         "sourceFileCount": 5
       },
       {
@@ -27762,13 +27792,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3778,
+      "sourceDocuments": 3791,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T03:36:17.337Z"
+      "latestInsightAt": "2026-06-06T03:46:49.914Z"
     },
     "inferenceStages": [
       {
@@ -27836,11 +27866,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 453,
+        "signalCount": 454,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 146
+            "count": 147
           },
           {
             "category": "project-spec",
@@ -27895,7 +27925,7 @@
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장"
         ],
-        "latestEvidenceAt": "2026-06-06T03:35:44.387Z"
+        "latestEvidenceAt": "2026-06-06T03:46:49.914Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27909,11 +27939,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1732,
+        "signalCount": 1735,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 491
+            "count": 492
           },
           {
             "category": "evaluation",
@@ -27921,7 +27951,7 @@
           },
           {
             "category": "web-search",
-            "count": 418
+            "count": 419
           },
           {
             "category": "plan",
@@ -27929,7 +27959,7 @@
           },
           {
             "category": "request-trace",
-            "count": 111
+            "count": 112
           },
           {
             "category": "work-timing",
@@ -27960,7 +27990,7 @@
           "2026 05 31 작업 모드 라우팅 계획 기록",
           "계획 히스토리: 코딩 조사 출처 다양성 강화"
         ],
-        "latestEvidenceAt": "2026-06-06T03:36:17.337Z"
+        "latestEvidenceAt": "2026-06-06T03:46:49.914Z"
       },
       {
         "id": "large-scope-slicing",
@@ -27974,11 +28004,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1000,
+        "signalCount": 1002,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 488
+            "count": 490
           },
           {
             "category": "plan",
@@ -28033,7 +28063,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T03:35:44.387Z"
+        "latestEvidenceAt": "2026-06-06T03:46:49.914Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28047,15 +28077,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 675,
+        "signalCount": 683,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 273
+            "count": 276
           },
           {
             "category": "evaluation",
-            "count": 235
+            "count": 236
           },
           {
             "category": "web-search",
@@ -28063,7 +28093,7 @@
           },
           {
             "category": "work-summary",
-            "count": 34
+            "count": 35
           },
           {
             "category": "plan",
@@ -28071,15 +28101,15 @@
           },
           {
             "category": "request-trace",
-            "count": 23
+            "count": 24
           },
           {
             "category": "user-request",
-            "count": 16
+            "count": 17
           },
           {
             "category": "project-doc",
-            "count": 13
+            "count": 14
           },
           {
             "category": "work-timing",
@@ -28106,7 +28136,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-06T03:36:17.337Z"
+        "latestEvidenceAt": "2026-06-06T03:46:49.914Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28120,15 +28150,15 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1482,
+        "signalCount": 1486,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 639
+            "count": 641
           },
           {
             "category": "evaluation",
-            "count": 519
+            "count": 520
           },
           {
             "category": "user-request",
@@ -28140,7 +28170,7 @@
           },
           {
             "category": "work-summary",
-            "count": 54
+            "count": 55
           },
           {
             "category": "plan",
@@ -28179,7 +28209,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T03:36:17.337Z"
+        "latestEvidenceAt": "2026-06-06T03:46:49.914Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28255,14 +28285,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3778,
+      "sourceDocuments": 3791,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T03:36:17.337Z"
+      "latestInsightAt": "2026-06-06T03:46:49.914Z"
     },
     "operatingModel": [
       {
@@ -28320,25 +28350,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3185,
+        "signalCount": 3191,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1732
+            "signalCount": 1735
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1000
+            "signalCount": 1002
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 453
+            "signalCount": 454
           }
         ],
         "missingPatternIds": [],
@@ -28366,7 +28396,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T03:36:17.337Z",
+        "latestEvidenceAt": "2026-06-06T03:46:49.914Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28395,13 +28425,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 794,
+        "signalCount": 802,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 675
+            "signalCount": 683
           },
           {
             "id": "release-blocker-gate",
@@ -28435,7 +28465,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T03:36:17.337Z",
+        "latestEvidenceAt": "2026-06-06T03:46:49.914Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28464,19 +28494,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2482,
+        "signalCount": 2488,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1482
+            "signalCount": 1486
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1000
+            "signalCount": 1002
           }
         ],
         "missingPatternIds": [],
@@ -28504,7 +28534,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T03:36:17.337Z",
+        "latestEvidenceAt": "2026-06-06T03:46:49.914Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28533,13 +28563,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 572,
+        "signalCount": 573,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 453
+            "signalCount": 454
           },
           {
             "id": "release-blocker-gate",
@@ -28573,7 +28603,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T03:35:44.387Z",
+        "latestEvidenceAt": "2026-06-06T03:46:49.914Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28602,19 +28632,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2732,
+        "signalCount": 2737,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1000
+            "signalCount": 1002
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1732
+            "signalCount": 1735
           }
         ],
         "missingPatternIds": [],
@@ -28642,7 +28672,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T03:36:17.337Z",
+        "latestEvidenceAt": "2026-06-06T03:46:49.914Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28671,7 +28701,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1851,
+        "signalCount": 1854,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28683,7 +28713,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1732
+            "signalCount": 1735
           }
         ],
         "missingPatternIds": [],
@@ -28711,7 +28741,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T03:36:17.337Z",
+        "latestEvidenceAt": "2026-06-06T03:46:49.914Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",
