@@ -1,17 +1,17 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-06T05:12:34.795Z",
+  "generatedAt": "2026-06-06T05:28:06.206Z",
   "summary": {
-    "documents": 2679,
+    "documents": 2685,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1027
+        "count": 1028
       },
       {
         "category": "web-search",
-        "count": 424
+        "count": 425
       },
       {
         "category": "plan",
@@ -19,19 +19,19 @@
       },
       {
         "category": "request-trace",
-        "count": 352
+        "count": 353
       },
       {
         "category": "work-timing",
-        "count": 272
+        "count": 273
       },
       {
         "category": "user-request",
-        "count": 137
+        "count": 138
       },
       {
         "category": "work-summary",
-        "count": 104
+        "count": 105
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6614290,
+    "totalSourceBytes": 6620353,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -63,17 +63,113 @@
   },
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-06-button-text-wrapping-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-button-text-wrapping.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Button Text Wrapping",
+      "excerpt": "Evaluation: Button Text Wrapping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 텍스트 줄바꿈 때문에 버튼이 너무 길어지는 문제 수정. 결과: 액션/명령 버튼 라벨에 한 줄 ellipsis 계약을 추가했고, 주요 커스텀 버튼 영역의 white space: normal / overflow wrap:anywhere 예외를 제거했다. 근거 Web 기준: MDN의 text overflow / white space 기준을 확인했다. 접근성 기준: DOM 텍스트는 유지하고",
+      "html": "<p>Evaluation: Button Text Wrapping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 텍스트 줄바꿈 때문에 버튼이 너무 길어지는 문제 수정. 결과: 액션/명령 버튼 라벨에 한 줄 ellipsis 계약을 추가했고, 주요 커스텀 버튼 영역의 white space: normal / overflow wrap:anywhere 예외를 제거했다. 근거 Web 기준: MDN의 text overflow / white space 기준을 확인했다. 접근성 기준: DOM 텍스트는 유지하고 CSS 표시 방식만 truncation 처리했다. 정적 검증: workspace monitor test/check 통과. Browser smo</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1208,
+      "updatedAt": "2026-06-06T05:27:59.626Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-button-text-wrapping-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-button-text-wrapping.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Button Text Wrapping",
+      "excerpt": "Request Trace: Button Text Wrapping 날짜: 2026 06 06 요청 버튼 텍스트 줄바꿈 때문에 버튼이 길어지는 문제 수정. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 button text wrapping.ko.md 스펙: platform desktop app/specs/2026 06 06 button text wrapping/spec.ko.md 계획/작업/검증/추적: platform desktop app/",
+      "html": "<p>Request Trace: Button Text Wrapping 날짜: 2026 06 06 요청 버튼 텍스트 줄바꿈 때문에 버튼이 길어지는 문제 수정. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 button text wrapping.ko.md 스펙: platform desktop app/specs/2026 06 06 button text wrapping/spec.ko.md 계획/작업/검증/추적: platform desktop app/specs/2026 06 06 button text wrapping/ 웹 검색 기록: history/web searches/2026/2026 0</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 822,
+      "updatedAt": "2026-06-06T05:27:59.626Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-button-text-wrapping-json",
+      "path": "_history/work-timings/2026/2026-06-06-button-text-wrapping.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Button Text Wrapping",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"task\": \"button text wrapping\", \"phases\": { \"name\": \"web first intake\", \"status\": \"completed\", \"notes\": \"MDN text overflow, MDN white space, W3C reflow notes checked.\" }, { \"name\": \"source inspection\", \"status\": \"completed\", \"notes\": \"Found custom button r",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;task&quot;: &quot;button text wrapping&quot;, &quot;phases&quot;: { &quot;name&quot;: &quot;web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;MDN text overflow, MDN white space, W3C reflow notes checked.&quot; }, { &quot;name&quot;: &quot;source inspection&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Found custom button rules using white space: normal and overflow wrap:anywhere.&quot; }, { &quot;name&quot;: &quot;implem</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 783,
+      "updatedAt": "2026-06-06T05:27:59.626Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-button-text-wrapping-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-button-text-wrapping.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Button Text Wrapping",
+      "excerpt": "Work Summary: Button Text Wrapping 날짜: 2026 06 06 변경 요약 버튼 라벨 max inline token을 추가했다. 액션/명령 버튼에 nowrap/ellipsis 계약을 적용했다. 런타임 빠른 명령, CLI 명령 복사, provider model chip, source command toolbar, command palette result에서 줄바꿈 예외를 정리했다. workspace monitor 정적 회귀 테스트를 추가했다. 검증 요약 workspace m",
+      "html": "<p>Work Summary: Button Text Wrapping 날짜: 2026 06 06 변경 요약 버튼 라벨 max inline token을 추가했다. 액션/명령 버튼에 nowrap/ellipsis 계약을 적용했다. 런타임 빠른 명령, CLI 명령 복사, provider model chip, source command toolbar, command palette result에서 줄바꿈 예외를 정리했다. workspace monitor 정적 회귀 테스트를 추가했다. 검증 요약 workspace monitor test/check, Browser smoke, platform desktop app test/check, internal pack</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 706,
+      "updatedAt": "2026-06-06T05:27:59.625Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-button-text-wrapping-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-button-text-wrapping.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: 버튼 텍스트 줄바꿈 안정화",
+      "excerpt": "User Request: 버튼 텍스트 줄바꿈 안정화 날짜: 2026 06 06 요약 사용자는 텍스트 줄바꿈 때문에 버튼이 과하게 길어지거나 높아지는 UI 문제를 수정해 달라고 요청했다. 해석한 요구 액션 버튼은 설명 문장처럼 줄바꿈되지 않아야 한다. 긴 라벨은 버튼 크기를 밀어내지 말고 한 줄로 안정적으로 표시되어야 한다. 구현 완료 후 자동 검증과 빌드까지 수행해야 한다.",
+      "html": "<p>User Request: 버튼 텍스트 줄바꿈 안정화 날짜: 2026 06 06 요약 사용자는 텍스트 줄바꿈 때문에 버튼이 과하게 길어지거나 높아지는 UI 문제를 수정해 달라고 요청했다. 해석한 요구 액션 버튼은 설명 문장처럼 줄바꿈되지 않아야 한다. 긴 라벨은 버튼 크기를 밀어내지 말고 한 줄로 안정적으로 표시되어야 한다. 구현 완료 후 자동 검증과 빌드까지 수행해야 한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 492,
+      "updatedAt": "2026-06-06T05:22:49.438Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-button-text-wrapping-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-button-text-wrapping.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: 버튼 텍스트 줄바꿈과 ellipsis 계약",
+      "excerpt": "Web Search: 버튼 텍스트 줄바꿈과 ellipsis 계약 날짜: 2026 06 06 질의 MDN text overflow CSS ellipsis overflow hidden white space nowrap MDN white space CSS nowrap button label wrapping WCAG Reflow success criterion 1.4.10 text controls truncation 확인한 출처 MDN text overflow : text overflow 가 숨겨진 ov",
+      "html": "<p>Web Search: 버튼 텍스트 줄바꿈과 ellipsis 계약 날짜: 2026 06 06 질의 MDN text overflow CSS ellipsis overflow hidden white space nowrap MDN white space CSS nowrap button label wrapping WCAG Reflow success criterion 1.4.10 text controls truncation 확인한 출처 MDN text overflow : text overflow 가 숨겨진 overflow content 표시 방식이며, 실제 ellipsis에는 overflow 와 white space 가 함께 필요하다는 기준을 확인했다</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1476,
+      "updatedAt": "2026-06-06T05:22:49.435Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
       "id": "history-work-timings-2026-2026-06-06-popup-scroll-clipping-json",
       "path": "_history/work-timings/2026/2026-06-06-popup-scroll-clipping.json",
       "category": "work-timing",
       "language": "unknown",
       "title": "2026 06 06 Popup Scroll Clipping",
-      "excerpt": "{ \"task id\": \"2026 06 06 popup scroll clipping\", \"title\": \"Popup scroll clipping fix\", \"work mode\": \"ship first\", \"measurement quality\": \"partial\", \"date\": \"2026 06 06\", \"started at\": \"2026 06 06T14:00:41+0900\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first inta",
-      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 popup scroll clipping&quot;, &quot;title&quot;: &quot;Popup scroll clipping fix&quot;, &quot;work mode&quot;: &quot;ship first&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;started at&quot;: &quot;2026 06 06T14:00:41+0900&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;notes&quot;: &quot;Checked ove</p>",
+      "excerpt": "{ \"task id\": \"2026 06 06 popup scroll clipping\", \"title\": \"Popup scroll clipping fix\", \"work mode\": \"ship first\", \"measurement quality\": \"partial\", \"date\": \"2026 06 06\", \"started at\": \"2026 06 06T14:00:41+0900\", \"ended at\": \"2026 06 06T14:12:42+0900\", \"phases\": { \"phase id\": \"web",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 popup scroll clipping&quot;, &quot;title&quot;: &quot;Popup scroll clipping fix&quot;, &quot;work mode&quot;: &quot;ship first&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;started at&quot;: &quot;2026 06 06T14:00:41+0900&quot;, &quot;ended at&quot;: &quot;2026 06 06T14:12:42+0900&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 1186,
-      "updatedAt": "2026-06-06T05:09:49.770Z",
+      "sourceBytes": 1301,
+      "updatedAt": "2026-06-06T05:13:07.854Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/work-timings"
@@ -88,8 +184,8 @@
       "html": "<p>Evaluation: Popup Scroll Clipping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 스크롤 때문에 팝업이 보이지 않는 현상 수정. 결과: 대표 dropdown/context/file picker 팝업이 portal layer, collision padding, viewport available height, 내부 scroll 계약을 갖게 되어 스크롤 컨테이너 clipping과 화면 밖 확장을 줄였다. 근거 Web 기준: overflow clipping과 portal/floating positioning reference를 확인했다. 정적 테스트: 팝업 레이어 token, Radix portal/colli</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 1070,
-      "updatedAt": "2026-06-06T05:09:01.442Z",
+      "sourceBytes": 1369,
+      "updatedAt": "2026-06-06T05:13:07.853Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
@@ -104,11 +200,27 @@
       "html": "<p>Request Trace: Popup Scroll Clipping 날짜: 2026 06 06 요청 스크롤 때문에 팝업이 안 보이는 현상 수정. 산출물 requirements: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md spec: platform desktop app/specs/2026 06 06 popup scroll clipping/spec.ko.md plan: platform desktop app/specs/2026 06 06 popup scroll clipping/plan.ko.md tasks: platform desktop app/sp</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 1104,
-      "updatedAt": "2026-06-06T05:09:01.442Z",
+      "sourceBytes": 1110,
+      "updatedAt": "2026-06-06T05:13:07.853Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-popup-scroll-clipping-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-popup-scroll-clipping.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Popup Scroll Clipping",
+      "excerpt": "Work Summary: Popup Scroll Clipping 날짜: 2026 06 06 변경 요약 팝업 레이어 공통 token을 추가했다. AppChoiceMenu, source file picker, Tool Studio dropdown/context menu가 Radix available height와 viewport gap을 기준으로 높이를 제한하게 했다. 관련 Radix Content에 collisionPadding={16} 을 명시했다. 스크롤 pane 밖에서 보이도록 포털 기반 메뉴",
+      "html": "<p>Work Summary: Popup Scroll Clipping 날짜: 2026 06 06 변경 요약 팝업 레이어 공통 token을 추가했다. AppChoiceMenu, source file picker, Tool Studio dropdown/context menu가 Radix available height와 viewport gap을 기준으로 높이를 제한하게 했다. 관련 Radix Content에 collisionPadding={16} 을 명시했다. 스크롤 pane 밖에서 보이도록 포털 기반 메뉴 계약을 정적 테스트로 고정했다. 확인 workspace monitor 테스트 83개 통과. Browser smoke에서 Tool Studio </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 795,
+      "updatedAt": "2026-06-06T05:13:07.853Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
     },
     {
       "id": "history-user-requests-2026-2026-06-06-popup-scroll-clipping-ko-md",
@@ -125,22 +237,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-popup-scroll-clipping-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-popup-scroll-clipping.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "Work Summary: Popup Scroll Clipping",
-      "excerpt": "Work Summary: Popup Scroll Clipping 날짜: 2026 06 06 변경 요약 팝업 레이어 공통 token을 추가했다. AppChoiceMenu, source file picker, Tool Studio dropdown/context menu가 Radix available height와 viewport gap을 기준으로 높이를 제한하게 했다. 관련 Radix Content에 collisionPadding={16} 을 명시했다. 스크롤 pane 밖에서 보이도록 포털 기반 메뉴",
-      "html": "<p>Work Summary: Popup Scroll Clipping 날짜: 2026 06 06 변경 요약 팝업 레이어 공통 token을 추가했다. AppChoiceMenu, source file picker, Tool Studio dropdown/context menu가 Radix available height와 viewport gap을 기준으로 높이를 제한하게 했다. 관련 Radix Content에 collisionPadding={16} 을 명시했다. 스크롤 pane 밖에서 보이도록 포털 기반 메뉴 계약을 정적 테스트로 고정했다. 확인 workspace monitor 테스트 83개 통과. Browser smoke에서 Tool Studio </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 639,
-      "updatedAt": "2026-06-06T05:09:01.441Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
     },
     {
       "id": "history-web-searches-2026-2026-06-06-popup-scroll-clipping-ko-md",
@@ -42931,31 +43027,31 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 407,
+      "documentsCount": 413,
       "categories": [
         {
           "category": "evaluation",
-          "count": 94
+          "count": 95
         },
         {
           "category": "user-request",
-          "count": 58
+          "count": 59
         },
         {
           "category": "web-search",
-          "count": 58
+          "count": 59
         },
         {
           "category": "work-summary",
-          "count": 58
+          "count": 59
         },
         {
           "category": "request-trace",
-          "count": 57
+          "count": 58
         },
         {
           "category": "work-timing",
-          "count": 55
+          "count": 56
         },
         {
           "category": "plan",

@@ -270,6 +270,35 @@ test("Monitor uses library-backed button variants for primary controls", () => {
   assert.match(css, /\.ui-button-icon \{[\s\S]*?aspect-ratio: 1;/);
 });
 
+test("Action button labels stay single-line and truncate instead of stretching controls", () => {
+  const cliCopyButtonLabelRule = readCssRule(".cli-command-copy-row button span");
+  const providerModelChipLabelRule = readCssRule(".provider-model-chip-list button span");
+  const commandPaletteTextRule = readCssRule(".command-palette-results strong,\n.command-palette-results em");
+  const sourceCommandButtonRule = readCssRule(".source-command-toolbar button,\n.source-settings-dialog button");
+  const agentCliCommandLabelRule = readCssRule(".agent-cli-command-stack button span");
+
+  assert.match(css, /--button-label-max-inline-size: 24ch;/);
+  assert.match(css, /--button-compact-label-max-inline-size: 18ch;/);
+  assert.match(css, /\.desktop-app-root :where\([\s\S]*?\.cli-command-copy-row button,[\s\S]*?\.provider-model-chip-list button,[\s\S]*?\.source-command-toolbar button,[\s\S]*?\.source-editor-primary-actions button[\s\S]*?\) \{[\s\S]*?overflow: hidden;[\s\S]*?text-overflow: ellipsis;[\s\S]*?white-space: nowrap;/);
+  assert.match(css, /\.desktop-app-root :where\([\s\S]*?\.cli-command-copy-row button,[\s\S]*?\.provider-model-chip-list button,[\s\S]*?\.source-command-toolbar button[\s\S]*?\) > :where\(span, strong, small, em, kbd\) \{[\s\S]*?max-inline-size: min\(100%, var\(--button-label-max-inline-size\)\);[\s\S]*?overflow: hidden;[\s\S]*?text-overflow: ellipsis;[\s\S]*?white-space: nowrap;[\s\S]*?overflow-wrap: normal;/);
+  assert.match(css, /\.desktop-app-root :where\([\s\S]*?\.runtime-quick-command-row > button,[\s\S]*?\.cli-command-copy-row button,[\s\S]*?\.source-command-toolbar button,[\s\S]*?\.agent-cli-command-stack button[\s\S]*?\) > :where\(span, strong, small, em, kbd\) \{[\s\S]*?max-inline-size: min\(100%, var\(--button-compact-label-max-inline-size\)\);/);
+  assert.match(css, /\.command-palette-results \{[\s\S]*?\}\n\n\.command-palette-results button \{[\s\S]*?display: grid;[\s\S]*?overflow: hidden;[\s\S]*?text-overflow: ellipsis;[\s\S]*?white-space: nowrap;/);
+
+  for (const rule of [
+    cliCopyButtonLabelRule,
+    providerModelChipLabelRule,
+    commandPaletteTextRule,
+    sourceCommandButtonRule,
+    agentCliCommandLabelRule
+  ]) {
+    assert.match(rule, /overflow: hidden;/);
+    assert.match(rule, /text-overflow: ellipsis;/);
+    assert.match(rule, /white-space: nowrap;/);
+    assert.doesNotMatch(rule, /white-space: normal;/);
+    assert.doesNotMatch(rule, /overflow-wrap: anywhere;/);
+  }
+});
+
 test("Monitor groups repeated actions with shared action primitives", () => {
   assert.match(actionGroupComponent, /export const actionGroupVariants = cva\("ui-action-group"/);
   assert.match(actionGroupComponent, /align:\s*\{[\s\S]*?start:[\s\S]*?end:[\s\S]*?stretch:/);

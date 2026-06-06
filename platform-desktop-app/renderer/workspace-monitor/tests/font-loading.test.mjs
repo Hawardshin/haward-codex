@@ -74,6 +74,6 @@ test("text wrapping contract separates prose, controls, and long tokens", () => 
   );
   assert.match(
     css,
-    /\.desktop-app-root button > span,[\s\S]*?\.desktop-app-root button > small \{[\s\S]*?max-width: 100%;[\s\S]*?word-break: keep-all;/
+    /\.desktop-app-root :where\(button > span, button > strong, button > small, button > em, button > kbd\) \{[\s\S]*?max-width: 100%;[\s\S]*?overflow: hidden;[\s\S]*?text-overflow: ellipsis;[\s\S]*?white-space: nowrap;[\s\S]*?overflow-wrap: normal;[\s\S]*?word-break: keep-all;/
   );
 });

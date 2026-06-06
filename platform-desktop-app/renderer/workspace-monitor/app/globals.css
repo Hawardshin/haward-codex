@@ -144,6 +144,8 @@
   --control-radius: 8px;
   --control-gap: var(--space-2);
   --control-padding-x: 12px;
+  --button-label-max-inline-size: 24ch;
+  --button-compact-label-max-inline-size: 18ch;
   --control-active-shift: 1px;
   --motion-duration-instant: 80ms;
   --motion-duration-fast: 140ms;
@@ -721,10 +723,13 @@ button:disabled {
   flex: 0 0 auto;
 }
 
-.desktop-app-root :where(button > span, button > strong, button > small) {
+.desktop-app-root :where(button > span, button > strong, button > small, button > em, button > kbd) {
   min-width: 0;
   max-width: 100%;
-  overflow-wrap: var(--text-natural-wrap);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-wrap: normal;
   word-break: keep-all;
 }
 
@@ -770,8 +775,107 @@ button:disabled {
 .ui-button > strong,
 .ui-button > small {
   min-width: 0;
+  max-inline-size: min(100%, var(--button-label-max-inline-size));
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.desktop-app-root :where(
+  .ui-button,
+  .segmented-control button,
+  .settings-segment-list button,
+  .settings-pin-grid button,
+  .app-chip-group button,
+  .command-palette-search button,
+  .runtime-provider-custom-card header button,
+  .runtime-preset-row button,
+  .runtime-shell-preset-row button,
+  .runtime-quick-command-editor button,
+  .runtime-quick-command-row > button,
+  .cli-command-copy-row button,
+  .provider-account-actions button,
+  .provider-login-card-actions button,
+  .provider-filter-choice button,
+  .provider-model-chip-list button,
+  .source-command-toolbar button,
+  .source-settings-dialog button,
+  .source-workbench-switcher button,
+  .source-editor-primary-actions button,
+  .terminal-view-switcher button,
+  .workspace-explorer-actions button,
+  .native-workspace-actions button,
+  .agent-cli-command-stack button,
+  .search-agent-actions button,
+  .settings-action-row button,
+  .tool-builder-actions button,
+  .tool-python-source-actions button,
+  .tool-environment-actions button,
+  .tool-venv-actions button,
+  .tool-venv-steps button,
+  .tool-deploy-actions button
+) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.desktop-app-root :where(
+  .ui-button,
+  .segmented-control button,
+  .settings-segment-list button,
+  .settings-pin-grid button,
+  .app-chip-group button,
+  .command-palette-search button,
+  .runtime-provider-custom-card header button,
+  .runtime-preset-row button,
+  .runtime-shell-preset-row button,
+  .runtime-quick-command-editor button,
+  .runtime-quick-command-row > button,
+  .cli-command-copy-row button,
+  .provider-account-actions button,
+  .provider-login-card-actions button,
+  .provider-filter-choice button,
+  .provider-model-chip-list button,
+  .source-command-toolbar button,
+  .source-settings-dialog button,
+  .source-workbench-switcher button,
+  .source-editor-primary-actions button,
+  .terminal-view-switcher button,
+  .workspace-explorer-actions button,
+  .native-workspace-actions button,
+  .agent-cli-command-stack button,
+  .search-agent-actions button,
+  .settings-action-row button,
+  .tool-builder-actions button,
+  .tool-python-source-actions button,
+  .tool-environment-actions button,
+  .tool-venv-actions button,
+  .tool-venv-steps button,
+  .tool-deploy-actions button
+) > :where(span, strong, small, em, kbd) {
+  min-width: 0;
+  max-inline-size: min(100%, var(--button-label-max-inline-size));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+
+.desktop-app-root :where(
+  .runtime-provider-custom-card header button,
+  .runtime-quick-command-editor button,
+  .runtime-quick-command-row > button,
+  .cli-command-copy-row button,
+  .provider-model-chip-list button,
+  .source-command-toolbar button,
+  .source-settings-dialog button,
+  .source-editor-primary-actions button,
+  .terminal-view-switcher button,
+  .agent-cli-command-stack button
+) > :where(span, strong, small, em, kbd) {
+  max-inline-size: min(100%, var(--button-compact-label-max-inline-size));
 }
 
 .ui-button-primary {
@@ -2735,6 +2839,9 @@ main {
   padding: 7px 10px;
   font-size: var(--font-size-caption);
   font-weight: 850;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .runtime-provider-custom-card header button span,
@@ -2743,7 +2850,10 @@ main {
 .runtime-quick-command-editor button span,
 .runtime-quick-command-row > button span {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-wrap: normal;
 }
 
 .runtime-preset-row,
@@ -2764,7 +2874,10 @@ main {
 .runtime-shell-preset-row small {
   min-width: 0;
   color: var(--muted);
-  overflow-wrap: anywhere;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-wrap: normal;
 }
 
 .runtime-preset-row button.active,
@@ -3002,12 +3115,18 @@ main {
   font-size: var(--font-size-caption);
   font-weight: 850;
   box-shadow: var(--control-shadow);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .cli-command-copy-row button span {
   min-width: 0;
   line-height: 1.2;
-  overflow-wrap: anywhere;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-wrap: normal;
 }
 
 .cli-command-copy-row button:hover:not(:disabled) {
@@ -3085,8 +3204,11 @@ main {
 }
 
 .provider-model-chip-list button {
+  display: inline-flex;
   min-height: 34px;
   max-width: 100%;
+  align-items: center;
+  justify-content: center;
   border: 1px solid var(--line);
   background: var(--choice-bg);
   color: var(--text);
@@ -3095,11 +3217,17 @@ main {
   padding: 6px 9px;
   font-size: var(--font-size-caption);
   font-weight: 850;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .provider-model-chip-list button span {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-wrap: normal;
 }
 
 .provider-account-row > small,
@@ -5398,17 +5526,20 @@ h3 {
   display: grid;
   grid-template-columns: 24px minmax(0, 1fr) auto;
   gap: 9px;
-  align-items: start;
+  align-items: center;
   min-height: 52px;
   padding: 8px 10px;
+  overflow: hidden;
   text-align: left;
-  white-space: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .command-palette-results button span {
   display: grid;
   min-width: 0;
   gap: 2px;
+  overflow: hidden;
 }
 
 .command-palette-results small {
@@ -5420,7 +5551,10 @@ h3 {
 .command-palette-results strong,
 .command-palette-results em {
   min-width: 0;
-  overflow-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-wrap: normal;
 }
 
 .command-palette-results em {
@@ -8214,7 +8348,10 @@ h3 {
 .agent-cli-command-stack button span {
   min-width: 0;
   line-height: 1.15;
-  overflow-wrap: anywhere;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-wrap: normal;
 }
 
 .agent-cli-cockpit-signals {
@@ -14033,7 +14170,9 @@ h3 {
   padding: 7px 10px;
   color: var(--text);
   box-shadow: var(--control-shadow);
-  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .source-command-toolbar button svg {
@@ -14754,6 +14893,8 @@ h3 {
   padding: 6px 9px;
   font-size: var(--font-size-caption);
   font-weight: 800;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -18913,6 +19054,8 @@ h3 {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-wrap: normal;
 }
 
 .tool-venv-command {
@@ -19535,9 +19678,14 @@ h3 {
 
 .desktop-app-root button > span,
 .desktop-app-root button > strong,
-.desktop-app-root button > small {
+.desktop-app-root button > small,
+.desktop-app-root button > em,
+.desktop-app-root button > kbd {
   min-width: 0;
   max-width: 100%;
-  overflow-wrap: var(--text-natural-wrap);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-wrap: normal;
   word-break: keep-all;
 }

@@ -1,0 +1,26 @@
+{
+  "date": "2026-06-06",
+  "task": "button-text-wrapping",
+  "phases": [
+    {
+      "name": "web_first_intake",
+      "status": "completed",
+      "notes": "MDN text-overflow, MDN white-space, W3C reflow notes checked."
+    },
+    {
+      "name": "source_inspection",
+      "status": "completed",
+      "notes": "Found custom button rules using white-space: normal and overflow-wrap:anywhere."
+    },
+    {
+      "name": "implementation",
+      "status": "completed",
+      "notes": "Added button label tokens and nowrap/ellipsis contracts."
+    },
+    {
+      "name": "validation",
+      "status": "completed",
+      "notes": "workspace-monitor test/check, browser smoke, platform-desktop-app test/check, package:internal, codesign verify, and hdiutil verify passed."
+    }
+  ]
+}

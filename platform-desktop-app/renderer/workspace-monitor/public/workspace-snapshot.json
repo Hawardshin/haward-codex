@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T05:12:34.792Z",
+  "generatedAt": "2026-06-06T05:28:06.203Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -17,7 +17,7 @@
     "webSearches": 13,
     "timingRecords": 12,
     "historyDays": 1,
-    "adminHistoryDocuments": 2679,
+    "adminHistoryDocuments": 2685,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7793,17 +7793,209 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-06-button-text-wrapping-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-button-text-wrapping.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Button Text Wrapping",
+      "excerpt": "Evaluation: Button Text Wrapping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 텍스트 줄바꿈 때문에 버튼이 너무 길어지는 문제 수정. 결과: 액션/명령 버튼 라벨에 한 줄 ellipsis 계약을 추가했고, 주요 커스텀 버튼 영역의 white space: normal / overflow wrap:anywhere 예외를 제거했다. 근거 Web 기준: MDN의 text overflow / white space 기준을 확인했다. 접근성 기준: DOM 텍스트는 유지하고",
+      "html": "<p>Evaluation: Button Text Wrapping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 텍스트 줄바꿈 때문에 버튼이 너무 길어지는 문제 수정. 결과: 액션/명령 버튼 라벨에 한 줄 ellipsis 계약을 추가했고, 주요 커스텀 버튼 영역의 white space: normal / overflow wrap:anywhere 예외를 제거했다. 근거 Web 기준: MDN의 text overflow / white space 기준을 확인했다. 접근성 기준: DOM 텍스트는 유지하고 CSS 표시 방식만 truncation 처리했다. 정적 검증: workspace monitor test/check 통과. Browser smo</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1208,
+      "updatedAt": "2026-06-06T05:27:59.626Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-button-text-wrapping-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-button-text-wrapping.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Button Text Wrapping",
+      "excerpt": "Request Trace: Button Text Wrapping 날짜: 2026 06 06 요청 버튼 텍스트 줄바꿈 때문에 버튼이 길어지는 문제 수정. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 button text wrapping.ko.md 스펙: platform desktop app/specs/2026 06 06 button text wrapping/spec.ko.md 계획/작업/검증/추적: platform desktop app/",
+      "html": "<p>Request Trace: Button Text Wrapping 날짜: 2026 06 06 요청 버튼 텍스트 줄바꿈 때문에 버튼이 길어지는 문제 수정. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 button text wrapping.ko.md 스펙: platform desktop app/specs/2026 06 06 button text wrapping/spec.ko.md 계획/작업/검증/추적: platform desktop app/specs/2026 06 06 button text wrapping/ 웹 검색 기록: history/web searches/2026/2026 0</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 822,
+      "updatedAt": "2026-06-06T05:27:59.626Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-button-text-wrapping-json",
+      "path": "_history/work-timings/2026/2026-06-06-button-text-wrapping.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Button Text Wrapping",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"task\": \"button text wrapping\", \"phases\": { \"name\": \"web first intake\", \"status\": \"completed\", \"notes\": \"MDN text overflow, MDN white space, W3C reflow notes checked.\" }, { \"name\": \"source inspection\", \"status\": \"completed\", \"notes\": \"Found custom button r",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;task&quot;: &quot;button text wrapping&quot;, &quot;phases&quot;: { &quot;name&quot;: &quot;web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;MDN text overflow, MDN white space, W3C reflow notes checked.&quot; }, { &quot;name&quot;: &quot;source inspection&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Found custom button rules using white space: normal and overflow wrap:anywhere.&quot; }, { &quot;name&quot;: &quot;implem</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 783,
+      "updatedAt": "2026-06-06T05:27:59.626Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-button-text-wrapping-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-button-text-wrapping.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Button Text Wrapping",
+      "excerpt": "Work Summary: Button Text Wrapping 날짜: 2026 06 06 변경 요약 버튼 라벨 max inline token을 추가했다. 액션/명령 버튼에 nowrap/ellipsis 계약을 적용했다. 런타임 빠른 명령, CLI 명령 복사, provider model chip, source command toolbar, command palette result에서 줄바꿈 예외를 정리했다. workspace monitor 정적 회귀 테스트를 추가했다. 검증 요약 workspace m",
+      "html": "<p>Work Summary: Button Text Wrapping 날짜: 2026 06 06 변경 요약 버튼 라벨 max inline token을 추가했다. 액션/명령 버튼에 nowrap/ellipsis 계약을 적용했다. 런타임 빠른 명령, CLI 명령 복사, provider model chip, source command toolbar, command palette result에서 줄바꿈 예외를 정리했다. workspace monitor 정적 회귀 테스트를 추가했다. 검증 요약 workspace monitor test/check, Browser smoke, platform desktop app test/check, internal pack</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 706,
+      "updatedAt": "2026-06-06T05:27:59.625Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-button-text-wrapping-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-button-text-wrapping/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Button Text Wrapping",
+      "excerpt": "Validation: Button Text Wrapping 완료된 검증 corepack pnpm filter workspace monitor test : 통과, 84개 테스트. 새 회귀 테스트: Action button labels stay single line and truncate instead of stretching controls . 갱신 테스트: text wrapping contract separates prose, controls, and long tokens . corepack pn",
+      "html": "<h1>Validation: Button Text Wrapping</h1>\n<h2>완료된 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 84개 테스트.</li>\n<li>새 회귀 테스트: <code>Action button labels stay single-line and truncate instead of stretching controls</code>.</li>\n<li>갱신 테스트: <code>text wrapping contract separates prose, controls, and long tokens</code>.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과.</li>\n<li>Browser smoke, viewport 1280x800:</li>\n<li>source command toolbar button: <code>whiteSpace=nowrap</code>, <code>overflow=hidden</code>, <code>textOverflow=ellipsis</code>, 대표 높이 <code>39.4px</code>.</li>\n<li>source command toolbar label span: <code>whiteSpace=nowrap</code>, <code>overflow=hidden</code>, <code>textOverflow=ellipsis</code>, <code>overflowWrap=normal</code>, 대표 높이 <code>14.18px</code>.</li>\n<li>공용 <code>ui-button</code> span: <code>whiteSpace=nowrap</code>, <code>overflow=hidden</code>, <code>textOverflow=ellipsis</code>.</li>\n<li>agent CLI command label span: <code>whiteSpace=nowrap</code>, <code>overflow=hidden</code>, <code>textOverflow=ellipsis</code>, <code>overflowWrap=normal</code>.</li>\n<li>console error count: <code>0</code>.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 27개 테스트.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과. 공개 배포 signing/notarization/updater/clean-machine smoke 경고는 기존 public release gate로 유지.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code>: 통과.</li>\n<li><code>.app</code>: <code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>.dmg</code>: <code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n<li><code>codesign --verify --deep --strict</code>: 통과.</li>\n<li><code>hdiutil verify</code>: 통과.</li>\n<li>package 후 <code>corepack pnpm --filter workspace-monitor run collect -- --best-effort</code> 및 <code>corepack pnpm --filter workspace-monitor run check</code>: 통과.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1731,
+      "updatedAt": "2026-06-06T05:27:59.625Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-button-text-wrapping-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-button-text-wrapping/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Button Text Wrapping",
+      "excerpt": "Tasks: Button Text Wrapping x 웹 기준 확인: MDN text overflow , MDN white space , W3C reflow note. x 현재 CSS에서 wrap/anywhere/normal 버튼 예외 조사. x 버튼 라벨 token과 공용 ellipsis 계약 추가. x 런타임/CLI/provider/source/palette 버튼 줄바꿈 예외 수정. x 회귀 테스트 추가. x workspace monitor test 실행. x workspace monitor ",
+      "html": "<h1>Tasks: Button Text Wrapping</h1>\n<ul>\n<li>[x] 웹 기준 확인: MDN <code>text-overflow</code>, MDN <code>white-space</code>, W3C reflow note.</li>\n<li>[x] 현재 CSS에서 wrap/anywhere/normal 버튼 예외 조사.</li>\n<li>[x] 버튼 라벨 token과 공용 ellipsis 계약 추가.</li>\n<li>[x] 런타임/CLI/provider/source/palette 버튼 줄바꿈 예외 수정.</li>\n<li>[x] 회귀 테스트 추가.</li>\n<li>[x] workspace-monitor test 실행.</li>\n<li>[x] workspace-monitor check 실행.</li>\n<li>[x] Browser smoke 실행.</li>\n<li>[x] platform-desktop-app test/check 실행.</li>\n<li>[x] internal package build 실행.</li>\n<li>[x] 최종 검증 기록, 평가, commit, push 준비.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 589,
+      "updatedAt": "2026-06-06T05:27:59.624Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-button-text-wrapping-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-button-text-wrapping.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: 버튼 텍스트 줄바꿈 안정화",
+      "excerpt": "User Request: 버튼 텍스트 줄바꿈 안정화 날짜: 2026 06 06 요약 사용자는 텍스트 줄바꿈 때문에 버튼이 과하게 길어지거나 높아지는 UI 문제를 수정해 달라고 요청했다. 해석한 요구 액션 버튼은 설명 문장처럼 줄바꿈되지 않아야 한다. 긴 라벨은 버튼 크기를 밀어내지 말고 한 줄로 안정적으로 표시되어야 한다. 구현 완료 후 자동 검증과 빌드까지 수행해야 한다.",
+      "html": "<p>User Request: 버튼 텍스트 줄바꿈 안정화 날짜: 2026 06 06 요약 사용자는 텍스트 줄바꿈 때문에 버튼이 과하게 길어지거나 높아지는 UI 문제를 수정해 달라고 요청했다. 해석한 요구 액션 버튼은 설명 문장처럼 줄바꿈되지 않아야 한다. 긴 라벨은 버튼 크기를 밀어내지 말고 한 줄로 안정적으로 표시되어야 한다. 구현 완료 후 자동 검증과 빌드까지 수행해야 한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 492,
+      "updatedAt": "2026-06-06T05:22:49.438Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-button-text-wrapping-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-button-text-wrapping/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Button Text Wrapping",
+      "excerpt": "Traceability: Button Text Wrapping 요구사항 연결 REQ BTW 001, REQ BTW 002 renderer/workspace monitor/app/globals.css 버튼 라벨 token과 action button nowrap/ellipsis 계약. REQ BTW 003 본문/코드 wrap selector는 유지하고 버튼 라벨 selector만 별도 강화. REQ BTW 004 tests/tool studio.test.mjs , tests/font loading.t",
+      "html": "<h1>Traceability: Button Text Wrapping</h1>\n<h2>요구사항 연결</h2>\n<ul>\n<li>REQ-BTW-001, REQ-BTW-002 -&gt; <code>renderer/workspace-monitor/app/globals.css</code> 버튼 라벨 token과 action button nowrap/ellipsis 계약.</li>\n<li>REQ-BTW-003 -&gt; 본문/코드 wrap selector는 유지하고 버튼 라벨 selector만 별도 강화.</li>\n<li>REQ-BTW-004 -&gt; <code>tests/tool-studio.test.mjs</code>, <code>tests/font-loading.test.mjs</code>.</li>\n<li>REQ-BTW-005 -&gt; React markup 텍스트는 제거하지 않고 CSS 표시 방식만 변경.</li>\n</ul>\n<h2>구현 파일</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/font-loading.test.mjs</code></li>\n</ul>\n<h2>검증 파일</h2>\n<ul>\n<li><code>platform-desktop-app/specs/2026-06-06-button-text-wrapping/validation.ko.md</code></li>\n<li><code>_history/evaluations/2026/2026-06-06-button-text-wrapping.ko.md</code></li>\n<li><code>_history/request-traces/2026/2026-06-06-button-text-wrapping.ko.md</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 951,
+      "updatedAt": "2026-06-06T05:22:49.437Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-button-text-wrapping-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-button-text-wrapping/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Button Text Wrapping",
+      "excerpt": "Plan: Button Text Wrapping 1. CSS에서 버튼 라벨 max inline token을 추가한다. 2. 공용 버튼과 액션 버튼 selector에 nowrap/ellipsis 계약을 적용한다. 3. 런타임, CLI, provider model chip, source editor, command palette의 기존 줄바꿈 예외를 제거한다. 4. 회귀 테스트를 추가한다. 5. workspace monitor test/check, browser smoke, desktop app te",
+      "html": "<h1>Plan: Button Text Wrapping</h1>\n<p>1. CSS에서 버튼 라벨 max inline token을 추가한다.</p>\n<p>2. 공용 버튼과 액션 버튼 selector에 nowrap/ellipsis 계약을 적용한다.</p>\n<p>3. 런타임, CLI, provider model chip, source editor, command palette의 기존 줄바꿈 예외를 제거한다.</p>\n<p>4. 회귀 테스트를 추가한다.</p>\n<p>5. workspace-monitor test/check, browser smoke, desktop app test/check/package로 검증한다.</p>\n<p>6. history/evaluation/trace 문서를 갱신하고 commit/push한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 495,
+      "updatedAt": "2026-06-06T05:22:49.436Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-button-text-wrapping-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-button-text-wrapping/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Button Text Wrapping",
+      "excerpt": "Spec: Button Text Wrapping 목표 버튼 텍스트가 줄바꿈되면서 버튼 높이와 레이아웃이 흔들리는 문제를 줄이고, 데스크톱 앱답게 액션 버튼은 한 줄로 예측 가능하게 유지한다. 설계 CSS token: button label max inline size button compact label max inline size 공용 버튼 라벨 계약: overflow: hidden text overflow: ellipsis white space: nowrap overflow wrap: norm",
+      "html": "<h1>Spec: Button Text Wrapping</h1>\n<h2>목표</h2>\n<p>버튼 텍스트가 줄바꿈되면서 버튼 높이와 레이아웃이 흔들리는 문제를 줄이고, 데스크톱 앱답게 액션 버튼은 한 줄로 예측 가능하게 유지한다.</p>\n<h2>설계</h2>\n<ul>\n<li>CSS token:</li>\n<li><code>--button-label-max-inline-size</code></li>\n<li><code>--button-compact-label-max-inline-size</code></li>\n<li>공용 버튼 라벨 계약:</li>\n<li><code>overflow: hidden</code></li>\n<li><code>text-overflow: ellipsis</code></li>\n<li><code>white-space: nowrap</code></li>\n<li><code>overflow-wrap: normal</code></li>\n<li>적용 대상:</li>\n<li>공용 <code>ui-button</code></li>\n<li>런타임 빠른 명령/프리셋 버튼</li>\n<li>CLI 명령 복사 버튼</li>\n<li>provider model chip</li>\n<li>source command toolbar/settings/editor action buttons</li>\n<li>command palette result text</li>\n<li>주요 action row/tool action buttons</li>\n<li>본문과 긴 경로/코드는 기존 wrap 정책을 유지한다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>모든 설명 카드의 본문 텍스트를 한 줄로 강제하지 않는다.</li>\n<li>버튼 copy나 정보 구조를 대규모로 바꾸지 않는다.</li>\n<li>새 UI dependency를 도입하지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1024,
+      "updatedAt": "2026-06-06T05:22:49.436Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-button-text-wrapping-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-button-text-wrapping.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: 버튼 텍스트 줄바꿈과 ellipsis 계약",
+      "excerpt": "Web Search: 버튼 텍스트 줄바꿈과 ellipsis 계약 날짜: 2026 06 06 질의 MDN text overflow CSS ellipsis overflow hidden white space nowrap MDN white space CSS nowrap button label wrapping WCAG Reflow success criterion 1.4.10 text controls truncation 확인한 출처 MDN text overflow : text overflow 가 숨겨진 ov",
+      "html": "<p>Web Search: 버튼 텍스트 줄바꿈과 ellipsis 계약 날짜: 2026 06 06 질의 MDN text overflow CSS ellipsis overflow hidden white space nowrap MDN white space CSS nowrap button label wrapping WCAG Reflow success criterion 1.4.10 text controls truncation 확인한 출처 MDN text overflow : text overflow 가 숨겨진 overflow content 표시 방식이며, 실제 ellipsis에는 overflow 와 white space 가 함께 필요하다는 기준을 확인했다</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1476,
+      "updatedAt": "2026-06-06T05:22:49.435Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-button-text-wrapping-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-button-text-wrapping.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: 버튼 텍스트 줄바꿈 안정화",
+      "excerpt": "요구사항: 버튼 텍스트 줄바꿈 안정화 날짜: 2026 06 06 사용자 요구 텍스트 줄바꿈 때문에 버튼이 너무 길어지거나 높아지는 문제를 고친다. 요구사항 REQ BTW 001: 액션/명령 버튼은 라벨 줄바꿈 때문에 높이가 커지지 않아야 한다. REQ BTW 002: 긴 버튼 라벨은 한 줄 ellipsis로 표시하고, 버튼 내부 아이콘과 라벨 정렬은 유지해야 한다. REQ BTW 003: 본문, 코드, 파일 경로처럼 줄바꿈이 필요한 영역의 wrap 정책과 버튼 라벨 정책을 분리해야 한다. REQ ",
+      "html": "<h1>요구사항: 버튼 텍스트 줄바꿈 안정화</h1>\n<p>날짜: 2026-06-06</p>\n<h2>사용자 요구</h2>\n<ul>\n<li>텍스트 줄바꿈 때문에 버튼이 너무 길어지거나 높아지는 문제를 고친다.</li>\n</ul>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-BTW-001: 액션/명령 버튼은 라벨 줄바꿈 때문에 높이가 커지지 않아야 한다.</li>\n<li>REQ-BTW-002: 긴 버튼 라벨은 한 줄 ellipsis로 표시하고, 버튼 내부 아이콘과 라벨 정렬은 유지해야 한다.</li>\n<li>REQ-BTW-003: 본문, 코드, 파일 경로처럼 줄바꿈이 필요한 영역의 wrap 정책과 버튼 라벨 정책을 분리해야 한다.</li>\n<li>REQ-BTW-004: 런타임 설정, CLI 설정, 모델 칩, 소스 에디터 툴바, 커맨드 팔레트 결과에서 줄바꿈 회귀를 테스트로 막아야 한다.</li>\n<li>REQ-BTW-005: 시각적 truncation이 생겨도 버튼의 DOM 텍스트와 accessible name은 제거하지 않아야 한다.</li>\n</ul>\n<h2>범위</h2>\n<ul>\n<li>포함: workspace monitor CSS, 버튼 라벨 회귀 테스트, 요구사항/스펙/검증 기록.</li>\n<li>제외: 버튼 copy 전면 재작성, 새 tooltip 시스템, 전체 디자인 시스템 교체.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>대표 액션 버튼 라벨에 <code>overflow:hidden</code>, <code>text-overflow:ellipsis</code>, <code>white-space:nowrap</code> 계약이 적용된다.</li>\n<li><code>overflow-wrap:anywhere</code>와 <code>white-space:normal</code>이 액션 버튼 라벨 높이를 늘리지 않는다.</li>\n<li>workspace-monitor test/check, browser smoke, desktop app test/check/package가 통과한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1436,
+      "updatedAt": "2026-06-06T05:22:49.435Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-work-timings-2026-2026-06-06-popup-scroll-clipping-json",
       "path": "_history/work-timings/2026/2026-06-06-popup-scroll-clipping.json",
       "category": "work-timing",
       "language": "unknown",
       "title": "2026 06 06 Popup Scroll Clipping",
-      "excerpt": "{ \"task id\": \"2026 06 06 popup scroll clipping\", \"title\": \"Popup scroll clipping fix\", \"work mode\": \"ship first\", \"measurement quality\": \"partial\", \"date\": \"2026 06 06\", \"started at\": \"2026 06 06T14:00:41+0900\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first inta",
-      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 popup scroll clipping&quot;, &quot;title&quot;: &quot;Popup scroll clipping fix&quot;, &quot;work mode&quot;: &quot;ship first&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;started at&quot;: &quot;2026 06 06T14:00:41+0900&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;notes&quot;: &quot;Checked ove</p>",
+      "excerpt": "{ \"task id\": \"2026 06 06 popup scroll clipping\", \"title\": \"Popup scroll clipping fix\", \"work mode\": \"ship first\", \"measurement quality\": \"partial\", \"date\": \"2026 06 06\", \"started at\": \"2026 06 06T14:00:41+0900\", \"ended at\": \"2026 06 06T14:12:42+0900\", \"phases\": { \"phase id\": \"web",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 popup scroll clipping&quot;, &quot;title&quot;: &quot;Popup scroll clipping fix&quot;, &quot;work mode&quot;: &quot;ship first&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;started at&quot;: &quot;2026 06 06T14:00:41+0900&quot;, &quot;ended at&quot;: &quot;2026 06 06T14:12:42+0900&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 1186,
-      "updatedAt": "2026-06-06T05:09:49.770Z",
+      "sourceBytes": 1301,
+      "updatedAt": "2026-06-06T05:13:07.854Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/work-timings"
@@ -7818,8 +8010,8 @@
       "html": "<p>Evaluation: Popup Scroll Clipping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 스크롤 때문에 팝업이 보이지 않는 현상 수정. 결과: 대표 dropdown/context/file picker 팝업이 portal layer, collision padding, viewport available height, 내부 scroll 계약을 갖게 되어 스크롤 컨테이너 clipping과 화면 밖 확장을 줄였다. 근거 Web 기준: overflow clipping과 portal/floating positioning reference를 확인했다. 정적 테스트: 팝업 레이어 token, Radix portal/colli</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 1070,
-      "updatedAt": "2026-06-06T05:09:01.442Z",
+      "sourceBytes": 1369,
+      "updatedAt": "2026-06-06T05:13:07.853Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
@@ -7834,11 +8026,59 @@
       "html": "<p>Request Trace: Popup Scroll Clipping 날짜: 2026 06 06 요청 스크롤 때문에 팝업이 안 보이는 현상 수정. 산출물 requirements: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md spec: platform desktop app/specs/2026 06 06 popup scroll clipping/spec.ko.md plan: platform desktop app/specs/2026 06 06 popup scroll clipping/plan.ko.md tasks: platform desktop app/sp</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 1104,
-      "updatedAt": "2026-06-06T05:09:01.442Z",
+      "sourceBytes": 1110,
+      "updatedAt": "2026-06-06T05:13:07.853Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-popup-scroll-clipping-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-popup-scroll-clipping.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Popup Scroll Clipping",
+      "excerpt": "Work Summary: Popup Scroll Clipping 날짜: 2026 06 06 변경 요약 팝업 레이어 공통 token을 추가했다. AppChoiceMenu, source file picker, Tool Studio dropdown/context menu가 Radix available height와 viewport gap을 기준으로 높이를 제한하게 했다. 관련 Radix Content에 collisionPadding={16} 을 명시했다. 스크롤 pane 밖에서 보이도록 포털 기반 메뉴",
+      "html": "<p>Work Summary: Popup Scroll Clipping 날짜: 2026 06 06 변경 요약 팝업 레이어 공통 token을 추가했다. AppChoiceMenu, source file picker, Tool Studio dropdown/context menu가 Radix available height와 viewport gap을 기준으로 높이를 제한하게 했다. 관련 Radix Content에 collisionPadding={16} 을 명시했다. 스크롤 pane 밖에서 보이도록 포털 기반 메뉴 계약을 정적 테스트로 고정했다. 확인 workspace monitor 테스트 83개 통과. Browser smoke에서 Tool Studio </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 795,
+      "updatedAt": "2026-06-06T05:13:07.853Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-popup-scroll-clipping-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-popup-scroll-clipping/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Popup Scroll Clipping",
+      "excerpt": "Tasks: Popup Scroll Clipping x 웹 기준 확인 및 기록 x 팝업/스크롤 관련 코드 경로 확인 x 공통 팝업 레이어 token 추가 x AppChoiceMenu, source file picker, Tool Studio menu CSS 보강 x Radix collision padding 명시 x 회귀 테스트 추가 x check, Browser smoke, package 검증 x 평가/요약/trace 기록 커밋 및 푸시",
+      "html": "<h1>Tasks: Popup Scroll Clipping</h1>\n<ul>\n<li>[x] 웹 기준 확인 및 기록</li>\n<li>[x] 팝업/스크롤 관련 코드 경로 확인</li>\n<li>[x] 공통 팝업 레이어 token 추가</li>\n<li>[x] AppChoiceMenu, source file picker, Tool Studio menu CSS 보강</li>\n<li>[x] Radix collision padding 명시</li>\n<li>[x] 회귀 테스트 추가</li>\n<li>[x] check, Browser smoke, package 검증</li>\n<li>[x] 평가/요약/trace 기록</li>\n<li>[ ] 커밋 및 푸시</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 397,
+      "updatedAt": "2026-06-06T05:13:07.852Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-popup-scroll-clipping-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-popup-scroll-clipping/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Popup Scroll Clipping",
+      "excerpt": "Validation: Popup Scroll Clipping 완료된 검증 corepack pnpm filter workspace monitor test : 통과, 83개 테스트. 새 회귀 테스트: Popup menus escape scroll panes and keep their own bounded scroll . Browser smoke, viewport 900x520: Tool Studio primary menu: top=281 , bottom=504 , height=223 , viewpor",
+      "html": "<h1>Validation: Popup Scroll Clipping</h1>\n<h2>완료된 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 83개 테스트.</li>\n<li>새 회귀 테스트: <code>Popup menus escape scroll panes and keep their own bounded scroll</code>.</li>\n<li>Browser smoke, viewport 900x520:</li>\n<li>Tool Studio primary menu: <code>top=281</code>, <code>bottom=504</code>, <code>height=223</code>, <code>viewportHeight=520</code>, <code>inViewport=true</code>, <code>zIndex=140</code>, <code>maxHeight=223.122px</code>, <code>overflowY=auto</code>, <code>overscrollBehavior=contain</code>, <code>portalWrapped=true</code>.</li>\n<li>Source file picker after scrolling trigger into view: <code>top=16</code>, <code>bottom=232</code>, <code>height=216</code>, <code>viewportHeight=520</code>, <code>inViewport=true</code>, <code>zIndex=140</code>, <code>maxHeight=216.094px</code>, <code>overflowY=auto</code>, <code>overscrollBehavior=contain</code>, <code>portalWrapped=true</code>.</li>\n<li><code>corepack pnpm --filter workspace-monitor run smoke:source-controls</code>: 통과. <code>sourceSelectCount=0</code>, <code>itemCount=23</code>, <code>pageErrors=[]</code>; WebGL <code>ReadPixels</code> performance warning만 관찰.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 27개 테스트.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과. 공개 배포 signing/notarization/updater/clean-machine smoke 경고는 기존 public release gate로 유지.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code>: 통과.</li>\n<li><code>.app</code>: <code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>.dmg</code>: <code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n<li><code>codesign --verify --deep --strict</code>: 통과.</li>\n<li><code>hdiutil verify</code>: 통과.</li>\n<li>package 후 <code>corepack pnpm --filter workspace-monitor run collect -- --best-effort</code> 및 <code>corepack pnpm --filter workspace-monitor run check</code>: 통과.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1751,
+      "updatedAt": "2026-06-06T05:13:07.852Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
     },
     {
       "id": "history-user-requests-2026-2026-06-06-popup-scroll-clipping-ko-md",
@@ -7857,38 +8097,6 @@
       "workspaceArea": "_history/user-requests"
     },
     {
-      "id": "history-work-summaries-2026-2026-06-06-popup-scroll-clipping-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-popup-scroll-clipping.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "Work Summary: Popup Scroll Clipping",
-      "excerpt": "Work Summary: Popup Scroll Clipping 날짜: 2026 06 06 변경 요약 팝업 레이어 공통 token을 추가했다. AppChoiceMenu, source file picker, Tool Studio dropdown/context menu가 Radix available height와 viewport gap을 기준으로 높이를 제한하게 했다. 관련 Radix Content에 collisionPadding={16} 을 명시했다. 스크롤 pane 밖에서 보이도록 포털 기반 메뉴",
-      "html": "<p>Work Summary: Popup Scroll Clipping 날짜: 2026 06 06 변경 요약 팝업 레이어 공통 token을 추가했다. AppChoiceMenu, source file picker, Tool Studio dropdown/context menu가 Radix available height와 viewport gap을 기준으로 높이를 제한하게 했다. 관련 Radix Content에 collisionPadding={16} 을 명시했다. 스크롤 pane 밖에서 보이도록 포털 기반 메뉴 계약을 정적 테스트로 고정했다. 확인 workspace monitor 테스트 83개 통과. Browser smoke에서 Tool Studio </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 639,
-      "updatedAt": "2026-06-06T05:09:01.441Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-06-popup-scroll-clipping-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-06-popup-scroll-clipping/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Validation: Popup Scroll Clipping",
-      "excerpt": "Validation: Popup Scroll Clipping 완료된 검증 corepack pnpm filter workspace monitor test : 통과, 83개 테스트. 새 회귀 테스트: Popup menus escape scroll panes and keep their own bounded scroll . Browser smoke, viewport 900x520: Tool Studio primary menu: top=281 , bottom=504 , height=223 , viewpor",
-      "html": "<h1>Validation: Popup Scroll Clipping</h1>\n<h2>완료된 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 83개 테스트.</li>\n<li>새 회귀 테스트: <code>Popup menus escape scroll panes and keep their own bounded scroll</code>.</li>\n<li>Browser smoke, viewport 900x520:</li>\n<li>Tool Studio primary menu: <code>top=281</code>, <code>bottom=504</code>, <code>height=223</code>, <code>viewportHeight=520</code>, <code>inViewport=true</code>, <code>zIndex=140</code>, <code>maxHeight=223.122px</code>, <code>overflowY=auto</code>, <code>overscrollBehavior=contain</code>, <code>portalWrapped=true</code>.</li>\n<li>Source file picker after scrolling trigger into view: <code>top=16</code>, <code>bottom=232</code>, <code>height=216</code>, <code>viewportHeight=520</code>, <code>inViewport=true</code>, <code>zIndex=140</code>, <code>maxHeight=216.094px</code>, <code>overflowY=auto</code>, <code>overscrollBehavior=contain</code>, <code>portalWrapped=true</code>.</li>\n</ul>\n<h2>남은 검증</h2>\n<ul>\n<li>workspace-monitor check.</li>\n<li>source controls smoke.</li>\n<li>platform-desktop-app test/check.</li>\n<li>internal package build.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 853,
-      "updatedAt": "2026-06-06T05:09:01.440Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-popup-scroll-clipping-plan-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-popup-scroll-clipping/plan.ko.md",
       "category": "project-spec",
@@ -7899,22 +8107,6 @@
       "previewMode": "document-preview",
       "htmlTruncated": false,
       "sourceBytes": 794,
-      "updatedAt": "2026-06-06T05:09:01.439Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-06-popup-scroll-clipping-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-06-popup-scroll-clipping/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Tasks: Popup Scroll Clipping",
-      "excerpt": "Tasks: Popup Scroll Clipping x 웹 기준 확인 및 기록 x 팝업/스크롤 관련 코드 경로 확인 x 공통 팝업 레이어 token 추가 x AppChoiceMenu, source file picker, Tool Studio menu CSS 보강 x Radix collision padding 명시 x 회귀 테스트 추가 check, Browser smoke, package 검증 평가/요약/trace 기록 커밋 및 푸시",
-      "html": "<h1>Tasks: Popup Scroll Clipping</h1>\n<ul>\n<li>[x] 웹 기준 확인 및 기록</li>\n<li>[x] 팝업/스크롤 관련 코드 경로 확인</li>\n<li>[x] 공통 팝업 레이어 token 추가</li>\n<li>[x] AppChoiceMenu, source file picker, Tool Studio menu CSS 보강</li>\n<li>[x] Radix collision padding 명시</li>\n<li>[x] 회귀 테스트 추가</li>\n<li>[ ] check, Browser smoke, package 검증</li>\n<li>[ ] 평가/요약/trace 기록</li>\n<li>[ ] 커밋 및 푸시</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 397,
       "updatedAt": "2026-06-06T05:09:01.439Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
@@ -10577,38 +10769,6 @@
       "workspaceArea": "_history/request-traces"
     },
     {
-      "id": "history-work-summaries-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "Parallel Snapshot Collector 작업 요약",
-      "excerpt": "Parallel Snapshot Collector 작업 요약 날짜: 2026 06 06 완료 Workspace Monitor snapshot collector를 async worker thread 구조로 전환했다. 문서 렌더링은 최대 6개 worker로 분산한다. source preview는 후보를 먼저 정렬/상한 적용한 뒤 최대 4개 worker로 읽는다. worker 실패 또는 작은 task에서는 기존 sync path로 fallback한다. snapshot stats에 snapshotDocu",
-      "html": "<p>Parallel Snapshot Collector 작업 요약 날짜: 2026 06 06 완료 Workspace Monitor snapshot collector를 async worker thread 구조로 전환했다. 문서 렌더링은 최대 6개 worker로 분산한다. source preview는 후보를 먼저 정렬/상한 적용한 뒤 최대 4개 worker로 읽는다. worker 실패 또는 작은 task에서는 기존 sync path로 fallback한다. snapshot stats에 snapshotDocumentWorkers , snapshotSourceWorkers 를 추가했다. Tool Playbook registry에 snapshot wor</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 981,
-      "updatedAt": "2026-06-06T02:26:02.134Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-      "path": "_history/work-timings/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-      "category": "work-timing",
-      "language": "ko",
-      "title": "Parallel Snapshot Collector 작업 시간 기록",
-      "excerpt": "Parallel Snapshot Collector 작업 시간 기록 | 단계 | 상태 | 메모 | | | | | | 조사 | 완료 | 공식 문서와 기존 Rust 구조 확인 | | 구현 | 완료 | worker pool, file worker, async buildSnapshot | | 1차 검증 | 완료 | collect/check/test 통과 | | 최종 패키징 | 완료 | Tauri package, codesign, hdiutil verify 완료 | 관측 time corepack pnpm f",
-      "html": "<p>Parallel Snapshot Collector 작업 시간 기록 | 단계 | 상태 | 메모 | | | | | | 조사 | 완료 | 공식 문서와 기존 Rust 구조 확인 | | 구현 | 완료 | worker pool, file worker, async buildSnapshot | | 1차 검증 | 완료 | collect/check/test 통과 | | 최종 패키징 | 완료 | Tauri package, codesign, hdiutil verify 완료 | 관측 time corepack pnpm filter workspace monitor run collect 에서 222% CPU 사용률과 0.855s wall time을 관측했다. sna</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 662,
-      "updatedAt": "2026-06-06T02:26:02.133Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-parallel-snapshot-collector-validation-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-parallel-snapshot-collector/validation.ko.md",
       "category": "project-spec",
@@ -10639,54 +10799,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-      "path": "_history/plans/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "Parallel Snapshot Collector 작업 계획",
-      "excerpt": "Parallel Snapshot Collector 작업 계획 날짜: 2026 06 06 work mode: standard install mode: developer 순서 1. 공식 문서 조사 2. 현재 병렬 구조 조사 3. snapshot collector worker pool 구현 4. registry/test/spec/history 업데이트 5. collect/check/test/build/package 6. commit/push",
-      "html": "<p>Parallel Snapshot Collector 작업 계획 날짜: 2026 06 06 work mode: standard install mode: developer 순서 1. 공식 문서 조사 2. 현재 병렬 구조 조사 3. snapshot collector worker pool 구현 4. registry/test/spec/history 업데이트 5. collect/check/test/build/package 6. commit/push</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 310,
-      "updatedAt": "2026-06-06T02:23:45.532Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약",
-      "excerpt": "사용자 요청 요약 날짜: 2026 06 06 사용자는 병렬 구조, 멀티스레드, 멀티프로세스를 통해 속도를 늘릴 수 있는 방법을 고려하라고 요청했다. 처리 범위 Workspace Monitor snapshot 수집에 Node worker thread pool을 추가하고, 기존 Rust/Rayon 구조는 중복 구현 없이 유지/기록한다.",
-      "html": "<p>사용자 요청 요약 날짜: 2026 06 06 사용자는 병렬 구조, 멀티스레드, 멀티프로세스를 통해 속도를 늘릴 수 있는 방법을 고려하라고 요청했다. 처리 범위 Workspace Monitor snapshot 수집에 Node worker thread pool을 추가하고, 기존 Rust/Rayon 구조는 중복 구현 없이 유지/기록한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 356,
-      "updatedAt": "2026-06-06T02:23:45.531Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "Parallel Snapshot Collector 웹 검색 기록",
-      "excerpt": "Parallel Snapshot Collector 웹 검색 기록 날짜: 2026 06 06 쿼리 Node.js official worker threads documentation parallel CPU tasks Node.js official child process documentation spawn parallel processes Tauri v2 official documentation async commands state task spawn Rust standard library std::",
-      "html": "<p>Parallel Snapshot Collector 웹 검색 기록 날짜: 2026 06 06 쿼리 Node.js official worker threads documentation parallel CPU tasks Node.js official child process documentation spawn parallel processes Tauri v2 official documentation async commands state task spawn Rust standard library std::thread official documentation spawn 출처와 영향 | 출처 | 판단 | | | | | https://nodejs.or</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1232,
-      "updatedAt": "2026-06-06T02:23:45.531Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-parallel-snapshot-collector-traceability-ko-md",
@@ -10783,22 +10895,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-tool-usage-integration-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-tool-usage-integration.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "Tool Usage Integration 평가",
-      "excerpt": "Tool Usage Integration 평가 날짜: 2026 06 06 결과 status: passed internal 사용자 요청인 “지금 쓰는 도구와 사용 방식을 플랫폼에 녹이기”를 source backed 기능으로 구현했다. 도구 사용 루프는 registry에 남고, snapshot으로 수집되며, Tool Studio에서 선택 가능한 Agent Tool Playbook으로 표시된다. 충족한 기준 웹 우선 조사와 공식 출처 기록: 통과 요구사항/스펙/추적성 기록: 통과 source of tr",
-      "html": "<p>Tool Usage Integration 평가 날짜: 2026 06 06 결과 status: passed internal 사용자 요청인 “지금 쓰는 도구와 사용 방식을 플랫폼에 녹이기”를 source backed 기능으로 구현했다. 도구 사용 루프는 registry에 남고, snapshot으로 수집되며, Tool Studio에서 선택 가능한 Agent Tool Playbook으로 표시된다. 충족한 기준 웹 우선 조사와 공식 출처 기록: 통과 요구사항/스펙/추적성 기록: 통과 source of truth registry: 통과 collector/snapshot/customer sanitizer: 통과 Tool Studio UI: 통과 te</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1347,
-      "updatedAt": "2026-06-06T02:16:42.822Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
     },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-tool-usage-integration-validation-ko-md",
@@ -18095,102 +18191,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-depth-first-home-navigation-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-depth-first-home-navigation/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "스펙: Depth First Home Navigation",
-      "excerpt": "스펙: Depth First Home Navigation 목표 Workspace Monitor의 Overview 탭이 여러 기능 패널을 한 번에 담는 얕은 대시보드처럼 동작하지 않게 한다. 기본 홈은 기능 선택 메뉴 역할만 하고, 실제 기능 내용은 한 단계 들어간 단일 기능 화면에서만 보여준다. 사용자가 한 탭 안에서 여러 기능을 동시에 해석하지 않도록, 탭보다 깊은 drill down 구조를 기본으로 둔다. 요구사항 Overview 기본 상태는 홈 히어로와 기능 선택 메뉴만 보여준다. 핵심 기능",
-      "html": "<h1>스펙: Depth First Home Navigation</h1>\n<h2>목표</h2>\n<ul>\n<li>Workspace Monitor의 Overview 탭이 여러 기능 패널을 한 번에 담는 얕은 대시보드처럼 동작하지 않게 한다.</li>\n<li>기본 홈은 기능 선택 메뉴 역할만 하고, 실제 기능 내용은 한 단계 들어간 단일 기능 화면에서만 보여준다.</li>\n<li>사용자가 한 탭 안에서 여러 기능을 동시에 해석하지 않도록, 탭보다 깊은 drill-down 구조를 기본으로 둔다.</li>\n</ul>\n<h2>요구사항</h2>\n<ul>\n<li>Overview 기본 상태는 홈 히어로와 기능 선택 메뉴만 보여준다.</li>\n<li>핵심 기능 상세, 설정 점검, 루트 툴, 실행 순서, 결정함, 작업 지표, 제품 구조, 최근 기록, 옵션 상태는 각각 별도 <code>#home-depth-*</code> drill-down 화면에서 하나씩 열린다.</li>\n<li>drill-down 화면은 뒤로가기 컨트롤을 제공하고, 같은 화면에 다른 기능 패널을 함께 노출하지 않는다.</li>\n<li>기존 탭형 핵심 기능 컴포넌트는 단일 기능 상세 컴포넌트로 바뀌어야 한다.</li>\n<li>desktop/tablet/mobile viewport에서 메뉴와 drill-down 화면이 수평 overflow 없이 동작해야 한다.</li>\n</ul>\n<h2>제외</h2>\n<ul>\n<li>전체 앱 routing 구조 변경</li>\n<li>Desktop, Source, Agents 탭 내부의 전체 워크벤치 재설계</li>\n<li>snapshot schema 변경</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1282,
-      "updatedAt": "2026-06-04T15:54:32.193Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-single-purpose-home-ui-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-single-purpose-home-ui/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록: Single Purpose Home UI",
-      "excerpt": "작업 목록: Single Purpose Home UI x 단일 목적 UI 요구사항을 추가한다. x 영속 지침과 UI 정책에 인지 용량/단일 목적 기준을 기록한다. x memory bootstrap hot anchor 설명을 갱신한다. x CoreFeatureTabs의 active feature detail에서 secondary CTA를 제거한다. x 홈 빠른 action 버튼을 중복 없는 단일 목적 버튼으로 바꾼다. x 운영 strip의 복합 숫자 라벨을 목적 라벨로 바꾼다. x 홈 disclos",
-      "html": "<h1>작업 목록: Single Purpose Home UI</h1>\n<ul>\n<li>[x] 단일 목적 UI 요구사항을 추가한다.</li>\n<li>[x] 영속 지침과 UI 정책에 인지 용량/단일 목적 기준을 기록한다.</li>\n<li>[x] memory bootstrap hot anchor 설명을 갱신한다.</li>\n<li>[x] CoreFeatureTabs의 active feature detail에서 secondary CTA를 제거한다.</li>\n<li>[x] 홈 빠른 action 버튼을 중복 없는 단일 목적 버튼으로 바꾼다.</li>\n<li>[x] 운영 strip의 복합 숫자 라벨을 목적 라벨로 바꾼다.</li>\n<li>[x] 홈 disclosure를 실행 순서, 결정함, 작업 지표, 제품 구조, 최근 기록, 옵션 상태로 분리한다.</li>\n<li>[x] 검증 명령과 Browser smoke를 실행하고 결과를 기록한다.</li>\n<li>[x] 커밋 후 <code>origin/main</code>에 push한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 733,
-      "updatedAt": "2026-06-04T15:34:12.828Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-single-purpose-home-ui-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-single-purpose-home-ui/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증: Single Purpose Home UI",
-      "excerpt": "검증: Single Purpose Home UI 수행 검증 pnpm run check : 통과 pnpm test : 17개 통과 pnpm exec next build : 통과 pnpm run perf:budget : 통과, largest chunk 362490 bytes python3 tools/docs audit/src/docs audit.py check : 통과, gaps 0 PYTHONPATH=src python3 m agent platform.cli check config contract ",
-      "html": "<h1>검증: Single Purpose Home UI</h1>\n<h2>수행 검증</h2>\n<ul>\n<li><code>pnpm run check</code>: 통과</li>\n<li><code>pnpm test</code>: 17개 통과</li>\n<li><code>pnpm exec next build</code>: 통과</li>\n<li><code>pnpm run perf:budget</code>: 통과, largest chunk 362490 bytes</li>\n<li><code>python3 _tools/docs-audit/src/docs_audit.py --check</code>: 통과, gaps 0</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json</code>: 통과</li>\n<li>JSON syntax check: 통과</li>\n<li>localhost HTTP smoke: <code>200</code>, 0.294806s</li>\n<li>in-app Browser responsive smoke:</li>\n<li>1280x720: horizontal overflow 0, disclosure 6개 기본 접힘, feature CTA 1개, 작은 홈 타깃 0개</li>\n<li>900x720: horizontal overflow 0, disclosure 6개 기본 접힘, feature CTA 1개, 작은 홈 타깃 0개</li>\n<li>390x844: horizontal overflow 0, disclosure 6개 기본 접힘, feature CTA 1개, 작은 홈 타깃 0개</li>\n<li>390x844에서 <code>실행 순서</code> disclosure open: 1개 열림, horizontal overflow 0</li>\n</ul>\n<h2>확인 기준</h2>\n<ul>\n<li>핵심 기능 active detail의 CTA는 하나다: 충족.</li>\n<li>홈 disclosure panel은 기본 접힘이며 각 summary가 하나의 정보 역할만 나타낸다: 충족.</li>\n<li>desktop/tablet/mobile viewport에서 horizontal overflow가 없다: 충족.</li>\n<li>단일 목적 UI 원칙이 persistent instructions, UI tone policy, memory bootstrap, 요구사항에 남아 있다: 충족.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1299,
-      "updatedAt": "2026-06-04T15:33:01.167Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-single-purpose-home-ui-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-single-purpose-home-ui/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성: Single Purpose Home UI",
-      "excerpt": "추적성: Single Purpose Home UI 요청 사용자 요청 요약: 사용자의 인지 한계를 고려해 기능 하나가 명확히 한 가지 일만 하도록 UI를 바꿔야 한다. 요구사항 연결 REQ WM 032 : 단일 목적 기능, 패널, 버튼, workflow step 관련 기존 요구사항: REQ WM 030 , REQ WM 031 구현 연결 components/workbench/CoreFeatureTabs.tsx : active feature detail의 CTA를 하나로 제한 components/Mon",
-      "html": "<h1>추적성: Single Purpose Home UI</h1>\n<h2>요청</h2>\n<ul>\n<li>사용자 요청 요약: 사용자의 인지 한계를 고려해 기능 하나가 명확히 한 가지 일만 하도록 UI를 바꿔야 한다.</li>\n</ul>\n<h2>요구사항 연결</h2>\n<ul>\n<li><code>REQ-WM-032</code>: 단일 목적 기능, 패널, 버튼, workflow step</li>\n<li>관련 기존 요구사항: <code>REQ-WM-030</code>, <code>REQ-WM-031</code></li>\n</ul>\n<h2>구현 연결</h2>\n<ul>\n<li><code>components/workbench/CoreFeatureTabs.tsx</code>: active feature detail의 CTA를 하나로 제한</li>\n<li><code>components/MonitorShell.tsx</code>: 홈 action, operator strip, disclosure panel 의미 단위 분리</li>\n<li><code>app/globals.css</code>: 분리된 disclosure panel이 암묵적 2열 grid에 끌려가지 않게 조정</li>\n</ul>\n<h2>정책 연결</h2>\n<ul>\n<li><code>_docs/instructions/persistent-instructions.md</code></li>\n<li><code>_docs/instructions/persistent-instructions.ko.md</code></li>\n<li><code>_docs/instructions/persistent-instructions.en.md</code></li>\n<li><code>_docs/policies/ui-tone-policy.ko.md</code></li>\n<li><code>_docs/policies/ui-tone-policy.en.md</code></li>\n<li><code>agent-platform/configs/memory/bootstrap-manifest.json</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 971,
-      "updatedAt": "2026-06-04T15:29:40.316Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-single-purpose-home-ui-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-single-purpose-home-ui/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "계획: Single Purpose Home UI",
-      "excerpt": "계획: Single Purpose Home UI work mode 선택: governance 이유: 사용자 지시가 앞으로의 UI 원칙으로 지속되어야 하며 docs/instructions/ , UI 정책, memory bootstrap, Workspace Monitor 요구사항과 구현을 함께 바꾼다. view mode: superadmin developer install mode: 해당 없음 단계 1. 웹 기준 확인: W3C/WAI cognitive accessibility, labels/purpo",
-      "html": "<h1>계획: Single Purpose Home UI</h1>\n<h2>work_mode</h2>\n<ul>\n<li>선택: <code>governance</code></li>\n<li>이유: 사용자 지시가 앞으로의 UI 원칙으로 지속되어야 하며 <code>_docs/instructions/</code>, UI 정책, memory bootstrap, Workspace Monitor 요구사항과 구현을 함께 바꾼다.</li>\n<li>view_mode: <code>superadmin_developer</code></li>\n<li>install_mode: 해당 없음</li>\n</ul>\n<h2>단계</h2>\n<p>1. 웹 기준 확인: W3C/WAI cognitive accessibility, labels/purpose, progressive disclosure 출처를 확인한다.</p>\n<p>2. 영속 원칙 반영: persistent instructions, UI tone policy, memory bootstrap에 단일 목적 UI 기준을 추가한다.</p>\n<p>3. 구현 반영: Overview home의 중복/복합 버튼, 핵심 기능 탭 secondary CTA, 복합 disclosure panel을 단일 목적 단위로 분리한다.</p>\n<p>4. 검증: check, test, build, docs audit, config contract, responsive Browser smoke를 실행한다.</p>\n<p>5. 기록: 요구사항, 스펙, 히스토리, 평가, 요청 추적을 갱신한다.</p>\n<h2>의사결정</h2>\n<ul>\n<li>대안 A: 홈의 보조 정보를 모두 제거한다.</li>\n<li>대안 B: 보조 정보는 유지하되 기본 접힘 상태에서 한 패널 한 역할로 분리한다.</li>\n<li>선택: B. 사용자가 필요할 때 근거와 상태를 볼 수 있어야 하므로 정보를 없애지 않고 인지 단위를 작게 만든다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1266,
-      "updatedAt": "2026-06-04T15:29:40.314Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-single-purpose-home-ui-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-single-purpose-home-ui/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "스펙: Single Purpose Home UI",
-      "excerpt": "스펙: Single Purpose Home UI 목표 Workspace Monitor 홈에서 사용자가 한 번에 하나의 기능 목적만 인지하고 선택하게 한다. 버튼 하나가 여러 결과를 암시하거나, 패널 하나가 상태/결정/지표/기록을 동시에 담는 구조를 줄인다. 기존 전체 화면 reflow와 버튼 크기 개선을 유지하면서 UI 의미 단위를 더 작고 명확하게 나눈다. 요구사항 핵심 기능 탭의 active detail은 primary action 하나만 제공한다. 홈의 빠른 action 버튼은 서로 다른 한",
-      "html": "<h1>스펙: Single Purpose Home UI</h1>\n<h2>목표</h2>\n<ul>\n<li>Workspace Monitor 홈에서 사용자가 한 번에 하나의 기능 목적만 인지하고 선택하게 한다.</li>\n<li>버튼 하나가 여러 결과를 암시하거나, 패널 하나가 상태/결정/지표/기록을 동시에 담는 구조를 줄인다.</li>\n<li>기존 전체 화면 reflow와 버튼 크기 개선을 유지하면서 UI 의미 단위를 더 작고 명확하게 나눈다.</li>\n</ul>\n<h2>요구사항</h2>\n<ul>\n<li>핵심 기능 탭의 active detail은 primary action 하나만 제공한다.</li>\n<li>홈의 빠른 action 버튼은 서로 다른 한 가지 행동만 수행해야 하며 같은 목적의 중복 버튼을 두지 않는다.</li>\n<li>보조 disclosure는 한 패널당 한 정보 역할만 가진다.</li>\n<li>운영 strip 버튼은 숫자 조합 대신 사용자가 인지 가능한 목적 라벨을 가져야 한다.</li>\n<li>정책 문서에는 단일 목적 UI 원칙과 검증 기준을 기록한다.</li>\n</ul>\n<h2>제외</h2>\n<ul>\n<li>각 기능 화면 내부의 전체 정보구조 재설계</li>\n<li>runtime, source editor, terminal drawer처럼 작업 특성상 복합 워크벤치가 필요한 영역</li>\n<li>backend snapshot schema 변경</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1134,
-      "updatedAt": "2026-06-04T15:29:40.314Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18205,7 +18205,7 @@
         },
         {
           "category": "request-trace",
-          "count": 13
+          "count": 14
         },
         {
           "category": "user-request",
@@ -18225,7 +18225,7 @@
         },
         {
           "category": "plan",
-          "count": 9
+          "count": 8
         },
         {
           "category": "daily-history",
@@ -18241,6 +18241,16 @@
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
           "updatedAt": "2026-06-06T03:58:52.562Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-button-text-wrapping-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-button-text-wrapping.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "Evaluation: Button Text Wrapping",
+          "excerpt": "Evaluation: Button Text Wrapping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 텍스트 줄바꿈 때문에 버튼이 너무 길어지는 문제 수정. 결과: 액션/명령 버튼 라벨에 한 줄 ellipsis 계약을 추가했고, 주요 커스텀 버튼 영역의 white space: normal / overflow wrap:anywhere 예외를 제거했다. 근거 Web 기준: MDN의 text overflow / white space 기준을 확인했다. 접근성 기준: DOM 텍스트는 유지하고",
+          "updatedAt": "2026-06-06T05:27:59.626Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18390,7 +18400,7 @@
           "language": "ko",
           "title": "Evaluation: Popup Scroll Clipping",
           "excerpt": "Evaluation: Popup Scroll Clipping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 스크롤 때문에 팝업이 보이지 않는 현상 수정. 결과: 대표 dropdown/context/file picker 팝업이 portal layer, collision padding, viewport available height, 내부 scroll 계약을 갖게 되어 스크롤 컨테이너 clipping과 화면 밖 확장을 줄였다. 근거 Web 기준: overflow clipping과 porta",
-          "updatedAt": "2026-06-06T05:09:01.442Z",
+          "updatedAt": "2026-06-06T05:13:07.853Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18454,16 +18464,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-tool-usage-integration-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-tool-usage-integration.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "Tool Usage Integration 평가",
-          "excerpt": "Tool Usage Integration 평가 날짜: 2026 06 06 결과 status: passed internal 사용자 요청인 “지금 쓰는 도구와 사용 방식을 플랫폼에 녹이기”를 source backed 기능으로 구현했다. 도구 사용 루프는 registry에 남고, snapshot으로 수집되며, Tool Studio에서 선택 가능한 Agent Tool Playbook으로 표시된다. 충족한 기준 웹 우선 조사와 공식 출처 기록: 통과 요구사항/스펙/추적성 기록: 통과 source of tr",
-          "updatedAt": "2026-06-06T02:16:42.822Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-clear-tab-discrimination-ko-md",
           "path": "_history/plans/2026/2026-06-06-clear-tab-discrimination.ko.md",
           "category": "plan",
@@ -18524,16 +18524,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-          "path": "_history/plans/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "Parallel Snapshot Collector 작업 계획",
-          "excerpt": "Parallel Snapshot Collector 작업 계획 날짜: 2026 06 06 work mode: standard install mode: developer 순서 1. 공식 문서 조사 2. 현재 병렬 구조 조사 3. snapshot collector worker pool 구현 4. registry/test/spec/history 업데이트 5. collect/check/test/build/package 6. commit/push",
-          "updatedAt": "2026-06-06T02:23:45.532Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-runtime-customization-layer-ko-md",
           "path": "_history/plans/2026/2026-06-06-runtime-customization-layer.ko.md",
           "category": "plan",
@@ -18551,6 +18541,16 @@
           "title": "Storage Architecture Review Plan",
           "excerpt": "Storage Architecture Review Plan 작성일: 2026 06 06 실행 계획 1. 웹 검색으로 공식 근거 확인 2. 현재 Workspace Monitor collector와 Tauri runtime persistence 조사 3. 파일 유지 대상과 DB 후보 대상 분류 4. 하이브리드 저장소 registry 작성 5. 요구사항, 아키텍처 리뷰, 스펙, traceability 작성 6. 관련 제품 registry 업데이트 7. collect/check/test/build/pac",
           "updatedAt": "2026-06-06T02:33:43.753Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-button-text-wrapping-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-button-text-wrapping.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Request Trace: Button Text Wrapping",
+          "excerpt": "Request Trace: Button Text Wrapping 날짜: 2026 06 06 요청 버튼 텍스트 줄바꿈 때문에 버튼이 길어지는 문제 수정. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 button text wrapping.ko.md 스펙: platform desktop app/specs/2026 06 06 button text wrapping/spec.ko.md 계획/작업/검증/추적: platform desktop app/",
+          "updatedAt": "2026-06-06T05:27:59.626Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18640,7 +18640,7 @@
           "language": "ko",
           "title": "Request Trace: Popup Scroll Clipping",
           "excerpt": "Request Trace: Popup Scroll Clipping 날짜: 2026 06 06 요청 스크롤 때문에 팝업이 안 보이는 현상 수정. 산출물 requirements: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md spec: platform desktop app/specs/2026 06 06 popup scroll clipping/spec.ko.md plan: platform desktop app/",
-          "updatedAt": "2026-06-06T05:09:01.442Z",
+          "updatedAt": "2026-06-06T05:13:07.853Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18681,6 +18681,16 @@
           "title": "Request Trace: Terminal and Provider Setup Usability",
           "excerpt": "Request Trace: Terminal and Provider Setup Usability 날짜: 2026 06 06 요청 터미널 기능 사용법과 세팅법 개선. GPT/Gemini 설정을 단순 로그인 흐름으로 시작 가능하게 개선. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/RuntimeTerminalDrawer.tsx platform desktop app/renderer/workspace monitor/com",
           "updatedAt": "2026-06-06T03:58:52.561Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-button-text-wrapping-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-button-text-wrapping.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "User Request: 버튼 텍스트 줄바꿈 안정화",
+          "excerpt": "User Request: 버튼 텍스트 줄바꿈 안정화 날짜: 2026 06 06 요약 사용자는 텍스트 줄바꿈 때문에 버튼이 과하게 길어지거나 높아지는 UI 문제를 수정해 달라고 요청했다. 해석한 요구 액션 버튼은 설명 문장처럼 줄바꿈되지 않아야 한다. 긴 라벨은 버튼 크기를 밀어내지 말고 한 줄로 안정적으로 표시되어야 한다. 구현 완료 후 자동 검증과 빌드까지 수행해야 한다.",
+          "updatedAt": "2026-06-06T05:22:49.438Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18754,16 +18764,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약",
-          "excerpt": "사용자 요청 요약 날짜: 2026 06 06 사용자는 병렬 구조, 멀티스레드, 멀티프로세스를 통해 속도를 늘릴 수 있는 방법을 고려하라고 요청했다. 처리 범위 Workspace Monitor snapshot 수집에 Node worker thread pool을 추가하고, 기존 Rust/Rayon 구조는 중복 구현 없이 유지/기록한다.",
-          "updatedAt": "2026-06-06T02:23:45.531Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-popup-scroll-clipping-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-popup-scroll-clipping.ko.md",
           "category": "user-request",
@@ -18811,6 +18811,16 @@
           "title": "User Request Summary: Terminal and Provider Setup Usability",
           "excerpt": "User Request Summary: Terminal and Provider Setup Usability 날짜: 2026 06 06 사용자는 터미널 기능의 실제 사용법과 세팅법을 더 기능적으로 만들고, GPT/OpenAI와 Gemini/Google 설정을 단순 로그인 흐름으로 시작할 수 있게 해 달라고 요청했다.",
           "updatedAt": "2026-06-06T03:56:10.653Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-button-text-wrapping-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-button-text-wrapping.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: 버튼 텍스트 줄바꿈과 ellipsis 계약",
+          "excerpt": "Web Search: 버튼 텍스트 줄바꿈과 ellipsis 계약 날짜: 2026 06 06 질의 MDN text overflow CSS ellipsis overflow hidden white space nowrap MDN white space CSS nowrap button label wrapping WCAG Reflow success criterion 1.4.10 text controls truncation 확인한 출처 MDN text overflow : text overflow 가 숨겨진 ov",
+          "updatedAt": "2026-06-06T05:22:49.435Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18884,16 +18894,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "Parallel Snapshot Collector 웹 검색 기록",
-          "excerpt": "Parallel Snapshot Collector 웹 검색 기록 날짜: 2026 06 06 쿼리 Node.js official worker threads documentation parallel CPU tasks Node.js official child process documentation spawn parallel processes Tauri v2 official documentation async commands state task spawn Rust standard library std::",
-          "updatedAt": "2026-06-06T02:23:45.531Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-popup-scroll-clipping-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-popup-scroll-clipping.ko.md",
           "category": "web-search",
@@ -18941,6 +18941,16 @@
           "title": "Web Search: Terminal and Provider Setup Usability",
           "excerpt": "Web Search: Terminal and Provider Setup Usability 날짜: 2026 06 06 Queries site:platform.openai.com/docs OpenAI API authentication API keys project keys 2026 site:ai.google.dev/gemini api/docs Gemini API authentication API key Google login 2026 site:cloud.google.com/vertex ai/gener",
           "updatedAt": "2026-06-06T03:56:10.649Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-button-text-wrapping-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-button-text-wrapping.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "Work Summary: Button Text Wrapping",
+          "excerpt": "Work Summary: Button Text Wrapping 날짜: 2026 06 06 변경 요약 버튼 라벨 max inline token을 추가했다. 액션/명령 버튼에 nowrap/ellipsis 계약을 적용했다. 런타임 빠른 명령, CLI 명령 복사, provider model chip, source command toolbar, command palette result에서 줄바꿈 예외를 정리했다. workspace monitor 정적 회귀 테스트를 추가했다. 검증 요약 workspace m",
+          "updatedAt": "2026-06-06T05:27:59.625Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19014,23 +19024,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "Parallel Snapshot Collector 작업 요약",
-          "excerpt": "Parallel Snapshot Collector 작업 요약 날짜: 2026 06 06 완료 Workspace Monitor snapshot collector를 async worker thread 구조로 전환했다. 문서 렌더링은 최대 6개 worker로 분산한다. source preview는 후보를 먼저 정렬/상한 적용한 뒤 최대 4개 worker로 읽는다. worker 실패 또는 작은 task에서는 기존 sync path로 fallback한다. snapshot stats에 snapshotDocu",
-          "updatedAt": "2026-06-06T02:26:02.134Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-popup-scroll-clipping-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-popup-scroll-clipping.ko.md",
           "category": "work-summary",
           "language": "ko",
           "title": "Work Summary: Popup Scroll Clipping",
           "excerpt": "Work Summary: Popup Scroll Clipping 날짜: 2026 06 06 변경 요약 팝업 레이어 공통 token을 추가했다. AppChoiceMenu, source file picker, Tool Studio dropdown/context menu가 Radix available height와 viewport gap을 기준으로 높이를 제한하게 했다. 관련 Radix Content에 collisionPadding={16} 을 명시했다. 스크롤 pane 밖에서 보이도록 포털 기반 메뉴",
-          "updatedAt": "2026-06-06T05:09:01.441Z",
+          "updatedAt": "2026-06-06T05:13:07.853Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19071,6 +19071,16 @@
           "title": "Work Summary: Terminal and Provider Setup Usability",
           "excerpt": "Work Summary: Terminal and Provider Setup Usability 날짜: 2026 06 06 변경 터미널 시작 화면에 PTY, 작업 폴더, 검색/클립보드, AI 계정 설정 카드 추가. Provider 설정에 GPT/OpenAI와 Gemini/Google fast lane 추가. OpenAI/Gemini login URL을 공식 API key 페이지로 정리. cloud provider row의 setup/login 중복 버튼을 하나의 로그인/키 발급 action으로 단순화",
           "updatedAt": "2026-06-06T03:58:52.561Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-06-button-text-wrapping-json",
+          "path": "_history/work-timings/2026/2026-06-06-button-text-wrapping.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Button Text Wrapping",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"task\": \"button text wrapping\", \"phases\": { \"name\": \"web first intake\", \"status\": \"completed\", \"notes\": \"MDN text overflow, MDN white space, W3C reflow notes checked.\" }, { \"name\": \"source inspection\", \"status\": \"completed\", \"notes\": \"Found custom button r",
+          "updatedAt": "2026-06-06T05:27:59.626Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19134,23 +19144,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-          "path": "_history/work-timings/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-          "category": "work-timing",
-          "language": "ko",
-          "title": "Parallel Snapshot Collector 작업 시간 기록",
-          "excerpt": "Parallel Snapshot Collector 작업 시간 기록 | 단계 | 상태 | 메모 | | | | | | 조사 | 완료 | 공식 문서와 기존 Rust 구조 확인 | | 구현 | 완료 | worker pool, file worker, async buildSnapshot | | 1차 검증 | 완료 | collect/check/test 통과 | | 최종 패키징 | 완료 | Tauri package, codesign, hdiutil verify 완료 | 관측 time corepack pnpm f",
-          "updatedAt": "2026-06-06T02:26:02.133Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-popup-scroll-clipping-json",
           "path": "_history/work-timings/2026/2026-06-06-popup-scroll-clipping.json",
           "category": "work-timing",
           "language": "unknown",
           "title": "2026 06 06 Popup Scroll Clipping",
-          "excerpt": "{ \"task id\": \"2026 06 06 popup scroll clipping\", \"title\": \"Popup scroll clipping fix\", \"work mode\": \"ship first\", \"measurement quality\": \"partial\", \"date\": \"2026 06 06\", \"started at\": \"2026 06 06T14:00:41+0900\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first inta",
-          "updatedAt": "2026-06-06T05:09:49.770Z",
+          "excerpt": "{ \"task id\": \"2026 06 06 popup scroll clipping\", \"title\": \"Popup scroll clipping fix\", \"work mode\": \"ship first\", \"measurement quality\": \"partial\", \"date\": \"2026 06 06\", \"started at\": \"2026 06 06T14:00:41+0900\", \"ended at\": \"2026 06 06T14:12:42+0900\", \"phases\": { \"phase id\": \"web",
+          "updatedAt": "2026-06-06T05:13:07.854Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19202,16 +19202,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2679,
+      "documents": 2685,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1027
+          "count": 1028
         },
         {
           "category": "web-search",
-          "count": 424
+          "count": 425
         },
         {
           "category": "plan",
@@ -19219,19 +19219,19 @@
         },
         {
           "category": "request-trace",
-          "count": 352
+          "count": 353
         },
         {
           "category": "work-timing",
-          "count": 272
+          "count": 273
         },
         {
           "category": "user-request",
-          "count": 137
+          "count": 138
         },
         {
           "category": "work-summary",
-          "count": 104
+          "count": 105
         },
         {
           "category": "daily-history",
@@ -19242,7 +19242,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6614290,
+      "totalSourceBytes": 6620353,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19271,7 +19271,7 @@
       "decisionEvents": 0,
       "openSignals": 20,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T05:09:49.770Z",
+      "latestEventAt": "2026-06-06T05:27:59.626Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19284,6 +19284,11 @@
         "id": "verification",
         "label": "verification",
         "count": 22
+      },
+      {
+        "id": "traceability",
+        "label": "traceability",
+        "count": 14
       },
       {
         "id": "delivery",
@@ -19301,11 +19306,6 @@
         "count": 13
       },
       {
-        "id": "traceability",
-        "label": "traceability",
-        "count": 13
-      },
-      {
         "id": "monitoring",
         "label": "monitoring",
         "count": 12
@@ -19313,7 +19313,7 @@
       {
         "id": "planning",
         "label": "planning",
-        "count": 9
+        "count": 8
       },
       {
         "id": "history",
@@ -19333,6 +19333,11 @@
         "count": 22
       },
       {
+        "id": "trace",
+        "label": "trace",
+        "count": 14
+      },
+      {
         "id": "intake",
         "label": "intake",
         "count": 13
@@ -19340,11 +19345,6 @@
       {
         "id": "summary",
         "label": "summary",
-        "count": 13
-      },
-      {
-        "id": "trace",
-        "label": "trace",
         "count": 13
       },
       {
@@ -19360,7 +19360,7 @@
       {
         "id": "plan",
         "label": "plan",
-        "count": 9
+        "count": 8
       },
       {
         "id": "history",
@@ -19382,6 +19382,96 @@
     ],
     "events": [
       {
+        "id": "history-history-work-timings-2026-2026-06-06-button-text-wrapping-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 06 Button Text Wrapping",
+        "detail": "{ \"date\": \"2026 06 06\", \"task\": \"button text wrapping\", \"phases\": { \"name\": \"web first intake\", \"status\": \"completed\", \"notes\": \"MDN text overflow, MDN white space, W3C reflow notes checked.\" }, { \"name\": \"source inspection\", \"status\": \"completed\", \"notes\": \"Found custom button r",
+        "path": "_history/work-timings/2026/2026-06-06-button-text-wrapping.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T05:27:59.626Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-button-text-wrapping-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "Evaluation: Button Text Wrapping",
+        "detail": "Evaluation: Button Text Wrapping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 텍스트 줄바꿈 때문에 버튼이 너무 길어지는 문제 수정. 결과: 액션/명령 버튼 라벨에 한 줄 ellipsis 계약을 추가했고, 주요 커스텀 버튼 영역의 white space: normal / overflow wrap:anywhere 예외를 제거했다. 근거 Web 기준: MDN의 text overflow / white space 기준을 확인했다. 접근성 기준: DOM 텍스트는 유지하고",
+        "path": "_history/evaluations/2026/2026-06-06-button-text-wrapping.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T05:27:59.626Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-button-text-wrapping-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Button Text Wrapping",
+        "detail": "Request Trace: Button Text Wrapping 날짜: 2026 06 06 요청 버튼 텍스트 줄바꿈 때문에 버튼이 길어지는 문제 수정. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 button text wrapping.ko.md 스펙: platform desktop app/specs/2026 06 06 button text wrapping/spec.ko.md 계획/작업/검증/추적: platform desktop app/",
+        "path": "_history/request-traces/2026/2026-06-06-button-text-wrapping.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T05:27:59.626Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-button-text-wrapping-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "Work Summary: Button Text Wrapping",
+        "detail": "Work Summary: Button Text Wrapping 날짜: 2026 06 06 변경 요약 버튼 라벨 max inline token을 추가했다. 액션/명령 버튼에 nowrap/ellipsis 계약을 적용했다. 런타임 빠른 명령, CLI 명령 복사, provider model chip, source command toolbar, command palette result에서 줄바꿈 예외를 정리했다. workspace monitor 정적 회귀 테스트를 추가했다. 검증 요약 workspace m",
+        "path": "_history/work-summaries/2026/2026-06-06-button-text-wrapping.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T05:27:59.625Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-button-text-wrapping-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "ready",
+        "title": "User Request: 버튼 텍스트 줄바꿈 안정화",
+        "detail": "User Request: 버튼 텍스트 줄바꿈 안정화 날짜: 2026 06 06 요약 사용자는 텍스트 줄바꿈 때문에 버튼이 과하게 길어지거나 높아지는 UI 문제를 수정해 달라고 요청했다. 해석한 요구 액션 버튼은 설명 문장처럼 줄바꿈되지 않아야 한다. 긴 라벨은 버튼 크기를 밀어내지 말고 한 줄로 안정적으로 표시되어야 한다. 구현 완료 후 자동 검증과 빌드까지 수행해야 한다.",
+        "path": "_history/user-requests/2026/2026-06-06-button-text-wrapping.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T05:22:49.438Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-button-text-wrapping-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: 버튼 텍스트 줄바꿈과 ellipsis 계약",
+        "detail": "Web Search: 버튼 텍스트 줄바꿈과 ellipsis 계약 날짜: 2026 06 06 질의 MDN text overflow CSS ellipsis overflow hidden white space nowrap MDN white space CSS nowrap button label wrapping WCAG Reflow success criterion 1.4.10 text controls truncation 확인한 출처 MDN text overflow : text overflow 가 숨겨진 ov",
+        "path": "_history/web-searches/2026/2026-06-06-button-text-wrapping.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T05:22:49.435Z"
+      },
+      {
         "id": "history-history-work-timings-2026-2026-06-06-popup-scroll-clipping-json",
         "sourceType": "history",
         "signalType": "timing",
@@ -19389,42 +19479,12 @@
         "severity": "verified",
         "status": "work-timing",
         "title": "2026 06 06 Popup Scroll Clipping",
-        "detail": "{ \"task id\": \"2026 06 06 popup scroll clipping\", \"title\": \"Popup scroll clipping fix\", \"work mode\": \"ship first\", \"measurement quality\": \"partial\", \"date\": \"2026 06 06\", \"started at\": \"2026 06 06T14:00:41+0900\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first inta",
+        "detail": "{ \"task id\": \"2026 06 06 popup scroll clipping\", \"title\": \"Popup scroll clipping fix\", \"work mode\": \"ship first\", \"measurement quality\": \"partial\", \"date\": \"2026 06 06\", \"started at\": \"2026 06 06T14:00:41+0900\", \"ended at\": \"2026 06 06T14:12:42+0900\", \"phases\": { \"phase id\": \"web",
         "path": "_history/work-timings/2026/2026-06-06-popup-scroll-clipping.json",
         "category": "work-timing",
         "language": "unknown",
         "date": "2026-06-06",
-        "timestamp": "2026-06-06T05:09:49.770Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-popup-scroll-clipping-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "Evaluation: Popup Scroll Clipping",
-        "detail": "Evaluation: Popup Scroll Clipping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 스크롤 때문에 팝업이 보이지 않는 현상 수정. 결과: 대표 dropdown/context/file picker 팝업이 portal layer, collision padding, viewport available height, 내부 scroll 계약을 갖게 되어 스크롤 컨테이너 clipping과 화면 밖 확장을 줄였다. 근거 Web 기준: overflow clipping과 porta",
-        "path": "_history/evaluations/2026/2026-06-06-popup-scroll-clipping.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T05:09:01.442Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-popup-scroll-clipping-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "Request Trace: Popup Scroll Clipping",
-        "detail": "Request Trace: Popup Scroll Clipping 날짜: 2026 06 06 요청 스크롤 때문에 팝업이 안 보이는 현상 수정. 산출물 requirements: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md spec: platform desktop app/specs/2026 06 06 popup scroll clipping/spec.ko.md plan: platform desktop app/",
-        "path": "_history/request-traces/2026/2026-06-06-popup-scroll-clipping.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T05:09:01.442Z"
+        "timestamp": "2026-06-06T05:13:07.854Z"
       },
       {
         "id": "history-history-work-summaries-2026-2026-06-06-popup-scroll-clipping-ko-md",
@@ -19439,7 +19499,37 @@
         "category": "work-summary",
         "language": "ko",
         "date": "2026-06-06",
-        "timestamp": "2026-06-06T05:09:01.441Z"
+        "timestamp": "2026-06-06T05:13:07.853Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-popup-scroll-clipping-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "Evaluation: Popup Scroll Clipping",
+        "detail": "Evaluation: Popup Scroll Clipping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 스크롤 때문에 팝업이 보이지 않는 현상 수정. 결과: 대표 dropdown/context/file picker 팝업이 portal layer, collision padding, viewport available height, 내부 scroll 계약을 갖게 되어 스크롤 컨테이너 clipping과 화면 밖 확장을 줄였다. 근거 Web 기준: overflow clipping과 porta",
+        "path": "_history/evaluations/2026/2026-06-06-popup-scroll-clipping.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T05:13:07.853Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-popup-scroll-clipping-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Popup Scroll Clipping",
+        "detail": "Request Trace: Popup Scroll Clipping 날짜: 2026 06 06 요청 스크롤 때문에 팝업이 안 보이는 현상 수정. 산출물 requirements: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md spec: platform desktop app/specs/2026 06 06 popup scroll clipping/spec.ko.md plan: platform desktop app/",
+        "path": "_history/request-traces/2026/2026-06-06-popup-scroll-clipping.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T05:13:07.853Z"
       },
       {
         "id": "history-history-user-requests-2026-2026-06-06-popup-scroll-clipping-ko-md",
@@ -20730,96 +20820,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T02:26:02.134Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "Parallel Snapshot Collector 작업 요약",
-        "detail": "Parallel Snapshot Collector 작업 요약 날짜: 2026 06 06 완료 Workspace Monitor snapshot collector를 async worker thread 구조로 전환했다. 문서 렌더링은 최대 6개 worker로 분산한다. source preview는 후보를 먼저 정렬/상한 적용한 뒤 최대 4개 worker로 읽는다. worker 실패 또는 작은 task에서는 기존 sync path로 fallback한다. snapshot stats에 snapshotDocu",
-        "path": "_history/work-summaries/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:26:02.134Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "Parallel Snapshot Collector 작업 시간 기록",
-        "detail": "Parallel Snapshot Collector 작업 시간 기록 | 단계 | 상태 | 메모 | | | | | | 조사 | 완료 | 공식 문서와 기존 Rust 구조 확인 | | 구현 | 완료 | worker pool, file worker, async buildSnapshot | | 1차 검증 | 완료 | collect/check/test 통과 | | 최종 패키징 | 완료 | Tauri package, codesign, hdiutil verify 완료 | 관측 time corepack pnpm f",
-        "path": "_history/work-timings/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-        "category": "work-timing",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:26:02.133Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "Parallel Snapshot Collector 작업 계획",
-        "detail": "Parallel Snapshot Collector 작업 계획 날짜: 2026 06 06 work mode: standard install mode: developer 순서 1. 공식 문서 조사 2. 현재 병렬 구조 조사 3. snapshot collector worker pool 구현 4. registry/test/spec/history 업데이트 5. collect/check/test/build/package 6. commit/push",
-        "path": "_history/plans/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:23:45.532Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "Parallel Snapshot Collector 웹 검색 기록",
-        "detail": "Parallel Snapshot Collector 웹 검색 기록 날짜: 2026 06 06 쿼리 Node.js official worker threads documentation parallel CPU tasks Node.js official child process documentation spawn parallel processes Tauri v2 official documentation async commands state task spawn Rust standard library std::",
-        "path": "_history/web-searches/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:23:45.531Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약",
-        "detail": "사용자 요청 요약 날짜: 2026 06 06 사용자는 병렬 구조, 멀티스레드, 멀티프로세스를 통해 속도를 늘릴 수 있는 방법을 고려하라고 요청했다. 처리 범위 Workspace Monitor snapshot 수집에 Node worker thread pool을 추가하고, 기존 Rust/Rayon 구조는 중복 구현 없이 유지/기록한다.",
-        "path": "_history/user-requests/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:23:45.531Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-tool-usage-integration-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "Tool Usage Integration 평가",
-        "detail": "Tool Usage Integration 평가 날짜: 2026 06 06 결과 status: passed internal 사용자 요청인 “지금 쓰는 도구와 사용 방식을 플랫폼에 녹이기”를 source backed 기능으로 구현했다. 도구 사용 루프는 registry에 남고, snapshot으로 수집되며, Tool Studio에서 선택 가능한 Agent Tool Playbook으로 표시된다. 충족한 기준 웹 우선 조사와 공식 출처 기록: 통과 요구사항/스펙/추적성 기록: 통과 source of tr",
-        "path": "_history/evaluations/2026/2026-06-06-tool-usage-integration.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:16:42.822Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23838,7 +23838,7 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 13
+        "documentsCount": 14
       },
       {
         "category": "web-search",
@@ -23853,7 +23853,7 @@
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 9
+        "documentsCount": 8
       },
       {
         "category": "evaluation",
@@ -23952,7 +23952,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 72,
+        "documentCount": 73,
         "sourceFileCount": 5
       },
       {
@@ -27792,13 +27792,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3867,
+      "sourceDocuments": 3879,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T05:09:01.442Z"
+      "latestInsightAt": "2026-06-06T05:27:59.626Z"
     },
     "inferenceStages": [
       {
@@ -27866,7 +27866,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 467,
+        "signalCount": 470,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -27878,15 +27878,15 @@
           },
           {
             "category": "request-trace",
-            "count": 69
+            "count": 70
           },
           {
             "category": "user-request",
-            "count": 46
+            "count": 47
           },
           {
             "category": "work-summary",
-            "count": 31
+            "count": 32
           },
           {
             "category": "plan",
@@ -27925,7 +27925,7 @@
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장"
         ],
-        "latestEvidenceAt": "2026-06-06T04:57:09.119Z"
+        "latestEvidenceAt": "2026-06-06T05:27:59.626Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27939,19 +27939,19 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1762,
+        "signalCount": 1767,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 503
+            "count": 505
           },
           {
             "category": "evaluation",
-            "count": 470
+            "count": 471
           },
           {
             "category": "web-search",
-            "count": 425
+            "count": 426
           },
           {
             "category": "plan",
@@ -27959,7 +27959,7 @@
           },
           {
             "category": "request-trace",
-            "count": 115
+            "count": 116
           },
           {
             "category": "work-timing",
@@ -27990,7 +27990,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T05:09:01.442Z"
+        "latestEvidenceAt": "2026-06-06T05:27:59.626Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28004,7 +28004,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1007,
+        "signalCount": 1009,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -28016,7 +28016,7 @@
           },
           {
             "category": "request-trace",
-            "count": 92
+            "count": 93
           },
           {
             "category": "project-spec",
@@ -28024,7 +28024,7 @@
           },
           {
             "category": "work-summary",
-            "count": 22
+            "count": 23
           },
           {
             "category": "user-request",
@@ -28063,7 +28063,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T04:57:09.118Z"
+        "latestEvidenceAt": "2026-06-06T05:27:59.626Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28150,27 +28150,27 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1530,
+        "signalCount": 1540,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 661
+            "count": 665
           },
           {
             "category": "evaluation",
-            "count": 524
+            "count": 525
           },
           {
             "category": "user-request",
-            "count": 101
+            "count": 102
           },
           {
             "category": "work-summary",
-            "count": 60
+            "count": 61
           },
           {
             "category": "request-trace",
-            "count": 56
+            "count": 57
           },
           {
             "category": "plan",
@@ -28178,11 +28178,11 @@
           },
           {
             "category": "web-search",
-            "count": 39
+            "count": 40
           },
           {
             "category": "project-doc",
-            "count": 33
+            "count": 34
           },
           {
             "category": "work-timing",
@@ -28209,7 +28209,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T05:09:01.442Z"
+        "latestEvidenceAt": "2026-06-06T05:27:59.626Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28285,14 +28285,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3867,
+      "sourceDocuments": 3879,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T05:09:01.442Z"
+      "latestInsightAt": "2026-06-06T05:27:59.626Z"
     },
     "operatingModel": [
       {
@@ -28350,25 +28350,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3236,
+        "signalCount": 3246,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1762
+            "signalCount": 1767
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1007
+            "signalCount": 1009
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 467
+            "signalCount": 470
           }
         ],
         "missingPatternIds": [],
@@ -28396,7 +28396,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T05:09:01.442Z",
+        "latestEvidenceAt": "2026-06-06T05:27:59.626Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28494,19 +28494,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2537,
+        "signalCount": 2549,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1530
+            "signalCount": 1540
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1007
+            "signalCount": 1009
           }
         ],
         "missingPatternIds": [],
@@ -28534,7 +28534,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T05:09:01.442Z",
+        "latestEvidenceAt": "2026-06-06T05:27:59.626Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28563,13 +28563,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 586,
+        "signalCount": 589,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 467
+            "signalCount": 470
           },
           {
             "id": "release-blocker-gate",
@@ -28603,7 +28603,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T04:57:09.119Z",
+        "latestEvidenceAt": "2026-06-06T05:27:59.626Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28632,19 +28632,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2769,
+        "signalCount": 2776,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1007
+            "signalCount": 1009
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1762
+            "signalCount": 1767
           }
         ],
         "missingPatternIds": [],
@@ -28672,7 +28672,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T05:09:01.442Z",
+        "latestEvidenceAt": "2026-06-06T05:27:59.626Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28701,7 +28701,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1881,
+        "signalCount": 1886,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28713,7 +28713,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1762
+            "signalCount": 1767
           }
         ],
         "missingPatternIds": [],
@@ -28741,7 +28741,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T05:09:01.442Z",
+        "latestEvidenceAt": "2026-06-06T05:27:59.626Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",
