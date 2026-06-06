@@ -577,14 +577,23 @@ test("CLI setup keeps settings scroll ownership isolated", () => {
 
 test("Search agent provider and model settings use explicit choices", () => {
   assert.match(monitorShell, /const modelChoiceOptions = useMemo/);
+  assert.match(monitorShell, /const chatbotConnectionItems = useMemo/);
+  assert.match(monitorShell, /id: "connect-chatbot"/);
+  assert.match(monitorShell, /label: uiLanguage === "ko" \? "챗봇 연결" : "Connect Chatbot"/);
   assert.match(monitorShell, /agent-provider-choice-grid/);
   assert.match(monitorShell, /agent-model-choice-grid/);
+  assert.match(monitorShell, /data-chatbot-connection="search-agent"/);
+  assert.match(monitorShell, /data-chatbot-connection-item=\{item\.id\}/);
+  assert.match(monitorShell, /onOpenProviderSettings=\{openProviderSettings\}/);
   assert.match(monitorShell, /onClick=\{\(\) => onChange\("providerId", provider\.providerId\)\}/);
   assert.match(monitorShell, /onClick=\{\(\) => onChange\("model", choice\.value\)\}/);
   assert.doesNotMatch(monitorShell, /<datalist id="search-agent-model-options">/);
   assert.doesNotMatch(monitorShell, /list="search-agent-model-options"/);
   assert.match(css, /\.agent-provider-choice-grid,/);
   assert.match(css, /\.agent-model-choice-grid button\.active/);
+  assert.match(css, /\.agent-chat-connection-strip \{/);
+  assert.match(css, /\.agent-chat-connection-grid \{/);
+  assert.match(css, /\.agent-chat-connection-actions button \{/);
   assert.match(css, /\.agent-provider-choice-grid button,[\s\S]*?box-shadow: var\(--control-shadow\);/);
 });
 

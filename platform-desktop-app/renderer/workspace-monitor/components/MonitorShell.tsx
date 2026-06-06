@@ -6810,6 +6810,26 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         run: () => openSettingsTab("execution", "providers")
       },
       {
+        id: "connect-chatbot",
+        label: uiLanguage === "ko" ? "챗봇 연결" : "Connect Chatbot",
+        detail:
+          uiLanguage === "ko"
+            ? "에이전트 채팅을 모델 API, 터미널 대체 실행, 작업 기록 저장소에 연결합니다."
+            : "Open the chatbot connection surface for model API, terminal fallback, and task-run storage.",
+        group: uiLanguage === "ko" ? "에이전트 실행" : "Agent Run",
+        icon: Bot,
+        badge:
+          providerCredentials.configuredCount > 0
+            ? uiLanguage === "ko"
+              ? "계정 연결"
+              : "account"
+            : uiLanguage === "ko"
+              ? "설정 필요"
+              : "setup",
+        keywords: ["chatbot", "chat", "agent chat", "connect", "provider", "terminal", "task run", "챗봇", "채팅", "연결"],
+        run: openSearchAgentWorkbench
+      },
+      {
         id: "run-search-agent",
         label: uiLanguage === "ko" ? "검색 에이전트 작업 채팅" : "Search Agent Work Chat",
         detail:
@@ -8774,6 +8794,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             providerTaskBusy={providerTaskBusy}
             runtimeLaunchQueued={runtimeLaunchRequest?.taskKind === "research_insight_agent"}
             onChange={updateSearchAgentRunForm}
+            onOpenProviderSettings={openProviderSettings}
             onOpenTerminal={openTerminalDrawer}
             onRun={launchSearchAgent}
             onRefreshModels={refreshProviderModels}
@@ -8968,6 +8989,7 @@ function SearchAgentWorkChatPanel({
   providerTaskBusy,
   runtimeLaunchQueued,
   onChange,
+  onOpenProviderSettings,
   onOpenTerminal,
   onRun,
   onRefreshModels
@@ -8983,6 +9005,7 @@ function SearchAgentWorkChatPanel({
   providerTaskBusy: boolean;
   runtimeLaunchQueued: boolean;
   onChange: (field: keyof SearchAgentRunForm, value: string) => void;
+  onOpenProviderSettings: () => void;
   onOpenTerminal: () => void;
   onRun: () => void;
   onRefreshModels: (providerId?: string) => void | Promise<void>;
@@ -9109,9 +9132,65 @@ function SearchAgentWorkChatPanel({
     selectedProvider?.label,
     selectedProviderModel
   ]);
+  const chatbotConnectionItems = useMemo<
+    Array<{
+      id: string;
+      label: string;
+      status: string;
+      detail: string;
+      state: "ready" | "missing" | "pending";
+    }>
+  >(
+    () => [
+      {
+        id: "provider-api",
+        label: ko ? "모델 API" : "Model API",
+        status: selectedProviderConnected || selectedProviderLocal ? (ko ? "연결됨" : "Connected") : ko ? "연결 필요" : "Needs setup",
+        detail: selectedProviderConnected || selectedProviderLocal
+          ? `${selectedProvider?.label || selectedProvider?.providerId || "provider"} / ${selectedProviderRuntimeSourceLabel}`
+          : ko
+            ? "계정 설정에서 API 키를 연결하세요."
+            : "Connect an API key in account settings.",
+        state: selectedProviderConnected || selectedProviderLocal ? "ready" : "missing"
+      },
+      {
+        id: "model-route",
+        label: ko ? "모델" : "Model",
+        status: routeDecision.tier,
+        detail: `${routeDecision.model} / ${routeDecision.constraintLabel}`,
+        state: "ready"
+      },
+      {
+        id: "terminal-fallback",
+        label: ko ? "터미널 대체" : "Terminal fallback",
+        status: runtimeLaunchQueued ? (ko ? "대기 중" : "Queued") : ko ? "준비" : "Ready",
+        detail: ko ? "API가 없거나 실패하면 CLI 세션으로 이어집니다." : "Falls back to a CLI session when API is missing or fails.",
+        state: runtimeLaunchQueued ? "pending" : "ready"
+      },
+      {
+        id: "task-run-store",
+        label: ko ? "작업 기록" : "Task runs",
+        status: ko ? "저장" : "Stored",
+        detail: ko ? "응답과 로그는 작업 실행 저장소에 남습니다." : "Responses and logs are written to the task-run store.",
+        state: "ready"
+      }
+    ],
+    [
+      ko,
+      routeDecision.constraintLabel,
+      routeDecision.model,
+      routeDecision.tier,
+      runtimeLaunchQueued,
+      selectedProvider?.label,
+      selectedProvider?.providerId,
+      selectedProviderConnected,
+      selectedProviderLocal,
+      selectedProviderRuntimeSourceLabel
+    ]
+  );
 
   return (
-    <section className="panel wide search-agent-work-chat-panel">
+    <section className="panel wide search-agent-work-chat-panel" data-chatbot-surface="search-agent">
       <div className="search-agent-work-chat-layout">
         <div className="agent-chat-workspace" aria-label={ko ? "검색 에이전트 작업 채팅" : "Search agent work chat"}>
           <header className="agent-chat-conversation-header">
@@ -9214,6 +9293,49 @@ function SearchAgentWorkChatPanel({
               <span>{ko ? `복잡도 ${routeDecision.complexityScore}/10` : `complexity ${routeDecision.complexityScore}/10`}</span>
               <span>{ko ? `출력 ${routeDecision.maxOutputTokens.toLocaleString("ko-KR")} 토큰` : `${routeDecision.maxOutputTokens.toLocaleString("en-US")} output tokens`}</span>
               <span>{`$${routeDecision.budgetUsd.toFixed(2)}`}</span>
+            </div>
+            <div className="agent-chat-connection-strip" data-chatbot-connection="search-agent">
+              <div className="agent-chat-connection-head">
+                <span>{ko ? "챗봇 연결" : "Chatbot connection"}</span>
+                <strong>
+                  {selectedProviderConnected || selectedProviderLocal
+                    ? selectedProviderRuntimeLabel
+                    : ko
+                      ? "설정 필요"
+                      : "Setup needed"}
+                </strong>
+              </div>
+              <div className="agent-chat-connection-grid" aria-label={ko ? "챗봇 연결 상태" : "Chatbot connection status"}>
+                {chatbotConnectionItems.map((item) => (
+                  <article
+                    key={item.id}
+                    className={`state-${item.state}`}
+                    data-chatbot-connection-item={item.id}
+                  >
+                    <span>{item.label}</span>
+                    <strong>{item.status}</strong>
+                    <small>{item.detail}</small>
+                  </article>
+                ))}
+              </div>
+              <div className="agent-chat-connection-actions">
+                <button type="button" onClick={onOpenProviderSettings}>
+                  <KeyRound size={15} aria-hidden="true" />
+                  <span>{ko ? "계정 연결" : "Connect account"}</span>
+                </button>
+                <button type="button" onClick={onOpenTerminal}>
+                  <SquareTerminal size={15} aria-hidden="true" />
+                  <span>{ko ? "터미널 연결" : "Connect terminal"}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onRefreshModels(selectedProvider?.providerId)}
+                  disabled={providerModelBusy || !selectedProvider}
+                >
+                  <RefreshCw size={15} aria-hidden="true" />
+                  <span>{ko ? "모델 갱신" : "Refresh models"}</span>
+                </button>
+              </div>
             </div>
             <div className="agent-chat-composer-footer">
               <div className="agent-provider-run-controls" aria-label={ko ? "제공자 실행 설정" : "Provider run settings"}>

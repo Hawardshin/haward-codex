@@ -1,0 +1,113 @@
+{
+  "task": "Chatbot Connection",
+  "work_mode": "standard",
+  "runtime_context": [
+    "React agent chat state",
+    "provider credential report and model catalog state",
+    "terminal drawer open state",
+    "Next.js development server for Browser smoke",
+    "in-app Browser DOM and interaction verification"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "provider-action-misroute",
+      "category": "memory",
+      "description": "New connection actions could route to the wrong settings or terminal surface.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Reuse existing openProviderSettings, openTerminalDrawer, and refreshProviderModels callbacks.",
+      "evidence": [
+        "onOpenProviderSettings={openProviderSettings}",
+        "onOpenTerminal={openTerminalDrawer}",
+        "onRefreshModels={refreshProviderModels}"
+      ]
+    },
+    {
+      "risk_id": "chat-layout-overflow",
+      "category": "other",
+      "description": "Connection state text could overflow the chat composer on narrow widths.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Use auto-fit grid, min-width: 0, and overflow-wrap rules for connection cards and buttons.",
+      "evidence": [
+        ".agent-chat-connection-grid",
+        "overflow-wrap: anywhere"
+      ]
+    },
+    {
+      "risk_id": "browser-smoke-server",
+      "category": "process",
+      "description": "Browser smoke uses a local Next.js development server that must be stopped after verification.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Serve on a dedicated local port, stop with Ctrl-C, and verify no listener remains.",
+      "evidence": [
+        "Next dev served http://127.0.0.1:3225",
+        "Ctrl-C stopped the session",
+        "lsof -nP -iTCP:3225 -sTCP:LISTEN returned no listener"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "connection-action-lifecycle",
+      "resource": "chatbot connection UI actions",
+      "create_path": "render SearchAgentWorkChatPanel with provider report and route decision",
+      "cleanup_path": "no persistent runtime resource created by rendering connection strip",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "No new native command",
+        "No new dependency",
+        "Renderer test covers connection strip contract"
+      ]
+    },
+    {
+      "check_id": "dev-server-lifecycle",
+      "resource": "Next.js dev server",
+      "create_path": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor exec next dev -H 127.0.0.1 -p 3225",
+      "cleanup_path": "Ctrl-C and lsof no-listener check",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Server started on 127.0.0.1:3225",
+        "No listener remained on TCP 3225"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "renderer-check",
+      "metric": "Type and design contract checks",
+      "tool": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+      "threshold": "exit code 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "lazy_boundary_contract_ok",
+        "scroll_contract_ok",
+        "source_control_design_ok",
+        "comprehensive_improvement_contract_ok",
+        "history_payload_ok"
+      ]
+    },
+    {
+      "check_id": "browser-smoke",
+      "metric": "Chatbot connection surface",
+      "tool": "in-app Browser",
+      "threshold": "connection strip, four connection items, account/terminal/model actions visible",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Desktop viewport: stripCount 1, itemCount 4, actions 계정 연결/터미널 연결/모델 갱신, no overflowing items",
+        "Account action opened settings dialog with provider login cards",
+        "Terminal action opened terminal drawer",
+        "Mobile 390x844: stripCount 1, itemCount 4, no overflowing connection items or buttons"
+      ]
+    }
+  ],
+  "notes": [
+    "No installation occurred.",
+    "No CLI pipeline was added."
+  ]
+}

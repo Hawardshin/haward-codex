@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T16:25:42.707Z",
+  "generatedAt": "2026-06-06T16:45:47.037Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 5,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 528,
-    "evaluations": 24,
-    "webSearches": 12,
-    "timingRecords": 13,
+    "evaluations": 25,
+    "webSearches": 11,
+    "timingRecords": 12,
     "historyDays": 2,
-    "adminHistoryDocuments": 2834,
+    "adminHistoryDocuments": 2846,
     "adminHistoryDays": 8,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7861,6 +7861,342 @@
   ],
   "documents": [
     {
+      "id": "history-2026-2026-06-07-md",
+      "path": "_history/2026/2026-06-07.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 07",
+      "excerpt": "2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Deskto",
+      "html": "<p>2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Desktop Runtime에 첫 2개 묶음 실행 버튼, fan out 결과 카드, pipeline/session 연결을 추가했다. 경계: default </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3566,
+      "updatedAt": "2026-06-06T16:38:30.955Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-chatbot-connection-input-json",
+      "path": "_history/evaluations/2026/2026-06-07-chatbot-connection-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 07 Chatbot Connection Input",
+      "excerpt": "{ \"initial instruction\": \"챗봇 연결\", \"result summary\": \"Connected the existing agent chat surface to visible provider API, model route, terminal fallback, and task run store status with direct account, terminal, and model refresh actions plus a command palette entry.\", \"work mode\": ",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;챗봇 연결&quot;, &quot;result summary&quot;: &quot;Connected the existing agent chat surface to visible provider API, model route, terminal fallback, and task run store status with direct account, terminal, and model refresh actions plus a command palette entry.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/renderer/workspace monitor/co</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3381,
+      "updatedAt": "2026-06-06T16:38:30.954Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-chatbot-connection-ko-md",
+      "path": "_history/evaluations/2026/2026-06-07-chatbot-connection.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Chatbot Connection",
+      "excerpt": "Evaluation: Chatbot Connection 날짜: 2026 06 07 평가 사용자의 챗봇 연결 요청은 기존 에이전트 채팅의 실행 연결 가시성을 높이는 방향으로 처리했다. 새 provider나 새 CLI 설치 없이 기존 provider API, 모델 라우팅, terminal fallback, 작업 실행 저장소를 한 화면에 연결했다. 결과 챗봇 연결 명령 팔레트 항목 추가. 채팅 composer 안에 연결 상태 strip 추가. provider 설정, terminal drawer, mod",
+      "html": "<p>Evaluation: Chatbot Connection 날짜: 2026 06 07 평가 사용자의 챗봇 연결 요청은 기존 에이전트 채팅의 실행 연결 가시성을 높이는 방향으로 처리했다. 새 provider나 새 CLI 설치 없이 기존 provider API, 모델 라우팅, terminal fallback, 작업 실행 저장소를 한 화면에 연결했다. 결과 챗봇 연결 명령 팔레트 항목 추가. 채팅 composer 안에 연결 상태 strip 추가. provider 설정, terminal drawer, model refresh 액션 추가. 연결 UI와 command entry 테스트 추가. 검증 renderer check 통과. renderer te</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 886,
+      "updatedAt": "2026-06-06T16:38:30.954Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-07-chatbot-connection-ko-md",
+      "path": "_history/request-traces/2026/2026-06-07-chatbot-connection.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Chatbot Connection",
+      "excerpt": "Request Trace: Chatbot Connection 날짜: 2026 06 07 요청 사용자: 챗봇 연결 해석 기존 agent chat을 실제 provider API, terminal fallback, task run store와 명확히 연결해야 한다. 새 provider 구현보다 현재 실행 경로의 가시성과 진입성이 핵심이다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 chatbot connection.ko.md 스펙: pla",
+      "html": "<p>Request Trace: Chatbot Connection 날짜: 2026 06 07 요청 사용자: 챗봇 연결 해석 기존 agent chat을 실제 provider API, terminal fallback, task run store와 명확히 연결해야 한다. 새 provider 구현보다 현재 실행 경로의 가시성과 진입성이 핵심이다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 chatbot connection.ko.md 스펙: platform desktop app/specs/2026 06 07 chatbot connection/spec.ko.md 구현: MonitorShel</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 990,
+      "updatedAt": "2026-06-06T16:38:30.953Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-07-chatbot-connection-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-07-chatbot-connection.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Chatbot Connection",
+      "excerpt": "Work Summary: Chatbot Connection 날짜: 2026 06 07 요약 에이전트 채팅 화면에 챗봇 연결 상태 스트립을 추가했다. 이제 사용자는 모델 API, 모델 라우팅, 터미널 대체 실행, 작업 실행 저장소 연결을 한 화면에서 확인하고 계정 설정, 터미널, 모델 갱신으로 바로 이동할 수 있다. 구현 connect chatbot 명령 팔레트 항목 추가. SearchAgentWorkChatPanel 에 chatbotConnectionItems 추가. provider 설정, ter",
+      "html": "<p>Work Summary: Chatbot Connection 날짜: 2026 06 07 요약 에이전트 채팅 화면에 챗봇 연결 상태 스트립을 추가했다. 이제 사용자는 모델 API, 모델 라우팅, 터미널 대체 실행, 작업 실행 저장소 연결을 한 화면에서 확인하고 계정 설정, 터미널, 모델 갱신으로 바로 이동할 수 있다. 구현 connect chatbot 명령 팔레트 항목 추가. SearchAgentWorkChatPanel 에 chatbotConnectionItems 추가. provider 설정, terminal drawer, model refresh 액션 연결. 연결 상태 CSS와 테스트 contract 추가. 검증 상태 renderer ch</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 763,
+      "updatedAt": "2026-06-06T16:38:30.952Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-07-chatbot-connection-ko-md",
+      "path": "_history/work-timings/2026/2026-06-07-chatbot-connection.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "Work Timing: Chatbot Connection",
+      "excerpt": "Work Timing: Chatbot Connection 날짜: 2026 06 07 단계별 기록 intake/research: web first search와 기존 SearchAgentWorkChatPanel , provider command, CLI fallback 확인. implementation: 명령 팔레트 entry, 연결 스트립, action wiring, CSS, 테스트 추가. static validation: renderer check와 renderer test 실행. durable",
+      "html": "<p>Work Timing: Chatbot Connection 날짜: 2026 06 07 단계별 기록 intake/research: web first search와 기존 SearchAgentWorkChatPanel , provider command, CLI fallback 확인. implementation: 명령 팔레트 entry, 연결 스트립, action wiring, CSS, 테스트 추가. static validation: renderer check와 renderer test 실행. durable records: requirements, spec, plan, tasks, validation, traceability, history rec</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 740,
+      "updatedAt": "2026-06-06T16:38:30.952Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-plans-2026-2026-06-07-chatbot-connection-ko-md",
+      "path": "_history/plans/2026/2026-06-07-chatbot-connection.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Work Plan: Chatbot Connection",
+      "excerpt": "Work Plan: Chatbot Connection 날짜: 2026 06 07 계획 1. web first intake로 agent/chat/native command 참고 기준을 확인한다. 2. 기존 provider 직접 실행과 CLI fallback 흐름을 읽는다. 3. 채팅 panel에 연결 상태 strip과 설정/터미널/모델 refresh 액션을 추가한다. 4. 명령 팔레트에 챗봇 연결 entry를 추가한다. 5. 테스트와 CSS contract를 보강한다. 6. renderer chec",
+      "html": "<p>Work Plan: Chatbot Connection 날짜: 2026 06 07 계획 1. web first intake로 agent/chat/native command 참고 기준을 확인한다. 2. 기존 provider 직접 실행과 CLI fallback 흐름을 읽는다. 3. 채팅 panel에 연결 상태 strip과 설정/터미널/모델 refresh 액션을 추가한다. 4. 명령 팔레트에 챗봇 연결 entry를 추가한다. 5. 테스트와 CSS contract를 보강한다. 6. renderer check/test, collect/build/platform check, Browser smoke를 실행한다. 7. guard/evaluator 기록</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 924,
+      "updatedAt": "2026-06-06T16:38:30.949Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-07-chatbot-connection-ko-md",
+      "path": "_history/user-requests/2026/2026-06-07-chatbot-connection.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: Chatbot Connection",
+      "excerpt": "User Request: Chatbot Connection 날짜: 2026 06 07 요약 사용자는 챗봇 연결 을 요구했다. 이전 요청 흐름상 터미널, provider, CLI, 에이전트 채팅이 실제 작업 공간 실행과 분리되어 보이지 않도록, 기존 실행 기능을 명확히 이어달라는 의미로 해석했다. 범위 결정 기존 SearchAgentWorkChatPanel 과 native provider/CLI fallback 경로를 활용한다. 채팅 화면에서 모델 API, 모델 라우팅, 터미널 대체 실행, 작업 실",
+      "html": "<p>User Request: Chatbot Connection 날짜: 2026 06 07 요약 사용자는 챗봇 연결 을 요구했다. 이전 요청 흐름상 터미널, provider, CLI, 에이전트 채팅이 실제 작업 공간 실행과 분리되어 보이지 않도록, 기존 실행 기능을 명확히 이어달라는 의미로 해석했다. 범위 결정 기존 SearchAgentWorkChatPanel 과 native provider/CLI fallback 경로를 활용한다. 채팅 화면에서 모델 API, 모델 라우팅, 터미널 대체 실행, 작업 실행 저장소 연결 상태를 보여준다. 명령 팔레트에서 챗봇 연결 로 바로 들어갈 수 있게 한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 648,
+      "updatedAt": "2026-06-06T16:38:30.948Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-07-chatbot-connection-ko-md",
+      "path": "_history/web-searches/2026/2026-06-07-chatbot-connection.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Chatbot Connection",
+      "excerpt": "Web Search: Chatbot Connection 날짜: 2026 06 07 검색 OpenAI Agents SDK official docs agents tools handoffs chat UI instructions Tauri v2 official docs calling Rust from frontend command state VS Code official docs chat extensions chat participant API Claude Code official docs slash c",
+      "html": "<p>Web Search: Chatbot Connection 날짜: 2026 06 07 검색 OpenAI Agents SDK official docs agents tools handoffs chat UI instructions Tauri v2 official docs calling Rust from frontend command state VS Code official docs chat extensions chat participant API Claude Code official docs slash commands custom prompts 확인한 출처 OpenAI Agents SDK Agents: https://openai.github.io</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2282,
+      "updatedAt": "2026-06-06T16:38:30.947Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-chatbot-connection-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-chatbot-connection/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Chatbot Connection",
+      "excerpt": "Plan: Chatbot Connection 날짜: 2026 06 07 순서 1. 기존 에이전트 채팅, provider 직접 실행, CLI fallback, provider 설정 진입점을 확인한다. 2. SearchAgentWorkChatPanel 에 provider/model/terminal/store 연결 상태를 추가한다. 3. 채팅 화면에서 provider 설정, terminal drawer, model refresh 액션을 바로 실행하게 한다. 4. 명령 팔레트에 챗봇 연결 진입점을 추가한",
+      "html": "<h1>Plan: Chatbot Connection</h1>\n<p>날짜: 2026-06-07</p>\n<h2>순서</h2>\n<p>1. 기존 에이전트 채팅, provider 직접 실행, CLI fallback, provider 설정 진입점을 확인한다.</p>\n<p>2. <code>SearchAgentWorkChatPanel</code>에 provider/model/terminal/store 연결 상태를 추가한다.</p>\n<p>3. 채팅 화면에서 provider 설정, terminal drawer, model refresh 액션을 바로 실행하게 한다.</p>\n<p>4. 명령 팔레트에 <code>챗봇 연결</code> 진입점을 추가한다.</p>\n<p>5. CSS를 추가해 연결 상태가 데스크톱과 모바일에서 줄바꿈되게 한다.</p>\n<p>6. 문자열 기반 테스트로 연결 UI와 명령 팔레트 contract를 보호한다.</p>\n<p>7. renderer check/test, collect/build/platform check, Browser smoke, resource/omission/evaluation guard를 실행한다.</p>\n<h2>결정</h2>\n<ul>\n<li>새 native 기능을 추가하지 않는다. 현재 요청은 이미 존재하는 provider API와 terminal fallback을 사용자가 볼 수 있게 연결하는 UI/UX 개선으로 해결된다.</li>\n<li>새 CLI나 dependency를 설치하지 않는다. 이번 slice는 설치보다 기존 실행 경로 연결 가시성이 우선이다.</li>\n<li>작업 모드는 <code>standard</code>로 둔다. UI와 실행 동선이 바뀌지만 native runtime schema 변경은 없다.</li>\n</ul>\n<h2>검증 게이트</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code></li>\n<li><code>corepack pnpm -w run desktop:renderer:build</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code></li>\n<li>Browser smoke: <code>#section-agents</code>에서 연결 스트립과 액션 확인</li>\n<li>resource guard, omission guard, work evaluator</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1711,
+      "updatedAt": "2026-06-06T16:38:30.946Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-chatbot-connection-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-chatbot-connection/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Chatbot Connection",
+      "excerpt": "Spec: Chatbot Connection 날짜: 2026 06 07 목적 Workspace Monitor의 에이전트 채팅을 실제 실행 연결면으로 보이게 한다. 사용자는 채팅이 어떤 모델 API, 모델 라우팅, 터미널 fallback, 작업 실행 저장소와 이어지는지 한 화면에서 확인하고 필요한 설정으로 즉시 이동해야 한다. 동작 1. SearchAgentWorkChatPanel 은 data chatbot surface=\"search agent\" 를 가진다. 2. composer 안에는 data ",
+      "html": "<h1>Spec: Chatbot Connection</h1>\n<p>날짜: 2026-06-07</p>\n<h2>목적</h2>\n<p>Workspace Monitor의 에이전트 채팅을 실제 실행 연결면으로 보이게 한다. 사용자는 채팅이 어떤 모델 API, 모델 라우팅, 터미널 fallback, 작업 실행 저장소와 이어지는지 한 화면에서 확인하고 필요한 설정으로 즉시 이동해야 한다.</p>\n<h2>동작</h2>\n<p>1. <code>SearchAgentWorkChatPanel</code>은 <code>data-chatbot-surface=&quot;search-agent&quot;</code>를 가진다.</p>\n<p>2. composer 안에는 <code>data-chatbot-connection=&quot;search-agent&quot;</code> 연결 스트립을 렌더링한다.</p>\n<p>3. 연결 스트립은 다음 네 항목을 표시한다.</p>\n<ul>\n<li><code>provider-api</code>: 선택 provider가 configured 또는 local HTTP이면 연결됨, 아니면 연결 필요.</li>\n<li><code>model-route</code>: 현재 route decision의 tier, model, constraint.</li>\n<li><code>terminal-fallback</code>: native provider 실행이 없거나 실패할 때 이어지는 CLI 세션 경로.</li>\n<li><code>task-run-store</code>: provider 응답과 실행 로그가 작업 실행 저장소에 남는 경로.</li>\n</ul>\n<p>4. 연결 스트립은 <code>계정 연결</code>, <code>터미널 연결</code>, <code>모델 갱신</code> 액션을 제공한다.</p>\n<p>5. <code>계정 연결</code>은 기존 execution provider 설정을 연다.</p>\n<p>6. <code>터미널 연결</code>은 기존 terminal drawer를 연다.</p>\n<p>7. <code>모델 갱신</code>은 선택 provider의 모델 catalog refresh를 실행한다.</p>\n<p>8. 명령 팔레트에는 <code>connect-chatbot</code> 항목을 추가하고 <code>챗봇</code>, <code>채팅</code>, <code>연결</code>, <code>provider</code>, <code>terminal</code>, <code>task run</code> 검색어를 연결한다.</p>\n<h2>실행 경계</h2>\n<ul>\n<li>기존 Rust <code>run_provider_agent_task</code> command를 재사용한다.</li>\n<li>기존 CLI fallback command인 <code>start_cli_adapter_session</code>을 재사용한다.</li>\n<li>새 native command, 새 secret store, 새 external dependency를 추가하지 않는다.</li>\n</ul>\n<h2>UX 경계</h2>\n<ul>\n<li>연결 상태는 채팅 입력과 실행 버튼 사이에서 사용자가 실행 전 확인할 수 있어야 한다.</li>\n<li>상태 항목은 고정 폭 카드가 아니라 반응형 grid로 줄바꿈한다.</li>\n<li>주요 액션은 icon과 짧은 label을 함께 사용한다.</li>\n<li>한국어 UI에는 <code>task-run store에</code> 같은 혼용 문구를 쓰지 않는다.</li>\n</ul>\n<h2>참고</h2>\n<ul>\n<li>OpenAI Agents SDK Agents: https://openai.github.io/openai-agents-js/guides/agents/</li>\n<li>OpenAI Agents SDK Tools: https://openai.github.io/openai-agents-js/guides/tools/</li>\n<li>Tauri Calling Rust from the Frontend: https://v2.tauri.app/develop/calling-rust/</li>\n<li>VS Code Chat extensions: https://code.visualstudio.com/api/extension-guides/chat</li>\n<li>Claude Code Slash commands: https://code.claude.com/docs/en/slash-commands</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2513,
+      "updatedAt": "2026-06-06T16:38:30.946Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-chatbot-connection-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-chatbot-connection/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Chatbot Connection",
+      "excerpt": "Tasks: Chatbot Connection 날짜: 2026 06 07 작업 x 기존 SearchAgentWorkChatPanel provider 실행/fallback 흐름 확인. x connect chatbot 명령 팔레트 항목 추가. x SearchAgentWorkChatPanel 에 onOpenProviderSettings prop 연결. x chatbotConnectionItems 상태 모델 추가. x 챗봇 연결 스트립과 data chatbot connection item 항목 렌더링. ",
+      "html": "<h1>Tasks: Chatbot Connection</h1>\n<p>날짜: 2026-06-07</p>\n<h2>작업</h2>\n<ul>\n<li>[x] 기존 <code>SearchAgentWorkChatPanel</code> provider 실행/fallback 흐름 확인.</li>\n<li>[x] <code>connect-chatbot</code> 명령 팔레트 항목 추가.</li>\n<li>[x] <code>SearchAgentWorkChatPanel</code>에 <code>onOpenProviderSettings</code> prop 연결.</li>\n<li>[x] <code>chatbotConnectionItems</code> 상태 모델 추가.</li>\n<li>[x] 챗봇 연결 스트립과 <code>data-chatbot-connection-item</code> 항목 렌더링.</li>\n<li>[x] 계정 연결, 터미널 연결, 모델 갱신 액션 추가.</li>\n<li>[x] 연결 스트립 CSS 추가.</li>\n<li>[x] 테스트 contract 보강.</li>\n<li>[ ] collect/build/platform check 실행.</li>\n<li>[ ] Browser smoke 실행.</li>\n<li>[ ] resource/omission/evaluation guard 실행.</li>\n<li>[ ] commit 및 push.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 684,
+      "updatedAt": "2026-06-06T16:38:30.946Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-chatbot-connection-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-chatbot-connection/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Chatbot Connection",
+      "excerpt": "Traceability: Chatbot Connection 날짜: 2026 06 07 요구사항 추적 | 요구 | 구현 | 검증 | | | | | | 챗봇 연결 상태 표시 | SearchAgentWorkChatPanel 의 agent chat connection strip | tool studio.test.mjs , Browser smoke | | 모델 API 연결 필요/연결됨 표시 | provider api connection item | data chatbot connection item={it",
+      "html": "<h1>Traceability: Chatbot Connection</h1>\n<p>날짜: 2026-06-07</p>\n<h2>요구사항 추적</h2>\n<table><thead><tr><th>요구</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>챗봇 연결 상태 표시</td><td><code>SearchAgentWorkChatPanel</code>의 <code>agent-chat-connection-strip</code></td><td><code>tool-studio.test.mjs</code>, Browser smoke</td></tr><tr><td>모델 API 연결 필요/연결됨 표시</td><td><code>provider-api</code> connection item</td><td><code>data-chatbot-connection-item={item.id}</code> contract</td></tr><tr><td>모델 라우팅 표시</td><td><code>model-route</code> connection item, 기존 <code>routeDecision</code> 재사용</td><td><code>model-routing-controls.test.mjs</code>, renderer test</td></tr><tr><td>터미널 fallback 표시</td><td><code>terminal-fallback</code> connection item, <code>onOpenTerminal</code> action</td><td>Browser smoke</td></tr><tr><td>작업 실행 저장소 표시</td><td><code>task-run-store</code> connection item</td><td>로컬라이제이션 test, Browser smoke</td></tr><tr><td>provider 설정 진입</td><td><code>onOpenProviderSettings</code> prop</td><td><code>tool-studio.test.mjs</code>, Browser smoke</td></tr><tr><td>명령 팔레트 진입</td><td><code>connect-chatbot</code> command item</td><td><code>tool-studio.test.mjs</code></td></tr></tbody></table>\n<h2>변경 파일</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n</ul>\n<h2>기록 파일</h2>\n<ul>\n<li><code>platform-desktop-app/docs/requirements/2026-06-07-chatbot-connection.ko.md</code></li>\n<li><code>platform-desktop-app/specs/2026-06-07-chatbot-connection/spec.ko.md</code></li>\n<li><code>_history/request-traces/2026/2026-06-07-chatbot-connection.ko.md</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1432,
+      "updatedAt": "2026-06-06T16:38:30.946Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-chatbot-connection-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-chatbot-connection/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Chatbot Connection",
+      "excerpt": "Validation: Chatbot Connection 날짜: 2026 06 07 완료된 검증 corepack pnpm dir platform desktop app/renderer/workspace monitor run check 결과: 통과. corepack pnpm dir platform desktop app/renderer/workspace monitor test 결과: 통과, 90 tests. 남은 검증 corepack pnpm dir platform desktop app/renderer/",
+      "html": "<h1>Validation: Chatbot Connection</h1>\n<p>날짜: 2026-06-07</p>\n<h2>완료된 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li>결과: 통과.</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code></li>\n<li>결과: 통과, 90 tests.</li>\n</ul>\n<h2>남은 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code></li>\n<li><code>corepack pnpm -w run desktop:renderer:build</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code></li>\n<li>Browser smoke로 <code>data-chatbot-connection=&quot;search-agent&quot;</code>와 액션 동작 확인.</li>\n<li>resource guard, omission guard, work evaluator.</li>\n</ul>\n<h2>수동 확인 항목</h2>\n<ul>\n<li><code>챗봇 연결</code> 명령 팔레트 항목이 에이전트 화면을 연다.</li>\n<li>에이전트 채팅 composer에서 provider API, 모델, 터미널 대체, 작업 실행 저장소 상태가 보인다.</li>\n<li><code>계정 연결</code>은 provider 설정 dialog로 이어진다.</li>\n<li><code>터미널 연결</code>은 terminal drawer를 연다.</li>\n<li><code>모델 갱신</code>은 선택 provider model refresh를 호출한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1046,
+      "updatedAt": "2026-06-06T16:38:30.946Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-07-chatbot-connection-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-07-chatbot-connection.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: Chatbot Connection",
+      "excerpt": "요구사항: Chatbot Connection 날짜: 2026 06 07 요구 사용자는 챗봇 연결을 요구했다. 기존 에이전트 채팅이 단순 채팅 화면처럼 보이지 말고, 실제 모델 API 계정, 터미널 대체 실행, 작업 실행 저장소와 어떻게 연결되어 있는지 바로 보여야 한다. 수용 기준 에이전트 채팅 화면은 챗봇 연결 상태를 별도 영역으로 표시한다. 연결 상태는 모델 API, 모델 라우팅, 터미널 대체 실행, 작업 실행 저장소를 포함한다. 모델 API가 연결되지 않은 경우 계정 연결 필요 상태를 명확히",
+      "html": "<h1>요구사항: Chatbot Connection</h1>\n<p>날짜: 2026-06-07</p>\n<h2>요구</h2>\n<p>사용자는 챗봇 연결을 요구했다. 기존 에이전트 채팅이 단순 채팅 화면처럼 보이지 말고, 실제 모델 API 계정, 터미널 대체 실행, 작업 실행 저장소와 어떻게 연결되어 있는지 바로 보여야 한다.</p>\n<h2>수용 기준</h2>\n<ul>\n<li>에이전트 채팅 화면은 챗봇 연결 상태를 별도 영역으로 표시한다.</li>\n<li>연결 상태는 모델 API, 모델 라우팅, 터미널 대체 실행, 작업 실행 저장소를 포함한다.</li>\n<li>모델 API가 연결되지 않은 경우 계정 연결 필요 상태를 명확히 보여준다.</li>\n<li>사용자는 채팅 화면에서 provider 계정 설정, 터미널 연결, 모델 목록 갱신으로 바로 이동할 수 있다.</li>\n<li>명령 팔레트에서 <code>챗봇 연결</code>을 검색해 같은 에이전트 채팅 화면을 열 수 있다.</li>\n<li>기존 <code>run_provider_agent_task</code> provider 직접 실행과 <code>start_cli_adapter_session</code> fallback 경로는 유지한다.</li>\n<li>연결 상태 UI와 명령 팔레트 진입점은 테스트로 보호한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>새 provider API 구현.</li>\n<li>새 CLI adapter 설치 또는 global dependency 설치.</li>\n<li>외부 chatbot SaaS 계정 자동 가입.</li>\n<li>provider secret 저장 방식 변경.</li>\n<li>작업 실행 기록 저장소 schema 변경.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1317,
+      "updatedAt": "2026-06-06T16:38:30.945Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-editable-runtime-prompts-ko-md",
+      "path": "_history/evaluations/2026/2026-06-07-editable-runtime-prompts.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Editable Runtime Prompts",
+      "excerpt": "Evaluation: Editable Runtime Prompts 날짜: 2026 06 07 판정 통과. 근거 사용자 요구의 핵심인 \"각 프롬프트 변경 가능\"을 세션 prompt와 작업 파이프라인 prompt 양쪽에 적용했다. 저장/초기화가 같은 정규화 경로를 타도록 조정해 Browser smoke에서 발견된 task prompt reset 불일치를 해결했다. Rust preferences 정규화가 허용 key만 보존하도록 테스트를 추가했다. renderer check/test, Rust unit",
+      "html": "<p>Evaluation: Editable Runtime Prompts 날짜: 2026 06 07 판정 통과. 근거 사용자 요구의 핵심인 &quot;각 프롬프트 변경 가능&quot;을 세션 prompt와 작업 파이프라인 prompt 양쪽에 적용했다. 저장/초기화가 같은 정규화 경로를 타도록 조정해 Browser smoke에서 발견된 task prompt reset 불일치를 해결했다. Rust preferences 정규화가 허용 key만 보존하도록 테스트를 추가했다. renderer check/test, Rust unit test, collect/build/platform check, Browser smoke, resource/omission/evaluator </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 959,
+      "updatedAt": "2026-06-06T16:28:24.777Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-editable-runtime-prompts-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-editable-runtime-prompts/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Editable Runtime Prompts",
+      "excerpt": "Validation: Editable Runtime Prompts 날짜: 2026 06 07 완료된 검증 corepack pnpm dir platform desktop app/renderer/workspace monitor run check 결과: 통과. 확인: TypeScript, lazy boundary, scroll contract, source control design, comprehensive improvement contract, history payload. corepack pnpm",
+      "html": "<h1>Validation: Editable Runtime Prompts</h1>\n<p>날짜: 2026-06-07</p>\n<h2>완료된 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li>결과: 통과.</li>\n<li>확인: TypeScript, lazy boundary, scroll contract, source control design, comprehensive improvement contract, history payload.</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code></li>\n<li>결과: 통과.</li>\n<li>확인: 90 tests pass.</li>\n<li><code>cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml desktop_prompt_customization_keeps_only_allowed_prompt_keys</code></li>\n<li>결과: 통과.</li>\n<li>확인: 허용 session/task-pipe prompt key만 보존하고 빈 값/알 수 없는 key 제거.</li>\n</ul>\n<h2>후속 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code></li>\n<li>결과: 통과.</li>\n<li>확인: 650 inline documents, 2834 admin history records.</li>\n<li><code>corepack pnpm -w run desktop:renderer:build</code></li>\n<li>결과: 통과.</li>\n<li>확인: Next production build와 customer bundle audit 통과.</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code></li>\n<li>결과: 통과.</li>\n<li>확인: developer public snapshot 재생성.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code></li>\n<li>결과: 통과.</li>\n<li>참고: 기존 public release gate 경고와 dev snapshot stale 경고가 남는다. customer-safe fallback과 <code>out</code> snapshot은 build에서 통과했다.</li>\n<li>Browser smoke</li>\n<li>결과: 통과.</li>\n<li>확인: Desktop Runtime 운영 진단 패널에서 작업 파이프라인 프롬프트 저장 후 <code>customized</code> 상태와 &quot;수정된 프롬프트&quot; 표시 확인.</li>\n<li>확인: 작업 파이프라인 프롬프트 기본값 reset 후 <code>customized</code> 제거와 기본값 복원 확인.</li>\n<li>확인: 하단 터미널 세션 프롬프트 저장 후 <code>customized</code> 상태와 &quot;수정된 프롬프트&quot; 표시 확인.</li>\n<li>확인: 세션 프롬프트 기본값 reset 후 <code>customized</code> 제거와 기본값 복원 확인.</li>\n<li>확인: Next dev server 종료 후 TCP 3224 listener 없음.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/resource-checks/2026/2026-06-07-editable-runtime-prompts.json</code></li>\n<li>결과: 통과. <code>resource_ready</code>.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/omission-checks/2026/2026-06-07-editable-runtime-prompts.json</code></li>\n<li>결과: 통과. <code>coverage_ready</code>.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-07-editable-runtime-prompts-input.json</code></li>\n<li>결과: 통과. <code>ready_to_close</code>.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2568,
+      "updatedAt": "2026-06-06T16:28:24.777Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-editable-runtime-prompts-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-editable-runtime-prompts/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Editable Runtime Prompts",
+      "excerpt": "Tasks: Editable Runtime Prompts 날짜: 2026 06 07 x 웹 우선 검색 기록 작성. x Desktop Runtime prompt 선택/textarea 흐름 조사. x RuntimeCustomization.prompts 타입과 기본값 추가. x 세션 프롬프트 choice에 promptKey , defaultValue , customized 추가. x 작업 파이프라인 프롬프트 choice에 key 기반 override 추가. x 선택 프롬프트 저장/기본값 액션 추가. x",
+      "html": "<h1>Tasks: Editable Runtime Prompts</h1>\n<p>날짜: 2026-06-07</p>\n<ul>\n<li>[x] 웹 우선 검색 기록 작성.</li>\n<li>[x] Desktop Runtime prompt 선택/textarea 흐름 조사.</li>\n<li>[x] <code>RuntimeCustomization.prompts</code> 타입과 기본값 추가.</li>\n<li>[x] 세션 프롬프트 choice에 <code>promptKey</code>, <code>defaultValue</code>, <code>customized</code> 추가.</li>\n<li>[x] 작업 파이프라인 프롬프트 choice에 key 기반 override 추가.</li>\n<li>[x] 선택 프롬프트 저장/기본값 액션 추가.</li>\n<li>[x] 저장 후 현재 선택 key가 유지되도록 effect 분리.</li>\n<li>[x] prompt editor CSS 추가.</li>\n<li>[x] Rust preferences에 <code>DesktopPromptCustomization</code> 추가.</li>\n<li>[x] Rust prompt key whitelist 정규화와 단위 테스트 추가.</li>\n<li>[x] renderer static contract tests 갱신.</li>\n<li>[x] collect/build/platform check 실행.</li>\n<li>[x] Browser smoke 실행.</li>\n<li>[x] omission/resource/evaluator guard 실행.</li>\n<li>[x] commit/push 준비.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 867,
+      "updatedAt": "2026-06-06T16:28:24.776Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-editable-runtime-prompts-input-json",
+      "path": "_history/evaluations/2026/2026-06-07-editable-runtime-prompts-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 07 Editable Runtime Prompts Input",
+      "excerpt": "{ \"initial instruction\": \"각 프롬프트 변경 가능하게\", \"result summary\": \"Made Desktop Runtime session and task pipeline prompt choices editable per prompt key with save/reset controls, persisted runtime customization fields, and Rust preference normalization.\", \"work mode\": \"standard\", \"cha",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;각 프롬프트 변경 가능하게&quot;, &quot;result summary&quot;: &quot;Made Desktop Runtime session and task pipeline prompt choices editable per prompt key with save/reset controls, persisted runtime customization fields, and Rust preference normalization.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/renderer/workspace monitor/components/Monitor</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4683,
+      "updatedAt": "2026-06-06T16:28:03.405Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-07-editable-runtime-prompts-ko-md",
+      "path": "_history/request-traces/2026/2026-06-07-editable-runtime-prompts.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Editable Runtime Prompts",
+      "excerpt": "Request Trace: Editable Runtime Prompts 날짜: 2026 06 07 요청 사용자 요청: 각 프롬프트를 변경 가능하게. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 editable runtime prompts.ko.md 스펙: platform desktop app/specs/2026 06 07 editable runtime prompts/ 웹 검색 기록: history/web searches/2026/202",
+      "html": "<p>Request Trace: Editable Runtime Prompts 날짜: 2026 06 07 요청 사용자 요청: 각 프롬프트를 변경 가능하게. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 editable runtime prompts.ko.md 스펙: platform desktop app/specs/2026 06 07 editable runtime prompts/ 웹 검색 기록: history/web searches/2026/2026 06 07 editable runtime prompts.ko.md 검증 기록: platform desktop app/specs/2026 06</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1260,
+      "updatedAt": "2026-06-06T16:27:39.629Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-07-editable-runtime-prompts-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-07-editable-runtime-prompts.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Editable Runtime Prompts",
+      "excerpt": "Work Summary: Editable Runtime Prompts 날짜: 2026 06 07 결과 Desktop Runtime의 세션 프롬프트와 작업 파이프라인 프롬프트를 선택지별로 수정할 수 있게 했다. 구현 RuntimeCustomization.prompts 에 sessionPrompts , taskPipePrompts override map을 추가했다. 세션 prompt choice와 task pipe prompt choice에 promptKey , defaultValue , custom",
+      "html": "<p>Work Summary: Editable Runtime Prompts 날짜: 2026 06 07 결과 Desktop Runtime의 세션 프롬프트와 작업 파이프라인 프롬프트를 선택지별로 수정할 수 있게 했다. 구현 RuntimeCustomization.prompts 에 sessionPrompts , taskPipePrompts override map을 추가했다. 세션 prompt choice와 task pipe prompt choice에 promptKey , defaultValue , customized 상태를 추가했다. 선택 프롬프트 저장/기본값 액션과 .prompt edit actions UI를 추가했다. 저장 후 현재 선택 key가</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1133,
+      "updatedAt": "2026-06-06T16:27:39.628Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
       "id": "history-work-timings-2026-2026-06-07-editable-runtime-prompts-ko-md",
       "path": "_history/work-timings/2026/2026-06-07-editable-runtime-prompts.ko.md",
       "category": "work-timing",
@@ -7941,22 +8277,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "platform-desktop-app-specs-2026-06-07-editable-runtime-prompts-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-07-editable-runtime-prompts/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Validation: Editable Runtime Prompts",
-      "excerpt": "Validation: Editable Runtime Prompts 날짜: 2026 06 07 완료된 검증 corepack pnpm dir platform desktop app/renderer/workspace monitor run check 결과: 통과. 확인: TypeScript, lazy boundary, scroll contract, source control design, comprehensive improvement contract, history payload. corepack pnpm",
-      "html": "<h1>Validation: Editable Runtime Prompts</h1>\n<p>날짜: 2026-06-07</p>\n<h2>완료된 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li>결과: 통과.</li>\n<li>확인: TypeScript, lazy boundary, scroll contract, source control design, comprehensive improvement contract, history payload.</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code></li>\n<li>결과: 통과.</li>\n<li>확인: 90 tests pass.</li>\n<li><code>cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml desktop_prompt_customization_keeps_only_allowed_prompt_keys</code></li>\n<li>결과: 통과.</li>\n<li>확인: 허용 session/task-pipe prompt key만 보존하고 빈 값/알 수 없는 key 제거.</li>\n</ul>\n<h2>남은 검증</h2>\n<ul>\n<li>snapshot collect.</li>\n<li>renderer production build.</li>\n<li>platform check.</li>\n<li>Browser smoke.</li>\n<li>resource/omission/evaluator guard.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 831,
-      "updatedAt": "2026-06-06T16:16:15.586Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
       "id": "platform-desktop-app-docs-requirements-2026-06-07-editable-runtime-prompts-ko-md",
       "path": "platform-desktop-app/docs/requirements/2026-06-07-editable-runtime-prompts.ko.md",
       "category": "project-doc",
@@ -8003,38 +8323,6 @@
       "historyDate": "2026-06-07",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-07-editable-runtime-prompts-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-07-editable-runtime-prompts/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Tasks: Editable Runtime Prompts",
-      "excerpt": "Tasks: Editable Runtime Prompts 날짜: 2026 06 07 x 웹 우선 검색 기록 작성. x Desktop Runtime prompt 선택/textarea 흐름 조사. x RuntimeCustomization.prompts 타입과 기본값 추가. x 세션 프롬프트 choice에 promptKey , defaultValue , customized 추가. x 작업 파이프라인 프롬프트 choice에 key 기반 override 추가. x 선택 프롬프트 저장/기본값 액션 추가. x",
-      "html": "<h1>Tasks: Editable Runtime Prompts</h1>\n<p>날짜: 2026-06-07</p>\n<ul>\n<li>[x] 웹 우선 검색 기록 작성.</li>\n<li>[x] Desktop Runtime prompt 선택/textarea 흐름 조사.</li>\n<li>[x] <code>RuntimeCustomization.prompts</code> 타입과 기본값 추가.</li>\n<li>[x] 세션 프롬프트 choice에 <code>promptKey</code>, <code>defaultValue</code>, <code>customized</code> 추가.</li>\n<li>[x] 작업 파이프라인 프롬프트 choice에 key 기반 override 추가.</li>\n<li>[x] 선택 프롬프트 저장/기본값 액션 추가.</li>\n<li>[x] 저장 후 현재 선택 key가 유지되도록 effect 분리.</li>\n<li>[x] prompt editor CSS 추가.</li>\n<li>[x] Rust preferences에 <code>DesktopPromptCustomization</code> 추가.</li>\n<li>[x] Rust prompt key whitelist 정규화와 단위 테스트 추가.</li>\n<li>[x] renderer static contract tests 갱신.</li>\n<li>[ ] collect/build/platform check 실행.</li>\n<li>[ ] Browser smoke 실행.</li>\n<li>[ ] omission/resource/evaluator guard 실행.</li>\n<li>[ ] commit/push.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 860,
-      "updatedAt": "2026-06-06T16:16:15.585Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-2026-2026-06-07-md",
-      "path": "_history/2026/2026-06-07.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 07",
-      "excerpt": "2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Deskto",
-      "html": "<p>2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Desktop Runtime에 첫 2개 묶음 실행 버튼, fan out 결과 카드, pipeline/session 연결을 추가했다. 경계: default </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2252,
-      "updatedAt": "2026-06-06T15:57:51.949Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-evaluations-2026-2026-06-07-core-feature-connections-input-json",
@@ -10085,38 +10373,6 @@
       "workspaceArea": "_history/work-timings"
     },
     {
-      "id": "history-user-requests-2026-2026-06-06-vscode-hard-fork-workspace-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-vscode-hard-fork-workspace.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: VS Code 하드 포크 워크스페이스",
-      "excerpt": "사용자 요청 요약: VS Code 하드 포크 워크스페이스 날짜: 2026 06 06 요약 사용자는 microsoft/vscode 를 클론하고, VS Code 소스와 기능을 최대한 활용하면서 새로운 하드 포크성 작업을 시작하라고 요청했다. 현재 작업이 작업 공간적 성격을 잃고 있으므로, VS Code 소스를 직접 변경하며 워크스페이스 기능을 완전히 녹이는 방향을 원했다. 실행 계약 계획만 세우지 않고 실제 clone, 설치, 소스 변경, 빌드 검증을 수행한다. 전체 완성은 여러 slice가 필요하지",
-      "html": "<p>사용자 요청 요약: VS Code 하드 포크 워크스페이스 날짜: 2026 06 06 요약 사용자는 microsoft/vscode 를 클론하고, VS Code 소스와 기능을 최대한 활용하면서 새로운 하드 포크성 작업을 시작하라고 요청했다. 현재 작업이 작업 공간적 성격을 잃고 있으므로, VS Code 소스를 직접 변경하며 워크스페이스 기능을 완전히 녹이는 방향을 원했다. 실행 계약 계획만 세우지 않고 실제 clone, 설치, 소스 변경, 빌드 검증을 수행한다. 전체 완성은 여러 slice가 필요하지만, 첫 slice는 실제로 동작하고 이어 작업 가능한 기준선이어야 한다. 설치나 native/runtime 준비가 필요하면 기록과 rollba</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 794,
-      "updatedAt": "2026-06-06T13:14:35.120Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-vscode-hard-fork-workspace-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-vscode-hard-fork-workspace.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "VS Code 하드 포크 워크스페이스 웹 우선 확인",
-      "excerpt": "VS Code 하드 포크 워크스페이스 웹 우선 확인 날짜: 2026 06 06 쿼리 microsoft vscode GitHub repository license build from source official Visual Studio Code build from source official wiki microsoft vscode product.json nameShort nameLong build source site:github.com/microsoft/vscode/issues product.js",
-      "html": "<p>VS Code 하드 포크 워크스페이스 웹 우선 확인 날짜: 2026 06 06 쿼리 microsoft vscode GitHub repository license build from source official Visual Studio Code build from source official wiki microsoft vscode product.json nameShort nameLong build source site:github.com/microsoft/vscode/issues product.json Code OSS applicationName hard fork site:github.com/microsoft/vscode/issues bu</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2128,
-      "updatedAt": "2026-06-06T13:14:35.119Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-awp-path-registration-validation-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-awp-path-registration/validation.ko.md",
       "category": "project-spec",
@@ -10133,86 +10389,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-request-traces-2026-2026-06-06-awp-path-registration-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-awp-path-registration.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "Request Trace: awp PATH Registration",
-      "excerpt": "Request Trace: awp PATH Registration 날짜: 2026 06 06 요청 반복적으로 필요한 내용을 뒤로 미루지 말고 처리한다. 산출물 PATH 설정 script: platform desktop app/scripts/configure awp path.mjs package scripts: platform desktop app/package.json persistent instructions: docs/instructions/persistent instructions .md i",
-      "html": "<p>Request Trace: awp PATH Registration 날짜: 2026 06 06 요청 반복적으로 필요한 내용을 뒤로 미루지 말고 처리한다. 산출물 PATH 설정 script: platform desktop app/scripts/configure awp path.mjs package scripts: platform desktop app/package.json persistent instructions: docs/instructions/persistent instructions .md installation audit: history/installations/2026/2026 06 06 awp zsh path registrati</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1189,
-      "updatedAt": "2026-06-06T12:51:43.853Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-awp-path-registration-omission-json",
-      "path": "_history/evaluations/2026/2026-06-06-awp-path-registration-omission.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Awp Path Registration Omission",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"awp path registration\", \"omission check targets\": \" history/evaluations/2026/2026 06 06 awp path registration omission.json\" , \"required items\": \"web first intake\", \"requirements\", \"spec plan tasks validation traceability\", \"source path configu",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;awp path registration&quot;, &quot;omission check targets&quot;: &quot; history/evaluations/2026/2026 06 06 awp path registration omission.json&quot; , &quot;required items&quot;: &quot;web first intake&quot;, &quot;requirements&quot;, &quot;spec plan tasks validation traceability&quot;, &quot;source path configurator&quot;, &quot;actual shell path registration&quot;, &quot;persistent instruction update&quot;, &quot;inst</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 765,
-      "updatedAt": "2026-06-06T12:51:43.852Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-awp-path-registration-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-awp-path-registration.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "Work Summary: awp PATH Registration",
-      "excerpt": "Work Summary: awp PATH Registration 날짜: 2026 06 06 완료 configure awp path.mjs 추가 cli:install 이 PATH 등록까지 수행하도록 변경 cli:path 추가 .zprofile , .zshrc 에 관리 block 실제 적용 새 zsh 세션에서 awp 확인 지속 지시와 memory bootstrap manifest 반영 test, docs audit, config contracts, desktop check, internal packa",
-      "html": "<p>Work Summary: awp PATH Registration 날짜: 2026 06 06 완료 configure awp path.mjs 추가 cli:install 이 PATH 등록까지 수행하도록 변경 cli:path 추가 .zprofile , .zshrc 에 관리 block 실제 적용 새 zsh 세션에서 awp 확인 지속 지시와 memory bootstrap manifest 반영 test, docs audit, config contracts, desktop check, internal package 검증 통과 주의 현재 실행 중인 부모 shell의 PATH는 자식 프로세스에서 바꿀 수 없다. 새 Terminal 또는 새 zsh 세션에서</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 583,
-      "updatedAt": "2026-06-06T12:51:43.852Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-awp-path-registration-ko-md",
-      "path": "_history/work-timings/2026/2026-06-06-awp-path-registration.ko.md",
-      "category": "work-timing",
-      "language": "ko",
-      "title": "Work Timing: awp PATH Registration",
-      "excerpt": "Work Timing: awp PATH Registration 날짜: 2026 06 06 단계 웹 우선 확인: 완료 구현: 완료 실제 shell 설정: 완료 검증: 완료 commit/push: 완료",
-      "html": "<p>Work Timing: awp PATH Registration 날짜: 2026 06 06 단계 웹 우선 확인: 완료 구현: 완료 실제 shell 설정: 완료 검증: 완료 commit/push: 완료</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 183,
-      "updatedAt": "2026-06-06T12:51:43.852Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-awp-path-registration-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-awp-path-registration.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "Evaluation: awp PATH Registration",
-      "excerpt": "Evaluation: awp PATH Registration 날짜: 2026 06 06 사용자 요구 대비 요구: 반복적으로 필요한 내용을 뒤로 미루지 말고 처리한다. 결과: awp 설치 후 실제 터미널에서 바로 awp 명령이 잡히도록 ~/.local/bin PATH 등록을 자동화하고 실제 적용했다. 새 zsh 세션에서 command v awp , awp version , awp doctor json 을 검증했다. 품질 평가 cli:install 이 symlink 설치와 PATH 등록을 함께 수행하",
-      "html": "<p>Evaluation: awp PATH Registration 날짜: 2026 06 06 사용자 요구 대비 요구: 반복적으로 필요한 내용을 뒤로 미루지 말고 처리한다. 결과: awp 설치 후 실제 터미널에서 바로 awp 명령이 잡히도록 ~/.local/bin PATH 등록을 자동화하고 실제 적용했다. 새 zsh 세션에서 command v awp , awp version , awp doctor json 을 검증했다. 품질 평가 cli:install 이 symlink 설치와 PATH 등록을 함께 수행하도록 바뀌었다. PATH 등록은 marker block, 백업, rollback 명령을 갖는다. 지속 지시에 “반복적으로 필요한 전제 조건을 미</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1216,
-      "updatedAt": "2026-06-06T12:51:43.851Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-awp-path-registration-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-awp-path-registration/tasks.ko.md",
       "category": "project-spec",
@@ -10227,54 +10403,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-awp-path-registration-ko-md",
-      "path": "_history/plans/2026/2026-06-06-awp-path-registration.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "Plan Record: awp PATH Registration",
-      "excerpt": "Plan Record: awp PATH Registration 날짜: 2026 06 06 계획 1. zsh 시작 파일 근거를 확인한다. 2. PATH 등록 script를 만들고 cli:install 에 연결한다. 3. 실제 shell files에 적용한다. 4. 새 zsh 세션에서 awp 를 검증한다. 5. 지속 지시와 설치 감사 기록을 업데이트한다. 6. test/check/package와 docs/config audit 후 commit/push한다.",
-      "html": "<p>Plan Record: awp PATH Registration 날짜: 2026 06 06 계획 1. zsh 시작 파일 근거를 확인한다. 2. PATH 등록 script를 만들고 cli:install 에 연결한다. 3. 실제 shell files에 적용한다. 4. 새 zsh 세션에서 awp 를 검증한다. 5. 지속 지시와 설치 감사 기록을 업데이트한다. 6. test/check/package와 docs/config audit 후 commit/push한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 396,
-      "updatedAt": "2026-06-06T12:49:25.216Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-awp-path-registration-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-awp-path-registration.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "User Request Summary: awp PATH Registration",
-      "excerpt": "User Request Summary: awp PATH Registration 날짜: 2026 06 06 사용자는 반복적으로 필요한 setup 내용을 후속으로 미루지 말라고 지시했다. 이번 맥락에서는 awp lightweight CLI가 설치됐지만 PATH 등록이 남아 있어 실제 터미널 사용에 걸리는 문제를 의미한다고 해석했다.",
-      "html": "<p>User Request Summary: awp PATH Registration 날짜: 2026 06 06 사용자는 반복적으로 필요한 setup 내용을 후속으로 미루지 말라고 지시했다. 이번 맥락에서는 awp lightweight CLI가 설치됐지만 PATH 등록이 남아 있어 실제 터미널 사용에 걸리는 문제를 의미한다고 해석했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 339,
-      "updatedAt": "2026-06-06T12:49:25.216Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-awp-path-registration-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-awp-path-registration.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "Web Search: awp PATH Registration",
-      "excerpt": "Web Search: awp PATH Registration 날짜: 2026 06 06 질의 zsh official documentation startup files zshrc PATH Apple Terminal zsh default shell startup file PATH 확인한 출처 Zsh startup files 소개: zsh가 .zprofile , .zshrc 등 시작 파일을 읽는 흐름과 PATH 같은 환경 변수를 시작 파일에 둘 수 있음을 확인했다. https://zsh.sourcefo",
-      "html": "<p>Web Search: awp PATH Registration 날짜: 2026 06 06 질의 zsh official documentation startup files zshrc PATH Apple Terminal zsh default shell startup file PATH 확인한 출처 Zsh startup files 소개: zsh가 .zprofile , .zshrc 등 시작 파일을 읽는 흐름과 PATH 같은 환경 변수를 시작 파일에 둘 수 있음을 확인했다. https://zsh.sourceforge.io/Intro/intro 3.html Zsh user guide: login/interactive shell 시작 파일 차이를 확인했다</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 986,
-      "updatedAt": "2026-06-06T12:49:25.214Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-awp-path-registration-traceability-ko-md",
@@ -10387,38 +10515,6 @@
       "historyDate": "",
       "historyYear": "",
       "workspaceArea": "_docs/instructions"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-lightweight-cli-install-omission-json",
-      "path": "_history/evaluations/2026/2026-06-06-lightweight-cli-install-omission.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Lightweight Cli Install Omission",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"lightweight cli install\", \"omission check targets\": \" history/evaluations/2026/2026 06 06 lightweight cli install omission.json\" , \"required items\": \"web first intake\", \"requirements\", \"spec plan tasks validation traceability\", \"source cli\", \"i",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;lightweight cli install&quot;, &quot;omission check targets&quot;: &quot; history/evaluations/2026/2026 06 06 lightweight cli install omission.json&quot; , &quot;required items&quot;: &quot;web first intake&quot;, &quot;requirements&quot;, &quot;spec plan tasks validation traceability&quot;, &quot;source cli&quot;, &quot;installer&quot;, &quot;actual install&quot;, &quot;installation audit&quot;, &quot;registry update&quot;, &quot;verificat</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 691,
-      "updatedAt": "2026-06-06T12:42:07.612Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-lightweight-cli-install-ko-md",
-      "path": "_history/work-timings/2026/2026-06-06-lightweight-cli-install.ko.md",
-      "category": "work-timing",
-      "language": "ko",
-      "title": "Work Timing: Lightweight CLI Install",
-      "excerpt": "Work Timing: Lightweight CLI Install 날짜: 2026 06 06 단계 웹 우선 확인: 완료 구현: 완료 설치: 완료 검증: 완료 commit/push: 완료",
-      "html": "<p>Work Timing: Lightweight CLI Install 날짜: 2026 06 06 단계 웹 우선 확인: 완료 구현: 완료 설치: 완료 검증: 완료 commit/push: 완료</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 172,
-      "updatedAt": "2026-06-06T12:42:07.612Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-lightweight-cli-install-tasks-ko-md",
@@ -18163,137 +18259,41 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-no-slow-button-press-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-no-slow-button-press/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "계획: 버튼 클릭 무지연 계약",
-      "excerpt": "계획: 버튼 클릭 무지연 계약 1. 공식 INP/long task/React 문서를 확인한다. 2. 기존 버튼 요구사항과 MonitorShell 버튼 렌더 경로를 확인한다. 3. 전역 capture phase instant button feedback을 구현한다. 4. CSS 눌림 피드백과 정적 회귀 테스트를 추가한다. 5. CPU throttle 6 버튼 응답 audit script를 추가한다. 6. test/check/build/perf/browser 검증을 실행한다. 7. history/ev",
-      "html": "<h1>계획: 버튼 클릭 무지연 계약</h1>\n<p>1. 공식 INP/long task/React 문서를 확인한다.</p>\n<p>2. 기존 버튼 요구사항과 <code>MonitorShell</code> 버튼 렌더 경로를 확인한다.</p>\n<p>3. 전역 capture-phase instant button feedback을 구현한다.</p>\n<p>4. CSS 눌림 피드백과 정적 회귀 테스트를 추가한다.</p>\n<p>5. CPU throttle 6 버튼 응답 audit script를 추가한다.</p>\n<p>6. test/check/build/perf/browser 검증을 실행한다.</p>\n<p>7. history/evaluation/trace를 기록하고 커밋/푸시한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 499,
-      "updatedAt": "2026-06-04T23:54:23.115Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-no-slow-button-press-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-no-slow-button-press/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "스펙: 버튼 클릭 무지연 계약",
-      "excerpt": "스펙: 버튼 클릭 무지연 계약 목표 Workspace Monitor에서 버튼이나 버튼형 컨트롤을 누를 때 실제 action이 무겁더라도 사용자는 즉시 눌림 피드백을 봐야 한다. React click handler, 섹션 이동, modal open, native 호출, clipboard 작업, workbench mount는 첫 피드백 paint를 막으면 안 된다. 요구사항 REQ WM 041 : 버튼 클릭은 heavy workbench mount나 evidence assembly 때문에 첫 응답 p",
-      "html": "<h1>스펙: 버튼 클릭 무지연 계약</h1>\n<h2>목표</h2>\n<p>Workspace Monitor에서 버튼이나 버튼형 컨트롤을 누를 때 실제 action이 무겁더라도 사용자는 즉시 눌림 피드백을 봐야 한다. React click handler, 섹션 이동, modal open, native 호출, clipboard 작업, workbench mount는 첫 피드백 paint를 막으면 안 된다.</p>\n<h2>요구사항</h2>\n<ul>\n<li><code>REQ-WM-041</code>: 버튼 클릭은 heavy workbench mount나 evidence assembly 때문에 첫 응답 paint를 막으면 안 된다.</li>\n<li><code>REQ-WM-055</code>: 모든 버튼/버튼형 컨트롤은 capture-phase 즉시 눌림 피드백을 제공해야 한다.</li>\n</ul>\n<h2>설계</h2>\n<ul>\n<li><code>.desktop-app-root</code>에 capture-phase <code>pointerdown</code>/<code>keydown</code> listener를 설치한다.</li>\n<li>대상은 <code>button</code>, <code>[role=&#039;button&#039;]</code>, <code>summary</code>, <code>a[href]</code>로 잡는다.</li>\n<li>비활성 버튼과 <code>aria-disabled=&quot;true&quot;</code> 대상은 제외한다.</li>\n<li>이벤트 capture 단계에서 <code>data-instant-button-feedback=&quot;active&quot;</code>를 즉시 부여한다.</li>\n<li>첫 paint 이후 <code>data-instant-button-painted=&quot;true&quot;</code>를 기록하고 짧은 시간 후 정리한다.</li>\n<li>CSS는 데이터 속성 기반으로 가벼운 눌림 상태를 표시한다.</li>\n<li><code>scripts/audit-button-response.mjs</code>는 정적 export + CPU throttle 6에서 67개 representative press sample과 실제 nav click sample p95를 측정한다.</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>web.dev INP 문서는 interaction을 input delay, processing duration, presentation delay로 나누며, 긴 작업이 사용자의 다음 paint를 막지 않도록 작업을 줄이거나 분리할 것을 권장한다.</li>\n<li>web.dev long task 문서는 main thread 긴 작업을 쪼개고 yield하여 interaction이 더 빨리 처리될 기회를 만들 것을 권장한다.</li>\n<li>React <code>useTransition</code> 문서는 일부 UI 렌더링을 non-blocking update로 다루는 방향을 제공한다. 이 스펙은 React update 이전 capture 단계의 즉시 피드백으로 더 앞단을 보강한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>모든 개별 버튼 action의 완료 시간을 60ms 이하로 만드는 것</li>\n<li>native command 자체의 실행 시간 최적화</li>\n<li>clipboard, browser permission, external URL 동작 변경</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2111,
-      "updatedAt": "2026-06-04T23:54:23.114Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-no-slow-tab-switch-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-no-slow-tab-switch/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업: 탭 전환 무지연 계약",
-      "excerpt": "작업: 탭 전환 무지연 계약 x 웹 first intake 기록 x 기존 MonitorShell 탭 렌더 경로 확인 x readySection staged mount 추가 x section transition shell CSS 추가 x Source query gate 추가 x 정적 회귀 테스트 추가 x workspace monitor test 실행 x workspace monitor check 실행 x workspace monitor build:customer 실행 x workspace monit",
-      "html": "<h1>작업: 탭 전환 무지연 계약</h1>\n<ul>\n<li>[x] 웹 first intake 기록</li>\n<li>[x] 기존 <code>MonitorShell</code> 탭 렌더 경로 확인</li>\n<li>[x] <code>readySection</code> staged mount 추가</li>\n<li>[x] <code>section-transition-shell</code> CSS 추가</li>\n<li>[x] Source query gate 추가</li>\n<li>[x] 정적 회귀 테스트 추가</li>\n<li>[x] <code>workspace-monitor test</code> 실행</li>\n<li>[x] <code>workspace-monitor check</code> 실행</li>\n<li>[x] <code>workspace-monitor build:customer</code> 실행</li>\n<li>[x] <code>workspace-monitor perf:budget</code> 실행</li>\n<li>[x] Browser/Playwright 성능 smoke 실행</li>\n<li>[x] evaluation/request trace/work summary 기록</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 541,
-      "updatedAt": "2026-06-04T23:47:48.268Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-no-slow-tab-switch-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-no-slow-tab-switch/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증: 탭 전환 무지연 계약",
-      "excerpt": "검증: 탭 전환 무지연 계약 수행 검증 corepack pnpm filter workspace monitor test : 통과, 37 tests corepack pnpm filter workspace monitor run check : 통과 corepack pnpm filter workspace monitor run build:customer : 통과 corepack pnpm filter workspace monitor run perf:budget : 통과, largest chunk 723490 ",
-      "html": "<h1>검증: 탭 전환 무지연 계약</h1>\n<h2>수행 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 37 tests</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: 통과, largest chunk 723490 bytes</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor exec node scripts/audit-tab-response.mjs http://127.0.0.1:3347/#section-overview</code>: 통과</li>\n<li>in-app Browser smoke: <code>overview/agents/desktop/source/tools</code> active/ready true, horizontal overflow false</li>\n</ul>\n<h2>탭 응답 측정</h2>\n<ul>\n<li>기준: 정적 export, viewport 1280x820, CPU throttle 6, pointerdown부터 측정</li>\n<li>active-response 평균: 18.8ms</li>\n<li>active-response p95: 52.0ms</li>\n<li>body-ready 평균: 139.4ms</li>\n<li>body-ready p95: 240.3ms</li>\n<li>섹션별 결과:</li>\n<li><code>agents</code>: active 52.0ms, ready 240.3ms, transition shell true</li>\n<li><code>desktop</code>: active 7.6ms, ready 149.1ms, transition shell true</li>\n<li><code>source</code>: active 6.9ms, ready 82.6ms, transition shell true</li>\n<li><code>tools</code>: active 13.7ms, ready 116.5ms, transition shell true</li>\n<li><code>overview</code>: active 13.6ms, ready 108.5ms, transition shell true</li>\n</ul>\n<h2>스크린샷</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-no-slow-tab-switch-desktop.png</code></li>\n</ul>\n<h2>합격 기준</h2>\n<ul>\n<li>active 탭과 <code>data-active-section</code>은 heavy section body mount 이전에 갱신된다: 통과.</li>\n<li>전환 중 <code>data-section-transition-shell</code>이 먼저 렌더링된다: 통과.</li>\n<li>heavy section body는 <code>data-section-content-ready=&quot;true&quot;</code> 이후에만 mount된다: 통과.</li>\n<li>Source 검색 query는 Source section body 준비 전 빈 문자열로 유지된다: 정적 테스트 통과.</li>\n<li>CPU throttle 6에서 대표 탭 active-response p95가 60ms 이하이다: 52.0ms로 통과.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1832,
-      "updatedAt": "2026-06-04T23:47:48.268Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-no-slow-tab-switch-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-no-slow-tab-switch/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적: 탭 전환 무지연 계약",
-      "excerpt": "추적: 탭 전환 무지연 계약 | 항목 | 대상 | 검증 | | | | | | REQ WM 039 | components/MonitorShell.tsx section body gate | CPU throttle 6 tab switch audit | | REQ WM 041 | section transition shell , first paint staged mount | static test, Browser smoke | | REQ WM 054 | readySection , sectionContent",
-      "html": "<h1>추적: 탭 전환 무지연 계약</h1>\n<table><thead><tr><th>항목</th><th>대상</th><th>검증</th></tr></thead><tbody><tr><td><code>REQ-WM-039</code></td><td><code>components/MonitorShell.tsx</code> section body gate</td><td>CPU throttle 6 tab switch audit</td></tr><tr><td><code>REQ-WM-041</code></td><td><code>section-transition-shell</code>, first-paint staged mount</td><td>static test, Browser smoke</td></tr><tr><td><code>REQ-WM-054</code></td><td><code>readySection</code>, <code>sectionContentReady</code>, Source query gate</td><td><code>tool-studio.test.mjs</code>, Playwright timing</td></tr><tr><td>스타일</td><td><code>app/globals.css</code></td><td>mobile/desktop visual smoke</td></tr><tr><td>요구사항</td><td><code>docs/requirements/2026-06-01-workspace-monitor.*.md</code></td><td>row audit</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 559,
-      "updatedAt": "2026-06-04T23:40:34.058Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-no-slow-tab-switch-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-no-slow-tab-switch/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "계획: 탭 전환 무지연 계약",
-      "excerpt": "계획: 탭 전환 무지연 계약 1. 현재 탭 전환 렌더 경로와 기존 성능 기록을 확인한다. 2. MonitorShell 에 section body staged mount gate를 추가한다. 3. Source 대량 검색이 body 준비 전 실행되지 않도록 막는다. 4. CSS 전환 shell과 정적 회귀 테스트를 추가한다. 5. 정적 테스트, 타입 체크, customer build, perf budget, Browser/Playwright 성능 smoke를 실행한다. 6. 결과와 trace/eval",
-      "html": "<h1>계획: 탭 전환 무지연 계약</h1>\n<p>1. 현재 탭 전환 렌더 경로와 기존 성능 기록을 확인한다.</p>\n<p>2. <code>MonitorShell</code>에 section body staged mount gate를 추가한다.</p>\n<p>3. Source 대량 검색이 body 준비 전 실행되지 않도록 막는다.</p>\n<p>4. CSS 전환 shell과 정적 회귀 테스트를 추가한다.</p>\n<p>5. 정적 테스트, 타입 체크, customer build, perf budget, Browser/Playwright 성능 smoke를 실행한다.</p>\n<p>6. 결과와 trace/evaluation을 남기고 커밋/푸시한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 503,
-      "updatedAt": "2026-06-04T23:40:34.057Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
       "date": "2026-06-07",
       "year": "2026",
-      "documentsCount": 31,
+      "documentsCount": 43,
       "categories": [
         {
           "category": "evaluation",
-          "count": 8
+          "count": 12
         },
         {
           "category": "plan",
-          "count": 4
-        },
-        {
-          "category": "user-request",
-          "count": 4
-        },
-        {
-          "category": "web-search",
-          "count": 4
-        },
-        {
-          "category": "work-timing",
-          "count": 4
+          "count": 5
         },
         {
           "category": "request-trace",
-          "count": 3
+          "count": 5
+        },
+        {
+          "category": "user-request",
+          "count": 5
+        },
+        {
+          "category": "web-search",
+          "count": 5
         },
         {
           "category": "work-summary",
-          "count": 3
+          "count": 5
+        },
+        {
+          "category": "work-timing",
+          "count": 5
         },
         {
           "category": "daily-history",
@@ -18308,7 +18308,27 @@
           "language": "unknown",
           "title": "2026 06 07",
           "excerpt": "2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Deskto",
-          "updatedAt": "2026-06-06T15:57:51.949Z",
+          "updatedAt": "2026-06-06T16:38:30.955Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-07-chatbot-connection-input-json",
+          "path": "_history/evaluations/2026/2026-06-07-chatbot-connection-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 07 Chatbot Connection Input",
+          "excerpt": "{ \"initial instruction\": \"챗봇 연결\", \"result summary\": \"Connected the existing agent chat surface to visible provider API, model route, terminal fallback, and task run store status with direct account, terminal, and model refresh actions plus a command palette entry.\", \"work mode\": ",
+          "updatedAt": "2026-06-06T16:38:30.954Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-07-chatbot-connection-ko-md",
+          "path": "_history/evaluations/2026/2026-06-07-chatbot-connection.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "Evaluation: Chatbot Connection",
+          "excerpt": "Evaluation: Chatbot Connection 날짜: 2026 06 07 평가 사용자의 챗봇 연결 요청은 기존 에이전트 채팅의 실행 연결 가시성을 높이는 방향으로 처리했다. 새 provider나 새 CLI 설치 없이 기존 provider API, 모델 라우팅, terminal fallback, 작업 실행 저장소를 한 화면에 연결했다. 결과 챗봇 연결 명령 팔레트 항목 추가. 채팅 composer 안에 연결 상태 strip 추가. provider 설정, terminal drawer, mod",
+          "updatedAt": "2026-06-06T16:38:30.954Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18329,6 +18349,26 @@
           "title": "최종 평가: Core Feature Connections",
           "excerpt": "최종 평가: Core Feature Connections 날짜: 2026 06 07 평가 홈의 주요 기능 상세가 실제 작업 흐름으로 이어지도록 connection 버튼을 추가했다. 각 버튼은 단순 섹션 이동이 아니라 intent와 flow step 또는 Tool Studio mode request를 함께 설정한다. 충족 핵심 기능 상세에 세부 연결 버튼이 추가됐다. 에이전트, 툴, 실행, 평가, 파일, 실행/결정 가시성 경로가 연결됐다. Tool Studio 연결은 mode request를 갱신한",
           "updatedAt": "2026-06-06T15:57:51.949Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-07-editable-runtime-prompts-input-json",
+          "path": "_history/evaluations/2026/2026-06-07-editable-runtime-prompts-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 07 Editable Runtime Prompts Input",
+          "excerpt": "{ \"initial instruction\": \"각 프롬프트 변경 가능하게\", \"result summary\": \"Made Desktop Runtime session and task pipeline prompt choices editable per prompt key with save/reset controls, persisted runtime customization fields, and Rust preference normalization.\", \"work mode\": \"standard\", \"cha",
+          "updatedAt": "2026-06-06T16:28:03.405Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-07-editable-runtime-prompts-ko-md",
+          "path": "_history/evaluations/2026/2026-06-07-editable-runtime-prompts.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "Evaluation: Editable Runtime Prompts",
+          "excerpt": "Evaluation: Editable Runtime Prompts 날짜: 2026 06 07 판정 통과. 근거 사용자 요구의 핵심인 \"각 프롬프트 변경 가능\"을 세션 prompt와 작업 파이프라인 prompt 양쪽에 적용했다. 저장/초기화가 같은 정규화 경로를 타도록 조정해 Browser smoke에서 발견된 task prompt reset 불일치를 해결했다. Rust preferences 정규화가 허용 key만 보존하도록 테스트를 추가했다. renderer check/test, Rust unit",
+          "updatedAt": "2026-06-06T16:28:24.777Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18392,6 +18432,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-plans-2026-2026-06-07-chatbot-connection-ko-md",
+          "path": "_history/plans/2026/2026-06-07-chatbot-connection.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "Work Plan: Chatbot Connection",
+          "excerpt": "Work Plan: Chatbot Connection 날짜: 2026 06 07 계획 1. web first intake로 agent/chat/native command 참고 기준을 확인한다. 2. 기존 provider 직접 실행과 CLI fallback 흐름을 읽는다. 3. 채팅 panel에 연결 상태 strip과 설정/터미널/모델 refresh 액션을 추가한다. 4. 명령 팔레트에 챗봇 연결 entry를 추가한다. 5. 테스트와 CSS contract를 보강한다. 6. renderer chec",
+          "updatedAt": "2026-06-06T16:38:30.949Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-plans-2026-2026-06-07-core-feature-connections-ko-md",
           "path": "_history/plans/2026/2026-06-07-core-feature-connections.ko.md",
           "category": "plan",
@@ -18432,6 +18482,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-request-traces-2026-2026-06-07-chatbot-connection-ko-md",
+          "path": "_history/request-traces/2026/2026-06-07-chatbot-connection.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Request Trace: Chatbot Connection",
+          "excerpt": "Request Trace: Chatbot Connection 날짜: 2026 06 07 요청 사용자: 챗봇 연결 해석 기존 agent chat을 실제 provider API, terminal fallback, task run store와 명확히 연결해야 한다. 새 provider 구현보다 현재 실행 경로의 가시성과 진입성이 핵심이다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 chatbot connection.ko.md 스펙: pla",
+          "updatedAt": "2026-06-06T16:38:30.953Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-07-core-feature-connections-ko-md",
           "path": "_history/request-traces/2026/2026-06-07-core-feature-connections.ko.md",
           "category": "request-trace",
@@ -18439,6 +18499,16 @@
           "title": "Request Trace: Core Feature Connections",
           "excerpt": "Request Trace: Core Feature Connections 날짜: 2026 06 07 요청 \"주요 기능 연결\" 결과 홈 주요 기능 상세에 connection 버튼을 추가했다. connection은 실제 intent/flow step 또는 Tool Studio mode request를 호출한다. 산출물 platform desktop app/docs/requirements/2026 06 07 core feature connections.ko.md platform desktop app/sp",
           "updatedAt": "2026-06-06T15:57:51.949Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-07-editable-runtime-prompts-ko-md",
+          "path": "_history/request-traces/2026/2026-06-07-editable-runtime-prompts.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Request Trace: Editable Runtime Prompts",
+          "excerpt": "Request Trace: Editable Runtime Prompts 날짜: 2026 06 07 요청 사용자 요청: 각 프롬프트를 변경 가능하게. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 editable runtime prompts.ko.md 스펙: platform desktop app/specs/2026 06 07 editable runtime prompts/ 웹 검색 기록: history/web searches/2026/202",
+          "updatedAt": "2026-06-06T16:27:39.629Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18459,6 +18529,16 @@
           "title": "Request Trace: Subagent Tool Selection",
           "excerpt": "Request Trace: Subagent Tool Selection 날짜: 2026 06 07 요청 미룬거 계속 구현. 연결된 이전 작업 2026 06 07 subagent bounded fanout 결과 이전 경계였던 explicit tool selection UI를 구현했다. 첫 2개 고정 실행에서 벗어나 선택된 saved tool만 단일 실행 또는 fan out으로 시작한다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 suba",
           "updatedAt": "2026-06-06T15:33:02.434Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-07-chatbot-connection-ko-md",
+          "path": "_history/user-requests/2026/2026-06-07-chatbot-connection.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "User Request: Chatbot Connection",
+          "excerpt": "User Request: Chatbot Connection 날짜: 2026 06 07 요약 사용자는 챗봇 연결 을 요구했다. 이전 요청 흐름상 터미널, provider, CLI, 에이전트 채팅이 실제 작업 공간 실행과 분리되어 보이지 않도록, 기존 실행 기능을 명확히 이어달라는 의미로 해석했다. 범위 결정 기존 SearchAgentWorkChatPanel 과 native provider/CLI fallback 경로를 활용한다. 채팅 화면에서 모델 API, 모델 라우팅, 터미널 대체 실행, 작업 실",
+          "updatedAt": "2026-06-06T16:38:30.948Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18502,6 +18582,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-web-searches-2026-2026-06-07-chatbot-connection-ko-md",
+          "path": "_history/web-searches/2026/2026-06-07-chatbot-connection.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: Chatbot Connection",
+          "excerpt": "Web Search: Chatbot Connection 날짜: 2026 06 07 검색 OpenAI Agents SDK official docs agents tools handoffs chat UI instructions Tauri v2 official docs calling Rust from frontend command state VS Code official docs chat extensions chat participant API Claude Code official docs slash c",
+          "updatedAt": "2026-06-06T16:38:30.947Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-07-core-feature-connections-ko-md",
           "path": "_history/web-searches/2026/2026-06-07-core-feature-connections.ko.md",
           "category": "web-search",
@@ -18542,6 +18632,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-07-chatbot-connection-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-07-chatbot-connection.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "Work Summary: Chatbot Connection",
+          "excerpt": "Work Summary: Chatbot Connection 날짜: 2026 06 07 요약 에이전트 채팅 화면에 챗봇 연결 상태 스트립을 추가했다. 이제 사용자는 모델 API, 모델 라우팅, 터미널 대체 실행, 작업 실행 저장소 연결을 한 화면에서 확인하고 계정 설정, 터미널, 모델 갱신으로 바로 이동할 수 있다. 구현 connect chatbot 명령 팔레트 항목 추가. SearchAgentWorkChatPanel 에 chatbotConnectionItems 추가. provider 설정, ter",
+          "updatedAt": "2026-06-06T16:38:30.952Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-07-core-feature-connections-ko-md",
           "path": "_history/work-summaries/2026/2026-06-07-core-feature-connections.ko.md",
           "category": "work-summary",
@@ -18549,6 +18649,16 @@
           "title": "Work Summary: Core Feature Connections",
           "excerpt": "Work Summary: Core Feature Connections 날짜: 2026 06 07 요약 Workspace Monitor 홈의 주요 기능 상세에 세부 연결 버튼을 추가했다. 에이전트, 툴, 실행, 평가, 파일, 가시성 기능이 실제 section/intent/flow step으로 바로 이동한다. 변경 CoreFeatureDrilldownItem 에 connections contract 추가. CoreFeatureDrilldown 에 connection grid 렌더링 추가. Monito",
           "updatedAt": "2026-06-06T15:57:51.948Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-07-editable-runtime-prompts-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-07-editable-runtime-prompts.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "Work Summary: Editable Runtime Prompts",
+          "excerpt": "Work Summary: Editable Runtime Prompts 날짜: 2026 06 07 결과 Desktop Runtime의 세션 프롬프트와 작업 파이프라인 프롬프트를 선택지별로 수정할 수 있게 했다. 구현 RuntimeCustomization.prompts 에 sessionPrompts , taskPipePrompts override map을 추가했다. 세션 prompt choice와 task pipe prompt choice에 promptKey , defaultValue , custom",
+          "updatedAt": "2026-06-06T16:27:39.628Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18569,6 +18679,16 @@
           "title": "Work Summary: Subagent Tool Selection",
           "excerpt": "Work Summary: Subagent Tool Selection 날짜: 2026 06 07 Desktop Runtime subagent plan 결과에 tool 선택 UI를 추가했다. plan 생성 후 첫 2개가 기본 선택되고, 사용자는 최대 3개까지 체크박스로 고를 수 있다. 단일 실행은 선택된 첫 tool을 사용하고, fan out은 선택된 2 3개 tool 이름과 선택 수를 native command에 전달한다.",
           "updatedAt": "2026-06-06T15:33:02.433Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-07-chatbot-connection-ko-md",
+          "path": "_history/work-timings/2026/2026-06-07-chatbot-connection.ko.md",
+          "category": "work-timing",
+          "language": "ko",
+          "title": "Work Timing: Chatbot Connection",
+          "excerpt": "Work Timing: Chatbot Connection 날짜: 2026 06 07 단계별 기록 intake/research: web first search와 기존 SearchAgentWorkChatPanel , provider command, CLI fallback 확인. implementation: 명령 팔레트 entry, 연결 스트립, action wiring, CSS, 테스트 추가. static validation: renderer check와 renderer test 실행. durable",
+          "updatedAt": "2026-06-06T16:38:30.952Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18616,35 +18736,35 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 65,
+      "documentsCount": 53,
       "categories": [
         {
           "category": "evaluation",
-          "count": 16
-        },
-        {
-          "category": "work-timing",
-          "count": 9
+          "count": 13
         },
         {
           "category": "request-trace",
-          "count": 8
-        },
-        {
-          "category": "user-request",
-          "count": 8
-        },
-        {
-          "category": "web-search",
-          "count": 8
+          "count": 7
         },
         {
           "category": "work-summary",
-          "count": 8
+          "count": 7
+        },
+        {
+          "category": "work-timing",
+          "count": 7
         },
         {
           "category": "plan",
-          "count": 7
+          "count": 6
+        },
+        {
+          "category": "user-request",
+          "count": 6
+        },
+        {
+          "category": "web-search",
+          "count": 6
         },
         {
           "category": "daily-history",
@@ -18660,26 +18780,6 @@
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
           "updatedAt": "2026-06-06T15:05:12.467Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-awp-path-registration-omission-json",
-          "path": "_history/evaluations/2026/2026-06-06-awp-path-registration-omission.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Awp Path Registration Omission",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"awp path registration\", \"omission check targets\": \" history/evaluations/2026/2026 06 06 awp path registration omission.json\" , \"required items\": \"web first intake\", \"requirements\", \"spec plan tasks validation traceability\", \"source path configu",
-          "updatedAt": "2026-06-06T12:51:43.852Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-awp-path-registration-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-awp-path-registration.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "Evaluation: awp PATH Registration",
-          "excerpt": "Evaluation: awp PATH Registration 날짜: 2026 06 06 사용자 요구 대비 요구: 반복적으로 필요한 내용을 뒤로 미루지 말고 처리한다. 결과: awp 설치 후 실제 터미널에서 바로 awp 명령이 잡히도록 ~/.local/bin PATH 등록을 자동화하고 실제 적용했다. 새 zsh 세션에서 command v awp , awp version , awp doctor json 을 검증했다. 품질 평가 cli:install 이 symlink 설치와 PATH 등록을 함께 수행하",
-          "updatedAt": "2026-06-06T12:51:43.851Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18700,16 +18800,6 @@
           "title": "최종 평가: Intuitive Home Flow",
           "excerpt": "최종 평가: Intuitive Home Flow 날짜: 2026 06 06 평가: 사용자의 “직관적 흐름” 요구에 대해 홈 진입점에서 다음 행동이 보이도록 첫 slice를 구현했다. 충족: 준비, 선택, 실행, 평가 흐름이 홈 첫 화면에 표시된다. 실행 단계가 실제 Desktop Runtime handoff로 이어진다. 테스트, 빌드, 브라우저 smoke가 통과했다. 남은 범위: 전체 앱 IA 재정렬, 섹션별 세부 흐름 단순화, 설정 onboarding 재설계는 후속 slice로 남는다.",
           "updatedAt": "2026-06-06T13:48:34.957Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-lightweight-cli-install-omission-json",
-          "path": "_history/evaluations/2026/2026-06-06-lightweight-cli-install-omission.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Lightweight Cli Install Omission",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"lightweight cli install\", \"omission check targets\": \" history/evaluations/2026/2026 06 06 lightweight cli install omission.json\" , \"required items\": \"web first intake\", \"requirements\", \"spec plan tasks validation traceability\", \"source cli\", \"i",
-          "updatedAt": "2026-06-06T12:42:07.612Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18823,16 +18913,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-awp-path-registration-ko-md",
-          "path": "_history/plans/2026/2026-06-06-awp-path-registration.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "Plan Record: awp PATH Registration",
-          "excerpt": "Plan Record: awp PATH Registration 날짜: 2026 06 06 계획 1. zsh 시작 파일 근거를 확인한다. 2. PATH 등록 script를 만들고 cli:install 에 연결한다. 3. 실제 shell files에 적용한다. 4. 새 zsh 세션에서 awp 를 검증한다. 5. 지속 지시와 설치 감사 기록을 업데이트한다. 6. test/check/package와 docs/config audit 후 commit/push한다.",
-          "updatedAt": "2026-06-06T12:49:25.216Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-intuitive-home-flow-ko-md",
           "path": "_history/plans/2026/2026-06-06-intuitive-home-flow.ko.md",
           "category": "plan",
@@ -18890,16 +18970,6 @@
           "title": "VS Code 하드 포크 워크스페이스 계획 기록",
           "excerpt": "VS Code 하드 포크 워크스페이스 계획 기록 날짜: 2026 06 06 실행 계획 1. 공식 소스와 라이선스/빌드 경계를 확인한다. 2. 새 root project vscode agent workbench/ 를 만든다. 3. microsoft/vscode 를 source/ 에 clone한다. 4. Node 24.15.0과 npm dependencies를 설치한다. 5. 하드 포크 branch를 만들고 product identity를 바꾼다. 6. Agent Workspace built in e",
           "updatedAt": "2026-06-06T13:14:35.121Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-06-awp-path-registration-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-awp-path-registration.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "Request Trace: awp PATH Registration",
-          "excerpt": "Request Trace: awp PATH Registration 날짜: 2026 06 06 요청 반복적으로 필요한 내용을 뒤로 미루지 말고 처리한다. 산출물 PATH 설정 script: platform desktop app/scripts/configure awp path.mjs package scripts: platform desktop app/package.json persistent instructions: docs/instructions/persistent instructions .md i",
-          "updatedAt": "2026-06-06T12:51:43.853Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18973,16 +19043,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-awp-path-registration-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-awp-path-registration.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "User Request Summary: awp PATH Registration",
-          "excerpt": "User Request Summary: awp PATH Registration 날짜: 2026 06 06 사용자는 반복적으로 필요한 setup 내용을 후속으로 미루지 말라고 지시했다. 이번 맥락에서는 awp lightweight CLI가 설치됐지만 PATH 등록이 남아 있어 실제 터미널 사용에 걸리는 문제를 의미한다고 해석했다.",
-          "updatedAt": "2026-06-06T12:49:25.216Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
           "category": "user-request",
@@ -19043,26 +19103,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-vscode-hard-fork-workspace-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-vscode-hard-fork-workspace.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: VS Code 하드 포크 워크스페이스",
-          "excerpt": "사용자 요청 요약: VS Code 하드 포크 워크스페이스 날짜: 2026 06 06 요약 사용자는 microsoft/vscode 를 클론하고, VS Code 소스와 기능을 최대한 활용하면서 새로운 하드 포크성 작업을 시작하라고 요청했다. 현재 작업이 작업 공간적 성격을 잃고 있으므로, VS Code 소스를 직접 변경하며 워크스페이스 기능을 완전히 녹이는 방향을 원했다. 실행 계약 계획만 세우지 않고 실제 clone, 설치, 소스 변경, 빌드 검증을 수행한다. 전체 완성은 여러 slice가 필요하지",
-          "updatedAt": "2026-06-06T13:14:35.120Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-awp-path-registration-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-awp-path-registration.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "Web Search: awp PATH Registration",
-          "excerpt": "Web Search: awp PATH Registration 날짜: 2026 06 06 질의 zsh official documentation startup files zshrc PATH Apple Terminal zsh default shell startup file PATH 확인한 출처 Zsh startup files 소개: zsh가 .zprofile , .zshrc 등 시작 파일을 읽는 흐름과 PATH 같은 환경 변수를 시작 파일에 둘 수 있음을 확인했다. https://zsh.sourcefo",
-          "updatedAt": "2026-06-06T12:49:25.214Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
           "category": "web-search",
@@ -19120,26 +19160,6 @@
           "title": "Web Search: Terminal Agent Bridge",
           "excerpt": "Web Search: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 검색 VS Code terminal shell integration API official documentation pty terminal extension API xterm.js attach addon official documentation terminal websocket pty node pty official GitHub pseudotermina",
           "updatedAt": "2026-06-06T14:07:16.088Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-vscode-hard-fork-workspace-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-vscode-hard-fork-workspace.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "VS Code 하드 포크 워크스페이스 웹 우선 확인",
-          "excerpt": "VS Code 하드 포크 워크스페이스 웹 우선 확인 날짜: 2026 06 06 쿼리 microsoft vscode GitHub repository license build from source official Visual Studio Code build from source official wiki microsoft vscode product.json nameShort nameLong build source site:github.com/microsoft/vscode/issues product.js",
-          "updatedAt": "2026-06-06T13:14:35.119Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-06-awp-path-registration-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-awp-path-registration.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "Work Summary: awp PATH Registration",
-          "excerpt": "Work Summary: awp PATH Registration 날짜: 2026 06 06 완료 configure awp path.mjs 추가 cli:install 이 PATH 등록까지 수행하도록 변경 cli:path 추가 .zprofile , .zshrc 에 관리 block 실제 적용 새 zsh 세션에서 awp 확인 지속 지시와 memory bootstrap manifest 반영 test, docs audit, config contracts, desktop check, internal packa",
-          "updatedAt": "2026-06-06T12:51:43.852Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19213,16 +19233,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-awp-path-registration-ko-md",
-          "path": "_history/work-timings/2026/2026-06-06-awp-path-registration.ko.md",
-          "category": "work-timing",
-          "language": "ko",
-          "title": "Work Timing: awp PATH Registration",
-          "excerpt": "Work Timing: awp PATH Registration 날짜: 2026 06 06 단계 웹 우선 확인: 완료 구현: 완료 실제 shell 설정: 완료 검증: 완료 commit/push: 완료",
-          "updatedAt": "2026-06-06T12:51:43.852Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
           "path": "_history/work-timings/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
           "category": "work-timing",
@@ -19240,16 +19250,6 @@
           "title": "작업 시간 기록: Intuitive Home Flow",
           "excerpt": "작업 시간 기록: Intuitive Home Flow 날짜: 2026 06 06 단계: web first intake: 완료 large scope slice 선택: 완료 홈 UI 구현: 완료 테스트와 browser smoke: 완료 build/check: 완료",
           "updatedAt": "2026-06-06T13:48:34.957Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-06-lightweight-cli-install-ko-md",
-          "path": "_history/work-timings/2026/2026-06-06-lightweight-cli-install.ko.md",
-          "category": "work-timing",
-          "language": "ko",
-          "title": "Work Timing: Lightweight CLI Install",
-          "excerpt": "Work Timing: Lightweight CLI Install 날짜: 2026 06 06 단계 웹 우선 확인: 완료 구현: 완료 설치: 완료 검증: 완료 commit/push: 완료",
-          "updatedAt": "2026-06-06T12:42:07.612Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19311,36 +19311,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2834,
+      "documents": 2846,
       "days": 8,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1068
+          "count": 1072
         },
         {
           "category": "web-search",
-          "count": 443
-        },
-        {
-          "category": "plan",
-          "count": 371
+          "count": 444
         },
         {
           "category": "request-trace",
-          "count": 371
+          "count": 373
+        },
+        {
+          "category": "plan",
+          "count": 372
         },
         {
           "category": "work-timing",
-          "count": 291
+          "count": 292
         },
         {
           "category": "user-request",
-          "count": 157
+          "count": 158
         },
         {
           "category": "work-summary",
-          "count": 123
+          "count": 125
         },
         {
           "category": "daily-history",
@@ -19351,7 +19351,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6813352,
+      "totalSourceBytes": 6833315,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19380,7 +19380,7 @@
       "decisionEvents": 0,
       "openSignals": 19,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T16:16:15.587Z",
+      "latestEventAt": "2026-06-06T16:38:30.955Z",
       "historyDays": 2
     },
     "lanes": [
@@ -19392,36 +19392,36 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 24
-      },
-      {
-        "id": "monitoring",
-        "label": "monitoring",
-        "count": 13
-      },
-      {
-        "id": "evidence",
-        "label": "evidence",
-        "count": 12
-      },
-      {
-        "id": "intake",
-        "label": "intake",
-        "count": 12
+        "count": 25
       },
       {
         "id": "delivery",
         "label": "delivery",
+        "count": 12
+      },
+      {
+        "id": "monitoring",
+        "label": "monitoring",
+        "count": 12
+      },
+      {
+        "id": "traceability",
+        "label": "traceability",
+        "count": 12
+      },
+      {
+        "id": "evidence",
+        "label": "evidence",
+        "count": 11
+      },
+      {
+        "id": "intake",
+        "label": "intake",
         "count": 11
       },
       {
         "id": "planning",
         "label": "planning",
-        "count": 11
-      },
-      {
-        "id": "traceability",
-        "label": "traceability",
         "count": 11
       },
       {
@@ -19439,22 +19439,27 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 24
+        "count": 25
+      },
+      {
+        "id": "summary",
+        "label": "summary",
+        "count": 12
       },
       {
         "id": "timing",
         "label": "timing",
-        "count": 13
+        "count": 12
+      },
+      {
+        "id": "trace",
+        "label": "trace",
+        "count": 12
       },
       {
         "id": "intake",
         "label": "intake",
-        "count": 12
-      },
-      {
-        "id": "web-search",
-        "label": "web search",
-        "count": 12
+        "count": 11
       },
       {
         "id": "plan",
@@ -19462,13 +19467,8 @@
         "count": 11
       },
       {
-        "id": "summary",
-        "label": "summary",
-        "count": 11
-      },
-      {
-        "id": "trace",
-        "label": "trace",
+        "id": "web-search",
+        "label": "web search",
         "count": 11
       },
       {
@@ -19490,6 +19490,201 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-2026-2026-06-07-md",
+        "sourceType": "history",
+        "signalType": "history",
+        "lane": "history",
+        "severity": "info",
+        "status": "daily-history",
+        "title": "2026 06 07",
+        "detail": "2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Deskto",
+        "path": "_history/2026/2026-06-07.md",
+        "category": "daily-history",
+        "language": "unknown",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:38:30.955Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-07-chatbot-connection-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 07 Chatbot Connection Input",
+        "detail": "{ \"initial instruction\": \"챗봇 연결\", \"result summary\": \"Connected the existing agent chat surface to visible provider API, model route, terminal fallback, and task run store status with direct account, terminal, and model refresh actions plus a command palette entry.\", \"work mode\": ",
+        "path": "_history/evaluations/2026/2026-06-07-chatbot-connection-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:38:30.954Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-07-chatbot-connection-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "Evaluation: Chatbot Connection",
+        "detail": "Evaluation: Chatbot Connection 날짜: 2026 06 07 평가 사용자의 챗봇 연결 요청은 기존 에이전트 채팅의 실행 연결 가시성을 높이는 방향으로 처리했다. 새 provider나 새 CLI 설치 없이 기존 provider API, 모델 라우팅, terminal fallback, 작업 실행 저장소를 한 화면에 연결했다. 결과 챗봇 연결 명령 팔레트 항목 추가. 채팅 composer 안에 연결 상태 strip 추가. provider 설정, terminal drawer, mod",
+        "path": "_history/evaluations/2026/2026-06-07-chatbot-connection.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:38:30.954Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-07-chatbot-connection-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Chatbot Connection",
+        "detail": "Request Trace: Chatbot Connection 날짜: 2026 06 07 요청 사용자: 챗봇 연결 해석 기존 agent chat을 실제 provider API, terminal fallback, task run store와 명확히 연결해야 한다. 새 provider 구현보다 현재 실행 경로의 가시성과 진입성이 핵심이다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 chatbot connection.ko.md 스펙: pla",
+        "path": "_history/request-traces/2026/2026-06-07-chatbot-connection.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:38:30.953Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-07-chatbot-connection-ko-md",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "Work Timing: Chatbot Connection",
+        "detail": "Work Timing: Chatbot Connection 날짜: 2026 06 07 단계별 기록 intake/research: web first search와 기존 SearchAgentWorkChatPanel , provider command, CLI fallback 확인. implementation: 명령 팔레트 entry, 연결 스트립, action wiring, CSS, 테스트 추가. static validation: renderer check와 renderer test 실행. durable",
+        "path": "_history/work-timings/2026/2026-06-07-chatbot-connection.ko.md",
+        "category": "work-timing",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:38:30.952Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-07-chatbot-connection-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "Work Summary: Chatbot Connection",
+        "detail": "Work Summary: Chatbot Connection 날짜: 2026 06 07 요약 에이전트 채팅 화면에 챗봇 연결 상태 스트립을 추가했다. 이제 사용자는 모델 API, 모델 라우팅, 터미널 대체 실행, 작업 실행 저장소 연결을 한 화면에서 확인하고 계정 설정, 터미널, 모델 갱신으로 바로 이동할 수 있다. 구현 connect chatbot 명령 팔레트 항목 추가. SearchAgentWorkChatPanel 에 chatbotConnectionItems 추가. provider 설정, ter",
+        "path": "_history/work-summaries/2026/2026-06-07-chatbot-connection.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:38:30.952Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-07-chatbot-connection-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "Work Plan: Chatbot Connection",
+        "detail": "Work Plan: Chatbot Connection 날짜: 2026 06 07 계획 1. web first intake로 agent/chat/native command 참고 기준을 확인한다. 2. 기존 provider 직접 실행과 CLI fallback 흐름을 읽는다. 3. 채팅 panel에 연결 상태 strip과 설정/터미널/모델 refresh 액션을 추가한다. 4. 명령 팔레트에 챗봇 연결 entry를 추가한다. 5. 테스트와 CSS contract를 보강한다. 6. renderer chec",
+        "path": "_history/plans/2026/2026-06-07-chatbot-connection.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:38:30.949Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-07-chatbot-connection-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "User Request: Chatbot Connection",
+        "detail": "User Request: Chatbot Connection 날짜: 2026 06 07 요약 사용자는 챗봇 연결 을 요구했다. 이전 요청 흐름상 터미널, provider, CLI, 에이전트 채팅이 실제 작업 공간 실행과 분리되어 보이지 않도록, 기존 실행 기능을 명확히 이어달라는 의미로 해석했다. 범위 결정 기존 SearchAgentWorkChatPanel 과 native provider/CLI fallback 경로를 활용한다. 채팅 화면에서 모델 API, 모델 라우팅, 터미널 대체 실행, 작업 실",
+        "path": "_history/user-requests/2026/2026-06-07-chatbot-connection.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:38:30.948Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-07-chatbot-connection-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Chatbot Connection",
+        "detail": "Web Search: Chatbot Connection 날짜: 2026 06 07 검색 OpenAI Agents SDK official docs agents tools handoffs chat UI instructions Tauri v2 official docs calling Rust from frontend command state VS Code official docs chat extensions chat participant API Claude Code official docs slash c",
+        "path": "_history/web-searches/2026/2026-06-07-chatbot-connection.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:38:30.947Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-07-editable-runtime-prompts-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "Evaluation: Editable Runtime Prompts",
+        "detail": "Evaluation: Editable Runtime Prompts 날짜: 2026 06 07 판정 통과. 근거 사용자 요구의 핵심인 \"각 프롬프트 변경 가능\"을 세션 prompt와 작업 파이프라인 prompt 양쪽에 적용했다. 저장/초기화가 같은 정규화 경로를 타도록 조정해 Browser smoke에서 발견된 task prompt reset 불일치를 해결했다. Rust preferences 정규화가 허용 key만 보존하도록 테스트를 추가했다. renderer check/test, Rust unit",
+        "path": "_history/evaluations/2026/2026-06-07-editable-runtime-prompts.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:28:24.777Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-07-editable-runtime-prompts-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 07 Editable Runtime Prompts Input",
+        "detail": "{ \"initial instruction\": \"각 프롬프트 변경 가능하게\", \"result summary\": \"Made Desktop Runtime session and task pipeline prompt choices editable per prompt key with save/reset controls, persisted runtime customization fields, and Rust preference normalization.\", \"work mode\": \"standard\", \"cha",
+        "path": "_history/evaluations/2026/2026-06-07-editable-runtime-prompts-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:28:03.405Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-07-editable-runtime-prompts-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Editable Runtime Prompts",
+        "detail": "Request Trace: Editable Runtime Prompts 날짜: 2026 06 07 요청 사용자 요청: 각 프롬프트를 변경 가능하게. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 editable runtime prompts.ko.md 스펙: platform desktop app/specs/2026 06 07 editable runtime prompts/ 웹 검색 기록: history/web searches/2026/202",
+        "path": "_history/request-traces/2026/2026-06-07-editable-runtime-prompts.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:27:39.629Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-07-editable-runtime-prompts-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "Work Summary: Editable Runtime Prompts",
+        "detail": "Work Summary: Editable Runtime Prompts 날짜: 2026 06 07 결과 Desktop Runtime의 세션 프롬프트와 작업 파이프라인 프롬프트를 선택지별로 수정할 수 있게 했다. 구현 RuntimeCustomization.prompts 에 sessionPrompts , taskPipePrompts override map을 추가했다. 세션 prompt choice와 task pipe prompt choice에 promptKey , defaultValue , custom",
+        "path": "_history/work-summaries/2026/2026-06-07-editable-runtime-prompts.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T16:27:39.628Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-07-editable-runtime-prompts-ko-md",
         "sourceType": "history",
@@ -19607,21 +19802,6 @@
         "path": "_history/request-traces/2026/2026-06-07-core-feature-connections.ko.md",
         "category": "request-trace",
         "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-06T15:57:51.949Z"
-      },
-      {
-        "id": "history-history-2026-2026-06-07-md",
-        "sourceType": "history",
-        "signalType": "history",
-        "lane": "history",
-        "severity": "info",
-        "status": "daily-history",
-        "title": "2026 06 07",
-        "detail": "2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Deskto",
-        "path": "_history/2026/2026-06-07.md",
-        "category": "daily-history",
-        "language": "unknown",
         "date": "2026-06-07",
         "timestamp": "2026-06-06T15:57:51.949Z"
       },
@@ -20749,186 +20929,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T13:14:35.121Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-vscode-hard-fork-workspace-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: VS Code 하드 포크 워크스페이스",
-        "detail": "사용자 요청 요약: VS Code 하드 포크 워크스페이스 날짜: 2026 06 06 요약 사용자는 microsoft/vscode 를 클론하고, VS Code 소스와 기능을 최대한 활용하면서 새로운 하드 포크성 작업을 시작하라고 요청했다. 현재 작업이 작업 공간적 성격을 잃고 있으므로, VS Code 소스를 직접 변경하며 워크스페이스 기능을 완전히 녹이는 방향을 원했다. 실행 계약 계획만 세우지 않고 실제 clone, 설치, 소스 변경, 빌드 검증을 수행한다. 전체 완성은 여러 slice가 필요하지",
-        "path": "_history/user-requests/2026/2026-06-06-vscode-hard-fork-workspace.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:14:35.120Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-vscode-hard-fork-workspace-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "VS Code 하드 포크 워크스페이스 웹 우선 확인",
-        "detail": "VS Code 하드 포크 워크스페이스 웹 우선 확인 날짜: 2026 06 06 쿼리 microsoft vscode GitHub repository license build from source official Visual Studio Code build from source official wiki microsoft vscode product.json nameShort nameLong build source site:github.com/microsoft/vscode/issues product.js",
-        "path": "_history/web-searches/2026/2026-06-06-vscode-hard-fork-workspace.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:14:35.119Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-awp-path-registration-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "Request Trace: awp PATH Registration",
-        "detail": "Request Trace: awp PATH Registration 날짜: 2026 06 06 요청 반복적으로 필요한 내용을 뒤로 미루지 말고 처리한다. 산출물 PATH 설정 script: platform desktop app/scripts/configure awp path.mjs package scripts: platform desktop app/package.json persistent instructions: docs/instructions/persistent instructions .md i",
-        "path": "_history/request-traces/2026/2026-06-06-awp-path-registration.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:51:43.853Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-awp-path-registration-omission-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Awp Path Registration Omission",
-        "detail": "{ \"date\": \"2026 06 06\", \"work id\": \"awp path registration\", \"omission check targets\": \" history/evaluations/2026/2026 06 06 awp path registration omission.json\" , \"required items\": \"web first intake\", \"requirements\", \"spec plan tasks validation traceability\", \"source path configu",
-        "path": "_history/evaluations/2026/2026-06-06-awp-path-registration-omission.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:51:43.852Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-awp-path-registration-ko-md",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "Work Timing: awp PATH Registration",
-        "detail": "Work Timing: awp PATH Registration 날짜: 2026 06 06 단계 웹 우선 확인: 완료 구현: 완료 실제 shell 설정: 완료 검증: 완료 commit/push: 완료",
-        "path": "_history/work-timings/2026/2026-06-06-awp-path-registration.ko.md",
-        "category": "work-timing",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:51:43.852Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-awp-path-registration-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "Work Summary: awp PATH Registration",
-        "detail": "Work Summary: awp PATH Registration 날짜: 2026 06 06 완료 configure awp path.mjs 추가 cli:install 이 PATH 등록까지 수행하도록 변경 cli:path 추가 .zprofile , .zshrc 에 관리 block 실제 적용 새 zsh 세션에서 awp 확인 지속 지시와 memory bootstrap manifest 반영 test, docs audit, config contracts, desktop check, internal packa",
-        "path": "_history/work-summaries/2026/2026-06-06-awp-path-registration.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:51:43.852Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-awp-path-registration-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "Evaluation: awp PATH Registration",
-        "detail": "Evaluation: awp PATH Registration 날짜: 2026 06 06 사용자 요구 대비 요구: 반복적으로 필요한 내용을 뒤로 미루지 말고 처리한다. 결과: awp 설치 후 실제 터미널에서 바로 awp 명령이 잡히도록 ~/.local/bin PATH 등록을 자동화하고 실제 적용했다. 새 zsh 세션에서 command v awp , awp version , awp doctor json 을 검증했다. 품질 평가 cli:install 이 symlink 설치와 PATH 등록을 함께 수행하",
-        "path": "_history/evaluations/2026/2026-06-06-awp-path-registration.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:51:43.851Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-awp-path-registration-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "Plan Record: awp PATH Registration",
-        "detail": "Plan Record: awp PATH Registration 날짜: 2026 06 06 계획 1. zsh 시작 파일 근거를 확인한다. 2. PATH 등록 script를 만들고 cli:install 에 연결한다. 3. 실제 shell files에 적용한다. 4. 새 zsh 세션에서 awp 를 검증한다. 5. 지속 지시와 설치 감사 기록을 업데이트한다. 6. test/check/package와 docs/config audit 후 commit/push한다.",
-        "path": "_history/plans/2026/2026-06-06-awp-path-registration.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:49:25.216Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-awp-path-registration-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "User Request Summary: awp PATH Registration",
-        "detail": "User Request Summary: awp PATH Registration 날짜: 2026 06 06 사용자는 반복적으로 필요한 setup 내용을 후속으로 미루지 말라고 지시했다. 이번 맥락에서는 awp lightweight CLI가 설치됐지만 PATH 등록이 남아 있어 실제 터미널 사용에 걸리는 문제를 의미한다고 해석했다.",
-        "path": "_history/user-requests/2026/2026-06-06-awp-path-registration.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:49:25.216Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-awp-path-registration-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "Web Search: awp PATH Registration",
-        "detail": "Web Search: awp PATH Registration 날짜: 2026 06 06 질의 zsh official documentation startup files zshrc PATH Apple Terminal zsh default shell startup file PATH 확인한 출처 Zsh startup files 소개: zsh가 .zprofile , .zshrc 등 시작 파일을 읽는 흐름과 PATH 같은 환경 변수를 시작 파일에 둘 수 있음을 확인했다. https://zsh.sourcefo",
-        "path": "_history/web-searches/2026/2026-06-06-awp-path-registration.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:49:25.214Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-lightweight-cli-install-omission-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Lightweight Cli Install Omission",
-        "detail": "{ \"date\": \"2026 06 06\", \"work id\": \"lightweight cli install\", \"omission check targets\": \" history/evaluations/2026/2026 06 06 lightweight cli install omission.json\" , \"required items\": \"web first intake\", \"requirements\", \"spec plan tasks validation traceability\", \"source cli\", \"i",
-        "path": "_history/evaluations/2026/2026-06-06-lightweight-cli-install-omission.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:42:07.612Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-lightweight-cli-install-ko-md",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "Work Timing: Lightweight CLI Install",
-        "detail": "Work Timing: Lightweight CLI Install 날짜: 2026 06 06 단계 웹 우선 확인: 완료 구현: 완료 설치: 완료 검증: 완료 commit/push: 완료",
-        "path": "_history/work-timings/2026/2026-06-06-lightweight-cli-install.ko.md",
-        "category": "work-timing",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:42:07.612Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -24160,12 +24160,12 @@
       {
         "category": "work-summary",
         "root": "_history/work-summaries",
-        "documentsCount": 11
+        "documentsCount": 12
       },
       {
         "category": "user-request",
         "root": "_history/user-requests",
-        "documentsCount": 12
+        "documentsCount": 11
       },
       {
         "category": "intent-feature-map",
@@ -24175,17 +24175,17 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 11
+        "documentsCount": 12
       },
       {
         "category": "web-search",
         "root": "_history/web-searches",
-        "documentsCount": 12
+        "documentsCount": 11
       },
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 13
+        "documentsCount": 12
       },
       {
         "category": "plan",
@@ -24195,7 +24195,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 24
+        "documentsCount": 25
       },
       {
         "category": "daily-history",
@@ -24289,7 +24289,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 86,
+        "documentCount": 87,
         "sourceFileCount": 14
       },
       {
@@ -28130,13 +28130,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 4118,
+      "sourceDocuments": 4136,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T16:16:15.587Z"
+      "latestInsightAt": "2026-06-06T16:38:30.955Z"
     },
     "inferenceStages": [
       {
@@ -28277,7 +28277,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1825,
+        "signalCount": 1829,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -28285,11 +28285,11 @@
           },
           {
             "category": "evaluation",
-            "count": 485
+            "count": 486
           },
           {
             "category": "web-search",
-            "count": 444
+            "count": 445
           },
           {
             "category": "plan",
@@ -28297,7 +28297,7 @@
           },
           {
             "category": "request-trace",
-            "count": 123
+            "count": 125
           },
           {
             "category": "work-timing",
@@ -28328,7 +28328,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T16:16:15.586Z"
+        "latestEvidenceAt": "2026-06-06T16:38:30.953Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28342,15 +28342,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1054,
+        "signalCount": 1057,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 512
+            "count": 514
           },
           {
             "category": "plan",
-            "count": 307
+            "count": 308
           },
           {
             "category": "request-trace",
@@ -28401,7 +28401,7 @@
           "작업 요약: 큰 범위 작업 미루지 않기",
           "작업 계획 기록: 사용자 의도 기반 기능 지도"
         ],
-        "latestEvidenceAt": "2026-06-06T16:16:15.586Z"
+        "latestEvidenceAt": "2026-06-06T16:38:30.954Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28415,7 +28415,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 803,
+        "signalCount": 807,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -28423,15 +28423,15 @@
           },
           {
             "category": "evaluation",
-            "count": 258
+            "count": 260
           },
           {
             "category": "work-summary",
-            "count": 49
+            "count": 50
           },
           {
             "category": "web-search",
-            "count": 42
+            "count": 43
           },
           {
             "category": "plan",
@@ -28474,7 +28474,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "Requirement: Native Pipe Runtime Tools"
         ],
-        "latestEvidenceAt": "2026-06-06T16:16:15.587Z"
+        "latestEvidenceAt": "2026-06-06T16:38:30.955Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28547,7 +28547,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T15:57:51.949Z"
+        "latestEvidenceAt": "2026-06-06T16:38:30.955Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28623,14 +28623,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 4118,
+      "sourceDocuments": 4136,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T16:16:15.587Z"
+      "latestInsightAt": "2026-06-06T16:38:30.955Z"
     },
     "operatingModel": [
       {
@@ -28688,19 +28688,19 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3375,
+        "signalCount": 3382,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1825
+            "signalCount": 1829
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1054
+            "signalCount": 1057
           },
           {
             "id": "build-closeout-gate",
@@ -28734,7 +28734,7 @@
           "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T16:16:15.586Z",
+        "latestEvidenceAt": "2026-06-06T16:38:30.954Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28763,13 +28763,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 922,
+        "signalCount": 926,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 803
+            "signalCount": 807
           },
           {
             "id": "release-blocker-gate",
@@ -28803,7 +28803,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T16:16:15.587Z",
+        "latestEvidenceAt": "2026-06-06T16:38:30.955Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28832,7 +28832,7 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2674,
+        "signalCount": 2677,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
@@ -28844,7 +28844,7 @@
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1054
+            "signalCount": 1057
           }
         ],
         "missingPatternIds": [],
@@ -28872,7 +28872,7 @@
           "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T16:16:15.586Z",
+        "latestEvidenceAt": "2026-06-06T16:38:30.955Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28970,19 +28970,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2879,
+        "signalCount": 2886,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1054
+            "signalCount": 1057
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1825
+            "signalCount": 1829
           }
         ],
         "missingPatternIds": [],
@@ -29010,7 +29010,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T16:16:15.586Z",
+        "latestEvidenceAt": "2026-06-06T16:38:30.954Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -29039,7 +29039,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1944,
+        "signalCount": 1948,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -29051,7 +29051,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1825
+            "signalCount": 1829
           }
         ],
         "missingPatternIds": [],
@@ -29079,7 +29079,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T16:16:15.586Z",
+        "latestEvidenceAt": "2026-06-06T16:38:30.953Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",
