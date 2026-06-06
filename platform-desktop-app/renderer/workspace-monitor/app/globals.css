@@ -1624,6 +1624,8 @@ main {
 
 .titlebar-context-strip,
 .titlebar-context-strip *,
+.titlebar-breadcrumb,
+.titlebar-breadcrumb *,
 .titlebar-actions,
 .titlebar-actions *,
 .titlebar-search,
@@ -1631,9 +1633,82 @@ main {
   -webkit-app-region: no-drag;
 }
 
-.titlebar-section strong {
-  display: block;
-  margin-top: 2px;
+.titlebar-location {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.titlebar-mode-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.titlebar-breadcrumb {
+  min-width: 0;
+}
+
+.titlebar-breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.titlebar-breadcrumb li {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+}
+
+.titlebar-breadcrumb li:not(:last-child)::after {
+  content: "/";
+  flex: 0 0 auto;
+  margin-inline: 4px 0;
+  color: var(--muted);
+  font-size: var(--font-size-caption);
+}
+
+.titlebar-breadcrumb button,
+.titlebar-breadcrumb-label,
+.titlebar-current-label {
+  display: inline-flex;
+  max-width: min(100%, 22ch);
+  min-height: 24px;
+  align-items: center;
+  border-radius: 7px;
+  padding: 2px 7px;
+  overflow: hidden;
+  color: var(--slate);
+  font-size: var(--font-size-caption);
+  font-weight: 800;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.titlebar-breadcrumb button {
+  border: 1px solid var(--line);
+  background: var(--choice-bg);
+  cursor: pointer;
+  box-shadow: var(--control-shadow);
+}
+
+.titlebar-breadcrumb button:hover {
+  border-color: var(--state-hover-border);
+  background: var(--state-hover-surface);
+}
+
+.titlebar-current-label {
+  max-width: min(100%, 28ch);
+  background: var(--surface-muted);
+  color: var(--text);
   font-size: var(--font-size-section-title);
 }
 
@@ -18141,6 +18216,22 @@ h3 {
     grid-column: 1 / -1;
   }
 
+  .desktop-viewport[data-primary-work-surface="true"] .desktop-titlebar {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  .desktop-viewport[data-primary-work-surface="true"] .titlebar-actions {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .desktop-viewport[data-primary-work-surface="true"] .titlebar-actions > button {
+    flex: 1 1 var(--control-target-size);
+    min-width: 0;
+  }
+
   .terminal-drawer {
     left: 62px;
     right: 0;
@@ -18227,6 +18318,13 @@ h3 {
 }
 
 @media (max-width: 960px) {
+  main,
+  .desktop-app-root,
+  .desktop-app-shell {
+    width: 100%;
+    min-width: 0;
+  }
+
   .desktop-titlebar,
   .titlebar-context-strip,
   .titlebar-actions,

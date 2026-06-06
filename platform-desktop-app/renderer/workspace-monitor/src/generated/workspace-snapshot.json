@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T17:05:15.976Z",
+  "generatedAt": "2026-06-06T17:25:11.228Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 5,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 528,
-    "evaluations": 24,
-    "webSearches": 11,
-    "timingRecords": 12,
+    "evaluations": 25,
+    "webSearches": 12,
+    "timingRecords": 11,
     "historyDays": 2,
-    "adminHistoryDocuments": 2854,
+    "adminHistoryDocuments": 2862,
     "adminHistoryDays": 8,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7861,6 +7861,230 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+      "path": "_history/evaluations/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Titlebar Location Breadcrumb",
+      "excerpt": "Evaluation: Titlebar Location Breadcrumb 날짜: 2026 06 07 평가 사용자의 사용자 헷갈리지 않게 직관성 개선 요청은 titlebar의 현재 위치 인식 개선으로 처리했다. 도움말 문구를 늘리지 않고, 사용자가 보고 있는 화면의 홈, 기능 그룹, 현재 섹션 관계를 바로 볼 수 있게 했다. 결과 titlebar에 홈 기능 그룹 현재 섹션 breadcrumb 추가. 현재 섹션에 aria current=\"page\" 추가. breadcrumb home은 기존 overv",
+      "html": "<p>Evaluation: Titlebar Location Breadcrumb 날짜: 2026 06 07 평가 사용자의 사용자 헷갈리지 않게 직관성 개선 요청은 titlebar의 현재 위치 인식 개선으로 처리했다. 도움말 문구를 늘리지 않고, 사용자가 보고 있는 화면의 홈, 기능 그룹, 현재 섹션 관계를 바로 볼 수 있게 했다. 결과 titlebar에 홈 기능 그룹 현재 섹션 breadcrumb 추가. 현재 섹션에 aria current=&quot;page&quot; 추가. breadcrumb home은 기존 overview section activation lifecycle을 재사용한다. 클릭 가능한 breadcrumb 영역만 no drag 처리했다. 960</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1507,
+      "updatedAt": "2026-06-06T17:25:02.243Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-titlebar-location-breadcrumb-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-titlebar-location-breadcrumb/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Titlebar Location Breadcrumb",
+      "excerpt": "Validation: Titlebar Location Breadcrumb 날짜: 2026 06 07 계획 구조 테스트로 data current location trail , breadcrumb home/group/section, aria current=\"page\" 계약을 확인한다. renderer check/test로 TypeScript와 회귀 테스트를 확인한다. collect/build/platform check로 생성 snapshot과 production renderer 경로를 확인한다. Br",
+      "html": "<h1>Validation: Titlebar Location Breadcrumb</h1>\n<p>날짜: 2026-06-07</p>\n<h2>계획</h2>\n<ul>\n<li>구조 테스트로 <code>data-current-location-trail</code>, breadcrumb home/group/section, <code>aria-current=&quot;page&quot;</code> 계약을 확인한다.</li>\n<li>renderer check/test로 TypeScript와 회귀 테스트를 확인한다.</li>\n<li>collect/build/platform check로 생성 snapshot과 production renderer 경로를 확인한다.</li>\n<li>Browser smoke로 실제 titlebar breadcrumb, 홈 클릭, 모바일 overflow를 확인한다.</li>\n</ul>\n<h2>결과</h2>\n<ul>\n<li>통과: <code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>.</li>\n<li>통과: <code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code> - 90 tests.</li>\n<li>통과: <code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code>.</li>\n<li>통과: <code>corepack pnpm -w run desktop:renderer:build</code>.</li>\n<li>통과: <code>corepack pnpm --dir platform-desktop-app run check</code>. 기존 public release signing/notarization/updater/clean-machine smoke gate는 public 배포 gate로 남았다.</li>\n<li>통과: Browser smoke.</li>\n<li>초기 상태: <code>홈</code>, <code>핵심 기능</code>, <code>핵심 홈</code>, <code>aria-current=&quot;page&quot;</code> 확인.</li>\n<li>섹션 이동: activity rail의 <code>tools</code> 클릭 후 <code>홈</code>, <code>핵심 기능</code>, <code>툴 스튜디오</code>로 trail 갱신.</li>\n<li>홈 클릭: breadcrumb home 클릭 후 <code>overview</code>로 복귀.</li>\n<li>모바일 390x844: root/shell/titlebar/breadcrumb/titlebar-actions overflow 없음.</li>\n<li>통과: dev server cleanup - TCP 3227 listener 없음.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1450,
+      "updatedAt": "2026-06-06T17:25:02.243Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Titlebar Location Breadcrumb",
+      "excerpt": "Work Summary: Titlebar Location Breadcrumb 날짜: 2026 06 07 요약 앱 상단 titlebar에 현재 위치 breadcrumb를 추가했다. 이제 사용자는 현재 화면이 홈, 기능 그룹, 섹션 중 어디에 속하는지 바로 볼 수 있고, 홈 을 눌러 overview로 돌아갈 수 있다. 구현 MonitorShell.tsx 에 titlebar breadcrumb nav 추가. globals.css 에 breadcrumb 스타일, no drag 범위, 모바일 root/sh",
+      "html": "<p>Work Summary: Titlebar Location Breadcrumb 날짜: 2026 06 07 요약 앱 상단 titlebar에 현재 위치 breadcrumb를 추가했다. 이제 사용자는 현재 화면이 홈, 기능 그룹, 섹션 중 어디에 속하는지 바로 볼 수 있고, 홈 을 눌러 overview로 돌아갈 수 있다. 구현 MonitorShell.tsx 에 titlebar breadcrumb nav 추가. globals.css 에 breadcrumb 스타일, no drag 범위, 모바일 root/shell width reset 추가. tool studio.test.mjs 에 breadcrumb와 모바일 width reset contract </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 897,
+      "updatedAt": "2026-06-06T17:24:05.122Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-07-titlebar-location-breadcrumb-json",
+      "path": "_history/work-timings/2026/2026-06-07-titlebar-location-breadcrumb.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 07 Titlebar Location Breadcrumb",
+      "excerpt": "{ \"task id\": \"2026 06 07 titlebar location breadcrumb\", \"title\": \"Titlebar location breadcrumb\", \"date\": \"2026 06 07\", \"timezone\": \"Asia/Seoul\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"st",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 07 titlebar location breadcrumb&quot;, &quot;title&quot;: &quot;Titlebar location breadcrumb&quot;, &quot;date&quot;: &quot;2026 06 07&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;bottleneck notes&quot;: &quot;Official</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1910,
+      "updatedAt": "2026-06-06T17:24:05.122Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-titlebar-location-breadcrumb-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-titlebar-location-breadcrumb/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Titlebar Location Breadcrumb",
+      "excerpt": "Tasks: Titlebar Location Breadcrumb 날짜: 2026 06 07 작업 목록 x titlebar 상태 구조 확인. x 현재 위치 breadcrumb 구현. x titlebar breadcrumb CSS 추가. x 구조 테스트 추가. x renderer check 실행. x renderer test 실행. x collect/build/platform check 실행. x Browser smoke 실행. x omission/resource/evaluation 기록 완료.",
+      "html": "<h1>Tasks: Titlebar Location Breadcrumb</h1>\n<p>날짜: 2026-06-07</p>\n<h2>작업 목록</h2>\n<ul>\n<li>[x] titlebar 상태 구조 확인.</li>\n<li>[x] 현재 위치 breadcrumb 구현.</li>\n<li>[x] titlebar breadcrumb CSS 추가.</li>\n<li>[x] 구조 테스트 추가.</li>\n<li>[x] renderer check 실행.</li>\n<li>[x] renderer test 실행.</li>\n<li>[x] collect/build/platform check 실행.</li>\n<li>[x] Browser smoke 실행.</li>\n<li>[x] omission/resource/evaluation 기록 완료.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 400,
+      "updatedAt": "2026-06-06T17:24:05.121Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-titlebar-location-breadcrumb-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-titlebar-location-breadcrumb/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Titlebar Location Breadcrumb",
+      "excerpt": "Traceability: Titlebar Location Breadcrumb 날짜: 2026 06 07 요청 연결 사용자 요청: \"사용자 헷갈리지 않게 직관성 개선\" 선택한 slice: titlebar 현재 위치 breadcrumb 요구사항 연결 요구사항: platform desktop app/docs/requirements/2026 06 07 titlebar location breadcrumb.ko.md 스펙: platform desktop app/specs/2026 06 07 titlebar ",
+      "html": "<h1>Traceability: Titlebar Location Breadcrumb</h1>\n<p>날짜: 2026-06-07</p>\n<h2>요청 연결</h2>\n<ul>\n<li>사용자 요청: &quot;사용자 헷갈리지 않게 직관성 개선&quot;</li>\n<li>선택한 slice: titlebar 현재 위치 breadcrumb</li>\n</ul>\n<h2>요구사항 연결</h2>\n<ul>\n<li>요구사항: <code>platform-desktop-app/docs/requirements/2026-06-07-titlebar-location-breadcrumb.ko.md</code></li>\n<li>스펙: <code>platform-desktop-app/specs/2026-06-07-titlebar-location-breadcrumb/spec.ko.md</code></li>\n<li>계획: <code>platform-desktop-app/specs/2026-06-07-titlebar-location-breadcrumb/plan.ko.md</code></li>\n<li>작업: <code>platform-desktop-app/specs/2026-06-07-titlebar-location-breadcrumb/tasks.ko.md</code></li>\n<li>검증: <code>platform-desktop-app/specs/2026-06-07-titlebar-location-breadcrumb/validation.ko.md</code></li>\n</ul>\n<h2>구현 연결</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n</ul>\n<h2>검증 연결</h2>\n<ul>\n<li>renderer check/test 통과.</li>\n<li>collect, production renderer build, platform check 통과.</li>\n<li>Browser smoke 통과.</li>\n<li>omission/resource/evaluation 기록 완료.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1127,
+      "updatedAt": "2026-06-06T17:24:05.121Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-titlebar-location-breadcrumb-evaluator-input-json",
+      "path": "_history/evaluations/2026/2026-06-07-titlebar-location-breadcrumb-evaluator-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 07 Titlebar Location Breadcrumb Evaluator Input",
+      "excerpt": "{ \"initial instruction\": \"사용자 헷갈리지 않게 직관성 개선\", \"result summary\": \"Added an accessible titlebar current location breadcrumb, preserved the existing section activation lifecycle, fixed mobile root/shell minimum width so responsive layout works, and verified with tests, build, and B",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;사용자 헷갈리지 않게 직관성 개선&quot;, &quot;result summary&quot;: &quot;Added an accessible titlebar current location breadcrumb, preserved the existing section activation lifecycle, fixed mobile root/shell minimum width so responsive layout works, and verified with tests, build, and Browser smoke.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4768,
+      "updatedAt": "2026-06-06T17:21:44.298Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+      "path": "_history/request-traces/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Titlebar Location Breadcrumb",
+      "excerpt": "Request Trace: Titlebar Location Breadcrumb 날짜: 2026 06 07 요청 사용자는 사용자가 헷갈리지 않게 직관성을 개선하라고 요청했다. 결정 상단 titlebar에 현재 위치 breadcrumb를 추가하는 slice로 처리했다. 사용자가 새로운 설명을 읽지 않아도 현재 위치를 바로 인식하게 하는 변경이기 때문이다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 titlebar location brea",
+      "html": "<p>Request Trace: Titlebar Location Breadcrumb 날짜: 2026 06 07 요청 사용자는 사용자가 헷갈리지 않게 직관성을 개선하라고 요청했다. 결정 상단 titlebar에 현재 위치 breadcrumb를 추가하는 slice로 처리했다. 사용자가 새로운 설명을 읽지 않아도 현재 위치를 바로 인식하게 하는 변경이기 때문이다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 titlebar location breadcrumb.ko.md 스펙: platform desktop app/specs/2026 06 07 titlebar location breadcr</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1148,
+      "updatedAt": "2026-06-06T17:21:44.298Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-titlebar-location-breadcrumb-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-titlebar-location-breadcrumb/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Titlebar Location Breadcrumb",
+      "excerpt": "Spec: Titlebar Location Breadcrumb 날짜: 2026 06 07 목표 사용자가 현재 보고 있는 화면의 위치를 기억하지 않아도 titlebar에서 바로 인식하게 한다. 동작 titlebar section 안에 titlebar location 을 둔다. 보기 모드는 titlebar mode label 로 유지한다. 현재 위치 trail은 titlebar breadcrumb nav와 ordered list로 표시한다. 첫 항목은 홈 button이며 primeSectionActi",
+      "html": "<h1>Spec: Titlebar Location Breadcrumb</h1>\n<p>날짜: 2026-06-07</p>\n<h2>목표</h2>\n<p>사용자가 현재 보고 있는 화면의 위치를 기억하지 않아도 titlebar에서 바로 인식하게 한다.</p>\n<h2>동작</h2>\n<ul>\n<li><code>titlebar-section</code> 안에 <code>titlebar-location</code>을 둔다.</li>\n<li>보기 모드는 <code>titlebar-mode-label</code>로 유지한다.</li>\n<li>현재 위치 trail은 <code>titlebar-breadcrumb</code> nav와 ordered list로 표시한다.</li>\n<li>첫 항목은 <code>홈</code> button이며 <code>primeSectionActivation(&quot;overview&quot;)</code>와 <code>openSection(&quot;overview&quot;)</code>를 재사용한다.</li>\n<li>두 번째 항목은 현재 <code>currentFeatureGroup.label</code>을 표시한다.</li>\n<li>세 번째 항목은 현재 <code>currentSectionLabel</code>이며 <code>aria-current=&quot;page&quot;</code>를 가진다.</li>\n</ul>\n<h2>UI 계약</h2>\n<ul>\n<li>breadcrumb nav는 <code>data-current-location-trail</code>을 가진다.</li>\n<li>breadcrumb 항목은 <code>data-titlebar-breadcrumb=&quot;home&quot;</code>, <code>&quot;group&quot;</code>, <code>&quot;section&quot;</code>을 가진다.</li>\n<li>현재 섹션 항목은 <code>.titlebar-current-label</code>과 <code>aria-current=&quot;page&quot;</code>를 가진다.</li>\n<li>breadcrumb 버튼은 최소 24px 조작 높이를 유지한다.</li>\n<li>모바일 폭에서 <code>.titlebar-breadcrumb</code>, <code>.titlebar-current-label</code>, breadcrumb button이 viewport를 넘지 않아야 한다.</li>\n<li><code>@media (max-width: 960px)</code>에서 <code>main</code>, <code>.desktop-app-root</code>, <code>.desktop-app-shell</code>은 <code>min-width: 0</code>을 가져야 한다.</li>\n</ul>\n<h2>안전 경계</h2>\n<ul>\n<li>기존 section state와 <code>openSection</code> lifecycle만 사용한다.</li>\n<li>새 long-running resource, CLI pipeline, native permission을 만들지 않는다.</li>\n<li>Browser smoke는 renderer fallback DOM/interaction을 검증한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1520,
+      "updatedAt": "2026-06-06T17:20:15.735Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-07-titlebar-location-breadcrumb-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-07-titlebar-location-breadcrumb.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: Titlebar Location Breadcrumb",
+      "excerpt": "요구사항: Titlebar Location Breadcrumb 날짜: 2026 06 07 요구 사용자가 앱에서 현재 어디에 있는지 헷갈리지 않도록 직관성을 개선한다. 기존 titlebar는 보기 모드와 섹션명을 표시하지만, 홈, 기능 그룹, 현재 섹션의 관계가 한눈에 이어지지 않는다. 수용 기준 titlebar는 현재 위치를 홈 기능 그룹 현재 섹션 구조로 표시한다. 현재 섹션 항목은 aria current=\"page\" 로 보조기기에 전달한다. 홈 항목은 기존 openSection \"overvie",
+      "html": "<h1>요구사항: Titlebar Location Breadcrumb</h1>\n<p>날짜: 2026-06-07</p>\n<h2>요구</h2>\n<p>사용자가 앱에서 현재 어디에 있는지 헷갈리지 않도록 직관성을 개선한다. 기존 titlebar는 보기 모드와 섹션명을 표시하지만, 홈, 기능 그룹, 현재 섹션의 관계가 한눈에 이어지지 않는다.</p>\n<h2>수용 기준</h2>\n<ul>\n<li>titlebar는 현재 위치를 <code>홈 &gt; 기능 그룹 &gt; 현재 섹션</code> 구조로 표시한다.</li>\n<li>현재 섹션 항목은 <code>aria-current=&quot;page&quot;</code>로 보조기기에 전달한다.</li>\n<li><code>홈</code> 항목은 기존 <code>openSection(&quot;overview&quot;)</code> 경로로 바로 돌아간다.</li>\n<li>breadcrumb는 기존 titlebar/drag region 구조를 해치지 않고, 클릭 가능한 항목만 no-drag 처리한다.</li>\n<li>좁은 화면에서 breadcrumb 텍스트는 줄바꿈 또는 말줄임으로 컨테이너를 밀어내지 않는다.</li>\n<li>960px 이하 viewport에서는 앱 root/shell 최소폭을 해제해 모바일용 미디어 규칙이 실제로 적용된다.</li>\n<li>구조 테스트와 Browser smoke로 현재 위치 표시, 홈 클릭, 모바일 overflow를 검증한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>새 route 시스템 도입.</li>\n<li>전체 정보구조 재설계.</li>\n<li>새 native command 추가.</li>\n<li>새 dependency 설치.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1208,
+      "updatedAt": "2026-06-06T17:20:15.734Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-plans-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+      "path": "_history/plans/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Work Plan: Titlebar Location Breadcrumb",
+      "excerpt": "Work Plan: Titlebar Location Breadcrumb 날짜: 2026 06 07 목표 사용자가 현재 위치를 기억하지 않아도 상단 titlebar에서 바로 확인하게 한다. 실행 계획 1. web first intake로 breadcrumb와 current page 접근성 근거 확인. 2. local source에서 titlebar와 section state 확인. 3. existing state를 재사용해 breadcrumb 추가. 4. no drag, responsive, ove",
+      "html": "<p>Work Plan: Titlebar Location Breadcrumb 날짜: 2026 06 07 목표 사용자가 현재 위치를 기억하지 않아도 상단 titlebar에서 바로 확인하게 한다. 실행 계획 1. web first intake로 breadcrumb와 current page 접근성 근거 확인. 2. local source에서 titlebar와 section state 확인. 3. existing state를 재사용해 breadcrumb 추가. 4. no drag, responsive, overflow CSS 추가. 5. 구조 테스트, renderer checks, build, Browser smoke로 검증. 6. omission/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 651,
+      "updatedAt": "2026-06-06T17:10:59.295Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+      "path": "_history/user-requests/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: Titlebar Location Breadcrumb",
+      "excerpt": "User Request: Titlebar Location Breadcrumb 날짜: 2026 06 07 요약 사용자는 사용자가 헷갈리지 않도록 직관성을 개선하라고 요청했다. 선택한 처리 앱 상단 titlebar에 현재 위치 breadcrumb를 추가해 홈, 기능 그룹, 현재 섹션 관계를 즉시 볼 수 있게 한다. 산출물 요구사항/스펙/계획/작업/검증/추적성 기록 titlebar breadcrumb UI/CSS/테스트 변경 검증 및 평가 기록",
+      "html": "<p>User Request: Titlebar Location Breadcrumb 날짜: 2026 06 07 요약 사용자는 사용자가 헷갈리지 않도록 직관성을 개선하라고 요청했다. 선택한 처리 앱 상단 titlebar에 현재 위치 breadcrumb를 추가해 홈, 기능 그룹, 현재 섹션 관계를 즉시 볼 수 있게 한다. 산출물 요구사항/스펙/계획/작업/검증/추적성 기록 titlebar breadcrumb UI/CSS/테스트 변경 검증 및 평가 기록</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 474,
+      "updatedAt": "2026-06-06T17:10:59.295Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+      "path": "_history/web-searches/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Titlebar Location Breadcrumb",
+      "excerpt": "Web Search: Titlebar Location Breadcrumb 날짜: 2026 06 07 검색 Nielsen Norman Group usability heuristics visibility system status recognition rather than recall breadcrumbs official W3C WAI breadcrumb navigation pattern current page aria current official Microsoft Fluent 2 navigation",
+      "html": "<p>Web Search: Titlebar Location Breadcrumb 날짜: 2026 06 07 검색 Nielsen Norman Group usability heuristics visibility system status recognition rather than recall breadcrumbs official W3C WAI breadcrumb navigation pattern current page aria current official Microsoft Fluent 2 navigation breadcrumb command design guidance official Apple Human Interface Guidelines fe</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1830,
+      "updatedAt": "2026-06-06T17:10:59.294Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-titlebar-location-breadcrumb-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-titlebar-location-breadcrumb/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Titlebar Location Breadcrumb",
+      "excerpt": "Plan: Titlebar Location Breadcrumb 날짜: 2026 06 07 선택한 구현 기존 titlebar에 breadcrumb를 추가한다. 별도 도움말이나 온보딩 문구를 늘리지 않고, 사용자가 실제 위치를 즉시 보는 구조를 만든다. 대안 비교 대안 A: titlebar breadcrumb 추가. 현재 위치 인식을 직접 개선하고 범위가 작다. 대안 B: 별도 도움말/가이드 패널 추가. 설명은 늘지만 화면 복잡도와 읽을거리가 증가한다. 선택: 대안 A. 혼란을 줄이는 핵심은 설명보다",
+      "html": "<h1>Plan: Titlebar Location Breadcrumb</h1>\n<p>날짜: 2026-06-07</p>\n<h2>선택한 구현</h2>\n<p>기존 titlebar에 breadcrumb를 추가한다. 별도 도움말이나 온보딩 문구를 늘리지 않고, 사용자가 실제 위치를 즉시 보는 구조를 만든다.</p>\n<h2>대안 비교</h2>\n<ul>\n<li>대안 A: titlebar breadcrumb 추가. 현재 위치 인식을 직접 개선하고 범위가 작다.</li>\n<li>대안 B: 별도 도움말/가이드 패널 추가. 설명은 늘지만 화면 복잡도와 읽을거리가 증가한다.</li>\n<li>선택: 대안 A. 혼란을 줄이는 핵심은 설명보다 위치와 상태를 보이게 하는 것이다.</li>\n</ul>\n<h2>단계</h2>\n<p>1. titlebar의 현재 섹션/그룹 상태 확인.</p>\n<p>2. breadcrumb nav와 home action 추가.</p>\n<p>3. no-drag, 말줄임, 모바일 overflow 방지 CSS 추가.</p>\n<p>4. 구조 테스트 추가.</p>\n<p>5. renderer check/test/build와 Browser smoke 실행.</p>\n<h2>검증 게이트</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code></li>\n<li><code>corepack pnpm -w run desktop:renderer:build</code></li>\n<li>Browser smoke: breadcrumb 표시, 홈 버튼 클릭, 모바일 overflow 없음</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1165,
+      "updatedAt": "2026-06-06T17:10:59.294Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-work-timings-2026-2026-06-07-command-palette-usability-json",
       "path": "_history/work-timings/2026/2026-06-07-command-palette-usability.json",
       "category": "work-timing",
@@ -10245,70 +10469,6 @@
       "workspaceArea": "_history/web-searches"
     },
     {
-      "id": "history-work-summaries-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: History Payload Check Customer Snapshot",
-      "excerpt": "작업 요약: History Payload Check Customer Snapshot 날짜: 2026 06 06 원인: customer renderer build 후 public/admin history index.json 이 empty customer index로 남아 check history payload.mjs 가 developer migrated index 요구와 충돌했다. 수정: collector가 src/generated/admin history index.json 을 항상 쓰도록 하고,",
-      "html": "<p>작업 요약: History Payload Check Customer Snapshot 날짜: 2026 06 06 원인: customer renderer build 후 public/admin history index.json 이 empty customer index로 남아 check history payload.mjs 가 developer migrated index 요구와 충돌했다. 수정: collector가 src/generated/admin history index.json 을 항상 쓰도록 하고, history payload check는 이 developer 원본을 기준으로 검증한다. 보강: public admin index는 devel</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 732,
-      "updatedAt": "2026-06-06T13:39:42.284Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-      "path": "_history/work-timings/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-      "category": "work-timing",
-      "language": "ko",
-      "title": "작업 시간 기록: History Payload Check Customer Snapshot",
-      "excerpt": "작업 시간 기록: History Payload Check Customer Snapshot 날짜: 2026 06 06 단계: web first intake: 완료 오류 재현: 완료 구현: 완료 customer/developer snapshot 검증: 완료 커밋 전 검증: 진행 중",
-      "html": "<p>작업 시간 기록: History Payload Check Customer Snapshot 날짜: 2026 06 06 단계: web first intake: 완료 오류 재현: 완료 구현: 완료 customer/developer snapshot 검증: 완료 커밋 전 검증: 진행 중</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 251,
-      "updatedAt": "2026-06-06T13:39:42.284Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "최종 평가: Rust Runtime Feature Split",
-      "excerpt": "최종 평가: Rust Runtime Feature Split 날짜: 2026 06 06 평가 요청한 Rust source 분리와 기능별 추가 기능의 첫 slice를 완료했다. lib.rs 전체 대분해는 회귀 위험이 커서 진행하지 않았고, 대신 기능별 source module tree와 read only runtime feature map command를 추가해 다음 이동 기준을 만들었다. 충족 기능별 Rust folder 구조 추가 기능별 command/risk/follow up report 추가",
-      "html": "<p>최종 평가: Rust Runtime Feature Split 날짜: 2026 06 06 평가 요청한 Rust source 분리와 기능별 추가 기능의 첫 slice를 완료했다. lib.rs 전체 대분해는 회귀 위험이 커서 진행하지 않았고, 대신 기능별 source module tree와 read only runtime feature map command를 추가해 다음 이동 기준을 만들었다. 충족 기능별 Rust folder 구조 추가 기능별 command/risk/follow up report 추가 Tauri command surface와 runtime contract 연결 Desktop Runtime UI metric 연결 Rust/No</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1087,
-      "updatedAt": "2026-06-06T13:30:09.998Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-      "path": "_history/work-timings/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-      "category": "work-timing",
-      "language": "ko",
-      "title": "작업 시간 기록: Rust Runtime Feature Split",
-      "excerpt": "작업 시간 기록: Rust Runtime Feature Split 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | Rust/Tauri 공식 문서 확인 | | source inventory | 완료 | lib.rs 12,175 lines 단일 파일 확인 | | 구현 | 완료 | feature module tree, command, UI metric | | 검증 | 완료 | Rust/Node checks와 internal package 통과 | | 기록",
-      "html": "<p>작업 시간 기록: Rust Runtime Feature Split 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | Rust/Tauri 공식 문서 확인 | | source inventory | 완료 | lib.rs 12,175 lines 단일 파일 확인 | | 구현 | 완료 | feature module tree, command, UI metric | | 검증 | 완료 | Rust/Node checks와 internal package 통과 | | 기록 | 완료 | requirements/spec/history 기록 | 병목 Rust source 자체보다 generated admin histo</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 637,
-      "updatedAt": "2026-06-06T13:30:09.998Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-rust-runtime-feature-split-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-rust-runtime-feature-split/tasks.ko.md",
       "category": "project-spec",
@@ -10339,70 +10499,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: Rust Runtime Feature Split",
-      "excerpt": "요청 결과 추적: Rust Runtime Feature Split 날짜: 2026 06 06 요청 Rust source와 folder structure를 기능별로 분리하고 기능별 추가 기능을 추가한다. 결과 src tauri/src/features/ 기능별 module tree 추가 get rust runtime feature map Tauri command 추가 Desktop Runtime diagnostics에 Rust module/command metrics 추가 runtime contrac",
-      "html": "<p>요청 결과 추적: Rust Runtime Feature Split 날짜: 2026 06 06 요청 Rust source와 folder structure를 기능별로 분리하고 기능별 추가 기능을 추가한다. 결과 src tauri/src/features/ 기능별 module tree 추가 get rust runtime feature map Tauri command 추가 Desktop Runtime diagnostics에 Rust module/command metrics 추가 runtime contract, readiness, tests 갱신 generated snapshot collect 수행 주요 검증 cargo check cargo tes</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 721,
-      "updatedAt": "2026-06-06T13:28:08.844Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: Rust Runtime Feature Split",
-      "excerpt": "작업 요약: Rust Runtime Feature Split 날짜: 2026 06 06 Tauri Rust runtime에 기능별 source root src tauri/src/features/ 를 추가하고, app shell, CLI orchestration, native process control, workspace host, provider accounts, diagnostics/data, agent factory, decision inbox로 나눴다. 새 read only command ",
-      "html": "<p>작업 요약: Rust Runtime Feature Split 날짜: 2026 06 06 Tauri Rust runtime에 기능별 source root src tauri/src/features/ 를 추가하고, app shell, CLI orchestration, native process control, workspace host, provider accounts, diagnostics/data, agent factory, decision inbox로 나눴다. 새 read only command get rust runtime feature map 은 기능별 module, command, risk boundary, follow up을 반환</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 639,
-      "updatedAt": "2026-06-06T13:28:08.844Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-      "path": "_history/plans/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "Rust Runtime Feature Split 계획",
-      "excerpt": "Rust Runtime Feature Split 계획 날짜: 2026 06 06 1. 공식 Rust/Tauri 구조 확인. 2. 현재 Rust source inventory 확인. 3. src tauri/src/features/ 기능별 폴더 생성. 4. 기능별 command/risk map command 추가. 5. Desktop Runtime UI metric 연결. 6. runtime contract, readiness, tests 갱신. 7. Rust/Node/build/package 검증.",
-      "html": "<p>Rust Runtime Feature Split 계획 날짜: 2026 06 06 1. 공식 Rust/Tauri 구조 확인. 2. 현재 Rust source inventory 확인. 3. src tauri/src/features/ 기능별 폴더 생성. 4. 기능별 command/risk map command 추가. 5. Desktop Runtime UI metric 연결. 6. runtime contract, readiness, tests 갱신. 7. Rust/Node/build/package 검증. 8. 기록, commit, push.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 376,
-      "updatedAt": "2026-06-06T13:28:08.843Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Rust Runtime Feature Split",
-      "excerpt": "사용자 요청 요약: Rust Runtime Feature Split 날짜: 2026 06 06 사용자는 Rust source를 분리하고 폴더 구조를 기능별로 나누며 기능별 추가 기능을 넣으라고 요청했다. 처리 대상은 platform desktop app/src tauri native runtime으로 해석했다.",
-      "html": "<p>사용자 요청 요약: Rust Runtime Feature Split 날짜: 2026 06 06 사용자는 Rust source를 분리하고 폴더 구조를 기능별로 나누며 기능별 추가 기능을 넣으라고 요청했다. 처리 대상은 platform desktop app/src tauri native runtime으로 해석했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 295,
-      "updatedAt": "2026-06-06T13:28:08.843Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-rust-runtime-feature-split-traceability-ko-md",
@@ -18163,137 +18259,41 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-overview-focus-command-surface-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-overview-focus-command-surface/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증 기록",
-      "excerpt": "검증 기록 명령 corepack pnpm filter workspace monitor test 통과 corepack pnpm filter workspace monitor run check 통과 corepack pnpm filter workspace monitor run build:customer 통과 corepack pnpm filter workspace monitor run perf:budget 통과 Browser smoke in app Browser desktop에서 Overview의 data",
-      "html": "<h1>검증 기록</h1>\n<h2>명령</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code> 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code> 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code> 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code> 통과</li>\n</ul>\n<h2>Browser smoke</h2>\n<ul>\n<li>in-app Browser desktop에서 Overview의 <code>data-home-focus-command</code>, <code>data-home-focus-card</code>, <code>data-home-navigation-dock</code> 표시를 확인했다.</li>\n<li>desktop에서 focus command가 작업 dock과 status strip보다 먼저 표시되고, 추천 card intent가 <code>build-tool</code>, flow step 3개, target intent 6개, 수평 overflow 0임을 확인했다.</li>\n<li>Playwright mobile 390x844에서 focus command/dock/status strip 표시, card intent <code>build-tool</code>, flow step 3개, target intent 6개, body/viewport 폭 390px, 수평 overflow 0, primary action 높이 48px를 확인했다.</li>\n</ul>\n<h2>스크린샷</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-overview-focus-command-desktop.png</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-overview-focus-command-mobile.png</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1130,
-      "updatedAt": "2026-06-05T00:19:19.949Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-overview-focus-command-surface-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-overview-focus-command-surface/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성",
-      "excerpt": "추적성 | 항목 | 연결 | | | | | 요구사항 | REQ WM 057 | | 사용자 요청 | UI 근본 변화 대혁신 | | 구현 파일 | components/MonitorShell.tsx | | 스타일 파일 | app/globals.css | | 테스트 파일 | tests/tool studio.test.mjs | | 검증 파일 | validation.ko.md | | 이력 | history/request traces/2026/2026 06 05 overview focus command sur",
-      "html": "<h1>추적성</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>요구사항</td><td>REQ-WM-057</td></tr><tr><td>사용자 요청</td><td><code>UI 근본 변화 대혁신</code></td></tr><tr><td>구현 파일</td><td><code>components/MonitorShell.tsx</code></td></tr><tr><td>스타일 파일</td><td><code>app/globals.css</code></td></tr><tr><td>테스트 파일</td><td><code>tests/tool-studio.test.mjs</code></td></tr><tr><td>검증 파일</td><td><code>validation.ko.md</code></td></tr><tr><td>이력</td><td><code>_history/request-traces/2026/2026-06-05-overview-focus-command-surface.ko.md</code></td></tr></tbody></table>\n<h2>수락 기준</h2>\n<ul>\n<li><code>data-home-focus-command</code>, <code>data-home-focus-card</code>, <code>data-home-navigation-dock</code>가 Overview에 표시된다.</li>\n<li>focus command가 작업 dock보다 먼저 렌더링된다.</li>\n<li>focus card는 추천 작업, badge, next step preview, primary action을 제공한다.</li>\n<li>desktop과 390px mobile에서 수평 overflow가 없다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 741,
-      "updatedAt": "2026-06-05T00:17:55.060Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-overview-focus-command-surface-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-overview-focus-command-surface/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "구현 계획",
-      "excerpt": "구현 계획 범위 Overview 홈의 첫 surface를 home focus command 중심으로 재배치한다. 추천 작업은 현재 handoff intent가 있으면 그것을 쓰고, 없으면 툴 만들기 를 기본 추천으로 둔다. 목표 목록은 home navigation dock 으로 낮추고 상태 요약은 별도 strip으로 유지한다. CSS는 desktop 2열, 960px 이하 1열, 720px 이하 텍스트 정상 줄바꿈을 보장한다. static test, check, customer build, per",
-      "html": "<h1>구현 계획</h1>\n<h2>범위</h2>\n<ul>\n<li>Overview 홈의 첫 surface를 <code>home-focus-command</code> 중심으로 재배치한다.</li>\n<li>추천 작업은 현재 handoff intent가 있으면 그것을 쓰고, 없으면 <code>툴 만들기</code>를 기본 추천으로 둔다.</li>\n<li>목표 목록은 <code>home-navigation-dock</code>으로 낮추고 상태 요약은 별도 strip으로 유지한다.</li>\n<li>CSS는 desktop 2열, 960px 이하 1열, 720px 이하 텍스트 정상 줄바꿈을 보장한다.</li>\n<li>static test, check, customer build, performance budget, Browser smoke로 검증한다.</li>\n</ul>\n<h2>결정</h2>\n<ul>\n<li>언어/런타임은 기존 Next.js/React/TypeScript를 유지한다.</li>\n<li>새 UI 라이브러리를 설치하지 않고 기존 CSS token, lucide icon, task intent 모델을 재사용한다.</li>\n<li>전체 navigation shell을 한 번에 재작성하지 않고 Overview 첫 화면을 고충격 slice로 먼저 바꾼다.</li>\n</ul>\n<h2>위험과 대응</h2>\n<ul>\n<li>추천 카드가 또 다른 카드 과밀을 만들 수 있다: 기존 <code>core-home-panel</code> frame을 제거하고 focus band/dock/status strip으로 분리한다.</li>\n<li>모바일에서 단계 텍스트가 좁게 깨질 수 있다: 960px 이하 1열, 720px 이하 단계 텍스트 normal wrap을 적용한다.</li>\n<li>목표 클릭 흐름이 퇴행할 수 있다: 기존 <code>data-task-intent</code>와 <code>item.run</code> route를 유지한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1298,
-      "updatedAt": "2026-06-05T00:17:55.059Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-overview-focus-command-surface-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-overview-focus-command-surface/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Overview Focus Command Surface 스펙",
-      "excerpt": "Overview Focus Command Surface 스펙 요구사항 REQ WM 057: Overview 첫 화면은 하나의 추천 작업, 다음 단계 preview, primary action을 먼저 보여주는 Focus Command Surface여야 한다. 사용자 결과 사용자는 Overview 첫 화면에서 동등한 카드 목록보다 먼저 추천 작업 하나와 다음 단계 3개를 본다. 사용자는 primary action으로 바로 대상 작업면에 들어간다. 다른 목표는 별도 작업 dock에 남아 있어 필요할 때",
-      "html": "<h1>Overview Focus Command Surface 스펙</h1>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-WM-057: Overview 첫 화면은 하나의 추천 작업, 다음 단계 preview, primary action을 먼저 보여주는 Focus Command Surface여야 한다.</li>\n</ul>\n<h2>사용자 결과</h2>\n<ul>\n<li>사용자는 Overview 첫 화면에서 동등한 카드 목록보다 먼저 추천 작업 하나와 다음 단계 3개를 본다.</li>\n<li>사용자는 primary action으로 바로 대상 작업면에 들어간다.</li>\n<li>다른 목표는 별도 작업 dock에 남아 있어 필요할 때만 선택한다.</li>\n<li>현재 작업량은 보조 status strip으로 낮아져 첫 판단을 방해하지 않는다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>전체 제품 UI를 한 커밋에서 전면 재작성</li>\n<li>새 디자인 시스템 라이브러리 설치</li>\n<li>실제 agent/tool runtime 동작 변경</li>\n<li>운영/문서/히스토리 섹션의 정보 구조 전면 재편</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 859,
-      "updatedAt": "2026-06-05T00:17:55.059Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-python-source-tool-management-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-python-source-tool-management/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록",
-      "excerpt": "작업 목록 x ToolBuilderBlueprint 에 package/module/entrypoint/pyproject/test/init/edit target/checklist 필드 추가 x Python CLI, MCP Wrapper, Automation Tool blueprint에 source 관리 메타데이터 추가 x build 모드 전용 Python source manager JSX 추가 x source target 선택 상태와 source plan copy action 추가 x 860px 이",
-      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] <code>ToolBuilderBlueprint</code>에 package/module/entrypoint/pyproject/test/init/edit target/checklist 필드 추가</li>\n<li>[x] Python CLI, MCP Wrapper, Automation Tool blueprint에 source 관리 메타데이터 추가</li>\n<li>[x] <code>build</code> 모드 전용 Python source manager JSX 추가</li>\n<li>[x] source target 선택 상태와 source plan copy action 추가</li>\n<li>[x] 860px 이하 1열 접힘 CSS 추가</li>\n<li>[x] static regression test 추가</li>\n<li>[x] <code>workspace-monitor test</code> 실행</li>\n<li>[x] <code>workspace-monitor check</code> 실행</li>\n<li>[x] <code>workspace-monitor build:customer</code> 실행</li>\n<li>[x] <code>workspace-monitor perf:budget</code> 실행</li>\n<li>[x] Browser smoke와 screenshot 저장</li>\n<li>[x] 평가, 추적, 작업 요약 갱신</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 689,
-      "updatedAt": "2026-06-05T00:12:12.339Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-python-source-tool-management-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-python-source-tool-management/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증 기록",
-      "excerpt": "검증 기록 명령 corepack pnpm filter workspace monitor test 통과 corepack pnpm filter workspace monitor run check 통과 corepack pnpm filter workspace monitor run build:customer 통과 corepack pnpm filter workspace monitor run perf:budget 통과 Browser smoke in app Browser desktop에서 Tools 화면의 툴 만들",
-      "html": "<h1>검증 기록</h1>\n<h2>명령</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code> 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code> 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code> 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code> 통과</li>\n</ul>\n<h2>Browser smoke</h2>\n<ul>\n<li>in-app Browser desktop에서 Tools 화면의 <code>툴 만들기</code> mode와 <code>data-tool-python-source-manager</code> 표시를 확인했다.</li>\n<li>in-app Browser desktop에서 source target 4개, pyproject, entry point, checklist, init command, action 3개, 수평 overflow 0을 확인했다.</li>\n<li>visual QA 중 checklist가 3열로 좁아져 한국어가 세로로 깨지는 문제를 발견했고, checklist를 한 열로 바꾼 뒤 재검증했다.</li>\n<li>cache-busting URL 재검증에서 desktop source manager layout은 <code>217.031px 196.359px</code>, checklist item 최소 폭 174px, 최대 높이 48px, 수평 overflow 0이었다.</li>\n<li>Playwright mobile 390x844에서 source manager 1열 접힘, checklist 1열, body/viewport 폭 390px, 수평 overflow 0, action 높이 48px를 확인했다.</li>\n</ul>\n<h2>스크린샷</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-python-source-tool-management-desktop.png</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-python-source-tool-management-mobile.png</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1340,
-      "updatedAt": "2026-06-05T00:11:14.559Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
       "date": "2026-06-07",
       "year": "2026",
-      "documentsCount": 51,
+      "documentsCount": 59,
       "categories": [
         {
           "category": "evaluation",
-          "count": 14
+          "count": 16
         },
         {
           "category": "plan",
-          "count": 6
+          "count": 7
         },
         {
           "category": "request-trace",
-          "count": 6
+          "count": 7
         },
         {
           "category": "user-request",
-          "count": 6
+          "count": 7
         },
         {
           "category": "web-search",
-          "count": 6
+          "count": 7
         },
         {
           "category": "work-summary",
-          "count": 6
+          "count": 7
         },
         {
           "category": "work-timing",
-          "count": 6
+          "count": 7
         },
         {
           "category": "daily-history",
@@ -18452,6 +18452,26 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-evaluations-2026-2026-06-07-titlebar-location-breadcrumb-evaluator-input-json",
+          "path": "_history/evaluations/2026/2026-06-07-titlebar-location-breadcrumb-evaluator-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 07 Titlebar Location Breadcrumb Evaluator Input",
+          "excerpt": "{ \"initial instruction\": \"사용자 헷갈리지 않게 직관성 개선\", \"result summary\": \"Added an accessible titlebar current location breadcrumb, preserved the existing section activation lifecycle, fixed mobile root/shell minimum width so responsive layout works, and verified with tests, build, and B",
+          "updatedAt": "2026-06-06T17:21:44.298Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+          "path": "_history/evaluations/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "Evaluation: Titlebar Location Breadcrumb",
+          "excerpt": "Evaluation: Titlebar Location Breadcrumb 날짜: 2026 06 07 평가 사용자의 사용자 헷갈리지 않게 직관성 개선 요청은 titlebar의 현재 위치 인식 개선으로 처리했다. 도움말 문구를 늘리지 않고, 사용자가 보고 있는 화면의 홈, 기능 그룹, 현재 섹션 관계를 바로 볼 수 있게 했다. 결과 titlebar에 홈 기능 그룹 현재 섹션 breadcrumb 추가. 현재 섹션에 aria current=\"page\" 추가. breadcrumb home은 기존 overv",
+          "updatedAt": "2026-06-06T17:25:02.243Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-plans-2026-2026-06-07-chatbot-connection-ko-md",
           "path": "_history/plans/2026/2026-06-07-chatbot-connection.ko.md",
           "category": "plan",
@@ -18509,6 +18529,16 @@
           "title": "Work Plan: Subagent Tool Selection",
           "excerpt": "Work Plan: Subagent Tool Selection 날짜: 2026 06 07 선택한 slice explicit tool selection controls before allowing more than the first two planned tools 이유 이전 구현은 안전한 첫 slice로 첫 2개 tool만 fan out했다. 다음 단계는 사용자 제어권과 작업공간적 흐름을 회복하는 선택 UI이며, Rust command가 이미 toolNames 와 hard cap 3을 지원하므로 f",
           "updatedAt": "2026-06-06T15:33:02.432Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-plans-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+          "path": "_history/plans/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "Work Plan: Titlebar Location Breadcrumb",
+          "excerpt": "Work Plan: Titlebar Location Breadcrumb 날짜: 2026 06 07 목표 사용자가 현재 위치를 기억하지 않아도 상단 titlebar에서 바로 확인하게 한다. 실행 계획 1. web first intake로 breadcrumb와 current page 접근성 근거 확인. 2. local source에서 titlebar와 section state 확인. 3. existing state를 재사용해 breadcrumb 추가. 4. no drag, responsive, ove",
+          "updatedAt": "2026-06-06T17:10:59.295Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18572,6 +18602,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-request-traces-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+          "path": "_history/request-traces/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Request Trace: Titlebar Location Breadcrumb",
+          "excerpt": "Request Trace: Titlebar Location Breadcrumb 날짜: 2026 06 07 요청 사용자는 사용자가 헷갈리지 않게 직관성을 개선하라고 요청했다. 결정 상단 titlebar에 현재 위치 breadcrumb를 추가하는 slice로 처리했다. 사용자가 새로운 설명을 읽지 않아도 현재 위치를 바로 인식하게 하는 변경이기 때문이다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 titlebar location brea",
+          "updatedAt": "2026-06-06T17:21:44.298Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-07-chatbot-connection-ko-md",
           "path": "_history/user-requests/2026/2026-06-07-chatbot-connection.ko.md",
           "category": "user-request",
@@ -18629,6 +18669,16 @@
           "title": "User Request: Subagent Tool Selection",
           "excerpt": "User Request: Subagent Tool Selection 날짜: 2026 06 07 요약 사용자가 “미룬거 계속 구현”을 요청했다. 이전 bounded fan out 평가에서 남긴 explicit tool selection UI를 다음 구현 대상으로 선택했다. 해석 첫 2개 고정 실행을 넘어서, 사용자가 저장된 subagent plan에서 실행할 tool을 직접 선택하고 단일 실행/fan out에 반영하는 흐름을 구현한다.",
           "updatedAt": "2026-06-06T15:33:02.432Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+          "path": "_history/user-requests/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "User Request: Titlebar Location Breadcrumb",
+          "excerpt": "User Request: Titlebar Location Breadcrumb 날짜: 2026 06 07 요약 사용자는 사용자가 헷갈리지 않도록 직관성을 개선하라고 요청했다. 선택한 처리 앱 상단 titlebar에 현재 위치 breadcrumb를 추가해 홈, 기능 그룹, 현재 섹션 관계를 즉시 볼 수 있게 한다. 산출물 요구사항/스펙/계획/작업/검증/추적성 기록 titlebar breadcrumb UI/CSS/테스트 변경 검증 및 평가 기록",
+          "updatedAt": "2026-06-06T17:10:59.295Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18692,6 +18742,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-web-searches-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+          "path": "_history/web-searches/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: Titlebar Location Breadcrumb",
+          "excerpt": "Web Search: Titlebar Location Breadcrumb 날짜: 2026 06 07 검색 Nielsen Norman Group usability heuristics visibility system status recognition rather than recall breadcrumbs official W3C WAI breadcrumb navigation pattern current page aria current official Microsoft Fluent 2 navigation",
+          "updatedAt": "2026-06-06T17:10:59.294Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-07-chatbot-connection-ko-md",
           "path": "_history/work-summaries/2026/2026-06-07-chatbot-connection.ko.md",
           "category": "work-summary",
@@ -18749,6 +18809,16 @@
           "title": "Work Summary: Subagent Tool Selection",
           "excerpt": "Work Summary: Subagent Tool Selection 날짜: 2026 06 07 Desktop Runtime subagent plan 결과에 tool 선택 UI를 추가했다. plan 생성 후 첫 2개가 기본 선택되고, 사용자는 최대 3개까지 체크박스로 고를 수 있다. 단일 실행은 선택된 첫 tool을 사용하고, fan out은 선택된 2 3개 tool 이름과 선택 수를 native command에 전달한다.",
           "updatedAt": "2026-06-06T15:33:02.433Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "Work Summary: Titlebar Location Breadcrumb",
+          "excerpt": "Work Summary: Titlebar Location Breadcrumb 날짜: 2026 06 07 요약 앱 상단 titlebar에 현재 위치 breadcrumb를 추가했다. 이제 사용자는 현재 화면이 홈, 기능 그룹, 섹션 중 어디에 속하는지 바로 볼 수 있고, 홈 을 눌러 overview로 돌아갈 수 있다. 구현 MonitorShell.tsx 에 titlebar breadcrumb nav 추가. globals.css 에 breadcrumb 스타일, no drag 범위, 모바일 root/sh",
+          "updatedAt": "2026-06-06T17:24:05.122Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18810,41 +18880,51 @@
           "excerpt": "Work Timing: Subagent Tool Selection 날짜: 2026 06 07 | Phase | Summary | | | | | intake | web first search와 이전 bounded fan out 기록 확인 | | implementation | 선택 상태, checkbox selector, 선택 기반 execute/fan out 연결 | | validation | renderer test/check 선통과, build/browser/guards 후속 수행 | | clo",
           "updatedAt": "2026-06-06T15:33:02.433Z",
           "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-07-titlebar-location-breadcrumb-json",
+          "path": "_history/work-timings/2026/2026-06-07-titlebar-location-breadcrumb.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 07 Titlebar Location Breadcrumb",
+          "excerpt": "{ \"task id\": \"2026 06 07 titlebar location breadcrumb\", \"title\": \"Titlebar location breadcrumb\", \"date\": \"2026 06 07\", \"timezone\": \"Asia/Seoul\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"st",
+          "updatedAt": "2026-06-06T17:24:05.122Z",
+          "historyDate": "2026-06-07"
         }
       ]
     },
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 45,
+      "documentsCount": 37,
       "categories": [
         {
           "category": "evaluation",
-          "count": 10
+          "count": 9
         },
         {
           "category": "request-trace",
-          "count": 6
+          "count": 5
         },
         {
           "category": "user-request",
-          "count": 6
-        },
-        {
-          "category": "work-summary",
-          "count": 6
-        },
-        {
-          "category": "work-timing",
-          "count": 6
-        },
-        {
-          "category": "plan",
           "count": 5
         },
         {
           "category": "web-search",
           "count": 5
+        },
+        {
+          "category": "plan",
+          "count": 4
+        },
+        {
+          "category": "work-summary",
+          "count": 4
+        },
+        {
+          "category": "work-timing",
+          "count": 4
         },
         {
           "category": "daily-history",
@@ -18880,16 +18960,6 @@
           "title": "최종 평가: Intuitive Home Flow",
           "excerpt": "최종 평가: Intuitive Home Flow 날짜: 2026 06 06 평가: 사용자의 “직관적 흐름” 요구에 대해 홈 진입점에서 다음 행동이 보이도록 첫 slice를 구현했다. 충족: 준비, 선택, 실행, 평가 흐름이 홈 첫 화면에 표시된다. 실행 단계가 실제 Desktop Runtime handoff로 이어진다. 테스트, 빌드, 브라우저 smoke가 통과했다. 남은 범위: 전체 앱 IA 재정렬, 섹션별 세부 흐름 단순화, 설정 onboarding 재설계는 후속 slice로 남는다.",
           "updatedAt": "2026-06-06T13:48:34.957Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "최종 평가: Rust Runtime Feature Split",
-          "excerpt": "최종 평가: Rust Runtime Feature Split 날짜: 2026 06 06 평가 요청한 Rust source 분리와 기능별 추가 기능의 첫 slice를 완료했다. lib.rs 전체 대분해는 회귀 위험이 커서 진행하지 않았고, 대신 기능별 source module tree와 read only runtime feature map command를 추가해 다음 이동 기준을 만들었다. 충족 기능별 Rust folder 구조 추가 기능별 command/risk/follow up report 추가",
-          "updatedAt": "2026-06-06T13:30:09.998Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18973,16 +19043,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-          "path": "_history/plans/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "Rust Runtime Feature Split 계획",
-          "excerpt": "Rust Runtime Feature Split 계획 날짜: 2026 06 06 1. 공식 Rust/Tauri 구조 확인. 2. 현재 Rust source inventory 확인. 3. src tauri/src/features/ 기능별 폴더 생성. 4. 기능별 command/risk map command 추가. 5. Desktop Runtime UI metric 연결. 6. runtime contract, readiness, tests 갱신. 7. Rust/Node/build/package 검증.",
-          "updatedAt": "2026-06-06T13:28:08.843Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-subagent-live-execution-ko-md",
           "path": "_history/plans/2026/2026-06-06-subagent-live-execution.ko.md",
           "category": "plan",
@@ -19033,16 +19093,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: Rust Runtime Feature Split",
-          "excerpt": "요청 결과 추적: Rust Runtime Feature Split 날짜: 2026 06 06 요청 Rust source와 folder structure를 기능별로 분리하고 기능별 추가 기능을 추가한다. 결과 src tauri/src/features/ 기능별 module tree 추가 get rust runtime feature map Tauri command 추가 Desktop Runtime diagnostics에 Rust module/command metrics 추가 runtime contrac",
-          "updatedAt": "2026-06-06T13:28:08.844Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-06-subagent-live-execution-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-subagent-live-execution.ko.md",
           "category": "request-trace",
@@ -19090,16 +19140,6 @@
           "title": "사용자 요청 요약: Intuitive Home Flow",
           "excerpt": "사용자 요청 요약: Intuitive Home Flow 날짜: 2026 06 06 요약: UI/UX를 더 직관적인 흐름으로 개선한다. 처리 범위: 홈 첫 화면의 시작 흐름을 준비, 선택, 실행, 평가 4단계로 명확히 한다.",
           "updatedAt": "2026-06-06T13:48:34.956Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: Rust Runtime Feature Split",
-          "excerpt": "사용자 요청 요약: Rust Runtime Feature Split 날짜: 2026 06 06 사용자는 Rust source를 분리하고 폴더 구조를 기능별로 나누며 기능별 추가 기능을 넣으라고 요청했다. 처리 대상은 platform desktop app/src tauri native runtime으로 해석했다.",
-          "updatedAt": "2026-06-06T13:28:08.843Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19183,16 +19223,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: History Payload Check Customer Snapshot",
-          "excerpt": "작업 요약: History Payload Check Customer Snapshot 날짜: 2026 06 06 원인: customer renderer build 후 public/admin history index.json 이 empty customer index로 남아 check history payload.mjs 가 developer migrated index 요구와 충돌했다. 수정: collector가 src/generated/admin history index.json 을 항상 쓰도록 하고,",
-          "updatedAt": "2026-06-06T13:39:42.284Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-intuitive-home-flow-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-intuitive-home-flow.ko.md",
           "category": "work-summary",
@@ -19200,16 +19230,6 @@
           "title": "작업 요약: Intuitive Home Flow",
           "excerpt": "작업 요약: Intuitive Home Flow 날짜: 2026 06 06 홈 첫 화면에 준비, 선택, 실행, 평가 4단계 start flow를 추가했다. 각 단계는 상태 label과 목적지를 갖고, 클릭하면 설정, 추천 intent, desktop runtime, eval 화면으로 이동한다. Browser smoke에서 1280x720 기준 overflow와 overlap이 없고 run 클릭 후 run work handoff가 표시됨을 확인했다.",
           "updatedAt": "2026-06-06T13:48:34.957Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: Rust Runtime Feature Split",
-          "excerpt": "작업 요약: Rust Runtime Feature Split 날짜: 2026 06 06 Tauri Rust runtime에 기능별 source root src tauri/src/features/ 를 추가하고, app shell, CLI orchestration, native process control, workspace host, provider accounts, diagnostics/data, agent factory, decision inbox로 나눴다. 새 read only command ",
-          "updatedAt": "2026-06-06T13:28:08.844Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19243,16 +19263,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-          "path": "_history/work-timings/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-          "category": "work-timing",
-          "language": "ko",
-          "title": "작업 시간 기록: History Payload Check Customer Snapshot",
-          "excerpt": "작업 시간 기록: History Payload Check Customer Snapshot 날짜: 2026 06 06 단계: web first intake: 완료 오류 재현: 완료 구현: 완료 customer/developer snapshot 검증: 완료 커밋 전 검증: 진행 중",
-          "updatedAt": "2026-06-06T13:39:42.284Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-intuitive-home-flow-ko-md",
           "path": "_history/work-timings/2026/2026-06-06-intuitive-home-flow.ko.md",
           "category": "work-timing",
@@ -19260,16 +19270,6 @@
           "title": "작업 시간 기록: Intuitive Home Flow",
           "excerpt": "작업 시간 기록: Intuitive Home Flow 날짜: 2026 06 06 단계: web first intake: 완료 large scope slice 선택: 완료 홈 UI 구현: 완료 테스트와 browser smoke: 완료 build/check: 완료",
           "updatedAt": "2026-06-06T13:48:34.957Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-          "path": "_history/work-timings/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-          "category": "work-timing",
-          "language": "ko",
-          "title": "작업 시간 기록: Rust Runtime Feature Split",
-          "excerpt": "작업 시간 기록: Rust Runtime Feature Split 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | Rust/Tauri 공식 문서 확인 | | source inventory | 완료 | lib.rs 12,175 lines 단일 파일 확인 | | 구현 | 완료 | feature module tree, command, UI metric | | 검증 | 완료 | Rust/Node checks와 internal package 통과 | | 기록",
-          "updatedAt": "2026-06-06T13:30:09.998Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19311,36 +19311,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2854,
+      "documents": 2862,
       "days": 8,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1074
+          "count": 1076
         },
         {
           "category": "web-search",
-          "count": 445
+          "count": 446
         },
         {
           "category": "request-trace",
-          "count": 374
+          "count": 375
         },
         {
           "category": "plan",
-          "count": 373
+          "count": 374
         },
         {
           "category": "work-timing",
-          "count": 293
+          "count": 294
         },
         {
           "category": "user-request",
-          "count": 159
+          "count": 160
         },
         {
           "category": "work-summary",
-          "count": 126
+          "count": 127
         },
         {
           "category": "daily-history",
@@ -19351,7 +19351,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6849766,
+      "totalSourceBytes": 6862951,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19376,11 +19376,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 35,
+      "evidenceEvents": 37,
       "decisionEvents": 0,
-      "openSignals": 18,
+      "openSignals": 16,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T17:05:08.767Z",
+      "latestEventAt": "2026-06-06T17:25:02.243Z",
       "historyDays": 2
     },
     "lanes": [
@@ -19392,11 +19392,11 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 24
+        "count": 25
       },
       {
-        "id": "delivery",
-        "label": "delivery",
+        "id": "evidence",
+        "label": "evidence",
         "count": 12
       },
       {
@@ -19405,18 +19405,18 @@
         "count": 12
       },
       {
-        "id": "monitoring",
-        "label": "monitoring",
-        "count": 12
-      },
-      {
         "id": "traceability",
         "label": "traceability",
         "count": 12
       },
       {
-        "id": "evidence",
-        "label": "evidence",
+        "id": "delivery",
+        "label": "delivery",
+        "count": 11
+      },
+      {
+        "id": "monitoring",
+        "label": "monitoring",
         "count": 11
       },
       {
@@ -19439,21 +19439,11 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 24
+        "count": 25
       },
       {
         "id": "intake",
         "label": "intake",
-        "count": 12
-      },
-      {
-        "id": "summary",
-        "label": "summary",
-        "count": 12
-      },
-      {
-        "id": "timing",
-        "label": "timing",
         "count": 12
       },
       {
@@ -19462,13 +19452,23 @@
         "count": 12
       },
       {
+        "id": "web-search",
+        "label": "web search",
+        "count": 12
+      },
+      {
         "id": "plan",
         "label": "plan",
         "count": 11
       },
       {
-        "id": "web-search",
-        "label": "web search",
+        "id": "summary",
+        "label": "summary",
+        "count": 11
+      },
+      {
+        "id": "timing",
+        "label": "timing",
         "count": 11
       },
       {
@@ -19490,6 +19490,126 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-evaluations-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "Evaluation: Titlebar Location Breadcrumb",
+        "detail": "Evaluation: Titlebar Location Breadcrumb 날짜: 2026 06 07 평가 사용자의 사용자 헷갈리지 않게 직관성 개선 요청은 titlebar의 현재 위치 인식 개선으로 처리했다. 도움말 문구를 늘리지 않고, 사용자가 보고 있는 화면의 홈, 기능 그룹, 현재 섹션 관계를 바로 볼 수 있게 했다. 결과 titlebar에 홈 기능 그룹 현재 섹션 breadcrumb 추가. 현재 섹션에 aria current=\"page\" 추가. breadcrumb home은 기존 overv",
+        "path": "_history/evaluations/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:25:02.243Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-07-titlebar-location-breadcrumb-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 07 Titlebar Location Breadcrumb",
+        "detail": "{ \"task id\": \"2026 06 07 titlebar location breadcrumb\", \"title\": \"Titlebar location breadcrumb\", \"date\": \"2026 06 07\", \"timezone\": \"Asia/Seoul\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"st",
+        "path": "_history/work-timings/2026/2026-06-07-titlebar-location-breadcrumb.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:24:05.122Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "Work Summary: Titlebar Location Breadcrumb",
+        "detail": "Work Summary: Titlebar Location Breadcrumb 날짜: 2026 06 07 요약 앱 상단 titlebar에 현재 위치 breadcrumb를 추가했다. 이제 사용자는 현재 화면이 홈, 기능 그룹, 섹션 중 어디에 속하는지 바로 볼 수 있고, 홈 을 눌러 overview로 돌아갈 수 있다. 구현 MonitorShell.tsx 에 titlebar breadcrumb nav 추가. globals.css 에 breadcrumb 스타일, no drag 범위, 모바일 root/sh",
+        "path": "_history/work-summaries/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:24:05.122Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-07-titlebar-location-breadcrumb-evaluator-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 07 Titlebar Location Breadcrumb Evaluator Input",
+        "detail": "{ \"initial instruction\": \"사용자 헷갈리지 않게 직관성 개선\", \"result summary\": \"Added an accessible titlebar current location breadcrumb, preserved the existing section activation lifecycle, fixed mobile root/shell minimum width so responsive layout works, and verified with tests, build, and B",
+        "path": "_history/evaluations/2026/2026-06-07-titlebar-location-breadcrumb-evaluator-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:21:44.298Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Titlebar Location Breadcrumb",
+        "detail": "Request Trace: Titlebar Location Breadcrumb 날짜: 2026 06 07 요청 사용자는 사용자가 헷갈리지 않게 직관성을 개선하라고 요청했다. 결정 상단 titlebar에 현재 위치 breadcrumb를 추가하는 slice로 처리했다. 사용자가 새로운 설명을 읽지 않아도 현재 위치를 바로 인식하게 하는 변경이기 때문이다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 titlebar location brea",
+        "path": "_history/request-traces/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:21:44.298Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "User Request: Titlebar Location Breadcrumb",
+        "detail": "User Request: Titlebar Location Breadcrumb 날짜: 2026 06 07 요약 사용자는 사용자가 헷갈리지 않도록 직관성을 개선하라고 요청했다. 선택한 처리 앱 상단 titlebar에 현재 위치 breadcrumb를 추가해 홈, 기능 그룹, 현재 섹션 관계를 즉시 볼 수 있게 한다. 산출물 요구사항/스펙/계획/작업/검증/추적성 기록 titlebar breadcrumb UI/CSS/테스트 변경 검증 및 평가 기록",
+        "path": "_history/user-requests/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:10:59.295Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "Work Plan: Titlebar Location Breadcrumb",
+        "detail": "Work Plan: Titlebar Location Breadcrumb 날짜: 2026 06 07 목표 사용자가 현재 위치를 기억하지 않아도 상단 titlebar에서 바로 확인하게 한다. 실행 계획 1. web first intake로 breadcrumb와 current page 접근성 근거 확인. 2. local source에서 titlebar와 section state 확인. 3. existing state를 재사용해 breadcrumb 추가. 4. no drag, responsive, ove",
+        "path": "_history/plans/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:10:59.295Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Titlebar Location Breadcrumb",
+        "detail": "Web Search: Titlebar Location Breadcrumb 날짜: 2026 06 07 검색 Nielsen Norman Group usability heuristics visibility system status recognition rather than recall breadcrumbs official W3C WAI breadcrumb navigation pattern current page aria current official Microsoft Fluent 2 navigation",
+        "path": "_history/web-searches/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:10:59.294Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-07-command-palette-usability-json",
         "sourceType": "history",
@@ -20751,21 +20871,6 @@
         "timestamp": "2026-06-06T13:48:34.956Z"
       },
       {
-        "id": "history-history-work-timings-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "작업 시간 기록: History Payload Check Customer Snapshot",
-        "detail": "작업 시간 기록: History Payload Check Customer Snapshot 날짜: 2026 06 06 단계: web first intake: 완료 오류 재현: 완료 구현: 완료 customer/developer snapshot 검증: 완료 커밋 전 검증: 진행 중",
-        "path": "_history/work-timings/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-        "category": "work-timing",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:39:42.284Z"
-      },
-      {
         "id": "history-history-evaluations-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
         "sourceType": "history",
         "signalType": "evaluation",
@@ -20824,111 +20929,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T13:39:42.284Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: History Payload Check Customer Snapshot",
-        "detail": "작업 요약: History Payload Check Customer Snapshot 날짜: 2026 06 06 원인: customer renderer build 후 public/admin history index.json 이 empty customer index로 남아 check history payload.mjs 가 developer migrated index 요구와 충돌했다. 수정: collector가 src/generated/admin history index.json 을 항상 쓰도록 하고,",
-        "path": "_history/work-summaries/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:39:42.284Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "ready",
-        "title": "최종 평가: Rust Runtime Feature Split",
-        "detail": "최종 평가: Rust Runtime Feature Split 날짜: 2026 06 06 평가 요청한 Rust source 분리와 기능별 추가 기능의 첫 slice를 완료했다. lib.rs 전체 대분해는 회귀 위험이 커서 진행하지 않았고, 대신 기능별 source module tree와 read only runtime feature map command를 추가해 다음 이동 기준을 만들었다. 충족 기능별 Rust folder 구조 추가 기능별 command/risk/follow up report 추가",
-        "path": "_history/evaluations/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:30:09.998Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "작업 시간 기록: Rust Runtime Feature Split",
-        "detail": "작업 시간 기록: Rust Runtime Feature Split 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | Rust/Tauri 공식 문서 확인 | | source inventory | 완료 | lib.rs 12,175 lines 단일 파일 확인 | | 구현 | 완료 | feature module tree, command, UI metric | | 검증 | 완료 | Rust/Node checks와 internal package 통과 | | 기록",
-        "path": "_history/work-timings/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-        "category": "work-timing",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:30:09.998Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: Rust Runtime Feature Split",
-        "detail": "요청 결과 추적: Rust Runtime Feature Split 날짜: 2026 06 06 요청 Rust source와 folder structure를 기능별로 분리하고 기능별 추가 기능을 추가한다. 결과 src tauri/src/features/ 기능별 module tree 추가 get rust runtime feature map Tauri command 추가 Desktop Runtime diagnostics에 Rust module/command metrics 추가 runtime contrac",
-        "path": "_history/request-traces/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:28:08.844Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: Rust Runtime Feature Split",
-        "detail": "작업 요약: Rust Runtime Feature Split 날짜: 2026 06 06 Tauri Rust runtime에 기능별 source root src tauri/src/features/ 를 추가하고, app shell, CLI orchestration, native process control, workspace host, provider accounts, diagnostics/data, agent factory, decision inbox로 나눴다. 새 read only command ",
-        "path": "_history/work-summaries/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:28:08.844Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "warning",
-        "status": "plan",
-        "title": "Rust Runtime Feature Split 계획",
-        "detail": "Rust Runtime Feature Split 계획 날짜: 2026 06 06 1. 공식 Rust/Tauri 구조 확인. 2. 현재 Rust source inventory 확인. 3. src tauri/src/features/ 기능별 폴더 생성. 4. 기능별 command/risk map command 추가. 5. Desktop Runtime UI metric 연결. 6. runtime contract, readiness, tests 갱신. 7. Rust/Node/build/package 검증.",
-        "path": "_history/plans/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:28:08.843Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-rust-runtime-feature-split-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: Rust Runtime Feature Split",
-        "detail": "사용자 요청 요약: Rust Runtime Feature Split 날짜: 2026 06 06 사용자는 Rust source를 분리하고 폴더 구조를 기능별로 나누며 기능별 추가 기능을 넣으라고 요청했다. 처리 대상은 platform desktop app/src tauri native runtime으로 해석했다.",
-        "path": "_history/user-requests/2026/2026-06-06-rust-runtime-feature-split.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:28:08.843Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -24160,7 +24160,7 @@
       {
         "category": "work-summary",
         "root": "_history/work-summaries",
-        "documentsCount": 12
+        "documentsCount": 11
       },
       {
         "category": "user-request",
@@ -24180,12 +24180,12 @@
       {
         "category": "web-search",
         "root": "_history/web-searches",
-        "documentsCount": 11
+        "documentsCount": 12
       },
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 12
+        "documentsCount": 11
       },
       {
         "category": "plan",
@@ -24195,7 +24195,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 24
+        "documentsCount": 25
       },
       {
         "category": "daily-history",
@@ -24289,7 +24289,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 88,
+        "documentCount": 89,
         "sourceFileCount": 14
       },
       {
@@ -28130,13 +28130,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 4150,
+      "sourceDocuments": 4164,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T17:03:38.234Z"
+      "latestInsightAt": "2026-06-06T17:25:02.243Z"
     },
     "inferenceStages": [
       {
@@ -28204,11 +28204,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 497,
+        "signalCount": 499,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 157
+            "count": 158
           },
           {
             "category": "project-spec",
@@ -28220,7 +28220,7 @@
           },
           {
             "category": "user-request",
-            "count": 52
+            "count": 53
           },
           {
             "category": "work-summary",
@@ -28263,7 +28263,7 @@
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장"
         ],
-        "latestEvidenceAt": "2026-06-06T16:56:35.766Z"
+        "latestEvidenceAt": "2026-06-06T17:21:44.298Z"
       },
       {
         "id": "web-research-to-spec",
@@ -28277,11 +28277,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1832,
+        "signalCount": 1836,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 518
+            "count": 520
           },
           {
             "category": "evaluation",
@@ -28289,11 +28289,11 @@
           },
           {
             "category": "web-search",
-            "count": 446
+            "count": 447
           },
           {
             "category": "plan",
-            "count": 220
+            "count": 221
           },
           {
             "category": "request-trace",
@@ -28328,7 +28328,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T17:02:07.983Z"
+        "latestEvidenceAt": "2026-06-06T17:24:05.121Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28342,7 +28342,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1062,
+        "signalCount": 1065,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -28350,11 +28350,11 @@
           },
           {
             "category": "plan",
-            "count": 309
+            "count": 310
           },
           {
             "category": "request-trace",
-            "count": 96
+            "count": 97
           },
           {
             "category": "project-spec",
@@ -28362,7 +28362,7 @@
           },
           {
             "category": "work-summary",
-            "count": 25
+            "count": 26
           },
           {
             "category": "user-request",
@@ -28401,7 +28401,7 @@
           "작업 요약: 큰 범위 작업 미루지 않기",
           "작업 계획 기록: 사용자 의도 기반 기능 지도"
         ],
-        "latestEvidenceAt": "2026-06-06T17:03:38.234Z"
+        "latestEvidenceAt": "2026-06-06T17:24:05.122Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28488,19 +28488,19 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1625,
+        "signalCount": 1633,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 697
+            "count": 700
           },
           {
             "category": "evaluation",
-            "count": 545
+            "count": 547
           },
           {
             "category": "user-request",
-            "count": 111
+            "count": 112
           },
           {
             "category": "work-summary",
@@ -28508,7 +28508,7 @@
           },
           {
             "category": "request-trace",
-            "count": 61
+            "count": 62
           },
           {
             "category": "plan",
@@ -28520,7 +28520,7 @@
           },
           {
             "category": "project-doc",
-            "count": 38
+            "count": 39
           },
           {
             "category": "work-timing",
@@ -28547,7 +28547,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T17:03:38.234Z"
+        "latestEvidenceAt": "2026-06-06T17:25:02.243Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28623,14 +28623,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 4150,
+      "sourceDocuments": 4164,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T17:03:38.234Z"
+      "latestInsightAt": "2026-06-06T17:25:02.243Z"
     },
     "operatingModel": [
       {
@@ -28688,25 +28688,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3391,
+        "signalCount": 3400,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1832
+            "signalCount": 1836
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1062
+            "signalCount": 1065
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 497
+            "signalCount": 499
           }
         ],
         "missingPatternIds": [],
@@ -28734,7 +28734,7 @@
           "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T17:03:38.234Z",
+        "latestEvidenceAt": "2026-06-06T17:24:05.122Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28832,19 +28832,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2687,
+        "signalCount": 2698,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1625
+            "signalCount": 1633
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1062
+            "signalCount": 1065
           }
         ],
         "missingPatternIds": [],
@@ -28872,7 +28872,7 @@
           "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T17:03:38.234Z",
+        "latestEvidenceAt": "2026-06-06T17:25:02.243Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28901,13 +28901,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 616,
+        "signalCount": 618,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 497
+            "signalCount": 499
           },
           {
             "id": "release-blocker-gate",
@@ -28941,7 +28941,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T16:56:35.766Z",
+        "latestEvidenceAt": "2026-06-06T17:21:44.298Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28970,19 +28970,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2894,
+        "signalCount": 2901,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1062
+            "signalCount": 1065
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1832
+            "signalCount": 1836
           }
         ],
         "missingPatternIds": [],
@@ -29010,7 +29010,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T17:03:38.234Z",
+        "latestEvidenceAt": "2026-06-06T17:24:05.122Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -29039,7 +29039,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1951,
+        "signalCount": 1955,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -29051,7 +29051,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1832
+            "signalCount": 1836
           }
         ],
         "missingPatternIds": [],
@@ -29079,7 +29079,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T17:02:07.983Z",
+        "latestEvidenceAt": "2026-06-06T17:24:05.121Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

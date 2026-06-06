@@ -1,0 +1,53 @@
+{
+  "task_id": "2026-06-07-titlebar-location-breadcrumb",
+  "title": "Titlebar location breadcrumb",
+  "date": "2026-06-07",
+  "timezone": "Asia/Seoul",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Official breadcrumb/navigation accessibility references checked before local planning."
+    },
+    {
+      "phase_id": "memory_and_local_context",
+      "label": "Memory bootstrap and local context",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Loaded AGENTS rules and inspected the titlebar, feature group, and section state."
+    },
+    {
+      "phase_id": "requirements_spec_plan",
+      "label": "Requirements, spec, and plan",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Requirement, spec, plan, tasks, validation, and traceability records created."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Titlebar breadcrumb, CSS, and tests added."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Renderer check/test/build, platform check, Browser smoke, and dev-server cleanup completed."
+    },
+    {
+      "phase_id": "evaluation_commit_push",
+      "label": "Evaluation, commit, and push",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Guard records and evaluator completed; commit and push happen after final git checks."
+    }
+  ],
+  "bottleneck_notes": "Exact wall-clock phase durations were not measured."
+}

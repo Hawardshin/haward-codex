@@ -7083,9 +7083,39 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           <header className="desktop-titlebar" data-tauri-drag-region="deep">
             <div className="titlebar-section" data-tauri-drag-region="deep">
               {currentSection ? <currentSection.icon size={18} aria-hidden="true" /> : <LayoutDashboard size={18} aria-hidden="true" />}
-              <div data-tauri-drag-region="deep">
-                <span data-tauri-drag-region="deep">{currentViewMode.label}</span>
-                <strong ref={titlebarSectionLabelRef} data-tauri-drag-region="deep">{currentSectionLabel}</strong>
+              <div className="titlebar-location" data-tauri-drag-region="deep">
+                <span className="titlebar-mode-label" data-tauri-drag-region="deep">{currentViewMode.label}</span>
+                <nav className="titlebar-breadcrumb" aria-label={uiLanguage === "ko" ? "현재 위치" : "Current location"} data-current-location-trail>
+                  <ol>
+                    <li>
+                      <button
+                        type="button"
+                        onPointerDown={() => primeSectionActivation("overview")}
+                        onClick={() => openSection("overview")}
+                        data-titlebar-breadcrumb="home"
+                        aria-label={uiLanguage === "ko" ? "작업공간 홈으로 이동" : "Go to workspace home"}
+                      >
+                        {uiLanguage === "ko" ? "홈" : "Home"}
+                      </button>
+                    </li>
+                    <li>
+                      <span className="titlebar-breadcrumb-label" data-titlebar-breadcrumb="group">
+                        {currentFeatureGroup?.label || (uiLanguage === "ko" ? "작업" : "Work")}
+                      </span>
+                    </li>
+                    <li>
+                      <span
+                        ref={titlebarSectionLabelRef}
+                        className="titlebar-current-label"
+                        data-titlebar-breadcrumb="section"
+                        aria-current="page"
+                        title={currentSection?.purpose}
+                      >
+                        {currentSectionLabel}
+                      </span>
+                    </li>
+                  </ol>
+                </nav>
               </div>
             </div>
             {!isPrimaryWorkSurface && section !== "overview" && (

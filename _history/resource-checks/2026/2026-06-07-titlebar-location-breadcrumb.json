@@ -1,0 +1,122 @@
+{
+  "task": "Titlebar Location Breadcrumb",
+  "work_mode": "standard",
+  "runtime_context": [
+    "React titlebar section state",
+    "existing openSection and primeSectionActivation lifecycle",
+    "CSS responsive root/shell layout",
+    "Next.js development server for Browser smoke",
+    "in-app Browser DOM and interaction verification"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "breadcrumb-action-misroute",
+      "category": "other",
+      "description": "The breadcrumb home action could bypass existing section activation behavior.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Reuse the same primeSectionActivation and openSection calls as the activity rail home action.",
+      "evidence": [
+        "onPointerDown={() => primeSectionActivation(\"overview\")}",
+        "onClick={() => openSection(\"overview\")}",
+        "Browser smoke home click returned activeSection overview"
+      ]
+    },
+    {
+      "risk_id": "mobile-layout-overflow",
+      "category": "memory",
+      "description": "The desktop minimum width could keep mobile layouts wider than the viewport.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Under max-width 960px, set main, desktop-app-root, and desktop-app-shell width to 100% and min-width to 0.",
+      "evidence": [
+        "@media (max-width: 960px) root/shell min-width reset",
+        "Browser smoke 390x844 overflow: []",
+        "shellWidth 375, titlebarWidth 306, viewport 390"
+      ]
+    },
+    {
+      "risk_id": "browser-smoke-server",
+      "category": "process",
+      "description": "Browser smoke uses a local Next.js development server that must be stopped.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Serve on dedicated local port 3227, close the browser tab, stop with Ctrl-C, and verify no listener remains.",
+      "evidence": [
+        "Next dev served http://127.0.0.1:3227",
+        "Browser tab closed",
+        "lsof -nP -iTCP:3227 -sTCP:LISTEN returned no listener"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "breadcrumb-home-lifecycle",
+      "resource": "breadcrumb home action",
+      "create_path": "render titlebar breadcrumb with existing section state",
+      "cleanup_path": "no persistent runtime resource created by breadcrumb rendering",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "No new native command",
+        "No new dependency",
+        "Browser smoke verified home click"
+      ]
+    },
+    {
+      "check_id": "dev-server-lifecycle",
+      "resource": "Next.js dev server",
+      "create_path": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor exec next dev -H 127.0.0.1 -p 3227",
+      "cleanup_path": "Ctrl-C and lsof no-listener check",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Server started on 127.0.0.1:3227",
+        "No listener remained on TCP 3227"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "browser-smoke-location",
+      "metric": "Titlebar current location trail",
+      "tool": "in-app Browser",
+      "threshold": "trail visible, section has aria-current page, group/section update after navigation",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "initial: 홈, 핵심 기능, 핵심 홈, aria-current page",
+        "tools: 홈, 핵심 기능, 툴 스튜디오, aria-current page"
+      ]
+    },
+    {
+      "check_id": "browser-smoke-home",
+      "metric": "Breadcrumb home action",
+      "tool": "in-app Browser",
+      "threshold": "clicking home returns to overview",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "activeSection overview",
+        "current 핵심 홈"
+      ]
+    },
+    {
+      "check_id": "browser-smoke-mobile",
+      "metric": "Mobile root and titlebar overflow",
+      "tool": "in-app Browser viewport 390x844",
+      "threshold": "no overflowing root, shell, titlebar, breadcrumb, or actions elements",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "overflow: []",
+        "shellWidth 375",
+        "titlebarWidth 306"
+      ]
+    }
+  ],
+  "notes": [
+    "No installation occurred.",
+    "No new CLI pipeline, worker, stream, native command, or persistent browser tab was created."
+  ]
+}

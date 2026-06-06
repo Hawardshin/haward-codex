@@ -317,6 +317,14 @@ test("Monitor groups repeated actions with shared action primitives", () => {
   assert.match(actionGroupComponent, /role=\{role \|\| \(asToolbar \? "toolbar" : "group"\)\}/);
   assert.match(monitorShell, /import \{ ActionGroup \} from "@\/components\/ui\/ActionGroup"/);
   assert.match(monitorShell, /<ActionGroup className="titlebar-actions"[\s\S]*?density="compact"[\s\S]*?>/);
+  assert.match(monitorShell, /className="titlebar-breadcrumb" aria-label=\{uiLanguage === "ko" \? "현재 위치" : "Current location"\}/);
+  assert.match(monitorShell, /data-current-location-trail/);
+  assert.match(monitorShell, /data-titlebar-breadcrumb="home"/);
+  assert.match(monitorShell, /data-titlebar-breadcrumb="group"/);
+  assert.match(monitorShell, /data-titlebar-breadcrumb="section"[\s\S]*?aria-current="page"/);
+  assert.match(css, /\.titlebar-breadcrumb \{/);
+  assert.match(css, /\.titlebar-breadcrumb ol \{/);
+  assert.match(css, /\.titlebar-current-label \{/);
   assert.match(monitorShell, /<ActionGroup className="task-handoff-actions"[\s\S]*?align="end" density="compact">/);
   assert.match(monitorShell, /<Button variant="secondary" size="sm" onClick=\{\(\) => setCommandPaletteOpen\(false\)\}>/);
   assert.match(monitorShell, /<Button key=\{item\.id\} variant="ghost" className="command-palette-result" onClick=\{\(\) => runCommandItem\(item\)\}>/);
@@ -1751,6 +1759,7 @@ test("Activity rail exposes readable destination labels in the desktop shell", (
   assert.match(css, /--desktop-app-min-height: 800px;/);
   assert.match(css, /\.desktop-app-shell \{[\s\S]*?grid-template-columns: 76px minmax\(0, 1fr\);/);
   assert.match(css, /\.desktop-app-shell \{[\s\S]*?min-width: var\(--desktop-app-min-width\);/);
+  assert.match(css, /@media \(max-width: 960px\) \{[\s\S]*?main,\s*\n\s*\.desktop-app-root,\s*\n\s*\.desktop-app-shell \{[\s\S]*?min-width: 0;/);
   assert.match(css, /\.activity-rail nav button \{[\s\S]*?display: grid;[\s\S]*?grid-template-rows: auto auto;[\s\S]*?min-height: 56px;/);
   assert.match(css, /\.activity-rail nav button span \{[\s\S]*?position: static;[\s\S]*?text-overflow: ellipsis;[\s\S]*?white-space: nowrap;/);
   assert.doesNotMatch(css, /@media \(pointer: coarse\)/);

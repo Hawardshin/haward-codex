@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-06T17:05:15.980Z",
+  "generatedAt": "2026-06-06T17:25:11.232Z",
   "summary": {
-    "documents": 2854,
+    "documents": 2862,
     "days": 8,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1074
+        "count": 1076
       },
       {
         "category": "web-search",
-        "count": 445
+        "count": 446
       },
       {
         "category": "request-trace",
-        "count": 374
+        "count": 375
       },
       {
         "category": "plan",
-        "count": 373
+        "count": 374
       },
       {
         "category": "work-timing",
-        "count": 293
+        "count": 294
       },
       {
         "category": "user-request",
-        "count": 159
+        "count": 160
       },
       {
         "category": "work-summary",
-        "count": 126
+        "count": 127
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6849766,
+    "totalSourceBytes": 6862951,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,134 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+      "path": "_history/evaluations/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Titlebar Location Breadcrumb",
+      "excerpt": "Evaluation: Titlebar Location Breadcrumb 날짜: 2026 06 07 평가 사용자의 사용자 헷갈리지 않게 직관성 개선 요청은 titlebar의 현재 위치 인식 개선으로 처리했다. 도움말 문구를 늘리지 않고, 사용자가 보고 있는 화면의 홈, 기능 그룹, 현재 섹션 관계를 바로 볼 수 있게 했다. 결과 titlebar에 홈 기능 그룹 현재 섹션 breadcrumb 추가. 현재 섹션에 aria current=\"page\" 추가. breadcrumb home은 기존 overv",
+      "html": "<p>Evaluation: Titlebar Location Breadcrumb 날짜: 2026 06 07 평가 사용자의 사용자 헷갈리지 않게 직관성 개선 요청은 titlebar의 현재 위치 인식 개선으로 처리했다. 도움말 문구를 늘리지 않고, 사용자가 보고 있는 화면의 홈, 기능 그룹, 현재 섹션 관계를 바로 볼 수 있게 했다. 결과 titlebar에 홈 기능 그룹 현재 섹션 breadcrumb 추가. 현재 섹션에 aria current=&quot;page&quot; 추가. breadcrumb home은 기존 overview section activation lifecycle을 재사용한다. 클릭 가능한 breadcrumb 영역만 no drag 처리했다. 960</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1507,
+      "updatedAt": "2026-06-06T17:25:02.243Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Titlebar Location Breadcrumb",
+      "excerpt": "Work Summary: Titlebar Location Breadcrumb 날짜: 2026 06 07 요약 앱 상단 titlebar에 현재 위치 breadcrumb를 추가했다. 이제 사용자는 현재 화면이 홈, 기능 그룹, 섹션 중 어디에 속하는지 바로 볼 수 있고, 홈 을 눌러 overview로 돌아갈 수 있다. 구현 MonitorShell.tsx 에 titlebar breadcrumb nav 추가. globals.css 에 breadcrumb 스타일, no drag 범위, 모바일 root/sh",
+      "html": "<p>Work Summary: Titlebar Location Breadcrumb 날짜: 2026 06 07 요약 앱 상단 titlebar에 현재 위치 breadcrumb를 추가했다. 이제 사용자는 현재 화면이 홈, 기능 그룹, 섹션 중 어디에 속하는지 바로 볼 수 있고, 홈 을 눌러 overview로 돌아갈 수 있다. 구현 MonitorShell.tsx 에 titlebar breadcrumb nav 추가. globals.css 에 breadcrumb 스타일, no drag 범위, 모바일 root/shell width reset 추가. tool studio.test.mjs 에 breadcrumb와 모바일 width reset contract </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 897,
+      "updatedAt": "2026-06-06T17:24:05.122Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-07-titlebar-location-breadcrumb-json",
+      "path": "_history/work-timings/2026/2026-06-07-titlebar-location-breadcrumb.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 07 Titlebar Location Breadcrumb",
+      "excerpt": "{ \"task id\": \"2026 06 07 titlebar location breadcrumb\", \"title\": \"Titlebar location breadcrumb\", \"date\": \"2026 06 07\", \"timezone\": \"Asia/Seoul\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"st",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 07 titlebar location breadcrumb&quot;, &quot;title&quot;: &quot;Titlebar location breadcrumb&quot;, &quot;date&quot;: &quot;2026 06 07&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;bottleneck notes&quot;: &quot;Official</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1910,
+      "updatedAt": "2026-06-06T17:24:05.122Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-titlebar-location-breadcrumb-evaluator-input-json",
+      "path": "_history/evaluations/2026/2026-06-07-titlebar-location-breadcrumb-evaluator-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 07 Titlebar Location Breadcrumb Evaluator Input",
+      "excerpt": "{ \"initial instruction\": \"사용자 헷갈리지 않게 직관성 개선\", \"result summary\": \"Added an accessible titlebar current location breadcrumb, preserved the existing section activation lifecycle, fixed mobile root/shell minimum width so responsive layout works, and verified with tests, build, and B",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;사용자 헷갈리지 않게 직관성 개선&quot;, &quot;result summary&quot;: &quot;Added an accessible titlebar current location breadcrumb, preserved the existing section activation lifecycle, fixed mobile root/shell minimum width so responsive layout works, and verified with tests, build, and Browser smoke.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4768,
+      "updatedAt": "2026-06-06T17:21:44.298Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+      "path": "_history/request-traces/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Titlebar Location Breadcrumb",
+      "excerpt": "Request Trace: Titlebar Location Breadcrumb 날짜: 2026 06 07 요청 사용자는 사용자가 헷갈리지 않게 직관성을 개선하라고 요청했다. 결정 상단 titlebar에 현재 위치 breadcrumb를 추가하는 slice로 처리했다. 사용자가 새로운 설명을 읽지 않아도 현재 위치를 바로 인식하게 하는 변경이기 때문이다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 titlebar location brea",
+      "html": "<p>Request Trace: Titlebar Location Breadcrumb 날짜: 2026 06 07 요청 사용자는 사용자가 헷갈리지 않게 직관성을 개선하라고 요청했다. 결정 상단 titlebar에 현재 위치 breadcrumb를 추가하는 slice로 처리했다. 사용자가 새로운 설명을 읽지 않아도 현재 위치를 바로 인식하게 하는 변경이기 때문이다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 titlebar location breadcrumb.ko.md 스펙: platform desktop app/specs/2026 06 07 titlebar location breadcr</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1148,
+      "updatedAt": "2026-06-06T17:21:44.298Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-plans-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+      "path": "_history/plans/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Work Plan: Titlebar Location Breadcrumb",
+      "excerpt": "Work Plan: Titlebar Location Breadcrumb 날짜: 2026 06 07 목표 사용자가 현재 위치를 기억하지 않아도 상단 titlebar에서 바로 확인하게 한다. 실행 계획 1. web first intake로 breadcrumb와 current page 접근성 근거 확인. 2. local source에서 titlebar와 section state 확인. 3. existing state를 재사용해 breadcrumb 추가. 4. no drag, responsive, ove",
+      "html": "<p>Work Plan: Titlebar Location Breadcrumb 날짜: 2026 06 07 목표 사용자가 현재 위치를 기억하지 않아도 상단 titlebar에서 바로 확인하게 한다. 실행 계획 1. web first intake로 breadcrumb와 current page 접근성 근거 확인. 2. local source에서 titlebar와 section state 확인. 3. existing state를 재사용해 breadcrumb 추가. 4. no drag, responsive, overflow CSS 추가. 5. 구조 테스트, renderer checks, build, Browser smoke로 검증. 6. omission/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 651,
+      "updatedAt": "2026-06-06T17:10:59.295Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+      "path": "_history/user-requests/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: Titlebar Location Breadcrumb",
+      "excerpt": "User Request: Titlebar Location Breadcrumb 날짜: 2026 06 07 요약 사용자는 사용자가 헷갈리지 않도록 직관성을 개선하라고 요청했다. 선택한 처리 앱 상단 titlebar에 현재 위치 breadcrumb를 추가해 홈, 기능 그룹, 현재 섹션 관계를 즉시 볼 수 있게 한다. 산출물 요구사항/스펙/계획/작업/검증/추적성 기록 titlebar breadcrumb UI/CSS/테스트 변경 검증 및 평가 기록",
+      "html": "<p>User Request: Titlebar Location Breadcrumb 날짜: 2026 06 07 요약 사용자는 사용자가 헷갈리지 않도록 직관성을 개선하라고 요청했다. 선택한 처리 앱 상단 titlebar에 현재 위치 breadcrumb를 추가해 홈, 기능 그룹, 현재 섹션 관계를 즉시 볼 수 있게 한다. 산출물 요구사항/스펙/계획/작업/검증/추적성 기록 titlebar breadcrumb UI/CSS/테스트 변경 검증 및 평가 기록</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 474,
+      "updatedAt": "2026-06-06T17:10:59.295Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
+      "path": "_history/web-searches/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Titlebar Location Breadcrumb",
+      "excerpt": "Web Search: Titlebar Location Breadcrumb 날짜: 2026 06 07 검색 Nielsen Norman Group usability heuristics visibility system status recognition rather than recall breadcrumbs official W3C WAI breadcrumb navigation pattern current page aria current official Microsoft Fluent 2 navigation",
+      "html": "<p>Web Search: Titlebar Location Breadcrumb 날짜: 2026 06 07 검색 Nielsen Norman Group usability heuristics visibility system status recognition rather than recall breadcrumbs official W3C WAI breadcrumb navigation pattern current page aria current official Microsoft Fluent 2 navigation breadcrumb command design guidance official Apple Human Interface Guidelines fe</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1830,
+      "updatedAt": "2026-06-06T17:10:59.294Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-work-timings-2026-2026-06-07-command-palette-usability-json",
       "path": "_history/work-timings/2026/2026-06-07-command-palette-usability.json",
@@ -45731,35 +45859,35 @@
     {
       "date": "2026-06-07",
       "year": "2026",
-      "documentsCount": 51,
+      "documentsCount": 59,
       "categories": [
         {
           "category": "evaluation",
-          "count": 14
+          "count": 16
         },
         {
           "category": "plan",
-          "count": 6
+          "count": 7
         },
         {
           "category": "request-trace",
-          "count": 6
+          "count": 7
         },
         {
           "category": "user-request",
-          "count": 6
+          "count": 7
         },
         {
           "category": "web-search",
-          "count": 6
+          "count": 7
         },
         {
           "category": "work-summary",
-          "count": 6
+          "count": 7
         },
         {
           "category": "work-timing",
-          "count": 6
+          "count": 7
         },
         {
           "category": "daily-history",

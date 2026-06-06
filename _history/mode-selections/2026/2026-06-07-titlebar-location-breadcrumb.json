@@ -1,0 +1,26 @@
+{
+  "task": "Titlebar Location Breadcrumb",
+  "selected_work_mode": "standard",
+  "selected_view_mode": "superadmin_developer",
+  "selected_install_mode": "developer",
+  "reasons": [
+    "The task changes a user-facing desktop renderer navigation surface.",
+    "The task should be verified with renderer tests, build checks, and Browser smoke.",
+    "No new dependency, global installation, native permission, or CLI adapter is required."
+  ],
+  "required_records": [
+    "web_search",
+    "coding_research",
+    "requirements",
+    "spec",
+    "plan",
+    "tasks",
+    "validation",
+    "traceability",
+    "resource_check",
+    "omission_check",
+    "evaluation",
+    "request_trace",
+    "work_summary"
+  ]
+}
