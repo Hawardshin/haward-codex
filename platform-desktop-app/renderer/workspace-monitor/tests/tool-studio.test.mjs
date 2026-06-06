@@ -501,9 +501,9 @@ test("Runtime customization settings persist and drive native execution", () => 
 });
 
 test("CLI adapter settings expose beginner setup steps and copyable commands", () => {
-  assert.match(monitorShell, /authHint: string;/);
-  assert.match(monitorShell, /firstRunCommand: string;/);
-  assert.match(monitorShell, /expectedResult: string;/);
+  assert.match(monitorShell, /authHint: LocalizedText;/);
+  assert.match(monitorShell, /firstRunCommand: LocalizedText;/);
+  assert.match(monitorShell, /expectedResult: LocalizedText;/);
   assert.match(monitorShell, /function adapterAuthReadyForAdapter/);
   assert.match(monitorShell, /const runtimeAdapterSetupSteps = \[/);
   assert.match(monitorShell, /data-cli-adapter-setup-guide="settings"/);
