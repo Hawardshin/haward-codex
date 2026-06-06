@@ -60,6 +60,7 @@ struct ProviderCredentialDefinition {
     login_url: &'static str,
     docs_url: &'static str,
     caution: &'static str,
+    requires_subscription_verification: bool,
 }
 
 struct PipelineLaneDefinition {
@@ -700,6 +701,9 @@ struct ProviderCredentialRecord {
     secret: String,
     created_at: String,
     updated_at: String,
+    subscription_state: String,
+    subscription_checked_at: String,
+    subscription_message: String,
 }
 
 #[derive(Clone, Deserialize, Serialize)]
@@ -738,6 +742,10 @@ struct ProviderCredentialSummary {
     login_url: String,
     docs_url: String,
     caution: String,
+    requires_subscription_verification: bool,
+    subscription_state: String,
+    subscription_checked_at: String,
+    subscription_message: String,
 }
 
 #[derive(Serialize)]
@@ -917,6 +925,9 @@ impl Default for ProviderCredentialRecord {
             secret: String::new(),
             created_at: String::new(),
             updated_at: String::new(),
+            subscription_state: "not_configured".to_string(),
+            subscription_checked_at: String::new(),
+            subscription_message: String::new(),
         }
     }
 }
@@ -1437,7 +1448,7 @@ const ACCUMULATED_DATA_INDEX_SCHEMA_VERSION: &str = "accumulated-data-overview.v
 const ACCUMULATED_DATA_STORAGE_FORMAT_VERSION: &str = "file-record-stores+overview-manifest.v1";
 const DESKTOP_WORKSPACE_STATE_SCHEMA_VERSION: &str = "desktop-workspace-state.v1";
 const DESKTOP_PREFERENCES_SCHEMA_VERSION: &str = "desktop-preferences.v1";
-const PROVIDER_CREDENTIALS_SCHEMA_VERSION: &str = "provider-credentials.v1";
+const PROVIDER_CREDENTIALS_SCHEMA_VERSION: &str = "provider-credentials.v2";
 const GIT_CLONE_TIMEOUT_MS: u64 = 120_000;
 const MAX_GIT_CLONE_OUTPUT_BYTES: usize = 24_000;
 const MAX_GIT_REPOSITORY_URL_BYTES: usize = 2_048;
@@ -1548,7 +1559,8 @@ static PROVIDER_CREDENTIALS: &[ProviderCredentialDefinition] = &[
         setup_url: "https://ollama.com/download",
         login_url: "https://ollama.com/download",
         docs_url: "https://docs.ollama.com/api",
-        caution: "Runs through the local Ollama HTTP runtime at 127.0.0.1:11434. No API key is stored; install Ollama and pull a model before first use.",
+        caution: "로컬의 Ollama HTTP 런타임(127.0.0.1:11434)에서 동작합니다. API 키를 저장하지 않습니다. 사용 전 Ollama 설치와 모델 pull이 필요합니다.",
+        requires_subscription_verification: false,
     },
     ProviderCredentialDefinition {
         provider_id: "openai",
@@ -1559,7 +1571,8 @@ static PROVIDER_CREDENTIALS: &[ProviderCredentialDefinition] = &[
         setup_url: "https://platform.openai.com/api-keys",
         login_url: "https://platform.openai.com/api-keys",
         docs_url: "https://platform.openai.com/docs/api-reference/authentication",
-        caution: "Open the OpenAI Platform API keys page, sign in with the target account, create a restricted project key, then save it here. Do not store ChatGPT web session cookies.",
+        caution: "OpenAI 공식 API key 페이지에서 대상 계정으로 로그인 후 프로젝트 키를 발급받아 저장하세요. ChatGPT 웹 세션 쿠키는 저장하지 않습니다.",
+        requires_subscription_verification: true,
     },
     ProviderCredentialDefinition {
         provider_id: "anthropic",
@@ -1570,7 +1583,8 @@ static PROVIDER_CREDENTIALS: &[ProviderCredentialDefinition] = &[
         setup_url: "https://console.anthropic.com/settings/keys",
         login_url: "https://claude.ai/login",
         docs_url: "https://platform.claude.com/docs/en/api/authentication/overview",
-        caution: "Use a Claude API key or provider-supported federation; consumer web OAuth tokens are not stored here.",
+        caution: "개인/비즈니스용 Claude API 키만 사용하세요. 웹 로그인 토큰이나 소비자 OAuth 토큰은 저장되지 않습니다.",
+        requires_subscription_verification: true,
     },
     ProviderCredentialDefinition {
         provider_id: "google-gemini",
@@ -1581,7 +1595,8 @@ static PROVIDER_CREDENTIALS: &[ProviderCredentialDefinition] = &[
         setup_url: "https://aistudio.google.com/api-keys",
         login_url: "https://aistudio.google.com/api-keys",
         docs_url: "https://ai.google.dev/gemini-api/docs/api-key",
-        caution: "Open Google AI Studio API keys, sign in with the target Google account, create a restricted Gemini key, then save it here. Vertex AI OAuth or ADC remains a separate production provider flow.",
+        caution: "Google AI Studio API key 페이지에서 대상 Google 계정으로 로그인 후 제한된 Gemini 키를 발급받아 저장하세요. Vertex AI OAuth/ADC는 별도 운영 흐름입니다.",
+        requires_subscription_verification: true,
     },
 ];
 
@@ -3678,6 +3693,7 @@ pub fn run() {
             save_provider_credential,
             clear_provider_credential,
             open_provider_auth_url,
+            verify_provider_subscription,
             read_system_clipboard_text,
             write_system_clipboard_text,
             list_provider_models,
@@ -6043,6 +6059,10 @@ fn provider_credentials_base_path(app: &AppHandle) -> Result<PathBuf, String> {
 }
 
 fn provider_credentials_path(app: &AppHandle) -> Result<PathBuf, String> {
+    Ok(provider_credentials_base_path(app)?.join("provider-credentials.v2.json"))
+}
+
+fn legacy_provider_credentials_path(app: &AppHandle) -> Result<PathBuf, String> {
     Ok(provider_credentials_base_path(app)?.join("provider-credentials.v1.json"))
 }
 
@@ -7620,7 +7640,7 @@ fn provider_credentials_report(app: &AppHandle) -> Result<ProviderCredentialRepo
             "default_empty".to_string()
         },
         credential_file_path: path_to_string(&path),
-        storage_warning: "Secrets are stored only in the local app config credential file and are redacted from reports and support bundles. Replace this storage adapter with OS keychain before public release.".to_string(),
+        storage_warning: "키 원문은 로컬 앱 설정 파일에만 저장되며 보고서/지원 번들에는 마스킹 처리되어 노출되지 않습니다. 공개 배포 전에는 OS keychain 기반 저장소로 교체해야 합니다.".to_string(),
         configured_count,
         providers,
     })
@@ -7631,7 +7651,7 @@ fn save_provider_credential_report(
     input: ProviderCredentialInput,
 ) -> Result<ProviderCredentialReport, String> {
     let definition = find_provider_credential(&input.provider_id)
-        .ok_or_else(|| format!("Unknown provider id: {}", input.provider_id))?;
+        .ok_or_else(|| format!("알 수 없는 제공자입니다: {}", input.provider_id))?;
     if provider_is_local_http(definition) {
         return provider_credentials_report(app);
     }
@@ -7642,11 +7662,11 @@ fn save_provider_credential_report(
     };
     if auth_method != definition.auth_method {
         return Err(format!(
-            "Unsupported auth method '{}' for provider '{}'.",
+            "제공자 '{}'의 인증 방식 '{}'은(는) 지원되지 않습니다.",
             auth_method, definition.provider_id
         ));
     }
-    let secret = normalize_provider_secret(&input.secret)?;
+    let secret = normalize_provider_secret_for_definition(definition, &input.secret)?;
     let account_hint = truncate_chars(
         &redact_sensitive_text(input.account_hint.trim()),
         MAX_PROVIDER_ACCOUNT_HINT_CHARS,
@@ -7670,10 +7690,21 @@ fn save_provider_credential_report(
         secret,
         created_at,
         updated_at: now,
+        subscription_state: "not_verified".to_string(),
+        subscription_checked_at: String::new(),
+        subscription_message: String::new(),
     });
     store = normalize_provider_credential_store(store);
     write_provider_credential_store(app, &store)?;
     provider_credentials_report(app)
+}
+
+#[tauri::command]
+async fn verify_provider_subscription(
+    app: AppHandle,
+    provider_id: String,
+) -> Result<ProviderCredentialReport, String> {
+    verify_provider_subscription_report(&app, &provider_id).await
 }
 
 fn clear_provider_credential_report(
@@ -7681,7 +7712,7 @@ fn clear_provider_credential_report(
     provider_id: &str,
 ) -> Result<ProviderCredentialReport, String> {
     let definition = find_provider_credential(provider_id)
-        .ok_or_else(|| format!("Unknown provider id: {provider_id}"))?;
+        .ok_or_else(|| format!("알 수 없는 제공자입니다: {provider_id}"))?;
     if provider_is_local_http(definition) {
         return provider_credentials_report(app);
     }
@@ -7700,7 +7731,7 @@ fn open_provider_auth_url_report(
     purpose: Option<&str>,
 ) -> Result<ProviderAuthUrlOpenReport, String> {
     let definition = find_provider_credential(provider_id)
-        .ok_or_else(|| format!("Unknown provider id: {provider_id}"))?;
+        .ok_or_else(|| format!("알 수 없는 제공자입니다: {provider_id}"))?;
     let purpose = match purpose.unwrap_or("setup") {
         "login" => "login",
         "docs" => "docs",
@@ -7718,6 +7749,155 @@ fn open_provider_auth_url_report(
         url: url.to_string(),
         status: "opened".to_string(),
     })
+}
+
+async fn verify_provider_subscription_report(
+    app: &AppHandle,
+    provider_id: &str,
+) -> Result<ProviderCredentialReport, String> {
+    let definition = find_provider_credential(provider_id)
+        .ok_or_else(|| format!("알 수 없는 제공자입니다: {provider_id}"))?;
+    if !definition.requires_subscription_verification {
+        let mut report = provider_credentials_report(app)?;
+        report.providers = mark_provider_subscription_status(
+            report.providers,
+            provider_id,
+            "not_required",
+            "구독 검증이 필요하지 않습니다.".to_string(),
+            String::new(),
+        );
+        return Ok(report);
+    }
+
+    let secret = provider_secret_for_definition(app, definition)?;
+    let checked_at = current_unix_millis_label();
+    let mut outcome = match definition.provider_id {
+        "openai" => verify_openai_subscription(&secret).await?,
+        "anthropic" => verify_anthropic_subscription(&secret).await?,
+        "google-gemini" => verify_gemini_subscription(&secret).await?,
+        _ => {
+            return Err(format!(
+                "{} 구독 검증은 현재 지원되지 않습니다.",
+                definition.label
+            ))
+        }
+    };
+    if outcome.message.trim().is_empty() {
+        outcome.message = "구독 검증 결과를 확인했습니다.".to_string();
+    }
+
+    let state = if outcome.verified {
+        "verified"
+    } else {
+        "error"
+    };
+    let mut report = provider_credentials_report(app)?;
+    report.providers = mark_provider_subscription_status(
+        report.providers,
+        provider_id,
+        state,
+        outcome.message.clone(),
+        checked_at.clone(),
+    );
+
+    let mut persisted = false;
+    let mut store = read_provider_credential_store(app)?;
+    for credential in &mut store.credentials {
+        if credential.provider_id != definition.provider_id {
+            continue;
+        }
+        if credential.secret.trim().is_empty() {
+            continue;
+        }
+        credential.subscription_state = state.to_string();
+        credential.subscription_checked_at = checked_at.clone();
+        credential.subscription_message = outcome.message.clone();
+        persisted = true;
+        break;
+    }
+    if persisted {
+        write_provider_credential_store(app, &store).map_err(|error| {
+            format!("구독 검증 상태 저장에 실패했습니다: {error}. 현재 세션 상태만 반영됩니다.")
+        })?;
+    } else {
+        report.providers = mark_provider_subscription_status(
+            report.providers,
+            provider_id,
+            state,
+            format!(
+                "{} (현재 세션 기준만 반영됩니다. 앱 저장소에 API 키를 저장해 주세요.)",
+                outcome.message
+            ),
+            checked_at,
+        );
+    }
+
+    if persisted {
+        return provider_credentials_report(app);
+    }
+
+    Ok(report)
+}
+
+#[derive(Debug, Clone)]
+struct ProviderSubscriptionVerificationOutcome {
+    verified: bool,
+    message: String,
+}
+
+fn mark_provider_subscription_status(
+    mut providers: Vec<ProviderCredentialSummary>,
+    provider_id: &str,
+    state: &str,
+    message: String,
+    checked_at: String,
+) -> Vec<ProviderCredentialSummary> {
+    for provider in &mut providers {
+        if provider.provider_id != provider_id {
+            continue;
+        }
+        provider.subscription_state = state.to_string();
+        provider.subscription_message = message.clone();
+        provider.subscription_checked_at = checked_at.clone();
+        return providers;
+    }
+    providers
+}
+
+async fn verify_provider_subscription_for_run(
+    app: &AppHandle,
+    definition: &ProviderCredentialDefinition,
+) -> Result<(), String> {
+    if !definition.requires_subscription_verification {
+        return Ok(());
+    }
+
+    let report = verify_provider_subscription_report(app, definition.provider_id).await?;
+    let verified = report
+        .providers
+        .iter()
+        .find(|provider| provider.provider_id == definition.provider_id)
+        .map(|provider| provider.subscription_state == "verified")
+        .unwrap_or(false);
+
+    if verified {
+        return Ok(());
+    }
+
+    let reason = report
+        .providers
+        .iter()
+        .find(|provider| provider.provider_id == definition.provider_id)
+        .map(|provider| provider.subscription_message.clone())
+        .filter(|value| !value.trim().is_empty())
+        .unwrap_or_else(|| {
+            "구독 검증이 필요합니다. 제공자 설정에서 구독 검증을 먼저 실행하세요.".to_string()
+        });
+
+    Err(format!(
+        "{} 구독 검증이 완료되지 않았습니다. {}",
+        definition.label, reason
+    ))
 }
 
 fn read_system_clipboard_text_report(app: &AppHandle) -> Result<SystemClipboardTextReport, String> {
@@ -7762,7 +7942,7 @@ async fn list_provider_models_report(
     provider_id: &str,
 ) -> Result<ProviderModelCatalogReport, String> {
     let definition = find_provider_credential(provider_id)
-        .ok_or_else(|| format!("Unknown provider id: {provider_id}"))?;
+        .ok_or_else(|| format!("알 수 없는 제공자입니다: {provider_id}"))?;
     let preferences = desktop_preferences_report(app)
         .map(|report| report.preferences)
         .unwrap_or_else(|_| DesktopPreferences::default());
@@ -7826,7 +8006,7 @@ async fn list_ollama_provider_models_report(
                 default_model: default_model.to_string(),
                 models: Vec::new(),
                 error: Some(format!(
-                    "Ollama runtime is not reachable at {base_url}. Start Ollama, then refresh models. {error}"
+                    "Ollama 런타임을 {base_url}에서 찾을 수 없습니다. Ollama를 실행한 뒤 모델 새로고침하세요. {error}"
                 )),
             });
         }
@@ -7835,7 +8015,7 @@ async fn list_ollama_provider_models_report(
     let body = response
         .text()
         .await
-        .map_err(|error| format!("Ollama model list response body read failed: {error}"))?;
+        .map_err(|error| format!("Ollama 모델 목록 응답 본문 읽기 실패: {error}"))?;
     if !(200..300).contains(&http_status) {
         return Ok(ProviderModelCatalogReport {
             provider_id: definition.provider_id.to_string(),
@@ -7845,13 +8025,13 @@ async fn list_ollama_provider_models_report(
             default_model: default_model.to_string(),
             models: Vec::new(),
             error: Some(format!(
-                "Ollama /api/tags returned HTTP {http_status}: {}",
+                "Ollama /api/tags 호출이 HTTP {http_status}를 반환했습니다: {}",
                 truncate_chars(&redact_sensitive_text(&body), 900)
             )),
         });
     }
     let value = serde_json::from_str::<Value>(&body)
-        .map_err(|error| format!("Ollama model list JSON parse failed: {error}"))?;
+        .map_err(|error| format!("Ollama 모델 목록 JSON 파싱 실패: {error}"))?;
     let mut models = extract_ollama_model_catalog(definition, &value);
     models.sort_by(|left, right| left.id.cmp(&right.id));
     let status = if models.is_empty() {
@@ -7905,14 +8085,26 @@ fn extract_ollama_model_catalog(
 
 fn read_provider_credential_store(app: &AppHandle) -> Result<ProviderCredentialStore, String> {
     let path = provider_credentials_path(app)?;
-    if !path.exists() {
+    if path.exists() {
+        let content = fs::read_to_string(&path)
+            .map_err(|error| format!("Provider credentials 파일을 읽지 못했습니다: {error}"))?;
+        let store: ProviderCredentialStore = serde_json::from_str(&content)
+            .map_err(|error| format!("Provider credentials 파일 파싱 실패: {error}"))?;
+        return Ok(normalize_provider_credential_store(store));
+    }
+
+    let legacy_path = legacy_provider_credentials_path(app)?;
+    if !legacy_path.exists() {
         return Ok(ProviderCredentialStore::default());
     }
-    let content = fs::read_to_string(&path)
-        .map_err(|error| format!("Failed to read provider credentials: {error}"))?;
+    let content = fs::read_to_string(&legacy_path)
+        .map_err(|error| format!("Provider credentials 파일을 읽지 못했습니다: {error}"))?;
     let store: ProviderCredentialStore = serde_json::from_str(&content)
-        .map_err(|error| format!("Failed to parse provider credentials: {error}"))?;
-    Ok(normalize_provider_credential_store(store))
+        .map_err(|error| format!("Provider credentials 파일 파싱 실패: {error}"))?;
+    let normalized = normalize_provider_credential_store(store);
+    write_provider_credential_store(app, &normalized)?;
+    let _ = fs::remove_file(&legacy_path);
+    Ok(normalized)
 }
 
 fn write_provider_credential_store(
@@ -7947,6 +8139,12 @@ fn normalize_provider_credential_store(store: ProviderCredentialStore) -> Provid
             secret: credential.secret.trim().to_string(),
             created_at: credential.created_at,
             updated_at: credential.updated_at,
+            subscription_state: credential.subscription_state.trim().to_string(),
+            subscription_checked_at: credential.subscription_checked_at.trim().to_string(),
+            subscription_message: truncate_chars(
+                &redact_sensitive_text(credential.subscription_message.trim()),
+                MAX_PROVIDER_ACCOUNT_HINT_CHARS,
+            ),
         });
     }
     ProviderCredentialStore {
@@ -7969,8 +8167,8 @@ fn provider_credential_summary(
             configured: true,
             environment_available: true,
             status: "local_runtime_configured".to_string(),
-            account_hint: "local runtime".to_string(),
-            secret_preview: "no API key".to_string(),
+            account_hint: "로컬 런타임".to_string(),
+            secret_preview: "API 키 없음".to_string(),
             last_updated_at: String::new(),
             storage: "local_http_runtime".to_string(),
             credential_source: "local_runtime".to_string(),
@@ -7978,6 +8176,10 @@ fn provider_credential_summary(
             login_url: definition.login_url.to_string(),
             docs_url: definition.docs_url.to_string(),
             caution: definition.caution.to_string(),
+            requires_subscription_verification: false,
+            subscription_state: "not_required".to_string(),
+            subscription_checked_at: String::new(),
+            subscription_message: String::new(),
         };
     }
     let saved_configured = record
@@ -8035,7 +8237,77 @@ fn provider_credential_summary(
         login_url: definition.login_url.to_string(),
         docs_url: definition.docs_url.to_string(),
         caution: definition.caution.to_string(),
+        requires_subscription_verification: definition.requires_subscription_verification,
+        subscription_state: subscription_state_for_summary(definition, saved_configured, record),
+        subscription_checked_at: record
+            .map(|credential| credential.subscription_checked_at.clone())
+            .unwrap_or_default(),
+        subscription_message: subscription_message_for_summary(
+            definition,
+            saved_configured,
+            record,
+        ),
     }
+}
+
+fn subscription_state_for_summary(
+    definition: &ProviderCredentialDefinition,
+    configured: bool,
+    record: Option<&ProviderCredentialRecord>,
+) -> String {
+    if !definition.requires_subscription_verification {
+        return "not_required".to_string();
+    }
+    if !configured {
+        return "not_configured".to_string();
+    }
+    let Some(record) = record else {
+        return "unverified".to_string();
+    };
+    if !record.subscription_state.trim().is_empty() {
+        let state = record.subscription_state.trim().to_lowercase();
+        if state == "verified"
+            || state == "not_required"
+            || state == "error"
+            || state == "unverified"
+        {
+            return state;
+        }
+        if state == "not_configured" {
+            return "unverified".to_string();
+        }
+    }
+    if !record.subscription_message.trim().is_empty() {
+        return "error".to_string();
+    }
+    "unverified".to_string()
+}
+
+fn subscription_message_for_summary(
+    definition: &ProviderCredentialDefinition,
+    configured: bool,
+    record: Option<&ProviderCredentialRecord>,
+) -> String {
+    if !definition.requires_subscription_verification {
+        return "구독 검증이 필요하지 않습니다.".to_string();
+    }
+    if !configured {
+        return "먼저 계정 키를 설정하세요.".to_string();
+    }
+    let Some(record) = record else {
+        return "구독 검증을 먼저 실행하세요.".to_string();
+    };
+    if !record.subscription_message.trim().is_empty() {
+        return record.subscription_message.trim().to_string();
+    }
+    let status = record.subscription_state.trim().to_lowercase();
+    if status == "verified" {
+        return "구독 검증이 완료되었습니다.".to_string();
+    }
+    if status == "error" {
+        return "구독 검증에 실패했습니다.".to_string();
+    }
+    "구독 검증을 먼저 실행하세요.".to_string()
 }
 
 fn find_provider_credential(provider_id: &str) -> Option<&'static ProviderCredentialDefinition> {
@@ -8051,21 +8323,83 @@ fn provider_is_local_http(definition: &ProviderCredentialDefinition) -> bool {
 fn normalize_provider_secret(value: &str) -> Result<String, String> {
     let secret = value.trim();
     if secret.is_empty() {
-        return Err("Provider API key is empty.".to_string());
+        return Err("API 키가 비어 있습니다.".to_string());
     }
     if secret.len() > MAX_PROVIDER_SECRET_BYTES {
         return Err(format!(
-            "Provider API key is too large. Max input is {MAX_PROVIDER_SECRET_BYTES} bytes."
+            "API 키 크기가 너무 큽니다. 최대 입력은 {MAX_PROVIDER_SECRET_BYTES}바이트입니다."
         ));
     }
     if secret.chars().any(|character| {
         character == '\n' || character == '\r' || character == '\0' || character.is_control()
     }) {
-        return Err(
-            "Provider API key cannot contain control characters or line breaks.".to_string(),
-        );
+        return Err("API 키에는 제어 문자나 줄바꿈을 넣을 수 없습니다.".to_string());
     }
     Ok(secret.to_string())
+}
+
+fn normalize_provider_secret_for_definition(
+    definition: &ProviderCredentialDefinition,
+    value: &str,
+) -> Result<String, String> {
+    if provider_is_local_http(definition) {
+        return Ok(String::new());
+    }
+
+    let secret = normalize_provider_secret(value)?;
+    validate_provider_secret_shape(definition, &secret)?;
+    Ok(secret)
+}
+
+fn validate_provider_secret_shape(definition: &ProviderCredentialDefinition, secret: &str) -> Result<(), String> {
+    if provider_is_local_http(definition) {
+        return Ok(());
+    }
+    let normalized = secret.trim();
+    if !normalized.chars().all(|character| {
+        character.is_ascii_alphanumeric()
+            || matches!(character, '-' | '_' )
+    }) && !matches!(definition.provider_id, "google-gemini") {
+        return Err(format!("{}은(는) 허용되지 않는 문자가 포함되어 있습니다.", definition.label));
+    }
+
+    if definition.provider_id == "openai" {
+        if !normalized.starts_with("sk-") {
+            return Err(format!(
+                "{} 계정 연동은 OpenAI API 키 형식(예: sk-...)만 허용합니다. ChatGPT 웹 로그인 세션/쿠키는 지원되지 않습니다.",
+                definition.label
+            ));
+        }
+        if normalized.len() < 20 {
+            return Err(format!("{} 키 길이가 너무 짧습니다. OpenAI 공식 API 키를 확인하세요.", definition.label));
+        }
+        return Ok(());
+    }
+
+    if definition.provider_id == "anthropic" {
+        if !normalized.starts_with("sk-ant-") || normalized.len() < 30 {
+            return Err(format!(
+                "{}은(는) Anthropic API 키 형식(예: sk-ant-...)이 아닙니다. 소비자 웹 OAuth 토큰은 저장하지 않습니다.",
+                definition.label
+            ));
+        }
+        return Ok(());
+    }
+
+    if definition.provider_id == "google-gemini" {
+        if !(normalized.starts_with("AIza") || (normalized.len() >= 30 && normalized.len() <= 80 && normalized
+            .chars()
+            .all(|character| character.is_ascii_alphanumeric() || character == '-' || character == '_')))
+        {
+            return Err(format!(
+                "{}은(는) Google AI Studio API 키 형식이 아닙니다. Vertex AI OAuth/ADC 토큰은 별도 운영 흐름입니다.",
+                definition.label
+            ));
+        }
+        return Ok(());
+    }
+
+    Ok(())
 }
 
 fn credential_secret_preview(secret: &str) -> String {
@@ -8093,15 +8427,32 @@ fn provider_env_for_adapter(
         let Some(definition) = find_provider_credential(provider_id) else {
             continue;
         };
+        let env_key = definition.env_var;
+        if env_key.trim().is_empty() {
+            continue;
+        }
         let Some(credential) = store
             .credentials
             .iter()
             .find(|item| item.provider_id == definition.provider_id)
         else {
+            if let Ok(env_value) = env::var(env_key) {
+                let trimmed = env_value.trim().to_string();
+                if !trimmed.is_empty() {
+                    env_values.push((env_key.to_string(), trimmed));
+                }
+            }
             continue;
         };
         if !credential.secret.trim().is_empty() {
-            env_values.push((definition.env_var.to_string(), credential.secret.clone()));
+            env_values.push((env_key.to_string(), credential.secret.trim().to_string()));
+            continue;
+        }
+        if let Ok(env_value) = env::var(env_key) {
+            let trimmed = env_value.trim().to_string();
+            if !trimmed.is_empty() {
+                env_values.push((env_key.to_string(), trimmed));
+            }
         }
     }
     Ok(env_values)
@@ -8129,12 +8480,12 @@ async fn run_provider_agent_task_report(
 ) -> Result<ProviderAgentTaskReport, String> {
     if input.prompt.len() > MAX_SESSION_INPUT_BYTES {
         return Err(format!(
-            "Prompt is too large. Max input is {MAX_SESSION_INPUT_BYTES} bytes."
+            "요청이 너무 깁니다. 최대 입력은 {MAX_SESSION_INPUT_BYTES}바이트입니다."
         ));
     }
 
     let definition = find_provider_credential(&input.provider_id)
-        .ok_or_else(|| format!("Unknown provider id: {}", input.provider_id))?;
+        .ok_or_else(|| format!("알 수 없는 제공자입니다: {}", input.provider_id))?;
     let preferences = desktop_preferences_report(app)
         .map(|report| report.preferences)
         .unwrap_or_else(|_| DesktopPreferences::default());
@@ -8144,6 +8495,11 @@ async fn run_provider_agent_task_report(
         .iter()
         .find(|entry| entry.provider_id == definition.provider_id);
     let secret = provider_secret_for_definition(app, definition)?;
+
+    if definition.requires_subscription_verification {
+        verify_provider_subscription_for_run(app, definition).await?;
+    }
+
     let model = normalize_provider_model(
         definition,
         &input.model,
@@ -8156,10 +8512,11 @@ async fn run_provider_agent_task_report(
     let task_kind = normalize_task_kind(Some(input.task_kind.as_str()), "provider_agent_task")?;
     let max_output_tokens = normalize_provider_task_output_tokens(input.max_output_tokens);
     if let Some(max_input_tokens) = input.max_input_tokens {
-        let estimated_prompt_tokens = estimate_text_tokens(&input.prompt) + estimate_text_tokens(&input.system_prompt);
+        let estimated_prompt_tokens =
+            estimate_text_tokens(&input.prompt) + estimate_text_tokens(&input.system_prompt);
         if estimated_prompt_tokens > max_input_tokens {
             return Err(format!(
-                "Task input is estimated at {estimated_prompt_tokens} tokens, above the selected max_input_tokens limit of {max_input_tokens}."
+                "현재 입력은 {estimated_prompt_tokens}토큰으로 추정되어, 설정된 최대 토큰 수 {max_input_tokens}을(를) 초과했습니다."
             ));
         }
     }
@@ -8214,8 +8571,14 @@ async fn run_provider_agent_task_report(
         provider_label: definition.label.to_string(),
         model,
         model_route_id: normalize_provider_task_control_id(&input.model_route_id, "manual"),
-        constraint_profile_id: normalize_provider_task_control_id(&input.constraint_profile_id, "developer"),
-        connector_policy_id: normalize_provider_task_control_id(&input.connector_policy_id, "provider-api"),
+        constraint_profile_id: normalize_provider_task_control_id(
+            &input.constraint_profile_id,
+            "developer",
+        ),
+        connector_policy_id: normalize_provider_task_control_id(
+            &input.connector_policy_id,
+            "provider-api",
+        ),
         max_input_tokens: input.max_input_tokens,
         max_output_tokens,
         budget_usd: input.budget_usd,
@@ -8259,20 +8622,251 @@ async fn call_provider_api(
 ) -> Result<ProviderApiResponse, String> {
     match definition.provider_id {
         OLLAMA_PROVIDER_ID => {
-            call_ollama_provider_api(base_url, model, system_prompt, prompt, max_output_tokens).await
+            call_ollama_provider_api(base_url, model, system_prompt, prompt, max_output_tokens)
+                .await
         }
-        "openai" => call_openai_provider_api(base_url, secret, model, system_prompt, prompt, max_output_tokens).await,
+        "openai" => {
+            call_openai_provider_api(
+                base_url,
+                secret,
+                model,
+                system_prompt,
+                prompt,
+                max_output_tokens,
+            )
+            .await
+        }
         "anthropic" => {
-            call_anthropic_provider_api(base_url, secret, model, system_prompt, prompt, max_output_tokens).await
+            call_anthropic_provider_api(
+                base_url,
+                secret,
+                model,
+                system_prompt,
+                prompt,
+                max_output_tokens,
+            )
+            .await
         }
         "google-gemini" => {
-            call_gemini_provider_api(base_url, secret, model, system_prompt, prompt, max_output_tokens).await
+            call_gemini_provider_api(
+                base_url,
+                secret,
+                model,
+                system_prompt,
+                prompt,
+                max_output_tokens,
+            )
+            .await
         }
         _ => Err(format!(
-            "Unsupported provider id: {}",
+            "지원되지 않는 제공자입니다: {}",
             definition.provider_id
         )),
     }
+}
+
+async fn verify_openai_subscription(
+    secret: &str,
+) -> Result<ProviderSubscriptionVerificationOutcome, String> {
+    let models_endpoint = provider_endpoint(OPENAI_BASE_URL, "/models");
+    let models_response = provider_http_client()?
+        .get(&models_endpoint)
+        .bearer_auth(secret)
+        .send()
+        .await
+        .map_err(|error| format!("OpenAI 구독 검증 요청 실패: {error}"))?;
+    let models_status_code = models_response.status().as_u16();
+    let models_body = models_response
+        .text()
+        .await
+        .map_err(|error| format!("OpenAI 구독 검증 응답 파싱 실패: {error}"))?;
+    if !(200..300).contains(&models_status_code) {
+        let detail = provider_http_error_message("OpenAI", models_status_code, &models_body);
+        return Ok(ProviderSubscriptionVerificationOutcome {
+            verified: false,
+            message: detail,
+        });
+    }
+    if let Ok(value) = serde_json::from_str::<Value>(&models_body) {
+        if value.get("data").and_then(Value::as_array).is_none() {
+            return Ok(ProviderSubscriptionVerificationOutcome {
+                verified: false,
+                message: "OpenAI 모델 목록 응답 형식이 예상과 다릅니다.".to_string(),
+            });
+        }
+    } else {
+        return Ok(ProviderSubscriptionVerificationOutcome {
+            verified: false,
+            message: "OpenAI 모델 목록 응답 파싱에 실패했습니다.".to_string(),
+        });
+    }
+
+    let billing_endpoint = provider_endpoint(OPENAI_BASE_URL, "/dashboard/billing/subscription");
+    let billing_response = provider_http_client()?
+        .get(&billing_endpoint)
+        .bearer_auth(secret)
+        .send()
+        .await
+        .map_err(|error| format!("OpenAI 구독 상태 조회 요청 실패: {error}"))?;
+    let billing_status_code = billing_response.status().as_u16();
+    let billing_body = billing_response
+        .text()
+        .await
+        .map_err(|error| format!("OpenAI 구독 상태 응답 파싱 실패: {error}"))?;
+    if !(200..300).contains(&billing_status_code) {
+        return Ok(ProviderSubscriptionVerificationOutcome {
+            verified: false,
+            message: provider_http_error_message(
+                "OpenAI 구독/과금 상태 조회",
+                billing_status_code,
+                &billing_body,
+            ),
+        });
+    }
+
+    let billing_data = serde_json::from_str::<Value>(&billing_body)
+        .map_err(|error| format!("OpenAI 구독/과금 응답 파싱 실패: {error}"))?;
+    let has_payment_method = billing_data
+        .get("has_payment_method")
+        .and_then(Value::as_bool)
+        .unwrap_or(false);
+    let hard_limit = billing_data
+        .get("hard_limit_usd")
+        .and_then(parse_openai_money);
+    let soft_limit = billing_data
+        .get("soft_limit_usd")
+        .and_then(parse_openai_money);
+    if has_payment_method || hard_limit.unwrap_or(0.0) > 0.0 || soft_limit.unwrap_or(0.0) > 0.0 {
+        return Ok(ProviderSubscriptionVerificationOutcome {
+            verified: true,
+            message: "OpenAI 구독·결제 상태 조회에 성공했으며 실제 계정 연동이 확인되었습니다."
+                .to_string(),
+        });
+    }
+
+    Ok(ProviderSubscriptionVerificationOutcome {
+        verified: false,
+        message: "OpenAI 계정에서 결제 상태가 활성화되지 않았거나 사용 한도가 0입니다. 유료 결제 등록 후 다시 시도하세요.".to_string(),
+    })
+}
+
+async fn verify_anthropic_subscription(
+    secret: &str,
+) -> Result<ProviderSubscriptionVerificationOutcome, String> {
+    let endpoint = provider_endpoint(ANTHROPIC_BASE_URL, "/v1/models");
+    let response = provider_http_client()?
+        .get(&endpoint)
+        .header("x-api-key", secret)
+        .header("anthropic-version", "2023-06-01")
+        .send()
+        .await
+        .map_err(|error| format!("Anthropic 구독 검증 요청 실패: {error}"))?;
+    let status_code = response.status().as_u16();
+    let body = response
+        .text()
+        .await
+        .map_err(|error| format!("Anthropic 구독 검증 응답 파싱 실패: {error}"))?;
+
+    if (200..300).contains(&status_code) {
+        if let Ok(value) = serde_json::from_str::<Value>(&body) {
+            if value.get("data").and_then(Value::as_array).is_none() {
+                return Ok(ProviderSubscriptionVerificationOutcome {
+                    verified: false,
+                    message: "Anthropic 모델 목록 응답 형식이 예상과 다릅니다.".to_string(),
+                });
+            }
+        }
+        return Ok(ProviderSubscriptionVerificationOutcome {
+            verified: true,
+            message: "Anthropic 계정/키가 유효하며 API 구독 상태 조회가 가능합니다.".to_string(),
+        });
+    }
+
+    let detail = provider_http_error_message("Anthropic", status_code, &body);
+    Ok(ProviderSubscriptionVerificationOutcome {
+        verified: false,
+        message: detail,
+    })
+}
+
+async fn verify_gemini_subscription(
+    secret: &str,
+) -> Result<ProviderSubscriptionVerificationOutcome, String> {
+    let endpoint = provider_endpoint(GEMINI_BASE_URL, "/v1beta/models");
+    let response = provider_http_client()?
+        .get(&endpoint)
+        .header("x-goog-api-key", secret)
+        .send()
+        .await
+        .map_err(|error| format!("Google Gemini 구독 검증 요청 실패: {error}"))?;
+    let status = response.status();
+    let status_code = status.as_u16();
+    let body = response
+        .text()
+        .await
+        .map_err(|error| format!("Google Gemini 구독 검증 응답 파싱 실패: {error}"))?;
+
+    if (200..300).contains(&status_code) {
+        if let Ok(value) = serde_json::from_str::<Value>(&body) {
+            if value.get("models").and_then(Value::as_array).is_none() {
+                return Ok(ProviderSubscriptionVerificationOutcome {
+                    verified: false,
+                    message: "Gemini 모델 목록 응답 형식이 예상과 다릅니다.".to_string(),
+                });
+            }
+        }
+        return Ok(ProviderSubscriptionVerificationOutcome {
+            verified: true,
+            message: "Google Gemini 계정/키가 유효하며 API 구독 상태 조회가 가능합니다."
+                .to_string(),
+        });
+    }
+
+    let detail = provider_http_error_message("Gemini", status_code, &body);
+    Ok(ProviderSubscriptionVerificationOutcome {
+        verified: false,
+        message: detail,
+    })
+}
+
+fn parse_openai_money(value: &Value) -> Option<f64> {
+    if let Some(number) = value.as_f64() {
+        return Some(number);
+    }
+    if let Some(text) = value.as_str() {
+        return text.trim().replace(',', "").parse::<f64>().ok();
+    }
+    None
+}
+
+fn provider_http_error_message(provider: &str, status_code: u16, body: &str) -> String {
+    let error_message = serde_json::from_str::<Value>(body)
+        .ok()
+        .and_then(|value| {
+            value
+                .get("error")
+                .and_then(Value::as_object)
+                .and_then(|error| {
+                    error
+                        .get("message")
+                        .and_then(Value::as_str)
+                        .map(ToString::to_string)
+                        .or_else(|| {
+                            error
+                                .get("status")
+                                .and_then(Value::as_str)
+                                .map(ToString::to_string)
+                        })
+                })
+                .or_else(|| {
+                    value
+                        .get("error")
+                        .and_then(Value::as_str)
+                        .map(ToString::to_string)
+                })
+        })
+        .unwrap_or_else(|| "API 응답에서 오류 상세가 없습니다.".to_string());
+    format!("{provider} 구독 검증 요청 실패: HTTP {status_code}. {error_message}")
 }
 
 async fn call_ollama_provider_api(
@@ -8304,12 +8898,12 @@ async fn call_ollama_provider_api(
         .json(&payload)
         .send()
         .await
-        .map_err(|error| format!("Ollama request failed: {error}"))?;
+        .map_err(|error| format!("Ollama 요청 실패: {error}"))?;
     let http_status = response.status().as_u16();
     let body = response
         .text()
         .await
-        .map_err(|error| format!("Ollama response body read failed: {error}"))?;
+        .map_err(|error| format!("Ollama 응답 본문 읽기 실패: {error}"))?;
     let output = serde_json::from_str::<Value>(&body)
         .map(|value| extract_ollama_output_text(&value))
         .unwrap_or_default();
@@ -8341,12 +8935,12 @@ async fn call_openai_provider_api(
         .json(&payload)
         .send()
         .await
-        .map_err(|error| format!("OpenAI request failed: {error}"))?;
+        .map_err(|error| format!("OpenAI 요청 실패: {error}"))?;
     let http_status = response.status().as_u16();
     let body = response
         .text()
         .await
-        .map_err(|error| format!("OpenAI response body read failed: {error}"))?;
+        .map_err(|error| format!("OpenAI 응답 본문 읽기 실패: {error}"))?;
     let output = serde_json::from_str::<Value>(&body)
         .map(|value| extract_openai_output_text(&value))
         .unwrap_or_default();
@@ -8383,12 +8977,12 @@ async fn call_anthropic_provider_api(
         .json(&payload)
         .send()
         .await
-        .map_err(|error| format!("Anthropic request failed: {error}"))?;
+        .map_err(|error| format!("Anthropic 요청 실패: {error}"))?;
     let http_status = response.status().as_u16();
     let body = response
         .text()
         .await
-        .map_err(|error| format!("Anthropic response body read failed: {error}"))?;
+        .map_err(|error| format!("Anthropic 응답 본문 읽기 실패: {error}"))?;
     let output = serde_json::from_str::<Value>(&body)
         .map(|value| extract_anthropic_output_text(&value))
         .unwrap_or_default();
@@ -8437,12 +9031,12 @@ async fn call_gemini_provider_api(
         .json(&payload)
         .send()
         .await
-        .map_err(|error| format!("Gemini request failed: {error}"))?;
+        .map_err(|error| format!("Gemini 요청 실패: {error}"))?;
     let http_status = response.status().as_u16();
     let body = response
         .text()
         .await
-        .map_err(|error| format!("Gemini response body read failed: {error}"))?;
+        .map_err(|error| format!("Gemini 응답 본문 읽기 실패: {error}"))?;
     let output = serde_json::from_str::<Value>(&body)
         .map(|value| extract_gemini_output_text(&value))
         .unwrap_or_default();
@@ -8467,7 +9061,7 @@ fn provider_http_client() -> Result<reqwest::Client, String> {
     reqwest::Client::builder()
         .timeout(Duration::from_millis(PROVIDER_TASK_TIMEOUT_MS))
         .build()
-        .map_err(|error| format!("Failed to create provider HTTP client: {error}"))
+        .map_err(|error| format!("Provider HTTP 클라이언트 생성 실패: {error}"))
 }
 
 fn provider_secret_for_definition(
@@ -8484,19 +9078,26 @@ fn provider_secret_for_definition(
         .find(|item| item.provider_id == definition.provider_id)
     {
         if !credential.secret.trim().is_empty() {
-            return Ok(credential.secret.trim().to_string());
+            let secret = credential.secret.trim().to_string();
+            validate_provider_secret_shape(definition, &secret)?;
+            return Ok(secret);
         }
     }
-    env::var(definition.env_var)
-        .map(|value| value.trim().to_string())
-        .ok()
-        .filter(|value| !value.is_empty())
-        .ok_or_else(|| {
-            format!(
-                "{} is not connected. Save a key or set {}.",
-                definition.label, definition.env_var
-            )
-        })
+    let secret = env::var(definition.env_var).map_err(|_| {
+        format!(
+            "{} 연결이 없습니다. 키를 저장하거나 {} 환경 변수를 설정하세요.",
+            definition.label, definition.env_var
+        )
+    })?;
+    let secret = secret.trim().to_string();
+    if secret.is_empty() {
+        return Err(format!(
+            "{} 연결이 없습니다. 키를 저장하거나 {} 환경 변수를 설정하세요.",
+            definition.label, definition.env_var
+        ));
+    }
+    validate_provider_secret_shape(definition, &secret)?;
+    Ok(secret)
 }
 
 fn provider_task_system_prompt(task_kind: &str, value: &str) -> String {
@@ -8505,7 +9106,7 @@ fn provider_task_system_prompt(task_kind: &str, value: &str) -> String {
         return truncate_chars(trimmed, MAX_SESSION_INPUT_BYTES);
     }
     format!(
-        "You are running as an Agent Workspace Platform direct provider task. Task kind: {task_kind}. Work from the user's request, return concrete output, separate assumptions from facts, list validation steps, and do not claim that files were edited or commands were run unless the prompt includes that evidence."
+        "에이전트 워크스페이스 플랫폼의 직접 Provider 작업입니다. 작업 유형: {task_kind}. 사용자의 요청을 바탕으로 실행하고, 구체적인 결과를 반환하세요. 가정과 사실을 분리하고, 검증 절차를 함께 남기세요."
     )
 }
 
@@ -8524,20 +9125,21 @@ fn normalize_provider_model(
         value.trim()
     };
     if candidate.len() > MAX_PROVIDER_MODEL_CHARS {
-        return Err("Provider model id is too long.".to_string());
+        return Err("모델 ID가 너무 깁니다.".to_string());
     }
     if !candidate.chars().all(|character| {
         character.is_ascii_alphanumeric() || matches!(character, '-' | '_' | '.' | ':' | '/')
     }) {
-        return Err("Provider model id contains unsupported characters.".to_string());
+        return Err("지원되지 않는 문자가 모델 ID에 포함되어 있습니다.".to_string());
     }
     Ok(candidate.to_string())
 }
 
 fn normalize_provider_task_output_tokens(value: Option<u64>) -> u64 {
-    value
-        .unwrap_or(DEFAULT_PROVIDER_TASK_OUTPUT_TOKENS)
-        .clamp(MIN_PROVIDER_TASK_OUTPUT_TOKENS, MAX_PROVIDER_TASK_OUTPUT_TOKENS)
+    value.unwrap_or(DEFAULT_PROVIDER_TASK_OUTPUT_TOKENS).clamp(
+        MIN_PROVIDER_TASK_OUTPUT_TOKENS,
+        MAX_PROVIDER_TASK_OUTPUT_TOKENS,
+    )
 }
 
 fn normalize_provider_task_control_id(value: &str, fallback: &str) -> String {

@@ -459,6 +459,10 @@ type ProviderCredentialSummary = {
   loginUrl: string;
   docsUrl: string;
   caution: string;
+  requiresSubscriptionVerification: boolean;
+  subscriptionState: string;
+  subscriptionCheckedAt: string;
+  subscriptionMessage: string;
 };
 
 type ProviderCredentialReport = {
@@ -489,7 +493,16 @@ type ProviderModelCatalogReport = {
   error?: string | null;
 };
 
-type ProviderActionKind = "refresh" | "setup" | "login" | "docs" | "save" | "clear" | "models" | "use";
+type ProviderActionKind =
+  | "refresh"
+  | "setup"
+  | "login"
+  | "docs"
+  | "save"
+  | "clear"
+  | "models"
+  | "use"
+  | "verifySubscription";
 
 type ProviderActionFeedback = {
   providerId: string;
@@ -498,7 +511,34 @@ type ProviderActionFeedback = {
   message: string;
 };
 
+function localizedAdapterGuideText(
+  guide: AdapterSetupGuide | undefined,
+  language: UiLanguage,
+  field: keyof AdapterSetupGuide
+) {
+  if (!guide) {
+    return "";
+  }
+  if (field === "sourceUrl") {
+    return guide.sourceUrl;
+  }
+  const localized = guide[field] as unknown as LocalizedText;
+  return language === "ko" ? localized.ko : localized.en;
+}
+
 const providerPanelFeedbackId = "__provider_accounts_panel__";
+const providerLabelKoMap: Record<string, string> = {
+  ollama: "올라마",
+  openai: "오픈AI",
+  anthropic: "클로드",
+  "google-gemini": "제미니",
+};
+const providerDisplayName = (providerId: string, fallback: string, uiLanguage: UiLanguage) => {
+  if (uiLanguage !== "ko") {
+    return fallback;
+  }
+  return providerLabelKoMap[providerId] || fallback;
+};
 
 type ProviderCredentialInputState = {
   accountHint: string;
@@ -2466,14 +2506,19 @@ type DecisionResumeReport = {
   resumeDetail: string;
 };
 
+type LocalizedText = {
+  ko: string;
+  en: string;
+};
+
 type AdapterSetupGuide = {
-  installHint: string;
-  authHint: string;
-  verifyCommand: string;
-  firstRunCommand: string;
-  expectedResult: string;
+  installHint: LocalizedText;
+  authHint: LocalizedText;
+  verifyCommand: LocalizedText;
+  firstRunCommand: LocalizedText;
+  expectedResult: LocalizedText;
   sourceUrl: string;
-  caution: string;
+  caution: LocalizedText;
 };
 
 type OutputEvent = {
@@ -2534,91 +2579,185 @@ const TASK_RUN_REFRESH_THROTTLE_MS = 5000;
 const SOURCE_DRAFT_UI_SYNC_MS = 180;
 
 const fallbackDesktopAdapters: CliAdapterStatus[] = [
-  { adapterId: "claude-code-cli", label: "Claude Code CLI", command: "claude", available: false, lastError: "Desktop runtime unavailable." },
-  { adapterId: "gemini-cli", label: "Gemini CLI", command: "gemini", available: false, lastError: "Desktop runtime unavailable." },
-  { adapterId: "codex-cli", label: "Codex CLI", command: "codex", available: false, lastError: "Desktop runtime unavailable." },
-  { adapterId: "opencode-cli", label: "OpenCode", command: "opencode", available: false, lastError: "Desktop runtime unavailable." },
-  { adapterId: "claw-code-cli", label: "Claw Code", command: "claw", available: false, lastError: "Desktop runtime unavailable." }
+  { adapterId: "claude-code-cli", label: "Claude Code CLI", command: "claude", available: false, lastError: "데스크톱 런타임이 필요합니다." },
+  { adapterId: "gemini-cli", label: "Gemini CLI", command: "gemini", available: false, lastError: "데스크톱 런타임이 필요합니다." },
+  { adapterId: "codex-cli", label: "Codex CLI", command: "codex", available: false, lastError: "데스크톱 런타임이 필요합니다." },
+  { adapterId: "opencode-cli", label: "OpenCode", command: "opencode", available: false, lastError: "데스크톱 런타임이 필요합니다." },
+  { adapterId: "claw-code-cli", label: "Claw Code", command: "claw", available: false, lastError: "데스크톱 런타임이 필요합니다." }
 ];
 
 const adapterSetupGuides: Record<string, AdapterSetupGuide> = {
   "claude-code-cli": {
-    installHint: "npm install -g @anthropic-ai/claude-code",
-    authHint: "claude login",
-    verifyCommand: "claude --version",
-    firstRunCommand: "claude",
-    expectedResult: "Interactive Claude Code session opens in the selected workspace.",
+    installHint: {
+      ko: "npm install -g @anthropic-ai/claude-code",
+      en: "npm install -g @anthropic-ai/claude-code"
+    },
+    authHint: {
+      ko: "claude login",
+      en: "claude login"
+    },
+    verifyCommand: {
+      ko: "claude --version",
+      en: "claude --version"
+    },
+    firstRunCommand: {
+      ko: "claude",
+      en: "claude"
+    },
+    expectedResult: {
+      ko: "선택한 작업공간에서 Claude Code 대화형 세션이 열립니다.",
+      en: "Interactive Claude Code session opens in the selected workspace."
+    },
     sourceUrl: "https://docs.claude.com/en/docs/claude-code/setup",
-    caution: "Node.js and account auth are required."
+    caution: {
+      ko: "Node.js와 계정 인증이 필요합니다.",
+      en: "Node.js and account auth are required."
+    }
   },
   "gemini-cli": {
-    installHint: "npm install -g @google/gemini-cli",
-    authHint: "gemini auth login",
-    verifyCommand: "gemini --version",
-    firstRunCommand: "gemini",
-    expectedResult: "Gemini CLI starts with the current workspace as its command context.",
+    installHint: {
+      ko: "npm install -g @google/gemini-cli",
+      en: "npm install -g @google/gemini-cli"
+    },
+    authHint: {
+      ko: "gemini auth login",
+      en: "gemini auth login"
+    },
+    verifyCommand: {
+      ko: "gemini --version",
+      en: "gemini --version"
+    },
+    firstRunCommand: {
+      ko: "gemini",
+      en: "gemini"
+    },
+    expectedResult: {
+      ko: "현재 작업공간이 Gemini CLI의 명령 컨텍스트로 사용됩니다.",
+      en: "Gemini CLI starts with the current workspace as its command context."
+    },
     sourceUrl: "https://github.com/google-gemini/gemini-cli",
-    caution: "Verify the package scope before install."
+    caution: {
+      ko: "설치 전 패키지 출처와 라이선스를 꼭 확인하세요.",
+      en: "Verify the package scope before install."
+    }
   },
   "codex-cli": {
-    installHint: "npm install -g @openai/codex",
-    authHint: "codex login",
-    verifyCommand: "codex --version",
-    firstRunCommand: "codex",
-    expectedResult: "Codex CLI starts as a guest execution lane; the platform keeps task state.",
+    installHint: {
+      ko: "npm install -g @openai/codex",
+      en: "npm install -g @openai/codex"
+    },
+    authHint: {
+      ko: "codex login",
+      en: "codex login"
+    },
+    verifyCommand: {
+      ko: "codex --version",
+      en: "codex --version"
+    },
+    firstRunCommand: {
+      ko: "codex",
+      en: "codex"
+    },
+    expectedResult: {
+      ko: "플랫폼이 작업 상태를 소유한 채 Codex 게스트 실행 경로가 시작됩니다.",
+      en: "Codex CLI starts as a guest execution lane; the platform keeps task state."
+    },
     sourceUrl: "https://help.openai.com/en/articles/11096431",
-    caution: "Use the official package and account auth."
+    caution: {
+      ko: "공식 패키지와 계정 인증 방식만 사용하세요.",
+      en: "Use the official package and account auth."
+    }
   },
   "opencode-cli": {
-    installHint: "npm install -g opencode-ai",
-    authHint: "Set the provider API key, then run the CLI auth check documented by OpenCode.",
-    verifyCommand: "opencode --version",
-    firstRunCommand: "opencode",
-    expectedResult: "OpenCode starts with the selected provider key and workspace boundary.",
+    installHint: {
+      ko: "npm install -g opencode-ai",
+      en: "npm install -g opencode-ai"
+    },
+    authHint: {
+      ko: "공급자 API 키를 설정한 뒤 OpenCode의 auth 확인 절차를 실행하세요.",
+      en: "Set the provider API key, then run the CLI auth check documented by OpenCode."
+    },
+    verifyCommand: {
+      ko: "opencode --version",
+      en: "opencode --version"
+    },
+    firstRunCommand: {
+      ko: "opencode",
+      en: "opencode"
+    },
+    expectedResult: {
+      ko: "선택한 공급자 키와 작업공간 경계를 기준으로 OpenCode가 시작됩니다.",
+      en: "OpenCode starts with the selected provider key and workspace boundary."
+    },
     sourceUrl: "https://opencode.ai/docs/cli/",
-    caution: "Confirm PATH resolves the expected binary."
+    caution: {
+      ko: "PATH에 opencode 실행 파일이 해석되는지 먼저 확인하세요.",
+      en: "Confirm PATH resolves the expected binary."
+    }
   },
   "claw-code-cli": {
-    installHint: "Use the project-documented Claw Code install path, then ensure `claw` is on PATH.",
-    authHint: "Follow the project-documented account or provider-key setup before use.",
-    verifyCommand: "claw --version",
-    firstRunCommand: "claw",
-    expectedResult: "Claw Code starts only after source, license, and binary provenance are checked.",
+    installHint: {
+      ko: "프로젝트 문서의 Claw Code 설치 경로를 따라 설치 후 `claw`가 PATH에 있는지 확인하세요.",
+      en: "Use the project-documented Claw Code install path, then ensure `claw` is on PATH."
+    },
+    authHint: {
+      ko: "Claw Code 사용 전 프로젝트 문서의 계정/키 설정 절차를 완료하세요.",
+      en: "Follow the project-documented account or provider-key setup before use."
+    },
+    verifyCommand: {
+      ko: "claw --version",
+      en: "claw --version"
+    },
+    firstRunCommand: {
+      ko: "claw",
+      en: "claw"
+    },
+    expectedResult: {
+      ko: "소스/라이선스/바이너리 출처 검증 후 실행됩니다.",
+      en: "Claw Code starts only after source, license, and binary provenance are checked."
+    },
     sourceUrl: "https://github.com/Hawardshin/claw-code",
-    caution: "The referenced repository was disabled for clone during review; verify source, license, and binary provenance before installing or bundling."
+    caution: {
+      ko: "검토 단계에서 저장소 클론이 제한되어 있었으므로 설치/번들링 전 출처, 라이선스, 바이너리 근거를 확인하세요.",
+      en: "The referenced repository was disabled for clone during review; verify source, license, and binary provenance before installing or bundling."
+    }
   }
 };
 
 const fallbackProviderCredentialReport: ProviderCredentialReport = {
-  schemaVersion: "provider-credentials.v1",
+  schemaVersion: "provider-credentials.v2",
   status: "provider_credentials_ready",
   source: "browser_fallback",
   credentialFilePath: "",
-  storageWarning: "Provider credentials are stored by the native desktop runtime, not by the static browser preview.",
+  storageWarning: "프로바이더 키는 브라우저 미리보기가 아닌 네이티브 앱 런타임의 앱 설정 파일에서 관리됩니다.",
   configuredCount: 1,
   providers: [
     {
       providerId: "ollama",
-      label: "Ollama / Local",
+      label: "올라마 / 로컬",
       authMethod: "local_http",
       envVar: "",
       defaultModel: "llama3.2",
       configured: true,
       environmentAvailable: true,
       status: "local_runtime_configured",
-      accountHint: "local runtime",
-      secretPreview: "no API key",
+      accountHint: "로컬 런타임",
+      secretPreview: "API 키 없음",
       lastUpdatedAt: "",
       storage: "local_http_runtime",
       credentialSource: "local_runtime",
       setupUrl: "https://ollama.com/download",
       loginUrl: "https://ollama.com/download",
       docsUrl: "https://docs.ollama.com/api",
-      caution: "127.0.0.1:11434에서 실행되는 로컬 Ollama 런타임을 사용합니다. API key는 저장하지 않습니다."
+      caution: "127.0.0.1:11434에서 실행되는 로컬 Ollama 런타임을 사용합니다. API key는 저장하지 않습니다.",
+      requiresSubscriptionVerification: false,
+      subscriptionState: "not_required",
+      subscriptionCheckedAt: "",
+      subscriptionMessage: "구독 검증이 필요하지 않습니다."
     },
     {
       providerId: "openai",
-      label: "ChatGPT / OpenAI",
+      label: "오픈AI",
       authMethod: "api_key",
       envVar: "OPENAI_API_KEY",
       defaultModel: "gpt-5.2",
@@ -2633,11 +2772,15 @@ const fallbackProviderCredentialReport: ProviderCredentialReport = {
       setupUrl: "https://platform.openai.com/api-keys",
       loginUrl: "https://platform.openai.com/api-keys",
       docsUrl: "https://platform.openai.com/docs/api-reference/authentication",
-      caution: "Open the OpenAI Platform API keys page, sign in with the target account, create a restricted project key, then save it here. Do not store ChatGPT web session cookies."
+      caution: "OpenAI 공식 API key 페이지에서 대상 계정으로 로그인 후 프로젝트 키를 발급받아 저장하세요. ChatGPT 웹 세션 쿠키는 저장하지 않습니다.",
+      requiresSubscriptionVerification: true,
+      subscriptionState: "not_configured",
+      subscriptionCheckedAt: "",
+      subscriptionMessage: "먼저 계정 키를 설정한 뒤 구독을 확인하세요."
     },
     {
       providerId: "anthropic",
-      label: "Claude / Anthropic",
+      label: "클로드",
       authMethod: "api_key",
       envVar: "ANTHROPIC_API_KEY",
       defaultModel: "claude-sonnet-4-6",
@@ -2652,11 +2795,15 @@ const fallbackProviderCredentialReport: ProviderCredentialReport = {
       setupUrl: "https://console.anthropic.com/settings/keys",
       loginUrl: "https://claude.ai/login",
       docsUrl: "https://platform.claude.com/docs/en/api/authentication/overview",
-      caution: "Use a Claude API key or provider-supported federation; consumer web OAuth tokens are not stored here."
+      caution: "Claude API key 또는 제공자가 지원하는 인증 연동을 사용하세요. 소비자 웹 OAuth 토큰은 저장되지 않습니다.",
+      requiresSubscriptionVerification: true,
+      subscriptionState: "not_configured",
+      subscriptionCheckedAt: "",
+      subscriptionMessage: "먼저 계정 키를 설정한 뒤 구독을 확인하세요."
     },
     {
       providerId: "google-gemini",
-      label: "Gemini / Google",
+      label: "제미니",
       authMethod: "api_key",
       envVar: "GEMINI_API_KEY",
       defaultModel: "gemini-3.5-flash",
@@ -2671,7 +2818,11 @@ const fallbackProviderCredentialReport: ProviderCredentialReport = {
       setupUrl: "https://aistudio.google.com/api-keys",
       loginUrl: "https://aistudio.google.com/api-keys",
       docsUrl: "https://ai.google.dev/gemini-api/docs/api-key",
-      caution: "Open Google AI Studio API keys, sign in with the target Google account, create a restricted Gemini key, then save it here. Vertex AI OAuth or ADC remains a separate production provider flow."
+      caution: "Google AI Studio API key 페이지에서 대상 Google 계정으로 로그인 후 제한된 Gemini 키를 발급받아 저장하세요. Vertex AI OAuth/ADC는 별도 운영 흐름입니다.",
+      requiresSubscriptionVerification: true,
+      subscriptionState: "not_configured",
+      subscriptionCheckedAt: "",
+      subscriptionMessage: "먼저 계정 키를 설정한 뒤 구독을 확인하세요."
     }
   ]
 };
@@ -2720,6 +2871,7 @@ type ModelRouteDecision = {
   model: string;
   tier: "small" | "balanced" | "premium";
   complexityScore: number;
+  estimatedTokens: number;
   maxInputTokens: number;
   maxOutputTokens: number;
   budgetUsd: number;
@@ -2845,7 +2997,7 @@ const defaultSearchAgentRunForm: SearchAgentRunForm = {
   objective: "사용자 요청을 조사해서 실행 가능한 계획과 검증 기준으로 정리하기",
   questions:
     "현재 요청을 처리하려면 어떤 외부 근거가 필요한가?\n기존 저장소 지식 중 무엇을 재사용해야 하는가?\n실행 전에 보류해야 할 사용자 결정은 무엇인가?",
-  searchChannels: "web search\nrepository search",
+  searchChannels: "웹 검색\n저장소 검색",
   captureTargets: "_history/web-searches/YYYY/\n_research/\n_history/plans/YYYY/",
   notes: "출처, 한계, 계획 영향을 분리하고 약한 근거는 실행 근거로 쓰지 않습니다.",
   providerId: "ollama",
@@ -4634,6 +4786,8 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     fallbackDesktopAdapters.find((adapter) => adapter.adapterId === runtimeInitDefaults.adapterId) ||
     fallbackDesktopAdapters[0];
   const selectedRuntimeAdapterGuide = adapterSetupGuides[selectedRuntimeAdapterOption.adapterId];
+  const selectedRuntimeAdapterGuideKoOrEn = (field: keyof AdapterSetupGuide) =>
+    localizedAdapterGuideText(selectedRuntimeAdapterGuide, uiLanguage, field);
   const selectedRuntimeAdapterAuthReady = adapterAuthReadyForAdapter(selectedRuntimeAdapterOption.adapterId, providerCredentials);
   const selectedRuntimeAdapterAuthStatus = providerAuthStatusForAdapter(
     selectedRuntimeAdapterOption.adapterId,
@@ -4644,30 +4798,32 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     {
       id: "install",
       label: uiLanguage === "ko" ? "1. 설치" : "1. Install",
-      detail: selectedRuntimeAdapterGuide.installHint,
+      detail: selectedRuntimeAdapterGuideKoOrEn("installHint"),
       ready: false,
-      command: selectedRuntimeAdapterGuide.installHint
+      command: selectedRuntimeAdapterGuideKoOrEn("installHint")
     },
     {
       id: "auth",
       label: uiLanguage === "ko" ? "2. 로그인/키" : "2. Login or key",
-      detail: selectedRuntimeAdapterAuthReady ? selectedRuntimeAdapterAuthStatus : selectedRuntimeAdapterGuide.authHint,
+      detail: selectedRuntimeAdapterAuthReady
+        ? selectedRuntimeAdapterAuthStatus
+        : selectedRuntimeAdapterGuideKoOrEn("authHint"),
       ready: selectedRuntimeAdapterAuthReady,
-      command: selectedRuntimeAdapterGuide.authHint
+      command: selectedRuntimeAdapterGuideKoOrEn("authHint")
     },
     {
       id: "verify",
       label: uiLanguage === "ko" ? "3. 검증" : "3. Verify",
-      detail: selectedRuntimeAdapterGuide.verifyCommand,
+      detail: selectedRuntimeAdapterGuideKoOrEn("verifyCommand"),
       ready: false,
-      command: selectedRuntimeAdapterGuide.verifyCommand
+      command: selectedRuntimeAdapterGuideKoOrEn("verifyCommand")
     },
     {
       id: "run",
       label: uiLanguage === "ko" ? "4. 첫 실행" : "4. First run",
-      detail: selectedRuntimeAdapterGuide.expectedResult,
+      detail: selectedRuntimeAdapterGuideKoOrEn("expectedResult"),
       ready: selectedRuntimeAdapterAuthReady,
-      command: selectedRuntimeAdapterGuide.firstRunCommand
+      command: selectedRuntimeAdapterGuideKoOrEn("firstRunCommand")
     }
   ];
   const copyRuntimeAdapterCommand = (label: string, command: string) => {
@@ -4704,7 +4860,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     if (!tauriInvoke) {
       const fallbackReport: ProviderModelCatalogReport = {
         providerId: provider.providerId,
-        providerLabel: provider.label,
+        providerLabel: providerDisplayName(provider.providerId, provider.label, uiLanguage),
         status: provider.authMethod === "local_http" ? "browser_preview_local_default" : "browser_preview_provider_default",
         source: "browser_fallback",
         defaultModel: effectiveProviderModelFor(provider),
@@ -4737,7 +4893,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           providerId: provider.providerId,
           action: "models",
           tone: "success",
-          message: uiLanguage === "ko" ? `${provider.label} 기본 모델을 확인했습니다.` : `${provider.label} default model checked.`
+            message: uiLanguage === "ko"
+              ? `${providerDisplayName(provider.providerId, provider.label, uiLanguage)} 기본 모델을 확인했습니다.`
+              : `${providerDisplayName(provider.providerId, provider.label, uiLanguage)} default model checked.`
         });
       }
       setProviderModelBusy(false);
@@ -4761,7 +4919,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           providerId: provider.providerId,
           action: "models",
           tone: "success",
-          message: uiLanguage === "ko" ? `${provider.label} 모델 목록을 확인했습니다.` : `${provider.label} model list checked.`
+          message: uiLanguage === "ko"
+            ? `${providerDisplayName(provider.providerId, provider.label, uiLanguage)} 모델 목록을 확인했습니다.`
+            : `${providerDisplayName(provider.providerId, provider.label, uiLanguage)} model list checked.`
         });
       }
       const suggestedModel = report.models[0]?.id || report.defaultModel || effectiveProviderModelFor(provider);
@@ -4775,7 +4935,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     } catch (modelError) {
       setProviderModelCatalog({
         providerId: provider.providerId,
-        providerLabel: provider.label,
+        providerLabel: providerDisplayName(provider.providerId, provider.label, uiLanguage),
         status: "model_catalog_error",
         source: "tauri_command",
         defaultModel: effectiveProviderModelFor(provider),
@@ -4862,7 +5022,10 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     const tauriInvoke = getTauriInvoke();
     const input = providerCredentialInputs[provider.providerId] || { accountHint: "", secret: "" };
     if (provider.authMethod === "local_http") {
-      const message = uiLanguage === "ko" ? `${provider.label}는 API 키 저장 없이 로컬 런타임으로 사용합니다.` : `${provider.label} uses the local runtime without saving an API key.`;
+      const providerName = providerDisplayName(provider.providerId, provider.label, uiLanguage);
+      const message = uiLanguage === "ko"
+        ? `${providerName}는 API 키 저장 없이 로컬 런타임으로 사용합니다.`
+        : `${providerName} uses the local runtime without saving an API key.`;
       setProviderCredentialNotice(message);
       setProviderActionFeedback({
         providerId: provider.providerId,
@@ -4884,7 +5047,8 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       return;
     }
     if (!input.secret.trim()) {
-      const message = uiLanguage === "ko" ? `${provider.label} API 키를 입력하세요.` : `Enter a ${provider.label} API key.`;
+      const providerName = providerDisplayName(provider.providerId, provider.label, uiLanguage);
+      const message = uiLanguage === "ko" ? `${providerName} API 키를 입력하세요.` : `Enter a ${providerName} API key.`;
       setProviderCredentialError(message);
       setProviderActionFeedback({
         providerId: provider.providerId,
@@ -4912,15 +5076,61 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           secret: ""
         }
       }));
+      const providerName = providerDisplayName(provider.providerId, provider.label, uiLanguage);
+      const savedMessage = uiLanguage === "ko"
+        ? `${providerName} 연결 정보를 저장했습니다.`
+        : `${providerName} credentials saved.`;
       setProviderCredentialError("");
-      const message = uiLanguage === "ko" ? `${provider.label} 연결 정보를 저장했습니다.` : `${provider.label} credentials saved.`;
-      setProviderCredentialNotice(message);
+      setProviderCredentialNotice(savedMessage);
       setProviderActionFeedback({
         providerId: provider.providerId,
         action: "save",
         tone: "success",
-        message
+        message: savedMessage
       });
+      if (!provider.requiresSubscriptionVerification) {
+        return;
+      }
+
+      try {
+        const verifiedReport = await tauriInvoke<ProviderCredentialReport>("verify_provider_subscription", {
+          providerId: provider.providerId
+        });
+        setProviderCredentials(verifiedReport);
+        setProviderCredentialInputs((current) => ({
+          ...providerInputsFromReport(verifiedReport, current),
+          [provider.providerId]: {
+            accountHint: input.accountHint,
+            secret: ""
+          }
+        }));
+        const updatedProvider = verifiedReport.providers.find((item) => item.providerId === provider.providerId);
+        const verified = updatedProvider?.subscriptionState === "verified";
+        const verifiedMessage = uiLanguage === "ko"
+          ? `${providerName} 구독 검증이 완료되어 바로 사용 가능합니다.`
+          : `${providerName} subscription is verified and ready to use.`;
+        const needVerifyMessage = uiLanguage === "ko"
+          ? `${providerName}은(는) 구독 검증이 필요합니다.`
+          : `${providerName} requires subscription verification.`;
+        setProviderCredentialError(verified ? "" : (updatedProvider?.subscriptionMessage || needVerifyMessage));
+        setProviderCredentialNotice(verified ? verifiedMessage : needVerifyMessage);
+        const actionMessage = verified ? verifiedMessage : needVerifyMessage;
+        setProviderActionFeedback({
+          providerId: provider.providerId,
+          action: "save",
+          tone: verified ? "success" : "error",
+          message: actionMessage
+        });
+      } catch (verifyError) {
+        const message = String(verifyError);
+        setProviderCredentialError(message);
+        setProviderActionFeedback({
+          providerId: provider.providerId,
+          action: "save",
+          tone: "error",
+          message
+        });
+      }
     } catch (credentialError) {
       const message = String(credentialError);
       setProviderCredentialError(message);
@@ -4937,7 +5147,10 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const clearProviderCredential = async (provider: ProviderCredentialSummary) => {
     const tauriInvoke = getTauriInvoke();
     if (provider.authMethod === "local_http") {
-      const message = uiLanguage === "ko" ? `${provider.label}는 삭제할 API 키가 없습니다.` : `${provider.label} has no API key to clear.`;
+      const providerName = providerDisplayName(provider.providerId, provider.label, uiLanguage);
+      const message = uiLanguage === "ko"
+        ? `${providerName}는 삭제할 API 키가 없습니다.`
+        : `${providerName} has no API key to clear.`;
       setProviderCredentialNotice(message);
       setProviderActionFeedback({
         providerId: provider.providerId,
@@ -4969,7 +5182,8 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         [provider.providerId]: { accountHint: "", secret: "" }
       }));
       setProviderCredentialError("");
-      const message = uiLanguage === "ko" ? `${provider.label} 연결을 삭제했습니다.` : `${provider.label} credentials cleared.`;
+      const providerName = providerDisplayName(provider.providerId, provider.label, uiLanguage);
+      const message = uiLanguage === "ko" ? `${providerName} 연결을 삭제했습니다.` : `${providerName} credentials cleared.`;
       setProviderCredentialNotice(message);
       setProviderActionFeedback({
         providerId: provider.providerId,
@@ -4992,6 +5206,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   };
   const openProviderAuthUrl = async (provider: ProviderCredentialSummary, purpose: "setup" | "login" | "docs") => {
     const tauriInvoke = getTauriInvoke();
+    const providerName = providerDisplayName(provider.providerId, provider.label, uiLanguage);
     const fallbackUrl = purpose === "login" ? provider.loginUrl : purpose === "docs" ? provider.docsUrl : provider.setupUrl;
     if (!tauriInvoke) {
       window.open(fallbackUrl, "_blank", "noopener,noreferrer");
@@ -4999,7 +5214,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         providerId: provider.providerId,
         action: purpose,
         tone: "info",
-        message: uiLanguage === "ko" ? `${provider.label} 링크를 브라우저에서 열었습니다.` : `${provider.label} link opened in the browser.`
+        message: uiLanguage === "ko"
+          ? `${providerName} 링크를 브라우저에서 열었습니다.`
+          : `${providerName} link opened in the browser.`
       });
       return;
     }
@@ -5014,7 +5231,10 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         providerId: provider.providerId,
         action: purpose,
         tone: "success",
-        message: uiLanguage === "ko" ? `${provider.label} 링크를 열었습니다.` : `${provider.label} link opened.`
+        message:
+          uiLanguage === "ko"
+            ? `${providerDisplayName(provider.providerId, provider.label, uiLanguage)} 링크를 열었습니다.`
+            : `${providerName} link opened.`
       });
     } catch (credentialError) {
       const message = String(credentialError);
@@ -5026,6 +5246,92 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         message
       });
       window.open(fallbackUrl, "_blank", "noopener,noreferrer");
+    } finally {
+      setProviderCredentialBusy("");
+    }
+  };
+  const verifyProviderSubscription = async (provider: ProviderCredentialSummary) => {
+    const tauriInvoke = getTauriInvoke();
+    const providerName = providerDisplayName(provider.providerId, provider.label, uiLanguage);
+    if (!provider.requiresSubscriptionVerification) {
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: "verifySubscription",
+        tone: "info",
+        message:
+        uiLanguage === "ko"
+          ? `${providerName}는 구독 검증이 필요하지 않습니다.`
+          : `${providerName} does not require subscription verification.`
+      });
+      return;
+    }
+    if (!provider.configured) {
+      const message =
+        uiLanguage === "ko"
+          ? `${providerName} 키를 먼저 설정한 뒤 구독을 확인하세요.`
+          : `Configure ${providerName} first, then verify subscription.`;
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: "verifySubscription",
+        tone: "error",
+        message
+      });
+      return;
+    }
+    if (!tauriInvoke) {
+      const message =
+        uiLanguage === "ko"
+          ? "브라우저 미리보기에서는 구독 검증을 실행할 수 없습니다."
+          : "Subscription verification is not available in preview mode.";
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: "verifySubscription",
+        tone: "error",
+        message
+      });
+      return;
+    }
+
+    setProviderCredentialBusy(`verify:${provider.providerId}`);
+    try {
+      const report = await tauriInvoke<ProviderCredentialReport>("verify_provider_subscription", {
+        providerId: provider.providerId
+      });
+      setProviderCredentials(report);
+      setProviderCredentialInputs((current) => providerInputsFromReport(report, current));
+
+      const updatedProvider = report.providers.find((item) => item.providerId === provider.providerId);
+      const verified = updatedProvider?.subscriptionState === "verified";
+      const message =
+        updatedProvider?.subscriptionMessage ||
+        (uiLanguage === "ko"
+          ? `${providerName} 구독 확인이 완료되었습니다.`
+          : `${providerName} subscription verification completed.`);
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: "verifySubscription",
+        tone: verified ? "success" : "error",
+        message
+      });
+      if (verified) {
+        setProviderCredentialNotice(
+          uiLanguage === "ko"
+            ? `${providerName} 구독을 확인했습니다. 직접 실행이 가능합니다.`
+            : `${providerName} subscription verified. Direct use is now available.`
+        );
+        setProviderCredentialError("");
+      } else {
+        setProviderCredentialError(message);
+      }
+    } catch (credentialError) {
+      const message = String(credentialError);
+      setProviderCredentialError(message);
+      setProviderActionFeedback({
+        providerId: provider.providerId,
+        action: "verifySubscription",
+        tone: "error",
+        message
+      });
     } finally {
       setProviderCredentialBusy("");
     }
@@ -5085,7 +5391,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           ? blueprint.defaultObjectiveKo
           : blueprint.defaultObjectiveEn,
       questions: ko ? blueprint.defaultQuestionsKo : blueprint.defaultQuestionsEn,
-      searchChannels: "web search\nrepository search\nAgentCore sample source\nAWS official docs",
+      searchChannels: uiLanguage === "ko"
+        ? "웹 검색\n저장소 검색\nAgentCore 샘플 소스\nAWS 공식 문서"
+        : "web search\nrepository search\nAgentCore sample source\nAWS official docs",
       captureTargets: "_history/web-searches/YYYY/\n_research/\nplatform-desktop-app/specs/\n_history/request-traces/YYYY/",
       notes: ko ? blueprint.defaultNotesKo : blueprint.defaultNotesEn
     }));
@@ -5115,7 +5423,16 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       providerCredentials.providers[0];
     const selectedProviderReady = Boolean(selectedProvider?.configured);
     const selectedProviderLocal = selectedProvider?.authMethod === "local_http";
-    const routeDecision = resolveModelRouteDecision(searchAgentRunForm, selectedProvider);
+    const selectedProviderRequiresSubscription = Boolean(selectedProvider?.requiresSubscriptionVerification);
+    const selectedProviderSubscriptionVerified = selectedProvider?.subscriptionState === "verified";
+    const selectedProviderName = providerDisplayName(
+      selectedProvider?.providerId || "",
+      selectedProvider?.label || (uiLanguage === "ko" ? "선택된 제공자" : "Selected provider"),
+      uiLanguage
+    );
+    const selectedProviderSubscriptionBlocked =
+      selectedProviderRequiresSubscription && !selectedProviderSubscriptionVerified;
+    const routeDecision = resolveModelRouteDecision(searchAgentRunForm, selectedProvider, uiLanguage);
     const prompt = renderSearchAgentPrompt(searchAgentRunForm, uiLanguage, selectedProvider);
     const selectedProviderModel = routeDecision.model;
     setSearchAgentChatMessages((current) =>
@@ -5136,17 +5453,19 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             uiLanguage === "ko"
               ? selectedProviderReady
                 ? selectedProviderLocal
-	                  ? `${selectedProvider.label} 로컬 모델로 research-insight-planner-agent 작업을 직접 실행합니다. 결과는 채팅과 작업 실행 저장소에 남깁니다.`
-	                  : `${selectedProvider.label} 계정으로 research-insight-planner-agent 작업을 직접 실행합니다. 결과는 채팅과 작업 실행 저장소에 남깁니다.`
+	                  ? `${selectedProviderName} 로컬 모델로 research-insight-planner-agent 작업을 직접 실행합니다. 결과는 채팅과 작업 실행 저장소에 남깁니다.`
+	                  : `${selectedProviderName} 계정으로 research-insight-planner-agent 작업을 직접 실행합니다. 결과는 채팅과 작업 실행 저장소에 남깁니다.`
 	                : "연결된 제공자 계정이 없어 CLI 실행 경로로 전환합니다. 계정을 연결하면 같은 버튼이 모델 API 작업을 바로 실행합니다."
               : selectedProviderReady
                 ? selectedProviderLocal
-                  ? `Running the research-insight-planner-agent directly with the local ${selectedProvider.label} model. The result is stored in chat and the task-run store.`
-                  : `Running the research-insight-planner-agent directly with ${selectedProvider.label}. The result is stored in chat and the task-run store.`
-                : "No connected provider account is ready, so this falls back to the CLI lane. Connect an account to run the model API directly.",
+                  ? `Running the research-insight-planner-agent directly with the local ${selectedProviderName} model. The result is stored in chat and the task-run store.`
+                  : `Running the research-insight-planner-agent directly with ${selectedProviderName}. The result is stored in chat and the task-run store.`
+                : `${selectedProviderName} has no connected account yet, so this falls back to the CLI lane. Connect an account to run the model API directly.`,
           meta: selectedProviderReady
             ? `${selectedProvider.providerId}:${selectedProviderModel} / ${routeDecision.tier} / ${routeDecision.connectorPolicyId}`
-            : `fallback=cli_lane / ${routeDecision.tier} / ${routeDecision.connectorPolicyId}`
+            : uiLanguage === "ko"
+              ? `cli 대체 실행 / lane=${routeDecision.tier} / connector=${routeDecision.connectorPolicyId}`
+              : `fallback=cli_lane / ${routeDecision.tier} / ${routeDecision.connectorPolicyId}`
         }
       ].slice(-12)
     );
@@ -5172,66 +5491,85 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     }
 
     if (selectedProviderReady) {
-      setProviderTaskBusy(true);
-      try {
-        const report = await tauriInvoke<ProviderAgentTaskReport>("run_provider_agent_task", {
-          providerId: selectedProvider.providerId,
-          model: selectedProviderModel,
-          taskKind: "research_insight_agent",
-          prompt,
-          systemPrompt: renderSearchAgentSystemPrompt(uiLanguage),
-          modelRouteId: routeDecision.routeId,
-          constraintProfileId: searchAgentRunForm.constraintProfileId,
-          connectorPolicyId: routeDecision.connectorPolicyId,
-          maxInputTokens: routeDecision.maxInputTokens,
-          maxOutputTokens: routeDecision.maxOutputTokens,
-          budgetUsd: routeDecision.budgetUsd
-        });
+      if (selectedProviderSubscriptionBlocked) {
         setSearchAgentChatMessages((current) =>
           [
             ...current,
             {
-              id: `${requestId}-provider-result`,
-              role: "agent" as const,
-              title: uiLanguage === "ko" ? "제공자 작업 결과" : "Provider Work Result",
-              body:
-                report.status === "completed"
-                  ? report.output || (uiLanguage === "ko" ? "제공자가 빈 응답을 반환했습니다." : "The provider returned an empty response.")
-                  : report.stderr || (uiLanguage === "ko" ? "제공자 API 실행이 실패했습니다." : "The provider API run failed."),
-              meta: `${report.providerLabel} / ${report.model} / ${report.status} / ${report.taskRunId}`
-            },
-            {
-              id: `${requestId}-provider-record`,
+              id: `${requestId}-subscription-blocked`,
               role: "system" as const,
-              title: uiLanguage === "ko" ? "실행 기록 저장" : "Run Record Stored",
+              title: uiLanguage === "ko" ? "구독 검증 필요" : "Subscription verification required",
               body:
                 uiLanguage === "ko"
-	                  ? `작업 실행 기록이 저장됐습니다: ${report.taskRecordPath || "저장 경로 대기"}`
-                  : `Task-run record stored: ${report.taskRecordPath || "path pending"}`,
-              meta: report.persistenceError || `http=${report.httpStatus ?? "n/a"} elapsed=${report.durationMs}ms tokens<=${report.maxOutputTokens ?? routeDecision.maxOutputTokens}`
+                  ? `${selectedProviderName}는 구독 검증이 필요합니다. 먼저 제공자 설정에서 구독 확인을 실행하세요.`
+                  : `${selectedProviderName} requires subscription verification. Run verification in provider settings first.`,
+              meta: "subscription_blocked"
             }
           ].slice(-12)
         );
         return;
-      } catch (caught) {
-        const message = errorMessage(caught);
-        setSearchAgentChatMessages((current) =>
-          [
-            ...current,
-            {
-              id: `${requestId}-provider-failed`,
-              role: "system" as const,
-              title: uiLanguage === "ko" ? "제공자 직접 실행 실패" : "Direct Provider Run Failed",
-              body:
-                uiLanguage === "ko"
-	                  ? `${message} CLI 실행 경로로 이어서 시도합니다.`
-                  : `${message} Falling back to the CLI lane.`,
-              meta: "provider_api_fallback"
-            }
-          ].slice(-12)
-        );
-      } finally {
-        setProviderTaskBusy(false);
+      } else {
+        setProviderTaskBusy(true);
+        try {
+          const report = await tauriInvoke<ProviderAgentTaskReport>("run_provider_agent_task", {
+            providerId: selectedProvider.providerId,
+            model: selectedProviderModel,
+            taskKind: "research_insight_agent",
+            prompt,
+            systemPrompt: renderSearchAgentSystemPrompt(uiLanguage),
+            modelRouteId: routeDecision.routeId,
+            constraintProfileId: searchAgentRunForm.constraintProfileId,
+            connectorPolicyId: routeDecision.connectorPolicyId,
+            maxInputTokens: routeDecision.maxInputTokens,
+            maxOutputTokens: routeDecision.maxOutputTokens,
+            budgetUsd: routeDecision.budgetUsd
+          });
+          setSearchAgentChatMessages((current) =>
+            [
+              ...current,
+              {
+                id: `${requestId}-provider-result`,
+                role: "agent" as const,
+                title: uiLanguage === "ko" ? "제공자 작업 결과" : "Provider Work Result",
+                body:
+                  report.status === "completed"
+                    ? report.output || (uiLanguage === "ko" ? "제공자가 빈 응답을 반환했습니다." : "The provider returned an empty response.")
+                    : report.stderr || (uiLanguage === "ko" ? "제공자 API 실행이 실패했습니다." : "The provider API run failed."),
+                meta: `${report.providerLabel} / ${report.model} / ${report.status} / ${report.taskRunId}`
+              },
+              {
+                id: `${requestId}-provider-record`,
+                role: "system" as const,
+                title: uiLanguage === "ko" ? "실행 기록 저장" : "Run Record Stored",
+                body:
+                  uiLanguage === "ko"
+                    ? `작업 실행 기록이 저장됐습니다: ${report.taskRecordPath || "저장 경로 대기"}`
+                    : `Task-run record stored: ${report.taskRecordPath || "path pending"}`,
+                meta: report.persistenceError || `http=${report.httpStatus ?? "n/a"} elapsed=${report.durationMs}ms tokens<=${report.maxOutputTokens ?? routeDecision.maxOutputTokens}`
+              }
+            ].slice(-12)
+          );
+          return;
+        } catch (caught) {
+          const message = errorMessage(caught);
+          setSearchAgentChatMessages((current) =>
+            [
+              ...current,
+              {
+                id: `${requestId}-provider-failed`,
+                role: "system" as const,
+                title: uiLanguage === "ko" ? "제공자 직접 실행 실패" : "Direct Provider Run Failed",
+                body:
+                  uiLanguage === "ko"
+                    ? `${message} CLI 실행 경로로 이어서 시도합니다.`
+                    : `${message} Falling back to the CLI lane.`,
+                meta: "provider_api_fallback"
+              }
+            ].slice(-12)
+          );
+        } finally {
+          setProviderTaskBusy(false);
+        }
       }
     }
 
@@ -6800,24 +7138,26 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                         onRefresh={refreshProviderCredentials}
                         onRefreshModels={(providerId) => refreshProviderModels(providerId, true)}
                         onSave={saveProviderCredential}
+                        onVerifySubscription={verifyProviderSubscription}
                         onUseProvider={(provider, modelId) => {
                           setSearchAgentRunForm((current) => ({
                             ...current,
                             providerId: provider.providerId,
                             model: modelId || effectiveProviderModelFor(provider)
                           }));
+                          const providerName = providerDisplayName(provider.providerId, provider.label, uiLanguage);
                           setProviderCredentialNotice(
                             uiLanguage === "ko"
-                              ? `${provider.label}를 에이전트 작업 기본값으로 선택했습니다.`
-                              : `${provider.label} selected as the agent work default.`
+                              ? `${providerName}를 에이전트 작업 기본값으로 선택했습니다.`
+                              : `${providerName} selected as the agent work default.`
                           );
                           setProviderActionFeedback({
                             providerId: provider.providerId,
                             action: "use",
                             tone: "success",
                             message: uiLanguage === "ko"
-                              ? `${provider.label}를 에이전트 작업 기본값으로 선택했습니다.`
-                              : `${provider.label} selected as the agent work default.`
+                              ? `${providerName}를 에이전트 작업 기본값으로 선택했습니다.`
+                              : `${providerName} selected as the agent work default.`
                           });
                         }}
                       />
@@ -6856,17 +7196,19 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                         {fallbackDesktopAdapters.map((adapter) => {
                           const setupGuide = adapterSetupGuides[adapter.adapterId];
                           const authReady = adapterAuthReadyForAdapter(adapter.adapterId, providerCredentials);
+                          const guideInstall = localizedAdapterGuideText(setupGuide, uiLanguage, "installHint");
+                          const guideAuth = localizedAdapterGuideText(setupGuide, uiLanguage, "authHint");
                           return (
                             <button
                               key={adapter.adapterId}
                               className={runtimeInitDefaults.adapterId === adapter.adapterId ? "active" : ""}
                               onClick={() => setRuntimeInitDefaults((current) => ({ ...current, adapterId: adapter.adapterId }))}
                               type="button"
-                              title={setupGuide?.installHint || adapter.command}
+                              title={guideInstall || adapter.command}
                             >
                               <span>{adapter.label}</span>
                               <strong>{providerAuthStatusForAdapter(adapter.adapterId, providerCredentials, uiLanguage)}</strong>
-                              <small>{authReady ? setupGuide?.firstRunCommand : setupGuide?.authHint}</small>
+                              <small>{authReady ? localizedAdapterGuideText(setupGuide, uiLanguage, "firstRunCommand") : guideAuth}</small>
                             </button>
                           );
                         })}
@@ -6902,8 +7244,8 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                       </div>
                       <div className="cli-adapter-setup-outcome">
                         <span>{uiLanguage === "ko" ? "첫 실행 결과" : "First-run result"}</span>
-                        <strong>{selectedRuntimeAdapterGuide.expectedResult}</strong>
-                        <small>{selectedRuntimeAdapterGuide.caution}</small>
+                        <strong>{selectedRuntimeAdapterGuideKoOrEn("expectedResult")}</strong>
+                        <small>{selectedRuntimeAdapterGuideKoOrEn("caution")}</small>
                       </div>
                     </section>
                     )}
@@ -7672,7 +8014,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                 </div>
                 <Activity size={18} aria-hidden="true" />
               </div>
-              <OpsEventRail events={visibleUnifiedEvents.slice(0, 24)} />
+              <OpsEventRail events={visibleUnifiedEvents.slice(0, 24)} uiLanguage={uiLanguage} />
             </section>
 
             <section className="panel wide">
@@ -8194,7 +8536,7 @@ function SearchAgentWorkChatPanel({
   const selectedProviderConnected = Boolean(selectedProvider?.configured);
   const selectedProviderLocal = selectedProvider?.authMethod === "local_http";
   const selectedProviderModel = form.model.trim() || selectedProvider?.defaultModel || "";
-  const routeDecision = useMemo(() => resolveModelRouteDecision(form, selectedProvider), [form, selectedProvider]);
+  const routeDecision = useMemo(() => resolveModelRouteDecision(form, selectedProvider, language), [form, selectedProvider, language]);
   const routeChoiceOptions = useMemo(
     () =>
       modelRouteOptions.map((option) => ({
@@ -8244,6 +8586,13 @@ function SearchAgentWorkChatPanel({
   const selectedProviderRuntimeSource = selectedProviderLocal
     ? "127.0.0.1:11434"
     : selectedProvider?.envVar || "provider env";
+  const selectedProviderRuntimeSourceLabel = selectedProviderLocal
+    ? selectedProviderRuntimeSource
+    : selectedProviderRuntimeSource === "provider env"
+      ? ko
+        ? "제공자 환경변수"
+        : "provider env"
+      : selectedProviderRuntimeSource;
   const modelChoiceOptions = useMemo(() => {
     const choices: Array<{ id: string; label: string; detail: string; value: string; badge?: string }> = [];
     const seen = new Set<string>();
@@ -8401,7 +8750,7 @@ function SearchAgentWorkChatPanel({
               <span>{routeDecision.constraintLabel}</span>
               <span>{routeDecision.connectorLabel}</span>
               <span>{ko ? `복잡도 ${routeDecision.complexityScore}/10` : `complexity ${routeDecision.complexityScore}/10`}</span>
-              <span>{ko ? `출력 ${routeDecision.maxOutputTokens.toLocaleString("ko-KR")} tok` : `${routeDecision.maxOutputTokens.toLocaleString("en-US")} output tok`}</span>
+              <span>{ko ? `출력 ${routeDecision.maxOutputTokens.toLocaleString("ko-KR")} 토큰` : `${routeDecision.maxOutputTokens.toLocaleString("en-US")} output tokens`}</span>
               <span>{`$${routeDecision.budgetUsd.toFixed(2)}`}</span>
             </div>
             <div className="agent-chat-composer-footer">
@@ -8417,8 +8766,8 @@ function SearchAgentWorkChatPanel({
                         role="option"
                         aria-selected={form.providerId === provider.providerId}
                         onClick={() => onChange("providerId", provider.providerId)}
-                      >
-                        <span>{provider.label}</span>
+	                      >
+	                        <span>{providerDisplayName(provider.providerId, provider.label, ko ? "ko" : "en")}</span>
                         <small>
                           {provider.authMethod === "local_http"
                             ? ko
@@ -8480,7 +8829,7 @@ function SearchAgentWorkChatPanel({
                 </label>
                 <div className={`agent-provider-run-state ${selectedProviderConnected || selectedProviderLocal ? "connected" : "missing"}`}>
                   <strong>{selectedProviderRuntimeLabel}</strong>
-                  <span>{selectedProviderRuntimeSource}</span>
+                  <span>{selectedProviderRuntimeSourceLabel}</span>
                 </div>
               </div>
               <div className="agent-chat-actions">
@@ -8544,10 +8893,16 @@ function SearchAgentWorkChatPanel({
                 <div className="agent-chat-contract-grid" aria-label={ko ? "실행 계약" : "Run contract"}>
                   <div className="agent-chat-contract-card">
                     <span>{ko ? "실행 계정" : "Run Account"}</span>
-                    <strong>{selectedProvider?.label || (ko ? "계정 없음" : "No account")}</strong>
+                    <strong>
+                      {selectedProvider
+                        ? providerDisplayName(selectedProvider.providerId, selectedProvider.label, ko ? "ko" : "en")
+                        : ko
+                          ? "계정 없음"
+                          : "No account"}
+                    </strong>
                     <small>
                       {selectedProviderConnected
-                        ? `${selectedProvider?.credentialSource || "credential"} / ${selectedProviderModel}`
+                        ? `${ko ? "비밀 키 저장소" : "credential"} / ${selectedProviderModel}`
                         : ko
                           ? "설정 > 초기화 > 계정 연결에서 키를 저장하면 바로 실행됩니다."
                           : "Save a key in Settings > Init > Account Connections to run directly."}
@@ -8556,7 +8911,11 @@ function SearchAgentWorkChatPanel({
                   <div className="agent-chat-contract-card">
                     <span>{ko ? "모델 라우팅" : "Model Route"}</span>
                     <strong>{`${routeDecision.routeLabel} / ${routeDecision.model}`}</strong>
-                    <small>{`${routeDecision.connectorLabel} / ${routeDecision.maxOutputTokens} output tokens / $${routeDecision.budgetUsd.toFixed(2)}`}</small>
+                    <small>
+                      {ko
+                        ? `${routeDecision.connectorLabel} / 출력 ${routeDecision.maxOutputTokens} 토큰 / $${routeDecision.budgetUsd.toFixed(2)}`
+                        : `${routeDecision.connectorLabel} / ${routeDecision.maxOutputTokens} output tokens / $${routeDecision.budgetUsd.toFixed(2)}`}
+                    </small>
                   </div>
                   <div className="agent-chat-contract-card">
                     <span>{ko ? "사용 에이전트" : "Agent"}</span>
@@ -9116,7 +9475,8 @@ function UnifiedOpsPanel({
   signalTypes,
   events,
   onOpenHistory,
-  onOpenAgents
+  onOpenAgents,
+  uiLanguage = "ko"
 }: {
   summary: UnifiedOps["summary"];
   lanes: Array<{ key: string; count: number }>;
@@ -9124,6 +9484,7 @@ function UnifiedOpsPanel({
   events: UnifiedOps["events"];
   onOpenHistory: () => void;
   onOpenAgents: () => void;
+  uiLanguage?: UiLanguage;
 }) {
   return (
     <section className="panel wide unified-ops-panel">
@@ -9196,13 +9557,13 @@ function UnifiedOpsPanel({
             )}
           </div>
         </div>
-        <OpsEventRail events={events} />
+        <OpsEventRail events={events} uiLanguage={uiLanguage} />
       </div>
     </section>
   );
 }
 
-function OpsEventRail({ events }: { events: UnifiedOps["events"] }) {
+function OpsEventRail({ events, uiLanguage }: { events: UnifiedOps["events"]; uiLanguage: UiLanguage }) {
   if (events.length === 0) {
     return <p className="empty-state">통합 운영 이벤트가 아직 없습니다.</p>;
   }
@@ -9214,13 +9575,19 @@ function OpsEventRail({ events }: { events: UnifiedOps["events"] }) {
           <div>
             <span>{event.sourceType} / {event.signalType}</span>
             <strong>{event.title}</strong>
-            <p>{event.detail || event.path || "No detail"}</p>
+            <p>{event.detail || event.path || (uiLanguage === "ko" ? "세부 정보 없음" : "No detail")}</p>
             {event.path && <small>{event.path}</small>}
           </div>
           <aside>
             <strong>{event.status}</strong>
             <span>{event.lane}</span>
-            <small>{event.timestamp ? formatDate(event.timestamp) : event.date ? formatDay(event.date) : "no time"}</small>
+            <small>
+              {event.timestamp
+                ? formatDate(event.timestamp)
+                : event.date
+                  ? formatDay(event.date)
+                  : uiLanguage === "ko" ? "시간 없음" : "no time"}
+            </small>
           </aside>
         </article>
       ))}
@@ -9250,7 +9617,8 @@ function ProviderAccountsPanel({
   onRefresh,
   onRefreshModels,
   onSave,
-  onUseProvider
+  onUseProvider,
+  onVerifySubscription
 }: {
   uiLanguage: UiLanguage;
   report: ProviderCredentialReport;
@@ -9274,6 +9642,7 @@ function ProviderAccountsPanel({
   onRefreshModels: (providerId: string) => void | Promise<void>;
   onSave: (provider: ProviderCredentialSummary) => void | Promise<void>;
   onUseProvider: (provider: ProviderCredentialSummary, modelId?: string) => void | Promise<void>;
+  onVerifySubscription: (provider: ProviderCredentialSummary) => void | Promise<void>;
 }) {
   const [providerFilter, setProviderFilter] = useState<"all" | "needed" | "connected" | "local">("all");
   const copy = uiLanguage === "ko"
@@ -9319,12 +9688,19 @@ function ProviderAccountsPanel({
         clearing: "삭제 중",
         refreshModels: "모델 확인",
         refreshingModels: "모델 확인 중",
+        verifySubscription: "구독 검증",
+        verifyingSubscription: "구독 검증 중",
+        verifySubscriptionHint: "API 키의 구독 사용 및 할당량 사용 가능 여부를 확인합니다.",
+        subscriptionVerified: "구독 확인됨",
+        subscriptionRequired: "구독 확인 필요",
+        subscriptionNotRequired: "구독 불필요",
+        subscriptionInProgress: "구독 검증 대기",
         useForWork: "작업 기본값",
         usingForWork: "사용 중",
         accountHint: "계정 메모",
         accountPlaceholder: "예: 개인 OpenAI 프로젝트, 회사 Claude Console",
-        apiKey: "API key",
-        apiKeyPlaceholder: "provider API key 붙여넣기",
+        apiKey: "API 키",
+        apiKeyPlaceholder: "공급자 API 키 붙여넣기",
         localRuntime: "로컬 런타임",
         localRuntimeSummary: "API key 없이 내 컴퓨터에서 실행 중인 모델 서버를 사용합니다.",
         localEndpoint: "로컬 주소",
@@ -9341,12 +9717,23 @@ function ProviderAccountsPanel({
         modelCatalog: "모델",
         modelFallback: "기본 모델만 표시",
         noProviders: "해당 조건의 제공자가 없습니다.",
+        storageWarningKo: "키 원문은 로컬 앱 설정 파일에만 저장되고 보고서/지원 번들에는 마스킹되어 노출되지 않습니다.",
+        providerStatusReady: "provider_credentials_ready",
+        providerStatusRequired: "provider_credentials_required",
+        providerStatusReadyLabel: "사용 가능",
+        providerStatusRequiredLabel: "설정 필요",
+        sourceLabelAppConfig: "app_config_file",
+        sourceLabelDefault: "default_empty",
+        sourceDisplayAppConfig: "앱 설정 파일",
+        sourceDisplayDefault: "기본 상태",
         errorBadge: "오류",
         doneBadge: "완료",
         infoBadge: "상태",
-        source: "source",
-        key: "key",
-        notSaved: "저장 안 됨"
+        source: "출처",
+        key: "비밀 키",
+        notSaved: "저장 안 됨",
+        statusUnknown: "상태 미확인",
+        sourceUnknown: "출처 미확인"
       }
     : {
         title: "Provider Accounts",
@@ -9390,6 +9777,13 @@ function ProviderAccountsPanel({
         clearing: "Clearing",
         refreshModels: "Check models",
         refreshingModels: "Checking models",
+        verifySubscription: "Verify subscription",
+        verifyingSubscription: "Verifying",
+        verifySubscriptionHint: "Check whether the account can use paid AI features and quotas.",
+        subscriptionVerified: "Subscription verified",
+        subscriptionRequired: "Subscription required",
+        subscriptionNotRequired: "No subscription needed",
+        subscriptionInProgress: "Subscription check pending",
         useForWork: "Use for work",
         usingForWork: "In use",
         accountHint: "Account note",
@@ -9412,16 +9806,43 @@ function ProviderAccountsPanel({
         modelCatalog: "Models",
         modelFallback: "Default model only",
         noProviders: "No providers match this filter.",
+        storageWarningKo: "API keys are kept only in the local app config; reports and support bundles only get redacted previews.",
+        providerStatusReady: "provider_credentials_ready",
+        providerStatusRequired: "provider_credentials_required",
+        providerStatusReadyLabel: "ready",
+        providerStatusRequiredLabel: "required",
+        sourceLabelAppConfig: "app_config_file",
+        sourceLabelDefault: "default_empty",
+        sourceDisplayAppConfig: "app config",
+        sourceDisplayDefault: "default",
         errorBadge: "Error",
         doneBadge: "Done",
         infoBadge: "Info",
         source: "source",
         key: "key",
-        notSaved: "Not saved"
+        notSaved: "Not saved",
+        statusUnknown: "Unknown status",
+        sourceUnknown: "Unknown source"
       };
   const connectedCount = report.providers.filter((provider) => provider.configured).length;
   const cloudCount = report.providers.filter((provider) => provider.authMethod !== "local_http").length;
   const localCount = report.providers.filter((provider) => provider.authMethod === "local_http").length;
+
+  const providerStatusLabel = report.status === copy.providerStatusReady
+    ? copy.providerStatusReadyLabel
+    : report.status === copy.providerStatusRequired
+      ? copy.providerStatusRequiredLabel
+      : copy.statusUnknown;
+
+  const providerSourceLabel = report.source === copy.sourceLabelAppConfig
+    ? copy.sourceDisplayAppConfig
+    : report.source === copy.sourceLabelDefault
+      ? copy.sourceDisplayDefault
+      : copy.sourceUnknown;
+
+  const storageWarningLabel = uiLanguage === "ko"
+    ? copy.storageWarningKo
+    : report.storageWarning;
   const visibleProviders = report.providers.filter((provider) => {
     if (providerFilter === "needed") {
       return !provider.configured;
@@ -9447,7 +9868,7 @@ function ProviderAccountsPanel({
     { icon: Bot, label: copy.verifyModel, detail: copy.verifyModelDetail }
   ];
   const quickLoginProviders = report.providers.filter((provider) =>
-    provider.providerId === "openai" || provider.providerId === "google-gemini"
+    provider.authMethod !== "local_http"
   );
   const feedbackFor = (providerId: string, action: ProviderActionKind) =>
     actionFeedback?.providerId === providerId && actionFeedback.action === action ? actionFeedback : null;
@@ -9506,25 +9927,26 @@ function ProviderAccountsPanel({
           <strong>{copy.fastLaneDetail}</strong>
         </div>
         {quickLoginProviders.map((provider) => {
+          const canUseQuickLogin = !provider.requiresSubscriptionVerification || provider.subscriptionState === "verified";
           const loginFeedback = feedbackFor(provider.providerId, "login");
           const useFeedback = feedbackFor(provider.providerId, "use");
           const selectedForWork = selectedProviderId === provider.providerId;
           return (
             <article key={provider.providerId} data-provider-login-card={provider.providerId} className={provider.configured ? "connected" : "missing"}>
-              <header>
-                <KeyRound size={15} aria-hidden="true" />
-                <div>
-                  <strong>{provider.providerId === "openai" ? "GPT / OpenAI" : provider.label}</strong>
-                  <small>{provider.configured ? copy.configuredNow : copy.notConfiguredYet} · {provider.envVar}</small>
-                </div>
-              </header>
+                <header>
+                  <KeyRound size={15} aria-hidden="true" />
+                  <div>
+                    <strong>{providerDisplayName(provider.providerId, provider.label, uiLanguage)}</strong>
+                    <small>{provider.configured ? copy.configuredNow : copy.notConfiguredYet} · {provider.envVar}</small>
+                  </div>
+                </header>
               <div className="provider-login-card-actions">
                 <button
                   type="button"
                   className={feedbackClass(loginFeedback)}
                   onClick={() => onOpenUrl(provider, "login")}
                   title={loginFeedback?.message || copy.loginSetupDetail}
-                  aria-label={ariaForAction(`${provider.label} ${copy.loginSetup}`, loginFeedback)}
+                  aria-label={ariaForAction(`${providerDisplayName(provider.providerId, provider.label, uiLanguage)} ${copy.loginSetup}`, loginFeedback)}
                 >
                   <ExternalLink size={15} aria-hidden="true" />
                   <span>{copy.loginSetup}</span>
@@ -9534,8 +9956,16 @@ function ProviderAccountsPanel({
                   type="button"
                   className={`${selectedForWork ? "active" : ""} ${feedbackClass(useFeedback)}`.trim()}
                   onClick={() => onUseProvider(provider, effectiveDefaultModelForProvider(provider))}
-                  disabled={!provider.configured}
-                  title={useFeedback?.message || undefined}
+                  disabled={!provider.configured || !canUseQuickLogin}
+                  title={
+                    useFeedback?.message || (
+                      canUseQuickLogin
+                        ? undefined
+                        : uiLanguage === "ko"
+                          ? `${providerDisplayName(provider.providerId, provider.label, uiLanguage)}는 구독 검증 후 사용할 수 있습니다.`
+                          : `${providerDisplayName(provider.providerId, provider.label, uiLanguage)} is available after subscription verification.`
+                    )
+                  }
                   aria-label={ariaForAction(selectedForWork ? copy.usingForWork : copy.useForWork, useFeedback)}
                 >
                   <Bot size={15} aria-hidden="true" />
@@ -9551,7 +9981,7 @@ function ProviderAccountsPanel({
       <div className="provider-account-summary">
         <article>
           <span>{copy.status}</span>
-          <strong>{report.status}</strong>
+          <strong>{providerStatusLabel}</strong>
         </article>
         <article>
           <span>{copy.cloudAccounts}</span>
@@ -9563,7 +9993,7 @@ function ProviderAccountsPanel({
         </article>
         <article>
           <span>{copy.source}</span>
-          <strong>{report.source}</strong>
+          <strong>{providerSourceLabel}</strong>
         </article>
         <article>
           <span>{copy.storage}</span>
@@ -9610,6 +10040,10 @@ function ProviderAccountsPanel({
       <div className="provider-account-list">
         {visibleProviders.length === 0 && <p className="empty-state">{copy.noProviders}</p>}
         {visibleProviders.map((provider) => {
+          const requiresVerification = provider.requiresSubscriptionVerification;
+          const verifiedState = provider.subscriptionState === "verified";
+          const subscriptionStateMessage = provider.subscriptionMessage || copy.subscriptionInProgress;
+          const canUseForWork = provider.configured && (!requiresVerification || verifiedState);
           const input = inputs[provider.providerId] || { accountHint: provider.accountHint || "", secret: "" };
           const saving = busy === `save:${provider.providerId}`;
           const clearing = busy === `clear:${provider.providerId}`;
@@ -9626,6 +10060,7 @@ function ProviderAccountsPanel({
           const saveFeedback = feedbackFor(provider.providerId, "save");
           const clearFeedback = feedbackFor(provider.providerId, "clear");
           const useFeedback = feedbackFor(provider.providerId, "use");
+          const subscriptionFeedback = feedbackFor(provider.providerId, "verifySubscription");
           const modelErrorForProvider = catalogForProvider?.error || (catalogForProvider && providerModelError ? providerModelError : "");
           const modelFeedback = feedbackFor(provider.providerId, "models") || (modelErrorForProvider
             ? {
@@ -9642,19 +10077,36 @@ function ProviderAccountsPanel({
               : provider.environmentAvailable
                 ? copy.envDetected
                 : copy.keyMissing;
-          return (
-            <article key={provider.providerId} data-provider-account-row={provider.providerId} className={`provider-account-row ${provider.configured ? "connected" : "missing"}`}>
-              <header>
-                <div>
-                  <span>{provider.providerId}</span>
-                  <strong>{provider.label}</strong>
-                </div>
+          const subscriptionPillClass = requiresVerification
+            ? verifiedState
+              ? "ready"
+              : provider.subscriptionState === "error"
+                ? "error"
+                : "warning"
+            : "ready";
+          const subscriptionPillLabel = requiresVerification
+            ? verifiedState
+              ? copy.subscriptionVerified
+              : provider.subscriptionState === "not_configured"
+                ? copy.subscriptionRequired
+                : provider.subscriptionState === "error"
+                  ? copy.subscriptionRequired
+                  : copy.subscriptionInProgress
+            : copy.subscriptionNotRequired;
+            return (
+              <article key={provider.providerId} data-provider-account-row={provider.providerId} className={`provider-account-row ${provider.configured ? "connected" : "missing"}`}>
+                <header>
+                  <div>
+                    <span>{provider.providerId}</span>
+                    <strong>{providerDisplayName(provider.providerId, provider.label, uiLanguage)}</strong>
+                  </div>
                 <em>{provider.configured ? copy.connected : copy.needed}</em>
               </header>
               <div className="provider-status-pills">
                 <span className={provider.configured ? "ready" : ""}>{connectionSource}</span>
                 <span className={selectedForWork ? "ready" : ""}>{selectedForWork ? copy.usingForWork : copy.useForWork}</span>
                 <span>{localRuntime ? copy.localRuntime : provider.envVar}</span>
+                <span className={subscriptionPillClass}>{subscriptionPillLabel}</span>
               </div>
               <dl>
                 <div>
@@ -9676,6 +10128,10 @@ function ProviderAccountsPanel({
                 <div>
                   <dt>{copy.key}</dt>
                   <dd>{localRuntime ? copy.localNoKey : provider.secretPreview || copy.notSaved}</dd>
+                </div>
+                <div>
+                  <dt>{requiresVerification ? copy.verifySubscription : copy.subscriptionNotRequired}</dt>
+                  <dd>{subscriptionStateMessage}</dd>
                 </div>
               </dl>
               {localRuntime ? (
@@ -9769,6 +10225,7 @@ function ProviderAccountsPanel({
                   type="button"
                   className={`${selectedForWork ? "active" : ""} ${feedbackClass(useFeedback)}`.trim()}
                   onClick={() => onUseProvider(provider, preferredModel)}
+                  disabled={!canUseForWork}
                   title={useFeedback?.message || undefined}
                   aria-label={ariaForAction(selectedForWork ? copy.usingForWork : copy.useForWork, useFeedback)}
                 >
@@ -9776,6 +10233,22 @@ function ProviderAccountsPanel({
                   <span>{selectedForWork ? copy.usingForWork : copy.useForWork}</span>
                   {feedbackBadge(useFeedback)}
                 </button>
+                {requiresVerification && (
+                  <button
+                    type="button"
+                    className={feedbackClass(subscriptionFeedback)}
+                    onClick={() => onVerifySubscription(provider)}
+                    disabled={busy === `verify:${provider.providerId}` || !provider.configured}
+                    title={subscriptionFeedback?.message || copy.verifySubscriptionHint}
+                    aria-label={ariaForAction(copy.verifySubscription, subscriptionFeedback)}
+                  >
+                    <ShieldCheck size={15} aria-hidden="true" />
+                    <span>
+                      {busy === `verify:${provider.providerId}` ? copy.verifyingSubscription : copy.verifySubscription}
+                    </span>
+                    {feedbackBadge(subscriptionFeedback)}
+                  </button>
+                )}
               </div>
               {catalogForProvider && (
                 <div className="provider-model-strip">
@@ -9812,7 +10285,7 @@ function ProviderAccountsPanel({
         })}
       </div>
 
-      <p className="provider-storage-warning">{report.storageWarning}</p>
+      <p className="provider-storage-warning">{storageWarningLabel}</p>
     </section>
   );
 }
@@ -9945,19 +10418,20 @@ function RuntimeCustomizationPanel({
             <Bot size={16} aria-hidden="true" />
           </header>
           <div className="runtime-provider-custom-list">
-            {report.providers.map((provider) => {
-              const override = overrideById.get(provider.providerId) || {
-                providerId: provider.providerId,
-                defaultModel: provider.defaultModel,
-                baseUrl: providerDefaultBaseUrlFor(provider.providerId)
-              };
-              return (
-                <article key={provider.providerId} className="runtime-provider-custom-card" data-runtime-provider-custom={provider.providerId}>
-                  <header>
-                    <div>
-                      <span>{provider.providerId}</span>
-                      <strong>{provider.label}</strong>
-                    </div>
+              {report.providers.map((provider) => {
+                const override = overrideById.get(provider.providerId) || {
+                  providerId: provider.providerId,
+                  defaultModel: provider.defaultModel,
+                  baseUrl: providerDefaultBaseUrlFor(provider.providerId)
+                };
+                const providerName = providerDisplayName(provider.providerId, provider.label, uiLanguage);
+                return (
+                  <article key={provider.providerId} className="runtime-provider-custom-card" data-runtime-provider-custom={provider.providerId}>
+                    <header>
+                      <div>
+                        <span>{provider.providerId}</span>
+                        <strong>{providerName}</strong>
+                      </div>
                     <button type="button" onClick={() => onProviderReset(provider.providerId)}>
                       <RefreshCw size={14} aria-hidden="true" />
                       <span>{copy.reset}</span>
@@ -9983,7 +10457,7 @@ function RuntimeCustomizationPanel({
                       />
                     </label>
                   </div>
-                  <div className="runtime-preset-row" role="group" aria-label={`${provider.label} ${copy.baseUrl}`}>
+                    <div className="runtime-preset-row" role="group" aria-label={`${providerName} ${copy.baseUrl}`}>
                     {providerBaseUrlPresets(provider.providerId).map((preset) => (
                       <button
                         key={`${provider.providerId}-${preset.value}`}
@@ -10144,6 +10618,18 @@ function DesktopRuntimePanel({
 }) {
   const copy = nativeWorkspaceCopy[uiLanguage];
   const isFileWorkspaceSurface = surface === "files";
+  const runtimeUnavailableErrorMessage = uiLanguage === "ko"
+    ? copy.noRuntime
+    : "Tauri desktop runtime is not available in this browser view.";
+  const decisionAnswerRequiredMessage = uiLanguage === "ko"
+    ? "결정 답변을 입력하세요."
+    : "Decision answer is required.";
+  const taskPipePromptRequiredMessage = uiLanguage === "ko"
+    ? "Task pipe 프롬프트를 입력하세요."
+    : "Task pipe prompt is required.";
+  const workspaceRelativePathRequiredMessage = uiLanguage === "ko"
+    ? "작업공간 상대 경로를 입력하세요."
+    : "Workspace-relative source path is required.";
   const initialSessionMode = sessionModePresets.find((mode) => mode.id === initDefaults.sessionModeId) || sessionModePresets[0];
   const runtimeQuickCommands = useMemo(
     () => normalizeRuntimeQuickCommands(runtimeCustomization.terminal.quickCommands),
@@ -11225,7 +11711,7 @@ function DesktopRuntimePanel({
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
       setRuntimeState("unavailable");
-      setError("Tauri desktop runtime is not available in this browser view.");
+      setError(runtimeUnavailableErrorMessage);
       return;
     }
 
@@ -11258,7 +11744,7 @@ function DesktopRuntimePanel({
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
       setRuntimeState("unavailable");
-      setError("Tauri desktop runtime is not available in this browser view.");
+      setError(runtimeUnavailableErrorMessage);
       return;
     }
 
@@ -11601,7 +12087,7 @@ function DesktopRuntimePanel({
       return;
     }
     if (!decisionAnswer.trim()) {
-      setError("Decision answer is required.");
+      setError(decisionAnswerRequiredMessage);
       return;
     }
 
@@ -11646,7 +12132,7 @@ function DesktopRuntimePanel({
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
       setRuntimeState("unavailable");
-      setError("Tauri desktop runtime is not available in this browser view.");
+      setError(runtimeUnavailableErrorMessage);
       return;
     }
 
@@ -11746,7 +12232,7 @@ function DesktopRuntimePanel({
       return;
     }
     if (!taskPipePrompt.trim()) {
-      setError("Task pipe prompt is required.");
+      setError(taskPipePromptRequiredMessage);
       return;
     }
 
@@ -11783,7 +12269,7 @@ function DesktopRuntimePanel({
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
       setRuntimeState("unavailable");
-      setError("Tauri desktop runtime is not available in this browser view.");
+      setError(runtimeUnavailableErrorMessage);
       return;
     }
 
@@ -11874,7 +12360,7 @@ function DesktopRuntimePanel({
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
       setRuntimeState("unavailable");
-      setError("Tauri desktop runtime is not available in this browser view.");
+      setError(runtimeUnavailableErrorMessage);
       return;
     }
 
@@ -11974,11 +12460,11 @@ function DesktopRuntimePanel({
     const tauriInvoke = getTauriInvoke();
     const targetPath = relativePath.trim();
     if (!tauriInvoke) {
-      setError("Tauri desktop runtime is not available in this browser view.");
+      setError(runtimeUnavailableErrorMessage);
       return;
     }
     if (!targetPath) {
-      setError("Workspace-relative source path is required.");
+      setError(workspaceRelativePathRequiredMessage);
       return;
     }
 
@@ -12963,7 +13449,7 @@ function DesktopRuntimePanel({
     ...providerSummaries.slice(0, 4).map((provider) => ({
       id: `provider-${provider.providerId}`,
       icon: KeyRound,
-      label: provider.label,
+      label: providerDisplayName(provider.providerId, provider.label, uiLanguage),
       status: provider.configured || provider.authMethod === "local_http" ? "connected" : "missing",
       statusClass: provider.configured || provider.authMethod === "local_http" ? "ready" : "setup",
       detail: provider.authMethod === "local_http" ? "127.0.0.1:11434" : provider.envVar
@@ -13099,6 +13585,12 @@ function DesktopRuntimePanel({
   ];
   const agentCliCockpitRows = adapters.map((adapter) => {
     const guide = adapterSetupGuides[adapter.adapterId];
+    const guideInstall = localizedAdapterGuideText(guide, uiLanguage, "installHint");
+    const guideAuth = localizedAdapterGuideText(guide, uiLanguage, "authHint");
+    const guideVerify = localizedAdapterGuideText(guide, uiLanguage, "verifyCommand");
+    const guideExpected = localizedAdapterGuideText(guide, uiLanguage, "expectedResult");
+    const guideRun = localizedAdapterGuideText(guide, uiLanguage, "firstRunCommand");
+    const guideCaution = localizedAdapterGuideText(guide, uiLanguage, "caution");
     const adapterSessions = sessions.filter((session) => session.adapterId === adapter.adapterId);
     const activeAdapterSessions = adapterSessions.filter((session) => isActiveSessionStatus(session.status));
     const adapterTaskRuns = taskRunRecords.filter((record) => record.adapterId === adapter.adapterId);
@@ -13136,31 +13628,37 @@ function DesktopRuntimePanel({
           id: "install",
           label: uiLanguage === "ko" ? "설치" : "Install",
           ready: adapter.available,
-          detail: adapter.available ? adapter.resolvedPath || adapter.command : guide?.installHint || adapter.command,
-          command: guide?.installHint || adapter.command
+          detail: adapter.available ? adapter.resolvedPath || adapter.command : guideInstall || adapter.command,
+          command: guideInstall || adapter.command
         },
         {
           id: "auth",
           label: uiLanguage === "ko" ? "로그인/키" : "Login/key",
           ready: authReady,
-          detail: authReady ? authStatus : guide?.authHint || authStatus,
-          command: guide?.authHint || ""
+          detail: authReady ? authStatus : guideAuth || authStatus,
+          command: guideAuth || ""
         },
         {
           id: "verify",
           label: uiLanguage === "ko" ? "검증" : "Verify",
           ready: adapter.available,
-          detail: adapter.version || adapter.lastError || guide?.verifyCommand || adapter.command,
-          command: guide?.verifyCommand || adapter.command
+          detail: adapter.version || adapter.lastError || guideVerify || adapter.command,
+          command: guideVerify || adapter.command
         },
         {
           id: "run",
           label: uiLanguage === "ko" ? "첫 실행" : "First run",
           ready: adapter.available && authReady,
-          detail: guide?.expectedResult || adapter.command,
-          command: guide?.firstRunCommand || adapter.command
+          detail: guideExpected || adapter.command,
+          command: guideRun || adapter.command
         }
-      ]
+      ],
+      guideInstall,
+      guideAuth,
+      guideVerify,
+      guideExpected,
+      guideRun,
+      guideCaution
     };
   });
   const startAdapterFromCockpit = async (adapterId: string) => {
@@ -13826,9 +14324,9 @@ function DesktopRuntimePanel({
         <section className="panel wide intellij-run-workbench-panel desktop-interaction-prerender" aria-busy="true">
           <div className="ide-run-toolbar">
             <div className="ide-run-selector">
-              <span>
+            <span>
                 <PlayCircle size={15} aria-hidden="true" />
-                Run Configuration
+                {uiLanguage === "ko" ? "실행 구성" : "Run Configuration"}
               </span>
               <strong>{uiLanguage === "ko" ? "실행 작업대 준비 중" : "Preparing runtime workbench"}</strong>
               <small>{selectedAdapter?.label || selectedSessionAdapterId} / {selectedMode.label}</small>
@@ -13871,9 +14369,9 @@ function DesktopRuntimePanel({
           </div>
           <div className="agent-cli-cockpit-tally" aria-label={uiLanguage === "ko" ? "CLI cockpit 요약" : "CLI cockpit summary"}>
             <span>{cockpitStats.available}/{cockpitStats.adapters} CLI</span>
-            <span>{cockpitStats.activeSessions} active</span>
-            <span>{cockpitStats.decisionItems} inbox</span>
-            <span>{cockpitStats.taskRuns} runs</span>
+            <span>{cockpitStats.activeSessions} {uiLanguage === "ko" ? "활성" : "active"}</span>
+            <span>{cockpitStats.decisionItems} {uiLanguage === "ko" ? "결정함" : "inbox"}</span>
+            <span>{cockpitStats.taskRuns} {uiLanguage === "ko" ? "실행" : "runs"}</span>
           </div>
         </div>
 
@@ -13901,7 +14399,9 @@ function DesktopRuntimePanel({
               </header>
               <div className="agent-cli-cockpit-command">
                 <code>{row.adapter.resolvedPath || row.adapter.command}</code>
-                <small>{row.adapter.version || row.adapter.lastError || row.guide?.verifyCommand || row.adapter.command}</small>
+                <small>
+                  {row.adapter.version || row.adapter.lastError || row.guideVerify || row.adapter.command}
+                </small>
               </div>
               <div className="agent-cli-setup-ladder" data-agent-cli-setup-ladder={row.adapter.adapterId}>
                 {row.setupSteps.map((step) => (
@@ -13930,9 +14430,9 @@ function DesktopRuntimePanel({
               </div>
               <div className="agent-cli-cockpit-signals">
                 <span>{row.authStatus}</span>
-                <span>{row.activeAdapterSessions.length}/{row.adapterSessions.length} sessions</span>
-                <span>{row.adapterTaskRuns.length} task-runs</span>
-                <span>{row.adapterDecisionItems} decisions</span>
+                <span>{row.activeAdapterSessions.length}/{row.adapterSessions.length} {uiLanguage === "ko" ? "세션" : "sessions"}</span>
+                <span>{row.adapterTaskRuns.length} {uiLanguage === "ko" ? "실행" : "task-runs"}</span>
+                <span>{row.adapterDecisionItems} {uiLanguage === "ko" ? "결정" : "decisions"}</span>
               </div>
               <div className="agent-cli-cockpit-actions">
                 <button
@@ -14905,7 +15405,7 @@ function DesktopRuntimePanel({
       <section className="panel wide service-readiness-panel">
         <div className="panel-heading">
           <div>
-            <p className="eyebrow">Service Readiness</p>
+            <p className="eyebrow">{uiLanguage === "ko" ? "서비스 준비도" : "Service Readiness"}</p>
             <h2>서비스 출시 준비도</h2>
           </div>
           <div className="desktop-actions">
@@ -14923,18 +15423,18 @@ function DesktopRuntimePanel({
         </div>
         {serviceReadinessNotice && <p className="decision-resume-notice">{serviceReadinessNotice}</p>}
         <div className="service-domain-row" aria-label="Service readiness domains">
-          <span>Runtime Data</span>
-          <span>Customer Payload</span>
-          <span>Support Diagnostics</span>
-          <span>Workspace Onboarding</span>
-          <span>Privacy & Logging</span>
-          <span>Signed Distribution</span>
-          <span>Update & Recovery</span>
+          <span>{uiLanguage === "ko" ? "런타임 데이터" : "Runtime Data"}</span>
+          <span>{uiLanguage === "ko" ? "고객 페이로드" : "Customer Payload"}</span>
+          <span>{uiLanguage === "ko" ? "지원 진단" : "Support Diagnostics"}</span>
+          <span>{uiLanguage === "ko" ? "워크스페이스 온보딩" : "Workspace Onboarding"}</span>
+          <span>{uiLanguage === "ko" ? "개인정보·로그" : "Privacy & Logging"}</span>
+          <span>{uiLanguage === "ko" ? "서명 배포" : "Signed Distribution"}</span>
+          <span>{uiLanguage === "ko" ? "업데이트·복구" : "Update & Recovery"}</span>
         </div>
         <div className={`service-readiness-hero status-${serviceReadiness?.status || "unknown"}`}>
           <div>
             <span>{serviceReadiness?.releaseLane || "local_internal"}</span>
-            <strong>{serviceReadiness?.status || "not checked"}</strong>
+            <strong>{serviceReadiness?.status || (uiLanguage === "ko" ? "미점검" : "not checked")}</strong>
 	            <p>{serviceReadiness?.serviceClaim || "서비스 준비도 보고서를 실행하면 공개 배포 차단 요소와 다음 조치가 표시됩니다."}</p>
           </div>
           <div className="service-score-ring">
@@ -15145,15 +15645,15 @@ function DesktopRuntimePanel({
                   </div>
                   <div className="task-run-preview-tabs">
                     <article>
-                      <span>stdout{taskRunDetail.stdoutTruncated ? " / truncated" : ""}</span>
-                      <pre><code>{taskRunDetail.stdoutPreview || "No stdout log"}</code></pre>
+                      <span>stdout{taskRunDetail.stdoutTruncated ? ` / ${uiLanguage === "ko" ? "잘림" : "truncated"}` : ""}</span>
+                      <pre><code>{taskRunDetail.stdoutPreview || (uiLanguage === "ko" ? "stdout 로그가 없습니다." : "No stdout log")}</code></pre>
                     </article>
                     <article>
-                      <span>stderr{taskRunDetail.stderrTruncated ? " / truncated" : ""}</span>
-                      <pre><code>{taskRunDetail.stderrPreview || "No stderr log"}</code></pre>
+                      <span>stderr{taskRunDetail.stderrTruncated ? ` / ${uiLanguage === "ko" ? "잘림" : "truncated"}` : ""}</span>
+                      <pre><code>{taskRunDetail.stderrPreview || (uiLanguage === "ko" ? "stderr 로그가 없습니다." : "No stderr log")}</code></pre>
                     </article>
                     <article>
-                      <span>record JSON</span>
+                      <span>{uiLanguage === "ko" ? "실행 기록 JSON" : "record JSON"}</span>
                       <pre><code>{taskRunDetail.recordJson}</code></pre>
                     </article>
                   </div>
@@ -15167,13 +15667,13 @@ function DesktopRuntimePanel({
       <section className="panel wide desktop-control-panel">
         <div className="panel-heading">
           <div>
-            <p className="eyebrow">Capability Center</p>
+            <p className="eyebrow">{uiLanguage === "ko" ? "기능 통합 센터" : "Capability Center"}</p>
             <h2>CLI adapter 상태</h2>
           </div>
           <div className="desktop-actions">
             <button type="button" onClick={refreshAdapters} disabled={runningAdapterId !== ""}>
               <Activity size={16} aria-hidden="true" />
-              <span>Refresh</span>
+              <span>{uiLanguage === "ko" ? "새로고침" : "Refresh"}</span>
             </button>
             <button
               type="button"
@@ -15183,7 +15683,7 @@ function DesktopRuntimePanel({
               disabled={!invoke || runningAdapterId !== ""}
             >
               <CheckCircle2 size={16} aria-hidden="true" />
-              <span>{runningAdapterId === "all" ? "Running" : "Run All Checks"}</span>
+              <span>{runningAdapterId === "all" ? (uiLanguage === "ko" ? "실행 중" : "Running") : (uiLanguage === "ko" ? "전체 점검" : "Run All Checks")}</span>
             </button>
           </div>
         </div>
@@ -15192,20 +15692,20 @@ function DesktopRuntimePanel({
 
         <div className="desktop-health-strip">
           <article>
-            <span>Shell</span>
-            <strong>{health?.shell || "not connected"}</strong>
+            <span>{uiLanguage === "ko" ? "쉘" : "Shell"}</span>
+            <strong>{health?.shell || (uiLanguage === "ko" ? "연결 안됨" : "not connected")}</strong>
           </article>
           <article>
-            <span>UI Source</span>
+            <span>{uiLanguage === "ko" ? "UI 소스" : "UI Source"}</span>
             <strong>{health?.uiSource || "workspace-monitor"}</strong>
           </article>
           <article>
-            <span>Execution Scope</span>
-            <strong>bounded pipes and scoped files</strong>
+            <span>{uiLanguage === "ko" ? "실행 범위" : "Execution Scope"}</span>
+            <strong>{uiLanguage === "ko" ? "제한된 파이프 및 범위 파일" : "bounded pipes and scoped files"}</strong>
           </article>
           <article>
-            <span>Platform state owner</span>
-            <strong>tasks, decisions, artifacts, validation</strong>
+            <span>{uiLanguage === "ko" ? "상태 소유권" : "Platform state owner"}</span>
+            <strong>{uiLanguage === "ko" ? "작업, 결정, 산출물, 검증" : "tasks, decisions, artifacts, validation"}</strong>
           </article>
         </div>
 
@@ -15214,6 +15714,9 @@ function DesktopRuntimePanel({
             const report = reports.find((item) => item.adapterId === adapter.adapterId);
             const running = runningAdapterId === adapter.adapterId;
             const setupGuide = adapterSetupGuides[adapter.adapterId];
+            const guideInstall = localizedAdapterGuideText(setupGuide, uiLanguage, "installHint");
+            const guideVerify = localizedAdapterGuideText(setupGuide, uiLanguage, "verifyCommand");
+            const guideCaution = localizedAdapterGuideText(setupGuide, uiLanguage, "caution");
             return (
               <article key={adapter.adapterId} className={adapter.available ? "adapter-card available" : "adapter-card missing"}>
                 <header>
@@ -15221,26 +15724,26 @@ function DesktopRuntimePanel({
                     <span>{adapter.adapterId}</span>
                     <h3>{adapter.label}</h3>
                   </div>
-                  <strong>{adapter.available ? "available" : "missing"}</strong>
+                  <strong>{adapter.available ? (uiLanguage === "ko" ? "사용 가능" : "available") : uiLanguage === "ko" ? "누락" : "missing"}</strong>
                 </header>
                 <p>
                   <code>{adapter.command}</code>
                   {adapter.version ? ` / ${adapter.version}` : ""}
                 </p>
-                <small>{adapter.resolvedPath || adapter.lastError || "No status detail"}</small>
+                <small>{adapter.resolvedPath || adapter.lastError || (uiLanguage === "ko" ? "상태 상세 없음" : "No status detail")}</small>
                 {setupGuide && (
                   <div className="adapter-setup-guide">
-                    <span>{adapter.available ? "Verify" : "Setup"}</span>
-                    <code>{adapter.available ? setupGuide.verifyCommand : setupGuide.installHint}</code>
+                    <span>{adapter.available ? (uiLanguage === "ko" ? "검증" : "Verify") : uiLanguage === "ko" ? "설치" : "Setup"}</span>
+                    <code>{adapter.available ? guideVerify || adapter.command : guideInstall || adapter.command}</code>
                     <small>{setupGuide.sourceUrl}</small>
-                    <small>{setupGuide.caution}</small>
+                    <small>{guideCaution}</small>
                   </div>
                 )}
                 <div className="capability-meta-grid">
-                  <span>{adapter.available ? "ready" : "setup-later"}</span>
+                  <span>{adapter.available ? (uiLanguage === "ko" ? "준비됨" : "ready") : uiLanguage === "ko" ? "나중에 설정" : "setup-later"}</span>
                   <span>{providerAuthStatusForAdapter(adapter.adapterId, providerCredentialReport, uiLanguage)}</span>
-                  <span>{sessions.filter((session) => session.adapterId === adapter.adapterId).length} lanes</span>
-                  <span>{reports.some((item) => item.adapterId === adapter.adapterId) ? "checked" : "unchecked"}</span>
+                  <span>{sessions.filter((session) => session.adapterId === adapter.adapterId).length} {uiLanguage === "ko" ? "경로" : "lanes"}</span>
+                  <span>{reports.some((item) => item.adapterId === adapter.adapterId) ? (uiLanguage === "ko" ? "확인됨" : "checked") : (uiLanguage === "ko" ? "미확인" : "unchecked")}</span>
                 </div>
                 <div className="adapter-card-actions">
                   <button
@@ -15249,7 +15752,7 @@ function DesktopRuntimePanel({
                     disabled={!invoke || runningAdapterId !== "" || !adapter.available}
                   >
                     <Activity size={15} aria-hidden="true" />
-                    <span>{running ? "Running" : "Health Check"}</span>
+                    <span>{running ? (uiLanguage === "ko" ? "실행 중" : "Running") : uiLanguage === "ko" ? "상태 점검" : "Health Check"}</span>
                   </button>
                   <button type="button" onClick={() => onOpenSettings("providers")}>
                     <KeyRound size={15} aria-hidden="true" />
@@ -15260,7 +15763,7 @@ function DesktopRuntimePanel({
                   <div className="adapter-report">
                     <span>{report.status}</span>
                     <span>{report.durationMs}ms</span>
-                    <span>{report.exitCode ?? "no code"}</span>
+                    <span>{report.exitCode ?? (uiLanguage === "ko" ? "코드 없음" : "no code")}</span>
                   </div>
                 )}
               </article>
@@ -15758,39 +16261,75 @@ function renderSearchAgentPrompt(form: SearchAgentRunForm, language: UiLanguage,
   const captureTargets = linesFromText(form.captureTargets);
   const notes = form.notes.trim() || defaultSearchAgentRunForm.notes;
   const dateLabel = new Date().toISOString().slice(0, 10);
-  const outputLanguage = language === "ko" ? "Korean first, with English labels only when useful" : "English";
-  const routeDecision = resolveModelRouteDecision(form, provider);
+  const outputLanguage = language === "ko" ? "한국어" : "English";
+  const providerName = provider
+    ? providerDisplayName(provider.providerId, provider.label, language)
+    : language === "ko"
+      ? "미지정"
+      : "not selected";
+  const routeDecision = resolveModelRouteDecision(form, provider, language);
+  const routeReasons = buildModelRouteReasons(form, scoreSearchAgentTaskComplexity(form), routeDecision.tier, routeDecision.constraintLabel, routeDecision.estimatedTokens, language);
 
   return [
-    "[Agent Platform Existing Agent Run]",
-    `Agent: ${researchInsightAgentId}`,
-    `Agent config: ${researchInsightAgentConfigPath}`,
-    `Input schema: ${researchInsightPlanTemplatePath}`,
-    "Runtime role: run the existing search/research agent from the platform, not a new ad hoc chat.",
-    `Output language: ${outputLanguage}`,
+    language === "ko" ? "[플랫폼 검색 에이전트 실행]" : "[Agent Platform Existing Agent Run]",
+    language === "ko" ? `에이전트: ${researchInsightAgentId}` : `Agent: ${researchInsightAgentId}`,
+    language === "ko"
+      ? `에이전트 설정 경로: ${researchInsightAgentConfigPath}`
+      : `Agent config: ${researchInsightAgentConfigPath}`,
+    language === "ko"
+      ? `입력 스키마: ${researchInsightPlanTemplatePath}`
+      : `Input schema: ${researchInsightPlanTemplatePath}`,
+    language === "ko" ? `제공자: ${providerName}` : `Provider: ${providerName}`,
+    language === "ko"
+      ? "런타임 역할: 플랫폼의 기존 검색/조사 에이전트를 사용하고 즉석 채팅을 새로 만들지 마세요."
+      : "Runtime role: run the existing search/research agent from the platform, not a new ad hoc chat.",
+    language === "ko" ? `출력 언어: ${outputLanguage}` : `Output language: ${outputLanguage}`,
     "",
-    "Platform-enforced work controls:",
-    `- Model route: ${routeDecision.routeLabel} / tier=${routeDecision.tier} / model=${routeDecision.model}`,
-    `- Constraint profile: ${routeDecision.constraintLabel}`,
-    `- Connector policy: ${routeDecision.connectorLabel}`,
-    `- Token caps: input<=${routeDecision.maxInputTokens}, output<=${routeDecision.maxOutputTokens}`,
-    `- Budget cap: approximately $${routeDecision.budgetUsd.toFixed(2)}`,
-    "- Treat these controls as execution constraints, not suggestions.",
-    "- If a needed tool or API cannot use MCP, use the connector policy above and state the fallback clearly.",
-    "- Do not escalate to a more expensive model, broader source search, or external tool execution unless the route policy permits it or asks for approval.",
-    "Route evidence:",
-    ...routeDecision.reasons.map((item) => `- ${item}`),
+    language === "ko" ? "플랫폼 강제 작업 제어:" : "Platform-enforced work controls:",
+    language === "ko"
+      ? `- 모델 라우팅: ${routeDecision.routeLabel} / 티어=${routeDecision.tier} / 모델=${routeDecision.model}`
+      : `- Model route: ${routeDecision.routeLabel} / tier=${routeDecision.tier} / model=${routeDecision.model}`,
+    language === "ko"
+      ? `- 제약 프로필: ${routeDecision.constraintLabel}`
+      : `- Constraint profile: ${routeDecision.constraintLabel}`,
+    language === "ko"
+      ? `- 연결 정책: ${routeDecision.connectorLabel}`
+      : `- Connector policy: ${routeDecision.connectorLabel}`,
+    language === "ko"
+      ? `- 토큰 제한: 입력<=${routeDecision.maxInputTokens}, 출력<=${routeDecision.maxOutputTokens}`
+      : `- Token caps: input<=${routeDecision.maxInputTokens}, output<=${routeDecision.maxOutputTokens}`,
+    language === "ko"
+      ? `- 예산 한도: 약 $${routeDecision.budgetUsd.toFixed(2)}`
+      : `- Budget cap: approximately $${routeDecision.budgetUsd.toFixed(2)}`,
+    language === "ko"
+      ? "- 아래 조건은 실행 권고가 아니라 실행 제약입니다."
+      : "- Treat these controls as execution constraints, not suggestions.",
+    language === "ko"
+      ? "- 필수 도구/API가 MCP를 못 쓰면 위 연결 정책에 맞춰 우회 경로를 명확히 제시하세요."
+      : "- If a needed tool or API cannot use MCP, use the connector policy above and state the fallback clearly.",
+    language === "ko"
+      ? "- 승인되지 않은 더 비싼 모델, 무분별한 출처 확장, 외부 실행으로 임의 escalate하지 마세요."
+      : "- Do not escalate to a more expensive model, broader source search, or external tool execution unless the route policy permits it or asks for approval.",
+    language === "ko" ? "라우팅 근거:" : "Route evidence:",
+    ...routeReasons.map((item) => `- ${item}`),
     "",
-    "Objective:",
+    language === "ko" ? "목표:" : "Objective:",
     objective,
     "",
-    "Search questions:",
-    ...(questions.length ? questions.map((item) => `- ${item}`) : ["- Find the evidence needed for this request."]),
+    language === "ko" ? "검색 질문:" : "Search questions:",
+    ...(questions.length
+      ? questions.map((item) => `- ${item}`)
+      : [language === "ko" ? "- 이 요청에 필요한 근거를 찾으세요." : "- Find the evidence needed for this request."]),
     "",
-    "Search channels:",
-    ...(channels.length ? channels.map((item) => `- ${item}`) : ["- web search", "- repository search"]),
+    language === "ko" ? "검색 채널:" : "Search channels:",
+    ...(channels.length
+      ? channels.map((item) => `- ${item}`)
+      : [
+          language === "ko" ? "- 웹 검색" : "- web search",
+          language === "ko" ? "- 저장소 검색" : "- repository search"
+        ]),
     "",
-    "Required answer-engine stages:",
+    language === "ko" ? "필수 실행 엔진 단계:" : "Required answer-engine stages:",
     "- query_understanding",
     "- search_retrieval",
     "- source_ranking",
@@ -15799,34 +16338,60 @@ function renderSearchAgentPrompt(form: SearchAgentRunForm, language: UiLanguage,
     "- citation_grounding",
     "- skeptic_review",
     "",
-    "Output contract:",
-    "- Summarize accepted evidence with citations or local file paths.",
-    "- Separate unsupported claims, uncertainty, and contrary evidence.",
-    "- Produce plan_steps, validation_steps, risks_or_unknowns, and blocked_decisions.",
-    "- Record what should be captured under the targets below.",
-    "- Ask only source-affecting or irreversible questions; otherwise continue with reversible defaults.",
+    language === "ko" ? "출력 규약:" : "Output contract:",
+    language === "ko"
+      ? "- 인용/로컬 파일 경로 근거를 붙여서 수용 가능한 증거를 정리하세요."
+      : "- Summarize accepted evidence with citations or local file paths.",
+    language === "ko"
+      ? "- 미지원 주장, 불확실성, 반대 근거를 분리해 기록하세요."
+      : "- Separate unsupported claims, uncertainty, and contrary evidence.",
+    language === "ko"
+      ? "- plan_steps, validation_steps, risks_or_unknowns, blocked_decisions를 생성하세요."
+      : "- Produce plan_steps, validation_steps, risks_or_unknowns, and blocked_decisions.",
+    language === "ko"
+      ? "- 아래 Capture targets 아래에 남겨야 하는 결과를 기록하세요."
+      : "- Record what should be captured under the targets below.",
+    language === "ko"
+      ? "- 소스 영향이 있거나 되돌릴 수 없는 결정이 필요할 때만 사용자 질문을 남기고, 아니면 안전한 기본 경로로 진행하세요."
+      : "- Ask only source-affecting or irreversible questions; otherwise continue with reversible defaults.",
     "",
-    "Capture targets:",
-    ...(captureTargets.length ? captureTargets.map((item) => `- ${item.replace("YYYY", dateLabel.slice(0, 4))}`) : ["- _research/"]),
+    language === "ko" ? "수집 대상:" : "Capture targets:",
+    ...(captureTargets.length
+      ? captureTargets.map((item) => `- ${item.replace("YYYY", dateLabel.slice(0, 4))}`)
+      : [language === "ko" ? "- _research/" : "- _research/"]),
     "",
-    "Notes:",
+    language === "ko" ? "메모:" : "Notes:",
     notes
   ].join("\n");
 }
 
 function renderSearchAgentSystemPrompt(language: UiLanguage) {
   return [
-    "You are the direct provider runtime for research-insight-planner-agent inside Agent Workspace Platform.",
-    `Output language: ${language === "ko" ? "Korean first" : "English"}.`,
-    "Use the user's task input as the work request.",
-    "Return a useful work result, not a UI explanation.",
-    "Separate evidence, assumptions, uncertainty, plan steps, validation steps, and blocked decisions.",
-    "Do not claim that source files were edited, shell commands were run, or web pages were visited unless the prompt includes that evidence.",
-    "When more execution is needed, state the exact next action that should be launched through the desktop platform."
+    language === "ko"
+      ? "당신은 Agent Workspace Platform의 research-insight-planner-agent 런타임입니다."
+      : "You are the direct provider runtime for research-insight-planner-agent inside Agent Workspace Platform.",
+    `Output language: ${language === "ko" ? "한국어" : "English"}.`,
+    language === "ko"
+      ? "작업 요청은 사용자의 입력을 그대로 실행 요청으로 처리합니다."
+      : "Use the user's task input as the work request.",
+    language === "ko" ? "UI 설명 대신 실행 가능한 결과를 반환하세요." : "Return a useful work result, not a UI explanation.",
+    language === "ko"
+      ? "근거, 가정, 불확실성, 실행 계획, 검증 단계, 미해결 결정사항을 분리해 정리하세요."
+      : "Separate evidence, assumptions, uncertainty, plan steps, validation steps, and blocked decisions.",
+    language === "ko"
+      ? "근거나 실행 사실이 없으면 파일 편집/명령 실행/방문을 완료했다고 쓰지 마세요."
+      : "Do not claim that source files were edited, shell commands were run, or web pages were visited unless the prompt includes that evidence.",
+    language === "ko"
+      ? "추가 실행이 필요하면 데스크톱 플랫폼에서 다음 액션을 정확히 제시하세요."
+      : "When more execution is needed, state the exact next action that should be launched through the desktop platform."
   ].join("\n");
 }
 
-function resolveModelRouteDecision(form: SearchAgentRunForm, provider?: ProviderCredentialSummary | null): ModelRouteDecision {
+function resolveModelRouteDecision(
+  form: SearchAgentRunForm,
+  provider?: ProviderCredentialSummary | null,
+  language: UiLanguage = "ko"
+): ModelRouteDecision {
   const routeOption = modelRouteOptions.find((option) => option.value === form.modelRouteId) || modelRouteOptions[0];
   const constraint = constraintProfileOptions.find((option) => option.value === form.constraintProfileId) || constraintProfileOptions[1];
   const connector = connectorPolicyOptions.find((option) => option.value === form.connectorPolicyId) || connectorPolicyOptions[0];
@@ -15834,11 +16399,8 @@ function resolveModelRouteDecision(form: SearchAgentRunForm, provider?: Provider
   const explicitMaxOutput = parsePositiveInteger(form.maxOutputTokens);
   const explicitBudget = parsePositiveNumber(form.budgetUsd);
   const score = scoreSearchAgentTaskComplexity(form);
-  const autoTier: ModelRouteDecision["tier"] = score >= 7 || constraint.value === "research"
-    ? "premium"
-    : score >= 4 || constraint.value === "developer"
-      ? "balanced"
-      : "small";
+  const estimatedTokens = estimateSearchTaskTokenDemand(form);
+  const autoTier: ModelRouteDecision["tier"] = estimateAutoModelTier(form, score, constraint.value, estimatedTokens);
   const tier: ModelRouteDecision["tier"] = routeOption.value === "premium"
     ? "premium"
     : routeOption.value === "balanced"
@@ -15848,28 +16410,79 @@ function resolveModelRouteDecision(form: SearchAgentRunForm, provider?: Provider
         : routeOption.value === "manual"
           ? "balanced"
           : autoTier;
-  const maxInputTokens = clampNumber(explicitMaxInput || constraint.maxInputTokens, 1000, 200000);
-  const maxOutputTokens = clampNumber(explicitMaxOutput || constraint.maxOutputTokens, 256, 12000);
-  const budgetUsd = clampNumber(explicitBudget || constraint.budgetUsd, 0.01, 100);
+  const maxInputTokens = clampNumber(
+    explicitMaxInput
+      || clampNumber(
+        Math.max(constraint.maxInputTokens, estimatedTokens + Math.min(8000, Math.floor(score * 1000))),
+        1000,
+        200000
+      ),
+    1000,
+    200000
+  );
+  const maxOutputTokens = clampNumber(
+    explicitMaxOutput
+      || clampNumber(
+        Math.max(
+          constraint.maxOutputTokens,
+          256 + Math.floor(score * 700) + Math.floor(estimatedTokens / 40)
+        ),
+        256,
+        12000
+      ),
+    256,
+    12000
+  );
+  const budgetBoost = tier === "premium" ? 1.6 : tier === "balanced" ? 1.2 : 0.9;
+  const budgetUsd = clampNumber(
+    explicitBudget || constraint.budgetUsd * budgetBoost + (estimatedTokens >= 16000 ? 0.4 : 0),
+    0.01,
+    100
+  );
   const model = routeOption.value === "manual"
     ? form.model.trim() || provider?.defaultModel || defaultSearchAgentRunForm.model
     : recommendedModelForTier(provider?.providerId || form.providerId, tier, form.model.trim() || provider?.defaultModel || defaultSearchAgentRunForm.model);
-  const reasons = buildModelRouteReasons(form, score, tier, constraint.value);
+  const reasons = buildModelRouteReasons(form, score, tier, constraint.value, estimatedTokens, language);
 
   return {
     routeId: routeOption.value,
-    routeLabel: routeOption.labelKo,
+    routeLabel: language === "ko" ? routeOption.labelKo : routeOption.labelEn,
     model,
     tier,
     complexityScore: score,
+    estimatedTokens,
     maxInputTokens,
     maxOutputTokens,
     budgetUsd,
     connectorPolicyId: connector.value,
-    connectorLabel: connector.labelKo,
-    constraintLabel: constraint.labelKo,
+    connectorLabel: language === "ko" ? connector.labelKo : connector.labelEn,
+    constraintLabel: language === "ko" ? constraint.labelKo : constraint.labelEn,
     reasons
   };
+}
+
+function estimateAutoModelTier(
+  form: SearchAgentRunForm,
+  score: number,
+  constraint: string,
+  estimatedTokens: number
+): ModelRouteDecision["tier"] {
+  const profile = form.modelRouteId === "manual"
+    ? "manual"
+    : constraint;
+  const requiresHighTrust = /규정|규격|compliance|legal|privacy|license|보안|의료|financial|finance|cost|비용|심리|의사결정/.test(
+    `${form.objective} ${form.questions} ${form.notes} ${form.searchChannels} ${form.captureTargets}`.toLowerCase()
+  );
+  if (score >= 8 || profile === "research" || estimatedTokens >= 18000 || requiresHighTrust) {
+    return "premium";
+  }
+  if (score >= 5 || profile === "developer" || estimatedTokens >= 9000) {
+    return "balanced";
+  }
+  if (estimatedTokens >= 4200 && !requiresHighTrust) {
+    return "balanced";
+  }
+  return "small";
 }
 
 function scoreSearchAgentTaskComplexity(form: SearchAgentRunForm) {
@@ -15887,7 +16500,7 @@ function scoreSearchAgentTaskComplexity(form: SearchAgentRunForm) {
   if (/architecture|아키텍처|구조|설계|migration|마이그레이션|refactor|리팩터/.test(haystack)) {
     score += 2;
   }
-  if (/security|privacy|license|legal|보안|개인정보|라이선스|법률|cost|비용|금융|medical|의료/.test(haystack)) {
+  if (/security|privacy|license|legal|보안|개인정보|라이선스|법률|cost|비용|금융|financial|medical|의료|윤리|compliance|규제/.test(haystack)) {
     score += 2;
   }
   if (/implementation|구현|source|소스|test|검증|build|배포|desktop|mcp|api/.test(haystack)) {
@@ -15906,19 +16519,62 @@ function buildModelRouteReasons(
   form: SearchAgentRunForm,
   score: number,
   tier: ModelRouteDecision["tier"],
-  constraintProfileId: string
+  constraintProfileId: string,
+  estimatedTokens: number,
+  language: UiLanguage
 ) {
+  const isResearchProfile = constraintProfileId === "research";
+  const policy = tier === "premium" ? "high-cost" : tier === "balanced" ? "balanced" : "low-cost";
+  if (language === "en") {
+    const reasons = [
+      `complexity_score=${score}`,
+      `selected_constraint=${constraintProfileId}`,
+      `resolved_tier=${tier}`,
+      `estimated_input_tokens=${estimatedTokens}`,
+      `policy=${policy}`
+    ];
+    if (tier === "premium") {
+      reasons.push("premium when broad research, architecture, high-risk judgment, long-context synthesis, or strict verification is needed");
+      if (/논문|paper|arxiv|survey|research|서베이/.test(form.notes.toLowerCase() + form.objective.toLowerCase())) {
+        reasons.push("premium because the task references papers/research and high-confidence evidence needs");
+      }
+      if (isResearchProfile) {
+        reasons.push("research profile always permits premium-tier cost to reduce hallucination risk.");
+      }
+    } else if (tier === "small") {
+      reasons.push("small when task is bounded, low-risk, mostly summary/check, and token pressure is low");
+    } else {
+      reasons.push("balanced when implementation, review, or planning needs reliability without deep-research cost");
+    }
+    reasons.push(`token_limit_reason=${estimatedTokens >= 12000 ? "high" : estimatedTokens >= 4200 ? "medium" : "low"}`);
+    if (estimatedTokens >= 12000) {
+      reasons.push("long estimated input context increases model and budget allocation");
+    }
+    return reasons;
+  }
+
   const reasons = [
-    `complexity_score=${score}`,
-    `selected_constraint=${constraintProfileId}`,
-    `resolved_tier=${tier}`
+    `복잡도 점수: ${score}`,
+    `요건 제약: ${constraintProfileId}`,
+    `선택 티어: ${tier}`,
+    `예상 입력 토큰: ${estimatedTokens}`,
+    `운영 정책: ${policy === "high-cost" ? "비싼 모델 허용" : policy === "balanced" ? "균형 라우팅" : "저비용 라우팅"}`
   ];
   if (tier === "premium") {
-    reasons.push("premium when broad research, architecture, high-risk judgment, or long-context synthesis is present");
+    reasons.push("높은 난이도/리스크/근거 신뢰성이 필요한 과제여서 비싼 모델 라우팅이 적합합니다.");
+    if (/논문|paper|arxiv|survey|research|서베이/.test(form.notes.toLowerCase() + form.objective.toLowerCase())) {
+      reasons.push("요청에 논문/연구 근거가 포함되어 있어 고신뢰 경로가 필요합니다.");
+    }
+    if (isResearchProfile) {
+      reasons.push("리서치 프로필에서는 근거 오차를 줄이기 위해 비싼 모델 티어를 허용합니다.");
+    }
   } else if (tier === "small") {
-    reasons.push("small when the task is bounded, low-risk, and mostly summarization or simple checking");
+    reasons.push("범위가 좁고 위험도가 낮아 요약/검증 중심의 작은 모델로 충분합니다.");
   } else {
-    reasons.push("balanced when implementation, review, or planning needs reliability without deep-research cost");
+    reasons.push("구현/리뷰/계획형 작업으로, 비용이 과도하지 않은 균형형 모델이 적절합니다.");
+  }
+  if (estimatedTokens >= 12000) {
+    reasons.push("입력 토큰이 많아 입력 컨텍스트 확보가 필요합니다.");
   }
   return reasons;
 }
@@ -15944,6 +16600,23 @@ function recommendedModelForTier(providerId: string, tier: ModelRouteDecision["t
 
 function estimateTextTokens(value: string) {
   return Math.ceil(value.length / 4);
+}
+
+function estimateSearchTaskTokenDemand(form: SearchAgentRunForm) {
+  const content = [
+    form.objective,
+    form.questions,
+    form.searchChannels,
+    form.captureTargets,
+    form.notes
+  ].join("\n").trim();
+  const base = estimateTextTokens(content || defaultSearchAgentRunForm.objective);
+  const linePenalty = [
+    linesFromText(form.questions).length,
+    linesFromText(form.searchChannels).length,
+    linesFromText(form.captureTargets).length
+  ].reduce((sum, value) => sum + value, 0);
+  return clampNumber(base + linePenalty * 250, 200, 120000);
 }
 
 function parsePositiveInteger(value: string) {
