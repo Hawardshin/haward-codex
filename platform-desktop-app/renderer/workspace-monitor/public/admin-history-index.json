@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-06T04:40:03.421Z",
+  "generatedAt": "2026-06-06T04:48:52.802Z",
   "summary": {
-    "documents": 2659,
+    "documents": 2666,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1024
+        "count": 1025
       },
       {
         "category": "web-search",
-        "count": 421
+        "count": 422
       },
       {
         "category": "plan",
-        "count": 352
+        "count": 353
       },
       {
         "category": "request-trace",
-        "count": 349
+        "count": 350
       },
       {
         "category": "work-timing",
-        "count": 269
+        "count": 270
       },
       {
         "category": "user-request",
-        "count": 134
+        "count": 135
       },
       {
         "category": "work-summary",
-        "count": 101
+        "count": 102
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6594727,
+    "totalSourceBytes": 6601912,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,118 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-work-timings-2026-2026-06-06-intellij-shell-separation-ko-md",
+      "path": "_history/work-timings/2026/2026-06-06-intellij-shell-separation.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "Work Timing: IntelliJ Shell Separation",
+      "excerpt": "Work Timing: IntelliJ Shell Separation | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 4분 | JetBrains 공식 UI 문서 확인 | | 로컬 구조 분석 | 8분 | shell CSS, JSX, 기존 테스트 확인 | | 구현 | 10분 | layout/zone attribute, CSS token/rule, 테스트 추가 | | 검증 | 20분 | renderer/desktop test/check, browser comp",
+      "html": "<p>Work Timing: IntelliJ Shell Separation | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 4분 | JetBrains 공식 UI 문서 확인 | | 로컬 구조 분석 | 8분 | shell CSS, JSX, 기존 테스트 확인 | | 구현 | 10분 | layout/zone attribute, CSS token/rule, 테스트 추가 | | 검증 | 20분 | renderer/desktop test/check, browser computed style check | | 패키지 빌드 | 2분 | Tauri internal app/DMG 생성 및 검증 | | 문서화 | 8분 |</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 542,
+      "updatedAt": "2026-06-06T04:48:46.696Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-intellij-shell-separation-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-intellij-shell-separation.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: IntelliJ Shell Separation",
+      "excerpt": "Evaluation: IntelliJ Shell Separation 평가 기준 side rail과 main viewport가 같은 평면처럼 보이지 않는가. IntelliJ style tool window/editor 분리 의도가 코드와 테스트에 남았는가. titlebar가 메인 영역의 상단 경계를 명확히 형성하는가. bounded scroll, no mobile shell, Tauri drag region, 기존 기능을 깨뜨리지 않는가. 테스트와 내부 패키지 빌드가 완료됐는가. 평가 결과 acti",
+      "html": "<p>Evaluation: IntelliJ Shell Separation 평가 기준 side rail과 main viewport가 같은 평면처럼 보이지 않는가. IntelliJ style tool window/editor 분리 의도가 코드와 테스트에 남았는가. titlebar가 메인 영역의 상단 경계를 명확히 형성하는가. bounded scroll, no mobile shell, Tauri drag region, 기존 기능을 깨뜨리지 않는가. 테스트와 내부 패키지 빌드가 완료됐는가. 평가 결과 activity rail 은 tool window stripe zone으로 명시됐고, 별도 배경/경계/활성 indicator/shadow를 갖는다. d</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1420,
+      "updatedAt": "2026-06-06T04:48:46.695Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-intellij-shell-separation-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-intellij-shell-separation.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: IntelliJ Shell Separation",
+      "excerpt": "Request Trace: IntelliJ Shell Separation 요청 IntelliJ UI 원칙으로 메인과 사이드 영역을 확실히 분리한다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 intellij shell separation.ko.md 스펙: platform desktop app/specs/2026 06 06 intellij shell separation/ 구현: MonitorShell.tsx , globals.css 테",
+      "html": "<p>Request Trace: IntelliJ Shell Separation 요청 IntelliJ UI 원칙으로 메인과 사이드 영역을 확실히 분리한다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 intellij shell separation.ko.md 스펙: platform desktop app/specs/2026 06 06 intellij shell separation/ 구현: MonitorShell.tsx , globals.css 테스트: workspace monitor/tests/tool studio.test.mjs 검증 corepack pnpm filter workspa</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 894,
+      "updatedAt": "2026-06-06T04:48:46.695Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-intellij-shell-separation-ko-md",
+      "path": "_history/plans/2026/2026-06-06-intellij-shell-separation.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Plan Record: IntelliJ Shell Separation",
+      "excerpt": "Plan Record: IntelliJ Shell Separation Work Mode selected work mode: standard view mode: superadmin developer 이유: 데스크톱 UI 구조 변경이지만 새로운 governance/policy 변경은 아니며, 구현과 검증이 필요한 중간 범위 작업이다. Plan 1. JetBrains 공식 UI 문서를 확인한다. 2. 요구사항과 스펙을 기록한다. 3. shell에 IntelliJ style layout/zone attr",
+      "html": "<p>Plan Record: IntelliJ Shell Separation Work Mode selected work mode: standard view mode: superadmin developer 이유: 데스크톱 UI 구조 변경이지만 새로운 governance/policy 변경은 아니며, 구현과 검증이 필요한 중간 범위 작업이다. Plan 1. JetBrains 공식 UI 문서를 확인한다. 2. 요구사항과 스펙을 기록한다. 3. shell에 IntelliJ style layout/zone attribute를 추가한다. 4. CSS에서 tool window stripe와 editor plane의 경계를 강화한다. 5. 회귀 방지 테스트를 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 902,
+      "updatedAt": "2026-06-06T04:48:46.694Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-intellij-shell-separation-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-intellij-shell-separation.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: IntelliJ Shell Separation",
+      "excerpt": "Work Summary: IntelliJ Shell Separation 완료 내용 desktop app shell 에 data layout model=\"intellij tool window editor\" 를 추가했다. 좌측 activity rail 을 tool window stripe zone으로 태깅했다. 메인 desktop viewport 를 editor plane zone으로 태깅했다. IntelliJ style separation token을 추가하고 rail/editor/titlebar ",
+      "html": "<p>Work Summary: IntelliJ Shell Separation 완료 내용 desktop app shell 에 data layout model=&quot;intellij tool window editor&quot; 를 추가했다. 좌측 activity rail 을 tool window stripe zone으로 태깅했다. 메인 desktop viewport 를 editor plane zone으로 태깅했다. IntelliJ style separation token을 추가하고 rail/editor/titlebar 경계를 강화했다. titlebar를 viewport padding 바깥까지 full bleed 처리해 메인 상단 chrome이 사이드와 분리되도</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 899,
+      "updatedAt": "2026-06-06T04:48:46.694Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-intellij-shell-separation-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-intellij-shell-separation.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: IntelliJ Shell Separation",
+      "excerpt": "User Request: IntelliJ Shell Separation 요약 사용자는 IntelliJ UI 특징과 원칙을 이용해 앱의 메인 영역과 사이드 영역을 확실히 분리해 달라고 요청했다. 해석 좌측 activity rail이 메인 작업 화면과 시각적으로 섞이지 않아야 한다. 메인 작업 영역은 editor/content plane처럼 별도 크롬과 경계를 가져야 한다. 기존 기능과 빌드 흐름은 유지해야 한다. 소유 프로젝트 platform desktop app/",
+      "html": "<p>User Request: IntelliJ Shell Separation 요약 사용자는 IntelliJ UI 특징과 원칙을 이용해 앱의 메인 영역과 사이드 영역을 확실히 분리해 달라고 요청했다. 해석 좌측 activity rail이 메인 작업 화면과 시각적으로 섞이지 않아야 한다. 메인 작업 영역은 editor/content plane처럼 별도 크롬과 경계를 가져야 한다. 기존 기능과 빌드 흐름은 유지해야 한다. 소유 프로젝트 platform desktop app/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 509,
+      "updatedAt": "2026-06-06T04:48:46.693Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-intellij-shell-separation-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-intellij-shell-separation.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: IntelliJ Shell Separation",
+      "excerpt": "Web Search: IntelliJ Shell Separation 요청 요약 IntelliJ UI 특징과 원칙을 사용해 데스크톱 앱의 메인 영역과 사이드 영역을 확실히 분리한다. 검색어 JetBrains IntelliJ Platform UI Guidelines tool windows layout sidebar main content official JetBrains IntelliJ Platform UI Guidelines navigation tool window content tabs offic",
+      "html": "<p>Web Search: IntelliJ Shell Separation 요청 요약 IntelliJ UI 특징과 원칙을 사용해 데스크톱 앱의 메인 영역과 사이드 영역을 확실히 분리한다. 검색어 JetBrains IntelliJ Platform UI Guidelines tool windows layout sidebar main content official JetBrains IntelliJ Platform UI Guidelines navigation tool window content tabs official JetBrains UI Guidelines layout spacing borders panels official IntelliJ 확인한 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2019,
+      "updatedAt": "2026-06-06T04:43:57.294Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-request-traces-2026-2026-06-06-runtime-customization-layer-ko-md",
       "path": "_history/request-traces/2026/2026-06-06-runtime-customization-layer.ko.md",
@@ -42611,35 +42723,35 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 387,
+      "documentsCount": 394,
       "categories": [
         {
           "category": "evaluation",
-          "count": 91
+          "count": 92
         },
         {
           "category": "user-request",
-          "count": 55
+          "count": 56
         },
         {
           "category": "web-search",
-          "count": 55
+          "count": 56
         },
         {
           "category": "work-summary",
-          "count": 55
+          "count": 56
         },
         {
           "category": "request-trace",
-          "count": 54
+          "count": 55
         },
         {
           "category": "work-timing",
-          "count": 52
+          "count": 53
         },
         {
           "category": "plan",
-          "count": 24
+          "count": 25
         },
         {
           "category": "daily-history",

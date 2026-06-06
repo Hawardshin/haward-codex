@@ -84,6 +84,13 @@
   --control-press-shadow: inset 0 2px 8px rgba(17, 24, 39, 0.12);
   --chrome-shadow: 0 1px 0 rgba(255, 255, 255, 0.74), 0 10px 28px rgba(17, 24, 39, 0.055);
   --rail-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.05), 10px 0 28px rgba(17, 24, 39, 0.11);
+  --ide-tool-window-bg: color-mix(in srgb, var(--rail-bg) 92%, #000000 8%);
+  --ide-tool-window-border: color-mix(in srgb, var(--line-strong) 48%, #000000 52%);
+  --ide-tool-window-highlight: rgba(255, 255, 255, 0.08);
+  --ide-editor-bg: color-mix(in srgb, var(--bg) 82%, var(--surface) 18%);
+  --ide-editor-separator: color-mix(in srgb, var(--line-strong) 72%, var(--bg) 28%);
+  --ide-editor-separator-shadow: color-mix(in srgb, var(--slate) 26%, transparent);
+  --ide-titlebar-bg: color-mix(in srgb, var(--titlebar-bg) 88%, var(--surface) 12%);
   --section-tab-shadow: 0 1px 1px rgba(17, 24, 39, 0.045), 0 6px 18px rgba(17, 24, 39, 0.05);
   --section-tab-active-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 12px 28px rgba(0, 102, 204, 0.16), 0 4px 12px rgba(15, 138, 116, 0.1);
   --surface-edge-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.68);
@@ -962,12 +969,15 @@ main {
 }
 
 .desktop-app-shell {
+  position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: 76px minmax(0, 1fr);
   min-width: var(--desktop-app-min-width);
   min-height: 100vh;
   min-height: 100dvh;
   min-height: max(100dvh, var(--desktop-app-min-height));
+  background: var(--ide-editor-bg);
   overflow: visible;
 }
 
@@ -1016,6 +1026,7 @@ main {
   position: sticky;
   top: 0;
   z-index: 30;
+  isolation: isolate;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto auto;
   gap: var(--density-chrome-gap);
@@ -1024,12 +1035,22 @@ main {
   height: 100dvh;
   max-height: 100vh;
   max-height: 100dvh;
-  border-right: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
+  border-right: 1px solid var(--ide-tool-window-border);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--rail-bg) 88%, var(--green) 12%), var(--rail-bg)),
-    var(--rail-bg);
-  box-shadow: var(--rail-shadow);
+    linear-gradient(180deg, color-mix(in srgb, var(--ide-tool-window-bg) 94%, var(--green) 6%), var(--ide-tool-window-bg)),
+    var(--ide-tool-window-bg);
+  box-shadow: var(--rail-shadow), inset -1px 0 0 var(--ide-tool-window-highlight);
   padding: var(--space-3) var(--space-2);
+}
+
+.activity-rail::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 auto;
+  z-index: -1;
+  width: 1px;
+  background: var(--ide-editor-separator);
+  box-shadow: 8px 0 18px -14px var(--ide-editor-separator-shadow);
 }
 
 .activity-rail nav {
@@ -1370,6 +1391,8 @@ main {
 }
 
 .desktop-viewport {
+  --viewport-inline-padding: clamp(18px, 2.2vw, 30px);
+  position: relative;
   animation: workspace-view-enter var(--motion-duration-standard) var(--motion-ease-out) both;
   min-width: 0;
   min-height: 100vh;
@@ -1379,7 +1402,9 @@ main {
   overflow: visible;
   overflow-x: hidden;
   overscroll-behavior: contain;
-  padding: 0 clamp(14px, 2.2vw, 26px) 32px;
+  background: var(--ide-editor-bg);
+  box-shadow: inset 1px 0 0 var(--ide-editor-separator), inset 16px 0 24px -30px var(--ide-editor-separator-shadow);
+  padding: 0 var(--viewport-inline-padding) 32px;
   scrollbar-gutter: stable;
   scroll-padding-top: 72px;
 }
@@ -1460,12 +1485,13 @@ main {
   grid-template-columns: minmax(180px, 0.34fr) minmax(0, 1fr);
   gap: var(--space-3) var(--space-4);
   align-items: start;
+  margin-inline: calc(var(--viewport-inline-padding) * -1);
   min-height: 0;
   border-bottom: 1px solid color-mix(in srgb, var(--hierarchy-border) 72%, transparent);
-  background: color-mix(in srgb, var(--titlebar-bg) 92%, var(--surface) 8%);
+  background: var(--ide-titlebar-bg);
   backdrop-filter: blur(16px) saturate(1.08);
   box-shadow: var(--chrome-shadow);
-  padding: var(--space-3) 0 var(--space-3);
+  padding: var(--space-3) var(--viewport-inline-padding) var(--space-3);
   -webkit-app-region: drag;
   user-select: none;
 }

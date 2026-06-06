@@ -531,6 +531,22 @@ test("Desktop titlebar uses native Tauri drag regions without stealing controls"
   assert.match(css, /\.titlebar-actions,[\s\S]*?\.titlebar-search,[\s\S]*?-webkit-app-region: no-drag;/);
 });
 
+test("Desktop shell separates IntelliJ-style tool window stripe and editor plane", () => {
+  assert.match(monitorShell, /data-layout-model="intellij-tool-window-editor"/);
+  assert.match(monitorShell, /data-intellij-zone="tool-window-stripe"/);
+  assert.match(monitorShell, /data-intellij-zone="editor-plane"/);
+  assert.match(css, /--ide-tool-window-bg:/);
+  assert.match(css, /--ide-tool-window-border:/);
+  assert.match(css, /--ide-editor-bg:/);
+  assert.match(css, /--ide-editor-separator:/);
+  assert.match(css, /--ide-titlebar-bg:/);
+  assert.match(css, /\.desktop-app-shell \{[\s\S]*?isolation: isolate;[\s\S]*?background: var\(--ide-editor-bg\);/);
+  assert.match(css, /\.activity-rail \{[\s\S]*?isolation: isolate;[\s\S]*?border-right: 1px solid var\(--ide-tool-window-border\);[\s\S]*?var\(--ide-tool-window-bg\);/);
+  assert.match(css, /\.activity-rail::after \{[\s\S]*?background: var\(--ide-editor-separator\);/);
+  assert.match(css, /\.desktop-viewport \{[\s\S]*?--viewport-inline-padding: clamp\(18px, 2\.2vw, 30px\);[\s\S]*?background: var\(--ide-editor-bg\);[\s\S]*?box-shadow: inset 1px 0 0 var\(--ide-editor-separator\)/);
+  assert.match(css, /\.desktop-titlebar \{[\s\S]*?margin-inline: calc\(var\(--viewport-inline-padding\) \* -1\);[\s\S]*?background: var\(--ide-titlebar-bg\);[\s\S]*?padding: var\(--space-3\) var\(--viewport-inline-padding\) var\(--space-3\);/);
+});
+
 test("Workspace monitor replaces native select dropdowns with styled app choices", () => {
   assert.doesNotMatch(monitorShell, /<select\b/);
   assert.match(monitorShell, /function AppChoiceMenu/);
@@ -1387,7 +1403,7 @@ test("Desktop chrome uses elevated navigation and tab states", () => {
   assert.match(css, /--section-tab-active-shadow:/);
   assert.match(css, /--surface-edge-highlight:/);
   assert.match(css, /\.desktop-titlebar \{[\s\S]*?box-shadow: var\(--chrome-shadow\);/);
-  assert.match(css, /\.activity-rail \{[\s\S]*?box-shadow: var\(--rail-shadow\);/);
+  assert.match(css, /\.activity-rail \{[\s\S]*?box-shadow: var\(--rail-shadow\), inset -1px 0 0 var\(--ide-tool-window-highlight\);/);
   assert.match(css, /\.activity-rail nav button::before \{/);
   assert.match(css, /\.activity-rail button\[aria-current="page"\]/);
   assert.match(css, /\.section-tab-group\.active::before \{/);

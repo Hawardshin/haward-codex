@@ -6048,8 +6048,16 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
 
   return (
     <main className={`desktop-app-root theme-${themeMode}`} aria-busy={sectionContentReady ? undefined : true}>
-      <div className={`desktop-app-shell sidebar-${sidebarMode}`} data-ui-foundation="gestalt-hierarchy-density">
-        <aside className="activity-rail" aria-label={uiLanguage === "ko" ? "주요 기능 레일" : "Primary activity rail"}>
+      <div
+        className={`desktop-app-shell sidebar-${sidebarMode}`}
+        data-ui-foundation="gestalt-hierarchy-density"
+        data-layout-model="intellij-tool-window-editor"
+      >
+        <aside
+          className="activity-rail"
+          data-intellij-zone="tool-window-stripe"
+          aria-label={uiLanguage === "ko" ? "주요 기능 레일" : "Primary activity rail"}
+        >
           <button
             className="activity-brand"
             type="button"
@@ -6105,6 +6113,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           data-resident-section-count={residentSectionIds.length}
           data-resident-section-limit={maxResidentSectionPanels}
           data-primary-work-surface={isPrimaryWorkSurface ? "true" : undefined}
+          data-intellij-zone="editor-plane"
           aria-label={uiLanguage === "ko" ? "데스크톱 앱 작업 화면" : "Desktop app viewport"}
           tabIndex={0}
         >

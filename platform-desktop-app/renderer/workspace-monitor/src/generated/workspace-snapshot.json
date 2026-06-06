@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T04:40:03.418Z",
+  "generatedAt": "2026-06-06T04:48:52.799Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 519,
-    "evaluations": 22,
+    "evaluations": 21,
     "webSearches": 13,
-    "timingRecords": 12,
+    "timingRecords": 13,
     "historyDays": 1,
-    "adminHistoryDocuments": 2659,
+    "adminHistoryDocuments": 2666,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7793,6 +7793,214 @@
   ],
   "documents": [
     {
+      "id": "history-work-timings-2026-2026-06-06-intellij-shell-separation-ko-md",
+      "path": "_history/work-timings/2026/2026-06-06-intellij-shell-separation.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "Work Timing: IntelliJ Shell Separation",
+      "excerpt": "Work Timing: IntelliJ Shell Separation | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 4분 | JetBrains 공식 UI 문서 확인 | | 로컬 구조 분석 | 8분 | shell CSS, JSX, 기존 테스트 확인 | | 구현 | 10분 | layout/zone attribute, CSS token/rule, 테스트 추가 | | 검증 | 20분 | renderer/desktop test/check, browser comp",
+      "html": "<p>Work Timing: IntelliJ Shell Separation | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 4분 | JetBrains 공식 UI 문서 확인 | | 로컬 구조 분석 | 8분 | shell CSS, JSX, 기존 테스트 확인 | | 구현 | 10분 | layout/zone attribute, CSS token/rule, 테스트 추가 | | 검증 | 20분 | renderer/desktop test/check, browser computed style check | | 패키지 빌드 | 2분 | Tauri internal app/DMG 생성 및 검증 | | 문서화 | 8분 |</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 542,
+      "updatedAt": "2026-06-06T04:48:46.696Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-intellij-shell-separation-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-intellij-shell-separation.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: IntelliJ Shell Separation",
+      "excerpt": "Evaluation: IntelliJ Shell Separation 평가 기준 side rail과 main viewport가 같은 평면처럼 보이지 않는가. IntelliJ style tool window/editor 분리 의도가 코드와 테스트에 남았는가. titlebar가 메인 영역의 상단 경계를 명확히 형성하는가. bounded scroll, no mobile shell, Tauri drag region, 기존 기능을 깨뜨리지 않는가. 테스트와 내부 패키지 빌드가 완료됐는가. 평가 결과 acti",
+      "html": "<p>Evaluation: IntelliJ Shell Separation 평가 기준 side rail과 main viewport가 같은 평면처럼 보이지 않는가. IntelliJ style tool window/editor 분리 의도가 코드와 테스트에 남았는가. titlebar가 메인 영역의 상단 경계를 명확히 형성하는가. bounded scroll, no mobile shell, Tauri drag region, 기존 기능을 깨뜨리지 않는가. 테스트와 내부 패키지 빌드가 완료됐는가. 평가 결과 activity rail 은 tool window stripe zone으로 명시됐고, 별도 배경/경계/활성 indicator/shadow를 갖는다. d</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1420,
+      "updatedAt": "2026-06-06T04:48:46.695Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-intellij-shell-separation-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-intellij-shell-separation.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: IntelliJ Shell Separation",
+      "excerpt": "Request Trace: IntelliJ Shell Separation 요청 IntelliJ UI 원칙으로 메인과 사이드 영역을 확실히 분리한다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 intellij shell separation.ko.md 스펙: platform desktop app/specs/2026 06 06 intellij shell separation/ 구현: MonitorShell.tsx , globals.css 테",
+      "html": "<p>Request Trace: IntelliJ Shell Separation 요청 IntelliJ UI 원칙으로 메인과 사이드 영역을 확실히 분리한다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 intellij shell separation.ko.md 스펙: platform desktop app/specs/2026 06 06 intellij shell separation/ 구현: MonitorShell.tsx , globals.css 테스트: workspace monitor/tests/tool studio.test.mjs 검증 corepack pnpm filter workspa</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 894,
+      "updatedAt": "2026-06-06T04:48:46.695Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-intellij-shell-separation-ko-md",
+      "path": "_history/plans/2026/2026-06-06-intellij-shell-separation.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Plan Record: IntelliJ Shell Separation",
+      "excerpt": "Plan Record: IntelliJ Shell Separation Work Mode selected work mode: standard view mode: superadmin developer 이유: 데스크톱 UI 구조 변경이지만 새로운 governance/policy 변경은 아니며, 구현과 검증이 필요한 중간 범위 작업이다. Plan 1. JetBrains 공식 UI 문서를 확인한다. 2. 요구사항과 스펙을 기록한다. 3. shell에 IntelliJ style layout/zone attr",
+      "html": "<p>Plan Record: IntelliJ Shell Separation Work Mode selected work mode: standard view mode: superadmin developer 이유: 데스크톱 UI 구조 변경이지만 새로운 governance/policy 변경은 아니며, 구현과 검증이 필요한 중간 범위 작업이다. Plan 1. JetBrains 공식 UI 문서를 확인한다. 2. 요구사항과 스펙을 기록한다. 3. shell에 IntelliJ style layout/zone attribute를 추가한다. 4. CSS에서 tool window stripe와 editor plane의 경계를 강화한다. 5. 회귀 방지 테스트를 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 902,
+      "updatedAt": "2026-06-06T04:48:46.694Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-intellij-shell-separation-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-intellij-shell-separation.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: IntelliJ Shell Separation",
+      "excerpt": "Work Summary: IntelliJ Shell Separation 완료 내용 desktop app shell 에 data layout model=\"intellij tool window editor\" 를 추가했다. 좌측 activity rail 을 tool window stripe zone으로 태깅했다. 메인 desktop viewport 를 editor plane zone으로 태깅했다. IntelliJ style separation token을 추가하고 rail/editor/titlebar ",
+      "html": "<p>Work Summary: IntelliJ Shell Separation 완료 내용 desktop app shell 에 data layout model=&quot;intellij tool window editor&quot; 를 추가했다. 좌측 activity rail 을 tool window stripe zone으로 태깅했다. 메인 desktop viewport 를 editor plane zone으로 태깅했다. IntelliJ style separation token을 추가하고 rail/editor/titlebar 경계를 강화했다. titlebar를 viewport padding 바깥까지 full bleed 처리해 메인 상단 chrome이 사이드와 분리되도</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 899,
+      "updatedAt": "2026-06-06T04:48:46.694Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-intellij-shell-separation-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-intellij-shell-separation.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: IntelliJ Shell Separation",
+      "excerpt": "User Request: IntelliJ Shell Separation 요약 사용자는 IntelliJ UI 특징과 원칙을 이용해 앱의 메인 영역과 사이드 영역을 확실히 분리해 달라고 요청했다. 해석 좌측 activity rail이 메인 작업 화면과 시각적으로 섞이지 않아야 한다. 메인 작업 영역은 editor/content plane처럼 별도 크롬과 경계를 가져야 한다. 기존 기능과 빌드 흐름은 유지해야 한다. 소유 프로젝트 platform desktop app/",
+      "html": "<p>User Request: IntelliJ Shell Separation 요약 사용자는 IntelliJ UI 특징과 원칙을 이용해 앱의 메인 영역과 사이드 영역을 확실히 분리해 달라고 요청했다. 해석 좌측 activity rail이 메인 작업 화면과 시각적으로 섞이지 않아야 한다. 메인 작업 영역은 editor/content plane처럼 별도 크롬과 경계를 가져야 한다. 기존 기능과 빌드 흐름은 유지해야 한다. 소유 프로젝트 platform desktop app/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 509,
+      "updatedAt": "2026-06-06T04:48:46.693Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-intellij-shell-separation-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-intellij-shell-separation/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: IntelliJ Shell Separation",
+      "excerpt": "Traceability: IntelliJ Shell Separation | 항목 | 연결 | | | | | 요구사항 | platform desktop app/docs/requirements/2026 06 06 intellij shell separation.ko.md | | 웹 검색 | history/web searches/2026/2026 06 06 intellij shell separation.ko.md | | 스펙 | platform desktop app/specs/2026 06 06 inte",
+      "html": "<h1>Traceability: IntelliJ Shell Separation</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>요구사항</td><td><code>platform-desktop-app/docs/requirements/2026-06-06-intellij-shell-separation.ko.md</code></td></tr><tr><td>웹 검색</td><td><code>_history/web-searches/2026/2026-06-06-intellij-shell-separation.ko.md</code></td></tr><tr><td>스펙</td><td><code>platform-desktop-app/specs/2026-06-06-intellij-shell-separation/spec.ko.md</code></td></tr><tr><td>구현</td><td><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code>, <code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></td></tr><tr><td>테스트</td><td><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></td></tr><tr><td>검증</td><td><code>platform-desktop-app/specs/2026-06-06-intellij-shell-separation/validation.ko.md</code></td></tr><tr><td>평가</td><td><code>_history/evaluations/2026/2026-06-06-intellij-shell-separation.ko.md</code></td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 790,
+      "updatedAt": "2026-06-06T04:48:46.693Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-intellij-shell-separation-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-intellij-shell-separation/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: IntelliJ Shell Separation",
+      "excerpt": "Validation: IntelliJ Shell Separation 실행 결과 corepack pnpm filter workspace monitor test : 통과, 81 tests. corepack pnpm filter workspace monitor run check : 통과. Browser computed style check: 통과. data layout model=intellij tool window editor , rail width 76px, viewport/titlebar left",
+      "html": "<h1>Validation: IntelliJ Shell Separation</h1>\n<h2>실행 결과</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 81 tests.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과.</li>\n<li>Browser computed-style check: 통과. <code>data-layout-model=intellij-tool-window-editor</code>, rail width 76px, viewport/titlebar left 76px, full-bleed titlebar, rail/editor background and separator shadow 확인.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 27 tests.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과. 기존 public release 경고는 signing/notarization/updater/clean-machine smoke test.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code>: 통과.</li>\n</ul>\n<h2>패키지 산출물</h2>\n<ul>\n<li>macOS app: <code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li>DMG: <code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>\n<h2>최종 예정</h2>\n<ul>\n<li><code>git diff --check</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 978,
+      "updatedAt": "2026-06-06T04:48:46.693Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-intellij-shell-separation-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-intellij-shell-separation/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: IntelliJ Shell Separation",
+      "excerpt": "Tasks: IntelliJ Shell Separation x 웹 first intake 기록. x 요구사항과 스펙 작성. x shell layout data attribute 추가. x IntelliJ style side/main CSS 분리 적용. x 테스트 계약 추가. x 검증과 package build 실행. x close out history/evaluation 업데이트.",
+      "html": "<h1>Tasks: IntelliJ Shell Separation</h1>\n<ul>\n<li>[x] 웹 first intake 기록.</li>\n<li>[x] 요구사항과 스펙 작성.</li>\n<li>[x] shell layout data attribute 추가.</li>\n<li>[x] IntelliJ-style side/main CSS 분리 적용.</li>\n<li>[x] 테스트 계약 추가.</li>\n<li>[x] 검증과 package build 실행.</li>\n<li>[x] close-out history/evaluation 업데이트.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 314,
+      "updatedAt": "2026-06-06T04:48:46.692Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-intellij-shell-separation-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-intellij-shell-separation/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: IntelliJ Shell Separation",
+      "excerpt": "Plan: IntelliJ Shell Separation 1. JetBrains 공식 UI 문서의 tool window/editor 분리 기준을 기록한다. 2. shell JSX에 layout/zone data attribute를 추가한다. 3. CSS token과 rail/viewport/titlebar rule을 조정한다. 4. 정적 테스트 계약을 추가한다. 5. renderer/desktop 검증과 internal package build를 실행한다. 6. history, evaluation",
+      "html": "<h1>Plan: IntelliJ Shell Separation</h1>\n<p>1. JetBrains 공식 UI 문서의 tool-window/editor 분리 기준을 기록한다.</p>\n<p>2. shell JSX에 layout/zone data attribute를 추가한다.</p>\n<p>3. CSS token과 rail/viewport/titlebar rule을 조정한다.</p>\n<p>4. 정적 테스트 계약을 추가한다.</p>\n<p>5. renderer/desktop 검증과 internal package build를 실행한다.</p>\n<p>6. history, evaluation, trace를 업데이트하고 commit/push한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 424,
+      "updatedAt": "2026-06-06T04:43:57.295Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-intellij-shell-separation-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-intellij-shell-separation.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: IntelliJ Shell Separation",
+      "excerpt": "Web Search: IntelliJ Shell Separation 요청 요약 IntelliJ UI 특징과 원칙을 사용해 데스크톱 앱의 메인 영역과 사이드 영역을 확실히 분리한다. 검색어 JetBrains IntelliJ Platform UI Guidelines tool windows layout sidebar main content official JetBrains IntelliJ Platform UI Guidelines navigation tool window content tabs offic",
+      "html": "<p>Web Search: IntelliJ Shell Separation 요청 요약 IntelliJ UI 특징과 원칙을 사용해 데스크톱 앱의 메인 영역과 사이드 영역을 확실히 분리한다. 검색어 JetBrains IntelliJ Platform UI Guidelines tool windows layout sidebar main content official JetBrains IntelliJ Platform UI Guidelines navigation tool window content tabs official JetBrains UI Guidelines layout spacing borders panels official IntelliJ 확인한 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2019,
+      "updatedAt": "2026-06-06T04:43:57.294Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-intellij-shell-separation-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-intellij-shell-separation.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Requirements: IntelliJ Shell Separation",
+      "excerpt": "Requirements: IntelliJ Shell Separation 목적 데스크톱 앱의 좌측 사이드/레일과 메인 작업 영역이 같은 평면처럼 보이지 않도록, IntelliJ 계열 IDE의 tool window stripe와 editor/content area 분리 원칙을 적용한다. 요구사항 좌측 activity rail은 tool window stripe처럼 독립된 side chrome으로 보여야 한다. 메인 viewport는 editor/content plane처럼 별도 배경, 경계, titl",
+      "html": "<h1>Requirements: IntelliJ Shell Separation</h1>\n<h2>목적</h2>\n<p>데스크톱 앱의 좌측 사이드/레일과 메인 작업 영역이 같은 평면처럼 보이지 않도록, IntelliJ 계열 IDE의 tool-window stripe와 editor/content area 분리 원칙을 적용한다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>좌측 activity rail은 tool-window stripe처럼 독립된 side chrome으로 보여야 한다.</li>\n<li>메인 viewport는 editor/content plane처럼 별도 배경, 경계, titlebar chrome을 가져야 한다.</li>\n<li>활성 section은 사이드에서 명확한 indicator와 selected state를 가져야 한다.</li>\n<li>titlebar는 메인 영역의 상단 경계를 끝까지 형성해야 하며, 좌측 레일과 시각적으로 섞이지 않아야 한다.</li>\n<li>기존 no-mobile, bounded scroll, Tauri drag region, resident section, provider/terminal 기능을 깨뜨리지 않아야 한다.</li>\n<li>구현 후 테스트, check, build/package 검증을 실행한다.</li>\n</ul>\n<h2>범위</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n</ul>\n<h2>제외</h2>\n<ul>\n<li>새로운 side panel 기능 추가.</li>\n<li>IntelliJ 상표나 시각 자산 복제.</li>\n<li>public release signing/notarization 문제 해결.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1306,
+      "updatedAt": "2026-06-06T04:43:57.294Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-intellij-shell-separation-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-intellij-shell-separation/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: IntelliJ Shell Separation",
+      "excerpt": "Spec: IntelliJ Shell Separation 결정 현재 workspace monitor shell을 intellij tool window editor layout model로 태깅하고, CSS에서 side tool window stripe와 main editor plane을 명시적으로 분리한다. 구현 기준 desktop app shell 에 layout model data attribute를 둔다. activity rail 에 tool window zone data attribute를",
+      "html": "<h1>Spec: IntelliJ Shell Separation</h1>\n<h2>결정</h2>\n<p>현재 <code>workspace-monitor</code> shell을 <code>intellij-tool-window-editor</code> layout model로 태깅하고, CSS에서 side tool-window stripe와 main editor plane을 명시적으로 분리한다.</p>\n<h2>구현 기준</h2>\n<ul>\n<li><code>desktop-app-shell</code>에 layout model data attribute를 둔다.</li>\n<li><code>activity-rail</code>에 tool-window zone data attribute를 둔다.</li>\n<li><code>desktop-viewport</code>에 editor zone data attribute를 둔다.</li>\n<li>CSS에 IntelliJ-style separation tokens를 추가한다.</li>\n<li><code>activity-rail</code>은 dark side chrome, 강한 우측 경계, inset/highlight shadow, active rail indicator를 유지한다.</li>\n<li><code>desktop-viewport</code>는 editor plane 배경과 좌측 separator shadow를 갖는다.</li>\n<li><code>desktop-titlebar</code>는 viewport padding 바깥까지 full-bleed로 확장해 메인 상단 chrome 경계를 만든다.</li>\n<li>테스트는 이 계약이 사라지지 않도록 shell data attribute와 CSS token/rule을 확인한다.</li>\n</ul>\n<h2>검증 기준</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1236,
+      "updatedAt": "2026-06-06T04:43:57.294Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-request-traces-2026-2026-06-06-runtime-customization-layer-ko-md",
       "path": "_history/request-traces/2026/2026-06-06-runtime-customization-layer.ko.md",
       "category": "request-trace",
@@ -10609,70 +10817,6 @@
       "workspaceArea": "_history/work-timings"
     },
     {
-      "id": "history-request-traces-2026-2026-06-06-desktop-dev-run-fix-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-desktop-dev-run-fix.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "2026 06 06 request to outcome trace",
-      "excerpt": "2026 06 06 request to outcome trace 요청 README대로 했는데 desktop app 빌드/실행이 되지 않는 문제 해결. 원인 Tauri beforeDevCommand 가 잘못된 상대 경로를 사용했다. updater plugin이 public updater config 없이도 항상 초기화되어 internal/dev 실행을 panic으로 막았다. README에 빌드 후 실행 명령이 없었다. 산출물 platform desktop app/src tauri/tauri.conf",
-      "html": "<p>2026 06 06 request to outcome trace 요청 README대로 했는데 desktop app 빌드/실행이 되지 않는 문제 해결. 원인 Tauri beforeDevCommand 가 잘못된 상대 경로를 사용했다. updater plugin이 public updater config 없이도 항상 초기화되어 internal/dev 실행을 panic으로 막았다. README에 빌드 후 실행 명령이 없었다. 산출물 platform desktop app/src tauri/tauri.conf.json platform desktop app/src tauri/src/lib.rs package.json platform desktop ap</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1145,
-      "updatedAt": "2026-06-06T01:28:41.482Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-desktop-dev-run-fix-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-desktop-dev-run-fix.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "2026 06 06 desktop dev/run fix 작업 요약",
-      "excerpt": "2026 06 06 desktop dev/run fix 작업 요약 구현 tauri.conf.json 의 dev renderer path를 수정했다. public updater config가 있을 때만 updater plugin을 초기화하도록 Rust startup을 바꿨다. desktop:dev , desktop:run:internal , desktop:package:run:internal root scripts를 추가했다. macOS internal .app open helper를 추가했다. R",
-      "html": "<p>2026 06 06 desktop dev/run fix 작업 요약 구현 tauri.conf.json 의 dev renderer path를 수정했다. public updater config가 있을 때만 updater plugin을 초기화하도록 Rust startup을 바꿨다. desktop:dev , desktop:run:internal , desktop:package:run:internal root scripts를 추가했다. macOS internal .app open helper를 추가했다. README, release runbook, doctor, readiness contract를 갱신했다. 현재 검증 desktop:dev 실행 s</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 859,
-      "updatedAt": "2026-06-06T01:28:41.482Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-desktop-dev-run-fix-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-desktop-dev-run-fix.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "2026 06 06 desktop dev/run fix 평가",
-      "excerpt": "2026 06 06 desktop dev/run fix 평가 평가 대상 README build/run failure fix. 완료 기준 desktop:dev 가 실제 app startup까지 진행한다. internal/dev 실행은 updater public release gate에 막히지 않는다. 빌드된 .app 을 여는 명령이 문서화되고 스크립트로 제공된다. 최종 package와 smoke가 통과한다. 현재 결과 desktop:dev : 통과. GET / 200 . desktop:run:int",
-      "html": "<p>2026 06 06 desktop dev/run fix 평가 평가 대상 README build/run failure fix. 완료 기준 desktop:dev 가 실제 app startup까지 진행한다. internal/dev 실행은 updater public release gate에 막히지 않는다. 빌드된 .app 을 여는 명령이 문서화되고 스크립트로 제공된다. 최종 package와 smoke가 통과한다. 현재 결과 desktop:dev : 통과. GET / 200 . desktop:run:internal dry run : 통과. desktop:doctor : 통과. public release warning만 남음. cargo check</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1213,
-      "updatedAt": "2026-06-06T01:28:41.481Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-desktop-dev-run-fix-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-desktop-dev-run-fix.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: desktop dev/run fix",
-      "excerpt": "사용자 요청 요약: desktop dev/run fix 사용자는 README에 있는 대로 빌드하고 실행했지만 되지 않는다고 보고했고, 해결을 요청했다. 적용 범위 desktop app README 명령 재현. Tauri dev 실행 실패 수정. internal/dev updater startup panic 수정. 빌드된 내부 .app 실행 명령 추가.",
-      "html": "<p>사용자 요청 요약: desktop dev/run fix 사용자는 README에 있는 대로 빌드하고 실행했지만 되지 않는다고 보고했고, 해결을 요청했다. 적용 범위 desktop app README 명령 재현. Tauri dev 실행 실패 수정. internal/dev updater startup panic 수정. 빌드된 내부 .app 실행 명령 추가.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 354,
-      "updatedAt": "2026-06-06T01:24:25.576Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-desktop-dev-run-fix-traceability-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-desktop-dev-run-fix/traceability.ko.md",
       "category": "project-spec",
@@ -10737,22 +10881,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-web-searches-2026-2026-06-06-desktop-dev-run-fix-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-desktop-dev-run-fix.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: desktop dev/run fix",
-      "excerpt": "웹 검색 기록: desktop dev/run fix 목적 README 명령대로 desktop app을 빌드하거나 실행할 때 실패하는 문제를 고치기 전에, Tauri v2와 Next static export의 공식 실행/빌드 전제를 확인했다. 검색어 Tauri v2 official docs development build beforeDevCommand frontendDist devUrl Next.js official docs output export static build Tauri plugin u",
-      "html": "<p>웹 검색 기록: desktop dev/run fix 목적 README 명령대로 desktop app을 빌드하거나 실행할 때 실패하는 문제를 고치기 전에, Tauri v2와 Next static export의 공식 실행/빌드 전제를 확인했다. 검색어 Tauri v2 official docs development build beforeDevCommand frontendDist devUrl Next.js official docs output export static build Tauri plugin updater v2 config pubkey endpoints official docs 확인한 주요 출처 Tauri Develop: https:/</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1551,
-      "updatedAt": "2026-06-06T01:24:25.572Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-docs-release-runbook-en-md",
       "path": "platform-desktop-app/docs/release-runbook.en.md",
       "category": "project-doc",
@@ -10783,38 +10911,6 @@
       "historyDate": "",
       "historyYear": "",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-eval-report-catalog-structure-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-eval-report-catalog-structure.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "2026 06 06 EVAL report catalog structure 평가",
-      "excerpt": "2026 06 06 EVAL report catalog structure 평가 평가 대상 요청: 소스코드 개선. 구현 slice: EVAL report static catalog를 score model에서 분리. 완료 기준 평가 유지보수성: scenario/tool/repo catalog 변경이 score formula diff와 섞이지 않는다. 검증성: panel/model/catalog/runtime model boundary를 tests/contracts가 확인한다. 동작 보존: EVAL c",
-      "html": "<p>2026 06 06 EVAL report catalog structure 평가 평가 대상 요청: 소스코드 개선. 구현 slice: EVAL report static catalog를 score model에서 분리. 완료 기준 평가 유지보수성: scenario/tool/repo catalog 변경이 score formula diff와 섞이지 않는다. 검증성: panel/model/catalog/runtime model boundary를 tests/contracts가 확인한다. 동작 보존: EVAL cockpit data attributes와 사용자 표시 label은 유지했다. resource lifecycle: 새 runtime resour</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1590,
-      "updatedAt": "2026-06-06T01:13:08.238Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-eval-report-catalog-structure-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-eval-report-catalog-structure.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "2026 06 06 request to outcome trace",
-      "excerpt": "2026 06 06 request to outcome trace 요청 소스코드 개선. 결정 가장 직접적인 다음 구조 병목으로 EVAL report model 안의 static catalog 혼재를 선택했다. 전체 repository 일괄 refactor 대신, 검증 가능한 source boundary 개선으로 진행했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationReportCatalog.ts p",
-      "html": "<p>2026 06 06 request to outcome trace 요청 소스코드 개선. 결정 가장 직접적인 다음 구조 병목으로 EVAL report model 안의 static catalog 혼재를 선택했다. 전체 repository 일괄 refactor 대신, 검증 가능한 source boundary 개선으로 진행했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationReportCatalog.ts platform desktop app/renderer/workspace monitor/components/features/evaluationRep</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1018,
-      "updatedAt": "2026-06-06T01:13:08.238Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-eval-report-catalog-structure-tasks-ko-md",
@@ -18095,102 +18191,6 @@
       "historyDate": "2026-06-04",
       "historyYear": "2026",
       "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-04-single-feature-full-screen-ui-plan-ko-md",
-      "path": "_specs/workspace-platform/2026-06-04-single-feature-full-screen-ui/plan.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "계획: 단일 주 기능 화면 공간 원칙",
-      "excerpt": "계획: 단일 주 기능 화면 공간 원칙 작업 모드 selected work mode: governance 이유: 사용자 지시가 앞으로 UI 설계에 반복 적용되어야 하는 durable rule이며 persistent instructions, policy, runtime adapter, memory bootstrap manifest를 변경한다. view mode: superadmin developer install mode: not applicable web first intake 검색어: single",
-      "html": "<h1>계획: 단일 주 기능 화면 공간 원칙</h1>\n<h2>작업 모드</h2>\n<ul>\n<li>selected work_mode: governance</li>\n<li>이유: 사용자 지시가 앞으로 UI 설계에 반복 적용되어야 하는 durable rule이며 persistent instructions, policy, runtime adapter, memory bootstrap manifest를 변경한다.</li>\n<li>view_mode: superadmin_developer</li>\n<li>install_mode: not_applicable</li>\n</ul>\n<h2>web-first intake</h2>\n<ul>\n<li>검색어:</li>\n<li><code>single task screen UI design focus principle task-focused interface full screen</code></li>\n<li><code>Nielsen Norman Group focused user interface one primary task per screen</code></li>\n<li>반영한 출처:</li>\n<li>Microsoft Learn, Inductive User Interface</li>\n<li>VA.gov Design System, A single response / One Thing per Page</li>\n<li>계획 영향: &quot;단일 주 기능을 화면 중심으로 두고 보조 요소는 종속시킨다&quot;를 UI 공간 배분 원칙으로 기록한다.</li>\n</ul>\n<h2>memory bootstrap</h2>\n<ul>\n<li>확인한 hot/warm anchor:</li>\n<li><code>_docs/instructions/persistent-instructions.md</code></li>\n<li><code>_docs/policies/ui-tone-policy.ko.md</code></li>\n<li><code>agent-platform/configs/memory/bootstrap-manifest.json</code></li>\n<li><code>agent-platform/configs/workflows/work-mode-registry.json</code></li>\n</ul>\n<h2>실행 계획</h2>\n<p>1. persistent instructions 한국어/영어/entry 문서에 단일 주 기능 화면 원칙을 추가한다.</p>\n<p>2. UI tone policy 한국어/영어 문서에 공간 배분 원칙, split layout 예외, 검증 기준, 외부 근거를 추가한다.</p>\n<p>3. <code>AGENTS.md</code>에 같은 원칙을 runtime adapter 수준으로 얇게 반영한다.</p>\n<p>4. memory bootstrap manifest가 UI tone policy를 새로운 focus rule과 연결하도록 갱신한다.</p>\n<p>5. requirements, spec, history, evaluation 기록을 남긴다.</p>\n<p>6. docs audit, JSON validation, git diff review를 수행한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1686,
-      "updatedAt": "2026-06-04T14:57:36.525Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-04-single-feature-full-screen-ui-spec-ko-md",
-      "path": "_specs/workspace-platform/2026-06-04-single-feature-full-screen-ui/spec.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "스펙: 단일 주 기능 화면 공간 원칙",
-      "excerpt": "스펙: 단일 주 기능 화면 공간 원칙 목표 플랫폼 UI를 설계하거나 검토할 때, 한 화면에 주 기능이 하나뿐이면 그 기능이 화면을 지배하도록 하는 공간 배분 원칙을 지속 규칙으로 만든다. 사용자 요구 화면에 주 기능이 하나라면 그 기능이 화면 대부분을 차지해야 한다. 보조 요소가 화면을 차지해 주 기능을 작게 만들면 안 된다. 기능 요구사항 | ID | 내용 | | | | | SPEC UI FOCUS 001 | 지속 지시에 단일 주 기능 화면의 full screen focus 원칙을 추가한다. |",
-      "html": "<h1>스펙: 단일 주 기능 화면 공간 원칙</h1>\n<h2>목표</h2>\n<p>플랫폼 UI를 설계하거나 검토할 때, 한 화면에 주 기능이 하나뿐이면 그 기능이 화면을 지배하도록 하는 공간 배분 원칙을 지속 규칙으로 만든다.</p>\n<h2>사용자 요구</h2>\n<ul>\n<li>화면에 주 기능이 하나라면 그 기능이 화면 대부분을 차지해야 한다.</li>\n<li>보조 요소가 화면을 차지해 주 기능을 작게 만들면 안 된다.</li>\n</ul>\n<h2>기능 요구사항</h2>\n<table><thead><tr><th>ID</th><th>내용</th></tr></thead><tbody><tr><td>SPEC-UI-FOCUS-001</td><td>지속 지시에 단일 주 기능 화면의 full-screen focus 원칙을 추가한다.</td></tr><tr><td>SPEC-UI-FOCUS-002</td><td>UI tone policy에 공간 배분 원칙, split layout 허용 조건, 검증 항목을 추가한다.</td></tr><tr><td>SPEC-UI-FOCUS-003</td><td>Codex runtime adapter인 <code>AGENTS.md</code>에 같은 원칙을 얇게 반영한다.</td></tr><tr><td>SPEC-UI-FOCUS-004</td><td>memory bootstrap manifest가 UI tone policy를 이 원칙의 startup anchor로 설명하도록 갱신한다.</td></tr><tr><td>SPEC-UI-FOCUS-005</td><td>요구사항, 검색 기록, 요청 요약, request trace, 평가 입력을 남긴다.</td></tr></tbody></table>\n<h2>비범위</h2>\n<ul>\n<li>특정 화면 구현 수정은 비범위다. 사용자가 대상 화면을 지정하면 이 스펙을 acceptance gate로 사용해 별도 UI 변경을 수행한다.</li>\n<li>화면의 모든 보조 UI 제거는 비범위다. navigation, status, action은 주 기능을 돕는 한 허용한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>지속 지시와 UI 정책에 단일 주 기능 화면 공간 원칙이 명시되어 있다.</li>\n<li>split layout을 허용하는 조건이 문서화되어 있다.</li>\n<li>검증 항목이 &quot;주 기능보다 주변 chrome이 우세한 화면&quot;을 재설계 대상으로 잡는다.</li>\n<li>docs audit와 JSON validation이 통과한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1728,
-      "updatedAt": "2026-06-04T14:57:36.525Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-04-single-feature-full-screen-ui-traceability-ko-md",
-      "path": "_specs/workspace-platform/2026-06-04-single-feature-full-screen-ui/traceability.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "추적성: 단일 주 기능 화면 공간 원칙",
-      "excerpt": "추적성: 단일 주 기능 화면 공간 원칙 | Requirement | Spec | Evidence | | | | | | REQ UI FOCUS 001 | SPEC UI FOCUS 001, SPEC UI FOCUS 002 | docs/instructions/persistent instructions.ko.md , docs/policies/ui tone policy.ko.md | | REQ UI FOCUS 002 | SPEC UI FOCUS 001, SPEC UI FOCUS 002 | docs/inst",
-      "html": "<h1>추적성: 단일 주 기능 화면 공간 원칙</h1>\n<table><thead><tr><th>Requirement</th><th>Spec</th><th>Evidence</th></tr></thead><tbody><tr><td>REQ-UI-FOCUS-001</td><td>SPEC-UI-FOCUS-001, SPEC-UI-FOCUS-002</td><td><code>_docs/instructions/persistent-instructions.ko.md</code>, <code>_docs/policies/ui-tone-policy.ko.md</code></td></tr><tr><td>REQ-UI-FOCUS-002</td><td>SPEC-UI-FOCUS-001, SPEC-UI-FOCUS-002</td><td><code>_docs/instructions/persistent-instructions.en.md</code>, <code>_docs/policies/ui-tone-policy.en.md</code></td></tr><tr><td>REQ-UI-FOCUS-003</td><td>SPEC-UI-FOCUS-002, SPEC-UI-FOCUS-003</td><td><code>AGENTS.md</code>, <code>_docs/policies/ui-tone-policy.ko.md</code></td></tr><tr><td>REQ-UI-FOCUS-004</td><td>SPEC-UI-FOCUS-002, SPEC-UI-FOCUS-004</td><td><code>_docs/policies/ui-tone-policy.ko.md</code>, <code>agent-platform/configs/memory/bootstrap-manifest.json</code></td></tr></tbody></table>\n<h2>Request Link</h2>\n<ul>\n<li>user_request_summary_target: <code>_history/user-requests/2026/2026-06-04-single-feature-full-screen-ui.ko.md</code></li>\n<li>web_search_record_target: <code>_history/web-searches/2026/2026-06-04-single-feature-full-screen-ui.ko.md</code></li>\n<li>evaluation_target: <code>_history/evaluations/2026/2026-06-04-single-feature-full-screen-ui-evaluation-input.json</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1023,
-      "updatedAt": "2026-06-04T14:57:36.525Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "requirements-changes-2026-06-04-single-feature-full-screen-ui-ko-md",
-      "path": "_requirements/changes/2026-06-04-single-feature-full-screen-ui.ko.md",
-      "category": "requirement",
-      "language": "ko",
-      "title": "요구사항 변경: 단일 주 기능 화면 공간 원칙",
-      "excerpt": "요구사항 변경: 단일 주 기능 화면 공간 원칙 요청 요약 사용자는 현재 화면이 좋지 않다고 지적하며, 한 화면에 주 기능이 하나라면 그 기능이 화면을 채우는 것을 기본 원칙으로 삼으라고 지시했다. 변경 요구사항 | ID | 요구사항 | 상태 | | | | | | REQ UI FOCUS 001 | 한 화면의 주 기능이 하나이면 그 기능이 화면 중심과 대부분의 면적을 차지해야 한다. | accepted | | REQ UI FOCUS 002 | navigation, 상태, 보조 action은 주 기능을",
-      "html": "<h1>요구사항 변경: 단일 주 기능 화면 공간 원칙</h1>\n<h2>요청 요약</h2>\n<p>사용자는 현재 화면이 좋지 않다고 지적하며, 한 화면에 주 기능이 하나라면 그 기능이 화면을 채우는 것을 기본 원칙으로 삼으라고 지시했다.</p>\n<h2>변경 요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>상태</th></tr></thead><tbody><tr><td>REQ-UI-FOCUS-001</td><td>한 화면의 주 기능이 하나이면 그 기능이 화면 중심과 대부분의 면적을 차지해야 한다.</td><td>accepted</td></tr><tr><td>REQ-UI-FOCUS-002</td><td>navigation, 상태, 보조 action은 주 기능을 돕는 수준으로만 배치하고 주 기능보다 시각적으로 우세하면 안 된다.</td><td>accepted</td></tr><tr><td>REQ-UI-FOCUS-003</td><td>split layout, dashboard grid, side-by-side panel은 비교, monitoring, 다중 주 작업처럼 동시에 봐야 할 명확한 이유가 있을 때만 사용한다.</td><td>accepted</td></tr><tr><td>REQ-UI-FOCUS-004</td><td>UI 검증에서는 단일 주 기능이 주변 chrome, 빈 card, 장식, 무관한 module보다 작게 보이는지 확인하고, 해당하면 재설계 대상으로 분류한다.</td><td>accepted</td></tr></tbody></table>\n<h2>범위</h2>\n<ul>\n<li>적용 대상: platform UI, desktop app UI, dashboard, monitor, generated snapshot, admin surface.</li>\n<li>비범위: 사용자가 특정 화면을 지정하지 않았으므로 이번 변경에서는 실제 화면 구현을 추측해 수정하지 않는다.</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>Microsoft Learn의 Inductive User Interface 문서는 screen/page를 하나의 primary task에 집중시키고 contents가 그 task에 맞아야 한다는 지침을 제공한다.</li>\n<li>VA.gov Design System의 One Thing per Page 패턴은 한 번에 하나의 논리적 항목을 다루면 집중과 이해가 쉬워진다고 설명한다.</li>\n</ul>\n<h2>반영 대상</h2>\n<ul>\n<li><code>_docs/instructions/persistent-instructions.ko.md</code></li>\n<li><code>_docs/instructions/persistent-instructions.en.md</code></li>\n<li><code>_docs/instructions/persistent-instructions.md</code></li>\n<li><code>_docs/policies/ui-tone-policy.ko.md</code></li>\n<li><code>_docs/policies/ui-tone-policy.en.md</code></li>\n<li><code>AGENTS.md</code></li>\n<li><code>agent-platform/configs/memory/bootstrap-manifest.json</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2031,
-      "updatedAt": "2026-06-04T14:57:36.524Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "_requirements/changes"
-    },
-    {
-      "id": "requirements-reviews-2026-06-04-single-feature-full-screen-ui-ko-md",
-      "path": "_requirements/reviews/2026-06-04-single-feature-full-screen-ui.ko.md",
-      "category": "requirement",
-      "language": "ko",
-      "title": "요구사항 리뷰: 단일 주 기능 화면 공간 원칙",
-      "excerpt": "요구사항 리뷰: 단일 주 기능 화면 공간 원칙 리뷰 결과 상태: accepted work mode: governance 리뷰 일자: 2026 06 04 판단 사용자 지시는 앞으로의 UI 설계에 반복 적용되어야 하는 지속 지시다. 기존 UI tone policy는 명확성, 훑어보기, 접근성, 운영 신뢰를 다루고 있었지만, 단일 주 기능 화면의 공간 배분 기준은 명시하지 않았다. 따라서 새로운 요구사항을 별도 UI focus gate로 수용한다. 충돌 검토 기존 \"운영 도구처럼 빠르게 읽히는 UI\" ",
-      "html": "<h1>요구사항 리뷰: 단일 주 기능 화면 공간 원칙</h1>\n<h2>리뷰 결과</h2>\n<ul>\n<li>상태: accepted</li>\n<li>work_mode: governance</li>\n<li>리뷰 일자: 2026-06-04</li>\n</ul>\n<h2>판단</h2>\n<p>사용자 지시는 앞으로의 UI 설계에 반복 적용되어야 하는 지속 지시다. 기존 UI tone policy는 명확성, 훑어보기, 접근성, 운영 신뢰를 다루고 있었지만, 단일 주 기능 화면의 공간 배분 기준은 명시하지 않았다. 따라서 새로운 요구사항을 별도 UI focus gate로 수용한다.</p>\n<h2>충돌 검토</h2>\n<ul>\n<li>기존 &quot;운영 도구처럼 빠르게 읽히는 UI&quot; 원칙과 충돌하지 않는다.</li>\n<li>기존 &quot;장식 과잉과 시각적 소음 회피&quot; 원칙을 더 구체화한다.</li>\n<li>dashboard나 monitor처럼 여러 상태를 동시에 봐야 하는 화면은 예외가 아니라 <code>비교</code>, <code>monitoring</code>, <code>다중 주 작업</code> 사유를 명시해야 하는 대상으로 분류한다.</li>\n</ul>\n<h2>승인 요구사항</h2>\n<ul>\n<li>REQ-UI-FOCUS-001</li>\n<li>REQ-UI-FOCUS-002</li>\n<li>REQ-UI-FOCUS-003</li>\n<li>REQ-UI-FOCUS-004</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1002,
-      "updatedAt": "2026-06-04T14:57:36.524Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "_requirements/reviews"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-core-feature-priority-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-core-feature-priority/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록",
-      "excerpt": "작업 목록 x Agent Core와 CLI Orchestration을 primary 기능으로 정의 x Home hero, metric strip, main tabs, setup panel 재구성 x Root Tool Management와 Work Visibility supporting layer 추가 x ProductFeatureArchitecturePanel CTA를 Agent Core/CLI Orchestration으로 변경 x view mode user navigation을 핵심 기능 중심으",
-      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] Agent Core와 CLI Orchestration을 primary 기능으로 정의</li>\n<li>[x] Home hero, metric strip, main tabs, setup panel 재구성</li>\n<li>[x] Root Tool Management와 Work Visibility supporting layer 추가</li>\n<li>[x] ProductFeatureArchitecturePanel CTA를 Agent Core/CLI Orchestration으로 변경</li>\n<li>[x] view-mode user navigation을 핵심 기능 중심으로 변경</li>\n<li>[x] product, service, reference, user-flow, gap registry 문구 정렬</li>\n<li>[x] readiness script/test와 collector tests 갱신</li>\n<li>[x] generated developer/customer snapshots 재생성</li>\n<li>[x] renderer/platform check와 tests 실행</li>\n<li>[x] Browser smoke 완료 후 평가 반영</li>\n<li>[x] 최종 검증과 diff check 준비</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 690,
-      "updatedAt": "2026-06-04T09:42:06.948Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18201,11 +18201,11 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 22
+          "count": 21
         },
         {
           "category": "request-trace",
-          "count": 14
+          "count": 13
         },
         {
           "category": "user-request",
@@ -18221,11 +18221,11 @@
         },
         {
           "category": "work-timing",
-          "count": 12
+          "count": 13
         },
         {
           "category": "plan",
-          "count": 8
+          "count": 9
         },
         {
           "category": "daily-history",
@@ -18324,23 +18324,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-desktop-dev-run-fix-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+          "id": "history-evaluations-2026-2026-06-06-intellij-shell-separation-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-intellij-shell-separation.ko.md",
           "category": "evaluation",
           "language": "ko",
-          "title": "2026 06 06 desktop dev/run fix 평가",
-          "excerpt": "2026 06 06 desktop dev/run fix 평가 평가 대상 README build/run failure fix. 완료 기준 desktop:dev 가 실제 app startup까지 진행한다. internal/dev 실행은 updater public release gate에 막히지 않는다. 빌드된 .app 을 여는 명령이 문서화되고 스크립트로 제공된다. 최종 package와 smoke가 통과한다. 현재 결과 desktop:dev : 통과. GET / 200 . desktop:run:int",
-          "updatedAt": "2026-06-06T01:28:41.481Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-eval-report-catalog-structure-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-eval-report-catalog-structure.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "2026 06 06 EVAL report catalog structure 평가",
-          "excerpt": "2026 06 06 EVAL report catalog structure 평가 평가 대상 요청: 소스코드 개선. 구현 slice: EVAL report static catalog를 score model에서 분리. 완료 기준 평가 유지보수성: scenario/tool/repo catalog 변경이 score formula diff와 섞이지 않는다. 검증성: panel/model/catalog/runtime model boundary를 tests/contracts가 확인한다. 동작 보존: EVAL c",
-          "updatedAt": "2026-06-06T01:13:08.238Z",
+          "title": "Evaluation: IntelliJ Shell Separation",
+          "excerpt": "Evaluation: IntelliJ Shell Separation 평가 기준 side rail과 main viewport가 같은 평면처럼 보이지 않는가. IntelliJ style tool window/editor 분리 의도가 코드와 테스트에 남았는가. titlebar가 메인 영역의 상단 경계를 명확히 형성하는가. bounded scroll, no mobile shell, Tauri drag region, 기존 기능을 깨뜨리지 않는가. 테스트와 내부 패키지 빌드가 완료됐는가. 평가 결과 acti",
+          "updatedAt": "2026-06-06T04:48:46.695Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18494,6 +18484,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-plans-2026-2026-06-06-intellij-shell-separation-ko-md",
+          "path": "_history/plans/2026/2026-06-06-intellij-shell-separation.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "Plan Record: IntelliJ Shell Separation",
+          "excerpt": "Plan Record: IntelliJ Shell Separation Work Mode selected work mode: standard view mode: superadmin developer 이유: 데스크톱 UI 구조 변경이지만 새로운 governance/policy 변경은 아니며, 구현과 검증이 필요한 중간 범위 작업이다. Plan 1. JetBrains 공식 UI 문서를 확인한다. 2. 요구사항과 스펙을 기록한다. 3. shell에 IntelliJ style layout/zone attr",
+          "updatedAt": "2026-06-06T04:48:46.694Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-plans-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
           "path": "_history/plans/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
           "category": "plan",
@@ -18584,23 +18584,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-desktop-dev-run-fix-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+          "id": "history-request-traces-2026-2026-06-06-intellij-shell-separation-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-intellij-shell-separation.ko.md",
           "category": "request-trace",
           "language": "ko",
-          "title": "2026 06 06 request to outcome trace",
-          "excerpt": "2026 06 06 request to outcome trace 요청 README대로 했는데 desktop app 빌드/실행이 되지 않는 문제 해결. 원인 Tauri beforeDevCommand 가 잘못된 상대 경로를 사용했다. updater plugin이 public updater config 없이도 항상 초기화되어 internal/dev 실행을 panic으로 막았다. README에 빌드 후 실행 명령이 없었다. 산출물 platform desktop app/src tauri/tauri.conf",
-          "updatedAt": "2026-06-06T01:28:41.482Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-06-eval-report-catalog-structure-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-eval-report-catalog-structure.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "2026 06 06 request to outcome trace",
-          "excerpt": "2026 06 06 request to outcome trace 요청 소스코드 개선. 결정 가장 직접적인 다음 구조 병목으로 EVAL report model 안의 static catalog 혼재를 선택했다. 전체 repository 일괄 refactor 대신, 검증 가능한 source boundary 개선으로 진행했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationReportCatalog.ts p",
-          "updatedAt": "2026-06-06T01:13:08.238Z",
+          "title": "Request Trace: IntelliJ Shell Separation",
+          "excerpt": "Request Trace: IntelliJ Shell Separation 요청 IntelliJ UI 원칙으로 메인과 사이드 영역을 확실히 분리한다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 intellij shell separation.ko.md 스펙: platform desktop app/specs/2026 06 06 intellij shell separation/ 구현: MonitorShell.tsx , globals.css 테",
+          "updatedAt": "2026-06-06T04:48:46.695Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18724,13 +18714,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-desktop-dev-run-fix-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+          "id": "history-user-requests-2026-2026-06-06-intellij-shell-separation-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-intellij-shell-separation.ko.md",
           "category": "user-request",
           "language": "ko",
-          "title": "사용자 요청 요약: desktop dev/run fix",
-          "excerpt": "사용자 요청 요약: desktop dev/run fix 사용자는 README에 있는 대로 빌드하고 실행했지만 되지 않는다고 보고했고, 해결을 요청했다. 적용 범위 desktop app README 명령 재현. Tauri dev 실행 실패 수정. internal/dev updater startup panic 수정. 빌드된 내부 .app 실행 명령 추가.",
-          "updatedAt": "2026-06-06T01:24:25.576Z",
+          "title": "User Request: IntelliJ Shell Separation",
+          "excerpt": "User Request: IntelliJ Shell Separation 요약 사용자는 IntelliJ UI 특징과 원칙을 이용해 앱의 메인 영역과 사이드 영역을 확실히 분리해 달라고 요청했다. 해석 좌측 activity rail이 메인 작업 화면과 시각적으로 섞이지 않아야 한다. 메인 작업 영역은 editor/content plane처럼 별도 크롬과 경계를 가져야 한다. 기존 기능과 빌드 흐름은 유지해야 한다. 소유 프로젝트 platform desktop app/",
+          "updatedAt": "2026-06-06T04:48:46.693Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18854,13 +18844,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-desktop-dev-run-fix-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+          "id": "history-web-searches-2026-2026-06-06-intellij-shell-separation-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-intellij-shell-separation.ko.md",
           "category": "web-search",
           "language": "ko",
-          "title": "웹 검색 기록: desktop dev/run fix",
-          "excerpt": "웹 검색 기록: desktop dev/run fix 목적 README 명령대로 desktop app을 빌드하거나 실행할 때 실패하는 문제를 고치기 전에, Tauri v2와 Next static export의 공식 실행/빌드 전제를 확인했다. 검색어 Tauri v2 official docs development build beforeDevCommand frontendDist devUrl Next.js official docs output export static build Tauri plugin u",
-          "updatedAt": "2026-06-06T01:24:25.572Z",
+          "title": "Web Search: IntelliJ Shell Separation",
+          "excerpt": "Web Search: IntelliJ Shell Separation 요청 요약 IntelliJ UI 특징과 원칙을 사용해 데스크톱 앱의 메인 영역과 사이드 영역을 확실히 분리한다. 검색어 JetBrains IntelliJ Platform UI Guidelines tool windows layout sidebar main content official JetBrains IntelliJ Platform UI Guidelines navigation tool window content tabs offic",
+          "updatedAt": "2026-06-06T04:43:57.294Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18984,13 +18974,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-desktop-dev-run-fix-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+          "id": "history-work-summaries-2026-2026-06-06-intellij-shell-separation-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-intellij-shell-separation.ko.md",
           "category": "work-summary",
           "language": "ko",
-          "title": "2026 06 06 desktop dev/run fix 작업 요약",
-          "excerpt": "2026 06 06 desktop dev/run fix 작업 요약 구현 tauri.conf.json 의 dev renderer path를 수정했다. public updater config가 있을 때만 updater plugin을 초기화하도록 Rust startup을 바꿨다. desktop:dev , desktop:run:internal , desktop:package:run:internal root scripts를 추가했다. macOS internal .app open helper를 추가했다. R",
-          "updatedAt": "2026-06-06T01:28:41.482Z",
+          "title": "Work Summary: IntelliJ Shell Separation",
+          "excerpt": "Work Summary: IntelliJ Shell Separation 완료 내용 desktop app shell 에 data layout model=\"intellij tool window editor\" 를 추가했다. 좌측 activity rail 을 tool window stripe zone으로 태깅했다. 메인 desktop viewport 를 editor plane zone으로 태깅했다. IntelliJ style separation token을 추가하고 rail/editor/titlebar ",
+          "updatedAt": "2026-06-06T04:48:46.694Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19124,6 +19114,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-timings-2026-2026-06-06-intellij-shell-separation-ko-md",
+          "path": "_history/work-timings/2026/2026-06-06-intellij-shell-separation.ko.md",
+          "category": "work-timing",
+          "language": "ko",
+          "title": "Work Timing: IntelliJ Shell Separation",
+          "excerpt": "Work Timing: IntelliJ Shell Separation | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 4분 | JetBrains 공식 UI 문서 확인 | | 로컬 구조 분석 | 8분 | shell CSS, JSX, 기존 테스트 확인 | | 구현 | 10분 | layout/zone attribute, CSS token/rule, 테스트 추가 | | 검증 | 20분 | renderer/desktop test/check, browser comp",
+          "updatedAt": "2026-06-06T04:48:46.696Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-main-tab-scroll-scope-policy-json",
           "path": "_history/work-timings/2026/2026-06-06-main-tab-scroll-scope-policy.json",
           "category": "work-timing",
@@ -19202,36 +19202,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2659,
+      "documents": 2666,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1024
+          "count": 1025
         },
         {
           "category": "web-search",
-          "count": 421
+          "count": 422
         },
         {
           "category": "plan",
-          "count": 352
+          "count": 353
         },
         {
           "category": "request-trace",
-          "count": 349
+          "count": 350
         },
         {
           "category": "work-timing",
-          "count": 269
+          "count": 270
         },
         {
           "category": "user-request",
-          "count": 134
+          "count": 135
         },
         {
           "category": "work-summary",
-          "count": 101
+          "count": 102
         },
         {
           "category": "daily-history",
@@ -19242,7 +19242,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6594727,
+      "totalSourceBytes": 6601912,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19267,11 +19267,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 35,
+      "evidenceEvents": 34,
       "decisionEvents": 0,
-      "openSignals": 21,
+      "openSignals": 20,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T04:39:46.754Z",
+      "latestEventAt": "2026-06-06T04:48:46.696Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19283,12 +19283,7 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 22
-      },
-      {
-        "id": "traceability",
-        "label": "traceability",
-        "count": 14
+        "count": 21
       },
       {
         "id": "delivery",
@@ -19308,12 +19303,17 @@
       {
         "id": "monitoring",
         "label": "monitoring",
-        "count": 12
+        "count": 13
+      },
+      {
+        "id": "traceability",
+        "label": "traceability",
+        "count": 13
       },
       {
         "id": "planning",
         "label": "planning",
-        "count": 8
+        "count": 9
       },
       {
         "id": "history",
@@ -19330,12 +19330,7 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 22
-      },
-      {
-        "id": "trace",
-        "label": "trace",
-        "count": 14
+        "count": 21
       },
       {
         "id": "intake",
@@ -19348,19 +19343,24 @@
         "count": 13
       },
       {
+        "id": "timing",
+        "label": "timing",
+        "count": 13
+      },
+      {
+        "id": "trace",
+        "label": "trace",
+        "count": 13
+      },
+      {
         "id": "web-search",
         "label": "web search",
         "count": 13
       },
       {
-        "id": "timing",
-        "label": "timing",
-        "count": 12
-      },
-      {
         "id": "plan",
         "label": "plan",
-        "count": 8
+        "count": 9
       },
       {
         "id": "history",
@@ -19381,6 +19381,111 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-intellij-shell-separation-ko-md",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "Work Timing: IntelliJ Shell Separation",
+        "detail": "Work Timing: IntelliJ Shell Separation | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 4분 | JetBrains 공식 UI 문서 확인 | | 로컬 구조 분석 | 8분 | shell CSS, JSX, 기존 테스트 확인 | | 구현 | 10분 | layout/zone attribute, CSS token/rule, 테스트 추가 | | 검증 | 20분 | renderer/desktop test/check, browser comp",
+        "path": "_history/work-timings/2026/2026-06-06-intellij-shell-separation.ko.md",
+        "category": "work-timing",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:48:46.696Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-intellij-shell-separation-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "Evaluation: IntelliJ Shell Separation",
+        "detail": "Evaluation: IntelliJ Shell Separation 평가 기준 side rail과 main viewport가 같은 평면처럼 보이지 않는가. IntelliJ style tool window/editor 분리 의도가 코드와 테스트에 남았는가. titlebar가 메인 영역의 상단 경계를 명확히 형성하는가. bounded scroll, no mobile shell, Tauri drag region, 기존 기능을 깨뜨리지 않는가. 테스트와 내부 패키지 빌드가 완료됐는가. 평가 결과 acti",
+        "path": "_history/evaluations/2026/2026-06-06-intellij-shell-separation.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:48:46.695Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-intellij-shell-separation-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: IntelliJ Shell Separation",
+        "detail": "Request Trace: IntelliJ Shell Separation 요청 IntelliJ UI 원칙으로 메인과 사이드 영역을 확실히 분리한다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 intellij shell separation.ko.md 스펙: platform desktop app/specs/2026 06 06 intellij shell separation/ 구현: MonitorShell.tsx , globals.css 테",
+        "path": "_history/request-traces/2026/2026-06-06-intellij-shell-separation.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:48:46.695Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-intellij-shell-separation-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "Plan Record: IntelliJ Shell Separation",
+        "detail": "Plan Record: IntelliJ Shell Separation Work Mode selected work mode: standard view mode: superadmin developer 이유: 데스크톱 UI 구조 변경이지만 새로운 governance/policy 변경은 아니며, 구현과 검증이 필요한 중간 범위 작업이다. Plan 1. JetBrains 공식 UI 문서를 확인한다. 2. 요구사항과 스펙을 기록한다. 3. shell에 IntelliJ style layout/zone attr",
+        "path": "_history/plans/2026/2026-06-06-intellij-shell-separation.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:48:46.694Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-intellij-shell-separation-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "Work Summary: IntelliJ Shell Separation",
+        "detail": "Work Summary: IntelliJ Shell Separation 완료 내용 desktop app shell 에 data layout model=\"intellij tool window editor\" 를 추가했다. 좌측 activity rail 을 tool window stripe zone으로 태깅했다. 메인 desktop viewport 를 editor plane zone으로 태깅했다. IntelliJ style separation token을 추가하고 rail/editor/titlebar ",
+        "path": "_history/work-summaries/2026/2026-06-06-intellij-shell-separation.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:48:46.694Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-intellij-shell-separation-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "User Request: IntelliJ Shell Separation",
+        "detail": "User Request: IntelliJ Shell Separation 요약 사용자는 IntelliJ UI 특징과 원칙을 이용해 앱의 메인 영역과 사이드 영역을 확실히 분리해 달라고 요청했다. 해석 좌측 activity rail이 메인 작업 화면과 시각적으로 섞이지 않아야 한다. 메인 작업 영역은 editor/content plane처럼 별도 크롬과 경계를 가져야 한다. 기존 기능과 빌드 흐름은 유지해야 한다. 소유 프로젝트 platform desktop app/",
+        "path": "_history/user-requests/2026/2026-06-06-intellij-shell-separation.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:48:46.693Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-intellij-shell-separation-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: IntelliJ Shell Separation",
+        "detail": "Web Search: IntelliJ Shell Separation 요청 요약 IntelliJ UI 특징과 원칙을 사용해 데스크톱 앱의 메인 영역과 사이드 영역을 확실히 분리한다. 검색어 JetBrains IntelliJ Platform UI Guidelines tool windows layout sidebar main content official JetBrains IntelliJ Platform UI Guidelines navigation tool window content tabs offic",
+        "path": "_history/web-searches/2026/2026-06-06-intellij-shell-separation.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:43:57.294Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-06-runtime-customization-layer-ko-md",
         "sourceType": "history",
@@ -20715,111 +20820,6 @@
         "language": "unknown",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T01:28:41.483Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-desktop-dev-run-fix-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "2026 06 06 request to outcome trace",
-        "detail": "2026 06 06 request to outcome trace 요청 README대로 했는데 desktop app 빌드/실행이 되지 않는 문제 해결. 원인 Tauri beforeDevCommand 가 잘못된 상대 경로를 사용했다. updater plugin이 public updater config 없이도 항상 초기화되어 internal/dev 실행을 panic으로 막았다. README에 빌드 후 실행 명령이 없었다. 산출물 platform desktop app/src tauri/tauri.conf",
-        "path": "_history/request-traces/2026/2026-06-06-desktop-dev-run-fix.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T01:28:41.482Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-desktop-dev-run-fix-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "2026 06 06 desktop dev/run fix 작업 요약",
-        "detail": "2026 06 06 desktop dev/run fix 작업 요약 구현 tauri.conf.json 의 dev renderer path를 수정했다. public updater config가 있을 때만 updater plugin을 초기화하도록 Rust startup을 바꿨다. desktop:dev , desktop:run:internal , desktop:package:run:internal root scripts를 추가했다. macOS internal .app open helper를 추가했다. R",
-        "path": "_history/work-summaries/2026/2026-06-06-desktop-dev-run-fix.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T01:28:41.482Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-desktop-dev-run-fix-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "ready",
-        "title": "2026 06 06 desktop dev/run fix 평가",
-        "detail": "2026 06 06 desktop dev/run fix 평가 평가 대상 README build/run failure fix. 완료 기준 desktop:dev 가 실제 app startup까지 진행한다. internal/dev 실행은 updater public release gate에 막히지 않는다. 빌드된 .app 을 여는 명령이 문서화되고 스크립트로 제공된다. 최종 package와 smoke가 통과한다. 현재 결과 desktop:dev : 통과. GET / 200 . desktop:run:int",
-        "path": "_history/evaluations/2026/2026-06-06-desktop-dev-run-fix.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T01:28:41.481Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-desktop-dev-run-fix-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "needs_attention",
-        "title": "사용자 요청 요약: desktop dev/run fix",
-        "detail": "사용자 요청 요약: desktop dev/run fix 사용자는 README에 있는 대로 빌드하고 실행했지만 되지 않는다고 보고했고, 해결을 요청했다. 적용 범위 desktop app README 명령 재현. Tauri dev 실행 실패 수정. internal/dev updater startup panic 수정. 빌드된 내부 .app 실행 명령 추가.",
-        "path": "_history/user-requests/2026/2026-06-06-desktop-dev-run-fix.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T01:24:25.576Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-desktop-dev-run-fix-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "needs_attention",
-        "title": "웹 검색 기록: desktop dev/run fix",
-        "detail": "웹 검색 기록: desktop dev/run fix 목적 README 명령대로 desktop app을 빌드하거나 실행할 때 실패하는 문제를 고치기 전에, Tauri v2와 Next static export의 공식 실행/빌드 전제를 확인했다. 검색어 Tauri v2 official docs development build beforeDevCommand frontendDist devUrl Next.js official docs output export static build Tauri plugin u",
-        "path": "_history/web-searches/2026/2026-06-06-desktop-dev-run-fix.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T01:24:25.572Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-eval-report-catalog-structure-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 EVAL report catalog structure 평가",
-        "detail": "2026 06 06 EVAL report catalog structure 평가 평가 대상 요청: 소스코드 개선. 구현 slice: EVAL report static catalog를 score model에서 분리. 완료 기준 평가 유지보수성: scenario/tool/repo catalog 변경이 score formula diff와 섞이지 않는다. 검증성: panel/model/catalog/runtime model boundary를 tests/contracts가 확인한다. 동작 보존: EVAL c",
-        "path": "_history/evaluations/2026/2026-06-06-eval-report-catalog-structure.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T01:13:08.238Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-eval-report-catalog-structure-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "2026 06 06 request to outcome trace",
-        "detail": "2026 06 06 request to outcome trace 요청 소스코드 개선. 결정 가장 직접적인 다음 구조 병목으로 EVAL report model 안의 static catalog 혼재를 선택했다. 전체 repository 일괄 refactor 대신, 검증 가능한 source boundary 개선으로 진행했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationReportCatalog.ts p",
-        "path": "_history/request-traces/2026/2026-06-06-eval-report-catalog-structure.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T01:13:08.238Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23838,7 +23838,7 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 14
+        "documentsCount": 13
       },
       {
         "category": "web-search",
@@ -23848,17 +23848,17 @@
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 12
+        "documentsCount": 13
       },
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 8
+        "documentsCount": 9
       },
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 22
+        "documentsCount": 21
       },
       {
         "category": "daily-history",
@@ -23902,7 +23902,7 @@
           "transient tool output"
         ],
         "uiEntry": "Overview, History, Documents, Requirements",
-        "documentCount": 116,
+        "documentCount": 111,
         "sourceFileCount": 0
       },
       {
@@ -23952,7 +23952,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 69,
+        "documentCount": 70,
         "sourceFileCount": 5
       },
       {
@@ -27792,13 +27792,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3829,
+      "sourceDocuments": 3842,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T04:39:46.754Z"
+      "latestInsightAt": "2026-06-06T04:48:46.696Z"
     },
     "inferenceStages": [
       {
@@ -27866,15 +27866,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 458,
+        "signalCount": 462,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 149
+            "count": 150
           },
           {
             "category": "project-spec",
-            "count": 140
+            "count": 142
           },
           {
             "category": "request-trace",
@@ -27882,7 +27882,7 @@
           },
           {
             "category": "user-request",
-            "count": 44
+            "count": 45
           },
           {
             "category": "work-summary",
@@ -27925,7 +27925,7 @@
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장"
         ],
-        "latestEvidenceAt": "2026-06-06T04:39:46.753Z"
+        "latestEvidenceAt": "2026-06-06T04:48:46.695Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27939,11 +27939,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1748,
+        "signalCount": 1753,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 496
+            "count": 498
           },
           {
             "category": "evaluation",
@@ -27951,15 +27951,15 @@
           },
           {
             "category": "web-search",
-            "count": 422
+            "count": 423
           },
           {
             "category": "plan",
-            "count": 211
+            "count": 212
           },
           {
             "category": "request-trace",
-            "count": 113
+            "count": 114
           },
           {
             "category": "work-timing",
@@ -27990,7 +27990,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T04:39:46.754Z"
+        "latestEvidenceAt": "2026-06-06T04:48:46.695Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28004,7 +28004,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1004,
+        "signalCount": 1006,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -28012,7 +28012,7 @@
           },
           {
             "category": "plan",
-            "count": 292
+            "count": 293
           },
           {
             "category": "request-trace",
@@ -28024,7 +28024,7 @@
           },
           {
             "category": "work-summary",
-            "count": 21
+            "count": 22
           },
           {
             "category": "user-request",
@@ -28063,7 +28063,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T04:36:56.832Z"
+        "latestEvidenceAt": "2026-06-06T04:48:46.694Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28077,7 +28077,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 704,
+        "signalCount": 705,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -28085,7 +28085,7 @@
           },
           {
             "category": "evaluation",
-            "count": 239
+            "count": 240
           },
           {
             "category": "web-search",
@@ -28136,7 +28136,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-06T04:39:46.754Z"
+        "latestEvidenceAt": "2026-06-06T04:48:46.695Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28150,11 +28150,11 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1501,
+        "signalCount": 1511,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 649
+            "count": 654
           },
           {
             "category": "evaluation",
@@ -28162,11 +28162,11 @@
           },
           {
             "category": "user-request",
-            "count": 98
+            "count": 99
           },
           {
             "category": "work-summary",
-            "count": 57
+            "count": 58
           },
           {
             "category": "request-trace",
@@ -28174,11 +28174,11 @@
           },
           {
             "category": "plan",
-            "count": 41
+            "count": 42
           },
           {
             "category": "web-search",
-            "count": 36
+            "count": 37
           },
           {
             "category": "project-doc",
@@ -28186,7 +28186,7 @@
           },
           {
             "category": "work-timing",
-            "count": 8
+            "count": 9
           },
           {
             "category": "daily-history",
@@ -28209,7 +28209,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T04:39:46.754Z"
+        "latestEvidenceAt": "2026-06-06T04:48:46.696Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28285,14 +28285,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3829,
+      "sourceDocuments": 3842,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T04:39:46.754Z"
+      "latestInsightAt": "2026-06-06T04:48:46.696Z"
     },
     "operatingModel": [
       {
@@ -28350,25 +28350,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3210,
+        "signalCount": 3221,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1748
+            "signalCount": 1753
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1004
+            "signalCount": 1006
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 458
+            "signalCount": 462
           }
         ],
         "missingPatternIds": [],
@@ -28396,7 +28396,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T04:39:46.754Z",
+        "latestEvidenceAt": "2026-06-06T04:48:46.695Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28425,13 +28425,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 823,
+        "signalCount": 824,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 704
+            "signalCount": 705
           },
           {
             "id": "release-blocker-gate",
@@ -28465,7 +28465,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T04:39:46.754Z",
+        "latestEvidenceAt": "2026-06-06T04:48:46.695Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28494,19 +28494,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2505,
+        "signalCount": 2517,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1501
+            "signalCount": 1511
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1004
+            "signalCount": 1006
           }
         ],
         "missingPatternIds": [],
@@ -28534,7 +28534,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T04:39:46.754Z",
+        "latestEvidenceAt": "2026-06-06T04:48:46.696Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28563,13 +28563,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 577,
+        "signalCount": 581,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 458
+            "signalCount": 462
           },
           {
             "id": "release-blocker-gate",
@@ -28603,7 +28603,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T04:39:46.753Z",
+        "latestEvidenceAt": "2026-06-06T04:48:46.695Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28632,19 +28632,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2752,
+        "signalCount": 2759,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1004
+            "signalCount": 1006
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1748
+            "signalCount": 1753
           }
         ],
         "missingPatternIds": [],
@@ -28672,7 +28672,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T04:39:46.754Z",
+        "latestEvidenceAt": "2026-06-06T04:48:46.695Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28701,7 +28701,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1867,
+        "signalCount": 1872,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28713,7 +28713,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1748
+            "signalCount": 1753
           }
         ],
         "missingPatternIds": [],
@@ -28741,7 +28741,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T04:39:46.754Z",
+        "latestEvidenceAt": "2026-06-06T04:48:46.695Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",
