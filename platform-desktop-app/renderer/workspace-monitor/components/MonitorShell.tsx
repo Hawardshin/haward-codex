@@ -390,6 +390,15 @@ type TaskIntentFlowStep = {
   run?: () => void;
 };
 
+type HomeStartFlowStep = {
+  id: string;
+  label: string;
+  detail: string;
+  stateLabel: string;
+  icon: LucideIcon;
+  run: () => void;
+};
+
 type RuntimeInitDefaults = {
   adapterId: string;
   sessionModeId: string;
@@ -6217,6 +6226,57 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     return primaryHomeIntent.flowSteps.find((step) => step.id === activeTaskFlowStepId) || primaryHomeIntent.flowSteps[0] || null;
   }, [activeTaskFlowStepId, primaryHomeIntent]);
   const PrimaryHomeIntentIcon = primaryHomeIntent?.icon;
+  const homeStartFlow = useMemo<HomeStartFlowStep[]>(
+    () => [
+      {
+        id: "prepare",
+        label: uiLanguage === "ko" ? "준비" : "Prepare",
+        detail: uiLanguage === "ko" ? "계정, CLI, 질문 보류" : "Accounts, CLI, questions",
+        stateLabel:
+          coreReadinessCount === coreSetupSteps.length
+            ? uiLanguage === "ko"
+              ? "완료"
+              : "ready"
+            : `${coreReadinessCount}/${coreSetupSteps.length}`,
+        icon: KeyRound,
+        run: () => openSettingsTab("execution", "quick")
+      },
+      {
+        id: "choose",
+        label: uiLanguage === "ko" ? "선택" : "Choose",
+        detail: primaryHomeIntent?.label || (uiLanguage === "ko" ? "작업 목표" : "Work goal"),
+        stateLabel: primaryHomeIntent?.actionLabel || (uiLanguage === "ko" ? "열기" : "open"),
+        icon: ListFilter,
+        run: () => primaryHomeIntent?.run()
+      },
+      {
+        id: "run",
+        label: uiLanguage === "ko" ? "실행" : "Run",
+        detail: uiLanguage === "ko" ? "런타임 작업면" : "Runtime surface",
+        stateLabel: runtimeInitDefaults.adapterId,
+        icon: PlayCircle,
+        run: () => openSection("desktop", { intentId: "run-work", flowStepId: "lane" })
+      },
+      {
+        id: "evaluate",
+        label: uiLanguage === "ko" ? "평가" : "Evaluate",
+        detail: uiLanguage === "ko" ? "결과와 병목 확인" : "Results and bottlenecks",
+        stateLabel: `${visibleEvaluations.toLocaleString("ko-KR")} evals`,
+        icon: ClipboardCheck,
+        run: () => openSection("eval", { intentId: "evaluate-work", flowStepId: "current" })
+      }
+    ],
+    [
+      coreReadinessCount,
+      coreSetupSteps.length,
+      openSection,
+      openSettingsTab,
+      primaryHomeIntent,
+      runtimeInitDefaults.adapterId,
+      uiLanguage,
+      visibleEvaluations
+    ]
+  );
   const workVisibilityItems = useMemo(
     () => [
       {
@@ -7733,6 +7793,32 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                         </button>
                       </article>
                     )}
+                  </section>
+
+                  <section className="home-start-flow" data-home-start-flow aria-label={uiLanguage === "ko" ? "오늘 시작 흐름" : "Today start flow"}>
+                    <header>
+                      <div>
+                        <p className="eyebrow">{uiLanguage === "ko" ? "오늘 흐름" : "Today Flow"}</p>
+                        <h3>{uiLanguage === "ko" ? "준비에서 평가까지" : "Prepare to evaluation"}</h3>
+                      </div>
+                      <span>{uiLanguage === "ko" ? "4단계" : "4 steps"}</span>
+                    </header>
+                    <ol>
+                      {homeStartFlow.map((step, index) => (
+                        <li key={step.id}>
+                          <button type="button" onClick={step.run} data-home-flow-step={step.id}>
+                            <span className="home-flow-index">{index + 1}</span>
+                            <step.icon size={16} aria-hidden="true" />
+                            <span>
+                              <strong>{step.label}</strong>
+                              <small>{step.detail}</small>
+                            </span>
+                            <em>{step.stateLabel}</em>
+                            <ArrowRight size={14} aria-hidden="true" />
+                          </button>
+                        </li>
+                      ))}
+                    </ol>
                   </section>
 
                   <section className="home-navigation-dock" data-home-navigation-dock aria-label={uiLanguage === "ko" ? "작업 목표 dock" : "Work goal dock"}>

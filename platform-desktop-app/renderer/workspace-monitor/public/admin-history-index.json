@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-06T13:40:16.869Z",
+  "generatedAt": "2026-06-06T13:48:43.334Z",
   "summary": {
-    "documents": 2771,
+    "documents": 2778,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1052
+        "count": 1053
       },
       {
         "category": "web-search",
-        "count": 435
+        "count": 436
       },
       {
         "category": "request-trace",
-        "count": 364
+        "count": 365
       },
       {
         "category": "plan",
-        "count": 363
+        "count": 364
       },
       {
         "category": "work-timing",
-        "count": 283
+        "count": 284
       },
       {
         "category": "user-request",
-        "count": 149
+        "count": 150
       },
       {
         "category": "work-summary",
-        "count": 116
+        "count": 117
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6718342,
+    "totalSourceBytes": 6721867,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -72,11 +72,123 @@
       "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 20923,
-      "updatedAt": "2026-06-06T13:39:42.285Z",
+      "sourceBytes": 21358,
+      "updatedAt": "2026-06-06T13:48:34.957Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-intuitive-home-flow-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-intuitive-home-flow.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "최종 평가: Intuitive Home Flow",
+      "excerpt": "최종 평가: Intuitive Home Flow 날짜: 2026 06 06 평가: 사용자의 “직관적 흐름” 요구에 대해 홈 진입점에서 다음 행동이 보이도록 첫 slice를 구현했다. 충족: 준비, 선택, 실행, 평가 흐름이 홈 첫 화면에 표시된다. 실행 단계가 실제 Desktop Runtime handoff로 이어진다. 테스트, 빌드, 브라우저 smoke가 통과했다. 남은 범위: 전체 앱 IA 재정렬, 섹션별 세부 흐름 단순화, 설정 onboarding 재설계는 후속 slice로 남는다.",
+      "html": "<p>최종 평가: Intuitive Home Flow 날짜: 2026 06 06 평가: 사용자의 “직관적 흐름” 요구에 대해 홈 진입점에서 다음 행동이 보이도록 첫 slice를 구현했다. 충족: 준비, 선택, 실행, 평가 흐름이 홈 첫 화면에 표시된다. 실행 단계가 실제 Desktop Runtime handoff로 이어진다. 테스트, 빌드, 브라우저 smoke가 통과했다. 남은 범위: 전체 앱 IA 재정렬, 섹션별 세부 흐름 단순화, 설정 onboarding 재설계는 후속 slice로 남는다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 553,
+      "updatedAt": "2026-06-06T13:48:34.957Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-intuitive-home-flow-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-intuitive-home-flow.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Intuitive Home Flow",
+      "excerpt": "요청 결과 추적: Intuitive Home Flow 날짜: 2026 06 06 요청: UI UX 개선, 직관적 흐름. 결과: home start flow 추가. 4개 data home flow step 추가. 홈 레이아웃 CSS와 responsive contract 추가. 테스트 계약 갱신. 검증: workspace monitor check/test 통과. desktop renderer build 통과. Browser smoke 통과.",
+      "html": "<p>요청 결과 추적: Intuitive Home Flow 날짜: 2026 06 06 요청: UI UX 개선, 직관적 흐름. 결과: home start flow 추가. 4개 data home flow step 추가. 홈 레이아웃 CSS와 responsive contract 추가. 테스트 계약 갱신. 검증: workspace monitor check/test 통과. desktop renderer build 통과. Browser smoke 통과.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 384,
+      "updatedAt": "2026-06-06T13:48:34.957Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-intuitive-home-flow-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-intuitive-home-flow.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Intuitive Home Flow",
+      "excerpt": "작업 요약: Intuitive Home Flow 날짜: 2026 06 06 홈 첫 화면에 준비, 선택, 실행, 평가 4단계 start flow를 추가했다. 각 단계는 상태 label과 목적지를 갖고, 클릭하면 설정, 추천 intent, desktop runtime, eval 화면으로 이동한다. Browser smoke에서 1280x720 기준 overflow와 overlap이 없고 run 클릭 후 run work handoff가 표시됨을 확인했다.",
+      "html": "<p>작업 요약: Intuitive Home Flow 날짜: 2026 06 06 홈 첫 화면에 준비, 선택, 실행, 평가 4단계 start flow를 추가했다. 각 단계는 상태 label과 목적지를 갖고, 클릭하면 설정, 추천 intent, desktop runtime, eval 화면으로 이동한다. Browser smoke에서 1280x720 기준 overflow와 overlap이 없고 run 클릭 후 run work handoff가 표시됨을 확인했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 418,
+      "updatedAt": "2026-06-06T13:48:34.957Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-intuitive-home-flow-ko-md",
+      "path": "_history/work-timings/2026/2026-06-06-intuitive-home-flow.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "작업 시간 기록: Intuitive Home Flow",
+      "excerpt": "작업 시간 기록: Intuitive Home Flow 날짜: 2026 06 06 단계: web first intake: 완료 large scope slice 선택: 완료 홈 UI 구현: 완료 테스트와 browser smoke: 완료 build/check: 완료",
+      "html": "<p>작업 시간 기록: Intuitive Home Flow 날짜: 2026 06 06 단계: web first intake: 완료 large scope slice 선택: 완료 홈 UI 구현: 완료 테스트와 browser smoke: 완료 build/check: 완료</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 231,
+      "updatedAt": "2026-06-06T13:48:34.957Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-intuitive-home-flow-ko-md",
+      "path": "_history/plans/2026/2026-06-06-intuitive-home-flow.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "작업 계획: Intuitive Home Flow",
+      "excerpt": "작업 계획: Intuitive Home Flow 범위가 큰 UI/UX 요청을 첫 화면 흐름 개선 slice로 분해했다. 홈 화면은 전체 앱의 진입점이고 기존 task intent와 handoff 구조가 있어 회귀 위험 대비 효과가 크다. 구현은 새 dependency 없이 MonitorShell.tsx , globals.css , 문자열 계약 테스트 안에서 완료한다.",
+      "html": "<p>작업 계획: Intuitive Home Flow 범위가 큰 UI/UX 요청을 첫 화면 흐름 개선 slice로 분해했다. 홈 화면은 전체 앱의 진입점이고 기존 task intent와 handoff 구조가 있어 회귀 위험 대비 효과가 크다. 구현은 새 dependency 없이 MonitorShell.tsx , globals.css , 문자열 계약 테스트 안에서 완료한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 370,
+      "updatedAt": "2026-06-06T13:48:34.956Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-intuitive-home-flow-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-intuitive-home-flow.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Intuitive Home Flow",
+      "excerpt": "사용자 요청 요약: Intuitive Home Flow 날짜: 2026 06 06 요약: UI/UX를 더 직관적인 흐름으로 개선한다. 처리 범위: 홈 첫 화면의 시작 흐름을 준비, 선택, 실행, 평가 4단계로 명확히 한다.",
+      "html": "<p>사용자 요청 요약: Intuitive Home Flow 날짜: 2026 06 06 요약: UI/UX를 더 직관적인 흐름으로 개선한다. 처리 범위: 홈 첫 화면의 시작 흐름을 준비, 선택, 실행, 평가 4단계로 명확히 한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 244,
+      "updatedAt": "2026-06-06T13:48:34.956Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-intuitive-home-flow-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-intuitive-home-flow.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Intuitive Home Flow",
+      "excerpt": "Web Search: Intuitive Home Flow 날짜: 2026 06 06 요청: UI UX 개선, 직관적 흐름. 검색: Nielsen Norman Group dashboard UX design actionable insights navigation patterns 2025 Microsoft Fluent Design desktop app navigation UX command bar patterns official Apple Human Interface Guidelines macOS si",
+      "html": "<p>Web Search: Intuitive Home Flow 날짜: 2026 06 06 요청: UI UX 개선, 직관적 흐름. 검색: Nielsen Norman Group dashboard UX design actionable insights navigation patterns 2025 Microsoft Fluent Design desktop app navigation UX command bar patterns official Apple Human Interface Guidelines macOS sidebar toolbar window navigation official 확인 출처: Apple HIG Sidebars: https://deve</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 890,
+      "updatedAt": "2026-06-06T13:48:34.956Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
@@ -44403,35 +44515,35 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 499,
+      "documentsCount": 506,
       "categories": [
         {
           "category": "evaluation",
-          "count": 119
+          "count": 120
         },
         {
           "category": "user-request",
-          "count": 70
+          "count": 71
         },
         {
           "category": "work-summary",
-          "count": 70
+          "count": 71
         },
         {
           "category": "request-trace",
-          "count": 69
+          "count": 70
         },
         {
           "category": "web-search",
-          "count": 69
+          "count": 70
         },
         {
           "category": "work-timing",
-          "count": 66
+          "count": 67
         },
         {
           "category": "plan",
-          "count": 35
+          "count": 36
         },
         {
           "category": "daily-history",

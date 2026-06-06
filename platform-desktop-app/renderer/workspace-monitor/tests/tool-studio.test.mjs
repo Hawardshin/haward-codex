@@ -1509,6 +1509,7 @@ test("Monitor home exposes task-intent routes before section names", () => {
   const statusRowIndex = monitorShell.indexOf("core-home-status-row");
 
   assert.match(monitorShell, /type TaskIntentItem = \{/);
+  assert.match(monitorShell, /type HomeStartFlowStep = \{/);
   assert.match(monitorShell, /const \[activeTaskIntentId, setActiveTaskIntentId\] = useState\(""\)/);
   assert.match(monitorShell, /const \[activeTaskFlowStepId, setActiveTaskFlowStepId\] = useState\(""\)/);
   assert.match(monitorShell, /const \[requestedToolMode, setRequestedToolMode\] = useState<ToolStudioModeRequest \| null>\(null\)/);
@@ -1529,6 +1530,10 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(monitorShell, /const primaryHomeIntent = useMemo/);
   assert.match(monitorShell, /taskIntentItems\.find\(\(item\) => item\.id === "build-tool"\)/);
   assert.match(monitorShell, /const primaryHomeFlowStep = useMemo/);
+  assert.match(monitorShell, /const homeStartFlow = useMemo<HomeStartFlowStep\[\]>/);
+  assert.match(monitorShell, /id: "prepare"[\s\S]*?id: "choose"[\s\S]*?id: "run"[\s\S]*?id: "evaluate"/);
+  assert.match(monitorShell, /data-home-start-flow/);
+  assert.match(monitorShell, /data-home-flow-step=\{step\.id\}/);
   assert.match(monitorShell, /primaryHomeIntent\.label/);
   assert.match(monitorShell, /primaryHomeIntent\.detail/);
   assert.doesNotMatch(monitorShell, /한 화면은 하나의 결정을 크게 보여줍니다/);
@@ -1566,6 +1571,9 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(css, /\.home-focus-card \{[\s\S]*?background: var\(--surface-depth-focus\);[\s\S]*?box-shadow: var\(--surface-shadow-medium\), var\(--hairline-shadow\);/);
   assert.match(css, /\.home-focus-flow \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.home-focus-card button \{[\s\S]*?min-height: 48px;/);
+  assert.match(css, /\.home-start-flow \{[\s\S]*?background: color-mix\(in srgb, var\(--surface-depth-1\) 86%, var\(--surface-muted\) 14%\);/);
+  assert.match(css, /\.home-start-flow ol \{[\s\S]*?grid-template-columns: repeat\(4, minmax\(0, 1fr\)\);/);
+  assert.match(css, /\.home-start-flow button \{[\s\S]*?grid-template-columns: 26px 28px minmax\(0, 1fr\) minmax\(44px, auto\) 22px;/);
   assert.match(css, /\.home-navigation-dock \{/);
   assert.match(css, /\.home-navigation-dock \.task-intent-grid \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.home-navigation-dock \.workspace-home-actions\.task-intent-grid button \{[\s\S]*?min-height: 88px;/);
@@ -1576,7 +1584,7 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(css, /\.task-handoff-strip \{[\s\S]*?grid-template-columns: auto minmax\(0, 1fr\) auto;/);
   assert.match(css, /\.task-flow-rail \{[\s\S]*?grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
   assert.match(css, /\.task-flow-rail button \{[\s\S]*?min-height: 44px;/);
-  assert.match(css, /@media \(max-width: 960px\) \{[\s\S]*?\.home-focus-command,[\s\S]*?\.home-focus-flow,[\s\S]*?\.workspace-home-actions,/);
+  assert.match(css, /@media \(max-width: 960px\) \{[\s\S]*?\.home-focus-command,[\s\S]*?\.home-focus-flow,[\s\S]*?\.home-start-flow header,[\s\S]*?\.home-start-flow ol,[\s\S]*?\.workspace-home-actions,/);
 });
 
 test("Activity rail exposes readable destination labels in the desktop shell", () => {
