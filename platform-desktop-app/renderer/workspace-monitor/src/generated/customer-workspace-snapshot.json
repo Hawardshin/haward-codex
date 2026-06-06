@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T02:17:31.226Z",
+  "generatedAt": "2026-06-06T02:26:09.093Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -40,8 +40,10 @@
     "fundamentalImprovementPrinciples": 0,
     "fundamentalImprovementPackages": 0,
     "fundamentalImprovementFitnessChecks": 0,
-    "toolUsagePatterns": 7,
-    "toolUsageValidationCommands": 21,
+    "toolUsagePatterns": 8,
+    "toolUsageValidationCommands": 26,
+    "snapshotDocumentWorkers": 0,
+    "snapshotSourceWorkers": 0,
     "structurePressurePoints": 0,
     "sourceFiles": 0,
     "rootFolders": 0
@@ -488,6 +490,7 @@
         "currentAssets": [],
         "automationTargets": [
           "snapshot collection",
+          "parallel document/source snapshot transformation",
           "customer snapshot sanitization",
           "service readiness reporting",
           "bundle audit",
@@ -495,6 +498,7 @@
         ],
         "learningSignals": [
           "snapshot schema counts",
+          "snapshot worker counts",
           "service blockers",
           "source hotspot count",
           "document and evaluation counts",
@@ -1546,7 +1550,7 @@
       "queuedPatterns": 0,
       "activeRecommendations": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-06T02:17:23.528Z"
+      "latestInsightAt": "2026-06-06T02:26:02.134Z"
     },
     "inferenceStages": [],
     "signalGroups": []
@@ -1561,7 +1565,7 @@
       "totalImprovementPackages": 0,
       "totalFitnessChecks": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-06T02:17:23.528Z"
+      "latestInsightAt": "2026-06-06T02:26:02.134Z"
     },
     "operatingModel": [],
     "structuralPrinciples": [],
@@ -1571,11 +1575,11 @@
   "toolUsageIntegration": {
     "sourcePath": "",
     "summary": {
-      "totalPatterns": 7,
-      "implementedPatterns": 7,
-      "p0Patterns": 7,
-      "verificationLadders": 3,
-      "validationCommands": 21,
+      "totalPatterns": 8,
+      "implementedPatterns": 8,
+      "p0Patterns": 8,
+      "verificationLadders": 4,
+      "validationCommands": 26,
       "adoptionBacklog": 2,
       "referenceLinks": 3
     },
@@ -1696,6 +1700,49 @@
           "Chaining shell output into unreadable logs."
         ],
         "platformApplication": "A future desktop source-intake lane can precompute read-only maps and expose them beside the code editor.",
+        "status": "implemented",
+        "priority": "p0"
+      },
+      {
+        "id": "snapshot-worker-thread-pool",
+        "label": "Snapshot worker thread pool",
+        "labelKo": "스냅샷 워커 스레드 풀",
+        "purpose": "Use multiple Node worker threads for independent document rendering and source preview work during startup snapshot collection.",
+        "toolSurfaces": [
+          "node:worker_threads",
+          "os.availableParallelism",
+          "workspace-monitor collect",
+          "workspace-snapshot stats"
+        ],
+        "triggerWhen": [
+          "The monitor must transform hundreds or thousands of independent documents.",
+          "Source previews can be read independently and sorted after processing.",
+          "Startup snapshot collection becomes a visible boot-time cost."
+        ],
+        "sequence": [
+          "Collect document and source-file tasks without reading every payload.",
+          "Choose worker count from available CPU parallelism and task count.",
+          "Run document rendering and source preview extraction through a bounded worker pool.",
+          "Fall back to the previous synchronous path if worker startup or execution fails.",
+          "Record worker counts in the generated snapshot stats."
+        ],
+        "evidenceOutputs": [
+          "src/generated/workspace-snapshot.json stats.snapshotDocumentWorkers",
+          "src/generated/workspace-snapshot.json stats.snapshotSourceWorkers",
+          "collect timing with CPU utilization above one core",
+          "collector.test.mjs async buildSnapshot coverage"
+        ],
+        "validationCommands": [
+          "corepack pnpm --filter workspace-monitor run collect",
+          "corepack pnpm --filter workspace-monitor run check",
+          "corepack pnpm --filter workspace-monitor test"
+        ],
+        "failureModes": [
+          "Spawning too many workers and making small repositories slower.",
+          "Assuming worker parallelism helps network or UI-bound work.",
+          "Dropping deterministic sorting after parallel task completion."
+        ],
+        "platformApplication": "Workspace Monitor startup collection now uses CPU-aware worker parallelism while preserving deterministic snapshots and synchronous fallback.",
         "status": "implemented",
         "priority": "p0"
       },
@@ -1921,6 +1968,21 @@
           "Static tests cover collector, UI, and snapshot type contracts."
         ],
         "ownerFeatureId": "root_tool_management"
+      },
+      {
+        "id": "parallel-snapshot-ladder",
+        "label": "Parallel snapshot ladder",
+        "surface": "tools",
+        "commands": [
+          "corepack pnpm --filter workspace-monitor run collect",
+          "node -e \"const s=require('./platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json'); console.log(s.stats.snapshotDocumentWorkers, s.stats.snapshotSourceWorkers)\""
+        ],
+        "acceptance": [
+          "snapshotDocumentWorkers is greater than one on multi-core developer machines with enough documents.",
+          "snapshotSourceWorkers is greater than one when enough source candidates exist.",
+          "Generated documents and source files remain deterministic after parallel processing."
+        ],
+        "ownerFeatureId": "observability_monitoring"
       },
       {
         "id": "desktop-package-ladder",

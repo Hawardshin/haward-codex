@@ -81,6 +81,8 @@ const coreDrilldown = fs.readFileSync(
 const buttonComponent = fs.readFileSync(path.join(projectRoot, "components", "ui", "Button.tsx"), "utf8");
 const actionGroupComponent = fs.readFileSync(path.join(projectRoot, "components", "ui", "ActionGroup.tsx"), "utf8");
 const collector = fs.readFileSync(path.join(projectRoot, "scripts", "collect-workspace.mjs"), "utf8");
+const snapshotWorkerPool = fs.readFileSync(path.join(projectRoot, "scripts", "lib", "snapshot-worker-pool.mjs"), "utf8");
+const snapshotFileWorker = fs.readFileSync(path.join(projectRoot, "scripts", "lib", "snapshot-file-worker.mjs"), "utf8");
 const scrollCheck = fs.readFileSync(path.join(projectRoot, "scripts", "check-scroll-containers.mjs"), "utf8");
 const surfaceAudit = fs.readFileSync(path.join(projectRoot, "scripts", "audit-monitor-surfaces.mjs"), "utf8");
 const sourceControlsSmoke = fs.readFileSync(
@@ -140,6 +142,22 @@ test("Tool Studio exposes source-backed agent tool usage playbooks", () => {
   assert.match(css, /\.tool-usage-playbook \{/);
   assert.match(css, /\.tool-usage-playbook-grid \{/);
   assert.match(css, /\.tool-usage-command-list code \{/);
+});
+
+test("Workspace snapshot collection uses bounded worker-thread parallelism", () => {
+  assert.match(collector, /import \{ recommendedWorkerCount, runWorkerTasks \} from "\.\/lib\/snapshot-worker-pool\.mjs"/);
+  assert.match(collector, /const snapshotFileWorkerPath = path\.join\(__dirname, "lib", "snapshot-file-worker\.mjs"\)/);
+  assert.match(collector, /export async function buildSnapshot/);
+  assert.match(collector, /collectDocumentsParallel\(repoRoot, documentTasks\)/);
+  assert.match(collector, /collectSourceFilesParallel\(repoRoot, sourceFileCandidates\)/);
+  assert.match(collector, /snapshotDocumentWorkers/);
+  assert.match(collector, /snapshotSourceWorkers/);
+  assert.match(snapshotWorkerPool, /from "node:worker_threads"/);
+  assert.match(snapshotWorkerPool, /recommendedWorkerCount/);
+  assert.match(snapshotWorkerPool, /WORKSPACE_MONITOR_PARALLEL === "0"/);
+  assert.match(snapshotWorkerPool, /new Worker\(workerPath/);
+  assert.match(snapshotFileWorker, /readDocument/);
+  assert.match(snapshotFileWorker, /readSourceFile/);
 });
 
 test("AI Eval is a first-class resident workbench section", () => {

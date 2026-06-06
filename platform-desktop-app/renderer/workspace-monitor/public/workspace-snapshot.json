@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T02:17:31.223Z",
+  "generatedAt": "2026-06-06T02:26:09.089Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -12,12 +12,12 @@
     "tasks": 71,
     "completedTasks": 71,
     "documents": 650,
-    "requirements": 498,
-    "evaluations": 16,
+    "requirements": 503,
+    "evaluations": 15,
     "webSearches": 15,
     "timingRecords": 14,
     "historyDays": 1,
-    "adminHistoryDocuments": 2585,
+    "adminHistoryDocuments": 2592,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -40,8 +40,10 @@
     "fundamentalImprovementPrinciples": 6,
     "fundamentalImprovementPackages": 6,
     "fundamentalImprovementFitnessChecks": 4,
-    "toolUsagePatterns": 7,
-    "toolUsageValidationCommands": 21,
+    "toolUsagePatterns": 8,
+    "toolUsageValidationCommands": 26,
+    "snapshotDocumentWorkers": 6,
+    "snapshotSourceWorkers": 4,
     "structurePressurePoints": 5,
     "sourceFiles": 134,
     "rootFolders": 20
@@ -7513,6 +7515,36 @@
       "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-open-source-feature-radar.ko.md"
     },
     {
+      "id": "REQ-PSC-001",
+      "requirement": "독립적인 Workspace Monitor 문서 변환 작업은 bounded worker thread pool로 처리해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-parallel-snapshot-collector.ko.md"
+    },
+    {
+      "id": "REQ-PSC-002",
+      "requirement": "source preview는 읽기 전 후보를 정렬/상한 적용하고, 선택된 후보만 worker pool로 읽어야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-parallel-snapshot-collector.ko.md"
+    },
+    {
+      "id": "REQ-PSC-003",
+      "requirement": "worker 실패 또는 작은 작업에서는 기존 동기 경로로 fallback해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-parallel-snapshot-collector.ko.md"
+    },
+    {
+      "id": "REQ-PSC-004",
+      "requirement": "generated snapshot은 실제 worker 수를 stats로 노출해야 한다.",
+      "priority": "should",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-parallel-snapshot-collector.ko.md"
+    },
+    {
+      "id": "REQ-PSC-005",
+      "requirement": "Rust/Tauri 병렬 구조는 중복 구현보다 기존 Rayon/background warmup 구조를 유지하고 관측한다.",
+      "priority": "should",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-parallel-snapshot-collector.ko.md"
+    },
+    {
       "id": "REQ-PPL-001",
       "requirement": "CLI 세션은 cancel, timeout, error, store cleanup, drop 경로에서 child process를 wait 또는 kill/wait해야 한다.",
       "priority": "must",
@@ -7664,6 +7696,246 @@
     }
   ],
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Parallel Snapshot Collector 평가",
+      "excerpt": "Parallel Snapshot Collector 평가 날짜: 2026 06 06 결과 status: passed internal 병렬 구조를 실제 코드에 반영했다. 기존 Rust/Tauri 영역에는 이미 Rayon/background warmup/threaded stream readers가 있었으므로, 이번 변경은 단일 루프였던 Workspace Monitor snapshot collector에 bounded Node worker thread pool을 추가했다. 성능 관측 collect : 2",
+      "html": "<p>Parallel Snapshot Collector 평가 날짜: 2026 06 06 결과 status: passed internal 병렬 구조를 실제 코드에 반영했다. 기존 Rust/Tauri 영역에는 이미 Rayon/background warmup/threaded stream readers가 있었으므로, 이번 변경은 단일 루프였던 Workspace Monitor snapshot collector에 bounded Node worker thread pool을 추가했다. 성능 관측 collect : 280% CPU, 0.645s wall time snapshot stats: snapshotDocumentWorkers=6 , snapshotSo</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1084,
+      "updatedAt": "2026-06-06T02:26:02.134Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Parallel Snapshot Collector 요청 추적",
+      "excerpt": "Parallel Snapshot Collector 요청 추적 날짜: 2026 06 06 요청 병렬 구조, 멀티스레드, 멀티프로세스로 속도를 늘릴 수 있는 방법을 고려. 결과 Workspace Monitor snapshot collector에 Node worker thread pool을 구현했다. Rust/Tauri에는 이미 Rayon/background warmup 구조가 있으므로 중복 추가 대신 관측과 기록을 남겼다. 변경 파일 platform desktop app/renderer/workspa",
+      "html": "<p>Parallel Snapshot Collector 요청 추적 날짜: 2026 06 06 요청 병렬 구조, 멀티스레드, 멀티프로세스로 속도를 늘릴 수 있는 방법을 고려. 결과 Workspace Monitor snapshot collector에 Node worker thread pool을 구현했다. Rust/Tauri에는 이미 Rayon/background warmup 구조가 있으므로 중복 추가 대신 관측과 기록을 남겼다. 변경 파일 platform desktop app/renderer/workspace monitor/scripts/lib/snapshot worker pool.mjs platform desktop app/renderer/wo</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1050,
+      "updatedAt": "2026-06-06T02:26:02.134Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Parallel Snapshot Collector 작업 요약",
+      "excerpt": "Parallel Snapshot Collector 작업 요약 날짜: 2026 06 06 완료 Workspace Monitor snapshot collector를 async worker thread 구조로 전환했다. 문서 렌더링은 최대 6개 worker로 분산한다. source preview는 후보를 먼저 정렬/상한 적용한 뒤 최대 4개 worker로 읽는다. worker 실패 또는 작은 task에서는 기존 sync path로 fallback한다. snapshot stats에 snapshotDocu",
+      "html": "<p>Parallel Snapshot Collector 작업 요약 날짜: 2026 06 06 완료 Workspace Monitor snapshot collector를 async worker thread 구조로 전환했다. 문서 렌더링은 최대 6개 worker로 분산한다. source preview는 후보를 먼저 정렬/상한 적용한 뒤 최대 4개 worker로 읽는다. worker 실패 또는 작은 task에서는 기존 sync path로 fallback한다. snapshot stats에 snapshotDocumentWorkers , snapshotSourceWorkers 를 추가했다. Tool Playbook registry에 snapshot wor</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 981,
+      "updatedAt": "2026-06-06T02:26:02.134Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+      "path": "_history/work-timings/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "Parallel Snapshot Collector 작업 시간 기록",
+      "excerpt": "Parallel Snapshot Collector 작업 시간 기록 | 단계 | 상태 | 메모 | | | | | | 조사 | 완료 | 공식 문서와 기존 Rust 구조 확인 | | 구현 | 완료 | worker pool, file worker, async buildSnapshot | | 1차 검증 | 완료 | collect/check/test 통과 | | 최종 패키징 | 완료 | Tauri package, codesign, hdiutil verify 완료 | 관측 time corepack pnpm f",
+      "html": "<p>Parallel Snapshot Collector 작업 시간 기록 | 단계 | 상태 | 메모 | | | | | | 조사 | 완료 | 공식 문서와 기존 Rust 구조 확인 | | 구현 | 완료 | worker pool, file worker, async buildSnapshot | | 1차 검증 | 완료 | collect/check/test 통과 | | 최종 패키징 | 완료 | Tauri package, codesign, hdiutil verify 완료 | 관측 time corepack pnpm filter workspace monitor run collect 에서 222% CPU 사용률과 0.855s wall time을 관측했다. sna</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 662,
+      "updatedAt": "2026-06-06T02:26:02.133Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-parallel-snapshot-collector-validation-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-parallel-snapshot-collector/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Parallel Snapshot Collector 검증",
+      "excerpt": "Parallel Snapshot Collector 검증 1차 검증 node check collect workspace.mjs 통과 node check snapshot worker pool.mjs 통과 node check snapshot file worker.mjs 통과 corepack pnpm filter workspace monitor run collect 통과 snapshot stats 확인: snapshotDocumentWorkers=6 , snapshotSourceWorkers=4 core",
+      "html": "<h1>Parallel Snapshot Collector 검증</h1>\n<h2>1차 검증</h2>\n<ul>\n<li><code>node --check collect-workspace.mjs</code> - 통과</li>\n<li><code>node --check snapshot-worker-pool.mjs</code> - 통과</li>\n<li><code>node --check snapshot-file-worker.mjs</code> - 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code> - 통과</li>\n<li>snapshot stats 확인: <code>snapshotDocumentWorkers=6</code>, <code>snapshotSourceWorkers=4</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code> - 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code> - 통과, 74개</li>\n</ul>\n<h2>최종 검증</h2>\n<ul>\n<li>registry 변경 후 <code>corepack pnpm --filter workspace-monitor run collect</code> - 통과, 280% CPU, 0.645s wall time</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code> - 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code> - 통과, 75개</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code> - 통과</li>\n<li><code>corepack pnpm run desktop:package:internal</code> - 통과</li>\n<li>codesign verify - 통과</li>\n<li>hdiutil verify - VALID</li>\n<li>package 후 developer snapshot 복구 collect - 통과</li>\n</ul>\n<h2>산출물</h2>\n<ul>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1183,
+      "updatedAt": "2026-06-06T02:26:02.132Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-parallel-snapshot-collector-tasks-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-parallel-snapshot-collector/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Parallel Snapshot Collector 작업 목록",
+      "excerpt": "Parallel Snapshot Collector 작업 목록 x 웹 우선 조사 x 현재 병렬 구조 조사 x snapshot worker pool.mjs 추가 x snapshot file worker.mjs 추가 x buildSnapshot async worker 경로 연결 x document/source worker stats 추가 x Tool Playbook registry에 병렬 패턴 추가 x static/source contract test 추가 x 최종 build/package 검증 com",
+      "html": "<h1>Parallel Snapshot Collector 작업 목록</h1>\n<ul>\n<li>[x] 웹 우선 조사</li>\n<li>[x] 현재 병렬 구조 조사</li>\n<li>[x] <code>snapshot-worker-pool.mjs</code> 추가</li>\n<li>[x] <code>snapshot-file-worker.mjs</code> 추가</li>\n<li>[x] <code>buildSnapshot</code> async worker 경로 연결</li>\n<li>[x] document/source worker stats 추가</li>\n<li>[x] Tool Playbook registry에 병렬 패턴 추가</li>\n<li>[x] static/source contract test 추가</li>\n<li>[x] 최종 build/package 검증</li>\n<li>[ ] commit/push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 420,
+      "updatedAt": "2026-06-06T02:26:02.131Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+      "path": "_history/plans/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Parallel Snapshot Collector 작업 계획",
+      "excerpt": "Parallel Snapshot Collector 작업 계획 날짜: 2026 06 06 work mode: standard install mode: developer 순서 1. 공식 문서 조사 2. 현재 병렬 구조 조사 3. snapshot collector worker pool 구현 4. registry/test/spec/history 업데이트 5. collect/check/test/build/package 6. commit/push",
+      "html": "<p>Parallel Snapshot Collector 작업 계획 날짜: 2026 06 06 work mode: standard install mode: developer 순서 1. 공식 문서 조사 2. 현재 병렬 구조 조사 3. snapshot collector worker pool 구현 4. registry/test/spec/history 업데이트 5. collect/check/test/build/package 6. commit/push</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 310,
+      "updatedAt": "2026-06-06T02:23:45.532Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약",
+      "excerpt": "사용자 요청 요약 날짜: 2026 06 06 사용자는 병렬 구조, 멀티스레드, 멀티프로세스를 통해 속도를 늘릴 수 있는 방법을 고려하라고 요청했다. 처리 범위 Workspace Monitor snapshot 수집에 Node worker thread pool을 추가하고, 기존 Rust/Rayon 구조는 중복 구현 없이 유지/기록한다.",
+      "html": "<p>사용자 요청 요약 날짜: 2026 06 06 사용자는 병렬 구조, 멀티스레드, 멀티프로세스를 통해 속도를 늘릴 수 있는 방법을 고려하라고 요청했다. 처리 범위 Workspace Monitor snapshot 수집에 Node worker thread pool을 추가하고, 기존 Rust/Rayon 구조는 중복 구현 없이 유지/기록한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 356,
+      "updatedAt": "2026-06-06T02:23:45.531Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Parallel Snapshot Collector 웹 검색 기록",
+      "excerpt": "Parallel Snapshot Collector 웹 검색 기록 날짜: 2026 06 06 쿼리 Node.js official worker threads documentation parallel CPU tasks Node.js official child process documentation spawn parallel processes Tauri v2 official documentation async commands state task spawn Rust standard library std::",
+      "html": "<p>Parallel Snapshot Collector 웹 검색 기록 날짜: 2026 06 06 쿼리 Node.js official worker threads documentation parallel CPU tasks Node.js official child process documentation spawn parallel processes Tauri v2 official documentation async commands state task spawn Rust standard library std::thread official documentation spawn 출처와 영향 | 출처 | 판단 | | | | | https://nodejs.or</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1232,
+      "updatedAt": "2026-06-06T02:23:45.531Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-parallel-snapshot-collector-traceability-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-parallel-snapshot-collector/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Parallel Snapshot Collector 추적성",
+      "excerpt": "Parallel Snapshot Collector 추적성 요구사항 연결 REQ PSC 001 snapshot worker pool.mjs , collectDocumentsParallel REQ PSC 002 collectSourceFileCandidates , collectSourceFilesParallel REQ PSC 003 WORKSPACE MONITOR PARALLEL=0 , worker catch fallback REQ PSC 004 WorkspaceStats.snapshotDocumen",
+      "html": "<h1>Parallel Snapshot Collector 추적성</h1>\n<h2>요구사항 연결</h2>\n<ul>\n<li>REQ-PSC-001 -&gt; <code>snapshot-worker-pool.mjs</code>, <code>collectDocumentsParallel</code></li>\n<li>REQ-PSC-002 -&gt; <code>collectSourceFileCandidates</code>, <code>collectSourceFilesParallel</code></li>\n<li>REQ-PSC-003 -&gt; <code>WORKSPACE_MONITOR_PARALLEL=0</code>, worker catch fallback</li>\n<li>REQ-PSC-004 -&gt; <code>WorkspaceStats.snapshotDocumentWorkers</code>, <code>snapshotSourceWorkers</code></li>\n<li>REQ-PSC-005 -&gt; <code>src-tauri</code> existing Rayon/background warmup investigation</li>\n</ul>\n<h2>롤백</h2>\n<p>1. <code>collectDocumentsParallel</code>/<code>collectSourceFilesParallel</code> call sites를 sync 함수로 되돌린다.</p>\n<p>2. worker pool files를 제거한다.</p>\n<p>3. snapshot stats fields와 tests를 제거한다.</p>\n<p>4. collect/check/test/build/package를 재실행한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 703,
+      "updatedAt": "2026-06-06T02:23:45.530Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-parallel-snapshot-collector-plan-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-parallel-snapshot-collector/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Parallel Snapshot Collector 계획",
+      "excerpt": "Parallel Snapshot Collector 계획 1. 공식 문서로 Node worker threads, child process, Tauri async command, Rust thread 경계 확인 2. 현재 병렬 구조 조사 3. Rust 쪽은 기존 Rayon/background warmup 구조를 유지 4. Node snapshot collector의 document/source transform을 worker pool로 분산 5. worker 수를 snapshot stats로 노출 6",
+      "html": "<h1>Parallel Snapshot Collector 계획</h1>\n<p>1. 공식 문서로 Node worker_threads, child_process, Tauri async command, Rust thread 경계 확인</p>\n<p>2. 현재 병렬 구조 조사</p>\n<p>3. Rust 쪽은 기존 Rayon/background warmup 구조를 유지</p>\n<p>4. Node snapshot collector의 document/source transform을 worker pool로 분산</p>\n<p>5. worker 수를 snapshot stats로 노출</p>\n<p>6. Tool Playbook registry에 병렬 snapshot 패턴 추가</p>\n<p>7. collect/check/test/build/package 검증</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 460,
+      "updatedAt": "2026-06-06T02:23:45.529Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-parallel-snapshot-collector-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-parallel-snapshot-collector.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Parallel Snapshot Collector 요구사항",
+      "excerpt": "Parallel Snapshot Collector 요구사항 작성일: 2026 06 06 소유 프로젝트: platform desktop app 사용자 요구 병렬 구조, 멀티스레드, 멀티프로세스로 속도를 늘릴 수 있는 방법을 고려하라는 요청이 있었다. 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | REQ PSC 001 | 독립적인 Workspace Monitor 문서 변환 작업은 bounded worker thread pool로 처리해야 한다. | must | colle",
+      "html": "<h1>Parallel Snapshot Collector 요구사항</h1>\n<p>작성일: 2026-06-06</p>\n<p>소유 프로젝트: <code>platform-desktop-app</code></p>\n<h2>사용자 요구</h2>\n<p>병렬 구조, 멀티스레드, 멀티프로세스로 속도를 늘릴 수 있는 방법을 고려하라는 요청이 있었다.</p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PSC-001</td><td>독립적인 Workspace Monitor 문서 변환 작업은 bounded worker thread pool로 처리해야 한다.</td><td>must</td><td><code>collect</code>, <code>test</code></td></tr><tr><td>REQ-PSC-002</td><td>source preview는 읽기 전 후보를 정렬/상한 적용하고, 선택된 후보만 worker pool로 읽어야 한다.</td><td>must</td><td>collector test</td></tr><tr><td>REQ-PSC-003</td><td>worker 실패 또는 작은 작업에서는 기존 동기 경로로 fallback해야 한다.</td><td>must</td><td>source contract test</td></tr><tr><td>REQ-PSC-004</td><td>generated snapshot은 실제 worker 수를 stats로 노출해야 한다.</td><td>should</td><td>snapshot stats</td></tr><tr><td>REQ-PSC-005</td><td>Rust/Tauri 병렬 구조는 중복 구현보다 기존 Rayon/background warmup 구조를 유지하고 관측한다.</td><td>should</td><td>package verification</td></tr></tbody></table>\n<h2>비범위</h2>\n<ul>\n<li>UI render thread 자체를 강제로 멀티스레드화하지 않는다.</li>\n<li>permission, install, destructive command가 있는 multi-process runner는 별도 승인 gate 없이 자동화하지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1306,
+      "updatedAt": "2026-06-06T02:23:45.528Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-parallel-snapshot-collector-spec-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-parallel-snapshot-collector/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Parallel Snapshot Collector 스펙",
+      "excerpt": "Parallel Snapshot Collector 스펙 목표 Workspace Monitor startup snapshot 수집 중 독립적인 document rendering/source preview 작업을 병렬 worker thread pool로 분산한다. 설계 snapshot worker pool.mjs : task count와 os.availableParallelism 기준으로 bounded worker 수를 정한다. snapshot file worker.mjs : document/sour",
+      "html": "<h1>Parallel Snapshot Collector 스펙</h1>\n<h2>목표</h2>\n<p>Workspace Monitor startup snapshot 수집 중 독립적인 document rendering/source preview 작업을 병렬 worker thread pool로 분산한다.</p>\n<h2>설계</h2>\n<ul>\n<li><code>snapshot-worker-pool.mjs</code>: task count와 <code>os.availableParallelism()</code> 기준으로 bounded worker 수를 정한다.</li>\n<li><code>snapshot-file-worker.mjs</code>: document/source 작업 단위 하나를 처리한다.</li>\n<li><code>collectDocumentsParallel</code>: 문서 task를 worker pool로 변환한다.</li>\n<li><code>collectSourceFilesParallel</code>: source 후보를 정렬/상한 적용한 뒤 선택된 파일만 worker pool로 읽는다.</li>\n<li><code>WORKSPACE_MONITOR_PARALLEL=0</code>: worker 비활성화 fallback.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>collect</code>가 성공하고 snapshot stats에 <code>snapshotDocumentWorkers</code>, <code>snapshotSourceWorkers</code>가 기록된다.</li>\n<li>multi-core developer machine에서 충분한 task 수가 있으면 worker 수가 1보다 크다.</li>\n<li>정렬 결과는 기존처럼 deterministic해야 한다.</li>\n<li>worker 실패 시 synchronous fallback이 존재해야 한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1027,
+      "updatedAt": "2026-06-06T02:23:45.528Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-configs-product-feature-registry-json",
+      "path": "platform-desktop-app/configs/product-feature-registry.json",
+      "category": "project-config",
+      "language": "unknown",
+      "title": "Product Feature Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"product feature registry\", \"purpose\": \"Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, ",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;product-feature-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, workbench, learning, and monitoring are supporting layers.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before changing the desktop home screen, snapshot schema, installer shell runtime, or platform feature navigation.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read product_position first to understand what the product is and what it is not.&quot;,\n      &quot;Read feature_layers to see which capabilities are primary product features and which capabilities are supporting surfaces.&quot;,\n      &quot;Read promotion_loop before adding workflow, prompt, tool, skill, or agent creation features.&quot;,\n      &quot;Read structure_rules before naming a feature, tab, data store, or installer shell behavior as monitoring.&quot;,\n      &quot;Use validation_gates as the acceptance checklist when making a UI, data, or runtime change around these features.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The desktop home screen or first-run product promise changes.&quot;,\n      &quot;A feature is promoted from workflow, prompt, template, tool, skill, or agent into a desktop product surface.&quot;,\n      &quot;A new Agent Core, CLI orchestration, root tool, workbench, learning, or observability capability is added.&quot;,\n      &quot;Monitoring starts to look like the main product again instead of a support layer.&quot;,\n      &quot;The installer shell runtime contract changes how work state, decisions, evidence, validation, or evaluations are accumulated.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;openai_agents_sdk&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;agent loop, tools, guardrails, handoffs, sessions, and tracing as product-level agent platform primitives&quot;,\n        &quot;workspace and resumable multi-step execution as desktop product capabilities&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;openai_agents_tracing&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK Tracing&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/tracing/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating traces and monitoring as debugging, evaluation, and improvement support rather than the whole product&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;autogen_docs&quot;,\n      &quot;title&quot;: &quot;Microsoft AutoGen&quot;,\n      &quot;url&quot;: &quot;https://microsoft.github.io/autogen/stable/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;multi-agent applications, event-driven multi-agent systems, and no-code prototyping surfaces as platform references&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;langgraph_multi_agent&quot;,\n      &quot;title&quot;: &quot;LangGraph Multi-agent Patterns&quot;,\n      &quot;url&quot;: &quot;https://langchain-ai.github.io/langgraph/tutorials/multi_agent/multi-agent-collaboration/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;subagents, handoffs, skills, routers, custom workflows, context management, and parallel execution trade-offs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;crewai_docs&quot;,\n      &quot;title&quot;: &quot;CrewAI Documentation&quot;,\n      &quot;url&quot;: &quot;https://docs.crewai.com/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;crew-style agent orchestration, flow, knowledge, and task abstractions as product reference points&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_hig_settings&quot;,\n      &quot;title&quot;: &quot;Apple Human Interface Guidelines: Settings&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/design/human-interface-guidelines/settings&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;keeping broad configuration in a dedicated settings area instead of mixing it into the core work surface&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;microsoft_navigation_view&quot;,\n      &quot;title&quot;: &quot;Microsoft Learn: NavigationView&quot;,\n      &quot;url&quot;: &quot;https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop-style navigation with main items and a separated settings item&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_platform_ui_overview&quot;,\n      &quot;title&quot;: &quot;IntelliJ Platform UI Overview&quot;,\n      &quot;url&quot;: &quot;https://plugins.jetbrains.com/docs/intellij/ui-overview.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;IDE-style separation of main editor/work surfaces, tool windows, settings, and modal dialogs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_tool_windows&quot;,\n      &quot;title&quot;: &quot;IntelliJ IDEA Tool Windows&quot;,\n      &quot;url&quot;: &quot;https://www.jetbrains.com/help/idea/tool-windows.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Run, Services, Problems, and status-oriented tool-window model </code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 36273,
+      "updatedAt": "2026-06-06T02:22:46.642Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-configs-tool-usage-integration-registry-json",
+      "path": "platform-desktop-app/configs/tool-usage-integration-registry.json",
+      "category": "project-config",
+      "language": "unknown",
+      "title": "Tool Usage Integration Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 06\", \"name\": \"tool usage integration registry\", \"purpose\": \"Captures high signal Codex style tool usage loops so the desktop platform can expose them as reusable agent work playbooks, validation ladders, and source linked implementation targets.\", \"re",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-06&quot;,\n  &quot;name&quot;: &quot;tool-usage-integration-registry&quot;,\n  &quot;purpose&quot;: &quot;Captures high-signal Codex-style tool usage loops so the desktop platform can expose them as reusable agent work playbooks, validation ladders, and source-linked implementation targets.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry when turning repeated agent tool behavior into desktop product behavior, Tool Studio guidance, validation commands, or future automation.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read patterns first to see the human-readable work sequence and the tool surfaces involved.&quot;,\n      &quot;Read verification_ladders to see which commands or checks prove a pattern is usable in the platform.&quot;,\n      &quot;Read adoption_backlog before adding new source, because it names the next bounded platform surfaces for these tool loops.&quot;,\n      &quot;Keep new entries narrow: each pattern should describe one repeatable tool loop with evidence outputs and failure modes.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;A repeated Codex or agent tool workflow appears in multiple meaningful tasks.&quot;,\n      &quot;A new desktop surface should teach, run, or validate a tool sequence directly.&quot;,\n      &quot;Tool use changes from ad hoc terminal use into a platform-owned capability.&quot;,\n      &quot;Validation, build, package, or resource cleanup behavior changes.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;playwright_locators&quot;,\n      &quot;title&quot;: &quot;Playwright Locators&quot;,\n      &quot;url&quot;: &quot;https://playwright.dev/docs/locators&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;prefer user-perceived locators for browser smoke checks&quot;,\n        &quot;auto-waiting and retryable UI validation&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;Applies to browser automation; native shell validation still needs OS/runtime checks.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;node_test_runner&quot;,\n      &quot;title&quot;: &quot;Node.js Test Runner&quot;,\n      &quot;url&quot;: &quot;https://nodejs.org/api/test.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;repository-local smoke and contract tests with node --test&quot;,\n        &quot;fast no-extra-framework validation for monitor collectors and source audits&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;Does not replace browser, Tauri, or Rust runtime checks.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_distribute&quot;,\n      &quot;title&quot;: &quot;Tauri Distribute&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop build and bundle close-out&quot;,\n        &quot;macOS .app and DMG artifact verification&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;Public macOS readiness still requires signing, hardened runtime, notarization, and installer policy gates.&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;tool_loop_is_platform_capability&quot;,\n      &quot;rule&quot;: &quot;Repeated agent tool usage shall become a platform-visible playbook before it becomes opaque automation.&quot;,\n      &quot;reason&quot;: &quot;The user asked to bring the tool usage style itself into the platform, not just ship a one-off fix.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;evidence_before_synthesis&quot;,\n      &quot;rule&quot;: &quot;Research, local inspection, source edits, validation, packaging, and git close-out must each leave evidence outputs before a task is considered done.&quot;,\n      &quot;reason&quot;: &quot;The platform needs durable trust handles for long-running agent work.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;desktop_resources_are_explicit&quot;,\n      &quot;rule&quot;: &quot;Tool playbooks that touch servers, browser automation, subprocesses, caches, memory, or packaging must include lifecycle and cleanup checks.&quot;,\n      &quot;reason&quot;: &quot;The platform is a desktop app and should own resource lifecycle instead of behaving like a stateless page.&quot;\n    }\n  ],\n  &quot;field_guide&quot;: [\n    {\n      &quot;field&quot;: &quot;patterns&quot;,\n      &quot;meaning&quot;: &quot;Repeatable tool-use loops that a platform agent or human operator can follow.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;verification_ladders&quot;,\n      &quot;meaning&quot;: &quot;Grouped validation commands and acceptance checks mapped to platform surfaces.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;adoption_backlog&quot;,\n      &quot;meaning&quot;: &quot;Bounded future platform source targets for making each loop more executable.&quot;,\n      &quot;required&quot;: true\n    }\n  ],\n  &quot;patterns&quot;: [\n    {\n      &quot;id&quot;: &quot;web-first-research&quot;,\n      &quot;label&quot;: &quot;Web-first research&quot;,\n      &quot;label_ko&quot;: &quot;웹 우선 조사&quot;,\n      &quot;purpose&quot;: &quot;Confirm unstable or tool-specific facts with current primary sources before planning, editing, or claiming readiness.&quot;,\n      &quot;tool_surfaces&quot;: [\n        &quot;web.run search_query&quot;,\n        &quot;_history/web-searches&quot;,\n        &quot;_research&quot;\n      ],\n      &quot;trigger_when&quot;: [\n        &quot;The user asks for latest, current, best practice, open-source references, packaging, API behavior, or broad platform design.&quot;,\n        &quot;A task depends on a page, repository, library, or documentation not already loaded into context.&quot;\n      ],\n      &quot;sequence&quot;: [\n        &quot;Search high-authority sources first.&quot;,\n        &quot;Prefer official docs for implement</code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 21599,
+      "updatedAt": "2026-06-06T02:22:34.176Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-tool-usage-integration-tasks-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-tool-usage-integration/tasks.ko.md",
@@ -7870,38 +8142,6 @@
       "updatedAt": "2026-06-06T02:12:58.449Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-configs-product-feature-registry-json",
-      "path": "platform-desktop-app/configs/product-feature-registry.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "Product Feature Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"product feature registry\", \"purpose\": \"Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, ",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;product-feature-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, workbench, learning, and monitoring are supporting layers.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before changing the desktop home screen, snapshot schema, installer shell runtime, or platform feature navigation.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read product_position first to understand what the product is and what it is not.&quot;,\n      &quot;Read feature_layers to see which capabilities are primary product features and which capabilities are supporting surfaces.&quot;,\n      &quot;Read promotion_loop before adding workflow, prompt, tool, skill, or agent creation features.&quot;,\n      &quot;Read structure_rules before naming a feature, tab, data store, or installer shell behavior as monitoring.&quot;,\n      &quot;Use validation_gates as the acceptance checklist when making a UI, data, or runtime change around these features.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The desktop home screen or first-run product promise changes.&quot;,\n      &quot;A feature is promoted from workflow, prompt, template, tool, skill, or agent into a desktop product surface.&quot;,\n      &quot;A new Agent Core, CLI orchestration, root tool, workbench, learning, or observability capability is added.&quot;,\n      &quot;Monitoring starts to look like the main product again instead of a support layer.&quot;,\n      &quot;The installer shell runtime contract changes how work state, decisions, evidence, validation, or evaluations are accumulated.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;openai_agents_sdk&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;agent loop, tools, guardrails, handoffs, sessions, and tracing as product-level agent platform primitives&quot;,\n        &quot;workspace and resumable multi-step execution as desktop product capabilities&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;openai_agents_tracing&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK Tracing&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/tracing/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating traces and monitoring as debugging, evaluation, and improvement support rather than the whole product&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;autogen_docs&quot;,\n      &quot;title&quot;: &quot;Microsoft AutoGen&quot;,\n      &quot;url&quot;: &quot;https://microsoft.github.io/autogen/stable/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;multi-agent applications, event-driven multi-agent systems, and no-code prototyping surfaces as platform references&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;langgraph_multi_agent&quot;,\n      &quot;title&quot;: &quot;LangGraph Multi-agent Patterns&quot;,\n      &quot;url&quot;: &quot;https://langchain-ai.github.io/langgraph/tutorials/multi_agent/multi-agent-collaboration/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;subagents, handoffs, skills, routers, custom workflows, context management, and parallel execution trade-offs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;crewai_docs&quot;,\n      &quot;title&quot;: &quot;CrewAI Documentation&quot;,\n      &quot;url&quot;: &quot;https://docs.crewai.com/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;crew-style agent orchestration, flow, knowledge, and task abstractions as product reference points&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_hig_settings&quot;,\n      &quot;title&quot;: &quot;Apple Human Interface Guidelines: Settings&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/design/human-interface-guidelines/settings&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;keeping broad configuration in a dedicated settings area instead of mixing it into the core work surface&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;microsoft_navigation_view&quot;,\n      &quot;title&quot;: &quot;Microsoft Learn: NavigationView&quot;,\n      &quot;url&quot;: &quot;https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop-style navigation with main items and a separated settings item&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_platform_ui_overview&quot;,\n      &quot;title&quot;: &quot;IntelliJ Platform UI Overview&quot;,\n      &quot;url&quot;: &quot;https://plugins.jetbrains.com/docs/intellij/ui-overview.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;IDE-style separation of main editor/work surfaces, tool windows, settings, and modal dialogs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_tool_windows&quot;,\n      &quot;title&quot;: &quot;IntelliJ IDEA Tool Windows&quot;,\n      &quot;url&quot;: &quot;https://www.jetbrains.com/help/idea/tool-windows.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Run, Services, Problems, and status-oriented tool-window model </code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 35895,
-      "updatedAt": "2026-06-06T02:10:43.020Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-configs-tool-usage-integration-registry-json",
-      "path": "platform-desktop-app/configs/tool-usage-integration-registry.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "Tool Usage Integration Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 06\", \"name\": \"tool usage integration registry\", \"purpose\": \"Captures high signal Codex style tool usage loops so the desktop platform can expose them as reusable agent work playbooks, validation ladders, and source linked implementation targets.\", \"re",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-06&quot;,\n  &quot;name&quot;: &quot;tool-usage-integration-registry&quot;,\n  &quot;purpose&quot;: &quot;Captures high-signal Codex-style tool usage loops so the desktop platform can expose them as reusable agent work playbooks, validation ladders, and source-linked implementation targets.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry when turning repeated agent tool behavior into desktop product behavior, Tool Studio guidance, validation commands, or future automation.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read patterns first to see the human-readable work sequence and the tool surfaces involved.&quot;,\n      &quot;Read verification_ladders to see which commands or checks prove a pattern is usable in the platform.&quot;,\n      &quot;Read adoption_backlog before adding new source, because it names the next bounded platform surfaces for these tool loops.&quot;,\n      &quot;Keep new entries narrow: each pattern should describe one repeatable tool loop with evidence outputs and failure modes.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;A repeated Codex or agent tool workflow appears in multiple meaningful tasks.&quot;,\n      &quot;A new desktop surface should teach, run, or validate a tool sequence directly.&quot;,\n      &quot;Tool use changes from ad hoc terminal use into a platform-owned capability.&quot;,\n      &quot;Validation, build, package, or resource cleanup behavior changes.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;playwright_locators&quot;,\n      &quot;title&quot;: &quot;Playwright Locators&quot;,\n      &quot;url&quot;: &quot;https://playwright.dev/docs/locators&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;prefer user-perceived locators for browser smoke checks&quot;,\n        &quot;auto-waiting and retryable UI validation&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;Applies to browser automation; native shell validation still needs OS/runtime checks.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;node_test_runner&quot;,\n      &quot;title&quot;: &quot;Node.js Test Runner&quot;,\n      &quot;url&quot;: &quot;https://nodejs.org/api/test.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;repository-local smoke and contract tests with node --test&quot;,\n        &quot;fast no-extra-framework validation for monitor collectors and source audits&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;Does not replace browser, Tauri, or Rust runtime checks.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_distribute&quot;,\n      &quot;title&quot;: &quot;Tauri Distribute&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop build and bundle close-out&quot;,\n        &quot;macOS .app and DMG artifact verification&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;Public macOS readiness still requires signing, hardened runtime, notarization, and installer policy gates.&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;tool_loop_is_platform_capability&quot;,\n      &quot;rule&quot;: &quot;Repeated agent tool usage shall become a platform-visible playbook before it becomes opaque automation.&quot;,\n      &quot;reason&quot;: &quot;The user asked to bring the tool usage style itself into the platform, not just ship a one-off fix.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;evidence_before_synthesis&quot;,\n      &quot;rule&quot;: &quot;Research, local inspection, source edits, validation, packaging, and git close-out must each leave evidence outputs before a task is considered done.&quot;,\n      &quot;reason&quot;: &quot;The platform needs durable trust handles for long-running agent work.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;desktop_resources_are_explicit&quot;,\n      &quot;rule&quot;: &quot;Tool playbooks that touch servers, browser automation, subprocesses, caches, memory, or packaging must include lifecycle and cleanup checks.&quot;,\n      &quot;reason&quot;: &quot;The platform is a desktop app and should own resource lifecycle instead of behaving like a stateless page.&quot;\n    }\n  ],\n  &quot;field_guide&quot;: [\n    {\n      &quot;field&quot;: &quot;patterns&quot;,\n      &quot;meaning&quot;: &quot;Repeatable tool-use loops that a platform agent or human operator can follow.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;verification_ladders&quot;,\n      &quot;meaning&quot;: &quot;Grouped validation commands and acceptance checks mapped to platform surfaces.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;adoption_backlog&quot;,\n      &quot;meaning&quot;: &quot;Bounded future platform source targets for making each loop more executable.&quot;,\n      &quot;required&quot;: true\n    }\n  ],\n  &quot;patterns&quot;: [\n    {\n      &quot;id&quot;: &quot;web-first-research&quot;,\n      &quot;label&quot;: &quot;Web-first research&quot;,\n      &quot;label_ko&quot;: &quot;웹 우선 조사&quot;,\n      &quot;purpose&quot;: &quot;Confirm unstable or tool-specific facts with current primary sources before planning, editing, or claiming readiness.&quot;,\n      &quot;tool_surfaces&quot;: [\n        &quot;web.run search_query&quot;,\n        &quot;_history/web-searches&quot;,\n        &quot;_research&quot;\n      ],\n      &quot;trigger_when&quot;: [\n        &quot;The user asks for latest, current, best practice, open-source references, packaging, API behavior, or broad platform design.&quot;,\n        &quot;A task depends on a page, repository, library, or documentation not already loaded into context.&quot;\n      ],\n      &quot;sequence&quot;: [\n        &quot;Search high-authority sources first.&quot;,\n        &quot;Prefer official docs for implement</code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 18595,
-      "updatedAt": "2026-06-06T02:08:35.953Z",
-      "historyDate": "",
-      "historyYear": "",
       "workspaceArea": "platform-desktop-app"
     },
     {
@@ -10401,70 +10641,6 @@
       "workspaceArea": "_history/work-summaries"
     },
     {
-      "id": "history-work-summaries-2026-2026-06-06-open-source-feature-radar-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-open-source-feature-radar.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: Open Source Feature Radar",
-      "excerpt": "작업 요약: Open Source Feature Radar 기능별 오픈소스 후보를 Product Structure 화면에서 볼 수 있는 오픈소스 기능 레이더 로 구현했다. open source feature reference registry.json 에 기능 layer별 candidate repo, 이식 패턴, 설치 정책을 self documenting config로 기록했다. Workspace Monitor collector, snapshot type, customer sanitizer, Pro",
-      "html": "<p>작업 요약: Open Source Feature Radar 기능별 오픈소스 후보를 Product Structure 화면에서 볼 수 있는 오픈소스 기능 레이더 로 구현했다. open source feature reference registry.json 에 기능 layer별 candidate repo, 이식 패턴, 설치 정책을 self documenting config로 기록했다. Workspace Monitor collector, snapshot type, customer sanitizer, Product Feature UI, CSS, tests를 갱신했다. 새 dependency 설치는 필요하지 않아 수행하지 않았다. Browser/Pl</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 647,
-      "updatedAt": "2026-06-05T22:24:44.186Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-open-source-feature-radar-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-open-source-feature-radar.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: Open Source Feature Radar",
-      "excerpt": "평가: Open Source Feature Radar 결과 요청한 “가능하면 기능 추가, 설치 필요하면 설치”에 대해 기능별 오픈소스 research를 Product Structure 안의 오픈소스 기능 레이더 로 승격했다. 새 dependency 설치는 필요하지 않았다. 구현 평가 오픈소스 후보 repo와 install policy가 open source feature reference registry.json 에 self documenting config로 고정됐다. Workspace Moni",
-      "html": "<p>평가: Open Source Feature Radar 결과 요청한 “가능하면 기능 추가, 설치 필요하면 설치”에 대해 기능별 오픈소스 research를 Product Structure 안의 오픈소스 기능 레이더 로 승격했다. 새 dependency 설치는 필요하지 않았다. 구현 평가 오픈소스 후보 repo와 install policy가 open source feature reference registry.json 에 self documenting config로 고정됐다. Workspace Monitor snapshot에 openSourceFeatureReferences 가 추가되어 developer/customer snapshot 모두에</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1599,
-      "updatedAt": "2026-06-05T22:24:44.185Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-open-source-feature-radar-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-open-source-feature-radar.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: Open Source Feature Radar",
-      "excerpt": "요청 결과 추적: Open Source Feature Radar 요청 기능별 오픈소스 조사 결과를 실제 기능으로 추가하고, 설치가 필요하면 설치하라는 요청. 결과 Product Structure에 오픈소스 기능 레이더 추가. 기능 layer별 candidate repo, implementation targets, install policy 표시. 새 dependency 설치는 불필요해 설치하지 않음. 산출물 platform desktop app/configs/open source feature r",
-      "html": "<p>요청 결과 추적: Open Source Feature Radar 요청 기능별 오픈소스 조사 결과를 실제 기능으로 추가하고, 설치가 필요하면 설치하라는 요청. 결과 Product Structure에 오픈소스 기능 레이더 추가. 기능 layer별 candidate repo, implementation targets, install policy 표시. 새 dependency 설치는 불필요해 설치하지 않음. 산출물 platform desktop app/configs/open source feature reference registry.json platform desktop app/renderer/workspace monitor/scripts/l</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1135,
-      "updatedAt": "2026-06-05T22:24:44.185Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-open-source-feature-radar-json",
-      "path": "_history/work-timings/2026/2026-06-06-open-source-feature-radar.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Open Source Feature Radar",
-      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 open source feature radar\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"notes\": \"Search queries captured in web search record.\" }, { \"phase\": \"implementation\", \"status\": \"compl",
-      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 open source feature radar&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Search queries captured in web search record.&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Config, collector, snapshot type, UI, CSS, and tests added.&quot; },</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 620,
-      "updatedAt": "2026-06-05T22:24:44.183Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-open-source-feature-radar-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-open-source-feature-radar/tasks.ko.md",
       "category": "project-spec",
@@ -10495,38 +10671,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-open-source-feature-radar-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-open-source-feature-radar.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Open Source Feature Radar",
-      "excerpt": "사용자 요청 요약: Open Source Feature Radar 사용자는 유사 오픈소스와 기능별 후보를 더 조사하고, 가능하면 플랫폼에 기능으로 추가하며, 설치가 필요하면 설치하라고 요청했다. 이번 slice는 기능별 오픈소스 후보와 설치 정책을 앱 안에서 확인할 수 있는 Product Structure 기능으로 구현한다. 원문 전체는 저장하지 않고 요약만 보존한다.",
-      "html": "<p>사용자 요청 요약: Open Source Feature Radar 사용자는 유사 오픈소스와 기능별 후보를 더 조사하고, 가능하면 플랫폼에 기능으로 추가하며, 설치가 필요하면 설치하라고 요청했다. 이번 slice는 기능별 오픈소스 후보와 설치 정책을 앱 안에서 확인할 수 있는 Product Structure 기능으로 구현한다. 원문 전체는 저장하지 않고 요약만 보존한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 442,
-      "updatedAt": "2026-06-05T22:19:40.811Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-open-source-feature-radar-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-open-source-feature-radar.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: Open Source Feature Radar",
-      "excerpt": "웹 검색 기록: Open Source Feature Radar 검색 시각 2026 06 06 쿼리 open source AI agent desktop feature radar provider setup CLI adapter cockpit GitHub 2026 open source agent platform feature reference explorer Dify Langflow n8n Langfuse OpenHands desktop UI open source AI agent workbench MC",
-      "html": "<p>웹 검색 기록: Open Source Feature Radar 검색 시각 2026 06 06 쿼리 open source AI agent desktop feature radar provider setup CLI adapter cockpit GitHub 2026 open source agent platform feature reference explorer Dify Langflow n8n Langfuse OpenHands desktop UI open source AI agent workbench MCP provider settings run history decision inbox GitHub open source AI agent deskt</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1921,
-      "updatedAt": "2026-06-05T22:19:40.811Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-open-source-feature-radar-traceability-ko-md",
@@ -10591,22 +10735,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: 기능별 오픈소스 맵",
-      "excerpt": "평가: 기능별 오픈소스 맵 판정 요청 충족. 현재 플랫폼의 기능 layer별로 오픈소스 후보를 나누고, 각 후보에서 봐야 할 부분과 현재 플랫폼 적용 포인트를 기록했다. 산출물 검색 기록: history/web searches/2026/2026 06 06 feature by feature open source map.ko.md 연구 문서: research/topics/platform desktop app/2026 06 06 feature by feature open source map.ko.md ",
-      "html": "<p>평가: 기능별 오픈소스 맵 판정 요청 충족. 현재 플랫폼의 기능 layer별로 오픈소스 후보를 나누고, 각 후보에서 봐야 할 부분과 현재 플랫폼 적용 포인트를 기록했다. 산출물 검색 기록: history/web searches/2026/2026 06 06 feature by feature open source map.ko.md 연구 문서: research/topics/platform desktop app/2026 06 06 feature by feature open source map.ko.md 요청 요약: history/user requests/2026/2026 06 06 feature by feature open source map.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1359,
-      "updatedAt": "2026-06-05T22:09:24.228Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-agent-cli-cockpit-traceability-ko-md",
@@ -17967,102 +18095,6 @@
       "historyDate": "2026-06-04",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-04-provider-account-connection-en-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-04-provider-account-connection.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Provider Account Connection Requirements",
-      "excerpt": "Provider Account Connection Requirements | ID | Requirement | Priority | Verification | | | | | | | REQ PDA 076 | The desktop app shall let users manage ChatGPT/OpenAI, Claude/Anthropic, and Gemini/Google account connections directly from Settings. | must | ProviderAccountsPanel ",
-      "html": "<h1>Provider Account Connection Requirements</h1>\n<table><thead><tr><th>ID</th><th>Requirement</th><th>Priority</th><th>Verification</th></tr></thead><tbody><tr><td>REQ-PDA-076</td><td>The desktop app shall let users manage ChatGPT/OpenAI, Claude/Anthropic, and Gemini/Google account connections directly from Settings.</td><td>must</td><td><code>ProviderAccountsPanel</code>, <code>list_provider_credentials</code></td></tr><tr><td>REQ-PDA-077</td><td>Account connection shall use provider-supported API keys or official auth flows, not unofficial embedded web sessions or copied cookies.</td><td>must</td><td>provider docs links, <code>setupUrl</code>, <code>docsUrl</code></td></tr><tr><td>REQ-PDA-078</td><td>Stored provider credentials shall never expose raw secrets in UI, reports, or support bundles; only short previews and connection state may be shown.</td><td>must</td><td><code>ProviderCredentialSummary</code>, <code>credential_secret_preview</code>, support export exclusions</td></tr><tr><td>REQ-PDA-079</td><td>Stored credentials shall be injected into matching guest CLI adapter sessions through provider-specific environment variables so connections affect real work execution.</td><td>must</td><td><code>provider_env_for_adapter</code>, <code>OPENAI_API_KEY</code>, <code>ANTHROPIC_API_KEY</code>, <code>GEMINI_API_KEY</code></td></tr><tr><td>REQ-PDA-080</td><td>Users shall be able to open official key setup, login, and docs links, then save, clear, and refresh provider credentials from each provider row.</td><td>must</td><td><code>open_provider_auth_url</code>, settings provider actions</td></tr><tr><td>REQ-PDA-081</td><td>The provider credential store shall be separated under app config and surfaced through runtime data boundary and service readiness status.</td><td>should</td><td><code>provider_credentials_path</code>, <code>provider_credential_store</code>, service readiness</td></tr></tbody></table>\n<h2>Decision</h2>\n<ul>\n<li>Do not embed ChatGPT, Claude, or Gemini web apps in a WebView or capture browser session cookies.</li>\n<li>This slice uses a local app config secret file as the storage adapter; before public release, replace it with an OS keychain or credential-manager adapter.</li>\n<li>Saved keys are injected only into the matching adapter&#039;s environment variables.</li>\n<li>Missing provider credentials do not block the whole app; the runtime and settings surfaces show <code>account needed</code> instead.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2027,
-      "updatedAt": "2026-06-03T16:41:36.636Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-04-provider-account-connection-ko-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-04-provider-account-connection.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "제공자 계정 연결 요구사항",
-      "excerpt": "제공자 계정 연결 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | REQ PDA 076 | 데스크톱 앱은 ChatGPT/OpenAI, Claude/Anthropic, Gemini/Google 계정 연결을 설정 화면에서 직접 관리할 수 있어야 한다. | must | ProviderAccountsPanel , list provider credentials | | REQ PDA 077 | 계정 연결은 비공식 웹 세션 쿠키나 임베드 로그인에 의존하지 않고, provider별 ",
-      "html": "<h1>제공자 계정 연결 요구사항</h1>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-076</td><td>데스크톱 앱은 ChatGPT/OpenAI, Claude/Anthropic, Gemini/Google 계정 연결을 설정 화면에서 직접 관리할 수 있어야 한다.</td><td>must</td><td><code>ProviderAccountsPanel</code>, <code>list_provider_credentials</code></td></tr><tr><td>REQ-PDA-077</td><td>계정 연결은 비공식 웹 세션 쿠키나 임베드 로그인에 의존하지 않고, provider별 공식 API key 또는 공식 인증 흐름을 기준으로 해야 한다.</td><td>must</td><td>provider docs links, <code>setupUrl</code>, <code>docsUrl</code></td></tr><tr><td>REQ-PDA-078</td><td>저장된 provider credential은 UI/report/support bundle에 원문을 노출하지 않고, 짧은 preview와 연결 상태만 보여야 한다.</td><td>must</td><td><code>ProviderCredentialSummary</code>, <code>credential_secret_preview</code>, support export exclusions</td></tr><tr><td>REQ-PDA-079</td><td>저장된 credential은 선택된 guest CLI adapter 실행 시 해당 provider 환경변수로 주입되어 실제 작업 실행에 쓰여야 한다.</td><td>must</td><td><code>provider_env_for_adapter</code>, <code>OPENAI_API_KEY</code>, <code>ANTHROPIC_API_KEY</code>, <code>GEMINI_API_KEY</code></td></tr><tr><td>REQ-PDA-080</td><td>사용자는 각 provider row에서 공식 키 발급, 로그인, 문서 링크를 열고, API key 저장/삭제/새로고침을 할 수 있어야 한다.</td><td>must</td><td><code>open_provider_auth_url</code>, settings provider actions</td></tr><tr><td>REQ-PDA-081</td><td>provider credential store는 앱 config 영역에 분리하고 runtime data boundary와 service readiness에 상태를 노출해야 한다.</td><td>should</td><td><code>provider_credentials_path</code>, <code>provider_credential_store</code>, service readiness</td></tr></tbody></table>\n<h2>결정</h2>\n<ul>\n<li>ChatGPT, Claude, Gemini 웹앱을 WebView로 임베드하거나 쿠키를 탈취하는 구조는 구현하지 않는다.</li>\n<li>이번 slice는 local app config secret file을 storage adapter로 사용하고, public release 전에는 OS keychain/credential manager adapter로 교체한다.</li>\n<li>저장된 key는 adapter별로 필요한 환경변수에만 주입한다.</li>\n<li>provider credential이 없더라도 앱 전체를 막지 않고, 실행 화면과 설정 화면에서 <code>계정 필요</code> 상태를 보여준다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2099,
-      "updatedAt": "2026-06-03T16:41:36.636Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-configs-runtime-data-boundary-registry-json",
-      "path": "platform-desktop-app/configs/runtime-data-boundary-registry.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "Runtime Data Boundary Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"runtime data boundary registry\", \"purpose\": \"Defines how the platform separates repository source code, installed product code, user workspaces, accumulated data stores, logs, and agent work areas so the development repository can build ",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;runtime-data-boundary-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines how the platform separates repository source code, installed product code, user workspaces, accumulated data stores, logs, and agent work areas so the development repository can build the platform while end users receive an installable app without platform source visibility.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before adding product storage, log capture, agent workspaces, installer payloads, or customer-facing workspace features. It is the steering contract for code/data/log/agent boundaries.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read customer_visibility_policy first to understand what an installed user should and should not see.&quot;,\n      &quot;Read repository_planes to know what remains in this development repository.&quot;,\n      &quot;Read installed_product_planes to know what the shipped app owns at runtime.&quot;,\n      &quot;Read runtime_data_roots and log_taxonomy before adding data accumulation or log persistence.&quot;,\n      &quot;Read agent_workspace_policy before creating or moving agent definitions, agent runtime state, or task work folders.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-03&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The desktop app adds a new persisted data store, log stream, agent runtime state, or workspace artifact.&quot;,\n      &quot;The installer payload, app bundle resources, source map policy, or customer-visible file layout changes.&quot;,\n      &quot;A new local service, sidecar, worker, or CLI adapter needs persistent state.&quot;,\n      &quot;User workspace import/export, backup, migration, or retention behavior changes.&quot;,\n      &quot;Agent definitions or agent task execution folders are reorganized.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;installer_shell_runtime_contract&quot;,\n      &quot;title&quot;: &quot;Installer Shell Runtime Contract&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;installed shell boot sequence&quot;,\n        &quot;runtime enforcement gates&quot;,\n        &quot;structured data accumulation targets&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_distribution&quot;,\n      &quot;title&quot;: &quot;Tauri Distribute&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;installed app bundle and release packaging boundary&quot;,\n        &quot;code-signing and distribution gates&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_config_resources&quot;,\n      &quot;title&quot;: &quot;Tauri Configuration Reference&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/reference/config/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;frontendDist and bundle resource behavior&quot;,\n        &quot;separating bundled resources from runtime data&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_filesystem&quot;,\n      &quot;title&quot;: &quot;Tauri File System Plugin&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/plugin/file-system/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;application-specific data, local data, cache, and log directory classes&quot;,\n        &quot;permission-scoped filesystem access&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_app_sandbox&quot;,\n      &quot;title&quot;: &quot;Protecting User Data with App Sandbox&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/documentation/security/protecting-user-data-with-app-sandbox&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;macOS app container and user data protection model&quot;,\n        &quot;standard storage locations for app data and supporting files&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;windows_app_data&quot;,\n      &quot;title&quot;: &quot;Store and Retrieve Settings and Other App Data&quot;,\n      &quot;url&quot;: &quot;https://learn.microsoft.com/en-us/windows/apps/develop/data/store-and-retrieve-app-data&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Windows local and roaming app data stores&quot;,\n        &quot;update-persistent user data behavior&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;repo_is_builder_not_customer_payload&quot;,\n      &quot;rule&quot;: &quot;This repository may contain platform source, product specifications, developer fixtures, and generated monitor snapshots, but public installers must not expose the repository source tree as the customer workspace.&quot;,\n      &quot;reason&quot;: &quot;The user wants this repo to build the platform while installed customers use the product without seeing platform source code.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;repository_planes&quot;,\n        &quot;customer_visibility_policy&quot;,\n        &quot;installer_payload_policy&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;runtime_data_is_not_source&quot;,\n      &quot;rule&quot;: &quot;User data stores, task artifacts, logs, accumulated evidence, and agent runtime state are runtime data planes, not platform source code.&quot;,\n      &quot;reason&quot;: &quot;The platform must keep building logic separate from accumulated customer data and operational logs.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;runtime_data_roots&quot;,\n        &quot;log_taxonomy&quot;,\n        &quot;agent_workspace_policy&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;l</code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 20468,
-      "updatedAt": "2026-06-03T16:41:15.736Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-codex-claude-desktop-reference-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "계획: Codex/Claude Desktop 레퍼런스 반영",
-      "excerpt": "계획: Codex/Claude Desktop 레퍼런스 반영 | 단계 | 내용 | 상태 | | | | | | 1 | OpenAI Codex app 공식 문서와 Claude Desktop 공식 지원 문서를 확인한다. | done | | 2 | 현재 레퍼런스 레지스트리와 사용자 흐름 레지스트리의 누락을 확인한다. | done | | 3 | Codex style thread workbench와 Claude Desktop style connector first chat 전이 패턴을 추가한다. | done ",
-      "html": "<h1>계획: Codex/Claude Desktop 레퍼런스 반영</h1>\n<table><thead><tr><th>단계</th><th>내용</th><th>상태</th></tr></thead><tbody><tr><td>1</td><td>OpenAI Codex app 공식 문서와 Claude Desktop 공식 지원 문서를 확인한다.</td><td>done</td></tr><tr><td>2</td><td>현재 레퍼런스 레지스트리와 사용자 흐름 레지스트리의 누락을 확인한다.</td><td>done</td></tr><tr><td>3</td><td>Codex-style thread workbench와 Claude Desktop-style connector-first chat 전이 패턴을 추가한다.</td><td>done</td></tr><tr><td>4</td><td>readiness/test 누락 방지 토큰을 갱신한다.</td><td>done</td></tr><tr><td>5</td><td>요구사항, 스펙, 히스토리, 평가를 기록한다.</td><td>done</td></tr><tr><td>6</td><td>JSON/config/test/build 검증 후 커밋 및 push한다.</td><td>done</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 652,
-      "updatedAt": "2026-06-03T16:25:40.481Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-codex-claude-desktop-reference-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업: Codex/Claude Desktop 레퍼런스 반영",
-      "excerpt": "작업: Codex/Claude Desktop 레퍼런스 반영 | ID | 작업 | 상태 | | | | | | TASK CCR 001 | Codex app commands/features/skills 공식 문서 확인 | done | | TASK CCR 002 | Claude Desktop local MCP desktop extensions 공식 문서 확인 | done | | TASK CCR 003 | reference platform advantage registry 갱신 | done | | TASK",
-      "html": "<h1>작업: Codex/Claude Desktop 레퍼런스 반영</h1>\n<table><thead><tr><th>ID</th><th>작업</th><th>상태</th></tr></thead><tbody><tr><td>TASK-CCR-001</td><td>Codex app commands/features/skills 공식 문서 확인</td><td>done</td></tr><tr><td>TASK-CCR-002</td><td>Claude Desktop local MCP desktop extensions 공식 문서 확인</td><td>done</td></tr><tr><td>TASK-CCR-003</td><td>reference platform advantage registry 갱신</td><td>done</td></tr><tr><td>TASK-CCR-004</td><td>user flow registry 갱신</td><td>done</td></tr><tr><td>TASK-CCR-005</td><td>readiness script와 readiness test 갱신</td><td>done</td></tr><tr><td>TASK-CCR-006</td><td>snapshot/customer build 및 검증 실행</td><td>done</td></tr><tr><td>TASK-CCR-007</td><td>close-out history/evaluation 기록</td><td>done</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 591,
-      "updatedAt": "2026-06-03T16:24:29.651Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-codex-claude-desktop-reference-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증: Codex/Claude Desktop 레퍼런스 반영",
-      "excerpt": "검증: Codex/Claude Desktop 레퍼런스 반영 계획된 검증 python3 m json.tool platform desktop app/configs/reference platform advantage registry.json python3 m json.tool platform desktop app/configs/user flow registry.json cd agent platform && PYTHONPATH=src python3 m agent platform.cli check conf",
-      "html": "<h1>검증: Codex/Claude Desktop 레퍼런스 반영</h1>\n<h2>계획된 검증</h2>\n<ul>\n<li><code>python3 -m json.tool platform-desktop-app/configs/reference-platform-advantage-registry.json</code></li>\n<li><code>python3 -m json.tool platform-desktop-app/configs/user-flow-registry.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/reference-platform-advantage-registry.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/user-flow-registry.json</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app run customer-bundle:audit</code></li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>결과</h2>\n<ul>\n<li><code>python3 -m json.tool platform-desktop-app/configs/reference-platform-advantage-registry.json</code>: passed</li>\n<li><code>python3 -m json.tool platform-desktop-app/configs/user-flow-registry.json</code>: passed</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/reference-platform-advantage-registry.json</code>: passed, <code>self_documenting</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/user-flow-registry.json</code>: passed, <code>self_documenting</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: passed, 21 tests</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: passed, 17 tests</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>: passed</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: passed</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: passed</li>\n<li><code>corepack pnpm --filter platform-desktop-app run customer-bundle:audit</code>: passed</li>\n<li><code>git diff --check</code>: passed</li>\n<li>Browser smoke on static output <code>http://127.0.0.1:4183</code>: passed</li>\n<li><code>Codex식 스레드 작업대</code>, <code>Claude Desktop식 커넥터 우선 채팅</code>, <code>Codex app</code>, <code>Claude Desktop</code> visible</li>\n<li>Screenshot: <code>outputs/browser-smoke/codex-claude-desktop-reference.png</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-04-codex-claude-desktop-reference-omission-check.json</code>: passed, <code>coverage_ready</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/evaluations/2026/2026-06-04-codex-claude-desktop-reference-resource.json</code>: passed, <code>resource_ready</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-04-codex-claude-desktop-reference-evaluation-input.json</code>: passed, <code>ready_to_close</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2692,
-      "updatedAt": "2026-06-03T16:24:29.651Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18073,7 +18105,7 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 16
+          "count": 15
         },
         {
           "category": "request-trace",
@@ -18097,7 +18129,7 @@
         },
         {
           "category": "plan",
-          "count": 5
+          "count": 6
         },
         {
           "category": "daily-history",
@@ -18206,16 +18238,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: 기능별 오픈소스 맵",
-          "excerpt": "평가: 기능별 오픈소스 맵 판정 요청 충족. 현재 플랫폼의 기능 layer별로 오픈소스 후보를 나누고, 각 후보에서 봐야 할 부분과 현재 플랫폼 적용 포인트를 기록했다. 산출물 검색 기록: history/web searches/2026/2026 06 06 feature by feature open source map.ko.md 연구 문서: research/topics/platform desktop app/2026 06 06 feature by feature open source map.ko.md ",
-          "updatedAt": "2026-06-05T22:09:24.228Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-no-large-scope-postponement-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-no-large-scope-postponement.ko.md",
           "category": "evaluation",
@@ -18226,13 +18248,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-open-source-feature-radar-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-open-source-feature-radar.ko.md",
+          "id": "history-evaluations-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-parallel-snapshot-collector.ko.md",
           "category": "evaluation",
           "language": "ko",
-          "title": "평가: Open Source Feature Radar",
-          "excerpt": "평가: Open Source Feature Radar 결과 요청한 “가능하면 기능 추가, 설치 필요하면 설치”에 대해 기능별 오픈소스 research를 Product Structure 안의 오픈소스 기능 레이더 로 승격했다. 새 dependency 설치는 필요하지 않았다. 구현 평가 오픈소스 후보 repo와 install policy가 open source feature reference registry.json 에 self documenting config로 고정됐다. Workspace Moni",
-          "updatedAt": "2026-06-05T22:24:44.185Z",
+          "title": "Parallel Snapshot Collector 평가",
+          "excerpt": "Parallel Snapshot Collector 평가 날짜: 2026 06 06 결과 status: passed internal 병렬 구조를 실제 코드에 반영했다. 기존 Rust/Tauri 영역에는 이미 Rayon/background warmup/threaded stream readers가 있었으므로, 이번 변경은 단일 루프였던 Workspace Monitor snapshot collector에 bounded Node worker thread pool을 추가했다. 성능 관측 collect : 2",
+          "updatedAt": "2026-06-06T02:26:02.134Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18303,6 +18325,16 @@
           "title": "2026 06 06 EVAL runtime telemetry source refactor 계획",
           "excerpt": "2026 06 06 EVAL runtime telemetry source refactor 계획 선택 이유 사용자가 소스 개선을 요청했다. 가장 최근 변경에서 EVAL runtime telemetry score 계산이 UI component 내부에 커졌으므로, 기능 변화 없이 소스 구조를 개선하기 좋은 위치다. 실행 순서 1. Web first intake와 memory bootstrap. 2. EvaluationReportPanel.tsx runtime telemetry 계산 위치 확인. 3. h",
           "updatedAt": "2026-06-06T00:35:29.577Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-plans-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+          "path": "_history/plans/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "Parallel Snapshot Collector 작업 계획",
+          "excerpt": "Parallel Snapshot Collector 작업 계획 날짜: 2026 06 06 work mode: standard install mode: developer 순서 1. 공식 문서 조사 2. 현재 병렬 구조 조사 3. snapshot collector worker pool 구현 4. registry/test/spec/history 업데이트 5. collect/check/test/build/package 6. commit/push",
+          "updatedAt": "2026-06-06T02:23:45.532Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18426,13 +18458,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-open-source-feature-radar-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-open-source-feature-radar.ko.md",
+          "id": "history-request-traces-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-parallel-snapshot-collector.ko.md",
           "category": "request-trace",
           "language": "ko",
-          "title": "요청 결과 추적: Open Source Feature Radar",
-          "excerpt": "요청 결과 추적: Open Source Feature Radar 요청 기능별 오픈소스 조사 결과를 실제 기능으로 추가하고, 설치가 필요하면 설치하라는 요청. 결과 Product Structure에 오픈소스 기능 레이더 추가. 기능 layer별 candidate repo, implementation targets, install policy 표시. 새 dependency 설치는 불필요해 설치하지 않음. 산출물 platform desktop app/configs/open source feature r",
-          "updatedAt": "2026-06-05T22:24:44.185Z",
+          "title": "Parallel Snapshot Collector 요청 추적",
+          "excerpt": "Parallel Snapshot Collector 요청 추적 날짜: 2026 06 06 요청 병렬 구조, 멀티스레드, 멀티프로세스로 속도를 늘릴 수 있는 방법을 고려. 결과 Workspace Monitor snapshot collector에 Node worker thread pool을 구현했다. Rust/Tauri에는 이미 Rayon/background warmup 구조가 있으므로 중복 추가 대신 관측과 기록을 남겼다. 변경 파일 platform desktop app/renderer/workspa",
+          "updatedAt": "2026-06-06T02:26:02.134Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18576,13 +18608,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-open-source-feature-radar-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-open-source-feature-radar.ko.md",
+          "id": "history-user-requests-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-parallel-snapshot-collector.ko.md",
           "category": "user-request",
           "language": "ko",
-          "title": "사용자 요청 요약: Open Source Feature Radar",
-          "excerpt": "사용자 요청 요약: Open Source Feature Radar 사용자는 유사 오픈소스와 기능별 후보를 더 조사하고, 가능하면 플랫폼에 기능으로 추가하며, 설치가 필요하면 설치하라고 요청했다. 이번 slice는 기능별 오픈소스 후보와 설치 정책을 앱 안에서 확인할 수 있는 Product Structure 기능으로 구현한다. 원문 전체는 저장하지 않고 요약만 보존한다.",
-          "updatedAt": "2026-06-05T22:19:40.811Z",
+          "title": "사용자 요청 요약",
+          "excerpt": "사용자 요청 요약 날짜: 2026 06 06 사용자는 병렬 구조, 멀티스레드, 멀티프로세스를 통해 속도를 늘릴 수 있는 방법을 고려하라고 요청했다. 처리 범위 Workspace Monitor snapshot 수집에 Node worker thread pool을 추가하고, 기존 Rust/Rayon 구조는 중복 구현 없이 유지/기록한다.",
+          "updatedAt": "2026-06-06T02:23:45.531Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18726,13 +18758,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-open-source-feature-radar-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-open-source-feature-radar.ko.md",
+          "id": "history-web-searches-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-parallel-snapshot-collector.ko.md",
           "category": "web-search",
           "language": "ko",
-          "title": "웹 검색 기록: Open Source Feature Radar",
-          "excerpt": "웹 검색 기록: Open Source Feature Radar 검색 시각 2026 06 06 쿼리 open source AI agent desktop feature radar provider setup CLI adapter cockpit GitHub 2026 open source agent platform feature reference explorer Dify Langflow n8n Langfuse OpenHands desktop UI open source AI agent workbench MC",
-          "updatedAt": "2026-06-05T22:19:40.811Z",
+          "title": "Parallel Snapshot Collector 웹 검색 기록",
+          "excerpt": "Parallel Snapshot Collector 웹 검색 기록 날짜: 2026 06 06 쿼리 Node.js official worker threads documentation parallel CPU tasks Node.js official child process documentation spawn parallel processes Tauri v2 official documentation async commands state task spawn Rust standard library std::",
+          "updatedAt": "2026-06-06T02:23:45.531Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18876,13 +18908,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-open-source-feature-radar-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-open-source-feature-radar.ko.md",
+          "id": "history-work-summaries-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-parallel-snapshot-collector.ko.md",
           "category": "work-summary",
           "language": "ko",
-          "title": "작업 요약: Open Source Feature Radar",
-          "excerpt": "작업 요약: Open Source Feature Radar 기능별 오픈소스 후보를 Product Structure 화면에서 볼 수 있는 오픈소스 기능 레이더 로 구현했다. open source feature reference registry.json 에 기능 layer별 candidate repo, 이식 패턴, 설치 정책을 self documenting config로 기록했다. Workspace Monitor collector, snapshot type, customer sanitizer, Pro",
-          "updatedAt": "2026-06-05T22:24:44.186Z",
+          "title": "Parallel Snapshot Collector 작업 요약",
+          "excerpt": "Parallel Snapshot Collector 작업 요약 날짜: 2026 06 06 완료 Workspace Monitor snapshot collector를 async worker thread 구조로 전환했다. 문서 렌더링은 최대 6개 worker로 분산한다. source preview는 후보를 먼저 정렬/상한 적용한 뒤 최대 4개 worker로 읽는다. worker 실패 또는 작은 task에서는 기존 sync path로 fallback한다. snapshot stats에 snapshotDocu",
+          "updatedAt": "2026-06-06T02:26:02.134Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19016,13 +19048,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-open-source-feature-radar-json",
-          "path": "_history/work-timings/2026/2026-06-06-open-source-feature-radar.json",
+          "id": "history-work-timings-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+          "path": "_history/work-timings/2026/2026-06-06-parallel-snapshot-collector.ko.md",
           "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Open Source Feature Radar",
-          "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 open source feature radar\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"notes\": \"Search queries captured in web search record.\" }, { \"phase\": \"implementation\", \"status\": \"compl",
-          "updatedAt": "2026-06-05T22:24:44.183Z",
+          "language": "ko",
+          "title": "Parallel Snapshot Collector 작업 시간 기록",
+          "excerpt": "Parallel Snapshot Collector 작업 시간 기록 | 단계 | 상태 | 메모 | | | | | | 조사 | 완료 | 공식 문서와 기존 Rust 구조 확인 | | 구현 | 완료 | worker pool, file worker, async buildSnapshot | | 1차 검증 | 완료 | collect/check/test 통과 | | 최종 패키징 | 완료 | Tauri package, codesign, hdiutil verify 완료 | 관측 time corepack pnpm f",
+          "updatedAt": "2026-06-06T02:26:02.133Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19074,36 +19106,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2585,
+      "documents": 2592,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1006
+          "count": 1007
         },
         {
           "category": "web-search",
-          "count": 411
+          "count": 412
         },
         {
           "category": "plan",
-          "count": 345
+          "count": 346
         },
         {
           "category": "request-trace",
-          "count": 339
+          "count": 340
         },
         {
           "category": "work-timing",
-          "count": 260
+          "count": 261
         },
         {
           "category": "user-request",
-          "count": 124
+          "count": 125
         },
         {
           "category": "work-summary",
-          "count": 91
+          "count": 92
         },
         {
           "category": "daily-history",
@@ -19114,7 +19146,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6497983,
+      "totalSourceBytes": 6503658,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19139,11 +19171,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 31,
+      "evidenceEvents": 30,
       "decisionEvents": 0,
       "openSignals": 15,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T02:16:42.822Z",
+      "latestEventAt": "2026-06-06T02:26:02.134Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19151,11 +19183,6 @@
         "id": "completed",
         "label": "completed",
         "count": 64
-      },
-      {
-        "id": "verification",
-        "label": "verification",
-        "count": 16
       },
       {
         "id": "delivery",
@@ -19178,6 +19205,11 @@
         "count": 15
       },
       {
+        "id": "verification",
+        "label": "verification",
+        "count": 15
+      },
+      {
         "id": "monitoring",
         "label": "monitoring",
         "count": 14
@@ -19185,7 +19217,7 @@
       {
         "id": "planning",
         "label": "planning",
-        "count": 5
+        "count": 6
       },
       {
         "id": "history",
@@ -19202,7 +19234,7 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 16
+        "count": 15
       },
       {
         "id": "intake",
@@ -19232,7 +19264,7 @@
       {
         "id": "plan",
         "label": "plan",
-        "count": 5
+        "count": 6
       },
       {
         "id": "history",
@@ -19253,6 +19285,111 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "Parallel Snapshot Collector 평가",
+        "detail": "Parallel Snapshot Collector 평가 날짜: 2026 06 06 결과 status: passed internal 병렬 구조를 실제 코드에 반영했다. 기존 Rust/Tauri 영역에는 이미 Rayon/background warmup/threaded stream readers가 있었으므로, 이번 변경은 단일 루프였던 Workspace Monitor snapshot collector에 bounded Node worker thread pool을 추가했다. 성능 관측 collect : 2",
+        "path": "_history/evaluations/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:26:02.134Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Parallel Snapshot Collector 요청 추적",
+        "detail": "Parallel Snapshot Collector 요청 추적 날짜: 2026 06 06 요청 병렬 구조, 멀티스레드, 멀티프로세스로 속도를 늘릴 수 있는 방법을 고려. 결과 Workspace Monitor snapshot collector에 Node worker thread pool을 구현했다. Rust/Tauri에는 이미 Rayon/background warmup 구조가 있으므로 중복 추가 대신 관측과 기록을 남겼다. 변경 파일 platform desktop app/renderer/workspa",
+        "path": "_history/request-traces/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:26:02.134Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "Parallel Snapshot Collector 작업 요약",
+        "detail": "Parallel Snapshot Collector 작업 요약 날짜: 2026 06 06 완료 Workspace Monitor snapshot collector를 async worker thread 구조로 전환했다. 문서 렌더링은 최대 6개 worker로 분산한다. source preview는 후보를 먼저 정렬/상한 적용한 뒤 최대 4개 worker로 읽는다. worker 실패 또는 작은 task에서는 기존 sync path로 fallback한다. snapshot stats에 snapshotDocu",
+        "path": "_history/work-summaries/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:26:02.134Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "Parallel Snapshot Collector 작업 시간 기록",
+        "detail": "Parallel Snapshot Collector 작업 시간 기록 | 단계 | 상태 | 메모 | | | | | | 조사 | 완료 | 공식 문서와 기존 Rust 구조 확인 | | 구현 | 완료 | worker pool, file worker, async buildSnapshot | | 1차 검증 | 완료 | collect/check/test 통과 | | 최종 패키징 | 완료 | Tauri package, codesign, hdiutil verify 완료 | 관측 time corepack pnpm f",
+        "path": "_history/work-timings/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+        "category": "work-timing",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:26:02.133Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "Parallel Snapshot Collector 작업 계획",
+        "detail": "Parallel Snapshot Collector 작업 계획 날짜: 2026 06 06 work mode: standard install mode: developer 순서 1. 공식 문서 조사 2. 현재 병렬 구조 조사 3. snapshot collector worker pool 구현 4. registry/test/spec/history 업데이트 5. collect/check/test/build/package 6. commit/push",
+        "path": "_history/plans/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:23:45.532Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Parallel Snapshot Collector 웹 검색 기록",
+        "detail": "Parallel Snapshot Collector 웹 검색 기록 날짜: 2026 06 06 쿼리 Node.js official worker threads documentation parallel CPU tasks Node.js official child process documentation spawn parallel processes Tauri v2 official documentation async commands state task spawn Rust standard library std::",
+        "path": "_history/web-searches/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:23:45.531Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-parallel-snapshot-collector-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약",
+        "detail": "사용자 요청 요약 날짜: 2026 06 06 사용자는 병렬 구조, 멀티스레드, 멀티프로세스를 통해 속도를 늘릴 수 있는 방법을 고려하라고 요청했다. 처리 범위 Workspace Monitor snapshot 수집에 Node worker thread pool을 추가하고, 기존 Rust/Rayon 구조는 중복 구현 없이 유지/기록한다.",
+        "path": "_history/user-requests/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:23:45.531Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-06-tool-usage-integration-ko-md",
         "sourceType": "history",
@@ -20587,111 +20724,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T22:28:28.756Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-open-source-feature-radar-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: Open Source Feature Radar",
-        "detail": "작업 요약: Open Source Feature Radar 기능별 오픈소스 후보를 Product Structure 화면에서 볼 수 있는 오픈소스 기능 레이더 로 구현했다. open source feature reference registry.json 에 기능 layer별 candidate repo, 이식 패턴, 설치 정책을 self documenting config로 기록했다. Workspace Monitor collector, snapshot type, customer sanitizer, Pro",
-        "path": "_history/work-summaries/2026/2026-06-06-open-source-feature-radar.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:24:44.186Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-open-source-feature-radar-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "평가: Open Source Feature Radar",
-        "detail": "평가: Open Source Feature Radar 결과 요청한 “가능하면 기능 추가, 설치 필요하면 설치”에 대해 기능별 오픈소스 research를 Product Structure 안의 오픈소스 기능 레이더 로 승격했다. 새 dependency 설치는 필요하지 않았다. 구현 평가 오픈소스 후보 repo와 install policy가 open source feature reference registry.json 에 self documenting config로 고정됐다. Workspace Moni",
-        "path": "_history/evaluations/2026/2026-06-06-open-source-feature-radar.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:24:44.185Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-open-source-feature-radar-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: Open Source Feature Radar",
-        "detail": "요청 결과 추적: Open Source Feature Radar 요청 기능별 오픈소스 조사 결과를 실제 기능으로 추가하고, 설치가 필요하면 설치하라는 요청. 결과 Product Structure에 오픈소스 기능 레이더 추가. 기능 layer별 candidate repo, implementation targets, install policy 표시. 새 dependency 설치는 불필요해 설치하지 않음. 산출물 platform desktop app/configs/open source feature r",
-        "path": "_history/request-traces/2026/2026-06-06-open-source-feature-radar.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:24:44.185Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-open-source-feature-radar-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 Open Source Feature Radar",
-        "detail": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 open source feature radar\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"notes\": \"Search queries captured in web search record.\" }, { \"phase\": \"implementation\", \"status\": \"compl",
-        "path": "_history/work-timings/2026/2026-06-06-open-source-feature-radar.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:24:44.183Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-open-source-feature-radar-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: Open Source Feature Radar",
-        "detail": "웹 검색 기록: Open Source Feature Radar 검색 시각 2026 06 06 쿼리 open source AI agent desktop feature radar provider setup CLI adapter cockpit GitHub 2026 open source agent platform feature reference explorer Dify Langflow n8n Langfuse OpenHands desktop UI open source AI agent workbench MC",
-        "path": "_history/web-searches/2026/2026-06-06-open-source-feature-radar.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:19:40.811Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-open-source-feature-radar-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: Open Source Feature Radar",
-        "detail": "사용자 요청 요약: Open Source Feature Radar 사용자는 유사 오픈소스와 기능별 후보를 더 조사하고, 가능하면 플랫폼에 기능으로 추가하며, 설치가 필요하면 설치하라고 요청했다. 이번 slice는 기능별 오픈소스 후보와 설치 정책을 앱 안에서 확인할 수 있는 Product Structure 기능으로 구현한다. 원문 전체는 저장하지 않고 요약만 보존한다.",
-        "path": "_history/user-requests/2026/2026-06-06-open-source-feature-radar.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:19:40.811Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "평가: 기능별 오픈소스 맵",
-        "detail": "평가: 기능별 오픈소스 맵 판정 요청 충족. 현재 플랫폼의 기능 layer별로 오픈소스 후보를 나누고, 각 후보에서 봐야 할 부분과 현재 플랫폼 적용 포인트를 기록했다. 산출물 검색 기록: history/web searches/2026/2026 06 06 feature by feature open source map.ko.md 연구 문서: research/topics/platform desktop app/2026 06 06 feature by feature open source map.ko.md ",
-        "path": "_history/evaluations/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:09:24.228Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23725,12 +23757,12 @@
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 5
+        "documentsCount": 6
       },
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 16
+        "documentsCount": 15
       },
       {
         "category": "daily-history",
@@ -23824,7 +23856,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 72,
+        "documentCount": 70,
         "sourceFileCount": 5
       },
       {
@@ -25804,11 +25836,14 @@
         ],
         "currentAssets": [
           "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+          "platform-desktop-app/renderer/workspace-monitor/scripts/lib/snapshot-worker-pool.mjs",
+          "platform-desktop-app/renderer/workspace-monitor/scripts/lib/snapshot-file-worker.mjs",
           "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
           "platform-desktop-app/configs/service-readiness-registry.json"
         ],
         "automationTargets": [
           "snapshot collection",
+          "parallel document/source snapshot transformation",
           "customer snapshot sanitization",
           "service readiness reporting",
           "bundle audit",
@@ -25816,6 +25851,7 @@
         ],
         "learningSignals": [
           "snapshot schema counts",
+          "snapshot worker counts",
           "service blockers",
           "source hotspot count",
           "document and evaluation counts",
@@ -25824,7 +25860,8 @@
         "validationGates": [
           "observability role remains supporting",
           "customer snapshot removes internal source",
-          "readiness scripts check supporting role"
+          "readiness scripts check supporting role",
+          "parallel snapshot collection keeps deterministic output and synchronous fallback"
         ]
       }
     ],
@@ -27657,13 +27694,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3695,
+      "sourceDocuments": 3708,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T02:17:23.528Z"
+      "latestInsightAt": "2026-06-06T02:26:02.134Z"
     },
     "inferenceStages": [
       {
@@ -27731,7 +27768,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 434,
+        "signalCount": 436,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -27739,7 +27776,7 @@
           },
           {
             "category": "project-spec",
-            "count": 133
+            "count": 134
           },
           {
             "category": "request-trace",
@@ -27771,7 +27808,7 @@
           },
           {
             "category": "work-timing",
-            "count": 1
+            "count": 2
           }
         ],
         "evidencePaths": [
@@ -27790,7 +27827,7 @@
           "요청 결과 추적: Workbench lazy boundary 확장",
           "최종 평가"
         ],
-        "latestEvidenceAt": "2026-06-06T02:16:42.822Z"
+        "latestEvidenceAt": "2026-06-06T02:26:02.133Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27804,11 +27841,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1696,
+        "signalCount": 1702,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 473
+            "count": 478
           },
           {
             "category": "evaluation",
@@ -27816,7 +27853,7 @@
           },
           {
             "category": "web-search",
-            "count": 412
+            "count": 413
           },
           {
             "category": "plan",
@@ -27855,7 +27892,7 @@
           "2026 05 31 작업 모드 라우팅 계획 기록",
           "계획 히스토리: 코딩 조사 출처 다양성 강화"
         ],
-        "latestEvidenceAt": "2026-06-06T02:16:42.822Z"
+        "latestEvidenceAt": "2026-06-06T02:26:02.132Z"
       },
       {
         "id": "large-scope-slicing",
@@ -27869,7 +27906,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 987,
+        "signalCount": 988,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -27877,7 +27914,7 @@
           },
           {
             "category": "plan",
-            "count": 285
+            "count": 286
           },
           {
             "category": "request-trace",
@@ -27928,7 +27965,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T02:13:24.567Z"
+        "latestEvidenceAt": "2026-06-06T02:23:45.532Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -27942,19 +27979,19 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 653,
+        "signalCount": 659,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 262
+            "count": 263
           },
           {
             "category": "evaluation",
-            "count": 229
+            "count": 230
           },
           {
             "category": "web-search",
-            "count": 36
+            "count": 37
           },
           {
             "category": "work-summary",
@@ -27966,11 +28003,11 @@
           },
           {
             "category": "request-trace",
-            "count": 22
+            "count": 23
           },
           {
             "category": "user-request",
-            "count": 15
+            "count": 16
           },
           {
             "category": "project-doc",
@@ -27978,7 +28015,7 @@
           },
           {
             "category": "work-timing",
-            "count": 11
+            "count": 12
           },
           {
             "category": "daily-history",
@@ -28001,7 +28038,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-06T02:03:14.739Z"
+        "latestEvidenceAt": "2026-06-06T02:26:02.134Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28015,11 +28052,11 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1441,
+        "signalCount": 1442,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 620
+            "count": 621
           },
           {
             "category": "evaluation",
@@ -28074,7 +28111,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T02:17:23.528Z"
+        "latestEvidenceAt": "2026-06-06T02:26:02.131Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28150,14 +28187,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3695,
+      "sourceDocuments": 3708,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T02:17:23.528Z"
+      "latestInsightAt": "2026-06-06T02:26:02.134Z"
     },
     "operatingModel": [
       {
@@ -28215,25 +28252,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3117,
+        "signalCount": 3126,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1696
+            "signalCount": 1702
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 987
+            "signalCount": 988
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 434
+            "signalCount": 436
           }
         ],
         "missingPatternIds": [],
@@ -28261,7 +28298,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T02:16:42.822Z",
+        "latestEvidenceAt": "2026-06-06T02:26:02.133Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28290,13 +28327,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 772,
+        "signalCount": 778,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 653
+            "signalCount": 659
           },
           {
             "id": "release-blocker-gate",
@@ -28330,7 +28367,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T02:03:14.739Z",
+        "latestEvidenceAt": "2026-06-06T02:26:02.134Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28359,19 +28396,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2428,
+        "signalCount": 2430,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1441
+            "signalCount": 1442
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 987
+            "signalCount": 988
           }
         ],
         "missingPatternIds": [],
@@ -28399,7 +28436,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T02:17:23.528Z",
+        "latestEvidenceAt": "2026-06-06T02:26:02.131Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28428,13 +28465,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 553,
+        "signalCount": 555,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 434
+            "signalCount": 436
           },
           {
             "id": "release-blocker-gate",
@@ -28468,7 +28505,7 @@
           "2026 06 06 User Request: Public Release Developer Repatch",
           "Public Release Updater Automation Spec"
         ],
-        "latestEvidenceAt": "2026-06-06T02:16:42.822Z",
+        "latestEvidenceAt": "2026-06-06T02:26:02.133Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28497,19 +28534,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2683,
+        "signalCount": 2690,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 987
+            "signalCount": 988
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1696
+            "signalCount": 1702
           }
         ],
         "missingPatternIds": [],
@@ -28537,7 +28574,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T02:16:42.822Z",
+        "latestEvidenceAt": "2026-06-06T02:26:02.132Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28566,7 +28603,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1815,
+        "signalCount": 1821,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28578,7 +28615,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1696
+            "signalCount": 1702
           }
         ],
         "missingPatternIds": [],
@@ -28606,7 +28643,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T02:16:42.822Z",
+        "latestEvidenceAt": "2026-06-06T02:26:02.132Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",
@@ -28851,11 +28888,11 @@
   "toolUsageIntegration": {
     "sourcePath": "platform-desktop-app/configs/tool-usage-integration-registry.json",
     "summary": {
-      "totalPatterns": 7,
-      "implementedPatterns": 7,
-      "p0Patterns": 7,
-      "verificationLadders": 3,
-      "validationCommands": 21,
+      "totalPatterns": 8,
+      "implementedPatterns": 8,
+      "p0Patterns": 8,
+      "verificationLadders": 4,
+      "validationCommands": 26,
       "adoptionBacklog": 2,
       "referenceLinks": 3
     },
@@ -28976,6 +29013,49 @@
           "Chaining shell output into unreadable logs."
         ],
         "platformApplication": "A future desktop source-intake lane can precompute read-only maps and expose them beside the code editor.",
+        "status": "implemented",
+        "priority": "p0"
+      },
+      {
+        "id": "snapshot-worker-thread-pool",
+        "label": "Snapshot worker thread pool",
+        "labelKo": "스냅샷 워커 스레드 풀",
+        "purpose": "Use multiple Node worker threads for independent document rendering and source preview work during startup snapshot collection.",
+        "toolSurfaces": [
+          "node:worker_threads",
+          "os.availableParallelism",
+          "workspace-monitor collect",
+          "workspace-snapshot stats"
+        ],
+        "triggerWhen": [
+          "The monitor must transform hundreds or thousands of independent documents.",
+          "Source previews can be read independently and sorted after processing.",
+          "Startup snapshot collection becomes a visible boot-time cost."
+        ],
+        "sequence": [
+          "Collect document and source-file tasks without reading every payload.",
+          "Choose worker count from available CPU parallelism and task count.",
+          "Run document rendering and source preview extraction through a bounded worker pool.",
+          "Fall back to the previous synchronous path if worker startup or execution fails.",
+          "Record worker counts in the generated snapshot stats."
+        ],
+        "evidenceOutputs": [
+          "src/generated/workspace-snapshot.json stats.snapshotDocumentWorkers",
+          "src/generated/workspace-snapshot.json stats.snapshotSourceWorkers",
+          "collect timing with CPU utilization above one core",
+          "collector.test.mjs async buildSnapshot coverage"
+        ],
+        "validationCommands": [
+          "corepack pnpm --filter workspace-monitor run collect",
+          "corepack pnpm --filter workspace-monitor run check",
+          "corepack pnpm --filter workspace-monitor test"
+        ],
+        "failureModes": [
+          "Spawning too many workers and making small repositories slower.",
+          "Assuming worker parallelism helps network or UI-bound work.",
+          "Dropping deterministic sorting after parallel task completion."
+        ],
+        "platformApplication": "Workspace Monitor startup collection now uses CPU-aware worker parallelism while preserving deterministic snapshots and synchronous fallback.",
         "status": "implemented",
         "priority": "p0"
       },
@@ -29201,6 +29281,21 @@
           "Static tests cover collector, UI, and snapshot type contracts."
         ],
         "ownerFeatureId": "root_tool_management"
+      },
+      {
+        "id": "parallel-snapshot-ladder",
+        "label": "Parallel snapshot ladder",
+        "surface": "tools",
+        "commands": [
+          "corepack pnpm --filter workspace-monitor run collect",
+          "node -e \"const s=require('./platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json'); console.log(s.stats.snapshotDocumentWorkers, s.stats.snapshotSourceWorkers)\""
+        ],
+        "acceptance": [
+          "snapshotDocumentWorkers is greater than one on multi-core developer machines with enough documents.",
+          "snapshotSourceWorkers is greater than one when enough source candidates exist.",
+          "Generated documents and source files remain deterministic after parallel processing."
+        ],
+        "ownerFeatureId": "observability_monitoring"
       },
       {
         "id": "desktop-package-ladder",

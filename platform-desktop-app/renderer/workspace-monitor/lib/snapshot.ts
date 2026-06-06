@@ -38,6 +38,8 @@ export type WorkspaceStats = {
   fundamentalImprovementFitnessChecks?: number;
   toolUsagePatterns?: number;
   toolUsageValidationCommands?: number;
+  snapshotDocumentWorkers?: number;
+  snapshotSourceWorkers?: number;
   structurePressurePoints?: number;
   sourceFiles?: number;
   rootFolders: number;

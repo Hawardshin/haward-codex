@@ -702,11 +702,14 @@
       ],
       "current_assets": [
         "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/scripts/lib/snapshot-worker-pool.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/scripts/lib/snapshot-file-worker.mjs",
         "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
         "platform-desktop-app/configs/service-readiness-registry.json"
       ],
       "automation_targets": [
         "snapshot collection",
+        "parallel document/source snapshot transformation",
         "customer snapshot sanitization",
         "service readiness reporting",
         "bundle audit",
@@ -714,6 +717,7 @@
       ],
       "learning_signals": [
         "snapshot schema counts",
+        "snapshot worker counts",
         "service blockers",
         "source hotspot count",
         "document and evaluation counts",
@@ -722,7 +726,8 @@
       "validation_gates": [
         "observability role remains supporting",
         "customer snapshot removes internal source",
-        "readiness scripts check supporting role"
+        "readiness scripts check supporting role",
+        "parallel snapshot collection keeps deterministic output and synchronous fallback"
       ]
     }
   ],

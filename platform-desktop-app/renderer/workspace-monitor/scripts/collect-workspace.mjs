@@ -32,10 +32,12 @@ import {
   emptyToolUsageIntegration,
   sanitizeToolUsageIntegrationForCustomer
 } from "./lib/tool-usage-integration.mjs";
+import { recommendedWorkerCount, runWorkerTasks } from "./lib/snapshot-worker-pool.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
 const defaultRepoRoot = path.resolve(projectRoot, "..", "..", "..");
+const snapshotFileWorkerPath = path.join(__dirname, "lib", "snapshot-file-worker.mjs");
 const snapshotPath = path.join(projectRoot, "src", "generated", "workspace-snapshot.json");
 const customerFallbackSnapshotPath = path.join(projectRoot, "src", "generated", "customer-workspace-snapshot.json");
 const publicSnapshotPath = path.join(projectRoot, "public", "workspace-snapshot.json");
@@ -138,7 +140,7 @@ export {
   collectToolUsageIntegration
 };
 
-export function main(argv = process.argv.slice(2)) {
+export async function main(argv = process.argv.slice(2)) {
   const options = parseArgs(argv);
   const repoRoot = path.resolve(options.repoRoot || process.env.MONITOR_REPO_ROOT || defaultRepoRoot);
   const canReadRepo = fs.existsSync(path.join(repoRoot, "_history")) && fs.existsSync(path.join(repoRoot, "_ops"));
@@ -151,7 +153,7 @@ export function main(argv = process.argv.slice(2)) {
     throw new Error(`Repository root is not readable: ${repoRoot}`);
   }
 
-  const snapshot = buildSnapshot(repoRoot);
+  const snapshot = await buildSnapshot(repoRoot);
   const adminHistoryIndex = buildAdminHistoryIndex(snapshot.adminHistorySourceDocuments || []);
   delete snapshot.adminHistorySourceDocuments;
   const publicSnapshot = options.snapshotMode === "customer" ? buildCustomerSnapshot(snapshot) : snapshot;
@@ -166,10 +168,11 @@ export function main(argv = process.argv.slice(2)) {
   );
 }
 
-export function buildSnapshot(repoRoot) {
+export async function buildSnapshot(repoRoot) {
   const projects = readJson(path.join(repoRoot, "_ops", "projects", "registry.json"), { projects: [] }).projects || [];
   const coordination = readJson(path.join(repoRoot, "_ops", "coordination", "status.json"), { agents: [], tasks: [] });
-  const allDocuments = collectDocuments(repoRoot);
+  const documentTasks = collectDocumentTasks(repoRoot);
+  const allDocuments = await collectDocumentsParallel(repoRoot, documentTasks);
   const adminHistoryIndex = buildAdminHistoryIndex(allDocuments);
   const documents = compactDocumentsForSnapshot(allDocuments);
   const requirements = collectRequirements(repoRoot);
@@ -186,7 +189,8 @@ export function buildSnapshot(repoRoot) {
   const historyInsightLoop = collectHistoryInsightLoop(allDocuments);
   const fundamentalImprovementStructure = collectFundamentalImprovementStructure(historyInsightLoop);
   const toolUsageIntegration = collectToolUsageIntegration(repoRoot);
-  const sourceFiles = collectSourceFiles(repoRoot, projects);
+  const sourceFileCandidates = collectSourceFileCandidates(repoRoot, projects);
+  const sourceFiles = await collectSourceFilesParallel(repoRoot, sourceFileCandidates);
   const folderStructure = buildFolderStructure(repoRoot, projects, documents);
   const structureOverview = buildStructureOverview(repoRoot, projects, documents, folderStructure, sourceFiles);
   const categories = Array.from(new Set(documents.map((document) => document.category))).sort();
@@ -246,6 +250,8 @@ export function buildSnapshot(repoRoot) {
       fundamentalImprovementFitnessChecks: fundamentalImprovementStructure.summary.totalFitnessChecks,
       toolUsagePatterns: toolUsageIntegration.summary.totalPatterns,
       toolUsageValidationCommands: toolUsageIntegration.summary.validationCommands,
+      snapshotDocumentWorkers: recommendedWorkerCount(documentTasks.length, { maxWorkers: 6, minTasksPerWorker: 80 }),
+      snapshotSourceWorkers: recommendedWorkerCount(sourceFileCandidates.length, { maxWorkers: 4, minTasksPerWorker: 24 }),
       structurePressurePoints: structureOverview.summary.totalPressurePoints,
       sourceFiles: sourceFiles.length,
       rootFolders: folderStructure.rootFolders.length
@@ -342,6 +348,8 @@ export function buildCustomerSnapshot(snapshot) {
       fundamentalImprovementFitnessChecks: 0,
       toolUsagePatterns: snapshot.toolUsageIntegration?.summary.totalPatterns ?? 0,
       toolUsageValidationCommands: snapshot.toolUsageIntegration?.summary.validationCommands ?? 0,
+      snapshotDocumentWorkers: 0,
+      snapshotSourceWorkers: 0,
       structurePressurePoints: 0,
       sourceFiles: 0,
       rootFolders: 0
@@ -971,9 +979,34 @@ function severityRank(severity) {
 }
 
 export function collectSourceFiles(repoRoot, projects = []) {
+  return collectSourceFileCandidates(repoRoot, projects).map((candidate) => readSourceFile(repoRoot, candidate.filePath, candidate.project));
+}
+
+export async function collectSourceFilesParallel(repoRoot, candidates = collectSourceFileCandidates(repoRoot, [])) {
+  const tasks = candidates.map((candidate) => ({
+    type: "source",
+    repoRoot,
+    filePath: candidate.filePath,
+    project: candidate.project
+  }));
+  const fallback = () => tasks.map((task) => readSourceFile(task.repoRoot, task.filePath, task.project));
+  const workerCount = recommendedWorkerCount(tasks.length, { maxWorkers: 4, minTasksPerWorker: 24 });
+  try {
+    return await runWorkerTasks({
+      tasks,
+      workerPath: snapshotFileWorkerPath,
+      workerCount,
+      fallback
+    });
+  } catch {
+    return fallback();
+  }
+}
+
+function collectSourceFileCandidates(repoRoot, projects = []) {
   const roots = sourceRoots(repoRoot, projects);
   const seen = new Set();
-  const files = [];
+  const candidates = [];
 
   for (const root of roots) {
     for (const filePath of walkFiles(root.path)) {
@@ -986,12 +1019,16 @@ export function collectSourceFiles(repoRoot, projects = []) {
         continue;
       }
       seen.add(relativePath);
-      files.push(readSourceFile(repoRoot, filePath, root.project));
+      candidates.push({
+        filePath,
+        relativePath,
+        project: root.project
+      });
     }
   }
 
-  return files
-    .sort((left, right) => left.path.localeCompare(right.path))
+  return candidates
+    .sort((left, right) => left.relativePath.localeCompare(right.relativePath))
     .slice(0, MAX_SOURCE_FILES);
 }
 
@@ -1532,13 +1569,38 @@ function priorityRank(priority = "") {
 }
 
 export function collectDocuments(repoRoot) {
-  const documents = [];
+  return sortDocuments(collectDocumentTasks(repoRoot).map((task) => readDocument(repoRoot, task.filePath, task.category)));
+}
+
+export async function collectDocumentsParallel(repoRoot, tasks = collectDocumentTasks(repoRoot)) {
+  const fallback = () => sortDocuments(tasks.map((task) => readDocument(repoRoot, task.filePath, task.category)));
+  const workerCount = recommendedWorkerCount(tasks.length, { maxWorkers: 6, minTasksPerWorker: 80 });
+  try {
+    const documents = await runWorkerTasks({
+      tasks: tasks.map((task) => ({
+        type: "document",
+        repoRoot,
+        filePath: task.filePath,
+        category: task.category
+      })),
+      workerPath: snapshotFileWorkerPath,
+      workerCount,
+      fallback: () => tasks.map((task) => readDocument(repoRoot, task.filePath, task.category))
+    });
+    return sortDocuments(documents);
+  } catch {
+    return fallback();
+  }
+}
+
+function collectDocumentTasks(repoRoot) {
+  const tasks = [];
   for (const source of DOCUMENT_FILES) {
     const filePath = path.join(repoRoot, source.file);
     if (!fs.existsSync(filePath)) {
       continue;
     }
-    documents.push(readDocument(repoRoot, filePath, source.category));
+    tasks.push({ filePath, category: source.category });
   }
   for (const source of DOCUMENT_SOURCES) {
     const sourceRoot = path.join(repoRoot, source.root);
@@ -1546,9 +1608,13 @@ export function collectDocuments(repoRoot) {
       if (!/\.(md|json)$/i.test(filePath)) {
         continue;
       }
-      documents.push(readDocument(repoRoot, filePath, source.category));
+      tasks.push({ filePath, category: source.category });
     }
   }
+  return tasks;
+}
+
+function sortDocuments(documents) {
   return documents.sort((left, right) => right.updatedAt.localeCompare(left.updatedAt) || left.path.localeCompare(right.path));
 }
 
@@ -1634,7 +1700,7 @@ export function emptyAdminHistoryIndex() {
   };
 }
 
-function readDocument(repoRoot, filePath, category) {
+export function readDocument(repoRoot, filePath, category) {
   const relativePath = toPosix(path.relative(repoRoot, filePath));
   const content = fs.readFileSync(filePath, "utf8");
   const stats = fs.statSync(filePath);
@@ -2180,7 +2246,7 @@ function isSourceFile(relativePath) {
   return SOURCE_EXTENSIONS.has(path.extname(relativePath).toLowerCase());
 }
 
-function readSourceFile(repoRoot, filePath, project) {
+export function readSourceFile(repoRoot, filePath, project) {
   const relativePath = toPosix(path.relative(repoRoot, filePath));
   const content = fs.readFileSync(filePath, "utf8");
   const stats = fs.statSync(filePath);
@@ -2370,5 +2436,8 @@ function parseArgs(argv) {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  main();
+  main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
 }

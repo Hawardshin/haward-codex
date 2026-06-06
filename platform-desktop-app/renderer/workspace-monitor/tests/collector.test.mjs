@@ -100,7 +100,7 @@ test("admin history index keeps all history records outside the default snapshot
   assert.equal(adminIndex.migration.status, "migrated_to_lazy_admin_index");
 });
 
-test("buildSnapshot reads minimal repository shape", () => {
+test("buildSnapshot reads minimal repository shape", async () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "workspace-monitor-test-"));
   fs.mkdirSync(path.join(root, "_ops", "projects"), { recursive: true });
   fs.mkdirSync(path.join(root, "_ops", "coordination"), { recursive: true });
@@ -319,7 +319,7 @@ test("buildSnapshot reads minimal repository shape", () => {
   );
   fs.writeFileSync(path.join(root, "demo", "src", "main.py"), "print('hello')\n");
 
-  const snapshot = buildSnapshot(root);
+  const snapshot = await buildSnapshot(root);
 
   assert.equal(snapshot.stats.projects, 1);
   assert.equal(snapshot.stats.agentDefinitions, 1);
@@ -374,6 +374,8 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.stats.fundamentalImprovementPrinciples >= 1, true);
   assert.equal(snapshot.stats.toolUsagePatterns, 1);
   assert.equal(snapshot.stats.toolUsageValidationCommands, 2);
+  assert.equal(snapshot.stats.snapshotDocumentWorkers >= 1, true);
+  assert.equal(snapshot.stats.snapshotSourceWorkers >= 1, true);
   assert.equal(snapshot.toolUsageIntegration.summary.totalPatterns, 1);
   assert.equal(snapshot.toolUsageIntegration.patterns[0].labelKo, "렌더러 검증 루프");
   assert.equal(snapshot.toolUsageIntegration.verificationLadders[0].surface, "tools");
