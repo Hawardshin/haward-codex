@@ -627,6 +627,30 @@ struct SubagentToolPlanReport {
     persistence_error: Option<String>,
 }
 
+#[derive(Deserialize)]
+#[serde(default, rename_all = "camelCase")]
+struct SubagentToolExecutionInput {
+    plan_task_run_id: String,
+    tool_name: String,
+    adapter_id: String,
+    prompt: String,
+    working_dir: Option<String>,
+    auto_defer_questions: Option<bool>,
+}
+
+impl Default for SubagentToolExecutionInput {
+    fn default() -> Self {
+        Self {
+            plan_task_run_id: String::new(),
+            tool_name: String::new(),
+            adapter_id: String::new(),
+            prompt: String::new(),
+            working_dir: None,
+            auto_defer_questions: Some(true),
+        }
+    }
+}
+
 #[derive(Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 struct WorkspaceTextFile {
@@ -2443,6 +2467,15 @@ fn run_subagent_tool_plan(
 }
 
 #[tauri::command]
+fn start_subagent_tool_execution(
+    app: AppHandle,
+    store: State<'_, SessionStore>,
+    input: SubagentToolExecutionInput,
+) -> Result<CliSessionReport, String> {
+    start_subagent_tool_execution_report(&app, store, input)
+}
+
+#[tauri::command]
 fn start_cli_adapter_session(
     app: AppHandle,
     store: State<'_, SessionStore>,
@@ -4087,6 +4120,7 @@ pub fn run() {
             create_agent_factory_proposal,
             record_learning_improvement_decision,
             run_subagent_tool_plan,
+            start_subagent_tool_execution,
             start_cli_adapter_session,
             start_cli_task_pipeline,
             poll_cli_adapter_session,
@@ -10465,6 +10499,112 @@ fn persist_subagent_tool_plan_task_run(
     })
 }
 
+fn start_subagent_tool_execution_report(
+    app: &AppHandle,
+    store: State<'_, SessionStore>,
+    mut input: SubagentToolExecutionInput,
+) -> Result<CliSessionReport, String> {
+    input.plan_task_run_id = input.plan_task_run_id.trim().to_string();
+    input.tool_name = input.tool_name.trim().to_string();
+    input.adapter_id = input.adapter_id.trim().to_string();
+    if input.plan_task_run_id.is_empty() {
+        return Err("Subagent plan task-run id is required.".to_string());
+    }
+    if input.tool_name.is_empty() {
+        return Err("Subagent tool name is required.".to_string());
+    }
+    if input.adapter_id.is_empty() {
+        return Err("Subagent execution adapter id is required.".to_string());
+    }
+
+    let adapter = find_adapter(&input.adapter_id)
+        .ok_or_else(|| format!("Unknown adapter id: {}", input.adapter_id))?;
+    let working_dir = resolve_workspace_dir(app, input.working_dir.as_deref())?;
+    let tool = subagent_tool_from_plan_record(app, &input.plan_task_run_id, &input.tool_name)?;
+    let prompt = render_subagent_cli_execution_prompt(&input, &tool);
+    if prompt.len() > MAX_SESSION_INPUT_BYTES {
+        return Err(format!(
+            "Subagent execution prompt is too large. Max input is {MAX_SESSION_INPUT_BYTES} bytes."
+        ));
+    }
+
+    let (session_id, mut session, report) = create_cli_session(
+        app,
+        adapter,
+        &prompt,
+        working_dir,
+        input.auto_defer_questions.unwrap_or(true),
+        "subagent_tool_execution",
+        Some(&input.plan_task_run_id),
+        Some(&tool.tool_name),
+        Some(&tool.agent_name),
+    )?;
+    match store.sessions.lock() {
+        Ok(mut sessions) => {
+            cleanup_finished_sessions_locked(&mut sessions);
+            sessions.insert(session_id, session);
+        }
+        Err(_) => {
+            dispose_cli_session_runtime(&mut session, "store_lock_failed");
+            return Err("Failed to lock CLI session store.".to_string());
+        }
+    }
+    Ok(report)
+}
+
+fn subagent_tool_from_plan_record(
+    app: &AppHandle,
+    plan_task_run_id: &str,
+    tool_name: &str,
+) -> Result<SubagentToolSummary, String> {
+    let detail = read_task_run_detail(app, plan_task_run_id)?;
+    if detail.record.task_kind != "subagent_tool_plan" {
+        return Err(format!(
+            "Task run '{}' is not a subagent tool plan.",
+            plan_task_run_id
+        ));
+    }
+    let record_value: Value = serde_json::from_str(&detail.record_json)
+        .map_err(|error| format!("Failed to parse subagent tool plan record: {error}"))?;
+    let plan_value = record_value
+        .get("subagent_tool_plan")
+        .ok_or_else(|| "Subagent tool plan metadata is missing.".to_string())?;
+    let tools = subagent_tool_summaries_from_plan(plan_value);
+    tools
+        .into_iter()
+        .find(|tool| tool.tool_name == tool_name)
+        .ok_or_else(|| format!("Tool '{tool_name}' was not found in plan '{plan_task_run_id}'."))
+}
+
+fn render_subagent_cli_execution_prompt(
+    input: &SubagentToolExecutionInput,
+    tool: &SubagentToolSummary,
+) -> String {
+    let user_prompt = input.prompt.trim();
+    let allowed_tools = if tool.allowed_tools.is_empty() {
+        "- none declared".to_string()
+    } else {
+        tool.allowed_tools
+            .iter()
+            .map(|tool| format!("- {tool}"))
+            .collect::<Vec<_>>()
+            .join("\n")
+    };
+    format!(
+        "You are running as a bounded subagent tool lane.\n\nPlan task-run id: {plan_task_run_id}\nTool name: {tool_name}\nAgent name: {agent_name}\nLane role: {agent_name}\n\nManager-owned boundaries:\n- The manager owns routing, merge, validation, and final answer.\n- This is a single advisory lane, not a parallel fan-out execution.\n- Do not access _private or outputs.\n- Do not perform destructive file operations, installs, or global environment changes.\n- If a task needs write access, propose the exact patch and wait for manager merge.\n\nAllowed tool metadata from the plan:\n{allowed_tools}\n\nOutput contract:\n{output_contract}\n\nManager prompt:\n{manager_prompt}\n\nReturn a concise result with summary, evidence, risks, validation, and next_action.",
+        plan_task_run_id = input.plan_task_run_id,
+        tool_name = tool.tool_name,
+        agent_name = tool.agent_name,
+        allowed_tools = allowed_tools,
+        output_contract = tool.output_contract,
+        manager_prompt = if user_prompt.is_empty() {
+            "Execute the selected subagent lane against the current manager task, then report findings without taking final ownership."
+        } else {
+            user_prompt
+        }
+    )
+}
+
 fn subagent_tool_summaries_from_plan(value: &Value) -> Vec<SubagentToolSummary> {
     value
         .get("subagent_tools")
@@ -12550,6 +12690,32 @@ mod tests {
         );
         assert!(normalize_native_os_action("shutdown").is_err());
         assert!(normalize_native_os_action("rm -rf").is_err());
+    }
+
+    #[test]
+    fn subagent_cli_execution_prompt_keeps_manager_boundaries() {
+        let input = SubagentToolExecutionInput {
+            plan_task_run_id: "task-run-subagent-tool-plan-1".to_string(),
+            tool_name: "run_research_insight_planner_agent".to_string(),
+            adapter_id: "codex-cli".to_string(),
+            prompt: "Review the implementation risk.".to_string(),
+            working_dir: None,
+            auto_defer_questions: Some(true),
+        };
+        let tool = SubagentToolSummary {
+            tool_name: "run_research_insight_planner_agent".to_string(),
+            agent_name: "research-insight-planner-agent".to_string(),
+            allowed_tools: vec!["web-search".to_string(), "repository-docs".to_string()],
+            output_contract: "summary, evidence, risks, validation, next_action".to_string(),
+        };
+        let prompt = render_subagent_cli_execution_prompt(&input, &tool);
+
+        assert!(prompt.contains("task-run-subagent-tool-plan-1"));
+        assert!(prompt.contains("run_research_insight_planner_agent"));
+        assert!(prompt.contains("research-insight-planner-agent"));
+        assert!(prompt.contains("The manager owns routing, merge, validation, and final answer."));
+        assert!(prompt.contains("Do not access _private or outputs."));
+        assert!(prompt.contains("Review the implementation risk."));
     }
 
     #[cfg(target_os = "macos")]

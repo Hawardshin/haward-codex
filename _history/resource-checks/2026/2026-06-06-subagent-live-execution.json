@@ -1,0 +1,104 @@
+{
+  "task": "Subagent Live Execution",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Tauri invoke bridge",
+    "CLI adapter subprocess session",
+    "runtime task-run store",
+    "workspace-monitor browser smoke"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "subagent-cli-session-lifecycle",
+      "category": "process",
+      "description": "The new command starts a CLI adapter subprocess for one subagent tool execution.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The command reuses create_cli_session, SessionStore, cancel_cli_adapter_session, and cleanup_finished_sessions_locked instead of adding a new runner or daemon.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "cargo check --manifest-path platform-desktop-app/src-tauri/Cargo.toml"
+      ]
+    },
+    {
+      "risk_id": "unbounded-subagent-fanout",
+      "category": "process",
+      "description": "Executing every planned subagent tool could create uncontrolled parallel CLI processes.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The UI and command execute only one selected tool from a saved plan; fan-out and merge are explicitly out of scope.",
+      "evidence": [
+        "executeSubagentTools",
+        "subagent_tool_from_plan_record",
+        "platform-desktop-app/specs/2026-06-06-subagent-live-execution/spec.ko.md"
+      ]
+    },
+    {
+      "risk_id": "sensitive-local-path-access",
+      "category": "file_handle",
+      "description": "A subagent execution prompt could ask the guest CLI to inspect local-only private folders.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The generated prompt includes explicit manager-owned boundaries and forbids _private and outputs access.",
+      "evidence": [
+        "render_subagent_cli_execution_prompt",
+        "cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml subagent_cli_execution_prompt_keeps_manager_boundaries"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "cli-session-create-cleanup-path",
+      "resource": "subagent CLI session",
+      "create_path": "start_subagent_tool_execution_report -> create_cli_session",
+      "cleanup_path": "RuntimeTerminalDrawer cancel action -> cancel_cli_adapter_session; Rust cleanup_finished_sessions_locked",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "rust-check",
+      "metric": "Rust command compile and unit contract",
+      "tool": "cargo check and cargo test",
+      "threshold": "exit code 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo check --manifest-path platform-desktop-app/src-tauri/Cargo.toml",
+        "cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml subagent_cli_execution_prompt_keeps_manager_boundaries"
+      ]
+    },
+    {
+      "check_id": "renderer-contract",
+      "metric": "Desktop Runtime action and copy contract",
+      "tool": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test",
+      "threshold": "90 tests pass",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "90 tests passed"
+      ]
+    },
+    {
+      "check_id": "browser-smoke-cleanup",
+      "metric": "Local preview renders controls and dev server is cleaned up",
+      "tool": "Browser on http://127.0.0.1:3224/#section-desktop plus lsof",
+      "threshold": "execute-subagent button visible/disabled; port 3224 has no listener after shutdown",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Browser smoke output in current Codex run",
+        "lsof -nP -iTCP:3224 -sTCP:LISTEN returned no listener"
+      ]
+    }
+  ],
+  "notes": [
+    "No installation occurred.",
+    "Browser preview cannot execute Tauri native commands; it is used only for UI contract smoke."
+  ]
+}

@@ -23,6 +23,11 @@ pub(super) fn group() -> NativeRuntimeFeatureGroupReport {
                 "Run manager-as-tools subagent plan",
                 "Bounded agent-platform planner execution with task-run persistence",
             ),
+            command(
+                "start_subagent_tool_execution",
+                "Start one subagent tool lane",
+                "Validates a saved subagent plan and starts one cancellable CLI session lane",
+            ),
         ],
         follow_up: vec![
             "Move proposal normalization into features/agent_factory/.",

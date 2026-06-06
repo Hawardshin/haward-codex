@@ -1,0 +1,115 @@
+{
+  "task": "Subagent Live Execution",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "plan-backed-execution-command",
+      "description": "Add a native command that starts execution only from a saved subagent tool plan.",
+      "source": "user request and previous slice gap",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "start_subagent_tool_execution",
+        "subagent_tool_from_plan_record"
+      ]
+    },
+    {
+      "item_id": "existing-cli-session-lifecycle",
+      "description": "Reuse existing CLI adapter session lifecycle and persistence.",
+      "source": "resource guard",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "create_cli_session",
+        "task_kind subagent_tool_execution"
+      ]
+    },
+    {
+      "item_id": "manager-boundary-prompt",
+      "description": "Keep manager-owned routing/merge/validation boundaries in the subagent prompt.",
+      "source": "subagent explorer recommendation",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "render_subagent_cli_execution_prompt",
+        "subagent_cli_execution_prompt_keeps_manager_boundaries"
+      ]
+    },
+    {
+      "item_id": "desktop-runtime-ui",
+      "description": "Expose execution as a Desktop Runtime action with result summary.",
+      "source": "user UI/terminal agent request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "data-terminal-agent-action=\"execute-subagent\"",
+        "data-subagent-tool-execution-result"
+      ]
+    },
+    {
+      "item_id": "no-unbounded-fanout",
+      "description": "Avoid automatic multi-subagent fan-out in this slice.",
+      "source": "runtime safety",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "selectedTool = lastSubagentToolPlan.subagentTools[0]",
+        "spec non-scope"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-subagent-live-execution.ko.md",
+      "purpose": "Requirement record",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-06-subagent-live-execution/spec.ko.md",
+      "purpose": "Spec record",
+      "required": true
+    },
+    {
+      "path": "_history/resource-checks/2026/2026-06-06-subagent-live-execution.json",
+      "purpose": "Resource lifecycle record",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "rust",
+      "description": "Rust command compiles and prompt boundary unit test passes.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo check",
+        "cargo test subagent_cli_execution_prompt_keeps_manager_boundaries"
+      ]
+    },
+    {
+      "check_id": "renderer",
+      "description": "Renderer static contracts pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test"
+      ]
+    },
+    {
+      "check_id": "build-and-browser",
+      "description": "Renderer build and browser smoke pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm -w run desktop:renderer:build",
+        "Browser smoke on http://127.0.0.1:3224/#section-desktop"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "Live Tauri execution is not available in browser preview; packaged desktop smoke remains the stronger runtime check."
+  ],
+  "notes": [
+    "Subagent explorer was used to scope the smallest safe executable slice."
+  ]
+}

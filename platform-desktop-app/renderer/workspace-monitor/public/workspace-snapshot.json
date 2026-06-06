@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T14:38:49.890Z",
+  "generatedAt": "2026-06-06T15:01:53.178Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 5,
@@ -14,10 +14,10 @@
     "documents": 650,
     "requirements": 528,
     "evaluations": 26,
-    "webSearches": 12,
-    "timingRecords": 11,
+    "webSearches": 11,
+    "timingRecords": 12,
     "historyDays": 1,
-    "adminHistoryDocuments": 2795,
+    "adminHistoryDocuments": 2803,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7861,6 +7861,246 @@
   ],
   "documents": [
     {
+      "id": "history-2026-2026-06-06-md",
+      "path": "_history/2026/2026-06-06.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 06",
+      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
+      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 23594,
+      "updatedAt": "2026-06-06T15:00:01.473Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-subagent-live-execution-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-subagent-live-execution-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Subagent Live Execution Input",
+      "excerpt": "{ \"initial instruction\": \"아까 미룬 다음 단계 구현\", \"result summary\": \"Added a Desktop Runtime path that validates a saved subagent tool plan and starts one selected tool as an existing CLI adapter session with task run linkage.\", \"work mode\": \"standard\", \"changed files\": \"platform deskto",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;아까 미룬 다음 단계 구현&quot;, &quot;result summary&quot;: &quot;Added a Desktop Runtime path that validates a saved subagent tool plan and starts one selected tool as an existing CLI adapter session with task run linkage.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/src tauri/src/lib.rs&quot;, &quot;platform desktop app/src tauri/src/features/agent </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4656,
+      "updatedAt": "2026-06-06T15:00:01.473Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-subagent-live-execution-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-subagent-live-execution.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "최종 평가: Subagent Live Execution",
+      "excerpt": "최종 평가: Subagent Live Execution 날짜: 2026 06 06 평가 이전 slice에서 남긴 “실제 autonomous subagent worker execution은 별도 slice” 경계를 닫기 위해, 저장된 subagent tool plan에서 선택한 tool 하나를 검증하고 기존 CLI adapter session으로 시작하는 기능을 구현했다. 충족 start subagent tool execution Tauri command가 추가됐다. plan task run rec",
+      "html": "<p>최종 평가: Subagent Live Execution 날짜: 2026 06 06 평가 이전 slice에서 남긴 “실제 autonomous subagent worker execution은 별도 slice” 경계를 닫기 위해, 저장된 subagent tool plan에서 선택한 tool 하나를 검증하고 기존 CLI adapter session으로 시작하는 기능을 구현했다. 충족 start subagent tool execution Tauri command가 추가됐다. plan task run record에서 tool name을 검증한다. 실행은 기존 create cli session 과 task run persistence를 재사용한다. </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1055,
+      "updatedAt": "2026-06-06T15:00:01.473Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-subagent-live-execution-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-subagent-live-execution.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Subagent Live Execution",
+      "excerpt": "Request Trace: Subagent Live Execution 날짜: 2026 06 06 요청 아까 미뤄둔 다음 단계 구현. 연결된 이전 작업 2026 06 06 subagent tool use : subagent tool plan 생성과 task run 저장까지 완료. 결과 저장된 plan에서 선택한 subagent tool 하나를 검증해 CLI session으로 시작하는 기능을 추가했다. 산출물 요구사항: platform desktop app/docs/requirements/2026 0",
+      "html": "<p>Request Trace: Subagent Live Execution 날짜: 2026 06 06 요청 아까 미뤄둔 다음 단계 구현. 연결된 이전 작업 2026 06 06 subagent tool use : subagent tool plan 생성과 task run 저장까지 완료. 결과 저장된 plan에서 선택한 subagent tool 하나를 검증해 CLI session으로 시작하는 기능을 추가했다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 subagent live execution.ko.md 스펙: platform desktop app/specs/2026 06 06 sub</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1016,
+      "updatedAt": "2026-06-06T15:00:01.472Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-subagent-live-execution-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-subagent-live-execution.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Subagent Live Execution",
+      "excerpt": "Work Summary: Subagent Live Execution 날짜: 2026 06 06 완료 start subagent tool execution Tauri command를 추가했다. 저장된 subagent tool plan task run record에서 tool name을 검증한다. 기존 CLI session lifecycle로 subagent tool execution session을 시작한다. session metadata에 plan/task lane 연결 정보를 남긴다. Deskt",
+      "html": "<p>Work Summary: Subagent Live Execution 날짜: 2026 06 06 완료 start subagent tool execution Tauri command를 추가했다. 저장된 subagent tool plan task run record에서 tool name을 검증한다. 기존 CLI session lifecycle로 subagent tool execution session을 시작한다. session metadata에 plan/task lane 연결 정보를 남긴다. Desktop Runtime에 선택 툴 실행 버튼과 실행 결과 요약을 추가했다. UI 문구는 내부 런타임 용어 대신 실행 세션/실행 기록 흐름으로 정리했</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 745,
+      "updatedAt": "2026-06-06T15:00:01.471Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-subagent-live-execution-ko-md",
+      "path": "_history/work-timings/2026/2026-06-06-subagent-live-execution.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "Work Timing: Subagent Live Execution",
+      "excerpt": "Work Timing: Subagent Live Execution 날짜: 2026 06 06 | Phase | Approx elapsed | Notes | | | : | | | Web first intake and subagent scoping | 15m | Official docs and subagent explorer result used to bound scope | | Rust command implementation | 35m | Command, plan lookup, prompt ren",
+      "html": "<p>Work Timing: Subagent Live Execution 날짜: 2026 06 06 | Phase | Approx elapsed | Notes | | | : | | | Web first intake and subagent scoping | 15m | Official docs and subagent explorer result used to bound scope | | Rust command implementation | 35m | Command, plan lookup, prompt rendering, unit test | | Renderer UI and static tests | 25m | Button, result panel,</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 682,
+      "updatedAt": "2026-06-06T15:00:01.471Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-subagent-live-execution-ko-md",
+      "path": "_history/plans/2026/2026-06-06-subagent-live-execution.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Work Plan: Subagent Live Execution",
+      "excerpt": "Work Plan: Subagent Live Execution 날짜: 2026 06 06 작업 모드 standard 실행 계획 1. 웹 우선 조사와 이전 slice 기록 확인. 2. subagent explorer로 안전한 다음 slice 범위 확인. 3. Rust command를 추가하되 기존 CLI session runner를 재사용. 4. Renderer button/result UI를 추가. 5. Rust/frontend 계약 테스트와 build/check 수행. 6. Browser smo",
+      "html": "<p>Work Plan: Subagent Live Execution 날짜: 2026 06 06 작업 모드 standard 실행 계획 1. 웹 우선 조사와 이전 slice 기록 확인. 2. subagent explorer로 안전한 다음 slice 범위 확인. 3. Rust command를 추가하되 기존 CLI session runner를 재사용. 4. Renderer button/result UI를 추가. 5. Rust/frontend 계약 테스트와 build/check 수행. 6. Browser smoke와 resource/omission/evaluation 기록 수행. 7. commit/push. 결정 이번 작업은 plan의 첫 번째 too</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 698,
+      "updatedAt": "2026-06-06T15:00:01.467Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-subagent-live-execution-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-subagent-live-execution.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request Summary: Subagent Live Execution",
+      "excerpt": "User Request Summary: Subagent Live Execution 날짜: 2026 06 06 요약 사용자는 이전에 미뤄둔 다음 단계 구현을 요구했다. 문맥상 이전 slice에서 계획만 만들고 멈춘 subagent tool use 기능을 실제 터미널/CLI 실행으로 연결하는 작업이다. 해석 run subagent tool plan 으로 저장된 plan을 사용한다. 자동 multi agent fan out은 아직 위험하므로 단일 선택 tool 실행부터 닫는다. 기존 terminal a",
+      "html": "<p>User Request Summary: Subagent Live Execution 날짜: 2026 06 06 요약 사용자는 이전에 미뤄둔 다음 단계 구현을 요구했다. 문맥상 이전 slice에서 계획만 만들고 멈춘 subagent tool use 기능을 실제 터미널/CLI 실행으로 연결하는 작업이다. 해석 run subagent tool plan 으로 저장된 plan을 사용한다. 자동 multi agent fan out은 아직 위험하므로 단일 선택 tool 실행부터 닫는다. 기존 terminal agent bridge와 CLI adapter session/task run store를 활용한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 557,
+      "updatedAt": "2026-06-06T15:00:01.466Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-subagent-live-execution-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-subagent-live-execution.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Subagent Live Execution",
+      "excerpt": "Web Search: Subagent Live Execution 날짜: 2026 06 06 Queries Tauri v2 command sidecar process official documentation Command create process stdout stderr timeout OpenAI Agents SDK tools handoffs agents official documentation Claude Code subagents tools official documentation VS Cod",
+      "html": "<p>Web Search: Subagent Live Execution 날짜: 2026 06 06 Queries Tauri v2 command sidecar process official documentation Command create process stdout stderr timeout OpenAI Agents SDK tools handoffs agents official documentation Claude Code subagents tools official documentation VS Code Copilot subagents prompt tools official documentation Tauri v2 shell plugin Co</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1947,
+      "updatedAt": "2026-06-06T15:00:01.465Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-subagent-live-execution-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-subagent-live-execution/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Subagent Live Execution",
+      "excerpt": "Traceability: Subagent Live Execution | Requirement | Implementation | Verification | | | | | | REQ SLE 001 | executeSubagentTools , start subagent tool execution | workspace monitor test | | REQ SLE 002 | subagent tool from plan record , input validation | Rust unit/static test ",
+      "html": "<h1>Traceability: Subagent Live Execution</h1>\n<table><thead><tr><th>Requirement</th><th>Implementation</th><th>Verification</th></tr></thead><tbody><tr><td>REQ-SLE-001</td><td><code>executeSubagentTools</code>, <code>start_subagent_tool_execution</code></td><td>workspace-monitor test</td></tr><tr><td>REQ-SLE-002</td><td><code>subagent_tool_from_plan_record</code>, input validation</td><td>Rust unit/static test</td></tr><tr><td>REQ-SLE-003</td><td><code>create_cli_session</code> reuse</td><td>cargo check, source contract</td></tr><tr><td>REQ-SLE-004</td><td><code>task_kind</code>, <code>pipeline_id</code>, <code>lane_id</code>, <code>lane_role</code> arguments</td><td>static test</td></tr><tr><td>REQ-SLE-005</td><td><code>render_subagent_cli_execution_prompt</code></td><td><code>subagent_cli_execution_prompt_keeps_manager_boundaries</code></td></tr><tr><td>REQ-SLE-006</td><td>prompt boundary and single selected tool UI</td><td>spec, omission check</td></tr><tr><td>REQ-SLE-007</td><td>Korean UI copy update and contract test</td><td>workspace-monitor test</td></tr></tbody></table>\n<h2>변경 파일</h2>\n<ul>\n<li><code>platform-desktop-app/src-tauri/src/lib.rs</code></li>\n<li><code>platform-desktop-app/src-tauri/src/features/agent_factory.rs</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1111,
+      "updatedAt": "2026-06-06T15:00:01.461Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-subagent-live-execution-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-subagent-live-execution/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Subagent Live Execution",
+      "excerpt": "Plan: Subagent Live Execution 1. 웹 우선 조사로 subagent delegation과 process/session event 기준을 재확인한다. 2. 이전 subagent tool use 구현과 task run persistence를 확인한다. 3. Rust/Tauri에 start subagent tool execution command와 plan/tool 검증 helper를 추가한다. 4. 기존 create cli session 에 subagent tool execut",
+      "html": "<h1>Plan: Subagent Live Execution</h1>\n<p>1. 웹 우선 조사로 subagent delegation과 process/session event 기준을 재확인한다.</p>\n<p>2. 이전 <code>subagent-tool-use</code> 구현과 task-run persistence를 확인한다.</p>\n<p>3. Rust/Tauri에 <code>start_subagent_tool_execution</code> command와 plan/tool 검증 helper를 추가한다.</p>\n<p>4. 기존 <code>create_cli_session</code>에 <code>subagent_tool_execution</code> metadata를 넘긴다.</p>\n<p>5. Desktop Runtime에 <code>선택 툴 실행</code> action과 실행 결과 요약을 추가한다.</p>\n<p>6. static contract, Rust unit/feature map, renderer tests/check/build를 검증한다.</p>\n<p>7. Browser preview로 버튼과 결과 UI 계약을 smoke한다.</p>\n<p>8. resource/omission/evaluation 기록 후 commit/push한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 695,
+      "updatedAt": "2026-06-06T15:00:01.460Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-subagent-live-execution-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-subagent-live-execution/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Subagent Live Execution",
+      "excerpt": "Spec: Subagent Live Execution 날짜: 2026 06 06 목적 Desktop Runtime에서 저장된 subagent tool plan의 첫 번째 tool을 검증한 뒤, 기존 CLI adapter session으로 시작한다. 이 slice는 planner 다음 단계인 live execution 진입점을 추가하되, multi worker orchestration은 아직 실행하지 않는다. 동작 1. Renderer는 최근 SubagentToolPlanReport 의 taskRu",
+      "html": "<h1>Spec: Subagent Live Execution</h1>\n<p>날짜: 2026-06-06</p>\n<h2>목적</h2>\n<p>Desktop Runtime에서 저장된 subagent tool plan의 첫 번째 tool을 검증한 뒤, 기존 CLI adapter session으로 시작한다. 이 slice는 planner 다음 단계인 live execution 진입점을 추가하되, multi-worker orchestration은 아직 실행하지 않는다.</p>\n<h2>동작</h2>\n<p>1. Renderer는 최근 <code>SubagentToolPlanReport</code>의 <code>taskRunId</code>와 첫 번째 <code>subagentTools[0].toolName</code>을 사용한다.</p>\n<p>2. Renderer는 Tauri command <code>start_subagent_tool_execution</code>을 호출한다.</p>\n<p>3. Rust command는 <code>plan_task_run_id</code>, <code>tool_name</code>, <code>adapter_id</code>, <code>prompt</code>를 검증한다.</p>\n<p>4. Rust command는 task-run detail에서 <code>task_kind=subagent_tool_plan</code> record를 읽고, plan JSON 내부에 같은 <code>tool_name</code>이 있는지 확인한다.</p>\n<p>5. Rust command는 subagent tool metadata와 사용자 prompt를 manager-owned execution prompt로 감싼다.</p>\n<p>6. Rust command는 기존 <code>create_cli_session</code>을 호출해 <code>task_kind=subagent_tool_execution</code>, <code>pipeline_id</code>, <code>lane_id</code>, <code>lane_role</code>을 부여한다.</p>\n<p>7. Renderer는 반환된 <code>CliSessionReport</code>를 세션 목록, 선택 세션, task-run 선택, 하단 터미널 drawer에 반영한다.</p>\n<p>8. Desktop Runtime은 <code>선택 툴 실행</code> 버튼과 최근 실행 결과 요약을 표시한다.</p>\n<h2>안전 경계</h2>\n<ul>\n<li>plan에 없는 tool은 실행하지 않는다.</li>\n<li>manager가 routing, merge, validation, final answer를 계속 소유한다.</li>\n<li>subagent prompt는 <code>_private</code>/<code>outputs</code> 접근 금지와 destructive/install/global environment change 금지를 포함한다.</li>\n<li>실행은 cancellable CLI adapter session으로 들어가며 기존 cancel/prune/support bundle 경계를 재사용한다.</li>\n<li>Browser preview는 Tauri command를 실행하지 못하므로 정적 UI와 계약만 smoke한다.</li>\n</ul>\n<h2>참고</h2>\n<ul>\n<li>OpenAI Agents SDK handoffs: https://openai.github.io/openai-agents-js/guides/handoffs/</li>\n<li>Claude Code subagents: https://docs.claude.com/ko/docs/claude-code/sub-agents</li>\n<li>VS Code Copilot subagents: https://code.visualstudio.com/docs/copilot/agents/subagents</li>\n<li>tauri-plugin-shell process events: https://docs.rs/tauri-plugin-shell/latest/tauri_plugin_shell/process/index.html</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2180,
+      "updatedAt": "2026-06-06T15:00:01.460Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-subagent-live-execution-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-subagent-live-execution/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Subagent Live Execution",
+      "excerpt": "Tasks: Subagent Live Execution x web first intake 수행 x subagent explorer로 다음 slice 범위 확인 x 기존 subagent tool plan record 구조 확인 x Rust input struct와 Tauri command 추가 x plan record에서 tool name 검증 helper 추가 x bounded subagent execution prompt 추가 x 기존 CLI session lifecycle로 실행 연결 x De",
+      "html": "<h1>Tasks: Subagent Live Execution</h1>\n<ul>\n<li>[x] web-first intake 수행</li>\n<li>[x] subagent explorer로 다음 slice 범위 확인</li>\n<li>[x] 기존 <code>subagent_tool_plan</code> record 구조 확인</li>\n<li>[x] Rust input struct와 Tauri command 추가</li>\n<li>[x] plan record에서 tool name 검증 helper 추가</li>\n<li>[x] bounded subagent execution prompt 추가</li>\n<li>[x] 기존 CLI session lifecycle로 실행 연결</li>\n<li>[x] Desktop Runtime action button/result UI 추가</li>\n<li>[x] static contract test 보강</li>\n<li>[x] Rust unit test 추가</li>\n<li>[x] renderer test 통과</li>\n<li>[ ] renderer check/build 및 Browser smoke 완료</li>\n<li>[ ] evaluator/resource/omission 검증 완료</li>\n<li>[ ] commit, push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 636,
+      "updatedAt": "2026-06-06T15:00:01.460Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-subagent-live-execution-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-subagent-live-execution/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Subagent Live Execution",
+      "excerpt": "Validation: Subagent Live Execution 완료 cargo fmt manifest path platform desktop app/src tauri/Cargo.toml : 통과 cargo check manifest path platform desktop app/src tauri/Cargo.toml : 통과 cargo test manifest path platform desktop app/src tauri/Cargo.toml subagent cli execution prompt ",
+      "html": "<h1>Validation: Subagent Live Execution</h1>\n<h2>완료</h2>\n<ul>\n<li><code>cargo fmt --manifest-path platform-desktop-app/src-tauri/Cargo.toml</code>: 통과</li>\n<li><code>cargo check --manifest-path platform-desktop-app/src-tauri/Cargo.toml</code>: 통과</li>\n<li><code>cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml subagent_cli_execution_prompt_keeps_manager_boundaries</code>: 통과</li>\n<li><code>cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml runtime_feature_map_groups_commands_by_native_capability</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code>: 통과, 90 tests</li>\n</ul>\n<h2>남은 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code></li>\n<li><code>corepack pnpm -w run desktop:renderer:build</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code></li>\n<li>Browser smoke</li>\n<li><code>check-resources</code>, <code>check-omissions</code>, <code>evaluate-work</code></li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>알려진 경계</h2>\n<ul>\n<li>Browser preview는 Tauri command를 직접 실행할 수 없다. 실제 process execution은 desktop runtime에서 확인해야 한다.</li>\n<li>이번 slice는 저장된 plan의 단일 tool 실행만 지원한다. 병렬 실행, 자동 merge, patch 적용은 후속 slice다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1273,
+      "updatedAt": "2026-06-06T15:00:01.460Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-subagent-live-execution-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-subagent-live-execution.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Requirements: Subagent Live Execution",
+      "excerpt": "Requirements: Subagent Live Execution 날짜: 2026 06 06 배경 이전 subagent tool use slice는 manager가 사용할 subagent tool plan을 만들고 task run record로 저장하는 데서 멈췄다. 사용자는 미뤄둔 다음 단계, 즉 계획된 subagent tool을 실제 터미널/CLI 실행으로 연결하기를 요구했다. 요구사항 REQ SLE 001: Desktop Runtime은 저장된 subagent tool plan record",
+      "html": "<h1>Requirements: Subagent Live Execution</h1>\n<p>날짜: 2026-06-06</p>\n<h2>배경</h2>\n<p>이전 <code>subagent-tool-use</code> slice는 manager가 사용할 subagent tool plan을 만들고 task-run record로 저장하는 데서 멈췄다. 사용자는 미뤄둔 다음 단계, 즉 계획된 subagent tool을 실제 터미널/CLI 실행으로 연결하기를 요구했다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-SLE-001: Desktop Runtime은 저장된 <code>subagent_tool_plan</code> record에서 선택한 tool 하나를 실행할 수 있어야 한다.</li>\n<li>REQ-SLE-002: 실행 전 <code>planTaskRunId</code>, <code>toolName</code>, <code>adapterId</code>를 검증하고, plan에 없는 tool name은 거부해야 한다.</li>\n<li>REQ-SLE-003: 실행은 새 subprocess runner가 아니라 기존 CLI adapter session lifecycle과 task-run persistence를 재사용해야 한다.</li>\n<li>REQ-SLE-004: 실행 record는 <code>task_kind=subagent_tool_execution</code>, <code>pipeline_id=&lt;planTaskRunId&gt;</code>, <code>lane_id=&lt;toolName&gt;</code>, <code>lane_role=&lt;agentName&gt;</code>을 가져야 한다.</li>\n<li>REQ-SLE-005: subagent prompt에는 manager-owned boundary, <code>_private</code>/<code>outputs</code> 접근 금지, destructive operation/install/global environment change 금지를 포함해야 한다.</li>\n<li>REQ-SLE-006: 이번 slice는 단일 실행 세션만 제공하고, 자동 병렬 fan-out과 자동 merge는 범위 밖으로 둔다.</li>\n<li>REQ-SLE-007: UI는 내부 구현 용어보다 사용자가 이해할 수 있는 계획, 실행 세션, 실행 기록 흐름으로 표시해야 한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>다중 subagent worker 자동 fan-out</li>\n<li>subagent 결과 자동 merge/patch 적용</li>\n<li>새 CLI 설치, global dependency 설치, background daemon 추가</li>\n<li><code>_private/</code> 또는 <code>outputs/</code> 직접 접근</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1631,
+      "updatedAt": "2026-06-06T15:00:01.459Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-06-subagent-tool-use-ko-md",
       "path": "_history/evaluations/2026/2026-06-06-subagent-tool-use.ko.md",
       "category": "evaluation",
@@ -7971,22 +8211,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-2026-2026-06-06-md",
-      "path": "_history/2026/2026-06-06.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 06",
-      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 22823,
-      "updatedAt": "2026-06-06T14:29:52.990Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-plans-2026-2026-06-06-subagent-tool-use-ko-md",
@@ -10149,38 +10373,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-plans-2026-2026-06-06-runtime-setup-check-ko-md",
-      "path": "_history/plans/2026/2026-06-06-runtime-setup-check.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "Plan Record: Runtime Setup Check",
-      "excerpt": "Plan Record: Runtime Setup Check 작업 모드 standard 기존 실행 설정 기능에 새 검증 동작과 Tauri command를 추가하는 의미 있는 product behavior 변경이다. 작업 분해 1. web first intake로 command lookup/PATH와 Tauri GUI PATH 주의점을 확인한다. 2. 기존 runtime customization 요구사항과 Desktop Runtime health command를 읽는다. 3. terminal setu",
-      "html": "<p>Plan Record: Runtime Setup Check 작업 모드 standard 기존 실행 설정 기능에 새 검증 동작과 Tauri command를 추가하는 의미 있는 product behavior 변경이다. 작업 분해 1. web first intake로 command lookup/PATH와 Tauri GUI PATH 주의점을 확인한다. 2. 기존 runtime customization 요구사항과 Desktop Runtime health command를 읽는다. 3. terminal setup check는 장기 PTY를 만들지 않는 Rust command로 구현한다. 4. settings adapter 화면에서 selected CL</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 893,
-      "updatedAt": "2026-06-06T11:40:57.203Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-runtime-setup-check-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-runtime-setup-check.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "Web Search: Runtime Setup Check",
-      "excerpt": "Web Search: Runtime Setup Check 질의 Tauri command invoke check installed CLI PATH official docs Node.js child process execFile command path check official docs macOS shell PATH GUI app command line tools Tauri official docs 확인한 주요 출처 Node.js child process documentation: https://no",
-      "html": "<p>Web Search: Runtime Setup Check 질의 Tauri command invoke check installed CLI PATH official docs Node.js child process execFile command path check official docs macOS shell PATH GUI app command line tools Tauri official docs 확인한 주요 출처 Node.js child process documentation: https://nodejs.org/api/child process.html Tauri macOS bundle documentation: https://v1.tau</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1431,
-      "updatedAt": "2026-06-06T11:40:57.203Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-docs-requirements-2026-06-06-runtime-setup-check-ko-md",
       "path": "platform-desktop-app/docs/requirements/2026-06-06-runtime-setup-check.ko.md",
       "category": "project-doc",
@@ -10227,102 +10419,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-cli-adapter-test-fix-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-cli-adapter-test-fix.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "Request Trace: CLI Adapter Test Fix",
-      "excerpt": "Request Trace: CLI Adapter Test Fix 요청 붙여넣은 테스트 실패 로그를 읽고 실패 원인을 고쳐 달라는 요청. 산출물 구현: platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs 웹 검색 기록: history/web searches/2026/2026 06 06 cli adapter test fix.ko.md 평가: history/evaluations/2026/2026 06 06 cli adap",
-      "html": "<p>Request Trace: CLI Adapter Test Fix 요청 붙여넣은 테스트 실패 로그를 읽고 실패 원인을 고쳐 달라는 요청. 산출물 구현: platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs 웹 검색 기록: history/web searches/2026/2026 06 06 cli adapter test fix.ko.md 평가: history/evaluations/2026/2026 06 06 cli adapter test fix.ko.md 작업 요약: history/work summaries/2026/2026 06 06 cli adapter tes</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 761,
-      "updatedAt": "2026-06-06T10:47:44.710Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-cli-adapter-test-fix-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-cli-adapter-test-fix.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "User Request: CLI Adapter Test Fix",
-      "excerpt": "User Request: CLI Adapter Test Fix 요약 사용자는 붙여넣은 파일에 담긴 실패 로그를 읽고 조치해 달라고 요청했다. 해석한 요구 platform desktop app 의 internal package pipeline 실패를 재현 가능한 테스트 실패로 해석한다. 실패한 tool studio.test.mjs assertion을 현재 소스 계약에 맞게 수정한다. 수정 후 관련 테스트와 owning package pipeline을 검증한다. 소유 프로젝트 platform desk",
-      "html": "<p>User Request: CLI Adapter Test Fix 요약 사용자는 붙여넣은 파일에 담긴 실패 로그를 읽고 조치해 달라고 요청했다. 해석한 요구 platform desktop app 의 internal package pipeline 실패를 재현 가능한 테스트 실패로 해석한다. 실패한 tool studio.test.mjs assertion을 현재 소스 계약에 맞게 수정한다. 수정 후 관련 테스트와 owning package pipeline을 검증한다. 소유 프로젝트 platform desktop app</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 504,
-      "updatedAt": "2026-06-06T10:47:44.710Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-cli-adapter-test-fix-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-cli-adapter-test-fix.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "Work Summary: CLI Adapter Test Fix",
-      "excerpt": "Work Summary: CLI Adapter Test Fix 완료 내용 붙여넣은 로그의 실패 지점인 tests/tool studio.test.mjs 의 CLI adapter setup assertion을 수정했다. authHint , firstRunCommand , expectedResult 기대 타입을 string 에서 LocalizedText 로 맞췄다. 소스 구현은 이미 localized setup guide를 사용하고 있어 런타임 코드는 변경하지 않았다. 변경 파일 중심 platform ",
-      "html": "<p>Work Summary: CLI Adapter Test Fix 완료 내용 붙여넣은 로그의 실패 지점인 tests/tool studio.test.mjs 의 CLI adapter setup assertion을 수정했다. authHint , firstRunCommand , expectedResult 기대 타입을 string 에서 LocalizedText 로 맞췄다. 소스 구현은 이미 localized setup guide를 사용하고 있어 런타임 코드는 변경하지 않았다. 변경 파일 중심 platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs 검증 pnpm dir pl</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 658,
-      "updatedAt": "2026-06-06T10:47:44.709Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-cli-adapter-test-fix-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-cli-adapter-test-fix.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "Evaluation: CLI Adapter Test Fix",
-      "excerpt": "Evaluation: CLI Adapter Test Fix 평가 기준 붙여넣은 실패 로그의 authHint: string; assertion 실패가 해소되는가. 런타임 동작을 불필요하게 되돌리지 않고 현재 localized setup guide 구조를 보존하는가. owning project의 테스트와 내부 패키지 명령이 통과하는가. 기존 dirty generated snapshot 변경을 섞어 커밋하지 않는가. 현재 평가 tool studio.test.mjs 의 CLI adapter setup a",
-      "html": "<p>Evaluation: CLI Adapter Test Fix 평가 기준 붙여넣은 실패 로그의 authHint: string; assertion 실패가 해소되는가. 런타임 동작을 불필요하게 되돌리지 않고 현재 localized setup guide 구조를 보존하는가. owning project의 테스트와 내부 패키지 명령이 통과하는가. 기존 dirty generated snapshot 변경을 섞어 커밋하지 않는가. 현재 평가 tool studio.test.mjs 의 CLI adapter setup assertion을 LocalizedText 타입 기대값으로 갱신했다. MonitorShell.tsx 의 AdapterSetupGuide 는 au</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1523,
-      "updatedAt": "2026-06-06T10:47:44.708Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-cli-adapter-test-fix-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-cli-adapter-test-fix.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "Web Search: CLI Adapter Test Fix",
-      "excerpt": "Web Search: CLI Adapter Test Fix 질의 OpenAI Codex AGENTS.md repository instructions 확인한 주요 출처 OpenAI Codex AGENTS.md documentation: https://github.com/openai/codex/blob/main/docs/agents md.md 계획 영향 검색은 작업 시작 규칙 확인용이었다. 실제 실패 원인은 외부 라이브러리나 최신 API 변화가 아니라 로컬 테스트 계약과 MonitorShell.tsx",
-      "html": "<p>Web Search: CLI Adapter Test Fix 질의 OpenAI Codex AGENTS.md repository instructions 확인한 주요 출처 OpenAI Codex AGENTS.md documentation: https://github.com/openai/codex/blob/main/docs/agents md.md 계획 영향 검색은 작업 시작 규칙 확인용이었다. 실제 실패 원인은 외부 라이브러리나 최신 API 변화가 아니라 로컬 테스트 계약과 MonitorShell.tsx 의 현재 타입 정의 차이였다. 따라서 구현 판단은 로컬 소스와 테스트 결과를 기준으로 했다. 무시한 약한 근거 비공식 AGENTS.md 가이드</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1019,
-      "updatedAt": "2026-06-06T10:47:44.708Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-oss-pattern-adoption-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-oss-pattern-adoption.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: OSS Pattern Adoption Gate",
-      "excerpt": "평가: OSS Pattern Adoption Gate 판정 충족. 사용자의 broad OSS 구조 적용 요청을 직접 code copy가 아니라 검증 가능한 pattern adoption gate로 구현했다. 구현 증거 agent platform/src/agent platform/oss/pattern adoption.py : source repo, pattern, language, architecture, folder, clone/import, hybrid module, adoption decisi",
-      "html": "<p>평가: OSS Pattern Adoption Gate 판정 충족. 사용자의 broad OSS 구조 적용 요청을 직접 code copy가 아니라 검증 가능한 pattern adoption gate로 구현했다. 구현 증거 agent platform/src/agent platform/oss/pattern adoption.py : source repo, pattern, language, architecture, folder, clone/import, hybrid module, adoption decision, validation command 검사. agent platform/src/agent platform/cli.py : check oss </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2365,
-      "updatedAt": "2026-06-06T09:13:09.589Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
     },
     {
       "id": "agent-platform-specs-2026-06-06-oss-pattern-adoption-traceability-ko-md",
@@ -18163,102 +18259,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agentcore-resource-topology-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agentcore-resource-topology/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "구현 계획",
-      "excerpt": "구현 계획 1. AgentCoreCapabilityOption 에 resource와 lifecycle metadata를 추가한다. 2. AgentCore Quick Builder에 선택된 capability 기반 resource topology 섹션을 추가한다. 3. topology header, lifecycle rail, resource grid를 반응형 CSS로 구현한다. 4. 정적 테스트에 resource metadata, DOM marker, desktop/mobile grid 계약을 추",
-      "html": "<h1>구현 계획</h1>\n<p>1. <code>AgentCoreCapabilityOption</code>에 resource와 lifecycle metadata를 추가한다.</p>\n<p>2. AgentCore Quick Builder에 선택된 capability 기반 resource topology 섹션을 추가한다.</p>\n<p>3. topology header, lifecycle rail, resource grid를 반응형 CSS로 구현한다.</p>\n<p>4. 정적 테스트에 resource metadata, DOM marker, desktop/mobile grid 계약을 추가한다.</p>\n<p>5. 요구사항, 검색, 검증, 평가, 요청 추적 기록을 남긴다.</p>\n<p>6. test/check/build와 desktop/mobile Browser smoke를 실행한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 526,
-      "updatedAt": "2026-06-04T23:00:37.476Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agentcore-resource-topology-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agentcore-resource-topology/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "AgentCore Resource Topology 스펙",
-      "excerpt": "AgentCore Resource Topology 스펙 요구사항 REQ WM 049: AgentCore Quick Builder는 선택된 capability 묶음을 AgentCore식 리소스 토폴로지와 생명주기로 표시해야 한다. 사용자 결과 사용자는 capability bundle을 선택한 직후 Runtime, Memory, Gateway, Built in Tools, Identity, Policy, Observability, Evaluations 같은 리소스 배치를 확인한다. 사용자는 Creat",
-      "html": "<h1>AgentCore Resource Topology 스펙</h1>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-WM-049: AgentCore Quick Builder는 선택된 capability 묶음을 AgentCore식 리소스 토폴로지와 생명주기로 표시해야 한다.</li>\n</ul>\n<h2>사용자 결과</h2>\n<ul>\n<li>사용자는 capability bundle을 선택한 직후 Runtime, Memory, Gateway, Built-in Tools, Identity, Policy, Observability, Evaluations 같은 리소스 배치를 확인한다.</li>\n<li>사용자는 Create, Configure, Invoke, Observe, Evaluate 흐름을 한 줄 생명주기로 본다.</li>\n<li>각 리소스 카드는 선택된 capability, local capability ID, lifecycle handoff를 보여준다.</li>\n<li>720px 이하 화면에서는 lifecycle과 resource card가 수평 overflow 없이 접힌다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>실제 AWS AgentCore 리소스 생성</li>\n<li>AWS 계정 권한 부여 또는 connector 인증</li>\n<li>기존 agent proposal 생성 로직의 실행 엔진 교체</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 875,
-      "updatedAt": "2026-06-04T23:00:37.475Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agentcore-multi-capability-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agentcore-multi-capability/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록",
-      "excerpt": "작업 목록 x 웹 검색으로 AgentCore capability 기준 확인 x REQ WM 048 추가 x capability catalog 추가 x Quick Builder bundle selector 추가 x selected capability를 proposal form에 반영 x 정적 테스트 업데이트 x build와 desktop/mobile smoke 실행",
-      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] 웹 검색으로 AgentCore capability 기준 확인</li>\n<li>[x] REQ-WM-048 추가</li>\n<li>[x] capability catalog 추가</li>\n<li>[x] Quick Builder bundle selector 추가</li>\n<li>[x] selected capability를 proposal form에 반영</li>\n<li>[x] 정적 테스트 업데이트</li>\n<li>[x] build와 desktop/mobile smoke 실행</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 306,
-      "updatedAt": "2026-06-04T22:54:32.846Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agentcore-multi-capability-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agentcore-multi-capability/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성",
-      "excerpt": "추적성 | 요구 | 구현 | 검증 | | | | | | REQ WM 048 | MonitorShell.tsx agentCoreCapabilityOptions , agentcore capability bundle | tool studio.test.mjs , desktop/mobile smoke | | proposal 반영 | buildAgentFactoryFormFromAgentCoreBlueprint ..., selectedCapabilityIds | browser form fill asserti",
-      "html": "<h1>추적성</h1>\n<table><thead><tr><th>요구</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-WM-048</td><td><code>MonitorShell.tsx</code> <code>agentCoreCapabilityOptions</code>, <code>agentcore-capability-bundle</code></td><td><code>tool-studio.test.mjs</code>, desktop/mobile smoke</td></tr><tr><td>proposal 반영</td><td><code>buildAgentFactoryFormFromAgentCoreBlueprint(..., selectedCapabilityIds)</code></td><td>browser form fill assertion</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 331,
-      "updatedAt": "2026-06-04T22:54:32.846Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agentcore-multi-capability-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agentcore-multi-capability/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증 기록",
-      "excerpt": "검증 기록 명령 corepack pnpm filter workspace monitor test corepack pnpm filter workspace monitor run check corepack pnpm filter workspace monitor run build:customer Browser smoke Agents 화면에서 에이전트 세부 기능 열기 disclosure를 열었다. data agentcore capability 9개 표시 확인 data agentcore select all 클릭",
-      "html": "<h1>검증 기록</h1>\n<h2>명령</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code></li>\n</ul>\n<h2>Browser smoke</h2>\n<ul>\n<li>Agents 화면에서 <code>에이전트 세부 기능 열기</code> disclosure를 열었다.</li>\n<li><code>[data-agentcore-capability]</code> 9개 표시 확인</li>\n<li><code>[data-agentcore-select-all]</code> 클릭 후 selected capability 9개 확인</li>\n<li><code>선택 능력으로 입력 채우기</code> 클릭 후 form에 <code>동시 capability bundle</code>, <code>browser_verification_lane</code>, <code>sandboxed_code_execution</code>, <code>action_policy_gate</code>, <code>evaluation_quality_gate</code> 반영 확인</li>\n<li>desktop/mobile 수평 overflow 0</li>\n</ul>\n<h2>스크린샷</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-agentcore-bundle-desktop.png</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-agentcore-bundle-mobile.png</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 912,
-      "updatedAt": "2026-06-04T22:54:32.846Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agentcore-multi-capability-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agentcore-multi-capability/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "구현 계획",
-      "excerpt": "구현 계획 1. AgentCoreCapabilityOption catalog를 추가한다. 2. buildAgentFactoryFormFromAgentCoreBlueprint 가 selected capability IDs를 받게 한다. 3. AgentCore Quick Builder에 capability bundle selector를 추가한다. 4. Apply/Preflight/Create proposal action이 selected capability IDs를 전달하게 한다. 5. CSS와 정적",
-      "html": "<h1>구현 계획</h1>\n<p>1. <code>AgentCoreCapabilityOption</code> catalog를 추가한다.</p>\n<p>2. <code>buildAgentFactoryFormFromAgentCoreBlueprint</code>가 selected capability IDs를 받게 한다.</p>\n<p>3. AgentCore Quick Builder에 capability bundle selector를 추가한다.</p>\n<p>4. Apply/Preflight/Create proposal action이 selected capability IDs를 전달하게 한다.</p>\n<p>5. CSS와 정적 테스트 계약을 추가한다.</p>\n<p>6. desktop/mobile browser smoke를 실행한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 434,
-      "updatedAt": "2026-06-04T22:54:32.845Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18280,15 +18280,15 @@
           "count": 12
         },
         {
-          "category": "web-search",
-          "count": 12
-        },
-        {
           "category": "work-summary",
           "count": 12
         },
         {
           "category": "work-timing",
+          "count": 12
+        },
+        {
+          "category": "web-search",
           "count": 11
         },
         {
@@ -18308,7 +18308,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-          "updatedAt": "2026-06-06T14:29:52.990Z",
+          "updatedAt": "2026-06-06T15:00:01.473Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18329,16 +18329,6 @@
           "title": "Evaluation: awp PATH Registration",
           "excerpt": "Evaluation: awp PATH Registration 날짜: 2026 06 06 사용자 요구 대비 요구: 반복적으로 필요한 내용을 뒤로 미루지 말고 처리한다. 결과: awp 설치 후 실제 터미널에서 바로 awp 명령이 잡히도록 ~/.local/bin PATH 등록을 자동화하고 실제 적용했다. 새 zsh 세션에서 command v awp , awp version , awp doctor json 을 검증했다. 품질 평가 cli:install 이 symlink 설치와 PATH 등록을 함께 수행하",
           "updatedAt": "2026-06-06T12:51:43.851Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-cli-adapter-test-fix-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-cli-adapter-test-fix.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "Evaluation: CLI Adapter Test Fix",
-          "excerpt": "Evaluation: CLI Adapter Test Fix 평가 기준 붙여넣은 실패 로그의 authHint: string; assertion 실패가 해소되는가. 런타임 동작을 불필요하게 되돌리지 않고 현재 localized setup guide 구조를 보존하는가. owning project의 테스트와 내부 패키지 명령이 통과하는가. 기존 dirty generated snapshot 변경을 섞어 커밋하지 않는가. 현재 평가 tool studio.test.mjs 의 CLI adapter setup a",
-          "updatedAt": "2026-06-06T10:47:44.708Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18462,16 +18452,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-oss-pattern-adoption-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-oss-pattern-adoption.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: OSS Pattern Adoption Gate",
-          "excerpt": "평가: OSS Pattern Adoption Gate 판정 충족. 사용자의 broad OSS 구조 적용 요청을 직접 code copy가 아니라 검증 가능한 pattern adoption gate로 구현했다. 구현 증거 agent platform/src/agent platform/oss/pattern adoption.py : source repo, pattern, language, architecture, folder, clone/import, hybrid module, adoption decisi",
-          "updatedAt": "2026-06-06T09:13:09.589Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-runtime-setup-check-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-runtime-setup-check.ko.md",
           "category": "evaluation",
@@ -18489,6 +18469,26 @@
           "title": "최종 평가: Rust Runtime Feature Split",
           "excerpt": "최종 평가: Rust Runtime Feature Split 날짜: 2026 06 06 평가 요청한 Rust source 분리와 기능별 추가 기능의 첫 slice를 완료했다. lib.rs 전체 대분해는 회귀 위험이 커서 진행하지 않았고, 대신 기능별 source module tree와 read only runtime feature map command를 추가해 다음 이동 기준을 만들었다. 충족 기능별 Rust folder 구조 추가 기능별 command/risk/follow up report 추가",
           "updatedAt": "2026-06-06T13:30:09.998Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-subagent-live-execution-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-subagent-live-execution-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Subagent Live Execution Input",
+          "excerpt": "{ \"initial instruction\": \"아까 미룬 다음 단계 구현\", \"result summary\": \"Added a Desktop Runtime path that validates a saved subagent tool plan and starts one selected tool as an existing CLI adapter session with task run linkage.\", \"work mode\": \"standard\", \"changed files\": \"platform deskto",
+          "updatedAt": "2026-06-06T15:00:01.473Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-subagent-live-execution-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-subagent-live-execution.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "최종 평가: Subagent Live Execution",
+          "excerpt": "최종 평가: Subagent Live Execution 날짜: 2026 06 06 평가 이전 slice에서 남긴 “실제 autonomous subagent worker execution은 별도 slice” 경계를 닫기 위해, 저장된 subagent tool plan에서 선택한 tool 하나를 검증하고 기존 CLI adapter session으로 시작하는 기능을 구현했다. 충족 start subagent tool execution Tauri command가 추가됐다. plan task run rec",
+          "updatedAt": "2026-06-06T15:00:01.473Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18622,16 +18622,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-runtime-setup-check-ko-md",
-          "path": "_history/plans/2026/2026-06-06-runtime-setup-check.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "Plan Record: Runtime Setup Check",
-          "excerpt": "Plan Record: Runtime Setup Check 작업 모드 standard 기존 실행 설정 기능에 새 검증 동작과 Tauri command를 추가하는 의미 있는 product behavior 변경이다. 작업 분해 1. web first intake로 command lookup/PATH와 Tauri GUI PATH 주의점을 확인한다. 2. 기존 runtime customization 요구사항과 Desktop Runtime health command를 읽는다. 3. terminal setu",
-          "updatedAt": "2026-06-06T11:40:57.203Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-rust-runtime-feature-split-ko-md",
           "path": "_history/plans/2026/2026-06-06-rust-runtime-feature-split.ko.md",
           "category": "plan",
@@ -18639,6 +18629,16 @@
           "title": "Rust Runtime Feature Split 계획",
           "excerpt": "Rust Runtime Feature Split 계획 날짜: 2026 06 06 1. 공식 Rust/Tauri 구조 확인. 2. 현재 Rust source inventory 확인. 3. src tauri/src/features/ 기능별 폴더 생성. 4. 기능별 command/risk map command 추가. 5. Desktop Runtime UI metric 연결. 6. runtime contract, readiness, tests 갱신. 7. Rust/Node/build/package 검증.",
           "updatedAt": "2026-06-06T13:28:08.843Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-plans-2026-2026-06-06-subagent-live-execution-ko-md",
+          "path": "_history/plans/2026/2026-06-06-subagent-live-execution.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "Work Plan: Subagent Live Execution",
+          "excerpt": "Work Plan: Subagent Live Execution 날짜: 2026 06 06 작업 모드 standard 실행 계획 1. 웹 우선 조사와 이전 slice 기록 확인. 2. subagent explorer로 안전한 다음 slice 범위 확인. 3. Rust command를 추가하되 기존 CLI session runner를 재사용. 4. Renderer button/result UI를 추가. 5. Rust/frontend 계약 테스트와 build/check 수행. 6. Browser smo",
+          "updatedAt": "2026-06-06T15:00:01.467Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18679,16 +18679,6 @@
           "title": "Request Trace: awp PATH Registration",
           "excerpt": "Request Trace: awp PATH Registration 날짜: 2026 06 06 요청 반복적으로 필요한 내용을 뒤로 미루지 말고 처리한다. 산출물 PATH 설정 script: platform desktop app/scripts/configure awp path.mjs package scripts: platform desktop app/package.json persistent instructions: docs/instructions/persistent instructions .md i",
           "updatedAt": "2026-06-06T12:51:43.853Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-06-cli-adapter-test-fix-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-cli-adapter-test-fix.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "Request Trace: CLI Adapter Test Fix",
-          "excerpt": "Request Trace: CLI Adapter Test Fix 요청 붙여넣은 테스트 실패 로그를 읽고 실패 원인을 고쳐 달라는 요청. 산출물 구현: platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs 웹 검색 기록: history/web searches/2026/2026 06 06 cli adapter test fix.ko.md 평가: history/evaluations/2026/2026 06 06 cli adap",
-          "updatedAt": "2026-06-06T10:47:44.710Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18762,6 +18752,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-request-traces-2026-2026-06-06-subagent-live-execution-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-subagent-live-execution.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Request Trace: Subagent Live Execution",
+          "excerpt": "Request Trace: Subagent Live Execution 날짜: 2026 06 06 요청 아까 미뤄둔 다음 단계 구현. 연결된 이전 작업 2026 06 06 subagent tool use : subagent tool plan 생성과 task run 저장까지 완료. 결과 저장된 plan에서 선택한 subagent tool 하나를 검증해 CLI session으로 시작하는 기능을 추가했다. 산출물 요구사항: platform desktop app/docs/requirements/2026 0",
+          "updatedAt": "2026-06-06T15:00:01.472Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-06-subagent-tool-use-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-subagent-tool-use.ko.md",
           "category": "request-trace",
@@ -18799,16 +18799,6 @@
           "title": "User Request Summary: awp PATH Registration",
           "excerpt": "User Request Summary: awp PATH Registration 날짜: 2026 06 06 사용자는 반복적으로 필요한 setup 내용을 후속으로 미루지 말라고 지시했다. 이번 맥락에서는 awp lightweight CLI가 설치됐지만 PATH 등록이 남아 있어 실제 터미널 사용에 걸리는 문제를 의미한다고 해석했다.",
           "updatedAt": "2026-06-06T12:49:25.216Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-06-cli-adapter-test-fix-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-cli-adapter-test-fix.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "User Request: CLI Adapter Test Fix",
-          "excerpt": "User Request: CLI Adapter Test Fix 요약 사용자는 붙여넣은 파일에 담긴 실패 로그를 읽고 조치해 달라고 요청했다. 해석한 요구 platform desktop app 의 internal package pipeline 실패를 재현 가능한 테스트 실패로 해석한다. 실패한 tool studio.test.mjs assertion을 현재 소스 계약에 맞게 수정한다. 수정 후 관련 테스트와 owning package pipeline을 검증한다. 소유 프로젝트 platform desk",
-          "updatedAt": "2026-06-06T10:47:44.710Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18882,6 +18872,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-user-requests-2026-2026-06-06-subagent-live-execution-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-subagent-live-execution.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "User Request Summary: Subagent Live Execution",
+          "excerpt": "User Request Summary: Subagent Live Execution 날짜: 2026 06 06 요약 사용자는 이전에 미뤄둔 다음 단계 구현을 요구했다. 문맥상 이전 slice에서 계획만 만들고 멈춘 subagent tool use 기능을 실제 터미널/CLI 실행으로 연결하는 작업이다. 해석 run subagent tool plan 으로 저장된 plan을 사용한다. 자동 multi agent fan out은 아직 위험하므로 단일 선택 tool 실행부터 닫는다. 기존 terminal a",
+          "updatedAt": "2026-06-06T15:00:01.466Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-06-subagent-tool-use-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-subagent-tool-use.ko.md",
           "category": "user-request",
@@ -18919,16 +18919,6 @@
           "title": "Web Search: awp PATH Registration",
           "excerpt": "Web Search: awp PATH Registration 날짜: 2026 06 06 질의 zsh official documentation startup files zshrc PATH Apple Terminal zsh default shell startup file PATH 확인한 출처 Zsh startup files 소개: zsh가 .zprofile , .zshrc 등 시작 파일을 읽는 흐름과 PATH 같은 환경 변수를 시작 파일에 둘 수 있음을 확인했다. https://zsh.sourcefo",
           "updatedAt": "2026-06-06T12:49:25.214Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-cli-adapter-test-fix-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-cli-adapter-test-fix.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "Web Search: CLI Adapter Test Fix",
-          "excerpt": "Web Search: CLI Adapter Test Fix 질의 OpenAI Codex AGENTS.md repository instructions 확인한 주요 출처 OpenAI Codex AGENTS.md documentation: https://github.com/openai/codex/blob/main/docs/agents md.md 계획 영향 검색은 작업 시작 규칙 확인용이었다. 실제 실패 원인은 외부 라이브러리나 최신 API 변화가 아니라 로컬 테스트 계약과 MonitorShell.tsx",
-          "updatedAt": "2026-06-06T10:47:44.708Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18982,16 +18972,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-runtime-setup-check-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-runtime-setup-check.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "Web Search: Runtime Setup Check",
-          "excerpt": "Web Search: Runtime Setup Check 질의 Tauri command invoke check installed CLI PATH official docs Node.js child process execFile command path check official docs macOS shell PATH GUI app command line tools Tauri official docs 확인한 주요 출처 Node.js child process documentation: https://no",
-          "updatedAt": "2026-06-06T11:40:57.203Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-rust-runtime-feature-split-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-rust-runtime-feature-split.ko.md",
           "category": "web-search",
@@ -18999,6 +18979,16 @@
           "title": "Rust Runtime Feature Split 웹 우선 확인",
           "excerpt": "Rust Runtime Feature Split 웹 우선 확인 날짜: 2026 06 06 쿼리 Rust official book modules file hierarchy mod.rs modules Tauri v2 official commands Rust module structure invoke handler Rust official cargo workspaces package layout modules 확인한 소스 | 소스 | 유형 | 사용 | | | | | | https://doc.rust l",
           "updatedAt": "2026-06-06T13:28:08.843Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-subagent-live-execution-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-subagent-live-execution.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: Subagent Live Execution",
+          "excerpt": "Web Search: Subagent Live Execution 날짜: 2026 06 06 Queries Tauri v2 command sidecar process official documentation Command create process stdout stderr timeout OpenAI Agents SDK tools handoffs agents official documentation Claude Code subagents tools official documentation VS Cod",
+          "updatedAt": "2026-06-06T15:00:01.465Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19039,16 +19029,6 @@
           "title": "Work Summary: awp PATH Registration",
           "excerpt": "Work Summary: awp PATH Registration 날짜: 2026 06 06 완료 configure awp path.mjs 추가 cli:install 이 PATH 등록까지 수행하도록 변경 cli:path 추가 .zprofile , .zshrc 에 관리 block 실제 적용 새 zsh 세션에서 awp 확인 지속 지시와 memory bootstrap manifest 반영 test, docs audit, config contracts, desktop check, internal packa",
           "updatedAt": "2026-06-06T12:51:43.852Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-06-cli-adapter-test-fix-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-cli-adapter-test-fix.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "Work Summary: CLI Adapter Test Fix",
-          "excerpt": "Work Summary: CLI Adapter Test Fix 완료 내용 붙여넣은 로그의 실패 지점인 tests/tool studio.test.mjs 의 CLI adapter setup assertion을 수정했다. authHint , firstRunCommand , expectedResult 기대 타입을 string 에서 LocalizedText 로 맞췄다. 소스 구현은 이미 localized setup guide를 사용하고 있어 런타임 코드는 변경하지 않았다. 변경 파일 중심 platform ",
-          "updatedAt": "2026-06-06T10:47:44.709Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19119,6 +19099,16 @@
           "title": "작업 요약: Rust Runtime Feature Split",
           "excerpt": "작업 요약: Rust Runtime Feature Split 날짜: 2026 06 06 Tauri Rust runtime에 기능별 source root src tauri/src/features/ 를 추가하고, app shell, CLI orchestration, native process control, workspace host, provider accounts, diagnostics/data, agent factory, decision inbox로 나눴다. 새 read only command ",
           "updatedAt": "2026-06-06T13:28:08.844Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-subagent-live-execution-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-subagent-live-execution.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "Work Summary: Subagent Live Execution",
+          "excerpt": "Work Summary: Subagent Live Execution 날짜: 2026 06 06 완료 start subagent tool execution Tauri command를 추가했다. 저장된 subagent tool plan task run record에서 tool name을 검증한다. 기존 CLI session lifecycle로 subagent tool execution session을 시작한다. session metadata에 plan/task lane 연결 정보를 남긴다. Deskt",
+          "updatedAt": "2026-06-06T15:00:01.471Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19232,6 +19222,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-timings-2026-2026-06-06-subagent-live-execution-ko-md",
+          "path": "_history/work-timings/2026/2026-06-06-subagent-live-execution.ko.md",
+          "category": "work-timing",
+          "language": "ko",
+          "title": "Work Timing: Subagent Live Execution",
+          "excerpt": "Work Timing: Subagent Live Execution 날짜: 2026 06 06 | Phase | Approx elapsed | Notes | | | : | | | Web first intake and subagent scoping | 15m | Official docs and subagent explorer result used to bound scope | | Rust command implementation | 35m | Command, plan lookup, prompt ren",
+          "updatedAt": "2026-06-06T15:00:01.471Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-subagent-tool-use-ko-md",
           "path": "_history/work-timings/2026/2026-06-06-subagent-tool-use.ko.md",
           "category": "work-timing",
@@ -19270,36 +19270,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2795,
+      "documents": 2803,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1058
+          "count": 1060
         },
         {
           "category": "web-search",
-          "count": 438
+          "count": 439
         },
         {
           "category": "request-trace",
-          "count": 367
+          "count": 368
         },
         {
           "category": "plan",
-          "count": 366
+          "count": 367
         },
         {
           "category": "work-timing",
-          "count": 286
+          "count": 287
         },
         {
           "category": "user-request",
-          "count": 152
+          "count": 153
         },
         {
           "category": "work-summary",
-          "count": 119
+          "count": 120
         },
         {
           "category": "daily-history",
@@ -19310,7 +19310,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6748509,
+      "totalSourceBytes": 6760636,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19335,11 +19335,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 38,
+      "evidenceEvents": 37,
       "decisionEvents": 0,
       "openSignals": 21,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T14:38:03.668Z",
+      "latestEventAt": "2026-06-06T15:00:01.473Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19359,13 +19359,13 @@
         "count": 12
       },
       {
-        "id": "evidence",
-        "label": "evidence",
+        "id": "intake",
+        "label": "intake",
         "count": 12
       },
       {
-        "id": "intake",
-        "label": "intake",
+        "id": "monitoring",
+        "label": "monitoring",
         "count": 12
       },
       {
@@ -19374,8 +19374,8 @@
         "count": 12
       },
       {
-        "id": "monitoring",
-        "label": "monitoring",
+        "id": "evidence",
+        "label": "evidence",
         "count": 11
       },
       {
@@ -19411,6 +19411,11 @@
         "count": 12
       },
       {
+        "id": "timing",
+        "label": "timing",
+        "count": 12
+      },
+      {
         "id": "trace",
         "label": "trace",
         "count": 12
@@ -19418,11 +19423,6 @@
       {
         "id": "web-search",
         "label": "web search",
-        "count": 12
-      },
-      {
-        "id": "timing",
-        "label": "timing",
         "count": 11
       },
       {
@@ -19449,6 +19449,141 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-subagent-live-execution-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 06 Subagent Live Execution Input",
+        "detail": "{ \"initial instruction\": \"아까 미룬 다음 단계 구현\", \"result summary\": \"Added a Desktop Runtime path that validates a saved subagent tool plan and starts one selected tool as an existing CLI adapter session with task run linkage.\", \"work mode\": \"standard\", \"changed files\": \"platform deskto",
+        "path": "_history/evaluations/2026/2026-06-06-subagent-live-execution-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T15:00:01.473Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-subagent-live-execution-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "최종 평가: Subagent Live Execution",
+        "detail": "최종 평가: Subagent Live Execution 날짜: 2026 06 06 평가 이전 slice에서 남긴 “실제 autonomous subagent worker execution은 별도 slice” 경계를 닫기 위해, 저장된 subagent tool plan에서 선택한 tool 하나를 검증하고 기존 CLI adapter session으로 시작하는 기능을 구현했다. 충족 start subagent tool execution Tauri command가 추가됐다. plan task run rec",
+        "path": "_history/evaluations/2026/2026-06-06-subagent-live-execution.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T15:00:01.473Z"
+      },
+      {
+        "id": "history-history-2026-2026-06-06-md",
+        "sourceType": "history",
+        "signalType": "history",
+        "lane": "history",
+        "severity": "info",
+        "status": "daily-history",
+        "title": "2026 06 06",
+        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
+        "path": "_history/2026/2026-06-06.md",
+        "category": "daily-history",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T15:00:01.473Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-subagent-live-execution-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "Request Trace: Subagent Live Execution",
+        "detail": "Request Trace: Subagent Live Execution 날짜: 2026 06 06 요청 아까 미뤄둔 다음 단계 구현. 연결된 이전 작업 2026 06 06 subagent tool use : subagent tool plan 생성과 task run 저장까지 완료. 결과 저장된 plan에서 선택한 subagent tool 하나를 검증해 CLI session으로 시작하는 기능을 추가했다. 산출물 요구사항: platform desktop app/docs/requirements/2026 0",
+        "path": "_history/request-traces/2026/2026-06-06-subagent-live-execution.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T15:00:01.472Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-subagent-live-execution-ko-md",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "Work Timing: Subagent Live Execution",
+        "detail": "Work Timing: Subagent Live Execution 날짜: 2026 06 06 | Phase | Approx elapsed | Notes | | | : | | | Web first intake and subagent scoping | 15m | Official docs and subagent explorer result used to bound scope | | Rust command implementation | 35m | Command, plan lookup, prompt ren",
+        "path": "_history/work-timings/2026/2026-06-06-subagent-live-execution.ko.md",
+        "category": "work-timing",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T15:00:01.471Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-subagent-live-execution-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "Work Summary: Subagent Live Execution",
+        "detail": "Work Summary: Subagent Live Execution 날짜: 2026 06 06 완료 start subagent tool execution Tauri command를 추가했다. 저장된 subagent tool plan task run record에서 tool name을 검증한다. 기존 CLI session lifecycle로 subagent tool execution session을 시작한다. session metadata에 plan/task lane 연결 정보를 남긴다. Deskt",
+        "path": "_history/work-summaries/2026/2026-06-06-subagent-live-execution.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T15:00:01.471Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-subagent-live-execution-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "Work Plan: Subagent Live Execution",
+        "detail": "Work Plan: Subagent Live Execution 날짜: 2026 06 06 작업 모드 standard 실행 계획 1. 웹 우선 조사와 이전 slice 기록 확인. 2. subagent explorer로 안전한 다음 slice 범위 확인. 3. Rust command를 추가하되 기존 CLI session runner를 재사용. 4. Renderer button/result UI를 추가. 5. Rust/frontend 계약 테스트와 build/check 수행. 6. Browser smo",
+        "path": "_history/plans/2026/2026-06-06-subagent-live-execution.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T15:00:01.467Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-subagent-live-execution-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "User Request Summary: Subagent Live Execution",
+        "detail": "User Request Summary: Subagent Live Execution 날짜: 2026 06 06 요약 사용자는 이전에 미뤄둔 다음 단계 구현을 요구했다. 문맥상 이전 slice에서 계획만 만들고 멈춘 subagent tool use 기능을 실제 터미널/CLI 실행으로 연결하는 작업이다. 해석 run subagent tool plan 으로 저장된 plan을 사용한다. 자동 multi agent fan out은 아직 위험하므로 단일 선택 tool 실행부터 닫는다. 기존 terminal a",
+        "path": "_history/user-requests/2026/2026-06-06-subagent-live-execution.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T15:00:01.466Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-subagent-live-execution-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Subagent Live Execution",
+        "detail": "Web Search: Subagent Live Execution 날짜: 2026 06 06 Queries Tauri v2 command sidecar process official documentation Command create process stdout stderr timeout OpenAI Agents SDK tools handoffs agents official documentation Claude Code subagents tools official documentation VS Cod",
+        "path": "_history/web-searches/2026/2026-06-06-subagent-live-execution.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T15:00:01.465Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-06-subagent-tool-use-ko-md",
         "sourceType": "history",
@@ -19523,21 +19658,6 @@
         "language": "unknown",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T14:37:32.711Z"
-      },
-      {
-        "id": "history-history-2026-2026-06-06-md",
-        "sourceType": "history",
-        "signalType": "history",
-        "lane": "history",
-        "severity": "info",
-        "status": "daily-history",
-        "title": "2026 06 06",
-        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-        "path": "_history/2026/2026-06-06.md",
-        "category": "daily-history",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:29:52.990Z"
       },
       {
         "id": "history-history-user-requests-2026-2026-06-06-subagent-tool-use-ko-md",
@@ -20768,126 +20888,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T11:51:48.742Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-runtime-setup-check-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "Web Search: Runtime Setup Check",
-        "detail": "Web Search: Runtime Setup Check 질의 Tauri command invoke check installed CLI PATH official docs Node.js child process execFile command path check official docs macOS shell PATH GUI app command line tools Tauri official docs 확인한 주요 출처 Node.js child process documentation: https://no",
-        "path": "_history/web-searches/2026/2026-06-06-runtime-setup-check.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T11:40:57.203Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-runtime-setup-check-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "Plan Record: Runtime Setup Check",
-        "detail": "Plan Record: Runtime Setup Check 작업 모드 standard 기존 실행 설정 기능에 새 검증 동작과 Tauri command를 추가하는 의미 있는 product behavior 변경이다. 작업 분해 1. web first intake로 command lookup/PATH와 Tauri GUI PATH 주의점을 확인한다. 2. 기존 runtime customization 요구사항과 Desktop Runtime health command를 읽는다. 3. terminal setu",
-        "path": "_history/plans/2026/2026-06-06-runtime-setup-check.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T11:40:57.203Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-cli-adapter-test-fix-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "needs_attention",
-        "title": "Request Trace: CLI Adapter Test Fix",
-        "detail": "Request Trace: CLI Adapter Test Fix 요청 붙여넣은 테스트 실패 로그를 읽고 실패 원인을 고쳐 달라는 요청. 산출물 구현: platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs 웹 검색 기록: history/web searches/2026/2026 06 06 cli adapter test fix.ko.md 평가: history/evaluations/2026/2026 06 06 cli adap",
-        "path": "_history/request-traces/2026/2026-06-06-cli-adapter-test-fix.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T10:47:44.710Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-cli-adapter-test-fix-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "needs_attention",
-        "title": "User Request: CLI Adapter Test Fix",
-        "detail": "User Request: CLI Adapter Test Fix 요약 사용자는 붙여넣은 파일에 담긴 실패 로그를 읽고 조치해 달라고 요청했다. 해석한 요구 platform desktop app 의 internal package pipeline 실패를 재현 가능한 테스트 실패로 해석한다. 실패한 tool studio.test.mjs assertion을 현재 소스 계약에 맞게 수정한다. 수정 후 관련 테스트와 owning package pipeline을 검증한다. 소유 프로젝트 platform desk",
-        "path": "_history/user-requests/2026/2026-06-06-cli-adapter-test-fix.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T10:47:44.710Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-cli-adapter-test-fix-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "Work Summary: CLI Adapter Test Fix",
-        "detail": "Work Summary: CLI Adapter Test Fix 완료 내용 붙여넣은 로그의 실패 지점인 tests/tool studio.test.mjs 의 CLI adapter setup assertion을 수정했다. authHint , firstRunCommand , expectedResult 기대 타입을 string 에서 LocalizedText 로 맞췄다. 소스 구현은 이미 localized setup guide를 사용하고 있어 런타임 코드는 변경하지 않았다. 변경 파일 중심 platform ",
-        "path": "_history/work-summaries/2026/2026-06-06-cli-adapter-test-fix.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T10:47:44.709Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-cli-adapter-test-fix-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "Evaluation: CLI Adapter Test Fix",
-        "detail": "Evaluation: CLI Adapter Test Fix 평가 기준 붙여넣은 실패 로그의 authHint: string; assertion 실패가 해소되는가. 런타임 동작을 불필요하게 되돌리지 않고 현재 localized setup guide 구조를 보존하는가. owning project의 테스트와 내부 패키지 명령이 통과하는가. 기존 dirty generated snapshot 변경을 섞어 커밋하지 않는가. 현재 평가 tool studio.test.mjs 의 CLI adapter setup a",
-        "path": "_history/evaluations/2026/2026-06-06-cli-adapter-test-fix.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T10:47:44.708Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-cli-adapter-test-fix-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "needs_attention",
-        "title": "Web Search: CLI Adapter Test Fix",
-        "detail": "Web Search: CLI Adapter Test Fix 질의 OpenAI Codex AGENTS.md repository instructions 확인한 주요 출처 OpenAI Codex AGENTS.md documentation: https://github.com/openai/codex/blob/main/docs/agents md.md 계획 영향 검색은 작업 시작 규칙 확인용이었다. 실제 실패 원인은 외부 라이브러리나 최신 API 변화가 아니라 로컬 테스트 계약과 MonitorShell.tsx",
-        "path": "_history/web-searches/2026/2026-06-06-cli-adapter-test-fix.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T10:47:44.708Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-oss-pattern-adoption-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "평가: OSS Pattern Adoption Gate",
-        "detail": "평가: OSS Pattern Adoption Gate 판정 충족. 사용자의 broad OSS 구조 적용 요청을 직접 code copy가 아니라 검증 가능한 pattern adoption gate로 구현했다. 구현 증거 agent platform/src/agent platform/oss/pattern adoption.py : source repo, pattern, language, architecture, folder, clone/import, hybrid module, adoption decisi",
-        "path": "_history/evaluations/2026/2026-06-06-oss-pattern-adoption.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T09:13:09.589Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23431,11 +23431,11 @@
       "project": "platform-desktop-app",
       "language": "rust",
       "extension": "rs",
-      "sizeBytes": 1270,
-      "lineCount": 33,
-      "updatedAt": "2026-06-06T14:24:46.126Z",
+      "sizeBytes": 1498,
+      "lineCount": 38,
+      "updatedAt": "2026-06-06T14:52:09.184Z",
       "truncated": true,
-      "preview": "use super::{command, NativeRuntimeFeatureGroupReport};\n\npub(super) fn group() -> NativeRuntimeFeatureGroupReport {\n    NativeRuntimeFeatureGroupReport {\n        group_id: \"agent-factory\",\n        label: \"Agent Factory\",\n        source_module: \"src-tauri/src/features/agent_factory.rs\",\n        role:\n            \"Owns proposal records for new agent capabilities and learning improvement decisions.\",\n        commands: vec![\n            command(\n                \"create_agent_factory_proposal\",\n                \"Create agent factory proposal\",\n                \"Writes proposal record under runtime data\",\n            ),\n            command(\n                \"record_learning_improvement_decision\",\n                \"Record learning improvement decision\",\n                \"Writes learning feedback record under runtime data\",\n            ),\n            command(\n                \"run_subagent_tool_plan\",\n                \"Run manager-as-tools subagent plan\",\n                \"Bounded agent-platform planner execution with task-run persistence\",\n            ),\n        ],\n        follow_up: vec![\n            \"Move proposal normalization into features/agent_factory/.\",\n            \"Keep generated proposal",
+      "preview": "use super::{command, NativeRuntimeFeatureGroupReport};\n\npub(super) fn group() -> NativeRuntimeFeatureGroupReport {\n    NativeRuntimeFeatureGroupReport {\n        group_id: \"agent-factory\",\n        label: \"Agent Factory\",\n        source_module: \"src-tauri/src/features/agent_factory.rs\",\n        role:\n            \"Owns proposal records for new agent capabilities and learning improvement decisions.\",\n        commands: vec![\n            command(\n                \"create_agent_factory_proposal\",\n                \"Create agent factory proposal\",\n                \"Writes proposal record under runtime data\",\n            ),\n            command(\n                \"record_learning_improvement_decision\",\n                \"Record learning improvement decision\",\n                \"Writes learning feedback record under runtime data\",\n            ),\n            command(\n                \"run_subagent_tool_plan\",\n                \"Run manager-as-tools subagent plan\",\n                \"Bounded agent-platform planner execution with task-run persistence\",\n            ),\n            command(\n                \"start_subagent_tool_execution\",\n                \"Start one subagent tool lane\",\n                \"Validates ",
       "previewBytes": 1200
     },
     {
@@ -24139,12 +24139,12 @@
       {
         "category": "web-search",
         "root": "_history/web-searches",
-        "documentsCount": 12
+        "documentsCount": 11
       },
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 11
+        "documentsCount": 12
       },
       {
         "category": "plan",
@@ -24248,7 +24248,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 81,
+        "documentCount": 82,
         "sourceFileCount": 14
       },
       {
@@ -24381,7 +24381,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-src-tauri-src-lib-rs",
         "label": "Large source surface",
-        "signal": "12,574 lines in platform-desktop-app/src-tauri/src/lib.rs",
+        "signal": "12,740 lines in platform-desktop-app/src-tauri/src/lib.rs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits.",
         "priority": "high",
@@ -24429,8 +24429,8 @@
         "path": "platform-desktop-app/src-tauri/src/lib.rs",
         "project": "platform-desktop-app",
         "language": "rust",
-        "lineCount": 12574,
-        "sizeBytes": 423174,
+        "lineCount": 12740,
+        "sizeBytes": 430122,
         "recommendation": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits."
       },
       {
@@ -28089,13 +28089,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 4049,
+      "sourceDocuments": 4063,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T14:38:03.668Z"
+      "latestInsightAt": "2026-06-06T15:00:01.473Z"
     },
     "inferenceStages": [
       {
@@ -28163,11 +28163,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 491,
+        "signalCount": 494,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 156
+            "count": 157
           },
           {
             "category": "project-spec",
@@ -28175,7 +28175,7 @@
           },
           {
             "category": "request-trace",
-            "count": 73
+            "count": 74
           },
           {
             "category": "user-request",
@@ -28183,7 +28183,7 @@
           },
           {
             "category": "work-summary",
-            "count": 36
+            "count": 37
           },
           {
             "category": "plan",
@@ -28222,7 +28222,7 @@
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장"
         ],
-        "latestEvidenceAt": "2026-06-06T14:29:52.990Z"
+        "latestEvidenceAt": "2026-06-06T15:00:01.473Z"
       },
       {
         "id": "web-research-to-spec",
@@ -28236,7 +28236,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1818,
+        "signalCount": 1819,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -28248,7 +28248,7 @@
           },
           {
             "category": "web-search",
-            "count": 439
+            "count": 440
           },
           {
             "category": "plan",
@@ -28287,7 +28287,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T14:38:03.668Z"
+        "latestEvidenceAt": "2026-06-06T15:00:01.465Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28301,15 +28301,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1037,
+        "signalCount": 1043,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 504
+            "count": 506
           },
           {
             "category": "plan",
-            "count": 303
+            "count": 304
           },
           {
             "category": "request-trace",
@@ -28317,7 +28317,7 @@
           },
           {
             "category": "project-spec",
-            "count": 79
+            "count": 80
           },
           {
             "category": "work-summary",
@@ -28325,7 +28325,7 @@
           },
           {
             "category": "user-request",
-            "count": 13
+            "count": 14
           },
           {
             "category": "web-search",
@@ -28341,26 +28341,26 @@
           },
           {
             "category": "project-doc",
-            "count": 1
+            "count": 2
           }
         ],
         "evidencePaths": [
           "_history/plans/2026/2026-06-02-large-scope-decomposition.ko.md",
           "_history/plans/2026/2026-06-06-eval-cockpit-large-scope-decomposition.ko.md",
+          "_history/plans/2026/2026-06-06-subagent-live-execution.ko.md",
           "_history/request-traces/2026/2026-06-06-no-large-scope-postponement.ko.md",
           "_history/work-summaries/2026/2026-06-06-no-large-scope-postponement.ko.md",
-          "_history/plans/2026/2026-06-03-user-intent-feature-map.ko.md",
-          "_history/plans/2026/2026-06-03-question-deferral.ko.md"
+          "_history/plans/2026/2026-06-03-user-intent-feature-map.ko.md"
         ],
         "evidenceTitles": [
           "계획 기록: Large Scope Decomposition",
           "계획 기록: AI EVAL cockpit large scope decomposition",
+          "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기",
-          "작업 계획 기록: 사용자 의도 기반 기능 지도",
-          "계획: 질문 보류 기능"
+          "작업 계획 기록: 사용자 의도 기반 기능 지도"
         ],
-        "latestEvidenceAt": "2026-06-06T14:38:03.668Z"
+        "latestEvidenceAt": "2026-06-06T15:00:01.473Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28374,19 +28374,19 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 781,
+        "signalCount": 787,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 316
+            "count": 320
           },
           {
             "category": "evaluation",
-            "count": 254
+            "count": 255
           },
           {
             "category": "work-summary",
-            "count": 46
+            "count": 47
           },
           {
             "category": "web-search",
@@ -28433,7 +28433,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "Requirement: Native Pipe Runtime Tools"
         ],
-        "latestEvidenceAt": "2026-06-06T14:38:03.668Z"
+        "latestEvidenceAt": "2026-06-06T15:00:01.473Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28447,15 +28447,15 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1594,
+        "signalCount": 1596,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 685
+            "count": 686
           },
           {
             "category": "evaluation",
-            "count": 539
+            "count": 540
           },
           {
             "category": "user-request",
@@ -28506,7 +28506,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T14:38:03.668Z"
+        "latestEvidenceAt": "2026-06-06T15:00:01.473Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28582,14 +28582,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 4049,
+      "sourceDocuments": 4063,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T14:38:03.668Z"
+      "latestInsightAt": "2026-06-06T15:00:01.473Z"
     },
     "operatingModel": [
       {
@@ -28647,25 +28647,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3346,
+        "signalCount": 3356,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1818
+            "signalCount": 1819
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1037
+            "signalCount": 1043
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 491
+            "signalCount": 494
           }
         ],
         "missingPatternIds": [],
@@ -28678,8 +28678,8 @@
           "_history/plans/2026/2026-05-31-work-mode-routing.ko.md",
           "_history/plans/2026/2026-06-02-large-scope-decomposition.ko.md",
           "_history/plans/2026/2026-06-06-eval-cockpit-large-scope-decomposition.ko.md",
-          "_history/request-traces/2026/2026-06-06-no-large-scope-postponement.ko.md",
-          "_history/work-summaries/2026/2026-06-06-no-large-scope-postponement.ko.md"
+          "_history/plans/2026/2026-06-06-subagent-live-execution.ko.md",
+          "_history/request-traces/2026/2026-06-06-no-large-scope-postponement.ko.md"
         ],
         "evidenceTitles": [
           "Evaluation: Terminal and Provider Setup Usability",
@@ -28690,10 +28690,10 @@
           "2026 05 31 작업 모드 라우팅 계획 기록",
           "계획 기록: Large Scope Decomposition",
           "계획 기록: AI EVAL cockpit large scope decomposition",
-          "요청 결과 추적: 큰 범위 작업 미루지 않기",
-          "작업 요약: 큰 범위 작업 미루지 않기"
+          "Work Plan: Subagent Live Execution",
+          "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T14:38:03.668Z",
+        "latestEvidenceAt": "2026-06-06T15:00:01.473Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28722,13 +28722,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 900,
+        "signalCount": 906,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 781
+            "signalCount": 787
           },
           {
             "id": "release-blocker-gate",
@@ -28762,7 +28762,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T14:38:03.668Z",
+        "latestEvidenceAt": "2026-06-06T15:00:01.473Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28791,19 +28791,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2631,
+        "signalCount": 2639,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1594
+            "signalCount": 1596
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1037
+            "signalCount": 1043
           }
         ],
         "missingPatternIds": [],
@@ -28816,8 +28816,8 @@
           "_history/user-requests/2026/2026-06-06-agent-cli-cockpit.ko.md",
           "_history/plans/2026/2026-06-02-large-scope-decomposition.ko.md",
           "_history/plans/2026/2026-06-06-eval-cockpit-large-scope-decomposition.ko.md",
-          "_history/request-traces/2026/2026-06-06-no-large-scope-postponement.ko.md",
-          "_history/work-summaries/2026/2026-06-06-no-large-scope-postponement.ko.md"
+          "_history/plans/2026/2026-06-06-subagent-live-execution.ko.md",
+          "_history/request-traces/2026/2026-06-06-no-large-scope-postponement.ko.md"
         ],
         "evidenceTitles": [
           "사용자 요청 요약",
@@ -28828,10 +28828,10 @@
           "사용자 요청 요약: Agent CLI Cockpit",
           "계획 기록: Large Scope Decomposition",
           "계획 기록: AI EVAL cockpit large scope decomposition",
-          "요청 결과 추적: 큰 범위 작업 미루지 않기",
-          "작업 요약: 큰 범위 작업 미루지 않기"
+          "Work Plan: Subagent Live Execution",
+          "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T14:38:03.668Z",
+        "latestEvidenceAt": "2026-06-06T15:00:01.473Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28860,13 +28860,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 610,
+        "signalCount": 613,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 491
+            "signalCount": 494
           },
           {
             "id": "release-blocker-gate",
@@ -28900,7 +28900,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T14:29:52.990Z",
+        "latestEvidenceAt": "2026-06-06T15:00:01.473Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28929,29 +28929,29 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2855,
+        "signalCount": 2862,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1037
+            "signalCount": 1043
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1818
+            "signalCount": 1819
           }
         ],
         "missingPatternIds": [],
         "evidencePaths": [
           "_history/plans/2026/2026-06-02-large-scope-decomposition.ko.md",
           "_history/plans/2026/2026-06-06-eval-cockpit-large-scope-decomposition.ko.md",
+          "_history/plans/2026/2026-06-06-subagent-live-execution.ko.md",
           "_history/request-traces/2026/2026-06-06-no-large-scope-postponement.ko.md",
           "_history/work-summaries/2026/2026-06-06-no-large-scope-postponement.ko.md",
           "_history/plans/2026/2026-06-03-user-intent-feature-map.ko.md",
-          "_history/plans/2026/2026-06-03-question-deferral.ko.md",
           "_history/evaluations/2026/2026-06-06-terminal-provider-setup-usability.ko.md",
           "_history/plans/2026/2026-06-02-agent-collaboration-board.ko.md",
           "_history/plans/2026/2026-06-02-source-code-viewer.ko.md",
@@ -28960,16 +28960,16 @@
         "evidenceTitles": [
           "계획 기록: Large Scope Decomposition",
           "계획 기록: AI EVAL cockpit large scope decomposition",
+          "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기",
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
-          "계획: 질문 보류 기능",
           "Evaluation: Terminal and Provider Setup Usability",
           "계획: Agent Collaboration Board",
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T14:38:03.668Z",
+        "latestEvidenceAt": "2026-06-06T15:00:01.473Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28998,7 +28998,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1937,
+        "signalCount": 1938,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -29010,7 +29010,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1818
+            "signalCount": 1819
           }
         ],
         "missingPatternIds": [],
@@ -29038,7 +29038,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T14:38:03.668Z",
+        "latestEvidenceAt": "2026-06-06T15:00:01.465Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",
@@ -29197,10 +29197,10 @@
         "evidencePaths": [
           "_history/plans/2026/2026-06-02-large-scope-decomposition.ko.md",
           "_history/plans/2026/2026-06-06-eval-cockpit-large-scope-decomposition.ko.md",
+          "_history/plans/2026/2026-06-06-subagent-live-execution.ko.md",
           "_history/request-traces/2026/2026-06-06-no-large-scope-postponement.ko.md",
           "_history/work-summaries/2026/2026-06-06-no-large-scope-postponement.ko.md",
-          "_history/plans/2026/2026-06-03-user-intent-feature-map.ko.md",
-          "_history/plans/2026/2026-06-03-question-deferral.ko.md"
+          "_history/plans/2026/2026-06-03-user-intent-feature-map.ko.md"
         ]
       },
       {

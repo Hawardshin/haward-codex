@@ -1,0 +1,25 @@
+{
+  "task": "Subagent Live Execution",
+  "selected_work_mode": "standard",
+  "selected_view_mode": "superadmin_developer",
+  "selected_install_mode": "developer",
+  "reasons": [
+    "The task changes desktop runtime source, Tauri commands, CLI session lifecycle, and UI.",
+    "The task touches runtime process orchestration, so resource lifecycle records are required.",
+    "No new dependency or global installation is needed."
+  ],
+  "required_records": [
+    "web_search",
+    "requirements",
+    "spec",
+    "plan",
+    "tasks",
+    "validation",
+    "traceability",
+    "resource_check",
+    "omission_check",
+    "evaluation",
+    "request_trace",
+    "work_summary"
+  ]
+}
