@@ -16,9 +16,9 @@ import {
 } from "lucide-react";
 
 import type { WorkspaceSnapshot } from "@/lib/snapshot";
+import { evalScenarios } from "@/components/features/evaluationReportCatalog";
 import {
   buildEvaluationReportModel,
-  evalScenarios,
   formatEvalPercent
 } from "@/components/features/evaluationReportModel";
 import type { EvalRuntimeTelemetrySignal } from "@/components/features/evaluationReportModel";

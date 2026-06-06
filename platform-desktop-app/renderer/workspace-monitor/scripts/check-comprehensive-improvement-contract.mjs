@@ -9,6 +9,10 @@ const evaluationReportModel = fs.readFileSync(
   path.join(projectRoot, "components", "features", "evaluationReportModel.ts"),
   "utf8"
 );
+const evaluationReportCatalog = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "evaluationReportCatalog.ts"),
+  "utf8"
+);
 const runtimeTelemetryModel = fs.readFileSync(
   path.join(projectRoot, "components", "features", "evaluationRuntimeTelemetry.ts"),
   "utf8"
@@ -40,6 +44,7 @@ assertIncludes(evaluationPanel, "Comprehensive improvement panel", [
   "Composite Improvement Cockpit",
   "EvalRuntimeTelemetrySignal",
   "buildEvaluationReportModel",
+  "evaluationReportCatalog",
   "formatEvalPercent",
   "comprehensiveImprovementDimensions",
   "comprehensiveImprovementScore",
@@ -50,7 +55,7 @@ assertIncludes(evaluationPanel, "Comprehensive improvement panel", [
 assertIncludes(evaluationReportModel, "Evaluation report score model", [
   "export function buildEvaluationReportModel",
   "export function formatEvalPercent",
-  "export const evalScenarios",
+  "evaluationReportCatalog",
   "comprehensiveImprovementDimensions",
   "comprehensiveImprovementScore",
   "buildRuntimeTelemetryModel",
@@ -58,11 +63,24 @@ assertIncludes(evaluationReportModel, "Evaluation report score model", [
   "runtimeTelemetryAvailable",
   "priorityDimensions",
   "riskLaneCount",
+  "mergeEvalRepos",
+  "toolSignals",
+  ...dimensionIds
+]);
+
+assertIncludes(evaluationReportCatalog, "Evaluation report catalog", [
+  "export const evalScenarios",
+  "export const toolSignals",
+  "export const fallbackEvalRepos",
+  "export function mergeEvalRepos",
+  "Token and Cost Tracking",
   "OpenAI Evals",
   "Inspect AI",
   "promptfoo",
   "DeepEval",
-  ...dimensionIds
+  "Arize Phoenix",
+  "Opik",
+  "Langfuse"
 ]);
 
 assertIncludes(runtimeTelemetryModel, "Runtime telemetry score model", [
@@ -96,7 +114,7 @@ console.log(
     {
       status: "comprehensive_improvement_contract_ok",
       checkedDimensions: dimensionIds.length,
-      checkedSurfaces: 4
+      checkedSurfaces: 5
     },
     null,
     2

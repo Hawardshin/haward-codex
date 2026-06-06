@@ -1,0 +1,49 @@
+{
+  "task_id": "2026-06-06-eval-report-catalog-structure",
+  "title": "EVAL report catalog structure",
+  "date": "2026-06-06",
+  "project": "platform-desktop-app",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked official React and TypeScript references."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Extracted static EVAL catalog from evaluationReportModel.ts."
+    },
+    {
+      "phase_id": "targeted_verification",
+      "label": "Targeted verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Comprehensive contract, workspace-monitor tests, and desktop tests passed."
+    },
+    {
+      "phase_id": "full_verification",
+      "label": "Full verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "collect, checks, renderer build, package:internal, and Browser smoke passed."
+    },
+    {
+      "phase_id": "closeout",
+      "label": "Close-out",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Final records updated; commit and push remain as VCS actions."
+    }
+  ],
+  "slow_phase_candidates": [
+    "Tauri internal package build"
+  ],
+  "bottleneck_notes": "Package remains the expected slow phase."
+}

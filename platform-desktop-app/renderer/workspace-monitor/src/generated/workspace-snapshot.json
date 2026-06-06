@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T01:00:36.425Z",
+  "generatedAt": "2026-06-06T01:13:41.047Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -17,7 +17,7 @@
     "webSearches": 15,
     "timingRecords": 14,
     "historyDays": 1,
-    "adminHistoryDocuments": 2560,
+    "adminHistoryDocuments": 2566,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7603,6 +7603,198 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-06-eval-report-catalog-structure-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-eval-report-catalog-structure.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "2026 06 06 EVAL report catalog structure 평가",
+      "excerpt": "2026 06 06 EVAL report catalog structure 평가 평가 대상 요청: 소스코드 개선. 구현 slice: EVAL report static catalog를 score model에서 분리. 완료 기준 평가 유지보수성: scenario/tool/repo catalog 변경이 score formula diff와 섞이지 않는다. 검증성: panel/model/catalog/runtime model boundary를 tests/contracts가 확인한다. 동작 보존: EVAL c",
+      "html": "<p>2026 06 06 EVAL report catalog structure 평가 평가 대상 요청: 소스코드 개선. 구현 slice: EVAL report static catalog를 score model에서 분리. 완료 기준 평가 유지보수성: scenario/tool/repo catalog 변경이 score formula diff와 섞이지 않는다. 검증성: panel/model/catalog/runtime model boundary를 tests/contracts가 확인한다. 동작 보존: EVAL cockpit data attributes와 사용자 표시 label은 유지했다. resource lifecycle: 새 runtime resour</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1590,
+      "updatedAt": "2026-06-06T01:13:08.238Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-eval-report-catalog-structure-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-eval-report-catalog-structure.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "2026 06 06 request to outcome trace",
+      "excerpt": "2026 06 06 request to outcome trace 요청 소스코드 개선. 결정 가장 직접적인 다음 구조 병목으로 EVAL report model 안의 static catalog 혼재를 선택했다. 전체 repository 일괄 refactor 대신, 검증 가능한 source boundary 개선으로 진행했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationReportCatalog.ts p",
+      "html": "<p>2026 06 06 request to outcome trace 요청 소스코드 개선. 결정 가장 직접적인 다음 구조 병목으로 EVAL report model 안의 static catalog 혼재를 선택했다. 전체 repository 일괄 refactor 대신, 검증 가능한 source boundary 개선으로 진행했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationReportCatalog.ts platform desktop app/renderer/workspace monitor/components/features/evaluationRep</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1018,
+      "updatedAt": "2026-06-06T01:13:08.238Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-eval-report-catalog-structure-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-eval-report-catalog-structure.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "2026 06 06 EVAL report catalog structure 작업 요약",
+      "excerpt": "2026 06 06 EVAL report catalog structure 작업 요약 구현 evaluationReportCatalog.ts 를 추가해 EVAL scenario, tool signal, fallback eval repo, repo merge function을 분리했다. evaluationReportModel.ts 는 catalog를 import해 score model을 계산하도록 변경했다. EvaluationReportPanel.tsx 는 scenario catalog와 report ",
+      "html": "<p>2026 06 06 EVAL report catalog structure 작업 요약 구현 evaluationReportCatalog.ts 를 추가해 EVAL scenario, tool signal, fallback eval repo, repo merge function을 분리했다. evaluationReportModel.ts 는 catalog를 import해 score model을 계산하도록 변경했다. EvaluationReportPanel.tsx 는 scenario catalog와 report model을 각각 import한다. comprehensive improvement contract, workspace monitor test, </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 984,
+      "updatedAt": "2026-06-06T01:13:08.237Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-eval-report-catalog-structure-json",
+      "path": "_history/work-timings/2026/2026-06-06-eval-report-catalog-structure.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Eval Report Catalog Structure",
+      "excerpt": "{ \"task id\": \"2026 06 06 eval report catalog structure\", \"title\": \"EVAL report catalog structure\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first i",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 eval report catalog structure&quot;, &quot;title&quot;: &quot;EVAL report catalog structure&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;notes&quot;: &quot;Checked </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1544,
+      "updatedAt": "2026-06-06T01:13:08.237Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-eval-report-catalog-structure-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-eval-report-catalog-structure/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업: EVAL report catalog structure",
+      "excerpt": "작업: EVAL report catalog structure x Web first 조사 수행 x memory bootstrap 확인 x large scope slice 선정 x evaluationReportCatalog.ts 추가 x evaluationReportModel.ts catalog import 구조로 변경 x EvaluationReportPanel.tsx scenario import 변경 x contract/tests 업데이트 x targeted contract/test 실행 x col",
+      "html": "<h1>작업: EVAL report catalog structure</h1>\n<ul>\n<li>[x] Web-first 조사 수행</li>\n<li>[x] memory bootstrap 확인</li>\n<li>[x] large-scope slice 선정</li>\n<li>[x] <code>evaluationReportCatalog.ts</code> 추가</li>\n<li>[x] <code>evaluationReportModel.ts</code> catalog import 구조로 변경</li>\n<li>[x] <code>EvaluationReportPanel.tsx</code> scenario import 변경</li>\n<li>[x] contract/tests 업데이트</li>\n<li>[x] targeted contract/test 실행</li>\n<li>[x] collect/check/test/build/package 실행</li>\n<li>[x] Browser smoke 실행</li>\n<li>[x] close-out 기록 최종화</li>\n<li>[ ] commit and push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 494,
+      "updatedAt": "2026-06-06T01:13:08.236Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-eval-report-catalog-structure-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-eval-report-catalog-structure/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증: EVAL report catalog structure",
+      "excerpt": "검증: EVAL report catalog structure 계획 npm prefix platform desktop app/renderer/workspace monitor run check:comprehensive improvement npm prefix platform desktop app/renderer/workspace monitor run test npm prefix platform desktop app run test npm prefix platform desktop app/rendere",
+      "html": "<h1>검증: EVAL report catalog structure</h1>\n<h2>계획</h2>\n<ul>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run check:comprehensive-improvement</code></li>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run test</code></li>\n<li><code>npm --prefix platform-desktop-app run test</code></li>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run collect</code></li>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li><code>npm --prefix platform-desktop-app run check</code></li>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run build</code></li>\n<li><code>npm --prefix platform-desktop-app run package:internal</code></li>\n<li>Browser smoke for EVAL surface</li>\n</ul>\n<h2>현재 결과</h2>\n<ul>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run check:comprehensive-improvement</code>: 통과. checkedDimensions 7, checkedSurfaces 5.</li>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run test</code>: 통과. tests 70개.</li>\n<li><code>npm --prefix platform-desktop-app run test</code>: 통과. tests 24개.</li>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run collect</code>: 통과. 650 inline documents, 2566 admin history records.</li>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run check</code>: 통과. lazy boundary, scroll, source control design, comprehensive improvement, history payload.</li>\n<li><code>npm --prefix platform-desktop-app run check</code>: 통과. internal service readiness score 96. public release는 signing/notarization/updater/clean-machine gate로 계속 blocked.</li>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run build</code>: 통과. Next static build.</li>\n<li><code>npm --prefix platform-desktop-app run package:internal</code>: 통과. customer renderer build/audit, tests, Rust tests/build, Tauri <code>.app</code>/DMG build, codesign verify, <code>hdiutil verify</code> 포함.</li>\n<li>Browser smoke: 통과. cockpitCount 1, dimensionCount 7, scenarioCount 7, openSourceCount 7, telemetryCount 1, runtimeMetricCount 1, telemetryMode <code>browser-preview</code>, errorLogCount 0.</li>\n</ul>\n<h2>산출물</h2>\n<ul>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2153,
+      "updatedAt": "2026-06-06T01:13:08.236Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-eval-report-catalog-structure-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-eval-report-catalog-structure.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: EVAL report catalog structure",
+      "excerpt": "사용자 요청 요약: EVAL report catalog structure 사용자는 “소스코드 개선”을 요청했다. 이전 맥락은 desktop app 성능, UI, EVAL, 구조 개선 반복이므로, 이번 slice는 EVAL report source의 책임 분리를 선택했다. 적용한 범위 EVAL report static catalog를 score model에서 분리. 관련 contract/tests 갱신. 구현 후 build/package까지 실행 예정.",
+      "html": "<p>사용자 요청 요약: EVAL report catalog structure 사용자는 “소스코드 개선”을 요청했다. 이전 맥락은 desktop app 성능, UI, EVAL, 구조 개선 반복이므로, 이번 slice는 EVAL report source의 책임 분리를 선택했다. 적용한 범위 EVAL report static catalog를 score model에서 분리. 관련 contract/tests 갱신. 구현 후 build/package까지 실행 예정.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 421,
+      "updatedAt": "2026-06-06T01:09:26.208Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-eval-report-catalog-structure-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-eval-report-catalog-structure/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적: EVAL report catalog structure",
+      "excerpt": "추적: EVAL report catalog structure | 요구 | 구현 | 검증 | | | | | | REQ ERCS 001 catalog 분리 | evaluationReportCatalog.ts | contract, tests | | REQ ERCS 002 model 계산 집중 | evaluationReportModel.ts imports catalog | TypeScript check, tests | | REQ ERCS 003 panel rendering 경계 | EvaluationRe",
+      "html": "<h1>추적: EVAL report catalog structure</h1>\n<table><thead><tr><th>요구</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-ERCS-001 catalog 분리</td><td><code>evaluationReportCatalog.ts</code></td><td>contract, tests</td></tr><tr><td>REQ-ERCS-002 model 계산 집중</td><td><code>evaluationReportModel.ts</code> imports catalog</td><td>TypeScript check, tests</td></tr><tr><td>REQ-ERCS-003 panel rendering 경계</td><td><code>EvaluationReportPanel.tsx</code> imports catalog/model separately</td><td>tests, Browser smoke</td></tr><tr><td>REQ-ERCS-004 boundary contract</td><td>check script, tool-studio test, readiness test</td><td>targeted tests</td></tr><tr><td>REQ-ERCS-005 자동 build/package</td><td>package pipeline</td><td>validation</td></tr></tbody></table>\n<h2>연결 기록</h2>\n<ul>\n<li>요구사항: <code>platform-desktop-app/docs/requirements/2026-06-06-eval-report-catalog-structure.ko.md</code></li>\n<li>웹 검색: <code>_history/web-searches/2026/2026-06-06-eval-report-catalog-structure.ko.md</code></li>\n<li>연구 노트: <code>_research/topics/platform-desktop-app/2026-06-06-eval-report-catalog-structure.ko.md</code></li>\n<li>평가: <code>_history/evaluations/2026/2026-06-06-eval-report-catalog-structure.ko.md</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 978,
+      "updatedAt": "2026-06-06T01:09:26.207Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-eval-report-catalog-structure-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-eval-report-catalog-structure.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "2026 06 06 EVAL report catalog structure 요구사항",
+      "excerpt": "2026 06 06 EVAL report catalog structure 요구사항 배경 EVAL report model은 계산 로직과 정적 카탈로그 데이터를 함께 담고 있었다. 오픈소스 후보, 평가 시나리오, tool signal은 변경 주기와 책임이 score formula와 다르므로 별도 module로 분리할 필요가 있다. 요구사항 REQ ERCS 001: EVAL scenario, tool signal, fallback eval repo catalog는 evaluationReportCatal",
+      "html": "<h1>2026-06-06 EVAL report catalog structure 요구사항</h1>\n<h2>배경</h2>\n<p>EVAL report model은 계산 로직과 정적 카탈로그 데이터를 함께 담고 있었다. 오픈소스 후보, 평가 시나리오, tool signal은 변경 주기와 책임이 score formula와 다르므로 별도 module로 분리할 필요가 있다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-ERCS-001: EVAL scenario, tool signal, fallback eval repo catalog는 <code>evaluationReportCatalog.ts</code>로 분리한다.</li>\n<li>REQ-ERCS-002: <code>evaluationReportModel.ts</code>는 catalog를 조합해 score/report model을 계산하고, 정적 후보 목록의 소유자가 되지 않는다.</li>\n<li>REQ-ERCS-003: <code>EvaluationReportPanel.tsx</code>는 scenario rendering에는 catalog를, score rendering에는 report model을 사용한다.</li>\n<li>REQ-ERCS-004: contract/tests는 panel, model, catalog, runtime telemetry model 경계를 각각 확인한다.</li>\n<li>REQ-ERCS-005: 구현 후 check, test, build, internal package, Browser smoke를 실행한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>evaluationReportCatalog.ts</code>가 존재하고 <code>evalScenarios</code>, <code>toolSignals</code>, <code>fallbackEvalRepos</code>, <code>mergeEvalRepos</code>를 export한다.</li>\n<li><code>evaluationReportModel.ts</code>는 <code>mergeEvalRepos</code>와 <code>toolSignals</code>를 import해 사용한다.</li>\n<li>EVAL cockpit UI의 data attributes와 주요 표시 내용은 유지된다.</li>\n<li>패키징 산출물 <code>.app</code>/DMG가 생성되고 smoke 검증이 통과한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1366,
+      "updatedAt": "2026-06-06T01:09:26.206Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-eval-report-catalog-structure-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-eval-report-catalog-structure/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "계획: EVAL report catalog structure",
+      "excerpt": "계획: EVAL report catalog structure 1. Web first intake와 memory bootstrap 결과를 반영한다. 2. 구조 개선 slice를 EVAL report catalog 분리로 제한한다. 3. evaluationReportCatalog.ts 를 추가해 scenarios, tool signals, fallback repos, merge function을 옮긴다. 4. evaluationReportModel.ts 와 EvaluationReportPanel.ts",
+      "html": "<h1>계획: EVAL report catalog structure</h1>\n<p>1. Web-first intake와 memory bootstrap 결과를 반영한다.</p>\n<p>2. 구조 개선 slice를 EVAL report catalog 분리로 제한한다.</p>\n<p>3. <code>evaluationReportCatalog.ts</code>를 추가해 scenarios, tool signals, fallback repos, merge function을 옮긴다.</p>\n<p>4. <code>evaluationReportModel.ts</code>와 <code>EvaluationReportPanel.tsx</code> import를 갱신한다.</p>\n<p>5. comprehensive improvement contract, workspace monitor test, desktop readiness test를 새 boundary에 맞춘다.</p>\n<p>6. targeted tests, collect/check/test/build/package, Browser smoke를 실행한다.</p>\n<p>7. close-out 기록, evaluation, request trace를 남기고 commit/push한다.</p>\n<h2>리스크</h2>\n<ul>\n<li>catalog import cycle: catalog는 <code>WorkspaceSnapshot</code> type만 참조하고 model을 참조하지 않는다.</li>\n<li>UI 회귀: data attributes와 scenario labels를 보존한다.</li>\n<li>contract drift: static repo token은 catalog test로 이동한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 912,
+      "updatedAt": "2026-06-06T01:09:26.206Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-eval-report-catalog-structure-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-eval-report-catalog-structure/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "스펙: EVAL report catalog structure",
+      "excerpt": "스펙: EVAL report catalog structure 목표 EVAL report의 정적 catalog 책임을 score model에서 분리해, 후보 목록과 시나리오 변경이 계산 로직 변경과 섞이지 않게 한다. 설계 결정 새 module: components/features/evaluationReportCatalog.ts . catalog API: evalScenarios , toolSignals , fallbackEvalRepos , mergeEvalRepos . model API: 기존 ",
+      "html": "<h1>스펙: EVAL report catalog structure</h1>\n<h2>목표</h2>\n<p>EVAL report의 정적 catalog 책임을 score model에서 분리해, 후보 목록과 시나리오 변경이 계산 로직 변경과 섞이지 않게 한다.</p>\n<h2>설계 결정</h2>\n<ul>\n<li>새 module: <code>components/features/evaluationReportCatalog.ts</code>.</li>\n<li>catalog API: <code>evalScenarios</code>, <code>toolSignals</code>, <code>fallbackEvalRepos</code>, <code>mergeEvalRepos</code>.</li>\n<li>model API: 기존 <code>buildEvaluationReportModel</code>, <code>formatEvalPercent</code> 유지.</li>\n<li>compatibility: <code>evaluationReportModel.ts</code>는 catalog type과 <code>evalScenarios</code> re-export를 유지해 기존 import 회귀 위험을 줄인다.</li>\n</ul>\n<h2>언어/런타임 선택</h2>\n<ul>\n<li>TypeScript module: 선택. 기존 renderer build/test로 검증 가능하며 runtime resource를 만들지 않는다.</li>\n<li>React hook: 미선택. state/effect가 없고 정적 catalog에 hook lifecycle이 필요 없다.</li>\n<li>Rust/Tauri command: 미선택. 정적 UI catalog는 native boundary로 넘길 이유가 없다.</li>\n</ul>\n<h2>아키텍처 선택</h2>\n<ul>\n<li>Feature-local catalog module: 선택. EVAL feature 내부 소유권을 유지하면서 경계를 분리한다.</li>\n<li>Shared <code>lib/evaluation</code> module: 보류. 아직 다른 feature 소비자가 없다.</li>\n</ul>\n<h2>폴더 구조 선택</h2>\n<ul>\n<li><code>components/features/evaluationReportCatalog.ts</code>: 선택. 기존 <code>evaluationReportModel.ts</code>와 같은 feature folder라 탐색 비용이 낮다.</li>\n<li><code>lib/eval/reportCatalog.ts</code>: 보류. cross-feature dependency가 생길 때 이동한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>catalog module은 scenario/tool/repo catalog와 merge function을 가진다.</li>\n<li>model module은 catalog를 import해서 score model을 조립한다.</li>\n<li>tests/contracts는 static catalog token을 catalog module에서 확인한다.</li>\n<li>build/package/Browser smoke가 통과한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1731,
+      "updatedAt": "2026-06-06T01:09:26.206Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-eval-report-catalog-structure-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-eval-report-catalog-structure.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: EVAL report catalog structure",
+      "excerpt": "웹 검색 기록: EVAL report catalog structure 목적 사용자의 “소스코드 개선” 요청을 platform desktop app의 EVAL report 구조 개선으로 좁혀 구현하기 전에, UI/계산/정적 데이터 분리 원칙이 현재 React/TypeScript 공식 권장과 충돌하지 않는지 확인했다. 검색어 TypeScript official modules import export maintainability type only imports React official keeping ",
+      "html": "<p>웹 검색 기록: EVAL report catalog structure 목적 사용자의 “소스코드 개선” 요청을 platform desktop app의 EVAL report 구조 개선으로 좁혀 구현하기 전에, UI/계산/정적 데이터 분리 원칙이 현재 React/TypeScript 공식 권장과 충돌하지 않는지 확인했다. 검색어 TypeScript official modules import export maintainability type only imports React official keeping components pure extracting logic from components React official reusing logic wi</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1755,
+      "updatedAt": "2026-06-06T01:09:26.204Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-06-eval-report-model-structure-ko-md",
       "path": "_history/evaluations/2026/2026-06-06-eval-report-model-structure.ko.md",
       "category": "evaluation",
@@ -10131,54 +10323,6 @@
       "workspaceArea": "_history/request-traces"
     },
     {
-      "id": "history-evaluations-2026-2026-06-06-fundamental-improvement-structure-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-06-fundamental-improvement-structure-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Fundamental Improvement Structure Evaluation Input",
-      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work mode\": \"governance\", \"user request summary targets\": \" history/user requests/2026/2026 06 06 fundamental improvement structure.ko.md\" , \"requirements targets\": \"platform desktop app/docs/requirements/2026 06 06 fundamental improvement struc",
-      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;user request summary targets&quot;: &quot; history/user requests/2026/2026 06 06 fundamental improvement structure.ko.md&quot; , &quot;requirements targets&quot;: &quot;platform desktop app/docs/requirements/2026 06 06 fundamental improvement structure.ko.md&quot; , &quot;spec targets&quot;: &quot;platform desktop app/specs/2026 06 06 fundamental</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1828,
-      "updatedAt": "2026-06-05T21:38:05.812Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "근본 개선 구조 적용 요약",
-      "excerpt": "근본 개선 구조 적용 요약 fundamentalImprovementStructure snapshot 모델을 추가해 기존 히스토리 반복 패턴 6개를 구조 원칙 6개, 개선 패키지 6개, fitness check 4개로 승격했다. Product Structure 화면에 근본 개선 구조 보드를 추가해 Signal intake Structural diagnosis Principle selection Package execution Fitness check Memory feedback 운영 모델을 보여준다",
-      "html": "<p>근본 개선 구조 적용 요약 fundamentalImprovementStructure snapshot 모델을 추가해 기존 히스토리 반복 패턴 6개를 구조 원칙 6개, 개선 패키지 6개, fitness check 4개로 승격했다. Product Structure 화면에 근본 개선 구조 보드를 추가해 Signal intake Structural diagnosis Principle selection Package execution Fitness check Memory feedback 운영 모델을 보여준다. Customer snapshot에서는 새 구조 모델을 0/empty로 sanitize해 내부 히스토리 evidence path가 노출되지 않</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 814,
-      "updatedAt": "2026-06-05T21:38:05.812Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-fundamental-improvement-structure-json",
-      "path": "_history/work-timings/2026/2026-06-06-fundamental-improvement-structure.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Fundamental Improvement Structure",
-      "excerpt": "{ \"schema version\": \"2026 06 06\", \"task\": \"fundamental improvement structure\", \"timezone\": \"Asia/Seoul\", \"spans\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"notes\": \"Checked continuous improvement, platform engineering, fitness functions, and postmortem learning sourc",
-      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;task&quot;: &quot;fundamental improvement structure&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;spans&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Checked continuous improvement, platform engineering, fitness functions, and postmortem learning sources.&quot; }, { &quot;phase&quot;: &quot;memory bootstrap and scope&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;:</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1366,
-      "updatedAt": "2026-06-05T21:38:05.812Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-fundamental-improvement-structure-validation-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-fundamental-improvement-structure/validation.ko.md",
       "category": "project-spec",
@@ -10257,54 +10401,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-      "path": "_history/plans/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "근본 개선 구조 적용 계획",
-      "excerpt": "근본 개선 구조 적용 계획 목표 다양한 히스토리에서 반복 신호를 읽고, 이를 구조적 개선 원칙과 실행 가능한 개선 패키지로 승격해 Workspace Monitor와 desktop product snapshot에 적용한다. 실행 계획 1. 기존 historyInsightLoop 를 입력으로 받는 fundamentalImprovementStructure collector를 추가한다. 2. snapshot stats/type/customer sanitizer에 구조 개선 모델을 연결한다. 3. Prod",
-      "html": "<p>근본 개선 구조 적용 계획 목표 다양한 히스토리에서 반복 신호를 읽고, 이를 구조적 개선 원칙과 실행 가능한 개선 패키지로 승격해 Workspace Monitor와 desktop product snapshot에 적용한다. 실행 계획 1. 기존 historyInsightLoop 를 입력으로 받는 fundamentalImprovementStructure collector를 추가한다. 2. snapshot stats/type/customer sanitizer에 구조 개선 모델을 연결한다. 3. Product Structure 화면에 구조 원칙, 개선 패키지, fitness check를 보여주는 보드를 추가한다. 4. collector/read</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1071,
-      "updatedAt": "2026-06-05T21:30:46.502Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약",
-      "excerpt": "사용자 요청 요약 날짜: 2026 06 06 요약: 다양한 히스토리를 보고 근본적 개선 구조를 생각해 플랫폼에 적용해 달라는 요청. 해석: 기존 히스토리 인사이트 루프를 상위 운영 구조로 승격하고, 플랫폼 UI와 snapshot에 적용해야 한다. 수용 기준: 구조적 원칙, 실행 패키지, 검증 루프가 플랫폼에 실제로 반영되고 빌드까지 완료되어야 한다.",
-      "html": "<p>사용자 요청 요약 날짜: 2026 06 06 요약: 다양한 히스토리를 보고 근본적 개선 구조를 생각해 플랫폼에 적용해 달라는 요청. 해석: 기존 히스토리 인사이트 루프를 상위 운영 구조로 승격하고, 플랫폼 UI와 snapshot에 적용해야 한다. 수용 기준: 구조적 원칙, 실행 패키지, 검증 루프가 플랫폼에 실제로 반영되고 빌드까지 완료되어야 한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 452,
-      "updatedAt": "2026-06-05T21:30:46.502Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "근본 개선 구조 웹 검색 기록",
-      "excerpt": "근본 개선 구조 웹 검색 기록 날짜: 2026 06 06 요청 요약: 다양한 히스토리에서 근본적 개선 구조를 추론해 플랫폼에 적용한다. 검색어 continuous improvement operating model software platform lessons learned architecture decision records official platform engineering operating model continuous improvement feedback loop official softw",
-      "html": "<p>근본 개선 구조 웹 검색 기록 날짜: 2026 06 06 요청 요약: 다양한 히스토리에서 근본적 개선 구조를 추론해 플랫폼에 적용한다. 검색어 continuous improvement operating model software platform lessons learned architecture decision records official platform engineering operating model continuous improvement feedback loop official software architecture fitness functions evolutionary architecture continuous improvem</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2515,
-      "updatedAt": "2026-06-05T21:30:46.499Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-history-insight-loop-tasks-ko-md",
@@ -17905,102 +18001,6 @@
       "historyDate": "",
       "historyYear": "",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-deferred-native-git-clipboard-pty-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-deferred-native-git-clipboard-pty/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Validation: Deferred Native Git, Clipboard QA, PTY Decision",
-      "excerpt": "Validation: Deferred Native Git, Clipboard QA, PTY Decision 실행한 검증 2026 06 04 추가 검증: cargo check in platform desktop app/src tauri : 통과 corepack pnpm filter workspace monitor run check : 통과 corepack pnpm filter workspace monitor run test : 통과, 17 tests corepack pnpm filter worksp",
-      "html": "<h1>Validation: Deferred Native Git, Clipboard QA, PTY Decision</h1>\n<h2>실행한 검증</h2>\n<ul>\n<li>2026-06-04 추가 검증:</li>\n<li><code>cargo check</code> in <code>platform-desktop-app/src-tauri</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run test</code>: 통과, 17 tests</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: 통과, largest chunk <code>242563</code> bytes</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 21 tests</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과</li>\n<li><code>corepack pnpm --filter platform-desktop-app run customer-bundle:audit</code>: 통과</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-gap-registry.json</code>: 통과</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json</code>: 통과</li>\n<li><code>git diff --check</code>: 통과</li>\n<li>로컬 정적 서버 <code>http://127.0.0.1:4187/</code>: HTML 응답 확인 후 종료 확인</li>\n<li>빌드 산출물 token smoke: <code>Git 작업대</code>, <code>native-git-view-tabs</code>, <code>native-git-history-list</code>, <code>native-git-stash-list</code>, <code>선택 커밋</code> 포함 확인</li>\n<li>in-app Browser smoke 시도: Browser plugin 연결이 usable tab을 만들지 못해 실제 클릭 스모크는 수행하지 못했다. 기존 <code>check-scroll-containers.mjs</code>, <code>check-source-control-design.mjs</code>, customer build/audit, 정적 산출물 token smoke로 대체 검증했다.</li>\n<li><code>cargo check</code> in <code>platform-desktop-app/src-tauri</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run test</code>: 통과, 17 tests</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: 통과</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 21 tests</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과</li>\n<li><code>corepack pnpm --filter platform-desktop-app run customer-bundle:audit</code>: 통과</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-gap-registry.json</code>: 통과</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json</code>: 통과</li>\n<li><code>git diff --check</code>: 통과</li>\n<li>Browser smoke at <code>http://127.0.0.1:4187/</code>: 실행 화면에서 <code>Native Git Workbench</code>, <code>Git 상태 새로고침</code>, <code>변경사항과 커밋</code>, <code>Pull --ff-only</code>, <code>Push</code> 렌더링 확인</li>\n<li>Browser smoke at <code>http://127.0.0.1:4187/</code>: Git workbench 3-pane 구조 확인. <code>native-git-layout</code> grid columns <code>244px / 581px / 279px</code>, <code>native-git-file-list</code>, <code>native-git-diff-pane</code>, <code>native-git-diff-preview</code>, <code>native-git-actions</code>, <code>native-git-change-meter</code> 렌더링, document horizontal overflow 0, button viewport escape 0.</li>\n<li>Browser smoke: 다크 테마 suspicious white background count 0</li>\n<li>Browser smoke: terminal drawer open rect <code>1218 x 656</code> on <code>1280 x 720</code> viewport</li>\n</ul>\n<h2>저장된 QA 산출물</h2>\n<ul>\n<li><code>/Users/shinjoungeun/Desktop/Obsidian/brain/codex/outputs/browser-qa/platform-desktop-native-git-workbench.png</code></li>\n</ul>\n<h2>제한</h2>\n<ul>\n<li>Public distribution readiness는 signing/notarization/updater/clean-machine smoke가 없어서 계속 release gate로 남는다.</li>\n<li>xterm/PTY는 구현하지 않고 optional extension decision으로 닫았다.</li>\n<li>전체 MonitorShell componentization은 아직 structural debt로 남는다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 3564,
-      "updatedAt": "2026-06-03T15:16:58.993Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-deferred-native-git-clipboard-pty-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-deferred-native-git-clipboard-pty/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Traceability: Deferred Native Git, Clipboard QA, PTY Decision",
-      "excerpt": "Traceability: Deferred Native Git, Clipboard QA, PTY Decision User Request UR 2026 06 03 056 : 이전에 미뤄진 구현 부족분을 모두 진행하라는 요청. UR 2026 06 03 064 : 실제 GitHub Desktop 정도는 되어야 한다는 요청. UR 2026 06 04 001 : 그 정도로 완전히 GitHub Desktop처럼 가야 한다는 요청. Requirements To Implementation PDA REQ 040 p",
-      "html": "<h1>Traceability: Deferred Native Git, Clipboard QA, PTY Decision</h1>\n<h2>User Request</h2>\n<ul>\n<li><code>UR-2026-06-03-056</code>: 이전에 미뤄진 구현 부족분을 모두 진행하라는 요청.</li>\n<li><code>UR-2026-06-03-064</code>: 실제 GitHub Desktop 정도는 되어야 한다는 요청.</li>\n<li><code>UR-2026-06-04-001</code>: 그 정도로 완전히 GitHub Desktop처럼 가야 한다는 요청.</li>\n</ul>\n<h2>Requirements To Implementation</h2>\n<ul>\n<li><code>PDA-REQ-040</code> -&gt; <code>platform-desktop-app/src-tauri/src/lib.rs</code>, <code>platform-desktop-app/renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx</code>, <code>platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json</code></li>\n<li><code>PDA-REQ-064</code> -&gt; <code>platform-desktop-app/src-tauri/src/lib.rs</code> diff preview payload, <code>NativeGitWorkbench.tsx</code> 3-pane changed-file/diff/commit layout, <code>app/globals.css</code> Native Git workbench styling, <code>tests/readiness.test.mjs</code> GitHub Desktop-like token checks.</li>\n<li><code>PDA-REQ-065</code> -&gt; <code>platform-desktop-app/src-tauri/src/lib.rs</code> selected file actions/history/stash payload, <code>NativeGitWorkbench.tsx</code> Changes/History/Stash tabs and include checkbox UX, <code>app/globals.css</code> scrollable native Git workbench lists, readiness Git token checks.</li>\n<li><code>PDA-REQ-041</code> -&gt; <code>platform-desktop-app/renderer/workspace-monitor/lib/clipboard.mjs</code>, <code>platform-desktop-app/tests/clipboard.test.mjs</code></li>\n<li><code>PDA-REQ-042</code> -&gt; <code>platform-desktop-app/docs/architecture/pty-terminal-decision.ko.md</code>, <code>platform-desktop-app/docs/architecture/pty-terminal-decision.en.md</code></li>\n<li><code>PDA-REQ-043</code> -&gt; <code>platform-desktop-app/configs/product-gap-registry.json</code>, <code>platform-desktop-app/scripts/check-readiness.mjs</code>, <code>platform-desktop-app/tests/readiness.test.mjs</code></li>\n</ul>\n<h2>Remaining Open Gates</h2>\n<ul>\n<li><code>componentized_desktop_ui_architecture</code>: <code>NativeGitWorkbench</code>는 분리했지만 전체 shell/source/settings/operator 분해는 계속 필요하다.</li>\n<li><code>public_distribution_gates</code>: public release assets and clean-machine validation required.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1896,
-      "updatedAt": "2026-06-03T15:11:02.695Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-deferred-native-git-clipboard-pty-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-deferred-native-git-clipboard-pty/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Tasks: Deferred Native Git, Clipboard QA, PTY Decision",
-      "excerpt": "Tasks: Deferred Native Git, Clipboard QA, PTY Decision x get desktop git status Tauri command 추가 x run desktop git action Tauri command 추가 x Git branch/status/upstream/ahead behind/remote/file parsing 추가 x 파일별 additions/deletions와 bounded diff preview payload 추가 x Git action vali",
-      "html": "<h1>Tasks: Deferred Native Git, Clipboard QA, PTY Decision</h1>\n<ul>\n<li>[x] <code>get_desktop_git_status</code> Tauri command 추가</li>\n<li>[x] <code>run_desktop_git_action</code> Tauri command 추가</li>\n<li>[x] Git branch/status/upstream/ahead-behind/remote/file parsing 추가</li>\n<li>[x] 파일별 additions/deletions와 bounded diff preview payload 추가</li>\n<li>[x] Git action validation과 bounded command output 추가</li>\n<li>[x] <code>NativeGitWorkbench.tsx</code> component 추가</li>\n<li>[x] Desktop Runtime 화면에 GitHub Desktop-like changed-file list, selected diff preview, commit/sync UI 연결</li>\n<li>[x] Changes/History/Stash 탭 구조 추가</li>\n<li>[x] 파일별 include checkbox와 <code>commit_selected</code> action 추가</li>\n<li>[x] 선택 파일 <code>discard_selected</code>, <code>stash_selected</code>, 전체 stash action 추가</li>\n<li>[x] stash apply/pop/drop action과 stash ref 검증 추가</li>\n<li>[x] 최근 commit history와 stash 목록 bounded status payload 추가</li>\n<li>[x] <code>clipboard.mjs</code> abstraction 추가</li>\n<li>[x] <code>clipboard.test.mjs</code> deterministic test 추가</li>\n<li>[x] Native Git Workbench credential/SSH boundary docs 추가</li>\n<li>[x] PTY terminal decision bilingual docs 추가</li>\n<li>[x] Runtime contract, readiness script, readiness test 갱신</li>\n<li>[x] Product gap registry에서 native Git, clipboard QA, PTY decision closure 반영</li>\n<li>[x] Browser smoke screenshot 저장</li>\n<li>[x] 검증 결과와 request trace 기록</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1309,
-      "updatedAt": "2026-06-03T15:10:56.412Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-deferred-native-git-clipboard-pty-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-deferred-native-git-clipboard-pty/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Spec: Deferred Native Git, Clipboard QA, PTY Decision",
-      "excerpt": "Spec: Deferred Native Git, Clipboard QA, PTY Decision 범위 Native runtime: selected workspace 기반 Git status/action command. Renderer: desktop runtime 화면의 Native Git Workbench UI. Native Git Workbench: GitHub Desktop like Changes/History/Stash workbench, changed file include checkbo",
-      "html": "<h1>Spec: Deferred Native Git, Clipboard QA, PTY Decision</h1>\n<h2>범위</h2>\n<ul>\n<li>Native runtime: selected workspace 기반 Git status/action command.</li>\n<li>Renderer: desktop runtime 화면의 Native Git Workbench UI.</li>\n<li>Native Git Workbench: GitHub Desktop-like Changes/History/Stash workbench, changed-file include checkbox, selected-file diff preview, selected/all commit, discard, stash, sync panel.</li>\n<li>Source editing QA: clipboard abstraction과 deterministic unit test.</li>\n<li>Architecture docs: PTY/xterm decision, Native Git credential/SSH boundary.</li>\n<li>Registry/readiness: product gap closure와 remaining gate 검증.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>앱이 SSH key, token, credential helper를 직접 관리하는 기능.</li>\n<li>public macOS/Windows release readiness claim.</li>\n<li>전체 <code>MonitorShell.tsx</code> 대분해 완료.</li>\n<li>xterm/PTY dependency 설치와 interactive pseudo-terminal 구현.</li>\n</ul>\n<h2>설계</h2>\n<p>Native Git은 Tauri command가 selected workspace의 Git root를 찾고 시스템 <code>git</code>을 bounded subprocess로 실행한다. Status payload는 파일별 staged/unstaged/untracked/conflicted 상태, additions/deletions, bounded diff preview, 최근 history, stash 목록을 포함한다. Renderer는 <code>NativeGitWorkbench</code> 컴포넌트로 Changes/History/Stash 탭, changed-file include checkbox, selected-file diff preview, commit/sync/stash panel을 제공하며, parent shell은 Tauri invocation state만 소유한다.</p>\n<p>선택 파일 작업은 repository-relative path만 허용한다. <code>commit_selected</code>와 <code>stash_selected</code>는 선택 pathspec을 사용하고, <code>discard_selected</code>는 tracked restore와 untracked clean을 분리한다. stash apply/pop/drop은 선택된 stash ref가 없으면 실행하지 않는다.</p>\n<p>Clipboard는 <code>writeClipboardText</code> module로 분리한다. navigator clipboard가 가능하면 먼저 사용하고, 실패하면 readonly textarea fallback으로 copy를 시도한다.</p>\n<p>PTY는 현재 기본 product slice가 아니다. pipe-first supervisor는 task-run store, decision inbox, bounded logs, stdin/defer/cancel 흐름을 보존하므로 기본으로 유지한다.</p>\n<h2>남은 Gate</h2>\n<ul>\n<li><code>componentized_desktop_ui_architecture</code>: 전체 shell/source/settings/operator component ownership split은 계속 남는다.</li>\n<li><code>public_distribution_gates</code>: Developer ID signing, notarization, updater, clean-machine smoke가 없으므로 public readiness는 계속 blocked이다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2360,
-      "updatedAt": "2026-06-03T15:10:51.909Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-architecture-native-git-workbench-en-md",
-      "path": "platform-desktop-app/docs/architecture/native-git-workbench.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Native Git Workbench",
-      "excerpt": "Native Git Workbench Decision The installable desktop app provides a Native Git Workbench that runs the system git inside the selected workspace. Users choose a workspace first, then manage branches, changes, commits, pull, and push from the same desktop surface instead of scatte",
-      "html": "<h1>Native Git Workbench</h1>\n<h2>Decision</h2>\n<p>The installable desktop app provides a Native Git Workbench that runs the system <code>git</code> inside the selected workspace. Users choose a workspace first, then manage branches, changes, commits, pull, and push from the same desktop surface instead of scattering Git input across setup forms.</p>\n<h2>Scope</h2>\n<ul>\n<li><code>get_desktop_git_status</code>: reads the Git root, branch, upstream, ahead/behind counts, changed files, remotes, per-file additions/deletions, bounded diff previews, recent history, and stash list for the selected workspace.</li>\n<li><code>run_desktop_git_action</code>: allows <code>refresh</code>, <code>fetch</code>, <code>create_branch</code>, <code>commit_all</code>, <code>commit_selected</code>, <code>discard_selected</code>, <code>stash_all</code>, <code>stash_selected</code>, <code>apply_stash</code>, <code>pop_stash</code>, <code>drop_stash</code>, <code>pull_ff</code>, and <code>push</code>.</li>\n<li>Commands run from the Git root under the selected workspace and return redacted bounded command output.</li>\n<li>Commit messages, branch names, selected file paths, and stash references are length-limited and reject risky control characters.</li>\n</ul>\n<h2>Credential / SSH Boundary</h2>\n<p>The app does not inspect or store SSH private keys, tokens, cookies, or credential-helper stores. Private remote authentication stays with the user&#039;s OS, Git, and SSH configuration. When authentication is missing, the workbench surfaces bounded Git command output as a <code>capability_missing</code> or authentication failure state.</p>\n<p>These future steps require a separate installation and security audit:</p>\n<ul>\n<li>changing credential-helper settings</li>\n<li>generating, copying, uploading, or auto-registering SSH keys</li>\n<li>storing or injecting tokens</li>\n<li>handling secrets embedded in remote URLs</li>\n</ul>\n<h2>User Experience</h2>\n<p>Native Git Workbench should behave like a GitHub Desktop-style workbench: Changes, History, and Stash stay in the same Git surface. Changes provides per-file include checkboxes and selected-file diff previews, while the commit box distinguishes selected-file commit from all-change commit. Stash provides selected/all stash plus apply/pop/drop, but apply/pop/drop run only against the explicitly selected stash reference. Users can still run direct <code>git</code> commands in the bottom Work Console, while the Git buttons shorten common, repeatable actions safely.</p>\n<p>Diff previews are bounded per file. Large diffs, binaries, and preview-limited files degrade to a preview-unavailable state without blocking overall Git status reading or commit actions.</p>\n<p>Discard runs only against selected files. Tracked files are restored with <code>git restore --staged --worktree</code>, and untracked files are removed separately with <code>git clean -f -d</code>. The renderer confirms destructive actions, and the backend accepts only repository-relative paths.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2659,
-      "updatedAt": "2026-06-03T15:10:44.233Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-architecture-native-git-workbench-ko-md",
-      "path": "platform-desktop-app/docs/architecture/native-git-workbench.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "Native Git Workbench",
-      "excerpt": "Native Git Workbench 결정 설치형 데스크톱 앱은 선택된 작업공간에서 시스템 git 을 직접 실행하는 Native Git Workbench를 제공한다. 사용자는 Git URL이나 명령을 별도 입력 폼에 흩어 넣지 않고, 작업공간을 고른 뒤 같은 데스크톱 화면에서 브랜치, 변경사항, 커밋, pull, push를 처리한다. 범위 get desktop git status : 현재 작업공간의 Git 루트, 브랜치, upstream, ahead/behind, 변경 파일, remote, 파일별",
-      "html": "<h1>Native Git Workbench</h1>\n<h2>결정</h2>\n<p>설치형 데스크톱 앱은 선택된 작업공간에서 시스템 <code>git</code>을 직접 실행하는 Native Git Workbench를 제공한다. 사용자는 Git URL이나 명령을 별도 입력 폼에 흩어 넣지 않고, 작업공간을 고른 뒤 같은 데스크톱 화면에서 브랜치, 변경사항, 커밋, pull, push를 처리한다.</p>\n<h2>범위</h2>\n<ul>\n<li><code>get_desktop_git_status</code>: 현재 작업공간의 Git 루트, 브랜치, upstream, ahead/behind, 변경 파일, remote, 파일별 additions/deletions, bounded diff preview, 최근 history, stash 목록을 읽는다.</li>\n<li><code>run_desktop_git_action</code>: <code>refresh</code>, <code>fetch</code>, <code>create_branch</code>, <code>commit_all</code>, <code>commit_selected</code>, <code>discard_selected</code>, <code>stash_all</code>, <code>stash_selected</code>, <code>apply_stash</code>, <code>pop_stash</code>, <code>drop_stash</code>, <code>pull_ff</code>, <code>push</code>를 허용한다.</li>\n<li>모든 명령은 선택된 작업공간 아래 Git 루트에서 실행하며, 출력은 redaction과 길이 제한을 거친 bounded command output으로만 반환한다.</li>\n<li>커밋 메시지, 브랜치 이름, 선택 파일 path, stash ref는 길이와 위험 문자를 제한한다.</li>\n</ul>\n<h2>Credential / SSH 경계</h2>\n<p>앱은 SSH private key, 토큰, 쿠키, credential helper 저장소를 직접 열람하거나 저장하지 않는다. private remote 인증은 사용자의 OS/Git/SSH credential 설정에 맡기고, 실패 시 Git 명령 출력으로 <code>capability_missing</code> 또는 인증 실패 상태를 보여준다.</p>\n<p>민감 정보 처리가 필요해지는 다음 단계는 별도 설치/보안 감사가 필요하다.</p>\n<ul>\n<li>credential helper 설정 변경</li>\n<li>SSH key 생성, 복사, 업로드, 자동 등록</li>\n<li>토큰 저장 또는 자동 주입</li>\n<li>remote URL에 포함된 비밀값 처리</li>\n</ul>\n<h2>사용자 경험</h2>\n<p>Native Git Workbench는 GitHub Desktop처럼 Changes, History, Stash가 같은 Git 작업대 안에서 이어져야 한다. Changes는 파일별 include checkbox와 선택 파일 diff preview를 제공하고, commit box는 선택 파일 커밋과 전체 변경 커밋을 구분한다. Stash는 선택 파일/전체 stash와 apply/pop/drop을 제공하되, apply/pop/drop은 UI에서 명시적으로 선택한 stash ref에만 실행한다. 사용자는 여전히 하단 Work Console에서 직접 <code>git</code> 명령을 실행할 수 있고, 앱의 Git 버튼은 반복 작업을 안전하게 단축하는 역할을 한다.</p>\n<p>Diff preview는 파일별 bounded preview로 제한한다. 대형 diff, binary, preview 제한 파일은 <code>diff preview 없음</code> 상태로 degrade하며 앱 전체 Git 상태 읽기나 커밋 작업을 막지 않는다.</p>\n<p>Discard는 선택 파일에 대해서만 실행한다. tracked 파일은 <code>git restore --staged --worktree</code>로 복원하고, untracked 파일은 <code>git clean -f -d</code>로 분리 처리한다. 앱은 destructive action 전에 renderer confirm을 띄우며, backend는 repository-relative path만 허용한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2870,
-      "updatedAt": "2026-06-03T15:10:34.470Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18015,7 +18015,7 @@
         },
         {
           "category": "request-trace",
-          "count": 15
+          "count": 16
         },
         {
           "category": "user-request",
@@ -18035,7 +18035,7 @@
         },
         {
           "category": "plan",
-          "count": 5
+          "count": 4
         },
         {
           "category": "daily-history",
@@ -18104,6 +18104,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-evaluations-2026-2026-06-06-eval-report-catalog-structure-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-eval-report-catalog-structure.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "2026 06 06 EVAL report catalog structure 평가",
+          "excerpt": "2026 06 06 EVAL report catalog structure 평가 평가 대상 요청: 소스코드 개선. 구현 slice: EVAL report static catalog를 score model에서 분리. 완료 기준 평가 유지보수성: scenario/tool/repo catalog 변경이 score formula diff와 섞이지 않는다. 검증성: panel/model/catalog/runtime model boundary를 tests/contracts가 확인한다. 동작 보존: EVAL c",
+          "updatedAt": "2026-06-06T01:13:08.238Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-evaluations-2026-2026-06-06-eval-report-model-structure-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-eval-report-model-structure.ko.md",
           "category": "evaluation",
@@ -18131,16 +18141,6 @@
           "title": "평가: 기능별 오픈소스 맵",
           "excerpt": "평가: 기능별 오픈소스 맵 판정 요청 충족. 현재 플랫폼의 기능 layer별로 오픈소스 후보를 나누고, 각 후보에서 봐야 할 부분과 현재 플랫폼 적용 포인트를 기록했다. 산출물 검색 기록: history/web searches/2026/2026 06 06 feature by feature open source map.ko.md 연구 문서: research/topics/platform desktop app/2026 06 06 feature by feature open source map.ko.md ",
           "updatedAt": "2026-06-05T22:09:24.228Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-fundamental-improvement-structure-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-06-fundamental-improvement-structure-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Fundamental Improvement Structure Evaluation Input",
-          "excerpt": "{ \"schema version\": \"2026 06 06\", \"work mode\": \"governance\", \"user request summary targets\": \" history/user requests/2026/2026 06 06 fundamental improvement structure.ko.md\" , \"requirements targets\": \"platform desktop app/docs/requirements/2026 06 06 fundamental improvement struc",
-          "updatedAt": "2026-06-05T21:38:05.812Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18244,16 +18244,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-          "path": "_history/plans/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "근본 개선 구조 적용 계획",
-          "excerpt": "근본 개선 구조 적용 계획 목표 다양한 히스토리에서 반복 신호를 읽고, 이를 구조적 개선 원칙과 실행 가능한 개선 패키지로 승격해 Workspace Monitor와 desktop product snapshot에 적용한다. 실행 계획 1. 기존 historyInsightLoop 를 입력으로 받는 fundamentalImprovementStructure collector를 추가한다. 2. snapshot stats/type/customer sanitizer에 구조 개선 모델을 연결한다. 3. Prod",
-          "updatedAt": "2026-06-05T21:30:46.502Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-runtime-metric-eval-score-ko-md",
           "path": "_history/plans/2026/2026-06-06-runtime-metric-eval-score.ko.md",
           "category": "plan",
@@ -18311,6 +18301,16 @@
           "title": "요청 결과 trace: AI EVAL cockpit",
           "excerpt": "요청 결과 trace: AI EVAL cockpit 요청 요약 사용자는 사용성, 성능, UI, 기능 개선을 계속 진행하고, EVAL 기능과 히스토리/토큰/툴 사용 비교 보고서를 추가하며, 캐릭터는 물개를 사용하라고 요청했다. 결과 EVAL 탭 추가 오픈소스 EVAL 후보 registry/UI 반영 Tool Studio 물개형 3D character 적용 requirements/spec/research/web search/evaluation/resource/omission 기록 추가 build/pa",
           "updatedAt": "2026-06-05T23:32:09.549Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-eval-report-catalog-structure-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-eval-report-catalog-structure.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "2026 06 06 request to outcome trace",
+          "excerpt": "2026 06 06 request to outcome trace 요청 소스코드 개선. 결정 가장 직접적인 다음 구조 병목으로 EVAL report model 안의 static catalog 혼재를 선택했다. 전체 repository 일괄 refactor 대신, 검증 가능한 source boundary 개선으로 진행했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationReportCatalog.ts p",
+          "updatedAt": "2026-06-06T01:13:08.238Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18464,6 +18464,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-user-requests-2026-2026-06-06-eval-report-catalog-structure-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-eval-report-catalog-structure.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: EVAL report catalog structure",
+          "excerpt": "사용자 요청 요약: EVAL report catalog structure 사용자는 “소스코드 개선”을 요청했다. 이전 맥락은 desktop app 성능, UI, EVAL, 구조 개선 반복이므로, 이번 slice는 EVAL report source의 책임 분리를 선택했다. 적용한 범위 EVAL report static catalog를 score model에서 분리. 관련 contract/tests 갱신. 구현 후 build/package까지 실행 예정.",
+          "updatedAt": "2026-06-06T01:09:26.208Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-06-eval-report-model-structure-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-eval-report-model-structure.ko.md",
           "category": "user-request",
@@ -18491,16 +18501,6 @@
           "title": "사용자 요청 요약: 기능별 오픈소스 조사",
           "excerpt": "사용자 요청 요약: 기능별 오픈소스 조사 날짜: 2026 06 06 대상: platform desktop app/ 요약 사용자는 앞선 유사 오픈소스 조사에 이어, 플랫폼의 각 기능별로도 참고할 오픈소스를 찾아보라고 요청했다. 처리 제품 기능 registry의 8개 feature layer와 native runtime 축을 기준으로 오픈소스 후보를 정리했다. 각 후보는 볼 부분과 현재 플랫폼 적용 포인트를 함께 기록했다.",
           "updatedAt": "2026-06-05T22:07:25.311Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약",
-          "excerpt": "사용자 요청 요약 날짜: 2026 06 06 요약: 다양한 히스토리를 보고 근본적 개선 구조를 생각해 플랫폼에 적용해 달라는 요청. 해석: 기존 히스토리 인사이트 루프를 상위 운영 구조로 승격하고, 플랫폼 UI와 snapshot에 적용해야 한다. 수용 기준: 구조적 원칙, 실행 패키지, 검증 루프가 플랫폼에 실제로 반영되고 빌드까지 완료되어야 한다.",
-          "updatedAt": "2026-06-05T21:30:46.502Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18614,6 +18614,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-web-searches-2026-2026-06-06-eval-report-catalog-structure-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-eval-report-catalog-structure.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: EVAL report catalog structure",
+          "excerpt": "웹 검색 기록: EVAL report catalog structure 목적 사용자의 “소스코드 개선” 요청을 platform desktop app의 EVAL report 구조 개선으로 좁혀 구현하기 전에, UI/계산/정적 데이터 분리 원칙이 현재 React/TypeScript 공식 권장과 충돌하지 않는지 확인했다. 검색어 TypeScript official modules import export maintainability type only imports React official keeping ",
+          "updatedAt": "2026-06-06T01:09:26.204Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-06-eval-report-model-structure-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-eval-report-model-structure.ko.md",
           "category": "web-search",
@@ -18641,16 +18651,6 @@
           "title": "웹 검색 기록: 기능별 오픈소스 맵",
           "excerpt": "웹 검색 기록: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 대상: platform desktop app/ 검색 질의 open source agent platform feature categories CLI orchestration desktop AI workbench task run decision inbox provider settings 2026 GitHub open source desktop AI agent workbench terminal pro",
           "updatedAt": "2026-06-05T22:07:25.311Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "근본 개선 구조 웹 검색 기록",
-          "excerpt": "근본 개선 구조 웹 검색 기록 날짜: 2026 06 06 요청 요약: 다양한 히스토리에서 근본적 개선 구조를 추론해 플랫폼에 적용한다. 검색어 continuous improvement operating model software platform lessons learned architecture decision records official platform engineering operating model continuous improvement feedback loop official softw",
-          "updatedAt": "2026-06-05T21:30:46.499Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18764,6 +18764,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-06-eval-report-catalog-structure-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-eval-report-catalog-structure.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "2026 06 06 EVAL report catalog structure 작업 요약",
+          "excerpt": "2026 06 06 EVAL report catalog structure 작업 요약 구현 evaluationReportCatalog.ts 를 추가해 EVAL scenario, tool signal, fallback eval repo, repo merge function을 분리했다. evaluationReportModel.ts 는 catalog를 import해 score model을 계산하도록 변경했다. EvaluationReportPanel.tsx 는 scenario catalog와 report ",
+          "updatedAt": "2026-06-06T01:13:08.237Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-06-eval-report-model-structure-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-eval-report-model-structure.ko.md",
           "category": "work-summary",
@@ -18791,16 +18801,6 @@
           "title": "작업 요약: 기능별 오픈소스 맵",
           "excerpt": "작업 요약: 기능별 오픈소스 맵 2026 06 06에 platform desktop app 의 기능 layer별 오픈소스 레퍼런스 맵을 만들었다. CLI orchestration, work environment, development workbench, Agent Core, learning/evaluation, root tools, work visibility, observability, native runtime별로 후보 repo와 적용 포인트를 정리했다. GitHub API 메타데이터는 403",
           "updatedAt": "2026-06-05T22:07:25.312Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "근본 개선 구조 적용 요약",
-          "excerpt": "근본 개선 구조 적용 요약 fundamentalImprovementStructure snapshot 모델을 추가해 기존 히스토리 반복 패턴 6개를 구조 원칙 6개, 개선 패키지 6개, fitness check 4개로 승격했다. Product Structure 화면에 근본 개선 구조 보드를 추가해 Signal intake Structural diagnosis Principle selection Package execution Fitness check Memory feedback 운영 모델을 보여준다",
-          "updatedAt": "2026-06-05T21:38:05.812Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18914,6 +18914,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-timings-2026-2026-06-06-eval-report-catalog-structure-json",
+          "path": "_history/work-timings/2026/2026-06-06-eval-report-catalog-structure.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Eval Report Catalog Structure",
+          "excerpt": "{ \"task id\": \"2026 06 06 eval report catalog structure\", \"title\": \"EVAL report catalog structure\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first i",
+          "updatedAt": "2026-06-06T01:13:08.237Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-eval-report-model-structure-json",
           "path": "_history/work-timings/2026/2026-06-06-eval-report-model-structure.json",
           "category": "work-timing",
@@ -18941,16 +18951,6 @@
           "title": "2026 06 06 Feature By Feature Open Source Map",
           "excerpt": "{ \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"phases\": { \"phase\": \"web search\", \"status\": \"completed\", \"notes\": \"Searched feature specific open source references for CLI orchestration, agent builders, observability, MCP/provider tools, human approval, and native run",
           "updatedAt": "2026-06-05T22:07:25.312Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-06-fundamental-improvement-structure-json",
-          "path": "_history/work-timings/2026/2026-06-06-fundamental-improvement-structure.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Fundamental Improvement Structure",
-          "excerpt": "{ \"schema version\": \"2026 06 06\", \"task\": \"fundamental improvement structure\", \"timezone\": \"Asia/Seoul\", \"spans\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"notes\": \"Checked continuous improvement, platform engineering, fitness functions, and postmortem learning sourc",
-          "updatedAt": "2026-06-05T21:38:05.812Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19012,16 +19012,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2560,
+      "documents": 2566,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1002
+          "count": 1003
         },
         {
           "category": "web-search",
-          "count": 407
+          "count": 408
         },
         {
           "category": "plan",
@@ -19029,19 +19029,19 @@
         },
         {
           "category": "request-trace",
-          "count": 335
+          "count": 336
         },
         {
           "category": "work-timing",
-          "count": 256
+          "count": 257
         },
         {
           "category": "user-request",
-          "count": 120
+          "count": 121
         },
         {
           "category": "work-summary",
-          "count": 87
+          "count": 88
         },
         {
           "category": "daily-history",
@@ -19052,7 +19052,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6472575,
+      "totalSourceBytes": 6479887,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19081,7 +19081,7 @@
       "decisionEvents": 0,
       "openSignals": 13,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T01:00:24.812Z",
+      "latestEventAt": "2026-06-06T01:13:08.238Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19089,6 +19089,11 @@
         "id": "completed",
         "label": "completed",
         "count": 64
+      },
+      {
+        "id": "traceability",
+        "label": "traceability",
+        "count": 16
       },
       {
         "id": "verification",
@@ -19111,11 +19116,6 @@
         "count": 15
       },
       {
-        "id": "traceability",
-        "label": "traceability",
-        "count": 15
-      },
-      {
         "id": "monitoring",
         "label": "monitoring",
         "count": 14
@@ -19123,7 +19123,7 @@
       {
         "id": "planning",
         "label": "planning",
-        "count": 5
+        "count": 4
       },
       {
         "id": "history",
@@ -19143,6 +19143,11 @@
         "count": 16
       },
       {
+        "id": "trace",
+        "label": "trace",
+        "count": 16
+      },
+      {
         "id": "intake",
         "label": "intake",
         "count": 15
@@ -19150,11 +19155,6 @@
       {
         "id": "summary",
         "label": "summary",
-        "count": 15
-      },
-      {
-        "id": "trace",
-        "label": "trace",
         "count": 15
       },
       {
@@ -19170,7 +19170,7 @@
       {
         "id": "plan",
         "label": "plan",
-        "count": 5
+        "count": 4
       },
       {
         "id": "history",
@@ -19191,6 +19191,96 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-eval-report-catalog-structure-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 06 EVAL report catalog structure 평가",
+        "detail": "2026 06 06 EVAL report catalog structure 평가 평가 대상 요청: 소스코드 개선. 구현 slice: EVAL report static catalog를 score model에서 분리. 완료 기준 평가 유지보수성: scenario/tool/repo catalog 변경이 score formula diff와 섞이지 않는다. 검증성: panel/model/catalog/runtime model boundary를 tests/contracts가 확인한다. 동작 보존: EVAL c",
+        "path": "_history/evaluations/2026/2026-06-06-eval-report-catalog-structure.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T01:13:08.238Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-eval-report-catalog-structure-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "2026 06 06 request to outcome trace",
+        "detail": "2026 06 06 request to outcome trace 요청 소스코드 개선. 결정 가장 직접적인 다음 구조 병목으로 EVAL report model 안의 static catalog 혼재를 선택했다. 전체 repository 일괄 refactor 대신, 검증 가능한 source boundary 개선으로 진행했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationReportCatalog.ts p",
+        "path": "_history/request-traces/2026/2026-06-06-eval-report-catalog-structure.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T01:13:08.238Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-eval-report-catalog-structure-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Eval Report Catalog Structure",
+        "detail": "{ \"task id\": \"2026 06 06 eval report catalog structure\", \"title\": \"EVAL report catalog structure\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first i",
+        "path": "_history/work-timings/2026/2026-06-06-eval-report-catalog-structure.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T01:13:08.237Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-eval-report-catalog-structure-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "2026 06 06 EVAL report catalog structure 작업 요약",
+        "detail": "2026 06 06 EVAL report catalog structure 작업 요약 구현 evaluationReportCatalog.ts 를 추가해 EVAL scenario, tool signal, fallback eval repo, repo merge function을 분리했다. evaluationReportModel.ts 는 catalog를 import해 score model을 계산하도록 변경했다. EvaluationReportPanel.tsx 는 scenario catalog와 report ",
+        "path": "_history/work-summaries/2026/2026-06-06-eval-report-catalog-structure.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T01:13:08.237Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-eval-report-catalog-structure-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: EVAL report catalog structure",
+        "detail": "사용자 요청 요약: EVAL report catalog structure 사용자는 “소스코드 개선”을 요청했다. 이전 맥락은 desktop app 성능, UI, EVAL, 구조 개선 반복이므로, 이번 slice는 EVAL report source의 책임 분리를 선택했다. 적용한 범위 EVAL report static catalog를 score model에서 분리. 관련 contract/tests 갱신. 구현 후 build/package까지 실행 예정.",
+        "path": "_history/user-requests/2026/2026-06-06-eval-report-catalog-structure.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T01:09:26.208Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-eval-report-catalog-structure-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: EVAL report catalog structure",
+        "detail": "웹 검색 기록: EVAL report catalog structure 목적 사용자의 “소스코드 개선” 요청을 platform desktop app의 EVAL report 구조 개선으로 좁혀 구현하기 전에, UI/계산/정적 데이터 분리 원칙이 현재 React/TypeScript 공식 권장과 충돌하지 않는지 확인했다. 검색어 TypeScript official modules import export maintainability type only imports React official keeping ",
+        "path": "_history/web-searches/2026/2026-06-06-eval-report-catalog-structure.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T01:09:26.204Z"
+      },
       {
         "id": "history-history-evaluations-2026-2026-06-06-eval-report-model-structure-ko-md",
         "sourceType": "history",
@@ -20540,96 +20630,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T21:38:05.813Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-fundamental-improvement-structure-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 Fundamental Improvement Structure",
-        "detail": "{ \"schema version\": \"2026 06 06\", \"task\": \"fundamental improvement structure\", \"timezone\": \"Asia/Seoul\", \"spans\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"notes\": \"Checked continuous improvement, platform engineering, fitness functions, and postmortem learning sourc",
-        "path": "_history/work-timings/2026/2026-06-06-fundamental-improvement-structure.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:38:05.812Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-fundamental-improvement-structure-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Fundamental Improvement Structure Evaluation Input",
-        "detail": "{ \"schema version\": \"2026 06 06\", \"work mode\": \"governance\", \"user request summary targets\": \" history/user requests/2026/2026 06 06 fundamental improvement structure.ko.md\" , \"requirements targets\": \"platform desktop app/docs/requirements/2026 06 06 fundamental improvement struc",
-        "path": "_history/evaluations/2026/2026-06-06-fundamental-improvement-structure-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:38:05.812Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "근본 개선 구조 적용 요약",
-        "detail": "근본 개선 구조 적용 요약 fundamentalImprovementStructure snapshot 모델을 추가해 기존 히스토리 반복 패턴 6개를 구조 원칙 6개, 개선 패키지 6개, fitness check 4개로 승격했다. Product Structure 화면에 근본 개선 구조 보드를 추가해 Signal intake Structural diagnosis Principle selection Package execution Fitness check Memory feedback 운영 모델을 보여준다",
-        "path": "_history/work-summaries/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:38:05.812Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "근본 개선 구조 적용 계획",
-        "detail": "근본 개선 구조 적용 계획 목표 다양한 히스토리에서 반복 신호를 읽고, 이를 구조적 개선 원칙과 실행 가능한 개선 패키지로 승격해 Workspace Monitor와 desktop product snapshot에 적용한다. 실행 계획 1. 기존 historyInsightLoop 를 입력으로 받는 fundamentalImprovementStructure collector를 추가한다. 2. snapshot stats/type/customer sanitizer에 구조 개선 모델을 연결한다. 3. Prod",
-        "path": "_history/plans/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:30:46.502Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "ready",
-        "title": "사용자 요청 요약",
-        "detail": "사용자 요청 요약 날짜: 2026 06 06 요약: 다양한 히스토리를 보고 근본적 개선 구조를 생각해 플랫폼에 적용해 달라는 요청. 해석: 기존 히스토리 인사이트 루프를 상위 운영 구조로 승격하고, 플랫폼 UI와 snapshot에 적용해야 한다. 수용 기준: 구조적 원칙, 실행 패키지, 검증 루프가 플랫폼에 실제로 반영되고 빌드까지 완료되어야 한다.",
-        "path": "_history/user-requests/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:30:46.502Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "근본 개선 구조 웹 검색 기록",
-        "detail": "근본 개선 구조 웹 검색 기록 날짜: 2026 06 06 요청 요약: 다양한 히스토리에서 근본적 개선 구조를 추론해 플랫폼에 적용한다. 검색어 continuous improvement operating model software platform lessons learned architecture decision records official platform engineering operating model continuous improvement feedback loop official softw",
-        "path": "_history/web-searches/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:30:46.499Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23160,9 +23160,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 56626,
-      "lineCount": 1258,
-      "updatedAt": "2026-06-06T00:56:07.899Z",
+      "sizeBytes": 57155,
+      "lineCount": 1268,
+      "updatedAt": "2026-06-06T01:07:38.765Z",
       "truncated": true,
       "preview": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/paths.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/definitions.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/runner.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts",
       "previewBytes": 1200
@@ -23635,7 +23635,7 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 15
+        "documentsCount": 16
       },
       {
         "category": "web-search",
@@ -23650,7 +23650,7 @@
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 5
+        "documentsCount": 4
       },
       {
         "category": "evaluation",
@@ -23749,7 +23749,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 79,
+        "documentCount": 78,
         "sourceFileCount": 5
       },
       {
@@ -23890,7 +23890,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,258 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,268 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23937,8 +23937,8 @@
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1258,
-        "sizeBytes": 56626,
+        "lineCount": 1268,
+        "sizeBytes": 57155,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
@@ -27577,13 +27577,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3646,
+      "sourceDocuments": 3658,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T01:00:24.812Z"
+      "latestInsightAt": "2026-06-06T01:13:08.238Z"
     },
     "inferenceStages": [
       {
@@ -27651,11 +27651,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 418,
+        "signalCount": 421,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 139
+            "count": 140
           },
           {
             "category": "project-spec",
@@ -27663,11 +27663,11 @@
           },
           {
             "category": "request-trace",
-            "count": 64
+            "count": 65
           },
           {
             "category": "user-request",
-            "count": 37
+            "count": 38
           },
           {
             "category": "work-summary",
@@ -27706,7 +27706,7 @@
           "최종 평가",
           "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브"
         ],
-        "latestEvidenceAt": "2026-06-06T01:00:24.812Z"
+        "latestEvidenceAt": "2026-06-06T01:13:08.238Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27720,11 +27720,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1687,
+        "signalCount": 1690,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 470
+            "count": 471
           },
           {
             "category": "evaluation",
@@ -27732,7 +27732,7 @@
           },
           {
             "category": "web-search",
-            "count": 408
+            "count": 409
           },
           {
             "category": "plan",
@@ -27740,7 +27740,7 @@
           },
           {
             "category": "request-trace",
-            "count": 108
+            "count": 109
           },
           {
             "category": "work-timing",
@@ -27771,7 +27771,7 @@
           "2026 05 31 작업 모드 라우팅 계획 기록",
           "계획 히스토리: 코딩 조사 출처 다양성 강화"
         ],
-        "latestEvidenceAt": "2026-06-06T00:57:07.706Z"
+        "latestEvidenceAt": "2026-06-06T01:13:08.238Z"
       },
       {
         "id": "large-scope-slicing",
@@ -27785,11 +27785,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 980,
+        "signalCount": 986,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 481
+            "count": 482
           },
           {
             "category": "plan",
@@ -27797,23 +27797,23 @@
           },
           {
             "category": "request-trace",
-            "count": 91
+            "count": 92
           },
           {
             "category": "project-spec",
-            "count": 74
+            "count": 76
           },
           {
             "category": "work-summary",
-            "count": 20
+            "count": 21
+          },
+          {
+            "category": "user-request",
+            "count": 12
           },
           {
             "category": "web-search",
             "count": 12
-          },
-          {
-            "category": "user-request",
-            "count": 11
           },
           {
             "category": "daily-history",
@@ -27844,7 +27844,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T01:00:24.812Z"
+        "latestEvidenceAt": "2026-06-06T01:13:08.238Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -27858,11 +27858,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 645,
+        "signalCount": 647,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 256
+            "count": 258
           },
           {
             "category": "evaluation",
@@ -27917,7 +27917,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-06T01:00:24.809Z"
+        "latestEvidenceAt": "2026-06-06T01:13:08.236Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -27931,7 +27931,7 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1425,
+        "signalCount": 1426,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -27943,7 +27943,7 @@
           },
           {
             "category": "user-request",
-            "count": 90
+            "count": 91
           },
           {
             "category": "request-trace",
@@ -27990,7 +27990,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T01:00:24.812Z"
+        "latestEvidenceAt": "2026-06-06T01:09:26.208Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28066,14 +28066,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3646,
+      "sourceDocuments": 3658,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T01:00:24.812Z"
+      "latestInsightAt": "2026-06-06T01:13:08.238Z"
     },
     "operatingModel": [
       {
@@ -28131,25 +28131,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3085,
+        "signalCount": 3097,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1687
+            "signalCount": 1690
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 980
+            "signalCount": 986
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 418
+            "signalCount": 421
           }
         ],
         "missingPatternIds": [],
@@ -28177,7 +28177,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T01:00:24.812Z",
+        "latestEvidenceAt": "2026-06-06T01:13:08.238Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28206,13 +28206,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 756,
+        "signalCount": 758,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 645
+            "signalCount": 647
           },
           {
             "id": "release-blocker-gate",
@@ -28246,7 +28246,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T01:00:24.809Z",
+        "latestEvidenceAt": "2026-06-06T01:13:08.236Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28275,19 +28275,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2405,
+        "signalCount": 2412,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1425
+            "signalCount": 1426
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 980
+            "signalCount": 986
           }
         ],
         "missingPatternIds": [],
@@ -28315,7 +28315,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T01:00:24.812Z",
+        "latestEvidenceAt": "2026-06-06T01:13:08.238Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28344,13 +28344,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 529,
+        "signalCount": 532,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 418
+            "signalCount": 421
           },
           {
             "id": "release-blocker-gate",
@@ -28384,7 +28384,7 @@
           "2026 06 06 User Request: Public Release Developer Repatch",
           "Public Release Updater Automation Spec"
         ],
-        "latestEvidenceAt": "2026-06-06T01:00:24.812Z",
+        "latestEvidenceAt": "2026-06-06T01:13:08.238Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28413,19 +28413,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2667,
+        "signalCount": 2676,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 980
+            "signalCount": 986
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1687
+            "signalCount": 1690
           }
         ],
         "missingPatternIds": [],
@@ -28453,7 +28453,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T01:00:24.812Z",
+        "latestEvidenceAt": "2026-06-06T01:13:08.238Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28482,7 +28482,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1798,
+        "signalCount": 1801,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28494,7 +28494,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1687
+            "signalCount": 1690
           }
         ],
         "missingPatternIds": [],
@@ -28522,7 +28522,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T00:57:07.706Z",
+        "latestEvidenceAt": "2026-06-06T01:13:08.238Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

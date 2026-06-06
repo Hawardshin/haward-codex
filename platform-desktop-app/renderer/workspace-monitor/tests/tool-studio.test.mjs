@@ -29,6 +29,10 @@ const evaluationReportModel = fs.readFileSync(
   path.join(projectRoot, "components", "features", "evaluationReportModel.ts"),
   "utf8"
 );
+const evaluationReportCatalog = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "evaluationReportCatalog.ts"),
+  "utf8"
+);
 const evaluationRuntimeTelemetry = fs.readFileSync(
   path.join(projectRoot, "components", "features", "evaluationRuntimeTelemetry.ts"),
   "utf8"
@@ -141,11 +145,15 @@ test("AI Eval is a first-class resident workbench section", () => {
   assert.match(evaluationReportPanel, /data-eval-comprehensive-improvement="all-signal-cockpit"/);
   assert.match(evaluationReportPanel, /data-eval-runtime-telemetry/);
   assert.match(evaluationReportPanel, /buildEvaluationReportModel/);
+  assert.match(evaluationReportPanel, /evaluationReportCatalog/);
   assert.match(evaluationReportPanel, /formatEvalPercent/);
   assert.match(evaluationReportPanel, /EvalRuntimeTelemetrySignal/);
   assert.match(evaluationReportPanel, /runtimeTelemetryAvailable/);
   assert.match(evaluationReportModel, /export function buildEvaluationReportModel/);
   assert.match(evaluationReportModel, /export function formatEvalPercent/);
+  assert.match(evaluationReportModel, /evaluationReportCatalog/);
+  assert.match(evaluationReportModel, /mergeEvalRepos/);
+  assert.match(evaluationReportModel, /toolSignals/);
   assert.match(evaluationReportModel, /buildRuntimeTelemetryModel/);
   assert.match(evaluationReportModel, /nativeRuntimeScore/);
   assert.match(evaluationRuntimeTelemetry, /export type EvalRuntimeTelemetrySignal/);
@@ -163,14 +171,18 @@ test("AI Eval is a first-class resident workbench section", () => {
   assert.match(evaluationReportModel, /release-packaging/);
   assert.match(evaluationReportModel, /open-source-leverage/);
   assert.match(evaluationReportModel, /automation-continuity/);
-  assert.match(evaluationReportModel, /Token and Cost Tracking/);
-  assert.match(evaluationReportModel, /OpenAI Evals/);
-  assert.match(evaluationReportModel, /Inspect AI/);
-  assert.match(evaluationReportModel, /promptfoo/);
-  assert.match(evaluationReportModel, /DeepEval/);
-  assert.match(evaluationReportModel, /Arize Phoenix/);
-  assert.match(evaluationReportModel, /Opik/);
-  assert.match(evaluationReportModel, /Langfuse/);
+  assert.match(evaluationReportCatalog, /export const evalScenarios/);
+  assert.match(evaluationReportCatalog, /export const toolSignals/);
+  assert.match(evaluationReportCatalog, /export const fallbackEvalRepos/);
+  assert.match(evaluationReportCatalog, /export function mergeEvalRepos/);
+  assert.match(evaluationReportCatalog, /Token and Cost Tracking/);
+  assert.match(evaluationReportCatalog, /OpenAI Evals/);
+  assert.match(evaluationReportCatalog, /Inspect AI/);
+  assert.match(evaluationReportCatalog, /promptfoo/);
+  assert.match(evaluationReportCatalog, /DeepEval/);
+  assert.match(evaluationReportCatalog, /Arize Phoenix/);
+  assert.match(evaluationReportCatalog, /Opik/);
+  assert.match(evaluationReportCatalog, /Langfuse/);
   assert.match(css, /\.eval-workbench \{/);
   assert.match(css, /\.eval-score-strip \{/);
   assert.match(css, /\.eval-comprehensive-panel \{/);

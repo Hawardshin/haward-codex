@@ -563,6 +563,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     join(root, "renderer/workspace-monitor/components/features/evaluationReportModel.ts"),
     "utf8"
   );
+  const evaluationReportCatalog = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/evaluationReportCatalog.ts"),
+    "utf8"
+  );
   const evaluationRuntimeTelemetry = readFileSync(
     join(root, "renderer/workspace-monitor/components/features/evaluationRuntimeTelemetry.ts"),
     "utf8"
@@ -733,11 +737,17 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     assert.match(`${evaluationReportPanel}\n${evaluationReportModel}`, pattern);
     assert.match(evaluationRuntimeTelemetry, pattern);
   }
-  for (const reportModelToken of ["buildEvaluationReportModel", "formatEvalPercent", "evalScenarios", "comprehensiveImprovementDimensions"]) {
+  for (const reportModelToken of ["buildEvaluationReportModel", "formatEvalPercent", "comprehensiveImprovementDimensions"]) {
     const pattern = new RegExp(reportModelToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
     assert.match(evaluationReportPanel, pattern);
     assert.match(evaluationReportModel, pattern);
   }
+  for (const reportCatalogToken of ["evalScenarios", "toolSignals", "fallbackEvalRepos", "mergeEvalRepos"]) {
+    const pattern = new RegExp(reportCatalogToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    assert.match(evaluationReportCatalog, pattern);
+  }
+  assert.match(evaluationReportPanel, /evaluationReportCatalog/);
+  assert.match(evaluationReportModel, /evaluationReportCatalog/);
 
   for (const commandName of [
     "list_cli_adapters",

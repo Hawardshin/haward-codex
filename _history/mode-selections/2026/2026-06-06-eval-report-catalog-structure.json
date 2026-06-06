@@ -1,0 +1,19 @@
+{
+  "schema_version": "2026-06-02",
+  "task_id": "2026-06-06-eval-report-catalog-structure",
+  "selected_mode": "standard",
+  "reason": "사용자 요청은 소스코드 개선이며 platform-desktop-app renderer source와 test contract를 변경하는 의미 있는 구현 작업이다.",
+  "project": "platform-desktop-app",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "resource_risk_occurred": false,
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-06-eval-report-catalog-structure.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-06-eval-report-catalog-structure.ko.md"
+  ],
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-06-eval-report-catalog-structure.ko.md"
+  ]
+}
