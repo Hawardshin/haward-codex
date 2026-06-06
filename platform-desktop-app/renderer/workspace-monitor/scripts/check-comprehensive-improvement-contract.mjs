@@ -5,6 +5,10 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
 const evaluationPanel = fs.readFileSync(path.join(projectRoot, "components", "features", "EvaluationReportPanel.tsx"), "utf8");
+const runtimeTelemetryModel = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "evaluationRuntimeTelemetry.ts"),
+  "utf8"
+);
 const css = fs.readFileSync(path.join(projectRoot, "app", "globals.css"), "utf8");
 const packageJson = JSON.parse(fs.readFileSync(path.join(projectRoot, "package.json"), "utf8"));
 
@@ -33,13 +37,21 @@ assertIncludes(evaluationPanel, "Comprehensive improvement panel", [
   "EvalRuntimeTelemetrySignal",
   "comprehensiveImprovementDimensions",
   "comprehensiveImprovementScore",
+  "buildRuntimeTelemetryModel",
   "nativeRuntimeScore",
   "runtimeTelemetryAvailable",
   "priorityDimensions",
   "riskLaneCount",
+  ...dimensionIds
+]);
+
+assertIncludes(runtimeTelemetryModel, "Runtime telemetry score model", [
+  "export type EvalRuntimeTelemetrySignal",
+  "export function buildRuntimeTelemetryModel",
+  "formatRuntimeBytes",
   "process.memory.usage",
   "process.cpu.utilization",
-  ...dimensionIds
+  "process.thread.count"
 ]);
 
 assertIncludes(css, "Comprehensive improvement design", [

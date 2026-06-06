@@ -1,0 +1,26 @@
+{
+  "task_id": "2026-06-06-eval-runtime-telemetry-source-refactor",
+  "date": "2026-06-06",
+  "project": "platform-desktop-app",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "selection_reason": "The request asks for source improvement. The chosen slice changes application source structure, static contracts, tests, generated snapshots, and package verification, so quick mode is insufficient.",
+  "scope_boundary": {
+    "included": [
+      "Evaluation runtime telemetry score model extraction",
+      "TypeScript module/type boundary",
+      "static source contract updates",
+      "renderer and desktop verification",
+      "internal package build"
+    ],
+    "excluded": [
+      "full MonitorShell split",
+      "new runtime dependency installation",
+      "new external EVAL runner"
+    ]
+  },
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-06-eval-runtime-telemetry-source-refactor.json"
+  ]
+}

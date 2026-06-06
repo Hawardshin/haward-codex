@@ -16,6 +16,11 @@ import {
 } from "lucide-react";
 
 import type { WorkspaceSnapshot } from "@/lib/snapshot";
+import {
+  buildRuntimeTelemetryModel,
+  formatRuntimeBytes
+} from "@/components/features/evaluationRuntimeTelemetry";
+import type { EvalRuntimeTelemetrySignal } from "@/components/features/evaluationRuntimeTelemetry";
 
 type EvalDocument = WorkspaceSnapshot["documents"][number];
 type EvalHistoryDay = WorkspaceSnapshot["historyDays"][number];
@@ -44,37 +49,6 @@ type EvalCandidateRepo = {
   url: string;
   focus: string;
   status: string;
-};
-
-type EvalRuntimeTelemetrySignal = {
-  status: string;
-  schemaVersion: string;
-  sampledAt: string;
-  systemSupported: boolean;
-  appPid: number;
-  processMemoryBytes: number;
-  processVirtualMemoryBytes: number;
-  processCpuUsage: number;
-  processRunTimeSeconds: number;
-  processTaskCount: number;
-  cpuThreads: number;
-  parallelWorkers: number;
-  globalCpuUsage: number;
-  totalMemoryBytes: number;
-  availableMemoryBytes: number;
-  memoryBudgetBytes: number;
-  workspaceCache: {
-    cacheStatus: string;
-    cachedTextFiles: number;
-    cachedBytes: number;
-    preloadDurationMs: number;
-  };
-  semanticMetrics?: Array<{
-    name: string;
-    value: number;
-    unit: string;
-    source: string;
-  }>;
 };
 
 type ImprovementDimension = {
@@ -267,20 +241,6 @@ function percent(value: number) {
   return `${Math.max(0, Math.min(100, Math.round(value))).toLocaleString("ko-KR")}%`;
 }
 
-function formatBytes(value: number) {
-  if (!Number.isFinite(value) || value <= 0) {
-    return "0 B";
-  }
-  const units = ["B", "KB", "MB", "GB", "TB"];
-  let size = value;
-  let unitIndex = 0;
-  while (size >= 1024 && unitIndex < units.length - 1) {
-    size /= 1024;
-    unitIndex += 1;
-  }
-  return `${size >= 10 || unitIndex === 0 ? size.toFixed(0) : size.toFixed(1)} ${units[unitIndex]}`;
-}
-
 function scoreFromRatio(value: number, max: number) {
   if (max <= 0) {
     return 0;
@@ -420,64 +380,13 @@ export function EvaluationReportPanel({
     /resource|process|pipe|memory|cpu|ram|leak|terminal|pty|tauri|rust|native|운영체제|메모리|프로세스|파이프/i
   );
   const releaseSignalCount = toolSignalCount("package") + documentsMatching(/build|package|dmg|codesign|notar|release|빌드|패키징|배포/i);
-  const runtimeTelemetryAvailable = Boolean(runtimeTelemetry?.status === "sampled" && runtimeTelemetry.systemSupported);
-  const runtimeMemoryHeadroomScore =
-    runtimeTelemetryAvailable && runtimeTelemetry?.memoryBudgetBytes
-      ? clampScore(100 - Math.min(95, scoreFromRatio(runtimeTelemetry.processMemoryBytes, runtimeTelemetry.memoryBudgetBytes)))
-      : scoreFromRatio(nativeResourceSignalCount, 12);
-  const runtimeCpuHeadroomScore =
-    runtimeTelemetryAvailable && runtimeTelemetry
-      ? clampScore(100 - Math.min(95, runtimeTelemetry.processCpuUsage))
-      : scoreFromRatio(toolSignalCount("rust-tauri"), 4);
-  const runtimeCacheScore =
-    runtimeTelemetryAvailable && runtimeTelemetry?.workspaceCache
-      ? runtimeTelemetry.workspaceCache.cachedBytes > 0 || runtimeTelemetry.workspaceCache.cacheStatus
-        ? 100
-        : 40
-      : scoreFromRatio(nativeResourceSignalCount, 12);
-  const nativeRuntimeScore = runtimeTelemetryAvailable
-    ? clampScore(runtimeMemoryHeadroomScore * 0.36 + runtimeCpuHeadroomScore * 0.36 + runtimeCacheScore * 0.18 + validationSignalScore * 0.1)
-    : clampScore(scoreFromRatio(nativeResourceSignalCount, 12) * 0.45 + scoreFromRatio(toolSignalCount("rust-tauri"), 4) * 0.35 + validationSignalScore * 0.2);
-  const runtimeTelemetryRows = runtimeTelemetryAvailable && runtimeTelemetry
-    ? [
-        {
-          id: "process.memory.usage",
-          labelKo: "프로세스 RAM",
-          labelEn: "Process RAM",
-          value: formatBytes(runtimeTelemetry.processMemoryBytes),
-          detail: `${formatBytes(runtimeTelemetry.availableMemoryBytes)} free / ${formatBytes(runtimeTelemetry.memoryBudgetBytes)} budget`
-        },
-        {
-          id: "process.cpu.utilization",
-          labelKo: "프로세스 CPU",
-          labelEn: "Process CPU",
-          value: `${runtimeTelemetry.processCpuUsage.toFixed(1)}%`,
-          detail: `${runtimeTelemetry.parallelWorkers}/${runtimeTelemetry.cpuThreads} workers`
-        },
-        {
-          id: "workspace.cache.usage",
-          labelKo: "워크스페이스 cache",
-          labelEn: "Workspace Cache",
-          value: formatBytes(runtimeTelemetry.workspaceCache.cachedBytes),
-          detail: `${runtimeTelemetry.workspaceCache.cachedTextFiles.toLocaleString("ko-KR")} files / ${runtimeTelemetry.workspaceCache.cacheStatus}`
-        },
-        {
-          id: "process.thread.count",
-          labelKo: "프로세스 task",
-          labelEn: "Process Tasks",
-          value: runtimeTelemetry.processTaskCount.toLocaleString("ko-KR"),
-          detail: `${runtimeTelemetry.processRunTimeSeconds.toLocaleString("ko-KR")}s uptime`
-        }
-      ]
-    : [
-        {
-          id: "runtime.preview",
-          labelKo: "네이티브 telemetry",
-          labelEn: "Native Telemetry",
-          value: ko ? "대기" : "pending",
-          detail: ko ? "Tauri desktop runtime에서 RAM/CPU/cache가 채워집니다." : "RAM, CPU, and cache fill in the Tauri desktop runtime."
-        }
-      ];
+  const { nativeRuntimeScore, runtimeTelemetryAvailable, runtimeTelemetryRows } = buildRuntimeTelemetryModel({
+    ko,
+    nativeResourceSignalCount,
+    runtimeTelemetry,
+    rustTauriSignalCount: toolSignalCount("rust-tauri"),
+    validationSignalScore
+  });
   const openSourceLayerScore = scoreFromRatio(
     (openSourceReferences.summary?.totalLayers || openSourceReferences.featureReferenceLayers.length || 0) +
       (openSourceReferences.summary?.totalRepositories || openSourceCandidates.length || 0),
@@ -503,10 +412,10 @@ export function EvaluationReportPanel({
       ),
       state: "watch",
       evidenceKo: runtimeTelemetryAvailable && runtimeTelemetry
-        ? `${formatBytes(runtimeTelemetry.processMemoryBytes)} RAM / ${runtimeTelemetry.processCpuUsage.toFixed(1)}% CPU / ${toolSignalCount("browser").toLocaleString("ko-KR")} browser signals`
+        ? `${formatRuntimeBytes(runtimeTelemetry.processMemoryBytes)} RAM / ${runtimeTelemetry.processCpuUsage.toFixed(1)}% CPU / ${toolSignalCount("browser").toLocaleString("ko-KR")} browser signals`
         : `${timingDocs.length.toLocaleString("ko-KR")} timing docs / ${toolSignalCount("browser").toLocaleString("ko-KR")} browser signals`,
       evidenceEn: runtimeTelemetryAvailable && runtimeTelemetry
-        ? `${formatBytes(runtimeTelemetry.processMemoryBytes)} RAM / ${runtimeTelemetry.processCpuUsage.toFixed(1)}% CPU / ${toolSignalCount("browser").toLocaleString("ko-KR")} browser signals`
+        ? `${formatRuntimeBytes(runtimeTelemetry.processMemoryBytes)} RAM / ${runtimeTelemetry.processCpuUsage.toFixed(1)}% CPU / ${toolSignalCount("browser").toLocaleString("ko-KR")} browser signals`
         : `${timingDocs.length.toLocaleString("ko-KR")} timing docs / ${toolSignalCount("browser").toLocaleString("ko-KR")} browser signals`,
       nextKo: "탭 전환, long task, resident preload를 같은 smoke run에서 계속 측정합니다.",
       nextEn: "Keep tab switching, long tasks, and resident preload measured in one smoke run."

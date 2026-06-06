@@ -1,0 +1,49 @@
+{
+  "task_id": "2026-06-06-eval-runtime-telemetry-source-refactor",
+  "title": "EVAL runtime telemetry source refactor",
+  "date": "2026-06-06",
+  "project": "platform-desktop-app",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked React, TypeScript, Tauri, and OpenTelemetry official references."
+    },
+    {
+      "phase_id": "memory_bootstrap_and_scope",
+      "label": "Memory bootstrap and scope",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Selected EVAL runtime telemetry source refactor as a bounded source improvement slice."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Extracted runtime telemetry score model into a pure TypeScript module and updated callers."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Renderer checks/tests, desktop checks/tests, renderer build, package:internal, and Browser smoke passed."
+    },
+    {
+      "phase_id": "evaluation_closeout",
+      "label": "Evaluation and close-out",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Close-out records finalized; commit and push remain as VCS actions."
+    }
+  ],
+  "slow_phase_candidates": [
+    "Tauri internal package build"
+  ],
+  "bottleneck_notes": "Package remains the expected slow phase because it repeats renderer and Rust verification before bundling. A stale macOS DMG intermediate cleanup step now guards retries."
+}

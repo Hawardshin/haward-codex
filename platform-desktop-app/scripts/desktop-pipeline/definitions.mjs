@@ -22,6 +22,13 @@ const developerSnapshotCollectStep = pnpmWorkspaceStep("Workspace Monitor develo
   "collect"
 ]);
 
+const macosDmgIntermediateCleanupStep = step(
+  "Clean stale macOS DMG intermediates",
+  "node",
+  ["scripts/cleanup-macos-dmg-intermediates.mjs"],
+  projectRoot
+);
+
 function tauriPreparedBuildStep(label) {
   return pnpmWorkspaceStep(label, [
     "--filter",
@@ -97,6 +104,7 @@ export const pipelines = {
   "tauri-build-prepared": {
     description: "Build the Tauri bundle using an already prepared and audited renderer output.",
     steps: [
+      macosDmgIntermediateCleanupStep,
       tauriPreparedBuildStep("Tauri build with prepared renderer")
     ]
   },
@@ -105,6 +113,7 @@ export const pipelines = {
     steps: [
       ...commonVerifySteps,
       step("Rust build", "cargo", ["build"], tauriRoot),
+      macosDmgIntermediateCleanupStep,
       tauriPreparedBuildStep("Tauri internal package build with prepared renderer"),
       step("macOS app signature verification", "codesign", ["--verify", "--deep", "--strict", macosAppArtifact], repoRoot, {
         onlyPlatform: "darwin"
@@ -129,6 +138,7 @@ export const pipelines = {
       ]),
       ...commonVerifySteps,
       step("Rust build", "cargo", ["build"], tauriRoot),
+      macosDmgIntermediateCleanupStep,
       step("Tauri public package build with signed updater artifacts", "node", ["scripts/public-release-build.mjs"], projectRoot),
       step("macOS app signature verification", "codesign", ["--verify", "--deep", "--strict", macosAppArtifact], repoRoot, {
         onlyPlatform: "darwin"

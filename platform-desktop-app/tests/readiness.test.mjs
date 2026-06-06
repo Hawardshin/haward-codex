@@ -20,6 +20,7 @@ test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline/paths.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline/definitions.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline/runner.mjs")), true);
+  assert.equal(existsSync(join(root, "scripts/cleanup-macos-dmg-intermediates.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/readiness/desktop-build-pipeline.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/public-release-dev-env.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/desktop-doctor.mjs")), true);
@@ -57,8 +58,9 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
   const pipelineEntrypoint = readFileSync(join(root, "scripts/desktop-pipeline.mjs"), "utf8");
   const pipelineDefinitions = readFileSync(join(root, "scripts/desktop-pipeline/definitions.mjs"), "utf8");
   const pipelineRunner = readFileSync(join(root, "scripts/desktop-pipeline/runner.mjs"), "utf8");
+  const dmgCleanupScript = readFileSync(join(root, "scripts/cleanup-macos-dmg-intermediates.mjs"), "utf8");
   const buildPipelineReadiness = readFileSync(join(root, "scripts/readiness/desktop-build-pipeline.mjs"), "utf8");
-  const pipelineStructure = `${pipelineEntrypoint}\n${pipelineDefinitions}\n${pipelineRunner}`;
+  const pipelineStructure = `${pipelineEntrypoint}\n${pipelineDefinitions}\n${pipelineRunner}\n${dmgCleanupScript}`;
   const requirementsKo = readFileSync(join(root, "docs/requirements/2026-06-02-installable-desktop.ko.md"), "utf8");
   const requirementsEn = readFileSync(join(root, "docs/requirements/2026-06-02-installable-desktop.en.md"), "utf8");
 
@@ -103,7 +105,7 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
   assert.match(buildPipelineReadiness, /checkDesktopBuildPipeline/);
   assert.match(buildPipelineReadiness, /desktopBuildPipelineRequiredFiles/);
   assert.match(buildPipelineReadiness, /desktop:doctor/);
-  for (const token of ["package-internal", "package-public", "public-report", "commonVerifySteps", "Workspace Monitor developer snapshot collect", "Public release preflight", "Tauri internal package build", "Tauri public package build", "create-updater-manifest", "codesign", "hdiutil"]) {
+  for (const token of ["package-internal", "package-public", "public-report", "commonVerifySteps", "Workspace Monitor developer snapshot collect", "Clean stale macOS DMG intermediates", "cleanup-macos-dmg-intermediates", "staleDmgPattern", "rmSync", "Public release preflight", "Tauri internal package build", "Tauri public package build", "create-updater-manifest", "codesign", "hdiutil"]) {
     assert.match(pipelineStructure, new RegExp(token));
   }
   const commonVerifyDefinition = pipelineDefinitions.slice(pipelineDefinitions.indexOf("const commonVerifySteps"));
@@ -557,6 +559,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     join(root, "renderer/workspace-monitor/components/features/EvaluationReportPanel.tsx"),
     "utf8"
   );
+  const evaluationRuntimeTelemetry = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/evaluationRuntimeTelemetry.ts"),
+    "utf8"
+  );
   const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureDrilldown}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}\n${agentBuilderPanels}\n${agentDetailPanels}`;
   const monitorStyles = readFileSync(join(root, "renderer/workspace-monitor/app/globals.css"), "utf8");
   const clipboardUtility = readFileSync(join(root, "renderer/workspace-monitor/lib/clipboard.mjs"), "utf8");
@@ -716,7 +722,12 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   for (const metricToken of ["process.memory.usage", "process.cpu.utilization", "process.thread.count"]) {
     const pattern = new RegExp(metricToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
     assert.match(lib, pattern);
+    assert.match(evaluationRuntimeTelemetry, pattern);
+  }
+  for (const runtimeTelemetryToken of ["buildRuntimeTelemetryModel", "formatRuntimeBytes", "EvalRuntimeTelemetrySignal"]) {
+    const pattern = new RegExp(runtimeTelemetryToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
     assert.match(evaluationReportPanel, pattern);
+    assert.match(evaluationRuntimeTelemetry, pattern);
   }
 
   for (const commandName of [

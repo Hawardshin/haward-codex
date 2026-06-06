@@ -25,6 +25,10 @@ const evaluationReportPanel = fs.readFileSync(
   path.join(projectRoot, "components", "features", "EvaluationReportPanel.tsx"),
   "utf8"
 );
+const evaluationRuntimeTelemetry = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "evaluationRuntimeTelemetry.ts"),
+  "utf8"
+);
 const toolStudio = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "ToolStudioPanel.tsx"),
   "utf8"
@@ -132,11 +136,16 @@ test("AI Eval is a first-class resident workbench section", () => {
   assert.match(evaluationReportPanel, /data-eval-workbench="open-source-eval-cockpit"/);
   assert.match(evaluationReportPanel, /data-eval-comprehensive-improvement="all-signal-cockpit"/);
   assert.match(evaluationReportPanel, /data-eval-runtime-telemetry/);
+  assert.match(evaluationReportPanel, /buildRuntimeTelemetryModel/);
   assert.match(evaluationReportPanel, /EvalRuntimeTelemetrySignal/);
   assert.match(evaluationReportPanel, /nativeRuntimeScore/);
   assert.match(evaluationReportPanel, /runtimeTelemetryAvailable/);
-  assert.match(evaluationReportPanel, /process\.memory\.usage/);
-  assert.match(evaluationReportPanel, /process\.cpu\.utilization/);
+  assert.match(evaluationRuntimeTelemetry, /export type EvalRuntimeTelemetrySignal/);
+  assert.match(evaluationRuntimeTelemetry, /export function buildRuntimeTelemetryModel/);
+  assert.match(evaluationRuntimeTelemetry, /formatRuntimeBytes/);
+  assert.match(evaluationRuntimeTelemetry, /process\.memory\.usage/);
+  assert.match(evaluationRuntimeTelemetry, /process\.cpu\.utilization/);
+  assert.match(evaluationRuntimeTelemetry, /process\.thread\.count/);
   assert.match(evaluationReportPanel, /Current work evaluation report/);
   assert.match(evaluationReportPanel, /Composite Improvement Cockpit/);
   assert.match(evaluationReportPanel, /desktop-performance/);
