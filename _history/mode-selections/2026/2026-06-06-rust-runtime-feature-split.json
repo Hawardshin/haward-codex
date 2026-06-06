@@ -1,0 +1,12 @@
+{
+  "date": "2026-06-06",
+  "work_id": "2026-06-06-rust-runtime-feature-split",
+  "selected_work_mode": "ship_first",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The request changes Rust/Tauri source architecture and desktop runtime behavior, so it needs implementation, tests, generated snapshot refresh, package validation, and close-out records.",
+  "web_first_intake_done": true,
+  "memory_bootstrap_simulated": true,
+  "resource_risk_occurred": true,
+  "installation_occurred": false
+}

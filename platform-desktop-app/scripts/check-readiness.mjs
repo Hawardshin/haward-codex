@@ -61,6 +61,15 @@ const requiredFiles = [
   "src-tauri/Entitlements.plist",
   "src-tauri/src/main.rs",
   "src-tauri/src/lib.rs",
+  "src-tauri/src/features/mod.rs",
+  "src-tauri/src/features/app_shell.rs",
+  "src-tauri/src/features/cli.rs",
+  "src-tauri/src/features/native.rs",
+  "src-tauri/src/features/workspace.rs",
+  "src-tauri/src/features/providers.rs",
+  "src-tauri/src/features/diagnostics.rs",
+  "src-tauri/src/features/agent_factory.rs",
+  "src-tauri/src/features/decisions.rs",
   "src-tauri/capabilities/default.json",
   "renderer/workspace-monitor/lib/clipboard.mjs",
   "tests/clipboard.test.mjs",
@@ -185,6 +194,7 @@ const tauriCargo = readFileSync(join(root, "src-tauri/Cargo.toml"), "utf8");
 const tauriDefaultCapability = readFileSync(join(root, "src-tauri/capabilities/default.json"), "utf8");
 for (const commandName of [
   "get_installer_shell_runtime_contract",
+  "get_rust_runtime_feature_map",
   "list_cli_adapters",
   "run_cli_adapter_health",
   "run_all_cli_adapter_health",

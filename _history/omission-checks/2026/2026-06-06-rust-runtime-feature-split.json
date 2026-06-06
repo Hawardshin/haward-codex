@@ -1,0 +1,37 @@
+{
+  "date": "2026-06-06",
+  "work_id": "2026-06-06-rust-runtime-feature-split",
+  "checked_items": [
+    {
+      "item": "web-first intake",
+      "status": "done",
+      "evidence": "_history/web-searches/2026/2026-06-06-rust-runtime-feature-split.ko.md"
+    },
+    {
+      "item": "Rust feature folder split",
+      "status": "done",
+      "evidence": "platform-desktop-app/src-tauri/src/features/"
+    },
+    {
+      "item": "feature-specific added capability",
+      "status": "done",
+      "evidence": "get_rust_runtime_feature_map"
+    },
+    {
+      "item": "UI visibility",
+      "status": "done",
+      "evidence": "Desktop Runtime Rust modules/commands metrics"
+    },
+    {
+      "item": "runtime contract and readiness",
+      "status": "done",
+      "evidence": "check-runtime-contract and check-readiness"
+    },
+    {
+      "item": "build/package",
+      "status": "done",
+      "evidence": "corepack pnpm --dir platform-desktop-app run package:internal"
+    }
+  ],
+  "status": "passed"
+}

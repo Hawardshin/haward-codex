@@ -2473,6 +2473,32 @@ type DesktopResourceSnapshotReport = {
   warmupError: string;
 };
 
+type RustRuntimeFeatureMapReport = {
+  status: string;
+  schemaVersion: string;
+  sourceLayout: {
+    rootModule: string;
+    featureRoot: string;
+    groupingPolicy: string;
+    commandRegistration: string;
+  };
+  groups: Array<{
+    groupId: string;
+    label: string;
+    sourceModule: string;
+    role: string;
+    commands: Array<{
+      command: string;
+      capability: string;
+      riskBoundary: string;
+    }>;
+    followUp: string[];
+  }>;
+  totalGroups: number;
+  totalCommands: number;
+  migrationNotes: string[];
+};
+
 type DesktopWorkspaceStateReport = {
   schemaVersion: string;
   status: string;
@@ -10859,6 +10885,7 @@ function DesktopRuntimePanel({
   const [workspaceResourceReport, setWorkspaceResourceReport] = useState<WorkspaceResourcePrepareReport | null>(null);
   const [workspaceWarmupReport, setWorkspaceWarmupReport] = useState<WorkspaceResourceWarmupReport | null>(null);
   const [desktopResourceSnapshot, setDesktopResourceSnapshot] = useState<DesktopResourceSnapshotReport | null>(null);
+  const [rustRuntimeFeatureMap, setRustRuntimeFeatureMap] = useState<RustRuntimeFeatureMapReport | null>(null);
   const [sourceSaveResults, setSourceSaveResults] = useState<WorkspaceWriteReport[]>([]);
   const [writeReport, setWriteReport] = useState<WorkspaceWriteReport | null>(null);
   const [sourceCopyNotice, setSourceCopyNotice] = useState("");
@@ -11786,7 +11813,8 @@ function DesktopRuntimePanel({
         nextAccumulatedDataOverview,
         nextServiceReadiness,
         nextDesktopWorkspace,
-        nextDesktopResourceSnapshot
+        nextDesktopResourceSnapshot,
+        nextRustRuntimeFeatureMap
       ] = await Promise.all([
         tauriInvoke<DesktopHealthStatus>("app_health"),
         tauriInvoke<CliAdapterStatus[]>("list_cli_adapters"),
@@ -11799,7 +11827,8 @@ function DesktopRuntimePanel({
         tauriInvoke<AccumulatedDataOverviewReport>("get_accumulated_data_overview"),
         tauriInvoke<ServiceReadinessReport>("get_service_readiness_report"),
         tauriInvoke<DesktopWorkspaceStateReport>("get_desktop_workspace_state"),
-        tauriInvoke<DesktopResourceSnapshotReport>("get_desktop_resource_snapshot")
+        tauriInvoke<DesktopResourceSnapshotReport>("get_desktop_resource_snapshot"),
+        tauriInvoke<RustRuntimeFeatureMapReport>("get_rust_runtime_feature_map")
       ]);
       if (!panelMountedRef.current) {
         return;
@@ -11819,6 +11848,7 @@ function DesktopRuntimePanel({
       setServiceReadinessNotice("");
       setDesktopWorkspace(nextDesktopWorkspace);
       setDesktopResourceSnapshot(nextDesktopResourceSnapshot);
+      setRustRuntimeFeatureMap(nextRustRuntimeFeatureMap);
       onDesktopResourceSnapshotChange?.(nextDesktopResourceSnapshot);
       setWorkspaceImportPath(nextDesktopWorkspace.activeWorkspacePath);
       setWorkspaceHostNotice("");
@@ -14974,6 +15004,8 @@ function DesktopRuntimePanel({
 	        <Metric label={uiLanguage === "ko" ? "자동 보류" : "Auto Deferred"} value={sessionStats.autoDeferred} icon={ShieldCheck} tone="slate" />
 	        <Metric label={uiLanguage === "ko" ? "공개 차단 요소" : "Public Blockers"} value={serviceReadinessStats.publicBlockers} icon={AlertTriangle} tone="amber" />
 	        <Metric label={uiLanguage === "ko" ? "소스 파일" : "Source Files"} value={sourceFileCount} icon={Code2} tone="green" />
+	        <Metric label={uiLanguage === "ko" ? "Rust 모듈" : "Rust Modules"} value={rustRuntimeFeatureMap?.totalGroups ?? 0} icon={Layers} tone="violet" />
+	        <Metric label={uiLanguage === "ko" ? "Rust 명령" : "Rust Commands"} value={rustRuntimeFeatureMap?.totalCommands ?? 0} icon={SquareTerminal} tone="green" />
       </section>
 
       <section className="panel wide desktop-command-panel">

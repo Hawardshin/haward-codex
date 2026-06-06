@@ -412,6 +412,33 @@ test("Desktop Runtime exposes bounded native OS workspace actions", () => {
   assert.match(monitorShell, /data-desktop-action-feedback="open-external-terminal"/);
 });
 
+test("Desktop Runtime exposes feature-split Rust runtime map", () => {
+  const tauriSrcRoot = path.resolve(projectRoot, "..", "..", "src-tauri", "src");
+  for (const featureModule of [
+    "mod.rs",
+    "app_shell.rs",
+    "cli.rs",
+    "native.rs",
+    "workspace.rs",
+    "providers.rs",
+    "diagnostics.rs",
+    "agent_factory.rs",
+    "decisions.rs"
+  ]) {
+    assert.equal(fs.existsSync(path.join(tauriSrcRoot, "features", featureModule)), true);
+  }
+  const featureMap = fs.readFileSync(path.join(tauriSrcRoot, "features", "mod.rs"), "utf8");
+  assert.match(tauriLib, /mod features/);
+  assert.match(tauriLib, /fn get_rust_runtime_feature_map/);
+  assert.match(tauriLib, /get_rust_runtime_feature_map,/);
+  assert.match(featureMap, /NativeRuntimeFeatureMapReport/);
+  assert.match(featureMap, /rust-runtime-feature-map\.v1/);
+  assert.match(monitorShell, /RustRuntimeFeatureMapReport/);
+  assert.match(monitorShell, /"get_rust_runtime_feature_map"/);
+  assert.match(monitorShell, /Rust 모듈/);
+  assert.match(monitorShell, /Rust 명령/);
+});
+
 test("CLI setup keeps settings scroll ownership isolated", () => {
   const cliSetupGuideRule = readCssRule(".cli-adapter-setup-guide");
   const cliCommandCopyRowRule = readCssRule(".cli-command-copy-row");

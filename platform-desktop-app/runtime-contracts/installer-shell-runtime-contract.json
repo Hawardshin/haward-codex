@@ -557,6 +557,7 @@
   ],
   "runtime_command_surface": {
     "contract_read_command": "get_installer_shell_runtime_contract",
+    "runtime_feature_map_command": "get_rust_runtime_feature_map",
     "runtime_roots_command": "list_runtime_data_roots",
     "accumulated_data_command": "get_accumulated_data_overview",
     "payload_audit_command": "run_installer_payload_audit",

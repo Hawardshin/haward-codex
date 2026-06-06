@@ -12,6 +12,19 @@ function readJson(relativePath) {
 test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(existsSync(join(root, "src-tauri/tauri.conf.json")), true);
   assert.equal(existsSync(join(root, "src-tauri/src/lib.rs")), true);
+  for (const featureModule of [
+    "mod.rs",
+    "app_shell.rs",
+    "cli.rs",
+    "native.rs",
+    "workspace.rs",
+    "providers.rs",
+    "diagnostics.rs",
+    "agent_factory.rs",
+    "decisions.rs"
+  ]) {
+    assert.equal(existsSync(join(root, "src-tauri/src/features", featureModule)), true);
+  }
   assert.equal(existsSync(join(root, "README.ko.md")), true);
   assert.equal(existsSync(join(root, "README.en.md")), true);
   assert.equal(existsSync(join(root, "docs/release-runbook.ko.md")), true);
@@ -391,6 +404,8 @@ test("installer shell runtime contract is bundled and enforceable", () => {
     assert.match(serialized, new RegExp(target));
   }
   assert.match(lib, /get_installer_shell_runtime_contract/);
+  assert.match(lib, /get_rust_runtime_feature_map/);
+  assert.equal(contract.runtime_command_surface.runtime_feature_map_command, "get_rust_runtime_feature_map");
   assert.match(lib, /get_accumulated_data_overview/);
   assert.equal(contract.runtime_command_surface.accumulated_data_command, "get_accumulated_data_overview");
   assert.ok(contract.runtime_command_surface.agent_run_presets.some((preset) => preset.preset_id === "research_insight_agent"));
@@ -766,6 +781,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   assert.match(evaluationReportModel, /evaluationReportCatalog/);
 
   for (const commandName of [
+    "get_rust_runtime_feature_map",
     "list_cli_adapters",
     "run_cli_adapter_health",
     "run_all_cli_adapter_health",

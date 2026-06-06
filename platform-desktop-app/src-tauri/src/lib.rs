@@ -21,6 +21,8 @@ use tauri_plugin_clipboard_manager::ClipboardExt;
 use tauri_plugin_dialog::DialogExt;
 use tauri_plugin_opener::OpenerExt;
 
+mod features;
+
 #[derive(Serialize)]
 struct HealthStatus {
     status: &'static str,
@@ -1946,6 +1948,11 @@ fn get_installer_shell_runtime_contract(
         data_accumulation_target_count,
         contract,
     })
+}
+
+#[tauri::command]
+fn get_rust_runtime_feature_map() -> features::NativeRuntimeFeatureMapReport {
+    features::feature_map_report()
 }
 
 #[tauri::command]
@@ -3973,6 +3980,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             app_health,
             get_installer_shell_runtime_contract,
+            get_rust_runtime_feature_map,
             list_cli_adapters,
             run_cli_adapter_health,
             run_all_cli_adapter_health,
