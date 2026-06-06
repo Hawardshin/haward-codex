@@ -326,6 +326,17 @@ struct CliRunReport {
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
+struct RuntimeTerminalSetupCheckReport {
+    status: String,
+    command: String,
+    command_source: String,
+    resolved_path: Option<String>,
+    working_dir: String,
+    error: Option<String>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
 struct CliSessionReport {
     session_id: String,
     task_run_id: String,
@@ -1854,6 +1865,64 @@ fn run_cli_adapter_health(adapter_id: String) -> Result<CliRunReport, String> {
 #[tauri::command]
 fn run_all_cli_adapter_health() -> Vec<CliRunReport> {
     ADAPTERS.iter().map(run_adapter_health).collect()
+}
+
+#[tauri::command]
+fn check_runtime_terminal_setup(
+    app: AppHandle,
+    command: Option<String>,
+    working_dir: Option<String>,
+) -> RuntimeTerminalSetupCheckReport {
+    let raw_command = command
+        .unwrap_or_default()
+        .trim()
+        .chars()
+        .take(MAX_TERMINAL_COMMAND_CHARS)
+        .collect::<String>();
+    let command_source = if raw_command.is_empty() {
+        "system_default"
+    } else {
+        "custom"
+    };
+    let checked_command = if raw_command.is_empty() {
+        default_native_shell()
+    } else {
+        raw_command
+    };
+
+    let working_dir_result = resolve_workspace_dir(&app, working_dir.as_deref());
+    let working_dir_label = working_dir_result
+        .as_ref()
+        .map(|path| path.to_string_lossy().to_string())
+        .unwrap_or_else(|error| format!("unresolved: {error}"));
+    let resolved_path = resolve_command(&checked_command);
+    let command_error = if resolved_path.is_some() {
+        None
+    } else {
+        Some(format!(
+            "Terminal shell command '{}' was not found on PATH or is not executable.",
+            checked_command
+        ))
+    };
+    let working_dir_error = working_dir_result.err();
+    let errors: Vec<String> = [working_dir_error, command_error]
+        .into_iter()
+        .flatten()
+        .collect();
+    let status = if errors.is_empty() { "ready" } else { "failed" };
+
+    RuntimeTerminalSetupCheckReport {
+        status: status.to_string(),
+        command: checked_command,
+        command_source: command_source.to_string(),
+        resolved_path: resolved_path.map(|path| path.to_string_lossy().to_string()),
+        working_dir: working_dir_label,
+        error: if errors.is_empty() {
+            None
+        } else {
+            Some(errors.join(" "))
+        },
+    }
 }
 
 #[tauri::command]
@@ -3678,6 +3747,7 @@ pub fn run() {
             list_cli_adapters,
             run_cli_adapter_health,
             run_all_cli_adapter_health,
+            check_runtime_terminal_setup,
             list_cli_task_pipeline_presets,
             list_cli_task_run_records,
             read_cli_task_run_record,

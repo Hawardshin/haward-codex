@@ -3138,6 +3138,111 @@ main {
   background: var(--choice-selected-bg);
 }
 
+.runtime-setup-check-panel {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface-muted) 70%, var(--surface));
+  border-radius: 7px;
+  padding: 10px;
+  min-width: 0;
+}
+
+.runtime-setup-check-panel > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+
+.runtime-setup-check-panel > header span {
+  color: var(--muted);
+  font-size: var(--font-size-overline);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.runtime-setup-check-panel > header strong {
+  color: var(--text);
+  font-size: var(--font-size-caption);
+}
+
+.runtime-setup-check-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.runtime-setup-check-grid article {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 7px;
+  padding: 9px;
+  min-width: 0;
+}
+
+.runtime-setup-check-grid article.ready {
+  border-color: var(--status-success-border);
+  background: var(--status-success-bg);
+}
+
+.runtime-setup-check-grid article.failed {
+  border-color: var(--status-warning-border);
+  background: color-mix(in srgb, var(--surface-raised) 82%, var(--amber) 8%);
+}
+
+.runtime-setup-check-grid article > span {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  background: var(--surface);
+}
+
+.runtime-setup-check-grid article.ready > span {
+  color: var(--green);
+}
+
+.runtime-setup-check-grid article div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.runtime-setup-check-grid article strong,
+.runtime-setup-check-grid article small,
+.runtime-setup-check-grid article code,
+.runtime-setup-check-error {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.runtime-setup-check-grid article strong {
+  color: var(--text);
+  font-size: var(--font-size-caption);
+}
+
+.runtime-setup-check-grid article small,
+.runtime-setup-check-error {
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.runtime-setup-check-grid article code {
+  color: var(--text);
+  font-size: var(--font-size-caption);
+}
+
 .cli-adapter-setup-outcome {
   display: grid;
   gap: 4px;

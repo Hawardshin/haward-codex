@@ -504,6 +504,13 @@ test("CLI adapter settings expose beginner setup steps and copyable commands", (
   assert.match(monitorShell, /authHint: LocalizedText;/);
   assert.match(monitorShell, /firstRunCommand: LocalizedText;/);
   assert.match(monitorShell, /expectedResult: LocalizedText;/);
+  assert.match(monitorShell, /type RuntimeTerminalSetupCheckReport = \{/);
+  assert.match(monitorShell, /const runRuntimeSetupCheck = async \(\) => \{/);
+  assert.match(monitorShell, /check_runtime_terminal_setup/);
+  assert.match(monitorShell, /data-runtime-setup-check-action="settings"/);
+  assert.match(monitorShell, /data-runtime-setup-check="settings"/);
+  assert.match(monitorShell, /data-runtime-setup-check-terminal=\{selectedRuntimeTerminalCheck\?\.status \|\| "not-checked"\}/);
+  assert.match(monitorShell, /data-runtime-setup-check-cli=\{selectedRuntimeSetupCliCheck\?\.status \|\| "not-checked"\}/);
   assert.match(monitorShell, /function adapterAuthReadyForAdapter/);
   assert.match(monitorShell, /const runtimeAdapterSetupSteps = \[/);
   assert.match(monitorShell, /data-cli-adapter-setup-guide="settings"/);
@@ -519,8 +526,14 @@ test("CLI adapter settings expose beginner setup steps and copyable commands", (
   assert.match(css, /\.cli-adapter-picker-grid \{/);
   assert.match(css, /\.cli-setup-stepper article\.ready \{/);
   assert.match(css, /\.cli-command-copy-row button \{/);
+  assert.match(css, /\.runtime-setup-check-panel \{/);
+  assert.match(css, /\.runtime-setup-check-grid article\.ready \{/);
+  assert.match(css, /\.runtime-setup-check-grid article\.failed \{/);
   assert.match(css, /\.agent-cli-setup-ladder \{/);
   assert.match(css, /\.agent-cli-command-stack button \{/);
+  assert.match(tauriLib, /struct RuntimeTerminalSetupCheckReport/);
+  assert.match(tauriLib, /fn check_runtime_terminal_setup/);
+  assert.match(tauriLib, /check_runtime_terminal_setup,/);
 });
 
 test("Choice and search controls have compact tonal hierarchy", () => {

@@ -1961,6 +1961,15 @@ type CliRunReport = {
   maxOutputBytes: number;
 };
 
+type RuntimeTerminalSetupCheckReport = {
+  status: string;
+  command: string;
+  commandSource: string;
+  resolvedPath?: string | null;
+  workingDir: string;
+  error?: string | null;
+};
+
 type CliSessionReport = {
   sessionId: string;
   taskRunId: string;
@@ -3659,6 +3668,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [providerModelBusy, setProviderModelBusy] = useState(false);
   const [providerModelBusyProviderId, setProviderModelBusyProviderId] = useState("");
   const [providerModelError, setProviderModelError] = useState("");
+  const [runtimeSetupCheckBusy, setRuntimeSetupCheckBusy] = useState(false);
+  const [runtimeSetupTerminalCheck, setRuntimeSetupTerminalCheck] = useState<RuntimeTerminalSetupCheckReport | null>(null);
+  const [runtimeSetupCliCheck, setRuntimeSetupCliCheck] = useState<CliRunReport | null>(null);
+  const [runtimeSetupAdapterStatus, setRuntimeSetupAdapterStatus] = useState<CliAdapterStatus | null>(null);
+  const [runtimeSetupCheckError, setRuntimeSetupCheckError] = useState("");
   const [sharedDesktopResourceSnapshot, setSharedDesktopResourceSnapshot] = useState<DesktopResourceSnapshotReport | null>(null);
   const viewModes = snapshot.viewModeCatalog?.modes?.length ? snapshot.viewModeCatalog.modes : fallbackViewModes;
   const languageModes = useMemo(() => {
@@ -4794,12 +4808,78 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     providerCredentials,
     uiLanguage
   );
+  const selectedRuntimeSetupCliCheck =
+    runtimeSetupCliCheck?.adapterId === selectedRuntimeAdapterOption.adapterId ? runtimeSetupCliCheck : null;
+  const selectedRuntimeSetupAdapterStatus =
+    runtimeSetupAdapterStatus?.adapterId === selectedRuntimeAdapterOption.adapterId ? runtimeSetupAdapterStatus : null;
+  const runtimeSetupShellCommand = runtimeCustomization.terminal.shellCommand.trim();
+  const selectedRuntimeTerminalCheck =
+    runtimeSetupTerminalCheck &&
+    ((runtimeSetupShellCommand && runtimeSetupTerminalCheck.command === runtimeSetupShellCommand) ||
+      (!runtimeSetupShellCommand && runtimeSetupTerminalCheck.commandSource === "system_default"))
+      ? runtimeSetupTerminalCheck
+      : null;
+  const selectedRuntimeCliInstallReady = Boolean(selectedRuntimeSetupAdapterStatus?.available);
+  const selectedRuntimeCliVerifyReady = selectedRuntimeSetupCliCheck?.status === "passed";
+  const selectedRuntimeTerminalReady = selectedRuntimeTerminalCheck?.status === "ready";
+  const runtimeSetupStatusLabel = runtimeSetupCheckBusy
+    ? uiLanguage === "ko" ? "점검 중" : "Checking"
+    : runtimeSetupCheckError
+      ? uiLanguage === "ko" ? "점검 실패" : "Check failed"
+      : selectedRuntimeSetupCliCheck || selectedRuntimeTerminalCheck
+        ? selectedRuntimeCliVerifyReady && selectedRuntimeTerminalReady
+          ? uiLanguage === "ko" ? "실행 준비됨" : "Ready"
+          : uiLanguage === "ko" ? "확인 필요" : "Needs attention"
+        : uiLanguage === "ko" ? "아직 미점검" : "Not checked";
+  const runRuntimeSetupCheck = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      const message = uiLanguage === "ko"
+        ? "Tauri 런타임이 없어서 설치형 CLI/터미널 설정을 점검할 수 없습니다."
+        : "Tauri runtime is unavailable, so installed CLI and terminal settings cannot be checked.";
+      setRuntimeSetupCheckError(message);
+      setProviderCredentialNotice(message);
+      return;
+    }
+
+    setRuntimeSetupCheckBusy(true);
+    setRuntimeSetupCheckError("");
+    try {
+      const shellCommand = runtimeCustomization.terminal.shellCommand.trim();
+      const [terminalCheck, cliCheck, adapterStatuses] = await Promise.all([
+        tauriInvoke<RuntimeTerminalSetupCheckReport>("check_runtime_terminal_setup", {
+          command: shellCommand || null,
+          workingDir: null
+        }),
+        tauriInvoke<CliRunReport>("run_cli_adapter_health", {
+          adapterId: selectedRuntimeAdapterOption.adapterId
+        }),
+        tauriInvoke<CliAdapterStatus[]>("list_cli_adapters")
+      ]);
+      setRuntimeSetupTerminalCheck(terminalCheck);
+      setRuntimeSetupCliCheck(cliCheck);
+      setRuntimeSetupAdapterStatus(
+        adapterStatuses.find((adapter) => adapter.adapterId === selectedRuntimeAdapterOption.adapterId) || null
+      );
+      setProviderCredentialNotice(
+        uiLanguage === "ko"
+          ? `런타임 설정 점검 완료: CLI ${cliCheck.status}, 터미널 ${terminalCheck.status}`
+          : `Runtime setup check complete: CLI ${cliCheck.status}, terminal ${terminalCheck.status}`
+      );
+    } catch (caught) {
+      const message = errorMessage(caught);
+      setRuntimeSetupCheckError(message);
+      setProviderCredentialNotice(message);
+    } finally {
+      setRuntimeSetupCheckBusy(false);
+    }
+  };
   const runtimeAdapterSetupSteps = [
     {
       id: "install",
       label: uiLanguage === "ko" ? "1. 설치" : "1. Install",
-      detail: selectedRuntimeAdapterGuideKoOrEn("installHint"),
-      ready: false,
+      detail: selectedRuntimeSetupAdapterStatus?.resolvedPath || selectedRuntimeAdapterGuideKoOrEn("installHint"),
+      ready: selectedRuntimeCliInstallReady,
       command: selectedRuntimeAdapterGuideKoOrEn("installHint")
     },
     {
@@ -4814,8 +4894,12 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     {
       id: "verify",
       label: uiLanguage === "ko" ? "3. 검증" : "3. Verify",
-      detail: selectedRuntimeAdapterGuideKoOrEn("verifyCommand"),
-      ready: false,
+      detail:
+        selectedRuntimeSetupCliCheck?.output ||
+        selectedRuntimeSetupCliCheck?.stderr ||
+        selectedRuntimeSetupAdapterStatus?.version ||
+        selectedRuntimeAdapterGuideKoOrEn("verifyCommand"),
+      ready: selectedRuntimeCliVerifyReady,
       command: selectedRuntimeAdapterGuideKoOrEn("verifyCommand")
     },
     {
@@ -7241,6 +7325,59 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                           <KeyRound size={14} aria-hidden="true" />
                           <span>{uiLanguage === "ko" ? "계정 연결로 이동" : "Open provider accounts"}</span>
                         </button>
+                        <button
+                          type="button"
+                          data-runtime-setup-check-action="settings"
+                          onClick={() => void runRuntimeSetupCheck()}
+                          disabled={runtimeSetupCheckBusy}
+                        >
+                          <RefreshCw size={14} aria-hidden="true" />
+                          <span>{runtimeSetupCheckBusy ? uiLanguage === "ko" ? "점검 중" : "Checking" : uiLanguage === "ko" ? "설정 점검" : "Check setup"}</span>
+                        </button>
+                      </div>
+                      <div className="runtime-setup-check-panel" data-runtime-setup-check="settings" role="status" aria-live="polite">
+                        <header>
+                          <span>{uiLanguage === "ko" ? "설정 점검" : "Setup check"}</span>
+                          <strong>{runtimeSetupStatusLabel}</strong>
+                        </header>
+                        <div className="runtime-setup-check-grid">
+                          <article
+                            className={
+                              selectedRuntimeTerminalReady ? "ready" : selectedRuntimeTerminalCheck ? "failed" : "pending"
+                            }
+                            data-runtime-setup-check-terminal={selectedRuntimeTerminalCheck?.status || "not-checked"}
+                          >
+                            <span>{selectedRuntimeTerminalReady ? <CheckCircle2 size={14} aria-hidden="true" /> : <AlertTriangle size={14} aria-hidden="true" />}</span>
+                            <div>
+                              <strong>{uiLanguage === "ko" ? "터미널 셸" : "Terminal shell"}</strong>
+                              <small>
+                                {selectedRuntimeTerminalCheck?.resolvedPath ||
+                                  selectedRuntimeTerminalCheck?.error ||
+                                  (runtimeCustomization.terminal.shellCommand.trim()
+                                    ? runtimeCustomization.terminal.shellCommand.trim()
+                                    : uiLanguage === "ko" ? "시스템 기본 셸 대기" : "Waiting for system default shell")}
+                              </small>
+                              {selectedRuntimeTerminalCheck?.workingDir && <code>{selectedRuntimeTerminalCheck.workingDir}</code>}
+                            </div>
+                          </article>
+                          <article
+                            className={selectedRuntimeCliVerifyReady ? "ready" : selectedRuntimeSetupCliCheck ? "failed" : "pending"}
+                            data-runtime-setup-check-cli={selectedRuntimeSetupCliCheck?.status || "not-checked"}
+                          >
+                            <span>{selectedRuntimeCliVerifyReady ? <CheckCircle2 size={14} aria-hidden="true" /> : <AlertTriangle size={14} aria-hidden="true" />}</span>
+                            <div>
+                              <strong>{selectedRuntimeAdapterOption.label}</strong>
+                              <small>
+                                {selectedRuntimeSetupAdapterStatus?.resolvedPath ||
+                                  selectedRuntimeSetupCliCheck?.output ||
+                                  selectedRuntimeSetupCliCheck?.stderr ||
+                                  selectedRuntimeAdapterGuideKoOrEn("verifyCommand")}
+                              </small>
+                              <code>{selectedRuntimeSetupCliCheck?.status || selectedRuntimeAdapterOption.command}</code>
+                            </div>
+                          </article>
+                        </div>
+                        {runtimeSetupCheckError && <small className="runtime-setup-check-error">{runtimeSetupCheckError}</small>}
                       </div>
                       <div className="cli-adapter-setup-outcome">
                         <span>{uiLanguage === "ko" ? "첫 실행 결과" : "First-run result"}</span>
