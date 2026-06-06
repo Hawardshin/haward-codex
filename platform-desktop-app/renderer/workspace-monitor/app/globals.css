@@ -76,7 +76,11 @@
   --scrollbar-track: color-mix(in srgb, var(--surface-muted) 68%, transparent);
   --scrollbar-thumb: #b5c2d1;
   --scrollbar-thumb-hover: #8798aa;
-  --popup-layer-z: 140;
+  --overlay-dialog-z: 90;
+  --overlay-drawer-backdrop-z: 100;
+  --overlay-drawer-z: 110;
+  --overlay-command-palette-z: 150;
+  --popup-layer-z: 160;
   --popup-viewport-gap: 16px;
   --popup-max-block-size: min(420px, calc(100dvh - (var(--popup-viewport-gap) * 2)));
   --popup-shadow: 0 24px 56px rgba(17, 24, 39, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.72) inset;
@@ -1908,7 +1912,7 @@ main {
 .settings-dialog-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 60;
+  z-index: var(--overlay-dialog-z);
   display: grid;
   animation: workspace-fade-in var(--motion-duration-fast) var(--motion-ease-standard) both;
   align-items: center;
@@ -5455,18 +5459,21 @@ h3 {
 .command-palette-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: var(--overlay-command-palette-z);
   display: grid;
   animation: workspace-fade-in var(--motion-duration-fast) var(--motion-ease-standard) both;
   align-items: start;
   justify-items: center;
   overflow: auto;
+  overscroll-behavior: none;
   background: var(--overlay);
   padding: 72px 16px 24px;
 }
 
 .command-palette {
   width: min(720px, 100%);
+  max-height: calc(100dvh - 96px);
+  overflow: hidden;
   animation: workspace-menu-enter var(--motion-duration-standard) var(--motion-ease-out) both;
   border: 1px solid rgba(148, 163, 184, 0.72);
   background: var(--surface);
@@ -12467,10 +12474,12 @@ h3 {
 .terminal-drawer-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 69;
+  z-index: var(--overlay-drawer-backdrop-z);
+  animation: workspace-fade-in var(--motion-duration-fast) var(--motion-ease-standard) both;
   border: 0;
   background: color-mix(in srgb, var(--overlay) 86%, #000000 14%);
   cursor: default;
+  overscroll-behavior: none;
 }
 
 .terminal-drawer {
@@ -12479,7 +12488,7 @@ h3 {
   right: 0;
   top: 64px;
   bottom: 0;
-  z-index: 70;
+  z-index: var(--overlay-drawer-z);
   display: grid;
   grid-template-rows: auto auto minmax(0, 1fr);
   min-height: 0;
@@ -12504,11 +12513,13 @@ h3 {
 
 .terminal-drawer.closed {
   pointer-events: none;
+  visibility: hidden;
   opacity: 0;
   transform: translateY(calc(100% + 16px));
 }
 
 .terminal-drawer.open {
+  visibility: visible;
   opacity: 1;
   transform: translateY(0);
 }

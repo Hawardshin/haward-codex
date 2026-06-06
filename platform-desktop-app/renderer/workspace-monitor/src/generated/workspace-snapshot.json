@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T05:28:06.203Z",
+  "generatedAt": "2026-06-06T05:55:48.208Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 519,
-    "evaluations": 22,
-    "webSearches": 13,
+    "evaluations": 23,
+    "webSearches": 12,
     "timingRecords": 12,
     "historyDays": 1,
-    "adminHistoryDocuments": 2685,
+    "adminHistoryDocuments": 2692,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7793,6 +7793,230 @@
   ],
   "documents": [
     {
+      "id": "history-work-timings-2026-2026-06-06-popup-overlay-audit-json",
+      "path": "_history/work-timings/2026/2026-06-06-popup-overlay-audit.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Popup Overlay Audit",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"popup overlay audit\", \"phases\": { \"phase\": \"web intake and inventory\", \"status\": \"completed\" }, { \"phase\": \"implementation\", \"status\": \"completed\" }, { \"phase\": \"browser smoke\", \"status\": \"completed\" }, { \"phase\": \"build and package\", \"status\":",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;popup overlay audit&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web intake and inventory&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;browser smoke&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;build and package&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;history and trace&quot;, &quot;status&quot;: &quot;completed&quot; } , &quot;note&quot;</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 612,
+      "updatedAt": "2026-06-06T05:53:33.573Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-popup-overlay-audit-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-popup-overlay-audit-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Popup Overlay Audit Evaluation Input",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"popup overlay audit\", \"user request summary\": \"Review and fix popup/overlay surfaces that are clipped, hard to use, or too generic.\", \"requirements\": \"REQ PSC 001\", \"REQ PSC 002\", \"REQ PSC 003\", \"REQ PSC 004\", \"REQ PSC 005\", \"REQ PSC 006\", \"REQ",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;popup overlay audit&quot;, &quot;user request summary&quot;: &quot;Review and fix popup/overlay surfaces that are clipped, hard to use, or too generic.&quot;, &quot;requirements&quot;: &quot;REQ PSC 001&quot;, &quot;REQ PSC 002&quot;, &quot;REQ PSC 003&quot;, &quot;REQ PSC 004&quot;, &quot;REQ PSC 005&quot;, &quot;REQ PSC 006&quot;, &quot;REQ PSC 007&quot; , &quot;changed surfaces&quot;: &quot;command palette&quot;, &quot;settings dialog&quot;, &quot;operator </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1123,
+      "updatedAt": "2026-06-06T05:53:33.572Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-popup-overlay-audit-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-popup-overlay-audit.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Popup Overlay Audit",
+      "excerpt": "Evaluation: Popup Overlay Audit 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 팝업 같은 것을 전부 검토하고, 스크롤/잘림/불편한 기본 팝업 문제를 해결한다. 결과: 작은 menu류는 기존 Radix portal/collision 계약을 유지하고, 큰 modal/drawer류는 앱 root portal과 focus containment로 통합했다. 근거 설정, 명령 팔레트, 운영 센터는 .desktop app root portal 아래에서 backdrop이 vi",
+      "html": "<p>Evaluation: Popup Overlay Audit 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 팝업 같은 것을 전부 검토하고, 스크롤/잘림/불편한 기본 팝업 문제를 해결한다. 결과: 작은 menu류는 기존 Radix portal/collision 계약을 유지하고, 큰 modal/drawer류는 앱 root portal과 focus containment로 통합했다. 근거 설정, 명령 팔레트, 운영 센터는 .desktop app root portal 아래에서 backdrop이 viewport 전체를 덮고 surface가 1280x720 안에 남는다. 터미널 드로어는 root portal 아래에서 top=64 , botto</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1234,
+      "updatedAt": "2026-06-06T05:53:33.572Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-popup-overlay-audit-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-popup-overlay-audit.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Popup Overlay Audit",
+      "excerpt": "Request Trace: Popup Overlay Audit 날짜: 2026 06 06 요청 팝업 같은 UI를 전부 검토하고 고친다. 산출물 요구사항 업데이트: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md 스펙 업데이트: platform desktop app/specs/2026 06 06 popup scroll clipping/ 구현: platform desktop app/renderer/workspa",
+      "html": "<p>Request Trace: Popup Overlay Audit 날짜: 2026 06 06 요청 팝업 같은 UI를 전부 검토하고 고친다. 산출물 요구사항 업데이트: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md 스펙 업데이트: platform desktop app/specs/2026 06 06 popup scroll clipping/ 구현: platform desktop app/renderer/workspace monitor/components/ui/useOverlayFocus.ts platform desktop app/renderer/worksp</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1320,
+      "updatedAt": "2026-06-06T05:53:33.572Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-popup-overlay-audit-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-popup-overlay-audit.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Popup Overlay Audit",
+      "excerpt": "Work Summary: Popup Overlay Audit 날짜: 2026 06 06 완료 useOverlayFocus 를 추가해 modal focus 이동, Tab 순환, Escape 닫기, focus restore를 공통화했다. command palette, settings dialog, operator center를 .desktop app root portal로 이동했다. terminal drawer를 root portal로 이동하고, 닫힌 상태 접근 차단과 열린 상태 위치 보정을 추가했다",
+      "html": "<p>Work Summary: Popup Overlay Audit 날짜: 2026 06 06 완료 useOverlayFocus 를 추가해 modal focus 이동, Tab 순환, Escape 닫기, focus restore를 공통화했다. command palette, settings dialog, operator center를 .desktop app root portal로 이동했다. terminal drawer를 root portal로 이동하고, 닫힌 상태 접근 차단과 열린 상태 위치 보정을 추가했다. overlay z index token을 dialog/drawer/command/menu로 분리했다. popup/menu 회귀 테스트에 po</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1005,
+      "updatedAt": "2026-06-06T05:53:33.572Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-popup-overlay-audit-ko-md",
+      "path": "_history/plans/2026/2026-06-06-popup-overlay-audit.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Plan: Popup Overlay Audit",
+      "excerpt": "Plan: Popup Overlay Audit 날짜: 2026 06 06 실행 계획 1. 웹 기준을 확인해 modal focus, menu keyboard, portal/collision, top layer 개념을 정리한다. 2. 현재 overlay inventory를 확인한다: command palette, settings dialog, operator center, app choice/source picker, Tool Studio menus, terminal drawer. 3. 공통 focu",
+      "html": "<p>Plan: Popup Overlay Audit 날짜: 2026 06 06 실행 계획 1. 웹 기준을 확인해 modal focus, menu keyboard, portal/collision, top layer 개념을 정리한다. 2. 현재 overlay inventory를 확인한다: command palette, settings dialog, operator center, app choice/source picker, Tool Studio menus, terminal drawer. 3. 공통 focus containment hook과 root portal 구조를 적용한다. 4. z index token을 overlay 종류별로 분리한다. 5</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1058,
+      "updatedAt": "2026-06-06T05:53:33.571Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-popup-overlay-audit-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-popup-overlay-audit.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: Popup Overlay Audit",
+      "excerpt": "User Request: Popup Overlay Audit 날짜: 2026 06 06 요약 사용자는 팝업류 UI를 전부 검토하라고 요청했다. 이전 맥락의 주요 불편은 스크롤 때문에 팝업이 안 보임, 범용/기본 팝업 느낌, 탭/터미널/설정 UI 사용성, 데스크톱 앱답게 안정적인 화면 자원 사용이었다. 이번 처리 범위 명령 팔레트, 설정 모달, 운영 센터, 터미널 드로어의 viewport 기준 배치와 focus 처리를 검토/패치한다. 기존 Radix dropdown/context menu clipp",
+      "html": "<p>User Request: Popup Overlay Audit 날짜: 2026 06 06 요약 사용자는 팝업류 UI를 전부 검토하라고 요청했다. 이전 맥락의 주요 불편은 스크롤 때문에 팝업이 안 보임, 범용/기본 팝업 느낌, 탭/터미널/설정 UI 사용성, 데스크톱 앱답게 안정적인 화면 자원 사용이었다. 이번 처리 범위 명령 팔레트, 설정 모달, 운영 센터, 터미널 드로어의 viewport 기준 배치와 focus 처리를 검토/패치한다. 기존 Radix dropdown/context menu clipping 계약은 유지하되 z index hierarchy를 재정렬한다. 구현 뒤 renderer build, internal package, ap</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 695,
+      "updatedAt": "2026-06-06T05:53:33.571Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-popup-scroll-clipping-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-popup-scroll-clipping.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Popup Scroll Clipping",
+      "excerpt": "Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs",
+      "html": "<p>Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs 확인한 출처 MDN CSS overflow : overflow가 scroll container와 clipping 동작을 만든다는 기본 동작 확</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3586,
+      "updatedAt": "2026-06-06T05:53:33.571Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-popup-scroll-clipping-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-popup-scroll-clipping/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Popup Scroll Clipping",
+      "excerpt": "Tasks: Popup Scroll Clipping x 웹 기준 확인 및 기록 x 팝업/스크롤 관련 코드 경로 확인 x 공통 팝업 레이어 token 추가 x AppChoiceMenu, source file picker, Tool Studio menu CSS 보강 x Radix collision padding 명시 x 회귀 테스트 추가 x check, Browser smoke, package 검증 x 평가/요약/trace 기록 x 명령 팔레트/설정/운영 센터 root portal 적용 x 터미널 드",
+      "html": "<h1>Tasks: Popup Scroll Clipping</h1>\n<ul>\n<li>[x] 웹 기준 확인 및 기록</li>\n<li>[x] 팝업/스크롤 관련 코드 경로 확인</li>\n<li>[x] 공통 팝업 레이어 token 추가</li>\n<li>[x] AppChoiceMenu, source file picker, Tool Studio menu CSS 보강</li>\n<li>[x] Radix collision padding 명시</li>\n<li>[x] 회귀 테스트 추가</li>\n<li>[x] check, Browser smoke, package 검증</li>\n<li>[x] 평가/요약/trace 기록</li>\n<li>[x] 명령 팔레트/설정/운영 센터 root portal 적용</li>\n<li>[x] 터미널 드로어 root portal 및 open 위치 보정</li>\n<li>[x] 공통 focus containment hook 추가</li>\n<li>[x] overlay z-index token 분리</li>\n<li>[x] 1280x720 Browser smoke로 주요 overlay viewport containment 확인</li>\n<li>[x] renderer build, internal package, internal app open 확인</li>\n<li>[ ] 커밋 및 푸시</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 739,
+      "updatedAt": "2026-06-06T05:53:33.570Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-popup-scroll-clipping-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-popup-scroll-clipping/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Popup Scroll Clipping",
+      "excerpt": "Traceability: Popup Scroll Clipping | 요구사항 | 구현 | 검증 | | | | | | REQ PSC 001 | DropdownMenu.Portal , ContextMenu.Portal , collisionPadding={16} | static test, Browser smoke | | REQ PSC 002 | popup max block size , Radix available height, overflow:auto | static test, Browser compu",
+      "html": "<h1>Traceability: Popup Scroll Clipping</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PSC-001</td><td><code>DropdownMenu.Portal</code>, <code>ContextMenu.Portal</code>, <code>collisionPadding={16}</code></td><td>static test, Browser smoke</td></tr><tr><td>REQ-PSC-002</td><td><code>--popup-max-block-size</code>, Radix available-height, <code>overflow:auto</code></td><td>static test, Browser computed metrics</td></tr><tr><td>REQ-PSC-003</td><td><code>--overlay-*</code> token, <code>--popup-layer-z: 160</code></td><td>static test, Browser computed z-index</td></tr><tr><td>REQ-PSC-004</td><td><code>AppChoiceMenu</code>, <code>source-file-picker-menu</code>, <code>tool-menu-content</code>, <code>tool-context-content</code></td><td>workspace-monitor tests</td></tr><tr><td>REQ-PSC-005</td><td><code>ViewportOverlayPortal</code>, <code>RuntimeTerminalDrawer</code> root portal</td><td>Browser smoke: settings/command/operator/terminal parent <code>.desktop-app-root</code></td></tr><tr><td>REQ-PSC-006</td><td><code>useOverlayFocus</code>, dialog refs, initial focus refs, Escape handling</td><td>static test, Browser focus title/placeholder checks</td></tr><tr><td>REQ-PSC-007</td><td><code>.terminal-drawer.closed</code>, open inline style, drawer aria state</td><td>static test, Browser computed rect/style checks</td></tr></tbody></table>\n<h2>출처 연결</h2>\n<ul>\n<li>web search record: <code>_history/web-searches/2026/2026-06-06-popup-scroll-clipping.ko.md</code></li>\n<li>requirements: <code>platform-desktop-app/docs/requirements/2026-06-06-popup-scroll-clipping.ko.md</code></li>\n<li>follow-up trace: <code>_history/request-traces/2026/2026-06-06-popup-overlay-audit.ko.md</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1288,
+      "updatedAt": "2026-06-06T05:53:33.570Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-popup-scroll-clipping-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-popup-scroll-clipping/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Popup Scroll Clipping",
+      "excerpt": "Validation: Popup Scroll Clipping 완료된 검증 corepack pnpm filter workspace monitor test : 통과, 83개 테스트. 새 회귀 테스트: Popup menus escape scroll panes and keep their own bounded scroll . Browser smoke, viewport 900x520: Tool Studio primary menu: top=281 , bottom=504 , height=223 , viewpor",
+      "html": "<h1>Validation: Popup Scroll Clipping</h1>\n<h2>완료된 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 83개 테스트.</li>\n<li>새 회귀 테스트: <code>Popup menus escape scroll panes and keep their own bounded scroll</code>.</li>\n<li>Browser smoke, viewport 900x520:</li>\n<li>Tool Studio primary menu: <code>top=281</code>, <code>bottom=504</code>, <code>height=223</code>, <code>viewportHeight=520</code>, <code>inViewport=true</code>, <code>zIndex=140</code>, <code>maxHeight=223.122px</code>, <code>overflowY=auto</code>, <code>overscrollBehavior=contain</code>, <code>portalWrapped=true</code>.</li>\n<li>Source file picker after scrolling trigger into view: <code>top=16</code>, <code>bottom=232</code>, <code>height=216</code>, <code>viewportHeight=520</code>, <code>inViewport=true</code>, <code>zIndex=140</code>, <code>maxHeight=216.094px</code>, <code>overflowY=auto</code>, <code>overscrollBehavior=contain</code>, <code>portalWrapped=true</code>.</li>\n<li><code>corepack pnpm --filter workspace-monitor run smoke:source-controls</code>: 통과. <code>sourceSelectCount=0</code>, <code>itemCount=23</code>, <code>pageErrors=[]</code>; WebGL <code>ReadPixels</code> performance warning만 관찰.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 27개 테스트.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과. 공개 배포 signing/notarization/updater/clean-machine smoke 경고는 기존 public release gate로 유지.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code>: 통과.</li>\n<li><code>.app</code>: <code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>.dmg</code>: <code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n<li><code>codesign --verify --deep --strict</code>: 통과.</li>\n<li><code>hdiutil verify</code>: 통과.</li>\n<li>package 후 <code>corepack pnpm --filter workspace-monitor run collect -- --best-effort</code> 및 <code>corepack pnpm --filter workspace-monitor run check</code>: 통과.</li>\n</ul>\n<h2>2026-06-06 후속 오버레이 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 85개 테스트.</li>\n<li><code>corepack pnpm --filter workspace-monitor check</code>: 통과.</li>\n<li>Browser smoke, viewport 1280x720:</li>\n<li>Settings dialog: portal parent <code>.desktop-app-root theme-system</code>, backdrop <code>0..720</code>, dialog <code>top=16.88</code>, <code>bottom=691.12</code>, <code>withinViewport=true</code>, initial focus <code>설정 닫기</code>.</li>\n<li>Command palette: portal parent <code>.desktop-app-root theme-system</code>, backdrop <code>0..720</code>, dialog <code>top=66</code>, <code>bottom=611.85</code>, <code>withinViewport=true</code>, initial focus search input.</li>\n<li>Terminal drawer: portal parent <code>.desktop-app-root theme-system</code>, backdrop <code>0..720</code>, drawer <code>top=64</code>, <code>bottom=720</code>, <code>opacity=1</code>, <code>transform=0</code>, <code>withinViewport=true</code>, initial focus <code>접기</code>.</li>\n<li>Operator Center: portal parent <code>.desktop-app-root theme-system</code>, backdrop <code>0..720</code>, dialog <code>top=16.88</code>, <code>bottom=691.12</code>, <code>withinViewport=true</code>, initial focus <code>운영 센터 닫기</code>.</li>\n<li><code>corepack pnpm run desktop:renderer:build</code>: 통과.</li>\n<li><code>corepack pnpm run desktop:package:internal</code>: 통과.</li>\n<li><code>.app</code>: <code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>.dmg</code>: <code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n<li><code>codesign --verify --deep --strict</code>: 통과.</li>\n<li><code>hdiutil verify</code>: 통과.</li>\n<li><code>corepack pnpm run desktop:run:internal</code>: <code>internal_app_opened</code>.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 3169,
+      "updatedAt": "2026-06-06T05:53:33.570Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-popup-scroll-clipping-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-popup-scroll-clipping/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Popup Scroll Clipping",
+      "excerpt": "Plan: Popup Scroll Clipping 1. 웹 기준 확인: overflow clipping, portal, collision aware popup 기준을 확인한다. 2. 현재 앱의 팝업 지점 확인: AppChoiceMenu, source file picker, Tool Studio dropdown/context menu. 3. CSS 팝업 레이어 토큰과 Radix available height max height 계약을 추가한다. 4. 관련 Radix Content에 collision",
+      "html": "<h1>Plan: Popup Scroll Clipping</h1>\n<p>1. 웹 기준 확인: overflow clipping, portal, collision-aware popup 기준을 확인한다.</p>\n<p>2. 현재 앱의 팝업 지점 확인: AppChoiceMenu, source file picker, Tool Studio dropdown/context menu.</p>\n<p>3. CSS 팝업 레이어 토큰과 Radix available-height max-height 계약을 추가한다.</p>\n<p>4. 관련 Radix Content에 collision padding을 명시한다.</p>\n<p>5. 회귀 테스트와 Browser 실측을 추가/실행한다.</p>\n<p>6. workspace monitor와 desktop app 검증, 내부 패키징, 커밋/푸시를 완료한다.</p>\n<h2>2026-06-06 후속 오버레이 점검 계획</h2>\n<p>1. ARIA dialog/menu, Radix portal/collision, MDN popover top-layer 기준을 확인한다.</p>\n<p>2. 명령 팔레트, 설정, 운영 센터, 터미널 드로어의 현재 DOM 위치와 fixed containing block을 측정한다.</p>\n<p>3. 앱 root portal, 공통 focus containment, 명시적 overlay z-index token을 적용한다.</p>\n<p>4. 터미널 drawer open 위치가 transition/portal 이동 잔상에 묶이지 않도록 보정한다.</p>\n<p>5. 정적 계약 테스트, Browser smoke, renderer build, internal package, app open을 완료한다.</p>\n<h2>리스크</h2>\n<ul>\n<li>팝업 높이를 너무 작게 제한하면 목록 탐색이 불편해질 수 있다.</li>\n<li>포털 z-index를 과도하게 올리면 modal hierarchy가 꼬일 수 있다. 후속 변경은 dialog/drawer/command/menu token을 분리해 hierarchy를 명시한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1387,
+      "updatedAt": "2026-06-06T05:53:33.569Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-popup-scroll-clipping-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-popup-scroll-clipping.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: 팝업 스크롤 잘림 방지",
+      "excerpt": "요구사항: 팝업 스크롤 잘림 방지 날짜: 2026 06 06 사용자 요구 스크롤 때문에 팝업이 보이지 않는 현상을 고친다. 요구사항 REQ PSC 001: Dropdown, context menu, file picker 같은 팝업은 스크롤 컨테이너 내부 overflow에 잘리지 않아야 한다. REQ PSC 002: 팝업은 viewport 안에 남는 높이를 기준으로 최대 높이를 제한하고, 필요할 때 팝업 내부에서만 스크롤해야 한다. REQ PSC 003: 팝업 레이어는 설정 모달, 작업 화면, 스크",
+      "html": "<h1>요구사항: 팝업 스크롤 잘림 방지</h1>\n<p>날짜: 2026-06-06</p>\n<h2>사용자 요구</h2>\n<ul>\n<li>스크롤 때문에 팝업이 보이지 않는 현상을 고친다.</li>\n</ul>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-PSC-001: Dropdown, context menu, file picker 같은 팝업은 스크롤 컨테이너 내부 overflow에 잘리지 않아야 한다.</li>\n<li>REQ-PSC-002: 팝업은 viewport 안에 남는 높이를 기준으로 최대 높이를 제한하고, 필요할 때 팝업 내부에서만 스크롤해야 한다.</li>\n<li>REQ-PSC-003: 팝업 레이어는 설정 모달, 작업 화면, 스크롤 pane보다 위에 떠야 한다.</li>\n<li>REQ-PSC-004: 소스 파일 선택, 공통 선택 메뉴, Tool Studio primary/action/context menu에 같은 팝업 계약을 적용한다.</li>\n<li>REQ-PSC-005: 명령 팔레트, 설정 모달, 운영 센터, 터미널 드로어 같은 큰 오버레이는 스크롤/애니메이션되는 작업면 내부 fixed 기준에 묶이지 않고 실제 앱 root/viewport 기준에서 떠야 한다.</li>\n<li>REQ-PSC-006: 모달성 오버레이는 열릴 때 내부의 의도된 초기 요소로 focus를 이동하고, <code>Tab</code>/<code>Shift+Tab</code>을 내부에 가두며, <code>Escape</code>로 닫혀야 한다.</li>\n<li>REQ-PSC-007: 닫힌 drawer형 오버레이는 pointer와 keyboard 접근이 차단되어야 하며, 열린 drawer는 transition/containing-block 잔상 때문에 화면 밖 위치에 고정되지 않아야 한다.</li>\n</ul>\n<h2>범위</h2>\n<ul>\n<li>포함: workspace monitor renderer CSS, MonitorShell dropdowns/modals, ToolStudioPanel menus, RuntimeTerminalDrawer, 회귀 테스트.</li>\n<li>제외: 새로운 메뉴 라이브러리 도입, native OS 팝오버 API 전환, 전체 화면 layout 재설계.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>작은 viewport와 스크롤된 화면에서도 대표 팝업이 viewport 안에 표시된다.</li>\n<li>팝업 content는 portal wrapper 아래에서 렌더링된다.</li>\n<li>팝업은 <code>z-index</code> token, Radix available-height, 내부 <code>overflow:auto</code>, <code>overscroll-behavior: contain</code>을 가진다.</li>\n<li>workspace-monitor 테스트와 check, desktop app 테스트/check/package가 통과한다.</li>\n<li>1280x720 데스크톱 뷰포트에서 설정, 명령 팔레트, 운영 센터, 터미널 드로어가 backdrop 기준 <code>top=0,left=0,bottom=viewportHeight</code>를 만족하고 주요 surface rect가 viewport 안에 남는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2250,
+      "updatedAt": "2026-06-06T05:53:33.568Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-popup-scroll-clipping-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-popup-scroll-clipping/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Popup Scroll Clipping",
+      "excerpt": "Spec: Popup Scroll Clipping 목표 스크롤 pane 안쪽이나 화면 하단 근처에서 열린 메뉴가 잘리거나 화면 밖으로 사라지는 현상을 줄인다. 설계 기존 Radix DropdownMenu.Portal / ContextMenu.Portal 을 유지한다. popup layer z , popup viewport gap , popup max block size , popup shadow 토큰을 추가한다. app choice menu , source file picker menu , too",
+      "html": "<h1>Spec: Popup Scroll Clipping</h1>\n<h2>목표</h2>\n<p>스크롤 pane 안쪽이나 화면 하단 근처에서 열린 메뉴가 잘리거나 화면 밖으로 사라지는 현상을 줄인다.</p>\n<h2>설계</h2>\n<ul>\n<li>기존 Radix <code>DropdownMenu.Portal</code> / <code>ContextMenu.Portal</code>을 유지한다.</li>\n<li><code>--popup-layer-z</code>, <code>--popup-viewport-gap</code>, <code>--popup-max-block-size</code>, <code>--popup-shadow</code> 토큰을 추가한다.</li>\n<li><code>app-choice-menu</code>, <code>source-file-picker-menu</code>, <code>tool-menu-content</code>, <code>tool-context-content</code>는 Radix available-height CSS 변수를 통해 최대 높이를 viewport 안쪽으로 제한한다.</li>\n<li>팝업 content는 <code>overflow:auto</code>, <code>overscroll-behavior: contain</code>, <code>scrollbar-gutter: stable</code>을 갖는다.</li>\n<li>관련 <code>DropdownMenu.Content</code>와 <code>ContextMenu.Content</code>는 <code>collisionPadding={16}</code>을 명시한다.</li>\n</ul>\n<h2>2026-06-06 후속 오버레이 설계</h2>\n<ul>\n<li><code>ViewportOverlayPortal</code>은 명령 팔레트, 설정 모달, 운영 센터를 <code>.desktop-app-root</code> 아래로 portal 처리한다. <code>body</code>가 아니라 앱 root를 대상으로 삼아 theme token 상속은 유지하고, <code>desktop-viewport</code>의 animation/containing block에서는 벗어난다.</li>\n<li><code>RuntimeTerminalDrawer</code>도 같은 root portal을 사용한다. 닫힌 상태는 <code>visibility:hidden</code>, <code>pointer-events:none</code>, <code>aria-hidden=true</code>로 남기고, 열린 상태는 <code>role=&quot;dialog&quot;</code>, <code>aria-modal=true</code>, <code>tabIndex=-1</code>을 가진다.</li>\n<li><code>useOverlayFocus</code>는 공통 focus containment hook이다. 열릴 때 initial focus를 적용하고, <code>Tab</code> 순환, <code>Escape</code> 닫기, 닫힌 뒤 focus restore를 담당한다.</li>\n<li>z-index는 <code>--overlay-dialog-z</code>, <code>--overlay-drawer-backdrop-z</code>, <code>--overlay-drawer-z</code>, <code>--overlay-command-palette-z</code>, <code>--popup-layer-z</code> 순서로 명시한다.</li>\n<li>터미널 drawer는 portal 이동 뒤 CSS transition 시작값이 남는 브라우저 상태를 피하기 위해 open 상태에서 위치/가시성 style을 명시하고 transition을 끈다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>전체 데스크톱 레이아웃 재편.</li>\n<li>새 floating UI dependency 추가.</li>\n<li>native select 복귀.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2000,
+      "updatedAt": "2026-06-06T05:53:33.568Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-06-button-text-wrapping-ko-md",
       "path": "_history/evaluations/2026/2026-06-06-button-text-wrapping.ko.md",
       "category": "evaluation",
@@ -8049,38 +8273,6 @@
       "workspaceArea": "_history/work-summaries"
     },
     {
-      "id": "platform-desktop-app-specs-2026-06-06-popup-scroll-clipping-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-06-popup-scroll-clipping/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Tasks: Popup Scroll Clipping",
-      "excerpt": "Tasks: Popup Scroll Clipping x 웹 기준 확인 및 기록 x 팝업/스크롤 관련 코드 경로 확인 x 공통 팝업 레이어 token 추가 x AppChoiceMenu, source file picker, Tool Studio menu CSS 보강 x Radix collision padding 명시 x 회귀 테스트 추가 x check, Browser smoke, package 검증 x 평가/요약/trace 기록 커밋 및 푸시",
-      "html": "<h1>Tasks: Popup Scroll Clipping</h1>\n<ul>\n<li>[x] 웹 기준 확인 및 기록</li>\n<li>[x] 팝업/스크롤 관련 코드 경로 확인</li>\n<li>[x] 공통 팝업 레이어 token 추가</li>\n<li>[x] AppChoiceMenu, source file picker, Tool Studio menu CSS 보강</li>\n<li>[x] Radix collision padding 명시</li>\n<li>[x] 회귀 테스트 추가</li>\n<li>[x] check, Browser smoke, package 검증</li>\n<li>[x] 평가/요약/trace 기록</li>\n<li>[ ] 커밋 및 푸시</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 397,
-      "updatedAt": "2026-06-06T05:13:07.852Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-06-popup-scroll-clipping-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-06-popup-scroll-clipping/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Validation: Popup Scroll Clipping",
-      "excerpt": "Validation: Popup Scroll Clipping 완료된 검증 corepack pnpm filter workspace monitor test : 통과, 83개 테스트. 새 회귀 테스트: Popup menus escape scroll panes and keep their own bounded scroll . Browser smoke, viewport 900x520: Tool Studio primary menu: top=281 , bottom=504 , height=223 , viewpor",
-      "html": "<h1>Validation: Popup Scroll Clipping</h1>\n<h2>완료된 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 83개 테스트.</li>\n<li>새 회귀 테스트: <code>Popup menus escape scroll panes and keep their own bounded scroll</code>.</li>\n<li>Browser smoke, viewport 900x520:</li>\n<li>Tool Studio primary menu: <code>top=281</code>, <code>bottom=504</code>, <code>height=223</code>, <code>viewportHeight=520</code>, <code>inViewport=true</code>, <code>zIndex=140</code>, <code>maxHeight=223.122px</code>, <code>overflowY=auto</code>, <code>overscrollBehavior=contain</code>, <code>portalWrapped=true</code>.</li>\n<li>Source file picker after scrolling trigger into view: <code>top=16</code>, <code>bottom=232</code>, <code>height=216</code>, <code>viewportHeight=520</code>, <code>inViewport=true</code>, <code>zIndex=140</code>, <code>maxHeight=216.094px</code>, <code>overflowY=auto</code>, <code>overscrollBehavior=contain</code>, <code>portalWrapped=true</code>.</li>\n<li><code>corepack pnpm --filter workspace-monitor run smoke:source-controls</code>: 통과. <code>sourceSelectCount=0</code>, <code>itemCount=23</code>, <code>pageErrors=[]</code>; WebGL <code>ReadPixels</code> performance warning만 관찰.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 27개 테스트.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과. 공개 배포 signing/notarization/updater/clean-machine smoke 경고는 기존 public release gate로 유지.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code>: 통과.</li>\n<li><code>.app</code>: <code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>.dmg</code>: <code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n<li><code>codesign --verify --deep --strict</code>: 통과.</li>\n<li><code>hdiutil verify</code>: 통과.</li>\n<li>package 후 <code>corepack pnpm --filter workspace-monitor run collect -- --best-effort</code> 및 <code>corepack pnpm --filter workspace-monitor run check</code>: 통과.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1751,
-      "updatedAt": "2026-06-06T05:13:07.852Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
       "id": "history-user-requests-2026-2026-06-06-popup-scroll-clipping-ko-md",
       "path": "_history/user-requests/2026/2026-06-06-popup-scroll-clipping.ko.md",
       "category": "user-request",
@@ -8095,86 +8287,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-06-popup-scroll-clipping-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-06-popup-scroll-clipping/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Plan: Popup Scroll Clipping",
-      "excerpt": "Plan: Popup Scroll Clipping 1. 웹 기준 확인: overflow clipping, portal, collision aware popup 기준을 확인한다. 2. 현재 앱의 팝업 지점 확인: AppChoiceMenu, source file picker, Tool Studio dropdown/context menu. 3. CSS 팝업 레이어 토큰과 Radix available height max height 계약을 추가한다. 4. 관련 Radix Content에 collision",
-      "html": "<h1>Plan: Popup Scroll Clipping</h1>\n<p>1. 웹 기준 확인: overflow clipping, portal, collision-aware popup 기준을 확인한다.</p>\n<p>2. 현재 앱의 팝업 지점 확인: AppChoiceMenu, source file picker, Tool Studio dropdown/context menu.</p>\n<p>3. CSS 팝업 레이어 토큰과 Radix available-height max-height 계약을 추가한다.</p>\n<p>4. 관련 Radix Content에 collision padding을 명시한다.</p>\n<p>5. 회귀 테스트와 Browser 실측을 추가/실행한다.</p>\n<p>6. workspace monitor와 desktop app 검증, 내부 패키징, 커밋/푸시를 완료한다.</p>\n<h2>리스크</h2>\n<ul>\n<li>팝업 높이를 너무 작게 제한하면 목록 탐색이 불편해질 수 있다.</li>\n<li>포털 z-index를 과도하게 올리면 modal hierarchy가 꼬일 수 있다. 이번 변경은 앱 팝업 전용 token <code>140</code>으로 제한한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 794,
-      "updatedAt": "2026-06-06T05:09:01.439Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-06-popup-scroll-clipping-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-06-popup-scroll-clipping/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Traceability: Popup Scroll Clipping",
-      "excerpt": "Traceability: Popup Scroll Clipping | 요구사항 | 구현 | 검증 | | | | | | REQ PSC 001 | DropdownMenu.Portal , ContextMenu.Portal , collisionPadding={16} | static test, Browser smoke | | REQ PSC 002 | popup max block size , Radix available height, overflow:auto | static test, Browser compu",
-      "html": "<h1>Traceability: Popup Scroll Clipping</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PSC-001</td><td><code>DropdownMenu.Portal</code>, <code>ContextMenu.Portal</code>, <code>collisionPadding={16}</code></td><td>static test, Browser smoke</td></tr><tr><td>REQ-PSC-002</td><td><code>--popup-max-block-size</code>, Radix available-height, <code>overflow:auto</code></td><td>static test, Browser computed metrics</td></tr><tr><td>REQ-PSC-003</td><td><code>--popup-layer-z: 140</code></td><td>static test, Browser computed z-index</td></tr><tr><td>REQ-PSC-004</td><td><code>AppChoiceMenu</code>, <code>source-file-picker-menu</code>, <code>tool-menu-content</code>, <code>tool-context-content</code></td><td>workspace-monitor tests</td></tr></tbody></table>\n<h2>출처 연결</h2>\n<ul>\n<li>web search record: <code>_history/web-searches/2026/2026-06-06-popup-scroll-clipping.ko.md</code></li>\n<li>requirements: <code>platform-desktop-app/docs/requirements/2026-06-06-popup-scroll-clipping.ko.md</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 750,
-      "updatedAt": "2026-06-06T05:09:01.439Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-06-popup-scroll-clipping-ko-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-06-popup-scroll-clipping.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "요구사항: 팝업 스크롤 잘림 방지",
-      "excerpt": "요구사항: 팝업 스크롤 잘림 방지 날짜: 2026 06 06 사용자 요구 스크롤 때문에 팝업이 보이지 않는 현상을 고친다. 요구사항 REQ PSC 001: Dropdown, context menu, file picker 같은 팝업은 스크롤 컨테이너 내부 overflow에 잘리지 않아야 한다. REQ PSC 002: 팝업은 viewport 안에 남는 높이를 기준으로 최대 높이를 제한하고, 필요할 때 팝업 내부에서만 스크롤해야 한다. REQ PSC 003: 팝업 레이어는 설정 모달, 작업 화면, 스크",
-      "html": "<h1>요구사항: 팝업 스크롤 잘림 방지</h1>\n<p>날짜: 2026-06-06</p>\n<h2>사용자 요구</h2>\n<ul>\n<li>스크롤 때문에 팝업이 보이지 않는 현상을 고친다.</li>\n</ul>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-PSC-001: Dropdown, context menu, file picker 같은 팝업은 스크롤 컨테이너 내부 overflow에 잘리지 않아야 한다.</li>\n<li>REQ-PSC-002: 팝업은 viewport 안에 남는 높이를 기준으로 최대 높이를 제한하고, 필요할 때 팝업 내부에서만 스크롤해야 한다.</li>\n<li>REQ-PSC-003: 팝업 레이어는 설정 모달, 작업 화면, 스크롤 pane보다 위에 떠야 한다.</li>\n<li>REQ-PSC-004: 소스 파일 선택, 공통 선택 메뉴, Tool Studio primary/action/context menu에 같은 팝업 계약을 적용한다.</li>\n</ul>\n<h2>범위</h2>\n<ul>\n<li>포함: workspace monitor renderer CSS, MonitorShell dropdowns, ToolStudioPanel menus, 회귀 테스트.</li>\n<li>제외: 새로운 메뉴 라이브러리 도입, native OS 팝오버 API 전환, 전체 화면 layout 재설계.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>작은 viewport와 스크롤된 화면에서도 대표 팝업이 viewport 안에 표시된다.</li>\n<li>팝업 content는 portal wrapper 아래에서 렌더링된다.</li>\n<li>팝업은 <code>z-index</code> token, Radix available-height, 내부 <code>overflow:auto</code>, <code>overscroll-behavior: contain</code>을 가진다.</li>\n<li>workspace-monitor 테스트와 check, desktop app 테스트/check/package가 통과한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1352,
-      "updatedAt": "2026-06-06T05:09:01.438Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-06-popup-scroll-clipping-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-06-popup-scroll-clipping/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Spec: Popup Scroll Clipping",
-      "excerpt": "Spec: Popup Scroll Clipping 목표 스크롤 pane 안쪽이나 화면 하단 근처에서 열린 메뉴가 잘리거나 화면 밖으로 사라지는 현상을 줄인다. 설계 기존 Radix DropdownMenu.Portal / ContextMenu.Portal 을 유지한다. popup layer z , popup viewport gap , popup max block size , popup shadow 토큰을 추가한다. app choice menu , source file picker menu , too",
-      "html": "<h1>Spec: Popup Scroll Clipping</h1>\n<h2>목표</h2>\n<p>스크롤 pane 안쪽이나 화면 하단 근처에서 열린 메뉴가 잘리거나 화면 밖으로 사라지는 현상을 줄인다.</p>\n<h2>설계</h2>\n<ul>\n<li>기존 Radix <code>DropdownMenu.Portal</code> / <code>ContextMenu.Portal</code>을 유지한다.</li>\n<li><code>--popup-layer-z</code>, <code>--popup-viewport-gap</code>, <code>--popup-max-block-size</code>, <code>--popup-shadow</code> 토큰을 추가한다.</li>\n<li><code>app-choice-menu</code>, <code>source-file-picker-menu</code>, <code>tool-menu-content</code>, <code>tool-context-content</code>는 Radix available-height CSS 변수를 통해 최대 높이를 viewport 안쪽으로 제한한다.</li>\n<li>팝업 content는 <code>overflow:auto</code>, <code>overscroll-behavior: contain</code>, <code>scrollbar-gutter: stable</code>을 갖는다.</li>\n<li>관련 <code>DropdownMenu.Content</code>와 <code>ContextMenu.Content</code>는 <code>collisionPadding={16}</code>을 명시한다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>전체 데스크톱 레이아웃 재편.</li>\n<li>새 floating UI dependency 추가.</li>\n<li>native select 복귀.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 898,
-      "updatedAt": "2026-06-06T05:09:01.438Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-popup-scroll-clipping-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-popup-scroll-clipping.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "Web Search: Popup Scroll Clipping",
-      "excerpt": "Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs",
-      "html": "<p>Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs 확인한 출처 MDN CSS overflow : overflow가 scroll container와 clipping 동작을 만든다는 기본 동작 확</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1776,
-      "updatedAt": "2026-06-06T05:09:01.437Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-clear-tab-discrimination-validation-ko-md",
@@ -10513,38 +10625,6 @@
       "workspaceArea": "_history/request-traces"
     },
     {
-      "id": "history-work-summaries-2026-2026-06-06-storage-architecture-review-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-storage-architecture-review.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "Work Summary: Storage Architecture Review",
-      "excerpt": "Work Summary: Storage Architecture Review 작성일: 2026 06 06 요약 Desktop app 저장소 구조를 검토해 전체 파일시스템 유지와 전체 DB 전환 모두를 배제하고, durable repository files와 embedded SQLite operational DB를 결합하는 하이브리드 전략을 기록했다. 핵심 결론 정책/요구사항/스펙/철학/히스토리는 파일과 Git을 유지한다. task run, decision inbox, workspace/history",
-      "html": "<p>Work Summary: Storage Architecture Review 작성일: 2026 06 06 요약 Desktop app 저장소 구조를 검토해 전체 파일시스템 유지와 전체 DB 전환 모두를 배제하고, durable repository files와 embedded SQLite operational DB를 결합하는 하이브리드 전략을 기록했다. 핵심 결론 정책/요구사항/스펙/철학/히스토리는 파일과 Git을 유지한다. task run, decision inbox, workspace/history/source index, telemetry는 SQLite operational plane 후보로 둔다. generated snapshots는 </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 818,
-      "updatedAt": "2026-06-06T02:36:02.919Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-storage-architecture-review-ko-md",
-      "path": "_history/work-timings/2026/2026-06-06-storage-architecture-review.ko.md",
-      "category": "work-timing",
-      "language": "ko",
-      "title": "Work Timing: Storage Architecture Review",
-      "excerpt": "Work Timing: Storage Architecture Review 작성일: 2026 06 06 | Phase | Status | Notes | | | | | | Web search | complete | Official docs checked first | | Local source inspection | complete | Collector and Tauri JSON persistence reviewed | | Architecture decision | complete | Hybrid f",
-      "html": "<p>Work Timing: Storage Architecture Review 작성일: 2026 06 06 | Phase | Status | Notes | | | | | | Web search | complete | Official docs checked first | | Local source inspection | complete | Collector and Tauri JSON persistence reviewed | | Architecture decision | complete | Hybrid files + embedded operational DB selected | | Artifact writing | complete | Regist</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 542,
-      "updatedAt": "2026-06-06T02:36:02.918Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-storage-architecture-review-tasks-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-storage-architecture-review/tasks.ko.md",
       "category": "project-spec",
@@ -10559,54 +10639,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-storage-architecture-review-ko-md",
-      "path": "_history/plans/2026/2026-06-06-storage-architecture-review.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "Storage Architecture Review Plan",
-      "excerpt": "Storage Architecture Review Plan 작성일: 2026 06 06 실행 계획 1. 웹 검색으로 공식 근거 확인 2. 현재 Workspace Monitor collector와 Tauri runtime persistence 조사 3. 파일 유지 대상과 DB 후보 대상 분류 4. 하이브리드 저장소 registry 작성 5. 요구사항, 아키텍처 리뷰, 스펙, traceability 작성 6. 관련 제품 registry 업데이트 7. collect/check/test/build/pac",
-      "html": "<p>Storage Architecture Review Plan 작성일: 2026 06 06 실행 계획 1. 웹 검색으로 공식 근거 확인 2. 현재 Workspace Monitor collector와 Tauri runtime persistence 조사 3. 파일 유지 대상과 DB 후보 대상 분류 4. 하이브리드 저장소 registry 작성 5. 요구사항, 아키텍처 리뷰, 스펙, traceability 작성 6. 관련 제품 registry 업데이트 7. collect/check/test/build/package 검증 8. 평가/요약/trace 작성 후 commit/push 주요 판단 전체 DB 전환이 아니라 embedded operational</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 645,
-      "updatedAt": "2026-06-06T02:33:43.753Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-storage-architecture-review-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-storage-architecture-review.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "User Request Summary",
-      "excerpt": "User Request Summary 작성일: 2026 06 06 요약 사용자는 앱 성능 문제가 모든 것을 파일시스템으로 처리해서 생기는지 물었고, 회사/desktop app들이 내부 DB를 쓰는 경우가 많지 않은지 검토해 달라고 요청했다. 해석한 요구 현재 platform desktop app의 파일 기반 저장 구조를 냉정하게 평가한다. embedded DB 사용 여부를 외부 근거와 현재 소스로 검토한다. 성능 개선을 위해 파일과 DB의 경계를 정한다. 구현 가능한 migration 계획을 남긴",
-      "html": "<p>User Request Summary 작성일: 2026 06 06 요약 사용자는 앱 성능 문제가 모든 것을 파일시스템으로 처리해서 생기는지 물었고, 회사/desktop app들이 내부 DB를 쓰는 경우가 많지 않은지 검토해 달라고 요청했다. 해석한 요구 현재 platform desktop app의 파일 기반 저장 구조를 냉정하게 평가한다. embedded DB 사용 여부를 외부 근거와 현재 소스로 검토한다. 성능 개선을 위해 파일과 DB의 경계를 정한다. 구현 가능한 migration 계획을 남긴다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 576,
-      "updatedAt": "2026-06-06T02:33:43.753Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-storage-architecture-review-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-storage-architecture-review.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "Web Search Record: Storage Architecture Review",
-      "excerpt": "Web Search Record: Storage Architecture Review 작성일: 2026 06 06 검색 목적 파일시스템 중심 저장 구조가 desktop app 성능 병목이 될 수 있는지, embedded DB/SQLite 같은 내부 DB 사용이 일반적인 선택인지 공식 근거로 확인했다. 검색어 SQLite official appropriate uses embedded database application file format Tauri v2 SQL plugin SQLite offici",
-      "html": "<p>Web Search Record: Storage Architecture Review 작성일: 2026 06 06 검색 목적 파일시스템 중심 저장 구조가 desktop app 성능 병목이 될 수 있는지, embedded DB/SQLite 같은 내부 DB 사용이 일반적인 선택인지 공식 근거로 확인했다. 검색어 SQLite official appropriate uses embedded database application file format Tauri v2 SQL plugin SQLite official documentation Apple Core Data persistent store SQLite official documentation </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2361,
-      "updatedAt": "2026-06-06T02:33:43.752Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "platform-desktop-app-configs-desktop-distribution-registry-json",
@@ -10735,38 +10767,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "Parallel Snapshot Collector 평가",
-      "excerpt": "Parallel Snapshot Collector 평가 날짜: 2026 06 06 결과 status: passed internal 병렬 구조를 실제 코드에 반영했다. 기존 Rust/Tauri 영역에는 이미 Rayon/background warmup/threaded stream readers가 있었으므로, 이번 변경은 단일 루프였던 Workspace Monitor snapshot collector에 bounded Node worker thread pool을 추가했다. 성능 관측 collect : 2",
-      "html": "<p>Parallel Snapshot Collector 평가 날짜: 2026 06 06 결과 status: passed internal 병렬 구조를 실제 코드에 반영했다. 기존 Rust/Tauri 영역에는 이미 Rayon/background warmup/threaded stream readers가 있었으므로, 이번 변경은 단일 루프였던 Workspace Monitor snapshot collector에 bounded Node worker thread pool을 추가했다. 성능 관측 collect : 280% CPU, 0.645s wall time snapshot stats: snapshotDocumentWorkers=6 , snapshotSo</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1084,
-      "updatedAt": "2026-06-06T02:26:02.134Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "Parallel Snapshot Collector 요청 추적",
-      "excerpt": "Parallel Snapshot Collector 요청 추적 날짜: 2026 06 06 요청 병렬 구조, 멀티스레드, 멀티프로세스로 속도를 늘릴 수 있는 방법을 고려. 결과 Workspace Monitor snapshot collector에 Node worker thread pool을 구현했다. Rust/Tauri에는 이미 Rayon/background warmup 구조가 있으므로 중복 추가 대신 관측과 기록을 남겼다. 변경 파일 platform desktop app/renderer/workspa",
-      "html": "<p>Parallel Snapshot Collector 요청 추적 날짜: 2026 06 06 요청 병렬 구조, 멀티스레드, 멀티프로세스로 속도를 늘릴 수 있는 방법을 고려. 결과 Workspace Monitor snapshot collector에 Node worker thread pool을 구현했다. Rust/Tauri에는 이미 Rayon/background warmup 구조가 있으므로 중복 추가 대신 관측과 기록을 남겼다. 변경 파일 platform desktop app/renderer/workspace monitor/scripts/lib/snapshot worker pool.mjs platform desktop app/renderer/wo</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1050,
-      "updatedAt": "2026-06-06T02:26:02.134Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
     },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-parallel-snapshot-collector-validation-ko-md",
@@ -18201,7 +18201,7 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 22
+          "count": 23
         },
         {
           "category": "request-trace",
@@ -18212,12 +18212,12 @@
           "count": 13
         },
         {
-          "category": "web-search",
+          "category": "work-summary",
           "count": 13
         },
         {
-          "category": "work-summary",
-          "count": 13
+          "category": "web-search",
+          "count": 12
         },
         {
           "category": "work-timing",
@@ -18384,13 +18384,23 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+          "id": "history-evaluations-2026-2026-06-06-popup-overlay-audit-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-popup-overlay-audit-evaluation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Popup Overlay Audit Evaluation Input",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"popup overlay audit\", \"user request summary\": \"Review and fix popup/overlay surfaces that are clipped, hard to use, or too generic.\", \"requirements\": \"REQ PSC 001\", \"REQ PSC 002\", \"REQ PSC 003\", \"REQ PSC 004\", \"REQ PSC 005\", \"REQ PSC 006\", \"REQ",
+          "updatedAt": "2026-06-06T05:53:33.572Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-popup-overlay-audit-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-popup-overlay-audit.ko.md",
           "category": "evaluation",
           "language": "ko",
-          "title": "Parallel Snapshot Collector 평가",
-          "excerpt": "Parallel Snapshot Collector 평가 날짜: 2026 06 06 결과 status: passed internal 병렬 구조를 실제 코드에 반영했다. 기존 Rust/Tauri 영역에는 이미 Rayon/background warmup/threaded stream readers가 있었으므로, 이번 변경은 단일 루프였던 Workspace Monitor snapshot collector에 bounded Node worker thread pool을 추가했다. 성능 관측 collect : 2",
-          "updatedAt": "2026-06-06T02:26:02.134Z",
+          "title": "Evaluation: Popup Overlay Audit",
+          "excerpt": "Evaluation: Popup Overlay Audit 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 팝업 같은 것을 전부 검토하고, 스크롤/잘림/불편한 기본 팝업 문제를 해결한다. 결과: 작은 menu류는 기존 Radix portal/collision 계약을 유지하고, 큰 modal/drawer류는 앱 root portal과 focus containment로 통합했다. 근거 설정, 명령 팔레트, 운영 센터는 .desktop app root portal 아래에서 backdrop이 vi",
+          "updatedAt": "2026-06-06T05:53:33.572Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18524,6 +18534,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-plans-2026-2026-06-06-popup-overlay-audit-ko-md",
+          "path": "_history/plans/2026/2026-06-06-popup-overlay-audit.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "Plan: Popup Overlay Audit",
+          "excerpt": "Plan: Popup Overlay Audit 날짜: 2026 06 06 실행 계획 1. 웹 기준을 확인해 modal focus, menu keyboard, portal/collision, top layer 개념을 정리한다. 2. 현재 overlay inventory를 확인한다: command palette, settings dialog, operator center, app choice/source picker, Tool Studio menus, terminal drawer. 3. 공통 focu",
+          "updatedAt": "2026-06-06T05:53:33.571Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-plans-2026-2026-06-06-runtime-customization-layer-ko-md",
           "path": "_history/plans/2026/2026-06-06-runtime-customization-layer.ko.md",
           "category": "plan",
@@ -18531,16 +18551,6 @@
           "title": "Plan Record: Runtime Customization Layer",
           "excerpt": "Plan Record: Runtime Customization Layer 작업 모드 ship first 성격의 구현 작업으로 처리했다. 새 dependency 설치 없이 기존 runtime과 preferences를 확장했다. 작업 분해 1. web first intake로 Tauri persistent settings, xterm.js terminal surface, provider API endpoint 근거 확인. 2. renderer preferences schema와 settings UI ",
           "updatedAt": "2026-06-06T04:36:56.832Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-plans-2026-2026-06-06-storage-architecture-review-ko-md",
-          "path": "_history/plans/2026/2026-06-06-storage-architecture-review.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "Storage Architecture Review Plan",
-          "excerpt": "Storage Architecture Review Plan 작성일: 2026 06 06 실행 계획 1. 웹 검색으로 공식 근거 확인 2. 현재 Workspace Monitor collector와 Tauri runtime persistence 조사 3. 파일 유지 대상과 DB 후보 대상 분류 4. 하이브리드 저장소 registry 작성 5. 요구사항, 아키텍처 리뷰, 스펙, traceability 작성 6. 관련 제품 registry 업데이트 7. collect/check/test/build/pac",
-          "updatedAt": "2026-06-06T02:33:43.753Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18624,13 +18634,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-parallel-snapshot-collector.ko.md",
+          "id": "history-request-traces-2026-2026-06-06-popup-overlay-audit-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-popup-overlay-audit.ko.md",
           "category": "request-trace",
           "language": "ko",
-          "title": "Parallel Snapshot Collector 요청 추적",
-          "excerpt": "Parallel Snapshot Collector 요청 추적 날짜: 2026 06 06 요청 병렬 구조, 멀티스레드, 멀티프로세스로 속도를 늘릴 수 있는 방법을 고려. 결과 Workspace Monitor snapshot collector에 Node worker thread pool을 구현했다. Rust/Tauri에는 이미 Rayon/background warmup 구조가 있으므로 중복 추가 대신 관측과 기록을 남겼다. 변경 파일 platform desktop app/renderer/workspa",
-          "updatedAt": "2026-06-06T02:26:02.134Z",
+          "title": "Request Trace: Popup Overlay Audit",
+          "excerpt": "Request Trace: Popup Overlay Audit 날짜: 2026 06 06 요청 팝업 같은 UI를 전부 검토하고 고친다. 산출물 요구사항 업데이트: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md 스펙 업데이트: platform desktop app/specs/2026 06 06 popup scroll clipping/ 구현: platform desktop app/renderer/workspa",
+          "updatedAt": "2026-06-06T05:53:33.572Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18764,6 +18774,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-user-requests-2026-2026-06-06-popup-overlay-audit-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-popup-overlay-audit.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "User Request: Popup Overlay Audit",
+          "excerpt": "User Request: Popup Overlay Audit 날짜: 2026 06 06 요약 사용자는 팝업류 UI를 전부 검토하라고 요청했다. 이전 맥락의 주요 불편은 스크롤 때문에 팝업이 안 보임, 범용/기본 팝업 느낌, 탭/터미널/설정 UI 사용성, 데스크톱 앱답게 안정적인 화면 자원 사용이었다. 이번 처리 범위 명령 팔레트, 설정 모달, 운영 센터, 터미널 드로어의 viewport 기준 배치와 focus 처리를 검토/패치한다. 기존 Radix dropdown/context menu clipp",
+          "updatedAt": "2026-06-06T05:53:33.571Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-06-popup-scroll-clipping-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-popup-scroll-clipping.ko.md",
           "category": "user-request",
@@ -18781,16 +18801,6 @@
           "title": "User Request: Runtime Customization Layer",
           "excerpt": "User Request: Runtime Customization Layer 요약 사용자는 실제 사용을 위해 provider, 모델, API 주소, 터미널, 명령 등 실행 설정이 전부 커스텀 가능해야 하며, 단순 표시가 아니라 사용성이 높아져야 한다고 요청했다. 해석한 요구 설정 UI에서 선택/입력 가능한 커스텀 항목을 늘린다. 커스텀 값이 실제 데스크톱 앱 실행 경로에 반영되게 한다. 기본 버튼/드롭다운 느낌을 피하고 기존 앱 스타일의 카드/버튼/입력으로 구성한다. 구현 후 빌드까지 자동으로 실행",
           "updatedAt": "2026-06-06T04:36:56.832Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-06-storage-architecture-review-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-storage-architecture-review.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "User Request Summary",
-          "excerpt": "User Request Summary 작성일: 2026 06 06 요약 사용자는 앱 성능 문제가 모든 것을 파일시스템으로 처리해서 생기는지 물었고, 회사/desktop app들이 내부 DB를 쓰는 경우가 많지 않은지 검토해 달라고 요청했다. 해석한 요구 현재 platform desktop app의 파일 기반 저장 구조를 냉정하게 평가한다. embedded DB 사용 여부를 외부 근거와 현재 소스로 검토한다. 성능 개선을 위해 파일과 DB의 경계를 정한다. 구현 가능한 migration 계획을 남긴",
-          "updatedAt": "2026-06-06T02:33:43.753Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18900,7 +18910,7 @@
           "language": "ko",
           "title": "Web Search: Popup Scroll Clipping",
           "excerpt": "Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs",
-          "updatedAt": "2026-06-06T05:09:01.437Z",
+          "updatedAt": "2026-06-06T05:53:33.571Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18911,16 +18921,6 @@
           "title": "Web Search: Runtime Customization Layer",
           "excerpt": "Web Search: Runtime Customization Layer 질의 Tauri v2 store plugin persistent settings official docs Tauri v2 app config persistent user settings official docs xterm.js terminal options addons official docs custom key handler OpenAI API base URL custom provider settings official do",
           "updatedAt": "2026-06-06T04:36:56.831Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-storage-architecture-review-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-storage-architecture-review.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "Web Search Record: Storage Architecture Review",
-          "excerpt": "Web Search Record: Storage Architecture Review 작성일: 2026 06 06 검색 목적 파일시스템 중심 저장 구조가 desktop app 성능 병목이 될 수 있는지, embedded DB/SQLite 같은 내부 DB 사용이 일반적인 선택인지 공식 근거로 확인했다. 검색어 SQLite official appropriate uses embedded database application file format Tauri v2 SQL plugin SQLite offici",
-          "updatedAt": "2026-06-06T02:33:43.752Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19024,6 +19024,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-06-popup-overlay-audit-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-popup-overlay-audit.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "Work Summary: Popup Overlay Audit",
+          "excerpt": "Work Summary: Popup Overlay Audit 날짜: 2026 06 06 완료 useOverlayFocus 를 추가해 modal focus 이동, Tab 순환, Escape 닫기, focus restore를 공통화했다. command palette, settings dialog, operator center를 .desktop app root portal로 이동했다. terminal drawer를 root portal로 이동하고, 닫힌 상태 접근 차단과 열린 상태 위치 보정을 추가했다",
+          "updatedAt": "2026-06-06T05:53:33.572Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-06-popup-scroll-clipping-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-popup-scroll-clipping.ko.md",
           "category": "work-summary",
@@ -19041,16 +19051,6 @@
           "title": "Work Summary: Runtime Customization Layer",
           "excerpt": "Work Summary: Runtime Customization Layer 완료 내용 데스크톱 preferences에 runtimeCustomization 을 추가했다. 설정 execution 탭에 실행 커스텀 섹션을 추가했다. provider별 기본 모델과 API base URL을 설정에서 수정할 수 있게 했다. provider 직접 실행과 모델 목록 확인이 커스텀 모델/base URL을 사용하도록 Rust 경로를 수정했다. native PTY 시작 시 커스텀 셸 명령과 시작 명령을 반영했다. ",
           "updatedAt": "2026-06-06T04:39:46.754Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-06-storage-architecture-review-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-storage-architecture-review.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "Work Summary: Storage Architecture Review",
-          "excerpt": "Work Summary: Storage Architecture Review 작성일: 2026 06 06 요약 Desktop app 저장소 구조를 검토해 전체 파일시스템 유지와 전체 DB 전환 모두를 배제하고, durable repository files와 embedded SQLite operational DB를 결합하는 하이브리드 전략을 기록했다. 핵심 결론 정책/요구사항/스펙/철학/히스토리는 파일과 Git을 유지한다. task run, decision inbox, workspace/history",
-          "updatedAt": "2026-06-06T02:36:02.919Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19144,6 +19144,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-timings-2026-2026-06-06-popup-overlay-audit-json",
+          "path": "_history/work-timings/2026/2026-06-06-popup-overlay-audit.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Popup Overlay Audit",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"popup overlay audit\", \"phases\": { \"phase\": \"web intake and inventory\", \"status\": \"completed\" }, { \"phase\": \"implementation\", \"status\": \"completed\" }, { \"phase\": \"browser smoke\", \"status\": \"completed\" }, { \"phase\": \"build and package\", \"status\":",
+          "updatedAt": "2026-06-06T05:53:33.573Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-popup-scroll-clipping-json",
           "path": "_history/work-timings/2026/2026-06-06-popup-scroll-clipping.json",
           "category": "work-timing",
@@ -19161,16 +19171,6 @@
           "title": "Work Timing: Runtime Customization Layer",
           "excerpt": "Work Timing: Runtime Customization Layer 단계별 기록 | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 5분 | Tauri, xterm.js, provider API 공식 문서 확인 | | 코드 경로 분석 | 10분 | preferences, provider task, native PTY 경로 확인 | | 구현 | 35분 | renderer UI/state, Rust schema/API, CSS, tests | | 1차 검증",
           "updatedAt": "2026-06-06T04:39:46.754Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-06-storage-architecture-review-ko-md",
-          "path": "_history/work-timings/2026/2026-06-06-storage-architecture-review.ko.md",
-          "category": "work-timing",
-          "language": "ko",
-          "title": "Work Timing: Storage Architecture Review",
-          "excerpt": "Work Timing: Storage Architecture Review 작성일: 2026 06 06 | Phase | Status | Notes | | | | | | Web search | complete | Official docs checked first | | Local source inspection | complete | Collector and Tauri JSON persistence reviewed | | Architecture decision | complete | Hybrid f",
-          "updatedAt": "2026-06-06T02:36:02.918Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19202,12 +19202,12 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2685,
+      "documents": 2692,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1028
+          "count": 1030
         },
         {
           "category": "web-search",
@@ -19215,23 +19215,23 @@
         },
         {
           "category": "plan",
-          "count": 354
+          "count": 355
         },
         {
           "category": "request-trace",
-          "count": 353
+          "count": 354
         },
         {
           "category": "work-timing",
-          "count": 273
+          "count": 274
         },
         {
           "category": "user-request",
-          "count": 138
+          "count": 139
         },
         {
           "category": "work-summary",
-          "count": 105
+          "count": 106
         },
         {
           "category": "daily-history",
@@ -19242,7 +19242,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6620353,
+      "totalSourceBytes": 6629210,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19271,7 +19271,7 @@
       "decisionEvents": 0,
       "openSignals": 20,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T05:27:59.626Z",
+      "latestEventAt": "2026-06-06T05:53:33.573Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19283,7 +19283,7 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 22
+        "count": 23
       },
       {
         "id": "traceability",
@@ -19296,14 +19296,14 @@
         "count": 13
       },
       {
-        "id": "evidence",
-        "label": "evidence",
-        "count": 13
-      },
-      {
         "id": "intake",
         "label": "intake",
         "count": 13
+      },
+      {
+        "id": "evidence",
+        "label": "evidence",
+        "count": 12
       },
       {
         "id": "monitoring",
@@ -19330,7 +19330,7 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 22
+        "count": 23
       },
       {
         "id": "trace",
@@ -19348,13 +19348,13 @@
         "count": 13
       },
       {
-        "id": "web-search",
-        "label": "web search",
-        "count": 13
-      },
-      {
         "id": "timing",
         "label": "timing",
+        "count": 12
+      },
+      {
+        "id": "web-search",
+        "label": "web search",
         "count": 12
       },
       {
@@ -19381,6 +19381,126 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-popup-overlay-audit-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 06 Popup Overlay Audit",
+        "detail": "{ \"date\": \"2026 06 06\", \"work id\": \"popup overlay audit\", \"phases\": { \"phase\": \"web intake and inventory\", \"status\": \"completed\" }, { \"phase\": \"implementation\", \"status\": \"completed\" }, { \"phase\": \"browser smoke\", \"status\": \"completed\" }, { \"phase\": \"build and package\", \"status\":",
+        "path": "_history/work-timings/2026/2026-06-06-popup-overlay-audit.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T05:53:33.573Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-popup-overlay-audit-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 06 Popup Overlay Audit Evaluation Input",
+        "detail": "{ \"date\": \"2026 06 06\", \"work id\": \"popup overlay audit\", \"user request summary\": \"Review and fix popup/overlay surfaces that are clipped, hard to use, or too generic.\", \"requirements\": \"REQ PSC 001\", \"REQ PSC 002\", \"REQ PSC 003\", \"REQ PSC 004\", \"REQ PSC 005\", \"REQ PSC 006\", \"REQ",
+        "path": "_history/evaluations/2026/2026-06-06-popup-overlay-audit-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T05:53:33.572Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-popup-overlay-audit-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "Evaluation: Popup Overlay Audit",
+        "detail": "Evaluation: Popup Overlay Audit 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 팝업 같은 것을 전부 검토하고, 스크롤/잘림/불편한 기본 팝업 문제를 해결한다. 결과: 작은 menu류는 기존 Radix portal/collision 계약을 유지하고, 큰 modal/drawer류는 앱 root portal과 focus containment로 통합했다. 근거 설정, 명령 팔레트, 운영 센터는 .desktop app root portal 아래에서 backdrop이 vi",
+        "path": "_history/evaluations/2026/2026-06-06-popup-overlay-audit.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T05:53:33.572Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-popup-overlay-audit-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Popup Overlay Audit",
+        "detail": "Request Trace: Popup Overlay Audit 날짜: 2026 06 06 요청 팝업 같은 UI를 전부 검토하고 고친다. 산출물 요구사항 업데이트: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md 스펙 업데이트: platform desktop app/specs/2026 06 06 popup scroll clipping/ 구현: platform desktop app/renderer/workspa",
+        "path": "_history/request-traces/2026/2026-06-06-popup-overlay-audit.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T05:53:33.572Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-popup-overlay-audit-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "Work Summary: Popup Overlay Audit",
+        "detail": "Work Summary: Popup Overlay Audit 날짜: 2026 06 06 완료 useOverlayFocus 를 추가해 modal focus 이동, Tab 순환, Escape 닫기, focus restore를 공통화했다. command palette, settings dialog, operator center를 .desktop app root portal로 이동했다. terminal drawer를 root portal로 이동하고, 닫힌 상태 접근 차단과 열린 상태 위치 보정을 추가했다",
+        "path": "_history/work-summaries/2026/2026-06-06-popup-overlay-audit.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T05:53:33.572Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-popup-scroll-clipping-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Popup Scroll Clipping",
+        "detail": "Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs",
+        "path": "_history/web-searches/2026/2026-06-06-popup-scroll-clipping.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T05:53:33.571Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-popup-overlay-audit-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "Plan: Popup Overlay Audit",
+        "detail": "Plan: Popup Overlay Audit 날짜: 2026 06 06 실행 계획 1. 웹 기준을 확인해 modal focus, menu keyboard, portal/collision, top layer 개념을 정리한다. 2. 현재 overlay inventory를 확인한다: command palette, settings dialog, operator center, app choice/source picker, Tool Studio menus, terminal drawer. 3. 공통 focu",
+        "path": "_history/plans/2026/2026-06-06-popup-overlay-audit.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T05:53:33.571Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-popup-overlay-audit-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "User Request: Popup Overlay Audit",
+        "detail": "User Request: Popup Overlay Audit 날짜: 2026 06 06 요약 사용자는 팝업류 UI를 전부 검토하라고 요청했다. 이전 맥락의 주요 불편은 스크롤 때문에 팝업이 안 보임, 범용/기본 팝업 느낌, 탭/터미널/설정 UI 사용성, 데스크톱 앱답게 안정적인 화면 자원 사용이었다. 이번 처리 범위 명령 팔레트, 설정 모달, 운영 센터, 터미널 드로어의 viewport 기준 배치와 focus 처리를 검토/패치한다. 기존 Radix dropdown/context menu clipp",
+        "path": "_history/user-requests/2026/2026-06-06-popup-overlay-audit.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T05:53:33.571Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-06-button-text-wrapping-json",
         "sourceType": "history",
@@ -19545,21 +19665,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T05:09:01.441Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-popup-scroll-clipping-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "Web Search: Popup Scroll Clipping",
-        "detail": "Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs",
-        "path": "_history/web-searches/2026/2026-06-06-popup-scroll-clipping.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T05:09:01.437Z"
       },
       {
         "id": "history-history-evaluations-2026-2026-06-06-clear-tab-discrimination-ko-md",
@@ -20715,111 +20820,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T02:36:02.919Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-storage-architecture-review-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "Work Summary: Storage Architecture Review",
-        "detail": "Work Summary: Storage Architecture Review 작성일: 2026 06 06 요약 Desktop app 저장소 구조를 검토해 전체 파일시스템 유지와 전체 DB 전환 모두를 배제하고, durable repository files와 embedded SQLite operational DB를 결합하는 하이브리드 전략을 기록했다. 핵심 결론 정책/요구사항/스펙/철학/히스토리는 파일과 Git을 유지한다. task run, decision inbox, workspace/history",
-        "path": "_history/work-summaries/2026/2026-06-06-storage-architecture-review.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:36:02.919Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-storage-architecture-review-ko-md",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "Work Timing: Storage Architecture Review",
-        "detail": "Work Timing: Storage Architecture Review 작성일: 2026 06 06 | Phase | Status | Notes | | | | | | Web search | complete | Official docs checked first | | Local source inspection | complete | Collector and Tauri JSON persistence reviewed | | Architecture decision | complete | Hybrid f",
-        "path": "_history/work-timings/2026/2026-06-06-storage-architecture-review.ko.md",
-        "category": "work-timing",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:36:02.918Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-storage-architecture-review-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "Storage Architecture Review Plan",
-        "detail": "Storage Architecture Review Plan 작성일: 2026 06 06 실행 계획 1. 웹 검색으로 공식 근거 확인 2. 현재 Workspace Monitor collector와 Tauri runtime persistence 조사 3. 파일 유지 대상과 DB 후보 대상 분류 4. 하이브리드 저장소 registry 작성 5. 요구사항, 아키텍처 리뷰, 스펙, traceability 작성 6. 관련 제품 registry 업데이트 7. collect/check/test/build/pac",
-        "path": "_history/plans/2026/2026-06-06-storage-architecture-review.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:33:43.753Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-storage-architecture-review-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "User Request Summary",
-        "detail": "User Request Summary 작성일: 2026 06 06 요약 사용자는 앱 성능 문제가 모든 것을 파일시스템으로 처리해서 생기는지 물었고, 회사/desktop app들이 내부 DB를 쓰는 경우가 많지 않은지 검토해 달라고 요청했다. 해석한 요구 현재 platform desktop app의 파일 기반 저장 구조를 냉정하게 평가한다. embedded DB 사용 여부를 외부 근거와 현재 소스로 검토한다. 성능 개선을 위해 파일과 DB의 경계를 정한다. 구현 가능한 migration 계획을 남긴",
-        "path": "_history/user-requests/2026/2026-06-06-storage-architecture-review.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:33:43.753Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-storage-architecture-review-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "Web Search Record: Storage Architecture Review",
-        "detail": "Web Search Record: Storage Architecture Review 작성일: 2026 06 06 검색 목적 파일시스템 중심 저장 구조가 desktop app 성능 병목이 될 수 있는지, embedded DB/SQLite 같은 내부 DB 사용이 일반적인 선택인지 공식 근거로 확인했다. 검색어 SQLite official appropriate uses embedded database application file format Tauri v2 SQL plugin SQLite offici",
-        "path": "_history/web-searches/2026/2026-06-06-storage-architecture-review.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:33:43.752Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "Parallel Snapshot Collector 평가",
-        "detail": "Parallel Snapshot Collector 평가 날짜: 2026 06 06 결과 status: passed internal 병렬 구조를 실제 코드에 반영했다. 기존 Rust/Tauri 영역에는 이미 Rayon/background warmup/threaded stream readers가 있었으므로, 이번 변경은 단일 루프였던 Workspace Monitor snapshot collector에 bounded Node worker thread pool을 추가했다. 성능 관측 collect : 2",
-        "path": "_history/evaluations/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:26:02.134Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-parallel-snapshot-collector-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "Parallel Snapshot Collector 요청 추적",
-        "detail": "Parallel Snapshot Collector 요청 추적 날짜: 2026 06 06 요청 병렬 구조, 멀티스레드, 멀티프로세스로 속도를 늘릴 수 있는 방법을 고려. 결과 Workspace Monitor snapshot collector에 Node worker thread pool을 구현했다. Rust/Tauri에는 이미 Rayon/background warmup 구조가 있으므로 중복 추가 대신 관측과 기록을 남겼다. 변경 파일 platform desktop app/renderer/workspa",
-        "path": "_history/request-traces/2026/2026-06-06-parallel-snapshot-collector.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:26:02.134Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23843,7 +23843,7 @@
       {
         "category": "web-search",
         "root": "_history/web-searches",
-        "documentsCount": 13
+        "documentsCount": 12
       },
       {
         "category": "work-timing",
@@ -23858,7 +23858,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 22
+        "documentsCount": 23
       },
       {
         "category": "daily-history",
@@ -27792,13 +27792,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3879,
+      "sourceDocuments": 3886,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T05:27:59.626Z"
+      "latestInsightAt": "2026-06-06T05:53:33.572Z"
     },
     "inferenceStages": [
       {
@@ -27939,7 +27939,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1767,
+        "signalCount": 1770,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -27947,7 +27947,7 @@
           },
           {
             "category": "evaluation",
-            "count": 471
+            "count": 472
           },
           {
             "category": "web-search",
@@ -27955,11 +27955,11 @@
           },
           {
             "category": "plan",
-            "count": 212
+            "count": 213
           },
           {
             "category": "request-trace",
-            "count": 116
+            "count": 117
           },
           {
             "category": "work-timing",
@@ -27990,7 +27990,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T05:27:59.626Z"
+        "latestEvidenceAt": "2026-06-06T05:53:33.572Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28004,7 +28004,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1009,
+        "signalCount": 1010,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -28012,7 +28012,7 @@
           },
           {
             "category": "plan",
-            "count": 294
+            "count": 295
           },
           {
             "category": "request-trace",
@@ -28063,7 +28063,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T05:27:59.626Z"
+        "latestEvidenceAt": "2026-06-06T05:53:33.571Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28150,7 +28150,7 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1540,
+        "signalCount": 1542,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -28158,11 +28158,11 @@
           },
           {
             "category": "evaluation",
-            "count": 525
+            "count": 526
           },
           {
             "category": "user-request",
-            "count": 102
+            "count": 103
           },
           {
             "category": "work-summary",
@@ -28209,7 +28209,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T05:27:59.626Z"
+        "latestEvidenceAt": "2026-06-06T05:53:33.572Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28285,14 +28285,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3879,
+      "sourceDocuments": 3886,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T05:27:59.626Z"
+      "latestInsightAt": "2026-06-06T05:53:33.572Z"
     },
     "operatingModel": [
       {
@@ -28350,19 +28350,19 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3246,
+        "signalCount": 3250,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1767
+            "signalCount": 1770
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1009
+            "signalCount": 1010
           },
           {
             "id": "build-closeout-gate",
@@ -28396,7 +28396,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T05:27:59.626Z",
+        "latestEvidenceAt": "2026-06-06T05:53:33.572Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28494,19 +28494,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2549,
+        "signalCount": 2552,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1540
+            "signalCount": 1542
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1009
+            "signalCount": 1010
           }
         ],
         "missingPatternIds": [],
@@ -28534,7 +28534,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T05:27:59.626Z",
+        "latestEvidenceAt": "2026-06-06T05:53:33.572Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28632,19 +28632,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2776,
+        "signalCount": 2780,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1009
+            "signalCount": 1010
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1767
+            "signalCount": 1770
           }
         ],
         "missingPatternIds": [],
@@ -28672,7 +28672,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T05:27:59.626Z",
+        "latestEvidenceAt": "2026-06-06T05:53:33.572Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28701,7 +28701,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1886,
+        "signalCount": 1889,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28713,7 +28713,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1767
+            "signalCount": 1770
           }
         ],
         "missingPatternIds": [],
@@ -28741,7 +28741,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T05:27:59.626Z",
+        "latestEvidenceAt": "2026-06-06T05:53:33.572Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

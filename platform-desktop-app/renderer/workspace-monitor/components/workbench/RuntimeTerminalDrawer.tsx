@@ -2,6 +2,8 @@
 
 import { Activity, ArrowRight, ChevronLeft, ChevronRight, Clipboard, ClipboardPaste, Eraser, Inbox, ListFilter, Maximize2, Search, Settings, ShieldCheck, SquareTerminal, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { useOverlayFocus } from "@/components/ui/useOverlayFocus";
 import { readClipboardText, writeClipboardText } from "@/lib/clipboard.mjs";
 
 type RuntimeTerminalLanguage = "ko" | "en";
@@ -361,6 +363,9 @@ export function RuntimeTerminalDrawer({
   onWriteSessionInput
 }: RuntimeTerminalDrawerProps) {
   const [terminalDrawerView, setTerminalDrawerView] = useState<TerminalDrawerView>("start");
+  const drawerRef = useRef<HTMLElement | null>(null);
+  const collapseButtonRef = useRef<HTMLButtonElement | null>(null);
+  const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null);
   const canStartSession =
     runtimeAvailable &&
     runningAdapterId === "" &&
@@ -378,7 +383,19 @@ export function RuntimeTerminalDrawer({
     { id: "account", icon: Settings, label: copy.terminalGuideAccount, detail: copy.terminalGuideAccountDetail }
   ];
 
-  return (
+  useEffect(() => {
+    setPortalTarget(document.querySelector<HTMLElement>(".desktop-app-root") || document.body);
+  }, []);
+
+  useOverlayFocus({
+    open,
+    containerRef: drawerRef,
+    initialFocusRef: collapseButtonRef,
+    onClose: onCollapse,
+    readyKey: portalTarget
+  });
+
+  const drawerOverlay = (
     <>
       {!open && (
         <button type="button" className="terminal-drawer-launcher" onClick={onOpen}>
@@ -397,7 +414,16 @@ export function RuntimeTerminalDrawer({
         />
       )}
 
-      <section className={`panel wide cli-session-panel terminal-drawer ${open ? "open" : "closed"}`} aria-label={copy.aria}>
+      <section
+        ref={drawerRef}
+        className={`panel wide cli-session-panel terminal-drawer ${open ? "open" : "closed"}`}
+        role="dialog"
+        aria-modal={open ? true : undefined}
+        aria-hidden={!open}
+        aria-label={copy.aria}
+        style={open ? { opacity: 1, transform: "translateY(0)", transition: "none", visibility: "visible" } : undefined}
+        tabIndex={-1}
+      >
         <div className="panel-heading">
           <div>
             <p className="eyebrow">{copy.eyebrow}</p>
@@ -407,7 +433,7 @@ export function RuntimeTerminalDrawer({
             <span className="result-count">
               {sessions.length + nativePtySessions.length} {copy.sessions}
             </span>
-            <button type="button" onClick={onCollapse} title={copy.collapse}>
+            <button ref={collapseButtonRef} type="button" onClick={onCollapse} title={copy.collapse}>
               <X size={15} aria-hidden="true" />
               <span>{copy.collapse}</span>
             </button>
@@ -826,6 +852,8 @@ export function RuntimeTerminalDrawer({
       </section>
     </>
   );
+
+  return portalTarget ? createPortal(drawerOverlay, portalTarget) : drawerOverlay;
 }
 
 function NativePtyTerminalSurface({

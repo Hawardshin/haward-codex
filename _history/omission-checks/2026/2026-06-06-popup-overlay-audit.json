@@ -1,0 +1,23 @@
+{
+  "date": "2026-06-06",
+  "work_id": "popup-overlay-audit",
+  "checked_user_requirements": [
+    "review popup-like surfaces",
+    "avoid scroll clipping",
+    "improve desktop-app overlay behavior",
+    "run build automatically after implementation"
+  ],
+  "checked_surfaces": [
+    "command palette",
+    "settings dialog",
+    "operator center",
+    "terminal drawer",
+    "Radix dropdown/context menus"
+  ],
+  "validation_covered": true,
+  "build_covered": true,
+  "package_covered": true,
+  "known_gaps": [
+    "Public release signing/notarization/updater/clean-machine smoke remains a separate existing gate."
+  ]
+}

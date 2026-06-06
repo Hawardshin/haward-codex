@@ -1,0 +1,38 @@
+{
+  "date": "2026-06-06",
+  "work_id": "popup-overlay-audit",
+  "user_request_summary": "Review and fix popup/overlay surfaces that are clipped, hard to use, or too generic.",
+  "requirements": [
+    "REQ-PSC-001",
+    "REQ-PSC-002",
+    "REQ-PSC-003",
+    "REQ-PSC-004",
+    "REQ-PSC-005",
+    "REQ-PSC-006",
+    "REQ-PSC-007"
+  ],
+  "changed_surfaces": [
+    "command_palette",
+    "settings_dialog",
+    "operator_center",
+    "terminal_drawer",
+    "radix_dropdown_context_menus"
+  ],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor check",
+    "browser_smoke_1280x720_overlay_rects",
+    "corepack pnpm run desktop:renderer:build",
+    "corepack pnpm run desktop:package:internal",
+    "corepack pnpm run desktop:run:internal"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-06-popup-overlay-audit.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-06-popup-overlay-audit.json"
+  ],
+  "installation_occurred": false,
+  "cli_pipeline_occurred": false
+}

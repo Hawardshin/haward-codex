@@ -44,6 +44,7 @@ import type { LucideIcon } from "lucide-react";
 import dynamic from "next/dynamic";
 import type { editor } from "monaco-editor";
 import { memo, useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 
 import type { ProductFeatureArchitecturePanelProps } from "@/components/features/ProductFeatureArchitecturePanel";
 import type { OperatorCenterDialogProps } from "@/components/features/OperatorCenterDialog";
@@ -52,6 +53,7 @@ import { preloadAdminHistoryIndex, useAdminHistoryIndex } from "@/components/his
 import { SnapshotLoadingShell } from "@/components/SnapshotLoadingShell";
 import { ActionGroup } from "@/components/ui/ActionGroup";
 import { Button } from "@/components/ui/Button";
+import { useOverlayFocus } from "@/components/ui/useOverlayFocus";
 import type {
   AgentCoreBlueprintPanelProps,
   AgentFactoryWizardProps,
@@ -803,6 +805,14 @@ const RuntimeTerminalDrawer = dynamic<RuntimeTerminalDrawerProps>(
     loading: () => null
   }
 );
+
+function ViewportOverlayPortal({ children, target }: { children: ReactNode; target: HTMLElement | null }) {
+  if (!target) {
+    return null;
+  }
+
+  return createPortal(children, target);
+}
 
 const AgentCollaborationBoardPanel = dynamic<AgentCollaborationBoardPanelProps>(
   () => import("@/components/workbench/AgentDetailPanels").then((module) => module.AgentCollaborationBoardPanel),
@@ -3308,6 +3318,10 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [startupSurfaceReady, setStartupSurfaceReady] = useState(false);
   const titlebarSectionLabelRef = useRef<HTMLElement>(null);
   const commandInputRef = useRef<HTMLInputElement>(null);
+  const commandPaletteDialogRef = useRef<HTMLElement | null>(null);
+  const settingsDialogRef = useRef<HTMLElement | null>(null);
+  const settingsCloseButtonRef = useRef<HTMLButtonElement | null>(null);
+  const [overlayPortalTarget, setOverlayPortalTarget] = useState<HTMLElement | null>(null);
   const pendingAgentDetailCommitRef = useRef<(() => void) | null>(null);
   const residentStartupPreloadDoneRef = useRef(false);
   const [searchAgentRunForm, setSearchAgentRunForm] = useState<SearchAgentRunForm>(defaultSearchAgentRunForm);
@@ -3628,22 +3642,45 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   useEffect(() => {
     void refreshProviderModels(searchAgentRunForm.providerId);
   }, [providerCredentials.source, providerCredentials.status, searchAgentRunForm.providerId]);
+  const closeCommandPalette = useCallback(() => setCommandPaletteOpen(false), []);
+  const closeSettingsDialog = useCallback(() => setSettingsOpen(false), []);
   useEffect(() => {
-    if (!commandPaletteOpen) {
-      return;
-    }
-    commandInputRef.current?.focus();
-  }, [commandPaletteOpen]);
+    setOverlayPortalTarget(document.querySelector<HTMLElement>(".desktop-app-root") || document.body);
+  }, []);
+  useOverlayFocus({
+    open: commandPaletteOpen,
+    containerRef: commandPaletteDialogRef,
+    initialFocusRef: commandInputRef,
+    onClose: closeCommandPalette,
+    readyKey: overlayPortalTarget
+  });
+  useOverlayFocus({
+    open: settingsOpen,
+    containerRef: settingsDialogRef,
+    initialFocusRef: settingsCloseButtonRef,
+    onClose: closeSettingsDialog,
+    readyKey: overlayPortalTarget
+  });
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       const key = event.key.toLowerCase();
       if ((event.metaKey || event.ctrlKey) && key === "k") {
         event.preventDefault();
-        setCommandPaletteOpen((current) => !current);
+        setCommandPaletteOpen((current) => {
+          const nextOpen = !current;
+          if (nextOpen) {
+            setSettingsOpen(false);
+            setOperatorCenterOpen(false);
+            setTerminalDrawerOpen(false);
+          }
+          return nextOpen;
+        });
         return;
       }
       if ((event.metaKey || event.ctrlKey) && event.key === ",") {
         event.preventDefault();
+        setCommandPaletteOpen(false);
+        setOperatorCenterOpen(false);
         setSettingsOpen(true);
         return;
       }
@@ -3651,6 +3688,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         setCommandPaletteOpen(false);
         setSettingsOpen(false);
         setOperatorCenterOpen(false);
+        setTerminalDrawerOpen(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -6204,75 +6242,78 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           )}
 
       {commandPaletteOpen && (
-        <div
-          className="command-palette-backdrop"
-          role="presentation"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) {
-              setCommandPaletteOpen(false);
-            }
-          }}
-        >
-          <section className="command-palette" role="dialog" aria-modal="true" aria-label={uiLanguage === "ko" ? "명령 검색" : "Command palette"}>
-            <div className="command-palette-search">
-              <Search size={18} aria-hidden="true" />
-              <input
-                ref={commandInputRef}
-                value={commandQuery}
-                onChange={(event) => setCommandQuery(event.target.value)}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter" && filteredCommandItems[0]) {
-                    runCommandItem(filteredCommandItems[0]);
-                  }
-                }}
-                placeholder={uiLanguage === "ko" ? "하고 싶은 일 검색: 툴, 에이전트, 실행, 파일, 설정" : "Search goals: tool, agent, run, files, setup"}
-              />
-              <Button variant="secondary" size="sm" onClick={() => setCommandPaletteOpen(false)}>
-                {uiLanguage === "ko" ? "닫기" : "Close"}
-              </Button>
-            </div>
-            <div className="command-palette-meta">
-              <span>{filteredCommandItems.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 결과" : "results"}</span>
-              <span>{currentViewMode.label}</span>
-            </div>
-            <div className="command-palette-results">
-              {filteredCommandItems.length ? (
-                filteredCommandItems.slice(0, 18).map((item) => (
-                  <Button key={item.id} variant="ghost" className="command-palette-result" onClick={() => runCommandItem(item)}>
-                    <item.icon size={17} aria-hidden="true" />
-                    <span>
-                      <small>{item.group}</small>
-                      <strong>{item.label}</strong>
-                      <em>{item.detail}</em>
-                    </span>
-                    {item.badge && <b>{item.badge}</b>}
-                  </Button>
-                ))
-              ) : (
-                <p className="empty-state">{uiLanguage === "ko" ? "일치하는 명령이 없습니다." : "No matching command."}</p>
-              )}
-            </div>
-          </section>
-        </div>
+        <ViewportOverlayPortal target={overlayPortalTarget}>
+          <div
+            className="command-palette-backdrop"
+            role="presentation"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) {
+                setCommandPaletteOpen(false);
+              }
+            }}
+          >
+            <section ref={commandPaletteDialogRef} className="command-palette" role="dialog" aria-modal="true" aria-label={uiLanguage === "ko" ? "명령 검색" : "Command palette"} tabIndex={-1}>
+              <div className="command-palette-search">
+                <Search size={18} aria-hidden="true" />
+                <input
+                  ref={commandInputRef}
+                  value={commandQuery}
+                  onChange={(event) => setCommandQuery(event.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" && filteredCommandItems[0]) {
+                      runCommandItem(filteredCommandItems[0]);
+                    }
+                  }}
+                  placeholder={uiLanguage === "ko" ? "하고 싶은 일 검색: 툴, 에이전트, 실행, 파일, 설정" : "Search goals: tool, agent, run, files, setup"}
+                />
+                <Button variant="secondary" size="sm" onClick={() => setCommandPaletteOpen(false)}>
+                  {uiLanguage === "ko" ? "닫기" : "Close"}
+                </Button>
+              </div>
+              <div className="command-palette-meta">
+                <span>{filteredCommandItems.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 결과" : "results"}</span>
+                <span>{currentViewMode.label}</span>
+              </div>
+              <div className="command-palette-results">
+                {filteredCommandItems.length ? (
+                  filteredCommandItems.slice(0, 18).map((item) => (
+                    <Button key={item.id} variant="ghost" className="command-palette-result" onClick={() => runCommandItem(item)}>
+                      <item.icon size={17} aria-hidden="true" />
+                      <span>
+                        <small>{item.group}</small>
+                        <strong>{item.label}</strong>
+                        <em>{item.detail}</em>
+                      </span>
+                      {item.badge && <b>{item.badge}</b>}
+                    </Button>
+                  ))
+                ) : (
+                  <p className="empty-state">{uiLanguage === "ko" ? "일치하는 명령이 없습니다." : "No matching command."}</p>
+                )}
+              </div>
+            </section>
+          </div>
+        </ViewportOverlayPortal>
       )}
 
       {settingsOpen && (
-        <div
-          className="settings-dialog-backdrop"
-          role="presentation"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) {
-              setSettingsOpen(false);
-            }
-          }}
-        >
-          <section className="settings-dialog" role="dialog" aria-modal="true" aria-label={uiLanguage === "ko" ? "설정" : "Settings"}>
+        <ViewportOverlayPortal target={overlayPortalTarget}>
+          <div
+            className="settings-dialog-backdrop"
+            role="presentation"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) {
+                setSettingsOpen(false);
+              }
+            }}
+          >
+            <section ref={settingsDialogRef} className="settings-dialog" role="dialog" aria-modal="true" aria-label={uiLanguage === "ko" ? "설정" : "Settings"} tabIndex={-1}>
             <header>
               <div>
                 <p className="eyebrow">{uiLanguage === "ko" ? "앱 설정" : "Preferences"}</p>
                 <h2>{uiLanguage === "ko" ? "설정" : "Settings"}</h2>
               </div>
-              <button type="button" onClick={() => setSettingsOpen(false)} title={uiLanguage === "ko" ? "설정 닫기" : "Close settings"}>
+              <button ref={settingsCloseButtonRef} type="button" onClick={() => setSettingsOpen(false)} title={uiLanguage === "ko" ? "설정 닫기" : "Close settings"}>
                 <X size={17} aria-hidden="true" />
               </button>
             </header>
@@ -6900,17 +6941,20 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                 )}
               </div>
             </div>
-          </section>
-        </div>
+            </section>
+          </div>
+        </ViewportOverlayPortal>
       )}
 
       {operatorCenterOpen && (
-        <OperatorCenterDialog
-          sections={operatorCenterSections}
-          language={uiLanguage}
-          onClose={() => setOperatorCenterOpen(false)}
-          onOpenSection={openSection}
-        />
+        <ViewportOverlayPortal target={overlayPortalTarget}>
+          <OperatorCenterDialog
+            sections={operatorCenterSections}
+            language={uiLanguage}
+            onClose={() => setOperatorCenterOpen(false)}
+            onOpenSection={openSection}
+          />
+        </ViewportOverlayPortal>
       )}
 
           {!isPrimaryWorkSurface && section !== "overview" && (

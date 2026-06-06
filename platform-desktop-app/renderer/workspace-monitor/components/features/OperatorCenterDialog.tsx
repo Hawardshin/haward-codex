@@ -1,5 +1,8 @@
 import { ArrowRight, ShieldCheck, X } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { useRef } from "react";
+
+import { useOverlayFocus } from "@/components/ui/useOverlayFocus";
 
 export type OperatorCenterSectionId =
   | "overview"
@@ -32,6 +35,15 @@ export type OperatorCenterDialogProps = {
 
 export function OperatorCenterDialog({ sections, language = "ko", onClose, onOpenSection }: OperatorCenterDialogProps) {
   const ko = language === "ko";
+  const dialogRef = useRef<HTMLElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  useOverlayFocus({
+    open: true,
+    containerRef: dialogRef,
+    initialFocusRef: closeButtonRef,
+    onClose
+  });
 
   return (
     <div
@@ -44,17 +56,19 @@ export function OperatorCenterDialog({ sections, language = "ko", onClose, onOpe
       }}
     >
       <section
+        ref={dialogRef}
         className="settings-dialog operator-center-dialog"
         role="dialog"
         aria-modal="true"
         aria-label={ko ? "운영 센터" : "Operator Center"}
+        tabIndex={-1}
       >
         <header>
           <div>
             <p className="eyebrow">{ko ? "운영 센터" : "Operator Center"}</p>
             <h2>{ko ? "기록, 문서, 거버넌스" : "Monitoring, Docs, Governance"}</h2>
           </div>
-          <button type="button" onClick={onClose} title={ko ? "운영 센터 닫기" : "Close operator center"}>
+          <button ref={closeButtonRef} type="button" onClick={onClose} title={ko ? "운영 센터 닫기" : "Close operator center"}>
             <X size={17} aria-hidden="true" />
           </button>
         </header>

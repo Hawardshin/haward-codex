@@ -20,3 +20,23 @@
 
 ## 불확실성
 - Browser 실측은 개발 preview 기준이다. Tauri native webview에서도 같은 CSS/DOM 계약이 적용되지만 OS webview별 세부 스크롤 감각은 패키지 smoke에서 계속 확인해야 한다.
+
+## 2026-06-06 후속 검색: 전체 팝업/오버레이 검토
+
+### 추가 질의
+- `WAI ARIA Authoring Practices dialog modal focus trap escape overlay`
+- `WAI ARIA Authoring Practices menu button keyboard focus escape`
+- `Radix UI Dropdown Menu collisionPadding portal avoid clipping scroll container`
+- `MDN popover API top layer CSS z-index focus accessibility`
+
+### 추가 확인 출처
+- WAI-ARIA APG Dialog Modal Pattern: modal dialog는 외부 content interaction을 막고, focus를 dialog 내부에 유지하며, `Escape` 닫기와 close button을 제공해야 한다. https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+- WAI-ARIA APG Menu Button Pattern: menu button은 버튼 role, menu open state, keyboard open/focus behavior를 가져야 한다. https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/
+- Radix Dropdown Menu docs: `Portal`, `collisionPadding`, `--radix-dropdown-menu-content-available-height`를 통해 clipping parent 밖 렌더링과 viewport height 제한을 지원한다. https://www.radix-ui.com/primitives/docs/components/dropdown-menu
+- MDN Popover API: native popover는 showing 상태에서 top layer에 추가된다. 이 변경은 native popover 전환이 아니라 앱 root portal로 같은 clipping 회피 목표를 달성한다. https://developer.mozilla.org/en-US/docs/Web/API/Popover_API
+
+### 후속 적용 판단
+- 기존 작은 Radix menu는 Radix portal/collision 계약을 유지한다.
+- 큰 앱 오버레이는 React portal로 `.desktop-app-root`에 올려 theme token을 유지하면서 scroll/animation containing block을 피한다.
+- modal성 surface에는 공통 focus containment hook을 적용한다.
+- terminal drawer는 hidden tab/portal 이동 시 transition 시작값이 남는 것을 피하기 위해 open 상태에서 위치를 명시한다.

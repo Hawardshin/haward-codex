@@ -80,6 +80,7 @@ const coreDrilldown = fs.readFileSync(
 );
 const buttonComponent = fs.readFileSync(path.join(projectRoot, "components", "ui", "Button.tsx"), "utf8");
 const actionGroupComponent = fs.readFileSync(path.join(projectRoot, "components", "ui", "ActionGroup.tsx"), "utf8");
+const overlayFocusHook = fs.readFileSync(path.join(projectRoot, "components", "ui", "useOverlayFocus.ts"), "utf8");
 const collector = fs.readFileSync(path.join(projectRoot, "scripts", "collect-workspace.mjs"), "utf8");
 const snapshotWorkerPool = fs.readFileSync(path.join(projectRoot, "scripts", "lib", "snapshot-worker-pool.mjs"), "utf8");
 const snapshotFileWorker = fs.readFileSync(path.join(projectRoot, "scripts", "lib", "snapshot-file-worker.mjs"), "utf8");
@@ -610,7 +611,7 @@ test("Popup menus escape scroll panes and keep their own bounded scroll", () => 
   const appChoiceMenuRule = readCssRule(".app-choice-menu");
   const sourceFilePickerMenuRule = readCssRule(".source-file-picker-menu");
 
-  assert.match(css, /--popup-layer-z: 140;/);
+  assert.match(css, /--popup-layer-z: 160;/);
   assert.match(css, /--popup-max-block-size: min\(420px, calc\(100dvh - \(var\(--popup-viewport-gap\) \* 2\)\)\);/);
   assert.match(monitorShell, /<DropdownMenu\.Portal>[\s\S]*?<DropdownMenu\.Content className="app-choice-menu"[\s\S]*?collisionPadding=\{16\}/);
   assert.match(monitorShell, /<DropdownMenu\.Portal>[\s\S]*?<DropdownMenu\.Content className="source-file-picker-menu"[\s\S]*?collisionPadding=\{16\}/);
@@ -624,6 +625,76 @@ test("Popup menus escape scroll panes and keep their own bounded scroll", () => 
   assert.match(sourceFilePickerMenuRule, /max-height: min\(var\(--popup-max-block-size\), var\(--popup-available-block-size\)\);/);
   assert.match(css, /\.tool-menu-content,[\s\S]*?\.tool-context-content \{[\s\S]*?max-height: min\(var\(--popup-max-block-size\), var\(--popup-available-block-size\)\);[\s\S]*?overscroll-behavior: contain;/);
   assert.match(css, /\.tool-context-content \{[\s\S]*?--popup-available-block-size: var\(--radix-context-menu-content-available-height, var\(--popup-max-block-size\)\);/);
+});
+
+test("Overlay surfaces share focus containment and explicit layer ordering", () => {
+  const commandPaletteBackdropRule = readCssRule(".command-palette-backdrop");
+  const commandPaletteRule = readCssRule(".command-palette");
+  const settingsDialogBackdropRule = readCssRule(".settings-dialog-backdrop");
+  const terminalDrawerBackdropRule = readCssRule(".terminal-drawer-backdrop");
+  const terminalDrawerRule = readCssRule(".terminal-drawer");
+  const terminalDrawerClosedRule = readCssRule(".terminal-drawer.closed");
+
+  assert.match(css, /--overlay-dialog-z: 90;/);
+  assert.match(css, /--overlay-drawer-backdrop-z: 100;/);
+  assert.match(css, /--overlay-drawer-z: 110;/);
+  assert.match(css, /--overlay-command-palette-z: 150;/);
+  assert.match(commandPaletteBackdropRule, /z-index: var\(--overlay-command-palette-z\);/);
+  assert.match(commandPaletteBackdropRule, /overscroll-behavior: none;/);
+  assert.match(commandPaletteRule, /max-height: calc\(100dvh - 96px\);/);
+  assert.match(commandPaletteRule, /overflow: hidden;/);
+  assert.match(settingsDialogBackdropRule, /z-index: var\(--overlay-dialog-z\);/);
+  assert.match(terminalDrawerBackdropRule, /z-index: var\(--overlay-drawer-backdrop-z\);/);
+  assert.match(terminalDrawerBackdropRule, /overscroll-behavior: none;/);
+  assert.match(terminalDrawerRule, /z-index: var\(--overlay-drawer-z\);/);
+  assert.match(terminalDrawerClosedRule, /visibility: hidden;/);
+  assert.match(overlayFocusHook, /export function useOverlayFocus/);
+  assert.match(overlayFocusHook, /event\.key === "Escape"/);
+  assert.match(overlayFocusHook, /event\.key !== "Tab"/);
+  assert.match(overlayFocusHook, /event\.stopPropagation\(\);/);
+  assert.match(overlayFocusHook, /readyKey\?: unknown/);
+  assert.match(overlayFocusHook, /\[containerRef, initialFocusRef, open, readyKey\]/);
+  assert.match(overlayFocusHook, /restoreTarget\.focus\(\{ preventScroll: true \}\)/);
+  assert.match(monitorShell, /import \{ createPortal \} from "react-dom";/);
+  assert.match(monitorShell, /function ViewportOverlayPortal/);
+  assert.match(monitorShell, /return createPortal\(children, target\);/);
+  assert.match(monitorShell, /document\.querySelector<HTMLElement>\("\.desktop-app-root"\) \|\| document\.body/);
+  assert.match(
+    monitorShell,
+    /useOverlayFocus\(\{[\s\S]*?open: commandPaletteOpen,[\s\S]*?containerRef: commandPaletteDialogRef,[\s\S]*?initialFocusRef: commandInputRef,[\s\S]*?readyKey: overlayPortalTarget/
+  );
+  assert.match(
+    monitorShell,
+    /useOverlayFocus\(\{[\s\S]*?open: settingsOpen,[\s\S]*?containerRef: settingsDialogRef,[\s\S]*?initialFocusRef: settingsCloseButtonRef,[\s\S]*?readyKey: overlayPortalTarget/
+  );
+  assert.match(monitorShell, /setTerminalDrawerOpen\(false\);/);
+  assert.match(monitorShell, /\{commandPaletteOpen && \([\s\S]*?<ViewportOverlayPortal target=\{overlayPortalTarget\}>[\s\S]*?className="command-palette-backdrop"/);
+  assert.match(monitorShell, /\{settingsOpen && \([\s\S]*?<ViewportOverlayPortal target=\{overlayPortalTarget\}>[\s\S]*?className="settings-dialog-backdrop"/);
+  assert.match(monitorShell, /\{operatorCenterOpen && \([\s\S]*?<ViewportOverlayPortal target=\{overlayPortalTarget\}>[\s\S]*?<OperatorCenterDialog/);
+  assert.match(
+    monitorShell,
+    /ref=\{commandPaletteDialogRef\} className="command-palette" role="dialog" aria-modal="true"[\s\S]*?tabIndex=\{-1\}/
+  );
+  assert.match(
+    monitorShell,
+    /ref=\{settingsDialogRef\} className="settings-dialog" role="dialog" aria-modal="true"[\s\S]*?tabIndex=\{-1\}/
+  );
+  assert.match(
+    operatorCenterDialog,
+    /useOverlayFocus\(\{[\s\S]*?open: true,[\s\S]*?containerRef: dialogRef,[\s\S]*?initialFocusRef: closeButtonRef/
+  );
+  assert.match(
+    runtimeTerminalDrawer,
+    /useOverlayFocus\(\{[\s\S]*?open,[\s\S]*?containerRef: drawerRef,[\s\S]*?initialFocusRef: collapseButtonRef,[\s\S]*?readyKey: portalTarget/
+  );
+  assert.match(runtimeTerminalDrawer, /import \{ createPortal \} from "react-dom";/);
+  assert.match(runtimeTerminalDrawer, /document\.querySelector<HTMLElement>\("\.desktop-app-root"\) \|\| document\.body/);
+  assert.match(runtimeTerminalDrawer, /const drawerOverlay = \(/);
+  assert.match(runtimeTerminalDrawer, /return portalTarget \? createPortal\(drawerOverlay, portalTarget\) : drawerOverlay;/);
+  assert.match(
+    runtimeTerminalDrawer,
+    /role="dialog"[\s\S]*?aria-modal=\{open \? true : undefined\}[\s\S]*?aria-hidden=\{!open\}[\s\S]*?style=\{open \? \{ opacity: 1, transform: "translateY\(0\)", transition: "none", visibility: "visible" \} : undefined\}[\s\S]*?tabIndex=\{-1\}/
+  );
 });
 
 test("Agents collaboration uses lazy open-source 3D character scene", () => {

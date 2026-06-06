@@ -1,13 +1,13 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-06T05:28:06.206Z",
+  "generatedAt": "2026-06-06T05:55:48.211Z",
   "summary": {
-    "documents": 2685,
+    "documents": 2692,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1028
+        "count": 1030
       },
       {
         "category": "web-search",
@@ -15,23 +15,23 @@
       },
       {
         "category": "plan",
-        "count": 354
+        "count": 355
       },
       {
         "category": "request-trace",
-        "count": 353
+        "count": 354
       },
       {
         "category": "work-timing",
-        "count": 273
+        "count": 274
       },
       {
         "category": "user-request",
-        "count": 138
+        "count": 139
       },
       {
         "category": "work-summary",
-        "count": 105
+        "count": 106
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6620353,
+    "totalSourceBytes": 6629210,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,134 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-work-timings-2026-2026-06-06-popup-overlay-audit-json",
+      "path": "_history/work-timings/2026/2026-06-06-popup-overlay-audit.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Popup Overlay Audit",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"popup overlay audit\", \"phases\": { \"phase\": \"web intake and inventory\", \"status\": \"completed\" }, { \"phase\": \"implementation\", \"status\": \"completed\" }, { \"phase\": \"browser smoke\", \"status\": \"completed\" }, { \"phase\": \"build and package\", \"status\":",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;popup overlay audit&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web intake and inventory&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;browser smoke&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;build and package&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;history and trace&quot;, &quot;status&quot;: &quot;completed&quot; } , &quot;note&quot;</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 612,
+      "updatedAt": "2026-06-06T05:53:33.573Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-popup-overlay-audit-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-popup-overlay-audit-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Popup Overlay Audit Evaluation Input",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"popup overlay audit\", \"user request summary\": \"Review and fix popup/overlay surfaces that are clipped, hard to use, or too generic.\", \"requirements\": \"REQ PSC 001\", \"REQ PSC 002\", \"REQ PSC 003\", \"REQ PSC 004\", \"REQ PSC 005\", \"REQ PSC 006\", \"REQ",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;popup overlay audit&quot;, &quot;user request summary&quot;: &quot;Review and fix popup/overlay surfaces that are clipped, hard to use, or too generic.&quot;, &quot;requirements&quot;: &quot;REQ PSC 001&quot;, &quot;REQ PSC 002&quot;, &quot;REQ PSC 003&quot;, &quot;REQ PSC 004&quot;, &quot;REQ PSC 005&quot;, &quot;REQ PSC 006&quot;, &quot;REQ PSC 007&quot; , &quot;changed surfaces&quot;: &quot;command palette&quot;, &quot;settings dialog&quot;, &quot;operator </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1123,
+      "updatedAt": "2026-06-06T05:53:33.572Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-popup-overlay-audit-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-popup-overlay-audit.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Popup Overlay Audit",
+      "excerpt": "Evaluation: Popup Overlay Audit 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 팝업 같은 것을 전부 검토하고, 스크롤/잘림/불편한 기본 팝업 문제를 해결한다. 결과: 작은 menu류는 기존 Radix portal/collision 계약을 유지하고, 큰 modal/drawer류는 앱 root portal과 focus containment로 통합했다. 근거 설정, 명령 팔레트, 운영 센터는 .desktop app root portal 아래에서 backdrop이 vi",
+      "html": "<p>Evaluation: Popup Overlay Audit 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 팝업 같은 것을 전부 검토하고, 스크롤/잘림/불편한 기본 팝업 문제를 해결한다. 결과: 작은 menu류는 기존 Radix portal/collision 계약을 유지하고, 큰 modal/drawer류는 앱 root portal과 focus containment로 통합했다. 근거 설정, 명령 팔레트, 운영 센터는 .desktop app root portal 아래에서 backdrop이 viewport 전체를 덮고 surface가 1280x720 안에 남는다. 터미널 드로어는 root portal 아래에서 top=64 , botto</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1234,
+      "updatedAt": "2026-06-06T05:53:33.572Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-popup-overlay-audit-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-popup-overlay-audit.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Popup Overlay Audit",
+      "excerpt": "Request Trace: Popup Overlay Audit 날짜: 2026 06 06 요청 팝업 같은 UI를 전부 검토하고 고친다. 산출물 요구사항 업데이트: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md 스펙 업데이트: platform desktop app/specs/2026 06 06 popup scroll clipping/ 구현: platform desktop app/renderer/workspa",
+      "html": "<p>Request Trace: Popup Overlay Audit 날짜: 2026 06 06 요청 팝업 같은 UI를 전부 검토하고 고친다. 산출물 요구사항 업데이트: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md 스펙 업데이트: platform desktop app/specs/2026 06 06 popup scroll clipping/ 구현: platform desktop app/renderer/workspace monitor/components/ui/useOverlayFocus.ts platform desktop app/renderer/worksp</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1320,
+      "updatedAt": "2026-06-06T05:53:33.572Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-popup-overlay-audit-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-popup-overlay-audit.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Popup Overlay Audit",
+      "excerpt": "Work Summary: Popup Overlay Audit 날짜: 2026 06 06 완료 useOverlayFocus 를 추가해 modal focus 이동, Tab 순환, Escape 닫기, focus restore를 공통화했다. command palette, settings dialog, operator center를 .desktop app root portal로 이동했다. terminal drawer를 root portal로 이동하고, 닫힌 상태 접근 차단과 열린 상태 위치 보정을 추가했다",
+      "html": "<p>Work Summary: Popup Overlay Audit 날짜: 2026 06 06 완료 useOverlayFocus 를 추가해 modal focus 이동, Tab 순환, Escape 닫기, focus restore를 공통화했다. command palette, settings dialog, operator center를 .desktop app root portal로 이동했다. terminal drawer를 root portal로 이동하고, 닫힌 상태 접근 차단과 열린 상태 위치 보정을 추가했다. overlay z index token을 dialog/drawer/command/menu로 분리했다. popup/menu 회귀 테스트에 po</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1005,
+      "updatedAt": "2026-06-06T05:53:33.572Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-popup-overlay-audit-ko-md",
+      "path": "_history/plans/2026/2026-06-06-popup-overlay-audit.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Plan: Popup Overlay Audit",
+      "excerpt": "Plan: Popup Overlay Audit 날짜: 2026 06 06 실행 계획 1. 웹 기준을 확인해 modal focus, menu keyboard, portal/collision, top layer 개념을 정리한다. 2. 현재 overlay inventory를 확인한다: command palette, settings dialog, operator center, app choice/source picker, Tool Studio menus, terminal drawer. 3. 공통 focu",
+      "html": "<p>Plan: Popup Overlay Audit 날짜: 2026 06 06 실행 계획 1. 웹 기준을 확인해 modal focus, menu keyboard, portal/collision, top layer 개념을 정리한다. 2. 현재 overlay inventory를 확인한다: command palette, settings dialog, operator center, app choice/source picker, Tool Studio menus, terminal drawer. 3. 공통 focus containment hook과 root portal 구조를 적용한다. 4. z index token을 overlay 종류별로 분리한다. 5</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1058,
+      "updatedAt": "2026-06-06T05:53:33.571Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-popup-overlay-audit-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-popup-overlay-audit.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: Popup Overlay Audit",
+      "excerpt": "User Request: Popup Overlay Audit 날짜: 2026 06 06 요약 사용자는 팝업류 UI를 전부 검토하라고 요청했다. 이전 맥락의 주요 불편은 스크롤 때문에 팝업이 안 보임, 범용/기본 팝업 느낌, 탭/터미널/설정 UI 사용성, 데스크톱 앱답게 안정적인 화면 자원 사용이었다. 이번 처리 범위 명령 팔레트, 설정 모달, 운영 센터, 터미널 드로어의 viewport 기준 배치와 focus 처리를 검토/패치한다. 기존 Radix dropdown/context menu clipp",
+      "html": "<p>User Request: Popup Overlay Audit 날짜: 2026 06 06 요약 사용자는 팝업류 UI를 전부 검토하라고 요청했다. 이전 맥락의 주요 불편은 스크롤 때문에 팝업이 안 보임, 범용/기본 팝업 느낌, 탭/터미널/설정 UI 사용성, 데스크톱 앱답게 안정적인 화면 자원 사용이었다. 이번 처리 범위 명령 팔레트, 설정 모달, 운영 센터, 터미널 드로어의 viewport 기준 배치와 focus 처리를 검토/패치한다. 기존 Radix dropdown/context menu clipping 계약은 유지하되 z index hierarchy를 재정렬한다. 구현 뒤 renderer build, internal package, ap</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 695,
+      "updatedAt": "2026-06-06T05:53:33.571Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-popup-scroll-clipping-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-popup-scroll-clipping.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Popup Scroll Clipping",
+      "excerpt": "Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs",
+      "html": "<p>Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs 확인한 출처 MDN CSS overflow : overflow가 scroll container와 clipping 동작을 만든다는 기본 동작 확</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3586,
+      "updatedAt": "2026-06-06T05:53:33.571Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-06-button-text-wrapping-ko-md",
       "path": "_history/evaluations/2026/2026-06-06-button-text-wrapping.ko.md",
@@ -237,22 +365,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-popup-scroll-clipping-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-popup-scroll-clipping.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "Web Search: Popup Scroll Clipping",
-      "excerpt": "Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs",
-      "html": "<p>Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs 확인한 출처 MDN CSS overflow : overflow가 scroll container와 clipping 동작을 만든다는 기본 동작 확</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1776,
-      "updatedAt": "2026-06-06T05:09:01.437Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-clear-tab-discrimination-ko-md",
@@ -43027,14 +43139,22 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 413,
+      "documentsCount": 420,
       "categories": [
         {
           "category": "evaluation",
-          "count": 95
+          "count": 97
         },
         {
           "category": "user-request",
+          "count": 60
+        },
+        {
+          "category": "work-summary",
+          "count": 60
+        },
+        {
+          "category": "request-trace",
           "count": 59
         },
         {
@@ -43042,20 +43162,12 @@
           "count": 59
         },
         {
-          "category": "work-summary",
-          "count": 59
-        },
-        {
-          "category": "request-trace",
-          "count": 58
-        },
-        {
           "category": "work-timing",
-          "count": 56
+          "count": 57
         },
         {
           "category": "plan",
-          "count": 26
+          "count": 27
         },
         {
           "category": "daily-history",
