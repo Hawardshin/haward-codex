@@ -419,6 +419,7 @@
       ],
       "current_assets": [
         "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+        "platform-desktop-app/configs/storage-architecture-registry.json",
         "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
         "platform-desktop-app/src-tauri/src/lib.rs",
         "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
@@ -441,6 +442,7 @@
       "validation_gates": [
         "workspace boundary commands reject unsafe paths",
         "resident desktop/source panels share native workspace warmup and prepare requests",
+        "storage architecture keeps durable repository knowledge file-backed while moving operational indexes toward embedded SQLite",
         "accumulated data manifest is persisted",
         "customer bundle excludes platform source"
       ]

@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-06T02:26:09.092Z",
+  "generatedAt": "2026-06-06T02:38:19.342Z",
   "summary": {
-    "documents": 2592,
+    "documents": 2599,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1007
+        "count": 1008
       },
       {
         "category": "web-search",
-        "count": 412
+        "count": 413
       },
       {
         "category": "plan",
-        "count": 346
+        "count": 347
       },
       {
         "category": "request-trace",
-        "count": 340
+        "count": 341
       },
       {
         "category": "work-timing",
-        "count": 261
+        "count": 262
       },
       {
         "category": "user-request",
-        "count": 125
+        "count": 126
       },
       {
         "category": "work-summary",
-        "count": 92
+        "count": 93
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6503658,
+    "totalSourceBytes": 6511951,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,118 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-06-storage-architecture-review-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-storage-architecture-review.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Work Evaluation: Storage Architecture Review",
+      "excerpt": "Work Evaluation: Storage Architecture Review 작성일: 2026 06 06 사용자 요구 대비 결과 요구: 파일시스템 중심 구조가 성능 문제인지, 내부 DB 사용이 맞는지 검토. 결과: 충족. 현재 구조의 파일 기반 pressure point를 확인했고, 전체 DB 전환이 아닌 hybrid files plus embedded operational DB 전략을 선택했다. 산출물 platform desktop app/configs/storage architecture ",
+      "html": "<p>Work Evaluation: Storage Architecture Review 작성일: 2026 06 06 사용자 요구 대비 결과 요구: 파일시스템 중심 구조가 성능 문제인지, 내부 DB 사용이 맞는지 검토. 결과: 충족. 현재 구조의 파일 기반 pressure point를 확인했고, 전체 DB 전환이 아닌 hybrid files plus embedded operational DB 전략을 선택했다. 산출물 platform desktop app/configs/storage architecture registry.json platform desktop app/docs/architecture/storage architecture review</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1773,
+      "updatedAt": "2026-06-06T02:36:02.919Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-storage-architecture-review-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-storage-architecture-review.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Storage Architecture Review",
+      "excerpt": "Request Trace: Storage Architecture Review 작성일: 2026 06 06 요청 파일시스템 중심 저장 구조가 성능 저하 원인인지, 내부 DB 사용을 검토해 달라는 요청. 해석 현재 앱의 느림을 저장소 구조 관점에서 재평가하고, desktop app다운 app data/embedded DB 활용 방향을 결정해야 한다. 실행 1. 웹 검색으로 공식 근거 확인 2. 현재 collector와 Rust runtime persistence 조사 3. 하이브리드 저장소 전략 선택",
+      "html": "<p>Request Trace: Storage Architecture Review 작성일: 2026 06 06 요청 파일시스템 중심 저장 구조가 성능 저하 원인인지, 내부 DB 사용을 검토해 달라는 요청. 해석 현재 앱의 느림을 저장소 구조 관점에서 재평가하고, desktop app다운 app data/embedded DB 활용 방향을 결정해야 한다. 실행 1. 웹 검색으로 공식 근거 확인 2. 현재 collector와 Rust runtime persistence 조사 3. 하이브리드 저장소 전략 선택 4. storage architecture registry와 architecture review 문서 생성 5. product/runtime </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1578,
+      "updatedAt": "2026-06-06T02:36:02.919Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-storage-architecture-review-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-storage-architecture-review.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Storage Architecture Review",
+      "excerpt": "Work Summary: Storage Architecture Review 작성일: 2026 06 06 요약 Desktop app 저장소 구조를 검토해 전체 파일시스템 유지와 전체 DB 전환 모두를 배제하고, durable repository files와 embedded SQLite operational DB를 결합하는 하이브리드 전략을 기록했다. 핵심 결론 정책/요구사항/스펙/철학/히스토리는 파일과 Git을 유지한다. task run, decision inbox, workspace/history",
+      "html": "<p>Work Summary: Storage Architecture Review 작성일: 2026 06 06 요약 Desktop app 저장소 구조를 검토해 전체 파일시스템 유지와 전체 DB 전환 모두를 배제하고, durable repository files와 embedded SQLite operational DB를 결합하는 하이브리드 전략을 기록했다. 핵심 결론 정책/요구사항/스펙/철학/히스토리는 파일과 Git을 유지한다. task run, decision inbox, workspace/history/source index, telemetry는 SQLite operational plane 후보로 둔다. generated snapshots는 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 818,
+      "updatedAt": "2026-06-06T02:36:02.919Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-storage-architecture-review-ko-md",
+      "path": "_history/work-timings/2026/2026-06-06-storage-architecture-review.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "Work Timing: Storage Architecture Review",
+      "excerpt": "Work Timing: Storage Architecture Review 작성일: 2026 06 06 | Phase | Status | Notes | | | | | | Web search | complete | Official docs checked first | | Local source inspection | complete | Collector and Tauri JSON persistence reviewed | | Architecture decision | complete | Hybrid f",
+      "html": "<p>Work Timing: Storage Architecture Review 작성일: 2026 06 06 | Phase | Status | Notes | | | | | | Web search | complete | Official docs checked first | | Local source inspection | complete | Collector and Tauri JSON persistence reviewed | | Architecture decision | complete | Hybrid files + embedded operational DB selected | | Artifact writing | complete | Regist</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 542,
+      "updatedAt": "2026-06-06T02:36:02.918Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-storage-architecture-review-ko-md",
+      "path": "_history/plans/2026/2026-06-06-storage-architecture-review.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Storage Architecture Review Plan",
+      "excerpt": "Storage Architecture Review Plan 작성일: 2026 06 06 실행 계획 1. 웹 검색으로 공식 근거 확인 2. 현재 Workspace Monitor collector와 Tauri runtime persistence 조사 3. 파일 유지 대상과 DB 후보 대상 분류 4. 하이브리드 저장소 registry 작성 5. 요구사항, 아키텍처 리뷰, 스펙, traceability 작성 6. 관련 제품 registry 업데이트 7. collect/check/test/build/pac",
+      "html": "<p>Storage Architecture Review Plan 작성일: 2026 06 06 실행 계획 1. 웹 검색으로 공식 근거 확인 2. 현재 Workspace Monitor collector와 Tauri runtime persistence 조사 3. 파일 유지 대상과 DB 후보 대상 분류 4. 하이브리드 저장소 registry 작성 5. 요구사항, 아키텍처 리뷰, 스펙, traceability 작성 6. 관련 제품 registry 업데이트 7. collect/check/test/build/package 검증 8. 평가/요약/trace 작성 후 commit/push 주요 판단 전체 DB 전환이 아니라 embedded operational</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 645,
+      "updatedAt": "2026-06-06T02:33:43.753Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-storage-architecture-review-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-storage-architecture-review.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request Summary",
+      "excerpt": "User Request Summary 작성일: 2026 06 06 요약 사용자는 앱 성능 문제가 모든 것을 파일시스템으로 처리해서 생기는지 물었고, 회사/desktop app들이 내부 DB를 쓰는 경우가 많지 않은지 검토해 달라고 요청했다. 해석한 요구 현재 platform desktop app의 파일 기반 저장 구조를 냉정하게 평가한다. embedded DB 사용 여부를 외부 근거와 현재 소스로 검토한다. 성능 개선을 위해 파일과 DB의 경계를 정한다. 구현 가능한 migration 계획을 남긴",
+      "html": "<p>User Request Summary 작성일: 2026 06 06 요약 사용자는 앱 성능 문제가 모든 것을 파일시스템으로 처리해서 생기는지 물었고, 회사/desktop app들이 내부 DB를 쓰는 경우가 많지 않은지 검토해 달라고 요청했다. 해석한 요구 현재 platform desktop app의 파일 기반 저장 구조를 냉정하게 평가한다. embedded DB 사용 여부를 외부 근거와 현재 소스로 검토한다. 성능 개선을 위해 파일과 DB의 경계를 정한다. 구현 가능한 migration 계획을 남긴다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 576,
+      "updatedAt": "2026-06-06T02:33:43.753Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-storage-architecture-review-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-storage-architecture-review.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search Record: Storage Architecture Review",
+      "excerpt": "Web Search Record: Storage Architecture Review 작성일: 2026 06 06 검색 목적 파일시스템 중심 저장 구조가 desktop app 성능 병목이 될 수 있는지, embedded DB/SQLite 같은 내부 DB 사용이 일반적인 선택인지 공식 근거로 확인했다. 검색어 SQLite official appropriate uses embedded database application file format Tauri v2 SQL plugin SQLite offici",
+      "html": "<p>Web Search Record: Storage Architecture Review 작성일: 2026 06 06 검색 목적 파일시스템 중심 저장 구조가 desktop app 성능 병목이 될 수 있는지, embedded DB/SQLite 같은 내부 DB 사용이 일반적인 선택인지 공식 근거로 확인했다. 검색어 SQLite official appropriate uses embedded database application file format Tauri v2 SQL plugin SQLite official documentation Apple Core Data persistent store SQLite official documentation </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2361,
+      "updatedAt": "2026-06-06T02:33:43.752Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-06-parallel-snapshot-collector-ko-md",
       "path": "_history/evaluations/2026/2026-06-06-parallel-snapshot-collector.ko.md",
@@ -41539,35 +41651,35 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 320,
+      "documentsCount": 327,
       "categories": [
         {
           "category": "evaluation",
-          "count": 74
+          "count": 75
         },
         {
           "category": "user-request",
-          "count": 46
+          "count": 47
         },
         {
           "category": "web-search",
-          "count": 46
+          "count": 47
         },
         {
           "category": "work-summary",
-          "count": 46
+          "count": 47
         },
         {
           "category": "request-trace",
-          "count": 45
+          "count": 46
         },
         {
           "category": "work-timing",
-          "count": 44
+          "count": 45
         },
         {
           "category": "plan",
-          "count": 18
+          "count": 19
         },
         {
           "category": "daily-history",

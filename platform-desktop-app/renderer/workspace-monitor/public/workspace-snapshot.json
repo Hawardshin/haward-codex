@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T02:26:09.089Z",
+  "generatedAt": "2026-06-06T02:38:19.340Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -12,12 +12,12 @@
     "tasks": 71,
     "completedTasks": 71,
     "documents": 650,
-    "requirements": 503,
+    "requirements": 509,
     "evaluations": 15,
-    "webSearches": 15,
-    "timingRecords": 14,
+    "webSearches": 14,
+    "timingRecords": 15,
     "historyDays": 1,
-    "adminHistoryDocuments": 2592,
+    "adminHistoryDocuments": 2599,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7665,6 +7665,42 @@
       "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-shared-workspace-resource-cache.ko.md"
     },
     {
+      "id": "REQ-SAR-001",
+      "requirement": "정책, 요구사항, 스펙, 철학, 소스, 사람이 읽는 히스토리는 Git 추적 파일로 유지해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-storage-architecture-review.ko.md"
+    },
+    {
+      "id": "REQ-SAR-002",
+      "requirement": "task run, decision inbox, workspace file index, history index, performance telemetry는 embedded operational DB 후보로 분리해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-storage-architecture-review.ko.md"
+    },
+    {
+      "id": "REQ-SAR-003",
+      "requirement": "DB는 숨은 단일 진실원이 아니라 앱 운영 인덱스/이벤트 저장소/물질화 뷰로 사용해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-storage-architecture-review.ko.md"
+    },
+    {
+      "id": "REQ-SAR-004",
+      "requirement": "각 DB 마이그레이션은 파일 fallback, rebuild/export, schema version, corruption recovery, retention/privacy 정책을 가져야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-storage-architecture-review.ko.md"
+    },
+    {
+      "id": "REQ-SAR-005",
+      "requirement": "초기 SQLite 의존성 설치 전 설치 감사, 라이선스/보안 검토, rollback, package 검증 계획을 남겨야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-storage-architecture-review.ko.md"
+    },
+    {
+      "id": "REQ-SAR-006",
+      "requirement": "탭 렉은 DB만으로 해결한다고 보지 않고 resident/prewarm UI, component split, render measurement와 함께 검증해야 한다.",
+      "priority": "should",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-storage-architecture-review.ko.md"
+    },
+    {
       "id": "REQ-TUI-001",
       "requirement": "플랫폼은 웹 조사, 로컬 탐색, 패치 편집, 렌더러 검증, 데스크톱 패키징, 리소스 정리, Git 마감 루프를 데이터로 표현해야 한다.",
       "priority": "must",
@@ -7696,6 +7732,278 @@
     }
   ],
   "documents": [
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-storage-architecture-review-validation-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-storage-architecture-review/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Storage Architecture Review 검증 계획",
+      "excerpt": "Storage Architecture Review 검증 계획 정적 검증 python3 m json.tool platform desktop app/configs/storage architecture registry.json python3 m json.tool platform desktop app/configs/product feature registry.json python3 m json.tool platform desktop app/configs/desktop distribution registr",
+      "html": "<h1>Storage Architecture Review 검증 계획</h1>\n<h2>정적 검증</h2>\n<ul>\n<li><code>python3 -m json.tool platform-desktop-app/configs/storage-architecture-registry.json</code></li>\n<li><code>python3 -m json.tool platform-desktop-app/configs/product-feature-registry.json</code></li>\n<li><code>python3 -m json.tool platform-desktop-app/configs/desktop-distribution-registry.json</code></li>\n</ul>\n<h2>Workspace Monitor 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code></li>\n</ul>\n<h2>Desktop package 검증</h2>\n<ul>\n<li><code>corepack pnpm run desktop:package:internal</code></li>\n</ul>\n<h2>수동 검토 기준</h2>\n<ul>\n<li>DB는 operational plane으로만 정의되어야 한다.</li>\n<li>파일 기반 durable knowledge를 DB로 옮긴다는 문장이 없어야 한다.</li>\n<li>SQLite 설치가 이번 변경에 포함되지 않았음을 명확히 해야 한다.</li>\n<li>다음 구현자가 <code>db-001</code>부터 시작할 수 있어야 한다.</li>\n</ul>\n<h2>실행 결과</h2>\n<ul>\n<li><code>python3 -m json.tool platform-desktop-app/configs/storage-architecture-registry.json</code>: passed</li>\n<li><code>python3 -m json.tool platform-desktop-app/configs/product-feature-registry.json</code>: passed</li>\n<li><code>python3 -m json.tool platform-desktop-app/configs/desktop-distribution-registry.json</code>: passed</li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code>: passed, 650 inline documents and 2599 admin history records</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: passed</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: passed, 75 tests</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code>: passed</li>\n<li><code>corepack pnpm run desktop:package:internal</code>: passed, internal <code>.app</code> and DMG generated and verified</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1692,
+      "updatedAt": "2026-06-06T02:38:09.754Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-storage-architecture-review-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-storage-architecture-review.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Work Evaluation: Storage Architecture Review",
+      "excerpt": "Work Evaluation: Storage Architecture Review 작성일: 2026 06 06 사용자 요구 대비 결과 요구: 파일시스템 중심 구조가 성능 문제인지, 내부 DB 사용이 맞는지 검토. 결과: 충족. 현재 구조의 파일 기반 pressure point를 확인했고, 전체 DB 전환이 아닌 hybrid files plus embedded operational DB 전략을 선택했다. 산출물 platform desktop app/configs/storage architecture ",
+      "html": "<p>Work Evaluation: Storage Architecture Review 작성일: 2026 06 06 사용자 요구 대비 결과 요구: 파일시스템 중심 구조가 성능 문제인지, 내부 DB 사용이 맞는지 검토. 결과: 충족. 현재 구조의 파일 기반 pressure point를 확인했고, 전체 DB 전환이 아닌 hybrid files plus embedded operational DB 전략을 선택했다. 산출물 platform desktop app/configs/storage architecture registry.json platform desktop app/docs/architecture/storage architecture review</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1773,
+      "updatedAt": "2026-06-06T02:36:02.919Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-storage-architecture-review-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-storage-architecture-review.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Storage Architecture Review",
+      "excerpt": "Request Trace: Storage Architecture Review 작성일: 2026 06 06 요청 파일시스템 중심 저장 구조가 성능 저하 원인인지, 내부 DB 사용을 검토해 달라는 요청. 해석 현재 앱의 느림을 저장소 구조 관점에서 재평가하고, desktop app다운 app data/embedded DB 활용 방향을 결정해야 한다. 실행 1. 웹 검색으로 공식 근거 확인 2. 현재 collector와 Rust runtime persistence 조사 3. 하이브리드 저장소 전략 선택",
+      "html": "<p>Request Trace: Storage Architecture Review 작성일: 2026 06 06 요청 파일시스템 중심 저장 구조가 성능 저하 원인인지, 내부 DB 사용을 검토해 달라는 요청. 해석 현재 앱의 느림을 저장소 구조 관점에서 재평가하고, desktop app다운 app data/embedded DB 활용 방향을 결정해야 한다. 실행 1. 웹 검색으로 공식 근거 확인 2. 현재 collector와 Rust runtime persistence 조사 3. 하이브리드 저장소 전략 선택 4. storage architecture registry와 architecture review 문서 생성 5. product/runtime </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1578,
+      "updatedAt": "2026-06-06T02:36:02.919Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-storage-architecture-review-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-storage-architecture-review.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Storage Architecture Review",
+      "excerpt": "Work Summary: Storage Architecture Review 작성일: 2026 06 06 요약 Desktop app 저장소 구조를 검토해 전체 파일시스템 유지와 전체 DB 전환 모두를 배제하고, durable repository files와 embedded SQLite operational DB를 결합하는 하이브리드 전략을 기록했다. 핵심 결론 정책/요구사항/스펙/철학/히스토리는 파일과 Git을 유지한다. task run, decision inbox, workspace/history",
+      "html": "<p>Work Summary: Storage Architecture Review 작성일: 2026 06 06 요약 Desktop app 저장소 구조를 검토해 전체 파일시스템 유지와 전체 DB 전환 모두를 배제하고, durable repository files와 embedded SQLite operational DB를 결합하는 하이브리드 전략을 기록했다. 핵심 결론 정책/요구사항/스펙/철학/히스토리는 파일과 Git을 유지한다. task run, decision inbox, workspace/history/source index, telemetry는 SQLite operational plane 후보로 둔다. generated snapshots는 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 818,
+      "updatedAt": "2026-06-06T02:36:02.919Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-storage-architecture-review-ko-md",
+      "path": "_history/work-timings/2026/2026-06-06-storage-architecture-review.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "Work Timing: Storage Architecture Review",
+      "excerpt": "Work Timing: Storage Architecture Review 작성일: 2026 06 06 | Phase | Status | Notes | | | | | | Web search | complete | Official docs checked first | | Local source inspection | complete | Collector and Tauri JSON persistence reviewed | | Architecture decision | complete | Hybrid f",
+      "html": "<p>Work Timing: Storage Architecture Review 작성일: 2026 06 06 | Phase | Status | Notes | | | | | | Web search | complete | Official docs checked first | | Local source inspection | complete | Collector and Tauri JSON persistence reviewed | | Architecture decision | complete | Hybrid files + embedded operational DB selected | | Artifact writing | complete | Regist</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 542,
+      "updatedAt": "2026-06-06T02:36:02.918Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-storage-architecture-review-tasks-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-storage-architecture-review/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Storage Architecture Review 작업 목록",
+      "excerpt": "Storage Architecture Review 작업 목록 x 공식/강한 외부 근거 조사 x collect workspace.mjs 파일 스캔/스냅샷 쓰기 경로 조사 x src tauri/src/lib.rs task run/workspace state JSON persistence 조사 x 하이브리드 저장소 결정 문서화 x DB 후보 도메인과 migration slice 정의 x registry/docs/spec validation 실행 x desktop package 실행 커밋 및 푸시",
+      "html": "<h1>Storage Architecture Review 작업 목록</h1>\n<ul>\n<li>[x] 공식/강한 외부 근거 조사</li>\n<li>[x] <code>collect-workspace.mjs</code> 파일 스캔/스냅샷 쓰기 경로 조사</li>\n<li>[x] <code>src-tauri/src/lib.rs</code> task run/workspace state JSON persistence 조사</li>\n<li>[x] 하이브리드 저장소 결정 문서화</li>\n<li>[x] DB 후보 도메인과 migration slice 정의</li>\n<li>[x] registry/docs/spec validation 실행</li>\n<li>[x] desktop package 실행</li>\n<li>[ ] 커밋 및 푸시</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 436,
+      "updatedAt": "2026-06-06T02:36:02.917Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-storage-architecture-review-ko-md",
+      "path": "_history/plans/2026/2026-06-06-storage-architecture-review.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Storage Architecture Review Plan",
+      "excerpt": "Storage Architecture Review Plan 작성일: 2026 06 06 실행 계획 1. 웹 검색으로 공식 근거 확인 2. 현재 Workspace Monitor collector와 Tauri runtime persistence 조사 3. 파일 유지 대상과 DB 후보 대상 분류 4. 하이브리드 저장소 registry 작성 5. 요구사항, 아키텍처 리뷰, 스펙, traceability 작성 6. 관련 제품 registry 업데이트 7. collect/check/test/build/pac",
+      "html": "<p>Storage Architecture Review Plan 작성일: 2026 06 06 실행 계획 1. 웹 검색으로 공식 근거 확인 2. 현재 Workspace Monitor collector와 Tauri runtime persistence 조사 3. 파일 유지 대상과 DB 후보 대상 분류 4. 하이브리드 저장소 registry 작성 5. 요구사항, 아키텍처 리뷰, 스펙, traceability 작성 6. 관련 제품 registry 업데이트 7. collect/check/test/build/package 검증 8. 평가/요약/trace 작성 후 commit/push 주요 판단 전체 DB 전환이 아니라 embedded operational</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 645,
+      "updatedAt": "2026-06-06T02:33:43.753Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-storage-architecture-review-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-storage-architecture-review.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request Summary",
+      "excerpt": "User Request Summary 작성일: 2026 06 06 요약 사용자는 앱 성능 문제가 모든 것을 파일시스템으로 처리해서 생기는지 물었고, 회사/desktop app들이 내부 DB를 쓰는 경우가 많지 않은지 검토해 달라고 요청했다. 해석한 요구 현재 platform desktop app의 파일 기반 저장 구조를 냉정하게 평가한다. embedded DB 사용 여부를 외부 근거와 현재 소스로 검토한다. 성능 개선을 위해 파일과 DB의 경계를 정한다. 구현 가능한 migration 계획을 남긴",
+      "html": "<p>User Request Summary 작성일: 2026 06 06 요약 사용자는 앱 성능 문제가 모든 것을 파일시스템으로 처리해서 생기는지 물었고, 회사/desktop app들이 내부 DB를 쓰는 경우가 많지 않은지 검토해 달라고 요청했다. 해석한 요구 현재 platform desktop app의 파일 기반 저장 구조를 냉정하게 평가한다. embedded DB 사용 여부를 외부 근거와 현재 소스로 검토한다. 성능 개선을 위해 파일과 DB의 경계를 정한다. 구현 가능한 migration 계획을 남긴다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 576,
+      "updatedAt": "2026-06-06T02:33:43.753Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-storage-architecture-review-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-storage-architecture-review.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search Record: Storage Architecture Review",
+      "excerpt": "Web Search Record: Storage Architecture Review 작성일: 2026 06 06 검색 목적 파일시스템 중심 저장 구조가 desktop app 성능 병목이 될 수 있는지, embedded DB/SQLite 같은 내부 DB 사용이 일반적인 선택인지 공식 근거로 확인했다. 검색어 SQLite official appropriate uses embedded database application file format Tauri v2 SQL plugin SQLite offici",
+      "html": "<p>Web Search Record: Storage Architecture Review 작성일: 2026 06 06 검색 목적 파일시스템 중심 저장 구조가 desktop app 성능 병목이 될 수 있는지, embedded DB/SQLite 같은 내부 DB 사용이 일반적인 선택인지 공식 근거로 확인했다. 검색어 SQLite official appropriate uses embedded database application file format Tauri v2 SQL plugin SQLite official documentation Apple Core Data persistent store SQLite official documentation </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2361,
+      "updatedAt": "2026-06-06T02:33:43.752Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-configs-desktop-distribution-registry-json",
+      "path": "platform-desktop-app/configs/desktop-distribution-registry.json",
+      "category": "project-config",
+      "language": "unknown",
+      "title": "Desktop Distribution Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 02\", \"name\": \"desktop distribution registry\", \"purpose\": \"Defines how the workspace platform should become installable desktop software without confusing repository setup modes with end user installer packaging.\", \"reader guide\": { \"summary\": \"Use thi",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-02&quot;,\n  &quot;name&quot;: &quot;desktop-distribution-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines how the workspace platform should become installable desktop software without confusing repository setup modes with end-user installer packaging.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before changing the selected desktop product runtime, adding packaging scripts, or preparing an installer release.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read product_boundary first so repository setup install_mode is not confused with end-user installers.&quot;,\n      &quot;Read selected_platform_architecture first to understand the current Tauri-first productization decision.&quot;,\n      &quot;Read candidate_frameworks to understand the fallback or comparison routes kept for recorded release blockers or maintenance evidence.&quot;,\n      &quot;Read packaging_targets to understand OS-specific installer and signing expectations.&quot;,\n      &quot;Read runtime_strategy and assistant_cli_capabilities before implementing multi-CLI orchestration.&quot;,\n      &quot;Read release_gates before claiming that a build is production-ready.&quot;,\n      &quot;Treat commands as planned future commands until dependencies are actually installed and audited.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-04&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The selected desktop product runtime changes.&quot;,\n      &quot;The installer target OS list changes.&quot;,\n      &quot;The platform runtime strategy changes between bundled, sidecar, local service, or remote service.&quot;,\n      &quot;Signing, notarization, update, uninstall, privacy, or dependency release gates change.&quot;,\n      &quot;A real packaging dependency is installed, upgraded, or removed.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;electron_application_distribution&quot;,\n      &quot;title&quot;: &quot;Electron: Application Packaging&quot;,\n      &quot;url&quot;: &quot;https://www.electronjs.org/docs/tutorial/application-distribution/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Electron application packaging and distribution concepts&quot;,\n        &quot;manual packaging versus tool-assisted packaging&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;electron_forge_makers&quot;,\n      &quot;title&quot;: &quot;Electron Forge: Makers&quot;,\n      &quot;url&quot;: &quot;https://www.electronforge.io/config/makers&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Electron installer maker options by platform&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_distribute&quot;,\n      &quot;title&quot;: &quot;Tauri: Distribute&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Tauri app distribution and bundling entry point&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_windows_installer&quot;,\n      &quot;title&quot;: &quot;Tauri: Windows Installer&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/windows-installer/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Windows MSI and setup executable packaging options for Tauri&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_sidecar&quot;,\n      &quot;title&quot;: &quot;Tauri: Embedding External Binaries&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/develop/sidecar/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;future Python sidecar or local service packaging pattern&quot;,\n        &quot;explicit external binary boundary&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_updater&quot;,\n      &quot;title&quot;: &quot;Tauri: Updater&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/plugin/updater/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;future signed updater artifact strategy&quot;,\n        &quot;macOS and Windows update release gates&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_windows_signing&quot;,\n      &quot;title&quot;: &quot;Tauri: Windows Code Signing&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/sign/windows/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Windows code-signing and SmartScreen release gate&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;go_docs&quot;,\n      &quot;title&quot;: &quot;Go Documentation&quot;,\n      &quot;url&quot;: &quot;https://go.dev/doc/docs.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Go as a compiled language and local service or CLI candidate&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;wails_introduction&quot;,\n      &quot;title&quot;: &quot;Wails Introduction&quot;,\n      &quot;url&quot;: &quot;https://wails.io/docs/next/introduction&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Wails as a Go backend plus web technology desktop app comparison candidate&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;language_decision_registry&quot;,\n      &quot;title&quot;: &quot;Language Decision Registry&quot;,\n      &quot;path&quot;: &quot;agent-platform/configs/runtime/language-decision-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;component-specific Rust, Go, Python, TypeScript, and Electron runtime placement&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;microsoft_msix&quot;,\n      &quot;title&quot;: &quot;Microsoft Learn: MSIX documentation&quot;,\n      &quot;url&quot;: &quot;https://learn.microsoft.com/en-us/wi</code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 34127,
+      "updatedAt": "2026-06-06T02:32:49.311Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-configs-product-feature-registry-json",
+      "path": "platform-desktop-app/configs/product-feature-registry.json",
+      "category": "project-config",
+      "language": "unknown",
+      "title": "Product Feature Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"product feature registry\", \"purpose\": \"Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, ",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;product-feature-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, workbench, learning, and monitoring are supporting layers.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before changing the desktop home screen, snapshot schema, installer shell runtime, or platform feature navigation.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read product_position first to understand what the product is and what it is not.&quot;,\n      &quot;Read feature_layers to see which capabilities are primary product features and which capabilities are supporting surfaces.&quot;,\n      &quot;Read promotion_loop before adding workflow, prompt, tool, skill, or agent creation features.&quot;,\n      &quot;Read structure_rules before naming a feature, tab, data store, or installer shell behavior as monitoring.&quot;,\n      &quot;Use validation_gates as the acceptance checklist when making a UI, data, or runtime change around these features.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The desktop home screen or first-run product promise changes.&quot;,\n      &quot;A feature is promoted from workflow, prompt, template, tool, skill, or agent into a desktop product surface.&quot;,\n      &quot;A new Agent Core, CLI orchestration, root tool, workbench, learning, or observability capability is added.&quot;,\n      &quot;Monitoring starts to look like the main product again instead of a support layer.&quot;,\n      &quot;The installer shell runtime contract changes how work state, decisions, evidence, validation, or evaluations are accumulated.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;openai_agents_sdk&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;agent loop, tools, guardrails, handoffs, sessions, and tracing as product-level agent platform primitives&quot;,\n        &quot;workspace and resumable multi-step execution as desktop product capabilities&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;openai_agents_tracing&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK Tracing&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/tracing/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating traces and monitoring as debugging, evaluation, and improvement support rather than the whole product&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;autogen_docs&quot;,\n      &quot;title&quot;: &quot;Microsoft AutoGen&quot;,\n      &quot;url&quot;: &quot;https://microsoft.github.io/autogen/stable/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;multi-agent applications, event-driven multi-agent systems, and no-code prototyping surfaces as platform references&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;langgraph_multi_agent&quot;,\n      &quot;title&quot;: &quot;LangGraph Multi-agent Patterns&quot;,\n      &quot;url&quot;: &quot;https://langchain-ai.github.io/langgraph/tutorials/multi_agent/multi-agent-collaboration/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;subagents, handoffs, skills, routers, custom workflows, context management, and parallel execution trade-offs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;crewai_docs&quot;,\n      &quot;title&quot;: &quot;CrewAI Documentation&quot;,\n      &quot;url&quot;: &quot;https://docs.crewai.com/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;crew-style agent orchestration, flow, knowledge, and task abstractions as product reference points&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_hig_settings&quot;,\n      &quot;title&quot;: &quot;Apple Human Interface Guidelines: Settings&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/design/human-interface-guidelines/settings&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;keeping broad configuration in a dedicated settings area instead of mixing it into the core work surface&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;microsoft_navigation_view&quot;,\n      &quot;title&quot;: &quot;Microsoft Learn: NavigationView&quot;,\n      &quot;url&quot;: &quot;https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop-style navigation with main items and a separated settings item&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_platform_ui_overview&quot;,\n      &quot;title&quot;: &quot;IntelliJ Platform UI Overview&quot;,\n      &quot;url&quot;: &quot;https://plugins.jetbrains.com/docs/intellij/ui-overview.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;IDE-style separation of main editor/work surfaces, tool windows, settings, and modal dialogs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_tool_windows&quot;,\n      &quot;title&quot;: &quot;IntelliJ IDEA Tool Windows&quot;,\n      &quot;url&quot;: &quot;https://www.jetbrains.com/help/idea/tool-windows.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Run, Services, Problems, and status-oriented tool-window model </code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 36483,
+      "updatedAt": "2026-06-06T02:32:49.310Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-storage-architecture-review-traceability-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-storage-architecture-review/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Storage Architecture Review 추적성",
+      "excerpt": "Storage Architecture Review 추적성 | 요구 | 산출물 | 검증 | | | | | | 파일시스템 병목 검토 | platform desktop app/docs/architecture/storage architecture review.ko.md | source line 조사 | | 내부 DB 사용 가능성 검토 | platform desktop app/configs/storage architecture registry.json | 공식 문서 근거 | | 파일/DB 경계 확정 | s",
+      "html": "<h1>Storage Architecture Review 추적성</h1>\n<table><thead><tr><th>요구</th><th>산출물</th><th>검증</th></tr></thead><tbody><tr><td>파일시스템 병목 검토</td><td><code>platform-desktop-app/docs/architecture/storage-architecture-review.ko.md</code></td><td>source line 조사</td></tr><tr><td>내부 DB 사용 가능성 검토</td><td><code>platform-desktop-app/configs/storage-architecture-registry.json</code></td><td>공식 문서 근거</td></tr><tr><td>파일/DB 경계 확정</td><td><code>storage_layers</code>, <code>database_candidate_domains</code></td><td>JSON validation</td></tr><tr><td>마이그레이션 계획</td><td><code>migration_slices</code></td><td>spec validation</td></tr><tr><td>자동 빌드/패키징</td><td>validation record</td><td>package command</td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 584,
+      "updatedAt": "2026-06-06T02:32:24.465Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-storage-architecture-review-plan-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-storage-architecture-review/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Storage Architecture Review 계획",
+      "excerpt": "Storage Architecture Review 계획 1. 웹 검색으로 SQLite, Tauri SQL, Apple Core Data, Electron app data path 근거 확인 2. 현재 Workspace Monitor snapshot collector와 Tauri runtime JSON persistence 조사 3. 파일 유지 대상과 DB 후보 대상 분리 4. storage architecture registry 생성 5. 요구사항, 아키텍처 리뷰, spec/task/validat",
+      "html": "<h1>Storage Architecture Review 계획</h1>\n<p>1. 웹 검색으로 SQLite, Tauri SQL, Apple Core Data, Electron app data path 근거 확인</p>\n<p>2. 현재 Workspace Monitor snapshot collector와 Tauri runtime JSON persistence 조사</p>\n<p>3. 파일 유지 대상과 DB 후보 대상 분리</p>\n<p>4. storage architecture registry 생성</p>\n<p>5. 요구사항, 아키텍처 리뷰, spec/task/validation/traceability 기록</p>\n<p>6. product/runtime registry의 storage strategy 연결</p>\n<p>7. collect/check/test/build/package 검증</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 487,
+      "updatedAt": "2026-06-06T02:32:24.464Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-storage-architecture-review-spec-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-storage-architecture-review/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Storage Architecture Review 스펙",
+      "excerpt": "Storage Architecture Review 스펙 목표 Workspace Monitor와 Tauri desktop runtime의 파일 기반 저장 구조를 검토하고, 파일로 남길 durable knowledge와 embedded DB로 옮길 operational data를 분리한다. 설계 결정 선택 구조: hybrid files plus embedded operational DB. durable repository files는 Git diff, review, migration trace가 필요",
+      "html": "<h1>Storage Architecture Review 스펙</h1>\n<h2>목표</h2>\n<p>Workspace Monitor와 Tauri desktop runtime의 파일 기반 저장 구조를 검토하고, 파일로 남길 durable knowledge와 embedded DB로 옮길 operational data를 분리한다.</p>\n<h2>설계 결정</h2>\n<ul>\n<li>선택 구조: hybrid files plus embedded operational DB.</li>\n<li>durable repository files는 Git diff, review, migration trace가 필요한 진실원으로 유지한다.</li>\n<li>generated snapshots는 renderer/package용 rebuildable cache로 유지한다.</li>\n<li>task run, decision inbox, workspace/history/source index, performance telemetry는 SQLite operational DB 후보로 분리한다.</li>\n<li>DB 의존성 설치는 별도 installation audit, license/security review, rollback, package verification 이후 진행한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>storage architecture registry가 self-documenting fields를 가진다.</li>\n<li>현재 파일 기반 pressure point가 source path와 함께 기록된다.</li>\n<li>DB migration slice가 task runs, decisions, workspace index, telemetry를 다룬다.</li>\n<li>전체 DB 전환을 금지하고 hybrid 기준을 명시한다.</li>\n<li><code>collect</code>, <code>check</code>, <code>test</code>, <code>build</code>, internal package를 통과한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1155,
+      "updatedAt": "2026-06-06T02:32:24.464Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-configs-storage-architecture-registry-json",
+      "path": "platform-desktop-app/configs/storage-architecture-registry.json",
+      "category": "project-config",
+      "language": "unknown",
+      "title": "Storage Architecture Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 06.storage architecture registry.v1\", \"updated at\": \"2026 06 06\", \"owner project\": \"platform desktop app\", \"reader guide\": \"This registry decides when the desktop product should use repository files, generated JSON snapshots, app owned runtime files, ",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-06.storage-architecture-registry.v1&quot;,\n  &quot;updated_at&quot;: &quot;2026-06-06&quot;,\n  &quot;owner_project&quot;: &quot;platform-desktop-app&quot;,\n  &quot;reader_guide&quot;: [\n    &quot;This registry decides when the desktop product should use repository files, generated JSON snapshots, app-owned runtime files, or an embedded operational database.&quot;,\n    &quot;Read selected_strategy first. Then use storage_layers and migration_slices before adding new runtime state, indexes, task histories, search records, or cache files.&quot;,\n    &quot;The selected strategy is hybrid: durable human-readable knowledge remains file-backed and Git-auditable; high-churn app runtime state and query indexes move toward an embedded SQLite operational store.&quot;,\n    &quot;This registry does not approve storing secrets, private notes, cookies, or unredacted logs in the embedded database.&quot;\n  ],\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;sqlite-appropriate-uses&quot;,\n      &quot;label&quot;: &quot;SQLite Appropriate Uses&quot;,\n      &quot;url&quot;: &quot;https://www.sqlite.org/whentouse.html&quot;,\n      &quot;relevance&quot;: &quot;SQLite is suitable as an embedded local application database and application file format for many desktop-style data stores.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri-sql-plugin&quot;,\n      &quot;label&quot;: &quot;Tauri SQL plugin&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/plugin/sql/&quot;,\n      &quot;relevance&quot;: &quot;Tauri v2 has an official SQL plugin path supporting SQLite through sqlx.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple-core-data&quot;,\n      &quot;label&quot;: &quot;Apple Core Data&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/documentation/coredata&quot;,\n      &quot;relevance&quot;: &quot;Apple documents local persist/cache data patterns for single-device apps.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;electron-app-paths&quot;,\n      &quot;label&quot;: &quot;Electron app data paths&quot;,\n      &quot;url&quot;: &quot;https://www.electronjs.org/docs/latest/api/app&quot;,\n      &quot;relevance&quot;: &quot;Desktop frameworks expose app-specific data paths, which should host runtime databases and caches instead of source directories.&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;files_remain_durable_source&quot;,\n      &quot;rule&quot;: &quot;Policies, requirements, specs, philosophy, registries, source code, and human-readable history remain repository files unless a separate migration plan proves the file is not a durable knowledge artifact.&quot;,\n      &quot;reason&quot;: &quot;The workspace depends on Git diffs, human review, provenance, and assistant-readable paths.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;database_is_operational_plane&quot;,\n      &quot;rule&quot;: &quot;Use the embedded database for app-owned operational records, indexes, materialized views, and query acceleration, not as the hidden source of truth for governance documents.&quot;,\n      &quot;reason&quot;: &quot;Task timelines, decision queues, search indexes, and performance telemetry need indexed reads and updates; policy and specs need durable auditability.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;generated_snapshots_are_distribution_cache&quot;,\n      &quot;rule&quot;: &quot;Generated workspace snapshots stay rebuildable caches for renderer/public bundles and must be derivable from repository files plus runtime store records.&quot;,\n      &quot;reason&quot;: &quot;Snapshots should speed delivery and packaging, not become another primary database.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;runtime_db_is_rebuildable_or_exportable&quot;,\n      &quot;rule&quot;: &quot;Every runtime database table must declare whether it is rebuildable from files, exportable as JSON/Markdown, or authoritative runtime state with migration and backup rules.&quot;,\n      &quot;reason&quot;: &quot;Users must not lose task records or be trapped in an opaque store.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;secrets_stay_out&quot;,\n      &quot;rule&quot;: &quot;Secrets, credentials, private notes, cookies, and unredacted raw logs do not move into the embedded database by default.&quot;,\n      &quot;reason&quot;: &quot;The runtime data policy already separates credentials and support exports from accumulated operational state.&quot;\n    }\n  ],\n  &quot;field_guide&quot;: [\n    {\n      &quot;field&quot;: &quot;selected_strategy&quot;,\n      &quot;meaning&quot;: &quot;The current storage architecture decision and its local evidence.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;storage_layers&quot;,\n      &quot;meaning&quot;: &quot;Allowed persistence planes, ownership, examples, performance role, and migration behavior.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;filesystem_pressure_points&quot;,\n      &quot;meaning&quot;: &quot;Current code paths where file scanning or JSON-file state can become slow as data grows.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;database_candidate_domains&quot;,\n      &quot;meaning&quot;: &quot;Data domains that should be implemented or migrated to SQLite first.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;migration_slices&quot;,\n      &quot;meaning&quot;: &quot;Incremental implementation slices for moving only the right data into the database.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;validation_gates&quot;,\n      &quot;meaning&quot;: &quot;Checks required before accepting a storage migration.&quot;,\n      &quot;required&quot;: true\n    }\n  ],\n  &quot;selected_strategy&quot;: {\n    &quot;id&quot;: &quot;hybrid_files_plus_embedded_operational_db&quot;,\n    &quot;status&quot;: &quot;selected_for_next_migration&quot;,\n    &quot;decision&quot;: &quot;Keep repository knowledge file-backed and add an embedded SQLite operational database for indexed runtime data, workspace search metadata, task-run timelines, decision state, materialized monitor indexes, and performance telemetry.&quot;,\n    &quot;why_not_all_filesys</code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 19089,
+      "updatedAt": "2026-06-06T02:32:24.463Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-architecture-storage-architecture-review-ko-md",
+      "path": "platform-desktop-app/docs/architecture/storage-architecture-review.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Desktop Storage Architecture Review",
+      "excerpt": "Desktop Storage Architecture Review 작성일: 2026 06 06 대상: platform desktop app 냉정한 평가 사용자 추정은 절반 이상 맞다. 현재 앱의 느림이 전부 파일시스템 때문이라고 보기는 어렵지만, 반복 조회되는 운영 데이터를 파일 스캔과 JSON 누적으로 처리하는 구조는 성장 병목이 된다. 현재 병목 후보는 세 갈래다. collect workspace.mjs 는 docs , history , requirements , specs , configs, ",
+      "html": "<h1>Desktop Storage Architecture Review</h1>\n<p>작성일: 2026-06-06</p>\n<p>대상: <code>platform-desktop-app</code></p>\n<h2>냉정한 평가</h2>\n<p>사용자 추정은 절반 이상 맞다. 현재 앱의 느림이 전부 파일시스템 때문이라고 보기는 어렵지만, 반복 조회되는 운영 데이터를 파일 스캔과 JSON 누적으로 처리하는 구조는 성장 병목이 된다.</p>\n<p>현재 병목 후보는 세 갈래다.</p>\n<ul>\n<li><code>collect-workspace.mjs</code>는 <code>_docs</code>, <code>_history</code>, <code>_requirements</code>, <code>_specs</code>, configs, project docs/specs를 걷고 Markdown/JSON을 읽어 generated snapshot을 만든다.</li>\n<li><code>admin-history-index.json</code>은 히스토리 문서에서 매번 정렬/요약해서 생성된다.</li>\n<li>Rust/Tauri 런타임은 task run을 <code>record.json</code>, <code>stdout.log</code>, <code>stderr.log</code> 파일로 누적하고, workspace state도 JSON으로 읽고 쓴다.</li>\n</ul>\n<p>이 방식은 감사성과 Git 친화성에는 좋다. 하지만 데스크톱 앱의 빠른 탭 이동, timeline filtering, decision inbox, 누적 데이터 검색, p95 성능 추적에는 약하다. JSON 파일은 “작고 드문 설정”에는 괜찮지만, 많은 이벤트와 자주 바뀌는 상태를 질의하기에는 인덱스, range query, join, incremental update가 부족하다.</p>\n<h2>외부 근거</h2>\n<ul>\n<li>SQLite 공식 문서는 embedded/local application database 용도에 SQLite가 맞는 경우를 설명한다: &lt;https://www.sqlite.org/whentouse.html&gt;</li>\n<li>Tauri v2에는 SQL plugin 경로가 있고 SQLite 엔진을 선택할 수 있다: &lt;https://v2.tauri.app/plugin/sql/&gt;</li>\n<li>Apple Core Data는 단일 기기 persist/cache 데이터 패턴을 공식 문서화한다: &lt;https://developer.apple.com/documentation/coredata&gt;</li>\n<li>Electron도 앱별 data path를 노출한다. 데스크톱 앱은 소스 폴더가 아니라 app data/cache/log 계층을 사용해야 한다: &lt;https://www.electronjs.org/docs/latest/api/app&gt;</li>\n</ul>\n<h2>선택한 구조</h2>\n<p>선택은 <code>파일 + embedded operational DB</code> 하이브리드다.</p>\n<p>파일로 유지할 것:</p>\n<ul>\n<li>정책, 요구사항, 스펙, 철학, source code, registry, 사람이 읽는 history</li>\n<li>Git diff와 review가 필요한 문서</li>\n<li>support bundle이나 export용 큰 로그/아티팩트</li>\n</ul>\n<p>DB로 옮길 것:</p>\n<ul>\n<li>task run metadata, task events, artifact index</li>\n<li>decision inbox active state와 resume lookup</li>\n<li>workspace file/document/source index</li>\n<li>admin history materialized index</li>\n<li>startup/tab/collector/resource telemetry</li>\n</ul>\n<p>이렇게 해야 durable knowledge는 투명하게 남기면서, 앱이 자주 질의하는 데이터는 OS app data 안의 SQLite로 빠르게 읽을 수 있다.</p>\n<h2>왜 전체 DB 전환은 아닌가</h2>\n<p>이 플랫폼은 단순 앱 데이터보다 “에이전트가 읽고 검토하고 커밋할 수 있는 지식 저장소”가 중요하다. 모든 것을 DB로 넣으면 사용자는 파일 diff, history, migration trace, 정책 리뷰를 잃는다. 또한 DB가 깨졌을 때 플랫폼 지식까지 불투명해진다.</p>\n<p>반대로 모든 것을 파일로 유지하면 앱은 매번 많은 파일을 걷고, JSON을 파싱하고, 정렬하고, 다시 snapshot을 써야 한다. 지금의 병렬화는 CPU 활용도를 올렸지만, warm startup과 탭 이동의 구조적 비용은 DB index 없이는 계속 남는다.</p>\n<h2>마이그레이션 순서</h2>\n<p>1. <code>db-001-task-run-shadow-index</code>: 기존 <code>record.json</code>/log 파일을 계속 쓰면서 task run metadata를 SQLite에 shadow index한다.</p>\n<p>2. <code>db-002-decision-inbox-index</code>: active decision filtering과 resume lookup을 DB로 이동한다.</p>\n<p>3. <code>db-003-workspace-file-index</code>: 파일 path, mtime, hash, category, excerpt를 DB에 저장하고 unchanged 파일은 재파싱하지 않는다.</p>\n<p>4. <code>db-004-performance-telemetry</code>: startup, tab switch, collector, memory/resource cleanup p50/p95를 DB에 누적한다.</p>\n<p>각 단계는 파일 fallback, DB rebuild, export, schema migration, corrupt DB recovery를 통과해야 한다.</p>\n<h2>즉시 결론</h2>\n<p>지금 당장 SQLite를 무작정 설치해서 모든 JSON을 치환하는 것은 위험하다. 하지만 다음 성능 개선 축은 분명하다. 파일은 durable source로 남기고, runtime/query/index 계층은 SQLite로 분리해야 한다. 이 결정을 <code>platform-desktop-app/configs/storage-architecture-registry.json</code>에 고정했다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 4224,
+      "updatedAt": "2026-06-06T02:32:24.463Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-storage-architecture-review-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-storage-architecture-review.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Storage Architecture Review 요구사항",
+      "excerpt": "Storage Architecture Review 요구사항 작성일: 2026 06 06 소유 프로젝트: platform desktop app 사용자 요구 앱이 모든 것을 파일시스템으로 처리해서 느린 것인지, 내부 DB를 쓰는 회사/데스크톱 앱 패턴을 검토하고 현재 플랫폼에 맞는 저장소 구조를 판단해 달라는 요청이 있었다. 결론 요구 현재 구조는 파일 기반 지식 저장소 자체가 문제라기보다, 앱이 반복 조회하는 운영 상태와 인덱스를 파일 스캔/JSON 누적으로 처리하는 부분이 성장 병목이 될 가능성이",
+      "html": "<h1>Storage Architecture Review 요구사항</h1>\n<p>작성일: 2026-06-06</p>\n<p>소유 프로젝트: <code>platform-desktop-app</code></p>\n<h2>사용자 요구</h2>\n<p>앱이 모든 것을 파일시스템으로 처리해서 느린 것인지, 내부 DB를 쓰는 회사/데스크톱 앱 패턴을 검토하고 현재 플랫폼에 맞는 저장소 구조를 판단해 달라는 요청이 있었다.</p>\n<h2>결론 요구</h2>\n<p>현재 구조는 파일 기반 지식 저장소 자체가 문제라기보다, 앱이 반복 조회하는 운영 상태와 인덱스를 파일 스캔/JSON 누적으로 처리하는 부분이 성장 병목이 될 가능성이 높다. 따라서 전체 DB 전환이 아니라 하이브리드 구조가 요구사항이다.</p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-SAR-001</td><td>정책, 요구사항, 스펙, 철학, 소스, 사람이 읽는 히스토리는 Git 추적 파일로 유지해야 한다.</td><td>must</td><td>저장소 구조 검토</td></tr><tr><td>REQ-SAR-002</td><td>task run, decision inbox, workspace file index, history index, performance telemetry는 embedded operational DB 후보로 분리해야 한다.</td><td>must</td><td>storage architecture registry</td></tr><tr><td>REQ-SAR-003</td><td>DB는 숨은 단일 진실원이 아니라 앱 운영 인덱스/이벤트 저장소/물질화 뷰로 사용해야 한다.</td><td>must</td><td>registry rules</td></tr><tr><td>REQ-SAR-004</td><td>각 DB 마이그레이션은 파일 fallback, rebuild/export, schema version, corruption recovery, retention/privacy 정책을 가져야 한다.</td><td>must</td><td>migration slice acceptance</td></tr><tr><td>REQ-SAR-005</td><td>초기 SQLite 의존성 설치 전 설치 감사, 라이선스/보안 검토, rollback, package 검증 계획을 남겨야 한다.</td><td>must</td><td>installation audit when dependency changes</td></tr><tr><td>REQ-SAR-006</td><td>탭 렉은 DB만으로 해결한다고 보지 않고 resident/prewarm UI, component split, render measurement와 함께 검증해야 한다.</td><td>should</td><td>performance validation</td></tr></tbody></table>\n<h2>비범위</h2>\n<ul>\n<li>이 요구사항만으로 SQLite 의존성을 즉시 설치하지 않는다.</li>\n<li><code>_private</code>, 쿠키, 실서버 비밀값, 원문 민감 로그를 DB에 저장하지 않는다.</li>\n<li>durable repository knowledge를 전부 DB로 숨기지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2176,
+      "updatedAt": "2026-06-06T02:32:24.463Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
     {
       "id": "history-evaluations-2026-2026-06-06-parallel-snapshot-collector-ko-md",
       "path": "_history/evaluations/2026/2026-06-06-parallel-snapshot-collector.ko.md",
@@ -7902,22 +8210,6 @@
       "updatedAt": "2026-06-06T02:23:45.528Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-configs-product-feature-registry-json",
-      "path": "platform-desktop-app/configs/product-feature-registry.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "Product Feature Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"product feature registry\", \"purpose\": \"Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, ",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;product-feature-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, workbench, learning, and monitoring are supporting layers.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before changing the desktop home screen, snapshot schema, installer shell runtime, or platform feature navigation.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read product_position first to understand what the product is and what it is not.&quot;,\n      &quot;Read feature_layers to see which capabilities are primary product features and which capabilities are supporting surfaces.&quot;,\n      &quot;Read promotion_loop before adding workflow, prompt, tool, skill, or agent creation features.&quot;,\n      &quot;Read structure_rules before naming a feature, tab, data store, or installer shell behavior as monitoring.&quot;,\n      &quot;Use validation_gates as the acceptance checklist when making a UI, data, or runtime change around these features.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The desktop home screen or first-run product promise changes.&quot;,\n      &quot;A feature is promoted from workflow, prompt, template, tool, skill, or agent into a desktop product surface.&quot;,\n      &quot;A new Agent Core, CLI orchestration, root tool, workbench, learning, or observability capability is added.&quot;,\n      &quot;Monitoring starts to look like the main product again instead of a support layer.&quot;,\n      &quot;The installer shell runtime contract changes how work state, decisions, evidence, validation, or evaluations are accumulated.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;openai_agents_sdk&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;agent loop, tools, guardrails, handoffs, sessions, and tracing as product-level agent platform primitives&quot;,\n        &quot;workspace and resumable multi-step execution as desktop product capabilities&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;openai_agents_tracing&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK Tracing&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/tracing/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating traces and monitoring as debugging, evaluation, and improvement support rather than the whole product&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;autogen_docs&quot;,\n      &quot;title&quot;: &quot;Microsoft AutoGen&quot;,\n      &quot;url&quot;: &quot;https://microsoft.github.io/autogen/stable/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;multi-agent applications, event-driven multi-agent systems, and no-code prototyping surfaces as platform references&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;langgraph_multi_agent&quot;,\n      &quot;title&quot;: &quot;LangGraph Multi-agent Patterns&quot;,\n      &quot;url&quot;: &quot;https://langchain-ai.github.io/langgraph/tutorials/multi_agent/multi-agent-collaboration/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;subagents, handoffs, skills, routers, custom workflows, context management, and parallel execution trade-offs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;crewai_docs&quot;,\n      &quot;title&quot;: &quot;CrewAI Documentation&quot;,\n      &quot;url&quot;: &quot;https://docs.crewai.com/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;crew-style agent orchestration, flow, knowledge, and task abstractions as product reference points&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_hig_settings&quot;,\n      &quot;title&quot;: &quot;Apple Human Interface Guidelines: Settings&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/design/human-interface-guidelines/settings&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;keeping broad configuration in a dedicated settings area instead of mixing it into the core work surface&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;microsoft_navigation_view&quot;,\n      &quot;title&quot;: &quot;Microsoft Learn: NavigationView&quot;,\n      &quot;url&quot;: &quot;https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop-style navigation with main items and a separated settings item&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_platform_ui_overview&quot;,\n      &quot;title&quot;: &quot;IntelliJ Platform UI Overview&quot;,\n      &quot;url&quot;: &quot;https://plugins.jetbrains.com/docs/intellij/ui-overview.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;IDE-style separation of main editor/work surfaces, tool windows, settings, and modal dialogs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_tool_windows&quot;,\n      &quot;title&quot;: &quot;IntelliJ IDEA Tool Windows&quot;,\n      &quot;url&quot;: &quot;https://www.jetbrains.com/help/idea/tool-windows.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Run, Services, Problems, and status-oriented tool-window model </code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 36273,
-      "updatedAt": "2026-06-06T02:22:46.642Z",
-      "historyDate": "",
-      "historyYear": "",
       "workspaceArea": "platform-desktop-app"
     },
     {
@@ -10465,38 +10757,6 @@
       "workspaceArea": "_history/work-summaries"
     },
     {
-      "id": "history-user-requests-2026-2026-06-06-do-all-completion-standard-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-do-all-completion-standard.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Do All Completion Standard",
-      "excerpt": "사용자 요청 요약: Do All Completion Standard 사용자는 “다하기”라고 지시했다. 이 요청은 앞으로 부분 처리로 닫지 않고, 요청의 적용 가능한 모든 결과물과 검증을 완료 기준에 포함하라는 지속 운영 규칙으로 해석했다. 원문 전체는 저장하지 않고 요약만 보존한다.",
-      "html": "<p>사용자 요청 요약: Do All Completion Standard 사용자는 “다하기”라고 지시했다. 이 요청은 앞으로 부분 처리로 닫지 않고, 요청의 적용 가능한 모든 결과물과 검증을 완료 기준에 포함하라는 지속 운영 규칙으로 해석했다. 원문 전체는 저장하지 않고 요약만 보존한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 353,
-      "updatedAt": "2026-06-05T22:31:11.991Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-do-all-completion-standard-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-do-all-completion-standard.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: Do All Completion Standard",
-      "excerpt": "웹 검색 기록: Do All Completion Standard 검색 시각 2026 06 06 쿼리 software engineering definition of done acceptance criteria complete all requested scope best practices task completion software project management definition of done acceptance criteria no partial completion large task exec",
-      "html": "<p>웹 검색 기록: Do All Completion Standard 검색 시각 2026 06 06 쿼리 software engineering definition of done acceptance criteria complete all requested scope best practices task completion software project management definition of done acceptance criteria no partial completion large task execution complete all acceptance criteria incremental delivery definition of done 확</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1303,
-      "updatedAt": "2026-06-05T22:31:11.991Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "docs-instructions-persistent-instructions-en-md",
       "path": "_docs/instructions/persistent-instructions.en.md",
       "category": "workspace-doc",
@@ -10559,86 +10819,6 @@
       "historyDate": "",
       "historyYear": "",
       "workspaceArea": "AGENTS.md"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-no-large-scope-postponement-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-no-large-scope-postponement.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: 큰 범위 작업 미루지 않기",
-      "excerpt": "요청 결과 추적: 큰 범위 작업 미루지 않기 요청 범위가 크다는 이유로 작업을 미루지 말라는 지속 지시. 결과 AGENTS.md 에 large scope work가 첫 실행 slice, validation gate, continuation path를 만들어야 한다는 규칙을 추가했다. docs/instructions/persistent instructions. .md 에 동일한 지속 지시를 반영했다. ops/workflows/76 large scope decomposition.md 가 지연 수단이 ",
-      "html": "<p>요청 결과 추적: 큰 범위 작업 미루지 않기 요청 범위가 크다는 이유로 작업을 미루지 말라는 지속 지시. 결과 AGENTS.md 에 large scope work가 첫 실행 slice, validation gate, continuation path를 만들어야 한다는 규칙을 추가했다. docs/instructions/persistent instructions. .md 에 동일한 지속 지시를 반영했다. ops/workflows/76 large scope decomposition.md 가 지연 수단이 아니라 실행 준비 workflow임을 명시했다. 검증 docs audit 통과 diff check 통과 상태 규칙 반영 완료. Commit/pu</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 624,
-      "updatedAt": "2026-06-05T22:28:50.539Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-no-large-scope-postponement-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-no-large-scope-postponement.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: 큰 범위 작업 미루지 않기",
-      "excerpt": "평가: 큰 범위 작업 미루지 않기 결과 사용자의 지속 지시를 durable instruction과 workflow에 반영했다. 기존 “넓은 범위를 회피하지 않는다” 규칙을 더 구체화해, 범위가 크다는 이유만으로 postpone/defer/hand back하지 않도록 했다. 변경 사항 AGENTS.md : large scope work는 첫 실행 slice, validation gate, continuation path를 만들어야 한다는 규칙 추가. docs/instructions/persisten",
-      "html": "<p>평가: 큰 범위 작업 미루지 않기 결과 사용자의 지속 지시를 durable instruction과 workflow에 반영했다. 기존 “넓은 범위를 회피하지 않는다” 규칙을 더 구체화해, 범위가 크다는 이유만으로 postpone/defer/hand back하지 않도록 했다. 변경 사항 AGENTS.md : large scope work는 첫 실행 slice, validation gate, continuation path를 만들어야 한다는 규칙 추가. docs/instructions/persistent instructions. .md : 한국어/영어/공통 문서에 동일 원칙 추가. ops/workflows/76 large scope decom</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 938,
-      "updatedAt": "2026-06-05T22:28:50.538Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-no-large-scope-postponement-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-no-large-scope-postponement.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: 큰 범위 작업 미루지 않기",
-      "excerpt": "사용자 요청 요약: 큰 범위 작업 미루지 않기 사용자는 “범위가 크다고 미루지 않기”를 지시했다. 이 요청은 향후 큰 범위 작업을 회피, 보류, 사용자에게 되돌려 넘기는 방식이 아니라 실행 가능한 slice와 continuation path로 처리하라는 지속 운영 규칙으로 해석했다. 원문 전체는 저장하지 않고 요약만 보존한다.",
-      "html": "<p>사용자 요청 요약: 큰 범위 작업 미루지 않기 사용자는 “범위가 크다고 미루지 않기”를 지시했다. 이 요청은 향후 큰 범위 작업을 회피, 보류, 사용자에게 되돌려 넘기는 방식이 아니라 실행 가능한 slice와 continuation path로 처리하라는 지속 운영 규칙으로 해석했다. 원문 전체는 저장하지 않고 요약만 보존한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 416,
-      "updatedAt": "2026-06-05T22:28:50.538Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-no-large-scope-postponement-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-no-large-scope-postponement.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: 큰 범위 작업 미루지 않기",
-      "excerpt": "웹 검색 기록: 큰 범위 작업 미루지 않기 검색 시각 2026 06 06 쿼리 large scope software engineering don't defer break down and deliver incrementally project management best practices large scope decomposition software engineering deliver incremental slices avoid postponing broad scope 확인한 내용 Incrementa",
-      "html": "<p>웹 검색 기록: 큰 범위 작업 미루지 않기 검색 시각 2026 06 06 쿼리 large scope software engineering don&#039;t defer break down and deliver incrementally project management best practices large scope decomposition software engineering deliver incremental slices avoid postponing broad scope 확인한 내용 Incremental delivery guidance는 큰 범위를 작고 완결된 increment로 나누는 쪽을 권한다. Scope control guidance는</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1174,
-      "updatedAt": "2026-06-05T22:28:28.756Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-no-large-scope-postponement-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-no-large-scope-postponement.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: 큰 범위 작업 미루지 않기",
-      "excerpt": "작업 요약: 큰 범위 작업 미루지 않기 사용자 지시 “범위가 크다고 미루지 않기”를 지속 운영 규칙으로 반영했다. AGENTS.md , persistent instruction 문서 3종, large scope decomposition workflow를 갱신했다. 큰 범위 작업은 미루지 않고 첫 실행 slice, 검증 gate, continuation path로 전환하도록 명시했다. 웹 검색 기록과 당일 history log를 남겼다.",
-      "html": "<p>작업 요약: 큰 범위 작업 미루지 않기 사용자 지시 “범위가 크다고 미루지 않기”를 지속 운영 규칙으로 반영했다. AGENTS.md , persistent instruction 문서 3종, large scope decomposition workflow를 갱신했다. 큰 범위 작업은 미루지 않고 첫 실행 slice, 검증 gate, continuation path로 전환하도록 명시했다. 웹 검색 기록과 당일 history log를 남겼다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 440,
-      "updatedAt": "2026-06-05T22:28:28.756Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-open-source-feature-radar-tasks-ko-md",
@@ -17951,150 +18131,6 @@
       "historyDate": "2026-06-04",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-04-agentcore-blueprint-transfer-ko-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-04-agentcore-blueprint-transfer.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "AgentCore Blueprint Transfer Requirements",
-      "excerpt": "AgentCore Blueprint Transfer Requirements 날짜: 2026 06 04 소유 프로젝트: platform desktop app/ 배경 사용자가 awslabs/agentcore samples 를 참고 대상으로 제시했다. 이 링크는 단순 조사 자료가 아니라, AgentCore 샘플의 생산형 에이전트 구조를 현재 데스크톱 플랫폼 기능으로 녹이라는 요구로 해석한다. 요구사항 | ID | 요구사항 | 수용 기준 | | | | | | REQ PDA 087 | Agents 화면은 ",
-      "html": "<h1>AgentCore Blueprint Transfer Requirements</h1>\n<p>날짜: 2026-06-04</p>\n<p>소유 프로젝트: <code>platform-desktop-app/</code></p>\n<h2>배경</h2>\n<p>사용자가 <code>awslabs/agentcore-samples</code>를 참고 대상으로 제시했다. 이 링크는 단순 조사 자료가 아니라, AgentCore 샘플의 생산형 에이전트 구조를 현재 데스크톱 플랫폼 기능으로 녹이라는 요구로 해석한다.</p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>수용 기준</th></tr></thead><tbody><tr><td>REQ-PDA-087</td><td>Agents 화면은 AgentCore식 production blueprint를 실제 선택 가능한 제품 표면으로 제공해야 한다.</td><td><code>Production Agent Blueprints</code> 패널이 runtime, memory, gateway/tool, evaluation-guarded blueprint를 표시한다.</td></tr><tr><td>REQ-PDA-088</td><td>Blueprint 선택은 문서 링크 표시에서 끝나지 않고 runnable input을 변경해야 한다.</td><td>선택한 blueprint가 Search Agent Work Chat 입력과 Agent Factory proposal 입력을 채운다.</td></tr><tr><td>REQ-PDA-089</td><td>AWS AgentCore는 선택형 배포 adapter로 취급해야 한다.</td><td>UI와 registry가 AWS/AgentCore CLI를 필수 로컬 runtime이 아니라 optional deployment adapter로 설명한다.</td></tr><tr><td>REQ-PDA-090</td><td>AgentCore reference transfer는 공개 출처와 라이선스 경계를 기록해야 한다.</td><td>reference registry와 web-search record가 AWS 공식 문서, awslabs repo, Apache-2.0 경계, 코드 미복사 정책을 남긴다.</td></tr><tr><td>REQ-PDA-091</td><td>Readiness/test는 AgentCore blueprint UI와 registry 계약 누락을 잡아야 한다.</td><td>platform check와 Node tests가 <code>AgentCoreBlueprintPanel</code>, <code>agentcore-blueprint-panel</code>, <code>agentcore-style-production-agent-blueprints</code> 토큰을 검증한다.</td></tr></tbody></table>\n<h2>비범위</h2>\n<ul>\n<li>AgentCore CLI 설치 또는 AWS 계정 설정을 자동 수행하지 않는다.</li>\n<li>AgentCore 샘플 소스 코드를 제품에 복사하지 않는다.</li>\n<li>AWS 배포를 공개 출시 완료 상태로 주장하지 않는다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1892,
-      "updatedAt": "2026-06-03T17:24:10.620Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-agentcore-blueprint-transfer-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-agentcore-blueprint-transfer/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Plan: AgentCore Blueprint Transfer",
-      "excerpt": "Plan: AgentCore Blueprint Transfer 1. 웹에서 AgentCore 공식 문서와 샘플 repo를 확인한다. 2. 샘플 repo를 transient outputs/ 에 얕은 클론으로 구조 확인한다. 3. 현재 Agents 화면과 product/user flow/readiness registry를 점검한다. 4. Agents 화면에 production blueprint 패널을 추가한다. 5. Blueprint 적용 시 Search Agent Work Chat과 Agent Fa",
-      "html": "<h1>Plan: AgentCore Blueprint Transfer</h1>\n<p>1. 웹에서 AgentCore 공식 문서와 샘플 repo를 확인한다.</p>\n<p>2. 샘플 repo를 transient <code>outputs/</code>에 얕은 클론으로 구조 확인한다.</p>\n<p>3. 현재 Agents 화면과 product/user-flow/readiness registry를 점검한다.</p>\n<p>4. Agents 화면에 production blueprint 패널을 추가한다.</p>\n<p>5. Blueprint 적용 시 Search Agent Work Chat과 Agent Factory 입력이 채워지게 한다.</p>\n<p>6. Registry, readiness, tests를 업데이트한다.</p>\n<p>7. TypeScript, Node tests, platform check, customer build, browser smoke로 검증한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 575,
-      "updatedAt": "2026-06-03T17:24:10.620Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-agentcore-blueprint-transfer-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-agentcore-blueprint-transfer/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Spec: AgentCore Blueprint Transfer",
-      "excerpt": "Spec: AgentCore Blueprint Transfer 목표 awslabs/agentcore samples 의 production agent 구조를 현재 데스크톱 앱의 Agents 화면에서 선택, 적용, 검증 가능한 blueprint 기능으로 전환한다. 구현 계약 Agents 화면에 AgentCoreBlueprintPanel 을 추가한다. Blueprint는 최소 runtime, memory, gateway/tool, evaluation guarded agent 유형을 제공한다. 각 blu",
-      "html": "<h1>Spec: AgentCore Blueprint Transfer</h1>\n<h2>목표</h2>\n<p><code>awslabs/agentcore-samples</code>의 production-agent 구조를 현재 데스크톱 앱의 <code>Agents</code> 화면에서 선택, 적용, 검증 가능한 blueprint 기능으로 전환한다.</p>\n<h2>구현 계약</h2>\n<ul>\n<li><code>Agents</code> 화면에 <code>AgentCoreBlueprintPanel</code>을 추가한다.</li>\n<li>Blueprint는 최소 runtime, memory, gateway/tool, evaluation-guarded agent 유형을 제공한다.</li>\n<li>각 blueprint는 lifecycle, capabilities, stored records, safety gates를 보여준다.</li>\n<li><code>에이전트 생성 입력 채우기</code>는 <code>SearchAgentRunForm</code>과 <code>AgentFactoryForm</code>을 동시에 채운다.</li>\n<li><code>배포 사전점검 작업 만들기</code>는 Search Agent Work Chat에 AgentCore-style production readiness 작업을 채운다.</li>\n<li>AWS AgentCore CLI와 AWS credentials는 optional deployment adapter로만 표현한다.</li>\n<li>Readiness/test/config registry가 이 기능을 강제한다.</li>\n</ul>\n<h2>출처 경계</h2>\n<ul>\n<li>공식 문서: <code>https://docs.aws.amazon.com/bedrock-agentcore/</code></li>\n<li>사용자 제공 repo: <code>https://github.com/awslabs/agentcore-samples</code></li>\n<li>라이선스: Apache-2.0</li>\n<li>정책: 원본 소스 코드는 제품에 복사하지 않고, 구조/흐름만 clean-room 방식으로 이전한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1199,
-      "updatedAt": "2026-06-03T17:24:10.620Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-provider-direct-agent-work-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-provider-direct-agent-work/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "구현 계획",
-      "excerpt": "구현 계획 결정 언어/런타임 선택: 기존 Tauri Rust 백엔드와 React/TypeScript renderer를 유지한다. 대안 비교: Rust direct HTTP client: 앱이 provider API 실행을 소유하고 task run store에 바로 저장할 수 있어 선택. 외부 CLI only: 이미 존재하지만 사용자가 계정 기반 실제 작업을 원하므로 단독 경로로는 부족해 fallback으로 유지. 아키텍처 선택: Provider direct command + task run per",
-      "html": "<h1>구현 계획</h1>\n<h2>결정</h2>\n<ul>\n<li>언어/런타임 선택: 기존 Tauri Rust 백엔드와 React/TypeScript renderer를 유지한다.</li>\n<li>대안 비교:</li>\n<li>Rust direct HTTP client: 앱이 provider API 실행을 소유하고 task-run store에 바로 저장할 수 있어 선택.</li>\n<li>외부 CLI only: 이미 존재하지만 사용자가 계정 기반 실제 작업을 원하므로 단독 경로로는 부족해 fallback으로 유지.</li>\n<li>아키텍처 선택:</li>\n<li>Provider direct command + task-run persistence: 기존 runtime data boundary를 재사용하고, 앱이 primary host runtime이라는 제품 원칙과 맞는다.</li>\n<li>WebView consumer login embed: 비공식 session/cookie 처리 위험이 있어 제외.</li>\n</ul>\n<h2>단계</h2>\n<p>1. provider credential definition에 기본 모델과 직접 실행 report type을 추가한다.</p>\n<p>2. <code>run_provider_agent_task</code> Tauri command를 구현하고 invoke handler에 등록한다.</p>\n<p>3. OpenAI, Anthropic, Gemini API 호출 함수와 response text extractor를 만든다.</p>\n<p>4. provider direct task 결과를 task-run store에 저장한다.</p>\n<p>5. 검색 에이전트 작업 채팅에 provider/model 선택과 직접 실행 결과 메시지를 추가한다.</p>\n<p>6. runtime contract, user flow, product feature, service readiness, readiness checks를 업데이트한다.</p>\n<p>7. 요구사항, 스펙, 설치 감사, 히스토리, 평가를 남기고 검증한다.</p>\n<h2>위험과 완화</h2>\n<ul>\n<li>API schema drift: 공식 docs 기준의 endpoint를 사용하고, 모델명은 UI에서 수정 가능하게 둔다.</li>\n<li>secret leakage: record에는 secret을 저장하지 않고 stderr/output도 redaction helper를 통과시킨다.</li>\n<li>public release storage risk: local secret file은 현재 slice의 한계로 기록하고 OS keychain adapter를 후속으로 둔다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1759,
-      "updatedAt": "2026-06-03T17:05:30.235Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-provider-account-connection-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-provider-account-connection/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록: Provider 계정 연결",
-      "excerpt": "작업 목록: Provider 계정 연결 x 공식 provider 인증 범위를 조사하고 저장 방식의 한계를 명시한다. x provider credential Tauri structs, store path, read/save/clear/list/open commands를 추가한다. x CLI session 시작 시 adapter별 provider env var 주입을 추가한다. x Settings provider accounts 패널과 command palette 진입점을 추가한다. x Adapter",
-      "html": "<h1>작업 목록: Provider 계정 연결</h1>\n<ul>\n<li>[x] 공식 provider 인증 범위를 조사하고 저장 방식의 한계를 명시한다.</li>\n<li>[x] provider credential Tauri structs, store path, read/save/clear/list/open commands를 추가한다.</li>\n<li>[x] CLI session 시작 시 adapter별 provider env var 주입을 추가한다.</li>\n<li>[x] Settings provider accounts 패널과 command palette 진입점을 추가한다.</li>\n<li>[x] Adapter card에 계정 연결 상태와 설정 진입 버튼을 추가한다.</li>\n<li>[x] Runtime contract, readiness tests, product/user-flow/service/runtime registries를 갱신한다.</li>\n<li>[x] 검증 명령을 실행하고 실패를 수정한다.</li>\n<li>[x] history/evaluation/trace를 기록하고 final git close-out을 준비한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 737,
-      "updatedAt": "2026-06-03T16:49:16.601Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-provider-account-connection-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-provider-account-connection/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증: Provider 계정 연결",
-      "excerpt": "검증: Provider 계정 연결 실행 명령 cargo check from platform desktop app/src tauri passed node e JSON parse checks for changed config/contract files passed PYTHONPATH=src python3 m agent platform.cli check config contract ... for changed registries passed corepack pnpm dir platform desktop",
-      "html": "<h1>검증: Provider 계정 연결</h1>\n<h2>실행 명령</h2>\n<ul>\n<li><code>cargo check</code> from <code>platform-desktop-app/src-tauri</code> - passed</li>\n<li><code>node -e</code> JSON parse checks for changed config/contract files - passed</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ...</code> for changed registries - passed</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code> - passed</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code> - passed</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code> - passed</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code> - passed</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code> - passed</li>\n<li>Browser smoke for Settings &gt; Initialize &gt; Provider accounts - passed</li>\n</ul>\n<h2>수동 확인 항목</h2>\n<ul>\n<li>API key 입력칸은 password type이고 저장 후 비워진다.</li>\n<li>Provider report에는 raw secret이 포함되지 않는다.</li>\n<li>환경변수 주입은 matching adapter에만 적용된다.</li>\n<li>credential store는 support bundle에 포함되지 않는다.</li>\n</ul>\n<h2>Browser smoke</h2>\n<ul>\n<li>URL: <code>http://127.0.0.1:4173/</code></li>\n<li>확인: 설정 &gt; 초기화 &gt; 계정 연결에서 <code>ChatGPT / OpenAI</code>, <code>Claude / Anthropic</code>, <code>Gemini / Google</code> row와 <code>OPENAI_API_KEY</code>, <code>ANTHROPIC_API_KEY</code>, <code>GEMINI_API_KEY</code>가 보임.</li>\n<li>Screenshot: <code>outputs/provider-account-connection-smoke.png</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1298,
-      "updatedAt": "2026-06-03T16:47:33.487Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-provider-account-connection-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-provider-account-connection/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "계획: Provider 계정 연결",
-      "excerpt": "계획: Provider 계정 연결 1. 공식 인증 근거를 확인하고 웹 세션 임베드가 아닌 provider credential 연결로 범위를 정한다. 2. Tauri provider credential store, command surface, URL opener, adapter env injection을 구현한다. 3. Settings Initialize Provider accounts UI와 adapter card 상태 표시를 구현한다. 4. installer shell runtime contr",
-      "html": "<h1>계획: Provider 계정 연결</h1>\n<p>1. 공식 인증 근거를 확인하고 웹 세션 임베드가 아닌 provider credential 연결로 범위를 정한다.</p>\n<p>2. Tauri provider credential store, command surface, URL opener, adapter env injection을 구현한다.</p>\n<p>3. Settings &gt; Initialize &gt; Provider accounts UI와 adapter card 상태 표시를 구현한다.</p>\n<p>4. installer shell runtime contract, user-flow/product/service/runtime registry, readiness tests를 갱신한다.</p>\n<p>5. 타입 검사, Rust check, JSON 검증, readiness/test/build, 브라우저 smoke를 실행한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 570,
-      "updatedAt": "2026-06-03T16:41:57.210Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-provider-account-connection-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-provider-account-connection/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성: Provider 계정 연결",
-      "excerpt": "추적성: Provider 계정 연결 | 요구사항 | 구현 | 검증 | | | | | | REQ PDA 076 | ProviderAccountsPanel , settings subsection providers | renderer check, browser smoke | | REQ PDA 077 | provider setup/login/docs URLs, web session non goal docs | readiness tokens, source review | | REQ PDA 078 | Pro",
-      "html": "<h1>추적성: Provider 계정 연결</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-076</td><td><code>ProviderAccountsPanel</code>, settings subsection <code>providers</code></td><td>renderer check, browser smoke</td></tr><tr><td>REQ-PDA-077</td><td>provider setup/login/docs URLs, web-session non-goal docs</td><td>readiness tokens, source review</td></tr><tr><td>REQ-PDA-078</td><td><code>ProviderCredentialSummary</code>, <code>credential_secret_preview</code>, support exclusions</td><td>Rust check, readiness</td></tr><tr><td>REQ-PDA-079</td><td><code>provider_env_for_adapter</code>, <code>create_cli_session</code> env injection</td><td>Rust check, token tests</td></tr><tr><td>REQ-PDA-080</td><td><code>open_provider_auth_url</code>, provider row actions</td><td>renderer check, browser smoke</td></tr><tr><td>REQ-PDA-081</td><td><code>provider_credentials_path</code>, runtime boundary, service readiness</td><td>readiness, JSON parse</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 739,
-      "updatedAt": "2026-06-03T16:41:57.210Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-provider-account-connection-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-provider-account-connection/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "스펙: Provider 계정 연결",
-      "excerpt": "스펙: Provider 계정 연결 목적 사용자가 데스크톱 앱 안에서 ChatGPT/OpenAI, Claude/Anthropic, Gemini/Google 연결 상태를 직접 관리하고, 저장된 credential이 실제 guest CLI 실행에 반영되게 한다. 기능 범위 Tauri command: list provider credentials , save provider credential , clear provider credential , open provider auth url . Provide",
-      "html": "<h1>스펙: Provider 계정 연결</h1>\n<h2>목적</h2>\n<p>사용자가 데스크톱 앱 안에서 ChatGPT/OpenAI, Claude/Anthropic, Gemini/Google 연결 상태를 직접 관리하고, 저장된 credential이 실제 guest CLI 실행에 반영되게 한다.</p>\n<h2>기능 범위</h2>\n<ul>\n<li>Tauri command: <code>list_provider_credentials</code>, <code>save_provider_credential</code>, <code>clear_provider_credential</code>, <code>open_provider_auth_url</code>.</li>\n<li>Provider registry: OpenAI, Anthropic, Google Gemini의 label, auth method, env var, setup/login/docs URL.</li>\n<li>Credential store: <code>app_config/provider-credentials/provider-credentials.v1.json</code>.</li>\n<li>Renderer: Settings &gt; Initialize &gt; Provider accounts 패널.</li>\n<li>CLI 실행: 선택 adapter에 맞춰 <code>OPENAI_API_KEY</code>, <code>ANTHROPIC_API_KEY</code>, <code>GEMINI_API_KEY</code>를 child process env로 주입.</li>\n<li>Runtime/service: runtime data boundary와 service readiness에 credential store/연결 상태를 표시.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>ChatGPT/Claude/Gemini 웹앱을 앱 내부 WebView로 임베드하지 않는다.</li>\n<li>provider consumer web session cookie나 비공식 token을 저장하지 않는다.</li>\n<li>이번 slice에서 OS keychain adapter를 도입하지 않는다.</li>\n<li>provider API에 test call을 보내 key 유효성을 검증하지 않는다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>설정에서 3개 provider row가 보이고 키 저장/삭제/새로고침/공식 링크 열기가 가능하다.</li>\n<li>저장 후 UI에는 secret 원문이 남지 않고 preview만 보인다.</li>\n<li>CLI session 시작 시 저장된 key가 matching adapter env로 주입된다.</li>\n<li>readiness 테스트가 provider commands, schema, env vars, renderer panel, contract target을 확인한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1609,
-      "updatedAt": "2026-06-03T16:41:57.209Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18112,24 +18148,24 @@
           "count": 15
         },
         {
-          "category": "user-request",
-          "count": 15
-        },
-        {
-          "category": "web-search",
-          "count": 15
-        },
-        {
           "category": "work-summary",
           "count": 15
         },
         {
           "category": "work-timing",
+          "count": 15
+        },
+        {
+          "category": "user-request",
+          "count": 14
+        },
+        {
+          "category": "web-search",
           "count": 14
         },
         {
           "category": "plan",
-          "count": 6
+          "count": 7
         },
         {
           "category": "daily-history",
@@ -18238,16 +18274,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-no-large-scope-postponement-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-no-large-scope-postponement.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: 큰 범위 작업 미루지 않기",
-          "excerpt": "평가: 큰 범위 작업 미루지 않기 결과 사용자의 지속 지시를 durable instruction과 workflow에 반영했다. 기존 “넓은 범위를 회피하지 않는다” 규칙을 더 구체화해, 범위가 크다는 이유만으로 postpone/defer/hand back하지 않도록 했다. 변경 사항 AGENTS.md : large scope work는 첫 실행 slice, validation gate, continuation path를 만들어야 한다는 규칙 추가. docs/instructions/persisten",
-          "updatedAt": "2026-06-05T22:28:50.538Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-parallel-snapshot-collector-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-parallel-snapshot-collector.ko.md",
           "category": "evaluation",
@@ -18285,6 +18311,16 @@
           "title": "Shared Workspace Resource Cache 평가",
           "excerpt": "Shared Workspace Resource Cache 평가 결과 구현 완료. 내부 패키징 완료. commit/push 예정. 변경 요약 desktop 과 source resident surface가 동시에 같은 runtime panel을 유지할 때 warm workspace os resources 호출을 공유한다. source catalog 준비도 prepare workspace os resources shared in flight/cache 경로를 사용한다. force refresh와 fal",
           "updatedAt": "2026-06-05T23:07:18.988Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-storage-architecture-review-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-storage-architecture-review.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "Work Evaluation: Storage Architecture Review",
+          "excerpt": "Work Evaluation: Storage Architecture Review 작성일: 2026 06 06 사용자 요구 대비 결과 요구: 파일시스템 중심 구조가 성능 문제인지, 내부 DB 사용이 맞는지 검토. 결과: 충족. 현재 구조의 파일 기반 pressure point를 확인했고, 전체 DB 전환이 아닌 hybrid files plus embedded operational DB 전략을 선택했다. 산출물 platform desktop app/configs/storage architecture ",
+          "updatedAt": "2026-06-06T02:36:02.919Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18345,6 +18381,16 @@
           "title": "2026 06 06 runtime metric EVAL score 계획",
           "excerpt": "2026 06 06 runtime metric EVAL score 계획 선택 이유 직전 작업의 잔여 위험은 종합 개선 점수가 실제 runtime metric보다 문서/계약 근거에 치우쳐 있다는 점이었다. 사용자는 반복적으로 \"데스크톱 앱이 실제 OS 자원, RAM, CPU를 써야 한다\"고 요구했으므로 다음 slice는 runtime metric을 EVAL score에 연결하는 것이 가장 직접적이다. 실행 순서 1. Web first intake와 memory bootstrap. 2. 이전 clos",
           "updatedAt": "2026-06-06T00:22:18.057Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-plans-2026-2026-06-06-storage-architecture-review-ko-md",
+          "path": "_history/plans/2026/2026-06-06-storage-architecture-review.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "Storage Architecture Review Plan",
+          "excerpt": "Storage Architecture Review Plan 작성일: 2026 06 06 실행 계획 1. 웹 검색으로 공식 근거 확인 2. 현재 Workspace Monitor collector와 Tauri runtime persistence 조사 3. 파일 유지 대상과 DB 후보 대상 분류 4. 하이브리드 저장소 registry 작성 5. 요구사항, 아키텍처 리뷰, 스펙, traceability 작성 6. 관련 제품 registry 업데이트 7. collect/check/test/build/pac",
+          "updatedAt": "2026-06-06T02:33:43.753Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18448,16 +18494,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-no-large-scope-postponement-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-no-large-scope-postponement.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: 큰 범위 작업 미루지 않기",
-          "excerpt": "요청 결과 추적: 큰 범위 작업 미루지 않기 요청 범위가 크다는 이유로 작업을 미루지 말라는 지속 지시. 결과 AGENTS.md 에 large scope work가 첫 실행 slice, validation gate, continuation path를 만들어야 한다는 규칙을 추가했다. docs/instructions/persistent instructions. .md 에 동일한 지속 지시를 반영했다. ops/workflows/76 large scope decomposition.md 가 지연 수단이 ",
-          "updatedAt": "2026-06-05T22:28:50.539Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-06-parallel-snapshot-collector-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-parallel-snapshot-collector.ko.md",
           "category": "request-trace",
@@ -18495,6 +18531,16 @@
           "title": "Shared Workspace Resource Cache 요청 추적",
           "excerpt": "Shared Workspace Resource Cache 요청 추적 요청 사용자는 계속 개발하라고 지시했다. 이전 대화 맥락상 데스크톱 앱의 탭 이동 지연, native resource 활용, 메모리/CPU 사용, 구현 후 자동 빌드가 지속 요구사항이다. 결정 전면 재작성 대신 현재 resident desktop / source panel 경계에서 확인 가능한 중복 native workspace 요청을 먼저 제거했다. Rust command schema와 source editor UX는 유지했다.",
           "updatedAt": "2026-06-05T23:07:18.989Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-storage-architecture-review-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-storage-architecture-review.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Request Trace: Storage Architecture Review",
+          "excerpt": "Request Trace: Storage Architecture Review 작성일: 2026 06 06 요청 파일시스템 중심 저장 구조가 성능 저하 원인인지, 내부 DB 사용을 검토해 달라는 요청. 해석 현재 앱의 느림을 저장소 구조 관점에서 재평가하고, desktop app다운 app data/embedded DB 활용 방향을 결정해야 한다. 실행 1. 웹 검색으로 공식 근거 확인 2. 현재 collector와 Rust runtime persistence 조사 3. 하이브리드 저장소 전략 선택",
+          "updatedAt": "2026-06-06T02:36:02.919Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18548,16 +18594,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-do-all-completion-standard-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-do-all-completion-standard.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: Do All Completion Standard",
-          "excerpt": "사용자 요청 요약: Do All Completion Standard 사용자는 “다하기”라고 지시했다. 이 요청은 앞으로 부분 처리로 닫지 않고, 요청의 적용 가능한 모든 결과물과 검증을 완료 기준에 포함하라는 지속 운영 규칙으로 해석했다. 원문 전체는 저장하지 않고 요약만 보존한다.",
-          "updatedAt": "2026-06-05T22:31:11.991Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-eval-cockpit-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-eval-cockpit.ko.md",
           "category": "user-request",
@@ -18598,16 +18634,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-no-large-scope-postponement-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-no-large-scope-postponement.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: 큰 범위 작업 미루지 않기",
-          "excerpt": "사용자 요청 요약: 큰 범위 작업 미루지 않기 사용자는 “범위가 크다고 미루지 않기”를 지시했다. 이 요청은 향후 큰 범위 작업을 회피, 보류, 사용자에게 되돌려 넘기는 방식이 아니라 실행 가능한 slice와 continuation path로 처리하라는 지속 운영 규칙으로 해석했다. 원문 전체는 저장하지 않고 요약만 보존한다.",
-          "updatedAt": "2026-06-05T22:28:50.538Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-parallel-snapshot-collector-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-parallel-snapshot-collector.ko.md",
           "category": "user-request",
@@ -18645,6 +18671,16 @@
           "title": "사용자 요청 요약: shared workspace resource cache",
           "excerpt": "사용자 요청 요약: shared workspace resource cache 원문 요지: 개발 맥락 해석: 앞선 데스크톱 앱 속도, 메모리, OS 자원 활용, 탭 이동 지연 개선 요구를 이어서 실제 플랫폼 코드를 더 개선하라는 지시. 적용 범위: platform desktop app 의 resident desktop/source runtime panel이 같은 native workspace warmup/source catalog prepare를 중복 실행하지 않도록 최적화. 완료 기준: 구현, 테",
           "updatedAt": "2026-06-05T23:00:20.395Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-storage-architecture-review-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-storage-architecture-review.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "User Request Summary",
+          "excerpt": "User Request Summary 작성일: 2026 06 06 요약 사용자는 앱 성능 문제가 모든 것을 파일시스템으로 처리해서 생기는지 물었고, 회사/desktop app들이 내부 DB를 쓰는 경우가 많지 않은지 검토해 달라고 요청했다. 해석한 요구 현재 platform desktop app의 파일 기반 저장 구조를 냉정하게 평가한다. embedded DB 사용 여부를 외부 근거와 현재 소스로 검토한다. 성능 개선을 위해 파일과 DB의 경계를 정한다. 구현 가능한 migration 계획을 남긴",
+          "updatedAt": "2026-06-06T02:33:43.753Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18698,16 +18734,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-do-all-completion-standard-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-do-all-completion-standard.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: Do All Completion Standard",
-          "excerpt": "웹 검색 기록: Do All Completion Standard 검색 시각 2026 06 06 쿼리 software engineering definition of done acceptance criteria complete all requested scope best practices task completion software project management definition of done acceptance criteria no partial completion large task exec",
-          "updatedAt": "2026-06-05T22:31:11.991Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-eval-cockpit-open-source-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-eval-cockpit-open-source.ko.md",
           "category": "web-search",
@@ -18748,16 +18774,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-no-large-scope-postponement-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-no-large-scope-postponement.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: 큰 범위 작업 미루지 않기",
-          "excerpt": "웹 검색 기록: 큰 범위 작업 미루지 않기 검색 시각 2026 06 06 쿼리 large scope software engineering don't defer break down and deliver incrementally project management best practices large scope decomposition software engineering deliver incremental slices avoid postponing broad scope 확인한 내용 Incrementa",
-          "updatedAt": "2026-06-05T22:28:28.756Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-parallel-snapshot-collector-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-parallel-snapshot-collector.ko.md",
           "category": "web-search",
@@ -18795,6 +18811,16 @@
           "title": "웹 검색 기록: shared workspace resource cache",
           "excerpt": "웹 검색 기록: shared workspace resource cache 쿼리 React large component performance split lazy boundary useMemo deferred value tab switching dashboard 2026 desktop app workbench React performance tab switch lazy load keep alive panels 2026 Tauri React desktop app performance large dash",
           "updatedAt": "2026-06-05T23:00:01.267Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-storage-architecture-review-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-storage-architecture-review.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search Record: Storage Architecture Review",
+          "excerpt": "Web Search Record: Storage Architecture Review 작성일: 2026 06 06 검색 목적 파일시스템 중심 저장 구조가 desktop app 성능 병목이 될 수 있는지, embedded DB/SQLite 같은 내부 DB 사용이 일반적인 선택인지 공식 근거로 확인했다. 검색어 SQLite official appropriate uses embedded database application file format Tauri v2 SQL plugin SQLite offici",
+          "updatedAt": "2026-06-06T02:33:43.752Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18898,16 +18924,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-no-large-scope-postponement-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-no-large-scope-postponement.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: 큰 범위 작업 미루지 않기",
-          "excerpt": "작업 요약: 큰 범위 작업 미루지 않기 사용자 지시 “범위가 크다고 미루지 않기”를 지속 운영 규칙으로 반영했다. AGENTS.md , persistent instruction 문서 3종, large scope decomposition workflow를 갱신했다. 큰 범위 작업은 미루지 않고 첫 실행 slice, 검증 gate, continuation path로 전환하도록 명시했다. 웹 검색 기록과 당일 history log를 남겼다.",
-          "updatedAt": "2026-06-05T22:28:28.756Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-parallel-snapshot-collector-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-parallel-snapshot-collector.ko.md",
           "category": "work-summary",
@@ -18945,6 +18961,16 @@
           "title": "Shared Workspace Resource Cache 작업 요약",
           "excerpt": "Shared Workspace Resource Cache 작업 요약 요청: 데스크톱 앱 성능 개발을 계속하고, 탭 전환 시 반복 로딩/마운트 비용을 줄이며, 구현 후 빌드까지 자동으로 수행. 처리: Workspace Monitor runtime의 warmup/prepare native 요청을 module level shared in flight/cache helper로 통합. 핵심 파일: platform desktop app/renderer/workspace monitor/components/Mo",
           "updatedAt": "2026-06-05T23:07:18.988Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-storage-architecture-review-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-storage-architecture-review.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "Work Summary: Storage Architecture Review",
+          "excerpt": "Work Summary: Storage Architecture Review 작성일: 2026 06 06 요약 Desktop app 저장소 구조를 검토해 전체 파일시스템 유지와 전체 DB 전환 모두를 배제하고, durable repository files와 embedded SQLite operational DB를 결합하는 하이브리드 전략을 기록했다. 핵심 결론 정책/요구사항/스펙/철학/히스토리는 파일과 Git을 유지한다. task run, decision inbox, workspace/history",
+          "updatedAt": "2026-06-06T02:36:02.919Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19088,6 +19114,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-timings-2026-2026-06-06-storage-architecture-review-ko-md",
+          "path": "_history/work-timings/2026/2026-06-06-storage-architecture-review.ko.md",
+          "category": "work-timing",
+          "language": "ko",
+          "title": "Work Timing: Storage Architecture Review",
+          "excerpt": "Work Timing: Storage Architecture Review 작성일: 2026 06 06 | Phase | Status | Notes | | | | | | Web search | complete | Official docs checked first | | Local source inspection | complete | Collector and Tauri JSON persistence reviewed | | Architecture decision | complete | Hybrid f",
+          "updatedAt": "2026-06-06T02:36:02.918Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-tool-usage-integration-ko-md",
           "path": "_history/work-timings/2026/2026-06-06-tool-usage-integration.ko.md",
           "category": "work-timing",
@@ -19106,36 +19142,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2592,
+      "documents": 2599,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1007
+          "count": 1008
         },
         {
           "category": "web-search",
-          "count": 412
+          "count": 413
         },
         {
           "category": "plan",
-          "count": 346
+          "count": 347
         },
         {
           "category": "request-trace",
-          "count": 340
+          "count": 341
         },
         {
           "category": "work-timing",
-          "count": 261
+          "count": 262
         },
         {
           "category": "user-request",
-          "count": 125
+          "count": 126
         },
         {
           "category": "work-summary",
-          "count": 92
+          "count": 93
         },
         {
           "category": "daily-history",
@@ -19146,7 +19182,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6503658,
+      "totalSourceBytes": 6511951,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19171,11 +19207,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 30,
+      "evidenceEvents": 29,
       "decisionEvents": 0,
       "openSignals": 15,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T02:26:02.134Z",
+      "latestEventAt": "2026-06-06T02:36:02.919Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19190,13 +19226,8 @@
         "count": 15
       },
       {
-        "id": "evidence",
-        "label": "evidence",
-        "count": 15
-      },
-      {
-        "id": "intake",
-        "label": "intake",
+        "id": "monitoring",
+        "label": "monitoring",
         "count": 15
       },
       {
@@ -19210,14 +19241,19 @@
         "count": 15
       },
       {
-        "id": "monitoring",
-        "label": "monitoring",
+        "id": "evidence",
+        "label": "evidence",
+        "count": 14
+      },
+      {
+        "id": "intake",
+        "label": "intake",
         "count": 14
       },
       {
         "id": "planning",
         "label": "planning",
-        "count": 6
+        "count": 7
       },
       {
         "id": "history",
@@ -19237,13 +19273,13 @@
         "count": 15
       },
       {
-        "id": "intake",
-        "label": "intake",
+        "id": "summary",
+        "label": "summary",
         "count": 15
       },
       {
-        "id": "summary",
-        "label": "summary",
+        "id": "timing",
+        "label": "timing",
         "count": 15
       },
       {
@@ -19252,19 +19288,19 @@
         "count": 15
       },
       {
-        "id": "web-search",
-        "label": "web search",
-        "count": 15
+        "id": "intake",
+        "label": "intake",
+        "count": 14
       },
       {
-        "id": "timing",
-        "label": "timing",
+        "id": "web-search",
+        "label": "web search",
         "count": 14
       },
       {
         "id": "plan",
         "label": "plan",
-        "count": 6
+        "count": 7
       },
       {
         "id": "history",
@@ -19285,6 +19321,111 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-storage-architecture-review-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "Work Evaluation: Storage Architecture Review",
+        "detail": "Work Evaluation: Storage Architecture Review 작성일: 2026 06 06 사용자 요구 대비 결과 요구: 파일시스템 중심 구조가 성능 문제인지, 내부 DB 사용이 맞는지 검토. 결과: 충족. 현재 구조의 파일 기반 pressure point를 확인했고, 전체 DB 전환이 아닌 hybrid files plus embedded operational DB 전략을 선택했다. 산출물 platform desktop app/configs/storage architecture ",
+        "path": "_history/evaluations/2026/2026-06-06-storage-architecture-review.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:36:02.919Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-storage-architecture-review-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Storage Architecture Review",
+        "detail": "Request Trace: Storage Architecture Review 작성일: 2026 06 06 요청 파일시스템 중심 저장 구조가 성능 저하 원인인지, 내부 DB 사용을 검토해 달라는 요청. 해석 현재 앱의 느림을 저장소 구조 관점에서 재평가하고, desktop app다운 app data/embedded DB 활용 방향을 결정해야 한다. 실행 1. 웹 검색으로 공식 근거 확인 2. 현재 collector와 Rust runtime persistence 조사 3. 하이브리드 저장소 전략 선택",
+        "path": "_history/request-traces/2026/2026-06-06-storage-architecture-review.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:36:02.919Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-storage-architecture-review-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "Work Summary: Storage Architecture Review",
+        "detail": "Work Summary: Storage Architecture Review 작성일: 2026 06 06 요약 Desktop app 저장소 구조를 검토해 전체 파일시스템 유지와 전체 DB 전환 모두를 배제하고, durable repository files와 embedded SQLite operational DB를 결합하는 하이브리드 전략을 기록했다. 핵심 결론 정책/요구사항/스펙/철학/히스토리는 파일과 Git을 유지한다. task run, decision inbox, workspace/history",
+        "path": "_history/work-summaries/2026/2026-06-06-storage-architecture-review.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:36:02.919Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-storage-architecture-review-ko-md",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "Work Timing: Storage Architecture Review",
+        "detail": "Work Timing: Storage Architecture Review 작성일: 2026 06 06 | Phase | Status | Notes | | | | | | Web search | complete | Official docs checked first | | Local source inspection | complete | Collector and Tauri JSON persistence reviewed | | Architecture decision | complete | Hybrid f",
+        "path": "_history/work-timings/2026/2026-06-06-storage-architecture-review.ko.md",
+        "category": "work-timing",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:36:02.918Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-storage-architecture-review-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "Storage Architecture Review Plan",
+        "detail": "Storage Architecture Review Plan 작성일: 2026 06 06 실행 계획 1. 웹 검색으로 공식 근거 확인 2. 현재 Workspace Monitor collector와 Tauri runtime persistence 조사 3. 파일 유지 대상과 DB 후보 대상 분류 4. 하이브리드 저장소 registry 작성 5. 요구사항, 아키텍처 리뷰, 스펙, traceability 작성 6. 관련 제품 registry 업데이트 7. collect/check/test/build/pac",
+        "path": "_history/plans/2026/2026-06-06-storage-architecture-review.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:33:43.753Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-storage-architecture-review-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "User Request Summary",
+        "detail": "User Request Summary 작성일: 2026 06 06 요약 사용자는 앱 성능 문제가 모든 것을 파일시스템으로 처리해서 생기는지 물었고, 회사/desktop app들이 내부 DB를 쓰는 경우가 많지 않은지 검토해 달라고 요청했다. 해석한 요구 현재 platform desktop app의 파일 기반 저장 구조를 냉정하게 평가한다. embedded DB 사용 여부를 외부 근거와 현재 소스로 검토한다. 성능 개선을 위해 파일과 DB의 경계를 정한다. 구현 가능한 migration 계획을 남긴",
+        "path": "_history/user-requests/2026/2026-06-06-storage-architecture-review.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:33:43.753Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-storage-architecture-review-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search Record: Storage Architecture Review",
+        "detail": "Web Search Record: Storage Architecture Review 작성일: 2026 06 06 검색 목적 파일시스템 중심 저장 구조가 desktop app 성능 병목이 될 수 있는지, embedded DB/SQLite 같은 내부 DB 사용이 일반적인 선택인지 공식 근거로 확인했다. 검색어 SQLite official appropriate uses embedded database application file format Tauri v2 SQL plugin SQLite offici",
+        "path": "_history/web-searches/2026/2026-06-06-storage-architecture-review.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:33:43.752Z"
+      },
       {
         "id": "history-history-evaluations-2026-2026-06-06-parallel-snapshot-collector-ko-md",
         "sourceType": "history",
@@ -20619,111 +20760,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T22:34:05.026Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-do-all-completion-standard-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "ready",
-        "title": "웹 검색 기록: Do All Completion Standard",
-        "detail": "웹 검색 기록: Do All Completion Standard 검색 시각 2026 06 06 쿼리 software engineering definition of done acceptance criteria complete all requested scope best practices task completion software project management definition of done acceptance criteria no partial completion large task exec",
-        "path": "_history/web-searches/2026/2026-06-06-do-all-completion-standard.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:31:11.991Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-do-all-completion-standard-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "ready",
-        "title": "사용자 요청 요약: Do All Completion Standard",
-        "detail": "사용자 요청 요약: Do All Completion Standard 사용자는 “다하기”라고 지시했다. 이 요청은 앞으로 부분 처리로 닫지 않고, 요청의 적용 가능한 모든 결과물과 검증을 완료 기준에 포함하라는 지속 운영 규칙으로 해석했다. 원문 전체는 저장하지 않고 요약만 보존한다.",
-        "path": "_history/user-requests/2026/2026-06-06-do-all-completion-standard.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:31:11.991Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-no-large-scope-postponement-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: 큰 범위 작업 미루지 않기",
-        "detail": "요청 결과 추적: 큰 범위 작업 미루지 않기 요청 범위가 크다는 이유로 작업을 미루지 말라는 지속 지시. 결과 AGENTS.md 에 large scope work가 첫 실행 slice, validation gate, continuation path를 만들어야 한다는 규칙을 추가했다. docs/instructions/persistent instructions. .md 에 동일한 지속 지시를 반영했다. ops/workflows/76 large scope decomposition.md 가 지연 수단이 ",
-        "path": "_history/request-traces/2026/2026-06-06-no-large-scope-postponement.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:28:50.539Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-no-large-scope-postponement-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "평가: 큰 범위 작업 미루지 않기",
-        "detail": "평가: 큰 범위 작업 미루지 않기 결과 사용자의 지속 지시를 durable instruction과 workflow에 반영했다. 기존 “넓은 범위를 회피하지 않는다” 규칙을 더 구체화해, 범위가 크다는 이유만으로 postpone/defer/hand back하지 않도록 했다. 변경 사항 AGENTS.md : large scope work는 첫 실행 slice, validation gate, continuation path를 만들어야 한다는 규칙 추가. docs/instructions/persisten",
-        "path": "_history/evaluations/2026/2026-06-06-no-large-scope-postponement.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:28:50.538Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-no-large-scope-postponement-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: 큰 범위 작업 미루지 않기",
-        "detail": "사용자 요청 요약: 큰 범위 작업 미루지 않기 사용자는 “범위가 크다고 미루지 않기”를 지시했다. 이 요청은 향후 큰 범위 작업을 회피, 보류, 사용자에게 되돌려 넘기는 방식이 아니라 실행 가능한 slice와 continuation path로 처리하라는 지속 운영 규칙으로 해석했다. 원문 전체는 저장하지 않고 요약만 보존한다.",
-        "path": "_history/user-requests/2026/2026-06-06-no-large-scope-postponement.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:28:50.538Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-no-large-scope-postponement-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: 큰 범위 작업 미루지 않기",
-        "detail": "웹 검색 기록: 큰 범위 작업 미루지 않기 검색 시각 2026 06 06 쿼리 large scope software engineering don't defer break down and deliver incrementally project management best practices large scope decomposition software engineering deliver incremental slices avoid postponing broad scope 확인한 내용 Incrementa",
-        "path": "_history/web-searches/2026/2026-06-06-no-large-scope-postponement.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:28:28.756Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-no-large-scope-postponement-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: 큰 범위 작업 미루지 않기",
-        "detail": "작업 요약: 큰 범위 작업 미루지 않기 사용자 지시 “범위가 크다고 미루지 않기”를 지속 운영 규칙으로 반영했다. AGENTS.md , persistent instruction 문서 3종, large scope decomposition workflow를 갱신했다. 큰 범위 작업은 미루지 않고 첫 실행 slice, 검증 gate, continuation path로 전환하도록 명시했다. 웹 검색 기록과 당일 history log를 남겼다.",
-        "path": "_history/work-summaries/2026/2026-06-06-no-large-scope-postponement.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:28:28.756Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23732,7 +23768,7 @@
       {
         "category": "user-request",
         "root": "_history/user-requests",
-        "documentsCount": 15
+        "documentsCount": 14
       },
       {
         "category": "intent-feature-map",
@@ -23747,17 +23783,17 @@
       {
         "category": "web-search",
         "root": "_history/web-searches",
-        "documentsCount": 15
+        "documentsCount": 14
       },
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 14
+        "documentsCount": 15
       },
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 6
+        "documentsCount": 7
       },
       {
         "category": "evaluation",
@@ -23856,7 +23892,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 70,
+        "documentCount": 73,
         "sourceFileCount": 5
       },
       {
@@ -25553,6 +25589,7 @@
         ],
         "currentAssets": [
           "platform-desktop-app/configs/runtime-data-boundary-registry.json",
+          "platform-desktop-app/configs/storage-architecture-registry.json",
           "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
           "platform-desktop-app/src-tauri/src/lib.rs",
           "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
@@ -25575,6 +25612,7 @@
         "validationGates": [
           "workspace boundary commands reject unsafe paths",
           "resident desktop/source panels share native workspace warmup and prepare requests",
+          "storage architecture keeps durable repository knowledge file-backed while moving operational indexes toward embedded SQLite",
           "accumulated data manifest is persisted",
           "customer bundle excludes platform source"
         ]
@@ -27694,13 +27732,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3708,
+      "sourceDocuments": 3721,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T02:26:02.134Z"
+      "latestInsightAt": "2026-06-06T02:36:02.919Z"
     },
     "inferenceStages": [
       {
@@ -27841,11 +27879,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1702,
+        "signalCount": 1710,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 478
+            "count": 482
           },
           {
             "category": "evaluation",
@@ -27853,19 +27891,19 @@
           },
           {
             "category": "web-search",
-            "count": 413
+            "count": 414
           },
           {
             "category": "plan",
-            "count": 206
+            "count": 207
           },
           {
             "category": "request-trace",
-            "count": 109
+            "count": 110
           },
           {
             "category": "work-timing",
-            "count": 29
+            "count": 30
           },
           {
             "category": "project-doc",
@@ -27892,7 +27930,7 @@
           "2026 05 31 작업 모드 라우팅 계획 기록",
           "계획 히스토리: 코딩 조사 출처 다양성 강화"
         ],
-        "latestEvidenceAt": "2026-06-06T02:26:02.132Z"
+        "latestEvidenceAt": "2026-06-06T02:36:02.919Z"
       },
       {
         "id": "large-scope-slicing",
@@ -27906,7 +27944,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 988,
+        "signalCount": 989,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -27914,7 +27952,7 @@
           },
           {
             "category": "plan",
-            "count": 286
+            "count": 287
           },
           {
             "category": "request-trace",
@@ -27965,7 +28003,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T02:23:45.532Z"
+        "latestEvidenceAt": "2026-06-06T02:33:43.753Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -27979,11 +28017,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 659,
+        "signalCount": 662,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 263
+            "count": 266
           },
           {
             "category": "evaluation",
@@ -28038,7 +28076,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-06T02:26:02.134Z"
+        "latestEvidenceAt": "2026-06-06T02:36:02.917Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28187,14 +28225,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3708,
+      "sourceDocuments": 3721,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T02:26:02.134Z"
+      "latestInsightAt": "2026-06-06T02:36:02.919Z"
     },
     "operatingModel": [
       {
@@ -28252,19 +28290,19 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3126,
+        "signalCount": 3135,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1702
+            "signalCount": 1710
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 988
+            "signalCount": 989
           },
           {
             "id": "build-closeout-gate",
@@ -28298,7 +28336,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T02:26:02.133Z",
+        "latestEvidenceAt": "2026-06-06T02:36:02.919Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28327,13 +28365,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 778,
+        "signalCount": 781,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 659
+            "signalCount": 662
           },
           {
             "id": "release-blocker-gate",
@@ -28367,7 +28405,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T02:26:02.134Z",
+        "latestEvidenceAt": "2026-06-06T02:36:02.917Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28396,7 +28434,7 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2430,
+        "signalCount": 2431,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
@@ -28408,7 +28446,7 @@
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 988
+            "signalCount": 989
           }
         ],
         "missingPatternIds": [],
@@ -28436,7 +28474,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T02:26:02.131Z",
+        "latestEvidenceAt": "2026-06-06T02:33:43.753Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28534,19 +28572,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2690,
+        "signalCount": 2699,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 988
+            "signalCount": 989
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1702
+            "signalCount": 1710
           }
         ],
         "missingPatternIds": [],
@@ -28574,7 +28612,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T02:26:02.132Z",
+        "latestEvidenceAt": "2026-06-06T02:36:02.919Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28603,7 +28641,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1821,
+        "signalCount": 1829,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28615,7 +28653,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1702
+            "signalCount": 1710
           }
         ],
         "missingPatternIds": [],
@@ -28643,7 +28681,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T02:26:02.132Z",
+        "latestEvidenceAt": "2026-06-06T02:36:02.919Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

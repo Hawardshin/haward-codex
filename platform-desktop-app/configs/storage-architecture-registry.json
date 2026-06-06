@@ -1,0 +1,387 @@
+{
+  "schema_version": "2026-06-06.storage-architecture-registry.v1",
+  "updated_at": "2026-06-06",
+  "owner_project": "platform-desktop-app",
+  "reader_guide": [
+    "This registry decides when the desktop product should use repository files, generated JSON snapshots, app-owned runtime files, or an embedded operational database.",
+    "Read selected_strategy first. Then use storage_layers and migration_slices before adding new runtime state, indexes, task histories, search records, or cache files.",
+    "The selected strategy is hybrid: durable human-readable knowledge remains file-backed and Git-auditable; high-churn app runtime state and query indexes move toward an embedded SQLite operational store.",
+    "This registry does not approve storing secrets, private notes, cookies, or unredacted logs in the embedded database."
+  ],
+  "reference_links": [
+    {
+      "id": "sqlite-appropriate-uses",
+      "label": "SQLite Appropriate Uses",
+      "url": "https://www.sqlite.org/whentouse.html",
+      "relevance": "SQLite is suitable as an embedded local application database and application file format for many desktop-style data stores."
+    },
+    {
+      "id": "tauri-sql-plugin",
+      "label": "Tauri SQL plugin",
+      "url": "https://v2.tauri.app/plugin/sql/",
+      "relevance": "Tauri v2 has an official SQL plugin path supporting SQLite through sqlx."
+    },
+    {
+      "id": "apple-core-data",
+      "label": "Apple Core Data",
+      "url": "https://developer.apple.com/documentation/coredata",
+      "relevance": "Apple documents local persist/cache data patterns for single-device apps."
+    },
+    {
+      "id": "electron-app-paths",
+      "label": "Electron app data paths",
+      "url": "https://www.electronjs.org/docs/latest/api/app",
+      "relevance": "Desktop frameworks expose app-specific data paths, which should host runtime databases and caches instead of source directories."
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "files_remain_durable_source",
+      "rule": "Policies, requirements, specs, philosophy, registries, source code, and human-readable history remain repository files unless a separate migration plan proves the file is not a durable knowledge artifact.",
+      "reason": "The workspace depends on Git diffs, human review, provenance, and assistant-readable paths."
+    },
+    {
+      "id": "database_is_operational_plane",
+      "rule": "Use the embedded database for app-owned operational records, indexes, materialized views, and query acceleration, not as the hidden source of truth for governance documents.",
+      "reason": "Task timelines, decision queues, search indexes, and performance telemetry need indexed reads and updates; policy and specs need durable auditability."
+    },
+    {
+      "id": "generated_snapshots_are_distribution_cache",
+      "rule": "Generated workspace snapshots stay rebuildable caches for renderer/public bundles and must be derivable from repository files plus runtime store records.",
+      "reason": "Snapshots should speed delivery and packaging, not become another primary database."
+    },
+    {
+      "id": "runtime_db_is_rebuildable_or_exportable",
+      "rule": "Every runtime database table must declare whether it is rebuildable from files, exportable as JSON/Markdown, or authoritative runtime state with migration and backup rules.",
+      "reason": "Users must not lose task records or be trapped in an opaque store."
+    },
+    {
+      "id": "secrets_stay_out",
+      "rule": "Secrets, credentials, private notes, cookies, and unredacted raw logs do not move into the embedded database by default.",
+      "reason": "The runtime data policy already separates credentials and support exports from accumulated operational state."
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "selected_strategy",
+      "meaning": "The current storage architecture decision and its local evidence.",
+      "required": true
+    },
+    {
+      "field": "storage_layers",
+      "meaning": "Allowed persistence planes, ownership, examples, performance role, and migration behavior.",
+      "required": true
+    },
+    {
+      "field": "filesystem_pressure_points",
+      "meaning": "Current code paths where file scanning or JSON-file state can become slow as data grows.",
+      "required": true
+    },
+    {
+      "field": "database_candidate_domains",
+      "meaning": "Data domains that should be implemented or migrated to SQLite first.",
+      "required": true
+    },
+    {
+      "field": "migration_slices",
+      "meaning": "Incremental implementation slices for moving only the right data into the database.",
+      "required": true
+    },
+    {
+      "field": "validation_gates",
+      "meaning": "Checks required before accepting a storage migration.",
+      "required": true
+    }
+  ],
+  "selected_strategy": {
+    "id": "hybrid_files_plus_embedded_operational_db",
+    "status": "selected_for_next_migration",
+    "decision": "Keep repository knowledge file-backed and add an embedded SQLite operational database for indexed runtime data, workspace search metadata, task-run timelines, decision state, materialized monitor indexes, and performance telemetry.",
+    "why_not_all_filesystem": [
+      "Large repeated directory walks, Markdown/JSON parsing, sorting, and generated snapshot writes add startup and refresh cost.",
+      "JSON files are easy to inspect but weak for indexed queries, range filters, joins, incremental updates, and history timelines.",
+      "Task runs, decisions, and search records are app-owned operational data that users expect to query quickly from the desktop app."
+    ],
+    "why_not_all_database": [
+      "Repository policies, requirements, specs, and history must stay diffable, reviewable, mergeable, and assistant-readable.",
+      "Moving durable knowledge into an opaque app database would weaken Git provenance and break the workspace operating model.",
+      "Generated customer snapshots and support exports still need bounded file artifacts."
+    ],
+    "expected_performance_effect": [
+      "Reduces cold-start and tab-open cost after initial indexing by avoiding repeated full file scans for app-owned query surfaces.",
+      "Improves task timeline, decision inbox, accumulated data, history index, and source search latency through indexed reads.",
+      "Does not by itself fix React remount or oversized component render cost; UI prewarm/resident tabs and component splitting remain separate gates."
+    ],
+    "current_dependency_status": {
+      "tauri_sql_plugin": "not_installed",
+      "rust_sqlite_crate": "not_installed",
+      "reason": "This review records the migration boundary first. Installing SQLite support requires an installation audit, dependency/license/security review, schema migration, and rollback path."
+    }
+  },
+  "storage_layers": [
+    {
+      "id": "durable_repository_files",
+      "status": "keep",
+      "owned_by": "repository",
+      "examples": [
+        "_docs/",
+        "_requirements/",
+        "_specs/",
+        "_history/",
+        "platform-desktop-app/configs/",
+        "platform-desktop-app/docs/",
+        "platform-desktop-app/renderer/workspace-monitor/specs/"
+      ],
+      "performance_role": "Source of truth and rebuild input, not the primary query surface for the installed app.",
+      "migration_rule": "Do not move to DB unless the file is reclassified from durable knowledge to operational runtime data."
+    },
+    {
+      "id": "generated_snapshots",
+      "status": "keep_as_rebuildable_cache",
+      "owned_by": "build_and_renderer",
+      "examples": [
+        "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json",
+        "platform-desktop-app/renderer/workspace-monitor/public/workspace-snapshot.json",
+        "platform-desktop-app/renderer/workspace-monitor/public/admin-history-index.json"
+      ],
+      "performance_role": "Bounded delivery cache for the renderer and internal package builds.",
+      "migration_rule": "May be generated from DB materialized views once indexes exist, but must remain rebuildable."
+    },
+    {
+      "id": "app_runtime_files",
+      "status": "keep_for_large_artifacts_and_exports",
+      "owned_by": "desktop_runtime",
+      "examples": [
+        "stdout.log",
+        "stderr.log",
+        "support bundles",
+        "exported task summaries",
+        "large artifacts"
+      ],
+      "performance_role": "Sequential artifact storage and user/export inspection.",
+      "migration_rule": "Store metadata and indexes in DB; keep large payloads as files with checksums and retention policy."
+    },
+    {
+      "id": "embedded_operational_database",
+      "status": "planned",
+      "owned_by": "desktop_runtime",
+      "recommended_engine": "SQLite",
+      "recommended_home": "Tauri app data or app config directory, never platform source directories",
+      "examples": [
+        "task_run_records",
+        "decision_inbox_items",
+        "workspace_file_index",
+        "history_document_index",
+        "source_search_index",
+        "performance_measurements",
+        "resource_lifecycle_events"
+      ],
+      "performance_role": "Indexed, incremental runtime query plane for desktop app surfaces.",
+      "migration_rule": "Start with a shadow index and read-through fallback; promote per-domain only after parity and rebuild tests pass."
+    }
+  ],
+  "filesystem_pressure_points": [
+    {
+      "id": "workspace_snapshot_document_scan",
+      "path": "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+      "evidence_lines": [
+        "DOCUMENT_SOURCES includes many _history, docs, specs, and config roots.",
+        "collectDocumentTasks walks each source root and selects Markdown/JSON files.",
+        "buildSnapshot currently parses and compacts documents before writing generated JSON snapshots."
+      ],
+      "current_mitigation": "Parallel worker pool added for document/source transforms.",
+      "remaining_risk": "Initial scan still grows with file count and repeated generated snapshot writes."
+    },
+    {
+      "id": "admin_history_index_generation",
+      "path": "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+      "evidence_lines": [
+        "buildAdminHistoryIndex sorts history documents, builds day summaries, and writes public/admin-history-index.json."
+      ],
+      "current_mitigation": "History details are bounded and separated into a lazy admin index.",
+      "remaining_risk": "The index is still rebuilt from files rather than incrementally updated."
+    },
+    {
+      "id": "tauri_task_run_json_records",
+      "path": "platform-desktop-app/src-tauri/src/lib.rs",
+      "evidence_lines": [
+        "Provider agent task runs create a directory, stdout.log, stderr.log, and record.json.",
+        "Runtime data overview scans file stores to count records and bytes."
+      ],
+      "current_mitigation": "Records are inspectable and support-bundle friendly.",
+      "remaining_risk": "Listing/filtering task runs becomes scan-bound and hard to query as records accumulate."
+    },
+    {
+      "id": "desktop_workspace_state_json",
+      "path": "platform-desktop-app/src-tauri/src/lib.rs",
+      "evidence_lines": [
+        "desktop-workspace-state.v1.json is read and written through serde_json."
+      ],
+      "current_mitigation": "Small state file is acceptable today.",
+      "remaining_risk": "If workspace state grows into project/session/worktree metadata, it should be split into DB-backed indexed state."
+    }
+  ],
+  "database_candidate_domains": [
+    {
+      "id": "task_run_timeline",
+      "priority": "p0",
+      "move_to_database": true,
+      "keep_files": [
+        "stdout.log",
+        "stderr.log",
+        "large artifacts",
+        "explicit exports"
+      ],
+      "tables_or_indexes": [
+        "task_runs(task_run_id, status, adapter_id, started_at, updated_at, elapsed_ms, working_dir, prompt_preview)",
+        "task_run_events(task_run_id, event_order, kind, timestamp, payload_json)",
+        "task_run_artifacts(task_run_id, artifact_id, path, media_type, size_bytes, checksum)"
+      ],
+      "why": "This is high-churn app-owned operational data and should be queried by status, time, adapter, decision count, and artifact relationship."
+    },
+    {
+      "id": "decision_inbox",
+      "priority": "p0",
+      "move_to_database": true,
+      "keep_files": [
+        "exported decision packets",
+        "repository governance records when decisions become durable policy"
+      ],
+      "tables_or_indexes": [
+        "decisions(decision_id, task_run_id, status, priority, created_at, updated_at, resume_action)",
+        "decision_options(decision_id, option_id, label, impact)",
+        "decision_answers(decision_id, answered_at, answer, provenance)"
+      ],
+      "why": "Open decisions need indexed filtering and should not require scanning one JSON file or many task folders."
+    },
+    {
+      "id": "workspace_file_and_history_index",
+      "priority": "p1",
+      "move_to_database": true,
+      "keep_files": [
+        "source files",
+        "Markdown docs",
+        "JSON registries",
+        "spec and history files"
+      ],
+      "tables_or_indexes": [
+        "workspace_files(path, category, mtime_ms, size_bytes, content_hash, indexed_at)",
+        "documents(path, title, category, history_date, excerpt, source_bytes, updated_at)",
+        "document_terms(document_id, token, rank)"
+      ],
+      "why": "The source of truth stays in files, but the app should query a maintained index rather than rewalking everything for every startup or refresh."
+    },
+    {
+      "id": "performance_and_resource_telemetry",
+      "priority": "p1",
+      "move_to_database": true,
+      "keep_files": [
+        "release evaluations",
+        "support diagnostic exports"
+      ],
+      "tables_or_indexes": [
+        "performance_samples(surface, operation, started_at, duration_ms, memory_bytes, cpu_percent)",
+        "resource_lifecycle_events(resource_id, kind, state, timestamp, cleanup_status)"
+      ],
+      "why": "Performance work needs trend queries and before/after comparisons across builds."
+    },
+    {
+      "id": "durable_governance_knowledge",
+      "priority": "never_primary_db",
+      "move_to_database": false,
+      "keep_files": [
+        "requirements",
+        "specs",
+        "policies",
+        "philosophy",
+        "traceability",
+        "history summaries"
+      ],
+      "why": "These are durable repository knowledge artifacts and should remain directly editable and reviewable."
+    }
+  ],
+  "migration_slices": [
+    {
+      "id": "db-001-task-run-shadow-index",
+      "status": "planned",
+      "goal": "Create an embedded SQLite database in the app runtime data directory and shadow-index task run metadata while continuing to write existing JSON/log artifacts.",
+      "implementation_notes": [
+        "Add project-local Tauri/Rust SQLite dependency after installation audit.",
+        "Create migrations table and schema version record.",
+        "Backfill recent task run record.json files into task_runs and task_run_artifacts.",
+        "Read task run lists from DB with fallback to file scan until parity tests pass."
+      ],
+      "acceptance": [
+        "Task run list does not scan every run directory on normal startup.",
+        "Deleting the DB and running rebuild recreates the same task run list from files.",
+        "Support bundle still includes file exports without exposing private data."
+      ]
+    },
+    {
+      "id": "db-002-decision-inbox-index",
+      "status": "planned",
+      "goal": "Move active decision filtering and resume lookup into DB while keeping exportable decision packets.",
+      "implementation_notes": [
+        "Write-through on new decisions and answers.",
+        "Backfill _ops/coordination/human-decision-inbox.json only when explicitly selected workspace permits it.",
+        "Expose DB health and migration status in Runtime Data & Support."
+      ],
+      "acceptance": [
+        "Open decisions can be filtered by status, priority, task, and age without scanning files.",
+        "Answering a decision updates DB and exportable record consistently.",
+        "DB corruption falls back to file-backed inbox with a visible recovery message."
+      ]
+    },
+    {
+      "id": "db-003-workspace-file-index",
+      "status": "planned",
+      "goal": "Maintain an incremental file/document/source index for Workspace Monitor and Source Review surfaces.",
+      "implementation_notes": [
+        "Track path, size, mtime, content hash, category, title, and excerpts.",
+        "Use file hash/mtime to skip unchanged Markdown/JSON/source parsing.",
+        "Generate workspace-snapshot.json and admin-history-index.json from DB materialized rows when available."
+      ],
+      "acceptance": [
+        "Cold rebuild remains possible from repository files.",
+        "Warm startup avoids a full document parse for unchanged workspaces.",
+        "Snapshot counts and category summaries match current collector output within documented bounds."
+      ]
+    },
+    {
+      "id": "db-004-performance-telemetry",
+      "status": "planned",
+      "goal": "Store tab switch, startup, collector, memory, and resource cleanup measurements for regression tracking.",
+      "implementation_notes": [
+        "Persist bounded samples only after privacy classification.",
+        "Expose p50/p95 by surface and version in developer view.",
+        "Keep release evaluation summaries in files."
+      ],
+      "acceptance": [
+        "Tab and startup regressions become visible in the app without reading history files.",
+        "Telemetry retention is bounded and configurable.",
+        "No prompt content or secrets are stored as performance samples."
+      ]
+    }
+  ],
+  "validation_gates": [
+    "Database dependency addition has installation, license, security, rollback, and verification records.",
+    "DB path is under app-owned Tauri data/config directories, not platform source directories.",
+    "Each migrated domain has rebuild-from-files or export/backup tests.",
+    "File-backed durable docs/specs/requirements/history remain readable without launching the app.",
+    "Renderer startup and tab switching are measured before and after migration.",
+    "Corrupt, missing, or old-schema DB degrades to visible recovery, not blank UI or app crash.",
+    "Support bundle export redacts secrets and never includes _private, cookies, or unredacted raw logs."
+  ],
+  "open_questions": [
+    {
+      "id": "storage-oq-001",
+      "question": "After db-001, should task run stdout/stderr full text remain file-only or also get a full-text searchable redacted preview table?",
+      "default": "Keep full text file-only and index redacted bounded previews."
+    },
+    {
+      "id": "storage-oq-002",
+      "question": "Should the first DB implementation use Tauri SQL plugin exposed to frontend or Rust-only rusqlite/sqlx commands?",
+      "default": "Prefer Rust-owned commands first so the renderer cannot issue arbitrary SQL."
+    }
+  ]
+}
