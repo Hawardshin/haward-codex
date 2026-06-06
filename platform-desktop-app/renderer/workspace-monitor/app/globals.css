@@ -420,6 +420,8 @@
 .desktop-app-root.theme-dark .sidebar-context-panel,
 .desktop-app-root.theme-dark .sidebar-status-card,
 .desktop-app-root.theme-dark .desktop-runtime-state,
+.desktop-app-root.theme-dark .terminal-agent-bridge-steps article,
+.desktop-app-root.theme-dark .terminal-agent-bridge-actions button,
 .desktop-app-root.theme-dark .titlebar-actions > button,
 .desktop-app-root.theme-dark .titlebar-search,
 .desktop-app-root.theme-dark .desktop-toolbar button,
@@ -464,6 +466,8 @@
   .desktop-app-root.theme-system .sidebar-context-panel,
   .desktop-app-root.theme-system .sidebar-status-card,
   .desktop-app-root.theme-system .desktop-runtime-state,
+  .desktop-app-root.theme-system .terminal-agent-bridge-steps article,
+  .desktop-app-root.theme-system .terminal-agent-bridge-actions button,
   .desktop-app-root.theme-system .titlebar-actions > button,
   .desktop-app-root.theme-system .titlebar-search,
   .desktop-app-root.theme-system .desktop-toolbar button,
@@ -8341,6 +8345,214 @@ h3 {
 .state-unavailable {
   border-color: var(--status-danger-border);
   background: var(--status-danger-bg);
+}
+
+.terminal-agent-bridge {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(360px, 1.35fr) minmax(240px, 0.8fr);
+  gap: 12px;
+  align-items: stretch;
+  border-color: color-mix(in srgb, var(--accent-primary-border) 54%, var(--line));
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-primary-soft) 22%, transparent), transparent 46%),
+    var(--surface);
+}
+
+.terminal-agent-bridge-copy {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+.terminal-agent-bridge-copy h2 {
+  margin: 4px 0 6px;
+  color: var(--text);
+  font-size: var(--font-size-title);
+  line-height: 1.2;
+}
+
+.terminal-agent-bridge-copy p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.terminal-agent-bridge-copy code {
+  min-width: 0;
+  display: block;
+  border: 1px solid var(--line);
+  background: var(--code-bg);
+  border-radius: 7px;
+  padding: 8px;
+  color: var(--text);
+  font-size: var(--font-size-caption);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.terminal-agent-bridge-steps {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.terminal-agent-bridge-steps article {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: var(--hairline-shadow);
+}
+
+.terminal-agent-bridge-steps article > span {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--muted);
+}
+
+.terminal-agent-bridge-steps article div {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.terminal-agent-bridge-steps small {
+  color: var(--muted);
+  font-size: var(--font-size-overline);
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.terminal-agent-bridge-steps strong,
+.terminal-agent-bridge-steps em {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.terminal-agent-bridge-steps strong {
+  color: var(--text);
+  font-size: var(--font-size-body-strong);
+  white-space: nowrap;
+}
+
+.terminal-agent-bridge-steps em {
+  color: var(--muted);
+  font-size: var(--font-size-caption);
+  font-style: normal;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.terminal-agent-bridge-steps article.state-ready {
+  border-color: var(--status-success-border);
+  background: var(--status-success-bg);
+}
+
+.terminal-agent-bridge-steps article.state-ready > span,
+.terminal-agent-bridge-steps article.state-running > span {
+  border-color: var(--status-success-border);
+  color: var(--green);
+}
+
+.terminal-agent-bridge-steps article.state-running {
+  border-color: var(--action-primary-border);
+  background: color-mix(in srgb, var(--action-primary-bg) 14%, var(--surface-raised));
+}
+
+.terminal-agent-bridge-steps article.state-pending {
+  border-color: var(--status-warning-border);
+  background: color-mix(in srgb, var(--surface) 88%, var(--amber) 8%);
+}
+
+.terminal-agent-bridge-steps article.state-pending > span {
+  color: var(--amber);
+}
+
+.terminal-agent-bridge-steps article.state-blocked {
+  border-color: var(--status-danger-border);
+  background: var(--status-danger-bg);
+}
+
+.terminal-agent-bridge-steps article.state-blocked > span {
+  color: var(--red);
+}
+
+.terminal-agent-bridge-actions {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: repeat(3, minmax(var(--control-target-size), auto));
+  gap: 8px;
+}
+
+.terminal-agent-bridge-actions button {
+  min-width: 0;
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  color: var(--text);
+  border-radius: 7px;
+  padding: 8px 10px;
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+  box-shadow: var(--control-shadow);
+}
+
+.terminal-agent-bridge-actions button:first-child {
+  border-color: var(--action-primary-border);
+  background: var(--action-primary-bg);
+  color: var(--action-primary-text);
+}
+
+.terminal-agent-bridge-actions button:hover:not(:disabled) {
+  border-color: var(--state-hover-border);
+  box-shadow: var(--control-hover-shadow), var(--hairline-shadow);
+}
+
+.terminal-agent-bridge-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.terminal-agent-bridge-actions button.desktop-action-current {
+  border-color: var(--action-primary-border);
+  box-shadow: 0 0 0 3px var(--focus-halo), var(--control-shadow);
+}
+
+.terminal-agent-bridge-actions button.desktop-action-current.status-running {
+  background: var(--status-info-bg);
+  color: var(--blue);
+}
+
+.terminal-agent-bridge-actions button.desktop-action-current.status-failed {
+  border-color: var(--status-danger-border);
+  background: var(--status-danger-bg);
+  color: var(--red);
+}
+
+.terminal-agent-bridge-actions button span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .agent-cli-cockpit {
@@ -17388,6 +17600,7 @@ h3 {
   .provider-login-fast-lane,
   .provider-login-steps,
   .provider-account-row dl,
+  .terminal-agent-bridge-steps,
   .terminal-usage-guide,
   .run-board-strip,
   .process-graph,
@@ -17428,6 +17641,9 @@ h3 {
   .session-grid,
   .source-review-grid,
   .desktop-hero,
+  .terminal-agent-bridge,
+  .terminal-agent-bridge-copy,
+  .terminal-agent-bridge-actions,
   .ide-run-toolbar,
   .ide-tool-window-layout,
   .attention-layout,

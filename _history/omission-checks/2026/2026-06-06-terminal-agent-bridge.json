@@ -1,0 +1,108 @@
+{
+  "task": "Terminal Agent Bridge",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "terminal-connection-visible",
+      "description": "Show terminal connection status directly in Desktop Runtime.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "Browser smoke bridgeCount=1"
+      ]
+    },
+    {
+      "item_id": "agent-start-connected",
+      "description": "Start agent/CLI session only after PTY connection path succeeds.",
+      "source": "requirement REQ-TAB",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "startTerminalAgentBridge",
+        "createNativePtySession",
+        "createCliAdapterSession"
+      ]
+    },
+    {
+      "item_id": "failure-feedback",
+      "description": "Do not mark failed session starts as successful desktop actions.",
+      "source": "implementation risk",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "startSelectedLaneAction",
+        "runDesktopAction callers"
+      ]
+    },
+    {
+      "item_id": "no-new-dependency",
+      "description": "Avoid new dependency or daemon install.",
+      "source": "workspace install policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "package files unchanged",
+        "resource check"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-terminal-agent-bridge.ko.md",
+      "purpose": "Requirement record",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-agent-bridge/spec.ko.md",
+      "purpose": "Spec record",
+      "required": true
+    },
+    {
+      "path": "_history/resource-checks/2026/2026-06-06-terminal-agent-bridge.json",
+      "purpose": "Resource lifecycle record",
+      "required": true
+    },
+    {
+      "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-cli-pipeline.json",
+      "purpose": "CLI pipeline record",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-check",
+      "description": "TypeScript and monitor contract checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check"
+      ]
+    },
+    {
+      "check_id": "workspace-monitor-test",
+      "description": "Node test suite passes.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test"
+      ]
+    },
+    {
+      "check_id": "browser-smoke",
+      "description": "Bridge renders and open-terminal action opens the drawer.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Browser smoke output in current Codex run"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "Browser preview cannot execute Tauri native PTY, so actual desktop PTY process smoke remains a follow-up if a running packaged app is required."
+  ],
+  "notes": [
+    "The existing desktop shell minimum width is recorded as an unchanged boundary."
+  ]
+}

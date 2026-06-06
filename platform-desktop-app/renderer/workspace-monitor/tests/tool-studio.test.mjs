@@ -371,6 +371,17 @@ test("Native PTY terminal exposes search, clipboard, and quick command controls"
 });
 
 test("Desktop Runtime exposes an open-source-informed Agent CLI cockpit", () => {
+  assert.match(monitorShell, /"start-terminal-agent-bridge"/);
+  assert.match(monitorShell, /createCliAdapterSession/);
+  assert.match(monitorShell, /createNativePtySession/);
+  assert.match(monitorShell, /startSelectedLaneAction/);
+  assert.match(monitorShell, /startTerminalAgentBridge/);
+  assert.match(monitorShell, /data-terminal-agent-bridge="pty-to-agent"/);
+  assert.match(monitorShell, /data-terminal-agent-step=\{step\.id\}/);
+  assert.match(monitorShell, /data-terminal-agent-action="connect-start"/);
+  assert.match(monitorShell, /data-terminal-agent-action="open-terminal"/);
+  assert.match(monitorShell, /data-desktop-action-feedback="start-terminal-agent-bridge"/);
+  assert.match(monitorShell, /isActiveSessionStatus\(activePty\.status\)/);
   assert.match(monitorShell, /data-agent-cli-cockpit="open-source-control-plane"/);
   assert.match(monitorShell, /Agent CLI Cockpit/);
   assert.match(monitorShell, /openSourceControlPlanePatterns/);
@@ -392,6 +403,10 @@ test("Desktop Runtime exposes an open-source-informed Agent CLI cockpit", () => 
   assert.match(tauriLib, /fn run_native_pipe_probe/);
   assert.match(tauriLib, /run_native_pipe_probe,/);
   assert.match(tauriLib, /pipe_kind: "os_pipe_stdout_to_stdin"/);
+  assert.match(css, /\.terminal-agent-bridge \{/);
+  assert.match(css, /\.terminal-agent-bridge-steps \{/);
+  assert.match(css, /\.terminal-agent-bridge-steps article\.state-ready/);
+  assert.match(css, /\.terminal-agent-bridge-actions button\.desktop-action-current\.status-failed/);
   assert.match(css, /\.agent-cli-cockpit \{/);
   assert.match(css, /\.agent-cli-pattern-strip \{/);
   assert.match(css, /\.agent-cli-cockpit-grid \{/);

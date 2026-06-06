@@ -1,0 +1,100 @@
+{
+  "task": "Terminal Agent Bridge",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Next.js renderer",
+    "Tauri invoke bridge",
+    "portable_pty native PTY",
+    "CLI adapter subprocess",
+    "workspace-monitor browser smoke"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "pty-process-lifecycle",
+      "category": "process",
+      "description": "The bridge may start a native PTY process before starting an agent CLI session.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The bridge reuses existing start_native_pty_terminal and cancel_native_pty_terminal paths; it does not add a new daemon or detached process owner.",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ]
+    },
+    {
+      "risk_id": "agent-session-failure-propagation",
+      "category": "process",
+      "description": "A failed CLI session start could be reported as a successful desktop action.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "createCliAdapterSession throws on Tauri or CLI start failure; startSelectedLaneAction and startTerminalAgentBridge let runDesktopAction mark failure.",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check"
+      ]
+    },
+    {
+      "risk_id": "new-background-runtime",
+      "category": "process",
+      "description": "The feature could add a new long-running background supervisor.",
+      "required": true,
+      "status": "not_applicable",
+      "rationale": "No new supervisor, interval, worker, or dependency was added; existing PTY and CLI stores remain the only runtime owners."
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "pty-create-cleanup-path",
+      "resource": "native PTY session",
+      "create_path": "createNativePtySession -> start_native_pty_terminal",
+      "cleanup_path": "RuntimeTerminalDrawer cancel action -> cancel_native_pty_terminal; Rust Drop disposes PTY runtime",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ]
+    },
+    {
+      "check_id": "cli-session-create-cleanup-path",
+      "resource": "CLI adapter session",
+      "create_path": "createCliAdapterSession -> start_cli_adapter_session",
+      "cleanup_path": "RuntimeTerminalDrawer cancel action -> cancel_cli_adapter_session; Rust cleanup_finished_sessions_locked",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "renderer-contract-check",
+      "metric": "TypeScript, lazy boundary, scroll, source control, history payload checks",
+      "tool": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+      "threshold": "exit code 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "command output in current Codex run"
+      ]
+    },
+    {
+      "check_id": "browser-smoke",
+      "metric": "Bridge visible and terminal drawer opens without starting runtime processes in browser preview",
+      "tool": "in-app Browser on http://127.0.0.1:3216/#section-desktop",
+      "threshold": "bridgeCount=1, stepCount=3, terminal-drawer.open=1 after open-terminal click",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Browser smoke output in current Codex run"
+      ]
+    }
+  ],
+  "notes": [
+    "Browser preview cannot spawn the Tauri PTY, so actual PTY process lifecycle relies on existing Rust command tests and code path inspection.",
+    "Browser smoke dev server was stopped after validation; port 3216 had no listener after shutdown.",
+    "No installation occurred."
+  ]
+}

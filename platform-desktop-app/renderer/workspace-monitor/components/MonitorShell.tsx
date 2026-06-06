@@ -175,6 +175,7 @@ type DesktopActionFeedbackId =
   | "check-adapters"
   | "open-search-agent"
   | "open-terminal"
+  | "start-terminal-agent-bridge"
   | "reveal-workspace"
   | "open-workspace-path"
   | "open-external-terminal"
@@ -12434,22 +12435,33 @@ function DesktopRuntimePanel({
     }
   };
 
-  const startSession = async () => {
-    setTerminalDrawerOpen(true);
+  const createCliAdapterSession = async ({
+    adapterId,
+    prompt,
+    runningId,
+    taskKind
+  }: {
+    adapterId: string;
+    prompt: string;
+    runningId: string;
+    taskKind?: string;
+  }) => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
       setRuntimeState("unavailable");
-      setError(runtimeUnavailableErrorMessage);
-      return;
+      throw new Error(runtimeUnavailableErrorMessage);
     }
 
-    setRunningAdapterId("session");
+    setRunningAdapterId(runningId);
     setError("");
     const args: Record<string, unknown> = {
-      adapterId: selectedSessionAdapterId,
-      prompt: sessionPrompt,
+      adapterId,
+      prompt,
       autoDeferQuestions
     };
+    if (taskKind) {
+      args.taskKind = taskKind;
+    }
     if (workingDir.trim()) {
       args.workingDir = workingDir.trim();
     }
@@ -12458,10 +12470,26 @@ function DesktopRuntimePanel({
       const report = await tauriInvoke<CliSessionReport>("start_cli_adapter_session", args);
       upsertSession(report);
       await refreshTaskRunRecords();
-    } catch (caught) {
-      setError(errorMessage(caught));
+      return report;
     } finally {
       setRunningAdapterId("");
+    }
+  };
+
+  const startSelectedLaneAction = async () => {
+    setTerminalDrawerOpen(true);
+    await createCliAdapterSession({
+      adapterId: selectedSessionAdapterId,
+      prompt: sessionPrompt,
+      runningId: "session"
+    });
+  };
+
+  const startSession = async () => {
+    try {
+      await startSelectedLaneAction();
+    } catch (caught) {
+      setError(errorMessage(caught));
     }
   };
 
@@ -12469,36 +12497,19 @@ function DesktopRuntimePanel({
     setTerminalDrawerOpen(request.openTerminal);
     setSelectedSessionModeId(request.modeId);
     setSessionPrompt(request.prompt);
-    const tauriInvoke = getTauriInvoke();
-    if (!tauriInvoke) {
-      setRuntimeState("unavailable");
-      setError("Tauri desktop runtime is not available in this browser view.");
-      return;
-    }
 
     const availableRequestedAdapter = adapters.find((adapter) => adapter.adapterId === request.adapterId && adapter.available);
     const adapterId = availableRequestedAdapter?.adapterId || adapters.find((adapter) => adapter.available)?.adapterId || request.adapterId;
     setSelectedSessionAdapterId(adapterId);
-    setRunningAdapterId(request.taskKind);
-    setError("");
-    const args: Record<string, unknown> = {
-      adapterId,
-      prompt: request.prompt,
-      autoDeferQuestions,
-      taskKind: request.taskKind
-    };
-    if (workingDir.trim()) {
-      args.workingDir = workingDir.trim();
-    }
-
     try {
-      const report = await tauriInvoke<CliSessionReport>("start_cli_adapter_session", args);
-      upsertSession(report);
-      await refreshTaskRunRecords();
+      await createCliAdapterSession({
+        adapterId,
+        prompt: request.prompt,
+        runningId: request.taskKind,
+        taskKind: request.taskKind
+      });
     } catch (caught) {
       setError(errorMessage(caught));
-    } finally {
-      setRunningAdapterId("");
     }
   };
 
@@ -12662,39 +12673,44 @@ function DesktopRuntimePanel({
     }
   };
 
-  const startNativePtySession = async (size: { rows: number; cols: number }) => {
-    setTerminalDrawerOpen(true);
+  const createNativePtySession = async (size: { rows: number; cols: number }) => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
       setRuntimeState("unavailable");
-      setError(runtimeUnavailableErrorMessage);
-      return;
+      throw new Error(runtimeUnavailableErrorMessage);
     }
 
     setError("");
+    const args: Record<string, unknown> = {
+      rows: Math.max(8, Math.min(80, Math.round(size.rows || 28))),
+      cols: Math.max(24, Math.min(240, Math.round(size.cols || 100)))
+    };
+    if (workingDir.trim()) {
+      args.workingDir = workingDir.trim();
+    }
+    const shellCommand = runtimeCustomization.terminal.shellCommand.trim();
+    if (shellCommand) {
+      args.command = shellCommand;
+    }
+    const report = await tauriInvoke<RuntimeNativePtySession>("start_native_pty_terminal", args);
+    upsertNativePtySession(report);
+    const startupCommand = runtimeCustomization.terminal.startupCommand.trim();
+    if (startupCommand) {
+      const startupInput = startupCommand.endsWith("\n") ? startupCommand : `${startupCommand}\n`;
+      const startupReport = await tauriInvoke<RuntimeNativePtySession>("write_native_pty_terminal_input", {
+        sessionId: report.sessionId,
+        input: startupInput
+      });
+      upsertNativePtySession(startupReport);
+      return startupReport;
+    }
+    return report;
+  };
+
+  const startNativePtySession = async (size: { rows: number; cols: number }) => {
+    setTerminalDrawerOpen(true);
     try {
-      const args: Record<string, unknown> = {
-        rows: Math.max(8, Math.min(80, Math.round(size.rows || 28))),
-        cols: Math.max(24, Math.min(240, Math.round(size.cols || 100)))
-      };
-      if (workingDir.trim()) {
-        args.workingDir = workingDir.trim();
-      }
-      const shellCommand = runtimeCustomization.terminal.shellCommand.trim();
-      if (shellCommand) {
-        args.command = shellCommand;
-      }
-      const report = await tauriInvoke<RuntimeNativePtySession>("start_native_pty_terminal", args);
-      upsertNativePtySession(report);
-      const startupCommand = runtimeCustomization.terminal.startupCommand.trim();
-      if (startupCommand) {
-        const startupInput = startupCommand.endsWith("\n") ? startupCommand : `${startupCommand}\n`;
-        const startupReport = await tauriInvoke<RuntimeNativePtySession>("write_native_pty_terminal_input", {
-          sessionId: report.sessionId,
-          input: startupInput
-        });
-        upsertNativePtySession(startupReport);
-      }
+      await createNativePtySession(size);
     } catch (caught) {
       setError(errorMessage(caught));
     }
@@ -13438,6 +13454,13 @@ function DesktopRuntimePanel({
             detail: uiLanguage === "ko" ? "현재 실행 중인 CLI 세션과 네이티브 PTY 출력을 확인할 수 있도록 터미널 패널을 엽니다." : "Opens the terminal panel so running CLI sessions and native PTY output are visible.",
             next: uiLanguage === "ko" ? "상태바의 Terminal 값과 하단 드로어를 확인하세요." : "Check the Terminal status and the bottom drawer."
           };
+        case "start-terminal-agent-bridge":
+          return {
+            label: uiLanguage === "ko" ? "터미널 연결 후 에이전트 시작" : "Connect terminal and start agent",
+            scope: `${selectedAdapter?.label || selectedSessionAdapterId} · ${selectedMode.label}`,
+            detail: uiLanguage === "ko" ? "네이티브 PTY 셸을 먼저 연결한 뒤, 같은 작업 폴더와 선택 모드로 에이전트 CLI 세션을 시작합니다." : "Connects the native PTY shell first, then starts the agent CLI session with the same working folder and selected mode.",
+            next: uiLanguage === "ko" ? "하단 터미널의 PTY 탭과 출력 탭에서 연결과 에이전트 세션을 함께 확인하세요." : "Check the PTY and Output tabs in the bottom terminal together."
+          };
         case "reveal-workspace":
           return {
             label: uiLanguage === "ko" ? "Finder에서 보기" : "Reveal in file manager",
@@ -13696,7 +13719,7 @@ function DesktopRuntimePanel({
       primaryLabel: uiLanguage === "ko" ? "세션 시작" : "Start session",
       secondaryLabel: uiLanguage === "ko" ? "실행 설정" : "Run settings",
       primaryDisabled: !runtimeReady || runningAdapterId !== "",
-      onPrimary: () => runDesktopAction("start-selected-lane", startSession),
+      onPrimary: () => runDesktopAction("start-selected-lane", startSelectedLaneAction),
       onSecondary: () => onOpenSettings("session")
     },
     {
@@ -13888,6 +13911,40 @@ function DesktopRuntimePanel({
     decisionItems: openInboxDecisions.length + pendingQuestionCount,
     taskRuns: taskRunRecords.length
   };
+  const terminalAgentBridgeAdapterId = selectedAdapter?.adapterId || selectedSessionAdapterId;
+  const selectedNativePtyReady = Boolean(selectedNativePtySession && isActiveSessionStatus(selectedNativePtySession.status));
+  const terminalAgentBridgeAdapterReady = Boolean(selectedAdapter?.available);
+  const terminalAgentBridgePromptReady = sessionPrompt.trim() !== "";
+  const terminalAgentBridgeCanStart =
+    runtimeReady && terminalAgentBridgeAdapterReady && terminalAgentBridgePromptReady && runningAdapterId === "";
+  const selectedAdapterActiveSession =
+    sessions.find((session) => session.adapterId === terminalAgentBridgeAdapterId && isActiveSessionStatus(session.status)) || null;
+  const terminalAgentBridgeSteps = [
+    {
+      id: "pty",
+      icon: SquareTerminal,
+      state: selectedNativePtyReady ? "ready" : runtimeReady ? "pending" : "blocked",
+      label: uiLanguage === "ko" ? "터미널 연결" : "Terminal connection",
+      value: selectedNativePtyReady ? uiLanguage === "ko" ? "연결됨" : "Connected" : uiLanguage === "ko" ? "PTY 필요" : "PTY needed",
+      detail: selectedNativePtySession?.sessionId || (uiLanguage === "ko" ? "네이티브 PTY를 먼저 엽니다" : "Open native PTY first")
+    },
+    {
+      id: "adapter",
+      icon: CheckCircle2,
+      state: terminalAgentBridgeAdapterReady ? "ready" : "blocked",
+      label: uiLanguage === "ko" ? "CLI 어댑터" : "CLI adapter",
+      value: terminalAgentBridgeAdapterReady ? uiLanguage === "ko" ? "준비됨" : "Ready" : uiLanguage === "ko" ? "설정 필요" : "Setup needed",
+      detail: selectedAdapter?.label || terminalAgentBridgeAdapterId
+    },
+    {
+      id: "agent",
+      icon: Bot,
+      state: selectedAdapterActiveSession ? "running" : terminalAgentBridgeCanStart ? "ready" : "pending",
+      label: uiLanguage === "ko" ? "에이전트 세션" : "Agent session",
+      value: selectedAdapterActiveSession ? uiLanguage === "ko" ? "실행 중" : "Running" : selectedMode.label,
+      detail: selectedAdapterActiveSession?.sessionId || (terminalAgentBridgePromptReady ? sessionPrompt.slice(0, 96) : uiLanguage === "ko" ? "초기 입력 필요" : "Initial input needed")
+    }
+  ];
   const openSourceControlPlanePatterns = [
     {
       id: "cao",
@@ -14001,6 +14058,37 @@ function DesktopRuntimePanel({
       prompt: sessionPrompt,
       openTerminal: true,
       autoStart: true
+    });
+  };
+  const startTerminalAgentBridge = async () => {
+    if (!runtimeReady) {
+      throw new Error(runtimeUnavailableErrorMessage);
+    }
+    if (!terminalAgentBridgeAdapterReady) {
+      throw new Error(uiLanguage === "ko" ? "선택한 CLI 어댑터가 준비되지 않았습니다." : "The selected CLI adapter is not ready.");
+    }
+    if (!terminalAgentBridgePromptReady) {
+      throw new Error(uiLanguage === "ko" ? "에이전트 초기 입력을 먼저 작성하세요." : "Enter the agent initial input first.");
+    }
+    setTerminalDrawerOpen(true);
+    if (selectedSessionAdapterId !== terminalAgentBridgeAdapterId) {
+      setSelectedSessionAdapterId(terminalAgentBridgeAdapterId);
+    }
+    const activePty =
+      selectedNativePtyReady && selectedNativePtySession
+        ? selectedNativePtySession
+        : await createNativePtySession({
+            rows: selectedNativePtySession?.rows || 28,
+            cols: selectedNativePtySession?.cols || 100
+          });
+    if (!activePty || !isActiveSessionStatus(activePty.status)) {
+      throw new Error(uiLanguage === "ko" ? "네이티브 PTY 연결이 완료되지 않아 에이전트를 시작하지 않았습니다." : "Native PTY did not become writable, so the agent was not started.");
+    }
+    await createCliAdapterSession({
+      adapterId: terminalAgentBridgeAdapterId,
+      prompt: sessionPrompt,
+      runningId: "session",
+      taskKind: selectedMode.id
     });
   };
 
@@ -14689,6 +14777,74 @@ function DesktopRuntimePanel({
         </div>
       </section>
 
+      <section className="panel wide terminal-agent-bridge" data-terminal-agent-bridge="pty-to-agent">
+        <div className="terminal-agent-bridge-copy">
+          <div>
+            <p className="eyebrow">{uiLanguage === "ko" ? "터미널 연결 실행" : "Terminal-connected run"}</p>
+            <h2>{uiLanguage === "ko" ? "PTY를 연결하고 에이전트를 바로 시작" : "Connect PTY and start the agent"}</h2>
+            <p>
+              {uiLanguage === "ko"
+                ? "네이티브 터미널이 먼저 열리고, 연결이 쓰기 가능한 상태가 된 뒤 같은 작업 폴더에서 선택한 agent/CLI 세션을 시작합니다."
+                : "The native terminal opens first; once it is writable, the selected agent/CLI session starts in the same working folder."}
+            </p>
+          </div>
+          <code>{workingDir.trim() || workspacePathLabel}</code>
+        </div>
+
+        <div className="terminal-agent-bridge-steps" aria-label={uiLanguage === "ko" ? "터미널 에이전트 연결 상태" : "Terminal agent bridge status"}>
+          {terminalAgentBridgeSteps.map((step) => {
+            const Icon = step.icon;
+            return (
+              <article key={step.id} className={`state-${step.state}`} data-terminal-agent-step={step.id}>
+                <span>
+                  <Icon size={15} aria-hidden="true" />
+                </span>
+                <div>
+                  <small>{step.label}</small>
+                  <strong>{step.value}</strong>
+                  <em>{step.detail}</em>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        <div className="terminal-agent-bridge-actions">
+          <button
+            type="button"
+            className={desktopActionButtonClass("start-terminal-agent-bridge")}
+            data-terminal-agent-action="connect-start"
+            data-desktop-action-feedback="start-terminal-agent-bridge"
+            onClick={() =>
+              void runDesktopAction(
+                "start-terminal-agent-bridge",
+                startTerminalAgentBridge,
+                uiLanguage === "ko" ? "PTY 연결 후 에이전트 CLI 세션을 시작했습니다." : "Connected PTY, then started the agent CLI session."
+              )
+            }
+            disabled={!terminalAgentBridgeCanStart}
+          >
+            <PlayCircle size={16} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "연결하고 에이전트 시작" : "Connect and start agent"}</span>
+          </button>
+          <button
+            type="button"
+            data-terminal-agent-action="open-terminal"
+            onClick={() => {
+              setTerminalDrawerOpen(true);
+              setDesktopActionStatus("open-terminal", "done", uiLanguage === "ko" ? "하단 터미널 패널을 열었습니다." : "Opened the bottom terminal panel.");
+            }}
+          >
+            <SquareTerminal size={15} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "터미널 보기" : "Open terminal"}</span>
+          </button>
+          <button type="button" data-terminal-agent-action="settings" onClick={() => onOpenSettings(terminalAgentBridgeAdapterReady ? "session" : "adapter")}>
+            <Settings size={15} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "연결 설정" : "Connection settings"}</span>
+          </button>
+        </div>
+      </section>
+
       <section className="panel wide agent-cli-cockpit" data-agent-cli-cockpit="open-source-control-plane">
         <div className="panel-heading">
           <div>
@@ -14806,7 +14962,7 @@ function DesktopRuntimePanel({
             <small>{selectedAdapter?.label || selectedSessionAdapterId} / {selectedMode.label} / {workspaceExplorerRootLabel}</small>
           </div>
           <div className="ide-run-actions">
-            <button className="ide-toolbar-button primary" type="button" onClick={() => void runDesktopAction("start-selected-lane", startSession)} disabled={!runtimeReady || runningAdapterId !== ""}>
+            <button className="ide-toolbar-button primary" type="button" onClick={() => void runDesktopAction("start-selected-lane", startSelectedLaneAction)} disabled={!runtimeReady || runningAdapterId !== ""}>
               <PlayCircle size={15} aria-hidden="true" />
               <span>{uiLanguage === "ko" ? "실행" : "Run"}</span>
             </button>
@@ -14826,7 +14982,7 @@ function DesktopRuntimePanel({
 
         <div className="ide-tool-window-layout">
           <nav className="ide-tool-window-rail" aria-label={uiLanguage === "ko" ? "도구 창" : "Tool windows"}>
-            <button type="button" className="active" onClick={() => void runDesktopAction("start-selected-lane", startSession)} disabled={!runtimeReady || runningAdapterId !== ""}>
+            <button type="button" className="active" onClick={() => void runDesktopAction("start-selected-lane", startSelectedLaneAction)} disabled={!runtimeReady || runningAdapterId !== ""}>
               <PlayCircle size={15} aria-hidden="true" />
               <span>{uiLanguage === "ko" ? "실행" : "Run"}</span>
             </button>
@@ -15057,7 +15213,7 @@ function DesktopRuntimePanel({
             type="button"
             className={desktopActionButtonClass("start-selected-lane")}
             data-desktop-action-feedback="start-selected-lane"
-            onClick={() => void runDesktopAction("start-selected-lane", startSession)}
+            onClick={() => void runDesktopAction("start-selected-lane", startSelectedLaneAction)}
             disabled={!invoke || runningAdapterId !== "" || !adapters.some((adapter) => adapter.adapterId === selectedSessionAdapterId && adapter.available)}
           >
             <PlayCircle size={16} aria-hidden="true" />
@@ -15118,7 +15274,7 @@ function DesktopRuntimePanel({
             type="button"
             className={desktopActionButtonClass("start-selected-lane")}
             data-desktop-action-feedback="start-selected-lane"
-            onClick={() => void runDesktopAction("start-selected-lane", startSession)}
+            onClick={() => void runDesktopAction("start-selected-lane", startSelectedLaneAction)}
             disabled={!invoke || runningAdapterId !== "" || !adapters.some((adapter) => adapter.adapterId === selectedSessionAdapterId && adapter.available)}
           >
             <SquareTerminal size={16} aria-hidden="true" />

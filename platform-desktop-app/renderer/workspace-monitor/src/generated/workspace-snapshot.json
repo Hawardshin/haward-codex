@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T13:48:43.331Z",
+  "generatedAt": "2026-06-06T14:08:49.078Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 5,
@@ -17,7 +17,7 @@
     "webSearches": 12,
     "timingRecords": 11,
     "historyDays": 1,
-    "adminHistoryDocuments": 2778,
+    "adminHistoryDocuments": 2787,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7870,11 +7870,251 @@
       "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 21358,
-      "updatedAt": "2026-06-06T13:48:34.957Z",
+      "sourceBytes": 21985,
+      "updatedAt": "2026-06-06T14:07:16.091Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Terminal Agent Bridge Input",
+      "excerpt": "{ \"initial instruction\": \"터미널 연결 기능 에이전트 기능 똑바로.\", \"result summary\": \"Added a Desktop Runtime terminal agent bridge that gates agent CLI session start on native PTY readiness and exposes PTY, adapter, and agent session status in one flow.\", \"work mode\": \"standard\", \"changed files",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;터미널 연결 기능 에이전트 기능 똑바로.&quot;, &quot;result summary&quot;: &quot;Added a Desktop Runtime terminal agent bridge that gates agent CLI session start on native PTY readiness and exposes PTY, adapter, and agent session status in one flow.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx&quot;</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3779,
+      "updatedAt": "2026-06-06T14:07:16.091Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "최종 평가: Terminal Agent Bridge",
+      "excerpt": "최종 평가: Terminal Agent Bridge 날짜: 2026 06 06 평가 사용자의 “터미널 연결 기능, 에이전트 기능을 제대로” 요구에 대해 Desktop Runtime에서 PTY 연결과 agent CLI session 시작을 한 흐름으로 묶는 첫 slice를 구현했다. 충족 PTY, CLI adapter, agent session 상태를 bridge 카드로 표시한다. 연결 실행 버튼은 runtime/adapter/prompt가 준비된 경우에만 활성화된다. PTY 연결이 writable",
+      "html": "<p>최종 평가: Terminal Agent Bridge 날짜: 2026 06 06 평가 사용자의 “터미널 연결 기능, 에이전트 기능을 제대로” 요구에 대해 Desktop Runtime에서 PTY 연결과 agent CLI session 시작을 한 흐름으로 묶는 첫 slice를 구현했다. 충족 PTY, CLI adapter, agent session 상태를 bridge 카드로 표시한다. 연결 실행 버튼은 runtime/adapter/prompt가 준비된 경우에만 활성화된다. PTY 연결이 writable 상태가 아니면 agent session을 시작하지 않는다. 기존 start selected lane action도 실패를 action feed</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1127,
+      "updatedAt": "2026-06-06T14:07:16.090Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-terminal-agent-bridge-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-terminal-agent-bridge.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Terminal Agent Bridge",
+      "excerpt": "요청 결과 추적: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 결과 Desktop Runtime에 PTY CLI adapter agent session bridge UI 추가. createNativePtySession , createCliAdapterSession , startTerminalAgentBridge 추가. 기존 start selected lane action feedback 실패 전파 보강. CSS와 te",
+      "html": "<p>요청 결과 추적: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 결과 Desktop Runtime에 PTY CLI adapter agent session bridge UI 추가. createNativePtySession , createCliAdapterSession , startTerminalAgentBridge 추가. 기존 start selected lane action feedback 실패 전파 보강. CSS와 test contract 추가. 주요 산출물 platform desktop app/renderer/workspace monitor/component</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 976,
+      "updatedAt": "2026-06-06T14:07:16.090Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-terminal-agent-bridge-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-terminal-agent-bridge.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Terminal Agent Bridge",
+      "excerpt": "작업 요약: Terminal Agent Bridge 날짜: 2026 06 06 Desktop Runtime에 terminal agent bridge 를 추가해 native PTY, CLI adapter, agent session 상태를 한 흐름으로 표시했다. 새 startTerminalAgentBridge 는 PTY를 먼저 만들고 writable 상태가 아니면 agent CLI session을 시작하지 않는다. 기존 선택 실행 버튼도 action feedback용 실행 함수가 실패를 전파하도록 분",
+      "html": "<p>작업 요약: Terminal Agent Bridge 날짜: 2026 06 06 Desktop Runtime에 terminal agent bridge 를 추가해 native PTY, CLI adapter, agent session 상태를 한 흐름으로 표시했다. 새 startTerminalAgentBridge 는 PTY를 먼저 만들고 writable 상태가 아니면 agent CLI session을 시작하지 않는다. 기존 선택 실행 버튼도 action feedback용 실행 함수가 실패를 전파하도록 분리했다. 검증: workspace monitor check/test, desktop renderer build, Browser smoke 통과.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 520,
+      "updatedAt": "2026-06-06T14:07:16.090Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-terminal-agent-bridge-ko-md",
+      "path": "_history/work-timings/2026/2026-06-06-terminal-agent-bridge.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "작업 시간 기록: Terminal Agent Bridge",
+      "excerpt": "작업 시간 기록: Terminal Agent Bridge 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | xterm.js, portable pty, Tauri, VS Code terminal docs 확인 | | source inventory | 완료 | RuntimeTerminalDrawer, MonitorShell, Rust PTY/CLI commands 확인 | | 구현 | 완료 | bridge UI와 실패 전파 helper 추가 | | 검증 ",
+      "html": "<p>작업 시간 기록: Terminal Agent Bridge 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | xterm.js, portable pty, Tauri, VS Code terminal docs 확인 | | source inventory | 완료 | RuntimeTerminalDrawer, MonitorShell, Rust PTY/CLI commands 확인 | | 구현 | 완료 | bridge UI와 실패 전파 helper 추가 | | 검증 | 진행 | check/test/build/Browser smoke 완료, final collect/check 남음 | | 기록 | 진행 | r</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 685,
+      "updatedAt": "2026-06-06T14:07:16.090Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-cli-pipeline-json",
+      "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-cli-pipeline.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Terminal Agent Bridge Cli Pipeline",
+      "excerpt": "{ \"pipeline id\": \"terminal agent bridge\", \"purpose\": \"Coordinate the UI action that connects native PTY terminal state before starting an agent CLI session.\", \"work mode\": \"standard\", \"risk level\": \"medium\", \"processes\": { \"process id\": \"terminal agent bridge action\", \"adapter id",
+      "html": "<p>{ &quot;pipeline id&quot;: &quot;terminal agent bridge&quot;, &quot;purpose&quot;: &quot;Coordinate the UI action that connects native PTY terminal state before starting an agent CLI session.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;risk level&quot;: &quot;medium&quot;, &quot;processes&quot;: { &quot;process id&quot;: &quot;terminal agent bridge action&quot;, &quot;adapter id&quot;: &quot;platform desktop app runtime&quot;, &quot;command&quot;: &quot;start terminal agent bridge&quot;, &quot;ar</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3908,
+      "updatedAt": "2026-06-06T14:07:16.089Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-terminal-agent-bridge-ko-md",
+      "path": "_history/plans/2026/2026-06-06-terminal-agent-bridge.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "작업 계획: Terminal Agent Bridge",
+      "excerpt": "작업 계획: Terminal Agent Bridge 1. 공식 문서와 기존 PTY/CLI/agent 구현을 확인한다. 2. helper를 분리해 PTY/CLI session 실패가 action feedback에 전파되게 한다. 3. Desktop Runtime에 terminal agent bridge UI를 추가한다. 4. CSS와 테스트 계약을 보강한다. 5. Browser smoke, check/test/build, resource/CLI/omission/evaluation 검증을 수행한다. ",
+      "html": "<p>작업 계획: Terminal Agent Bridge 1. 공식 문서와 기존 PTY/CLI/agent 구현을 확인한다. 2. helper를 분리해 PTY/CLI session 실패가 action feedback에 전파되게 한다. 3. Desktop Runtime에 terminal agent bridge UI를 추가한다. 4. CSS와 테스트 계약을 보강한다. 5. Browser smoke, check/test/build, resource/CLI/omission/evaluation 검증을 수행한다. work mode: standard</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 416,
+      "updatedAt": "2026-06-06T14:07:16.088Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-terminal-agent-bridge-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-terminal-agent-bridge.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: Terminal Agent Bridge",
+      "excerpt": "User Request: Terminal Agent Bridge 날짜: 2026 06 06 요약: 터미널 연결 기능과 에이전트 기능이 분리되어 어색하지 않게, 실제 연결 실행 흐름으로 제대로 동작하게 개선해 달라는 요청. 범위 결정: 기존 native PTY와 CLI agent session command를 재사용해 Desktop Runtime 첫 화면에 연결 bridge를 추가한다.",
+      "html": "<p>User Request: Terminal Agent Bridge 날짜: 2026 06 06 요약: 터미널 연결 기능과 에이전트 기능이 분리되어 어색하지 않게, 실제 연결 실행 흐름으로 제대로 동작하게 개선해 달라는 요청. 범위 결정: 기존 native PTY와 CLI agent session command를 재사용해 Desktop Runtime 첫 화면에 연결 bridge를 추가한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 376,
+      "updatedAt": "2026-06-06T14:07:16.088Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-terminal-agent-bridge-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-terminal-agent-bridge.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Terminal Agent Bridge",
+      "excerpt": "Web Search: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 검색 VS Code terminal shell integration API official documentation pty terminal extension API xterm.js attach addon official documentation terminal websocket pty node pty official GitHub pseudotermina",
+      "html": "<p>Web Search: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 검색 VS Code terminal shell integration API official documentation pty terminal extension API xterm.js attach addon official documentation terminal websocket pty node pty official GitHub pseudoterminal process documentation portable pty Rust crate official documentation pseudo te</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1465,
+      "updatedAt": "2026-06-06T14:07:16.088Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-agent-bridge-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-agent-bridge/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Terminal Agent Bridge",
+      "excerpt": "Traceability: Terminal Agent Bridge | Requirement | Source target | Validation | | | | | | PTY와 agent 실행을 한 흐름으로 표시 | MonitorShell.tsx , .terminal agent bridge | Browser smoke, test | | PTY 성공 후 CLI session 시작 | startTerminalAgentBridge , createNativePtySession , createCliAdapter",
+      "html": "<h1>Traceability: Terminal Agent Bridge</h1>\n<table><thead><tr><th>Requirement</th><th>Source target</th><th>Validation</th></tr></thead><tbody><tr><td>PTY와 agent 실행을 한 흐름으로 표시</td><td><code>MonitorShell.tsx</code>, <code>.terminal-agent-bridge</code></td><td>Browser smoke, test</td></tr><tr><td>PTY 성공 후 CLI session 시작</td><td><code>startTerminalAgentBridge</code>, <code>createNativePtySession</code>, <code>createCliAdapterSession</code></td><td>TypeScript check, test</td></tr><tr><td>실패를 action feedback에 전파</td><td><code>startSelectedLaneAction</code>, <code>runDesktopAction</code> callers</td><td>TypeScript check, test</td></tr><tr><td>runtime 없는 preview에서 안전 비활성</td><td><code>terminalAgentBridgeCanStart</code></td><td>Browser smoke</td></tr><tr><td>새 dependency 없음</td><td><code>package.json</code> unchanged</td><td>git diff, build</td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 659,
+      "updatedAt": "2026-06-06T14:07:16.088Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-agent-bridge-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-agent-bridge/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Terminal Agent Bridge",
+      "excerpt": "Validation: Terminal Agent Bridge 실행 완료 corepack pnpm dir platform desktop app/renderer/workspace monitor run check : 통과 corepack pnpm dir platform desktop app/renderer/workspace monitor test : 통과, 90 tests corepack pnpm w run desktop:renderer:build : 통과, customer bundle audit 통과",
+      "html": "<h1>Validation: Terminal Agent Bridge</h1>\n<h2>실행 완료</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code>: 통과, 90 tests</li>\n<li><code>corepack pnpm -w run desktop:renderer:build</code>: 통과, customer bundle audit 통과</li>\n<li>Browser smoke:</li>\n<li><code>http://127.0.0.1:3216/#section-desktop</code></li>\n<li>desktop 1280x720에서 bridge 1개, step 3개, bridge viewport 내 표시 확인</li>\n<li>Browser preview에서 Tauri runtime 없음으로 connect-start 버튼 비활성 확인</li>\n<li><code>data-terminal-agent-action=&quot;open-terminal&quot;</code> 클릭 후 <code>.terminal-drawer.open</code> 1개 확인</li>\n</ul>\n<h2>추가 예정</h2>\n<ul>\n<li>developer snapshot collect</li>\n<li><code>platform-desktop-app</code> check</li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>알려진 경계</h2>\n<ul>\n<li>모바일 390px viewport에서는 기존 <code>--desktop-app-min-width: 1280px</code> desktop shell 정책 때문에 전체 앱이 1280px 폭을 유지한다. 이번 slice는 bridge 자체의 responsive grid를 추가했지만 desktop shell 최소 폭 정책은 변경하지 않았다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1059,
+      "updatedAt": "2026-06-06T14:07:16.088Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-agent-bridge-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-agent-bridge/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Terminal Agent Bridge",
+      "excerpt": "Plan: Terminal Agent Bridge 1. 공식 문서로 xterm.js, portable pty, Tauri command/invoke, VS Code terminal integration 경계를 확인한다. 2. 기존 RuntimeTerminalDrawer , native PTY, CLI session 시작 경로를 확인한다. 3. PTY/CLI 시작 helper를 실패 전파 가능하게 분리한다. 4. Desktop Runtime에 terminal agent bridge 상태 카드와 ac",
+      "html": "<h1>Plan: Terminal Agent Bridge</h1>\n<p>1. 공식 문서로 xterm.js, portable-pty, Tauri command/invoke, VS Code terminal integration 경계를 확인한다.</p>\n<p>2. 기존 <code>RuntimeTerminalDrawer</code>, native PTY, CLI session 시작 경로를 확인한다.</p>\n<p>3. PTY/CLI 시작 helper를 실패 전파 가능하게 분리한다.</p>\n<p>4. Desktop Runtime에 terminal-agent bridge 상태 카드와 actions를 추가한다.</p>\n<p>5. CSS와 문자열 계약 테스트를 추가한다.</p>\n<p>6. Browser smoke로 bridge 표시와 terminal drawer open action을 확인한다.</p>\n<p>7. resource, CLI pipeline, omission, evaluation 기록을 남긴다.</p>\n<p>8. check/test/build/collect/check를 실행하고 commit/push한다.</p>\n<h2>모드 선택</h2>\n<ul>\n<li>work_mode: <code>standard</code></li>\n<li>이유: UI와 runtime process flow가 함께 바뀌는 의미 있는 구현이지만 새 dependency나 공개 release 변경은 없다.</li>\n</ul>\n<h2>계획 근거</h2>\n<ul>\n<li><code>platform-desktop-app/specs/2026-06-06-native-pty-terminal-runtime/</code></li>\n<li><code>platform-desktop-app/specs/2026-06-06-agent-cli-cockpit/</code></li>\n<li><code>platform-desktop-app/specs/2026-06-06-terminal-command-center-usability/</code></li>\n<li>공식 xterm.js/Tauri/portable-pty/VS Code terminal documentation.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1147,
+      "updatedAt": "2026-06-06T14:07:16.087Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-agent-bridge-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-agent-bridge/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Terminal Agent Bridge",
+      "excerpt": "Spec: Terminal Agent Bridge 목표 Desktop Runtime에서 터미널 연결과 에이전트 실행을 같은 작업 흐름으로 묶는다. 사용자가 별도 drawer, cockpit, 실행 버튼을 추측하지 않아도 PTY 연결 상태와 에이전트 세션 상태를 한 번에 확인하고 시작할 수 있어야 한다. 구현 범위 MonitorShell.tsx createNativePtySession helper: 기존 native PTY 시작 로직을 반환값 있는 helper로 분리한다. createCliAdapt",
+      "html": "<h1>Spec: Terminal Agent Bridge</h1>\n<h2>목표</h2>\n<p>Desktop Runtime에서 터미널 연결과 에이전트 실행을 같은 작업 흐름으로 묶는다. 사용자가 별도 drawer, cockpit, 실행 버튼을 추측하지 않아도 PTY 연결 상태와 에이전트 세션 상태를 한 번에 확인하고 시작할 수 있어야 한다.</p>\n<h2>구현 범위</h2>\n<ul>\n<li><code>MonitorShell.tsx</code></li>\n<li><code>createNativePtySession</code> helper: 기존 native PTY 시작 로직을 반환값 있는 helper로 분리한다.</li>\n<li><code>createCliAdapterSession</code> helper: 기존 CLI session 시작 로직을 실패 전파 가능한 helper로 분리한다.</li>\n<li><code>startTerminalAgentBridge</code>: runtime, adapter, prompt를 확인하고 PTY 연결 후 CLI session을 시작한다.</li>\n<li><code>terminal-agent-bridge</code> UI: PTY, adapter, agent 세 단계 상태와 action buttons를 노출한다.</li>\n<li><code>globals.css</code></li>\n<li>bridge layout, state cards, action button 상태, desktop/mobile grid fallback을 추가한다.</li>\n<li><code>tool-studio.test.mjs</code></li>\n<li>bridge surface, helper, stable data attributes, failure feedback CSS 계약을 검증한다.</li>\n</ul>\n<h2>언어/런타임 선택</h2>\n<ul>\n<li>옵션 A: TypeScript renderer bridge. 기존 Tauri commands와 terminal drawer 상태를 재사용할 수 있어 선택했다.</li>\n<li>옵션 B: 새 Rust supervisor command. 실제 process orchestration authority는 강하지만, 현재 요구에는 새 command와 cleanup surface가 과하다.</li>\n<li>선택: TypeScript renderer bridge + 기존 Rust PTY/CLI commands.</li>\n</ul>\n<h2>아키텍처 선택</h2>\n<ul>\n<li>옵션 A: Desktop Runtime 상단 bridge UI + 실패 전파 helper. 사용자 흐름이 바로 보이고 회귀 범위가 좁다.</li>\n<li>옵션 B: RuntimeTerminalDrawer 내부에만 연결 버튼 추가. 구현은 작지만 첫 화면에서 기능을 찾기 어렵다.</li>\n<li>옵션 C: 새 agent terminal supervisor. 장기적으로 가능하지만 이번 slice의 검증/cleanup 비용이 크다.</li>\n<li>선택: 옵션 A.</li>\n</ul>\n<h2>폴더 구조 선택</h2>\n<ul>\n<li>옵션 A: 기존 <code>MonitorShell.tsx</code>, <code>globals.css</code>, 테스트 파일에 좁게 추가한다.</li>\n<li>옵션 B: 새 component 파일로 분리한다.</li>\n<li>선택: 옵션 A. bridge가 Desktop Runtime local state와 helper를 직접 사용하므로 새 폴더를 만들지 않는다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>Desktop Runtime에 <code>data-terminal-agent-bridge=&quot;pty-to-agent&quot;</code>가 1개 표시된다.</li>\n<li>상태 step은 <code>pty</code>, <code>adapter</code>, <code>agent</code> 3개다.</li>\n<li><code>data-terminal-agent-action=&quot;connect-start&quot;</code>는 runtime/adapter/prompt 준비 시만 활성화된다.</li>\n<li><code>startTerminalAgentBridge</code>는 PTY가 writable 상태가 아니면 CLI session을 시작하지 않는다.</li>\n<li>check/test/build/browser smoke가 통과한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2606,
+      "updatedAt": "2026-06-06T14:07:16.087Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-agent-bridge-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-agent-bridge/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Terminal Agent Bridge",
+      "excerpt": "Tasks: Terminal Agent Bridge x web first intake 수행 x 기존 PTY/CLI/agent 실행 경로 확인 x createCliAdapterSession , createNativePtySession helper 추가 x startTerminalAgentBridge 추가 x Desktop Runtime bridge UI 추가 x CSS responsive/state/action styling 추가 x 문자열 계약 테스트 보강 x Browser smoke 수행 x r",
+      "html": "<h1>Tasks: Terminal Agent Bridge</h1>\n<ul>\n<li>[x] web-first intake 수행</li>\n<li>[x] 기존 PTY/CLI/agent 실행 경로 확인</li>\n<li>[x] <code>createCliAdapterSession</code>, <code>createNativePtySession</code> helper 추가</li>\n<li>[x] <code>startTerminalAgentBridge</code> 추가</li>\n<li>[x] Desktop Runtime bridge UI 추가</li>\n<li>[x] CSS responsive/state/action styling 추가</li>\n<li>[x] 문자열 계약 테스트 보강</li>\n<li>[x] Browser smoke 수행</li>\n<li>[x] resource, CLI pipeline, omission 기록 추가</li>\n<li>[ ] final collect/check, commit, push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 470,
+      "updatedAt": "2026-06-06T14:07:16.087Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-terminal-agent-bridge-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-terminal-agent-bridge.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: Terminal Agent Bridge",
+      "excerpt": "요구사항: Terminal Agent Bridge 사용자 요구 터미널 연결 기능과 에이전트 실행 기능이 분리되어 보이지 않도록 제대로 연결한다. 기능 요구사항 Desktop Runtime 첫 화면에서 native PTY 연결, CLI 어댑터 준비, 에이전트 세션 상태를 한 흐름으로 보여준다. 사용자는 한 버튼으로 PTY를 먼저 연결하고, 연결이 쓰기 가능한 상태가 된 뒤 선택된 에이전트/CLI 세션을 시작할 수 있어야 한다. PTY 연결이 실패하면 에이전트 세션을 시작하지 않고 실패 상태를 남긴다",
+      "html": "<h1>요구사항: Terminal Agent Bridge</h1>\n<h2>사용자 요구</h2>\n<p>터미널 연결 기능과 에이전트 실행 기능이 분리되어 보이지 않도록 제대로 연결한다.</p>\n<h2>기능 요구사항</h2>\n<ul>\n<li>Desktop Runtime 첫 화면에서 native PTY 연결, CLI 어댑터 준비, 에이전트 세션 상태를 한 흐름으로 보여준다.</li>\n<li>사용자는 한 버튼으로 PTY를 먼저 연결하고, 연결이 쓰기 가능한 상태가 된 뒤 선택된 에이전트/CLI 세션을 시작할 수 있어야 한다.</li>\n<li>PTY 연결이 실패하면 에이전트 세션을 시작하지 않고 실패 상태를 남긴다.</li>\n<li>기존 선택 실행 버튼도 Desktop action feedback에서 실패를 성공으로 오인하지 않도록 실패를 전파한다.</li>\n<li>Browser preview처럼 Tauri runtime이 없는 환경에서는 연결 실행 버튼이 비활성화되어야 한다.</li>\n</ul>\n<h2>비기능 요구사항</h2>\n<ul>\n<li>새 long-running daemon, 새 dependency, 새 secret-bearing login 흐름을 만들지 않는다.</li>\n<li>기존 Rust <code>start_native_pty_terminal</code>, <code>start_cli_adapter_session</code>, task-run 기록, terminal drawer를 재사용한다.</li>\n<li>버튼과 상태 카드는 기존 desktop workbench 톤과 responsive grid 정책을 따른다.</li>\n</ul>\n<h2>제외</h2>\n<ul>\n<li>이번 slice는 새 Rust supervisor나 stdout/stdin pipe 연결을 추가하지 않는다.</li>\n<li>1280px desktop shell 최소 폭 정책은 변경하지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1384,
+      "updatedAt": "2026-06-06T14:07:16.086Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-intuitive-home-flow-ko-md",
@@ -10085,134 +10325,6 @@
       "workspaceArea": "agent-platform"
     },
     {
-      "id": "history-work-timings-2026-2026-06-06-popup-overlay-audit-json",
-      "path": "_history/work-timings/2026/2026-06-06-popup-overlay-audit.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Popup Overlay Audit",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"popup overlay audit\", \"phases\": { \"phase\": \"web intake and inventory\", \"status\": \"completed\" }, { \"phase\": \"implementation\", \"status\": \"completed\" }, { \"phase\": \"browser smoke\", \"status\": \"completed\" }, { \"phase\": \"build and package\", \"status\":",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;popup overlay audit&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web intake and inventory&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;browser smoke&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;build and package&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;history and trace&quot;, &quot;status&quot;: &quot;completed&quot; } , &quot;note&quot;</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 612,
-      "updatedAt": "2026-06-06T05:53:33.573Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-popup-overlay-audit-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-06-popup-overlay-audit-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Popup Overlay Audit Evaluation Input",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"popup overlay audit\", \"user request summary\": \"Review and fix popup/overlay surfaces that are clipped, hard to use, or too generic.\", \"requirements\": \"REQ PSC 001\", \"REQ PSC 002\", \"REQ PSC 003\", \"REQ PSC 004\", \"REQ PSC 005\", \"REQ PSC 006\", \"REQ",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;popup overlay audit&quot;, &quot;user request summary&quot;: &quot;Review and fix popup/overlay surfaces that are clipped, hard to use, or too generic.&quot;, &quot;requirements&quot;: &quot;REQ PSC 001&quot;, &quot;REQ PSC 002&quot;, &quot;REQ PSC 003&quot;, &quot;REQ PSC 004&quot;, &quot;REQ PSC 005&quot;, &quot;REQ PSC 006&quot;, &quot;REQ PSC 007&quot; , &quot;changed surfaces&quot;: &quot;command palette&quot;, &quot;settings dialog&quot;, &quot;operator </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1123,
-      "updatedAt": "2026-06-06T05:53:33.572Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-popup-overlay-audit-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-popup-overlay-audit.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "Evaluation: Popup Overlay Audit",
-      "excerpt": "Evaluation: Popup Overlay Audit 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 팝업 같은 것을 전부 검토하고, 스크롤/잘림/불편한 기본 팝업 문제를 해결한다. 결과: 작은 menu류는 기존 Radix portal/collision 계약을 유지하고, 큰 modal/drawer류는 앱 root portal과 focus containment로 통합했다. 근거 설정, 명령 팔레트, 운영 센터는 .desktop app root portal 아래에서 backdrop이 vi",
-      "html": "<p>Evaluation: Popup Overlay Audit 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 팝업 같은 것을 전부 검토하고, 스크롤/잘림/불편한 기본 팝업 문제를 해결한다. 결과: 작은 menu류는 기존 Radix portal/collision 계약을 유지하고, 큰 modal/drawer류는 앱 root portal과 focus containment로 통합했다. 근거 설정, 명령 팔레트, 운영 센터는 .desktop app root portal 아래에서 backdrop이 viewport 전체를 덮고 surface가 1280x720 안에 남는다. 터미널 드로어는 root portal 아래에서 top=64 , botto</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1234,
-      "updatedAt": "2026-06-06T05:53:33.572Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-popup-overlay-audit-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-popup-overlay-audit.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "Request Trace: Popup Overlay Audit",
-      "excerpt": "Request Trace: Popup Overlay Audit 날짜: 2026 06 06 요청 팝업 같은 UI를 전부 검토하고 고친다. 산출물 요구사항 업데이트: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md 스펙 업데이트: platform desktop app/specs/2026 06 06 popup scroll clipping/ 구현: platform desktop app/renderer/workspa",
-      "html": "<p>Request Trace: Popup Overlay Audit 날짜: 2026 06 06 요청 팝업 같은 UI를 전부 검토하고 고친다. 산출물 요구사항 업데이트: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md 스펙 업데이트: platform desktop app/specs/2026 06 06 popup scroll clipping/ 구현: platform desktop app/renderer/workspace monitor/components/ui/useOverlayFocus.ts platform desktop app/renderer/worksp</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1320,
-      "updatedAt": "2026-06-06T05:53:33.572Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-popup-overlay-audit-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-popup-overlay-audit.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "Work Summary: Popup Overlay Audit",
-      "excerpt": "Work Summary: Popup Overlay Audit 날짜: 2026 06 06 완료 useOverlayFocus 를 추가해 modal focus 이동, Tab 순환, Escape 닫기, focus restore를 공통화했다. command palette, settings dialog, operator center를 .desktop app root portal로 이동했다. terminal drawer를 root portal로 이동하고, 닫힌 상태 접근 차단과 열린 상태 위치 보정을 추가했다",
-      "html": "<p>Work Summary: Popup Overlay Audit 날짜: 2026 06 06 완료 useOverlayFocus 를 추가해 modal focus 이동, Tab 순환, Escape 닫기, focus restore를 공통화했다. command palette, settings dialog, operator center를 .desktop app root portal로 이동했다. terminal drawer를 root portal로 이동하고, 닫힌 상태 접근 차단과 열린 상태 위치 보정을 추가했다. overlay z index token을 dialog/drawer/command/menu로 분리했다. popup/menu 회귀 테스트에 po</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1005,
-      "updatedAt": "2026-06-06T05:53:33.572Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-popup-overlay-audit-ko-md",
-      "path": "_history/plans/2026/2026-06-06-popup-overlay-audit.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "Plan: Popup Overlay Audit",
-      "excerpt": "Plan: Popup Overlay Audit 날짜: 2026 06 06 실행 계획 1. 웹 기준을 확인해 modal focus, menu keyboard, portal/collision, top layer 개념을 정리한다. 2. 현재 overlay inventory를 확인한다: command palette, settings dialog, operator center, app choice/source picker, Tool Studio menus, terminal drawer. 3. 공통 focu",
-      "html": "<p>Plan: Popup Overlay Audit 날짜: 2026 06 06 실행 계획 1. 웹 기준을 확인해 modal focus, menu keyboard, portal/collision, top layer 개념을 정리한다. 2. 현재 overlay inventory를 확인한다: command palette, settings dialog, operator center, app choice/source picker, Tool Studio menus, terminal drawer. 3. 공통 focus containment hook과 root portal 구조를 적용한다. 4. z index token을 overlay 종류별로 분리한다. 5</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1058,
-      "updatedAt": "2026-06-06T05:53:33.571Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-popup-overlay-audit-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-popup-overlay-audit.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "User Request: Popup Overlay Audit",
-      "excerpt": "User Request: Popup Overlay Audit 날짜: 2026 06 06 요약 사용자는 팝업류 UI를 전부 검토하라고 요청했다. 이전 맥락의 주요 불편은 스크롤 때문에 팝업이 안 보임, 범용/기본 팝업 느낌, 탭/터미널/설정 UI 사용성, 데스크톱 앱답게 안정적인 화면 자원 사용이었다. 이번 처리 범위 명령 팔레트, 설정 모달, 운영 센터, 터미널 드로어의 viewport 기준 배치와 focus 처리를 검토/패치한다. 기존 Radix dropdown/context menu clipp",
-      "html": "<p>User Request: Popup Overlay Audit 날짜: 2026 06 06 요약 사용자는 팝업류 UI를 전부 검토하라고 요청했다. 이전 맥락의 주요 불편은 스크롤 때문에 팝업이 안 보임, 범용/기본 팝업 느낌, 탭/터미널/설정 UI 사용성, 데스크톱 앱답게 안정적인 화면 자원 사용이었다. 이번 처리 범위 명령 팔레트, 설정 모달, 운영 센터, 터미널 드로어의 viewport 기준 배치와 focus 처리를 검토/패치한다. 기존 Radix dropdown/context menu clipping 계약은 유지하되 z index hierarchy를 재정렬한다. 구현 뒤 renderer build, internal package, ap</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 695,
-      "updatedAt": "2026-06-06T05:53:33.571Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-popup-scroll-clipping-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-popup-scroll-clipping.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "Web Search: Popup Scroll Clipping",
-      "excerpt": "Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs",
-      "html": "<p>Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs 확인한 출처 MDN CSS overflow : overflow가 scroll container와 clipping 동작을 만든다는 기본 동작 확</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 3586,
-      "updatedAt": "2026-06-06T05:53:33.571Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-popup-scroll-clipping-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-popup-scroll-clipping/tasks.ko.md",
       "category": "project-spec",
@@ -10307,22 +10419,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-button-text-wrapping-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-button-text-wrapping.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "Evaluation: Button Text Wrapping",
-      "excerpt": "Evaluation: Button Text Wrapping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 텍스트 줄바꿈 때문에 버튼이 너무 길어지는 문제 수정. 결과: 액션/명령 버튼 라벨에 한 줄 ellipsis 계약을 추가했고, 주요 커스텀 버튼 영역의 white space: normal / overflow wrap:anywhere 예외를 제거했다. 근거 Web 기준: MDN의 text overflow / white space 기준을 확인했다. 접근성 기준: DOM 텍스트는 유지하고",
-      "html": "<p>Evaluation: Button Text Wrapping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 텍스트 줄바꿈 때문에 버튼이 너무 길어지는 문제 수정. 결과: 액션/명령 버튼 라벨에 한 줄 ellipsis 계약을 추가했고, 주요 커스텀 버튼 영역의 white space: normal / overflow wrap:anywhere 예외를 제거했다. 근거 Web 기준: MDN의 text overflow / white space 기준을 확인했다. 접근성 기준: DOM 텍스트는 유지하고 CSS 표시 방식만 truncation 처리했다. 정적 검증: workspace monitor test/check 통과. Browser smo</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1208,
-      "updatedAt": "2026-06-06T05:27:59.626Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-button-text-wrapping-validation-ko-md",
@@ -18163,102 +18259,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-easy-flow-ux-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-easy-flow-ux/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록",
-      "excerpt": "작업 목록 x 웹 검색으로 progressive disclosure/task flow 기준 확인 x REQ WM 046 추가 x TaskIntentItem.flowSteps 추가 x 목표별 3단계 이하 flow 문구 추가 x handoff 내부 task flow rail 추가 x desktop/mobile CSS 추가 x 정적 테스트 업데이트 x build와 click through smoke 실행",
-      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] 웹 검색으로 progressive disclosure/task flow 기준 확인</li>\n<li>[x] REQ-WM-046 추가</li>\n<li>[x] <code>TaskIntentItem.flowSteps</code> 추가</li>\n<li>[x] 목표별 3단계 이하 flow 문구 추가</li>\n<li>[x] handoff 내부 task flow rail 추가</li>\n<li>[x] desktop/mobile CSS 추가</li>\n<li>[x] 정적 테스트 업데이트</li>\n<li>[x] build와 click-through smoke 실행</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 354,
-      "updatedAt": "2026-06-04T22:40:24.489Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-easy-flow-ux-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-easy-flow-ux/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성",
-      "excerpt": "추적성 | 요구 | 구현 | 검증 | | | | | | REQ WM 046 | MonitorShell.tsx TaskIntentItem.flowSteps , task flow rail | tool studio.test.mjs , click through smoke | | 플로우 쉽게 개선 | globals.css desktop 3열/mobile 1열 flow rail | desktop/mobile screenshots |",
-      "html": "<h1>추적성</h1>\n<table><thead><tr><th>요구</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-WM-046</td><td><code>MonitorShell.tsx</code> <code>TaskIntentItem.flowSteps</code>, <code>task-flow-rail</code></td><td><code>tool-studio.test.mjs</code>, click-through smoke</td></tr><tr><td>플로우 쉽게 개선</td><td><code>globals.css</code> desktop 3열/mobile 1열 flow rail</td><td>desktop/mobile screenshots</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 297,
-      "updatedAt": "2026-06-04T22:40:24.489Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-easy-flow-ux-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-easy-flow-ux/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증 기록",
-      "excerpt": "검증 기록 명령 corepack pnpm filter workspace monitor test corepack pnpm filter workspace monitor run check corepack pnpm filter workspace monitor run build:customer Browser smoke Overview build tool 클릭 후 section tools 로 이동 data task handoff='build tool' 1개 표시 .task flow rail li 3개 표시 ",
-      "html": "<h1>검증 기록</h1>\n<h2>명령</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code></li>\n</ul>\n<h2>Browser smoke</h2>\n<ul>\n<li>Overview <code>build-tool</code> 클릭 후 <code>#section-tools</code>로 이동</li>\n<li><code>[data-task-handoff=&#039;build-tool&#039;]</code> 1개 표시</li>\n<li><code>.task-flow-rail li</code> 3개 표시</li>\n<li>desktop 단계: <code>소스 선택</code>, <code>입력과 venv 확인</code>, <code>검증 후 배포</code></li>\n<li>desktop 수평 overflow 0</li>\n<li>390px mobile 단계 레일 1열 표시, 수평 overflow 0</li>\n</ul>\n<h2>스크린샷</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-easy-flow-desktop.png</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-easy-flow-mobile.png</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 761,
-      "updatedAt": "2026-06-04T22:40:24.489Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-easy-flow-ux-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-easy-flow-ux/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "구현 계획",
-      "excerpt": "구현 계획 1. TaskIntentItem 에 flowSteps 를 추가한다. 2. 각 목표 route에 3개 이하의 짧은 단계 문구를 정의한다. 3. task handoff strip 안에 task flow rail 을 렌더링한다. 4. desktop/mobile CSS와 정적 테스트 계약을 추가한다. 5. build와 browser smoke를 실행한다.",
-      "html": "<h1>구현 계획</h1>\n<p>1. <code>TaskIntentItem</code>에 <code>flowSteps</code>를 추가한다.</p>\n<p>2. 각 목표 route에 3개 이하의 짧은 단계 문구를 정의한다.</p>\n<p>3. <code>task-handoff-strip</code> 안에 <code>task-flow-rail</code>을 렌더링한다.</p>\n<p>4. desktop/mobile CSS와 정적 테스트 계약을 추가한다.</p>\n<p>5. build와 browser smoke를 실행한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 322,
-      "updatedAt": "2026-06-04T22:40:24.488Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-easy-flow-ux-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-easy-flow-ux/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Easy Flow UX 스펙",
-      "excerpt": "Easy Flow UX 스펙 요구사항 REQ WM 046: 목표 기반 이동 후 대상 작업면은 3개 이하의 짧은 순서형 작업 흐름을 표시해야 한다. 사용자 결과 사용자는 툴 만들기 선택 후 Tool Studio에서 소스 선택 , 입력과 venv 확인 , 검증 후 배포 순서를 즉시 확인한다. 사용자는 전체 기능 목록을 해석하기 전에 현재 목표의 다음 진행 순서를 먼저 본다. 비목표 각 단계별 상세 wizard 구현 사용자 진행 상태의 장기 저장 모든 섹션에 독립 breadcrumb 시스템 도입",
-      "html": "<h1>Easy Flow UX 스펙</h1>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-WM-046: 목표 기반 이동 후 대상 작업면은 3개 이하의 짧은 순서형 작업 흐름을 표시해야 한다.</li>\n</ul>\n<h2>사용자 결과</h2>\n<ul>\n<li>사용자는 <code>툴 만들기</code> 선택 후 Tool Studio에서 <code>소스 선택</code>, <code>입력과 venv 확인</code>, <code>검증 후 배포</code> 순서를 즉시 확인한다.</li>\n<li>사용자는 전체 기능 목록을 해석하기 전에 현재 목표의 다음 진행 순서를 먼저 본다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>각 단계별 상세 wizard 구현</li>\n<li>사용자 진행 상태의 장기 저장</li>\n<li>모든 섹션에 독립 breadcrumb 시스템 도입</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 608,
-      "updatedAt": "2026-06-04T22:40:24.488Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-task-handoff-ux-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-task-handoff-ux/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성",
-      "excerpt": "추적성 | 요구 | 구현 | 검증 | | | | | | REQ WM 045 | MonitorShell.tsx active task intent, data task handoff | tool studio.test.mjs , click through smoke | | UX 개선 | globals.css task handoff strip desktop/mobile layout | desktop/mobile screenshots |",
-      "html": "<h1>추적성</h1>\n<table><thead><tr><th>요구</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-WM-045</td><td><code>MonitorShell.tsx</code> active task intent, <code>data-task-handoff</code></td><td><code>tool-studio.test.mjs</code>, click-through smoke</td></tr><tr><td>UX 개선</td><td><code>globals.css</code> <code>task-handoff-strip</code> desktop/mobile layout</td><td>desktop/mobile screenshots</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 286,
-      "updatedAt": "2026-06-04T22:34:56.726Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18308,7 +18308,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-          "updatedAt": "2026-06-06T13:48:34.957Z",
+          "updatedAt": "2026-06-06T14:07:16.091Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18329,16 +18329,6 @@
           "title": "Evaluation: awp PATH Registration",
           "excerpt": "Evaluation: awp PATH Registration 날짜: 2026 06 06 사용자 요구 대비 요구: 반복적으로 필요한 내용을 뒤로 미루지 말고 처리한다. 결과: awp 설치 후 실제 터미널에서 바로 awp 명령이 잡히도록 ~/.local/bin PATH 등록을 자동화하고 실제 적용했다. 새 zsh 세션에서 command v awp , awp version , awp doctor json 을 검증했다. 품질 평가 cli:install 이 symlink 설치와 PATH 등록을 함께 수행하",
           "updatedAt": "2026-06-06T12:51:43.851Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-button-text-wrapping-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-button-text-wrapping.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "Evaluation: Button Text Wrapping",
-          "excerpt": "Evaluation: Button Text Wrapping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 텍스트 줄바꿈 때문에 버튼이 너무 길어지는 문제 수정. 결과: 액션/명령 버튼 라벨에 한 줄 ellipsis 계약을 추가했고, 주요 커스텀 버튼 영역의 white space: normal / overflow wrap:anywhere 예외를 제거했다. 근거 Web 기준: MDN의 text overflow / white space 기준을 확인했다. 접근성 기준: DOM 텍스트는 유지하고",
-          "updatedAt": "2026-06-06T05:27:59.626Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18502,26 +18492,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-popup-overlay-audit-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-06-popup-overlay-audit-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Popup Overlay Audit Evaluation Input",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"popup overlay audit\", \"user request summary\": \"Review and fix popup/overlay surfaces that are clipped, hard to use, or too generic.\", \"requirements\": \"REQ PSC 001\", \"REQ PSC 002\", \"REQ PSC 003\", \"REQ PSC 004\", \"REQ PSC 005\", \"REQ PSC 006\", \"REQ",
-          "updatedAt": "2026-06-06T05:53:33.572Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-popup-overlay-audit-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-popup-overlay-audit.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "Evaluation: Popup Overlay Audit",
-          "excerpt": "Evaluation: Popup Overlay Audit 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 팝업 같은 것을 전부 검토하고, 스크롤/잘림/불편한 기본 팝업 문제를 해결한다. 결과: 작은 menu류는 기존 Radix portal/collision 계약을 유지하고, 큰 modal/drawer류는 앱 root portal과 focus containment로 통합했다. 근거 설정, 명령 팔레트, 운영 센터는 .desktop app root portal 아래에서 backdrop이 vi",
-          "updatedAt": "2026-06-06T05:53:33.572Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-runtime-setup-check-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-runtime-setup-check.ko.md",
           "category": "evaluation",
@@ -18539,6 +18509,36 @@
           "title": "최종 평가: Rust Runtime Feature Split",
           "excerpt": "최종 평가: Rust Runtime Feature Split 날짜: 2026 06 06 평가 요청한 Rust source 분리와 기능별 추가 기능의 첫 slice를 완료했다. lib.rs 전체 대분해는 회귀 위험이 커서 진행하지 않았고, 대신 기능별 source module tree와 read only runtime feature map command를 추가해 다음 이동 기준을 만들었다. 충족 기능별 Rust folder 구조 추가 기능별 command/risk/follow up report 추가",
           "updatedAt": "2026-06-06T13:30:09.998Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-cli-pipeline-json",
+          "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-cli-pipeline.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Terminal Agent Bridge Cli Pipeline",
+          "excerpt": "{ \"pipeline id\": \"terminal agent bridge\", \"purpose\": \"Coordinate the UI action that connects native PTY terminal state before starting an agent CLI session.\", \"work mode\": \"standard\", \"risk level\": \"medium\", \"processes\": { \"process id\": \"terminal agent bridge action\", \"adapter id",
+          "updatedAt": "2026-06-06T14:07:16.089Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Terminal Agent Bridge Input",
+          "excerpt": "{ \"initial instruction\": \"터미널 연결 기능 에이전트 기능 똑바로.\", \"result summary\": \"Added a Desktop Runtime terminal agent bridge that gates agent CLI session start on native PTY readiness and exposes PTY, adapter, and agent session status in one flow.\", \"work mode\": \"standard\", \"changed files",
+          "updatedAt": "2026-06-06T14:07:16.091Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "최종 평가: Terminal Agent Bridge",
+          "excerpt": "최종 평가: Terminal Agent Bridge 날짜: 2026 06 06 평가 사용자의 “터미널 연결 기능, 에이전트 기능을 제대로” 요구에 대해 Desktop Runtime에서 PTY 연결과 agent CLI session 시작을 한 흐름으로 묶는 첫 slice를 구현했다. 충족 PTY, CLI adapter, agent session 상태를 bridge 카드로 표시한다. 연결 실행 버튼은 runtime/adapter/prompt가 준비된 경우에만 활성화된다. PTY 연결이 writable",
+          "updatedAt": "2026-06-06T14:07:16.090Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18632,16 +18632,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-popup-overlay-audit-ko-md",
-          "path": "_history/plans/2026/2026-06-06-popup-overlay-audit.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "Plan: Popup Overlay Audit",
-          "excerpt": "Plan: Popup Overlay Audit 날짜: 2026 06 06 실행 계획 1. 웹 기준을 확인해 modal focus, menu keyboard, portal/collision, top layer 개념을 정리한다. 2. 현재 overlay inventory를 확인한다: command palette, settings dialog, operator center, app choice/source picker, Tool Studio menus, terminal drawer. 3. 공통 focu",
-          "updatedAt": "2026-06-06T05:53:33.571Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-runtime-setup-check-ko-md",
           "path": "_history/plans/2026/2026-06-06-runtime-setup-check.ko.md",
           "category": "plan",
@@ -18659,6 +18649,16 @@
           "title": "Rust Runtime Feature Split 계획",
           "excerpt": "Rust Runtime Feature Split 계획 날짜: 2026 06 06 1. 공식 Rust/Tauri 구조 확인. 2. 현재 Rust source inventory 확인. 3. src tauri/src/features/ 기능별 폴더 생성. 4. 기능별 command/risk map command 추가. 5. Desktop Runtime UI metric 연결. 6. runtime contract, readiness, tests 갱신. 7. Rust/Node/build/package 검증.",
           "updatedAt": "2026-06-06T13:28:08.843Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-plans-2026-2026-06-06-terminal-agent-bridge-ko-md",
+          "path": "_history/plans/2026/2026-06-06-terminal-agent-bridge.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "작업 계획: Terminal Agent Bridge",
+          "excerpt": "작업 계획: Terminal Agent Bridge 1. 공식 문서와 기존 PTY/CLI/agent 구현을 확인한다. 2. helper를 분리해 PTY/CLI session 실패가 action feedback에 전파되게 한다. 3. Desktop Runtime에 terminal agent bridge UI를 추가한다. 4. CSS와 테스트 계약을 보강한다. 5. Browser smoke, check/test/build, resource/CLI/omission/evaluation 검증을 수행한다. ",
+          "updatedAt": "2026-06-06T14:07:16.088Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18752,16 +18752,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-popup-overlay-audit-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-popup-overlay-audit.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "Request Trace: Popup Overlay Audit",
-          "excerpt": "Request Trace: Popup Overlay Audit 날짜: 2026 06 06 요청 팝업 같은 UI를 전부 검토하고 고친다. 산출물 요구사항 업데이트: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md 스펙 업데이트: platform desktop app/specs/2026 06 06 popup scroll clipping/ 구현: platform desktop app/renderer/workspa",
-          "updatedAt": "2026-06-06T05:53:33.572Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-06-runtime-setup-check-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-runtime-setup-check.ko.md",
           "category": "request-trace",
@@ -18779,6 +18769,16 @@
           "title": "요청 결과 추적: Rust Runtime Feature Split",
           "excerpt": "요청 결과 추적: Rust Runtime Feature Split 날짜: 2026 06 06 요청 Rust source와 folder structure를 기능별로 분리하고 기능별 추가 기능을 추가한다. 결과 src tauri/src/features/ 기능별 module tree 추가 get rust runtime feature map Tauri command 추가 Desktop Runtime diagnostics에 Rust module/command metrics 추가 runtime contrac",
           "updatedAt": "2026-06-06T13:28:08.844Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-terminal-agent-bridge-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-terminal-agent-bridge.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: Terminal Agent Bridge",
+          "excerpt": "요청 결과 추적: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 결과 Desktop Runtime에 PTY CLI adapter agent session bridge UI 추가. createNativePtySession , createCliAdapterSession , startTerminalAgentBridge 추가. 기존 start selected lane action feedback 실패 전파 보강. CSS와 te",
+          "updatedAt": "2026-06-06T14:07:16.090Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18872,16 +18872,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-popup-overlay-audit-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-popup-overlay-audit.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "User Request: Popup Overlay Audit",
-          "excerpt": "User Request: Popup Overlay Audit 날짜: 2026 06 06 요약 사용자는 팝업류 UI를 전부 검토하라고 요청했다. 이전 맥락의 주요 불편은 스크롤 때문에 팝업이 안 보임, 범용/기본 팝업 느낌, 탭/터미널/설정 UI 사용성, 데스크톱 앱답게 안정적인 화면 자원 사용이었다. 이번 처리 범위 명령 팔레트, 설정 모달, 운영 센터, 터미널 드로어의 viewport 기준 배치와 focus 처리를 검토/패치한다. 기존 Radix dropdown/context menu clipp",
-          "updatedAt": "2026-06-06T05:53:33.571Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-runtime-setup-check-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-runtime-setup-check.ko.md",
           "category": "user-request",
@@ -18899,6 +18889,16 @@
           "title": "사용자 요청 요약: Rust Runtime Feature Split",
           "excerpt": "사용자 요청 요약: Rust Runtime Feature Split 날짜: 2026 06 06 사용자는 Rust source를 분리하고 폴더 구조를 기능별로 나누며 기능별 추가 기능을 넣으라고 요청했다. 처리 대상은 platform desktop app/src tauri native runtime으로 해석했다.",
           "updatedAt": "2026-06-06T13:28:08.843Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-terminal-agent-bridge-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-terminal-agent-bridge.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "User Request: Terminal Agent Bridge",
+          "excerpt": "User Request: Terminal Agent Bridge 날짜: 2026 06 06 요약: 터미널 연결 기능과 에이전트 기능이 분리되어 어색하지 않게, 실제 연결 실행 흐름으로 제대로 동작하게 개선해 달라는 요청. 범위 결정: 기존 native PTY와 CLI agent session command를 재사용해 Desktop Runtime 첫 화면에 연결 bridge를 추가한다.",
+          "updatedAt": "2026-06-06T14:07:16.088Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18992,16 +18992,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-popup-scroll-clipping-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-popup-scroll-clipping.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "Web Search: Popup Scroll Clipping",
-          "excerpt": "Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs",
-          "updatedAt": "2026-06-06T05:53:33.571Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-runtime-setup-check-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-runtime-setup-check.ko.md",
           "category": "web-search",
@@ -19019,6 +19009,16 @@
           "title": "Rust Runtime Feature Split 웹 우선 확인",
           "excerpt": "Rust Runtime Feature Split 웹 우선 확인 날짜: 2026 06 06 쿼리 Rust official book modules file hierarchy mod.rs modules Tauri v2 official commands Rust module structure invoke handler Rust official cargo workspaces package layout modules 확인한 소스 | 소스 | 유형 | 사용 | | | | | | https://doc.rust l",
           "updatedAt": "2026-06-06T13:28:08.843Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-terminal-agent-bridge-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-terminal-agent-bridge.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: Terminal Agent Bridge",
+          "excerpt": "Web Search: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 검색 VS Code terminal shell integration API official documentation pty terminal extension API xterm.js attach addon official documentation terminal websocket pty node pty official GitHub pseudotermina",
+          "updatedAt": "2026-06-06T14:07:16.088Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19112,16 +19112,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-popup-overlay-audit-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-popup-overlay-audit.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "Work Summary: Popup Overlay Audit",
-          "excerpt": "Work Summary: Popup Overlay Audit 날짜: 2026 06 06 완료 useOverlayFocus 를 추가해 modal focus 이동, Tab 순환, Escape 닫기, focus restore를 공통화했다. command palette, settings dialog, operator center를 .desktop app root portal로 이동했다. terminal drawer를 root portal로 이동하고, 닫힌 상태 접근 차단과 열린 상태 위치 보정을 추가했다",
-          "updatedAt": "2026-06-06T05:53:33.572Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-runtime-setup-check-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-runtime-setup-check.ko.md",
           "category": "work-summary",
@@ -19139,6 +19129,16 @@
           "title": "작업 요약: Rust Runtime Feature Split",
           "excerpt": "작업 요약: Rust Runtime Feature Split 날짜: 2026 06 06 Tauri Rust runtime에 기능별 source root src tauri/src/features/ 를 추가하고, app shell, CLI orchestration, native process control, workspace host, provider accounts, diagnostics/data, agent factory, decision inbox로 나눴다. 새 read only command ",
           "updatedAt": "2026-06-06T13:28:08.844Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-terminal-agent-bridge-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-terminal-agent-bridge.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: Terminal Agent Bridge",
+          "excerpt": "작업 요약: Terminal Agent Bridge 날짜: 2026 06 06 Desktop Runtime에 terminal agent bridge 를 추가해 native PTY, CLI adapter, agent session 상태를 한 흐름으로 표시했다. 새 startTerminalAgentBridge 는 PTY를 먼저 만들고 writable 상태가 아니면 agent CLI session을 시작하지 않는다. 기존 선택 실행 버튼도 action feedback용 실행 함수가 실패를 전파하도록 분",
+          "updatedAt": "2026-06-06T14:07:16.090Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19222,16 +19222,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-popup-overlay-audit-json",
-          "path": "_history/work-timings/2026/2026-06-06-popup-overlay-audit.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Popup Overlay Audit",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"popup overlay audit\", \"phases\": { \"phase\": \"web intake and inventory\", \"status\": \"completed\" }, { \"phase\": \"implementation\", \"status\": \"completed\" }, { \"phase\": \"browser smoke\", \"status\": \"completed\" }, { \"phase\": \"build and package\", \"status\":",
-          "updatedAt": "2026-06-06T05:53:33.573Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-runtime-setup-check-ko-md",
           "path": "_history/work-timings/2026/2026-06-06-runtime-setup-check.ko.md",
           "category": "work-timing",
@@ -19249,6 +19239,16 @@
           "title": "작업 시간 기록: Rust Runtime Feature Split",
           "excerpt": "작업 시간 기록: Rust Runtime Feature Split 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | Rust/Tauri 공식 문서 확인 | | source inventory | 완료 | lib.rs 12,175 lines 단일 파일 확인 | | 구현 | 완료 | feature module tree, command, UI metric | | 검증 | 완료 | Rust/Node checks와 internal package 통과 | | 기록",
           "updatedAt": "2026-06-06T13:30:09.998Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-06-terminal-agent-bridge-ko-md",
+          "path": "_history/work-timings/2026/2026-06-06-terminal-agent-bridge.ko.md",
+          "category": "work-timing",
+          "language": "ko",
+          "title": "작업 시간 기록: Terminal Agent Bridge",
+          "excerpt": "작업 시간 기록: Terminal Agent Bridge 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | xterm.js, portable pty, Tauri, VS Code terminal docs 확인 | | source inventory | 완료 | RuntimeTerminalDrawer, MonitorShell, Rust PTY/CLI commands 확인 | | 구현 | 완료 | bridge UI와 실패 전파 helper 추가 | | 검증 ",
+          "updatedAt": "2026-06-06T14:07:16.090Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19270,36 +19270,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2778,
+      "documents": 2787,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1053
+          "count": 1056
         },
         {
           "category": "web-search",
-          "count": 436
+          "count": 437
         },
         {
           "category": "request-trace",
-          "count": 365
+          "count": 366
         },
         {
           "category": "plan",
-          "count": 364
+          "count": 365
         },
         {
           "category": "work-timing",
-          "count": 284
+          "count": 285
         },
         {
           "category": "user-request",
-          "count": 150
+          "count": 151
         },
         {
           "category": "work-summary",
-          "count": 117
+          "count": 118
         },
         {
           "category": "daily-history",
@@ -19310,7 +19310,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6721867,
+      "totalSourceBytes": 6735746,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19337,9 +19337,9 @@
       "monitorEvents": 64,
       "evidenceEvents": 38,
       "decisionEvents": 0,
-      "openSignals": 20,
+      "openSignals": 21,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T13:48:34.957Z",
+      "latestEventAt": "2026-06-06T14:07:16.091Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19450,6 +19450,156 @@
     ],
     "events": [
       {
+        "id": "history-history-evaluations-2026-2026-06-06-terminal-agent-bridge-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 06 Terminal Agent Bridge Input",
+        "detail": "{ \"initial instruction\": \"터미널 연결 기능 에이전트 기능 똑바로.\", \"result summary\": \"Added a Desktop Runtime terminal agent bridge that gates agent CLI session start on native PTY readiness and exposes PTY, adapter, and agent session status in one flow.\", \"work mode\": \"standard\", \"changed files",
+        "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:07:16.091Z"
+      },
+      {
+        "id": "history-history-2026-2026-06-06-md",
+        "sourceType": "history",
+        "signalType": "history",
+        "lane": "history",
+        "severity": "info",
+        "status": "daily-history",
+        "title": "2026 06 06",
+        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
+        "path": "_history/2026/2026-06-06.md",
+        "category": "daily-history",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:07:16.091Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-terminal-agent-bridge-ko-md",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "작업 시간 기록: Terminal Agent Bridge",
+        "detail": "작업 시간 기록: Terminal Agent Bridge 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | xterm.js, portable pty, Tauri, VS Code terminal docs 확인 | | source inventory | 완료 | RuntimeTerminalDrawer, MonitorShell, Rust PTY/CLI commands 확인 | | 구현 | 완료 | bridge UI와 실패 전파 helper 추가 | | 검증 ",
+        "path": "_history/work-timings/2026/2026-06-06-terminal-agent-bridge.ko.md",
+        "category": "work-timing",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:07:16.090Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-terminal-agent-bridge-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "최종 평가: Terminal Agent Bridge",
+        "detail": "최종 평가: Terminal Agent Bridge 날짜: 2026 06 06 평가 사용자의 “터미널 연결 기능, 에이전트 기능을 제대로” 요구에 대해 Desktop Runtime에서 PTY 연결과 agent CLI session 시작을 한 흐름으로 묶는 첫 slice를 구현했다. 충족 PTY, CLI adapter, agent session 상태를 bridge 카드로 표시한다. 연결 실행 버튼은 runtime/adapter/prompt가 준비된 경우에만 활성화된다. PTY 연결이 writable",
+        "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:07:16.090Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-terminal-agent-bridge-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "needs_attention",
+        "title": "요청 결과 추적: Terminal Agent Bridge",
+        "detail": "요청 결과 추적: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 결과 Desktop Runtime에 PTY CLI adapter agent session bridge UI 추가. createNativePtySession , createCliAdapterSession , startTerminalAgentBridge 추가. 기존 start selected lane action feedback 실패 전파 보강. CSS와 te",
+        "path": "_history/request-traces/2026/2026-06-06-terminal-agent-bridge.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:07:16.090Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-terminal-agent-bridge-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "needs_attention",
+        "title": "작업 요약: Terminal Agent Bridge",
+        "detail": "작업 요약: Terminal Agent Bridge 날짜: 2026 06 06 Desktop Runtime에 terminal agent bridge 를 추가해 native PTY, CLI adapter, agent session 상태를 한 흐름으로 표시했다. 새 startTerminalAgentBridge 는 PTY를 먼저 만들고 writable 상태가 아니면 agent CLI session을 시작하지 않는다. 기존 선택 실행 버튼도 action feedback용 실행 함수가 실패를 전파하도록 분",
+        "path": "_history/work-summaries/2026/2026-06-06-terminal-agent-bridge.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:07:16.090Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-terminal-agent-bridge-cli-pipeline-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "evaluation",
+        "title": "2026 06 06 Terminal Agent Bridge Cli Pipeline",
+        "detail": "{ \"pipeline id\": \"terminal agent bridge\", \"purpose\": \"Coordinate the UI action that connects native PTY terminal state before starting an agent CLI session.\", \"work mode\": \"standard\", \"risk level\": \"medium\", \"processes\": { \"process id\": \"terminal agent bridge action\", \"adapter id",
+        "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-cli-pipeline.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:07:16.089Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-terminal-agent-bridge-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Terminal Agent Bridge",
+        "detail": "Web Search: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 검색 VS Code terminal shell integration API official documentation pty terminal extension API xterm.js attach addon official documentation terminal websocket pty node pty official GitHub pseudotermina",
+        "path": "_history/web-searches/2026/2026-06-06-terminal-agent-bridge.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:07:16.088Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-terminal-agent-bridge-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "User Request: Terminal Agent Bridge",
+        "detail": "User Request: Terminal Agent Bridge 날짜: 2026 06 06 요약: 터미널 연결 기능과 에이전트 기능이 분리되어 어색하지 않게, 실제 연결 실행 흐름으로 제대로 동작하게 개선해 달라는 요청. 범위 결정: 기존 native PTY와 CLI agent session command를 재사용해 Desktop Runtime 첫 화면에 연결 bridge를 추가한다.",
+        "path": "_history/user-requests/2026/2026-06-06-terminal-agent-bridge.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:07:16.088Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-terminal-agent-bridge-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "needs_attention",
+        "title": "작업 계획: Terminal Agent Bridge",
+        "detail": "작업 계획: Terminal Agent Bridge 1. 공식 문서와 기존 PTY/CLI/agent 구현을 확인한다. 2. helper를 분리해 PTY/CLI session 실패가 action feedback에 전파되게 한다. 3. Desktop Runtime에 terminal agent bridge UI를 추가한다. 4. CSS와 테스트 계약을 보강한다. 5. Browser smoke, check/test/build, resource/CLI/omission/evaluation 검증을 수행한다. ",
+        "path": "_history/plans/2026/2026-06-06-terminal-agent-bridge.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:07:16.088Z"
+      },
+      {
         "id": "history-history-work-timings-2026-2026-06-06-intuitive-home-flow-ko-md",
         "sourceType": "history",
         "signalType": "timing",
@@ -19491,21 +19641,6 @@
         "path": "_history/request-traces/2026/2026-06-06-intuitive-home-flow.ko.md",
         "category": "request-trace",
         "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:48:34.957Z"
-      },
-      {
-        "id": "history-history-2026-2026-06-06-md",
-        "sourceType": "history",
-        "signalType": "history",
-        "lane": "history",
-        "severity": "info",
-        "status": "daily-history",
-        "title": "2026 06 06",
-        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-        "path": "_history/2026/2026-06-06.md",
-        "category": "daily-history",
-        "language": "unknown",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T13:48:34.957Z"
       },
@@ -20753,141 +20888,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T09:12:48.555Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-popup-overlay-audit-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 Popup Overlay Audit",
-        "detail": "{ \"date\": \"2026 06 06\", \"work id\": \"popup overlay audit\", \"phases\": { \"phase\": \"web intake and inventory\", \"status\": \"completed\" }, { \"phase\": \"implementation\", \"status\": \"completed\" }, { \"phase\": \"browser smoke\", \"status\": \"completed\" }, { \"phase\": \"build and package\", \"status\":",
-        "path": "_history/work-timings/2026/2026-06-06-popup-overlay-audit.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T05:53:33.573Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-popup-overlay-audit-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Popup Overlay Audit Evaluation Input",
-        "detail": "{ \"date\": \"2026 06 06\", \"work id\": \"popup overlay audit\", \"user request summary\": \"Review and fix popup/overlay surfaces that are clipped, hard to use, or too generic.\", \"requirements\": \"REQ PSC 001\", \"REQ PSC 002\", \"REQ PSC 003\", \"REQ PSC 004\", \"REQ PSC 005\", \"REQ PSC 006\", \"REQ",
-        "path": "_history/evaluations/2026/2026-06-06-popup-overlay-audit-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T05:53:33.572Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-popup-overlay-audit-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "Evaluation: Popup Overlay Audit",
-        "detail": "Evaluation: Popup Overlay Audit 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 팝업 같은 것을 전부 검토하고, 스크롤/잘림/불편한 기본 팝업 문제를 해결한다. 결과: 작은 menu류는 기존 Radix portal/collision 계약을 유지하고, 큰 modal/drawer류는 앱 root portal과 focus containment로 통합했다. 근거 설정, 명령 팔레트, 운영 센터는 .desktop app root portal 아래에서 backdrop이 vi",
-        "path": "_history/evaluations/2026/2026-06-06-popup-overlay-audit.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T05:53:33.572Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-popup-overlay-audit-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "Request Trace: Popup Overlay Audit",
-        "detail": "Request Trace: Popup Overlay Audit 날짜: 2026 06 06 요청 팝업 같은 UI를 전부 검토하고 고친다. 산출물 요구사항 업데이트: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md 스펙 업데이트: platform desktop app/specs/2026 06 06 popup scroll clipping/ 구현: platform desktop app/renderer/workspa",
-        "path": "_history/request-traces/2026/2026-06-06-popup-overlay-audit.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T05:53:33.572Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-popup-overlay-audit-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "Work Summary: Popup Overlay Audit",
-        "detail": "Work Summary: Popup Overlay Audit 날짜: 2026 06 06 완료 useOverlayFocus 를 추가해 modal focus 이동, Tab 순환, Escape 닫기, focus restore를 공통화했다. command palette, settings dialog, operator center를 .desktop app root portal로 이동했다. terminal drawer를 root portal로 이동하고, 닫힌 상태 접근 차단과 열린 상태 위치 보정을 추가했다",
-        "path": "_history/work-summaries/2026/2026-06-06-popup-overlay-audit.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T05:53:33.572Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-popup-scroll-clipping-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "Web Search: Popup Scroll Clipping",
-        "detail": "Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs",
-        "path": "_history/web-searches/2026/2026-06-06-popup-scroll-clipping.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T05:53:33.571Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-popup-overlay-audit-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "Plan: Popup Overlay Audit",
-        "detail": "Plan: Popup Overlay Audit 날짜: 2026 06 06 실행 계획 1. 웹 기준을 확인해 modal focus, menu keyboard, portal/collision, top layer 개념을 정리한다. 2. 현재 overlay inventory를 확인한다: command palette, settings dialog, operator center, app choice/source picker, Tool Studio menus, terminal drawer. 3. 공통 focu",
-        "path": "_history/plans/2026/2026-06-06-popup-overlay-audit.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T05:53:33.571Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-popup-overlay-audit-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "User Request: Popup Overlay Audit",
-        "detail": "User Request: Popup Overlay Audit 날짜: 2026 06 06 요약 사용자는 팝업류 UI를 전부 검토하라고 요청했다. 이전 맥락의 주요 불편은 스크롤 때문에 팝업이 안 보임, 범용/기본 팝업 느낌, 탭/터미널/설정 UI 사용성, 데스크톱 앱답게 안정적인 화면 자원 사용이었다. 이번 처리 범위 명령 팔레트, 설정 모달, 운영 센터, 터미널 드로어의 viewport 기준 배치와 focus 처리를 검토/패치한다. 기존 Radix dropdown/context menu clipp",
-        "path": "_history/user-requests/2026/2026-06-06-popup-overlay-audit.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T05:53:33.571Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-button-text-wrapping-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "Evaluation: Button Text Wrapping",
-        "detail": "Evaluation: Button Text Wrapping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 텍스트 줄바꿈 때문에 버튼이 너무 길어지는 문제 수정. 결과: 액션/명령 버튼 라벨에 한 줄 ellipsis 계약을 추가했고, 주요 커스텀 버튼 영역의 white space: normal / overflow wrap:anywhere 예외를 제거했다. 근거 Web 기준: MDN의 text overflow / white space 기준을 확인했다. 접근성 기준: DOM 텍스트는 유지하고",
-        "path": "_history/evaluations/2026/2026-06-06-button-text-wrapping.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T05:27:59.626Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -24248,7 +24248,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 79,
+        "documentCount": 80,
         "sourceFileCount": 14
       },
       {
@@ -28089,13 +28089,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 4020,
+      "sourceDocuments": 4035,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T13:48:34.957Z"
+      "latestInsightAt": "2026-06-06T14:07:16.091Z"
     },
     "inferenceStages": [
       {
@@ -28163,7 +28163,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 490,
+        "signalCount": 491,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -28187,7 +28187,7 @@
           },
           {
             "category": "plan",
-            "count": 13
+            "count": 14
           },
           {
             "category": "web-search",
@@ -28222,7 +28222,7 @@
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장"
         ],
-        "latestEvidenceAt": "2026-06-06T13:48:34.957Z"
+        "latestEvidenceAt": "2026-06-06T14:07:16.091Z"
       },
       {
         "id": "web-research-to-spec",
@@ -28236,11 +28236,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1812,
+        "signalCount": 1815,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 515
+            "count": 516
           },
           {
             "category": "evaluation",
@@ -28248,11 +28248,11 @@
           },
           {
             "category": "web-search",
-            "count": 437
+            "count": 438
           },
           {
             "category": "plan",
-            "count": 217
+            "count": 218
           },
           {
             "category": "request-trace",
@@ -28287,7 +28287,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T13:48:34.956Z"
+        "latestEvidenceAt": "2026-06-06T14:07:16.088Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28301,15 +28301,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1029,
+        "signalCount": 1033,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 499
+            "count": 502
           },
           {
             "category": "plan",
-            "count": 301
+            "count": 302
           },
           {
             "category": "request-trace",
@@ -28360,7 +28360,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T13:48:34.957Z"
+        "latestEvidenceAt": "2026-06-06T14:07:16.091Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28374,19 +28374,19 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 761,
+        "signalCount": 773,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 308
+            "count": 312
           },
           {
             "category": "evaluation",
-            "count": 249
+            "count": 252
           },
           {
             "category": "work-summary",
-            "count": 44
+            "count": 45
           },
           {
             "category": "web-search",
@@ -28398,19 +28398,19 @@
           },
           {
             "category": "request-trace",
-            "count": 27
+            "count": 28
           },
           {
             "category": "user-request",
-            "count": 20
+            "count": 21
           },
           {
             "category": "project-doc",
-            "count": 19
+            "count": 20
           },
           {
             "category": "work-timing",
-            "count": 17
+            "count": 18
           },
           {
             "category": "daily-history",
@@ -28433,7 +28433,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "Requirement: Native Pipe Runtime Tools"
         ],
-        "latestEvidenceAt": "2026-06-06T13:48:34.957Z"
+        "latestEvidenceAt": "2026-06-06T14:07:16.091Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28447,15 +28447,15 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1583,
+        "signalCount": 1592,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 681
+            "count": 685
           },
           {
             "category": "evaluation",
-            "count": 537
+            "count": 539
           },
           {
             "category": "user-request",
@@ -28463,11 +28463,11 @@
           },
           {
             "category": "work-summary",
-            "count": 67
+            "count": 68
           },
           {
             "category": "request-trace",
-            "count": 58
+            "count": 59
           },
           {
             "category": "plan",
@@ -28479,7 +28479,7 @@
           },
           {
             "category": "project-doc",
-            "count": 35
+            "count": 36
           },
           {
             "category": "work-timing",
@@ -28506,7 +28506,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T13:48:34.957Z"
+        "latestEvidenceAt": "2026-06-06T14:07:16.090Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28582,14 +28582,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 4020,
+      "sourceDocuments": 4035,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T13:48:34.957Z"
+      "latestInsightAt": "2026-06-06T14:07:16.091Z"
     },
     "operatingModel": [
       {
@@ -28647,25 +28647,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3331,
+        "signalCount": 3339,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1812
+            "signalCount": 1815
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1029
+            "signalCount": 1033
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 490
+            "signalCount": 491
           }
         ],
         "missingPatternIds": [],
@@ -28693,7 +28693,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T13:48:34.957Z",
+        "latestEvidenceAt": "2026-06-06T14:07:16.091Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28722,13 +28722,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 880,
+        "signalCount": 892,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 761
+            "signalCount": 773
           },
           {
             "id": "release-blocker-gate",
@@ -28762,7 +28762,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T13:48:34.957Z",
+        "latestEvidenceAt": "2026-06-06T14:07:16.091Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28791,19 +28791,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2612,
+        "signalCount": 2625,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1583
+            "signalCount": 1592
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1029
+            "signalCount": 1033
           }
         ],
         "missingPatternIds": [],
@@ -28831,7 +28831,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T13:48:34.957Z",
+        "latestEvidenceAt": "2026-06-06T14:07:16.091Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28860,13 +28860,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 609,
+        "signalCount": 610,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 490
+            "signalCount": 491
           },
           {
             "id": "release-blocker-gate",
@@ -28900,7 +28900,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T13:48:34.957Z",
+        "latestEvidenceAt": "2026-06-06T14:07:16.091Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28929,19 +28929,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2841,
+        "signalCount": 2848,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1029
+            "signalCount": 1033
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1812
+            "signalCount": 1815
           }
         ],
         "missingPatternIds": [],
@@ -28969,7 +28969,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T13:48:34.957Z",
+        "latestEvidenceAt": "2026-06-06T14:07:16.091Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28998,7 +28998,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1931,
+        "signalCount": 1934,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -29010,7 +29010,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1812
+            "signalCount": 1815
           }
         ],
         "missingPatternIds": [],
@@ -29038,7 +29038,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T13:48:34.956Z",
+        "latestEvidenceAt": "2026-06-06T14:07:16.088Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

@@ -1,0 +1,102 @@
+{
+  "pipeline_id": "terminal-agent-bridge",
+  "purpose": "Coordinate the UI action that connects native PTY terminal state before starting an agent CLI session.",
+  "work_mode": "standard",
+  "risk_level": "medium",
+  "processes": [
+    {
+      "process_id": "terminal_agent_bridge_action",
+      "adapter_id": "platform-desktop-app-runtime",
+      "command": "start_terminal_agent_bridge",
+      "args": [
+        "connect_native_pty",
+        "start_cli_adapter_session"
+      ],
+      "cwd": "workspace-root",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 30,
+      "max_output_bytes": 120000,
+      "required": true
+    }
+  ],
+  "pipes": [],
+  "artifacts": [
+    {
+      "artifact_id": "terminal_agent_bridge_evaluation",
+      "kind": "report",
+      "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge.ko.md",
+      "produced_by": "terminal_agent_bridge_action",
+      "consumed_by": [],
+      "required": true,
+      "max_bytes": 120000,
+      "format": "markdown",
+      "retention_policy": "Retained as the close-out evaluation report.",
+      "cleanup_policy": "No temporary artifact is created by this UI bridge.",
+      "provenance": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "validation": [
+        "workspace-monitor check/test",
+        "renderer build",
+        "Browser bridge smoke"
+      ]
+    }
+  ],
+  "execution_policy": {
+    "shell_allowed": false,
+    "argv_arrays_required": true,
+    "explicit_pipe_graph_required": true,
+    "explicit_cwd_required": true,
+    "adapter_allowlist": [
+      "platform-desktop-app-runtime"
+    ]
+  },
+  "safety_controls": [
+    "adapter_allowlist",
+    "argv_arguments",
+    "shell_disabled_by_default",
+    "explicit_cwd_boundary",
+    "environment_allowlist",
+    "secret_redaction",
+    "output_redaction",
+    "permission_scope",
+    "fallback_behavior",
+    "audit_logging"
+  ],
+  "resource_controls": {
+    "timeout_policy": "Existing Rust CLI sessions remain bounded by their existing session timeout logic.",
+    "max_output_bytes": 120000,
+    "cancellation_policy": "Existing cancel_native_pty_terminal and cancel_cli_adapter_session actions remain available in RuntimeTerminalDrawer.",
+    "cleanup_policy": "No new background supervisor, file pipe, or temp artifact is introduced.",
+    "orphan_process_policy": "Existing Rust session disposal paths remain the owner of process cleanup.",
+    "backpressure_policy": "Existing bounded PTY and CLI output buffers remain in use."
+  },
+  "merge_strategy": "No fan-out or merge gate is added. The bridge is a sequential UI action: PTY readiness gate first, then selected agent CLI session.",
+  "source_provenance": [
+    "https://xtermjs.org/docs/guides/using-addons/",
+    "https://docs.rs/portable-pty/",
+    "https://v2.tauri.app/develop/calling-rust/",
+    "platform-desktop-app/specs/2026-06-06-terminal-agent-bridge/spec.ko.md"
+  ],
+  "plan_evidence": [
+    "The user asked to make terminal connection and agent function proper.",
+    "Existing Rust PTY and CLI session commands already provide the native process authority.",
+    "A renderer bridge can make the dependency visible without adding a new supervisor."
+  ],
+  "verification": [
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test",
+    "corepack pnpm -w run desktop:renderer:build",
+    "Browser smoke on http://127.0.0.1:3216/#section-desktop"
+  ],
+  "rollback_plan": [
+    "Remove terminal-agent-bridge UI and CSS.",
+    "Restore startSession and startNativePtySession inline logic from previous commit if needed.",
+    "Remove related test assertions and history/spec records."
+  ],
+  "notes": [
+    "No stdout/stdin pipe edge is added in this slice; the bridge coordinates existing command invocations."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "date": "2026-06-06",
+  "project": "platform-desktop-app",
+  "work_mode": "standard",
+  "selection_reason": "The request changes a desktop runtime UI and process-start flow, but it does not install dependencies or change public release packaging.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "enforcement_checks": [
+    "requirements and spec artifacts created",
+    "resource risk recorded because PTY/CLI subprocess lifecycle is touched",
+    "CLI pipeline target recorded because one action coordinates terminal and agent execution",
+    "browser smoke required for frontend change"
+  ]
+}
