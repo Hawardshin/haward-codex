@@ -124,8 +124,19 @@ test("AI Eval is a first-class resident workbench section", () => {
   assert.match(monitorShell, /id:\s*"evaluate-work"[\s\S]*?targetSection:\s*"eval"/);
   assert.match(monitorShell, /id:\s*"eval"[\s\S]*?cta:\s*uiLanguage === "ko" \? "AI 평가 열기" : "Open AI Eval"/);
   assert.match(monitorShell, /section === "eval"[\s\S]*?<EvaluationReportPanel/);
+  assert.match(monitorShell, /const \[sharedDesktopResourceSnapshot, setSharedDesktopResourceSnapshot\] = useState<DesktopResourceSnapshotReport \| null>\(null\)/);
+  assert.match(monitorShell, /handleDesktopResourceSnapshotChange/);
+  assert.match(monitorShell, /onDesktopResourceSnapshotChange=\{handleDesktopResourceSnapshotChange\}/);
+  assert.match(monitorShell, /runtimeTelemetry=\{sharedDesktopResourceSnapshot\}/);
+  assert.match(monitorShell, /semanticMetrics: Array<\{/);
   assert.match(evaluationReportPanel, /data-eval-workbench="open-source-eval-cockpit"/);
   assert.match(evaluationReportPanel, /data-eval-comprehensive-improvement="all-signal-cockpit"/);
+  assert.match(evaluationReportPanel, /data-eval-runtime-telemetry/);
+  assert.match(evaluationReportPanel, /EvalRuntimeTelemetrySignal/);
+  assert.match(evaluationReportPanel, /nativeRuntimeScore/);
+  assert.match(evaluationReportPanel, /runtimeTelemetryAvailable/);
+  assert.match(evaluationReportPanel, /process\.memory\.usage/);
+  assert.match(evaluationReportPanel, /process\.cpu\.utilization/);
   assert.match(evaluationReportPanel, /Current work evaluation report/);
   assert.match(evaluationReportPanel, /Composite Improvement Cockpit/);
   assert.match(evaluationReportPanel, /desktop-performance/);
@@ -148,6 +159,7 @@ test("AI Eval is a first-class resident workbench section", () => {
   assert.match(css, /\.eval-comprehensive-panel \{/);
   assert.match(css, /\.eval-comprehensive-grid \{/);
   assert.match(css, /\.eval-dimension-meter \{/);
+  assert.match(css, /\.eval-runtime-telemetry-strip \{/);
   assert.match(css, /\.eval-tool-grid \{/);
   assert.match(css, /\.eval-open-source-grid \{/);
   assert.match(packageJson.scripts.check, /check-comprehensive-improvement-contract\.mjs/);

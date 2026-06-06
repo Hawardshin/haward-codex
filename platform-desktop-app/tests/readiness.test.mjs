@@ -553,6 +553,10 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     join(root, "renderer/workspace-monitor/components/workbench/AgentDetailPanels.tsx"),
     "utf8"
   );
+  const evaluationReportPanel = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/EvaluationReportPanel.tsx"),
+    "utf8"
+  );
   const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureDrilldown}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}\n${agentBuilderPanels}\n${agentDetailPanels}`;
   const monitorStyles = readFileSync(join(root, "renderer/workspace-monitor/app/globals.css"), "utf8");
   const clipboardUtility = readFileSync(join(root, "renderer/workspace-monitor/lib/clipboard.mjs"), "utf8");
@@ -708,6 +712,11 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     const pattern = new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
     assert.match(ptyDecisionKo, pattern);
     assert.match(ptyDecisionEn, pattern);
+  }
+  for (const metricToken of ["process.memory.usage", "process.cpu.utilization", "process.thread.count"]) {
+    const pattern = new RegExp(metricToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    assert.match(lib, pattern);
+    assert.match(evaluationReportPanel, pattern);
   }
 
   for (const commandName of [

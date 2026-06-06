@@ -2304,6 +2304,12 @@ type DesktopResourceSnapshotReport = {
   preloadFileLimit: number;
   preloadStrategy: string;
   workspaceCache: WorkspaceResourceSnapshotCache;
+  semanticMetrics: Array<{
+    name: string;
+    value: number;
+    unit: string;
+    source: string;
+  }>;
   warmupStatus: string;
   warmupSource: string;
   warmupError: string;
@@ -3155,6 +3161,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [providerModelBusy, setProviderModelBusy] = useState(false);
   const [providerModelBusyProviderId, setProviderModelBusyProviderId] = useState("");
   const [providerModelError, setProviderModelError] = useState("");
+  const [sharedDesktopResourceSnapshot, setSharedDesktopResourceSnapshot] = useState<DesktopResourceSnapshotReport | null>(null);
   const viewModes = snapshot.viewModeCatalog?.modes?.length ? snapshot.viewModeCatalog.modes : fallbackViewModes;
   const languageModes = useMemo(() => {
     const merged = new Map<string, MonitorLanguageMode>();
@@ -4490,6 +4497,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const openProviderSettings = useCallback(() => {
     openSettingsTab("execution", "providers");
   }, [openSettingsTab]);
+  const handleDesktopResourceSnapshotChange = useCallback((report: DesktopResourceSnapshotReport | null) => {
+    setSharedDesktopResourceSnapshot(report);
+  }, []);
   const updateSearchAgentRunForm = (field: keyof SearchAgentRunForm, value: string) => {
     if (field === "providerId") {
       const provider = providerCredentials.providers.find((item) => item.providerId === value);
@@ -6928,6 +6938,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             onLaunchRequestConsumed={consumeRuntimeLaunchRequest}
             onOpenSearchAgentWorkbench={openSearchAgentWorkbench}
             onOpenSettings={openExecutionSettings}
+            onDesktopResourceSnapshotChange={handleDesktopResourceSnapshotChange}
             terminalDrawerOpen={terminalDrawerOpen}
             setTerminalDrawerOpen={setTerminalDrawerOpen}
             surfaceActive={section === "desktop"}
@@ -6946,6 +6957,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             activeTasks={collaborationBoard.summary.activeTasks}
             blockedTasks={collaborationBoard.summary.blockedTasks}
             openSourceReferences={openSourceFeatureReferences}
+            runtimeTelemetry={sharedDesktopResourceSnapshot}
             onOpenDocuments={(nextCategory = "evaluation") => {
               openSection("documents");
               setCategory(nextCategory);
@@ -7273,6 +7285,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             onLaunchRequestConsumed={consumeRuntimeLaunchRequest}
             onOpenSearchAgentWorkbench={openSearchAgentWorkbench}
             onOpenSettings={openExecutionSettings}
+            onDesktopResourceSnapshotChange={handleDesktopResourceSnapshotChange}
             terminalDrawerOpen={terminalDrawerOpen}
             setTerminalDrawerOpen={setTerminalDrawerOpen}
             surface="files"
@@ -9018,6 +9031,7 @@ function DesktopRuntimePanel({
   onLaunchRequestConsumed,
   onOpenSearchAgentWorkbench,
   onOpenSettings,
+  onDesktopResourceSnapshotChange,
   terminalDrawerOpen,
   setTerminalDrawerOpen,
   surface = "runtime",
@@ -9033,6 +9047,7 @@ function DesktopRuntimePanel({
   onLaunchRequestConsumed?: (requestId: string) => void;
   onOpenSearchAgentWorkbench?: () => void;
   onOpenSettings: (subsectionId?: SettingsSubsectionId) => void;
+  onDesktopResourceSnapshotChange?: (report: DesktopResourceSnapshotReport | null) => void;
   terminalDrawerOpen: boolean;
   setTerminalDrawerOpen: (open: boolean) => void;
   surface?: "runtime" | "files";
@@ -9661,6 +9676,7 @@ function DesktopRuntimePanel({
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
       setDesktopResourceSnapshot(null);
+      onDesktopResourceSnapshotChange?.(null);
       return null;
     }
 
@@ -9670,10 +9686,12 @@ function DesktopRuntimePanel({
         return null;
       }
       setDesktopResourceSnapshot(report);
+      onDesktopResourceSnapshotChange?.(report);
       return report;
     } catch {
       if (panelMountedRef.current) {
         setDesktopResourceSnapshot(null);
+        onDesktopResourceSnapshotChange?.(null);
       }
       return null;
     }
@@ -10064,6 +10082,7 @@ function DesktopRuntimePanel({
       setServiceReadinessNotice("");
       setDesktopWorkspace(nextDesktopWorkspace);
       setDesktopResourceSnapshot(nextDesktopResourceSnapshot);
+      onDesktopResourceSnapshotChange?.(nextDesktopResourceSnapshot);
       setWorkspaceImportPath(nextDesktopWorkspace.activeWorkspacePath);
       setWorkspaceHostNotice("");
       setDecisionResumeNotice("");
@@ -10100,6 +10119,7 @@ function DesktopRuntimePanel({
       setServiceReadinessNotice("");
       setDesktopWorkspace(null);
       setDesktopResourceSnapshot(null);
+      onDesktopResourceSnapshotChange?.(null);
       setWorkspaceHostNotice("");
       setInboxReport(null);
       setDecisionResumeNotice("");

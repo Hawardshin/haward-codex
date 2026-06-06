@@ -28,11 +28,17 @@ const dimensionIds = [
 
 assertIncludes(evaluationPanel, "Comprehensive improvement panel", [
   'data-eval-comprehensive-improvement="all-signal-cockpit"',
+  'data-eval-runtime-telemetry',
   "Composite Improvement Cockpit",
+  "EvalRuntimeTelemetrySignal",
   "comprehensiveImprovementDimensions",
   "comprehensiveImprovementScore",
+  "nativeRuntimeScore",
+  "runtimeTelemetryAvailable",
   "priorityDimensions",
   "riskLaneCount",
+  "process.memory.usage",
+  "process.cpu.utilization",
   ...dimensionIds
 ]);
 
@@ -41,6 +47,7 @@ assertIncludes(css, "Comprehensive improvement design", [
   ".eval-comprehensive-summary",
   ".eval-comprehensive-grid",
   ".eval-comprehensive-priority",
+  ".eval-runtime-telemetry-strip",
   ".eval-dimension-card",
   ".eval-dimension-meter",
   ".eval-dimension-card.state-risk",

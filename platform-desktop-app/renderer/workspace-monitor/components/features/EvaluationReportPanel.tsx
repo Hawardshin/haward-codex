@@ -46,6 +46,37 @@ type EvalCandidateRepo = {
   status: string;
 };
 
+type EvalRuntimeTelemetrySignal = {
+  status: string;
+  schemaVersion: string;
+  sampledAt: string;
+  systemSupported: boolean;
+  appPid: number;
+  processMemoryBytes: number;
+  processVirtualMemoryBytes: number;
+  processCpuUsage: number;
+  processRunTimeSeconds: number;
+  processTaskCount: number;
+  cpuThreads: number;
+  parallelWorkers: number;
+  globalCpuUsage: number;
+  totalMemoryBytes: number;
+  availableMemoryBytes: number;
+  memoryBudgetBytes: number;
+  workspaceCache: {
+    cacheStatus: string;
+    cachedTextFiles: number;
+    cachedBytes: number;
+    preloadDurationMs: number;
+  };
+  semanticMetrics?: Array<{
+    name: string;
+    value: number;
+    unit: string;
+    source: string;
+  }>;
+};
+
 type ImprovementDimension = {
   id: string;
   labelKo: string;
@@ -67,6 +98,7 @@ export type EvaluationReportPanelProps = {
   activeTasks: number;
   blockedTasks: number;
   openSourceReferences: EvalOpenSourceReferences;
+  runtimeTelemetry?: EvalRuntimeTelemetrySignal | null;
   onOpenDocuments: (category?: string) => void;
   onOpenRuntime: () => void;
 };
@@ -235,6 +267,20 @@ function percent(value: number) {
   return `${Math.max(0, Math.min(100, Math.round(value))).toLocaleString("ko-KR")}%`;
 }
 
+function formatBytes(value: number) {
+  if (!Number.isFinite(value) || value <= 0) {
+    return "0 B";
+  }
+  const units = ["B", "KB", "MB", "GB", "TB"];
+  let size = value;
+  let unitIndex = 0;
+  while (size >= 1024 && unitIndex < units.length - 1) {
+    size /= 1024;
+    unitIndex += 1;
+  }
+  return `${size >= 10 || unitIndex === 0 ? size.toFixed(0) : size.toFixed(1)} ${units[unitIndex]}`;
+}
+
 function scoreFromRatio(value: number, max: number) {
   if (max <= 0) {
     return 0;
@@ -290,6 +336,7 @@ export function EvaluationReportPanel({
   onOpenDocuments,
   onOpenRuntime,
   openSourceReferences,
+  runtimeTelemetry,
   stats,
   unifiedEvents
 }: EvaluationReportPanelProps) {
@@ -373,6 +420,64 @@ export function EvaluationReportPanel({
     /resource|process|pipe|memory|cpu|ram|leak|terminal|pty|tauri|rust|native|운영체제|메모리|프로세스|파이프/i
   );
   const releaseSignalCount = toolSignalCount("package") + documentsMatching(/build|package|dmg|codesign|notar|release|빌드|패키징|배포/i);
+  const runtimeTelemetryAvailable = Boolean(runtimeTelemetry?.status === "sampled" && runtimeTelemetry.systemSupported);
+  const runtimeMemoryHeadroomScore =
+    runtimeTelemetryAvailable && runtimeTelemetry?.memoryBudgetBytes
+      ? clampScore(100 - Math.min(95, scoreFromRatio(runtimeTelemetry.processMemoryBytes, runtimeTelemetry.memoryBudgetBytes)))
+      : scoreFromRatio(nativeResourceSignalCount, 12);
+  const runtimeCpuHeadroomScore =
+    runtimeTelemetryAvailable && runtimeTelemetry
+      ? clampScore(100 - Math.min(95, runtimeTelemetry.processCpuUsage))
+      : scoreFromRatio(toolSignalCount("rust-tauri"), 4);
+  const runtimeCacheScore =
+    runtimeTelemetryAvailable && runtimeTelemetry?.workspaceCache
+      ? runtimeTelemetry.workspaceCache.cachedBytes > 0 || runtimeTelemetry.workspaceCache.cacheStatus
+        ? 100
+        : 40
+      : scoreFromRatio(nativeResourceSignalCount, 12);
+  const nativeRuntimeScore = runtimeTelemetryAvailable
+    ? clampScore(runtimeMemoryHeadroomScore * 0.36 + runtimeCpuHeadroomScore * 0.36 + runtimeCacheScore * 0.18 + validationSignalScore * 0.1)
+    : clampScore(scoreFromRatio(nativeResourceSignalCount, 12) * 0.45 + scoreFromRatio(toolSignalCount("rust-tauri"), 4) * 0.35 + validationSignalScore * 0.2);
+  const runtimeTelemetryRows = runtimeTelemetryAvailable && runtimeTelemetry
+    ? [
+        {
+          id: "process.memory.usage",
+          labelKo: "프로세스 RAM",
+          labelEn: "Process RAM",
+          value: formatBytes(runtimeTelemetry.processMemoryBytes),
+          detail: `${formatBytes(runtimeTelemetry.availableMemoryBytes)} free / ${formatBytes(runtimeTelemetry.memoryBudgetBytes)} budget`
+        },
+        {
+          id: "process.cpu.utilization",
+          labelKo: "프로세스 CPU",
+          labelEn: "Process CPU",
+          value: `${runtimeTelemetry.processCpuUsage.toFixed(1)}%`,
+          detail: `${runtimeTelemetry.parallelWorkers}/${runtimeTelemetry.cpuThreads} workers`
+        },
+        {
+          id: "workspace.cache.usage",
+          labelKo: "워크스페이스 cache",
+          labelEn: "Workspace Cache",
+          value: formatBytes(runtimeTelemetry.workspaceCache.cachedBytes),
+          detail: `${runtimeTelemetry.workspaceCache.cachedTextFiles.toLocaleString("ko-KR")} files / ${runtimeTelemetry.workspaceCache.cacheStatus}`
+        },
+        {
+          id: "process.thread.count",
+          labelKo: "프로세스 task",
+          labelEn: "Process Tasks",
+          value: runtimeTelemetry.processTaskCount.toLocaleString("ko-KR"),
+          detail: `${runtimeTelemetry.processRunTimeSeconds.toLocaleString("ko-KR")}s uptime`
+        }
+      ]
+    : [
+        {
+          id: "runtime.preview",
+          labelKo: "네이티브 telemetry",
+          labelEn: "Native Telemetry",
+          value: ko ? "대기" : "pending",
+          detail: ko ? "Tauri desktop runtime에서 RAM/CPU/cache가 채워집니다." : "RAM, CPU, and cache fill in the Tauri desktop runtime."
+        }
+      ];
   const openSourceLayerScore = scoreFromRatio(
     (openSourceReferences.summary?.totalLayers || openSourceReferences.featureReferenceLayers.length || 0) +
       (openSourceReferences.summary?.totalRepositories || openSourceCandidates.length || 0),
@@ -393,12 +498,16 @@ export function EvaluationReportPanel({
       labelEn: "Desktop Performance",
       score: clampScore(
         scoreFromRatio(timingDocs.length + (stats.timingRecords || 0), 10) * 0.42 +
-          scoreFromRatio(toolSignalCount("browser") + toolSignalCount("typescript"), 8) * 0.38 +
-          scoreFromRatio(nativeResourceSignalCount, 10) * 0.2
+          scoreFromRatio(toolSignalCount("browser") + toolSignalCount("typescript"), 8) * 0.3 +
+          nativeRuntimeScore * 0.28
       ),
       state: "watch",
-      evidenceKo: `${timingDocs.length.toLocaleString("ko-KR")} timing docs / ${toolSignalCount("browser").toLocaleString("ko-KR")} browser signals`,
-      evidenceEn: `${timingDocs.length.toLocaleString("ko-KR")} timing docs / ${toolSignalCount("browser").toLocaleString("ko-KR")} browser signals`,
+      evidenceKo: runtimeTelemetryAvailable && runtimeTelemetry
+        ? `${formatBytes(runtimeTelemetry.processMemoryBytes)} RAM / ${runtimeTelemetry.processCpuUsage.toFixed(1)}% CPU / ${toolSignalCount("browser").toLocaleString("ko-KR")} browser signals`
+        : `${timingDocs.length.toLocaleString("ko-KR")} timing docs / ${toolSignalCount("browser").toLocaleString("ko-KR")} browser signals`,
+      evidenceEn: runtimeTelemetryAvailable && runtimeTelemetry
+        ? `${formatBytes(runtimeTelemetry.processMemoryBytes)} RAM / ${runtimeTelemetry.processCpuUsage.toFixed(1)}% CPU / ${toolSignalCount("browser").toLocaleString("ko-KR")} browser signals`
+        : `${timingDocs.length.toLocaleString("ko-KR")} timing docs / ${toolSignalCount("browser").toLocaleString("ko-KR")} browser signals`,
       nextKo: "탭 전환, long task, resident preload를 같은 smoke run에서 계속 측정합니다.",
       nextEn: "Keep tab switching, long tasks, and resident preload measured in one smoke run."
     },
@@ -417,10 +526,14 @@ export function EvaluationReportPanel({
       id: "native-resource-lifecycle",
       labelKo: "네이티브 리소스 생명주기",
       labelEn: "Native Resource Lifecycle",
-      score: clampScore(scoreFromRatio(nativeResourceSignalCount, 12) * 0.45 + scoreFromRatio(toolSignalCount("rust-tauri"), 4) * 0.35 + validationSignalScore * 0.2),
+      score: nativeRuntimeScore,
       state: "watch",
-      evidenceKo: `${nativeResourceSignalCount.toLocaleString("ko-KR")} resource/process records`,
-      evidenceEn: `${nativeResourceSignalCount.toLocaleString("ko-KR")} resource/process records`,
+      evidenceKo: runtimeTelemetryAvailable && runtimeTelemetry
+        ? `${runtimeTelemetry.semanticMetrics?.length || 0} semantic metrics / ${runtimeTelemetry.workspaceCache.cachedTextFiles.toLocaleString("ko-KR")} cached files`
+        : `${nativeResourceSignalCount.toLocaleString("ko-KR")} resource/process records`,
+      evidenceEn: runtimeTelemetryAvailable && runtimeTelemetry
+        ? `${runtimeTelemetry.semanticMetrics?.length || 0} semantic metrics / ${runtimeTelemetry.workspaceCache.cachedTextFiles.toLocaleString("ko-KR")} cached files`
+        : `${nativeResourceSignalCount.toLocaleString("ko-KR")} resource/process records`,
       nextKo: "PTY, subprocess, timers, cache, memory retention은 시작/종료 소유권을 하나씩 계약화합니다.",
       nextEn: "Contract ownership for PTYs, subprocesses, timers, caches, and memory retention."
     },
@@ -575,6 +688,15 @@ export function EvaluationReportPanel({
               <span>{`P${index + 1}`}</span>
               <strong>{ko ? dimension.labelKo : dimension.labelEn}</strong>
               <p>{ko ? dimension.nextKo : dimension.nextEn}</p>
+            </article>
+          ))}
+        </div>
+        <div className="eval-runtime-telemetry-strip" data-eval-runtime-telemetry={runtimeTelemetryAvailable ? "native-sampled" : "browser-preview"}>
+          {runtimeTelemetryRows.map((item) => (
+            <article key={item.id} data-runtime-metric={item.id}>
+              <span>{ko ? item.labelKo : item.labelEn}</span>
+              <strong>{item.value}</strong>
+              <small>{item.detail}</small>
             </article>
           ))}
         </div>

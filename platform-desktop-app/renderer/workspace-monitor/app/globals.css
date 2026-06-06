@@ -4992,6 +4992,7 @@ h3 {
 .eval-comprehensive-summary,
 .eval-comprehensive-grid,
 .eval-comprehensive-priority,
+.eval-runtime-telemetry-strip,
 .eval-report-grid,
 .eval-token-grid,
 .eval-tool-grid,
@@ -5030,6 +5031,7 @@ h3 {
 .eval-comprehensive-priority p,
 .eval-dimension-card p,
 .eval-dimension-card small,
+.eval-runtime-telemetry-strip small,
 .eval-tool-grid span,
 .eval-open-source-grid p,
 .eval-bottleneck-list p,
@@ -5228,6 +5230,41 @@ h3 {
   overflow-wrap: anywhere;
   font-size: var(--font-size-body);
   line-height: 1.25;
+}
+
+.eval-runtime-telemetry-strip {
+  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+}
+
+.eval-runtime-telemetry-strip article {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 68%, #21776d);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 86%, #21776d 14%);
+  padding: 10px;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.07);
+}
+
+.eval-runtime-telemetry-strip span {
+  color: var(--muted);
+  font-size: var(--font-size-overline);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.eval-runtime-telemetry-strip strong {
+  overflow-wrap: anywhere;
+  font-size: var(--font-size-section-title);
+  line-height: var(--line-height-tight);
+}
+
+.eval-runtime-telemetry-strip small {
+  color: var(--muted);
+  font-size: var(--font-size-caption);
+  font-weight: 780;
+  line-height: 1.35;
 }
 
 .eval-report-grid {

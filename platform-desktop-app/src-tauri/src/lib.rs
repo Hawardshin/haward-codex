@@ -185,9 +185,19 @@ struct DesktopResourceSnapshotReport {
     preload_file_limit: usize,
     preload_strategy: String,
     workspace_cache: WorkspaceResourceSnapshotCache,
+    semantic_metrics: Vec<DesktopResourceMetric>,
     warmup_status: String,
     warmup_source: String,
     warmup_error: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct DesktopResourceMetric {
+    name: &'static str,
+    value: f64,
+    unit: &'static str,
+    source: &'static str,
 }
 
 struct CliSession {
@@ -2632,6 +2642,39 @@ fn get_desktop_resource_snapshot(
     let warmup = cache_store.warmup_report()?;
     let workspace_cache = cache_store.snapshot_cache()?;
 
+    let process_memory_bytes = process.map(|item| item.memory()).unwrap_or(0);
+    let process_virtual_memory_bytes = process.map(|item| item.virtual_memory()).unwrap_or(0);
+    let process_cpu_usage = process.map(|item| item.cpu_usage()).unwrap_or(0.0);
+    let process_task_count = process
+        .and_then(|item| item.tasks().map(|tasks| tasks.len()))
+        .unwrap_or(0);
+    let semantic_metrics = vec![
+        DesktopResourceMetric {
+            name: "process.memory.usage",
+            value: process_memory_bytes as f64,
+            unit: "By",
+            source: "sysinfo",
+        },
+        DesktopResourceMetric {
+            name: "process.memory.virtual",
+            value: process_virtual_memory_bytes as f64,
+            unit: "By",
+            source: "sysinfo",
+        },
+        DesktopResourceMetric {
+            name: "process.cpu.utilization",
+            value: f64::from(process_cpu_usage) / 100.0,
+            unit: "1",
+            source: "sysinfo",
+        },
+        DesktopResourceMetric {
+            name: "process.thread.count",
+            value: process_task_count as f64,
+            unit: "{thread}",
+            source: "sysinfo",
+        },
+    ];
+
     Ok(DesktopResourceSnapshotReport {
         status: "sampled".to_string(),
         schema_version: "desktop-resource-snapshot.v1".to_string(),
@@ -2641,13 +2684,11 @@ fn get_desktop_resource_snapshot(
         process_name: process
             .map(|item| item.name().to_string_lossy().to_string())
             .unwrap_or_else(|| "unknown".to_string()),
-        process_memory_bytes: process.map(|item| item.memory()).unwrap_or(0),
-        process_virtual_memory_bytes: process.map(|item| item.virtual_memory()).unwrap_or(0),
-        process_cpu_usage: process.map(|item| item.cpu_usage()).unwrap_or(0.0),
+        process_memory_bytes,
+        process_virtual_memory_bytes,
+        process_cpu_usage,
         process_run_time_seconds: process.map(|item| item.run_time()).unwrap_or(0),
-        process_task_count: process
-            .and_then(|item| item.tasks().map(|tasks| tasks.len()))
-            .unwrap_or(0),
+        process_task_count,
         cpu_threads: profile.cpu_threads,
         available_parallelism: profile.available_parallelism,
         parallel_workers: profile.parallel_workers,
@@ -2660,6 +2701,7 @@ fn get_desktop_resource_snapshot(
         preload_file_limit: profile.preload_file_limit,
         preload_strategy: profile.preload_strategy,
         workspace_cache,
+        semantic_metrics,
         warmup_status: warmup.status,
         warmup_source: warmup.source,
         warmup_error: warmup.error,

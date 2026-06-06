@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T00:07:22.858Z",
+  "generatedAt": "2026-06-06T00:28:58.776Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -17,7 +17,7 @@
     "webSearches": 14,
     "timingRecords": 14,
     "historyDays": 1,
-    "adminHistoryDocuments": 2540,
+    "adminHistoryDocuments": 2547,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7603,6 +7603,214 @@
   ],
   "documents": [
     {
+      "id": "history-request-traces-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-runtime-metric-eval-score.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "2026 06 06 request to outcome trace",
+      "excerpt": "2026 06 06 request to outcome trace 요청 미뤄둔 작업 진행. 결정 이전 comprehensive improvement close out의 잔여 위험 중 실제 runtime metric 기반 score source 연결을 다음 slice로 선택했다. 산출물 platform desktop app/docs/requirements/2026 06 06 runtime metric eval score.ko.md platform desktop app/specs/2026 06 06 r",
+      "html": "<p>2026 06 06 request to outcome trace 요청 미뤄둔 작업 진행. 결정 이전 comprehensive improvement close out의 잔여 위험 중 실제 runtime metric 기반 score source 연결을 다음 slice로 선택했다. 산출물 platform desktop app/docs/requirements/2026 06 06 runtime metric eval score.ko.md platform desktop app/specs/2026 06 06 runtime metric eval score/ platform desktop app/src tauri/src/lib.rs platform des</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 926,
+      "updatedAt": "2026-06-06T00:28:42.081Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-runtime-metric-eval-score-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-runtime-metric-eval-score/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업: runtime metric EVAL score",
+      "excerpt": "작업: runtime metric EVAL score x Web first 조사 수행 x memory bootstrap과 이전 close out 잔여 위험 확인 x 구현 slice 선택 x Rust DesktopResourceSnapshotReport semantic metric 추가 x MonitorShell runtime snapshot 공유 state 추가 x EVAL panel scoring/evidence/runtime strip 추가 x CSS와 static contract check ",
+      "html": "<h1>작업: runtime metric EVAL score</h1>\n<ul>\n<li>[x] Web-first 조사 수행</li>\n<li>[x] memory bootstrap과 이전 close-out 잔여 위험 확인</li>\n<li>[x] 구현 slice 선택</li>\n<li>[x] Rust <code>DesktopResourceSnapshotReport</code> semantic metric 추가</li>\n<li>[x] <code>MonitorShell</code> runtime snapshot 공유 state 추가</li>\n<li>[x] EVAL panel scoring/evidence/runtime strip 추가</li>\n<li>[x] CSS와 static contract check 추가</li>\n<li>[x] workspace-monitor/readiness tests 업데이트</li>\n<li>[x] renderer and desktop checks/tests 실행</li>\n<li>[x] renderer build와 internal package 실행</li>\n<li>[x] Browser smoke 실행</li>\n<li>[x] history/evaluation/trace close-out</li>\n<li>[x] commit and push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 616,
+      "updatedAt": "2026-06-06T00:28:42.081Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-runtime-metric-eval-score.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "2026 06 06 runtime metric EVAL score 평가",
+      "excerpt": "2026 06 06 runtime metric EVAL score 평가 평가 대상 요청: 미뤄둔 작업 진행. 구현 slice: EVAL 종합 개선 cockpit에 실제 desktop runtime metric을 연결. 완료 기준 평가 성능: process RAM/CPU/cache 상태를 EVAL 점수 입력으로 연결했다. UI/사용성: EVAL 탭에서 runtime telemetry strip과 metric evidence를 직접 볼 수 있게 했다. 네이티브 자원: Rust/Tauri sysinfo",
+      "html": "<p>2026 06 06 runtime metric EVAL score 평가 평가 대상 요청: 미뤄둔 작업 진행. 구현 slice: EVAL 종합 개선 cockpit에 실제 desktop runtime metric을 연결. 완료 기준 평가 성능: process RAM/CPU/cache 상태를 EVAL 점수 입력으로 연결했다. UI/사용성: EVAL 탭에서 runtime telemetry strip과 metric evidence를 직접 볼 수 있게 했다. 네이티브 자원: Rust/Tauri sysinfo snapshot의 semantic process metric을 renderer에 전달한다. 안정성: 새 subprocess/timer를 만들지</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1922,
+      "updatedAt": "2026-06-06T00:26:20.963Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-runtime-metric-eval-score-json",
+      "path": "_history/work-timings/2026/2026-06-06-runtime-metric-eval-score.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Runtime Metric Eval Score",
+      "excerpt": "{ \"task id\": \"2026 06 06 runtime metric eval score\", \"title\": \"Runtime metric EVAL score\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", ",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 runtime metric eval score&quot;, &quot;title&quot;: &quot;Runtime metric EVAL score&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;notes&quot;: &quot;Checked Tauri pr</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1883,
+      "updatedAt": "2026-06-06T00:26:20.963Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-runtime-metric-eval-score.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "2026 06 06 runtime metric EVAL score 작업 요약",
+      "excerpt": "2026 06 06 runtime metric EVAL score 작업 요약 구현 Rust/Tauri desktop resource snapshot에 semantic process metric 배열을 추가했다. MonitorShell 이 desktop runtime snapshot을 공유 state로 관리하고 EVAL panel에 전달하도록 바꿨다. EVAL 종합 개선 cockpit에 native runtime score, 실제 metric evidence, runtime telemetry str",
+      "html": "<p>2026 06 06 runtime metric EVAL score 작업 요약 구현 Rust/Tauri desktop resource snapshot에 semantic process metric 배열을 추가했다. MonitorShell 이 desktop runtime snapshot을 공유 state로 관리하고 EVAL panel에 전달하도록 바꿨다. EVAL 종합 개선 cockpit에 native runtime score, 실제 metric evidence, runtime telemetry strip을 추가했다. static contract check, workspace monitor test, desktop readiness test를</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1028,
+      "updatedAt": "2026-06-06T00:26:20.961Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-runtime-metric-eval-score-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-runtime-metric-eval-score/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증: runtime metric EVAL score",
+      "excerpt": "검증: runtime metric EVAL score 실행 결과 npm prefix platform desktop app/renderer/workspace monitor run check:comprehensive improvement : 통과. checkedDimensions 7, checkedSurfaces 3. cargo check in platform desktop app/src tauri : 통과. npm prefix platform desktop app/renderer/workspace ",
+      "html": "<h1>검증: runtime metric EVAL score</h1>\n<h2>실행 결과</h2>\n<ul>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run check:comprehensive-improvement</code>: 통과. checkedDimensions 7, checkedSurfaces 3.</li>\n<li><code>cargo check</code> in <code>platform-desktop-app/src-tauri</code>: 통과.</li>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run test</code>: 통과. 70개 통과.</li>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run collect</code>: 통과. 650 inline documents, 2547 admin history records.</li>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run check</code>: 통과.</li>\n<li><code>npm --prefix platform-desktop-app run check</code>: 통과. internal service readiness score 96, public release는 signing/notarization/updater/clean-machine gate로 계속 blocked.</li>\n<li><code>npm --prefix platform-desktop-app run test</code>: 통과. 24개 통과.</li>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run build</code>: 통과.</li>\n<li><code>npm --prefix platform-desktop-app run package:internal</code>: 통과.</li>\n<li>Browser smoke for static EVAL surface: 통과. cockpitCount 1, dimensionCount 7, telemetryCount 1, runtimeMetricCount 1, telemetryMode <code>browser-preview</code>, errorLogCount 0.</li>\n</ul>\n<h2>계약 확인</h2>\n<ul>\n<li><code>data-eval-runtime-telemetry</code></li>\n<li><code>data-runtime-metric</code></li>\n<li><code>EvalRuntimeTelemetrySignal</code></li>\n<li><code>nativeRuntimeScore</code></li>\n<li><code>runtimeTelemetryAvailable</code></li>\n<li><code>process.memory.usage</code></li>\n<li><code>process.cpu.utilization</code></li>\n<li><code>.eval-runtime-telemetry-strip</code></li>\n</ul>\n<h2>생성 산출물</h2>\n<ul>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>\n<h2>현재 상태</h2>\n<p>완료. Internal package는 통과했고, public release readiness는 기존처럼 Developer ID signing, notarization, signed updater, clean-machine smoke가 필요하다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1812,
+      "updatedAt": "2026-06-06T00:26:20.961Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+      "path": "_history/plans/2026/2026-06-06-runtime-metric-eval-score.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "2026 06 06 runtime metric EVAL score 계획",
+      "excerpt": "2026 06 06 runtime metric EVAL score 계획 선택 이유 직전 작업의 잔여 위험은 종합 개선 점수가 실제 runtime metric보다 문서/계약 근거에 치우쳐 있다는 점이었다. 사용자는 반복적으로 \"데스크톱 앱이 실제 OS 자원, RAM, CPU를 써야 한다\"고 요구했으므로 다음 slice는 runtime metric을 EVAL score에 연결하는 것이 가장 직접적이다. 실행 순서 1. Web first intake와 memory bootstrap. 2. 이전 clos",
+      "html": "<p>2026 06 06 runtime metric EVAL score 계획 선택 이유 직전 작업의 잔여 위험은 종합 개선 점수가 실제 runtime metric보다 문서/계약 근거에 치우쳐 있다는 점이었다. 사용자는 반복적으로 &quot;데스크톱 앱이 실제 OS 자원, RAM, CPU를 써야 한다&quot;고 요구했으므로 다음 slice는 runtime metric을 EVAL score에 연결하는 것이 가장 직접적이다. 실행 순서 1. Web first intake와 memory bootstrap. 2. 이전 close out과 현재 source contract 확인. 3. Rust/Tauri snapshot에 semantic metric 추가. 4. Mon</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 936,
+      "updatedAt": "2026-06-06T00:22:18.057Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-runtime-metric-eval-score.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "2026 06 06 사용자 요청 요약",
+      "excerpt": "2026 06 06 사용자 요청 요약 요약 사용자는 미뤄둔 작업을 계속 진행하라고 요청했다. 해석 직전 완료 기록에서 남긴 후속 작업 중 실제 runtime metric 기반 score source 연결을 우선 처리한다. 이 선택은 사용자가 반복적으로 요구한 성능 개선, desktop OS 자원 활용, EVAL 탭, build 자동화와 직접 연결된다. 범위 포함: runtime metric을 EVAL score에 연결, 계약/테스트/build/package 검증. 제외: 새 external EVA",
+      "html": "<p>2026 06 06 사용자 요청 요약 요약 사용자는 미뤄둔 작업을 계속 진행하라고 요청했다. 해석 직전 완료 기록에서 남긴 후속 작업 중 실제 runtime metric 기반 score source 연결을 우선 처리한다. 이 선택은 사용자가 반복적으로 요구한 성능 개선, desktop OS 자원 활용, EVAL 탭, build 자동화와 직접 연결된다. 범위 포함: runtime metric을 EVAL score에 연결, 계약/테스트/build/package 검증. 제외: 새 external EVAL runner 설치, telemetry persistence, 모든 UI 전면 리팩터링.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 598,
+      "updatedAt": "2026-06-06T00:22:18.057Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-runtime-metric-eval-score-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-runtime-metric-eval-score/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "계획: runtime metric EVAL score",
+      "excerpt": "계획: runtime metric EVAL score 단계 1. 공식 문서와 이전 close out 기록을 확인한다. 2. 미뤄둔 항목 중 실제 runtime metric 기반 score 연결을 선택한다. 3. Rust desktop resource snapshot report에 semantic metric contract를 추가한다. 4. MonitorShell 이 runtime snapshot을 EVAL panel로 공유하도록 state를 끌어올린다. 5. EVAL scoring, eviden",
+      "html": "<h1>계획: runtime metric EVAL score</h1>\n<h2>단계</h2>\n<p>1. 공식 문서와 이전 close-out 기록을 확인한다.</p>\n<p>2. 미뤄둔 항목 중 실제 runtime metric 기반 score 연결을 선택한다.</p>\n<p>3. Rust desktop resource snapshot report에 semantic metric contract를 추가한다.</p>\n<p>4. <code>MonitorShell</code>이 runtime snapshot을 EVAL panel로 공유하도록 state를 끌어올린다.</p>\n<p>5. EVAL scoring, evidence, runtime metric strip UI를 추가한다.</p>\n<p>6. contract script, workspace-monitor test, readiness test를 업데이트한다.</p>\n<p>7. collector, check, test, build, internal package, Browser smoke를 실행한다.</p>\n<p>8. 요구사항/spec/trace/evaluation/history 기록을 정리하고 commit/push한다.</p>\n<h2>리스크 관리</h2>\n<ul>\n<li>snapshot callback은 실패 시 <code>null</code>을 전달해 stale native metric이 EVAL에 남지 않게 한다.</li>\n<li>static browser preview는 fallback metric row로 유지한다.</li>\n<li>process/thread metric은 semantic name을 갖되 source field로 <code>sysinfo</code> 기반임을 표시한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 994,
+      "updatedAt": "2026-06-06T00:22:18.056Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-runtime-metric-eval-score-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-runtime-metric-eval-score/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적: runtime metric EVAL score",
+      "excerpt": "추적: runtime metric EVAL score | 요구 | 구현 | 검증 | | | | | | REQ RMES 001 process runtime snapshot | DesktopResourceSnapshotReport process fields and shared snapshot state | cargo check , readiness test | | REQ RMES 002 semantic metric names | semanticMetrics with process.memory.usag",
+      "html": "<h1>추적: runtime metric EVAL score</h1>\n<table><thead><tr><th>요구</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-RMES-001 process runtime snapshot</td><td><code>DesktopResourceSnapshotReport</code> process fields and shared snapshot state</td><td><code>cargo check</code>, readiness test</td></tr><tr><td>REQ-RMES-002 semantic metric names</td><td><code>semanticMetrics</code> with <code>process.memory.usage</code>, <code>process.cpu.utilization</code>, <code>process.thread.count</code></td><td>contract check, readiness test</td></tr><tr><td>REQ-RMES-003 EVAL 점수 반영</td><td><code>nativeRuntimeScore</code>, runtime memory/cpu/cache scoring</td><td>workspace-monitor test, Browser smoke</td></tr><tr><td>REQ-RMES-004 preview fallback</td><td><code>runtime.preview</code> fallback row</td><td>Browser smoke</td></tr><tr><td>REQ-RMES-005 계약 검증</td><td><code>data-eval-runtime-telemetry</code>, <code>data-runtime-metric</code>, CSS/test tokens</td><td>contract check and tests</td></tr><tr><td>REQ-RMES-006 build/package 자동 실행</td><td>renderer build and <code>package:internal</code></td><td>validation record</td></tr></tbody></table>\n<h2>연결 기록</h2>\n<ul>\n<li>요구사항: <code>platform-desktop-app/docs/requirements/2026-06-06-runtime-metric-eval-score.ko.md</code></li>\n<li>웹 검색: <code>_history/web-searches/2026/2026-06-06-runtime-metric-eval-score.ko.md</code></li>\n<li>연구 노트: <code>_research/topics/platform-desktop-app/2026-06-06-runtime-metric-eval-score.ko.md</code></li>\n<li>평가: <code>_history/evaluations/2026/2026-06-06-runtime-metric-eval-score.ko.md</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1243,
+      "updatedAt": "2026-06-06T00:22:18.056Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-runtime-metric-eval-score-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-runtime-metric-eval-score.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "2026 06 06 runtime metric EVAL score 요구사항",
+      "excerpt": "2026 06 06 runtime metric EVAL score 요구사항 배경 이전 종합 개선 cockpit은 성능, UI, 기능, 사용성, 디자인, 네이티브 자원 활용을 한 화면에서 비교하도록 만들었다. 다만 점수 source가 아직 정적 계약과 문서 근거 중심이라, desktop process가 실제로 사용하는 CPU/RAM/cache 상태를 점수에 반영해야 한다. 요구사항 REQ RMES 001: Rust/Tauri runtime snapshot은 process memory, virtual",
+      "html": "<h1>2026-06-06 runtime metric EVAL score 요구사항</h1>\n<h2>배경</h2>\n<p>이전 종합 개선 cockpit은 성능, UI, 기능, 사용성, 디자인, 네이티브 자원 활용을 한 화면에서 비교하도록 만들었다. 다만 점수 source가 아직 정적 계약과 문서 근거 중심이라, desktop process가 실제로 사용하는 CPU/RAM/cache 상태를 점수에 반영해야 한다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-RMES-001: Rust/Tauri runtime snapshot은 process memory, virtual memory, CPU usage, runtime, task/thread count를 renderer로 전달해야 한다.</li>\n<li>REQ-RMES-002: runtime snapshot은 후속 telemetry collector와 맞물릴 수 있도록 semantic metric 이름을 포함해야 한다.</li>\n<li>REQ-RMES-003: EVAL 탭은 runtime telemetry가 있을 때 desktop performance와 native resource lifecycle 점수에 실제 metric을 반영해야 한다.</li>\n<li>REQ-RMES-004: Tauri invoke가 없는 static/browser preview 환경에서도 UI가 깨지지 않고 fallback 상태를 보여야 한다.</li>\n<li>REQ-RMES-005: runtime telemetry surface는 static contract check, unit/integration test, Browser smoke로 검증 가능해야 한다.</li>\n<li>REQ-RMES-006: 구현 후 <code>check</code>, <code>test</code>, <code>build</code>, <code>package:internal</code>을 자동 실행한다.</li>\n</ul>\n<h2>비요구사항</h2>\n<ul>\n<li>이번 slice에서 새 external EVAL runner를 설치하지 않는다.</li>\n<li>이번 slice에서 telemetry persistence DB를 만들지 않는다.</li>\n<li>이번 slice에서 모든 탭 transition latency를 time-series로 저장하지 않는다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>DesktopResourceSnapshotReport</code>에 <code>semanticMetrics</code>가 포함된다.</li>\n<li><code>EvaluationReportPanel</code>이 <code>runtimeTelemetry</code> prop을 받아 점수와 evidence에 반영한다.</li>\n<li>EVAL UI에 <code>data-eval-runtime-telemetry</code>와 <code>data-runtime-metric</code> 계약이 존재한다.</li>\n<li>contract check와 tests가 semantic process metric token을 확인한다.</li>\n<li>renderer build와 internal package가 통과한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1892,
+      "updatedAt": "2026-06-06T00:22:18.055Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-runtime-metric-eval-score-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-runtime-metric-eval-score/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "스펙: runtime metric EVAL score",
+      "excerpt": "스펙: runtime metric EVAL score 목표 Workspace Monitor EVAL 탭이 현재 desktop process의 native runtime metric을 받아 종합 개선 점수에 반영한다. 사용자가 탭 이동 지연과 OS 자원 활용 부족을 지적했을 때, 평가 화면이 실제 RAM/CPU/cache 상태를 근거로 보여야 한다. 설계 결정 Rust DesktopResourceSnapshotReport 에 semanticMetrics 를 추가한다. metric 이름은 후속 col",
+      "html": "<h1>스펙: runtime metric EVAL score</h1>\n<h2>목표</h2>\n<p>Workspace Monitor EVAL 탭이 현재 desktop process의 native runtime metric을 받아 종합 개선 점수에 반영한다. 사용자가 탭 이동 지연과 OS 자원 활용 부족을 지적했을 때, 평가 화면이 실제 RAM/CPU/cache 상태를 근거로 보여야 한다.</p>\n<h2>설계 결정</h2>\n<ul>\n<li>Rust <code>DesktopResourceSnapshotReport</code>에 <code>semanticMetrics</code>를 추가한다.</li>\n<li>metric 이름은 후속 collector 연결을 고려해 <code>process.memory.usage</code>, <code>process.memory.virtual</code>, <code>process.cpu.utilization</code>, <code>process.thread.count</code>를 사용한다.</li>\n<li><code>MonitorShell</code>이 <code>DesktopRuntimePanel</code> 내부 snapshot을 공유 state로 끌어올려 EVAL panel에 넘긴다.</li>\n<li>EVAL 점수는 memory headroom, CPU headroom, workspace cache status를 합산해 <code>nativeRuntimeScore</code>를 만든다.</li>\n<li>browser/static preview에서는 Tauri invoke가 없어도 fallback row를 보여준다.</li>\n</ul>\n<h2>언어/런타임 선택</h2>\n<ul>\n<li>옵션 A: Rust/Tauri snapshot 확장. 기존 sysinfo 기반 telemetry와 desktop process authority를 재사용할 수 있어 선택했다.</li>\n<li>옵션 B: renderer-only performance API. browser long task에는 유리하지만 OS memory/process metric에는 약해 미선택.</li>\n<li>옵션 C: 별도 sidecar telemetry process. 분리성은 좋지만 pipe/process lifecycle 부담이 커서 이번 slice에서는 미선택.</li>\n</ul>\n<h2>아키텍처 선택</h2>\n<ul>\n<li>옵션 A: parent shell state lift. <code>DesktopRuntimePanel</code>이 이미 refresh 책임을 갖고 있으므로 snapshot callback만 추가한다. 선택.</li>\n<li>옵션 B: 전역 store/context. 장기적으로 telemetry surface가 많아지면 좋지만 현재 범위에는 과하다.</li>\n<li>옵션 C: EVAL panel에서 직접 Tauri command 호출. 호출 중복과 lifecycle ownership이 흐려져 미선택.</li>\n</ul>\n<h2>폴더 구조 선택</h2>\n<ul>\n<li>옵션 A: 기존 component/test/script 위치에 좁게 확장한다. 현재 변경이 기존 EVAL cockpit과 runtime panel 계약에 붙어 있어 선택했다.</li>\n<li>옵션 B: 새 telemetry feature module을 만든다. persistence/time-series가 생길 때 분리한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>Rust report에 semantic process metric 배열이 직렬화된다.</li>\n<li>EVAL panel이 runtime telemetry available/fallback 상태를 명시한다.</li>\n<li>static contract script가 telemetry 계약 token을 확인한다.</li>\n<li>readiness와 workspace-monitor tests가 새 source token을 보호한다.</li>\n<li><code>package:internal</code>이 통과한다.</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>Tauri process model: https://tauri.app/concept/process-model/</li>\n<li>Tauri shell plugin: https://v2.tauri.app/plugin/shell/</li>\n<li>MDN PerformanceLongTaskTiming: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming</li>\n<li>OpenTelemetry process metrics: https://opentelemetry.io/docs/specs/semconv/system/process-metrics/</li>\n</ul>\n<h2>제한</h2>\n<ul>\n<li>이 작업은 snapshot 기반이다. 실제 탭 전환 latency와 long task time-series는 후속으로 측정한다.</li>\n<li>CPU utilization은 <code>sysinfo</code> process CPU usage를 0..1 ratio로 변환한 값이다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2990,
+      "updatedAt": "2026-06-06T00:22:18.055Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-runtime-metric-eval-score.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "2026 06 06 runtime metric EVAL score 웹 검색 기록",
+      "excerpt": "2026 06 06 runtime metric EVAL score 웹 검색 기록 요청 사용자가 미뤄둔 작업 진행을 요청했다. 이전 완료 기록의 잔여 위험 중 \"종합 점수가 실제 runtime metric과 약하게 연결되어 있음\"을 다음 구현 slice로 선택했다. 검색 쿼리 Tauri v2 state manager commands process lifecycle official docs Tauri v2 shell plugin process sidecar official docs Playwright",
+      "html": "<p>2026 06 06 runtime metric EVAL score 웹 검색 기록 요청 사용자가 미뤄둔 작업 진행을 요청했다. 이전 완료 기록의 잔여 위험 중 &quot;종합 점수가 실제 runtime metric과 약하게 연결되어 있음&quot;을 다음 구현 slice로 선택했다. 검색 쿼리 Tauri v2 state manager commands process lifecycle official docs Tauri v2 shell plugin process sidecar official docs Playwright performance long tasks web vitals official docs OpenTelemetry semantic conventi</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2335,
+      "updatedAt": "2026-06-06T00:22:18.054Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
       "id": "history-work-timings-2026-2026-06-06-comprehensive-improvement-json",
       "path": "_history/work-timings/2026/2026-06-06-comprehensive-improvement.json",
       "category": "work-timing",
@@ -10035,54 +10243,6 @@
       "workspaceArea": "_history/evaluations"
     },
     {
-      "id": "history-user-requests-2026-2026-06-06-process-pipe-leak-guard-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-process-pipe-leak-guard.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: 프로세스/파이프 누수 방지",
-      "excerpt": "사용자 요청 요약: 프로세스/파이프 누수 방지 요약 사용자는 데스크톱 앱의 프로세스 관리, pipe 관리, 메모리 누수가 없도록 처리해 달라고 요청했다. 해석 터미널/CLI 세션의 child process cleanup을 강화한다. stdout/stderr/stdin pipe와 PTY writer/master가 세션 종료 후 남지 않게 한다. reader thread가 끝나지 않는 상태를 bounded하게 정리한다. 구현 후 빌드까지 자동 실행한다. 범위 platform desktop app Ru",
-      "html": "<p>사용자 요청 요약: 프로세스/파이프 누수 방지 요약 사용자는 데스크톱 앱의 프로세스 관리, pipe 관리, 메모리 누수가 없도록 처리해 달라고 요청했다. 해석 터미널/CLI 세션의 child process cleanup을 강화한다. stdout/stderr/stdin pipe와 PTY writer/master가 세션 종료 후 남지 않게 한다. reader thread가 끝나지 않는 상태를 bounded하게 정리한다. 구현 후 빌드까지 자동 실행한다. 범위 platform desktop app Rust/Tauri runtime. CLI adapter session, bounded command runner, native PTY termin</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 681,
-      "updatedAt": "2026-06-05T21:08:50.056Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-process-pipe-leak-guard-ko-md",
-      "path": "_history/plans/2026/2026-06-06-process-pipe-leak-guard.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "계획 기록: 프로세스/파이프 누수 방지",
-      "excerpt": "계획 기록: 프로세스/파이프 누수 방지 문제 정의 터미널/CLI 기능은 child process, pipe, reader thread, PTY handle을 소유한다. 데스크톱 앱에서 탭 전환과 터미널 반복 사용이 계속되면 종료 경로가 불완전한 세션은 memory/FD/thread/process 누수로 이어질 수 있다. 결정 Rust/Tauri backend에서 OS resource lifecycle을 닫는다. Renderer에 cleanup 책임을 두지 않는다. CLI adapter는 Unix ",
-      "html": "<p>계획 기록: 프로세스/파이프 누수 방지 문제 정의 터미널/CLI 기능은 child process, pipe, reader thread, PTY handle을 소유한다. 데스크톱 앱에서 탭 전환과 터미널 반복 사용이 계속되면 종료 경로가 불완전한 세션은 memory/FD/thread/process 누수로 이어질 수 있다. 결정 Rust/Tauri backend에서 OS resource lifecycle을 닫는다. Renderer에 cleanup 책임을 두지 않는다. CLI adapter는 Unix process group으로 격리한다. 세션 store cleanup과 Drop guard를 모두 close out 경로로 둔다. reader </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 908,
-      "updatedAt": "2026-06-05T21:08:50.055Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-process-pipe-leak-guard-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-process-pipe-leak-guard.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: 프로세스/파이프 누수 방지",
-      "excerpt": "웹 검색 기록: 프로세스/파이프 누수 방지 검색 시각 2026 06 06 KST 질의 Rust std::process ChildStdin ChildStdout pipe deadlock wait drop official docs Tokio process Command kill on drop child stdout memory leak official docs Tauri v2 async command process management sidecar official docs portable pty ru",
-      "html": "<p>웹 검색 기록: 프로세스/파이프 누수 방지 검색 시각 2026 06 06 KST 질의 Rust std::process ChildStdin ChildStdout pipe deadlock wait drop official docs Tokio process Command kill on drop child stdout memory leak official docs Tauri v2 async command process management sidecar official docs portable pty rust process pipe close drop documentation Rust CommandExt process group official </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2427,
-      "updatedAt": "2026-06-05T21:08:50.054Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-process-pipe-leak-guard-traceability-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-process-pipe-leak-guard/traceability.ko.md",
       "category": "project-spec",
@@ -10145,70 +10305,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-native-window-chrome-json",
-      "path": "_history/evaluations/2026/2026-06-06-native-window-chrome.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Native Window Chrome",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 native window chrome.json\" , \"omission check targets\": \" history/omission checks/2026/2026 ",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;installation occurred&quot;: false, &quot;installation record targets&quot;: , &quot;resource risk occurred&quot;: true, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 06 06 native window chrome.json&quot; , &quot;omission check targets&quot;: &quot; history/omission checks/2026/2026 06 06 native window chrome.json&quot; , &quot;mode selection record targets&quot;: &quot; history/mo</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 737,
-      "updatedAt": "2026-06-05T20:56:57.048Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-native-window-chrome-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-native-window-chrome.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: 네이티브 창 크롬 활용",
-      "excerpt": "요청 결과 추적: 네이티브 창 크롬 활용 요청 사용자 요청: 네이티브 방식 활용 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 native window chrome.ko.md 스펙: platform desktop app/specs/2026 06 06 native window chrome/spec.ko.md 계획: platform desktop app/specs/2026 06 06 native window chrome/plan.ko.md ",
-      "html": "<p>요청 결과 추적: 네이티브 창 크롬 활용 요청 사용자 요청: 네이티브 방식 활용 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 native window chrome.ko.md 스펙: platform desktop app/specs/2026 06 06 native window chrome/spec.ko.md 계획: platform desktop app/specs/2026 06 06 native window chrome/plan.ko.md 작업 목록: platform desktop app/specs/2026 06 06 native window chrome/tasks.ko.md 검증</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1207,
-      "updatedAt": "2026-06-05T20:56:57.048Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-native-window-chrome-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-native-window-chrome.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "네이티브 창 크롬 활용 작업 요약",
-      "excerpt": "네이티브 창 크롬 활용 작업 요약 변경 요약 Tauri main window에 native transparent titlebar, hidden title, dark launch background를 추가했다. Tauri capability에 native window dragging permission을 명시했다. Workspace Monitor titlebar에 data tauri drag region=\"deep\" 을 적용하고 버튼/검색/컨텍스트 strip은 false 및 no drag 로 분리했",
-      "html": "<p>네이티브 창 크롬 활용 작업 요약 변경 요약 Tauri main window에 native transparent titlebar, hidden title, dark launch background를 추가했다. Tauri capability에 native window dragging permission을 명시했다. Workspace Monitor titlebar에 data tauri drag region=&quot;deep&quot; 을 적용하고 버튼/검색/컨텍스트 strip은 false 및 no drag 로 분리했다. renderer test와 desktop readiness check가 native chrome 계약을 검증하도록 갱신했다. 검증 work</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 772,
-      "updatedAt": "2026-06-05T20:56:57.048Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-native-window-chrome-json",
-      "path": "_history/work-timings/2026/2026-06-06-native-window-chrome.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Native Window Chrome",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"work item\": \"native window chrome\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first research\", \"started at\": \"2026 06 06T05:40:00+09:00\", \"ended at\": \"2026 06 06T05:50:00+09:00\", \"notes\": \"Checked official Tauri config, window customization, cor",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work item&quot;: &quot;native window chrome&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first research&quot;, &quot;started at&quot;: &quot;2026 06 06T05:40:00+09:00&quot;, &quot;ended at&quot;: &quot;2026 06 06T05:50:00+09:00&quot;, &quot;notes&quot;: &quot;Checked official Tauri config, window customization, core permissions, release notes, and Apple HIG.&quot; }, { &quot;phase&quot;: &quot;source patch&quot;, &quot;sta</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1229,
-      "updatedAt": "2026-06-05T20:56:57.047Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-native-window-chrome-tasks-ko-md",
@@ -17905,102 +18001,6 @@
       "historyDate": "2026-06-03",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-reference-platform-advantage-transfer-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-reference-platform-advantage-transfer/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Traceability",
-      "excerpt": "Traceability | 요구사항 | 구현/증거 | 검증 | | | | | | RPA 001 | research/topics/platform desktop app/2026 06 03 similar desktop agent platforms.ko.md | web search record, citation audit | | RPA 002 | configs/reference platform advantage registry.json transfer patterns | readiness/test | |",
-      "html": "<h1>Traceability</h1>\n<table><thead><tr><th>요구사항</th><th>구현/증거</th><th>검증</th></tr></thead><tbody><tr><td>RPA-001</td><td><code>_research/topics/platform-desktop-app/2026-06-03-similar-desktop-agent-platforms.ko.md</code></td><td>web-search record, citation audit</td></tr><tr><td>RPA-002</td><td><code>configs/reference-platform-advantage-registry.json</code> <code>transfer_patterns</code></td><td>readiness/test</td></tr><tr><td>RPA-003</td><td>registry fields: source ids, status, targets, risk controls</td><td>JSON parse, readiness/test</td></tr><tr><td>RPA-004</td><td><code>ProductFeatureArchitecturePanel.tsx</code> reference advantage board</td><td>typecheck/build/browser smoke</td></tr><tr><td>RPA-005</td><td><code>sanitizeReferencePlatformAdvantagesForCustomer</code></td><td>customer build/snapshot check</td></tr><tr><td>RPA-006</td><td><code>scripts/check-readiness.mjs</code>, <code>tests/readiness.test.mjs</code></td><td>platform check/test</td></tr></tbody></table>\n<h2>요청 연결</h2>\n<ul>\n<li><code>UR-2026-06-03-059</code>: 유사 데스크톱/에이전트 플랫폼 심층 조사.</li>\n<li><code>UR-2026-06-03-060</code>: 조사 결과를 현재 플랫폼에 기능으로 반영.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 904,
-      "updatedAt": "2026-06-03T14:07:56.190Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-reference-platform-advantage-transfer-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-reference-platform-advantage-transfer/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Reference Platform Advantage Transfer Spec",
-      "excerpt": "Reference Platform Advantage Transfer Spec 날짜: 2026 06 03 대상: platform desktop app/ , renderer/workspace monitor/ 배경 사용자는 현재 앱이 여전히 웹 UI처럼 보이며 Codex 앱, IntelliJ, Discord, VS Code, Cursor/Windsurf류의 데스크톱 앱 장점을 깊게 조사한 뒤 제품에 녹이라고 요구했다. 요구사항 RPA 001: 유사 플랫폼 조사는 공식 문서, 오픈소스 문서, 보안 기준을",
-      "html": "<h1>Reference Platform Advantage Transfer Spec</h1>\n<ul>\n<li>날짜: 2026-06-03</li>\n<li>대상: <code>platform-desktop-app/</code>, <code>renderer/workspace-monitor/</code></li>\n</ul>\n<h2>배경</h2>\n<p>사용자는 현재 앱이 여전히 웹 UI처럼 보이며 Codex 앱, IntelliJ, Discord, VS Code, Cursor/Windsurf류의 데스크톱 앱 장점을 깊게 조사한 뒤 제품에 녹이라고 요구했다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>RPA-001: 유사 플랫폼 조사는 공식 문서, 오픈소스 문서, 보안 기준을 우선 근거로 기록한다.</li>\n<li>RPA-002: 각 플랫폼의 장점은 단순 문서 요약이 아니라 제품 기능 패턴으로 전환한다.</li>\n<li>RPA-003: 적용 패턴은 출처, 적용 상태, 구현 목표, 위험 제어, 제품 섹션을 포함해야 한다.</li>\n<li>RPA-004: Workspace Monitor Overview는 조사 결과를 “레퍼런스 장점 적용 지도”로 보여주고 핵심 섹션으로 이동할 수 있어야 한다.</li>\n<li>RPA-005: customer snapshot은 내부 연구 source path와 raw reference link를 의존하지 않아야 한다.</li>\n<li>RPA-006: readiness/test는 registry, collector, UI token 누락을 회귀로 잡아야 한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>실제 OpenHands/Cline/Aider/OpenCode 설치 또는 bundling.</li>\n<li>실제 permission dialog/checkpoint rollback native store 완성.</li>\n<li>public release signing/notarization 완료.</li>\n</ul>\n<h2>승인 기준</h2>\n<ul>\n<li><code>reference-platform-advantage-registry.json</code>가 10개 이상의 전환 패턴을 담는다.</li>\n<li>snapshot에 <code>referencePlatformAdvantages</code>가 생성된다.</li>\n<li>Overview 제품 패널에 “레퍼런스 장점 적용 지도”가 렌더링된다.</li>\n<li><code>check-readiness</code>, <code>node --test</code>, workspace monitor typecheck/build가 통과한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1641,
-      "updatedAt": "2026-06-03T14:07:56.189Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-responsive-text-wrapping-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-responsive-text-wrapping/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Tasks: Responsive Text Wrapping",
-      "excerpt": "Tasks: Responsive Text Wrapping x Web first intake로 CSS wrapping 기준을 확인한다. x 기본 UI 텍스트 wrapping을 break word / keep all 중심으로 낮춘다. x 긴 토큰 전용 anywhere 예외를 별도 rule로 분리한다. x readiness script/test에 회귀 방지 검사를 추가한다. x build/check/test/browser QA를 완료한다. x validation/evaluation/request tra",
-      "html": "<h1>Tasks: Responsive Text Wrapping</h1>\n<ul>\n<li>[x] Web-first intake로 CSS wrapping 기준을 확인한다.</li>\n<li>[x] 기본 UI 텍스트 wrapping을 <code>break-word</code>/<code>keep-all</code> 중심으로 낮춘다.</li>\n<li>[x] 긴 토큰 전용 <code>anywhere</code> 예외를 별도 rule로 분리한다.</li>\n<li>[x] readiness script/test에 회귀 방지 검사를 추가한다.</li>\n<li>[x] build/check/test/browser QA를 완료한다.</li>\n<li>[x] validation/evaluation/request trace를 저장한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 437,
-      "updatedAt": "2026-06-03T13:47:23.715Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-responsive-text-wrapping-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-responsive-text-wrapping/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Validation: Responsive Text Wrapping",
-      "excerpt": "Validation: Responsive Text Wrapping 실행한 검증 corepack pnpm filter workspace monitor run check : 통과 corepack pnpm filter workspace monitor run build:customer : 통과 corepack pnpm filter platform desktop app test : 통과, 20 tests corepack pnpm filter platform desktop app run check : 통과 ",
-      "html": "<h1>Validation: Responsive Text Wrapping</h1>\n<h2>실행한 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 20 tests</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과</li>\n<li><code>git diff --check</code>: 통과</li>\n</ul>\n<h2>Browser QA</h2>\n<ul>\n<li>Mobile <code>390 x 844</code>: visible buttons 39, button target/wrapping issues 0, natural text <code>overflow-wrap:anywhere</code> 0, horizontal overflow 0</li>\n<li>Desktop <code>1280 x 720</code>: visible buttons 39, button target/wrapping issues 0, horizontal overflow 0</li>\n<li>Desktop terminal drawer: buttons 7, issues 0, natural text <code>overflow-wrap:anywhere</code> 0, horizontal overflow 0</li>\n<li>Mobile terminal drawer: buttons 7, issues 0, natural text <code>overflow-wrap:anywhere</code> 0, horizontal overflow 0</li>\n</ul>\n<h2>저장된 QA 산출물</h2>\n<ul>\n<li><code>/Users/shinjoungeun/Desktop/Obsidian/brain/codex/outputs/browser-qa/platform-desktop-responsive-text-mobile-terminal.png</code></li>\n<li><code>/Users/shinjoungeun/Desktop/Obsidian/brain/codex/outputs/browser-qa/platform-desktop-responsive-text-desktop.png</code></li>\n</ul>\n<h2>제한</h2>\n<ul>\n<li>이번 slice는 CSS wrapping policy와 회귀 검사에 집중했다. 화면별 문구 축약과 design-system component 추출은 별도 작업이다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1272,
-      "updatedAt": "2026-06-03T13:47:23.715Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-responsive-text-wrapping-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-responsive-text-wrapping/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Traceability: Responsive Text Wrapping",
-      "excerpt": "Traceability: Responsive Text Wrapping | Requirement | Implementation | Validation | | | | | | PDA REQ 058 1 | app/globals.css global button/text wrapping rules | readiness/test, browser QA | | PDA REQ 058 2 | .desktop app root :where ... natural text rule with word break: keep a",
-      "html": "<h1>Traceability: Responsive Text Wrapping</h1>\n<table><thead><tr><th>Requirement</th><th>Implementation</th><th>Validation</th></tr></thead><tbody><tr><td>PDA-REQ-058-1</td><td><code>app/globals.css</code> global button/text wrapping rules</td><td>readiness/test, browser QA</td></tr><tr><td>PDA-REQ-058-2</td><td><code>.desktop-app-root :where(...)</code> natural text rule with <code>word-break: keep-all</code></td><td>browser QA at mobile width</td></tr><tr><td>PDA-REQ-058-3</td><td>long-token exception rule for <code>code</code>, <code>pre</code>, paths, logs, state values</td><td>CSS token/readiness checks</td></tr><tr><td>PDA-REQ-058-4</td><td><code>scripts/check-readiness.mjs</code>, <code>tests/readiness.test.mjs</code></td><td><code>platform-desktop-app test</code>, <code>platform-desktop-app check</code></td></tr><tr><td>PDA-REQ-058-5</td><td>Browser QA checks for overflow and computed wrapping</td><td>screenshot and QA record</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 694,
-      "updatedAt": "2026-06-03T13:43:26.505Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-responsive-text-wrapping-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-responsive-text-wrapping/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Plan: Responsive Text Wrapping",
-      "excerpt": "Plan: Responsive Text Wrapping 1. CSS에서 전역 overflow wrap: anywhere 사용 범위를 줄인다. 2. 일반 UI 문구와 긴 토큰 값을 분리하는 wrapping token/rule을 추가한다. 3. readiness script와 unit test에 버튼 텍스트 회귀 방지 검사를 추가한다. 4. TypeScript/test/build/check를 실행한다. 5. Browser QA로 mobile/desktop overflow와 visible button ",
-      "html": "<h1>Plan: Responsive Text Wrapping</h1>\n<p>1. CSS에서 전역 <code>overflow-wrap: anywhere</code> 사용 범위를 줄인다.</p>\n<p>2. 일반 UI 문구와 긴 토큰 값을 분리하는 wrapping token/rule을 추가한다.</p>\n<p>3. readiness script와 unit test에 버튼 텍스트 회귀 방지 검사를 추가한다.</p>\n<p>4. TypeScript/test/build/check를 실행한다.</p>\n<p>5. Browser QA로 mobile/desktop overflow와 visible button wrapping policy를 확인한다.</p>\n<p>6. 결과와 잔여 위험을 history/evaluation에 기록한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 496,
-      "updatedAt": "2026-06-03T13:43:26.504Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18154,16 +18154,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-native-window-chrome-json",
-          "path": "_history/evaluations/2026/2026-06-06-native-window-chrome.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Native Window Chrome",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 native window chrome.json\" , \"omission check targets\": \" history/omission checks/2026/2026 ",
-          "updatedAt": "2026-06-05T20:56:57.048Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-no-large-scope-postponement-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-no-large-scope-postponement.ko.md",
           "category": "evaluation",
@@ -18211,6 +18201,16 @@
           "title": "평가: 프로세스/파이프 누수 방지",
           "excerpt": "평가: 프로세스/파이프 누수 방지 판정 충족. 프로세스/pipe/session cleanup을 Rust runtime 소유권 경로로 중앙화했고, 내부 패키징 빌드까지 완료했다. 증거 CLI 세션 Drop/finalize/dispose guard 추가. Unix/macOS CLI process group setup 및 group kill cleanup 추가. timeout/error/store cleanup에서 kill/wait 통합. PTY writer/master drop 및 reader gra",
           "updatedAt": "2026-06-05T21:10:52.703Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-runtime-metric-eval-score.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "2026 06 06 runtime metric EVAL score 평가",
+          "excerpt": "2026 06 06 runtime metric EVAL score 평가 평가 대상 요청: 미뤄둔 작업 진행. 구현 slice: EVAL 종합 개선 cockpit에 실제 desktop runtime metric을 연결. 완료 기준 평가 성능: process RAM/CPU/cache 상태를 EVAL 점수 입력으로 연결했다. UI/사용성: EVAL 탭에서 runtime telemetry strip과 metric evidence를 직접 볼 수 있게 했다. 네이티브 자원: Rust/Tauri sysinfo",
+          "updatedAt": "2026-06-06T00:26:20.963Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18274,13 +18274,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-process-pipe-leak-guard-ko-md",
-          "path": "_history/plans/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+          "id": "history-plans-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+          "path": "_history/plans/2026/2026-06-06-runtime-metric-eval-score.ko.md",
           "category": "plan",
           "language": "ko",
-          "title": "계획 기록: 프로세스/파이프 누수 방지",
-          "excerpt": "계획 기록: 프로세스/파이프 누수 방지 문제 정의 터미널/CLI 기능은 child process, pipe, reader thread, PTY handle을 소유한다. 데스크톱 앱에서 탭 전환과 터미널 반복 사용이 계속되면 종료 경로가 불완전한 세션은 memory/FD/thread/process 누수로 이어질 수 있다. 결정 Rust/Tauri backend에서 OS resource lifecycle을 닫는다. Renderer에 cleanup 책임을 두지 않는다. CLI adapter는 Unix ",
-          "updatedAt": "2026-06-05T21:08:50.055Z",
+          "title": "2026 06 06 runtime metric EVAL score 계획",
+          "excerpt": "2026 06 06 runtime metric EVAL score 계획 선택 이유 직전 작업의 잔여 위험은 종합 개선 점수가 실제 runtime metric보다 문서/계약 근거에 치우쳐 있다는 점이었다. 사용자는 반복적으로 \"데스크톱 앱이 실제 OS 자원, RAM, CPU를 써야 한다\"고 요구했으므로 다음 slice는 runtime metric을 EVAL score에 연결하는 것이 가장 직접적이다. 실행 순서 1. Web first intake와 memory bootstrap. 2. 이전 clos",
+          "updatedAt": "2026-06-06T00:22:18.057Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18364,16 +18364,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-native-window-chrome-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-native-window-chrome.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: 네이티브 창 크롬 활용",
-          "excerpt": "요청 결과 추적: 네이티브 창 크롬 활용 요청 사용자 요청: 네이티브 방식 활용 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 native window chrome.ko.md 스펙: platform desktop app/specs/2026 06 06 native window chrome/spec.ko.md 계획: platform desktop app/specs/2026 06 06 native window chrome/plan.ko.md ",
-          "updatedAt": "2026-06-05T20:56:57.048Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-06-no-large-scope-postponement-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-no-large-scope-postponement.ko.md",
           "category": "request-trace",
@@ -18411,6 +18401,16 @@
           "title": "요청 결과 추적: 프로세스/파이프 누수 방지",
           "excerpt": "요청 결과 추적: 프로세스/파이프 누수 방지 요청 프로세스 관리, pipe 관리, 메모리 누수가 없도록 처리. 결과 CLI/PTY session lifecycle cleanup 강화. Unix process group 기반 cleanup 추가. reader thread grace join과 PTY master/writer explicit drop 추가. readiness tests에 lifecycle contract 추가. 산출물 platform desktop app/docs/requirement",
           "updatedAt": "2026-06-05T21:10:52.704Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-runtime-metric-eval-score.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "2026 06 06 request to outcome trace",
+          "excerpt": "2026 06 06 request to outcome trace 요청 미뤄둔 작업 진행. 결정 이전 comprehensive improvement close out의 잔여 위험 중 실제 runtime metric 기반 score source 연결을 다음 slice로 선택했다. 산출물 platform desktop app/docs/requirements/2026 06 06 runtime metric eval score.ko.md platform desktop app/specs/2026 06 06 r",
+          "updatedAt": "2026-06-06T00:28:42.081Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18544,13 +18544,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-process-pipe-leak-guard-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+          "id": "history-user-requests-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-runtime-metric-eval-score.ko.md",
           "category": "user-request",
           "language": "ko",
-          "title": "사용자 요청 요약: 프로세스/파이프 누수 방지",
-          "excerpt": "사용자 요청 요약: 프로세스/파이프 누수 방지 요약 사용자는 데스크톱 앱의 프로세스 관리, pipe 관리, 메모리 누수가 없도록 처리해 달라고 요청했다. 해석 터미널/CLI 세션의 child process cleanup을 강화한다. stdout/stderr/stdin pipe와 PTY writer/master가 세션 종료 후 남지 않게 한다. reader thread가 끝나지 않는 상태를 bounded하게 정리한다. 구현 후 빌드까지 자동 실행한다. 범위 platform desktop app Ru",
-          "updatedAt": "2026-06-05T21:08:50.056Z",
+          "title": "2026 06 06 사용자 요청 요약",
+          "excerpt": "2026 06 06 사용자 요청 요약 요약 사용자는 미뤄둔 작업을 계속 진행하라고 요청했다. 해석 직전 완료 기록에서 남긴 후속 작업 중 실제 runtime metric 기반 score source 연결을 우선 처리한다. 이 선택은 사용자가 반복적으로 요구한 성능 개선, desktop OS 자원 활용, EVAL 탭, build 자동화와 직접 연결된다. 범위 포함: runtime metric을 EVAL score에 연결, 계약/테스트/build/package 검증. 제외: 새 external EVA",
+          "updatedAt": "2026-06-06T00:22:18.057Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18684,13 +18684,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-process-pipe-leak-guard-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-process-pipe-leak-guard.ko.md",
+          "id": "history-web-searches-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-runtime-metric-eval-score.ko.md",
           "category": "web-search",
           "language": "ko",
-          "title": "웹 검색 기록: 프로세스/파이프 누수 방지",
-          "excerpt": "웹 검색 기록: 프로세스/파이프 누수 방지 검색 시각 2026 06 06 KST 질의 Rust std::process ChildStdin ChildStdout pipe deadlock wait drop official docs Tokio process Command kill on drop child stdout memory leak official docs Tauri v2 async command process management sidecar official docs portable pty ru",
-          "updatedAt": "2026-06-05T21:08:50.054Z",
+          "title": "2026 06 06 runtime metric EVAL score 웹 검색 기록",
+          "excerpt": "2026 06 06 runtime metric EVAL score 웹 검색 기록 요청 사용자가 미뤄둔 작업 진행을 요청했다. 이전 완료 기록의 잔여 위험 중 \"종합 점수가 실제 runtime metric과 약하게 연결되어 있음\"을 다음 구현 slice로 선택했다. 검색 쿼리 Tauri v2 state manager commands process lifecycle official docs Tauri v2 shell plugin process sidecar official docs Playwright",
+          "updatedAt": "2026-06-06T00:22:18.054Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18794,16 +18794,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-native-window-chrome-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-native-window-chrome.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "네이티브 창 크롬 활용 작업 요약",
-          "excerpt": "네이티브 창 크롬 활용 작업 요약 변경 요약 Tauri main window에 native transparent titlebar, hidden title, dark launch background를 추가했다. Tauri capability에 native window dragging permission을 명시했다. Workspace Monitor titlebar에 data tauri drag region=\"deep\" 을 적용하고 버튼/검색/컨텍스트 strip은 false 및 no drag 로 분리했",
-          "updatedAt": "2026-06-05T20:56:57.048Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-no-large-scope-postponement-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-no-large-scope-postponement.ko.md",
           "category": "work-summary",
@@ -18841,6 +18831,16 @@
           "title": "작업 요약: 프로세스/파이프 누수 방지",
           "excerpt": "작업 요약: 프로세스/파이프 누수 방지 변경 CLI adapter/command spawn에 Unix process group 설정을 추가했다. timeout/error/store cleanup에서 child kill만 하지 않고 process group kill과 wait를 통합했다. CliSession 과 NativePtySession 에 Drop guard를 추가했다. CLI/PTY finished cleanup에서 stdin, writer, PTY master, reader thread를 ",
           "updatedAt": "2026-06-05T21:10:52.703Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-runtime-metric-eval-score.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "2026 06 06 runtime metric EVAL score 작업 요약",
+          "excerpt": "2026 06 06 runtime metric EVAL score 작업 요약 구현 Rust/Tauri desktop resource snapshot에 semantic process metric 배열을 추가했다. MonitorShell 이 desktop runtime snapshot을 공유 state로 관리하고 EVAL panel에 전달하도록 바꿨다. EVAL 종합 개선 cockpit에 native runtime score, 실제 metric evidence, runtime telemetry str",
+          "updatedAt": "2026-06-06T00:26:20.961Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18944,16 +18944,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-native-window-chrome-json",
-          "path": "_history/work-timings/2026/2026-06-06-native-window-chrome.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Native Window Chrome",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"work item\": \"native window chrome\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first research\", \"started at\": \"2026 06 06T05:40:00+09:00\", \"ended at\": \"2026 06 06T05:50:00+09:00\", \"notes\": \"Checked official Tauri config, window customization, cor",
-          "updatedAt": "2026-06-05T20:56:57.047Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-open-source-agent-platform-landscape-json",
           "path": "_history/work-timings/2026/2026-06-06-open-source-agent-platform-landscape.json",
           "category": "work-timing",
@@ -18981,6 +18971,16 @@
           "title": "2026 06 06 Process Pipe Leak Guard",
           "excerpt": "{ \"id\": \"2026 06 06 process pipe leak guard\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"name\": \"web first research\", \"status\": \"completed\", \"notes\": \"Checked Rust std process, Unix CommandExt, portable pty, Tauri, and issue/community risk signals.\" }, { \"name\": \"source inspection\", ",
           "updatedAt": "2026-06-05T21:10:52.702Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-06-runtime-metric-eval-score-json",
+          "path": "_history/work-timings/2026/2026-06-06-runtime-metric-eval-score.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Runtime Metric Eval Score",
+          "excerpt": "{ \"task id\": \"2026 06 06 runtime metric eval score\", \"title\": \"Runtime metric EVAL score\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", ",
+          "updatedAt": "2026-06-06T00:26:20.963Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19012,36 +19012,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2540,
+      "documents": 2547,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 999
+          "count": 1000
         },
         {
           "category": "web-search",
-          "count": 404
+          "count": 405
         },
         {
           "category": "plan",
-          "count": 342
+          "count": 343
         },
         {
           "category": "request-trace",
-          "count": 332
+          "count": 333
         },
         {
           "category": "work-timing",
-          "count": 253
+          "count": 254
         },
         {
           "category": "user-request",
-          "count": 117
+          "count": 118
         },
         {
           "category": "work-summary",
-          "count": 84
+          "count": 85
         },
         {
           "category": "daily-history",
@@ -19052,7 +19052,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6448024,
+      "totalSourceBytes": 6457652,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19079,9 +19079,9 @@
       "monitorEvents": 64,
       "evidenceEvents": 32,
       "decisionEvents": 0,
-      "openSignals": 17,
+      "openSignals": 16,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T00:06:52.599Z",
+      "latestEventAt": "2026-06-06T00:28:42.081Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19191,6 +19191,111 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "2026 06 06 request to outcome trace",
+        "detail": "2026 06 06 request to outcome trace 요청 미뤄둔 작업 진행. 결정 이전 comprehensive improvement close out의 잔여 위험 중 실제 runtime metric 기반 score source 연결을 다음 slice로 선택했다. 산출물 platform desktop app/docs/requirements/2026 06 06 runtime metric eval score.ko.md platform desktop app/specs/2026 06 06 r",
+        "path": "_history/request-traces/2026/2026-06-06-runtime-metric-eval-score.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T00:28:42.081Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-runtime-metric-eval-score-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Runtime Metric Eval Score",
+        "detail": "{ \"task id\": \"2026 06 06 runtime metric eval score\", \"title\": \"Runtime metric EVAL score\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", ",
+        "path": "_history/work-timings/2026/2026-06-06-runtime-metric-eval-score.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T00:26:20.963Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 06 runtime metric EVAL score 평가",
+        "detail": "2026 06 06 runtime metric EVAL score 평가 평가 대상 요청: 미뤄둔 작업 진행. 구현 slice: EVAL 종합 개선 cockpit에 실제 desktop runtime metric을 연결. 완료 기준 평가 성능: process RAM/CPU/cache 상태를 EVAL 점수 입력으로 연결했다. UI/사용성: EVAL 탭에서 runtime telemetry strip과 metric evidence를 직접 볼 수 있게 했다. 네이티브 자원: Rust/Tauri sysinfo",
+        "path": "_history/evaluations/2026/2026-06-06-runtime-metric-eval-score.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T00:26:20.963Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "2026 06 06 runtime metric EVAL score 작업 요약",
+        "detail": "2026 06 06 runtime metric EVAL score 작업 요약 구현 Rust/Tauri desktop resource snapshot에 semantic process metric 배열을 추가했다. MonitorShell 이 desktop runtime snapshot을 공유 state로 관리하고 EVAL panel에 전달하도록 바꿨다. EVAL 종합 개선 cockpit에 native runtime score, 실제 metric evidence, runtime telemetry str",
+        "path": "_history/work-summaries/2026/2026-06-06-runtime-metric-eval-score.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T00:26:20.961Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "2026 06 06 runtime metric EVAL score 계획",
+        "detail": "2026 06 06 runtime metric EVAL score 계획 선택 이유 직전 작업의 잔여 위험은 종합 개선 점수가 실제 runtime metric보다 문서/계약 근거에 치우쳐 있다는 점이었다. 사용자는 반복적으로 \"데스크톱 앱이 실제 OS 자원, RAM, CPU를 써야 한다\"고 요구했으므로 다음 slice는 runtime metric을 EVAL score에 연결하는 것이 가장 직접적이다. 실행 순서 1. Web first intake와 memory bootstrap. 2. 이전 clos",
+        "path": "_history/plans/2026/2026-06-06-runtime-metric-eval-score.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T00:22:18.057Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "ready",
+        "title": "2026 06 06 사용자 요청 요약",
+        "detail": "2026 06 06 사용자 요청 요약 요약 사용자는 미뤄둔 작업을 계속 진행하라고 요청했다. 해석 직전 완료 기록에서 남긴 후속 작업 중 실제 runtime metric 기반 score source 연결을 우선 처리한다. 이 선택은 사용자가 반복적으로 요구한 성능 개선, desktop OS 자원 활용, EVAL 탭, build 자동화와 직접 연결된다. 범위 포함: runtime metric을 EVAL score에 연결, 계약/테스트/build/package 검증. 제외: 새 external EVA",
+        "path": "_history/user-requests/2026/2026-06-06-runtime-metric-eval-score.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T00:22:18.057Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-runtime-metric-eval-score-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "2026 06 06 runtime metric EVAL score 웹 검색 기록",
+        "detail": "2026 06 06 runtime metric EVAL score 웹 검색 기록 요청 사용자가 미뤄둔 작업 진행을 요청했다. 이전 완료 기록의 잔여 위험 중 \"종합 점수가 실제 runtime metric과 약하게 연결되어 있음\"을 다음 구현 slice로 선택했다. 검색 쿼리 Tauri v2 state manager commands process lifecycle official docs Tauri v2 shell plugin process sidecar official docs Playwright",
+        "path": "_history/web-searches/2026/2026-06-06-runtime-metric-eval-score.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T00:22:18.054Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-06-comprehensive-improvement-json",
         "sourceType": "history",
@@ -20525,111 +20630,6 @@
         "language": "unknown",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T21:08:50.058Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-process-pipe-leak-guard-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: 프로세스/파이프 누수 방지",
-        "detail": "사용자 요청 요약: 프로세스/파이프 누수 방지 요약 사용자는 데스크톱 앱의 프로세스 관리, pipe 관리, 메모리 누수가 없도록 처리해 달라고 요청했다. 해석 터미널/CLI 세션의 child process cleanup을 강화한다. stdout/stderr/stdin pipe와 PTY writer/master가 세션 종료 후 남지 않게 한다. reader thread가 끝나지 않는 상태를 bounded하게 정리한다. 구현 후 빌드까지 자동 실행한다. 범위 platform desktop app Ru",
-        "path": "_history/user-requests/2026/2026-06-06-process-pipe-leak-guard.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:08:50.056Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-process-pipe-leak-guard-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "계획 기록: 프로세스/파이프 누수 방지",
-        "detail": "계획 기록: 프로세스/파이프 누수 방지 문제 정의 터미널/CLI 기능은 child process, pipe, reader thread, PTY handle을 소유한다. 데스크톱 앱에서 탭 전환과 터미널 반복 사용이 계속되면 종료 경로가 불완전한 세션은 memory/FD/thread/process 누수로 이어질 수 있다. 결정 Rust/Tauri backend에서 OS resource lifecycle을 닫는다. Renderer에 cleanup 책임을 두지 않는다. CLI adapter는 Unix ",
-        "path": "_history/plans/2026/2026-06-06-process-pipe-leak-guard.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:08:50.055Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-process-pipe-leak-guard-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: 프로세스/파이프 누수 방지",
-        "detail": "웹 검색 기록: 프로세스/파이프 누수 방지 검색 시각 2026 06 06 KST 질의 Rust std::process ChildStdin ChildStdout pipe deadlock wait drop official docs Tokio process Command kill on drop child stdout memory leak official docs Tauri v2 async command process management sidecar official docs portable pty ru",
-        "path": "_history/web-searches/2026/2026-06-06-process-pipe-leak-guard.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:08:50.054Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-native-window-chrome-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "evaluation",
-        "title": "2026 06 06 Native Window Chrome",
-        "detail": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 native window chrome.json\" , \"omission check targets\": \" history/omission checks/2026/2026 ",
-        "path": "_history/evaluations/2026/2026-06-06-native-window-chrome.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T20:56:57.048Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-native-window-chrome-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: 네이티브 창 크롬 활용",
-        "detail": "요청 결과 추적: 네이티브 창 크롬 활용 요청 사용자 요청: 네이티브 방식 활용 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 native window chrome.ko.md 스펙: platform desktop app/specs/2026 06 06 native window chrome/spec.ko.md 계획: platform desktop app/specs/2026 06 06 native window chrome/plan.ko.md ",
-        "path": "_history/request-traces/2026/2026-06-06-native-window-chrome.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T20:56:57.048Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-native-window-chrome-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "네이티브 창 크롬 활용 작업 요약",
-        "detail": "네이티브 창 크롬 활용 작업 요약 변경 요약 Tauri main window에 native transparent titlebar, hidden title, dark launch background를 추가했다. Tauri capability에 native window dragging permission을 명시했다. Workspace Monitor titlebar에 data tauri drag region=\"deep\" 을 적용하고 버튼/검색/컨텍스트 strip은 false 및 no drag 로 분리했",
-        "path": "_history/work-summaries/2026/2026-06-06-native-window-chrome.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T20:56:57.048Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-native-window-chrome-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 06 Native Window Chrome",
-        "detail": "{ \"date\": \"2026 06 06\", \"work item\": \"native window chrome\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first research\", \"started at\": \"2026 06 06T05:40:00+09:00\", \"ended at\": \"2026 06 06T05:50:00+09:00\", \"notes\": \"Checked official Tauri config, window customization, cor",
-        "path": "_history/work-timings/2026/2026-06-06-native-window-chrome.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T20:56:57.047Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23147,9 +23147,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 54855,
-      "lineCount": 1229,
-      "updatedAt": "2026-06-05T23:22:25.354Z",
+      "sizeBytes": 55286,
+      "lineCount": 1238,
+      "updatedAt": "2026-06-06T00:18:41.613Z",
       "truncated": true,
       "preview": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/paths.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/definitions.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/runner.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts",
       "previewBytes": 1200
@@ -23736,7 +23736,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 77,
+        "documentCount": 78,
         "sourceFileCount": 5
       },
       {
@@ -23868,7 +23868,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-src-tauri-src-lib-rs",
         "label": "Large source surface",
-        "signal": "10,258 lines in platform-desktop-app/src-tauri/src/lib.rs",
+        "signal": "10,300 lines in platform-desktop-app/src-tauri/src/lib.rs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits.",
         "priority": "high",
@@ -23877,7 +23877,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,229 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,238 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23916,16 +23916,16 @@
         "path": "platform-desktop-app/src-tauri/src/lib.rs",
         "project": "platform-desktop-app",
         "language": "rust",
-        "lineCount": 10258,
-        "sizeBytes": 342432,
+        "lineCount": 10300,
+        "sizeBytes": 343625,
         "recommendation": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits."
       },
       {
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1229,
-        "sizeBytes": 54855,
+        "lineCount": 1238,
+        "sizeBytes": 55286,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
@@ -27564,13 +27564,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3608,
+      "sourceDocuments": 3621,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T00:06:23.552Z"
+      "latestInsightAt": "2026-06-06T00:28:42.081Z"
     },
     "inferenceStages": [
       {
@@ -27638,7 +27638,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 412,
+        "signalCount": 413,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -27654,7 +27654,7 @@
           },
           {
             "category": "user-request",
-            "count": 36
+            "count": 37
           },
           {
             "category": "work-summary",
@@ -27693,7 +27693,7 @@
           "최종 평가",
           "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브"
         ],
-        "latestEvidenceAt": "2026-06-05T23:54:07.600Z"
+        "latestEvidenceAt": "2026-06-06T00:22:18.057Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27707,11 +27707,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1668,
+        "signalCount": 1676,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 460
+            "count": 464
           },
           {
             "category": "evaluation",
@@ -27719,15 +27719,15 @@
           },
           {
             "category": "web-search",
-            "count": 405
+            "count": 406
           },
           {
             "category": "plan",
-            "count": 204
+            "count": 205
           },
           {
             "category": "request-trace",
-            "count": 106
+            "count": 107
           },
           {
             "category": "work-timing",
@@ -27735,7 +27735,7 @@
           },
           {
             "category": "project-doc",
-            "count": 3
+            "count": 4
           },
           {
             "category": "daily-history",
@@ -27758,7 +27758,7 @@
           "2026 05 31 작업 모드 라우팅 계획 기록",
           "계획 히스토리: 코딩 조사 출처 다양성 강화"
         ],
-        "latestEvidenceAt": "2026-06-06T00:06:23.550Z"
+        "latestEvidenceAt": "2026-06-06T00:28:42.081Z"
       },
       {
         "id": "large-scope-slicing",
@@ -27772,19 +27772,19 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 968,
+        "signalCount": 971,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 478
+            "count": 479
           },
           {
             "category": "plan",
-            "count": 282
+            "count": 283
           },
           {
             "category": "request-trace",
-            "count": 89
+            "count": 90
           },
           {
             "category": "project-spec",
@@ -27831,7 +27831,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T00:06:23.552Z"
+        "latestEvidenceAt": "2026-06-06T00:28:42.081Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -27845,15 +27845,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 632,
+        "signalCount": 641,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 247
+            "count": 252
           },
           {
             "category": "evaluation",
-            "count": 227
+            "count": 228
           },
           {
             "category": "web-search",
@@ -27861,11 +27861,11 @@
           },
           {
             "category": "work-summary",
-            "count": 31
+            "count": 32
           },
           {
             "category": "plan",
-            "count": 28
+            "count": 29
           },
           {
             "category": "request-trace",
@@ -27877,7 +27877,7 @@
           },
           {
             "category": "project-doc",
-            "count": 12
+            "count": 13
           },
           {
             "category": "work-timing",
@@ -27904,7 +27904,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-06T00:06:23.551Z"
+        "latestEvidenceAt": "2026-06-06T00:28:42.081Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -27918,19 +27918,19 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1413,
+        "signalCount": 1417,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 605
+            "count": 606
           },
           {
             "category": "evaluation",
-            "count": 508
+            "count": 509
           },
           {
             "category": "user-request",
-            "count": 88
+            "count": 89
           },
           {
             "category": "request-trace",
@@ -27950,7 +27950,7 @@
           },
           {
             "category": "project-doc",
-            "count": 25
+            "count": 26
           },
           {
             "category": "work-timing",
@@ -27977,7 +27977,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T00:06:23.552Z"
+        "latestEvidenceAt": "2026-06-06T00:26:20.963Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28053,14 +28053,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3608,
+      "sourceDocuments": 3621,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T00:06:23.552Z"
+      "latestInsightAt": "2026-06-06T00:28:42.081Z"
     },
     "operatingModel": [
       {
@@ -28118,25 +28118,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3048,
+        "signalCount": 3060,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1668
+            "signalCount": 1676
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 968
+            "signalCount": 971
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 412
+            "signalCount": 413
           }
         ],
         "missingPatternIds": [],
@@ -28164,7 +28164,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T00:06:23.552Z",
+        "latestEvidenceAt": "2026-06-06T00:28:42.081Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28193,13 +28193,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 743,
+        "signalCount": 752,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 632
+            "signalCount": 641
           },
           {
             "id": "release-blocker-gate",
@@ -28233,7 +28233,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T00:06:23.551Z",
+        "latestEvidenceAt": "2026-06-06T00:28:42.081Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28262,19 +28262,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2381,
+        "signalCount": 2388,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1413
+            "signalCount": 1417
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 968
+            "signalCount": 971
           }
         ],
         "missingPatternIds": [],
@@ -28302,7 +28302,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T00:06:23.552Z",
+        "latestEvidenceAt": "2026-06-06T00:28:42.081Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28331,13 +28331,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 523,
+        "signalCount": 524,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 412
+            "signalCount": 413
           },
           {
             "id": "release-blocker-gate",
@@ -28371,7 +28371,7 @@
           "2026 06 06 User Request: Public Release Developer Repatch",
           "Public Release Updater Automation Spec"
         ],
-        "latestEvidenceAt": "2026-06-06T00:06:23.551Z",
+        "latestEvidenceAt": "2026-06-06T00:22:18.057Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28400,19 +28400,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2636,
+        "signalCount": 2647,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 968
+            "signalCount": 971
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1668
+            "signalCount": 1676
           }
         ],
         "missingPatternIds": [],
@@ -28440,7 +28440,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T00:06:23.552Z",
+        "latestEvidenceAt": "2026-06-06T00:28:42.081Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28469,7 +28469,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1779,
+        "signalCount": 1787,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28481,7 +28481,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1668
+            "signalCount": 1676
           }
         ],
         "missingPatternIds": [],
@@ -28509,7 +28509,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T00:06:23.551Z",
+        "latestEvidenceAt": "2026-06-06T00:28:42.081Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",
