@@ -1284,6 +1284,7 @@ test("Desktop runtime buttons expose contextual action feedback", () => {
 test("History documents use bounded admin previews instead of loading full records into the UI snapshot", () => {
   assert.equal(packageJson.scripts["check:history-payload"], "node scripts/check-history-payload.mjs");
   assert.match(packageJson.scripts.check, /check-history-payload/);
+  assert.match(collector, /const generatedAdminHistoryIndexPath = path\.join\(projectRoot, "src", "generated", "admin-history-index\.json"\)/);
   assert.match(collector, /const publicAdminHistoryIndexPath = path\.join\(projectRoot, "public", "admin-history-index\.json"\)/);
   assert.match(collector, /const MAX_INLINE_HISTORY_DOCUMENTS = 96;/);
   assert.match(collector, /const HISTORY_DOCUMENT_HTML_CHARS = 2200;/);
@@ -1291,15 +1292,19 @@ test("History documents use bounded admin previews instead of loading full recor
   assert.match(collector, /export function buildAdminHistoryIndex\(documents\)/);
   assert.match(collector, /export function compactDocumentsForSnapshot\(documents\)/);
   assert.match(collector, /migrated_to_lazy_admin_index/);
+  assert.match(collector, /writeJson\(generatedAdminHistoryIndexPath, adminHistoryIndex\)/);
   assert.match(collector, /isHistoryDocument[\s\S]*?\? historyAdminPreviewToHtml\(content\)/);
   assert.match(collector, /previewMode: isHistoryDocument \? "admin-summary" : "document-preview"/);
   assert.match(collector, /htmlTruncated: isHistoryDocument \? content\.length > HISTORY_ADMIN_EXCERPT_CHARS : content\.length > maxHtmlChars/);
   assert.match(collector, /sourceBytes: stats\.size/);
-  assert.match(historyPayloadCheck, /const adminHistoryIndexPath = path\.join\(projectRoot, "public", "admin-history-index\.json"\)/);
+  assert.match(historyPayloadCheck, /const generatedAdminHistoryIndexPath = path\.join\(projectRoot, "src", "generated", "admin-history-index\.json"\)/);
+  assert.match(historyPayloadCheck, /const publicAdminHistoryIndexPath = path\.join\(projectRoot, "public", "admin-history-index\.json"\)/);
   assert.match(historyPayloadCheck, /const maxDocumentJsonBytes = 1_900_000;/);
   assert.match(historyPayloadCheck, /Inline history documents must stay at or below/);
   assert.match(historyPayloadCheck, /Admin history index day groups must not duplicate document lists/);
   assert.match(historyPayloadCheck, /Snapshot adminHistory summary must match generated admin-history-index\.json/);
+  assert.match(historyPayloadCheck, /disabled-customer-snapshot/);
+  assert.match(historyPayloadCheck, /Public admin history index must be either the developer migrated index or the empty customer index/);
   assert.match(monitorShell, /from "@\/components\/history\/useAdminHistoryIndex"/);
   assert.match(monitorShell, /useAdminHistoryIndex\(snapshot, section\)/);
   assert.doesNotMatch(monitorShell, /function mergeDocuments\(/);

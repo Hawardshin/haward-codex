@@ -12,7 +12,7 @@ const projectRoot = path.resolve(__dirname, "..");
 const repoRoot = path.resolve(projectRoot, "../../..");
 const outDir = path.join(projectRoot, "out");
 const developerSnapshotPath = path.join(projectRoot, "src", "generated", "workspace-snapshot.json");
-const adminHistoryIndexPath = path.join(projectRoot, "public", "admin-history-index.json");
+const developerAdminHistoryIndexPath = path.join(projectRoot, "src", "generated", "admin-history-index.json");
 const screenshotPath =
   process.env.TERMINAL_PROVIDER_SMOKE_SCREENSHOT ||
   path.join(repoRoot, "outputs", "workspace-monitor-terminal-provider-smoke.png");
@@ -25,6 +25,10 @@ if (!fs.existsSync(developerSnapshotPath)) {
   throw new Error("Developer workspace snapshot is missing. Run `corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort` first.");
 }
 
+if (!fs.existsSync(developerAdminHistoryIndexPath)) {
+  throw new Error("Developer admin history index is missing. Run `corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort` first.");
+}
+
 const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "workspace-monitor-terminal-provider-"));
 const browser = await chromium.launch({ headless: true });
 let server;
@@ -32,9 +36,7 @@ let server;
 try {
   fs.cpSync(outDir, tempDir, { recursive: true });
   fs.copyFileSync(developerSnapshotPath, path.join(tempDir, "workspace-snapshot.json"));
-  if (fs.existsSync(adminHistoryIndexPath)) {
-    fs.copyFileSync(adminHistoryIndexPath, path.join(tempDir, "admin-history-index.json"));
-  }
+  fs.copyFileSync(developerAdminHistoryIndexPath, path.join(tempDir, "admin-history-index.json"));
 
   server = await serveStaticDirectory(tempDir);
   const port = server.address().port;

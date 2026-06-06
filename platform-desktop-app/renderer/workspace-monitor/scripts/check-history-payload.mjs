@@ -5,7 +5,9 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
 const snapshotPath = path.join(projectRoot, "src", "generated", "workspace-snapshot.json");
-const adminHistoryIndexPath = path.join(projectRoot, "public", "admin-history-index.json");
+const generatedAdminHistoryIndexPath = path.join(projectRoot, "src", "generated", "admin-history-index.json");
+const publicSnapshotPath = path.join(projectRoot, "public", "workspace-snapshot.json");
+const publicAdminHistoryIndexPath = path.join(projectRoot, "public", "admin-history-index.json");
 const maxDocumentJsonBytes = 1_900_000;
 const maxInlineHistoryDocuments = 96;
 const maxHistoryHtmlChars = 3_600;
@@ -34,15 +36,15 @@ if (documentJsonBytes > maxDocumentJsonBytes) {
   );
 }
 
-if (!fs.existsSync(adminHistoryIndexPath)) {
-  throw new Error("Generated admin history index is missing. Run `corepack pnpm --filter workspace-monitor collect` first.");
+if (!fs.existsSync(generatedAdminHistoryIndexPath)) {
+  throw new Error("Generated developer admin history index is missing. Run `corepack pnpm --filter workspace-monitor collect` first.");
 }
 
-const adminHistoryIndex = JSON.parse(fs.readFileSync(adminHistoryIndexPath, "utf8"));
+const adminHistoryIndex = JSON.parse(fs.readFileSync(generatedAdminHistoryIndexPath, "utf8"));
 const adminHistoryDocuments = Array.isArray(adminHistoryIndex.documents) ? adminHistoryIndex.documents : [];
 const adminHistoryDays = Array.isArray(adminHistoryIndex.historyDays) ? adminHistoryIndex.historyDays : [];
 if (adminHistoryIndex?.migration?.status !== "migrated_to_lazy_admin_index") {
-  throw new Error("Admin history index must mark records as migrated_to_lazy_admin_index.");
+  throw new Error("Generated developer admin history index must mark records as migrated_to_lazy_admin_index.");
 }
 const duplicatedDayDocuments = adminHistoryDays.filter((day) => Array.isArray(day.documents) && day.documents.length > 0);
 if (duplicatedDayDocuments.length > 0) {
@@ -96,6 +98,28 @@ if ((snapshot.adminHistory?.summary?.documents || 0) !== adminHistoryDocuments.l
   throw new Error("Snapshot adminHistory summary must match generated admin-history-index.json.");
 }
 
+const publicSnapshot = readJsonIfExists(publicSnapshotPath);
+const publicAdminHistoryIndex = readJsonIfExists(publicAdminHistoryIndexPath);
+const publicAdminHistoryStatus = publicAdminHistoryIndex?.migration?.status || "missing";
+if (publicAdminHistoryIndex) {
+  const publicAdminDocuments = Array.isArray(publicAdminHistoryIndex.documents) ? publicAdminHistoryIndex.documents : [];
+  const publicIsDeveloperIndex = publicAdminHistoryStatus === "migrated_to_lazy_admin_index";
+  const publicIsCustomerIndex =
+    publicAdminHistoryStatus === "empty" &&
+    publicSnapshot?.repoRootName === "customer-workspace" &&
+    publicSnapshot?.adminHistory?.loadMode === "disabled-customer-snapshot" &&
+    publicAdminDocuments.length === 0;
+
+  if (!publicIsDeveloperIndex && !publicIsCustomerIndex) {
+    throw new Error(
+      "Public admin history index must be either the developer migrated index or the empty customer index paired with a customer public snapshot."
+    );
+  }
+  if (publicIsDeveloperIndex && publicAdminDocuments.length !== adminHistoryDocuments.length) {
+    throw new Error("Developer public admin history index must match generated developer admin-history-index.json.");
+  }
+}
+
 console.log(
   JSON.stringify(
     {
@@ -105,9 +129,17 @@ console.log(
       documents: documents.length,
       historyDocuments: historyDocuments.length,
       adminHistoryDocuments: adminHistoryDocuments.length,
-      adminHistoryIndexBytes: fs.statSync(adminHistoryIndexPath).size
+      adminHistoryIndexBytes: fs.statSync(generatedAdminHistoryIndexPath).size,
+      publicAdminHistoryStatus
     },
     null,
     2
   )
 );
+
+function readJsonIfExists(filePath) {
+  if (!fs.existsSync(filePath)) {
+    return null;
+  }
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}

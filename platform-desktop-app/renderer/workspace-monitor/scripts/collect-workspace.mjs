@@ -40,6 +40,7 @@ const defaultRepoRoot = path.resolve(projectRoot, "..", "..", "..");
 const snapshotFileWorkerPath = path.join(__dirname, "lib", "snapshot-file-worker.mjs");
 const snapshotPath = path.join(projectRoot, "src", "generated", "workspace-snapshot.json");
 const customerFallbackSnapshotPath = path.join(projectRoot, "src", "generated", "customer-workspace-snapshot.json");
+const generatedAdminHistoryIndexPath = path.join(projectRoot, "src", "generated", "admin-history-index.json");
 const publicSnapshotPath = path.join(projectRoot, "public", "workspace-snapshot.json");
 const publicAdminHistoryIndexPath = path.join(projectRoot, "public", "admin-history-index.json");
 
@@ -161,6 +162,7 @@ export async function main(argv = process.argv.slice(2)) {
   const publicAdminHistoryIndex = options.snapshotMode === "customer" ? emptyAdminHistoryIndex() : adminHistoryIndex;
   writeJson(snapshotPath, snapshot);
   writeJson(customerFallbackSnapshotPath, customerFallbackSnapshot);
+  writeJson(generatedAdminHistoryIndexPath, adminHistoryIndex);
   writeJson(publicSnapshotPath, publicSnapshot);
   writeJson(publicAdminHistoryIndexPath, publicAdminHistoryIndex);
   console.log(
