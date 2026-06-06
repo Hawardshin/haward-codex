@@ -800,6 +800,12 @@ struct ProviderAgentTaskInput {
     prompt: String,
     system_prompt: String,
     working_dir: Option<String>,
+    model_route_id: String,
+    constraint_profile_id: String,
+    connector_policy_id: String,
+    max_input_tokens: Option<u64>,
+    max_output_tokens: Option<u64>,
+    budget_usd: Option<f64>,
 }
 
 #[derive(Serialize)]
@@ -809,6 +815,12 @@ struct ProviderAgentTaskReport {
     provider_id: String,
     provider_label: String,
     model: String,
+    model_route_id: String,
+    constraint_profile_id: String,
+    connector_policy_id: String,
+    max_input_tokens: Option<u64>,
+    max_output_tokens: u64,
+    budget_usd: Option<f64>,
     status: String,
     http_status: Option<u16>,
     duration_ms: u128,
@@ -938,6 +950,12 @@ impl Default for ProviderAgentTaskInput {
             prompt: String::new(),
             system_prompt: String::new(),
             working_dir: None,
+            model_route_id: "manual".to_string(),
+            constraint_profile_id: "developer".to_string(),
+            connector_policy_id: "provider-api".to_string(),
+            max_input_tokens: None,
+            max_output_tokens: None,
+            budget_usd: None,
         }
     }
 }
@@ -1446,7 +1464,9 @@ const OPENAI_BASE_URL: &str = "https://api.openai.com/v1";
 const ANTHROPIC_BASE_URL: &str = "https://api.anthropic.com";
 const GEMINI_BASE_URL: &str = "https://generativelanguage.googleapis.com";
 const MAX_PROVIDER_TASK_OUTPUT_BYTES: usize = 100_000;
-const MAX_PROVIDER_TASK_OUTPUT_TOKENS: u64 = 2_048;
+const DEFAULT_PROVIDER_TASK_OUTPUT_TOKENS: u64 = 2_048;
+const MAX_PROVIDER_TASK_OUTPUT_TOKENS: u64 = 12_000;
+const MIN_PROVIDER_TASK_OUTPUT_TOKENS: u64 = 256;
 const PROVIDER_TASK_TIMEOUT_MS: u64 = 120_000;
 const LOCAL_HTTP_AUTH_METHOD: &str = "local_http";
 const OLLAMA_PROVIDER_ID: &str = "ollama";
@@ -8134,6 +8154,15 @@ async fn run_provider_agent_task_report(
         .filter(|value| provider_base_url_is_valid(value))
         .unwrap_or_else(|| provider_default_base_url(definition.provider_id).to_string());
     let task_kind = normalize_task_kind(Some(input.task_kind.as_str()), "provider_agent_task")?;
+    let max_output_tokens = normalize_provider_task_output_tokens(input.max_output_tokens);
+    if let Some(max_input_tokens) = input.max_input_tokens {
+        let estimated_prompt_tokens = estimate_text_tokens(&input.prompt) + estimate_text_tokens(&input.system_prompt);
+        if estimated_prompt_tokens > max_input_tokens {
+            return Err(format!(
+                "Task input is estimated at {estimated_prompt_tokens} tokens, above the selected max_input_tokens limit of {max_input_tokens}."
+            ));
+        }
+    }
     let working_dir = resolve_workspace_dir(app, input.working_dir.as_deref())?;
     let system_prompt = provider_task_system_prompt(&task_kind, &input.system_prompt);
     let request_id = new_session_id(&format!("provider-{}", definition.provider_id));
@@ -8148,6 +8177,7 @@ async fn run_provider_agent_task_report(
         &base_url,
         &system_prompt,
         &input.prompt,
+        max_output_tokens,
     )
     .await;
     let duration_ms = started.elapsed().as_millis();
@@ -8183,6 +8213,12 @@ async fn run_provider_agent_task_report(
         provider_id: definition.provider_id.to_string(),
         provider_label: definition.label.to_string(),
         model,
+        model_route_id: normalize_provider_task_control_id(&input.model_route_id, "manual"),
+        constraint_profile_id: normalize_provider_task_control_id(&input.constraint_profile_id, "developer"),
+        connector_policy_id: normalize_provider_task_control_id(&input.connector_policy_id, "provider-api"),
+        max_input_tokens: input.max_input_tokens,
+        max_output_tokens,
+        budget_usd: input.budget_usd,
         status,
         http_status,
         duration_ms,
@@ -8219,17 +8255,18 @@ async fn call_provider_api(
     base_url: &str,
     system_prompt: &str,
     prompt: &str,
+    max_output_tokens: u64,
 ) -> Result<ProviderApiResponse, String> {
     match definition.provider_id {
         OLLAMA_PROVIDER_ID => {
-            call_ollama_provider_api(base_url, model, system_prompt, prompt).await
+            call_ollama_provider_api(base_url, model, system_prompt, prompt, max_output_tokens).await
         }
-        "openai" => call_openai_provider_api(base_url, secret, model, system_prompt, prompt).await,
+        "openai" => call_openai_provider_api(base_url, secret, model, system_prompt, prompt, max_output_tokens).await,
         "anthropic" => {
-            call_anthropic_provider_api(base_url, secret, model, system_prompt, prompt).await
+            call_anthropic_provider_api(base_url, secret, model, system_prompt, prompt, max_output_tokens).await
         }
         "google-gemini" => {
-            call_gemini_provider_api(base_url, secret, model, system_prompt, prompt).await
+            call_gemini_provider_api(base_url, secret, model, system_prompt, prompt, max_output_tokens).await
         }
         _ => Err(format!(
             "Unsupported provider id: {}",
@@ -8243,6 +8280,7 @@ async fn call_ollama_provider_api(
     model: &str,
     system_prompt: &str,
     prompt: &str,
+    max_output_tokens: u64,
 ) -> Result<ProviderApiResponse, String> {
     let payload = json!({
         "model": model,
@@ -8258,7 +8296,7 @@ async fn call_ollama_provider_api(
         ],
         "stream": false,
         "options": {
-            "num_predict": MAX_PROVIDER_TASK_OUTPUT_TOKENS
+            "num_predict": max_output_tokens
         }
     });
     let response = provider_http_client()?
@@ -8288,12 +8326,13 @@ async fn call_openai_provider_api(
     model: &str,
     system_prompt: &str,
     prompt: &str,
+    max_output_tokens: u64,
 ) -> Result<ProviderApiResponse, String> {
     let payload = json!({
         "model": model,
         "instructions": system_prompt,
         "input": prompt,
-        "max_output_tokens": MAX_PROVIDER_TASK_OUTPUT_TOKENS,
+        "max_output_tokens": max_output_tokens,
         "store": false
     });
     let response = provider_http_client()?
@@ -8324,10 +8363,11 @@ async fn call_anthropic_provider_api(
     model: &str,
     system_prompt: &str,
     prompt: &str,
+    max_output_tokens: u64,
 ) -> Result<ProviderApiResponse, String> {
     let payload = json!({
         "model": model,
-        "max_tokens": MAX_PROVIDER_TASK_OUTPUT_TOKENS,
+        "max_tokens": max_output_tokens,
         "system": system_prompt,
         "messages": [
             {
@@ -8365,6 +8405,7 @@ async fn call_gemini_provider_api(
     model: &str,
     system_prompt: &str,
     prompt: &str,
+    max_output_tokens: u64,
 ) -> Result<ProviderApiResponse, String> {
     let model_path = gemini_model_path(model);
     let endpoint = provider_endpoint(base_url, &format!("/v1beta/{model_path}:generateContent"));
@@ -8387,7 +8428,7 @@ async fn call_gemini_provider_api(
             }
         ],
         "generationConfig": {
-            "maxOutputTokens": MAX_PROVIDER_TASK_OUTPUT_TOKENS
+            "maxOutputTokens": max_output_tokens
         }
     });
     let response = provider_http_client()?
@@ -8491,6 +8532,33 @@ fn normalize_provider_model(
         return Err("Provider model id contains unsupported characters.".to_string());
     }
     Ok(candidate.to_string())
+}
+
+fn normalize_provider_task_output_tokens(value: Option<u64>) -> u64 {
+    value
+        .unwrap_or(DEFAULT_PROVIDER_TASK_OUTPUT_TOKENS)
+        .clamp(MIN_PROVIDER_TASK_OUTPUT_TOKENS, MAX_PROVIDER_TASK_OUTPUT_TOKENS)
+}
+
+fn normalize_provider_task_control_id(value: &str, fallback: &str) -> String {
+    let candidate = value.trim();
+    if candidate.is_empty() {
+        return fallback.to_string();
+    }
+    let normalized: String = candidate
+        .chars()
+        .filter(|character| character.is_ascii_alphanumeric() || matches!(character, '-' | '_'))
+        .take(64)
+        .collect();
+    if normalized.is_empty() {
+        fallback.to_string()
+    } else {
+        normalized
+    }
+}
+
+fn estimate_text_tokens(value: &str) -> u64 {
+    u64::try_from(value.chars().count().div_ceil(4)).unwrap_or(u64::MAX)
 }
 
 fn gemini_model_path(model: &str) -> String {
@@ -8600,6 +8668,24 @@ fn persist_provider_agent_task_run(
     let relative_stderr_path = workspace_relative_display_path(&root, &stderr_log_path);
     let updated_at = current_unix_millis_label();
     let exit_code = if report.status == "completed" { 0 } else { 1 };
+    let provider_task = json!({
+        "provider_id": report.provider_id.clone(),
+        "provider_label": report.provider_label.clone(),
+        "model": report.model.clone(),
+        "model_route_id": report.model_route_id.clone(),
+        "constraint_profile_id": report.constraint_profile_id.clone(),
+        "connector_policy_id": report.connector_policy_id.clone(),
+        "max_input_tokens": report.max_input_tokens,
+        "max_output_tokens": report.max_output_tokens,
+        "budget_usd": report.budget_usd,
+        "http_status": report.http_status,
+        "credential_policy": "secret_not_persisted"
+    });
+    let paths = json!({
+        "record": relative_record_path,
+        "stdout_log": relative_stdout_path,
+        "stderr_log": relative_stderr_path
+    });
     let record = json!({
         "schema_version": 1,
         "record_id": format!("record-{}", report.request_id),
@@ -8631,18 +8717,8 @@ fn persist_provider_agent_task_run(
         "bounded": true,
         "max_output_bytes": MAX_PROVIDER_TASK_OUTPUT_BYTES,
         "decision_prompts": [],
-        "provider_task": {
-            "provider_id": report.provider_id.clone(),
-            "provider_label": report.provider_label.clone(),
-            "model": report.model.clone(),
-            "http_status": report.http_status,
-            "credential_policy": "secret_not_persisted"
-        },
-        "paths": {
-            "record": relative_record_path,
-            "stdout_log": relative_stdout_path,
-            "stderr_log": relative_stderr_path
-        }
+        "provider_task": provider_task,
+        "paths": paths
     });
     let formatted = serde_json::to_string_pretty(&record)
         .map_err(|error| format!("Failed to serialize provider task record: {error}"))?;

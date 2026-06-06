@@ -37,6 +37,7 @@ import {
   ShieldCheck,
   SquareTerminal,
   Trash2,
+  WalletCards,
   Wrench,
   X
 } from "lucide-react";
@@ -526,6 +527,12 @@ type SearchAgentRunForm = {
   notes: string;
   providerId: string;
   model: string;
+  modelRouteId: string;
+  constraintProfileId: string;
+  connectorPolicyId: string;
+  maxInputTokens: string;
+  maxOutputTokens: string;
+  budgetUsd: string;
 };
 
 type AgentCoreBlueprint = {
@@ -582,6 +589,12 @@ type ProviderAgentTaskReport = {
   providerId: string;
   providerLabel: string;
   model: string;
+  modelRouteId?: string;
+  constraintProfileId?: string;
+  connectorPolicyId?: string;
+  maxInputTokens?: number | null;
+  maxOutputTokens?: number | null;
+  budgetUsd?: number | null;
   status: string;
   httpStatus?: number | null;
   durationMs: number;
@@ -2701,6 +2714,133 @@ const researchInsightAgentId = "research-insight-planner-agent";
 const researchInsightAgentConfigPath = "agent-platform/configs/agents/research-insight-planner-agent.json";
 const researchInsightPlanTemplatePath = "agent-platform/configs/planning/research-insight-plan-template.json";
 
+type ModelRouteDecision = {
+  routeId: string;
+  routeLabel: string;
+  model: string;
+  tier: "small" | "balanced" | "premium";
+  complexityScore: number;
+  maxInputTokens: number;
+  maxOutputTokens: number;
+  budgetUsd: number;
+  connectorPolicyId: string;
+  connectorLabel: string;
+  constraintLabel: string;
+  reasons: string[];
+};
+
+const modelRouteOptions = [
+  {
+    value: "auto",
+    labelKo: "자동",
+    labelEn: "Auto",
+    detailKo: "작업 난이도와 근거 수로 모델 티어 결정",
+    detailEn: "Route by task difficulty and evidence load"
+  },
+  {
+    value: "small",
+    labelKo: "작은 모델",
+    labelEn: "Small",
+    detailKo: "정리, 짧은 수정, 단순 확인",
+    detailEn: "Summaries, small edits, simple checks"
+  },
+  {
+    value: "balanced",
+    labelKo: "균형",
+    labelEn: "Balanced",
+    detailKo: "일반 구현, 리뷰, 계획",
+    detailEn: "General implementation, review, planning"
+  },
+  {
+    value: "premium",
+    labelKo: "비싼 모델",
+    labelEn: "Premium",
+    detailKo: "광범위 연구, 아키텍처, 고위험 판단",
+    detailEn: "Deep research, architecture, high-risk judgment"
+  },
+  {
+    value: "manual",
+    labelKo: "직접 선택",
+    labelEn: "Manual",
+    detailKo: "아래 모델 입력값 그대로 사용",
+    detailEn: "Use the model typed below"
+  }
+];
+
+const constraintProfileOptions = [
+  {
+    value: "quick",
+    labelKo: "빠른 작업",
+    labelEn: "Quick",
+    detailKo: "질문 최소, 작은 모델 우선",
+    detailEn: "Few questions, small model first",
+    maxInputTokens: 8000,
+    maxOutputTokens: 1200,
+    budgetUsd: 0.2
+  },
+  {
+    value: "developer",
+    labelKo: "개발 작업",
+    labelEn: "Developer",
+    detailKo: "코드 변경, 테스트, 제한된 근거",
+    detailEn: "Code change, tests, bounded evidence",
+    maxInputTokens: 32000,
+    maxOutputTokens: 2400,
+    budgetUsd: 1.5
+  },
+  {
+    value: "research",
+    labelKo: "연구/설계",
+    labelEn: "Research",
+    detailKo: "다중 출처, 논문/공식문서, synthesis",
+    detailEn: "Multi-source, papers/docs, synthesis",
+    maxInputTokens: 96000,
+    maxOutputTokens: 6000,
+    budgetUsd: 8
+  },
+  {
+    value: "governed",
+    labelKo: "강제 제약",
+    labelEn: "Governed",
+    detailKo: "예산·토큰·도구 접근 제한을 강하게 적용",
+    detailEn: "Strict budget, tokens, and tool access",
+    maxInputTokens: 24000,
+    maxOutputTokens: 1800,
+    budgetUsd: 0.8
+  }
+];
+
+const connectorPolicyOptions = [
+  {
+    value: "mcp-first",
+    labelKo: "MCP 우선",
+    labelEn: "MCP first",
+    detailKo: "도구·리소스·프롬프트를 MCP JSON-RPC 경계로 연결",
+    detailEn: "Connect tools/resources/prompts through MCP JSON-RPC boundaries"
+  },
+  {
+    value: "provider-api",
+    labelKo: "API 직접",
+    labelEn: "Direct API",
+    detailKo: "MCP가 없는 제공자는 provider API로 제한 실행",
+    detailEn: "Use provider API when MCP is unavailable"
+  },
+  {
+    value: "local-only",
+    labelKo: "로컬만",
+    labelEn: "Local only",
+    detailKo: "Ollama/로컬 런타임과 저장소 근거만 허용",
+    detailEn: "Allow only local runtime and repository evidence"
+  },
+  {
+    value: "approval-required",
+    labelKo: "승인 필요",
+    labelEn: "Approval",
+    detailKo: "외부 API, 비용 증가, 도구 실행 전 사용자 승인",
+    detailEn: "Require user approval before external API, cost, or tool escalation"
+  }
+];
+
 const defaultSearchAgentRunForm: SearchAgentRunForm = {
   objective: "사용자 요청을 조사해서 실행 가능한 계획과 검증 기준으로 정리하기",
   questions:
@@ -2709,7 +2849,13 @@ const defaultSearchAgentRunForm: SearchAgentRunForm = {
   captureTargets: "_history/web-searches/YYYY/\n_research/\n_history/plans/YYYY/",
   notes: "출처, 한계, 계획 영향을 분리하고 약한 근거는 실행 근거로 쓰지 않습니다.",
   providerId: "ollama",
-  model: "llama3.2"
+  model: "llama3.2",
+  modelRouteId: "auto",
+  constraintProfileId: "developer",
+  connectorPolicyId: "mcp-first",
+  maxInputTokens: "32000",
+  maxOutputTokens: "2400",
+  budgetUsd: "1.50"
 };
 
 const defaultSearchAgentChatMessages: SearchAgentChatMessage[] = [
@@ -2717,15 +2863,15 @@ const defaultSearchAgentChatMessages: SearchAgentChatMessage[] = [
     id: "research-agent-ready",
     role: "agent",
     title: "검색 에이전트",
-    body: "여기에 작업을 입력하면 기존 research-insight-planner-agent가 외부 검색, 저장소 근거 확인, 실행 계획 작성을 맡습니다.",
+    body: "작업을 입력하고 모델 라우팅, 작업 제약, MCP/API 연결 정책, 토큰/예산 상한을 선택하면 기존 research-insight-planner-agent가 그 경계 안에서 실행됩니다.",
     meta: researchInsightAgentId
   },
   {
     id: "research-agent-runtime",
     role: "system",
     title: "작업 방식",
-    body: "Ollama 같은 로컬 모델이나 연결된 제공자 계정이 있으면 이 채팅에서 바로 작업하고, 결과는 작업 실행 저장소에 저장됩니다. CLI는 보조 실행 경로로만 사용됩니다.",
-    meta: "local/provider model + optional CLI lane + task-run store"
+    body: "단순 작업은 작은 모델/로컬 실행으로 제한하고, 다중 연구·아키텍처·고위험 판단만 비싼 모델로 승격합니다. CLI는 보조 실행 경로로만 사용됩니다.",
+    meta: "model route + connector policy + task-run store"
   }
 ];
 
@@ -4962,7 +5108,6 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const launchSearchAgent = async () => {
     const requestId = `research-insight-agent-${Date.now()}`;
     const objective = searchAgentRunForm.objective.trim() || defaultSearchAgentRunForm.objective;
-    const prompt = renderSearchAgentPrompt(searchAgentRunForm, uiLanguage);
     const connectedProviders = providerCredentials.providers.filter((provider) => provider.configured);
     const selectedProvider =
       providerCredentials.providers.find((provider) => provider.providerId === searchAgentRunForm.providerId) ||
@@ -4970,7 +5115,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       providerCredentials.providers[0];
     const selectedProviderReady = Boolean(selectedProvider?.configured);
     const selectedProviderLocal = selectedProvider?.authMethod === "local_http";
-    const selectedProviderModel = (searchAgentRunForm.model.trim() || (selectedProvider ? effectiveProviderModelFor(selectedProvider) : "") || "").trim();
+    const routeDecision = resolveModelRouteDecision(searchAgentRunForm, selectedProvider);
+    const prompt = renderSearchAgentPrompt(searchAgentRunForm, uiLanguage, selectedProvider);
+    const selectedProviderModel = routeDecision.model;
     setSearchAgentChatMessages((current) =>
       [
         ...current,
@@ -4997,7 +5144,9 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                   ? `Running the research-insight-planner-agent directly with the local ${selectedProvider.label} model. The result is stored in chat and the task-run store.`
                   : `Running the research-insight-planner-agent directly with ${selectedProvider.label}. The result is stored in chat and the task-run store.`
                 : "No connected provider account is ready, so this falls back to the CLI lane. Connect an account to run the model API directly.",
-          meta: selectedProviderReady ? `${selectedProvider.providerId}:${selectedProviderModel}` : "fallback=cli_lane"
+          meta: selectedProviderReady
+            ? `${selectedProvider.providerId}:${selectedProviderModel} / ${routeDecision.tier} / ${routeDecision.connectorPolicyId}`
+            : `fallback=cli_lane / ${routeDecision.tier} / ${routeDecision.connectorPolicyId}`
         }
       ].slice(-12)
     );
@@ -5030,7 +5179,13 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           model: selectedProviderModel,
           taskKind: "research_insight_agent",
           prompt,
-          systemPrompt: renderSearchAgentSystemPrompt(uiLanguage)
+          systemPrompt: renderSearchAgentSystemPrompt(uiLanguage),
+          modelRouteId: routeDecision.routeId,
+          constraintProfileId: searchAgentRunForm.constraintProfileId,
+          connectorPolicyId: routeDecision.connectorPolicyId,
+          maxInputTokens: routeDecision.maxInputTokens,
+          maxOutputTokens: routeDecision.maxOutputTokens,
+          budgetUsd: routeDecision.budgetUsd
         });
         setSearchAgentChatMessages((current) =>
           [
@@ -5053,7 +5208,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                 uiLanguage === "ko"
 	                  ? `작업 실행 기록이 저장됐습니다: ${report.taskRecordPath || "저장 경로 대기"}`
                   : `Task-run record stored: ${report.taskRecordPath || "path pending"}`,
-              meta: report.persistenceError || `http=${report.httpStatus ?? "n/a"} elapsed=${report.durationMs}ms`
+              meta: report.persistenceError || `http=${report.httpStatus ?? "n/a"} elapsed=${report.durationMs}ms tokens<=${report.maxOutputTokens ?? routeDecision.maxOutputTokens}`
             }
           ].slice(-12)
         );
@@ -8039,6 +8194,34 @@ function SearchAgentWorkChatPanel({
   const selectedProviderConnected = Boolean(selectedProvider?.configured);
   const selectedProviderLocal = selectedProvider?.authMethod === "local_http";
   const selectedProviderModel = form.model.trim() || selectedProvider?.defaultModel || "";
+  const routeDecision = useMemo(() => resolveModelRouteDecision(form, selectedProvider), [form, selectedProvider]);
+  const routeChoiceOptions = useMemo(
+    () =>
+      modelRouteOptions.map((option) => ({
+        value: option.value,
+        label: ko ? option.labelKo : option.labelEn,
+        detail: ko ? option.detailKo : option.detailEn
+      })),
+    [ko]
+  );
+  const constraintChoiceOptions = useMemo(
+    () =>
+      constraintProfileOptions.map((option) => ({
+        value: option.value,
+        label: ko ? option.labelKo : option.labelEn,
+        detail: ko ? option.detailKo : option.detailEn
+      })),
+    [ko]
+  );
+  const connectorChoiceOptions = useMemo(
+    () =>
+      connectorPolicyOptions.map((option) => ({
+        value: option.value,
+        label: ko ? option.labelKo : option.labelEn,
+        detail: ko ? option.detailKo : option.detailEn
+      })),
+    [ko]
+  );
   const modelOptions = providerModelCatalog?.providerId === selectedProvider?.providerId ? providerModelCatalog.models : [];
   const modelStatusText = providerModelBusy
     ? ko
@@ -8074,6 +8257,13 @@ function SearchAgentWorkChatPanel({
     };
 
     addChoice({
+      id: "route-recommended-model",
+      label: ko ? "라우팅 추천" : "Route pick",
+      detail: routeDecision.model,
+      value: routeDecision.model,
+      badge: routeDecision.tier
+    });
+    addChoice({
       id: "provider-default-model",
       label: ko ? "기본 모델" : "Default",
       detail: selectedProvider?.defaultModel || providerModelCatalog?.defaultModel || "",
@@ -8102,6 +8292,8 @@ function SearchAgentWorkChatPanel({
     ko,
     modelOptions,
     providerModelCatalog?.defaultModel,
+    routeDecision.model,
+    routeDecision.tier,
     selectedProvider?.defaultModel,
     selectedProvider?.label,
     selectedProviderModel
@@ -8155,6 +8347,63 @@ function SearchAgentWorkChatPanel({
                 onChange={(event) => onChange("objective", event.target.value)}
               />
             </label>
+            <div className="agent-routing-control-strip" aria-label={ko ? "모델 라우팅과 작업 제약" : "Model routing and work constraints"}>
+              <AppChoiceButtonGroup
+                density="compact"
+                label={ko ? "모델 라우팅" : "Model route"}
+                value={form.modelRouteId}
+                options={routeChoiceOptions}
+                onChange={(value) => onChange("modelRouteId", value)}
+              />
+              <AppChoiceButtonGroup
+                density="compact"
+                label={ko ? "작업 제약" : "Task constraint"}
+                value={form.constraintProfileId}
+                options={constraintChoiceOptions}
+                onChange={(value) => {
+                  const profile = constraintProfileOptions.find((option) => option.value === value);
+                  onChange("constraintProfileId", value);
+                  if (profile) {
+                    onChange("maxInputTokens", String(profile.maxInputTokens));
+                    onChange("maxOutputTokens", String(profile.maxOutputTokens));
+                    onChange("budgetUsd", profile.budgetUsd.toFixed(2));
+                  }
+                }}
+              />
+              <AppChoiceButtonGroup
+                density="compact"
+                label={ko ? "연결 정책" : "Connector policy"}
+                value={form.connectorPolicyId}
+                options={connectorChoiceOptions}
+                onChange={(value) => onChange("connectorPolicyId", value)}
+              />
+              <label className="agent-routing-number-field">
+                <span>{ko ? "출력 토큰" : "Output tokens"}</span>
+                <input
+                  inputMode="numeric"
+                  value={form.maxOutputTokens}
+                  onChange={(event) => onChange("maxOutputTokens", event.target.value)}
+                />
+              </label>
+              <label className="agent-routing-number-field">
+                <span>{ko ? "예산 $" : "Budget $"}</span>
+                <input
+                  inputMode="decimal"
+                  value={form.budgetUsd}
+                  onChange={(event) => onChange("budgetUsd", event.target.value)}
+                />
+              </label>
+            </div>
+            <div className={`agent-route-summary ${routeDecision.tier}`} data-model-route-summary="true">
+              <WalletCards size={16} aria-hidden="true" />
+              <strong>{ko ? "이번 실행" : "This run"}</strong>
+              <span>{routeDecision.model}</span>
+              <span>{routeDecision.constraintLabel}</span>
+              <span>{routeDecision.connectorLabel}</span>
+              <span>{ko ? `복잡도 ${routeDecision.complexityScore}/10` : `complexity ${routeDecision.complexityScore}/10`}</span>
+              <span>{ko ? `출력 ${routeDecision.maxOutputTokens.toLocaleString("ko-KR")} tok` : `${routeDecision.maxOutputTokens.toLocaleString("en-US")} output tok`}</span>
+              <span>{`$${routeDecision.budgetUsd.toFixed(2)}`}</span>
+            </div>
             <div className="agent-chat-composer-footer">
               <div className="agent-provider-run-controls" aria-label={ko ? "제공자 실행 설정" : "Provider run settings"}>
                 <div className="agent-provider-choice-field">
@@ -8303,6 +8552,11 @@ function SearchAgentWorkChatPanel({
                           ? "설정 > 초기화 > 계정 연결에서 키를 저장하면 바로 실행됩니다."
                           : "Save a key in Settings > Init > Account Connections to run directly."}
                     </small>
+                  </div>
+                  <div className="agent-chat-contract-card">
+                    <span>{ko ? "모델 라우팅" : "Model Route"}</span>
+                    <strong>{`${routeDecision.routeLabel} / ${routeDecision.model}`}</strong>
+                    <small>{`${routeDecision.connectorLabel} / ${routeDecision.maxOutputTokens} output tokens / $${routeDecision.budgetUsd.toFixed(2)}`}</small>
                   </div>
                   <div className="agent-chat-contract-card">
                     <span>{ko ? "사용 에이전트" : "Agent"}</span>
@@ -15497,7 +15751,7 @@ function linesFromText(value: string) {
     .filter(Boolean);
 }
 
-function renderSearchAgentPrompt(form: SearchAgentRunForm, language: UiLanguage) {
+function renderSearchAgentPrompt(form: SearchAgentRunForm, language: UiLanguage, provider?: ProviderCredentialSummary | null) {
   const objective = form.objective.trim() || defaultSearchAgentRunForm.objective;
   const questions = linesFromText(form.questions);
   const channels = linesFromText(form.searchChannels);
@@ -15505,6 +15759,7 @@ function renderSearchAgentPrompt(form: SearchAgentRunForm, language: UiLanguage)
   const notes = form.notes.trim() || defaultSearchAgentRunForm.notes;
   const dateLabel = new Date().toISOString().slice(0, 10);
   const outputLanguage = language === "ko" ? "Korean first, with English labels only when useful" : "English";
+  const routeDecision = resolveModelRouteDecision(form, provider);
 
   return [
     "[Agent Platform Existing Agent Run]",
@@ -15513,6 +15768,18 @@ function renderSearchAgentPrompt(form: SearchAgentRunForm, language: UiLanguage)
     `Input schema: ${researchInsightPlanTemplatePath}`,
     "Runtime role: run the existing search/research agent from the platform, not a new ad hoc chat.",
     `Output language: ${outputLanguage}`,
+    "",
+    "Platform-enforced work controls:",
+    `- Model route: ${routeDecision.routeLabel} / tier=${routeDecision.tier} / model=${routeDecision.model}`,
+    `- Constraint profile: ${routeDecision.constraintLabel}`,
+    `- Connector policy: ${routeDecision.connectorLabel}`,
+    `- Token caps: input<=${routeDecision.maxInputTokens}, output<=${routeDecision.maxOutputTokens}`,
+    `- Budget cap: approximately $${routeDecision.budgetUsd.toFixed(2)}`,
+    "- Treat these controls as execution constraints, not suggestions.",
+    "- If a needed tool or API cannot use MCP, use the connector policy above and state the fallback clearly.",
+    "- Do not escalate to a more expensive model, broader source search, or external tool execution unless the route policy permits it or asks for approval.",
+    "Route evidence:",
+    ...routeDecision.reasons.map((item) => `- ${item}`),
     "",
     "Objective:",
     objective,
@@ -15557,6 +15824,140 @@ function renderSearchAgentSystemPrompt(language: UiLanguage) {
     "Do not claim that source files were edited, shell commands were run, or web pages were visited unless the prompt includes that evidence.",
     "When more execution is needed, state the exact next action that should be launched through the desktop platform."
   ].join("\n");
+}
+
+function resolveModelRouteDecision(form: SearchAgentRunForm, provider?: ProviderCredentialSummary | null): ModelRouteDecision {
+  const routeOption = modelRouteOptions.find((option) => option.value === form.modelRouteId) || modelRouteOptions[0];
+  const constraint = constraintProfileOptions.find((option) => option.value === form.constraintProfileId) || constraintProfileOptions[1];
+  const connector = connectorPolicyOptions.find((option) => option.value === form.connectorPolicyId) || connectorPolicyOptions[0];
+  const explicitMaxInput = parsePositiveInteger(form.maxInputTokens);
+  const explicitMaxOutput = parsePositiveInteger(form.maxOutputTokens);
+  const explicitBudget = parsePositiveNumber(form.budgetUsd);
+  const score = scoreSearchAgentTaskComplexity(form);
+  const autoTier: ModelRouteDecision["tier"] = score >= 7 || constraint.value === "research"
+    ? "premium"
+    : score >= 4 || constraint.value === "developer"
+      ? "balanced"
+      : "small";
+  const tier: ModelRouteDecision["tier"] = routeOption.value === "premium"
+    ? "premium"
+    : routeOption.value === "balanced"
+      ? "balanced"
+      : routeOption.value === "small"
+        ? "small"
+        : routeOption.value === "manual"
+          ? "balanced"
+          : autoTier;
+  const maxInputTokens = clampNumber(explicitMaxInput || constraint.maxInputTokens, 1000, 200000);
+  const maxOutputTokens = clampNumber(explicitMaxOutput || constraint.maxOutputTokens, 256, 12000);
+  const budgetUsd = clampNumber(explicitBudget || constraint.budgetUsd, 0.01, 100);
+  const model = routeOption.value === "manual"
+    ? form.model.trim() || provider?.defaultModel || defaultSearchAgentRunForm.model
+    : recommendedModelForTier(provider?.providerId || form.providerId, tier, form.model.trim() || provider?.defaultModel || defaultSearchAgentRunForm.model);
+  const reasons = buildModelRouteReasons(form, score, tier, constraint.value);
+
+  return {
+    routeId: routeOption.value,
+    routeLabel: routeOption.labelKo,
+    model,
+    tier,
+    complexityScore: score,
+    maxInputTokens,
+    maxOutputTokens,
+    budgetUsd,
+    connectorPolicyId: connector.value,
+    connectorLabel: connector.labelKo,
+    constraintLabel: constraint.labelKo,
+    reasons
+  };
+}
+
+function scoreSearchAgentTaskComplexity(form: SearchAgentRunForm) {
+  const haystack = [
+    form.objective,
+    form.questions,
+    form.searchChannels,
+    form.captureTargets,
+    form.notes
+  ].join("\n").toLowerCase();
+  let score = 0;
+  if (/논문|paper|arxiv|survey|research|리서치|연구|근거|citation|source|출처/.test(haystack)) {
+    score += 3;
+  }
+  if (/architecture|아키텍처|구조|설계|migration|마이그레이션|refactor|리팩터/.test(haystack)) {
+    score += 2;
+  }
+  if (/security|privacy|license|legal|보안|개인정보|라이선스|법률|cost|비용|금융|medical|의료/.test(haystack)) {
+    score += 2;
+  }
+  if (/implementation|구현|source|소스|test|검증|build|배포|desktop|mcp|api/.test(haystack)) {
+    score += 1;
+  }
+  if (linesFromText(form.searchChannels).length >= 3 || linesFromText(form.questions).length >= 4) {
+    score += 1;
+  }
+  if (estimateTextTokens(haystack) > 6000) {
+    score += 1;
+  }
+  return Math.min(score, 10);
+}
+
+function buildModelRouteReasons(
+  form: SearchAgentRunForm,
+  score: number,
+  tier: ModelRouteDecision["tier"],
+  constraintProfileId: string
+) {
+  const reasons = [
+    `complexity_score=${score}`,
+    `selected_constraint=${constraintProfileId}`,
+    `resolved_tier=${tier}`
+  ];
+  if (tier === "premium") {
+    reasons.push("premium when broad research, architecture, high-risk judgment, or long-context synthesis is present");
+  } else if (tier === "small") {
+    reasons.push("small when the task is bounded, low-risk, and mostly summarization or simple checking");
+  } else {
+    reasons.push("balanced when implementation, review, or planning needs reliability without deep-research cost");
+  }
+  return reasons;
+}
+
+function recommendedModelForTier(providerId: string, tier: ModelRouteDecision["tier"], fallbackModel: string) {
+  if (providerId === "openai") {
+    if (tier === "small") {
+      return "gpt-5-mini";
+    }
+    if (tier === "premium") {
+      return "gpt-5.2";
+    }
+    return fallbackModel || "gpt-5.2";
+  }
+  if (providerId === "ollama") {
+    return fallbackModel || "llama3.2";
+  }
+  if (providerId === "google-gemini") {
+    return fallbackModel || "gemini-3.5-flash";
+  }
+  return fallbackModel;
+}
+
+function estimateTextTokens(value: string) {
+  return Math.ceil(value.length / 4);
+}
+
+function parsePositiveInteger(value: string) {
+  const parsed = Number.parseInt(value.trim(), 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
+}
+
+function parsePositiveNumber(value: string) {
+  const parsed = Number.parseFloat(value.trim());
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
+}
+
+function clampNumber(value: number, min: number, max: number) {
+  return Math.max(min, Math.min(max, value));
 }
 
 function agentFactoryPreviewSpec(form: AgentFactoryForm) {

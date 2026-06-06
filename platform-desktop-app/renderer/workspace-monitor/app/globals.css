@@ -11427,6 +11427,78 @@ h3 {
   color: var(--amber);
 }
 
+.agent-routing-control-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(132px, 1fr)) repeat(2, minmax(92px, 0.6fr));
+  gap: 8px;
+  align-items: end;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 7px;
+}
+
+.agent-routing-number-field {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.agent-routing-number-field span {
+  color: var(--muted);
+  font-size: var(--font-size-overline);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.agent-route-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface-raised);
+  border-radius: 7px;
+  padding: 7px 9px;
+  color: var(--muted);
+  font-size: var(--font-size-caption);
+}
+
+.agent-route-summary svg {
+  color: var(--accent-primary);
+}
+
+.agent-route-summary strong {
+  color: var(--text);
+  font-size: var(--font-size-caption);
+}
+
+.agent-route-summary span {
+  display: inline-flex;
+  min-width: 0;
+  max-width: 180px;
+  border: 1px solid var(--line);
+  background: var(--chip-bg);
+  border-radius: 999px;
+  padding: 3px 7px;
+  color: var(--text);
+  font-size: var(--font-size-overline);
+  font-weight: 800;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agent-route-summary.premium {
+  border-color: color-mix(in srgb, var(--amber) 42%, var(--line));
+}
+
+.agent-route-summary.small {
+  border-color: color-mix(in srgb, var(--green) 38%, var(--line));
+}
+
 .agent-provider-run-state {
   display: grid;
   flex: 1 1 160px;
@@ -17127,6 +17199,7 @@ h3 {
   .search-agent-run-layout,
   .search-agent-work-chat-layout,
   .agentcore-blueprint-layout,
+  .agent-routing-control-strip,
   .agent-provider-run-controls,
   .agent-factory-layout,
   .learning-feedback-layout,
@@ -17349,6 +17422,7 @@ h3 {
   .agent-factory-form,
   .learning-decision-controls,
   .mode-option-grid,
+  .agent-routing-control-strip,
   .agent-provider-run-controls,
   .provider-login-guide,
   .provider-setup-toolbar,
