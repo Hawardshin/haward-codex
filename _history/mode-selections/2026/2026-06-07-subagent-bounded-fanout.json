@@ -1,0 +1,26 @@
+{
+  "task": "Subagent Bounded Fan-Out",
+  "selected_work_mode": "standard",
+  "selected_view_mode": "superadmin_developer",
+  "selected_install_mode": "developer",
+  "reasons": [
+    "The task changes Tauri runtime commands, CLI process orchestration, and Desktop Runtime UI.",
+    "The task touches multiple subprocess sessions, so resource and CLI pipeline checks are required.",
+    "No new dependency or global installation is needed."
+  ],
+  "required_records": [
+    "web_search",
+    "requirements",
+    "spec",
+    "plan",
+    "tasks",
+    "validation",
+    "traceability",
+    "cli_pipeline",
+    "resource_check",
+    "omission_check",
+    "evaluation",
+    "request_trace",
+    "work_summary"
+  ]
+}

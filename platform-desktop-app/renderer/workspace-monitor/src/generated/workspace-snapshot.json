@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T15:01:53.178Z",
+  "generatedAt": "2026-06-06T15:20:44.771Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 5,
@@ -13,12 +13,12 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 528,
-    "evaluations": 26,
+    "evaluations": 25,
     "webSearches": 11,
     "timingRecords": 12,
-    "historyDays": 1,
-    "adminHistoryDocuments": 2803,
-    "adminHistoryDays": 7,
+    "historyDays": 2,
+    "adminHistoryDocuments": 2813,
+    "adminHistoryDays": 8,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
     "modeOptions": 35,
@@ -7861,6 +7861,262 @@
   ],
   "documents": [
     {
+      "id": "history-2026-2026-06-07-md",
+      "path": "_history/2026/2026-06-07.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 07",
+      "excerpt": "2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Deskto",
+      "html": "<p>2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Desktop Runtime에 첫 2개 묶음 실행 버튼, fan out 결과 카드, pipeline/session 연결을 추가했다. 경계: default </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 774,
+      "updatedAt": "2026-06-06T15:19:33.217Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-subagent-bounded-fanout-input-json",
+      "path": "_history/evaluations/2026/2026-06-07-subagent-bounded-fanout-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 07 Subagent Bounded Fanout Input",
+      "excerpt": "{ \"initial instruction\": \"미룬거 계속 구현\", \"result summary\": \"Added a bounded subagent fan out command and Desktop Runtime UI that starts the first two saved subagent plan tools as existing CLI adapter sessions behind a manual merge gate.\", \"work mode\": \"standard\", \"changed files\": \"p",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;미룬거 계속 구현&quot;, &quot;result summary&quot;: &quot;Added a bounded subagent fan out command and Desktop Runtime UI that starts the first two saved subagent plan tools as existing CLI adapter sessions behind a manual merge gate.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/src tauri/src/lib.rs&quot;, &quot;platform desktop app/src tauri/src/f</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 5029,
+      "updatedAt": "2026-06-06T15:19:33.217Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+      "path": "_history/evaluations/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "최종 평가: Subagent Bounded Fan Out",
+      "excerpt": "최종 평가: Subagent Bounded Fan Out 날짜: 2026 06 07 평가 이전 단일 lane 실행 다음 단계로, 저장된 subagent plan의 첫 2개 tool을 bounded fan out CLI sessions로 시작하고 manual merge gate로 묶는 기능을 구현했다. 충족 start subagent tool fanout Tauri command가 추가됐다. default 2, hard cap 3 sessions 경계가 추가됐다. 각 lane은 기존 create c",
+      "html": "<p>최종 평가: Subagent Bounded Fan Out 날짜: 2026 06 07 평가 이전 단일 lane 실행 다음 단계로, 저장된 subagent plan의 첫 2개 tool을 bounded fan out CLI sessions로 시작하고 manual merge gate로 묶는 기능을 구현했다. 충족 start subagent tool fanout Tauri command가 추가됐다. default 2, hard cap 3 sessions 경계가 추가됐다. 각 lane은 기존 create cli session lifecycle과 task run persistence를 재사용한다. fan out prompt는 manager owned</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 966,
+      "updatedAt": "2026-06-06T15:19:33.217Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+      "path": "_history/request-traces/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Subagent Bounded Fan Out",
+      "excerpt": "Request Trace: Subagent Bounded Fan Out 날짜: 2026 06 07 요청 미룬거 계속 구현. 연결된 이전 작업 2026 06 06 subagent tool use : plan 생성 2026 06 06 subagent live execution : 단일 tool 실행 결과 저장된 plan의 첫 2개 subagent tool을 bounded fan out으로 시작하고 manual merge gate로 묶는 기능을 추가했다. 산출물 요구사항: platform desktop",
+      "html": "<p>Request Trace: Subagent Bounded Fan Out 날짜: 2026 06 07 요청 미룬거 계속 구현. 연결된 이전 작업 2026 06 06 subagent tool use : plan 생성 2026 06 06 subagent live execution : 단일 tool 실행 결과 저장된 plan의 첫 2개 subagent tool을 bounded fan out으로 시작하고 manual merge gate로 묶는 기능을 추가했다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 subagent bounded fanout.ko.md 스펙: platform des</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 956,
+      "updatedAt": "2026-06-06T15:19:33.217Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-subagent-bounded-fanout-cli-pipeline-json",
+      "path": "_history/evaluations/2026/2026-06-07-subagent-bounded-fanout-cli-pipeline.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 07 Subagent Bounded Fanout Cli Pipeline",
+      "excerpt": "{ \"pipeline id\": \"subagent bounded fanout\", \"purpose\": \"Start the first two saved subagent plan tools as independent CLI adapter sessions and hold their summaries behind a manual merge gate.\", \"work mode\": \"standard\", \"risk level\": \"medium\", \"processes\": { \"process id\": \"subagent",
+      "html": "<p>{ &quot;pipeline id&quot;: &quot;subagent bounded fanout&quot;, &quot;purpose&quot;: &quot;Start the first two saved subagent plan tools as independent CLI adapter sessions and hold their summaries behind a manual merge gate.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;risk level&quot;: &quot;medium&quot;, &quot;processes&quot;: { &quot;process id&quot;: &quot;subagent tool 1&quot;, &quot;adapter id&quot;: &quot;codex cli&quot;, &quot;command&quot;: &quot;codex&quot;, &quot;args&quot;: &quot;run&quot;, &quot;bounded</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 5226,
+      "updatedAt": "2026-06-06T15:19:33.216Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Subagent Bounded Fan Out",
+      "excerpt": "Work Summary: Subagent Bounded Fan Out 날짜: 2026 06 07 완료 start subagent tool fanout Tauri command를 추가했다. 저장된 plan에서 요청 tool names를 검증한다. default 2, hard cap 3 sessions로 제한한다. 각 lane은 기존 CLI session lifecycle로 시작하고 같은 pipeline id와 manual merge gate를 공유한다. Desktop Runtime에 첫 2개 묶음 ",
+      "html": "<p>Work Summary: Subagent Bounded Fan Out 날짜: 2026 06 07 완료 start subagent tool fanout Tauri command를 추가했다. 저장된 plan에서 요청 tool names를 검증한다. default 2, hard cap 3 sessions로 제한한다. 각 lane은 기존 CLI session lifecycle로 시작하고 같은 pipeline id와 manual merge gate를 공유한다. Desktop Runtime에 첫 2개 묶음 실행 버튼과 fan out 결과 카드를 추가했다. fan out report를 task pipeline panel과 session list에 연</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 716,
+      "updatedAt": "2026-06-06T15:19:33.216Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+      "path": "_history/work-timings/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "Work Timing: Subagent Bounded Fan Out",
+      "excerpt": "Work Timing: Subagent Bounded Fan Out 날짜: 2026 06 07 | Phase | Approx elapsed | Notes | | | : | | | Web first intake and slice scoping | 10m | Official docs and explorer recommendation used | | Rust command implementation | 35m | Fan out command, prompt, selection, tests | | Rend",
+      "html": "<p>Work Timing: Subagent Bounded Fan Out 날짜: 2026 06 07 | Phase | Approx elapsed | Notes | | | : | | | Web first intake and slice scoping | 10m | Official docs and explorer recommendation used | | Rust command implementation | 35m | Fan out command, prompt, selection, tests | | Renderer integration | 25m | Button, report card, pipeline/session merge | | Validat</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 615,
+      "updatedAt": "2026-06-06T15:19:33.216Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-plans-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+      "path": "_history/plans/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Work Plan: Subagent Bounded Fan Out",
+      "excerpt": "Work Plan: Subagent Bounded Fan Out 날짜: 2026 06 07 작업 모드 standard 실행 계획 1. 웹 우선 조사와 이전 slice 기록 확인. 2. subagent explorer로 safe slice 검토. 3. Rust command와 fan out report 구현. 4. Renderer UI와 pipeline/session 연결 구현. 5. Rust/frontend/build/browser 검증. 6. CLI pipeline/resource/omissio",
+      "html": "<p>Work Plan: Subagent Bounded Fan Out 날짜: 2026 06 07 작업 모드 standard 실행 계획 1. 웹 우선 조사와 이전 slice 기록 확인. 2. subagent explorer로 safe slice 검토. 3. Rust command와 fan out report 구현. 4. Renderer UI와 pipeline/session 연결 구현. 5. Rust/frontend/build/browser 검증. 6. CLI pipeline/resource/omission/evaluation 기록. 7. commit/push. 결정 default fan out은 첫 2개 planned tools만 실행한다. h</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 588,
+      "updatedAt": "2026-06-06T15:19:33.215Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+      "path": "_history/user-requests/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request Summary: Subagent Bounded Fan Out",
+      "excerpt": "User Request Summary: Subagent Bounded Fan Out 날짜: 2026 06 07 요약 사용자는 “미룬거 계속 구현”이라고 요청했다. 이전 응답에서 후속으로 남긴 subagent fan out과 merge gate 쪽을 계속 구현하는 요청으로 해석했다. 실행 범위 저장된 subagent tool plan을 사용한다. 첫 multi process slice로 첫 2개 planned tools만 실행한다. hard cap 3, manager owned merge gate,",
+      "html": "<p>User Request Summary: Subagent Bounded Fan Out 날짜: 2026 06 07 요약 사용자는 “미룬거 계속 구현”이라고 요청했다. 이전 응답에서 후속으로 남긴 subagent fan out과 merge gate 쪽을 계속 구현하는 요청으로 해석했다. 실행 범위 저장된 subagent tool plan을 사용한다. 첫 multi process slice로 첫 2개 planned tools만 실행한다. hard cap 3, manager owned merge gate, 기존 CLI session lifecycle reuse를 요구사항으로 둔다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 513,
+      "updatedAt": "2026-06-06T15:19:33.215Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+      "path": "_history/web-searches/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Subagent Bounded Fan Out",
+      "excerpt": "Web Search: Subagent Bounded Fan Out 날짜: 2026 06 07 Queries OpenAI Agents SDK handoffs agents as tools official documentation Claude Code subagents parallel background permissions official documentation VS Code Copilot subagents orchestration runSubagent tools official documentat",
+      "html": "<p>Web Search: Subagent Bounded Fan Out 날짜: 2026 06 07 Queries OpenAI Agents SDK handoffs agents as tools official documentation Claude Code subagents parallel background permissions official documentation VS Code Copilot subagents orchestration runSubagent tools official documentation Tauri v2 shell plugin process CommandEvent stdout stderr termination officia</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2153,
+      "updatedAt": "2026-06-06T15:19:33.215Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-subagent-bounded-fanout-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-subagent-bounded-fanout/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Subagent Bounded Fan Out",
+      "excerpt": "Plan: Subagent Bounded Fan Out 1. 웹 우선 조사로 subagent fan out, permissions, process lifecycle 기준을 확인한다. 2. 이전 single lane execution 구현과 task pipeline 구현을 읽는다. 3. Rust에 SubagentToolFanoutInput/Report 와 start subagent tool fanout command를 추가한다. 4. plan record에서 tool list를 한 번 읽고, req",
+      "html": "<h1>Plan: Subagent Bounded Fan-Out</h1>\n<p>1. 웹 우선 조사로 subagent fan-out, permissions, process lifecycle 기준을 확인한다.</p>\n<p>2. 이전 single-lane execution 구현과 task pipeline 구현을 읽는다.</p>\n<p>3. Rust에 <code>SubagentToolFanoutInput/Report</code>와 <code>start_subagent_tool_fanout</code> command를 추가한다.</p>\n<p>4. plan record에서 tool list를 한 번 읽고, requested tool names를 검증한다.</p>\n<p>5. fan-out lane prompt와 process cap을 추가한다.</p>\n<p>6. Renderer에 첫 2개 묶음 실행 button, result card, pipeline report 연결을 추가한다.</p>\n<p>7. static tests, Rust unit tests, check/build, browser smoke를 수행한다.</p>\n<p>8. resource/CLI pipeline/omission/evaluation 기록 후 commit/push한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 704,
+      "updatedAt": "2026-06-06T15:19:33.214Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-subagent-bounded-fanout-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-subagent-bounded-fanout/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Subagent Bounded Fan Out",
+      "excerpt": "Spec: Subagent Bounded Fan Out 날짜: 2026 06 07 목적 저장된 subagent plan에서 첫 2개 tool을 검증해 독립 CLI session으로 시작하고, 같은 pipeline id와 manual merge gate로 묶는다. 이는 단일 lane 실행 다음의 첫 multi process slice이며, 자동 fan in/merge는 하지 않는다. 동작 1. Renderer는 최근 SubagentToolPlanReport 가 completed 이고 tool이 2개",
+      "html": "<h1>Spec: Subagent Bounded Fan-Out</h1>\n<p>날짜: 2026-06-07</p>\n<h2>목적</h2>\n<p>저장된 subagent plan에서 첫 2개 tool을 검증해 독립 CLI session으로 시작하고, 같은 pipeline id와 manual merge gate로 묶는다. 이는 단일 lane 실행 다음의 첫 multi-process slice이며, 자동 fan-in/merge는 하지 않는다.</p>\n<h2>동작</h2>\n<p>1. Renderer는 최근 <code>SubagentToolPlanReport</code>가 <code>completed</code>이고 tool이 2개 이상일 때 <code>첫 2개 묶음 실행</code> 버튼을 활성화한다.</p>\n<p>2. Renderer는 <code>start_subagent_tool_fanout</code>에 <code>planTaskRunId</code>, 첫 2개 <code>toolNames</code>, adapter id, prompt, working dir, <code>maxSessions=2</code>를 넘긴다.</p>\n<p>3. Rust command는 plan record가 <code>subagent_tool_plan</code>인지 확인하고, 요청 tool name이 plan에 있는지 검증한다.</p>\n<p>4. Rust command는 <code>maxSessions</code>가 1 이상 3 이하인지 확인한다.</p>\n<p>5. Rust command는 각 tool에 대해 fan-out lane prompt를 생성하고 기존 <code>create_cli_session</code>으로 시작한다.</p>\n<p>6. Rust command는 partial failure를 허용하되 각 lane status를 <code>running</code>, <code>capability_missing</code>, <code>init_failed</code> 등으로 명시한다.</p>\n<p>7. Rust command는 <code>SubagentToolFanoutReport</code>를 반환하며, <code>lanes</code>, <code>pipes</code>, <code>mergeGate</code>, <code>startedSessions</code>, <code>missingLanes</code>, <code>skippedTools</code>, <code>processCap</code>을 포함한다.</p>\n<p>8. Renderer는 report를 <code>pipelineReports</code>와 최근 fan-out 카드에 표시하고, 시작된 session들을 하단 terminal session list에 합친다.</p>\n<h2>안전 경계</h2>\n<ul>\n<li>default fan-out은 첫 2개 tool만 실행한다.</li>\n<li>hard cap은 3 sessions다.</li>\n<li>adapter는 registered adapter만 허용한다.</li>\n<li>cwd는 기존 workspace resolver를 통과해야 한다.</li>\n<li>prompt는 <code>_private</code>/<code>outputs</code>, destructive file operation, install, global env change를 금지한다.</li>\n<li>manager가 fan-in, merge, validation, final answer를 소유한다.</li>\n</ul>\n<h2>참고</h2>\n<ul>\n<li>OpenAI Agents SDK handoffs: https://openai.github.io/openai-agents-js/guides/handoffs/</li>\n<li>Claude Code subagents: https://code.claude.com/docs/en/sub-agents</li>\n<li>Claude Code agents/parallel work: https://code.claude.com/docs/en/agents</li>\n<li>VS Code subagents: https://code.visualstudio.com/docs/copilot/agents/subagents</li>\n<li>Tauri shell plugin: https://v2.tauri.app/plugin/shell/</li>\n<li>Rust <code>std::process::Command</code>: https://doc.rust-lang.org/std/process/struct.Command.html</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2278,
+      "updatedAt": "2026-06-06T15:19:33.214Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-subagent-bounded-fanout-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-subagent-bounded-fanout/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Subagent Bounded Fan Out",
+      "excerpt": "Tasks: Subagent Bounded Fan Out x web first intake 수행 x subagent explorer로 safe slice 검토 x 기존 single lane execution과 task pipeline lifecycle 확인 x Rust fan out input/report/command 추가 x plan tool list helper와 requested tool validation 추가 x fan out prompt와 process cap 추가 x Desktop ",
+      "html": "<h1>Tasks: Subagent Bounded Fan-Out</h1>\n<ul>\n<li>[x] web-first intake 수행</li>\n<li>[x] subagent explorer로 safe slice 검토</li>\n<li>[x] 기존 single-lane execution과 task pipeline lifecycle 확인</li>\n<li>[x] Rust fan-out input/report/command 추가</li>\n<li>[x] plan tool list helper와 requested tool validation 추가</li>\n<li>[x] fan-out prompt와 process cap 추가</li>\n<li>[x] Desktop Runtime button/result UI 추가</li>\n<li>[x] pipelineReports/session list 연결</li>\n<li>[x] static contract tests 보강</li>\n<li>[x] Rust unit tests 추가</li>\n<li>[x] Rust check/tests 통과</li>\n<li>[x] renderer test/check 통과</li>\n<li>[ ] renderer build, collect, platform check</li>\n<li>[ ] Browser smoke</li>\n<li>[ ] resource/CLI pipeline/omission/evaluation 검증</li>\n<li>[ ] commit, push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 688,
+      "updatedAt": "2026-06-06T15:19:33.214Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-subagent-bounded-fanout-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-subagent-bounded-fanout/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Subagent Bounded Fan Out",
+      "excerpt": "Traceability: Subagent Bounded Fan Out | Requirement | Implementation | Verification | | | | | | REQ SBF 001 | fanoutSubagentTools , start subagent tool fanout | workspace monitor test, Browser smoke | | REQ SBF 002 | subagent tools from plan record , select subagent fanout tools",
+      "html": "<h1>Traceability: Subagent Bounded Fan-Out</h1>\n<table><thead><tr><th>Requirement</th><th>Implementation</th><th>Verification</th></tr></thead><tbody><tr><td>REQ-SBF-001</td><td><code>fanoutSubagentTools</code>, <code>start_subagent_tool_fanout</code></td><td>workspace-monitor test, Browser smoke</td></tr><tr><td>REQ-SBF-002</td><td><code>subagent_tools_from_plan_record</code>, <code>select_subagent_fanout_tools</code></td><td>Rust unit/static test</td></tr><tr><td>REQ-SBF-003</td><td><code>DEFAULT_SUBAGENT_FANOUT_SESSIONS</code>, <code>MAX_SUBAGENT_FANOUT_SESSIONS</code></td><td>static test</td></tr><tr><td>REQ-SBF-004</td><td><code>create_cli_session</code> reuse</td><td>cargo check, resource check</td></tr><tr><td>REQ-SBF-005</td><td><code>task_kind=subagent_tool_fanout</code>, <code>pipeline_id</code>, <code>lane_id</code>, <code>lane_role</code></td><td>static test</td></tr><tr><td>REQ-SBF-006</td><td><code>render_subagent_cli_fanout_prompt</code></td><td>Rust unit test</td></tr><tr><td>REQ-SBF-007</td><td>fan-out result card, <code>pipelineReports</code>, session merge</td><td>workspace-monitor test</td></tr></tbody></table>\n<h2>변경 파일</h2>\n<ul>\n<li><code>platform-desktop-app/src-tauri/src/lib.rs</code></li>\n<li><code>platform-desktop-app/src-tauri/src/features/agent_factory.rs</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1131,
+      "updatedAt": "2026-06-06T15:19:33.214Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-subagent-bounded-fanout-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-subagent-bounded-fanout/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Subagent Bounded Fan Out",
+      "excerpt": "Validation: Subagent Bounded Fan Out 완료 cargo fmt manifest path platform desktop app/src tauri/Cargo.toml : 통과 cargo check manifest path platform desktop app/src tauri/Cargo.toml : 통과 cargo test manifest path platform desktop app/src tauri/Cargo.toml subagent cli fanout prompt ke",
+      "html": "<h1>Validation: Subagent Bounded Fan-Out</h1>\n<h2>완료</h2>\n<ul>\n<li><code>cargo fmt --manifest-path platform-desktop-app/src-tauri/Cargo.toml</code>: 통과</li>\n<li><code>cargo check --manifest-path platform-desktop-app/src-tauri/Cargo.toml</code>: 통과</li>\n<li><code>cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml subagent_cli_fanout_prompt_keeps_merge_gate_boundaries</code>: 통과</li>\n<li><code>cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml subagent_fanout_tool_selection_rejects_unknown_tools</code>: 통과</li>\n<li><code>cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml runtime_feature_map_groups_commands_by_native_capability</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code>: 통과, 90 tests</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>: 통과</li>\n</ul>\n<h2>남은 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code></li>\n<li><code>corepack pnpm -w run desktop:renderer:build</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code></li>\n<li>Browser smoke</li>\n<li><code>check-cli-pipeline</code></li>\n<li><code>check-resources</code></li>\n<li><code>check-omissions</code></li>\n<li><code>evaluate-work</code></li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>알려진 경계</h2>\n<ul>\n<li>Browser preview는 Tauri command를 직접 실행하지 못하므로 UI contract만 smoke한다.</li>\n<li>실제 packaged runtime smoke는 별도 내부 앱 실행 환경에서 더 강하게 닫을 수 있다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1475,
+      "updatedAt": "2026-06-06T15:19:33.214Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-07-subagent-bounded-fanout-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-07-subagent-bounded-fanout.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Requirements: Subagent Bounded Fan Out",
+      "excerpt": "Requirements: Subagent Bounded Fan Out 날짜: 2026 06 07 배경 이전 slice는 저장된 subagent plan에서 선택한 tool 하나를 CLI session으로 시작했다. 사용자는 미룬 다음 단계를 계속 구현하라고 요청했으므로, 다음 단계는 plan의 여러 tool을 제한된 병렬 실행으로 시작하고 manager가 수동 merge gate를 소유하게 만드는 것이다. 요구사항 REQ SBF 001: Desktop Runtime은 저장된 subagent too",
+      "html": "<h1>Requirements: Subagent Bounded Fan-Out</h1>\n<p>날짜: 2026-06-07</p>\n<h2>배경</h2>\n<p>이전 slice는 저장된 subagent plan에서 선택한 tool 하나를 CLI session으로 시작했다. 사용자는 미룬 다음 단계를 계속 구현하라고 요청했으므로, 다음 단계는 plan의 여러 tool을 제한된 병렬 실행으로 시작하고 manager가 수동 merge gate를 소유하게 만드는 것이다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-SBF-001: Desktop Runtime은 저장된 <code>subagent_tool_plan</code>에서 첫 2개 planned tools를 묶음 실행할 수 있어야 한다.</li>\n<li>REQ-SBF-002: Rust command는 registered adapter, workspace-root cwd, saved plan record, tool names를 검증해야 한다.</li>\n<li>REQ-SBF-003: fan-out은 default 2 sessions, hard cap 3 sessions를 넘지 않아야 한다.</li>\n<li>REQ-SBF-004: 각 실행은 기존 <code>create_cli_session</code> lifecycle, cancellation, task-run persistence를 재사용해야 한다.</li>\n<li>REQ-SBF-005: 각 lane은 <code>task_kind=subagent_tool_fanout</code>, 같은 <code>pipeline_id</code>, <code>lane_id=&lt;toolName&gt;</code>, <code>lane_role=&lt;agentName&gt;</code>을 가져야 한다.</li>\n<li>REQ-SBF-006: lane prompt에는 manager-owned fan-in/merge/validation/final-answer boundary, <code>_private</code>/<code>outputs</code> 접근 금지, destructive/install/global env change 금지가 포함되어야 한다.</li>\n<li>REQ-SBF-007: UI는 fan-out report를 실행 기록과 task pipeline panel에 연결하고, 자동 merge가 아니라 수동 merge gate임을 표시해야 한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>plan의 모든 tool 자동 실행</li>\n<li>자동 결과 merge나 patch 적용</li>\n<li>새 CLI 설치, global dependency 설치, daemon 추가</li>\n<li>lane 간 직접 통신 또는 lane의 final answer ownership</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1634,
+      "updatedAt": "2026-06-06T15:19:33.213Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-2026-2026-06-06-md",
       "path": "_history/2026/2026-06-06.md",
       "category": "daily-history",
@@ -7870,27 +8126,11 @@
       "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 23594,
-      "updatedAt": "2026-06-06T15:00:01.473Z",
+      "sourceBytes": 23597,
+      "updatedAt": "2026-06-06T15:05:12.467Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/2026"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-subagent-live-execution-input-json",
-      "path": "_history/evaluations/2026/2026-06-06-subagent-live-execution-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Subagent Live Execution Input",
-      "excerpt": "{ \"initial instruction\": \"아까 미룬 다음 단계 구현\", \"result summary\": \"Added a Desktop Runtime path that validates a saved subagent tool plan and starts one selected tool as an existing CLI adapter session with task run linkage.\", \"work mode\": \"standard\", \"changed files\": \"platform deskto",
-      "html": "<p>{ &quot;initial instruction&quot;: &quot;아까 미룬 다음 단계 구현&quot;, &quot;result summary&quot;: &quot;Added a Desktop Runtime path that validates a saved subagent tool plan and starts one selected tool as an existing CLI adapter session with task run linkage.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/src tauri/src/lib.rs&quot;, &quot;platform desktop app/src tauri/src/features/agent </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 4656,
-      "updatedAt": "2026-06-06T15:00:01.473Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-subagent-live-execution-ko-md",
@@ -7902,11 +8142,59 @@
       "html": "<p>최종 평가: Subagent Live Execution 날짜: 2026 06 06 평가 이전 slice에서 남긴 “실제 autonomous subagent worker execution은 별도 slice” 경계를 닫기 위해, 저장된 subagent tool plan에서 선택한 tool 하나를 검증하고 기존 CLI adapter session으로 시작하는 기능을 구현했다. 충족 start subagent tool execution Tauri command가 추가됐다. plan task run record에서 tool name을 검증한다. 실행은 기존 create cli session 과 task run persistence를 재사용한다. </p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 1055,
-      "updatedAt": "2026-06-06T15:00:01.473Z",
+      "sourceBytes": 1390,
+      "updatedAt": "2026-06-06T15:05:12.467Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-subagent-live-execution-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-subagent-live-execution/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Subagent Live Execution",
+      "excerpt": "Validation: Subagent Live Execution 완료 cargo fmt manifest path platform desktop app/src tauri/Cargo.toml : 통과 cargo check manifest path platform desktop app/src tauri/Cargo.toml : 통과 cargo test manifest path platform desktop app/src tauri/Cargo.toml subagent cli execution prompt ",
+      "html": "<h1>Validation: Subagent Live Execution</h1>\n<h2>완료</h2>\n<ul>\n<li><code>cargo fmt --manifest-path platform-desktop-app/src-tauri/Cargo.toml</code>: 통과</li>\n<li><code>cargo check --manifest-path platform-desktop-app/src-tauri/Cargo.toml</code>: 통과</li>\n<li><code>cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml subagent_cli_execution_prompt_keeps_manager_boundaries</code>: 통과</li>\n<li><code>cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml runtime_feature_map_groups_commands_by_native_capability</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code>: 통과, 90 tests</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code>: 통과</li>\n<li><code>corepack pnpm -w run desktop:renderer:build</code>: 통과, customer bundle audit 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code>: 통과, developer snapshot 복원</li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code>: 통과, public release signing/updater/clean-machine smoke warning은 기존 public gate로 유지</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/resource-checks/2026/2026-06-06-subagent-live-execution.json</code>: <code>resource_ready</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/omission-checks/2026/2026-06-06-subagent-live-execution.json</code>: <code>coverage_ready</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-06-subagent-live-execution-input.json</code>: <code>ready_to_close</code></li>\n<li>Browser smoke:</li>\n<li><code>http://127.0.0.1:3224/#section-desktop</code></li>\n<li><code>data-terminal-agent-bridge=&quot;pty-to-agent&quot;</code> 표시 확인</li>\n<li><code>data-terminal-agent-action=&quot;plan-subagents&quot;</code> 버튼 표시 및 browser preview에서 disabled 확인</li>\n<li><code>data-terminal-agent-action=&quot;execute-subagent&quot;</code> 버튼 표시 및 browser preview에서 disabled 확인</li>\n<li><code>data-desktop-action-feedback=&quot;execute-subagent-tools&quot;</code> 표시 확인</li>\n<li>dev server 종료 후 <code>lsof -nP -iTCP:3224 -sTCP:LISTEN</code> listener 없음 확인</li>\n</ul>\n<h2>남은 검증</h2>\n<ul>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>알려진 경계</h2>\n<ul>\n<li>Browser preview는 Tauri command를 직접 실행할 수 없다. 실제 process execution은 desktop runtime에서 확인해야 한다.</li>\n<li>이번 slice는 저장된 plan의 단일 tool 실행만 지원한다. 병렬 실행, 자동 merge, patch 적용은 후속 slice다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2455,
+      "updatedAt": "2026-06-06T15:05:12.466Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-subagent-live-execution-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-subagent-live-execution-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Subagent Live Execution Input",
+      "excerpt": "{ \"initial instruction\": \"아까 미룬 다음 단계 구현\", \"result summary\": \"Added a Desktop Runtime path that validates a saved subagent tool plan and starts one selected tool as an existing CLI adapter session with task run linkage.\", \"work mode\": \"standard\", \"changed files\": \"platform deskto",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;아까 미룬 다음 단계 구현&quot;, &quot;result summary&quot;: &quot;Added a Desktop Runtime path that validates a saved subagent tool plan and starts one selected tool as an existing CLI adapter session with task run linkage.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/src tauri/src/lib.rs&quot;, &quot;platform desktop app/src tauri/src/features/agent </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4491,
+      "updatedAt": "2026-06-06T15:04:56.863Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-subagent-live-execution-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-subagent-live-execution/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Subagent Live Execution",
+      "excerpt": "Tasks: Subagent Live Execution x web first intake 수행 x subagent explorer로 다음 slice 범위 확인 x 기존 subagent tool plan record 구조 확인 x Rust input struct와 Tauri command 추가 x plan record에서 tool name 검증 helper 추가 x bounded subagent execution prompt 추가 x 기존 CLI session lifecycle로 실행 연결 x De",
+      "html": "<h1>Tasks: Subagent Live Execution</h1>\n<ul>\n<li>[x] web-first intake 수행</li>\n<li>[x] subagent explorer로 다음 slice 범위 확인</li>\n<li>[x] 기존 <code>subagent_tool_plan</code> record 구조 확인</li>\n<li>[x] Rust input struct와 Tauri command 추가</li>\n<li>[x] plan record에서 tool name 검증 helper 추가</li>\n<li>[x] bounded subagent execution prompt 추가</li>\n<li>[x] 기존 CLI session lifecycle로 실행 연결</li>\n<li>[x] Desktop Runtime action button/result UI 추가</li>\n<li>[x] static contract test 보강</li>\n<li>[x] Rust unit test 추가</li>\n<li>[x] renderer test 통과</li>\n<li>[x] renderer check/build 및 Browser smoke 완료</li>\n<li>[x] evaluator/resource/omission 검증 완료</li>\n<li>[ ] commit, push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 636,
+      "updatedAt": "2026-06-06T15:04:41.606Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
     },
     {
       "id": "history-request-traces-2026-2026-06-06-subagent-live-execution-ko-md",
@@ -8047,38 +8335,6 @@
       "previewMode": "document-preview",
       "htmlTruncated": false,
       "sourceBytes": 2180,
-      "updatedAt": "2026-06-06T15:00:01.460Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-06-subagent-live-execution-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-06-subagent-live-execution/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Tasks: Subagent Live Execution",
-      "excerpt": "Tasks: Subagent Live Execution x web first intake 수행 x subagent explorer로 다음 slice 범위 확인 x 기존 subagent tool plan record 구조 확인 x Rust input struct와 Tauri command 추가 x plan record에서 tool name 검증 helper 추가 x bounded subagent execution prompt 추가 x 기존 CLI session lifecycle로 실행 연결 x De",
-      "html": "<h1>Tasks: Subagent Live Execution</h1>\n<ul>\n<li>[x] web-first intake 수행</li>\n<li>[x] subagent explorer로 다음 slice 범위 확인</li>\n<li>[x] 기존 <code>subagent_tool_plan</code> record 구조 확인</li>\n<li>[x] Rust input struct와 Tauri command 추가</li>\n<li>[x] plan record에서 tool name 검증 helper 추가</li>\n<li>[x] bounded subagent execution prompt 추가</li>\n<li>[x] 기존 CLI session lifecycle로 실행 연결</li>\n<li>[x] Desktop Runtime action button/result UI 추가</li>\n<li>[x] static contract test 보강</li>\n<li>[x] Rust unit test 추가</li>\n<li>[x] renderer test 통과</li>\n<li>[ ] renderer check/build 및 Browser smoke 완료</li>\n<li>[ ] evaluator/resource/omission 검증 완료</li>\n<li>[ ] commit, push</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 636,
-      "updatedAt": "2026-06-06T15:00:01.460Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-06-subagent-live-execution-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-06-subagent-live-execution/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Validation: Subagent Live Execution",
-      "excerpt": "Validation: Subagent Live Execution 완료 cargo fmt manifest path platform desktop app/src tauri/Cargo.toml : 통과 cargo check manifest path platform desktop app/src tauri/Cargo.toml : 통과 cargo test manifest path platform desktop app/src tauri/Cargo.toml subagent cli execution prompt ",
-      "html": "<h1>Validation: Subagent Live Execution</h1>\n<h2>완료</h2>\n<ul>\n<li><code>cargo fmt --manifest-path platform-desktop-app/src-tauri/Cargo.toml</code>: 통과</li>\n<li><code>cargo check --manifest-path platform-desktop-app/src-tauri/Cargo.toml</code>: 통과</li>\n<li><code>cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml subagent_cli_execution_prompt_keeps_manager_boundaries</code>: 통과</li>\n<li><code>cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml runtime_feature_map_groups_commands_by_native_capability</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code>: 통과, 90 tests</li>\n</ul>\n<h2>남은 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code></li>\n<li><code>corepack pnpm -w run desktop:renderer:build</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code></li>\n<li>Browser smoke</li>\n<li><code>check-resources</code>, <code>check-omissions</code>, <code>evaluate-work</code></li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>알려진 경계</h2>\n<ul>\n<li>Browser preview는 Tauri command를 직접 실행할 수 없다. 실제 process execution은 desktop runtime에서 확인해야 한다.</li>\n<li>이번 slice는 저장된 plan의 단일 tool 실행만 지원한다. 병렬 실행, 자동 merge, patch 적용은 후속 slice다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1273,
       "updatedAt": "2026-06-06T15:00:01.460Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
@@ -10101,86 +10357,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-evaluations-2026-2026-06-06-native-pipe-runtime-tools-omission-json",
-      "path": "_history/evaluations/2026/2026-06-06-native-pipe-runtime-tools-omission.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Native Pipe Runtime Tools Omission",
-      "excerpt": "{ \"task\": \"Native pipe runtime tools omission check.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"install native pipe tool\", \"description\": \"Install or add a stronger native tool for process pipes/direct terminal control.\", \"source\": \"user request\", \"required\": true",
-      "html": "<p>{ &quot;task&quot;: &quot;Native pipe runtime tools omission check.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;expected items&quot;: { &quot;item id&quot;: &quot;install native pipe tool&quot;, &quot;description&quot;: &quot;Install or add a stronger native tool for process pipes/direct terminal control.&quot;, &quot;source&quot;: &quot;user request&quot;, &quot;required&quot;: true, &quot;status&quot;: &quot;covered&quot;, &quot;evidence&quot;: &quot;platform desktop app/src tauri/Cargo.toml&quot;, </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 3211,
-      "updatedAt": "2026-06-06T12:08:29.988Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-native-pipe-runtime-tools-resource-json",
-      "path": "_history/evaluations/2026/2026-06-06-native-pipe-runtime-tools-resource.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Native Pipe Runtime Tools Resource",
-      "excerpt": "{ \"task\": \"Native pipe runtime tools resource check.\", \"work mode\": \"standard\", \"runtime context\": \"rust\", \"tauri\", \"std::process\", \"os pipe\", \"reader threads\" , \"resource risks\": { \"risk id\": \"pipe file descriptor leak\", \"category\": \"file handle\", \"description\": \"Parent process ",
-      "html": "<p>{ &quot;task&quot;: &quot;Native pipe runtime tools resource check.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;runtime context&quot;: &quot;rust&quot;, &quot;tauri&quot;, &quot;std::process&quot;, &quot;os pipe&quot;, &quot;reader threads&quot; , &quot;resource risks&quot;: { &quot;risk id&quot;: &quot;pipe file descriptor leak&quot;, &quot;category&quot;: &quot;file handle&quot;, &quot;description&quot;: &quot;Parent process can keep pipe file descriptors open after spawning producer or consumer, causing</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 3975,
-      "updatedAt": "2026-06-06T12:08:29.988Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-native-pipe-runtime-tools-cli-pipeline-json",
-      "path": "_history/evaluations/2026/2026-06-06-native-pipe-runtime-tools-cli-pipeline.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Native Pipe Runtime Tools Cli Pipeline",
-      "excerpt": "{ \"pipeline id\": \"native pipe runtime tools\", \"purpose\": \"Add a Rust/Tauri native OS pipe execution layer that connects one producer process stdout to one consumer process stdin without a shell pipeline string.\", \"work mode\": \"standard\", \"risk level\": \"high\", \"processes\": { \"proc",
-      "html": "<p>{ &quot;pipeline id&quot;: &quot;native pipe runtime tools&quot;, &quot;purpose&quot;: &quot;Add a Rust/Tauri native OS pipe execution layer that connects one producer process stdout to one consumer process stdin without a shell pipeline string.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;risk level&quot;: &quot;high&quot;, &quot;processes&quot;: { &quot;process id&quot;: &quot;native pipe producer&quot;, &quot;adapter id&quot;: &quot;platform desktop app native pipe</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 5150,
-      "updatedAt": "2026-06-06T12:08:29.987Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-native-pipe-runtime-tools-ko-md",
-      "path": "_history/plans/2026/2026-06-06-native-pipe-runtime-tools.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "Plan History: Native Pipe Runtime Tools",
-      "excerpt": "Plan History: Native Pipe Runtime Tools 요약 사용자는 터미널/CLI 설정 확인을 넘어 파이프와 터미널 직접 제어에 필요한 강력한 네이티브 툴 설치를 요청했다. 전역 도구 설치보다 platform desktop app Rust 런타임에 OS pipe 의존성과 bounded pipe runner command를 추가하는 계획을 선택했다. 선택 work mode: standard install mode: developer 구현 위치: platform desktop app",
-      "html": "<p>Plan History: Native Pipe Runtime Tools 요약 사용자는 터미널/CLI 설정 확인을 넘어 파이프와 터미널 직접 제어에 필요한 강력한 네이티브 툴 설치를 요청했다. 전역 도구 설치보다 platform desktop app Rust 런타임에 OS pipe 의존성과 bounded pipe runner command를 추가하는 계획을 선택했다. 선택 work mode: standard install mode: developer 구현 위치: platform desktop app/src tauri 설치 대상: os pipe@1.2.3 검증 게이트 Cargo dependency/lock 검증. Rust/Tauri comm</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 732,
-      "updatedAt": "2026-06-06T12:00:16.449Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-native-pipe-runtime-tools-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-native-pipe-runtime-tools.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "Web Search: Native Pipe Runtime Tools",
-      "excerpt": "Web Search: Native Pipe Runtime Tools 검색 Rust portable pty crate official documentation terminal pty Rust tokio process pipe child stdin stdout official documentation Tauri v2 shell plugin official documentation process command os pipe crate Rust official documentation pipe Stdio",
-      "html": "<p>Web Search: Native Pipe Runtime Tools 검색 Rust portable pty crate official documentation terminal pty Rust tokio process pipe child stdin stdout official documentation Tauri v2 shell plugin official documentation process command os pipe crate Rust official documentation pipe Stdio os pipe Rust crates.io license repository Rust std process Stdio piped deadlock</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1791,
-      "updatedAt": "2026-06-06T12:00:16.448Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-native-pipe-runtime-tools-traceability-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-native-pipe-runtime-tools/traceability.ko.md",
       "category": "project-spec",
@@ -10243,86 +10419,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-runtime-setup-check-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-runtime-setup-check.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "Evaluation: Runtime Setup Check",
-      "excerpt": "Evaluation: Runtime Setup Check 평가 기준 설정 화면에서 터미널/CLI 설정 점검을 바로 실행할 수 있는가. CLI 점검은 기존 Tauri runtime health 경로를 재사용하는가. 터미널 점검은 startup command를 실행하지 않고 command/cwd 해석만 확인하는가. UI에서 상태, 경로, 오류를 구분해 볼 수 있는가. 검증과 internal package build가 통과하는가. 현재 평가 check runtime terminal setup comma",
-      "html": "<p>Evaluation: Runtime Setup Check 평가 기준 설정 화면에서 터미널/CLI 설정 점검을 바로 실행할 수 있는가. CLI 점검은 기존 Tauri runtime health 경로를 재사용하는가. 터미널 점검은 startup command를 실행하지 않고 command/cwd 해석만 확인하는가. UI에서 상태, 경로, 오류를 구분해 볼 수 있는가. 검증과 internal package build가 통과하는가. 현재 평가 check runtime terminal setup command를 추가해 terminal shell command, fallback shell, working dir 해석 결과를 반환한다. setting</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1832,
-      "updatedAt": "2026-06-06T11:51:48.743Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-runtime-setup-check-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-runtime-setup-check.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "Request Trace: Runtime Setup Check",
-      "excerpt": "Request Trace: Runtime Setup Check 요청 터미널 설정과 자동 CLI 설정이 실제로 되었는지 확인하는 기능 추가. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 runtime setup check.ko.md 스펙: platform desktop app/specs/2026 06 06 runtime setup check/ 구현: platform desktop app/src tauri/src/lib.rs platfor",
-      "html": "<p>Request Trace: Runtime Setup Check 요청 터미널 설정과 자동 CLI 설정이 실제로 되었는지 확인하는 기능 추가. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 runtime setup check.ko.md 스펙: platform desktop app/specs/2026 06 06 runtime setup check/ 구현: platform desktop app/src tauri/src/lib.rs platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx platform de</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1308,
-      "updatedAt": "2026-06-06T11:51:48.743Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-runtime-setup-check-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-runtime-setup-check.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "User Request: Runtime Setup Check",
-      "excerpt": "User Request: Runtime Setup Check 요약 사용자는 터미널 설정이나 자동 CLI 설정이 되어도 실제로 되었는지 확인하는 기능이 없으니 추가해 달라고 요청했다. 해석한 요구 설정 화면에서 selected CLI adapter와 terminal shell 설정을 바로 점검할 수 있어야 한다. CLI 설치/로그인 자동화가 아니라 현재 설치형 런타임 기준의 실행 가능 여부를 보여줘야 한다. 점검 결과는 사용자가 어디가 막혔는지 볼 수 있어야 한다. 소유 프로젝트 platform d",
-      "html": "<p>User Request: Runtime Setup Check 요약 사용자는 터미널 설정이나 자동 CLI 설정이 되어도 실제로 되었는지 확인하는 기능이 없으니 추가해 달라고 요청했다. 해석한 요구 설정 화면에서 selected CLI adapter와 terminal shell 설정을 바로 점검할 수 있어야 한다. CLI 설치/로그인 자동화가 아니라 현재 설치형 런타임 기준의 실행 가능 여부를 보여줘야 한다. 점검 결과는 사용자가 어디가 막혔는지 볼 수 있어야 한다. 소유 프로젝트 platform desktop app</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 596,
-      "updatedAt": "2026-06-06T11:51:48.743Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-runtime-setup-check-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-runtime-setup-check.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "Work Summary: Runtime Setup Check",
-      "excerpt": "Work Summary: Runtime Setup Check 완료 내용 설정 CLI 어댑터 섹션에 설정 점검 버튼을 추가했다. 선택된 CLI adapter는 기존 health check로 PATH/version 상태를 확인한다. 터미널 셸은 새 Rust command로 command/cwd 해석만 확인한다. 점검 결과 패널에서 terminal shell과 selected CLI 상태를 따로 보여준다. browser preview에서 Tauri runtime 없음 fallback 상태까지 확인했다.",
-      "html": "<p>Work Summary: Runtime Setup Check 완료 내용 설정 CLI 어댑터 섹션에 설정 점검 버튼을 추가했다. 선택된 CLI adapter는 기존 health check로 PATH/version 상태를 확인한다. 터미널 셸은 새 Rust command로 command/cwd 해석만 확인한다. 점검 결과 패널에서 terminal shell과 selected CLI 상태를 따로 보여준다. browser preview에서 Tauri runtime 없음 fallback 상태까지 확인했다. 변경 파일 중심 platform desktop app/src tauri/src/lib.rs platform desktop app/rendere</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1145,
-      "updatedAt": "2026-06-06T11:51:48.743Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-runtime-setup-check-ko-md",
-      "path": "_history/work-timings/2026/2026-06-06-runtime-setup-check.ko.md",
-      "category": "work-timing",
-      "language": "ko",
-      "title": "Work Timing: Runtime Setup Check",
-      "excerpt": "Work Timing: Runtime Setup Check 단계별 기록 | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 3분 | Node child process, Tauri/macOS PATH 관련 확인 | | 요구사항/스펙 | 8분 | runtime setup check 요구사항과 구현 범위 기록 | | 구현 | 25분 | Rust command, renderer state/action/UI, CSS, test contract | | 검증 | 25분 ",
-      "html": "<p>Work Timing: Runtime Setup Check 단계별 기록 | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 3분 | Node child process, Tauri/macOS PATH 관련 확인 | | 요구사항/스펙 | 8분 | runtime setup check 요구사항과 구현 범위 기록 | | 구현 | 25분 | Rust command, renderer state/action/UI, CSS, test contract | | 검증 | 25분 | test/check/cargo/package/browser 확인 | | 기록/정리 | 10분 | validation, omission/res</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 985,
-      "updatedAt": "2026-06-06T11:51:48.742Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-runtime-setup-check-traceability-ko-md",
@@ -18163,137 +18259,182 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-tool-builder-workbench-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-tool-builder-workbench/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성",
-      "excerpt": "추적성 | 항목 | 연결 | | | | | 사용자 요청 | history/user requests/2026/2026 06 05 tool builder workbench.ko.md | | 요구사항 | REQ WM 050 | | 구현 | platform desktop app/renderer/workspace monitor/components/workbench/ToolStudioPanel.tsx , platform desktop app/renderer/workspace monitor/app/global",
-      "html": "<h1>추적성</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>사용자 요청</td><td><code>_history/user-requests/2026/2026-06-05-tool-builder-workbench.ko.md</code></td></tr><tr><td>요구사항</td><td>REQ-WM-050</td></tr><tr><td>구현</td><td><code>platform-desktop-app/renderer/workspace-monitor/components/workbench/ToolStudioPanel.tsx</code>, <code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></td></tr><tr><td>테스트</td><td><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></td></tr><tr><td>검증</td><td><code>validation.ko.md</code>, <code>_history/evaluations/2026/2026-06-05-tool-builder-workbench-evaluation.json</code></td></tr><tr><td>스크린샷</td><td><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-tool-builder-desktop.png</code>, <code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-tool-builder-mobile.png</code></td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 780,
-      "updatedAt": "2026-06-04T23:08:59.123Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-tool-builder-workbench-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-tool-builder-workbench/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "구현 계획",
-      "excerpt": "구현 계획 1. Tool Studio build mode의 현재 detail pane 구조를 확인한다. 2. tool builder template catalog를 추가한다. 3. 선택 template 기반 manifest/source/schema/run/package/output preview를 추가한다. 4. 소스/콘솔/배포/명세 복사 액션을 분리한다. 5. responsive CSS와 정적 테스트 계약을 추가한다. 6. test/check/build와 desktop/mobile Browser",
-      "html": "<h1>구현 계획</h1>\n<p>1. Tool Studio build mode의 현재 detail pane 구조를 확인한다.</p>\n<p>2. tool builder template catalog를 추가한다.</p>\n<p>3. 선택 template 기반 manifest/source/schema/run/package/output preview를 추가한다.</p>\n<p>4. 소스/콘솔/배포/명세 복사 액션을 분리한다.</p>\n<p>5. responsive CSS와 정적 테스트 계약을 추가한다.</p>\n<p>6. test/check/build와 desktop/mobile Browser smoke를 실행한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 425,
-      "updatedAt": "2026-06-04T23:08:59.122Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-tool-builder-workbench-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-tool-builder-workbench/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Tool Builder Workbench 스펙",
-      "excerpt": "Tool Builder Workbench 스펙 요구사항 REQ WM 050: Tool Studio의 툴 만들기 화면은 새 툴 제작 전용 작업대를 제공해야 한다. 사용자 결과 사용자는 툴 만들기 모드에서 Python CLI Tool, MCP Wrapper, Automation Tool template를 선택한다. 선택 template에 따라 manifest, source path, input schema, run validation command, package preflight command, o",
-      "html": "<h1>Tool Builder Workbench 스펙</h1>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-WM-050: Tool Studio의 <code>툴 만들기</code> 화면은 새 툴 제작 전용 작업대를 제공해야 한다.</li>\n</ul>\n<h2>사용자 결과</h2>\n<ul>\n<li>사용자는 <code>툴 만들기</code> 모드에서 Python CLI Tool, MCP Wrapper, Automation Tool template를 선택한다.</li>\n<li>선택 template에 따라 manifest, source path, input schema, run validation command, package preflight command, output contract가 즉시 바뀐다.</li>\n<li>주요 액션은 <code>소스 열기</code>, <code>Smoke 실행</code>, <code>배포 점검</code>, <code>명세 복사</code>로 분리된다.</li>\n<li>860px 이하 화면에서는 template, canvas, action 영역이 한 열로 접혀 수평 overflow를 만들지 않는다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>실제 파일 생성</li>\n<li>package 실행 또는 배포 실행</li>\n<li>외부 MCP connector 인증</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 784,
-      "updatedAt": "2026-06-04T23:08:59.121Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agentcore-resource-topology-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agentcore-resource-topology/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록",
-      "excerpt": "작업 목록 x 웹 검색으로 AgentCore 리소스 기준 확인 x REQ WM 049 추가 x capability catalog에 resource/lifecycle metadata 추가 x AgentCore resource topology UI 추가 x responsive resource topology CSS 추가 x 정적 테스트 업데이트 x check/build와 desktop/mobile smoke 실행 x 평가와 요청 추적 업데이트",
-      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] 웹 검색으로 AgentCore 리소스 기준 확인</li>\n<li>[x] REQ-WM-049 추가</li>\n<li>[x] capability catalog에 resource/lifecycle metadata 추가</li>\n<li>[x] AgentCore resource topology UI 추가</li>\n<li>[x] responsive resource topology CSS 추가</li>\n<li>[x] 정적 테스트 업데이트</li>\n<li>[x] check/build와 desktop/mobile smoke 실행</li>\n<li>[x] 평가와 요청 추적 업데이트</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 379,
-      "updatedAt": "2026-06-04T23:04:21.016Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agentcore-resource-topology-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agentcore-resource-topology/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증 기록",
-      "excerpt": "검증 기록 명령 corepack pnpm filter workspace monitor test 통과 corepack pnpm filter workspace monitor run check 통과 corepack pnpm filter workspace monitor run build:customer 통과 Browser smoke in app Browser desktop: Agents 화면에서 AgentCore Quick Builder disclosure를 열고 data agentcore resourc",
-      "html": "<h1>검증 기록</h1>\n<h2>명령</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code> 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code> 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code> 통과</li>\n</ul>\n<h2>Browser smoke</h2>\n<ul>\n<li>in-app Browser desktop: Agents 화면에서 AgentCore Quick Builder disclosure를 열고 <code>[data-agentcore-resource]</code> 9개를 확인했다.</li>\n<li>in-app Browser desktop: 전체 capability 선택 후 Runtime, Memory, Gateway, Built-in Tools, Identity, Policy, Observability, Evaluations 텍스트를 확인했다.</li>\n<li>in-app Browser desktop: selected capability 9개, resource card 9개, 수평 overflow 0을 확인했다.</li>\n<li>Playwright mobile 390x844: resource card 9개, resource grid 1열, lifecycle 2열, 수평 overflow 0을 확인했다.</li>\n</ul>\n<h2>스크린샷</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-agentcore-topology-desktop.png</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-agentcore-topology-mobile.png</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1023,
-      "updatedAt": "2026-06-04T23:04:21.016Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agentcore-resource-topology-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agentcore-resource-topology/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성",
-      "excerpt": "추적성 | 항목 | 연결 | | | | | 사용자 요청 | history/user requests/2026/2026 06 05 agentcore resource topology.ko.md | | 요구사항 | REQ WM 049 | | 구현 | platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx , platform desktop app/renderer/workspace monitor/app/globals.css | ",
-      "html": "<h1>추적성</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>사용자 요청</td><td><code>_history/user-requests/2026/2026-06-05-agentcore-resource-topology.ko.md</code></td></tr><tr><td>요구사항</td><td>REQ-WM-049</td></tr><tr><td>구현</td><td><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code>, <code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></td></tr><tr><td>테스트</td><td><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></td></tr><tr><td>검증</td><td><code>validation.ko.md</code>, <code>_history/evaluations/2026/2026-06-05-agentcore-resource-topology-evaluation.json</code></td></tr><tr><td>스크린샷</td><td><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-agentcore-topology-desktop.png</code>, <code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-agentcore-topology-mobile.png</code></td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 789,
-      "updatedAt": "2026-06-04T23:00:37.477Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
-      "date": "2026-06-06",
+      "date": "2026-06-07",
       "year": "2026",
-      "documentsCount": 96,
+      "documentsCount": 10,
       "categories": [
         {
           "category": "evaluation",
-          "count": 26
+          "count": 3
         },
         {
-          "category": "request-trace",
-          "count": 12
-        },
-        {
-          "category": "user-request",
-          "count": 12
-        },
-        {
-          "category": "work-summary",
-          "count": 12
-        },
-        {
-          "category": "work-timing",
-          "count": 12
-        },
-        {
-          "category": "web-search",
-          "count": 11
+          "category": "daily-history",
+          "count": 1
         },
         {
           "category": "plan",
+          "count": 1
+        },
+        {
+          "category": "request-trace",
+          "count": 1
+        },
+        {
+          "category": "user-request",
+          "count": 1
+        },
+        {
+          "category": "web-search",
+          "count": 1
+        },
+        {
+          "category": "work-summary",
+          "count": 1
+        },
+        {
+          "category": "work-timing",
+          "count": 1
+        }
+      ],
+      "documents": [
+        {
+          "id": "history-2026-2026-06-07-md",
+          "path": "_history/2026/2026-06-07.md",
+          "category": "daily-history",
+          "language": "unknown",
+          "title": "2026 06 07",
+          "excerpt": "2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Deskto",
+          "updatedAt": "2026-06-06T15:19:33.217Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-07-subagent-bounded-fanout-cli-pipeline-json",
+          "path": "_history/evaluations/2026/2026-06-07-subagent-bounded-fanout-cli-pipeline.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 07 Subagent Bounded Fanout Cli Pipeline",
+          "excerpt": "{ \"pipeline id\": \"subagent bounded fanout\", \"purpose\": \"Start the first two saved subagent plan tools as independent CLI adapter sessions and hold their summaries behind a manual merge gate.\", \"work mode\": \"standard\", \"risk level\": \"medium\", \"processes\": { \"process id\": \"subagent",
+          "updatedAt": "2026-06-06T15:19:33.216Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-07-subagent-bounded-fanout-input-json",
+          "path": "_history/evaluations/2026/2026-06-07-subagent-bounded-fanout-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 07 Subagent Bounded Fanout Input",
+          "excerpt": "{ \"initial instruction\": \"미룬거 계속 구현\", \"result summary\": \"Added a bounded subagent fan out command and Desktop Runtime UI that starts the first two saved subagent plan tools as existing CLI adapter sessions behind a manual merge gate.\", \"work mode\": \"standard\", \"changed files\": \"p",
+          "updatedAt": "2026-06-06T15:19:33.217Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+          "path": "_history/evaluations/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "최종 평가: Subagent Bounded Fan Out",
+          "excerpt": "최종 평가: Subagent Bounded Fan Out 날짜: 2026 06 07 평가 이전 단일 lane 실행 다음 단계로, 저장된 subagent plan의 첫 2개 tool을 bounded fan out CLI sessions로 시작하고 manual merge gate로 묶는 기능을 구현했다. 충족 start subagent tool fanout Tauri command가 추가됐다. default 2, hard cap 3 sessions 경계가 추가됐다. 각 lane은 기존 create c",
+          "updatedAt": "2026-06-06T15:19:33.217Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-plans-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+          "path": "_history/plans/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "Work Plan: Subagent Bounded Fan Out",
+          "excerpt": "Work Plan: Subagent Bounded Fan Out 날짜: 2026 06 07 작업 모드 standard 실행 계획 1. 웹 우선 조사와 이전 slice 기록 확인. 2. subagent explorer로 safe slice 검토. 3. Rust command와 fan out report 구현. 4. Renderer UI와 pipeline/session 연결 구현. 5. Rust/frontend/build/browser 검증. 6. CLI pipeline/resource/omissio",
+          "updatedAt": "2026-06-06T15:19:33.215Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+          "path": "_history/request-traces/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Request Trace: Subagent Bounded Fan Out",
+          "excerpt": "Request Trace: Subagent Bounded Fan Out 날짜: 2026 06 07 요청 미룬거 계속 구현. 연결된 이전 작업 2026 06 06 subagent tool use : plan 생성 2026 06 06 subagent live execution : 단일 tool 실행 결과 저장된 plan의 첫 2개 subagent tool을 bounded fan out으로 시작하고 manual merge gate로 묶는 기능을 추가했다. 산출물 요구사항: platform desktop",
+          "updatedAt": "2026-06-06T15:19:33.217Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+          "path": "_history/user-requests/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "User Request Summary: Subagent Bounded Fan Out",
+          "excerpt": "User Request Summary: Subagent Bounded Fan Out 날짜: 2026 06 07 요약 사용자는 “미룬거 계속 구현”이라고 요청했다. 이전 응답에서 후속으로 남긴 subagent fan out과 merge gate 쪽을 계속 구현하는 요청으로 해석했다. 실행 범위 저장된 subagent tool plan을 사용한다. 첫 multi process slice로 첫 2개 planned tools만 실행한다. hard cap 3, manager owned merge gate,",
+          "updatedAt": "2026-06-06T15:19:33.215Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+          "path": "_history/web-searches/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: Subagent Bounded Fan Out",
+          "excerpt": "Web Search: Subagent Bounded Fan Out 날짜: 2026 06 07 Queries OpenAI Agents SDK handoffs agents as tools official documentation Claude Code subagents parallel background permissions official documentation VS Code Copilot subagents orchestration runSubagent tools official documentat",
+          "updatedAt": "2026-06-06T15:19:33.215Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "Work Summary: Subagent Bounded Fan Out",
+          "excerpt": "Work Summary: Subagent Bounded Fan Out 날짜: 2026 06 07 완료 start subagent tool fanout Tauri command를 추가했다. 저장된 plan에서 요청 tool names를 검증한다. default 2, hard cap 3 sessions로 제한한다. 각 lane은 기존 CLI session lifecycle로 시작하고 같은 pipeline id와 manual merge gate를 공유한다. Desktop Runtime에 첫 2개 묶음 ",
+          "updatedAt": "2026-06-06T15:19:33.216Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+          "path": "_history/work-timings/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+          "category": "work-timing",
+          "language": "ko",
+          "title": "Work Timing: Subagent Bounded Fan Out",
+          "excerpt": "Work Timing: Subagent Bounded Fan Out 날짜: 2026 06 07 | Phase | Approx elapsed | Notes | | | : | | | Web first intake and slice scoping | 10m | Official docs and explorer recommendation used | | Rust command implementation | 35m | Fan out command, prompt, selection, tests | | Rend",
+          "updatedAt": "2026-06-06T15:19:33.216Z",
+          "historyDate": "2026-06-07"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-06",
+      "year": "2026",
+      "documentsCount": 86,
+      "categories": [
+        {
+          "category": "evaluation",
+          "count": 22
+        },
+        {
+          "category": "request-trace",
+          "count": 11
+        },
+        {
+          "category": "user-request",
+          "count": 11
+        },
+        {
+          "category": "work-summary",
+          "count": 11
+        },
+        {
+          "category": "work-timing",
+          "count": 11
+        },
+        {
+          "category": "web-search",
           "count": 10
+        },
+        {
+          "category": "plan",
+          "count": 9
         },
         {
           "category": "daily-history",
@@ -18308,7 +18449,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-          "updatedAt": "2026-06-06T15:00:01.473Z",
+          "updatedAt": "2026-06-06T15:05:12.467Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18412,36 +18553,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-native-pipe-runtime-tools-cli-pipeline-json",
-          "path": "_history/evaluations/2026/2026-06-06-native-pipe-runtime-tools-cli-pipeline.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Native Pipe Runtime Tools Cli Pipeline",
-          "excerpt": "{ \"pipeline id\": \"native pipe runtime tools\", \"purpose\": \"Add a Rust/Tauri native OS pipe execution layer that connects one producer process stdout to one consumer process stdin without a shell pipeline string.\", \"work mode\": \"standard\", \"risk level\": \"high\", \"processes\": { \"proc",
-          "updatedAt": "2026-06-06T12:08:29.987Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-native-pipe-runtime-tools-omission-json",
-          "path": "_history/evaluations/2026/2026-06-06-native-pipe-runtime-tools-omission.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Native Pipe Runtime Tools Omission",
-          "excerpt": "{ \"task\": \"Native pipe runtime tools omission check.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"install native pipe tool\", \"description\": \"Install or add a stronger native tool for process pipes/direct terminal control.\", \"source\": \"user request\", \"required\": true",
-          "updatedAt": "2026-06-06T12:08:29.988Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-native-pipe-runtime-tools-resource-json",
-          "path": "_history/evaluations/2026/2026-06-06-native-pipe-runtime-tools-resource.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Native Pipe Runtime Tools Resource",
-          "excerpt": "{ \"task\": \"Native pipe runtime tools resource check.\", \"work mode\": \"standard\", \"runtime context\": \"rust\", \"tauri\", \"std::process\", \"os pipe\", \"reader threads\" , \"resource risks\": { \"risk id\": \"pipe file descriptor leak\", \"category\": \"file handle\", \"description\": \"Parent process ",
-          "updatedAt": "2026-06-06T12:08:29.988Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-native-pipe-runtime-tools-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-native-pipe-runtime-tools.ko.md",
           "category": "evaluation",
@@ -18449,16 +18560,6 @@
           "title": "Evaluation: Native Pipe Runtime Tools",
           "excerpt": "Evaluation: Native Pipe Runtime Tools 결과 상태: complete 요청: 파이프와 터미널 직접 제어에 필요한 강력한 네이티브 도구/기능 추가. 구현: os pipe@1.2.3 project local Rust dependency를 추가하고, Rust/Tauri command run native pipe probe 로 producer stdout을 consumer stdin에 직접 OS pipe로 연결하는 bounded probe 실행 계층을 추가했다. 주요 산출물 p",
           "updatedAt": "2026-06-06T12:12:18.894Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-runtime-setup-check-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-runtime-setup-check.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "Evaluation: Runtime Setup Check",
-          "excerpt": "Evaluation: Runtime Setup Check 평가 기준 설정 화면에서 터미널/CLI 설정 점검을 바로 실행할 수 있는가. CLI 점검은 기존 Tauri runtime health 경로를 재사용하는가. 터미널 점검은 startup command를 실행하지 않고 command/cwd 해석만 확인하는가. UI에서 상태, 경로, 오류를 구분해 볼 수 있는가. 검증과 internal package build가 통과하는가. 현재 평가 check runtime terminal setup comma",
-          "updatedAt": "2026-06-06T11:51:48.743Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18478,7 +18579,7 @@
           "language": "unknown",
           "title": "2026 06 06 Subagent Live Execution Input",
           "excerpt": "{ \"initial instruction\": \"아까 미룬 다음 단계 구현\", \"result summary\": \"Added a Desktop Runtime path that validates a saved subagent tool plan and starts one selected tool as an existing CLI adapter session with task run linkage.\", \"work mode\": \"standard\", \"changed files\": \"platform deskto",
-          "updatedAt": "2026-06-06T15:00:01.473Z",
+          "updatedAt": "2026-06-06T15:04:56.863Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18488,7 +18589,7 @@
           "language": "ko",
           "title": "최종 평가: Subagent Live Execution",
           "excerpt": "최종 평가: Subagent Live Execution 날짜: 2026 06 06 평가 이전 slice에서 남긴 “실제 autonomous subagent worker execution은 별도 slice” 경계를 닫기 위해, 저장된 subagent tool plan에서 선택한 tool 하나를 검증하고 기존 CLI adapter session으로 시작하는 기능을 구현했다. 충족 start subagent tool execution Tauri command가 추가됐다. plan task run rec",
-          "updatedAt": "2026-06-06T15:00:01.473Z",
+          "updatedAt": "2026-06-06T15:05:12.467Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18612,16 +18713,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-native-pipe-runtime-tools-ko-md",
-          "path": "_history/plans/2026/2026-06-06-native-pipe-runtime-tools.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "Plan History: Native Pipe Runtime Tools",
-          "excerpt": "Plan History: Native Pipe Runtime Tools 요약 사용자는 터미널/CLI 설정 확인을 넘어 파이프와 터미널 직접 제어에 필요한 강력한 네이티브 툴 설치를 요청했다. 전역 도구 설치보다 platform desktop app Rust 런타임에 OS pipe 의존성과 bounded pipe runner command를 추가하는 계획을 선택했다. 선택 work mode: standard install mode: developer 구현 위치: platform desktop app",
-          "updatedAt": "2026-06-06T12:00:16.449Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-rust-runtime-feature-split-ko-md",
           "path": "_history/plans/2026/2026-06-06-rust-runtime-feature-split.ko.md",
           "category": "plan",
@@ -18729,16 +18820,6 @@
           "title": "Request Trace: Native Pipe Runtime Tools",
           "excerpt": "Request Trace: Native Pipe Runtime Tools 요청 파이프와 터미널 직접 제어에 필요한 네이티브 도구/기능 추가. 결정 platform desktop app 소유. work mode: standard install mode: developer 설치 대상: os pipe@1.2.3 선택 이유: Rust/Tauri가 packaged desktop runtime의 process ownership, cwd boundary, timeout, cleanup을 직접 소유해야 한다. ",
           "updatedAt": "2026-06-06T12:12:18.895Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-06-runtime-setup-check-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-runtime-setup-check.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "Request Trace: Runtime Setup Check",
-          "excerpt": "Request Trace: Runtime Setup Check 요청 터미널 설정과 자동 CLI 설정이 실제로 되었는지 확인하는 기능 추가. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 runtime setup check.ko.md 스펙: platform desktop app/specs/2026 06 06 runtime setup check/ 구현: platform desktop app/src tauri/src/lib.rs platfor",
-          "updatedAt": "2026-06-06T11:51:48.743Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18852,16 +18933,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-runtime-setup-check-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-runtime-setup-check.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "User Request: Runtime Setup Check",
-          "excerpt": "User Request: Runtime Setup Check 요약 사용자는 터미널 설정이나 자동 CLI 설정이 되어도 실제로 되었는지 확인하는 기능이 없으니 추가해 달라고 요청했다. 해석한 요구 설정 화면에서 selected CLI adapter와 terminal shell 설정을 바로 점검할 수 있어야 한다. CLI 설치/로그인 자동화가 아니라 현재 설치형 런타임 기준의 실행 가능 여부를 보여줘야 한다. 점검 결과는 사용자가 어디가 막혔는지 볼 수 있어야 한다. 소유 프로젝트 platform d",
-          "updatedAt": "2026-06-06T11:51:48.743Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-rust-runtime-feature-split-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-rust-runtime-feature-split.ko.md",
           "category": "user-request",
@@ -18959,16 +19030,6 @@
           "title": "Web Search: Native OS Action Bridge",
           "excerpt": "Web Search: Native OS Action Bridge 날짜: 2026 06 06 질의 Tauri v2 opener plugin official documentation open path reveal in file manager Apple macOS open command man page reveal file Finder official Rust std::process Command official documentation current dir env clear 확인한 출처 Tauri o",
           "updatedAt": "2026-06-06T12:27:10.720Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-native-pipe-runtime-tools-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-native-pipe-runtime-tools.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "Web Search: Native Pipe Runtime Tools",
-          "excerpt": "Web Search: Native Pipe Runtime Tools 검색 Rust portable pty crate official documentation terminal pty Rust tokio process pipe child stdin stdout official documentation Tauri v2 shell plugin official documentation process command os pipe crate Rust official documentation pipe Stdio",
-          "updatedAt": "2026-06-06T12:00:16.448Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19082,16 +19143,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-runtime-setup-check-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-runtime-setup-check.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "Work Summary: Runtime Setup Check",
-          "excerpt": "Work Summary: Runtime Setup Check 완료 내용 설정 CLI 어댑터 섹션에 설정 점검 버튼을 추가했다. 선택된 CLI adapter는 기존 health check로 PATH/version 상태를 확인한다. 터미널 셸은 새 Rust command로 command/cwd 해석만 확인한다. 점검 결과 패널에서 terminal shell과 selected CLI 상태를 따로 보여준다. browser preview에서 Tauri runtime 없음 fallback 상태까지 확인했다.",
-          "updatedAt": "2026-06-06T11:51:48.743Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-rust-runtime-feature-split-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-rust-runtime-feature-split.ko.md",
           "category": "work-summary",
@@ -19202,16 +19253,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-runtime-setup-check-ko-md",
-          "path": "_history/work-timings/2026/2026-06-06-runtime-setup-check.ko.md",
-          "category": "work-timing",
-          "language": "ko",
-          "title": "Work Timing: Runtime Setup Check",
-          "excerpt": "Work Timing: Runtime Setup Check 단계별 기록 | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 3분 | Node child process, Tauri/macOS PATH 관련 확인 | | 요구사항/스펙 | 8분 | runtime setup check 요구사항과 구현 범위 기록 | | 구현 | 25분 | Rust command, renderer state/action/UI, CSS, test contract | | 검증 | 25분 ",
-          "updatedAt": "2026-06-06T11:51:48.742Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-rust-runtime-feature-split-ko-md",
           "path": "_history/work-timings/2026/2026-06-06-rust-runtime-feature-split.ko.md",
           "category": "work-timing",
@@ -19270,47 +19311,47 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2803,
-      "days": 7,
+      "documents": 2813,
+      "days": 8,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1060
+          "count": 1063
         },
         {
           "category": "web-search",
-          "count": 439
+          "count": 440
         },
         {
           "category": "request-trace",
-          "count": 368
+          "count": 369
         },
         {
           "category": "plan",
-          "count": 367
+          "count": 368
         },
         {
           "category": "work-timing",
-          "count": 287
+          "count": 288
         },
         {
           "category": "user-request",
-          "count": 153
+          "count": 154
         },
         {
           "category": "work-summary",
-          "count": 120
+          "count": 121
         },
         {
           "category": "daily-history",
-          "count": 7
+          "count": 8
         },
         {
           "category": "intent-feature-map",
           "count": 2
         }
       ],
-      "totalSourceBytes": 6760636,
+      "totalSourceBytes": 6778345,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19335,12 +19376,12 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 37,
+      "evidenceEvents": 36,
       "decisionEvents": 0,
-      "openSignals": 21,
+      "openSignals": 20,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T15:00:01.473Z",
-      "historyDays": 1
+      "latestEventAt": "2026-06-06T15:19:33.217Z",
+      "historyDays": 2
     },
     "lanes": [
       {
@@ -19351,7 +19392,7 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 26
+        "count": 25
       },
       {
         "id": "delivery",
@@ -19386,7 +19427,7 @@
       {
         "id": "history",
         "label": "history",
-        "count": 1
+        "count": 2
       }
     ],
     "signalTypes": [
@@ -19398,7 +19439,7 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 26
+        "count": 25
       },
       {
         "id": "intake",
@@ -19433,7 +19474,7 @@
       {
         "id": "history",
         "label": "history",
-        "count": 1
+        "count": 2
       }
     ],
     "sourceTypes": [
@@ -19450,19 +19491,154 @@
     ],
     "events": [
       {
-        "id": "history-history-evaluations-2026-2026-06-06-subagent-live-execution-input-json",
+        "id": "history-history-evaluations-2026-2026-06-07-subagent-bounded-fanout-input-json",
         "sourceType": "history",
         "signalType": "evaluation",
         "lane": "verification",
         "severity": "verified",
         "status": "evaluation",
-        "title": "2026 06 06 Subagent Live Execution Input",
-        "detail": "{ \"initial instruction\": \"아까 미룬 다음 단계 구현\", \"result summary\": \"Added a Desktop Runtime path that validates a saved subagent tool plan and starts one selected tool as an existing CLI adapter session with task run linkage.\", \"work mode\": \"standard\", \"changed files\": \"platform deskto",
-        "path": "_history/evaluations/2026/2026-06-06-subagent-live-execution-input.json",
+        "title": "2026 06 07 Subagent Bounded Fanout Input",
+        "detail": "{ \"initial instruction\": \"미룬거 계속 구현\", \"result summary\": \"Added a bounded subagent fan out command and Desktop Runtime UI that starts the first two saved subagent plan tools as existing CLI adapter sessions behind a manual merge gate.\", \"work mode\": \"standard\", \"changed files\": \"p",
+        "path": "_history/evaluations/2026/2026-06-07-subagent-bounded-fanout-input.json",
         "category": "evaluation",
         "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T15:00:01.473Z"
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:19:33.217Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "최종 평가: Subagent Bounded Fan Out",
+        "detail": "최종 평가: Subagent Bounded Fan Out 날짜: 2026 06 07 평가 이전 단일 lane 실행 다음 단계로, 저장된 subagent plan의 첫 2개 tool을 bounded fan out CLI sessions로 시작하고 manual merge gate로 묶는 기능을 구현했다. 충족 start subagent tool fanout Tauri command가 추가됐다. default 2, hard cap 3 sessions 경계가 추가됐다. 각 lane은 기존 create c",
+        "path": "_history/evaluations/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:19:33.217Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Subagent Bounded Fan Out",
+        "detail": "Request Trace: Subagent Bounded Fan Out 날짜: 2026 06 07 요청 미룬거 계속 구현. 연결된 이전 작업 2026 06 06 subagent tool use : plan 생성 2026 06 06 subagent live execution : 단일 tool 실행 결과 저장된 plan의 첫 2개 subagent tool을 bounded fan out으로 시작하고 manual merge gate로 묶는 기능을 추가했다. 산출물 요구사항: platform desktop",
+        "path": "_history/request-traces/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:19:33.217Z"
+      },
+      {
+        "id": "history-history-2026-2026-06-07-md",
+        "sourceType": "history",
+        "signalType": "history",
+        "lane": "history",
+        "severity": "info",
+        "status": "daily-history",
+        "title": "2026 06 07",
+        "detail": "2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Deskto",
+        "path": "_history/2026/2026-06-07.md",
+        "category": "daily-history",
+        "language": "unknown",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:19:33.217Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-07-subagent-bounded-fanout-cli-pipeline-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "evaluation",
+        "title": "2026 06 07 Subagent Bounded Fanout Cli Pipeline",
+        "detail": "{ \"pipeline id\": \"subagent bounded fanout\", \"purpose\": \"Start the first two saved subagent plan tools as independent CLI adapter sessions and hold their summaries behind a manual merge gate.\", \"work mode\": \"standard\", \"risk level\": \"medium\", \"processes\": { \"process id\": \"subagent",
+        "path": "_history/evaluations/2026/2026-06-07-subagent-bounded-fanout-cli-pipeline.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:19:33.216Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "Work Timing: Subagent Bounded Fan Out",
+        "detail": "Work Timing: Subagent Bounded Fan Out 날짜: 2026 06 07 | Phase | Approx elapsed | Notes | | | : | | | Web first intake and slice scoping | 10m | Official docs and explorer recommendation used | | Rust command implementation | 35m | Fan out command, prompt, selection, tests | | Rend",
+        "path": "_history/work-timings/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+        "category": "work-timing",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:19:33.216Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "Work Summary: Subagent Bounded Fan Out",
+        "detail": "Work Summary: Subagent Bounded Fan Out 날짜: 2026 06 07 완료 start subagent tool fanout Tauri command를 추가했다. 저장된 plan에서 요청 tool names를 검증한다. default 2, hard cap 3 sessions로 제한한다. 각 lane은 기존 CLI session lifecycle로 시작하고 같은 pipeline id와 manual merge gate를 공유한다. Desktop Runtime에 첫 2개 묶음 ",
+        "path": "_history/work-summaries/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:19:33.216Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Subagent Bounded Fan Out",
+        "detail": "Web Search: Subagent Bounded Fan Out 날짜: 2026 06 07 Queries OpenAI Agents SDK handoffs agents as tools official documentation Claude Code subagents parallel background permissions official documentation VS Code Copilot subagents orchestration runSubagent tools official documentat",
+        "path": "_history/web-searches/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:19:33.215Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "User Request Summary: Subagent Bounded Fan Out",
+        "detail": "User Request Summary: Subagent Bounded Fan Out 날짜: 2026 06 07 요약 사용자는 “미룬거 계속 구현”이라고 요청했다. 이전 응답에서 후속으로 남긴 subagent fan out과 merge gate 쪽을 계속 구현하는 요청으로 해석했다. 실행 범위 저장된 subagent tool plan을 사용한다. 첫 multi process slice로 첫 2개 planned tools만 실행한다. hard cap 3, manager owned merge gate,",
+        "path": "_history/user-requests/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:19:33.215Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "Work Plan: Subagent Bounded Fan Out",
+        "detail": "Work Plan: Subagent Bounded Fan Out 날짜: 2026 06 07 작업 모드 standard 실행 계획 1. 웹 우선 조사와 이전 slice 기록 확인. 2. subagent explorer로 safe slice 검토. 3. Rust command와 fan out report 구현. 4. Renderer UI와 pipeline/session 연결 구현. 5. Rust/frontend/build/browser 검증. 6. CLI pipeline/resource/omissio",
+        "path": "_history/plans/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:19:33.215Z"
       },
       {
         "id": "history-history-evaluations-2026-2026-06-06-subagent-live-execution-ko-md",
@@ -19477,7 +19653,7 @@
         "category": "evaluation",
         "language": "ko",
         "date": "2026-06-06",
-        "timestamp": "2026-06-06T15:00:01.473Z"
+        "timestamp": "2026-06-06T15:05:12.467Z"
       },
       {
         "id": "history-history-2026-2026-06-06-md",
@@ -19492,7 +19668,22 @@
         "category": "daily-history",
         "language": "unknown",
         "date": "2026-06-06",
-        "timestamp": "2026-06-06T15:00:01.473Z"
+        "timestamp": "2026-06-06T15:05:12.467Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-subagent-live-execution-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 06 Subagent Live Execution Input",
+        "detail": "{ \"initial instruction\": \"아까 미룬 다음 단계 구현\", \"result summary\": \"Added a Desktop Runtime path that validates a saved subagent tool plan and starts one selected tool as an existing CLI adapter session with task run linkage.\", \"work mode\": \"standard\", \"changed files\": \"platform deskto",
+        "path": "_history/evaluations/2026/2026-06-06-subagent-live-execution-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T15:04:56.863Z"
       },
       {
         "id": "history-history-request-traces-2026-2026-06-06-subagent-live-execution-ko-md",
@@ -20738,156 +20929,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T12:12:18.894Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-native-pipe-runtime-tools-resource-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "evaluation",
-        "title": "2026 06 06 Native Pipe Runtime Tools Resource",
-        "detail": "{ \"task\": \"Native pipe runtime tools resource check.\", \"work mode\": \"standard\", \"runtime context\": \"rust\", \"tauri\", \"std::process\", \"os pipe\", \"reader threads\" , \"resource risks\": { \"risk id\": \"pipe file descriptor leak\", \"category\": \"file handle\", \"description\": \"Parent process ",
-        "path": "_history/evaluations/2026/2026-06-06-native-pipe-runtime-tools-resource.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:08:29.988Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-native-pipe-runtime-tools-omission-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Native Pipe Runtime Tools Omission",
-        "detail": "{ \"task\": \"Native pipe runtime tools omission check.\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"install native pipe tool\", \"description\": \"Install or add a stronger native tool for process pipes/direct terminal control.\", \"source\": \"user request\", \"required\": true",
-        "path": "_history/evaluations/2026/2026-06-06-native-pipe-runtime-tools-omission.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:08:29.988Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-native-pipe-runtime-tools-cli-pipeline-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "evaluation",
-        "title": "2026 06 06 Native Pipe Runtime Tools Cli Pipeline",
-        "detail": "{ \"pipeline id\": \"native pipe runtime tools\", \"purpose\": \"Add a Rust/Tauri native OS pipe execution layer that connects one producer process stdout to one consumer process stdin without a shell pipeline string.\", \"work mode\": \"standard\", \"risk level\": \"high\", \"processes\": { \"proc",
-        "path": "_history/evaluations/2026/2026-06-06-native-pipe-runtime-tools-cli-pipeline.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:08:29.987Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-native-pipe-runtime-tools-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "Plan History: Native Pipe Runtime Tools",
-        "detail": "Plan History: Native Pipe Runtime Tools 요약 사용자는 터미널/CLI 설정 확인을 넘어 파이프와 터미널 직접 제어에 필요한 강력한 네이티브 툴 설치를 요청했다. 전역 도구 설치보다 platform desktop app Rust 런타임에 OS pipe 의존성과 bounded pipe runner command를 추가하는 계획을 선택했다. 선택 work mode: standard install mode: developer 구현 위치: platform desktop app",
-        "path": "_history/plans/2026/2026-06-06-native-pipe-runtime-tools.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:00:16.449Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-native-pipe-runtime-tools-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "Web Search: Native Pipe Runtime Tools",
-        "detail": "Web Search: Native Pipe Runtime Tools 검색 Rust portable pty crate official documentation terminal pty Rust tokio process pipe child stdin stdout official documentation Tauri v2 shell plugin official documentation process command os pipe crate Rust official documentation pipe Stdio",
-        "path": "_history/web-searches/2026/2026-06-06-native-pipe-runtime-tools.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:00:16.448Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-runtime-setup-check-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "Evaluation: Runtime Setup Check",
-        "detail": "Evaluation: Runtime Setup Check 평가 기준 설정 화면에서 터미널/CLI 설정 점검을 바로 실행할 수 있는가. CLI 점검은 기존 Tauri runtime health 경로를 재사용하는가. 터미널 점검은 startup command를 실행하지 않고 command/cwd 해석만 확인하는가. UI에서 상태, 경로, 오류를 구분해 볼 수 있는가. 검증과 internal package build가 통과하는가. 현재 평가 check runtime terminal setup comma",
-        "path": "_history/evaluations/2026/2026-06-06-runtime-setup-check.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T11:51:48.743Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-runtime-setup-check-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "Request Trace: Runtime Setup Check",
-        "detail": "Request Trace: Runtime Setup Check 요청 터미널 설정과 자동 CLI 설정이 실제로 되었는지 확인하는 기능 추가. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 runtime setup check.ko.md 스펙: platform desktop app/specs/2026 06 06 runtime setup check/ 구현: platform desktop app/src tauri/src/lib.rs platfor",
-        "path": "_history/request-traces/2026/2026-06-06-runtime-setup-check.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T11:51:48.743Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-runtime-setup-check-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "User Request: Runtime Setup Check",
-        "detail": "User Request: Runtime Setup Check 요약 사용자는 터미널 설정이나 자동 CLI 설정이 되어도 실제로 되었는지 확인하는 기능이 없으니 추가해 달라고 요청했다. 해석한 요구 설정 화면에서 selected CLI adapter와 terminal shell 설정을 바로 점검할 수 있어야 한다. CLI 설치/로그인 자동화가 아니라 현재 설치형 런타임 기준의 실행 가능 여부를 보여줘야 한다. 점검 결과는 사용자가 어디가 막혔는지 볼 수 있어야 한다. 소유 프로젝트 platform d",
-        "path": "_history/user-requests/2026/2026-06-06-runtime-setup-check.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T11:51:48.743Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-runtime-setup-check-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "Work Summary: Runtime Setup Check",
-        "detail": "Work Summary: Runtime Setup Check 완료 내용 설정 CLI 어댑터 섹션에 설정 점검 버튼을 추가했다. 선택된 CLI adapter는 기존 health check로 PATH/version 상태를 확인한다. 터미널 셸은 새 Rust command로 command/cwd 해석만 확인한다. 점검 결과 패널에서 terminal shell과 selected CLI 상태를 따로 보여준다. browser preview에서 Tauri runtime 없음 fallback 상태까지 확인했다.",
-        "path": "_history/work-summaries/2026/2026-06-06-runtime-setup-check.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T11:51:48.743Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-runtime-setup-check-ko-md",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "Work Timing: Runtime Setup Check",
-        "detail": "Work Timing: Runtime Setup Check 단계별 기록 | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 3분 | Node child process, Tauri/macOS PATH 관련 확인 | | 요구사항/스펙 | 8분 | runtime setup check 요구사항과 구현 범위 기록 | | 구현 | 25분 | Rust command, renderer state/action/UI, CSS, test contract | | 검증 | 25분 ",
-        "path": "_history/work-timings/2026/2026-06-06-runtime-setup-check.ko.md",
-        "category": "work-timing",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T11:51:48.742Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23431,9 +23472,9 @@
       "project": "platform-desktop-app",
       "language": "rust",
       "extension": "rs",
-      "sizeBytes": 1498,
-      "lineCount": 38,
-      "updatedAt": "2026-06-06T14:52:09.184Z",
+      "sizeBytes": 1757,
+      "lineCount": 43,
+      "updatedAt": "2026-06-06T15:11:06.884Z",
       "truncated": true,
       "preview": "use super::{command, NativeRuntimeFeatureGroupReport};\n\npub(super) fn group() -> NativeRuntimeFeatureGroupReport {\n    NativeRuntimeFeatureGroupReport {\n        group_id: \"agent-factory\",\n        label: \"Agent Factory\",\n        source_module: \"src-tauri/src/features/agent_factory.rs\",\n        role:\n            \"Owns proposal records for new agent capabilities and learning improvement decisions.\",\n        commands: vec![\n            command(\n                \"create_agent_factory_proposal\",\n                \"Create agent factory proposal\",\n                \"Writes proposal record under runtime data\",\n            ),\n            command(\n                \"record_learning_improvement_decision\",\n                \"Record learning improvement decision\",\n                \"Writes learning feedback record under runtime data\",\n            ),\n            command(\n                \"run_subagent_tool_plan\",\n                \"Run manager-as-tools subagent plan\",\n                \"Bounded agent-platform planner execution with task-run persistence\",\n            ),\n            command(\n                \"start_subagent_tool_execution\",\n                \"Start one subagent tool lane\",\n                \"Validates ",
       "previewBytes": 1200
@@ -24154,12 +24195,12 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 26
+        "documentsCount": 25
       },
       {
         "category": "daily-history",
         "root": "_history/2026",
-        "documentsCount": 1
+        "documentsCount": 2
       }
     ]
   },
@@ -24248,7 +24289,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 82,
+        "documentCount": 83,
         "sourceFileCount": 14
       },
       {
@@ -24381,7 +24422,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-src-tauri-src-lib-rs",
         "label": "Large source surface",
-        "signal": "12,740 lines in platform-desktop-app/src-tauri/src/lib.rs",
+        "signal": "13,120 lines in platform-desktop-app/src-tauri/src/lib.rs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits.",
         "priority": "high",
@@ -24429,8 +24470,8 @@
         "path": "platform-desktop-app/src-tauri/src/lib.rs",
         "project": "platform-desktop-app",
         "language": "rust",
-        "lineCount": 12740,
-        "sizeBytes": 430122,
+        "lineCount": 13120,
+        "sizeBytes": 444809,
         "recommendation": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits."
       },
       {
@@ -28089,13 +28130,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 4063,
+      "sourceDocuments": 4079,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T15:00:01.473Z"
+      "latestInsightAt": "2026-06-06T15:19:33.217Z"
     },
     "inferenceStages": [
       {
@@ -28163,7 +28204,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 494,
+        "signalCount": 496,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -28183,11 +28224,11 @@
           },
           {
             "category": "work-summary",
-            "count": 37
+            "count": 38
           },
           {
             "category": "plan",
-            "count": 14
+            "count": 15
           },
           {
             "category": "web-search",
@@ -28222,7 +28263,7 @@
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장"
         ],
-        "latestEvidenceAt": "2026-06-06T15:00:01.473Z"
+        "latestEvidenceAt": "2026-06-06T15:19:33.216Z"
       },
       {
         "id": "web-research-to-spec",
@@ -28236,7 +28277,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1819,
+        "signalCount": 1821,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -28248,11 +28289,11 @@
           },
           {
             "category": "web-search",
-            "count": 440
+            "count": 441
           },
           {
             "category": "plan",
-            "count": 218
+            "count": 219
           },
           {
             "category": "request-trace",
@@ -28287,7 +28328,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T15:00:01.465Z"
+        "latestEvidenceAt": "2026-06-06T15:19:33.215Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28301,15 +28342,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1043,
+        "signalCount": 1047,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 506
+            "count": 508
           },
           {
             "category": "plan",
-            "count": 304
+            "count": 305
           },
           {
             "category": "request-trace",
@@ -28325,7 +28366,7 @@
           },
           {
             "category": "user-request",
-            "count": 14
+            "count": 15
           },
           {
             "category": "web-search",
@@ -28360,7 +28401,7 @@
           "작업 요약: 큰 범위 작업 미루지 않기",
           "작업 계획 기록: 사용자 의도 기반 기능 지도"
         ],
-        "latestEvidenceAt": "2026-06-06T15:00:01.473Z"
+        "latestEvidenceAt": "2026-06-06T15:19:33.217Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28374,19 +28415,19 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 787,
+        "signalCount": 796,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 320
+            "count": 324
           },
           {
             "category": "evaluation",
-            "count": 255
+            "count": 257
           },
           {
             "category": "work-summary",
-            "count": 47
+            "count": 48
           },
           {
             "category": "web-search",
@@ -28394,7 +28435,7 @@
           },
           {
             "category": "plan",
-            "count": 32
+            "count": 33
           },
           {
             "category": "request-trace",
@@ -28414,7 +28455,7 @@
           },
           {
             "category": "daily-history",
-            "count": 3
+            "count": 4
           }
         ],
         "evidencePaths": [
@@ -28433,7 +28474,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "Requirement: Native Pipe Runtime Tools"
         ],
-        "latestEvidenceAt": "2026-06-06T15:00:01.473Z"
+        "latestEvidenceAt": "2026-06-06T15:19:33.217Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28447,15 +28488,15 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1596,
+        "signalCount": 1599,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 686
+            "count": 687
           },
           {
             "category": "evaluation",
-            "count": 540
+            "count": 541
           },
           {
             "category": "user-request",
@@ -28487,7 +28528,7 @@
           },
           {
             "category": "daily-history",
-            "count": 4
+            "count": 5
           }
         ],
         "evidencePaths": [
@@ -28506,7 +28547,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T15:00:01.473Z"
+        "latestEvidenceAt": "2026-06-06T15:19:33.217Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28582,14 +28623,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 4063,
+      "sourceDocuments": 4079,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T15:00:01.473Z"
+      "latestInsightAt": "2026-06-06T15:19:33.217Z"
     },
     "operatingModel": [
       {
@@ -28647,25 +28688,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3356,
+        "signalCount": 3364,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1819
+            "signalCount": 1821
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1043
+            "signalCount": 1047
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 494
+            "signalCount": 496
           }
         ],
         "missingPatternIds": [],
@@ -28693,7 +28734,7 @@
           "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T15:00:01.473Z",
+        "latestEvidenceAt": "2026-06-06T15:19:33.217Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28722,13 +28763,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 906,
+        "signalCount": 915,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 787
+            "signalCount": 796
           },
           {
             "id": "release-blocker-gate",
@@ -28762,7 +28803,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T15:00:01.473Z",
+        "latestEvidenceAt": "2026-06-06T15:19:33.217Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28791,19 +28832,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2639,
+        "signalCount": 2646,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1596
+            "signalCount": 1599
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1043
+            "signalCount": 1047
           }
         ],
         "missingPatternIds": [],
@@ -28831,7 +28872,7 @@
           "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T15:00:01.473Z",
+        "latestEvidenceAt": "2026-06-06T15:19:33.217Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28860,13 +28901,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 613,
+        "signalCount": 615,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 494
+            "signalCount": 496
           },
           {
             "id": "release-blocker-gate",
@@ -28900,7 +28941,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T15:00:01.473Z",
+        "latestEvidenceAt": "2026-06-06T15:19:33.216Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28929,19 +28970,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2862,
+        "signalCount": 2868,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1043
+            "signalCount": 1047
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1819
+            "signalCount": 1821
           }
         ],
         "missingPatternIds": [],
@@ -28969,7 +29010,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T15:00:01.473Z",
+        "latestEvidenceAt": "2026-06-06T15:19:33.217Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28998,7 +29039,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1938,
+        "signalCount": 1940,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -29010,7 +29051,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1819
+            "signalCount": 1821
           }
         ],
         "missingPatternIds": [],
@@ -29038,7 +29079,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T15:00:01.465Z",
+        "latestEvidenceAt": "2026-06-06T15:19:33.215Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

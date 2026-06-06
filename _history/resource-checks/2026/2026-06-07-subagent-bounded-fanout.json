@@ -1,0 +1,105 @@
+{
+  "task": "Subagent Bounded Fan-Out",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Tauri invoke bridge",
+    "CLI adapter subprocess sessions",
+    "SessionStore",
+    "runtime task-run store",
+    "workspace-monitor browser smoke"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "multi-session-process-lifecycle",
+      "category": "process",
+      "description": "The new action may start two CLI adapter subprocess sessions at once.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Fan-out defaults to 2 sessions and rejects maxSessions above 3; it reuses create_cli_session, SessionStore, cancel_cli_adapter_session, and cleanup_finished_sessions_locked.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "cargo check --manifest-path platform-desktop-app/src-tauri/Cargo.toml"
+      ]
+    },
+    {
+      "risk_id": "unbounded-plan-execution",
+      "category": "process",
+      "description": "A plan may contain more tools than should be started in the first multi-process slice.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Renderer passes only the first two tool names, Rust default is 2, and Rust hard cap is 3.",
+      "evidence": [
+        "fanoutSubagentTools",
+        "MAX_SUBAGENT_FANOUT_SESSIONS"
+      ]
+    },
+    {
+      "risk_id": "private-output-access",
+      "category": "file_handle",
+      "description": "A fan-out lane could try to inspect local-only private folders or transient output folders.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Fan-out prompt explicitly forbids _private and outputs access and keeps manager-owned merge boundaries.",
+      "evidence": [
+        "render_subagent_cli_fanout_prompt",
+        "subagent_cli_fanout_prompt_keeps_merge_gate_boundaries"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "fanout-create-cleanup-path",
+      "resource": "subagent fan-out CLI sessions",
+      "create_path": "start_subagent_tool_fanout_report -> create_cli_session per selected tool",
+      "cleanup_path": "RuntimeTerminalDrawer cancel action -> cancel_cli_adapter_session; Rust Drop and cleanup_finished_sessions_locked",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "rust-check",
+      "metric": "Rust compile and unit contracts",
+      "tool": "cargo check and cargo test",
+      "threshold": "exit code 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo check --manifest-path platform-desktop-app/src-tauri/Cargo.toml",
+        "cargo test subagent_cli_fanout_prompt_keeps_merge_gate_boundaries",
+        "cargo test subagent_fanout_tool_selection_rejects_unknown_tools"
+      ]
+    },
+    {
+      "check_id": "renderer-contract",
+      "metric": "Desktop Runtime fan-out action and UI contract",
+      "tool": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test",
+      "threshold": "90 tests pass",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "90 tests passed"
+      ]
+    },
+    {
+      "check_id": "browser-smoke-server-cleanup",
+      "metric": "Local development server lifecycle",
+      "tool": "next dev on 127.0.0.1:3224 and lsof",
+      "threshold": "fan-out UI contract observed and no listener remains after Ctrl-C",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Browser smoke found pty-to-agent bridge, fanout-subagents action, fanout-subagent-tools feedback, and disabled first-two button.",
+        "lsof -nP -iTCP:3224 -sTCP:LISTEN returned no listener after shutdown."
+      ]
+    }
+  ],
+  "notes": [
+    "No installation occurred.",
+    "Browser preview cannot execute Tauri native commands; it will be used only for UI contract smoke."
+  ]
+}

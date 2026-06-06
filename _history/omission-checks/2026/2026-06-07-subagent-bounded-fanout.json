@@ -1,0 +1,104 @@
+{
+  "task": "Subagent Bounded Fan-Out",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "bounded-fanout-command",
+      "description": "Add a native command that starts multiple saved subagent tools with a process cap.",
+      "source": "user continuation request",
+      "required": true,
+      "status": "covered",
+      "evidence": ["start_subagent_tool_fanout", "MAX_SUBAGENT_FANOUT_SESSIONS"]
+    },
+    {
+      "item_id": "first-two-ui",
+      "description": "Expose first-two fan-out in Desktop Runtime without implying all tools are started.",
+      "source": "subagent explorer recommendation",
+      "required": true,
+      "status": "covered",
+      "evidence": ["data-terminal-agent-action=\"fanout-subagents\"", "첫 2개 묶음 실행"]
+    },
+    {
+      "item_id": "manual-merge-gate",
+      "description": "Keep merge and final answer manager-owned.",
+      "source": "safety boundary",
+      "required": true,
+      "status": "covered",
+      "evidence": ["SUBAGENT_FANOUT_MERGE_GATE", "render_subagent_cli_fanout_prompt"]
+    },
+    {
+      "item_id": "pipeline-record",
+      "description": "Record and validate the multi-CLI process graph.",
+      "source": "CLI pipeline workflow",
+      "required": true,
+      "status": "covered",
+      "evidence": ["_history/evaluations/2026/2026-06-07-subagent-bounded-fanout-cli-pipeline.json"]
+    },
+    {
+      "item_id": "verification",
+      "description": "Run Rust, renderer, resource, CLI pipeline, omission, build, and browser checks.",
+      "source": "workspace close-out rule",
+      "required": true,
+      "status": "covered",
+      "evidence": ["platform-desktop-app/specs/2026-06-07-subagent-bounded-fanout/validation.ko.md"]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-07-subagent-bounded-fanout.ko.md",
+      "purpose": "Requirement record",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-07-subagent-bounded-fanout/spec.ko.md",
+      "purpose": "Spec record",
+      "required": true
+    },
+    {
+      "path": "_history/evaluations/2026/2026-06-07-subagent-bounded-fanout-cli-pipeline.json",
+      "purpose": "CLI pipeline record",
+      "required": true
+    },
+    {
+      "path": "_history/resource-checks/2026/2026-06-07-subagent-bounded-fanout.json",
+      "purpose": "Resource lifecycle record",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "rust-renderer",
+      "description": "Rust and renderer tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["cargo check", "cargo test", "workspace-monitor test/check"]
+    },
+    {
+      "check_id": "pipeline-resource",
+      "description": "CLI pipeline and resource guards pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-07-subagent-bounded-fanout-cli-pipeline.json: pipeline_ready",
+        "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/resource-checks/2026/2026-06-07-subagent-bounded-fanout.json: resource_ready"
+      ]
+    },
+    {
+      "check_id": "build-browser",
+      "description": "Renderer build and Browser smoke pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm -w run desktop:renderer:build: passed",
+        "corepack pnpm --dir platform-desktop-app run check: passed with existing public release warnings",
+        "Browser smoke on http://127.0.0.1:3224/#section-desktop found the pty-to-agent bridge, fanout-subagents action, fanout-subagent-tools feedback, and disabled first-two fan-out button."
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "Browser preview cannot execute Tauri native command; live packaged runtime smoke is a stronger follow-up."
+  ],
+  "notes": [
+    "Subagent explorer was used read-only to verify safe fan-out scope."
+  ]
+}

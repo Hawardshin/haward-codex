@@ -178,6 +178,7 @@ type DesktopActionFeedbackId =
   | "start-terminal-agent-bridge"
   | "plan-subagent-tools"
   | "execute-subagent-tools"
+  | "fanout-subagent-tools"
   | "reveal-workspace"
   | "open-workspace-path"
   | "open-external-terminal"
@@ -2154,6 +2155,28 @@ type SubagentToolPlanReport = {
   stdoutLogPath?: string | null;
   stderrLogPath?: string | null;
   persistenceError?: string | null;
+};
+
+type SubagentToolFanoutReport = {
+  pipelineId: string;
+  planTaskRunId: string;
+  taskKind: string;
+  label: string;
+  status: string;
+  intent: string;
+  adapterId: string;
+  workingDir: string;
+  promptBytes: number;
+  selectedToolCount: number;
+  startedSessions: number;
+  missingLanes: number;
+  skippedTools: string[];
+  processCap: number;
+  mergeGate: string;
+  bounded: boolean;
+  maxOutputBytes: number;
+  lanes: CliTaskPipelineLaneReport[];
+  pipes: CliPipeEdgeReport[];
 };
 
 type RuntimeDataRootReport = {
@@ -10954,6 +10977,7 @@ function DesktopRuntimePanel({
   const [taskRunPruneNotice, setTaskRunPruneNotice] = useState("");
   const [lastSubagentToolPlan, setLastSubagentToolPlan] = useState<SubagentToolPlanReport | null>(null);
   const [lastSubagentToolExecution, setLastSubagentToolExecution] = useState<CliSessionReport | null>(null);
+  const [lastSubagentToolFanout, setLastSubagentToolFanout] = useState<SubagentToolFanoutReport | null>(null);
   const [runtimeDataBoundary, setRuntimeDataBoundary] = useState<RuntimeDataBoundaryReport | null>(null);
   const [payloadAudit, setPayloadAudit] = useState<InstallerPayloadAuditReport | null>(null);
   const [supportBundle, setSupportBundle] = useState<SupportDiagnosticBundleReport | null>(null);
@@ -13506,6 +13530,13 @@ function DesktopRuntimePanel({
             detail: uiLanguage === "ko" ? "저장된 계획에서 선택한 도구 하나를 검증한 뒤 독립 실행 세션으로 시작합니다." : "Validates one selected tool from the saved plan, then starts it as an independent execution session.",
             next: uiLanguage === "ko" ? "하단 터미널과 실행 기록에서 서브에이전트 진행 상황을 확인하세요." : "Check subagent progress in the terminal and task-run records."
           };
+        case "fanout-subagent-tools":
+          return {
+            label: uiLanguage === "ko" ? "서브에이전트 묶음 실행" : "Subagent fan-out",
+            scope: "start_subagent_tool_fanout",
+            detail: uiLanguage === "ko" ? "저장된 계획의 첫 2개 도구를 검증한 뒤 독립 실행 세션으로 시작합니다." : "Validates the first two saved plan tools, then starts independent execution sessions.",
+            next: uiLanguage === "ko" ? "하단 터미널과 실행 기록에서 각 세션을 확인하고, 병합은 수동으로 승인하세요." : "Check each session in the terminal and task-run records, then approve merge manually."
+          };
         case "reveal-workspace":
           return {
             label: uiLanguage === "ko" ? "Finder에서 보기" : "Reveal in file manager",
@@ -14194,6 +14225,48 @@ function DesktopRuntimePanel({
     setSelectedTaskRunId(report.taskRunId);
     setTerminalDrawerOpen(true);
     await refreshTaskRunRecords();
+  };
+  const fanoutSubagentTools = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setRuntimeState("unavailable");
+      throw new Error(runtimeUnavailableErrorMessage);
+    }
+    if (!lastSubagentToolPlan || lastSubagentToolPlan.subagentTools.length === 0) {
+      throw new Error(uiLanguage === "ko" ? "먼저 서브에이전트 툴 계획을 생성하세요." : "Create a subagent tool plan first.");
+    }
+    setRunningAdapterId("subagent-fanout");
+    try {
+      const report = await tauriInvoke<SubagentToolFanoutReport>("start_subagent_tool_fanout", {
+        input: {
+          planTaskRunId: lastSubagentToolPlan.taskRunId,
+          toolNames: lastSubagentToolPlan.subagentTools.slice(0, 2).map((tool) => tool.toolName),
+          adapterId: terminalAgentBridgeAdapterId,
+          prompt: sessionPrompt.trim() || (uiLanguage === "ko"
+            ? "첫 2개 서브에이전트는 현재 manager 작업을 각자 역할 관점에서 검토하고, 요약/근거/위험/검증/충돌 또는 의존성/다음 행동만 보고하세요."
+            : "The first two subagents should review the current manager task from their roles and report only summary, evidence, risks, validation, conflicts or dependencies, and next action."),
+          workingDir: workingDir.trim() || undefined,
+          autoDeferQuestions,
+          maxSessions: 2
+        }
+      });
+      const startedSessions = report.lanes
+        .map((lane) => lane.session)
+        .filter((session): session is CliSessionReport => Boolean(session));
+      setLastSubagentToolFanout(report);
+      setPipelineReports((current) => [report, ...current].slice(0, 8));
+      if (startedSessions[0]) {
+        setSelectedSessionId(startedSessions[0].sessionId);
+        setSelectedTaskRunId(startedSessions[0].taskRunId);
+      }
+      if (startedSessions.length > 0) {
+        setSessions((current) => mergeSessionReports(current, startedSessions, { promote: true }));
+        setTerminalDrawerOpen(true);
+      }
+      await refreshTaskRunRecords();
+    } finally {
+      setRunningAdapterId("");
+    }
   };
 
   if (isFileWorkspaceSurface && !interactionContentReady) {
@@ -14980,6 +15053,30 @@ function DesktopRuntimePanel({
             <Bot size={15} aria-hidden="true" />
             <span>{uiLanguage === "ko" ? "선택 툴 실행" : "Run selected tool"}</span>
           </button>
+          <button
+            type="button"
+            className={desktopActionButtonClass("fanout-subagent-tools")}
+            data-terminal-agent-action="fanout-subagents"
+            data-desktop-action-feedback="fanout-subagent-tools"
+            onClick={() =>
+              void runDesktopAction(
+                "fanout-subagent-tools",
+                fanoutSubagentTools,
+                uiLanguage === "ko" ? "첫 2개 서브에이전트 도구를 묶음 실행 세션으로 시작했습니다." : "Started the first two subagent tools as a bounded fan-out."
+              )
+            }
+            disabled={
+              !runtimeReady ||
+              !terminalAgentBridgeAdapterReady ||
+              runningAdapterId !== "" ||
+              !lastSubagentToolPlan ||
+              lastSubagentToolPlan.status !== "completed" ||
+              lastSubagentToolPlan.subagentTools.length < 2
+            }
+          >
+            <GitBranch size={15} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "첫 2개 묶음 실행" : "Run first 2"}</span>
+          </button>
           {lastSubagentToolPlan && (
             <div className="terminal-agent-plan-result" data-subagent-tool-plan-result>
               <strong>
@@ -15000,6 +15097,17 @@ function DesktopRuntimePanel({
                 {lastSubagentToolExecution.adapterId} · {lastSubagentToolExecution.command}
               </span>
               <code>{lastSubagentToolExecution.taskRunId}</code>
+            </div>
+          )}
+          {lastSubagentToolFanout && (
+            <div className="terminal-agent-plan-result fanout" data-subagent-tool-fanout-result>
+              <strong>
+                {lastSubagentToolFanout.startedSessions}/{lastSubagentToolFanout.selectedToolCount} {uiLanguage === "ko" ? "개 시작" : "started"} · {lastSubagentToolFanout.status}
+              </strong>
+              <span>
+                {lastSubagentToolFanout.lanes.map((lane) => `${lane.laneId}:${lane.status}`).slice(0, 3).join(" · ")}
+              </span>
+              <code>{lastSubagentToolFanout.pipelineId} · {lastSubagentToolFanout.mergeGate}</code>
             </div>
           )}
         </div>

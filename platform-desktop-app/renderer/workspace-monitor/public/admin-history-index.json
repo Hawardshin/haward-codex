@@ -1,48 +1,48 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-06T15:01:53.181Z",
+  "generatedAt": "2026-06-06T15:20:44.775Z",
   "summary": {
-    "documents": 2803,
-    "days": 7,
+    "documents": 2813,
+    "days": 8,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1060
+        "count": 1063
       },
       {
         "category": "web-search",
-        "count": 439
+        "count": 440
       },
       {
         "category": "request-trace",
-        "count": 368
+        "count": 369
       },
       {
         "category": "plan",
-        "count": 367
+        "count": 368
       },
       {
         "category": "work-timing",
-        "count": 287
+        "count": 288
       },
       {
         "category": "user-request",
-        "count": 153
+        "count": 154
       },
       {
         "category": "work-summary",
-        "count": 120
+        "count": 121
       },
       {
         "category": "daily-history",
-        "count": 7
+        "count": 8
       },
       {
         "category": "intent-feature-map",
         "count": 2
       }
     ],
-    "totalSourceBytes": 6760636,
+    "totalSourceBytes": 6778345,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -63,6 +63,166 @@
   },
   "documents": [
     {
+      "id": "history-2026-2026-06-07-md",
+      "path": "_history/2026/2026-06-07.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 07",
+      "excerpt": "2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Deskto",
+      "html": "<p>2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Desktop Runtime에 첫 2개 묶음 실행 버튼, fan out 결과 카드, pipeline/session 연결을 추가했다. 경계: default </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 774,
+      "updatedAt": "2026-06-06T15:19:33.217Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-subagent-bounded-fanout-input-json",
+      "path": "_history/evaluations/2026/2026-06-07-subagent-bounded-fanout-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 07 Subagent Bounded Fanout Input",
+      "excerpt": "{ \"initial instruction\": \"미룬거 계속 구현\", \"result summary\": \"Added a bounded subagent fan out command and Desktop Runtime UI that starts the first two saved subagent plan tools as existing CLI adapter sessions behind a manual merge gate.\", \"work mode\": \"standard\", \"changed files\": \"p",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;미룬거 계속 구현&quot;, &quot;result summary&quot;: &quot;Added a bounded subagent fan out command and Desktop Runtime UI that starts the first two saved subagent plan tools as existing CLI adapter sessions behind a manual merge gate.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/src tauri/src/lib.rs&quot;, &quot;platform desktop app/src tauri/src/f</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 5029,
+      "updatedAt": "2026-06-06T15:19:33.217Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+      "path": "_history/evaluations/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "최종 평가: Subagent Bounded Fan Out",
+      "excerpt": "최종 평가: Subagent Bounded Fan Out 날짜: 2026 06 07 평가 이전 단일 lane 실행 다음 단계로, 저장된 subagent plan의 첫 2개 tool을 bounded fan out CLI sessions로 시작하고 manual merge gate로 묶는 기능을 구현했다. 충족 start subagent tool fanout Tauri command가 추가됐다. default 2, hard cap 3 sessions 경계가 추가됐다. 각 lane은 기존 create c",
+      "html": "<p>최종 평가: Subagent Bounded Fan Out 날짜: 2026 06 07 평가 이전 단일 lane 실행 다음 단계로, 저장된 subagent plan의 첫 2개 tool을 bounded fan out CLI sessions로 시작하고 manual merge gate로 묶는 기능을 구현했다. 충족 start subagent tool fanout Tauri command가 추가됐다. default 2, hard cap 3 sessions 경계가 추가됐다. 각 lane은 기존 create cli session lifecycle과 task run persistence를 재사용한다. fan out prompt는 manager owned</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 966,
+      "updatedAt": "2026-06-06T15:19:33.217Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+      "path": "_history/request-traces/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Subagent Bounded Fan Out",
+      "excerpt": "Request Trace: Subagent Bounded Fan Out 날짜: 2026 06 07 요청 미룬거 계속 구현. 연결된 이전 작업 2026 06 06 subagent tool use : plan 생성 2026 06 06 subagent live execution : 단일 tool 실행 결과 저장된 plan의 첫 2개 subagent tool을 bounded fan out으로 시작하고 manual merge gate로 묶는 기능을 추가했다. 산출물 요구사항: platform desktop",
+      "html": "<p>Request Trace: Subagent Bounded Fan Out 날짜: 2026 06 07 요청 미룬거 계속 구현. 연결된 이전 작업 2026 06 06 subagent tool use : plan 생성 2026 06 06 subagent live execution : 단일 tool 실행 결과 저장된 plan의 첫 2개 subagent tool을 bounded fan out으로 시작하고 manual merge gate로 묶는 기능을 추가했다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 subagent bounded fanout.ko.md 스펙: platform des</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 956,
+      "updatedAt": "2026-06-06T15:19:33.217Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-subagent-bounded-fanout-cli-pipeline-json",
+      "path": "_history/evaluations/2026/2026-06-07-subagent-bounded-fanout-cli-pipeline.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 07 Subagent Bounded Fanout Cli Pipeline",
+      "excerpt": "{ \"pipeline id\": \"subagent bounded fanout\", \"purpose\": \"Start the first two saved subagent plan tools as independent CLI adapter sessions and hold their summaries behind a manual merge gate.\", \"work mode\": \"standard\", \"risk level\": \"medium\", \"processes\": { \"process id\": \"subagent",
+      "html": "<p>{ &quot;pipeline id&quot;: &quot;subagent bounded fanout&quot;, &quot;purpose&quot;: &quot;Start the first two saved subagent plan tools as independent CLI adapter sessions and hold their summaries behind a manual merge gate.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;risk level&quot;: &quot;medium&quot;, &quot;processes&quot;: { &quot;process id&quot;: &quot;subagent tool 1&quot;, &quot;adapter id&quot;: &quot;codex cli&quot;, &quot;command&quot;: &quot;codex&quot;, &quot;args&quot;: &quot;run&quot;, &quot;bounded</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 5226,
+      "updatedAt": "2026-06-06T15:19:33.216Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Subagent Bounded Fan Out",
+      "excerpt": "Work Summary: Subagent Bounded Fan Out 날짜: 2026 06 07 완료 start subagent tool fanout Tauri command를 추가했다. 저장된 plan에서 요청 tool names를 검증한다. default 2, hard cap 3 sessions로 제한한다. 각 lane은 기존 CLI session lifecycle로 시작하고 같은 pipeline id와 manual merge gate를 공유한다. Desktop Runtime에 첫 2개 묶음 ",
+      "html": "<p>Work Summary: Subagent Bounded Fan Out 날짜: 2026 06 07 완료 start subagent tool fanout Tauri command를 추가했다. 저장된 plan에서 요청 tool names를 검증한다. default 2, hard cap 3 sessions로 제한한다. 각 lane은 기존 CLI session lifecycle로 시작하고 같은 pipeline id와 manual merge gate를 공유한다. Desktop Runtime에 첫 2개 묶음 실행 버튼과 fan out 결과 카드를 추가했다. fan out report를 task pipeline panel과 session list에 연</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 716,
+      "updatedAt": "2026-06-06T15:19:33.216Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+      "path": "_history/work-timings/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "Work Timing: Subagent Bounded Fan Out",
+      "excerpt": "Work Timing: Subagent Bounded Fan Out 날짜: 2026 06 07 | Phase | Approx elapsed | Notes | | | : | | | Web first intake and slice scoping | 10m | Official docs and explorer recommendation used | | Rust command implementation | 35m | Fan out command, prompt, selection, tests | | Rend",
+      "html": "<p>Work Timing: Subagent Bounded Fan Out 날짜: 2026 06 07 | Phase | Approx elapsed | Notes | | | : | | | Web first intake and slice scoping | 10m | Official docs and explorer recommendation used | | Rust command implementation | 35m | Fan out command, prompt, selection, tests | | Renderer integration | 25m | Button, report card, pipeline/session merge | | Validat</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 615,
+      "updatedAt": "2026-06-06T15:19:33.216Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-plans-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+      "path": "_history/plans/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Work Plan: Subagent Bounded Fan Out",
+      "excerpt": "Work Plan: Subagent Bounded Fan Out 날짜: 2026 06 07 작업 모드 standard 실행 계획 1. 웹 우선 조사와 이전 slice 기록 확인. 2. subagent explorer로 safe slice 검토. 3. Rust command와 fan out report 구현. 4. Renderer UI와 pipeline/session 연결 구현. 5. Rust/frontend/build/browser 검증. 6. CLI pipeline/resource/omissio",
+      "html": "<p>Work Plan: Subagent Bounded Fan Out 날짜: 2026 06 07 작업 모드 standard 실행 계획 1. 웹 우선 조사와 이전 slice 기록 확인. 2. subagent explorer로 safe slice 검토. 3. Rust command와 fan out report 구현. 4. Renderer UI와 pipeline/session 연결 구현. 5. Rust/frontend/build/browser 검증. 6. CLI pipeline/resource/omission/evaluation 기록. 7. commit/push. 결정 default fan out은 첫 2개 planned tools만 실행한다. h</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 588,
+      "updatedAt": "2026-06-06T15:19:33.215Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+      "path": "_history/user-requests/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request Summary: Subagent Bounded Fan Out",
+      "excerpt": "User Request Summary: Subagent Bounded Fan Out 날짜: 2026 06 07 요약 사용자는 “미룬거 계속 구현”이라고 요청했다. 이전 응답에서 후속으로 남긴 subagent fan out과 merge gate 쪽을 계속 구현하는 요청으로 해석했다. 실행 범위 저장된 subagent tool plan을 사용한다. 첫 multi process slice로 첫 2개 planned tools만 실행한다. hard cap 3, manager owned merge gate,",
+      "html": "<p>User Request Summary: Subagent Bounded Fan Out 날짜: 2026 06 07 요약 사용자는 “미룬거 계속 구현”이라고 요청했다. 이전 응답에서 후속으로 남긴 subagent fan out과 merge gate 쪽을 계속 구현하는 요청으로 해석했다. 실행 범위 저장된 subagent tool plan을 사용한다. 첫 multi process slice로 첫 2개 planned tools만 실행한다. hard cap 3, manager owned merge gate, 기존 CLI session lifecycle reuse를 요구사항으로 둔다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 513,
+      "updatedAt": "2026-06-06T15:19:33.215Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-07-subagent-bounded-fanout-ko-md",
+      "path": "_history/web-searches/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Subagent Bounded Fan Out",
+      "excerpt": "Web Search: Subagent Bounded Fan Out 날짜: 2026 06 07 Queries OpenAI Agents SDK handoffs agents as tools official documentation Claude Code subagents parallel background permissions official documentation VS Code Copilot subagents orchestration runSubagent tools official documentat",
+      "html": "<p>Web Search: Subagent Bounded Fan Out 날짜: 2026 06 07 Queries OpenAI Agents SDK handoffs agents as tools official documentation Claude Code subagents parallel background permissions official documentation VS Code Copilot subagents orchestration runSubagent tools official documentation Tauri v2 shell plugin process CommandEvent stdout stderr termination officia</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2153,
+      "updatedAt": "2026-06-06T15:19:33.215Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
       "id": "history-2026-2026-06-06-md",
       "path": "_history/2026/2026-06-06.md",
       "category": "daily-history",
@@ -72,27 +232,11 @@
       "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 23594,
-      "updatedAt": "2026-06-06T15:00:01.473Z",
+      "sourceBytes": 23597,
+      "updatedAt": "2026-06-06T15:05:12.467Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/2026"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-subagent-live-execution-input-json",
-      "path": "_history/evaluations/2026/2026-06-06-subagent-live-execution-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Subagent Live Execution Input",
-      "excerpt": "{ \"initial instruction\": \"아까 미룬 다음 단계 구현\", \"result summary\": \"Added a Desktop Runtime path that validates a saved subagent tool plan and starts one selected tool as an existing CLI adapter session with task run linkage.\", \"work mode\": \"standard\", \"changed files\": \"platform deskto",
-      "html": "<p>{ &quot;initial instruction&quot;: &quot;아까 미룬 다음 단계 구현&quot;, &quot;result summary&quot;: &quot;Added a Desktop Runtime path that validates a saved subagent tool plan and starts one selected tool as an existing CLI adapter session with task run linkage.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/src tauri/src/lib.rs&quot;, &quot;platform desktop app/src tauri/src/features/agent </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 4656,
-      "updatedAt": "2026-06-06T15:00:01.473Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-subagent-live-execution-ko-md",
@@ -104,8 +248,24 @@
       "html": "<p>최종 평가: Subagent Live Execution 날짜: 2026 06 06 평가 이전 slice에서 남긴 “실제 autonomous subagent worker execution은 별도 slice” 경계를 닫기 위해, 저장된 subagent tool plan에서 선택한 tool 하나를 검증하고 기존 CLI adapter session으로 시작하는 기능을 구현했다. 충족 start subagent tool execution Tauri command가 추가됐다. plan task run record에서 tool name을 검증한다. 실행은 기존 create cli session 과 task run persistence를 재사용한다. </p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 1055,
-      "updatedAt": "2026-06-06T15:00:01.473Z",
+      "sourceBytes": 1390,
+      "updatedAt": "2026-06-06T15:05:12.467Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-subagent-live-execution-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-subagent-live-execution-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Subagent Live Execution Input",
+      "excerpt": "{ \"initial instruction\": \"아까 미룬 다음 단계 구현\", \"result summary\": \"Added a Desktop Runtime path that validates a saved subagent tool plan and starts one selected tool as an existing CLI adapter session with task run linkage.\", \"work mode\": \"standard\", \"changed files\": \"platform deskto",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;아까 미룬 다음 단계 구현&quot;, &quot;result summary&quot;: &quot;Added a Desktop Runtime path that validates a saved subagent tool plan and starts one selected tool as an existing CLI adapter session with task run linkage.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/src tauri/src/lib.rs&quot;, &quot;platform desktop app/src tauri/src/features/agent </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4491,
+      "updatedAt": "2026-06-06T15:04:56.863Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
@@ -44912,6 +45072,46 @@
     }
   ],
   "historyDays": [
+    {
+      "date": "2026-06-07",
+      "year": "2026",
+      "documentsCount": 10,
+      "categories": [
+        {
+          "category": "evaluation",
+          "count": 3
+        },
+        {
+          "category": "daily-history",
+          "count": 1
+        },
+        {
+          "category": "plan",
+          "count": 1
+        },
+        {
+          "category": "request-trace",
+          "count": 1
+        },
+        {
+          "category": "user-request",
+          "count": 1
+        },
+        {
+          "category": "web-search",
+          "count": 1
+        },
+        {
+          "category": "work-summary",
+          "count": 1
+        },
+        {
+          "category": "work-timing",
+          "count": 1
+        }
+      ],
+      "documents": []
+    },
     {
       "date": "2026-06-06",
       "year": "2026",

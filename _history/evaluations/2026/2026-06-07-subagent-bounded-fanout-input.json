@@ -1,0 +1,96 @@
+{
+  "initial_instruction": "미룬거 계속 구현",
+  "result_summary": "Added a bounded subagent fan-out command and Desktop Runtime UI that starts the first two saved subagent plan tools as existing CLI adapter sessions behind a manual merge gate.",
+  "work_mode": "standard",
+  "changed_files": [
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "platform-desktop-app/src-tauri/src/features/agent_factory.rs",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "verification": [
+    "cargo fmt --manifest-path platform-desktop-app/src-tauri/Cargo.toml",
+    "cargo check --manifest-path platform-desktop-app/src-tauri/Cargo.toml",
+    "cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml subagent_cli_fanout_prompt_keeps_merge_gate_boundaries",
+    "cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml subagent_fanout_tool_selection_rejects_unknown_tools",
+    "cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml runtime_feature_map_groups_commands_by_native_capability",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort",
+    "corepack pnpm -w run desktop:renderer:build",
+    "corepack pnpm --dir platform-desktop-app run check",
+    "Browser smoke on Desktop Runtime",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-07-subagent-bounded-fanout-cli-pipeline.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/resource-checks/2026/2026-06-07-subagent-bounded-fanout.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/omission-checks/2026/2026-06-07-subagent-bounded-fanout.json"
+  ],
+  "references_checked": [
+    "https://openai.github.io/openai-agents-js/guides/handoffs/",
+    "https://code.claude.com/docs/en/sub-agents",
+    "https://code.claude.com/docs/en/agents",
+    "https://code.visualstudio.com/docs/copilot/agents/subagents",
+    "https://v2.tauri.app/plugin/shell/",
+    "https://doc.rust-lang.org/std/process/struct.Command.html"
+  ],
+  "grounding_checks": [
+    "_history/web-searches/2026/2026-06-07-subagent-bounded-fanout.ko.md"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-07-subagent-bounded-fanout.ko.md",
+    "platform-desktop-app/specs/2026-06-07-subagent-bounded-fanout/spec.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "platform-desktop-app/specs/2026-06-07-subagent-bounded-fanout/plan.ko.md",
+    "_history/plans/2026/2026-06-07-subagent-bounded-fanout.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-07-subagent-bounded-fanout.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-07-subagent-bounded-fanout.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-07-subagent-bounded-fanout.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-07-subagent-bounded-fanout.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-07-subagent-bounded-fanout.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-07-subagent-bounded-fanout/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-07-subagent-bounded-fanout/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-07-subagent-bounded-fanout/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-07-subagent-bounded-fanout/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-07-subagent-bounded-fanout/traceability.ko.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-07-subagent-bounded-fanout.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-07-subagent-bounded-fanout.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-07-subagent-bounded-fanout.ko.md"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-07-subagent-bounded-fanout.json"
+  ],
+  "cli_pipeline_occurred": true,
+  "cli_pipeline_targets": [
+    "_history/evaluations/2026/2026-06-07-subagent-bounded-fanout-cli-pipeline.json"
+  ],
+  "known_gaps": [],
+  "deferred_improvement_targets": [
+    "platform-desktop-app/specs/2026-06-07-subagent-bounded-fanout/validation.ko.md"
+  ],
+  "improvement_ideas": [
+    "Add packaged desktop smoke for live start_subagent_tool_fanout.",
+    "Add explicit tool selection controls before allowing more than the first two planned tools.",
+    "Add manual merge review UI that compares completed lane summaries side by side."
+  ]
+}

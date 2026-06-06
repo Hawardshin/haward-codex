@@ -8496,7 +8496,7 @@ h3 {
 .terminal-agent-bridge-actions {
   min-width: 0;
   display: grid;
-  grid-template-rows: repeat(5, minmax(var(--control-target-size), auto));
+  grid-template-rows: repeat(6, minmax(var(--control-target-size), auto));
   gap: 8px;
 }
 
@@ -8570,6 +8570,11 @@ h3 {
 .terminal-agent-plan-result.execution {
   border-color: var(--status-info-border);
   background: var(--status-info-bg);
+}
+
+.terminal-agent-plan-result.fanout {
+  border-color: var(--status-warning-border);
+  background: color-mix(in srgb, var(--status-warning-bg) 74%, var(--surface-muted));
 }
 
 .terminal-agent-plan-result strong,

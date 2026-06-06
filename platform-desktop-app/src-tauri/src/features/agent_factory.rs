@@ -28,6 +28,11 @@ pub(super) fn group() -> NativeRuntimeFeatureGroupReport {
                 "Start one subagent tool lane",
                 "Validates a saved subagent plan and starts one cancellable CLI session lane",
             ),
+            command(
+                "start_subagent_tool_fanout",
+                "Start bounded subagent tool fan-out",
+                "Starts up to three saved subagent plan tools as cancellable CLI session lanes with a manual merge gate",
+            ),
         ],
         follow_up: vec![
             "Move proposal normalization into features/agent_factory/.",
