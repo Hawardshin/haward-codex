@@ -1,0 +1,90 @@
+{
+  "initial_instruction": "사이드바 UI 문제 해결 옆에 이상한 스크롤 안 생기게 크기 조절",
+  "result_summary": "Fixed the workspace monitor activity rail so the sidebar nav no longer creates phantom horizontal scrollbar space; constrained rail button width and verified default plus short viewport behavior.",
+  "work_mode": "standard",
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+    "platform-desktop-app/docs/requirements/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+    "platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/traceability.ko.md"
+  ],
+  "verification": [
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check: passed",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test: passed, 90 tests",
+    "Browser smoke: default 1280x720 navClientWidth=59 navScrollWidth=59",
+    "Browser smoke: short 1280x520 navClientWidth=48 navScrollWidth=48, vertical overflow only",
+    "Browser/dev-server cleanup: tab closed and no listener on TCP 3231",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort: passed",
+    "corepack pnpm -w run desktop:renderer:build: passed",
+    "corepack pnpm --dir platform-desktop-app run check: passed with existing public release warnings"
+  ],
+  "references_checked": [
+    "MDN CSS overflow: https://developer.mozilla.org/en-US/docs/Web/CSS/overflow",
+    "MDN scrollbar-gutter: https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-gutter",
+    "web.dev overflow: https://web.dev/learn/css/overflow",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "grounding_checks": [
+    "_history/web-searches/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md records the official CSS overflow references used for the fix."
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+    "_history/coding-research/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+    "platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-07-sidebar-rail-scrollbar-fix.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-07-sidebar-rail-scrollbar-fix.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-07-sidebar-rail-scrollbar-fix.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-07-sidebar-rail-scrollbar-fix.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-07-sidebar-rail-scrollbar-fix.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "A future broader responsive IA pass could collapse lower-priority rail items into a menu on very short screens."
+  ]
+}

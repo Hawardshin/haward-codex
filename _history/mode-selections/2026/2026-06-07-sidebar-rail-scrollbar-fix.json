@@ -1,0 +1,26 @@
+{
+  "task": "Sidebar Rail Scrollbar Fix",
+  "selected_work_mode": "standard",
+  "selected_view_mode": "superadmin_developer",
+  "selected_install_mode": "developer",
+  "reasons": [
+    "The task changes a user-facing desktop renderer navigation surface.",
+    "The task uses a local dev server and Browser smoke, so resource cleanup must be recorded.",
+    "No new dependency, native permission, or CLI adapter is required."
+  ],
+  "required_records": [
+    "web_search",
+    "coding_research",
+    "requirements",
+    "spec",
+    "plan",
+    "tasks",
+    "validation",
+    "traceability",
+    "resource_check",
+    "omission_check",
+    "evaluation",
+    "request_trace",
+    "work_summary"
+  ]
+}

@@ -1760,7 +1760,10 @@ test("Activity rail exposes readable destination labels in the desktop shell", (
   assert.match(css, /\.desktop-app-shell \{[\s\S]*?grid-template-columns: 76px minmax\(0, 1fr\);/);
   assert.match(css, /\.desktop-app-shell \{[\s\S]*?min-width: var\(--desktop-app-min-width\);/);
   assert.match(css, /@media \(max-width: 960px\) \{[\s\S]*?main,\s*\n\s*\.desktop-app-root,\s*\n\s*\.desktop-app-shell \{[\s\S]*?min-width: 0;/);
+  assert.match(css, /\.activity-rail nav \{[\s\S]*?width: 100%;[\s\S]*?overflow-x: hidden;[\s\S]*?overflow-y: auto;[\s\S]*?scrollbar-gutter: auto;/);
   assert.match(css, /\.activity-rail nav button \{[\s\S]*?display: grid;[\s\S]*?grid-template-rows: auto auto;[\s\S]*?min-height: 56px;/);
+  assert.match(css, /\.activity-rail nav button \{[\s\S]*?box-sizing: border-box;[\s\S]*?width: min\(100%, 58px\);/);
+  assert.match(css, /\.desktop-app-shell\.sidebar-expanded \.activity-rail nav button \{[\s\S]*?width: 100%;/);
   assert.match(css, /\.activity-rail nav button span \{[\s\S]*?position: static;[\s\S]*?text-overflow: ellipsis;[\s\S]*?white-space: nowrap;/);
   assert.doesNotMatch(css, /@media \(pointer: coarse\)/);
   assert.doesNotMatch(css, /@media \(max-width: 720px\)/);

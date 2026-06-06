@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-06T17:25:11.232Z",
+  "generatedAt": "2026-06-06T17:36:05.344Z",
   "summary": {
-    "documents": 2862,
+    "documents": 2870,
     "days": 8,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1076
+        "count": 1078
       },
       {
         "category": "web-search",
-        "count": 446
+        "count": 447
       },
       {
         "category": "request-trace",
-        "count": 375
+        "count": 376
       },
       {
         "category": "plan",
-        "count": 374
+        "count": 375
       },
       {
         "category": "work-timing",
-        "count": 294
+        "count": 295
       },
       {
         "category": "user-request",
-        "count": 160
+        "count": 161
       },
       {
         "category": "work-summary",
-        "count": 127
+        "count": 128
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6862951,
+    "totalSourceBytes": 6873657,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,134 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-07-sidebar-rail-scrollbar-fix-evaluator-input-json",
+      "path": "_history/evaluations/2026/2026-06-07-sidebar-rail-scrollbar-fix-evaluator-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 07 Sidebar Rail Scrollbar Fix Evaluator Input",
+      "excerpt": "{ \"initial instruction\": \"사이드바 UI 문제 해결 옆에 이상한 스크롤 안 생기게 크기 조절\", \"result summary\": \"Fixed the workspace monitor activity rail so the sidebar nav no longer creates phantom horizontal scrollbar space; constrained rail button width and verified default plus short viewport behavior.\"",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;사이드바 UI 문제 해결 옆에 이상한 스크롤 안 생기게 크기 조절&quot;, &quot;result summary&quot;: &quot;Fixed the workspace monitor activity rail so the sidebar nav no longer creates phantom horizontal scrollbar space; constrained rail button width and verified default plus short viewport behavior.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/renderer/works</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4633,
+      "updatedAt": "2026-06-06T17:35:44.294Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+      "path": "_history/evaluations/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Sidebar Rail Scrollbar Fix",
+      "excerpt": "Evaluation: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 평가 사용자의 사이드바 옆 이상한 스크롤 문제는 activity rail nav의 안정 scrollbar gutter와 고정 button width가 좁은 rail에서 만드는 phantom horizontal overflow로 판단했다. React 구조를 바꾸지 않고 CSS contract를 조정해 해결했다. 결과 .activity rail nav 의 가로 overflow를 숨기고 세로 overflow",
+      "html": "<p>Evaluation: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 평가 사용자의 사이드바 옆 이상한 스크롤 문제는 activity rail nav의 안정 scrollbar gutter와 고정 button width가 좁은 rail에서 만드는 phantom horizontal overflow로 판단했다. React 구조를 바꾸지 않고 CSS contract를 조정해 해결했다. 결과 .activity rail nav 의 가로 overflow를 숨기고 세로 overflow만 허용했다. rail nav의 scrollbar gutter 를 auto 로 되돌려 기본 상태의 불필요한 gutter를 없앴다. collaps</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1411,
+      "updatedAt": "2026-06-06T17:35:44.293Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+      "path": "_history/request-traces/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Sidebar Rail Scrollbar Fix",
+      "excerpt": "Request Trace: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요청 \"사이드바 UI 문제 해결 옆에 이상한 스크롤 안 생기게 크기 조절\" 산출물 CSS 수정: platform desktop app/renderer/workspace monitor/app/globals.css 테스트 수정: platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs 요구사항/스펙/검증 기록: platfor",
+      "html": "<p>Request Trace: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요청 &quot;사이드바 UI 문제 해결 옆에 이상한 스크롤 안 생기게 크기 조절&quot; 산출물 CSS 수정: platform desktop app/renderer/workspace monitor/app/globals.css 테스트 수정: platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs 요구사항/스펙/검증 기록: platform desktop app/docs/requirements/2026 06 07 sidebar rail scrollbar fix.ko.md , pl</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 731,
+      "updatedAt": "2026-06-06T17:35:44.293Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Sidebar Rail Scrollbar Fix",
+      "excerpt": "Work Summary: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요약 좌측 사이드바 레일 옆에 생기던 이상한 스크롤 조건을 제거했다. nav 영역은 가로 스크롤을 만들지 않고, 화면 높이가 부족할 때만 세로로 스크롤한다. 구현 globals.css 에서 activity rail nav overflow 축과 scrollbar gutter를 조정했다. collapsed/expanded rail button width contract를 정리했다. tool studio",
+      "html": "<p>Work Summary: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요약 좌측 사이드바 레일 옆에 생기던 이상한 스크롤 조건을 제거했다. nav 영역은 가로 스크롤을 만들지 않고, 화면 높이가 부족할 때만 세로로 스크롤한다. 구현 globals.css 에서 activity rail nav overflow 축과 scrollbar gutter를 조정했다. collapsed/expanded rail button width contract를 정리했다. tool studio.test.mjs 에 재발 방지 assertion을 추가했다. 검증 상태 renderer check 통과. renderer test 90개 통과</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 829,
+      "updatedAt": "2026-06-06T17:35:44.293Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-07-sidebar-rail-scrollbar-fix-json",
+      "path": "_history/work-timings/2026/2026-06-07-sidebar-rail-scrollbar-fix.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 07 Sidebar Rail Scrollbar Fix",
+      "excerpt": "{ \"task id\": \"2026 06 07 sidebar rail scrollbar fix\", \"title\": \"Sidebar rail scrollbar fix\", \"date\": \"2026 06 07\", \"timezone\": \"Asia/Seoul\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 07 sidebar rail scrollbar fix&quot;, &quot;title&quot;: &quot;Sidebar rail scrollbar fix&quot;, &quot;date&quot;: &quot;2026 06 07&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;bottleneck notes&quot;: &quot;CSS overflow</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1293,
+      "updatedAt": "2026-06-06T17:35:44.293Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-plans-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+      "path": "_history/plans/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Plan Record: Sidebar Rail Scrollbar Fix",
+      "excerpt": "Plan Record: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 실행 계획 web first 참고 확인. Browser로 현재 레일 overflow 측정. CSS only로 nav overflow 축, gutter, button width contract 수정. 구조 테스트와 Browser smoke로 재발 방지. build/platform/evaluator gate 통과 후 commit/push.",
+      "html": "<p>Plan Record: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 실행 계획 web first 참고 확인. Browser로 현재 레일 overflow 측정. CSS only로 nav overflow 축, gutter, button width contract 수정. 구조 테스트와 Browser smoke로 재발 방지. build/platform/evaluator gate 통과 후 commit/push.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 332,
+      "updatedAt": "2026-06-06T17:34:42.067Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+      "path": "_history/user-requests/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: Sidebar Rail Scrollbar Fix",
+      "excerpt": "User Request: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요약 사용자는 사이드바 옆에 이상한 스크롤이 생기지 않도록 UI 크기와 overflow 처리를 조정해 달라고 요청했다. 처리 방향 좌측 activity rail nav의 scrollbar gutter와 button width가 만드는 phantom horizontal overflow를 제거한다.",
+      "html": "<p>User Request: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요약 사용자는 사이드바 옆에 이상한 스크롤이 생기지 않도록 UI 크기와 overflow 처리를 조정해 달라고 요청했다. 처리 방향 좌측 activity rail nav의 scrollbar gutter와 button width가 만드는 phantom horizontal overflow를 제거한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 355,
+      "updatedAt": "2026-06-06T17:34:42.066Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+      "path": "_history/web-searches/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Sidebar Rail Scrollbar Fix",
+      "excerpt": "Web Search: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 검색 MDN CSS overflow scrollbar layout min width flex grid sidebar official web.dev avoid horizontal overflow CSS grid flexbox minmax 0 sidebar W3C CSS overflow module scrollbar overflow official 확인한 출처 MDN CSS overflow: https:/",
+      "html": "<p>Web Search: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 검색 MDN CSS overflow scrollbar layout min width flex grid sidebar official web.dev avoid horizontal overflow CSS grid flexbox minmax 0 sidebar W3C CSS overflow module scrollbar overflow official 확인한 출처 MDN CSS overflow: https://developer.mozilla.org/en US/docs/Web/CSS/overflow MDN scrollbar gutter: https:/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1122,
+      "updatedAt": "2026-06-06T17:34:42.066Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
       "path": "_history/evaluations/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
@@ -45859,35 +45987,35 @@
     {
       "date": "2026-06-07",
       "year": "2026",
-      "documentsCount": 59,
+      "documentsCount": 67,
       "categories": [
         {
           "category": "evaluation",
-          "count": 16
+          "count": 18
         },
         {
           "category": "plan",
-          "count": 7
+          "count": 8
         },
         {
           "category": "request-trace",
-          "count": 7
+          "count": 8
         },
         {
           "category": "user-request",
-          "count": 7
+          "count": 8
         },
         {
           "category": "web-search",
-          "count": 7
+          "count": 8
         },
         {
           "category": "work-summary",
-          "count": 7
+          "count": 8
         },
         {
           "category": "work-timing",
-          "count": 7
+          "count": 8
         },
         {
           "category": "daily-history",

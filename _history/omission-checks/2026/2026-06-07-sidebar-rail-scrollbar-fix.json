@@ -1,0 +1,102 @@
+{
+  "task": "Sidebar Rail Scrollbar Fix",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "rail-no-horizontal-scroll",
+      "description": "Activity rail nav no longer creates horizontal scroll from button width.",
+      "source": "user request: sidebar weird scroll",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "overflow-x: hidden",
+        "width: min(100%, 58px)",
+        "Browser navScrollWidth <= navClientWidth"
+      ]
+    },
+    {
+      "item_id": "short-height-vertical-only",
+      "description": "Short viewport allows only vertical nav overflow.",
+      "source": "requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "overflow-y: auto",
+        "short viewport Browser smoke"
+      ]
+    },
+    {
+      "item_id": "expanded-mode-width",
+      "description": "Expanded rail nav buttons stay within expanded container width.",
+      "source": "requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        ".desktop-app-shell.sidebar-expanded .activity-rail nav button { width: 100%; }",
+        "tool-studio.test.mjs CSS contract"
+      ]
+    },
+    {
+      "item_id": "test-contract",
+      "description": "Static tests protect rail overflow behavior.",
+      "source": "requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "Activity rail test checks overflow-x hidden, overflow-y auto, scrollbar-gutter auto, button width contract"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+      "purpose": "Requirement record",
+      "required": true,
+      "status": "present"
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/spec.ko.md",
+      "purpose": "Spec record",
+      "required": true,
+      "status": "present"
+    },
+    {
+      "path": "_history/web-searches/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+      "purpose": "Web-first search record",
+      "required": true,
+      "status": "present"
+    },
+    {
+      "path": "_history/resource-checks/2026/2026-06-07-sidebar-rail-scrollbar-fix.json",
+      "purpose": "Resource lifecycle record",
+      "required": true,
+      "status": "present"
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "renderer-static-contracts",
+      "description": "Renderer static checks and tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor run check passed",
+        "workspace-monitor test passed: 90 tests"
+      ]
+    },
+    {
+      "check_id": "browser-smoke",
+      "description": "Browser smoke verifies default and short viewport rail overflow.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "1280x720 navClientWidth=59 navScrollWidth=59",
+        "1280x520 navClientWidth=48 navScrollWidth=48"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "This slice does not redesign all side navigation IA.",
+    "Packaged OS scrollbar rendering is validated by Browser smoke and CSS contract, not by a packaged Tauri binary E2E."
+  ]
+}

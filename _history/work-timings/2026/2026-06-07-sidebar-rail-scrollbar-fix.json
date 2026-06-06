@@ -1,0 +1,39 @@
+{
+  "task_id": "2026-06-07-sidebar-rail-scrollbar-fix",
+  "title": "Sidebar rail scrollbar fix",
+  "date": "2026-06-07",
+  "timezone": "Asia/Seoul",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "CSS overflow and scrollbar-gutter references checked before implementation."
+    },
+    {
+      "phase_id": "local_reproduction",
+      "label": "Local reproduction",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Browser smoke measured rail nav clientWidth and scrollWidth before and after the CSS change."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "CSS and tests updated."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Renderer check/test, Browser smoke, build, platform check, and evaluator passed."
+    }
+  ],
+  "bottleneck_notes": "Exact wall-clock phase durations were not measured."
+}

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T17:25:11.228Z",
+  "generatedAt": "2026-06-06T17:36:05.341Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 5,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 528,
-    "evaluations": 25,
-    "webSearches": 12,
+    "evaluations": 26,
+    "webSearches": 11,
     "timingRecords": 11,
     "historyDays": 2,
-    "adminHistoryDocuments": 2862,
+    "adminHistoryDocuments": 2870,
     "adminHistoryDays": 8,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7861,6 +7861,230 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-07-sidebar-rail-scrollbar-fix-evaluator-input-json",
+      "path": "_history/evaluations/2026/2026-06-07-sidebar-rail-scrollbar-fix-evaluator-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 07 Sidebar Rail Scrollbar Fix Evaluator Input",
+      "excerpt": "{ \"initial instruction\": \"사이드바 UI 문제 해결 옆에 이상한 스크롤 안 생기게 크기 조절\", \"result summary\": \"Fixed the workspace monitor activity rail so the sidebar nav no longer creates phantom horizontal scrollbar space; constrained rail button width and verified default plus short viewport behavior.\"",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;사이드바 UI 문제 해결 옆에 이상한 스크롤 안 생기게 크기 조절&quot;, &quot;result summary&quot;: &quot;Fixed the workspace monitor activity rail so the sidebar nav no longer creates phantom horizontal scrollbar space; constrained rail button width and verified default plus short viewport behavior.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/renderer/works</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4633,
+      "updatedAt": "2026-06-06T17:35:44.294Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+      "path": "_history/evaluations/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Sidebar Rail Scrollbar Fix",
+      "excerpt": "Evaluation: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 평가 사용자의 사이드바 옆 이상한 스크롤 문제는 activity rail nav의 안정 scrollbar gutter와 고정 button width가 좁은 rail에서 만드는 phantom horizontal overflow로 판단했다. React 구조를 바꾸지 않고 CSS contract를 조정해 해결했다. 결과 .activity rail nav 의 가로 overflow를 숨기고 세로 overflow",
+      "html": "<p>Evaluation: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 평가 사용자의 사이드바 옆 이상한 스크롤 문제는 activity rail nav의 안정 scrollbar gutter와 고정 button width가 좁은 rail에서 만드는 phantom horizontal overflow로 판단했다. React 구조를 바꾸지 않고 CSS contract를 조정해 해결했다. 결과 .activity rail nav 의 가로 overflow를 숨기고 세로 overflow만 허용했다. rail nav의 scrollbar gutter 를 auto 로 되돌려 기본 상태의 불필요한 gutter를 없앴다. collaps</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1411,
+      "updatedAt": "2026-06-06T17:35:44.293Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+      "path": "_history/request-traces/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Sidebar Rail Scrollbar Fix",
+      "excerpt": "Request Trace: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요청 \"사이드바 UI 문제 해결 옆에 이상한 스크롤 안 생기게 크기 조절\" 산출물 CSS 수정: platform desktop app/renderer/workspace monitor/app/globals.css 테스트 수정: platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs 요구사항/스펙/검증 기록: platfor",
+      "html": "<p>Request Trace: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요청 &quot;사이드바 UI 문제 해결 옆에 이상한 스크롤 안 생기게 크기 조절&quot; 산출물 CSS 수정: platform desktop app/renderer/workspace monitor/app/globals.css 테스트 수정: platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs 요구사항/스펙/검증 기록: platform desktop app/docs/requirements/2026 06 07 sidebar rail scrollbar fix.ko.md , pl</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 731,
+      "updatedAt": "2026-06-06T17:35:44.293Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Sidebar Rail Scrollbar Fix",
+      "excerpt": "Work Summary: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요약 좌측 사이드바 레일 옆에 생기던 이상한 스크롤 조건을 제거했다. nav 영역은 가로 스크롤을 만들지 않고, 화면 높이가 부족할 때만 세로로 스크롤한다. 구현 globals.css 에서 activity rail nav overflow 축과 scrollbar gutter를 조정했다. collapsed/expanded rail button width contract를 정리했다. tool studio",
+      "html": "<p>Work Summary: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요약 좌측 사이드바 레일 옆에 생기던 이상한 스크롤 조건을 제거했다. nav 영역은 가로 스크롤을 만들지 않고, 화면 높이가 부족할 때만 세로로 스크롤한다. 구현 globals.css 에서 activity rail nav overflow 축과 scrollbar gutter를 조정했다. collapsed/expanded rail button width contract를 정리했다. tool studio.test.mjs 에 재발 방지 assertion을 추가했다. 검증 상태 renderer check 통과. renderer test 90개 통과</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 829,
+      "updatedAt": "2026-06-06T17:35:44.293Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-07-sidebar-rail-scrollbar-fix-json",
+      "path": "_history/work-timings/2026/2026-06-07-sidebar-rail-scrollbar-fix.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 07 Sidebar Rail Scrollbar Fix",
+      "excerpt": "{ \"task id\": \"2026 06 07 sidebar rail scrollbar fix\", \"title\": \"Sidebar rail scrollbar fix\", \"date\": \"2026 06 07\", \"timezone\": \"Asia/Seoul\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 07 sidebar rail scrollbar fix&quot;, &quot;title&quot;: &quot;Sidebar rail scrollbar fix&quot;, &quot;date&quot;: &quot;2026 06 07&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;bottleneck notes&quot;: &quot;CSS overflow</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1293,
+      "updatedAt": "2026-06-06T17:35:44.293Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-sidebar-rail-scrollbar-fix-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Sidebar Rail Scrollbar Fix",
+      "excerpt": "Tasks: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 작업 목록 x web first 참고 확인. x activity rail overflow 원인 측정. x nav overflow/gutter/button width CSS 수정. x CSS contract 테스트 추가. x Browser 기본 viewport smoke 확인. x Browser 짧은 viewport smoke 확인. x dev server cleanup 확인. x collect/build/pla",
+      "html": "<h1>Tasks: Sidebar Rail Scrollbar Fix</h1>\n<p>날짜: 2026-06-07</p>\n<h2>작업 목록</h2>\n<ul>\n<li>[x] web-first 참고 확인.</li>\n<li>[x] activity rail overflow 원인 측정.</li>\n<li>[x] nav overflow/gutter/button width CSS 수정.</li>\n<li>[x] CSS contract 테스트 추가.</li>\n<li>[x] Browser 기본 viewport smoke 확인.</li>\n<li>[x] Browser 짧은 viewport smoke 확인.</li>\n<li>[x] dev server cleanup 확인.</li>\n<li>[x] collect/build/platform check 완료.</li>\n<li>[x] omission/resource/evaluation 기록 완료.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 452,
+      "updatedAt": "2026-06-06T17:35:44.292Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-sidebar-rail-scrollbar-fix-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Sidebar Rail Scrollbar Fix",
+      "excerpt": "Traceability: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요청 연결 사용자 요청: \"사이드바 UI 문제 해결 옆에 이상한 스크롤 안 생기게 크기 조절\" 선택한 slice: activity rail nav phantom scrollbar 제거 요구사항 연결 요구사항: platform desktop app/docs/requirements/2026 06 07 sidebar rail scrollbar fix.ko.md 스펙: platform desktop app",
+      "html": "<h1>Traceability: Sidebar Rail Scrollbar Fix</h1>\n<p>날짜: 2026-06-07</p>\n<h2>요청 연결</h2>\n<ul>\n<li>사용자 요청: &quot;사이드바 UI 문제 해결 옆에 이상한 스크롤 안 생기게 크기 조절&quot;</li>\n<li>선택한 slice: activity rail nav phantom scrollbar 제거</li>\n</ul>\n<h2>요구사항 연결</h2>\n<ul>\n<li>요구사항: <code>platform-desktop-app/docs/requirements/2026-06-07-sidebar-rail-scrollbar-fix.ko.md</code></li>\n<li>스펙: <code>platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/spec.ko.md</code></li>\n<li>계획: <code>platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/plan.ko.md</code></li>\n<li>작업: <code>platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/tasks.ko.md</code></li>\n<li>검증: <code>platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/validation.ko.md</code></li>\n</ul>\n<h2>구현 연결</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n</ul>\n<h2>검증 연결</h2>\n<ul>\n<li>renderer check/test 통과.</li>\n<li>Browser smoke 통과.</li>\n<li>collect/build/platform/evaluation 기록 완료.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1026,
+      "updatedAt": "2026-06-06T17:35:44.292Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-sidebar-rail-scrollbar-fix-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Sidebar Rail Scrollbar Fix",
+      "excerpt": "Validation: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 실행 결과 통과: corepack pnpm dir platform desktop app/renderer/workspace monitor run check . 통과: corepack pnpm dir platform desktop app/renderer/workspace monitor test 90 tests . 통과: corepack pnpm dir platform desktop app/renderer/",
+      "html": "<h1>Validation: Sidebar Rail Scrollbar Fix</h1>\n<p>날짜: 2026-06-07</p>\n<h2>실행 결과</h2>\n<ul>\n<li>통과: <code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>.</li>\n<li>통과: <code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code> (<code>90</code> tests).</li>\n<li>통과: <code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code>.</li>\n<li>통과: <code>corepack pnpm -w run desktop:renderer:build</code>.</li>\n<li>통과: <code>corepack pnpm --dir platform-desktop-app run check</code>. 기존 public release signing/notarization/updater/clean-machine smoke gate는 public 배포 gate로 남았다.</li>\n</ul>\n<h2>Browser Smoke</h2>\n<ul>\n<li>기본 1280x720: 수정 전 <code>navClientWidth=48</code>, <code>navScrollWidth=58</code>, 수정 후 <code>navClientWidth=59</code>, <code>navScrollWidth=59</code>.</li>\n<li>짧은 1280x520: <code>navClientWidth=48</code>, <code>navScrollWidth=48</code>, <code>navScrollHeight=376</code>, <code>navClientHeight=328</code>.</li>\n<li>기본/짧은 viewport 모두 문서 전체 가로 scrollWidth가 viewport width를 넘지 않았다.</li>\n<li>브라우저 탭을 닫고 dev server 포트 <code>3231</code> no-listener를 확인했다.</li>\n</ul>\n<h2>남은 위험</h2>\n<ul>\n<li>매우 작은 모바일 폭에서의 전체 정보구조 재배치는 이번 slice 범위 밖이다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1173,
+      "updatedAt": "2026-06-06T17:35:44.292Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-plans-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+      "path": "_history/plans/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Plan Record: Sidebar Rail Scrollbar Fix",
+      "excerpt": "Plan Record: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 실행 계획 web first 참고 확인. Browser로 현재 레일 overflow 측정. CSS only로 nav overflow 축, gutter, button width contract 수정. 구조 테스트와 Browser smoke로 재발 방지. build/platform/evaluator gate 통과 후 commit/push.",
+      "html": "<p>Plan Record: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 실행 계획 web first 참고 확인. Browser로 현재 레일 overflow 측정. CSS only로 nav overflow 축, gutter, button width contract 수정. 구조 테스트와 Browser smoke로 재발 방지. build/platform/evaluator gate 통과 후 commit/push.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 332,
+      "updatedAt": "2026-06-06T17:34:42.067Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+      "path": "_history/user-requests/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: Sidebar Rail Scrollbar Fix",
+      "excerpt": "User Request: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요약 사용자는 사이드바 옆에 이상한 스크롤이 생기지 않도록 UI 크기와 overflow 처리를 조정해 달라고 요청했다. 처리 방향 좌측 activity rail nav의 scrollbar gutter와 button width가 만드는 phantom horizontal overflow를 제거한다.",
+      "html": "<p>User Request: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요약 사용자는 사이드바 옆에 이상한 스크롤이 생기지 않도록 UI 크기와 overflow 처리를 조정해 달라고 요청했다. 처리 방향 좌측 activity rail nav의 scrollbar gutter와 button width가 만드는 phantom horizontal overflow를 제거한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 355,
+      "updatedAt": "2026-06-06T17:34:42.066Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+      "path": "_history/web-searches/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Sidebar Rail Scrollbar Fix",
+      "excerpt": "Web Search: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 검색 MDN CSS overflow scrollbar layout min width flex grid sidebar official web.dev avoid horizontal overflow CSS grid flexbox minmax 0 sidebar W3C CSS overflow module scrollbar overflow official 확인한 출처 MDN CSS overflow: https:/",
+      "html": "<p>Web Search: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 검색 MDN CSS overflow scrollbar layout min width flex grid sidebar official web.dev avoid horizontal overflow CSS grid flexbox minmax 0 sidebar W3C CSS overflow module scrollbar overflow official 확인한 출처 MDN CSS overflow: https://developer.mozilla.org/en US/docs/Web/CSS/overflow MDN scrollbar gutter: https:/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1122,
+      "updatedAt": "2026-06-06T17:34:42.066Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-sidebar-rail-scrollbar-fix-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Sidebar Rail Scrollbar Fix",
+      "excerpt": "Plan: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 계획 1. 공식 CSS overflow 참고 문서 확인. 2. 현재 activity rail DOM 크기와 scrollWidth/clientWidth 측정. 3. nav overflow 축과 gutter, button width contract 수정. 4. 구조 테스트 추가. 5. Browser smoke로 기본/짧은 viewport 검증. 6. renderer check/test/build, platform c",
+      "html": "<h1>Plan: Sidebar Rail Scrollbar Fix</h1>\n<p>날짜: 2026-06-07</p>\n<h2>계획</h2>\n<p>1. 공식 CSS overflow 참고 문서 확인.</p>\n<p>2. 현재 activity rail DOM 크기와 scrollWidth/clientWidth 측정.</p>\n<p>3. nav overflow 축과 gutter, button width contract 수정.</p>\n<p>4. 구조 테스트 추가.</p>\n<p>5. Browser smoke로 기본/짧은 viewport 검증.</p>\n<p>6. renderer check/test/build, platform check, 누락/리소스/evaluation 검증.</p>\n<p>7. 커밋 후 <code>origin/main</code> 푸시.</p>\n<h2>선택</h2>\n<ul>\n<li>CSS-only 수정이 가장 작고 안전하다.</li>\n<li>React 상태나 섹션 구조는 변경하지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 560,
+      "updatedAt": "2026-06-06T17:34:42.065Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-sidebar-rail-scrollbar-fix-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-sidebar-rail-scrollbar-fix/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Sidebar Rail Scrollbar Fix",
+      "excerpt": "Spec: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 문제 기본 1280x720 viewport에서 .activity rail nav 가 scrollbar gutter: stable 을 상속받아 nav clientWidth 가 48px로 줄고, 58px nav button이 가용 폭을 넘어 가로 스크롤 조건이 생겼다. 설계 .activity rail nav 는 width: 100% , min width: 0 , overflow x: hidden , overflow ",
+      "html": "<h1>Spec: Sidebar Rail Scrollbar Fix</h1>\n<p>날짜: 2026-06-07</p>\n<h2>문제</h2>\n<p>기본 1280x720 viewport에서 <code>.activity-rail nav</code>가 <code>scrollbar-gutter: stable</code>을 상속받아 nav <code>clientWidth</code>가 48px로 줄고, 58px nav button이 가용 폭을 넘어 가로 스크롤 조건이 생겼다.</p>\n<h2>설계</h2>\n<ul>\n<li><code>.activity-rail nav</code>는 <code>width: 100%</code>, <code>min-width: 0</code>, <code>overflow-x: hidden</code>, <code>overflow-y: auto</code>, <code>scrollbar-gutter: auto</code>를 가진다.</li>\n<li>collapsed nav button은 <code>box-sizing: border-box</code>와 <code>width: min(100%, 58px)</code>로 컨테이너 폭 안에 들어간다.</li>\n<li>expanded nav button은 <code>width: 100%</code>로 expanded rail 트랙 안에서 라벨 폭을 유지한다.</li>\n<li>테스트는 CSS contract를 고정한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>기본 1280x720에서 <code>navScrollWidth &lt;= navClientWidth</code>.</li>\n<li>짧은 1280x520에서 세로 overflow는 허용하지만 <code>navScrollWidth &lt;= navClientWidth</code>.</li>\n<li><code>documentElement.scrollWidth</code>가 viewport width를 넘지 않는다.</li>\n<li>renderer check/test/build와 platform check가 통과한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1004,
+      "updatedAt": "2026-06-06T17:34:42.065Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Requirements: Sidebar Rail Scrollbar Fix",
+      "excerpt": "Requirements: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요청 사용자가 사이드바 옆에 이상한 스크롤이 생기지 않게 UI 크기를 조절해 달라고 요청했다. 요구사항 좌측 activity rail의 nav 영역은 버튼 폭 때문에 가로 스크롤을 만들지 않아야 한다. 짧은 viewport에서 nav 항목이 실제로 넘칠 때만 세로 스크롤을 허용해야 한다. collapsed rail의 버튼은 nav 가용 폭 안으로 줄어들어야 한다. expanded rail의 버튼은 ",
+      "html": "<h1>Requirements: Sidebar Rail Scrollbar Fix</h1>\n<p>날짜: 2026-06-07</p>\n<h2>요청</h2>\n<p>사용자가 사이드바 옆에 이상한 스크롤이 생기지 않게 UI 크기를 조절해 달라고 요청했다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>좌측 activity rail의 nav 영역은 버튼 폭 때문에 가로 스크롤을 만들지 않아야 한다.</li>\n<li>짧은 viewport에서 nav 항목이 실제로 넘칠 때만 세로 스크롤을 허용해야 한다.</li>\n<li>collapsed rail의 버튼은 nav 가용 폭 안으로 줄어들어야 한다.</li>\n<li>expanded rail의 버튼은 기존 라벨 표시 폭을 유지하면서 컨테이너 폭을 넘지 않아야 한다.</li>\n<li>renderer 테스트와 Browser smoke로 overflow contract를 검증해야 한다.</li>\n</ul>\n<h2>범위</h2>\n<ul>\n<li>포함: workspace monitor activity rail CSS, 관련 구조 테스트, 검증/기록.</li>\n<li>제외: 전체 사이드바 정보구조 재설계, 새 라이브러리 설치, native shell 변경.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 907,
+      "updatedAt": "2026-06-06T17:34:42.064Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
       "path": "_history/evaluations/2026/2026-06-07-titlebar-location-breadcrumb.ko.md",
       "category": "evaluation",
@@ -10245,70 +10469,6 @@
       "workspaceArea": "_history/work-summaries"
     },
     {
-      "id": "history-work-timings-2026-2026-06-06-intuitive-home-flow-ko-md",
-      "path": "_history/work-timings/2026/2026-06-06-intuitive-home-flow.ko.md",
-      "category": "work-timing",
-      "language": "ko",
-      "title": "작업 시간 기록: Intuitive Home Flow",
-      "excerpt": "작업 시간 기록: Intuitive Home Flow 날짜: 2026 06 06 단계: web first intake: 완료 large scope slice 선택: 완료 홈 UI 구현: 완료 테스트와 browser smoke: 완료 build/check: 완료",
-      "html": "<p>작업 시간 기록: Intuitive Home Flow 날짜: 2026 06 06 단계: web first intake: 완료 large scope slice 선택: 완료 홈 UI 구현: 완료 테스트와 browser smoke: 완료 build/check: 완료</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 231,
-      "updatedAt": "2026-06-06T13:48:34.957Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-intuitive-home-flow-ko-md",
-      "path": "_history/plans/2026/2026-06-06-intuitive-home-flow.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "작업 계획: Intuitive Home Flow",
-      "excerpt": "작업 계획: Intuitive Home Flow 범위가 큰 UI/UX 요청을 첫 화면 흐름 개선 slice로 분해했다. 홈 화면은 전체 앱의 진입점이고 기존 task intent와 handoff 구조가 있어 회귀 위험 대비 효과가 크다. 구현은 새 dependency 없이 MonitorShell.tsx , globals.css , 문자열 계약 테스트 안에서 완료한다.",
-      "html": "<p>작업 계획: Intuitive Home Flow 범위가 큰 UI/UX 요청을 첫 화면 흐름 개선 slice로 분해했다. 홈 화면은 전체 앱의 진입점이고 기존 task intent와 handoff 구조가 있어 회귀 위험 대비 효과가 크다. 구현은 새 dependency 없이 MonitorShell.tsx , globals.css , 문자열 계약 테스트 안에서 완료한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 370,
-      "updatedAt": "2026-06-06T13:48:34.956Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-intuitive-home-flow-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-intuitive-home-flow.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Intuitive Home Flow",
-      "excerpt": "사용자 요청 요약: Intuitive Home Flow 날짜: 2026 06 06 요약: UI/UX를 더 직관적인 흐름으로 개선한다. 처리 범위: 홈 첫 화면의 시작 흐름을 준비, 선택, 실행, 평가 4단계로 명확히 한다.",
-      "html": "<p>사용자 요청 요약: Intuitive Home Flow 날짜: 2026 06 06 요약: UI/UX를 더 직관적인 흐름으로 개선한다. 처리 범위: 홈 첫 화면의 시작 흐름을 준비, 선택, 실행, 평가 4단계로 명확히 한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 244,
-      "updatedAt": "2026-06-06T13:48:34.956Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-intuitive-home-flow-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-intuitive-home-flow.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "Web Search: Intuitive Home Flow",
-      "excerpt": "Web Search: Intuitive Home Flow 날짜: 2026 06 06 요청: UI UX 개선, 직관적 흐름. 검색: Nielsen Norman Group dashboard UX design actionable insights navigation patterns 2025 Microsoft Fluent Design desktop app navigation UX command bar patterns official Apple Human Interface Guidelines macOS si",
-      "html": "<p>Web Search: Intuitive Home Flow 날짜: 2026 06 06 요청: UI UX 개선, 직관적 흐름. 검색: Nielsen Norman Group dashboard UX design actionable insights navigation patterns 2025 Microsoft Fluent Design desktop app navigation UX command bar patterns official Apple Human Interface Guidelines macOS sidebar toolbar window navigation official 확인 출처: Apple HIG Sidebars: https://deve</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 890,
-      "updatedAt": "2026-06-06T13:48:34.956Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-intuitive-home-flow-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-intuitive-home-flow/tasks.ko.md",
       "category": "project-spec",
@@ -10403,70 +10563,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "최종 평가: History Payload Check Customer Snapshot",
-      "excerpt": "최종 평가: History Payload Check Customer Snapshot 날짜: 2026 06 06 평가: 요청한 오류를 재현했고, customer build 후에도 workspace monitor check 가 통과하도록 수정했다. 충족: 실패 원인을 local command로 재현했다. developer 검증 원본과 public/customer 산출물을 분리했다. customer 상태와 developer 상태 양쪽에서 history payload check를 통과시켰다. 남은 위험:",
-      "html": "<p>최종 평가: History Payload Check Customer Snapshot 날짜: 2026 06 06 평가: 요청한 오류를 재현했고, customer build 후에도 workspace monitor check 가 통과하도록 수정했다. 충족: 실패 원인을 local command로 재현했다. developer 검증 원본과 public/customer 산출물을 분리했다. customer 상태와 developer 상태 양쪽에서 history payload check를 통과시켰다. 남은 위험: public release 자체는 기존과 동일하게 signing, notarization, updater, clean machine smoke</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 582,
-      "updatedAt": "2026-06-06T13:39:42.284Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: History Payload Check Customer Snapshot",
-      "excerpt": "요청 결과 추적: History Payload Check Customer Snapshot 날짜: 2026 06 06 요청: 오류 해결. 재현: corepack pnpm run desktop:renderer:build : 통과. 직후 corepack pnpm dir platform desktop app/renderer/workspace monitor run check : 기존 오류 재현. 오류: Admin history index must mark records as migrated to lazy ",
-      "html": "<p>요청 결과 추적: History Payload Check Customer Snapshot 날짜: 2026 06 06 요청: 오류 해결. 재현: corepack pnpm run desktop:renderer:build : 통과. 직후 corepack pnpm dir platform desktop app/renderer/workspace monitor run check : 기존 오류 재현. 오류: Admin history index must mark records as migrated to lazy admin index. 결과: collect workspace.mjs 가 developer admin index를 src/generated/ad</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 964,
-      "updatedAt": "2026-06-06T13:39:42.284Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: History Payload Check Customer Snapshot",
-      "excerpt": "사용자 요청 요약: History Payload Check Customer Snapshot 날짜: 2026 06 06 요약: 오류를 해결한다. 해석: 최근 renderer/customer build 이후 workspace monitor check 에서 발생한 history payload 검증 오류를 재현하고 수정한다.",
-      "html": "<p>사용자 요청 요약: History Payload Check Customer Snapshot 날짜: 2026 06 06 요약: 오류를 해결한다. 해석: 최근 renderer/customer build 이후 workspace monitor check 에서 발생한 history payload 검증 오류를 재현하고 수정한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 273,
-      "updatedAt": "2026-06-06T13:39:42.284Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "Web Search: History Payload Check Customer Snapshot",
-      "excerpt": "Web Search: History Payload Check Customer Snapshot 날짜: 2026 06 06 요청: \"오류 해결\" 검색 순서: Tauri v2 calling Rust commands invoke handler official documentation Next.js TypeScript noEmit build error official docs Rust cargo check compile errors modules official documentation 확인 출처: Tau",
-      "html": "<p>Web Search: History Payload Check Customer Snapshot 날짜: 2026 06 06 요청: &quot;오류 해결&quot; 검색 순서: Tauri v2 calling Rust commands invoke handler official documentation Next.js TypeScript noEmit build error official docs Rust cargo check compile errors modules official documentation 확인 출처: Tauri v2 Calling Rust: https://v2.tauri.app/develop/calling rust/ Next.js TypeScrip</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1151,
-      "updatedAt": "2026-06-06T13:39:42.284Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-rust-runtime-feature-split-tasks-ko-md",
@@ -18163,137 +18259,41 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-industrial-control-affordance-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-industrial-control-affordance/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Industrial Control Affordance 검증",
-      "excerpt": "Industrial Control Affordance 검증 계획 corepack pnpm filter workspace monitor test : 통과 corepack pnpm filter workspace monitor run check : 통과 corepack pnpm filter workspace monitor run build:customer : 통과 corepack pnpm filter workspace monitor run perf:budget : 통과, largest chunk 723",
-      "html": "<h1>Industrial Control Affordance 검증</h1>\n<h2>계획</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: 통과, largest chunk 723,490 bytes</li>\n<li>desktop static export visual smoke: 통과, button 6개, action cue 6개, icon 6개, 첫 버튼 88px, overflowX 0</li>\n<li>mobile 390px static export visual smoke: 통과, button 6개, action cue 6개, icon DOM 6개/display none, 첫 버튼 약 109px, overflowX 0</li>\n</ul>\n<h2>기대 기준</h2>\n<ul>\n<li><code>task-intent-icon</code>과 <code>task-intent-action-cue</code>가 각 목표 버튼에 존재한다.</li>\n<li>작업 dock 버튼은 desktop에서 88px 이상 높이를 가진다.</li>\n<li>모바일 390px에서 body horizontal overflow가 0이다.</li>\n<li>action cue 개수는 목표 버튼 개수와 같다.</li>\n</ul>\n<h2>산출물</h2>\n<ul>\n<li><code>artifacts/screenshots/2026-06-05-industrial-control-affordance-desktop.png</code></li>\n<li><code>artifacts/screenshots/2026-06-05-industrial-control-affordance-mobile.png</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1066,
-      "updatedAt": "2026-06-05T00:37:41.407Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-industrial-control-affordance-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-industrial-control-affordance/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Industrial Control Affordance 작업",
-      "excerpt": "Industrial Control Affordance 작업 x 웹 검색과 현재 dock 구조 확인 x REQ WM 059 추가 x 작업 목표 버튼 JSX 구조 분리 x dock/button tactile CSS와 모바일 reflow 추가 x static test 계약 추가 x check/build/perf/visual smoke 검증 x 평가, 요청 추적, 작업 요약 기록 커밋 및 push",
-      "html": "<h1>Industrial Control Affordance 작업</h1>\n<ul>\n<li>[x] 웹 검색과 현재 dock 구조 확인</li>\n<li>[x] REQ-WM-059 추가</li>\n<li>[x] 작업 목표 버튼 JSX 구조 분리</li>\n<li>[x] dock/button tactile CSS와 모바일 reflow 추가</li>\n<li>[x] static test 계약 추가</li>\n<li>[x] check/build/perf/visual smoke 검증</li>\n<li>[x] 평가, 요청 추적, 작업 요약 기록</li>\n<li>[ ] 커밋 및 push</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 359,
-      "updatedAt": "2026-06-05T00:37:41.406Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-industrial-control-affordance-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-industrial-control-affordance/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Industrial Control Affordance 추적",
-      "excerpt": "Industrial Control Affordance 추적 | 항목 | 연결 | | | | | 사용자 요청 | \"너는 엄청난 산업 디자이너야\" | | 요구사항 | REQ WM 059 | | 구현 | components/MonitorShell.tsx , app/globals.css | | 테스트 | tests/tool studio.test.mjs | | 검증 | test , check , build:customer , perf:budget , desktop/mobile visual smoke | |",
-      "html": "<h1>Industrial Control Affordance 추적</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>사용자 요청</td><td>&quot;너는 엄청난 산업 디자이너야&quot;</td></tr><tr><td>요구사항</td><td>REQ-WM-059</td></tr><tr><td>구현</td><td><code>components/MonitorShell.tsx</code>, <code>app/globals.css</code></td></tr><tr><td>테스트</td><td><code>tests/tool-studio.test.mjs</code></td></tr><tr><td>검증</td><td><code>test</code>, <code>check</code>, <code>build:customer</code>, <code>perf:budget</code>, desktop/mobile visual smoke</td></tr><tr><td>기록</td><td><code>_history/web-searches/2026/2026-06-05-industrial-control-affordance.ko.md</code>, <code>_history/evaluations/2026/2026-06-05-industrial-control-affordance.ko.md</code></td></tr></tbody></table>\n<h2>근거</h2>\n<ul>\n<li>Apple HIG: 컨트롤은 명확한 visual hierarchy와 일관된 interaction feedback을 가져야 한다.</li>\n<li>Material Design: 버튼은 상태와 action을 시각적으로 구분해야 한다.</li>\n<li>Carbon buttons: 제품 UI의 버튼은 목적, hierarchy, 상태가 일관되어야 한다.</li>\n<li>Fitts&#039;s Law: 목표 크기와 도달 위치는 조작 속도와 정확도에 직접 영향을 준다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 936,
-      "updatedAt": "2026-06-05T00:35:37.496Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-industrial-control-affordance-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-industrial-control-affordance/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Industrial Control Affordance 계획",
-      "excerpt": "Industrial Control Affordance 계획 1. 버튼/컨트롤 공식 레퍼런스와 Fitts's Law 관련 자료를 확인한다. 2. REQ WM 059를 요구사항에 추가한다. 3. Overview 작업 dock 버튼 JSX를 번호, 아이콘, 본문, badge, action cue로 분리한다. 4. CSS에서 조작 패널 표면, hit target, hover/focus/active 상태, 모바일 재배치를 정의한다. 5. 정적 테스트와 desktop/mobile smoke로 구조, 크기, ",
-      "html": "<h1>Industrial Control Affordance 계획</h1>\n<p>1. 버튼/컨트롤 공식 레퍼런스와 Fitts&#039;s Law 관련 자료를 확인한다.</p>\n<p>2. REQ-WM-059를 요구사항에 추가한다.</p>\n<p>3. Overview 작업 dock 버튼 JSX를 번호, 아이콘, 본문, badge, action cue로 분리한다.</p>\n<p>4. CSS에서 조작 패널 표면, hit target, hover/focus/active 상태, 모바일 재배치를 정의한다.</p>\n<p>5. 정적 테스트와 desktop/mobile smoke로 구조, 크기, overflow를 검증한다.</p>\n<h2>설계 선택</h2>\n<ul>\n<li>기존 lucide icon과 CSS만 사용한다.</li>\n<li>작업 목표 버튼의 기본 높이는 dock 안에서 88px 이상으로 유지한다.</li>\n<li>모바일에서는 기능 아이콘을 숨기고 action cue를 오른쪽 고정 affordance로 유지한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 737,
-      "updatedAt": "2026-06-05T00:35:37.495Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-industrial-control-affordance-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-industrial-control-affordance/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Industrial Control Affordance 스펙",
-      "excerpt": "Industrial Control Affordance 스펙 요구사항 REQ WM 059: Overview 작업 dock의 목표 버튼은 번호, 기능 아이콘, 작업 설명, 상태 badge, 진행 화살표를 분리해 손이 갈 위치와 실행 결과가 즉시 보여야 한다. 사용자 결과 사용자는 작업 dock을 목록이 아니라 누를 수 있는 조작 패널로 인식한다. 각 목표 버튼은 번호, 아이콘, 설명, 상태, 진행 방향을 분리해서 보여준다. hover/focus/active 상태는 버튼이 실제 조작부처럼 반응한다. 모",
-      "html": "<h1>Industrial Control Affordance 스펙</h1>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-WM-059: Overview 작업 dock의 목표 버튼은 번호, 기능 아이콘, 작업 설명, 상태 badge, 진행 화살표를 분리해 손이 갈 위치와 실행 결과가 즉시 보여야 한다.</li>\n</ul>\n<h2>사용자 결과</h2>\n<ul>\n<li>사용자는 작업 dock을 목록이 아니라 누를 수 있는 조작 패널로 인식한다.</li>\n<li>각 목표 버튼은 번호, 아이콘, 설명, 상태, 진행 방향을 분리해서 보여준다.</li>\n<li>hover/focus/active 상태는 버튼이 실제 조작부처럼 반응한다.</li>\n<li>모바일에서는 아이콘을 줄이고 번호, 텍스트, action cue 중심으로 재배치해 수평 overflow를 만들지 않는다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>전체 UI 라이브러리 교체</li>\n<li>새 dependency 설치</li>\n<li>실제 작업 실행 로직 변경</li>\n<li>generated snapshot 파일 정리</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 847,
-      "updatedAt": "2026-06-05T00:35:37.495Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-overview-focus-command-surface-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-overview-focus-command-surface/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록",
-      "excerpt": "작업 목록 x web first intake와 대규모 범위 분해 기록 x REQ WM 057 추가 x primaryHomeIntent 와 primaryHomeFlowStep 계산 추가 x Overview 홈 JSX를 focus command, navigation dock, status strip으로 재배치 x desktop/mobile CSS 계약 추가 x static regression test 추가 x workspace monitor test 실행 x workspace monitor check",
-      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] web-first intake와 대규모 범위 분해 기록</li>\n<li>[x] REQ-WM-057 추가</li>\n<li>[x] <code>primaryHomeIntent</code>와 <code>primaryHomeFlowStep</code> 계산 추가</li>\n<li>[x] Overview 홈 JSX를 focus command, navigation dock, status strip으로 재배치</li>\n<li>[x] desktop/mobile CSS 계약 추가</li>\n<li>[x] static regression test 추가</li>\n<li>[x] <code>workspace-monitor test</code> 실행</li>\n<li>[x] <code>workspace-monitor check</code> 실행</li>\n<li>[x] <code>workspace-monitor build:customer</code> 실행</li>\n<li>[x] <code>workspace-monitor perf:budget</code> 실행</li>\n<li>[x] Browser smoke와 screenshot 저장</li>\n<li>[x] 평가, 추적, 작업 요약 갱신</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 579,
-      "updatedAt": "2026-06-05T00:19:58.664Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
       "date": "2026-06-07",
       "year": "2026",
-      "documentsCount": 59,
+      "documentsCount": 67,
       "categories": [
         {
           "category": "evaluation",
-          "count": 16
+          "count": 18
         },
         {
           "category": "plan",
-          "count": 7
+          "count": 8
         },
         {
           "category": "request-trace",
-          "count": 7
+          "count": 8
         },
         {
           "category": "user-request",
-          "count": 7
+          "count": 8
         },
         {
           "category": "web-search",
-          "count": 7
+          "count": 8
         },
         {
           "category": "work-summary",
-          "count": 7
+          "count": 8
         },
         {
           "category": "work-timing",
-          "count": 7
+          "count": 8
         },
         {
           "category": "daily-history",
@@ -18389,6 +18389,26 @@
           "title": "Evaluation: Editable Runtime Prompts",
           "excerpt": "Evaluation: Editable Runtime Prompts 날짜: 2026 06 07 판정 통과. 근거 사용자 요구의 핵심인 \"각 프롬프트 변경 가능\"을 세션 prompt와 작업 파이프라인 prompt 양쪽에 적용했다. 저장/초기화가 같은 정규화 경로를 타도록 조정해 Browser smoke에서 발견된 task prompt reset 불일치를 해결했다. Rust preferences 정규화가 허용 key만 보존하도록 테스트를 추가했다. renderer check/test, Rust unit",
           "updatedAt": "2026-06-06T16:28:24.777Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-07-sidebar-rail-scrollbar-fix-evaluator-input-json",
+          "path": "_history/evaluations/2026/2026-06-07-sidebar-rail-scrollbar-fix-evaluator-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 07 Sidebar Rail Scrollbar Fix Evaluator Input",
+          "excerpt": "{ \"initial instruction\": \"사이드바 UI 문제 해결 옆에 이상한 스크롤 안 생기게 크기 조절\", \"result summary\": \"Fixed the workspace monitor activity rail so the sidebar nav no longer creates phantom horizontal scrollbar space; constrained rail button width and verified default plus short viewport behavior.\"",
+          "updatedAt": "2026-06-06T17:35:44.294Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+          "path": "_history/evaluations/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "Evaluation: Sidebar Rail Scrollbar Fix",
+          "excerpt": "Evaluation: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 평가 사용자의 사이드바 옆 이상한 스크롤 문제는 activity rail nav의 안정 scrollbar gutter와 고정 button width가 좁은 rail에서 만드는 phantom horizontal overflow로 판단했다. React 구조를 바꾸지 않고 CSS contract를 조정해 해결했다. 결과 .activity rail nav 의 가로 overflow를 숨기고 세로 overflow",
+          "updatedAt": "2026-06-06T17:35:44.293Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18512,6 +18532,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-plans-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+          "path": "_history/plans/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "Plan Record: Sidebar Rail Scrollbar Fix",
+          "excerpt": "Plan Record: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 실행 계획 web first 참고 확인. Browser로 현재 레일 overflow 측정. CSS only로 nav overflow 축, gutter, button width contract 수정. 구조 테스트와 Browser smoke로 재발 방지. build/platform/evaluator gate 통과 후 commit/push.",
+          "updatedAt": "2026-06-06T17:34:42.067Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-plans-2026-2026-06-07-subagent-bounded-fanout-ko-md",
           "path": "_history/plans/2026/2026-06-07-subagent-bounded-fanout.ko.md",
           "category": "plan",
@@ -18579,6 +18609,16 @@
           "title": "Request Trace: Editable Runtime Prompts",
           "excerpt": "Request Trace: Editable Runtime Prompts 날짜: 2026 06 07 요청 사용자 요청: 각 프롬프트를 변경 가능하게. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 07 editable runtime prompts.ko.md 스펙: platform desktop app/specs/2026 06 07 editable runtime prompts/ 웹 검색 기록: history/web searches/2026/202",
           "updatedAt": "2026-06-06T16:27:39.629Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+          "path": "_history/request-traces/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Request Trace: Sidebar Rail Scrollbar Fix",
+          "excerpt": "Request Trace: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요청 \"사이드바 UI 문제 해결 옆에 이상한 스크롤 안 생기게 크기 조절\" 산출물 CSS 수정: platform desktop app/renderer/workspace monitor/app/globals.css 테스트 수정: platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs 요구사항/스펙/검증 기록: platfor",
+          "updatedAt": "2026-06-06T17:35:44.293Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18652,6 +18692,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-user-requests-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+          "path": "_history/user-requests/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "User Request: Sidebar Rail Scrollbar Fix",
+          "excerpt": "User Request: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요약 사용자는 사이드바 옆에 이상한 스크롤이 생기지 않도록 UI 크기와 overflow 처리를 조정해 달라고 요청했다. 처리 방향 좌측 activity rail nav의 scrollbar gutter와 button width가 만드는 phantom horizontal overflow를 제거한다.",
+          "updatedAt": "2026-06-06T17:34:42.066Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-07-subagent-bounded-fanout-ko-md",
           "path": "_history/user-requests/2026/2026-06-07-subagent-bounded-fanout.ko.md",
           "category": "user-request",
@@ -18719,6 +18769,16 @@
           "title": "Web Search: Editable Runtime Prompts",
           "excerpt": "Web Search: Editable Runtime Prompts 날짜: 2026 06 07 검색 VS Code official docs prompt files custom instructions editable prompts OpenAI Agents SDK official docs prompts instructions tools editable agent prompts Claude Code official docs custom slash commands prompts editable files ",
           "updatedAt": "2026-06-06T16:16:15.586Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+          "path": "_history/web-searches/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: Sidebar Rail Scrollbar Fix",
+          "excerpt": "Web Search: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 검색 MDN CSS overflow scrollbar layout min width flex grid sidebar official web.dev avoid horizontal overflow CSS grid flexbox minmax 0 sidebar W3C CSS overflow module scrollbar overflow official 확인한 출처 MDN CSS overflow: https:/",
+          "updatedAt": "2026-06-06T17:34:42.066Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18792,6 +18852,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "Work Summary: Sidebar Rail Scrollbar Fix",
+          "excerpt": "Work Summary: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요약 좌측 사이드바 레일 옆에 생기던 이상한 스크롤 조건을 제거했다. nav 영역은 가로 스크롤을 만들지 않고, 화면 높이가 부족할 때만 세로로 스크롤한다. 구현 globals.css 에서 activity rail nav overflow 축과 scrollbar gutter를 조정했다. collapsed/expanded rail button width contract를 정리했다. tool studio",
+          "updatedAt": "2026-06-06T17:35:44.293Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-07-subagent-bounded-fanout-ko-md",
           "path": "_history/work-summaries/2026/2026-06-07-subagent-bounded-fanout.ko.md",
           "category": "work-summary",
@@ -18862,6 +18932,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-work-timings-2026-2026-06-07-sidebar-rail-scrollbar-fix-json",
+          "path": "_history/work-timings/2026/2026-06-07-sidebar-rail-scrollbar-fix.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 07 Sidebar Rail Scrollbar Fix",
+          "excerpt": "{ \"task id\": \"2026 06 07 sidebar rail scrollbar fix\", \"title\": \"Sidebar rail scrollbar fix\", \"date\": \"2026 06 07\", \"timezone\": \"Asia/Seoul\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status",
+          "updatedAt": "2026-06-06T17:35:44.293Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-07-subagent-bounded-fanout-ko-md",
           "path": "_history/work-timings/2026/2026-06-07-subagent-bounded-fanout.ko.md",
           "category": "work-timing",
@@ -18896,26 +18976,14 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 37,
+      "documentsCount": 29,
       "categories": [
         {
           "category": "evaluation",
-          "count": 9
+          "count": 8
         },
         {
           "category": "request-trace",
-          "count": 5
-        },
-        {
-          "category": "user-request",
-          "count": 5
-        },
-        {
-          "category": "web-search",
-          "count": 5
-        },
-        {
-          "category": "plan",
           "count": 4
         },
         {
@@ -18923,8 +18991,20 @@
           "count": 4
         },
         {
+          "category": "plan",
+          "count": 3
+        },
+        {
+          "category": "user-request",
+          "count": 3
+        },
+        {
+          "category": "web-search",
+          "count": 3
+        },
+        {
           "category": "work-timing",
-          "count": 4
+          "count": 3
         },
         {
           "category": "daily-history",
@@ -18940,16 +19020,6 @@
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
           "updatedAt": "2026-06-06T15:05:12.467Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "최종 평가: History Payload Check Customer Snapshot",
-          "excerpt": "최종 평가: History Payload Check Customer Snapshot 날짜: 2026 06 06 평가: 요청한 오류를 재현했고, customer build 후에도 workspace monitor check 가 통과하도록 수정했다. 충족: 실패 원인을 local command로 재현했다. developer 검증 원본과 public/customer 산출물을 분리했다. customer 상태와 developer 상태 양쪽에서 history payload check를 통과시켰다. 남은 위험:",
-          "updatedAt": "2026-06-06T13:39:42.284Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19033,16 +19103,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-intuitive-home-flow-ko-md",
-          "path": "_history/plans/2026/2026-06-06-intuitive-home-flow.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "작업 계획: Intuitive Home Flow",
-          "excerpt": "작업 계획: Intuitive Home Flow 범위가 큰 UI/UX 요청을 첫 화면 흐름 개선 slice로 분해했다. 홈 화면은 전체 앱의 진입점이고 기존 task intent와 handoff 구조가 있어 회귀 위험 대비 효과가 크다. 구현은 새 dependency 없이 MonitorShell.tsx , globals.css , 문자열 계약 테스트 안에서 완료한다.",
-          "updatedAt": "2026-06-06T13:48:34.956Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-subagent-live-execution-ko-md",
           "path": "_history/plans/2026/2026-06-06-subagent-live-execution.ko.md",
           "category": "plan",
@@ -19070,16 +19130,6 @@
           "title": "작업 계획: Terminal Agent Bridge",
           "excerpt": "작업 계획: Terminal Agent Bridge 1. 공식 문서와 기존 PTY/CLI/agent 구현을 확인한다. 2. helper를 분리해 PTY/CLI session 실패가 action feedback에 전파되게 한다. 3. Desktop Runtime에 terminal agent bridge UI를 추가한다. 4. CSS와 테스트 계약을 보강한다. 5. Browser smoke, check/test/build, resource/CLI/omission/evaluation 검증을 수행한다. ",
           "updatedAt": "2026-06-06T14:07:16.088Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: History Payload Check Customer Snapshot",
-          "excerpt": "요청 결과 추적: History Payload Check Customer Snapshot 날짜: 2026 06 06 요청: 오류 해결. 재현: corepack pnpm run desktop:renderer:build : 통과. 직후 corepack pnpm dir platform desktop app/renderer/workspace monitor run check : 기존 오류 재현. 오류: Admin history index must mark records as migrated to lazy ",
-          "updatedAt": "2026-06-06T13:39:42.284Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19123,26 +19173,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: History Payload Check Customer Snapshot",
-          "excerpt": "사용자 요청 요약: History Payload Check Customer Snapshot 날짜: 2026 06 06 요약: 오류를 해결한다. 해석: 최근 renderer/customer build 이후 workspace monitor check 에서 발생한 history payload 검증 오류를 재현하고 수정한다.",
-          "updatedAt": "2026-06-06T13:39:42.284Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-06-intuitive-home-flow-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-intuitive-home-flow.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: Intuitive Home Flow",
-          "excerpt": "사용자 요청 요약: Intuitive Home Flow 날짜: 2026 06 06 요약: UI/UX를 더 직관적인 흐름으로 개선한다. 처리 범위: 홈 첫 화면의 시작 흐름을 준비, 선택, 실행, 평가 4단계로 명확히 한다.",
-          "updatedAt": "2026-06-06T13:48:34.956Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-subagent-live-execution-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-subagent-live-execution.ko.md",
           "category": "user-request",
@@ -19170,26 +19200,6 @@
           "title": "User Request: Terminal Agent Bridge",
           "excerpt": "User Request: Terminal Agent Bridge 날짜: 2026 06 06 요약: 터미널 연결 기능과 에이전트 기능이 분리되어 어색하지 않게, 실제 연결 실행 흐름으로 제대로 동작하게 개선해 달라는 요청. 범위 결정: 기존 native PTY와 CLI agent session command를 재사용해 Desktop Runtime 첫 화면에 연결 bridge를 추가한다.",
           "updatedAt": "2026-06-06T14:07:16.088Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "Web Search: History Payload Check Customer Snapshot",
-          "excerpt": "Web Search: History Payload Check Customer Snapshot 날짜: 2026 06 06 요청: \"오류 해결\" 검색 순서: Tauri v2 calling Rust commands invoke handler official documentation Next.js TypeScript noEmit build error official docs Rust cargo check compile errors modules official documentation 확인 출처: Tau",
-          "updatedAt": "2026-06-06T13:39:42.284Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-intuitive-home-flow-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-intuitive-home-flow.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "Web Search: Intuitive Home Flow",
-          "excerpt": "Web Search: Intuitive Home Flow 날짜: 2026 06 06 요청: UI UX 개선, 직관적 흐름. 검색: Nielsen Norman Group dashboard UX design actionable insights navigation patterns 2025 Microsoft Fluent Design desktop app navigation UX command bar patterns official Apple Human Interface Guidelines macOS si",
-          "updatedAt": "2026-06-06T13:48:34.956Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19263,16 +19273,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-intuitive-home-flow-ko-md",
-          "path": "_history/work-timings/2026/2026-06-06-intuitive-home-flow.ko.md",
-          "category": "work-timing",
-          "language": "ko",
-          "title": "작업 시간 기록: Intuitive Home Flow",
-          "excerpt": "작업 시간 기록: Intuitive Home Flow 날짜: 2026 06 06 단계: web first intake: 완료 large scope slice 선택: 완료 홈 UI 구현: 완료 테스트와 browser smoke: 완료 build/check: 완료",
-          "updatedAt": "2026-06-06T13:48:34.957Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-subagent-live-execution-ko-md",
           "path": "_history/work-timings/2026/2026-06-06-subagent-live-execution.ko.md",
           "category": "work-timing",
@@ -19311,36 +19311,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2862,
+      "documents": 2870,
       "days": 8,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1076
+          "count": 1078
         },
         {
           "category": "web-search",
-          "count": 446
+          "count": 447
         },
         {
           "category": "request-trace",
-          "count": 375
+          "count": 376
         },
         {
           "category": "plan",
-          "count": 374
+          "count": 375
         },
         {
           "category": "work-timing",
-          "count": 294
+          "count": 295
         },
         {
           "category": "user-request",
-          "count": 160
+          "count": 161
         },
         {
           "category": "work-summary",
-          "count": 127
+          "count": 128
         },
         {
           "category": "daily-history",
@@ -19351,7 +19351,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6862951,
+      "totalSourceBytes": 6873657,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19380,7 +19380,7 @@
       "decisionEvents": 0,
       "openSignals": 16,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T17:25:02.243Z",
+      "latestEventAt": "2026-06-06T17:35:44.294Z",
       "historyDays": 2
     },
     "lanes": [
@@ -19392,16 +19392,11 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 25
+        "count": 26
       },
       {
-        "id": "evidence",
-        "label": "evidence",
-        "count": 12
-      },
-      {
-        "id": "intake",
-        "label": "intake",
+        "id": "delivery",
+        "label": "delivery",
         "count": 12
       },
       {
@@ -19410,8 +19405,13 @@
         "count": 12
       },
       {
-        "id": "delivery",
-        "label": "delivery",
+        "id": "evidence",
+        "label": "evidence",
+        "count": 11
+      },
+      {
+        "id": "intake",
+        "label": "intake",
         "count": 11
       },
       {
@@ -19439,11 +19439,11 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 25
+        "count": 26
       },
       {
-        "id": "intake",
-        "label": "intake",
+        "id": "summary",
+        "label": "summary",
         "count": 12
       },
       {
@@ -19452,9 +19452,9 @@
         "count": 12
       },
       {
-        "id": "web-search",
-        "label": "web search",
-        "count": 12
+        "id": "intake",
+        "label": "intake",
+        "count": 11
       },
       {
         "id": "plan",
@@ -19462,13 +19462,13 @@
         "count": 11
       },
       {
-        "id": "summary",
-        "label": "summary",
+        "id": "timing",
+        "label": "timing",
         "count": 11
       },
       {
-        "id": "timing",
-        "label": "timing",
+        "id": "web-search",
+        "label": "web search",
         "count": 11
       },
       {
@@ -19490,6 +19490,126 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-evaluations-2026-2026-06-07-sidebar-rail-scrollbar-fix-evaluator-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 07 Sidebar Rail Scrollbar Fix Evaluator Input",
+        "detail": "{ \"initial instruction\": \"사이드바 UI 문제 해결 옆에 이상한 스크롤 안 생기게 크기 조절\", \"result summary\": \"Fixed the workspace monitor activity rail so the sidebar nav no longer creates phantom horizontal scrollbar space; constrained rail button width and verified default plus short viewport behavior.\"",
+        "path": "_history/evaluations/2026/2026-06-07-sidebar-rail-scrollbar-fix-evaluator-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:35:44.294Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-07-sidebar-rail-scrollbar-fix-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 07 Sidebar Rail Scrollbar Fix",
+        "detail": "{ \"task id\": \"2026 06 07 sidebar rail scrollbar fix\", \"title\": \"Sidebar rail scrollbar fix\", \"date\": \"2026 06 07\", \"timezone\": \"Asia/Seoul\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status",
+        "path": "_history/work-timings/2026/2026-06-07-sidebar-rail-scrollbar-fix.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:35:44.293Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "Evaluation: Sidebar Rail Scrollbar Fix",
+        "detail": "Evaluation: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 평가 사용자의 사이드바 옆 이상한 스크롤 문제는 activity rail nav의 안정 scrollbar gutter와 고정 button width가 좁은 rail에서 만드는 phantom horizontal overflow로 판단했다. React 구조를 바꾸지 않고 CSS contract를 조정해 해결했다. 결과 .activity rail nav 의 가로 overflow를 숨기고 세로 overflow",
+        "path": "_history/evaluations/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:35:44.293Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Sidebar Rail Scrollbar Fix",
+        "detail": "Request Trace: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요청 \"사이드바 UI 문제 해결 옆에 이상한 스크롤 안 생기게 크기 조절\" 산출물 CSS 수정: platform desktop app/renderer/workspace monitor/app/globals.css 테스트 수정: platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs 요구사항/스펙/검증 기록: platfor",
+        "path": "_history/request-traces/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:35:44.293Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "Work Summary: Sidebar Rail Scrollbar Fix",
+        "detail": "Work Summary: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요약 좌측 사이드바 레일 옆에 생기던 이상한 스크롤 조건을 제거했다. nav 영역은 가로 스크롤을 만들지 않고, 화면 높이가 부족할 때만 세로로 스크롤한다. 구현 globals.css 에서 activity rail nav overflow 축과 scrollbar gutter를 조정했다. collapsed/expanded rail button width contract를 정리했다. tool studio",
+        "path": "_history/work-summaries/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:35:44.293Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "ready",
+        "title": "Plan Record: Sidebar Rail Scrollbar Fix",
+        "detail": "Plan Record: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 실행 계획 web first 참고 확인. Browser로 현재 레일 overflow 측정. CSS only로 nav overflow 축, gutter, button width contract 수정. 구조 테스트와 Browser smoke로 재발 방지. build/platform/evaluator gate 통과 후 commit/push.",
+        "path": "_history/plans/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:34:42.067Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Sidebar Rail Scrollbar Fix",
+        "detail": "Web Search: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 검색 MDN CSS overflow scrollbar layout min width flex grid sidebar official web.dev avoid horizontal overflow CSS grid flexbox minmax 0 sidebar W3C CSS overflow module scrollbar overflow official 확인한 출처 MDN CSS overflow: https:/",
+        "path": "_history/web-searches/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:34:42.066Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-07-sidebar-rail-scrollbar-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "User Request: Sidebar Rail Scrollbar Fix",
+        "detail": "User Request: Sidebar Rail Scrollbar Fix 날짜: 2026 06 07 요약 사용자는 사이드바 옆에 이상한 스크롤이 생기지 않도록 UI 크기와 overflow 처리를 조정해 달라고 요청했다. 처리 방향 좌측 activity rail nav의 scrollbar gutter와 button width가 만드는 phantom horizontal overflow를 제거한다.",
+        "path": "_history/user-requests/2026/2026-06-07-sidebar-rail-scrollbar-fix.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:34:42.066Z"
+      },
       {
         "id": "history-history-evaluations-2026-2026-06-07-titlebar-location-breadcrumb-ko-md",
         "sourceType": "history",
@@ -20766,21 +20886,6 @@
         "timestamp": "2026-06-06T14:07:16.088Z"
       },
       {
-        "id": "history-history-work-timings-2026-2026-06-06-intuitive-home-flow-ko-md",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "작업 시간 기록: Intuitive Home Flow",
-        "detail": "작업 시간 기록: Intuitive Home Flow 날짜: 2026 06 06 단계: web first intake: 완료 large scope slice 선택: 완료 홈 UI 구현: 완료 테스트와 browser smoke: 완료 build/check: 완료",
-        "path": "_history/work-timings/2026/2026-06-06-intuitive-home-flow.ko.md",
-        "category": "work-timing",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:48:34.957Z"
-      },
-      {
         "id": "history-history-evaluations-2026-2026-06-06-intuitive-home-flow-ko-md",
         "sourceType": "history",
         "signalType": "evaluation",
@@ -20824,111 +20929,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T13:48:34.957Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-intuitive-home-flow-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "Web Search: Intuitive Home Flow",
-        "detail": "Web Search: Intuitive Home Flow 날짜: 2026 06 06 요청: UI UX 개선, 직관적 흐름. 검색: Nielsen Norman Group dashboard UX design actionable insights navigation patterns 2025 Microsoft Fluent Design desktop app navigation UX command bar patterns official Apple Human Interface Guidelines macOS si",
-        "path": "_history/web-searches/2026/2026-06-06-intuitive-home-flow.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:48:34.956Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-intuitive-home-flow-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: Intuitive Home Flow",
-        "detail": "사용자 요청 요약: Intuitive Home Flow 날짜: 2026 06 06 요약: UI/UX를 더 직관적인 흐름으로 개선한다. 처리 범위: 홈 첫 화면의 시작 흐름을 준비, 선택, 실행, 평가 4단계로 명확히 한다.",
-        "path": "_history/user-requests/2026/2026-06-06-intuitive-home-flow.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:48:34.956Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-intuitive-home-flow-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "ready",
-        "title": "작업 계획: Intuitive Home Flow",
-        "detail": "작업 계획: Intuitive Home Flow 범위가 큰 UI/UX 요청을 첫 화면 흐름 개선 slice로 분해했다. 홈 화면은 전체 앱의 진입점이고 기존 task intent와 handoff 구조가 있어 회귀 위험 대비 효과가 크다. 구현은 새 dependency 없이 MonitorShell.tsx , globals.css , 문자열 계약 테스트 안에서 완료한다.",
-        "path": "_history/plans/2026/2026-06-06-intuitive-home-flow.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:48:34.956Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "최종 평가: History Payload Check Customer Snapshot",
-        "detail": "최종 평가: History Payload Check Customer Snapshot 날짜: 2026 06 06 평가: 요청한 오류를 재현했고, customer build 후에도 workspace monitor check 가 통과하도록 수정했다. 충족: 실패 원인을 local command로 재현했다. developer 검증 원본과 public/customer 산출물을 분리했다. customer 상태와 developer 상태 양쪽에서 history payload check를 통과시켰다. 남은 위험:",
-        "path": "_history/evaluations/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:39:42.284Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "Web Search: History Payload Check Customer Snapshot",
-        "detail": "Web Search: History Payload Check Customer Snapshot 날짜: 2026 06 06 요청: \"오류 해결\" 검색 순서: Tauri v2 calling Rust commands invoke handler official documentation Next.js TypeScript noEmit build error official docs Rust cargo check compile errors modules official documentation 확인 출처: Tau",
-        "path": "_history/web-searches/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:39:42.284Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "ready",
-        "title": "요청 결과 추적: History Payload Check Customer Snapshot",
-        "detail": "요청 결과 추적: History Payload Check Customer Snapshot 날짜: 2026 06 06 요청: 오류 해결. 재현: corepack pnpm run desktop:renderer:build : 통과. 직후 corepack pnpm dir platform desktop app/renderer/workspace monitor run check : 기존 오류 재현. 오류: Admin history index must mark records as migrated to lazy ",
-        "path": "_history/request-traces/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:39:42.284Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-history-payload-check-customer-snapshot-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: History Payload Check Customer Snapshot",
-        "detail": "사용자 요청 요약: History Payload Check Customer Snapshot 날짜: 2026 06 06 요약: 오류를 해결한다. 해석: 최근 renderer/customer build 이후 workspace monitor check 에서 발생한 history payload 검증 오류를 재현하고 수정한다.",
-        "path": "_history/user-requests/2026/2026-06-06-history-payload-check-customer-snapshot.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:39:42.284Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -24160,12 +24160,12 @@
       {
         "category": "work-summary",
         "root": "_history/work-summaries",
-        "documentsCount": 11
+        "documentsCount": 12
       },
       {
         "category": "user-request",
         "root": "_history/user-requests",
-        "documentsCount": 12
+        "documentsCount": 11
       },
       {
         "category": "intent-feature-map",
@@ -24180,7 +24180,7 @@
       {
         "category": "web-search",
         "root": "_history/web-searches",
-        "documentsCount": 12
+        "documentsCount": 11
       },
       {
         "category": "work-timing",
@@ -24195,7 +24195,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 25
+        "documentsCount": 26
       },
       {
         "category": "daily-history",
@@ -24289,7 +24289,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 89,
+        "documentCount": 90,
         "sourceFileCount": 14
       },
       {
@@ -28130,13 +28130,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 4164,
+      "sourceDocuments": 4178,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T17:25:02.243Z"
+      "latestInsightAt": "2026-06-06T17:35:44.294Z"
     },
     "inferenceStages": [
       {
@@ -28204,7 +28204,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 499,
+        "signalCount": 501,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -28212,11 +28212,11 @@
           },
           {
             "category": "project-spec",
-            "count": 147
+            "count": 148
           },
           {
             "category": "request-trace",
-            "count": 74
+            "count": 75
           },
           {
             "category": "user-request",
@@ -28263,7 +28263,7 @@
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장"
         ],
-        "latestEvidenceAt": "2026-06-06T17:21:44.298Z"
+        "latestEvidenceAt": "2026-06-06T17:35:44.293Z"
       },
       {
         "id": "web-research-to-spec",
@@ -28277,11 +28277,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1836,
+        "signalCount": 1839,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 520
+            "count": 521
           },
           {
             "category": "evaluation",
@@ -28289,7 +28289,7 @@
           },
           {
             "category": "web-search",
-            "count": 447
+            "count": 448
           },
           {
             "category": "plan",
@@ -28297,7 +28297,7 @@
           },
           {
             "category": "request-trace",
-            "count": 125
+            "count": 126
           },
           {
             "category": "work-timing",
@@ -28328,7 +28328,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T17:24:05.121Z"
+        "latestEvidenceAt": "2026-06-06T17:35:44.293Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28342,7 +28342,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1065,
+        "signalCount": 1066,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -28350,7 +28350,7 @@
           },
           {
             "category": "plan",
-            "count": 310
+            "count": 311
           },
           {
             "category": "request-trace",
@@ -28401,7 +28401,7 @@
           "작업 요약: 큰 범위 작업 미루지 않기",
           "작업 계획 기록: 사용자 의도 기반 기능 지도"
         ],
-        "latestEvidenceAt": "2026-06-06T17:24:05.122Z"
+        "latestEvidenceAt": "2026-06-06T17:34:42.067Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28488,39 +28488,39 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1633,
+        "signalCount": 1645,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 700
+            "count": 704
           },
           {
             "category": "evaluation",
-            "count": 547
+            "count": 549
           },
           {
             "category": "user-request",
-            "count": 112
+            "count": 113
           },
           {
             "category": "work-summary",
-            "count": 72
+            "count": 73
           },
           {
             "category": "request-trace",
-            "count": 62
+            "count": 63
           },
           {
             "category": "plan",
-            "count": 45
+            "count": 46
           },
           {
             "category": "web-search",
-            "count": 41
+            "count": 42
           },
           {
             "category": "project-doc",
-            "count": 39
+            "count": 40
           },
           {
             "category": "work-timing",
@@ -28547,7 +28547,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T17:25:02.243Z"
+        "latestEvidenceAt": "2026-06-06T17:35:44.294Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28623,14 +28623,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 4164,
+      "sourceDocuments": 4178,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T17:25:02.243Z"
+      "latestInsightAt": "2026-06-06T17:35:44.294Z"
     },
     "operatingModel": [
       {
@@ -28688,25 +28688,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3400,
+        "signalCount": 3406,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1836
+            "signalCount": 1839
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1065
+            "signalCount": 1066
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 499
+            "signalCount": 501
           }
         ],
         "missingPatternIds": [],
@@ -28734,7 +28734,7 @@
           "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T17:24:05.122Z",
+        "latestEvidenceAt": "2026-06-06T17:35:44.293Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28832,19 +28832,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2698,
+        "signalCount": 2711,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1633
+            "signalCount": 1645
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1065
+            "signalCount": 1066
           }
         ],
         "missingPatternIds": [],
@@ -28872,7 +28872,7 @@
           "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T17:25:02.243Z",
+        "latestEvidenceAt": "2026-06-06T17:35:44.294Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28901,13 +28901,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 618,
+        "signalCount": 620,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 499
+            "signalCount": 501
           },
           {
             "id": "release-blocker-gate",
@@ -28941,7 +28941,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T17:21:44.298Z",
+        "latestEvidenceAt": "2026-06-06T17:35:44.293Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28970,19 +28970,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2901,
+        "signalCount": 2905,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1065
+            "signalCount": 1066
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1836
+            "signalCount": 1839
           }
         ],
         "missingPatternIds": [],
@@ -29010,7 +29010,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T17:24:05.122Z",
+        "latestEvidenceAt": "2026-06-06T17:35:44.293Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -29039,7 +29039,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1955,
+        "signalCount": 1958,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -29051,7 +29051,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1836
+            "signalCount": 1839
           }
         ],
         "missingPatternIds": [],
@@ -29079,7 +29079,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T17:24:05.121Z",
+        "latestEvidenceAt": "2026-06-06T17:35:44.293Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

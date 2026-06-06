@@ -1,0 +1,108 @@
+{
+  "task": "Sidebar Rail Scrollbar Fix",
+  "work_mode": "standard",
+  "runtime_context": [
+    "CSS activity rail layout",
+    "Next.js development server for Browser smoke",
+    "in-app Browser viewport override for short-height validation",
+    "Node test runner",
+    "Next.js production build"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "phantom-horizontal-scroll",
+      "category": "other",
+      "description": "Stable scrollbar gutter can reduce nav client width below button width and create horizontal overflow.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Set activity rail nav overflow-x hidden, overflow-y auto, scrollbar-gutter auto, and constrain button width to min(100%, 58px).",
+      "evidence": [
+        "Browser smoke after fix: navClientWidth=59 and navScrollWidth=59 at 1280x720",
+        "Browser smoke short viewport: navClientWidth=48 and navScrollWidth=48 at 1280x520"
+      ]
+    },
+    {
+      "risk_id": "browser-viewport-override",
+      "category": "process",
+      "description": "Temporary viewport override could leak into later browser work.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Reset Browser viewport after short-height smoke.",
+      "evidence": [
+        "viewport reset called after 1280x520 measurement"
+      ]
+    },
+    {
+      "risk_id": "dev-server-lifecycle",
+      "category": "process",
+      "description": "Browser smoke uses a local Next.js development server that must be stopped.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Serve on dedicated local port 3231, close the Browser tab, stop the server, and verify no listener remains.",
+      "evidence": [
+        "Next dev served http://127.0.0.1:3231",
+        "Browser tab closed",
+        "lsof -nP -iTCP:3231 -sTCP:LISTEN returned no listener"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "dev-server-cleanup",
+      "resource": "Next.js dev server",
+      "create_path": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor dev --hostname 127.0.0.1 --port 3231",
+      "cleanup_path": "Ctrl-C and lsof no-listener check",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Server started on 127.0.0.1:3231",
+        "No listener remained on TCP 3231"
+      ]
+    },
+    {
+      "check_id": "browser-tab-cleanup",
+      "resource": "in-app Browser tab",
+      "create_path": "Open local app tab for smoke measurement",
+      "cleanup_path": "Close tab after measurement",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Browser tab closed"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "default-viewport-rail-overflow",
+      "metric": "Default viewport nav horizontal overflow",
+      "tool": "in-app Browser at 1280x720",
+      "threshold": "navScrollWidth <= navClientWidth",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "navClientWidth=59",
+        "navScrollWidth=59",
+        "docScrollWidth=1280",
+        "innerWidth=1280"
+      ]
+    },
+    {
+      "check_id": "short-viewport-rail-overflow",
+      "metric": "Short viewport nav horizontal overflow",
+      "tool": "in-app Browser at 1280x520",
+      "threshold": "vertical overflow is allowed, horizontal overflow is not",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "navClientHeight=328",
+        "navScrollHeight=376",
+        "navClientWidth=48",
+        "navScrollWidth=48"
+      ]
+    }
+  ],
+  "notes": [
+    "No installation occurred.",
+    "No new CLI pipeline, worker, stream, native command, or persistent browser tab was created."
+  ]
+}
