@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T03:59:01.737Z",
+  "generatedAt": "2026-06-06T04:19:42.173Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 519,
-    "evaluations": 21,
+    "evaluations": 22,
     "webSearches": 13,
-    "timingRecords": 14,
+    "timingRecords": 12,
     "historyDays": 1,
-    "adminHistoryDocuments": 2646,
+    "adminHistoryDocuments": 2652,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7793,6 +7793,198 @@
   ],
   "documents": [
     {
+      "id": "history-request-traces-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-native-provider-terminal-action-reliability.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Native Provider and Terminal Action Reliability",
+      "excerpt": "Request Trace: Native Provider and Terminal Action Reliability Request User reported that the previously added provider/terminal/CLI setup functions did not seem to work. Requirements platform desktop app/docs/requirements/2026 06 06 native provider terminal action reliability.ko",
+      "html": "<p>Request Trace: Native Provider and Terminal Action Reliability Request User reported that the previously added provider/terminal/CLI setup functions did not seem to work. Requirements platform desktop app/docs/requirements/2026 06 06 native provider terminal action reliability.ko.md Specs platform desktop app/specs/2026 06 06 native provider terminal action </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 947,
+      "updatedAt": "2026-06-06T04:18:56.226Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-native-provider-terminal-action-reliability-resource-json",
+      "path": "_history/evaluations/2026/2026-06-06-native-provider-terminal-action-reliability-resource.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Native Provider Terminal Action Reliability Resource",
+      "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 native provider terminal action reliability\", \"resource risk occurred\": true, \"touched runtime resources\": \"Tauri opener plugin\", \"Tauri clipboard manager plugin\", \"native PTY renderer action path\", \"local static validation",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 native provider terminal action reliability&quot;, &quot;resource risk occurred&quot;: true, &quot;touched runtime resources&quot;: &quot;Tauri opener plugin&quot;, &quot;Tauri clipboard manager plugin&quot;, &quot;native PTY renderer action path&quot;, &quot;local static validation server&quot; , &quot;lifecycle checks&quot;: { &quot;resource&quot;: &quot;local static validation server&quot;, &quot;</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1203,
+      "updatedAt": "2026-06-06T04:18:56.225Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-native-provider-terminal-action-reliability.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Native Provider and Terminal Action Reliability",
+      "excerpt": "Evaluation: Native Provider and Terminal Action Reliability 결론 요청한 “기능이 실제로 안 되는 것 같음”에 대해 provider URL open, provider key save, terminal PTY start, terminal clipboard paste가 native invoke 경로까지 도달하도록 수정했다. 데스크톱 OS 자원 사용은 Tauri opener와 Tauri clipboard manager로 연결했다. internal packa",
+      "html": "<p>Evaluation: Native Provider and Terminal Action Reliability 결론 요청한 “기능이 실제로 안 되는 것 같음”에 대해 provider URL open, provider key save, terminal PTY start, terminal clipboard paste가 native invoke 경로까지 도달하도록 수정했다. 데스크톱 OS 자원 사용은 Tauri opener와 Tauri clipboard manager로 연결했다. internal package build와 app/DMG 검증까지 완료했다. 검증 근거 Rust compile/test: passed. Renderer unit/chec</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1129,
+      "updatedAt": "2026-06-06T04:18:56.225Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-native-provider-terminal-action-reliability.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request Summary: Native Provider and Terminal Action Reliability",
+      "excerpt": "User Request Summary: Native Provider and Terminal Action Reliability 요약 사용자는 이전에 추가한 AI provider setup, terminal, CLI 관련 기능이 실제로 동작하지 않는 것 같다고 지적했다. 요구는 안내 UI가 아니라 데스크톱 앱의 OS 자원을 실제로 사용하도록 고치고, 구현 후 빌드까지 자동으로 끝내는 것이다. 적용된 해석 provider login/key/docs 버튼은 Tauri opener 기반 native URL",
+      "html": "<p>User Request Summary: Native Provider and Terminal Action Reliability 요약 사용자는 이전에 추가한 AI provider setup, terminal, CLI 관련 기능이 실제로 동작하지 않는 것 같다고 지적했다. 요구는 안내 UI가 아니라 데스크톱 앱의 OS 자원을 실제로 사용하도록 고치고, 구현 후 빌드까지 자동으로 끝내는 것이다. 적용된 해석 provider login/key/docs 버튼은 Tauri opener 기반 native URL open으로 연결한다. terminal copy/paste는 Tauri system clipboard를 우선 사용한다. 버튼 클릭이 nativ</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 673,
+      "updatedAt": "2026-06-06T04:18:56.225Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-native-provider-terminal-action-reliability.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Native Provider and Terminal Action Reliability",
+      "excerpt": "Work Summary: Native Provider and Terminal Action Reliability 완료 Tauri opener plugin을 추가하고 provider auth URL open command를 raw OS command에서 Tauri opener로 교체했다. Tauri clipboard manager plugin을 추가하고 read system clipboard text , write system clipboard text command를 등록했다. Terminal cl",
+      "html": "<p>Work Summary: Native Provider and Terminal Action Reliability 완료 Tauri opener plugin을 추가하고 provider auth URL open command를 raw OS command에서 Tauri opener로 교체했다. Tauri clipboard manager plugin을 추가하고 read system clipboard text , write system clipboard text command를 등록했다. Terminal clipboard helper를 native first로 바꿨고 browser/textarea fallback은 유지했다. Provider/term</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1100,
+      "updatedAt": "2026-06-06T04:18:56.225Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-provider-terminal-action-reliability-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-provider-terminal-action-reliability/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Native Provider and Terminal Action Reliability",
+      "excerpt": "Tasks: Native Provider and Terminal Action Reliability x 설치 감사 기록 작성 x Tauri opener/clipboard dependency 추가 x Rust plugin init 및 provider opener command 변경 x Native clipboard read/write command 추가 x Renderer clipboard helper와 terminal paste 연결 x Provider/terminal action smoke 추가 ",
+      "html": "<h1>Tasks: Native Provider and Terminal Action Reliability</h1>\n<ul>\n<li>[x] 설치 감사 기록 작성</li>\n<li>[x] Tauri opener/clipboard dependency 추가</li>\n<li>[x] Rust plugin init 및 provider opener command 변경</li>\n<li>[x] Native clipboard read/write command 추가</li>\n<li>[x] Renderer clipboard helper와 terminal paste 연결</li>\n<li>[x] Provider/terminal action smoke 추가</li>\n<li>[x] 검증 및 package build</li>\n<li>[x] history/evaluation/trace 업데이트</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 422,
+      "updatedAt": "2026-06-06T04:18:56.224Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-provider-terminal-action-reliability-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-provider-terminal-action-reliability/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Native Provider and Terminal Action Reliability",
+      "excerpt": "Validation: Native Provider and Terminal Action Reliability Commands cd platform desktop app/src tauri && cargo check passed. cd platform desktop app/src tauri && cargo test passed. cd platform desktop app/src tauri && cargo info tauri plugin opener@2.5.4 Apache 2.0 OR MIT. cd pl",
+      "html": "<h1>Validation: Native Provider and Terminal Action Reliability</h1>\n<h2>Commands</h2>\n<ul>\n<li><code>cd platform-desktop-app/src-tauri &amp;&amp; cargo check</code> - passed.</li>\n<li><code>cd platform-desktop-app/src-tauri &amp;&amp; cargo test</code> - passed.</li>\n<li><code>cd platform-desktop-app/src-tauri &amp;&amp; cargo info tauri-plugin-opener@2.5.4</code> - Apache-2.0 OR MIT.</li>\n<li><code>cd platform-desktop-app/src-tauri &amp;&amp; cargo info tauri-plugin-clipboard-manager@2.3.2</code> - Apache-2.0 OR MIT.</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code> - passed, 79 tests.</li>\n<li><code>corepack pnpm --filter workspace-monitor run collect -- --best-effort</code> - passed, regenerated developer public snapshot/index.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code> - passed.</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code> - passed.</li>\n<li><code>corepack pnpm --filter workspace-monitor run smoke:terminal-provider-actions</code> - passed.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code> - passed, 27 tests.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code> - passed with existing public release signing/updater/clean-machine blockers still visible.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code> - passed.</li>\n<li>In-app Browser static render check for <code>http://127.0.0.1:4180/?section=desktop#desktop</code> - desktop section active and terminal launcher present.</li>\n</ul>\n<h2>결과</h2>\n<ul>\n<li>Internal package completed.</li>\n<li>Built artifacts:</li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n<li>macOS app <code>codesign --verify --deep --strict</code> passed.</li>\n<li>DMG <code>hdiutil verify</code> passed.</li>\n<li>Public notarization remains skipped because Apple notarization env vars are not present; this is an existing public release gate, not an internal build blocker.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1786,
+      "updatedAt": "2026-06-06T04:18:56.224Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-provider-terminal-action-reliability-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-provider-terminal-action-reliability/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Native Provider and Terminal Action Reliability",
+      "excerpt": "Traceability: Native Provider and Terminal Action Reliability | Requirement | Source targets | Verification | | | | | | REQ NAR 001 | src tauri/src/lib.rs , src tauri/Cargo.toml | cargo check , provider action smoke | | REQ NAR 002 | src tauri/src/lib.rs , renderer/workspace moni",
+      "html": "<h1>Traceability: Native Provider and Terminal Action Reliability</h1>\n<table><thead><tr><th>Requirement</th><th>Source targets</th><th>Verification</th></tr></thead><tbody><tr><td>REQ-NAR-001</td><td><code>src-tauri/src/lib.rs</code>, <code>src-tauri/Cargo.toml</code></td><td><code>cargo check</code>, provider action smoke</td></tr><tr><td>REQ-NAR-002</td><td><code>src-tauri/src/lib.rs</code>, <code>renderer/workspace-monitor/lib/clipboard.mjs</code>, <code>RuntimeTerminalDrawer.tsx</code></td><td><code>clipboard.test.mjs</code>, terminal action smoke</td></tr><tr><td>REQ-NAR-003</td><td><code>src-tauri/capabilities/default.json</code></td><td>package build/capability compile</td></tr><tr><td>REQ-NAR-004</td><td><code>scripts/smoke-terminal-provider-actions.mjs</code></td><td><code>corepack pnpm --filter workspace-monitor run smoke:terminal-provider-actions</code></td></tr><tr><td>REQ-NAR-005</td><td><code>MonitorShell.tsx</code>, <code>RuntimeTerminalDrawer.tsx</code></td><td>Playwright smoke and existing UI tests</td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 744,
+      "updatedAt": "2026-06-06T04:06:51.180Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-provider-terminal-action-reliability-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-provider-terminal-action-reliability/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Native Provider and Terminal Action Reliability",
+      "excerpt": "Plan: Native Provider and Terminal Action Reliability 1. 공식 문서와 기존 구현을 대조해 failure point를 확정한다. 2. 설치 감사 초안을 만들고 project local Rust dependency를 추가한다. 3. Tauri runtime plugin init, capability, Rust command를 패치한다. 4. Renderer clipboard helper와 terminal paste handler를 native 우선으로 변경",
+      "html": "<h1>Plan: Native Provider and Terminal Action Reliability</h1>\n<p>1. 공식 문서와 기존 구현을 대조해 failure point를 확정한다.</p>\n<p>2. 설치 감사 초안을 만들고 project-local Rust dependency를 추가한다.</p>\n<p>3. Tauri runtime plugin init, capability, Rust command를 패치한다.</p>\n<p>4. Renderer clipboard helper와 terminal paste handler를 native 우선으로 변경한다.</p>\n<p>5. Unit test와 Playwright click smoke를 추가한다.</p>\n<p>6. check/test/build/package를 실행하고 검증 기록을 갱신한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 514,
+      "updatedAt": "2026-06-06T04:06:51.179Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-native-provider-terminal-action-reliability-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-native-provider-terminal-action-reliability/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Native Provider and Terminal Action Reliability",
+      "excerpt": "Spec: Native Provider and Terminal Action Reliability 범위 Tauri opener plugin을 추가하고 provider auth URL open command를 plugin 기반으로 변경한다. Tauri clipboard manager plugin을 추가하고 system clipboard read/write command를 제공한다. Renderer clipboard helper와 terminal paste button을 native clipboard ",
+      "html": "<h1>Spec: Native Provider and Terminal Action Reliability</h1>\n<h2>범위</h2>\n<ul>\n<li>Tauri opener plugin을 추가하고 provider auth URL open command를 plugin 기반으로 변경한다.</li>\n<li>Tauri clipboard manager plugin을 추가하고 system clipboard read/write command를 제공한다.</li>\n<li>Renderer clipboard helper와 terminal paste button을 native clipboard 우선 경로로 변경한다.</li>\n<li>Provider/terminal action Playwright smoke를 추가한다.</li>\n<li>설치 감사, 검증, 추적 기록을 업데이트한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>provider OAuth redirect callback.</li>\n<li>OS keychain credential migration.</li>\n<li>실제 provider API 호출 성공 검증.</li>\n</ul>\n<h2>설계 결정</h2>\n<ul>\n<li>URL opener는 Rust command에서 <code>tauri_plugin_opener::OpenerExt</code>를 사용한다. 기존 provider UI의 <code>open_provider_auth_url</code> contract를 유지해 renderer 변경 폭을 줄인다.</li>\n<li>Clipboard는 renderer가 custom Tauri command를 우선 호출한다. JS plugin import를 추가하지 않고, Rust plugin extension을 통해 system clipboard를 사용한다.</li>\n<li>Browser fallback은 유지한다. 정적 export 또는 일반 브라우저 preview에서도 copy/open UI가 완전히 죽지 않게 하기 위해서다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>src-tauri/capabilities/default.json</code>에 opener/clipboard permissions가 들어간다.</li>\n<li><code>RuntimeTerminalDrawer</code> 붙여넣기 버튼은 native clipboard helper를 호출한다.</li>\n<li><code>clipboard.test.mjs</code>가 native invoke read/write 경로와 fallback 경로를 검증한다.</li>\n<li>새 Playwright smoke가 provider login/save와 terminal PTY/paste 버튼 action을 누른다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1563,
+      "updatedAt": "2026-06-06T04:06:51.179Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-native-provider-terminal-action-reliability-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-native-provider-terminal-action-reliability.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Requirement: Native Provider and Terminal Action Reliability",
+      "excerpt": "Requirement: Native Provider and Terminal Action Reliability 배경 Provider 계정 설정과 터미널 편의 기능이 화면에 표시되더라도 실제 데스크톱 앱에서 OS URL opener, system clipboard, native PTY command로 이어지지 않으면 사용자는 기능이 안 된다고 판단한다. 요구사항 REQ NAR 001 : Provider login/key/docs 버튼은 raw shell command가 아니라 Tauri opener ",
+      "html": "<h1>Requirement: Native Provider and Terminal Action Reliability</h1>\n<h2>배경</h2>\n<p>Provider 계정 설정과 터미널 편의 기능이 화면에 표시되더라도 실제 데스크톱 앱에서 OS URL opener, system clipboard, native PTY command로 이어지지 않으면 사용자는 기능이 안 된다고 판단한다.</p>\n<h2>요구사항</h2>\n<ul>\n<li><code>REQ-NAR-001</code>: Provider login/key/docs 버튼은 raw shell command가 아니라 Tauri opener 기반 OS default browser 동작으로 연결되어야 한다.</li>\n<li><code>REQ-NAR-002</code>: Terminal copy/paste는 브라우저 clipboard만 의존하지 않고 Tauri system clipboard 경로를 우선 사용해야 한다.</li>\n<li><code>REQ-NAR-003</code>: Tauri capability는 opener URL과 clipboard read/write text 권한을 명시해야 한다.</li>\n<li><code>REQ-NAR-004</code>: Provider key 저장, provider URL open, native PTY start, terminal paste action은 클릭 smoke에서 handler 호출까지 검증되어야 한다.</li>\n<li><code>REQ-NAR-005</code>: 실패 시 버튼/상태 메시지가 사용자가 볼 수 있는 위치에 남아야 하며 조용히 실패하면 안 된다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>OAuth 자동 로그인, browser cookie 수집, provider key 자동 발급.</li>\n<li>OS keychain secret store 교체.</li>\n<li>Headless test에서 실제 macOS browser window 또는 system clipboard 내용까지 검증.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>tauri-plugin-opener</code>와 <code>tauri-plugin-clipboard-manager</code>가 Tauri runtime에 등록된다.</li>\n<li>Provider URL open command는 opener plugin을 사용한다.</li>\n<li>Renderer clipboard utility는 native command, browser clipboard, textarea fallback 순서로 동작한다.</li>\n<li>Smoke script가 provider/terminal 클릭 action을 검증한다.</li>\n<li>renderer check/test/build, Rust check/test, desktop internal package build가 통과한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1723,
+      "updatedAt": "2026-06-06T04:06:51.178Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-native-provider-terminal-action-reliability.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Native Provider and Terminal Action Reliability",
+      "excerpt": "Web Search: Native Provider and Terminal Action Reliability 검색 일시 2026 06 06 질문 Provider login/key 버튼과 터미널 clipboard 버튼이 데스크톱 앱에서 실제 OS 기능으로 동작하려면 어떤 Tauri v2 플러그인과 권한이 필요한가? xterm.js 터미널 surface에서 검색/fit/link/clipboard 류 기능은 어떤 addon 또는 host API와 연결해야 하는가? OpenAI/Gemini API key ",
+      "html": "<p>Web Search: Native Provider and Terminal Action Reliability 검색 일시 2026 06 06 질문 Provider login/key 버튼과 터미널 clipboard 버튼이 데스크톱 앱에서 실제 OS 기능으로 동작하려면 어떤 Tauri v2 플러그인과 권한이 필요한가? xterm.js 터미널 surface에서 검색/fit/link/clipboard 류 기능은 어떤 addon 또는 host API와 연결해야 하는가? OpenAI/Gemini API key setup URL은 공식 문서 기준으로 유지되는가? 확인한 출처 Tauri Clipboard plugin: https://v2.tauri.app</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2819,
+      "updatedAt": "2026-06-06T04:06:51.177Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
       "id": "history-2026-2026-06-06-md",
       "path": "_history/2026/2026-06-06.md",
       "category": "daily-history",
@@ -10625,22 +10817,6 @@
       "workspaceArea": "_history/work-summaries"
     },
     {
-      "id": "history-work-timings-2026-2026-06-06-eval-report-model-structure-json",
-      "path": "_history/work-timings/2026/2026-06-06-eval-report-model-structure.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Eval Report Model Structure",
-      "excerpt": "{ \"task id\": \"2026 06 06 eval report model structure\", \"title\": \"EVAL report model structure\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intak",
-      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 eval report model structure&quot;, &quot;title&quot;: &quot;EVAL report model structure&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;notes&quot;: &quot;Checked Reac</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1574,
-      "updatedAt": "2026-06-06T01:00:24.811Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-eval-report-model-structure-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-eval-report-model-structure/tasks.ko.md",
       "category": "project-spec",
@@ -10671,22 +10847,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-eval-report-model-structure-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-eval-report-model-structure.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "2026 06 06 사용자 요청 요약",
-      "excerpt": "2026 06 06 사용자 요청 요약 요청 구조개선. 해석 desktop app source 구조에서 즉시 개선 가능한 부분을 찾아 구현한다. 이번 slice는 EVAL report의 score/model 책임을 JSX component에서 분리하는 것으로 정했다. 연결 산출물 platform desktop app/specs/2026 06 06 eval report model structure/ platform desktop app/docs/requirements/2026 06 06 eval re",
-      "html": "<p>2026 06 06 사용자 요청 요약 요청 구조개선. 해석 desktop app source 구조에서 즉시 개선 가능한 부분을 찾아 구현한다. 이번 slice는 EVAL report의 score/model 책임을 JSX component에서 분리하는 것으로 정했다. 연결 산출물 platform desktop app/specs/2026 06 06 eval report model structure/ platform desktop app/docs/requirements/2026 06 06 eval report model structure.ko.md</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 450,
-      "updatedAt": "2026-06-06T00:57:37.807Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-eval-report-model-structure-plan-ko-md",
@@ -10751,70 +10911,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-eval-report-model-structure-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-eval-report-model-structure.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "2026 06 06 EVAL report model structure web search",
-      "excerpt": "2026 06 06 EVAL report model structure web search 질의 React official guidance separating logic from components custom hooks pure functions useMemo components architecture TypeScript official modules type only imports module structure maintainability React official scaling up reduc",
-      "html": "<p>2026 06 06 EVAL report model structure web search 질의 React official guidance separating logic from components custom hooks pure functions useMemo components architecture TypeScript official modules type only imports module structure maintainability React official scaling up reducer context extracting state logic components architecture Tauri official process</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1627,
-      "updatedAt": "2026-06-06T00:57:07.704Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "2026 06 06 EVAL runtime telemetry source refactor 평가",
-      "excerpt": "2026 06 06 EVAL runtime telemetry source refactor 평가 평가 대상 요청: 소스개선. 구현 slice: EVAL runtime telemetry score model을 pure TypeScript module로 분리. 완료 기준 평가 유지보수성: UI component에서 score/format/row construction 책임을 제거했다. 검증성: helper module boundary를 static contract와 tests가 확인한다. 동작 보존: ",
-      "html": "<p>2026 06 06 EVAL runtime telemetry source refactor 평가 평가 대상 요청: 소스개선. 구현 slice: EVAL runtime telemetry score model을 pure TypeScript module로 분리. 완료 기준 평가 유지보수성: UI component에서 score/format/row construction 책임을 제거했다. 검증성: helper module boundary를 static contract와 tests가 확인한다. 동작 보존: score formula와 UI data attributes는 유지했다. resource lifecycle: 새 runtime resource를</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1404,
-      "updatedAt": "2026-06-06T00:48:37.024Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-eval-runtime-telemetry-source-refactor-json",
-      "path": "_history/work-timings/2026/2026-06-06-eval-runtime-telemetry-source-refactor.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Eval Runtime Telemetry Source Refactor",
-      "excerpt": "{ \"task id\": \"2026 06 06 eval runtime telemetry source refactor\", \"title\": \"EVAL runtime telemetry source refactor\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"la",
-      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 eval runtime telemetry source refactor&quot;, &quot;title&quot;: &quot;EVAL runtime telemetry source refactor&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1817,
-      "updatedAt": "2026-06-06T00:48:37.024Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "2026 06 06 request to outcome trace",
-      "excerpt": "2026 06 06 request to outcome trace 요청 소스개선. 결정 가장 최근 변경에서 커진 EVAL runtime telemetry 계산을 source 구조 개선 대상으로 선택했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationRuntimeTelemetry.ts platform desktop app/renderer/workspace monitor/components/featur",
-      "html": "<p>2026 06 06 request to outcome trace 요청 소스개선. 결정 가장 최근 변경에서 커진 EVAL runtime telemetry 계산을 source 구조 개선 대상으로 선택했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationRuntimeTelemetry.ts platform desktop app/renderer/workspace monitor/components/features/EvaluationReportPanel.tsx platform desktop app/renderer/workspace monitor/scr</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1186,
-      "updatedAt": "2026-06-06T00:48:37.023Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-eval-runtime-telemetry-source-refactor-tasks-ko-md",
@@ -18095,102 +18191,6 @@
       "historyDate": "2026-06-04",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-configs-user-flow-registry-json",
-      "path": "platform-desktop-app/configs/user-flow-registry.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "User Flow Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 02\", \"name\": \"desktop user flow registry\", \"purpose\": \"Defines the end user and developer superadmin flow for making the agent platform usable as installable desktop software.\", \"reader guide\": { \"summary\": \"Use this registry before designing desktop ",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-02&quot;,\n  &quot;name&quot;: &quot;desktop-user-flow-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines the end-user and developer-superadmin flow for making the agent platform usable as installable desktop software.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before designing desktop screens, onboarding, installer behavior, first-run setup, workspace selection, CLI capability checks, or user-facing task execution flows.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read product_principles first to understand the usability bar.&quot;,\n      &quot;Read install_flow and first_run_flow before adding installer or desktop shell code.&quot;,\n      &quot;Read home_information_architecture and task_run_flow before designing app navigation.&quot;,\n      &quot;Read developer_superadmin_flow when exposing internal configs, traces, agents, logs, and validation tools.&quot;,\n      &quot;Read failure_recovery_flows before adding background processes, CLI adapters, local services, or updates.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-04&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The desktop shell framework changes.&quot;,\n      &quot;The app adds real installer, updater, sidecar, local service, or CLI execution.&quot;,\n      &quot;The workspace monitor navigation changes.&quot;,\n      &quot;View mode, install mode, work mode, notification, CLI adapter, or orchestration behavior changes.&quot;,\n      &quot;A usability test, user session, or support issue shows friction in install, first run, task start, result review, or recovery.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;apple_onboarding&quot;,\n      &quot;title&quot;: &quot;Apple Human Interface Guidelines: Onboarding&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/design/human-interface-guidelines/onboarding&quot;,\n      &quot;source_type&quot;: &quot;official_design_guidance&quot;,\n      &quot;used_for&quot;: [\n        &quot;postpone nonessential setup&quot;,\n        &quot;place instructions near relevant UI&quot;,\n        &quot;request permissions only when needed for function&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;microsoft_fluent_onboarding&quot;,\n      &quot;title&quot;: &quot;Fluent 2 Design System: Onboarding&quot;,\n      &quot;url&quot;: &quot;https://fluent2.microsoft.design/onboarding/&quot;,\n      &quot;source_type&quot;: &quot;official_design_guidance&quot;,\n      &quot;used_for&quot;: [\n        &quot;active onboarding&quot;,\n        &quot;standard components&quot;,\n        &quot;setup wizard or multi-step flow when setup is required&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_distribute&quot;,\n      &quot;title&quot;: &quot;Tauri: Distribute&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop installer distribution direction&quot;,\n        &quot;platform-specific packaging reference&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_updater&quot;,\n      &quot;title&quot;: &quot;Tauri: Updater&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/plugin/updater/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;future update flow and user-wide installer implications&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;electron_forge&quot;,\n      &quot;title&quot;: &quot;Electron Forge&quot;,\n      &quot;url&quot;: &quot;https://www.electronforge.io/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;fallback desktop packaging and makers comparison&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;electron_utility_process&quot;,\n      &quot;title&quot;: &quot;Electron: utilityProcess&quot;,\n      &quot;url&quot;: &quot;https://www.electronjs.org/docs/latest/api/utility-process&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;fallback child-process isolation comparison for CLI orchestration&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;desktop_distribution_registry&quot;,\n      &quot;title&quot;: &quot;Desktop Distribution Registry&quot;,\n      &quot;path&quot;: &quot;platform-desktop-app/configs/desktop-distribution-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop framework and installer release gates&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;view_mode_registry&quot;,\n      &quot;title&quot;: &quot;View Mode Registry&quot;,\n      &quot;path&quot;: &quot;agent-platform/configs/access/view-mode-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;user, developer, and superadmin developer view separation&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;install_mode_registry&quot;,\n      &quot;title&quot;: &quot;Install Mode Registry&quot;,\n      &quot;path&quot;: &quot;agent-platform/configs/installations/install-mode-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;repository setup modes distinct from desktop installer flow&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;work_mode_registry&quot;,\n      &quot;title&quot;: &quot;Work Mode Registry&quot;,\n      &quot;path&quot;: &quot;agent-platform/configs/workflows/work-mode-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;task execution modes exposed after first-run setup&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;cli_adapter_registry&quot;,\n      &quot;title&quot;: &quot;CLI Adapter Registry&quot;,\n      &quot;path&quot;: &quot;agent-platform/configs/integrations/cli-adapter-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;optional CLI capability checks</code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 40316,
-      "updatedAt": "2026-06-03T22:18:54.653Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-02-installable-desktop-en-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Installable Desktop App Requirements",
-      "excerpt": "Installable Desktop App Requirements Scope These are the first requirements for turning the platform into installable software, similar to a desktop application such as Visual Studio Code. Requirements | ID | Requirement | Priority | Verification | | | | | | | PDA REQ 001 | Insta",
-      "html": "<h1>Installable Desktop App Requirements</h1>\n<h2>Scope</h2>\n<p>These are the first requirements for turning the platform into installable software, similar to a desktop application such as Visual Studio Code.</p>\n<h2>Requirements</h2>\n<table><thead><tr><th>ID</th><th>Requirement</th><th>Priority</th><th>Verification</th></tr></thead><tbody><tr><td>PDA-REQ-001</td><td>Installable app productization shall be owned by the <code>platform-desktop-app/</code> root project.</td><td>must</td><td>Project registry and structure audit</td></tr><tr><td>PDA-REQ-002</td><td>Repository setup <code>install_mode</code> and end-user installer packaging shall be separated in docs and configs.</td><td>must</td><td>Product boundary docs and registry review</td></tr><tr><td>PDA-REQ-003</td><td>The current desktop product shell should own <code>platform-desktop-app/renderer/workspace-monitor/</code> as the selected product UI source.</td><td>should</td><td>Desktop distribution registry review</td></tr><tr><td>PDA-REQ-004</td><td>Tauri, Electron, and native packaging options shall be compared before dependency installation or implementation.</td><td>must</td><td>Packaging strategy and spec traceability</td></tr><tr><td>PDA-REQ-005</td><td>Release readiness shall require signing, notarization or OS trust, install/update/uninstall smoke tests, privacy review, and dependency/license review.</td><td>must</td><td>Release gate checklist</td></tr><tr><td>PDA-REQ-006</td><td>Real tokens, webhook URLs, browser cookies, and private snapshots shall not be bundled in installers.</td><td>must</td><td>Privacy/security review</td></tr><tr><td>PDA-REQ-007</td><td>The macOS executable structure shall distinguish developer local run, internal test <code>.app</code>, and public distribution app; it shall define the <code>.app</code> bundle/process model, workspace selection, optional CLI adapters, Developer ID signing, hardened runtime, notarization, stapling, update, and clean Mac smoke-test criteria.</td><td>must</td><td><code>macos-execution-profile.json</code>, macOS execution docs, config contract</td></tr><tr><td>PDA-REQ-008</td><td>The Windows executable structure shall distinguish developer local run, internal test installer, and public signed distribution; it shall define MSI/NSIS/MSIX, WebView2, code signing, SmartScreen, update, uninstall, and clean Windows smoke-test criteria.</td><td>must</td><td><code>windows-execution-profile.json</code>, config contract</td></tr><tr><td>PDA-REQ-009</td><td>The current implementation product shell shall follow a Tauri v2/Rust desktop shell, project-owned <code>renderer/workspace-monitor</code> static UI, <code>agent-platform</code> Python layer, and optional external CLI adapter architecture.</td><td>must</td><td><code>src-tauri/</code>, <code>package.json</code>, desktop distribution registry</td></tr><tr><td>PDA-REQ-010</td><td>AI coding tools such as Codex, Claude Code, Cursor, and Antigravity shall be configurable optional capabilities, not required platform runtimes.</td><td>must</td><td>CLI adapter registry and desktop registry review</td></tr><tr><td>PDA-REQ-011</td><td>Before installing Rust/Tauri dependencies or running desktop builds, the work shall record an installation audit, license/security review, and rollback plan.</td><td>must</td><td>Installation records and <code>planned_commands</code> review</td></tr><tr><td>PDA-REQ-012</td><td>Public-ready or “just install it” wording is prohibited until macOS/Windows signing, notarization or code signing, clean-machine smoke tests, and update/uninstall/rollback tests pass.</td><td>must</td><td>Release gates and evaluation record</td></tr><tr><td>PDA-REQ-013</td><td>The installable app shall expose Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, and Claw Code as the first AI CLI adapter candidates, while making no single CLI required to open the app, view a workspace, or browse history.</td><td>must</td><td>CLI adapter registry, user-flow registry, readiness test</td></tr><tr><td>PDA-REQ-014</td><td>Multi-AI-CLI execution shall be managed by a platform supervisor with process graph state, lane status, bounded terminal output, stdin policy, cancellation, orphan cleanup, and merge gates, not by simply opening several terminals.</td><td>must</td><td>multi-CLI architecture doc, CLI pipeline validation, resource check</td></tr><tr><td>PDA-REQ-015</td><td>When a CLI asks a user question while the user is absent, the app shall send a safe defer message only when supported, pause only the dependent lane, store the decision in the decision inbox, and continue independent work.</td><td>must</td><td><code>ai_cli_orchestration_flow</code>, human decision inbox, omission check</td></tr><tr><td>PDA-REQ-016</td><td>Terminal output shall not be preserved only as raw scrollback; useful output shall become structured task events, process events, artifacts, decision packets, verification records, or reusable knowledge candidates with provenance, redaction, validation, and retention.</td><td>must</td><td>data accumulation contract, history/evaluation records</td></tr><tr><td>PDA-REQ-017</td><td>Source-code editing shall prefer mature open-source editor surfaces such as Monaco Editor before custom editor work, and product acceptance shall validate file URI/model lifecycle, disposal, workers, and runtime constraints.</td><td>should</td><td>architecture doc, dependency audit, UI product acceptance</td></tr><tr><td>PDA-REQ-018</td><td>The first real supervisor implementation shall provide PATH detection and stdin-free bounded health/version checks only for allowlisted AI CLIs, and missing CLIs shall report <code>capability_missing</code>.</td><td>must</td><td>Tauri commands, Desktop tab, readiness/test</td></tr></tbody></table>\n<p>| PDA-REQ-019 | The desktop UI shall remain safe to open in a normal browser without the Tauri runtime; CLI execution controls shall degrade to an unavailable fallback. | must | workspace-monitor build, Type</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 14366,
-      "updatedAt": "2026-06-03T22:11:39.938Z",
-      "historyDate": "2026-06-02",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-product-boundary-en-md",
-      "path": "platform-desktop-app/docs/product-boundary.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Installable Desktop App Product Boundary",
-      "excerpt": "Installable Desktop App Product Boundary Purpose platform desktop app/ productizes this workspace platform as software that an end user can install. The existing agent platform install mode prepares a repository environment for users or developers. This project owns distributable",
-      "html": "<h1>Installable Desktop App Product Boundary</h1>\n<h2>Purpose</h2>\n<p><code>platform-desktop-app/</code> productizes this workspace platform as software that an end user can install. The existing <code>agent-platform</code> <code>install_mode</code> prepares a repository environment for users or developers. This project owns distributable desktop packaging and the installed-app experience.</p>\n<h2>Owned Scope</h2>\n<ul>\n<li>Desktop app product requirements</li>\n<li>Desktop shell or native wrapper selection</li>\n<li>macOS, Windows, and Linux packaging strategy</li>\n<li>Code signing, notarization, update, uninstall, and rollback release gates</li>\n<li>User settings, workspace selection, and private-data protection boundaries</li>\n<li>Command allowlists, workspace path allowlists, permission settings, and missing-CLI fallback boundaries when external CLI execution is needed</li>\n</ul>\n<h2>Out Of Scope</h2>\n<ul>\n<li>Core agent, evaluation, and research implementation in <code>agent-platform/</code></li>\n<li>Renderer UI implementation in <code>platform-desktop-app/renderer/workspace-monitor/</code></li>\n<li>Repository setup <code>install_mode</code></li>\n<li>Behavior or authenticated sessions of external CLIs such as Codex CLI, Claude Code, GitHub CLI, package managers, or deployment CLIs</li>\n<li>Domain projects such as <code>presentation-agent/</code></li>\n</ul>\n<h2>First Product Assumption</h2>\n<p>The first version should use <code>platform-desktop-app/renderer/workspace-monitor/</code> as the desktop shell&#039;s project-owned renderer instead of creating a separate UI. However, the product identity is an agent capability platform, not a monitoring dashboard. The first screen and feature structure shall foreground the two primary capabilities defined in <code>platform-desktop-app/configs/product-feature-registry.json</code>: Agent Core for easy custom agent and subagent creation, and CLI orchestration for continuous Claude Code-style guest CLI work through the decision inbox and task-run store. Root tool management, work visibility, the workbench, and the learning/evaluation loop are supporting layers for those two core capabilities.</p>\n<p>History, documents, project structure, evaluations, source inventory, and service readiness are supporting observability surfaces for trusting and improving the primary features. They must not replace the product&#039;s first promise or central navigation.</p>\n<p>Add desktop-specific UI or native behavior later when requirements are concrete:</p>\n<ul>\n<li>Running local Python agents from the app</li>\n<li>File-system watching, notifications, OS credential storage, or other native APIs</li>\n<li>Adapter and permission UI for invoking multiple CLIs without becoming dependent on any one of them</li>\n<li>Update channels, workspace profiles, or plugin management</li>\n</ul>\n<h2>Core Rules</h2>\n<ul>\n<li>An installable app is not the same thing as a repository development environment.</li>\n<li>This repository is the development source for building the platform; the customer product is distributed as an app/runtime/data boundary that does not expose the platform source tree.</li>\n<li>User workspaces, platform data stores, log stores, and agent workspaces are runtime data planes separated from platform source code.</li>\n<li>Agent definitions are grouped in <code>agent-platform/configs/agents/</code>; runtime agent input/output/log/handoff/temp files belong in the installed app&#039;s agent workspace plane.</li>\n<li>A manual terminal <code>git clone</code> followed by running the app from that folder is not the product surface. The installed app must provide existing-workspace import, repository clone, active workspace selection, and workspace state persistence through Workspace Host.</li>\n<li>Logs are classified as runtime health, task execution, CLI IO, agent work, or support diagnostic before retention, redaction, and support export policies apply.</li>\n<li>Do not bundle real tokens, webhook URLs, browser cookies, or private snapshots.</li>\n<li>A build is not distributable until signing, notarization or OS-specific trust requirements, install/uninstall smoke tests, and privacy review are complete.</li>\n<li>Before installing Tauri or Electron, record dependency audit and installation-audit plans.</li>\n<li>The installable app is not a single CLI wrapper. The platform launches first as the host runtime; external CLIs attach only as guest adapter capabilities registered in <code>agent-platform/configs/integrations/cli-adapter-registry.json</code>.</li>\n<li>Follow <code>platform-desktop-app/configs/runtime-data-boundary-registry.json</code> for detailed code/data/log/agent workspace steering.</li>\n<li>Follow <code>platform-desktop-app/configs/product-feature-registry.json</code> for primary/supporting feature roles, desktop home priority, and capability promotion loops.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 4438,
-      "updatedAt": "2026-06-03T22:10:25.418Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-product-boundary-ko-md",
-      "path": "platform-desktop-app/docs/product-boundary.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "설치형 데스크톱 앱 제품 경계",
-      "excerpt": "설치형 데스크톱 앱 제품 경계 목적 platform desktop app/ 은 이 저장소 플랫폼을 최종 사용자가 설치하는 소프트웨어로 만드는 제품화 프로젝트다. 기존 agent platform 의 install mode 는 레포지토리 개발/사용 환경을 준비하는 설정이고, 이 프로젝트는 DMG, MSIX, MSI, NSIS 같은 배포 패키지와 데스크톱 앱 경험을 다룬다. 소유 범위 데스크톱 앱 제품 요구사항 데스크톱 shell 또는 native wrapper 선택 macOS, Windows, Lin",
-      "html": "<h1>설치형 데스크톱 앱 제품 경계</h1>\n<h2>목적</h2>\n<p><code>platform-desktop-app/</code>은 이 저장소 플랫폼을 최종 사용자가 설치하는 소프트웨어로 만드는 제품화 프로젝트다. 기존 <code>agent-platform</code>의 <code>install_mode</code>는 레포지토리 개발/사용 환경을 준비하는 설정이고, 이 프로젝트는 DMG, MSIX, MSI, NSIS 같은 배포 패키지와 데스크톱 앱 경험을 다룬다.</p>\n<h2>소유 범위</h2>\n<ul>\n<li>데스크톱 앱 제품 요구사항</li>\n<li>데스크톱 shell 또는 native wrapper 선택</li>\n<li>macOS, Windows, Linux 설치 패키지 전략</li>\n<li>code signing, notarization, update, uninstall, rollback release gate</li>\n<li>사용자 설정, workspace 선택, private data 보호 경계</li>\n<li>외부 CLI를 실행해야 할 때 command allowlist, workspace path allowlist, permission 설정, missing-CLI fallback 경계</li>\n</ul>\n<h2>소유하지 않는 범위</h2>\n<ul>\n<li><code>agent-platform/</code>의 핵심 에이전트/평가/조사 구현</li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/</code>의 renderer UI 구현</li>\n<li>레포지토리 세팅용 사용자/개발자 <code>install_mode</code></li>\n<li>Codex CLI, Claude Code, GitHub CLI, package manager, 배포 CLI 같은 외부 CLI 자체의 동작이나 인증 세션</li>\n<li>발표 에이전트 같은 도메인 프로젝트 기능</li>\n</ul>\n<h2>첫 제품 가정</h2>\n<p>첫 버전은 새 UI를 따로 만들기보다 <code>platform-desktop-app/renderer/workspace-monitor/</code>를 데스크톱 shell의 project-owned renderer로 사용한다. 단, 제품 정체성은 모니터링 대시보드가 아니라 에이전트 역량 플랫폼이다. 첫 화면과 기능 구조는 <code>platform-desktop-app/configs/product-feature-registry.json</code>에 정의된 두 핵심 기능, 즉 커스텀 에이전트와 서브에이전트를 쉽게 만드는 Agent Core, 그리고 Claude Code 같은 guest CLI 작업을 decision inbox와 task-run store로 이어가는 CLI orchestration을 primary로 드러내야 한다. 루트 툴 관리, 작업 가시성, workbench, learning/evaluation loop는 이 두 핵심 기능을 가능하게 하는 supporting layer다.</p>\n<p>히스토리, 문서, 프로젝트 구조, 평가, source inventory, service readiness 같은 화면은 primary 기능을 신뢰하고 개선하기 위한 supporting observability다. 이 표면들이 제품의 첫 약속이나 중심 네비게이션을 대체하면 안 된다.</p>\n<p>이후 다음 요구가 확실해지면 별도 데스크톱 UI 또는 native 기능을 추가한다.</p>\n<ul>\n<li>로컬 Python 에이전트를 앱에서 실행해야 한다.</li>\n<li>파일 시스템 감시, 알림, OS credential store 같은 native API가 필요하다.</li>\n<li>여러 CLI를 앱에서 호출하되 특정 CLI에 종속되지 않는 adapter/permission UI가 필요하다.</li>\n<li>update channel, workspace profile, plugin 관리 같은 데스크톱 제품 기능이 필요하다.</li>\n</ul>\n<h2>핵심 규칙</h2>\n<ul>\n<li>설치형 앱은 레포지토리 개발 환경이 아니다.</li>\n<li>이 레포지토리는 플랫폼을 만드는 개발 원천이며, 고객이 설치해서 쓰는 제품은 플랫폼 source tree를 노출하지 않는 앱/런타임/데이터 경계로 배포한다.</li>\n<li>사용자 workspace, platform data store, log store, agent workspace는 플랫폼 source code와 분리된 runtime data plane으로 취급한다.</li>\n<li>agent definition은 <code>agent-platform/configs/agents/</code>에 모으고, 설치 앱에서 agent가 실제 작업하는 input/output/log/handoff/temp 파일은 agent workspace plane에 모은다.</li>\n<li>사용자가 별도 터미널에서 <code>git clone</code> 후 그 폴더에서 앱을 실행하는 흐름은 제품 표면이 아니다. 설치 앱은 Workspace Host에서 기존 workspace import, repository clone, active workspace 선택, workspace state 저장을 직접 제공해야 한다.</li>\n<li>로그는 runtime health, task execution, CLI IO, agent work, support diagnostic처럼 분류한 뒤 retention, redaction, support export 정책을 적용한다.</li>\n<li>실제 token, webhook URL, browser cookie, private snapshot은 번들에 넣지 않는다.</li>\n<li>배포 가능한 앱이라고 부르려면 signing, notarization 또는 OS별 신뢰 체인, 설치/삭제 smoke test, privacy review가 끝나야 한다.</li>\n<li>Tauri/Electron 중 하나를 설치하기 전에는 dependency audit와 설치 감사 계획을 먼저 남긴다.</li>\n<li>설치형 앱은 특정 CLI wrapper가 아니다. 플랫폼이 먼저 실행되는 host runtime이며, 외부 CLI는 <code>agent-platform/configs/integrations/cli-adapter-registry.json</code>에 등록된 guest adapter capability로만 붙인다.</li>\n<li>코드/데이터/로그/에이전트 작업영역의 세부 steering은 <code>platform-desktop-app/configs/runtime-data-boundary-registry.json</code>을 따른다.</li>\n<li>제품 기능의 primary/supporting 역할, desktop home 우선순위, capability promotion loop는 <code>platform-desktop-app/configs/product-feature-registry.json</code>을 따른다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 4795,
-      "updatedAt": "2026-06-03T22:10:19.855Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-04-manager-tool-orchestration-planner-tasks-ko-md",
-      "path": "_specs/workspace-platform/2026-06-04-manager-tool-orchestration-planner/tasks.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "Tasks: Manager Tool Orchestration Planner",
-      "excerpt": "Tasks: Manager Tool Orchestration Planner x 웹 검색으로 manager as tools와 subagent/router/handoff 패턴 확인 x 기존 agent orchestration 요구사항과 스펙 확인 x 요구사항 변경/검토 기록 추가 x manager tool.py planner 모듈 추가 x plan agent orchestration CLI 추가 x manager tool input template 추가 x agent orchestration regi",
-      "html": "<h1>Tasks: Manager Tool Orchestration Planner</h1>\n<ul>\n<li>[x] 웹 검색으로 manager-as-tools와 subagent/router/handoff 패턴 확인</li>\n<li>[x] 기존 agent orchestration 요구사항과 스펙 확인</li>\n<li>[x] 요구사항 변경/검토 기록 추가</li>\n<li>[x] <code>manager_tool.py</code> planner 모듈 추가</li>\n<li>[x] <code>plan-agent-orchestration</code> CLI 추가</li>\n<li>[x] manager tool input template 추가</li>\n<li>[x] agent orchestration registry와 agent-orchestrator spec 갱신</li>\n<li>[x] 문서와 README 명령 갱신</li>\n<li>[x] 단위 테스트 추가</li>\n<li>[x] 검증 명령 실행</li>\n<li>[x] history, omission, grounding, evaluation, timing 기록</li>\n<li>[x] commit 및 push</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 614,
-      "updatedAt": "2026-06-03T21:58:45.665Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-04-manager-tool-orchestration-planner-validation-ko-md",
-      "path": "_specs/workspace-platform/2026-06-04-manager-tool-orchestration-planner/validation.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "Validation: Manager Tool Orchestration Planner",
-      "excerpt": "Validation: Manager Tool Orchestration Planner 필수 검증 추가 검증 수용 기준 unit test가 성공한다. planner 결과가 ready to orchestrate 다. manager self call, unknown subagent, invalid pattern은 테스트에서 rework required 로 확인된다. config contract와 agent orchestration registry가 ready/self documenting 상태다. 실행 ",
-      "html": "<h1>Validation: Manager Tool Orchestration Planner</h1>\n<h2>필수 검증</h2>\n<pre><code>\ncd agent-platform\nPYTHONPATH=src python3 -m unittest discover -s tests\nPYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json\nPYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json\nPYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/agent-orchestrator-agent.json\nPYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/orchestration/agent-orchestration-registry.json configs/orchestration/manager-tool-plan-template.json\n</code></pre>\n<h2>추가 검증</h2>\n<pre><code>\ncd agent-platform\nPYTHONPATH=src python3 -m agent_platform.cli complete-coding-research ../_history/plans/2026/2026-06-04-manager-tool-orchestration-coding-research.json\nPYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-04-manager-tool-orchestration-omission-input.json\nPYTHONPATH=src python3 -m agent_platform.cli check-grounding ../_history/evaluations/2026/2026-06-04-manager-tool-orchestration-grounding-input.json\nPYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-04-manager-tool-orchestration-evaluation-input.json\n</code></pre>\n<h2>수용 기준</h2>\n<ul>\n<li>unit test가 성공한다.</li>\n<li>planner 결과가 <code>ready_to_orchestrate</code>다.</li>\n<li>manager self-call, unknown subagent, invalid pattern은 테스트에서 <code>rework_required</code>로 확인된다.</li>\n<li>config contract와 agent orchestration registry가 ready/self-documenting 상태다.</li>\n</ul>\n<h2>실행 결과</h2>\n<ul>\n<li><code>tests.test_manager_tool_orchestration</code>: 5 tests OK</li>\n<li><code>tests.test_agent_orchestration tests.test_manager_tool_orchestration</code>: 9 tests OK</li>\n<li><code>plan-agent-orchestration</code>: <code>ready_to_orchestrate</code></li>\n<li><code>complete-coding-research</code>: <code>ready_to_implement</code></li>\n<li><code>check-agent-orchestration</code>: <code>ready</code></li>\n<li><code>check-config-contract</code>: <code>self_documenting</code></li>\n<li><code>check-memory-bootstrap</code>: <code>ready_to_bootstrap</code></li>\n<li><code>check-omissions</code>: <code>coverage_ready</code></li>\n<li><code>check-grounding</code>: <code>ready_to_publish</code></li>\n<li><code>evaluate-work</code>: <code>ready_to_close</code></li>\n<li>전체 <code>unittest discover -s tests</code>: 172 tests 중 기존 registry/view-mode readiness 실패 3건이 있으며, 이번 변경 파일과 직접 관련된 diff는 없다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2302,
-      "updatedAt": "2026-06-03T21:57:24.773Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
     }
   ],
   "historyDays": [
@@ -18201,14 +18201,14 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 21
+          "count": 22
         },
         {
           "category": "request-trace",
           "count": 14
         },
         {
-          "category": "work-timing",
+          "category": "work-summary",
           "count": 14
         },
         {
@@ -18220,8 +18220,8 @@
           "count": 13
         },
         {
-          "category": "work-summary",
-          "count": 13
+          "category": "work-timing",
+          "count": 12
         },
         {
           "category": "plan",
@@ -18354,16 +18354,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "2026 06 06 EVAL runtime telemetry source refactor 평가",
-          "excerpt": "2026 06 06 EVAL runtime telemetry source refactor 평가 평가 대상 요청: 소스개선. 구현 slice: EVAL runtime telemetry score model을 pure TypeScript module로 분리. 완료 기준 평가 유지보수성: UI component에서 score/format/row construction 책임을 제거했다. 검증성: helper module boundary를 static contract와 tests가 확인한다. 동작 보존: ",
-          "updatedAt": "2026-06-06T00:48:37.024Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-main-tab-scroll-scope-policy-evaluation-input-json",
           "path": "_history/evaluations/2026/2026-06-06-main-tab-scroll-scope-policy-evaluation-input.json",
           "category": "evaluation",
@@ -18381,6 +18371,26 @@
           "title": "평가: Main Tab Scroll Scope Policy",
           "excerpt": "평가: Main Tab Scroll Scope Policy 날짜: 2026 06 06 결론 요청은 정책과 회귀 방지 검사 수준에서 충족됐다. main tab/page 전체를 기본 scroll owner로 두지 않는 원칙이 durable instructions, UI tone policy, memory bootstrap, renderer checker에 반영됐다. 검증 python3 tools/docs audit/src/docs audit.py check 통과. PYTHONPATH=src pytho",
           "updatedAt": "2026-06-06T03:35:44.386Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-native-provider-terminal-action-reliability-resource-json",
+          "path": "_history/evaluations/2026/2026-06-06-native-provider-terminal-action-reliability-resource.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Native Provider Terminal Action Reliability Resource",
+          "excerpt": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 native provider terminal action reliability\", \"resource risk occurred\": true, \"touched runtime resources\": \"Tauri opener plugin\", \"Tauri clipboard manager plugin\", \"native PTY renderer action path\", \"local static validation",
+          "updatedAt": "2026-06-06T04:18:56.225Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-native-provider-terminal-action-reliability.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "Evaluation: Native Provider and Terminal Action Reliability",
+          "excerpt": "Evaluation: Native Provider and Terminal Action Reliability 결론 요청한 “기능이 실제로 안 되는 것 같음”에 대해 provider URL open, provider key save, terminal PTY start, terminal clipboard paste가 native invoke 경로까지 도달하도록 수정했다. 데스크톱 OS 자원 사용은 Tauri opener와 Tauri clipboard manager로 연결했다. internal packa",
+          "updatedAt": "2026-06-06T04:18:56.225Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18594,16 +18604,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "2026 06 06 request to outcome trace",
-          "excerpt": "2026 06 06 request to outcome trace 요청 소스개선. 결정 가장 최근 변경에서 커진 EVAL runtime telemetry 계산을 source 구조 개선 대상으로 선택했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationRuntimeTelemetry.ts platform desktop app/renderer/workspace monitor/components/featur",
-          "updatedAt": "2026-06-06T00:48:37.023Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
           "category": "request-trace",
@@ -18611,6 +18611,16 @@
           "title": "Request Trace: Main Tab Scroll Scope Policy",
           "excerpt": "Request Trace: Main Tab Scroll Scope Policy 날짜: 2026 06 06 요청 스크롤은 code, 기능 목록, popup 같은 제한된 곳에서만 최대한 쓰고, 메인 화면/tab 전체를 scroll 영역으로 만드는 것을 자제해 달라는 UI 운영 지침. 결과 durable instructions와 AGENTS.md 에 main tab/page scroll ownership 제한을 추가했다. UI tone policy 한/영 문서에 근거, 원칙, 검증 항목을 추가했다. m",
           "updatedAt": "2026-06-06T03:34:28.044Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-native-provider-terminal-action-reliability.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Request Trace: Native Provider and Terminal Action Reliability",
+          "excerpt": "Request Trace: Native Provider and Terminal Action Reliability Request User reported that the previously added provider/terminal/CLI setup functions did not seem to work. Requirements platform desktop app/docs/requirements/2026 06 06 native provider terminal action reliability.ko",
+          "updatedAt": "2026-06-06T04:18:56.226Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18724,16 +18734,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-eval-report-model-structure-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-eval-report-model-structure.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "2026 06 06 사용자 요청 요약",
-          "excerpt": "2026 06 06 사용자 요청 요약 요청 구조개선. 해석 desktop app source 구조에서 즉시 개선 가능한 부분을 찾아 구현한다. 이번 slice는 EVAL report의 score/model 책임을 JSX component에서 분리하는 것으로 정했다. 연결 산출물 platform desktop app/specs/2026 06 06 eval report model structure/ platform desktop app/docs/requirements/2026 06 06 eval re",
-          "updatedAt": "2026-06-06T00:57:37.807Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
           "category": "user-request",
@@ -18741,6 +18741,16 @@
           "title": "사용자 요청 요약: Main Tab Scroll Scope Policy",
           "excerpt": "사용자 요청 요약: Main Tab Scroll Scope Policy 날짜: 2026 06 06 요지 사용자는 코드, 기능 목록, popup 같은 제한된 영역에서만 scroll을 쓰고, 메인 화면이나 tab 전체에 scroll 영역을 거는 것을 기본적으로 자제하라고 지시했다. 의도 데스크톱 앱의 넓은 화면을 main surface로 활용한다. 전체 tab scroll과 nested scroll이 겹쳐 생기는 불편함을 줄인다. code/log/list/dialog처럼 실제로 overflow가 필요",
           "updatedAt": "2026-06-06T03:34:28.042Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-native-provider-terminal-action-reliability.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "User Request Summary: Native Provider and Terminal Action Reliability",
+          "excerpt": "User Request Summary: Native Provider and Terminal Action Reliability 요약 사용자는 이전에 추가한 AI provider setup, terminal, CLI 관련 기능이 실제로 동작하지 않는 것 같다고 지적했다. 요구는 안내 UI가 아니라 데스크톱 앱의 OS 자원을 실제로 사용하도록 고치고, 구현 후 빌드까지 자동으로 끝내는 것이다. 적용된 해석 provider login/key/docs 버튼은 Tauri opener 기반 native URL",
+          "updatedAt": "2026-06-06T04:18:56.225Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18854,16 +18864,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-eval-report-model-structure-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-eval-report-model-structure.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "2026 06 06 EVAL report model structure web search",
-          "excerpt": "2026 06 06 EVAL report model structure web search 질의 React official guidance separating logic from components custom hooks pure functions useMemo components architecture TypeScript official modules type only imports module structure maintainability React official scaling up reduc",
-          "updatedAt": "2026-06-06T00:57:07.704Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
           "category": "web-search",
@@ -18871,6 +18871,16 @@
           "title": "Web Search: Main Tab Scroll Scope Policy",
           "excerpt": "Web Search: Main Tab Scroll Scope Policy 날짜: 2026 06 06 Queries Apple Human Interface Guidelines Scrolling macOS scroll views Microsoft Fluent UI scroll controls guidance scroll containers Baymard nested scrolling usability issue 확인한 출처 Apple Human Interface Guidelines, Scroll Vi",
           "updatedAt": "2026-06-06T03:34:28.041Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-native-provider-terminal-action-reliability.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: Native Provider and Terminal Action Reliability",
+          "excerpt": "Web Search: Native Provider and Terminal Action Reliability 검색 일시 2026 06 06 질문 Provider login/key 버튼과 터미널 clipboard 버튼이 데스크톱 앱에서 실제 OS 기능으로 동작하려면 어떤 Tauri v2 플러그인과 권한이 필요한가? xterm.js 터미널 surface에서 검색/fit/link/clipboard 류 기능은 어떤 addon 또는 host API와 연결해야 하는가? OpenAI/Gemini API key ",
+          "updatedAt": "2026-06-06T04:06:51.177Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19004,6 +19014,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-native-provider-terminal-action-reliability.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "Work Summary: Native Provider and Terminal Action Reliability",
+          "excerpt": "Work Summary: Native Provider and Terminal Action Reliability 완료 Tauri opener plugin을 추가하고 provider auth URL open command를 raw OS command에서 Tauri opener로 교체했다. Tauri clipboard manager plugin을 추가하고 read system clipboard text , write system clipboard text command를 등록했다. Terminal cl",
+          "updatedAt": "2026-06-06T04:18:56.225Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-06-parallel-snapshot-collector-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-parallel-snapshot-collector.ko.md",
           "category": "work-summary",
@@ -19114,26 +19134,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-eval-report-model-structure-json",
-          "path": "_history/work-timings/2026/2026-06-06-eval-report-model-structure.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Eval Report Model Structure",
-          "excerpt": "{ \"task id\": \"2026 06 06 eval report model structure\", \"title\": \"EVAL report model structure\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intak",
-          "updatedAt": "2026-06-06T01:00:24.811Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-06-eval-runtime-telemetry-source-refactor-json",
-          "path": "_history/work-timings/2026/2026-06-06-eval-runtime-telemetry-source-refactor.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Eval Runtime Telemetry Source Refactor",
-          "excerpt": "{ \"task id\": \"2026 06 06 eval runtime telemetry source refactor\", \"title\": \"EVAL runtime telemetry source refactor\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"la",
-          "updatedAt": "2026-06-06T00:48:37.024Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-main-tab-scroll-scope-policy-json",
           "path": "_history/work-timings/2026/2026-06-06-main-tab-scroll-scope-policy.json",
           "category": "work-timing",
@@ -19202,16 +19202,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2646,
+      "documents": 2652,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1021
+          "count": 1023
         },
         {
           "category": "web-search",
-          "count": 419
+          "count": 420
         },
         {
           "category": "plan",
@@ -19219,7 +19219,7 @@
         },
         {
           "category": "request-trace",
-          "count": 347
+          "count": 348
         },
         {
           "category": "work-timing",
@@ -19227,11 +19227,11 @@
         },
         {
           "category": "user-request",
-          "count": 132
+          "count": 133
         },
         {
           "category": "work-summary",
-          "count": 99
+          "count": 100
         },
         {
           "category": "daily-history",
@@ -19242,7 +19242,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6578372,
+      "totalSourceBytes": 6586243,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19267,11 +19267,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 34,
+      "evidenceEvents": 35,
       "decisionEvents": 0,
-      "openSignals": 20,
+      "openSignals": 21,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T03:58:52.562Z",
+      "latestEventAt": "2026-06-06T04:18:56.226Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19283,22 +19283,17 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 21
+        "count": 22
       },
       {
-        "id": "monitoring",
-        "label": "monitoring",
+        "id": "delivery",
+        "label": "delivery",
         "count": 14
       },
       {
         "id": "traceability",
         "label": "traceability",
         "count": 14
-      },
-      {
-        "id": "delivery",
-        "label": "delivery",
-        "count": 13
       },
       {
         "id": "evidence",
@@ -19309,6 +19304,11 @@
         "id": "intake",
         "label": "intake",
         "count": 13
+      },
+      {
+        "id": "monitoring",
+        "label": "monitoring",
+        "count": 12
       },
       {
         "id": "planning",
@@ -19330,11 +19330,11 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 21
+        "count": 22
       },
       {
-        "id": "timing",
-        "label": "timing",
+        "id": "summary",
+        "label": "summary",
         "count": 14
       },
       {
@@ -19348,14 +19348,14 @@
         "count": 13
       },
       {
-        "id": "summary",
-        "label": "summary",
-        "count": 13
-      },
-      {
         "id": "web-search",
         "label": "web search",
         "count": 13
+      },
+      {
+        "id": "timing",
+        "label": "timing",
+        "count": 12
       },
       {
         "id": "plan",
@@ -19381,6 +19381,96 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Native Provider and Terminal Action Reliability",
+        "detail": "Request Trace: Native Provider and Terminal Action Reliability Request User reported that the previously added provider/terminal/CLI setup functions did not seem to work. Requirements platform desktop app/docs/requirements/2026 06 06 native provider terminal action reliability.ko",
+        "path": "_history/request-traces/2026/2026-06-06-native-provider-terminal-action-reliability.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:18:56.226Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-native-provider-terminal-action-reliability-resource-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "evaluation",
+        "title": "2026 06 06 Native Provider Terminal Action Reliability Resource",
+        "detail": "{ \"schema version\": \"2026 06 06\", \"work id\": \"2026 06 06 native provider terminal action reliability\", \"resource risk occurred\": true, \"touched runtime resources\": \"Tauri opener plugin\", \"Tauri clipboard manager plugin\", \"native PTY renderer action path\", \"local static validation",
+        "path": "_history/evaluations/2026/2026-06-06-native-provider-terminal-action-reliability-resource.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:18:56.225Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "Evaluation: Native Provider and Terminal Action Reliability",
+        "detail": "Evaluation: Native Provider and Terminal Action Reliability 결론 요청한 “기능이 실제로 안 되는 것 같음”에 대해 provider URL open, provider key save, terminal PTY start, terminal clipboard paste가 native invoke 경로까지 도달하도록 수정했다. 데스크톱 OS 자원 사용은 Tauri opener와 Tauri clipboard manager로 연결했다. internal packa",
+        "path": "_history/evaluations/2026/2026-06-06-native-provider-terminal-action-reliability.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:18:56.225Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "User Request Summary: Native Provider and Terminal Action Reliability",
+        "detail": "User Request Summary: Native Provider and Terminal Action Reliability 요약 사용자는 이전에 추가한 AI provider setup, terminal, CLI 관련 기능이 실제로 동작하지 않는 것 같다고 지적했다. 요구는 안내 UI가 아니라 데스크톱 앱의 OS 자원을 실제로 사용하도록 고치고, 구현 후 빌드까지 자동으로 끝내는 것이다. 적용된 해석 provider login/key/docs 버튼은 Tauri opener 기반 native URL",
+        "path": "_history/user-requests/2026/2026-06-06-native-provider-terminal-action-reliability.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:18:56.225Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "Work Summary: Native Provider and Terminal Action Reliability",
+        "detail": "Work Summary: Native Provider and Terminal Action Reliability 완료 Tauri opener plugin을 추가하고 provider auth URL open command를 raw OS command에서 Tauri opener로 교체했다. Tauri clipboard manager plugin을 추가하고 read system clipboard text , write system clipboard text command를 등록했다. Terminal cl",
+        "path": "_history/work-summaries/2026/2026-06-06-native-provider-terminal-action-reliability.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:18:56.225Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Native Provider and Terminal Action Reliability",
+        "detail": "Web Search: Native Provider and Terminal Action Reliability 검색 일시 2026 06 06 질문 Provider login/key 버튼과 터미널 clipboard 버튼이 데스크톱 앱에서 실제 OS 기능으로 동작하려면 어떤 Tauri v2 플러그인과 권한이 필요한가? xterm.js 터미널 surface에서 검색/fit/link/clipboard 류 기능은 어떤 addon 또는 host API와 연결해야 하는가? OpenAI/Gemini API key ",
+        "path": "_history/web-searches/2026/2026-06-06-native-provider-terminal-action-reliability.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:06:51.177Z"
+      },
       {
         "id": "history-history-evaluations-2026-2026-06-06-terminal-provider-setup-usability-ko-md",
         "sourceType": "history",
@@ -20717,21 +20807,6 @@
         "timestamp": "2026-06-06T01:00:24.812Z"
       },
       {
-        "id": "history-history-work-timings-2026-2026-06-06-eval-report-model-structure-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 06 Eval Report Model Structure",
-        "detail": "{ \"task id\": \"2026 06 06 eval report model structure\", \"title\": \"EVAL report model structure\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intak",
-        "path": "_history/work-timings/2026/2026-06-06-eval-report-model-structure.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T01:00:24.811Z"
-      },
-      {
         "id": "history-history-work-summaries-2026-2026-06-06-eval-report-model-structure-ko-md",
         "sourceType": "history",
         "signalType": "summary",
@@ -20745,81 +20820,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T01:00:24.811Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-eval-report-model-structure-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "2026 06 06 사용자 요청 요약",
-        "detail": "2026 06 06 사용자 요청 요약 요청 구조개선. 해석 desktop app source 구조에서 즉시 개선 가능한 부분을 찾아 구현한다. 이번 slice는 EVAL report의 score/model 책임을 JSX component에서 분리하는 것으로 정했다. 연결 산출물 platform desktop app/specs/2026 06 06 eval report model structure/ platform desktop app/docs/requirements/2026 06 06 eval re",
-        "path": "_history/user-requests/2026/2026-06-06-eval-report-model-structure.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:57:37.807Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-eval-report-model-structure-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "2026 06 06 EVAL report model structure web search",
-        "detail": "2026 06 06 EVAL report model structure web search 질의 React official guidance separating logic from components custom hooks pure functions useMemo components architecture TypeScript official modules type only imports module structure maintainability React official scaling up reduc",
-        "path": "_history/web-searches/2026/2026-06-06-eval-report-model-structure.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:57:07.704Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-eval-runtime-telemetry-source-refactor-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 06 Eval Runtime Telemetry Source Refactor",
-        "detail": "{ \"task id\": \"2026 06 06 eval runtime telemetry source refactor\", \"title\": \"EVAL runtime telemetry source refactor\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"la",
-        "path": "_history/work-timings/2026/2026-06-06-eval-runtime-telemetry-source-refactor.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:48:37.024Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 EVAL runtime telemetry source refactor 평가",
-        "detail": "2026 06 06 EVAL runtime telemetry source refactor 평가 평가 대상 요청: 소스개선. 구현 slice: EVAL runtime telemetry score model을 pure TypeScript module로 분리. 완료 기준 평가 유지보수성: UI component에서 score/format/row construction 책임을 제거했다. 검증성: helper module boundary를 static contract와 tests가 확인한다. 동작 보존: ",
-        "path": "_history/evaluations/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:48:37.024Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-eval-runtime-telemetry-source-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "2026 06 06 request to outcome trace",
-        "detail": "2026 06 06 request to outcome trace 요청 소스개선. 결정 가장 최근 변경에서 커진 EVAL runtime telemetry 계산을 source 구조 개선 대상으로 선택했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationRuntimeTelemetry.ts platform desktop app/renderer/workspace monitor/components/featur",
-        "path": "_history/request-traces/2026/2026-06-06-eval-runtime-telemetry-source-refactor.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:48:37.023Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23285,12 +23285,12 @@
       "project": "platform-desktop-app",
       "language": "json",
       "extension": "json",
-      "sizeBytes": 465,
-      "lineCount": 14,
-      "updatedAt": "2026-06-05T20:50:34.318Z",
+      "sizeBytes": 570,
+      "lineCount": 17,
+      "updatedAt": "2026-06-06T04:07:44.449Z",
       "truncated": false,
-      "preview": "{\n  \"$schema\": \"../gen/schemas/desktop-schema.json\",\n  \"identifier\": \"default\",\n  \"description\": \"Default desktop shell capability. Product work is routed through allowlisted Tauri commands and the bundled installer shell runtime contract; plugin shell sidecars remain excluded until a separate scoped capability is approved.\",\n  \"windows\": [\n    \"main\"\n  ],\n  \"permissions\": [\n    \"core:default\",\n    \"core:window:allow-start-dragging\",\n    \"dialog:default\"\n  ]\n}\n",
-      "previewBytes": 465
+      "preview": "{\n  \"$schema\": \"../gen/schemas/desktop-schema.json\",\n  \"identifier\": \"default\",\n  \"description\": \"Default desktop shell capability. Product work is routed through allowlisted Tauri commands and the bundled installer shell runtime contract; plugin shell sidecars remain excluded until a separate scoped capability is approved.\",\n  \"windows\": [\n    \"main\"\n  ],\n  \"permissions\": [\n    \"core:default\",\n    \"core:window:allow-start-dragging\",\n    \"dialog:default\",\n    \"opener:default\",\n    \"clipboard-manager:allow-read-text\",\n    \"clipboard-manager:allow-write-text\"\n  ]\n}\n",
+      "previewBytes": 570
     },
     {
       "id": "platform-desktop-app-src-tauri-cargo-toml",
@@ -23298,12 +23298,12 @@
       "project": "platform-desktop-app",
       "language": "toml",
       "extension": "toml",
-      "sizeBytes": 732,
-      "lineCount": 26,
-      "updatedAt": "2026-06-05T21:03:19.481Z",
+      "sizeBytes": 795,
+      "lineCount": 28,
+      "updatedAt": "2026-06-06T04:06:57.600Z",
       "truncated": false,
-      "preview": "[package]\nname = \"agent-workspace-platform-desktop\"\nversion = \"0.1.0\"\ndescription = \"Desktop shell for the personal agent-building platform\"\nauthors = [\"Personal Agent Platform\"]\nedition = \"2021\"\n\n[lib]\nname = \"agent_workspace_platform_desktop_lib\"\ncrate-type = [\"staticlib\", \"cdylib\", \"rlib\"]\n\n[build-dependencies]\ntauri-build = { version = \"2\", features = [] }\n\n[dependencies]\ntauri = { version = \"2\", features = [] }\nserde = { version = \"1\", features = [\"derive\"] }\nserde_json = \"1\"\nreqwest = { version = \"0.13.4\", features = [\"json\"] }\ntauri-plugin-dialog = \"2\"\nrayon = \"1.12.0\"\nsysinfo = { version = \"0.39.3\", default-features = false, features = [\"system\"] }\nportable-pty = \"0.9.0\"\ntauri-plugin-updater = \"2\"\nlibc = \"0.2.186\"\n",
-      "previewBytes": 732
+      "preview": "[package]\nname = \"agent-workspace-platform-desktop\"\nversion = \"0.1.0\"\ndescription = \"Desktop shell for the personal agent-building platform\"\nauthors = [\"Personal Agent Platform\"]\nedition = \"2021\"\n\n[lib]\nname = \"agent_workspace_platform_desktop_lib\"\ncrate-type = [\"staticlib\", \"cdylib\", \"rlib\"]\n\n[build-dependencies]\ntauri-build = { version = \"2\", features = [] }\n\n[dependencies]\ntauri = { version = \"2\", features = [] }\nserde = { version = \"1\", features = [\"derive\"] }\nserde_json = \"1\"\nreqwest = { version = \"0.13.4\", features = [\"json\"] }\ntauri-plugin-dialog = \"2\"\nrayon = \"1.12.0\"\nsysinfo = { version = \"0.39.3\", default-features = false, features = [\"system\"] }\nportable-pty = \"0.9.0\"\ntauri-plugin-updater = \"2\"\nlibc = \"0.2.186\"\ntauri-plugin-opener = \"2\"\ntauri-plugin-clipboard-manager = \"2\"\n",
+      "previewBytes": 795
     },
     {
       "id": "platform-desktop-app-src-tauri-src-main-rs",
@@ -23337,11 +23337,11 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 2330,
-      "lineCount": 94,
-      "updatedAt": "2026-06-03T13:12:56.144Z",
+      "sizeBytes": 3899,
+      "lineCount": 156,
+      "updatedAt": "2026-06-06T04:08:19.951Z",
       "truncated": true,
-      "preview": "import assert from \"node:assert/strict\";\nimport { test } from \"node:test\";\n\nimport { writeClipboardText } from \"../renderer/workspace-monitor/lib/clipboard.mjs\";\n\nfunction mockDocument(execResult = true) {\n  const appended = [];\n  const field = {\n    value: \"\",\n    style: {},\n    focused: false,\n    selected: false,\n    range: null,\n    setAttribute(name, value) {\n      this[name] = value;\n    },\n    focus() {\n      this.focused = true;\n    },\n    select() {\n      this.selected = true;\n    },\n    setSelectionRange(start, end) {\n      this.range = [start, end];\n    }\n  };\n  return {\n    appended,\n    field,\n    body: {\n      appendChild(value) {\n        appended.push(value);\n      },\n      removeChild(value) {\n        const index = appended.indexOf(value);\n        if (index >= 0) {\n          appended.splice(index, 1);\n        }\n      }\n    },\n    createElement(name) {\n      assert.equal(name, \"textarea\");\n      return field;\n    },\n    execCommand(command) {\n      assert.equal(command, \"copy\");\n      return execResult;\n    }\n  };\n}\n\ntest(\"clipboard utility writes through navigator clipboard when available\", async () => {\n  const writes = [];\n  const copied = await writeClipboardText",
+      "preview": "import assert from \"node:assert/strict\";\nimport { test } from \"node:test\";\n\nimport { readClipboardText, writeClipboardText } from \"../renderer/workspace-monitor/lib/clipboard.mjs\";\n\nfunction mockDocument(execResult = true) {\n  const appended = [];\n  const field = {\n    value: \"\",\n    style: {},\n    focused: false,\n    selected: false,\n    range: null,\n    setAttribute(name, value) {\n      this[name] = value;\n    },\n    focus() {\n      this.focused = true;\n    },\n    select() {\n      this.selected = true;\n    },\n    setSelectionRange(start, end) {\n      this.range = [start, end];\n    }\n  };\n  return {\n    appended,\n    field,\n    body: {\n      appendChild(value) {\n        appended.push(value);\n      },\n      removeChild(value) {\n        const index = appended.indexOf(value);\n        if (index >= 0) {\n          appended.splice(index, 1);\n        }\n      }\n    },\n    createElement(name) {\n      assert.equal(name, \"textarea\");\n      return field;\n    },\n    execCommand(command) {\n      assert.equal(command, \"copy\");\n      return execResult;\n    }\n  };\n}\n\ntest(\"clipboard utility writes through navigator clipboard when available\", async () => {\n  const writes = [];\n  const copied = await",
       "previewBytes": 1200
     },
     {
@@ -23823,7 +23823,7 @@
       {
         "category": "work-summary",
         "root": "_history/work-summaries",
-        "documentsCount": 13
+        "documentsCount": 14
       },
       {
         "category": "user-request",
@@ -23848,7 +23848,7 @@
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 14
+        "documentsCount": 12
       },
       {
         "category": "plan",
@@ -23858,7 +23858,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 21
+        "documentsCount": 22
       },
       {
         "category": "daily-history",
@@ -23902,7 +23902,7 @@
           "transient tool output"
         ],
         "uiEntry": "Overview, History, Documents, Requirements",
-        "documentCount": 118,
+        "documentCount": 116,
         "sourceFileCount": 0
       },
       {
@@ -23952,7 +23952,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 73,
+        "documentCount": 70,
         "sourceFileCount": 5
       },
       {
@@ -24084,7 +24084,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-src-tauri-src-lib-rs",
         "label": "Large source surface",
-        "signal": "10,312 lines in platform-desktop-app/src-tauri/src/lib.rs",
+        "signal": "10,359 lines in platform-desktop-app/src-tauri/src/lib.rs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits.",
         "priority": "high",
@@ -24132,8 +24132,8 @@
         "path": "platform-desktop-app/src-tauri/src/lib.rs",
         "project": "platform-desktop-app",
         "language": "rust",
-        "lineCount": 10312,
-        "sizeBytes": 344059,
+        "lineCount": 10359,
+        "sizeBytes": 345523,
         "recommendation": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits."
       },
       {
@@ -27792,13 +27792,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3804,
+      "sourceDocuments": 3816,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T03:58:52.562Z"
+      "latestInsightAt": "2026-06-06T04:18:56.225Z"
     },
     "inferenceStages": [
       {
@@ -27866,7 +27866,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 455,
+        "signalCount": 456,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -27882,7 +27882,7 @@
           },
           {
             "category": "user-request",
-            "count": 42
+            "count": 43
           },
           {
             "category": "work-summary",
@@ -27925,7 +27925,7 @@
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장"
         ],
-        "latestEvidenceAt": "2026-06-06T03:58:52.562Z"
+        "latestEvidenceAt": "2026-06-06T04:18:56.225Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27939,19 +27939,19 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1740,
+        "signalCount": 1743,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 493
+            "count": 494
           },
           {
             "category": "evaluation",
-            "count": 468
+            "count": 469
           },
           {
             "category": "web-search",
-            "count": 420
+            "count": 421
           },
           {
             "category": "plan",
@@ -27990,7 +27990,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T03:58:52.562Z"
+        "latestEvidenceAt": "2026-06-06T04:18:56.225Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28077,23 +28077,23 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 685,
+        "signalCount": 696,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 277
+            "count": 282
           },
           {
             "category": "evaluation",
-            "count": 236
+            "count": 238
           },
           {
             "category": "web-search",
-            "count": 37
+            "count": 38
           },
           {
             "category": "work-summary",
-            "count": 36
+            "count": 37
           },
           {
             "category": "plan",
@@ -28105,11 +28105,11 @@
           },
           {
             "category": "user-request",
-            "count": 17
+            "count": 18
           },
           {
             "category": "project-doc",
-            "count": 14
+            "count": 15
           },
           {
             "category": "work-timing",
@@ -28136,7 +28136,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-06T03:58:52.562Z"
+        "latestEvidenceAt": "2026-06-06T04:18:56.225Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28150,11 +28150,11 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1492,
+        "signalCount": 1495,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 645
+            "count": 646
           },
           {
             "category": "evaluation",
@@ -28162,7 +28162,7 @@
           },
           {
             "category": "user-request",
-            "count": 96
+            "count": 97
           },
           {
             "category": "work-summary",
@@ -28182,7 +28182,7 @@
           },
           {
             "category": "project-doc",
-            "count": 30
+            "count": 31
           },
           {
             "category": "work-timing",
@@ -28209,7 +28209,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T03:58:52.562Z"
+        "latestEvidenceAt": "2026-06-06T04:18:56.225Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28285,14 +28285,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3804,
+      "sourceDocuments": 3816,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T03:58:52.562Z"
+      "latestInsightAt": "2026-06-06T04:18:56.225Z"
     },
     "operatingModel": [
       {
@@ -28350,13 +28350,13 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3198,
+        "signalCount": 3202,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1740
+            "signalCount": 1743
           },
           {
             "id": "large-scope-slicing",
@@ -28368,7 +28368,7 @@
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 455
+            "signalCount": 456
           }
         ],
         "missingPatternIds": [],
@@ -28396,7 +28396,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T03:58:52.562Z",
+        "latestEvidenceAt": "2026-06-06T04:18:56.225Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28425,13 +28425,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 804,
+        "signalCount": 815,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 685
+            "signalCount": 696
           },
           {
             "id": "release-blocker-gate",
@@ -28465,7 +28465,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T03:58:52.562Z",
+        "latestEvidenceAt": "2026-06-06T04:18:56.225Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28494,13 +28494,13 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2495,
+        "signalCount": 2498,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1492
+            "signalCount": 1495
           },
           {
             "id": "large-scope-slicing",
@@ -28534,7 +28534,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T03:58:52.562Z",
+        "latestEvidenceAt": "2026-06-06T04:18:56.225Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28563,13 +28563,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 574,
+        "signalCount": 575,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 455
+            "signalCount": 456
           },
           {
             "id": "release-blocker-gate",
@@ -28603,7 +28603,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T03:58:52.562Z",
+        "latestEvidenceAt": "2026-06-06T04:18:56.225Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28632,7 +28632,7 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2743,
+        "signalCount": 2746,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
@@ -28644,7 +28644,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1740
+            "signalCount": 1743
           }
         ],
         "missingPatternIds": [],
@@ -28672,7 +28672,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T03:58:52.562Z",
+        "latestEvidenceAt": "2026-06-06T04:18:56.225Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28701,7 +28701,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1859,
+        "signalCount": 1862,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28713,7 +28713,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1740
+            "signalCount": 1743
           }
         ],
         "missingPatternIds": [],
@@ -28741,7 +28741,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T03:58:52.562Z",
+        "latestEvidenceAt": "2026-06-06T04:18:56.225Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

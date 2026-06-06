@@ -1,0 +1,32 @@
+{
+  "schema_version": "2026-06-06",
+  "work_id": "2026-06-06-native-provider-terminal-action-reliability",
+  "resource_risk_occurred": true,
+  "touched_runtime_resources": [
+    "Tauri opener plugin",
+    "Tauri clipboard manager plugin",
+    "native PTY renderer action path",
+    "local static validation server"
+  ],
+  "lifecycle_checks": [
+    {
+      "resource": "local static validation server",
+      "status": "closed",
+      "evidence": "Port 4180 server was terminated with lsof/kill after in-app Browser check."
+    },
+    {
+      "resource": "native PTY smoke",
+      "status": "mocked",
+      "evidence": "Playwright smoke verifies invoke contract; no real PTY child process is spawned in headless smoke."
+    },
+    {
+      "resource": "Tauri package build",
+      "status": "verified",
+      "evidence": "cargo test, cargo build, Tauri release build, codesign verify, and hdiutil verify passed."
+    }
+  ],
+  "residual_risk": [
+    "Real system clipboard mutation and external browser launch need manual app smoke or OS-level automation beyond headless contract testing.",
+    "Public release remains gated by signing, notarization, updater configuration, and clean-machine smoke."
+  ]
+}

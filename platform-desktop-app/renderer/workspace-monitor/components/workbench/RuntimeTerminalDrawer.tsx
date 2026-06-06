@@ -2,7 +2,7 @@
 
 import { Activity, ArrowRight, ChevronLeft, ChevronRight, Clipboard, ClipboardPaste, Eraser, Inbox, ListFilter, Maximize2, Search, Settings, ShieldCheck, SquareTerminal, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { writeClipboardText } from "@/lib/clipboard.mjs";
+import { readClipboardText, writeClipboardText } from "@/lib/clipboard.mjs";
 
 type RuntimeTerminalLanguage = "ko" | "en";
 type TerminalDrawerView = "start" | "native" | "sessions" | "output" | "events";
@@ -1090,13 +1090,12 @@ function NativePtyTerminalSurface({
 
   async function pasteFromClipboard() {
     const activeSession = sessionRef.current;
-    const clipboard = typeof navigator !== "undefined" ? navigator.clipboard : null;
-    if (!clipboard || typeof clipboard.readText !== "function" || !activeSession || !runtimeAvailableRef.current || !isWritableSessionStatus(activeSession.status)) {
+    if (!activeSession || !runtimeAvailableRef.current || !isWritableSessionStatus(activeSession.status)) {
       notify(labels.terminalPasteBlocked);
       return;
     }
     try {
-      const text = await clipboard.readText();
+      const text = await readClipboardText();
       if (!text) {
         notify(labels.terminalPasteBlocked);
         return;

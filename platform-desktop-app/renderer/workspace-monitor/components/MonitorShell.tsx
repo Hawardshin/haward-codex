@@ -9078,7 +9078,7 @@ function ProviderAccountsPanel({
                 ? copy.envDetected
                 : copy.keyMissing;
           return (
-            <article key={provider.providerId} className={`provider-account-row ${provider.configured ? "connected" : "missing"}`}>
+            <article key={provider.providerId} data-provider-account-row={provider.providerId} className={`provider-account-row ${provider.configured ? "connected" : "missing"}`}>
               <header>
                 <div>
                   <span>{provider.providerId}</span>

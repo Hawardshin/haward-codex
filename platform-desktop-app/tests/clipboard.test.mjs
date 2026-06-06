@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 
-import { writeClipboardText } from "../renderer/workspace-monitor/lib/clipboard.mjs";
+import { readClipboardText, writeClipboardText } from "../renderer/workspace-monitor/lib/clipboard.mjs";
 
 function mockDocument(execResult = true) {
   const appended = [];
@@ -65,6 +65,51 @@ test("clipboard utility writes through navigator clipboard when available", asyn
   assert.deepEqual(writes, ["hello"]);
 });
 
+test("clipboard utility writes through native Tauri clipboard before browser fallback", async () => {
+  const calls = [];
+  const copied = await writeClipboardText("native", {
+    tauriInvoke(command, args) {
+      calls.push({ command, args });
+      return { status: "written", textLength: 6 };
+    },
+    navigator: {
+      clipboard: {
+        writeText() {
+          throw new Error("browser clipboard should not be used first");
+        }
+      }
+    }
+  });
+
+  assert.equal(copied, true);
+  assert.deepEqual(calls, [
+    {
+      command: "write_system_clipboard_text",
+      args: { text: "native" }
+    }
+  ]);
+});
+
+test("clipboard utility reads through native Tauri clipboard before browser fallback", async () => {
+  const calls = [];
+  const text = await readClipboardText({
+    tauriInvoke(command) {
+      calls.push(command);
+      return { status: "read", text: "native paste", textLength: 12 };
+    },
+    navigator: {
+      clipboard: {
+        readText() {
+          throw new Error("browser clipboard should not be used first");
+        }
+      }
+    }
+  });
+
+  assert.equal(text, "native paste");
+  assert.deepEqual(calls, ["read_system_clipboard_text"]);
+});
+
 test("clipboard utility falls back to textarea copy when navigator write fails", async () => {
   const document = mockDocument(true);
   const copied = await writeClipboardText("fallback", {
@@ -85,6 +130,23 @@ test("clipboard utility falls back to textarea copy when navigator write fails",
   assert.equal(document.field.focused, true);
   assert.equal(document.field.selected, true);
   assert.deepEqual(document.field.range, [0, "fallback".length]);
+});
+
+test("clipboard utility falls back to browser read when native read fails", async () => {
+  const text = await readClipboardText({
+    tauriInvoke() {
+      throw new Error("native unavailable");
+    },
+    navigator: {
+      clipboard: {
+        readText() {
+          return "browser paste";
+        }
+      }
+    }
+  });
+
+  assert.equal(text, "browser paste");
 });
 
 test("clipboard utility returns false when no write path is available", async () => {

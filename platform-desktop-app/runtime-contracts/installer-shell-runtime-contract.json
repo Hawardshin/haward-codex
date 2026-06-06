@@ -573,6 +573,10 @@
       "list_provider_models",
       "run_provider_agent_task"
     ],
+    "system_clipboard_commands": [
+      "read_system_clipboard_text",
+      "write_system_clipboard_text"
+    ],
     "workspace_host_commands": [
       "get_desktop_workspace_state",
       "set_desktop_workspace_path",

@@ -1,14 +1,65 @@
 export function defaultClipboardEnvironment() {
   return {
     document: typeof document === "undefined" ? undefined : document,
-    navigator: typeof navigator === "undefined" ? undefined : navigator
+    navigator: typeof navigator === "undefined" ? undefined : navigator,
+    window: typeof window === "undefined" ? undefined : window
   };
+}
+
+function tauriInvokeFromEnvironment(environment) {
+  const explicitInvoke = environment?.tauriInvoke;
+  if (typeof explicitInvoke === "function") {
+    return explicitInvoke;
+  }
+  const windowRef = environment?.window;
+  const windowInvoke = windowRef?.__TAURI__?.core?.invoke;
+  if (typeof windowInvoke === "function") {
+    return windowInvoke;
+  }
+  return null;
+}
+
+export async function readClipboardText(environment = defaultClipboardEnvironment()) {
+  const tauriInvoke = tauriInvokeFromEnvironment(environment);
+  if (tauriInvoke) {
+    try {
+      const report = await tauriInvoke("read_system_clipboard_text");
+      if (report && typeof report.text === "string") {
+        return report.text;
+      }
+    } catch {
+      // Fall through to browser clipboard. Static previews and older app builds can still paste.
+    }
+  }
+
+  const clipboard = environment.navigator?.clipboard;
+  if (typeof clipboard?.readText === "function") {
+    try {
+      return await clipboard.readText();
+    } catch {
+      return "";
+    }
+  }
+
+  return "";
 }
 
 export async function writeClipboardText(value, environment = defaultClipboardEnvironment()) {
   const text = String(value ?? "");
   if (!text) {
     return false;
+  }
+
+  const tauriInvoke = tauriInvokeFromEnvironment(environment);
+  if (tauriInvoke) {
+    try {
+      const report = await tauriInvoke("write_system_clipboard_text", { text });
+      if (report?.status === "written" || report?.textLength > 0) {
+        return true;
+      }
+    } catch {
+      // Browser clipboard permissions may still succeed in non-native previews.
+    }
   }
 
   const clipboard = environment.navigator?.clipboard;

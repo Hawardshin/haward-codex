@@ -312,7 +312,7 @@ test("Runtime text defaults expose selectable choices", () => {
 
 test("Native PTY terminal exposes search, clipboard, and quick command controls", () => {
   assert.equal(packageJson.dependencies["@xterm/addon-search"], "0.16.0");
-  assert.match(runtimeTerminalDrawer, /import \{ writeClipboardText \} from "@\/lib\/clipboard\.mjs"/);
+  assert.match(runtimeTerminalDrawer, /import \{ readClipboardText, writeClipboardText \} from "@\/lib\/clipboard\.mjs"/);
   assert.match(runtimeTerminalDrawer, /import\("@xterm\/addon-search"\)/);
   assert.match(runtimeTerminalDrawer, /new SearchAddon\(\)/);
   assert.match(runtimeTerminalDrawer, /searchAddonRef\.current\.findNext/);
@@ -329,7 +329,7 @@ test("Native PTY terminal exposes search, clipboard, and quick command controls"
   assert.match(runtimeTerminalDrawer, /data-terminal-quick-commands/);
   assert.match(runtimeTerminalDrawer, /nativePtyQuickActions/);
   assert.match(runtimeTerminalDrawer, /terminal\.attachCustomKeyEventHandler/);
-  assert.match(runtimeTerminalDrawer, /clipboard\.readText/);
+  assert.match(runtimeTerminalDrawer, /readClipboardText\(\)/);
   assert.match(runtimeTerminalDrawer, /terminal\?\.clear\(\)/);
   assert.match(runtimeTerminalDrawer, /terminalCopySelection|copyTerminalSelection/);
   assert.match(css, /\.native-pty-command-center \{/);

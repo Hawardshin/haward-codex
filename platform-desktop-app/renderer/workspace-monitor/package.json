@@ -25,6 +25,7 @@
     "perf:sections": "node scripts/audit-section-switch-latency.mjs",
     "perf:sections:repeat": "node scripts/audit-section-switch-latency.mjs --runs=3",
     "audit:surfaces": "node scripts/audit-monitor-surfaces.mjs",
+    "smoke:terminal-provider-actions": "node scripts/smoke-terminal-provider-actions.mjs",
     "test": "node --test tests/*.test.mjs"
   },
   "engines": {

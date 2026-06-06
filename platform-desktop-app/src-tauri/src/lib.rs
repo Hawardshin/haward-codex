@@ -16,7 +16,9 @@ use std::thread;
 use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 use sysinfo::{get_current_pid, ProcessRefreshKind, ProcessesToUpdate, System};
 use tauri::{AppHandle, Manager, State};
+use tauri_plugin_clipboard_manager::ClipboardExt;
 use tauri_plugin_dialog::DialogExt;
+use tauri_plugin_opener::OpenerExt;
 
 #[derive(Serialize)]
 struct HealthStatus {
@@ -746,6 +748,14 @@ struct ProviderAuthUrlOpenReport {
     purpose: String,
     url: String,
     status: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct SystemClipboardTextReport {
+    status: String,
+    text: String,
+    text_length: usize,
 }
 
 #[derive(Deserialize)]
@@ -1777,10 +1787,24 @@ fn clear_provider_credential(
 
 #[tauri::command]
 fn open_provider_auth_url(
+    app: AppHandle,
     provider_id: String,
     purpose: Option<String>,
 ) -> Result<ProviderAuthUrlOpenReport, String> {
-    open_provider_auth_url_report(&provider_id, purpose.as_deref())
+    open_provider_auth_url_report(&app, &provider_id, purpose.as_deref())
+}
+
+#[tauri::command]
+fn read_system_clipboard_text(app: AppHandle) -> Result<SystemClipboardTextReport, String> {
+    read_system_clipboard_text_report(&app)
+}
+
+#[tauri::command]
+fn write_system_clipboard_text(
+    app: AppHandle,
+    text: String,
+) -> Result<SystemClipboardTextReport, String> {
+    write_system_clipboard_text_report(&app, &text)
 }
 
 #[tauri::command]
@@ -3474,7 +3498,9 @@ pub fn run() {
         .manage(SessionStore::default())
         .manage(PtySessionStore::default())
         .manage(WorkspaceResourceStore::default())
-        .plugin(tauri_plugin_dialog::init());
+        .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_opener::init())
+        .plugin(tauri_plugin_clipboard_manager::init());
 
     if updater_configured {
         builder = builder.plugin(tauri_plugin_updater::Builder::new().build());
@@ -3511,6 +3537,8 @@ pub fn run() {
             save_provider_credential,
             clear_provider_credential,
             open_provider_auth_url,
+            read_system_clipboard_text,
+            write_system_clipboard_text,
             list_provider_models,
             run_provider_agent_task,
             get_desktop_workspace_state,
@@ -6462,29 +6490,10 @@ fn restrict_secret_file_permissions(path: &Path) -> Result<(), String> {
     Ok(())
 }
 
-fn open_url_with_system_browser(url: &str) -> Result<(), String> {
-    #[cfg(target_os = "macos")]
-    let mut command = {
-        let mut command = Command::new("open");
-        command.arg(url);
-        command
-    };
-    #[cfg(target_os = "windows")]
-    let mut command = {
-        let mut command = Command::new("cmd");
-        command.args(["/C", "start", "", url]);
-        command
-    };
-    #[cfg(all(unix, not(target_os = "macos")))]
-    let mut command = {
-        let mut command = Command::new("xdg-open");
-        command.arg(url);
-        command
-    };
-    command
-        .spawn()
-        .map_err(|error| format!("Failed to open provider URL: {error}"))?;
-    Ok(())
+fn open_url_with_system_browser(app: &AppHandle, url: &str) -> Result<(), String> {
+    app.opener()
+        .open_url(url, None::<&str>)
+        .map_err(|error| format!("Failed to open provider URL with Tauri opener: {error}"))
 }
 
 fn relative_payload_path(base: &Path, path: &Path) -> String {
@@ -7453,6 +7462,7 @@ fn clear_provider_credential_report(
 }
 
 fn open_provider_auth_url_report(
+    app: &AppHandle,
     provider_id: &str,
     purpose: Option<&str>,
 ) -> Result<ProviderAuthUrlOpenReport, String> {
@@ -7468,12 +7478,49 @@ fn open_provider_auth_url_report(
         "docs" => definition.docs_url,
         _ => definition.setup_url,
     };
-    open_url_with_system_browser(url)?;
+    open_url_with_system_browser(app, url)?;
     Ok(ProviderAuthUrlOpenReport {
         provider_id: definition.provider_id.to_string(),
         purpose: purpose.to_string(),
         url: url.to_string(),
         status: "opened".to_string(),
+    })
+}
+
+fn read_system_clipboard_text_report(app: &AppHandle) -> Result<SystemClipboardTextReport, String> {
+    let text = app
+        .clipboard()
+        .read_text()
+        .map_err(|error| format!("Failed to read system clipboard text: {error}"))?;
+    Ok(SystemClipboardTextReport {
+        status: if text.is_empty() {
+            "empty".to_string()
+        } else {
+            "read".to_string()
+        },
+        text_length: text.chars().count(),
+        text,
+    })
+}
+
+fn write_system_clipboard_text_report(
+    app: &AppHandle,
+    text: &str,
+) -> Result<SystemClipboardTextReport, String> {
+    if text.is_empty() {
+        return Ok(SystemClipboardTextReport {
+            status: "empty".to_string(),
+            text: String::new(),
+            text_length: 0,
+        });
+    }
+    app.clipboard()
+        .write_text(text.to_string())
+        .map_err(|error| format!("Failed to write system clipboard text: {error}"))?;
+    Ok(SystemClipboardTextReport {
+        status: "written".to_string(),
+        text: String::new(),
+        text_length: text.chars().count(),
     })
 }
 
