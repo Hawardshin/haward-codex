@@ -1,0 +1,21 @@
+{
+  "date": "2026-06-06",
+  "work_id": "awp-path-registration",
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-06-awp-path-registration-omission.json"
+  ],
+  "required_items": [
+    "web_first_intake",
+    "requirements",
+    "spec_plan_tasks_validation_traceability",
+    "source_path_configurator",
+    "actual_shell_path_registration",
+    "persistent_instruction_update",
+    "installation_audit",
+    "registry_update",
+    "verification",
+    "commit_push"
+  ],
+  "status": "coverage_ready",
+  "notes": "Web intake, requirements, spec artifacts, source path configurator, actual shell PATH registration, persistent instruction update, installation audit, registry update, verification, commit, and push are covered by this close-out."
+}

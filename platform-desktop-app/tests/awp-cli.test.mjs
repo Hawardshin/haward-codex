@@ -7,6 +7,7 @@ import test from "node:test";
 const projectRoot = path.resolve(import.meta.dirname, "..");
 const cliPath = path.join(projectRoot, "tools", "awp", "awp.py");
 const installerPath = path.join(projectRoot, "scripts", "install-awp-cli.mjs");
+const pathConfiguratorPath = path.join(projectRoot, "scripts", "configure-awp-path.mjs");
 const packageJson = JSON.parse(readFileSync(path.join(projectRoot, "package.json"), "utf8"));
 
 function run(command, args) {
@@ -39,7 +40,8 @@ test("awp CLI checks optional adapter commands without requiring installs", () =
 });
 
 test("awp installer supports a dry run and package script", () => {
-  assert.equal(packageJson.scripts["cli:install"], "node scripts/install-awp-cli.mjs");
+  assert.equal(packageJson.scripts["cli:install"], "node scripts/install-awp-cli.mjs && node scripts/configure-awp-path.mjs");
+  assert.equal(packageJson.scripts["cli:path"], "node scripts/configure-awp-path.mjs");
   assert.equal(packageJson.scripts["cli:doctor"], "python3 tools/awp/awp.py doctor");
 
   const result = run("node", [installerPath, "--dry-run"]);
@@ -48,4 +50,11 @@ test("awp installer supports a dry run and package script", () => {
   assert.equal(report.status, "planned");
   assert.equal(report.command, "awp");
   assert.match(report.target, /\.local\/bin\/awp$/);
+
+  const pathResult = run("node", [pathConfiguratorPath, "--dry-run"]);
+  assert.equal(pathResult.status, 0, pathResult.stderr);
+  const pathReport = JSON.parse(pathResult.stdout);
+  assert.ok(["configured", "already_configured"].includes(pathReport.status));
+  assert.equal(pathReport.dryRun, true);
+  assert.equal(pathReport.binDir.endsWith(".local/bin"), true);
 });

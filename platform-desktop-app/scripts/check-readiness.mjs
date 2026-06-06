@@ -72,6 +72,7 @@ const requiredFiles = [
   "scripts/public-release-build.mjs",
   "scripts/create-updater-manifest.mjs",
   "scripts/install-awp-cli.mjs",
+  "scripts/configure-awp-path.mjs",
   "scripts/readiness/desktop-build-pipeline.mjs",
   "tools/awp/awp.py",
   "tests/awp-cli.test.mjs",
@@ -104,11 +105,27 @@ for (const file of requiredFiles) {
 failures.push(...checkDesktopBuildPipeline({ root, readJson }));
 
 const packageJson = readJson("package.json");
-if (packageJson.scripts?.["cli:install"] !== "node scripts/install-awp-cli.mjs") {
-  failures.push("package.json must expose cli:install for the lightweight awp CLI");
+if (packageJson.scripts?.["cli:install"] !== "node scripts/install-awp-cli.mjs && node scripts/configure-awp-path.mjs") {
+  failures.push("package.json must expose cli:install for the lightweight awp CLI and PATH registration");
+}
+if (packageJson.scripts?.["cli:path"] !== "node scripts/configure-awp-path.mjs") {
+  failures.push("package.json must expose cli:path for awp PATH registration");
 }
 if (packageJson.scripts?.["cli:doctor"] !== "python3 tools/awp/awp.py doctor") {
   failures.push("package.json must expose cli:doctor for the lightweight awp CLI");
+}
+const awpPathConfigurator = readFileSync(join(root, "scripts/configure-awp-path.mjs"), "utf8");
+for (const requiredPhrase of [
+  "agent-workspace-platform awp path",
+  ".zprofile",
+  ".zshrc",
+  "--dry-run",
+  "--remove",
+  "verificationCommand"
+]) {
+  if (!awpPathConfigurator.includes(requiredPhrase)) {
+    failures.push(`awp PATH configurator must include ${requiredPhrase}`);
+  }
 }
 const awpCli = readFileSync(join(root, "tools/awp/awp.py"), "utf8");
 for (const requiredPhrase of [

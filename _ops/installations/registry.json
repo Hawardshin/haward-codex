@@ -838,7 +838,7 @@
         "platform-desktop-app/package.json"
       ],
       "version_or_lock_status": "awp 0.1.0 is a repository-managed Python stdlib script symlinked into ~/.local/bin; no external dependency lock changed.",
-      "security_review": "User-local symlink only. The CLI uses Python standard library, shell=False subprocess calls, workspace path containment, and _private/outputs blocking. Shell profile PATH was not modified.",
+      "security_review": "User-local symlink only. The CLI uses Python standard library, shell=False subprocess calls, workspace path containment, and _private/outputs blocking. Shell PATH registration is tracked separately as 2026-06-06-awp-zsh-path-registration.",
       "license_review": "Internal personal workspace artifact; no external package code installed.",
       "verification": [
         "python3 platform-desktop-app/tools/awp/awp.py --version: awp 0.1.0",
@@ -853,8 +853,45 @@
         "pnpm --dir platform-desktop-app check: passed with existing public release gate warnings",
         "pnpm --dir platform-desktop-app package:internal: passed with app/DMG build and verification"
       ],
-      "rollback_path": "rm /Users/shinjoungeun/.local/bin/awp; optionally remove platform-desktop-app/tools/awp, scripts/install-awp-cli.mjs, package scripts, tests, and readiness checks.",
+      "rollback_path": "rm /Users/shinjoungeun/.local/bin/awp; run node platform-desktop-app/scripts/configure-awp-path.mjs --remove for shell PATH rollback; optionally remove platform-desktop-app/tools/awp, scripts/install-awp-cli.mjs, package scripts, tests, and readiness checks.",
       "installation_record_path": "_history/installations/2026/2026-06-06-awp-lightweight-cli.ko.md",
+      "commit": "8f755ab2"
+    },
+    {
+      "id": "2026-06-06-awp-zsh-path-registration",
+      "date": "2026-06-06",
+      "status": "installed",
+      "name": "awp zsh PATH registration",
+      "scope": "user-shell-environment",
+      "owning_project": "platform-desktop-app",
+      "package_manager": "node-script",
+      "install_command": "pnpm --dir platform-desktop-app cli:path",
+      "environment_path": "/Users/shinjoungeun/.zprofile and /Users/shinjoungeun/.zshrc",
+      "dependency_record_paths": [
+        "platform-desktop-app/scripts/configure-awp-path.mjs",
+        "platform-desktop-app/package.json",
+        "_docs/instructions/persistent-instructions.md",
+        "_docs/instructions/persistent-instructions.ko.md",
+        "_docs/instructions/persistent-instructions.en.md"
+      ],
+      "version_or_lock_status": "No external dependency or lock file changed. PATH registration adds an idempotent managed zsh block for ~/.local/bin.",
+      "security_review": "User shell files are updated only inside a marked block. Existing files are backed up before write. The rollback command removes only the managed block. The PATH entry points to user-local ~/.local/bin where awp is symlinked.",
+      "license_review": "Internal personal workspace artifact; no external package code installed.",
+      "verification": [
+        "pnpm --dir platform-desktop-app cli:path -- --dry-run: planned updates before install",
+        "pnpm --dir platform-desktop-app cli:path: updated .zprofile and .zshrc with backups",
+        "zsh -lic 'command -v awp && awp --version && awp doctor --json': awp resolved and userBinOnPath true",
+        "pnpm --dir platform-desktop-app cli:path -- --dry-run: already_configured after install",
+        "node platform-desktop-app/scripts/configure-awp-path.mjs --remove --dry-run: rollback block detected",
+        "pnpm --dir platform-desktop-app test: passed",
+        "python3 _tools/docs-audit/src/docs_audit.py --check: passed",
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/installations/registry.json: passed",
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json: passed",
+        "pnpm --dir platform-desktop-app check: passed with existing public release gate warnings",
+        "pnpm --dir platform-desktop-app package:internal: passed with app/DMG build and verification"
+      ],
+      "rollback_path": "node platform-desktop-app/scripts/configure-awp-path.mjs --remove; optional restore from /Users/shinjoungeun/.zprofile.awp-backup-20260606T124607Z and /Users/shinjoungeun/.zshrc.awp-backup-20260606T124607Z",
+      "installation_record_path": "_history/installations/2026/2026-06-06-awp-zsh-path-registration.ko.md",
       "commit": "pending"
     }
   ]

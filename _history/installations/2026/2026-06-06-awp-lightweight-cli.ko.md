@@ -22,7 +22,8 @@
 - shell string을 사용하지 않고 `subprocess.run(..., shell=False)`와 executable/args 배열을 사용한다.
 - OS action 대상은 workspace root 내부로 제한한다.
 - `_private/`, `outputs/` 경로는 차단한다.
-- shell 설정 파일은 자동 수정하지 않았다.
+- 초기 설치에서는 shell 설정 파일을 자동 수정하지 않았다.
+- 후속 작업에서 `~/.local/bin` PATH 등록을 별도 환경 설정으로 처리했다. 상세 기록은 `_history/installations/2026/2026-06-06-awp-zsh-path-registration.ko.md`에 둔다.
 
 ## 검증
 
@@ -37,11 +38,13 @@
 - `PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/installations/registry.json`: 통과
 - `pnpm --dir platform-desktop-app check`: 통과. 기존 public release gate 경고는 유지된다.
 - `pnpm --dir platform-desktop-app package:internal`: 통과
+- `pnpm --dir platform-desktop-app cli:path`: 통과. `~/.zprofile`, `~/.zshrc`에 관리 블록 추가.
 
 ## Rollback
 
 ```bash
 rm /Users/shinjoungeun/.local/bin/awp
+node platform-desktop-app/scripts/configure-awp-path.mjs --remove
 ```
 
 추가로 repo source를 되돌리려면 `platform-desktop-app/tools/awp/`, `platform-desktop-app/scripts/install-awp-cli.mjs`, 관련 package/test/readiness 변경을 제거한다.

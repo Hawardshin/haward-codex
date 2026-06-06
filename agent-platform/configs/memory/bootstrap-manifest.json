@@ -96,6 +96,7 @@
         "single-purpose UI controls and panels for cognitive load control",
         "depth-first tab and drill-down navigation rule",
         "main-tab scroll ownership limit and bounded child scroll-surface rule",
+        "do not postpone repeatedly needed setup prerequisites such as PATH registration, adapter checks, and validation when they are required for the real user workflow",
         "wide-scope work should not be avoided or prematurely shrunk only because it is wide",
         "do-all requests must cover every applicable requirement, artifact, validation, build, record, commit, and push step",
         "post-implementation automatic build or package verification rule"
