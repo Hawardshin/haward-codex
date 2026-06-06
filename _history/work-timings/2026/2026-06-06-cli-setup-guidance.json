@@ -1,0 +1,33 @@
+{
+  "schema_version": "work-timing.v1",
+  "date": "2026-06-06",
+  "work_id": "cli-setup-guidance",
+  "measurement_quality": "partial_manual",
+  "phases": [
+    {
+      "phase": "web_first_and_memory_bootstrap",
+      "duration_seconds": 240,
+      "notes": "Web source checks plus repository memory anchors and mode selection."
+    },
+    {
+      "phase": "implementation",
+      "duration_seconds": 720,
+      "notes": "Adapter setup model, settings UI, cockpit ladder, CSS, and tests."
+    },
+    {
+      "phase": "verification",
+      "duration_seconds": 260,
+      "notes": "check, tests, collect, build, Playwright smoke."
+    },
+    {
+      "phase": "packaging",
+      "duration_seconds": 58,
+      "notes": "desktop:package:internal including Rust/Tauri build, codesign verify, and DMG verify."
+    },
+    {
+      "phase": "closeout_records",
+      "duration_seconds": 180,
+      "notes": "Omission, resource, summary, trace, evaluation, and history records."
+    }
+  ]
+}

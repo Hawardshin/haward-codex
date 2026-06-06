@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-06T02:59:01.945Z",
+  "generatedAt": "2026-06-06T03:12:52.400Z",
   "summary": {
-    "documents": 2606,
+    "documents": 2613,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1009
+        "count": 1010
       },
       {
         "category": "web-search",
-        "count": 414
+        "count": 415
       },
       {
         "category": "plan",
-        "count": 348
+        "count": 349
       },
       {
         "category": "request-trace",
-        "count": 342
+        "count": 343
       },
       {
         "category": "work-timing",
-        "count": 263
+        "count": 264
       },
       {
         "category": "user-request",
-        "count": 127
+        "count": 128
       },
       {
         "category": "work-summary",
-        "count": 94
+        "count": 95
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6518270,
+    "totalSourceBytes": 6526873,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -72,11 +72,139 @@
       "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 14584,
-      "updatedAt": "2026-06-06T02:55:18.304Z",
+      "sourceBytes": 15252,
+      "updatedAt": "2026-06-06T03:12:20.407Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-cli-setup-guidance-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-cli-setup-guidance.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "작업 평가: CLI 설정 안내 개선",
+      "excerpt": "작업 평가: CLI 설정 안내 개선 날짜: 2026 06 06 work mode: standard resource risk occurred: true installation occurred: false cli pipeline occurred: false 결과 판정 passed 사용자의 초기 지시에 대한 평가 “CLI 어캐 쓰는지도 전혀 모르겠어”: 설정 모달과 Cockpit에 설치/로그인/검증/첫 실행 순서를 추가해 앱 안에서 CLI 사용 흐름을 볼 수 있게 했다. “세팅이 직관적이지 않아”: 어",
+      "html": "<p>작업 평가: CLI 설정 안내 개선 날짜: 2026 06 06 work mode: standard resource risk occurred: true installation occurred: false cli pipeline occurred: false 결과 판정 passed 사용자의 초기 지시에 대한 평가 “CLI 어캐 쓰는지도 전혀 모르겠어”: 설정 모달과 Cockpit에 설치/로그인/검증/첫 실행 순서를 추가해 앱 안에서 CLI 사용 흐름을 볼 수 있게 했다. “세팅이 직관적이지 않아”: 어댑터 선택, 준비 단계, 명령 복사, 계정 연결 이동, 실행 버튼을 분리했다. “구현 끝나면 빌드까지 자동”: collect/check/test</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1557,
+      "updatedAt": "2026-06-06T03:12:20.406Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-cli-setup-guidance-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-cli-setup-guidance.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: CLI 설정 안내",
+      "excerpt": "요청 결과 추적: CLI 설정 안내 날짜: 2026 06 06 요청: CLI 사용법과 설정이 직관적이지 않다는 지적 소유 프로젝트: platform desktop app 입력 해석 사용자가 CLI 문법을 직접 학습하지 않아도 앱 안에서 설치, 로그인/키, 검증, 실행 순서를 선택형으로 따라갈 수 있어야 한다. 결과 설정 모달에 cli adapter setup guide 를 추가했다. Agent CLI Cockpit에 agent cli setup ladder 와 agent cli command st",
+      "html": "<p>요청 결과 추적: CLI 설정 안내 날짜: 2026 06 06 요청: CLI 사용법과 설정이 직관적이지 않다는 지적 소유 프로젝트: platform desktop app 입력 해석 사용자가 CLI 문법을 직접 학습하지 않아도 앱 안에서 설치, 로그인/키, 검증, 실행 순서를 선택형으로 따라갈 수 있어야 한다. 결과 설정 모달에 cli adapter setup guide 를 추가했다. Agent CLI Cockpit에 agent cli setup ladder 와 agent cli command stack 을 추가했다. 설치/검증/첫 실행 명령 복사를 실제 실행과 분리했다. Provider Accounts 연결 상태를 CLI 준비 단계에 반</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1323,
+      "updatedAt": "2026-06-06T03:12:20.406Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-cli-setup-guidance-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-cli-setup-guidance.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: CLI 설정 안내 개선",
+      "excerpt": "작업 요약: CLI 설정 안내 개선 날짜: 2026 06 06 소유 프로젝트: platform desktop app 커밋 전 상태: 구현 및 검증 완료 변경 CLI 어댑터 가이드에 설치, 로그인/키, 검증, 첫 실행, 기대 결과 필드를 추가했다. 설정 모달의 기본 CLI 어댑터 섹션을 단계형 setup guide로 바꿨다. Agent CLI Cockpit 각 카드에 설치/계정/검증/첫 실행 ladder와 명령 복사 버튼을 추가했다. 복사 버튼은 실제 CLI 실행과 분리했다. 정적 테스트에 CLI ",
+      "html": "<p>작업 요약: CLI 설정 안내 개선 날짜: 2026 06 06 소유 프로젝트: platform desktop app 커밋 전 상태: 구현 및 검증 완료 변경 CLI 어댑터 가이드에 설치, 로그인/키, 검증, 첫 실행, 기대 결과 필드를 추가했다. 설정 모달의 기본 CLI 어댑터 섹션을 단계형 setup guide로 바꿨다. Agent CLI Cockpit 각 카드에 설치/계정/검증/첫 실행 ladder와 명령 복사 버튼을 추가했다. 복사 버튼은 실제 CLI 실행과 분리했다. 정적 테스트에 CLI setup guidance 계약을 추가했다. 검증 corepack pnpm filter workspace monitor run collect c</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1323,
+      "updatedAt": "2026-06-06T03:12:20.406Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-cli-setup-guidance-json",
+      "path": "_history/work-timings/2026/2026-06-06-cli-setup-guidance.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Cli Setup Guidance",
+      "excerpt": "{ \"schema version\": \"work timing.v1\", \"date\": \"2026 06 06\", \"work id\": \"cli setup guidance\", \"measurement quality\": \"partial manual\", \"phases\": { \"phase\": \"web first and memory bootstrap\", \"duration seconds\": 240, \"notes\": \"Web source checks plus repository memory anchors and mod",
+      "html": "<p>{ &quot;schema version&quot;: &quot;work timing.v1&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;cli setup guidance&quot;, &quot;measurement quality&quot;: &quot;partial manual&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first and memory bootstrap&quot;, &quot;duration seconds&quot;: 240, &quot;notes&quot;: &quot;Web source checks plus repository memory anchors and mode selection.&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;duration seconds&quot;: 720, &quot;notes&quot;: </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 979,
+      "updatedAt": "2026-06-06T03:12:20.406Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-cli-setup-guidance-ko-md",
+      "path": "_history/plans/2026/2026-06-06-cli-setup-guidance.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "계획 기록: CLI 설정 안내 개선",
+      "excerpt": "계획 기록: CLI 설정 안내 개선 날짜: 2026 06 06 작업 모드: standard view mode: superadmin developer install mode: developer 결정 설정 모달과 Agent CLI Cockpit을 동시에 개선한다. 실제 CLI 자동 설치는 하지 않는다. 명령 복사와 실제 실행은 분리한다. 새 장기 실행 리소스는 만들지 않는다. 근거 Fluent 2 온보딩은 맥락형 안내, 선택 가능한 단계, 예상 결과 표시를 권장한다. Microsoft command ",
+      "html": "<p>계획 기록: CLI 설정 안내 개선 날짜: 2026 06 06 작업 모드: standard view mode: superadmin developer install mode: developer 결정 설정 모달과 Agent CLI Cockpit을 동시에 개선한다. 실제 CLI 자동 설치는 하지 않는다. 명령 복사와 실제 실행은 분리한다. 새 장기 실행 리소스는 만들지 않는다. 근거 Fluent 2 온보딩은 맥락형 안내, 선택 가능한 단계, 예상 결과 표시를 권장한다. Microsoft command guidance는 관련 명령을 작업 대상 가까이에 배치하는 방향과 맞다. 기존 CLI adapter registry는 optional CLI 누</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 699,
+      "updatedAt": "2026-06-06T03:04:27.478Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-cli-setup-guidance-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-cli-setup-guidance.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: CLI 설정 직관성",
+      "excerpt": "사용자 요청 요약: CLI 설정 직관성 날짜: 2026 06 06 요약: 사용자가 CLI 사용법을 전혀 모르겠고 세팅이 직관적이지 않다고 지적했다. 해석: 데스크톱 앱은 사용자가 CLI 문법을 따로 알지 않아도 설치, 로그인, 검증, 실행 순서를 앱 UI에서 따라갈 수 있어야 한다. 소유 프로젝트: platform desktop app",
+      "html": "<p>사용자 요청 요약: CLI 설정 직관성 날짜: 2026 06 06 요약: 사용자가 CLI 사용법을 전혀 모르겠고 세팅이 직관적이지 않다고 지적했다. 해석: 데스크톱 앱은 사용자가 CLI 문법을 따로 알지 않아도 설치, 로그인, 검증, 실행 순서를 앱 UI에서 따라갈 수 있어야 한다. 소유 프로젝트: platform desktop app</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 396,
+      "updatedAt": "2026-06-06T03:04:27.477Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-cli-setup-guidance-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-cli-setup-guidance.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: CLI 설정 안내",
+      "excerpt": "웹 검색 기록: CLI 설정 안내 날짜: 2026 06 06 요청 요약: CLI 사용법과 설정이 직관적이지 않다는 지적을 데스크톱 앱 UI 개선으로 반영한다. 검색어 CLI onboarding UX best practices setup wizard command palette developer tools documentation Apple Human Interface Guidelines settings onboarding progressive disclosure developer tools Mic",
+      "html": "<p>웹 검색 기록: CLI 설정 안내 날짜: 2026 06 06 요청 요약: CLI 사용법과 설정이 직관적이지 않다는 지적을 데스크톱 앱 UI 개선으로 반영한다. 검색어 CLI onboarding UX best practices setup wizard command palette developer tools documentation Apple Human Interface Guidelines settings onboarding progressive disclosure developer tools Microsoft Fluent settings design command line tool setup UX Microsoft Fluent 2 onbo</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1666,
+      "updatedAt": "2026-06-06T03:04:27.477Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-contextual-button-feedback-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-contextual-button-feedback.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: 버튼별 맥락 피드백",
+      "excerpt": "웹 검색 기록: 버튼별 맥락 피드백 쿼리 Apple Human Interface Guidelines buttons feedback menus contextual actions official Microsoft Fluent Design commanding buttons menu contextual feedback official Nielsen Norman Group action button labels verbs specificity feedback site:developer.apple.com/de",
+      "html": "<p>웹 검색 기록: 버튼별 맥락 피드백 쿼리 Apple Human Interface Guidelines buttons feedback menus contextual actions official Microsoft Fluent Design commanding buttons menu contextual feedback official Nielsen Norman Group action button labels verbs specificity feedback site:developer.apple.com/design/human interface guidelines buttons feedback macOS button status site:nngrou</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1653,
+      "updatedAt": "2026-06-06T02:59:50.009Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-contextual-button-feedback-ko-md",
@@ -173,22 +301,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-contextual-button-feedback-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-contextual-button-feedback.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: 버튼별 맥락 피드백",
-      "excerpt": "웹 검색 기록: 버튼별 맥락 피드백 쿼리 Apple Human Interface Guidelines buttons feedback menus contextual actions official Microsoft Fluent Design commanding buttons menu contextual feedback official Nielsen Norman Group action button labels verbs specificity feedback site:developer.apple.com/de",
-      "html": "<p>웹 검색 기록: 버튼별 맥락 피드백 쿼리 Apple Human Interface Guidelines buttons feedback menus contextual actions official Microsoft Fluent Design commanding buttons menu contextual feedback official Nielsen Norman Group action button labels verbs specificity feedback site:developer.apple.com/design/human interface guidelines buttons feedback macOS button status site:nngrou</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1661,
-      "updatedAt": "2026-06-06T02:51:44.117Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-storage-architecture-review-ko-md",
@@ -41763,35 +41875,35 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 334,
+      "documentsCount": 341,
       "categories": [
         {
           "category": "evaluation",
-          "count": 76
+          "count": 77
         },
         {
           "category": "user-request",
-          "count": 48
+          "count": 49
         },
         {
           "category": "web-search",
-          "count": 48
+          "count": 49
         },
         {
           "category": "work-summary",
-          "count": 48
+          "count": 49
         },
         {
           "category": "request-trace",
-          "count": 47
+          "count": 48
         },
         {
           "category": "work-timing",
-          "count": 46
+          "count": 47
         },
         {
           "category": "plan",
-          "count": 20
+          "count": 21
         },
         {
           "category": "daily-history",

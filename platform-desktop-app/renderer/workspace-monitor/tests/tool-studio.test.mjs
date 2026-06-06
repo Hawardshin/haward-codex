@@ -361,6 +361,29 @@ test("Provider account settings expose guided login and model setup controls", (
   assert.doesNotMatch(providerPanelSource, /\{notice && <p className="decision-resume-notice">\{notice\}<\/p>\}/);
 });
 
+test("CLI adapter settings expose beginner setup steps and copyable commands", () => {
+  assert.match(monitorShell, /authHint: string;/);
+  assert.match(monitorShell, /firstRunCommand: string;/);
+  assert.match(monitorShell, /expectedResult: string;/);
+  assert.match(monitorShell, /function adapterAuthReadyForAdapter/);
+  assert.match(monitorShell, /const runtimeAdapterSetupSteps = \[/);
+  assert.match(monitorShell, /data-cli-adapter-setup-guide="settings"/);
+  assert.match(monitorShell, /className="cli-adapter-picker-grid"/);
+  assert.match(monitorShell, /data-cli-setup-step=\{step\.id\}/);
+  assert.match(monitorShell, /data-cli-command-copy=\{step\.id\}/);
+  assert.match(monitorShell, /className="cli-command-copy-row"/);
+  assert.match(monitorShell, /className="cli-adapter-setup-outcome"/);
+  assert.match(monitorShell, /data-agent-cli-setup-ladder=\{row\.adapter\.adapterId\}/);
+  assert.match(monitorShell, /data-cli-command-copy=\{`\$\{row\.adapter\.adapterId\}:\$\{step\.id\}`\}/);
+  assert.match(monitorShell, /className="agent-cli-command-stack"/);
+  assert.match(css, /\.cli-adapter-setup-guide \{/);
+  assert.match(css, /\.cli-adapter-picker-grid \{/);
+  assert.match(css, /\.cli-setup-stepper article\.ready \{/);
+  assert.match(css, /\.cli-command-copy-row button \{/);
+  assert.match(css, /\.agent-cli-setup-ladder \{/);
+  assert.match(css, /\.agent-cli-command-stack button \{/);
+});
+
 test("Choice and search controls have compact tonal hierarchy", () => {
   assert.match(css, /\.settings-segment-list \{[\s\S]*?display: flex;/);
   assert.match(css, /\.settings-segment-list button \{[\s\S]*?min-width: 104px;[\s\S]*?min-height: var\(--control-compact-target-size\);/);

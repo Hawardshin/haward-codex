@@ -1,0 +1,41 @@
+{
+  "schema_version": "resource-check.v1",
+  "date": "2026-06-06",
+  "work_id": "cli-setup-guidance",
+  "status": "resource_ready",
+  "resource_risk_occurred": true,
+  "scope": [
+    "CLI setup surface",
+    "Agent CLI Cockpit",
+    "clipboard command copy",
+    "Playwright smoke",
+    "temporary dev server"
+  ],
+  "checks": [
+    {
+      "item": "new_long_running_processes",
+      "status": "passed",
+      "evidence": "No new intervals, workers, PTY sessions, or process launch loops were added."
+    },
+    {
+      "item": "copy_not_execute",
+      "status": "passed",
+      "evidence": "Setup command buttons call writeClipboardText only; Start remains a separate runtime action."
+    },
+    {
+      "item": "dev_server_cleanup",
+      "status": "passed",
+      "evidence": "Temporary localhost:3223 Next dev server was stopped with lsof/kill after Playwright smoke."
+    },
+    {
+      "item": "existing_runtime_lifecycle",
+      "status": "passed",
+      "evidence": "Existing runtime startSession/startTaskPipe code paths were not changed."
+    },
+    {
+      "item": "package_verification",
+      "status": "passed",
+      "evidence": "codesign --verify --deep --strict and hdiutil verify passed for internal artifacts."
+    }
+  ]
+}

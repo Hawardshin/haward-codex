@@ -2425,7 +2425,10 @@ type DecisionResumeReport = {
 
 type AdapterSetupGuide = {
   installHint: string;
+  authHint: string;
   verifyCommand: string;
+  firstRunCommand: string;
+  expectedResult: string;
   sourceUrl: string;
   caution: string;
 };
@@ -2498,31 +2501,46 @@ const fallbackDesktopAdapters: CliAdapterStatus[] = [
 const adapterSetupGuides: Record<string, AdapterSetupGuide> = {
   "claude-code-cli": {
     installHint: "npm install -g @anthropic-ai/claude-code",
+    authHint: "claude login",
     verifyCommand: "claude --version",
+    firstRunCommand: "claude",
+    expectedResult: "Interactive Claude Code session opens in the selected workspace.",
     sourceUrl: "https://docs.claude.com/en/docs/claude-code/setup",
     caution: "Node.js and account auth are required."
   },
   "gemini-cli": {
     installHint: "npm install -g @google/gemini-cli",
+    authHint: "gemini auth login",
     verifyCommand: "gemini --version",
+    firstRunCommand: "gemini",
+    expectedResult: "Gemini CLI starts with the current workspace as its command context.",
     sourceUrl: "https://github.com/google-gemini/gemini-cli",
     caution: "Verify the package scope before install."
   },
   "codex-cli": {
     installHint: "npm install -g @openai/codex",
+    authHint: "codex login",
     verifyCommand: "codex --version",
+    firstRunCommand: "codex",
+    expectedResult: "Codex CLI starts as a guest execution lane; the platform keeps task state.",
     sourceUrl: "https://help.openai.com/en/articles/11096431",
     caution: "Use the official package and account auth."
   },
   "opencode-cli": {
     installHint: "npm install -g opencode-ai",
+    authHint: "Set the provider API key, then run the CLI auth check documented by OpenCode.",
     verifyCommand: "opencode --version",
+    firstRunCommand: "opencode",
+    expectedResult: "OpenCode starts with the selected provider key and workspace boundary.",
     sourceUrl: "https://opencode.ai/docs/cli/",
     caution: "Confirm PATH resolves the expected binary."
   },
   "claw-code-cli": {
     installHint: "Use the project-documented Claw Code install path, then ensure `claw` is on PATH.",
+    authHint: "Follow the project-documented account or provider-key setup before use.",
     verifyCommand: "claw --version",
+    firstRunCommand: "claw",
+    expectedResult: "Claw Code starts only after source, license, and binary provenance are checked.",
     sourceUrl: "https://github.com/Hawardshin/claw-code",
     caution: "The referenced repository was disabled for clone during review; verify source, license, and binary provenance before installing or bundling."
   }
@@ -3132,6 +3150,17 @@ function providerAuthStatusForAdapter(
     return uiLanguage === "ko" ? "계정 연결됨" : "account connected";
   }
   return uiLanguage === "ko" ? "계정 필요" : "account needed";
+}
+
+function adapterAuthReadyForAdapter(adapterId: string, report: ProviderCredentialReport | null | undefined) {
+  const providerIds = providerIdsByAdapter[adapterId] || [];
+  if (providerIds.length === 0) {
+    return true;
+  }
+  const providers = report?.providers || [];
+  return providers
+    .filter((provider) => providerIds.includes(provider.providerId))
+    .some((provider) => provider.configured || provider.authMethod === "local_http");
 }
 
 export function MonitorShell({ snapshot, initialSection }: { snapshot: WorkspaceSnapshot; initialSection?: string }) {
@@ -4182,6 +4211,54 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const openExecutionSettings = useCallback((subsectionId: SettingsSubsectionId = "quick") => {
     openSettingsTab("execution", subsectionId);
   }, [openSettingsTab]);
+  const selectedRuntimeAdapterOption =
+    fallbackDesktopAdapters.find((adapter) => adapter.adapterId === runtimeInitDefaults.adapterId) ||
+    fallbackDesktopAdapters[0];
+  const selectedRuntimeAdapterGuide = adapterSetupGuides[selectedRuntimeAdapterOption.adapterId];
+  const selectedRuntimeAdapterAuthReady = adapterAuthReadyForAdapter(selectedRuntimeAdapterOption.adapterId, providerCredentials);
+  const selectedRuntimeAdapterAuthStatus = providerAuthStatusForAdapter(
+    selectedRuntimeAdapterOption.adapterId,
+    providerCredentials,
+    uiLanguage
+  );
+  const runtimeAdapterSetupSteps = [
+    {
+      id: "install",
+      label: uiLanguage === "ko" ? "1. 설치" : "1. Install",
+      detail: selectedRuntimeAdapterGuide.installHint,
+      ready: false,
+      command: selectedRuntimeAdapterGuide.installHint
+    },
+    {
+      id: "auth",
+      label: uiLanguage === "ko" ? "2. 로그인/키" : "2. Login or key",
+      detail: selectedRuntimeAdapterAuthReady ? selectedRuntimeAdapterAuthStatus : selectedRuntimeAdapterGuide.authHint,
+      ready: selectedRuntimeAdapterAuthReady,
+      command: selectedRuntimeAdapterGuide.authHint
+    },
+    {
+      id: "verify",
+      label: uiLanguage === "ko" ? "3. 검증" : "3. Verify",
+      detail: selectedRuntimeAdapterGuide.verifyCommand,
+      ready: false,
+      command: selectedRuntimeAdapterGuide.verifyCommand
+    },
+    {
+      id: "run",
+      label: uiLanguage === "ko" ? "4. 첫 실행" : "4. First run",
+      detail: selectedRuntimeAdapterGuide.expectedResult,
+      ready: selectedRuntimeAdapterAuthReady,
+      command: selectedRuntimeAdapterGuide.firstRunCommand
+    }
+  ];
+  const copyRuntimeAdapterCommand = (label: string, command: string) => {
+    void writeClipboardText(command);
+    setProviderCredentialNotice(
+      uiLanguage === "ko"
+        ? `${label} 명령을 클립보드에 복사했습니다.`
+        : `${label} command copied to the clipboard.`
+    );
+  };
   async function refreshProviderModels(providerId = searchAgentRunForm.providerId, userInitiated = false) {
     const provider =
       providerCredentials.providers.find((item) => item.providerId === providerId) ||
@@ -6304,17 +6381,23 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                     )}
 
                     {activeSettingsSubsection === "adapter" && (
-                    <section className="settings-pane wide">
+                    <section className="settings-pane wide cli-adapter-setup-guide" data-cli-adapter-setup-guide="settings">
                       <div className="settings-pane-heading">
                         <SquareTerminal size={16} aria-hidden="true" />
                         <div>
                           <span>{uiLanguage === "ko" ? "기본 CLI 어댑터" : "Default CLI Adapter"}</span>
-                          <strong>{runtimeInitDefaults.adapterId}</strong>
+                          <strong>{selectedRuntimeAdapterOption.label}</strong>
+                          <small>
+                            {uiLanguage === "ko"
+                              ? "CLI 문법을 외우지 않아도 설치, 로그인/키, 검증, 첫 실행 순서대로 따라가면 됩니다."
+                              : "Follow install, login/key, verify, and first-run steps without memorizing CLI syntax."}
+                          </small>
                         </div>
                       </div>
-                      <div className="settings-option-list">
+                      <div className="cli-adapter-picker-grid" role="group" aria-label={uiLanguage === "ko" ? "CLI 어댑터 선택" : "CLI adapter selection"}>
                         {fallbackDesktopAdapters.map((adapter) => {
                           const setupGuide = adapterSetupGuides[adapter.adapterId];
+                          const authReady = adapterAuthReadyForAdapter(adapter.adapterId, providerCredentials);
                           return (
                             <button
                               key={adapter.adapterId}
@@ -6324,10 +6407,45 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                               title={setupGuide?.installHint || adapter.command}
                             >
                               <span>{adapter.label}</span>
-                              <small>{setupGuide?.verifyCommand || adapter.command}</small>
+                              <strong>{providerAuthStatusForAdapter(adapter.adapterId, providerCredentials, uiLanguage)}</strong>
+                              <small>{authReady ? setupGuide?.firstRunCommand : setupGuide?.authHint}</small>
                             </button>
                           );
                         })}
+                      </div>
+                      <div className="cli-setup-stepper" aria-label={uiLanguage === "ko" ? "CLI 설정 단계" : "CLI setup steps"}>
+                        {runtimeAdapterSetupSteps.map((step) => (
+                          <article key={step.id} className={step.ready ? "ready" : "pending"} data-cli-setup-step={step.id}>
+                            <span>{step.ready ? <CheckCircle2 size={15} aria-hidden="true" /> : <SquareTerminal size={15} aria-hidden="true" />}</span>
+                            <div>
+                              <strong>{step.label}</strong>
+                              <small>{step.detail}</small>
+                            </div>
+                            <code>{step.command}</code>
+                          </article>
+                        ))}
+                      </div>
+                      <div className="cli-command-copy-row" aria-label={uiLanguage === "ko" ? "CLI 명령 복사" : "Copy CLI commands"}>
+                        {runtimeAdapterSetupSteps.map((step) => (
+                          <button
+                            key={step.id}
+                            type="button"
+                            data-cli-command-copy={step.id}
+                            onClick={() => copyRuntimeAdapterCommand(step.label, step.command)}
+                          >
+                            <Copy size={14} aria-hidden="true" />
+                            <span>{uiLanguage === "ko" ? `${step.label} 복사` : `Copy ${step.label}`}</span>
+                          </button>
+                        ))}
+                        <button type="button" onClick={() => openProviderSettings()}>
+                          <KeyRound size={14} aria-hidden="true" />
+                          <span>{uiLanguage === "ko" ? "계정 연결로 이동" : "Open provider accounts"}</span>
+                        </button>
+                      </div>
+                      <div className="cli-adapter-setup-outcome">
+                        <span>{uiLanguage === "ko" ? "첫 실행 결과" : "First-run result"}</span>
+                        <strong>{selectedRuntimeAdapterGuide.expectedResult}</strong>
+                        <small>{selectedRuntimeAdapterGuide.caution}</small>
                       </div>
                     </section>
                     )}
@@ -12063,6 +12181,7 @@ function DesktopRuntimePanel({
     );
     const selected = selectedSessionAdapterId === adapter.adapterId;
     const authStatus = providerAuthStatusForAdapter(adapter.adapterId, providerCredentialReport, uiLanguage);
+    const authReady = adapterAuthReadyForAdapter(adapter.adapterId, providerCredentialReport);
     const statusLabel = adapter.available
       ? uiLanguage === "ko" ? "설치됨" : "Installed"
       : uiLanguage === "ko" ? "설치 필요" : "Install needed";
@@ -12082,8 +12201,39 @@ function DesktopRuntimePanel({
       adapterTaskRuns,
       adapterDecisionItems,
       authStatus,
+      authReady,
       statusLabel,
-      readinessLabel
+      readinessLabel,
+      setupSteps: [
+        {
+          id: "install",
+          label: uiLanguage === "ko" ? "설치" : "Install",
+          ready: adapter.available,
+          detail: adapter.available ? adapter.resolvedPath || adapter.command : guide?.installHint || adapter.command,
+          command: guide?.installHint || adapter.command
+        },
+        {
+          id: "auth",
+          label: uiLanguage === "ko" ? "로그인/키" : "Login/key",
+          ready: authReady,
+          detail: authReady ? authStatus : guide?.authHint || authStatus,
+          command: guide?.authHint || ""
+        },
+        {
+          id: "verify",
+          label: uiLanguage === "ko" ? "검증" : "Verify",
+          ready: adapter.available,
+          detail: adapter.version || adapter.lastError || guide?.verifyCommand || adapter.command,
+          command: guide?.verifyCommand || adapter.command
+        },
+        {
+          id: "run",
+          label: uiLanguage === "ko" ? "첫 실행" : "First run",
+          ready: adapter.available && authReady,
+          detail: guide?.expectedResult || adapter.command,
+          command: guide?.firstRunCommand || adapter.command
+        }
+      ]
     };
   });
   const startAdapterFromCockpit = async (adapterId: string) => {
@@ -12817,6 +12967,31 @@ function DesktopRuntimePanel({
               <div className="agent-cli-cockpit-command">
                 <code>{row.adapter.resolvedPath || row.adapter.command}</code>
                 <small>{row.adapter.version || row.adapter.lastError || row.guide?.verifyCommand || row.adapter.command}</small>
+              </div>
+              <div className="agent-cli-setup-ladder" data-agent-cli-setup-ladder={row.adapter.adapterId}>
+                {row.setupSteps.map((step) => (
+                  <article key={step.id} className={step.ready ? "ready" : "pending"} data-cli-setup-step={step.id}>
+                    <span>{step.ready ? <CheckCircle2 size={13} aria-hidden="true" /> : <AlertTriangle size={13} aria-hidden="true" />}</span>
+                    <div>
+                      <strong>{step.label}</strong>
+                      <small>{step.detail}</small>
+                    </div>
+                  </article>
+                ))}
+              </div>
+              <div className="agent-cli-command-stack" aria-label={uiLanguage === "ko" ? "CLI 명령 복사" : "Copy CLI commands"}>
+                {row.setupSteps.map((step) => (
+                  <button
+                    key={step.id}
+                    type="button"
+                    data-cli-command-copy={`${row.adapter.adapterId}:${step.id}`}
+                    onClick={() => void writeClipboardText(step.command || step.detail)}
+                    title={step.command || step.detail}
+                  >
+                    <Copy size={13} aria-hidden="true" />
+                    <span>{step.label}</span>
+                  </button>
+                ))}
               </div>
               <div className="agent-cli-cockpit-signals">
                 <span>{row.authStatus}</span>
