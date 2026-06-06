@@ -16405,6 +16405,7 @@ h3 {
 .tool-studio-shell,
 .tool-studio-side-pane > section,
 .tool-builder-workbench,
+.tool-usage-playbook,
 .tool-environment-workbench,
 .tool-venv-manager,
 .tool-deploy-workbench,
@@ -16861,7 +16862,9 @@ h3 {
 
 .tool-card strong,
 .tool-selected-summary strong,
-.tool-build-flow strong {
+.tool-build-flow strong,
+.tool-playbook-list strong,
+.tool-usage-playbook strong {
   display: block;
   color: var(--text);
   line-height: 1.25;
@@ -16922,6 +16925,194 @@ h3 {
   border-radius: 7px;
   color: var(--text-inverse);
   background: var(--slate);
+}
+
+.tool-playbook-list {
+  display: grid;
+  gap: 7px;
+  margin-top: 4px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 90%, var(--accent-primary) 5%), var(--surface-raised)),
+    var(--surface-raised);
+}
+
+.tool-playbook-list > div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.tool-playbook-list button {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  min-height: 54px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--control-radius);
+  background: var(--choice-bg);
+  color: var(--text);
+  padding: 8px;
+  text-align: left;
+  box-shadow: var(--section-tab-shadow), var(--surface-edge-highlight);
+}
+
+.tool-playbook-list button:hover,
+.tool-playbook-list button.active {
+  border-color: var(--control-selected-border);
+  color: var(--control-selected-fg);
+  background: var(--choice-selected-bg);
+  box-shadow: var(--section-tab-active-shadow);
+}
+
+.tool-playbook-list button span,
+.tool-playbook-list button small {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+}
+
+.tool-playbook-list button small {
+  color: inherit;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+.tool-playbook-list button em {
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, currentColor 12%, transparent);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.tool-usage-playbook {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--surface) 88%, var(--green) 6%), color-mix(in srgb, var(--surface-raised) 92%, var(--accent-primary) 5%)),
+    var(--surface-raised);
+  padding: 12px;
+}
+
+.tool-usage-playbook header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: start;
+  min-width: 0;
+}
+
+.tool-usage-playbook h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--font-size-card-title);
+  line-height: 1.3;
+  overflow-wrap: break-word;
+}
+
+.tool-usage-playbook header span,
+.tool-usage-playbook footer span,
+.tool-usage-playbook p {
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  line-height: 1.45;
+  overflow-wrap: break-word;
+}
+
+.tool-usage-playbook header button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  border: 1px solid var(--line);
+  border-radius: var(--control-radius);
+  background: var(--control-bg);
+  color: var(--text);
+  padding: 6px 9px;
+  box-shadow: var(--section-tab-shadow), var(--surface-edge-highlight);
+  white-space: nowrap;
+}
+
+.tool-usage-playbook header button:hover {
+  border-color: var(--state-hover-border);
+  background: var(--control-bg-hover);
+}
+
+.tool-usage-playbook-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.tool-usage-playbook-grid article {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-height: 122px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 10px;
+}
+
+.tool-usage-playbook-grid ul,
+.tool-usage-playbook-grid ol {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding-left: 16px;
+}
+
+.tool-usage-playbook-grid li {
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.tool-usage-command-list {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.tool-usage-command-list code {
+  display: block;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--terminal-bg);
+  color: var(--terminal-fg);
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  padding: 7px;
+}
+
+.tool-usage-playbook footer {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 7px;
+  align-items: start;
+  min-width: 0;
+  border-top: 1px solid var(--line);
+  padding-top: 9px;
 }
 
 .tool-builder-workbench {

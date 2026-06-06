@@ -19,6 +19,7 @@ import {
   collectOpenSourceFeatureReferences,
   collectPhilosophyFeatureExtraction,
   collectProductFeatureArchitecture,
+  collectToolUsageIntegration,
   collectLanguageModeCatalog,
   collectModeFunctionCatalog,
   collectSourceFiles,
@@ -244,6 +245,62 @@ test("buildSnapshot reads minimal repository shape", () => {
       ]
     })
   );
+  fs.writeFileSync(
+    path.join(root, "platform-desktop-app", "configs", "tool-usage-integration-registry.json"),
+    JSON.stringify({
+      reader_guide: { summary: "Tool usage", how_to_read: ["patterns"], owner: "test" },
+      reference_links: [
+        {
+          id: "node-test",
+          title: "Node Test",
+          url: "https://nodejs.org/api/test.html",
+          source_type: "official_docs",
+          used_for: ["node --test"],
+          last_checked: "2026-06-06",
+          reliability: "high"
+        }
+      ],
+      structure_rules: [{ id: "evidence", rule: "Record evidence", reason: "Trust" }],
+      field_guide: [{ field: "patterns", meaning: "Tool patterns", required: true }],
+      patterns: [
+        {
+          id: "renderer-validation-loop",
+          label: "Renderer validation loop",
+          label_ko: "렌더러 검증 루프",
+          purpose: "Validate renderer source.",
+          tool_surfaces: ["node --test", "Playwright"],
+          trigger_when: ["UI source changes"],
+          sequence: ["collect", "check", "test", "build"],
+          evidence_outputs: ["workspace-snapshot.json"],
+          validation_commands: ["corepack pnpm --filter workspace-monitor test"],
+          failure_modes: ["blank UI"],
+          platform_application: "Expose validation ladder in Tool Studio.",
+          status: "implemented",
+          priority: "p0"
+        }
+      ],
+      verification_ladders: [
+        {
+          id: "workspace-monitor-source-ladder",
+          label: "Workspace Monitor source ladder",
+          surface: "tools",
+          commands: ["corepack pnpm --filter workspace-monitor run check"],
+          acceptance: ["snapshot contains toolUsageIntegration"],
+          owner_feature_id: "root_tool_management"
+        }
+      ],
+      adoption_backlog: [
+        {
+          id: "playbook-to-runner",
+          title: "Turn playbook entries into executable presets",
+          target_paths: ["platform-desktop-app/src-tauri/src/lib.rs"],
+          smallest_asset_type: "project_feature",
+          status: "queued",
+          risk_controls: ["approval gate"]
+        }
+      ]
+    })
+  );
   fs.writeFileSync(path.join(root, "agent-platform", "docs", "demo-agent.ko.md"), "# Demo Agent\n\n설명");
   fs.writeFileSync(
     path.join(root, "_docs", "registry.json"),
@@ -269,7 +326,7 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.stats.completedTasks, 1);
   assert.equal(snapshot.collaborationBoard.summary.completedTasks, 1);
   assert.equal(snapshot.collaborationBoard.flows.length, 1);
-  assert.equal(snapshot.documents.length, 8);
+  assert.equal(snapshot.documents.length, 9);
   assert.equal(snapshot.stats.sourceFiles, 1);
   assert.equal(snapshot.adminHistory.summary.documents, 1);
   assert.equal(snapshot.adminHistory.inlineHistoryDocuments, 1);
@@ -315,6 +372,11 @@ test("buildSnapshot reads minimal repository shape", () => {
   assert.equal(snapshot.stats.historyInsightPatterns >= 1, true);
   assert.equal(snapshot.historyInsightLoop.signalGroups.some((group) => group.id === "build-closeout-gate"), true);
   assert.equal(snapshot.stats.fundamentalImprovementPrinciples >= 1, true);
+  assert.equal(snapshot.stats.toolUsagePatterns, 1);
+  assert.equal(snapshot.stats.toolUsageValidationCommands, 2);
+  assert.equal(snapshot.toolUsageIntegration.summary.totalPatterns, 1);
+  assert.equal(snapshot.toolUsageIntegration.patterns[0].labelKo, "렌더러 검증 루프");
+  assert.equal(snapshot.toolUsageIntegration.verificationLadders[0].surface, "tools");
   assert.equal(
     snapshot.fundamentalImprovementStructure.structuralPrinciples.some((principle) => principle.id === "definition-of-done-is-artifact"),
     true
@@ -361,6 +423,8 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
       fundamentalImprovementPrinciples: 1,
       fundamentalImprovementPackages: 1,
       fundamentalImprovementFitnessChecks: 1,
+      toolUsagePatterns: 1,
+      toolUsageValidationCommands: 2,
       structurePressurePoints: 1,
       sourceFiles: 1,
       rootFolders: 1
@@ -609,6 +673,68 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
         }
       ]
     },
+    toolUsageIntegration: {
+      sourcePath: "platform-desktop-app/configs/tool-usage-integration-registry.json",
+      summary: {
+        totalPatterns: 1,
+        implementedPatterns: 1,
+        p0Patterns: 1,
+        verificationLadders: 1,
+        validationCommands: 2,
+        adoptionBacklog: 1,
+        referenceLinks: 1
+      },
+      referenceLinks: [
+        {
+          id: "node-test",
+          title: "Node Test",
+          url: "https://nodejs.org/api/test.html",
+          path: "",
+          sourceType: "official_docs",
+          usedFor: ["node --test"],
+          lastChecked: "2026-06-06",
+          reliability: "high",
+          limitations: ""
+        }
+      ],
+      patterns: [
+        {
+          id: "renderer-validation-loop",
+          label: "Renderer validation loop",
+          labelKo: "렌더러 검증 루프",
+          purpose: "Validate renderer source.",
+          toolSurfaces: ["node --test", "Playwright"],
+          triggerWhen: ["UI source changes"],
+          sequence: ["collect", "check"],
+          evidenceOutputs: ["workspace-snapshot.json"],
+          validationCommands: ["corepack pnpm --filter workspace-monitor test"],
+          failureModes: ["blank UI"],
+          platformApplication: "Expose validation ladder in Tool Studio.",
+          status: "implemented",
+          priority: "p0"
+        }
+      ],
+      verificationLadders: [
+        {
+          id: "workspace-monitor-source-ladder",
+          label: "Workspace Monitor source ladder",
+          surface: "tools",
+          commands: ["corepack pnpm --filter workspace-monitor run check"],
+          acceptance: ["snapshot contains toolUsageIntegration"],
+          ownerFeatureId: "root_tool_management"
+        }
+      ],
+      adoptionBacklog: [
+        {
+          id: "playbook-to-runner",
+          title: "Turn playbook entries into executable presets",
+          targetPaths: ["platform-desktop-app/src-tauri/src/lib.rs"],
+          smallestAssetType: "project_feature",
+          status: "queued",
+          riskControls: ["approval gate"]
+        }
+      ]
+    },
     categories: ["project-doc"],
     publicReview: { status: "review_required_before_public_deploy", checklist: [] }
   };
@@ -630,6 +756,8 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.stats.fundamentalImprovementPrinciples, 0);
   assert.equal(customer.stats.fundamentalImprovementPackages, 0);
   assert.equal(customer.stats.fundamentalImprovementFitnessChecks, 0);
+  assert.equal(customer.stats.toolUsagePatterns, 1);
+  assert.equal(customer.stats.toolUsageValidationCommands, 2);
   assert.equal(customer.stats.structurePressurePoints, 0);
   assert.equal(customer.sourceFiles.length, 0);
   assert.equal(customer.documents.length, 0);
@@ -656,6 +784,10 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.fundamentalImprovementStructure.structuralPrinciples.length, 0);
   assert.equal(customer.fundamentalImprovementStructure.improvementPackages.length, 0);
   assert.equal(customer.fundamentalImprovementStructure.fitnessChecks.length, 0);
+  assert.equal(customer.toolUsageIntegration.sourcePath, "");
+  assert.equal(customer.toolUsageIntegration.patterns.length, 1);
+  assert.equal(customer.toolUsageIntegration.referenceLinks.length, 1);
+  assert.equal(customer.toolUsageIntegration.adoptionBacklog[0].targetPaths.length, 0);
   assert.equal(customer.historyDays.length, 0);
   assert.equal(customer.projects.length, 0);
   assert.equal(customer.publicReview.status, "customer_snapshot_sanitized");
@@ -668,6 +800,89 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
     "source",
     "intent"
   ]);
+});
+
+test("collectToolUsageIntegration maps agent tool loops to validation ladders", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "workspace-monitor-tool-usage-test-"));
+  fs.mkdirSync(path.join(root, "platform-desktop-app", "configs"), { recursive: true });
+  fs.writeFileSync(
+    path.join(root, "platform-desktop-app", "configs", "tool-usage-integration-registry.json"),
+    JSON.stringify({
+      reference_links: [
+        {
+          id: "playwright",
+          title: "Playwright",
+          url: "https://playwright.dev/docs/locators",
+          source_type: "official_docs",
+          used_for: ["browser smoke"],
+          last_checked: "2026-06-06",
+          reliability: "high",
+          limitations: "browser only"
+        }
+      ],
+      patterns: [
+        {
+          id: "web-first-research",
+          label: "Web-first research",
+          label_ko: "웹 우선 조사",
+          purpose: "Confirm current sources before planning.",
+          tool_surfaces: ["web.run"],
+          trigger_when: ["latest facts"],
+          sequence: ["search", "record"],
+          evidence_outputs: ["_history/web-searches/YYYY/file.ko.md"],
+          validation_commands: [],
+          failure_modes: ["stale memory"],
+          platform_application: "Research gate in Tool Studio.",
+          status: "implemented",
+          priority: "p0"
+        },
+        {
+          id: "desktop-packaging-loop",
+          label: "Desktop packaging loop",
+          purpose: "Package desktop app.",
+          tool_surfaces: ["tauri build"],
+          trigger_when: ["desktop source changes"],
+          sequence: ["build", "bundle"],
+          evidence_outputs: ["*.app", "*.dmg"],
+          validation_commands: ["corepack pnpm run desktop:package:internal"],
+          failure_modes: ["missing artifact"],
+          platform_application: "Desktop package ladder.",
+          status: "implemented",
+          priority: "p0"
+        }
+      ],
+      verification_ladders: [
+        {
+          id: "desktop-package-ladder",
+          label: "Desktop package ladder",
+          surface: "desktop",
+          commands: ["corepack pnpm run desktop:package:internal"],
+          acceptance: [".app exists"],
+          owner_feature_id: "agent_work_environment"
+        }
+      ],
+      adoption_backlog: [
+        {
+          id: "tool-call-trace-store",
+          title: "Persist tool-call traces",
+          target_paths: ["platform-desktop-app/runtime-data/"],
+          smallest_asset_type: "tool",
+          status: "queued",
+          risk_controls: ["redact secrets"]
+        }
+      ]
+    })
+  );
+
+  const integration = collectToolUsageIntegration(root);
+
+  assert.equal(integration.sourcePath, "platform-desktop-app/configs/tool-usage-integration-registry.json");
+  assert.equal(integration.summary.totalPatterns, 2);
+  assert.equal(integration.summary.validationCommands, 2);
+  assert.equal(integration.referenceLinks[0].sourceType, "official_docs");
+  assert.equal(integration.patterns[0].labelKo, "웹 우선 조사");
+  assert.equal(integration.verificationLadders[0].ownerFeatureId, "agent_work_environment");
+  assert.equal(integration.adoptionBacklog[0].smallestAssetType, "tool");
 });
 
 test("collectOpenSourceFeatureReferences maps feature layers to install policy and candidate repos", () => {

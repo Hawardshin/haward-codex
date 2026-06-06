@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-06T02:03:25.042Z",
+  "generatedAt": "2026-06-06T02:17:31.226Z",
   "summary": {
-    "documents": 2578,
+    "documents": 2585,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1005
+        "count": 1006
       },
       {
         "category": "web-search",
-        "count": 410
+        "count": 411
       },
       {
         "category": "plan",
-        "count": 344
+        "count": 345
       },
       {
         "category": "request-trace",
-        "count": 338
+        "count": 339
       },
       {
         "category": "work-timing",
-        "count": 259
+        "count": 260
       },
       {
         "category": "user-request",
-        "count": 123
+        "count": 124
       },
       {
         "category": "work-summary",
-        "count": 90
+        "count": 91
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6490274,
+    "totalSourceBytes": 6497983,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,118 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-06-tool-usage-integration-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-tool-usage-integration.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Tool Usage Integration 평가",
+      "excerpt": "Tool Usage Integration 평가 날짜: 2026 06 06 결과 status: passed internal 사용자 요청인 “지금 쓰는 도구와 사용 방식을 플랫폼에 녹이기”를 source backed 기능으로 구현했다. 도구 사용 루프는 registry에 남고, snapshot으로 수집되며, Tool Studio에서 선택 가능한 Agent Tool Playbook으로 표시된다. 충족한 기준 웹 우선 조사와 공식 출처 기록: 통과 요구사항/스펙/추적성 기록: 통과 source of tr",
+      "html": "<p>Tool Usage Integration 평가 날짜: 2026 06 06 결과 status: passed internal 사용자 요청인 “지금 쓰는 도구와 사용 방식을 플랫폼에 녹이기”를 source backed 기능으로 구현했다. 도구 사용 루프는 registry에 남고, snapshot으로 수집되며, Tool Studio에서 선택 가능한 Agent Tool Playbook으로 표시된다. 충족한 기준 웹 우선 조사와 공식 출처 기록: 통과 요구사항/스펙/추적성 기록: 통과 source of truth registry: 통과 collector/snapshot/customer sanitizer: 통과 Tool Studio UI: 통과 te</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1347,
+      "updatedAt": "2026-06-06T02:16:42.822Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-tool-usage-integration-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-tool-usage-integration.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Tool Usage Integration 요청 추적",
+      "excerpt": "Tool Usage Integration 요청 추적 날짜: 2026 06 06 요청 Codex가 현재 사용한 도구들과 사용 방식을 플랫폼에도 반영해 달라는 요청. 결과 구현 완료. Tool Studio가 Agent Tool Playbook을 표시하고, snapshot collector가 toolUsageIntegration 데이터를 공급한다. 주요 변경 파일 platform desktop app/configs/tool usage integration registry.json platform des",
+      "html": "<p>Tool Usage Integration 요청 추적 날짜: 2026 06 06 요청 Codex가 현재 사용한 도구들과 사용 방식을 플랫폼에도 반영해 달라는 요청. 결과 구현 완료. Tool Studio가 Agent Tool Playbook을 표시하고, snapshot collector가 toolUsageIntegration 데이터를 공급한다. 주요 변경 파일 platform desktop app/configs/tool usage integration registry.json platform desktop app/renderer/workspace monitor/scripts/lib/tool usage integration.mjs platf</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1670,
+      "updatedAt": "2026-06-06T02:16:42.822Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-tool-usage-integration-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-tool-usage-integration.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Tool Usage Integration 작업 요약",
+      "excerpt": "Tool Usage Integration 작업 요약 날짜: 2026 06 06 완료 Codex식 도구 사용 루프를 tool usage integration registry.json 로 구조화했다. Workspace Monitor collector와 snapshot 타입에 toolUsageIntegration 을 추가했다. Tool Studio에 source backed Agent Tool Playbook 리스트와 상세 패널을 추가했다. product feature registry의 Root Too",
+      "html": "<p>Tool Usage Integration 작업 요약 날짜: 2026 06 06 완료 Codex식 도구 사용 루프를 tool usage integration registry.json 로 구조화했다. Workspace Monitor collector와 snapshot 타입에 toolUsageIntegration 을 추가했다. Tool Studio에 source backed Agent Tool Playbook 리스트와 상세 패널을 추가했다. product feature registry의 Root Tool Management 자산과 검증 gate에 연결했다. collector, customer snapshot, UI static test를 추가</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1067,
+      "updatedAt": "2026-06-06T02:16:42.822Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-tool-usage-integration-ko-md",
+      "path": "_history/work-timings/2026/2026-06-06-tool-usage-integration.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "Tool Usage Integration 작업 시간 기록",
+      "excerpt": "Tool Usage Integration 작업 시간 기록 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 조사 | 완료 | 공식 문서 3개 확인 | | 기존 구조 파악 | 완료 | collector, snapshot, Tool Studio, tests 확인 | | 구현 | 완료 | registry, collector, type, UI, CSS, tests | | 1차 검증 | 완료 | collect/check/test 통과 | | build/package | 완료 |",
+      "html": "<p>Tool Usage Integration 작업 시간 기록 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 조사 | 완료 | 공식 문서 3개 확인 | | 기존 구조 파악 | 완료 | collector, snapshot, Tool Studio, tests 확인 | | 구현 | 완료 | registry, collector, type, UI, CSS, tests | | 1차 검증 | 완료 | collect/check/test 통과 | | build/package | 완료 | Next build, Playwright smoke, Tauri package 완료 | 병목 후보 최종 Tauri desktop package</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 634,
+      "updatedAt": "2026-06-06T02:16:42.822Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-tool-usage-integration-ko-md",
+      "path": "_history/plans/2026/2026-06-06-tool-usage-integration.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Tool Usage Integration 작업 계획",
+      "excerpt": "Tool Usage Integration 작업 계획 날짜: 2026 06 06 work mode: standard view mode: superadmin developer install mode: developer 실행 순서 1. 웹 우선 조사로 공식 출처 확인 2. 기존 snapshot collector, Tool Studio, 테스트 구조 확인 3. tool usage registry와 collector 구현 4. snapshot 타입과 Tool Studio UI 연결 5. product fe",
+      "html": "<p>Tool Usage Integration 작업 계획 날짜: 2026 06 06 work mode: standard view mode: superadmin developer install mode: developer 실행 순서 1. 웹 우선 조사로 공식 출처 확인 2. 기존 snapshot collector, Tool Studio, 테스트 구조 확인 3. tool usage registry와 collector 구현 4. snapshot 타입과 Tool Studio UI 연결 5. product feature registry와 요구사항/스펙/히스토리 업데이트 6. collect, check, test, build, browser smoke,</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 794,
+      "updatedAt": "2026-06-06T02:13:24.567Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-tool-usage-integration-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-tool-usage-integration.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약",
+      "excerpt": "사용자 요청 요약 날짜: 2026 06 06 사용자는 Codex가 현재 사용한 도구들과 그 사용 방식을 자신의 플랫폼에도 녹여 달라고 요청했다. 요구의 핵심은 설명만이 아니라 소스와 플랫폼 화면에 반영되는 기능화였다. 해석한 작업 범위 도구 사용 루프를 구조화된 registry로 저장 Workspace Monitor snapshot으로 수집 Tool Studio에서 선택 가능한 Agent Tool Playbook으로 표시 테스트, 빌드, 데스크톱 패키징까지 자동 수행",
+      "html": "<p>사용자 요청 요약 날짜: 2026 06 06 사용자는 Codex가 현재 사용한 도구들과 그 사용 방식을 자신의 플랫폼에도 녹여 달라고 요청했다. 요구의 핵심은 설명만이 아니라 소스와 플랫폼 화면에 반영되는 기능화였다. 해석한 작업 범위 도구 사용 루프를 구조화된 registry로 저장 Workspace Monitor snapshot으로 수집 Tool Studio에서 선택 가능한 Agent Tool Playbook으로 표시 테스트, 빌드, 데스크톱 패키징까지 자동 수행</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 543,
+      "updatedAt": "2026-06-06T02:13:24.567Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-tool-usage-integration-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-tool-usage-integration.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Tool Usage Integration 웹 검색 기록",
+      "excerpt": "Tool Usage Integration 웹 검색 기록 날짜: 2026 06 06 작업: Codex 도구 사용 방식의 플랫폼 내 기능화 검색 쿼리 Playwright official docs locators auto waiting browser automation testing Node.js official test runner documentation node test Tauri v2 official documentation build bundle command 확인한 주요 출처 | 출처 | 신",
+      "html": "<p>Tool Usage Integration 웹 검색 기록 날짜: 2026 06 06 작업: Codex 도구 사용 방식의 플랫폼 내 기능화 검색 쿼리 Playwright official docs locators auto waiting browser automation testing Node.js official test runner documentation node test Tauri v2 official documentation build bundle command 확인한 주요 출처 | 출처 | 신뢰도 | 사용한 판단 | | | | | | https://playwright.dev/docs/locators | 높음, 공식 문서 | UI sm</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1654,
+      "updatedAt": "2026-06-06T02:13:24.566Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
       "path": "_history/evaluations/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
@@ -41315,35 +41427,35 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 306,
+      "documentsCount": 313,
       "categories": [
         {
           "category": "evaluation",
-          "count": 72
+          "count": 73
         },
         {
           "category": "user-request",
-          "count": 44
+          "count": 45
         },
         {
           "category": "web-search",
-          "count": 44
+          "count": 45
         },
         {
           "category": "work-summary",
-          "count": 44
+          "count": 45
         },
         {
           "category": "request-trace",
-          "count": 43
+          "count": 44
         },
         {
           "category": "work-timing",
-          "count": 42
+          "count": 43
         },
         {
           "category": "plan",
-          "count": 16
+          "count": 17
         },
         {
           "category": "daily-history",

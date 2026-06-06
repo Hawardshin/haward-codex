@@ -53,6 +53,7 @@ const nativeGitWorkbench = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "NativeGitWorkbench.tsx"),
   "utf8"
 );
+const snapshotModel = fs.readFileSync(path.join(projectRoot, "lib", "snapshot.ts"), "utf8");
 const toolStudioData = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "tool-studio", "data.ts"),
   "utf8"
@@ -114,12 +115,31 @@ test("Tool Studio is a first-class monitor section", () => {
   assert.doesNotMatch(monitorShell, /next\.splice\(insertAt, 0, "tools"\)/);
   assert.match(monitorShell, /tools:\s*"Studio"/);
   assert.match(monitorShell, /section === "tools"[\s\S]*?<MemoizedToolStudioPanel/);
+  assert.match(monitorShell, /toolUsageIntegration=\{snapshot\.toolUsageIntegration\}/);
   assert.match(monitorShell, /import type \{ ToolStudioMode, ToolStudioModeRequest, ToolStudioPanelProps \} from "@\/components\/workbench\/ToolStudioPanel"/);
   assert.match(monitorShell, /const ToolStudioPanel = dynamic<ToolStudioPanelProps>/);
   assert.match(monitorShell, /\(\) => import\("@\/components\/workbench\/ToolStudioPanel"\)\.then\(\(module\) => module\.ToolStudioPanel\)/);
   assert.match(monitorShell, /const MemoizedToolStudioPanel = memo\(ToolStudioPanel\)/);
   assert.match(toolStudio, /export type ToolStudioPanelProps = \{/);
+  assert.match(toolStudio, /toolUsageIntegration\?: WorkspaceToolUsageIntegration/);
   assert.match(coreDrilldown, /"files" \| "agents" \| "tools" \| "run" \| "eval" \| "learn"/);
+});
+
+test("Tool Studio exposes source-backed agent tool usage playbooks", () => {
+  assert.match(snapshotModel, /export type WorkspaceToolUsageIntegration = \{/);
+  assert.match(snapshotModel, /toolUsageIntegration\?: WorkspaceToolUsageIntegration/);
+  assert.match(toolStudio, /import type \{ WorkspaceToolUsageIntegration \} from "@\/lib\/snapshot"/);
+  assert.match(toolStudio, /const toolUsagePatterns = toolUsageIntegration\?\.patterns \|\| \[\]/);
+  assert.match(toolStudio, /data-tool-playbook-list/);
+  assert.match(toolStudio, /data-tool-playbook-pattern=\{pattern\.id\}/);
+  assert.match(toolStudio, /data-tool-usage-playbook/);
+  assert.match(toolStudio, /data-tool-playbook-action="copy"/);
+  assert.match(toolStudio, /copyToolUsagePlaybook/);
+  assert.match(css, /\.tool-playbook-list \{/);
+  assert.match(css, /\.tool-playbook-list button \{/);
+  assert.match(css, /\.tool-usage-playbook \{/);
+  assert.match(css, /\.tool-usage-playbook-grid \{/);
+  assert.match(css, /\.tool-usage-command-list code \{/);
 });
 
 test("AI Eval is a first-class resident workbench section", () => {

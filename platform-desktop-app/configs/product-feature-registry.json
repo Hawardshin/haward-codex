@@ -618,6 +618,8 @@
       ],
       "current_assets": [
         "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/workbench/ToolStudioPanel.tsx",
+        "platform-desktop-app/configs/tool-usage-integration-registry.json",
         "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
         "agent-platform/configs/integrations/cli-adapter-registry.json"
       ],
@@ -626,17 +628,20 @@
         "CLI adapter selection",
         "workspace access setup",
         "root tool sharing across task-specific agents",
-        "question deferral defaults"
+        "question deferral defaults",
+        "tool usage playbook presets"
       ],
       "learning_signals": [
         "configured provider count",
         "selected CLI adapter",
         "workspace file count",
-        "auto-defer setting"
+        "auto-defer setting",
+        "tool usage pattern count"
       ],
       "validation_gates": [
         "Home and execution settings expose root tools separately from Agent Core and CLI orchestration",
-        "root tools stay reusable across task-specific agents and guest CLI lanes"
+        "root tools stay reusable across task-specific agents and guest CLI lanes",
+        "Tool Studio renders source-backed agent tool usage playbooks"
       ]
     },
     {

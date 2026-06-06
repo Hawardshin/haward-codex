@@ -27,6 +27,11 @@ import {
   emptyFundamentalImprovementStructure,
   sanitizeFundamentalImprovementStructureForCustomer
 } from "./lib/fundamental-improvement-structure.mjs";
+import {
+  collectToolUsageIntegration,
+  emptyToolUsageIntegration,
+  sanitizeToolUsageIntegrationForCustomer
+} from "./lib/tool-usage-integration.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
@@ -129,7 +134,8 @@ export {
   collectIntentFeatureMap,
   collectOpenSourceFeatureReferences,
   collectProductFeatureArchitecture,
-  collectReferencePlatformAdvantages
+  collectReferencePlatformAdvantages,
+  collectToolUsageIntegration
 };
 
 export function main(argv = process.argv.slice(2)) {
@@ -179,6 +185,7 @@ export function buildSnapshot(repoRoot) {
   const openSourceFeatureReferences = collectOpenSourceFeatureReferences(repoRoot);
   const historyInsightLoop = collectHistoryInsightLoop(allDocuments);
   const fundamentalImprovementStructure = collectFundamentalImprovementStructure(historyInsightLoop);
+  const toolUsageIntegration = collectToolUsageIntegration(repoRoot);
   const sourceFiles = collectSourceFiles(repoRoot, projects);
   const folderStructure = buildFolderStructure(repoRoot, projects, documents);
   const structureOverview = buildStructureOverview(repoRoot, projects, documents, folderStructure, sourceFiles);
@@ -237,6 +244,8 @@ export function buildSnapshot(repoRoot) {
       fundamentalImprovementPrinciples: fundamentalImprovementStructure.summary.totalStructuralPrinciples,
       fundamentalImprovementPackages: fundamentalImprovementStructure.summary.totalImprovementPackages,
       fundamentalImprovementFitnessChecks: fundamentalImprovementStructure.summary.totalFitnessChecks,
+      toolUsagePatterns: toolUsageIntegration.summary.totalPatterns,
+      toolUsageValidationCommands: toolUsageIntegration.summary.validationCommands,
       structurePressurePoints: structureOverview.summary.totalPressurePoints,
       sourceFiles: sourceFiles.length,
       rootFolders: folderStructure.rootFolders.length
@@ -273,6 +282,7 @@ export function buildSnapshot(repoRoot) {
     openSourceFeatureReferences,
     historyInsightLoop,
     fundamentalImprovementStructure,
+    toolUsageIntegration,
     categories,
     publicReview: {
       status: "review_required_before_public_deploy",
@@ -330,6 +340,8 @@ export function buildCustomerSnapshot(snapshot) {
       fundamentalImprovementPrinciples: 0,
       fundamentalImprovementPackages: 0,
       fundamentalImprovementFitnessChecks: 0,
+      toolUsagePatterns: snapshot.toolUsageIntegration?.summary.totalPatterns ?? 0,
+      toolUsageValidationCommands: snapshot.toolUsageIntegration?.summary.validationCommands ?? 0,
       structurePressurePoints: 0,
       sourceFiles: 0,
       rootFolders: 0
@@ -435,6 +447,9 @@ export function buildCustomerSnapshot(snapshot) {
     historyInsightLoop: sanitizeHistoryInsightLoopForCustomer(snapshot.historyInsightLoop || emptyHistoryInsightLoop()),
     fundamentalImprovementStructure: sanitizeFundamentalImprovementStructureForCustomer(
       snapshot.fundamentalImprovementStructure || emptyFundamentalImprovementStructure()
+    ),
+    toolUsageIntegration: sanitizeToolUsageIntegrationForCustomer(
+      snapshot.toolUsageIntegration || emptyToolUsageIntegration()
     ),
     categories: [],
     publicReview: {

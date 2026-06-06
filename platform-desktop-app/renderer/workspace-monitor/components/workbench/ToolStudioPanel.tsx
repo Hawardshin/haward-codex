@@ -27,6 +27,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ActionGroup } from "@/components/ui/ActionGroup";
 import { Button } from "@/components/ui/Button";
 import { writeClipboardText } from "@/lib/clipboard.mjs";
+import type { WorkspaceToolUsageIntegration } from "@/lib/snapshot";
 import {
   buildSteps,
   environmentRows,
@@ -51,6 +52,7 @@ export type ToolStudioPanelProps = {
   sourceFileCount: number;
   runtimeAdapterId: string;
   providerConfiguredCount: number;
+  toolUsageIntegration?: WorkspaceToolUsageIntegration;
   onOpenAgents: () => void;
   onOpenSource: () => void;
   onOpenTerminal: () => void;
@@ -80,6 +82,7 @@ export function ToolStudioPanel({
   sourceFileCount,
   runtimeAdapterId,
   providerConfiguredCount,
+  toolUsageIntegration,
   onOpenAgents,
   onOpenSource,
   onOpenTerminal,
@@ -93,6 +96,7 @@ export function ToolStudioPanel({
   const [selectedEnvironmentId, setSelectedEnvironmentId] = useState(pythonEnvironmentProfiles[0].id);
   const [selectedVenvStepId, setSelectedVenvStepId] = useState(virtualEnvironmentLifecycleSteps[0].id);
   const [selectedDeployTargetId, setSelectedDeployTargetId] = useState(toolDeployTargets[0].id);
+  const [selectedToolPatternId, setSelectedToolPatternId] = useState("");
   const [actionMenuOpen, setActionMenuOpen] = useState(false);
   const ko = language === "ko";
   const activeMode = toolModes.find((item) => item.id === mode) || toolModes[0];
@@ -105,6 +109,9 @@ export function ToolStudioPanel({
   const selectedVenvStep = virtualEnvironmentLifecycleSteps.find((item) => item.id === selectedVenvStepId) || virtualEnvironmentLifecycleSteps[0];
   const selectedVenvCommand = selectedVenvStep.command(selectedEnvironment);
   const selectedDeployTarget = toolDeployTargets.find((item) => item.id === selectedDeployTargetId) || toolDeployTargets[0];
+  const toolUsagePatterns = toolUsageIntegration?.patterns || [];
+  const selectedToolPattern = toolUsagePatterns.find((item) => item.id === selectedToolPatternId) || toolUsagePatterns[0] || null;
+  const primaryVerificationLadder = toolUsageIntegration?.verificationLadders?.[0] || null;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const statusItems = useMemo(
     () => [
@@ -185,6 +192,22 @@ export function ToolStudioPanel({
       ]
     }, null, 2));
   }, [ko, language, mode, stage]);
+
+  const copyToolUsagePlaybook = useCallback(() => {
+    if (!selectedToolPattern) {
+      return;
+    }
+    void writeClipboardText(JSON.stringify({
+      id: selectedToolPattern.id,
+      label: labelFor(language, selectedToolPattern.labelKo, selectedToolPattern.label),
+      purpose: selectedToolPattern.purpose,
+      toolSurfaces: selectedToolPattern.toolSurfaces,
+      sequence: selectedToolPattern.sequence,
+      validationCommands: selectedToolPattern.validationCommands,
+      evidenceOutputs: selectedToolPattern.evidenceOutputs,
+      platformApplication: selectedToolPattern.platformApplication
+    }, null, 2));
+  }, [language, selectedToolPattern]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -767,6 +790,12 @@ export function ToolStudioPanel({
     }
   }, [requestedMode, selectMode]);
 
+  useEffect(() => {
+    if (!selectedToolPatternId && toolUsagePatterns.length > 0) {
+      setSelectedToolPatternId(toolUsagePatterns[0].id);
+    }
+  }, [selectedToolPatternId, toolUsagePatterns]);
+
   return (
     <section className="tool-studio-shell" data-tool-studio data-tool-studio-mode={mode} aria-label={ko ? "툴 스튜디오" : "Tool Studio"}>
       <header className="tool-studio-hero">
@@ -1071,6 +1100,31 @@ export function ToolStudioPanel({
                 </ContextMenu.Portal>
               </ContextMenu.Root>
             ))}
+            {toolUsagePatterns.length > 0 && (
+              <section className="tool-playbook-list" data-tool-playbook-list aria-label={ko ? "에이전트 툴 사용 플레이북" : "Agent tool usage playbook"}>
+                <div>
+                  <p className="eyebrow">Agent Tool Playbook</p>
+                  <strong>{ko ? "사용 방식" : "Usage patterns"}</strong>
+                </div>
+                {toolUsagePatterns.slice(0, 7).map((pattern) => (
+                  <button
+                    key={pattern.id}
+                    type="button"
+                    className={selectedToolPattern?.id === pattern.id ? "active" : ""}
+                    onClick={() => setSelectedToolPatternId(pattern.id)}
+                    aria-pressed={selectedToolPattern?.id === pattern.id}
+                    data-tool-playbook-pattern={pattern.id}
+                  >
+                    <ScrollText size={15} aria-hidden="true" />
+                    <span>
+                      <strong>{labelFor(language, pattern.labelKo, pattern.label)}</strong>
+                      <small>{pattern.toolSurfaces.slice(0, 3).join(" · ")}</small>
+                    </span>
+                    <em>{pattern.priority}</em>
+                  </button>
+                ))}
+              </section>
+            )}
           </div>
         </section>
 
@@ -1102,6 +1156,69 @@ export function ToolStudioPanel({
                 </article>
               ))}
             </div>
+            {selectedToolPattern && (
+              <section className="tool-usage-playbook" data-tool-usage-playbook aria-label={ko ? "현재 에이전트 툴 사용 방식" : "Current agent tool usage pattern"}>
+                <header>
+                  <div>
+                    <p className="eyebrow">Agent Tool Playbook</p>
+                    <h4>{labelFor(language, selectedToolPattern.labelKo, selectedToolPattern.label)}</h4>
+                    <span>{selectedToolPattern.purpose}</span>
+                  </div>
+                  <button type="button" onClick={copyToolUsagePlaybook} data-tool-playbook-action="copy" title={ko ? "플레이북 복사" : "Copy playbook"}>
+                    <Copy size={15} aria-hidden="true" />
+                    <span>{ko ? "복사" : "Copy"}</span>
+                  </button>
+                </header>
+                <div className="tool-usage-playbook-grid">
+                  <article>
+                    <strong>{ko ? "도구 표면" : "Tool surfaces"}</strong>
+                    <ul>
+                      {selectedToolPattern.toolSurfaces.slice(0, 5).map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </article>
+                  <article>
+                    <strong>{ko ? "실행 순서" : "Sequence"}</strong>
+                    <ol>
+                      {selectedToolPattern.sequence.slice(0, 5).map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ol>
+                  </article>
+                  <article>
+                    <strong>{ko ? "증거 출력" : "Evidence"}</strong>
+                    <ul>
+                      {selectedToolPattern.evidenceOutputs.slice(0, 4).map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </article>
+                  <article>
+                    <strong>{ko ? "검증 명령" : "Validation"}</strong>
+                    {selectedToolPattern.validationCommands.length > 0 ? (
+                      <div className="tool-usage-command-list">
+                        {selectedToolPattern.validationCommands.slice(0, 4).map((command) => (
+                          <code key={command}>{command}</code>
+                        ))}
+                      </div>
+                    ) : primaryVerificationLadder ? (
+                      <div className="tool-usage-command-list">
+                        {primaryVerificationLadder.commands.slice(0, 3).map((command) => (
+                          <code key={command}>{command}</code>
+                        ))}
+                      </div>
+                    ) : (
+                      <p>{ko ? "기록 산출물로 검증합니다." : "Validated by recorded evidence outputs."}</p>
+                    )}
+                  </article>
+                </div>
+                <footer>
+                  <ShieldCheck size={15} aria-hidden="true" />
+                  <span>{selectedToolPattern.platformApplication}</span>
+                </footer>
+              </section>
+            )}
             {mode === "build" && (
               <section className="tool-builder-workbench" data-tool-builder-workbench aria-label={ko ? "툴 제작 작업대" : "Tool builder workbench"}>
                 <div className="tool-builder-blueprints" aria-label={ko ? "툴 템플릿" : "Tool templates"}>

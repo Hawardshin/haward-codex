@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T02:03:25.040Z",
+  "generatedAt": "2026-06-06T02:17:31.223Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -12,12 +12,12 @@
     "tasks": 71,
     "completedTasks": 71,
     "documents": 650,
-    "requirements": 493,
+    "requirements": 498,
     "evaluations": 16,
     "webSearches": 15,
     "timingRecords": 14,
     "historyDays": 1,
-    "adminHistoryDocuments": 2578,
+    "adminHistoryDocuments": 2585,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -40,6 +40,8 @@
     "fundamentalImprovementPrinciples": 6,
     "fundamentalImprovementPackages": 6,
     "fundamentalImprovementFitnessChecks": 4,
+    "toolUsagePatterns": 7,
+    "toolUsageValidationCommands": 21,
     "structurePressurePoints": 5,
     "sourceFiles": 134,
     "rootFolders": 20
@@ -7629,9 +7631,279 @@
       "requirement": "변경 후 TypeScript, renderer checks, platform tests, browser smoke, internal package가 통과해야 한다.",
       "priority": "must",
       "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-shared-workspace-resource-cache.ko.md"
+    },
+    {
+      "id": "REQ-TUI-001",
+      "requirement": "플랫폼은 웹 조사, 로컬 탐색, 패치 편집, 렌더러 검증, 데스크톱 패키징, 리소스 정리, Git 마감 루프를 데이터로 표현해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-tool-usage-integration.ko.md"
+    },
+    {
+      "id": "REQ-TUI-002",
+      "requirement": "Workspace snapshot은 도구 사용 패턴, 검증 ladder, adoption backlog를 toolUsageIntegration 으로 수집해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-tool-usage-integration.ko.md"
+    },
+    {
+      "id": "REQ-TUI-003",
+      "requirement": "Tool Studio는 source backed Agent Tool Playbook을 표시하고 선택, 복사, 검증 명령 확인을 지원해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-tool-usage-integration.ko.md"
+    },
+    {
+      "id": "REQ-TUI-004",
+      "requirement": "customer snapshot에서는 내부 소스 경로와 backlog target path를 제거하되 공개 가능한 패턴과 공식 출처는 유지해야 한다.",
+      "priority": "should",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-tool-usage-integration.ko.md"
+    },
+    {
+      "id": "REQ-TUI-005",
+      "requirement": "제품 기능 레지스트리는 이 기능을 Root Tool Management의 현재 자산과 검증 gate로 연결해야 한다.",
+      "priority": "should",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-tool-usage-integration.ko.md"
     }
   ],
   "documents": [
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-tool-usage-integration-tasks-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-tool-usage-integration/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tool Usage Integration 작업 목록",
+      "excerpt": "Tool Usage Integration 작업 목록 x 웹 우선 조사 기록 x tool usage integration registry.json 생성 x tool usage integration.mjs collector 생성 x collect workspace.mjs snapshot/customer snapshot 연결 x WorkspaceToolUsageIntegration 타입 추가 x ToolStudioPanel Agent Tool Playbook UI 추가 x CSS 안정화 x produc",
+      "html": "<h1>Tool Usage Integration 작업 목록</h1>\n<ul>\n<li>[x] 웹 우선 조사 기록</li>\n<li>[x] <code>tool-usage-integration-registry.json</code> 생성</li>\n<li>[x] <code>tool-usage-integration.mjs</code> collector 생성</li>\n<li>[x] <code>collect-workspace.mjs</code> snapshot/customer snapshot 연결</li>\n<li>[x] <code>WorkspaceToolUsageIntegration</code> 타입 추가</li>\n<li>[x] <code>ToolStudioPanel</code> Agent Tool Playbook UI 추가</li>\n<li>[x] CSS 안정화</li>\n<li>[x] product feature registry 연결</li>\n<li>[x] collector 및 UI static tests 추가</li>\n<li>[x] 최종 build와 desktop package 검증</li>\n<li>[x] commit 직전 close-out 기록 준비</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 535,
+      "updatedAt": "2026-06-06T02:17:23.528Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-tool-usage-integration-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-tool-usage-integration.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Tool Usage Integration 평가",
+      "excerpt": "Tool Usage Integration 평가 날짜: 2026 06 06 결과 status: passed internal 사용자 요청인 “지금 쓰는 도구와 사용 방식을 플랫폼에 녹이기”를 source backed 기능으로 구현했다. 도구 사용 루프는 registry에 남고, snapshot으로 수집되며, Tool Studio에서 선택 가능한 Agent Tool Playbook으로 표시된다. 충족한 기준 웹 우선 조사와 공식 출처 기록: 통과 요구사항/스펙/추적성 기록: 통과 source of tr",
+      "html": "<p>Tool Usage Integration 평가 날짜: 2026 06 06 결과 status: passed internal 사용자 요청인 “지금 쓰는 도구와 사용 방식을 플랫폼에 녹이기”를 source backed 기능으로 구현했다. 도구 사용 루프는 registry에 남고, snapshot으로 수집되며, Tool Studio에서 선택 가능한 Agent Tool Playbook으로 표시된다. 충족한 기준 웹 우선 조사와 공식 출처 기록: 통과 요구사항/스펙/추적성 기록: 통과 source of truth registry: 통과 collector/snapshot/customer sanitizer: 통과 Tool Studio UI: 통과 te</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1347,
+      "updatedAt": "2026-06-06T02:16:42.822Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-tool-usage-integration-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-tool-usage-integration.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Tool Usage Integration 요청 추적",
+      "excerpt": "Tool Usage Integration 요청 추적 날짜: 2026 06 06 요청 Codex가 현재 사용한 도구들과 사용 방식을 플랫폼에도 반영해 달라는 요청. 결과 구현 완료. Tool Studio가 Agent Tool Playbook을 표시하고, snapshot collector가 toolUsageIntegration 데이터를 공급한다. 주요 변경 파일 platform desktop app/configs/tool usage integration registry.json platform des",
+      "html": "<p>Tool Usage Integration 요청 추적 날짜: 2026 06 06 요청 Codex가 현재 사용한 도구들과 사용 방식을 플랫폼에도 반영해 달라는 요청. 결과 구현 완료. Tool Studio가 Agent Tool Playbook을 표시하고, snapshot collector가 toolUsageIntegration 데이터를 공급한다. 주요 변경 파일 platform desktop app/configs/tool usage integration registry.json platform desktop app/renderer/workspace monitor/scripts/lib/tool usage integration.mjs platf</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1670,
+      "updatedAt": "2026-06-06T02:16:42.822Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-tool-usage-integration-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-tool-usage-integration.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Tool Usage Integration 작업 요약",
+      "excerpt": "Tool Usage Integration 작업 요약 날짜: 2026 06 06 완료 Codex식 도구 사용 루프를 tool usage integration registry.json 로 구조화했다. Workspace Monitor collector와 snapshot 타입에 toolUsageIntegration 을 추가했다. Tool Studio에 source backed Agent Tool Playbook 리스트와 상세 패널을 추가했다. product feature registry의 Root Too",
+      "html": "<p>Tool Usage Integration 작업 요약 날짜: 2026 06 06 완료 Codex식 도구 사용 루프를 tool usage integration registry.json 로 구조화했다. Workspace Monitor collector와 snapshot 타입에 toolUsageIntegration 을 추가했다. Tool Studio에 source backed Agent Tool Playbook 리스트와 상세 패널을 추가했다. product feature registry의 Root Tool Management 자산과 검증 gate에 연결했다. collector, customer snapshot, UI static test를 추가</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1067,
+      "updatedAt": "2026-06-06T02:16:42.822Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-tool-usage-integration-ko-md",
+      "path": "_history/work-timings/2026/2026-06-06-tool-usage-integration.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "Tool Usage Integration 작업 시간 기록",
+      "excerpt": "Tool Usage Integration 작업 시간 기록 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 조사 | 완료 | 공식 문서 3개 확인 | | 기존 구조 파악 | 완료 | collector, snapshot, Tool Studio, tests 확인 | | 구현 | 완료 | registry, collector, type, UI, CSS, tests | | 1차 검증 | 완료 | collect/check/test 통과 | | build/package | 완료 |",
+      "html": "<p>Tool Usage Integration 작업 시간 기록 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 조사 | 완료 | 공식 문서 3개 확인 | | 기존 구조 파악 | 완료 | collector, snapshot, Tool Studio, tests 확인 | | 구현 | 완료 | registry, collector, type, UI, CSS, tests | | 1차 검증 | 완료 | collect/check/test 통과 | | build/package | 완료 | Next build, Playwright smoke, Tauri package 완료 | 병목 후보 최종 Tauri desktop package</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 634,
+      "updatedAt": "2026-06-06T02:16:42.822Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-tool-usage-integration-validation-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-tool-usage-integration/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tool Usage Integration 검증",
+      "excerpt": "Tool Usage Integration 검증 실행한 검증 corepack pnpm filter workspace monitor run collect 통과 corepack pnpm filter workspace monitor run check 통과 corepack pnpm filter workspace monitor test 통과, 74개 테스트 corepack pnpm filter workspace monitor run build Playwright smoke: data tool usage pl",
+      "html": "<h1>Tool Usage Integration 검증</h1>\n<h2>실행한 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code> - 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code> - 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code> - 통과, 74개 테스트</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code></li>\n<li>Playwright smoke: <code>data-tool-usage-playbook</code> 렌더링, playbook pattern 7개, validation 영역 확인</li>\n<li><code>corepack pnpm run desktop:package:internal</code> - 통과</li>\n<li>package 후 <code>corepack pnpm --filter workspace-monitor run collect</code>로 developer snapshot 복구</li>\n</ul>\n<h2>주요 확인 지점</h2>\n<ul>\n<li><code>toolUsageIntegration</code> snapshot 필드 생성</li>\n<li><code>data-tool-playbook-list</code>, <code>data-tool-usage-playbook</code> UI 계약 유지</li>\n<li>customer snapshot sanitizer가 내부 backlog target path 제거</li>\n</ul>\n<h2>패키징 산출물</h2>\n<ul>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1010,
+      "updatedAt": "2026-06-06T02:16:42.821Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-tool-usage-integration-ko-md",
+      "path": "_history/plans/2026/2026-06-06-tool-usage-integration.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Tool Usage Integration 작업 계획",
+      "excerpt": "Tool Usage Integration 작업 계획 날짜: 2026 06 06 work mode: standard view mode: superadmin developer install mode: developer 실행 순서 1. 웹 우선 조사로 공식 출처 확인 2. 기존 snapshot collector, Tool Studio, 테스트 구조 확인 3. tool usage registry와 collector 구현 4. snapshot 타입과 Tool Studio UI 연결 5. product fe",
+      "html": "<p>Tool Usage Integration 작업 계획 날짜: 2026 06 06 work mode: standard view mode: superadmin developer install mode: developer 실행 순서 1. 웹 우선 조사로 공식 출처 확인 2. 기존 snapshot collector, Tool Studio, 테스트 구조 확인 3. tool usage registry와 collector 구현 4. snapshot 타입과 Tool Studio UI 연결 5. product feature registry와 요구사항/스펙/히스토리 업데이트 6. collect, check, test, build, browser smoke,</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 794,
+      "updatedAt": "2026-06-06T02:13:24.567Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-tool-usage-integration-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-tool-usage-integration.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약",
+      "excerpt": "사용자 요청 요약 날짜: 2026 06 06 사용자는 Codex가 현재 사용한 도구들과 그 사용 방식을 자신의 플랫폼에도 녹여 달라고 요청했다. 요구의 핵심은 설명만이 아니라 소스와 플랫폼 화면에 반영되는 기능화였다. 해석한 작업 범위 도구 사용 루프를 구조화된 registry로 저장 Workspace Monitor snapshot으로 수집 Tool Studio에서 선택 가능한 Agent Tool Playbook으로 표시 테스트, 빌드, 데스크톱 패키징까지 자동 수행",
+      "html": "<p>사용자 요청 요약 날짜: 2026 06 06 사용자는 Codex가 현재 사용한 도구들과 그 사용 방식을 자신의 플랫폼에도 녹여 달라고 요청했다. 요구의 핵심은 설명만이 아니라 소스와 플랫폼 화면에 반영되는 기능화였다. 해석한 작업 범위 도구 사용 루프를 구조화된 registry로 저장 Workspace Monitor snapshot으로 수집 Tool Studio에서 선택 가능한 Agent Tool Playbook으로 표시 테스트, 빌드, 데스크톱 패키징까지 자동 수행</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 543,
+      "updatedAt": "2026-06-06T02:13:24.567Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-tool-usage-integration-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-tool-usage-integration.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Tool Usage Integration 웹 검색 기록",
+      "excerpt": "Tool Usage Integration 웹 검색 기록 날짜: 2026 06 06 작업: Codex 도구 사용 방식의 플랫폼 내 기능화 검색 쿼리 Playwright official docs locators auto waiting browser automation testing Node.js official test runner documentation node test Tauri v2 official documentation build bundle command 확인한 주요 출처 | 출처 | 신",
+      "html": "<p>Tool Usage Integration 웹 검색 기록 날짜: 2026 06 06 작업: Codex 도구 사용 방식의 플랫폼 내 기능화 검색 쿼리 Playwright official docs locators auto waiting browser automation testing Node.js official test runner documentation node test Tauri v2 official documentation build bundle command 확인한 주요 출처 | 출처 | 신뢰도 | 사용한 판단 | | | | | | https://playwright.dev/docs/locators | 높음, 공식 문서 | UI sm</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1654,
+      "updatedAt": "2026-06-06T02:13:24.566Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-tool-usage-integration-traceability-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-tool-usage-integration/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tool Usage Integration 추적성",
+      "excerpt": "Tool Usage Integration 추적성 요구사항 연결 REQ TUI 001 platform desktop app/configs/tool usage integration registry.json REQ TUI 002 platform desktop app/renderer/workspace monitor/scripts/lib/tool usage integration.mjs REQ TUI 003 ToolStudioPanel.tsx , globals.css REQ TUI 004 buildCusto",
+      "html": "<h1>Tool Usage Integration 추적성</h1>\n<h2>요구사항 연결</h2>\n<ul>\n<li>REQ-TUI-001 -&gt; <code>platform-desktop-app/configs/tool-usage-integration-registry.json</code></li>\n<li>REQ-TUI-002 -&gt; <code>platform-desktop-app/renderer/workspace-monitor/scripts/lib/tool-usage-integration.mjs</code></li>\n<li>REQ-TUI-003 -&gt; <code>ToolStudioPanel.tsx</code>, <code>globals.css</code></li>\n<li>REQ-TUI-004 -&gt; <code>buildCustomerSnapshot</code>, <code>collector.test.mjs</code></li>\n<li>REQ-TUI-005 -&gt; <code>platform-desktop-app/configs/product-feature-registry.json</code></li>\n</ul>\n<h2>검증 연결</h2>\n<ul>\n<li>Collector contract: <code>collector.test.mjs</code></li>\n<li>UI contract: <code>tool-studio.test.mjs</code></li>\n<li>TypeScript/check scripts: <code>pnpm --filter workspace-monitor run check</code></li>\n<li>Build/package: final validation record</li>\n</ul>\n<h2>롤백</h2>\n<p>1. <code>toolUsageIntegration</code> snapshot field and collector import 제거</p>\n<p>2. Tool Studio playbook UI 제거</p>\n<p>3. registry file 제거</p>\n<p>4. generated snapshots 재생성</p>\n<p>5. tests에서 관련 계약 제거 후 <code>check</code>, <code>test</code>, <code>build</code> 실행</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 903,
+      "updatedAt": "2026-06-06T02:12:58.450Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-tool-usage-integration-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-tool-usage-integration.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Tool Usage Integration 요구사항",
+      "excerpt": "Tool Usage Integration 요구사항 작성일: 2026 06 06 소유 프로젝트: platform desktop app 범위: Workspace Monitor Tool Studio, snapshot collector, product feature registry 사용자 요구 사용자가 현재 Codex가 쓰는 도구들과 사용 방식을 플랫폼에도 녹여 달라고 요청했다. 단순 설명 문서가 아니라 소스와 UI에 반영되어야 한다. 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | |",
+      "html": "<h1>Tool Usage Integration 요구사항</h1>\n<p>작성일: 2026-06-06</p>\n<p>소유 프로젝트: <code>platform-desktop-app</code></p>\n<p>범위: Workspace Monitor Tool Studio, snapshot collector, product feature registry</p>\n<h2>사용자 요구</h2>\n<p>사용자가 현재 Codex가 쓰는 도구들과 사용 방식을 플랫폼에도 녹여 달라고 요청했다. 단순 설명 문서가 아니라 소스와 UI에 반영되어야 한다.</p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-TUI-001</td><td>플랫폼은 웹 조사, 로컬 탐색, 패치 편집, 렌더러 검증, 데스크톱 패키징, 리소스 정리, Git 마감 루프를 데이터로 표현해야 한다.</td><td>must</td><td><code>tool-usage-integration-registry.json</code></td></tr><tr><td>REQ-TUI-002</td><td>Workspace snapshot은 도구 사용 패턴, 검증 ladder, adoption backlog를 <code>toolUsageIntegration</code>으로 수집해야 한다.</td><td>must</td><td>collector test</td></tr><tr><td>REQ-TUI-003</td><td>Tool Studio는 source-backed Agent Tool Playbook을 표시하고 선택, 복사, 검증 명령 확인을 지원해야 한다.</td><td>must</td><td>UI static test, browser smoke</td></tr><tr><td>REQ-TUI-004</td><td>customer snapshot에서는 내부 소스 경로와 backlog target path를 제거하되 공개 가능한 패턴과 공식 출처는 유지해야 한다.</td><td>should</td><td>customer snapshot test</td></tr><tr><td>REQ-TUI-005</td><td>제품 기능 레지스트리는 이 기능을 Root Tool Management의 현재 자산과 검증 gate로 연결해야 한다.</td><td>should</td><td>product feature registry diff</td></tr></tbody></table>\n<h2>비범위</h2>\n<ul>\n<li>이번 변경은 플레이북을 실제 버튼 하나로 자동 실행하는 runner까지 만들지 않는다.</li>\n<li>설치, 외부 비용, destructive git 동작, secret-bearing 동작은 자동화하지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1694,
+      "updatedAt": "2026-06-06T02:12:58.449Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-tool-usage-integration-plan-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-tool-usage-integration/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tool Usage Integration 구현 계획",
+      "excerpt": "Tool Usage Integration 구현 계획 1. 공식 문서 기반 조사 기록을 남긴다. 2. 도구 사용 루프 registry를 만든다. 3. snapshot collector와 customer sanitizer를 추가한다. 4. snapshot 타입을 확장한다. 5. Tool Studio에 playbook 리스트와 상세 패널을 붙인다. 6. product feature registry의 Root Tool Management 자산에 연결한다. 7. collector/UI/customer sn",
+      "html": "<h1>Tool Usage Integration 구현 계획</h1>\n<p>1. 공식 문서 기반 조사 기록을 남긴다.</p>\n<p>2. 도구 사용 루프 registry를 만든다.</p>\n<p>3. snapshot collector와 customer sanitizer를 추가한다.</p>\n<p>4. snapshot 타입을 확장한다.</p>\n<p>5. Tool Studio에 playbook 리스트와 상세 패널을 붙인다.</p>\n<p>6. product feature registry의 Root Tool Management 자산에 연결한다.</p>\n<p>7. collector/UI/customer snapshot 테스트를 추가한다.</p>\n<p>8. collect, check, test, build, desktop package를 실행한다.</p>\n<h2>결정</h2>\n<p>별도 새 탭 대신 Tool Studio 내부에 붙였다. 사용자가 “툴과 사용 방식”을 요청했기 때문에, 도구를 만드는 화면과 도구를 사용하는 작업 루프가 같은 작업대에 있어야 한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 748,
+      "updatedAt": "2026-06-06T02:12:58.449Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-tool-usage-integration-spec-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-tool-usage-integration/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tool Usage Integration 스펙",
+      "excerpt": "Tool Usage Integration 스펙 목표 Codex가 작업 중 사용하는 도구 루프를 플랫폼 내부 데이터와 Tool Studio UI로 승격한다. 사용자는 툴 제작 화면에서 “어떤 도구를 어떤 순서로 쓰고, 무엇을 증거로 남기며, 어떤 검증 명령을 실행해야 하는지”를 볼 수 있어야 한다. 설계 결정 platform desktop app/configs/tool usage integration registry.json 를 source of truth로 둔다. collectToolUsageIn",
+      "html": "<h1>Tool Usage Integration 스펙</h1>\n<h2>목표</h2>\n<p>Codex가 작업 중 사용하는 도구 루프를 플랫폼 내부 데이터와 Tool Studio UI로 승격한다. 사용자는 툴 제작 화면에서 “어떤 도구를 어떤 순서로 쓰고, 무엇을 증거로 남기며, 어떤 검증 명령을 실행해야 하는지”를 볼 수 있어야 한다.</p>\n<h2>설계 결정</h2>\n<ul>\n<li><code>platform-desktop-app/configs/tool-usage-integration-registry.json</code>를 source of truth로 둔다.</li>\n<li><code>collectToolUsageIntegration()</code>이 레지스트리를 camelCase snapshot 모델로 정규화한다.</li>\n<li><code>WorkspaceToolUsageIntegration</code> 타입을 추가해 UI가 구조화된 데이터를 받는다.</li>\n<li>Tool Studio의 기존 3-column workbench 안에 <code>Agent Tool Playbook</code> 리스트와 상세 패널을 배치한다.</li>\n<li>customer snapshot은 내부 source path와 backlog target path를 제거한다.</li>\n</ul>\n<h2>데이터 계약</h2>\n<p>필수 top-level 필드:</p>\n<ul>\n<li><code>summary</code></li>\n<li><code>referenceLinks</code></li>\n<li><code>patterns</code></li>\n<li><code>verificationLadders</code></li>\n<li><code>adoptionBacklog</code></li>\n</ul>\n<p>패턴 필수 의미:</p>\n<ul>\n<li><code>toolSurfaces</code>: 사용하는 도구 표면</li>\n<li><code>sequence</code>: 실행 순서</li>\n<li><code>evidenceOutputs</code>: 남겨야 하는 증거</li>\n<li><code>validationCommands</code>: 실행 가능한 검증 명령</li>\n<li><code>failureModes</code>: 반복적으로 막아야 하는 실패 형태</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>generated snapshot에 <code>toolUsageIntegration.summary.totalPatterns &gt; 0</code>.</li>\n<li>Tool Studio source에 <code>data-tool-usage-playbook</code>가 존재한다.</li>\n<li>test suite가 collector, customer snapshot, Tool Studio UI 계약을 확인한다.</li>\n<li>build와 desktop package가 성공한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1550,
+      "updatedAt": "2026-06-06T02:12:58.449Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-configs-product-feature-registry-json",
+      "path": "platform-desktop-app/configs/product-feature-registry.json",
+      "category": "project-config",
+      "language": "unknown",
+      "title": "Product Feature Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"product feature registry\", \"purpose\": \"Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, ",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;product-feature-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, workbench, learning, and monitoring are supporting layers.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before changing the desktop home screen, snapshot schema, installer shell runtime, or platform feature navigation.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read product_position first to understand what the product is and what it is not.&quot;,\n      &quot;Read feature_layers to see which capabilities are primary product features and which capabilities are supporting surfaces.&quot;,\n      &quot;Read promotion_loop before adding workflow, prompt, tool, skill, or agent creation features.&quot;,\n      &quot;Read structure_rules before naming a feature, tab, data store, or installer shell behavior as monitoring.&quot;,\n      &quot;Use validation_gates as the acceptance checklist when making a UI, data, or runtime change around these features.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The desktop home screen or first-run product promise changes.&quot;,\n      &quot;A feature is promoted from workflow, prompt, template, tool, skill, or agent into a desktop product surface.&quot;,\n      &quot;A new Agent Core, CLI orchestration, root tool, workbench, learning, or observability capability is added.&quot;,\n      &quot;Monitoring starts to look like the main product again instead of a support layer.&quot;,\n      &quot;The installer shell runtime contract changes how work state, decisions, evidence, validation, or evaluations are accumulated.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;openai_agents_sdk&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;agent loop, tools, guardrails, handoffs, sessions, and tracing as product-level agent platform primitives&quot;,\n        &quot;workspace and resumable multi-step execution as desktop product capabilities&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;openai_agents_tracing&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK Tracing&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/tracing/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating traces and monitoring as debugging, evaluation, and improvement support rather than the whole product&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;autogen_docs&quot;,\n      &quot;title&quot;: &quot;Microsoft AutoGen&quot;,\n      &quot;url&quot;: &quot;https://microsoft.github.io/autogen/stable/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;multi-agent applications, event-driven multi-agent systems, and no-code prototyping surfaces as platform references&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;langgraph_multi_agent&quot;,\n      &quot;title&quot;: &quot;LangGraph Multi-agent Patterns&quot;,\n      &quot;url&quot;: &quot;https://langchain-ai.github.io/langgraph/tutorials/multi_agent/multi-agent-collaboration/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;subagents, handoffs, skills, routers, custom workflows, context management, and parallel execution trade-offs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;crewai_docs&quot;,\n      &quot;title&quot;: &quot;CrewAI Documentation&quot;,\n      &quot;url&quot;: &quot;https://docs.crewai.com/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;crew-style agent orchestration, flow, knowledge, and task abstractions as product reference points&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_hig_settings&quot;,\n      &quot;title&quot;: &quot;Apple Human Interface Guidelines: Settings&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/design/human-interface-guidelines/settings&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;keeping broad configuration in a dedicated settings area instead of mixing it into the core work surface&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;microsoft_navigation_view&quot;,\n      &quot;title&quot;: &quot;Microsoft Learn: NavigationView&quot;,\n      &quot;url&quot;: &quot;https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop-style navigation with main items and a separated settings item&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_platform_ui_overview&quot;,\n      &quot;title&quot;: &quot;IntelliJ Platform UI Overview&quot;,\n      &quot;url&quot;: &quot;https://plugins.jetbrains.com/docs/intellij/ui-overview.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;IDE-style separation of main editor/work surfaces, tool windows, settings, and modal dialogs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_tool_windows&quot;,\n      &quot;title&quot;: &quot;IntelliJ IDEA Tool Windows&quot;,\n      &quot;url&quot;: &quot;https://www.jetbrains.com/help/idea/tool-windows.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Run, Services, Problems, and status-oriented tool-window model </code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 35895,
+      "updatedAt": "2026-06-06T02:10:43.020Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-configs-tool-usage-integration-registry-json",
+      "path": "platform-desktop-app/configs/tool-usage-integration-registry.json",
+      "category": "project-config",
+      "language": "unknown",
+      "title": "Tool Usage Integration Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 06\", \"name\": \"tool usage integration registry\", \"purpose\": \"Captures high signal Codex style tool usage loops so the desktop platform can expose them as reusable agent work playbooks, validation ladders, and source linked implementation targets.\", \"re",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-06&quot;,\n  &quot;name&quot;: &quot;tool-usage-integration-registry&quot;,\n  &quot;purpose&quot;: &quot;Captures high-signal Codex-style tool usage loops so the desktop platform can expose them as reusable agent work playbooks, validation ladders, and source-linked implementation targets.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry when turning repeated agent tool behavior into desktop product behavior, Tool Studio guidance, validation commands, or future automation.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read patterns first to see the human-readable work sequence and the tool surfaces involved.&quot;,\n      &quot;Read verification_ladders to see which commands or checks prove a pattern is usable in the platform.&quot;,\n      &quot;Read adoption_backlog before adding new source, because it names the next bounded platform surfaces for these tool loops.&quot;,\n      &quot;Keep new entries narrow: each pattern should describe one repeatable tool loop with evidence outputs and failure modes.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;A repeated Codex or agent tool workflow appears in multiple meaningful tasks.&quot;,\n      &quot;A new desktop surface should teach, run, or validate a tool sequence directly.&quot;,\n      &quot;Tool use changes from ad hoc terminal use into a platform-owned capability.&quot;,\n      &quot;Validation, build, package, or resource cleanup behavior changes.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;playwright_locators&quot;,\n      &quot;title&quot;: &quot;Playwright Locators&quot;,\n      &quot;url&quot;: &quot;https://playwright.dev/docs/locators&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;prefer user-perceived locators for browser smoke checks&quot;,\n        &quot;auto-waiting and retryable UI validation&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;Applies to browser automation; native shell validation still needs OS/runtime checks.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;node_test_runner&quot;,\n      &quot;title&quot;: &quot;Node.js Test Runner&quot;,\n      &quot;url&quot;: &quot;https://nodejs.org/api/test.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;repository-local smoke and contract tests with node --test&quot;,\n        &quot;fast no-extra-framework validation for monitor collectors and source audits&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;Does not replace browser, Tauri, or Rust runtime checks.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_distribute&quot;,\n      &quot;title&quot;: &quot;Tauri Distribute&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop build and bundle close-out&quot;,\n        &quot;macOS .app and DMG artifact verification&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;Public macOS readiness still requires signing, hardened runtime, notarization, and installer policy gates.&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;tool_loop_is_platform_capability&quot;,\n      &quot;rule&quot;: &quot;Repeated agent tool usage shall become a platform-visible playbook before it becomes opaque automation.&quot;,\n      &quot;reason&quot;: &quot;The user asked to bring the tool usage style itself into the platform, not just ship a one-off fix.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;evidence_before_synthesis&quot;,\n      &quot;rule&quot;: &quot;Research, local inspection, source edits, validation, packaging, and git close-out must each leave evidence outputs before a task is considered done.&quot;,\n      &quot;reason&quot;: &quot;The platform needs durable trust handles for long-running agent work.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;desktop_resources_are_explicit&quot;,\n      &quot;rule&quot;: &quot;Tool playbooks that touch servers, browser automation, subprocesses, caches, memory, or packaging must include lifecycle and cleanup checks.&quot;,\n      &quot;reason&quot;: &quot;The platform is a desktop app and should own resource lifecycle instead of behaving like a stateless page.&quot;\n    }\n  ],\n  &quot;field_guide&quot;: [\n    {\n      &quot;field&quot;: &quot;patterns&quot;,\n      &quot;meaning&quot;: &quot;Repeatable tool-use loops that a platform agent or human operator can follow.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;verification_ladders&quot;,\n      &quot;meaning&quot;: &quot;Grouped validation commands and acceptance checks mapped to platform surfaces.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;adoption_backlog&quot;,\n      &quot;meaning&quot;: &quot;Bounded future platform source targets for making each loop more executable.&quot;,\n      &quot;required&quot;: true\n    }\n  ],\n  &quot;patterns&quot;: [\n    {\n      &quot;id&quot;: &quot;web-first-research&quot;,\n      &quot;label&quot;: &quot;Web-first research&quot;,\n      &quot;label_ko&quot;: &quot;웹 우선 조사&quot;,\n      &quot;purpose&quot;: &quot;Confirm unstable or tool-specific facts with current primary sources before planning, editing, or claiming readiness.&quot;,\n      &quot;tool_surfaces&quot;: [\n        &quot;web.run search_query&quot;,\n        &quot;_history/web-searches&quot;,\n        &quot;_research&quot;\n      ],\n      &quot;trigger_when&quot;: [\n        &quot;The user asks for latest, current, best practice, open-source references, packaging, API behavior, or broad platform design.&quot;,\n        &quot;A task depends on a page, repository, library, or documentation not already loaded into context.&quot;\n      ],\n      &quot;sequence&quot;: [\n        &quot;Search high-authority sources first.&quot;,\n        &quot;Prefer official docs for implement</code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 18595,
+      "updatedAt": "2026-06-06T02:08:35.953Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
     {
       "id": "history-evaluations-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
       "path": "_history/evaluations/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
@@ -9473,22 +9745,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "platform-desktop-app-configs-product-feature-registry-json",
-      "path": "platform-desktop-app/configs/product-feature-registry.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "Product Feature Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"product feature registry\", \"purpose\": \"Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, ",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;product-feature-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, workbench, learning, and monitoring are supporting layers.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before changing the desktop home screen, snapshot schema, installer shell runtime, or platform feature navigation.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read product_position first to understand what the product is and what it is not.&quot;,\n      &quot;Read feature_layers to see which capabilities are primary product features and which capabilities are supporting surfaces.&quot;,\n      &quot;Read promotion_loop before adding workflow, prompt, tool, skill, or agent creation features.&quot;,\n      &quot;Read structure_rules before naming a feature, tab, data store, or installer shell behavior as monitoring.&quot;,\n      &quot;Use validation_gates as the acceptance checklist when making a UI, data, or runtime change around these features.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The desktop home screen or first-run product promise changes.&quot;,\n      &quot;A feature is promoted from workflow, prompt, template, tool, skill, or agent into a desktop product surface.&quot;,\n      &quot;A new Agent Core, CLI orchestration, root tool, workbench, learning, or observability capability is added.&quot;,\n      &quot;Monitoring starts to look like the main product again instead of a support layer.&quot;,\n      &quot;The installer shell runtime contract changes how work state, decisions, evidence, validation, or evaluations are accumulated.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;openai_agents_sdk&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;agent loop, tools, guardrails, handoffs, sessions, and tracing as product-level agent platform primitives&quot;,\n        &quot;workspace and resumable multi-step execution as desktop product capabilities&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;openai_agents_tracing&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK Tracing&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/tracing/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating traces and monitoring as debugging, evaluation, and improvement support rather than the whole product&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;autogen_docs&quot;,\n      &quot;title&quot;: &quot;Microsoft AutoGen&quot;,\n      &quot;url&quot;: &quot;https://microsoft.github.io/autogen/stable/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;multi-agent applications, event-driven multi-agent systems, and no-code prototyping surfaces as platform references&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;langgraph_multi_agent&quot;,\n      &quot;title&quot;: &quot;LangGraph Multi-agent Patterns&quot;,\n      &quot;url&quot;: &quot;https://langchain-ai.github.io/langgraph/tutorials/multi_agent/multi-agent-collaboration/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;subagents, handoffs, skills, routers, custom workflows, context management, and parallel execution trade-offs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;crewai_docs&quot;,\n      &quot;title&quot;: &quot;CrewAI Documentation&quot;,\n      &quot;url&quot;: &quot;https://docs.crewai.com/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;crew-style agent orchestration, flow, knowledge, and task abstractions as product reference points&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_hig_settings&quot;,\n      &quot;title&quot;: &quot;Apple Human Interface Guidelines: Settings&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/design/human-interface-guidelines/settings&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;keeping broad configuration in a dedicated settings area instead of mixing it into the core work surface&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;microsoft_navigation_view&quot;,\n      &quot;title&quot;: &quot;Microsoft Learn: NavigationView&quot;,\n      &quot;url&quot;: &quot;https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop-style navigation with main items and a separated settings item&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_platform_ui_overview&quot;,\n      &quot;title&quot;: &quot;IntelliJ Platform UI Overview&quot;,\n      &quot;url&quot;: &quot;https://plugins.jetbrains.com/docs/intellij/ui-overview.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;IDE-style separation of main editor/work surfaces, tool windows, settings, and modal dialogs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_tool_windows&quot;,\n      &quot;title&quot;: &quot;IntelliJ IDEA Tool Windows&quot;,\n      &quot;url&quot;: &quot;https://www.jetbrains.com/help/idea/tool-windows.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Run, Services, Problems, and status-oriented tool-window model </code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 35571,
-      "updatedAt": "2026-06-05T23:21:15.065Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
       "id": "agent-platform-configs-access-view-mode-registry-json",
       "path": "agent-platform/configs/access/view-mode-registry.json",
       "category": "agent-config",
@@ -10351,118 +10607,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: 기능별 오픈소스 맵",
-      "excerpt": "요청 결과 추적: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 프로젝트: platform desktop app/ 입력 앞선 유사 플랫폼 조사에서 전체적으로 비슷한 오픈소스를 봤으나, 사용자는 각 기능 단위로도 오픈소스를 찾으라고 요청했다. 결정 현재 제품의 feature layers 를 기준 분류로 사용했다. 기능 layer는 CLI Orchestration, Agent Work Environment, Agent Development Environment",
-      "html": "<p>요청 결과 추적: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 프로젝트: platform desktop app/ 입력 앞선 유사 플랫폼 조사에서 전체적으로 비슷한 오픈소스를 봤으나, 사용자는 각 기능 단위로도 오픈소스를 찾으라고 요청했다. 결정 현재 제품의 feature layers 를 기준 분류로 사용했다. 기능 layer는 CLI Orchestration, Agent Work Environment, Agent Development Environment, Agent Core, Learning &amp; Evaluation Loop, Root Tool Management, Work Visibility,</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 986,
-      "updatedAt": "2026-06-05T22:07:25.312Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: 기능별 오픈소스 맵",
-      "excerpt": "작업 요약: 기능별 오픈소스 맵 2026 06 06에 platform desktop app 의 기능 layer별 오픈소스 레퍼런스 맵을 만들었다. CLI orchestration, work environment, development workbench, Agent Core, learning/evaluation, root tools, work visibility, observability, native runtime별로 후보 repo와 적용 포인트를 정리했다. GitHub API 메타데이터는 403",
-      "html": "<p>작업 요약: 기능별 오픈소스 맵 2026 06 06에 platform desktop app 의 기능 layer별 오픈소스 레퍼런스 맵을 만들었다. CLI orchestration, work environment, development workbench, Agent Core, learning/evaluation, root tools, work visibility, observability, native runtime별로 후보 repo와 적용 포인트를 정리했다. GitHub API 메타데이터는 403으로 막혔지만, 공식 GitHub 페이지와 git ls remote 로 repo 존재를 확인했다. 구현 전에는 선택 후보를 직접 clone해 s</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 583,
-      "updatedAt": "2026-06-05T22:07:25.312Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-feature-by-feature-open-source-map-json",
-      "path": "_history/work-timings/2026/2026-06-06-feature-by-feature-open-source-map.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Feature By Feature Open Source Map",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"phases\": { \"phase\": \"web search\", \"status\": \"completed\", \"notes\": \"Searched feature specific open source references for CLI orchestration, agent builders, observability, MCP/provider tools, human approval, and native run",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web search&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Searched feature specific open source references for CLI orchestration, agent builders, observability, MCP/provider tools, human approval, and native runtime.&quot; }, { &quot;phase&quot;: &quot;local feature axis&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Read</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 844,
-      "updatedAt": "2026-06-05T22:07:25.312Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: 기능별 오픈소스 조사",
-      "excerpt": "사용자 요청 요약: 기능별 오픈소스 조사 날짜: 2026 06 06 대상: platform desktop app/ 요약 사용자는 앞선 유사 오픈소스 조사에 이어, 플랫폼의 각 기능별로도 참고할 오픈소스를 찾아보라고 요청했다. 처리 제품 기능 registry의 8개 feature layer와 native runtime 축을 기준으로 오픈소스 후보를 정리했다. 각 후보는 볼 부분과 현재 플랫폼 적용 포인트를 함께 기록했다.",
-      "html": "<p>사용자 요청 요약: 기능별 오픈소스 조사 날짜: 2026 06 06 대상: platform desktop app/ 요약 사용자는 앞선 유사 오픈소스 조사에 이어, 플랫폼의 각 기능별로도 참고할 오픈소스를 찾아보라고 요청했다. 처리 제품 기능 registry의 8개 feature layer와 native runtime 축을 기준으로 오픈소스 후보를 정리했다. 각 후보는 볼 부분과 현재 플랫폼 적용 포인트를 함께 기록했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 490,
-      "updatedAt": "2026-06-05T22:07:25.311Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: 기능별 오픈소스 맵",
-      "excerpt": "웹 검색 기록: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 대상: platform desktop app/ 검색 질의 open source agent platform feature categories CLI orchestration desktop AI workbench task run decision inbox provider settings 2026 GitHub open source desktop AI agent workbench terminal pro",
-      "html": "<p>웹 검색 기록: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 대상: platform desktop app/ 검색 질의 open source agent platform feature categories CLI orchestration desktop AI workbench task run decision inbox provider settings 2026 GitHub open source desktop AI agent workbench terminal provider settings task management GitHub open source AI agent workflow builder eval</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2374,
-      "updatedAt": "2026-06-05T22:07:25.311Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-agent-cli-cockpit-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-agent-cli-cockpit.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: Agent CLI Cockpit",
-      "excerpt": "평가: Agent CLI Cockpit 판정 요청 충족. 유사 오픈소스 검색과 직접 clone 탐구 후, 현재 데스크톱 플랫폼에 Agent CLI Cockpit 기능을 추가했다. 기능은 새 process를 늘리지 않고 기존 native runtime state를 묶어 CLI/provider/session/task/decision control plane으로 보여준다. 구현 증거 MonitorShell.tsx 에 cockpitStats , openSourceControlPlanePatterns , ",
-      "html": "<p>평가: Agent CLI Cockpit 판정 요청 충족. 유사 오픈소스 검색과 직접 clone 탐구 후, 현재 데스크톱 플랫폼에 Agent CLI Cockpit 기능을 추가했다. 기능은 새 process를 늘리지 않고 기존 native runtime state를 묶어 CLI/provider/session/task/decision control plane으로 보여준다. 구현 증거 MonitorShell.tsx 에 cockpitStats , openSourceControlPlanePatterns , agentCliCockpitRows , startAdapterFromCockpit 추가. Desktop Runtime에 data agent cl</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2143,
-      "updatedAt": "2026-06-05T21:59:44.775Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-agent-cli-cockpit-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-agent-cli-cockpit.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: Agent CLI Cockpit",
-      "excerpt": "요청 결과 추적: Agent CLI Cockpit 날짜: 2026 06 06 요청: 유사 오픈소스 딥 리서치와 직접 탐구 후 기능 추가 프로젝트: platform desktop app/ 입력 요구 사용자는 현재 플랫폼과 유사한 오픈소스를 많이 조사하고, 직접 탐구한 뒤 결과를 기능으로 구현하라고 했다. 이전 반복 맥락에서는 데스크톱 native resource 활용, 느린 탭 전환, CLI/terminal/process 관리, AI 로그인/설정 UI 개선이 계속 요구됐다. 결정 직접 clone한 ",
-      "html": "<p>요청 결과 추적: Agent CLI Cockpit 날짜: 2026 06 06 요청: 유사 오픈소스 딥 리서치와 직접 탐구 후 기능 추가 프로젝트: platform desktop app/ 입력 요구 사용자는 현재 플랫폼과 유사한 오픈소스를 많이 조사하고, 직접 탐구한 뒤 결과를 기능으로 구현하라고 했다. 이전 반복 맥락에서는 데스크톱 native resource 활용, 느린 탭 전환, CLI/terminal/process 관리, AI 로그인/설정 UI 개선이 계속 요구됐다. 결정 직접 clone한 repo에서 공통으로 확인한 control plane 패턴을 바탕으로, 큰 runtime rewrite 대신 기존 adapter/session/</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1710,
-      "updatedAt": "2026-06-05T21:59:44.775Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-agent-cli-cockpit-traceability-ko-md",
@@ -17919,118 +18063,6 @@
       "historyDate": "2026-06-04",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-codex-claude-desktop-reference-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적: Codex/Claude Desktop 레퍼런스 반영",
-      "excerpt": "추적: Codex/Claude Desktop 레퍼런스 반영 | 요구사항 | 구현 | 검증 | | | | | | REQ PDA 072 | reference platform advantage registry.json source links/platform group | readiness, Node test | | REQ PDA 073 | codex style thread workbench , user flow task run behavior | readiness, Node test | | REQ PD",
-      "html": "<h1>추적: Codex/Claude Desktop 레퍼런스 반영</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-072</td><td><code>reference-platform-advantage-registry.json</code> source links/platform group</td><td>readiness, Node test</td></tr><tr><td>REQ-PDA-073</td><td><code>codex-style-thread-workbench</code>, user-flow task run behavior</td><td>readiness, Node test</td></tr><tr><td>REQ-PDA-074</td><td><code>claude-desktop-connector-first-chat</code>, settings/user-flow capability fields</td><td>readiness, Node test</td></tr><tr><td>REQ-PDA-075</td><td><code>check-readiness.mjs</code>, <code>readiness.test.mjs</code></td><td>platform-desktop-app test/check</td></tr></tbody></table>\n<h2>관련 파일</h2>\n<ul>\n<li><code>platform-desktop-app/configs/reference-platform-advantage-registry.json</code></li>\n<li><code>platform-desktop-app/configs/user-flow-registry.json</code></li>\n<li><code>platform-desktop-app/scripts/check-readiness.mjs</code></li>\n<li><code>platform-desktop-app/tests/readiness.test.mjs</code></li>\n<li><code>platform-desktop-app/docs/requirements/2026-06-04-codex-claude-desktop-reference.*.md</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 880,
-      "updatedAt": "2026-06-03T16:20:26.419Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-codex-claude-desktop-reference-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-codex-claude-desktop-reference/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "스펙: Codex/Claude Desktop 레퍼런스 반영",
-      "excerpt": "스펙: Codex/Claude Desktop 레퍼런스 반영 목적 사용자가 지적한 데스크톱 앱다운 UX 기준을 Codex app과 Claude Desktop 공식 자료에 근거해 제품 계약으로 고정한다. 기능 범위 reference platform advantage registry.json 에 Codex app과 Claude Desktop source link를 추가한다. Codex app식 thread workbench 패턴을 추가한다. Claude Desktop식 connector first ch",
-      "html": "<h1>스펙: Codex/Claude Desktop 레퍼런스 반영</h1>\n<h2>목적</h2>\n<p>사용자가 지적한 데스크톱 앱다운 UX 기준을 Codex app과 Claude Desktop 공식 자료에 근거해 제품 계약으로 고정한다.</p>\n<h2>기능 범위</h2>\n<ul>\n<li><code>reference-platform-advantage-registry.json</code>에 Codex app과 Claude Desktop source link를 추가한다.</li>\n<li>Codex app식 thread workbench 패턴을 추가한다.</li>\n<li>Claude Desktop식 connector-first chat 패턴을 추가한다.</li>\n<li><code>user-flow-registry.json</code>에 MCP servers, desktop extensions, connector chips, Codex app-style thread workbench를 반영한다.</li>\n<li>readiness script와 Node test가 새 패턴을 강제한다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>Codex app 또는 Claude Desktop UI를 복제하지 않는다.</li>\n<li>외부 CLI, MCP server, desktop extension을 자동 설치하지 않는다.</li>\n<li>이번 변경에서 connector chip 실제 렌더링 컴포넌트까지 만들지는 않는다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>레퍼런스 레지스트리가 <code>Codex app</code>, <code>Claude Desktop</code>, <code>codex-style-thread-workbench</code>, <code>claude-desktop-connector-first-chat</code>를 포함한다.</li>\n<li>사용자 흐름 레지스트리가 <code>Codex app-style thread workbench</code>, <code>Claude Desktop-style connector chips</code>, <code>MCP servers</code>, <code>desktop extensions</code>를 포함한다.</li>\n<li>readiness와 test가 위 토큰을 검증한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1295,
-      "updatedAt": "2026-06-03T16:20:26.418Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-04-codex-claude-desktop-reference-en-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-04-codex-claude-desktop-reference.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Codex/Claude Desktop Reference Requirements",
-      "excerpt": "Codex/Claude Desktop Reference Requirements | ID | Requirement | Priority | Verification | | | | | | | REQ PDA 072 | The desktop app shall track Codex app and Claude Desktop as explicit official references and shall not regress into a CLI wrapper or web dashboard. | must | refere",
-      "html": "<h1>Codex/Claude Desktop Reference Requirements</h1>\n<table><thead><tr><th>ID</th><th>Requirement</th><th>Priority</th><th>Verification</th></tr></thead><tbody><tr><td>REQ-PDA-072</td><td>The desktop app shall track Codex app and Claude Desktop as explicit official references and shall not regress into a CLI wrapper or web dashboard.</td><td>must</td><td><code>reference-platform-advantage-registry.json</code>, readiness</td></tr><tr><td>REQ-PDA-073</td><td>Agent run chats shall behave as Codex app-style thread workbenches where the chat composer, bottom terminal, files/diff, artifacts, decisions, and validation belong to the same work unit.</td><td>must</td><td><code>codex-style-thread-workbench</code>, user-flow token</td></tr><tr><td>REQ-PDA-074</td><td>Local tools, MCP servers, desktop extensions, and guest CLI adapters shall follow a Claude Desktop-style connector-first UX: manage them in a settings tab and show connection state around the chat composer.</td><td>must</td><td><code>claude-desktop-connector-first-chat</code>, user-flow token</td></tr><tr><td>REQ-PDA-075</td><td>Codex/Claude Desktop transfer patterns shall keep the public-source-only boundary and fail readiness/tests when omitted.</td><td>must</td><td><code>check-readiness.mjs</code>, <code>readiness.test.mjs</code></td></tr></tbody></table>\n<h2>Decision</h2>\n<ul>\n<li>Transfer only public, official desktop work patterns and connector flows from Codex app and Claude Desktop; do not copy brand identity or proprietary UI.</li>\n<li>Codex CLI and Claude Code CLI remain optional guest adapters. The platform app launches first and owns task state and accumulated data.</li>\n<li>Claude Desktop&#039;s desktop extension/MCP flow becomes the baseline for future <code>Settings &gt; Capabilities</code> and agent work chat connector-chip implementation.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1558,
-      "updatedAt": "2026-06-03T16:20:26.417Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-04-codex-claude-desktop-reference-ko-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-04-codex-claude-desktop-reference.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "Codex/Claude Desktop 레퍼런스 반영 요구사항",
-      "excerpt": "Codex/Claude Desktop 레퍼런스 반영 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | REQ PDA 072 | 데스크톱 앱은 Codex app과 Claude Desktop을 별도 공식 레퍼런스로 추적해야 하며, 단순 CLI wrapper나 웹 대시보드로 회귀하지 않아야 한다. | must | reference platform advantage registry.json , readiness | | REQ PDA 073 | 에이전트 실행 채팅은 Codex a",
-      "html": "<h1>Codex/Claude Desktop 레퍼런스 반영 요구사항</h1>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-072</td><td>데스크톱 앱은 Codex app과 Claude Desktop을 별도 공식 레퍼런스로 추적해야 하며, 단순 CLI wrapper나 웹 대시보드로 회귀하지 않아야 한다.</td><td>must</td><td><code>reference-platform-advantage-registry.json</code>, readiness</td></tr><tr><td>REQ-PDA-073</td><td>에이전트 실행 채팅은 Codex app식 thread workbench로 취급되어야 하며, 채팅 composer, 하단 터미널, 파일/디프, artifact, decision, validation이 같은 작업 단위로 묶여야 한다.</td><td>must</td><td><code>codex-style-thread-workbench</code>, user-flow token</td></tr><tr><td>REQ-PDA-074</td><td>로컬 도구, MCP 서버, desktop extension, guest CLI adapter는 Claude Desktop식 connector-first UX로 설정 탭에서 관리하고 채팅 composer 주변에서 연결 상태를 보여야 한다.</td><td>must</td><td><code>claude-desktop-connector-first-chat</code>, user-flow token</td></tr><tr><td>REQ-PDA-075</td><td>Codex/Claude Desktop 레퍼런스 전이 패턴은 public source only 경계를 유지하고, 누락 시 readiness/test가 실패해야 한다.</td><td>must</td><td><code>check-readiness.mjs</code>, <code>readiness.test.mjs</code></td></tr></tbody></table>\n<h2>결정</h2>\n<ul>\n<li>Codex app과 Claude Desktop의 브랜드나 UI를 복제하지 않고, 공개 공식 자료에서 확인되는 데스크톱 작업 구조와 커넥터 흐름만 제품 계약으로 전이한다.</li>\n<li>Codex CLI나 Claude Code CLI는 여전히 선택형 guest adapter이며, 플랫폼 앱이 먼저 실행되고 작업 상태와 데이터 축적을 소유한다.</li>\n<li>Claude Desktop의 desktop extension/MCP 흐름은 향후 <code>Settings &gt; Capabilities</code>와 agent work chat connector chip 구현의 기준으로 둔다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1695,
-      "updatedAt": "2026-06-03T16:20:26.417Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-existing-search-agent-run-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-existing-search-agent-run/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증: 기존 검색 에이전트 실행",
-      "excerpt": "검증: 기존 검색 에이전트 실행 계획된 검증 corepack pnpm dir platform desktop app/renderer/workspace monitor run check cargo check from platform desktop app/src tauri python3 m json.tool for changed JSON registries/contracts cd agent platform && PYTHONPATH=src python3 m agent platform.cli check co",
-      "html": "<h1>검증: 기존 검색 에이전트 실행</h1>\n<h2>계획된 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li><code>cargo check</code> from <code>platform-desktop-app/src-tauri</code></li>\n<li><code>python3 -m json.tool</code> for changed JSON registries/contracts</li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-feature-registry.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/user-flow-registry.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/research-insight-planner-agent.json</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code></li>\n<li>Browser smoke for Agents screen and Desktop search-agent work chat</li>\n</ul>\n<h2>결과</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>: passed</li>\n<li><code>cargo check</code> from <code>platform-desktop-app/src-tauri</code>: passed</li>\n<li><code>python3 -m json.tool platform-desktop-app/configs/product-feature-registry.json</code>: passed</li>\n<li><code>python3 -m json.tool platform-desktop-app/configs/user-flow-registry.json</code>: passed</li>\n<li><code>python3 -m json.tool platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json</code>: passed</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-feature-registry.json</code>: passed, <code>self_documenting</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/user-flow-registry.json</code>: passed, <code>self_documenting</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json</code>: passed, <code>self_documenting</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/research-insight-planner-agent.json</code>: passed</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: passed, 21 tests</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: passed</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: passed, 17 tests</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: passed</li>\n<li><code>corepack pnpm --filter platform-desktop-app run customer-bundle:audit</code>: passed</li>\n<li><code>git diff --check</code>: passed</li>\n<li>Browser smoke on static output <code>http://127.0.0.1:4178</code>: passed</li>\n<li>Agents screen: <code>검색 에이전트 작업 채팅</code>, <code>작업 시작</code>, <code>research-insight-planner-agent</code>, <code>research-insight-plan-template</code> visible</li>\n<li>Desktop runtime: <code>바로 쓰기</code>, <code>검색 에이전트 작업 채팅</code>, <code>research-insight-planner-agent</code> visible</li>\n<li>Screenshot: <code>outputs/browser-smoke/existing-search-agent-run.png</code></li>\n</ul>\n<h2>참고</h2>\n<ul>\n<li>Next dev server smoke did not hydrate to snapshot fetch in this environment, so the final UI smoke used the exported static customer build.</li>\n<li>Both validation servers were stopped after testing; an unrelated local <code>http.server</code> on port 3018 remained running and was not touched.</li>\n</ul>\n<h2>2026-06-04 작업 채팅 전환 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>: passed</li>\n<li>JSON parse for changed product/user-flow/runtime-contract/history JSON: passed</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-feature-registry.json</code>: passed, <code>self_documenting</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/user-flow-registry.json</code>: passed, <code>self_documenting</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json</code>: passed, <code>self_documenting</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: passed, 21 tests</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: passed, 17 tests</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: passed</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: passed</li>\n<li><code>corepack pnpm --filter platform-desktop-app run customer-bundle:audit</code>: passed</li>\n<li>Browser smoke on static output <code>http://127.0.0.1:4182</code>: passed</li>\n<li>Agents screen: <code>검색 에이전트 작업 채팅</code>, <code>작업 시작</code>, <code>research-insight-planner-agent</code>, <code>research-insight-plan-template</code> visible</li>\n<li>Clicking <code>작업 시작</code> stays in the work chat and appends runtime-link/preview messages</li>\n<li>Desktop runtime quick start and command grid expose <code>검색 에이전트 작업 채팅</code></li>\n<li>Screenshot: <code>outputs/browser-smoke/agent-chat-workbench.png</code></li>\n<li>Browser plugin API fallback: in-app browser runtime did not expose <code>browser.nameSession</code>; validation used bundled Playwright instead.</li>\n<li>Static preview limitation: the native Tauri runtime is unavailable in the browser smoke, so actual CLI session startup is represented by the preview-mode chat message. Installed app execution path is covered by <code>start_cli_adapter_session</code> contract/readiness tests.</li>\n<li>`PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/evaluations/2026/2026-06-04-agent-chat-workben</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 5758,
-      "updatedAt": "2026-06-03T16:11:07.318Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-existing-search-agent-run-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-existing-search-agent-run/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업: 기존 검색 에이전트 실행",
-      "excerpt": "작업: 기존 검색 에이전트 실행 | ID | 작업 | 상태 | | | | | | TASK SAR 001 | research insight planner agent 와 입력 스키마 확인 | done | | TASK SAR 002 | SearchAgentWorkChatPanel 추가 | done | | TASK SAR 003 | renderSearchAgentPrompt 로 검색 입력 구조화 | done | | TASK SAR 004 | RuntimeLaunchRequest 로 Agents 화면에서 ",
-      "html": "<h1>작업: 기존 검색 에이전트 실행</h1>\n<table><thead><tr><th>ID</th><th>작업</th><th>상태</th></tr></thead><tbody><tr><td>TASK-SAR-001</td><td><code>research-insight-planner-agent</code>와 입력 스키마 확인</td><td>done</td></tr><tr><td>TASK-SAR-002</td><td><code>SearchAgentWorkChatPanel</code> 추가</td><td>done</td></tr><tr><td>TASK-SAR-003</td><td><code>renderSearchAgentPrompt</code>로 검색 입력 구조화</td><td>done</td></tr><tr><td>TASK-SAR-004</td><td><code>RuntimeLaunchRequest</code>로 Agents 화면에서 Desktop runtime 세션 자동 시작</td><td>done</td></tr><tr><td>TASK-SAR-005</td><td>Tauri <code>start_cli_adapter_session</code>에 optional <code>taskKind</code> 추가</td><td>done</td></tr><tr><td>TASK-SAR-006</td><td><code>research_insight_agent_pipe</code> 추가</td><td>done</td></tr><tr><td>TASK-SAR-007</td><td>검색 에이전트 실행 시작점을 작업 채팅 composer로 변경</td><td>done</td></tr><tr><td>TASK-SAR-008</td><td>레지스트리와 readiness 테스트 갱신</td><td>done</td></tr><tr><td>TASK-SAR-009</td><td>검증 실행 및 결과 기록</td><td>done</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 806,
-      "updatedAt": "2026-06-03T16:09:47.847Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-existing-search-agent-run-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-existing-search-agent-run/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "스펙: 기존 검색 에이전트 실행",
-      "excerpt": "스펙: 기존 검색 에이전트 실행 목적 사용자가 “이미 만들어둔 검색 에이전트”를 바로 쓰게 한다. 검색 에이전트를 생성 후보나 내부 설정 파일로 숨기지 않고, 데스크톱 앱의 실행 가능한 제품 기능으로 노출한다. 기능 범위 Agents 화면 최상단에 research insight planner agent 작업 채팅 패널을 추가한다. 목표, 검색 질문, 검색 채널, 저장 위치, 메모를 받아 구조화된 초기 프롬프트를 만든다. command palette와 Desktop quick start에서도 검색 ",
-      "html": "<h1>스펙: 기존 검색 에이전트 실행</h1>\n<h2>목적</h2>\n<p>사용자가 “이미 만들어둔 검색 에이전트”를 바로 쓰게 한다. 검색 에이전트를 생성 후보나 내부 설정 파일로 숨기지 않고, 데스크톱 앱의 실행 가능한 제품 기능으로 노출한다.</p>\n<h2>기능 범위</h2>\n<ul>\n<li>Agents 화면 최상단에 <code>research-insight-planner-agent</code> 작업 채팅 패널을 추가한다.</li>\n<li>목표, 검색 질문, 검색 채널, 저장 위치, 메모를 받아 구조화된 초기 프롬프트를 만든다.</li>\n<li>command palette와 Desktop quick start에서도 검색 에이전트 작업 채팅으로 진입할 수 있게 한다.</li>\n<li>Tauri <code>start_cli_adapter_session</code>은 optional <code>taskKind</code>를 받아 task-run store에 <code>research_insight_agent</code>를 남긴다.</li>\n<li>multi-lane 실행용 <code>research_insight_agent_pipe</code>를 추가한다.</li>\n<li>제품 기능/사용자 흐름/런타임 계약/검증 스크립트에 검색 에이전트 실행을 기록한다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li><code>research-insight-planner-agent</code> 자체의 판단 로직을 새로 구현하지 않는다.</li>\n<li>optional CLI를 자동 설치하지 않는다.</li>\n<li>공개 배포용 signing/notarization 준비 상태를 바꾸지 않는다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>사용자는 Agents 화면에서 검색 에이전트 작업 채팅을 볼 수 있다.</li>\n<li>사용자가 <code>작업 시작</code>을 누르면 채팅 메시지가 남고, 하단 터미널 drawer가 열리며, 구조화된 프롬프트가 선택 adapter 세션에 주입된다.</li>\n<li>실행 기록은 <code>taskKind=research_insight_agent</code>로 저장된다.</li>\n<li>readiness 테스트가 <code>research-insight-planner-agent</code>, <code>SearchAgentWorkChatPanel</code>, <code>SearchAgentChatMessage</code>, <code>research_insight_agent_pipe</code>를 확인한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1713,
-      "updatedAt": "2026-06-03T16:01:43.878Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18045,7 +18077,7 @@
         },
         {
           "category": "request-trace",
-          "count": 16
+          "count": 15
         },
         {
           "category": "user-request",
@@ -18065,7 +18097,7 @@
         },
         {
           "category": "plan",
-          "count": 4
+          "count": 5
         },
         {
           "category": "daily-history",
@@ -18081,16 +18113,6 @@
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
           "updatedAt": "2026-06-05T23:07:18.989Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-agent-cli-cockpit-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-agent-cli-cockpit.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: Agent CLI Cockpit",
-          "excerpt": "평가: Agent CLI Cockpit 판정 요청 충족. 유사 오픈소스 검색과 직접 clone 탐구 후, 현재 데스크톱 플랫폼에 Agent CLI Cockpit 기능을 추가했다. 기능은 새 process를 늘리지 않고 기존 native runtime state를 묶어 CLI/provider/session/task/decision control plane으로 보여준다. 구현 증거 MonitorShell.tsx 에 cockpitStats , openSourceControlPlanePatterns , ",
-          "updatedAt": "2026-06-05T21:59:44.775Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18244,6 +18266,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-evaluations-2026-2026-06-06-tool-usage-integration-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-tool-usage-integration.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "Tool Usage Integration 평가",
+          "excerpt": "Tool Usage Integration 평가 날짜: 2026 06 06 결과 status: passed internal 사용자 요청인 “지금 쓰는 도구와 사용 방식을 플랫폼에 녹이기”를 source backed 기능으로 구현했다. 도구 사용 루프는 registry에 남고, snapshot으로 수집되며, Tool Studio에서 선택 가능한 Agent Tool Playbook으로 표시된다. 충족한 기준 웹 우선 조사와 공식 출처 기록: 통과 요구사항/스펙/추적성 기록: 통과 source of tr",
+          "updatedAt": "2026-06-06T02:16:42.822Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-plans-2026-2026-06-06-comprehensive-improvement-ko-md",
           "path": "_history/plans/2026/2026-06-06-comprehensive-improvement.ko.md",
           "category": "plan",
@@ -18284,13 +18316,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-agent-cli-cockpit-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-agent-cli-cockpit.ko.md",
-          "category": "request-trace",
+          "id": "history-plans-2026-2026-06-06-tool-usage-integration-ko-md",
+          "path": "_history/plans/2026/2026-06-06-tool-usage-integration.ko.md",
+          "category": "plan",
           "language": "ko",
-          "title": "요청 결과 추적: Agent CLI Cockpit",
-          "excerpt": "요청 결과 추적: Agent CLI Cockpit 날짜: 2026 06 06 요청: 유사 오픈소스 딥 리서치와 직접 탐구 후 기능 추가 프로젝트: platform desktop app/ 입력 요구 사용자는 현재 플랫폼과 유사한 오픈소스를 많이 조사하고, 직접 탐구한 뒤 결과를 기능으로 구현하라고 했다. 이전 반복 맥락에서는 데스크톱 native resource 활용, 느린 탭 전환, CLI/terminal/process 관리, AI 로그인/설정 UI 개선이 계속 요구됐다. 결정 직접 clone한 ",
-          "updatedAt": "2026-06-05T21:59:44.775Z",
+          "title": "Tool Usage Integration 작업 계획",
+          "excerpt": "Tool Usage Integration 작업 계획 날짜: 2026 06 06 work mode: standard view mode: superadmin developer install mode: developer 실행 순서 1. 웹 우선 조사로 공식 출처 확인 2. 기존 snapshot collector, Tool Studio, 테스트 구조 확인 3. tool usage registry와 collector 구현 4. snapshot 타입과 Tool Studio UI 연결 5. product fe",
+          "updatedAt": "2026-06-06T02:13:24.567Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18384,16 +18416,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: 기능별 오픈소스 맵",
-          "excerpt": "요청 결과 추적: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 프로젝트: platform desktop app/ 입력 앞선 유사 플랫폼 조사에서 전체적으로 비슷한 오픈소스를 봤으나, 사용자는 각 기능 단위로도 오픈소스를 찾으라고 요청했다. 결정 현재 제품의 feature layers 를 기준 분류로 사용했다. 기능 layer는 CLI Orchestration, Agent Work Environment, Agent Development Environment",
-          "updatedAt": "2026-06-05T22:07:25.312Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-06-no-large-scope-postponement-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-no-large-scope-postponement.ko.md",
           "category": "request-trace",
@@ -18441,6 +18463,16 @@
           "title": "Shared Workspace Resource Cache 요청 추적",
           "excerpt": "Shared Workspace Resource Cache 요청 추적 요청 사용자는 계속 개발하라고 지시했다. 이전 대화 맥락상 데스크톱 앱의 탭 이동 지연, native resource 활용, 메모리/CPU 사용, 구현 후 자동 빌드가 지속 요구사항이다. 결정 전면 재작성 대신 현재 resident desktop / source panel 경계에서 확인 가능한 중복 native workspace 요청을 먼저 제거했다. Rust command schema와 source editor UX는 유지했다.",
           "updatedAt": "2026-06-05T23:07:18.989Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-tool-usage-integration-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-tool-usage-integration.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Tool Usage Integration 요청 추적",
+          "excerpt": "Tool Usage Integration 요청 추적 날짜: 2026 06 06 요청 Codex가 현재 사용한 도구들과 사용 방식을 플랫폼에도 반영해 달라는 요청. 결과 구현 완료. Tool Studio가 Agent Tool Playbook을 표시하고, snapshot collector가 toolUsageIntegration 데이터를 공급한다. 주요 변경 파일 platform desktop app/configs/tool usage integration registry.json platform des",
+          "updatedAt": "2026-06-06T02:16:42.822Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18534,16 +18566,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: 기능별 오픈소스 조사",
-          "excerpt": "사용자 요청 요약: 기능별 오픈소스 조사 날짜: 2026 06 06 대상: platform desktop app/ 요약 사용자는 앞선 유사 오픈소스 조사에 이어, 플랫폼의 각 기능별로도 참고할 오픈소스를 찾아보라고 요청했다. 처리 제품 기능 registry의 8개 feature layer와 native runtime 축을 기준으로 오픈소스 후보를 정리했다. 각 후보는 볼 부분과 현재 플랫폼 적용 포인트를 함께 기록했다.",
-          "updatedAt": "2026-06-05T22:07:25.311Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-no-large-scope-postponement-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-no-large-scope-postponement.ko.md",
           "category": "user-request",
@@ -18591,6 +18613,16 @@
           "title": "사용자 요청 요약: shared workspace resource cache",
           "excerpt": "사용자 요청 요약: shared workspace resource cache 원문 요지: 개발 맥락 해석: 앞선 데스크톱 앱 속도, 메모리, OS 자원 활용, 탭 이동 지연 개선 요구를 이어서 실제 플랫폼 코드를 더 개선하라는 지시. 적용 범위: platform desktop app 의 resident desktop/source runtime panel이 같은 native workspace warmup/source catalog prepare를 중복 실행하지 않도록 최적화. 완료 기준: 구현, 테",
           "updatedAt": "2026-06-05T23:00:20.395Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-tool-usage-integration-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-tool-usage-integration.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약",
+          "excerpt": "사용자 요청 요약 날짜: 2026 06 06 사용자는 Codex가 현재 사용한 도구들과 그 사용 방식을 자신의 플랫폼에도 녹여 달라고 요청했다. 요구의 핵심은 설명만이 아니라 소스와 플랫폼 화면에 반영되는 기능화였다. 해석한 작업 범위 도구 사용 루프를 구조화된 registry로 저장 Workspace Monitor snapshot으로 수집 Tool Studio에서 선택 가능한 Agent Tool Playbook으로 표시 테스트, 빌드, 데스크톱 패키징까지 자동 수행",
+          "updatedAt": "2026-06-06T02:13:24.567Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18684,16 +18716,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: 기능별 오픈소스 맵",
-          "excerpt": "웹 검색 기록: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 대상: platform desktop app/ 검색 질의 open source agent platform feature categories CLI orchestration desktop AI workbench task run decision inbox provider settings 2026 GitHub open source desktop AI agent workbench terminal pro",
-          "updatedAt": "2026-06-05T22:07:25.311Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-no-large-scope-postponement-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-no-large-scope-postponement.ko.md",
           "category": "web-search",
@@ -18741,6 +18763,16 @@
           "title": "웹 검색 기록: shared workspace resource cache",
           "excerpt": "웹 검색 기록: shared workspace resource cache 쿼리 React large component performance split lazy boundary useMemo deferred value tab switching dashboard 2026 desktop app workbench React performance tab switch lazy load keep alive panels 2026 Tauri React desktop app performance large dash",
           "updatedAt": "2026-06-05T23:00:01.267Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-tool-usage-integration-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-tool-usage-integration.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Tool Usage Integration 웹 검색 기록",
+          "excerpt": "Tool Usage Integration 웹 검색 기록 날짜: 2026 06 06 작업: Codex 도구 사용 방식의 플랫폼 내 기능화 검색 쿼리 Playwright official docs locators auto waiting browser automation testing Node.js official test runner documentation node test Tauri v2 official documentation build bundle command 확인한 주요 출처 | 출처 | 신",
+          "updatedAt": "2026-06-06T02:13:24.566Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18834,16 +18866,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: 기능별 오픈소스 맵",
-          "excerpt": "작업 요약: 기능별 오픈소스 맵 2026 06 06에 platform desktop app 의 기능 layer별 오픈소스 레퍼런스 맵을 만들었다. CLI orchestration, work environment, development workbench, Agent Core, learning/evaluation, root tools, work visibility, observability, native runtime별로 후보 repo와 적용 포인트를 정리했다. GitHub API 메타데이터는 403",
-          "updatedAt": "2026-06-05T22:07:25.312Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-no-large-scope-postponement-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-no-large-scope-postponement.ko.md",
           "category": "work-summary",
@@ -18891,6 +18913,16 @@
           "title": "Shared Workspace Resource Cache 작업 요약",
           "excerpt": "Shared Workspace Resource Cache 작업 요약 요청: 데스크톱 앱 성능 개발을 계속하고, 탭 전환 시 반복 로딩/마운트 비용을 줄이며, 구현 후 빌드까지 자동으로 수행. 처리: Workspace Monitor runtime의 warmup/prepare native 요청을 module level shared in flight/cache helper로 통합. 핵심 파일: platform desktop app/renderer/workspace monitor/components/Mo",
           "updatedAt": "2026-06-05T23:07:18.988Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-tool-usage-integration-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-tool-usage-integration.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "Tool Usage Integration 작업 요약",
+          "excerpt": "Tool Usage Integration 작업 요약 날짜: 2026 06 06 완료 Codex식 도구 사용 루프를 tool usage integration registry.json 로 구조화했다. Workspace Monitor collector와 snapshot 타입에 toolUsageIntegration 을 추가했다. Tool Studio에 source backed Agent Tool Playbook 리스트와 상세 패널을 추가했다. product feature registry의 Root Too",
+          "updatedAt": "2026-06-06T02:16:42.822Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18984,16 +19016,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-feature-by-feature-open-source-map-json",
-          "path": "_history/work-timings/2026/2026-06-06-feature-by-feature-open-source-map.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Feature By Feature Open Source Map",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"phases\": { \"phase\": \"web search\", \"status\": \"completed\", \"notes\": \"Searched feature specific open source references for CLI orchestration, agent builders, observability, MCP/provider tools, human approval, and native run",
-          "updatedAt": "2026-06-05T22:07:25.312Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-open-source-feature-radar-json",
           "path": "_history/work-timings/2026/2026-06-06-open-source-feature-radar.json",
           "category": "work-timing",
@@ -19032,6 +19054,16 @@
           "excerpt": "{ \"schema version\": \"2026 06 01\", \"request id\": \"2026 06 06 shared workspace resource cache\", \"timezone\": \"Asia/Seoul\", \"started at\": \"2026 06 06T07:59:50+0900\", \"finished at\": \"2026 06 06T08:06:26+0900\", \"phases\": { \"phase\": \"web first intake and mode selection\", \"status\": \"comp",
           "updatedAt": "2026-06-05T23:07:18.989Z",
           "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-06-tool-usage-integration-ko-md",
+          "path": "_history/work-timings/2026/2026-06-06-tool-usage-integration.ko.md",
+          "category": "work-timing",
+          "language": "ko",
+          "title": "Tool Usage Integration 작업 시간 기록",
+          "excerpt": "Tool Usage Integration 작업 시간 기록 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 조사 | 완료 | 공식 문서 3개 확인 | | 기존 구조 파악 | 완료 | collector, snapshot, Tool Studio, tests 확인 | | 구현 | 완료 | registry, collector, type, UI, CSS, tests | | 1차 검증 | 완료 | collect/check/test 통과 | | build/package | 완료 |",
+          "updatedAt": "2026-06-06T02:16:42.822Z",
+          "historyDate": "2026-06-06"
         }
       ]
     }
@@ -19042,36 +19074,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2578,
+      "documents": 2585,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1005
+          "count": 1006
         },
         {
           "category": "web-search",
-          "count": 410
+          "count": 411
         },
         {
           "category": "plan",
-          "count": 344
+          "count": 345
         },
         {
           "category": "request-trace",
-          "count": 338
+          "count": 339
         },
         {
           "category": "work-timing",
-          "count": 259
+          "count": 260
         },
         {
           "category": "user-request",
-          "count": 123
+          "count": 124
         },
         {
           "category": "work-summary",
-          "count": 90
+          "count": 91
         },
         {
           "category": "daily-history",
@@ -19082,7 +19114,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6490274,
+      "totalSourceBytes": 6497983,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19111,7 +19143,7 @@
       "decisionEvents": 0,
       "openSignals": 15,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T02:03:14.739Z",
+      "latestEventAt": "2026-06-06T02:16:42.822Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19119,11 +19151,6 @@
         "id": "completed",
         "label": "completed",
         "count": 64
-      },
-      {
-        "id": "traceability",
-        "label": "traceability",
-        "count": 16
       },
       {
         "id": "verification",
@@ -19146,6 +19173,11 @@
         "count": 15
       },
       {
+        "id": "traceability",
+        "label": "traceability",
+        "count": 15
+      },
+      {
         "id": "monitoring",
         "label": "monitoring",
         "count": 14
@@ -19153,7 +19185,7 @@
       {
         "id": "planning",
         "label": "planning",
-        "count": 4
+        "count": 5
       },
       {
         "id": "history",
@@ -19173,11 +19205,6 @@
         "count": 16
       },
       {
-        "id": "trace",
-        "label": "trace",
-        "count": 16
-      },
-      {
         "id": "intake",
         "label": "intake",
         "count": 15
@@ -19185,6 +19212,11 @@
       {
         "id": "summary",
         "label": "summary",
+        "count": 15
+      },
+      {
+        "id": "trace",
+        "label": "trace",
         "count": 15
       },
       {
@@ -19200,7 +19232,7 @@
       {
         "id": "plan",
         "label": "plan",
-        "count": 4
+        "count": 5
       },
       {
         "id": "history",
@@ -19221,6 +19253,111 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-tool-usage-integration-ko-md",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "Tool Usage Integration 작업 시간 기록",
+        "detail": "Tool Usage Integration 작업 시간 기록 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 조사 | 완료 | 공식 문서 3개 확인 | | 기존 구조 파악 | 완료 | collector, snapshot, Tool Studio, tests 확인 | | 구현 | 완료 | registry, collector, type, UI, CSS, tests | | 1차 검증 | 완료 | collect/check/test 통과 | | build/package | 완료 |",
+        "path": "_history/work-timings/2026/2026-06-06-tool-usage-integration.ko.md",
+        "category": "work-timing",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:16:42.822Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-tool-usage-integration-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "Tool Usage Integration 평가",
+        "detail": "Tool Usage Integration 평가 날짜: 2026 06 06 결과 status: passed internal 사용자 요청인 “지금 쓰는 도구와 사용 방식을 플랫폼에 녹이기”를 source backed 기능으로 구현했다. 도구 사용 루프는 registry에 남고, snapshot으로 수집되며, Tool Studio에서 선택 가능한 Agent Tool Playbook으로 표시된다. 충족한 기준 웹 우선 조사와 공식 출처 기록: 통과 요구사항/스펙/추적성 기록: 통과 source of tr",
+        "path": "_history/evaluations/2026/2026-06-06-tool-usage-integration.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:16:42.822Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-tool-usage-integration-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "Tool Usage Integration 요청 추적",
+        "detail": "Tool Usage Integration 요청 추적 날짜: 2026 06 06 요청 Codex가 현재 사용한 도구들과 사용 방식을 플랫폼에도 반영해 달라는 요청. 결과 구현 완료. Tool Studio가 Agent Tool Playbook을 표시하고, snapshot collector가 toolUsageIntegration 데이터를 공급한다. 주요 변경 파일 platform desktop app/configs/tool usage integration registry.json platform des",
+        "path": "_history/request-traces/2026/2026-06-06-tool-usage-integration.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:16:42.822Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-tool-usage-integration-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "Tool Usage Integration 작업 요약",
+        "detail": "Tool Usage Integration 작업 요약 날짜: 2026 06 06 완료 Codex식 도구 사용 루프를 tool usage integration registry.json 로 구조화했다. Workspace Monitor collector와 snapshot 타입에 toolUsageIntegration 을 추가했다. Tool Studio에 source backed Agent Tool Playbook 리스트와 상세 패널을 추가했다. product feature registry의 Root Too",
+        "path": "_history/work-summaries/2026/2026-06-06-tool-usage-integration.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:16:42.822Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-tool-usage-integration-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "Tool Usage Integration 작업 계획",
+        "detail": "Tool Usage Integration 작업 계획 날짜: 2026 06 06 work mode: standard view mode: superadmin developer install mode: developer 실행 순서 1. 웹 우선 조사로 공식 출처 확인 2. 기존 snapshot collector, Tool Studio, 테스트 구조 확인 3. tool usage registry와 collector 구현 4. snapshot 타입과 Tool Studio UI 연결 5. product fe",
+        "path": "_history/plans/2026/2026-06-06-tool-usage-integration.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:13:24.567Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-tool-usage-integration-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약",
+        "detail": "사용자 요청 요약 날짜: 2026 06 06 사용자는 Codex가 현재 사용한 도구들과 그 사용 방식을 자신의 플랫폼에도 녹여 달라고 요청했다. 요구의 핵심은 설명만이 아니라 소스와 플랫폼 화면에 반영되는 기능화였다. 해석한 작업 범위 도구 사용 루프를 구조화된 registry로 저장 Workspace Monitor snapshot으로 수집 Tool Studio에서 선택 가능한 Agent Tool Playbook으로 표시 테스트, 빌드, 데스크톱 패키징까지 자동 수행",
+        "path": "_history/user-requests/2026/2026-06-06-tool-usage-integration.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:13:24.567Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-tool-usage-integration-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Tool Usage Integration 웹 검색 기록",
+        "detail": "Tool Usage Integration 웹 검색 기록 날짜: 2026 06 06 작업: Codex 도구 사용 방식의 플랫폼 내 기능화 검색 쿼리 Playwright official docs locators auto waiting browser automation testing Node.js official test runner documentation node test Tauri v2 official documentation build bundle command 확인한 주요 출처 | 출처 | 신",
+        "path": "_history/web-searches/2026/2026-06-06-tool-usage-integration.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:13:24.566Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-06-agent-tab-startup-prewarm-json",
         "sourceType": "history",
@@ -20555,111 +20692,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T22:09:24.228Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-feature-by-feature-open-source-map-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 Feature By Feature Open Source Map",
-        "detail": "{ \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"phases\": { \"phase\": \"web search\", \"status\": \"completed\", \"notes\": \"Searched feature specific open source references for CLI orchestration, agent builders, observability, MCP/provider tools, human approval, and native run",
-        "path": "_history/work-timings/2026/2026-06-06-feature-by-feature-open-source-map.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:07:25.312Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: 기능별 오픈소스 맵",
-        "detail": "요청 결과 추적: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 프로젝트: platform desktop app/ 입력 앞선 유사 플랫폼 조사에서 전체적으로 비슷한 오픈소스를 봤으나, 사용자는 각 기능 단위로도 오픈소스를 찾으라고 요청했다. 결정 현재 제품의 feature layers 를 기준 분류로 사용했다. 기능 layer는 CLI Orchestration, Agent Work Environment, Agent Development Environment",
-        "path": "_history/request-traces/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:07:25.312Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: 기능별 오픈소스 맵",
-        "detail": "작업 요약: 기능별 오픈소스 맵 2026 06 06에 platform desktop app 의 기능 layer별 오픈소스 레퍼런스 맵을 만들었다. CLI orchestration, work environment, development workbench, Agent Core, learning/evaluation, root tools, work visibility, observability, native runtime별로 후보 repo와 적용 포인트를 정리했다. GitHub API 메타데이터는 403",
-        "path": "_history/work-summaries/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:07:25.312Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: 기능별 오픈소스 맵",
-        "detail": "웹 검색 기록: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 대상: platform desktop app/ 검색 질의 open source agent platform feature categories CLI orchestration desktop AI workbench task run decision inbox provider settings 2026 GitHub open source desktop AI agent workbench terminal pro",
-        "path": "_history/web-searches/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:07:25.311Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-feature-by-feature-open-source-map-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: 기능별 오픈소스 조사",
-        "detail": "사용자 요청 요약: 기능별 오픈소스 조사 날짜: 2026 06 06 대상: platform desktop app/ 요약 사용자는 앞선 유사 오픈소스 조사에 이어, 플랫폼의 각 기능별로도 참고할 오픈소스를 찾아보라고 요청했다. 처리 제품 기능 registry의 8개 feature layer와 native runtime 축을 기준으로 오픈소스 후보를 정리했다. 각 후보는 볼 부분과 현재 플랫폼 적용 포인트를 함께 기록했다.",
-        "path": "_history/user-requests/2026/2026-06-06-feature-by-feature-open-source-map.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:07:25.311Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-agent-cli-cockpit-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "평가: Agent CLI Cockpit",
-        "detail": "평가: Agent CLI Cockpit 판정 요청 충족. 유사 오픈소스 검색과 직접 clone 탐구 후, 현재 데스크톱 플랫폼에 Agent CLI Cockpit 기능을 추가했다. 기능은 새 process를 늘리지 않고 기존 native runtime state를 묶어 CLI/provider/session/task/decision control plane으로 보여준다. 구현 증거 MonitorShell.tsx 에 cockpitStats , openSourceControlPlanePatterns , ",
-        "path": "_history/evaluations/2026/2026-06-06-agent-cli-cockpit.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:59:44.775Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-agent-cli-cockpit-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: Agent CLI Cockpit",
-        "detail": "요청 결과 추적: Agent CLI Cockpit 날짜: 2026 06 06 요청: 유사 오픈소스 딥 리서치와 직접 탐구 후 기능 추가 프로젝트: platform desktop app/ 입력 요구 사용자는 현재 플랫폼과 유사한 오픈소스를 많이 조사하고, 직접 탐구한 뒤 결과를 기능으로 구현하라고 했다. 이전 반복 맥락에서는 데스크톱 native resource 활용, 느린 탭 전환, CLI/terminal/process 관리, AI 로그인/설정 UI 개선이 계속 요구됐다. 결정 직접 clone한 ",
-        "path": "_history/request-traces/2026/2026-06-06-agent-cli-cockpit.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:59:44.775Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23678,7 +23710,7 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 16
+        "documentsCount": 15
       },
       {
         "category": "web-search",
@@ -23693,7 +23725,7 @@
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 4
+        "documentsCount": 5
       },
       {
         "category": "evaluation",
@@ -25688,6 +25720,8 @@
         ],
         "currentAssets": [
           "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+          "platform-desktop-app/renderer/workspace-monitor/components/workbench/ToolStudioPanel.tsx",
+          "platform-desktop-app/configs/tool-usage-integration-registry.json",
           "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json",
           "agent-platform/configs/integrations/cli-adapter-registry.json"
         ],
@@ -25696,17 +25730,20 @@
           "CLI adapter selection",
           "workspace access setup",
           "root tool sharing across task-specific agents",
-          "question deferral defaults"
+          "question deferral defaults",
+          "tool usage playbook presets"
         ],
         "learningSignals": [
           "configured provider count",
           "selected CLI adapter",
           "workspace file count",
-          "auto-defer setting"
+          "auto-defer setting",
+          "tool usage pattern count"
         ],
         "validationGates": [
           "Home and execution settings expose root tools separately from Agent Core and CLI orchestration",
-          "root tools stay reusable across task-specific agents and guest CLI lanes"
+          "root tools stay reusable across task-specific agents and guest CLI lanes",
+          "Tool Studio renders source-backed agent tool usage playbooks"
         ]
       },
       {
@@ -27620,13 +27657,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3682,
+      "sourceDocuments": 3695,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T02:03:14.739Z"
+      "latestInsightAt": "2026-06-06T02:17:23.528Z"
     },
     "inferenceStages": [
       {
@@ -27694,7 +27731,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 431,
+        "signalCount": 434,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -27702,7 +27739,7 @@
           },
           {
             "category": "project-spec",
-            "count": 132
+            "count": 133
           },
           {
             "category": "request-trace",
@@ -27710,7 +27747,7 @@
           },
           {
             "category": "user-request",
-            "count": 39
+            "count": 40
           },
           {
             "category": "work-summary",
@@ -27731,6 +27768,10 @@
           {
             "category": "project-doc",
             "count": 3
+          },
+          {
+            "category": "work-timing",
+            "count": 1
           }
         ],
         "evidencePaths": [
@@ -27749,7 +27790,7 @@
           "요청 결과 추적: Workbench lazy boundary 확장",
           "최종 평가"
         ],
-        "latestEvidenceAt": "2026-06-06T02:03:14.739Z"
+        "latestEvidenceAt": "2026-06-06T02:16:42.822Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27763,19 +27804,19 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1693,
+        "signalCount": 1696,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 472
+            "count": 473
           },
           {
             "category": "evaluation",
-            "count": 460
+            "count": 461
           },
           {
             "category": "web-search",
-            "count": 411
+            "count": 412
           },
           {
             "category": "plan",
@@ -27814,7 +27855,7 @@
           "2026 05 31 작업 모드 라우팅 계획 기록",
           "계획 히스토리: 코딩 조사 출처 다양성 강화"
         ],
-        "latestEvidenceAt": "2026-06-06T02:00:59.362Z"
+        "latestEvidenceAt": "2026-06-06T02:16:42.822Z"
       },
       {
         "id": "large-scope-slicing",
@@ -27828,7 +27869,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 986,
+        "signalCount": 987,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -27836,7 +27877,7 @@
           },
           {
             "category": "plan",
-            "count": 284
+            "count": 285
           },
           {
             "category": "request-trace",
@@ -27887,7 +27928,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T01:13:08.238Z"
+        "latestEvidenceAt": "2026-06-06T02:13:24.567Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -27974,11 +28015,11 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1436,
+        "signalCount": 1441,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 615
+            "count": 620
           },
           {
             "category": "evaluation",
@@ -28033,7 +28074,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T02:03:14.739Z"
+        "latestEvidenceAt": "2026-06-06T02:17:23.528Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28109,14 +28150,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3682,
+      "sourceDocuments": 3695,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T02:03:14.739Z"
+      "latestInsightAt": "2026-06-06T02:17:23.528Z"
     },
     "operatingModel": [
       {
@@ -28174,25 +28215,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3110,
+        "signalCount": 3117,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1693
+            "signalCount": 1696
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 986
+            "signalCount": 987
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 431
+            "signalCount": 434
           }
         ],
         "missingPatternIds": [],
@@ -28220,7 +28261,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T02:03:14.739Z",
+        "latestEvidenceAt": "2026-06-06T02:16:42.822Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28318,19 +28359,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2422,
+        "signalCount": 2428,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1436
+            "signalCount": 1441
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 986
+            "signalCount": 987
           }
         ],
         "missingPatternIds": [],
@@ -28358,7 +28399,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T02:03:14.739Z",
+        "latestEvidenceAt": "2026-06-06T02:17:23.528Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28387,13 +28428,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 550,
+        "signalCount": 553,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 431
+            "signalCount": 434
           },
           {
             "id": "release-blocker-gate",
@@ -28427,7 +28468,7 @@
           "2026 06 06 User Request: Public Release Developer Repatch",
           "Public Release Updater Automation Spec"
         ],
-        "latestEvidenceAt": "2026-06-06T02:03:14.739Z",
+        "latestEvidenceAt": "2026-06-06T02:16:42.822Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28456,19 +28497,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2679,
+        "signalCount": 2683,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 986
+            "signalCount": 987
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1693
+            "signalCount": 1696
           }
         ],
         "missingPatternIds": [],
@@ -28496,7 +28537,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T02:00:59.362Z",
+        "latestEvidenceAt": "2026-06-06T02:16:42.822Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28525,7 +28566,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1812,
+        "signalCount": 1815,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28537,7 +28578,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1693
+            "signalCount": 1696
           }
         ],
         "missingPatternIds": [],
@@ -28565,7 +28606,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T02:00:59.362Z",
+        "latestEvidenceAt": "2026-06-06T02:16:42.822Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",
@@ -28804,6 +28845,423 @@
           "desktop-native-first-plane"
         ],
         "status": "contract"
+      }
+    ]
+  },
+  "toolUsageIntegration": {
+    "sourcePath": "platform-desktop-app/configs/tool-usage-integration-registry.json",
+    "summary": {
+      "totalPatterns": 7,
+      "implementedPatterns": 7,
+      "p0Patterns": 7,
+      "verificationLadders": 3,
+      "validationCommands": 21,
+      "adoptionBacklog": 2,
+      "referenceLinks": 3
+    },
+    "referenceLinks": [
+      {
+        "id": "playwright_locators",
+        "title": "Playwright Locators",
+        "url": "https://playwright.dev/docs/locators",
+        "path": "",
+        "sourceType": "official_docs",
+        "usedFor": [
+          "prefer user-perceived locators for browser smoke checks",
+          "auto-waiting and retryable UI validation"
+        ],
+        "lastChecked": "2026-06-06",
+        "reliability": "high",
+        "limitations": "Applies to browser automation; native shell validation still needs OS/runtime checks."
+      },
+      {
+        "id": "node_test_runner",
+        "title": "Node.js Test Runner",
+        "url": "https://nodejs.org/api/test.html",
+        "path": "",
+        "sourceType": "official_docs",
+        "usedFor": [
+          "repository-local smoke and contract tests with node --test",
+          "fast no-extra-framework validation for monitor collectors and source audits"
+        ],
+        "lastChecked": "2026-06-06",
+        "reliability": "high",
+        "limitations": "Does not replace browser, Tauri, or Rust runtime checks."
+      },
+      {
+        "id": "tauri_distribute",
+        "title": "Tauri Distribute",
+        "url": "https://v2.tauri.app/distribute/",
+        "path": "",
+        "sourceType": "official_docs",
+        "usedFor": [
+          "desktop build and bundle close-out",
+          "macOS .app and DMG artifact verification"
+        ],
+        "lastChecked": "2026-06-06",
+        "reliability": "high",
+        "limitations": "Public macOS readiness still requires signing, hardened runtime, notarization, and installer policy gates."
+      }
+    ],
+    "patterns": [
+      {
+        "id": "web-first-research",
+        "label": "Web-first research",
+        "labelKo": "웹 우선 조사",
+        "purpose": "Confirm unstable or tool-specific facts with current primary sources before planning, editing, or claiming readiness.",
+        "toolSurfaces": [
+          "web.run search_query",
+          "_history/web-searches",
+          "_research"
+        ],
+        "triggerWhen": [
+          "The user asks for latest, current, best practice, open-source references, packaging, API behavior, or broad platform design.",
+          "A task depends on a page, repository, library, or documentation not already loaded into context."
+        ],
+        "sequence": [
+          "Search high-authority sources first.",
+          "Prefer official docs for implementation behavior.",
+          "Record queries, checked sources, weak sources ignored, plan impact, and uncertainty.",
+          "Only carry source claims into implementation when the source changes the plan or risk model."
+        ],
+        "evidenceOutputs": [
+          "_history/web-searches/YYYY/YYYY-MM-DD-<slug>.ko.md",
+          "_research/topics/<project>/<slug>.ko.md",
+          "implementation plan citations"
+        ],
+        "validationCommands": [],
+        "failureModes": [
+          "Using stale model memory for changed library behavior.",
+          "Treating community signals as factual proof.",
+          "Forgetting to carry source uncertainty into the plan."
+        ],
+        "platformApplication": "Tool Studio should show research as a first gate for tool creation, validation, packaging, and external integration work.",
+        "status": "implemented",
+        "priority": "p0"
+      },
+      {
+        "id": "parallel-local-inspection",
+        "label": "Parallel local inspection",
+        "labelKo": "병렬 로컬 탐색",
+        "purpose": "Read existing source, tests, configs, and docs quickly without flooding the operator with noisy shell output.",
+        "toolSurfaces": [
+          "rg",
+          "sed",
+          "find",
+          "git status",
+          "multi_tool_use.parallel"
+        ],
+        "triggerWhen": [
+          "The task needs repo context across source, UI, tests, configs, and docs.",
+          "Multiple read-only inspections can run without touching shared mutable state."
+        ],
+        "sequence": [
+          "Start with git status and targeted file maps.",
+          "Use rg for text and file discovery.",
+          "Read related source files in parallel when they are independent.",
+          "Summarize the system shape before editing."
+        ],
+        "evidenceOutputs": [
+          "source inventory notes",
+          "touched path list",
+          "plan evidence section"
+        ],
+        "validationCommands": [
+          "git status --short",
+          "rg -n \"<contract>\" <path>"
+        ],
+        "failureModes": [
+          "Reading too much source by default.",
+          "Running parallel commands that mutate the same file or git state.",
+          "Chaining shell output into unreadable logs."
+        ],
+        "platformApplication": "A future desktop source-intake lane can precompute read-only maps and expose them beside the code editor.",
+        "status": "implemented",
+        "priority": "p0"
+      },
+      {
+        "id": "patch-based-editing",
+        "label": "Patch-based editing",
+        "labelKo": "패치 기반 편집",
+        "purpose": "Make scoped source changes with reviewable diffs while preserving user work and avoiding destructive operations.",
+        "toolSurfaces": [
+          "apply_patch",
+          "git diff",
+          "git status"
+        ],
+        "triggerWhen": [
+          "A source, config, test, or document change is needed.",
+          "The worktree may include user changes that must not be reverted."
+        ],
+        "sequence": [
+          "Announce the edit target and intent.",
+          "Apply the smallest coherent patch.",
+          "Inspect the diff after edits.",
+          "Avoid reset, checkout, or deletion unless the user explicitly requested it."
+        ],
+        "evidenceOutputs": [
+          "git diff summary",
+          "changed file list",
+          "validation record"
+        ],
+        "validationCommands": [
+          "git diff -- <paths>",
+          "git status --short"
+        ],
+        "failureModes": [
+          "Overwriting unrelated user edits.",
+          "Refactoring beyond the requested behavioral surface.",
+          "Editing generated files before the source of truth."
+        ],
+        "platformApplication": "Source workbench should support patch queues, diff preview, and protected user-change boundaries.",
+        "status": "implemented",
+        "priority": "p0"
+      },
+      {
+        "id": "renderer-validation-loop",
+        "label": "Renderer validation loop",
+        "labelKo": "렌더러 검증 루프",
+        "purpose": "Validate TypeScript, collector contracts, static UI rules, browser rendering, and performance-sensitive surfaces before packaging.",
+        "toolSurfaces": [
+          "node --test",
+          "tsc --noEmit",
+          "Playwright",
+          "workspace-monitor check scripts",
+          "in-app Browser"
+        ],
+        "triggerWhen": [
+          "Workspace Monitor source, snapshot schema, UI, CSS, or generated data changes.",
+          "A user-reported interaction or rendering problem is being fixed."
+        ],
+        "sequence": [
+          "Regenerate the workspace snapshot.",
+          "Run TypeScript and source contract checks.",
+          "Run node --test suites.",
+          "Open the relevant UI route with a browser smoke check.",
+          "Check visible text, stable controls, and nonblank surfaces."
+        ],
+        "evidenceOutputs": [
+          "workspace-snapshot.json",
+          "test output",
+          "browser smoke notes",
+          "performance audit output"
+        ],
+        "validationCommands": [
+          "corepack pnpm --filter workspace-monitor run collect",
+          "corepack pnpm --filter workspace-monitor run check",
+          "corepack pnpm --filter workspace-monitor test",
+          "corepack pnpm --filter workspace-monitor run build"
+        ],
+        "failureModes": [
+          "Passing static tests while the UI route is blank.",
+          "Updating UI without the snapshot schema.",
+          "Forgetting to regenerate developer snapshot after customer packaging."
+        ],
+        "platformApplication": "Tool Studio should expose the renderer validation ladder directly beside build and deployment controls.",
+        "status": "implemented",
+        "priority": "p0"
+      },
+      {
+        "id": "desktop-packaging-loop",
+        "label": "Desktop packaging loop",
+        "labelKo": "데스크톱 패키징 루프",
+        "purpose": "Turn a verified renderer and Tauri shell into local macOS artifacts without making the user run build steps manually.",
+        "toolSurfaces": [
+          "corepack pnpm run desktop:package:internal",
+          "cargo",
+          "tauri build",
+          "hdiutil",
+          "codesign"
+        ],
+        "triggerWhen": [
+          "The user asks for runnable desktop app changes.",
+          "Renderer, Tauri command, native process, packaging, or installer-adjacent behavior changes."
+        ],
+        "sequence": [
+          "Prepare the renderer snapshot and static output.",
+          "Run the internal desktop packaging command.",
+          "Verify .app and DMG artifact paths.",
+          "Record public-readiness gaps separately from local internal readiness."
+        ],
+        "evidenceOutputs": [
+          "src-tauri/target/release/bundle/macos/*.app",
+          "src-tauri/target/release/bundle/dmg/*.dmg",
+          "_history/evaluations/YYYY/*.md"
+        ],
+        "validationCommands": [
+          "corepack pnpm run desktop:package:internal"
+        ],
+        "failureModes": [
+          "Claiming public macOS readiness without notarization and hardened-runtime gates.",
+          "Leaving customer snapshot in place after internal packaging.",
+          "Treating a web build as enough for desktop runtime changes."
+        ],
+        "platformApplication": "Desktop Runtime and Tool Studio should show packaging as a first-class validation ladder, not an afterthought.",
+        "status": "implemented",
+        "priority": "p0"
+      },
+      {
+        "id": "resource-cleanup-loop",
+        "label": "Resource cleanup loop",
+        "labelKo": "리소스 정리 루프",
+        "purpose": "Prevent leaking dev servers, browser sessions, PTYs, subprocess pipes, timers, caches, or native runtime handles.",
+        "toolSurfaces": [
+          "resource-guard records",
+          "lsof",
+          "runtime terminal lifecycle",
+          "Browser tab lifecycle",
+          "Tauri process management"
+        ],
+        "triggerWhen": [
+          "The task starts a server, browser automation, terminal session, subprocess, worker, queue, stream, timer, or native resource.",
+          "A desktop optimization touches CPU, RAM, PTY, pipes, or cache behavior."
+        ],
+        "sequence": [
+          "Name every long-running resource before starting it.",
+          "Attach a stop, close, or dispose action.",
+          "Confirm cleanup before final response.",
+          "Record residual resource risk when cleanup cannot be proven."
+        ],
+        "evidenceOutputs": [
+          "_history/resource-checks/YYYY/*.md",
+          "port/process cleanup notes",
+          "runtime lifecycle diff"
+        ],
+        "validationCommands": [
+          "lsof -nP -iTCP:<port> -sTCP:LISTEN",
+          "git status --short"
+        ],
+        "failureModes": [
+          "Leaving dev servers running after verification.",
+          "Keeping stale browser tabs or PTY sessions alive.",
+          "Holding file handles or pipes across task boundaries."
+        ],
+        "platformApplication": "Native runtime panels should expose process and pipe lifecycle state as part of task health.",
+        "status": "implemented",
+        "priority": "p0"
+      },
+      {
+        "id": "git-closeout-loop",
+        "label": "Git close-out loop",
+        "labelKo": "Git 마감 루프",
+        "purpose": "Turn a completed change set into an auditable commit and push only after validation and final evaluation records exist.",
+        "toolSurfaces": [
+          "git diff",
+          "git status",
+          "git add",
+          "git commit",
+          "git push"
+        ],
+        "triggerWhen": [
+          "A meaningful source, config, documentation, or history change is complete.",
+          "Repository rules require commit and push for completed work."
+        ],
+        "sequence": [
+          "Review the diff and changed paths.",
+          "Run required validation and package steps.",
+          "Write work summary, evaluation, omission check, and trace records.",
+          "Commit with a scoped conventional message.",
+          "Push to origin/main unless explicitly told not to."
+        ],
+        "evidenceOutputs": [
+          "commit hash",
+          "push result",
+          "_history/request-traces/YYYY/*.md",
+          "_history/evaluations/YYYY/*.md"
+        ],
+        "validationCommands": [
+          "git status --short",
+          "git diff --stat",
+          "git push origin main"
+        ],
+        "failureModes": [
+          "Committing before validation artifacts exist.",
+          "Bundling unrelated user changes.",
+          "Leaving the user to run the final build."
+        ],
+        "platformApplication": "The platform should make finalization explicit: evidence, validation, commit, push, and artifact paths.",
+        "status": "implemented",
+        "priority": "p0"
+      }
+    ],
+    "verificationLadders": [
+      {
+        "id": "workspace-monitor-source-ladder",
+        "label": "Workspace Monitor source ladder",
+        "surface": "tools",
+        "commands": [
+          "corepack pnpm --filter workspace-monitor run collect",
+          "corepack pnpm --filter workspace-monitor run check",
+          "corepack pnpm --filter workspace-monitor test",
+          "corepack pnpm --filter workspace-monitor run build"
+        ],
+        "acceptance": [
+          "The snapshot contains toolUsageIntegration.",
+          "Tool Studio renders the Agent Tool Playbook.",
+          "Static tests cover collector, UI, and snapshot type contracts."
+        ],
+        "ownerFeatureId": "root_tool_management"
+      },
+      {
+        "id": "desktop-package-ladder",
+        "label": "Desktop package ladder",
+        "surface": "desktop",
+        "commands": [
+          "corepack pnpm run desktop:package:internal"
+        ],
+        "acceptance": [
+          "Internal .app and DMG artifacts are generated.",
+          "Public-readiness caveats remain separate from internal runnable artifacts.",
+          "Developer snapshot is restored after customer bundle generation when needed."
+        ],
+        "ownerFeatureId": "agent_work_environment"
+      },
+      {
+        "id": "runtime-resource-ladder",
+        "label": "Runtime resource ladder",
+        "surface": "desktop",
+        "commands": [
+          "lsof -nP -iTCP:<port> -sTCP:LISTEN",
+          "git status --short"
+        ],
+        "acceptance": [
+          "Dev servers and browser sessions started by the task are stopped.",
+          "Long-running processes are named and have cleanup actions.",
+          "Residual risk is recorded when cleanup cannot be proven."
+        ],
+        "ownerFeatureId": "agent_orchestration"
+      }
+    ],
+    "adoptionBacklog": [
+      {
+        "id": "playbook-to-runner",
+        "title": "Turn playbook entries into executable task presets",
+        "targetPaths": [
+          "platform-desktop-app/renderer/workspace-monitor/components/workbench/ToolStudioPanel.tsx",
+          "platform-desktop-app/src-tauri/src/lib.rs"
+        ],
+        "smallestAssetType": "project_feature",
+        "status": "queued",
+        "riskControls": [
+          "No destructive git operation preset.",
+          "Install and external mutation steps require explicit approval.",
+          "Every preset records evidence and rollback."
+        ]
+      },
+      {
+        "id": "tool-call-trace-store",
+        "title": "Persist tool-call traces and validation ladders per task run",
+        "targetPaths": [
+          "platform-desktop-app/runtime-data/",
+          "agent-platform/configs/integrations/cli-pipeline-template.json"
+        ],
+        "smallestAssetType": "tool",
+        "status": "queued",
+        "riskControls": [
+          "Redact secrets and private paths.",
+          "Keep raw logs separate from operator summaries.",
+          "Bound retention and cache size."
+        ]
       }
     ]
   },

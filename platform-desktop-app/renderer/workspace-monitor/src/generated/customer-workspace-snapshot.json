@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T02:03:25.043Z",
+  "generatedAt": "2026-06-06T02:17:31.226Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -40,6 +40,8 @@
     "fundamentalImprovementPrinciples": 0,
     "fundamentalImprovementPackages": 0,
     "fundamentalImprovementFitnessChecks": 0,
+    "toolUsagePatterns": 7,
+    "toolUsageValidationCommands": 21,
     "structurePressurePoints": 0,
     "sourceFiles": 0,
     "rootFolders": 0
@@ -423,13 +425,15 @@
           "CLI adapter selection",
           "workspace access setup",
           "root tool sharing across task-specific agents",
-          "question deferral defaults"
+          "question deferral defaults",
+          "tool usage playbook presets"
         ],
         "learningSignals": [
           "configured provider count",
           "selected CLI adapter",
           "workspace file count",
-          "auto-defer setting"
+          "auto-defer setting",
+          "tool usage pattern count"
         ],
         "validationGates": []
       },
@@ -1542,7 +1546,7 @@
       "queuedPatterns": 0,
       "activeRecommendations": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-06T02:03:14.739Z"
+      "latestInsightAt": "2026-06-06T02:17:23.528Z"
     },
     "inferenceStages": [],
     "signalGroups": []
@@ -1557,12 +1561,423 @@
       "totalImprovementPackages": 0,
       "totalFitnessChecks": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-06T02:03:14.739Z"
+      "latestInsightAt": "2026-06-06T02:17:23.528Z"
     },
     "operatingModel": [],
     "structuralPrinciples": [],
     "improvementPackages": [],
     "fitnessChecks": []
+  },
+  "toolUsageIntegration": {
+    "sourcePath": "",
+    "summary": {
+      "totalPatterns": 7,
+      "implementedPatterns": 7,
+      "p0Patterns": 7,
+      "verificationLadders": 3,
+      "validationCommands": 21,
+      "adoptionBacklog": 2,
+      "referenceLinks": 3
+    },
+    "referenceLinks": [
+      {
+        "id": "playwright_locators",
+        "title": "Playwright Locators",
+        "url": "https://playwright.dev/docs/locators",
+        "path": "",
+        "sourceType": "official_docs",
+        "usedFor": [
+          "prefer user-perceived locators for browser smoke checks",
+          "auto-waiting and retryable UI validation"
+        ],
+        "lastChecked": "2026-06-06",
+        "reliability": "high",
+        "limitations": "Applies to browser automation; native shell validation still needs OS/runtime checks."
+      },
+      {
+        "id": "node_test_runner",
+        "title": "Node.js Test Runner",
+        "url": "https://nodejs.org/api/test.html",
+        "path": "",
+        "sourceType": "official_docs",
+        "usedFor": [
+          "repository-local smoke and contract tests with node --test",
+          "fast no-extra-framework validation for monitor collectors and source audits"
+        ],
+        "lastChecked": "2026-06-06",
+        "reliability": "high",
+        "limitations": "Does not replace browser, Tauri, or Rust runtime checks."
+      },
+      {
+        "id": "tauri_distribute",
+        "title": "Tauri Distribute",
+        "url": "https://v2.tauri.app/distribute/",
+        "path": "",
+        "sourceType": "official_docs",
+        "usedFor": [
+          "desktop build and bundle close-out",
+          "macOS .app and DMG artifact verification"
+        ],
+        "lastChecked": "2026-06-06",
+        "reliability": "high",
+        "limitations": "Public macOS readiness still requires signing, hardened runtime, notarization, and installer policy gates."
+      }
+    ],
+    "patterns": [
+      {
+        "id": "web-first-research",
+        "label": "Web-first research",
+        "labelKo": "웹 우선 조사",
+        "purpose": "Confirm unstable or tool-specific facts with current primary sources before planning, editing, or claiming readiness.",
+        "toolSurfaces": [
+          "web.run search_query",
+          "_history/web-searches",
+          "_research"
+        ],
+        "triggerWhen": [
+          "The user asks for latest, current, best practice, open-source references, packaging, API behavior, or broad platform design.",
+          "A task depends on a page, repository, library, or documentation not already loaded into context."
+        ],
+        "sequence": [
+          "Search high-authority sources first.",
+          "Prefer official docs for implementation behavior.",
+          "Record queries, checked sources, weak sources ignored, plan impact, and uncertainty.",
+          "Only carry source claims into implementation when the source changes the plan or risk model."
+        ],
+        "evidenceOutputs": [
+          "_history/web-searches/YYYY/YYYY-MM-DD-<slug>.ko.md",
+          "_research/topics/<project>/<slug>.ko.md",
+          "implementation plan citations"
+        ],
+        "validationCommands": [],
+        "failureModes": [
+          "Using stale model memory for changed library behavior.",
+          "Treating community signals as factual proof.",
+          "Forgetting to carry source uncertainty into the plan."
+        ],
+        "platformApplication": "Tool Studio should show research as a first gate for tool creation, validation, packaging, and external integration work.",
+        "status": "implemented",
+        "priority": "p0"
+      },
+      {
+        "id": "parallel-local-inspection",
+        "label": "Parallel local inspection",
+        "labelKo": "병렬 로컬 탐색",
+        "purpose": "Read existing source, tests, configs, and docs quickly without flooding the operator with noisy shell output.",
+        "toolSurfaces": [
+          "rg",
+          "sed",
+          "find",
+          "git status",
+          "multi_tool_use.parallel"
+        ],
+        "triggerWhen": [
+          "The task needs repo context across source, UI, tests, configs, and docs.",
+          "Multiple read-only inspections can run without touching shared mutable state."
+        ],
+        "sequence": [
+          "Start with git status and targeted file maps.",
+          "Use rg for text and file discovery.",
+          "Read related source files in parallel when they are independent.",
+          "Summarize the system shape before editing."
+        ],
+        "evidenceOutputs": [
+          "source inventory notes",
+          "touched path list",
+          "plan evidence section"
+        ],
+        "validationCommands": [
+          "git status --short",
+          "rg -n \"<contract>\" <path>"
+        ],
+        "failureModes": [
+          "Reading too much source by default.",
+          "Running parallel commands that mutate the same file or git state.",
+          "Chaining shell output into unreadable logs."
+        ],
+        "platformApplication": "A future desktop source-intake lane can precompute read-only maps and expose them beside the code editor.",
+        "status": "implemented",
+        "priority": "p0"
+      },
+      {
+        "id": "patch-based-editing",
+        "label": "Patch-based editing",
+        "labelKo": "패치 기반 편집",
+        "purpose": "Make scoped source changes with reviewable diffs while preserving user work and avoiding destructive operations.",
+        "toolSurfaces": [
+          "apply_patch",
+          "git diff",
+          "git status"
+        ],
+        "triggerWhen": [
+          "A source, config, test, or document change is needed.",
+          "The worktree may include user changes that must not be reverted."
+        ],
+        "sequence": [
+          "Announce the edit target and intent.",
+          "Apply the smallest coherent patch.",
+          "Inspect the diff after edits.",
+          "Avoid reset, checkout, or deletion unless the user explicitly requested it."
+        ],
+        "evidenceOutputs": [
+          "git diff summary",
+          "changed file list",
+          "validation record"
+        ],
+        "validationCommands": [
+          "git diff -- <paths>",
+          "git status --short"
+        ],
+        "failureModes": [
+          "Overwriting unrelated user edits.",
+          "Refactoring beyond the requested behavioral surface.",
+          "Editing generated files before the source of truth."
+        ],
+        "platformApplication": "Source workbench should support patch queues, diff preview, and protected user-change boundaries.",
+        "status": "implemented",
+        "priority": "p0"
+      },
+      {
+        "id": "renderer-validation-loop",
+        "label": "Renderer validation loop",
+        "labelKo": "렌더러 검증 루프",
+        "purpose": "Validate TypeScript, collector contracts, static UI rules, browser rendering, and performance-sensitive surfaces before packaging.",
+        "toolSurfaces": [
+          "node --test",
+          "tsc --noEmit",
+          "Playwright",
+          "workspace-monitor check scripts",
+          "in-app Browser"
+        ],
+        "triggerWhen": [
+          "Workspace Monitor source, snapshot schema, UI, CSS, or generated data changes.",
+          "A user-reported interaction or rendering problem is being fixed."
+        ],
+        "sequence": [
+          "Regenerate the workspace snapshot.",
+          "Run TypeScript and source contract checks.",
+          "Run node --test suites.",
+          "Open the relevant UI route with a browser smoke check.",
+          "Check visible text, stable controls, and nonblank surfaces."
+        ],
+        "evidenceOutputs": [
+          "workspace-snapshot.json",
+          "test output",
+          "browser smoke notes",
+          "performance audit output"
+        ],
+        "validationCommands": [
+          "corepack pnpm --filter workspace-monitor run collect",
+          "corepack pnpm --filter workspace-monitor run check",
+          "corepack pnpm --filter workspace-monitor test",
+          "corepack pnpm --filter workspace-monitor run build"
+        ],
+        "failureModes": [
+          "Passing static tests while the UI route is blank.",
+          "Updating UI without the snapshot schema.",
+          "Forgetting to regenerate developer snapshot after customer packaging."
+        ],
+        "platformApplication": "Tool Studio should expose the renderer validation ladder directly beside build and deployment controls.",
+        "status": "implemented",
+        "priority": "p0"
+      },
+      {
+        "id": "desktop-packaging-loop",
+        "label": "Desktop packaging loop",
+        "labelKo": "데스크톱 패키징 루프",
+        "purpose": "Turn a verified renderer and Tauri shell into local macOS artifacts without making the user run build steps manually.",
+        "toolSurfaces": [
+          "corepack pnpm run desktop:package:internal",
+          "cargo",
+          "tauri build",
+          "hdiutil",
+          "codesign"
+        ],
+        "triggerWhen": [
+          "The user asks for runnable desktop app changes.",
+          "Renderer, Tauri command, native process, packaging, or installer-adjacent behavior changes."
+        ],
+        "sequence": [
+          "Prepare the renderer snapshot and static output.",
+          "Run the internal desktop packaging command.",
+          "Verify .app and DMG artifact paths.",
+          "Record public-readiness gaps separately from local internal readiness."
+        ],
+        "evidenceOutputs": [
+          "src-tauri/target/release/bundle/macos/*.app",
+          "src-tauri/target/release/bundle/dmg/*.dmg",
+          "_history/evaluations/YYYY/*.md"
+        ],
+        "validationCommands": [
+          "corepack pnpm run desktop:package:internal"
+        ],
+        "failureModes": [
+          "Claiming public macOS readiness without notarization and hardened-runtime gates.",
+          "Leaving customer snapshot in place after internal packaging.",
+          "Treating a web build as enough for desktop runtime changes."
+        ],
+        "platformApplication": "Desktop Runtime and Tool Studio should show packaging as a first-class validation ladder, not an afterthought.",
+        "status": "implemented",
+        "priority": "p0"
+      },
+      {
+        "id": "resource-cleanup-loop",
+        "label": "Resource cleanup loop",
+        "labelKo": "리소스 정리 루프",
+        "purpose": "Prevent leaking dev servers, browser sessions, PTYs, subprocess pipes, timers, caches, or native runtime handles.",
+        "toolSurfaces": [
+          "resource-guard records",
+          "lsof",
+          "runtime terminal lifecycle",
+          "Browser tab lifecycle",
+          "Tauri process management"
+        ],
+        "triggerWhen": [
+          "The task starts a server, browser automation, terminal session, subprocess, worker, queue, stream, timer, or native resource.",
+          "A desktop optimization touches CPU, RAM, PTY, pipes, or cache behavior."
+        ],
+        "sequence": [
+          "Name every long-running resource before starting it.",
+          "Attach a stop, close, or dispose action.",
+          "Confirm cleanup before final response.",
+          "Record residual resource risk when cleanup cannot be proven."
+        ],
+        "evidenceOutputs": [
+          "_history/resource-checks/YYYY/*.md",
+          "port/process cleanup notes",
+          "runtime lifecycle diff"
+        ],
+        "validationCommands": [
+          "lsof -nP -iTCP:<port> -sTCP:LISTEN",
+          "git status --short"
+        ],
+        "failureModes": [
+          "Leaving dev servers running after verification.",
+          "Keeping stale browser tabs or PTY sessions alive.",
+          "Holding file handles or pipes across task boundaries."
+        ],
+        "platformApplication": "Native runtime panels should expose process and pipe lifecycle state as part of task health.",
+        "status": "implemented",
+        "priority": "p0"
+      },
+      {
+        "id": "git-closeout-loop",
+        "label": "Git close-out loop",
+        "labelKo": "Git 마감 루프",
+        "purpose": "Turn a completed change set into an auditable commit and push only after validation and final evaluation records exist.",
+        "toolSurfaces": [
+          "git diff",
+          "git status",
+          "git add",
+          "git commit",
+          "git push"
+        ],
+        "triggerWhen": [
+          "A meaningful source, config, documentation, or history change is complete.",
+          "Repository rules require commit and push for completed work."
+        ],
+        "sequence": [
+          "Review the diff and changed paths.",
+          "Run required validation and package steps.",
+          "Write work summary, evaluation, omission check, and trace records.",
+          "Commit with a scoped conventional message.",
+          "Push to origin/main unless explicitly told not to."
+        ],
+        "evidenceOutputs": [
+          "commit hash",
+          "push result",
+          "_history/request-traces/YYYY/*.md",
+          "_history/evaluations/YYYY/*.md"
+        ],
+        "validationCommands": [
+          "git status --short",
+          "git diff --stat",
+          "git push origin main"
+        ],
+        "failureModes": [
+          "Committing before validation artifacts exist.",
+          "Bundling unrelated user changes.",
+          "Leaving the user to run the final build."
+        ],
+        "platformApplication": "The platform should make finalization explicit: evidence, validation, commit, push, and artifact paths.",
+        "status": "implemented",
+        "priority": "p0"
+      }
+    ],
+    "verificationLadders": [
+      {
+        "id": "workspace-monitor-source-ladder",
+        "label": "Workspace Monitor source ladder",
+        "surface": "tools",
+        "commands": [
+          "corepack pnpm --filter workspace-monitor run collect",
+          "corepack pnpm --filter workspace-monitor run check",
+          "corepack pnpm --filter workspace-monitor test",
+          "corepack pnpm --filter workspace-monitor run build"
+        ],
+        "acceptance": [
+          "The snapshot contains toolUsageIntegration.",
+          "Tool Studio renders the Agent Tool Playbook.",
+          "Static tests cover collector, UI, and snapshot type contracts."
+        ],
+        "ownerFeatureId": "root_tool_management"
+      },
+      {
+        "id": "desktop-package-ladder",
+        "label": "Desktop package ladder",
+        "surface": "desktop",
+        "commands": [
+          "corepack pnpm run desktop:package:internal"
+        ],
+        "acceptance": [
+          "Internal .app and DMG artifacts are generated.",
+          "Public-readiness caveats remain separate from internal runnable artifacts.",
+          "Developer snapshot is restored after customer bundle generation when needed."
+        ],
+        "ownerFeatureId": "agent_work_environment"
+      },
+      {
+        "id": "runtime-resource-ladder",
+        "label": "Runtime resource ladder",
+        "surface": "desktop",
+        "commands": [
+          "lsof -nP -iTCP:<port> -sTCP:LISTEN",
+          "git status --short"
+        ],
+        "acceptance": [
+          "Dev servers and browser sessions started by the task are stopped.",
+          "Long-running processes are named and have cleanup actions.",
+          "Residual risk is recorded when cleanup cannot be proven."
+        ],
+        "ownerFeatureId": "agent_orchestration"
+      }
+    ],
+    "adoptionBacklog": [
+      {
+        "id": "playbook-to-runner",
+        "title": "Turn playbook entries into executable task presets",
+        "targetPaths": [],
+        "smallestAssetType": "project_feature",
+        "status": "queued",
+        "riskControls": [
+          "No destructive git operation preset.",
+          "Install and external mutation steps require explicit approval.",
+          "Every preset records evidence and rollback."
+        ]
+      },
+      {
+        "id": "tool-call-trace-store",
+        "title": "Persist tool-call traces and validation ladders per task run",
+        "targetPaths": [],
+        "smallestAssetType": "tool",
+        "status": "queued",
+        "riskControls": [
+          "Redact secrets and private paths.",
+          "Keep raw logs separate from operator summaries.",
+          "Bound retention and cache size."
+        ]
+      }
+    ]
   },
   "categories": [],
   "publicReview": {

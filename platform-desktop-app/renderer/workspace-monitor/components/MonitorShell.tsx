@@ -7002,6 +7002,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             sourceFileCount={visibleSourceFiles.length}
             runtimeAdapterId={runtimeInitDefaults.adapterId}
             providerConfiguredCount={providerCredentials.configuredCount}
+            toolUsageIntegration={snapshot.toolUsageIntegration}
             onOpenAgents={openAgentsSection}
             onOpenSource={openSourceSection}
             onOpenTerminal={openTerminalDrawer}

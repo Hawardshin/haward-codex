@@ -36,6 +36,8 @@ export type WorkspaceStats = {
   fundamentalImprovementPrinciples?: number;
   fundamentalImprovementPackages?: number;
   fundamentalImprovementFitnessChecks?: number;
+  toolUsagePatterns?: number;
+  toolUsageValidationCommands?: number;
   structurePressurePoints?: number;
   sourceFiles?: number;
   rootFolders: number;
@@ -806,6 +808,61 @@ export type WorkspaceFundamentalImprovementStructure = {
   }>;
 };
 
+export type WorkspaceToolUsageIntegration = {
+  sourcePath: string;
+  summary: {
+    totalPatterns: number;
+    implementedPatterns: number;
+    p0Patterns: number;
+    verificationLadders: number;
+    validationCommands: number;
+    adoptionBacklog: number;
+    referenceLinks: number;
+  };
+  referenceLinks: Array<{
+    id: string;
+    title: string;
+    url: string;
+    path: string;
+    sourceType: string;
+    usedFor: string[];
+    lastChecked: string;
+    reliability: string;
+    limitations: string;
+  }>;
+  patterns: Array<{
+    id: string;
+    label: string;
+    labelKo: string;
+    purpose: string;
+    toolSurfaces: string[];
+    triggerWhen: string[];
+    sequence: string[];
+    evidenceOutputs: string[];
+    validationCommands: string[];
+    failureModes: string[];
+    platformApplication: string;
+    status: string;
+    priority: string;
+  }>;
+  verificationLadders: Array<{
+    id: string;
+    label: string;
+    surface: string;
+    commands: string[];
+    acceptance: string[];
+    ownerFeatureId: string;
+  }>;
+  adoptionBacklog: Array<{
+    id: string;
+    title: string;
+    targetPaths: string[];
+    smallestAssetType: string;
+    status: string;
+    riskControls: string[];
+  }>;
+};
+
 export type WorkspaceSnapshot = {
   schemaVersion: string;
   generatedAt: string;
@@ -841,6 +898,7 @@ export type WorkspaceSnapshot = {
   openSourceFeatureReferences?: WorkspaceOpenSourceFeatureReferences;
   historyInsightLoop?: WorkspaceHistoryInsightLoop;
   fundamentalImprovementStructure?: WorkspaceFundamentalImprovementStructure;
+  toolUsageIntegration?: WorkspaceToolUsageIntegration;
   categories: string[];
   publicReview: {
     status: string;
