@@ -1,0 +1,20 @@
+{
+  "schema_version": "2026-06-02",
+  "request_slug": "native-pipe-runtime-tools",
+  "selected_work_mode": "standard",
+  "selected_install_mode": "developer",
+  "reasons": [
+    "The work changes platform runtime source and dependency state.",
+    "The work touches subprocesses, OS pipes, file handles, and package verification.",
+    "The install is project-local developer improvement setup, not a user-facing global install."
+  ],
+  "blocking_records": [
+    "requirements",
+    "spec",
+    "installation_record",
+    "cli_pipeline_record",
+    "resource_check",
+    "omission_check",
+    "evaluation"
+  ]
+}

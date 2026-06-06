@@ -417,6 +417,10 @@ test("installer shell runtime contract is bundled and enforceable", () => {
     assert.match(lib, new RegExp(providerCredentialCommand));
     assert.ok(contract.runtime_command_surface.provider_credential_commands.includes(providerCredentialCommand));
   }
+  for (const nativePipeCommand of ["run_native_pipe_probe"]) {
+    assert.match(lib, new RegExp(nativePipeCommand));
+    assert.ok(contract.runtime_command_surface.native_pipe_commands.includes(nativePipeCommand));
+  }
   const providerCredentialTarget = contract.data_accumulation_targets.find((target) => target.target_id === "provider_credential_state");
   assert.equal(providerCredentialTarget.record_type, "local_secret_config");
   assert.equal(providerCredentialTarget.directory, "app_config/provider-credentials");
@@ -437,6 +441,7 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   }
   assert.match(cargoToml, /tauri-plugin-dialog/);
   assert.match(cargoToml, /tauri-plugin-updater/);
+  assert.match(cargoToml, /os_pipe = "1\.2\.3"/);
   assert.match(defaultCapability, /dialog:default/);
   assert.match(defaultCapability, /core:window:allow-start-dragging/);
   assert.match(lib, /DialogExt/);

@@ -184,6 +184,13 @@ for (const providerCredentialCommand of [
   );
   failIf(!tauriLib.includes(providerCredentialCommand), `src-tauri/src/lib.rs must include ${providerCredentialCommand}`);
 }
+for (const nativePipeCommand of ["run_native_pipe_probe"]) {
+  failIf(
+    !(contract.runtime_command_surface?.native_pipe_commands ?? []).includes(nativePipeCommand),
+    `runtime_command_surface.native_pipe_commands must include ${nativePipeCommand}`
+  );
+  failIf(!tauriLib.includes(nativePipeCommand), `src-tauri/src/lib.rs must include ${nativePipeCommand}`);
+}
 for (const workspaceHostCommand of [
   "get_desktop_workspace_state",
   "set_desktop_workspace_path",

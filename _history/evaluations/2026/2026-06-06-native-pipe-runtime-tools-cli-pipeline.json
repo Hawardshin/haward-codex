@@ -1,0 +1,127 @@
+{
+  "pipeline_id": "native-pipe-runtime-tools",
+  "purpose": "Add a Rust/Tauri native OS pipe execution layer that connects one producer process stdout to one consumer process stdin without a shell pipeline string.",
+  "work_mode": "standard",
+  "risk_level": "high",
+  "processes": [
+    {
+      "process_id": "native_pipe_producer",
+      "adapter_id": "platform-desktop-app-native-pipe",
+      "command": "producer_command",
+      "args": [
+        "producer_args"
+      ],
+      "cwd": "workspace-root",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 30,
+      "max_output_bytes": 100000,
+      "required": true
+    },
+    {
+      "process_id": "native_pipe_consumer",
+      "adapter_id": "platform-desktop-app-native-pipe",
+      "command": "consumer_command",
+      "args": [
+        "consumer_args"
+      ],
+      "cwd": "workspace-root",
+      "env_keys": [
+        "PATH"
+      ],
+      "timeout_seconds": 30,
+      "max_output_bytes": 100000,
+      "required": true
+    }
+  ],
+  "pipes": [
+    {
+      "pipe_id": "producer_stdout_to_consumer_stdin",
+      "from_process": "native_pipe_producer",
+      "from_stream": "stdout",
+      "to_process": "native_pipe_consumer",
+      "to_stream": "stdin",
+      "mode": "pipe",
+      "required": true
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "native_pipe_probe_report",
+      "kind": "report",
+      "path": "_history/evaluations/2026/2026-06-06-native-pipe-runtime-tools.ko.md",
+      "produced_by": "native_pipe_consumer",
+      "consumed_by": [],
+      "required": true,
+      "max_bytes": 100000,
+      "format": "markdown",
+      "retention_policy": "Retained as the close-out evaluation report for this implementation slice.",
+      "cleanup_policy": "No temporary file is created by direct pipe mode; report retention follows _history policy.",
+      "provenance": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json"
+      ],
+      "validation": [
+        "Focused Rust test executes printf stdout into wc stdin through os_pipe.",
+        "Runtime contract and readiness tests require run_native_pipe_probe.",
+        "Package pipeline compiles the Tauri runtime."
+      ]
+    }
+  ],
+  "execution_policy": {
+    "shell_allowed": false,
+    "argv_arrays_required": true,
+    "explicit_pipe_graph_required": true,
+    "explicit_cwd_required": true,
+    "adapter_allowlist": [
+      "platform-desktop-app-native-pipe"
+    ]
+  },
+  "safety_controls": [
+    "adapter_allowlist",
+    "argv_arguments",
+    "shell_disabled_by_default",
+    "explicit_cwd_boundary",
+    "environment_allowlist",
+    "secret_redaction",
+    "output_redaction",
+    "permission_scope",
+    "fallback_behavior",
+    "audit_logging"
+  ],
+  "resource_controls": {
+    "timeout_policy": "run_native_pipe_probe clamps timeout to 500ms..30000ms.",
+    "max_output_bytes": 100000,
+    "cancellation_policy": "Timeout path kills and waits for both producer and consumer process groups.",
+    "cleanup_policy": "Parent Command builders are dropped after spawn so pipe file descriptors close; reader threads are joined before report return.",
+    "orphan_process_policy": "configure_process_group plus kill_and_wait_child are used for producer and consumer cleanup.",
+    "backpressure_policy": "producer stderr, consumer stdout, and consumer stderr are read concurrently into bounded buffers."
+  },
+  "merge_strategy": "The first implementation exposes a bounded probe command only. Downstream multi-CLI supervisor work must promote accepted stdout/stderr into task-run records or structured artifacts before affecting source changes.",
+  "source_provenance": [
+    "https://docs.rs/os_pipe/latest/os_pipe/",
+    "https://doc.rust-lang.org/std/process/struct.Stdio.html",
+    "https://v2.tauri.app/plugin/shell/",
+    "_history/web-searches/2026/2026-06-06-native-pipe-runtime-tools.ko.md",
+    "platform-desktop-app/specs/2026-06-06-native-pipe-runtime-tools/spec.ko.md"
+  ],
+  "plan_evidence": [
+    "The user asked for stronger native tools for pipes and direct terminal control.",
+    "portable-pty already covers interactive terminal control; os_pipe fills direct process pipe graph execution.",
+    "The platform CLI pipeline workflow requires explicit process nodes and pipe edges instead of shell strings."
+  ],
+  "verification": [
+    "cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml native_pipe_probe_connects_producer_stdout_to_consumer_stdin",
+    "cd agent-platform && PYTHONPATH=src python3 -m agent_platform.cli check-cli-pipeline ../_history/evaluations/2026/2026-06-06-native-pipe-runtime-tools-cli-pipeline.json"
+  ],
+  "rollback_plan": [
+    "Remove run_native_pipe_probe and NativePipeProbeRequest/Report from lib.rs.",
+    "Run cargo remove os_pipe from platform-desktop-app/src-tauri.",
+    "Remove runtime contract/readiness/test references and regenerate Cargo.lock."
+  ],
+  "notes": [
+    "Direct pipe mode does not create an intermediate file artifact.",
+    "This is a bounded probe/execution foundation, not the final multi-lane supervisor UI."
+  ]
+}

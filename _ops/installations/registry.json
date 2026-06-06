@@ -792,6 +792,35 @@
       "rollback_path": "Remove tauri-plugin-opener and tauri-plugin-clipboard-manager from Cargo.toml; regenerate Cargo.lock; remove plugin init, provider opener extension call, native clipboard commands, capability permissions, renderer native clipboard helper path, and terminal/provider smoke script; rerun Rust/frontend/platform/package checks.",
       "installation_record_path": "_history/installations/2026/2026-06-06-tauri-opener-clipboard-plugins.ko.md",
       "commit": "pending"
+    },
+    {
+      "id": "2026-06-06-native-pipe-runtime-tools-os-pipe",
+      "date": "2026-06-06",
+      "status": "installed",
+      "name": "os_pipe",
+      "scope": "project",
+      "owning_project": "platform-desktop-app",
+      "package_manager": "cargo",
+      "install_command": "cd platform-desktop-app/src-tauri && cargo add os_pipe@1.2.3",
+      "environment_path": "platform-desktop-app/src-tauri",
+      "dependency_record_paths": [
+        "platform-desktop-app/src-tauri/Cargo.toml",
+        "platform-desktop-app/src-tauri/Cargo.lock"
+      ],
+      "version_or_lock_status": "os_pipe@1.2.3 recorded in Cargo.toml and Cargo.lock.",
+      "security_review": "Project-local Rust dependency only. Used for explicit OS pipe graph execution without shell string pipelines; runtime command applies command resolution, cwd boundary, timeout, output bounds, and cleanup.",
+      "license_review": "cargo info reports os_pipe license MIT.",
+      "verification": [
+        "cargo tree --manifest-path platform-desktop-app/src-tauri/Cargo.toml -i os_pipe@1.2.3: direct dependency confirmed",
+        "cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml native_pipe_probe_connects_producer_stdout_to_consumer_stdin: passed",
+        "cargo check --manifest-path platform-desktop-app/src-tauri/Cargo.toml: passed",
+        "pnpm --dir platform-desktop-app test: passed",
+        "pnpm --dir platform-desktop-app check: passed",
+        "pnpm --dir platform-desktop-app package:internal: passed with app/DMG build and verification"
+      ],
+      "rollback_path": "Run cd platform-desktop-app/src-tauri && cargo remove os_pipe; remove run_native_pipe_probe, NativePipeProbeRequest/Report, pipe helper tests, runtime contract/test references, regenerate Cargo.lock, and rerun Rust/frontend/platform/package checks.",
+      "installation_record_path": "_history/installations/2026/2026-06-06-native-pipe-runtime-tools-os-pipe.ko.md",
+      "commit": "pending"
     }
   ]
 }

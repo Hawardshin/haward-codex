@@ -1,0 +1,96 @@
+{
+  "task": "Native pipe runtime tools resource check.",
+  "work_mode": "standard",
+  "runtime_context": [
+    "rust",
+    "tauri",
+    "std::process",
+    "os_pipe",
+    "reader threads"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "pipe-file-descriptor-leak",
+      "category": "file_handle",
+      "description": "Parent process can keep pipe file descriptors open after spawning producer or consumer, causing downstream stdin EOF to never arrive.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Command builders are dropped immediately after spawn so parent-held pipe descriptors are released.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs: drop(producer_command) and drop(consumer_command)",
+        "Focused Rust test initially timed out until Command builder drop was added, then passed."
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "child-process-orphan",
+      "category": "process",
+      "description": "Producer or consumer can hang and remain running after the Tauri command returns.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "wait_native_pipe_children tracks both children and timeout kills/waits both process groups through kill_and_wait_child.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs: wait_native_pipe_children",
+        "platform-desktop-app/src-tauri/src/lib.rs: configure_process_group"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "stdout-stderr-deadlock",
+      "category": "stream",
+      "description": "Pipe or stderr buffers can fill if the parent waits without reading process output.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Producer stderr, consumer stdout, and consumer stderr are read on separate threads while child wait runs.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs: producer_stderr_handle",
+        "platform-desktop-app/src-tauri/src/lib.rs: consumer_stdout_handle",
+        "platform-desktop-app/src-tauri/src/lib.rs: consumer_stderr_handle"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "native-pipe-process-lifecycle",
+      "resource": "producer and consumer child processes",
+      "create_path": "run_native_pipe_probe_processes spawns producer and consumer with std::process::Command",
+      "cleanup_path": "wait_native_pipe_children waits for both children or kills/waits both on timeout",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml native_pipe_probe_connects_producer_stdout_to_consumer_stdin: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "native-pipe-reader-lifecycle",
+      "resource": "producer/consumer output reader threads",
+      "create_path": "thread::spawn read_limited for producer stderr, consumer stdout, consumer stderr",
+      "cleanup_path": "join all reader handles before returning NativePipeProbeReport",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs: producer_stderr_handle.join / consumer_stdout_handle.join / consumer_stderr_handle.join"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "native-pipe-focused-smoke",
+      "metric": "pipe completion under timeout",
+      "tool": "cargo test focused Rust unit test",
+      "threshold": "printf | wc -c completes within 2500ms and returns status passed",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml native_pipe_probe_connects_producer_stdout_to_consumer_stdin: passed"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "Full package pipeline validation is recorded separately in the task validation and evaluation files."
+  ]
+}

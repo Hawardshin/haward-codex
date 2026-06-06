@@ -591,6 +591,9 @@
       "start_cli_adapter_session",
       "start_cli_task_pipeline"
     ],
+    "native_pipe_commands": [
+      "run_native_pipe_probe"
+    ],
     "native_pty_commands": [
       "start_native_pty_terminal",
       "poll_native_pty_terminal_session",

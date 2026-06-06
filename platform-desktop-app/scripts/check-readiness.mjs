@@ -169,6 +169,7 @@ for (const commandName of [
   "run_desktop_git_action",
   "start_cli_adapter_session",
   "start_cli_task_pipeline",
+  "run_native_pipe_probe",
   "poll_cli_adapter_session",
   "list_cli_adapter_sessions",
   "write_cli_adapter_stdin",
@@ -243,6 +244,9 @@ for (const requiredPhrase of [
 }
 if (!tauriCargo.includes('libc = "0.2.186"')) {
   failures.push("src-tauri/Cargo.toml must declare libc for Unix process-group cleanup");
+}
+if (!tauriCargo.includes('os_pipe = "1.2.3"')) {
+  failures.push("src-tauri/Cargo.toml must declare os_pipe for native OS pipe graph execution");
 }
 for (const requiredPhrase of [
   "CliTaskRunRecordReport",

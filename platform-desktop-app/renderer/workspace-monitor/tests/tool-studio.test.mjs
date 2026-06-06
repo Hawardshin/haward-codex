@@ -386,6 +386,12 @@ test("Desktop Runtime exposes an open-source-informed Agent CLI cockpit", () => 
   assert.match(monitorShell, /row\.activeAdapterSessions\.length/);
   assert.match(monitorShell, /row\.adapterTaskRuns\.length/);
   assert.match(monitorShell, /row\.adapterDecisionItems/);
+  assert.match(tauriCargo, /os_pipe = "1\.2\.3"/);
+  assert.match(tauriLib, /use os_pipe::pipe/);
+  assert.match(tauriLib, /struct NativePipeProbeRequest/);
+  assert.match(tauriLib, /fn run_native_pipe_probe/);
+  assert.match(tauriLib, /run_native_pipe_probe,/);
+  assert.match(tauriLib, /pipe_kind: "os_pipe_stdout_to_stdin"/);
   assert.match(css, /\.agent-cli-cockpit \{/);
   assert.match(css, /\.agent-cli-pattern-strip \{/);
   assert.match(css, /\.agent-cli-cockpit-grid \{/);

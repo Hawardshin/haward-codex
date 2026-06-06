@@ -1,0 +1,92 @@
+{
+  "task": "Native pipe runtime tools omission check.",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "install-native-pipe-tool",
+      "description": "Install or add a stronger native tool for process pipes/direct terminal control.",
+      "source": "user_request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/Cargo.toml",
+        "_history/installations/2026/2026-06-06-native-pipe-runtime-tools-os-pipe.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "implement-native-pipe-command",
+      "description": "Expose a native runtime function that directly controls process pipes instead of only saving settings.",
+      "source": "requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "resource-cleanup",
+      "description": "Bound subprocess, pipe, stream, and output lifecycle risks.",
+      "source": "resource_policy",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/evaluations/2026/2026-06-06-native-pipe-runtime-tools-resource.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/src-tauri/Cargo.toml",
+      "purpose": "Project-local Rust dependency manifest.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/src-tauri/src/lib.rs",
+      "purpose": "Native pipe command implementation.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-06-native-pipe-runtime-tools/spec.ko.md",
+      "purpose": "Spec-driven implementation record.",
+      "required": true
+    },
+    {
+      "path": "_history/installations/2026/2026-06-06-native-pipe-runtime-tools-os-pipe.ko.md",
+      "purpose": "Installation audit record.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "focused-rust-pipe-test",
+      "description": "Focused Rust test proves producer stdout reaches consumer stdin through os_pipe.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml native_pipe_probe_connects_producer_stdout_to_consumer_stdin: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "pipeline-record",
+      "description": "CLI pipeline record exists for process graph and pipe edge.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "_history/evaluations/2026/2026-06-06-native-pipe-runtime-tools-cli-pipeline.json"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Full package verification must still be run before final close-out.",
+    "Generated workspace snapshots may be touched by collect/package and should not be accidentally staged unless intentionally included."
+  ],
+  "notes": [
+    "This omission check covers implementation and records; final validation file records full command results."
+  ]
+}

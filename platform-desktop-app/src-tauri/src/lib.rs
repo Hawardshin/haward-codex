@@ -1,3 +1,4 @@
+use os_pipe::pipe;
 use portable_pty::{native_pty_system, CommandBuilder, MasterPty, PtySize};
 use rayon::prelude::*;
 use rayon::{ThreadPool, ThreadPoolBuilder};
@@ -420,6 +421,44 @@ struct CliTaskPipelineInitReport {
     max_output_bytes: usize,
     lanes: Vec<CliTaskPipelineLaneReport>,
     pipes: Vec<CliPipeEdgeReport>,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct NativePipeProbeRequest {
+    producer_command: String,
+    producer_args: Option<Vec<String>>,
+    consumer_command: String,
+    consumer_args: Option<Vec<String>>,
+    working_dir: Option<String>,
+    timeout_ms: Option<u64>,
+    max_output_bytes: Option<usize>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct NativePipeProbeReport {
+    status: String,
+    pipe_kind: String,
+    producer_command: String,
+    producer_args: Vec<String>,
+    producer_resolved_path: String,
+    producer_exit_code: Option<i32>,
+    producer_stderr: String,
+    consumer_command: String,
+    consumer_args: Vec<String>,
+    consumer_resolved_path: String,
+    consumer_exit_code: Option<i32>,
+    consumer_stdout: String,
+    consumer_stderr: String,
+    working_dir: String,
+    duration_ms: u128,
+    timeout_ms: u64,
+    timed_out: bool,
+    bounded: bool,
+    max_output_bytes: usize,
+    output_truncated: bool,
+    error: Option<String>,
 }
 
 #[derive(Serialize)]
@@ -1179,6 +1218,26 @@ struct ProcessOutput {
     duration_ms: u128,
 }
 
+struct NativePipeExecution {
+    producer_command: String,
+    producer_args: Vec<String>,
+    producer_path: PathBuf,
+    consumer_command: String,
+    consumer_args: Vec<String>,
+    consumer_path: PathBuf,
+    working_dir: PathBuf,
+    timeout: Duration,
+    timeout_ms: u64,
+    max_output_bytes: usize,
+}
+
+struct NativePipeWaitResult {
+    producer_exit_code: Option<i32>,
+    consumer_exit_code: Option<i32>,
+    timed_out: bool,
+    error: Option<String>,
+}
+
 struct TaskRunPersistPaths {
     record_path: String,
     stdout_log_path: String,
@@ -1482,6 +1541,10 @@ const MAX_PROVIDER_MODEL_CHARS: usize = 140;
 const MAX_TERMINAL_COMMAND_CHARS: usize = 512;
 const MAX_TERMINAL_STARTUP_COMMAND_CHARS: usize = 2_000;
 const MAX_TERMINAL_QUICK_COMMANDS: usize = 8;
+const NATIVE_PIPE_PROBE_TIMEOUT_MS: u64 = 5_000;
+const MAX_NATIVE_PIPE_PROBE_TIMEOUT_MS: u64 = 30_000;
+const MAX_NATIVE_PIPE_ARGS: usize = 32;
+const MAX_NATIVE_PIPE_ARG_CHARS: usize = 2_000;
 const OPENAI_BASE_URL: &str = "https://api.openai.com/v1";
 const ANTHROPIC_BASE_URL: &str = "https://api.anthropic.com";
 const GEMINI_BASE_URL: &str = "https://generativelanguage.googleapis.com";
@@ -1923,6 +1986,43 @@ fn check_runtime_terminal_setup(
             Some(errors.join(" "))
         },
     }
+}
+
+#[tauri::command]
+fn run_native_pipe_probe(
+    app: AppHandle,
+    request: NativePipeProbeRequest,
+) -> Result<NativePipeProbeReport, String> {
+    let working_dir = resolve_workspace_dir(&app, request.working_dir.as_deref())?;
+    let producer_command = normalize_native_pipe_command(&request.producer_command, "producer")?;
+    let consumer_command = normalize_native_pipe_command(&request.consumer_command, "consumer")?;
+    let producer_args = normalize_native_pipe_args(request.producer_args)?;
+    let consumer_args = normalize_native_pipe_args(request.consumer_args)?;
+    let producer_path = resolve_command(&producer_command)
+        .ok_or_else(|| format!("Producer command '{producer_command}' was not found on PATH."))?;
+    let consumer_path = resolve_command(&consumer_command)
+        .ok_or_else(|| format!("Consumer command '{consumer_command}' was not found on PATH."))?;
+    let timeout_ms = request
+        .timeout_ms
+        .unwrap_or(NATIVE_PIPE_PROBE_TIMEOUT_MS)
+        .clamp(500, MAX_NATIVE_PIPE_PROBE_TIMEOUT_MS);
+    let max_output_bytes = request
+        .max_output_bytes
+        .unwrap_or(MAX_HEALTH_OUTPUT_BYTES)
+        .clamp(1_000, MAX_SESSION_OUTPUT_BYTES);
+
+    run_native_pipe_probe_processes(NativePipeExecution {
+        producer_command,
+        producer_args,
+        producer_path,
+        consumer_command,
+        consumer_args,
+        consumer_path,
+        working_dir,
+        timeout: Duration::from_millis(timeout_ms),
+        timeout_ms,
+        max_output_bytes,
+    })
 }
 
 #[tauri::command]
@@ -3748,6 +3848,7 @@ pub fn run() {
             run_cli_adapter_health,
             run_all_cli_adapter_health,
             check_runtime_terminal_setup,
+            run_native_pipe_probe,
             list_cli_task_pipeline_presets,
             list_cli_task_run_records,
             read_cli_task_run_record,
@@ -4105,6 +4206,256 @@ fn run_bounded_command_with_cwd(
         stderr,
         duration_ms: started.elapsed().as_millis(),
     })
+}
+
+fn run_native_pipe_probe_processes(
+    execution: NativePipeExecution,
+) -> Result<NativePipeProbeReport, String> {
+    let started = Instant::now();
+    let (pipe_reader, pipe_writer) =
+        pipe().map_err(|error| format!("Failed to open native OS pipe: {error}"))?;
+
+    let mut producer_command = Command::new(&execution.producer_path);
+    producer_command
+        .args(&execution.producer_args)
+        .current_dir(&execution.working_dir)
+        .stdin(Stdio::null())
+        .stdout(Stdio::from(pipe_writer))
+        .stderr(Stdio::piped());
+    configure_process_group(&mut producer_command);
+    apply_native_pipe_env_allowlist(&mut producer_command);
+
+    let mut producer = producer_command
+        .spawn()
+        .map_err(|error| format!("Failed to spawn native pipe producer: {error}"))?;
+    drop(producer_command);
+    let producer_stderr = match producer.stderr.take() {
+        Some(stderr) => stderr,
+        None => {
+            let _ = kill_and_wait_child(&mut producer);
+            return Err("Failed to capture producer stderr.".to_string());
+        }
+    };
+
+    let mut consumer_command = Command::new(&execution.consumer_path);
+    consumer_command
+        .args(&execution.consumer_args)
+        .current_dir(&execution.working_dir)
+        .stdin(Stdio::from(pipe_reader))
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped());
+    configure_process_group(&mut consumer_command);
+    apply_native_pipe_env_allowlist(&mut consumer_command);
+
+    let mut consumer = match consumer_command.spawn() {
+        Ok(child) => child,
+        Err(error) => {
+            let _ = kill_and_wait_child(&mut producer);
+            return Err(format!("Failed to spawn native pipe consumer: {error}"));
+        }
+    };
+    drop(consumer_command);
+    let consumer_stdout = match consumer.stdout.take() {
+        Some(stdout) => stdout,
+        None => {
+            let _ = kill_and_wait_child(&mut producer);
+            let _ = kill_and_wait_child(&mut consumer);
+            return Err("Failed to capture consumer stdout.".to_string());
+        }
+    };
+    let consumer_stderr = match consumer.stderr.take() {
+        Some(stderr) => stderr,
+        None => {
+            let _ = kill_and_wait_child(&mut producer);
+            let _ = kill_and_wait_child(&mut consumer);
+            return Err("Failed to capture consumer stderr.".to_string());
+        }
+    };
+
+    let max_output_bytes = execution.max_output_bytes;
+    let producer_stderr_handle =
+        thread::spawn(move || read_limited(producer_stderr, max_output_bytes));
+    let consumer_stdout_handle =
+        thread::spawn(move || read_limited(consumer_stdout, max_output_bytes));
+    let consumer_stderr_handle =
+        thread::spawn(move || read_limited(consumer_stderr, max_output_bytes));
+    let timeout = execution.timeout;
+    let (tx, rx) = mpsc::channel();
+
+    thread::spawn(move || {
+        let wait_result = wait_native_pipe_children(producer, consumer, started, timeout);
+        let _ = tx.send(wait_result);
+    });
+
+    let wait_result = rx
+        .recv_timeout(timeout + Duration::from_millis(500))
+        .unwrap_or_else(|error| NativePipeWaitResult {
+            producer_exit_code: None,
+            consumer_exit_code: None,
+            timed_out: true,
+            error: Some(format!("Failed to wait for native pipe processes: {error}")),
+        });
+    let producer_stderr_bytes = producer_stderr_handle
+        .join()
+        .map_err(|_| "Failed to join producer stderr reader.".to_string())?;
+    let consumer_stdout_bytes = consumer_stdout_handle
+        .join()
+        .map_err(|_| "Failed to join consumer stdout reader.".to_string())?;
+    let consumer_stderr_bytes = consumer_stderr_handle
+        .join()
+        .map_err(|_| "Failed to join consumer stderr reader.".to_string())?;
+
+    let output_truncated = producer_stderr_bytes.len() >= execution.max_output_bytes
+        || consumer_stdout_bytes.len() >= execution.max_output_bytes
+        || consumer_stderr_bytes.len() >= execution.max_output_bytes;
+    let status = if wait_result.timed_out {
+        "timed_out"
+    } else if wait_result.error.is_some() {
+        "error"
+    } else if wait_result.producer_exit_code == Some(0) && wait_result.consumer_exit_code == Some(0)
+    {
+        "passed"
+    } else {
+        "failed"
+    };
+
+    Ok(NativePipeProbeReport {
+        status: status.to_string(),
+        pipe_kind: "os_pipe_stdout_to_stdin".to_string(),
+        producer_command: execution.producer_command,
+        producer_args: execution.producer_args,
+        producer_resolved_path: path_to_string(&execution.producer_path),
+        producer_exit_code: wait_result.producer_exit_code,
+        producer_stderr: String::from_utf8_lossy(&producer_stderr_bytes)
+            .trim()
+            .to_string(),
+        consumer_command: execution.consumer_command,
+        consumer_args: execution.consumer_args,
+        consumer_resolved_path: path_to_string(&execution.consumer_path),
+        consumer_exit_code: wait_result.consumer_exit_code,
+        consumer_stdout: String::from_utf8_lossy(&consumer_stdout_bytes)
+            .trim()
+            .to_string(),
+        consumer_stderr: String::from_utf8_lossy(&consumer_stderr_bytes)
+            .trim()
+            .to_string(),
+        working_dir: path_to_string(&execution.working_dir),
+        duration_ms: started.elapsed().as_millis(),
+        timeout_ms: execution.timeout_ms,
+        timed_out: wait_result.timed_out,
+        bounded: true,
+        max_output_bytes: execution.max_output_bytes,
+        output_truncated,
+        error: wait_result.error,
+    })
+}
+
+fn wait_native_pipe_children(
+    mut producer: Child,
+    mut consumer: Child,
+    started: Instant,
+    timeout: Duration,
+) -> NativePipeWaitResult {
+    let mut producer_exit_code = None;
+    let mut consumer_exit_code = None;
+    let mut producer_done = false;
+    let mut consumer_done = false;
+    let mut error = None;
+
+    loop {
+        if !producer_done {
+            match producer.try_wait() {
+                Ok(Some(status)) => {
+                    producer_exit_code = status.code();
+                    producer_done = true;
+                }
+                Ok(None) => {}
+                Err(wait_error) => {
+                    let exit_code = kill_and_wait_child(&mut producer);
+                    producer_exit_code = exit_code;
+                    producer_done = true;
+                    error = Some(format!("Failed to wait for producer: {wait_error}"));
+                }
+            }
+        }
+        if !consumer_done {
+            match consumer.try_wait() {
+                Ok(Some(status)) => {
+                    consumer_exit_code = status.code();
+                    consumer_done = true;
+                }
+                Ok(None) => {}
+                Err(wait_error) => {
+                    let exit_code = kill_and_wait_child(&mut consumer);
+                    consumer_exit_code = exit_code;
+                    consumer_done = true;
+                    error = Some(format!("Failed to wait for consumer: {wait_error}"));
+                }
+            }
+        }
+
+        if producer_done && consumer_done {
+            return NativePipeWaitResult {
+                producer_exit_code,
+                consumer_exit_code,
+                timed_out: false,
+                error,
+            };
+        }
+        if started.elapsed() >= timeout {
+            if !producer_done {
+                producer_exit_code = kill_and_wait_child(&mut producer);
+            }
+            if !consumer_done {
+                consumer_exit_code = kill_and_wait_child(&mut consumer);
+            }
+            return NativePipeWaitResult {
+                producer_exit_code,
+                consumer_exit_code,
+                timed_out: true,
+                error,
+            };
+        }
+        thread::sleep(Duration::from_millis(20));
+    }
+}
+
+fn normalize_native_pipe_command(value: &str, role: &str) -> Result<String, String> {
+    let command = value
+        .trim()
+        .chars()
+        .take(MAX_TERMINAL_COMMAND_CHARS)
+        .collect::<String>();
+    if command.is_empty() {
+        Err(format!("Native pipe {role} command is required."))
+    } else {
+        Ok(command)
+    }
+}
+
+fn normalize_native_pipe_args(args: Option<Vec<String>>) -> Result<Vec<String>, String> {
+    let args = args.unwrap_or_default();
+    if args.len() > MAX_NATIVE_PIPE_ARGS {
+        return Err(format!(
+            "Native pipe args are limited to {MAX_NATIVE_PIPE_ARGS} items."
+        ));
+    }
+    Ok(args
+        .into_iter()
+        .map(|arg| {
+            arg.chars()
+                .take(MAX_NATIVE_PIPE_ARG_CHARS)
+                .collect::<String>()
+        })
+        .collect())
+}
+
+fn apply_native_pipe_env_allowlist(command: &mut Command) {
+    let path_env = env::var_os("PATH");
+    command.env_clear();
+    if let Some(path_env) = path_env {
+        command.env("PATH", path_env);
+    }
 }
 
 fn poll_session_locked(
@@ -8421,16 +8772,23 @@ fn normalize_provider_secret_for_definition(
     Ok(secret)
 }
 
-fn validate_provider_secret_shape(definition: &ProviderCredentialDefinition, secret: &str) -> Result<(), String> {
+fn validate_provider_secret_shape(
+    definition: &ProviderCredentialDefinition,
+    secret: &str,
+) -> Result<(), String> {
     if provider_is_local_http(definition) {
         return Ok(());
     }
     let normalized = secret.trim();
-    if !normalized.chars().all(|character| {
-        character.is_ascii_alphanumeric()
-            || matches!(character, '-' | '_' )
-    }) && !matches!(definition.provider_id, "google-gemini") {
-        return Err(format!("{}은(는) 허용되지 않는 문자가 포함되어 있습니다.", definition.label));
+    if !normalized
+        .chars()
+        .all(|character| character.is_ascii_alphanumeric() || matches!(character, '-' | '_'))
+        && !matches!(definition.provider_id, "google-gemini")
+    {
+        return Err(format!(
+            "{}은(는) 허용되지 않는 문자가 포함되어 있습니다.",
+            definition.label
+        ));
     }
 
     if definition.provider_id == "openai" {
@@ -8441,7 +8799,10 @@ fn validate_provider_secret_shape(definition: &ProviderCredentialDefinition, sec
             ));
         }
         if normalized.len() < 20 {
-            return Err(format!("{} 키 길이가 너무 짧습니다. OpenAI 공식 API 키를 확인하세요.", definition.label));
+            return Err(format!(
+                "{} 키 길이가 너무 짧습니다. OpenAI 공식 API 키를 확인하세요.",
+                definition.label
+            ));
         }
         return Ok(());
     }
@@ -8457,9 +8818,12 @@ fn validate_provider_secret_shape(definition: &ProviderCredentialDefinition, sec
     }
 
     if definition.provider_id == "google-gemini" {
-        if !(normalized.starts_with("AIza") || (normalized.len() >= 30 && normalized.len() <= 80 && normalized
-            .chars()
-            .all(|character| character.is_ascii_alphanumeric() || character == '-' || character == '_')))
+        if !(normalized.starts_with("AIza")
+            || (normalized.len() >= 30
+                && normalized.len() <= 80
+                && normalized.chars().all(|character| {
+                    character.is_ascii_alphanumeric() || character == '-' || character == '_'
+                })))
         {
             return Err(format!(
                 "{}은(는) Google AI Studio API 키 형식이 아닙니다. Vertex AI OAuth/ADC 토큰은 별도 운영 흐름입니다.",
@@ -11387,4 +11751,37 @@ fn is_executable_file(path: &PathBuf) -> bool {
 #[cfg(not(unix))]
 fn is_executable_file(path: &PathBuf) -> bool {
     path.is_file()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[cfg(unix)]
+    #[test]
+    fn native_pipe_probe_connects_producer_stdout_to_consumer_stdin() {
+        let producer_path = resolve_command("printf").expect("printf must be available on Unix");
+        let consumer_path = resolve_command("wc").expect("wc must be available on Unix");
+        let working_dir = env::current_dir().expect("current dir must resolve");
+
+        let report = run_native_pipe_probe_processes(NativePipeExecution {
+            producer_command: "printf".to_string(),
+            producer_args: vec!["hello".to_string()],
+            producer_path,
+            consumer_command: "wc".to_string(),
+            consumer_args: vec!["-c".to_string()],
+            consumer_path,
+            working_dir,
+            timeout: Duration::from_millis(2_500),
+            timeout_ms: 2_500,
+            max_output_bytes: 20_000,
+        })
+        .expect("native pipe probe should run");
+
+        assert_eq!(report.status, "passed");
+        assert_eq!(report.producer_exit_code, Some(0));
+        assert_eq!(report.consumer_exit_code, Some(0));
+        assert_eq!(report.consumer_stdout.trim(), "5");
+        assert_eq!(report.pipe_kind, "os_pipe_stdout_to_stdin");
+    }
 }
