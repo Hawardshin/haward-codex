@@ -1,20 +1,16 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 
+import { SnapshotLoadingShell } from "@/components/SnapshotLoadingShell";
 import { readInitialSectionFromParts } from "@/lib/section-location.mjs";
 import type { WorkspaceSnapshot } from "@/lib/snapshot";
 
-type MonitorShellProps = {
-  snapshot: WorkspaceSnapshot;
-  initialSection?: string;
-};
+const MonitorShellBoundary = lazy(() =>
+  import("./MonitorShellBoundary").then((module) => ({ default: module.MonitorShellBoundary }))
+);
 
-const MonitorShell = dynamic<MonitorShellProps>(() => import("./MonitorShell").then((module) => module.MonitorShell), {
-  ssr: false,
-  loading: () => <SnapshotLoadingShell detail="Loading workspace monitor" />
-});
+const STARTUP_PREWARM_MIN_MS = 850;
 
 type SnapshotState =
   | { status: "loading"; snapshot: null; error: "" }
@@ -44,7 +40,7 @@ export function SnapshotLoader() {
 
     async function loadSnapshot() {
       try {
-        const snapshot = await Promise.race([
+        const snapshotPromise = Promise.race([
           fetchPublicSnapshot(controller),
           new Promise<WorkspaceSnapshot>((_, reject) => {
             timeoutId = setTimeout(() => {
@@ -53,6 +49,10 @@ export function SnapshotLoader() {
               reject(new Error("Snapshot request timed out."));
             }, 7000);
           })
+        ]);
+        const [snapshot] = await Promise.all([
+          snapshotPromise,
+          waitForStartupPrewarmWindow()
         ]);
         if (!canceled) {
           setState({ status: "ready", snapshot, error: "" });
@@ -95,7 +95,11 @@ export function SnapshotLoader() {
   }, []);
 
   if (state.status === "ready") {
-    return <MonitorShell snapshot={state.snapshot} initialSection={initialSection} />;
+    return (
+      <Suspense fallback={<SnapshotLoadingShell detail="Preparing warmed work surfaces" />}>
+        <MonitorShellBoundary snapshot={state.snapshot} initialSection={initialSection} />
+      </Suspense>
+    );
   }
 
   if (state.status === "error") {
@@ -112,6 +116,12 @@ function readInitialSectionFromLocation() {
   return readInitialSectionFromParts(window.location.search, window.location.hash);
 }
 
+function waitForStartupPrewarmWindow() {
+  return new Promise<void>((resolve) => {
+    setTimeout(resolve, STARTUP_PREWARM_MIN_MS);
+  });
+}
+
 async function fetchPublicSnapshot(controller: AbortController | null) {
   const snapshotUrl = new URL("workspace-snapshot.json", window.location.href);
   const requestOptions: RequestInit = { cache: "no-cache" };
@@ -123,17 +133,4 @@ async function fetchPublicSnapshot(controller: AbortController | null) {
     throw new Error(`Snapshot request failed with ${response.status}`);
   }
   return (await response.json()) as WorkspaceSnapshot;
-}
-
-function SnapshotLoadingShell({ detail, status = "loading" }: { detail: string; status?: "loading" | "error" }) {
-  return (
-    <main className="snapshot-loading-shell">
-      <div>
-        <p className="eyebrow">Workspace Monitor</p>
-        <h1>{status === "error" ? "Snapshot unavailable" : "Loading monitor"}</h1>
-        <p>{detail}</p>
-      </div>
-      <span className={`snapshot-loading-indicator ${status}`} />
-    </main>
-  );
 }

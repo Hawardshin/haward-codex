@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T01:30:54.126Z",
+  "generatedAt": "2026-06-06T02:03:25.040Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -12,12 +12,12 @@
     "tasks": 71,
     "completedTasks": 71,
     "documents": 650,
-    "requirements": 488,
+    "requirements": 493,
     "evaluations": 16,
     "webSearches": 15,
     "timingRecords": 14,
     "historyDays": 1,
-    "adminHistoryDocuments": 2572,
+    "adminHistoryDocuments": 2578,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7337,6 +7337,36 @@
       "sourcePath": "platform-desktop-app/docs/requirements/2026-06-04-provider-direct-agent-work.ko.md"
     },
     {
+      "id": "REQ-ATP-001",
+      "requirement": "앱 시작 시 Agent, Desktop, Eval, Source, Tools를 포함한 모든 주요 section을 resident set에 포함해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-agent-tab-startup-prewarm.ko.md"
+    },
+    {
+      "id": "REQ-ATP-002",
+      "requirement": "사용자가 첫 Agent 탭을 누르기 전에 탭 panel mount 비용을 startup warmup으로 이동해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-agent-tab-startup-prewarm.ko.md"
+    },
+    {
+      "id": "REQ-ATP-003",
+      "requirement": "초기 로딩은 더 길어질 수 있지만 loading shell에서 멈추지 않아야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-agent-tab-startup-prewarm.ko.md"
+    },
+    {
+      "id": "REQ-ATP-004",
+      "requirement": "desktop:dev 가 쓰는 Next dev hydration 경로는 static export 설정 때문에 멈추면 안 된다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-agent-tab-startup-prewarm.ko.md"
+    },
+    {
+      "id": "REQ-ATP-005",
+      "requirement": "변경 후 build와 내부 packaging을 자동 실행해야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-agent-tab-startup-prewarm.ko.md"
+    },
+    {
       "id": "REQ-PDA-126",
       "requirement": "설정 화면은 AI provider 연결을 공식 로그인, API key 발급, 앱 저장, 모델 확인, 작업 기본값 선택 순서로 한 화면에서 처리할 수 있어야 한다.",
       "priority": "must",
@@ -7603,6 +7633,214 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "최종 평가",
+      "excerpt": "최종 평가 결과 요구사항 충족: 완료. 구현, renderer 검증, browser smoke, internal package build를 완료했다. 성능 결과: Static smoke: ready 3948ms, Agent switch 244ms. Dev smoke: ready 4702ms, Agent switch 219ms. Section audit under 6x CPU throttle: p95 1413.4ms, limit 1600ms. 판단 사용자 요구처럼 초기 로딩을 더 길게 써서 Agen",
+      "html": "<p>최종 평가 결과 요구사항 충족: 완료. 구현, renderer 검증, browser smoke, internal package build를 완료했다. 성능 결과: Static smoke: ready 3948ms, Agent switch 244ms. Dev smoke: ready 4702ms, Agent switch 219ms. Section audit under 6x CPU throttle: p95 1413.4ms, limit 1600ms. 판단 사용자 요구처럼 초기 로딩을 더 길게 써서 Agent 탭 첫 진입 비용을 줄였다. 모든 탭을 DOM resident로 유지하되, inactive heavy WebGL surface가 과하게 실행</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 942,
+      "updatedAt": "2026-06-06T02:03:14.739Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-agent-tab-startup-prewarm-json",
+      "path": "_history/work-timings/2026/2026-06-06-agent-tab-startup-prewarm.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Agent Tab Startup Prewarm",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"work\": \"agent tab startup prewarm\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\" }, { \"phase\": \"local inspection\", \"status\": \"completed\" }, { \"phase\": \"implementation\", \"status\": \"completed\" }, { \"phase\": \"renderer validation\", \"status\":",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work&quot;: &quot;agent tab startup prewarm&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;local inspection&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;renderer validation&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;desktop packaging&quot;, &quot;status&quot;: &quot;completed&quot; } , &quot;obser</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 572,
+      "updatedAt": "2026-06-06T02:03:14.739Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-agent-tab-startup-prewarm-tasks-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-agent-tab-startup-prewarm/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록",
+      "excerpt": "작업 목록 x Snapshot loader lightweight boundary 분리 x 모든 주요 section startup resident 등록 x shell warmup overlay 추가 x Next dev/prod config 분리 x static/dev browser smoke 검증 x section latency audit 예산 갱신 x internal desktop package build 완료",
+      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] Snapshot loader lightweight boundary 분리</li>\n<li>[x] 모든 주요 section startup resident 등록</li>\n<li>[x] shell warmup overlay 추가</li>\n<li>[x] Next dev/prod config 분리</li>\n<li>[x] static/dev browser smoke 검증</li>\n<li>[x] section latency audit 예산 갱신</li>\n<li>[x] internal desktop package build 완료</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 311,
+      "updatedAt": "2026-06-06T02:03:14.738Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-agent-tab-startup-prewarm-validation-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-agent-tab-startup-prewarm/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증",
+      "excerpt": "검증 완료 corepack pnpm filter workspace monitor run check : 통과 corepack pnpm filter workspace monitor test : 통과, 72 tests corepack pnpm filter workspace monitor run build : 통과 corepack pnpm filter workspace monitor run perf:budget : 통과 node scripts/audit section switch latency.mjs h",
+      "html": "<h1>검증</h1>\n<h2>완료</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 72 tests</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: 통과</li>\n<li><code>node scripts/audit-section-switch-latency.mjs http://127.0.0.1:3010/#section-overview</code>: 통과, p95 1413.4ms under 6x CPU throttle</li>\n<li>Static browser smoke: ready 3948ms, Agent switch 244ms, 12 mounted sections</li>\n<li>Dev browser smoke: ready 4702ms, Agent switch 219ms, 12 mounted sections</li>\n<li>Codex in-app Browser smoke: ready true, active overview, 12 mounted sections</li>\n</ul>\n<h2>Packaging</h2>\n<ul>\n<li><code>corepack pnpm run desktop:package:internal</code>: 통과</li>\n<li>생성:</li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n<li><code>codesign --verify --deep --strict</code>: 통과</li>\n<li><code>hdiutil verify</code>: 통과</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1003,
+      "updatedAt": "2026-06-06T02:03:14.738Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 Trace",
+      "excerpt": "요청 결과 Trace 요청: Agent 탭 첫 진입 지연을 시작 로딩으로 이동. 결과: 초기 ready를 약 4초대로 늘리고 Agent 탭 전환을 약 0.22 0.24초로 낮춤. 주요 구현: MonitorShell.tsx SnapshotLoader.tsx MonitorShellBoundary.tsx SnapshotLoadingShell.tsx next.config.mjs 검증: workspace monitor check/test/build/perf static/dev Playwright smoke",
+      "html": "<p>요청 결과 Trace 요청: Agent 탭 첫 진입 지연을 시작 로딩으로 이동. 결과: 초기 ready를 약 4초대로 늘리고 Agent 탭 전환을 약 0.22 0.24초로 낮춤. 주요 구현: MonitorShell.tsx SnapshotLoader.tsx MonitorShellBoundary.tsx SnapshotLoadingShell.tsx next.config.mjs 검증: workspace monitor check/test/build/perf static/dev Playwright smoke in app Browser smoke 후속: internal package build와 commit/push.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 500,
+      "updatedAt": "2026-06-06T02:00:59.366Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약",
+      "excerpt": "사용자 요청 요약 시작할 때 Agent 탭 첫 로딩이 오래 걸리므로, 초기 로딩 시간을 조금 더 길게 잡고 모든 탭을 처음에 띄워 둔 것처럼 만들어 탭 이동 체감을 개선해 달라는 요청.",
+      "html": "<p>사용자 요청 요약 시작할 때 Agent 탭 첫 로딩이 오래 걸리므로, 초기 로딩 시간을 조금 더 길게 잡고 모든 탭을 처음에 띄워 둔 것처럼 만들어 탭 이동 체감을 개선해 달라는 요청.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 239,
+      "updatedAt": "2026-06-06T02:00:59.366Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약",
+      "excerpt": "작업 요약 SnapshotLoader 를 lightweight bootstrap으로 유지하고 heavy MonitorShell 을 별도 dynamic boundary로 분리했다. startup resident panel limit을 12로 늘려 모든 주요 section을 초기 resident set에 포함했다. 2.6초 shell warmup overlay를 추가해 사용자가 조작하기 전 탭 mount/prewarm 비용을 먼저 쓰게 했다. production static export 설정을 dev",
+      "html": "<p>작업 요약 SnapshotLoader 를 lightweight bootstrap으로 유지하고 heavy MonitorShell 을 별도 dynamic boundary로 분리했다. startup resident panel limit을 12로 늘려 모든 주요 section을 초기 resident set에 포함했다. 2.6초 shell warmup overlay를 추가해 사용자가 조작하기 전 탭 mount/prewarm 비용을 먼저 쓰게 했다. production static export 설정을 dev 경로와 분리해 next dev hydration 고착을 해결했다. static/dev/in app Browser smoke, check/tes</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 557,
+      "updatedAt": "2026-06-06T02:00:59.366Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-agent-tab-startup-prewarm-traceability-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-agent-tab-startup-prewarm/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability",
+      "excerpt": "Traceability | 요구사항 | 구현 | 검증 | | | | | | REQ ATP 001 | MonitorShell.tsx resident section config | tool studio.test.mjs , browser smoke | | REQ ATP 002 | startupSurfaceReadyMinMs , startup warmup overlay | static/dev smoke, section audit | | REQ ATP 003 | SnapshotLoader.tsx , Mon",
+      "html": "<h1>Traceability</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-ATP-001</td><td><code>MonitorShell.tsx</code> resident section config</td><td><code>tool-studio.test.mjs</code>, browser smoke</td></tr><tr><td>REQ-ATP-002</td><td><code>startupSurfaceReadyMinMs</code>, startup warmup overlay</td><td>static/dev smoke, section audit</td></tr><tr><td>REQ-ATP-003</td><td><code>SnapshotLoader.tsx</code>, <code>MonitorShellBoundary.tsx</code>, <code>SnapshotLoadingShell.tsx</code></td><td>snapshot loader tests, browser smoke</td></tr><tr><td>REQ-ATP-004</td><td><code>next.config.mjs</code> production-only static export</td><td>dev smoke</td></tr><tr><td>REQ-ATP-005</td><td>build/package validation</td><td>validation/evaluation records</td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 562,
+      "updatedAt": "2026-06-06T02:00:59.365Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-agent-tab-startup-prewarm-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-agent-tab-startup-prewarm.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Agent 탭 시작 선로딩 요구사항",
+      "excerpt": "Agent 탭 시작 선로딩 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | REQ ATP 001 | 앱 시작 시 Agent, Desktop, Eval, Source, Tools를 포함한 모든 주요 section을 resident set에 포함해야 한다. | must | tool studio.test.mjs , browser smoke | | REQ ATP 002 | 사용자가 첫 Agent 탭을 누르기 전에 탭 panel mount 비용을 startup warmup으로 ",
+      "html": "<h1>Agent 탭 시작 선로딩 요구사항</h1>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-ATP-001</td><td>앱 시작 시 Agent, Desktop, Eval, Source, Tools를 포함한 모든 주요 section을 resident set에 포함해야 한다.</td><td>must</td><td><code>tool-studio.test.mjs</code>, browser smoke</td></tr><tr><td>REQ-ATP-002</td><td>사용자가 첫 Agent 탭을 누르기 전에 탭 panel mount 비용을 startup warmup으로 이동해야 한다.</td><td>must</td><td>Playwright smoke, section latency audit</td></tr><tr><td>REQ-ATP-003</td><td>초기 로딩은 더 길어질 수 있지만 loading shell에서 멈추지 않아야 한다.</td><td>must</td><td>dev/static browser smoke</td></tr><tr><td>REQ-ATP-004</td><td><code>desktop:dev</code>가 쓰는 Next dev hydration 경로는 static export 설정 때문에 멈추면 안 된다.</td><td>must</td><td>dev server smoke</td></tr><tr><td>REQ-ATP-005</td><td>변경 후 build와 내부 packaging을 자동 실행해야 한다.</td><td>must</td><td>validation/evaluation 기록</td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 907,
+      "updatedAt": "2026-06-06T02:00:59.364Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-agent-tab-startup-prewarm-plan-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-agent-tab-startup-prewarm/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "구현 계획",
+      "excerpt": "구현 계획 1. SnapshotLoader 에서 heavy monitor dynamic import를 분리한다. 2. MonitorShellBoundary 와 shared loading shell을 추가한다. 3. startup resident section limit을 12로 늘리고 모든 section을 초기 resident set에 포함한다. 4. shell 내부 warmup overlay로 초기 마운트 비용을 사용자가 조작하기 전으로 이동한다. 5. dev hydration을 위해 stati",
+      "html": "<h1>구현 계획</h1>\n<p>1. <code>SnapshotLoader</code>에서 heavy monitor dynamic import를 분리한다.</p>\n<p>2. <code>MonitorShellBoundary</code>와 shared loading shell을 추가한다.</p>\n<p>3. startup resident section limit을 12로 늘리고 모든 section을 초기 resident set에 포함한다.</p>\n<p>4. shell 내부 warmup overlay로 초기 마운트 비용을 사용자가 조작하기 전으로 이동한다.</p>\n<p>5. dev hydration을 위해 static export config를 production에만 적용한다.</p>\n<p>6. check/test/build/browser smoke/perf/package를 실행한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 521,
+      "updatedAt": "2026-06-06T02:00:59.364Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-agent-tab-startup-prewarm-spec-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-agent-tab-startup-prewarm/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Agent 탭 시작 선로딩 Spec",
+      "excerpt": "Agent 탭 시작 선로딩 Spec 목표 시작 로딩 시간을 의도적으로 더 사용해 모든 주요 탭을 먼저 resident/mounted 상태로 만들고, Agent 탭 첫 진입 지연을 줄인다. 범위 SnapshotLoader lightweight bootstrap 분리 heavy MonitorShell dynamic boundary 분리 12개 section startup resident set shell 내부 2.6초 warmup overlay dev/prod Next config 분리 section",
+      "html": "<h1>Agent 탭 시작 선로딩 Spec</h1>\n<h2>목표</h2>\n<p>시작 로딩 시간을 의도적으로 더 사용해 모든 주요 탭을 먼저 resident/mounted 상태로 만들고, Agent 탭 첫 진입 지연을 줄인다.</p>\n<h2>범위</h2>\n<ul>\n<li><code>SnapshotLoader</code> lightweight bootstrap 분리</li>\n<li>heavy <code>MonitorShell</code> dynamic boundary 분리</li>\n<li>12개 section startup resident set</li>\n<li>shell 내부 2.6초 warmup overlay</li>\n<li>dev/prod Next config 분리</li>\n<li>section latency audit 예산 현실화</li>\n</ul>\n<h2>제외</h2>\n<ul>\n<li>Agent 3D scene 자체 로직 교체</li>\n<li>Tauri Rust command 변경</li>\n<li>추가 dependency 설치</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 565,
+      "updatedAt": "2026-06-06T02:00:59.364Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Agent 탭 시작 선로딩 웹 검색 기록",
+      "excerpt": "Agent 탭 시작 선로딩 웹 검색 기록 날짜: 2026 06 06 요청 요약: 시작 시점의 로딩 시간을 더 쓰더라도 Agent 탭을 포함한 주요 탭을 먼저 띄워 첫 탭 진입 지연을 줄인다. 검색 React lazy Suspense preload code splitting official docs preloading tabs Next.js app router dynamic import lazy loading official docs preload Tauri v2 webview performance",
+      "html": "<p>Agent 탭 시작 선로딩 웹 검색 기록 날짜: 2026 06 06 요청 요약: 시작 시점의 로딩 시간을 더 쓰더라도 Agent 탭을 포함한 주요 탭을 먼저 띄워 첫 탭 진입 지연을 줄인다. 검색 React lazy Suspense preload code splitting official docs preloading tabs Next.js app router dynamic import lazy loading official docs preload Tauri v2 webview performance preload app startup official docs 확인한 출처 React lazy : https://react.dev/referen</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1178,
+      "updatedAt": "2026-06-06T02:00:59.362Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-desktop-dev-run-fix-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-desktop-dev-run-fix/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업: desktop dev/run fix",
+      "excerpt": "작업: desktop dev/run fix x Web first 공식 문서 확인 x memory bootstrap 확인 x README 실행 실패 재현 x beforeDevCommand 경로 수정 x updater plugin conditional registration 적용 x 실행 scripts와 open helper 추가 x README/runbook/doctor/readiness contract 갱신 x desktop:dev 실행 smoke x dev process cleanup x des",
+      "html": "<h1>작업: desktop dev/run fix</h1>\n<ul>\n<li>[x] Web-first 공식 문서 확인</li>\n<li>[x] memory bootstrap 확인</li>\n<li>[x] README 실행 실패 재현</li>\n<li>[x] <code>beforeDevCommand</code> 경로 수정</li>\n<li>[x] updater plugin conditional registration 적용</li>\n<li>[x] 실행 scripts와 open helper 추가</li>\n<li>[x] README/runbook/doctor/readiness contract 갱신</li>\n<li>[x] <code>desktop:dev</code> 실행 smoke</li>\n<li>[x] dev process cleanup</li>\n<li>[x] <code>desktop:run:internal -- --dry-run</code></li>\n<li>[x] doctor, Rust check, desktop tests</li>\n<li>[x] collect/check/workspace tests/build/package</li>\n<li>[x] post-package smoke</li>\n<li>[x] commit and push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 559,
+      "updatedAt": "2026-06-06T01:32:08.361Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "platform-desktop-app-specs-2026-06-06-desktop-dev-run-fix-validation-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-desktop-dev-run-fix/validation.ko.md",
       "category": "project-spec",
@@ -7681,22 +7919,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-06-desktop-dev-run-fix-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-06-desktop-dev-run-fix/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업: desktop dev/run fix",
-      "excerpt": "작업: desktop dev/run fix x Web first 공식 문서 확인 x memory bootstrap 확인 x README 실행 실패 재현 x beforeDevCommand 경로 수정 x updater plugin conditional registration 적용 x 실행 scripts와 open helper 추가 x README/runbook/doctor/readiness contract 갱신 x desktop:dev 실행 smoke x dev process cleanup x des",
-      "html": "<h1>작업: desktop dev/run fix</h1>\n<ul>\n<li>[x] Web-first 공식 문서 확인</li>\n<li>[x] memory bootstrap 확인</li>\n<li>[x] README 실행 실패 재현</li>\n<li>[x] <code>beforeDevCommand</code> 경로 수정</li>\n<li>[x] updater plugin conditional registration 적용</li>\n<li>[x] 실행 scripts와 open helper 추가</li>\n<li>[x] README/runbook/doctor/readiness contract 갱신</li>\n<li>[x] <code>desktop:dev</code> 실행 smoke</li>\n<li>[x] dev process cleanup</li>\n<li>[x] <code>desktop:run:internal -- --dry-run</code></li>\n<li>[x] doctor, Rust check, desktop tests</li>\n<li>[x] collect/check/workspace tests/build/package</li>\n<li>[x] post-package smoke</li>\n<li>[ ] commit and push</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 559,
-      "updatedAt": "2026-06-06T01:28:41.480Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     },
     {
       "id": "history-user-requests-2026-2026-06-06-desktop-dev-run-fix-ko-md",
@@ -10243,70 +10465,6 @@
       "workspaceArea": "_history/request-traces"
     },
     {
-      "id": "history-work-summaries-2026-2026-06-06-agent-cli-cockpit-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-agent-cli-cockpit.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: Agent CLI Cockpit",
-      "excerpt": "작업 요약: Agent CLI Cockpit 2026 06 06에 platform desktop app 의 Desktop Runtime에 Agent CLI Cockpit을 추가했다. Agentify Desktop, ClawX, CLI Agent Orchestrator, OpenLoaf를 직접 clone해 확인한 뒤, 기존 CLI adapter/session/provider/task run/decision 상태를 한 화면에 묶는 control plane UI를 구현했다. 검증은 workspace m",
-      "html": "<p>작업 요약: Agent CLI Cockpit 2026 06 06에 platform desktop app 의 Desktop Runtime에 Agent CLI Cockpit을 추가했다. Agentify Desktop, ClawX, CLI Agent Orchestrator, OpenLoaf를 직접 clone해 확인한 뒤, 기존 CLI adapter/session/provider/task run/decision 상태를 한 화면에 묶는 control plane UI를 구현했다. 검증은 workspace monitor test/check/perf/build, platform desktop app test/check, Playwright smoke,</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 692,
-      "updatedAt": "2026-06-05T21:59:44.775Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-agent-cli-cockpit-json",
-      "path": "_history/work-timings/2026/2026-06-06-agent-cli-cockpit.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Agent Cli Cockpit",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"phases\": { \"phase\": \"web search and direct repo exploration\", \"status\": \"completed\", \"notes\": \"Searched similar desktop agent platforms and inspected four cloned repositories.\" }, { \"phase\": \"implementation\", \"status\": \"",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web search and direct repo exploration&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Searched similar desktop agent platforms and inspected four cloned repositories.&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Added Agent CLI Cockpit UI, CSS, and regression test.&quot; }, </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 918,
-      "updatedAt": "2026-06-05T21:59:44.775Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-agent-cli-cockpit-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-agent-cli-cockpit.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Agent CLI Cockpit",
-      "excerpt": "사용자 요청 요약: Agent CLI Cockpit 날짜: 2026 06 06 대상: platform desktop app/ 요약 사용자는 유사 agent desktop/platform 오픈소스를 깊게 리서치하고, 직접 탐구가 끝나면 그 결과를 현재 플랫폼 기능으로 추가하라고 요청했다. 이전 맥락에서는 데스크톱 앱의 CPU/RAM/native resource 활용, 느린 탭 이동, 불편한 코드 편집/설정 UI, 기본 버튼/dropdown 개선, AI 로그인/CLI 설정 쉽게 만들기, termina",
-      "html": "<p>사용자 요청 요약: Agent CLI Cockpit 날짜: 2026 06 06 대상: platform desktop app/ 요약 사용자는 유사 agent desktop/platform 오픈소스를 깊게 리서치하고, 직접 탐구가 끝나면 그 결과를 현재 플랫폼 기능으로 추가하라고 요청했다. 이전 맥락에서는 데스크톱 앱의 CPU/RAM/native resource 활용, 느린 탭 이동, 불편한 코드 편집/설정 UI, 기본 버튼/dropdown 개선, AI 로그인/CLI 설정 쉽게 만들기, terminal/process/pipe lifecycle 관리가 반복 요구됐다. 적용한 요구 외부 오픈소스 repo를 직접 clone해 확인했다. 기존 플랫</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 887,
-      "updatedAt": "2026-06-05T21:59:44.774Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-agent-cli-cockpit-open-source-direct-exploration-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-agent-cli-cockpit-open-source-direct-exploration.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: Agent CLI Cockpit 오픈소스 직접 탐구",
-      "excerpt": "웹 검색 기록: Agent CLI Cockpit 오픈소스 직접 탐구 날짜: 2026 06 06 작업: 유사 오픈소스 딥 리서치 후 직접 탐구 기반 기능 추가 대상 프로젝트: platform desktop app/ 검색 질의 open source AI agent desktop app Codex Claude OpenCode MCP GitHub 2026 open source coding agent desktop UI CLI orchestration GitHub ClawX Agentify Desktop ",
-      "html": "<p>웹 검색 기록: Agent CLI Cockpit 오픈소스 직접 탐구 날짜: 2026 06 06 작업: 유사 오픈소스 딥 리서치 후 직접 탐구 기반 기능 추가 대상 프로젝트: platform desktop app/ 검색 질의 open source AI agent desktop app Codex Claude OpenCode MCP GitHub 2026 open source coding agent desktop UI CLI orchestration GitHub ClawX Agentify Desktop OpenLoaf OpenHands Goose Cline open source agent workbench terminal browser diff</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2134,
-      "updatedAt": "2026-06-05T21:59:44.773Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-agent-cli-cockpit-traceability-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-agent-cli-cockpit/traceability.ko.md",
       "category": "project-spec",
@@ -10401,38 +10559,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-open-source-agent-platform-landscape-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-open-source-agent-platform-landscape.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: 오픈소스 Agent Platform Landscape",
-      "excerpt": "평가: 오픈소스 Agent Platform Landscape 판정 충족. 현재 플랫폼 특징을 로컬 제품 레지스트리와 Tauri 설정 기준으로 정리했고, 유사 오픈소스를 여러 제품군으로 나눠 대량 조사했다. 증거 현재 플랫폼 특징 11개를 Agent Workspace Platform , Agent Core, CLI orchestration, work environment, development environment, root tool management, work visibility, learnin",
-      "html": "<p>평가: 오픈소스 Agent Platform Landscape 판정 충족. 현재 플랫폼 특징을 로컬 제품 레지스트리와 Tauri 설정 기준으로 정리했고, 유사 오픈소스를 여러 제품군으로 나눠 대량 조사했다. 증거 현재 플랫폼 특징 11개를 Agent Workspace Platform , Agent Core, CLI orchestration, work environment, development environment, root tool management, work visibility, learning/evaluation loop, observability support layer로 정리했다. 60개 이상의 오픈소스/인접 프로젝트를 codi</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1984,
-      "updatedAt": "2026-06-05T21:47:17.741Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-open-source-agent-platform-landscape-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-open-source-agent-platform-landscape.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: 오픈소스 Agent Platform Landscape",
-      "excerpt": "요청 결과 추적: 오픈소스 Agent Platform Landscape 요청 현재 플랫폼의 특징을 뽑아내고, 유사한 오픈소스를 매우 많이 조사한다. 결과 현재 플랫폼을 설치형 데스크톱 Agent Workspace Platform으로 정리했다. Agent Core, CLI orchestration, root tool management, work visibility, development/work environment, learning/evaluation loop를 핵심 특징으로 추출했다. 60개 ",
-      "html": "<p>요청 결과 추적: 오픈소스 Agent Platform Landscape 요청 현재 플랫폼의 특징을 뽑아내고, 유사한 오픈소스를 매우 많이 조사한다. 결과 현재 플랫폼을 설치형 데스크톱 Agent Workspace Platform으로 정리했다. Agent Core, CLI orchestration, root tool management, work visibility, development/work environment, learning/evaluation loop를 핵심 특징으로 추출했다. 60개 이상의 직접/인접 오픈소스를 제품군별로 조사해 비교했다. 현재 플랫폼의 차별화 방향과 다음 구현 후보를 도출했다. 산출물 research/top</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1405,
-      "updatedAt": "2026-06-05T21:47:17.741Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-fundamental-improvement-structure-tasks-ko-md",
@@ -17905,102 +18031,6 @@
       "historyDate": "2026-06-04",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-existing-search-agent-run-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-existing-search-agent-run/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적: 기존 검색 에이전트 실행",
-      "excerpt": "추적: 기존 검색 에이전트 실행 | 요구사항 | 구현 | 검증 | | | | | | REQ PDA 066 | SearchAgentWorkChatPanel , run search agent command item | readiness test, browser smoke | | REQ PDA 067 | renderSearchAgentPrompt | TypeScript check, readiness token | | REQ PDA 068 | RuntimeLaunchRequest , start cli a",
-      "html": "<h1>추적: 기존 검색 에이전트 실행</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-066</td><td><code>SearchAgentWorkChatPanel</code>, <code>run-search-agent</code> command item</td><td>readiness test, browser smoke</td></tr><tr><td>REQ-PDA-067</td><td><code>renderSearchAgentPrompt</code></td><td>TypeScript check, readiness token</td></tr><tr><td>REQ-PDA-068</td><td><code>RuntimeLaunchRequest</code>, <code>start_cli_adapter_session(taskKind)</code>, <code>research_insight_agent</code></td><td>Rust <code>cargo check</code>, task-run readiness assertions</td></tr><tr><td>REQ-PDA-069</td><td>Agents 화면에서 work chat panel을 Agent Factory보다 먼저 렌더링</td><td>browser smoke, source review</td></tr><tr><td>REQ-PDA-070</td><td>Desktop quick start, command palette entry</td><td>browser smoke, readiness token</td></tr><tr><td>REQ-PDA-071</td><td><code>SearchAgentChatMessage</code>, <code>agent-chat-thread</code>, <code>작업 시작</code> composer</td><td>browser smoke, readiness token</td></tr></tbody></table>\n<h2>관련 파일</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/src-tauri/src/lib.rs</code></li>\n<li><code>platform-desktop-app/configs/product-feature-registry.json</code></li>\n<li><code>platform-desktop-app/configs/user-flow-registry.json</code></li>\n<li><code>platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json</code></li>\n<li><code>platform-desktop-app/tests/readiness.test.mjs</code></li>\n<li><code>platform-desktop-app/scripts/check-readiness.mjs</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1307,
-      "updatedAt": "2026-06-03T16:01:43.878Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-04-existing-search-agent-run-en-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-04-existing-search-agent-run.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Existing Search Agent Run Requirements",
-      "excerpt": "Existing Search Agent Run Requirements | ID | Requirement | Priority | Verification | | | | | | | REQ PDA 066 | The desktop app shall let users run the existing research insight planner agent without finding config files or typing shell commands manually. | must | Agents screen S",
-      "html": "<h1>Existing Search Agent Run Requirements</h1>\n<table><thead><tr><th>ID</th><th>Requirement</th><th>Priority</th><th>Verification</th></tr></thead><tbody><tr><td>REQ-PDA-066</td><td>The desktop app shall let users run the existing <code>research-insight-planner-agent</code> without finding config files or typing shell commands manually.</td><td>must</td><td>Agents screen <code>SearchAgentWorkChatPanel</code>, command palette</td></tr><tr><td>REQ-PDA-067</td><td>The run form shall structure objective, search questions, search channels, capture targets, and notes into an initial input compatible with <code>research-insight-plan-template</code>.</td><td>must</td><td><code>renderSearchAgentPrompt</code></td></tr><tr><td>REQ-PDA-068</td><td>Runs shall start in a platform-owned bottom terminal lane, with output and questions accumulated in the task-run store and decision inbox.</td><td>must</td><td><code>start_cli_adapter_session</code>, <code>taskKind=research_insight_agent</code></td></tr><tr><td>REQ-PDA-069</td><td>Existing search-agent execution shall appear before new-agent creation so users can run what already exists before creating another agent.</td><td>should</td><td>Agents screen order, readiness token</td></tr><tr><td>REQ-PDA-070</td><td>Search-agent execution shall also be reachable from desktop quick start and the command palette.</td><td>should</td><td>Desktop quick start, <code>run-search-agent</code> command item</td></tr><tr><td>REQ-PDA-071</td><td>The search agent&#039;s default user surface shall be a work chat, not a launch-only form, and users shall start the real work there.</td><td>must</td><td><code>SearchAgentWorkChatPanel</code>, <code>SearchAgentChatMessage</code>, <code>Start Work</code></td></tr></tbody></table>\n<h2>Decision</h2>\n<ul>\n<li>Reuse the existing guest adapter session path instead of adding a separate runtime.</li>\n<li>Add <code>taskKind=research_insight_agent</code> and <code>research_insight_agent_pipe</code> so accumulated run records are easy to identify.</li>\n<li>The user entry point is the chat composer; the bottom terminal is the supporting surface for long output and raw logs.</li>\n<li>Preserve <code>capability_missing</code> behavior for optional CLI adapters.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1821,
-      "updatedAt": "2026-06-03T16:01:27.607Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-04-existing-search-agent-run-ko-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-04-existing-search-agent-run.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "기존 검색 에이전트 실행 요구사항",
-      "excerpt": "기존 검색 에이전트 실행 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | REQ PDA 066 | 데스크톱 앱은 이미 정의된 research insight planner agent 를 사용자가 설정 파일이나 셸 명령을 직접 찾지 않고 실행할 수 있게 해야 한다. | must | Agents 화면 SearchAgentWorkChatPanel , command palette | | REQ PDA 067 | 검색 에이전트 실행은 목표, 검색 질문, 검색 채널, 저장 위치, ",
-      "html": "<h1>기존 검색 에이전트 실행 요구사항</h1>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-066</td><td>데스크톱 앱은 이미 정의된 <code>research-insight-planner-agent</code>를 사용자가 설정 파일이나 셸 명령을 직접 찾지 않고 실행할 수 있게 해야 한다.</td><td>must</td><td>Agents 화면 <code>SearchAgentWorkChatPanel</code>, command palette</td></tr><tr><td>REQ-PDA-067</td><td>검색 에이전트 실행은 목표, 검색 질문, 검색 채널, 저장 위치, 실행 메모를 구조화해 <code>research-insight-plan-template</code> 기준의 초기 입력으로 만들어야 한다.</td><td>must</td><td><code>renderSearchAgentPrompt</code></td></tr><tr><td>REQ-PDA-068</td><td>실행은 플랫폼 런타임이 소유하는 하단 터미널 lane에서 시작되어야 하며, 결과와 질문은 task-run store와 decision inbox로 축적되어야 한다.</td><td>must</td><td><code>start_cli_adapter_session</code>, <code>taskKind=research_insight_agent</code></td></tr><tr><td>REQ-PDA-069</td><td>검색 에이전트는 새 에이전트 생성 UI보다 앞에 노출되어야 하며, 사용자는 “만들기” 전에 “기존 에이전트 실행”을 먼저 볼 수 있어야 한다.</td><td>should</td><td>Agents 화면 순서, readiness token</td></tr><tr><td>REQ-PDA-070</td><td>검색 에이전트 실행은 데스크톱 quick start와 command palette에서도 접근 가능해야 한다.</td><td>should</td><td>Desktop quick start, <code>run-search-agent</code> command item</td></tr><tr><td>REQ-PDA-071</td><td>검색 에이전트의 기본 사용자 표면은 실행 폼이 아니라 작업 채팅이어야 하며, 사용자는 그 채팅에서 실제 작업을 시작해야 한다.</td><td>must</td><td><code>SearchAgentWorkChatPanel</code>, <code>SearchAgentChatMessage</code>, <code>작업 시작</code></td></tr></tbody></table>\n<h2>결정</h2>\n<ul>\n<li>새 별도 런타임을 만들지 않고 기존 guest adapter 세션 실행 경로를 재사용한다.</li>\n<li>단, 실행 기록을 찾기 쉽도록 <code>taskKind=research_insight_agent</code>와 <code>research_insight_agent_pipe</code>를 추가한다.</li>\n<li>사용자 시작점은 채팅 composer이며, 하단 터미널은 작업 로그와 장기 출력 확인용 보조 표면이다.</li>\n<li>누락된 선택 CLI는 전체 앱을 막지 않고 기존 <code>capability_missing</code> 처리 흐름을 유지한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2109,
-      "updatedAt": "2026-06-03T16:01:27.607Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-existing-search-agent-run-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-existing-search-agent-run/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "계획: 기존 검색 에이전트 실행",
-      "excerpt": "계획: 기존 검색 에이전트 실행 | 단계 | 내용 | 상태 | | | | | | 1 | 웹 first intake와 기존 검색 에이전트 설정 확인 | done | | 2 | 런타임 세션 기록에 검색 에이전트 taskKind 를 남길 수 있게 확장 | done | | 3 | Agents 화면과 command palette에 실행 UI 추가 | done | | 4 | 제품/사용자 흐름/런타임 계약 레지스트리 갱신 | done | | 5 | 요구사항, 스펙, 검증, 히스토리 기록 | done | | 6",
-      "html": "<h1>계획: 기존 검색 에이전트 실행</h1>\n<table><thead><tr><th>단계</th><th>내용</th><th>상태</th></tr></thead><tbody><tr><td>1</td><td>웹-first intake와 기존 검색 에이전트 설정 확인</td><td>done</td></tr><tr><td>2</td><td>런타임 세션 기록에 검색 에이전트 <code>taskKind</code>를 남길 수 있게 확장</td><td>done</td></tr><tr><td>3</td><td>Agents 화면과 command palette에 실행 UI 추가</td><td>done</td></tr><tr><td>4</td><td>제품/사용자 흐름/런타임 계약 레지스트리 갱신</td><td>done</td></tr><tr><td>5</td><td>요구사항, 스펙, 검증, 히스토리 기록</td><td>done</td></tr><tr><td>6</td><td>타입/Rust/Node/browser 검증 후 커밋 및 push</td><td>done</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 550,
-      "updatedAt": "2026-06-03T15:51:03.492Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-architecture-installer-shell-runtime-contract-ko-md",
-      "path": "platform-desktop-app/docs/architecture/installer-shell-runtime-contract.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "Installer Shell Runtime Contract",
-      "excerpt": "Installer Shell Runtime Contract 결정 platform desktop app/ 의 중심 목적은 설치 프로그램과 설치된 데스크톱 앱 shell/runtime을 만드는 것이다. 이 shell은 이 저장소를 느슨한 문서 묶음으로 해석하지 않고, 번들된 runtime contracts/installer shell runtime contract.json 을 먼저 읽은 뒤 작업을 시작한다. 구조 runtime contracts/installer shell runtime contrac",
-      "html": "<h1>Installer Shell Runtime Contract</h1>\n<h2>결정</h2>\n<p><code>platform-desktop-app/</code>의 중심 목적은 설치 프로그램과 설치된 데스크톱 앱 shell/runtime을 만드는 것이다. 이 shell은 이 저장소를 느슨한 문서 묶음으로 해석하지 않고, 번들된 <code>runtime-contracts/installer-shell-runtime-contract.json</code>을 먼저 읽은 뒤 작업을 시작한다.</p>\n<h2>구조</h2>\n<ul>\n<li><code>runtime-contracts/installer-shell-runtime-contract.json</code>: 설치 shell이 읽는 source of truth. required read targets, enforcement gates, data accumulation targets를 정의한다.</li>\n<li><code>runtime-contracts/installer-shell-bootstrap.ko.md</code>: shell bootstrap 순서를 사람이 읽는 형태로 설명한다.</li>\n<li><code>scripts/check-runtime-contract.mjs</code>: 계약 파일, Tauri resource mapping, Rust command, 필수 gate, 데이터 축적 대상이 빠지지 않았는지 검사한다.</li>\n<li><code>src-tauri/tauri.conf.json</code>: runtime contract와 bootstrap 문서를 app resource로 번들한다.</li>\n<li><code>src-tauri/src/lib.rs</code>: <code>get_installer_shell_runtime_contract</code> command로 bundle resource 또는 개발 repo 경로에서 계약을 읽는다.</li>\n</ul>\n<h2>실행 원칙</h2>\n<p>설치 앱이 직접 띄우는 shell/runtime은 platform-first host다. Codex CLI, Claude Code CLI, Gemini CLI, OpenCode, Claw Code 같은 외부 도구는 guest adapter lane이며, 누락되면 <code>capability_missing</code>으로 degrade한다. task state, decision inbox, evidence, validation, evaluation, UI authority는 플랫폼이 소유한다.</p>\n<h2>데이터 축적</h2>\n<p>작업 결과는 shell output으로만 남기지 않는다. 사용자 요청, request trace, decision inbox, task run store, structured evidence, validation/evaluation, work timing, support diagnostic bundle로 구조화해 축적한다. 각 기록은 provenance와 retention/visibility boundary를 가져야 한다.</p>\n<p>사용자 화면이 읽는 축적 데이터 overview는 raw store scan만으로 끝나지 않는다. <code>get_accumulated_data_overview</code>는 <code>app_data/runtime-data/indexes/accumulated-data-overview.v1.json</code> versioned manifest를 저장하고, Desktop UI는 schema version, storage format version, migration status, index path를 표시한다.</p>\n<h2>배포 경계</h2>\n<p>계약은 Tauri resource로 번들되지만 <code>_private/</code>, <code>outputs/</code>, <code>.git/</code>, 개발 source tree 전체는 번들 대상이 아니다. public-ready 주장은 signing, updater, clean-machine smoke, privacy/dependency review가 끝난 뒤에만 가능하다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2424,
-      "updatedAt": "2026-06-03T15:26:40.464Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-02-multi-cli-orchestration-desktop-spec-en-md",
-      "path": "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.en.md",
-      "category": "project-spec",
-      "language": "en",
-      "title": "Multi CLI Orchestration Desktop Spec",
-      "excerpt": "Multi CLI Orchestration Desktop Spec Goal Define the product contract for an installable desktop app that can configure Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, and Claw Code as optional capabilities, supervise multiple CLIs, and manage questions, decisions, output, sour",
-      "html": "<h1>Multi-CLI Orchestration Desktop Spec</h1>\n<h2>Goal</h2>\n<p>Define the product contract for an installable desktop app that can configure Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, and Claw Code as optional capabilities, supervise multiple CLIs, and manage questions, decisions, output, source editing, and data accumulation as platform state.</p>\n<h2>Requirements</h2>\n<ul>\n<li><code>REQ-WS-085</code></li>\n<li><code>PDA-REQ-013</code> - <code>PDA-REQ-027</code></li>\n<li><code>PDA-UX-009</code> - <code>PDA-UX-020</code></li>\n</ul>\n<h2>Scope</h2>\n<ul>\n<li>Concrete AI CLI adapter candidates in <code>cli-adapter-registry.json</code></li>\n<li>AI CLI orchestration flow in <code>user-flow-registry.json</code></li>\n<li>Multi-CLI supervisor release gate in <code>desktop-distribution-registry.json</code></li>\n<li>Project-local architecture document</li>\n<li>Readiness/test reinforcement for the new documents</li>\n<li>Tauri backend allowlisted CLI detection and bounded health/version checks</li>\n<li>Tauri backend task pipe preset listing and task-intake-based multi-CLI lane init command</li>\n<li>Workspace Monitor Desktop tab and browser fallback</li>\n<li>Tauri backend pipe-based CLI session start/poll/stdin/defer/cancel commands and human decision inbox append on defer</li>\n<li>Tauri backend human decision inbox list/answer commands</li>\n<li>Tauri backend linked active CLI session answer-and-resume command</li>\n<li>Tauri backend workspace-scoped source file read/write with backup</li>\n<li>Workspace Monitor CLI setup guide, work-mode presets, decision inbox answer UI, CLI session console, and scoped source editor</li>\n<li>Workspace Monitor command palette, capability center cards, run board, process graph, terminal event rail, grouped decision inbox, decision replay, source diff review, and evidence/promotion surface</li>\n<li>Workspace Monitor multi-file source editing draft queue, direct path open, indexed file browser, dirty state, save current, save all, revert, close, and backup result surface</li>\n<li>Platform-first host runtime contract: the platform launches first and external AI CLIs attach only as guest adapter lanes</li>\n<li>Pipe-first task init contract: one task intake creates stdin init, stdout/stderr capture, decision inbox pipe, and merge gate edges for several optional CLI lanes</li>\n</ul>\n<h2>Non-Scope</h2>\n<ul>\n<li>Treating Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, or another external AI tool as the product host runtime</li>\n<li>Interactive PTY execution and autonomous source-affecting long-running task release</li>\n<li>Installing Rust/Tauri, xterm.js, Monaco, or PTY dependencies</li>\n<li>Managing provider authentication</li>\n<li>Creating public installers or claiming release readiness</li>\n</ul>\n<h2>Functional Contract</h2>\n<ul>\n<li>The platform is the host runtime that owns task state, durable memory, decision inbox, artifacts, validation, and UI authority.</li>\n<li>The four CLIs are optional guest adapter lanes; missing tools return <code>capability_missing</code> and disable only that lane.</li>\n<li>The first supervisor MVP runs allowlisted CLI PATH detection and stdin-free bounded version checks.</li>\n<li>The second supervisor MVP provides pipe-based session start, poll, stdin, defer, and cancel for allowlisted CLIs without adding the shell plugin, and stores detected questions in <code>_ops/coordination/human-decision-inbox.json</code> when deferring.</li>\n<li>The third supervisor MVP initializes several optional CLI lanes at once through task pipe presets and returns each lane&#039;s pipe edges plus merge gate as a platform-owned report.</li>\n<li>Users can see per-CLI setup hints and verification commands, create session prompts from work-mode presets, and save answers to deferred decision items from the Desktop tab.</li>\n<li>A deferred decision with session metadata sends the saved answer to the linked active CLI session stdin and refreshes the session report only after the user explicitly chooses answer-and-resume.</li>\n<li>The Desktop tab shows quick action commands, capability status, lane timeline, process graph, structured terminal events, grouped decisions, replay metadata, source diffs, and evidence/promotion candidates as the applied reference UI layer.</li>\n<li>Autonomous source-affecting long-running multi-CLI execution will be implemented in the next supervisor stage with process graphs and merge gates.</li>\n<li>CLI questions route to the decision inbox and pause only dependent lanes.</li>\n<li>Terminal output separates bounded/redacted raw logs from structured durable records.</li>\n<li>Source editing starts with a textarea-based scoped editor, multi-file draft queue, diff preview, and backup save; mature open-source editor surfaces such as Monaco Editor are added after dependency audit.</li>\n<li>Data accumulation defaults to file-system indexes and structured records; vector DB comes only after measured retrieval bottlenecks.</li>\n</ul>\n<h2>Acceptance Criteria</h2>\n<ul>\n<li>JSON configs pass syntax and self-documenting config contract checks.</li>\n<li>Desktop readiness tests check the multi-CLI architecture doc and orchestration registry fields.</li>\n<li>The <code>workspace-monitor</code> Desktop tab shows CLI adapter state and health-check results when Tauri runtime exists, and an unavailable fallback in browser-only environments.</li>\n<li>The <code>workspace-monitor</code> Desktop tab shows a CLI session console and scoped source editor.</li>\n<li>The <code>workspace-monitor</code> Desktop tab shows CLI setup guides, work-mode presets, and human decision inbox list/answer UI.</li>\n<li>The <code>workspace-monitor</code> Desktop tab distinguishes <code>Answer</code> from <code>Answer &amp; Resume</code> for deci</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 6445,
-      "updatedAt": "2026-06-03T15:26:31.045Z",
-      "historyDate": "2026-06-02",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18061,6 +18091,16 @@
           "title": "평가: Agent CLI Cockpit",
           "excerpt": "평가: Agent CLI Cockpit 판정 요청 충족. 유사 오픈소스 검색과 직접 clone 탐구 후, 현재 데스크톱 플랫폼에 Agent CLI Cockpit 기능을 추가했다. 기능은 새 process를 늘리지 않고 기존 native runtime state를 묶어 CLI/provider/session/task/decision control plane으로 보여준다. 구현 증거 MonitorShell.tsx 에 cockpitStats , openSourceControlPlanePatterns , ",
           "updatedAt": "2026-06-05T21:59:44.775Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "최종 평가",
+          "excerpt": "최종 평가 결과 요구사항 충족: 완료. 구현, renderer 검증, browser smoke, internal package build를 완료했다. 성능 결과: Static smoke: ready 3948ms, Agent switch 244ms. Dev smoke: ready 4702ms, Agent switch 219ms. Section audit under 6x CPU throttle: p95 1413.4ms, limit 1600ms. 판단 사용자 요구처럼 초기 로딩을 더 길게 써서 Agen",
+          "updatedAt": "2026-06-06T02:03:14.739Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18164,16 +18204,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-open-source-agent-platform-landscape-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-open-source-agent-platform-landscape.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: 오픈소스 Agent Platform Landscape",
-          "excerpt": "평가: 오픈소스 Agent Platform Landscape 판정 충족. 현재 플랫폼 특징을 로컬 제품 레지스트리와 Tauri 설정 기준으로 정리했고, 유사 오픈소스를 여러 제품군으로 나눠 대량 조사했다. 증거 현재 플랫폼 특징 11개를 Agent Workspace Platform , Agent Core, CLI orchestration, work environment, development environment, root tool management, work visibility, learnin",
-          "updatedAt": "2026-06-05T21:47:17.741Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-open-source-feature-radar-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-open-source-feature-radar.ko.md",
           "category": "evaluation",
@@ -18261,6 +18291,16 @@
           "title": "요청 결과 추적: Agent CLI Cockpit",
           "excerpt": "요청 결과 추적: Agent CLI Cockpit 날짜: 2026 06 06 요청: 유사 오픈소스 딥 리서치와 직접 탐구 후 기능 추가 프로젝트: platform desktop app/ 입력 요구 사용자는 현재 플랫폼과 유사한 오픈소스를 많이 조사하고, 직접 탐구한 뒤 결과를 기능으로 구현하라고 했다. 이전 반복 맥락에서는 데스크톱 native resource 활용, 느린 탭 전환, CLI/terminal/process 관리, AI 로그인/설정 UI 개선이 계속 요구됐다. 결정 직접 clone한 ",
           "updatedAt": "2026-06-05T21:59:44.775Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 Trace",
+          "excerpt": "요청 결과 Trace 요청: Agent 탭 첫 진입 지연을 시작 로딩으로 이동. 결과: 초기 ready를 약 4초대로 늘리고 Agent 탭 전환을 약 0.22 0.24초로 낮춤. 주요 구현: MonitorShell.tsx SnapshotLoader.tsx MonitorShellBoundary.tsx SnapshotLoadingShell.tsx next.config.mjs 검증: workspace monitor check/test/build/perf static/dev Playwright smoke",
+          "updatedAt": "2026-06-06T02:00:59.366Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18364,16 +18404,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-open-source-agent-platform-landscape-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-open-source-agent-platform-landscape.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: 오픈소스 Agent Platform Landscape",
-          "excerpt": "요청 결과 추적: 오픈소스 Agent Platform Landscape 요청 현재 플랫폼의 특징을 뽑아내고, 유사한 오픈소스를 매우 많이 조사한다. 결과 현재 플랫폼을 설치형 데스크톱 Agent Workspace Platform으로 정리했다. Agent Core, CLI orchestration, root tool management, work visibility, development/work environment, learning/evaluation loop를 핵심 특징으로 추출했다. 60개 ",
-          "updatedAt": "2026-06-05T21:47:17.741Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-06-open-source-feature-radar-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-open-source-feature-radar.ko.md",
           "category": "request-trace",
@@ -18414,13 +18444,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-agent-cli-cockpit-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-agent-cli-cockpit.ko.md",
+          "id": "history-user-requests-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
           "category": "user-request",
           "language": "ko",
-          "title": "사용자 요청 요약: Agent CLI Cockpit",
-          "excerpt": "사용자 요청 요약: Agent CLI Cockpit 날짜: 2026 06 06 대상: platform desktop app/ 요약 사용자는 유사 agent desktop/platform 오픈소스를 깊게 리서치하고, 직접 탐구가 끝나면 그 결과를 현재 플랫폼 기능으로 추가하라고 요청했다. 이전 맥락에서는 데스크톱 앱의 CPU/RAM/native resource 활용, 느린 탭 이동, 불편한 코드 편집/설정 UI, 기본 버튼/dropdown 개선, AI 로그인/CLI 설정 쉽게 만들기, termina",
-          "updatedAt": "2026-06-05T21:59:44.774Z",
+          "title": "사용자 요청 요약",
+          "excerpt": "사용자 요청 요약 시작할 때 Agent 탭 첫 로딩이 오래 걸리므로, 초기 로딩 시간을 조금 더 길게 잡고 모든 탭을 처음에 띄워 둔 것처럼 만들어 탭 이동 체감을 개선해 달라는 요청.",
+          "updatedAt": "2026-06-06T02:00:59.366Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18564,13 +18594,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-agent-cli-cockpit-open-source-direct-exploration-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-agent-cli-cockpit-open-source-direct-exploration.ko.md",
+          "id": "history-web-searches-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
           "category": "web-search",
           "language": "ko",
-          "title": "웹 검색 기록: Agent CLI Cockpit 오픈소스 직접 탐구",
-          "excerpt": "웹 검색 기록: Agent CLI Cockpit 오픈소스 직접 탐구 날짜: 2026 06 06 작업: 유사 오픈소스 딥 리서치 후 직접 탐구 기반 기능 추가 대상 프로젝트: platform desktop app/ 검색 질의 open source AI agent desktop app Codex Claude OpenCode MCP GitHub 2026 open source coding agent desktop UI CLI orchestration GitHub ClawX Agentify Desktop ",
-          "updatedAt": "2026-06-05T21:59:44.773Z",
+          "title": "Agent 탭 시작 선로딩 웹 검색 기록",
+          "excerpt": "Agent 탭 시작 선로딩 웹 검색 기록 날짜: 2026 06 06 요청 요약: 시작 시점의 로딩 시간을 더 쓰더라도 Agent 탭을 포함한 주요 탭을 먼저 띄워 첫 탭 진입 지연을 줄인다. 검색 React lazy Suspense preload code splitting official docs preloading tabs Next.js app router dynamic import lazy loading official docs preload Tauri v2 webview performance",
+          "updatedAt": "2026-06-06T02:00:59.362Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18714,13 +18744,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-agent-cli-cockpit-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-agent-cli-cockpit.ko.md",
+          "id": "history-work-summaries-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
           "category": "work-summary",
           "language": "ko",
-          "title": "작업 요약: Agent CLI Cockpit",
-          "excerpt": "작업 요약: Agent CLI Cockpit 2026 06 06에 platform desktop app 의 Desktop Runtime에 Agent CLI Cockpit을 추가했다. Agentify Desktop, ClawX, CLI Agent Orchestrator, OpenLoaf를 직접 clone해 확인한 뒤, 기존 CLI adapter/session/provider/task run/decision 상태를 한 화면에 묶는 control plane UI를 구현했다. 검증은 workspace m",
-          "updatedAt": "2026-06-05T21:59:44.775Z",
+          "title": "작업 요약",
+          "excerpt": "작업 요약 SnapshotLoader 를 lightweight bootstrap으로 유지하고 heavy MonitorShell 을 별도 dynamic boundary로 분리했다. startup resident panel limit을 12로 늘려 모든 주요 section을 초기 resident set에 포함했다. 2.6초 shell warmup overlay를 추가해 사용자가 조작하기 전 탭 mount/prewarm 비용을 먼저 쓰게 했다. production static export 설정을 dev",
+          "updatedAt": "2026-06-06T02:00:59.366Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18864,13 +18894,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-agent-cli-cockpit-json",
-          "path": "_history/work-timings/2026/2026-06-06-agent-cli-cockpit.json",
+          "id": "history-work-timings-2026-2026-06-06-agent-tab-startup-prewarm-json",
+          "path": "_history/work-timings/2026/2026-06-06-agent-tab-startup-prewarm.json",
           "category": "work-timing",
           "language": "unknown",
-          "title": "2026 06 06 Agent Cli Cockpit",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"phases\": { \"phase\": \"web search and direct repo exploration\", \"status\": \"completed\", \"notes\": \"Searched similar desktop agent platforms and inspected four cloned repositories.\" }, { \"phase\": \"implementation\", \"status\": \"",
-          "updatedAt": "2026-06-05T21:59:44.775Z",
+          "title": "2026 06 06 Agent Tab Startup Prewarm",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"work\": \"agent tab startup prewarm\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\" }, { \"phase\": \"local inspection\", \"status\": \"completed\" }, { \"phase\": \"implementation\", \"status\": \"completed\" }, { \"phase\": \"renderer validation\", \"status\":",
+          "updatedAt": "2026-06-06T02:03:14.739Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19012,16 +19042,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2572,
+      "documents": 2578,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1004
+          "count": 1005
         },
         {
           "category": "web-search",
-          "count": 409
+          "count": 410
         },
         {
           "category": "plan",
@@ -19029,19 +19059,19 @@
         },
         {
           "category": "request-trace",
-          "count": 337
+          "count": 338
         },
         {
           "category": "work-timing",
-          "count": 258
+          "count": 259
         },
         {
           "category": "user-request",
-          "count": 122
+          "count": 123
         },
         {
           "category": "work-summary",
-          "count": 89
+          "count": 90
         },
         {
           "category": "daily-history",
@@ -19052,7 +19082,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6486286,
+      "totalSourceBytes": 6490274,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19081,7 +19111,7 @@
       "decisionEvents": 0,
       "openSignals": 15,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T01:28:41.483Z",
+      "latestEventAt": "2026-06-06T02:03:14.739Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19191,6 +19221,96 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-agent-tab-startup-prewarm-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 06 Agent Tab Startup Prewarm",
+        "detail": "{ \"date\": \"2026 06 06\", \"work\": \"agent tab startup prewarm\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\" }, { \"phase\": \"local inspection\", \"status\": \"completed\" }, { \"phase\": \"implementation\", \"status\": \"completed\" }, { \"phase\": \"renderer validation\", \"status\":",
+        "path": "_history/work-timings/2026/2026-06-06-agent-tab-startup-prewarm.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:03:14.739Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "최종 평가",
+        "detail": "최종 평가 결과 요구사항 충족: 완료. 구현, renderer 검증, browser smoke, internal package build를 완료했다. 성능 결과: Static smoke: ready 3948ms, Agent switch 244ms. Dev smoke: ready 4702ms, Agent switch 219ms. Section audit under 6x CPU throttle: p95 1413.4ms, limit 1600ms. 판단 사용자 요구처럼 초기 로딩을 더 길게 써서 Agen",
+        "path": "_history/evaluations/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:03:14.739Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "요청 결과 Trace",
+        "detail": "요청 결과 Trace 요청: Agent 탭 첫 진입 지연을 시작 로딩으로 이동. 결과: 초기 ready를 약 4초대로 늘리고 Agent 탭 전환을 약 0.22 0.24초로 낮춤. 주요 구현: MonitorShell.tsx SnapshotLoader.tsx MonitorShellBoundary.tsx SnapshotLoadingShell.tsx next.config.mjs 검증: workspace monitor check/test/build/perf static/dev Playwright smoke",
+        "path": "_history/request-traces/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:00:59.366Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약",
+        "detail": "사용자 요청 요약 시작할 때 Agent 탭 첫 로딩이 오래 걸리므로, 초기 로딩 시간을 조금 더 길게 잡고 모든 탭을 처음에 띄워 둔 것처럼 만들어 탭 이동 체감을 개선해 달라는 요청.",
+        "path": "_history/user-requests/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:00:59.366Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약",
+        "detail": "작업 요약 SnapshotLoader 를 lightweight bootstrap으로 유지하고 heavy MonitorShell 을 별도 dynamic boundary로 분리했다. startup resident panel limit을 12로 늘려 모든 주요 section을 초기 resident set에 포함했다. 2.6초 shell warmup overlay를 추가해 사용자가 조작하기 전 탭 mount/prewarm 비용을 먼저 쓰게 했다. production static export 설정을 dev",
+        "path": "_history/work-summaries/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:00:59.366Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Agent 탭 시작 선로딩 웹 검색 기록",
+        "detail": "Agent 탭 시작 선로딩 웹 검색 기록 날짜: 2026 06 06 요청 요약: 시작 시점의 로딩 시간을 더 쓰더라도 Agent 탭을 포함한 주요 탭을 먼저 띄워 첫 탭 진입 지연을 줄인다. 검색 React lazy Suspense preload code splitting official docs preloading tabs Next.js app router dynamic import lazy loading official docs preload Tauri v2 webview performance",
+        "path": "_history/web-searches/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:00:59.362Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-06-desktop-dev-run-fix-json",
         "sourceType": "history",
@@ -20512,21 +20632,6 @@
         "timestamp": "2026-06-05T22:07:25.311Z"
       },
       {
-        "id": "history-history-work-timings-2026-2026-06-06-agent-cli-cockpit-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 Agent Cli Cockpit",
-        "detail": "{ \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"phases\": { \"phase\": \"web search and direct repo exploration\", \"status\": \"completed\", \"notes\": \"Searched similar desktop agent platforms and inspected four cloned repositories.\" }, { \"phase\": \"implementation\", \"status\": \"",
-        "path": "_history/work-timings/2026/2026-06-06-agent-cli-cockpit.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:59:44.775Z"
-      },
-      {
         "id": "history-history-evaluations-2026-2026-06-06-agent-cli-cockpit-ko-md",
         "sourceType": "history",
         "signalType": "evaluation",
@@ -20555,81 +20660,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T21:59:44.775Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-agent-cli-cockpit-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: Agent CLI Cockpit",
-        "detail": "작업 요약: Agent CLI Cockpit 2026 06 06에 platform desktop app 의 Desktop Runtime에 Agent CLI Cockpit을 추가했다. Agentify Desktop, ClawX, CLI Agent Orchestrator, OpenLoaf를 직접 clone해 확인한 뒤, 기존 CLI adapter/session/provider/task run/decision 상태를 한 화면에 묶는 control plane UI를 구현했다. 검증은 workspace m",
-        "path": "_history/work-summaries/2026/2026-06-06-agent-cli-cockpit.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:59:44.775Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-agent-cli-cockpit-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: Agent CLI Cockpit",
-        "detail": "사용자 요청 요약: Agent CLI Cockpit 날짜: 2026 06 06 대상: platform desktop app/ 요약 사용자는 유사 agent desktop/platform 오픈소스를 깊게 리서치하고, 직접 탐구가 끝나면 그 결과를 현재 플랫폼 기능으로 추가하라고 요청했다. 이전 맥락에서는 데스크톱 앱의 CPU/RAM/native resource 활용, 느린 탭 이동, 불편한 코드 편집/설정 UI, 기본 버튼/dropdown 개선, AI 로그인/CLI 설정 쉽게 만들기, termina",
-        "path": "_history/user-requests/2026/2026-06-06-agent-cli-cockpit.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:59:44.774Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-agent-cli-cockpit-open-source-direct-exploration-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: Agent CLI Cockpit 오픈소스 직접 탐구",
-        "detail": "웹 검색 기록: Agent CLI Cockpit 오픈소스 직접 탐구 날짜: 2026 06 06 작업: 유사 오픈소스 딥 리서치 후 직접 탐구 기반 기능 추가 대상 프로젝트: platform desktop app/ 검색 질의 open source AI agent desktop app Codex Claude OpenCode MCP GitHub 2026 open source coding agent desktop UI CLI orchestration GitHub ClawX Agentify Desktop ",
-        "path": "_history/web-searches/2026/2026-06-06-agent-cli-cockpit-open-source-direct-exploration.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:59:44.773Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-open-source-agent-platform-landscape-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "평가: 오픈소스 Agent Platform Landscape",
-        "detail": "평가: 오픈소스 Agent Platform Landscape 판정 충족. 현재 플랫폼 특징을 로컬 제품 레지스트리와 Tauri 설정 기준으로 정리했고, 유사 오픈소스를 여러 제품군으로 나눠 대량 조사했다. 증거 현재 플랫폼 특징 11개를 Agent Workspace Platform , Agent Core, CLI orchestration, work environment, development environment, root tool management, work visibility, learnin",
-        "path": "_history/evaluations/2026/2026-06-06-open-source-agent-platform-landscape.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:47:17.741Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-open-source-agent-platform-landscape-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: 오픈소스 Agent Platform Landscape",
-        "detail": "요청 결과 추적: 오픈소스 Agent Platform Landscape 요청 현재 플랫폼의 특징을 뽑아내고, 유사한 오픈소스를 매우 많이 조사한다. 결과 현재 플랫폼을 설치형 데스크톱 Agent Workspace Platform으로 정리했다. Agent Core, CLI orchestration, root tool management, work visibility, development/work environment, learning/evaluation loop를 핵심 특징으로 추출했다. 60개 ",
-        "path": "_history/request-traces/2026/2026-06-06-open-source-agent-platform-landscape.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:47:17.741Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23762,7 +23792,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 74,
+        "documentCount": 72,
         "sourceFileCount": 5
       },
       {
@@ -27590,13 +27620,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3670,
+      "sourceDocuments": 3682,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T01:30:31.312Z"
+      "latestInsightAt": "2026-06-06T02:03:14.739Z"
     },
     "inferenceStages": [
       {
@@ -27664,19 +27694,19 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 427,
+        "signalCount": 431,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 141
+            "count": 142
           },
           {
             "category": "project-spec",
-            "count": 130
+            "count": 132
           },
           {
             "category": "request-trace",
-            "count": 66
+            "count": 67
           },
           {
             "category": "user-request",
@@ -27719,7 +27749,7 @@
           "요청 결과 추적: Workbench lazy boundary 확장",
           "최종 평가"
         ],
-        "latestEvidenceAt": "2026-06-06T01:30:31.312Z"
+        "latestEvidenceAt": "2026-06-06T02:03:14.739Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27733,7 +27763,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1692,
+        "signalCount": 1693,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -27745,7 +27775,7 @@
           },
           {
             "category": "web-search",
-            "count": 410
+            "count": 411
           },
           {
             "category": "plan",
@@ -27784,7 +27814,7 @@
           "2026 05 31 작업 모드 라우팅 계획 기록",
           "계획 히스토리: 코딩 조사 출처 다양성 강화"
         ],
-        "latestEvidenceAt": "2026-06-06T01:24:25.575Z"
+        "latestEvidenceAt": "2026-06-06T02:00:59.362Z"
       },
       {
         "id": "large-scope-slicing",
@@ -27871,7 +27901,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 652,
+        "signalCount": 653,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -27879,7 +27909,7 @@
           },
           {
             "category": "evaluation",
-            "count": 228
+            "count": 229
           },
           {
             "category": "web-search",
@@ -27930,7 +27960,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-06T01:30:31.312Z"
+        "latestEvidenceAt": "2026-06-06T02:03:14.739Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -27944,27 +27974,27 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1428,
+        "signalCount": 1436,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 612
+            "count": 615
           },
           {
             "category": "evaluation",
-            "count": 512
+            "count": 513
           },
           {
             "category": "user-request",
-            "count": 91
+            "count": 92
           },
           {
             "category": "request-trace",
-            "count": 52
+            "count": 53
           },
           {
             "category": "work-summary",
-            "count": 49
+            "count": 50
           },
           {
             "category": "plan",
@@ -27976,7 +28006,7 @@
           },
           {
             "category": "project-doc",
-            "count": 26
+            "count": 27
           },
           {
             "category": "work-timing",
@@ -28003,7 +28033,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T01:30:31.312Z"
+        "latestEvidenceAt": "2026-06-06T02:03:14.739Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28072,21 +28102,21 @@
           "Public Release Updater Automation Spec",
           "2026 06 06 평가: Public Release Updater Automation"
         ],
-        "latestEvidenceAt": "2026-06-06T01:30:31.312Z"
+        "latestEvidenceAt": "2026-06-06T01:32:08.361Z"
       }
     ]
   },
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3670,
+      "sourceDocuments": 3682,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T01:30:31.312Z"
+      "latestInsightAt": "2026-06-06T02:03:14.739Z"
     },
     "operatingModel": [
       {
@@ -28144,13 +28174,13 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3105,
+        "signalCount": 3110,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1692
+            "signalCount": 1693
           },
           {
             "id": "large-scope-slicing",
@@ -28162,7 +28192,7 @@
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 427
+            "signalCount": 431
           }
         ],
         "missingPatternIds": [],
@@ -28190,7 +28220,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T01:30:31.312Z",
+        "latestEvidenceAt": "2026-06-06T02:03:14.739Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28219,13 +28249,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 771,
+        "signalCount": 772,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 652
+            "signalCount": 653
           },
           {
             "id": "release-blocker-gate",
@@ -28259,7 +28289,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T01:30:31.312Z",
+        "latestEvidenceAt": "2026-06-06T02:03:14.739Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28288,13 +28318,13 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2414,
+        "signalCount": 2422,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1428
+            "signalCount": 1436
           },
           {
             "id": "large-scope-slicing",
@@ -28328,7 +28358,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T01:30:31.312Z",
+        "latestEvidenceAt": "2026-06-06T02:03:14.739Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28357,13 +28387,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 546,
+        "signalCount": 550,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 427
+            "signalCount": 431
           },
           {
             "id": "release-blocker-gate",
@@ -28397,7 +28427,7 @@
           "2026 06 06 User Request: Public Release Developer Repatch",
           "Public Release Updater Automation Spec"
         ],
-        "latestEvidenceAt": "2026-06-06T01:30:31.312Z",
+        "latestEvidenceAt": "2026-06-06T02:03:14.739Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28426,7 +28456,7 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2678,
+        "signalCount": 2679,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
@@ -28438,7 +28468,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1692
+            "signalCount": 1693
           }
         ],
         "missingPatternIds": [],
@@ -28466,7 +28496,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T01:24:25.575Z",
+        "latestEvidenceAt": "2026-06-06T02:00:59.362Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28495,7 +28525,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1811,
+        "signalCount": 1812,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28507,7 +28537,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1692
+            "signalCount": 1693
           }
         ],
         "missingPatternIds": [],
@@ -28535,7 +28565,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T01:30:31.312Z",
+        "latestEvidenceAt": "2026-06-06T02:00:59.362Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

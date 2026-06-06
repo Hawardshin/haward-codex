@@ -49,6 +49,7 @@ import type { ProductFeatureArchitecturePanelProps } from "@/components/features
 import type { OperatorCenterDialogProps } from "@/components/features/OperatorCenterDialog";
 import type { EvaluationReportPanelProps } from "@/components/features/EvaluationReportPanel";
 import { preloadAdminHistoryIndex, useAdminHistoryIndex } from "@/components/history/useAdminHistoryIndex";
+import { SnapshotLoadingShell } from "@/components/SnapshotLoadingShell";
 import { ActionGroup } from "@/components/ui/ActionGroup";
 import { Button } from "@/components/ui/Button";
 import type {
@@ -101,10 +102,24 @@ type SectionId =
   | "requirements"
   | "agents";
 
-const maxResidentSectionPanels = 6;
-const retainedResidentSections: SectionId[] = ["source", "eval"];
-const nonRetainedResidentSections: SectionId[] = ["overview"];
-const startupResidentPreloadSections: SectionId[] = ["agents", "desktop", "eval", "source", "tools", "overview"];
+const maxResidentSectionPanels = 12;
+const startupSurfaceReadyMinMs = 2600;
+const retainedResidentSections: SectionId[] = ["agents", "desktop", "eval", "source", "tools"];
+const nonRetainedResidentSections: SectionId[] = [];
+const startupResidentPreloadSections: SectionId[] = [
+  "agents",
+  "desktop",
+  "eval",
+  "source",
+  "tools",
+  "intent",
+  "projects",
+  "history",
+  "structure",
+  "documents",
+  "requirements",
+  "overview"
+];
 
 function normalizeResidentSectionIds(candidates: SectionId[], activeSection: SectionId) {
   const ordered = [activeSection, ...retainedResidentSections, ...candidates];
@@ -3120,6 +3135,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [agentDetailRenderView, setAgentDetailRenderView] = useState<AgentDetailViewId>("collaboration");
   const [commandQuery, setCommandQuery] = useState("");
   const [buttonFeedbackReady, setButtonFeedbackReady] = useState(false);
+  const [startupSurfaceReady, setStartupSurfaceReady] = useState(false);
   const titlebarSectionLabelRef = useRef<HTMLElement>(null);
   const commandInputRef = useRef<HTMLInputElement>(null);
   const pendingAgentDetailCommitRef = useRef<(() => void) | null>(null);
@@ -3196,7 +3212,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   );
   const [residentSectionIds, setResidentSectionIds] = useState<SectionId[]>(() => {
     const initialResidentSection = normalizeSectionId(initialSection) || "overview";
-    return normalizeResidentSectionIds([initialResidentSection, "source"], initialResidentSection);
+    return normalizeResidentSectionIds([initialResidentSection, ...startupResidentPreloadSections], initialResidentSection);
   });
   const residentSectionSet = useMemo(() => new Set(residentSectionIds), [residentSectionIds]);
   const markSectionResident = useCallback((targetSection: SectionId) => {
@@ -3241,6 +3257,13 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     setButtonFeedbackReady(true);
     return cleanup;
   }, []);
+  useEffect(() => {
+    if (!buttonFeedbackReady) {
+      return undefined;
+    }
+    const timeoutId = window.setTimeout(() => setStartupSurfaceReady(true), startupSurfaceReadyMinMs);
+    return () => window.clearTimeout(timeoutId);
+  }, [buttonFeedbackReady]);
   useEffect(() => {
     if (typeof window === "undefined") {
       return undefined;
@@ -3561,10 +3584,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
 
   const deferredQuery = useDeferredValue(query);
   const normalizedQuery = deferredQuery.trim().toLowerCase();
-  const sectionContentReady = buttonFeedbackReady;
+  const sectionPanelsMounted = buttonFeedbackReady;
+  const sectionContentReady = sectionPanelsMounted && startupSurfaceReady;
   const shouldRenderSection = useCallback(
-    (targetSection: SectionId) => sectionContentReady && residentSectionSet.has(targetSection),
-    [residentSectionSet, sectionContentReady]
+    (targetSection: SectionId) => sectionPanelsMounted && residentSectionSet.has(targetSection),
+    [residentSectionSet, sectionPanelsMounted]
   );
   const { documents: monitorDocuments, historyDays: monitorHistoryDays, statusText: adminHistoryStatusText } =
     useAdminHistoryIndex(snapshot, section);
@@ -5680,7 +5704,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   };
 
   return (
-    <main className={`desktop-app-root theme-${themeMode}`}>
+    <main className={`desktop-app-root theme-${themeMode}`} aria-busy={sectionContentReady ? undefined : true}>
       <div className={`desktop-app-shell sidebar-${sidebarMode}`} data-ui-foundation="gestalt-hierarchy-density">
         <aside className="activity-rail" aria-label={uiLanguage === "ko" ? "주요 기능 레일" : "Primary activity rail"}>
           <button
@@ -7506,6 +7530,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       )}
         </section>
       </div>
+      {!sectionContentReady && (
+        <div className="startup-warmup-overlay" data-startup-warmup="true">
+          <SnapshotLoadingShell detail="Warming resident tabs" />
+        </div>
+      )}
     </main>
   );
 }

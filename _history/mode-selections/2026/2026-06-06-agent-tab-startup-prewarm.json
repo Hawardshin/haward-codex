@@ -1,0 +1,10 @@
+{
+  "date": "2026-06-06",
+  "request": "Agent tab startup prewarm and first-tab latency reduction",
+  "selected_work_mode": "standard",
+  "install_mode": "developer",
+  "view_mode": "superadmin_developer",
+  "resource_risk_occurred": true,
+  "resource_risk_reason": "The change touches long-lived mounted panels, dynamic imports, timers, browser render resources, and WebGL-heavy surfaces.",
+  "mode_reason": "Meaningful product behavior and performance work requiring tests, browser validation, build, and packaging."
+}

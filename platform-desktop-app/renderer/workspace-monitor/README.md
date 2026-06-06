@@ -55,7 +55,7 @@ UI는 대용량 snapshot을 client JavaScript bundle에 정적으로 포함하�
 - 별도 배포가 필요하면 root directory를 `platform-desktop-app/renderer/workspace-monitor`로 설정한다.
 - Install command: `pnpm install --frozen-lockfile`
 - Build command: `pnpm run build`
-- Output은 Next.js가 관리한다. `next.config.mjs`는 `output: "export"`를 사용한다.
+- Output은 Next.js가 관리한다. `next.config.mjs`는 production build에서만 `output: "export"`와 상대 `assetPrefix`를 사용하고, dev 서버는 일반 Next dev hydration 경로를 유지한다.
 
 ## 공개 전 점검
 

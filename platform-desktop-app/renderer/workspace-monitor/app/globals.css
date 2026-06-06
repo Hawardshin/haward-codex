@@ -4431,6 +4431,21 @@ main {
   line-height: 1.6;
 }
 
+.startup-warmup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  padding: 48px;
+  background:
+    linear-gradient(135deg, rgba(15, 17, 21, 0.96), rgba(25, 29, 36, 0.94)),
+    var(--bg);
+}
+
+.startup-warmup-overlay .snapshot-loading-shell {
+  min-height: 100%;
+}
+
 .snapshot-loading-indicator {
   width: 42px;
   height: 42px;
