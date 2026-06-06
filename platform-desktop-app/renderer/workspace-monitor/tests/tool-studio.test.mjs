@@ -320,6 +320,15 @@ test("Monitor groups repeated actions with shared action primitives", () => {
   assert.match(monitorShell, /<ActionGroup className="task-handoff-actions"[\s\S]*?align="end" density="compact">/);
   assert.match(monitorShell, /<Button variant="secondary" size="sm" onClick=\{\(\) => setCommandPaletteOpen\(false\)\}>/);
   assert.match(monitorShell, /<Button key=\{item\.id\} variant="ghost" className="command-palette-result" onClick=\{\(\) => runCommandItem\(item\)\}>/);
+  assert.match(monitorShell, /const recommendedCommandItems = useMemo/);
+  assert.match(monitorShell, /"connect-chatbot", "provider-accounts", "terminal-drawer-open", "settings-execution"/);
+  assert.match(monitorShell, /const commandResultStatusText =/);
+  assert.match(monitorShell, /role="status" aria-live="polite" className="command-palette-live-status"/);
+  assert.match(monitorShell, /data-command-palette-recommendation=\{item\.id\}/);
+  assert.match(monitorShell, /data-command-palette-empty-state="true"/);
+  assert.match(css, /\.command-palette-live-status,/);
+  assert.match(css, /\.command-palette-recommendations \{/);
+  assert.match(css, /\.command-palette-empty-state \{/);
   assert.match(toolStudio, /import \{ ActionGroup \} from "@\/components\/ui\/ActionGroup"/);
   assert.match(toolStudio, /<ActionGroup className="tool-studio-actions"[\s\S]*?align="end" density="compact">/);
   assert.match(css, /\.ui-action-group \{[\s\S]*?display: inline-flex;/);

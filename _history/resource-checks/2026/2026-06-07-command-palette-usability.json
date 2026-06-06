@@ -1,0 +1,120 @@
+{
+  "task": "Command Palette Usability",
+  "work_mode": "standard",
+  "runtime_context": [
+    "React command palette state",
+    "existing command item execution lifecycle",
+    "Next.js development server for Browser smoke",
+    "in-app Browser DOM and interaction verification"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "recommendation-action-misroute",
+      "category": "other",
+      "description": "Recommended commands could bypass the existing command lifecycle or route to the wrong surface.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Reuse existing command items by id and execute them through runCommandItem.",
+      "evidence": [
+        "recommendedIds: connect-chatbot, provider-accounts, terminal-drawer-open, settings-execution",
+        "renderRecommendedCommandButtons calls runCommandItem(item)"
+      ]
+    },
+    {
+      "risk_id": "palette-mobile-overflow",
+      "category": "memory",
+      "description": "Recommended command labels and empty-state text could overflow narrow command palette layouts.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Use flex wrapping, min-width: 0, text-overflow, and bounded button target styling.",
+      "evidence": [
+        ".command-palette-recommendations",
+        ".command-palette-recommendation span",
+        "Browser smoke 390x844 overflow: []"
+      ]
+    },
+    {
+      "risk_id": "browser-smoke-server",
+      "category": "process",
+      "description": "Browser smoke uses a local Next.js development server that must not be left running.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Serve on dedicated local port 3226, close the browser tab, stop with Ctrl-C, and verify no listener remains.",
+      "evidence": [
+        "Next dev served http://127.0.0.1:3226",
+        "Browser tab closed",
+        "lsof -nP -iTCP:3226 -sTCP:LISTEN returned no listener"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "command-recommendation-lifecycle",
+      "resource": "recommended command buttons",
+      "create_path": "render command palette with existing commandItems",
+      "cleanup_path": "runCommandItem closes palette and clears query",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Clicking connect-chatbot closed the dialog",
+        "Active section became agents",
+        "data-chatbot-connection=\"search-agent\" present"
+      ]
+    },
+    {
+      "check_id": "dev-server-lifecycle",
+      "resource": "Next.js dev server",
+      "create_path": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor exec next dev -H 127.0.0.1 -p 3226",
+      "cleanup_path": "Ctrl-C and lsof no-listener check",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Server started on 127.0.0.1:3226",
+        "No listener remained on TCP 3226"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "browser-smoke-default",
+      "metric": "Default command palette recommendations",
+      "tool": "in-app Browser",
+      "threshold": "4 recommendations and status text",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "status: 추천 4개 - 빠른 실행 18개",
+        "recommendations: connect-chatbot, provider-accounts, terminal-drawer-open, settings-execution"
+      ]
+    },
+    {
+      "check_id": "browser-smoke-empty",
+      "metric": "Empty command result recovery",
+      "tool": "in-app Browser",
+      "threshold": "empty state and 4 alternative recommendations",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "status: 0개 결과",
+        "data-command-palette-empty-state=true",
+        "empty recommendation count: 4"
+      ]
+    },
+    {
+      "check_id": "browser-smoke-mobile",
+      "metric": "Mobile command palette overflow",
+      "tool": "in-app Browser viewport 390x844",
+      "threshold": "no overflowing palette, status, or recommendation elements",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "default overflow: []",
+        "empty overflow: []"
+      ]
+    }
+  ],
+  "notes": [
+    "No installation occurred.",
+    "No new native command or CLI pipeline was added."
+  ]
+}

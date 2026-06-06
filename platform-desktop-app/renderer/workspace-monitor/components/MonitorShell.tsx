@@ -6962,7 +6962,8 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       workVisibleSections
     ]
   );
-  const normalizedCommandQuery = commandQuery.trim().toLowerCase();
+  const trimmedCommandQuery = commandQuery.trim();
+  const normalizedCommandQuery = trimmedCommandQuery.toLowerCase();
   const filteredCommandItems = useMemo(() => {
     return normalizedCommandQuery
       ? commandItems.filter((item) =>
@@ -6972,11 +6973,41 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         )
       : commandItems.slice(0, 18);
   }, [commandItems, normalizedCommandQuery]);
+  const recommendedCommandItems = useMemo(() => {
+    const recommendedIds = ["connect-chatbot", "provider-accounts", "terminal-drawer-open", "settings-execution"];
+    const commandById = new Map(commandItems.map((item) => [item.id, item]));
+    return recommendedIds
+      .map((id) => commandById.get(id))
+      .filter((item): item is CommandItem => Boolean(item));
+  }, [commandItems]);
+  const commandResultCount = filteredCommandItems.length;
+  const commandResultStatusText = normalizedCommandQuery
+    ? uiLanguage === "ko"
+      ? `${commandResultCount.toLocaleString("ko-KR")}개 결과 - "${trimmedCommandQuery}"`
+      : `${commandResultCount.toLocaleString("en-US")} ${commandResultCount === 1 ? "result" : "results"} for "${trimmedCommandQuery}"`
+    : uiLanguage === "ko"
+      ? `추천 ${recommendedCommandItems.length.toLocaleString("ko-KR")}개 - 빠른 실행 ${commandResultCount.toLocaleString("ko-KR")}개`
+      : `${recommendedCommandItems.length.toLocaleString("en-US")} recommended - ${commandResultCount.toLocaleString("en-US")} quick actions`;
   const runCommandItem = (item: CommandItem) => {
     item.run();
     setCommandPaletteOpen(false);
     setCommandQuery("");
   };
+  const renderRecommendedCommandButtons = (context: "default" | "empty") =>
+    recommendedCommandItems.map((item) => (
+      <Button
+        key={`${context}-${item.id}`}
+        variant="ghost"
+        size="sm"
+        className="command-palette-recommendation"
+        onClick={() => runCommandItem(item)}
+        data-command-palette-recommendation={item.id}
+        data-command-palette-recommendation-context={context}
+      >
+        <item.icon size={15} aria-hidden="true" />
+        <span>{item.label}</span>
+      </Button>
+    ));
 
   return (
     <main className={`desktop-app-root theme-${themeMode}`} aria-busy={sectionContentReady ? undefined : true}>
@@ -7165,9 +7196,16 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                 </Button>
               </div>
               <div className="command-palette-meta">
-                <span>{filteredCommandItems.length.toLocaleString("ko-KR")} {uiLanguage === "ko" ? "개 결과" : "results"}</span>
+                <span role="status" aria-live="polite" className="command-palette-live-status">
+                  {commandResultStatusText}
+                </span>
                 <span>{currentViewMode.label}</span>
               </div>
+              {!normalizedCommandQuery && recommendedCommandItems.length > 0 && (
+                <div className="command-palette-recommendations" aria-label={uiLanguage === "ko" ? "추천 명령" : "Recommended commands"}>
+                  {renderRecommendedCommandButtons("default")}
+                </div>
+              )}
               <div className="command-palette-results">
                 {filteredCommandItems.length ? (
                   filteredCommandItems.slice(0, 18).map((item) => (
@@ -7182,7 +7220,18 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                     </Button>
                   ))
                 ) : (
-                  <p className="empty-state">{uiLanguage === "ko" ? "일치하는 명령이 없습니다." : "No matching command."}</p>
+                  <div className="command-palette-empty-state" role="note" data-command-palette-empty-state="true">
+                    <Search size={18} aria-hidden="true" />
+                    <strong>{uiLanguage === "ko" ? "일치하는 명령이 없습니다" : "No matching command"}</strong>
+                    <span>
+                      {uiLanguage === "ko"
+                        ? "다른 표현으로 검색하거나 추천 명령에서 바로 이어가세요."
+                        : "Try a different phrase or continue with a recommended command."}
+                    </span>
+                    <div className="command-palette-recommendations compact" aria-label={uiLanguage === "ko" ? "대체 추천 명령" : "Alternative recommended commands"}>
+                      {renderRecommendedCommandButtons("empty")}
+                    </div>
+                  </div>
                 )}
               </div>
             </section>
