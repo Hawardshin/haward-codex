@@ -821,6 +821,41 @@
       "rollback_path": "Run cd platform-desktop-app/src-tauri && cargo remove os_pipe; remove run_native_pipe_probe, NativePipeProbeRequest/Report, pipe helper tests, runtime contract/test references, regenerate Cargo.lock, and rerun Rust/frontend/platform/package checks.",
       "installation_record_path": "_history/installations/2026/2026-06-06-native-pipe-runtime-tools-os-pipe.ko.md",
       "commit": "pending"
+    },
+    {
+      "id": "2026-06-06-awp-lightweight-cli",
+      "date": "2026-06-06",
+      "status": "installed",
+      "name": "awp lightweight CLI",
+      "scope": "user-local-cli",
+      "owning_project": "platform-desktop-app",
+      "package_manager": "node-script",
+      "install_command": "pnpm --dir platform-desktop-app cli:install",
+      "environment_path": "/Users/shinjoungeun/.local/bin/awp",
+      "dependency_record_paths": [
+        "platform-desktop-app/tools/awp/awp.py",
+        "platform-desktop-app/scripts/install-awp-cli.mjs",
+        "platform-desktop-app/package.json"
+      ],
+      "version_or_lock_status": "awp 0.1.0 is a repository-managed Python stdlib script symlinked into ~/.local/bin; no external dependency lock changed.",
+      "security_review": "User-local symlink only. The CLI uses Python standard library, shell=False subprocess calls, workspace path containment, and _private/outputs blocking. Shell profile PATH was not modified.",
+      "license_review": "Internal personal workspace artifact; no external package code installed.",
+      "verification": [
+        "python3 platform-desktop-app/tools/awp/awp.py --version: awp 0.1.0",
+        "python3 platform-desktop-app/tools/awp/awp.py doctor --json: passed",
+        "python3 platform-desktop-app/tools/awp/awp.py cli-check --json: passed",
+        "node platform-desktop-app/scripts/install-awp-cli.mjs --dry-run: planned",
+        "pnpm --dir platform-desktop-app cli:install: installed",
+        "/Users/shinjoungeun/.local/bin/awp --version: awp 0.1.0",
+        "/Users/shinjoungeun/.local/bin/awp doctor --json: passed",
+        "pnpm --dir platform-desktop-app test: passed",
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/installations/registry.json: passed",
+        "pnpm --dir platform-desktop-app check: passed with existing public release gate warnings",
+        "pnpm --dir platform-desktop-app package:internal: passed with app/DMG build and verification"
+      ],
+      "rollback_path": "rm /Users/shinjoungeun/.local/bin/awp; optionally remove platform-desktop-app/tools/awp, scripts/install-awp-cli.mjs, package scripts, tests, and readiness checks.",
+      "installation_record_path": "_history/installations/2026/2026-06-06-awp-lightweight-cli.ko.md",
+      "commit": "pending"
     }
   ]
 }

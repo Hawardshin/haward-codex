@@ -71,7 +71,10 @@ const requiredFiles = [
   "scripts/public-release-config.mjs",
   "scripts/public-release-build.mjs",
   "scripts/create-updater-manifest.mjs",
+  "scripts/install-awp-cli.mjs",
   "scripts/readiness/desktop-build-pipeline.mjs",
+  "tools/awp/awp.py",
+  "tests/awp-cli.test.mjs",
   "renderer/workspace-monitor/scripts/check-lazy-boundary-contract.mjs",
   ...desktopBuildPipelineRequiredFiles
 ];
@@ -99,6 +102,29 @@ for (const file of requiredFiles) {
 }
 
 failures.push(...checkDesktopBuildPipeline({ root, readJson }));
+
+const packageJson = readJson("package.json");
+if (packageJson.scripts?.["cli:install"] !== "node scripts/install-awp-cli.mjs") {
+  failures.push("package.json must expose cli:install for the lightweight awp CLI");
+}
+if (packageJson.scripts?.["cli:doctor"] !== "python3 tools/awp/awp.py doctor") {
+  failures.push("package.json must expose cli:doctor for the lightweight awp CLI");
+}
+const awpCli = readFileSync(join(root, "tools/awp/awp.py"), "utf8");
+for (const requiredPhrase of [
+  "Lightweight Agent Workspace Platform CLI",
+  "CLI_ADAPTERS",
+  "PROTECTED_PARTS",
+  "def doctor_command",
+  "def terminal_command",
+  "def reveal_command",
+  "def cli_check_command",
+  "shell=False"
+]) {
+  if (!awpCli.includes(requiredPhrase)) {
+    failures.push(`awp CLI must include ${requiredPhrase}`);
+  }
+}
 
 const tauriConfig = readJson("src-tauri/tauri.conf.json");
 if (tauriConfig.identifier !== "com.personalagentplatform.desktop") {

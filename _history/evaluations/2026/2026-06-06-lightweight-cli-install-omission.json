@@ -1,0 +1,21 @@
+{
+  "date": "2026-06-06",
+  "work_id": "lightweight-cli-install",
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-06-lightweight-cli-install-omission.json"
+  ],
+  "required_items": [
+    "web_first_intake",
+    "requirements",
+    "spec_plan_tasks_validation_traceability",
+    "source_cli",
+    "installer",
+    "actual_install",
+    "installation_audit",
+    "registry_update",
+    "verification",
+    "commit_push"
+  ],
+  "status": "coverage_ready",
+  "notes": "Requirements, spec artifacts, source CLI, installer, actual install, installation audit, registry update, tests, package verification, registry contract, commit, and push are covered by this close-out."
+}
