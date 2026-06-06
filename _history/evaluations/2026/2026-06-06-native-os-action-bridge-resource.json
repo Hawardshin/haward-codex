@@ -1,0 +1,25 @@
+{
+  "date": "2026-06-06",
+  "work_id": "native-os-action-bridge",
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/evaluations/2026/2026-06-06-native-os-action-bridge-resource.json"
+  ],
+  "checks": [
+    {
+      "id": "bounded_process",
+      "status": "passed",
+      "evidence": "External terminal launcher uses timeout, bounded stdout/stderr capture, stdin null, and child cleanup."
+    },
+    {
+      "id": "path_boundary",
+      "status": "passed",
+      "evidence": "Native OS action targets are canonicalized and checked with ensure_workspace_path."
+    },
+    {
+      "id": "no_global_install",
+      "status": "passed",
+      "evidence": "No new OS/global tool was installed; existing Tauri opener and Rust std::process are used."
+    }
+  ]
+}

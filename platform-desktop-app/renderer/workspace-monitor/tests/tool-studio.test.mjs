@@ -400,6 +400,18 @@ test("Desktop Runtime exposes an open-source-informed Agent CLI cockpit", () => 
   assert.match(css, /\.agent-cli-cockpit-actions button:disabled/);
 });
 
+test("Desktop Runtime exposes bounded native OS workspace actions", () => {
+  assert.match(tauriLib, /struct NativeOsActionRequest/);
+  assert.match(tauriLib, /fn run_native_os_action/);
+  assert.match(tauriLib, /run_native_os_action,/);
+  assert.match(tauriLib, /open_external_terminal/);
+  assert.match(tauriLib, /reveal_item_in_dir/);
+  assert.match(monitorShell, /runNativeWorkspaceOsAction/);
+  assert.match(monitorShell, /data-desktop-action-feedback="reveal-workspace"/);
+  assert.match(monitorShell, /data-desktop-action-feedback="open-workspace-path"/);
+  assert.match(monitorShell, /data-desktop-action-feedback="open-external-terminal"/);
+});
+
 test("CLI setup keeps settings scroll ownership isolated", () => {
   const cliSetupGuideRule = readCssRule(".cli-adapter-setup-guide");
   const cliCommandCopyRowRule = readCssRule(".cli-command-copy-row");

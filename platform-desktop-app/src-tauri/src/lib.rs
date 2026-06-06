@@ -461,6 +461,33 @@ struct NativePipeProbeReport {
     error: Option<String>,
 }
 
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct NativeOsActionRequest {
+    action: String,
+    target_path: Option<String>,
+    working_dir: Option<String>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct NativeOsActionReport {
+    status: String,
+    action: String,
+    operating_system: String,
+    method: String,
+    target_path: String,
+    working_dir: String,
+    command: Option<String>,
+    args: Vec<String>,
+    exit_code: Option<i32>,
+    stdout: String,
+    stderr: String,
+    duration_ms: u128,
+    bounded: bool,
+    error: Option<String>,
+}
+
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
 struct NativePtySessionReport {
@@ -1218,6 +1245,12 @@ struct ProcessOutput {
     duration_ms: u128,
 }
 
+struct NativeOsCommandPlan {
+    method: String,
+    command_path: PathBuf,
+    args: Vec<String>,
+}
+
 struct NativePipeExecution {
     producer_command: String,
     producer_args: Vec<String>,
@@ -1545,6 +1578,8 @@ const NATIVE_PIPE_PROBE_TIMEOUT_MS: u64 = 5_000;
 const MAX_NATIVE_PIPE_PROBE_TIMEOUT_MS: u64 = 30_000;
 const MAX_NATIVE_PIPE_ARGS: usize = 32;
 const MAX_NATIVE_PIPE_ARG_CHARS: usize = 2_000;
+const NATIVE_OS_ACTION_TIMEOUT_MS: u64 = 5_000;
+const MAX_NATIVE_OS_ACTION_OUTPUT_BYTES: usize = 8_000;
 const OPENAI_BASE_URL: &str = "https://api.openai.com/v1";
 const ANTHROPIC_BASE_URL: &str = "https://api.anthropic.com";
 const GEMINI_BASE_URL: &str = "https://generativelanguage.googleapis.com";
@@ -2023,6 +2058,100 @@ fn run_native_pipe_probe(
         timeout_ms,
         max_output_bytes,
     })
+}
+
+#[tauri::command]
+fn run_native_os_action(
+    app: AppHandle,
+    request: NativeOsActionRequest,
+) -> Result<NativeOsActionReport, String> {
+    let action = normalize_native_os_action(&request.action)?;
+    let working_dir = resolve_workspace_dir(&app, request.working_dir.as_deref())?;
+    let directory_required = action == "open_external_terminal";
+    let target = resolve_native_os_action_target(
+        &app,
+        request.target_path.as_deref(),
+        &working_dir,
+        directory_required,
+    )?;
+    let started = Instant::now();
+    let operating_system = env::consts::OS.to_string();
+
+    match action.as_str() {
+        "open_path" => {
+            app.opener()
+                .open_path(path_to_string(&target), None::<&str>)
+                .map_err(|error| format!("Failed to open path with Tauri opener: {error}"))?;
+            Ok(NativeOsActionReport {
+                status: "opened".to_string(),
+                action,
+                operating_system,
+                method: "tauri_opener_open_path".to_string(),
+                target_path: path_to_string(&target),
+                working_dir: path_to_string(&working_dir),
+                command: None,
+                args: Vec::new(),
+                exit_code: Some(0),
+                stdout: String::new(),
+                stderr: String::new(),
+                duration_ms: started.elapsed().as_millis(),
+                bounded: true,
+                error: None,
+            })
+        }
+        "reveal_path" => {
+            app.opener()
+                .reveal_item_in_dir(&target)
+                .map_err(|error| format!("Failed to reveal path with Tauri opener: {error}"))?;
+            Ok(NativeOsActionReport {
+                status: "opened".to_string(),
+                action,
+                operating_system,
+                method: "tauri_opener_reveal_item_in_dir".to_string(),
+                target_path: path_to_string(&target),
+                working_dir: path_to_string(&working_dir),
+                command: None,
+                args: Vec::new(),
+                exit_code: Some(0),
+                stdout: String::new(),
+                stderr: String::new(),
+                duration_ms: started.elapsed().as_millis(),
+                bounded: true,
+                error: None,
+            })
+        }
+        "open_external_terminal" => {
+            let command_plan = native_external_terminal_command(&target)?;
+            let output = run_native_os_action_command(
+                &command_plan.command_path,
+                &command_plan.args,
+                &target,
+                Duration::from_millis(NATIVE_OS_ACTION_TIMEOUT_MS),
+                MAX_NATIVE_OS_ACTION_OUTPUT_BYTES,
+            )?;
+            Ok(NativeOsActionReport {
+                status: if output.status == "passed" {
+                    "opened".to_string()
+                } else {
+                    output.status.clone()
+                },
+                action,
+                operating_system,
+                method: command_plan.method,
+                target_path: path_to_string(&target),
+                working_dir: path_to_string(&working_dir),
+                command: Some(path_to_string(&command_plan.command_path)),
+                args: command_plan.args,
+                exit_code: output.exit_code,
+                stdout: output.stdout,
+                stderr: output.stderr,
+                duration_ms: output.duration_ms,
+                bounded: true,
+                error: None,
+            })
+        }
+        _ => Err("Unsupported native OS action.".to_string()),
+    }
 }
 
 #[tauri::command]
@@ -3849,6 +3978,7 @@ pub fn run() {
             run_all_cli_adapter_health,
             check_runtime_terminal_setup,
             run_native_pipe_probe,
+            run_native_os_action,
             list_cli_task_pipeline_presets,
             list_cli_task_run_records,
             read_cli_task_run_record,
@@ -4456,6 +4586,226 @@ fn apply_native_pipe_env_allowlist(command: &mut Command) {
     if let Some(path_env) = path_env {
         command.env("PATH", path_env);
     }
+}
+
+fn normalize_native_os_action(value: &str) -> Result<String, String> {
+    let action = value.trim();
+    match action {
+        "open_path" | "reveal_path" | "open_external_terminal" => Ok(action.to_string()),
+        _ => Err(
+            "Native OS action must be open_path, reveal_path, or open_external_terminal."
+                .to_string(),
+        ),
+    }
+}
+
+fn resolve_native_os_action_target(
+    app: &AppHandle,
+    target_path: Option<&str>,
+    working_dir: &Path,
+    directory_required: bool,
+) -> Result<PathBuf, String> {
+    let root = workspace_root_for_app(Some(app))?;
+    let candidate = match target_path.map(str::trim).filter(|value| !value.is_empty()) {
+        Some(path) => {
+            let value = Path::new(path);
+            if value.is_absolute() {
+                value.to_path_buf()
+            } else {
+                working_dir.join(value)
+            }
+        }
+        None => working_dir.to_path_buf(),
+    };
+    let canonical = candidate
+        .canonicalize()
+        .map_err(|error| format!("Failed to resolve native OS action target: {error}"))?;
+    ensure_workspace_path(&root, &canonical)?;
+    if directory_required && !canonical.is_dir() {
+        return Err("Native external terminal target must be a directory.".to_string());
+    }
+    if !canonical.exists() {
+        return Err("Native OS action target does not exist.".to_string());
+    }
+    Ok(canonical)
+}
+
+fn native_external_terminal_command(target_dir: &Path) -> Result<NativeOsCommandPlan, String> {
+    if !target_dir.is_dir() {
+        return Err("Native external terminal target must be a directory.".to_string());
+    }
+
+    #[cfg(target_os = "macos")]
+    {
+        let command_path = resolve_command("open")
+            .ok_or_else(|| "macOS open command was not found on PATH.".to_string())?;
+        return Ok(NativeOsCommandPlan {
+            method: "macos_open_terminal_app".to_string(),
+            command_path,
+            args: vec![
+                "-a".to_string(),
+                "Terminal".to_string(),
+                path_to_string(target_dir),
+            ],
+        });
+    }
+
+    #[cfg(target_os = "windows")]
+    {
+        let command_path = resolve_command("cmd")
+            .ok_or_else(|| "Windows cmd command was not found on PATH.".to_string())?;
+        return Ok(NativeOsCommandPlan {
+            method: "windows_cmd_start_terminal".to_string(),
+            command_path,
+            args: vec![
+                "/C".to_string(),
+                "start".to_string(),
+                "".to_string(),
+                "cmd".to_string(),
+                "/K".to_string(),
+                "cd".to_string(),
+                "/D".to_string(),
+                path_to_string(target_dir),
+            ],
+        });
+    }
+
+    #[cfg(all(unix, not(target_os = "macos")))]
+    {
+        for (command, method, args) in [
+            (
+                "xdg-terminal-exec",
+                "linux_xdg_terminal_exec",
+                vec![path_to_string(target_dir)],
+            ),
+            (
+                "gnome-terminal",
+                "linux_gnome_terminal",
+                vec![format!(
+                    "--working-directory={}",
+                    path_to_string(target_dir)
+                )],
+            ),
+            (
+                "konsole",
+                "linux_konsole",
+                vec!["--workdir".to_string(), path_to_string(target_dir)],
+            ),
+            (
+                "xfce4-terminal",
+                "linux_xfce4_terminal",
+                vec![format!(
+                    "--working-directory={}",
+                    path_to_string(target_dir)
+                )],
+            ),
+        ] {
+            if let Some(command_path) = resolve_command(command) {
+                return Ok(NativeOsCommandPlan {
+                    method: method.to_string(),
+                    command_path,
+                    args,
+                });
+            }
+        }
+        Err("No supported external terminal launcher was found on PATH.".to_string())
+    }
+
+    #[cfg(not(any(unix, target_os = "windows")))]
+    {
+        let _ = target_dir;
+        Err("External terminal launch is not supported on this operating system.".to_string())
+    }
+}
+
+fn run_native_os_action_command(
+    path: &PathBuf,
+    args: &[String],
+    cwd: &Path,
+    timeout: Duration,
+    max_output_bytes: usize,
+) -> Result<ProcessOutput, String> {
+    let started = Instant::now();
+    let mut command = Command::new(path);
+    command
+        .args(args)
+        .current_dir(cwd)
+        .stdin(Stdio::null())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped());
+    configure_process_group(&mut command);
+    apply_native_pipe_env_allowlist(&mut command);
+    let mut child = command
+        .spawn()
+        .map_err(|error| format!("Failed to spawn native OS action command: {error}"))?;
+
+    let stdout = match child.stdout.take() {
+        Some(stdout) => stdout,
+        None => {
+            let _ = kill_and_wait_child(&mut child);
+            return Err("Failed to capture native OS action stdout.".to_string());
+        }
+    };
+    let stderr = match child.stderr.take() {
+        Some(stderr) => stderr,
+        None => {
+            let _ = kill_and_wait_child(&mut child);
+            return Err("Failed to capture native OS action stderr.".to_string());
+        }
+    };
+
+    let stdout_handle = thread::spawn(move || read_limited(stdout, max_output_bytes));
+    let stderr_handle = thread::spawn(move || read_limited(stderr, max_output_bytes));
+    let (tx, rx) = mpsc::channel();
+
+    thread::spawn(move || loop {
+        match child.try_wait() {
+            Ok(Some(status)) => {
+                let _ = tx.send((status.code(), false));
+                break;
+            }
+            Ok(None) => {
+                if started.elapsed() >= timeout {
+                    let status = kill_and_wait_child(&mut child);
+                    let _ = tx.send((status, true));
+                    break;
+                }
+                thread::sleep(Duration::from_millis(40));
+            }
+            Err(_) => {
+                let _ = kill_and_wait_child(&mut child);
+                let _ = tx.send((None, false));
+                break;
+            }
+        }
+    });
+
+    let (exit_code, timed_out) = rx
+        .recv_timeout(timeout + Duration::from_millis(500))
+        .map_err(|error| format!("Failed to wait for native OS action command: {error}"))?;
+    let stdout_bytes = stdout_handle
+        .join()
+        .map_err(|_| "Failed to join native OS action stdout reader.".to_string())?;
+    let stderr_bytes = stderr_handle
+        .join()
+        .map_err(|_| "Failed to join native OS action stderr reader.".to_string())?;
+    let stdout = String::from_utf8_lossy(&stdout_bytes).trim().to_string();
+    let stderr = String::from_utf8_lossy(&stderr_bytes).trim().to_string();
+    let status = if timed_out {
+        "timed_out"
+    } else if exit_code == Some(0) {
+        "passed"
+    } else {
+        "failed"
+    };
+
+    Ok(ProcessOutput {
+        status: status.to_string(),
+        exit_code,
+        stdout,
+        stderr,
+        duration_ms: started.elapsed().as_millis(),
+    })
 }
 
 fn poll_session_locked(
@@ -11783,5 +12133,43 @@ mod tests {
         assert_eq!(report.consumer_exit_code, Some(0));
         assert_eq!(report.consumer_stdout.trim(), "5");
         assert_eq!(report.pipe_kind, "os_pipe_stdout_to_stdin");
+    }
+
+    #[test]
+    fn native_os_action_accepts_only_bounded_actions() {
+        assert_eq!(
+            normalize_native_os_action("open_path").expect("open_path should be accepted"),
+            "open_path"
+        );
+        assert_eq!(
+            normalize_native_os_action("reveal_path").expect("reveal_path should be accepted"),
+            "reveal_path"
+        );
+        assert_eq!(
+            normalize_native_os_action("open_external_terminal")
+                .expect("open_external_terminal should be accepted"),
+            "open_external_terminal"
+        );
+        assert!(normalize_native_os_action("shutdown").is_err());
+        assert!(normalize_native_os_action("rm -rf").is_err());
+    }
+
+    #[cfg(target_os = "macos")]
+    #[test]
+    fn native_external_terminal_plan_uses_macos_open_without_shell_string() {
+        let target_dir = env::current_dir().expect("current dir must resolve");
+        let plan =
+            native_external_terminal_command(&target_dir).expect("macOS open should be available");
+
+        assert_eq!(plan.method, "macos_open_terminal_app");
+        assert!(plan.command_path.ends_with("open"));
+        assert_eq!(
+            plan.args,
+            vec![
+                "-a".to_string(),
+                "Terminal".to_string(),
+                path_to_string(&target_dir)
+            ]
+        );
     }
 }

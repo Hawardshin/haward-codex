@@ -1,0 +1,19 @@
+{
+  "date": "2026-06-06",
+  "work_id": "native-os-action-bridge",
+  "omission_check_targets": [
+    "_history/evaluations/2026/2026-06-06-native-os-action-bridge-omission.json"
+  ],
+  "required_items": [
+    "web_first_intake",
+    "requirements",
+    "spec_plan_tasks_validation_traceability",
+    "native_runtime_command",
+    "user_visible_controls",
+    "contract_and_tests",
+    "build_or_package_verification",
+    "evaluation_and_trace"
+  ],
+  "status": "coverage_ready",
+  "notes": "Package verification completed before commit."
+}

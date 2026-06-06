@@ -591,6 +591,9 @@
       "start_cli_adapter_session",
       "start_cli_task_pipeline"
     ],
+    "native_os_commands": [
+      "run_native_os_action"
+    ],
     "native_pipe_commands": [
       "run_native_pipe_probe"
     ],

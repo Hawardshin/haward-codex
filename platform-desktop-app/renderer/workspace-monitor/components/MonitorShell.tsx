@@ -175,6 +175,9 @@ type DesktopActionFeedbackId =
   | "check-adapters"
   | "open-search-agent"
   | "open-terminal"
+  | "reveal-workspace"
+  | "open-workspace-path"
+  | "open-external-terminal"
   | "start-selected-lane"
   | "init-task-pipe"
   | "refresh-decisions"
@@ -1967,6 +1970,23 @@ type RuntimeTerminalSetupCheckReport = {
   commandSource: string;
   resolvedPath?: string | null;
   workingDir: string;
+  error?: string | null;
+};
+
+type NativeOsActionReport = {
+  status: string;
+  action: string;
+  operatingSystem: string;
+  method: string;
+  targetPath: string;
+  workingDir: string;
+  command?: string | null;
+  args: string[];
+  exitCode?: number | null;
+  stdout: string;
+  stderr: string;
+  durationMs: number;
+  bounded: boolean;
   error?: string | null;
 };
 
@@ -11877,6 +11897,40 @@ function DesktopRuntimePanel({
     }
   };
 
+  const nativeOsActionDoneMessage = (report: NativeOsActionReport) =>
+    uiLanguage === "ko"
+      ? `${report.method}로 ${report.targetPath} 대상 OS 액션을 실행했습니다.`
+      : `Ran ${report.method} for ${report.targetPath}.`;
+
+  const runNativeWorkspaceOsAction = async (
+    feedbackId: DesktopActionFeedbackId,
+    action: "open_path" | "reveal_path" | "open_external_terminal"
+  ) => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setRuntimeState("unavailable");
+      setError(runtimeUnavailableErrorMessage);
+      setDesktopActionStatus(feedbackId, "failed", runtimeUnavailableErrorMessage);
+      return;
+    }
+    setDesktopActionStatus(feedbackId, "running");
+    setError("");
+    try {
+      const report = await tauriInvoke<NativeOsActionReport>("run_native_os_action", {
+        request: {
+          action,
+          targetPath: null,
+          workingDir: null
+        }
+      });
+      setDesktopActionStatus(feedbackId, "done", nativeOsActionDoneMessage(report));
+    } catch (caught) {
+      const message = errorMessage(caught);
+      setError(message);
+      setDesktopActionStatus(feedbackId, "failed", message);
+    }
+  };
+
   const runSingleHealthCheck = async (adapterId: string) => {
     const tauriInvoke = getTauriInvoke();
     if (!tauriInvoke) {
@@ -13267,6 +13321,27 @@ function DesktopRuntimePanel({
             scope: terminalDrawerOpen ? (uiLanguage === "ko" ? "이미 열림" : "already open") : uiLanguage === "ko" ? "터미널 드로어" : "terminal drawer",
             detail: uiLanguage === "ko" ? "현재 실행 중인 CLI 세션과 네이티브 PTY 출력을 확인할 수 있도록 터미널 패널을 엽니다." : "Opens the terminal panel so running CLI sessions and native PTY output are visible.",
             next: uiLanguage === "ko" ? "상태바의 Terminal 값과 하단 드로어를 확인하세요." : "Check the Terminal status and the bottom drawer."
+          };
+        case "reveal-workspace":
+          return {
+            label: uiLanguage === "ko" ? "Finder에서 보기" : "Reveal in file manager",
+            scope: workspacePathLabel,
+            detail: uiLanguage === "ko" ? "선택된 작업공간 경로를 OS 파일 관리자에서 직접 표시합니다." : "Reveals the selected workspace path in the operating system file manager.",
+            next: uiLanguage === "ko" ? "열린 파일 관리자에서 작업공간 위치와 권한을 확인하세요." : "Check the workspace location and permissions in the opened file manager."
+          };
+        case "open-workspace-path":
+          return {
+            label: uiLanguage === "ko" ? "기본 앱으로 열기" : "Open with default app",
+            scope: workspacePathLabel,
+            detail: uiLanguage === "ko" ? "선택된 작업공간 경로를 OS 기본 앱/파일 관리자로 엽니다." : "Opens the selected workspace path with the operating system default app or file manager.",
+            next: uiLanguage === "ko" ? "OS가 선택한 기본 앱에서 작업공간이 열렸는지 확인하세요." : "Check that the workspace opened in the OS-selected default app."
+          };
+        case "open-external-terminal":
+          return {
+            label: uiLanguage === "ko" ? "외부 터미널 열기" : "Open external terminal",
+            scope: workspacePathLabel,
+            detail: uiLanguage === "ko" ? "선택된 작업공간을 cwd로 하는 OS 터미널 앱을 엽니다." : "Opens the OS terminal app with the selected workspace as cwd.",
+            next: uiLanguage === "ko" ? "외부 터미널의 현재 디렉터리가 작업공간인지 확인하세요." : "Check that the external terminal cwd is the workspace."
           };
         case "start-selected-lane":
           return {
@@ -14804,6 +14879,39 @@ function DesktopRuntimePanel({
             <CheckCircle2 size={16} aria-hidden="true" />
             <span>{uiLanguage === "ko" ? "CLI 자동 확인" : "Check CLIs"}</span>
 	            <small>{uiLanguage === "ko" ? `${availableCount} / ${adapters.length} 준비됨` : `${availableCount} / ${adapters.length} ready`}</small>
+          </button>
+          <button
+            type="button"
+            className={desktopActionButtonClass("reveal-workspace")}
+            data-desktop-action-feedback="reveal-workspace"
+            onClick={() => void runNativeWorkspaceOsAction("reveal-workspace", "reveal_path")}
+            disabled={!invoke}
+          >
+            <FolderOpen size={16} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "Finder" : "File manager"}</span>
+            <small>{workspacePathLabel}</small>
+          </button>
+          <button
+            type="button"
+            className={desktopActionButtonClass("open-workspace-path")}
+            data-desktop-action-feedback="open-workspace-path"
+            onClick={() => void runNativeWorkspaceOsAction("open-workspace-path", "open_path")}
+            disabled={!invoke}
+          >
+            <ExternalLink size={16} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "기본 앱" : "Default app"}</span>
+            <small>{workspacePathLabel}</small>
+          </button>
+          <button
+            type="button"
+            className={desktopActionButtonClass("open-external-terminal")}
+            data-desktop-action-feedback="open-external-terminal"
+            onClick={() => void runNativeWorkspaceOsAction("open-external-terminal", "open_external_terminal")}
+            disabled={!invoke}
+          >
+            <SquareTerminal size={16} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "외부 터미널" : "External terminal"}</span>
+            <small>{workspacePathLabel}</small>
           </button>
           <button
             type="button"

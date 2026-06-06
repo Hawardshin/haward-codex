@@ -421,6 +421,10 @@ test("installer shell runtime contract is bundled and enforceable", () => {
     assert.match(lib, new RegExp(nativePipeCommand));
     assert.ok(contract.runtime_command_surface.native_pipe_commands.includes(nativePipeCommand));
   }
+  for (const nativeOsCommand of ["run_native_os_action"]) {
+    assert.match(lib, new RegExp(nativeOsCommand));
+    assert.ok(contract.runtime_command_surface.native_os_commands.includes(nativeOsCommand));
+  }
   const providerCredentialTarget = contract.data_accumulation_targets.find((target) => target.target_id === "provider_credential_state");
   assert.equal(providerCredentialTarget.record_type, "local_secret_config");
   assert.equal(providerCredentialTarget.directory, "app_config/provider-credentials");
