@@ -16,6 +16,12 @@ export type CoreFeatureDrilldownItem = {
   cta: string;
   run: () => void;
   steps: string[];
+  connections?: Array<{
+    id: string;
+    label: string;
+    detail: string;
+    run: () => void;
+  }>;
 };
 
 export type CoreFeatureDrilldownProps = {
@@ -54,6 +60,17 @@ export function CoreFeatureDrilldown({ feature, language }: CoreFeatureDrilldown
             <small>{feature.label}</small>
           </button>
         </div>
+        {feature.connections?.length ? (
+          <div className="main-feature-connections" data-core-feature-connections={feature.id}>
+            {feature.connections.map((connection) => (
+              <button key={connection.id} type="button" onClick={connection.run} data-core-feature-action={connection.id}>
+                <span>{connection.label}</span>
+                <small>{connection.detail}</small>
+                <ArrowRight size={14} aria-hidden="true" />
+              </button>
+            ))}
+          </div>
+        ) : null}
       </div>
     </section>
   );

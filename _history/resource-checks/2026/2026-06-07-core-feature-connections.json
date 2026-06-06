@@ -1,0 +1,104 @@
+{
+  "task": "Core Feature Connections",
+  "work_mode": "standard",
+  "runtime_context": [
+    "React navigation state",
+    "Tool Studio mode request state",
+    "Next.js development server for Browser smoke",
+    "in-app Browser DOM verification"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "stale-intent-step-state",
+      "category": "memory",
+      "description": "Connections could leave stale intent or flow step state when switching major features.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Connections reuse openSection with explicit intentId and flowStepId for each click.",
+      "evidence": ["selectIntentStep", "openSection(targetSection, { intentId, flowStepId })"]
+    },
+    {
+      "risk_id": "tool-mode-request-staleness",
+      "category": "memory",
+      "description": "Opening Tool Studio from a core feature could fail to refresh a repeated mode request.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Tool mode request increments requestId on every connection run.",
+      "evidence": ["requestId: (previous?.requestId || 0) + 1"]
+    },
+    {
+      "risk_id": "browser-smoke-server",
+      "category": "process",
+      "description": "Browser smoke uses a local Next.js development server that must be stopped after verification.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Use a fixed local port, stop with Ctrl-C, and verify no listener remains with lsof.",
+      "evidence": [
+        "Next dev served http://127.0.0.1:3224",
+        "Ctrl-C stopped the session",
+        "lsof -nP -iTCP:3224 -sTCP:LISTEN returned no listener"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "connection-click-lifecycle",
+      "resource": "React state updates",
+      "create_path": "connection.run -> selectIntentStep/selectToolStep",
+      "cleanup_path": "state overwritten by next explicit route selection",
+      "required": true,
+      "status": "passed",
+      "evidence": ["Each connection has a concrete run callback."]
+    },
+    {
+      "check_id": "dev-server-lifecycle",
+      "resource": "Next.js dev server",
+      "create_path": "corepack pnpm exec next dev -H 127.0.0.1 -p 3224",
+      "cleanup_path": "Ctrl-C and lsof no-listener check",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Server started on 127.0.0.1:3224 and was stopped after Browser smoke.",
+        "No listener remained on TCP 3224."
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "renderer-test",
+      "metric": "Connection contract tests",
+      "tool": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test",
+      "threshold": "90 tests pass",
+      "required": true,
+      "status": "passed",
+      "evidence": ["90 tests passed"]
+    },
+    {
+      "check_id": "renderer-check",
+      "metric": "Type and design contract checks",
+      "tool": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+      "threshold": "exit code 0",
+      "required": true,
+      "status": "passed",
+      "evidence": ["lazy_boundary_contract_ok", "scroll_contract_ok", "source_control_design_ok", "comprehensive_improvement_contract_ok", "history_payload_ok"]
+    },
+    {
+      "check_id": "browser-smoke",
+      "metric": "Connection DOM availability",
+      "tool": "in-app Browser",
+      "threshold": "all target data-core-feature-action ids exist",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "data-core-feature-connections count: 6",
+        "data-core-feature-action count: 18",
+        "agent-role, tool-source, run-lane, eval-current, files-file, visibility-decisions existed",
+        "tool-source click opened #section-tools with Tool Studio/source step visible"
+      ]
+    }
+  ],
+  "notes": [
+    "No installation occurred.",
+    "No native command or CLI pipeline was added."
+  ]
+}

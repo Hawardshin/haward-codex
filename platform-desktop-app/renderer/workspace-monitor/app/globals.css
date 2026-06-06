@@ -5913,6 +5913,55 @@ h3 {
   min-height: 62px;
 }
 
+.main-feature-connections {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.main-feature-connections button {
+  min-width: 0;
+  min-height: 58px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 3px 8px;
+  align-items: center;
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 9px;
+  text-align: left;
+}
+
+.main-feature-connections button:hover {
+  border-color: var(--state-hover-border);
+  background: var(--state-hover-bg);
+}
+
+.main-feature-connections span,
+.main-feature-connections small {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.main-feature-connections span {
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+}
+
+.main-feature-connections small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.main-feature-connections svg {
+  grid-row: span 2;
+  color: var(--accent-primary);
+}
+
 .eval-workbench {
   display: grid;
   gap: 14px;
@@ -17678,6 +17727,7 @@ h3 {
   .desktop-run-timeline,
   .home-metrics-strip,
   .main-feature-detail,
+  .main-feature-connections,
   .product-feature-summary,
   .product-feature-grid,
   .reference-advantage-grid,

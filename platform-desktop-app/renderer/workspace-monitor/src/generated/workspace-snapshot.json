@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T15:40:01.382Z",
+  "generatedAt": "2026-06-06T15:57:59.861Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 5,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 528,
-    "evaluations": 26,
+    "evaluations": 25,
     "webSearches": 11,
     "timingRecords": 12,
     "historyDays": 2,
-    "adminHistoryDocuments": 2822,
+    "adminHistoryDocuments": 2830,
     "adminHistoryDays": 8,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7861,6 +7861,246 @@
   ],
   "documents": [
     {
+      "id": "history-2026-2026-06-07-md",
+      "path": "_history/2026/2026-06-07.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 07",
+      "excerpt": "2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Deskto",
+      "html": "<p>2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Desktop Runtime에 첫 2개 묶음 실행 버튼, fan out 결과 카드, pipeline/session 연결을 추가했다. 경계: default </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2252,
+      "updatedAt": "2026-06-06T15:57:51.949Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-core-feature-connections-input-json",
+      "path": "_history/evaluations/2026/2026-06-07-core-feature-connections-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 07 Core Feature Connections Input",
+      "excerpt": "{ \"initial instruction\": \"주요 기능 연결\", \"result summary\": \"Connected Workspace Monitor home core features to concrete agent, tool, run, eval, file, and visibility flow steps through CoreFeatureDrilldown connection buttons.\", \"work mode\": \"standard\", \"changed files\": \"platform deskto",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;주요 기능 연결&quot;, &quot;result summary&quot;: &quot;Connected Workspace Monitor home core features to concrete agent, tool, run, eval, file, and visibility flow steps through CoreFeatureDrilldown connection buttons.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx&quot;, &quot;platform desktop</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4324,
+      "updatedAt": "2026-06-06T15:57:51.949Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-core-feature-connections-ko-md",
+      "path": "_history/evaluations/2026/2026-06-07-core-feature-connections.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "최종 평가: Core Feature Connections",
+      "excerpt": "최종 평가: Core Feature Connections 날짜: 2026 06 07 평가 홈의 주요 기능 상세가 실제 작업 흐름으로 이어지도록 connection 버튼을 추가했다. 각 버튼은 단순 섹션 이동이 아니라 intent와 flow step 또는 Tool Studio mode request를 함께 설정한다. 충족 핵심 기능 상세에 세부 연결 버튼이 추가됐다. 에이전트, 툴, 실행, 평가, 파일, 실행/결정 가시성 경로가 연결됐다. Tool Studio 연결은 mode request를 갱신한",
+      "html": "<p>최종 평가: Core Feature Connections 날짜: 2026 06 07 평가 홈의 주요 기능 상세가 실제 작업 흐름으로 이어지도록 connection 버튼을 추가했다. 각 버튼은 단순 섹션 이동이 아니라 intent와 flow step 또는 Tool Studio mode request를 함께 설정한다. 충족 핵심 기능 상세에 세부 연결 버튼이 추가됐다. 에이전트, 툴, 실행, 평가, 파일, 실행/결정 가시성 경로가 연결됐다. Tool Studio 연결은 mode request를 갱신한다. DOM/CSS contract가 static test로 보호된다. 검증 corepack pnpm dir platform desktop ap</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1937,
+      "updatedAt": "2026-06-06T15:57:51.949Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-07-core-feature-connections-ko-md",
+      "path": "_history/request-traces/2026/2026-06-07-core-feature-connections.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Core Feature Connections",
+      "excerpt": "Request Trace: Core Feature Connections 날짜: 2026 06 07 요청 \"주요 기능 연결\" 결과 홈 주요 기능 상세에 connection 버튼을 추가했다. connection은 실제 intent/flow step 또는 Tool Studio mode request를 호출한다. 산출물 platform desktop app/docs/requirements/2026 06 07 core feature connections.ko.md platform desktop app/sp",
+      "html": "<p>Request Trace: Core Feature Connections 날짜: 2026 06 07 요청 &quot;주요 기능 연결&quot; 결과 홈 주요 기능 상세에 connection 버튼을 추가했다. connection은 실제 intent/flow step 또는 Tool Studio mode request를 호출한다. 산출물 platform desktop app/docs/requirements/2026 06 07 core feature connections.ko.md platform desktop app/specs/2026 06 07 core feature connections/ history/web searches/2026/2026 06 07 co</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1081,
+      "updatedAt": "2026-06-06T15:57:51.949Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-07-core-feature-connections-ko-md",
+      "path": "_history/work-timings/2026/2026-06-07-core-feature-connections.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "Work Timing: Core Feature Connections",
+      "excerpt": "Work Timing: Core Feature Connections 날짜: 2026 06 07 | 단계 | 대략 시간 | 메모 | | | : | | | 웹 우선 조사와 기존 구조 확인 | 10분 | 공식 문서와 홈/task intent 구조 확인 | | 구현 | 20분 | connection contract, helper, CSS, tests | | 1차 검증 | 8분 | 테스트 실패 1건 후 반응형 중단점 테스트 조정 | | 기록 작성 | 15분 | 요구사항, spec, history recor",
+      "html": "<p>Work Timing: Core Feature Connections 날짜: 2026 06 07 | 단계 | 대략 시간 | 메모 | | | : | | | 웹 우선 조사와 기존 구조 확인 | 10분 | 공식 문서와 홈/task intent 구조 확인 | | 구현 | 20분 | connection contract, helper, CSS, tests | | 1차 검증 | 8분 | 테스트 실패 1건 후 반응형 중단점 테스트 조정 | | 기록 작성 | 15분 | 요구사항, spec, history records | | 최종 검증 | 25분 | collect/build/platform check, Browser smoke, resource/omiss</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 670,
+      "updatedAt": "2026-06-06T15:57:51.949Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-07-core-feature-connections-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-07-core-feature-connections.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Core Feature Connections",
+      "excerpt": "Work Summary: Core Feature Connections 날짜: 2026 06 07 요약 Workspace Monitor 홈의 주요 기능 상세에 세부 연결 버튼을 추가했다. 에이전트, 툴, 실행, 평가, 파일, 가시성 기능이 실제 section/intent/flow step으로 바로 이동한다. 변경 CoreFeatureDrilldownItem 에 connections contract 추가. CoreFeatureDrilldown 에 connection grid 렌더링 추가. Monito",
+      "html": "<p>Work Summary: Core Feature Connections 날짜: 2026 06 07 요약 Workspace Monitor 홈의 주요 기능 상세에 세부 연결 버튼을 추가했다. 에이전트, 툴, 실행, 평가, 파일, 가시성 기능이 실제 section/intent/flow step으로 바로 이동한다. 변경 CoreFeatureDrilldownItem 에 connections contract 추가. CoreFeatureDrilldown 에 connection grid 렌더링 추가. MonitorShell 에 selectIntentStep , selectToolStep helper 추가. 홈 주요 기능 6개에 세부 연결 버튼 추가. .</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 894,
+      "updatedAt": "2026-06-06T15:57:51.948Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-core-feature-connections-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-core-feature-connections/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Core Feature Connections",
+      "excerpt": "Tasks: Core Feature Connections x 웹 우선 검색과 공식 문서 기준 확인. x 요구사항과 spec/plan/task/validation/traceability 기록 생성. x CoreFeatureDrilldownItem.connections 타입과 렌더링 추가. x selectIntentStep , selectToolStep helper를 공유 위치로 이동. x 주요 기능별 세부 연결 버튼 추가. x 연결 버튼 CSS와 반응형 grid 규칙 추가. x static test",
+      "html": "<h1>Tasks: Core Feature Connections</h1>\n<ul>\n<li>[x] 웹 우선 검색과 공식 문서 기준 확인.</li>\n<li>[x] 요구사항과 spec/plan/task/validation/traceability 기록 생성.</li>\n<li>[x] <code>CoreFeatureDrilldownItem.connections</code> 타입과 렌더링 추가.</li>\n<li>[x] <code>selectIntentStep</code>, <code>selectToolStep</code> helper를 공유 위치로 이동.</li>\n<li>[x] 주요 기능별 세부 연결 버튼 추가.</li>\n<li>[x] 연결 버튼 CSS와 반응형 grid 규칙 추가.</li>\n<li>[x] static tests에 route, DOM, CSS contract 추가.</li>\n<li>[x] renderer test/check 실행.</li>\n<li>[x] snapshot collect, renderer build, platform check 실행.</li>\n<li>[x] Browser smoke로 홈 연결 DOM 확인.</li>\n<li>[x] omission/resource/evaluation guard 실행.</li>\n<li>[ ] commit 및 push.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 697,
+      "updatedAt": "2026-06-06T15:57:51.948Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-core-feature-connections-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-core-feature-connections/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Core Feature Connections",
+      "excerpt": "Validation: Core Feature Connections 날짜: 2026 06 07 정적 검증 corepack pnpm dir platform desktop app/renderer/workspace monitor test 상태: 통과 결과: 90 tests pass corepack pnpm dir platform desktop app/renderer/workspace monitor run check 상태: 통과 결과: lazy boundary contract ok , scroll cont",
+      "html": "<h1>Validation: Core Feature Connections</h1>\n<p>날짜: 2026-06-07</p>\n<h2>정적 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code></li>\n<li>상태: 통과</li>\n<li>결과: 90 tests pass</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li>상태: 통과</li>\n<li>결과: <code>lazy_boundary_contract_ok</code>, <code>scroll_contract_ok</code>, <code>source_control_design_ok</code>, <code>comprehensive_improvement_contract_ok</code>, <code>history_payload_ok</code></li>\n</ul>\n<h2>빌드/스냅샷 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code></li>\n<li>상태: 통과</li>\n<li>결과: 650 inline documents, 2830 admin history records</li>\n<li><code>corepack pnpm -w run desktop:renderer:build</code></li>\n<li>상태: 통과</li>\n<li>결과: Next.js production build, customer bundle audit ready</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code></li>\n<li>상태: 통과</li>\n<li>결과: developer public snapshot restored</li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code></li>\n<li>상태: 통과</li>\n<li>결과: internal checks passed; 기존 public release gate 경고와 developer snapshot stale warning은 유지</li>\n</ul>\n<h2>Browser Smoke</h2>\n<ul>\n<li>대상: <code>http://127.0.0.1:3224/#section-overview</code></li>\n<li>상태: 통과</li>\n<li>결과:</li>\n<li><code>data-home-focus-command</code>: 1</li>\n<li><code>data-core-feature-connections</code>: 6</li>\n<li><code>data-core-feature-action</code>: 18</li>\n<li>확인한 action: <code>agent-role</code>, <code>tool-source</code>, <code>run-lane</code>, <code>eval-current</code>, <code>files-file</code>, <code>visibility-decisions</code></li>\n<li><code>tool-source</code> 대표 클릭 후 <code>#section-tools</code>, visible mounted section <code>tools</code>, Tool Studio/source step text 확인</li>\n<li>dev server 종료 후 <code>lsof -nP -iTCP:3224 -sTCP:LISTEN</code> no listener</li>\n</ul>\n<h2>예정 검증</h2>\n<ul>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>Guard</h2>\n<ul>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/resource-checks/2026/2026-06-07-core-feature-connections.json</code></li>\n<li>상태: 통과</li>\n<li>결과: <code>resource_ready</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/omission-checks/2026/2026-06-07-core-feature-connections.json</code></li>\n<li>상태: 통과</li>\n<li>결과: <code>coverage_ready</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-07-core-feature-connections-input.json</code></li>\n<li>상태: 통과</li>\n<li>결과: <code>ready_to_close</code></li>\n</ul>\n<h2>수동 확인 포인트</h2>\n<ul>\n<li>홈 주요 기능 상세에서 <code>data-core-feature-connections</code>가 렌더링된다.</li>\n<li><code>agent-role</code>, <code>tool-source</code>, <code>run-lane</code>, <code>eval-current</code>, <code>files-file</code>, <code>visibility-decisions</code> 액션이 존재한다.</li>\n<li>Tool Studio 연결은 mode request를 발생시키고 <code>build-tool</code> intent step을 연다.</li>\n</ul>\n<h2>남은 경계</h2>\n<ul>\n<li>Browser preview는 native command 실행이 아니라 화면/DOM 연결만 확인한다.</li>\n<li>이번 slice는 navigation connection이며 새 CLI process lifecycle을 추가하지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2818,
+      "updatedAt": "2026-06-06T15:57:51.948Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-plans-2026-2026-06-07-core-feature-connections-ko-md",
+      "path": "_history/plans/2026/2026-06-07-core-feature-connections.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Work Plan: Core Feature Connections",
+      "excerpt": "Work Plan: Core Feature Connections 날짜: 2026 06 07 모드 standard 이유: Desktop app renderer의 의미 있는 UI navigation 동작 변경이며 테스트, 빌드, 브라우저 smoke가 필요하다. 단계 1. 웹 우선 intake와 기존 홈/task intent 구조 확인. 2. 요구사항/spec/trace 기준 작성. 3. CoreFeatureDrilldown connection contract 추가. 4. MonitorShell의 주요",
+      "html": "<p>Work Plan: Core Feature Connections 날짜: 2026 06 07 모드 standard 이유: Desktop app renderer의 의미 있는 UI navigation 동작 변경이며 테스트, 빌드, 브라우저 smoke가 필요하다. 단계 1. 웹 우선 intake와 기존 홈/task intent 구조 확인. 2. 요구사항/spec/trace 기준 작성. 3. CoreFeatureDrilldown connection contract 추가. 4. MonitorShell의 주요 기능 run/connection을 실제 intent step으로 연결. 5. CSS와 static tests 추가. 6. renderer te</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 665,
+      "updatedAt": "2026-06-06T15:52:07.679Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-07-core-feature-connections-ko-md",
+      "path": "_history/user-requests/2026/2026-06-07-core-feature-connections.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: Core Feature Connections",
+      "excerpt": "User Request: Core Feature Connections 날짜: 2026 06 07 요약 사용자는 플랫폼의 주요 기능을 실제 작업 흐름에 연결하라고 요청했다. 이전에 구현한 기능들이 각자 떨어져 보이지 않도록, 홈에서 에이전트, 툴, 실행, 평가, 파일, 가시성으로 바로 이동할 수 있어야 한다. 해석 단순 안내 문구가 아니라 클릭 가능한 기능 연결을 구현한다. 연결은 섹션 이동뿐 아니라 해당 작업 의도와 단계 선택까지 포함한다. UI/UX는 직관적이고 기존 workbench 구조와 일",
+      "html": "<p>User Request: Core Feature Connections 날짜: 2026 06 07 요약 사용자는 플랫폼의 주요 기능을 실제 작업 흐름에 연결하라고 요청했다. 이전에 구현한 기능들이 각자 떨어져 보이지 않도록, 홈에서 에이전트, 툴, 실행, 평가, 파일, 가시성으로 바로 이동할 수 있어야 한다. 해석 단순 안내 문구가 아니라 클릭 가능한 기능 연결을 구현한다. 연결은 섹션 이동뿐 아니라 해당 작업 의도와 단계 선택까지 포함한다. UI/UX는 직관적이고 기존 workbench 구조와 일관되어야 한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 620,
+      "updatedAt": "2026-06-06T15:52:07.678Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-07-core-feature-connections-ko-md",
+      "path": "_history/web-searches/2026/2026-06-07-core-feature-connections.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Core Feature Connections",
+      "excerpt": "Web Search: Core Feature Connections 날짜: 2026 06 07 검색 VS Code workbench command palette activity bar navigation UX official documentation Tauri v2 frontend invoke command official documentation OpenAI Agents SDK manager agents as tools official documentation Claude Code subagent",
+      "html": "<p>Web Search: Core Feature Connections 날짜: 2026 06 07 검색 VS Code workbench command palette activity bar navigation UX official documentation Tauri v2 frontend invoke command official documentation OpenAI Agents SDK manager agents as tools official documentation Claude Code subagents official documentation 확인한 출처 VS Code User Interface: https://code.visualstudi</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2387,
+      "updatedAt": "2026-06-06T15:52:07.678Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-core-feature-connections-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-core-feature-connections/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Core Feature Connections",
+      "excerpt": "Traceability: Core Feature Connections 날짜: 2026 06 07 | 요구 | 구현 | 검증 | | | | | | 홈 주요 기능이 실제 작업 흐름으로 연결되어야 한다 | MonitorShell.tsx homeMainFeatures connection 배열 | renderer test, Browser smoke | | 연결은 섹션뿐 아니라 단계까지 선택해야 한다 | selectIntentStep , selectToolStep | static test route cont",
+      "html": "<h1>Traceability: Core Feature Connections</h1>\n<p>날짜: 2026-06-07</p>\n<table><thead><tr><th>요구</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>홈 주요 기능이 실제 작업 흐름으로 연결되어야 한다</td><td><code>MonitorShell.tsx</code> <code>homeMainFeatures</code> connection 배열</td><td>renderer test, Browser smoke</td></tr><tr><td>연결은 섹션뿐 아니라 단계까지 선택해야 한다</td><td><code>selectIntentStep</code>, <code>selectToolStep</code></td><td>static test route contract</td></tr><tr><td>Tool Studio 연결은 mode를 함께 전달해야 한다</td><td><code>setRequestedToolMode</code> helper</td><td>static test <code>requestedMode</code>/helper contract</td></tr><tr><td>연결 UI는 핵심 기능 상세에 표시되어야 한다</td><td><code>CoreFeatureDrilldown.tsx</code> connection button render</td><td>static test DOM contract</td></tr><tr><td>반응형 UI가 기존 홈 구조와 맞아야 한다</td><td><code>globals.css</code> <code>.main-feature-connections</code></td><td>CSS contract test, Browser smoke</td></tr></tbody></table>\n<h2>기록</h2>\n<ul>\n<li>요구사항: <code>platform-desktop-app/docs/requirements/2026-06-07-core-feature-connections.ko.md</code></li>\n<li>계획: <code>platform-desktop-app/specs/2026-06-07-core-feature-connections/plan.ko.md</code></li>\n<li>검증: <code>platform-desktop-app/specs/2026-06-07-core-feature-connections/validation.ko.md</code></li>\n<li>평가: <code>_history/evaluations/2026/2026-06-07-core-feature-connections.ko.md</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1200,
+      "updatedAt": "2026-06-06T15:52:07.677Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-07-core-feature-connections-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-07-core-feature-connections.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: Core Feature Connections",
+      "excerpt": "요구사항: Core Feature Connections 날짜: 2026 06 07 요구 사용자는 주요 기능을 서로 연결해, 홈 화면의 핵심 기능이 단순 설명 카드로 끝나지 않고 실제 에이전트, 툴, 실행, 평가, 파일, 가시성 작업면으로 바로 이어지기를 요구했다. 수용 기준 홈의 핵심 기능 상세는 기본 CTA 외에 세부 연결 버튼을 제공한다. 연결 버튼은 섹션 이름만 여는 것이 아니라 해당 작업 의도와 단계까지 선택한다. 에이전트 만들기, 툴 만들기, 작업 실행, 평가, 파일 열기, 실행/결정 가",
+      "html": "<h1>요구사항: Core Feature Connections</h1>\n<p>날짜: 2026-06-07</p>\n<h2>요구</h2>\n<p>사용자는 주요 기능을 서로 연결해, 홈 화면의 핵심 기능이 단순 설명 카드로 끝나지 않고 실제 에이전트, 툴, 실행, 평가, 파일, 가시성 작업면으로 바로 이어지기를 요구했다.</p>\n<h2>수용 기준</h2>\n<ul>\n<li>홈의 핵심 기능 상세는 기본 CTA 외에 세부 연결 버튼을 제공한다.</li>\n<li>연결 버튼은 섹션 이름만 여는 것이 아니라 해당 작업 의도와 단계까지 선택한다.</li>\n<li>에이전트 만들기, 툴 만들기, 작업 실행, 평가, 파일 열기, 실행/결정 가시성의 주요 경로가 모두 포함된다.</li>\n<li>Tool Studio 연결은 선택된 tool mode 요청을 함께 전달한다.</li>\n<li>연결 UI는 작은 화면에서 기존 홈 반응형 규칙을 따른다.</li>\n<li>연결 DOM contract와 CSS contract가 테스트로 보호된다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>새 native command 추가.</li>\n<li>실제 CLI 실행 pipeline 변경.</li>\n<li>새로운 외부 dependency 설치.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1008,
+      "updatedAt": "2026-06-06T15:52:07.676Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-core-feature-connections-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-core-feature-connections/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Core Feature Connections",
+      "excerpt": "Plan: Core Feature Connections 1. 웹 우선 조사로 workbench navigation, Tauri frontend/native bridge, agent tool/subagent 연결 기준을 확인한다. 2. 기존 홈 주요 기능, task intent, Tool Studio mode 요청 흐름을 확인한다. 3. CoreFeatureDrilldownItem 에 세부 connection contract를 추가한다. 4. MonitorShell 에 intent step과 too",
+      "html": "<h1>Plan: Core Feature Connections</h1>\n<p>1. 웹 우선 조사로 workbench navigation, Tauri frontend/native bridge, agent tool/subagent 연결 기준을 확인한다.</p>\n<p>2. 기존 홈 주요 기능, task intent, Tool Studio mode 요청 흐름을 확인한다.</p>\n<p>3. <code>CoreFeatureDrilldownItem</code>에 세부 connection contract를 추가한다.</p>\n<p>4. <code>MonitorShell</code>에 intent step과 tool step 공유 helper를 추가한다.</p>\n<p>5. 홈 주요 기능 6개에 핵심 연결 버튼을 붙인다.</p>\n<p>6. CSS와 static tests로 DOM/CSS/route contract를 고정한다.</p>\n<p>7. renderer test/check, snapshot collect, renderer build, platform check, Browser smoke, omission/resource/evaluation guard를 실행한다.</p>\n<p>8. history/spec/evaluation 기록 후 commit/push한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 733,
+      "updatedAt": "2026-06-06T15:52:07.676Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-core-feature-connections-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-core-feature-connections/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Core Feature Connections",
+      "excerpt": "Spec: Core Feature Connections 날짜: 2026 06 07 목적 Workspace Monitor 홈의 주요 기능을 실제 작업면과 하위 흐름에 직접 연결한다. 사용자는 \"에이전트\", \"툴\", \"실행\", \"평가\", \"파일\", \"가시성\"을 눌렀을 때 별도 탐색 없이 해당 기능의 세부 단계로 들어가야 한다. 동작 1. CoreFeatureDrilldownItem 은 선택적 connections 배열을 가진다. 2. 각 connection은 id , label , detail , r",
+      "html": "<h1>Spec: Core Feature Connections</h1>\n<p>날짜: 2026-06-07</p>\n<h2>목적</h2>\n<p>Workspace Monitor 홈의 주요 기능을 실제 작업면과 하위 흐름에 직접 연결한다. 사용자는 &quot;에이전트&quot;, &quot;툴&quot;, &quot;실행&quot;, &quot;평가&quot;, &quot;파일&quot;, &quot;가시성&quot;을 눌렀을 때 별도 탐색 없이 해당 기능의 세부 단계로 들어가야 한다.</p>\n<h2>동작</h2>\n<p>1. <code>CoreFeatureDrilldownItem</code>은 선택적 <code>connections</code> 배열을 가진다.</p>\n<p>2. 각 connection은 <code>id</code>, <code>label</code>, <code>detail</code>, <code>run</code>을 가진다.</p>\n<p>3. <code>CoreFeatureDrilldown</code>은 기본 CTA 아래에 connection 버튼 grid를 렌더링한다.</p>\n<p>4. connection 버튼은 <code>data-core-feature-connections</code>와 <code>data-core-feature-action</code> contract를 가진다.</p>\n<p>5. <code>MonitorShell</code>은 <code>selectIntentStep(intentId, targetSection, flowStepId)</code> helper로 작업 의도와 단계를 함께 선택한다.</p>\n<p>6. <code>MonitorShell</code>은 <code>selectToolStep(mode, flowStepId)</code> helper로 Tool Studio mode와 build-tool intent step을 함께 선택한다.</p>\n<p>7. 홈 주요 기능은 다음 연결을 제공한다.</p>\n<ul>\n<li>에이전트: 역할 선택, 도구 연결, 검증 제안.</li>\n<li>툴: 소스 선택, 환경 확인, 배포 점검.</li>\n<li>실행: 실행 경로, 실행 시작, 결과 처리.</li>\n<li>평가: 현재 점수, 사용 비교, 오픈소스 후보 판단.</li>\n<li>파일: 파일 선택, 컨텍스트 확인, 실행 연결.</li>\n<li>가시성: 실행 기록, 결정함, 개선 흐름.</li>\n</ul>\n<h2>안전/UX 경계</h2>\n<ul>\n<li>연결은 기존 <code>openSection</code>과 기존 task intent state를 재사용한다.</li>\n<li>새 background process나 native command는 시작하지 않는다.</li>\n<li>버튼 label/detail은 한 줄 ellipsis contract를 따른다.</li>\n<li>반응형 처리는 기존 홈 <code>max-width: 1080px</code> grid 규칙에 편입한다.</li>\n</ul>\n<h2>참고</h2>\n<ul>\n<li>VS Code User Interface: https://code.visualstudio.com/docs/editing/userinterface</li>\n<li>Tauri Calling Rust from the Frontend: https://v2.tauri.app/develop/calling-rust/</li>\n<li>OpenAI Agents SDK Agents: https://openai.github.io/openai-agents-js/guides/agents/</li>\n<li>OpenAI Agents SDK Tools: https://openai.github.io/openai-agents-js/guides/tools/</li>\n<li>Claude Code Subagents: https://code.claude.com/docs/en/subagents</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2119,
+      "updatedAt": "2026-06-06T15:52:07.676Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-07-subagent-tool-selection-input-json",
       "path": "_history/evaluations/2026/2026-06-07-subagent-tool-selection-input.json",
       "category": "evaluation",
@@ -7891,22 +8131,6 @@
       "historyDate": "2026-06-07",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-2026-2026-06-07-md",
-      "path": "_history/2026/2026-06-07.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 07",
-      "excerpt": "2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Deskto",
-      "html": "<p>2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Desktop Runtime에 첫 2개 묶음 실행 버튼, fan out 결과 카드, pipeline/session 연결을 추가했다. 경계: default </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1561,
-      "updatedAt": "2026-06-06T15:38:01.261Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-evaluations-2026-2026-06-07-subagent-tool-selection-ko-md",
@@ -10133,54 +10357,6 @@
       "workspaceArea": "_history/user-requests"
     },
     {
-      "id": "history-evaluations-2026-2026-06-06-lightweight-cli-install-resource-json",
-      "path": "_history/evaluations/2026/2026-06-06-lightweight-cli-install-resource.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Lightweight Cli Install Resource",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"lightweight cli install\", \"resource risk occurred\": true, \"resource check targets\": \" history/evaluations/2026/2026 06 06 lightweight cli install resource.json\" , \"checks\": { \"id\": \"process bounds\", \"status\": \"passed\", \"evidence\": \"awp launcher",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;lightweight cli install&quot;, &quot;resource risk occurred&quot;: true, &quot;resource check targets&quot;: &quot; history/evaluations/2026/2026 06 06 lightweight cli install resource.json&quot; , &quot;checks&quot;: { &quot;id&quot;: &quot;process bounds&quot;, &quot;status&quot;: &quot;passed&quot;, &quot;evidence&quot;: &quot;awp launcher commands use stdin DEVNULL, timeout, bounded output, and shell=False.&quot; }, { &quot;id</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 772,
-      "updatedAt": "2026-06-06T12:36:30.223Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-lightweight-cli-install-ko-md",
-      "path": "_history/plans/2026/2026-06-06-lightweight-cli-install.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "Plan Record: Lightweight CLI Install",
-      "excerpt": "Plan Record: Lightweight CLI Install 날짜: 2026 06 06 1. 웹 우선 확인으로 Python/Rust CLI 옵션을 비교한다. 2. Python 표준 라이브러리 단일 파일 CLI를 구현한다. 3. user local symlink installer를 구현한다. 4. 설치 dry run 후 실제 설치한다. 5. 설치 audit/registry를 남긴다. 6. tests/check/package, commit, push를 완료한다.",
-      "html": "<p>Plan Record: Lightweight CLI Install 날짜: 2026 06 06 1. 웹 우선 확인으로 Python/Rust CLI 옵션을 비교한다. 2. Python 표준 라이브러리 단일 파일 CLI를 구현한다. 3. user local symlink installer를 구현한다. 4. 설치 dry run 후 실제 설치한다. 5. 설치 audit/registry를 남긴다. 6. tests/check/package, commit, push를 완료한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 380,
-      "updatedAt": "2026-06-06T12:36:30.223Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-lightweight-cli-install-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-lightweight-cli-install.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "Web Search: Lightweight CLI Install",
-      "excerpt": "Web Search: Lightweight CLI Install 날짜: 2026 06 06 질의 Python argparse official documentation command line interface Python console scripts entry points official packaging documentation Rust clap official documentation command line parser 확인한 출처 Python argparse 공식 문서: Python 표준 라이",
-      "html": "<p>Web Search: Lightweight CLI Install 날짜: 2026 06 06 질의 Python argparse official documentation command line interface Python console scripts entry points official packaging documentation Rust clap official documentation command line parser 확인한 출처 Python argparse 공식 문서: Python 표준 라이브러리 CLI parser로 subcommand/error handling을 제공한다. https://docs.python.org/3.12/li</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1205,
-      "updatedAt": "2026-06-06T12:36:30.222Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-lightweight-cli-install-plan-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-lightweight-cli-install/plan.ko.md",
       "category": "project-spec",
@@ -10245,22 +10421,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-work-timings-2026-2026-06-06-native-os-action-bridge-ko-md",
-      "path": "_history/work-timings/2026/2026-06-06-native-os-action-bridge.ko.md",
-      "category": "work-timing",
-      "language": "ko",
-      "title": "Work Timing: Native OS Action Bridge",
-      "excerpt": "Work Timing: Native OS Action Bridge 날짜: 2026 06 06 단계 웹 우선 확인: 완료 구현: 완료 Rust/Node/renderer 검증: 완료 내부 패키징: 완료 commit/push: 완료",
-      "html": "<p>Work Timing: Native OS Action Bridge 날짜: 2026 06 06 단계 웹 우선 확인: 완료 구현: 완료 Rust/Node/renderer 검증: 완료 내부 패키징: 완료 commit/push: 완료</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 201,
-      "updatedAt": "2026-06-06T12:29:34.451Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-native-os-action-bridge-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-native-os-action-bridge/tasks.ko.md",
       "category": "project-spec",
@@ -10277,54 +10437,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-evaluations-2026-2026-06-06-native-os-action-bridge-omission-json",
-      "path": "_history/evaluations/2026/2026-06-06-native-os-action-bridge-omission.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Native Os Action Bridge Omission",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"native os action bridge\", \"omission check targets\": \" history/evaluations/2026/2026 06 06 native os action bridge omission.json\" , \"required items\": \"web first intake\", \"requirements\", \"spec plan tasks validation traceability\", \"native runtime ",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;native os action bridge&quot;, &quot;omission check targets&quot;: &quot; history/evaluations/2026/2026 06 06 native os action bridge omission.json&quot; , &quot;required items&quot;: &quot;web first intake&quot;, &quot;requirements&quot;, &quot;spec plan tasks validation traceability&quot;, &quot;native runtime command&quot;, &quot;user visible controls&quot;, &quot;contract and tests&quot;, &quot;build or package verif</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 540,
-      "updatedAt": "2026-06-06T12:28:45.939Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-native-os-action-bridge-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-native-os-action-bridge.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "Evaluation: Native OS Action Bridge",
-      "excerpt": "Evaluation: Native OS Action Bridge 날짜: 2026 06 06 사용자 요구 대비 요구: 운영체제 기능을 직접 조작하도록 도움. 결과: run native os action 을 추가해 작업공간을 Finder/파일 관리자에서 표시, 기본 앱으로 열기, 외부 터미널로 열기 기능을 제공했다. Quick Start에 직접 실행 버튼을 추가했다. 안전 경계 허용 액션은 3개로 제한했다. 작업공간 밖 경로, private/ , outputs/ 대상은 기존 path guard로 차단",
-      "html": "<p>Evaluation: Native OS Action Bridge 날짜: 2026 06 06 사용자 요구 대비 요구: 운영체제 기능을 직접 조작하도록 도움. 결과: run native os action 을 추가해 작업공간을 Finder/파일 관리자에서 표시, 기본 앱으로 열기, 외부 터미널로 열기 기능을 제공했다. Quick Start에 직접 실행 버튼을 추가했다. 안전 경계 허용 액션은 3개로 제한했다. 작업공간 밖 경로, private/ , outputs/ 대상은 기존 path guard로 차단한다. 외부 터미널은 shell string이 아니라 executable + args로 실행한다. 자동 검증에서 실제 OS 창을 띄우는 smok</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 911,
-      "updatedAt": "2026-06-06T12:28:36.310Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-native-os-action-bridge-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-native-os-action-bridge.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "Work Summary: Native OS Action Bridge",
-      "excerpt": "Work Summary: Native OS Action Bridge 날짜: 2026 06 06 완료 run native os action Tauri command 추가 open path , reveal path , open external terminal allowlist 적용 작업공간 내부 path guard 적용 Quick Start에 Finder/기본 앱/외부 터미널 버튼 추가 runtime contract, readiness, Rust/Node/renderer 테스트 업데이트 검증 요약 R",
-      "html": "<p>Work Summary: Native OS Action Bridge 날짜: 2026 06 06 완료 run native os action Tauri command 추가 open path , reveal path , open external terminal allowlist 적용 작업공간 내부 path guard 적용 Quick Start에 Finder/기본 앱/외부 터미널 버튼 추가 runtime contract, readiness, Rust/Node/renderer 테스트 업데이트 검증 요약 Rust/Node/renderer/check 검증 통과. 내부 패키징도 통과했고 macOS .app 서명 검증과 .dmg verify가 완료됐다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 522,
-      "updatedAt": "2026-06-06T12:28:36.310Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-native-os-action-bridge-validation-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-native-os-action-bridge/validation.ko.md",
       "category": "project-spec",
@@ -10339,22 +10451,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-native-os-action-bridge-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-native-os-action-bridge.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "Request Trace: Native OS Action Bridge",
-      "excerpt": "Request Trace: Native OS Action Bridge 날짜: 2026 06 06 요청 운영체제 기능을 직접 조작하도록 도움. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 native os action bridge.ko.md 스펙: platform desktop app/specs/2026 06 06 native os action bridge/ 구현: platform desktop app/src tauri/src/lib.r",
-      "html": "<p>Request Trace: Native OS Action Bridge 날짜: 2026 06 06 요청 운영체제 기능을 직접 조작하도록 도움. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 native os action bridge.ko.md 스펙: platform desktop app/specs/2026 06 06 native os action bridge/ 구현: platform desktop app/src tauri/src/lib.rs , platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 869,
-      "updatedAt": "2026-06-06T12:27:10.722Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-native-os-action-bridge-traceability-ko-md",
@@ -18163,137 +18259,41 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-python-environment-workbench-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-python-environment-workbench/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록",
-      "excerpt": "작업 목록 x PythonEnvironmentProfile 타입과 3개 실행환경 프로필 추가 x environment 모드 전용 workbench JSX 추가 x 실행환경 profile/runtime/install/run/sandbox/health/action marker 추가 x 860px 이하 1열 접힘 CSS 추가 x static regression test 추가 x workspace monitor check 실행 x workspace monitor build:customer 실행 x des",
-      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] <code>PythonEnvironmentProfile</code> 타입과 3개 실행환경 프로필 추가</li>\n<li>[x] <code>environment</code> 모드 전용 workbench JSX 추가</li>\n<li>[x] 실행환경 profile/runtime/install/run/sandbox/health/action marker 추가</li>\n<li>[x] 860px 이하 1열 접힘 CSS 추가</li>\n<li>[x] static regression test 추가</li>\n<li>[x] <code>workspace-monitor check</code> 실행</li>\n<li>[x] <code>workspace-monitor build:customer</code> 실행</li>\n<li>[x] desktop/mobile Browser smoke와 screenshot 저장</li>\n<li>[x] 평가, 추적, 작업 요약 갱신</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 497,
-      "updatedAt": "2026-06-04T23:26:38.247Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-python-environment-workbench-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-python-environment-workbench/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증 기록",
-      "excerpt": "검증 기록 명령 corepack pnpm filter workspace monitor test 통과 corepack pnpm filter workspace monitor run check 통과 corepack pnpm filter workspace monitor run build:customer 통과 Browser smoke in app Browser desktop: Tools 화면에서 파이썬 환경 mode를 열고 data tool environment workbench 표시를 확인했다. in a",
-      "html": "<h1>검증 기록</h1>\n<h2>명령</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code> 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code> 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code> 통과</li>\n</ul>\n<h2>Browser smoke</h2>\n<ul>\n<li>in-app Browser desktop: Tools 화면에서 <code>파이썬 환경</code> mode를 열고 <code>data-tool-environment-workbench</code> 표시를 확인했다.</li>\n<li>in-app Browser desktop: profile 3개, action 4개, runtime/install/run/sandbox/health 영역, 수평 overflow 0을 확인했다.</li>\n<li>in-app Browser desktop: Agent sandbox profile 전환 후 <code>runtime/sandbox/.venv</code>, network/secret/host path 경계 문구, 수평 overflow 0을 확인했다.</li>\n<li>Playwright mobile 390x844: profile/canvas/action 영역이 모두 한 열로 접히고 수평 overflow 0, action 최소 높이 48px임을 확인했다.</li>\n</ul>\n<h2>스크린샷</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-python-environment-desktop.png</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-python-environment-mobile.png</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1067,
-      "updatedAt": "2026-06-04T23:26:38.247Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-python-environment-workbench-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-python-environment-workbench/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성",
-      "excerpt": "추적성 | 항목 | 연결 | | | | | 요구사항 | REQ WM 052 | | 사용자 요청 | 파이썬 실행환경 | | 구현 파일 | components/workbench/ToolStudioPanel.tsx | | 스타일 파일 | app/globals.css | | 테스트 파일 | tests/tool studio.test.mjs | | 검증 파일 | validation.ko.md | | 이력 | history/request traces/2026/2026 06 05 python environmen",
-      "html": "<h1>추적성</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>요구사항</td><td>REQ-WM-052</td></tr><tr><td>사용자 요청</td><td><code>파이썬 실행환경</code></td></tr><tr><td>구현 파일</td><td><code>components/workbench/ToolStudioPanel.tsx</code></td></tr><tr><td>스타일 파일</td><td><code>app/globals.css</code></td></tr><tr><td>테스트 파일</td><td><code>tests/tool-studio.test.mjs</code></td></tr><tr><td>검증 파일</td><td><code>validation.ko.md</code></td></tr><tr><td>이력</td><td><code>_history/request-traces/2026/2026-06-05-python-environment-workbench.ko.md</code></td></tr></tbody></table>\n<h2>수락 기준</h2>\n<ul>\n<li><code>data-tool-environment-workbench</code>가 <code>environment</code> 모드에서만 표시된다.</li>\n<li>profile 3개와 action 4개가 marker로 검증된다.</li>\n<li>runtime/install/run/sandbox/health 영역이 모두 표시된다.</li>\n<li>390px 모바일에서도 수평 overflow가 없다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 691,
-      "updatedAt": "2026-06-04T23:23:26.233Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-python-environment-workbench-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-python-environment-workbench/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "구현 계획",
-      "excerpt": "구현 계획 범위 ToolStudioPanel 에 Python 실행환경 프로필 모델과 선택 상태를 추가한다. environment 모드에만 표시되는 전용 workbench를 추가한다. 실행환경 작업대 CSS를 build / deploy 와 동일한 반응형 계약으로 맞춘다. static test, check, customer build, desktop/mobile Browser smoke로 검증한다. 결정 언어/런타임 선택은 기존 Next.js/React/TypeScript를 유지한다. 별도 runti",
-      "html": "<h1>구현 계획</h1>\n<h2>범위</h2>\n<ul>\n<li><code>ToolStudioPanel</code>에 Python 실행환경 프로필 모델과 선택 상태를 추가한다.</li>\n<li><code>environment</code> 모드에만 표시되는 전용 workbench를 추가한다.</li>\n<li>실행환경 작업대 CSS를 <code>build</code>/<code>deploy</code>와 동일한 반응형 계약으로 맞춘다.</li>\n<li>static test, check, customer build, desktop/mobile Browser smoke로 검증한다.</li>\n</ul>\n<h2>결정</h2>\n<ul>\n<li>언어/런타임 선택은 기존 Next.js/React/TypeScript를 유지한다.</li>\n<li>별도 runtime 구현 대신 UI 계약과 복사 가능한 실행 계획을 먼저 만든다.</li>\n<li>실행환경 옵션은 <code>.venv</code>, 매 실행 임시 runner, AgentCore Code Interpreter식 sandbox 경계의 세 가지로 제한한다.</li>\n</ul>\n<h2>위험과 대응</h2>\n<ul>\n<li>긴 Python 명령어가 작은 창에서 깨질 수 있다: terminal code block에 <code>overflow-wrap: anywhere</code>를 적용한다.</li>\n<li>한 화면 정보량이 다시 커질 수 있다: <code>environment</code> 모드에서만 작업대가 표시되게 하고 액션을 네 개로 제한한다.</li>\n<li>실제 설치 버튼처럼 오해될 수 있다: 현재 버튼은 terminal/workflow 진입점이며 실제 설치 실행은 별도 runner 범위로 둔다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1158,
-      "updatedAt": "2026-06-04T23:23:26.232Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-python-environment-workbench-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-python-environment-workbench/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Python Environment Workbench 스펙",
-      "excerpt": "Python Environment Workbench 스펙 요구사항 REQ WM 052: Tool Studio의 파이썬 환경 화면은 전용 Python 실행환경 작업대를 제공해야 한다. 사용자 결과 사용자는 파이썬 환경 모드에서 Local venv, Isolated runner, Agent sandbox 프로필을 선택한다. 선택 프로필에 따라 interpreter, venv path, dependency file, lock/report, 설치 명령, 실행 명령, 격리 경계, cache 정책, heal",
-      "html": "<h1>Python Environment Workbench 스펙</h1>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-WM-052: Tool Studio의 <code>파이썬 환경</code> 화면은 전용 Python 실행환경 작업대를 제공해야 한다.</li>\n</ul>\n<h2>사용자 결과</h2>\n<ul>\n<li>사용자는 <code>파이썬 환경</code> 모드에서 Local venv, Isolated runner, Agent sandbox 프로필을 선택한다.</li>\n<li>선택 프로필에 따라 interpreter, venv path, dependency file, lock/report, 설치 명령, 실행 명령, 격리 경계, cache 정책, health check가 즉시 바뀐다.</li>\n<li>주요 액션은 <code>venv 생성</code>, <code>의존성 설치</code>, <code>Smoke 실행</code>, <code>환경 계획 복사</code>로 분리된다.</li>\n<li>860px 이하 화면에서는 profile, canvas, action 영역이 한 열로 접혀 수평 overflow를 만들지 않는다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>실제 Python 패키지 설치 실행</li>\n<li>host credential 또는 secret 주입</li>\n<li>원격 sandbox 인프라 생성</li>\n<li>lockfile 생성기 또는 dependency resolver 구현</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 906,
-      "updatedAt": "2026-06-04T23:23:26.231Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-tool-deploy-workbench-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-tool-deploy-workbench/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증 기록",
-      "excerpt": "검증 기록 명령 corepack pnpm filter workspace monitor test 통과 corepack pnpm filter workspace monitor run check 통과 corepack pnpm filter workspace monitor run build:customer 통과 Browser smoke in app Browser desktop: Tools 화면에서 툴 배포 mode를 열고 data tool deploy workbench 표시를 확인했다. in app Brow",
-      "html": "<h1>검증 기록</h1>\n<h2>명령</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code> 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code> 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code> 통과</li>\n</ul>\n<h2>Browser smoke</h2>\n<ul>\n<li>in-app Browser desktop: Tools 화면에서 <code>툴 배포</code> mode를 열고 <code>data-tool-deploy-workbench</code> 표시를 확인했다.</li>\n<li>in-app Browser desktop: target 3개, release/preflight/guardrails/rollback 영역, action 4개를 확인했다.</li>\n<li>in-app Browser desktop: AgentCore Gateway target 선택 후 <code>--tool-schema-file</code>, credential, rollback 문구 전환을 확인했다.</li>\n<li>in-app Browser desktop: 수평 overflow 0을 확인했다.</li>\n<li>Playwright mobile 390x844: target/canvas/action 영역이 모두 한 열로 접히고 수평 overflow 0임을 확인했다.</li>\n</ul>\n<h2>스크린샷</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-tool-deploy-desktop.png</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-tool-deploy-mobile.png</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1035,
-      "updatedAt": "2026-06-04T23:17:02.238Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
       "date": "2026-06-07",
       "year": "2026",
-      "documentsCount": 19,
+      "documentsCount": 27,
       "categories": [
         {
           "category": "evaluation",
-          "count": 6
+          "count": 8
         },
         {
           "category": "plan",
-          "count": 2
+          "count": 3
         },
         {
           "category": "request-trace",
-          "count": 2
+          "count": 3
         },
         {
           "category": "user-request",
-          "count": 2
+          "count": 3
         },
         {
           "category": "web-search",
-          "count": 2
+          "count": 3
         },
         {
           "category": "work-summary",
-          "count": 2
+          "count": 3
         },
         {
           "category": "work-timing",
-          "count": 2
+          "count": 3
         },
         {
           "category": "daily-history",
@@ -18308,7 +18308,27 @@
           "language": "unknown",
           "title": "2026 06 07",
           "excerpt": "2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Deskto",
-          "updatedAt": "2026-06-06T15:38:01.261Z",
+          "updatedAt": "2026-06-06T15:57:51.949Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-07-core-feature-connections-input-json",
+          "path": "_history/evaluations/2026/2026-06-07-core-feature-connections-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 07 Core Feature Connections Input",
+          "excerpt": "{ \"initial instruction\": \"주요 기능 연결\", \"result summary\": \"Connected Workspace Monitor home core features to concrete agent, tool, run, eval, file, and visibility flow steps through CoreFeatureDrilldown connection buttons.\", \"work mode\": \"standard\", \"changed files\": \"platform deskto",
+          "updatedAt": "2026-06-06T15:57:51.949Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-07-core-feature-connections-ko-md",
+          "path": "_history/evaluations/2026/2026-06-07-core-feature-connections.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "최종 평가: Core Feature Connections",
+          "excerpt": "최종 평가: Core Feature Connections 날짜: 2026 06 07 평가 홈의 주요 기능 상세가 실제 작업 흐름으로 이어지도록 connection 버튼을 추가했다. 각 버튼은 단순 섹션 이동이 아니라 intent와 flow step 또는 Tool Studio mode request를 함께 설정한다. 충족 핵심 기능 상세에 세부 연결 버튼이 추가됐다. 에이전트, 툴, 실행, 평가, 파일, 실행/결정 가시성 경로가 연결됐다. Tool Studio 연결은 mode request를 갱신한",
+          "updatedAt": "2026-06-06T15:57:51.949Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18372,6 +18392,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-plans-2026-2026-06-07-core-feature-connections-ko-md",
+          "path": "_history/plans/2026/2026-06-07-core-feature-connections.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "Work Plan: Core Feature Connections",
+          "excerpt": "Work Plan: Core Feature Connections 날짜: 2026 06 07 모드 standard 이유: Desktop app renderer의 의미 있는 UI navigation 동작 변경이며 테스트, 빌드, 브라우저 smoke가 필요하다. 단계 1. 웹 우선 intake와 기존 홈/task intent 구조 확인. 2. 요구사항/spec/trace 기준 작성. 3. CoreFeatureDrilldown connection contract 추가. 4. MonitorShell의 주요",
+          "updatedAt": "2026-06-06T15:52:07.679Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-plans-2026-2026-06-07-subagent-bounded-fanout-ko-md",
           "path": "_history/plans/2026/2026-06-07-subagent-bounded-fanout.ko.md",
           "category": "plan",
@@ -18389,6 +18419,16 @@
           "title": "Work Plan: Subagent Tool Selection",
           "excerpt": "Work Plan: Subagent Tool Selection 날짜: 2026 06 07 선택한 slice explicit tool selection controls before allowing more than the first two planned tools 이유 이전 구현은 안전한 첫 slice로 첫 2개 tool만 fan out했다. 다음 단계는 사용자 제어권과 작업공간적 흐름을 회복하는 선택 UI이며, Rust command가 이미 toolNames 와 hard cap 3을 지원하므로 f",
           "updatedAt": "2026-06-06T15:33:02.432Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-07-core-feature-connections-ko-md",
+          "path": "_history/request-traces/2026/2026-06-07-core-feature-connections.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Request Trace: Core Feature Connections",
+          "excerpt": "Request Trace: Core Feature Connections 날짜: 2026 06 07 요청 \"주요 기능 연결\" 결과 홈 주요 기능 상세에 connection 버튼을 추가했다. connection은 실제 intent/flow step 또는 Tool Studio mode request를 호출한다. 산출물 platform desktop app/docs/requirements/2026 06 07 core feature connections.ko.md platform desktop app/sp",
+          "updatedAt": "2026-06-06T15:57:51.949Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18412,6 +18452,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-user-requests-2026-2026-06-07-core-feature-connections-ko-md",
+          "path": "_history/user-requests/2026/2026-06-07-core-feature-connections.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "User Request: Core Feature Connections",
+          "excerpt": "User Request: Core Feature Connections 날짜: 2026 06 07 요약 사용자는 플랫폼의 주요 기능을 실제 작업 흐름에 연결하라고 요청했다. 이전에 구현한 기능들이 각자 떨어져 보이지 않도록, 홈에서 에이전트, 툴, 실행, 평가, 파일, 가시성으로 바로 이동할 수 있어야 한다. 해석 단순 안내 문구가 아니라 클릭 가능한 기능 연결을 구현한다. 연결은 섹션 이동뿐 아니라 해당 작업 의도와 단계 선택까지 포함한다. UI/UX는 직관적이고 기존 workbench 구조와 일",
+          "updatedAt": "2026-06-06T15:52:07.678Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-07-subagent-bounded-fanout-ko-md",
           "path": "_history/user-requests/2026/2026-06-07-subagent-bounded-fanout.ko.md",
           "category": "user-request",
@@ -18429,6 +18479,16 @@
           "title": "User Request: Subagent Tool Selection",
           "excerpt": "User Request: Subagent Tool Selection 날짜: 2026 06 07 요약 사용자가 “미룬거 계속 구현”을 요청했다. 이전 bounded fan out 평가에서 남긴 explicit tool selection UI를 다음 구현 대상으로 선택했다. 해석 첫 2개 고정 실행을 넘어서, 사용자가 저장된 subagent plan에서 실행할 tool을 직접 선택하고 단일 실행/fan out에 반영하는 흐름을 구현한다.",
           "updatedAt": "2026-06-06T15:33:02.432Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-07-core-feature-connections-ko-md",
+          "path": "_history/web-searches/2026/2026-06-07-core-feature-connections.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: Core Feature Connections",
+          "excerpt": "Web Search: Core Feature Connections 날짜: 2026 06 07 검색 VS Code workbench command palette activity bar navigation UX official documentation Tauri v2 frontend invoke command official documentation OpenAI Agents SDK manager agents as tools official documentation Claude Code subagent",
+          "updatedAt": "2026-06-06T15:52:07.678Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18452,6 +18512,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-07-core-feature-connections-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-07-core-feature-connections.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "Work Summary: Core Feature Connections",
+          "excerpt": "Work Summary: Core Feature Connections 날짜: 2026 06 07 요약 Workspace Monitor 홈의 주요 기능 상세에 세부 연결 버튼을 추가했다. 에이전트, 툴, 실행, 평가, 파일, 가시성 기능이 실제 section/intent/flow step으로 바로 이동한다. 변경 CoreFeatureDrilldownItem 에 connections contract 추가. CoreFeatureDrilldown 에 connection grid 렌더링 추가. Monito",
+          "updatedAt": "2026-06-06T15:57:51.948Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-07-subagent-bounded-fanout-ko-md",
           "path": "_history/work-summaries/2026/2026-06-07-subagent-bounded-fanout.ko.md",
           "category": "work-summary",
@@ -18469,6 +18539,16 @@
           "title": "Work Summary: Subagent Tool Selection",
           "excerpt": "Work Summary: Subagent Tool Selection 날짜: 2026 06 07 Desktop Runtime subagent plan 결과에 tool 선택 UI를 추가했다. plan 생성 후 첫 2개가 기본 선택되고, 사용자는 최대 3개까지 체크박스로 고를 수 있다. 단일 실행은 선택된 첫 tool을 사용하고, fan out은 선택된 2 3개 tool 이름과 선택 수를 native command에 전달한다.",
           "updatedAt": "2026-06-06T15:33:02.433Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-07-core-feature-connections-ko-md",
+          "path": "_history/work-timings/2026/2026-06-07-core-feature-connections.ko.md",
+          "category": "work-timing",
+          "language": "ko",
+          "title": "Work Timing: Core Feature Connections",
+          "excerpt": "Work Timing: Core Feature Connections 날짜: 2026 06 07 | 단계 | 대략 시간 | 메모 | | | : | | | 웹 우선 조사와 기존 구조 확인 | 10분 | 공식 문서와 홈/task intent 구조 확인 | | 구현 | 20분 | connection contract, helper, CSS, tests | | 1차 검증 | 8분 | 테스트 실패 1건 후 반응형 중단점 테스트 조정 | | 기록 작성 | 15분 | 요구사항, spec, history recor",
+          "updatedAt": "2026-06-06T15:57:51.949Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18496,35 +18576,35 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 77,
+      "documentsCount": 69,
       "categories": [
         {
           "category": "evaluation",
-          "count": 20
+          "count": 17
         },
         {
           "category": "request-trace",
-          "count": 10
-        },
-        {
-          "category": "work-summary",
-          "count": 10
-        },
-        {
-          "category": "work-timing",
-          "count": 10
+          "count": 9
         },
         {
           "category": "user-request",
           "count": 9
         },
         {
-          "category": "web-search",
+          "category": "work-summary",
           "count": 9
         },
         {
-          "category": "plan",
+          "category": "work-timing",
+          "count": 9
+        },
+        {
+          "category": "web-search",
           "count": 8
+        },
+        {
+          "category": "plan",
+          "count": 7
         },
         {
           "category": "daily-history",
@@ -18593,16 +18673,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-lightweight-cli-install-resource-json",
-          "path": "_history/evaluations/2026/2026-06-06-lightweight-cli-install-resource.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Lightweight Cli Install Resource",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"lightweight cli install\", \"resource risk occurred\": true, \"resource check targets\": \" history/evaluations/2026/2026 06 06 lightweight cli install resource.json\" , \"checks\": { \"id\": \"process bounds\", \"status\": \"passed\", \"evidence\": \"awp launcher",
-          "updatedAt": "2026-06-06T12:36:30.223Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-lightweight-cli-install-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-lightweight-cli-install.ko.md",
           "category": "evaluation",
@@ -18610,26 +18680,6 @@
           "title": "Evaluation: Lightweight CLI Install",
           "excerpt": "Evaluation: Lightweight CLI Install 날짜: 2026 06 06 사용자 요구 대비 요구: CLI도 가벼운 CLI 설치를 도와준다. 결과: awp lightweight CLI를 구현하고 /Users/shinjoungeun/.local/bin/awp 로 설치했다. doctor , cli check , open , reveal , terminal 명령을 제공한다. 설치 평가 외부 dependency 설치 없음. Python 표준 라이브러리만 사용한다. user local sy",
           "updatedAt": "2026-06-06T12:40:28.660Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-native-os-action-bridge-omission-json",
-          "path": "_history/evaluations/2026/2026-06-06-native-os-action-bridge-omission.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Native Os Action Bridge Omission",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"native os action bridge\", \"omission check targets\": \" history/evaluations/2026/2026 06 06 native os action bridge omission.json\" , \"required items\": \"web first intake\", \"requirements\", \"spec plan tasks validation traceability\", \"native runtime ",
-          "updatedAt": "2026-06-06T12:28:45.939Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-native-os-action-bridge-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-native-os-action-bridge.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "Evaluation: Native OS Action Bridge",
-          "excerpt": "Evaluation: Native OS Action Bridge 날짜: 2026 06 06 사용자 요구 대비 요구: 운영체제 기능을 직접 조작하도록 도움. 결과: run native os action 을 추가해 작업공간을 Finder/파일 관리자에서 표시, 기본 앱으로 열기, 외부 터미널로 열기 기능을 제공했다. Quick Start에 직접 실행 버튼을 추가했다. 안전 경계 허용 액션은 3개로 제한했다. 작업공간 밖 경로, private/ , outputs/ 대상은 기존 path guard로 차단",
-          "updatedAt": "2026-06-06T12:28:36.310Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18763,16 +18813,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-lightweight-cli-install-ko-md",
-          "path": "_history/plans/2026/2026-06-06-lightweight-cli-install.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "Plan Record: Lightweight CLI Install",
-          "excerpt": "Plan Record: Lightweight CLI Install 날짜: 2026 06 06 1. 웹 우선 확인으로 Python/Rust CLI 옵션을 비교한다. 2. Python 표준 라이브러리 단일 파일 CLI를 구현한다. 3. user local symlink installer를 구현한다. 4. 설치 dry run 후 실제 설치한다. 5. 설치 audit/registry를 남긴다. 6. tests/check/package, commit, push를 완료한다.",
-          "updatedAt": "2026-06-06T12:36:30.223Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-rust-runtime-feature-split-ko-md",
           "path": "_history/plans/2026/2026-06-06-rust-runtime-feature-split.ko.md",
           "category": "plan",
@@ -18860,16 +18900,6 @@
           "title": "Request Trace: Lightweight CLI Install",
           "excerpt": "Request Trace: Lightweight CLI Install 날짜: 2026 06 06 요청 CLI도 가벼운 CLI 설치를 도와준다. 산출물 CLI: platform desktop app/tools/awp/awp.py 설치 스크립트: platform desktop app/scripts/install awp cli.mjs 테스트: platform desktop app/tests/awp cli.test.mjs 요구사항: platform desktop app/docs/requirements/2",
           "updatedAt": "2026-06-06T12:40:49.411Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-06-native-os-action-bridge-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-native-os-action-bridge.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "Request Trace: Native OS Action Bridge",
-          "excerpt": "Request Trace: Native OS Action Bridge 날짜: 2026 06 06 요청 운영체제 기능을 직접 조작하도록 도움. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 native os action bridge.ko.md 스펙: platform desktop app/specs/2026 06 06 native os action bridge/ 구현: platform desktop app/src tauri/src/lib.r",
-          "updatedAt": "2026-06-06T12:27:10.722Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19043,16 +19073,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-lightweight-cli-install-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-lightweight-cli-install.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "Web Search: Lightweight CLI Install",
-          "excerpt": "Web Search: Lightweight CLI Install 날짜: 2026 06 06 질의 Python argparse official documentation command line interface Python console scripts entry points official packaging documentation Rust clap official documentation command line parser 확인한 출처 Python argparse 공식 문서: Python 표준 라이",
-          "updatedAt": "2026-06-06T12:36:30.222Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-rust-runtime-feature-split-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-rust-runtime-feature-split.ko.md",
           "category": "web-search",
@@ -19140,16 +19160,6 @@
           "title": "Work Summary: Lightweight CLI Install",
           "excerpt": "Work Summary: Lightweight CLI Install 날짜: 2026 06 06 완료 awp Python stdlib CLI 추가 user local symlink installer 추가 cli:install , cli:doctor package scripts 추가 CLI tests/readiness 추가 /Users/shinjoungeun/.local/bin/awp 설치 완료 test , 설치 registry contract, check , package:internal 검증 통과",
           "updatedAt": "2026-06-06T12:40:49.410Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-06-native-os-action-bridge-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-native-os-action-bridge.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "Work Summary: Native OS Action Bridge",
-          "excerpt": "Work Summary: Native OS Action Bridge 날짜: 2026 06 06 완료 run native os action Tauri command 추가 open path , reveal path , open external terminal allowlist 적용 작업공간 내부 path guard 적용 Quick Start에 Finder/기본 앱/외부 터미널 버튼 추가 runtime contract, readiness, Rust/Node/renderer 테스트 업데이트 검증 요약 R",
-          "updatedAt": "2026-06-06T12:28:36.310Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19243,16 +19253,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-native-os-action-bridge-ko-md",
-          "path": "_history/work-timings/2026/2026-06-06-native-os-action-bridge.ko.md",
-          "category": "work-timing",
-          "language": "ko",
-          "title": "Work Timing: Native OS Action Bridge",
-          "excerpt": "Work Timing: Native OS Action Bridge 날짜: 2026 06 06 단계 웹 우선 확인: 완료 구현: 완료 Rust/Node/renderer 검증: 완료 내부 패키징: 완료 commit/push: 완료",
-          "updatedAt": "2026-06-06T12:29:34.451Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-rust-runtime-feature-split-ko-md",
           "path": "_history/work-timings/2026/2026-06-06-rust-runtime-feature-split.ko.md",
           "category": "work-timing",
@@ -19311,36 +19311,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2822,
+      "documents": 2830,
       "days": 8,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1066
+          "count": 1068
         },
         {
           "category": "web-search",
-          "count": 441
+          "count": 442
         },
         {
           "category": "request-trace",
-          "count": 370
+          "count": 371
         },
         {
           "category": "plan",
-          "count": 369
+          "count": 370
         },
         {
           "category": "work-timing",
-          "count": 289
+          "count": 290
         },
         {
           "category": "user-request",
-          "count": 155
+          "count": 156
         },
         {
           "category": "work-summary",
-          "count": 122
+          "count": 123
         },
         {
           "category": "daily-history",
@@ -19351,7 +19351,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6795378,
+      "totalSourceBytes": 6808647,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19376,11 +19376,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 37,
+      "evidenceEvents": 36,
       "decisionEvents": 0,
-      "openSignals": 20,
+      "openSignals": 19,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T15:38:40.815Z",
+      "latestEventAt": "2026-06-06T15:57:51.949Z",
       "historyDays": 2
     },
     "lanes": [
@@ -19392,11 +19392,16 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 26
+        "count": 25
       },
       {
         "id": "delivery",
         "label": "delivery",
+        "count": 12
+      },
+      {
+        "id": "intake",
+        "label": "intake",
         "count": 12
       },
       {
@@ -19412,11 +19417,6 @@
       {
         "id": "evidence",
         "label": "evidence",
-        "count": 11
-      },
-      {
-        "id": "intake",
-        "label": "intake",
         "count": 11
       },
       {
@@ -19439,7 +19439,12 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 26
+        "count": 25
+      },
+      {
+        "id": "intake",
+        "label": "intake",
+        "count": 12
       },
       {
         "id": "summary",
@@ -19455,11 +19460,6 @@
         "id": "trace",
         "label": "trace",
         "count": 12
-      },
-      {
-        "id": "intake",
-        "label": "intake",
-        "count": 11
       },
       {
         "id": "web-search",
@@ -19491,6 +19491,141 @@
     ],
     "events": [
       {
+        "id": "history-history-evaluations-2026-2026-06-07-core-feature-connections-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 07 Core Feature Connections Input",
+        "detail": "{ \"initial instruction\": \"주요 기능 연결\", \"result summary\": \"Connected Workspace Monitor home core features to concrete agent, tool, run, eval, file, and visibility flow steps through CoreFeatureDrilldown connection buttons.\", \"work mode\": \"standard\", \"changed files\": \"platform deskto",
+        "path": "_history/evaluations/2026/2026-06-07-core-feature-connections-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:57:51.949Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-07-core-feature-connections-ko-md",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "needs_attention",
+        "title": "Work Timing: Core Feature Connections",
+        "detail": "Work Timing: Core Feature Connections 날짜: 2026 06 07 | 단계 | 대략 시간 | 메모 | | | : | | | 웹 우선 조사와 기존 구조 확인 | 10분 | 공식 문서와 홈/task intent 구조 확인 | | 구현 | 20분 | connection contract, helper, CSS, tests | | 1차 검증 | 8분 | 테스트 실패 1건 후 반응형 중단점 테스트 조정 | | 기록 작성 | 15분 | 요구사항, spec, history recor",
+        "path": "_history/work-timings/2026/2026-06-07-core-feature-connections.ko.md",
+        "category": "work-timing",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:57:51.949Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-07-core-feature-connections-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "최종 평가: Core Feature Connections",
+        "detail": "최종 평가: Core Feature Connections 날짜: 2026 06 07 평가 홈의 주요 기능 상세가 실제 작업 흐름으로 이어지도록 connection 버튼을 추가했다. 각 버튼은 단순 섹션 이동이 아니라 intent와 flow step 또는 Tool Studio mode request를 함께 설정한다. 충족 핵심 기능 상세에 세부 연결 버튼이 추가됐다. 에이전트, 툴, 실행, 평가, 파일, 실행/결정 가시성 경로가 연결됐다. Tool Studio 연결은 mode request를 갱신한",
+        "path": "_history/evaluations/2026/2026-06-07-core-feature-connections.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:57:51.949Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-07-core-feature-connections-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Core Feature Connections",
+        "detail": "Request Trace: Core Feature Connections 날짜: 2026 06 07 요청 \"주요 기능 연결\" 결과 홈 주요 기능 상세에 connection 버튼을 추가했다. connection은 실제 intent/flow step 또는 Tool Studio mode request를 호출한다. 산출물 platform desktop app/docs/requirements/2026 06 07 core feature connections.ko.md platform desktop app/sp",
+        "path": "_history/request-traces/2026/2026-06-07-core-feature-connections.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:57:51.949Z"
+      },
+      {
+        "id": "history-history-2026-2026-06-07-md",
+        "sourceType": "history",
+        "signalType": "history",
+        "lane": "history",
+        "severity": "info",
+        "status": "daily-history",
+        "title": "2026 06 07",
+        "detail": "2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Deskto",
+        "path": "_history/2026/2026-06-07.md",
+        "category": "daily-history",
+        "language": "unknown",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:57:51.949Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-07-core-feature-connections-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "Work Summary: Core Feature Connections",
+        "detail": "Work Summary: Core Feature Connections 날짜: 2026 06 07 요약 Workspace Monitor 홈의 주요 기능 상세에 세부 연결 버튼을 추가했다. 에이전트, 툴, 실행, 평가, 파일, 가시성 기능이 실제 section/intent/flow step으로 바로 이동한다. 변경 CoreFeatureDrilldownItem 에 connections contract 추가. CoreFeatureDrilldown 에 connection grid 렌더링 추가. Monito",
+        "path": "_history/work-summaries/2026/2026-06-07-core-feature-connections.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:57:51.948Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-07-core-feature-connections-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "Work Plan: Core Feature Connections",
+        "detail": "Work Plan: Core Feature Connections 날짜: 2026 06 07 모드 standard 이유: Desktop app renderer의 의미 있는 UI navigation 동작 변경이며 테스트, 빌드, 브라우저 smoke가 필요하다. 단계 1. 웹 우선 intake와 기존 홈/task intent 구조 확인. 2. 요구사항/spec/trace 기준 작성. 3. CoreFeatureDrilldown connection contract 추가. 4. MonitorShell의 주요",
+        "path": "_history/plans/2026/2026-06-07-core-feature-connections.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:52:07.679Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-07-core-feature-connections-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Core Feature Connections",
+        "detail": "Web Search: Core Feature Connections 날짜: 2026 06 07 검색 VS Code workbench command palette activity bar navigation UX official documentation Tauri v2 frontend invoke command official documentation OpenAI Agents SDK manager agents as tools official documentation Claude Code subagent",
+        "path": "_history/web-searches/2026/2026-06-07-core-feature-connections.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:52:07.678Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-07-core-feature-connections-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "User Request: Core Feature Connections",
+        "detail": "User Request: Core Feature Connections 날짜: 2026 06 07 요약 사용자는 플랫폼의 주요 기능을 실제 작업 흐름에 연결하라고 요청했다. 이전에 구현한 기능들이 각자 떨어져 보이지 않도록, 홈에서 에이전트, 툴, 실행, 평가, 파일, 가시성으로 바로 이동할 수 있어야 한다. 해석 단순 안내 문구가 아니라 클릭 가능한 기능 연결을 구현한다. 연결은 섹션 이동뿐 아니라 해당 작업 의도와 단계 선택까지 포함한다. UI/UX는 직관적이고 기존 workbench 구조와 일",
+        "path": "_history/user-requests/2026/2026-06-07-core-feature-connections.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T15:52:07.678Z"
+      },
+      {
         "id": "history-history-evaluations-2026-2026-06-07-subagent-tool-selection-input-json",
         "sourceType": "history",
         "signalType": "evaluation",
@@ -19517,21 +19652,6 @@
         "path": "_history/evaluations/2026/2026-06-07-subagent-tool-selection.ko.md",
         "category": "evaluation",
         "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-06T15:38:01.261Z"
-      },
-      {
-        "id": "history-history-2026-2026-06-07-md",
-        "sourceType": "history",
-        "signalType": "history",
-        "lane": "history",
-        "severity": "info",
-        "status": "daily-history",
-        "title": "2026 06 07",
-        "detail": "2026 06 07 Subagent Bounded Fan Out 요청: 미룬거 계속 구현. 처리: 저장된 subagent tool plan의 첫 2개 tool을 bounded fan out으로 시작하는 start subagent tool fanout command를 추가했다. 구현: 각 lane은 기존 CLI adapter session으로 시작하고 같은 pipeline id , lane id , lane role , subagent manual merge gate 를 가진다. UI: Deskto",
-        "path": "_history/2026/2026-06-07.md",
-        "category": "daily-history",
-        "language": "unknown",
         "date": "2026-06-07",
         "timestamp": "2026-06-06T15:38:01.261Z"
       },
@@ -20809,126 +20929,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T12:36:30.224Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-lightweight-cli-install-resource-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "ready",
-        "title": "2026 06 06 Lightweight Cli Install Resource",
-        "detail": "{ \"date\": \"2026 06 06\", \"work id\": \"lightweight cli install\", \"resource risk occurred\": true, \"resource check targets\": \" history/evaluations/2026/2026 06 06 lightweight cli install resource.json\" , \"checks\": { \"id\": \"process bounds\", \"status\": \"passed\", \"evidence\": \"awp launcher",
-        "path": "_history/evaluations/2026/2026-06-06-lightweight-cli-install-resource.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:36:30.223Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-lightweight-cli-install-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "ready",
-        "title": "Plan Record: Lightweight CLI Install",
-        "detail": "Plan Record: Lightweight CLI Install 날짜: 2026 06 06 1. 웹 우선 확인으로 Python/Rust CLI 옵션을 비교한다. 2. Python 표준 라이브러리 단일 파일 CLI를 구현한다. 3. user local symlink installer를 구현한다. 4. 설치 dry run 후 실제 설치한다. 5. 설치 audit/registry를 남긴다. 6. tests/check/package, commit, push를 완료한다.",
-        "path": "_history/plans/2026/2026-06-06-lightweight-cli-install.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:36:30.223Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-lightweight-cli-install-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "Web Search: Lightweight CLI Install",
-        "detail": "Web Search: Lightweight CLI Install 날짜: 2026 06 06 질의 Python argparse official documentation command line interface Python console scripts entry points official packaging documentation Rust clap official documentation command line parser 확인한 출처 Python argparse 공식 문서: Python 표준 라이",
-        "path": "_history/web-searches/2026/2026-06-06-lightweight-cli-install.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:36:30.222Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-native-os-action-bridge-ko-md",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "Work Timing: Native OS Action Bridge",
-        "detail": "Work Timing: Native OS Action Bridge 날짜: 2026 06 06 단계 웹 우선 확인: 완료 구현: 완료 Rust/Node/renderer 검증: 완료 내부 패키징: 완료 commit/push: 완료",
-        "path": "_history/work-timings/2026/2026-06-06-native-os-action-bridge.ko.md",
-        "category": "work-timing",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:29:34.451Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-native-os-action-bridge-omission-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Native Os Action Bridge Omission",
-        "detail": "{ \"date\": \"2026 06 06\", \"work id\": \"native os action bridge\", \"omission check targets\": \" history/evaluations/2026/2026 06 06 native os action bridge omission.json\" , \"required items\": \"web first intake\", \"requirements\", \"spec plan tasks validation traceability\", \"native runtime ",
-        "path": "_history/evaluations/2026/2026-06-06-native-os-action-bridge-omission.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:28:45.939Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-native-os-action-bridge-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "needs_attention",
-        "title": "Evaluation: Native OS Action Bridge",
-        "detail": "Evaluation: Native OS Action Bridge 날짜: 2026 06 06 사용자 요구 대비 요구: 운영체제 기능을 직접 조작하도록 도움. 결과: run native os action 을 추가해 작업공간을 Finder/파일 관리자에서 표시, 기본 앱으로 열기, 외부 터미널로 열기 기능을 제공했다. Quick Start에 직접 실행 버튼을 추가했다. 안전 경계 허용 액션은 3개로 제한했다. 작업공간 밖 경로, private/ , outputs/ 대상은 기존 path guard로 차단",
-        "path": "_history/evaluations/2026/2026-06-06-native-os-action-bridge.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:28:36.310Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-native-os-action-bridge-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "Work Summary: Native OS Action Bridge",
-        "detail": "Work Summary: Native OS Action Bridge 날짜: 2026 06 06 완료 run native os action Tauri command 추가 open path , reveal path , open external terminal allowlist 적용 작업공간 내부 path guard 적용 Quick Start에 Finder/기본 앱/외부 터미널 버튼 추가 runtime contract, readiness, Rust/Node/renderer 테스트 업데이트 검증 요약 R",
-        "path": "_history/work-summaries/2026/2026-06-06-native-os-action-bridge.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:28:36.310Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-native-os-action-bridge-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "Request Trace: Native OS Action Bridge",
-        "detail": "Request Trace: Native OS Action Bridge 날짜: 2026 06 06 요청 운영체제 기능을 직접 조작하도록 도움. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 native os action bridge.ko.md 스펙: platform desktop app/specs/2026 06 06 native os action bridge/ 구현: platform desktop app/src tauri/src/lib.r",
-        "path": "_history/request-traces/2026/2026-06-06-native-os-action-bridge.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T12:27:10.722Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -24165,7 +24165,7 @@
       {
         "category": "user-request",
         "root": "_history/user-requests",
-        "documentsCount": 11
+        "documentsCount": 12
       },
       {
         "category": "intent-feature-map",
@@ -24195,7 +24195,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 26
+        "documentsCount": 25
       },
       {
         "category": "daily-history",
@@ -24289,7 +24289,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 84,
+        "documentCount": 85,
         "sourceFileCount": 14
       },
       {
@@ -28130,13 +28130,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 4094,
+      "sourceDocuments": 4108,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T15:38:40.815Z"
+      "latestInsightAt": "2026-06-06T15:57:51.949Z"
     },
     "inferenceStages": [
       {
@@ -28277,7 +28277,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1822,
+        "signalCount": 1823,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -28289,7 +28289,7 @@
           },
           {
             "category": "web-search",
-            "count": 442
+            "count": 443
           },
           {
             "category": "plan",
@@ -28328,7 +28328,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T15:33:02.432Z"
+        "latestEvidenceAt": "2026-06-06T15:52:07.678Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28342,11 +28342,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1050,
+        "signalCount": 1053,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 510
+            "count": 512
           },
           {
             "category": "plan",
@@ -28354,7 +28354,7 @@
           },
           {
             "category": "request-trace",
-            "count": 94
+            "count": 95
           },
           {
             "category": "project-spec",
@@ -28401,7 +28401,7 @@
           "작업 요약: 큰 범위 작업 미루지 않기",
           "작업 계획 기록: 사용자 의도 기반 기능 지도"
         ],
-        "latestEvidenceAt": "2026-06-06T15:38:40.815Z"
+        "latestEvidenceAt": "2026-06-06T15:57:51.949Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28415,11 +28415,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 798,
+        "signalCount": 799,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 324
+            "count": 325
           },
           {
             "category": "evaluation",
@@ -28474,7 +28474,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "Requirement: Native Pipe Runtime Tools"
         ],
-        "latestEvidenceAt": "2026-06-06T15:38:01.261Z"
+        "latestEvidenceAt": "2026-06-06T15:57:51.949Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28488,27 +28488,27 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1613,
+        "signalCount": 1620,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 692
+            "count": 694
           },
           {
             "category": "evaluation",
-            "count": 544
+            "count": 545
           },
           {
             "category": "user-request",
-            "count": 109
+            "count": 110
           },
           {
             "category": "work-summary",
-            "count": 70
+            "count": 71
           },
           {
             "category": "request-trace",
-            "count": 60
+            "count": 61
           },
           {
             "category": "plan",
@@ -28520,7 +28520,7 @@
           },
           {
             "category": "project-doc",
-            "count": 37
+            "count": 38
           },
           {
             "category": "work-timing",
@@ -28547,7 +28547,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T15:38:40.815Z"
+        "latestEvidenceAt": "2026-06-06T15:57:51.949Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28623,14 +28623,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 4094,
+      "sourceDocuments": 4108,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T15:38:40.815Z"
+      "latestInsightAt": "2026-06-06T15:57:51.949Z"
     },
     "operatingModel": [
       {
@@ -28688,19 +28688,19 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3368,
+        "signalCount": 3372,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1822
+            "signalCount": 1823
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1050
+            "signalCount": 1053
           },
           {
             "id": "build-closeout-gate",
@@ -28734,7 +28734,7 @@
           "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T15:38:40.815Z",
+        "latestEvidenceAt": "2026-06-06T15:57:51.949Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28763,13 +28763,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 917,
+        "signalCount": 918,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 798
+            "signalCount": 799
           },
           {
             "id": "release-blocker-gate",
@@ -28803,7 +28803,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T15:38:01.261Z",
+        "latestEvidenceAt": "2026-06-06T15:57:51.949Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28832,19 +28832,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2663,
+        "signalCount": 2673,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1613
+            "signalCount": 1620
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1050
+            "signalCount": 1053
           }
         ],
         "missingPatternIds": [],
@@ -28872,7 +28872,7 @@
           "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T15:38:40.815Z",
+        "latestEvidenceAt": "2026-06-06T15:57:51.949Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28970,19 +28970,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2872,
+        "signalCount": 2876,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1050
+            "signalCount": 1053
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1822
+            "signalCount": 1823
           }
         ],
         "missingPatternIds": [],
@@ -29010,7 +29010,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T15:38:40.815Z",
+        "latestEvidenceAt": "2026-06-06T15:57:51.949Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -29039,7 +29039,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1941,
+        "signalCount": 1942,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -29051,7 +29051,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1822
+            "signalCount": 1823
           }
         ],
         "missingPatternIds": [],
@@ -29079,7 +29079,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T15:33:02.432Z",
+        "latestEvidenceAt": "2026-06-06T15:52:07.678Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

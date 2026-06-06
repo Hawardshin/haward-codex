@@ -1,0 +1,23 @@
+{
+  "task": "Core Feature Connections",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "Meaningful Workspace Monitor UI navigation behavior change requiring renderer tests, build, and browser smoke.",
+  "web_first_intake": true,
+  "memory_bootstrap": "simulated from active platform-desktop-app specs and recent runtime/tool/agent connection records",
+  "non_quick_required_targets": [
+    "requirements",
+    "spec",
+    "plan",
+    "tasks",
+    "validation",
+    "traceability",
+    "omission_check",
+    "resource_check",
+    "evaluation",
+    "request_trace",
+    "work_summary",
+    "timing_summary"
+  ]
+}

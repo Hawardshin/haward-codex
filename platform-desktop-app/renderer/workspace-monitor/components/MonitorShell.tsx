@@ -4620,6 +4620,19 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       window.history.replaceState(null, "", `#section-${targetSection}`);
     }
   }, [activateSection, currentViewMode.allowedSections, primeSectionActivation, viewModes]);
+  const selectIntentStep = useCallback(
+    (intentId: string, targetSection: SectionId, flowStepId: string) => () => {
+      openSection(targetSection, { intentId, flowStepId });
+    },
+    [openSection]
+  );
+  const selectToolStep = useCallback(
+    (mode: ToolStudioMode, flowStepId: string) => () => {
+      setRequestedToolMode((previous) => ({ mode, requestId: (previous?.requestId || 0) + 1 }));
+      openSection("tools", { intentId: "build-tool", flowStepId });
+    },
+    [openSection]
+  );
   const togglePinnedSection = (targetSection: SectionId) => {
     setPinnedSections((previous) => {
       if (previous.includes(targetSection)) {
@@ -6039,14 +6052,6 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const coreReadinessCount = useMemo(() => coreSetupSteps.filter((step) => step.ready).length, [coreSetupSteps]);
   const taskIntentItems = useMemo<TaskIntentItem[]>(
     () => {
-      const selectIntentStep = (intentId: string, targetSection: SectionId, flowStepId: string) => () => {
-        openSection(targetSection, { intentId, flowStepId });
-      };
-      const selectToolStep = (mode: ToolStudioMode, flowStepId: string) => () => {
-        setRequestedToolMode((previous) => ({ mode, requestId: (previous?.requestId || 0) + 1 }));
-        openSection("tools", { intentId: "build-tool", flowStepId });
-      };
-
       return [
         {
         id: "create-agent",
@@ -6249,10 +6254,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       collaborationBoard.summary.blockedTasks,
       coreReadinessCount,
       coreSetupSteps.length,
-      openSection,
       openSettingsTab,
       rootToolItems.length,
       runtimeInitDefaults.adapterId,
+      selectIntentStep,
+      selectToolStep,
       uiLanguage,
       visibleEvaluations,
       visibleWebSearches,
@@ -6386,7 +6392,19 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         icon: Bot,
         metric: `${agentCatalog.length.toLocaleString("ko-KR")} agents`,
         cta: uiLanguage === "ko" ? "에이전트 코어 열기" : "Open Agent Core",
-        run: () => openSection("agents"),
+        run: selectIntentStep("create-agent", "agents", "role"),
+        connections:
+          uiLanguage === "ko"
+            ? [
+                { id: "agent-role", label: "역할 선택", detail: "Agent Core 설계 화면", run: selectIntentStep("create-agent", "agents", "role") },
+                { id: "agent-tools", label: "도구 연결", detail: "툴/기억 연결 단계", run: selectIntentStep("create-agent", "agents", "tools") },
+                { id: "agent-proposal", label: "검증 제안", detail: "제안 생성 단계", run: selectIntentStep("create-agent", "agents", "proposal") }
+              ]
+            : [
+                { id: "agent-role", label: "Choose role", detail: "Agent Core design surface", run: selectIntentStep("create-agent", "agents", "role") },
+                { id: "agent-tools", label: "Connect tools", detail: "Tools and memory step", run: selectIntentStep("create-agent", "agents", "tools") },
+                { id: "agent-proposal", label: "Validation proposal", detail: "Proposal generation step", run: selectIntentStep("create-agent", "agents", "proposal") }
+              ],
         steps:
           uiLanguage === "ko"
             ? ["목표와 역할 선택", "루트 툴과 검증 연결", "제안 또는 실행 경로로 넘기기"]
@@ -6404,7 +6422,19 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         icon: Wrench,
         metric: `${rootToolItems.length.toLocaleString("ko-KR")} tools`,
         cta: uiLanguage === "ko" ? "툴 스튜디오 열기" : "Open Tool Studio",
-        run: () => openSection("tools"),
+        run: selectToolStep("build", "source"),
+        connections:
+          uiLanguage === "ko"
+            ? [
+                { id: "tool-source", label: "소스 선택", detail: "빌드 모드", run: selectToolStep("build", "source") },
+                { id: "tool-venv", label: "환경 확인", detail: "Python venv 단계", run: selectToolStep("environment", "venv") },
+                { id: "tool-deploy", label: "배포 점검", detail: "검증/롤백 단계", run: selectToolStep("deploy", "deploy") }
+              ]
+            : [
+                { id: "tool-source", label: "Choose source", detail: "Build mode", run: selectToolStep("build", "source") },
+                { id: "tool-venv", label: "Check environment", detail: "Python venv step", run: selectToolStep("environment", "venv") },
+                { id: "tool-deploy", label: "Deploy preflight", detail: "Validation and rollback step", run: selectToolStep("deploy", "deploy") }
+              ],
         steps:
           uiLanguage === "ko"
             ? ["Python 소스와 입력 스키마 선택", "가상 환경과 검증 명령 연결", "배포 전 점검과 롤백 기록"]
@@ -6422,7 +6452,19 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         icon: Network,
         metric: runtimeInitDefaults.adapterId,
         cta: uiLanguage === "ko" ? "CLI 실행 화면" : "Open CLI run",
-        run: () => openSection("desktop"),
+        run: selectIntentStep("run-work", "desktop", "lane"),
+        connections:
+          uiLanguage === "ko"
+            ? [
+                { id: "run-lane", label: "실행 경로", detail: "CLI lane 확인", run: selectIntentStep("run-work", "desktop", "lane") },
+                { id: "run-start", label: "실행 시작", detail: "Runtime 시작 단계", run: selectIntentStep("run-work", "desktop", "start") },
+                { id: "run-result", label: "결과 처리", detail: "결정/병합 단계", run: selectIntentStep("run-work", "desktop", "result") }
+              ]
+            : [
+                { id: "run-lane", label: "Run lane", detail: "Review CLI lane", run: selectIntentStep("run-work", "desktop", "lane") },
+                { id: "run-start", label: "Start run", detail: "Runtime start step", run: selectIntentStep("run-work", "desktop", "start") },
+                { id: "run-result", label: "Handle output", detail: "Decision and merge step", run: selectIntentStep("run-work", "desktop", "result") }
+              ],
         steps:
           uiLanguage === "ko"
             ? ["작업 요청 입력", "필요한 CLI 실행 경로로 분산", "질문 보류 후 결과 병합"]
@@ -6440,7 +6482,19 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         icon: ClipboardCheck,
         metric: `${visibleEvaluations.toLocaleString("ko-KR")} evals`,
         cta: uiLanguage === "ko" ? "AI 평가 열기" : "Open AI Eval",
-        run: () => openSection("eval"),
+        run: selectIntentStep("evaluate-work", "eval", "current"),
+        connections:
+          uiLanguage === "ko"
+            ? [
+                { id: "eval-current", label: "현재 점수", detail: "작업 평가", run: selectIntentStep("evaluate-work", "eval", "current") },
+                { id: "eval-compare", label: "사용 비교", detail: "토큰/툴 비교", run: selectIntentStep("evaluate-work", "eval", "compare") },
+                { id: "eval-open-source", label: "후보 판단", detail: "오픈소스 EVAL", run: selectIntentStep("evaluate-work", "eval", "opensource") }
+              ]
+            : [
+                { id: "eval-current", label: "Current score", detail: "Work evaluation", run: selectIntentStep("evaluate-work", "eval", "current") },
+                { id: "eval-compare", label: "Usage comparison", detail: "Token/tool comparison", run: selectIntentStep("evaluate-work", "eval", "compare") },
+                { id: "eval-open-source", label: "Judge candidates", detail: "Open-source eval", run: selectIntentStep("evaluate-work", "eval", "opensource") }
+              ],
         steps:
           uiLanguage === "ko"
             ? ["현재 작업 점수 확인", "토큰/툴 사용 비교", "오픈소스 EVAL 후보 판단"]
@@ -6458,7 +6512,19 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         icon: Code2,
         metric: `${coreReadinessCount}/${coreSetupSteps.length} ready`,
         cta: uiLanguage === "ko" ? "루트 파일/툴" : "Root files/tools",
-        run: () => openSection("source"),
+        run: selectIntentStep("open-files", "source", "file"),
+        connections:
+          uiLanguage === "ko"
+            ? [
+                { id: "files-file", label: "파일 선택", detail: "소스 작업면", run: selectIntentStep("open-files", "source", "file") },
+                { id: "files-context", label: "컨텍스트", detail: "근거/요구사항 확인", run: selectIntentStep("open-files", "source", "context") },
+                { id: "files-run", label: "실행 연결", detail: "런타임에 넘기기", run: selectIntentStep("open-files", "source", "run") }
+              ]
+            : [
+                { id: "files-file", label: "Choose file", detail: "Source surface", run: selectIntentStep("open-files", "source", "file") },
+                { id: "files-context", label: "Context", detail: "Evidence and requirements", run: selectIntentStep("open-files", "source", "context") },
+                { id: "files-run", label: "Connect to run", detail: "Send to runtime", run: selectIntentStep("open-files", "source", "run") }
+              ],
         steps:
           uiLanguage === "ko"
             ? ["계정과 CLI 연결", "작업공간 권한 설정", "작업별 에이전트에 공유"]
@@ -6476,7 +6542,19 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         icon: Activity,
         metric: `${collaborationBoard.summary.activeTasks.toLocaleString("ko-KR")} 진행 중`,
         cta: uiLanguage === "ko" ? "CLI 작업량 보기" : "View CLI workload",
-        run: () => openSection("desktop"),
+        run: selectIntentStep("run-work", "desktop", "result"),
+        connections:
+          uiLanguage === "ko"
+            ? [
+                { id: "visibility-runs", label: "실행 기록", detail: "Runtime 결과", run: selectIntentStep("run-work", "desktop", "result") },
+                { id: "visibility-decisions", label: "결정함", detail: "보류 질문 처리", run: selectIntentStep("resolve-decisions", "agents", "questions") },
+                { id: "visibility-improve", label: "개선 루프", detail: "패턴 승격", run: () => openSection("intent") }
+              ]
+            : [
+                { id: "visibility-runs", label: "Run records", detail: "Runtime results", run: selectIntentStep("run-work", "desktop", "result") },
+                { id: "visibility-decisions", label: "Decision inbox", detail: "Handle deferred questions", run: selectIntentStep("resolve-decisions", "agents", "questions") },
+                { id: "visibility-improve", label: "Improvement loop", detail: "Promote patterns", run: () => openSection("intent") }
+              ],
         steps:
           uiLanguage === "ko"
             ? ["진행/보류/기록 요약", "결정함에서 답변", "반복 패턴을 개선 후보로 승격"]
@@ -6491,6 +6569,8 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       openSection,
       rootToolItems.length,
       runtimeInitDefaults.adapterId,
+      selectIntentStep,
+      selectToolStep,
       uiLanguage,
       visibleEvaluations
     ]

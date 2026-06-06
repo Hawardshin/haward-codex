@@ -1,0 +1,96 @@
+{
+  "task": "Core Feature Connections",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "core-feature-connection-ui",
+      "description": "Expose connection buttons from core feature drilldown cards.",
+      "source": "user request: 주요 기능 연결",
+      "required": true,
+      "status": "covered",
+      "evidence": ["connections?: Array", "data-core-feature-connections"]
+    },
+    {
+      "item_id": "agent-tool-run-eval-file-visibility-routes",
+      "description": "Connect major home features to agent, tool, run, eval, file, and visibility flows.",
+      "source": "requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": ["agent-role", "tool-source", "run-lane", "eval-current", "files-file", "visibility-decisions"]
+    },
+    {
+      "item_id": "step-level-navigation",
+      "description": "Connections select intent and flow step, not only top-level section.",
+      "source": "spec",
+      "required": true,
+      "status": "covered",
+      "evidence": ["selectIntentStep", "selectToolStep"]
+    },
+    {
+      "item_id": "tool-mode-connection",
+      "description": "Tool connections set Tool Studio mode request before opening tools.",
+      "source": "spec",
+      "required": true,
+      "status": "covered",
+      "evidence": ["setRequestedToolMode", "openSection(\"tools\", { intentId: \"build-tool\", flowStepId })"]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-07-core-feature-connections.ko.md",
+      "purpose": "Requirement record",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-07-core-feature-connections/spec.ko.md",
+      "purpose": "Spec record",
+      "required": true
+    },
+    {
+      "path": "_history/web-searches/2026/2026-06-07-core-feature-connections.ko.md",
+      "purpose": "Web-first search record",
+      "required": true
+    },
+    {
+      "path": "_history/resource-checks/2026/2026-06-07-core-feature-connections.json",
+      "purpose": "Resource lifecycle record for browser/dev-server verification",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "renderer-test-check",
+      "description": "Renderer tests and static contract checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["workspace-monitor test: 90 tests", "workspace-monitor run check: passed"]
+    },
+    {
+      "check_id": "build-platform-browser",
+      "description": "Snapshot collect, renderer build, platform check, and browser smoke pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "collect wrote 650 inline documents and 2830 admin history records",
+        "desktop:renderer:build passed",
+        "platform-desktop-app run check passed with existing public release gate warnings",
+        "Browser smoke found 6 connection groups and 18 actions; tool-source click opened section tools"
+      ]
+    },
+    {
+      "check_id": "guards",
+      "description": "Resource, omission, and evaluator guards pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-resources: resource_ready",
+        "check-omissions target prepared in this file",
+        "evaluate-work input prepared"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "Browser preview validates navigation DOM and click routing, not packaged native app behavior.",
+    "This slice intentionally avoids new CLI process orchestration."
+  ]
+}
