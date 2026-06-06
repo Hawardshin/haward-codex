@@ -54,6 +54,15 @@ function assertBlockExcludes(selector, forbiddenTokens) {
   }
 }
 
+function assertBlockDoesNotMatch(selector, forbiddenPatterns) {
+  const block = readCssBlock(selector);
+  for (const { pattern, reason } of forbiddenPatterns) {
+    if (pattern.test(block)) {
+      throw new Error(`${selector} must not match ${pattern}; ${reason}`);
+    }
+  }
+}
+
 function assertSourceSliceIncludes(source, anchor, expectedTokens) {
   const start = source.indexOf(anchor);
   if (start === -1) {
@@ -76,6 +85,25 @@ function assertSourceIncludes(source, label, expectedTokens) {
   }
 }
 
+const wholeMainTabScrollPatterns = [
+  {
+    pattern: /(^|\n)\s*overflow:\s*(auto|scroll);/,
+    reason: "main tab/page surfaces must not be the default vertical scroll owner"
+  },
+  {
+    pattern: /(^|\n)\s*overflow-y:\s*(auto|scroll);/,
+    reason: "whole-tab vertical scrolling should be replaced by bounded child scroll surfaces"
+  },
+  {
+    pattern: /(^|\n)\s*height:\s*100d?vh;/,
+    reason: "fixed viewport height can trap content behind shell chrome"
+  },
+  {
+    pattern: /(^|\n)\s*max-height:\s*100d?vh;/,
+    reason: "fixed viewport max-height can turn the tab into a hidden overflow container"
+  }
+];
+
 const cssContracts = [
   {
     selector: ".desktop-app-shell",
@@ -89,7 +117,13 @@ const cssContracts = [
   {
     selector: ".desktop-viewport",
     includes: ["min-height: 100dvh;", "height: auto;", "max-height: none;", "overflow: visible;", "overflow-x: hidden;", "scrollbar-gutter: stable;", "overscroll-behavior: contain;"],
-    excludes: ["  height: 100vh;", "  max-height: 100vh;"]
+    excludes: ["  height: 100vh;", "  max-height: 100vh;"],
+    forbiddenPatterns: wholeMainTabScrollPatterns
+  },
+  {
+    selector: ".mounted-section-panel",
+    includes: ["contain: layout paint style;", "min-width: 0;"],
+    forbiddenPatterns: wholeMainTabScrollPatterns
   },
   {
     selector: ".settings-dialog-backdrop",
@@ -162,6 +196,9 @@ for (const contract of cssContracts) {
   if (contract.excludes) {
     assertBlockExcludes(contract.selector, contract.excludes);
   }
+  if (contract.forbiddenPatterns) {
+    assertBlockDoesNotMatch(contract.selector, contract.forbiddenPatterns);
+  }
 }
 
 assertSourceSliceIncludes(monitorShell, 'className="desktop-viewport"', ["tabIndex={0}"]);
@@ -188,6 +225,12 @@ assertSourceIncludes(css, "Scoped scroll contract", [
   "scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);",
   "contain: layout paint style;"
 ]);
+assertSourceIncludes(css, "Main-tab scroll ownership contract", [
+  ".desktop-viewport {",
+  "overflow: visible;",
+  ".mounted-section-panel {",
+  "contain: layout paint style;"
+]);
 
 console.log(
   JSON.stringify(
@@ -196,7 +239,8 @@ console.log(
       checkedCssContracts: cssContracts.length,
       checkedFocusablePanes: 3,
       checkedDesktopOnlyContract: 1,
-      checkedScopedScroll: 1
+      checkedScopedScroll: 1,
+      checkedMainTabScrollOwners: 2
     },
     null,
     2

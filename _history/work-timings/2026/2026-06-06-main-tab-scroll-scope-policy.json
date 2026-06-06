@@ -1,0 +1,34 @@
+{
+  "date": "2026-06-06",
+  "slug": "main-tab-scroll-scope-policy",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "approx_minutes": 3
+    },
+    {
+      "phase": "source_and_policy_inspection",
+      "approx_minutes": 6
+    },
+    {
+      "phase": "policy_and_checker_patch",
+      "approx_minutes": 12
+    },
+    {
+      "phase": "history_and_requirements_records",
+      "approx_minutes": 10
+    },
+    {
+      "phase": "validation",
+      "approx_minutes": 8
+    },
+    {
+      "phase": "evaluation_commit_push",
+      "approx_minutes": 5
+    }
+  ],
+  "bottlenecks": [
+    "Durable instruction changes require multiple synchronized policy and memory records.",
+    "Renderer validation is static because this change does not introduce a new rendered screen."
+  ]
+}

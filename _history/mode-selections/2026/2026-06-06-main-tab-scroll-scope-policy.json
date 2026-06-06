@@ -1,0 +1,22 @@
+{
+  "date": "2026-06-06",
+  "request_id": "2026-06-06-main-tab-scroll-scope-policy",
+  "selected_work_mode": "governance",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "reason": "The user gave a durable platform UI rule about scroll ownership. It changes repository instructions, UI policy, memory bootstrap anchors, and a renderer regression validator.",
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-06-main-tab-scroll-scope-policy.json"
+  ],
+  "non_quick_gates": [
+    "web_first_intake",
+    "persistent_instruction_update",
+    "ui_policy_update",
+    "memory_bootstrap_update",
+    "renderer_contract_update",
+    "omission_check",
+    "docs_and_renderer_validation",
+    "evaluation",
+    "commit_push"
+  ]
+}

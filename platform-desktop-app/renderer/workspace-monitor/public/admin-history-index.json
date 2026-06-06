@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-06T03:28:13.270Z",
+  "generatedAt": "2026-06-06T03:36:32.041Z",
   "summary": {
-    "documents": 2624,
+    "documents": 2632,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1015
+        "count": 1017
       },
       {
         "category": "web-search",
-        "count": 416
+        "count": 417
       },
       {
         "category": "plan",
-        "count": 350
+        "count": 351
       },
       {
         "category": "request-trace",
-        "count": 344
+        "count": 345
       },
       {
         "category": "work-timing",
-        "count": 265
+        "count": 266
       },
       {
         "category": "user-request",
-        "count": 129
+        "count": 130
       },
       {
         "category": "work-summary",
-        "count": 96
+        "count": 97
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6550638,
+    "totalSourceBytes": 6560487,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -63,6 +63,150 @@
   },
   "documents": [
     {
+      "id": "history-2026-2026-06-06-md",
+      "path": "_history/2026/2026-06-06.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 06",
+      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
+      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 16685,
+      "updatedAt": "2026-06-06T03:35:44.387Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: Main Tab Scroll Scope Policy",
+      "excerpt": "평가: Main Tab Scroll Scope Policy 날짜: 2026 06 06 결론 요청은 정책과 회귀 방지 검사 수준에서 충족됐다. main tab/page 전체를 기본 scroll owner로 두지 않는 원칙이 durable instructions, UI tone policy, memory bootstrap, renderer checker에 반영됐다. 검증 python3 tools/docs audit/src/docs audit.py check 통과. PYTHONPATH=src pytho",
+      "html": "<p>평가: Main Tab Scroll Scope Policy 날짜: 2026 06 06 결론 요청은 정책과 회귀 방지 검사 수준에서 충족됐다. main tab/page 전체를 기본 scroll owner로 두지 않는 원칙이 durable instructions, UI tone policy, memory bootstrap, renderer checker에 반영됐다. 검증 python3 tools/docs audit/src/docs audit.py check 통과. PYTHONPATH=src python3 m agent platform.cli check memory bootstrap configs/memory/bootstrap manifest</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1498,
+      "updatedAt": "2026-06-06T03:35:44.386Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Main Tab Scroll Scope Policy",
+      "excerpt": "작업 요약: Main Tab Scroll Scope Policy 날짜: 2026 06 06 완료 main tab/page 전체를 기본 scroll owner로 두지 않는 지속 UI 원칙을 추가했다. code, terminal/log, 긴 목록, popup/dialog/flyout, inspector 같은 bounded child surface는 허용 scroll 영역으로 명명했다. UI tone policy와 memory bootstrap anchor를 갱신했다. workspace monitor ",
+      "html": "<p>작업 요약: Main Tab Scroll Scope Policy 날짜: 2026 06 06 완료 main tab/page 전체를 기본 scroll owner로 두지 않는 지속 UI 원칙을 추가했다. code, terminal/log, 긴 목록, popup/dialog/flyout, inspector 같은 bounded child surface는 허용 scroll 영역으로 명명했다. UI tone policy와 memory bootstrap anchor를 갱신했다. workspace monitor scroll contract checker에 .desktop viewport 와 .mounted section panel 회귀 방지 패턴을 추가</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 861,
+      "updatedAt": "2026-06-06T03:35:44.386Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-main-tab-scroll-scope-policy-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-main-tab-scroll-scope-policy-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Main Tab Scroll Scope Policy Evaluation Input",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"2026 06 06 main tab scroll scope policy\", \"project\": \"platform desktop app\", \"work mode\": \"governance\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"installation occurred\": false, \"resource risk occurred\": false, \"cli pipe",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 main tab scroll scope policy&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;view mode&quot;: &quot;superadmin developer&quot;, &quot;install mode&quot;: &quot;developer&quot;, &quot;installation occurred&quot;: false, &quot;resource risk occurred&quot;: false, &quot;cli pipeline occurred&quot;: false, &quot;requirements targets&quot;: &quot; requirements/reviews/2026 06 06</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1684,
+      "updatedAt": "2026-06-06T03:34:28.045Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+      "path": "_history/plans/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "작업 계획: Main Tab Scroll Scope Policy",
+      "excerpt": "작업 계획: Main Tab Scroll Scope Policy 날짜: 2026 06 06 계획 web first intake로 scroll/nested scroll 기준을 확인한다. 사용자 지시를 durable UI rule로 정리한다. policy, persistent instructions, memory bootstrap, renderer static checker를 같은 방향으로 맞춘다. 새 화면 구현은 하지 않고 회귀 방지 계약을 강화한다. docs/config/renderer check",
+      "html": "<p>작업 계획: Main Tab Scroll Scope Policy 날짜: 2026 06 06 계획 web first intake로 scroll/nested scroll 기준을 확인한다. 사용자 지시를 durable UI rule로 정리한다. policy, persistent instructions, memory bootstrap, renderer static checker를 같은 방향으로 맞춘다. 새 화면 구현은 하지 않고 회귀 방지 계약을 강화한다. docs/config/renderer checks를 통과시키고 기록/commit/push로 마감한다. 범위 포함: scroll ownership 정책, memory anchor, static</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 636,
+      "updatedAt": "2026-06-06T03:34:28.044Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Main Tab Scroll Scope Policy",
+      "excerpt": "Request Trace: Main Tab Scroll Scope Policy 날짜: 2026 06 06 요청 스크롤은 code, 기능 목록, popup 같은 제한된 곳에서만 최대한 쓰고, 메인 화면/tab 전체를 scroll 영역으로 만드는 것을 자제해 달라는 UI 운영 지침. 결과 durable instructions와 AGENTS.md 에 main tab/page scroll ownership 제한을 추가했다. UI tone policy 한/영 문서에 근거, 원칙, 검증 항목을 추가했다. m",
+      "html": "<p>Request Trace: Main Tab Scroll Scope Policy 날짜: 2026 06 06 요청 스크롤은 code, 기능 목록, popup 같은 제한된 곳에서만 최대한 쓰고, 메인 화면/tab 전체를 scroll 영역으로 만드는 것을 자제해 달라는 UI 운영 지침. 결과 durable instructions와 AGENTS.md 에 main tab/page scroll ownership 제한을 추가했다. UI tone policy 한/영 문서에 근거, 원칙, 검증 항목을 추가했다. memory bootstrap manifest에 future session anchor를 갱신했다. check scroll containers.m</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1210,
+      "updatedAt": "2026-06-06T03:34:28.044Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-main-tab-scroll-scope-policy-json",
+      "path": "_history/work-timings/2026/2026-06-06-main-tab-scroll-scope-policy.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Main Tab Scroll Scope Policy",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"slug\": \"main tab scroll scope policy\", \"phases\": { \"phase\": \"web first intake\", \"approx minutes\": 3 }, { \"phase\": \"source and policy inspection\", \"approx minutes\": 6 }, { \"phase\": \"policy and checker patch\", \"approx minutes\": 12 }, { \"phase\": \"history and",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;slug&quot;: &quot;main tab scroll scope policy&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;approx minutes&quot;: 3 }, { &quot;phase&quot;: &quot;source and policy inspection&quot;, &quot;approx minutes&quot;: 6 }, { &quot;phase&quot;: &quot;policy and checker patch&quot;, &quot;approx minutes&quot;: 12 }, { &quot;phase&quot;: &quot;history and requirements records&quot;, &quot;approx minutes&quot;: 10 }, { &quot;phase&quot;: &quot;validation&quot;, &quot;approx</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 783,
+      "updatedAt": "2026-06-06T03:34:28.044Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Main Tab Scroll Scope Policy",
+      "excerpt": "사용자 요청 요약: Main Tab Scroll Scope Policy 날짜: 2026 06 06 요지 사용자는 코드, 기능 목록, popup 같은 제한된 영역에서만 scroll을 쓰고, 메인 화면이나 tab 전체에 scroll 영역을 거는 것을 기본적으로 자제하라고 지시했다. 의도 데스크톱 앱의 넓은 화면을 main surface로 활용한다. 전체 tab scroll과 nested scroll이 겹쳐 생기는 불편함을 줄인다. code/log/list/dialog처럼 실제로 overflow가 필요",
+      "html": "<p>사용자 요청 요약: Main Tab Scroll Scope Policy 날짜: 2026 06 06 요지 사용자는 코드, 기능 목록, popup 같은 제한된 영역에서만 scroll을 쓰고, 메인 화면이나 tab 전체에 scroll 영역을 거는 것을 기본적으로 자제하라고 지시했다. 의도 데스크톱 앱의 넓은 화면을 main surface로 활용한다. 전체 tab scroll과 nested scroll이 겹쳐 생기는 불편함을 줄인다. code/log/list/dialog처럼 실제로 overflow가 필요한 bounded 영역만 scroll owner가 되게 한다. 처리 방향 지속 지침과 UI tone policy에 scroll ownership</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 774,
+      "updatedAt": "2026-06-06T03:34:28.042Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Main Tab Scroll Scope Policy",
+      "excerpt": "Web Search: Main Tab Scroll Scope Policy 날짜: 2026 06 06 Queries Apple Human Interface Guidelines Scrolling macOS scroll views Microsoft Fluent UI scroll controls guidance scroll containers Baymard nested scrolling usability issue 확인한 출처 Apple Human Interface Guidelines, Scroll Vi",
+      "html": "<p>Web Search: Main Tab Scroll Scope Policy 날짜: 2026 06 06 Queries Apple Human Interface Guidelines Scrolling macOS scroll views Microsoft Fluent UI scroll controls guidance scroll containers Baymard nested scrolling usability issue 확인한 출처 Apple Human Interface Guidelines, Scroll Views: https://developer.apple.com/design/human interface guidelines/scroll views </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1647,
+      "updatedAt": "2026-06-06T03:34:28.041Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-evaluation-result-json",
       "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-evaluation-result.json",
       "category": "evaluation",
@@ -77,22 +221,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-2026-2026-06-06-md",
-      "path": "_history/2026/2026-06-06.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 06",
-      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 15929,
-      "updatedAt": "2026-06-06T03:27:15.270Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-ko-md",
@@ -42051,35 +42179,35 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 352,
+      "documentsCount": 360,
       "categories": [
         {
           "category": "evaluation",
-          "count": 82
+          "count": 84
         },
         {
           "category": "user-request",
-          "count": 50
+          "count": 51
         },
         {
           "category": "web-search",
-          "count": 50
+          "count": 51
         },
         {
           "category": "work-summary",
-          "count": 50
+          "count": 51
         },
         {
           "category": "request-trace",
-          "count": 49
+          "count": 50
         },
         {
           "category": "work-timing",
-          "count": 48
+          "count": 49
         },
         {
           "category": "plan",
-          "count": 22
+          "count": 23
         },
         {
           "category": "daily-history",

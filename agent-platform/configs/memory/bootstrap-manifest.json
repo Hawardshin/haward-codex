@@ -12,7 +12,7 @@
       "Run default_command after changing durable rules, navigation, source configs, project boundaries, prompts, workflows, or maps."
     ],
     "owner": "agent-platform",
-    "last_reviewed": "2026-06-03",
+    "last_reviewed": "2026-06-06",
     "update_triggers": [
       "A durable user instruction becomes mandatory for future sessions.",
       "A new shared config, prompt, workflow, project registry, or map becomes part of startup context.",
@@ -38,6 +38,7 @@
       "The request-to-outcome trace layer or traceability contract changes.",
       "The web search record layer or prompt-level search contract changes.",
       "The work mode selection or deferred improvement policy changes.",
+      "The UI tone policy, main-tab scroll ownership rule, or bounded child scroll-surface contract changes.",
       "The omission prevention workflow, omission guard agent, or omission_check_targets contract changes.",
       "The do-all completion standard, acceptance coverage rule, or partial-closeout blocker policy changes.",
       "The resource leak prevention workflow, resource guard agent, or resource_check_targets contract changes.",
@@ -94,6 +95,7 @@
         "single-primary-feature full-screen UI layout principle",
         "single-purpose UI controls and panels for cognitive load control",
         "depth-first tab and drill-down navigation rule",
+        "main-tab scroll ownership limit and bounded child scroll-surface rule",
         "wide-scope work should not be avoided or prematurely shrunk only because it is wide",
         "do-all requests must cover every applicable requirement, artifact, validation, build, record, commit, and push step",
         "post-implementation automatic build or package verification rule"
@@ -205,9 +207,10 @@
         "motion and micro-interaction guardrails",
         "single-primary-feature screens filling the viewport by default",
         "single-purpose feature, panel, button, and workflow-step UI rule",
-        "deeper drill-down screens instead of multi-feature tabs"
+        "deeper drill-down screens instead of multi-feature tabs",
+        "main-tab scroll ownership limits and bounded child scroll-surface policy"
       ],
-      "last_checked": "2026-06-04"
+      "last_checked": "2026-06-06"
     },
     {
       "id": "desktop_distribution_registry",
@@ -1608,7 +1611,7 @@
       "id": "persistent_instructions",
       "path": "_docs/instructions/persistent-instructions.md",
       "tier": "hot",
-      "purpose": "Durable user preferences, source-structure quality gate, single-purpose UI controls, depth-first tab navigation, post-implementation build verification, and long-running operating rules.",
+      "purpose": "Durable user preferences, source-structure quality gate, single-purpose UI controls, depth-first tab navigation, main-tab scroll ownership limits, post-implementation build verification, and long-running operating rules.",
       "required": true,
       "load_order": 2
     },
@@ -1688,7 +1691,7 @@
       "id": "ui_tone_policy",
       "path": "_docs/policies/ui-tone-policy.ko.md",
       "tier": "warm",
-      "purpose": "Subtle cute and quietly delightful UI tone policy that keeps clarity, scanability, accessibility, operational trust, single-primary-feature layout focus, single-purpose UI controls, and depth-first tab navigation first.",
+      "purpose": "Subtle cute and quietly delightful UI tone policy that keeps clarity, scanability, accessibility, operational trust, single-primary-feature layout focus, single-purpose UI controls, depth-first tab navigation, and bounded child scroll surfaces first.",
       "required": true,
       "load_order": 8
     },

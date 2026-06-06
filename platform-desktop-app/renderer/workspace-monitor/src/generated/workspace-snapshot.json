@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T03:28:13.267Z",
+  "generatedAt": "2026-06-06T03:36:32.038Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -12,12 +12,12 @@
     "tasks": 71,
     "completedTasks": 71,
     "documents": 650,
-    "requirements": 509,
-    "evaluations": 18,
+    "requirements": 514,
+    "evaluations": 19,
     "webSearches": 13,
-    "timingRecords": 13,
+    "timingRecords": 14,
     "historyDays": 1,
-    "adminHistoryDocuments": 2624,
+    "adminHistoryDocuments": 2632,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -4677,6 +4677,12 @@
   ],
   "requirements": [
     {
+      "id": "REQ-PDA-126",
+      "requirement": "Workspace Monitor는 .desktop viewport 와 .mounted section panel 에 whole tab vertical scroll ownership이 재도입되면 static check에서 실패해야 한다.",
+      "priority": "baseline",
+      "sourcePath": "_requirements/reviews/2026-06-06-main-tab-scroll-scope-policy.ko.md"
+    },
+    {
       "id": "REQ-WS-088",
       "requirement": "JavaScript/TypeScript projects in the repository shall install and verify dependencies through a pnpm workspace and the root pnpm lock.yaml .",
       "priority": "must",
@@ -7431,6 +7437,30 @@
       "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-history-insight-loop.ko.md"
     },
     {
+      "id": "REQ-PDA-126",
+      "requirement": "Workspace Monitor의 main tab/page surface는 기본 scroll owner가 아니어야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-main-tab-scroll-scope-policy.ko.md"
+    },
+    {
+      "id": "REQ-PDA-127",
+      "requirement": "scroll container는 code editor/viewer, terminal/log, 긴 기능/파일 목록, popup/dialog/flyout, inspector 같은 bounded child surface에만 둔다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-main-tab-scroll-scope-policy.ko.md"
+    },
+    {
+      "id": "REQ-PDA-128",
+      "requirement": "main tab overflow가 생기면 전체 tab scroll보다 deeper view 또는 bounded child pane으로 정보 구조를 나누는 것을 기본 설계로 삼는다.",
+      "priority": "should",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-main-tab-scroll-scope-policy.ko.md"
+    },
+    {
+      "id": "REQ-PDA-129",
+      "requirement": "scroll ownership 정책은 future session startup memory에서 찾을 수 있어야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-main-tab-scroll-scope-policy.ko.md"
+    },
+    {
       "id": "REQ-PTY-001",
       "requirement": "앱은 OS pseudo terminal을 사용해 live shell session을 시작할 수 있어야 한다.",
       "priority": "must",
@@ -7733,6 +7763,358 @@
   ],
   "documents": [
     {
+      "id": "platform-desktop-app-specs-2026-06-06-main-tab-scroll-scope-policy-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-main-tab-scroll-scope-policy/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Main Tab Scroll Scope Policy",
+      "excerpt": "Tasks: Main Tab Scroll Scope Policy x web search record 작성. x 요구사항 리뷰와 프로젝트 요구사항 작성. x persistent instructions와 AGENTS.md 업데이트. x UI tone policy 한/영 업데이트. x memory bootstrap manifest 업데이트. x check scroll containers.mjs main tab scroll ownership contract 추가. x validation command 실",
+      "html": "<h1>Tasks: Main Tab Scroll Scope Policy</h1>\n<ul>\n<li>[x] web search record 작성.</li>\n<li>[x] 요구사항 리뷰와 프로젝트 요구사항 작성.</li>\n<li>[x] persistent instructions와 <code>AGENTS.md</code> 업데이트.</li>\n<li>[x] UI tone policy 한/영 업데이트.</li>\n<li>[x] memory bootstrap manifest 업데이트.</li>\n<li>[x] <code>check-scroll-containers.mjs</code> main tab scroll ownership contract 추가.</li>\n<li>[x] validation command 실행.</li>\n<li>[x] omission/evaluation/trace 기록 마감.</li>\n<li>[x] commit-ready 상태 확인.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 475,
+      "updatedAt": "2026-06-06T03:36:17.337Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-2026-2026-06-06-md",
+      "path": "_history/2026/2026-06-06.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 06",
+      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
+      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 16685,
+      "updatedAt": "2026-06-06T03:35:44.387Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "평가: Main Tab Scroll Scope Policy",
+      "excerpt": "평가: Main Tab Scroll Scope Policy 날짜: 2026 06 06 결론 요청은 정책과 회귀 방지 검사 수준에서 충족됐다. main tab/page 전체를 기본 scroll owner로 두지 않는 원칙이 durable instructions, UI tone policy, memory bootstrap, renderer checker에 반영됐다. 검증 python3 tools/docs audit/src/docs audit.py check 통과. PYTHONPATH=src pytho",
+      "html": "<p>평가: Main Tab Scroll Scope Policy 날짜: 2026 06 06 결론 요청은 정책과 회귀 방지 검사 수준에서 충족됐다. main tab/page 전체를 기본 scroll owner로 두지 않는 원칙이 durable instructions, UI tone policy, memory bootstrap, renderer checker에 반영됐다. 검증 python3 tools/docs audit/src/docs audit.py check 통과. PYTHONPATH=src python3 m agent platform.cli check memory bootstrap configs/memory/bootstrap manifest</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1498,
+      "updatedAt": "2026-06-06T03:35:44.386Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Main Tab Scroll Scope Policy",
+      "excerpt": "작업 요약: Main Tab Scroll Scope Policy 날짜: 2026 06 06 완료 main tab/page 전체를 기본 scroll owner로 두지 않는 지속 UI 원칙을 추가했다. code, terminal/log, 긴 목록, popup/dialog/flyout, inspector 같은 bounded child surface는 허용 scroll 영역으로 명명했다. UI tone policy와 memory bootstrap anchor를 갱신했다. workspace monitor ",
+      "html": "<p>작업 요약: Main Tab Scroll Scope Policy 날짜: 2026 06 06 완료 main tab/page 전체를 기본 scroll owner로 두지 않는 지속 UI 원칙을 추가했다. code, terminal/log, 긴 목록, popup/dialog/flyout, inspector 같은 bounded child surface는 허용 scroll 영역으로 명명했다. UI tone policy와 memory bootstrap anchor를 갱신했다. workspace monitor scroll contract checker에 .desktop viewport 와 .mounted section panel 회귀 방지 패턴을 추가</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 861,
+      "updatedAt": "2026-06-06T03:35:44.386Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-main-tab-scroll-scope-policy-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-main-tab-scroll-scope-policy/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Main Tab Scroll Scope Policy",
+      "excerpt": "Validation: Main Tab Scroll Scope Policy 실행한 검증 | 명령 | 결과 | | | | | python3 tools/docs audit/src/docs audit.py check | 통과, docs ready , gaps 0 | | cd agent platform && PYTHONPATH=src python3 m agent platform.cli check memory bootstrap configs/memory/bootstrap manifest.json | 통과, ",
+      "html": "<h1>Validation: Main Tab Scroll Scope Policy</h1>\n<h2>실행한 검증</h2>\n<table><thead><tr><th>명령</th><th>결과</th></tr></thead><tbody><tr><td><code>python3 _tools/docs-audit/src/docs_audit.py --check</code></td><td>통과, <code>docs_ready</code>, gaps 0</td></tr><tr><td><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-memory-bootstrap configs/memory/bootstrap-manifest.json</code></td><td>통과, <code>ready_to_bootstrap</code></td></tr><tr><td><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json</code></td><td>통과, <code>self_documenting</code></td></tr><tr><td><code>corepack pnpm --filter workspace-monitor run check</code></td><td>통과, <code>scroll_contract_ok</code>, <code>checkedMainTabScrollOwners: 2</code></td></tr><tr><td><code>corepack pnpm --filter workspace-monitor test</code></td><td>통과, 78개 테스트</td></tr><tr><td><code>corepack pnpm --filter workspace-monitor run collect</code></td><td>통과, 650 inline documents, 2632 admin history records</td></tr><tr><td><code>corepack pnpm --filter workspace-monitor run build</code></td><td>통과, Next.js production build</td></tr><tr><td><code>git diff --check</code></td><td>통과</td></tr></tbody></table>\n<h2>Acceptance</h2>\n<ul>\n<li><code>.desktop-viewport</code>와 <code>.mounted-section-panel</code>은 whole-tab vertical scroll owner가 될 수 없다.</li>\n<li>기존 bounded scroll containers는 scoped scroll contract 안에서 유지된다.</li>\n<li>durable instructions와 memory bootstrap에서 새 정책을 찾을 수 있다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1239,
+      "updatedAt": "2026-06-06T03:35:44.385Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-main-tab-scroll-scope-policy-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-main-tab-scroll-scope-policy-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Main Tab Scroll Scope Policy Evaluation Input",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"2026 06 06 main tab scroll scope policy\", \"project\": \"platform desktop app\", \"work mode\": \"governance\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"installation occurred\": false, \"resource risk occurred\": false, \"cli pipe",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;2026 06 06 main tab scroll scope policy&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;view mode&quot;: &quot;superadmin developer&quot;, &quot;install mode&quot;: &quot;developer&quot;, &quot;installation occurred&quot;: false, &quot;resource risk occurred&quot;: false, &quot;cli pipeline occurred&quot;: false, &quot;requirements targets&quot;: &quot; requirements/reviews/2026 06 06</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1684,
+      "updatedAt": "2026-06-06T03:34:28.045Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+      "path": "_history/plans/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "작업 계획: Main Tab Scroll Scope Policy",
+      "excerpt": "작업 계획: Main Tab Scroll Scope Policy 날짜: 2026 06 06 계획 web first intake로 scroll/nested scroll 기준을 확인한다. 사용자 지시를 durable UI rule로 정리한다. policy, persistent instructions, memory bootstrap, renderer static checker를 같은 방향으로 맞춘다. 새 화면 구현은 하지 않고 회귀 방지 계약을 강화한다. docs/config/renderer check",
+      "html": "<p>작업 계획: Main Tab Scroll Scope Policy 날짜: 2026 06 06 계획 web first intake로 scroll/nested scroll 기준을 확인한다. 사용자 지시를 durable UI rule로 정리한다. policy, persistent instructions, memory bootstrap, renderer static checker를 같은 방향으로 맞춘다. 새 화면 구현은 하지 않고 회귀 방지 계약을 강화한다. docs/config/renderer checks를 통과시키고 기록/commit/push로 마감한다. 범위 포함: scroll ownership 정책, memory anchor, static</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 636,
+      "updatedAt": "2026-06-06T03:34:28.044Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Main Tab Scroll Scope Policy",
+      "excerpt": "Request Trace: Main Tab Scroll Scope Policy 날짜: 2026 06 06 요청 스크롤은 code, 기능 목록, popup 같은 제한된 곳에서만 최대한 쓰고, 메인 화면/tab 전체를 scroll 영역으로 만드는 것을 자제해 달라는 UI 운영 지침. 결과 durable instructions와 AGENTS.md 에 main tab/page scroll ownership 제한을 추가했다. UI tone policy 한/영 문서에 근거, 원칙, 검증 항목을 추가했다. m",
+      "html": "<p>Request Trace: Main Tab Scroll Scope Policy 날짜: 2026 06 06 요청 스크롤은 code, 기능 목록, popup 같은 제한된 곳에서만 최대한 쓰고, 메인 화면/tab 전체를 scroll 영역으로 만드는 것을 자제해 달라는 UI 운영 지침. 결과 durable instructions와 AGENTS.md 에 main tab/page scroll ownership 제한을 추가했다. UI tone policy 한/영 문서에 근거, 원칙, 검증 항목을 추가했다. memory bootstrap manifest에 future session anchor를 갱신했다. check scroll containers.m</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1210,
+      "updatedAt": "2026-06-06T03:34:28.044Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-main-tab-scroll-scope-policy-json",
+      "path": "_history/work-timings/2026/2026-06-06-main-tab-scroll-scope-policy.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Main Tab Scroll Scope Policy",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"slug\": \"main tab scroll scope policy\", \"phases\": { \"phase\": \"web first intake\", \"approx minutes\": 3 }, { \"phase\": \"source and policy inspection\", \"approx minutes\": 6 }, { \"phase\": \"policy and checker patch\", \"approx minutes\": 12 }, { \"phase\": \"history and",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;slug&quot;: &quot;main tab scroll scope policy&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;approx minutes&quot;: 3 }, { &quot;phase&quot;: &quot;source and policy inspection&quot;, &quot;approx minutes&quot;: 6 }, { &quot;phase&quot;: &quot;policy and checker patch&quot;, &quot;approx minutes&quot;: 12 }, { &quot;phase&quot;: &quot;history and requirements records&quot;, &quot;approx minutes&quot;: 10 }, { &quot;phase&quot;: &quot;validation&quot;, &quot;approx</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 783,
+      "updatedAt": "2026-06-06T03:34:28.044Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-main-tab-scroll-scope-policy-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-main-tab-scroll-scope-policy/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Main Tab Scroll Scope Policy",
+      "excerpt": "Plan: Main Tab Scroll Scope Policy 1. web first intake로 scroll view 중첩과 scoped scroll 근거를 확인한다. 2. persistent instructions, UI tone policy, AGENTS.md 에 durable rule을 반영한다. 3. memory bootstrap manifest에 future session anchor를 갱신한다. 4. workspace monitor scroll contract checker에 mai",
+      "html": "<h1>Plan: Main Tab Scroll Scope Policy</h1>\n<p>1. web-first intake로 scroll view 중첩과 scoped scroll 근거를 확인한다.</p>\n<p>2. persistent instructions, UI tone policy, <code>AGENTS.md</code>에 durable rule을 반영한다.</p>\n<p>3. memory bootstrap manifest에 future session anchor를 갱신한다.</p>\n<p>4. <code>workspace-monitor</code> scroll contract checker에 main tab scroll owner 금지 패턴을 추가한다.</p>\n<p>5. docs audit, config contract, renderer check/test로 검증한다.</p>\n<p>6. history, omission, evaluation, request trace를 남기고 commit/push한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 533,
+      "updatedAt": "2026-06-06T03:34:28.043Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-main-tab-scroll-scope-policy-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-main-tab-scroll-scope-policy/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Main Tab Scroll Scope Policy",
+      "excerpt": "Spec: Main Tab Scroll Scope Policy 목표 Workspace Monitor와 플랫폼 UI에서 main tab/page 전체가 기본 scroll owner가 되는 회귀를 막고, scroll을 bounded child surface로 제한한다. 범위 persistent instructions와 AGENTS.md runtime adapter. docs/policies/ui tone policy. .md . agent platform/configs/memory/bootstrap ",
+      "html": "<h1>Spec: Main Tab Scroll Scope Policy</h1>\n<h2>목표</h2>\n<p>Workspace Monitor와 플랫폼 UI에서 main tab/page 전체가 기본 scroll owner가 되는 회귀를 막고, scroll을 bounded child surface로 제한한다.</p>\n<h2>범위</h2>\n<ul>\n<li>persistent instructions와 <code>AGENTS.md</code> runtime adapter.</li>\n<li><code>_docs/policies/ui-tone-policy.*.md</code>.</li>\n<li><code>agent-platform/configs/memory/bootstrap-manifest.json</code>.</li>\n<li><code>workspace-monitor</code> scroll contract checker.</li>\n<li>요구사항, trace, evaluation 기록.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>새 화면 layout 대규모 리팩터링.</li>\n<li>기존 source editor, terminal, file tree, timeline, tool detail 같은 bounded scroll surface 제거.</li>\n<li>새 dependency 설치.</li>\n</ul>\n<h2>설계</h2>\n<ul>\n<li>정책은 “main tab/page 전체가 기본 scroll owner가 아니다”로 긍정 행동을 정의한다.</li>\n<li>허용 scroll surface를 code, terminal/log, 긴 function/file list, popup/dialog/flyout, inspector로 명명한다.</li>\n<li>검증기는 <code>.desktop-viewport</code>와 <code>.mounted-section-panel</code>에서 <code>overflow: auto/scroll</code>, <code>overflow-y: auto/scroll</code>, fixed viewport height/max-height 패턴을 금지한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1075,
+      "updatedAt": "2026-06-06T03:34:28.043Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-main-tab-scroll-scope-policy-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-main-tab-scroll-scope-policy/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Main Tab Scroll Scope Policy",
+      "excerpt": "Traceability: Main Tab Scroll Scope Policy | 요구사항 | 구현 | 검증 | | | | | | REQ PDA 126 | check scroll containers.mjs 의 .desktop viewport , .mounted section panel forbidden pattern | workspace monitor run check | | REQ PDA 127 | docs/policies/ui tone policy. .md , scoped scroll contr",
+      "html": "<h1>Traceability: Main Tab Scroll Scope Policy</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-126</td><td><code>check-scroll-containers.mjs</code>의 <code>.desktop-viewport</code>, <code>.mounted-section-panel</code> forbidden pattern</td><td><code>workspace-monitor run check</code></td></tr><tr><td>REQ-PDA-127</td><td><code>_docs/policies/ui-tone-policy.*.md</code>, scoped scroll contract 유지</td><td><code>check-scroll-containers.mjs</code></td></tr><tr><td>REQ-PDA-128</td><td><code>persistent-instructions.*.md</code>, <code>AGENTS.md</code> durable rule</td><td>docs audit, request trace</td></tr><tr><td>REQ-PDA-129</td><td><code>bootstrap-manifest.json</code> reference link와 anchor purpose 갱신</td><td><code>check-memory-bootstrap</code>, <code>check-config-contract</code></td></tr></tbody></table>\n<h2>변경 파일</h2>\n<ul>\n<li><code>AGENTS.md</code></li>\n<li><code>_docs/instructions/persistent-instructions.md</code></li>\n<li><code>_docs/instructions/persistent-instructions.en.md</code></li>\n<li><code>_docs/instructions/persistent-instructions.ko.md</code></li>\n<li><code>_docs/policies/ui-tone-policy.en.md</code></li>\n<li><code>_docs/policies/ui-tone-policy.ko.md</code></li>\n<li><code>agent-platform/configs/memory/bootstrap-manifest.json</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/scripts/check-scroll-containers.mjs</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1014,
+      "updatedAt": "2026-06-06T03:34:28.043Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Main Tab Scroll Scope Policy",
+      "excerpt": "사용자 요청 요약: Main Tab Scroll Scope Policy 날짜: 2026 06 06 요지 사용자는 코드, 기능 목록, popup 같은 제한된 영역에서만 scroll을 쓰고, 메인 화면이나 tab 전체에 scroll 영역을 거는 것을 기본적으로 자제하라고 지시했다. 의도 데스크톱 앱의 넓은 화면을 main surface로 활용한다. 전체 tab scroll과 nested scroll이 겹쳐 생기는 불편함을 줄인다. code/log/list/dialog처럼 실제로 overflow가 필요",
+      "html": "<p>사용자 요청 요약: Main Tab Scroll Scope Policy 날짜: 2026 06 06 요지 사용자는 코드, 기능 목록, popup 같은 제한된 영역에서만 scroll을 쓰고, 메인 화면이나 tab 전체에 scroll 영역을 거는 것을 기본적으로 자제하라고 지시했다. 의도 데스크톱 앱의 넓은 화면을 main surface로 활용한다. 전체 tab scroll과 nested scroll이 겹쳐 생기는 불편함을 줄인다. code/log/list/dialog처럼 실제로 overflow가 필요한 bounded 영역만 scroll owner가 되게 한다. 처리 방향 지속 지침과 UI tone policy에 scroll ownership</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 774,
+      "updatedAt": "2026-06-06T03:34:28.042Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "requirements-reviews-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+      "path": "_requirements/reviews/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+      "category": "requirement",
+      "language": "ko",
+      "title": "Main Tab Scroll Scope Policy 요구사항 리뷰",
+      "excerpt": "Main Tab Scroll Scope Policy 요구사항 리뷰 날짜: 2026 06 06 프로젝트: shared policy, platform desktop app 요구사항 후보 | ID | 요구사항 | 판정 | | | | | | REQ SHARED UI 001 | main tab/page 전체를 기본 scroll owner로 만들지 않는다. | baseline | | REQ SHARED UI 002 | scroll이 필요한 영역은 code editor/viewer, terminal/log, ",
+      "html": "<h1>Main Tab Scroll Scope Policy 요구사항 리뷰</h1>\n<p>날짜: 2026-06-06</p>\n<p>프로젝트: shared policy, <code>platform-desktop-app</code></p>\n<h2>요구사항 후보</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>판정</th></tr></thead><tbody><tr><td>REQ-SHARED-UI-001</td><td>main tab/page 전체를 기본 scroll owner로 만들지 않는다.</td><td>baseline</td></tr><tr><td>REQ-SHARED-UI-002</td><td>scroll이 필요한 영역은 code editor/viewer, terminal/log, 긴 기능/파일 목록, popup/dialog/flyout, inspector 같은 bounded child surface로 제한한다.</td><td>baseline</td></tr><tr><td>REQ-SHARED-UI-003</td><td>main tab이 overflow될 것 같으면 전체 tab scroll보다 deeper view, drill-down, bounded child pane으로 정보 구조를 나눈다.</td><td>baseline</td></tr><tr><td>REQ-PDA-126</td><td>Workspace Monitor는 <code>.desktop-viewport</code>와 <code>.mounted-section-panel</code>에 whole-tab vertical scroll ownership이 재도입되면 static check에서 실패해야 한다.</td><td>baseline</td></tr></tbody></table>\n<h2>검토</h2>\n<ul>\n<li>요청은 일회성 취향이 아니라 이후 UI 변경 기준으로 작동해야 하므로 persistent instructions, UI tone policy, memory bootstrap에 반영한다.</li>\n<li>이미 허용된 scroll surface인 source editor, terminal drawer, file tree, timeline docs, tool detail/list scroll은 유지한다.</li>\n<li>전체 tab/page scroll을 금지하는 대신 overflow가 실제로 필요한 child surface를 명명해 허용한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1308,
+      "updatedAt": "2026-06-06T03:34:28.042Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_requirements/reviews"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Main Tab Scroll Scope Policy 요구사항",
+      "excerpt": "Main Tab Scroll Scope Policy 요구사항 날짜: 2026 06 06 프로젝트: platform desktop app 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | :| | | REQ PDA 126 | Workspace Monitor의 main tab/page surface는 기본 scroll owner가 아니어야 한다. | must | .desktop viewport , .mounted section panel scroll 금지 패턴 검사 | | REQ PD",
+      "html": "<h1>Main Tab Scroll Scope Policy 요구사항</h1>\n<p>날짜: 2026-06-06</p>\n<p>프로젝트: <code>platform-desktop-app</code></p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-126</td><td>Workspace Monitor의 main tab/page surface는 기본 scroll owner가 아니어야 한다.</td><td>must</td><td><code>.desktop-viewport</code>, <code>.mounted-section-panel</code> scroll 금지 패턴 검사</td></tr><tr><td>REQ-PDA-127</td><td>scroll container는 code editor/viewer, terminal/log, 긴 기능/파일 목록, popup/dialog/flyout, inspector 같은 bounded child surface에만 둔다.</td><td>must</td><td><code>check-scroll-containers.mjs</code> scoped scroll contract</td></tr><tr><td>REQ-PDA-128</td><td>main tab overflow가 생기면 전체 tab scroll보다 deeper view 또는 bounded child pane으로 정보 구조를 나누는 것을 기본 설계로 삼는다.</td><td>should</td><td>UI policy, persistent instructions</td></tr><tr><td>REQ-PDA-129</td><td>scroll ownership 정책은 future session startup memory에서 찾을 수 있어야 한다.</td><td>must</td><td><code>bootstrap-manifest.json</code> config contract</td></tr></tbody></table>\n<h2>결정</h2>\n<ul>\n<li>기존 scoped scroll surface는 유지한다.</li>\n<li><code>.desktop-viewport</code>와 <code>.mounted-section-panel</code>은 whole-tab vertical scroll owner가 되지 않도록 static regression contract를 둔다.</li>\n<li>이 원칙은 데스크톱 앱 UI의 기본 설계 기준으로 문서화한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1281,
+      "updatedAt": "2026-06-06T03:34:28.042Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Main Tab Scroll Scope Policy",
+      "excerpt": "Web Search: Main Tab Scroll Scope Policy 날짜: 2026 06 06 Queries Apple Human Interface Guidelines Scrolling macOS scroll views Microsoft Fluent UI scroll controls guidance scroll containers Baymard nested scrolling usability issue 확인한 출처 Apple Human Interface Guidelines, Scroll Vi",
+      "html": "<p>Web Search: Main Tab Scroll Scope Policy 날짜: 2026 06 06 Queries Apple Human Interface Guidelines Scrolling macOS scroll views Microsoft Fluent UI scroll controls guidance scroll containers Baymard nested scrolling usability issue 확인한 출처 Apple Human Interface Guidelines, Scroll Views: https://developer.apple.com/design/human interface guidelines/scroll views </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1647,
+      "updatedAt": "2026-06-06T03:34:28.041Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "docs-policies-ui-tone-policy-en-md",
+      "path": "_docs/policies/ui-tone-policy.en.md",
+      "category": "workspace-doc",
+      "language": "en",
+      "title": "UI Tone Policy",
+      "excerpt": "UI Tone Policy Purpose Platform surfaces should feel fast to scan and trustworthy like operational tools. Because the user will repeatedly work in these tools, a small amount of quiet delight and subtle cuteness is allowed when it does not weaken clarity. Principles Clarity, scan",
+      "html": "<h1>UI Tone Policy</h1>\n<h2>Purpose</h2>\n<p>Platform surfaces should feel fast to scan and trustworthy like operational tools. Because the user will repeatedly work in these tools, a small amount of quiet delight and subtle cuteness is allowed when it does not weaken clarity.</p>\n<h2>Principles</h2>\n<ul>\n<li>Clarity, scanability, accessibility, and operational trust come first.</li>\n<li>Cuteness is not the main event; it is a supporting signal that makes status and flow easier to feel.</li>\n<li>Good applications include small color accents, status dots, gentle hover feedback, friendly empty states, and restrained micro-interactions.</li>\n<li>Avoid decorative clutter, emoji-heavy UI, unnecessary animation, reduced information density, and visual noise.</li>\n<li>Motion must be brief and purposeful, and must respect <code>prefers-reduced-motion</code>.</li>\n<li>Operational and management surfaces should keep card radii aligned with the local design system and avoid feeling like broad marketing UI.</li>\n<li>When a screen has one primary feature, that feature should own the center and most of the viewport. A layout fails if the feature is small while decoration, empty cards, or unrelated secondary panels consume the screen.</li>\n<li>Because users can only perceive and decide on a limited amount of information at once, each feature, panel, button, and workflow step should expose one clear purpose.</li>\n<li>One tab should represent one functional purpose. Prefer a deeper drill-down screen or task-specific child view over keeping navigation shallow by placing several features in one tab.</li>\n<li>Do not make the whole main tab/page the default scroll owner. The default is a full-surface layout that fits the viewport; use scroll containers only in bounded child surfaces such as code editors/viewers, terminal or log panes, long function/file lists, popup/dialog/flyout menus, and intentionally framed inspector panels.</li>\n<li>Use split layouts, dashboard grids, and side-by-side panels only when the user needs simultaneous comparison, monitoring, or multiple primary tasks.</li>\n</ul>\n<h2>Applies To</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/</code> dashboards, history, source viewer, and agent board</li>\n<li><code>platform-desktop-app/</code> installable app UI</li>\n<li>Future admin, monitor, coordination board, and generated report HTML</li>\n</ul>\n<h2>Evidence</h2>\n<ul>\n<li>Apple Human Interface Guidelines for Motion describe motion as useful for status and feedback, but warn against gratuitous or excessive animation. Reduced-motion handling is required by this policy.</li>\n</ul>\n<p>https://developer.apple.com/design/Human-Interface-Guidelines/motion</p>\n<ul>\n<li>Microsoft Fluent 2 design principles emphasize focus, less visual clutter, trust, and personality in balance.</li>\n</ul>\n<p>https://fluent2.microsoft.design/design-principles</p>\n<ul>\n<li>Material Design&#039;s motion guidance treats motion as a way to communicate relationships, action availability, and action outcomes.</li>\n</ul>\n<p>https://m2.material.io/design/motion/understanding-motion.html</p>\n<ul>\n<li>Don Norman&#039;s emotional design discussion supports the idea that usability and pleasure are connected, while this repository still keeps operational readability and verification first.</li>\n</ul>\n<p>https://ubiquity.acm.org/article.cfm?id=966013</p>\n<ul>\n<li>Microsoft&#039;s Inductive User Interface guidance says screens should focus on one primary task and make screen contents fit that task. This policy applies that principle as a space-allocation rule for platform surfaces.</li>\n</ul>\n<p>https://learn.microsoft.com/en-us/windows/win32/appuistart/inductive-user-interface</p>\n<ul>\n<li>VA.gov Design System&#039;s One Thing per Page pattern says one logical thing at a time helps users focus and understand the task.</li>\n</ul>\n<p>https://dev-design.va.gov/5931/patterns/ask-users-for/a-single-response</p>\n<ul>\n<li>W3C WAI cognitive accessibility patterns say page purpose and control use should be clear, and users should be able to identify the tasks they can perform and the controls they can interact with.</li>\n</ul>\n<p>https://www.w3.org/WAI/WCAG2/supplemental/patterns/o1p01-clear-purpose/</p>\n<p>https://www.w3.org/WAI/WCAG2/supplemental/patterns/o1p05-clear-controls/</p>\n<ul>\n<li>W3C WAI cognitive accessibility patterns also recommend breaking content into manageable pieces, and the GOV.UK Service Manual recommends handling one thing per page for complex forms and workflows.</li>\n</ul>\n<p>https://www.w3.org/WAI/WCAG2/supplemental/patterns/o3p01-chunk/</p>\n<p>https://www.gov.uk/service-manual/design/form-structure#start-with-one-thing-per-page</p>\n<ul>\n<li>Apple Human Interface Guidelines for Scroll Views warn that nesting same-orientation scroll views can create an unpredictable interface that is difficult to control. This policy prefers clear bounded scroll surfaces over whole-tab scrolling.</li>\n</ul>\n<p>https://developer.apple.com/design/human-interface-guidelines/scroll-views</p>\n<ul>\n<li>Microsoft Learn&#039;s Scroll viewer controls guidance treats scroll viewers as controls for UI content that cannot fit inside a specific area. This policy applies that as a scoped child-pane ownership rule.</li>\n</ul>\n<p>https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/scroll-controls</p>\n<ul>\n<li>Baymard&#039;s inline scroll area research warns that inline and nested scroll areas can be difficult for users to perceive and operate in most ordinary scenarios.</li>\n</ul>\n<p>https://baymard.com/blog/inline-scroll-areas</p>\n<h2>Verification</h2>\n<ul>\n<li>Check that delightful details do not</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 6356,
+      "updatedAt": "2026-06-06T03:33:08.432Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "_docs/policies"
+    },
+    {
+      "id": "docs-policies-ui-tone-policy-ko-md",
+      "path": "_docs/policies/ui-tone-policy.ko.md",
+      "category": "workspace-doc",
+      "language": "ko",
+      "title": "UI Tone 정책",
+      "excerpt": "UI Tone 정책 목적 플랫폼 화면은 운영 도구처럼 빠르게 읽히고 신뢰돼야 한다. 동시에 사용자가 오래 반복해서 쓰는 도구이므로, 명확성을 해치지 않는 작은 즐거움과 은근히 귀여운 톤을 허용한다. 원칙 명확성, 훑어보기, 접근성, 운영 신뢰가 항상 먼저다. 귀여움은 주인공이 아니라 사용자가 상태를 더 편하게 이해하게 하는 보조 신호다. 좋은 적용은 작은 색상 accent, 상태점, 부드러운 hover 피드백, friendly empty state, 과하지 않은 micro interaction이다",
+      "html": "<h1>UI Tone 정책</h1>\n<h2>목적</h2>\n<p>플랫폼 화면은 운영 도구처럼 빠르게 읽히고 신뢰돼야 한다. 동시에 사용자가 오래 반복해서 쓰는 도구이므로, 명확성을 해치지 않는 작은 즐거움과 은근히 귀여운 톤을 허용한다.</p>\n<h2>원칙</h2>\n<ul>\n<li>명확성, 훑어보기, 접근성, 운영 신뢰가 항상 먼저다.</li>\n<li>귀여움은 주인공이 아니라 사용자가 상태를 더 편하게 이해하게 하는 보조 신호다.</li>\n<li>좋은 적용은 작은 색상 accent, 상태점, 부드러운 hover 피드백, friendly empty state, 과하지 않은 micro-interaction이다.</li>\n<li>피해야 할 적용은 장식 과잉, emoji 남용, 불필요한 animation, 정보 밀도 저하, 시각적 소음이다.</li>\n<li>motion은 짧고 목적이 있어야 하며, <code>prefers-reduced-motion</code>을 존중해야 한다.</li>\n<li>운영/관리 화면의 card radius는 기존 디자인 시스템과 맞추고, 과하게 둥근 marketing UI처럼 보이지 않게 한다.</li>\n<li>한 화면의 주 기능이 하나이면 그 기능이 viewport의 중심과 대부분의 면적을 차지해야 한다. 기능이 작게 떠 있고 나머지를 장식, 빈 card, 무관한 보조 panel로 채우는 layout은 실패로 본다.</li>\n<li>사용자는 한 번에 인지하고 판단할 수 있는 정보량이 제한되어 있으므로, 기능, panel, button, workflow step은 한 가지 목적만 명확히 드러내야 한다.</li>\n<li>한 tab은 하나의 기능 목적을 대표해야 한다. 여러 기능을 한 tab에 얹어 navigation을 얕게 만들기보다, 한 단계 더 들어가는 drill-down 화면이나 task-specific child view를 사용한다.</li>\n<li>main tab/page 전체를 기본 scroll owner로 만들지 않는다. 기본은 viewport 안에 맞는 full-surface layout이고, scroll container는 code editor/viewer, terminal/log pane, 긴 기능/파일 목록, popup/dialog/flyout menu, 의도적으로 framed 된 inspector panel처럼 bounded child surface에만 둔다.</li>\n<li>분할 layout, dashboard grid, side-by-side panel은 비교, monitoring, 다중 주 작업처럼 사용자가 동시에 봐야 하는 맥락이 있을 때만 쓴다.</li>\n</ul>\n<h2>적용 대상</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/</code>의 dashboard, history, source viewer, agent board</li>\n<li><code>platform-desktop-app/</code>의 설치형 프로그램 UI</li>\n<li>미래의 admin, monitor, coordination board, generated report HTML</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>Apple Human Interface Guidelines의 Motion 문서는 motion이 status와 feedback을 전달할 수 있지만 목적 없이 추가하면 산만하거나 불편할 수 있다고 설명한다. <code>prefers-reduced-motion</code> 계열 대응은 이 정책의 필수 기준으로 둔다.</li>\n</ul>\n<p>https://developer.apple.com/design/Human-Interface-Guidelines/motion</p>\n<ul>\n<li>Microsoft Fluent 2의 design principles는 focus, 적은 visual clutter, trust, personality의 균형을 강조한다.</li>\n</ul>\n<p>https://fluent2.microsoft.design/design-principles</p>\n<ul>\n<li>Material Design의 motion 문서는 motion을 관계, action availability, action outcome을 알려주는 도구로 다룬다.</li>\n</ul>\n<p>https://m2.material.io/design/motion/understanding-motion.html</p>\n<ul>\n<li>Don Norman의 emotional design 논의는 사용성과 즐거움이 분리되지 않는다는 관점을 제공하지만, 이 저장소에서는 운영 가독성과 검증 가능성을 우선한다.</li>\n</ul>\n<p>https://ubiquity.acm.org/article.cfm?id=966013</p>\n<ul>\n<li>Microsoft의 Inductive User Interface 문서는 화면을 하나의 primary task에 집중시키고, 화면 내용이 그 task에 맞아야 한다고 설명한다. 이 정책은 그 원칙을 플랫폼 화면의 공간 배분 기준으로 적용한다.</li>\n</ul>\n<p>https://learn.microsoft.com/en-us/windows/win32/appuistart/inductive-user-interface</p>\n<ul>\n<li>VA.gov Design System의 One Thing per Page 패턴은 한 번에 하나의 논리적 항목을 다루면 사용자가 더 쉽게 집중하고 이해할 수 있다고 설명한다.</li>\n</ul>\n<p>https://dev-design.va.gov/5931/patterns/ask-users-for/a-single-response</p>\n<ul>\n<li>W3C WAI의 cognitive accessibility 패턴은 화면 목적과 control 사용법을 명확히 드러내야 하며, 사용자가 수행 가능한 task와 interactive control을 알아볼 수 있어야 한다고 설명한다.</li>\n</ul>\n<p>https://www.w3.org/WAI/WCAG2/supplemental/patterns/o1p01-clear-purpose/</p>\n<p>https://www.w3.org/WAI/WCAG2/supplemental/patterns/o1p05-clear-controls/</p>\n<ul>\n<li>W3C WAI의 cognitive accessibility 패턴은 content를 관리 가능한 조각으로 나누라고 설명하며, GOV.UK Service Manual도 복잡한 form/workflow에서 한 번에 한 가지를 다루는 구조를 권장한다.</li>\n</ul>\n<p>https://www.w3.org/WAI/WCAG2/supplemental/patterns/o3p01-chunk/</p>\n<p>https://www.gov.uk/service-manual/design/form-structure#start-with-one-thing-per-page</p>\n<ul>\n<li>Apple Human Interface Guidelines의 Scroll Views 문서는 같은 방향의 scroll view 중첩이 예측하기 어렵고 조작하기 어려운 interface를 만들 수 있다고 설명한다. 이 정책은 main tab 전체 scroll보다 명확한 bounded scroll surface를 우선한다.</li>\n</ul>\n<p>https://developer.apple.com/design/human-interface-guidelines/scroll-views</p>\n<ul>\n<li>Microsoft Learn의 Scroll viewer controls 문서는 UI content가 한 영역에 맞지 않을 때 scroll viewer를 쓰는 control로 다룬다. 이 정책은 overflow가 있는 특정 control/child pane에 scroll ownership을 두는 기준으로 적용한다.</li>\n</ul>\n<p>https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/scroll-controls</p>\n<ul>\n<li>Baymard의 inline scroll area 연구는 inline/nested scroll area가 대부분의 일반 시나리오에서 사용자가 인지하고 조작하기 어려운 pattern이 될 수 있음을 경고한다.</li>\n</ul>\n<p>https://baymard.com/blog/inline-scroll-areas</p>\n<h2>검증</h2>\n<ul>\n<li>화면에 추가한 귀여움이 정보 hierarchy를 약화하지 않는지 확인한다.</li>\n<li>화면에 주 기능이 하나뿐인데 해당 기능이 작고 주변 chrome, card, 빈 공간, 장식이 더 크게 보이면 재설계한다.</li>\n<li>panel이나 button 하나가 상태 확인, 설정, 이동, 실행, 근거 보기처럼 서로 다른 일을 동시에 시키면 단일 목적 단위로 분리한다.</li>\n<li>tab 안에서 서로 다른 여러 기능 panel이 동시에 보이면 기본 tab은 선택 메뉴로 낮추고, 각 기능은 더 깊은 단일 기능 화면으로 이동시킨다.</li>\n<li>main tab/page selector가 <code>overflow: auto</code>, <code>overflow: scroll</code>, <code>overflow-y: auto</code>, <code>overflow-y: scroll</code>을 갖지 않는지 확인한다. scroll이 필요하면 code, terminal/log, 긴 목록, popup/dialog/flyout, inspector 같은 bounded child surface에 명명된 scroll container를 둔다.</li>\n<li>분할 layout을 썼다면 비교, monitoring, 다중 주 작업 중 어떤 이유로 동시에 봐야 하는지 설명 가능해야 한다.</li>\n<li>버튼, tab, card, chart, code viewer에서 text overlap이 없는지 확인한다.</li>\n<li>반복 interaction에 불필요한 대기 animation이 없는지 확인한다.</li>\n<li><code>prefers-reduced-motion</code> 대응이 있는지 확인한다.</li>\n<li><code>pnpm run build</code> 또는 해당 프로젝트의 build/check를 통과한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 7029,
+      "updatedAt": "2026-06-06T03:33:08.432Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "_docs/policies"
+    },
+    {
+      "id": "docs-instructions-persistent-instructions-en-md",
+      "path": "_docs/instructions/persistent-instructions.en.md",
+      "category": "workspace-doc",
+      "language": "en",
+      "title": "Persistent Instructions",
+      "excerpt": "Persistent Instructions This document records durable user instructions in English. Active Instructions Manage this repository as a monorepo for a personal agent building platform. The platform's top level purpose is to keep reducing repetitive human work and elapsed work time. R",
+      "html": "<h1>Persistent Instructions</h1>\n<p>This document records durable user instructions in English.</p>\n<h2>Active Instructions</h2>\n<ul>\n<li>Manage this repository as a monorepo for a personal agent-building platform.</li>\n<li>The platform&#039;s top-level purpose is to keep reducing repetitive human work and elapsed work time. Repeated research, comparison, judgment, execution, and verification should first be modeled as the process a human actually performs; when automation value is confirmed, promote the repetition into the smallest suitable prompt, workflow, template, tool, skill, agent, or project feature.</li>\n<li>Automation must not hide human-judgment checkpoints, validation criteria, or rollback boundaries. Automation candidates should be checked through work timing records, bottleneck records, and evaluator results to confirm that they actually reduce repetition and time.</li>\n<li>&quot;Like a human directly doing the work&quot; means modeling the competent human work sequence and artifacts before automation: goal, context, sources, assumptions, option comparison, decision, execution notes, verification, handoff, and review.</li>\n<li>Treat source structure quality as a product quality gate. Keep refactoring continuously while working, but keep each refactor behavior-preserving, scoped, tested, and tied to clearer ownership boundaries.</li>\n<li>Keep the user&#039;s point of view as a product quality gate. For every meaningful product, UI, workflow, documentation, setup, or automation change, identify the user&#039;s goal, first action, expected next feedback, likely confusion points, and success evidence; rework any result that is technically correct but unclear, hard to start, hard to recover from, or not aligned with the user&#039;s actual workflow.</li>\n<li>When the platform detects repeated work, bottlenecks, omissions, validation failures, manual rework, or recurring research/prompt/tool patterns while doing work, use <code>capability-promotion-agent</code> and <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code> to create automatic capability candidates. This is allowed only as bounded black-box processing: the user-facing experience may feel automatic, but internal observations, candidates, evidence, risk, rejected lighter options, validation, rollback or disablement, documentation, evaluation, and commit/push traces must remain auditable.</li>\n<li>Capability promotion must record the direct human work model before idea generation. Generated ideas should reduce or stabilize concrete human process steps, not merely react to the user phrase.</li>\n<li>Capability promotion separates idea generation from idea evaluation. For non-trivial problems, generate several improvement ideas, score them by repetition reduction, time savings, maintenance cost, evidence strength, risk fit, and smallest-asset fit, then record selected, rejected, or queued reasons.</li>\n<li>Capability promotion must check the smallest asset first in this order: <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code>. Destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible changes must not auto-execute without a human checkpoint and rollback plan.</li>\n<li>Sensitive files must be centrally routed to <code>_private/sensitive/</code> or an external secret manager, while AI agents must not read or index <code>_private/</code> contents by default. Ask for a redacted extract first; direct inspection requires explicit one-time permission for the exact path and operation.</li>\n<li>The source of truth for this boundary is <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, and <code>_ops/security/README.ko.md</code>. Run <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code> after changing <code>.gitignore</code>, maps, snapshots, collectors, public artifacts, installer payload rules, or sensitive-file handling rules.</li>\n<li>Keep the workspace operating principles usable from Claude Code, Cursor, Antigravity, Codex, or another AI coding tool the user prefers.</li>\n<li>All agents shall strongly adhere to durable principles. Principles are execution contracts and close-out gates, not decoration; speed, profit, optimism, convenience, or user pressure must not silently bypass required evidence, safety, privacy, legality, quality, provenance, validation, or evaluation.</li>\n<li>Keep <code>_docs/operating-models/tool-agnostic-agent-operating-model.ko.md</code> and <code>_ops/assistant-runtimes/adapter-registry.json</code> as the source of truth for tool-agnostic runtime decisions.</li>\n<li>Treat <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, <code>.cursor/rules/</code>, and <code>.agents/rules/</code> as runtime adapters. Do not copy common policy into separate divergent sources.</li>\n<li>Keep separate projects as root-level <code>kebab-case</code> folders.</li>\n<li>Keep project-specific files inside the owning project folder.</li>\n<li>When a new interest has an independent lifecycle, create a new root project and register it under <code>_ops/projects/</code>.</li>\n<li>Commit every completed meaningful change set.</li>\n<li>Push completed commits to <code>origin/main</code> immediately unless explicitly told not to push.</li>\n<li>Before closing meaningful work, evaluate the result against the initial user instruction and rework real gaps.</li>\n<li>After completing meaningful implementation work, run the o</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 35427,
+      "updatedAt": "2026-06-06T03:33:08.431Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "_docs/instructions"
+    },
+    {
+      "id": "docs-instructions-persistent-instructions-ko-md",
+      "path": "_docs/instructions/persistent-instructions.ko.md",
+      "category": "workspace-doc",
+      "language": "ko",
+      "title": "지속 지시",
+      "excerpt": "지속 지시 이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 한국어로 정리한다. 활성 지시 이 저장소는 개인 에이전트 구축 플랫폼을 위한 monorepo로 운영한다. 플랫폼의 최상위 목적은 사람의 반복 작업과 소요 시간을 계속 줄이는 것이다. 반복되는 조사, 비교, 판단, 실행, 검증은 먼저 인간이 실제로 하는 프로세스로 모델링하고, 자동화 가치가 확인되면 가장 작은 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트 또는 프로젝트 기능으로 승격한다. 자동화는 인간 판단 지점, 검증 기준, ",
+      "html": "<h1>지속 지시</h1>\n<p>이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 한국어로 정리한다.</p>\n<h2>활성 지시</h2>\n<ul>\n<li>이 저장소는 개인 에이전트 구축 플랫폼을 위한 monorepo로 운영한다.</li>\n<li>플랫폼의 최상위 목적은 사람의 반복 작업과 소요 시간을 계속 줄이는 것이다. 반복되는 조사, 비교, 판단, 실행, 검증은 먼저 인간이 실제로 하는 프로세스로 모델링하고, 자동화 가치가 확인되면 가장 작은 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트 또는 프로젝트 기능으로 승격한다.</li>\n<li>자동화는 인간 판단 지점, 검증 기준, rollback 경계를 숨기지 않는다. 자동화 후보는 실제 반복 감소와 시간 절감 효과를 작업 시간 기록, 병목 기록, evaluator 결과로 확인한다.</li>\n<li>“직접 사람이 하는 것처럼”은 사람 말투를 흉내 내는 것이 아니라 유능한 사람이 실제로 일할 때의 목표, 맥락, 출처, 가정, 선택지 비교, 결정, 실행 메모, 검증, 인수인계, 리뷰 순서와 산출물을 먼저 모델링한다는 뜻이다.</li>\n<li>소스 구조 품질을 제품 품질 gate로 다룬다. 작업 중 계속 리팩터링하되, 각 리팩터링은 동작 보존, 작은 범위, 테스트, 더 명확한 소유 경계와 연결되어야 한다.</li>\n<li>사용자 관점을 제품 품질 gate로 계속 적용한다. 의미 있는 제품, UI, workflow, 문서, setup, 자동화 변경마다 사용자의 목표, 첫 행동, 다음에 받아야 할 피드백, 헷갈릴 지점, 성공 근거를 확인하고, 기술적으로는 맞더라도 시작하기 어렵거나 이해하기 어렵거나 복구하기 어렵거나 실제 사용자 흐름과 어긋나는 결과는 재작업한다.</li>\n<li>플랫폼이 작업 중 반복, 병목, 누락, 검증 실패, 수동 재작업, 자주 쓰는 조사/프롬프트/도구 패턴을 발견하면 <code>capability-promotion-agent</code>와 <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code>을 사용해 자동 기능 후보로 만들 수 있다. 이 흐름은 bounded black-box로만 허용한다. 사용자 경험은 자동 개선처럼 보일 수 있지만 내부 observation, candidate, evidence, risk, rejected lighter options, validation, rollback 또는 disablement, documentation, evaluation, commit/push trace는 감사 가능해야 한다.</li>\n<li>capability promotion은 아이디어 생성 전에 사람이 직접 수행하는 작업 모델을 먼저 기록한다. 생성된 아이디어는 사용자 문구만이 아니라 구체적인 human process step을 줄이거나 안정화해야 한다.</li>\n<li>capability promotion은 아이디어 생성과 아이디어 평가를 분리한다. 사소하지 않은 문제는 여러 개선 아이디어를 만들고, 반복 감소, 시간 절감, 유지보수 비용, 근거 강도, 위험 적합성, 가장 작은 자산 적합성으로 평가한 뒤 선택/기각/대기 이유를 남긴다.</li>\n<li>capability promotion은 <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code> 순서로 가장 작은 자산을 먼저 검토한다. destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, irreversible change는 human checkpoint와 rollback 계획 없이 자동 실행하지 않는다.</li>\n<li>민감 파일은 <code>_private/sensitive/</code> 또는 외부 secret manager로 중앙 라우팅하되, AI 에이전트는 <code>_private/</code> 내부를 기본적으로 직접 읽거나 색인하지 않는다. 필요한 정보는 redacted extract를 먼저 요청하고, 직접 열람은 특정 경로와 작업에 대한 명시적 1회 허가가 있을 때만 허용한다.</li>\n<li>민감 파일 경계의 원본은 <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, <code>_ops/security/README.ko.md</code>에 둔다. <code>.gitignore</code>, map, snapshot, collector, public artifact, installer 규칙을 바꾸면 <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code>를 실행한다.</li>\n<li>이 저장소의 운영 원칙은 Codex에만 묶지 않고 Claude Code, Cursor, Antigravity, 또는 사용자가 선호하는 다른 AI 코딩 도구에서도 재사용할 수 있게 유지한다.</li>\n<li>도구 독립형 원칙의 원본은 <code>_docs/operating-models/tool-agnostic-agent-operating-model.ko.md</code>와 <code>_ops/assistant-runtimes/adapter-registry.json</code>에 둔다.</li>\n<li>모든 에이전트는 영속 원칙을 강하게 고수한다. 원칙은 장식 문구가 아니라 실행 계약과 close-out gate이며, 속도, 돈, 낙관, 편의, 사용자 압박은 필요한 근거, 안전, 개인정보, 법, 품질, provenance, 검증, 평가를 무단 생략하는 이유가 될 수 없다.</li>\n<li><code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, <code>.cursor/rules/</code>, <code>.agents/rules/</code>는 도구별 adapter로 취급하고, 공통 정책을 길게 복사해 서로 다른 원본으로 갈라지게 하지 않는다.</li>\n<li>별도 프로젝트는 루트의 <code>kebab-case</code> 폴더로 관리한다.</li>\n<li>프로젝트별 파일은 해당 프로젝트 폴더 안에만 둔다.</li>\n<li>새 관심사나 독립 라이프사이클이 생기면 새 루트 프로젝트로 만들고 <code>_ops/projects/</code>에 등록한다.</li>\n<li>의미 있는 변경 단위가 끝날 때마다 커밋한다.</li>\n<li>커밋 후 별도 지시가 없으면 즉시 <code>origin/main</code>에 push한다.</li>\n<li>의미 있는 작업을 닫기 전 초기 사용자 지시와 결과를 평가하고, 실제 gap은 재작업한다.</li>\n<li>의미 있는 구현 작업을 완료하면 최종 응답 전에 해당 프로젝트의 build 또는 package 명령을 자동으로 실행해 사용자가 직접 빌드하지 않아도 되게 한다. build 명령이 없거나, 안전하지 않거나, 비용이 과도하거나, 변경한 프로젝트 경계 밖이면 그 이유를 기록하고 가능한 가장 강한 대체 검증을 실행한다.</li>\n<li>평가 전에는 완료 작업을 요약하고 관련 이전 작업이나 강한 레퍼런스를 확인한다.</li>\n<li>사용자의 작업과 지시는 요구사항 후보로 보고, 구현 전 관련 요구사항을 정의/검토/수정/기준선화한다.</li>\n<li>공통 요구사항은 <code>_requirements/</code>에, 프로젝트별 요구사항은 해당 프로젝트의 <code>docs/requirements/</code>에 저장한다.</li>\n<li>의미 있는 구현 작업은 spec-driven 구조로 진행해 요구사항을 스펙, 계획, 작업 목록, 검증, traceability 산출물로 바꾼 뒤 코딩한다.</li>\n<li>공통 스펙은 <code>_specs/</code>에, 프로젝트별 스펙은 해당 프로젝트의 <code>specs/</code>에 저장한다.</li>\n<li>활성 프로젝트 스펙이 애매하거나 현재 소스, 테스트, 생성 산출물과 다를 때는 어느 쪽도 바로 수정하지 말고 스펙/소스 조정 workflow를 먼저 실행한다. 이슈를 <code>update_spec</code>, <code>update_source</code>, <code>ask_user</code>, <code>defer</code>로 분류하고, <code>ask_user</code>는 안정적인 질문 ID와 답변 형식이 포함된 <code>clarification_needed</code> 알림으로 사용자에게 질문한 뒤 답변이 기록되기 전까지 관련 스펙이나 소스를 수정하지 않는다.</li>\n<li>커스텀 스킬 생성/수정은 명시적으로 관리하며 <code>_skills/</code> 원본, 검증, 필요한 전진 테스트, 개선 아이디어를 남긴다.</li>\n<li>의미 있는 작업의 최종 평가는 <code>_history/evaluations/YYYY/</code> 아래 파일로 저장한다.</li>\n<li>중요한 계획을 세우는 과정은 <code>_history/plans/YYYY/</code> 아래 파일로 저장한다.</li>\n<li>의미 있는 사용자 요청은 원문 전체가 아니라 요약으로 <code>_history/user-requests/YYYY/</code> 아래에 저장한다.</li>\n<li>의미 있는 요청은 <code>_history/request-traces/YYYY/</code> 아래에서 요청, 결과, 산출물, 평가, 커밋을 연결해 저장한다.</li>\n<li>작업 히스토리는 <code>_history/YYYY/YYYY-MM-DD.md</code>에 기록한다.</li>\n<li>나중에 문서만 보고도 한 일을 쉽게 파악할 수 있도록 <code>_history/work-summaries/YYYY/</code> 아래 빠른 작업 요약을 유지한다.</li>\n<li><code>_ops/</code>를 프롬프트, 워크플로, 맵을 위한 운영 허브로 사용한다.</li>\n<li><code>_docs/</code>는 <code>_docs/registry.json</code>의 카테고리 규칙으로 관리하고, 허용된 index 파일을 제외한 Markdown 문서를 <code>_docs</code> 루트에 직접 두지 않는다. 문서 구조나 필수 문서 경로를 바꾸면 <code>python3 _tools/docs-audit/src/docs_audit.py --check</code>를 실행한다.</li>\n<li>진행 중인 에이전트와 병렬 작업은 <code>_ops/coordination/</code>에서 추적한다.</li>\n<li>인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용은 <code>_research/</code>에 기록한다.</li>\n<li>에이전트와 플랫폼 운영의 근본 철학은 <code>_philosophy/</code>에 기록한다.</li>\n<li>모든 새 사용자 지시는 계획, 저장소 탐색, 파일 수정 전에 웹 검색을 먼저 수행한다.</li>\n<li><code>_ops/prompts/</code>의 모든 재사용 프롬프트 실행도 웹 검색을 먼저 수행한다.</li>\n<li>의미 있는 웹 검색 기록은 <code>_history/web-searches/YYYY/</code>에 저장하고 작업 평가 입력에 <code>web_search_record_targets</code>를 포함한다.</li>\n<li>검색 판단 과정은 검색어, 확인한 출처, 제외한 약한 출처, 계획에 반영한 인사이트, 남은 불확실성 형태의 공개 판단 요약으로 텍스트에 남긴다. 내부 추론 원문은 저장하지 않는다.</li>\n<li>웹 검색이 무관하거나 불가능하면 그 사실을 기록하고 로컬 검증을 강화해 진행한다.</li>\n<li>웹 검색 후 로컬 계획 전에 <code>memory-bootstrap-agent</code>로 필수 메모리 anchor를 확인하고 hot context를 읽는다.</li>\n<li>웹 검색과 메모리 부트스트랩 후에는 `agent-platform/configs/workflows/work-</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 38009,
+      "updatedAt": "2026-06-06T03:33:08.431Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "_docs/instructions"
+    },
+    {
+      "id": "docs-instructions-persistent-instructions-md",
+      "path": "_docs/instructions/persistent-instructions.md",
+      "category": "workspace-doc",
+      "language": "unknown",
+      "title": "Persistent Instructions",
+      "excerpt": "Persistent Instructions 이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 저장한다. 대화 기억에 의존하지 않고, 반복성 있는 지시는 이 문서와 관련 운영 문서에 반영한다. 병렬 문서: 한국어: docs/instructions/persistent instructions.ko.md persistent instructions.ko.md 영어: docs/instructions/persistent instructions.en.md persistent instructions.en.md",
+      "html": "<h1>Persistent Instructions</h1>\n<p>이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 저장한다. 대화 기억에 의존하지 않고, 반복성 있는 지시는 이 문서와 관련 운영 문서에 반영한다.</p>\n<p>병렬 문서:</p>\n<ul>\n<li>한국어: <span class=\"doc-link\">_docs/instructions/persistent-instructions.ko.md</span></li>\n<li>영어: <span class=\"doc-link\">_docs/instructions/persistent-instructions.en.md</span></li>\n</ul>\n<h2>Active Instructions</h2>\n<ul>\n<li>Manage this repository as a monorepo for a personal agent-building platform.</li>\n<li>The platform&#039;s top-level purpose is to keep reducing repetitive human work and elapsed work time by modeling real human research, comparison, judgment, execution, and verification processes, then promoting automation-worthy repetition into the smallest suitable prompt, workflow, template, tool, skill, agent, or project feature.</li>\n<li>Automation must preserve human-judgment checkpoints, validation criteria, and rollback boundaries, and should be checked with timing, bottleneck, and evaluator records when the work is meaningful.</li>\n<li>&quot;Like a human directly doing the work&quot; means modeling the competent human work sequence and artifacts before automation: goal, context, sources, assumptions, option comparison, decision, execution notes, verification, handoff, and review.</li>\n<li>Treat source structure quality as a product quality gate. Keep refactoring continuously while working, but keep each refactor behavior-preserving, scoped, tested, and tied to clearer ownership boundaries.</li>\n<li>Keep the user&#039;s point of view as a product quality gate. For every meaningful product, UI, workflow, documentation, setup, or automation change, identify the user&#039;s goal, first action, expected next feedback, likely confusion points, and success evidence; rework any result that is technically correct but unclear, hard to start, hard to recover from, or not aligned with the user&#039;s actual workflow.</li>\n<li>When the platform detects repeated work, bottlenecks, omissions, validation failures, manual rework, or recurring research/prompt/tool patterns, use <code>capability-promotion-agent</code> and <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code> to create automatic capability candidates. This is bounded black-box processing: user-facing automation may feel smooth, but internal observations, candidates, evidence, risk, rejected lighter options, validation, rollback or disablement, documentation, evaluation, and commit/push traces must remain auditable.</li>\n<li>Capability promotion must record the direct human work model before idea generation. Generated ideas should reduce or stabilize concrete human process steps, not merely react to the user phrase.</li>\n<li>Capability promotion separates idea generation from idea evaluation. For non-trivial problems, generate several improvement ideas, score them by repetition reduction, time savings, maintenance cost, evidence strength, risk fit, and smallest-asset fit, then record selected, rejected, or queued reasons.</li>\n<li>Capability promotion checks the smallest asset first in this order: <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code>. Destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible changes must not auto-execute without a human checkpoint and rollback plan.</li>\n<li>Sensitive files must be centrally routed to <code>_private/sensitive/</code> or an external secret manager, while AI agents must not read or index <code>_private/</code> contents by default. Ask for a redacted extract first; direct inspection requires explicit one-time permission for the exact path and operation.</li>\n<li>The source of truth for this boundary is <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, and <code>_ops/security/README.ko.md</code>. Run <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code> after changing <code>.gitignore</code>, maps, snapshots, collectors, public artifacts, installer payload rules, or sensitive-file handling rules.</li>\n<li>Keep the workspace operating principles tool-agnostic so the same structure can be used from Codex, Claude Code, Cursor, Antigravity, or another user-preferred AI coding tool.</li>\n<li>Treat the installable platform as the primary host runtime. It launches first and owns task state, durable memory, decisions, artifacts, validation, and UI authority; Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, or other commercial/external AI tools attach only as guest adapters through explicit CLI/runtime adapter contracts.</li>\n<li>Treat this repository as the development source that builds the platform, not as the customer-visible product payload. Installed customers should use the app, customer-selected workspaces, app-managed data stores, classified logs, and exports without seeing the platform source tree.</li>\n<li>Separate platform source code from runtime data planes: user workspace data, platform data stores, log stores, cache stores, and agent runtime workspaces. Use <code>platform-desktop-app/configs/runtime-data-boundary-registry.json</code> before adding persistent runtime data, logs, support exports, installer payload behavior, or agent work directories.</li>\n<li>Keep reusable agent definitions grouped under <code>agent-platform/configs/agents/</code>; runtime agent input/output/log/handoff/temp work belongs in the install</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 35156,
+      "updatedAt": "2026-06-06T03:33:08.431Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "_docs/instructions"
+    },
+    {
+      "id": "agents-md",
+      "path": "AGENTS.md",
+      "category": "runtime-adapter",
+      "language": "unknown",
+      "title": "Repository Instructions",
+      "excerpt": "Repository Instructions This repository is the workspace for building and tracking a personal agent building platform and related projects. Workspace Rules Treat each root level non reserved directory as a separate project. Create new project directories at the repository root us",
+      "html": "<h1>Repository Instructions</h1>\n<p>This repository is the workspace for building and tracking a personal agent-building platform and related projects.</p>\n<h2>Workspace Rules</h2>\n<ul>\n<li>Treat each root-level non-reserved directory as a separate project.</li>\n<li>Create new project directories at the repository root using <code>kebab-case</code>.</li>\n<li>Use <code>_ops/naming/naming-policy.json</code> as the source of truth for durable naming rules.</li>\n<li>For new durable paths, use lower <code>kebab-case</code> for project/tool/skill/workflow/prompt/spec slugs, <code>snake_case</code> for Python packages and modules, <code>YYYY-MM-DD-&lt;slug&gt;</code> for dated records, and <code>name.ko.md</code>/<code>name.en.md</code> for important bilingual docs.</li>\n<li>Do not rename existing durable paths without a migration plan, trace update, and validation run.</li>\n<li>Reserve underscore-prefixed root directories for workspace operations:</li>\n<li><code>_docs/</code> for workspace-level documentation and decision records; keep it categorized through <code>_docs/registry.json</code></li>\n<li><code>_docs/instructions/</code> for durable instructions and baseline workspace rules</li>\n<li><code>_docs/policies/</code> for execution policies</li>\n<li><code>_docs/operating-models/</code> for conceptual operating models</li>\n<li><code>_docs/governance/</code> for cross-workspace governance documents</li>\n<li><code>_philosophy/</code> for foundational agent and platform operating philosophy</li>\n<li><code>_requirements/</code> for shared requirements baselines, change records, and review records</li>\n<li><code>_specs/</code> for shared spec-driven artifacts, implementation plans, task lists, validation, and traceability</li>\n<li><code>_history/</code> for dated work history and compressed context summaries</li>\n<li><code>_ops/</code> for operations navigation, prompts, workflows, and maps</li>\n<li><code>_research/</code> for reusable internet research and external reference notes</li>\n<li><code>_skills/</code> for tracked source copies of custom Codex skills</li>\n<li><code>_templates/</code> for reusable project scaffolds</li>\n<li><code>_tools/</code> for reusable local tools and scripts</li>\n<li><code>_archive/</code> for paused or retired projects</li>\n<li>Treat <code>_private/</code> and <code>outputs/</code> as local-only ignored folders, not durable repository knowledge:</li>\n<li><code>_private/</code> is the protected local vault for private scratch state and sensitive local files.</li>\n<li>Store real sensitive local files under <code>_private/sensitive/</code> or an external secret manager; track only policies, env var names, secret references, and redacted metadata.</li>\n<li>Agents must not recursively list, search, open, read, summarize, index, snapshot, embed, or use <code>_private/</code> contents by default. If sensitive content is needed, ask for a redacted extract first; direct inspection requires explicit one-time user permission for the exact path and operation.</li>\n<li><code>outputs/</code> is for transient one-off tool output only.</li>\n<li>Durable project artifacts must move into the owning project&#039;s <code>artifacts/</code> folder.</li>\n<li>Keep project-specific code, docs, tests, and assets inside that project folder.</li>\n<li>Keep project-specific configs, artifacts, tools, and decisions inside that project folder as well.</li>\n<li>Do not move or delete unrelated files unless the user explicitly asks.</li>\n<li>Prefer creating a project folder for substantial work instead of placing loose files at the repository root.</li>\n<li>Register root projects and their boundaries in <code>_ops/projects/registry.json</code>.</li>\n<li>Keep durable AI assistant operating principles tool-agnostic. Use <code>_docs/operating-models/tool-agnostic-agent-operating-model.ko.md</code> and <code>_ops/assistant-runtimes/adapter-registry.json</code> as the shared source for adapting this workspace to Codex, Claude Code, Cursor, Antigravity, or another assistant runtime.</li>\n<li>All agents shall strongly adhere to durable principles. Treat principles as execution contracts and close-out gates, not motivational language; speed, profit, optimism, convenience, or user pressure must not silently bypass required evidence, safety, privacy, legality, quality, provenance, validation, or evaluation.</li>\n<li>Treat <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, <code>.cursor/rules/</code>, and <code>.agents/rules/</code> as runtime adapters or entrypoints. Do not fork durable policy across them; update shared docs/configs first and keep adapters thin.</li>\n</ul>\n<h2>Git Rules</h2>\n<ul>\n<li>Check <code>git status</code> before editing and before committing.</li>\n<li>Commit every completed meaningful change set.</li>\n<li>Use commit messages in the form <code>type(scope): summary</code>.</li>\n<li>Keep commits scoped to the work just completed.</li>\n<li>Push completed commits to <code>origin/main</code> immediately after committing unless the user explicitly says not to push.</li>\n<li>Do not rewrite history, reset, or discard user changes unless explicitly requested.</li>\n<li>Update the relevant history log before committing when the work changes project direction, repository rules, or meaningful artifacts.</li>\n<li>Before final close-out of meaningful work, evaluate the result against the user&#039;s initial instruction and rework any real gaps before committing or final response.</li>\n<li>After completing meaningful implementation work, run the owning project&#039;s build or package command before final response so the user does not have to build manually. If no build command exists, or the build is unsafe, too costly, or outside the touched project boundary, record the reason and run the strongest available equivalent verification instead.</li>\n<li>Before evaluation, summarize completed work and check prior internal work or strong external references r</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 52485,
+      "updatedAt": "2026-06-06T03:33:08.430Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "AGENTS.md"
+    },
+    {
       "id": "platform-desktop-app-specs-2026-06-06-cli-scroll-isolation-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/tasks.ko.md",
       "category": "project-spec",
@@ -7763,22 +8145,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-2026-2026-06-06-md",
-      "path": "_history/2026/2026-06-06.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 06",
-      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 15929,
-      "updatedAt": "2026-06-06T03:27:15.270Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-ko-md",
@@ -10405,38 +10771,6 @@
       "workspaceArea": "_history/request-traces"
     },
     {
-      "id": "history-user-requests-2026-2026-06-06-comprehensive-improvement-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-comprehensive-improvement.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "2026 06 06 사용자 요청 요약",
-      "excerpt": "2026 06 06 사용자 요청 요약 요약 사용자는 누적된 성능, UI, 기능, 사용성, 디자인, 네이티브 자원 활용, EVAL, 오픈소스 참고, 기록 기반 개선 요구를 종합해 전체 개선을 요청했다. 해석 전 저장소 무차별 변경이 아니라, 실제 제품에서 종합 개선을 계속 판단하고 우선순위를 정할 수 있는 구조가 필요하다. 기존 platform desktop app 의 EVAL 탭이 현재 작업, 히스토리, 토큰/툴, 오픈소스 EVAL 후보를 이미 모으므로 첫 구현 slice로 적합하다. 적용 범위 ",
-      "html": "<p>2026 06 06 사용자 요청 요약 요약 사용자는 누적된 성능, UI, 기능, 사용성, 디자인, 네이티브 자원 활용, EVAL, 오픈소스 참고, 기록 기반 개선 요구를 종합해 전체 개선을 요청했다. 해석 전 저장소 무차별 변경이 아니라, 실제 제품에서 종합 개선을 계속 판단하고 우선순위를 정할 수 있는 구조가 필요하다. 기존 platform desktop app 의 EVAL 탭이 현재 작업, 히스토리, 토큰/툴, 오픈소스 EVAL 후보를 이미 모으므로 첫 구현 slice로 적합하다. 적용 범위 platform desktop app/renderer/workspace monitor EVAL surface. 정적 계약 검사, 테스트, sna</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 737,
-      "updatedAt": "2026-06-06T00:06:23.551Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-comprehensive-improvement-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-comprehensive-improvement.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "2026 06 06 종합 개선 작업 요약",
-      "excerpt": "2026 06 06 종합 개선 작업 요약 완료한 일 EVAL 탭에 data eval comprehensive improvement=\"all signal cockpit\" 종합 개선 cockpit를 추가했다. 7개 개선 차원 desktop performance , ux control clarity , native resource lifecycle , eval evidence , release packaging , open source leverage , automation continuity 을 점수",
-      "html": "<p>2026 06 06 종합 개선 작업 요약 완료한 일 EVAL 탭에 data eval comprehensive improvement=&quot;all signal cockpit&quot; 종합 개선 cockpit를 추가했다. 7개 개선 차원 desktop performance , ux control clarity , native resource lifecycle , eval evidence , release packaging , open source leverage , automation continuity 을 점수화하고 P1 P3 우선순위를 표시했다. 종합 개선 panel, summary, dimension card, priority card CSS를 추</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1765,
-      "updatedAt": "2026-06-06T00:06:23.551Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-comprehensive-improvement-validation-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-comprehensive-improvement/validation.ko.md",
       "category": "project-spec",
@@ -10517,22 +10851,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-plans-2026-2026-06-06-comprehensive-improvement-ko-md",
-      "path": "_history/plans/2026/2026-06-06-comprehensive-improvement.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "2026 06 06 종합 개선 구현 계획",
-      "excerpt": "2026 06 06 종합 개선 구현 계획 목표 platform desktop app 의 EVAL 탭에 종합 개선 cockpit를 추가해 성능, UX, 네이티브 리소스, EVAL 근거, 패키징, 오픈소스 활용, 자동화 연속성을 한 화면에서 비교한다. 단계 1. 웹 기준과 저장소 hot anchor 확인. 2. 대범위 요청을 EvaluationReportPanel 중심 slice로 분해. 3. 종합 개선 점수 모델과 7개 차원을 UI에 구현. 4. CSS를 추가해 desktop dense surfac",
-      "html": "<p>2026 06 06 종합 개선 구현 계획 목표 platform desktop app 의 EVAL 탭에 종합 개선 cockpit를 추가해 성능, UX, 네이티브 리소스, EVAL 근거, 패키징, 오픈소스 활용, 자동화 연속성을 한 화면에서 비교한다. 단계 1. 웹 기준과 저장소 hot anchor 확인. 2. 대범위 요청을 EvaluationReportPanel 중심 slice로 분해. 3. 종합 개선 점수 모델과 7개 차원을 UI에 구현. 4. CSS를 추가해 desktop dense surface로 읽히게 한다. 5. check comprehensive improvement contract.mjs 를 추가하고 npm run check </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1216,
-      "updatedAt": "2026-06-06T00:02:05.908Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
       "id": "platform-desktop-app-docs-requirements-2026-06-06-comprehensive-improvement-ko-md",
       "path": "platform-desktop-app/docs/requirements/2026-06-06-comprehensive-improvement.ko.md",
       "category": "project-doc",
@@ -10547,86 +10865,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-comprehensive-improvement-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-comprehensive-improvement.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "2026 06 06 종합 개선 웹 검색 기록",
-      "excerpt": "2026 06 06 종합 개선 웹 검색 기록 요청 요약 사용자는 기존 성능, UI, 기능, 사용성, 디자인, 운영체제 자원 활용, 오픈소스 참고, EVAL, 기록 기반 개선 요구를 종합해 전체 개선을 요구했다. 범위가 넓으므로 바로 전 파일을 훑지 않고 웹 기준과 저장소 대표 샘플을 결합해 첫 구현 slice를 선정했다. 검색 쿼리 desktop app UX performance accessibility design system best practices official Tauri desktop ",
-      "html": "<p>2026 06 06 종합 개선 웹 검색 기록 요청 요약 사용자는 기존 성능, UI, 기능, 사용성, 디자인, 운영체제 자원 활용, 오픈소스 참고, EVAL, 기록 기반 개선 요구를 종합해 전체 개선을 요구했다. 범위가 넓으므로 바로 전 파일을 훑지 않고 웹 기준과 저장소 대표 샘플을 결합해 첫 구현 slice를 선정했다. 검색 쿼리 desktop app UX performance accessibility design system best practices official Tauri desktop app performance memory process management best practices official software maint</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 3402,
-      "updatedAt": "2026-06-06T00:02:05.907Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: 데스크톱 크롬 디자인 개선",
-      "excerpt": "요청 결과 추적: 데스크톱 크롬 디자인 개선 요청 사용자: 디자인개선 해석: 앞선 반복 맥락을 포함해 기본 버튼 느낌, 평면적인 화면, 탭/사이드바/선택 UI의 시각적 불편함을 줄인다. 결과 구현 완료. 테스트, 빌드, 내부 패키징, Browser smoke 완료. 주요 변경 파일 platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/tests/tool",
-      "html": "<p>요청 결과 추적: 데스크톱 크롬 디자인 개선 요청 사용자: 디자인개선 해석: 앞선 반복 맥락을 포함해 기본 버튼 느낌, 평면적인 화면, 탭/사이드바/선택 UI의 시각적 불편함을 줄인다. 결과 구현 완료. 테스트, 빌드, 내부 패키징, Browser smoke 완료. 주요 변경 파일 platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs platform desktop app/docs/requirements/2026 06 06 desktop chrom</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1112,
-      "updatedAt": "2026-06-05T23:54:07.600Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "최종 평가: 데스크톱 크롬 디자인 개선",
-      "excerpt": "최종 평가: 데스크톱 크롬 디자인 개선 결과 통과. 요청한 디자인 개선을 공통 토큰, 좌측 레일, 상단바, 섹션 탭 계약, 패널, 툴 스튜디오 실제 버튼 표면에 반영했다. 구현 평가 기본 버튼 느낌을 줄이기 위해 chrome shadow , rail shadow , section tab shadow , section tab active shadow , surface edge highlight , control press shadow 를 추가했다. activity rail은 active와 aria ",
-      "html": "<p>최종 평가: 데스크톱 크롬 디자인 개선 결과 통과. 요청한 디자인 개선을 공통 토큰, 좌측 레일, 상단바, 섹션 탭 계약, 패널, 툴 스튜디오 실제 버튼 표면에 반영했다. 구현 평가 기본 버튼 느낌을 줄이기 위해 chrome shadow , rail shadow , section tab shadow , section tab active shadow , surface edge highlight , control press shadow 를 추가했다. activity rail은 active와 aria current=&quot;page&quot; 를 같은 selected 상태로 처리하고 indicator를 추가했다. titlebar는 chrome shadow로 </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1652,
-      "updatedAt": "2026-06-05T23:51:36.205Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약",
-      "excerpt": "사용자 요청 요약 날짜 2026 06 06 요약 사용자는 데스크톱 앱의 전반적인 디자인 개선을 요청했다. 앞선 반복 요청 맥락에는 기본 버튼 느낌 제거, 선택 UI 개선, 탭/사이드바의 시각적 불편함 개선, 데스크톱 앱다운 작업면 강화가 포함되어 있었다. 이번 응답 범위 공통 디자인 토큰과 실제 렌더되는 데스크톱 크롬/레일/툴 스튜디오 버튼 표면 개선 테스트, 빌드, 내부 패키징, Browser smoke까지 실행",
-      "html": "<p>사용자 요청 요약 날짜 2026 06 06 요약 사용자는 데스크톱 앱의 전반적인 디자인 개선을 요청했다. 앞선 반복 요청 맥락에는 기본 버튼 느낌 제거, 선택 UI 개선, 탭/사이드바의 시각적 불편함 개선, 데스크톱 앱다운 작업면 강화가 포함되어 있었다. 이번 응답 범위 공통 디자인 토큰과 실제 렌더되는 데스크톱 크롬/레일/툴 스튜디오 버튼 표면 개선 테스트, 빌드, 내부 패키징, Browser smoke까지 실행</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 543,
-      "updatedAt": "2026-06-05T23:51:36.205Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: 데스크톱 크롬 디자인 개선",
-      "excerpt": "작업 요약: 데스크톱 크롬 디자인 개선 변경 workspace monitor 공통 CSS에 chrome/rail/section/control depth token 추가. 좌측 activity rail active/current 상태, titlebar elevation, panel elevation 개선. section tab/panel heading button 계약 개선. 실제 툴 스튜디오 depth/mode/action 버튼에 choice background와 active shadow 적용. ",
-      "html": "<p>작업 요약: 데스크톱 크롬 디자인 개선 변경 workspace monitor 공통 CSS에 chrome/rail/section/control depth token 추가. 좌측 activity rail active/current 상태, titlebar elevation, panel elevation 개선. section tab/panel heading button 계약 개선. 실제 툴 스튜디오 depth/mode/action 버튼에 choice background와 active shadow 적용. 디자인 계약 정적 테스트 추가. 요구사항, 스펙, 웹 검색, 리서치, 검증, 평가, 누락/리소스 점검 기록 추가. 검증 app check/tes</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 884,
-      "updatedAt": "2026-06-05T23:51:36.205Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-desktop-chrome-design-polish-tasks-ko-md",
@@ -11043,70 +11281,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "docs-instructions-persistent-instructions-en-md",
-      "path": "_docs/instructions/persistent-instructions.en.md",
-      "category": "workspace-doc",
-      "language": "en",
-      "title": "Persistent Instructions",
-      "excerpt": "Persistent Instructions This document records durable user instructions in English. Active Instructions Manage this repository as a monorepo for a personal agent building platform. The platform's top level purpose is to keep reducing repetitive human work and elapsed work time. R",
-      "html": "<h1>Persistent Instructions</h1>\n<p>This document records durable user instructions in English.</p>\n<h2>Active Instructions</h2>\n<ul>\n<li>Manage this repository as a monorepo for a personal agent-building platform.</li>\n<li>The platform&#039;s top-level purpose is to keep reducing repetitive human work and elapsed work time. Repeated research, comparison, judgment, execution, and verification should first be modeled as the process a human actually performs; when automation value is confirmed, promote the repetition into the smallest suitable prompt, workflow, template, tool, skill, agent, or project feature.</li>\n<li>Automation must not hide human-judgment checkpoints, validation criteria, or rollback boundaries. Automation candidates should be checked through work timing records, bottleneck records, and evaluator results to confirm that they actually reduce repetition and time.</li>\n<li>&quot;Like a human directly doing the work&quot; means modeling the competent human work sequence and artifacts before automation: goal, context, sources, assumptions, option comparison, decision, execution notes, verification, handoff, and review.</li>\n<li>Treat source structure quality as a product quality gate. Keep refactoring continuously while working, but keep each refactor behavior-preserving, scoped, tested, and tied to clearer ownership boundaries.</li>\n<li>Keep the user&#039;s point of view as a product quality gate. For every meaningful product, UI, workflow, documentation, setup, or automation change, identify the user&#039;s goal, first action, expected next feedback, likely confusion points, and success evidence; rework any result that is technically correct but unclear, hard to start, hard to recover from, or not aligned with the user&#039;s actual workflow.</li>\n<li>When the platform detects repeated work, bottlenecks, omissions, validation failures, manual rework, or recurring research/prompt/tool patterns while doing work, use <code>capability-promotion-agent</code> and <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code> to create automatic capability candidates. This is allowed only as bounded black-box processing: the user-facing experience may feel automatic, but internal observations, candidates, evidence, risk, rejected lighter options, validation, rollback or disablement, documentation, evaluation, and commit/push traces must remain auditable.</li>\n<li>Capability promotion must record the direct human work model before idea generation. Generated ideas should reduce or stabilize concrete human process steps, not merely react to the user phrase.</li>\n<li>Capability promotion separates idea generation from idea evaluation. For non-trivial problems, generate several improvement ideas, score them by repetition reduction, time savings, maintenance cost, evidence strength, risk fit, and smallest-asset fit, then record selected, rejected, or queued reasons.</li>\n<li>Capability promotion must check the smallest asset first in this order: <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code>. Destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible changes must not auto-execute without a human checkpoint and rollback plan.</li>\n<li>Sensitive files must be centrally routed to <code>_private/sensitive/</code> or an external secret manager, while AI agents must not read or index <code>_private/</code> contents by default. Ask for a redacted extract first; direct inspection requires explicit one-time permission for the exact path and operation.</li>\n<li>The source of truth for this boundary is <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, and <code>_ops/security/README.ko.md</code>. Run <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code> after changing <code>.gitignore</code>, maps, snapshots, collectors, public artifacts, installer payload rules, or sensitive-file handling rules.</li>\n<li>Keep the workspace operating principles usable from Claude Code, Cursor, Antigravity, Codex, or another AI coding tool the user prefers.</li>\n<li>All agents shall strongly adhere to durable principles. Principles are execution contracts and close-out gates, not decoration; speed, profit, optimism, convenience, or user pressure must not silently bypass required evidence, safety, privacy, legality, quality, provenance, validation, or evaluation.</li>\n<li>Keep <code>_docs/operating-models/tool-agnostic-agent-operating-model.ko.md</code> and <code>_ops/assistant-runtimes/adapter-registry.json</code> as the source of truth for tool-agnostic runtime decisions.</li>\n<li>Treat <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, <code>.cursor/rules/</code>, and <code>.agents/rules/</code> as runtime adapters. Do not copy common policy into separate divergent sources.</li>\n<li>Keep separate projects as root-level <code>kebab-case</code> folders.</li>\n<li>Keep project-specific files inside the owning project folder.</li>\n<li>When a new interest has an independent lifecycle, create a new root project and register it under <code>_ops/projects/</code>.</li>\n<li>Commit every completed meaningful change set.</li>\n<li>Push completed commits to <code>origin/main</code> immediately unless explicitly told not to push.</li>\n<li>Before closing meaningful work, evaluate the result against the initial user instruction and rework real gaps.</li>\n<li>After completing meaningful implementation work, run the o</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 34971,
-      "updatedAt": "2026-06-05T22:30:45.114Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "_docs/instructions"
-    },
-    {
-      "id": "docs-instructions-persistent-instructions-ko-md",
-      "path": "_docs/instructions/persistent-instructions.ko.md",
-      "category": "workspace-doc",
-      "language": "ko",
-      "title": "지속 지시",
-      "excerpt": "지속 지시 이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 한국어로 정리한다. 활성 지시 이 저장소는 개인 에이전트 구축 플랫폼을 위한 monorepo로 운영한다. 플랫폼의 최상위 목적은 사람의 반복 작업과 소요 시간을 계속 줄이는 것이다. 반복되는 조사, 비교, 판단, 실행, 검증은 먼저 인간이 실제로 하는 프로세스로 모델링하고, 자동화 가치가 확인되면 가장 작은 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트 또는 프로젝트 기능으로 승격한다. 자동화는 인간 판단 지점, 검증 기준, ",
-      "html": "<h1>지속 지시</h1>\n<p>이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 한국어로 정리한다.</p>\n<h2>활성 지시</h2>\n<ul>\n<li>이 저장소는 개인 에이전트 구축 플랫폼을 위한 monorepo로 운영한다.</li>\n<li>플랫폼의 최상위 목적은 사람의 반복 작업과 소요 시간을 계속 줄이는 것이다. 반복되는 조사, 비교, 판단, 실행, 검증은 먼저 인간이 실제로 하는 프로세스로 모델링하고, 자동화 가치가 확인되면 가장 작은 프롬프트, 워크플로, 템플릿, 도구, 스킬, 에이전트 또는 프로젝트 기능으로 승격한다.</li>\n<li>자동화는 인간 판단 지점, 검증 기준, rollback 경계를 숨기지 않는다. 자동화 후보는 실제 반복 감소와 시간 절감 효과를 작업 시간 기록, 병목 기록, evaluator 결과로 확인한다.</li>\n<li>“직접 사람이 하는 것처럼”은 사람 말투를 흉내 내는 것이 아니라 유능한 사람이 실제로 일할 때의 목표, 맥락, 출처, 가정, 선택지 비교, 결정, 실행 메모, 검증, 인수인계, 리뷰 순서와 산출물을 먼저 모델링한다는 뜻이다.</li>\n<li>소스 구조 품질을 제품 품질 gate로 다룬다. 작업 중 계속 리팩터링하되, 각 리팩터링은 동작 보존, 작은 범위, 테스트, 더 명확한 소유 경계와 연결되어야 한다.</li>\n<li>사용자 관점을 제품 품질 gate로 계속 적용한다. 의미 있는 제품, UI, workflow, 문서, setup, 자동화 변경마다 사용자의 목표, 첫 행동, 다음에 받아야 할 피드백, 헷갈릴 지점, 성공 근거를 확인하고, 기술적으로는 맞더라도 시작하기 어렵거나 이해하기 어렵거나 복구하기 어렵거나 실제 사용자 흐름과 어긋나는 결과는 재작업한다.</li>\n<li>플랫폼이 작업 중 반복, 병목, 누락, 검증 실패, 수동 재작업, 자주 쓰는 조사/프롬프트/도구 패턴을 발견하면 <code>capability-promotion-agent</code>와 <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code>을 사용해 자동 기능 후보로 만들 수 있다. 이 흐름은 bounded black-box로만 허용한다. 사용자 경험은 자동 개선처럼 보일 수 있지만 내부 observation, candidate, evidence, risk, rejected lighter options, validation, rollback 또는 disablement, documentation, evaluation, commit/push trace는 감사 가능해야 한다.</li>\n<li>capability promotion은 아이디어 생성 전에 사람이 직접 수행하는 작업 모델을 먼저 기록한다. 생성된 아이디어는 사용자 문구만이 아니라 구체적인 human process step을 줄이거나 안정화해야 한다.</li>\n<li>capability promotion은 아이디어 생성과 아이디어 평가를 분리한다. 사소하지 않은 문제는 여러 개선 아이디어를 만들고, 반복 감소, 시간 절감, 유지보수 비용, 근거 강도, 위험 적합성, 가장 작은 자산 적합성으로 평가한 뒤 선택/기각/대기 이유를 남긴다.</li>\n<li>capability promotion은 <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code> 순서로 가장 작은 자산을 먼저 검토한다. destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, irreversible change는 human checkpoint와 rollback 계획 없이 자동 실행하지 않는다.</li>\n<li>민감 파일은 <code>_private/sensitive/</code> 또는 외부 secret manager로 중앙 라우팅하되, AI 에이전트는 <code>_private/</code> 내부를 기본적으로 직접 읽거나 색인하지 않는다. 필요한 정보는 redacted extract를 먼저 요청하고, 직접 열람은 특정 경로와 작업에 대한 명시적 1회 허가가 있을 때만 허용한다.</li>\n<li>민감 파일 경계의 원본은 <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, <code>_ops/security/README.ko.md</code>에 둔다. <code>.gitignore</code>, map, snapshot, collector, public artifact, installer 규칙을 바꾸면 <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code>를 실행한다.</li>\n<li>이 저장소의 운영 원칙은 Codex에만 묶지 않고 Claude Code, Cursor, Antigravity, 또는 사용자가 선호하는 다른 AI 코딩 도구에서도 재사용할 수 있게 유지한다.</li>\n<li>도구 독립형 원칙의 원본은 <code>_docs/operating-models/tool-agnostic-agent-operating-model.ko.md</code>와 <code>_ops/assistant-runtimes/adapter-registry.json</code>에 둔다.</li>\n<li>모든 에이전트는 영속 원칙을 강하게 고수한다. 원칙은 장식 문구가 아니라 실행 계약과 close-out gate이며, 속도, 돈, 낙관, 편의, 사용자 압박은 필요한 근거, 안전, 개인정보, 법, 품질, provenance, 검증, 평가를 무단 생략하는 이유가 될 수 없다.</li>\n<li><code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, <code>.cursor/rules/</code>, <code>.agents/rules/</code>는 도구별 adapter로 취급하고, 공통 정책을 길게 복사해 서로 다른 원본으로 갈라지게 하지 않는다.</li>\n<li>별도 프로젝트는 루트의 <code>kebab-case</code> 폴더로 관리한다.</li>\n<li>프로젝트별 파일은 해당 프로젝트 폴더 안에만 둔다.</li>\n<li>새 관심사나 독립 라이프사이클이 생기면 새 루트 프로젝트로 만들고 <code>_ops/projects/</code>에 등록한다.</li>\n<li>의미 있는 변경 단위가 끝날 때마다 커밋한다.</li>\n<li>커밋 후 별도 지시가 없으면 즉시 <code>origin/main</code>에 push한다.</li>\n<li>의미 있는 작업을 닫기 전 초기 사용자 지시와 결과를 평가하고, 실제 gap은 재작업한다.</li>\n<li>의미 있는 구현 작업을 완료하면 최종 응답 전에 해당 프로젝트의 build 또는 package 명령을 자동으로 실행해 사용자가 직접 빌드하지 않아도 되게 한다. build 명령이 없거나, 안전하지 않거나, 비용이 과도하거나, 변경한 프로젝트 경계 밖이면 그 이유를 기록하고 가능한 가장 강한 대체 검증을 실행한다.</li>\n<li>평가 전에는 완료 작업을 요약하고 관련 이전 작업이나 강한 레퍼런스를 확인한다.</li>\n<li>사용자의 작업과 지시는 요구사항 후보로 보고, 구현 전 관련 요구사항을 정의/검토/수정/기준선화한다.</li>\n<li>공통 요구사항은 <code>_requirements/</code>에, 프로젝트별 요구사항은 해당 프로젝트의 <code>docs/requirements/</code>에 저장한다.</li>\n<li>의미 있는 구현 작업은 spec-driven 구조로 진행해 요구사항을 스펙, 계획, 작업 목록, 검증, traceability 산출물로 바꾼 뒤 코딩한다.</li>\n<li>공통 스펙은 <code>_specs/</code>에, 프로젝트별 스펙은 해당 프로젝트의 <code>specs/</code>에 저장한다.</li>\n<li>활성 프로젝트 스펙이 애매하거나 현재 소스, 테스트, 생성 산출물과 다를 때는 어느 쪽도 바로 수정하지 말고 스펙/소스 조정 workflow를 먼저 실행한다. 이슈를 <code>update_spec</code>, <code>update_source</code>, <code>ask_user</code>, <code>defer</code>로 분류하고, <code>ask_user</code>는 안정적인 질문 ID와 답변 형식이 포함된 <code>clarification_needed</code> 알림으로 사용자에게 질문한 뒤 답변이 기록되기 전까지 관련 스펙이나 소스를 수정하지 않는다.</li>\n<li>커스텀 스킬 생성/수정은 명시적으로 관리하며 <code>_skills/</code> 원본, 검증, 필요한 전진 테스트, 개선 아이디어를 남긴다.</li>\n<li>의미 있는 작업의 최종 평가는 <code>_history/evaluations/YYYY/</code> 아래 파일로 저장한다.</li>\n<li>중요한 계획을 세우는 과정은 <code>_history/plans/YYYY/</code> 아래 파일로 저장한다.</li>\n<li>의미 있는 사용자 요청은 원문 전체가 아니라 요약으로 <code>_history/user-requests/YYYY/</code> 아래에 저장한다.</li>\n<li>의미 있는 요청은 <code>_history/request-traces/YYYY/</code> 아래에서 요청, 결과, 산출물, 평가, 커밋을 연결해 저장한다.</li>\n<li>작업 히스토리는 <code>_history/YYYY/YYYY-MM-DD.md</code>에 기록한다.</li>\n<li>나중에 문서만 보고도 한 일을 쉽게 파악할 수 있도록 <code>_history/work-summaries/YYYY/</code> 아래 빠른 작업 요약을 유지한다.</li>\n<li><code>_ops/</code>를 프롬프트, 워크플로, 맵을 위한 운영 허브로 사용한다.</li>\n<li><code>_docs/</code>는 <code>_docs/registry.json</code>의 카테고리 규칙으로 관리하고, 허용된 index 파일을 제외한 Markdown 문서를 <code>_docs</code> 루트에 직접 두지 않는다. 문서 구조나 필수 문서 경로를 바꾸면 <code>python3 _tools/docs-audit/src/docs_audit.py --check</code>를 실행한다.</li>\n<li>진행 중인 에이전트와 병렬 작업은 <code>_ops/coordination/</code>에서 추적한다.</li>\n<li>인터넷 조사와 외부 레퍼런스 중 재사용 가치가 있는 내용은 <code>_research/</code>에 기록한다.</li>\n<li>에이전트와 플랫폼 운영의 근본 철학은 <code>_philosophy/</code>에 기록한다.</li>\n<li>모든 새 사용자 지시는 계획, 저장소 탐색, 파일 수정 전에 웹 검색을 먼저 수행한다.</li>\n<li><code>_ops/prompts/</code>의 모든 재사용 프롬프트 실행도 웹 검색을 먼저 수행한다.</li>\n<li>의미 있는 웹 검색 기록은 <code>_history/web-searches/YYYY/</code>에 저장하고 작업 평가 입력에 <code>web_search_record_targets</code>를 포함한다.</li>\n<li>검색 판단 과정은 검색어, 확인한 출처, 제외한 약한 출처, 계획에 반영한 인사이트, 남은 불확실성 형태의 공개 판단 요약으로 텍스트에 남긴다. 내부 추론 원문은 저장하지 않는다.</li>\n<li>웹 검색이 무관하거나 불가능하면 그 사실을 기록하고 로컬 검증을 강화해 진행한다.</li>\n<li>웹 검색 후 로컬 계획 전에 <code>memory-bootstrap-agent</code>로 필수 메모리 anchor를 확인하고 hot context를 읽는다.</li>\n<li>웹 검색과 메모리 부트스트랩 후에는 `agent-platform/configs/workflows/work-</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 37522,
-      "updatedAt": "2026-06-05T22:30:45.113Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "_docs/instructions"
-    },
-    {
-      "id": "docs-instructions-persistent-instructions-md",
-      "path": "_docs/instructions/persistent-instructions.md",
-      "category": "workspace-doc",
-      "language": "unknown",
-      "title": "Persistent Instructions",
-      "excerpt": "Persistent Instructions 이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 저장한다. 대화 기억에 의존하지 않고, 반복성 있는 지시는 이 문서와 관련 운영 문서에 반영한다. 병렬 문서: 한국어: docs/instructions/persistent instructions.ko.md persistent instructions.ko.md 영어: docs/instructions/persistent instructions.en.md persistent instructions.en.md",
-      "html": "<h1>Persistent Instructions</h1>\n<p>이 문서는 앞으로도 계속 적용해야 하는 사용자 지시를 저장한다. 대화 기억에 의존하지 않고, 반복성 있는 지시는 이 문서와 관련 운영 문서에 반영한다.</p>\n<p>병렬 문서:</p>\n<ul>\n<li>한국어: <span class=\"doc-link\">_docs/instructions/persistent-instructions.ko.md</span></li>\n<li>영어: <span class=\"doc-link\">_docs/instructions/persistent-instructions.en.md</span></li>\n</ul>\n<h2>Active Instructions</h2>\n<ul>\n<li>Manage this repository as a monorepo for a personal agent-building platform.</li>\n<li>The platform&#039;s top-level purpose is to keep reducing repetitive human work and elapsed work time by modeling real human research, comparison, judgment, execution, and verification processes, then promoting automation-worthy repetition into the smallest suitable prompt, workflow, template, tool, skill, agent, or project feature.</li>\n<li>Automation must preserve human-judgment checkpoints, validation criteria, and rollback boundaries, and should be checked with timing, bottleneck, and evaluator records when the work is meaningful.</li>\n<li>&quot;Like a human directly doing the work&quot; means modeling the competent human work sequence and artifacts before automation: goal, context, sources, assumptions, option comparison, decision, execution notes, verification, handoff, and review.</li>\n<li>Treat source structure quality as a product quality gate. Keep refactoring continuously while working, but keep each refactor behavior-preserving, scoped, tested, and tied to clearer ownership boundaries.</li>\n<li>Keep the user&#039;s point of view as a product quality gate. For every meaningful product, UI, workflow, documentation, setup, or automation change, identify the user&#039;s goal, first action, expected next feedback, likely confusion points, and success evidence; rework any result that is technically correct but unclear, hard to start, hard to recover from, or not aligned with the user&#039;s actual workflow.</li>\n<li>When the platform detects repeated work, bottlenecks, omissions, validation failures, manual rework, or recurring research/prompt/tool patterns, use <code>capability-promotion-agent</code> and <code>agent-platform/configs/orchestration/capability-promotion-registry.json</code> to create automatic capability candidates. This is bounded black-box processing: user-facing automation may feel smooth, but internal observations, candidates, evidence, risk, rejected lighter options, validation, rollback or disablement, documentation, evaluation, and commit/push traces must remain auditable.</li>\n<li>Capability promotion must record the direct human work model before idea generation. Generated ideas should reduce or stabilize concrete human process steps, not merely react to the user phrase.</li>\n<li>Capability promotion separates idea generation from idea evaluation. For non-trivial problems, generate several improvement ideas, score them by repetition reduction, time savings, maintenance cost, evidence strength, risk fit, and smallest-asset fit, then record selected, rejected, or queued reasons.</li>\n<li>Capability promotion checks the smallest asset first in this order: <code>prompt</code>, <code>workflow</code>, <code>template</code>, <code>tool</code>, <code>skill</code>, <code>agent</code>, <code>project_feature</code>. Destructive, secret-bearing, install, permission, cost, public-release, security/privacy-sensitive, or irreversible changes must not auto-execute without a human checkpoint and rollback plan.</li>\n<li>Sensitive files must be centrally routed to <code>_private/sensitive/</code> or an external secret manager, while AI agents must not read or index <code>_private/</code> contents by default. Ask for a redacted extract first; direct inspection requires explicit one-time permission for the exact path and operation.</li>\n<li>The source of truth for this boundary is <code>agent-platform/configs/security/sensitive-file-boundary.json</code>, <code>_docs/policies/sensitive-file-boundary-policy.ko.md</code>, and <code>_ops/security/README.ko.md</code>. Run <code>python3 _tools/privacy-audit/src/privacy_audit.py --check</code> after changing <code>.gitignore</code>, maps, snapshots, collectors, public artifacts, installer payload rules, or sensitive-file handling rules.</li>\n<li>Keep the workspace operating principles tool-agnostic so the same structure can be used from Codex, Claude Code, Cursor, Antigravity, or another user-preferred AI coding tool.</li>\n<li>Treat the installable platform as the primary host runtime. It launches first and owns task state, durable memory, decisions, artifacts, validation, and UI authority; Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity, or other commercial/external AI tools attach only as guest adapters through explicit CLI/runtime adapter contracts.</li>\n<li>Treat this repository as the development source that builds the platform, not as the customer-visible product payload. Installed customers should use the app, customer-selected workspaces, app-managed data stores, classified logs, and exports without seeing the platform source tree.</li>\n<li>Separate platform source code from runtime data planes: user workspace data, platform data stores, log stores, cache stores, and agent runtime workspaces. Use <code>platform-desktop-app/configs/runtime-data-boundary-registry.json</code> before adding persistent runtime data, logs, support exports, installer payload behavior, or agent work directories.</li>\n<li>Keep reusable agent definitions grouped under <code>agent-platform/configs/agents/</code>; runtime agent input/output/log/handoff/temp work belongs in the install</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 34700,
-      "updatedAt": "2026-06-05T22:30:45.112Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "_docs/instructions"
-    },
-    {
-      "id": "agents-md",
-      "path": "AGENTS.md",
-      "category": "runtime-adapter",
-      "language": "unknown",
-      "title": "Repository Instructions",
-      "excerpt": "Repository Instructions This repository is the workspace for building and tracking a personal agent building platform and related projects. Workspace Rules Treat each root level non reserved directory as a separate project. Create new project directories at the repository root us",
-      "html": "<h1>Repository Instructions</h1>\n<p>This repository is the workspace for building and tracking a personal agent-building platform and related projects.</p>\n<h2>Workspace Rules</h2>\n<ul>\n<li>Treat each root-level non-reserved directory as a separate project.</li>\n<li>Create new project directories at the repository root using <code>kebab-case</code>.</li>\n<li>Use <code>_ops/naming/naming-policy.json</code> as the source of truth for durable naming rules.</li>\n<li>For new durable paths, use lower <code>kebab-case</code> for project/tool/skill/workflow/prompt/spec slugs, <code>snake_case</code> for Python packages and modules, <code>YYYY-MM-DD-&lt;slug&gt;</code> for dated records, and <code>name.ko.md</code>/<code>name.en.md</code> for important bilingual docs.</li>\n<li>Do not rename existing durable paths without a migration plan, trace update, and validation run.</li>\n<li>Reserve underscore-prefixed root directories for workspace operations:</li>\n<li><code>_docs/</code> for workspace-level documentation and decision records; keep it categorized through <code>_docs/registry.json</code></li>\n<li><code>_docs/instructions/</code> for durable instructions and baseline workspace rules</li>\n<li><code>_docs/policies/</code> for execution policies</li>\n<li><code>_docs/operating-models/</code> for conceptual operating models</li>\n<li><code>_docs/governance/</code> for cross-workspace governance documents</li>\n<li><code>_philosophy/</code> for foundational agent and platform operating philosophy</li>\n<li><code>_requirements/</code> for shared requirements baselines, change records, and review records</li>\n<li><code>_specs/</code> for shared spec-driven artifacts, implementation plans, task lists, validation, and traceability</li>\n<li><code>_history/</code> for dated work history and compressed context summaries</li>\n<li><code>_ops/</code> for operations navigation, prompts, workflows, and maps</li>\n<li><code>_research/</code> for reusable internet research and external reference notes</li>\n<li><code>_skills/</code> for tracked source copies of custom Codex skills</li>\n<li><code>_templates/</code> for reusable project scaffolds</li>\n<li><code>_tools/</code> for reusable local tools and scripts</li>\n<li><code>_archive/</code> for paused or retired projects</li>\n<li>Treat <code>_private/</code> and <code>outputs/</code> as local-only ignored folders, not durable repository knowledge:</li>\n<li><code>_private/</code> is the protected local vault for private scratch state and sensitive local files.</li>\n<li>Store real sensitive local files under <code>_private/sensitive/</code> or an external secret manager; track only policies, env var names, secret references, and redacted metadata.</li>\n<li>Agents must not recursively list, search, open, read, summarize, index, snapshot, embed, or use <code>_private/</code> contents by default. If sensitive content is needed, ask for a redacted extract first; direct inspection requires explicit one-time user permission for the exact path and operation.</li>\n<li><code>outputs/</code> is for transient one-off tool output only.</li>\n<li>Durable project artifacts must move into the owning project&#039;s <code>artifacts/</code> folder.</li>\n<li>Keep project-specific code, docs, tests, and assets inside that project folder.</li>\n<li>Keep project-specific configs, artifacts, tools, and decisions inside that project folder as well.</li>\n<li>Do not move or delete unrelated files unless the user explicitly asks.</li>\n<li>Prefer creating a project folder for substantial work instead of placing loose files at the repository root.</li>\n<li>Register root projects and their boundaries in <code>_ops/projects/registry.json</code>.</li>\n<li>Keep durable AI assistant operating principles tool-agnostic. Use <code>_docs/operating-models/tool-agnostic-agent-operating-model.ko.md</code> and <code>_ops/assistant-runtimes/adapter-registry.json</code> as the shared source for adapting this workspace to Codex, Claude Code, Cursor, Antigravity, or another assistant runtime.</li>\n<li>All agents shall strongly adhere to durable principles. Treat principles as execution contracts and close-out gates, not motivational language; speed, profit, optimism, convenience, or user pressure must not silently bypass required evidence, safety, privacy, legality, quality, provenance, validation, or evaluation.</li>\n<li>Treat <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.claude/rules/</code>, <code>.cursor/rules/</code>, and <code>.agents/rules/</code> as runtime adapters or entrypoints. Do not fork durable policy across them; update shared docs/configs first and keep adapters thin.</li>\n</ul>\n<h2>Git Rules</h2>\n<ul>\n<li>Check <code>git status</code> before editing and before committing.</li>\n<li>Commit every completed meaningful change set.</li>\n<li>Use commit messages in the form <code>type(scope): summary</code>.</li>\n<li>Keep commits scoped to the work just completed.</li>\n<li>Push completed commits to <code>origin/main</code> immediately after committing unless the user explicitly says not to push.</li>\n<li>Do not rewrite history, reset, or discard user changes unless explicitly requested.</li>\n<li>Update the relevant history log before committing when the work changes project direction, repository rules, or meaningful artifacts.</li>\n<li>Before final close-out of meaningful work, evaluate the result against the user&#039;s initial instruction and rework any real gaps before committing or final response.</li>\n<li>After completing meaningful implementation work, run the owning project&#039;s build or package command before final response so the user does not have to build manually. If no build command exists, or the build is unsafe, too costly, or outside the touched project boundary, record the reason and run the strongest available equivalent verification instead.</li>\n<li>Before evaluation, summarize completed work and check prior internal work or strong external references r</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 52029,
-      "updatedAt": "2026-06-05T22:30:45.112Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "AGENTS.md"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-open-source-feature-radar-tasks-ko-md",
@@ -17221,38 +17395,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "docs-policies-ui-tone-policy-en-md",
-      "path": "_docs/policies/ui-tone-policy.en.md",
-      "category": "workspace-doc",
-      "language": "en",
-      "title": "UI Tone Policy",
-      "excerpt": "UI Tone Policy Purpose Platform surfaces should feel fast to scan and trustworthy like operational tools. Because the user will repeatedly work in these tools, a small amount of quiet delight and subtle cuteness is allowed when it does not weaken clarity. Principles Clarity, scan",
-      "html": "<h1>UI Tone Policy</h1>\n<h2>Purpose</h2>\n<p>Platform surfaces should feel fast to scan and trustworthy like operational tools. Because the user will repeatedly work in these tools, a small amount of quiet delight and subtle cuteness is allowed when it does not weaken clarity.</p>\n<h2>Principles</h2>\n<ul>\n<li>Clarity, scanability, accessibility, and operational trust come first.</li>\n<li>Cuteness is not the main event; it is a supporting signal that makes status and flow easier to feel.</li>\n<li>Good applications include small color accents, status dots, gentle hover feedback, friendly empty states, and restrained micro-interactions.</li>\n<li>Avoid decorative clutter, emoji-heavy UI, unnecessary animation, reduced information density, and visual noise.</li>\n<li>Motion must be brief and purposeful, and must respect <code>prefers-reduced-motion</code>.</li>\n<li>Operational and management surfaces should keep card radii aligned with the local design system and avoid feeling like broad marketing UI.</li>\n<li>When a screen has one primary feature, that feature should own the center and most of the viewport. A layout fails if the feature is small while decoration, empty cards, or unrelated secondary panels consume the screen.</li>\n<li>Because users can only perceive and decide on a limited amount of information at once, each feature, panel, button, and workflow step should expose one clear purpose.</li>\n<li>One tab should represent one functional purpose. Prefer a deeper drill-down screen or task-specific child view over keeping navigation shallow by placing several features in one tab.</li>\n<li>Use split layouts, dashboard grids, and side-by-side panels only when the user needs simultaneous comparison, monitoring, or multiple primary tasks.</li>\n</ul>\n<h2>Applies To</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/</code> dashboards, history, source viewer, and agent board</li>\n<li><code>platform-desktop-app/</code> installable app UI</li>\n<li>Future admin, monitor, coordination board, and generated report HTML</li>\n</ul>\n<h2>Evidence</h2>\n<ul>\n<li>Apple Human Interface Guidelines for Motion describe motion as useful for status and feedback, but warn against gratuitous or excessive animation. Reduced-motion handling is required by this policy.</li>\n</ul>\n<p>https://developer.apple.com/design/Human-Interface-Guidelines/motion</p>\n<ul>\n<li>Microsoft Fluent 2 design principles emphasize focus, less visual clutter, trust, and personality in balance.</li>\n</ul>\n<p>https://fluent2.microsoft.design/design-principles</p>\n<ul>\n<li>Material Design&#039;s motion guidance treats motion as a way to communicate relationships, action availability, and action outcomes.</li>\n</ul>\n<p>https://m2.material.io/design/motion/understanding-motion.html</p>\n<ul>\n<li>Don Norman&#039;s emotional design discussion supports the idea that usability and pleasure are connected, while this repository still keeps operational readability and verification first.</li>\n</ul>\n<p>https://ubiquity.acm.org/article.cfm?id=966013</p>\n<ul>\n<li>Microsoft&#039;s Inductive User Interface guidance says screens should focus on one primary task and make screen contents fit that task. This policy applies that principle as a space-allocation rule for platform surfaces.</li>\n</ul>\n<p>https://learn.microsoft.com/en-us/windows/win32/appuistart/inductive-user-interface</p>\n<ul>\n<li>VA.gov Design System&#039;s One Thing per Page pattern says one logical thing at a time helps users focus and understand the task.</li>\n</ul>\n<p>https://dev-design.va.gov/5931/patterns/ask-users-for/a-single-response</p>\n<ul>\n<li>W3C WAI cognitive accessibility patterns say page purpose and control use should be clear, and users should be able to identify the tasks they can perform and the controls they can interact with.</li>\n</ul>\n<p>https://www.w3.org/WAI/WCAG2/supplemental/patterns/o1p01-clear-purpose/</p>\n<p>https://www.w3.org/WAI/WCAG2/supplemental/patterns/o1p05-clear-controls/</p>\n<ul>\n<li>W3C WAI cognitive accessibility patterns also recommend breaking content into manageable pieces, and the GOV.UK Service Manual recommends handling one thing per page for complex forms and workflows.</li>\n</ul>\n<p>https://www.w3.org/WAI/WCAG2/supplemental/patterns/o3p01-chunk/</p>\n<p>https://www.gov.uk/service-manual/design/form-structure#start-with-one-thing-per-page</p>\n<h2>Verification</h2>\n<ul>\n<li>Check that delightful details do not weaken information hierarchy.</li>\n<li>Redesign screens where a single primary feature is small while surrounding chrome, cards, empty space, or decoration is visually dominant.</li>\n<li>Split any panel or button that mixes status checking, setup, navigation, execution, and evidence review into separate single-purpose units.</li>\n<li>If a tab shows several unrelated feature panels at once, demote the default tab to a choice menu and move each feature into a deeper single-feature view.</li>\n<li>If a split layout is used, verify that simultaneous comparison, monitoring, or multiple primary tasks justify it.</li>\n<li>Check that buttons, tabs, cards, charts, and code viewers do not create text overlap.</li>\n<li>Check that repeated interactions do not add unnecessary waiting animations.</li>\n<li>Check that <code>prefers-reduced-motion</code> handling exists.</li>\n<li>Run <code>pnpm run build</code> or the owning project&#039;s build/check command.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 4929,
-      "updatedAt": "2026-06-04T15:43:06.375Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "_docs/policies"
-    },
-    {
-      "id": "docs-policies-ui-tone-policy-ko-md",
-      "path": "_docs/policies/ui-tone-policy.ko.md",
-      "category": "workspace-doc",
-      "language": "ko",
-      "title": "UI Tone 정책",
-      "excerpt": "UI Tone 정책 목적 플랫폼 화면은 운영 도구처럼 빠르게 읽히고 신뢰돼야 한다. 동시에 사용자가 오래 반복해서 쓰는 도구이므로, 명확성을 해치지 않는 작은 즐거움과 은근히 귀여운 톤을 허용한다. 원칙 명확성, 훑어보기, 접근성, 운영 신뢰가 항상 먼저다. 귀여움은 주인공이 아니라 사용자가 상태를 더 편하게 이해하게 하는 보조 신호다. 좋은 적용은 작은 색상 accent, 상태점, 부드러운 hover 피드백, friendly empty state, 과하지 않은 micro interaction이다",
-      "html": "<h1>UI Tone 정책</h1>\n<h2>목적</h2>\n<p>플랫폼 화면은 운영 도구처럼 빠르게 읽히고 신뢰돼야 한다. 동시에 사용자가 오래 반복해서 쓰는 도구이므로, 명확성을 해치지 않는 작은 즐거움과 은근히 귀여운 톤을 허용한다.</p>\n<h2>원칙</h2>\n<ul>\n<li>명확성, 훑어보기, 접근성, 운영 신뢰가 항상 먼저다.</li>\n<li>귀여움은 주인공이 아니라 사용자가 상태를 더 편하게 이해하게 하는 보조 신호다.</li>\n<li>좋은 적용은 작은 색상 accent, 상태점, 부드러운 hover 피드백, friendly empty state, 과하지 않은 micro-interaction이다.</li>\n<li>피해야 할 적용은 장식 과잉, emoji 남용, 불필요한 animation, 정보 밀도 저하, 시각적 소음이다.</li>\n<li>motion은 짧고 목적이 있어야 하며, <code>prefers-reduced-motion</code>을 존중해야 한다.</li>\n<li>운영/관리 화면의 card radius는 기존 디자인 시스템과 맞추고, 과하게 둥근 marketing UI처럼 보이지 않게 한다.</li>\n<li>한 화면의 주 기능이 하나이면 그 기능이 viewport의 중심과 대부분의 면적을 차지해야 한다. 기능이 작게 떠 있고 나머지를 장식, 빈 card, 무관한 보조 panel로 채우는 layout은 실패로 본다.</li>\n<li>사용자는 한 번에 인지하고 판단할 수 있는 정보량이 제한되어 있으므로, 기능, panel, button, workflow step은 한 가지 목적만 명확히 드러내야 한다.</li>\n<li>한 tab은 하나의 기능 목적을 대표해야 한다. 여러 기능을 한 tab에 얹어 navigation을 얕게 만들기보다, 한 단계 더 들어가는 drill-down 화면이나 task-specific child view를 사용한다.</li>\n<li>분할 layout, dashboard grid, side-by-side panel은 비교, monitoring, 다중 주 작업처럼 사용자가 동시에 봐야 하는 맥락이 있을 때만 쓴다.</li>\n</ul>\n<h2>적용 대상</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/</code>의 dashboard, history, source viewer, agent board</li>\n<li><code>platform-desktop-app/</code>의 설치형 프로그램 UI</li>\n<li>미래의 admin, monitor, coordination board, generated report HTML</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>Apple Human Interface Guidelines의 Motion 문서는 motion이 status와 feedback을 전달할 수 있지만 목적 없이 추가하면 산만하거나 불편할 수 있다고 설명한다. <code>prefers-reduced-motion</code> 계열 대응은 이 정책의 필수 기준으로 둔다.</li>\n</ul>\n<p>https://developer.apple.com/design/Human-Interface-Guidelines/motion</p>\n<ul>\n<li>Microsoft Fluent 2의 design principles는 focus, 적은 visual clutter, trust, personality의 균형을 강조한다.</li>\n</ul>\n<p>https://fluent2.microsoft.design/design-principles</p>\n<ul>\n<li>Material Design의 motion 문서는 motion을 관계, action availability, action outcome을 알려주는 도구로 다룬다.</li>\n</ul>\n<p>https://m2.material.io/design/motion/understanding-motion.html</p>\n<ul>\n<li>Don Norman의 emotional design 논의는 사용성과 즐거움이 분리되지 않는다는 관점을 제공하지만, 이 저장소에서는 운영 가독성과 검증 가능성을 우선한다.</li>\n</ul>\n<p>https://ubiquity.acm.org/article.cfm?id=966013</p>\n<ul>\n<li>Microsoft의 Inductive User Interface 문서는 화면을 하나의 primary task에 집중시키고, 화면 내용이 그 task에 맞아야 한다고 설명한다. 이 정책은 그 원칙을 플랫폼 화면의 공간 배분 기준으로 적용한다.</li>\n</ul>\n<p>https://learn.microsoft.com/en-us/windows/win32/appuistart/inductive-user-interface</p>\n<ul>\n<li>VA.gov Design System의 One Thing per Page 패턴은 한 번에 하나의 논리적 항목을 다루면 사용자가 더 쉽게 집중하고 이해할 수 있다고 설명한다.</li>\n</ul>\n<p>https://dev-design.va.gov/5931/patterns/ask-users-for/a-single-response</p>\n<ul>\n<li>W3C WAI의 cognitive accessibility 패턴은 화면 목적과 control 사용법을 명확히 드러내야 하며, 사용자가 수행 가능한 task와 interactive control을 알아볼 수 있어야 한다고 설명한다.</li>\n</ul>\n<p>https://www.w3.org/WAI/WCAG2/supplemental/patterns/o1p01-clear-purpose/</p>\n<p>https://www.w3.org/WAI/WCAG2/supplemental/patterns/o1p05-clear-controls/</p>\n<ul>\n<li>W3C WAI의 cognitive accessibility 패턴은 content를 관리 가능한 조각으로 나누라고 설명하며, GOV.UK Service Manual도 복잡한 form/workflow에서 한 번에 한 가지를 다루는 구조를 권장한다.</li>\n</ul>\n<p>https://www.w3.org/WAI/WCAG2/supplemental/patterns/o3p01-chunk/</p>\n<p>https://www.gov.uk/service-manual/design/form-structure#start-with-one-thing-per-page</p>\n<h2>검증</h2>\n<ul>\n<li>화면에 추가한 귀여움이 정보 hierarchy를 약화하지 않는지 확인한다.</li>\n<li>화면에 주 기능이 하나뿐인데 해당 기능이 작고 주변 chrome, card, 빈 공간, 장식이 더 크게 보이면 재설계한다.</li>\n<li>panel이나 button 하나가 상태 확인, 설정, 이동, 실행, 근거 보기처럼 서로 다른 일을 동시에 시키면 단일 목적 단위로 분리한다.</li>\n<li>tab 안에서 서로 다른 여러 기능 panel이 동시에 보이면 기본 tab은 선택 메뉴로 낮추고, 각 기능은 더 깊은 단일 기능 화면으로 이동시킨다.</li>\n<li>분할 layout을 썼다면 비교, monitoring, 다중 주 작업 중 어떤 이유로 동시에 봐야 하는지 설명 가능해야 한다.</li>\n<li>버튼, tab, card, chart, code viewer에서 text overlap이 없는지 확인한다.</li>\n<li>반복 interaction에 불필요한 대기 animation이 없는지 확인한다.</li>\n<li><code>prefers-reduced-motion</code> 대응이 있는지 확인한다.</li>\n<li><code>pnpm run build</code> 또는 해당 프로젝트의 build/check를 통과한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 5446,
-      "updatedAt": "2026-06-04T15:43:06.375Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "_docs/policies"
-    },
-    {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-single-purpose-home-ui-tasks-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-single-purpose-home-ui/tasks.ko.md",
       "category": "project-spec",
@@ -18019,118 +18161,6 @@
       "historyDate": "2026-06-04",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-intellij-run-workbench-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-intellij-run-workbench/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "IntelliJ식 실행 작업대 스펙",
-      "excerpt": "IntelliJ식 실행 작업대 스펙 목표 작업 실행 탭을 긴 웹 대시보드처럼 보이지 않게 만들고, 사용자가 IntelliJ식 실행 구성과 도구 창 구조 안에서 에이전트 작업을 바로 시작하고 막힌 상태를 해소하게 한다. 범위 Desktop Runtime 상단에 Run Configuration toolbar와 실행 구성 카드를 추가한다. 실행 구성은 검색 에이전트 채팅, CLI 세션, 다중 CLI pipe, workspace readiness 점검에 연결한다. Services 영역은 runtime, ",
-      "html": "<h1>IntelliJ식 실행 작업대 스펙</h1>\n<h2>목표</h2>\n<p><code>작업 실행</code> 탭을 긴 웹 대시보드처럼 보이지 않게 만들고, 사용자가 IntelliJ식 실행 구성과 도구 창 구조 안에서 에이전트 작업을 바로 시작하고 막힌 상태를 해소하게 한다.</p>\n<h2>범위</h2>\n<ul>\n<li>Desktop Runtime 상단에 Run Configuration toolbar와 실행 구성 카드를 추가한다.</li>\n<li>실행 구성은 검색 에이전트 채팅, CLI 세션, 다중 CLI pipe, workspace readiness 점검에 연결한다.</li>\n<li>Services 영역은 runtime, workspace, CLI adapter, provider account, session 상태를 요약한다.</li>\n<li>Problems 영역은 오류, 누락 CLI, provider 미설정, pending decisions, dirty drafts, public blockers를 조치 가능한 형태로 보여준다.</li>\n<li>상태바는 runtime, CLI, model, session, inbox, terminal 상태를 노출한다.</li>\n<li>레지스트리, readiness script, 요구사항, 히스토리에 기능 계약을 남긴다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>IntelliJ UI asset 또는 소스 복사</li>\n<li>새로운 CLI adapter backend 추가</li>\n<li>실제 provider live call 자동 실행</li>\n<li>OS installer signing/notarization 개선</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>MonitorShell.tsx</code>에 <code>intellij-run-workbench-panel</code>, <code>ide-run-config-list</code>, <code>ide-services-window</code>, <code>ide-problems-strip</code>, <code>ide-status-bar</code>가 있다.</li>\n<li>실행 구성 버튼이 기존 runtime 함수에 연결된다.</li>\n<li>CSS는 <code>var(--surface)</code>, <code>var(--surface-raised)</code>, <code>var(--line)</code>, <code>var(--text)</code>, <code>var(--muted)</code> 같은 테마 토큰을 사용한다.</li>\n<li>product feature, user flow, reference advantage registries가 IntelliJ식 Run/Services/Problems 패턴을 추적한다.</li>\n<li>renderer check, platform check, tests, customer build, browser smoke가 통과한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1705,
-      "updatedAt": "2026-06-03T18:12:35.675Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-provider-direct-agent-work-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-provider-direct-agent-work/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증 기록",
-      "excerpt": "검증 기록 실행 완료 cd platform desktop app/src tauri && cargo check : passed corepack pnpm dir platform desktop app/renderer/workspace monitor run check : passed corepack pnpm filter platform desktop app run service:readiness : passed, provider group includes local model catalog command",
-      "html": "<h1>검증 기록</h1>\n<h2>실행 완료</h2>\n<ul>\n<li><code>cd platform-desktop-app/src-tauri &amp;&amp; cargo check</code>: passed</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>: passed</li>\n<li><code>corepack pnpm --filter platform-desktop-app run service:readiness</code>: passed, provider group includes <code>local_model_catalog_command</code></li>\n<li>JSON parse checks for changed registries/contracts: passed</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ...</code>: passed for user-flow, product-feature, service-readiness, installation registry</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: passed, 21 tests</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: passed</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: passed, 17 tests</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: passed</li>\n<li><code>git diff --check</code>: passed</li>\n<li>Browser smoke at <code>http://127.0.0.1:4174/</code>: passed</li>\n<li>Confirmed <code>검색 에이전트 작업 채팅</code></li>\n<li>Confirmed <code>실행 계정</code>, provider options <code>ChatGPT / OpenAI</code>, <code>Claude / Anthropic</code>, <code>Gemini / Google</code></li>\n<li>Confirmed <code>모델</code>, default <code>gpt-5.2</code>, <code>CLI 대체</code>, and work input</li>\n<li>Browser smoke at <code>http://127.0.0.1:4178/</code>: passed</li>\n<li>Confirmed Agents screen <code>Ollama / Local</code>, <code>모델</code>, <code>로컬 실행</code>, <code>.agent-model-picker</code>, <code>.agent-model-refresh-button</code></li>\n<li>Confirmed Settings &gt; 초기화 &gt; 계정 연결 <code>Ollama / Local</code>, <code>로컬 런타임</code>, <code>127.0.0.1:11434</code>, <code>API key 없음</code></li>\n</ul>\n<h2>최종 close-out 전 실행 예정</h2>\n<ul>\n<li>Final post-history <code>git diff --check</code></li>\n<li>Final <code>git status</code></li>\n</ul>\n<h2>수동 검토 포인트</h2>\n<ul>\n<li>실제 provider API 호출은 사용자 API key가 필요하므로 자동 테스트에서는 호출하지 않는다.</li>\n<li>실제 Ollama 응답 호출은 사용자 로컬 Ollama 설치와 모델 pull 상태에 의존하므로 자동 테스트에서는 <code>/api/chat</code>을 호출하지 않는다.</li>\n<li>command path, UI token, task-run persistence, secret redaction policy를 정적 검사와 컴파일로 검증한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1965,
-      "updatedAt": "2026-06-03T18:02:58.023Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-04-provider-direct-agent-work-en-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-04-provider-direct-agent-work.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Provider Account Direct Work Requirements",
-      "excerpt": "Provider Account Direct Work Requirements | ID | Requirement | Priority | Verification | | | | | | | REQ PDA 082 | The desktop app shall run model work directly from a local Ollama model or connected OpenAI, Anthropic, and Gemini accounts without requiring an external CLI. | must",
-      "html": "<h1>Provider Account Direct Work Requirements</h1>\n<table><thead><tr><th>ID</th><th>Requirement</th><th>Priority</th><th>Verification</th></tr></thead><tbody><tr><td>REQ-PDA-082</td><td>The desktop app shall run model work directly from a local Ollama model or connected OpenAI, Anthropic, and Gemini accounts without requiring an external CLI.</td><td>must</td><td><code>run_provider_agent_task</code>, <code>ProviderAgentTaskReport</code>, <code>call_ollama_provider_api</code></td></tr><tr><td>REQ-PDA-083</td><td>The Search Agent Work Chat shall let the user select a provider and model, then prefer direct model execution when a local runtime or connected account is available.</td><td>must</td><td><code>SearchAgentWorkChatPanel</code>, <code>agent-provider-run-controls</code>, <code>agent-model-picker</code>, <code>run_provider_agent_task</code> invoke</td></tr><tr><td>REQ-PDA-084</td><td>Direct provider results shall appear in chat and be persisted as task-run <code>record.json</code>, <code>stdout.log</code>, and <code>stderr.log</code> artifacts.</td><td>must</td><td><code>persist_provider_agent_task_run</code>, <code>task_runs_base_path</code></td></tr><tr><td>REQ-PDA-085</td><td>Direct provider task records shall not store raw secrets or export them through support bundles; they shall keep only safe metadata such as provider id, model, status, and HTTP status.</td><td>must</td><td><code>credential_policy: secret_not_persisted</code>, support export exclusion</td></tr><tr><td>REQ-PDA-086</td><td>When direct provider execution fails or no account is connected, the app shall fallback to optional CLI lanes or guide the user to settings without blocking the whole app.</td><td>should</td><td>chat fallback messages, <code>capability_missing</code> behavior</td></tr><tr><td>REQ-PDA-087</td><td>The desktop app shall refresh local Ollama model lists through <code>list_provider_models</code> and show <code>/api/tags</code> failures as catalog state rather than whole-app failure.</td><td>must</td><td><code>ProviderModelCatalogReport</code>, <code>list_provider_models</code>, <code>local_model_runtime_unavailable</code></td></tr><tr><td>REQ-PDA-088</td><td>Settings shall present Ollama as a keyless local runtime with install, docs, and endpoint state instead of an API-key form.</td><td>must</td><td><code>provider-local-runtime-note</code>, <code>Ollama / Local</code>, Settings provider accounts</td></tr></tbody></table>\n<h2>Decisions</h2>\n<ul>\n<li>When a local Ollama runtime or connected account is available, the Search Agent Work Chat <code>Start Work</code> action prefers direct model execution.</li>\n<li>External CLIs remain optional fallback lanes.</li>\n<li>The direct-run system prompt constrains the model from claiming source edits or shell commands unless the prompt contains evidence.</li>\n<li>Ollama is treated as a local HTTP runtime at <code>127.0.0.1:11434</code>; no API key is stored.</li>\n<li>OAuth desktop flow and OS keychain storage remain separate public-release security improvements.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2476,
-      "updatedAt": "2026-06-03T17:58:25.381Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-04-provider-direct-agent-work-ko-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-04-provider-direct-agent-work.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "제공자 계정 기반 직접 작업 실행 요구사항",
-      "excerpt": "제공자 계정 기반 직접 작업 실행 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | REQ PDA 082 | 데스크톱 앱은 Ollama 로컬 모델 또는 연결된 OpenAI, Anthropic, Gemini 계정을 기반으로 외부 CLI 없이 모델 작업을 직접 실행할 수 있어야 한다. | must | run provider agent task , ProviderAgentTaskReport , call ollama provider api | | REQ PDA 083 | 검색 ",
-      "html": "<h1>제공자 계정 기반 직접 작업 실행 요구사항</h1>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-082</td><td>데스크톱 앱은 Ollama 로컬 모델 또는 연결된 OpenAI, Anthropic, Gemini 계정을 기반으로 외부 CLI 없이 모델 작업을 직접 실행할 수 있어야 한다.</td><td>must</td><td><code>run_provider_agent_task</code>, <code>ProviderAgentTaskReport</code>, <code>call_ollama_provider_api</code></td></tr><tr><td>REQ-PDA-083</td><td>검색 에이전트 작업 채팅은 provider와 모델을 선택하고, 로컬 런타임 또는 연결된 계정이 있으면 직접 모델 실행을 우선해야 한다.</td><td>must</td><td><code>SearchAgentWorkChatPanel</code>, <code>agent-provider-run-controls</code>, <code>agent-model-picker</code>, <code>run_provider_agent_task</code> invoke</td></tr><tr><td>REQ-PDA-084</td><td>직접 provider 실행 결과는 채팅 메시지로 보여주고, 동일한 실행을 task-run store의 <code>record.json</code>, <code>stdout.log</code>, <code>stderr.log</code>로 저장해야 한다.</td><td>must</td><td><code>persist_provider_agent_task_run</code>, <code>task_runs_base_path</code></td></tr><tr><td>REQ-PDA-085</td><td>provider 직접 실행 record는 원문 secret을 저장하거나 support bundle에 내보내지 않아야 하며, provider id, model, status, http status 같은 안전한 메타데이터만 남겨야 한다.</td><td>must</td><td><code>credential_policy: secret_not_persisted</code>, support export exclusion</td></tr><tr><td>REQ-PDA-086</td><td>provider 직접 실행이 실패하거나 계정이 없을 때 앱은 기존 optional CLI lane으로 fallback하거나 설정 위치를 안내해야 하며, 전체 앱 사용을 막지 않아야 한다.</td><td>should</td><td>chat fallback messages, <code>capability_missing</code> behavior</td></tr><tr><td>REQ-PDA-087</td><td>데스크톱 앱은 Ollama 로컬 모델 목록을 <code>list_provider_models</code>로 새로고침하고 <code>/api/tags</code> 실패를 전체 앱 오류가 아닌 catalog 상태로 보여줘야 한다.</td><td>must</td><td><code>ProviderModelCatalogReport</code>, <code>list_provider_models</code>, <code>local_model_runtime_unavailable</code></td></tr><tr><td>REQ-PDA-088</td><td>설정 화면은 Ollama를 API key 입력 폼이 아니라 keyless 로컬 런타임으로 표시하고 설치/문서/endpoint 상태를 보여줘야 한다.</td><td>must</td><td><code>provider-local-runtime-note</code>, <code>Ollama / Local</code>, Settings provider accounts</td></tr></tbody></table>\n<h2>결정</h2>\n<ul>\n<li>로컬 Ollama 런타임 또는 연결된 계정이 있으면 검색 에이전트 작업 채팅의 <code>작업 시작</code>은 직접 모델 실행을 우선한다.</li>\n<li>외부 CLI는 계속 보조 실행 lane으로 남기며, provider 계정이 없거나 직접 실행이 실패하면 fallback 경로로 사용한다.</li>\n<li>직접 실행은 source edit이나 shell command 실행을 했다고 주장하지 않도록 system prompt에서 실행 경계를 고정한다.</li>\n<li>Ollama는 <code>127.0.0.1:11434</code> 로컬 HTTP 런타임으로 취급하고 API key를 저장하지 않는다.</li>\n<li>OAuth desktop flow와 OS keychain adapter는 public release 보안 개선으로 분리한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2807,
-      "updatedAt": "2026-06-03T17:58:14.674Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-provider-direct-agent-work-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-provider-direct-agent-work/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성",
-      "excerpt": "추적성 | 요구사항 | 구현/문서 | 검증 | | | | | | REQ PDA 082 | platform desktop app/src tauri/src/lib.rs , platform desktop app/src tauri/Cargo.toml | run provider agent task , cargo check | | REQ PDA 083 | platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx , app/glob",
-      "html": "<h1>추적성</h1>\n<table><thead><tr><th>요구사항</th><th>구현/문서</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-082</td><td><code>platform-desktop-app/src-tauri/src/lib.rs</code>, <code>platform-desktop-app/src-tauri/Cargo.toml</code></td><td><code>run_provider_agent_task</code>, <code>cargo check</code></td></tr><tr><td>REQ-PDA-083</td><td><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code>, <code>app/globals.css</code></td><td>renderer <code>check</code>, readiness token checks</td></tr><tr><td>REQ-PDA-084</td><td><code>persist_provider_agent_task_run</code>, <code>task_runs_base_path</code></td><td>task-run record compatibility, desktop tests</td></tr><tr><td>REQ-PDA-085</td><td><code>credential_policy: secret_not_persisted</code>, support bundle exclusion policy</td><td>service/readiness checks</td></tr><tr><td>REQ-PDA-086</td><td><code>launchSearchAgent</code> provider direct try/catch fallback</td><td>renderer <code>check</code>, chat fallback messages</td></tr><tr><td>REQ-PDA-087</td><td><code>list_provider_models</code>, <code>ProviderModelCatalogReport</code>, <code>OLLAMA_BASE_URL</code></td><td><code>cargo check</code>, readiness/service-readiness token checks</td></tr><tr><td>REQ-PDA-088</td><td><code>Ollama / Local</code>, <code>agent-model-picker</code>, <code>provider-local-runtime-note</code></td><td>renderer <code>check</code>, browser smoke</td></tr></tbody></table>\n<h2>출처</h2>\n<ul>\n<li>OpenAI API authentication and Responses API docs</li>\n<li>Anthropic API authentication and Messages API docs</li>\n<li>Gemini API key and generateContent API docs</li>\n<li>Ollama API docs: <code>/api/tags</code> local model catalog and <code>/api/chat</code> local chat execution</li>\n<li>기존 <code>2026-06-04-provider-account-connection</code> 요구사항/스펙</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1331,
-      "updatedAt": "2026-06-03T17:57:57.446Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-provider-direct-agent-work-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-provider-direct-agent-work/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록",
-      "excerpt": "작업 목록 x reqwest 직접 의존성 추가와 설치 감사 기록 작성 x provider default model, direct task input/report 타입 추가 x run provider agent task Tauri command 구현 x OpenAI, Anthropic, Gemini API 호출 함수 구현 x Ollama 로컬 provider 정의와 /api/chat 호출 함수 구현 x list provider models Tauri command와 Ollama /api/tags c",
-      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] <code>reqwest</code> 직접 의존성 추가와 설치 감사 기록 작성</li>\n<li>[x] provider default model, direct task input/report 타입 추가</li>\n<li>[x] <code>run_provider_agent_task</code> Tauri command 구현</li>\n<li>[x] OpenAI, Anthropic, Gemini API 호출 함수 구현</li>\n<li>[x] Ollama 로컬 provider 정의와 <code>/api/chat</code> 호출 함수 구현</li>\n<li>[x] <code>list_provider_models</code> Tauri command와 Ollama <code>/api/tags</code> catalog 구현</li>\n<li>[x] provider direct task-run persistence 구현</li>\n<li>[x] 검색 에이전트 채팅 provider/model 선택 UI 추가</li>\n<li>[x] 모델 목록 새로고침/직접 입력 UI와 Ollama keyless 설정 UI 추가</li>\n<li>[x] 직접 provider 결과 채팅 메시지와 CLI fallback 경로 연결</li>\n<li>[x] runtime contract, product feature registry, user flow registry 업데이트</li>\n<li>[x] readiness scripts/tests provider direct task 토큰 추가</li>\n<li>[x] 최종 검증 명령 전체 통과</li>\n<li>[x] work evaluation, omission/resource checks, request trace 저장</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 953,
-      "updatedAt": "2026-06-03T17:57:51.654Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-provider-direct-agent-work-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-provider-direct-agent-work/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "제공자 계정 기반 직접 작업 실행 스펙",
-      "excerpt": "제공자 계정 기반 직접 작업 실행 스펙 목표 연결된 ChatGPT/OpenAI, Claude/Anthropic, Gemini/Google 계정과 Ollama 로컬 모델 런타임을 단순 설정 상태로 두지 않고, 검색 에이전트 작업 채팅에서 실제 모델 작업 실행에 사용한다. 범위 Tauri 백엔드에 provider direct task command를 추가한다. provider credential store 또는 환경변수에서 API key를 읽어 allowlisted provider API만 호출한다.",
-      "html": "<h1>제공자 계정 기반 직접 작업 실행 스펙</h1>\n<h2>목표</h2>\n<p>연결된 ChatGPT/OpenAI, Claude/Anthropic, Gemini/Google 계정과 Ollama 로컬 모델 런타임을 단순 설정 상태로 두지 않고, 검색 에이전트 작업 채팅에서 실제 모델 작업 실행에 사용한다.</p>\n<h2>범위</h2>\n<ul>\n<li>Tauri 백엔드에 provider direct task command를 추가한다.</li>\n<li>provider credential store 또는 환경변수에서 API key를 읽어 allowlisted provider API만 호출한다.</li>\n<li>Ollama는 API key 없이 로컬 HTTP 런타임 <code>127.0.0.1:11434</code>를 사용한다.</li>\n<li>설치된 Ollama 모델 목록을 <code>list_provider_models</code>로 새로고침하고, 검색 에이전트 작업 채팅에서 provider와 model을 선택하고 직접 실행한다.</li>\n<li>결과를 채팅에 표시하고 task-run store에 <code>record.json</code>, <code>stdout.log</code>, <code>stderr.log</code>로 저장한다.</li>\n<li>provider 직접 실행 실패 시 기존 optional CLI lane으로 fallback한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>ChatGPT, Claude, Gemini consumer web session 쿠키 저장 또는 WebView 임베드 로그인</li>\n<li>OAuth desktop flow 전체 구현</li>\n<li>OS keychain adapter 전환</li>\n<li>모델이 직접 파일을 수정하거나 shell command를 실행하는 tool-calling runtime</li>\n<li>Ollama 설치 파일 번들링 또는 모델 자동 pull</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>run_provider_agent_task</code> 명령이 Rust/Tauri invoke handler에 등록된다.</li>\n<li><code>list_provider_models</code> 명령이 Rust/Tauri invoke handler에 등록되고 Ollama <code>/api/tags</code>를 조회한다.</li>\n<li>Ollama provider는 API key 저장/삭제 UI가 아니라 로컬 런타임 상태와 설치/문서 링크로 표시된다.</li>\n<li>OpenAI Responses API, Anthropic Messages API, Gemini generateContent API 호출 경로가 provider id별로 분리된다.</li>\n<li>Ollama <code>/api/chat</code> 호출 경로가 provider id별로 분리된다.</li>\n<li>직접 provider task record가 원문 secret 없이 task-run store에 남는다.</li>\n<li>검색 에이전트 채팅에서 provider/model 선택, 모델 목록 새로고침, 직접 입력 UI가 보인다.</li>\n<li><code>cargo check</code>, renderer check, desktop tests/check가 통과한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2072,
-      "updatedAt": "2026-06-03T17:57:46.516Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18141,26 +18171,26 @@
       "categories": [
         {
           "category": "evaluation",
-          "count": 18
+          "count": 19
         },
         {
           "category": "request-trace",
           "count": 14
         },
         {
-          "category": "user-request",
+          "category": "work-timing",
           "count": 14
         },
         {
-          "category": "work-summary",
-          "count": 14
+          "category": "user-request",
+          "count": 13
         },
         {
           "category": "web-search",
           "count": 13
         },
         {
-          "category": "work-timing",
+          "category": "work-summary",
           "count": 13
         },
         {
@@ -18180,7 +18210,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-          "updatedAt": "2026-06-06T03:27:15.270Z",
+          "updatedAt": "2026-06-06T03:35:44.387Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18274,16 +18304,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "최종 평가: 데스크톱 크롬 디자인 개선",
-          "excerpt": "최종 평가: 데스크톱 크롬 디자인 개선 결과 통과. 요청한 디자인 개선을 공통 토큰, 좌측 레일, 상단바, 섹션 탭 계약, 패널, 툴 스튜디오 실제 버튼 표면에 반영했다. 구현 평가 기본 버튼 느낌을 줄이기 위해 chrome shadow , rail shadow , section tab shadow , section tab active shadow , surface edge highlight , control press shadow 를 추가했다. activity rail은 active와 aria ",
-          "updatedAt": "2026-06-05T23:51:36.205Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-desktop-dev-run-fix-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-desktop-dev-run-fix.ko.md",
           "category": "evaluation",
@@ -18321,6 +18341,26 @@
           "title": "2026 06 06 EVAL runtime telemetry source refactor 평가",
           "excerpt": "2026 06 06 EVAL runtime telemetry source refactor 평가 평가 대상 요청: 소스개선. 구현 slice: EVAL runtime telemetry score model을 pure TypeScript module로 분리. 완료 기준 평가 유지보수성: UI component에서 score/format/row construction 책임을 제거했다. 검증성: helper module boundary를 static contract와 tests가 확인한다. 동작 보존: ",
           "updatedAt": "2026-06-06T00:48:37.024Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-main-tab-scroll-scope-policy-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-main-tab-scroll-scope-policy-evaluation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Main Tab Scroll Scope Policy Evaluation Input",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"2026 06 06 main tab scroll scope policy\", \"project\": \"platform desktop app\", \"work mode\": \"governance\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"installation occurred\": false, \"resource risk occurred\": false, \"cli pipe",
+          "updatedAt": "2026-06-06T03:34:28.045Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "평가: Main Tab Scroll Scope Policy",
+          "excerpt": "평가: Main Tab Scroll Scope Policy 날짜: 2026 06 06 결론 요청은 정책과 회귀 방지 검사 수준에서 충족됐다. main tab/page 전체를 기본 scroll owner로 두지 않는 원칙이 durable instructions, UI tone policy, memory bootstrap, renderer checker에 반영됐다. 검증 python3 tools/docs audit/src/docs audit.py check 통과. PYTHONPATH=src pytho",
+          "updatedAt": "2026-06-06T03:35:44.386Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18384,16 +18424,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-comprehensive-improvement-ko-md",
-          "path": "_history/plans/2026/2026-06-06-comprehensive-improvement.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "2026 06 06 종합 개선 구현 계획",
-          "excerpt": "2026 06 06 종합 개선 구현 계획 목표 platform desktop app 의 EVAL 탭에 종합 개선 cockpit를 추가해 성능, UX, 네이티브 리소스, EVAL 근거, 패키징, 오픈소스 활용, 자동화 연속성을 한 화면에서 비교한다. 단계 1. 웹 기준과 저장소 hot anchor 확인. 2. 대범위 요청을 EvaluationReportPanel 중심 slice로 분해. 3. 종합 개선 점수 모델과 7개 차원을 UI에 구현. 4. CSS를 추가해 desktop dense surfac",
-          "updatedAt": "2026-06-06T00:02:05.908Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-contextual-button-feedback-ko-md",
           "path": "_history/plans/2026/2026-06-06-contextual-button-feedback.ko.md",
           "category": "plan",
@@ -18411,6 +18441,16 @@
           "title": "2026 06 06 EVAL runtime telemetry source refactor 계획",
           "excerpt": "2026 06 06 EVAL runtime telemetry source refactor 계획 선택 이유 사용자가 소스 개선을 요청했다. 가장 최근 변경에서 EVAL runtime telemetry score 계산이 UI component 내부에 커졌으므로, 기능 변화 없이 소스 구조를 개선하기 좋은 위치다. 실행 순서 1. Web first intake와 memory bootstrap. 2. EvaluationReportPanel.tsx runtime telemetry 계산 위치 확인. 3. h",
           "updatedAt": "2026-06-06T00:35:29.577Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-plans-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+          "path": "_history/plans/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "작업 계획: Main Tab Scroll Scope Policy",
+          "excerpt": "작업 계획: Main Tab Scroll Scope Policy 날짜: 2026 06 06 계획 web first intake로 scroll/nested scroll 기준을 확인한다. 사용자 지시를 durable UI rule로 정리한다. policy, persistent instructions, memory bootstrap, renderer static checker를 같은 방향으로 맞춘다. 새 화면 구현은 하지 않고 회귀 방지 계약을 강화한다. docs/config/renderer check",
+          "updatedAt": "2026-06-06T03:34:28.044Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18504,16 +18544,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: 데스크톱 크롬 디자인 개선",
-          "excerpt": "요청 결과 추적: 데스크톱 크롬 디자인 개선 요청 사용자: 디자인개선 해석: 앞선 반복 맥락을 포함해 기본 버튼 느낌, 평면적인 화면, 탭/사이드바/선택 UI의 시각적 불편함을 줄인다. 결과 구현 완료. 테스트, 빌드, 내부 패키징, Browser smoke 완료. 주요 변경 파일 platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/tests/tool",
-          "updatedAt": "2026-06-05T23:54:07.600Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-06-desktop-dev-run-fix-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-desktop-dev-run-fix.ko.md",
           "category": "request-trace",
@@ -18551,6 +18581,16 @@
           "title": "2026 06 06 request to outcome trace",
           "excerpt": "2026 06 06 request to outcome trace 요청 소스개선. 결정 가장 최근 변경에서 커진 EVAL runtime telemetry 계산을 source 구조 개선 대상으로 선택했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationRuntimeTelemetry.ts platform desktop app/renderer/workspace monitor/components/featur",
           "updatedAt": "2026-06-06T00:48:37.023Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Request Trace: Main Tab Scroll Scope Policy",
+          "excerpt": "Request Trace: Main Tab Scroll Scope Policy 날짜: 2026 06 06 요청 스크롤은 code, 기능 목록, popup 같은 제한된 곳에서만 최대한 쓰고, 메인 화면/tab 전체를 scroll 영역으로 만드는 것을 자제해 달라는 UI 운영 지침. 결과 durable instructions와 AGENTS.md 에 main tab/page scroll ownership 제한을 추가했다. UI tone policy 한/영 문서에 근거, 원칙, 검증 항목을 추가했다. m",
+          "updatedAt": "2026-06-06T03:34:28.044Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18624,16 +18664,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-comprehensive-improvement-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-comprehensive-improvement.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "2026 06 06 사용자 요청 요약",
-          "excerpt": "2026 06 06 사용자 요청 요약 요약 사용자는 누적된 성능, UI, 기능, 사용성, 디자인, 네이티브 자원 활용, EVAL, 오픈소스 참고, 기록 기반 개선 요구를 종합해 전체 개선을 요청했다. 해석 전 저장소 무차별 변경이 아니라, 실제 제품에서 종합 개선을 계속 판단하고 우선순위를 정할 수 있는 구조가 필요하다. 기존 platform desktop app 의 EVAL 탭이 현재 작업, 히스토리, 토큰/툴, 오픈소스 EVAL 후보를 이미 모으므로 첫 구현 slice로 적합하다. 적용 범위 ",
-          "updatedAt": "2026-06-06T00:06:23.551Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-contextual-button-feedback-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-contextual-button-feedback.ko.md",
           "category": "user-request",
@@ -18641,16 +18671,6 @@
           "title": "사용자 요청 요약",
           "excerpt": "사용자 요청 요약 원문 취지 버튼을 눌렀을 때 나오는 내용이 너무 범용적이므로, 사용자가 누른 버튼의 맥락과 결과를 더 직접적으로 알 수 있게 고친다. 적용 범위 데스크톱 런타임 주요 실행 버튼 Quick Start / Command Palette / Workspace Host / Runtime Data / Service Readiness / Task Run / Agent CLI Cockpit 구현 후 빌드와 패키징 자동 실행",
           "updatedAt": "2026-06-06T02:51:44.117Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약",
-          "excerpt": "사용자 요청 요약 날짜 2026 06 06 요약 사용자는 데스크톱 앱의 전반적인 디자인 개선을 요청했다. 앞선 반복 요청 맥락에는 기본 버튼 느낌 제거, 선택 UI 개선, 탭/사이드바의 시각적 불편함 개선, 데스크톱 앱다운 작업면 강화가 포함되어 있었다. 이번 응답 범위 공통 디자인 토큰과 실제 렌더되는 데스크톱 크롬/레일/툴 스튜디오 버튼 표면 개선 테스트, 빌드, 내부 패키징, Browser smoke까지 실행",
-          "updatedAt": "2026-06-05T23:51:36.205Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18691,6 +18711,16 @@
           "title": "2026 06 06 사용자 요청 요약",
           "excerpt": "2026 06 06 사용자 요청 요약 요청 소스개선. 해석 직전 EVAL runtime telemetry 작업의 source 구조를 개선한다. 새 기능보다 유지보수성, 계산/렌더링 책임 분리, 테스트 가능한 source boundary를 우선한다.",
           "updatedAt": "2026-06-06T00:35:29.577Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: Main Tab Scroll Scope Policy",
+          "excerpt": "사용자 요청 요약: Main Tab Scroll Scope Policy 날짜: 2026 06 06 요지 사용자는 코드, 기능 목록, popup 같은 제한된 영역에서만 scroll을 쓰고, 메인 화면이나 tab 전체에 scroll 영역을 거는 것을 기본적으로 자제하라고 지시했다. 의도 데스크톱 앱의 넓은 화면을 main surface로 활용한다. 전체 tab scroll과 nested scroll이 겹쳐 생기는 불편함을 줄인다. code/log/list/dialog처럼 실제로 overflow가 필요",
+          "updatedAt": "2026-06-06T03:34:28.042Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18764,16 +18794,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-comprehensive-improvement-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-comprehensive-improvement.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "2026 06 06 종합 개선 웹 검색 기록",
-          "excerpt": "2026 06 06 종합 개선 웹 검색 기록 요청 요약 사용자는 기존 성능, UI, 기능, 사용성, 디자인, 운영체제 자원 활용, 오픈소스 참고, EVAL, 기록 기반 개선 요구를 종합해 전체 개선을 요구했다. 범위가 넓으므로 바로 전 파일을 훑지 않고 웹 기준과 저장소 대표 샘플을 결합해 첫 구현 slice를 선정했다. 검색 쿼리 desktop app UX performance accessibility design system best practices official Tauri desktop ",
-          "updatedAt": "2026-06-06T00:02:05.907Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-contextual-button-feedback-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-contextual-button-feedback.ko.md",
           "category": "web-search",
@@ -18821,6 +18841,16 @@
           "title": "2026 06 06 EVAL runtime telemetry source refactor 웹 검색 기록",
           "excerpt": "2026 06 06 EVAL runtime telemetry source refactor 웹 검색 기록 요청 사용자가 \"소스개선\"을 요청했다. 검색 쿼리 React official docs extracting logic into custom hooks or separate functions maintainability useMemo TypeScript handbook modules type only imports official documentation Tauri v2 official docs s",
           "updatedAt": "2026-06-06T00:35:29.575Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: Main Tab Scroll Scope Policy",
+          "excerpt": "Web Search: Main Tab Scroll Scope Policy 날짜: 2026 06 06 Queries Apple Human Interface Guidelines Scrolling macOS scroll views Microsoft Fluent UI scroll controls guidance scroll containers Baymard nested scrolling usability issue 확인한 출처 Apple Human Interface Guidelines, Scroll Vi",
+          "updatedAt": "2026-06-06T03:34:28.041Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18894,16 +18924,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-comprehensive-improvement-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-comprehensive-improvement.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "2026 06 06 종합 개선 작업 요약",
-          "excerpt": "2026 06 06 종합 개선 작업 요약 완료한 일 EVAL 탭에 data eval comprehensive improvement=\"all signal cockpit\" 종합 개선 cockpit를 추가했다. 7개 개선 차원 desktop performance , ux control clarity , native resource lifecycle , eval evidence , release packaging , open source leverage , automation continuity 을 점수",
-          "updatedAt": "2026-06-06T00:06:23.551Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-contextual-button-feedback-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-contextual-button-feedback.ko.md",
           "category": "work-summary",
@@ -18911,16 +18931,6 @@
           "title": "작업 요약",
           "excerpt": "작업 요약 데스크톱 런타임 버튼 클릭 결과가 범용 notice처럼 보이는 문제를 줄이기 위해 버튼별 액션 피드백 카드를 추가했다. 각 피드백은 액션명, 대상, 상태, 결과, 다음 확인 위치를 보여준다. 주요 버튼에는 현재 액션 상태 class와 data desktop action feedback 를 부여했다. 검증은 renderer collect/check/test/build, Playwright DOM/CSS smoke, 내부 데스크톱 패키징, codesign verify, DMG verify까",
           "updatedAt": "2026-06-06T02:55:18.302Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: 데스크톱 크롬 디자인 개선",
-          "excerpt": "작업 요약: 데스크톱 크롬 디자인 개선 변경 workspace monitor 공통 CSS에 chrome/rail/section/control depth token 추가. 좌측 activity rail active/current 상태, titlebar elevation, panel elevation 개선. section tab/panel heading button 계약 개선. 실제 툴 스튜디오 depth/mode/action 버튼에 choice background와 active shadow 적용. ",
-          "updatedAt": "2026-06-05T23:51:36.205Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18961,6 +18971,16 @@
           "title": "2026 06 06 EVAL runtime telemetry source refactor 작업 요약",
           "excerpt": "2026 06 06 EVAL runtime telemetry source refactor 작업 요약 구현 EvaluationReportPanel.tsx 에서 runtime telemetry type, score 계산, byte formatting, telemetry row construction을 분리했다. 새 evaluationRuntimeTelemetry.ts pure TypeScript module을 추가했다. comprehensive improvement contract check, wor",
           "updatedAt": "2026-06-06T00:48:37.022Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: Main Tab Scroll Scope Policy",
+          "excerpt": "작업 요약: Main Tab Scroll Scope Policy 날짜: 2026 06 06 완료 main tab/page 전체를 기본 scroll owner로 두지 않는 지속 UI 원칙을 추가했다. code, terminal/log, 긴 목록, popup/dialog/flyout, inspector 같은 bounded child surface는 허용 scroll 영역으로 명명했다. UI tone policy와 memory bootstrap anchor를 갱신했다. workspace monitor ",
+          "updatedAt": "2026-06-06T03:35:44.386Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19094,6 +19114,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-timings-2026-2026-06-06-main-tab-scroll-scope-policy-json",
+          "path": "_history/work-timings/2026/2026-06-06-main-tab-scroll-scope-policy.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Main Tab Scroll Scope Policy",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"slug\": \"main tab scroll scope policy\", \"phases\": { \"phase\": \"web first intake\", \"approx minutes\": 3 }, { \"phase\": \"source and policy inspection\", \"approx minutes\": 6 }, { \"phase\": \"policy and checker patch\", \"approx minutes\": 12 }, { \"phase\": \"history and",
+          "updatedAt": "2026-06-06T03:34:28.044Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-parallel-snapshot-collector-ko-md",
           "path": "_history/work-timings/2026/2026-06-06-parallel-snapshot-collector.ko.md",
           "category": "work-timing",
@@ -19142,36 +19172,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2624,
+      "documents": 2632,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1015
+          "count": 1017
         },
         {
           "category": "web-search",
-          "count": 416
+          "count": 417
         },
         {
           "category": "plan",
-          "count": 350
+          "count": 351
         },
         {
           "category": "request-trace",
-          "count": 344
+          "count": 345
         },
         {
           "category": "work-timing",
-          "count": 265
+          "count": 266
         },
         {
           "category": "user-request",
-          "count": 129
+          "count": 130
         },
         {
           "category": "work-summary",
-          "count": 96
+          "count": 97
         },
         {
           "category": "daily-history",
@@ -19182,7 +19212,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6550638,
+      "totalSourceBytes": 6560487,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19207,11 +19237,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 31,
+      "evidenceEvents": 32,
       "decisionEvents": 0,
-      "openSignals": 18,
+      "openSignals": 19,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T03:27:40.048Z",
+      "latestEventAt": "2026-06-06T03:35:44.387Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19223,16 +19253,11 @@
       {
         "id": "verification",
         "label": "verification",
-        "count": 18
+        "count": 19
       },
       {
-        "id": "delivery",
-        "label": "delivery",
-        "count": 14
-      },
-      {
-        "id": "intake",
-        "label": "intake",
+        "id": "monitoring",
+        "label": "monitoring",
         "count": 14
       },
       {
@@ -19241,13 +19266,18 @@
         "count": 14
       },
       {
+        "id": "delivery",
+        "label": "delivery",
+        "count": 13
+      },
+      {
         "id": "evidence",
         "label": "evidence",
         "count": 13
       },
       {
-        "id": "monitoring",
-        "label": "monitoring",
+        "id": "intake",
+        "label": "intake",
         "count": 13
       },
       {
@@ -19270,16 +19300,11 @@
       {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 18
+        "count": 19
       },
       {
-        "id": "intake",
-        "label": "intake",
-        "count": 14
-      },
-      {
-        "id": "summary",
-        "label": "summary",
+        "id": "timing",
+        "label": "timing",
         "count": 14
       },
       {
@@ -19288,8 +19313,13 @@
         "count": 14
       },
       {
-        "id": "timing",
-        "label": "timing",
+        "id": "intake",
+        "label": "intake",
+        "count": 13
+      },
+      {
+        "id": "summary",
+        "label": "summary",
         "count": 13
       },
       {
@@ -19322,6 +19352,141 @@
     ],
     "events": [
       {
+        "id": "history-history-2026-2026-06-06-md",
+        "sourceType": "history",
+        "signalType": "history",
+        "lane": "history",
+        "severity": "info",
+        "status": "daily-history",
+        "title": "2026 06 06",
+        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
+        "path": "_history/2026/2026-06-06.md",
+        "category": "daily-history",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:35:44.387Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "평가: Main Tab Scroll Scope Policy",
+        "detail": "평가: Main Tab Scroll Scope Policy 날짜: 2026 06 06 결론 요청은 정책과 회귀 방지 검사 수준에서 충족됐다. main tab/page 전체를 기본 scroll owner로 두지 않는 원칙이 durable instructions, UI tone policy, memory bootstrap, renderer checker에 반영됐다. 검증 python3 tools/docs audit/src/docs audit.py check 통과. PYTHONPATH=src pytho",
+        "path": "_history/evaluations/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:35:44.386Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "작업 요약: Main Tab Scroll Scope Policy",
+        "detail": "작업 요약: Main Tab Scroll Scope Policy 날짜: 2026 06 06 완료 main tab/page 전체를 기본 scroll owner로 두지 않는 지속 UI 원칙을 추가했다. code, terminal/log, 긴 목록, popup/dialog/flyout, inspector 같은 bounded child surface는 허용 scroll 영역으로 명명했다. UI tone policy와 memory bootstrap anchor를 갱신했다. workspace monitor ",
+        "path": "_history/work-summaries/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:35:44.386Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-main-tab-scroll-scope-policy-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "evaluation",
+        "title": "2026 06 06 Main Tab Scroll Scope Policy Evaluation Input",
+        "detail": "{ \"date\": \"2026 06 06\", \"work id\": \"2026 06 06 main tab scroll scope policy\", \"project\": \"platform desktop app\", \"work mode\": \"governance\", \"view mode\": \"superadmin developer\", \"install mode\": \"developer\", \"installation occurred\": false, \"resource risk occurred\": false, \"cli pipe",
+        "path": "_history/evaluations/2026/2026-06-06-main-tab-scroll-scope-policy-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:34:28.045Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-main-tab-scroll-scope-policy-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Main Tab Scroll Scope Policy",
+        "detail": "{ \"date\": \"2026 06 06\", \"slug\": \"main tab scroll scope policy\", \"phases\": { \"phase\": \"web first intake\", \"approx minutes\": 3 }, { \"phase\": \"source and policy inspection\", \"approx minutes\": 6 }, { \"phase\": \"policy and checker patch\", \"approx minutes\": 12 }, { \"phase\": \"history and",
+        "path": "_history/work-timings/2026/2026-06-06-main-tab-scroll-scope-policy.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:34:28.044Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Main Tab Scroll Scope Policy",
+        "detail": "Request Trace: Main Tab Scroll Scope Policy 날짜: 2026 06 06 요청 스크롤은 code, 기능 목록, popup 같은 제한된 곳에서만 최대한 쓰고, 메인 화면/tab 전체를 scroll 영역으로 만드는 것을 자제해 달라는 UI 운영 지침. 결과 durable instructions와 AGENTS.md 에 main tab/page scroll ownership 제한을 추가했다. UI tone policy 한/영 문서에 근거, 원칙, 검증 항목을 추가했다. m",
+        "path": "_history/request-traces/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:34:28.044Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "작업 계획: Main Tab Scroll Scope Policy",
+        "detail": "작업 계획: Main Tab Scroll Scope Policy 날짜: 2026 06 06 계획 web first intake로 scroll/nested scroll 기준을 확인한다. 사용자 지시를 durable UI rule로 정리한다. policy, persistent instructions, memory bootstrap, renderer static checker를 같은 방향으로 맞춘다. 새 화면 구현은 하지 않고 회귀 방지 계약을 강화한다. docs/config/renderer check",
+        "path": "_history/plans/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:34:28.044Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: Main Tab Scroll Scope Policy",
+        "detail": "사용자 요청 요약: Main Tab Scroll Scope Policy 날짜: 2026 06 06 요지 사용자는 코드, 기능 목록, popup 같은 제한된 영역에서만 scroll을 쓰고, 메인 화면이나 tab 전체에 scroll 영역을 거는 것을 기본적으로 자제하라고 지시했다. 의도 데스크톱 앱의 넓은 화면을 main surface로 활용한다. 전체 tab scroll과 nested scroll이 겹쳐 생기는 불편함을 줄인다. code/log/list/dialog처럼 실제로 overflow가 필요",
+        "path": "_history/user-requests/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:34:28.042Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Main Tab Scroll Scope Policy",
+        "detail": "Web Search: Main Tab Scroll Scope Policy 날짜: 2026 06 06 Queries Apple Human Interface Guidelines Scrolling macOS scroll views Microsoft Fluent UI scroll controls guidance scroll containers Baymard nested scrolling usability issue 확인한 출처 Apple Human Interface Guidelines, Scroll Vi",
+        "path": "_history/web-searches/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:34:28.041Z"
+      },
+      {
         "id": "history-history-evaluations-2026-2026-06-06-cli-scroll-isolation-evaluation-result-json",
         "sourceType": "history",
         "signalType": "evaluation",
@@ -19335,21 +19500,6 @@
         "language": "unknown",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T03:27:40.048Z"
-      },
-      {
-        "id": "history-history-2026-2026-06-06-md",
-        "sourceType": "history",
-        "signalType": "history",
-        "lane": "history",
-        "severity": "info",
-        "status": "daily-history",
-        "title": "2026 06 06",
-        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-        "path": "_history/2026/2026-06-06.md",
-        "category": "daily-history",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T03:27:15.270Z"
       },
       {
         "id": "history-history-evaluations-2026-2026-06-06-cli-scroll-isolation-ko-md",
@@ -20640,126 +20790,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T00:06:23.552Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-comprehensive-improvement-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "2026 06 06 사용자 요청 요약",
-        "detail": "2026 06 06 사용자 요청 요약 요약 사용자는 누적된 성능, UI, 기능, 사용성, 디자인, 네이티브 자원 활용, EVAL, 오픈소스 참고, 기록 기반 개선 요구를 종합해 전체 개선을 요청했다. 해석 전 저장소 무차별 변경이 아니라, 실제 제품에서 종합 개선을 계속 판단하고 우선순위를 정할 수 있는 구조가 필요하다. 기존 platform desktop app 의 EVAL 탭이 현재 작업, 히스토리, 토큰/툴, 오픈소스 EVAL 후보를 이미 모으므로 첫 구현 slice로 적합하다. 적용 범위 ",
-        "path": "_history/user-requests/2026/2026-06-06-comprehensive-improvement.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:06:23.551Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-comprehensive-improvement-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "2026 06 06 종합 개선 작업 요약",
-        "detail": "2026 06 06 종합 개선 작업 요약 완료한 일 EVAL 탭에 data eval comprehensive improvement=\"all signal cockpit\" 종합 개선 cockpit를 추가했다. 7개 개선 차원 desktop performance , ux control clarity , native resource lifecycle , eval evidence , release packaging , open source leverage , automation continuity 을 점수",
-        "path": "_history/work-summaries/2026/2026-06-06-comprehensive-improvement.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:06:23.551Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-comprehensive-improvement-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "2026 06 06 종합 개선 구현 계획",
-        "detail": "2026 06 06 종합 개선 구현 계획 목표 platform desktop app 의 EVAL 탭에 종합 개선 cockpit를 추가해 성능, UX, 네이티브 리소스, EVAL 근거, 패키징, 오픈소스 활용, 자동화 연속성을 한 화면에서 비교한다. 단계 1. 웹 기준과 저장소 hot anchor 확인. 2. 대범위 요청을 EvaluationReportPanel 중심 slice로 분해. 3. 종합 개선 점수 모델과 7개 차원을 UI에 구현. 4. CSS를 추가해 desktop dense surfac",
-        "path": "_history/plans/2026/2026-06-06-comprehensive-improvement.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:02:05.908Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-comprehensive-improvement-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "2026 06 06 종합 개선 웹 검색 기록",
-        "detail": "2026 06 06 종합 개선 웹 검색 기록 요청 요약 사용자는 기존 성능, UI, 기능, 사용성, 디자인, 운영체제 자원 활용, 오픈소스 참고, EVAL, 기록 기반 개선 요구를 종합해 전체 개선을 요구했다. 범위가 넓으므로 바로 전 파일을 훑지 않고 웹 기준과 저장소 대표 샘플을 결합해 첫 구현 slice를 선정했다. 검색 쿼리 desktop app UX performance accessibility design system best practices official Tauri desktop ",
-        "path": "_history/web-searches/2026/2026-06-06-comprehensive-improvement.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T00:02:05.907Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "ready",
-        "title": "요청 결과 추적: 데스크톱 크롬 디자인 개선",
-        "detail": "요청 결과 추적: 데스크톱 크롬 디자인 개선 요청 사용자: 디자인개선 해석: 앞선 반복 맥락을 포함해 기본 버튼 느낌, 평면적인 화면, 탭/사이드바/선택 UI의 시각적 불편함을 줄인다. 결과 구현 완료. 테스트, 빌드, 내부 패키징, Browser smoke 완료. 주요 변경 파일 platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/tests/tool",
-        "path": "_history/request-traces/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:54:07.600Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "최종 평가: 데스크톱 크롬 디자인 개선",
-        "detail": "최종 평가: 데스크톱 크롬 디자인 개선 결과 통과. 요청한 디자인 개선을 공통 토큰, 좌측 레일, 상단바, 섹션 탭 계약, 패널, 툴 스튜디오 실제 버튼 표면에 반영했다. 구현 평가 기본 버튼 느낌을 줄이기 위해 chrome shadow , rail shadow , section tab shadow , section tab active shadow , surface edge highlight , control press shadow 를 추가했다. activity rail은 active와 aria ",
-        "path": "_history/evaluations/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:51:36.205Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약",
-        "detail": "사용자 요청 요약 날짜 2026 06 06 요약 사용자는 데스크톱 앱의 전반적인 디자인 개선을 요청했다. 앞선 반복 요청 맥락에는 기본 버튼 느낌 제거, 선택 UI 개선, 탭/사이드바의 시각적 불편함 개선, 데스크톱 앱다운 작업면 강화가 포함되어 있었다. 이번 응답 범위 공통 디자인 토큰과 실제 렌더되는 데스크톱 크롬/레일/툴 스튜디오 버튼 표면 개선 테스트, 빌드, 내부 패키징, Browser smoke까지 실행",
-        "path": "_history/user-requests/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:51:36.205Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: 데스크톱 크롬 디자인 개선",
-        "detail": "작업 요약: 데스크톱 크롬 디자인 개선 변경 workspace monitor 공통 CSS에 chrome/rail/section/control depth token 추가. 좌측 activity rail active/current 상태, titlebar elevation, panel elevation 개선. section tab/panel heading button 계약 개선. 실제 툴 스튜디오 depth/mode/action 버튼에 choice background와 active shadow 적용. ",
-        "path": "_history/work-summaries/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:51:36.205Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23763,12 +23793,12 @@
       {
         "category": "work-summary",
         "root": "_history/work-summaries",
-        "documentsCount": 14
+        "documentsCount": 13
       },
       {
         "category": "user-request",
         "root": "_history/user-requests",
-        "documentsCount": 14
+        "documentsCount": 13
       },
       {
         "category": "intent-feature-map",
@@ -23788,7 +23818,7 @@
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 13
+        "documentsCount": 14
       },
       {
         "category": "plan",
@@ -23798,7 +23828,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 18
+        "documentsCount": 19
       },
       {
         "category": "daily-history",
@@ -23842,7 +23872,7 @@
           "transient tool output"
         ],
         "uiEntry": "Overview, History, Documents, Requirements",
-        "documentCount": 123,
+        "documentCount": 124,
         "sourceFileCount": 0
       },
       {
@@ -23892,7 +23922,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 71,
+        "documentCount": 70,
         "sourceFileCount": 5
       },
       {
@@ -27732,13 +27762,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3764,
+      "sourceDocuments": 3778,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T03:28:06.114Z"
+      "latestInsightAt": "2026-06-06T03:36:17.337Z"
     },
     "inferenceStages": [
       {
@@ -27806,11 +27836,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 451,
+        "signalCount": 453,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 145
+            "count": 146
           },
           {
             "category": "project-spec",
@@ -27818,7 +27848,7 @@
           },
           {
             "category": "request-trace",
-            "count": 68
+            "count": 69
           },
           {
             "category": "user-request",
@@ -27865,7 +27895,7 @@
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장"
         ],
-        "latestEvidenceAt": "2026-06-06T03:28:06.114Z"
+        "latestEvidenceAt": "2026-06-06T03:35:44.387Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27879,19 +27909,19 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1727,
+        "signalCount": 1732,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 489
+            "count": 491
           },
           {
             "category": "evaluation",
-            "count": 465
+            "count": 466
           },
           {
             "category": "web-search",
-            "count": 417
+            "count": 418
           },
           {
             "category": "plan",
@@ -27899,7 +27929,7 @@
           },
           {
             "category": "request-trace",
-            "count": 110
+            "count": 111
           },
           {
             "category": "work-timing",
@@ -27930,7 +27960,7 @@
           "2026 05 31 작업 모드 라우팅 계획 기록",
           "계획 히스토리: 코딩 조사 출처 다양성 강화"
         ],
-        "latestEvidenceAt": "2026-06-06T03:28:06.114Z"
+        "latestEvidenceAt": "2026-06-06T03:36:17.337Z"
       },
       {
         "id": "large-scope-slicing",
@@ -27944,15 +27974,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 998,
+        "signalCount": 1000,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 487
+            "count": 488
           },
           {
             "category": "plan",
-            "count": 290
+            "count": 291
           },
           {
             "category": "request-trace",
@@ -28003,7 +28033,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T03:27:40.048Z"
+        "latestEvidenceAt": "2026-06-06T03:35:44.387Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28017,15 +28047,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 668,
+        "signalCount": 675,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 269
+            "count": 273
           },
           {
             "category": "evaluation",
-            "count": 233
+            "count": 235
           },
           {
             "category": "web-search",
@@ -28033,7 +28063,7 @@
           },
           {
             "category": "work-summary",
-            "count": 33
+            "count": 34
           },
           {
             "category": "plan",
@@ -28076,7 +28106,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-06T03:27:15.270Z"
+        "latestEvidenceAt": "2026-06-06T03:36:17.337Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28090,19 +28120,19 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1475,
+        "signalCount": 1482,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 635
+            "count": 639
           },
           {
             "category": "evaluation",
-            "count": 518
+            "count": 519
           },
           {
             "category": "user-request",
-            "count": 95
+            "count": 96
           },
           {
             "category": "request-trace",
@@ -28110,7 +28140,7 @@
           },
           {
             "category": "work-summary",
-            "count": 53
+            "count": 54
           },
           {
             "category": "plan",
@@ -28149,7 +28179,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T03:27:40.048Z"
+        "latestEvidenceAt": "2026-06-06T03:36:17.337Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28225,14 +28255,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3764,
+      "sourceDocuments": 3778,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T03:28:06.114Z"
+      "latestInsightAt": "2026-06-06T03:36:17.337Z"
     },
     "operatingModel": [
       {
@@ -28290,25 +28320,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3176,
+        "signalCount": 3185,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1727
+            "signalCount": 1732
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 998
+            "signalCount": 1000
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 451
+            "signalCount": 453
           }
         ],
         "missingPatternIds": [],
@@ -28336,7 +28366,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T03:28:06.114Z",
+        "latestEvidenceAt": "2026-06-06T03:36:17.337Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28365,13 +28395,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 787,
+        "signalCount": 794,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 668
+            "signalCount": 675
           },
           {
             "id": "release-blocker-gate",
@@ -28405,7 +28435,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T03:27:15.270Z",
+        "latestEvidenceAt": "2026-06-06T03:36:17.337Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28434,19 +28464,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2473,
+        "signalCount": 2482,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1475
+            "signalCount": 1482
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 998
+            "signalCount": 1000
           }
         ],
         "missingPatternIds": [],
@@ -28474,7 +28504,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T03:27:40.048Z",
+        "latestEvidenceAt": "2026-06-06T03:36:17.337Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28503,13 +28533,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 570,
+        "signalCount": 572,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 451
+            "signalCount": 453
           },
           {
             "id": "release-blocker-gate",
@@ -28543,7 +28573,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T03:28:06.114Z",
+        "latestEvidenceAt": "2026-06-06T03:35:44.387Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28572,19 +28602,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2725,
+        "signalCount": 2732,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 998
+            "signalCount": 1000
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1727
+            "signalCount": 1732
           }
         ],
         "missingPatternIds": [],
@@ -28612,7 +28642,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T03:28:06.114Z",
+        "latestEvidenceAt": "2026-06-06T03:36:17.337Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28641,7 +28671,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1846,
+        "signalCount": 1851,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28653,7 +28683,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1727
+            "signalCount": 1732
           }
         ],
         "missingPatternIds": [],
@@ -28681,7 +28711,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T03:28:06.114Z",
+        "latestEvidenceAt": "2026-06-06T03:36:17.337Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

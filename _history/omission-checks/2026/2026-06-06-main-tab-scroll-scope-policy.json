@@ -1,0 +1,24 @@
+{
+  "date": "2026-06-06",
+  "slug": "main-tab-scroll-scope-policy",
+  "request_coverage": [
+    {
+      "request": "Use scroll mostly for code, feature lists, and popups.",
+      "status": "covered",
+      "evidence": "UI policy names code editors/viewers, terminal/log panes, long lists, popup/dialog/flyout menus, and inspector panes as bounded scroll surfaces."
+    },
+    {
+      "request": "Avoid applying scroll to the whole main tab/screen whenever possible.",
+      "status": "covered",
+      "evidence": "Persistent instructions and `check-scroll-containers.mjs` prohibit whole-tab scroll ownership on `.desktop-viewport` and `.mounted-section-panel`."
+    },
+    {
+      "request": "Make it durable for future UI work.",
+      "status": "covered",
+      "evidence": "AGENTS, persistent instructions, UI tone policy, memory bootstrap, requirements, and trace records were updated."
+    }
+  ],
+  "known_limits": [
+    "This slice adds policy and regression checks; it does not redesign every existing screen."
+  ]
+}
