@@ -835,7 +835,7 @@ export function ToolStudioPanel({
               </Button>
             </DropdownMenu.Trigger>
             <DropdownMenu.Portal>
-              <DropdownMenu.Content className="tool-menu-content" sideOffset={8} align="end">
+              <DropdownMenu.Content className="tool-menu-content" sideOffset={8} align="end" collisionPadding={16}>
                 {toolStudioStages.map((stageItem) => (
                   <DropdownMenu.Group key={stageItem.id}>
                     <DropdownMenu.Label className="tool-menu-label">
@@ -877,7 +877,7 @@ export function ToolStudioPanel({
               </Button>
             </DropdownMenu.Trigger>
             <DropdownMenu.Portal>
-              <DropdownMenu.Content className="tool-menu-content" sideOffset={8} align="end" data-tool-action-menu>
+              <DropdownMenu.Content className="tool-menu-content" sideOffset={8} align="end" collisionPadding={16} data-tool-action-menu>
                 <DropdownMenu.Label className="tool-menu-label">
                   {ko ? "빠른 작업" : "Quick actions"}
                 </DropdownMenu.Label>
@@ -964,7 +964,7 @@ export function ToolStudioPanel({
               </button>
             </ContextMenu.Trigger>
             <ContextMenu.Portal>
-              <ContextMenu.Content className="tool-context-content" data-tool-stage-context-menu={item.id}>
+              <ContextMenu.Content className="tool-context-content" collisionPadding={16} data-tool-stage-context-menu={item.id}>
                 <ContextMenu.Label className="tool-menu-label">
                   {labelFor(language, item.labelKo, item.labelEn)}
                 </ContextMenu.Label>
@@ -1009,7 +1009,7 @@ export function ToolStudioPanel({
               </button>
             </ContextMenu.Trigger>
             <ContextMenu.Portal>
-              <ContextMenu.Content className="tool-context-content" data-tool-mode-context-menu={item.id}>
+              <ContextMenu.Content className="tool-context-content" collisionPadding={16} data-tool-mode-context-menu={item.id}>
                 <ContextMenu.Label className="tool-menu-label">
                   {labelFor(language, item.labelKo, item.labelEn)}
                 </ContextMenu.Label>
@@ -1076,7 +1076,7 @@ export function ToolStudioPanel({
                   </article>
                 </ContextMenu.Trigger>
                 <ContextMenu.Portal>
-                  <ContextMenu.Content className="tool-context-content" data-tool-context-menu>
+                  <ContextMenu.Content className="tool-context-content" collisionPadding={16} data-tool-context-menu>
                     <ContextMenu.Label className="tool-menu-label">
                       {labelFor(language, tool.labelKo, tool.labelEn)}
                     </ContextMenu.Label>

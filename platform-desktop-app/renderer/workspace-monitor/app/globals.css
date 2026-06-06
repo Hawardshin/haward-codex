@@ -76,6 +76,10 @@
   --scrollbar-track: color-mix(in srgb, var(--surface-muted) 68%, transparent);
   --scrollbar-thumb: #b5c2d1;
   --scrollbar-thumb-hover: #8798aa;
+  --popup-layer-z: 140;
+  --popup-viewport-gap: 16px;
+  --popup-max-block-size: min(420px, calc(100dvh - (var(--popup-viewport-gap) * 2)));
+  --popup-shadow: 0 24px 56px rgba(17, 24, 39, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.72) inset;
   --soft-shadow: 0 1px 2px rgba(17, 24, 39, 0.04), 0 8px 24px rgba(17, 24, 39, 0.05);
   --shell-shadow: 0 1px 2px rgba(17, 24, 39, 0.04), 0 18px 48px rgba(17, 24, 39, 0.08);
   --focus-shadow: 0 1px 2px rgba(17, 24, 39, 0.05), 0 24px 64px rgba(17, 24, 39, 0.1);
@@ -258,6 +262,7 @@
   --scrollbar-track: color-mix(in srgb, var(--surface-muted) 62%, transparent);
   --scrollbar-thumb: #526276;
   --scrollbar-thumb-hover: #718399;
+  --popup-shadow: 0 24px 56px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
   --soft-shadow: 0 1px 2px rgba(0, 0, 0, 0.34), 0 12px 34px rgba(0, 0, 0, 0.24);
   --shell-shadow: 0 1px 2px rgba(0, 0, 0, 0.36), 0 24px 64px rgba(0, 0, 0, 0.32);
   --focus-shadow: 0 1px 2px rgba(0, 0, 0, 0.38), 0 30px 78px rgba(0, 0, 0, 0.36);
@@ -6478,17 +6483,20 @@ h3 {
 }
 
 .app-choice-menu {
-  z-index: 90;
+  --popup-available-block-size: var(--radix-dropdown-menu-content-available-height, var(--popup-max-block-size));
+  z-index: var(--popup-layer-z);
   width: min(340px, calc(100vw - 32px));
-  max-height: min(380px, 68vh);
+  max-height: min(var(--popup-max-block-size), var(--popup-available-block-size));
   overflow: auto;
+  overscroll-behavior: contain;
   border: 1px solid color-mix(in srgb, var(--line) 78%, var(--blue) 12%);
   background: var(--surface);
   color: var(--text);
   border-radius: 8px;
   padding: 6px;
-  box-shadow: 0 20px 48px rgba(17, 24, 39, 0.2);
+  box-shadow: var(--popup-shadow);
   animation: workspace-menu-enter var(--motion-duration-fast) var(--motion-ease-out) both;
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin, top center);
   scrollbar-gutter: stable;
 }
 
@@ -13836,17 +13844,20 @@ h3 {
 }
 
 .source-file-picker-menu {
-  z-index: 90;
+  --popup-available-block-size: var(--radix-dropdown-menu-content-available-height, var(--popup-max-block-size));
+  z-index: var(--popup-layer-z);
   width: min(720px, calc(100vw - 32px));
-  max-height: min(430px, 70vh);
+  max-height: min(var(--popup-max-block-size), var(--popup-available-block-size));
   overflow: auto;
+  overscroll-behavior: contain;
   padding: 6px;
   border: 1px solid color-mix(in srgb, var(--line) 78%, var(--blue) 12%);
   border-radius: 8px;
   color: var(--text);
   background: var(--surface);
-  box-shadow: 0 20px 48px rgba(17, 24, 39, 0.2);
+  box-shadow: var(--popup-shadow);
   animation: workspace-menu-enter var(--motion-duration-fast) var(--motion-ease-out) both;
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin, top center);
   scrollbar-gutter: stable;
 }
 
@@ -19334,17 +19345,27 @@ h3 {
 
 .tool-menu-content,
 .tool-context-content {
-  z-index: 80;
+  --popup-available-block-size: var(--radix-dropdown-menu-content-available-height, var(--popup-max-block-size));
+  z-index: var(--popup-layer-z);
   width: min(360px, calc(100vw - 24px));
+  max-height: min(var(--popup-max-block-size), var(--popup-available-block-size));
+  overflow: auto;
+  overscroll-behavior: contain;
   animation: workspace-menu-enter var(--motion-duration-fast) var(--motion-ease-out) both;
   padding: 6px;
   border: 1px solid var(--line);
   border-radius: 8px;
   color: var(--text);
   background: var(--surface);
-  box-shadow: 0 18px 42px rgba(17, 24, 39, 0.18);
-  transform-origin: top center;
+  box-shadow: var(--popup-shadow);
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin, top center);
   will-change: transform, opacity;
+  scrollbar-gutter: stable;
+}
+
+.tool-context-content {
+  --popup-available-block-size: var(--radix-context-menu-content-available-height, var(--popup-max-block-size));
+  transform-origin: var(--radix-context-menu-content-transform-origin, top center);
 }
 
 .tool-menu-label {

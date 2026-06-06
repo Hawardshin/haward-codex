@@ -577,6 +577,26 @@ test("Workspace monitor replaces native select dropdowns with styled app choices
   assert.match(css, /\.decision-answer-controls > button \{/);
 });
 
+test("Popup menus escape scroll panes and keep their own bounded scroll", () => {
+  const appChoiceMenuRule = readCssRule(".app-choice-menu");
+  const sourceFilePickerMenuRule = readCssRule(".source-file-picker-menu");
+
+  assert.match(css, /--popup-layer-z: 140;/);
+  assert.match(css, /--popup-max-block-size: min\(420px, calc\(100dvh - \(var\(--popup-viewport-gap\) \* 2\)\)\);/);
+  assert.match(monitorShell, /<DropdownMenu\.Portal>[\s\S]*?<DropdownMenu\.Content className="app-choice-menu"[\s\S]*?collisionPadding=\{16\}/);
+  assert.match(monitorShell, /<DropdownMenu\.Portal>[\s\S]*?<DropdownMenu\.Content className="source-file-picker-menu"[\s\S]*?collisionPadding=\{16\}/);
+  assert.match(toolStudio, /<DropdownMenu\.Content className="tool-menu-content" sideOffset=\{8\} align="end" collisionPadding=\{16\}/);
+  assert.match(toolStudio, /<ContextMenu\.Content className="tool-context-content" collisionPadding=\{16\}/);
+  assert.match(appChoiceMenuRule, /--popup-available-block-size: var\(--radix-dropdown-menu-content-available-height, var\(--popup-max-block-size\)\);/);
+  assert.match(appChoiceMenuRule, /max-height: min\(var\(--popup-max-block-size\), var\(--popup-available-block-size\)\);/);
+  assert.match(appChoiceMenuRule, /overflow: auto;/);
+  assert.match(appChoiceMenuRule, /overscroll-behavior: contain;/);
+  assert.match(sourceFilePickerMenuRule, /--popup-available-block-size: var\(--radix-dropdown-menu-content-available-height, var\(--popup-max-block-size\)\);/);
+  assert.match(sourceFilePickerMenuRule, /max-height: min\(var\(--popup-max-block-size\), var\(--popup-available-block-size\)\);/);
+  assert.match(css, /\.tool-menu-content,[\s\S]*?\.tool-context-content \{[\s\S]*?max-height: min\(var\(--popup-max-block-size\), var\(--popup-available-block-size\)\);[\s\S]*?overscroll-behavior: contain;/);
+  assert.match(css, /\.tool-context-content \{[\s\S]*?--popup-available-block-size: var\(--radix-context-menu-content-available-height, var\(--popup-max-block-size\)\);/);
+});
+
 test("Agents collaboration uses lazy open-source 3D character scene", () => {
   assert.equal(packageJson.dependencies["@react-three/fiber"], "9.6.1");
   assert.equal(packageJson.dependencies["@react-three/drei"], "10.7.7");
@@ -1053,6 +1073,7 @@ test("Source workbench replaces native select and command buttons with app primi
   assert.match(css, /\.source-editor-action-group \{[\s\S]*?grid-template-columns: repeat\(4, minmax\(104px, 1fr\)\);/);
   assert.match(sourceControlsSmoke, /workspace-monitor-source-controls-/);
   assert.match(sourceControlsSmoke, /sourceSelectCount,\s*0/);
+  assert.match(sourceControlsSmoke, /data-section-content-ready="true"/);
   assert.match(sourceControlsSmoke, /await trigger\.click\(\)/);
   assert.match(sourceControlsSmoke, /source_controls_playwright_ok/);
 });

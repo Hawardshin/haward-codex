@@ -322,7 +322,7 @@ function AppChoiceMenu({
           </button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Portal>
-          <DropdownMenu.Content className="app-choice-menu" align="start" sideOffset={6} collisionPadding={12}>
+          <DropdownMenu.Content className="app-choice-menu" align="start" sideOffset={6} collisionPadding={16}>
             <DropdownMenu.Label className="app-choice-menu-heading">
               <span>{label}</span>
               <strong>{options.length}</strong>
@@ -13090,7 +13090,7 @@ function DesktopRuntimePanel({
                 </Button>
               </DropdownMenu.Trigger>
               <DropdownMenu.Portal>
-                <DropdownMenu.Content className="source-file-picker-menu" align="start" sideOffset={6} collisionPadding={12}>
+                <DropdownMenu.Content className="source-file-picker-menu" align="start" sideOffset={6} collisionPadding={16}>
                   <DropdownMenu.Label className="source-file-picker-label">
                     <span>{copy.fileList}</span>
                     <strong>

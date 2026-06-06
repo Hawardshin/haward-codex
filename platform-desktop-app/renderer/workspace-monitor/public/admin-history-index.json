@@ -1,17 +1,17 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-06T04:57:48.235Z",
+  "generatedAt": "2026-06-06T05:12:34.795Z",
   "summary": {
-    "documents": 2673,
+    "documents": 2679,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1026
+        "count": 1027
       },
       {
         "category": "web-search",
-        "count": 423
+        "count": 424
       },
       {
         "category": "plan",
@@ -19,19 +19,19 @@
       },
       {
         "category": "request-trace",
-        "count": 351
+        "count": 352
       },
       {
         "category": "work-timing",
-        "count": 271
+        "count": 272
       },
       {
         "category": "user-request",
-        "count": 136
+        "count": 137
       },
       {
         "category": "work-summary",
-        "count": 103
+        "count": 104
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6608114,
+    "totalSourceBytes": 6614290,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,102 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-work-timings-2026-2026-06-06-popup-scroll-clipping-json",
+      "path": "_history/work-timings/2026/2026-06-06-popup-scroll-clipping.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Popup Scroll Clipping",
+      "excerpt": "{ \"task id\": \"2026 06 06 popup scroll clipping\", \"title\": \"Popup scroll clipping fix\", \"work mode\": \"ship first\", \"measurement quality\": \"partial\", \"date\": \"2026 06 06\", \"started at\": \"2026 06 06T14:00:41+0900\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first inta",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 popup scroll clipping&quot;, &quot;title&quot;: &quot;Popup scroll clipping fix&quot;, &quot;work mode&quot;: &quot;ship first&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;started at&quot;: &quot;2026 06 06T14:00:41+0900&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;notes&quot;: &quot;Checked ove</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1186,
+      "updatedAt": "2026-06-06T05:09:49.770Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-popup-scroll-clipping-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-popup-scroll-clipping.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Popup Scroll Clipping",
+      "excerpt": "Evaluation: Popup Scroll Clipping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 스크롤 때문에 팝업이 보이지 않는 현상 수정. 결과: 대표 dropdown/context/file picker 팝업이 portal layer, collision padding, viewport available height, 내부 scroll 계약을 갖게 되어 스크롤 컨테이너 clipping과 화면 밖 확장을 줄였다. 근거 Web 기준: overflow clipping과 porta",
+      "html": "<p>Evaluation: Popup Scroll Clipping 날짜: 2026 06 06 사용자 요구 대비 평가 요구: 스크롤 때문에 팝업이 보이지 않는 현상 수정. 결과: 대표 dropdown/context/file picker 팝업이 portal layer, collision padding, viewport available height, 내부 scroll 계약을 갖게 되어 스크롤 컨테이너 clipping과 화면 밖 확장을 줄였다. 근거 Web 기준: overflow clipping과 portal/floating positioning reference를 확인했다. 정적 테스트: 팝업 레이어 token, Radix portal/colli</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1070,
+      "updatedAt": "2026-06-06T05:09:01.442Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-popup-scroll-clipping-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-popup-scroll-clipping.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Popup Scroll Clipping",
+      "excerpt": "Request Trace: Popup Scroll Clipping 날짜: 2026 06 06 요청 스크롤 때문에 팝업이 안 보이는 현상 수정. 산출물 requirements: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md spec: platform desktop app/specs/2026 06 06 popup scroll clipping/spec.ko.md plan: platform desktop app/",
+      "html": "<p>Request Trace: Popup Scroll Clipping 날짜: 2026 06 06 요청 스크롤 때문에 팝업이 안 보이는 현상 수정. 산출물 requirements: platform desktop app/docs/requirements/2026 06 06 popup scroll clipping.ko.md spec: platform desktop app/specs/2026 06 06 popup scroll clipping/spec.ko.md plan: platform desktop app/specs/2026 06 06 popup scroll clipping/plan.ko.md tasks: platform desktop app/sp</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1104,
+      "updatedAt": "2026-06-06T05:09:01.442Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-popup-scroll-clipping-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-popup-scroll-clipping.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request Summary: Popup Scroll Clipping",
+      "excerpt": "User Request Summary: Popup Scroll Clipping 날짜: 2026 06 06 요약 사용자는 스크롤 때문에 팝업이 보이지 않는 현상을 지적했다. 해석한 작업 스크롤 영역 안에서 dropdown/context menu/file picker가 잘리거나 화면 밖에 뜨는 문제를 개선한다. 기존 UI 개선 흐름과 맞춰 native select 대신 앱 스타일 메뉴를 유지한다.",
+      "html": "<p>User Request Summary: Popup Scroll Clipping 날짜: 2026 06 06 요약 사용자는 스크롤 때문에 팝업이 보이지 않는 현상을 지적했다. 해석한 작업 스크롤 영역 안에서 dropdown/context menu/file picker가 잘리거나 화면 밖에 뜨는 문제를 개선한다. 기존 UI 개선 흐름과 맞춰 native select 대신 앱 스타일 메뉴를 유지한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 401,
+      "updatedAt": "2026-06-06T05:09:01.441Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-popup-scroll-clipping-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-popup-scroll-clipping.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Popup Scroll Clipping",
+      "excerpt": "Work Summary: Popup Scroll Clipping 날짜: 2026 06 06 변경 요약 팝업 레이어 공통 token을 추가했다. AppChoiceMenu, source file picker, Tool Studio dropdown/context menu가 Radix available height와 viewport gap을 기준으로 높이를 제한하게 했다. 관련 Radix Content에 collisionPadding={16} 을 명시했다. 스크롤 pane 밖에서 보이도록 포털 기반 메뉴",
+      "html": "<p>Work Summary: Popup Scroll Clipping 날짜: 2026 06 06 변경 요약 팝업 레이어 공통 token을 추가했다. AppChoiceMenu, source file picker, Tool Studio dropdown/context menu가 Radix available height와 viewport gap을 기준으로 높이를 제한하게 했다. 관련 Radix Content에 collisionPadding={16} 을 명시했다. 스크롤 pane 밖에서 보이도록 포털 기반 메뉴 계약을 정적 테스트로 고정했다. 확인 workspace monitor 테스트 83개 통과. Browser smoke에서 Tool Studio </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 639,
+      "updatedAt": "2026-06-06T05:09:01.441Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-popup-scroll-clipping-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-popup-scroll-clipping.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Popup Scroll Clipping",
+      "excerpt": "Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs",
+      "html": "<p>Web Search: Popup Scroll Clipping 날짜: 2026 06 06 질의 MDN CSS overflow clipping popover position fixed portal overlay scroll container WAI ARIA dialog modal popup focus management scroll container overflow clipping Floating UI prevent overflow flip shift portal scroll clipping docs 확인한 출처 MDN CSS overflow : overflow가 scroll container와 clipping 동작을 만든다는 기본 동작 확</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1776,
+      "updatedAt": "2026-06-06T05:09:01.437Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-06-clear-tab-discrimination-ko-md",
       "path": "_history/evaluations/2026/2026-06-06-clear-tab-discrimination.ko.md",
@@ -42835,31 +42931,31 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 401,
+      "documentsCount": 407,
       "categories": [
         {
           "category": "evaluation",
-          "count": 93
+          "count": 94
         },
         {
           "category": "user-request",
-          "count": 57
+          "count": 58
         },
         {
           "category": "web-search",
-          "count": 57
+          "count": 58
         },
         {
           "category": "work-summary",
-          "count": 57
+          "count": 58
         },
         {
           "category": "request-trace",
-          "count": 56
+          "count": 57
         },
         {
           "category": "work-timing",
-          "count": 54
+          "count": 55
         },
         {
           "category": "plan",

@@ -51,6 +51,7 @@ try {
 
   await page.goto(`http://127.0.0.1:${port}/?section=source#source`, { waitUntil: "networkidle" });
   await page.waitForSelector(".source-file-picker-trigger", { timeout: 20_000 });
+  await page.waitForSelector('.desktop-viewport[data-section-content-ready="true"]', { timeout: 20_000 });
 
   const activeSection = await page.locator(".desktop-viewport").getAttribute("data-active-section");
   const contentReady = await page.locator(".desktop-viewport").getAttribute("data-section-content-ready");
