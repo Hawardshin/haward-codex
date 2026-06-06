@@ -2560,6 +2560,221 @@ main {
   white-space: nowrap;
 }
 
+.runtime-customization-pane {
+  gap: 14px;
+}
+
+.runtime-customization-grid {
+  display: grid;
+  grid-template-columns: minmax(340px, 1fr) minmax(340px, 1fr);
+  gap: 12px;
+  min-width: 0;
+  align-items: start;
+}
+
+.runtime-customization-block {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface-raised) 74%, var(--surface));
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: var(--surface-shadow-subtle);
+}
+
+.runtime-customization-block > header,
+.runtime-provider-custom-card > header,
+.runtime-quick-command-editor > header {
+  display: flex;
+  min-width: 0;
+  align-items: start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.runtime-customization-block header div,
+.runtime-provider-custom-card header div,
+.runtime-quick-command-editor header div {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.runtime-customization-block header span,
+.runtime-provider-custom-card header span,
+.runtime-custom-fields span,
+.runtime-quick-command-editor header span {
+  color: var(--muted);
+  font-size: var(--font-size-overline);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.runtime-customization-block header strong,
+.runtime-provider-custom-card header strong,
+.runtime-quick-command-editor header strong {
+  min-width: 0;
+  color: var(--text);
+  overflow-wrap: var(--text-long-token-wrap);
+}
+
+.runtime-provider-custom-list,
+.runtime-quick-command-list {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.runtime-provider-custom-card,
+.runtime-quick-command-row {
+  display: grid;
+  gap: 9px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 7px;
+  padding: 10px;
+  box-shadow: var(--control-shadow);
+}
+
+.runtime-provider-custom-card header button,
+.runtime-preset-row button,
+.runtime-shell-preset-row button,
+.runtime-quick-command-editor button,
+.runtime-quick-command-row > button {
+  display: inline-flex;
+  min-height: var(--control-compact-target-size);
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap);
+  border: 1px solid var(--line);
+  background: var(--choice-bg);
+  color: var(--text);
+  border-radius: var(--control-radius);
+  box-shadow: var(--choice-shadow);
+  padding: 7px 10px;
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+}
+
+.runtime-provider-custom-card header button span,
+.runtime-preset-row button span,
+.runtime-shell-preset-row button span,
+.runtime-quick-command-editor button span,
+.runtime-quick-command-row > button span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.runtime-preset-row,
+.runtime-shell-preset-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  min-width: 0;
+}
+
+.runtime-shell-preset-row button {
+  display: grid;
+  min-width: 128px;
+  justify-items: start;
+  text-align: left;
+}
+
+.runtime-shell-preset-row small {
+  min-width: 0;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.runtime-preset-row button.active,
+.runtime-shell-preset-row button.active {
+  border-color: var(--control-selected-border);
+  background: var(--choice-selected-bg);
+  color: var(--control-selected-fg);
+  box-shadow: var(--choice-active-shadow);
+}
+
+.runtime-preset-row button:hover:not(:disabled),
+.runtime-shell-preset-row button:hover:not(:disabled),
+.runtime-provider-custom-card header button:hover:not(:disabled),
+.runtime-quick-command-editor button:hover:not(:disabled),
+.runtime-quick-command-row > button:hover:not(:disabled) {
+  border-color: var(--accent-primary-border);
+  background: var(--choice-bg-hover);
+}
+
+.runtime-custom-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.runtime-custom-fields.single {
+  grid-template-columns: 1fr;
+}
+
+.runtime-custom-fields.quick {
+  grid-template-columns: minmax(100px, 0.7fr) minmax(120px, 0.9fr) minmax(180px, 1.4fr);
+}
+
+.runtime-custom-fields label {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+}
+
+.runtime-custom-fields input,
+.runtime-custom-fields textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--control-radius);
+  padding: 8px var(--control-padding-x);
+  outline: 0;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface-raised) 60%, transparent);
+}
+
+.runtime-custom-fields textarea {
+  min-height: 74px;
+  resize: vertical;
+  line-height: 1.4;
+}
+
+.runtime-quick-command-editor {
+  display: grid;
+  gap: 9px;
+  min-width: 0;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+.runtime-quick-command-editor > header > div:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 7px;
+}
+
+.runtime-quick-command-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+}
+
+.runtime-quick-command-row > button {
+  min-width: 86px;
+}
+
+.runtime-quick-command-row button:disabled,
+.runtime-quick-command-editor button:disabled {
+  opacity: 0.55;
+}
+
 .cli-adapter-setup-guide {
   gap: 12px;
   overflow: visible;

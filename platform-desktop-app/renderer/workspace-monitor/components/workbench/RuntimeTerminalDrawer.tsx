@@ -18,7 +18,7 @@ type RuntimeTerminalSessionMode = {
   intent: string;
 };
 
-type NativePtyQuickCommand = {
+export type NativePtyQuickCommand = {
   id: string;
   label: string;
   detail: string;
@@ -108,6 +108,7 @@ export type RuntimeTerminalDrawerProps = {
   uiLanguage: RuntimeTerminalLanguage;
   workingDir: string;
   workingDirOptions?: RuntimeTextChoice[];
+  nativePtyQuickCommands?: NativePtyQuickCommand[];
   nativePtySession: RuntimeNativePtySession | null;
   nativePtySessions: RuntimeNativePtySession[];
   onCancelSession: (sessionId: string) => void | Promise<void>;
@@ -337,6 +338,7 @@ export function RuntimeTerminalDrawer({
   uiLanguage,
   workingDir,
   workingDirOptions = [],
+  nativePtyQuickCommands,
   nativePtySession,
   nativePtySessions,
   onCancelSession,
@@ -659,7 +661,7 @@ export function RuntimeTerminalDrawer({
                   ariaLabel={copy.nativePtySurface}
                   labels={copy}
                   placeholder={copy.nativePtyPlaceholder}
-                  quickCommands={nativePtyQuickActions[uiLanguage]}
+                  quickCommands={nativePtyQuickCommands?.length ? nativePtyQuickCommands : nativePtyQuickActions[uiLanguage]}
                   runtimeAvailable={runtimeAvailable}
                   session={nativePtySession}
                   startLabel={copy.startNativePty}

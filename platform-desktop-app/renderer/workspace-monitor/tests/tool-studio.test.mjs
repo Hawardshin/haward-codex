@@ -432,6 +432,44 @@ test("Provider account settings expose guided login and model setup controls", (
   assert.doesNotMatch(providerPanelSource, /\{notice && <p className="decision-resume-notice">\{notice\}<\/p>\}/);
 });
 
+test("Runtime customization settings persist and drive native execution", () => {
+  assert.match(monitorShell, /type RuntimeCustomization = \{/);
+  assert.match(monitorShell, /runtimeCustomization: RuntimeCustomization/);
+  assert.match(monitorShell, /const defaultRuntimeCustomization: RuntimeCustomization = \{/);
+  assert.match(monitorShell, /runtimeProviderDefaultBaseUrls/);
+  assert.match(monitorShell, /function normalizeRuntimeCustomization/);
+  assert.match(monitorShell, /setRuntimeCustomization\(preferences\.runtimeCustomization\)/);
+  assert.match(monitorShell, /runtimeCustomization,\n\s+pinnedSections/);
+  assert.match(monitorShell, /id: "customization"/);
+  assert.match(monitorShell, /data-runtime-customization-panel/);
+  assert.match(monitorShell, /data-runtime-provider-model=\{provider\.providerId\}/);
+  assert.match(monitorShell, /data-runtime-provider-base-url=\{provider\.providerId\}/);
+  assert.match(monitorShell, /data-runtime-terminal-shell/);
+  assert.match(monitorShell, /data-runtime-terminal-startup-command/);
+  assert.match(monitorShell, /data-runtime-quick-command-input=\{index\}/);
+  assert.match(monitorShell, /effectiveDefaultModelForProvider=\{effectiveProviderModelFor\}/);
+  assert.match(monitorShell, /model: modelId \|\| effectiveProviderModelFor\(provider\)/);
+  assert.match(monitorShell, /args\.command = shellCommand/);
+  assert.match(monitorShell, /write_native_pty_terminal_input"[\s\S]*?startupInput/);
+  assert.match(monitorShell, /nativePtyQuickCommands=\{runtimeQuickCommands\}/);
+  assert.match(runtimeTerminalDrawer, /export type NativePtyQuickCommand = \{/);
+  assert.match(runtimeTerminalDrawer, /nativePtyQuickCommands\?: NativePtyQuickCommand\[\]/);
+  assert.match(runtimeTerminalDrawer, /quickCommands=\{nativePtyQuickCommands\?\.length \? nativePtyQuickCommands : nativePtyQuickActions\[uiLanguage\]\}/);
+  assert.match(css, /\.runtime-customization-grid \{/);
+  assert.match(css, /\.runtime-provider-custom-card,\n\.runtime-quick-command-row \{/);
+  assert.match(css, /\.runtime-shell-preset-row button\.active/);
+  assert.match(css, /\.runtime-custom-fields textarea \{/);
+  assert.match(tauriLib, /struct DesktopRuntimeCustomization/);
+  assert.match(tauriLib, /runtime_customization: DesktopRuntimeCustomization/);
+  assert.match(tauriLib, /fn normalize_runtime_customization/);
+  assert.match(tauriLib, /provider_base_url_is_valid/);
+  assert.match(tauriLib, /provider_default_base_url/);
+  assert.match(tauriLib, /list_provider_models_report\(&app, &provider_id\)/);
+  assert.match(tauriLib, /call_provider_api\([\s\S]*?definition,[\s\S]*?&secret,[\s\S]*?&model,[\s\S]*?&base_url/);
+  assert.match(tauriLib, /fn provider_endpoint\(base_url: &str, endpoint_path: &str\)/);
+  assert.match(tauriLib, /\.post\(provider_endpoint\(base_url, "\/responses"\)\)/);
+});
+
 test("CLI adapter settings expose beginner setup steps and copyable commands", () => {
   assert.match(monitorShell, /authHint: string;/);
   assert.match(monitorShell, /firstRunCommand: string;/);

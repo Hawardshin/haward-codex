@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T04:19:42.173Z",
+  "generatedAt": "2026-06-06T04:40:03.418Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -17,7 +17,7 @@
     "webSearches": 13,
     "timingRecords": 12,
     "historyDays": 1,
-    "adminHistoryDocuments": 2652,
+    "adminHistoryDocuments": 2659,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7793,6 +7793,214 @@
   ],
   "documents": [
     {
+      "id": "history-request-traces-2026-2026-06-06-runtime-customization-layer-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-runtime-customization-layer.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Runtime Customization Layer",
+      "excerpt": "Request Trace: Runtime Customization Layer 요청 실사용에 필요한 커스텀 설정이 충분하지 않으므로 전체적으로 커스텀 가능하고 사용성 높게 개선해 달라는 요청. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 runtime customization layer.ko.md 스펙: platform desktop app/specs/2026 06 06 runtime customization layer/ 구현: runt",
+      "html": "<p>Request Trace: Runtime Customization Layer 요청 실사용에 필요한 커스텀 설정이 충분하지 않으므로 전체적으로 커스텀 가능하고 사용성 높게 개선해 달라는 요청. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 runtime customization layer.ko.md 스펙: platform desktop app/specs/2026 06 06 runtime customization layer/ 구현: runtime customization settings, provider base URL/model override, native PTY shell/s</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1052,
+      "updatedAt": "2026-06-06T04:39:46.754Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-runtime-customization-layer-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-runtime-customization-layer.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Runtime Customization Layer",
+      "excerpt": "Work Summary: Runtime Customization Layer 완료 내용 데스크톱 preferences에 runtimeCustomization 을 추가했다. 설정 execution 탭에 실행 커스텀 섹션을 추가했다. provider별 기본 모델과 API base URL을 설정에서 수정할 수 있게 했다. provider 직접 실행과 모델 목록 확인이 커스텀 모델/base URL을 사용하도록 Rust 경로를 수정했다. native PTY 시작 시 커스텀 셸 명령과 시작 명령을 반영했다. ",
+      "html": "<p>Work Summary: Runtime Customization Layer 완료 내용 데스크톱 preferences에 runtimeCustomization 을 추가했다. 설정 execution 탭에 실행 커스텀 섹션을 추가했다. provider별 기본 모델과 API base URL을 설정에서 수정할 수 있게 했다. provider 직접 실행과 모델 목록 확인이 커스텀 모델/base URL을 사용하도록 Rust 경로를 수정했다. native PTY 시작 시 커스텀 셸 명령과 시작 명령을 반영했다. 터미널 빠른 명령을 설정에서 편집하고 드로어에 반영하도록 했다. 정적 테스트 계약을 추가했다. 변경 파일 중심 platform desktop a</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1512,
+      "updatedAt": "2026-06-06T04:39:46.754Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-runtime-customization-layer-ko-md",
+      "path": "_history/work-timings/2026/2026-06-06-runtime-customization-layer.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "Work Timing: Runtime Customization Layer",
+      "excerpt": "Work Timing: Runtime Customization Layer 단계별 기록 | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 5분 | Tauri, xterm.js, provider API 공식 문서 확인 | | 코드 경로 분석 | 10분 | preferences, provider task, native PTY 경로 확인 | | 구현 | 35분 | renderer UI/state, Rust schema/API, CSS, tests | | 1차 검증",
+      "html": "<p>Work Timing: Runtime Customization Layer 단계별 기록 | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 5분 | Tauri, xterm.js, provider API 공식 문서 확인 | | 코드 경로 분석 | 10분 | preferences, provider task, native PTY 경로 확인 | | 구현 | 35분 | renderer UI/state, Rust schema/API, CSS, tests | | 1차 검증 | 10분 | test/check/cargo check, history collect | | 문서화 | 10분 | 요구사항, 스펙, 히스토리 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 822,
+      "updatedAt": "2026-06-06T04:39:46.754Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-runtime-customization-layer-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-runtime-customization-layer.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Runtime Customization Layer",
+      "excerpt": "Evaluation: Runtime Customization Layer 평가 기준 커스텀 설정이 저장되는가. UI에서 사용자가 어떤 값을 바꿔야 하는지 알 수 있는가. provider 실행과 terminal 실행의 실제 경로에 반영되는가. 기존 provider credential, PTY, quick command 기능을 깨뜨리지 않는가. 빌드 검증까지 완료되는가. 현재 평가 runtimeCustomization 이 preferences에 포함되어 저장/로드된다. provider 모델/base U",
+      "html": "<p>Evaluation: Runtime Customization Layer 평가 기준 커스텀 설정이 저장되는가. UI에서 사용자가 어떤 값을 바꿔야 하는지 알 수 있는가. provider 실행과 terminal 실행의 실제 경로에 반영되는가. 기존 provider credential, PTY, quick command 기능을 깨뜨리지 않는가. 빌드 검증까지 완료되는가. 현재 평가 runtimeCustomization 이 preferences에 포함되어 저장/로드된다. provider 모델/base URL, terminal shell/startup command, quick command UI가 추가됐다. run provider agent t</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1524,
+      "updatedAt": "2026-06-06T04:39:46.753Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-runtime-customization-layer-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-runtime-customization-layer/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Runtime Customization Layer",
+      "excerpt": "Tasks: Runtime Customization Layer x 웹 first intake와 공식 문서 확인. x 요구사항과 스펙 범위 작성. x renderer preferences 타입과 normalizer 확장. x RuntimeCustomizationPanel UI 추가. x provider 기본 모델 선택 경로에 커스텀 기본값 반영. x RuntimeTerminalDrawer 에 외부 quick command prop 추가. x native PTY 시작에 shell/startup com",
+      "html": "<h1>Tasks: Runtime Customization Layer</h1>\n<ul>\n<li>[x] 웹 first intake와 공식 문서 확인.</li>\n<li>[x] 요구사항과 스펙 범위 작성.</li>\n<li>[x] renderer preferences 타입과 normalizer 확장.</li>\n<li>[x] <code>RuntimeCustomizationPanel</code> UI 추가.</li>\n<li>[x] provider 기본 모델 선택 경로에 커스텀 기본값 반영.</li>\n<li>[x] <code>RuntimeTerminalDrawer</code>에 외부 quick command prop 추가.</li>\n<li>[x] native PTY 시작에 shell/startup command 반영.</li>\n<li>[x] Rust preferences schema와 normalizer 확장.</li>\n<li>[x] provider model catalog와 provider task API endpoint에 base URL override 반영.</li>\n<li>[x] 정적 테스트 추가.</li>\n<li>[x] 최종 package build와 close-out 기록 업데이트.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 661,
+      "updatedAt": "2026-06-06T04:39:46.753Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-runtime-customization-layer-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-runtime-customization-layer/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Runtime Customization Layer",
+      "excerpt": "Validation: Runtime Customization Layer 실행 결과 corepack pnpm filter workspace monitor test : 통과, 80 tests. corepack pnpm filter workspace monitor run check : 통과. cargo fmt manifest path platform desktop app/src tauri/Cargo.toml : 통과. cargo check from platform desktop app/src tauri",
+      "html": "<h1>Validation: Runtime Customization Layer</h1>\n<h2>실행 결과</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 80 tests.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과.</li>\n<li><code>cargo fmt --manifest-path platform-desktop-app/src-tauri/Cargo.toml</code>: 통과.</li>\n<li><code>cargo check</code> from <code>platform-desktop-app/src-tauri</code>: 통과.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 27 tests.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과. Public release readiness는 기존 서명, notarization, updater, clean-machine 경고만 남김.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code>: 통과.</li>\n</ul>\n<h2>패키지 산출물</h2>\n<ul>\n<li>macOS app: <code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li>DMG: <code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>\n<h2>최종 검증 예정</h2>\n<ul>\n<li><code>git diff --check</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 934,
+      "updatedAt": "2026-06-06T04:39:46.753Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-runtime-customization-layer-ko-md",
+      "path": "_history/plans/2026/2026-06-06-runtime-customization-layer.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Plan Record: Runtime Customization Layer",
+      "excerpt": "Plan Record: Runtime Customization Layer 작업 모드 ship first 성격의 구현 작업으로 처리했다. 새 dependency 설치 없이 기존 runtime과 preferences를 확장했다. 작업 분해 1. web first intake로 Tauri persistent settings, xterm.js terminal surface, provider API endpoint 근거 확인. 2. renderer preferences schema와 settings UI ",
+      "html": "<p>Plan Record: Runtime Customization Layer 작업 모드 ship first 성격의 구현 작업으로 처리했다. 새 dependency 설치 없이 기존 runtime과 preferences를 확장했다. 작업 분해 1. web first intake로 Tauri persistent settings, xterm.js terminal surface, provider API endpoint 근거 확인. 2. renderer preferences schema와 settings UI 확장. 3. native PTY shell/startup/quick command 경로 연결. 4. Rust provider base URL/m</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 839,
+      "updatedAt": "2026-06-06T04:36:56.832Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-runtime-customization-layer-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-runtime-customization-layer.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: Runtime Customization Layer",
+      "excerpt": "User Request: Runtime Customization Layer 요약 사용자는 실제 사용을 위해 provider, 모델, API 주소, 터미널, 명령 등 실행 설정이 전부 커스텀 가능해야 하며, 단순 표시가 아니라 사용성이 높아져야 한다고 요청했다. 해석한 요구 설정 UI에서 선택/입력 가능한 커스텀 항목을 늘린다. 커스텀 값이 실제 데스크톱 앱 실행 경로에 반영되게 한다. 기본 버튼/드롭다운 느낌을 피하고 기존 앱 스타일의 카드/버튼/입력으로 구성한다. 구현 후 빌드까지 자동으로 실행",
+      "html": "<p>User Request: Runtime Customization Layer 요약 사용자는 실제 사용을 위해 provider, 모델, API 주소, 터미널, 명령 등 실행 설정이 전부 커스텀 가능해야 하며, 단순 표시가 아니라 사용성이 높아져야 한다고 요청했다. 해석한 요구 설정 UI에서 선택/입력 가능한 커스텀 항목을 늘린다. 커스텀 값이 실제 데스크톱 앱 실행 경로에 반영되게 한다. 기본 버튼/드롭다운 느낌을 피하고 기존 앱 스타일의 카드/버튼/입력으로 구성한다. 구현 후 빌드까지 자동으로 실행한다. 소유 프로젝트 platform desktop app</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 670,
+      "updatedAt": "2026-06-06T04:36:56.832Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-runtime-customization-layer-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-runtime-customization-layer.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Runtime Customization Layer",
+      "excerpt": "Web Search: Runtime Customization Layer 질의 Tauri v2 store plugin persistent settings official docs Tauri v2 app config persistent user settings official docs xterm.js terminal options addons official docs custom key handler OpenAI API base URL custom provider settings official do",
+      "html": "<p>Web Search: Runtime Customization Layer 질의 Tauri v2 store plugin persistent settings official docs Tauri v2 app config persistent user settings official docs xterm.js terminal options addons official docs custom key handler OpenAI API base URL custom provider settings official docs Ollama API base URL tags chat official docs Gemini API generateContent REST o</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2065,
+      "updatedAt": "2026-06-06T04:36:56.831Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-runtime-customization-layer-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-runtime-customization-layer/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Runtime Customization Layer",
+      "excerpt": "Traceability: Runtime Customization Layer | 항목 | 연결 | | | | | 요구사항 | platform desktop app/docs/requirements/2026 06 06 runtime customization layer.ko.md | | 웹 검색 | history/web searches/2026/2026 06 06 runtime customization layer.ko.md | | 구현 | platform desktop app/renderer/worksp",
+      "html": "<h1>Traceability: Runtime Customization Layer</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>요구사항</td><td><code>platform-desktop-app/docs/requirements/2026-06-06-runtime-customization-layer.ko.md</code></td></tr><tr><td>웹 검색</td><td><code>_history/web-searches/2026/2026-06-06-runtime-customization-layer.ko.md</code></td></tr><tr><td>구현</td><td><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code>, <code>platform-desktop-app/renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx</code>, <code>platform-desktop-app/src-tauri/src/lib.rs</code>, <code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></td></tr><tr><td>테스트</td><td><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></td></tr><tr><td>검증</td><td><code>platform-desktop-app/specs/2026-06-06-runtime-customization-layer/validation.ko.md</code></td></tr><tr><td>평가</td><td><code>_history/evaluations/2026/2026-06-06-runtime-customization-layer.ko.md</code></td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 853,
+      "updatedAt": "2026-06-06T04:36:23.757Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-runtime-customization-layer-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-runtime-customization-layer/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Runtime Customization Layer",
+      "excerpt": "Plan: Runtime Customization Layer 옵션 비교 | 옵션 | 장점 | 단점 | 결정 | | | | | | | 기존 preferences JSON 확장 | 새 설치 없음, Tauri command와 Rust normalizer 재사용, 현재 앱 구조와 잘 맞음 | key value store plugin보다 수동 schema 관리가 필요 | 선택 | | tauri plugin store 도입 | 공식 persistent store API 사용 가능 | dependency/in",
+      "html": "<h1>Plan: Runtime Customization Layer</h1>\n<h2>옵션 비교</h2>\n<table><thead><tr><th>옵션</th><th>장점</th><th>단점</th><th>결정</th></tr></thead><tbody><tr><td>기존 preferences JSON 확장</td><td>새 설치 없음, Tauri command와 Rust normalizer 재사용, 현재 앱 구조와 잘 맞음</td><td>key-value store plugin보다 수동 schema 관리가 필요</td><td>선택</td></tr><tr><td><code>tauri-plugin-store</code> 도입</td><td>공식 persistent store API 사용 가능</td><td>dependency/install audit 범위 증가, 현재 preferences와 중복</td><td>보류</td></tr><tr><td>renderer localStorage 저장</td><td>구현이 작음</td><td>데스크톱 앱의 Rust 실행 경로와 불일치, native 실행에 연결하기 어려움</td><td>기각</td></tr></tbody></table>\n<h2>실행 순서</h2>\n<p>1. preferences TypeScript/Rust schema에 runtime customization 추가.</p>\n<p>2. 설정 UI에 실행 커스텀 섹션 추가.</p>\n<p>3. provider 선택, provider task 실행, model catalog refresh에 커스텀 모델/base URL 연결.</p>\n<p>4. native PTY 시작에 shell/startup command와 quick command override 연결.</p>\n<p>5. 정적 테스트, TypeScript check, Rust check, package build로 검증.</p>\n<h2>리스크와 완화</h2>\n<ul>\n<li>잘못된 base URL이 provider 호출을 깨뜨릴 수 있다: http/https와 길이 제한으로 정규화한다.</li>\n<li>기존 preferences 파일에 새 필드가 없을 수 있다: <code>serde(default)</code>와 renderer normalizer로 기본값을 채운다.</li>\n<li>UI만 바뀌고 실행 경로가 빠질 수 있다: 테스트에서 renderer state, PTY args, Rust endpoint 생성까지 확인한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1438,
+      "updatedAt": "2026-06-06T04:36:23.756Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-runtime-customization-layer-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-runtime-customization-layer/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Runtime Customization Layer",
+      "excerpt": "Spec: Runtime Customization Layer 범위 DesktopPreferences 에 runtimeCustomization 을 추가한다. renderer에서 RuntimeCustomizationPanel 을 추가해 provider, terminal, quick command 설정을 편집한다. provider 기본 모델 선택과 provider 작업 실행은 커스텀 기본 모델을 우선한다. Rust provider 실행은 provider별 커스텀 base URL을 endpoint 생성에",
+      "html": "<h1>Spec: Runtime Customization Layer</h1>\n<h2>범위</h2>\n<ul>\n<li><code>DesktopPreferences</code>에 <code>runtimeCustomization</code>을 추가한다.</li>\n<li>renderer에서 <code>RuntimeCustomizationPanel</code>을 추가해 provider, terminal, quick command 설정을 편집한다.</li>\n<li>provider 기본 모델 선택과 provider 작업 실행은 커스텀 기본 모델을 우선한다.</li>\n<li>Rust provider 실행은 provider별 커스텀 base URL을 endpoint 생성에 사용한다.</li>\n<li>native PTY 시작은 커스텀 셸과 시작 명령을 반영한다.</li>\n<li>테스트는 커스텀 설정이 저장/렌더링/실행 경로에 연결되어 있는지 정적 계약으로 검증한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>새 secret store, OAuth, keychain, provider별 OAuth flow.</li>\n<li>external CLI 자동 설치.</li>\n<li>모바일 UI 대응. 현재 데스크톱 최소 창 크기 정책 안에서 처리한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>설정 섹션 id <code>customization</code>이 execution 탭에 존재한다.</li>\n<li><code>data-runtime-customization-panel</code>이 렌더링된다.</li>\n<li>provider model/base URL input은 provider id별 data attribute를 가진다.</li>\n<li>terminal shell/startup command와 quick command input이 존재한다.</li>\n<li>Rust <code>normalize_runtime_customization</code>이 저장값을 보정한다.</li>\n<li>Rust provider API 호출이 <code>provider_endpoint(base_url, ...)</code>를 통해 endpoint를 만든다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1286,
+      "updatedAt": "2026-06-06T04:36:23.756Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-runtime-customization-layer-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-runtime-customization-layer.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Requirement: Runtime Customization Layer",
+      "excerpt": "Requirement: Runtime Customization Layer 배경 실사용자는 기본 provider, 모델, API 주소, 셸, 터미널 시작 명령, 빠른 명령을 자신의 로컬 환경과 계정 구조에 맞게 바꿀 수 있어야 한다. 설정 화면에 값이 보이더라도 실제 provider 호출이나 native PTY 시작 경로에 반영되지 않으면 커스텀 기능으로 볼 수 없다. 요구사항 REQ RCL 001 : 데스크톱 preferences는 provider별 기본 모델과 API base URL overri",
+      "html": "<h1>Requirement: Runtime Customization Layer</h1>\n<h2>배경</h2>\n<p>실사용자는 기본 provider, 모델, API 주소, 셸, 터미널 시작 명령, 빠른 명령을 자신의 로컬 환경과 계정 구조에 맞게 바꿀 수 있어야 한다. 설정 화면에 값이 보이더라도 실제 provider 호출이나 native PTY 시작 경로에 반영되지 않으면 커스텀 기능으로 볼 수 없다.</p>\n<h2>요구사항</h2>\n<ul>\n<li><code>REQ-RCL-001</code>: 데스크톱 preferences는 provider별 기본 모델과 API base URL override를 저장하고 앱 재시작 뒤에도 유지해야 한다.</li>\n<li><code>REQ-RCL-002</code>: provider 직접 실행은 저장된 기본 모델과 base URL override를 실제 HTTP endpoint 생성에 사용해야 한다.</li>\n<li><code>REQ-RCL-003</code>: provider 모델 목록 확인은 Ollama 같은 로컬 런타임의 커스텀 base URL을 사용해야 한다.</li>\n<li><code>REQ-RCL-004</code>: native PTY 시작은 사용자가 지정한 셸 명령을 Tauri command에 전달해야 한다.</li>\n<li><code>REQ-RCL-005</code>: native PTY 시작 후 사용자가 지정한 시작 명령을 stdin으로 전송할 수 있어야 한다.</li>\n<li><code>REQ-RCL-006</code>: 터미널 빠른 명령은 설정에서 편집 가능해야 하며 드로어의 실제 버튼 목록에 반영되어야 한다.</li>\n<li><code>REQ-RCL-007</code>: 커스텀 설정 UI는 기본 <code>&lt;select&gt;</code>에 의존하지 않고 기존 앱 버튼/카드/입력 스타일을 사용해야 한다.</li>\n<li><code>REQ-RCL-008</code>: 저장값은 등록된 provider, 길이 제한, 모델 id 문자 제한, http/https base URL 제한으로 정규화되어야 한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>OAuth 자동 로그인, 브라우저 세션 cookie 저장, API key 자동 발급.</li>\n<li>OS keychain으로 secret 저장소를 교체하는 작업.</li>\n<li>모든 provider의 전체 모델 카탈로그 API를 새로 구현하는 작업.</li>\n<li>새 Tauri store plugin 설치. 현재 앱의 Rust preferences JSON 저장 경로를 확장한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>설정의 <code>실행 커스텀</code> 섹션에서 provider 모델/base URL, 터미널 셸/시작 명령, 빠른 명령을 편집할 수 있다.</li>\n<li><code>run_provider_agent_task</code>는 커스텀 모델과 base URL을 사용한다.</li>\n<li><code>start_native_pty_terminal</code> 호출은 커스텀 셸 명령을 포함한다.</li>\n<li>시작 명령은 PTY 생성 후 <code>write_native_pty_terminal_input</code>으로 전송된다.</li>\n<li><code>RuntimeTerminalDrawer</code>는 저장된 빠른 명령을 우선 렌더링한다.</li>\n<li>renderer test/check, Rust check, internal package build가 통과한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2415,
+      "updatedAt": "2026-06-06T04:36:23.755Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-request-traces-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
       "path": "_history/request-traces/2026/2026-06-06-native-provider-terminal-action-reliability.ko.md",
       "category": "request-trace",
@@ -10609,38 +10817,6 @@
       "workspaceArea": "_history/request-traces"
     },
     {
-      "id": "history-work-summaries-2026-2026-06-06-eval-report-catalog-structure-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-eval-report-catalog-structure.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "2026 06 06 EVAL report catalog structure 작업 요약",
-      "excerpt": "2026 06 06 EVAL report catalog structure 작업 요약 구현 evaluationReportCatalog.ts 를 추가해 EVAL scenario, tool signal, fallback eval repo, repo merge function을 분리했다. evaluationReportModel.ts 는 catalog를 import해 score model을 계산하도록 변경했다. EvaluationReportPanel.tsx 는 scenario catalog와 report ",
-      "html": "<p>2026 06 06 EVAL report catalog structure 작업 요약 구현 evaluationReportCatalog.ts 를 추가해 EVAL scenario, tool signal, fallback eval repo, repo merge function을 분리했다. evaluationReportModel.ts 는 catalog를 import해 score model을 계산하도록 변경했다. EvaluationReportPanel.tsx 는 scenario catalog와 report model을 각각 import한다. comprehensive improvement contract, workspace monitor test, </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 984,
-      "updatedAt": "2026-06-06T01:13:08.237Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-eval-report-catalog-structure-json",
-      "path": "_history/work-timings/2026/2026-06-06-eval-report-catalog-structure.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Eval Report Catalog Structure",
-      "excerpt": "{ \"task id\": \"2026 06 06 eval report catalog structure\", \"title\": \"EVAL report catalog structure\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first i",
-      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 eval report catalog structure&quot;, &quot;title&quot;: &quot;EVAL report catalog structure&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;notes&quot;: &quot;Checked </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1544,
-      "updatedAt": "2026-06-06T01:13:08.237Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-eval-report-catalog-structure-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-eval-report-catalog-structure/tasks.ko.md",
       "category": "project-spec",
@@ -10671,22 +10847,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-eval-report-catalog-structure-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-eval-report-catalog-structure.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: EVAL report catalog structure",
-      "excerpt": "사용자 요청 요약: EVAL report catalog structure 사용자는 “소스코드 개선”을 요청했다. 이전 맥락은 desktop app 성능, UI, EVAL, 구조 개선 반복이므로, 이번 slice는 EVAL report source의 책임 분리를 선택했다. 적용한 범위 EVAL report static catalog를 score model에서 분리. 관련 contract/tests 갱신. 구현 후 build/package까지 실행 예정.",
-      "html": "<p>사용자 요청 요약: EVAL report catalog structure 사용자는 “소스코드 개선”을 요청했다. 이전 맥락은 desktop app 성능, UI, EVAL, 구조 개선 반복이므로, 이번 slice는 EVAL report source의 책임 분리를 선택했다. 적용한 범위 EVAL report static catalog를 score model에서 분리. 관련 contract/tests 갱신. 구현 후 build/package까지 실행 예정.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 421,
-      "updatedAt": "2026-06-06T01:09:26.208Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-eval-report-catalog-structure-traceability-ko-md",
@@ -10751,70 +10911,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-eval-report-catalog-structure-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-eval-report-catalog-structure.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: EVAL report catalog structure",
-      "excerpt": "웹 검색 기록: EVAL report catalog structure 목적 사용자의 “소스코드 개선” 요청을 platform desktop app의 EVAL report 구조 개선으로 좁혀 구현하기 전에, UI/계산/정적 데이터 분리 원칙이 현재 React/TypeScript 공식 권장과 충돌하지 않는지 확인했다. 검색어 TypeScript official modules import export maintainability type only imports React official keeping ",
-      "html": "<p>웹 검색 기록: EVAL report catalog structure 목적 사용자의 “소스코드 개선” 요청을 platform desktop app의 EVAL report 구조 개선으로 좁혀 구현하기 전에, UI/계산/정적 데이터 분리 원칙이 현재 React/TypeScript 공식 권장과 충돌하지 않는지 확인했다. 검색어 TypeScript official modules import export maintainability type only imports React official keeping components pure extracting logic from components React official reusing logic wi</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1755,
-      "updatedAt": "2026-06-06T01:09:26.204Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-eval-report-model-structure-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-eval-report-model-structure.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "2026 06 06 EVAL report model structure 평가",
-      "excerpt": "2026 06 06 EVAL report model structure 평가 평가 대상 요청: 구조개선. 구현 slice: EVAL report score/model을 pure TypeScript module로 분리. 완료 기준 평가 유지보수성: UI component에서 document aggregation과 score construction 책임을 제거했다. 검증성: panel/model/runtime model boundary를 contract와 tests가 확인한다. 동작 보존: cockpi",
-      "html": "<p>2026 06 06 EVAL report model structure 평가 평가 대상 요청: 구조개선. 구현 slice: EVAL report score/model을 pure TypeScript module로 분리. 완료 기준 평가 유지보수성: UI component에서 document aggregation과 score construction 책임을 제거했다. 검증성: panel/model/runtime model boundary를 contract와 tests가 확인한다. 동작 보존: cockpit data attributes, dimension IDs, runtime telemetry fallback은 유지했다. resource lif</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1323,
-      "updatedAt": "2026-06-06T01:00:24.812Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-eval-report-model-structure-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-eval-report-model-structure.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "2026 06 06 request to outcome trace",
-      "excerpt": "2026 06 06 request to outcome trace 요청 구조개선. 결정 가장 직접적인 구조 병목으로 EvaluationReportPanel.tsx 의 score/model 책임을 선택했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationReportModel.ts platform desktop app/renderer/workspace monitor/components/features/E",
-      "html": "<p>2026 06 06 request to outcome trace 요청 구조개선. 결정 가장 직접적인 구조 병목으로 EvaluationReportPanel.tsx 의 score/model 책임을 선택했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationReportModel.ts platform desktop app/renderer/workspace monitor/components/features/EvaluationReportPanel.tsx platform desktop app/renderer/workspace monitor/scripts</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 933,
-      "updatedAt": "2026-06-06T01:00:24.812Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-eval-report-model-structure-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-eval-report-model-structure.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "2026 06 06 EVAL report model structure 작업 요약",
-      "excerpt": "2026 06 06 EVAL report model structure 작업 요약 구현 EvaluationReportPanel.tsx 에서 EVAL report score/model 책임을 분리했다. 새 evaluationReportModel.ts pure TypeScript module을 추가했다. comprehensive improvement contract, workspace monitor test, desktop readiness test를 새 boundary에 맞췄다. 검증 Workspac",
-      "html": "<p>2026 06 06 EVAL report model structure 작업 요약 구현 EvaluationReportPanel.tsx 에서 EVAL report score/model 책임을 분리했다. 새 evaluationReportModel.ts pure TypeScript module을 추가했다. comprehensive improvement contract, workspace monitor test, desktop readiness test를 새 boundary에 맞췄다. 검증 Workspace Monitor check/test 통과. tests 70개 통과. Desktop app check/test 통과. tests 24개 통과. </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 894,
-      "updatedAt": "2026-06-06T01:00:24.811Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-eval-report-model-structure-tasks-ko-md",
@@ -18095,102 +18191,6 @@
       "historyDate": "2026-06-04",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-core-feature-priority-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-core-feature-priority/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증 계획",
-      "excerpt": "검증 계획 명령 corepack pnpm dir platform desktop app/renderer/workspace monitor run check corepack pnpm dir platform desktop app/renderer/workspace monitor run test corepack pnpm dir platform desktop app run test corepack pnpm dir platform desktop app run check cd agent platform && PY",
-      "html": "<h1>검증 계획</h1>\n<h2>명령</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run test</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app run test</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-feature-registry.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-gap-registry.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/service-readiness-registry.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/reference-platform-advantage-registry.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/user-flow-registry.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-view-modes configs/access/view-mode-registry.json</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m unittest tests.test_view_modes</code></li>\n<li><code>python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-04-core-feature-priority.json</code></li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>브라우저 스모크</h2>\n<ul>\n<li>로컬 dev server를 열고 Home 첫 화면을 확인한다.</li>\n<li>desktop과 mobile viewport에서 <code>Agent Core</code>, <code>CLI Orchestration</code>, <code>Root Tools</code>, <code>Work Visibility</code>, <code>Setup</code> 관련 표면이 보이는지 확인한다.</li>\n<li>텍스트 겹침, 빈 화면, 가로 overflow, 핵심 CTA 누락을 확인한다.</li>\n</ul>\n<h2>결과</h2>\n<ul>\n<li>in-app Browser desktop DOM smoke: 통과, core panel/setup/root tool panel 렌더, 가로 overflow 없음.</li>\n<li>in-app Browser mobile DOM smoke: 통과, core panel/setup/root tool panel 렌더, 가로 overflow 없음.</li>\n<li>Playwright desktop capture: 통과, <code>_history/evaluations/2026/2026-06-04-core-feature-priority-desktop.png</code></li>\n<li>Playwright mobile capture: 통과, <code>_history/evaluations/2026/2026-06-04-core-feature-priority-mobile.png</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2202,
-      "updatedAt": "2026-06-04T09:41:06.124Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-core-feature-priority-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-core-feature-priority/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성",
-      "excerpt": "추적성 | 요구사항 | 구현/문서 | 검증 | | | | | | REQ PDA 094 | MonitorShell.tsx , ProductFeatureArchitecturePanel.tsx , product feature registry.json | renderer check/test, platform readiness/test | | REQ PDA 095 | root tool management , root tool setup panels, execution settings | product re",
-      "html": "<h1>추적성</h1>\n<table><thead><tr><th>요구사항</th><th>구현/문서</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-094</td><td><code>MonitorShell.tsx</code>, <code>ProductFeatureArchitecturePanel.tsx</code>, <code>product-feature-registry.json</code></td><td>renderer check/test, platform readiness/test</td></tr><tr><td>REQ-PDA-095</td><td><code>root_tool_management</code>, root tool setup panels, execution settings</td><td>product registry contract, Browser smoke</td></tr><tr><td>REQ-PDA-096</td><td>Home workload strip, <code>work_visibility</code> layer</td><td>snapshot collector tests, Browser smoke</td></tr><tr><td>REQ-PDA-097</td><td><code>view-mode-registry.json</code>, <code>view_modes.py</code>, user allowed sections</td><td><code>check-view-modes</code>, <code>tests.test_view_modes</code></td></tr><tr><td>REQ-PDA-098</td><td><code>coreSetupSteps</code>, settings setup grid, readiness metric</td><td>renderer check, platform tests</td></tr></tbody></table>\n<h2>출처</h2>\n<ul>\n<li>OpenAI Agents SDK docs: agents, sessions, handoffs, tracing</li>\n<li>Claude Code docs: custom subagents, MCP, hooks</li>\n<li>LangGraph docs: multi-agent and supervisor patterns</li>\n<li>기존 platform desktop product feature, user flow, runtime contract registries</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 961,
-      "updatedAt": "2026-06-03T22:21:50.947Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-core-feature-priority-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-core-feature-priority/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "구현 계획",
-      "excerpt": "구현 계획 1. Web first intake로 agent/subagent, CLI continuity, multi agent orchestration reference를 확인한다. 2. 기존 Home, product feature registry, view mode, readiness tests의 현재 계약을 확인한다. 3. 요구사항을 Agent Core, CLI Orchestration, Root Tools, Work Visibility로 구조화한다. 4. MonitorShell.tsx , P",
-      "html": "<h1>구현 계획</h1>\n<p>1. Web-first intake로 agent/subagent, CLI continuity, multi-agent orchestration reference를 확인한다.</p>\n<p>2. 기존 Home, product feature registry, view mode, readiness tests의 현재 계약을 확인한다.</p>\n<p>3. 요구사항을 Agent Core, CLI Orchestration, Root Tools, Work Visibility로 구조화한다.</p>\n<p>4. <code>MonitorShell.tsx</code>, <code>ProductFeatureArchitecturePanel.tsx</code>, CSS를 수정한다.</p>\n<p>5. product/view/service/user-flow/reference/gap registries와 readiness tests를 새 용어와 우선순위로 맞춘다.</p>\n<p>6. generated developer/customer snapshots를 재생성한다.</p>\n<p>7. renderer/platform tests, check, config contracts, view-mode check를 실행한다.</p>\n<p>8. Browser smoke로 desktop/mobile 첫 화면을 확인한다.</p>\n<p>9. history, evaluation, trace, timing 기록을 남기고 commit/push한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 820,
-      "updatedAt": "2026-06-03T22:21:50.946Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-core-feature-priority-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-core-feature-priority/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "핵심 기능 우선순위 스펙",
-      "excerpt": "핵심 기능 우선순위 스펙 목표 설치형 데스크톱 앱의 첫 화면과 제품 계약을 Agent Core와 CLI Orchestration 중심으로 재정렬한다. 루트 툴과 작업 가시성은 두 핵심 기능을 가능하게 하는 supporting layer로 분리하고, 운영/문서/구조/요구사항 같은 비핵심 기능은 Operator Center 뒤로 낮춘다. 범위 Home hero, primary metric, feature tabs, setup panels를 두 core 기능 중심으로 재구성한다. product feat",
-      "html": "<h1>핵심 기능 우선순위 스펙</h1>\n<h2>목표</h2>\n<p>설치형 데스크톱 앱의 첫 화면과 제품 계약을 Agent Core와 CLI Orchestration 중심으로 재정렬한다. 루트 툴과 작업 가시성은 두 핵심 기능을 가능하게 하는 supporting layer로 분리하고, 운영/문서/구조/요구사항 같은 비핵심 기능은 Operator Center 뒤로 낮춘다.</p>\n<h2>범위</h2>\n<ul>\n<li>Home hero, primary metric, feature tabs, setup panels를 두 core 기능 중심으로 재구성한다.</li>\n<li><code>product-feature-registry.json</code>과 fallback product architecture를 2 primary + supporting layer 구조로 맞춘다.</li>\n<li>사용자 기본 navigation과 view mode contract를 <code>overview</code>, <code>agents</code>, <code>desktop</code>, <code>source</code>, <code>intent</code> 순서로 맞춘다.</li>\n<li>루트 툴 setup과 핵심 기능 readiness를 Home과 execution settings에서 노출한다.</li>\n<li>현재 작업량, pending decisions, task-run records, agent count를 한눈에 보이게 한다.</li>\n<li>readiness/test/snapshot/customer bundle 검사를 새 제품 계약으로 갱신한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>새 CLI adapter나 agent runtime backend 추가</li>\n<li>실제 외부 provider 계정 생성 자동화</li>\n<li>public release signing/notarization/updater 완료</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>Home 첫 화면에 Agent Core, CLI Orchestration, Root Tools, Work Visibility가 보인다.</li>\n<li>primary product feature는 Agent Core와 CLI Orchestration 두 개뿐이다.</li>\n<li>Root Tool Management와 Work Visibility는 supporting feature로 registry와 snapshot에 포함된다.</li>\n<li>user view mode의 allowed sections는 <code>overview</code>, <code>agents</code>, <code>desktop</code>, <code>source</code>, <code>intent</code>다.</li>\n<li>renderer check/test, platform check/test, config contract, view-mode check, customer snapshot audit가 통과한다.</li>\n<li>Browser smoke에서 첫 화면과 설정 표면이 비어 있지 않고 주요 핵심 문구가 렌더된다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1818,
-      "updatedAt": "2026-06-03T22:21:50.946Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-04-core-feature-priority-en-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-04-core-feature-priority.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Requirements: Core Feature Priority",
-      "excerpt": "Requirements: Core Feature Priority Context The user defined two primary platform capabilities: Agent Core for very easy custom agent and subagent creation, and CLI Orchestration for continuous Claude Code, Codex, Gemini, OpenCode, and similar guest CLI work with deferred decisio",
-      "html": "<h1>Requirements: Core Feature Priority</h1>\n<h2>Context</h2>\n<p>The user defined two primary platform capabilities: Agent Core for very easy custom agent and subagent creation, and CLI Orchestration for continuous Claude Code, Codex, Gemini, OpenCode, and similar guest CLI work with deferred decisions that can be answered later.</p>\n<h2>Requirements</h2>\n<table><thead><tr><th>ID</th><th>Requirement</th><th>Acceptance Criteria</th></tr></thead><tbody><tr><td>REQ-PDA-094</td><td>The first screen shall foreground Agent Core and CLI Orchestration as the two primary capabilities.</td><td>Home and the product feature registry keep only <code>agent_factory</code> and <code>agent_orchestration</code> as primary features.</td></tr><tr><td>REQ-PDA-095</td><td>Root tool management shall appear as a separate supporting layer shared by both core capabilities.</td><td>Home and settings expose provider accounts, CLI adapters, workspace files, and decision routing as root tool setup.</td></tr><tr><td>REQ-PDA-096</td><td>Current work volume and blocked decisions shall be visible at a glance.</td><td>The Home workload strip shows active tasks, pending decisions, task runs, and ready agents.</td></tr><tr><td>REQ-PDA-097</td><td>Non-core functions shall be de-emphasized while remaining accessible.</td><td>User default navigation is <code>overview</code>, <code>agents</code>, <code>desktop</code>, <code>source</code>, <code>intent</code>; operator sections move to Operator Center.</td></tr><tr><td>REQ-PDA-098</td><td>Setup required for the two core capabilities shall be visible and intuitive.</td><td>Home and execution settings show provider account, Agent Core, CLI lane, and auto-defer question setup steps.</td></tr></tbody></table>\n<h2>Out Of Scope</h2>\n<ul>\n<li>Implementing a new guest CLI adapter</li>\n<li>Making cloud deployment mandatory</li>\n<li>Renaming every historical Agent Factory record</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1612,
-      "updatedAt": "2026-06-03T22:21:50.945Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-04-core-feature-priority-ko-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-04-core-feature-priority.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "요구사항: 핵심 기능 우선순위",
-      "excerpt": "요구사항: 핵심 기능 우선순위 배경 사용자는 이 플랫폼의 핵심 기능을 두 가지로 명확히 정의했다. 첫째, 커스텀 에이전트와 서브에이전트를 매우 쉽게 만들 수 있는 Agent Core다. 둘째, Claude Code, Codex, Gemini, OpenCode 같은 guest CLI 작업을 연속적으로 오케스트레이션하고 중간 의사결정을 모아 나중에 처리할 수 있는 CLI Orchestration이다. 요구사항 | ID | 요구사항 | 수용 기준 | | | | | | REQ PDA 094 | 첫 화면은",
-      "html": "<h1>요구사항: 핵심 기능 우선순위</h1>\n<h2>배경</h2>\n<p>사용자는 이 플랫폼의 핵심 기능을 두 가지로 명확히 정의했다. 첫째, 커스텀 에이전트와 서브에이전트를 매우 쉽게 만들 수 있는 Agent Core다. 둘째, Claude Code, Codex, Gemini, OpenCode 같은 guest CLI 작업을 연속적으로 오케스트레이션하고 중간 의사결정을 모아 나중에 처리할 수 있는 CLI Orchestration이다.</p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>수용 기준</th></tr></thead><tbody><tr><td>REQ-PDA-094</td><td>첫 화면은 Agent Core와 CLI Orchestration을 두 primary 기능으로 강조해야 한다.</td><td>Home과 product feature registry에서 primary feature가 <code>agent_factory</code>, <code>agent_orchestration</code> 두 개로 제한된다.</td></tr><tr><td>REQ-PDA-095</td><td>root tool management는 두 core 기능이 공유하는 별도 supporting layer로 보여야 한다.</td><td>Home과 설정 표면에 provider accounts, CLI adapters, workspace files, decision routing이 root tool setup으로 노출된다.</td></tr><tr><td>REQ-PDA-096</td><td>현재 진행 중인 작업량과 막힌 의사결정은 한눈에 보여야 한다.</td><td>Home workload strip이 active tasks, pending decisions, task runs, agents ready를 보여준다.</td></tr><tr><td>REQ-PDA-097</td><td>비핵심 기능은 숨기되 접근은 유지해야 한다.</td><td>사용자 기본 navigation은 <code>overview</code>, <code>agents</code>, <code>desktop</code>, <code>source</code>, <code>intent</code>이고 operator sections는 Operator Center로 분리된다.</td></tr><tr><td>REQ-PDA-098</td><td>핵심 기능을 쓰기 전에 필요한 설정이 직관적으로 보여야 한다.</td><td>Home과 execution settings에 provider account, Agent Core, CLI lane, auto-defer question setup 단계가 표시된다.</td></tr></tbody></table>\n<h2>비범위</h2>\n<ul>\n<li>새로운 guest CLI adapter 구현</li>\n<li>실제 cloud deployment 필수화</li>\n<li>과거 history 문서의 모든 Agent Factory 표기 일괄 개명</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1819,
-      "updatedAt": "2026-06-03T22:21:50.945Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18208,10 +18208,6 @@
           "count": 14
         },
         {
-          "category": "work-summary",
-          "count": 14
-        },
-        {
           "category": "user-request",
           "count": 13
         },
@@ -18220,12 +18216,16 @@
           "count": 13
         },
         {
+          "category": "work-summary",
+          "count": 13
+        },
+        {
           "category": "work-timing",
           "count": 12
         },
         {
           "category": "plan",
-          "count": 7
+          "count": 8
         },
         {
           "category": "daily-history",
@@ -18344,16 +18344,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-eval-report-model-structure-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-eval-report-model-structure.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "2026 06 06 EVAL report model structure 평가",
-          "excerpt": "2026 06 06 EVAL report model structure 평가 평가 대상 요청: 구조개선. 구현 slice: EVAL report score/model을 pure TypeScript module로 분리. 완료 기준 평가 유지보수성: UI component에서 document aggregation과 score construction 책임을 제거했다. 검증성: panel/model/runtime model boundary를 contract와 tests가 확인한다. 동작 보존: cockpi",
-          "updatedAt": "2026-06-06T01:00:24.812Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-main-tab-scroll-scope-policy-evaluation-input-json",
           "path": "_history/evaluations/2026/2026-06-06-main-tab-scroll-scope-policy-evaluation-input.json",
           "category": "evaluation",
@@ -18401,6 +18391,16 @@
           "title": "Parallel Snapshot Collector 평가",
           "excerpt": "Parallel Snapshot Collector 평가 날짜: 2026 06 06 결과 status: passed internal 병렬 구조를 실제 코드에 반영했다. 기존 Rust/Tauri 영역에는 이미 Rayon/background warmup/threaded stream readers가 있었으므로, 이번 변경은 단일 루프였던 Workspace Monitor snapshot collector에 bounded Node worker thread pool을 추가했다. 성능 관측 collect : 2",
           "updatedAt": "2026-06-06T02:26:02.134Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-runtime-customization-layer-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-runtime-customization-layer.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "Evaluation: Runtime Customization Layer",
+          "excerpt": "Evaluation: Runtime Customization Layer 평가 기준 커스텀 설정이 저장되는가. UI에서 사용자가 어떤 값을 바꿔야 하는지 알 수 있는가. provider 실행과 terminal 실행의 실제 경로에 반영되는가. 기존 provider credential, PTY, quick command 기능을 깨뜨리지 않는가. 빌드 검증까지 완료되는가. 현재 평가 runtimeCustomization 이 preferences에 포함되어 저장/로드된다. provider 모델/base U",
+          "updatedAt": "2026-06-06T04:39:46.753Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18514,6 +18514,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-plans-2026-2026-06-06-runtime-customization-layer-ko-md",
+          "path": "_history/plans/2026/2026-06-06-runtime-customization-layer.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "Plan Record: Runtime Customization Layer",
+          "excerpt": "Plan Record: Runtime Customization Layer 작업 모드 ship first 성격의 구현 작업으로 처리했다. 새 dependency 설치 없이 기존 runtime과 preferences를 확장했다. 작업 분해 1. web first intake로 Tauri persistent settings, xterm.js terminal surface, provider API endpoint 근거 확인. 2. renderer preferences schema와 settings UI ",
+          "updatedAt": "2026-06-06T04:36:56.832Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-plans-2026-2026-06-06-storage-architecture-review-ko-md",
           "path": "_history/plans/2026/2026-06-06-storage-architecture-review.ko.md",
           "category": "plan",
@@ -18594,16 +18604,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-eval-report-model-structure-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-eval-report-model-structure.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "2026 06 06 request to outcome trace",
-          "excerpt": "2026 06 06 request to outcome trace 요청 구조개선. 결정 가장 직접적인 구조 병목으로 EvaluationReportPanel.tsx 의 score/model 책임을 선택했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationReportModel.ts platform desktop app/renderer/workspace monitor/components/features/E",
-          "updatedAt": "2026-06-06T01:00:24.812Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
           "category": "request-trace",
@@ -18631,6 +18631,16 @@
           "title": "Parallel Snapshot Collector 요청 추적",
           "excerpt": "Parallel Snapshot Collector 요청 추적 날짜: 2026 06 06 요청 병렬 구조, 멀티스레드, 멀티프로세스로 속도를 늘릴 수 있는 방법을 고려. 결과 Workspace Monitor snapshot collector에 Node worker thread pool을 구현했다. Rust/Tauri에는 이미 Rayon/background warmup 구조가 있으므로 중복 추가 대신 관측과 기록을 남겼다. 변경 파일 platform desktop app/renderer/workspa",
           "updatedAt": "2026-06-06T02:26:02.134Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-06-runtime-customization-layer-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-runtime-customization-layer.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Request Trace: Runtime Customization Layer",
+          "excerpt": "Request Trace: Runtime Customization Layer 요청 실사용에 필요한 커스텀 설정이 충분하지 않으므로 전체적으로 커스텀 가능하고 사용성 높게 개선해 달라는 요청. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 runtime customization layer.ko.md 스펙: platform desktop app/specs/2026 06 06 runtime customization layer/ 구현: runt",
+          "updatedAt": "2026-06-06T04:39:46.754Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18724,16 +18734,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-eval-report-catalog-structure-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-eval-report-catalog-structure.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: EVAL report catalog structure",
-          "excerpt": "사용자 요청 요약: EVAL report catalog structure 사용자는 “소스코드 개선”을 요청했다. 이전 맥락은 desktop app 성능, UI, EVAL, 구조 개선 반복이므로, 이번 slice는 EVAL report source의 책임 분리를 선택했다. 적용한 범위 EVAL report static catalog를 score model에서 분리. 관련 contract/tests 갱신. 구현 후 build/package까지 실행 예정.",
-          "updatedAt": "2026-06-06T01:09:26.208Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
           "category": "user-request",
@@ -18761,6 +18761,16 @@
           "title": "사용자 요청 요약",
           "excerpt": "사용자 요청 요약 날짜: 2026 06 06 사용자는 병렬 구조, 멀티스레드, 멀티프로세스를 통해 속도를 늘릴 수 있는 방법을 고려하라고 요청했다. 처리 범위 Workspace Monitor snapshot 수집에 Node worker thread pool을 추가하고, 기존 Rust/Rayon 구조는 중복 구현 없이 유지/기록한다.",
           "updatedAt": "2026-06-06T02:23:45.531Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-runtime-customization-layer-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-runtime-customization-layer.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "User Request: Runtime Customization Layer",
+          "excerpt": "User Request: Runtime Customization Layer 요약 사용자는 실제 사용을 위해 provider, 모델, API 주소, 터미널, 명령 등 실행 설정이 전부 커스텀 가능해야 하며, 단순 표시가 아니라 사용성이 높아져야 한다고 요청했다. 해석한 요구 설정 UI에서 선택/입력 가능한 커스텀 항목을 늘린다. 커스텀 값이 실제 데스크톱 앱 실행 경로에 반영되게 한다. 기본 버튼/드롭다운 느낌을 피하고 기존 앱 스타일의 카드/버튼/입력으로 구성한다. 구현 후 빌드까지 자동으로 실행",
+          "updatedAt": "2026-06-06T04:36:56.832Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18854,16 +18864,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-eval-report-catalog-structure-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-eval-report-catalog-structure.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: EVAL report catalog structure",
-          "excerpt": "웹 검색 기록: EVAL report catalog structure 목적 사용자의 “소스코드 개선” 요청을 platform desktop app의 EVAL report 구조 개선으로 좁혀 구현하기 전에, UI/계산/정적 데이터 분리 원칙이 현재 React/TypeScript 공식 권장과 충돌하지 않는지 확인했다. 검색어 TypeScript official modules import export maintainability type only imports React official keeping ",
-          "updatedAt": "2026-06-06T01:09:26.204Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
           "category": "web-search",
@@ -18891,6 +18891,16 @@
           "title": "Parallel Snapshot Collector 웹 검색 기록",
           "excerpt": "Parallel Snapshot Collector 웹 검색 기록 날짜: 2026 06 06 쿼리 Node.js official worker threads documentation parallel CPU tasks Node.js official child process documentation spawn parallel processes Tauri v2 official documentation async commands state task spawn Rust standard library std::",
           "updatedAt": "2026-06-06T02:23:45.531Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-runtime-customization-layer-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-runtime-customization-layer.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: Runtime Customization Layer",
+          "excerpt": "Web Search: Runtime Customization Layer 질의 Tauri v2 store plugin persistent settings official docs Tauri v2 app config persistent user settings official docs xterm.js terminal options addons official docs custom key handler OpenAI API base URL custom provider settings official do",
+          "updatedAt": "2026-06-06T04:36:56.831Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18984,26 +18994,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-eval-report-catalog-structure-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-eval-report-catalog-structure.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "2026 06 06 EVAL report catalog structure 작업 요약",
-          "excerpt": "2026 06 06 EVAL report catalog structure 작업 요약 구현 evaluationReportCatalog.ts 를 추가해 EVAL scenario, tool signal, fallback eval repo, repo merge function을 분리했다. evaluationReportModel.ts 는 catalog를 import해 score model을 계산하도록 변경했다. EvaluationReportPanel.tsx 는 scenario catalog와 report ",
-          "updatedAt": "2026-06-06T01:13:08.237Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-06-eval-report-model-structure-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-eval-report-model-structure.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "2026 06 06 EVAL report model structure 작업 요약",
-          "excerpt": "2026 06 06 EVAL report model structure 작업 요약 구현 EvaluationReportPanel.tsx 에서 EVAL report score/model 책임을 분리했다. 새 evaluationReportModel.ts pure TypeScript module을 추가했다. comprehensive improvement contract, workspace monitor test, desktop readiness test를 새 boundary에 맞췄다. 검증 Workspac",
-          "updatedAt": "2026-06-06T01:00:24.811Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-main-tab-scroll-scope-policy-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-main-tab-scroll-scope-policy.ko.md",
           "category": "work-summary",
@@ -19031,6 +19021,16 @@
           "title": "Parallel Snapshot Collector 작업 요약",
           "excerpt": "Parallel Snapshot Collector 작업 요약 날짜: 2026 06 06 완료 Workspace Monitor snapshot collector를 async worker thread 구조로 전환했다. 문서 렌더링은 최대 6개 worker로 분산한다. source preview는 후보를 먼저 정렬/상한 적용한 뒤 최대 4개 worker로 읽는다. worker 실패 또는 작은 task에서는 기존 sync path로 fallback한다. snapshot stats에 snapshotDocu",
           "updatedAt": "2026-06-06T02:26:02.134Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-runtime-customization-layer-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-runtime-customization-layer.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "Work Summary: Runtime Customization Layer",
+          "excerpt": "Work Summary: Runtime Customization Layer 완료 내용 데스크톱 preferences에 runtimeCustomization 을 추가했다. 설정 execution 탭에 실행 커스텀 섹션을 추가했다. provider별 기본 모델과 API base URL을 설정에서 수정할 수 있게 했다. provider 직접 실행과 모델 목록 확인이 커스텀 모델/base URL을 사용하도록 Rust 경로를 수정했다. native PTY 시작 시 커스텀 셸 명령과 시작 명령을 반영했다. ",
+          "updatedAt": "2026-06-06T04:39:46.754Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19124,16 +19124,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-eval-report-catalog-structure-json",
-          "path": "_history/work-timings/2026/2026-06-06-eval-report-catalog-structure.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Eval Report Catalog Structure",
-          "excerpt": "{ \"task id\": \"2026 06 06 eval report catalog structure\", \"title\": \"EVAL report catalog structure\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first i",
-          "updatedAt": "2026-06-06T01:13:08.237Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-main-tab-scroll-scope-policy-json",
           "path": "_history/work-timings/2026/2026-06-06-main-tab-scroll-scope-policy.json",
           "category": "work-timing",
@@ -19151,6 +19141,16 @@
           "title": "Parallel Snapshot Collector 작업 시간 기록",
           "excerpt": "Parallel Snapshot Collector 작업 시간 기록 | 단계 | 상태 | 메모 | | | | | | 조사 | 완료 | 공식 문서와 기존 Rust 구조 확인 | | 구현 | 완료 | worker pool, file worker, async buildSnapshot | | 1차 검증 | 완료 | collect/check/test 통과 | | 최종 패키징 | 완료 | Tauri package, codesign, hdiutil verify 완료 | 관측 time corepack pnpm f",
           "updatedAt": "2026-06-06T02:26:02.133Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-06-runtime-customization-layer-ko-md",
+          "path": "_history/work-timings/2026/2026-06-06-runtime-customization-layer.ko.md",
+          "category": "work-timing",
+          "language": "ko",
+          "title": "Work Timing: Runtime Customization Layer",
+          "excerpt": "Work Timing: Runtime Customization Layer 단계별 기록 | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 5분 | Tauri, xterm.js, provider API 공식 문서 확인 | | 코드 경로 분석 | 10분 | preferences, provider task, native PTY 경로 확인 | | 구현 | 35분 | renderer UI/state, Rust schema/API, CSS, tests | | 1차 검증",
+          "updatedAt": "2026-06-06T04:39:46.754Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19202,36 +19202,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2652,
+      "documents": 2659,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1023
+          "count": 1024
         },
         {
           "category": "web-search",
-          "count": 420
+          "count": 421
         },
         {
           "category": "plan",
-          "count": 351
+          "count": 352
         },
         {
           "category": "request-trace",
-          "count": 348
+          "count": 349
         },
         {
           "category": "work-timing",
-          "count": 268
+          "count": 269
         },
         {
           "category": "user-request",
-          "count": 133
+          "count": 134
         },
         {
           "category": "work-summary",
-          "count": 100
+          "count": 101
         },
         {
           "category": "daily-history",
@@ -19242,7 +19242,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6586243,
+      "totalSourceBytes": 6594727,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19271,7 +19271,7 @@
       "decisionEvents": 0,
       "openSignals": 21,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T04:18:56.226Z",
+      "latestEventAt": "2026-06-06T04:39:46.754Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19286,14 +19286,14 @@
         "count": 22
       },
       {
-        "id": "delivery",
-        "label": "delivery",
-        "count": 14
-      },
-      {
         "id": "traceability",
         "label": "traceability",
         "count": 14
+      },
+      {
+        "id": "delivery",
+        "label": "delivery",
+        "count": 13
       },
       {
         "id": "evidence",
@@ -19313,7 +19313,7 @@
       {
         "id": "planning",
         "label": "planning",
-        "count": 7
+        "count": 8
       },
       {
         "id": "history",
@@ -19333,11 +19333,6 @@
         "count": 22
       },
       {
-        "id": "summary",
-        "label": "summary",
-        "count": 14
-      },
-      {
         "id": "trace",
         "label": "trace",
         "count": 14
@@ -19345,6 +19340,11 @@
       {
         "id": "intake",
         "label": "intake",
+        "count": 13
+      },
+      {
+        "id": "summary",
+        "label": "summary",
         "count": 13
       },
       {
@@ -19360,7 +19360,7 @@
       {
         "id": "plan",
         "label": "plan",
-        "count": 7
+        "count": 8
       },
       {
         "id": "history",
@@ -19381,6 +19381,111 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-runtime-customization-layer-ko-md",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "Work Timing: Runtime Customization Layer",
+        "detail": "Work Timing: Runtime Customization Layer 단계별 기록 | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 5분 | Tauri, xterm.js, provider API 공식 문서 확인 | | 코드 경로 분석 | 10분 | preferences, provider task, native PTY 경로 확인 | | 구현 | 35분 | renderer UI/state, Rust schema/API, CSS, tests | | 1차 검증",
+        "path": "_history/work-timings/2026/2026-06-06-runtime-customization-layer.ko.md",
+        "category": "work-timing",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:39:46.754Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-runtime-customization-layer-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Runtime Customization Layer",
+        "detail": "Request Trace: Runtime Customization Layer 요청 실사용에 필요한 커스텀 설정이 충분하지 않으므로 전체적으로 커스텀 가능하고 사용성 높게 개선해 달라는 요청. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 runtime customization layer.ko.md 스펙: platform desktop app/specs/2026 06 06 runtime customization layer/ 구현: runt",
+        "path": "_history/request-traces/2026/2026-06-06-runtime-customization-layer.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:39:46.754Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-runtime-customization-layer-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "Work Summary: Runtime Customization Layer",
+        "detail": "Work Summary: Runtime Customization Layer 완료 내용 데스크톱 preferences에 runtimeCustomization 을 추가했다. 설정 execution 탭에 실행 커스텀 섹션을 추가했다. provider별 기본 모델과 API base URL을 설정에서 수정할 수 있게 했다. provider 직접 실행과 모델 목록 확인이 커스텀 모델/base URL을 사용하도록 Rust 경로를 수정했다. native PTY 시작 시 커스텀 셸 명령과 시작 명령을 반영했다. ",
+        "path": "_history/work-summaries/2026/2026-06-06-runtime-customization-layer.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:39:46.754Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-runtime-customization-layer-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "Evaluation: Runtime Customization Layer",
+        "detail": "Evaluation: Runtime Customization Layer 평가 기준 커스텀 설정이 저장되는가. UI에서 사용자가 어떤 값을 바꿔야 하는지 알 수 있는가. provider 실행과 terminal 실행의 실제 경로에 반영되는가. 기존 provider credential, PTY, quick command 기능을 깨뜨리지 않는가. 빌드 검증까지 완료되는가. 현재 평가 runtimeCustomization 이 preferences에 포함되어 저장/로드된다. provider 모델/base U",
+        "path": "_history/evaluations/2026/2026-06-06-runtime-customization-layer.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:39:46.753Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-runtime-customization-layer-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "Plan Record: Runtime Customization Layer",
+        "detail": "Plan Record: Runtime Customization Layer 작업 모드 ship first 성격의 구현 작업으로 처리했다. 새 dependency 설치 없이 기존 runtime과 preferences를 확장했다. 작업 분해 1. web first intake로 Tauri persistent settings, xterm.js terminal surface, provider API endpoint 근거 확인. 2. renderer preferences schema와 settings UI ",
+        "path": "_history/plans/2026/2026-06-06-runtime-customization-layer.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:36:56.832Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-runtime-customization-layer-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "User Request: Runtime Customization Layer",
+        "detail": "User Request: Runtime Customization Layer 요약 사용자는 실제 사용을 위해 provider, 모델, API 주소, 터미널, 명령 등 실행 설정이 전부 커스텀 가능해야 하며, 단순 표시가 아니라 사용성이 높아져야 한다고 요청했다. 해석한 요구 설정 UI에서 선택/입력 가능한 커스텀 항목을 늘린다. 커스텀 값이 실제 데스크톱 앱 실행 경로에 반영되게 한다. 기본 버튼/드롭다운 느낌을 피하고 기존 앱 스타일의 카드/버튼/입력으로 구성한다. 구현 후 빌드까지 자동으로 실행",
+        "path": "_history/user-requests/2026/2026-06-06-runtime-customization-layer.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:36:56.832Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-runtime-customization-layer-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Runtime Customization Layer",
+        "detail": "Web Search: Runtime Customization Layer 질의 Tauri v2 store plugin persistent settings official docs Tauri v2 app config persistent user settings official docs xterm.js terminal options addons official docs custom key handler OpenAI API base URL custom provider settings official do",
+        "path": "_history/web-searches/2026/2026-06-06-runtime-customization-layer.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:36:56.831Z"
+      },
       {
         "id": "history-history-request-traces-2026-2026-06-06-native-provider-terminal-action-reliability-ko-md",
         "sourceType": "history",
@@ -20715,111 +20820,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T01:13:08.238Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-eval-report-catalog-structure-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 06 Eval Report Catalog Structure",
-        "detail": "{ \"task id\": \"2026 06 06 eval report catalog structure\", \"title\": \"EVAL report catalog structure\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first i",
-        "path": "_history/work-timings/2026/2026-06-06-eval-report-catalog-structure.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T01:13:08.237Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-eval-report-catalog-structure-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "2026 06 06 EVAL report catalog structure 작업 요약",
-        "detail": "2026 06 06 EVAL report catalog structure 작업 요약 구현 evaluationReportCatalog.ts 를 추가해 EVAL scenario, tool signal, fallback eval repo, repo merge function을 분리했다. evaluationReportModel.ts 는 catalog를 import해 score model을 계산하도록 변경했다. EvaluationReportPanel.tsx 는 scenario catalog와 report ",
-        "path": "_history/work-summaries/2026/2026-06-06-eval-report-catalog-structure.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T01:13:08.237Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-eval-report-catalog-structure-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: EVAL report catalog structure",
-        "detail": "사용자 요청 요약: EVAL report catalog structure 사용자는 “소스코드 개선”을 요청했다. 이전 맥락은 desktop app 성능, UI, EVAL, 구조 개선 반복이므로, 이번 slice는 EVAL report source의 책임 분리를 선택했다. 적용한 범위 EVAL report static catalog를 score model에서 분리. 관련 contract/tests 갱신. 구현 후 build/package까지 실행 예정.",
-        "path": "_history/user-requests/2026/2026-06-06-eval-report-catalog-structure.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T01:09:26.208Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-eval-report-catalog-structure-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: EVAL report catalog structure",
-        "detail": "웹 검색 기록: EVAL report catalog structure 목적 사용자의 “소스코드 개선” 요청을 platform desktop app의 EVAL report 구조 개선으로 좁혀 구현하기 전에, UI/계산/정적 데이터 분리 원칙이 현재 React/TypeScript 공식 권장과 충돌하지 않는지 확인했다. 검색어 TypeScript official modules import export maintainability type only imports React official keeping ",
-        "path": "_history/web-searches/2026/2026-06-06-eval-report-catalog-structure.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T01:09:26.204Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-eval-report-model-structure-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 EVAL report model structure 평가",
-        "detail": "2026 06 06 EVAL report model structure 평가 평가 대상 요청: 구조개선. 구현 slice: EVAL report score/model을 pure TypeScript module로 분리. 완료 기준 평가 유지보수성: UI component에서 document aggregation과 score construction 책임을 제거했다. 검증성: panel/model/runtime model boundary를 contract와 tests가 확인한다. 동작 보존: cockpi",
-        "path": "_history/evaluations/2026/2026-06-06-eval-report-model-structure.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T01:00:24.812Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-eval-report-model-structure-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "2026 06 06 request to outcome trace",
-        "detail": "2026 06 06 request to outcome trace 요청 구조개선. 결정 가장 직접적인 구조 병목으로 EvaluationReportPanel.tsx 의 score/model 책임을 선택했다. 산출물 platform desktop app/renderer/workspace monitor/components/features/evaluationReportModel.ts platform desktop app/renderer/workspace monitor/components/features/E",
-        "path": "_history/request-traces/2026/2026-06-06-eval-report-model-structure.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T01:00:24.812Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-eval-report-model-structure-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "2026 06 06 EVAL report model structure 작업 요약",
-        "detail": "2026 06 06 EVAL report model structure 작업 요약 구현 EvaluationReportPanel.tsx 에서 EVAL report score/model 책임을 분리했다. 새 evaluationReportModel.ts pure TypeScript module을 추가했다. comprehensive improvement contract, workspace monitor test, desktop readiness test를 새 boundary에 맞췄다. 검증 Workspac",
-        "path": "_history/work-summaries/2026/2026-06-06-eval-report-model-structure.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T01:00:24.811Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23823,7 +23823,7 @@
       {
         "category": "work-summary",
         "root": "_history/work-summaries",
-        "documentsCount": 14
+        "documentsCount": 13
       },
       {
         "category": "user-request",
@@ -23853,7 +23853,7 @@
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 7
+        "documentsCount": 8
       },
       {
         "category": "evaluation",
@@ -23952,7 +23952,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 70,
+        "documentCount": 69,
         "sourceFileCount": 5
       },
       {
@@ -24084,7 +24084,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-src-tauri-src-lib-rs",
         "label": "Large source surface",
-        "signal": "10,359 lines in platform-desktop-app/src-tauri/src/lib.rs",
+        "signal": "10,643 lines in platform-desktop-app/src-tauri/src/lib.rs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits.",
         "priority": "high",
@@ -24132,8 +24132,8 @@
         "path": "platform-desktop-app/src-tauri/src/lib.rs",
         "project": "platform-desktop-app",
         "language": "rust",
-        "lineCount": 10359,
-        "sizeBytes": 345523,
+        "lineCount": 10643,
+        "sizeBytes": 354968,
         "recommendation": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits."
       },
       {
@@ -27792,13 +27792,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3816,
+      "sourceDocuments": 3829,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T04:18:56.225Z"
+      "latestInsightAt": "2026-06-06T04:39:46.754Z"
     },
     "inferenceStages": [
       {
@@ -27866,11 +27866,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 456,
+        "signalCount": 458,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 148
+            "count": 149
           },
           {
             "category": "project-spec",
@@ -27882,7 +27882,7 @@
           },
           {
             "category": "user-request",
-            "count": 43
+            "count": 44
           },
           {
             "category": "work-summary",
@@ -27925,7 +27925,7 @@
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장"
         ],
-        "latestEvidenceAt": "2026-06-06T04:18:56.225Z"
+        "latestEvidenceAt": "2026-06-06T04:39:46.753Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27939,11 +27939,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1743,
+        "signalCount": 1748,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 494
+            "count": 496
           },
           {
             "category": "evaluation",
@@ -27951,15 +27951,15 @@
           },
           {
             "category": "web-search",
-            "count": 421
+            "count": 422
           },
           {
             "category": "plan",
-            "count": 210
+            "count": 211
           },
           {
             "category": "request-trace",
-            "count": 112
+            "count": 113
           },
           {
             "category": "work-timing",
@@ -27990,7 +27990,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T04:18:56.225Z"
+        "latestEvidenceAt": "2026-06-06T04:39:46.754Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28004,7 +28004,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1003,
+        "signalCount": 1004,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -28012,7 +28012,7 @@
           },
           {
             "category": "plan",
-            "count": 291
+            "count": 292
           },
           {
             "category": "request-trace",
@@ -28063,7 +28063,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T03:58:52.562Z"
+        "latestEvidenceAt": "2026-06-06T04:36:56.832Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28077,15 +28077,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 696,
+        "signalCount": 704,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 282
+            "count": 286
           },
           {
             "category": "evaluation",
-            "count": 238
+            "count": 239
           },
           {
             "category": "web-search",
@@ -28093,7 +28093,7 @@
           },
           {
             "category": "work-summary",
-            "count": 37
+            "count": 38
           },
           {
             "category": "plan",
@@ -28109,11 +28109,11 @@
           },
           {
             "category": "project-doc",
-            "count": 15
+            "count": 16
           },
           {
             "category": "work-timing",
-            "count": 12
+            "count": 13
           },
           {
             "category": "daily-history",
@@ -28136,7 +28136,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-06T04:18:56.225Z"
+        "latestEvidenceAt": "2026-06-06T04:39:46.754Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28150,23 +28150,23 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1495,
+        "signalCount": 1501,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 646
+            "count": 649
           },
           {
             "category": "evaluation",
-            "count": 521
+            "count": 522
           },
           {
             "category": "user-request",
-            "count": 97
+            "count": 98
           },
           {
             "category": "work-summary",
-            "count": 56
+            "count": 57
           },
           {
             "category": "request-trace",
@@ -28209,7 +28209,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T04:18:56.225Z"
+        "latestEvidenceAt": "2026-06-06T04:39:46.754Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28285,14 +28285,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3816,
+      "sourceDocuments": 3829,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T04:18:56.225Z"
+      "latestInsightAt": "2026-06-06T04:39:46.754Z"
     },
     "operatingModel": [
       {
@@ -28350,25 +28350,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3202,
+        "signalCount": 3210,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1743
+            "signalCount": 1748
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1003
+            "signalCount": 1004
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 456
+            "signalCount": 458
           }
         ],
         "missingPatternIds": [],
@@ -28396,7 +28396,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T04:18:56.225Z",
+        "latestEvidenceAt": "2026-06-06T04:39:46.754Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28425,13 +28425,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 815,
+        "signalCount": 823,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 696
+            "signalCount": 704
           },
           {
             "id": "release-blocker-gate",
@@ -28465,7 +28465,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T04:18:56.225Z",
+        "latestEvidenceAt": "2026-06-06T04:39:46.754Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28494,19 +28494,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2498,
+        "signalCount": 2505,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1495
+            "signalCount": 1501
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1003
+            "signalCount": 1004
           }
         ],
         "missingPatternIds": [],
@@ -28534,7 +28534,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T04:18:56.225Z",
+        "latestEvidenceAt": "2026-06-06T04:39:46.754Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28563,13 +28563,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 575,
+        "signalCount": 577,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 456
+            "signalCount": 458
           },
           {
             "id": "release-blocker-gate",
@@ -28603,7 +28603,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T04:18:56.225Z",
+        "latestEvidenceAt": "2026-06-06T04:39:46.753Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28632,19 +28632,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2746,
+        "signalCount": 2752,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1003
+            "signalCount": 1004
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1743
+            "signalCount": 1748
           }
         ],
         "missingPatternIds": [],
@@ -28672,7 +28672,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T04:18:56.225Z",
+        "latestEvidenceAt": "2026-06-06T04:39:46.754Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28701,7 +28701,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1862,
+        "signalCount": 1867,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28713,7 +28713,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1743
+            "signalCount": 1748
           }
         ],
         "missingPatternIds": [],
@@ -28741,7 +28741,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T04:18:56.225Z",
+        "latestEvidenceAt": "2026-06-06T04:39:46.754Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

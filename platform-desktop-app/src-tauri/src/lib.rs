@@ -638,6 +638,38 @@ struct DesktopRuntimeInitDefaults {
 
 #[derive(Clone, Deserialize, Serialize)]
 #[serde(default, rename_all = "camelCase")]
+struct DesktopProviderOverride {
+    provider_id: String,
+    default_model: String,
+    base_url: String,
+}
+
+#[derive(Clone, Deserialize, Serialize)]
+#[serde(default, rename_all = "camelCase")]
+struct DesktopTerminalQuickCommand {
+    id: String,
+    label: String,
+    detail: String,
+    input: String,
+}
+
+#[derive(Clone, Deserialize, Serialize)]
+#[serde(default, rename_all = "camelCase")]
+struct DesktopTerminalCustomization {
+    shell_command: String,
+    startup_command: String,
+    quick_commands: Vec<DesktopTerminalQuickCommand>,
+}
+
+#[derive(Clone, Deserialize, Serialize)]
+#[serde(default, rename_all = "camelCase")]
+struct DesktopRuntimeCustomization {
+    provider_overrides: Vec<DesktopProviderOverride>,
+    terminal: DesktopTerminalCustomization,
+}
+
+#[derive(Clone, Deserialize, Serialize)]
+#[serde(default, rename_all = "camelCase")]
 struct DesktopPreferences {
     schema_version: String,
     ui_language: String,
@@ -645,6 +677,7 @@ struct DesktopPreferences {
     sidebar_mode: String,
     terminal_drawer_open: bool,
     runtime_init_defaults: DesktopRuntimeInitDefaults,
+    runtime_customization: DesktopRuntimeCustomization,
     pinned_sections: Vec<String>,
 }
 
@@ -802,6 +835,46 @@ impl Default for DesktopRuntimeInitDefaults {
     }
 }
 
+impl Default for DesktopProviderOverride {
+    fn default() -> Self {
+        Self {
+            provider_id: String::new(),
+            default_model: String::new(),
+            base_url: String::new(),
+        }
+    }
+}
+
+impl Default for DesktopTerminalQuickCommand {
+    fn default() -> Self {
+        Self {
+            id: String::new(),
+            label: String::new(),
+            detail: String::new(),
+            input: String::new(),
+        }
+    }
+}
+
+impl Default for DesktopTerminalCustomization {
+    fn default() -> Self {
+        Self {
+            shell_command: String::new(),
+            startup_command: String::new(),
+            quick_commands: default_terminal_quick_commands(),
+        }
+    }
+}
+
+impl Default for DesktopRuntimeCustomization {
+    fn default() -> Self {
+        Self {
+            provider_overrides: default_provider_overrides(),
+            terminal: DesktopTerminalCustomization::default(),
+        }
+    }
+}
+
 impl Default for DesktopPreferences {
     fn default() -> Self {
         Self {
@@ -811,6 +884,7 @@ impl Default for DesktopPreferences {
             sidebar_mode: "collapsed".to_string(),
             terminal_drawer_open: false,
             runtime_init_defaults: DesktopRuntimeInitDefaults::default(),
+            runtime_customization: DesktopRuntimeCustomization::default(),
             pinned_sections: vec![
                 "overview".to_string(),
                 "desktop".to_string(),
@@ -1363,6 +1437,14 @@ const DESKTOP_GIT_STATUS_SCHEMA_VERSION: &str = "desktop-git-status.v1";
 const MAX_WORKSPACE_FOLDER_NAME_BYTES: usize = 120;
 const MAX_PROVIDER_SECRET_BYTES: usize = 8_192;
 const MAX_PROVIDER_ACCOUNT_HINT_CHARS: usize = 160;
+const MAX_PROVIDER_BASE_URL_CHARS: usize = 240;
+const MAX_PROVIDER_MODEL_CHARS: usize = 140;
+const MAX_TERMINAL_COMMAND_CHARS: usize = 512;
+const MAX_TERMINAL_STARTUP_COMMAND_CHARS: usize = 2_000;
+const MAX_TERMINAL_QUICK_COMMANDS: usize = 8;
+const OPENAI_BASE_URL: &str = "https://api.openai.com/v1";
+const ANTHROPIC_BASE_URL: &str = "https://api.anthropic.com";
+const GEMINI_BASE_URL: &str = "https://generativelanguage.googleapis.com";
 const MAX_PROVIDER_TASK_OUTPUT_BYTES: usize = 100_000;
 const MAX_PROVIDER_TASK_OUTPUT_TOKENS: u64 = 2_048;
 const PROVIDER_TASK_TIMEOUT_MS: u64 = 120_000;
@@ -1482,6 +1564,50 @@ static PROVIDER_CREDENTIALS: &[ProviderCredentialDefinition] = &[
         caution: "Open Google AI Studio API keys, sign in with the target Google account, create a restricted Gemini key, then save it here. Vertex AI OAuth or ADC remains a separate production provider flow.",
     },
 ];
+
+fn provider_default_base_url(provider_id: &str) -> &'static str {
+    match provider_id {
+        OLLAMA_PROVIDER_ID => OLLAMA_BASE_URL,
+        "openai" => OPENAI_BASE_URL,
+        "anthropic" => ANTHROPIC_BASE_URL,
+        "google-gemini" => GEMINI_BASE_URL,
+        _ => "",
+    }
+}
+
+fn default_provider_overrides() -> Vec<DesktopProviderOverride> {
+    PROVIDER_CREDENTIALS
+        .iter()
+        .map(|definition| DesktopProviderOverride {
+            provider_id: definition.provider_id.to_string(),
+            default_model: definition.default_model.to_string(),
+            base_url: provider_default_base_url(definition.provider_id).to_string(),
+        })
+        .collect()
+}
+
+fn default_terminal_quick_commands() -> Vec<DesktopTerminalQuickCommand> {
+    vec![
+        DesktopTerminalQuickCommand {
+            id: "pwd".to_string(),
+            label: "현재 위치".to_string(),
+            detail: "pwd".to_string(),
+            input: "pwd\n".to_string(),
+        },
+        DesktopTerminalQuickCommand {
+            id: "list".to_string(),
+            label: "파일 목록".to_string(),
+            detail: "ls -la".to_string(),
+            input: "ls -la\n".to_string(),
+        },
+        DesktopTerminalQuickCommand {
+            id: "git".to_string(),
+            label: "Git 상태".to_string(),
+            detail: "git status --short".to_string(),
+            input: "git status --short\n".to_string(),
+        },
+    ]
+}
 
 static PLATFORM_IMPROVEMENT_LANES: &[PipelineLaneDefinition] = &[
     PipelineLaneDefinition {
@@ -1808,8 +1934,11 @@ fn write_system_clipboard_text(
 }
 
 #[tauri::command]
-async fn list_provider_models(provider_id: String) -> Result<ProviderModelCatalogReport, String> {
-    list_provider_models_report(&provider_id).await
+async fn list_provider_models(
+    app: AppHandle,
+    provider_id: String,
+) -> Result<ProviderModelCatalogReport, String> {
+    list_provider_models_report(&app, &provider_id).await
 }
 
 #[tauri::command]
@@ -2648,18 +2777,10 @@ fn get_desktop_resource_snapshot(
             .with_cpu()
             .with_memory()
             .with_tasks();
-        system.refresh_processes_specifics(
-            ProcessesToUpdate::Some(&[pid]),
-            false,
-            process_refresh,
-        );
+        system.refresh_processes_specifics(ProcessesToUpdate::Some(&[pid]), false, process_refresh);
         thread::sleep(Duration::from_millis(120));
         system.refresh_cpu_all();
-        system.refresh_processes_specifics(
-            ProcessesToUpdate::Some(&[pid]),
-            false,
-            process_refresh,
-        );
+        system.refresh_processes_specifics(ProcessesToUpdate::Some(&[pid]), false, process_refresh);
     }
 
     let process = current_pid.and_then(|pid| system.process(pid));
@@ -7312,11 +7433,103 @@ fn normalize_desktop_preferences(preferences: DesktopPreferences) -> DesktopPref
             ),
             auto_defer_questions: preferences.runtime_init_defaults.auto_defer_questions,
         },
+        runtime_customization: normalize_runtime_customization(preferences.runtime_customization),
         pinned_sections: normalize_pinned_sections(
             preferences.pinned_sections,
             defaults.pinned_sections,
         ),
     }
+}
+
+fn normalize_runtime_customization(
+    customization: DesktopRuntimeCustomization,
+) -> DesktopRuntimeCustomization {
+    let mut provider_overrides = Vec::new();
+    for definition in PROVIDER_CREDENTIALS {
+        let override_entry = customization
+            .provider_overrides
+            .iter()
+            .find(|entry| entry.provider_id == definition.provider_id);
+        let default_model = override_entry
+            .map(|entry| entry.default_model.trim().to_string())
+            .filter(|value| provider_model_id_is_valid(value))
+            .unwrap_or_else(|| definition.default_model.to_string());
+        let base_url = override_entry
+            .map(|entry| entry.base_url.trim().to_string())
+            .filter(|value| provider_base_url_is_valid(value))
+            .unwrap_or_else(|| provider_default_base_url(definition.provider_id).to_string());
+        provider_overrides.push(DesktopProviderOverride {
+            provider_id: definition.provider_id.to_string(),
+            default_model,
+            base_url,
+        });
+    }
+
+    let mut quick_commands: Vec<DesktopTerminalQuickCommand> = customization
+        .terminal
+        .quick_commands
+        .into_iter()
+        .take(MAX_TERMINAL_QUICK_COMMANDS)
+        .filter_map(|command| {
+            let input = truncate_chars(command.input.trim(), 500);
+            if input.is_empty() {
+                return None;
+            }
+            let input = if input.ends_with('\n') {
+                input
+            } else {
+                format!("{input}\n")
+            };
+            Some(DesktopTerminalQuickCommand {
+                id: safe_short_setting(command.id, 48, "quick-command"),
+                label: safe_short_setting(command.label, 48, "Command"),
+                detail: safe_short_setting(command.detail, 120, input.trim()),
+                input,
+            })
+        })
+        .collect();
+    if quick_commands.is_empty() {
+        quick_commands = default_terminal_quick_commands();
+    }
+
+    DesktopRuntimeCustomization {
+        provider_overrides,
+        terminal: DesktopTerminalCustomization {
+            shell_command: truncate_chars(
+                customization.terminal.shell_command.trim(),
+                MAX_TERMINAL_COMMAND_CHARS,
+            ),
+            startup_command: truncate_chars(
+                customization.terminal.startup_command.trim(),
+                MAX_TERMINAL_STARTUP_COMMAND_CHARS,
+            ),
+            quick_commands,
+        },
+    }
+}
+
+fn safe_short_setting(value: String, max_chars: usize, fallback: &str) -> String {
+    let trimmed = value.trim();
+    if trimmed.is_empty() {
+        fallback.to_string()
+    } else {
+        truncate_chars(trimmed, max_chars)
+    }
+}
+
+fn provider_model_id_is_valid(value: &str) -> bool {
+    !value.is_empty()
+        && value.len() <= MAX_PROVIDER_MODEL_CHARS
+        && value.chars().all(|character| {
+            character.is_ascii_alphanumeric() || matches!(character, '-' | '_' | '.' | ':' | '/')
+        })
+}
+
+fn provider_base_url_is_valid(value: &str) -> bool {
+    if value.is_empty() || value.len() > MAX_PROVIDER_BASE_URL_CHARS {
+        return false;
+    }
+    value.starts_with("http://") || value.starts_with("https://")
 }
 
 fn normalize_one_of(value: String, allowed: &[&str], fallback: &str) -> String {
@@ -7525,29 +7738,50 @@ fn write_system_clipboard_text_report(
 }
 
 async fn list_provider_models_report(
+    app: &AppHandle,
     provider_id: &str,
 ) -> Result<ProviderModelCatalogReport, String> {
     let definition = find_provider_credential(provider_id)
         .ok_or_else(|| format!("Unknown provider id: {provider_id}"))?;
+    let preferences = desktop_preferences_report(app)
+        .map(|report| report.preferences)
+        .unwrap_or_else(|_| DesktopPreferences::default());
+    let provider_override = preferences
+        .runtime_customization
+        .provider_overrides
+        .iter()
+        .find(|entry| entry.provider_id == definition.provider_id);
+    let default_model = provider_override
+        .map(|entry| entry.default_model.trim().to_string())
+        .filter(|value| provider_model_id_is_valid(value))
+        .unwrap_or_else(|| definition.default_model.to_string());
+    let base_url = provider_override
+        .map(|entry| entry.base_url.trim().to_string())
+        .filter(|value| provider_base_url_is_valid(value))
+        .unwrap_or_else(|| provider_default_base_url(definition.provider_id).to_string());
     if definition.provider_id == OLLAMA_PROVIDER_ID {
-        return list_ollama_provider_models_report(definition).await;
+        return list_ollama_provider_models_report(definition, &base_url, &default_model).await;
     }
-    Ok(default_provider_model_catalog_report(definition))
+    Ok(default_provider_model_catalog_report(
+        definition,
+        &default_model,
+    ))
 }
 
 fn default_provider_model_catalog_report(
     definition: &ProviderCredentialDefinition,
+    default_model: &str,
 ) -> ProviderModelCatalogReport {
     ProviderModelCatalogReport {
         provider_id: definition.provider_id.to_string(),
         provider_label: definition.label.to_string(),
         status: "static_default_model".to_string(),
         source: "provider_definition".to_string(),
-        default_model: definition.default_model.to_string(),
+        default_model: default_model.to_string(),
         models: vec![ProviderModelSummary {
             provider_id: definition.provider_id.to_string(),
-            id: definition.default_model.to_string(),
-            label: definition.default_model.to_string(),
+            id: default_model.to_string(),
+            label: default_model.to_string(),
             size: None,
             modified_at: String::new(),
         }],
@@ -7557,8 +7791,10 @@ fn default_provider_model_catalog_report(
 
 async fn list_ollama_provider_models_report(
     definition: &ProviderCredentialDefinition,
+    base_url: &str,
+    default_model: &str,
 ) -> Result<ProviderModelCatalogReport, String> {
-    let endpoint = format!("{OLLAMA_BASE_URL}/api/tags");
+    let endpoint = provider_endpoint(base_url, "/api/tags");
     let response = match provider_http_client()?.get(&endpoint).send().await {
         Ok(response) => response,
         Err(error) => {
@@ -7567,10 +7803,10 @@ async fn list_ollama_provider_models_report(
                 provider_label: definition.label.to_string(),
                 status: "local_model_runtime_unavailable".to_string(),
                 source: endpoint,
-                default_model: definition.default_model.to_string(),
+                default_model: default_model.to_string(),
                 models: Vec::new(),
                 error: Some(format!(
-                    "Ollama runtime is not reachable at {OLLAMA_BASE_URL}. Start Ollama, then refresh models. {error}"
+                    "Ollama runtime is not reachable at {base_url}. Start Ollama, then refresh models. {error}"
                 )),
             });
         }
@@ -7586,7 +7822,7 @@ async fn list_ollama_provider_models_report(
             provider_label: definition.label.to_string(),
             status: "local_model_catalog_failed".to_string(),
             source: endpoint,
-            default_model: definition.default_model.to_string(),
+            default_model: default_model.to_string(),
             models: Vec::new(),
             error: Some(format!(
                 "Ollama /api/tags returned HTTP {http_status}: {}",
@@ -7608,7 +7844,7 @@ async fn list_ollama_provider_models_report(
         provider_label: definition.label.to_string(),
         status: status.to_string(),
         source: endpoint,
-        default_model: definition.default_model.to_string(),
+        default_model: default_model.to_string(),
         models,
         error: None,
     })
@@ -7879,8 +8115,24 @@ async fn run_provider_agent_task_report(
 
     let definition = find_provider_credential(&input.provider_id)
         .ok_or_else(|| format!("Unknown provider id: {}", input.provider_id))?;
+    let preferences = desktop_preferences_report(app)
+        .map(|report| report.preferences)
+        .unwrap_or_else(|_| DesktopPreferences::default());
+    let provider_override = preferences
+        .runtime_customization
+        .provider_overrides
+        .iter()
+        .find(|entry| entry.provider_id == definition.provider_id);
     let secret = provider_secret_for_definition(app, definition)?;
-    let model = normalize_provider_model(definition, &input.model)?;
+    let model = normalize_provider_model(
+        definition,
+        &input.model,
+        provider_override.map(|entry| entry.default_model.as_str()),
+    )?;
+    let base_url = provider_override
+        .map(|entry| entry.base_url.trim().to_string())
+        .filter(|value| provider_base_url_is_valid(value))
+        .unwrap_or_else(|| provider_default_base_url(definition.provider_id).to_string());
     let task_kind = normalize_task_kind(Some(input.task_kind.as_str()), "provider_agent_task")?;
     let working_dir = resolve_workspace_dir(app, input.working_dir.as_deref())?;
     let system_prompt = provider_task_system_prompt(&task_kind, &input.system_prompt);
@@ -7889,8 +8141,15 @@ async fn run_provider_agent_task_report(
     let started_at = current_unix_millis_label();
     let started = Instant::now();
 
-    let api_result =
-        call_provider_api(definition, &secret, &model, &system_prompt, &input.prompt).await;
+    let api_result = call_provider_api(
+        definition,
+        &secret,
+        &model,
+        &base_url,
+        &system_prompt,
+        &input.prompt,
+    )
+    .await;
     let duration_ms = started.elapsed().as_millis();
     let mut http_status = None;
     let mut output = String::new();
@@ -7957,14 +8216,21 @@ async fn call_provider_api(
     definition: &ProviderCredentialDefinition,
     secret: &str,
     model: &str,
+    base_url: &str,
     system_prompt: &str,
     prompt: &str,
 ) -> Result<ProviderApiResponse, String> {
     match definition.provider_id {
-        OLLAMA_PROVIDER_ID => call_ollama_provider_api(model, system_prompt, prompt).await,
-        "openai" => call_openai_provider_api(secret, model, system_prompt, prompt).await,
-        "anthropic" => call_anthropic_provider_api(secret, model, system_prompt, prompt).await,
-        "google-gemini" => call_gemini_provider_api(secret, model, system_prompt, prompt).await,
+        OLLAMA_PROVIDER_ID => {
+            call_ollama_provider_api(base_url, model, system_prompt, prompt).await
+        }
+        "openai" => call_openai_provider_api(base_url, secret, model, system_prompt, prompt).await,
+        "anthropic" => {
+            call_anthropic_provider_api(base_url, secret, model, system_prompt, prompt).await
+        }
+        "google-gemini" => {
+            call_gemini_provider_api(base_url, secret, model, system_prompt, prompt).await
+        }
         _ => Err(format!(
             "Unsupported provider id: {}",
             definition.provider_id
@@ -7973,6 +8239,7 @@ async fn call_provider_api(
 }
 
 async fn call_ollama_provider_api(
+    base_url: &str,
     model: &str,
     system_prompt: &str,
     prompt: &str,
@@ -7995,7 +8262,7 @@ async fn call_ollama_provider_api(
         }
     });
     let response = provider_http_client()?
-        .post(format!("{OLLAMA_BASE_URL}/api/chat"))
+        .post(provider_endpoint(base_url, "/api/chat"))
         .json(&payload)
         .send()
         .await
@@ -8016,6 +8283,7 @@ async fn call_ollama_provider_api(
 }
 
 async fn call_openai_provider_api(
+    base_url: &str,
     secret: &str,
     model: &str,
     system_prompt: &str,
@@ -8029,7 +8297,7 @@ async fn call_openai_provider_api(
         "store": false
     });
     let response = provider_http_client()?
-        .post("https://api.openai.com/v1/responses")
+        .post(provider_endpoint(base_url, "/responses"))
         .bearer_auth(secret)
         .json(&payload)
         .send()
@@ -8051,6 +8319,7 @@ async fn call_openai_provider_api(
 }
 
 async fn call_anthropic_provider_api(
+    base_url: &str,
     secret: &str,
     model: &str,
     system_prompt: &str,
@@ -8068,7 +8337,7 @@ async fn call_anthropic_provider_api(
         ]
     });
     let response = provider_http_client()?
-        .post("https://api.anthropic.com/v1/messages")
+        .post(provider_endpoint(base_url, "/v1/messages"))
         .header("x-api-key", secret)
         .header("anthropic-version", "2023-06-01")
         .json(&payload)
@@ -8091,14 +8360,14 @@ async fn call_anthropic_provider_api(
 }
 
 async fn call_gemini_provider_api(
+    base_url: &str,
     secret: &str,
     model: &str,
     system_prompt: &str,
     prompt: &str,
 ) -> Result<ProviderApiResponse, String> {
     let model_path = gemini_model_path(model);
-    let endpoint =
-        format!("https://generativelanguage.googleapis.com/v1beta/{model_path}:generateContent");
+    let endpoint = provider_endpoint(base_url, &format!("/v1beta/{model_path}:generateContent"));
     let payload = json!({
         "systemInstruction": {
             "parts": [
@@ -8141,6 +8410,16 @@ async fn call_gemini_provider_api(
         body,
         output,
     })
+}
+
+fn provider_endpoint(base_url: &str, endpoint_path: &str) -> String {
+    let base = base_url.trim().trim_end_matches('/');
+    let path = endpoint_path.trim_start_matches('/');
+    if base.ends_with(path) {
+        base.to_string()
+    } else {
+        format!("{base}/{path}")
+    }
 }
 
 fn provider_http_client() -> Result<reqwest::Client, String> {
@@ -8192,13 +8471,18 @@ fn provider_task_system_prompt(task_kind: &str, value: &str) -> String {
 fn normalize_provider_model(
     definition: &ProviderCredentialDefinition,
     value: &str,
+    fallback_model: Option<&str>,
 ) -> Result<String, String> {
+    let fallback = fallback_model
+        .map(str::trim)
+        .filter(|candidate| provider_model_id_is_valid(candidate))
+        .unwrap_or(definition.default_model);
     let candidate = if value.trim().is_empty() {
-        definition.default_model
+        fallback
     } else {
         value.trim()
     };
-    if candidate.len() > 120 {
+    if candidate.len() > MAX_PROVIDER_MODEL_CHARS {
         return Err("Provider model id is too long.".to_string());
     }
     if !candidate.chars().all(|character| {

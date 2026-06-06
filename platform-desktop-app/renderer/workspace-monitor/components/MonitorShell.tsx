@@ -72,6 +72,7 @@ import type {
 } from "@/components/workbench/NativeGitWorkbench";
 import { PathDisclosure } from "@/components/workbench/PathDisclosure";
 import type {
+  NativePtyQuickCommand,
   RuntimeNativePtySession,
   RuntimeTerminalDrawerProps,
   RuntimeTextChoice
@@ -154,6 +155,7 @@ type SettingsSubsectionId =
   | "pinned"
   | "quick"
   | "providers"
+  | "customization"
   | "adapter"
   | "session"
   | "pipe"
@@ -389,6 +391,23 @@ type RuntimeInitDefaults = {
   autoDeferQuestions: boolean;
 };
 
+type RuntimeProviderOverride = {
+  providerId: string;
+  defaultModel: string;
+  baseUrl: string;
+};
+
+type RuntimeTerminalCustomization = {
+  shellCommand: string;
+  startupCommand: string;
+  quickCommands: NativePtyQuickCommand[];
+};
+
+type RuntimeCustomization = {
+  providerOverrides: RuntimeProviderOverride[];
+  terminal: RuntimeTerminalCustomization;
+};
+
 type RuntimeLaunchRequest = {
   id: string;
   label: string;
@@ -407,6 +426,7 @@ type DesktopPreferences = {
   sidebarMode: SidebarMode;
   terminalDrawerOpen: boolean;
   runtimeInitDefaults: RuntimeInitDefaults;
+  runtimeCustomization: RuntimeCustomization;
   pinnedSections: SectionId[];
 };
 
@@ -2641,6 +2661,32 @@ const providerIdsByAdapter: Record<string, string[]> = {
   "claw-code-cli": ["ollama", "openai", "anthropic", "google-gemini"]
 };
 
+const runtimeProviderDefaultBaseUrls: Record<string, string> = {
+  ollama: "http://127.0.0.1:11434",
+  openai: "https://api.openai.com/v1",
+  anthropic: "https://api.anthropic.com",
+  "google-gemini": "https://generativelanguage.googleapis.com"
+};
+
+const defaultTerminalQuickCommands: NativePtyQuickCommand[] = [
+  { id: "pwd", label: "현재 위치", detail: "pwd", input: "pwd\n" },
+  { id: "list", label: "파일 목록", detail: "ls -la", input: "ls -la\n" },
+  { id: "git", label: "Git 상태", detail: "git status --short", input: "git status --short\n" }
+];
+
+const defaultRuntimeCustomization: RuntimeCustomization = {
+  providerOverrides: fallbackProviderCredentialReport.providers.map((provider) => ({
+    providerId: provider.providerId,
+    defaultModel: provider.defaultModel,
+    baseUrl: runtimeProviderDefaultBaseUrls[provider.providerId] || ""
+  })),
+  terminal: {
+    shellCommand: "",
+    startupCommand: "",
+    quickCommands: defaultTerminalQuickCommands
+  }
+};
+
 const researchInsightAgentId = "research-insight-planner-agent";
 const researchInsightAgentConfigPath = "agent-platform/configs/agents/research-insight-planner-agent.json";
 const researchInsightPlanTemplatePath = "agent-platform/configs/planning/research-insight-plan-template.json";
@@ -2995,6 +3041,7 @@ const defaultDesktopPreferences: DesktopPreferences = {
   sidebarMode: "collapsed",
   terminalDrawerOpen: false,
   runtimeInitDefaults: defaultRuntimeInitDefaults,
+  runtimeCustomization: defaultRuntimeCustomization,
   pinnedSections: defaultPinnedSections
 };
 
@@ -3067,6 +3114,7 @@ function desktopPreferencesFromState(input: {
   sidebarMode: SidebarMode;
   terminalDrawerOpen: boolean;
   runtimeInitDefaults: RuntimeInitDefaults;
+  runtimeCustomization: RuntimeCustomization;
   pinnedSections: SectionId[];
 }): DesktopPreferences {
   return {
@@ -3076,6 +3124,7 @@ function desktopPreferencesFromState(input: {
     sidebarMode: input.sidebarMode,
     terminalDrawerOpen: input.terminalDrawerOpen,
     runtimeInitDefaults: input.runtimeInitDefaults,
+    runtimeCustomization: normalizeRuntimeCustomization(input.runtimeCustomization),
     pinnedSections: normalizePinnedSections(input.pinnedSections)
   };
 }
@@ -3085,6 +3134,65 @@ function normalizePinnedSections(sectionsToNormalize: unknown): SectionId[] {
     ? sectionsToNormalize.filter((item): item is SectionId => sectionIds.has(item as SectionId))
     : [];
   return next.slice(0, 6);
+}
+
+function providerDefaultModelFor(providerId: string) {
+  return fallbackProviderCredentialReport.providers.find((provider) => provider.providerId === providerId)?.defaultModel || "";
+}
+
+function providerDefaultBaseUrlFor(providerId: string) {
+  return runtimeProviderDefaultBaseUrls[providerId] || "";
+}
+
+function trimRuntimeSetting(value: unknown, maxLength: number) {
+  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+}
+
+function normalizeRuntimeQuickCommands(commands: unknown): NativePtyQuickCommand[] {
+  const sourceCommands = Array.isArray(commands) ? commands : defaultTerminalQuickCommands;
+  const normalized = sourceCommands
+    .map((command, index) => {
+      const source = command as Partial<NativePtyQuickCommand>;
+      const input = trimRuntimeSetting(source.input, 500);
+      if (!input) {
+        return null;
+      }
+      return {
+        id: trimRuntimeSetting(source.id, 48) || `quick-${index + 1}`,
+        label: trimRuntimeSetting(source.label, 48) || `Command ${index + 1}`,
+        detail: trimRuntimeSetting(source.detail, 120) || input.replace(/\s+/g, " ").slice(0, 80),
+        input: input.endsWith("\n") ? input : `${input}\n`
+      };
+    })
+    .filter((command): command is NativePtyQuickCommand => Boolean(command))
+    .slice(0, 8);
+  return normalized.length ? normalized : defaultTerminalQuickCommands;
+}
+
+function normalizeRuntimeCustomization(customization: Partial<RuntimeCustomization> | null | undefined): RuntimeCustomization {
+  const overrideMap = new Map<string, Partial<RuntimeProviderOverride>>();
+  for (const override of Array.isArray(customization?.providerOverrides) ? customization?.providerOverrides || [] : []) {
+    if (override && typeof override.providerId === "string") {
+      overrideMap.set(override.providerId, override);
+    }
+  }
+  const providerOverrides = fallbackProviderCredentialReport.providers.map((provider) => {
+    const override = overrideMap.get(provider.providerId);
+    return {
+      providerId: provider.providerId,
+      defaultModel: trimRuntimeSetting(override?.defaultModel, 140) || provider.defaultModel,
+      baseUrl: trimRuntimeSetting(override?.baseUrl, 240) || providerDefaultBaseUrlFor(provider.providerId)
+    };
+  });
+  const terminal = customization?.terminal || defaultRuntimeCustomization.terminal;
+  return {
+    providerOverrides,
+    terminal: {
+      shellCommand: trimRuntimeSetting(terminal.shellCommand, 512),
+      startupCommand: trimRuntimeSetting(terminal.startupCommand, 2_000),
+      quickCommands: normalizeRuntimeQuickCommands(terminal.quickCommands)
+    }
+  };
 }
 
 function normalizeDesktopPreferences(preferences: Partial<DesktopPreferences> | null | undefined): DesktopPreferences {
@@ -3117,6 +3225,7 @@ function normalizeDesktopPreferences(preferences: Partial<DesktopPreferences> | 
           ? runtimeInit.autoDeferQuestions
           : defaultRuntimeInitDefaults.autoDeferQuestions
     },
+    runtimeCustomization: normalizeRuntimeCustomization(preferences?.runtimeCustomization),
     pinnedSections: pinned.length ? pinned : defaultPinnedSections
   };
 }
@@ -3188,6 +3297,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [sidebarMode, setSidebarMode] = useState<SidebarMode>("collapsed");
   const [terminalDrawerOpen, setTerminalDrawerOpen] = useState(false);
   const [runtimeInitDefaults, setRuntimeInitDefaults] = useState<RuntimeInitDefaults>(defaultRuntimeInitDefaults);
+  const [runtimeCustomization, setRuntimeCustomization] = useState<RuntimeCustomization>(defaultRuntimeCustomization);
   const [operatorCenterOpen, setOperatorCenterOpen] = useState(false);
   const [agentSignalsOpen, setAgentSignalsOpen] = useState(false);
   const [agentDetailsOpen, setAgentDetailsOpen] = useState(false);
@@ -3415,6 +3525,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         setSidebarMode(preferences.sidebarMode);
         setTerminalDrawerOpen(preferences.terminalDrawerOpen);
         setRuntimeInitDefaults(preferences.runtimeInitDefaults);
+        setRuntimeCustomization(preferences.runtimeCustomization);
         setPinnedSections(preferences.pinnedSections);
         setDesktopPreferencesPath(report.preferencesPath);
         setDesktopPreferencesSource(report.source);
@@ -3451,6 +3562,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       sidebarMode,
       terminalDrawerOpen,
       runtimeInitDefaults,
+      runtimeCustomization,
       pinnedSections
     });
     tauriInvoke<DesktopPreferencesReport>("save_desktop_preferences", { preferences })
@@ -3477,6 +3589,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   }, [
     desktopPreferencesLoaded,
     pinnedSections,
+    runtimeCustomization,
     runtimeInitDefaults,
     sidebarMode,
     terminalDrawerOpen,
@@ -4080,6 +4193,120 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       : themeMode === "dark"
         ? uiLanguage === "ko" ? "다크" : "Dark"
         : uiLanguage === "ko" ? "라이트" : "Light";
+  const providerRuntimeOverridesById = useMemo(() => {
+    const entries = new Map<string, RuntimeProviderOverride>();
+    for (const override of runtimeCustomization.providerOverrides) {
+      entries.set(override.providerId, override);
+    }
+    return entries;
+  }, [runtimeCustomization.providerOverrides]);
+  const effectiveProviderModelFor = useCallback(
+    (provider: Pick<ProviderCredentialSummary, "providerId" | "defaultModel">) =>
+      providerRuntimeOverridesById.get(provider.providerId)?.defaultModel.trim() || provider.defaultModel,
+    [providerRuntimeOverridesById]
+  );
+  const runtimeNativePtyQuickCommands = useMemo(
+    () => normalizeRuntimeQuickCommands(runtimeCustomization.terminal.quickCommands),
+    [runtimeCustomization.terminal.quickCommands]
+  );
+  const updateRuntimeProviderOverride = useCallback((providerId: string, field: keyof RuntimeProviderOverride, value: string) => {
+    if (field === "providerId") {
+      return;
+    }
+    setRuntimeCustomization((current) => {
+      const normalized = normalizeRuntimeCustomization(current);
+      return {
+        ...normalized,
+        providerOverrides: normalized.providerOverrides.map((override) =>
+          override.providerId === providerId ? { ...override, [field]: value } : override
+        )
+      };
+    });
+  }, []);
+  const resetRuntimeProviderOverride = useCallback((providerId: string) => {
+    setRuntimeCustomization((current) => {
+      const normalized = normalizeRuntimeCustomization(current);
+      return {
+        ...normalized,
+        providerOverrides: normalized.providerOverrides.map((override) =>
+          override.providerId === providerId
+            ? {
+                ...override,
+                defaultModel: providerDefaultModelFor(providerId) || override.defaultModel,
+                baseUrl: providerDefaultBaseUrlFor(providerId)
+              }
+            : override
+        )
+      };
+    });
+  }, []);
+  const updateRuntimeTerminalCustomization = useCallback((field: "shellCommand" | "startupCommand", value: string) => {
+    setRuntimeCustomization((current) => ({
+      ...normalizeRuntimeCustomization(current),
+      terminal: {
+        ...normalizeRuntimeCustomization(current).terminal,
+        [field]: value
+      }
+    }));
+  }, []);
+  const updateRuntimeQuickCommand = useCallback((index: number, field: keyof NativePtyQuickCommand, value: string) => {
+    setRuntimeCustomization((current) => {
+      const normalized = normalizeRuntimeCustomization(current);
+      const quickCommands = normalized.terminal.quickCommands.map((command, commandIndex) =>
+        commandIndex === index ? { ...command, [field]: value } : command
+      );
+      return {
+        ...normalized,
+        terminal: {
+          ...normalized.terminal,
+          quickCommands
+        }
+      };
+    });
+  }, []);
+  const addRuntimeQuickCommand = useCallback(() => {
+    setRuntimeCustomization((current) => {
+      const normalized = normalizeRuntimeCustomization(current);
+      const nextIndex = normalized.terminal.quickCommands.length + 1;
+      return {
+        ...normalized,
+        terminal: {
+          ...normalized.terminal,
+          quickCommands: [
+            ...normalized.terminal.quickCommands,
+            {
+              id: `custom-${nextIndex}`,
+              label: uiLanguage === "ko" ? `명령 ${nextIndex}` : `Command ${nextIndex}`,
+              detail: "echo ready",
+              input: "echo ready\n"
+            }
+          ].slice(0, 8)
+        }
+      };
+    });
+  }, [uiLanguage]);
+  const removeRuntimeQuickCommand = useCallback((index: number) => {
+    setRuntimeCustomization((current) => {
+      const normalized = normalizeRuntimeCustomization(current);
+      const quickCommands = normalized.terminal.quickCommands.filter((_, commandIndex) => commandIndex !== index);
+      return {
+        ...normalized,
+        terminal: {
+          ...normalized.terminal,
+          quickCommands: quickCommands.length ? quickCommands : defaultTerminalQuickCommands
+        }
+      };
+    });
+  }, []);
+  const resetRuntimeQuickCommands = useCallback(() => {
+    setRuntimeCustomization((current) => ({
+      ...normalizeRuntimeCustomization(current),
+      terminal: {
+        ...normalizeRuntimeCustomization(current).terminal,
+        quickCommands: defaultTerminalQuickCommands
+      }
+    }));
+  }, []);
   const settingsSubsections: Record<SettingsTabId, Array<{
     id: SettingsSubsectionId;
     label: string;
@@ -4138,6 +4365,14 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         label: uiLanguage === "ko" ? "계정 연결" : "Provider accounts",
         detail: `${providerCredentials.configuredCount}/${providerCredentials.providers.length || 3}`,
         icon: KeyRound
+      },
+      {
+        id: "customization",
+        label: uiLanguage === "ko" ? "실행 커스텀" : "Runtime custom",
+        detail: uiLanguage === "ko"
+          ? `${runtimeNativePtyQuickCommands.length}개 빠른 명령`
+          : `${runtimeNativePtyQuickCommands.length} quick commands`,
+        icon: Wrench
       },
       {
         id: "adapter",
@@ -4288,12 +4523,12 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         providerLabel: provider.label,
         status: provider.authMethod === "local_http" ? "browser_preview_local_default" : "browser_preview_provider_default",
         source: "browser_fallback",
-        defaultModel: provider.defaultModel,
+        defaultModel: effectiveProviderModelFor(provider),
         models: [
           {
             providerId: provider.providerId,
-            id: provider.defaultModel,
-            label: provider.defaultModel,
+            id: effectiveProviderModelFor(provider),
+            label: effectiveProviderModelFor(provider),
             size: null,
             modifiedAt: ""
           }
@@ -4345,7 +4580,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           message: uiLanguage === "ko" ? `${provider.label} 모델 목록을 확인했습니다.` : `${provider.label} model list checked.`
         });
       }
-      const suggestedModel = report.models[0]?.id || report.defaultModel || provider.defaultModel;
+      const suggestedModel = report.models[0]?.id || report.defaultModel || effectiveProviderModelFor(provider);
       if (suggestedModel && !searchAgentRunForm.model.trim()) {
         setSearchAgentRunForm((current) =>
           current.providerId === provider.providerId && !current.model.trim()
@@ -4359,12 +4594,12 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
         providerLabel: provider.label,
         status: "model_catalog_error",
         source: "tauri_command",
-        defaultModel: provider.defaultModel,
+        defaultModel: effectiveProviderModelFor(provider),
         models: [
           {
             providerId: provider.providerId,
-            id: provider.defaultModel,
-            label: provider.defaultModel,
+            id: effectiveProviderModelFor(provider),
+            label: effectiveProviderModelFor(provider),
             size: null,
             modifiedAt: ""
           }
@@ -4640,7 +4875,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       setSearchAgentRunForm((current) => ({
         ...current,
         providerId: value,
-        model: provider?.defaultModel || ""
+        model: provider ? effectiveProviderModelFor(provider) : ""
       }));
       return;
     }
@@ -4697,7 +4932,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       providerCredentials.providers[0];
     const selectedProviderReady = Boolean(selectedProvider?.configured);
     const selectedProviderLocal = selectedProvider?.authMethod === "local_http";
-    const selectedProviderModel = (searchAgentRunForm.model.trim() || selectedProvider?.defaultModel || "").trim();
+    const selectedProviderModel = (searchAgentRunForm.model.trim() || (selectedProvider ? effectiveProviderModelFor(selectedProvider) : "") || "").trim();
     setSearchAgentChatMessages((current) =>
       [
         ...current,
@@ -6351,6 +6586,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                         providerModelError={providerModelError}
                         selectedProviderId={searchAgentRunForm.providerId}
                         selectedModel={searchAgentRunForm.model}
+                        effectiveDefaultModelForProvider={effectiveProviderModelFor}
                         onClear={clearProviderCredential}
                         onInputChange={updateProviderCredentialInput}
                         onOpenUrl={openProviderAuthUrl}
@@ -6361,7 +6597,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                           setSearchAgentRunForm((current) => ({
                             ...current,
                             providerId: provider.providerId,
-                            model: modelId || provider.defaultModel
+                            model: modelId || effectiveProviderModelFor(provider)
                           }));
                           setProviderCredentialNotice(
                             uiLanguage === "ko"
@@ -6377,6 +6613,21 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                               : `${provider.label} selected as the agent work default.`
                           });
                         }}
+                      />
+                    )}
+
+                    {activeSettingsSubsection === "customization" && (
+                      <RuntimeCustomizationPanel
+                        uiLanguage={uiLanguage}
+                        report={providerCredentials}
+                        customization={runtimeCustomization}
+                        onProviderChange={updateRuntimeProviderOverride}
+                        onProviderReset={resetRuntimeProviderOverride}
+                        onTerminalChange={updateRuntimeTerminalCustomization}
+                        onQuickCommandChange={updateRuntimeQuickCommand}
+                        onAddQuickCommand={addRuntimeQuickCommand}
+                        onRemoveQuickCommand={removeRuntimeQuickCommand}
+                        onResetQuickCommands={resetRuntimeQuickCommands}
                       />
                     )}
 
@@ -7106,6 +7357,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             sourceFiles={visibleSourceFiles}
             uiLanguage={uiLanguage}
             initDefaults={runtimeInitDefaults}
+            runtimeCustomization={runtimeCustomization}
             providerCredentialReport={providerCredentials}
             launchRequest={section === "desktop" ? runtimeLaunchRequest : null}
             onLaunchRequestConsumed={consumeRuntimeLaunchRequest}
@@ -7454,6 +7706,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             sourceFiles={visibleSourceFiles}
             uiLanguage={uiLanguage}
             initDefaults={runtimeInitDefaults}
+            runtimeCustomization={runtimeCustomization}
             providerCredentialReport={providerCredentials}
             launchRequest={section === "source" ? runtimeLaunchRequest : null}
             onLaunchRequestConsumed={consumeRuntimeLaunchRequest}
@@ -8681,6 +8934,7 @@ function ProviderAccountsPanel({
   providerModelError,
   selectedProviderId,
   selectedModel,
+  effectiveDefaultModelForProvider,
   onClear,
   onInputChange,
   onOpenUrl,
@@ -8703,6 +8957,7 @@ function ProviderAccountsPanel({
   providerModelError: string;
   selectedProviderId: string;
   selectedModel: string;
+  effectiveDefaultModelForProvider: (provider: ProviderCredentialSummary) => string;
   onClear: (provider: ProviderCredentialSummary) => void | Promise<void>;
   onInputChange: (providerId: string, field: keyof ProviderCredentialInputState, value: string) => void;
   onOpenUrl: (provider: ProviderCredentialSummary, purpose: "setup" | "login" | "docs") => void | Promise<void>;
@@ -8969,7 +9224,7 @@ function ProviderAccountsPanel({
                 <button
                   type="button"
                   className={`${selectedForWork ? "active" : ""} ${feedbackClass(useFeedback)}`.trim()}
-                  onClick={() => onUseProvider(provider, provider.defaultModel)}
+                  onClick={() => onUseProvider(provider, effectiveDefaultModelForProvider(provider))}
                   disabled={!provider.configured}
                   title={useFeedback?.message || undefined}
                   aria-label={ariaForAction(selectedForWork ? copy.usingForWork : copy.useForWork, useFeedback)}
@@ -9052,7 +9307,8 @@ function ProviderAccountsPanel({
           const modelChecking = providerModelBusy && providerModelBusyProviderId === provider.providerId;
           const localRuntime = provider.authMethod === "local_http";
           const catalogForProvider = providerModelCatalog?.providerId === provider.providerId ? providerModelCatalog : null;
-          const preferredModel = catalogForProvider?.models[0]?.id || catalogForProvider?.defaultModel || provider.defaultModel;
+          const effectiveDefaultModel = effectiveDefaultModelForProvider(provider);
+          const preferredModel = catalogForProvider?.models[0]?.id || catalogForProvider?.defaultModel || effectiveDefaultModel;
           const selectedForWork = selectedProviderId === provider.providerId;
           const setupFeedback = feedbackFor(provider.providerId, "setup");
           const loginFeedback = feedbackFor(provider.providerId, "login");
@@ -9102,7 +9358,7 @@ function ProviderAccountsPanel({
                 </div>
                 <div>
                   <dt>{copy.defaultModel}</dt>
-                  <dd><code>{provider.defaultModel}</code></dd>
+                  <dd><code>{effectiveDefaultModel}</code></dd>
                 </div>
                 <div>
                   <dt>{copy.connectionSource}</dt>
@@ -9223,8 +9479,8 @@ function ProviderAccountsPanel({
                     {(catalogForProvider.models.length ? catalogForProvider.models : [
                       {
                         providerId: provider.providerId,
-                        id: provider.defaultModel,
-                        label: provider.defaultModel,
+                        id: effectiveDefaultModel,
+                        label: effectiveDefaultModel,
                         size: null,
                         modifiedAt: ""
                       }
@@ -9252,12 +9508,303 @@ function ProviderAccountsPanel({
   );
 }
 
+function RuntimeCustomizationPanel({
+  uiLanguage,
+  report,
+  customization,
+  onProviderChange,
+  onProviderReset,
+  onTerminalChange,
+  onQuickCommandChange,
+  onAddQuickCommand,
+  onRemoveQuickCommand,
+  onResetQuickCommands
+}: {
+  uiLanguage: UiLanguage;
+  report: ProviderCredentialReport;
+  customization: RuntimeCustomization;
+  onProviderChange: (providerId: string, field: keyof RuntimeProviderOverride, value: string) => void;
+  onProviderReset: (providerId: string) => void;
+  onTerminalChange: (field: "shellCommand" | "startupCommand", value: string) => void;
+  onQuickCommandChange: (index: number, field: keyof NativePtyQuickCommand, value: string) => void;
+  onAddQuickCommand: () => void;
+  onRemoveQuickCommand: (index: number) => void;
+  onResetQuickCommands: () => void;
+}) {
+  const ko = uiLanguage === "ko";
+  const copy = ko
+    ? {
+        title: "실행 커스텀",
+        summary: "모델, API 주소, 네이티브 셸, 빠른 명령을 저장하고 실제 실행에 적용합니다.",
+        providerTitle: "AI 제공자 런타임",
+        providerDetail: "계정 저장과 별개로 호출 모델과 base URL을 바꿉니다.",
+        terminalTitle: "네이티브 터미널",
+        terminalDetail: "PTY 셸과 시작 명령을 사용 환경에 맞춥니다.",
+        quickTitle: "빠른 명령",
+        model: "작업 기본 모델",
+        baseUrl: "API base URL",
+        reset: "기본값",
+        official: "공식",
+        local: "로컬",
+        proxy: "프록시",
+        shell: "셸",
+        shellInput: "셸 명령",
+        startupCommand: "시작 명령",
+        startupPlaceholder: "예: nvm use --lts 또는 source .venv/bin/activate",
+        systemShell: "시스템 기본",
+        directInput: "직접 입력",
+        commandLabel: "버튼 라벨",
+        commandDetail: "설명",
+        commandInput: "실행 명령",
+        addCommand: "명령 추가",
+        remove: "삭제",
+        resetCommands: "추천 명령 복원"
+      }
+    : {
+        title: "Runtime customization",
+        summary: "Store model, API URL, native shell, and quick commands, then apply them to real execution.",
+        providerTitle: "AI provider runtime",
+        providerDetail: "Change call model and base URL separately from credential storage.",
+        terminalTitle: "Native terminal",
+        terminalDetail: "Tune the PTY shell and startup command for your environment.",
+        quickTitle: "Quick commands",
+        model: "Work default model",
+        baseUrl: "API base URL",
+        reset: "Defaults",
+        official: "Official",
+        local: "Local",
+        proxy: "Proxy",
+        shell: "Shell",
+        shellInput: "Shell command",
+        startupCommand: "Startup command",
+        startupPlaceholder: "e.g. nvm use --lts or source .venv/bin/activate",
+        systemShell: "System default",
+        directInput: "Custom",
+        commandLabel: "Button label",
+        commandDetail: "Detail",
+        commandInput: "Command input",
+        addCommand: "Add command",
+        remove: "Remove",
+        resetCommands: "Restore recommended"
+      };
+  const normalized = normalizeRuntimeCustomization(customization);
+  const overrideById = new Map(normalized.providerOverrides.map((override) => [override.providerId, override]));
+  const shellPresets = [
+    { label: copy.systemShell, value: "", detail: ko ? "로그인 셸 사용" : "Use login shell" },
+    { label: "zsh", value: "/bin/zsh", detail: "/bin/zsh" },
+    { label: "bash", value: "/bin/bash", detail: "/bin/bash" },
+    { label: "fish", value: "/opt/homebrew/bin/fish", detail: "/opt/homebrew/bin/fish" }
+  ];
+  const activeShellPreset = shellPresets.some((preset) => preset.value === normalized.terminal.shellCommand)
+    ? normalized.terminal.shellCommand
+    : "__custom__";
+  const providerBaseUrlPresets = (providerId: string) => {
+    const official = providerDefaultBaseUrlFor(providerId);
+    if (providerId === "openai") {
+      return [
+        { label: copy.official, value: official },
+        { label: copy.proxy, value: "http://127.0.0.1:4000/v1" },
+        { label: copy.local, value: "http://127.0.0.1:11434/v1" }
+      ];
+    }
+    if (providerId === "ollama") {
+      return [
+        { label: copy.local, value: official },
+        { label: "localhost", value: "http://localhost:11434" }
+      ];
+    }
+    return [{ label: copy.official, value: official }];
+  };
+
+  return (
+    <section className="settings-pane wide runtime-customization-pane" data-runtime-customization-panel>
+      <div className="settings-pane-heading">
+        <Wrench size={16} aria-hidden="true" />
+        <div>
+          <span>{copy.title}</span>
+          <strong>{copy.summary}</strong>
+        </div>
+      </div>
+
+      <div className="runtime-customization-grid">
+        <div className="runtime-customization-block">
+          <header>
+            <div>
+              <span>{copy.providerTitle}</span>
+              <strong>{copy.providerDetail}</strong>
+            </div>
+            <Bot size={16} aria-hidden="true" />
+          </header>
+          <div className="runtime-provider-custom-list">
+            {report.providers.map((provider) => {
+              const override = overrideById.get(provider.providerId) || {
+                providerId: provider.providerId,
+                defaultModel: provider.defaultModel,
+                baseUrl: providerDefaultBaseUrlFor(provider.providerId)
+              };
+              return (
+                <article key={provider.providerId} className="runtime-provider-custom-card" data-runtime-provider-custom={provider.providerId}>
+                  <header>
+                    <div>
+                      <span>{provider.providerId}</span>
+                      <strong>{provider.label}</strong>
+                    </div>
+                    <button type="button" onClick={() => onProviderReset(provider.providerId)}>
+                      <RefreshCw size={14} aria-hidden="true" />
+                      <span>{copy.reset}</span>
+                    </button>
+                  </header>
+                  <div className="runtime-custom-fields">
+                    <label>
+                      <span>{copy.model}</span>
+                      <input
+                        data-runtime-provider-model={provider.providerId}
+                        value={override.defaultModel}
+                        onChange={(event) => onProviderChange(provider.providerId, "defaultModel", event.target.value)}
+                        placeholder={provider.defaultModel}
+                      />
+                    </label>
+                    <label>
+                      <span>{copy.baseUrl}</span>
+                      <input
+                        data-runtime-provider-base-url={provider.providerId}
+                        value={override.baseUrl}
+                        onChange={(event) => onProviderChange(provider.providerId, "baseUrl", event.target.value)}
+                        placeholder={providerDefaultBaseUrlFor(provider.providerId)}
+                      />
+                    </label>
+                  </div>
+                  <div className="runtime-preset-row" role="group" aria-label={`${provider.label} ${copy.baseUrl}`}>
+                    {providerBaseUrlPresets(provider.providerId).map((preset) => (
+                      <button
+                        key={`${provider.providerId}-${preset.value}`}
+                        type="button"
+                        className={override.baseUrl === preset.value ? "active" : ""}
+                        onClick={() => onProviderChange(provider.providerId, "baseUrl", preset.value)}
+                      >
+                        <span>{preset.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="runtime-customization-block">
+          <header>
+            <div>
+              <span>{copy.terminalTitle}</span>
+              <strong>{copy.terminalDetail}</strong>
+            </div>
+            <SquareTerminal size={16} aria-hidden="true" />
+          </header>
+          <div className="runtime-shell-preset-row" role="group" aria-label={copy.shell}>
+            {shellPresets.map((preset) => (
+              <button
+                key={preset.label}
+                type="button"
+                className={activeShellPreset === preset.value ? "active" : ""}
+                onClick={() => onTerminalChange("shellCommand", preset.value)}
+                title={preset.detail}
+              >
+                <span>{preset.label}</span>
+                <small>{preset.detail}</small>
+              </button>
+            ))}
+            <button type="button" className={activeShellPreset === "__custom__" ? "active" : ""}>
+              <span>{copy.directInput}</span>
+              <small>{normalized.terminal.shellCommand || copy.shellInput}</small>
+            </button>
+          </div>
+          <div className="runtime-custom-fields single">
+            <label>
+              <span>{copy.shellInput}</span>
+              <input
+                data-runtime-terminal-shell
+                value={normalized.terminal.shellCommand}
+                onChange={(event) => onTerminalChange("shellCommand", event.target.value)}
+                placeholder="/bin/zsh"
+              />
+            </label>
+            <label>
+              <span>{copy.startupCommand}</span>
+              <textarea
+                data-runtime-terminal-startup-command
+                value={normalized.terminal.startupCommand}
+                onChange={(event) => onTerminalChange("startupCommand", event.target.value)}
+                placeholder={copy.startupPlaceholder}
+                rows={3}
+              />
+            </label>
+          </div>
+
+          <div className="runtime-quick-command-editor">
+            <header>
+              <div>
+                <span>{copy.quickTitle}</span>
+                <strong>{normalized.terminal.quickCommands.length}/8</strong>
+              </div>
+              <div>
+                <button type="button" onClick={onResetQuickCommands}>
+                  <RefreshCw size={14} aria-hidden="true" />
+                  <span>{copy.resetCommands}</span>
+                </button>
+                <button type="button" onClick={onAddQuickCommand} disabled={normalized.terminal.quickCommands.length >= 8}>
+                  <PlayCircle size={14} aria-hidden="true" />
+                  <span>{copy.addCommand}</span>
+                </button>
+              </div>
+            </header>
+            <div className="runtime-quick-command-list">
+              {normalized.terminal.quickCommands.map((command, index) => (
+                <article key={`${command.id}-${index}`} className="runtime-quick-command-row">
+                  <div className="runtime-custom-fields quick">
+                    <label>
+                      <span>{copy.commandLabel}</span>
+                      <input
+                        value={command.label}
+                        onChange={(event) => onQuickCommandChange(index, "label", event.target.value)}
+                      />
+                    </label>
+                    <label>
+                      <span>{copy.commandDetail}</span>
+                      <input
+                        value={command.detail}
+                        onChange={(event) => onQuickCommandChange(index, "detail", event.target.value)}
+                      />
+                    </label>
+                    <label>
+                      <span>{copy.commandInput}</span>
+                      <input
+                        data-runtime-quick-command-input={index}
+                        value={command.input}
+                        onChange={(event) => onQuickCommandChange(index, "input", event.target.value)}
+                      />
+                    </label>
+                  </div>
+                  <button type="button" onClick={() => onRemoveQuickCommand(index)} disabled={normalized.terminal.quickCommands.length <= 1}>
+                    <Trash2 size={14} aria-hidden="true" />
+                    <span>{copy.remove}</span>
+                  </button>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function DesktopRuntimePanel({
   agentCatalogCount,
   blockedTaskCount,
   sourceFiles,
   uiLanguage,
   initDefaults,
+  runtimeCustomization,
   providerCredentialReport,
   launchRequest,
   onLaunchRequestConsumed,
@@ -9274,6 +9821,7 @@ function DesktopRuntimePanel({
   sourceFiles: WorkspaceSourceFile[];
   uiLanguage: UiLanguage;
   initDefaults: RuntimeInitDefaults;
+  runtimeCustomization: RuntimeCustomization;
   providerCredentialReport?: ProviderCredentialReport | null;
   launchRequest?: RuntimeLaunchRequest | null;
   onLaunchRequestConsumed?: (requestId: string) => void;
@@ -9288,6 +9836,10 @@ function DesktopRuntimePanel({
   const copy = nativeWorkspaceCopy[uiLanguage];
   const isFileWorkspaceSurface = surface === "files";
   const initialSessionMode = sessionModePresets.find((mode) => mode.id === initDefaults.sessionModeId) || sessionModePresets[0];
+  const runtimeQuickCommands = useMemo(
+    () => normalizeRuntimeQuickCommands(runtimeCustomization.terminal.quickCommands),
+    [runtimeCustomization.terminal.quickCommands]
+  );
   const [runtimeState, setRuntimeState] = useState<"checking" | "available" | "unavailable">("checking");
   const [health, setHealth] = useState<DesktopHealthStatus | null>(null);
   const [adapters, setAdapters] = useState<CliAdapterStatus[]>(fallbackDesktopAdapters);
@@ -11026,8 +11578,21 @@ function DesktopRuntimePanel({
       if (workingDir.trim()) {
         args.workingDir = workingDir.trim();
       }
+      const shellCommand = runtimeCustomization.terminal.shellCommand.trim();
+      if (shellCommand) {
+        args.command = shellCommand;
+      }
       const report = await tauriInvoke<RuntimeNativePtySession>("start_native_pty_terminal", args);
       upsertNativePtySession(report);
+      const startupCommand = runtimeCustomization.terminal.startupCommand.trim();
+      if (startupCommand) {
+        const startupInput = startupCommand.endsWith("\n") ? startupCommand : `${startupCommand}\n`;
+        const startupReport = await tauriInvoke<RuntimeNativePtySession>("write_native_pty_terminal_input", {
+          sessionId: report.sessionId,
+          input: startupInput
+        });
+        upsertNativePtySession(startupReport);
+      }
     } catch (caught) {
       setError(errorMessage(caught));
     }
@@ -14411,6 +14976,7 @@ function DesktopRuntimePanel({
         uiLanguage={uiLanguage}
         workingDir={workingDir}
         workingDirOptions={workingDirOptions}
+        nativePtyQuickCommands={runtimeQuickCommands}
         nativePtySession={selectedNativePtySession}
         nativePtySessions={nativePtySessions}
         onCancelSession={cancelSession}
