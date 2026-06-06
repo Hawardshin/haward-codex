@@ -110,6 +110,7 @@ PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/princi
 PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/human-arbitration-agent.json
 PYTHONPATH=src python3 -m agent_platform.cli inspect-agent configs/agents/capability-promotion-agent.json
 PYTHONPATH=src python3 -m agent_platform.cli score-oss configs/open-source/candidate-template.json
+PYTHONPATH=src python3 -m agent_platform.cli check-oss-pattern-adoption configs/open-source/pattern-adoption-template.json
 PYTHONPATH=src python3 -m agent_platform.cli evaluate-work configs/evaluation/work-evaluation-template.json
 PYTHONPATH=src python3 -m agent_platform.cli validate-knowledge configs/evaluation/knowledge-validation-template.json
 PYTHONPATH=src python3 -m agent_platform.cli validate-skill configs/evaluation/skill-validation-template.json
@@ -147,7 +148,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `src/agent_platform/integrations/`: external service integrations such as Slack, Discord, and Teams notifications
 - `src/agent_platform/memory/`: memory bootstrap checks for durable context loading
 - `src/agent_platform/orchestration/`: agent creation and orchestration registry checks
-- `src/agent_platform/oss/`: open-source dependency evaluation helpers
+- `src/agent_platform/oss/`: open-source dependency evaluation and structure pattern adoption helpers
 - `src/agent_platform/planning/`: research-backed insight and planning checks
 - `configs/agents/`: declarative agent specs
 - `configs/evaluation/`: structured evaluation inputs
@@ -168,7 +169,7 @@ PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/integ
 - `configs/usage/unstructured-data-structuring-profile.json`: schema, provenance, null handling, and validation contract for turning messy input into structured records
 - `configs/evaluation/omission-guard-template.json`: required item, artifact, and acceptance-check coverage template for omission prevention
 - `configs/evaluation/resource-guard-template.json`: memory and runtime resource leak risk, lifecycle cleanup, and measurement evidence template
-- `configs/open-source/`: dependency candidate scoring inputs
+- `configs/open-source/`: dependency candidate scoring inputs and OSS structure pattern adoption plans
 - `research-insight-planner-agent` is the core Perplexity-style research agent for search, source ranking, evidence extraction, synthesis, citation grounding, and skeptic review
 - `deep-research-agent` validates multi-step deep research packages before long-form report writing
 - `requirements-manager-agent` keeps user requests, reviewed requirements, implementation, and evaluation connected

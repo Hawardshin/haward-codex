@@ -41,6 +41,7 @@ from agent_platform.orchestration.agent_orchestration import (
 )
 from agent_platform.orchestration.manager_tool import ManagerToolPlanInput, plan_manager_tool_orchestration
 from agent_platform.oss.evaluation import OpenSourceCandidate, evaluate_candidate
+from agent_platform.oss.pattern_adoption import check_pattern_adoption_plan
 from agent_platform.planning.coding_research import CodingResearchInput, complete_coding_research
 from agent_platform.planning.deep_research import DeepResearchInput, complete_deep_research
 from agent_platform.planning.parallel_work import ParallelWorkPlanInput, plan_parallel_work
@@ -72,6 +73,12 @@ def build_parser() -> argparse.ArgumentParser:
 
     score_oss = subparsers.add_parser("score-oss", help="Score an open-source candidate JSON file.")
     score_oss.add_argument("path", type=Path)
+
+    check_oss_patterns = subparsers.add_parser(
+        "check-oss-pattern-adoption",
+        help="Validate an open-source structure pattern adoption plan.",
+    )
+    check_oss_patterns.add_argument("path", type=Path)
 
     evaluate = subparsers.add_parser("evaluate-work", help="Evaluate completed work against the initial instruction.")
     evaluate.add_argument("path", type=Path)
@@ -230,6 +237,27 @@ def main(argv: list[str] | None = None) -> int:
         with args.path.open("r", encoding="utf-8") as file:
             candidate = OpenSourceCandidate(**json.load(file))
         print(json.dumps(evaluate_candidate(candidate), indent=2, ensure_ascii=False))
+        return 0
+
+    if args.command == "check-oss-pattern-adoption":
+        with args.path.open("r", encoding="utf-8") as file:
+            plan = json.load(file)
+        config_contract_report = check_config_contract(plan, str(args.path))
+        pattern_report = check_pattern_adoption_plan(plan)
+        print(
+            json.dumps(
+                {
+                    "status": "rework_required"
+                    if config_contract_report["requires_rework"] or pattern_report["requires_rework"]
+                    else "ready",
+                    "requires_rework": config_contract_report["requires_rework"] or pattern_report["requires_rework"],
+                    "config_contract": config_contract_report,
+                    "oss_pattern_adoption": pattern_report,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+        )
         return 0
 
     if args.command == "evaluate-work":

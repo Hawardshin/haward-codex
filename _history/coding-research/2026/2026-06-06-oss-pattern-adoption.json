@@ -1,0 +1,189 @@
+{
+  "schema_version": "2026-06-06",
+  "task": "Implement an OSS structure pattern adoption gate for agent-platform.",
+  "technology_stack": [
+    "Python 3",
+    "argparse CLI",
+    "JSON self-documenting configs",
+    "unittest"
+  ],
+  "technology_official_docs": [
+    "https://docs.python.org/3/library/argparse.html",
+    "https://docs.python.org/3/library/unittest.html",
+    "https://docs.github.com/rest/repos/repos",
+    "https://docs.github.com/rest/repos/contents"
+  ],
+  "stack_version_constraints": {
+    "agent_platform": "Use the existing Python package layout and PYTHONPATH=src validation commands.",
+    "dependencies": "No new dependency install in this slice.",
+    "external_code": "No external source code copied into durable source."
+  },
+  "source_types": [
+    "official_docs",
+    "repository_primary_source",
+    "local_source",
+    "community_signal",
+    "repository_policy"
+  ],
+  "reference_config_paths": [
+    "agent-platform/configs/research/coding-research-profile.json",
+    "agent-platform/configs/open-source/candidate-template.json",
+    "agent-platform/configs/open-source/pattern-adoption-template.json"
+  ],
+  "external_sources": [
+    {
+      "url": "https://github.com/langchain-ai/langgraph",
+      "type": "repository_primary_source",
+      "used_for": "State/checkpoint adapter pattern."
+    },
+    {
+      "url": "https://github.com/openai/openai-agents-python",
+      "type": "repository_primary_source",
+      "used_for": "Agent lifecycle, guardrail, handoff, sandbox, and tracing separation."
+    },
+    {
+      "url": "https://github.com/pydantic/pydantic-ai",
+      "type": "repository_primary_source",
+      "used_for": "Typed tool, provider, model, and MCP boundaries."
+    },
+    {
+      "url": "https://github.com/langgenius/dify",
+      "type": "repository_primary_source",
+      "used_for": "Productized API/web/CLI/agent/package/SDK split reference."
+    },
+    {
+      "url": "https://github.com/mastra-ai/mastra",
+      "type": "repository_primary_source",
+      "used_for": "TypeScript module split and hybrid module signal."
+    },
+    {
+      "url": "https://github.com/vercel/ai",
+      "type": "repository_primary_source",
+      "used_for": "Provider package and framework binding split reference."
+    }
+  ],
+  "issue_discussion_sources": [
+    {
+      "url": "https://github.com/topics/ai-agent",
+      "signal": "Topic search used to discover adoption signals and suspicious/noisy candidates.",
+      "evidence_role": "community_signal_only"
+    },
+    {
+      "url": "https://github.com/topics/mcp",
+      "signal": "Topic search used to identify current ecosystem clustering around tools and protocol adapters.",
+      "evidence_role": "community_signal_only"
+    }
+  ],
+  "issue_discussion_notes": "Issue/discussion signals were not used as factual proof. This slice relied on repository metadata, selected contents, local source, and policy constraints.",
+  "community_signal_notes": "Stars and trending-style discovery influenced which repositories to inspect first. They did not determine adoption decisions.",
+  "language_options": [
+    {
+      "language": "Python",
+      "fit": "Best fit for existing agent-platform validators, CLI commands, JSON configs, and tests."
+    },
+    {
+      "language": "TypeScript",
+      "fit": "Best candidate for future provider SDK packages, UI-facing modules, and web adapter surfaces."
+    },
+    {
+      "language": "Rust or Go",
+      "fit": "Candidate for future sandbox, process supervisor, file watcher, or performance-sensitive sidecar."
+    },
+    {
+      "language": "C#/.NET",
+      "fit": "Reference candidate for Semantic Kernel style plugin/kernel service, not selected for this slice."
+    }
+  ],
+  "selected_language": "Python",
+  "language_decision_notes": "The immediate capability is a governance validator and CLI. Python matches the existing platform boundary, avoids new installs, and keeps tests local.",
+  "architecture_reference_sources": [
+    "agent-platform/src/agent_platform/oss/evaluation.py",
+    "agent-platform/src/agent_platform/governance/config_contract.py",
+    "agent-platform/src/agent_platform/cli.py",
+    "OpenAI Agents Python module split",
+    "LangGraph checkpoint package split",
+    "Pydantic AI provider/tool split",
+    "Dify/Mastra/Vercel AI product and package split"
+  ],
+  "architecture_options": [
+    {
+      "option": "Extend existing OSS validation layer",
+      "pros": [
+        "Smallest coherent platform change",
+        "No external dependency or copied code",
+        "Reuses existing CLI/config/test patterns"
+      ],
+      "cons": [
+        "Does not directly import open-source features"
+      ]
+    },
+    {
+      "option": "Clone and adapt a framework",
+      "pros": [
+        "Could copy feature behavior faster for a specific target"
+      ],
+      "cons": [
+        "Requires license review, pinned commit, attribution, tests, rollback, and human checkpoint",
+        "Too broad without a specific feature target"
+      ]
+    },
+    {
+      "option": "Build hybrid sidecar module",
+      "pros": [
+        "Can use another ecosystem when it is materially stronger"
+      ],
+      "cons": [
+        "Requires separate build, install audit, adapter schema, and lifecycle verification"
+      ]
+    }
+  ],
+  "architecture_decision_notes": "Selected the existing OSS validation layer. It handles the user's broad structure request while preventing unsafe omissions around direct import and hybrid modules.",
+  "architecture_theory_sources": [
+    "Local adapter rule in agent-platform/docs/open-source-integration.md",
+    "Self-documenting config contract in agent-platform/src/agent_platform/governance/config_contract.py",
+    "Ports-and-adapters style boundary as local policy: core platform models must not depend on third-party framework internals"
+  ],
+  "architecture_practitioner_sources": [
+    "OpenAI Agents Python",
+    "LangGraph",
+    "Pydantic AI",
+    "Dify",
+    "Mastra",
+    "Vercel AI SDK",
+    "OpenHands",
+    "CrewAI",
+    "Semantic Kernel"
+  ],
+  "architecture_tradeoff_notes": "Repository structures converge around separated agent lifecycle, tools/providers, state/checkpoints, product packages, and runtime/sandbox boundaries. Local policy favors adopting those as contracts first, not copying source.",
+  "code_reference_sources": [
+    "agent-platform/src/agent_platform/oss/evaluation.py",
+    "agent-platform/src/agent_platform/governance/config_contract.py",
+    "agent-platform/src/agent_platform/cli.py",
+    "agent-platform/tests/test_runtime_and_oss.py",
+    "GitHub contents paths recorded in agent-platform/configs/open-source/pattern-adoption-template.json"
+  ],
+  "code_reference_notes": "Implementation follows existing dataclass/lightweight validation style, JSON CLI command style, and unittest structure.",
+  "folder_structure_options": [
+    {
+      "option": "Use existing agent_platform.oss module",
+      "decision": "Selected because OSS provenance and adoption logic belongs beside dependency evaluation."
+    },
+    {
+      "option": "Create a new root project",
+      "decision": "Rejected because no standalone lab or cloned framework is needed."
+    },
+    {
+      "option": "Put logic in orchestration module",
+      "decision": "Rejected because OSS pattern provenance should not be mixed with agent orchestration contracts."
+    }
+  ],
+  "folder_structure_decision_notes": "Source goes under agent-platform/src/agent_platform/oss, config under agent-platform/configs/open-source, tests under agent-platform/tests.",
+  "folder_semantics_notes": "The oss module owns open-source dependency scoring and structure pattern adoption gates.",
+  "maintainability_notes": "Keep the validator deterministic and dependency-free; future direct import or hybrid implementation must add explicit audit records and tests.",
+  "post_research_answers": [
+    "Should code be cloned now: no, no specific feature target passed license/provenance/import gates.",
+    "Should another language be used now: no, but TypeScript/Rust/Go/C# are recorded as bounded hybrid options.",
+    "What is implemented now: Python-native pattern adoption validator, CLI, config, tests, and docs.",
+    "What remains for future work: direct feature import, provider adapter, sandbox sidecar, or productized package split only after a narrower target and audit."
+  ]
+}

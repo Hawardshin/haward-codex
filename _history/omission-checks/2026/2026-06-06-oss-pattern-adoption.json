@@ -1,0 +1,152 @@
+{
+  "task": "Implement an OSS structure pattern adoption gate for agent-platform.",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "web-first",
+      "description": "Run web search before planning and implementation.",
+      "source": "AGENTS.md and user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-06-oss-pattern-adoption.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "open-source-patterns",
+      "description": "Find reusable structure patterns from high-signal open-source repositories, including other languages.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/open-source/pattern-adoption-template.json",
+        "_history/coding-research/2026/2026-06-06-oss-pattern-adoption.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "implementation",
+      "description": "Implement a durable mechanism rather than stopping at research.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/src/agent_platform/oss/pattern_adoption.py",
+        "agent-platform/src/agent_platform/cli.py",
+        "agent-platform/tests/test_oss_pattern_adoption.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "direct-code-import",
+      "description": "Consider clone/direct feature import but prevent unsafe copying.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/open-source/pattern-adoption-template.json",
+        "agent-platform/tests/test_oss_pattern_adoption.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "hybrid-module",
+      "description": "Consider other-language hybrid modules with separate build boundaries.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/open-source/pattern-adoption-template.json",
+        "agent-platform/src/agent_platform/oss/pattern_adoption.py"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "docs-and-history",
+      "description": "Update durable docs and close-out records.",
+      "source": "repository rules",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/docs/open-source-integration.md",
+        "agent-platform/README.md",
+        "agent-platform/docs/requirements/2026-06-06-oss-pattern-adoption.ko.md",
+        "agent-platform/specs/2026-06-06-oss-pattern-adoption/spec.ko.md"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-platform/src/agent_platform/oss/pattern_adoption.py",
+      "purpose": "Pattern adoption validator.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/configs/open-source/pattern-adoption-template.json",
+      "purpose": "Self-documenting OSS pattern adoption plan.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/tests/test_oss_pattern_adoption.py",
+      "purpose": "Unit tests for adoption gates.",
+      "required": true
+    },
+    {
+      "path": "agent-platform/specs/2026-06-06-oss-pattern-adoption/spec.ko.md",
+      "purpose": "Spec-driven artifact.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "pattern-adoption-ready",
+      "description": "Pattern adoption CLI returns ready for the template.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-oss-pattern-adoption configs/open-source/pattern-adoption-template.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "config-contract-ready",
+      "description": "Pattern adoption config passes self-documenting config contract.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/open-source/pattern-adoption-template.json"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "targeted-tests",
+      "description": "Touched-area tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m unittest tests.test_oss_pattern_adoption tests.test_runtime_and_oss"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "full-tests",
+      "description": "Full agent-platform test suite.",
+      "required": false,
+      "status": "failed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m unittest discover -s tests failed because existing philosophy registry checks reference missing workspace-monitor path."
+      ],
+      "rationale": "The failure is pre-existing/unrelated to this OSS adoption gate change."
+    }
+  ],
+  "known_omission_risks": [
+    "Direct source copying was intentionally not performed because no specific feature target passed license/provenance gates.",
+    "Repositories with unclear license posture are reference-only until dedicated license review."
+  ],
+  "notes": [
+    "No dependency installation occurred.",
+    "No long-running runtime, server, browser automation, or multi-process CLI orchestration was introduced."
+  ]
+}
