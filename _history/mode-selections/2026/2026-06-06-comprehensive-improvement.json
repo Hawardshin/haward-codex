@@ -1,0 +1,16 @@
+{
+  "date": "2026-06-06",
+  "request_slug": "comprehensive-improvement",
+  "project": "platform-desktop-app",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "selection_reasons": [
+    "The request is broad and asks for implementation, performance, UI, design, usability, and feature improvement.",
+    "The work changes product UI and validation contracts but does not require a new dependency install.",
+    "A bounded implementation slice can be shipped with check, test, build, internal package, and Browser smoke."
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-06-comprehensive-improvement.json"
+  ]
+}

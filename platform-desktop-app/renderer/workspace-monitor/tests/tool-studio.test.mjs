@@ -125,7 +125,16 @@ test("AI Eval is a first-class resident workbench section", () => {
   assert.match(monitorShell, /id:\s*"eval"[\s\S]*?cta:\s*uiLanguage === "ko" \? "AI 평가 열기" : "Open AI Eval"/);
   assert.match(monitorShell, /section === "eval"[\s\S]*?<EvaluationReportPanel/);
   assert.match(evaluationReportPanel, /data-eval-workbench="open-source-eval-cockpit"/);
+  assert.match(evaluationReportPanel, /data-eval-comprehensive-improvement="all-signal-cockpit"/);
   assert.match(evaluationReportPanel, /Current work evaluation report/);
+  assert.match(evaluationReportPanel, /Composite Improvement Cockpit/);
+  assert.match(evaluationReportPanel, /desktop-performance/);
+  assert.match(evaluationReportPanel, /ux-control-clarity/);
+  assert.match(evaluationReportPanel, /native-resource-lifecycle/);
+  assert.match(evaluationReportPanel, /eval-evidence/);
+  assert.match(evaluationReportPanel, /release-packaging/);
+  assert.match(evaluationReportPanel, /open-source-leverage/);
+  assert.match(evaluationReportPanel, /automation-continuity/);
   assert.match(evaluationReportPanel, /Token and Cost Tracking/);
   assert.match(evaluationReportPanel, /OpenAI Evals/);
   assert.match(evaluationReportPanel, /Inspect AI/);
@@ -136,8 +145,13 @@ test("AI Eval is a first-class resident workbench section", () => {
   assert.match(evaluationReportPanel, /Langfuse/);
   assert.match(css, /\.eval-workbench \{/);
   assert.match(css, /\.eval-score-strip \{/);
+  assert.match(css, /\.eval-comprehensive-panel \{/);
+  assert.match(css, /\.eval-comprehensive-grid \{/);
+  assert.match(css, /\.eval-dimension-meter \{/);
   assert.match(css, /\.eval-tool-grid \{/);
   assert.match(css, /\.eval-open-source-grid \{/);
+  assert.match(packageJson.scripts.check, /check-comprehensive-improvement-contract\.mjs/);
+  assert.equal(packageJson.scripts["check:comprehensive-improvement"], "node scripts/check-comprehensive-improvement-contract.mjs");
 });
 
 test("Tool Studio uses open-source menu primitives and exact dependencies", () => {

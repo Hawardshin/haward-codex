@@ -4989,6 +4989,9 @@ h3 {
 }
 
 .eval-score-strip,
+.eval-comprehensive-summary,
+.eval-comprehensive-grid,
+.eval-comprehensive-priority,
 .eval-report-grid,
 .eval-token-grid,
 .eval-tool-grid,
@@ -5022,6 +5025,11 @@ h3 {
 }
 
 .eval-score-strip span,
+.eval-comprehensive-panel p,
+.eval-comprehensive-summary span,
+.eval-comprehensive-priority p,
+.eval-dimension-card p,
+.eval-dimension-card small,
 .eval-tool-grid span,
 .eval-open-source-grid p,
 .eval-bottleneck-list p,
@@ -5060,6 +5068,166 @@ h3 {
   padding: 8px 12px;
   box-shadow: var(--choice-shadow);
   font-weight: 850;
+}
+
+.eval-comprehensive-panel {
+  display: grid;
+  gap: 12px;
+  border-color: color-mix(in srgb, #7c5a1f 32%, var(--line));
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--surface) 84%, #21776d 16%), color-mix(in srgb, var(--surface-raised) 88%, #c58b2f 12%));
+}
+
+.eval-comprehensive-panel .panel-heading {
+  align-items: start;
+}
+
+.eval-comprehensive-panel .panel-heading > svg {
+  color: color-mix(in srgb, var(--accent-primary) 76%, #c58b2f);
+}
+
+.eval-comprehensive-panel .panel-heading p:not(.eyebrow) {
+  max-width: 760px;
+  margin: 6px 0 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.eval-comprehensive-summary {
+  grid-template-columns: minmax(180px, 0.75fr) minmax(140px, 0.45fr) minmax(260px, 1.4fr);
+}
+
+.eval-comprehensive-summary article,
+.eval-comprehensive-priority article,
+.eval-dimension-card {
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 74%, var(--accent-primary));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface-raised) 90%, #ffffff 10%);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+}
+
+.eval-comprehensive-summary article {
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+}
+
+.eval-comprehensive-summary span,
+.eval-dimension-card p,
+.eval-dimension-card small,
+.eval-comprehensive-priority p {
+  color: var(--muted);
+  font-size: var(--font-size-caption);
+  line-height: 1.45;
+}
+
+.eval-comprehensive-summary strong {
+  overflow-wrap: anywhere;
+  font-size: var(--font-size-section-title);
+  line-height: var(--line-height-tight);
+}
+
+.eval-comprehensive-summary .state-risk {
+  border-color: color-mix(in srgb, var(--status-danger-text) 48%, var(--line));
+  background: color-mix(in srgb, var(--surface) 82%, var(--status-danger-bg) 18%);
+}
+
+.eval-comprehensive-summary .state-watch {
+  border-color: color-mix(in srgb, var(--status-warning-text) 42%, var(--line));
+  background: color-mix(in srgb, var(--surface) 84%, var(--status-warning-bg) 16%);
+}
+
+.eval-comprehensive-summary .state-strong {
+  border-color: color-mix(in srgb, var(--status-success-text) 42%, var(--line));
+  background: color-mix(in srgb, var(--surface) 84%, var(--status-success-bg) 16%);
+}
+
+.eval-comprehensive-grid {
+  grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+}
+
+.eval-dimension-card {
+  display: grid;
+  gap: 8px;
+  padding: 11px;
+}
+
+.eval-dimension-card > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.eval-dimension-card strong {
+  overflow-wrap: anywhere;
+  font-size: var(--font-size-body);
+  line-height: 1.25;
+}
+
+.eval-dimension-card > div span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-muted);
+  padding: 3px 8px;
+  font-size: var(--font-size-overline);
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.eval-dimension-meter {
+  display: block;
+  overflow: hidden;
+  block-size: 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 58%, var(--surface-muted));
+}
+
+.eval-dimension-meter b {
+  display: block;
+  block-size: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #21776d, #c58b2f);
+}
+
+.eval-dimension-card.state-risk {
+  border-color: color-mix(in srgb, var(--status-danger-text) 42%, var(--line));
+}
+
+.eval-dimension-card.state-watch {
+  border-color: color-mix(in srgb, var(--status-warning-text) 38%, var(--line));
+}
+
+.eval-dimension-card.state-strong {
+  border-color: color-mix(in srgb, var(--status-success-text) 38%, var(--line));
+}
+
+.eval-comprehensive-priority {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.eval-comprehensive-priority article {
+  display: grid;
+  gap: 6px;
+  padding: 10px;
+}
+
+.eval-comprehensive-priority span {
+  width: fit-content;
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 42%, var(--line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 78%, var(--accent-primary) 22%);
+  color: var(--text);
+  padding: 3px 8px;
+  font-size: var(--font-size-overline);
+  font-weight: 900;
+}
+
+.eval-comprehensive-priority strong {
+  overflow-wrap: anywhere;
+  font-size: var(--font-size-body);
+  line-height: 1.25;
 }
 
 .eval-report-grid {

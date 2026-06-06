@@ -46,6 +46,18 @@ type EvalCandidateRepo = {
   status: string;
 };
 
+type ImprovementDimension = {
+  id: string;
+  labelKo: string;
+  labelEn: string;
+  score: number;
+  state: "strong" | "watch" | "risk";
+  evidenceKo: string;
+  evidenceEn: string;
+  nextKo: string;
+  nextEn: string;
+};
+
 export type EvaluationReportPanelProps = {
   language: "ko" | "en";
   documents: EvalDocument[];
@@ -230,6 +242,20 @@ function scoreFromRatio(value: number, max: number) {
   return Math.min(100, Math.round((value / max) * 100));
 }
 
+function clampScore(value: number) {
+  return Math.max(0, Math.min(100, Math.round(value)));
+}
+
+function scoreState(score: number): ImprovementDimension["state"] {
+  if (score >= 80) {
+    return "strong";
+  }
+  if (score >= 62) {
+    return "watch";
+  }
+  return "risk";
+}
+
 function latestByCategory(documents: EvalDocument[], category: string) {
   return documents.find((document) => document.category === category) || null;
 }
@@ -340,6 +366,117 @@ export function EvaluationReportPanel({
       severity: blockedTasks > 0 ? "high" : "low"
     }
   ];
+  const toolSignalCount = (id: string) => toolRows.find((tool) => tool.id === id)?.count || 0;
+  const documentsMatching = (query: RegExp) => documents.filter((document) => query.test(textOf(document))).length;
+  const designSignalCount = documentsMatching(/design|ui|ux|visual|button|dropdown|select|sidebar|control|디자인|버튼|드롭다운|선택|사이드바/i);
+  const nativeResourceSignalCount = documentsMatching(
+    /resource|process|pipe|memory|cpu|ram|leak|terminal|pty|tauri|rust|native|운영체제|메모리|프로세스|파이프/i
+  );
+  const releaseSignalCount = toolSignalCount("package") + documentsMatching(/build|package|dmg|codesign|notar|release|빌드|패키징|배포/i);
+  const openSourceLayerScore = scoreFromRatio(
+    (openSourceReferences.summary?.totalLayers || openSourceReferences.featureReferenceLayers.length || 0) +
+      (openSourceReferences.summary?.totalRepositories || openSourceCandidates.length || 0),
+    16
+  );
+  const historyLoopScore = scoreFromRatio(
+    (stats.historyInsightPatterns || 0) +
+      (stats.historyInsightRecommendations || 0) +
+      (stats.fundamentalImprovementPrinciples || 0) +
+      (stats.fundamentalImprovementPackages || 0) +
+      (stats.fundamentalImprovementFitnessChecks || 0),
+    18
+  );
+  const comprehensiveImprovementDimensions: ImprovementDimension[] = [
+    {
+      id: "desktop-performance",
+      labelKo: "데스크톱 성능",
+      labelEn: "Desktop Performance",
+      score: clampScore(
+        scoreFromRatio(timingDocs.length + (stats.timingRecords || 0), 10) * 0.42 +
+          scoreFromRatio(toolSignalCount("browser") + toolSignalCount("typescript"), 8) * 0.38 +
+          scoreFromRatio(nativeResourceSignalCount, 10) * 0.2
+      ),
+      state: "watch",
+      evidenceKo: `${timingDocs.length.toLocaleString("ko-KR")} timing docs / ${toolSignalCount("browser").toLocaleString("ko-KR")} browser signals`,
+      evidenceEn: `${timingDocs.length.toLocaleString("ko-KR")} timing docs / ${toolSignalCount("browser").toLocaleString("ko-KR")} browser signals`,
+      nextKo: "탭 전환, long task, resident preload를 같은 smoke run에서 계속 측정합니다.",
+      nextEn: "Keep tab switching, long tasks, and resident preload measured in one smoke run."
+    },
+    {
+      id: "ux-control-clarity",
+      labelKo: "UX/컨트롤 명확성",
+      labelEn: "UX Control Clarity",
+      score: clampScore(scoreFromRatio(designSignalCount, 14) * 0.5 + scoreFromRatio(requirementDocs.length + specDocs.length, 18) * 0.5),
+      state: "watch",
+      evidenceKo: `${designSignalCount.toLocaleString("ko-KR")} design/control records`,
+      evidenceEn: `${designSignalCount.toLocaleString("ko-KR")} design/control records`,
+      nextKo: "텍스트 입력형 설정은 선택형 primitive로 승격하고 버튼 크기/음영 계약을 유지합니다.",
+      nextEn: "Promote text-only settings to choice primitives and keep button sizing/shadow contracts."
+    },
+    {
+      id: "native-resource-lifecycle",
+      labelKo: "네이티브 리소스 생명주기",
+      labelEn: "Native Resource Lifecycle",
+      score: clampScore(scoreFromRatio(nativeResourceSignalCount, 12) * 0.45 + scoreFromRatio(toolSignalCount("rust-tauri"), 4) * 0.35 + validationSignalScore * 0.2),
+      state: "watch",
+      evidenceKo: `${nativeResourceSignalCount.toLocaleString("ko-KR")} resource/process records`,
+      evidenceEn: `${nativeResourceSignalCount.toLocaleString("ko-KR")} resource/process records`,
+      nextKo: "PTY, subprocess, timers, cache, memory retention은 시작/종료 소유권을 하나씩 계약화합니다.",
+      nextEn: "Contract ownership for PTYs, subprocesses, timers, caches, and memory retention."
+    },
+    {
+      id: "eval-evidence",
+      labelKo: "근거/EVAL 폐쇄성",
+      labelEn: "Evidence and EVAL Closure",
+      score: clampScore(evidenceScore * 0.48 + validationSignalScore * 0.34 + currentWorkScore * 0.18),
+      state: "watch",
+      evidenceKo: `${evidenceCategories.toLocaleString("ko-KR")} evidence categories`,
+      evidenceEn: `${evidenceCategories.toLocaleString("ko-KR")} evidence categories`,
+      nextKo: "요구사항, spec, validation, 평가, trace가 한 작업 점수로 이어지게 합니다.",
+      nextEn: "Keep requirements, specs, validation, evals, and traces tied to one work score."
+    },
+    {
+      id: "release-packaging",
+      labelKo: "빌드/패키징 자동화",
+      labelEn: "Release Packaging",
+      score: clampScore(scoreFromRatio(releaseSignalCount, 14) * 0.65 + scoreFromRatio(toolSignalCount("git"), 5) * 0.2 + validationSignalScore * 0.15),
+      state: "watch",
+      evidenceKo: `${releaseSignalCount.toLocaleString("ko-KR")} build/package records`,
+      evidenceEn: `${releaseSignalCount.toLocaleString("ko-KR")} build/package records`,
+      nextKo: "구현 후 내부 패키징까지 자동 실행하고 실패는 화면과 기록 양쪽에 남깁니다.",
+      nextEn: "Run internal packaging after implementation and keep failures visible in UI and records."
+    },
+    {
+      id: "open-source-leverage",
+      labelKo: "오픈소스 활용성",
+      labelEn: "Open-Source Leverage",
+      score: clampScore(openSourceLayerScore * 0.72 + scoreFromRatio(toolSignalCount("web-search"), 8) * 0.28),
+      state: "watch",
+      evidenceKo: `${openSourceCandidates.length.toLocaleString("ko-KR")} eval/reference candidates`,
+      evidenceEn: `${openSourceCandidates.length.toLocaleString("ko-KR")} eval/reference candidates`,
+      nextKo: "설치가 필요한 후보는 audit, license, rollback, verification을 통과한 뒤 붙입니다.",
+      nextEn: "Install candidates only after audit, license, rollback, and verification are recorded."
+    },
+    {
+      id: "automation-continuity",
+      labelKo: "반복 개선 자동화",
+      labelEn: "Automation Continuity",
+      score: clampScore(historyLoopScore * 0.58 + scoreFromRatio(requestTraceDocs.length + workSummaryDocs.length, 18) * 0.42),
+      state: "watch",
+      evidenceKo: `${(stats.historyInsightPatterns || 0).toLocaleString("ko-KR")} history patterns`,
+      evidenceEn: `${(stats.historyInsightPatterns || 0).toLocaleString("ko-KR")} history patterns`,
+      nextKo: "반복 지적은 prompt, workflow, tool, skill, feature 중 가장 작은 durable asset으로 승격합니다.",
+      nextEn: "Promote repeated friction into the smallest durable prompt, workflow, tool, skill, or feature."
+    }
+  ].map((dimension) => ({
+    ...dimension,
+    state: scoreState(dimension.score)
+  }));
+  const comprehensiveImprovementScore = clampScore(
+    comprehensiveImprovementDimensions.reduce((total, dimension) => total + dimension.score, 0) / comprehensiveImprovementDimensions.length
+  );
+  const priorityDimensions = [...comprehensiveImprovementDimensions].sort((left, right) => left.score - right.score).slice(0, 3);
+  const riskLaneCount = comprehensiveImprovementDimensions.filter((dimension) => dimension.state === "risk").length;
 
   return (
     <section className="eval-workbench" data-eval-workbench="open-source-eval-cockpit" aria-label={ko ? "AI 평가 작업대" : "AI evaluation workbench"}>
@@ -387,6 +524,59 @@ export function EvaluationReportPanel({
             <Activity size={15} aria-hidden="true" />
             <span>{ko ? "런타임 보기" : "Open runtime"}</span>
           </button>
+        </div>
+      </section>
+
+      <section className="panel wide eval-comprehensive-panel" data-eval-comprehensive-improvement="all-signal-cockpit">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">{ko ? "종합 개선" : "Comprehensive Improvement"}</p>
+            <h2>{ko ? "전체 개선 cockpit" : "Composite Improvement Cockpit"}</h2>
+            <p>
+              {ko
+                ? "성능, UI, 네이티브 리소스, EVAL, 패키징, 오픈소스, 자동화 신호를 하나의 우선순위로 압축합니다."
+                : "Compress performance, UI, native resources, EVAL, packaging, open source, and automation signals into one priority model."}
+            </p>
+          </div>
+          <Gauge size={20} aria-hidden="true" />
+        </div>
+        <div className="eval-comprehensive-summary" aria-label={ko ? "종합 개선 요약" : "Comprehensive improvement summary"}>
+          <article className={`state-${scoreState(comprehensiveImprovementScore)}`}>
+            <span>{ko ? "종합 점수" : "Composite score"}</span>
+            <strong>{percent(comprehensiveImprovementScore)}</strong>
+          </article>
+          <article>
+            <span>{ko ? "위험 lane" : "Risk lanes"}</span>
+            <strong>{riskLaneCount.toLocaleString("ko-KR")}</strong>
+          </article>
+          <article>
+            <span>{ko ? "최우선" : "Top priority"}</span>
+            <strong>{ko ? priorityDimensions[0]?.labelKo : priorityDimensions[0]?.labelEn}</strong>
+          </article>
+        </div>
+        <div className="eval-comprehensive-grid">
+          {comprehensiveImprovementDimensions.map((dimension) => (
+            <article key={dimension.id} className={`eval-dimension-card state-${dimension.state}`} data-improvement-dimension={dimension.id}>
+              <div>
+                <strong>{ko ? dimension.labelKo : dimension.labelEn}</strong>
+                <span>{percent(dimension.score)}</span>
+              </div>
+              <i className="eval-dimension-meter" aria-hidden="true">
+                <b style={{ inlineSize: `${dimension.score}%` }} />
+              </i>
+              <p>{ko ? dimension.evidenceKo : dimension.evidenceEn}</p>
+              <small>{ko ? dimension.nextKo : dimension.nextEn}</small>
+            </article>
+          ))}
+        </div>
+        <div className="eval-comprehensive-priority">
+          {priorityDimensions.map((dimension, index) => (
+            <article key={dimension.id}>
+              <span>{`P${index + 1}`}</span>
+              <strong>{ko ? dimension.labelKo : dimension.labelEn}</strong>
+              <p>{ko ? dimension.nextKo : dimension.nextEn}</p>
+            </article>
+          ))}
         </div>
       </section>
 

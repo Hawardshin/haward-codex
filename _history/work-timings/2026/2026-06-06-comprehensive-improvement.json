@@ -1,0 +1,58 @@
+{
+  "task_id": "2026-06-06-comprehensive-improvement",
+  "title": "Platform desktop app comprehensive improvement cockpit",
+  "date": "2026-06-06",
+  "project": "platform-desktop-app",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Checked official desktop UX, Tauri process model, WCAG, and code review decomposition references."
+    },
+    {
+      "phase_id": "memory_bootstrap_and_decomposition",
+      "label": "Memory bootstrap and decomposition",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Ran memory bootstrap and selected the platform-desktop-app EVAL cockpit slice from a broad request."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Created requirements, spec, plan, tasks, validation, traceability, research, and provenance records."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Added comprehensive improvement scoring UI, CSS, static contract script, package check wiring, and tests."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "package:internal intentionally repeats checks, tests, customer build, Rust build, and Tauri bundling.",
+      "notes": "Ran collector, check, tests, renderer build, package:internal, and Browser smoke."
+    },
+    {
+      "phase_id": "evaluation_closeout",
+      "label": "Evaluation and close-out",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Recorded omission, resource, work summary, request trace, validation, and evaluation documents."
+    }
+  ],
+  "slow_phase_candidates": [
+    "Tauri internal package build",
+    "workspace-monitor full test suite inside package pipeline"
+  ],
+  "bottleneck_notes": "The longest observed phase was package:internal because it intentionally repeats renderer checks/tests, customer build/audit, Rust build, and Tauri bundling. This is expected for release confidence but remains a candidate for cached internal packaging lanes."
+}

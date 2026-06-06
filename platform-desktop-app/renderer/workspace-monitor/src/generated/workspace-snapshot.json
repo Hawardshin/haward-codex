@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-05T23:52:05.924Z",
+  "generatedAt": "2026-06-06T00:07:22.858Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -17,7 +17,7 @@
     "webSearches": 14,
     "timingRecords": 14,
     "historyDays": 1,
-    "adminHistoryDocuments": 2533,
+    "adminHistoryDocuments": 2540,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7603,6 +7603,230 @@
   ],
   "documents": [
     {
+      "id": "history-work-timings-2026-2026-06-06-comprehensive-improvement-json",
+      "path": "_history/work-timings/2026/2026-06-06-comprehensive-improvement.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Comprehensive Improvement",
+      "excerpt": "{ \"task id\": \"2026 06 06 comprehensive improvement\", \"title\": \"Platform desktop app comprehensive improvement cockpit\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", ",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 comprehensive improvement&quot;, &quot;title&quot;: &quot;Platform desktop app comprehensive improvement cockpit&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2454,
+      "updatedAt": "2026-06-06T00:06:52.599Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-comprehensive-improvement-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-comprehensive-improvement.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "2026 06 06 종합 개선 평가",
+      "excerpt": "2026 06 06 종합 개선 평가 평가 대상 요청: 성능, UI, 기능, 사용성, 디자인 개선을 종합해 실제로 구현. 구현 slice: platform desktop app workspace monitor EVAL 탭 종합 개선 cockpit. 완료 기준 평가 성능: 직접 runtime latency 개선은 이번 slice의 주 구현은 아니지만, 성능을 desktop performance 차원으로 고정하고 후속 telemetry 연결 지점을 만들었다. UI/디자인/사용성: EVAL 탭에 desk",
+      "html": "<p>2026 06 06 종합 개선 평가 평가 대상 요청: 성능, UI, 기능, 사용성, 디자인 개선을 종합해 실제로 구현. 구현 slice: platform desktop app workspace monitor EVAL 탭 종합 개선 cockpit. 완료 기준 평가 성능: 직접 runtime latency 개선은 이번 slice의 주 구현은 아니지만, 성능을 desktop performance 차원으로 고정하고 후속 telemetry 연결 지점을 만들었다. UI/디자인/사용성: EVAL 탭에 desktop dense 종합 개선 panel, 점수 카드, 차원 카드, 우선순위 카드를 추가했다. 기능: 현재 작업 평가를 넘어 7개 개선 차원을 비</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2223,
+      "updatedAt": "2026-06-06T00:06:23.552Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-comprehensive-improvement-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-comprehensive-improvement.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "2026 06 06 종합 개선 request trace",
+      "excerpt": "2026 06 06 종합 개선 request trace 요청 사용자는 전체적인 성능, UI, 기능, 사용성, 디자인 개선을 종합해 구현하라고 요청했다. 결정 대범위 분해 결과 첫 slice는 platform desktop app 의 EVAL 탭 종합 개선 cockpit로 정했다. 새 의존성 설치는 하지 않았다. 새 탭을 만들지 않고 기존 EVAL resident workbench 안에 종합 개선 모델을 추가했다. 산출물 요구사항: platform desktop app/docs/requirement",
+      "html": "<p>2026 06 06 종합 개선 request trace 요청 사용자는 전체적인 성능, UI, 기능, 사용성, 디자인 개선을 종합해 구현하라고 요청했다. 결정 대범위 분해 결과 첫 slice는 platform desktop app 의 EVAL 탭 종합 개선 cockpit로 정했다. 새 의존성 설치는 하지 않았다. 새 탭을 만들지 않고 기존 EVAL resident workbench 안에 종합 개선 모델을 추가했다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 comprehensive improvement.ko.md spec: platform desktop app/specs/20</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1689,
+      "updatedAt": "2026-06-06T00:06:23.552Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-comprehensive-improvement-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-comprehensive-improvement.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "2026 06 06 사용자 요청 요약",
+      "excerpt": "2026 06 06 사용자 요청 요약 요약 사용자는 누적된 성능, UI, 기능, 사용성, 디자인, 네이티브 자원 활용, EVAL, 오픈소스 참고, 기록 기반 개선 요구를 종합해 전체 개선을 요청했다. 해석 전 저장소 무차별 변경이 아니라, 실제 제품에서 종합 개선을 계속 판단하고 우선순위를 정할 수 있는 구조가 필요하다. 기존 platform desktop app 의 EVAL 탭이 현재 작업, 히스토리, 토큰/툴, 오픈소스 EVAL 후보를 이미 모으므로 첫 구현 slice로 적합하다. 적용 범위 ",
+      "html": "<p>2026 06 06 사용자 요청 요약 요약 사용자는 누적된 성능, UI, 기능, 사용성, 디자인, 네이티브 자원 활용, EVAL, 오픈소스 참고, 기록 기반 개선 요구를 종합해 전체 개선을 요청했다. 해석 전 저장소 무차별 변경이 아니라, 실제 제품에서 종합 개선을 계속 판단하고 우선순위를 정할 수 있는 구조가 필요하다. 기존 platform desktop app 의 EVAL 탭이 현재 작업, 히스토리, 토큰/툴, 오픈소스 EVAL 후보를 이미 모으므로 첫 구현 slice로 적합하다. 적용 범위 platform desktop app/renderer/workspace monitor EVAL surface. 정적 계약 검사, 테스트, sna</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 737,
+      "updatedAt": "2026-06-06T00:06:23.551Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-comprehensive-improvement-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-comprehensive-improvement.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "2026 06 06 종합 개선 작업 요약",
+      "excerpt": "2026 06 06 종합 개선 작업 요약 완료한 일 EVAL 탭에 data eval comprehensive improvement=\"all signal cockpit\" 종합 개선 cockpit를 추가했다. 7개 개선 차원 desktop performance , ux control clarity , native resource lifecycle , eval evidence , release packaging , open source leverage , automation continuity 을 점수",
+      "html": "<p>2026 06 06 종합 개선 작업 요약 완료한 일 EVAL 탭에 data eval comprehensive improvement=&quot;all signal cockpit&quot; 종합 개선 cockpit를 추가했다. 7개 개선 차원 desktop performance , ux control clarity , native resource lifecycle , eval evidence , release packaging , open source leverage , automation continuity 을 점수화하고 P1 P3 우선순위를 표시했다. 종합 개선 panel, summary, dimension card, priority card CSS를 추</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1765,
+      "updatedAt": "2026-06-06T00:06:23.551Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-comprehensive-improvement-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-comprehensive-improvement/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "종합 개선 Cockpit Validation",
+      "excerpt": "종합 개선 Cockpit Validation 예정 검증 npm prefix platform desktop app/renderer/workspace monitor run collect npm prefix platform desktop app/renderer/workspace monitor run check npm prefix platform desktop app/renderer/workspace monitor run test npm prefix platform desktop app run check",
+      "html": "<h1>종합 개선 Cockpit Validation</h1>\n<h2>예정 검증</h2>\n<ul>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run collect</code></li>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run test</code></li>\n<li><code>npm --prefix platform-desktop-app run check</code></li>\n<li><code>npm --prefix platform-desktop-app run test</code></li>\n<li><code>npm --prefix platform-desktop-app/renderer/workspace-monitor run build</code></li>\n<li><code>npm --prefix platform-desktop-app run package:internal</code></li>\n<li>Browser smoke: EVAL 탭에서 <code>data-eval-comprehensive-improvement=&quot;all-signal-cockpit&quot;</code> 확인</li>\n</ul>\n<h2>현재 상태</h2>\n<ul>\n<li><code>collect</code>: 완료.</li>\n<li><code>workspace-monitor check</code>: 완료. TypeScript, lazy boundary, scroll, source control design, comprehensive improvement contract, history payload 통과.</li>\n<li><code>workspace-monitor test</code>: 완료. 70개 테스트 통과.</li>\n<li><code>platform-desktop-app check</code>: 완료. internal readiness 통과, public release는 기존 signing/notarization/updater/clean-machine smoke gate로 차단 상태 유지.</li>\n<li><code>platform-desktop-app test</code>: 완료. 24개 테스트 통과.</li>\n<li><code>workspace-monitor build</code>: 완료. Next.js production build 성공.</li>\n<li><code>package:internal</code>: 완료. renderer customer build, customer bundle audit, Rust test/build, Tauri <code>.app</code>/<code>.dmg</code>, codesign verify, DMG verify 통과.</li>\n<li>Browser smoke: 완료. <code>data-eval-comprehensive-improvement=&quot;all-signal-cockpit&quot;</code> panel 1개, dimension 7개, visible true, console error 0개.</li>\n</ul>\n<h2>참고</h2>\n<ul>\n<li><code>npm exec tsc -- --noEmit</code>는 npm 인자 전달 방식 때문에 TypeScript help만 출력해 실패했다. 실제 타입 검증은 <code>npm run check</code>의 <code>tsc --noEmit</code>으로 통과했다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1664,
+      "updatedAt": "2026-06-06T00:06:23.551Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-comprehensive-improvement-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-comprehensive-improvement/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "종합 개선 Cockpit 작업 목록",
+      "excerpt": "종합 개선 Cockpit 작업 목록 x 웹 기준과 로컬 대표 slice 선정. x 요구사항과 spec 작성. x EVAL panel에 종합 개선 점수 모델 추가. x 종합 개선 UI/CSS 추가. x 정적 계약 검사 추가. x package check 연결. x 회귀 테스트 기대값 갱신. x 전체 check/test/build/package 실행. x Browser smoke 실행. x 평가, omission, resource, timing, request trace, work summary 기록",
+      "html": "<h1>종합 개선 Cockpit 작업 목록</h1>\n<ul>\n<li>[x] 웹 기준과 로컬 대표 slice 선정.</li>\n<li>[x] 요구사항과 spec 작성.</li>\n<li>[x] EVAL panel에 종합 개선 점수 모델 추가.</li>\n<li>[x] 종합 개선 UI/CSS 추가.</li>\n<li>[x] 정적 계약 검사 추가.</li>\n<li>[x] package <code>check</code> 연결.</li>\n<li>[x] 회귀 테스트 기대값 갱신.</li>\n<li>[x] 전체 check/test/build/package 실행.</li>\n<li>[x] Browser smoke 실행.</li>\n<li>[x] 평가, omission, resource, timing, request trace, work summary 기록.</li>\n<li>[ ] commit 및 push.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 494,
+      "updatedAt": "2026-06-06T00:06:23.550Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-comprehensive-improvement-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-comprehensive-improvement/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "종합 개선 Cockpit Traceability",
+      "excerpt": "종합 개선 Cockpit Traceability | 요구사항 | 구현 | 검증 | | | | | | REQ CI 001 | EvaluationReportPanel.tsx 종합 개선 panel | Browser smoke, test | | REQ CI 002 | 7개 stable dimension ID | check comprehensive improvement contract.mjs | | REQ CI 003 | globals.css grid/card/wrap 스타일 | Browser smoke,",
+      "html": "<h1>종합 개선 Cockpit Traceability</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-CI-001</td><td><code>EvaluationReportPanel.tsx</code> 종합 개선 panel</td><td>Browser smoke, test</td></tr><tr><td>REQ-CI-002</td><td>7개 stable dimension ID</td><td><code>check-comprehensive-improvement-contract.mjs</code></td></tr><tr><td>REQ-CI-003</td><td><code>globals.css</code> grid/card/wrap 스타일</td><td>Browser smoke, CSS contract test</td></tr><tr><td>REQ-CI-004</td><td>package <code>check</code> 연결, test expectation</td><td><code>npm run check</code>, <code>node --test</code></td></tr><tr><td>REQ-CI-005</td><td>build/package 실행</td><td><code>npm run build</code>, <code>npm run package:internal</code></td></tr></tbody></table>\n<h2>산출물</h2>\n<ul>\n<li><code>components/features/EvaluationReportPanel.tsx</code></li>\n<li><code>app/globals.css</code></li>\n<li><code>scripts/check-comprehensive-improvement-contract.mjs</code></li>\n<li><code>package.json</code></li>\n<li><code>tests/tool-studio.test.mjs</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 721,
+      "updatedAt": "2026-06-06T00:02:05.910Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-comprehensive-improvement-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-comprehensive-improvement/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "종합 개선 Cockpit 구현 계획",
+      "excerpt": "종합 개선 Cockpit 구현 계획 구현 순서 1. EvaluationReportPanel.tsx 에 ImprovementDimension 타입과 score helper를 추가한다. 2. 현재 문서/통계/툴 신호에서 7개 차원 점수를 계산한다. 3. EVAL hero 아래에 종합 개선 panel을 렌더링한다. 4. globals.css 에 summary, dimension, priority grid 스타일을 추가한다. 5. 정적 계약 검사 스크립트를 만들고 package check 에 연결한다. ",
+      "html": "<h1>종합 개선 Cockpit 구현 계획</h1>\n<h2>구현 순서</h2>\n<p>1. <code>EvaluationReportPanel.tsx</code>에 <code>ImprovementDimension</code> 타입과 score helper를 추가한다.</p>\n<p>2. 현재 문서/통계/툴 신호에서 7개 차원 점수를 계산한다.</p>\n<p>3. EVAL hero 아래에 종합 개선 panel을 렌더링한다.</p>\n<p>4. <code>globals.css</code>에 summary, dimension, priority grid 스타일을 추가한다.</p>\n<p>5. 정적 계약 검사 스크립트를 만들고 package <code>check</code>에 연결한다.</p>\n<p>6. 기존 EVAL test block을 확장한다.</p>\n<p>7. collector와 검증 명령을 실행한다.</p>\n<h2>롤백</h2>\n<ul>\n<li><code>EvaluationReportPanel.tsx</code>의 종합 개선 block, CSS block, check script, package script, test expectation을 되돌리면 기존 EVAL cockpit 상태로 복구된다.</li>\n</ul>\n<h2>후속 확장</h2>\n<ul>\n<li>runtime metric 기반 점수 소스 추가.</li>\n<li>외부 EVAL runner 설치/audit 후 candidate 점수와 report 연결.</li>\n<li>Rust/Tauri process/resource ownership check 연결.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 924,
+      "updatedAt": "2026-06-06T00:02:05.909Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-comprehensive-improvement-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-comprehensive-improvement/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "종합 개선 Cockpit Spec",
+      "excerpt": "종합 개선 Cockpit Spec 목표 workspace monitor 의 EVAL 탭에 종합 개선 cockpit를 추가해 넓은 개선 요구를 하나의 평가 surface와 검증 계약으로 만든다. 기능 종합 점수: 7개 개선 차원의 평균으로 계산한다. 위험 lane 수: 위험 상태인 차원 개수를 표시한다. 최우선 개선: 가장 낮은 점수의 차원을 표시한다. 차원 카드: stable ID, 점수, evidence, next action을 표시한다. 우선순위 카드: 낮은 점수 3개를 P1 P3로 표시한다.",
+      "html": "<h1>종합 개선 Cockpit Spec</h1>\n<h2>목표</h2>\n<p><code>workspace-monitor</code>의 EVAL 탭에 종합 개선 cockpit를 추가해 넓은 개선 요구를 하나의 평가 surface와 검증 계약으로 만든다.</p>\n<h2>기능</h2>\n<ul>\n<li>종합 점수: 7개 개선 차원의 평균으로 계산한다.</li>\n<li>위험 lane 수: 위험 상태인 차원 개수를 표시한다.</li>\n<li>최우선 개선: 가장 낮은 점수의 차원을 표시한다.</li>\n<li>차원 카드: stable ID, 점수, evidence, next action을 표시한다.</li>\n<li>우선순위 카드: 낮은 점수 3개를 P1-P3로 표시한다.</li>\n</ul>\n<h2>개선 차원</h2>\n<ul>\n<li><code>desktop-performance</code></li>\n<li><code>ux-control-clarity</code></li>\n<li><code>native-resource-lifecycle</code></li>\n<li><code>eval-evidence</code></li>\n<li><code>release-packaging</code></li>\n<li><code>open-source-leverage</code></li>\n<li><code>automation-continuity</code></li>\n</ul>\n<h2>데이터 소스</h2>\n<ul>\n<li>현재 snapshot documents, stats, unified events, open-source reference registry.</li>\n<li>기존 tool signal matcher.</li>\n<li>기존 evaluation, web-search, work-summary, request-trace, timing, requirement/spec 문서 분류.</li>\n</ul>\n<h2>UI 원칙</h2>\n<ul>\n<li>새 탭을 만들지 않고 기존 EVAL 탭 안에서 동작한다.</li>\n<li>8px radius 이하 카드, restrained shadow, mixed accent colors, stable grid를 사용한다.</li>\n<li>긴 문구는 wrap하고 카드 크기는 grid constraint로 안정화한다.</li>\n</ul>\n<h2>검증 계약</h2>\n<ul>\n<li><code>scripts/check-comprehensive-improvement-contract.mjs</code>는 panel token, dimension ID, CSS class, package check 연결을 검사한다.</li>\n<li><code>tests/tool-studio.test.mjs</code>는 EVAL surface와 CSS 및 package script 연결을 검사한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1489,
+      "updatedAt": "2026-06-06T00:02:05.909Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-comprehensive-improvement-ko-md",
+      "path": "_history/plans/2026/2026-06-06-comprehensive-improvement.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "2026 06 06 종합 개선 구현 계획",
+      "excerpt": "2026 06 06 종합 개선 구현 계획 목표 platform desktop app 의 EVAL 탭에 종합 개선 cockpit를 추가해 성능, UX, 네이티브 리소스, EVAL 근거, 패키징, 오픈소스 활용, 자동화 연속성을 한 화면에서 비교한다. 단계 1. 웹 기준과 저장소 hot anchor 확인. 2. 대범위 요청을 EvaluationReportPanel 중심 slice로 분해. 3. 종합 개선 점수 모델과 7개 차원을 UI에 구현. 4. CSS를 추가해 desktop dense surfac",
+      "html": "<p>2026 06 06 종합 개선 구현 계획 목표 platform desktop app 의 EVAL 탭에 종합 개선 cockpit를 추가해 성능, UX, 네이티브 리소스, EVAL 근거, 패키징, 오픈소스 활용, 자동화 연속성을 한 화면에서 비교한다. 단계 1. 웹 기준과 저장소 hot anchor 확인. 2. 대범위 요청을 EvaluationReportPanel 중심 slice로 분해. 3. 종합 개선 점수 모델과 7개 차원을 UI에 구현. 4. CSS를 추가해 desktop dense surface로 읽히게 한다. 5. check comprehensive improvement contract.mjs 를 추가하고 npm run check </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1216,
+      "updatedAt": "2026-06-06T00:02:05.908Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-comprehensive-improvement-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-comprehensive-improvement.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "2026 06 06 종합 개선 요구사항",
+      "excerpt": "2026 06 06 종합 개선 요구사항 배경 사용자는 성능, UI, 기능, 사용성, 디자인, 네이티브 자원 활용, EVAL, 오픈소스 참고, 히스토리 기반 개선을 한꺼번에 요구했다. 전 저장소 무차별 변경 대신, 실제 제품 화면에서 이 요구들을 지속적으로 평가하고 우선순위화하는 기반이 필요하다. 요구사항 REQ CI 001: EVAL 탭은 현재 작업만이 아니라 성능, UX, 네이티브 리소스, 근거/EVAL, 패키징, 오픈소스, 자동화 연속성을 종합해 보여야 한다. REQ CI 002: 종합 개선 ",
+      "html": "<h1>2026-06-06 종합 개선 요구사항</h1>\n<h2>배경</h2>\n<p>사용자는 성능, UI, 기능, 사용성, 디자인, 네이티브 자원 활용, EVAL, 오픈소스 참고, 히스토리 기반 개선을 한꺼번에 요구했다. 전 저장소 무차별 변경 대신, 실제 제품 화면에서 이 요구들을 지속적으로 평가하고 우선순위화하는 기반이 필요하다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-CI-001: EVAL 탭은 현재 작업만이 아니라 성능, UX, 네이티브 리소스, 근거/EVAL, 패키징, 오픈소스, 자동화 연속성을 종합해 보여야 한다.</li>\n<li>REQ-CI-002: 종합 개선 차원은 stable ID를 가져야 하며 후속 telemetry나 외부 EVAL runner가 연결될 수 있어야 한다.</li>\n<li>REQ-CI-003: UI는 desktop dense panel로 유지하고 텍스트가 버튼이나 카드 크기를 밀어내지 않도록 wrap 가능한 구조를 가져야 한다.</li>\n<li>REQ-CI-004: 종합 개선 surface는 정적 계약 검사와 테스트로 보호되어야 한다.</li>\n<li>REQ-CI-005: 구현 후 check, test, build, internal package, Browser smoke를 실행한다.</li>\n</ul>\n<h2>비요구사항</h2>\n<ul>\n<li>이번 slice에서 새 외부 EVAL dependency를 설치하지 않는다.</li>\n<li>이번 slice에서 Rust/Tauri resource telemetry 저장소 구조를 새로 만들지 않는다.</li>\n<li>이번 slice에서 모든 UI 컴포넌트를 전면 리팩터링하지 않는다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>data-eval-comprehensive-improvement=&quot;all-signal-cockpit&quot;</code> surface가 EVAL 탭에 존재한다.</li>\n<li>7개 개선 차원이 UI와 계약 검사에 모두 존재한다.</li>\n<li><code>npm run check</code>가 새 계약 검사를 실행한다.</li>\n<li>renderer build와 internal package가 완료된다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1651,
+      "updatedAt": "2026-06-06T00:02:05.908Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-comprehensive-improvement-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-comprehensive-improvement.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "2026 06 06 종합 개선 웹 검색 기록",
+      "excerpt": "2026 06 06 종합 개선 웹 검색 기록 요청 요약 사용자는 기존 성능, UI, 기능, 사용성, 디자인, 운영체제 자원 활용, 오픈소스 참고, EVAL, 기록 기반 개선 요구를 종합해 전체 개선을 요구했다. 범위가 넓으므로 바로 전 파일을 훑지 않고 웹 기준과 저장소 대표 샘플을 결합해 첫 구현 slice를 선정했다. 검색 쿼리 desktop app UX performance accessibility design system best practices official Tauri desktop ",
+      "html": "<p>2026 06 06 종합 개선 웹 검색 기록 요청 요약 사용자는 기존 성능, UI, 기능, 사용성, 디자인, 운영체제 자원 활용, 오픈소스 참고, EVAL, 기록 기반 개선 요구를 종합해 전체 개선을 요구했다. 범위가 넓으므로 바로 전 파일을 훑지 않고 웹 기준과 저장소 대표 샘플을 결합해 첫 구현 slice를 선정했다. 검색 쿼리 desktop app UX performance accessibility design system best practices official Tauri desktop app performance memory process management best practices official software maint</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3402,
+      "updatedAt": "2026-06-06T00:02:05.907Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: 데스크톱 크롬 디자인 개선",
+      "excerpt": "요청 결과 추적: 데스크톱 크롬 디자인 개선 요청 사용자: 디자인개선 해석: 앞선 반복 맥락을 포함해 기본 버튼 느낌, 평면적인 화면, 탭/사이드바/선택 UI의 시각적 불편함을 줄인다. 결과 구현 완료. 테스트, 빌드, 내부 패키징, Browser smoke 완료. 주요 변경 파일 platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/tests/tool",
+      "html": "<p>요청 결과 추적: 데스크톱 크롬 디자인 개선 요청 사용자: 디자인개선 해석: 앞선 반복 맥락을 포함해 기본 버튼 느낌, 평면적인 화면, 탭/사이드바/선택 UI의 시각적 불편함을 줄인다. 결과 구현 완료. 테스트, 빌드, 내부 패키징, Browser smoke 완료. 주요 변경 파일 platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs platform desktop app/docs/requirements/2026 06 06 desktop chrom</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1112,
+      "updatedAt": "2026-06-05T23:54:07.600Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
       "path": "_history/evaluations/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
       "category": "evaluation",
@@ -7617,22 +7841,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: 데스크톱 크롬 디자인 개선",
-      "excerpt": "요청 결과 추적: 데스크톱 크롬 디자인 개선 요청 사용자: 디자인개선 해석: 앞선 반복 맥락을 포함해 기본 버튼 느낌, 평면적인 화면, 탭/사이드바/선택 UI의 시각적 불편함을 줄인다. 결과 구현 완료. 테스트, 빌드, 내부 패키징, Browser smoke 완료. 주요 변경 파일 platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/tests/tool",
-      "html": "<p>요청 결과 추적: 데스크톱 크롬 디자인 개선 요청 사용자: 디자인개선 해석: 앞선 반복 맥락을 포함해 기본 버튼 느낌, 평면적인 화면, 탭/사이드바/선택 UI의 시각적 불편함을 줄인다. 결과 구현 완료. 테스트, 빌드, 내부 패키징, Browser smoke 완료. 주요 변경 파일 platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs platform desktop app/docs/requirements/2026 06 06 desktop chrom</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1067,
-      "updatedAt": "2026-06-05T23:51:36.205Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
     },
     {
       "id": "history-user-requests-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
@@ -10035,54 +10243,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-plans-2026-2026-06-06-native-window-chrome-ko-md",
-      "path": "_history/plans/2026/2026-06-06-native-window-chrome.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "2026 06 06 네이티브 창 크롬 활용 계획",
-      "excerpt": "2026 06 06 네이티브 창 크롬 활용 계획 목적 사용자의 “네이티브 방식 활용” 지시를 Tauri desktop runtime에서 즉시 검증 가능한 native window chrome 개선으로 구현한다. 범위 main window native titlebar config native drag region and no drag control separation readiness/test gates browser DOM/CSS verification internal package build 제",
-      "html": "<p>2026 06 06 네이티브 창 크롬 활용 계획 목적 사용자의 “네이티브 방식 활용” 지시를 Tauri desktop runtime에서 즉시 검증 가능한 native window chrome 개선으로 구현한다. 범위 main window native titlebar config native drag region and no drag control separation readiness/test gates browser DOM/CSS verification internal package build 제외 macOS vibrancy/AppKit material tray/global shortcut/file association native Ru</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 618,
-      "updatedAt": "2026-06-05T20:53:15.065Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-native-window-chrome-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-native-window-chrome.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: 네이티브 방식 활용",
-      "excerpt": "사용자 요청 요약: 네이티브 방식 활용 요약 사용자는 현재 플랫폼 데스크톱 앱이 웹 렌더링 수준에 머물지 말고 네이티브 데스크톱 방식을 활용하라고 지시했다. 해석 이번 구현 slice에서는 창 자체의 native chrome과 drag region을 우선 적용한다. 이미 Rust resource warmup, PTY, native git, OS telemetry가 존재하므로 이번 변경은 창/크롬 레벨의 네이티브 통합을 보강한다. 결과 대상 platform desktop app/src tauri/t",
-      "html": "<p>사용자 요청 요약: 네이티브 방식 활용 요약 사용자는 현재 플랫폼 데스크톱 앱이 웹 렌더링 수준에 머물지 말고 네이티브 데스크톱 방식을 활용하라고 지시했다. 해석 이번 구현 slice에서는 창 자체의 native chrome과 drag region을 우선 적용한다. 이미 Rust resource warmup, PTY, native git, OS telemetry가 존재하므로 이번 변경은 창/크롬 레벨의 네이티브 통합을 보강한다. 결과 대상 platform desktop app/src tauri/tauri.conf.json platform desktop app/src tauri/capabilities/default.json platform</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 810,
-      "updatedAt": "2026-06-05T20:53:15.065Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-native-window-chrome-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-native-window-chrome.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "2026 06 06 네이티브 창 크롬 활용 웹 검색",
-      "excerpt": "2026 06 06 네이티브 창 크롬 활용 웹 검색 질의 Tauri v2 native window APIs theme color titlebar macOS official docs Tauri v2 commands invoke Rust native desktop app state official docs Apple Human Interface Guidelines macOS materials controls toolbar sidebar official Tauri v2 window effects vib",
-      "html": "<p>2026 06 06 네이티브 창 크롬 활용 웹 검색 질의 Tauri v2 native window APIs theme color titlebar macOS official docs Tauri v2 commands invoke Rust native desktop app state official docs Apple Human Interface Guidelines macOS materials controls toolbar sidebar official Tauri v2 window effects vibrancy macOS official docs site:v2.tauri.app data tauri drag region allow start d</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1935,
-      "updatedAt": "2026-06-05T20:53:15.064Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-native-window-chrome-traceability-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-native-window-chrome/traceability.ko.md",
       "category": "project-spec",
@@ -10145,70 +10305,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: UI 이론 기반 디자인 파운데이션 리팩토링",
-      "excerpt": "작업 요약: UI 이론 기반 디자인 파운데이션 리팩토링 완료 workspace monitor 전역 CSS에 spacing, depth, hierarchy, hover, focus halo token을 추가했다. 홈/설정/어댑터/주요 버튼 표면을 새 token으로 연결했다. data ui foundation=\"gestalt hierarchy density\" shell marker를 추가했다. dark/system 테마의 depth token 누락을 브라우저 검증으로 발견하고 수정했다. 정적 테스트와",
-      "html": "<p>작업 요약: UI 이론 기반 디자인 파운데이션 리팩토링 완료 workspace monitor 전역 CSS에 spacing, depth, hierarchy, hover, focus halo token을 추가했다. 홈/설정/어댑터/주요 버튼 표면을 새 token으로 연결했다. data ui foundation=&quot;gestalt hierarchy density&quot; shell marker를 추가했다. dark/system 테마의 depth token 누락을 브라우저 검증으로 발견하고 수정했다. 정적 테스트와 readiness 검사를 보강했다. 검증 workspace monitor test 통과 platform desktop app test 통과 w</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 737,
-      "updatedAt": "2026-06-05T20:44:11.178Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-ui-theory-foundation-refactor-json",
-      "path": "_history/evaluations/2026/2026-06-06-ui-theory-foundation-refactor.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Ui Theory Foundation Refactor",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 ui theory foundation refactor.json\" , \"omission check targets\": \" history/omission checks/2",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;installation occurred&quot;: false, &quot;installation record targets&quot;: , &quot;resource risk occurred&quot;: true, &quot;resource check targets&quot;: &quot; history/resource checks/2026/2026 06 06 ui theory foundation refactor.json&quot; , &quot;omission check targets&quot;: &quot; history/omission checks/2026/2026 06 06 ui theory foundation refactor.json&quot; , &quot;mode selection record targ</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 773,
-      "updatedAt": "2026-06-05T20:44:06.525Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: UI 이론 기반 디자인 파운데이션 리팩토링",
-      "excerpt": "요청 결과 추적: UI 이론 기반 디자인 파운데이션 리팩토링 요청 UI 디자인 전문가 관점에서 이론을 조사하고 데스크톱 앱 UI를 리팩토링. 결과 산출물 platform desktop app/docs/requirements/2026 06 06 ui theory foundation refactor.ko.md platform desktop app/specs/2026 06 06 ui theory foundation refactor/ platform desktop app/renderer/workspace",
-      "html": "<p>요청 결과 추적: UI 이론 기반 디자인 파운데이션 리팩토링 요청 UI 디자인 전문가 관점에서 이론을 조사하고 데스크톱 앱 UI를 리팩토링. 결과 산출물 platform desktop app/docs/requirements/2026 06 06 ui theory foundation refactor.ko.md platform desktop app/specs/2026 06 06 ui theory foundation refactor/ platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/compone</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 828,
-      "updatedAt": "2026-06-05T20:44:06.525Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-ui-theory-foundation-refactor-json",
-      "path": "_history/work-timings/2026/2026-06-06-ui-theory-foundation-refactor.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Ui Theory Foundation Refactor",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"phases\": { \"name\": \"web first research\", \"status\": \"completed\", \"notes\": \"Checked NN/g, Apple HIG, Material, WCAG, Fluent, and Carbon references.\" }, { \"name\": \"implementation\", \"status\": \"completed\", \"notes\": \"Added CSS foundation tokens, shell marker, a",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;phases&quot;: { &quot;name&quot;: &quot;web first research&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Checked NN/g, Apple HIG, Material, WCAG, Fluent, and Carbon references.&quot; }, { &quot;name&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Added CSS foundation tokens, shell marker, and readiness/test coverage.&quot; }, { &quot;name&quot;: &quot;browser validation&quot;, &quot;status&quot;: &quot;compl</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 693,
-      "updatedAt": "2026-06-05T20:44:06.524Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-ui-theory-foundation-refactor-validation-ko-md",
@@ -17905,102 +18001,6 @@
       "historyDate": "2026-06-03",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-responsive-text-wrapping-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-responsive-text-wrapping/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Spec: Responsive Text Wrapping",
-      "excerpt": "Spec: Responsive Text Wrapping 목표 반응형 UI에서 텍스트가 의도보다 자주 글자 단위로 깨지는 문제를 줄이고, 긴 기계적 값만 안전하게 분리하는 CSS 정책과 회귀 검사를 추가한다. 설계 기본 UI 텍스트는 text natural wrap: break word 와 word break: keep all 을 사용한다. 긴 토큰은 text long token wrap: anywhere 를 별도 rule에만 적용한다. button 및 generic button label chil",
-      "html": "<h1>Spec: Responsive Text Wrapping</h1>\n<h2>목표</h2>\n<p>반응형 UI에서 텍스트가 의도보다 자주 글자 단위로 깨지는 문제를 줄이고, 긴 기계적 값만 안전하게 분리하는 CSS 정책과 회귀 검사를 추가한다.</p>\n<h2>설계</h2>\n<ul>\n<li>기본 UI 텍스트는 <code>--text-natural-wrap: break-word</code>와 <code>word-break: keep-all</code>을 사용한다.</li>\n<li>긴 토큰은 <code>--text-long-token-wrap: anywhere</code>를 별도 rule에만 적용한다.</li>\n<li><code>button</code> 및 generic button label children은 긴 토큰 정책을 쓰지 않고 자연스러운 wrapping 정책만 사용한다.</li>\n<li>readiness script/test는 버튼에 <code>anywhere</code>가 들어오는 회귀를 명시적으로 실패시킨다.</li>\n</ul>\n<h2>Acceptance</h2>\n<ul>\n<li>global <code>button</code> rule에 <code>overflow-wrap: anywhere</code>가 없다.</li>\n<li>generic <code>.desktop-app-root button &gt; span/strong/small</code> rule에 <code>overflow-wrap: anywhere</code>가 없다.</li>\n<li><code>code</code>, <code>pre</code>, 경로/로그/상태 값에는 긴 토큰 예외가 존재한다.</li>\n<li>desktop/mobile browser QA에서 horizontal overflow가 0이다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1006,
-      "updatedAt": "2026-06-03T13:43:26.504Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-responsive-button-design-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-responsive-button-design/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Plan: Responsive Button Design",
-      "excerpt": "Plan: Responsive Button Design 1. 공식 UI/accessibility 기준을 확인한다. 2. 현재 CSS의 button group 분산 상태를 조사한다. 3. 공통 button token과 기본 button interaction contract를 추가한다. 4. titlebar, panel, settings, terminal, source, workspace action buttons를 responsive rule에 포함한다. 5. readiness test에 butto",
-      "html": "<h1>Plan: Responsive Button Design</h1>\n<p>1. 공식 UI/accessibility 기준을 확인한다.</p>\n<p>2. 현재 CSS의 button group 분산 상태를 조사한다.</p>\n<p>3. 공통 button token과 기본 button interaction contract를 추가한다.</p>\n<p>4. titlebar, panel, settings, terminal, source, workspace action buttons를 responsive rule에 포함한다.</p>\n<p>5. readiness test에 button responsive token을 추가한다.</p>\n<p>6. desktop/mobile browser smoke로 target size와 overflow를 확인한다.</p>\n<p>7. history/evaluation을 남기고 commit/push한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 525,
-      "updatedAt": "2026-06-03T13:38:09.039Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-deferred-native-git-clipboard-pty-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-deferred-native-git-clipboard-pty/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Plan: Deferred Native Git, Clipboard QA, PTY Decision",
-      "excerpt": "Plan: Deferred Native Git, Clipboard QA, PTY Decision 1. 제품 갭 레지스트리에서 구현 가능 gap과 외부 release gate를 분리한다. 2. Tauri native command로 Git status/action surface를 구현한다. 3. Desktop Runtime 화면에 Native Git Workbench를 추가하고 별도 component로 분리한다. 4. Clipboard abstraction과 deterministic tests를 추",
-      "html": "<h1>Plan: Deferred Native Git, Clipboard QA, PTY Decision</h1>\n<p>1. 제품 갭 레지스트리에서 구현 가능 gap과 외부 release gate를 분리한다.</p>\n<p>2. Tauri native command로 Git status/action surface를 구현한다.</p>\n<p>3. Desktop Runtime 화면에 Native Git Workbench를 추가하고 별도 component로 분리한다.</p>\n<p>4. Clipboard abstraction과 deterministic tests를 추가한다.</p>\n<p>5. PTY/xterm decision과 Native Git credential boundary를 bilingual architecture docs로 기록한다.</p>\n<p>6. Runtime contract, readiness script, readiness tests, product gap registry를 갱신한다.</p>\n<p>7. Rust/type/test/check/build/browser smoke를 실행하고 결과를 history/evaluation에 남긴다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 687,
-      "updatedAt": "2026-06-03T13:27:30.047Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-p0-agent-factory-learning-loop-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-p0-agent-factory-learning-loop/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Validation: P0 Agent Factory and Learning Loop",
-      "excerpt": "Validation: P0 Agent Factory and Learning Loop 실행한 검증 cargo check in platform desktop app/src tauri : 통과 corepack pnpm filter workspace monitor run check : 통과 corepack pnpm filter platform desktop app test : 통과 corepack pnpm filter workspace monitor run build:customer : 통과 corepa",
-      "html": "<h1>Validation: P0 Agent Factory and Learning Loop</h1>\n<h2>실행한 검증</h2>\n<ul>\n<li><code>cargo check</code> in <code>platform-desktop-app/src-tauri</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-gap-registry.json</code>: 통과</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/runtime-data-boundary-registry.json</code>: 통과</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/runtime-contracts/installer-shell-runtime-contract.json</code>: 통과</li>\n</ul>\n<h2>확인한 회귀 방지</h2>\n<ul>\n<li>Runtime contract validator가 <code>agent_factory_proposals</code>, <code>learning_feedback_decisions</code> accumulation target을 확인한다.</li>\n<li>Readiness script/test가 <code>create_agent_factory_proposal</code>, <code>record_learning_improvement_decision</code>, <code>AgentFactoryWizard</code>, <code>LearningFeedbackLoopPanel</code> token을 확인한다.</li>\n<li>Product gap registry에서 P0 gap이 다시 missing/partial로 남으면 readiness가 실패한다.</li>\n</ul>\n<h2>제한</h2>\n<ul>\n<li>현재 세션에서 packaged native app click smoke는 수행하지 못했다.</li>\n<li>Public release readiness는 이 slice 범위가 아니며 signing/notarization/updater/clean-machine smoke가 계속 필요하다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1492,
-      "updatedAt": "2026-06-03T13:04:21.299Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-p0-agent-factory-learning-loop-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-p0-agent-factory-learning-loop/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Plan: P0 Agent Factory and Learning Loop",
-      "excerpt": "Plan: P0 Agent Factory and Learning Loop 1. 제품 갭 레지스트리에서 남은 P0 항목과 acceptance를 확인한다. 2. Tauri app data runtime store에 proposal/decision JSON을 저장하는 command를 추가한다. 3. Agents 화면에 Agent Factory wizard와 Learning Feedback Loop panel을 추가한다. 4. Runtime contract와 accumulated data overview",
-      "html": "<h1>Plan: P0 Agent Factory and Learning Loop</h1>\n<p>1. 제품 갭 레지스트리에서 남은 P0 항목과 acceptance를 확인한다.</p>\n<p>2. Tauri app-data runtime store에 proposal/decision JSON을 저장하는 command를 추가한다.</p>\n<p>3. Agents 화면에 Agent Factory wizard와 Learning Feedback Loop panel을 추가한다.</p>\n<p>4. Runtime contract와 accumulated data overview가 새 저장소를 노출하도록 연결한다.</p>\n<p>5. readiness/test를 구현 기준으로 갱신한다.</p>\n<p>6. TypeScript, Rust, platform check/test, customer build를 실행한다.</p>\n<p>7. 요구사항/spec/history/evaluation을 남기고 commit/push한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 617,
-      "updatedAt": "2026-06-03T13:03:59.871Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-03-p0-agent-factory-learning-loop-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-03-p0-agent-factory-learning-loop/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Tasks: P0 Agent Factory and Learning Loop",
-      "excerpt": "Tasks: P0 Agent Factory and Learning Loop x create agent factory proposal Tauri command 추가 x record learning improvement decision Tauri command 추가 x app data runtime roots와 accumulated data stores에 agent factory proposals , learning feedback decisions 추가 x Agents 화면에 AgentFactory",
-      "html": "<h1>Tasks: P0 Agent Factory and Learning Loop</h1>\n<ul>\n<li>[x] <code>create_agent_factory_proposal</code> Tauri command 추가</li>\n<li>[x] <code>record_learning_improvement_decision</code> Tauri command 추가</li>\n<li>[x] app-data runtime roots와 accumulated data stores에 <code>agent_factory_proposals</code>, <code>learning_feedback_decisions</code> 추가</li>\n<li>[x] Agents 화면에 <code>AgentFactoryWizard</code> 추가</li>\n<li>[x] Agents 화면에 <code>LearningFeedbackLoopPanel</code> 추가</li>\n<li>[x] runtime contract와 runtime boundary registry 갱신</li>\n<li>[x] product gap registry에서 P0 gap 구현 상태 반영</li>\n<li>[x] readiness script/test 갱신</li>\n<li>[x] customer snapshot/build 재생성</li>\n<li>[x] 검증 결과와 request trace 기록</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 641,
-      "updatedAt": "2026-06-03T13:03:59.871Z",
-      "historyDate": "2026-06-03",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18061,6 +18061,16 @@
           "title": "평가: Agent CLI Cockpit",
           "excerpt": "평가: Agent CLI Cockpit 판정 요청 충족. 유사 오픈소스 검색과 직접 clone 탐구 후, 현재 데스크톱 플랫폼에 Agent CLI Cockpit 기능을 추가했다. 기능은 새 process를 늘리지 않고 기존 native runtime state를 묶어 CLI/provider/session/task/decision control plane으로 보여준다. 구현 증거 MonitorShell.tsx 에 cockpitStats , openSourceControlPlanePatterns , ",
           "updatedAt": "2026-06-05T21:59:44.775Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-comprehensive-improvement-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-comprehensive-improvement.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "2026 06 06 종합 개선 평가",
+          "excerpt": "2026 06 06 종합 개선 평가 평가 대상 요청: 성능, UI, 기능, 사용성, 디자인 개선을 종합해 실제로 구현. 구현 slice: platform desktop app workspace monitor EVAL 탭 종합 개선 cockpit. 완료 기준 평가 성능: 직접 runtime latency 개선은 이번 slice의 주 구현은 아니지만, 성능을 desktop performance 차원으로 고정하고 후속 telemetry 연결 지점을 만들었다. UI/디자인/사용성: EVAL 탭에 desk",
+          "updatedAt": "2026-06-06T00:06:23.552Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18224,13 +18234,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-ui-theory-foundation-refactor-json",
-          "path": "_history/evaluations/2026/2026-06-06-ui-theory-foundation-refactor.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Ui Theory Foundation Refactor",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 ui theory foundation refactor.json\" , \"omission check targets\": \" history/omission checks/2",
-          "updatedAt": "2026-06-05T20:44:06.525Z",
+          "id": "history-plans-2026-2026-06-06-comprehensive-improvement-ko-md",
+          "path": "_history/plans/2026/2026-06-06-comprehensive-improvement.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "2026 06 06 종합 개선 구현 계획",
+          "excerpt": "2026 06 06 종합 개선 구현 계획 목표 platform desktop app 의 EVAL 탭에 종합 개선 cockpit를 추가해 성능, UX, 네이티브 리소스, EVAL 근거, 패키징, 오픈소스 활용, 자동화 연속성을 한 화면에서 비교한다. 단계 1. 웹 기준과 저장소 hot anchor 확인. 2. 대범위 요청을 EvaluationReportPanel 중심 slice로 분해. 3. 종합 개선 점수 모델과 7개 차원을 UI에 구현. 4. CSS를 추가해 desktop dense surfac",
+          "updatedAt": "2026-06-06T00:02:05.908Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18264,16 +18274,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-native-window-chrome-ko-md",
-          "path": "_history/plans/2026/2026-06-06-native-window-chrome.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "2026 06 06 네이티브 창 크롬 활용 계획",
-          "excerpt": "2026 06 06 네이티브 창 크롬 활용 계획 목적 사용자의 “네이티브 방식 활용” 지시를 Tauri desktop runtime에서 즉시 검증 가능한 native window chrome 개선으로 구현한다. 범위 main window native titlebar config native drag region and no drag control separation readiness/test gates browser DOM/CSS verification internal package build 제",
-          "updatedAt": "2026-06-05T20:53:15.065Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-process-pipe-leak-guard-ko-md",
           "path": "_history/plans/2026/2026-06-06-process-pipe-leak-guard.ko.md",
           "category": "plan",
@@ -18294,13 +18294,23 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-request-traces-2026-2026-06-06-comprehensive-improvement-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-comprehensive-improvement.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "2026 06 06 종합 개선 request trace",
+          "excerpt": "2026 06 06 종합 개선 request trace 요청 사용자는 전체적인 성능, UI, 기능, 사용성, 디자인 개선을 종합해 구현하라고 요청했다. 결정 대범위 분해 결과 첫 slice는 platform desktop app 의 EVAL 탭 종합 개선 cockpit로 정했다. 새 의존성 설치는 하지 않았다. 새 탭을 만들지 않고 기존 EVAL resident workbench 안에 종합 개선 모델을 추가했다. 산출물 요구사항: platform desktop app/docs/requirement",
+          "updatedAt": "2026-06-06T00:06:23.552Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
           "category": "request-trace",
           "language": "ko",
           "title": "요청 결과 추적: 데스크톱 크롬 디자인 개선",
           "excerpt": "요청 결과 추적: 데스크톱 크롬 디자인 개선 요청 사용자: 디자인개선 해석: 앞선 반복 맥락을 포함해 기본 버튼 느낌, 평면적인 화면, 탭/사이드바/선택 UI의 시각적 불편함을 줄인다. 결과 구현 완료. 테스트, 빌드, 내부 패키징, Browser smoke 완료. 주요 변경 파일 platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/tests/tool",
-          "updatedAt": "2026-06-05T23:51:36.205Z",
+          "updatedAt": "2026-06-05T23:54:07.600Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18424,16 +18434,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: UI 이론 기반 디자인 파운데이션 리팩토링",
-          "excerpt": "요청 결과 추적: UI 이론 기반 디자인 파운데이션 리팩토링 요청 UI 디자인 전문가 관점에서 이론을 조사하고 데스크톱 앱 UI를 리팩토링. 결과 산출물 platform desktop app/docs/requirements/2026 06 06 ui theory foundation refactor.ko.md platform desktop app/specs/2026 06 06 ui theory foundation refactor/ platform desktop app/renderer/workspace",
-          "updatedAt": "2026-06-05T20:44:06.525Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-agent-cli-cockpit-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-agent-cli-cockpit.ko.md",
           "category": "user-request",
@@ -18441,6 +18441,16 @@
           "title": "사용자 요청 요약: Agent CLI Cockpit",
           "excerpt": "사용자 요청 요약: Agent CLI Cockpit 날짜: 2026 06 06 대상: platform desktop app/ 요약 사용자는 유사 agent desktop/platform 오픈소스를 깊게 리서치하고, 직접 탐구가 끝나면 그 결과를 현재 플랫폼 기능으로 추가하라고 요청했다. 이전 맥락에서는 데스크톱 앱의 CPU/RAM/native resource 활용, 느린 탭 이동, 불편한 코드 편집/설정 UI, 기본 버튼/dropdown 개선, AI 로그인/CLI 설정 쉽게 만들기, termina",
           "updatedAt": "2026-06-05T21:59:44.774Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-comprehensive-improvement-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-comprehensive-improvement.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "2026 06 06 사용자 요청 요약",
+          "excerpt": "2026 06 06 사용자 요청 요약 요약 사용자는 누적된 성능, UI, 기능, 사용성, 디자인, 네이티브 자원 활용, EVAL, 오픈소스 참고, 기록 기반 개선 요구를 종합해 전체 개선을 요청했다. 해석 전 저장소 무차별 변경이 아니라, 실제 제품에서 종합 개선을 계속 판단하고 우선순위를 정할 수 있는 구조가 필요하다. 기존 platform desktop app 의 EVAL 탭이 현재 작업, 히스토리, 토큰/툴, 오픈소스 EVAL 후보를 이미 모으므로 첫 구현 slice로 적합하다. 적용 범위 ",
+          "updatedAt": "2026-06-06T00:06:23.551Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18501,16 +18511,6 @@
           "title": "사용자 요청 요약: 히스토리 인사이트 루프",
           "excerpt": "사용자 요청 요약: 히스토리 인사이트 루프 요약 사용자는 지금까지 누적된 히스토리를 보고 쓸 수 있는 인사이트, 추론 과정, 반복 과정에서 뽑아낼 수 있는 것들을 플랫폼에 적용해 달라고 요청했다. 해석 내부 히스토리를 단순 열람용이 아니라 플랫폼 기능 개선 신호로 전환한다. 반복되는 작업 방식과 검증 루프를 구조화한다. 결과를 UI와 snapshot에 반영한다. 구현 후 빌드까지 자동 실행한다.",
           "updatedAt": "2026-06-05T21:20:01.751Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-06-native-window-chrome-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-native-window-chrome.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: 네이티브 방식 활용",
-          "excerpt": "사용자 요청 요약: 네이티브 방식 활용 요약 사용자는 현재 플랫폼 데스크톱 앱이 웹 렌더링 수준에 머물지 말고 네이티브 데스크톱 방식을 활용하라고 지시했다. 해석 이번 구현 slice에서는 창 자체의 native chrome과 drag region을 우선 적용한다. 이미 Rust resource warmup, PTY, native git, OS telemetry가 존재하므로 이번 변경은 창/크롬 레벨의 네이티브 통합을 보강한다. 결과 대상 platform desktop app/src tauri/t",
-          "updatedAt": "2026-06-05T20:53:15.065Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18584,6 +18584,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-web-searches-2026-2026-06-06-comprehensive-improvement-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-comprehensive-improvement.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "2026 06 06 종합 개선 웹 검색 기록",
+          "excerpt": "2026 06 06 종합 개선 웹 검색 기록 요청 요약 사용자는 기존 성능, UI, 기능, 사용성, 디자인, 운영체제 자원 활용, 오픈소스 참고, EVAL, 기록 기반 개선 요구를 종합해 전체 개선을 요구했다. 범위가 넓으므로 바로 전 파일을 훑지 않고 웹 기준과 저장소 대표 샘플을 결합해 첫 구현 slice를 선정했다. 검색 쿼리 desktop app UX performance accessibility design system best practices official Tauri desktop ",
+          "updatedAt": "2026-06-06T00:02:05.907Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
           "category": "web-search",
@@ -18641,16 +18651,6 @@
           "title": "웹 검색 기록: 히스토리 인사이트 루프",
           "excerpt": "웹 검색 기록: 히스토리 인사이트 루프 검색 시각 2026 06 06 KST 질의 lessons learned process after action review official guide continuous improvement decision records architecture knowledge management software engineering official docs retrospective action items continuous improvement product developm",
           "updatedAt": "2026-06-05T21:20:01.750Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-native-window-chrome-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-native-window-chrome.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "2026 06 06 네이티브 창 크롬 활용 웹 검색",
-          "excerpt": "2026 06 06 네이티브 창 크롬 활용 웹 검색 질의 Tauri v2 native window APIs theme color titlebar macOS official docs Tauri v2 commands invoke Rust native desktop app state official docs Apple Human Interface Guidelines macOS materials controls toolbar sidebar official Tauri v2 window effects vib",
-          "updatedAt": "2026-06-05T20:53:15.064Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18721,6 +18721,16 @@
           "title": "작업 요약: Agent CLI Cockpit",
           "excerpt": "작업 요약: Agent CLI Cockpit 2026 06 06에 platform desktop app 의 Desktop Runtime에 Agent CLI Cockpit을 추가했다. Agentify Desktop, ClawX, CLI Agent Orchestrator, OpenLoaf를 직접 clone해 확인한 뒤, 기존 CLI adapter/session/provider/task run/decision 상태를 한 화면에 묶는 control plane UI를 구현했다. 검증은 workspace m",
           "updatedAt": "2026-06-05T21:59:44.775Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-06-comprehensive-improvement-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-comprehensive-improvement.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "2026 06 06 종합 개선 작업 요약",
+          "excerpt": "2026 06 06 종합 개선 작업 요약 완료한 일 EVAL 탭에 data eval comprehensive improvement=\"all signal cockpit\" 종합 개선 cockpit를 추가했다. 7개 개선 차원 desktop performance , ux control clarity , native resource lifecycle , eval evidence , release packaging , open source leverage , automation continuity 을 점수",
+          "updatedAt": "2026-06-06T00:06:23.551Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18854,16 +18864,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: UI 이론 기반 디자인 파운데이션 리팩토링",
-          "excerpt": "작업 요약: UI 이론 기반 디자인 파운데이션 리팩토링 완료 workspace monitor 전역 CSS에 spacing, depth, hierarchy, hover, focus halo token을 추가했다. 홈/설정/어댑터/주요 버튼 표면을 새 token으로 연결했다. data ui foundation=\"gestalt hierarchy density\" shell marker를 추가했다. dark/system 테마의 depth token 누락을 브라우저 검증으로 발견하고 수정했다. 정적 테스트와",
-          "updatedAt": "2026-06-05T20:44:11.178Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-agent-cli-cockpit-json",
           "path": "_history/work-timings/2026/2026-06-06-agent-cli-cockpit.json",
           "category": "work-timing",
@@ -18871,6 +18871,16 @@
           "title": "2026 06 06 Agent Cli Cockpit",
           "excerpt": "{ \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"phases\": { \"phase\": \"web search and direct repo exploration\", \"status\": \"completed\", \"notes\": \"Searched similar desktop agent platforms and inspected four cloned repositories.\" }, { \"phase\": \"implementation\", \"status\": \"",
           "updatedAt": "2026-06-05T21:59:44.775Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-06-comprehensive-improvement-json",
+          "path": "_history/work-timings/2026/2026-06-06-comprehensive-improvement.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Comprehensive Improvement",
+          "excerpt": "{ \"task id\": \"2026 06 06 comprehensive improvement\", \"title\": \"Platform desktop app comprehensive improvement cockpit\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", ",
+          "updatedAt": "2026-06-06T00:06:52.599Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18992,16 +19002,6 @@
           "excerpt": "{ \"schema version\": \"2026 06 01\", \"request id\": \"2026 06 06 shared workspace resource cache\", \"timezone\": \"Asia/Seoul\", \"started at\": \"2026 06 06T07:59:50+0900\", \"finished at\": \"2026 06 06T08:06:26+0900\", \"phases\": { \"phase\": \"web first intake and mode selection\", \"status\": \"comp",
           "updatedAt": "2026-06-05T23:07:18.989Z",
           "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-06-ui-theory-foundation-refactor-json",
-          "path": "_history/work-timings/2026/2026-06-06-ui-theory-foundation-refactor.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Ui Theory Foundation Refactor",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"phases\": { \"name\": \"web first research\", \"status\": \"completed\", \"notes\": \"Checked NN/g, Apple HIG, Material, WCAG, Fluent, and Carbon references.\" }, { \"name\": \"implementation\", \"status\": \"completed\", \"notes\": \"Added CSS foundation tokens, shell marker, a",
-          "updatedAt": "2026-06-05T20:44:06.524Z",
-          "historyDate": "2026-06-06"
         }
       ]
     }
@@ -19012,36 +19012,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2533,
+      "documents": 2540,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 998
+          "count": 999
         },
         {
           "category": "web-search",
-          "count": 403
+          "count": 404
         },
         {
           "category": "plan",
-          "count": 341
+          "count": 342
         },
         {
           "category": "request-trace",
-          "count": 331
+          "count": 332
         },
         {
           "category": "work-timing",
-          "count": 252
+          "count": 253
         },
         {
           "category": "user-request",
-          "count": 116
+          "count": 117
         },
         {
           "category": "work-summary",
-          "count": 83
+          "count": 84
         },
         {
           "category": "daily-history",
@@ -19052,7 +19052,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6434493,
+      "totalSourceBytes": 6448024,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19079,9 +19079,9 @@
       "monitorEvents": 64,
       "evidenceEvents": 32,
       "decisionEvents": 0,
-      "openSignals": 18,
+      "openSignals": 17,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-05T23:51:36.205Z",
+      "latestEventAt": "2026-06-06T00:06:52.599Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19192,6 +19192,126 @@
     ],
     "events": [
       {
+        "id": "history-history-work-timings-2026-2026-06-06-comprehensive-improvement-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Comprehensive Improvement",
+        "detail": "{ \"task id\": \"2026 06 06 comprehensive improvement\", \"title\": \"Platform desktop app comprehensive improvement cockpit\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", ",
+        "path": "_history/work-timings/2026/2026-06-06-comprehensive-improvement.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T00:06:52.599Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-comprehensive-improvement-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 06 종합 개선 평가",
+        "detail": "2026 06 06 종합 개선 평가 평가 대상 요청: 성능, UI, 기능, 사용성, 디자인 개선을 종합해 실제로 구현. 구현 slice: platform desktop app workspace monitor EVAL 탭 종합 개선 cockpit. 완료 기준 평가 성능: 직접 runtime latency 개선은 이번 slice의 주 구현은 아니지만, 성능을 desktop performance 차원으로 고정하고 후속 telemetry 연결 지점을 만들었다. UI/디자인/사용성: EVAL 탭에 desk",
+        "path": "_history/evaluations/2026/2026-06-06-comprehensive-improvement.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T00:06:23.552Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-comprehensive-improvement-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "2026 06 06 종합 개선 request trace",
+        "detail": "2026 06 06 종합 개선 request trace 요청 사용자는 전체적인 성능, UI, 기능, 사용성, 디자인 개선을 종합해 구현하라고 요청했다. 결정 대범위 분해 결과 첫 slice는 platform desktop app 의 EVAL 탭 종합 개선 cockpit로 정했다. 새 의존성 설치는 하지 않았다. 새 탭을 만들지 않고 기존 EVAL resident workbench 안에 종합 개선 모델을 추가했다. 산출물 요구사항: platform desktop app/docs/requirement",
+        "path": "_history/request-traces/2026/2026-06-06-comprehensive-improvement.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T00:06:23.552Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-comprehensive-improvement-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "2026 06 06 사용자 요청 요약",
+        "detail": "2026 06 06 사용자 요청 요약 요약 사용자는 누적된 성능, UI, 기능, 사용성, 디자인, 네이티브 자원 활용, EVAL, 오픈소스 참고, 기록 기반 개선 요구를 종합해 전체 개선을 요청했다. 해석 전 저장소 무차별 변경이 아니라, 실제 제품에서 종합 개선을 계속 판단하고 우선순위를 정할 수 있는 구조가 필요하다. 기존 platform desktop app 의 EVAL 탭이 현재 작업, 히스토리, 토큰/툴, 오픈소스 EVAL 후보를 이미 모으므로 첫 구현 slice로 적합하다. 적용 범위 ",
+        "path": "_history/user-requests/2026/2026-06-06-comprehensive-improvement.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T00:06:23.551Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-comprehensive-improvement-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "2026 06 06 종합 개선 작업 요약",
+        "detail": "2026 06 06 종합 개선 작업 요약 완료한 일 EVAL 탭에 data eval comprehensive improvement=\"all signal cockpit\" 종합 개선 cockpit를 추가했다. 7개 개선 차원 desktop performance , ux control clarity , native resource lifecycle , eval evidence , release packaging , open source leverage , automation continuity 을 점수",
+        "path": "_history/work-summaries/2026/2026-06-06-comprehensive-improvement.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T00:06:23.551Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-comprehensive-improvement-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "2026 06 06 종합 개선 구현 계획",
+        "detail": "2026 06 06 종합 개선 구현 계획 목표 platform desktop app 의 EVAL 탭에 종합 개선 cockpit를 추가해 성능, UX, 네이티브 리소스, EVAL 근거, 패키징, 오픈소스 활용, 자동화 연속성을 한 화면에서 비교한다. 단계 1. 웹 기준과 저장소 hot anchor 확인. 2. 대범위 요청을 EvaluationReportPanel 중심 slice로 분해. 3. 종합 개선 점수 모델과 7개 차원을 UI에 구현. 4. CSS를 추가해 desktop dense surfac",
+        "path": "_history/plans/2026/2026-06-06-comprehensive-improvement.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T00:02:05.908Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-comprehensive-improvement-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "2026 06 06 종합 개선 웹 검색 기록",
+        "detail": "2026 06 06 종합 개선 웹 검색 기록 요청 요약 사용자는 기존 성능, UI, 기능, 사용성, 디자인, 운영체제 자원 활용, 오픈소스 참고, EVAL, 기록 기반 개선 요구를 종합해 전체 개선을 요구했다. 범위가 넓으므로 바로 전 파일을 훑지 않고 웹 기준과 저장소 대표 샘플을 결합해 첫 구현 slice를 선정했다. 검색 쿼리 desktop app UX performance accessibility design system best practices official Tauri desktop ",
+        "path": "_history/web-searches/2026/2026-06-06-comprehensive-improvement.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T00:02:05.907Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "요청 결과 추적: 데스크톱 크롬 디자인 개선",
+        "detail": "요청 결과 추적: 데스크톱 크롬 디자인 개선 요청 사용자: 디자인개선 해석: 앞선 반복 맥락을 포함해 기본 버튼 느낌, 평면적인 화면, 탭/사이드바/선택 UI의 시각적 불편함을 줄인다. 결과 구현 완료. 테스트, 빌드, 내부 패키징, Browser smoke 완료. 주요 변경 파일 platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/tests/tool",
+        "path": "_history/request-traces/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-05T23:54:07.600Z"
+      },
+      {
         "id": "history-history-work-timings-2026-2026-06-06-desktop-chrome-design-polish-json",
         "sourceType": "history",
         "signalType": "timing",
@@ -19217,21 +19337,6 @@
         "detail": "최종 평가: 데스크톱 크롬 디자인 개선 결과 통과. 요청한 디자인 개선을 공통 토큰, 좌측 레일, 상단바, 섹션 탭 계약, 패널, 툴 스튜디오 실제 버튼 표면에 반영했다. 구현 평가 기본 버튼 느낌을 줄이기 위해 chrome shadow , rail shadow , section tab shadow , section tab active shadow , surface edge highlight , control press shadow 를 추가했다. activity rail은 active와 aria ",
         "path": "_history/evaluations/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
         "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:51:36.205Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "ready",
-        "title": "요청 결과 추적: 데스크톱 크롬 디자인 개선",
-        "detail": "요청 결과 추적: 데스크톱 크롬 디자인 개선 요청 사용자: 디자인개선 해석: 앞선 반복 맥락을 포함해 기본 버튼 느낌, 평면적인 화면, 탭/사이드바/선택 UI의 시각적 불편함을 줄인다. 결과 구현 완료. 테스트, 빌드, 내부 패키징, Browser smoke 완료. 주요 변경 파일 platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/tests/tool",
-        "path": "_history/request-traces/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-        "category": "request-trace",
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T23:51:36.205Z"
@@ -20525,111 +20630,6 @@
         "language": "unknown",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T20:56:57.047Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-native-window-chrome-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "2026 06 06 네이티브 창 크롬 활용 계획",
-        "detail": "2026 06 06 네이티브 창 크롬 활용 계획 목적 사용자의 “네이티브 방식 활용” 지시를 Tauri desktop runtime에서 즉시 검증 가능한 native window chrome 개선으로 구현한다. 범위 main window native titlebar config native drag region and no drag control separation readiness/test gates browser DOM/CSS verification internal package build 제",
-        "path": "_history/plans/2026/2026-06-06-native-window-chrome.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T20:53:15.065Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-native-window-chrome-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: 네이티브 방식 활용",
-        "detail": "사용자 요청 요약: 네이티브 방식 활용 요약 사용자는 현재 플랫폼 데스크톱 앱이 웹 렌더링 수준에 머물지 말고 네이티브 데스크톱 방식을 활용하라고 지시했다. 해석 이번 구현 slice에서는 창 자체의 native chrome과 drag region을 우선 적용한다. 이미 Rust resource warmup, PTY, native git, OS telemetry가 존재하므로 이번 변경은 창/크롬 레벨의 네이티브 통합을 보강한다. 결과 대상 platform desktop app/src tauri/t",
-        "path": "_history/user-requests/2026/2026-06-06-native-window-chrome.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T20:53:15.065Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-native-window-chrome-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "2026 06 06 네이티브 창 크롬 활용 웹 검색",
-        "detail": "2026 06 06 네이티브 창 크롬 활용 웹 검색 질의 Tauri v2 native window APIs theme color titlebar macOS official docs Tauri v2 commands invoke Rust native desktop app state official docs Apple Human Interface Guidelines macOS materials controls toolbar sidebar official Tauri v2 window effects vib",
-        "path": "_history/web-searches/2026/2026-06-06-native-window-chrome.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T20:53:15.064Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "작업 요약: UI 이론 기반 디자인 파운데이션 리팩토링",
-        "detail": "작업 요약: UI 이론 기반 디자인 파운데이션 리팩토링 완료 workspace monitor 전역 CSS에 spacing, depth, hierarchy, hover, focus halo token을 추가했다. 홈/설정/어댑터/주요 버튼 표면을 새 token으로 연결했다. data ui foundation=\"gestalt hierarchy density\" shell marker를 추가했다. dark/system 테마의 depth token 누락을 브라우저 검증으로 발견하고 수정했다. 정적 테스트와",
-        "path": "_history/work-summaries/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T20:44:11.178Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-ui-theory-foundation-refactor-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "evaluation",
-        "title": "2026 06 06 Ui Theory Foundation Refactor",
-        "detail": "{ \"date\": \"2026 06 06\", \"installation occurred\": false, \"installation record targets\": , \"resource risk occurred\": true, \"resource check targets\": \" history/resource checks/2026/2026 06 06 ui theory foundation refactor.json\" , \"omission check targets\": \" history/omission checks/2",
-        "path": "_history/evaluations/2026/2026-06-06-ui-theory-foundation-refactor.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T20:44:06.525Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-ui-theory-foundation-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: UI 이론 기반 디자인 파운데이션 리팩토링",
-        "detail": "요청 결과 추적: UI 이론 기반 디자인 파운데이션 리팩토링 요청 UI 디자인 전문가 관점에서 이론을 조사하고 데스크톱 앱 UI를 리팩토링. 결과 산출물 platform desktop app/docs/requirements/2026 06 06 ui theory foundation refactor.ko.md platform desktop app/specs/2026 06 06 ui theory foundation refactor/ platform desktop app/renderer/workspace",
-        "path": "_history/request-traces/2026/2026-06-06-ui-theory-foundation-refactor.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T20:44:06.525Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-ui-theory-foundation-refactor-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 Ui Theory Foundation Refactor",
-        "detail": "{ \"date\": \"2026 06 06\", \"phases\": { \"name\": \"web first research\", \"status\": \"completed\", \"notes\": \"Checked NN/g, Apple HIG, Material, WCAG, Fluent, and Carbon references.\" }, { \"name\": \"implementation\", \"status\": \"completed\", \"notes\": \"Added CSS foundation tokens, shell marker, a",
-        "path": "_history/work-timings/2026/2026-06-06-ui-theory-foundation-refactor.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T20:44:06.524Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23736,7 +23736,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 76,
+        "documentCount": 77,
         "sourceFileCount": 5
       },
       {
@@ -27564,13 +27564,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3595,
+      "sourceDocuments": 3608,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-05T23:51:36.205Z"
+      "latestInsightAt": "2026-06-06T00:06:23.552Z"
     },
     "inferenceStages": [
       {
@@ -27693,7 +27693,7 @@
           "최종 평가",
           "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브"
         ],
-        "latestEvidenceAt": "2026-06-05T23:51:36.205Z"
+        "latestEvidenceAt": "2026-06-05T23:54:07.600Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27707,23 +27707,23 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1665,
+        "signalCount": 1668,
         "sourceCategories": [
+          {
+            "category": "project-spec",
+            "count": 460
+          },
           {
             "category": "evaluation",
             "count": 459
           },
           {
-            "category": "project-spec",
-            "count": 459
-          },
-          {
             "category": "web-search",
-            "count": 404
+            "count": 405
           },
           {
             "category": "plan",
-            "count": 203
+            "count": 204
           },
           {
             "category": "request-trace",
@@ -27758,7 +27758,7 @@
           "2026 05 31 작업 모드 라우팅 계획 기록",
           "계획 히스토리: 코딩 조사 출처 다양성 강화"
         ],
-        "latestEvidenceAt": "2026-06-05T23:51:36.205Z"
+        "latestEvidenceAt": "2026-06-06T00:06:23.550Z"
       },
       {
         "id": "large-scope-slicing",
@@ -27772,19 +27772,19 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 963,
+        "signalCount": 968,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 477
+            "count": 478
           },
           {
             "category": "plan",
-            "count": 281
+            "count": 282
           },
           {
             "category": "request-trace",
-            "count": 88
+            "count": 89
           },
           {
             "category": "project-spec",
@@ -27796,11 +27796,11 @@
           },
           {
             "category": "web-search",
-            "count": 11
+            "count": 12
           },
           {
             "category": "user-request",
-            "count": 9
+            "count": 10
           },
           {
             "category": "daily-history",
@@ -27831,7 +27831,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-05T23:51:36.205Z"
+        "latestEvidenceAt": "2026-06-06T00:06:23.552Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -27845,7 +27845,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 631,
+        "signalCount": 632,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -27861,7 +27861,7 @@
           },
           {
             "category": "work-summary",
-            "count": 30
+            "count": 31
           },
           {
             "category": "plan",
@@ -27904,7 +27904,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-05T23:34:41.289Z"
+        "latestEvidenceAt": "2026-06-06T00:06:23.551Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -27918,39 +27918,39 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1404,
+        "signalCount": 1413,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 603
+            "count": 605
           },
           {
             "category": "evaluation",
-            "count": 507
+            "count": 508
           },
           {
             "category": "user-request",
-            "count": 87
+            "count": 88
           },
           {
             "category": "request-trace",
-            "count": 51
+            "count": 52
           },
           {
             "category": "work-summary",
-            "count": 48
+            "count": 49
           },
           {
             "category": "plan",
-            "count": 39
+            "count": 40
           },
           {
             "category": "web-search",
-            "count": 33
+            "count": 34
           },
           {
             "category": "project-doc",
-            "count": 24
+            "count": 25
           },
           {
             "category": "work-timing",
@@ -27977,7 +27977,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-05T23:51:36.205Z"
+        "latestEvidenceAt": "2026-06-06T00:06:23.552Z"
       },
       {
         "id": "release-blocker-gate",
@@ -27991,7 +27991,7 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 110,
+        "signalCount": 111,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -28014,12 +28014,12 @@
             "count": 6
           },
           {
-            "category": "work-timing",
+            "category": "work-summary",
             "count": 6
           },
           {
-            "category": "work-summary",
-            "count": 5
+            "category": "work-timing",
+            "count": 6
           },
           {
             "category": "plan",
@@ -28046,21 +28046,21 @@
           "Public Release Updater Automation Spec",
           "2026 06 06 평가: Public Release Updater Automation"
         ],
-        "latestEvidenceAt": "2026-06-05T22:34:05.026Z"
+        "latestEvidenceAt": "2026-06-06T00:06:23.551Z"
       }
     ]
   },
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3595,
+      "sourceDocuments": 3608,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-05T23:51:36.205Z"
+      "latestInsightAt": "2026-06-06T00:06:23.552Z"
     },
     "operatingModel": [
       {
@@ -28118,19 +28118,19 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3040,
+        "signalCount": 3048,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1665
+            "signalCount": 1668
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 963
+            "signalCount": 968
           },
           {
             "id": "build-closeout-gate",
@@ -28164,7 +28164,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-05T23:51:36.205Z",
+        "latestEvidenceAt": "2026-06-06T00:06:23.552Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28193,19 +28193,19 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 741,
+        "signalCount": 743,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 631
+            "signalCount": 632
           },
           {
             "id": "release-blocker-gate",
             "label": "공개 릴리스 blocker를 fail-fast gate로 유지",
             "signalStrength": "high",
-            "signalCount": 110
+            "signalCount": 111
           }
         ],
         "missingPatternIds": [],
@@ -28233,7 +28233,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-05T23:34:41.289Z",
+        "latestEvidenceAt": "2026-06-06T00:06:23.551Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28262,19 +28262,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2367,
+        "signalCount": 2381,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1404
+            "signalCount": 1413
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 963
+            "signalCount": 968
           }
         ],
         "missingPatternIds": [],
@@ -28302,7 +28302,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-05T23:51:36.205Z",
+        "latestEvidenceAt": "2026-06-06T00:06:23.552Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28331,7 +28331,7 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 522,
+        "signalCount": 523,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
@@ -28343,7 +28343,7 @@
             "id": "release-blocker-gate",
             "label": "공개 릴리스 blocker를 fail-fast gate로 유지",
             "signalStrength": "high",
-            "signalCount": 110
+            "signalCount": 111
           }
         ],
         "missingPatternIds": [],
@@ -28371,7 +28371,7 @@
           "2026 06 06 User Request: Public Release Developer Repatch",
           "Public Release Updater Automation Spec"
         ],
-        "latestEvidenceAt": "2026-06-05T23:51:36.205Z",
+        "latestEvidenceAt": "2026-06-06T00:06:23.551Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28400,19 +28400,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2628,
+        "signalCount": 2636,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 963
+            "signalCount": 968
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1665
+            "signalCount": 1668
           }
         ],
         "missingPatternIds": [],
@@ -28440,7 +28440,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-05T23:51:36.205Z",
+        "latestEvidenceAt": "2026-06-06T00:06:23.552Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28469,19 +28469,19 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1775,
+        "signalCount": 1779,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
             "label": "공개 릴리스 blocker를 fail-fast gate로 유지",
             "signalStrength": "high",
-            "signalCount": 110
+            "signalCount": 111
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1665
+            "signalCount": 1668
           }
         ],
         "missingPatternIds": [],
@@ -28509,7 +28509,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-05T23:51:36.205Z",
+        "latestEvidenceAt": "2026-06-06T00:06:23.551Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",
