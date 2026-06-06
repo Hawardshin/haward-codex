@@ -1,0 +1,16 @@
+{
+  "id": "2026-06-06-contextual-button-feedback",
+  "status": "completed",
+  "request_coverage": [
+    "button click feedback is no longer generic",
+    "contextual action status appears after click",
+    "implementation includes validation and build/package"
+  ],
+  "implemented": [
+    "DesktopActionFeedback model",
+    "contextual feedback card",
+    "current action button state",
+    "contract test"
+  ],
+  "remaining_before_closeout": []
+}

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T02:38:19.340Z",
+  "generatedAt": "2026-06-06T02:59:01.942Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 509,
-    "evaluations": 15,
+    "evaluations": 14,
     "webSearches": 14,
     "timingRecords": 15,
     "historyDays": 1,
-    "adminHistoryDocuments": 2599,
+    "adminHistoryDocuments": 2606,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7733,6 +7733,230 @@
   ],
   "documents": [
     {
+      "id": "history-2026-2026-06-06-md",
+      "path": "_history/2026/2026-06-06.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 06",
+      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
+      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 14584,
+      "updatedAt": "2026-06-06T02:55:18.304Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-contextual-button-feedback-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-contextual-button-feedback.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "최종 평가",
+      "excerpt": "최종 평가 판정 요청한 “버튼을 눌렀을 때 나오는 결과가 너무 범용적”인 문제에 대해 적용 가능한 주요 데스크톱 런타임 버튼의 피드백을 액션별로 구체화했다. 구현, 테스트, 빌드, 내부 패키징까지 완료됐다. 완료한 항목 버튼별 액션 피드백 모델 추가 Quick Start, Command Palette, Workspace Host, Runtime Data, Service Readiness, Task Run, Agent CLI Cockpit 주요 버튼 연결 액션 상태 카드와 현재 버튼 강조 스타일 추",
+      "html": "<p>최종 평가 판정 요청한 “버튼을 눌렀을 때 나오는 결과가 너무 범용적”인 문제에 대해 적용 가능한 주요 데스크톱 런타임 버튼의 피드백을 액션별로 구체화했다. 구현, 테스트, 빌드, 내부 패키징까지 완료됐다. 완료한 항목 버튼별 액션 피드백 모델 추가 Quick Start, Command Palette, Workspace Host, Runtime Data, Service Readiness, Task Run, Agent CLI Cockpit 주요 버튼 연결 액션 상태 카드와 현재 버튼 강조 스타일 추가 구조 테스트 추가 검증 근거 corepack pnpm filter workspace monitor run collect corepack pn</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1301,
+      "updatedAt": "2026-06-06T02:55:18.303Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-contextual-button-feedback-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-contextual-button-feedback.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적",
+      "excerpt": "요청 결과 추적 요청 버튼을 눌렀을 때 나오는 결과가 너무 범용적이므로, 버튼별 맥락과 결과가 분명하게 보이도록 개선한다. 결과 platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/tests/tool studio.te",
+      "html": "<p>요청 결과 추적 요청 버튼을 눌렀을 때 나오는 결과가 너무 범용적이므로, 버튼별 맥락과 결과가 분명하게 보이도록 개선한다. 결과 platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs platform desktop app/docs/requirements/2026 06 06 contextual button feedb</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 752,
+      "updatedAt": "2026-06-06T02:55:18.302Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-contextual-button-feedback-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-contextual-button-feedback.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약",
+      "excerpt": "작업 요약 데스크톱 런타임 버튼 클릭 결과가 범용 notice처럼 보이는 문제를 줄이기 위해 버튼별 액션 피드백 카드를 추가했다. 각 피드백은 액션명, 대상, 상태, 결과, 다음 확인 위치를 보여준다. 주요 버튼에는 현재 액션 상태 class와 data desktop action feedback 를 부여했다. 검증은 renderer collect/check/test/build, Playwright DOM/CSS smoke, 내부 데스크톱 패키징, codesign verify, DMG verify까",
+      "html": "<p>작업 요약 데스크톱 런타임 버튼 클릭 결과가 범용 notice처럼 보이는 문제를 줄이기 위해 버튼별 액션 피드백 카드를 추가했다. 각 피드백은 액션명, 대상, 상태, 결과, 다음 확인 위치를 보여준다. 주요 버튼에는 현재 액션 상태 class와 data desktop action feedback 를 부여했다. 검증은 renderer collect/check/test/build, Playwright DOM/CSS smoke, 내부 데스크톱 패키징, codesign verify, DMG verify까지 통과했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 511,
+      "updatedAt": "2026-06-06T02:55:18.302Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-contextual-button-feedback-json",
+      "path": "_history/work-timings/2026/2026-06-06-contextual-button-feedback.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Contextual Button Feedback",
+      "excerpt": "{ \"id\": \"2026 06 06 contextual button feedback\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"notes\": \"Checked Apple HIG, Microsoft Learn, and NN/g search signals.\" }, { \"phase\": \"implementation\", \"status\": \"completed\", \"notes\": \"Added contextual button feedba",
+      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 contextual button feedback&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Checked Apple HIG, Microsoft Learn, and NN/g search signals.&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Added contextual button feedback state, card, button state styling, and tests.&quot; }, { &quot;phase&quot;: &quot;validation&quot;, &quot;s</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 585,
+      "updatedAt": "2026-06-06T02:55:18.302Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-contextual-button-feedback-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-contextual-button-feedback/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증 기록",
+      "excerpt": "검증 기록 통과 corepack pnpm filter workspace monitor test corepack pnpm filter workspace monitor run check corepack pnpm filter workspace monitor run collect corepack pnpm filter workspace monitor run build Playwright DOM/CSS smoke on http://localhost:3222/?section=desktop corepack pn",
+      "html": "<h1>검증 기록</h1>\n<h2>통과</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code></li>\n<li>Playwright DOM/CSS smoke on <code>http://localhost:3222/?section=desktop</code></li>\n<li><code>corepack pnpm run desktop:package:internal</code></li>\n</ul>\n<h2>패키징 결과</h2>\n<ul>\n<li><code>.app</code>: <code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>.dmg</code>: <code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n<li><code>codesign --verify --deep --strict</code> 통과</li>\n<li><code>hdiutil verify</code> 통과</li>\n</ul>\n<h2>Browser/Playwright 확인</h2>\n<p>인앱 Browser tool은 현재 callable tool로 노출되지 않아 Playwright로 대체했다. 데스크톱 섹션에서 <code>data-desktop-action-feedback</code> 버튼 10개와 <code>.desktop-action-feedback-card</code> CSS rule이 실제 페이지에 로드되는 것을 확인했다. 브라우저 미리보기에서는 네이티브 런타임이 없으므로 일부 버튼은 disabled 상태였다.</p>\n<h2>확인할 위험</h2>\n<ul>\n<li>내부 handler가 자체 catch 후 error state만 갱신하는 경우 wrapper는 완료 상태로 표시될 수 있다. 이번 변경은 버튼 피드백의 구체성을 다루며, 모든 네이티브 액션의 성공/실패 반환 계약 개편은 후속 범위다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1370,
+      "updatedAt": "2026-06-06T02:55:18.301Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-contextual-button-feedback-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-contextual-button-feedback/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록",
+      "excerpt": "작업 목록 x 웹 검색으로 버튼/명령 피드백 기준 확인 x 현재 버튼 액션과 generic notice 위치 확인 x DesktopActionFeedback 타입과 상태 추가 x 버튼별 copy와 runDesktopAction wrapper 구현 x Quick Start, Command Palette, 반복 진단 버튼 연결 x 피드백 카드와 현재 액션 버튼 스타일 추가 x 구조 테스트 추가 x renderer build 실행 x 내부 데스크톱 패키징 실행 x 최종 평가/추적 기록 갱신",
+      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] 웹 검색으로 버튼/명령 피드백 기준 확인</li>\n<li>[x] 현재 버튼 액션과 generic notice 위치 확인</li>\n<li>[x] <code>DesktopActionFeedback</code> 타입과 상태 추가</li>\n<li>[x] 버튼별 copy와 <code>runDesktopAction</code> wrapper 구현</li>\n<li>[x] Quick Start, Command Palette, 반복 진단 버튼 연결</li>\n<li>[x] 피드백 카드와 현재 액션 버튼 스타일 추가</li>\n<li>[x] 구조 테스트 추가</li>\n<li>[x] renderer build 실행</li>\n<li>[x] 내부 데스크톱 패키징 실행</li>\n<li>[x] 최종 평가/추적 기록 갱신</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 519,
+      "updatedAt": "2026-06-06T02:55:18.300Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-contextual-button-feedback-ko-md",
+      "path": "_history/plans/2026/2026-06-06-contextual-button-feedback.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "작업 계획 기록",
+      "excerpt": "작업 계획 기록 선택한 모드 standard implementation 계획 1. 웹 검색으로 버튼/명령 피드백 근거 확인 2. 현재 버튼 액션과 notice 구조 확인 3. 액션별 피드백 상태 모델 추가 4. 주요 버튼을 wrapper로 연결 5. CSS와 구조 테스트 추가 6. check/test/build/package 실행 7. 평가, 요청 추적, commit/push 제외 전체 버튼 컴포넌트 교체, 모든 handler 성공/실패 반환 계약 개편, 새 dependency 설치는 제외한다.",
+      "html": "<p>작업 계획 기록 선택한 모드 standard implementation 계획 1. 웹 검색으로 버튼/명령 피드백 근거 확인 2. 현재 버튼 액션과 notice 구조 확인 3. 액션별 피드백 상태 모델 추가 4. 주요 버튼을 wrapper로 연결 5. CSS와 구조 테스트 추가 6. check/test/build/package 실행 7. 평가, 요청 추적, commit/push 제외 전체 버튼 컴포넌트 교체, 모든 handler 성공/실패 반환 계약 개편, 새 dependency 설치는 제외한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 513,
+      "updatedAt": "2026-06-06T02:51:44.117Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-contextual-button-feedback-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-contextual-button-feedback.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약",
+      "excerpt": "사용자 요청 요약 원문 취지 버튼을 눌렀을 때 나오는 내용이 너무 범용적이므로, 사용자가 누른 버튼의 맥락과 결과를 더 직접적으로 알 수 있게 고친다. 적용 범위 데스크톱 런타임 주요 실행 버튼 Quick Start / Command Palette / Workspace Host / Runtime Data / Service Readiness / Task Run / Agent CLI Cockpit 구현 후 빌드와 패키징 자동 실행",
+      "html": "<p>사용자 요청 요약 원문 취지 버튼을 눌렀을 때 나오는 내용이 너무 범용적이므로, 사용자가 누른 버튼의 맥락과 결과를 더 직접적으로 알 수 있게 고친다. 적용 범위 데스크톱 런타임 주요 실행 버튼 Quick Start / Command Palette / Workspace Host / Runtime Data / Service Readiness / Task Run / Agent CLI Cockpit 구현 후 빌드와 패키징 자동 실행</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 439,
+      "updatedAt": "2026-06-06T02:51:44.117Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-contextual-button-feedback-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-contextual-button-feedback.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: 버튼별 맥락 피드백",
+      "excerpt": "웹 검색 기록: 버튼별 맥락 피드백 쿼리 Apple Human Interface Guidelines buttons feedback menus contextual actions official Microsoft Fluent Design commanding buttons menu contextual feedback official Nielsen Norman Group action button labels verbs specificity feedback site:developer.apple.com/de",
+      "html": "<p>웹 검색 기록: 버튼별 맥락 피드백 쿼리 Apple Human Interface Guidelines buttons feedback menus contextual actions official Microsoft Fluent Design commanding buttons menu contextual feedback official Nielsen Norman Group action button labels verbs specificity feedback site:developer.apple.com/design/human interface guidelines buttons feedback macOS button status site:nngrou</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1661,
+      "updatedAt": "2026-06-06T02:51:44.117Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-contextual-button-feedback-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-contextual-button-feedback/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "구현 계획",
+      "excerpt": "구현 계획 1. 기존 버튼 액션과 notice 상태를 조사한다. 2. 버튼별 피드백 데이터 타입, 상태, wrapper, 렌더러를 추가한다. 3. Quick Start와 Command Palette의 주요 버튼을 wrapper에 연결한다. 4. 반복 버튼이 많은 Workspace Host, Runtime Data, Service Readiness, Task Run, Agent CLI Cockpit도 같은 피드백 계약에 연결한다. 5. CSS 상태 카드와 현재 버튼 강조 스타일을 추가한다. 6. 문",
+      "html": "<h1>구현 계획</h1>\n<p>1. 기존 버튼 액션과 notice 상태를 조사한다.</p>\n<p>2. 버튼별 피드백 데이터 타입, 상태, wrapper, 렌더러를 추가한다.</p>\n<p>3. Quick Start와 Command Palette의 주요 버튼을 wrapper에 연결한다.</p>\n<p>4. 반복 버튼이 많은 Workspace Host, Runtime Data, Service Readiness, Task Run, Agent CLI Cockpit도 같은 피드백 계약에 연결한다.</p>\n<p>5. CSS 상태 카드와 현재 버튼 강조 스타일을 추가한다.</p>\n<p>6. 문자열 기반 계약 테스트를 추가한다.</p>\n<p>7. check/test/build/package를 실행하고 validation 문서를 갱신한다.</p>\n<h2>결정</h2>\n<p>별도 모달이나 toast queue를 추가하지 않고, 현재 패널 안에 passive status card를 둔다. 사용자가 이미 보고 있는 명령 표면 안에서 피드백을 받는 것이 interruption을 줄이고, 현재 앱의 패널형 구조와도 맞는다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 872,
+      "updatedAt": "2026-06-06T02:51:44.116Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-contextual-button-feedback-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-contextual-button-feedback/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적성",
+      "excerpt": "추적성 요구사항 연결 REQ CONTEXTUAL BUTTON FEEDBACK 001 MonitorShell.tsx 의 DesktopActionFeedbackId , 주요 버튼 data desktop action feedback REQ CONTEXTUAL BUTTON FEEDBACK 002 getDesktopActionFeedback , DesktopActionFeedbackStatus REQ CONTEXTUAL BUTTON FEEDBACK 003 .desktop action current.stat",
+      "html": "<h1>추적성</h1>\n<h2>요구사항 연결</h2>\n<ul>\n<li>REQ-CONTEXTUAL-BUTTON-FEEDBACK-001 -&gt; <code>MonitorShell.tsx</code>의 <code>DesktopActionFeedbackId</code>, 주요 버튼 <code>data-desktop-action-feedback</code></li>\n<li>REQ-CONTEXTUAL-BUTTON-FEEDBACK-002 -&gt; <code>getDesktopActionFeedback</code>, <code>DesktopActionFeedbackStatus</code></li>\n<li>REQ-CONTEXTUAL-BUTTON-FEEDBACK-003 -&gt; <code>.desktop-action-current.status-*</code></li>\n<li>REQ-CONTEXTUAL-BUTTON-FEEDBACK-004 -&gt; <code>renderDesktopActionFeedbackCard</code></li>\n<li>REQ-CONTEXTUAL-BUTTON-FEEDBACK-005 -&gt; <code>validation.ko.md</code>, final evaluation</li>\n</ul>\n<h2>변경 파일</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n<li><code>platform-desktop-app/docs/requirements/2026-06-06-contextual-button-feedback.ko.md</code></li>\n<li><code>platform-desktop-app/specs/2026-06-06-contextual-button-feedback/</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 898,
+      "updatedAt": "2026-06-06T02:51:44.116Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-contextual-button-feedback-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-contextual-button-feedback.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "버튼별 맥락 피드백 요구사항",
+      "excerpt": "버튼별 맥락 피드백 요구사항 배경 사용자는 버튼을 눌렀을 때 나오는 결과가 너무 범용적이라고 지적했다. 현재 데스크톱 런타임 표면은 많은 버튼이 서로 다른 네이티브 작업을 수행하지만, 실행 후 사용자가 보는 피드백은 짧은 notice 또는 일반 상태 문구에 가까워 어떤 버튼의 결과인지, 대상이 무엇인지, 다음에 어디를 확인해야 하는지 즉시 알기 어렵다. 요구사항 REQ CONTEXTUAL BUTTON FEEDBACK 001: Quick Start, Command Palette, Workspace ",
+      "html": "<h1>버튼별 맥락 피드백 요구사항</h1>\n<h2>배경</h2>\n<p>사용자는 버튼을 눌렀을 때 나오는 결과가 너무 범용적이라고 지적했다. 현재 데스크톱 런타임 표면은 많은 버튼이 서로 다른 네이티브 작업을 수행하지만, 실행 후 사용자가 보는 피드백은 짧은 notice 또는 일반 상태 문구에 가까워 어떤 버튼의 결과인지, 대상이 무엇인지, 다음에 어디를 확인해야 하는지 즉시 알기 어렵다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-CONTEXTUAL-BUTTON-FEEDBACK-001: Quick Start, Command Palette, Workspace Host, Runtime Data, Service Readiness, Task Run, Agent CLI Cockpit의 주요 실행 버튼은 클릭 후 액션별 피드백 상태를 표시해야 한다.</li>\n<li>REQ-CONTEXTUAL-BUTTON-FEEDBACK-002: 피드백은 액션명, 대상 scope, 실행 상태, 결과, 다음 확인 위치를 포함해야 하며 <code>running</code>, <code>done</code>, <code>failed</code>를 구분해야 한다.</li>\n<li>REQ-CONTEXTUAL-BUTTON-FEEDBACK-003: 클릭한 버튼은 현재 액션 상태와 시각적으로 연결되어야 하며, 버튼 외부의 일반 notice만으로 끝나면 안 된다.</li>\n<li>REQ-CONTEXTUAL-BUTTON-FEEDBACK-004: 피드백 영역은 <code>role=&quot;status&quot;</code>와 <code>aria-live=&quot;polite&quot;</code>를 사용해 보조기술에서도 실행 결과 변화를 알 수 있어야 한다.</li>\n<li>REQ-CONTEXTUAL-BUTTON-FEEDBACK-005: 변경 후 renderer check/test/build와 내부 데스크톱 패키징을 실행해야 한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>모든 버튼을 새 컴포넌트로 교체하지 않는다.</li>\n<li>CLI/Rust 실행 로직의 성공/실패 판정 방식은 이번 변경에서 확장하지 않는다.</li>\n<li>모달 alert 또는 blocking dialog를 늘리지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1673,
+      "updatedAt": "2026-06-06T02:51:44.115Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-contextual-button-feedback-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-contextual-button-feedback/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: 버튼별 맥락 피드백",
+      "excerpt": "Spec: 버튼별 맥락 피드백 목표 데스크톱 런타임 주요 버튼이 클릭된 뒤 범용 notice 대신 액션별 상태 카드를 보여준다. 사용자는 방금 누른 버튼이 무엇을 대상으로 어떤 작업을 수행했고, 결과를 어디에서 이어서 확인해야 하는지 한 화면 안에서 파악할 수 있어야 한다. UX 기준 Apple HIG Feedback: 피드백은 현재 상태, 성공/실패, 다음에 할 수 있는 일을 이해하게 해야 한다. Apple HIG Buttons: 버튼은 목적을 명확히 전달해야 하고, 즉시 끝나지 않는 동작에는 ",
+      "html": "<h1>Spec: 버튼별 맥락 피드백</h1>\n<h2>목표</h2>\n<p>데스크톱 런타임 주요 버튼이 클릭된 뒤 범용 notice 대신 액션별 상태 카드를 보여준다. 사용자는 방금 누른 버튼이 무엇을 대상으로 어떤 작업을 수행했고, 결과를 어디에서 이어서 확인해야 하는지 한 화면 안에서 파악할 수 있어야 한다.</p>\n<h2>UX 기준</h2>\n<ul>\n<li>Apple HIG Feedback: 피드백은 현재 상태, 성공/실패, 다음에 할 수 있는 일을 이해하게 해야 한다.</li>\n<li>Apple HIG Buttons: 버튼은 목적을 명확히 전달해야 하고, 즉시 끝나지 않는 동작에는 진행 피드백이 필요하다.</li>\n<li>Microsoft Commanding basics: command feedback은 명령이 감지/해석/처리되었는지와 성공 여부, 다음 행동을 알려야 한다.</li>\n</ul>\n<h2>구현 계약</h2>\n<ul>\n<li><code>DesktopActionFeedbackId</code>, <code>DesktopActionFeedbackStatus</code>, <code>DesktopActionFeedback</code> 타입을 둔다.</li>\n<li><code>runDesktopAction</code> wrapper는 액션 시작 시 <code>running</code>, 완료 시 <code>done</code>, 예외 시 <code>failed</code> 피드백을 갱신한다.</li>\n<li><code>renderDesktopActionFeedbackCard</code>는 Quick Start, Command Palette, 파일 워크스페이스 표면에서 재사용한다.</li>\n<li>버튼에는 <code>data-desktop-action-feedback=&quot;&lt;id&gt;&quot;</code>를 부여하고 현재 액션이면 <code>desktop-action-current status-*</code> 클래스를 적용한다.</li>\n<li>피드백 카드는 <code>role=&quot;status&quot;</code>와 <code>aria-live=&quot;polite&quot;</code>를 포함한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>CLI 점검, 세션 시작, 검색 에이전트, 파이프라인, 결정함, 실행 기록, 축적 데이터, 런타임 루트, 페이로드 감사, 지원 번들, 서비스 준비도, 작업공간, 질문 보류, 소스 검토 버튼이 각기 다른 피드백 copy를 가진다.</li>\n<li>완료 문구가 “완료”만 말하지 않고 액션 이름과 다음 확인 위치를 포함한다.</li>\n<li>CSS는 상태별 border/background/shadow를 제공한다.</li>\n<li>구조 테스트가 타입, data attribute, aria status, CSS class 계약을 확인한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1957,
+      "updatedAt": "2026-06-06T02:51:44.115Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-storage-architecture-review-validation-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-storage-architecture-review/validation.ko.md",
       "category": "project-spec",
@@ -10293,22 +10517,6 @@
       "workspaceArea": "agent-platform"
     },
     {
-      "id": "history-2026-2026-06-06-md",
-      "path": "_history/2026/2026-06-06.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 06",
-      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 14027,
-      "updatedAt": "2026-06-05T23:07:18.989Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
-    },
-    {
       "id": "history-request-traces-2026-2026-06-06-shared-workspace-resource-cache-ko-md",
       "path": "_history/request-traces/2026/2026-06-06-shared-workspace-resource-cache.ko.md",
       "category": "request-trace",
@@ -10613,22 +10821,6 @@
       "workspaceArea": "_history/work-summaries"
     },
     {
-      "id": "history-evaluations-2026-2026-06-06-runtime-run-timeline-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-runtime-run-timeline.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "최종 평가: Runtime Run Timeline",
-      "excerpt": "최종 평가: Runtime Run Timeline 결론 작업은 닫을 수 있다. Desktop Runtime의 실행 기록, 결정함, 활성 세션, task run, 출력 신호를 raw log 앞에서 먼저 볼 수 있는 Run Timeline 패널을 추가했고, 내부 .app 와 .dmg 패키징까지 통과했다. 결과 Run Timeline / 작업 실행 타임라인 패널을 실행 기록과 결정함 disclosure 안의 raw terminal output 앞에 추가했다. 열린 결정, 활성 세션, 실행 기록, 출력 ",
-      "html": "<p>최종 평가: Runtime Run Timeline 결론 작업은 닫을 수 있다. Desktop Runtime의 실행 기록, 결정함, 활성 세션, task run, 출력 신호를 raw log 앞에서 먼저 볼 수 있는 Run Timeline 패널을 추가했고, 내부 .app 와 .dmg 패키징까지 통과했다. 결과 Run Timeline / 작업 실행 타임라인 패널을 실행 기록과 결정함 disclosure 안의 raw terminal output 앞에 추가했다. 열린 결정, 활성 세션, 실행 기록, 출력 신호 카운터와 빈 상태를 제공한다. timeline item은 기존 상태만 재사용하며 disclosure가 열릴 때만 계산되도록 해서 탭 이동 </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2282,
-      "updatedAt": "2026-06-05T22:50:16.100Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-runtime-run-timeline-validation-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-runtime-run-timeline/validation.ko.md",
       "category": "project-spec",
@@ -10659,102 +10851,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-runtime-run-timeline-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-runtime-run-timeline.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: Runtime Run Timeline",
-      "excerpt": "사용자 요청 요약: Runtime Run Timeline 사용자는 “개발”이라고 지시했다. 최근 플랫폼 개발 흐름과 오픈소스 feature radar 이후 상태를 기준으로, 다음 실행 가능한 제품 slice를 개발하라는 요청으로 해석했다. 이번 slice는 platform desktop app 의 Work Visibility 계층을 보강해 Desktop Runtime의 실행 기록/결정함 영역에 작업 실행 타임라인을 추가하는 것으로 정했다. 원문 전체는 저장하지 않고 요약만 보존한다.",
-      "html": "<p>사용자 요청 요약: Runtime Run Timeline 사용자는 “개발”이라고 지시했다. 최근 플랫폼 개발 흐름과 오픈소스 feature radar 이후 상태를 기준으로, 다음 실행 가능한 제품 slice를 개발하라는 요청으로 해석했다. 이번 slice는 platform desktop app 의 Work Visibility 계층을 보강해 Desktop Runtime의 실행 기록/결정함 영역에 작업 실행 타임라인을 추가하는 것으로 정했다. 원문 전체는 저장하지 않고 요약만 보존한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 531,
-      "updatedAt": "2026-06-05T22:41:14.418Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-runtime-run-timeline-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-runtime-run-timeline.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: Runtime Run Timeline",
-      "excerpt": "웹 검색 기록: Runtime Run Timeline 검색 시각 2026 06 06 쿼리 agent workbench run timeline decision inbox open source desktop AI agent platform UX patterns 2026 developer workflow task timeline decision inbox AI agent workbench design best practices local desktop AI agent platform process ma",
-      "html": "<p>웹 검색 기록: Runtime Run Timeline 검색 시각 2026 06 06 쿼리 agent workbench run timeline decision inbox open source desktop AI agent platform UX patterns 2026 developer workflow task timeline decision inbox AI agent workbench design best practices local desktop AI agent platform process management workspace monitor open source examples 확인한 내용 local first agent workben</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1296,
-      "updatedAt": "2026-06-05T22:41:14.418Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-do-all-completion-standard-json",
-      "path": "_history/work-timings/2026/2026-06-06-do-all-completion-standard.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Do All Completion Standard",
-      "excerpt": "{ \"schema version\": \"2026 06 01\", \"task id\": \"2026 06 06 do all completion standard\", \"title\": \"Persist do all completion standard\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"started at\": null, \"ended at\": \"2026 06 06T07:33:21+0900\", \"measurement note\": \"Timin",
-      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 01&quot;, &quot;task id&quot;: &quot;2026 06 06 do all completion standard&quot;, &quot;title&quot;: &quot;Persist do all completion standard&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;started at&quot;: null, &quot;ended at&quot;: &quot;2026 06 06T07:33:21+0900&quot;, &quot;measurement note&quot;: &quot;Timing record was created after the task began, so phases are recorded as completed b</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2820,
-      "updatedAt": "2026-06-05T22:34:23.253Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-do-all-completion-standard-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-do-all-completion-standard.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "평가: Do All Completion Standard",
-      "excerpt": "평가: Do All Completion Standard 결과 사용자 지시 “다하기”를 durable instruction과 omission prevention workflow에 반영했다. 앞으로 부분 처리로 완료 선언하지 않고, 적용 가능한 전체 결과물과 검증을 완료 기준으로 삼는다. 변경 사항 AGENTS.md : do all completion standard 추가. docs/instructions/persistent instructions. .md : 한국어/영어/공통 지속 지시 추가. op",
-      "html": "<p>평가: Do All Completion Standard 결과 사용자 지시 “다하기”를 durable instruction과 omission prevention workflow에 반영했다. 앞으로 부분 처리로 완료 선언하지 않고, 적용 가능한 전체 결과물과 검증을 완료 기준으로 삼는다. 변경 사항 AGENTS.md : do all completion standard 추가. docs/instructions/persistent instructions. .md : 한국어/영어/공통 지속 지시 추가. ops/workflows/68 omission prevention.md : “다하기/전부/모두/do all”을 expected items로 확장. </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1724,
-      "updatedAt": "2026-06-05T22:34:23.252Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-do-all-completion-standard-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-do-all-completion-standard.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: Do All Completion Standard",
-      "excerpt": "요청 결과 추적: Do All Completion Standard 요청 “다하기”. 결과 AGENTS.md 에 do all completion standard를 추가했다. docs/instructions/persistent instructions. .md 에 동일한 지속 지시를 반영했다. ops/workflows/68 omission prevention.md 에서 “다하기/전부/모두/do all”을 expected items로 확장하도록 했다. agent platform/configs/memory",
-      "html": "<p>요청 결과 추적: Do All Completion Standard 요청 “다하기”. 결과 AGENTS.md 에 do all completion standard를 추가했다. docs/instructions/persistent instructions. .md 에 동일한 지속 지시를 반영했다. ops/workflows/68 omission prevention.md 에서 “다하기/전부/모두/do all”을 expected items로 확장하도록 했다. agent platform/configs/memory/bootstrap manifest.json 에 omission/do all anchor를 반영했다. governance mode 선택 기록, </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1260,
-      "updatedAt": "2026-06-05T22:34:23.252Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-do-all-completion-standard-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-do-all-completion-standard.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: Do All Completion Standard",
-      "excerpt": "작업 요약: Do All Completion Standard 사용자 지시 “다하기”를 지속 운영 규칙으로 반영했다. 앞으로 “다하기/전부/모두/do all” 요청은 적용 가능한 요구사항, 구현, 산출물, 검증, 빌드/패키징, 기록, commit, push까지 커버해야 한다. 구체적 blocker가 있으면 해당 항목만 격리하고 blocker와 continuation path를 남기도록 했다. AGENTS.md , persistent instruction 문서, omission prevention w",
-      "html": "<p>작업 요약: Do All Completion Standard 사용자 지시 “다하기”를 지속 운영 규칙으로 반영했다. 앞으로 “다하기/전부/모두/do all” 요청은 적용 가능한 요구사항, 구현, 산출물, 검증, 빌드/패키징, 기록, commit, push까지 커버해야 한다. 구체적 blocker가 있으면 해당 항목만 격리하고 blocker와 continuation path를 남기도록 했다. AGENTS.md , persistent instruction 문서, omission prevention workflow, memory bootstrap manifest를 갱신했다. durable behavior 변경으로 governance mode </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 675,
-      "updatedAt": "2026-06-05T22:34:05.026Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
     },
     {
       "id": "docs-instructions-persistent-instructions-en-md",
@@ -18035,102 +18131,6 @@
       "historyDate": "2026-06-04",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-agentcore-easy-agent-builder-plan-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-agentcore-easy-agent-builder/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Plan: AgentCore Easy Agent Builder",
-      "excerpt": "Plan: AgentCore Easy Agent Builder 단계 1. AgentCore 공식 문서, AgentCore CLI, awslabs sample reference를 다시 확인한다. 2. 기존 blueprint prefill flow와 Agent Factory proposal command를 연결한다. 3. Quick Builder UI와 preview/native 상태 문구를 추가한다. 4. Product, user flow, reference, service readiness reg",
-      "html": "<h1>Plan: AgentCore Easy Agent Builder</h1>\n<h2>단계</h2>\n<p>1. AgentCore 공식 문서, AgentCore CLI, awslabs sample reference를 다시 확인한다.</p>\n<p>2. 기존 blueprint prefill flow와 Agent Factory proposal command를 연결한다.</p>\n<p>3. Quick Builder UI와 preview/native 상태 문구를 추가한다.</p>\n<p>4. Product, user-flow, reference, service readiness registry를 갱신한다.</p>\n<p>5. Type check, tests, readiness, browser smoke를 실행한다.</p>\n<h2>선택한 구조</h2>\n<ul>\n<li>새 native command를 만들지 않는다.</li>\n<li><code>create_agent_factory_proposal</code>을 재사용한다.</li>\n<li>Blueprint-to-form 변환은 React component 외부 helper로 둔다.</li>\n<li>AWS deploy는 optional adapter로 유지한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 679,
-      "updatedAt": "2026-06-03T17:35:39.179Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-agentcore-easy-agent-builder-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-agentcore-easy-agent-builder/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Validation: AgentCore Easy Agent Builder",
-      "excerpt": "Validation: AgentCore Easy Agent Builder 필수 검증 corepack pnpm filter workspace monitor run check corepack pnpm filter workspace monitor test corepack pnpm filter workspace monitor run build:customer corepack pnpm filter platform desktop app test corepack pnpm filter platform deskt",
-      "html": "<h1>Validation: AgentCore Easy Agent Builder</h1>\n<h2>필수 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor run check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code></li>\n<li><code>cd platform-desktop-app &amp;&amp; cargo check</code></li>\n<li>Browser smoke: Agents 화면에서 <code>AgentCore Quick Builder</code>, <code>바로 에이전트 제안 생성</code>, preview/native status가 보이는지 확인한다.</li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>Quick Builder UI가 Agents 화면에 표시된다.</li>\n<li>선택한 blueprint가 Agent Factory proposal form으로 변환된다.</li>\n<li>Direct proposal action은 native runtime이 있을 때 기존 <code>create_agent_factory_proposal</code> command를 호출한다.</li>\n<li>Preview runtime에서는 저장 불가 상태가 명확히 보인다.</li>\n<li>Readiness scripts가 quick builder token을 검증한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 958,
-      "updatedAt": "2026-06-03T17:35:39.179Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-agentcore-blueprint-transfer-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-agentcore-blueprint-transfer/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Validation: AgentCore Blueprint Transfer",
-      "excerpt": "Validation: AgentCore Blueprint Transfer 완료된 검증 corepack pnpm filter workspace monitor run check corepack pnpm filter platform desktop app test corepack pnpm filter platform desktop app run check PYTHONPATH=src python3 m agent platform.cli check config contract ../platform deskto",
-      "html": "<h1>Validation: AgentCore Blueprint Transfer</h1>\n<h2>완료된 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor run check</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/reference-platform-advantage-registry.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-feature-registry.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/user-flow-registry.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/service-readiness-registry.json</code></li>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code></li>\n<li>Browser smoke: <code>http://127.0.0.1:4175/</code></li>\n<li>Agents 화면에서 <code>Production 에이전트 블루프린트</code> 표시 확인</li>\n<li><code>Memory-Enabled Work Agent</code> 선택 확인</li>\n<li><code>에이전트 생성 입력 채우기</code> 클릭 후 Search Agent Work Chat과 Agent Factory 입력 변경 확인</li>\n<li>스크린샷: <code>outputs/agentcore-blueprint-smoke.png</code></li>\n</ul>\n<h2>남은 검증</h2>\n<ul>\n<li>Final full test/check before commit</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1284,
-      "updatedAt": "2026-06-03T17:27:43.295Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-agentcore-blueprint-transfer-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-agentcore-blueprint-transfer/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Tasks: AgentCore Blueprint Transfer",
-      "excerpt": "Tasks: AgentCore Blueprint Transfer x AgentCore 공식 문서와 awslabs/agentcore samples 확인 x Apache 2.0 및 코드 미복사 경계 기록 x AgentCoreBlueprint 타입과 blueprint 카탈로그 추가 x AgentCoreBlueprintPanel UI 추가 x Blueprint 적용 handler 추가 x 반응형 CSS 추가 x reference platform advantage registry.json 업데이트 x pr",
-      "html": "<h1>Tasks: AgentCore Blueprint Transfer</h1>\n<ul>\n<li>[x] AgentCore 공식 문서와 <code>awslabs/agentcore-samples</code> 확인</li>\n<li>[x] Apache-2.0 및 코드 미복사 경계 기록</li>\n<li>[x] <code>AgentCoreBlueprint</code> 타입과 blueprint 카탈로그 추가</li>\n<li>[x] <code>AgentCoreBlueprintPanel</code> UI 추가</li>\n<li>[x] Blueprint 적용 handler 추가</li>\n<li>[x] 반응형 CSS 추가</li>\n<li>[x] <code>reference-platform-advantage-registry.json</code> 업데이트</li>\n<li>[x] <code>product-feature-registry.json</code> 업데이트</li>\n<li>[x] <code>user-flow-registry.json</code> 업데이트</li>\n<li>[x] <code>service-readiness-registry.json</code>와 readiness script 업데이트</li>\n<li>[x] Node readiness tests 업데이트</li>\n<li>[x] 검증 기록 작성</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 634,
-      "updatedAt": "2026-06-03T17:24:10.621Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-agentcore-blueprint-transfer-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-agentcore-blueprint-transfer/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Traceability: AgentCore Blueprint Transfer",
-      "excerpt": "Traceability: AgentCore Blueprint Transfer | Requirement | 구현 | 검증 | | | | | | REQ PDA 087 | AgentCoreBlueprintPanel , agentCoreBlueprints | workspace monitor run check , readiness token | | REQ PDA 088 | applyAgentCoreBlueprint , setSearchAgentRunForm , setAgentFactoryForm | che",
-      "html": "<h1>Traceability: AgentCore Blueprint Transfer</h1>\n<table><thead><tr><th>Requirement</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-PDA-087</td><td><code>AgentCoreBlueprintPanel</code>, <code>agentCoreBlueprints</code></td><td><code>workspace-monitor run check</code>, readiness token</td></tr><tr><td>REQ-PDA-088</td><td><code>applyAgentCoreBlueprint</code>, <code>setSearchAgentRunForm</code>, <code>setAgentFactoryForm</code></td><td><code>check-service-readiness.mjs</code> production blueprint group</td></tr><tr><td>REQ-PDA-089</td><td>Blueprint contract copy, product/user-flow registry</td><td><code>platform-desktop-app test</code></td></tr><tr><td>REQ-PDA-090</td><td>reference registry, web-search record</td><td>config contract checks</td></tr><tr><td>REQ-PDA-091</td><td>readiness script/test assertions</td><td><code>platform-desktop-app run check</code></td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 635,
-      "updatedAt": "2026-06-03T17:24:10.621Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-04-agentcore-blueprint-transfer-en-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-04-agentcore-blueprint-transfer.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "AgentCore Blueprint Transfer Requirements",
-      "excerpt": "AgentCore Blueprint Transfer Requirements Date: 2026 06 04 Owner project: platform desktop app/ Context The user provided awslabs/agentcore samples as a reference. This is treated as a request to translate AgentCore's production agent sample structure into actual desktop platform",
-      "html": "<h1>AgentCore Blueprint Transfer Requirements</h1>\n<p>Date: 2026-06-04</p>\n<p>Owner project: <code>platform-desktop-app/</code></p>\n<h2>Context</h2>\n<p>The user provided <code>awslabs/agentcore-samples</code> as a reference. This is treated as a request to translate AgentCore&#039;s production-agent sample structure into actual desktop platform capability, not as a passive research note.</p>\n<h2>Requirements</h2>\n<table><thead><tr><th>ID</th><th>Requirement</th><th>Acceptance Criteria</th></tr></thead><tbody><tr><td>REQ-PDA-087</td><td>The Agents screen must expose AgentCore-style production blueprints as selectable product UI.</td><td>A <code>Production Agent Blueprints</code> panel displays runtime, memory, gateway/tool, and evaluation-guarded blueprints.</td></tr><tr><td>REQ-PDA-088</td><td>Selecting a blueprint must change runnable input, not only show documentation.</td><td>The selected blueprint fills Search Agent Work Chat input and Agent Factory proposal input.</td></tr><tr><td>REQ-PDA-089</td><td>AWS AgentCore must remain an optional deployment adapter.</td><td>UI and registries describe AWS/AgentCore CLI as optional deployment readiness, not a required local runtime.</td></tr><tr><td>REQ-PDA-090</td><td>AgentCore reference transfer must record public source and license boundaries.</td><td>Reference registry and web-search record capture AWS docs, the awslabs repo, Apache-2.0 boundary, and no source-copy policy.</td></tr><tr><td>REQ-PDA-091</td><td>Readiness/tests must catch missing AgentCore blueprint UI and registry contracts.</td><td>Platform check and Node tests assert <code>AgentCoreBlueprintPanel</code>, <code>agentcore-blueprint-panel</code>, and <code>agentcore-style-production-agent-blueprints</code> tokens.</td></tr></tbody></table>\n<h2>Out Of Scope</h2>\n<ul>\n<li>Do not auto-install AgentCore CLI or configure AWS accounts.</li>\n<li>Do not copy AgentCore sample source code into the product.</li>\n<li>Do not claim AWS public deployment readiness.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1691,
-      "updatedAt": "2026-06-03T17:24:10.620Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18139,10 +18139,6 @@
       "year": "2026",
       "documentsCount": 96,
       "categories": [
-        {
-          "category": "evaluation",
-          "count": 15
-        },
         {
           "category": "request-trace",
           "count": 15
@@ -18156,6 +18152,10 @@
           "count": 15
         },
         {
+          "category": "evaluation",
+          "count": 14
+        },
+        {
           "category": "user-request",
           "count": 14
         },
@@ -18165,7 +18165,7 @@
         },
         {
           "category": "plan",
-          "count": 7
+          "count": 8
         },
         {
           "category": "daily-history",
@@ -18180,7 +18180,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-          "updatedAt": "2026-06-05T23:07:18.989Z",
+          "updatedAt": "2026-06-06T02:55:18.304Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18204,6 +18204,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-evaluations-2026-2026-06-06-contextual-button-feedback-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-contextual-button-feedback.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "최종 평가",
+          "excerpt": "최종 평가 판정 요청한 “버튼을 눌렀을 때 나오는 결과가 너무 범용적”인 문제에 대해 적용 가능한 주요 데스크톱 런타임 버튼의 피드백을 액션별로 구체화했다. 구현, 테스트, 빌드, 내부 패키징까지 완료됐다. 완료한 항목 버튼별 액션 피드백 모델 추가 Quick Start, Command Palette, Workspace Host, Runtime Data, Service Readiness, Task Run, Agent CLI Cockpit 주요 버튼 연결 액션 상태 카드와 현재 버튼 강조 스타일 추",
+          "updatedAt": "2026-06-06T02:55:18.303Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-evaluations-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
           "category": "evaluation",
@@ -18221,16 +18231,6 @@
           "title": "2026 06 06 desktop dev/run fix 평가",
           "excerpt": "2026 06 06 desktop dev/run fix 평가 평가 대상 README build/run failure fix. 완료 기준 desktop:dev 가 실제 app startup까지 진행한다. internal/dev 실행은 updater public release gate에 막히지 않는다. 빌드된 .app 을 여는 명령이 문서화되고 스크립트로 제공된다. 최종 package와 smoke가 통과한다. 현재 결과 desktop:dev : 통과. GET / 200 . desktop:run:int",
           "updatedAt": "2026-06-06T01:28:41.481Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-do-all-completion-standard-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-do-all-completion-standard.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "평가: Do All Completion Standard",
-          "excerpt": "평가: Do All Completion Standard 결과 사용자 지시 “다하기”를 durable instruction과 omission prevention workflow에 반영했다. 앞으로 부분 처리로 완료 선언하지 않고, 적용 가능한 전체 결과물과 검증을 완료 기준으로 삼는다. 변경 사항 AGENTS.md : do all completion standard 추가. docs/instructions/persistent instructions. .md : 한국어/영어/공통 지속 지시 추가. op",
-          "updatedAt": "2026-06-05T22:34:23.252Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18294,16 +18294,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-runtime-run-timeline-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-runtime-run-timeline.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "최종 평가: Runtime Run Timeline",
-          "excerpt": "최종 평가: Runtime Run Timeline 결론 작업은 닫을 수 있다. Desktop Runtime의 실행 기록, 결정함, 활성 세션, task run, 출력 신호를 raw log 앞에서 먼저 볼 수 있는 Run Timeline 패널을 추가했고, 내부 .app 와 .dmg 패키징까지 통과했다. 결과 Run Timeline / 작업 실행 타임라인 패널을 실행 기록과 결정함 disclosure 안의 raw terminal output 앞에 추가했다. 열린 결정, 활성 세션, 실행 기록, 출력 ",
-          "updatedAt": "2026-06-05T22:50:16.100Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-shared-workspace-resource-cache-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-shared-workspace-resource-cache.ko.md",
           "category": "evaluation",
@@ -18341,6 +18331,16 @@
           "title": "2026 06 06 종합 개선 구현 계획",
           "excerpt": "2026 06 06 종합 개선 구현 계획 목표 platform desktop app 의 EVAL 탭에 종합 개선 cockpit를 추가해 성능, UX, 네이티브 리소스, EVAL 근거, 패키징, 오픈소스 활용, 자동화 연속성을 한 화면에서 비교한다. 단계 1. 웹 기준과 저장소 hot anchor 확인. 2. 대범위 요청을 EvaluationReportPanel 중심 slice로 분해. 3. 종합 개선 점수 모델과 7개 차원을 UI에 구현. 4. CSS를 추가해 desktop dense surfac",
           "updatedAt": "2026-06-06T00:02:05.908Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-plans-2026-2026-06-06-contextual-button-feedback-ko-md",
+          "path": "_history/plans/2026/2026-06-06-contextual-button-feedback.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "작업 계획 기록",
+          "excerpt": "작업 계획 기록 선택한 모드 standard implementation 계획 1. 웹 검색으로 버튼/명령 피드백 근거 확인 2. 현재 버튼 액션과 notice 구조 확인 3. 액션별 피드백 상태 모델 추가 4. 주요 버튼을 wrapper로 연결 5. CSS와 구조 테스트 추가 6. check/test/build/package 실행 7. 평가, 요청 추적, commit/push 제외 전체 버튼 컴포넌트 교체, 모든 handler 성공/실패 반환 계약 개편, 새 dependency 설치는 제외한다.",
+          "updatedAt": "2026-06-06T02:51:44.117Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18424,6 +18424,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-request-traces-2026-2026-06-06-contextual-button-feedback-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-contextual-button-feedback.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적",
+          "excerpt": "요청 결과 추적 요청 버튼을 눌렀을 때 나오는 결과가 너무 범용적이므로, 버튼별 맥락과 결과가 분명하게 보이도록 개선한다. 결과 platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/tests/tool studio.te",
+          "updatedAt": "2026-06-06T02:55:18.302Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
           "category": "request-trace",
@@ -18441,16 +18451,6 @@
           "title": "2026 06 06 request to outcome trace",
           "excerpt": "2026 06 06 request to outcome trace 요청 README대로 했는데 desktop app 빌드/실행이 되지 않는 문제 해결. 원인 Tauri beforeDevCommand 가 잘못된 상대 경로를 사용했다. updater plugin이 public updater config 없이도 항상 초기화되어 internal/dev 실행을 panic으로 막았다. README에 빌드 후 실행 명령이 없었다. 산출물 platform desktop app/src tauri/tauri.conf",
           "updatedAt": "2026-06-06T01:28:41.482Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-06-do-all-completion-standard-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-do-all-completion-standard.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: Do All Completion Standard",
-          "excerpt": "요청 결과 추적: Do All Completion Standard 요청 “다하기”. 결과 AGENTS.md 에 do all completion standard를 추가했다. docs/instructions/persistent instructions. .md 에 동일한 지속 지시를 반영했다. ops/workflows/68 omission prevention.md 에서 “다하기/전부/모두/do all”을 expected items로 확장하도록 했다. agent platform/configs/memory",
-          "updatedAt": "2026-06-05T22:34:23.252Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18574,6 +18574,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-user-requests-2026-2026-06-06-contextual-button-feedback-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-contextual-button-feedback.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약",
+          "excerpt": "사용자 요청 요약 원문 취지 버튼을 눌렀을 때 나오는 내용이 너무 범용적이므로, 사용자가 누른 버튼의 맥락과 결과를 더 직접적으로 알 수 있게 고친다. 적용 범위 데스크톱 런타임 주요 실행 버튼 Quick Start / Command Palette / Workspace Host / Runtime Data / Service Readiness / Task Run / Agent CLI Cockpit 구현 후 빌드와 패키징 자동 실행",
+          "updatedAt": "2026-06-06T02:51:44.117Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
           "category": "user-request",
@@ -18654,16 +18664,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-runtime-run-timeline-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-runtime-run-timeline.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: Runtime Run Timeline",
-          "excerpt": "사용자 요청 요약: Runtime Run Timeline 사용자는 “개발”이라고 지시했다. 최근 플랫폼 개발 흐름과 오픈소스 feature radar 이후 상태를 기준으로, 다음 실행 가능한 제품 slice를 개발하라는 요청으로 해석했다. 이번 slice는 platform desktop app 의 Work Visibility 계층을 보강해 Desktop Runtime의 실행 기록/결정함 영역에 작업 실행 타임라인을 추가하는 것으로 정했다. 원문 전체는 저장하지 않고 요약만 보존한다.",
-          "updatedAt": "2026-06-05T22:41:14.418Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-shared-workspace-resource-cache-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-shared-workspace-resource-cache.ko.md",
           "category": "user-request",
@@ -18711,6 +18711,16 @@
           "title": "2026 06 06 종합 개선 웹 검색 기록",
           "excerpt": "2026 06 06 종합 개선 웹 검색 기록 요청 요약 사용자는 기존 성능, UI, 기능, 사용성, 디자인, 운영체제 자원 활용, 오픈소스 참고, EVAL, 기록 기반 개선 요구를 종합해 전체 개선을 요구했다. 범위가 넓으므로 바로 전 파일을 훑지 않고 웹 기준과 저장소 대표 샘플을 결합해 첫 구현 slice를 선정했다. 검색 쿼리 desktop app UX performance accessibility design system best practices official Tauri desktop ",
           "updatedAt": "2026-06-06T00:02:05.907Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-contextual-button-feedback-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-contextual-button-feedback.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: 버튼별 맥락 피드백",
+          "excerpt": "웹 검색 기록: 버튼별 맥락 피드백 쿼리 Apple Human Interface Guidelines buttons feedback menus contextual actions official Microsoft Fluent Design commanding buttons menu contextual feedback official Nielsen Norman Group action button labels verbs specificity feedback site:developer.apple.com/de",
+          "updatedAt": "2026-06-06T02:51:44.117Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18794,16 +18804,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-runtime-run-timeline-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-runtime-run-timeline.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: Runtime Run Timeline",
-          "excerpt": "웹 검색 기록: Runtime Run Timeline 검색 시각 2026 06 06 쿼리 agent workbench run timeline decision inbox open source desktop AI agent platform UX patterns 2026 developer workflow task timeline decision inbox AI agent workbench design best practices local desktop AI agent platform process ma",
-          "updatedAt": "2026-06-05T22:41:14.418Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-shared-workspace-resource-cache-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-shared-workspace-resource-cache.ko.md",
           "category": "web-search",
@@ -18854,6 +18854,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-06-contextual-button-feedback-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-contextual-button-feedback.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약",
+          "excerpt": "작업 요약 데스크톱 런타임 버튼 클릭 결과가 범용 notice처럼 보이는 문제를 줄이기 위해 버튼별 액션 피드백 카드를 추가했다. 각 피드백은 액션명, 대상, 상태, 결과, 다음 확인 위치를 보여준다. 주요 버튼에는 현재 액션 상태 class와 data desktop action feedback 를 부여했다. 검증은 renderer collect/check/test/build, Playwright DOM/CSS smoke, 내부 데스크톱 패키징, codesign verify, DMG verify까",
+          "updatedAt": "2026-06-06T02:55:18.302Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
           "category": "work-summary",
@@ -18871,16 +18881,6 @@
           "title": "2026 06 06 desktop dev/run fix 작업 요약",
           "excerpt": "2026 06 06 desktop dev/run fix 작업 요약 구현 tauri.conf.json 의 dev renderer path를 수정했다. public updater config가 있을 때만 updater plugin을 초기화하도록 Rust startup을 바꿨다. desktop:dev , desktop:run:internal , desktop:package:run:internal root scripts를 추가했다. macOS internal .app open helper를 추가했다. R",
           "updatedAt": "2026-06-06T01:28:41.482Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-06-do-all-completion-standard-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-do-all-completion-standard.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: Do All Completion Standard",
-          "excerpt": "작업 요약: Do All Completion Standard 사용자 지시 “다하기”를 지속 운영 규칙으로 반영했다. 앞으로 “다하기/전부/모두/do all” 요청은 적용 가능한 요구사항, 구현, 산출물, 검증, 빌드/패키징, 기록, commit, push까지 커버해야 한다. 구체적 blocker가 있으면 해당 항목만 격리하고 blocker와 continuation path를 남기도록 했다. AGENTS.md , persistent instruction 문서, omission prevention w",
-          "updatedAt": "2026-06-05T22:34:05.026Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19004,6 +19004,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-timings-2026-2026-06-06-contextual-button-feedback-json",
+          "path": "_history/work-timings/2026/2026-06-06-contextual-button-feedback.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Contextual Button Feedback",
+          "excerpt": "{ \"id\": \"2026 06 06 contextual button feedback\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"notes\": \"Checked Apple HIG, Microsoft Learn, and NN/g search signals.\" }, { \"phase\": \"implementation\", \"status\": \"completed\", \"notes\": \"Added contextual button feedba",
+          "updatedAt": "2026-06-06T02:55:18.302Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-desktop-chrome-design-polish-json",
           "path": "_history/work-timings/2026/2026-06-06-desktop-chrome-design-polish.json",
           "category": "work-timing",
@@ -19021,16 +19031,6 @@
           "title": "2026 06 06 Desktop Dev Run Fix",
           "excerpt": "{ \"task id\": \"2026 06 06 desktop dev run fix\", \"title\": \"desktop dev/run fix\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"reproduction\", \"label\": \"Failure reproduction\", \"status\": \"c",
           "updatedAt": "2026-06-06T01:28:41.483Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-06-do-all-completion-standard-json",
-          "path": "_history/work-timings/2026/2026-06-06-do-all-completion-standard.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Do All Completion Standard",
-          "excerpt": "{ \"schema version\": \"2026 06 01\", \"task id\": \"2026 06 06 do all completion standard\", \"title\": \"Persist do all completion standard\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"started at\": null, \"ended at\": \"2026 06 06T07:33:21+0900\", \"measurement note\": \"Timin",
-          "updatedAt": "2026-06-05T22:34:23.253Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19142,36 +19142,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2599,
+      "documents": 2606,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1008
+          "count": 1009
         },
         {
           "category": "web-search",
-          "count": 413
+          "count": 414
         },
         {
           "category": "plan",
-          "count": 347
+          "count": 348
         },
         {
           "category": "request-trace",
-          "count": 341
+          "count": 342
         },
         {
           "category": "work-timing",
-          "count": 262
+          "count": 263
         },
         {
           "category": "user-request",
-          "count": 126
+          "count": 127
         },
         {
           "category": "work-summary",
-          "count": 93
+          "count": 94
         },
         {
           "category": "daily-history",
@@ -19182,7 +19182,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6511951,
+      "totalSourceBytes": 6518270,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19207,11 +19207,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 29,
+      "evidenceEvents": 28,
       "decisionEvents": 0,
       "openSignals": 15,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T02:36:02.919Z",
+      "latestEventAt": "2026-06-06T02:55:18.304Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19236,11 +19236,6 @@
         "count": 15
       },
       {
-        "id": "verification",
-        "label": "verification",
-        "count": 15
-      },
-      {
         "id": "evidence",
         "label": "evidence",
         "count": 14
@@ -19251,9 +19246,14 @@
         "count": 14
       },
       {
+        "id": "verification",
+        "label": "verification",
+        "count": 14
+      },
+      {
         "id": "planning",
         "label": "planning",
-        "count": 7
+        "count": 8
       },
       {
         "id": "history",
@@ -19266,11 +19266,6 @@
         "id": "task",
         "label": "task",
         "count": 64
-      },
-      {
-        "id": "evaluation",
-        "label": "evaluation",
-        "count": 15
       },
       {
         "id": "summary",
@@ -19288,6 +19283,11 @@
         "count": 15
       },
       {
+        "id": "evaluation",
+        "label": "evaluation",
+        "count": 14
+      },
+      {
         "id": "intake",
         "label": "intake",
         "count": 14
@@ -19300,7 +19300,7 @@
       {
         "id": "plan",
         "label": "plan",
-        "count": 7
+        "count": 8
       },
       {
         "id": "history",
@@ -19321,6 +19321,126 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-2026-2026-06-06-md",
+        "sourceType": "history",
+        "signalType": "history",
+        "lane": "history",
+        "severity": "info",
+        "status": "daily-history",
+        "title": "2026 06 06",
+        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
+        "path": "_history/2026/2026-06-06.md",
+        "category": "daily-history",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:55:18.304Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-contextual-button-feedback-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "최종 평가",
+        "detail": "최종 평가 판정 요청한 “버튼을 눌렀을 때 나오는 결과가 너무 범용적”인 문제에 대해 적용 가능한 주요 데스크톱 런타임 버튼의 피드백을 액션별로 구체화했다. 구현, 테스트, 빌드, 내부 패키징까지 완료됐다. 완료한 항목 버튼별 액션 피드백 모델 추가 Quick Start, Command Palette, Workspace Host, Runtime Data, Service Readiness, Task Run, Agent CLI Cockpit 주요 버튼 연결 액션 상태 카드와 현재 버튼 강조 스타일 추",
+        "path": "_history/evaluations/2026/2026-06-06-contextual-button-feedback.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:55:18.303Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-contextual-button-feedback-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 06 Contextual Button Feedback",
+        "detail": "{ \"id\": \"2026 06 06 contextual button feedback\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"notes\": \"Checked Apple HIG, Microsoft Learn, and NN/g search signals.\" }, { \"phase\": \"implementation\", \"status\": \"completed\", \"notes\": \"Added contextual button feedba",
+        "path": "_history/work-timings/2026/2026-06-06-contextual-button-feedback.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:55:18.302Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-contextual-button-feedback-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "요청 결과 추적",
+        "detail": "요청 결과 추적 요청 버튼을 눌렀을 때 나오는 결과가 너무 범용적이므로, 버튼별 맥락과 결과가 분명하게 보이도록 개선한다. 결과 platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx platform desktop app/renderer/workspace monitor/app/globals.css platform desktop app/renderer/workspace monitor/tests/tool studio.te",
+        "path": "_history/request-traces/2026/2026-06-06-contextual-button-feedback.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:55:18.302Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-contextual-button-feedback-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약",
+        "detail": "작업 요약 데스크톱 런타임 버튼 클릭 결과가 범용 notice처럼 보이는 문제를 줄이기 위해 버튼별 액션 피드백 카드를 추가했다. 각 피드백은 액션명, 대상, 상태, 결과, 다음 확인 위치를 보여준다. 주요 버튼에는 현재 액션 상태 class와 data desktop action feedback 를 부여했다. 검증은 renderer collect/check/test/build, Playwright DOM/CSS smoke, 내부 데스크톱 패키징, codesign verify, DMG verify까",
+        "path": "_history/work-summaries/2026/2026-06-06-contextual-button-feedback.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:55:18.302Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-contextual-button-feedback-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: 버튼별 맥락 피드백",
+        "detail": "웹 검색 기록: 버튼별 맥락 피드백 쿼리 Apple Human Interface Guidelines buttons feedback menus contextual actions official Microsoft Fluent Design commanding buttons menu contextual feedback official Nielsen Norman Group action button labels verbs specificity feedback site:developer.apple.com/de",
+        "path": "_history/web-searches/2026/2026-06-06-contextual-button-feedback.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:51:44.117Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-contextual-button-feedback-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약",
+        "detail": "사용자 요청 요약 원문 취지 버튼을 눌렀을 때 나오는 내용이 너무 범용적이므로, 사용자가 누른 버튼의 맥락과 결과를 더 직접적으로 알 수 있게 고친다. 적용 범위 데스크톱 런타임 주요 실행 버튼 Quick Start / Command Palette / Workspace Host / Runtime Data / Service Readiness / Task Run / Agent CLI Cockpit 구현 후 빌드와 패키징 자동 실행",
+        "path": "_history/user-requests/2026/2026-06-06-contextual-button-feedback.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:51:44.117Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-contextual-button-feedback-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "needs_attention",
+        "title": "작업 계획 기록",
+        "detail": "작업 계획 기록 선택한 모드 standard implementation 계획 1. 웹 검색으로 버튼/명령 피드백 근거 확인 2. 현재 버튼 액션과 notice 구조 확인 3. 액션별 피드백 상태 모델 추가 4. 주요 버튼을 wrapper로 연결 5. CSS와 구조 테스트 추가 6. check/test/build/package 실행 7. 평가, 요청 추적, commit/push 제외 전체 버튼 컴포넌트 교체, 모든 handler 성공/실패 반환 계약 개편, 새 dependency 설치는 제외한다.",
+        "path": "_history/plans/2026/2026-06-06-contextual-button-feedback.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T02:51:44.117Z"
+      },
       {
         "id": "history-history-evaluations-2026-2026-06-06-storage-architecture-review-ko-md",
         "sourceType": "history",
@@ -20537,21 +20657,6 @@
         "timestamp": "2026-06-05T23:07:18.989Z"
       },
       {
-        "id": "history-history-2026-2026-06-06-md",
-        "sourceType": "history",
-        "signalType": "history",
-        "lane": "history",
-        "severity": "info",
-        "status": "daily-history",
-        "title": "2026 06 06",
-        "detail": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-        "path": "_history/2026/2026-06-06.md",
-        "category": "daily-history",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:07:18.989Z"
-      },
-      {
         "id": "history-history-evaluations-2026-2026-06-06-shared-workspace-resource-cache-ko-md",
         "sourceType": "history",
         "signalType": "evaluation",
@@ -20655,111 +20760,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T22:50:22.550Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-runtime-run-timeline-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "최종 평가: Runtime Run Timeline",
-        "detail": "최종 평가: Runtime Run Timeline 결론 작업은 닫을 수 있다. Desktop Runtime의 실행 기록, 결정함, 활성 세션, task run, 출력 신호를 raw log 앞에서 먼저 볼 수 있는 Run Timeline 패널을 추가했고, 내부 .app 와 .dmg 패키징까지 통과했다. 결과 Run Timeline / 작업 실행 타임라인 패널을 실행 기록과 결정함 disclosure 안의 raw terminal output 앞에 추가했다. 열린 결정, 활성 세션, 실행 기록, 출력 ",
-        "path": "_history/evaluations/2026/2026-06-06-runtime-run-timeline.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:50:16.100Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-runtime-run-timeline-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: Runtime Run Timeline",
-        "detail": "웹 검색 기록: Runtime Run Timeline 검색 시각 2026 06 06 쿼리 agent workbench run timeline decision inbox open source desktop AI agent platform UX patterns 2026 developer workflow task timeline decision inbox AI agent workbench design best practices local desktop AI agent platform process ma",
-        "path": "_history/web-searches/2026/2026-06-06-runtime-run-timeline.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:41:14.418Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-runtime-run-timeline-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: Runtime Run Timeline",
-        "detail": "사용자 요청 요약: Runtime Run Timeline 사용자는 “개발”이라고 지시했다. 최근 플랫폼 개발 흐름과 오픈소스 feature radar 이후 상태를 기준으로, 다음 실행 가능한 제품 slice를 개발하라는 요청으로 해석했다. 이번 slice는 platform desktop app 의 Work Visibility 계층을 보강해 Desktop Runtime의 실행 기록/결정함 영역에 작업 실행 타임라인을 추가하는 것으로 정했다. 원문 전체는 저장하지 않고 요약만 보존한다.",
-        "path": "_history/user-requests/2026/2026-06-06-runtime-run-timeline.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:41:14.418Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-do-all-completion-standard-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 06 Do All Completion Standard",
-        "detail": "{ \"schema version\": \"2026 06 01\", \"task id\": \"2026 06 06 do all completion standard\", \"title\": \"Persist do all completion standard\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"started at\": null, \"ended at\": \"2026 06 06T07:33:21+0900\", \"measurement note\": \"Timin",
-        "path": "_history/work-timings/2026/2026-06-06-do-all-completion-standard.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:34:23.253Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-do-all-completion-standard-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "평가: Do All Completion Standard",
-        "detail": "평가: Do All Completion Standard 결과 사용자 지시 “다하기”를 durable instruction과 omission prevention workflow에 반영했다. 앞으로 부분 처리로 완료 선언하지 않고, 적용 가능한 전체 결과물과 검증을 완료 기준으로 삼는다. 변경 사항 AGENTS.md : do all completion standard 추가. docs/instructions/persistent instructions. .md : 한국어/영어/공통 지속 지시 추가. op",
-        "path": "_history/evaluations/2026/2026-06-06-do-all-completion-standard.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:34:23.252Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-do-all-completion-standard-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: Do All Completion Standard",
-        "detail": "요청 결과 추적: Do All Completion Standard 요청 “다하기”. 결과 AGENTS.md 에 do all completion standard를 추가했다. docs/instructions/persistent instructions. .md 에 동일한 지속 지시를 반영했다. ops/workflows/68 omission prevention.md 에서 “다하기/전부/모두/do all”을 expected items로 확장하도록 했다. agent platform/configs/memory",
-        "path": "_history/request-traces/2026/2026-06-06-do-all-completion-standard.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:34:23.252Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-do-all-completion-standard-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: Do All Completion Standard",
-        "detail": "작업 요약: Do All Completion Standard 사용자 지시 “다하기”를 지속 운영 규칙으로 반영했다. 앞으로 “다하기/전부/모두/do all” 요청은 적용 가능한 요구사항, 구현, 산출물, 검증, 빌드/패키징, 기록, commit, push까지 커버해야 한다. 구체적 blocker가 있으면 해당 항목만 격리하고 blocker와 continuation path를 남기도록 했다. AGENTS.md , persistent instruction 문서, omission prevention w",
-        "path": "_history/work-summaries/2026/2026-06-06-do-all-completion-standard.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T22:34:05.026Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23793,12 +23793,12 @@
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 7
+        "documentsCount": 8
       },
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 15
+        "documentsCount": 14
       },
       {
         "category": "daily-history",
@@ -27732,13 +27732,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3721,
+      "sourceDocuments": 3734,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T02:36:02.919Z"
+      "latestInsightAt": "2026-06-06T02:55:18.304Z"
     },
     "inferenceStages": [
       {
@@ -27806,15 +27806,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 436,
+        "signalCount": 440,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 142
+            "count": 143
           },
           {
             "category": "project-spec",
-            "count": 134
+            "count": 135
           },
           {
             "category": "request-trace",
@@ -27822,11 +27822,11 @@
           },
           {
             "category": "user-request",
-            "count": 40
+            "count": 41
           },
           {
             "category": "work-summary",
-            "count": 28
+            "count": 29
           },
           {
             "category": "plan",
@@ -27865,7 +27865,7 @@
           "요청 결과 추적: Workbench lazy boundary 확장",
           "최종 평가"
         ],
-        "latestEvidenceAt": "2026-06-06T02:26:02.133Z"
+        "latestEvidenceAt": "2026-06-06T02:55:18.304Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27879,11 +27879,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1710,
+        "signalCount": 1713,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 482
+            "count": 483
           },
           {
             "category": "evaluation",
@@ -27891,11 +27891,11 @@
           },
           {
             "category": "web-search",
-            "count": 414
+            "count": 415
           },
           {
             "category": "plan",
-            "count": 207
+            "count": 208
           },
           {
             "category": "request-trace",
@@ -27930,7 +27930,7 @@
           "2026 05 31 작업 모드 라우팅 계획 기록",
           "계획 히스토리: 코딩 조사 출처 다양성 강화"
         ],
-        "latestEvidenceAt": "2026-06-06T02:36:02.919Z"
+        "latestEvidenceAt": "2026-06-06T02:55:18.300Z"
       },
       {
         "id": "large-scope-slicing",
@@ -27944,7 +27944,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 989,
+        "signalCount": 990,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -27952,7 +27952,7 @@
           },
           {
             "category": "plan",
-            "count": 287
+            "count": 288
           },
           {
             "category": "request-trace",
@@ -28003,7 +28003,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T02:33:43.753Z"
+        "latestEvidenceAt": "2026-06-06T02:55:18.304Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28076,7 +28076,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-06T02:36:02.917Z"
+        "latestEvidenceAt": "2026-06-06T02:55:18.304Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28090,19 +28090,19 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1442,
+        "signalCount": 1453,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 621
+            "count": 626
           },
           {
             "category": "evaluation",
-            "count": 513
+            "count": 514
           },
           {
             "category": "user-request",
-            "count": 92
+            "count": 93
           },
           {
             "category": "request-trace",
@@ -28110,19 +28110,19 @@
           },
           {
             "category": "work-summary",
-            "count": 50
+            "count": 51
           },
           {
             "category": "plan",
-            "count": 40
+            "count": 41
           },
           {
             "category": "web-search",
-            "count": 34
+            "count": 35
           },
           {
             "category": "project-doc",
-            "count": 27
+            "count": 28
           },
           {
             "category": "work-timing",
@@ -28149,7 +28149,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T02:26:02.131Z"
+        "latestEvidenceAt": "2026-06-06T02:55:18.303Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28225,14 +28225,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3721,
+      "sourceDocuments": 3734,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T02:36:02.919Z"
+      "latestInsightAt": "2026-06-06T02:55:18.304Z"
     },
     "operatingModel": [
       {
@@ -28290,25 +28290,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3135,
+        "signalCount": 3143,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1710
+            "signalCount": 1713
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 989
+            "signalCount": 990
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 436
+            "signalCount": 440
           }
         ],
         "missingPatternIds": [],
@@ -28336,7 +28336,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T02:36:02.919Z",
+        "latestEvidenceAt": "2026-06-06T02:55:18.304Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28405,7 +28405,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T02:36:02.917Z",
+        "latestEvidenceAt": "2026-06-06T02:55:18.304Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28434,19 +28434,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2431,
+        "signalCount": 2443,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1442
+            "signalCount": 1453
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 989
+            "signalCount": 990
           }
         ],
         "missingPatternIds": [],
@@ -28474,7 +28474,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T02:33:43.753Z",
+        "latestEvidenceAt": "2026-06-06T02:55:18.304Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28503,13 +28503,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 555,
+        "signalCount": 559,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 436
+            "signalCount": 440
           },
           {
             "id": "release-blocker-gate",
@@ -28543,7 +28543,7 @@
           "2026 06 06 User Request: Public Release Developer Repatch",
           "Public Release Updater Automation Spec"
         ],
-        "latestEvidenceAt": "2026-06-06T02:26:02.133Z",
+        "latestEvidenceAt": "2026-06-06T02:55:18.304Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28572,19 +28572,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2699,
+        "signalCount": 2703,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 989
+            "signalCount": 990
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1710
+            "signalCount": 1713
           }
         ],
         "missingPatternIds": [],
@@ -28612,7 +28612,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T02:36:02.919Z",
+        "latestEvidenceAt": "2026-06-06T02:55:18.304Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28641,7 +28641,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1829,
+        "signalCount": 1832,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28653,7 +28653,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1710
+            "signalCount": 1713
           }
         ],
         "missingPatternIds": [],
@@ -28681,7 +28681,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T02:36:02.919Z",
+        "latestEvidenceAt": "2026-06-06T02:55:18.300Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

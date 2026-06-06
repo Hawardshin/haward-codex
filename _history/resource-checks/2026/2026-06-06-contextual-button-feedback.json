@@ -1,0 +1,9 @@
+{
+  "id": "2026-06-06-contextual-button-feedback",
+  "resource_risk_occurred": false,
+  "scope": "renderer UI state and CSS only",
+  "long_running_processes_added": false,
+  "timers_or_subscriptions_added": false,
+  "memory_or_process_management_changed": false,
+  "notes": "No new process, pipe, timer, subscription, worker, or cache lifecycle was introduced."
+}

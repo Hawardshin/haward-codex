@@ -922,6 +922,21 @@ test("Monitor buttons expose instant press feedback before heavy click work", ()
   assert.match(css, /\[data-instant-button-feedback="active"\]/);
 });
 
+test("Desktop runtime buttons expose contextual action feedback", () => {
+  assert.match(monitorShell, /type DesktopActionFeedbackStatus = "running" \| "done" \| "failed"/);
+  assert.match(monitorShell, /type DesktopActionFeedbackId =[\s\S]*?"check-adapters"[\s\S]*?"create-support-bundle"[\s\S]*?"open-source-review"/);
+  assert.match(monitorShell, /const \[desktopActionFeedback, setDesktopActionFeedback\] = useState<DesktopActionFeedback \| null>\(null\)/);
+  assert.match(monitorShell, /const runDesktopAction = async \(id: DesktopActionFeedbackId/);
+  assert.match(monitorShell, /data-desktop-action-feedback="check-adapters"/);
+  assert.match(monitorShell, /data-desktop-action-feedback="create-support-bundle"/);
+  assert.match(monitorShell, /data-desktop-action-feedback-card=\{placement\}/);
+  assert.match(monitorShell, /role="status"[\s\S]*?aria-live="polite"/);
+  assert.match(css, /\.desktop-action-feedback-card \{/);
+  assert.match(css, /\.desktop-action-feedback-card\.status-running \{/);
+  assert.match(css, /\.desktop-action-feedback-card\.status-failed \{/);
+  assert.match(css, /\.desktop-command-grid button\.desktop-action-current/);
+});
+
 test("History documents use bounded admin previews instead of loading full records into the UI snapshot", () => {
   assert.equal(packageJson.scripts["check:history-payload"], "node scripts/check-history-payload.mjs");
   assert.match(packageJson.scripts.check, /check-history-payload/);

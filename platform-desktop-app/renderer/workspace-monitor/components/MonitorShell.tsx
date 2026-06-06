@@ -164,6 +164,37 @@ type SettingsSubsectionId =
   | "operator";
 type AppThemeMode = "system" | "light" | "dark";
 type UiLanguage = "ko" | "en";
+type DesktopActionFeedbackStatus = "running" | "done" | "failed";
+type DesktopActionFeedbackId =
+  | "choose-workspace"
+  | "check-adapters"
+  | "open-search-agent"
+  | "open-terminal"
+  | "start-selected-lane"
+  | "init-task-pipe"
+  | "refresh-decisions"
+  | "refresh-task-runs"
+  | "refresh-accumulated-data"
+  | "refresh-runtime-roots"
+  | "audit-payload"
+  | "create-support-bundle"
+  | "refresh-service-readiness"
+  | "refresh-workspace-host"
+  | "defer-questions"
+  | "open-source-review"
+  | "import-workspace"
+  | "clone-workspace"
+  | "start-cockpit-adapter";
+type DesktopActionFeedback = {
+  id: DesktopActionFeedbackId;
+  label: string;
+  scope: string;
+  status: DesktopActionFeedbackStatus;
+  detail: string;
+  result: string;
+  next: string;
+  updatedAt: string;
+};
 type SourceWorkbenchView = "files" | "editor" | "results";
 type AgentDetailViewId = "collaboration" | "blueprint" | "builder" | "learning" | "flow" | "inventory" | "runtime";
 
@@ -9118,6 +9149,7 @@ function DesktopRuntimePanel({
   const [desktopWorkspace, setDesktopWorkspace] = useState<DesktopWorkspaceStateReport | null>(null);
   const [workspaceHostBusy, setWorkspaceHostBusy] = useState("");
   const [workspaceHostNotice, setWorkspaceHostNotice] = useState("");
+  const [desktopActionFeedback, setDesktopActionFeedback] = useState<DesktopActionFeedback | null>(null);
   const [workspaceImportPath, setWorkspaceImportPath] = useState("");
   const [workspaceCloneUrl, setWorkspaceCloneUrl] = useState("");
   const [workspaceCloneFolder, setWorkspaceCloneFolder] = useState("");
@@ -11533,6 +11565,232 @@ function DesktopRuntimePanel({
     desktopWorkspace?.activeWorkspacePath ||
     desktopWorkspace?.fallbackWorkspacePath ||
     (uiLanguage === "ko" ? "작업공간 선택 필요" : "Workspace needed");
+  const getDesktopActionFeedback = (
+    id: DesktopActionFeedbackId,
+    status: DesktopActionFeedbackStatus,
+    result?: string
+  ): DesktopActionFeedback => {
+    const base: Omit<DesktopActionFeedback, "id" | "status" | "result" | "updatedAt"> = (() => {
+      switch (id) {
+        case "choose-workspace":
+          return {
+            label: uiLanguage === "ko" ? "작업공간 폴더 선택" : "Choose workspace folder",
+            scope: uiLanguage === "ko" ? "macOS 폴더 권한 · 작업공간 호스트" : "macOS folder permission · workspace host",
+            detail: uiLanguage === "ko" ? "폴더 선택 대화상자를 열고 선택한 경로를 앱 작업공간으로 등록합니다." : "Opens the folder picker and registers the selected path as the app workspace.",
+            next: uiLanguage === "ko" ? "작업공간 호스트 카드에서 활성 경로와 Git 상태를 확인하세요." : "Check the workspace host card for the active path and Git status."
+          };
+        case "check-adapters":
+          return {
+            label: uiLanguage === "ko" ? "CLI 어댑터 전체 점검" : "Check all CLI adapters",
+            scope: `${availableCount}/${adapters.length} CLI · ${workspacePathLabel}`,
+            detail: uiLanguage === "ko" ? "Codex/Claude/Gemini 등 게스트 CLI의 경로, 버전, 헬스 체크를 다시 실행합니다." : "Reruns path, version, and health checks for guest CLIs such as Codex, Claude, and Gemini.",
+            next: uiLanguage === "ko" ? "서비스 창과 문제 스트립에 누락 CLI와 최신 오류가 표시됩니다." : "Missing CLIs and recent errors appear in Services and Problems."
+          };
+        case "open-search-agent":
+          return {
+            label: uiLanguage === "ko" ? "검색 에이전트 작업 채팅" : "Search agent work chat",
+            scope: researchInsightAgentId,
+            detail: uiLanguage === "ko" ? "기존 검색 에이전트 워크벤치를 열거나 선택한 CLI 세션으로 검색 에이전트를 시작합니다." : "Opens the existing search-agent workbench or starts the search agent in the selected CLI session.",
+            next: uiLanguage === "ko" ? "워크벤치가 있으면 탭이 열리고, 없으면 하단 터미널에서 세션이 시작됩니다." : "If the workbench exists it opens; otherwise the bottom terminal starts a session."
+          };
+        case "open-terminal":
+          return {
+            label: uiLanguage === "ko" ? "하단 터미널 열기" : "Open bottom terminal",
+            scope: terminalDrawerOpen ? (uiLanguage === "ko" ? "이미 열림" : "already open") : uiLanguage === "ko" ? "터미널 드로어" : "terminal drawer",
+            detail: uiLanguage === "ko" ? "현재 실행 중인 CLI 세션과 네이티브 PTY 출력을 확인할 수 있도록 터미널 패널을 엽니다." : "Opens the terminal panel so running CLI sessions and native PTY output are visible.",
+            next: uiLanguage === "ko" ? "상태바의 Terminal 값과 하단 드로어를 확인하세요." : "Check the Terminal status and the bottom drawer."
+          };
+        case "start-selected-lane":
+          return {
+            label: uiLanguage === "ko" ? "선택한 실행 경로 시작" : "Start selected lane",
+            scope: `${selectedAdapter?.label || selectedSessionAdapterId} · ${selectedMode.label}`,
+            detail: uiLanguage === "ko" ? "선택한 어댑터와 실행 모드로 CLI 세션을 만들고 하단 터미널을 엽니다." : "Creates a CLI session with the selected adapter and run mode, then opens the bottom terminal.",
+            next: uiLanguage === "ko" ? "터미널 출력과 실행 기록 패널에서 세션 진행 상황을 확인하세요." : "Follow progress in the terminal output and task-run records."
+          };
+        case "init-task-pipe":
+          return {
+            label: uiLanguage === "ko" ? "작업 파이프라인 시작" : "Initialize task pipeline",
+            scope: `${selectedTaskPipe.label} · ${selectedTaskPipe.laneCount} lanes`,
+            detail: uiLanguage === "ko" ? "현재 프리셋으로 다중 CLI 실행 경로를 만들고 병합 게이트 기준을 기록합니다." : "Creates multi-CLI lanes from the selected preset and records the merge-gate criteria.",
+            next: uiLanguage === "ko" ? "작업 파이프라인 패널에서 lane, pipe, 누락 경로를 확인하세요." : "Check lanes, pipes, and missing routes in the task-pipeline panel."
+          };
+        case "refresh-decisions":
+          return {
+            label: uiLanguage === "ko" ? "결정함 새로고침" : "Refresh decision inbox",
+            scope: uiLanguage === "ko" ? `${openInboxDecisions.length}개 열림` : `${openInboxDecisions.length} open`,
+            detail: uiLanguage === "ko" ? "사람 답변이 필요한 결정 항목과 재개 조건을 다시 읽어옵니다." : "Reloads decision items that need human answers and resume conditions.",
+            next: uiLanguage === "ko" ? "결정함 패널에서 첫 번째 열린 항목이 자동 선택됩니다." : "The first open item is selected in the decision panel."
+          };
+        case "refresh-task-runs":
+          return {
+            label: uiLanguage === "ko" ? "실행 기록 새로고침" : "Refresh task-run records",
+            scope: uiLanguage === "ko" ? `${taskRunRecords.length}개 기록` : `${taskRunRecords.length} records`,
+            detail: uiLanguage === "ko" ? "CLI 실행 로그, 출력 크기, 보류 질문, 상태 타임라인을 다시 읽습니다." : "Reloads CLI run logs, output sizes, deferred questions, and status timelines.",
+            next: uiLanguage === "ko" ? "실행 기록 패널에서 최신 record를 열어 stdout/stderr를 확인하세요." : "Open the latest record in Task Runs to inspect stdout/stderr."
+          };
+        case "refresh-accumulated-data":
+          return {
+            label: uiLanguage === "ko" ? "축적 데이터 인덱스" : "Accumulated data index",
+            scope: uiLanguage === "ko" ? `${accumulatedDataStats.records}개 기록` : `${accumulatedDataStats.records} records`,
+            detail: uiLanguage === "ko" ? "작업 실행, 결정, 감사, 지원 번들 등 사용자에게 보이는 데이터 인덱스를 다시 계산합니다." : "Recalculates the user-visible index for task runs, decisions, audits, support bundles, and related data.",
+            next: uiLanguage === "ko" ? "축적 데이터 패널의 저장소별 count와 경로를 확인하세요." : "Check per-store counts and paths in Accumulated Data."
+          };
+        case "refresh-runtime-roots":
+          return {
+            label: uiLanguage === "ko" ? "런타임 데이터 루트 점검" : "Check runtime data roots",
+            scope: uiLanguage === "ko" ? `${runtimeDataStats.ready}/${runtimeDataStats.roots || "?"} 준비` : `${runtimeDataStats.ready}/${runtimeDataStats.roots || "?"} ready`,
+            detail: uiLanguage === "ko" ? "앱 데이터, 실행 기록, 지원 출력 등 설치형 앱 데이터 경계의 루트 폴더를 확인합니다." : "Checks root folders for app data, task-run records, support output, and installable-app boundaries.",
+            next: uiLanguage === "ko" ? "Runtime Data 패널에서 생성/누락 루트와 경로를 확인하세요." : "Review created and missing roots in Runtime Data."
+          };
+        case "audit-payload":
+          return {
+            label: uiLanguage === "ko" ? "설치 페이로드 감사" : "Installer payload audit",
+            scope: payloadAudit ? `${payloadAudit.flaggedCount} findings` : uiLanguage === "ko" ? "아직 미검사" : "not scanned yet",
+            detail: uiLanguage === "ko" ? "공개 배포 페이로드에 들어가면 안 되는 파일, 민감 경로, 과도한 산출물을 스캔합니다." : "Scans public-release payloads for sensitive paths, blocked files, and oversized artifacts.",
+            next: uiLanguage === "ko" ? "감사 카드에서 severity, rule, 경로를 확인하세요." : "Check severity, rule, and paths in the audit card."
+          };
+        case "create-support-bundle":
+          return {
+            label: uiLanguage === "ko" ? "지원 진단 번들 생성" : "Create support diagnostic bundle",
+            scope: supportBundle?.bundleId || (uiLanguage === "ko" ? "새 번들" : "new bundle"),
+            detail: uiLanguage === "ko" ? "런타임 루트, 최근 이벤트, 실행 기록 요약을 민감정보 제거 형식으로 묶습니다." : "Packages runtime roots, recent events, and task-run summaries with redaction.",
+            next: uiLanguage === "ko" ? "지원 진단 번들 카드에서 manifest와 내보낸 파일 경로를 확인하세요." : "Check manifest and export paths in the support bundle card."
+          };
+        case "refresh-service-readiness":
+          return {
+            label: uiLanguage === "ko" ? "서비스 준비도 점검" : "Check service readiness",
+            scope: serviceReadiness ? `${serviceReadiness.score} score · ${serviceReadiness.publicBlockers.length} blockers` : uiLanguage === "ko" ? "미점검" : "not checked",
+            detail: uiLanguage === "ko" ? "런타임 데이터, 고객 페이로드, 개인정보, 업데이트/복구 차단 요소를 한 번에 평가합니다." : "Evaluates runtime data, customer payload, privacy, update, and recovery blockers together.",
+            next: uiLanguage === "ko" ? "Service Readiness 패널에서 공개 차단 요소와 warning을 확인하세요." : "Review public blockers and warnings in Service Readiness."
+          };
+        case "refresh-workspace-host":
+          return {
+            label: uiLanguage === "ko" ? "작업공간 호스트 새로고침" : "Refresh workspace host",
+            scope: workspacePathLabel,
+            detail: uiLanguage === "ko" ? "현재 앱 작업공간 상태, 권한 출처, Git 가능 여부, 최근 작업 상태를 다시 불러옵니다." : "Reloads workspace state, permission source, Git availability, and last operation status.",
+            next: uiLanguage === "ko" ? "작업공간 호스트 카드의 상태/출처/최근 작업을 확인하세요." : "Check status, source, and last operation in Workspace Host."
+          };
+        case "defer-questions":
+          return {
+            label: uiLanguage === "ko" ? "감지된 질문 보류" : "Defer detected questions",
+            scope: uiLanguage === "ko" ? `${pendingQuestionCount}개 대기` : `${pendingQuestionCount} pending`,
+            detail: uiLanguage === "ko" ? "실행 중 CLI 세션에서 감지한 질문을 결정함으로 이동시켜 작업 재개 조건으로 남깁니다." : "Moves detected CLI questions into the decision inbox as resume conditions.",
+            next: uiLanguage === "ko" ? "결정함에서 새로 생긴 질문과 resume action을 확인하세요." : "Check newly created questions and resume actions in Decisions."
+          };
+        case "open-source-review":
+          return {
+            label: uiLanguage === "ko" ? "소스 검토 열기" : "Open source review",
+            scope: selectedSourcePath || (uiLanguage === "ko" ? "선택 파일 없음" : "no selected file"),
+            detail: uiLanguage === "ko" ? "선택한 워크스페이스 상대 경로를 읽고 코드 편집/ diff 표면으로 전환합니다." : "Reads the selected workspace-relative path and switches to the code edit/diff surface.",
+            next: uiLanguage === "ko" ? "소스 에디터 탭에서 초안 변경과 저장 상태를 확인하세요." : "Check draft changes and save state in the source editor tab."
+          };
+        case "import-workspace":
+          return {
+            label: uiLanguage === "ko" ? "작업공간 가져오기" : "Import workspace",
+            scope: workspaceImportPath.trim() || (uiLanguage === "ko" ? "경로 미입력" : "path empty"),
+            detail: uiLanguage === "ko" ? "입력한 절대 경로를 앱의 활성 작업공간으로 등록하고 권한/캐시를 준비합니다." : "Registers the entered absolute path as the active workspace and prepares permissions/cache.",
+            next: uiLanguage === "ko" ? "작업공간 호스트 상태와 OS 캐시 수치를 확인하세요." : "Check workspace host status and OS cache metrics."
+          };
+        case "clone-workspace":
+          return {
+            label: uiLanguage === "ko" ? "작업공간 복제" : "Clone workspace",
+            scope: workspaceCloneUrl.trim() || (uiLanguage === "ko" ? "저장소 URL 미입력" : "repository URL empty"),
+            detail: uiLanguage === "ko" ? "저장소를 관리 작업공간 루트 아래로 복제하고 활성 작업공간으로 전환합니다." : "Clones the repository into the managed workspace root and switches it active.",
+            next: uiLanguage === "ko" ? "Git 버전, 활성 경로, 최근 상태를 확인하세요." : "Check Git version, active path, and latest status."
+          };
+        case "start-cockpit-adapter":
+          return {
+            label: uiLanguage === "ko" ? "에이전트 CLI 코크핏 시작" : "Start Agent CLI cockpit",
+            scope: `${selectedAdapter?.label || selectedSessionAdapterId} · ${selectedMode.label}`,
+            detail: uiLanguage === "ko" ? "코크핏에서 고른 CLI 어댑터를 현재 실행 모드와 프롬프트로 바로 시작합니다." : "Starts the cockpit-selected CLI adapter with the current mode and prompt.",
+            next: uiLanguage === "ko" ? "코크핏 row, 하단 터미널, 실행 기록에서 같은 세션을 추적하세요." : "Track the same session in the cockpit row, bottom terminal, and task-run records."
+          };
+      }
+    })();
+    const defaultResult =
+      status === "running"
+        ? uiLanguage === "ko"
+          ? `${base.label} 실행 중입니다. 대상: ${base.scope}`
+          : `${base.label} is running. Target: ${base.scope}`
+        : status === "failed"
+          ? uiLanguage === "ko"
+            ? `${base.label} 실패. 최근 실행 오류와 터미널 출력을 확인하세요.`
+            : `${base.label} failed. Check the latest error and terminal output.`
+          : uiLanguage === "ko"
+            ? `${base.label} 완료. ${base.next}`
+            : `${base.label} done. ${base.next}`;
+    return {
+      id,
+      ...base,
+      status,
+      result: result || defaultResult,
+      updatedAt: new Date().toISOString()
+    };
+  };
+  const setDesktopActionStatus = (id: DesktopActionFeedbackId, status: DesktopActionFeedbackStatus, result?: string) => {
+    setDesktopActionFeedback(getDesktopActionFeedback(id, status, result));
+  };
+  const runDesktopAction = async (id: DesktopActionFeedbackId, action: () => void | Promise<void>, doneResult?: string) => {
+    setDesktopActionStatus(id, "running");
+    try {
+      await action();
+      setDesktopActionStatus(id, "done", doneResult);
+    } catch (caught) {
+      const message = errorMessage(caught);
+      setError(message);
+      setDesktopActionStatus(id, "failed", message);
+    }
+  };
+  const desktopActionButtonClass = (id: DesktopActionFeedbackId) =>
+    desktopActionFeedback?.id === id ? `desktop-action-current status-${desktopActionFeedback.status}` : undefined;
+  const desktopActionStatusLabel = (status: DesktopActionFeedbackStatus) => {
+    if (status === "running") {
+      return uiLanguage === "ko" ? "실행 중" : "Running";
+    }
+    if (status === "failed") {
+      return uiLanguage === "ko" ? "실패" : "Failed";
+    }
+    return uiLanguage === "ko" ? "완료" : "Done";
+  };
+  const renderDesktopActionFeedbackCard = (placement: "quick-start" | "command-palette") => {
+    if (!desktopActionFeedback) {
+      return null;
+    }
+    const StatusIcon =
+      desktopActionFeedback.status === "running"
+        ? Activity
+        : desktopActionFeedback.status === "failed"
+          ? AlertTriangle
+          : CheckCircle2;
+    return (
+      <article
+        className={`desktop-action-feedback-card status-${desktopActionFeedback.status}`}
+        data-desktop-action-feedback-card={placement}
+        role="status"
+        aria-live="polite"
+      >
+        <header>
+          <span className="desktop-action-feedback-status">
+            <StatusIcon size={15} aria-hidden="true" />
+            {desktopActionStatusLabel(desktopActionFeedback.status)}
+          </span>
+          <div>
+            <strong>{desktopActionFeedback.label}</strong>
+            <small>{desktopActionFeedback.scope}</small>
+          </div>
+          <time dateTime={desktopActionFeedback.updatedAt}>{formatTimeLabel(desktopActionFeedback.updatedAt)}</time>
+        </header>
+        <div className="desktop-action-feedback-body">
+          <p>{desktopActionFeedback.result}</p>
+          <small>{desktopActionFeedback.detail}</small>
+        </div>
+        <div className="desktop-action-feedback-next">
+          <span>{uiLanguage === "ko" ? "다음 확인" : "Next check"}</span>
+          <strong>{desktopActionFeedback.next}</strong>
+        </div>
+      </article>
+    );
+  };
   const ideRunConfigurations: IdeRunConfiguration[] = [
     {
       id: "search-agent-chat",
@@ -11560,8 +11818,8 @@ function DesktopRuntimePanel({
       secondaryLabel: uiLanguage === "ko" ? "터미널 실행" : "Run in terminal",
       primaryDisabled: !onOpenSearchAgentWorkbench && (!runtimeReady || runningAdapterId !== ""),
       secondaryDisabled: !runtimeReady || runningAdapterId !== "",
-      onPrimary: onOpenSearchAgentWorkbench || startDefaultSearchAgent,
-      onSecondary: startDefaultSearchAgent
+      onPrimary: () => runDesktopAction("open-search-agent", onOpenSearchAgentWorkbench || startDefaultSearchAgent),
+      onSecondary: () => runDesktopAction("open-search-agent", startDefaultSearchAgent)
     },
     {
       id: "cli-session",
@@ -11579,7 +11837,7 @@ function DesktopRuntimePanel({
       primaryLabel: uiLanguage === "ko" ? "세션 시작" : "Start session",
       secondaryLabel: uiLanguage === "ko" ? "실행 설정" : "Run settings",
       primaryDisabled: !runtimeReady || runningAdapterId !== "",
-      onPrimary: startSession,
+      onPrimary: () => runDesktopAction("start-selected-lane", startSession),
       onSecondary: () => onOpenSettings("session")
     },
     {
@@ -11603,7 +11861,7 @@ function DesktopRuntimePanel({
       primaryLabel: uiLanguage === "ko" ? "파이프라인 시작" : "Start pipe",
       secondaryLabel: uiLanguage === "ko" ? "파이프라인 설정" : "Pipe settings",
       primaryDisabled: !runtimeReady || runningAdapterId !== "",
-      onPrimary: initTaskPipe,
+      onPrimary: () => runDesktopAction("init-task-pipe", initTaskPipe),
       onSecondary: () => onOpenSettings("pipe")
     },
     {
@@ -11628,8 +11886,8 @@ function DesktopRuntimePanel({
       secondaryLabel: uiLanguage === "ko" ? "폴더 선택" : "Choose folder",
       primaryDisabled: !runtimeReady || runningAdapterId !== "",
       secondaryDisabled: !runtimeReady || workspaceHostBusy !== "",
-      onPrimary: runAllHealthChecks,
-      onSecondary: chooseDesktopWorkspaceFolder
+      onPrimary: () => runDesktopAction("check-adapters", runAllHealthChecks),
+      onSecondary: () => runDesktopAction("choose-workspace", chooseDesktopWorkspaceFolder)
     }
   ];
   const ideServiceRows = [
@@ -11887,7 +12145,7 @@ function DesktopRuntimePanel({
         <ActionGroup className="native-workspace-actions" align="end" density="compact">
           <Button
             variant="primary"
-            onClick={chooseDesktopWorkspaceFolder}
+            onClick={() => void runDesktopAction("choose-workspace", chooseDesktopWorkspaceFolder)}
             loading={workspaceHostBusy === "choose"}
             disabled={!invoke || workspaceHostBusy !== ""}
           >
@@ -11896,7 +12154,7 @@ function DesktopRuntimePanel({
           </Button>
           <Button
             variant="secondary"
-            onClick={refreshDesktopWorkspace}
+            onClick={() => void runDesktopAction("refresh-workspace-host", refreshDesktopWorkspace)}
             loading={workspaceHostBusy === "refresh"}
             disabled={!invoke || workspaceHostBusy !== ""}
           >
@@ -11917,6 +12175,7 @@ function DesktopRuntimePanel({
 
       {!invoke && <p className="desktop-error">{copy.noRuntime}</p>}
       {workspaceHostNotice && <p className="decision-resume-notice">{workspaceHostNotice}</p>}
+      {renderDesktopActionFeedbackCard("quick-start")}
 
       <section className="filesystem-workbench-shell" aria-label={copy.eyebrow}>
         <WorkspaceExplorerPane
@@ -12576,7 +12835,13 @@ function DesktopRuntimePanel({
                 </button>
                 <button
                   type="button"
-                  onClick={() => void startAdapterFromCockpit(row.adapter.adapterId)}
+                  className={
+                    desktopActionFeedback?.id === "start-cockpit-adapter" && selectedSessionAdapterId === row.adapter.adapterId
+                      ? `desktop-action-current status-${desktopActionFeedback.status}`
+                      : undefined
+                  }
+                  data-desktop-action-feedback="start-cockpit-adapter"
+                  onClick={() => void runDesktopAction("start-cockpit-adapter", () => startAdapterFromCockpit(row.adapter.adapterId))}
                   disabled={!runtimeReady || runningAdapterId !== "" || !row.adapter.available}
                 >
                   <PlayCircle size={14} aria-hidden="true" />
@@ -12603,11 +12868,14 @@ function DesktopRuntimePanel({
             <small>{selectedAdapter?.label || selectedSessionAdapterId} / {selectedMode.label} / {workspaceExplorerRootLabel}</small>
           </div>
           <div className="ide-run-actions">
-            <button className="ide-toolbar-button primary" type="button" onClick={() => void startSession()} disabled={!runtimeReady || runningAdapterId !== ""}>
+            <button className="ide-toolbar-button primary" type="button" onClick={() => void runDesktopAction("start-selected-lane", startSession)} disabled={!runtimeReady || runningAdapterId !== ""}>
               <PlayCircle size={15} aria-hidden="true" />
               <span>{uiLanguage === "ko" ? "실행" : "Run"}</span>
             </button>
-            <button className="ide-toolbar-button" type="button" onClick={() => setTerminalDrawerOpen(true)}>
+            <button className="ide-toolbar-button" type="button" onClick={() => {
+              setTerminalDrawerOpen(true);
+              setDesktopActionStatus("open-terminal", "done", uiLanguage === "ko" ? "하단 터미널 패널을 열었습니다." : "Opened the bottom terminal panel.");
+            }}>
               <SquareTerminal size={15} aria-hidden="true" />
               <span>{uiLanguage === "ko" ? "터미널" : "Terminal"}</span>
             </button>
@@ -12620,7 +12888,7 @@ function DesktopRuntimePanel({
 
         <div className="ide-tool-window-layout">
           <nav className="ide-tool-window-rail" aria-label={uiLanguage === "ko" ? "도구 창" : "Tool windows"}>
-            <button type="button" className="active" onClick={() => void startSession()} disabled={!runtimeReady || runningAdapterId !== ""}>
+            <button type="button" className="active" onClick={() => void runDesktopAction("start-selected-lane", startSession)} disabled={!runtimeReady || runningAdapterId !== ""}>
               <PlayCircle size={15} aria-hidden="true" />
               <span>{uiLanguage === "ko" ? "실행" : "Run"}</span>
             </button>
@@ -12632,7 +12900,10 @@ function DesktopRuntimePanel({
               <AlertTriangle size={15} aria-hidden="true" />
               <span>{uiLanguage === "ko" ? "문제" : "Problems"}</span>
             </button>
-            <button type="button" onClick={() => setTerminalDrawerOpen(true)}>
+            <button type="button" onClick={() => {
+              setTerminalDrawerOpen(true);
+              setDesktopActionStatus("open-terminal", "done", uiLanguage === "ko" ? "하단 터미널 패널을 열었습니다." : "Opened the bottom terminal panel.");
+            }}>
               <SquareTerminal size={15} aria-hidden="true" />
               <span>{uiLanguage === "ko" ? "터미널" : "Terminal"}</span>
             </button>
@@ -12765,33 +13036,57 @@ function DesktopRuntimePanel({
           <span className="result-count">{selectedMode.label}</span>
         </div>
         <div className="quick-start-flow">
-          <button type="button" onClick={chooseDesktopWorkspaceFolder} disabled={!invoke || workspaceHostBusy !== ""}>
+          <button
+            type="button"
+            className={desktopActionButtonClass("choose-workspace")}
+            data-desktop-action-feedback="choose-workspace"
+            onClick={() => void runDesktopAction("choose-workspace", chooseDesktopWorkspaceFolder)}
+            disabled={!invoke || workspaceHostBusy !== ""}
+          >
             <FolderOpen size={16} aria-hidden="true" />
             <span>{workspaceHostBusy === "choose" ? copy.choosingFolder : copy.chooseFolder}</span>
 	            <small>{desktopWorkspace?.activeWorkspacePath || (uiLanguage === "ko" ? "네이티브 권한 요청" : "native permission request")}</small>
           </button>
-          <button type="button" onClick={runAllHealthChecks} disabled={!invoke || runningAdapterId !== ""}>
+          <button
+            type="button"
+            className={desktopActionButtonClass("check-adapters")}
+            data-desktop-action-feedback="check-adapters"
+            onClick={() => void runDesktopAction("check-adapters", runAllHealthChecks)}
+            disabled={!invoke || runningAdapterId !== ""}
+          >
             <CheckCircle2 size={16} aria-hidden="true" />
             <span>{uiLanguage === "ko" ? "CLI 자동 확인" : "Check CLIs"}</span>
 	            <small>{uiLanguage === "ko" ? `${availableCount} / ${adapters.length} 준비됨` : `${availableCount} / ${adapters.length} ready`}</small>
           </button>
           <button
             type="button"
-            onClick={onOpenSearchAgentWorkbench || startDefaultSearchAgent}
+            className={desktopActionButtonClass("open-search-agent")}
+            data-desktop-action-feedback="open-search-agent"
+            onClick={() => void runDesktopAction("open-search-agent", onOpenSearchAgentWorkbench || startDefaultSearchAgent)}
             disabled={!onOpenSearchAgentWorkbench && (!invoke || runningAdapterId !== "")}
           >
             <Search size={16} aria-hidden="true" />
             <span>{uiLanguage === "ko" ? "검색 에이전트 작업 채팅" : "Search agent chat"}</span>
             <small>{researchInsightAgentId}</small>
           </button>
-          <button type="button" onClick={() => setTerminalDrawerOpen(true)}>
+          <button
+            type="button"
+            className={desktopActionButtonClass("open-terminal")}
+            data-desktop-action-feedback="open-terminal"
+            onClick={() => {
+              setTerminalDrawerOpen(true);
+              setDesktopActionStatus("open-terminal", "done", uiLanguage === "ko" ? "하단 터미널 패널을 열었습니다." : "Opened the bottom terminal panel.");
+            }}
+          >
             <SquareTerminal size={16} aria-hidden="true" />
 	            <span>{uiLanguage === "ko" ? "하단 터미널 열기" : "Open terminal drawer"}</span>
 	            <small>{terminalDrawerOpen ? (uiLanguage === "ko" ? "열림" : "open") : uiLanguage === "ko" ? "하단 패널" : "bottom panel"}</small>
           </button>
           <button
             type="button"
-            onClick={startSession}
+            className={desktopActionButtonClass("start-selected-lane")}
+            data-desktop-action-feedback="start-selected-lane"
+            onClick={() => void runDesktopAction("start-selected-lane", startSession)}
             disabled={!invoke || runningAdapterId !== "" || !adapters.some((adapter) => adapter.adapterId === selectedSessionAdapterId && adapter.available)}
           >
             <PlayCircle size={16} aria-hidden="true" />
@@ -12799,6 +13094,7 @@ function DesktopRuntimePanel({
             <small>{adapters.find((adapter) => adapter.adapterId === selectedSessionAdapterId)?.label || selectedSessionAdapterId}</small>
           </button>
         </div>
+        {renderDesktopActionFeedbackCard("quick-start")}
       </section>
 
       <details
@@ -12834,14 +13130,22 @@ function DesktopRuntimePanel({
           <Search size={18} aria-hidden="true" />
         </div>
         <div className="desktop-command-grid">
-          <button type="button" onClick={runAllHealthChecks} disabled={!invoke || runningAdapterId !== ""}>
+          <button
+            type="button"
+            className={desktopActionButtonClass("check-adapters")}
+            data-desktop-action-feedback="check-adapters"
+            onClick={() => void runDesktopAction("check-adapters", runAllHealthChecks)}
+            disabled={!invoke || runningAdapterId !== ""}
+          >
             <Network size={16} aria-hidden="true" />
 	            <span>{uiLanguage === "ko" ? "CLI 어댑터 확인" : "Check CLI adapters"}</span>
 	            <small>{uiLanguage === "ko" ? `${availableCount}개 사용 가능` : `${availableCount} available`}</small>
           </button>
           <button
             type="button"
-            onClick={startSession}
+            className={desktopActionButtonClass("start-selected-lane")}
+            data-desktop-action-feedback="start-selected-lane"
+            onClick={() => void runDesktopAction("start-selected-lane", startSession)}
             disabled={!invoke || runningAdapterId !== "" || !adapters.some((adapter) => adapter.adapterId === selectedSessionAdapterId && adapter.available)}
           >
             <SquareTerminal size={16} aria-hidden="true" />
@@ -12850,69 +13154,138 @@ function DesktopRuntimePanel({
           </button>
           <button
             type="button"
-            onClick={onOpenSearchAgentWorkbench || startDefaultSearchAgent}
+            className={desktopActionButtonClass("open-search-agent")}
+            data-desktop-action-feedback="open-search-agent"
+            onClick={() => void runDesktopAction("open-search-agent", onOpenSearchAgentWorkbench || startDefaultSearchAgent)}
             disabled={!onOpenSearchAgentWorkbench && (!invoke || runningAdapterId !== "")}
           >
             <Search size={16} aria-hidden="true" />
             <span>{uiLanguage === "ko" ? "검색 에이전트 작업 채팅" : "Search agent chat"}</span>
             <small>research_insight_agent</small>
           </button>
-          <button type="button" onClick={initTaskPipe} disabled={!invoke || runningAdapterId !== ""}>
+          <button
+            type="button"
+            className={desktopActionButtonClass("init-task-pipe")}
+            data-desktop-action-feedback="init-task-pipe"
+            onClick={() => void runDesktopAction("init-task-pipe", initTaskPipe)}
+            disabled={!invoke || runningAdapterId !== ""}
+          >
             <GitBranch size={16} aria-hidden="true" />
 	            <span>{uiLanguage === "ko" ? "작업 파이프라인 시작" : "Init task pipe"}</span>
             <small>{selectedTaskPipe.label}</small>
           </button>
-          <button type="button" onClick={refreshDecisionInbox} disabled={!invoke || decisionBusy}>
+          <button
+            type="button"
+            className={desktopActionButtonClass("refresh-decisions")}
+            data-desktop-action-feedback="refresh-decisions"
+            onClick={() => void runDesktopAction("refresh-decisions", refreshDecisionInbox)}
+            disabled={!invoke || decisionBusy}
+          >
             <Inbox size={16} aria-hidden="true" />
 	            <span>{uiLanguage === "ko" ? "결정함 새로고침" : "Refresh decisions"}</span>
 	            <small>{uiLanguage === "ko" ? `${openInboxDecisions.length}개 열림` : `${openInboxDecisions.length} open`}</small>
           </button>
-          <button type="button" onClick={refreshTaskRunRecords} disabled={!invoke || runningAdapterId !== ""}>
+          <button
+            type="button"
+            className={desktopActionButtonClass("refresh-task-runs")}
+            data-desktop-action-feedback="refresh-task-runs"
+            onClick={() => void runDesktopAction("refresh-task-runs", refreshTaskRunRecords)}
+            disabled={!invoke || runningAdapterId !== ""}
+          >
             <FileSearch size={16} aria-hidden="true" />
 	            <span>{uiLanguage === "ko" ? "실행 기록 새로고침" : "Refresh task runs"}</span>
 	            <small>{uiLanguage === "ko" ? `${taskRunRecords.length}개 기록` : `${taskRunRecords.length} records`}</small>
           </button>
-          <button type="button" onClick={refreshAccumulatedDataOverview} disabled={!invoke || accumulatedDataBusy}>
+          <button
+            type="button"
+            className={desktopActionButtonClass("refresh-accumulated-data")}
+            data-desktop-action-feedback="refresh-accumulated-data"
+            onClick={() => void runDesktopAction("refresh-accumulated-data", refreshAccumulatedDataOverview)}
+            disabled={!invoke || accumulatedDataBusy}
+          >
             <Database size={16} aria-hidden="true" />
 	            <span>{uiLanguage === "ko" ? "축적 데이터" : "Accumulated data"}</span>
 	            <small>{uiLanguage === "ko" ? `${accumulatedDataStats.records}개 기록` : `${accumulatedDataStats.records} records`}</small>
           </button>
-          <button type="button" onClick={refreshRuntimeDataBoundary} disabled={!invoke || runtimeDataBusy !== ""}>
+          <button
+            type="button"
+            className={desktopActionButtonClass("refresh-runtime-roots")}
+            data-desktop-action-feedback="refresh-runtime-roots"
+            onClick={() => void runDesktopAction("refresh-runtime-roots", refreshRuntimeDataBoundary)}
+            disabled={!invoke || runtimeDataBusy !== ""}
+          >
             <Activity size={16} aria-hidden="true" />
 	            <span>{uiLanguage === "ko" ? "런타임 루트" : "Runtime roots"}</span>
 	            <small>{uiLanguage === "ko" ? `${runtimeDataStats.ready}/${runtimeDataStats.roots || "?"} 준비됨` : `${runtimeDataStats.ready}/${runtimeDataStats.roots || "?"} ready`}</small>
           </button>
-          <button type="button" onClick={runInstallerPayloadAudit} disabled={!invoke || runtimeDataBusy !== ""}>
+          <button
+            type="button"
+            className={desktopActionButtonClass("audit-payload")}
+            data-desktop-action-feedback="audit-payload"
+            onClick={() => void runDesktopAction("audit-payload", runInstallerPayloadAudit)}
+            disabled={!invoke || runtimeDataBusy !== ""}
+          >
             <ShieldCheck size={16} aria-hidden="true" />
 	            <span>{uiLanguage === "ko" ? "페이로드 감사" : "Audit payload"}</span>
 	            <small>{payloadAudit ? (uiLanguage === "ko" ? `${payloadAudit.flaggedCount}개 발견` : `${payloadAudit.flaggedCount} findings`) : uiLanguage === "ko" ? "미검사" : "not scanned"}</small>
           </button>
-          <button type="button" onClick={createSupportDiagnosticBundle} disabled={!invoke || runtimeDataBusy !== ""}>
+          <button
+            type="button"
+            className={desktopActionButtonClass("create-support-bundle")}
+            data-desktop-action-feedback="create-support-bundle"
+            onClick={() => void runDesktopAction("create-support-bundle", createSupportDiagnosticBundle)}
+            disabled={!invoke || runtimeDataBusy !== ""}
+          >
             <FileSearch size={16} aria-hidden="true" />
 	            <span>{uiLanguage === "ko" ? "지원 번들" : "Support bundle"}</span>
 	            <small>{supportBundle?.status || (uiLanguage === "ko" ? "민감정보 제거 내보내기" : "redacted export")}</small>
           </button>
-          <button type="button" onClick={refreshServiceReadiness} disabled={!invoke || serviceReadinessBusy}>
+          <button
+            type="button"
+            className={desktopActionButtonClass("refresh-service-readiness")}
+            data-desktop-action-feedback="refresh-service-readiness"
+            onClick={() => void runDesktopAction("refresh-service-readiness", refreshServiceReadiness)}
+            disabled={!invoke || serviceReadinessBusy}
+          >
             <ShieldCheck size={16} aria-hidden="true" />
 	            <span>{uiLanguage === "ko" ? "서비스 준비도" : "Service readiness"}</span>
 	            <small>{serviceReadiness ? (uiLanguage === "ko" ? `${serviceReadiness.score} / 차단 ${serviceReadiness.publicBlockers.length}개` : `${serviceReadiness.score} / ${serviceReadiness.publicBlockers.length} blockers`) : uiLanguage === "ko" ? "미점검" : "not checked"}</small>
           </button>
-          <button type="button" onClick={refreshDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== ""}>
+          <button
+            type="button"
+            className={desktopActionButtonClass("refresh-workspace-host")}
+            data-desktop-action-feedback="refresh-workspace-host"
+            onClick={() => void runDesktopAction("refresh-workspace-host", refreshDesktopWorkspace)}
+            disabled={!invoke || workspaceHostBusy !== ""}
+          >
             <FolderKanban size={16} aria-hidden="true" />
 	            <span>{uiLanguage === "ko" ? "작업공간 호스트" : "Workspace host"}</span>
 	            <small>{desktopWorkspace?.status || (uiLanguage === "ko" ? "불러오지 않음" : "not loaded")}</small>
           </button>
-          <button type="button" onClick={deferDetectedQuestions} disabled={!invoke || decisionBusy || pendingQuestionCount === 0}>
+          <button
+            type="button"
+            className={desktopActionButtonClass("defer-questions")}
+            data-desktop-action-feedback="defer-questions"
+            onClick={() => void runDesktopAction("defer-questions", deferDetectedQuestions)}
+            disabled={!invoke || decisionBusy || pendingQuestionCount === 0}
+          >
             <ShieldCheck size={16} aria-hidden="true" />
 	            <span>{uiLanguage === "ko" ? "감지된 질문 보류" : "Defer detected questions"}</span>
 	            <small>{uiLanguage === "ko" ? `${pendingQuestionCount}개 대기` : `${pendingQuestionCount} pending`}</small>
           </button>
-          <button type="button" onClick={loadSourceFile} disabled={!invoke || editorBusy || !selectedSourcePath}>
+          <button
+            type="button"
+            className={desktopActionButtonClass("open-source-review")}
+            data-desktop-action-feedback="open-source-review"
+            onClick={() => void runDesktopAction("open-source-review", loadSourceFile)}
+            disabled={!invoke || editorBusy || !selectedSourcePath}
+          >
             <GitBranch size={16} aria-hidden="true" />
 	            <span>{uiLanguage === "ko" ? "소스 검토 열기" : "Open source review"}</span>
 	            <small>{sourceDiff?.dirty ? (uiLanguage === "ko" ? "초안 변경됨" : "draft changed") : uiLanguage === "ko" ? "준비됨" : "ready"}</small>
           </button>
         </div>
+        {renderDesktopActionFeedbackCard("command-palette")}
       </section>
 
       <section className="panel wide desktop-workspace-panel">
@@ -12922,11 +13295,23 @@ function DesktopRuntimePanel({
             <h2>앱 워크스페이스</h2>
           </div>
           <div className="desktop-actions">
-            <button type="button" onClick={chooseDesktopWorkspaceFolder} disabled={!invoke || workspaceHostBusy !== ""}>
+            <button
+              type="button"
+              className={desktopActionButtonClass("choose-workspace")}
+              data-desktop-action-feedback="choose-workspace"
+              onClick={() => void runDesktopAction("choose-workspace", chooseDesktopWorkspaceFolder)}
+              disabled={!invoke || workspaceHostBusy !== ""}
+            >
               <FolderOpen size={16} aria-hidden="true" />
               <span>{workspaceHostBusy === "choose" ? "권한 요청 중" : "작업공간 접근 권한 요청"}</span>
             </button>
-            <button type="button" onClick={refreshDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== ""}>
+            <button
+              type="button"
+              className={desktopActionButtonClass("refresh-workspace-host")}
+              data-desktop-action-feedback="refresh-workspace-host"
+              onClick={() => void runDesktopAction("refresh-workspace-host", refreshDesktopWorkspace)}
+              disabled={!invoke || workspaceHostBusy !== ""}
+            >
               <Activity size={16} aria-hidden="true" />
 	              <span>{workspaceHostBusy === "refresh" ? (uiLanguage === "ko" ? "새로고침 중" : "Refreshing") : uiLanguage === "ko" ? "새로고침" : "Refresh"}</span>
             </button>
@@ -12967,7 +13352,13 @@ function DesktopRuntimePanel({
                 placeholder="/absolute/workspace/path"
               />
             </label>
-            <button type="button" onClick={importDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== "" || !workspaceImportPath.trim()}>
+            <button
+              type="button"
+              className={desktopActionButtonClass("import-workspace")}
+              data-desktop-action-feedback="import-workspace"
+              onClick={() => void runDesktopAction("import-workspace", importDesktopWorkspace)}
+              disabled={!invoke || workspaceHostBusy !== "" || !workspaceImportPath.trim()}
+            >
               <FolderOpen size={16} aria-hidden="true" />
 	              <span>{workspaceHostBusy === "import" ? (uiLanguage === "ko" ? "가져오는 중" : "Importing") : uiLanguage === "ko" ? "작업공간 가져오기" : "Import Workspace"}</span>
             </button>
@@ -12987,7 +13378,13 @@ function DesktopRuntimePanel({
                 placeholder="managed-workspace"
               />
             </label>
-            <button type="button" onClick={cloneDesktopWorkspace} disabled={!invoke || workspaceHostBusy !== "" || !workspaceCloneUrl.trim()}>
+            <button
+              type="button"
+              className={desktopActionButtonClass("clone-workspace")}
+              data-desktop-action-feedback="clone-workspace"
+              onClick={() => void runDesktopAction("clone-workspace", cloneDesktopWorkspace)}
+              disabled={!invoke || workspaceHostBusy !== "" || !workspaceCloneUrl.trim()}
+            >
               <GitBranch size={16} aria-hidden="true" />
 	              <span>{workspaceHostBusy === "clone" ? (uiLanguage === "ko" ? "복제 중" : "Cloning") : uiLanguage === "ko" ? "작업공간 복제" : "Clone Workspace"}</span>
             </button>
@@ -13077,7 +13474,13 @@ function DesktopRuntimePanel({
                 rows={4}
               />
             </div>
-            <button type="button" onClick={initTaskPipe} disabled={!invoke || runningAdapterId !== "" || !taskPipePrompt.trim()}>
+            <button
+              type="button"
+              className={desktopActionButtonClass("init-task-pipe")}
+              data-desktop-action-feedback="init-task-pipe"
+              onClick={() => void runDesktopAction("init-task-pipe", initTaskPipe)}
+              disabled={!invoke || runningAdapterId !== "" || !taskPipePrompt.trim()}
+            >
               <Network size={16} aria-hidden="true" />
 	              <span>{runningAdapterId === "task-pipe" ? (uiLanguage === "ko" ? "초기화 중" : "Initializing") : uiLanguage === "ko" ? "파이프라인 시작" : "Init Pipe"}</span>
             </button>
@@ -13150,7 +13553,13 @@ function DesktopRuntimePanel({
             <h2>축적 데이터 인덱스</h2>
           </div>
           <div className="desktop-actions">
-            <button type="button" onClick={refreshAccumulatedDataOverview} disabled={!invoke || accumulatedDataBusy}>
+            <button
+              type="button"
+              className={desktopActionButtonClass("refresh-accumulated-data")}
+              data-desktop-action-feedback="refresh-accumulated-data"
+              onClick={() => void runDesktopAction("refresh-accumulated-data", refreshAccumulatedDataOverview)}
+              disabled={!invoke || accumulatedDataBusy}
+            >
               <Database size={15} aria-hidden="true" />
 	            <span>{accumulatedDataBusy ? (uiLanguage === "ko" ? "새로고침 중" : "Refreshing") : uiLanguage === "ko" ? "인덱스 새로고침" : "Refresh Index"}</span>
             </button>
@@ -13257,15 +13666,33 @@ function DesktopRuntimePanel({
             <h2>설치형 데이터 경계</h2>
           </div>
           <div className="desktop-actions">
-            <button type="button" onClick={refreshRuntimeDataBoundary} disabled={!invoke || runtimeDataBusy !== ""}>
+            <button
+              type="button"
+              className={desktopActionButtonClass("refresh-runtime-roots")}
+              data-desktop-action-feedback="refresh-runtime-roots"
+              onClick={() => void runDesktopAction("refresh-runtime-roots", refreshRuntimeDataBoundary)}
+              disabled={!invoke || runtimeDataBusy !== ""}
+            >
               <Activity size={15} aria-hidden="true" />
 	              <span>{runtimeDataBusy === "roots" ? (uiLanguage === "ko" ? "점검 중" : "Checking") : uiLanguage === "ko" ? "루트 확인" : "Roots"}</span>
             </button>
-            <button type="button" onClick={runInstallerPayloadAudit} disabled={!invoke || runtimeDataBusy !== ""}>
+            <button
+              type="button"
+              className={desktopActionButtonClass("audit-payload")}
+              data-desktop-action-feedback="audit-payload"
+              onClick={() => void runDesktopAction("audit-payload", runInstallerPayloadAudit)}
+              disabled={!invoke || runtimeDataBusy !== ""}
+            >
               <ShieldCheck size={15} aria-hidden="true" />
 	              <span>{runtimeDataBusy === "payload" ? (uiLanguage === "ko" ? "감사 중" : "Auditing") : uiLanguage === "ko" ? "페이로드 감사" : "Audit Payload"}</span>
             </button>
-            <button type="button" onClick={createSupportDiagnosticBundle} disabled={!invoke || runtimeDataBusy !== ""}>
+            <button
+              type="button"
+              className={desktopActionButtonClass("create-support-bundle")}
+              data-desktop-action-feedback="create-support-bundle"
+              onClick={() => void runDesktopAction("create-support-bundle", createSupportDiagnosticBundle)}
+              disabled={!invoke || runtimeDataBusy !== ""}
+            >
               <FileSearch size={15} aria-hidden="true" />
 	              <span>{runtimeDataBusy === "support" ? (uiLanguage === "ko" ? "생성 중" : "Creating") : uiLanguage === "ko" ? "지원 번들" : "Support Bundle"}</span>
             </button>
@@ -13372,7 +13799,13 @@ function DesktopRuntimePanel({
             <h2>서비스 출시 준비도</h2>
           </div>
           <div className="desktop-actions">
-            <button type="button" onClick={refreshServiceReadiness} disabled={!invoke || serviceReadinessBusy}>
+            <button
+              type="button"
+              className={desktopActionButtonClass("refresh-service-readiness")}
+              data-desktop-action-feedback="refresh-service-readiness"
+              onClick={() => void runDesktopAction("refresh-service-readiness", refreshServiceReadiness)}
+              disabled={!invoke || serviceReadinessBusy}
+            >
               <ShieldCheck size={15} aria-hidden="true" />
 	              <span>{serviceReadinessBusy ? (uiLanguage === "ko" ? "점검 중" : "Checking") : uiLanguage === "ko" ? "준비도 점검" : "Run Readiness"}</span>
             </button>
@@ -13488,7 +13921,13 @@ function DesktopRuntimePanel({
             <h2>저장된 실행 기록과 로그</h2>
           </div>
           <div className="desktop-actions">
-	            <button type="button" onClick={refreshTaskRunRecords} disabled={!invoke || runningAdapterId !== ""}>
+	            <button
+                type="button"
+                className={desktopActionButtonClass("refresh-task-runs")}
+                data-desktop-action-feedback="refresh-task-runs"
+                onClick={() => void runDesktopAction("refresh-task-runs", refreshTaskRunRecords)}
+                disabled={!invoke || runningAdapterId !== ""}
+              >
 	              <FileSearch size={15} aria-hidden="true" />
 	              <span>{uiLanguage === "ko" ? "기록 새로고침" : "Refresh Records"}</span>
 	            </button>
@@ -13626,7 +14065,13 @@ function DesktopRuntimePanel({
               <Activity size={16} aria-hidden="true" />
               <span>Refresh</span>
             </button>
-            <button type="button" onClick={runAllHealthChecks} disabled={!invoke || runningAdapterId !== ""}>
+            <button
+              type="button"
+              className={desktopActionButtonClass("check-adapters")}
+              data-desktop-action-feedback="check-adapters"
+              onClick={() => void runDesktopAction("check-adapters", runAllHealthChecks)}
+              disabled={!invoke || runningAdapterId !== ""}
+            >
               <CheckCircle2 size={16} aria-hidden="true" />
               <span>{runningAdapterId === "all" ? "Running" : "Run All Checks"}</span>
             </button>
