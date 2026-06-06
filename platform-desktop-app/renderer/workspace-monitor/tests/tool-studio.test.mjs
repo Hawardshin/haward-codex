@@ -108,6 +108,13 @@ const tauriCargo = fs.readFileSync(path.resolve(projectRoot, "..", "..", "src-ta
 const css = fs.readFileSync(path.join(projectRoot, "app", "globals.css"), "utf8");
 const packageJson = JSON.parse(fs.readFileSync(path.join(projectRoot, "package.json"), "utf8"));
 
+function readCssRule(selector) {
+  const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = css.match(new RegExp(`${escaped} \\{([\\s\\S]*?)\\n\\}`));
+  assert.ok(match, `Missing CSS rule: ${selector}`);
+  return match[1];
+}
+
 test("Tool Studio is a first-class monitor section", () => {
   assert.match(monitorShell, /\|\s*"tools"/);
   assert.match(monitorShell, /id:\s*"tools"[\s\S]*?label:\s*"툴 스튜디오"/);
@@ -323,7 +330,33 @@ test("Desktop Runtime exposes an open-source-informed Agent CLI cockpit", () => 
   assert.match(css, /\.agent-cli-pattern-strip \{/);
   assert.match(css, /\.agent-cli-cockpit-grid \{/);
   assert.match(css, /\.agent-cli-cockpit-card\.selected/);
+  assert.match(css, /\.agent-cli-command-stack \{[\s\S]*?grid-template-columns: repeat\(auto-fit, minmax\(112px, 1fr\)\);/);
   assert.match(css, /\.agent-cli-cockpit-actions button:disabled/);
+});
+
+test("CLI setup keeps settings scroll ownership isolated", () => {
+  const cliSetupGuideRule = readCssRule(".cli-adapter-setup-guide");
+  const cliCommandCopyRowRule = readCssRule(".cli-command-copy-row");
+  const agentCliCommandStackRule = readCssRule(".agent-cli-command-stack");
+
+  assert.match(monitorShell, /className="settings-dialog-backdrop"/);
+  assert.match(monitorShell, /className="settings-tab-panel" tabIndex=\{0\}/);
+  assert.match(monitorShell, /className="settings-pane wide cli-adapter-setup-guide"/);
+  assert.match(monitorShell, /className="cli-setup-stepper"/);
+  assert.match(monitorShell, /className="cli-command-copy-row"/);
+  assert.match(monitorShell, /className="agent-cli-command-stack"/);
+  assert.match(css, /\.settings-dialog-backdrop \{[\s\S]*?overflow: hidden;[\s\S]*?overscroll-behavior: none;/);
+  assert.match(css, /\.settings-dialog \{[\s\S]*?height: min\(820px, calc\(100dvh - \(var\(--space-4\) \* 2\)\)\);[\s\S]*?overflow: hidden;/);
+  assert.match(css, /\.settings-dialog-body \{[\s\S]*?overflow: hidden;/);
+  assert.match(css, /\.settings-tab-panel \{[\s\S]*?overflow-x: hidden;[\s\S]*?overflow-y: auto;[\s\S]*?overscroll-behavior: contain;/);
+  assert.match(css, /\.settings-subsection-rail \{[\s\S]*?overflow-x: auto;[\s\S]*?overflow-y: hidden;/);
+  assert.match(css, /\.cli-adapter-setup-guide \{[\s\S]*?overflow: visible;/);
+  assert.match(css, /\.cli-setup-stepper \{[\s\S]*?grid-template-columns: repeat\(auto-fit, minmax\(220px, 1fr\)\);[\s\S]*?overflow: visible;/);
+  assert.match(css, /\.cli-command-copy-row \{[\s\S]*?display: grid;[\s\S]*?grid-template-columns: repeat\(auto-fit, minmax\(170px, 1fr\)\);[\s\S]*?overflow: visible;/);
+  assert.match(css, /\.agent-cli-command-stack \{[\s\S]*?grid-template-columns: repeat\(auto-fit, minmax\(112px, 1fr\)\);[\s\S]*?overflow: visible;/);
+  assert.doesNotMatch(cliSetupGuideRule, /overflow-y: auto;/);
+  assert.doesNotMatch(cliCommandCopyRowRule, /overflow-x: auto;/);
+  assert.doesNotMatch(agentCliCommandStackRule, /overflow-x: auto;/);
 });
 
 test("Search agent provider and model settings use explicit choices", () => {

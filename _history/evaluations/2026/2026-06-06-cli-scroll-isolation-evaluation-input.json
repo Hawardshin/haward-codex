@@ -1,0 +1,91 @@
+{
+  "initial_instruction": "The user said the CLI feature scroll overlaps with other scroll areas and is very inconvenient.",
+  "result_summary": "Changed the settings dialog so the backdrop and dialog body do not scroll, the settings tab panel owns vertical scrolling, CLI setup controls wrap without nested overflow, and the scroll contract/test/build/package gates all pass.",
+  "work_mode": "standard",
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/check-scroll-containers.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+    "platform-desktop-app/docs/requirements/2026-06-06-cli-scroll-isolation.ko.md",
+    "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/",
+    "_history/web-searches/2026/2026-06-06-cli-scroll-isolation.ko.md",
+    "_history/user-requests/2026/2026-06-06-cli-scroll-isolation.ko.md",
+    "_history/plans/2026/2026-06-06-cli-scroll-isolation.ko.md"
+  ],
+  "verification": [
+    "corepack pnpm --filter workspace-monitor run collect: passed",
+    "corepack pnpm --filter workspace-monitor run check: passed",
+    "corepack pnpm --filter workspace-monitor test: 78 passed",
+    "corepack pnpm --filter workspace-monitor run build: passed",
+    "Playwright smoke on http://127.0.0.1:3224: passed",
+    "corepack pnpm run desktop:package:internal: passed",
+    "codesign verify: passed",
+    "hdiutil verify: VALID"
+  ],
+  "references_checked": [
+    "MDN overscroll-behavior",
+    "Apple Human Interface Guidelines Scrolling",
+    "Microsoft Learn Scroll controls",
+    "platform-desktop-app/specs/2026-06-06-cli-setup-guidance/",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/check-scroll-containers.mjs"
+  ],
+  "grounding_checks": [
+    "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-omission-input.json",
+    "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-resource-input.json"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-06-cli-scroll-isolation.ko.md",
+    "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/spec.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-06-cli-scroll-isolation.ko.md",
+    "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/plans/2026/2026-06-06-cli-scroll-isolation.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-06-cli-scroll-isolation.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-06-cli-scroll-isolation.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-06-cli-scroll-isolation.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-06-cli-scroll-isolation.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "skill_targets": [],
+  "skill_validation_targets": [],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-06-cli-scroll-isolation.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-06-cli-scroll-isolation.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-06-cli-scroll-isolation.json"
+  ],
+  "context_archiving_occurred": false,
+  "context_archive_targets": [],
+  "installation_occurred": false,
+  "installation_record_targets": [],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-06-cli-scroll-isolation.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "deferred_improvement_targets": [],
+  "known_gaps": [],
+  "improvement_ideas": []
+}

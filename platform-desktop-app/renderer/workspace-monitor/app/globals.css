@@ -1772,30 +1772,30 @@ main {
   z-index: 60;
   display: grid;
   animation: workspace-fade-in var(--motion-duration-fast) var(--motion-ease-standard) both;
-  align-items: start;
+  align-items: center;
   justify-items: center;
-  overflow: auto;
-  overscroll-behavior: contain;
+  overflow: hidden;
+  overscroll-behavior: none;
   background: var(--overlay);
-  padding: var(--space-5);
+  padding: var(--space-4);
 }
 
 .settings-dialog {
   display: grid;
   animation: workspace-menu-enter var(--motion-duration-standard) var(--motion-ease-out) both;
   grid-template-rows: auto minmax(0, 1fr);
-  width: min(980px, 100%);
-  height: min(760px, calc(100vh - 36px));
-  height: min(760px, calc(100dvh - 36px));
-  max-height: calc(100vh - 36px);
-  max-height: calc(100dvh - 36px);
+  width: min(1040px, calc(100vw - (var(--space-4) * 2)));
+  height: min(820px, calc(100vh - (var(--space-4) * 2)));
+  height: min(820px, calc(100dvh - (var(--space-4) * 2)));
+  max-height: calc(100vh - (var(--space-4) * 2));
+  max-height: calc(100dvh - (var(--space-4) * 2));
   overflow: hidden;
   border: 1px solid var(--hierarchy-border-strong);
   background: var(--surface-depth-1);
   border-radius: 8px;
   box-shadow: var(--surface-shadow-high);
   padding: var(--space-4);
-  transform-origin: top center;
+  transform-origin: center center;
   will-change: transform, opacity;
 }
 
@@ -1874,9 +1874,11 @@ main {
   gap: var(--space-3);
   min-width: 0;
   min-height: 0;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   overscroll-behavior: contain;
-  padding-right: 2px;
+  padding: 0 var(--space-1) var(--space-1) 0;
+  isolation: isolate;
   scrollbar-gutter: stable;
 }
 
@@ -1888,9 +1890,11 @@ main {
   gap: var(--space-2);
   min-width: 0;
   overflow-x: auto;
+  overflow-y: hidden;
   border-bottom: 1px solid var(--hierarchy-border);
   background: var(--surface-depth-1);
   padding: 0 0 var(--space-2);
+  box-shadow: 0 10px 16px color-mix(in srgb, var(--bg) 42%, transparent);
   scrollbar-gutter: stable;
 }
 
@@ -2482,12 +2486,14 @@ main {
 
 .cli-adapter-setup-guide {
   gap: 12px;
+  overflow: visible;
 }
 
 .cli-adapter-picker-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 8px;
+  min-width: 0;
 }
 
 .cli-adapter-picker-grid button {
@@ -2534,8 +2540,10 @@ main {
 
 .cli-setup-stepper {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 8px;
+  min-width: 0;
+  overflow: visible;
 }
 
 .cli-setup-stepper article {
@@ -2587,9 +2595,8 @@ main {
 .cli-setup-stepper article code {
   min-width: 0;
   color: var(--muted);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 .cli-setup-stepper article code {
@@ -2600,16 +2607,20 @@ main {
   padding: 6px;
   color: var(--text);
   font-size: var(--font-size-caption);
+  line-height: 1.35;
 }
 
 .cli-command-copy-row {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 8px;
+  min-width: 0;
+  overflow: visible;
 }
 
 .cli-command-copy-row button {
-  display: inline-flex;
+  display: inline-grid;
+  grid-template-columns: auto minmax(0, 1fr);
   min-height: var(--control-compact-target-size);
   align-items: center;
   justify-content: center;
@@ -2622,6 +2633,12 @@ main {
   font-size: var(--font-size-caption);
   font-weight: 850;
   box-shadow: var(--control-shadow);
+}
+
+.cli-command-copy-row button span {
+  min-width: 0;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 .cli-command-copy-row button:hover:not(:disabled) {
@@ -7631,8 +7648,9 @@ h3 {
 
 .agent-cli-cockpit-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 10px;
+  min-width: 0;
 }
 
 .agent-cli-cockpit-card {
@@ -7645,6 +7663,7 @@ h3 {
   border-radius: 8px;
   padding: 12px;
   box-shadow: var(--control-shadow);
+  overflow: hidden;
 }
 
 .agent-cli-cockpit-card.selected {
@@ -7724,6 +7743,8 @@ h3 {
 .agent-cli-setup-ladder {
   display: grid;
   gap: 6px;
+  min-width: 0;
+  overflow: visible;
 }
 
 .agent-cli-setup-ladder article {
@@ -7778,15 +7799,16 @@ h3 {
 .agent-cli-setup-ladder article small {
   min-width: 0;
   color: var(--muted);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 .agent-cli-command-stack {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
   gap: 5px;
+  min-width: 0;
+  overflow: visible;
 }
 
 .agent-cli-command-stack button {
@@ -7813,9 +7835,8 @@ h3 {
 
 .agent-cli-command-stack button span {
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
 }
 
 .agent-cli-cockpit-signals {

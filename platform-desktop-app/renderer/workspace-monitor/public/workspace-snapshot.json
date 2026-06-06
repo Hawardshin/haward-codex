@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T03:12:52.397Z",
+  "generatedAt": "2026-06-06T03:28:13.267Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -13,11 +13,11 @@
     "completedTasks": 71,
     "documents": 650,
     "requirements": 509,
-    "evaluations": 14,
-    "webSearches": 14,
-    "timingRecords": 15,
+    "evaluations": 18,
+    "webSearches": 13,
+    "timingRecords": 13,
     "historyDays": 1,
-    "adminHistoryDocuments": 2613,
+    "adminHistoryDocuments": 2624,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7733,6 +7733,294 @@
   ],
   "documents": [
     {
+      "id": "platform-desktop-app-specs-2026-06-06-cli-scroll-isolation-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업: CLI 스크롤 겹침 제거",
+      "excerpt": "작업: CLI 스크롤 겹침 제거 x 웹 검색 기록 작성 x 요구사항 작성 x 스펙/계획/추적성 작성 x CSS scroll ownership 수정 x CLI command grid 안정화 x 정적 테스트 추가 x 검증 및 빌드 x close out 기록 x commit, push",
+      "html": "<h1>작업: CLI 스크롤 겹침 제거</h1>\n<ul>\n<li>[x] 웹 검색 기록 작성</li>\n<li>[x] 요구사항 작성</li>\n<li>[x] 스펙/계획/추적성 작성</li>\n<li>[x] CSS scroll ownership 수정</li>\n<li>[x] CLI command grid 안정화</li>\n<li>[x] 정적 테스트 추가</li>\n<li>[x] 검증 및 빌드</li>\n<li>[x] close-out 기록</li>\n<li>[x] commit, push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 296,
+      "updatedAt": "2026-06-06T03:28:06.114Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-evaluation-result-json",
+      "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-evaluation-result.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Cli Scroll Isolation Evaluation Result",
+      "excerpt": "{ \"status\": \"ready to close\", \"requires rework\": false, \"work mode\": \"standard\", \"required target policy\": { \"required targets\": \"mode selection record targets\", \"omission check targets\", \"plan evidence targets\", \"references checked\", \"request trace targets\", \"requirements target",
+      "html": "<p>{ &quot;status&quot;: &quot;ready to close&quot;, &quot;requires rework&quot;: false, &quot;work mode&quot;: &quot;standard&quot;, &quot;required target policy&quot;: { &quot;required targets&quot;: &quot;mode selection record targets&quot;, &quot;omission check targets&quot;, &quot;plan evidence targets&quot;, &quot;references checked&quot;, &quot;request trace targets&quot;, &quot;requirements targets&quot;, &quot;source provenance targets&quot;, &quot;spec targets&quot;, &quot;timing summary targets&quot;, &quot;user</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1787,
+      "updatedAt": "2026-06-06T03:27:40.048Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-2026-2026-06-06-md",
+      "path": "_history/2026/2026-06-06.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 06",
+      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
+      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 15929,
+      "updatedAt": "2026-06-06T03:27:15.270Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "작업 평가: CLI 스크롤 겹침 제거",
+      "excerpt": "작업 평가: CLI 스크롤 겹침 제거 날짜: 2026 06 06 work mode: standard resource risk occurred: true installation occurred: false cli pipeline occurred: false 결과 판정 passed 사용자 지시에 대한 평가 “CLI 기능 다른 스크롤이랑 겹치니까 너무 불편해”: settings backdrop/body의 스크롤을 제거하고 .settings tab panel 만 본문 스크롤을 소유하게 했다. CLI se",
+      "html": "<p>작업 평가: CLI 스크롤 겹침 제거 날짜: 2026 06 06 work mode: standard resource risk occurred: true installation occurred: false cli pipeline occurred: false 결과 판정 passed 사용자 지시에 대한 평가 “CLI 기능 다른 스크롤이랑 겹치니까 너무 불편해”: settings backdrop/body의 스크롤을 제거하고 .settings tab panel 만 본문 스크롤을 소유하게 했다. CLI setup guide와 command buttons는 nested scroll 없이 wrap grid로 배치했다. 변경 후 build와 intern</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1500,
+      "updatedAt": "2026-06-06T03:27:15.269Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-cli-scroll-isolation-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-cli-scroll-isolation.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: CLI 스크롤 겹침 제거",
+      "excerpt": "요청 결과 추적: CLI 스크롤 겹침 제거 날짜: 2026 06 06 요청: CLI 기능의 스크롤이 다른 스크롤과 겹쳐 불편하다는 지적 소유 프로젝트: platform desktop app 입력 해석 설정 모달 안에서 CLI 안내와 버튼 영역이 별도 스크롤처럼 보이거나 다른 스크롤바와 겹치지 않아야 한다. 결과 설정 backdrop은 overflow: hidden 으로 바꾸고, 설정 본문은 .settings tab panel 이 세로 스크롤을 소유하게 했다. subsection rail은 가로 스",
+      "html": "<p>요청 결과 추적: CLI 스크롤 겹침 제거 날짜: 2026 06 06 요청: CLI 기능의 스크롤이 다른 스크롤과 겹쳐 불편하다는 지적 소유 프로젝트: platform desktop app 입력 해석 설정 모달 안에서 CLI 안내와 버튼 영역이 별도 스크롤처럼 보이거나 다른 스크롤바와 겹치지 않아야 한다. 결과 설정 backdrop은 overflow: hidden 으로 바꾸고, 설정 본문은 .settings tab panel 이 세로 스크롤을 소유하게 했다. subsection rail은 가로 스크롤만 가능하게 overflow y: hidden 을 명시했다. CLI setup guide, stepper, command copy row, </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1478,
+      "updatedAt": "2026-06-06T03:27:15.269Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-cli-scroll-isolation-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-cli-scroll-isolation.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: CLI 스크롤 겹침 제거",
+      "excerpt": "작업 요약: CLI 스크롤 겹침 제거 날짜: 2026 06 06 소유 프로젝트: platform desktop app 커밋 전 상태: 구현 및 검증 완료 변경 설정 모달 바깥 backdrop의 스크롤을 제거하고, 설정 본문 panel만 세로 스크롤을 갖도록 정리했다. subsection rail은 가로 방향만 스크롤되게 했다. CLI 설정 카드와 명령 복사 버튼은 별도 scroll container 대신 접히는 grid로 바꿨다. 긴 CLI 명령은 카드 안에서 줄바꿈되도록 처리했다. scroll ",
+      "html": "<p>작업 요약: CLI 스크롤 겹침 제거 날짜: 2026 06 06 소유 프로젝트: platform desktop app 커밋 전 상태: 구현 및 검증 완료 변경 설정 모달 바깥 backdrop의 스크롤을 제거하고, 설정 본문 panel만 세로 스크롤을 갖도록 정리했다. subsection rail은 가로 방향만 스크롤되게 했다. CLI 설정 카드와 명령 복사 버튼은 별도 scroll container 대신 접히는 grid로 바꿨다. 긴 CLI 명령은 카드 안에서 줄바꿈되도록 처리했다. scroll contract checker와 정적 테스트에 회귀 방지 계약을 추가했다. 검증 corepack pnpm filter workspace moni</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1449,
+      "updatedAt": "2026-06-06T03:27:15.269Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-cli-scroll-isolation-json",
+      "path": "_history/work-timings/2026/2026-06-06-cli-scroll-isolation.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Cli Scroll Isolation",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"cli scroll isolation\", \"timezone\": \"Asia/Seoul\", \"started at\": \"2026 06 06T12:17:14+0900\", \"ended at\": \"2026 06 06T12:25:51+0900\", \"phases\": { \"phase\": \"web first and context\", \"duration minutes\": 2, \"notes\": \"Checked nested scroll guidance and",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;cli scroll isolation&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;started at&quot;: &quot;2026 06 06T12:17:14+0900&quot;, &quot;ended at&quot;: &quot;2026 06 06T12:25:51+0900&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first and context&quot;, &quot;duration minutes&quot;: 2, &quot;notes&quot;: &quot;Checked nested scroll guidance and local settings/CLI CSS.&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;duration minutes&quot;: 3,</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 887,
+      "updatedAt": "2026-06-06T03:27:15.269Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Cli Scroll Isolation Evaluation Input",
+      "excerpt": "{ \"initial instruction\": \"The user said the CLI feature scroll overlaps with other scroll areas and is very inconvenient.\", \"result summary\": \"Changed the settings dialog so the backdrop and dialog body do not scroll, the settings tab panel owns vertical scrolling, CLI setup cont",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;The user said the CLI feature scroll overlaps with other scroll areas and is very inconvenient.&quot;, &quot;result summary&quot;: &quot;Changed the settings dialog so the backdrop and dialog body do not scroll, the settings tab panel owns vertical scrolling, CLI setup controls wrap without nested overflow, and the scroll contract/test/build/package ga</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4183,
+      "updatedAt": "2026-06-06T03:27:15.268Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-resource-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-resource-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Cli Scroll Isolation Resource Input",
+      "excerpt": "{ \"task\": \"Resource check for CLI scroll isolation\", \"work mode\": \"standard\", \"runtime context\": \"nextjs\", \"playwright\", \"browser\", \"tauri build\", \"cargo\", \"node\" , \"resource risks\": { \"risk id\": \"temporary dev server\", \"category\": \"process\", \"description\": \"The local Next dev se",
+      "html": "<p>{ &quot;task&quot;: &quot;Resource check for CLI scroll isolation&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;runtime context&quot;: &quot;nextjs&quot;, &quot;playwright&quot;, &quot;browser&quot;, &quot;tauri build&quot;, &quot;cargo&quot;, &quot;node&quot; , &quot;resource risks&quot;: { &quot;risk id&quot;: &quot;temporary dev server&quot;, &quot;category&quot;: &quot;process&quot;, &quot;description&quot;: &quot;The local Next dev server used for Playwright smoke could remain running after verification.&quot;, &quot;requi</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4391,
+      "updatedAt": "2026-06-06T03:27:15.268Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-omission-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-omission-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Cli Scroll Isolation Omission Input",
+      "excerpt": "{ \"task\": \"CLI scroll isolation in desktop settings\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"web first intake\", \"description\": \"Run web search before planning and editing.\", \"source\": \"AGENTS.md\", \"required\": true, \"status\": \"covered\", \"evidence\": \" history/web ",
+      "html": "<p>{ &quot;task&quot;: &quot;CLI scroll isolation in desktop settings&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;expected items&quot;: { &quot;item id&quot;: &quot;web first intake&quot;, &quot;description&quot;: &quot;Run web search before planning and editing.&quot;, &quot;source&quot;: &quot;AGENTS.md&quot;, &quot;required&quot;: true, &quot;status&quot;: &quot;covered&quot;, &quot;evidence&quot;: &quot; history/web searches/2026/2026 06 06 cli scroll isolation.ko.md&quot; , &quot;rationale&quot;: &quot;&quot; }, { &quot;ite</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4460,
+      "updatedAt": "2026-06-06T03:27:15.267Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-cli-scroll-isolation-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증: CLI 스크롤 겹침 제거",
+      "excerpt": "검증: CLI 스크롤 겹침 제거 예정 명령 git diff check corepack pnpm filter workspace monitor run collect corepack pnpm filter workspace monitor run check corepack pnpm filter workspace monitor test corepack pnpm filter workspace monitor run build Playwright smoke against local dev server corepa",
+      "html": "<h1>검증: CLI 스크롤 겹침 제거</h1>\n<h2>예정 명령</h2>\n<ul>\n<li><code>git diff --check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code></li>\n<li>Playwright smoke against local dev server</li>\n<li><code>corepack pnpm run desktop:package:internal</code></li>\n</ul>\n<h2>UI 계약</h2>\n<ul>\n<li><code>.settings-dialog-backdrop</code>은 <code>overflow: hidden</code>을 사용한다.</li>\n<li><code>.settings-tab-panel</code>은 <code>overflow-y: auto</code>와 <code>overflow-x: hidden</code>을 사용한다.</li>\n<li>CLI setup guide와 command stack은 nested scroll container가 아니다.</li>\n<li>CLI command controls는 grid wrapping으로 배치된다.</li>\n</ul>\n<h2>결과</h2>\n<ul>\n<li><code>git diff --check</code>: passed</li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code>: passed, 650 inline documents and 2616 admin history records</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: passed, scroll contract 18 CSS contracts</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: passed, 78 tests</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code>: passed</li>\n<li>Playwright smoke: passed, <code>settings-dialog-backdrop</code> hidden, <code>settings-tab-panel</code> auto, CLI guide/stepper/copy row no overflow</li>\n<li><code>corepack pnpm run desktop:package:internal</code>: passed</li>\n<li><code>codesign --verify --deep --strict</code>: passed</li>\n<li><code>hdiutil verify</code>: passed</li>\n</ul>\n<h2>생성물</h2>\n<ul>\n<li>Visual smoke screenshot: <code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-06-cli-scroll-isolation-settings.png</code></li>\n<li>내부 앱: <code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li>내부 DMG: <code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>\n<h2>제한</h2>\n<ul>\n<li>공개 notarization은 Apple credentials가 없어 수행하지 않았다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1805,
+      "updatedAt": "2026-06-06T03:27:15.266Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-cli-scroll-isolation-ko-md",
+      "path": "_history/plans/2026/2026-06-06-cli-scroll-isolation.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "계획 기록: CLI 스크롤 겹침 제거",
+      "excerpt": "계획 기록: CLI 스크롤 겹침 제거 날짜: 2026 06 06 작업 모드: standard memory bootstrap hot anchors: persistent instructions, work mode registry, CLI adapter integration workflow, desktop user flow workflow, resource leak prevention workflow. view mode: superadmin developer install mode: developer ",
+      "html": "<p>계획 기록: CLI 스크롤 겹침 제거 날짜: 2026 06 06 작업 모드: standard memory bootstrap hot anchors: persistent instructions, work mode registry, CLI adapter integration workflow, desktop user flow workflow, resource leak prevention workflow. view mode: superadmin developer install mode: developer 실행 계획 1. 설정 모달과 CLI CSS의 스크롤 소유권을 확인한다. 2. .settings dialog backdrop 은 고정 overla</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1007,
+      "updatedAt": "2026-06-06T03:18:35.634Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-cli-scroll-isolation-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-cli-scroll-isolation.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: CLI 스크롤 겹침",
+      "excerpt": "사용자 요청 요약: CLI 스크롤 겹침 날짜: 2026 06 06 원 요청 요약: CLI 기능의 스크롤이 다른 스크롤과 겹쳐 사용이 불편하다고 지적했다. 해석: 설정 모달과 CLI 안내/명령 복사 영역의 nested scroll을 줄이고, 버튼 위치와 줄바꿈을 안정화해야 한다. 소유 프로젝트: platform desktop app",
+      "html": "<p>사용자 요청 요약: CLI 스크롤 겹침 날짜: 2026 06 06 원 요청 요약: CLI 기능의 스크롤이 다른 스크롤과 겹쳐 사용이 불편하다고 지적했다. 해석: 설정 모달과 CLI 안내/명령 복사 영역의 nested scroll을 줄이고, 버튼 위치와 줄바꿈을 안정화해야 한다. 소유 프로젝트: platform desktop app</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 375,
+      "updatedAt": "2026-06-06T03:18:35.634Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-cli-scroll-isolation-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-cli-scroll-isolation.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: CLI 스크롤 겹침 제거",
+      "excerpt": "웹 검색 기록: CLI 스크롤 겹침 제거 날짜: 2026 06 06 요청 요약: CLI 기능이 다른 스크롤 영역과 겹쳐 설정 화면 사용성이 낮다는 문제를 수정한다. 검색어 nested scroll containers UX avoid scroll jacking settings panels desktop app design Apple Human Interface Guidelines scroll views macOS avoid nested scroll views Microsoft Fluent UI sc",
+      "html": "<p>웹 검색 기록: CLI 스크롤 겹침 제거 날짜: 2026 06 06 요청 요약: CLI 기능이 다른 스크롤 영역과 겹쳐 설정 화면 사용성이 낮다는 문제를 수정한다. 검색어 nested scroll containers UX avoid scroll jacking settings panels desktop app design Apple Human Interface Guidelines scroll views macOS avoid nested scroll views Microsoft Fluent UI scrollable pane layout avoid nested scrolling MDN overscroll behavior contain nest</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1571,
+      "updatedAt": "2026-06-06T03:18:35.634Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-cli-scroll-isolation-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "계획: CLI 스크롤 겹침 제거",
+      "excerpt": "계획: CLI 스크롤 겹침 제거 단계 1. 웹 검색과 기존 설정/CLI CSS 구조 확인. 2. 요구사항과 스펙을 최소 기록으로 남긴다. 3. 설정 모달 backdrop과 panel의 scroll ownership을 수정한다. 4. CLI setup guide와 Agent CLI Cockpit button grid를 wrap 가능한 구조로 조정한다. 5. 정적 테스트에 scroll ownership 회귀 계약을 추가한다. 6. collect, check, test, build, Playwright",
+      "html": "<h1>계획: CLI 스크롤 겹침 제거</h1>\n<h2>단계</h2>\n<p>1. 웹 검색과 기존 설정/CLI CSS 구조 확인.</p>\n<p>2. 요구사항과 스펙을 최소 기록으로 남긴다.</p>\n<p>3. 설정 모달 backdrop과 panel의 scroll ownership을 수정한다.</p>\n<p>4. CLI setup guide와 Agent CLI Cockpit button grid를 wrap 가능한 구조로 조정한다.</p>\n<p>5. 정적 테스트에 scroll ownership 회귀 계약을 추가한다.</p>\n<p>6. collect, check, test, build, Playwright smoke, internal package를 실행한다.</p>\n<p>7. omission/resource/evaluation/history를 기록하고 commit/push한다.</p>\n<h2>리스크</h2>\n<ul>\n<li>Backdrop scroll 제거로 작은 창에서 dialog가 잘릴 수 있다.</li>\n<li>대응: dialog 높이를 viewport padding을 뺀 값으로 계산하고, 본문 panel이 스크롤을 소유하게 한다.</li>\n</ul>\n<h2>결정</h2>\n<ul>\n<li>새 runtime resource를 만들지 않는다.</li>\n<li>이 변경은 UI layout fix이며 CLI process graph나 pipe contract를 변경하지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 931,
+      "updatedAt": "2026-06-06T03:18:35.633Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-cli-scroll-isolation-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "스펙: CLI 스크롤 겹침 제거",
+      "excerpt": "스펙: CLI 스크롤 겹침 제거 목표 CLI 설정과 Agent CLI Cockpit이 설정 모달의 기본 스크롤과 겹치지 않도록, 설정 화면의 스크롤 소유권을 한 곳으로 고정한다. 범위 workspace monitor 설정 모달 레이아웃 CSS CLI adapter setup guide CSS Agent CLI Cockpit command stack CSS 정적 회귀 테스트 제외 CLI 실행 엔진 변경 PTY, pipe, process lifecycle 변경 provider credential 저장",
+      "html": "<h1>스펙: CLI 스크롤 겹침 제거</h1>\n<h2>목표</h2>\n<p>CLI 설정과 Agent CLI Cockpit이 설정 모달의 기본 스크롤과 겹치지 않도록, 설정 화면의 스크롤 소유권을 한 곳으로 고정한다.</p>\n<h2>범위</h2>\n<ul>\n<li><code>workspace-monitor</code> 설정 모달 레이아웃 CSS</li>\n<li>CLI adapter setup guide CSS</li>\n<li>Agent CLI Cockpit command stack CSS</li>\n<li>정적 회귀 테스트</li>\n</ul>\n<h2>제외</h2>\n<ul>\n<li>CLI 실행 엔진 변경</li>\n<li>PTY, pipe, process lifecycle 변경</li>\n<li>provider credential 저장 방식 변경</li>\n<li>새 dependency 설치</li>\n</ul>\n<h2>설계 결정</h2>\n<ul>\n<li>설정 모달의 바깥 backdrop은 고정 overlay로 두고 스크롤하지 않는다.</li>\n<li><code>.settings-tab-panel</code>만 세로 스크롤을 가진다.</li>\n<li>CLI 설정 내부 요소는 별도 scroll container가 아니라 <code>auto-fit</code> grid와 줄바꿈으로 대응한다.</li>\n<li>긴 명령어는 <code>overflow-wrap: anywhere</code>로 카드 안에서 처리한다.</li>\n</ul>\n<h2>언어/런타임 선택</h2>\n<ul>\n<li>선택: TypeScript/React 기존 컴포넌트와 CSS만 수정한다.</li>\n<li>대안 A: Rust/Tauri native layout 측정 로직 추가. 이번 문제는 renderer scroll ownership이 원인이라 과하다.</li>\n<li>대안 B: 새 settings route 분리. 구조 변경 비용이 크고 현재 불편의 직접 원인을 해결하지 않는다.</li>\n</ul>\n<h2>아키텍처 선택</h2>\n<ul>\n<li>선택: 기존 <code>MonitorShell.tsx</code> 구조를 유지하고 CSS 계약을 강화한다.</li>\n<li>대안 A: CLI 설정 컴포넌트 분리. 장기적으로 가능하지만 이번 변경은 layout regression fix라 좁게 처리한다.</li>\n<li>대안 B: 설정 모달 제거 후 전체 페이지 설정으로 이동. 사용 흐름이 크게 바뀌므로 별도 제품 설계가 필요하다.</li>\n</ul>\n<h2>폴더 구조 선택</h2>\n<ul>\n<li>선택: 기존 <code>docs/requirements</code>, <code>specs/&lt;date-slug&gt;</code>, <code>tests</code>, <code>app/globals.css</code>에 좁게 반영한다.</li>\n<li>대안: 새 UI package 생성. 단일 CSS 계약 변경에는 유지보수 비용이 더 크다.</li>\n</ul>\n<h2>성공 조건</h2>\n<ul>\n<li>설정 화면에서 CLI 기능 때문에 두 개 이상의 세로 스크롤바가 겹치지 않는다.</li>\n<li>CLI command 버튼과 단계 카드는 horizontal overflow를 만들지 않는다.</li>\n<li>자동 테스트와 내부 패키징이 통과한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2134,
+      "updatedAt": "2026-06-06T03:18:35.633Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-cli-scroll-isolation-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적성: CLI 스크롤 겹침 제거",
+      "excerpt": "추적성: CLI 스크롤 겹침 제거 | 요구 | 구현 대상 | 검증 | | | | | | 설정 본문만 세로 스크롤 | globals.css .settings dialog backdrop , .settings tab panel | tool studio.test.mjs | | CLI 내부 scroll 제거 | globals.css .cli adapter setup guide , .cli setup stepper , .cli command copy row | tool studio.test.mjs , Pl",
+      "html": "<h1>추적성: CLI 스크롤 겹침 제거</h1>\n<table><thead><tr><th>요구</th><th>구현 대상</th><th>검증</th></tr></thead><tbody><tr><td>설정 본문만 세로 스크롤</td><td><code>globals.css</code> <code>.settings-dialog-backdrop</code>, <code>.settings-tab-panel</code></td><td><code>tool-studio.test.mjs</code></td></tr><tr><td>CLI 내부 scroll 제거</td><td><code>globals.css</code> <code>.cli-adapter-setup-guide</code>, <code>.cli-setup-stepper</code>, <code>.cli-command-copy-row</code></td><td><code>tool-studio.test.mjs</code>, Playwright smoke</td></tr><tr><td>Cockpit command stack 안정화</td><td><code>globals.css</code> <code>.agent-cli-command-stack</code></td><td><code>tool-studio.test.mjs</code>, Playwright smoke</td></tr><tr><td>긴 명령 줄바꿈</td><td><code>globals.css</code> code/small/button span wrapping</td><td>visual smoke</td></tr><tr><td>자동 빌드/패키징</td><td>package scripts</td><td>validation record</td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 666,
+      "updatedAt": "2026-06-06T03:18:35.633Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-cli-scroll-isolation-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-cli-scroll-isolation.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "CLI 스크롤 겹침 제거 요구사항",
+      "excerpt": "CLI 스크롤 겹침 제거 요구사항 날짜: 2026 06 06 소유 프로젝트: platform desktop app 작업 모드: standard 요청 요약: CLI 기능의 스크롤이 다른 스크롤과 겹쳐 설정 화면 사용이 불편하다는 지적을 반영한다. 요구사항 1. 설정 모달은 바깥 backdrop이 아니라 설정 본문 패널이 세로 스크롤을 소유해야 한다. 2. CLI 어댑터 설정 안내, 단계 카드, 명령 복사 버튼은 별도 세로/가로 스크롤을 만들지 않아야 한다. 3. 긴 CLI 명령과 설명은 버튼 위치를",
+      "html": "<h1>CLI 스크롤 겹침 제거 요구사항</h1>\n<ul>\n<li>날짜: 2026-06-06</li>\n<li>소유 프로젝트: <code>platform-desktop-app</code></li>\n<li>작업 모드: <code>standard</code></li>\n<li>요청 요약: CLI 기능의 스크롤이 다른 스크롤과 겹쳐 설정 화면 사용이 불편하다는 지적을 반영한다.</li>\n</ul>\n<h2>요구사항</h2>\n<p>1. 설정 모달은 바깥 backdrop이 아니라 설정 본문 패널이 세로 스크롤을 소유해야 한다.</p>\n<p>2. CLI 어댑터 설정 안내, 단계 카드, 명령 복사 버튼은 별도 세로/가로 스크롤을 만들지 않아야 한다.</p>\n<p>3. 긴 CLI 명령과 설명은 버튼 위치를 밀거나 가로 스크롤을 만들지 않고 카드 안에서 줄바꿈되어야 한다.</p>\n<p>4. Agent CLI Cockpit의 명령 복사 영역은 카드 안에서 접히는 그리드로 배치되어 다른 스크롤바와 겹치지 않아야 한다.</p>\n<p>5. 변경 후 정적 테스트, 빌드, 내부 데스크톱 패키징을 실행해야 한다.</p>\n<h2>수용 기준</h2>\n<ul>\n<li><code>.settings-dialog-backdrop</code>은 page-level 스크롤을 만들지 않는다.</li>\n<li><code>.settings-tab-panel</code>만 설정 본문 세로 스크롤 컨테이너로 남는다.</li>\n<li><code>.cli-adapter-setup-guide</code>, <code>.cli-setup-stepper</code>, <code>.cli-command-copy-row</code>, <code>.agent-cli-command-stack</code>은 내부 overflow 스크롤을 만들지 않는다.</li>\n<li>CLI 명령 복사 버튼은 접히는 그리드 안에서 위치가 안정적이다.</li>\n<li>테스트가 스크롤 소유권과 CLI 그리드 계약을 검증한다.</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>MDN <code>overscroll-behavior</code>: 중첩 스크롤의 체이닝과 전파는 명시적으로 제어해야 한다.</li>\n<li>Apple Human Interface Guidelines <code>Scrolling</code>: 스크롤 가능한 콘텐츠의 범위와 조작 대상이 분명해야 한다.</li>\n<li>Fluent/Windows scroll guidance: 스크롤 영역은 사용자가 조작 중인 표면 안에서 예측 가능해야 한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1802,
+      "updatedAt": "2026-06-06T03:18:35.632Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "platform-desktop-app-specs-2026-06-06-cli-setup-guidance-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-cli-setup-guidance/tasks.ko.md",
       "category": "project-spec",
@@ -7747,22 +8035,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-2026-2026-06-06-md",
-      "path": "_history/2026/2026-06-06.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 06",
-      "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-      "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 15252,
-      "updatedAt": "2026-06-06T03:12:20.407Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-cli-setup-guidance-ko-md",
@@ -10357,22 +10629,6 @@
       "workspaceArea": "_history/work-summaries"
     },
     {
-      "id": "history-work-timings-2026-2026-06-06-desktop-chrome-design-polish-json",
-      "path": "_history/work-timings/2026/2026-06-06-desktop-chrome-design-polish.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Desktop Chrome Design Polish",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"task\": \"desktop chrome design polish\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first intake and local inspection\", \"status\": \"completed\", \"notes\": \"Official design/accessibility sources checked; CSS and tests inspected.\" }, { \"phase\": \"impleme",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;task&quot;: &quot;desktop chrome design polish&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake and local inspection&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Official design/accessibility sources checked; CSS and tests inspected.&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Design tokens, rail/titlebar/panel/se</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 793,
-      "updatedAt": "2026-06-05T23:51:36.205Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-desktop-chrome-design-polish-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-desktop-chrome-design-polish/tasks.ko.md",
       "category": "project-spec",
@@ -10403,22 +10659,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "데스크톱 크롬 디자인 개선 웹 검색 기록",
-      "excerpt": "데스크톱 크롬 디자인 개선 웹 검색 기록 검색 시각 2026 06 06 KST 검색 쿼리 Apple Human Interface Guidelines layout visual hierarchy desktop app design official Microsoft Fluent 2 design system elevation color layout official Nielsen Norman Group visual hierarchy UI design scannability WCAG 2.2 focus appe",
-      "html": "<p>데스크톱 크롬 디자인 개선 웹 검색 기록 검색 시각 2026 06 06 KST 검색 쿼리 Apple Human Interface Guidelines layout visual hierarchy desktop app design official Microsoft Fluent 2 design system elevation color layout official Nielsen Norman Group visual hierarchy UI design scannability WCAG 2.2 focus appearance target size contrast official 확인한 고신뢰 소스 Apple Human Interface Guidelines</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1517,
-      "updatedAt": "2026-06-05T23:41:21.326Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-desktop-chrome-design-polish-traceability-ko-md",
@@ -10517,118 +10757,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-evaluations-2026-2026-06-06-eval-cockpit-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-eval-cockpit.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "최종 평가: AI EVAL cockpit",
-      "excerpt": "최종 평가: AI EVAL cockpit 결론 이번 slice는 닫을 수 있다. Workspace Monitor에 EVAL 탭을 추가했고, 현재 작업/히스토리/토큰/툴 사용/오픈소스 후보를 한 화면에서 비교할 수 있게 했다. Tool Studio 캐릭터도 물개형 3D scene으로 바꿨고, 내부 패키징까지 완료했다. 완료 내용 eval 섹션, navigation, fallback view modes, pinned sections, resident preload, home feature, task ",
-      "html": "<p>최종 평가: AI EVAL cockpit 결론 이번 slice는 닫을 수 있다. Workspace Monitor에 EVAL 탭을 추가했고, 현재 작업/히스토리/토큰/툴 사용/오픈소스 후보를 한 화면에서 비교할 수 있게 했다. Tool Studio 캐릭터도 물개형 3D scene으로 바꿨고, 내부 패키징까지 완료했다. 완료 내용 eval 섹션, navigation, fallback view modes, pinned sections, resident preload, home feature, task intent를 연결했다. EvaluationReportPanel 을 추가해 score strip, current work report, hist</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1539,
-      "updatedAt": "2026-06-05T23:32:09.549Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-eval-cockpit-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-eval-cockpit.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 trace: AI EVAL cockpit",
-      "excerpt": "요청 결과 trace: AI EVAL cockpit 요청 요약 사용자는 사용성, 성능, UI, 기능 개선을 계속 진행하고, EVAL 기능과 히스토리/토큰/툴 사용 비교 보고서를 추가하며, 캐릭터는 물개를 사용하라고 요청했다. 결과 EVAL 탭 추가 오픈소스 EVAL 후보 registry/UI 반영 Tool Studio 물개형 3D character 적용 requirements/spec/research/web search/evaluation/resource/omission 기록 추가 build/pa",
-      "html": "<p>요청 결과 trace: AI EVAL cockpit 요청 요약 사용자는 사용성, 성능, UI, 기능 개선을 계속 진행하고, EVAL 기능과 히스토리/토큰/툴 사용 비교 보고서를 추가하며, 캐릭터는 물개를 사용하라고 요청했다. 결과 EVAL 탭 추가 오픈소스 EVAL 후보 registry/UI 반영 Tool Studio 물개형 3D character 적용 requirements/spec/research/web search/evaluation/resource/omission 기록 추가 build/package 자동 실행 완료 주요 산출물 platform desktop app/renderer/workspace monitor/components</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1574,
-      "updatedAt": "2026-06-05T23:32:09.549Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-eval-cockpit-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-eval-cockpit.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: AI EVAL cockpit",
-      "excerpt": "사용자 요청 요약: AI EVAL cockpit 요약 사용자는 플랫폼 전반의 사용성/성능/UI/기능 개선을 계속 진행하고, EVAL 기능과 현재 작업 평가 보고서를 탭으로 추가하며, 히스토리/토큰 수/툴 사용을 점수 비교하고, 오픈소스 평가 기능을 참고해 적용하라고 요청했다. 캐릭터는 물개를 쓰라고 요청했다. 이번 반영 범위 EVAL 탭과 보고서 UI 오픈소스 EVAL 후보 registry/UI Tool Studio 물개형 캐릭터 자동 build/package 검증 후속 범위 외부 EVAL run",
-      "html": "<p>사용자 요청 요약: AI EVAL cockpit 요약 사용자는 플랫폼 전반의 사용성/성능/UI/기능 개선을 계속 진행하고, EVAL 기능과 현재 작업 평가 보고서를 탭으로 추가하며, 히스토리/토큰 수/툴 사용을 점수 비교하고, 오픈소스 평가 기능을 참고해 적용하라고 요청했다. 캐릭터는 물개를 쓰라고 요청했다. 이번 반영 범위 EVAL 탭과 보고서 UI 오픈소스 EVAL 후보 registry/UI Tool Studio 물개형 캐릭터 자동 build/package 검증 후속 범위 외부 EVAL runner 실제 설치/실행 통합 token/cost/run schema 구조화 장기 route level monitor shell 개선</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 695,
-      "updatedAt": "2026-06-05T23:32:09.549Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-eval-cockpit-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-eval-cockpit.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: AI EVAL cockpit",
-      "excerpt": "작업 요약: AI EVAL cockpit 요약 Workspace Monitor에 EVAL 탭을 추가해 현재 작업 품질, 히스토리, 토큰/툴 사용, 오픈소스 EVAL 후보를 비교하는 사용성 표면을 만들었다. Tool Studio 3D 캐릭터는 물개형으로 바꿨고, 내부 앱 패키징까지 완료했다. 변경 파일군 UI: MonitorShell.tsx , EvaluationReportPanel.tsx , ToolStudioPanel.tsx , globals.css Config: view mode, produc",
-      "html": "<p>작업 요약: AI EVAL cockpit 요약 Workspace Monitor에 EVAL 탭을 추가해 현재 작업 품질, 히스토리, 토큰/툴 사용, 오픈소스 EVAL 후보를 비교하는 사용성 표면을 만들었다. Tool Studio 3D 캐릭터는 물개형으로 바꿨고, 내부 앱 패키징까지 완료했다. 변경 파일군 UI: MonitorShell.tsx , EvaluationReportPanel.tsx , ToolStudioPanel.tsx , globals.css Config: view mode, product feature, open source feature reference, readiness check Tests: workspace monit</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1067,
-      "updatedAt": "2026-06-05T23:32:09.549Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-eval-cockpit-ko-md",
-      "path": "_history/work-timings/2026/2026-06-06-eval-cockpit.ko.md",
-      "category": "work-timing",
-      "language": "ko",
-      "title": "작업 타이밍: AI EVAL cockpit",
-      "excerpt": "작업 타이밍: AI EVAL cockpit 단계별 기록 | 단계 | 결과 | | | | | 웹 검색/메모리 부트스트랩 | 완료 | | 구현 slice 분해 | 완료 | | EVAL panel/UI/registry/test 구현 | 완료 | | Tool Studio seal character 변경 | 완료 | | check/test/build/package | 완료 | | Browser smoke | 완료 | 병목 TypeScript build에서 operator center section type",
-      "html": "<p>작업 타이밍: AI EVAL cockpit 단계별 기록 | 단계 | 결과 | | | | | 웹 검색/메모리 부트스트랩 | 완료 | | 구현 slice 분해 | 완료 | | EVAL panel/UI/registry/test 구현 | 완료 | | Tool Studio seal character 변경 | 완료 | | check/test/build/package | 완료 | | Browser smoke | 완료 | 병목 TypeScript build에서 operator center section type narrowing 문제가 발견되어 타입 가드와 명시적 object 조립으로 해결했다. 기존 desktop only CSS 계약이 max wid</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 620,
-      "updatedAt": "2026-06-05T23:32:09.549Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-eval-cockpit-large-scope-decomposition-ko-md",
-      "path": "_history/plans/2026/2026-06-06-eval-cockpit-large-scope-decomposition.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "계획 기록: AI EVAL cockpit large scope decomposition",
-      "excerpt": "계획 기록: AI EVAL cockpit large scope decomposition 요청 성격 사용자 요청은 사용성 개선, 성능 개선, UI 개선, 기능 개선, 오픈소스 비교, EVAL 기능, 캐릭터 개선, 히스토리/토큰/툴 사용 비교를 모두 포함하는 광범위 요청이다. 이번 slice EVAL 탭을 실제 first class section으로 추가한다. 현재 작업 점수, 히스토리 비교, 토큰/툴 비교, 오픈소스 EVAL 후보를 한 화면에 배치한다. Tool Studio 캐릭터를 물개형으로 바꾼",
-      "html": "<p>계획 기록: AI EVAL cockpit large scope decomposition 요청 성격 사용자 요청은 사용성 개선, 성능 개선, UI 개선, 기능 개선, 오픈소스 비교, EVAL 기능, 캐릭터 개선, 히스토리/토큰/툴 사용 비교를 모두 포함하는 광범위 요청이다. 이번 slice EVAL 탭을 실제 first class section으로 추가한다. 현재 작업 점수, 히스토리 비교, 토큰/툴 비교, 오픈소스 EVAL 후보를 한 화면에 배치한다. Tool Studio 캐릭터를 물개형으로 바꾼다. 관련 registry/test/docs/build/package를 닫는다. 제외/후속 slice 외부 EVAL runner 설치 및 실제 </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1541,
-      "updatedAt": "2026-06-05T23:24:49.198Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-eval-cockpit-open-source-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-eval-cockpit-open-source.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: AI EVAL cockpit 오픈소스 후보",
-      "excerpt": "웹 검색 기록: AI EVAL cockpit 오픈소스 후보 목적 사용자가 AI 평가 기능, EVAL 오픈소스 기능, 현재 작업 EVAL 탭, 히스토리/토큰/툴 사용 비교 보고서를 요청했다. 구현 전 공식 문서와 공개 저장소를 확인해 후보 도구와 UI 비교 축을 정했다. 검색어 OpenAI Evals GitHub open source evaluation framework official Inspect AI evaluation framework official documentation GitHub p",
-      "html": "<p>웹 검색 기록: AI EVAL cockpit 오픈소스 후보 목적 사용자가 AI 평가 기능, EVAL 오픈소스 기능, 현재 작업 EVAL 탭, 히스토리/토큰/툴 사용 비교 보고서를 요청했다. 구현 전 공식 문서와 공개 저장소를 확인해 후보 도구와 UI 비교 축을 정했다. 검색어 OpenAI Evals GitHub open source evaluation framework official Inspect AI evaluation framework official documentation GitHub promptfoo open source LLM eval framework official docs GitHub DeepEval open sourc</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 3234,
-      "updatedAt": "2026-06-05T23:24:49.198Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-eval-cockpit-plan-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-eval-cockpit/plan.ko.md",
       "category": "project-spec",
@@ -10723,38 +10851,6 @@
       "historyDate": "",
       "historyYear": "",
       "workspaceArea": "agent-platform"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-shared-workspace-resource-cache-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-shared-workspace-resource-cache.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "Shared Workspace Resource Cache 요청 추적",
-      "excerpt": "Shared Workspace Resource Cache 요청 추적 요청 사용자는 계속 개발하라고 지시했다. 이전 대화 맥락상 데스크톱 앱의 탭 이동 지연, native resource 활용, 메모리/CPU 사용, 구현 후 자동 빌드가 지속 요구사항이다. 결정 전면 재작성 대신 현재 resident desktop / source panel 경계에서 확인 가능한 중복 native workspace 요청을 먼저 제거했다. Rust command schema와 source editor UX는 유지했다.",
-      "html": "<p>Shared Workspace Resource Cache 요청 추적 요청 사용자는 계속 개발하라고 지시했다. 이전 대화 맥락상 데스크톱 앱의 탭 이동 지연, native resource 활용, 메모리/CPU 사용, 구현 후 자동 빌드가 지속 요구사항이다. 결정 전면 재작성 대신 현재 resident desktop / source panel 경계에서 확인 가능한 중복 native workspace 요청을 먼저 제거했다. Rust command schema와 source editor UX는 유지했다. 새 dependency는 설치하지 않았다. 산출물 요구사항: platform desktop app/docs/requirements/2026 0</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1240,
-      "updatedAt": "2026-06-05T23:07:18.989Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-shared-workspace-resource-cache-json",
-      "path": "_history/work-timings/2026/2026-06-06-shared-workspace-resource-cache.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Shared Workspace Resource Cache",
-      "excerpt": "{ \"schema version\": \"2026 06 01\", \"request id\": \"2026 06 06 shared workspace resource cache\", \"timezone\": \"Asia/Seoul\", \"started at\": \"2026 06 06T07:59:50+0900\", \"finished at\": \"2026 06 06T08:06:26+0900\", \"phases\": { \"phase\": \"web first intake and mode selection\", \"status\": \"comp",
-      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 01&quot;, &quot;request id&quot;: &quot;2026 06 06 shared workspace resource cache&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;started at&quot;: &quot;2026 06 06T07:59:50+0900&quot;, &quot;finished at&quot;: &quot;2026 06 06T08:06:26+0900&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake and mode selection&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Checked React and Tauri official docs, ran memory bootstrap, s</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1201,
-      "updatedAt": "2026-06-05T23:07:18.989Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-shared-workspace-resource-cache-validation-ko-md",
@@ -18035,102 +18131,6 @@
       "historyDate": "2026-06-04",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-local-agent-execution-boundary-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-local-agent-execution-boundary/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Tasks: Local Agent Execution Boundary",
-      "excerpt": "Tasks: Local Agent Execution Boundary | ID | 작업 | 상태 | | | | | | T1 | Web first AgentCore local dev/deploy 확인 | 완료 | | T2 | Gateway Tool Agent UI 문구 수정 | 완료 | | T3 | AgentCore proposal helper에 local runtime capability/guardrail 추가 | 완료 | | T4 | Registry와 readiness script 갱신 | 완료 ",
-      "html": "<h1>Tasks: Local Agent Execution Boundary</h1>\n<table><thead><tr><th>ID</th><th>작업</th><th>상태</th></tr></thead><tbody><tr><td>T1</td><td>Web-first AgentCore local dev/deploy 확인</td><td>완료</td></tr><tr><td>T2</td><td>Gateway Tool Agent UI 문구 수정</td><td>완료</td></tr><tr><td>T3</td><td>AgentCore proposal helper에 local runtime capability/guardrail 추가</td><td>완료</td></tr><tr><td>T4</td><td>Registry와 readiness script 갱신</td><td>완료</td></tr><tr><td>T5</td><td>Requirements/spec/history 기록</td><td>완료</td></tr><tr><td>T6</td><td>Validation, commit, push</td><td>완료</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 439,
-      "updatedAt": "2026-06-03T17:47:53.813Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-agentcore-easy-agent-builder-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-agentcore-easy-agent-builder/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Spec: AgentCore Easy Agent Builder",
-      "excerpt": "Spec: AgentCore Easy Agent Builder 목표 AgentCore reference를 사용자가 이해하기 쉬운 데스크톱 agent creation flow로 바꾼다. 사용자는 runtime, memory, gateway/tool, evaluation guarded blueprint 중 하나를 고르고, 같은 패널에서 Agent Factory proposal 생성을 시작할 수 있어야 한다. 구현 계약 AgentCoreBlueprintPanel 은 AgentCore Quick Buil",
-      "html": "<h1>Spec: AgentCore Easy Agent Builder</h1>\n<h2>목표</h2>\n<p>AgentCore reference를 사용자가 이해하기 쉬운 데스크톱 agent creation flow로 바꾼다. 사용자는 runtime, memory, gateway/tool, evaluation-guarded blueprint 중 하나를 고르고, 같은 패널에서 Agent Factory proposal 생성을 시작할 수 있어야 한다.</p>\n<h2>구현 계약</h2>\n<ul>\n<li><code>AgentCoreBlueprintPanel</code>은 <code>AgentCore Quick Builder</code> 단계 표시를 가진다.</li>\n<li>단계는 <code>목적 선택</code>, <code>능력 추가</code>, <code>제안 생성</code>, <code>검증 준비</code>로 보인다.</li>\n<li>선택한 blueprint는 <code>buildAgentFactoryFormFromAgentCoreBlueprint</code>를 통해 Agent Factory form으로 변환된다.</li>\n<li><code>바로 에이전트 제안 생성</code>은 선택한 blueprint를 기반으로 <code>createAgentCoreBlueprintProposal</code>을 호출한다.</li>\n<li><code>createAgentCoreBlueprintProposal</code>은 기존 native command <code>create_agent_factory_proposal</code>을 재사용한다.</li>\n<li>브라우저 preview에서는 native 저장 불가 상태를 표시한다.</li>\n<li>설치 앱에서는 proposal이 app data의 Agent Factory proposal record로 저장된다.</li>\n</ul>\n<h2>데이터 계약</h2>\n<ul>\n<li>Proposal form은 <code>agentId</code>, <code>label</code>, <code>goal</code>, <code>role</code>, <code>tools</code>, <code>guardrails</code>, <code>validationCommands</code>, <code>outputContract</code>, <code>ownerProject</code>, <code>targetPath</code>, <code>rollbackPlan</code>을 유지한다.</li>\n<li><code>tools</code>에는 blueprint capabilities, <code>local_python_agent_runtime</code>, <code>local_process_execution</code>, local task-run store가 포함된다.</li>\n<li><code>guardrails</code>에는 blueprint safety gates, 로컬 실행 경계, remote tool connector 경계, optional AgentCore adapter boundary가 포함된다.</li>\n</ul>\n<h2>출처 경계</h2>\n<ul>\n<li>AWS AgentCore 공식 문서와 <code>awslabs/agentcore-samples</code>는 architecture/capability reference로만 사용한다.</li>\n<li>원본 소스는 복사하지 않는다.</li>\n<li>AWS AgentCore CLI와 AWS credentials는 optional deployment adapter로 둔다.</li>\n<li>Lambda/cloud function/API는 필요할 때 tool connector로만 다루며, agent/Python 실행 호스트가 아니다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1934,
-      "updatedAt": "2026-06-03T17:45:02.363Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-agentcore-easy-agent-builder-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-agentcore-easy-agent-builder/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Traceability: AgentCore Easy Agent Builder",
-      "excerpt": "Traceability: AgentCore Easy Agent Builder | Requirement | Implementation | Validation | | | | | | REQ PDA 092 | AgentCoreBlueprintPanel , .agentcore builder steps | Browser smoke, workspace monitor check | | REQ PDA 093 | createAgentCoreBlueprintProposal , createAgentFactoryProp",
-      "html": "<h1>Traceability: AgentCore Easy Agent Builder</h1>\n<table><thead><tr><th>Requirement</th><th>Implementation</th><th>Validation</th></tr></thead><tbody><tr><td>REQ-PDA-092</td><td><code>AgentCoreBlueprintPanel</code>, <code>.agentcore-builder-steps</code></td><td>Browser smoke, workspace-monitor check</td></tr><tr><td>REQ-PDA-093</td><td><code>createAgentCoreBlueprintProposal</code>, <code>createAgentFactoryProposal(formOverride)</code></td><td>platform-desktop-app test/check</td></tr><tr><td>REQ-PDA-094</td><td><code>buildAgentFactoryFormFromAgentCoreBlueprint</code></td><td>Type check, readiness token checks</td></tr><tr><td>REQ-PDA-095</td><td><code>.agentcore-builder-status</code> preview/native copy</td><td>Browser smoke screenshot</td></tr><tr><td>REQ-PDA-096</td><td><code>check-service-readiness.mjs</code>, <code>check-readiness.mjs</code>, registry updates</td><td>platform-desktop-app test/check</td></tr><tr><td>REQ-PDA-097</td><td><code>local_python_agent_runtime</code>, local execution guardrails</td><td>service readiness local execution check</td></tr></tbody></table>\n<h2>관련 기록</h2>\n<ul>\n<li>Requirements: <code>platform-desktop-app/docs/requirements/2026-06-04-agentcore-easy-agent-builder.ko.md</code></li>\n<li>Web search: <code>_history/web-searches/2026/2026-06-04-agentcore-easy-agent-builder.ko.md</code></li>\n<li>Evaluation: <code>_history/evaluations/2026/2026-06-04-agentcore-easy-agent-builder.ko.md</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1089,
-      "updatedAt": "2026-06-03T17:45:02.363Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-local-agent-execution-boundary-traceability-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-local-agent-execution-boundary/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Traceability: Local Agent Execution Boundary",
-      "excerpt": "Traceability: Local Agent Execution Boundary | Requirement | Implementation | Validation | | | | | | REQ PDA 097 | buildAgentFactoryFormFromAgentCoreBlueprint local capabilities | service readiness, workspace monitor check | | REQ PDA 098 | Gateway Tool Agent copy, reference/prod",
-      "html": "<h1>Traceability: Local Agent Execution Boundary</h1>\n<table><thead><tr><th>Requirement</th><th>Implementation</th><th>Validation</th></tr></thead><tbody><tr><td>REQ-PDA-097</td><td><code>buildAgentFactoryFormFromAgentCoreBlueprint</code> local capabilities</td><td>service readiness, workspace-monitor check</td></tr><tr><td>REQ-PDA-098</td><td><code>Gateway Tool Agent</code> copy, reference/product/user-flow registries</td><td>platform-desktop-app check</td></tr><tr><td>REQ-PDA-099</td><td><code>local_python_execution_boundary</code> service readiness check, readiness tokens</td><td>platform-desktop-app test/check</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 484,
-      "updatedAt": "2026-06-03T17:44:53.356Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-04-local-agent-execution-boundary-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-04-local-agent-execution-boundary/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Validation: Local Agent Execution Boundary",
-      "excerpt": "Validation: Local Agent Execution Boundary 검증 명령 corepack pnpm filter workspace monitor run check corepack pnpm filter workspace monitor test corepack pnpm filter workspace monitor run build:customer corepack pnpm filter platform desktop app test corepack pnpm filter platform des",
-      "html": "<h1>Validation: Local Agent Execution Boundary</h1>\n<h2>검증 명령</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor run check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code></li>\n<li><code>cd agent-platform &amp;&amp; PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-feature-registry.json ../platform-desktop-app/configs/user-flow-registry.json ../platform-desktop-app/configs/service-readiness-registry.json ../platform-desktop-app/configs/reference-platform-advantage-registry.json</code></li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>AgentCore proposal helper에 <code>local_python_agent_runtime</code>과 <code>local_process_execution</code>이 포함된다.</li>\n<li>Service readiness의 <code>local_python_execution_boundary</code> check가 통과한다.</li>\n<li>UI는 실제 에이전트/Python 실행이 로컬 runtime에서 일어난다고 설명한다.</li>\n<li>Lambda/cloud function은 실행 호스트가 아니라 optional connector로 기록된다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1109,
-      "updatedAt": "2026-06-03T17:44:53.356Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-04-local-agent-execution-boundary-en-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-04-local-agent-execution-boundary.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Local Agent Execution Boundary Requirements",
-      "excerpt": "Local Agent Execution Boundary Requirements Date: 2026 06 04 Owning project: platform desktop app/ Context The user clarified that the AgentCore inspired implementation must not run agents in Lambda. Actual agent and Python execution happen locally. Gateway/tool wording must ther",
-      "html": "<h1>Local Agent Execution Boundary Requirements</h1>\n<p>Date: 2026-06-04</p>\n<p>Owning project: <code>platform-desktop-app/</code></p>\n<h2>Context</h2>\n<p>The user clarified that the AgentCore-inspired implementation must not run agents in Lambda. Actual agent and Python execution happen locally. Gateway/tool wording must therefore not imply a remote function host; the desktop runtime owns the agent loop and Python process.</p>\n<h2>Requirements</h2>\n<table><thead><tr><th>ID</th><th>Requirement</th><th>Acceptance Criteria</th></tr></thead><tbody><tr><td>REQ-PDA-097</td><td>The agent execution host must be the local Python/process runtime.</td><td>AgentCore proposals include <code>local_python_agent_runtime</code> and <code>local_process_execution</code> capabilities.</td></tr><tr><td>REQ-PDA-098</td><td>Lambda, cloud functions, and remote APIs must be represented as optional tool connectors, not execution hosts.</td><td>UI and registries describe remote APIs/cloud functions only as tool connectors.</td></tr><tr><td>REQ-PDA-099</td><td>Readiness must catch regressions that remove the local execution boundary.</td><td>Service readiness validates <code>local_python_agent_runtime</code>, <code>local_process_execution</code>, and registry local Python execution language.</td></tr></tbody></table>\n<h2>Non-Goals</h2>\n<ul>\n<li>Do not make AWS AgentCore deploy the default execution path.</li>\n<li>Do not use Lambda as the agent runtime host.</li>\n<li>Do not ban remote APIs or tool connectors.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1267,
-      "updatedAt": "2026-06-03T17:44:53.355Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18140,15 +18140,11 @@
       "documentsCount": 96,
       "categories": [
         {
-          "category": "request-trace",
-          "count": 15
-        },
-        {
-          "category": "work-timing",
-          "count": 15
-        },
-        {
           "category": "evaluation",
+          "count": 18
+        },
+        {
+          "category": "request-trace",
           "count": 14
         },
         {
@@ -18156,12 +18152,16 @@
           "count": 14
         },
         {
-          "category": "web-search",
+          "category": "work-summary",
           "count": 14
         },
         {
-          "category": "work-summary",
-          "count": 14
+          "category": "web-search",
+          "count": 13
+        },
+        {
+          "category": "work-timing",
+          "count": 13
         },
         {
           "category": "plan",
@@ -18180,7 +18180,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-          "updatedAt": "2026-06-06T03:12:20.407Z",
+          "updatedAt": "2026-06-06T03:27:15.270Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18191,6 +18191,56 @@
           "title": "최종 평가",
           "excerpt": "최종 평가 결과 요구사항 충족: 완료. 구현, renderer 검증, browser smoke, internal package build를 완료했다. 성능 결과: Static smoke: ready 3948ms, Agent switch 244ms. Dev smoke: ready 4702ms, Agent switch 219ms. Section audit under 6x CPU throttle: p95 1413.4ms, limit 1600ms. 판단 사용자 요구처럼 초기 로딩을 더 길게 써서 Agen",
           "updatedAt": "2026-06-06T02:03:14.739Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-evaluation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Cli Scroll Isolation Evaluation Input",
+          "excerpt": "{ \"initial instruction\": \"The user said the CLI feature scroll overlaps with other scroll areas and is very inconvenient.\", \"result summary\": \"Changed the settings dialog so the backdrop and dialog body do not scroll, the settings tab panel owns vertical scrolling, CLI setup cont",
+          "updatedAt": "2026-06-06T03:27:15.268Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-evaluation-result-json",
+          "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-evaluation-result.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Cli Scroll Isolation Evaluation Result",
+          "excerpt": "{ \"status\": \"ready to close\", \"requires rework\": false, \"work mode\": \"standard\", \"required target policy\": { \"required targets\": \"mode selection record targets\", \"omission check targets\", \"plan evidence targets\", \"references checked\", \"request trace targets\", \"requirements target",
+          "updatedAt": "2026-06-06T03:27:40.048Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-omission-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-omission-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Cli Scroll Isolation Omission Input",
+          "excerpt": "{ \"task\": \"CLI scroll isolation in desktop settings\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"web first intake\", \"description\": \"Run web search before planning and editing.\", \"source\": \"AGENTS.md\", \"required\": true, \"status\": \"covered\", \"evidence\": \" history/web ",
+          "updatedAt": "2026-06-06T03:27:15.267Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-resource-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-resource-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Cli Scroll Isolation Resource Input",
+          "excerpt": "{ \"task\": \"Resource check for CLI scroll isolation\", \"work mode\": \"standard\", \"runtime context\": \"nextjs\", \"playwright\", \"browser\", \"tauri build\", \"cargo\", \"node\" , \"resource risks\": { \"risk id\": \"temporary dev server\", \"category\": \"process\", \"description\": \"The local Next dev se",
+          "updatedAt": "2026-06-06T03:27:15.268Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "작업 평가: CLI 스크롤 겹침 제거",
+          "excerpt": "작업 평가: CLI 스크롤 겹침 제거 날짜: 2026 06 06 work mode: standard resource risk occurred: true installation occurred: false cli pipeline occurred: false 결과 판정 passed 사용자 지시에 대한 평가 “CLI 기능 다른 스크롤이랑 겹치니까 너무 불편해”: settings backdrop/body의 스크롤을 제거하고 .settings tab panel 만 본문 스크롤을 소유하게 했다. CLI se",
+          "updatedAt": "2026-06-06T03:27:15.269Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18241,16 +18291,6 @@
           "title": "2026 06 06 desktop dev/run fix 평가",
           "excerpt": "2026 06 06 desktop dev/run fix 평가 평가 대상 README build/run failure fix. 완료 기준 desktop:dev 가 실제 app startup까지 진행한다. internal/dev 실행은 updater public release gate에 막히지 않는다. 빌드된 .app 을 여는 명령이 문서화되고 스크립트로 제공된다. 최종 package와 smoke가 통과한다. 현재 결과 desktop:dev : 통과. GET / 200 . desktop:run:int",
           "updatedAt": "2026-06-06T01:28:41.481Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-eval-cockpit-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-eval-cockpit.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "최종 평가: AI EVAL cockpit",
-          "excerpt": "최종 평가: AI EVAL cockpit 결론 이번 slice는 닫을 수 있다. Workspace Monitor에 EVAL 탭을 추가했고, 현재 작업/히스토리/토큰/툴 사용/오픈소스 후보를 한 화면에서 비교할 수 있게 했다. Tool Studio 캐릭터도 물개형 3D scene으로 바꿨고, 내부 패키징까지 완료했다. 완료 내용 eval 섹션, navigation, fallback view modes, pinned sections, resident preload, home feature, task ",
-          "updatedAt": "2026-06-05T23:32:09.549Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18324,6 +18364,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-plans-2026-2026-06-06-cli-scroll-isolation-ko-md",
+          "path": "_history/plans/2026/2026-06-06-cli-scroll-isolation.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "계획 기록: CLI 스크롤 겹침 제거",
+          "excerpt": "계획 기록: CLI 스크롤 겹침 제거 날짜: 2026 06 06 작업 모드: standard memory bootstrap hot anchors: persistent instructions, work mode registry, CLI adapter integration workflow, desktop user flow workflow, resource leak prevention workflow. view mode: superadmin developer install mode: developer ",
+          "updatedAt": "2026-06-06T03:18:35.634Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-plans-2026-2026-06-06-cli-setup-guidance-ko-md",
           "path": "_history/plans/2026/2026-06-06-cli-setup-guidance.ko.md",
           "category": "plan",
@@ -18351,16 +18401,6 @@
           "title": "작업 계획 기록",
           "excerpt": "작업 계획 기록 선택한 모드 standard implementation 계획 1. 웹 검색으로 버튼/명령 피드백 근거 확인 2. 현재 버튼 액션과 notice 구조 확인 3. 액션별 피드백 상태 모델 추가 4. 주요 버튼을 wrapper로 연결 5. CSS와 구조 테스트 추가 6. check/test/build/package 실행 7. 평가, 요청 추적, commit/push 제외 전체 버튼 컴포넌트 교체, 모든 handler 성공/실패 반환 계약 개편, 새 dependency 설치는 제외한다.",
           "updatedAt": "2026-06-06T02:51:44.117Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-plans-2026-2026-06-06-eval-cockpit-large-scope-decomposition-ko-md",
-          "path": "_history/plans/2026/2026-06-06-eval-cockpit-large-scope-decomposition.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "계획 기록: AI EVAL cockpit large scope decomposition",
-          "excerpt": "계획 기록: AI EVAL cockpit large scope decomposition 요청 성격 사용자 요청은 사용성 개선, 성능 개선, UI 개선, 기능 개선, 오픈소스 비교, EVAL 기능, 캐릭터 개선, 히스토리/토큰/툴 사용 비교를 모두 포함하는 광범위 요청이다. 이번 slice EVAL 탭을 실제 first class section으로 추가한다. 현재 작업 점수, 히스토리 비교, 토큰/툴 비교, 오픈소스 EVAL 후보를 한 화면에 배치한다. Tool Studio 캐릭터를 물개형으로 바꾼",
-          "updatedAt": "2026-06-05T23:24:49.198Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18424,6 +18464,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-request-traces-2026-2026-06-06-cli-scroll-isolation-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-cli-scroll-isolation.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: CLI 스크롤 겹침 제거",
+          "excerpt": "요청 결과 추적: CLI 스크롤 겹침 제거 날짜: 2026 06 06 요청: CLI 기능의 스크롤이 다른 스크롤과 겹쳐 불편하다는 지적 소유 프로젝트: platform desktop app 입력 해석 설정 모달 안에서 CLI 안내와 버튼 영역이 별도 스크롤처럼 보이거나 다른 스크롤바와 겹치지 않아야 한다. 결과 설정 backdrop은 overflow: hidden 으로 바꾸고, 설정 본문은 .settings tab panel 이 세로 스크롤을 소유하게 했다. subsection rail은 가로 스",
+          "updatedAt": "2026-06-06T03:27:15.269Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-06-cli-setup-guidance-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-cli-setup-guidance.ko.md",
           "category": "request-trace",
@@ -18471,16 +18521,6 @@
           "title": "2026 06 06 request to outcome trace",
           "excerpt": "2026 06 06 request to outcome trace 요청 README대로 했는데 desktop app 빌드/실행이 되지 않는 문제 해결. 원인 Tauri beforeDevCommand 가 잘못된 상대 경로를 사용했다. updater plugin이 public updater config 없이도 항상 초기화되어 internal/dev 실행을 panic으로 막았다. README에 빌드 후 실행 명령이 없었다. 산출물 platform desktop app/src tauri/tauri.conf",
           "updatedAt": "2026-06-06T01:28:41.482Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-06-eval-cockpit-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-eval-cockpit.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 trace: AI EVAL cockpit",
-          "excerpt": "요청 결과 trace: AI EVAL cockpit 요청 요약 사용자는 사용성, 성능, UI, 기능 개선을 계속 진행하고, EVAL 기능과 히스토리/토큰/툴 사용 비교 보고서를 추가하며, 캐릭터는 물개를 사용하라고 요청했다. 결과 EVAL 탭 추가 오픈소스 EVAL 후보 registry/UI 반영 Tool Studio 물개형 3D character 적용 requirements/spec/research/web search/evaluation/resource/omission 기록 추가 build/pa",
-          "updatedAt": "2026-06-05T23:32:09.549Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18534,16 +18574,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-shared-workspace-resource-cache-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-shared-workspace-resource-cache.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "Shared Workspace Resource Cache 요청 추적",
-          "excerpt": "Shared Workspace Resource Cache 요청 추적 요청 사용자는 계속 개발하라고 지시했다. 이전 대화 맥락상 데스크톱 앱의 탭 이동 지연, native resource 활용, 메모리/CPU 사용, 구현 후 자동 빌드가 지속 요구사항이다. 결정 전면 재작성 대신 현재 resident desktop / source panel 경계에서 확인 가능한 중복 native workspace 요청을 먼저 제거했다. Rust command schema와 source editor UX는 유지했다.",
-          "updatedAt": "2026-06-05T23:07:18.989Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-06-storage-architecture-review-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-storage-architecture-review.ko.md",
           "category": "request-trace",
@@ -18571,6 +18601,16 @@
           "title": "사용자 요청 요약",
           "excerpt": "사용자 요청 요약 시작할 때 Agent 탭 첫 로딩이 오래 걸리므로, 초기 로딩 시간을 조금 더 길게 잡고 모든 탭을 처음에 띄워 둔 것처럼 만들어 탭 이동 체감을 개선해 달라는 요청.",
           "updatedAt": "2026-06-06T02:00:59.366Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-cli-scroll-isolation-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-cli-scroll-isolation.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: CLI 스크롤 겹침",
+          "excerpt": "사용자 요청 요약: CLI 스크롤 겹침 날짜: 2026 06 06 원 요청 요약: CLI 기능의 스크롤이 다른 스크롤과 겹쳐 사용이 불편하다고 지적했다. 해석: 설정 모달과 CLI 안내/명령 복사 영역의 nested scroll을 줄이고, 버튼 위치와 줄바꿈을 안정화해야 한다. 소유 프로젝트: platform desktop app",
+          "updatedAt": "2026-06-06T03:18:35.634Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18621,16 +18661,6 @@
           "title": "사용자 요청 요약: desktop dev/run fix",
           "excerpt": "사용자 요청 요약: desktop dev/run fix 사용자는 README에 있는 대로 빌드하고 실행했지만 되지 않는다고 보고했고, 해결을 요청했다. 적용 범위 desktop app README 명령 재현. Tauri dev 실행 실패 수정. internal/dev updater startup panic 수정. 빌드된 내부 .app 실행 명령 추가.",
           "updatedAt": "2026-06-06T01:24:25.576Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-06-eval-cockpit-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-eval-cockpit.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: AI EVAL cockpit",
-          "excerpt": "사용자 요청 요약: AI EVAL cockpit 요약 사용자는 플랫폼 전반의 사용성/성능/UI/기능 개선을 계속 진행하고, EVAL 기능과 현재 작업 평가 보고서를 탭으로 추가하며, 히스토리/토큰 수/툴 사용을 점수 비교하고, 오픈소스 평가 기능을 참고해 적용하라고 요청했다. 캐릭터는 물개를 쓰라고 요청했다. 이번 반영 범위 EVAL 탭과 보고서 UI 오픈소스 EVAL 후보 registry/UI Tool Studio 물개형 캐릭터 자동 build/package 검증 후속 범위 외부 EVAL run",
-          "updatedAt": "2026-06-05T23:32:09.549Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18714,6 +18744,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-web-searches-2026-2026-06-06-cli-scroll-isolation-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-cli-scroll-isolation.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: CLI 스크롤 겹침 제거",
+          "excerpt": "웹 검색 기록: CLI 스크롤 겹침 제거 날짜: 2026 06 06 요청 요약: CLI 기능이 다른 스크롤 영역과 겹쳐 설정 화면 사용성이 낮다는 문제를 수정한다. 검색어 nested scroll containers UX avoid scroll jacking settings panels desktop app design Apple Human Interface Guidelines scroll views macOS avoid nested scroll views Microsoft Fluent UI sc",
+          "updatedAt": "2026-06-06T03:18:35.634Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-06-cli-setup-guidance-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-cli-setup-guidance.ko.md",
           "category": "web-search",
@@ -18744,16 +18784,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "데스크톱 크롬 디자인 개선 웹 검색 기록",
-          "excerpt": "데스크톱 크롬 디자인 개선 웹 검색 기록 검색 시각 2026 06 06 KST 검색 쿼리 Apple Human Interface Guidelines layout visual hierarchy desktop app design official Microsoft Fluent 2 design system elevation color layout official Nielsen Norman Group visual hierarchy UI design scannability WCAG 2.2 focus appe",
-          "updatedAt": "2026-06-05T23:41:21.326Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-desktop-dev-run-fix-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-desktop-dev-run-fix.ko.md",
           "category": "web-search",
@@ -18761,16 +18791,6 @@
           "title": "웹 검색 기록: desktop dev/run fix",
           "excerpt": "웹 검색 기록: desktop dev/run fix 목적 README 명령대로 desktop app을 빌드하거나 실행할 때 실패하는 문제를 고치기 전에, Tauri v2와 Next static export의 공식 실행/빌드 전제를 확인했다. 검색어 Tauri v2 official docs development build beforeDevCommand frontendDist devUrl Next.js official docs output export static build Tauri plugin u",
           "updatedAt": "2026-06-06T01:24:25.572Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-eval-cockpit-open-source-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-eval-cockpit-open-source.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: AI EVAL cockpit 오픈소스 후보",
-          "excerpt": "웹 검색 기록: AI EVAL cockpit 오픈소스 후보 목적 사용자가 AI 평가 기능, EVAL 오픈소스 기능, 현재 작업 EVAL 탭, 히스토리/토큰/툴 사용 비교 보고서를 요청했다. 구현 전 공식 문서와 공개 저장소를 확인해 후보 도구와 UI 비교 축을 정했다. 검색어 OpenAI Evals GitHub open source evaluation framework official Inspect AI evaluation framework official documentation GitHub p",
-          "updatedAt": "2026-06-05T23:24:49.198Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18854,6 +18874,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-06-cli-scroll-isolation-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-cli-scroll-isolation.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: CLI 스크롤 겹침 제거",
+          "excerpt": "작업 요약: CLI 스크롤 겹침 제거 날짜: 2026 06 06 소유 프로젝트: platform desktop app 커밋 전 상태: 구현 및 검증 완료 변경 설정 모달 바깥 backdrop의 스크롤을 제거하고, 설정 본문 panel만 세로 스크롤을 갖도록 정리했다. subsection rail은 가로 방향만 스크롤되게 했다. CLI 설정 카드와 명령 복사 버튼은 별도 scroll container 대신 접히는 grid로 바꿨다. 긴 CLI 명령은 카드 안에서 줄바꿈되도록 처리했다. scroll ",
+          "updatedAt": "2026-06-06T03:27:15.269Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-06-cli-setup-guidance-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-cli-setup-guidance.ko.md",
           "category": "work-summary",
@@ -18901,16 +18931,6 @@
           "title": "2026 06 06 desktop dev/run fix 작업 요약",
           "excerpt": "2026 06 06 desktop dev/run fix 작업 요약 구현 tauri.conf.json 의 dev renderer path를 수정했다. public updater config가 있을 때만 updater plugin을 초기화하도록 Rust startup을 바꿨다. desktop:dev , desktop:run:internal , desktop:package:run:internal root scripts를 추가했다. macOS internal .app open helper를 추가했다. R",
           "updatedAt": "2026-06-06T01:28:41.482Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-06-eval-cockpit-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-eval-cockpit.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: AI EVAL cockpit",
-          "excerpt": "작업 요약: AI EVAL cockpit 요약 Workspace Monitor에 EVAL 탭을 추가해 현재 작업 품질, 히스토리, 토큰/툴 사용, 오픈소스 EVAL 후보를 비교하는 사용성 표면을 만들었다. Tool Studio 3D 캐릭터는 물개형으로 바꿨고, 내부 앱 패키징까지 완료했다. 변경 파일군 UI: MonitorShell.tsx , EvaluationReportPanel.tsx , ToolStudioPanel.tsx , globals.css Config: view mode, produc",
-          "updatedAt": "2026-06-05T23:32:09.549Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18994,6 +19014,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-timings-2026-2026-06-06-cli-scroll-isolation-json",
+          "path": "_history/work-timings/2026/2026-06-06-cli-scroll-isolation.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Cli Scroll Isolation",
+          "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"cli scroll isolation\", \"timezone\": \"Asia/Seoul\", \"started at\": \"2026 06 06T12:17:14+0900\", \"ended at\": \"2026 06 06T12:25:51+0900\", \"phases\": { \"phase\": \"web first and context\", \"duration minutes\": 2, \"notes\": \"Checked nested scroll guidance and",
+          "updatedAt": "2026-06-06T03:27:15.269Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-cli-setup-guidance-json",
           "path": "_history/work-timings/2026/2026-06-06-cli-setup-guidance.json",
           "category": "work-timing",
@@ -19024,16 +19054,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-desktop-chrome-design-polish-json",
-          "path": "_history/work-timings/2026/2026-06-06-desktop-chrome-design-polish.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Desktop Chrome Design Polish",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"task\": \"desktop chrome design polish\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first intake and local inspection\", \"status\": \"completed\", \"notes\": \"Official design/accessibility sources checked; CSS and tests inspected.\" }, { \"phase\": \"impleme",
-          "updatedAt": "2026-06-05T23:51:36.205Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-desktop-dev-run-fix-json",
           "path": "_history/work-timings/2026/2026-06-06-desktop-dev-run-fix.json",
           "category": "work-timing",
@@ -19041,16 +19061,6 @@
           "title": "2026 06 06 Desktop Dev Run Fix",
           "excerpt": "{ \"task id\": \"2026 06 06 desktop dev run fix\", \"title\": \"desktop dev/run fix\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"reproduction\", \"label\": \"Failure reproduction\", \"status\": \"c",
           "updatedAt": "2026-06-06T01:28:41.483Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-06-eval-cockpit-ko-md",
-          "path": "_history/work-timings/2026/2026-06-06-eval-cockpit.ko.md",
-          "category": "work-timing",
-          "language": "ko",
-          "title": "작업 타이밍: AI EVAL cockpit",
-          "excerpt": "작업 타이밍: AI EVAL cockpit 단계별 기록 | 단계 | 결과 | | | | | 웹 검색/메모리 부트스트랩 | 완료 | | 구현 slice 분해 | 완료 | | EVAL panel/UI/registry/test 구현 | 완료 | | Tool Studio seal character 변경 | 완료 | | check/test/build/package | 완료 | | Browser smoke | 완료 | 병목 TypeScript build에서 operator center section type",
-          "updatedAt": "2026-06-05T23:32:09.549Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19104,16 +19114,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-shared-workspace-resource-cache-json",
-          "path": "_history/work-timings/2026/2026-06-06-shared-workspace-resource-cache.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Shared Workspace Resource Cache",
-          "excerpt": "{ \"schema version\": \"2026 06 01\", \"request id\": \"2026 06 06 shared workspace resource cache\", \"timezone\": \"Asia/Seoul\", \"started at\": \"2026 06 06T07:59:50+0900\", \"finished at\": \"2026 06 06T08:06:26+0900\", \"phases\": { \"phase\": \"web first intake and mode selection\", \"status\": \"comp",
-          "updatedAt": "2026-06-05T23:07:18.989Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-storage-architecture-review-ko-md",
           "path": "_history/work-timings/2026/2026-06-06-storage-architecture-review.ko.md",
           "category": "work-timing",
@@ -19142,36 +19142,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2613,
+      "documents": 2624,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1010
+          "count": 1015
         },
         {
           "category": "web-search",
-          "count": 415
+          "count": 416
         },
         {
           "category": "plan",
-          "count": 349
+          "count": 350
         },
         {
           "category": "request-trace",
-          "count": 343
+          "count": 344
         },
         {
           "category": "work-timing",
-          "count": 264
+          "count": 265
         },
         {
           "category": "user-request",
-          "count": 128
+          "count": 129
         },
         {
           "category": "work-summary",
-          "count": 95
+          "count": 96
         },
         {
           "category": "daily-history",
@@ -19182,7 +19182,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6526873,
+      "totalSourceBytes": 6550638,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19207,11 +19207,11 @@
       "totalEvents": 160,
       "historyEvents": 96,
       "monitorEvents": 64,
-      "evidenceEvents": 28,
+      "evidenceEvents": 31,
       "decisionEvents": 0,
-      "openSignals": 16,
+      "openSignals": 18,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T03:12:20.407Z",
+      "latestEventAt": "2026-06-06T03:27:40.048Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19221,23 +19221,13 @@
         "count": 64
       },
       {
-        "id": "monitoring",
-        "label": "monitoring",
-        "count": 15
-      },
-      {
-        "id": "traceability",
-        "label": "traceability",
-        "count": 15
+        "id": "verification",
+        "label": "verification",
+        "count": 18
       },
       {
         "id": "delivery",
         "label": "delivery",
-        "count": 14
-      },
-      {
-        "id": "evidence",
-        "label": "evidence",
         "count": 14
       },
       {
@@ -19246,9 +19236,19 @@
         "count": 14
       },
       {
-        "id": "verification",
-        "label": "verification",
+        "id": "traceability",
+        "label": "traceability",
         "count": 14
+      },
+      {
+        "id": "evidence",
+        "label": "evidence",
+        "count": 13
+      },
+      {
+        "id": "monitoring",
+        "label": "monitoring",
+        "count": 13
       },
       {
         "id": "planning",
@@ -19268,19 +19268,9 @@
         "count": 64
       },
       {
-        "id": "timing",
-        "label": "timing",
-        "count": 15
-      },
-      {
-        "id": "trace",
-        "label": "trace",
-        "count": 15
-      },
-      {
         "id": "evaluation",
         "label": "evaluation",
-        "count": 14
+        "count": 18
       },
       {
         "id": "intake",
@@ -19293,9 +19283,19 @@
         "count": 14
       },
       {
+        "id": "trace",
+        "label": "trace",
+        "count": 14
+      },
+      {
+        "id": "timing",
+        "label": "timing",
+        "count": 13
+      },
+      {
         "id": "web-search",
         "label": "web search",
-        "count": 14
+        "count": 13
       },
       {
         "id": "plan",
@@ -19322,6 +19322,21 @@
     ],
     "events": [
       {
+        "id": "history-history-evaluations-2026-2026-06-06-cli-scroll-isolation-evaluation-result-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 06 Cli Scroll Isolation Evaluation Result",
+        "detail": "{ \"status\": \"ready to close\", \"requires rework\": false, \"work mode\": \"standard\", \"required target policy\": { \"required targets\": \"mode selection record targets\", \"omission check targets\", \"plan evidence targets\", \"references checked\", \"request trace targets\", \"requirements target",
+        "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-evaluation-result.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:27:40.048Z"
+      },
+      {
         "id": "history-history-2026-2026-06-06-md",
         "sourceType": "history",
         "signalType": "history",
@@ -19334,7 +19349,157 @@
         "category": "daily-history",
         "language": "unknown",
         "date": "2026-06-06",
-        "timestamp": "2026-06-06T03:12:20.407Z"
+        "timestamp": "2026-06-06T03:27:15.270Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-cli-scroll-isolation-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "ready",
+        "title": "작업 평가: CLI 스크롤 겹침 제거",
+        "detail": "작업 평가: CLI 스크롤 겹침 제거 날짜: 2026 06 06 work mode: standard resource risk occurred: true installation occurred: false cli pipeline occurred: false 결과 판정 passed 사용자 지시에 대한 평가 “CLI 기능 다른 스크롤이랑 겹치니까 너무 불편해”: settings backdrop/body의 스크롤을 제거하고 .settings tab panel 만 본문 스크롤을 소유하게 했다. CLI se",
+        "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:27:15.269Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-cli-scroll-isolation-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 06 Cli Scroll Isolation",
+        "detail": "{ \"date\": \"2026 06 06\", \"work id\": \"cli scroll isolation\", \"timezone\": \"Asia/Seoul\", \"started at\": \"2026 06 06T12:17:14+0900\", \"ended at\": \"2026 06 06T12:25:51+0900\", \"phases\": { \"phase\": \"web first and context\", \"duration minutes\": 2, \"notes\": \"Checked nested scroll guidance and",
+        "path": "_history/work-timings/2026/2026-06-06-cli-scroll-isolation.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:27:15.269Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-cli-scroll-isolation-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "요청 결과 추적: CLI 스크롤 겹침 제거",
+        "detail": "요청 결과 추적: CLI 스크롤 겹침 제거 날짜: 2026 06 06 요청: CLI 기능의 스크롤이 다른 스크롤과 겹쳐 불편하다는 지적 소유 프로젝트: platform desktop app 입력 해석 설정 모달 안에서 CLI 안내와 버튼 영역이 별도 스크롤처럼 보이거나 다른 스크롤바와 겹치지 않아야 한다. 결과 설정 backdrop은 overflow: hidden 으로 바꾸고, 설정 본문은 .settings tab panel 이 세로 스크롤을 소유하게 했다. subsection rail은 가로 스",
+        "path": "_history/request-traces/2026/2026-06-06-cli-scroll-isolation.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:27:15.269Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-cli-scroll-isolation-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "작업 요약: CLI 스크롤 겹침 제거",
+        "detail": "작업 요약: CLI 스크롤 겹침 제거 날짜: 2026 06 06 소유 프로젝트: platform desktop app 커밋 전 상태: 구현 및 검증 완료 변경 설정 모달 바깥 backdrop의 스크롤을 제거하고, 설정 본문 panel만 세로 스크롤을 갖도록 정리했다. subsection rail은 가로 방향만 스크롤되게 했다. CLI 설정 카드와 명령 복사 버튼은 별도 scroll container 대신 접히는 grid로 바꿨다. 긴 CLI 명령은 카드 안에서 줄바꿈되도록 처리했다. scroll ",
+        "path": "_history/work-summaries/2026/2026-06-06-cli-scroll-isolation.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:27:15.269Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-cli-scroll-isolation-resource-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "evaluation",
+        "title": "2026 06 06 Cli Scroll Isolation Resource Input",
+        "detail": "{ \"task\": \"Resource check for CLI scroll isolation\", \"work mode\": \"standard\", \"runtime context\": \"nextjs\", \"playwright\", \"browser\", \"tauri build\", \"cargo\", \"node\" , \"resource risks\": { \"risk id\": \"temporary dev server\", \"category\": \"process\", \"description\": \"The local Next dev se",
+        "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-resource-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:27:15.268Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-cli-scroll-isolation-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 06 Cli Scroll Isolation Evaluation Input",
+        "detail": "{ \"initial instruction\": \"The user said the CLI feature scroll overlaps with other scroll areas and is very inconvenient.\", \"result summary\": \"Changed the settings dialog so the backdrop and dialog body do not scroll, the settings tab panel owns vertical scrolling, CLI setup cont",
+        "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:27:15.268Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-cli-scroll-isolation-omission-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 06 Cli Scroll Isolation Omission Input",
+        "detail": "{ \"task\": \"CLI scroll isolation in desktop settings\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"web first intake\", \"description\": \"Run web search before planning and editing.\", \"source\": \"AGENTS.md\", \"required\": true, \"status\": \"covered\", \"evidence\": \" history/web ",
+        "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-omission-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:27:15.267Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-cli-scroll-isolation-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: CLI 스크롤 겹침 제거",
+        "detail": "웹 검색 기록: CLI 스크롤 겹침 제거 날짜: 2026 06 06 요청 요약: CLI 기능이 다른 스크롤 영역과 겹쳐 설정 화면 사용성이 낮다는 문제를 수정한다. 검색어 nested scroll containers UX avoid scroll jacking settings panels desktop app design Apple Human Interface Guidelines scroll views macOS avoid nested scroll views Microsoft Fluent UI sc",
+        "path": "_history/web-searches/2026/2026-06-06-cli-scroll-isolation.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:18:35.634Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-cli-scroll-isolation-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "계획 기록: CLI 스크롤 겹침 제거",
+        "detail": "계획 기록: CLI 스크롤 겹침 제거 날짜: 2026 06 06 작업 모드: standard memory bootstrap hot anchors: persistent instructions, work mode registry, CLI adapter integration workflow, desktop user flow workflow, resource leak prevention workflow. view mode: superadmin developer install mode: developer ",
+        "path": "_history/plans/2026/2026-06-06-cli-scroll-isolation.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:18:35.634Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-cli-scroll-isolation-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: CLI 스크롤 겹침",
+        "detail": "사용자 요청 요약: CLI 스크롤 겹침 날짜: 2026 06 06 원 요청 요약: CLI 기능의 스크롤이 다른 스크롤과 겹쳐 사용이 불편하다고 지적했다. 해석: 설정 모달과 CLI 안내/명령 복사 영역의 nested scroll을 줄이고, 버튼 위치와 줄바꿈을 안정화해야 한다. 소유 프로젝트: platform desktop app",
+        "path": "_history/user-requests/2026/2026-06-06-cli-scroll-isolation.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T03:18:35.634Z"
       },
       {
         "id": "history-history-evaluations-2026-2026-06-06-cli-setup-guidance-ko-md",
@@ -20552,21 +20717,6 @@
         "timestamp": "2026-06-05T23:54:07.600Z"
       },
       {
-        "id": "history-history-work-timings-2026-2026-06-06-desktop-chrome-design-polish-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 Desktop Chrome Design Polish",
-        "detail": "{ \"date\": \"2026 06 06\", \"task\": \"desktop chrome design polish\", \"timezone\": \"Asia/Seoul\", \"phases\": { \"phase\": \"web first intake and local inspection\", \"status\": \"completed\", \"notes\": \"Official design/accessibility sources checked; CSS and tests inspected.\" }, { \"phase\": \"impleme",
-        "path": "_history/work-timings/2026/2026-06-06-desktop-chrome-design-polish.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:51:36.205Z"
-      },
-      {
         "id": "history-history-evaluations-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
         "sourceType": "history",
         "signalType": "evaluation",
@@ -20610,156 +20760,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T23:51:36.205Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-desktop-chrome-design-polish-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "데스크톱 크롬 디자인 개선 웹 검색 기록",
-        "detail": "데스크톱 크롬 디자인 개선 웹 검색 기록 검색 시각 2026 06 06 KST 검색 쿼리 Apple Human Interface Guidelines layout visual hierarchy desktop app design official Microsoft Fluent 2 design system elevation color layout official Nielsen Norman Group visual hierarchy UI design scannability WCAG 2.2 focus appe",
-        "path": "_history/web-searches/2026/2026-06-06-desktop-chrome-design-polish.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:41:21.326Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-eval-cockpit-ko-md",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "작업 타이밍: AI EVAL cockpit",
-        "detail": "작업 타이밍: AI EVAL cockpit 단계별 기록 | 단계 | 결과 | | | | | 웹 검색/메모리 부트스트랩 | 완료 | | 구현 slice 분해 | 완료 | | EVAL panel/UI/registry/test 구현 | 완료 | | Tool Studio seal character 변경 | 완료 | | check/test/build/package | 완료 | | Browser smoke | 완료 | 병목 TypeScript build에서 operator center section type",
-        "path": "_history/work-timings/2026/2026-06-06-eval-cockpit.ko.md",
-        "category": "work-timing",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:32:09.549Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-eval-cockpit-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "최종 평가: AI EVAL cockpit",
-        "detail": "최종 평가: AI EVAL cockpit 결론 이번 slice는 닫을 수 있다. Workspace Monitor에 EVAL 탭을 추가했고, 현재 작업/히스토리/토큰/툴 사용/오픈소스 후보를 한 화면에서 비교할 수 있게 했다. Tool Studio 캐릭터도 물개형 3D scene으로 바꿨고, 내부 패키징까지 완료했다. 완료 내용 eval 섹션, navigation, fallback view modes, pinned sections, resident preload, home feature, task ",
-        "path": "_history/evaluations/2026/2026-06-06-eval-cockpit.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:32:09.549Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-eval-cockpit-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 trace: AI EVAL cockpit",
-        "detail": "요청 결과 trace: AI EVAL cockpit 요청 요약 사용자는 사용성, 성능, UI, 기능 개선을 계속 진행하고, EVAL 기능과 히스토리/토큰/툴 사용 비교 보고서를 추가하며, 캐릭터는 물개를 사용하라고 요청했다. 결과 EVAL 탭 추가 오픈소스 EVAL 후보 registry/UI 반영 Tool Studio 물개형 3D character 적용 requirements/spec/research/web search/evaluation/resource/omission 기록 추가 build/pa",
-        "path": "_history/request-traces/2026/2026-06-06-eval-cockpit.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:32:09.549Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-eval-cockpit-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: AI EVAL cockpit",
-        "detail": "사용자 요청 요약: AI EVAL cockpit 요약 사용자는 플랫폼 전반의 사용성/성능/UI/기능 개선을 계속 진행하고, EVAL 기능과 현재 작업 평가 보고서를 탭으로 추가하며, 히스토리/토큰 수/툴 사용을 점수 비교하고, 오픈소스 평가 기능을 참고해 적용하라고 요청했다. 캐릭터는 물개를 쓰라고 요청했다. 이번 반영 범위 EVAL 탭과 보고서 UI 오픈소스 EVAL 후보 registry/UI Tool Studio 물개형 캐릭터 자동 build/package 검증 후속 범위 외부 EVAL run",
-        "path": "_history/user-requests/2026/2026-06-06-eval-cockpit.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:32:09.549Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-eval-cockpit-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "ready",
-        "title": "작업 요약: AI EVAL cockpit",
-        "detail": "작업 요약: AI EVAL cockpit 요약 Workspace Monitor에 EVAL 탭을 추가해 현재 작업 품질, 히스토리, 토큰/툴 사용, 오픈소스 EVAL 후보를 비교하는 사용성 표면을 만들었다. Tool Studio 3D 캐릭터는 물개형으로 바꿨고, 내부 앱 패키징까지 완료했다. 변경 파일군 UI: MonitorShell.tsx , EvaluationReportPanel.tsx , ToolStudioPanel.tsx , globals.css Config: view mode, produc",
-        "path": "_history/work-summaries/2026/2026-06-06-eval-cockpit.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:32:09.549Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-eval-cockpit-open-source-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: AI EVAL cockpit 오픈소스 후보",
-        "detail": "웹 검색 기록: AI EVAL cockpit 오픈소스 후보 목적 사용자가 AI 평가 기능, EVAL 오픈소스 기능, 현재 작업 EVAL 탭, 히스토리/토큰/툴 사용 비교 보고서를 요청했다. 구현 전 공식 문서와 공개 저장소를 확인해 후보 도구와 UI 비교 축을 정했다. 검색어 OpenAI Evals GitHub open source evaluation framework official Inspect AI evaluation framework official documentation GitHub p",
-        "path": "_history/web-searches/2026/2026-06-06-eval-cockpit-open-source.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:24:49.198Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-eval-cockpit-large-scope-decomposition-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "계획 기록: AI EVAL cockpit large scope decomposition",
-        "detail": "계획 기록: AI EVAL cockpit large scope decomposition 요청 성격 사용자 요청은 사용성 개선, 성능 개선, UI 개선, 기능 개선, 오픈소스 비교, EVAL 기능, 캐릭터 개선, 히스토리/토큰/툴 사용 비교를 모두 포함하는 광범위 요청이다. 이번 slice EVAL 탭을 실제 first class section으로 추가한다. 현재 작업 점수, 히스토리 비교, 토큰/툴 비교, 오픈소스 EVAL 후보를 한 화면에 배치한다. Tool Studio 캐릭터를 물개형으로 바꾼",
-        "path": "_history/plans/2026/2026-06-06-eval-cockpit-large-scope-decomposition.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:24:49.198Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-shared-workspace-resource-cache-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 06 Shared Workspace Resource Cache",
-        "detail": "{ \"schema version\": \"2026 06 01\", \"request id\": \"2026 06 06 shared workspace resource cache\", \"timezone\": \"Asia/Seoul\", \"started at\": \"2026 06 06T07:59:50+0900\", \"finished at\": \"2026 06 06T08:06:26+0900\", \"phases\": { \"phase\": \"web first intake and mode selection\", \"status\": \"comp",
-        "path": "_history/work-timings/2026/2026-06-06-shared-workspace-resource-cache.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:07:18.989Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-shared-workspace-resource-cache-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "Shared Workspace Resource Cache 요청 추적",
-        "detail": "Shared Workspace Resource Cache 요청 추적 요청 사용자는 계속 개발하라고 지시했다. 이전 대화 맥락상 데스크톱 앱의 탭 이동 지연, native resource 활용, 메모리/CPU 사용, 구현 후 자동 빌드가 지속 요구사항이다. 결정 전면 재작성 대신 현재 resident desktop / source panel 경계에서 확인 가능한 중복 native workspace 요청을 먼저 제거했다. Rust command schema와 source editor UX는 유지했다.",
-        "path": "_history/request-traces/2026/2026-06-06-shared-workspace-resource-cache.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T23:07:18.989Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23778,17 +23778,17 @@
       {
         "category": "request-trace",
         "root": "_history/request-traces",
-        "documentsCount": 15
+        "documentsCount": 14
       },
       {
         "category": "web-search",
         "root": "_history/web-searches",
-        "documentsCount": 14
+        "documentsCount": 13
       },
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 15
+        "documentsCount": 13
       },
       {
         "category": "plan",
@@ -23798,7 +23798,7 @@
       {
         "category": "evaluation",
         "root": "_history/evaluations",
-        "documentsCount": 14
+        "documentsCount": 18
       },
       {
         "category": "daily-history",
@@ -27732,13 +27732,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3747,
+      "sourceDocuments": 3764,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T03:12:47.122Z"
+      "latestInsightAt": "2026-06-06T03:28:06.114Z"
     },
     "inferenceStages": [
       {
@@ -27806,15 +27806,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 447,
+        "signalCount": 451,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 144
+            "count": 145
           },
           {
             "category": "project-spec",
-            "count": 138
+            "count": 140
           },
           {
             "category": "request-trace",
@@ -27826,7 +27826,7 @@
           },
           {
             "category": "work-summary",
-            "count": 30
+            "count": 31
           },
           {
             "category": "plan",
@@ -27865,7 +27865,7 @@
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장"
         ],
-        "latestEvidenceAt": "2026-06-06T03:12:47.122Z"
+        "latestEvidenceAt": "2026-06-06T03:28:06.114Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27879,23 +27879,23 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1719,
+        "signalCount": 1727,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 486
+            "count": 489
           },
           {
             "category": "evaluation",
-            "count": 462
+            "count": 465
           },
           {
             "category": "web-search",
-            "count": 416
+            "count": 417
           },
           {
             "category": "plan",
-            "count": 209
+            "count": 210
           },
           {
             "category": "request-trace",
@@ -27930,7 +27930,7 @@
           "2026 05 31 작업 모드 라우팅 계획 기록",
           "계획 히스토리: 코딩 조사 출처 다양성 강화"
         ],
-        "latestEvidenceAt": "2026-06-06T03:12:47.122Z"
+        "latestEvidenceAt": "2026-06-06T03:28:06.114Z"
       },
       {
         "id": "large-scope-slicing",
@@ -27944,15 +27944,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 993,
+        "signalCount": 998,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 483
+            "count": 487
           },
           {
             "category": "plan",
-            "count": 289
+            "count": 290
           },
           {
             "category": "request-trace",
@@ -28003,7 +28003,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T03:12:20.407Z"
+        "latestEvidenceAt": "2026-06-06T03:27:40.048Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28017,15 +28017,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 665,
+        "signalCount": 668,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 268
+            "count": 269
           },
           {
             "category": "evaluation",
-            "count": 231
+            "count": 233
           },
           {
             "category": "web-search",
@@ -28076,7 +28076,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-06T03:12:20.407Z"
+        "latestEvidenceAt": "2026-06-06T03:27:15.270Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28090,27 +28090,27 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1464,
+        "signalCount": 1475,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 631
+            "count": 635
           },
           {
             "category": "evaluation",
-            "count": 515
+            "count": 518
           },
           {
             "category": "user-request",
-            "count": 94
+            "count": 95
           },
           {
             "category": "request-trace",
-            "count": 54
+            "count": 55
           },
           {
             "category": "work-summary",
-            "count": 52
+            "count": 53
           },
           {
             "category": "plan",
@@ -28122,7 +28122,7 @@
           },
           {
             "category": "project-doc",
-            "count": 29
+            "count": 30
           },
           {
             "category": "work-timing",
@@ -28149,7 +28149,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T03:12:47.122Z"
+        "latestEvidenceAt": "2026-06-06T03:27:40.048Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28225,14 +28225,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3747,
+      "sourceDocuments": 3764,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T03:12:47.122Z"
+      "latestInsightAt": "2026-06-06T03:28:06.114Z"
     },
     "operatingModel": [
       {
@@ -28290,25 +28290,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3159,
+        "signalCount": 3176,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1719
+            "signalCount": 1727
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 993
+            "signalCount": 998
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 447
+            "signalCount": 451
           }
         ],
         "missingPatternIds": [],
@@ -28336,7 +28336,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T03:12:47.122Z",
+        "latestEvidenceAt": "2026-06-06T03:28:06.114Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28365,13 +28365,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 784,
+        "signalCount": 787,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 665
+            "signalCount": 668
           },
           {
             "id": "release-blocker-gate",
@@ -28405,7 +28405,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T03:12:20.407Z",
+        "latestEvidenceAt": "2026-06-06T03:27:15.270Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28434,19 +28434,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2457,
+        "signalCount": 2473,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1464
+            "signalCount": 1475
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 993
+            "signalCount": 998
           }
         ],
         "missingPatternIds": [],
@@ -28474,7 +28474,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T03:12:47.122Z",
+        "latestEvidenceAt": "2026-06-06T03:27:40.048Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28503,13 +28503,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 566,
+        "signalCount": 570,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 447
+            "signalCount": 451
           },
           {
             "id": "release-blocker-gate",
@@ -28543,7 +28543,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T03:12:47.122Z",
+        "latestEvidenceAt": "2026-06-06T03:28:06.114Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28572,19 +28572,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2712,
+        "signalCount": 2725,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 993
+            "signalCount": 998
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1719
+            "signalCount": 1727
           }
         ],
         "missingPatternIds": [],
@@ -28612,7 +28612,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T03:12:47.122Z",
+        "latestEvidenceAt": "2026-06-06T03:28:06.114Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28641,7 +28641,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1838,
+        "signalCount": 1846,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28653,7 +28653,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1719
+            "signalCount": 1727
           }
         ],
         "missingPatternIds": [],
@@ -28681,7 +28681,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T03:12:47.122Z",
+        "latestEvidenceAt": "2026-06-06T03:28:06.114Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

@@ -1,0 +1,122 @@
+{
+  "task": "CLI scroll isolation in desktop settings",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web-first-intake",
+      "description": "Run web search before planning and editing.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-06-cli-scroll-isolation.ko.md"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "single-settings-scroll-owner",
+      "description": "Make the settings content panel own vertical scrolling instead of the backdrop or CLI section.",
+      "source": "platform-desktop-app/docs/requirements/2026-06-06-cli-scroll-isolation.ko.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+        "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "cli-controls-no-nested-scroll",
+      "description": "Keep CLI setup guide, stepper, and copy buttons from creating nested scrollbars or horizontal overflow.",
+      "source": "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/spec.ko.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "Playwright smoke badVertical=[] badHorizontal=[]",
+        "platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-06-cli-scroll-isolation-settings.png"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "validator-updated",
+      "description": "Update the scroll contract checker so future regressions fail CI/check.",
+      "source": "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/traceability.ko.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/scripts/check-scroll-containers.mjs",
+        "corepack pnpm --filter workspace-monitor run check: passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "item_id": "automatic-build-and-package",
+      "description": "Run build and internal desktop packaging after implementation.",
+      "source": "persistent user instruction",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "corepack pnpm --filter workspace-monitor run build: passed",
+        "corepack pnpm run desktop:package:internal: passed"
+      ],
+      "rationale": ""
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-cli-scroll-isolation.ko.md",
+      "purpose": "Project-local requirements for the scroll fix.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-06-cli-scroll-isolation/spec.ko.md",
+      "purpose": "Spec for scroll ownership and acceptance criteria.",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-06-cli-scroll-isolation-settings.png",
+      "purpose": "Visual smoke evidence for the settings CLI layout.",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-test",
+      "description": "Workspace Monitor tests pass after adding regression coverage.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter workspace-monitor test: 78 passed"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "workspace-monitor-check",
+      "description": "Workspace Monitor check passes with the updated scroll contract.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --filter workspace-monitor run check: scroll_contract_ok checkedCssContracts=18"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "desktop-package",
+      "description": "Internal desktop package produces verified .app and .dmg artifacts.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm run desktop:package:internal: completed",
+        "codesign verify: passed",
+        "hdiutil verify: VALID"
+      ],
+      "rationale": ""
+    }
+  ],
+  "known_omission_risks": [
+    "Public notarization remains outside this internal package slice because Apple credentials are unavailable."
+  ],
+  "notes": [
+    "CLI process lifecycle was not changed; this is a renderer layout and validation slice."
+  ]
+}

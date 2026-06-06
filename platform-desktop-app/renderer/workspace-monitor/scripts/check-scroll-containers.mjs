@@ -92,12 +92,24 @@ const cssContracts = [
     excludes: ["  height: 100vh;", "  max-height: 100vh;"]
   },
   {
+    selector: ".settings-dialog-backdrop",
+    includes: ["overflow: hidden;", "overscroll-behavior: none;", "align-items: center;"]
+  },
+  {
     selector: ".settings-dialog",
-    includes: ["height: min(760px, calc(100dvh - 36px));", "max-height: calc(100dvh - 36px);", "overflow: hidden;"]
+    includes: [
+      "height: min(820px, calc(100dvh - (var(--space-4) * 2)));",
+      "max-height: calc(100dvh - (var(--space-4) * 2));",
+      "overflow: hidden;"
+    ]
   },
   {
     selector: ".settings-tab-panel",
-    includes: ["overflow: auto;", "overscroll-behavior: contain;", "scrollbar-gutter: stable;"]
+    includes: ["overflow-x: hidden;", "overflow-y: auto;", "overscroll-behavior: contain;", "scrollbar-gutter: stable;"]
+  },
+  {
+    selector: ".settings-subsection-rail",
+    includes: ["overflow-x: auto;", "overflow-y: hidden;", "scrollbar-gutter: stable;"]
   },
   {
     selector: ".terminal-drawer",

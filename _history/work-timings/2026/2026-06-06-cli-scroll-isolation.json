@@ -1,0 +1,28 @@
+{
+  "date": "2026-06-06",
+  "work_id": "cli-scroll-isolation",
+  "timezone": "Asia/Seoul",
+  "started_at": "2026-06-06T12:17:14+0900",
+  "ended_at": "2026-06-06T12:25:51+0900",
+  "phases": [
+    {
+      "phase": "web_first_and_context",
+      "duration_minutes": 2,
+      "notes": "Checked nested scroll guidance and local settings/CLI CSS."
+    },
+    {
+      "phase": "implementation",
+      "duration_minutes": 3,
+      "notes": "Changed settings scroll ownership, CLI grid wrapping, and regression tests."
+    },
+    {
+      "phase": "validation",
+      "duration_minutes": 3,
+      "notes": "Ran tests, check, build, Playwright smoke, package, and final collect/check."
+    }
+  ],
+  "bottleneck_notes": [
+    "Tauri package build was the longest single validation step.",
+    "Next dev overlay intercepted direct Playwright click, so DOM click was used for smoke navigation."
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "task": "Resource check for CLI scroll isolation",
+  "work_mode": "standard",
+  "runtime_context": [
+    "nextjs",
+    "playwright",
+    "browser",
+    "tauri-build",
+    "cargo",
+    "node"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "temporary-dev-server",
+      "category": "process",
+      "description": "The local Next dev server used for Playwright smoke could remain running after verification.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The dev server exec session was stopped with Ctrl-C and tcp:3224 had no remaining listener.",
+      "evidence": [
+        "write_stdin Ctrl-C exited dev server code 0",
+        "lsof -ti tcp:3224 returned no process"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "playwright-browser-context",
+      "category": "browser_context",
+      "description": "Playwright browser contexts can leak if the smoke script fails before cleanup.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Smoke scripts called browser.close() and completed with exit code 0.",
+      "evidence": [
+        "Playwright smoke exited code 0",
+        "errors=[] in smoke output"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "tauri-package-subprocesses",
+      "category": "process",
+      "description": "Tauri, Cargo, codesign, and hdiutil subprocesses must be awaited during internal packaging.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The package exec session was polled until process exit and returned code 0.",
+      "evidence": [
+        "corepack pnpm run desktop:package:internal exited code 0",
+        "codesign verify passed",
+        "hdiutil verify reported checksum VALID"
+      ],
+      "rationale": ""
+    },
+    {
+      "risk_id": "generated-artifacts",
+      "category": "temporary_file",
+      "description": "Build and smoke steps create generated snapshots, screenshots, and Tauri bundle artifacts.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Generated snapshots were restored to developer mode after packaging; screenshot is retained as a bounded validation artifact; Tauri target artifacts remain under build output paths.",
+      "evidence": [
+        "final corepack pnpm --filter workspace-monitor run collect && check passed",
+        "screenshot size 328KB",
+        "DMG size 10MB under src-tauri/target"
+      ],
+      "rationale": ""
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "dev-server-cleanup",
+      "resource": "Next dev server on 127.0.0.1:3224",
+      "create_path": "PORT=3224 corepack pnpm --filter workspace-monitor dev --hostname 127.0.0.1",
+      "cleanup_path": "Ctrl-C through write_stdin, then lsof -ti tcp:3224 check",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "dev server exited code 0",
+        "lsof check empty"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "no-new-runtime-loop",
+      "resource": "CLI setup UI",
+      "create_path": "CSS and static React render only",
+      "cleanup_path": "No new timer, worker, subscription, PTY, or CLI subprocess is created by this change.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "No MonitorShell process lifecycle code changed",
+        "tool-studio static tests pass"
+      ],
+      "rationale": ""
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "scroll-overflow-smoke",
+      "metric": "Unexpected vertical or horizontal overflow in CLI settings path",
+      "tool": "Playwright DOM measurement",
+      "threshold": "badVertical=[] and badHorizontal=[] for settings/CLI containers",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Playwright smoke output badVertical=[] badHorizontal=[]",
+        "subsectionRailYHidden=true"
+      ],
+      "rationale": ""
+    },
+    {
+      "check_id": "package-artifact-verification",
+      "metric": "Internal desktop package integrity",
+      "tool": "codesign and hdiutil",
+      "threshold": "codesign verify exits 0 and hdiutil checksum is VALID",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "codesign --verify --deep --strict passed",
+        "hdiutil verify checksum is VALID"
+      ],
+      "rationale": ""
+    }
+  ],
+  "notes": [
+    "No dependency installation occurred."
+  ]
+}

@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-06T03:12:52.400Z",
+  "generatedAt": "2026-06-06T03:28:13.270Z",
   "summary": {
-    "documents": 2613,
+    "documents": 2624,
     "days": 7,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1010
+        "count": 1015
       },
       {
         "category": "web-search",
-        "count": 415
+        "count": 416
       },
       {
         "category": "plan",
-        "count": 349
+        "count": 350
       },
       {
         "category": "request-trace",
-        "count": 343
+        "count": 344
       },
       {
         "category": "work-timing",
-        "count": 264
+        "count": 265
       },
       {
         "category": "user-request",
-        "count": 128
+        "count": 129
       },
       {
         "category": "work-summary",
-        "count": 95
+        "count": 96
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6526873,
+    "totalSourceBytes": 6550638,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -63,6 +63,22 @@
   },
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-evaluation-result-json",
+      "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-evaluation-result.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Cli Scroll Isolation Evaluation Result",
+      "excerpt": "{ \"status\": \"ready to close\", \"requires rework\": false, \"work mode\": \"standard\", \"required target policy\": { \"required targets\": \"mode selection record targets\", \"omission check targets\", \"plan evidence targets\", \"references checked\", \"request trace targets\", \"requirements target",
+      "html": "<p>{ &quot;status&quot;: &quot;ready to close&quot;, &quot;requires rework&quot;: false, &quot;work mode&quot;: &quot;standard&quot;, &quot;required target policy&quot;: { &quot;required targets&quot;: &quot;mode selection record targets&quot;, &quot;omission check targets&quot;, &quot;plan evidence targets&quot;, &quot;references checked&quot;, &quot;request trace targets&quot;, &quot;requirements targets&quot;, &quot;source provenance targets&quot;, &quot;spec targets&quot;, &quot;timing summary targets&quot;, &quot;user</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1787,
+      "updatedAt": "2026-06-06T03:27:40.048Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
       "id": "history-2026-2026-06-06-md",
       "path": "_history/2026/2026-06-06.md",
       "category": "daily-history",
@@ -72,11 +88,171 @@
       "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 15252,
-      "updatedAt": "2026-06-06T03:12:20.407Z",
+      "sourceBytes": 15929,
+      "updatedAt": "2026-06-06T03:27:15.270Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "작업 평가: CLI 스크롤 겹침 제거",
+      "excerpt": "작업 평가: CLI 스크롤 겹침 제거 날짜: 2026 06 06 work mode: standard resource risk occurred: true installation occurred: false cli pipeline occurred: false 결과 판정 passed 사용자 지시에 대한 평가 “CLI 기능 다른 스크롤이랑 겹치니까 너무 불편해”: settings backdrop/body의 스크롤을 제거하고 .settings tab panel 만 본문 스크롤을 소유하게 했다. CLI se",
+      "html": "<p>작업 평가: CLI 스크롤 겹침 제거 날짜: 2026 06 06 work mode: standard resource risk occurred: true installation occurred: false cli pipeline occurred: false 결과 판정 passed 사용자 지시에 대한 평가 “CLI 기능 다른 스크롤이랑 겹치니까 너무 불편해”: settings backdrop/body의 스크롤을 제거하고 .settings tab panel 만 본문 스크롤을 소유하게 했다. CLI setup guide와 command buttons는 nested scroll 없이 wrap grid로 배치했다. 변경 후 build와 intern</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1500,
+      "updatedAt": "2026-06-06T03:27:15.269Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-cli-scroll-isolation-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-cli-scroll-isolation.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: CLI 스크롤 겹침 제거",
+      "excerpt": "요청 결과 추적: CLI 스크롤 겹침 제거 날짜: 2026 06 06 요청: CLI 기능의 스크롤이 다른 스크롤과 겹쳐 불편하다는 지적 소유 프로젝트: platform desktop app 입력 해석 설정 모달 안에서 CLI 안내와 버튼 영역이 별도 스크롤처럼 보이거나 다른 스크롤바와 겹치지 않아야 한다. 결과 설정 backdrop은 overflow: hidden 으로 바꾸고, 설정 본문은 .settings tab panel 이 세로 스크롤을 소유하게 했다. subsection rail은 가로 스",
+      "html": "<p>요청 결과 추적: CLI 스크롤 겹침 제거 날짜: 2026 06 06 요청: CLI 기능의 스크롤이 다른 스크롤과 겹쳐 불편하다는 지적 소유 프로젝트: platform desktop app 입력 해석 설정 모달 안에서 CLI 안내와 버튼 영역이 별도 스크롤처럼 보이거나 다른 스크롤바와 겹치지 않아야 한다. 결과 설정 backdrop은 overflow: hidden 으로 바꾸고, 설정 본문은 .settings tab panel 이 세로 스크롤을 소유하게 했다. subsection rail은 가로 스크롤만 가능하게 overflow y: hidden 을 명시했다. CLI setup guide, stepper, command copy row, </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1478,
+      "updatedAt": "2026-06-06T03:27:15.269Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-cli-scroll-isolation-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-cli-scroll-isolation.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: CLI 스크롤 겹침 제거",
+      "excerpt": "작업 요약: CLI 스크롤 겹침 제거 날짜: 2026 06 06 소유 프로젝트: platform desktop app 커밋 전 상태: 구현 및 검증 완료 변경 설정 모달 바깥 backdrop의 스크롤을 제거하고, 설정 본문 panel만 세로 스크롤을 갖도록 정리했다. subsection rail은 가로 방향만 스크롤되게 했다. CLI 설정 카드와 명령 복사 버튼은 별도 scroll container 대신 접히는 grid로 바꿨다. 긴 CLI 명령은 카드 안에서 줄바꿈되도록 처리했다. scroll ",
+      "html": "<p>작업 요약: CLI 스크롤 겹침 제거 날짜: 2026 06 06 소유 프로젝트: platform desktop app 커밋 전 상태: 구현 및 검증 완료 변경 설정 모달 바깥 backdrop의 스크롤을 제거하고, 설정 본문 panel만 세로 스크롤을 갖도록 정리했다. subsection rail은 가로 방향만 스크롤되게 했다. CLI 설정 카드와 명령 복사 버튼은 별도 scroll container 대신 접히는 grid로 바꿨다. 긴 CLI 명령은 카드 안에서 줄바꿈되도록 처리했다. scroll contract checker와 정적 테스트에 회귀 방지 계약을 추가했다. 검증 corepack pnpm filter workspace moni</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1449,
+      "updatedAt": "2026-06-06T03:27:15.269Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-cli-scroll-isolation-json",
+      "path": "_history/work-timings/2026/2026-06-06-cli-scroll-isolation.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Cli Scroll Isolation",
+      "excerpt": "{ \"date\": \"2026 06 06\", \"work id\": \"cli scroll isolation\", \"timezone\": \"Asia/Seoul\", \"started at\": \"2026 06 06T12:17:14+0900\", \"ended at\": \"2026 06 06T12:25:51+0900\", \"phases\": { \"phase\": \"web first and context\", \"duration minutes\": 2, \"notes\": \"Checked nested scroll guidance and",
+      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work id&quot;: &quot;cli scroll isolation&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;started at&quot;: &quot;2026 06 06T12:17:14+0900&quot;, &quot;ended at&quot;: &quot;2026 06 06T12:25:51+0900&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first and context&quot;, &quot;duration minutes&quot;: 2, &quot;notes&quot;: &quot;Checked nested scroll guidance and local settings/CLI CSS.&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;duration minutes&quot;: 3,</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 887,
+      "updatedAt": "2026-06-06T03:27:15.269Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Cli Scroll Isolation Evaluation Input",
+      "excerpt": "{ \"initial instruction\": \"The user said the CLI feature scroll overlaps with other scroll areas and is very inconvenient.\", \"result summary\": \"Changed the settings dialog so the backdrop and dialog body do not scroll, the settings tab panel owns vertical scrolling, CLI setup cont",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;The user said the CLI feature scroll overlaps with other scroll areas and is very inconvenient.&quot;, &quot;result summary&quot;: &quot;Changed the settings dialog so the backdrop and dialog body do not scroll, the settings tab panel owns vertical scrolling, CLI setup controls wrap without nested overflow, and the scroll contract/test/build/package ga</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4183,
+      "updatedAt": "2026-06-06T03:27:15.268Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-resource-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-resource-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Cli Scroll Isolation Resource Input",
+      "excerpt": "{ \"task\": \"Resource check for CLI scroll isolation\", \"work mode\": \"standard\", \"runtime context\": \"nextjs\", \"playwright\", \"browser\", \"tauri build\", \"cargo\", \"node\" , \"resource risks\": { \"risk id\": \"temporary dev server\", \"category\": \"process\", \"description\": \"The local Next dev se",
+      "html": "<p>{ &quot;task&quot;: &quot;Resource check for CLI scroll isolation&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;runtime context&quot;: &quot;nextjs&quot;, &quot;playwright&quot;, &quot;browser&quot;, &quot;tauri build&quot;, &quot;cargo&quot;, &quot;node&quot; , &quot;resource risks&quot;: { &quot;risk id&quot;: &quot;temporary dev server&quot;, &quot;category&quot;: &quot;process&quot;, &quot;description&quot;: &quot;The local Next dev server used for Playwright smoke could remain running after verification.&quot;, &quot;requi</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4391,
+      "updatedAt": "2026-06-06T03:27:15.268Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-cli-scroll-isolation-omission-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-cli-scroll-isolation-omission-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Cli Scroll Isolation Omission Input",
+      "excerpt": "{ \"task\": \"CLI scroll isolation in desktop settings\", \"work mode\": \"standard\", \"expected items\": { \"item id\": \"web first intake\", \"description\": \"Run web search before planning and editing.\", \"source\": \"AGENTS.md\", \"required\": true, \"status\": \"covered\", \"evidence\": \" history/web ",
+      "html": "<p>{ &quot;task&quot;: &quot;CLI scroll isolation in desktop settings&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;expected items&quot;: { &quot;item id&quot;: &quot;web first intake&quot;, &quot;description&quot;: &quot;Run web search before planning and editing.&quot;, &quot;source&quot;: &quot;AGENTS.md&quot;, &quot;required&quot;: true, &quot;status&quot;: &quot;covered&quot;, &quot;evidence&quot;: &quot; history/web searches/2026/2026 06 06 cli scroll isolation.ko.md&quot; , &quot;rationale&quot;: &quot;&quot; }, { &quot;ite</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4460,
+      "updatedAt": "2026-06-06T03:27:15.267Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-cli-scroll-isolation-ko-md",
+      "path": "_history/plans/2026/2026-06-06-cli-scroll-isolation.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "계획 기록: CLI 스크롤 겹침 제거",
+      "excerpt": "계획 기록: CLI 스크롤 겹침 제거 날짜: 2026 06 06 작업 모드: standard memory bootstrap hot anchors: persistent instructions, work mode registry, CLI adapter integration workflow, desktop user flow workflow, resource leak prevention workflow. view mode: superadmin developer install mode: developer ",
+      "html": "<p>계획 기록: CLI 스크롤 겹침 제거 날짜: 2026 06 06 작업 모드: standard memory bootstrap hot anchors: persistent instructions, work mode registry, CLI adapter integration workflow, desktop user flow workflow, resource leak prevention workflow. view mode: superadmin developer install mode: developer 실행 계획 1. 설정 모달과 CLI CSS의 스크롤 소유권을 확인한다. 2. .settings dialog backdrop 은 고정 overla</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1007,
+      "updatedAt": "2026-06-06T03:18:35.634Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-cli-scroll-isolation-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-cli-scroll-isolation.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: CLI 스크롤 겹침",
+      "excerpt": "사용자 요청 요약: CLI 스크롤 겹침 날짜: 2026 06 06 원 요청 요약: CLI 기능의 스크롤이 다른 스크롤과 겹쳐 사용이 불편하다고 지적했다. 해석: 설정 모달과 CLI 안내/명령 복사 영역의 nested scroll을 줄이고, 버튼 위치와 줄바꿈을 안정화해야 한다. 소유 프로젝트: platform desktop app",
+      "html": "<p>사용자 요청 요약: CLI 스크롤 겹침 날짜: 2026 06 06 원 요청 요약: CLI 기능의 스크롤이 다른 스크롤과 겹쳐 사용이 불편하다고 지적했다. 해석: 설정 모달과 CLI 안내/명령 복사 영역의 nested scroll을 줄이고, 버튼 위치와 줄바꿈을 안정화해야 한다. 소유 프로젝트: platform desktop app</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 375,
+      "updatedAt": "2026-06-06T03:18:35.634Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-cli-scroll-isolation-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-cli-scroll-isolation.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: CLI 스크롤 겹침 제거",
+      "excerpt": "웹 검색 기록: CLI 스크롤 겹침 제거 날짜: 2026 06 06 요청 요약: CLI 기능이 다른 스크롤 영역과 겹쳐 설정 화면 사용성이 낮다는 문제를 수정한다. 검색어 nested scroll containers UX avoid scroll jacking settings panels desktop app design Apple Human Interface Guidelines scroll views macOS avoid nested scroll views Microsoft Fluent UI sc",
+      "html": "<p>웹 검색 기록: CLI 스크롤 겹침 제거 날짜: 2026 06 06 요청 요약: CLI 기능이 다른 스크롤 영역과 겹쳐 설정 화면 사용성이 낮다는 문제를 수정한다. 검색어 nested scroll containers UX avoid scroll jacking settings panels desktop app design Apple Human Interface Guidelines scroll views macOS avoid nested scroll views Microsoft Fluent UI scrollable pane layout avoid nested scrolling MDN overscroll behavior contain nest</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1571,
+      "updatedAt": "2026-06-06T03:18:35.634Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-cli-setup-guidance-ko-md",
@@ -41875,35 +42051,35 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 341,
+      "documentsCount": 352,
       "categories": [
         {
           "category": "evaluation",
-          "count": 77
+          "count": 82
         },
         {
           "category": "user-request",
-          "count": 49
+          "count": 50
         },
         {
           "category": "web-search",
-          "count": 49
+          "count": 50
         },
         {
           "category": "work-summary",
-          "count": 49
+          "count": 50
         },
         {
           "category": "request-trace",
-          "count": 48
+          "count": 49
         },
         {
           "category": "work-timing",
-          "count": 47
+          "count": 48
         },
         {
           "category": "plan",
-          "count": 21
+          "count": 22
         },
         {
           "category": "daily-history",
