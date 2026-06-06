@@ -1,0 +1,12 @@
+{
+	"name": "vscode-agent-workbench",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"verify:source": "node scripts/verify-source-state.mjs"
+	},
+	"engines": {
+		"node": ">=18"
+	}
+}

@@ -11,6 +11,7 @@
 # Local-only workspace scratch
 /_private/
 /outputs/
+/vscode-agent-workbench/source/
 /presentation-agent/data/assets/raw/user-provided/*
 !/presentation-agent/data/assets/raw/user-provided/README.ko.md
 !/presentation-agent/data/assets/raw/user-provided/README.en.md

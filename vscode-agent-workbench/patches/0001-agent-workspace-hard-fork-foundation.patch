@@ -1,0 +1,267 @@
+From c7df3053c6da59dae9af42d5474a0d45dd3dc594 Mon Sep 17 00:00:00 2001
+From: hawardShin <joushin@student.42seoul.kr>
+Date: Sat, 6 Jun 2026 22:08:03 +0900
+Subject: [PATCH] feat: add agent workspace hard fork foundation
+
+---
+ build/gulpfile.extensions.ts                |  1 +
+ extensions/agent-workspace/package.json     | 78 +++++++++++++++++++++
+ extensions/agent-workspace/src/extension.ts | 67 ++++++++++++++++++
+ extensions/agent-workspace/tsconfig.json    | 11 +++
+ product.json                                | 38 +++++-----
+ 5 files changed, 176 insertions(+), 19 deletions(-)
+ create mode 100644 extensions/agent-workspace/package.json
+ create mode 100644 extensions/agent-workspace/src/extension.ts
+ create mode 100644 extensions/agent-workspace/tsconfig.json
+
+diff --git a/build/gulpfile.extensions.ts b/build/gulpfile.extensions.ts
+index dafca7f2..c2287ec6 100644
+--- a/build/gulpfile.extensions.ts
++++ b/build/gulpfile.extensions.ts
+@@ -51,6 +51,7 @@ function onExtensionCompilationEnd(): void {
+ // 	ignore: ['**/out/**', '**/node_modules/**']
+ // });
+ const compilations = [
++	'extensions/agent-workspace/tsconfig.json',
+ 	'extensions/configuration-editing/tsconfig.json',
+ 	'extensions/css-language-features/client/tsconfig.json',
+ 	'extensions/css-language-features/server/tsconfig.json',
+diff --git a/extensions/agent-workspace/package.json b/extensions/agent-workspace/package.json
+new file mode 100644
+index 00000000..f255bd7e
+--- /dev/null
++++ b/extensions/agent-workspace/package.json
+@@ -0,0 +1,78 @@
++{
++  "name": "agent-workspace",
++  "displayName": "Agent Workspace",
++  "description": "Workspace-first agent control surface for Agent Workspace Code.",
++  "version": "0.0.1",
++  "publisher": "agent-workspace",
++  "license": "MIT",
++  "engines": {
++    "vscode": "^1.124.0"
++  },
++  "categories": [
++    "Other"
++  ],
++  "capabilities": {
++    "virtualWorkspaces": true,
++    "untrustedWorkspaces": {
++      "supported": true
++    }
++  },
++  "activationEvents": [
++    "onView:agentWorkspace.timeline",
++    "onCommand:agentWorkspace.openPlatformStatus",
++    "onCommand:agentWorkspace.refresh"
++  ],
++  "main": "./out/extension",
++  "contributes": {
++    "configuration": {
++      "title": "Agent Workspace",
++      "properties": {
++        "agentWorkspace.platformRoot": {
++          "type": "string",
++          "default": "",
++          "description": "Optional absolute path to the Agent Workspace Platform repository."
++        }
++      }
++    },
++    "viewsContainers": {
++      "activitybar": [
++        {
++          "id": "agent-workspace",
++          "icon": "$(sparkle)",
++          "title": "Agent Workspace"
++        }
++      ]
++    },
++    "views": {
++      "agent-workspace": [
++        {
++          "id": "agentWorkspace.timeline",
++          "name": "Workspace Timeline"
++        }
++      ]
++    },
++    "commands": [
++      {
++        "command": "agentWorkspace.openPlatformStatus",
++        "title": "Open Platform Status",
++        "category": "Agent Workspace",
++        "icon": "$(pulse)"
++      },
++      {
++        "command": "agentWorkspace.refresh",
++        "title": "Refresh Workspace Timeline",
++        "category": "Agent Workspace",
++        "icon": "$(refresh)"
++      }
++    ],
++    "menus": {
++      "view/title": [
++        {
++          "command": "agentWorkspace.refresh",
++          "when": "view == agentWorkspace.timeline",
++          "group": "navigation"
++        }
++      ]
++    }
++  }
++}
+diff --git a/extensions/agent-workspace/src/extension.ts b/extensions/agent-workspace/src/extension.ts
+new file mode 100644
+index 00000000..0abc3028
+--- /dev/null
++++ b/extensions/agent-workspace/src/extension.ts
+@@ -0,0 +1,67 @@
++/*---------------------------------------------------------------------------------------------
++ *  Copyright (c) Microsoft Corporation. All rights reserved.
++ *  Licensed under the MIT License. See License.txt in the project root for license information.
++ *--------------------------------------------------------------------------------------------*/
++
++import * as vscode from 'vscode';
++
++type TimelineNode = {
++	readonly label: string;
++	readonly description: string;
++	readonly detail: string;
++	readonly icon: vscode.ThemeIcon;
++};
++
++class AgentWorkspaceTimelineProvider implements vscode.TreeDataProvider<TimelineNode> {
++
++	private readonly _onDidChangeTreeData = new vscode.EventEmitter<TimelineNode | undefined>();
++	readonly onDidChangeTreeData = this._onDidChangeTreeData.event;
++
++	refresh(): void {
++		this._onDidChangeTreeData.fire(undefined);
++	}
++
++	getTreeItem(element: TimelineNode): vscode.TreeItem {
++		const item = new vscode.TreeItem(element.label, vscode.TreeItemCollapsibleState.None);
++		item.description = element.description;
++		item.tooltip = element.detail;
++		item.iconPath = element.icon;
++		return item;
++	}
++
++	getChildren(): TimelineNode[] {
++		const workspaceFolders = vscode.workspace.workspaceFolders ?? [];
++		const platformRoot = vscode.workspace.getConfiguration('agentWorkspace').get<string>('platformRoot') ?? '';
++		const primaryWorkspace = workspaceFolders[0]?.uri.fsPath ?? 'No workspace folder open';
++
++		return [
++			{
++				label: 'Workspace root',
++				description: primaryWorkspace,
++				detail: 'Primary folder currently opened in Agent Workspace Code.',
++				icon: new vscode.ThemeIcon('root-folder')
++			},
++			{
++				label: 'Platform root',
++				description: platformRoot || 'Set agentWorkspace.platformRoot',
++				detail: 'Connect this hard fork to the Agent Workspace Platform repository.',
++				icon: new vscode.ThemeIcon('server-environment')
++			},
++			{
++				label: 'Hard-fork lane',
++				description: 'Code - OSS source + Agent Workspace surface',
++				detail: 'This lane keeps VS Code workspace primitives while adding agent platform controls.',
++				icon: new vscode.ThemeIcon('git-branch')
++			}
++		];
++	}
++}
++
++export function activate(context: vscode.ExtensionContext): void {
++	const provider = new AgentWorkspaceTimelineProvider();
++	context.subscriptions.push(vscode.window.registerTreeDataProvider('agentWorkspace.timeline', provider));
++	context.subscriptions.push(vscode.commands.registerCommand('agentWorkspace.refresh', () => provider.refresh()));
++	context.subscriptions.push(vscode.commands.registerCommand('agentWorkspace.openPlatformStatus', () => {
++		void vscode.window.showInformationMessage('Agent Workspace is wired into this Code - OSS hard fork. Set agentWorkspace.platformRoot to connect the platform repository.');
++	}));
++}
+diff --git a/extensions/agent-workspace/tsconfig.json b/extensions/agent-workspace/tsconfig.json
+new file mode 100644
+index 00000000..ee7adf12
+--- /dev/null
++++ b/extensions/agent-workspace/tsconfig.json
+@@ -0,0 +1,11 @@
++{
++	"extends": "../tsconfig.base.json",
++	"compilerOptions": {
++		"rootDir": "./src",
++		"outDir": "./out"
++	},
++	"include": [
++		"src/**/*",
++		"../../src/vscode-dts/vscode.d.ts"
++	]
++}
+diff --git a/product.json b/product.json
+index e7f7e936..2b4af044 100644
+--- a/product.json
++++ b/product.json
+@@ -1,38 +1,38 @@
+ {
+-	"nameShort": "Code - OSS",
+-	"nameLong": "Code - OSS",
+-	"applicationName": "code-oss",
+-	"dataFolderName": ".vscode-oss",
+-	"sharedDataFolderName": ".vscode-oss-shared",
+-	"win32MutexName": "vscodeoss",
++	"nameShort": "Agent Workspace Code",
++	"nameLong": "Agent Workspace Code",
++	"applicationName": "agent-workspace-code",
++	"dataFolderName": ".agent-workspace-code",
++	"sharedDataFolderName": ".agent-workspace-code-shared",
++	"win32MutexName": "agentworkspacecode",
+ 	"licenseName": "MIT",
+ 	"licenseUrl": "https://github.com/microsoft/vscode/blob/main/LICENSE.txt",
+ 	"serverLicenseUrl": "https://github.com/microsoft/vscode/blob/main/LICENSE.txt",
+ 	"serverGreeting": [],
+ 	"serverLicense": [],
+ 	"serverLicensePrompt": "",
+-	"serverApplicationName": "code-server-oss",
+-	"serverDataFolderName": ".vscode-server-oss",
+-	"tunnelApplicationName": "code-tunnel-oss",
+-	"win32DirName": "Microsoft Code OSS",
+-	"win32NameVersion": "Microsoft Code OSS",
+-	"win32RegValueName": "CodeOSS",
++	"serverApplicationName": "agent-workspace-code-server",
++	"serverDataFolderName": ".agent-workspace-code-server",
++	"tunnelApplicationName": "agent-workspace-code-tunnel",
++	"win32DirName": "Agent Workspace Code",
++	"win32NameVersion": "Agent Workspace Code",
++	"win32RegValueName": "AgentWorkspaceCode",
+ 	"win32x64AppId": "{{D77B7E06-80BA-4137-BCF4-654B95CCEBC5}",
+ 	"win32arm64AppId": "{{D1ACE434-89C5-48D1-88D3-E2991DF85475}",
+ 	"win32x64UserAppId": "{{CC6B787D-37A0-49E8-AE24-8559A032BE0C}",
+ 	"win32arm64UserAppId": "{{3AEBF0C8-F733-4AD4-BADE-FDB816D53D7B}",
+-	"win32AppUserModelId": "Microsoft.CodeOSS",
+-	"win32ShellNameShort": "C&ode - OSS",
+-	"win32TunnelServiceMutex": "vscodeoss-tunnelservice",
+-	"win32TunnelMutex": "vscodeoss-tunnel",
+-	"darwinBundleIdentifier": "com.visualstudio.code.oss",
++	"win32AppUserModelId": "AgentWorkspace.Code",
++	"win32ShellNameShort": "Agent &Workspace Code",
++	"win32TunnelServiceMutex": "agentworkspacecode-tunnelservice",
++	"win32TunnelMutex": "agentworkspacecode-tunnel",
++	"darwinBundleIdentifier": "com.agentworkspace.code",
+ 	"darwinProfileUUID": "47827DD9-4734-49A0-AF80-7E19B11495CC",
+ 	"darwinProfilePayloadUUID": "CF808BE7-53F3-46C6-A7E2-7EDB98A5E959",
+-	"linuxIconName": "code-oss",
++	"linuxIconName": "agent-workspace-code",
+ 	"licenseFileName": "LICENSE.txt",
+ 	"reportIssueUrl": "https://github.com/microsoft/vscode/issues/new",
+ 	"nodejsRepository": "https://nodejs.org",
+-	"urlProtocol": "code-oss",
++	"urlProtocol": "agent-workspace-code",
+ 	"agentsTelemetryAppName": "agents",
+ 	"webviewContentExternalBaseUrlTemplate": "https://{{uuid}}.vscode-cdn.net/insider/ef65ac1ba57f57f2a3961bfe94aa20481caca4c6/out/vs/workbench/contrib/webview/browser/pre/",
+ 	"builtInExtensions": [
+-- 
+2.39.3 (Apple Git-146)
+

@@ -87,7 +87,7 @@
     }
   ],
   "version": 1,
-  "updated": "2026-06-03",
+  "updated": "2026-06-06",
   "projects": [
     {
       "name": "agent-platform",
@@ -216,6 +216,35 @@
         "Keep the Next.js renderer under platform-desktop-app/renderer/workspace-monitor/ so the desktop product owns UI, runtime bridge, customer bundle, and installer boundaries together.",
         "Do not bundle real secrets, private snapshots, or environment-specific tokens in installers.",
         "New fallback runtime or packager dependency installation must follow the installation audit workflow."
+      ]
+    },
+    {
+      "name": "vscode-agent-workbench",
+      "path": "vscode-agent-workbench/",
+      "status": "active",
+      "type": "source-hard-fork-workbench",
+      "purpose": "Local hard-fork workbench for adapting the microsoft/vscode Code - OSS source into Agent Workspace Code.",
+      "scope": "VS Code source clone boundary, hard-fork patches, product identity experiments, built-in Agent Workspace extensions, source validation scripts, and fork planning records.",
+      "project_specific_home": [
+        "vscode-agent-workbench/configs/",
+        "vscode-agent-workbench/docs/",
+        "vscode-agent-workbench/docs/requirements/",
+        "vscode-agent-workbench/patches/",
+        "vscode-agent-workbench/scripts/",
+        "vscode-agent-workbench/source/",
+        "vscode-agent-workbench/specs/"
+      ],
+      "shared_dependencies": [
+        "agent-platform/",
+        "platform-desktop-app/",
+        "_history/",
+        "_ops/"
+      ],
+      "boundary_notes": [
+        "The full VS Code source clone under vscode-agent-workbench/source/ is local-only and ignored by the outer workspace repository.",
+        "Completed hard-fork source slices must be represented by a source commit and a replayable patch under vscode-agent-workbench/patches/.",
+        "Use this project for VS Code-derived workbench source integration, not for the Tauri-first platform-desktop-app product shell.",
+        "Public redistribution readiness requires separate signing, branding, service endpoint, marketplace, and legal review gates."
       ]
     }
   ]

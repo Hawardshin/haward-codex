@@ -9,12 +9,13 @@ AI assistant runtime adapter: [../assistant-runtimes/adapter-registry.json](../a
 | `agent-platform/` | active | core-platform | 에이전트 구축 플랫폼 중심 프로젝트 | 플랫폼 공통 기능은 여기, 도메인 실험은 별도 루트 프로젝트 |
 | `presentation-agent/` | active | domain-agent-project | 발표 자료와 발표 스킬을 위한 전용 프로젝트 | 발표 레퍼런스, 에셋, 변환 도구, 산출물은 이 프로젝트 안에 둔다 |
 | `platform-desktop-app/` | active | installable-desktop-product | 설치형 데스크톱 제품화 프로젝트 | OS별 설치, 배포, 업데이트, 개인정보/secret 검토와 Next.js renderer UI는 이 프로젝트 안에 둔다 |
+| `vscode-agent-workbench/` | active | source-hard-fork-workbench | VS Code Code - OSS 소스를 Agent Workspace Code로 하드 포크하는 작업대 | 전체 source clone은 local-only로 두고, 커밋/패치/검증/기록을 이 프로젝트에 둔다 |
 
 ## 최상위 폴더 논리 계층
 
 | 계층 | 폴더 | 의미 |
 | --- | --- | --- |
-| 프로젝트 계층 | `agent-platform/`, `presentation-agent/`, `platform-desktop-app/` | 독립 목적과 라이프사이클이 있는 루트 프로젝트 |
+| 프로젝트 계층 | `agent-platform/`, `presentation-agent/`, `platform-desktop-app/`, `vscode-agent-workbench/` | 독립 목적과 라이프사이클이 있는 루트 프로젝트 |
 | 운영 제어 계층 | `_ops/`, `_docs/`, `_requirements/`, `_specs/`, `_history/` | 작업 흐름, 정책, 요구사항, 스펙, 평가, 히스토리 |
 | 지식/재사용 계층 | `_philosophy/`, `_research/`, `_skills/`, `_templates/`, `_tools/`, `_archive/` | 재사용 지식, 도구, 템플릿, 스킬, 철학, 보관 프로젝트 |
 | 런타임 어댑터 계층 | `.claude/`, `.cursor/`, `.agents/` | AI 도구별 얇은 adapter |

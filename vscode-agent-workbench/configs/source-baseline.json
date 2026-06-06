@@ -1,0 +1,134 @@
+{
+	"schema_version": "2026-06-06",
+	"name": "agent-workspace-code-source-baseline",
+	"purpose": "Records the local VS Code hard-fork source baseline, replay patch, validation commands, and dependency risk notes.",
+	"reader_guide": {
+		"summary": "Use this file before changing vscode-agent-workbench/source so the hard-fork base, branch, patch, and validation expectations stay explicit.",
+		"how_to_read": [
+			"Confirm upstream.repository and upstream.commit before rebasing or refreshing the clone.",
+			"Confirm local_source.branch and local_source.commit before stacking new hard-fork commits.",
+			"Regenerate tracked_patch.path from the source commit after source changes.",
+			"Run validation.commands before considering a source slice ready."
+		],
+		"owner": "vscode-agent-workbench",
+		"last_reviewed": "2026-06-06",
+		"update_triggers": [
+			"The upstream VS Code source commit changes.",
+			"A new local source branch or hard-fork commit becomes the baseline.",
+			"The tracked patch path or patch generation command changes.",
+			"Validation commands, runtime versions, or dependency risk notes change.",
+			"Public distribution, signing, branding, or service endpoint gates are added."
+		]
+	},
+	"reference_links": [
+		{
+			"id": "vscode-repository",
+			"title": "microsoft/vscode",
+			"url": "https://github.com/microsoft/vscode",
+			"source_type": "official",
+			"used_for": ["source baseline", "license", "build entrypoint"],
+			"last_checked": "2026-06-06"
+		},
+		{
+			"id": "vscode-differences",
+			"title": "Differences between the repository and Visual Studio Code",
+			"url": "https://github.com/microsoft/vscode/wiki/Differences-between-the-repository-and-Visual-Studio-Code",
+			"source_type": "official",
+			"used_for": ["Code - OSS distribution boundary", "product identity boundary"],
+			"last_checked": "2026-06-06"
+		},
+		{
+			"id": "vscode-source-organization",
+			"title": "Source Code Organization",
+			"url": "https://github.com/microsoft/vscode/wiki/source-code-organization",
+			"source_type": "official",
+			"used_for": ["source architecture orientation", "extension/workbench boundary"],
+			"last_checked": "2026-06-06"
+		}
+	],
+	"structure_rules": [
+		{
+			"id": "source-clone-is-local",
+			"rule": "vscode-agent-workbench/source is a local nested clone and must stay ignored by the outer repository.",
+			"reason": "The full VS Code checkout, dependencies, and build outputs are too large for the workspace repository and already have their own Git history.",
+			"applies_to": ["local_source", "tracked_patch"]
+		},
+		{
+			"id": "patches-are-durable",
+			"rule": "Each completed source slice must be represented by a source commit and a replayable patch under vscode-agent-workbench/patches.",
+			"reason": "Patch tracking gives the outer workspace a durable artifact without vendoring the entire upstream repository.",
+			"applies_to": ["local_source.commit", "tracked_patch.path"]
+		}
+	],
+	"field_guide": [
+		{
+			"field": "upstream",
+			"meaning": "Pinned upstream source repository and commit used for this hard-fork slice.",
+			"required": true
+		},
+		{
+			"field": "local_source",
+			"meaning": "Local branch and commit inside the ignored source clone.",
+			"required": true
+		},
+		{
+			"field": "tracked_patch",
+			"meaning": "Outer-repository patch artifact generated from the local source commit.",
+			"required": true
+		},
+		{
+			"field": "validation",
+			"meaning": "Commands already run and expected smoke checks for the baseline.",
+			"required": true
+		}
+	],
+	"upstream": {
+		"repository": "https://github.com/microsoft/vscode.git",
+		"commit": "6a4e80f425c2eb9d4c528862efeed9f4743692e8",
+		"license": "MIT",
+		"source_version_reported_by_cli": "1.124.0"
+	},
+	"local_source": {
+		"path": "vscode-agent-workbench/source/",
+		"outer_git_ignored": true,
+		"branch": "awp/hard-fork-workspace-foundation",
+		"commit": "c7df3053c6da59dae9af42d5474a0d45dd3dc594",
+		"commit_subject": "feat: add agent workspace hard fork foundation"
+	},
+	"tracked_patch": {
+		"path": "vscode-agent-workbench/patches/0001-agent-workspace-hard-fork-foundation.patch",
+		"source_command": "git -C vscode-agent-workbench/source format-patch -1 --stdout > vscode-agent-workbench/patches/0001-agent-workspace-hard-fork-foundation.patch"
+	},
+	"implemented_surface": [
+		"Agent Workspace Code product identity in product.json",
+		"extensions/agent-workspace built-in extension",
+		"Agent Workspace activity bar container",
+		"Workspace Timeline view",
+		"agentWorkspace.platformRoot configuration",
+		"source extension compilation registration"
+	],
+	"runtime": {
+		"node_version": "24.15.0",
+		"node_install_scope": "nvm user-local runtime",
+		"dependency_install_scope": "vscode-agent-workbench/source/node_modules"
+	},
+	"validation": {
+		"commands": [
+			"npm run gulp compile-extensions",
+			"npm run compile-client",
+			"./scripts/code-cli.sh --version",
+			"./scripts/code.sh launch smoke"
+		],
+		"results": [
+			"compile-extensions completed with extensions/agent-workspace/tsconfig.json at 0 errors",
+			"compile-client completed with compilation at 0 errors",
+			"code-cli reported 1.124.0, Unknown commit, arm64",
+			"code.sh launched Agent Workspace Code.app; spawned GUI processes were cleaned up"
+		]
+	},
+	"risk_notes": [
+		"npm install reported existing upstream dependency audit warnings; npm audit fix was not run because it would alter upstream lockfiles outside this source slice.",
+		"zsh interactive startup emits an existing gitstatus/monitor warning unrelated to the hard-fork source changes.",
+		"Public redistribution readiness is not claimed; signing, branding, marketplace/service endpoints, and legal review remain separate gates."
+	]
+}

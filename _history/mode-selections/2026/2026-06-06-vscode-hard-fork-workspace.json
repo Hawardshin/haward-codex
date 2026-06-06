@@ -1,0 +1,23 @@
+{
+	"date": "2026-06-06",
+	"work_id": "2026-06-06-vscode-hard-fork-workspace",
+	"selected_work_mode": "ship_first",
+	"view_mode": "superadmin_developer",
+	"install_mode": "developer",
+	"reason": "The user explicitly requested a new hard-fork style implementation using microsoft/vscode source and asked not to defer needed setup. The safe response is a bounded but real source slice with clone, install, source edits, validation, patch tracking, and records.",
+	"web_first_intake_done": true,
+	"memory_bootstrap_simulated": true,
+	"resource_risk_occurred": true,
+	"installation_occurred": true,
+	"blocking_closeout_targets": [
+		"source_clone",
+		"source_commit",
+		"tracked_patch",
+		"requirements",
+		"spec_plan_tasks_validation_traceability",
+		"installation_record",
+		"resource_check",
+		"omission_check",
+		"outer_commit_and_push"
+	]
+}

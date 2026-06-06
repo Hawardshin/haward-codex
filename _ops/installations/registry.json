@@ -893,6 +893,38 @@
       "rollback_path": "node platform-desktop-app/scripts/configure-awp-path.mjs --remove; optional restore from /Users/shinjoungeun/.zprofile.awp-backup-20260606T124607Z and /Users/shinjoungeun/.zshrc.awp-backup-20260606T124607Z",
       "installation_record_path": "_history/installations/2026/2026-06-06-awp-zsh-path-registration.ko.md",
       "commit": "pending"
+    },
+    {
+      "id": "2026-06-06-vscode-hard-fork-node-and-deps",
+      "date": "2026-06-06",
+      "status": "installed",
+      "name": "Agent Workspace Code VS Code source setup",
+      "scope": "user-local-runtime-and-project-source-deps",
+      "owning_project": "vscode-agent-workbench",
+      "package_manager": "nvm+npm",
+      "install_command": "git clone --depth 1 --filter=blob:none https://github.com/microsoft/vscode.git vscode-agent-workbench/source; nvm install 24.15.0; nvm use 24.15.0; npm install",
+      "environment_path": "/Users/shinjoungeun/.nvm/versions/node/v24.15.0 and vscode-agent-workbench/source/node_modules/",
+      "dependency_record_paths": [
+        "vscode-agent-workbench/configs/source-baseline.json",
+        "vscode-agent-workbench/source/.nvmrc",
+        "vscode-agent-workbench/source/package.json",
+        "vscode-agent-workbench/source/package-lock.json"
+      ],
+      "version_or_lock_status": "Node 24.15.0 installed through user-local nvm; VS Code source dependency graph resolved from upstream package-lock.json inside the ignored source clone.",
+      "security_review": "Source dependency install is local to the VS Code clone. npm install reported existing upstream audit warnings across root and nested packages; npm audit fix was not run to avoid unreviewed upstream lockfile drift.",
+      "license_review": "microsoft/vscode Code - OSS is MIT licensed. Full redistribution branding, Marketplace/service endpoint, signing, and third-party dependency SBOM review remain separate gates before public distribution.",
+      "verification": [
+        "node --version after nvm use 24.15.0: v24.15.0",
+        "npm --version after nvm use 24.15.0: 11.12.1",
+        "npm install from vscode-agent-workbench/source: completed with upstream audit warnings",
+        "npm run gulp compile-extensions: passed",
+        "npm run compile-client: passed",
+        "./scripts/code-cli.sh --version: 1.124.0, Unknown commit, arm64",
+        "./scripts/code.sh launch smoke: Agent Workspace Code.app launched and spawned processes were cleaned up"
+      ],
+      "rollback_path": "Remove vscode-agent-workbench/source/node_modules and build outputs; delete vscode-agent-workbench/source if the local clone is no longer needed; optionally run nvm uninstall 24.15.0 if no other project depends on that Node runtime.",
+      "installation_record_path": "_history/installations/2026/2026-06-06-vscode-hard-fork-node-and-deps.ko.md",
+      "commit": "pending"
     }
   ]
 }

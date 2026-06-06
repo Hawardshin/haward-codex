@@ -1,0 +1,11 @@
+{
+	"date": "2026-06-06",
+	"work_id": "2026-06-06-vscode-hard-fork-workspace",
+	"status": "passed",
+	"coverage_summary": "The first executable hard-fork slice includes clone, source edit, source commit, patch, validation, installation audit, resource check, and outer project records.",
+	"required_targets": [
+		"_history/omission-checks/2026/2026-06-06-vscode-hard-fork-workspace.json",
+		"_history/resource-checks/2026/2026-06-06-vscode-hard-fork-workspace.json",
+		"_history/installations/2026/2026-06-06-vscode-hard-fork-node-and-deps.ko.md"
+	]
+}

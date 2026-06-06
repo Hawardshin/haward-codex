@@ -1,0 +1,52 @@
+{
+	"date": "2026-06-06",
+	"work_id": "2026-06-06-vscode-hard-fork-workspace",
+	"checked_items": [
+		{
+			"item": "web-first intake",
+			"status": "done",
+			"evidence": "_history/web-searches/2026/2026-06-06-vscode-hard-fork-workspace.ko.md"
+		},
+		{
+			"item": "source clone",
+			"status": "done",
+			"evidence": "vscode-agent-workbench/source"
+		},
+		{
+			"item": "direct source modification",
+			"status": "done",
+			"evidence": "source commit c7df3053c6da59dae9af42d5474a0d45dd3dc594"
+		},
+		{
+			"item": "tracked replay artifact",
+			"status": "done",
+			"evidence": "vscode-agent-workbench/patches/0001-agent-workspace-hard-fork-foundation.patch"
+		},
+		{
+			"item": "build verification",
+			"status": "done",
+			"evidence": "compile-extensions, compile-client, code-cli, GUI launch smoke"
+		},
+		{
+			"item": "installation audit",
+			"status": "done",
+			"evidence": "_history/installations/2026/2026-06-06-vscode-hard-fork-node-and-deps.ko.md"
+		},
+		{
+			"item": "outer repository tracking",
+			"status": "done",
+			"evidence": "registry, docs, specs, source-baseline, verify script"
+		}
+	],
+	"omissions": [
+		{
+			"item": "full product distribution readiness",
+			"reason": "separate signing, branding, marketplace/service endpoint, and legal review gate"
+		},
+		{
+			"item": "real platform runtime data in VS Code view",
+			"reason": "next source slice after hard-fork foundation is established"
+		}
+	],
+	"status": "passed"
+}

@@ -1,0 +1,24 @@
+{
+	"date": "2026-06-06",
+	"work_id": "2026-06-06-vscode-hard-fork-workspace",
+	"resource_risk_occurred": true,
+	"resources_touched": [
+		"large local git clone at vscode-agent-workbench/source",
+		"nvm Node 24.15.0 user-local runtime",
+		"VS Code source node_modules",
+		"VS Code compile outputs",
+		"Electron GUI launch smoke process",
+		"user data folders .agent-workspace-code-shared and code-oss-dev runtime state"
+	],
+	"cleanup": [
+		"Agent Workspace Code Electron processes were terminated after launch smoke.",
+		"No long-running Agent Workspace Code process remained after cleanup.",
+		"source/ is ignored by the outer repository."
+	],
+	"risk_notes": [
+		"Local clone is large and should not be committed to the outer workspace.",
+		"npm audit warnings remain for upstream dependency graph.",
+		"Public release would require clean machine, signing, and endpoint validation."
+	],
+	"status": "passed"
+}

@@ -9,12 +9,13 @@ AI assistant runtime adapters: [../assistant-runtimes/adapter-registry.json](../
 | `agent-platform/` | active | core-platform | Central agent-building platform project | Shared platform capabilities live here; domain experiments should become separate root projects |
 | `presentation-agent/` | active | domain-agent-project | Dedicated project for presentation assets, references, and skills | Presentation references, assets, conversion tools, and artifacts stay in this project |
 | `platform-desktop-app/` | active | installable-desktop-product | Installable desktop productization project | OS-specific install, distribution, update, privacy, secret review, and the Next.js renderer UI stay in this project |
+| `vscode-agent-workbench/` | active | source-hard-fork-workbench | Hard-fork workbench for adapting VS Code Code - OSS into Agent Workspace Code | Keep the full source clone local-only; track commits, patches, validation, and records in this project |
 
 ## Root Folder Logical Layers
 
 | Layer | Folders | Meaning |
 | --- | --- | --- |
-| Project plane | `agent-platform/`, `presentation-agent/`, `platform-desktop-app/` | Root projects with independent purpose and lifecycle |
+| Project plane | `agent-platform/`, `presentation-agent/`, `platform-desktop-app/`, `vscode-agent-workbench/` | Root projects with independent purpose and lifecycle |
 | Operations control plane | `_ops/`, `_docs/`, `_requirements/`, `_specs/`, `_history/` | Workflows, policies, requirements, specs, evaluations, and history |
 | Knowledge and reuse plane | `_philosophy/`, `_research/`, `_skills/`, `_templates/`, `_tools/`, `_archive/` | Reusable knowledge, tools, templates, skills, philosophy, and archived projects |
 | Runtime adapter plane | `.claude/`, `.cursor/`, `.agents/` | Thin adapters for AI coding tools |

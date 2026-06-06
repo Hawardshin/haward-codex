@@ -1,0 +1,10 @@
+{
+	"date": "2026-06-06",
+	"work_id": "2026-06-06-vscode-hard-fork-workspace",
+	"status": "passed",
+	"resource_risk_occurred": true,
+	"resource_check_targets": [
+		"_history/resource-checks/2026/2026-06-06-vscode-hard-fork-workspace.json"
+	],
+	"cleanup_verified": true
+}
