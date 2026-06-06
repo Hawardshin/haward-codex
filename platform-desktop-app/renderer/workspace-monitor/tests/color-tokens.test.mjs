@@ -95,6 +95,7 @@ test("light color tokens keep readable foreground contrast", () => {
   assertContrast(tokens, "status-info-text", "status-info-bg");
   assertContrast(tokens, "status-warning-text", "status-warning-bg");
   assertContrast(tokens, "status-danger-text", "status-danger-bg");
+  assertContrast(tokens, "control-selected-fg", "control-selected-bg");
   assertContrast(tokens, "action-primary-fg", "action-primary-bg");
 });
 
@@ -113,6 +114,7 @@ test("dark color tokens keep readable foreground contrast", () => {
   assertContrast(tokens, "status-info-text", "status-info-bg");
   assertContrast(tokens, "status-warning-text", "status-warning-bg");
   assertContrast(tokens, "status-danger-text", "status-danger-bg");
+  assertContrast(tokens, "control-selected-fg", "control-selected-bg");
   assertContrast(tokens, "action-primary-fg", "action-primary-bg");
 });
 

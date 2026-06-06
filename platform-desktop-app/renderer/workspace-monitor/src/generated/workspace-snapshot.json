@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T17:36:05.341Z",
+  "generatedAt": "2026-06-06T17:46:05.716Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 5,
@@ -17,7 +17,7 @@
     "webSearches": 11,
     "timingRecords": 11,
     "historyDays": 2,
-    "adminHistoryDocuments": 2870,
+    "adminHistoryDocuments": 2878,
     "adminHistoryDays": 8,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7861,6 +7861,230 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-07-dark-mode-contrast-fix-evaluator-input-json",
+      "path": "_history/evaluations/2026/2026-06-07-dark-mode-contrast-fix-evaluator-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 07 Dark Mode Contrast Fix Evaluator Input",
+      "excerpt": "{ \"initial instruction\": \"다크모드 색상 문제 해결해줘\", \"result summary\": \"Fixed the visible dark mode contrast issue on the terminal launcher count badge by using selected control color tokens and adding regression tests.\", \"work mode\": \"standard\", \"changed files\": \"platform desktop app/ren",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;다크모드 색상 문제 해결해줘&quot;, &quot;result summary&quot;: &quot;Fixed the visible dark mode contrast issue on the terminal launcher count badge by using selected control color tokens and adding regression tests.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/renderer/workspace monitor/app/globals.css&quot;, &quot;platform desktop app/renderer/workspa</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4579,
+      "updatedAt": "2026-06-06T17:44:19.618Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-07-dark-mode-contrast-fix-json",
+      "path": "_history/work-timings/2026/2026-06-07-dark-mode-contrast-fix.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 07 Dark Mode Contrast Fix",
+      "excerpt": "{ \"task id\": \"2026 06 07 dark mode contrast fix\", \"title\": \"Dark mode contrast fix\", \"date\": \"2026 06 07\", \"timezone\": \"Asia/Seoul\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"comp",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 07 dark mode contrast fix&quot;, &quot;title&quot;: &quot;Dark mode contrast fix&quot;, &quot;date&quot;: &quot;2026 06 07&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;bottleneck notes&quot;: &quot;WCAG and dark mode c</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1275,
+      "updatedAt": "2026-06-06T17:44:19.618Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+      "path": "_history/evaluations/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Dark Mode Contrast Fix",
+      "excerpt": "Evaluation: Dark Mode Contrast Fix 날짜: 2026 06 07 평가 다크 모드 기본 화면에서 계산된 색상 대비를 감사했고, 실제 낮은 대비 항목은 하단 터미널 런처 숫자 배지였다. 전체 강조색을 바꾸지 않고, 흰 텍스트가 올라가는 배지만 selected control 토큰으로 바꿔 영향 범위를 줄였다. 결과 터미널 런처 숫자 배지 배경을 accent primary 에서 control selected bg 로 변경. 배지 글자색을 text inverse 에서 control",
+      "html": "<p>Evaluation: Dark Mode Contrast Fix 날짜: 2026 06 07 평가 다크 모드 기본 화면에서 계산된 색상 대비를 감사했고, 실제 낮은 대비 항목은 하단 터미널 런처 숫자 배지였다. 전체 강조색을 바꾸지 않고, 흰 텍스트가 올라가는 배지만 selected control 토큰으로 바꿔 영향 범위를 줄였다. 결과 터미널 런처 숫자 배지 배경을 accent primary 에서 control selected bg 로 변경. 배지 글자색을 text inverse 에서 control selected fg 로 변경. light/dark 색상 토큰 테스트에 selected control 대비 검사 추가. UI 구조 테스트에 터</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1314,
+      "updatedAt": "2026-06-06T17:44:19.617Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Dark Mode Contrast Fix",
+      "excerpt": "Work Summary: Dark Mode Contrast Fix 날짜: 2026 06 07 요약 다크 모드에서 하단 터미널 런처 숫자 배지의 낮은 대비 문제를 수정했다. 배지는 이제 selected control 색상 토큰을 사용해 흰 텍스트 대비를 확보한다. 구현 globals.css 에서 .terminal drawer launcher strong 색상 토큰 변경. color tokens.test.mjs 에 selected control 대비 검사 추가. tool studio.test.mjs ",
+      "html": "<p>Work Summary: Dark Mode Contrast Fix 날짜: 2026 06 07 요약 다크 모드에서 하단 터미널 런처 숫자 배지의 낮은 대비 문제를 수정했다. 배지는 이제 selected control 색상 토큰을 사용해 흰 텍스트 대비를 확보한다. 구현 globals.css 에서 .terminal drawer launcher strong 색상 토큰 변경. color tokens.test.mjs 에 selected control 대비 검사 추가. tool studio.test.mjs 에 터미널 런처 배지 색상 contract 추가. 검증 상태 renderer check 통과. renderer test 90개 통과. Brows</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 800,
+      "updatedAt": "2026-06-06T17:44:19.617Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-dark-mode-contrast-fix-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-dark-mode-contrast-fix/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Dark Mode Contrast Fix",
+      "excerpt": "Traceability: Dark Mode Contrast Fix 날짜: 2026 06 07 요청 연결 사용자 요청: \"다크모드 색상 문제 해결해줘\" 선택한 slice: 다크 모드 터미널 런처 숫자 배지 대비 수정 요구사항 연결 요구사항: platform desktop app/docs/requirements/2026 06 07 dark mode contrast fix.ko.md 스펙: platform desktop app/specs/2026 06 07 dark mode contrast fix/sp",
+      "html": "<h1>Traceability: Dark Mode Contrast Fix</h1>\n<p>날짜: 2026-06-07</p>\n<h2>요청 연결</h2>\n<ul>\n<li>사용자 요청: &quot;다크모드 색상 문제 해결해줘&quot;</li>\n<li>선택한 slice: 다크 모드 터미널 런처 숫자 배지 대비 수정</li>\n</ul>\n<h2>요구사항 연결</h2>\n<ul>\n<li>요구사항: <code>platform-desktop-app/docs/requirements/2026-06-07-dark-mode-contrast-fix.ko.md</code></li>\n<li>스펙: <code>platform-desktop-app/specs/2026-06-07-dark-mode-contrast-fix/spec.ko.md</code></li>\n<li>계획: <code>platform-desktop-app/specs/2026-06-07-dark-mode-contrast-fix/plan.ko.md</code></li>\n<li>작업: <code>platform-desktop-app/specs/2026-06-07-dark-mode-contrast-fix/tasks.ko.md</code></li>\n<li>검증: <code>platform-desktop-app/specs/2026-06-07-dark-mode-contrast-fix/validation.ko.md</code></li>\n</ul>\n<h2>구현 연결</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/color-tokens.test.mjs</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n</ul>\n<h2>검증 연결</h2>\n<ul>\n<li>renderer check/test 통과.</li>\n<li>Browser dark smoke 통과.</li>\n<li>collect/build/platform/evaluation 기록 완료.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1058,
+      "updatedAt": "2026-06-06T17:44:19.617Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-dark-mode-contrast-fix-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-dark-mode-contrast-fix/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Dark Mode Contrast Fix",
+      "excerpt": "Validation: Dark Mode Contrast Fix 날짜: 2026 06 07 실행 결과 통과: corepack pnpm dir platform desktop app/renderer/workspace monitor run check . 통과: corepack pnpm dir platform desktop app/renderer/workspace monitor test 90 tests . 통과: corepack pnpm dir platform desktop app/renderer/work",
+      "html": "<h1>Validation: Dark Mode Contrast Fix</h1>\n<p>날짜: 2026-06-07</p>\n<h2>실행 결과</h2>\n<ul>\n<li>통과: <code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>.</li>\n<li>통과: <code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code> (<code>90</code> tests).</li>\n<li>통과: <code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code>.</li>\n<li>통과: <code>corepack pnpm -w run desktop:renderer:build</code>.</li>\n<li>통과: <code>corepack pnpm --dir platform-desktop-app run check</code>. 기존 public release signing/notarization/updater/clean-machine smoke gate는 public 배포 gate로 남았다.</li>\n</ul>\n<h2>Browser Smoke</h2>\n<ul>\n<li>다크 모드 root class: <code>desktop-app-root theme-system</code>.</li>\n<li>수정 전 낮은 대비: 터미널 런처 숫자 <code>0</code>, 흰 텍스트 on <code>rgb(10, 132, 255)</code>, 대비 <code>3.65:1</code>.</li>\n<li>수정 후 보이는 낮은 대비 텍스트 목록: <code>[]</code>.</li>\n<li>수정 후 터미널 런처 숫자 배지: 배경 <code>rgb(0, 93, 184)</code>, 텍스트 <code>rgb(255, 255, 255)</code>.</li>\n<li>Browser tab을 닫고 dev server 포트 <code>3232</code> no-listener를 확인했다.</li>\n</ul>\n<h2>남은 위험</h2>\n<ul>\n<li>이번 slice는 현재 보이는 기본 홈 화면과 터미널 런처 배지 문제를 대상으로 한다.</li>\n<li>전체 앱의 모든 깊은 화면을 색상별로 재감사하는 작업은 별도 넓은 범위의 다크 테마 audit가 필요하다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1313,
+      "updatedAt": "2026-06-06T17:44:19.617Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-dark-mode-contrast-fix-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-dark-mode-contrast-fix/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Dark Mode Contrast Fix",
+      "excerpt": "Tasks: Dark Mode Contrast Fix 날짜: 2026 06 07 작업 목록 x web first 참고 확인. x 다크 모드 화면 대비 측정. x 터미널 런처 배지 색상 수정. x 색상/구조 테스트 추가. x Browser dark smoke 확인. x renderer check/test 실행. x collect/build/platform check 완료. x omission/resource/evaluation 기록 완료.",
+      "html": "<h1>Tasks: Dark Mode Contrast Fix</h1>\n<p>날짜: 2026-06-07</p>\n<h2>작업 목록</h2>\n<ul>\n<li>[x] web-first 참고 확인.</li>\n<li>[x] 다크 모드 화면 대비 측정.</li>\n<li>[x] 터미널 런처 배지 색상 수정.</li>\n<li>[x] 색상/구조 테스트 추가.</li>\n<li>[x] Browser dark smoke 확인.</li>\n<li>[x] renderer check/test 실행.</li>\n<li>[x] collect/build/platform check 완료.</li>\n<li>[x] omission/resource/evaluation 기록 완료.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 387,
+      "updatedAt": "2026-06-06T17:44:19.616Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+      "path": "_history/request-traces/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Dark Mode Contrast Fix",
+      "excerpt": "Request Trace: Dark Mode Contrast Fix 날짜: 2026 06 07 요청 \"다크모드 색상 문제 해결해줘\" 산출물 CSS 수정: platform desktop app/renderer/workspace monitor/app/globals.css 테스트 수정: platform desktop app/renderer/workspace monitor/tests/color tokens.test.mjs , platform desktop app/renderer/workspace moni",
+      "html": "<p>Request Trace: Dark Mode Contrast Fix 날짜: 2026 06 07 요청 &quot;다크모드 색상 문제 해결해줘&quot; 산출물 CSS 수정: platform desktop app/renderer/workspace monitor/app/globals.css 테스트 수정: platform desktop app/renderer/workspace monitor/tests/color tokens.test.mjs , platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs 요구사항/스펙/검증 기록: platform desktop app/docs/requirem</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 738,
+      "updatedAt": "2026-06-06T17:43:37.833Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-plans-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+      "path": "_history/plans/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Plan Record: Dark Mode Contrast Fix",
+      "excerpt": "Plan Record: Dark Mode Contrast Fix 날짜: 2026 06 07 실행 계획 web first로 대비 기준 확인. Browser에서 다크 모드 computed style audit 실행. 낮은 대비 배지 색상 수정. 색상/구조 테스트 추가. build/platform/evaluator gate 통과 후 commit/push.",
+      "html": "<p>Plan Record: Dark Mode Contrast Fix 날짜: 2026 06 07 실행 계획 web first로 대비 기준 확인. Browser에서 다크 모드 computed style audit 실행. 낮은 대비 배지 색상 수정. 색상/구조 테스트 추가. build/platform/evaluator gate 통과 후 commit/push.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 301,
+      "updatedAt": "2026-06-06T17:43:37.832Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+      "path": "_history/user-requests/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: Dark Mode Contrast Fix",
+      "excerpt": "User Request: Dark Mode Contrast Fix 날짜: 2026 06 07 요약 사용자는 다크모드 색상 문제를 해결해 달라고 요청했다. 처리 방향 실제 다크 화면에서 낮은 대비 요소를 측정하고, 터미널 런처 숫자 배지를 대비용 selected control 토큰으로 수정했다.",
+      "html": "<p>User Request: Dark Mode Contrast Fix 날짜: 2026 06 07 요약 사용자는 다크모드 색상 문제를 해결해 달라고 요청했다. 처리 방향 실제 다크 화면에서 낮은 대비 요소를 측정하고, 터미널 런처 숫자 배지를 대비용 selected control 토큰으로 수정했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 320,
+      "updatedAt": "2026-06-06T17:43:37.832Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+      "path": "_history/web-searches/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Dark Mode Contrast Fix",
+      "excerpt": "Web Search: Dark Mode Contrast Fix 날짜: 2026 06 07 검색 WCAG 2.2 contrast minimum text user interface components official dark mode colors Material Design dark theme color system contrast official Apple Human Interface Guidelines Dark Mode color contrast official WCAG 2.2 Understand",
+      "html": "<p>Web Search: Dark Mode Contrast Fix 날짜: 2026 06 07 검색 WCAG 2.2 contrast minimum text user interface components official dark mode colors Material Design dark theme color system contrast official Apple Human Interface Guidelines Dark Mode color contrast official WCAG 2.2 Understanding contrast minimum 1.4.3 official W3C WCAG 2.2 non text contrast 1.4.11 offici</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1285,
+      "updatedAt": "2026-06-06T17:43:37.832Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-07-dark-mode-contrast-fix-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-07-dark-mode-contrast-fix.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Requirements: Dark Mode Contrast Fix",
+      "excerpt": "Requirements: Dark Mode Contrast Fix 날짜: 2026 06 07 요청 사용자가 다크모드 색상 문제 해결을 요청했다. 요구사항 다크 모드에서 실제 표시되는 텍스트와 배경의 낮은 대비를 찾아 수정한다. 작은 텍스트는 WCAG 2.2 1.4.3의 일반 텍스트 대비 기준인 4.5:1 이상을 목표로 한다. 다크 배경 위 강조색 텍스트로 쓰이는 accent primary 는 무리하게 어둡게 만들지 않는다. 흰 텍스트가 올라가는 선택/배지 배경은 control selected bg",
+      "html": "<h1>Requirements: Dark Mode Contrast Fix</h1>\n<p>날짜: 2026-06-07</p>\n<h2>요청</h2>\n<p>사용자가 다크모드 색상 문제 해결을 요청했다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>다크 모드에서 실제 표시되는 텍스트와 배경의 낮은 대비를 찾아 수정한다.</li>\n<li>작은 텍스트는 WCAG 2.2 1.4.3의 일반 텍스트 대비 기준인 4.5:1 이상을 목표로 한다.</li>\n<li>다크 배경 위 강조색 텍스트로 쓰이는 <code>--accent-primary</code>는 무리하게 어둡게 만들지 않는다.</li>\n<li>흰 텍스트가 올라가는 선택/배지 배경은 <code>--control-selected-bg</code> 계열을 사용한다.</li>\n<li>색상 토큰 테스트와 UI 구조 테스트로 재발을 막는다.</li>\n</ul>\n<h2>범위</h2>\n<ul>\n<li>포함: workspace monitor 다크 모드 터미널 런처 배지 대비, 색상 토큰 테스트, 관련 기록.</li>\n<li>제외: 전체 다크 테마 재디자인, 브랜드 팔레트 교체, 새 라이브러리 설치.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 887,
+      "updatedAt": "2026-06-06T17:43:37.831Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-dark-mode-contrast-fix-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-dark-mode-contrast-fix/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Dark Mode Contrast Fix",
+      "excerpt": "Plan: Dark Mode Contrast Fix 날짜: 2026 06 07 계획 1. web first로 WCAG/다크 모드 색상 기준 확인. 2. 현재 다크 모드 화면의 계산된 색상과 대비 측정. 3. 낮은 대비 요소를 가장 작은 CSS 변경으로 수정. 4. 색상 토큰 테스트와 UI contract 테스트 추가. 5. Browser smoke, renderer check/test, collect/build/platform check 실행. 6. omission/resource/evaluato",
+      "html": "<h1>Plan: Dark Mode Contrast Fix</h1>\n<p>날짜: 2026-06-07</p>\n<h2>계획</h2>\n<p>1. web-first로 WCAG/다크 모드 색상 기준 확인.</p>\n<p>2. 현재 다크 모드 화면의 계산된 색상과 대비 측정.</p>\n<p>3. 낮은 대비 요소를 가장 작은 CSS 변경으로 수정.</p>\n<p>4. 색상 토큰 테스트와 UI contract 테스트 추가.</p>\n<p>5. Browser smoke, renderer check/test, collect/build/platform check 실행.</p>\n<p>6. omission/resource/evaluator 기록 후 commit/push.</p>\n<h2>선택</h2>\n<ul>\n<li>CSS token 사용처 수정이 가장 작고 안전하다.</li>\n<li>전체 다크 팔레트 교체는 이번 요청보다 범위가 넓어 제외한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 605,
+      "updatedAt": "2026-06-06T17:43:37.831Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-07-dark-mode-contrast-fix-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-07-dark-mode-contrast-fix/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Dark Mode Contrast Fix",
+      "excerpt": "Spec: Dark Mode Contrast Fix 날짜: 2026 06 07 문제 다크 모드에서 .terminal drawer launcher strong 숫자 배지가 accent primary 배경과 text inverse 흰 텍스트를 사용했다. 시스템 다크 모드에서 계산된 색은 rgb 10, 132, 255 위 rgb 255, 255, 255 였고, 작은 숫자 텍스트의 대비는 3.65:1 로 4.5:1 기준을 넘지 못했다. 설계 터미널 런처 숫자 배지는 background: var contr",
+      "html": "<h1>Spec: Dark Mode Contrast Fix</h1>\n<p>날짜: 2026-06-07</p>\n<h2>문제</h2>\n<p>다크 모드에서 <code>.terminal-drawer-launcher strong</code> 숫자 배지가 <code>--accent-primary</code> 배경과 <code>--text-inverse</code> 흰 텍스트를 사용했다. 시스템 다크 모드에서 계산된 색은 <code>rgb(10, 132, 255)</code> 위 <code>rgb(255, 255, 255)</code>였고, 작은 숫자 텍스트의 대비는 <code>3.65:1</code>로 4.5:1 기준을 넘지 못했다.</p>\n<h2>설계</h2>\n<ul>\n<li>터미널 런처 숫자 배지는 <code>background: var(--control-selected-bg)</code>와 <code>color: var(--control-selected-fg)</code>를 사용한다.</li>\n<li><code>--accent-primary</code>는 다크 배경 위 강조 텍스트/라인으로 계속 사용할 수 있게 유지한다.</li>\n<li><code>color-tokens.test.mjs</code>에서 <code>control-selected-fg</code>와 <code>control-selected-bg</code> 대비를 light/dark 모두 검사한다.</li>\n<li><code>tool-studio.test.mjs</code>에서 터미널 런처 배지가 selected control 토큰을 쓰는 CSS contract를 검사한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>Browser dark smoke에서 보이는 낮은 대비 텍스트 목록이 비어야 한다.</li>\n<li>터미널 런처 숫자 배지 배경이 <code>rgb(0, 93, 184)</code>로 계산되어 흰 텍스트 대비가 4.5:1 이상이어야 한다.</li>\n<li>renderer check/test/build와 platform check가 통과해야 한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1205,
+      "updatedAt": "2026-06-06T17:43:37.831Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-07-sidebar-rail-scrollbar-fix-evaluator-input-json",
       "path": "_history/evaluations/2026/2026-06-07-sidebar-rail-scrollbar-fix-evaluator-input.json",
       "category": "evaluation",
@@ -10261,22 +10485,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-work-timings-2026-2026-06-06-terminal-agent-bridge-ko-md",
-      "path": "_history/work-timings/2026/2026-06-06-terminal-agent-bridge.ko.md",
-      "category": "work-timing",
-      "language": "ko",
-      "title": "작업 시간 기록: Terminal Agent Bridge",
-      "excerpt": "작업 시간 기록: Terminal Agent Bridge 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | xterm.js, portable pty, Tauri, VS Code terminal docs 확인 | | source inventory | 완료 | RuntimeTerminalDrawer, MonitorShell, Rust PTY/CLI commands 확인 | | 구현 | 완료 | bridge UI와 실패 전파 helper 추가 | | 검증 ",
-      "html": "<p>작업 시간 기록: Terminal Agent Bridge 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | xterm.js, portable pty, Tauri, VS Code terminal docs 확인 | | source inventory | 완료 | RuntimeTerminalDrawer, MonitorShell, Rust PTY/CLI commands 확인 | | 구현 | 완료 | bridge UI와 실패 전파 helper 추가 | | 검증 | 완료 | check/test/build/Browser smoke/final collect/platform check 완료 | | 기록 | 완</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 686,
-      "updatedAt": "2026-06-06T14:09:33.272Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-terminal-agent-bridge-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-terminal-agent-bridge/tasks.ko.md",
       "category": "project-spec",
@@ -10291,70 +10499,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-cli-pipeline-json",
-      "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-cli-pipeline.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Terminal Agent Bridge Cli Pipeline",
-      "excerpt": "{ \"pipeline id\": \"terminal agent bridge\", \"purpose\": \"Coordinate the UI action that connects native PTY terminal state before starting an agent CLI session.\", \"work mode\": \"standard\", \"risk level\": \"medium\", \"processes\": { \"process id\": \"terminal agent bridge action\", \"adapter id",
-      "html": "<p>{ &quot;pipeline id&quot;: &quot;terminal agent bridge&quot;, &quot;purpose&quot;: &quot;Coordinate the UI action that connects native PTY terminal state before starting an agent CLI session.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;risk level&quot;: &quot;medium&quot;, &quot;processes&quot;: { &quot;process id&quot;: &quot;terminal agent bridge action&quot;, &quot;adapter id&quot;: &quot;platform desktop app runtime&quot;, &quot;command&quot;: &quot;start terminal agent bridge&quot;, &quot;ar</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 3908,
-      "updatedAt": "2026-06-06T14:07:16.089Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-terminal-agent-bridge-ko-md",
-      "path": "_history/plans/2026/2026-06-06-terminal-agent-bridge.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "작업 계획: Terminal Agent Bridge",
-      "excerpt": "작업 계획: Terminal Agent Bridge 1. 공식 문서와 기존 PTY/CLI/agent 구현을 확인한다. 2. helper를 분리해 PTY/CLI session 실패가 action feedback에 전파되게 한다. 3. Desktop Runtime에 terminal agent bridge UI를 추가한다. 4. CSS와 테스트 계약을 보강한다. 5. Browser smoke, check/test/build, resource/CLI/omission/evaluation 검증을 수행한다. ",
-      "html": "<p>작업 계획: Terminal Agent Bridge 1. 공식 문서와 기존 PTY/CLI/agent 구현을 확인한다. 2. helper를 분리해 PTY/CLI session 실패가 action feedback에 전파되게 한다. 3. Desktop Runtime에 terminal agent bridge UI를 추가한다. 4. CSS와 테스트 계약을 보강한다. 5. Browser smoke, check/test/build, resource/CLI/omission/evaluation 검증을 수행한다. work mode: standard</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 416,
-      "updatedAt": "2026-06-06T14:07:16.088Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-terminal-agent-bridge-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-terminal-agent-bridge.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "User Request: Terminal Agent Bridge",
-      "excerpt": "User Request: Terminal Agent Bridge 날짜: 2026 06 06 요약: 터미널 연결 기능과 에이전트 기능이 분리되어 어색하지 않게, 실제 연결 실행 흐름으로 제대로 동작하게 개선해 달라는 요청. 범위 결정: 기존 native PTY와 CLI agent session command를 재사용해 Desktop Runtime 첫 화면에 연결 bridge를 추가한다.",
-      "html": "<p>User Request: Terminal Agent Bridge 날짜: 2026 06 06 요약: 터미널 연결 기능과 에이전트 기능이 분리되어 어색하지 않게, 실제 연결 실행 흐름으로 제대로 동작하게 개선해 달라는 요청. 범위 결정: 기존 native PTY와 CLI agent session command를 재사용해 Desktop Runtime 첫 화면에 연결 bridge를 추가한다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 376,
-      "updatedAt": "2026-06-06T14:07:16.088Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-terminal-agent-bridge-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-terminal-agent-bridge.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "Web Search: Terminal Agent Bridge",
-      "excerpt": "Web Search: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 검색 VS Code terminal shell integration API official documentation pty terminal extension API xterm.js attach addon official documentation terminal websocket pty node pty official GitHub pseudotermina",
-      "html": "<p>Web Search: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 검색 VS Code terminal shell integration API official documentation pty terminal extension API xterm.js attach addon official documentation terminal websocket pty node pty official GitHub pseudoterminal process documentation portable pty Rust crate official documentation pseudo te</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1465,
-      "updatedAt": "2026-06-06T14:07:16.088Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-terminal-agent-bridge-traceability-ko-md",
@@ -10419,54 +10563,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-intuitive-home-flow-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-intuitive-home-flow.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "최종 평가: Intuitive Home Flow",
-      "excerpt": "최종 평가: Intuitive Home Flow 날짜: 2026 06 06 평가: 사용자의 “직관적 흐름” 요구에 대해 홈 진입점에서 다음 행동이 보이도록 첫 slice를 구현했다. 충족: 준비, 선택, 실행, 평가 흐름이 홈 첫 화면에 표시된다. 실행 단계가 실제 Desktop Runtime handoff로 이어진다. 테스트, 빌드, 브라우저 smoke가 통과했다. 남은 범위: 전체 앱 IA 재정렬, 섹션별 세부 흐름 단순화, 설정 onboarding 재설계는 후속 slice로 남는다.",
-      "html": "<p>최종 평가: Intuitive Home Flow 날짜: 2026 06 06 평가: 사용자의 “직관적 흐름” 요구에 대해 홈 진입점에서 다음 행동이 보이도록 첫 slice를 구현했다. 충족: 준비, 선택, 실행, 평가 흐름이 홈 첫 화면에 표시된다. 실행 단계가 실제 Desktop Runtime handoff로 이어진다. 테스트, 빌드, 브라우저 smoke가 통과했다. 남은 범위: 전체 앱 IA 재정렬, 섹션별 세부 흐름 단순화, 설정 onboarding 재설계는 후속 slice로 남는다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 553,
-      "updatedAt": "2026-06-06T13:48:34.957Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-intuitive-home-flow-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-intuitive-home-flow.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: Intuitive Home Flow",
-      "excerpt": "요청 결과 추적: Intuitive Home Flow 날짜: 2026 06 06 요청: UI UX 개선, 직관적 흐름. 결과: home start flow 추가. 4개 data home flow step 추가. 홈 레이아웃 CSS와 responsive contract 추가. 테스트 계약 갱신. 검증: workspace monitor check/test 통과. desktop renderer build 통과. Browser smoke 통과.",
-      "html": "<p>요청 결과 추적: Intuitive Home Flow 날짜: 2026 06 06 요청: UI UX 개선, 직관적 흐름. 결과: home start flow 추가. 4개 data home flow step 추가. 홈 레이아웃 CSS와 responsive contract 추가. 테스트 계약 갱신. 검증: workspace monitor check/test 통과. desktop renderer build 통과. Browser smoke 통과.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 384,
-      "updatedAt": "2026-06-06T13:48:34.957Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-intuitive-home-flow-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-intuitive-home-flow.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: Intuitive Home Flow",
-      "excerpt": "작업 요약: Intuitive Home Flow 날짜: 2026 06 06 홈 첫 화면에 준비, 선택, 실행, 평가 4단계 start flow를 추가했다. 각 단계는 상태 label과 목적지를 갖고, 클릭하면 설정, 추천 intent, desktop runtime, eval 화면으로 이동한다. Browser smoke에서 1280x720 기준 overflow와 overlap이 없고 run 클릭 후 run work handoff가 표시됨을 확인했다.",
-      "html": "<p>작업 요약: Intuitive Home Flow 날짜: 2026 06 06 홈 첫 화면에 준비, 선택, 실행, 평가 4단계 start flow를 추가했다. 각 단계는 상태 label과 목적지를 갖고, 클릭하면 설정, 추천 intent, desktop runtime, eval 화면으로 이동한다. Browser smoke에서 1280x720 기준 overflow와 overlap이 없고 run 클릭 후 run work handoff가 표시됨을 확인했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 418,
-      "updatedAt": "2026-06-06T13:48:34.957Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-intuitive-home-flow-tasks-ko-md",
@@ -18163,137 +18259,41 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agent-detail-single-workspace-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agent-detail-single-workspace/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Agents Detail Single Workspace 스펙",
-      "excerpt": "Agents Detail Single Workspace 스펙 요구사항 REQ WM 037: 주요 섹션은 진단, 기록, 인벤토리, 생성기, 실행 보조 패널을 동시에 펼쳐 사용자를 압박하지 않는다. REQ WM 038: Agents 기본 화면은 에이전트 코어 채팅을 주 작업면으로 유지한다. REQ WM 039: 닫힌 보조 기능군과 선택되지 않은 heavy panel은 React tree에 붙지 않는다. REQ WM 061: Agents 세부 기능 disclosure는 한 번에 하나의 active wo",
-      "html": "<h1>Agents Detail Single Workspace 스펙</h1>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-WM-037: 주요 섹션은 진단, 기록, 인벤토리, 생성기, 실행 보조 패널을 동시에 펼쳐 사용자를 압박하지 않는다.</li>\n<li>REQ-WM-038: Agents 기본 화면은 에이전트 코어 채팅을 주 작업면으로 유지한다.</li>\n<li>REQ-WM-039: 닫힌 보조 기능군과 선택되지 않은 heavy panel은 React tree에 붙지 않는다.</li>\n<li>REQ-WM-061: Agents 세부 기능 disclosure는 한 번에 하나의 active workspace만 렌더링한다.</li>\n</ul>\n<h2>사용자 결과</h2>\n<ul>\n<li>세부 기능을 열면 7개 기능 선택기가 먼저 보인다.</li>\n<li>기본 선택은 <code>협업 / 3D 작업판</code>이다.</li>\n<li><code>생성기</code>, <code>블루프린트</code>, <code>학습</code>, <code>흐름</code>, <code>인벤토리</code>, <code>런타임</code>을 선택하면 해당 작업면만 보인다.</li>\n<li>선택되지 않은 3D canvas와 이전 기능 panel은 DOM에서 사라진다.</li>\n<li>390px 모바일에서는 선택기가 한 열로 접혀 텍스트가 깨지지 않는다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>Agents 기본 채팅 UI 재배치</li>\n<li>각 세부 panel 내부의 세부 기능 재설계</li>\n<li>새 UI 라이브러리 설치</li>\n<li>backend/runtime 동작 변경</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1137,
-      "updatedAt": "2026-06-05T01:00:04.610Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agent-collaboration-3d-characters-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agent-collaboration-3d-characters/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성",
-      "excerpt": "추적성 | 항목 | 연결 | | | | | 사용자 요청 | history/user requests/2026/2026 06 05 agent collaboration 3d characters.ko.md | | 요구사항 | REQ WM 038, REQ WM 039, REQ WM 060 | | 구현 | components/workbench/AgentCollaborationScene.tsx , components/MonitorShell.tsx , app/globals.css | | 테스트 | tests/t",
-      "html": "<h1>추적성</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>사용자 요청</td><td><code>_history/user-requests/2026/2026-06-05-agent-collaboration-3d-characters.ko.md</code></td></tr><tr><td>요구사항</td><td>REQ-WM-038, REQ-WM-039, REQ-WM-060</td></tr><tr><td>구현</td><td><code>components/workbench/AgentCollaborationScene.tsx</code>, <code>components/MonitorShell.tsx</code>, <code>app/globals.css</code></td></tr><tr><td>테스트</td><td><code>tests/tool-studio.test.mjs</code></td></tr><tr><td>설치 감사</td><td><code>_history/installations/2026/2026-06-05-workspace-monitor-react-three-fiber-drei.ko.md</code></td></tr><tr><td>검증</td><td><code>validation.ko.md</code>, <code>_history/evaluations/2026/2026-06-05-agent-collaboration-3d-characters.ko.md</code></td></tr><tr><td>스크린샷</td><td><code>artifacts/screenshots/2026-06-05-agent-collaboration-3d-desktop.png</code>, <code>artifacts/screenshots/2026-06-05-agent-collaboration-3d-mobile.png</code></td></tr></tbody></table>\n<h2>변경 의도</h2>\n<ul>\n<li>Agents 첫 화면은 채팅 UI로 유지한다.</li>\n<li>Collaboration의 협업 이해는 세부 기능 안에서 더 큰 3D 작업면으로 제공한다.</li>\n<li>새로운 3D 패키지는 exact version, 설치 감사, rollback 계획, pixel smoke로 추적한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1017,
-      "updatedAt": "2026-06-05T00:51:24.602Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agent-collaboration-3d-characters-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agent-collaboration-3d-characters/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증 기록",
-      "excerpt": "검증 기록 명령 corepack pnpm audit prod=false from platform desktop app/renderer/workspace monitor : 통과, no known vulnerabilities corepack pnpm filter workspace monitor test : 통과, 39 tests corepack pnpm filter workspace monitor exec tsc noEmit : 통과 corepack pnpm filter workspace monito",
-      "html": "<h1>검증 기록</h1>\n<h2>명령</h2>\n<ul>\n<li><code>corepack pnpm audit --prod=false</code> from <code>platform-desktop-app/renderer/workspace-monitor</code>: 통과, no known vulnerabilities</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 39 tests</li>\n<li><code>corepack pnpm --filter workspace-monitor exec tsc --noEmit</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: 통과, largest chunk 734,386 bytes, chunkCount 12</li>\n</ul>\n<h2>Browser/Playwright</h2>\n<ul>\n<li>in-app Browser desktop visual smoke:</li>\n<li>URL: <code>http://127.0.0.1:4187/?section=agents#section-agents</code></li>\n<li>닫힌 상태에서 <code>data-agent-collaboration-theater</code> count 0</li>\n<li>세부 기능 open 후 <code>canvas[data-agent-collaboration-3d-ready=&quot;true&quot;]</code> 확인</li>\n<li>body horizontal overflow 0</li>\n<li>Project-local Playwright pixel smoke:</li>\n<li>desktop 1280x820: scene 1102x552, canvas buffer 1100x550, coloredSamples 6/7, overflowX 0</li>\n<li>mobile 390x844: scene 306x300, canvas buffer 532x266, coloredSamples 6/7, overflowX 0</li>\n</ul>\n<h2>산출물</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-agent-collaboration-3d-desktop.png</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-agent-collaboration-3d-mobile.png</code></li>\n</ul>\n<h2>주의</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor audit --prod=false</code>는 pnpm 10.34.1에서 내부 recursive 옵션 조합 오류로 실패했다. 동일 audit은 workspace-monitor project cwd에서 <code>corepack pnpm audit --prod=false</code>로 통과했다.</li>\n<li><code>build:customer</code>는 고객 snapshot에서 내부 agent 데이터를 제거하므로 3D scene은 empty state를 표시한다. 내부 개발 snapshot <code>build</code>에서 실제 3D canvas를 검증했다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1847,
-      "updatedAt": "2026-06-05T00:51:24.602Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agent-collaboration-3d-characters-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agent-collaboration-3d-characters/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Agents 3D Collaboration Characters 계획",
-      "excerpt": "Agents 3D Collaboration Characters 계획 순서 1. 웹/패키지 metadata로 React Three Fiber, Drei, Three.js 호환성과 라이선스를 확인한다. 2. 설치 감사 초안을 만들고 프로젝트 로컬 pnpm 의존성으로 설치한다. 3. Agents 세부 Collaboration panel에만 mount되는 3D scene 컴포넌트를 추가한다. 4. CSS로 desktop/mobile scene 크기, dark surface foreground, HUD 위",
-      "html": "<h1>Agents 3D Collaboration Characters 계획</h1>\n<h2>순서</h2>\n<p>1. 웹/패키지 metadata로 React Three Fiber, Drei, Three.js 호환성과 라이선스를 확인한다.</p>\n<p>2. 설치 감사 초안을 만들고 프로젝트 로컬 pnpm 의존성으로 설치한다.</p>\n<p>3. Agents 세부 Collaboration panel에만 mount되는 3D scene 컴포넌트를 추가한다.</p>\n<p>4. CSS로 desktop/mobile scene 크기, dark surface foreground, HUD 위치를 안정화한다.</p>\n<p>5. 정적 테스트로 dependency, dynamic import, ready marker, canvas 옵션, responsive CSS를 고정한다.</p>\n<p>6. <code>test</code>, <code>check</code>, <code>build</code>, <code>build:customer</code>, <code>perf:budget</code>, in-app Browser, Playwright pixel smoke를 실행한다.</p>\n<p>7. 설치 감사, 요구사항, 스펙, 평가, 요청 추적을 업데이트한다.</p>\n<h2>선택한 구현</h2>\n<ul>\n<li>언어/런타임: TypeScript/React/Next.js</li>\n<li>대안 비교:</li>\n<li>직접 Three.js imperative scene: 이미 Tool Studio에 있으나 React component lifecycle과 data-driven scene 조합이 길어진다.</li>\n<li>React Three Fiber/Drei: React state/data 구조에 맞고 lazy component boundary를 만들기 쉬워 이번 Agents 장면에 선택한다.</li>\n<li>아키텍처 비교:</li>\n<li>Agents 기본 화면에 3D 장면 노출: 시각적으로 강하지만 REQ-WM-038의 채팅 우선 원칙과 충돌한다.</li>\n<li>Agents 세부 Collaboration surface에 3D 장면 배치: 기본 화면을 보존하면서 사용자가 협업 이해를 원할 때 큰 작업면을 제공하므로 선택한다.</li>\n</ul>\n<h2>리스크와 제어</h2>\n<ul>\n<li>WebGL chunk 증가: <code>next/dynamic</code>으로 세부 disclosure 내부에만 mount하고 <code>perf:budget</code>을 실행한다.</li>\n<li>모바일 깨짐: 390px Playwright smoke와 screenshot으로 확인한다.</li>\n<li>공개 snapshot 데이터 없음: canvas 대신 empty state를 보여준다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1757,
-      "updatedAt": "2026-06-05T00:51:24.601Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agent-collaboration-3d-characters-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agent-collaboration-3d-characters/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Agents 3D Collaboration Characters 스펙",
-      "excerpt": "Agents 3D Collaboration Characters 스펙 요구사항 REQ WM 038: Agents 기본 화면은 중앙 채팅과 하단 composer를 주 작업면으로 유지한다. REQ WM 039: 닫힌 Agents 세부 기능은 React 트리에 붙지 않아야 한다. REQ WM 060: Agents 세부 Collaboration 작업면은 React Three Fiber/Drei 기반 3D 캐릭터 협업 장면을 lazy mount하고, 390px 모바일에서도 nonblank canvas와 수평",
-      "html": "<h1>Agents 3D Collaboration Characters 스펙</h1>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-WM-038: Agents 기본 화면은 중앙 채팅과 하단 composer를 주 작업면으로 유지한다.</li>\n<li>REQ-WM-039: 닫힌 Agents 세부 기능은 React 트리에 붙지 않아야 한다.</li>\n<li>REQ-WM-060: Agents 세부 Collaboration 작업면은 React Three Fiber/Drei 기반 3D 캐릭터 협업 장면을 lazy mount하고, 390px 모바일에서도 nonblank canvas와 수평 overflow 0을 유지한다.</li>\n</ul>\n<h2>사용자 결과</h2>\n<ul>\n<li>사용자는 Agents 탭에 들어오면 기존처럼 에이전트 코어 채팅을 먼저 본다.</li>\n<li>사용자가 <code>에이전트 세부 기능 열기</code>를 연 뒤 Collaboration 영역으로 내려가면 에이전트들이 캐릭터로 작업 lane과 연결선을 중심으로 협업하는 3D 장면을 본다.</li>\n<li>3D 장면은 summary HUD, 작업 lane 카드, 기존 collaboration board를 함께 제공해 시각적 이해와 상세 데이터 확인을 분리한다.</li>\n<li>고객/공개 snapshot처럼 에이전트 데이터가 없으면 빈 상태를 표시하고 canvas를 강제로 만들지 않는다.</li>\n</ul>\n<h2>설계</h2>\n<ul>\n<li>새 컴포넌트: <code>components/workbench/AgentCollaborationScene.tsx</code></li>\n<li>오픈소스 의존성:</li>\n<li><code>@react-three/fiber@9.6.1</code></li>\n<li><code>@react-three/drei@10.7.7</code></li>\n<li>mount 경계:</li>\n<li><code>MonitorShell.tsx</code>에서 <code>next/dynamic(..., { ssr: false })</code>로 불러온다.</li>\n<li><code>agentDetailsOpen</code>이 true일 때만 Collaboration panel 안에 렌더링한다.</li>\n<li>렌더링:</li>\n<li><code>collaborationBoard.agents</code> 상위 8개를 3D character로 배치한다.</li>\n<li><code>collaborationBoard.lanes</code> 상위 5개를 task lane node로 배치한다.</li>\n<li><code>collaborationBoard.flows</code> 상위 16개를 line connection으로 표시한다.</li>\n<li>WebGL <code>preserveDrawingBuffer: true</code>로 smoke test pixel sampling을 가능하게 한다.</li>\n<li>반응형:</li>\n<li>desktop scene 높이는 <code>clamp(280px, 42vh, 520px)</code>를 사용한다.</li>\n<li>720px 이하에서는 scene 높이를 300px로 고정하고 HUD를 하단에 둔다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>실시간 multi-agent runtime streaming</li>\n<li>새 에이전트 데이터 모델 수집 로직 변경</li>\n<li>3D avatar asset 파일 다운로드</li>\n<li>기본 Agents 채팅 화면 위로 3D 장면을 올리는 것</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2179,
-      "updatedAt": "2026-06-05T00:51:24.601Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agent-collaboration-3d-characters-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agent-collaboration-3d-characters/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록",
-      "excerpt": "작업 목록 x 웹 검색 및 패키지 metadata 확인 x 설치 감사 초안 작성 x @react three/fiber 와 @react three/drei 프로젝트 로컬 설치 x Agents 3D collaboration scene 컴포넌트 추가 x MonitorShell dynamic import와 Collaboration panel 연결 x desktop/mobile CSS 추가 x 정적 테스트 추가 x pnpm audit , test , check , build , build:customer ",
-      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] 웹 검색 및 패키지 metadata 확인</li>\n<li>[x] 설치 감사 초안 작성</li>\n<li>[x] <code>@react-three/fiber</code>와 <code>@react-three/drei</code> 프로젝트 로컬 설치</li>\n<li>[x] Agents 3D collaboration scene 컴포넌트 추가</li>\n<li>[x] <code>MonitorShell</code> dynamic import와 Collaboration panel 연결</li>\n<li>[x] desktop/mobile CSS 추가</li>\n<li>[x] 정적 테스트 추가</li>\n<li>[x] <code>pnpm audit</code>, <code>test</code>, <code>check</code>, <code>build</code>, <code>build:customer</code>, <code>perf:budget</code> 실행</li>\n<li>[x] in-app Browser visual smoke</li>\n<li>[x] desktop/mobile Playwright canvas pixel smoke</li>\n<li>[x] 요구사항, 스펙, 설치 감사, 평가, 추적 기록 업데이트</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 607,
-      "updatedAt": "2026-06-05T00:51:24.601Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
       "date": "2026-06-07",
       "year": "2026",
-      "documentsCount": 67,
+      "documentsCount": 75,
       "categories": [
         {
           "category": "evaluation",
-          "count": 18
+          "count": 20
         },
         {
           "category": "plan",
-          "count": 8
+          "count": 9
         },
         {
           "category": "request-trace",
-          "count": 8
+          "count": 9
         },
         {
           "category": "user-request",
-          "count": 8
+          "count": 9
         },
         {
           "category": "web-search",
-          "count": 8
+          "count": 9
         },
         {
           "category": "work-summary",
-          "count": 8
+          "count": 9
         },
         {
           "category": "work-timing",
-          "count": 8
+          "count": 9
         },
         {
           "category": "daily-history",
@@ -18369,6 +18369,26 @@
           "title": "최종 평가: Core Feature Connections",
           "excerpt": "최종 평가: Core Feature Connections 날짜: 2026 06 07 평가 홈의 주요 기능 상세가 실제 작업 흐름으로 이어지도록 connection 버튼을 추가했다. 각 버튼은 단순 섹션 이동이 아니라 intent와 flow step 또는 Tool Studio mode request를 함께 설정한다. 충족 핵심 기능 상세에 세부 연결 버튼이 추가됐다. 에이전트, 툴, 실행, 평가, 파일, 실행/결정 가시성 경로가 연결됐다. Tool Studio 연결은 mode request를 갱신한",
           "updatedAt": "2026-06-06T15:57:51.949Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-07-dark-mode-contrast-fix-evaluator-input-json",
+          "path": "_history/evaluations/2026/2026-06-07-dark-mode-contrast-fix-evaluator-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 07 Dark Mode Contrast Fix Evaluator Input",
+          "excerpt": "{ \"initial instruction\": \"다크모드 색상 문제 해결해줘\", \"result summary\": \"Fixed the visible dark mode contrast issue on the terminal launcher count badge by using selected control color tokens and adding regression tests.\", \"work mode\": \"standard\", \"changed files\": \"platform desktop app/ren",
+          "updatedAt": "2026-06-06T17:44:19.618Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+          "path": "_history/evaluations/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "Evaluation: Dark Mode Contrast Fix",
+          "excerpt": "Evaluation: Dark Mode Contrast Fix 날짜: 2026 06 07 평가 다크 모드 기본 화면에서 계산된 색상 대비를 감사했고, 실제 낮은 대비 항목은 하단 터미널 런처 숫자 배지였다. 전체 강조색을 바꾸지 않고, 흰 텍스트가 올라가는 배지만 selected control 토큰으로 바꿔 영향 범위를 줄였다. 결과 터미널 런처 숫자 배지 배경을 accent primary 에서 control selected bg 로 변경. 배지 글자색을 text inverse 에서 control",
+          "updatedAt": "2026-06-06T17:44:19.617Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18522,6 +18542,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-plans-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+          "path": "_history/plans/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "Plan Record: Dark Mode Contrast Fix",
+          "excerpt": "Plan Record: Dark Mode Contrast Fix 날짜: 2026 06 07 실행 계획 web first로 대비 기준 확인. Browser에서 다크 모드 computed style audit 실행. 낮은 대비 배지 색상 수정. 색상/구조 테스트 추가. build/platform/evaluator gate 통과 후 commit/push.",
+          "updatedAt": "2026-06-06T17:43:37.832Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-plans-2026-2026-06-07-editable-runtime-prompts-ko-md",
           "path": "_history/plans/2026/2026-06-07-editable-runtime-prompts.ko.md",
           "category": "plan",
@@ -18599,6 +18629,16 @@
           "title": "Request Trace: Core Feature Connections",
           "excerpt": "Request Trace: Core Feature Connections 날짜: 2026 06 07 요청 \"주요 기능 연결\" 결과 홈 주요 기능 상세에 connection 버튼을 추가했다. connection은 실제 intent/flow step 또는 Tool Studio mode request를 호출한다. 산출물 platform desktop app/docs/requirements/2026 06 07 core feature connections.ko.md platform desktop app/sp",
           "updatedAt": "2026-06-06T15:57:51.949Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+          "path": "_history/request-traces/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "Request Trace: Dark Mode Contrast Fix",
+          "excerpt": "Request Trace: Dark Mode Contrast Fix 날짜: 2026 06 07 요청 \"다크모드 색상 문제 해결해줘\" 산출물 CSS 수정: platform desktop app/renderer/workspace monitor/app/globals.css 테스트 수정: platform desktop app/renderer/workspace monitor/tests/color tokens.test.mjs , platform desktop app/renderer/workspace moni",
+          "updatedAt": "2026-06-06T17:43:37.833Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18682,6 +18722,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-user-requests-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+          "path": "_history/user-requests/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "User Request: Dark Mode Contrast Fix",
+          "excerpt": "User Request: Dark Mode Contrast Fix 날짜: 2026 06 07 요약 사용자는 다크모드 색상 문제를 해결해 달라고 요청했다. 처리 방향 실제 다크 화면에서 낮은 대비 요소를 측정하고, 터미널 런처 숫자 배지를 대비용 selected control 토큰으로 수정했다.",
+          "updatedAt": "2026-06-06T17:43:37.832Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-07-editable-runtime-prompts-ko-md",
           "path": "_history/user-requests/2026/2026-06-07-editable-runtime-prompts.ko.md",
           "category": "user-request",
@@ -18759,6 +18809,16 @@
           "title": "Web Search: Core Feature Connections",
           "excerpt": "Web Search: Core Feature Connections 날짜: 2026 06 07 검색 VS Code workbench command palette activity bar navigation UX official documentation Tauri v2 frontend invoke command official documentation OpenAI Agents SDK manager agents as tools official documentation Claude Code subagent",
           "updatedAt": "2026-06-06T15:52:07.678Z",
+          "historyDate": "2026-06-07"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+          "path": "_history/web-searches/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "Web Search: Dark Mode Contrast Fix",
+          "excerpt": "Web Search: Dark Mode Contrast Fix 날짜: 2026 06 07 검색 WCAG 2.2 contrast minimum text user interface components official dark mode colors Material Design dark theme color system contrast official Apple Human Interface Guidelines Dark Mode color contrast official WCAG 2.2 Understand",
+          "updatedAt": "2026-06-06T17:43:37.832Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18842,6 +18902,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "Work Summary: Dark Mode Contrast Fix",
+          "excerpt": "Work Summary: Dark Mode Contrast Fix 날짜: 2026 06 07 요약 다크 모드에서 하단 터미널 런처 숫자 배지의 낮은 대비 문제를 수정했다. 배지는 이제 selected control 색상 토큰을 사용해 흰 텍스트 대비를 확보한다. 구현 globals.css 에서 .terminal drawer launcher strong 색상 토큰 변경. color tokens.test.mjs 에 selected control 대비 검사 추가. tool studio.test.mjs ",
+          "updatedAt": "2026-06-06T17:44:19.617Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-07-editable-runtime-prompts-ko-md",
           "path": "_history/work-summaries/2026/2026-06-07-editable-runtime-prompts.ko.md",
           "category": "work-summary",
@@ -18922,6 +18992,16 @@
           "historyDate": "2026-06-07"
         },
         {
+          "id": "history-work-timings-2026-2026-06-07-dark-mode-contrast-fix-json",
+          "path": "_history/work-timings/2026/2026-06-07-dark-mode-contrast-fix.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 07 Dark Mode Contrast Fix",
+          "excerpt": "{ \"task id\": \"2026 06 07 dark mode contrast fix\", \"title\": \"Dark mode contrast fix\", \"date\": \"2026 06 07\", \"timezone\": \"Asia/Seoul\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"comp",
+          "updatedAt": "2026-06-06T17:44:19.618Z",
+          "historyDate": "2026-06-07"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-07-editable-runtime-prompts-ko-md",
           "path": "_history/work-timings/2026/2026-06-07-editable-runtime-prompts.ko.md",
           "category": "work-timing",
@@ -18976,35 +19056,35 @@
     {
       "date": "2026-06-06",
       "year": "2026",
-      "documentsCount": 29,
+      "documentsCount": 21,
       "categories": [
         {
           "category": "evaluation",
-          "count": 8
+          "count": 6
         },
         {
           "category": "request-trace",
-          "count": 4
+          "count": 3
         },
         {
           "category": "work-summary",
-          "count": 4
+          "count": 3
         },
         {
           "category": "plan",
-          "count": 3
+          "count": 2
         },
         {
           "category": "user-request",
-          "count": 3
+          "count": 2
         },
         {
           "category": "web-search",
-          "count": 3
+          "count": 2
         },
         {
           "category": "work-timing",
-          "count": 3
+          "count": 2
         },
         {
           "category": "daily-history",
@@ -19020,16 +19100,6 @@
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
           "updatedAt": "2026-06-06T15:05:12.467Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-intuitive-home-flow-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-intuitive-home-flow.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "최종 평가: Intuitive Home Flow",
-          "excerpt": "최종 평가: Intuitive Home Flow 날짜: 2026 06 06 평가: 사용자의 “직관적 흐름” 요구에 대해 홈 진입점에서 다음 행동이 보이도록 첫 slice를 구현했다. 충족: 준비, 선택, 실행, 평가 흐름이 홈 첫 화면에 표시된다. 실행 단계가 실제 Desktop Runtime handoff로 이어진다. 테스트, 빌드, 브라우저 smoke가 통과했다. 남은 범위: 전체 앱 IA 재정렬, 섹션별 세부 흐름 단순화, 설정 onboarding 재설계는 후속 slice로 남는다.",
-          "updatedAt": "2026-06-06T13:48:34.957Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19073,16 +19143,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-cli-pipeline-json",
-          "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-cli-pipeline.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Terminal Agent Bridge Cli Pipeline",
-          "excerpt": "{ \"pipeline id\": \"terminal agent bridge\", \"purpose\": \"Coordinate the UI action that connects native PTY terminal state before starting an agent CLI session.\", \"work mode\": \"standard\", \"risk level\": \"medium\", \"processes\": { \"process id\": \"terminal agent bridge action\", \"adapter id",
-          "updatedAt": "2026-06-06T14:07:16.089Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-input-json",
           "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-input.json",
           "category": "evaluation",
@@ -19120,26 +19180,6 @@
           "title": "작업 계획: Subagent Tool Use",
           "excerpt": "작업 계획: Subagent Tool Use work mode: standard view mode: superadmin developer install mode: developer 1. 웹 우선 조사와 subagent tool discovery 수행. 2. existing manager as tools planner와 task run store 확인. 3. Tool Studio playbook에 subagent delegation loop 추가. 4. Tauri command run subagen",
           "updatedAt": "2026-06-06T14:29:52.988Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-plans-2026-2026-06-06-terminal-agent-bridge-ko-md",
-          "path": "_history/plans/2026/2026-06-06-terminal-agent-bridge.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "작업 계획: Terminal Agent Bridge",
-          "excerpt": "작업 계획: Terminal Agent Bridge 1. 공식 문서와 기존 PTY/CLI/agent 구현을 확인한다. 2. helper를 분리해 PTY/CLI session 실패가 action feedback에 전파되게 한다. 3. Desktop Runtime에 terminal agent bridge UI를 추가한다. 4. CSS와 테스트 계약을 보강한다. 5. Browser smoke, check/test/build, resource/CLI/omission/evaluation 검증을 수행한다. ",
-          "updatedAt": "2026-06-06T14:07:16.088Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-06-intuitive-home-flow-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-intuitive-home-flow.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: Intuitive Home Flow",
-          "excerpt": "요청 결과 추적: Intuitive Home Flow 날짜: 2026 06 06 요청: UI UX 개선, 직관적 흐름. 결과: home start flow 추가. 4개 data home flow step 추가. 홈 레이아웃 CSS와 responsive contract 추가. 테스트 계약 갱신. 검증: workspace monitor check/test 통과. desktop renderer build 통과. Browser smoke 통과.",
-          "updatedAt": "2026-06-06T13:48:34.957Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19193,16 +19233,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-terminal-agent-bridge-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-terminal-agent-bridge.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "User Request: Terminal Agent Bridge",
-          "excerpt": "User Request: Terminal Agent Bridge 날짜: 2026 06 06 요약: 터미널 연결 기능과 에이전트 기능이 분리되어 어색하지 않게, 실제 연결 실행 흐름으로 제대로 동작하게 개선해 달라는 요청. 범위 결정: 기존 native PTY와 CLI agent session command를 재사용해 Desktop Runtime 첫 화면에 연결 bridge를 추가한다.",
-          "updatedAt": "2026-06-06T14:07:16.088Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-subagent-live-execution-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-subagent-live-execution.ko.md",
           "category": "web-search",
@@ -19220,26 +19250,6 @@
           "title": "웹 검색 기록: Subagent Tool Use",
           "excerpt": "웹 검색 기록: Subagent Tool Use 날짜: 2026 06 06 질의 OpenAI Agents SDK handoffs tools agents subagents official documentation Anthropic Claude Code subagents tools official documentation VS Code Copilot coding agent subagents tools official documentation 확인한 출처 OpenAI Agents SDK Handoffs",
           "updatedAt": "2026-06-06T14:29:52.987Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-terminal-agent-bridge-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-terminal-agent-bridge.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "Web Search: Terminal Agent Bridge",
-          "excerpt": "Web Search: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 검색 VS Code terminal shell integration API official documentation pty terminal extension API xterm.js attach addon official documentation terminal websocket pty node pty official GitHub pseudotermina",
-          "updatedAt": "2026-06-06T14:07:16.088Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-06-intuitive-home-flow-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-intuitive-home-flow.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: Intuitive Home Flow",
-          "excerpt": "작업 요약: Intuitive Home Flow 날짜: 2026 06 06 홈 첫 화면에 준비, 선택, 실행, 평가 4단계 start flow를 추가했다. 각 단계는 상태 label과 목적지를 갖고, 클릭하면 설정, 추천 intent, desktop runtime, eval 화면으로 이동한다. Browser smoke에서 1280x720 기준 overflow와 overlap이 없고 run 클릭 후 run work handoff가 표시됨을 확인했다.",
-          "updatedAt": "2026-06-06T13:48:34.957Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19291,16 +19301,6 @@
           "excerpt": "작업 시간 기록: Subagent Tool Use 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | OpenAI/Claude/VS Code subagent 공식 문서 확인 | | subagent tool discovery | 완료 | multi agent v1.spawn agent/wait agent/close agent 확인 및 explorer 사용 | | source inventory | 완료 | manager tool, CLI entrypoint",
           "updatedAt": "2026-06-06T14:38:03.668Z",
           "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-06-terminal-agent-bridge-ko-md",
-          "path": "_history/work-timings/2026/2026-06-06-terminal-agent-bridge.ko.md",
-          "category": "work-timing",
-          "language": "ko",
-          "title": "작업 시간 기록: Terminal Agent Bridge",
-          "excerpt": "작업 시간 기록: Terminal Agent Bridge 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | xterm.js, portable pty, Tauri, VS Code terminal docs 확인 | | source inventory | 완료 | RuntimeTerminalDrawer, MonitorShell, Rust PTY/CLI commands 확인 | | 구현 | 완료 | bridge UI와 실패 전파 helper 추가 | | 검증 ",
-          "updatedAt": "2026-06-06T14:09:33.272Z",
-          "historyDate": "2026-06-06"
         }
       ]
     }
@@ -19311,36 +19311,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2870,
+      "documents": 2878,
       "days": 8,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1078
+          "count": 1080
         },
         {
           "category": "web-search",
-          "count": 447
+          "count": 448
         },
         {
           "category": "request-trace",
-          "count": 376
+          "count": 377
         },
         {
           "category": "plan",
-          "count": 375
+          "count": 376
         },
         {
           "category": "work-timing",
-          "count": 295
+          "count": 296
         },
         {
           "category": "user-request",
-          "count": 161
+          "count": 162
         },
         {
           "category": "work-summary",
-          "count": 128
+          "count": 129
         },
         {
           "category": "daily-history",
@@ -19351,7 +19351,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6873657,
+      "totalSourceBytes": 6884269,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19378,9 +19378,9 @@
       "monitorEvents": 64,
       "evidenceEvents": 37,
       "decisionEvents": 0,
-      "openSignals": 16,
+      "openSignals": 15,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T17:35:44.294Z",
+      "latestEventAt": "2026-06-06T17:44:19.618Z",
       "historyDays": 2
     },
     "lanes": [
@@ -19490,6 +19490,126 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-work-timings-2026-2026-06-07-dark-mode-contrast-fix-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 07 Dark Mode Contrast Fix",
+        "detail": "{ \"task id\": \"2026 06 07 dark mode contrast fix\", \"title\": \"Dark mode contrast fix\", \"date\": \"2026 06 07\", \"timezone\": \"Asia/Seoul\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"comp",
+        "path": "_history/work-timings/2026/2026-06-07-dark-mode-contrast-fix.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:44:19.618Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-07-dark-mode-contrast-fix-evaluator-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 07 Dark Mode Contrast Fix Evaluator Input",
+        "detail": "{ \"initial instruction\": \"다크모드 색상 문제 해결해줘\", \"result summary\": \"Fixed the visible dark mode contrast issue on the terminal launcher count badge by using selected control color tokens and adding regression tests.\", \"work mode\": \"standard\", \"changed files\": \"platform desktop app/ren",
+        "path": "_history/evaluations/2026/2026-06-07-dark-mode-contrast-fix-evaluator-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:44:19.618Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "Evaluation: Dark Mode Contrast Fix",
+        "detail": "Evaluation: Dark Mode Contrast Fix 날짜: 2026 06 07 평가 다크 모드 기본 화면에서 계산된 색상 대비를 감사했고, 실제 낮은 대비 항목은 하단 터미널 런처 숫자 배지였다. 전체 강조색을 바꾸지 않고, 흰 텍스트가 올라가는 배지만 selected control 토큰으로 바꿔 영향 범위를 줄였다. 결과 터미널 런처 숫자 배지 배경을 accent primary 에서 control selected bg 로 변경. 배지 글자색을 text inverse 에서 control",
+        "path": "_history/evaluations/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:44:19.617Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "Work Summary: Dark Mode Contrast Fix",
+        "detail": "Work Summary: Dark Mode Contrast Fix 날짜: 2026 06 07 요약 다크 모드에서 하단 터미널 런처 숫자 배지의 낮은 대비 문제를 수정했다. 배지는 이제 selected control 색상 토큰을 사용해 흰 텍스트 대비를 확보한다. 구현 globals.css 에서 .terminal drawer launcher strong 색상 토큰 변경. color tokens.test.mjs 에 selected control 대비 검사 추가. tool studio.test.mjs ",
+        "path": "_history/work-summaries/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:44:19.617Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Dark Mode Contrast Fix",
+        "detail": "Request Trace: Dark Mode Contrast Fix 날짜: 2026 06 07 요청 \"다크모드 색상 문제 해결해줘\" 산출물 CSS 수정: platform desktop app/renderer/workspace monitor/app/globals.css 테스트 수정: platform desktop app/renderer/workspace monitor/tests/color tokens.test.mjs , platform desktop app/renderer/workspace moni",
+        "path": "_history/request-traces/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:43:37.833Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Dark Mode Contrast Fix",
+        "detail": "Web Search: Dark Mode Contrast Fix 날짜: 2026 06 07 검색 WCAG 2.2 contrast minimum text user interface components official dark mode colors Material Design dark theme color system contrast official Apple Human Interface Guidelines Dark Mode color contrast official WCAG 2.2 Understand",
+        "path": "_history/web-searches/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:43:37.832Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "ready",
+        "title": "Plan Record: Dark Mode Contrast Fix",
+        "detail": "Plan Record: Dark Mode Contrast Fix 날짜: 2026 06 07 실행 계획 web first로 대비 기준 확인. Browser에서 다크 모드 computed style audit 실행. 낮은 대비 배지 색상 수정. 색상/구조 테스트 추가. build/platform/evaluator gate 통과 후 commit/push.",
+        "path": "_history/plans/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:43:37.832Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "User Request: Dark Mode Contrast Fix",
+        "detail": "User Request: Dark Mode Contrast Fix 날짜: 2026 06 07 요약 사용자는 다크모드 색상 문제를 해결해 달라고 요청했다. 처리 방향 실제 다크 화면에서 낮은 대비 요소를 측정하고, 터미널 런처 숫자 배지를 대비용 selected control 토큰으로 수정했다.",
+        "path": "_history/user-requests/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-07",
+        "timestamp": "2026-06-06T17:43:37.832Z"
+      },
       {
         "id": "history-history-evaluations-2026-2026-06-07-sidebar-rail-scrollbar-fix-evaluator-input-json",
         "sourceType": "history",
@@ -20809,126 +20929,6 @@
         "language": "unknown",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T14:09:58.345Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-terminal-agent-bridge-ko-md",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "작업 시간 기록: Terminal Agent Bridge",
-        "detail": "작업 시간 기록: Terminal Agent Bridge 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | xterm.js, portable pty, Tauri, VS Code terminal docs 확인 | | source inventory | 완료 | RuntimeTerminalDrawer, MonitorShell, Rust PTY/CLI commands 확인 | | 구현 | 완료 | bridge UI와 실패 전파 helper 추가 | | 검증 ",
-        "path": "_history/work-timings/2026/2026-06-06-terminal-agent-bridge.ko.md",
-        "category": "work-timing",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:09:33.272Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-terminal-agent-bridge-cli-pipeline-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "evaluation",
-        "title": "2026 06 06 Terminal Agent Bridge Cli Pipeline",
-        "detail": "{ \"pipeline id\": \"terminal agent bridge\", \"purpose\": \"Coordinate the UI action that connects native PTY terminal state before starting an agent CLI session.\", \"work mode\": \"standard\", \"risk level\": \"medium\", \"processes\": { \"process id\": \"terminal agent bridge action\", \"adapter id",
-        "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-cli-pipeline.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:07:16.089Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-terminal-agent-bridge-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "Web Search: Terminal Agent Bridge",
-        "detail": "Web Search: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 검색 VS Code terminal shell integration API official documentation pty terminal extension API xterm.js attach addon official documentation terminal websocket pty node pty official GitHub pseudotermina",
-        "path": "_history/web-searches/2026/2026-06-06-terminal-agent-bridge.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:07:16.088Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-terminal-agent-bridge-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "User Request: Terminal Agent Bridge",
-        "detail": "User Request: Terminal Agent Bridge 날짜: 2026 06 06 요약: 터미널 연결 기능과 에이전트 기능이 분리되어 어색하지 않게, 실제 연결 실행 흐름으로 제대로 동작하게 개선해 달라는 요청. 범위 결정: 기존 native PTY와 CLI agent session command를 재사용해 Desktop Runtime 첫 화면에 연결 bridge를 추가한다.",
-        "path": "_history/user-requests/2026/2026-06-06-terminal-agent-bridge.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:07:16.088Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-terminal-agent-bridge-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "needs_attention",
-        "title": "작업 계획: Terminal Agent Bridge",
-        "detail": "작업 계획: Terminal Agent Bridge 1. 공식 문서와 기존 PTY/CLI/agent 구현을 확인한다. 2. helper를 분리해 PTY/CLI session 실패가 action feedback에 전파되게 한다. 3. Desktop Runtime에 terminal agent bridge UI를 추가한다. 4. CSS와 테스트 계약을 보강한다. 5. Browser smoke, check/test/build, resource/CLI/omission/evaluation 검증을 수행한다. ",
-        "path": "_history/plans/2026/2026-06-06-terminal-agent-bridge.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:07:16.088Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-intuitive-home-flow-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "최종 평가: Intuitive Home Flow",
-        "detail": "최종 평가: Intuitive Home Flow 날짜: 2026 06 06 평가: 사용자의 “직관적 흐름” 요구에 대해 홈 진입점에서 다음 행동이 보이도록 첫 slice를 구현했다. 충족: 준비, 선택, 실행, 평가 흐름이 홈 첫 화면에 표시된다. 실행 단계가 실제 Desktop Runtime handoff로 이어진다. 테스트, 빌드, 브라우저 smoke가 통과했다. 남은 범위: 전체 앱 IA 재정렬, 섹션별 세부 흐름 단순화, 설정 onboarding 재설계는 후속 slice로 남는다.",
-        "path": "_history/evaluations/2026/2026-06-06-intuitive-home-flow.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:48:34.957Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-intuitive-home-flow-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "ready",
-        "title": "요청 결과 추적: Intuitive Home Flow",
-        "detail": "요청 결과 추적: Intuitive Home Flow 날짜: 2026 06 06 요청: UI UX 개선, 직관적 흐름. 결과: home start flow 추가. 4개 data home flow step 추가. 홈 레이아웃 CSS와 responsive contract 추가. 테스트 계약 갱신. 검증: workspace monitor check/test 통과. desktop renderer build 통과. Browser smoke 통과.",
-        "path": "_history/request-traces/2026/2026-06-06-intuitive-home-flow.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:48:34.957Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-intuitive-home-flow-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: Intuitive Home Flow",
-        "detail": "작업 요약: Intuitive Home Flow 날짜: 2026 06 06 홈 첫 화면에 준비, 선택, 실행, 평가 4단계 start flow를 추가했다. 각 단계는 상태 label과 목적지를 갖고, 클릭하면 설정, 추천 intent, desktop runtime, eval 화면으로 이동한다. Browser smoke에서 1280x720 기준 overflow와 overlap이 없고 run 클릭 후 run work handoff가 표시됨을 확인했다.",
-        "path": "_history/work-summaries/2026/2026-06-06-intuitive-home-flow.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T13:48:34.957Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -24289,7 +24289,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 90,
+        "documentCount": 91,
         "sourceFileCount": 14
       },
       {
@@ -28130,13 +28130,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 4178,
+      "sourceDocuments": 4192,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T17:35:44.294Z"
+      "latestInsightAt": "2026-06-06T17:44:19.618Z"
     },
     "inferenceStages": [
       {
@@ -28277,11 +28277,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1839,
+        "signalCount": 1843,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 521
+            "count": 524
           },
           {
             "category": "evaluation",
@@ -28289,7 +28289,7 @@
           },
           {
             "category": "web-search",
-            "count": 448
+            "count": 449
           },
           {
             "category": "plan",
@@ -28328,7 +28328,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T17:35:44.293Z"
+        "latestEvidenceAt": "2026-06-06T17:44:19.617Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28342,27 +28342,27 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1066,
+        "signalCount": 1073,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 516
+            "count": 518
           },
           {
             "category": "plan",
-            "count": 311
+            "count": 312
           },
           {
             "category": "request-trace",
-            "count": 97
+            "count": 98
           },
           {
             "category": "project-spec",
-            "count": 80
+            "count": 82
           },
           {
             "category": "work-summary",
-            "count": 26
+            "count": 27
           },
           {
             "category": "user-request",
@@ -28401,7 +28401,7 @@
           "작업 요약: 큰 범위 작업 미루지 않기",
           "작업 계획 기록: 사용자 의도 기반 기능 지도"
         ],
-        "latestEvidenceAt": "2026-06-06T17:34:42.067Z"
+        "latestEvidenceAt": "2026-06-06T17:44:19.618Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28488,23 +28488,23 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1645,
+        "signalCount": 1653,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 704
+            "count": 707
           },
           {
             "category": "evaluation",
-            "count": 549
+            "count": 551
           },
           {
             "category": "user-request",
-            "count": 113
+            "count": 114
           },
           {
             "category": "work-summary",
-            "count": 73
+            "count": 74
           },
           {
             "category": "request-trace",
@@ -28520,7 +28520,7 @@
           },
           {
             "category": "project-doc",
-            "count": 40
+            "count": 41
           },
           {
             "category": "work-timing",
@@ -28547,7 +28547,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T17:35:44.294Z"
+        "latestEvidenceAt": "2026-06-06T17:44:19.618Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28623,14 +28623,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 4178,
+      "sourceDocuments": 4192,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T17:35:44.294Z"
+      "latestInsightAt": "2026-06-06T17:44:19.618Z"
     },
     "operatingModel": [
       {
@@ -28688,19 +28688,19 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3406,
+        "signalCount": 3417,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1839
+            "signalCount": 1843
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1066
+            "signalCount": 1073
           },
           {
             "id": "build-closeout-gate",
@@ -28734,7 +28734,7 @@
           "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T17:35:44.293Z",
+        "latestEvidenceAt": "2026-06-06T17:44:19.618Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28832,19 +28832,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2711,
+        "signalCount": 2726,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1645
+            "signalCount": 1653
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1066
+            "signalCount": 1073
           }
         ],
         "missingPatternIds": [],
@@ -28872,7 +28872,7 @@
           "Work Plan: Subagent Live Execution",
           "요청 결과 추적: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T17:35:44.294Z",
+        "latestEvidenceAt": "2026-06-06T17:44:19.618Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28970,19 +28970,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2905,
+        "signalCount": 2916,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1066
+            "signalCount": 1073
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1839
+            "signalCount": 1843
           }
         ],
         "missingPatternIds": [],
@@ -29010,7 +29010,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T17:35:44.293Z",
+        "latestEvidenceAt": "2026-06-06T17:44:19.618Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -29039,7 +29039,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1958,
+        "signalCount": 1962,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -29051,7 +29051,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1839
+            "signalCount": 1843
           }
         ],
         "missingPatternIds": [],
@@ -29079,7 +29079,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T17:35:44.293Z",
+        "latestEvidenceAt": "2026-06-06T17:44:19.617Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

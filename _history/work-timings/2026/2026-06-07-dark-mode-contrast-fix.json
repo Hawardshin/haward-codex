@@ -1,0 +1,39 @@
+{
+  "task_id": "2026-06-07-dark-mode-contrast-fix",
+  "title": "Dark mode contrast fix",
+  "date": "2026-06-07",
+  "timezone": "Asia/Seoul",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "WCAG and dark mode color guidance checked before implementation."
+    },
+    {
+      "phase_id": "local_color_audit",
+      "label": "Local color audit",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Browser computed-style audit identified the terminal launcher badge contrast issue."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "CSS token usage and tests updated."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "measurement": "not_measured",
+      "bottleneck_notes": "Renderer check/test, Browser smoke, build, platform check, and evaluator passed."
+    }
+  ],
+  "bottleneck_notes": "Exact wall-clock phase durations were not measured."
+}

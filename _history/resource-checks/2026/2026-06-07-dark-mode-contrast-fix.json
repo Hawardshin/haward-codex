@@ -1,0 +1,93 @@
+{
+  "task": "Dark Mode Contrast Fix",
+  "work_mode": "standard",
+  "runtime_context": [
+    "CSS dark mode token usage",
+    "Next.js development server for Browser smoke",
+    "in-app Browser computed-style contrast audit",
+    "Node test runner",
+    "Next.js production build"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "accent-token-regression",
+      "category": "other",
+      "description": "Changing the global accent token could reduce dark-background text and line visibility elsewhere.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Keep --accent-primary unchanged and change only the terminal launcher badge to selected control tokens.",
+      "evidence": [
+        "terminal-drawer-launcher strong uses --control-selected-bg and --control-selected-fg",
+        "color token tests include control-selected contrast"
+      ]
+    },
+    {
+      "risk_id": "browser-smoke-server",
+      "category": "process",
+      "description": "Browser smoke uses a local Next.js development server that must be stopped.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Serve on dedicated local port 3232, close the Browser tab, stop the server, and verify no listener remains.",
+      "evidence": [
+        "Next dev served http://127.0.0.1:3232",
+        "Browser tab closed",
+        "lsof -nP -iTCP:3232 -sTCP:LISTEN returned no listener"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "dev-server-cleanup",
+      "resource": "Next.js dev server",
+      "create_path": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor dev --hostname 127.0.0.1 --port 3232",
+      "cleanup_path": "Ctrl-C and lsof no-listener check",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Server started on 127.0.0.1:3232",
+        "No listener remained on TCP 3232"
+      ]
+    },
+    {
+      "check_id": "browser-tab-cleanup",
+      "resource": "in-app Browser tab",
+      "create_path": "Open local app tab for dark mode smoke measurement",
+      "cleanup_path": "Close tab after measurement",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Browser tab closed"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "dark-mode-low-contrast-before",
+      "metric": "Dark mode visible text contrast before fix",
+      "tool": "in-app Browser",
+      "threshold": "pre-fix low contrast issue is captured with measured colors and ratio",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "terminal launcher badge ratio 3.65:1 before fix",
+        "background rgb(10, 132, 255), foreground rgb(255, 255, 255)"
+      ]
+    },
+    {
+      "check_id": "dark-mode-low-contrast-after",
+      "metric": "Dark mode visible text contrast after fix",
+      "tool": "in-app Browser",
+      "threshold": "visible low contrast list is empty",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "lowContrast: []",
+        "terminal launcher badge background rgb(0, 93, 184), foreground rgb(255, 255, 255)"
+      ]
+    }
+  ],
+  "notes": [
+    "No installation occurred.",
+    "No new CLI pipeline, worker, stream, native command, or persistent browser tab was created."
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "task": "Dark Mode Contrast Fix",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "identify-visible-dark-contrast-issue",
+      "description": "Identify the visible dark mode color issue with computed styles.",
+      "source": "user request: dark mode color issue",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "Browser audit found terminal launcher badge contrast 3.65:1"
+      ]
+    },
+    {
+      "item_id": "fix-badge-token",
+      "description": "Use selected control tokens for the badge background and foreground.",
+      "source": "requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        ".terminal-drawer-launcher strong uses --control-selected-bg/fg"
+      ]
+    },
+    {
+      "item_id": "test-contract",
+      "description": "Tests protect selected control contrast and terminal badge token usage.",
+      "source": "requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "color-tokens.test.mjs asserts control-selected contrast",
+        "tool-studio.test.mjs asserts terminal launcher badge token usage"
+      ]
+    },
+    {
+      "item_id": "browser-smoke",
+      "description": "Browser smoke verifies the visible dark mode issue is gone.",
+      "source": "requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "lowContrast: [] after fix"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-07-dark-mode-contrast-fix.ko.md",
+      "purpose": "Requirement record",
+      "required": true,
+      "status": "present"
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-07-dark-mode-contrast-fix/spec.ko.md",
+      "purpose": "Spec record",
+      "required": true,
+      "status": "present"
+    },
+    {
+      "path": "_history/web-searches/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+      "purpose": "Web-first search record",
+      "required": true,
+      "status": "present"
+    },
+    {
+      "path": "_history/resource-checks/2026/2026-06-07-dark-mode-contrast-fix.json",
+      "purpose": "Resource lifecycle record",
+      "required": true,
+      "status": "present"
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "renderer-static-contracts",
+      "description": "Renderer static checks and tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor run check passed",
+        "workspace-monitor test passed: 90 tests"
+      ]
+    },
+    {
+      "check_id": "browser-smoke",
+      "description": "Browser smoke verifies dark mode contrast fix.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "lowContrast: []",
+        "badge background rgb(0, 93, 184)"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "This slice does not audit every nested route and dialog in the app.",
+    "Packaged Tauri binary rendering is validated through Browser computed-style smoke and CSS tests, not packaged E2E."
+  ]
+}

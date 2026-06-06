@@ -13486,8 +13486,8 @@ h3 {
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: var(--accent-primary);
-  color: var(--text-inverse);
+  background: var(--control-selected-bg);
+  color: var(--control-selected-fg);
   font-size: var(--font-size-caption);
 }
 

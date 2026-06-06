@@ -1422,6 +1422,7 @@ test("Desktop runtime buttons expose contextual action feedback", () => {
   assert.match(css, /\.desktop-action-feedback-card\.status-running \{/);
   assert.match(css, /\.desktop-action-feedback-card\.status-failed \{/);
   assert.match(css, /\.desktop-command-grid button\.desktop-action-current/);
+  assert.match(css, /\.terminal-drawer-launcher strong \{[\s\S]*?background: var\(--control-selected-bg\);[\s\S]*?color: var\(--control-selected-fg\);/);
 });
 
 test("History documents use bounded admin previews instead of loading full records into the UI snapshot", () => {

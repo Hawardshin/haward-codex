@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-06T17:36:05.344Z",
+  "generatedAt": "2026-06-06T17:46:05.719Z",
   "summary": {
-    "documents": 2870,
+    "documents": 2878,
     "days": 8,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1078
+        "count": 1080
       },
       {
         "category": "web-search",
-        "count": 447
+        "count": 448
       },
       {
         "category": "request-trace",
-        "count": 376
+        "count": 377
       },
       {
         "category": "plan",
-        "count": 375
+        "count": 376
       },
       {
         "category": "work-timing",
-        "count": 295
+        "count": 296
       },
       {
         "category": "user-request",
-        "count": 161
+        "count": 162
       },
       {
         "category": "work-summary",
-        "count": 128
+        "count": 129
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 6873657,
+    "totalSourceBytes": 6884269,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,134 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-07-dark-mode-contrast-fix-evaluator-input-json",
+      "path": "_history/evaluations/2026/2026-06-07-dark-mode-contrast-fix-evaluator-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 07 Dark Mode Contrast Fix Evaluator Input",
+      "excerpt": "{ \"initial instruction\": \"다크모드 색상 문제 해결해줘\", \"result summary\": \"Fixed the visible dark mode contrast issue on the terminal launcher count badge by using selected control color tokens and adding regression tests.\", \"work mode\": \"standard\", \"changed files\": \"platform desktop app/ren",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;다크모드 색상 문제 해결해줘&quot;, &quot;result summary&quot;: &quot;Fixed the visible dark mode contrast issue on the terminal launcher count badge by using selected control color tokens and adding regression tests.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/renderer/workspace monitor/app/globals.css&quot;, &quot;platform desktop app/renderer/workspa</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4579,
+      "updatedAt": "2026-06-06T17:44:19.618Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-07-dark-mode-contrast-fix-json",
+      "path": "_history/work-timings/2026/2026-06-07-dark-mode-contrast-fix.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 07 Dark Mode Contrast Fix",
+      "excerpt": "{ \"task id\": \"2026 06 07 dark mode contrast fix\", \"title\": \"Dark mode contrast fix\", \"date\": \"2026 06 07\", \"timezone\": \"Asia/Seoul\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"comp",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 07 dark mode contrast fix&quot;, &quot;title&quot;: &quot;Dark mode contrast fix&quot;, &quot;date&quot;: &quot;2026 06 07&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;not measured&quot;, &quot;bottleneck notes&quot;: &quot;WCAG and dark mode c</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1275,
+      "updatedAt": "2026-06-06T17:44:19.618Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+      "path": "_history/evaluations/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Dark Mode Contrast Fix",
+      "excerpt": "Evaluation: Dark Mode Contrast Fix 날짜: 2026 06 07 평가 다크 모드 기본 화면에서 계산된 색상 대비를 감사했고, 실제 낮은 대비 항목은 하단 터미널 런처 숫자 배지였다. 전체 강조색을 바꾸지 않고, 흰 텍스트가 올라가는 배지만 selected control 토큰으로 바꿔 영향 범위를 줄였다. 결과 터미널 런처 숫자 배지 배경을 accent primary 에서 control selected bg 로 변경. 배지 글자색을 text inverse 에서 control",
+      "html": "<p>Evaluation: Dark Mode Contrast Fix 날짜: 2026 06 07 평가 다크 모드 기본 화면에서 계산된 색상 대비를 감사했고, 실제 낮은 대비 항목은 하단 터미널 런처 숫자 배지였다. 전체 강조색을 바꾸지 않고, 흰 텍스트가 올라가는 배지만 selected control 토큰으로 바꿔 영향 범위를 줄였다. 결과 터미널 런처 숫자 배지 배경을 accent primary 에서 control selected bg 로 변경. 배지 글자색을 text inverse 에서 control selected fg 로 변경. light/dark 색상 토큰 테스트에 selected control 대비 검사 추가. UI 구조 테스트에 터</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1314,
+      "updatedAt": "2026-06-06T17:44:19.617Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Dark Mode Contrast Fix",
+      "excerpt": "Work Summary: Dark Mode Contrast Fix 날짜: 2026 06 07 요약 다크 모드에서 하단 터미널 런처 숫자 배지의 낮은 대비 문제를 수정했다. 배지는 이제 selected control 색상 토큰을 사용해 흰 텍스트 대비를 확보한다. 구현 globals.css 에서 .terminal drawer launcher strong 색상 토큰 변경. color tokens.test.mjs 에 selected control 대비 검사 추가. tool studio.test.mjs ",
+      "html": "<p>Work Summary: Dark Mode Contrast Fix 날짜: 2026 06 07 요약 다크 모드에서 하단 터미널 런처 숫자 배지의 낮은 대비 문제를 수정했다. 배지는 이제 selected control 색상 토큰을 사용해 흰 텍스트 대비를 확보한다. 구현 globals.css 에서 .terminal drawer launcher strong 색상 토큰 변경. color tokens.test.mjs 에 selected control 대비 검사 추가. tool studio.test.mjs 에 터미널 런처 배지 색상 contract 추가. 검증 상태 renderer check 통과. renderer test 90개 통과. Brows</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 800,
+      "updatedAt": "2026-06-06T17:44:19.617Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+      "path": "_history/request-traces/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Dark Mode Contrast Fix",
+      "excerpt": "Request Trace: Dark Mode Contrast Fix 날짜: 2026 06 07 요청 \"다크모드 색상 문제 해결해줘\" 산출물 CSS 수정: platform desktop app/renderer/workspace monitor/app/globals.css 테스트 수정: platform desktop app/renderer/workspace monitor/tests/color tokens.test.mjs , platform desktop app/renderer/workspace moni",
+      "html": "<p>Request Trace: Dark Mode Contrast Fix 날짜: 2026 06 07 요청 &quot;다크모드 색상 문제 해결해줘&quot; 산출물 CSS 수정: platform desktop app/renderer/workspace monitor/app/globals.css 테스트 수정: platform desktop app/renderer/workspace monitor/tests/color tokens.test.mjs , platform desktop app/renderer/workspace monitor/tests/tool studio.test.mjs 요구사항/스펙/검증 기록: platform desktop app/docs/requirem</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 738,
+      "updatedAt": "2026-06-06T17:43:37.833Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-plans-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+      "path": "_history/plans/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Plan Record: Dark Mode Contrast Fix",
+      "excerpt": "Plan Record: Dark Mode Contrast Fix 날짜: 2026 06 07 실행 계획 web first로 대비 기준 확인. Browser에서 다크 모드 computed style audit 실행. 낮은 대비 배지 색상 수정. 색상/구조 테스트 추가. build/platform/evaluator gate 통과 후 commit/push.",
+      "html": "<p>Plan Record: Dark Mode Contrast Fix 날짜: 2026 06 07 실행 계획 web first로 대비 기준 확인. Browser에서 다크 모드 computed style audit 실행. 낮은 대비 배지 색상 수정. 색상/구조 테스트 추가. build/platform/evaluator gate 통과 후 commit/push.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 301,
+      "updatedAt": "2026-06-06T17:43:37.832Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+      "path": "_history/user-requests/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: Dark Mode Contrast Fix",
+      "excerpt": "User Request: Dark Mode Contrast Fix 날짜: 2026 06 07 요약 사용자는 다크모드 색상 문제를 해결해 달라고 요청했다. 처리 방향 실제 다크 화면에서 낮은 대비 요소를 측정하고, 터미널 런처 숫자 배지를 대비용 selected control 토큰으로 수정했다.",
+      "html": "<p>User Request: Dark Mode Contrast Fix 날짜: 2026 06 07 요약 사용자는 다크모드 색상 문제를 해결해 달라고 요청했다. 처리 방향 실제 다크 화면에서 낮은 대비 요소를 측정하고, 터미널 런처 숫자 배지를 대비용 selected control 토큰으로 수정했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 320,
+      "updatedAt": "2026-06-06T17:43:37.832Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-07-dark-mode-contrast-fix-ko-md",
+      "path": "_history/web-searches/2026/2026-06-07-dark-mode-contrast-fix.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Dark Mode Contrast Fix",
+      "excerpt": "Web Search: Dark Mode Contrast Fix 날짜: 2026 06 07 검색 WCAG 2.2 contrast minimum text user interface components official dark mode colors Material Design dark theme color system contrast official Apple Human Interface Guidelines Dark Mode color contrast official WCAG 2.2 Understand",
+      "html": "<p>Web Search: Dark Mode Contrast Fix 날짜: 2026 06 07 검색 WCAG 2.2 contrast minimum text user interface components official dark mode colors Material Design dark theme color system contrast official Apple Human Interface Guidelines Dark Mode color contrast official WCAG 2.2 Understanding contrast minimum 1.4.3 official W3C WCAG 2.2 non text contrast 1.4.11 offici</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1285,
+      "updatedAt": "2026-06-06T17:43:37.832Z",
+      "historyDate": "2026-06-07",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-07-sidebar-rail-scrollbar-fix-evaluator-input-json",
       "path": "_history/evaluations/2026/2026-06-07-sidebar-rail-scrollbar-fix-evaluator-input.json",
@@ -45987,35 +46115,35 @@
     {
       "date": "2026-06-07",
       "year": "2026",
-      "documentsCount": 67,
+      "documentsCount": 75,
       "categories": [
         {
           "category": "evaluation",
-          "count": 18
+          "count": 20
         },
         {
           "category": "plan",
-          "count": 8
+          "count": 9
         },
         {
           "category": "request-trace",
-          "count": 8
+          "count": 9
         },
         {
           "category": "user-request",
-          "count": 8
+          "count": 9
         },
         {
           "category": "web-search",
-          "count": 8
+          "count": 9
         },
         {
           "category": "work-summary",
-          "count": 8
+          "count": 9
         },
         {
           "category": "work-timing",
-          "count": 8
+          "count": 9
         },
         {
           "category": "daily-history",
