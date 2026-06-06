@@ -1,0 +1,105 @@
+{
+  "task": "Subagent Tool Use",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Tauri invoke bridge",
+    "Rust command wrapper",
+    "bounded Python subprocess",
+    "agent-platform manager-as-tools planner",
+    "runtime task-run store",
+    "workspace-monitor browser smoke"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "planner-subprocess-lifecycle",
+      "category": "process",
+      "description": "The desktop command starts a Python subprocess to run agent-platform planner code.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The command invokes only a fixed python -c entrypoint for agent_platform.cli plan-agent-orchestration, uses a bounded timeout/output limit, captures stdout/stderr, and does not create a background daemon.",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs",
+        "cargo check --manifest-path platform-desktop-app/src-tauri/Cargo.toml"
+      ]
+    },
+    {
+      "risk_id": "task-run-store-growth",
+      "category": "temporary_file",
+      "description": "Each plan creates input/record/stdout/stderr files.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The files are stored in the existing app-data task-run store and remain subject to existing list/prune/support bundle boundaries.",
+      "evidence": [
+        "persist_subagent_tool_plan_task_run",
+        "list_cli_task_run_records",
+        "prune_cli_task_run_records"
+      ]
+    },
+    {
+      "risk_id": "autonomous-subagent-execution",
+      "category": "process",
+      "description": "A planner button could be confused with autonomous subagent execution.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "This slice only generates the plan and persists the trace; it does not start autonomous subagent workers.",
+      "evidence": [
+        "run_subagent_tool_plan",
+        "platform-desktop-app/specs/2026-06-06-subagent-tool-use/spec.ko.md"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "fixed-command-boundary",
+      "resource": "Python planner subprocess",
+      "create_path": "run_subagent_tool_plan -> run_native_os_action_command",
+      "cleanup_path": "run_native_os_action_command waits for exit or kills on timeout",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib.rs"
+      ]
+    },
+    {
+      "check_id": "dev-server-cleanup",
+      "resource": "Browser smoke dev server",
+      "create_path": "next dev -H 127.0.0.1 -p 3224",
+      "cleanup_path": "stop session and verify port 3224 has no listener before close-out",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Sent Ctrl-C to next dev session 95915",
+        "lsof -nP -iTCP:3224 -sTCP:LISTEN returned no listener"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "rust-check",
+      "metric": "Rust type/lifetime/command compile",
+      "tool": "cargo check --manifest-path platform-desktop-app/src-tauri/Cargo.toml",
+      "threshold": "exit code 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "command output in current Codex run"
+      ]
+    },
+    {
+      "check_id": "browser-smoke",
+      "metric": "Tool Studio subagent playbook appears and detail panel updates",
+      "tool": "in-app Browser on http://127.0.0.1:3224/#section-tools",
+      "threshold": "subagent-delegation-loop visible, detail active, subagent tools and planner command visible",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Playwright smoke output in current Codex run",
+        "Desktop Runtime plan-subagents button visible and disabled in browser preview because Tauri runtime is unavailable"
+      ]
+    }
+  ],
+  "notes": [
+    "No installation occurred.",
+    "Browser preview cannot execute Tauri commands; packaged desktop runtime is required for live command smoke."
+  ]
+}

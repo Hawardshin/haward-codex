@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T14:08:49.078Z",
+  "generatedAt": "2026-06-06T14:38:49.890Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 5,
@@ -17,7 +17,7 @@
     "webSearches": 12,
     "timingRecords": 11,
     "historyDays": 1,
-    "adminHistoryDocuments": 2787,
+    "adminHistoryDocuments": 2795,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -40,8 +40,8 @@
     "fundamentalImprovementPrinciples": 6,
     "fundamentalImprovementPackages": 6,
     "fundamentalImprovementFitnessChecks": 4,
-    "toolUsagePatterns": 8,
-    "toolUsageValidationCommands": 26,
+    "toolUsagePatterns": 9,
+    "toolUsageValidationCommands": 31,
     "snapshotDocumentWorkers": 6,
     "snapshotSourceWorkers": 4,
     "structurePressurePoints": 5,
@@ -7861,6 +7861,118 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-06-subagent-tool-use-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-subagent-tool-use.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "최종 평가: Subagent Tool Use",
+      "excerpt": "최종 평가: Subagent Tool Use 날짜: 2026 06 06 평가 사용자의 agent/subagent use tool 요구에 대해, Tool Studio playbook과 Desktop Runtime native planner command를 구현했다. 이번 slice는 실제 subagent 실행 runtime이 아니라 manager as tools plan 생성과 task run persistence까지를 닫는다. 충족 subagent delegation loop가 Tool Studi",
+      "html": "<p>최종 평가: Subagent Tool Use 날짜: 2026 06 06 평가 사용자의 agent/subagent use tool 요구에 대해, Tool Studio playbook과 Desktop Runtime native planner command를 구현했다. 이번 slice는 실제 subagent 실행 runtime이 아니라 manager as tools plan 생성과 task run persistence까지를 닫는다. 충족 subagent delegation loop가 Tool Studio에 표시된다. Desktop Runtime에서 subagent tool plan 생성 버튼이 보인다. run subagent tool plan</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1022,
+      "updatedAt": "2026-06-06T14:38:03.668Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-subagent-tool-use-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-subagent-tool-use.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: Subagent Tool Use",
+      "excerpt": "요청 결과 추적: Subagent Tool Use 날짜: 2026 06 06 요청 agent/subagent를 사용할 수 있는 tool 기능. 결과 subagent delegation loop 를 Tool Studio source backed playbook에 추가. run subagent tool plan Tauri command 추가. command가 agent platform:plan agent orchestration 을 실행하고 task run record/stdout/stderr/inp",
+      "html": "<p>요청 결과 추적: Subagent Tool Use 날짜: 2026 06 06 요청 agent/subagent를 사용할 수 있는 tool 기능. 결과 subagent delegation loop 를 Tool Studio source backed playbook에 추가. run subagent tool plan Tauri command 추가. command가 agent platform:plan agent orchestration 을 실행하고 task run record/stdout/stderr/input을 app data runtime store에 저장. Desktop Runtime bridge에 서브에이전트 툴 계획 버튼과 최근 결과 요약</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1233,
+      "updatedAt": "2026-06-06T14:38:03.668Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-subagent-tool-use-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-subagent-tool-use.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: Subagent Tool Use",
+      "excerpt": "작업 요약: Subagent Tool Use 날짜: 2026 06 06 Tool Studio에 subagent delegation loop 와 subagent delegation ladder 를 추가했다. Desktop Runtime에는 서브에이전트 툴 계획 버튼을 추가했고, Tauri command run subagent tool plan 은 agent platform:plan agent orchestration 을 bounded Python subprocess로 실행해 결과를 runtime t",
+      "html": "<p>작업 요약: Subagent Tool Use 날짜: 2026 06 06 Tool Studio에 subagent delegation loop 와 subagent delegation ladder 를 추가했다. Desktop Runtime에는 서브에이전트 툴 계획 버튼을 추가했고, Tauri command run subagent tool plan 은 agent platform:plan agent orchestration 을 bounded Python subprocess로 실행해 결과를 runtime task run store에 저장한다. 검증 진행: config contract, plan agent orchestration, check age</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 718,
+      "updatedAt": "2026-06-06T14:38:03.668Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-subagent-tool-use-ko-md",
+      "path": "_history/work-timings/2026/2026-06-06-subagent-tool-use.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "작업 시간 기록: Subagent Tool Use",
+      "excerpt": "작업 시간 기록: Subagent Tool Use 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | OpenAI/Claude/VS Code subagent 공식 문서 확인 | | subagent tool discovery | 완료 | multi agent v1.spawn agent/wait agent/close agent 확인 및 explorer 사용 | | source inventory | 완료 | manager tool, CLI entrypoint",
+      "html": "<p>작업 시간 기록: Subagent Tool Use 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | OpenAI/Claude/VS Code subagent 공식 문서 확인 | | subagent tool discovery | 완료 | multi agent v1.spawn agent/wait agent/close agent 확인 및 explorer 사용 | | source inventory | 완료 | manager tool, CLI entrypoint, task run store, Tool Studio 확인 | | 구현 | 완료 | registry, Rust command, task run </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 846,
+      "updatedAt": "2026-06-06T14:38:03.668Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-subagent-tool-use-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-subagent-tool-use/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Subagent Tool Use",
+      "excerpt": "Tasks: Subagent Tool Use x web first intake 수행 x subagent tool discovery 수행 x 기존 manager as tools planner와 task run store 확인 x Tool Studio subagent delegation loop 추가 x Rust run subagent tool plan command 추가 x task run record/stdout/stderr/input persistence 추가 x Desktop Runtime b",
+      "html": "<h1>Tasks: Subagent Tool Use</h1>\n<ul>\n<li>[x] web-first intake 수행</li>\n<li>[x] subagent tool discovery 수행</li>\n<li>[x] 기존 manager-as-tools planner와 task-run store 확인</li>\n<li>[x] Tool Studio <code>subagent-delegation-loop</code> 추가</li>\n<li>[x] Rust <code>run_subagent_tool_plan</code> command 추가</li>\n<li>[x] task-run record/stdout/stderr/input persistence 추가</li>\n<li>[x] Desktop Runtime button/result UI 추가</li>\n<li>[x] static contract test 보강</li>\n<li>[x] Browser smoke 1차 수행</li>\n<li>[x] final validation, collect, evaluation</li>\n<li>[ ] commit, push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 497,
+      "updatedAt": "2026-06-06T14:38:03.667Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-subagent-tool-use-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-subagent-tool-use/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Subagent Tool Use",
+      "excerpt": "Validation: Subagent Tool Use 현재 완료 node e JSON.parse ... : registry JSON 파싱 통과 PYTHONPATH=src python3 m agent platform.cli check config contract ../platform desktop app/configs/tool usage integration registry.json : 통과 PYTHONPATH=src python3 m agent platform.cli plan agent orche",
+      "html": "<h1>Validation: Subagent Tool Use</h1>\n<h2>현재 완료</h2>\n<ul>\n<li><code>node -e JSON.parse(...)</code>: registry JSON 파싱 통과</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/tool-usage-integration-registry.json</code>: 통과</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json</code>: <code>ready_to_orchestrate</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code>: 통과, 90 tests</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm -w run desktop:renderer:build</code>: 통과, customer bundle audit 통과</li>\n<li><code>cargo check --manifest-path platform-desktop-app/src-tauri/Cargo.toml</code>: 통과</li>\n<li><code>cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml runtime_feature_map_groups_commands_by_native_capability</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code>: 통과, public release 관련 기존 외부 credential warning만 유지</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/resource-checks/2026/2026-06-06-subagent-tool-use.json</code>: <code>resource_ready</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/omission-checks/2026/2026-06-06-subagent-tool-use.json</code>: <code>coverage_ready</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-06-subagent-tool-use-input.json</code>: <code>ready_to_close</code></li>\n<li>Browser smoke:</li>\n<li><code>http://127.0.0.1:3224/#section-tools</code></li>\n<li><code>subagent-delegation-loop</code> button 표시 확인</li>\n<li>click 후 detail panel에 <code>multi_agent_v1.spawn_agent</code>, <code>multi_agent_v1.wait_agent</code>, <code>multi_agent_v1.close_agent</code>, <code>agent-platform:plan-agent-orchestration</code> 표시 확인</li>\n<li><code>http://127.0.0.1:3224/#section-desktop</code></li>\n<li><code>data-terminal-agent-action=&quot;plan-subagents&quot;</code> 버튼 표시, Tauri runtime 없는 browser preview에서는 disabled 확인</li>\n<li>dev server 종료 후 <code>lsof -nP -iTCP:3224 -sTCP:LISTEN</code> listener 없음 확인</li>\n</ul>\n<h2>남은 검증</h2>\n<ul>\n<li><code>git diff --check</code></li>\n<li>commit/push</li>\n</ul>\n<h2>알려진 경계</h2>\n<ul>\n<li>Browser preview는 Tauri command를 직접 실행할 수 없다. 실제 <code>run_subagent_tool_plan</code> 실행은 desktop runtime에서 수행된다.</li>\n<li>이번 slice는 subagent plan 생성과 task-run 기록까지이며, autonomous subagent execution runtime은 만들지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2623,
+      "updatedAt": "2026-06-06T14:38:03.667Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-subagent-tool-use-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-subagent-tool-use-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Subagent Tool Use Input",
+      "excerpt": "{ \"initial instruction\": \"에이전트 서브에이전트 사용 툴\", \"result summary\": \"Added a source backed subagent delegation playbook plus a Desktop Runtime Tauri command that runs the agent platform manager as tools planner and persists the result as a task run record.\", \"work mode\": \"standard\", \"",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;에이전트 서브에이전트 사용 툴&quot;, &quot;result summary&quot;: &quot;Added a source backed subagent delegation playbook plus a Desktop Runtime Tauri command that runs the agent platform manager as tools planner and persists the result as a task run record.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/configs/tool usage integration registry.js</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4840,
+      "updatedAt": "2026-06-06T14:37:32.711Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
       "id": "history-2026-2026-06-06-md",
       "path": "_history/2026/2026-06-06.md",
       "category": "daily-history",
@@ -7870,27 +7982,139 @@
       "html": "<p>2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large scope decomposition이 지연 수단이 아니라 첫 실행 slice와 continuation path를 만드는 실행 수단임을 명시했다. </p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 21985,
-      "updatedAt": "2026-06-06T14:07:16.091Z",
+      "sourceBytes": 22823,
+      "updatedAt": "2026-06-06T14:29:52.990Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/2026"
     },
     {
-      "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-input-json",
-      "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Terminal Agent Bridge Input",
-      "excerpt": "{ \"initial instruction\": \"터미널 연결 기능 에이전트 기능 똑바로.\", \"result summary\": \"Added a Desktop Runtime terminal agent bridge that gates agent CLI session start on native PTY readiness and exposes PTY, adapter, and agent session status in one flow.\", \"work mode\": \"standard\", \"changed files",
-      "html": "<p>{ &quot;initial instruction&quot;: &quot;터미널 연결 기능 에이전트 기능 똑바로.&quot;, &quot;result summary&quot;: &quot;Added a Desktop Runtime terminal agent bridge that gates agent CLI session start on native PTY readiness and exposes PTY, adapter, and agent session status in one flow.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx&quot;</p>",
+      "id": "history-plans-2026-2026-06-06-subagent-tool-use-ko-md",
+      "path": "_history/plans/2026/2026-06-06-subagent-tool-use.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "작업 계획: Subagent Tool Use",
+      "excerpt": "작업 계획: Subagent Tool Use work mode: standard view mode: superadmin developer install mode: developer 1. 웹 우선 조사와 subagent tool discovery 수행. 2. existing manager as tools planner와 task run store 확인. 3. Tool Studio playbook에 subagent delegation loop 추가. 4. Tauri command run subagen",
+      "html": "<p>작업 계획: Subagent Tool Use work mode: standard view mode: superadmin developer install mode: developer 1. 웹 우선 조사와 subagent tool discovery 수행. 2. existing manager as tools planner와 task run store 확인. 3. Tool Studio playbook에 subagent delegation loop 추가. 4. Tauri command run subagent tool plan 추가. 5. Desktop Runtime UI에서 planner command 실행 버튼과 결과 요약 표시. 6. conf</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 3779,
-      "updatedAt": "2026-06-06T14:07:16.091Z",
+      "sourceBytes": 546,
+      "updatedAt": "2026-06-06T14:29:52.988Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-subagent-tool-use-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-subagent-tool-use.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: Subagent Tool Use",
+      "excerpt": "사용자 요청 요약: Subagent Tool Use 날짜: 2026 06 06 사용자는 agent/subagent를 사용할 수 있는 tool 기능을 요구했다. 해석한 핵심은 agent가 subagent를 도구처럼 위임하고, 그 사용 방식이 플랫폼에 보이며, 실행 가능한 최소 native 경로가 있어야 한다는 것이다. 이번 범위는 Tool Studio playbook, Desktop Runtime 실행 버튼, Tauri planner command, task run 기록까지다. 실제 subagent",
+      "html": "<p>사용자 요청 요약: Subagent Tool Use 날짜: 2026 06 06 사용자는 agent/subagent를 사용할 수 있는 tool 기능을 요구했다. 해석한 핵심은 agent가 subagent를 도구처럼 위임하고, 그 사용 방식이 플랫폼에 보이며, 실행 가능한 최소 native 경로가 있어야 한다는 것이다. 이번 범위는 Tool Studio playbook, Desktop Runtime 실행 버튼, Tauri planner command, task run 기록까지다. 실제 subagent 병렬 실행 runtime은 다음 slice로 남긴다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 520,
+      "updatedAt": "2026-06-06T14:29:52.988Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-subagent-tool-use-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-subagent-tool-use.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: Subagent Tool Use",
+      "excerpt": "웹 검색 기록: Subagent Tool Use 날짜: 2026 06 06 질의 OpenAI Agents SDK handoffs tools agents subagents official documentation Anthropic Claude Code subagents tools official documentation VS Code Copilot coding agent subagents tools official documentation 확인한 출처 OpenAI Agents SDK Handoffs",
+      "html": "<p>웹 검색 기록: Subagent Tool Use 날짜: 2026 06 06 질의 OpenAI Agents SDK handoffs tools agents subagents official documentation Anthropic Claude Code subagents tools official documentation VS Code Copilot coding agent subagents tools official documentation 확인한 출처 OpenAI Agents SDK Handoffs: https://openai.github.io/openai agents python/handoffs/ OpenAI Agents SDK Agen</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1343,
+      "updatedAt": "2026-06-06T14:29:52.987Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-subagent-tool-use-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-subagent-tool-use/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Subagent Tool Use",
+      "excerpt": "Traceability: Subagent Tool Use | 요구 | 구현 | 검증 | | | | | | 서브에이전트 사용 툴이 보여야 함 | tool usage integration registry.json 의 subagent delegation loop | Tool Studio test, Browser smoke | | 실제 실행 경로가 있어야 함 | run subagent tool plan Tauri command | cargo check , static test | | manager as ",
+      "html": "<h1>Traceability: Subagent Tool Use</h1>\n<table><thead><tr><th>요구</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>서브에이전트 사용 툴이 보여야 함</td><td><code>tool-usage-integration-registry.json</code>의 <code>subagent-delegation-loop</code></td><td>Tool Studio test, Browser smoke</td></tr><tr><td>실제 실행 경로가 있어야 함</td><td><code>run_subagent_tool_plan</code> Tauri command</td><td><code>cargo check</code>, static test</td></tr><tr><td>manager-as-tools 구조 사용</td><td><code>agent-platform:plan-agent-orchestration</code> 고정 실행</td><td><code>plan-agent-orchestration</code> ready</td></tr><tr><td>결과 기록</td><td>task-run record/stdout/stderr/input persistence</td><td>task-run store code path, Rust check</td></tr><tr><td>임의 shell/설치 금지</td><td>Python planner entrypoint만 실행, 새 dependency 없음</td><td>config/resource/evaluation 기록</td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 715,
+      "updatedAt": "2026-06-06T14:29:52.987Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-subagent-tool-use-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-subagent-tool-use/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Subagent Tool Use",
+      "excerpt": "Plan: Subagent Tool Use 1. 웹 우선 조사로 subagent/handoff/tool 공식 기준을 확인한다. 2. agent platform 의 manager as tools planner와 desktop task run store를 확인한다. 3. Tool Studio registry에 subagent delegation playbook과 ladder를 추가한다. 4. Rust command run subagent tool plan 과 task run persistence를 추",
+      "html": "<h1>Plan: Subagent Tool Use</h1>\n<p>1. 웹 우선 조사로 subagent/handoff/tool 공식 기준을 확인한다.</p>\n<p>2. <code>agent-platform</code>의 manager-as-tools planner와 desktop task-run store를 확인한다.</p>\n<p>3. Tool Studio registry에 subagent delegation playbook과 ladder를 추가한다.</p>\n<p>4. Rust command <code>run_subagent_tool_plan</code>과 task-run persistence를 추가한다.</p>\n<p>5. Desktop Runtime 버튼과 최근 결과 요약을 추가한다.</p>\n<p>6. static tests, config contract, orchestration planner, Rust/TS checks, Browser smoke를 실행한다.</p>\n<p>7. omission/resource/evaluation 기록 후 commit/push한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 593,
+      "updatedAt": "2026-06-06T14:29:52.985Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-subagent-tool-use-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-subagent-tool-use/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Subagent Tool Use",
+      "excerpt": "Spec: Subagent Tool Use 날짜: 2026 06 06 목적 Desktop Runtime과 Tool Studio에서 agent/subagent tool 사용을 눈에 보이는 기능으로 만든다. 먼저 manager as tools plan을 생성하고 기록하는 bounded command를 제공한다. 동작 1. Tool Studio registry에 subagent delegation loop 와 subagent delegation ladder 를 추가한다. 2. Rust/Tauri com",
+      "html": "<h1>Spec: Subagent Tool Use</h1>\n<p>날짜: 2026-06-06</p>\n<h2>목적</h2>\n<p>Desktop Runtime과 Tool Studio에서 agent/subagent tool 사용을 눈에 보이는 기능으로 만든다. 먼저 manager-as-tools plan을 생성하고 기록하는 bounded command를 제공한다.</p>\n<h2>동작</h2>\n<p>1. Tool Studio registry에 <code>subagent-delegation-loop</code>와 <code>subagent-delegation-ladder</code>를 추가한다.</p>\n<p>2. Rust/Tauri command <code>run_subagent_tool_plan</code>을 추가한다.</p>\n<p>3. command는 runtime task-run directory에 <code>input.json</code>을 작성한다.</p>\n<p>4. command는 <code>python3 -c ... agent_platform.cli plan-agent-orchestration &lt;input&gt;</code>만 실행한다.</p>\n<p>5. stdout plan JSON에서 <code>status</code>, <code>subagent_tools</code>를 추출해 renderer에 반환한다.</p>\n<p>6. record/stdout/stderr/input path를 task-run store에 저장한다.</p>\n<p>7. Desktop Runtime bridge는 <code>서브에이전트 툴 계획</code> 버튼과 최근 결과 요약을 표시한다.</p>\n<h2>안전 경계</h2>\n<ul>\n<li>command cwd는 workspace 안의 <code>agent-platform/</code>로 제한한다.</li>\n<li>input/output은 app-data runtime store에 저장한다.</li>\n<li>Python 실행은 planner entrypoint에 고정하고 autonomous subagent execution은 하지 않는다.</li>\n<li>Browser preview에서는 Tauri command가 실행되지 않으므로 버튼은 runtime availability에 의해 비활성된다.</li>\n</ul>\n<h2>참고</h2>\n<ul>\n<li>OpenAI Agents SDK handoffs: https://openai.github.io/openai-agents-python/handoffs/</li>\n<li>Claude Code subagents: https://docs.claude.com/ko/docs/claude-code/sub-agents</li>\n<li>VS Code Copilot subagents: https://code.visualstudio.com/docs/copilot/agents/subagents</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1527,
+      "updatedAt": "2026-06-06T14:29:52.985Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-subagent-tool-use-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-subagent-tool-use.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: Subagent Tool Use",
+      "excerpt": "요구사항: Subagent Tool Use 날짜: 2026 06 06 요구 사용자는 에이전트가 서브에이전트를 도구처럼 사용할 수 있는 기능을 요구했다. 설명이나 추후 계획만으로 두지 않고, 플랫폼 화면과 native runtime에서 실행 가능한 최소 경로를 제공해야 한다. 수용 기준 Tool Studio는 subagent delegation loop 를 source backed Agent Tool Playbook으로 보여준다. Desktop Runtime은 run subagent tool pla",
+      "html": "<h1>요구사항: Subagent Tool Use</h1>\n<p>날짜: 2026-06-06</p>\n<h2>요구</h2>\n<p>사용자는 에이전트가 서브에이전트를 도구처럼 사용할 수 있는 기능을 요구했다. 설명이나 추후 계획만으로 두지 않고, 플랫폼 화면과 native runtime에서 실행 가능한 최소 경로를 제공해야 한다.</p>\n<h2>수용 기준</h2>\n<ul>\n<li>Tool Studio는 <code>subagent-delegation-loop</code>를 source-backed Agent Tool Playbook으로 보여준다.</li>\n<li>Desktop Runtime은 <code>run_subagent_tool_plan</code>을 통해 <code>agent-platform:plan-agent-orchestration</code>을 실행할 수 있다.</li>\n<li>실행은 arbitrary shell이 아니라 고정된 <code>agent-platform</code> planner command로 제한한다.</li>\n<li>결과는 runtime task-run store에 record/stdout/stderr/input으로 저장된다.</li>\n<li>manager가 route, merge, evaluation, final answer를 소유한다는 제약을 plan input에 포함한다.</li>\n<li>실제 autonomous subagent execution은 이번 slice에서 하지 않고, planner 결과를 task-run trace로 남긴다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>여러 subagent를 실제로 동시에 실행하는 background runtime.</li>\n<li>외부 agent framework 설치.</li>\n<li><code>_private</code> 또는 <code>outputs</code> 직접 접근.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1150,
+      "updatedAt": "2026-06-06T14:29:52.984Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-configs-tool-usage-integration-registry-json",
+      "path": "platform-desktop-app/configs/tool-usage-integration-registry.json",
+      "category": "project-config",
+      "language": "unknown",
+      "title": "Tool Usage Integration Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 06\", \"name\": \"tool usage integration registry\", \"purpose\": \"Captures high signal Codex style tool usage loops so the desktop platform can expose them as reusable agent work playbooks, validation ladders, and source linked implementation targets.\", \"re",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-06&quot;,\n  &quot;name&quot;: &quot;tool-usage-integration-registry&quot;,\n  &quot;purpose&quot;: &quot;Captures high-signal Codex-style tool usage loops so the desktop platform can expose them as reusable agent work playbooks, validation ladders, and source-linked implementation targets.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry when turning repeated agent tool behavior into desktop product behavior, Tool Studio guidance, validation commands, or future automation.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read patterns first to see the human-readable work sequence and the tool surfaces involved.&quot;,\n      &quot;Read verification_ladders to see which commands or checks prove a pattern is usable in the platform.&quot;,\n      &quot;Read adoption_backlog before adding new source, because it names the next bounded platform surfaces for these tool loops.&quot;,\n      &quot;Keep new entries narrow: each pattern should describe one repeatable tool loop with evidence outputs and failure modes.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;A repeated Codex or agent tool workflow appears in multiple meaningful tasks.&quot;,\n      &quot;A new desktop surface should teach, run, or validate a tool sequence directly.&quot;,\n      &quot;Tool use changes from ad hoc terminal use into a platform-owned capability.&quot;,\n      &quot;Validation, build, package, or resource cleanup behavior changes.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;playwright_locators&quot;,\n      &quot;title&quot;: &quot;Playwright Locators&quot;,\n      &quot;url&quot;: &quot;https://playwright.dev/docs/locators&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;prefer user-perceived locators for browser smoke checks&quot;,\n        &quot;auto-waiting and retryable UI validation&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;Applies to browser automation; native shell validation still needs OS/runtime checks.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;node_test_runner&quot;,\n      &quot;title&quot;: &quot;Node.js Test Runner&quot;,\n      &quot;url&quot;: &quot;https://nodejs.org/api/test.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;repository-local smoke and contract tests with node --test&quot;,\n        &quot;fast no-extra-framework validation for monitor collectors and source audits&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;Does not replace browser, Tauri, or Rust runtime checks.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_distribute&quot;,\n      &quot;title&quot;: &quot;Tauri Distribute&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop build and bundle close-out&quot;,\n        &quot;macOS .app and DMG artifact verification&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;Public macOS readiness still requires signing, hardened runtime, notarization, and installer policy gates.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;openai_agents_handoffs&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK Handoffs&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/handoffs/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;agent-to-agent delegation and handoff contract comparison&quot;,\n        &quot;manager-owned routing and final answer responsibility&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;SDK-specific API behavior; the desktop platform keeps the pattern framework-neutral.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;claude_code_subagents&quot;,\n      &quot;title&quot;: &quot;Claude Code Subagents&quot;,\n      &quot;url&quot;: &quot;https://docs.claude.com/ko/docs/claude-code/sub-agents&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;specialized subagent definitions and bounded tool access&quot;,\n        &quot;context isolation and reusable subagent behavior&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;Claude Code-specific configuration; use as a reference pattern, not a platform dependency.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;vscode_subagents&quot;,\n      &quot;title&quot;: &quot;VS Code Copilot Subagents&quot;,\n      &quot;url&quot;: &quot;https://code.visualstudio.com/docs/copilot/agents/subagents&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;subagent invocation through prompt tools&quot;,\n        &quot;explicit tool frontmatter and focused work delegation&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;VS Code-specific prompt-file behavior; the platform records only reusable design constraints.&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;tool_loop_is_platform_capability&quot;,\n      &quot;rule&quot;: &quot;Repeated agent tool usage shall become a platform-visible playbook before it becomes opaque automation.&quot;,\n      &quot;reason&quot;: &quot;The user asked to bring the tool usage style itself into the platform, not just ship a one-off fix.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;patterns&quot;,\n        &quot;adoption_backlog&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;evidence_before_synthesis&quot;,\n      &quot;rule&quot;: &quot;Research, local inspection, source edits, validation, packaging, and git close-out must each leave evidence outputs before a task is considered done.&quot;,\n      &quot;reason&quot;: &quot;The platform needs durable trust </code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 27281,
+      "updatedAt": "2026-06-06T14:15:42.410Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-ko-md",
@@ -7902,8 +8126,8 @@
       "html": "<p>최종 평가: Terminal Agent Bridge 날짜: 2026 06 06 평가 사용자의 “터미널 연결 기능, 에이전트 기능을 제대로” 요구에 대해 Desktop Runtime에서 PTY 연결과 agent CLI session 시작을 한 흐름으로 묶는 첫 slice를 구현했다. 충족 PTY, CLI adapter, agent session 상태를 bridge 카드로 표시한다. 연결 실행 버튼은 runtime/adapter/prompt가 준비된 경우에만 활성화된다. PTY 연결이 writable 상태가 아니면 agent session을 시작하지 않는다. 기존 start selected lane action도 실패를 action feed</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 1127,
-      "updatedAt": "2026-06-06T14:07:16.090Z",
+      "sourceBytes": 1263,
+      "updatedAt": "2026-06-06T14:09:58.346Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
@@ -7918,8 +8142,8 @@
       "html": "<p>요청 결과 추적: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 결과 Desktop Runtime에 PTY CLI adapter agent session bridge UI 추가. createNativePtySession , createCliAdapterSession , startTerminalAgentBridge 추가. 기존 start selected lane action feedback 실패 전파 보강. CSS와 test contract 추가. 주요 산출물 platform desktop app/renderer/workspace monitor/component</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 976,
-      "updatedAt": "2026-06-06T14:07:16.090Z",
+      "sourceBytes": 1289,
+      "updatedAt": "2026-06-06T14:09:58.346Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/request-traces"
@@ -7931,14 +8155,46 @@
       "language": "ko",
       "title": "작업 요약: Terminal Agent Bridge",
       "excerpt": "작업 요약: Terminal Agent Bridge 날짜: 2026 06 06 Desktop Runtime에 terminal agent bridge 를 추가해 native PTY, CLI adapter, agent session 상태를 한 흐름으로 표시했다. 새 startTerminalAgentBridge 는 PTY를 먼저 만들고 writable 상태가 아니면 agent CLI session을 시작하지 않는다. 기존 선택 실행 버튼도 action feedback용 실행 함수가 실패를 전파하도록 분",
-      "html": "<p>작업 요약: Terminal Agent Bridge 날짜: 2026 06 06 Desktop Runtime에 terminal agent bridge 를 추가해 native PTY, CLI adapter, agent session 상태를 한 흐름으로 표시했다. 새 startTerminalAgentBridge 는 PTY를 먼저 만들고 writable 상태가 아니면 agent CLI session을 시작하지 않는다. 기존 선택 실행 버튼도 action feedback용 실행 함수가 실패를 전파하도록 분리했다. 검증: workspace monitor check/test, desktop renderer build, Browser smoke 통과.</p>",
+      "html": "<p>작업 요약: Terminal Agent Bridge 날짜: 2026 06 06 Desktop Runtime에 terminal agent bridge 를 추가해 native PTY, CLI adapter, agent session 상태를 한 흐름으로 표시했다. 새 startTerminalAgentBridge 는 PTY를 먼저 만들고 writable 상태가 아니면 agent CLI session을 시작하지 않는다. 기존 선택 실행 버튼도 action feedback용 실행 함수가 실패를 전파하도록 분리했다. 검증: workspace monitor check/test, desktop renderer build, Browser smoke, de</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 520,
-      "updatedAt": "2026-06-06T14:07:16.090Z",
+      "sourceBytes": 600,
+      "updatedAt": "2026-06-06T14:09:58.346Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-input-json",
+      "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 06 Terminal Agent Bridge Input",
+      "excerpt": "{ \"initial instruction\": \"터미널 연결 기능 에이전트 기능 똑바로.\", \"result summary\": \"Added a Desktop Runtime terminal agent bridge that gates agent CLI session start on native PTY readiness and exposes PTY, adapter, and agent session status in one flow.\", \"work mode\": \"standard\", \"changed files",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;터미널 연결 기능 에이전트 기능 똑바로.&quot;, &quot;result summary&quot;: &quot;Added a Desktop Runtime terminal agent bridge that gates agent CLI session start on native PTY readiness and exposes PTY, adapter, and agent session status in one flow.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx&quot;</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 4106,
+      "updatedAt": "2026-06-06T14:09:58.345Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-agent-bridge-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-agent-bridge/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Terminal Agent Bridge",
+      "excerpt": "Validation: Terminal Agent Bridge 실행 완료 corepack pnpm dir platform desktop app/renderer/workspace monitor run check : 통과 corepack pnpm dir platform desktop app/renderer/workspace monitor test : 통과, 90 tests corepack pnpm w run desktop:renderer:build : 통과, customer bundle audit 통과",
+      "html": "<h1>Validation: Terminal Agent Bridge</h1>\n<h2>실행 완료</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code>: 통과, 90 tests</li>\n<li><code>corepack pnpm -w run desktop:renderer:build</code>: 통과, customer bundle audit 통과</li>\n<li>Browser smoke:</li>\n<li><code>http://127.0.0.1:3216/#section-desktop</code></li>\n<li>desktop 1280x720에서 bridge 1개, step 3개, bridge viewport 내 표시 확인</li>\n<li>Browser preview에서 Tauri runtime 없음으로 connect-start 버튼 비활성 확인</li>\n<li><code>data-terminal-agent-action=&quot;open-terminal&quot;</code> 클릭 후 <code>.terminal-drawer.open</code> 1개 확인</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code>: 통과, developer public snapshot 갱신</li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code>: 통과</li>\n<li>기존 public release signing/updater/clean-machine smoke 경고는 유지</li>\n<li>developer collect 후 <code>public/workspace-snapshot.json</code>은 developer snapshot이고 customer-safe fallback은 <code>src/generated/customer-workspace-snapshot.json</code>로 확인됨</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-06-terminal-agent-bridge-input.json</code>: <code>ready_to_close</code></li>\n<li><code>git diff --check</code>: 통과</li>\n</ul>\n<h2>알려진 경계</h2>\n<ul>\n<li>모바일 390px viewport에서는 기존 <code>--desktop-app-min-width: 1280px</code> desktop shell 정책 때문에 전체 앱이 1280px 폭을 유지한다. 이번 slice는 bridge 자체의 responsive grid를 추가했지만 desktop shell 최소 폭 정책은 변경하지 않았다.</li>\n<li>Browser preview에는 Tauri runtime이 없어 실제 native PTY spawn은 packaged desktop runtime에서 별도 smoke가 필요하다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1738,
+      "updatedAt": "2026-06-06T14:09:58.345Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
     },
     {
       "id": "history-work-timings-2026-2026-06-06-terminal-agent-bridge-ko-md",
@@ -7947,14 +8203,30 @@
       "language": "ko",
       "title": "작업 시간 기록: Terminal Agent Bridge",
       "excerpt": "작업 시간 기록: Terminal Agent Bridge 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | xterm.js, portable pty, Tauri, VS Code terminal docs 확인 | | source inventory | 완료 | RuntimeTerminalDrawer, MonitorShell, Rust PTY/CLI commands 확인 | | 구현 | 완료 | bridge UI와 실패 전파 helper 추가 | | 검증 ",
-      "html": "<p>작업 시간 기록: Terminal Agent Bridge 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | xterm.js, portable pty, Tauri, VS Code terminal docs 확인 | | source inventory | 완료 | RuntimeTerminalDrawer, MonitorShell, Rust PTY/CLI commands 확인 | | 구현 | 완료 | bridge UI와 실패 전파 helper 추가 | | 검증 | 진행 | check/test/build/Browser smoke 완료, final collect/check 남음 | | 기록 | 진행 | r</p>",
+      "html": "<p>작업 시간 기록: Terminal Agent Bridge 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | xterm.js, portable pty, Tauri, VS Code terminal docs 확인 | | source inventory | 완료 | RuntimeTerminalDrawer, MonitorShell, Rust PTY/CLI commands 확인 | | 구현 | 완료 | bridge UI와 실패 전파 helper 추가 | | 검증 | 완료 | check/test/build/Browser smoke/final collect/platform check 완료 | | 기록 | 완</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 685,
-      "updatedAt": "2026-06-06T14:07:16.090Z",
+      "sourceBytes": 686,
+      "updatedAt": "2026-06-06T14:09:33.272Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-terminal-agent-bridge-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-terminal-agent-bridge/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Terminal Agent Bridge",
+      "excerpt": "Tasks: Terminal Agent Bridge x web first intake 수행 x 기존 PTY/CLI/agent 실행 경로 확인 x createCliAdapterSession , createNativePtySession helper 추가 x startTerminalAgentBridge 추가 x Desktop Runtime bridge UI 추가 x CSS responsive/state/action styling 추가 x 문자열 계약 테스트 보강 x Browser smoke 수행 x r",
+      "html": "<h1>Tasks: Terminal Agent Bridge</h1>\n<ul>\n<li>[x] web-first intake 수행</li>\n<li>[x] 기존 PTY/CLI/agent 실행 경로 확인</li>\n<li>[x] <code>createCliAdapterSession</code>, <code>createNativePtySession</code> helper 추가</li>\n<li>[x] <code>startTerminalAgentBridge</code> 추가</li>\n<li>[x] Desktop Runtime bridge UI 추가</li>\n<li>[x] CSS responsive/state/action styling 추가</li>\n<li>[x] 문자열 계약 테스트 보강</li>\n<li>[x] Browser smoke 수행</li>\n<li>[x] resource, CLI pipeline, omission 기록 추가</li>\n<li>[x] final collect/check 수행</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 463,
+      "updatedAt": "2026-06-06T14:09:33.271Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
     },
     {
       "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-cli-pipeline-json",
@@ -8037,22 +8309,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "platform-desktop-app-specs-2026-06-06-terminal-agent-bridge-validation-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-06-terminal-agent-bridge/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Validation: Terminal Agent Bridge",
-      "excerpt": "Validation: Terminal Agent Bridge 실행 완료 corepack pnpm dir platform desktop app/renderer/workspace monitor run check : 통과 corepack pnpm dir platform desktop app/renderer/workspace monitor test : 통과, 90 tests corepack pnpm w run desktop:renderer:build : 통과, customer bundle audit 통과",
-      "html": "<h1>Validation: Terminal Agent Bridge</h1>\n<h2>실행 완료</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code>: 통과, 90 tests</li>\n<li><code>corepack pnpm -w run desktop:renderer:build</code>: 통과, customer bundle audit 통과</li>\n<li>Browser smoke:</li>\n<li><code>http://127.0.0.1:3216/#section-desktop</code></li>\n<li>desktop 1280x720에서 bridge 1개, step 3개, bridge viewport 내 표시 확인</li>\n<li>Browser preview에서 Tauri runtime 없음으로 connect-start 버튼 비활성 확인</li>\n<li><code>data-terminal-agent-action=&quot;open-terminal&quot;</code> 클릭 후 <code>.terminal-drawer.open</code> 1개 확인</li>\n</ul>\n<h2>추가 예정</h2>\n<ul>\n<li>developer snapshot collect</li>\n<li><code>platform-desktop-app</code> check</li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>알려진 경계</h2>\n<ul>\n<li>모바일 390px viewport에서는 기존 <code>--desktop-app-min-width: 1280px</code> desktop shell 정책 때문에 전체 앱이 1280px 폭을 유지한다. 이번 slice는 bridge 자체의 responsive grid를 추가했지만 desktop shell 최소 폭 정책은 변경하지 않았다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1059,
-      "updatedAt": "2026-06-06T14:07:16.088Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-terminal-agent-bridge-plan-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-terminal-agent-bridge/plan.ko.md",
       "category": "project-spec",
@@ -8079,22 +8335,6 @@
       "previewMode": "document-preview",
       "htmlTruncated": false,
       "sourceBytes": 2606,
-      "updatedAt": "2026-06-06T14:07:16.087Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-06-terminal-agent-bridge-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-06-terminal-agent-bridge/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Tasks: Terminal Agent Bridge",
-      "excerpt": "Tasks: Terminal Agent Bridge x web first intake 수행 x 기존 PTY/CLI/agent 실행 경로 확인 x createCliAdapterSession , createNativePtySession helper 추가 x startTerminalAgentBridge 추가 x Desktop Runtime bridge UI 추가 x CSS responsive/state/action styling 추가 x 문자열 계약 테스트 보강 x Browser smoke 수행 x r",
-      "html": "<h1>Tasks: Terminal Agent Bridge</h1>\n<ul>\n<li>[x] web-first intake 수행</li>\n<li>[x] 기존 PTY/CLI/agent 실행 경로 확인</li>\n<li>[x] <code>createCliAdapterSession</code>, <code>createNativePtySession</code> helper 추가</li>\n<li>[x] <code>startTerminalAgentBridge</code> 추가</li>\n<li>[x] Desktop Runtime bridge UI 추가</li>\n<li>[x] CSS responsive/state/action styling 추가</li>\n<li>[x] 문자열 계약 테스트 보강</li>\n<li>[x] Browser smoke 수행</li>\n<li>[x] resource, CLI pipeline, omission 기록 추가</li>\n<li>[ ] final collect/check, commit, push</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 470,
       "updatedAt": "2026-06-06T14:07:16.087Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
@@ -10085,134 +10325,6 @@
       "workspaceArea": "_history/evaluations"
     },
     {
-      "id": "history-evaluations-2026-2026-06-06-oss-pattern-adoption-evaluation-result-json",
-      "path": "_history/evaluations/2026/2026-06-06-oss-pattern-adoption-evaluation-result.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Oss Pattern Adoption Evaluation Result",
-      "excerpt": "{ \"status\": \"ready to close\", \"requires rework\": false, \"work mode\": \"governance\", \"required target policy\": { \"required targets\": \"mode selection record targets\", \"omission check targets\", \"plan evidence targets\", \"references checked\", \"request trace targets\", \"requirements targ",
-      "html": "<p>{ &quot;status&quot;: &quot;ready to close&quot;, &quot;requires rework&quot;: false, &quot;work mode&quot;: &quot;governance&quot;, &quot;required target policy&quot;: { &quot;required targets&quot;: &quot;mode selection record targets&quot;, &quot;omission check targets&quot;, &quot;plan evidence targets&quot;, &quot;references checked&quot;, &quot;request trace targets&quot;, &quot;requirements targets&quot;, &quot;source provenance targets&quot;, &quot;spec targets&quot;, &quot;timing summary targets&quot;, &quot;us</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2281,
-      "updatedAt": "2026-06-06T09:13:09.458Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-oss-pattern-adoption-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-oss-pattern-adoption.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "Work Summary: OSS Pattern Adoption Gate",
-      "excerpt": "Work Summary: OSS Pattern Adoption Gate agent platform 에 오픈소스 구조 패턴 채택 게이트를 추가했다. 이번 변경은 LangGraph, OpenAI Agents Python, Pydantic AI, CrewAI, Semantic Kernel, Dify, OpenHands, Mastra, Vercel AI SDK에서 관찰한 구조 패턴을 직접 코드 복사 없이 로컬 검증 계약으로 전환한다. 주요 산출물은 check oss pattern adoption CLI,",
-      "html": "<p>Work Summary: OSS Pattern Adoption Gate agent platform 에 오픈소스 구조 패턴 채택 게이트를 추가했다. 이번 변경은 LangGraph, OpenAI Agents Python, Pydantic AI, CrewAI, Semantic Kernel, Dify, OpenHands, Mastra, Vercel AI SDK에서 관찰한 구조 패턴을 직접 코드 복사 없이 로컬 검증 계약으로 전환한다. 주요 산출물은 check oss pattern adoption CLI, pattern adoption template.json , direct import/hybrid module guard tests, READM</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 751,
-      "updatedAt": "2026-06-06T09:12:49.857Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-oss-pattern-adoption-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-oss-pattern-adoption.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: OSS Pattern Adoption Gate",
-      "excerpt": "요청 결과 추적: OSS Pattern Adoption Gate 요청 현재 플랫폼에 적용할 수 있는 다른 오픈소스 구조 패턴을 조사하고, 필요하면 다른 언어/하이브리드 모듈이나 직접 기능 반입까지 고려해 누락 없이 구현한다. 결과 오픈소스 패턴 채택 plan을 검증하는 Python validator를 추가했다. CLI check oss pattern adoption 을 추가했다. GitHub 레포 9개와 구조 패턴 6개를 self documenting config에 기록했다. 직접 code imp",
-      "html": "<p>요청 결과 추적: OSS Pattern Adoption Gate 요청 현재 플랫폼에 적용할 수 있는 다른 오픈소스 구조 패턴을 조사하고, 필요하면 다른 언어/하이브리드 모듈이나 직접 기능 반입까지 고려해 누락 없이 구현한다. 결과 오픈소스 패턴 채택 plan을 검증하는 Python validator를 추가했다. CLI check oss pattern adoption 을 추가했다. GitHub 레포 9개와 구조 패턴 6개를 self documenting config에 기록했다. 직접 code import와 hybrid module 결정을 검증 가능한 gate로 만들었다. README, OSS integration docs, tests, r</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1598,
-      "updatedAt": "2026-06-06T09:12:49.726Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-oss-pattern-adoption-evaluation-input-json",
-      "path": "_history/evaluations/2026/2026-06-06-oss-pattern-adoption-evaluation-input.json",
-      "category": "evaluation",
-      "language": "unknown",
-      "title": "2026 06 06 Oss Pattern Adoption Evaluation Input",
-      "excerpt": "{ \"initial instruction\": \"Find open source structure patterns, including other languages and trending GitHub star repositories, that apply to the current platform; implement without omissions; consider cloning/direct feature import and hybrid modules when needed.\", \"result summar",
-      "html": "<p>{ &quot;initial instruction&quot;: &quot;Find open source structure patterns, including other languages and trending GitHub star repositories, that apply to the current platform; implement without omissions; consider cloning/direct feature import and hybrid modules when needed.&quot;, &quot;result summary&quot;: &quot;Implemented an OSS pattern adoption validator, CLI command, self documentin</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 4499,
-      "updatedAt": "2026-06-06T09:12:49.594Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-oss-pattern-adoption-json",
-      "path": "_history/work-timings/2026/2026-06-06-oss-pattern-adoption.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Oss Pattern Adoption",
-      "excerpt": "{ \"id\": \"2026 06 06 oss pattern adoption\", \"timezone\": \"Asia/Seoul\", \"measurement quality\": \"partial\", \"phases\": { \"name\": \"web first research\", \"status\": \"completed\", \"notes\": \"Searched broad agent framework/platform queries and inspected GitHub repository metadata and selected ",
-      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 oss pattern adoption&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;name&quot;: &quot;web first research&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Searched broad agent framework/platform queries and inspected GitHub repository metadata and selected contents.&quot; }, { &quot;name&quot;: &quot;local context and scope&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1424,
-      "updatedAt": "2026-06-06T09:12:49.332Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-plans-2026-2026-06-06-oss-pattern-adoption-ko-md",
-      "path": "_history/plans/2026/2026-06-06-oss-pattern-adoption.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "Plan Evidence: OSS Pattern Adoption Gate",
-      "excerpt": "Plan Evidence: OSS Pattern Adoption Gate 근거 현재 agent platform 은 Python CLI, deterministic validators, JSON configs, unittest 중심이다. 기존 OSS 기능은 dependency candidate scoring까지만 제공한다. 사용자는 단순 리서치가 아니라 적용과 구현 누락 방지를 요구했다. GitHub primary source inspection에서 agent lifecycle, state/check",
-      "html": "<p>Plan Evidence: OSS Pattern Adoption Gate 근거 현재 agent platform 은 Python CLI, deterministic validators, JSON configs, unittest 중심이다. 기존 OSS 기능은 dependency candidate scoring까지만 제공한다. 사용자는 단순 리서치가 아니라 적용과 구현 누락 방지를 요구했다. GitHub primary source inspection에서 agent lifecycle, state/checkpoint, typed tools/providers, productized monorepo split, sandbox/runtime, hybri</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1269,
-      "updatedAt": "2026-06-06T09:12:49.077Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-oss-pattern-adoption-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-oss-pattern-adoption.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "User Request Summary: OSS Pattern Adoption Gate",
-      "excerpt": "User Request Summary: OSS Pattern Adoption Gate 사용자는 현재 플랫폼의 근본, 사용성, 사용자 AI 능력을 기준으로 다른 언어의 오픈소스 구조 패턴까지 폭넓게 찾아 적용하라고 요청했다. 요청에는 현재 트렌딩/고스타 GitHub 레포 조사, 필요 시 clone과 기능 반입 고려, 직접 구현 누락 방지, 다른 언어 하이브리드 모듈과 별도 build 방식 고려가 포함됐다. 이번 결과는 직접 code copy가 아니라, 향후 그런 선택을 안전하게 할 수 있게 만드는 ",
-      "html": "<p>User Request Summary: OSS Pattern Adoption Gate 사용자는 현재 플랫폼의 근본, 사용성, 사용자 AI 능력을 기준으로 다른 언어의 오픈소스 구조 패턴까지 폭넓게 찾아 적용하라고 요청했다. 요청에는 현재 트렌딩/고스타 GitHub 레포 조사, 필요 시 clone과 기능 반입 고려, 직접 구현 누락 방지, 다른 언어 하이브리드 모듈과 별도 build 방식 고려가 포함됐다. 이번 결과는 직접 code copy가 아니라, 향후 그런 선택을 안전하게 할 수 있게 만드는 OSS pattern adoption gate 구현으로 정리했다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 618,
-      "updatedAt": "2026-06-06T09:12:48.817Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-oss-pattern-adoption-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-oss-pattern-adoption.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "Web Search Record: OSS Pattern Adoption Gate",
-      "excerpt": "Web Search Record: OSS Pattern Adoption Gate 작성일: 2026 06 06 Queries GitHub trending AI agent framework open source architecture 2026 LangGraph AutoGen CrewAI OpenHands Dify GitHub trending AI agent platform repository stars architecture 2026 best open source AI agent frameworks ",
-      "html": "<p>Web Search Record: OSS Pattern Adoption Gate 작성일: 2026 06 06 Queries GitHub trending AI agent framework open source architecture 2026 LangGraph AutoGen CrewAI OpenHands Dify GitHub trending AI agent platform repository stars architecture 2026 best open source AI agent frameworks GitHub stars 2026 agent platform architecture open source agent platform GitHub </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2507,
-      "updatedAt": "2026-06-06T09:12:48.555Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "agent-platform-specs-2026-06-06-oss-pattern-adoption-traceability-ko-md",
       "path": "agent-platform/specs/2026-06-06-oss-pattern-adoption/traceability.ko.md",
       "category": "project-spec",
@@ -11810,22 +11922,6 @@
       "updatedAt": "2026-06-06T02:23:45.528Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-configs-tool-usage-integration-registry-json",
-      "path": "platform-desktop-app/configs/tool-usage-integration-registry.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "Tool Usage Integration Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 06\", \"name\": \"tool usage integration registry\", \"purpose\": \"Captures high signal Codex style tool usage loops so the desktop platform can expose them as reusable agent work playbooks, validation ladders, and source linked implementation targets.\", \"re",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-06&quot;,\n  &quot;name&quot;: &quot;tool-usage-integration-registry&quot;,\n  &quot;purpose&quot;: &quot;Captures high-signal Codex-style tool usage loops so the desktop platform can expose them as reusable agent work playbooks, validation ladders, and source-linked implementation targets.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry when turning repeated agent tool behavior into desktop product behavior, Tool Studio guidance, validation commands, or future automation.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read patterns first to see the human-readable work sequence and the tool surfaces involved.&quot;,\n      &quot;Read verification_ladders to see which commands or checks prove a pattern is usable in the platform.&quot;,\n      &quot;Read adoption_backlog before adding new source, because it names the next bounded platform surfaces for these tool loops.&quot;,\n      &quot;Keep new entries narrow: each pattern should describe one repeatable tool loop with evidence outputs and failure modes.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;A repeated Codex or agent tool workflow appears in multiple meaningful tasks.&quot;,\n      &quot;A new desktop surface should teach, run, or validate a tool sequence directly.&quot;,\n      &quot;Tool use changes from ad hoc terminal use into a platform-owned capability.&quot;,\n      &quot;Validation, build, package, or resource cleanup behavior changes.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;playwright_locators&quot;,\n      &quot;title&quot;: &quot;Playwright Locators&quot;,\n      &quot;url&quot;: &quot;https://playwright.dev/docs/locators&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;prefer user-perceived locators for browser smoke checks&quot;,\n        &quot;auto-waiting and retryable UI validation&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;Applies to browser automation; native shell validation still needs OS/runtime checks.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;node_test_runner&quot;,\n      &quot;title&quot;: &quot;Node.js Test Runner&quot;,\n      &quot;url&quot;: &quot;https://nodejs.org/api/test.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;repository-local smoke and contract tests with node --test&quot;,\n        &quot;fast no-extra-framework validation for monitor collectors and source audits&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;Does not replace browser, Tauri, or Rust runtime checks.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_distribute&quot;,\n      &quot;title&quot;: &quot;Tauri Distribute&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop build and bundle close-out&quot;,\n        &quot;macOS .app and DMG artifact verification&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-06&quot;,\n      &quot;reliability&quot;: &quot;high&quot;,\n      &quot;limitations&quot;: &quot;Public macOS readiness still requires signing, hardened runtime, notarization, and installer policy gates.&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;tool_loop_is_platform_capability&quot;,\n      &quot;rule&quot;: &quot;Repeated agent tool usage shall become a platform-visible playbook before it becomes opaque automation.&quot;,\n      &quot;reason&quot;: &quot;The user asked to bring the tool usage style itself into the platform, not just ship a one-off fix.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;evidence_before_synthesis&quot;,\n      &quot;rule&quot;: &quot;Research, local inspection, source edits, validation, packaging, and git close-out must each leave evidence outputs before a task is considered done.&quot;,\n      &quot;reason&quot;: &quot;The platform needs durable trust handles for long-running agent work.&quot;\n    },\n    {\n      &quot;id&quot;: &quot;desktop_resources_are_explicit&quot;,\n      &quot;rule&quot;: &quot;Tool playbooks that touch servers, browser automation, subprocesses, caches, memory, or packaging must include lifecycle and cleanup checks.&quot;,\n      &quot;reason&quot;: &quot;The platform is a desktop app and should own resource lifecycle instead of behaving like a stateless page.&quot;\n    }\n  ],\n  &quot;field_guide&quot;: [\n    {\n      &quot;field&quot;: &quot;patterns&quot;,\n      &quot;meaning&quot;: &quot;Repeatable tool-use loops that a platform agent or human operator can follow.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;verification_ladders&quot;,\n      &quot;meaning&quot;: &quot;Grouped validation commands and acceptance checks mapped to platform surfaces.&quot;,\n      &quot;required&quot;: true\n    },\n    {\n      &quot;field&quot;: &quot;adoption_backlog&quot;,\n      &quot;meaning&quot;: &quot;Bounded future platform source targets for making each loop more executable.&quot;,\n      &quot;required&quot;: true\n    }\n  ],\n  &quot;patterns&quot;: [\n    {\n      &quot;id&quot;: &quot;web-first-research&quot;,\n      &quot;label&quot;: &quot;Web-first research&quot;,\n      &quot;label_ko&quot;: &quot;웹 우선 조사&quot;,\n      &quot;purpose&quot;: &quot;Confirm unstable or tool-specific facts with current primary sources before planning, editing, or claiming readiness.&quot;,\n      &quot;tool_surfaces&quot;: [\n        &quot;web.run search_query&quot;,\n        &quot;_history/web-searches&quot;,\n        &quot;_research&quot;\n      ],\n      &quot;trigger_when&quot;: [\n        &quot;The user asks for latest, current, best practice, open-source references, packaging, API behavior, or broad platform design.&quot;,\n        &quot;A task depends on a page, repository, library, or documentation not already loaded into context.&quot;\n      ],\n      &quot;sequence&quot;: [\n        &quot;Search high-authority sources first.&quot;,\n        &quot;Prefer official docs for implement</code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 21599,
-      "updatedAt": "2026-06-06T02:22:34.176Z",
-      "historyDate": "",
-      "historyYear": "",
       "workspaceArea": "platform-desktop-app"
     },
     {
@@ -18163,102 +18259,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-agentcore-multi-capability-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-agentcore-multi-capability/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "AgentCore Multi Capability 스펙",
-      "excerpt": "AgentCore Multi Capability 스펙 요구사항 REQ WM 048: AgentCore Quick Builder는 여러 capability를 동시에 선택하고 agent proposal 입력에 반영해야 한다. 사용자 결과 사용자는 AgentCore Quick Builder에서 Runtime, Memory, Gateway, Browser, Code Interpreter, Identity, Policy, Observability, Evaluations를 여러 개 선택한다. 전체 선택 을 ",
-      "html": "<h1>AgentCore Multi-Capability 스펙</h1>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-WM-048: AgentCore Quick Builder는 여러 capability를 동시에 선택하고 agent proposal 입력에 반영해야 한다.</li>\n</ul>\n<h2>사용자 결과</h2>\n<ul>\n<li>사용자는 AgentCore Quick Builder에서 Runtime, Memory, Gateway, Browser, Code Interpreter, Identity, Policy, Observability, Evaluations를 여러 개 선택한다.</li>\n<li><code>전체 선택</code>을 누르면 9개 capability가 한 번에 선택된다.</li>\n<li><code>선택 능력으로 입력 채우기</code>를 누르면 Agent proposal form에 local capability, guardrail, output contract가 반영된다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>AWS AgentCore cloud resource 생성</li>\n<li>실제 external connector 권한 부여</li>\n<li>runtime execution engine 변경</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 721,
-      "updatedAt": "2026-06-04T22:54:32.845Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-core-feature-flow-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-core-feature-flow/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성",
-      "excerpt": "추적성 | 요구 | 구현 | 검증 | | | | | | REQ WM 047 | MonitorShell.tsx TaskIntentFlowStep , requestedToolMode , data task flow step | tool studio.test.mjs , desktop/mobile smoke | | Tool Studio mode 연결 | ToolStudioPanel.tsx requestedMode prop, ToolStudioModeRequest | data tool studio mode ",
-      "html": "<h1>추적성</h1>\n<table><thead><tr><th>요구</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-WM-047</td><td><code>MonitorShell.tsx</code> <code>TaskIntentFlowStep</code>, <code>requestedToolMode</code>, <code>data-task-flow-step</code></td><td><code>tool-studio.test.mjs</code>, desktop/mobile smoke</td></tr><tr><td>Tool Studio mode 연결</td><td><code>ToolStudioPanel.tsx</code> <code>requestedMode</code> prop, <code>ToolStudioModeRequest</code></td><td><code>data-tool-studio-mode</code> browser assertion</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 352,
-      "updatedAt": "2026-06-04T22:47:52.810Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-core-feature-flow-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-core-feature-flow/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증 기록",
-      "excerpt": "검증 기록 명령 corepack pnpm filter workspace monitor test corepack pnpm filter workspace monitor run check corepack pnpm filter workspace monitor run build:customer Browser smoke Overview build tool 클릭 후 Tool Studio 이동 data task flow step='venv' 클릭 후 data tool studio mode='environment",
-      "html": "<h1>검증 기록</h1>\n<h2>명령</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code></li>\n</ul>\n<h2>Browser smoke</h2>\n<ul>\n<li>Overview <code>build-tool</code> 클릭 후 Tool Studio 이동</li>\n<li><code>[data-task-flow-step=&#039;venv&#039;]</code> 클릭 후 <code>[data-tool-studio-mode=&#039;environment&#039;]</code> 확인</li>\n<li><code>[data-task-flow-step=&#039;deploy&#039;]</code> 클릭 후 <code>[data-tool-studio-mode=&#039;deploy&#039;]</code> 확인</li>\n<li>현재 step에 <code>aria-current=&#039;step&#039;</code> 표시</li>\n<li>desktop/mobile 수평 overflow 0</li>\n</ul>\n<h2>스크린샷</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-core-flow-desktop.png</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/artifacts/screenshots/2026-06-05-core-flow-mobile.png</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 761,
-      "updatedAt": "2026-06-04T22:47:52.810Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-core-feature-flow-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-core-feature-flow/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "구현 계획",
-      "excerpt": "구현 계획 1. TaskIntentFlowStep 타입을 추가한다. 2. activeTaskFlowStepId 와 Tool Studio mode request state를 추가한다. 3. task flow rail 항목을 버튼으로 바꾸고 data task flow step 을 부여한다. 4. ToolStudioPanel 에 requestedMode prop을 추가한다. 5. build tool flow step을 build/environment/deploy mode에 연결한다. 6. 정적 테스트와",
-      "html": "<h1>구현 계획</h1>\n<p>1. <code>TaskIntentFlowStep</code> 타입을 추가한다.</p>\n<p>2. <code>activeTaskFlowStepId</code>와 Tool Studio mode request state를 추가한다.</p>\n<p>3. task flow rail 항목을 버튼으로 바꾸고 <code>data-task-flow-step</code>을 부여한다.</p>\n<p>4. <code>ToolStudioPanel</code>에 <code>requestedMode</code> prop을 추가한다.</p>\n<p>5. <code>build-tool</code> flow step을 build/environment/deploy mode에 연결한다.</p>\n<p>6. 정적 테스트와 browser smoke를 실행한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 424,
-      "updatedAt": "2026-06-04T22:47:52.809Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-core-feature-flow-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-core-feature-flow/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Core Feature Flow 스펙",
-      "excerpt": "Core Feature Flow 스펙 요구사항 REQ WM 047: 목표 기반 작업 흐름 단계는 가능한 경우 실제 핵심 mode를 전환해야 한다. 사용자 결과 사용자는 툴 만들기 선택 후 입력과 venv 확인 을 누르면 Tool Studio가 파이썬 환경 mode로 전환되는 것을 본다. 사용자는 검증 후 배포 를 누르면 Tool Studio가 툴 배포 mode로 전환되는 것을 본다. 현재 단계는 aria current=\"step\" 과 visual active 상태를 갖는다. 비목표 실제 Pytho",
-      "html": "<h1>Core Feature Flow 스펙</h1>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-WM-047: 목표 기반 작업 흐름 단계는 가능한 경우 실제 핵심 mode를 전환해야 한다.</li>\n</ul>\n<h2>사용자 결과</h2>\n<ul>\n<li>사용자는 <code>툴 만들기</code> 선택 후 <code>입력과 venv 확인</code>을 누르면 Tool Studio가 <code>파이썬 환경</code> mode로 전환되는 것을 본다.</li>\n<li>사용자는 <code>검증 후 배포</code>를 누르면 Tool Studio가 <code>툴 배포</code> mode로 전환되는 것을 본다.</li>\n<li>현재 단계는 <code>aria-current=&quot;step&quot;</code>과 visual active 상태를 갖는다.</li>\n</ul>\n<h2>비목표</h2>\n<ul>\n<li>실제 Python 파일 생성/저장 실행</li>\n<li>Tool Studio mode별 세부 wizard 완성</li>\n<li>모든 task intent의 deep mode 구현</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 662,
-      "updatedAt": "2026-06-04T22:47:52.809Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-core-feature-flow-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-core-feature-flow/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록",
-      "excerpt": "작업 목록 x 웹 검색으로 primary action/task flow 기준 확인 x REQ WM 047 추가 x task flow step action object 추가 x 현재 step state와 aria current 추가 x Tool Studio external mode request 추가 x build tool 단계별 mode 전환 연결 x 정적 테스트 업데이트 x build와 desktop/mobile browser smoke 실행",
-      "html": "<h1>작업 목록</h1>\n<ul>\n<li>[x] 웹 검색으로 primary action/task flow 기준 확인</li>\n<li>[x] REQ-WM-047 추가</li>\n<li>[x] task flow step action object 추가</li>\n<li>[x] 현재 step state와 <code>aria-current</code> 추가</li>\n<li>[x] Tool Studio external mode request 추가</li>\n<li>[x] <code>build-tool</code> 단계별 mode 전환 연결</li>\n<li>[x] 정적 테스트 업데이트</li>\n<li>[x] build와 desktop/mobile browser smoke 실행</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 376,
-      "updatedAt": "2026-06-04T22:47:52.809Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18308,7 +18308,7 @@
           "language": "unknown",
           "title": "2026 06 06",
           "excerpt": "2026 06 06 넓은 범위 작업 지시 사용자가 “범위가 넓다고 두려워하지마”라고 지시했다. 지속 지시에 “범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다”는 원칙을 추가했다. 넓은 범위는 large scope decomposition, bounded slices, parallel lanes, merge gates, 검증, rollback 경계로 다루도록 memory bootstrap manifest도 갱신했다. 추가 지시 “범위가 크다고 미루지 않기”를 반영해, large s",
-          "updatedAt": "2026-06-06T14:07:16.091Z",
+          "updatedAt": "2026-06-06T14:29:52.990Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18462,26 +18462,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-oss-pattern-adoption-evaluation-input-json",
-          "path": "_history/evaluations/2026/2026-06-06-oss-pattern-adoption-evaluation-input.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Oss Pattern Adoption Evaluation Input",
-          "excerpt": "{ \"initial instruction\": \"Find open source structure patterns, including other languages and trending GitHub star repositories, that apply to the current platform; implement without omissions; consider cloning/direct feature import and hybrid modules when needed.\", \"result summar",
-          "updatedAt": "2026-06-06T09:12:49.594Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-oss-pattern-adoption-evaluation-result-json",
-          "path": "_history/evaluations/2026/2026-06-06-oss-pattern-adoption-evaluation-result.json",
-          "category": "evaluation",
-          "language": "unknown",
-          "title": "2026 06 06 Oss Pattern Adoption Evaluation Result",
-          "excerpt": "{ \"status\": \"ready to close\", \"requires rework\": false, \"work mode\": \"governance\", \"required target policy\": { \"required targets\": \"mode selection record targets\", \"omission check targets\", \"plan evidence targets\", \"references checked\", \"request trace targets\", \"requirements targ",
-          "updatedAt": "2026-06-06T09:13:09.458Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-evaluations-2026-2026-06-06-oss-pattern-adoption-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-oss-pattern-adoption.ko.md",
           "category": "evaluation",
@@ -18512,6 +18492,26 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-evaluations-2026-2026-06-06-subagent-tool-use-input-json",
+          "path": "_history/evaluations/2026/2026-06-06-subagent-tool-use-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 06 Subagent Tool Use Input",
+          "excerpt": "{ \"initial instruction\": \"에이전트 서브에이전트 사용 툴\", \"result summary\": \"Added a source backed subagent delegation playbook plus a Desktop Runtime Tauri command that runs the agent platform manager as tools planner and persists the result as a task run record.\", \"work mode\": \"standard\", \"",
+          "updatedAt": "2026-06-06T14:37:32.711Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-06-subagent-tool-use-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-subagent-tool-use.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "최종 평가: Subagent Tool Use",
+          "excerpt": "최종 평가: Subagent Tool Use 날짜: 2026 06 06 평가 사용자의 agent/subagent use tool 요구에 대해, Tool Studio playbook과 Desktop Runtime native planner command를 구현했다. 이번 slice는 실제 subagent 실행 runtime이 아니라 manager as tools plan 생성과 task run persistence까지를 닫는다. 충족 subagent delegation loop가 Tool Studi",
+          "updatedAt": "2026-06-06T14:38:03.668Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-evaluations-2026-2026-06-06-terminal-agent-bridge-cli-pipeline-json",
           "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-cli-pipeline.json",
           "category": "evaluation",
@@ -18528,7 +18528,7 @@
           "language": "unknown",
           "title": "2026 06 06 Terminal Agent Bridge Input",
           "excerpt": "{ \"initial instruction\": \"터미널 연결 기능 에이전트 기능 똑바로.\", \"result summary\": \"Added a Desktop Runtime terminal agent bridge that gates agent CLI session start on native PTY readiness and exposes PTY, adapter, and agent session status in one flow.\", \"work mode\": \"standard\", \"changed files",
-          "updatedAt": "2026-06-06T14:07:16.091Z",
+          "updatedAt": "2026-06-06T14:09:58.345Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18538,7 +18538,7 @@
           "language": "ko",
           "title": "최종 평가: Terminal Agent Bridge",
           "excerpt": "최종 평가: Terminal Agent Bridge 날짜: 2026 06 06 평가 사용자의 “터미널 연결 기능, 에이전트 기능을 제대로” 요구에 대해 Desktop Runtime에서 PTY 연결과 agent CLI session 시작을 한 흐름으로 묶는 첫 slice를 구현했다. 충족 PTY, CLI adapter, agent session 상태를 bridge 카드로 표시한다. 연결 실행 버튼은 runtime/adapter/prompt가 준비된 경우에만 활성화된다. PTY 연결이 writable",
-          "updatedAt": "2026-06-06T14:07:16.090Z",
+          "updatedAt": "2026-06-06T14:09:58.346Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18622,16 +18622,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-plans-2026-2026-06-06-oss-pattern-adoption-ko-md",
-          "path": "_history/plans/2026/2026-06-06-oss-pattern-adoption.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "Plan Evidence: OSS Pattern Adoption Gate",
-          "excerpt": "Plan Evidence: OSS Pattern Adoption Gate 근거 현재 agent platform 은 Python CLI, deterministic validators, JSON configs, unittest 중심이다. 기존 OSS 기능은 dependency candidate scoring까지만 제공한다. 사용자는 단순 리서치가 아니라 적용과 구현 누락 방지를 요구했다. GitHub primary source inspection에서 agent lifecycle, state/check",
-          "updatedAt": "2026-06-06T09:12:49.077Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-plans-2026-2026-06-06-runtime-setup-check-ko-md",
           "path": "_history/plans/2026/2026-06-06-runtime-setup-check.ko.md",
           "category": "plan",
@@ -18649,6 +18639,16 @@
           "title": "Rust Runtime Feature Split 계획",
           "excerpt": "Rust Runtime Feature Split 계획 날짜: 2026 06 06 1. 공식 Rust/Tauri 구조 확인. 2. 현재 Rust source inventory 확인. 3. src tauri/src/features/ 기능별 폴더 생성. 4. 기능별 command/risk map command 추가. 5. Desktop Runtime UI metric 연결. 6. runtime contract, readiness, tests 갱신. 7. Rust/Node/build/package 검증.",
           "updatedAt": "2026-06-06T13:28:08.843Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-plans-2026-2026-06-06-subagent-tool-use-ko-md",
+          "path": "_history/plans/2026/2026-06-06-subagent-tool-use.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "작업 계획: Subagent Tool Use",
+          "excerpt": "작업 계획: Subagent Tool Use work mode: standard view mode: superadmin developer install mode: developer 1. 웹 우선 조사와 subagent tool discovery 수행. 2. existing manager as tools planner와 task run store 확인. 3. Tool Studio playbook에 subagent delegation loop 추가. 4. Tauri command run subagen",
+          "updatedAt": "2026-06-06T14:29:52.988Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18742,16 +18742,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-oss-pattern-adoption-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-oss-pattern-adoption.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적: OSS Pattern Adoption Gate",
-          "excerpt": "요청 결과 추적: OSS Pattern Adoption Gate 요청 현재 플랫폼에 적용할 수 있는 다른 오픈소스 구조 패턴을 조사하고, 필요하면 다른 언어/하이브리드 모듈이나 직접 기능 반입까지 고려해 누락 없이 구현한다. 결과 오픈소스 패턴 채택 plan을 검증하는 Python validator를 추가했다. CLI check oss pattern adoption 을 추가했다. GitHub 레포 9개와 구조 패턴 6개를 self documenting config에 기록했다. 직접 code imp",
-          "updatedAt": "2026-06-06T09:12:49.726Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-06-runtime-setup-check-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-runtime-setup-check.ko.md",
           "category": "request-trace",
@@ -18772,13 +18762,23 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-request-traces-2026-2026-06-06-subagent-tool-use-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-subagent-tool-use.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: Subagent Tool Use",
+          "excerpt": "요청 결과 추적: Subagent Tool Use 날짜: 2026 06 06 요청 agent/subagent를 사용할 수 있는 tool 기능. 결과 subagent delegation loop 를 Tool Studio source backed playbook에 추가. run subagent tool plan Tauri command 추가. command가 agent platform:plan agent orchestration 을 실행하고 task run record/stdout/stderr/inp",
+          "updatedAt": "2026-06-06T14:38:03.668Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-06-terminal-agent-bridge-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-terminal-agent-bridge.ko.md",
           "category": "request-trace",
           "language": "ko",
           "title": "요청 결과 추적: Terminal Agent Bridge",
           "excerpt": "요청 결과 추적: Terminal Agent Bridge 날짜: 2026 06 06 요청 터미널 연결 기능과 에이전트 기능을 제대로 연결한다. 결과 Desktop Runtime에 PTY CLI adapter agent session bridge UI 추가. createNativePtySession , createCliAdapterSession , startTerminalAgentBridge 추가. 기존 start selected lane action feedback 실패 전파 보강. CSS와 te",
-          "updatedAt": "2026-06-06T14:07:16.090Z",
+          "updatedAt": "2026-06-06T14:09:58.346Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18862,16 +18862,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-oss-pattern-adoption-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-oss-pattern-adoption.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "User Request Summary: OSS Pattern Adoption Gate",
-          "excerpt": "User Request Summary: OSS Pattern Adoption Gate 사용자는 현재 플랫폼의 근본, 사용성, 사용자 AI 능력을 기준으로 다른 언어의 오픈소스 구조 패턴까지 폭넓게 찾아 적용하라고 요청했다. 요청에는 현재 트렌딩/고스타 GitHub 레포 조사, 필요 시 clone과 기능 반입 고려, 직접 구현 누락 방지, 다른 언어 하이브리드 모듈과 별도 build 방식 고려가 포함됐다. 이번 결과는 직접 code copy가 아니라, 향후 그런 선택을 안전하게 할 수 있게 만드는 ",
-          "updatedAt": "2026-06-06T09:12:48.817Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-06-runtime-setup-check-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-runtime-setup-check.ko.md",
           "category": "user-request",
@@ -18889,6 +18879,16 @@
           "title": "사용자 요청 요약: Rust Runtime Feature Split",
           "excerpt": "사용자 요청 요약: Rust Runtime Feature Split 날짜: 2026 06 06 사용자는 Rust source를 분리하고 폴더 구조를 기능별로 나누며 기능별 추가 기능을 넣으라고 요청했다. 처리 대상은 platform desktop app/src tauri native runtime으로 해석했다.",
           "updatedAt": "2026-06-06T13:28:08.843Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-06-subagent-tool-use-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-subagent-tool-use.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: Subagent Tool Use",
+          "excerpt": "사용자 요청 요약: Subagent Tool Use 날짜: 2026 06 06 사용자는 agent/subagent를 사용할 수 있는 tool 기능을 요구했다. 해석한 핵심은 agent가 subagent를 도구처럼 위임하고, 그 사용 방식이 플랫폼에 보이며, 실행 가능한 최소 native 경로가 있어야 한다는 것이다. 이번 범위는 Tool Studio playbook, Desktop Runtime 실행 버튼, Tauri planner command, task run 기록까지다. 실제 subagent",
+          "updatedAt": "2026-06-06T14:29:52.988Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18982,16 +18982,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-oss-pattern-adoption-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-oss-pattern-adoption.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "Web Search Record: OSS Pattern Adoption Gate",
-          "excerpt": "Web Search Record: OSS Pattern Adoption Gate 작성일: 2026 06 06 Queries GitHub trending AI agent framework open source architecture 2026 LangGraph AutoGen CrewAI OpenHands Dify GitHub trending AI agent platform repository stars architecture 2026 best open source AI agent frameworks ",
-          "updatedAt": "2026-06-06T09:12:48.555Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-06-runtime-setup-check-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-runtime-setup-check.ko.md",
           "category": "web-search",
@@ -19009,6 +18999,16 @@
           "title": "Rust Runtime Feature Split 웹 우선 확인",
           "excerpt": "Rust Runtime Feature Split 웹 우선 확인 날짜: 2026 06 06 쿼리 Rust official book modules file hierarchy mod.rs modules Tauri v2 official commands Rust module structure invoke handler Rust official cargo workspaces package layout modules 확인한 소스 | 소스 | 유형 | 사용 | | | | | | https://doc.rust l",
           "updatedAt": "2026-06-06T13:28:08.843Z",
+          "historyDate": "2026-06-06"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-06-subagent-tool-use-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-subagent-tool-use.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: Subagent Tool Use",
+          "excerpt": "웹 검색 기록: Subagent Tool Use 날짜: 2026 06 06 질의 OpenAI Agents SDK handoffs tools agents subagents official documentation Anthropic Claude Code subagents tools official documentation VS Code Copilot coding agent subagents tools official documentation 확인한 출처 OpenAI Agents SDK Handoffs",
+          "updatedAt": "2026-06-06T14:29:52.987Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19102,16 +19102,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-oss-pattern-adoption-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-oss-pattern-adoption.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "Work Summary: OSS Pattern Adoption Gate",
-          "excerpt": "Work Summary: OSS Pattern Adoption Gate agent platform 에 오픈소스 구조 패턴 채택 게이트를 추가했다. 이번 변경은 LangGraph, OpenAI Agents Python, Pydantic AI, CrewAI, Semantic Kernel, Dify, OpenHands, Mastra, Vercel AI SDK에서 관찰한 구조 패턴을 직접 코드 복사 없이 로컬 검증 계약으로 전환한다. 주요 산출물은 check oss pattern adoption CLI,",
-          "updatedAt": "2026-06-06T09:12:49.857Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-06-runtime-setup-check-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-runtime-setup-check.ko.md",
           "category": "work-summary",
@@ -19132,13 +19122,23 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-06-subagent-tool-use-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-subagent-tool-use.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: Subagent Tool Use",
+          "excerpt": "작업 요약: Subagent Tool Use 날짜: 2026 06 06 Tool Studio에 subagent delegation loop 와 subagent delegation ladder 를 추가했다. Desktop Runtime에는 서브에이전트 툴 계획 버튼을 추가했고, Tauri command run subagent tool plan 은 agent platform:plan agent orchestration 을 bounded Python subprocess로 실행해 결과를 runtime t",
+          "updatedAt": "2026-06-06T14:38:03.668Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-06-terminal-agent-bridge-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-terminal-agent-bridge.ko.md",
           "category": "work-summary",
           "language": "ko",
           "title": "작업 요약: Terminal Agent Bridge",
           "excerpt": "작업 요약: Terminal Agent Bridge 날짜: 2026 06 06 Desktop Runtime에 terminal agent bridge 를 추가해 native PTY, CLI adapter, agent session 상태를 한 흐름으로 표시했다. 새 startTerminalAgentBridge 는 PTY를 먼저 만들고 writable 상태가 아니면 agent CLI session을 시작하지 않는다. 기존 선택 실행 버튼도 action feedback용 실행 함수가 실패를 전파하도록 분",
-          "updatedAt": "2026-06-06T14:07:16.090Z",
+          "updatedAt": "2026-06-06T14:09:58.346Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19212,16 +19212,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-oss-pattern-adoption-json",
-          "path": "_history/work-timings/2026/2026-06-06-oss-pattern-adoption.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Oss Pattern Adoption",
-          "excerpt": "{ \"id\": \"2026 06 06 oss pattern adoption\", \"timezone\": \"Asia/Seoul\", \"measurement quality\": \"partial\", \"phases\": { \"name\": \"web first research\", \"status\": \"completed\", \"notes\": \"Searched broad agent framework/platform queries and inspected GitHub repository metadata and selected ",
-          "updatedAt": "2026-06-06T09:12:49.332Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-runtime-setup-check-ko-md",
           "path": "_history/work-timings/2026/2026-06-06-runtime-setup-check.ko.md",
           "category": "work-timing",
@@ -19242,13 +19232,23 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-timings-2026-2026-06-06-subagent-tool-use-ko-md",
+          "path": "_history/work-timings/2026/2026-06-06-subagent-tool-use.ko.md",
+          "category": "work-timing",
+          "language": "ko",
+          "title": "작업 시간 기록: Subagent Tool Use",
+          "excerpt": "작업 시간 기록: Subagent Tool Use 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | OpenAI/Claude/VS Code subagent 공식 문서 확인 | | subagent tool discovery | 완료 | multi agent v1.spawn agent/wait agent/close agent 확인 및 explorer 사용 | | source inventory | 완료 | manager tool, CLI entrypoint",
+          "updatedAt": "2026-06-06T14:38:03.668Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-terminal-agent-bridge-ko-md",
           "path": "_history/work-timings/2026/2026-06-06-terminal-agent-bridge.ko.md",
           "category": "work-timing",
           "language": "ko",
           "title": "작업 시간 기록: Terminal Agent Bridge",
           "excerpt": "작업 시간 기록: Terminal Agent Bridge 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | xterm.js, portable pty, Tauri, VS Code terminal docs 확인 | | source inventory | 완료 | RuntimeTerminalDrawer, MonitorShell, Rust PTY/CLI commands 확인 | | 구현 | 완료 | bridge UI와 실패 전파 helper 추가 | | 검증 ",
-          "updatedAt": "2026-06-06T14:07:16.090Z",
+          "updatedAt": "2026-06-06T14:09:33.272Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19270,36 +19270,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2787,
+      "documents": 2795,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1056
+          "count": 1058
         },
         {
           "category": "web-search",
-          "count": 437
+          "count": 438
         },
         {
           "category": "request-trace",
-          "count": 366
+          "count": 367
         },
         {
           "category": "plan",
-          "count": 365
+          "count": 366
         },
         {
           "category": "work-timing",
-          "count": 285
+          "count": 286
         },
         {
           "category": "user-request",
-          "count": 151
+          "count": 152
         },
         {
           "category": "work-summary",
-          "count": 118
+          "count": 119
         },
         {
           "category": "daily-history",
@@ -19310,7 +19310,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6735746,
+      "totalSourceBytes": 6748509,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19339,7 +19339,7 @@
       "decisionEvents": 0,
       "openSignals": 21,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T14:07:16.091Z",
+      "latestEventAt": "2026-06-06T14:38:03.668Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19450,19 +19450,79 @@
     ],
     "events": [
       {
-        "id": "history-history-evaluations-2026-2026-06-06-terminal-agent-bridge-input-json",
+        "id": "history-history-work-timings-2026-2026-06-06-subagent-tool-use-ko-md",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "작업 시간 기록: Subagent Tool Use",
+        "detail": "작업 시간 기록: Subagent Tool Use 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | OpenAI/Claude/VS Code subagent 공식 문서 확인 | | subagent tool discovery | 완료 | multi agent v1.spawn agent/wait agent/close agent 확인 및 explorer 사용 | | source inventory | 완료 | manager tool, CLI entrypoint",
+        "path": "_history/work-timings/2026/2026-06-06-subagent-tool-use.ko.md",
+        "category": "work-timing",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:38:03.668Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-subagent-tool-use-ko-md",
         "sourceType": "history",
         "signalType": "evaluation",
         "lane": "verification",
         "severity": "verified",
         "status": "evaluation",
-        "title": "2026 06 06 Terminal Agent Bridge Input",
-        "detail": "{ \"initial instruction\": \"터미널 연결 기능 에이전트 기능 똑바로.\", \"result summary\": \"Added a Desktop Runtime terminal agent bridge that gates agent CLI session start on native PTY readiness and exposes PTY, adapter, and agent session status in one flow.\", \"work mode\": \"standard\", \"changed files",
-        "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-input.json",
+        "title": "최종 평가: Subagent Tool Use",
+        "detail": "최종 평가: Subagent Tool Use 날짜: 2026 06 06 평가 사용자의 agent/subagent use tool 요구에 대해, Tool Studio playbook과 Desktop Runtime native planner command를 구현했다. 이번 slice는 실제 subagent 실행 runtime이 아니라 manager as tools plan 생성과 task run persistence까지를 닫는다. 충족 subagent delegation loop가 Tool Studi",
+        "path": "_history/evaluations/2026/2026-06-06-subagent-tool-use.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:38:03.668Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-subagent-tool-use-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "요청 결과 추적: Subagent Tool Use",
+        "detail": "요청 결과 추적: Subagent Tool Use 날짜: 2026 06 06 요청 agent/subagent를 사용할 수 있는 tool 기능. 결과 subagent delegation loop 를 Tool Studio source backed playbook에 추가. run subagent tool plan Tauri command 추가. command가 agent platform:plan agent orchestration 을 실행하고 task run record/stdout/stderr/inp",
+        "path": "_history/request-traces/2026/2026-06-06-subagent-tool-use.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:38:03.668Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-subagent-tool-use-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약: Subagent Tool Use",
+        "detail": "작업 요약: Subagent Tool Use 날짜: 2026 06 06 Tool Studio에 subagent delegation loop 와 subagent delegation ladder 를 추가했다. Desktop Runtime에는 서브에이전트 툴 계획 버튼을 추가했고, Tauri command run subagent tool plan 은 agent platform:plan agent orchestration 을 bounded Python subprocess로 실행해 결과를 runtime t",
+        "path": "_history/work-summaries/2026/2026-06-06-subagent-tool-use.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:38:03.668Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-subagent-tool-use-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 06 Subagent Tool Use Input",
+        "detail": "{ \"initial instruction\": \"에이전트 서브에이전트 사용 툴\", \"result summary\": \"Added a source backed subagent delegation playbook plus a Desktop Runtime Tauri command that runs the agent platform manager as tools planner and persists the result as a task run record.\", \"work mode\": \"standard\", \"",
+        "path": "_history/evaluations/2026/2026-06-06-subagent-tool-use-input.json",
         "category": "evaluation",
         "language": "unknown",
         "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:07:16.091Z"
+        "timestamp": "2026-06-06T14:37:32.711Z"
       },
       {
         "id": "history-history-2026-2026-06-06-md",
@@ -19477,22 +19537,52 @@
         "category": "daily-history",
         "language": "unknown",
         "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:07:16.091Z"
+        "timestamp": "2026-06-06T14:29:52.990Z"
       },
       {
-        "id": "history-history-work-timings-2026-2026-06-06-terminal-agent-bridge-ko-md",
+        "id": "history-history-user-requests-2026-2026-06-06-subagent-tool-use-ko-md",
         "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "작업 시간 기록: Terminal Agent Bridge",
-        "detail": "작업 시간 기록: Terminal Agent Bridge 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | xterm.js, portable pty, Tauri, VS Code terminal docs 확인 | | source inventory | 완료 | RuntimeTerminalDrawer, MonitorShell, Rust PTY/CLI commands 확인 | | 구현 | 완료 | bridge UI와 실패 전파 helper 추가 | | 검증 ",
-        "path": "_history/work-timings/2026/2026-06-06-terminal-agent-bridge.ko.md",
-        "category": "work-timing",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: Subagent Tool Use",
+        "detail": "사용자 요청 요약: Subagent Tool Use 날짜: 2026 06 06 사용자는 agent/subagent를 사용할 수 있는 tool 기능을 요구했다. 해석한 핵심은 agent가 subagent를 도구처럼 위임하고, 그 사용 방식이 플랫폼에 보이며, 실행 가능한 최소 native 경로가 있어야 한다는 것이다. 이번 범위는 Tool Studio playbook, Desktop Runtime 실행 버튼, Tauri planner command, task run 기록까지다. 실제 subagent",
+        "path": "_history/user-requests/2026/2026-06-06-subagent-tool-use.ko.md",
+        "category": "user-request",
         "language": "ko",
         "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:07:16.090Z"
+        "timestamp": "2026-06-06T14:29:52.988Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-subagent-tool-use-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "작업 계획: Subagent Tool Use",
+        "detail": "작업 계획: Subagent Tool Use work mode: standard view mode: superadmin developer install mode: developer 1. 웹 우선 조사와 subagent tool discovery 수행. 2. existing manager as tools planner와 task run store 확인. 3. Tool Studio playbook에 subagent delegation loop 추가. 4. Tauri command run subagen",
+        "path": "_history/plans/2026/2026-06-06-subagent-tool-use.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:29:52.988Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-subagent-tool-use-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: Subagent Tool Use",
+        "detail": "웹 검색 기록: Subagent Tool Use 날짜: 2026 06 06 질의 OpenAI Agents SDK handoffs tools agents subagents official documentation Anthropic Claude Code subagents tools official documentation VS Code Copilot coding agent subagents tools official documentation 확인한 출처 OpenAI Agents SDK Handoffs",
+        "path": "_history/web-searches/2026/2026-06-06-subagent-tool-use.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:29:52.987Z"
       },
       {
         "id": "history-history-evaluations-2026-2026-06-06-terminal-agent-bridge-ko-md",
@@ -19507,7 +19597,7 @@
         "category": "evaluation",
         "language": "ko",
         "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:07:16.090Z"
+        "timestamp": "2026-06-06T14:09:58.346Z"
       },
       {
         "id": "history-history-request-traces-2026-2026-06-06-terminal-agent-bridge-ko-md",
@@ -19522,7 +19612,7 @@
         "category": "request-trace",
         "language": "ko",
         "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:07:16.090Z"
+        "timestamp": "2026-06-06T14:09:58.346Z"
       },
       {
         "id": "history-history-work-summaries-2026-2026-06-06-terminal-agent-bridge-ko-md",
@@ -19537,7 +19627,37 @@
         "category": "work-summary",
         "language": "ko",
         "date": "2026-06-06",
-        "timestamp": "2026-06-06T14:07:16.090Z"
+        "timestamp": "2026-06-06T14:09:58.346Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-terminal-agent-bridge-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 06 Terminal Agent Bridge Input",
+        "detail": "{ \"initial instruction\": \"터미널 연결 기능 에이전트 기능 똑바로.\", \"result summary\": \"Added a Desktop Runtime terminal agent bridge that gates agent CLI session start on native PTY readiness and exposes PTY, adapter, and agent session status in one flow.\", \"work mode\": \"standard\", \"changed files",
+        "path": "_history/evaluations/2026/2026-06-06-terminal-agent-bridge-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:09:58.345Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-terminal-agent-bridge-ko-md",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "작업 시간 기록: Terminal Agent Bridge",
+        "detail": "작업 시간 기록: Terminal Agent Bridge 날짜: 2026 06 06 | 단계 | 상태 | 메모 | | | | | | 웹 확인 | 완료 | xterm.js, portable pty, Tauri, VS Code terminal docs 확인 | | source inventory | 완료 | RuntimeTerminalDrawer, MonitorShell, Rust PTY/CLI commands 확인 | | 구현 | 완료 | bridge UI와 실패 전파 helper 추가 | | 검증 ",
+        "path": "_history/work-timings/2026/2026-06-06-terminal-agent-bridge.ko.md",
+        "category": "work-timing",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T14:09:33.272Z"
       },
       {
         "id": "history-history-evaluations-2026-2026-06-06-terminal-agent-bridge-cli-pipeline-json",
@@ -20768,126 +20888,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T09:13:09.589Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-oss-pattern-adoption-evaluation-result-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 Oss Pattern Adoption Evaluation Result",
-        "detail": "{ \"status\": \"ready to close\", \"requires rework\": false, \"work mode\": \"governance\", \"required target policy\": { \"required targets\": \"mode selection record targets\", \"omission check targets\", \"plan evidence targets\", \"references checked\", \"request trace targets\", \"requirements targ",
-        "path": "_history/evaluations/2026/2026-06-06-oss-pattern-adoption-evaluation-result.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T09:13:09.458Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-oss-pattern-adoption-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "Work Summary: OSS Pattern Adoption Gate",
-        "detail": "Work Summary: OSS Pattern Adoption Gate agent platform 에 오픈소스 구조 패턴 채택 게이트를 추가했다. 이번 변경은 LangGraph, OpenAI Agents Python, Pydantic AI, CrewAI, Semantic Kernel, Dify, OpenHands, Mastra, Vercel AI SDK에서 관찰한 구조 패턴을 직접 코드 복사 없이 로컬 검증 계약으로 전환한다. 주요 산출물은 check oss pattern adoption CLI,",
-        "path": "_history/work-summaries/2026/2026-06-06-oss-pattern-adoption.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T09:12:49.857Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-oss-pattern-adoption-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적: OSS Pattern Adoption Gate",
-        "detail": "요청 결과 추적: OSS Pattern Adoption Gate 요청 현재 플랫폼에 적용할 수 있는 다른 오픈소스 구조 패턴을 조사하고, 필요하면 다른 언어/하이브리드 모듈이나 직접 기능 반입까지 고려해 누락 없이 구현한다. 결과 오픈소스 패턴 채택 plan을 검증하는 Python validator를 추가했다. CLI check oss pattern adoption 을 추가했다. GitHub 레포 9개와 구조 패턴 6개를 self documenting config에 기록했다. 직접 code imp",
-        "path": "_history/request-traces/2026/2026-06-06-oss-pattern-adoption.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T09:12:49.726Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-oss-pattern-adoption-evaluation-input-json",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "evaluation",
-        "title": "2026 06 06 Oss Pattern Adoption Evaluation Input",
-        "detail": "{ \"initial instruction\": \"Find open source structure patterns, including other languages and trending GitHub star repositories, that apply to the current platform; implement without omissions; consider cloning/direct feature import and hybrid modules when needed.\", \"result summar",
-        "path": "_history/evaluations/2026/2026-06-06-oss-pattern-adoption-evaluation-input.json",
-        "category": "evaluation",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T09:12:49.594Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-oss-pattern-adoption-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 Oss Pattern Adoption",
-        "detail": "{ \"id\": \"2026 06 06 oss pattern adoption\", \"timezone\": \"Asia/Seoul\", \"measurement quality\": \"partial\", \"phases\": { \"name\": \"web first research\", \"status\": \"completed\", \"notes\": \"Searched broad agent framework/platform queries and inspected GitHub repository metadata and selected ",
-        "path": "_history/work-timings/2026/2026-06-06-oss-pattern-adoption.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T09:12:49.332Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-06-oss-pattern-adoption-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "Plan Evidence: OSS Pattern Adoption Gate",
-        "detail": "Plan Evidence: OSS Pattern Adoption Gate 근거 현재 agent platform 은 Python CLI, deterministic validators, JSON configs, unittest 중심이다. 기존 OSS 기능은 dependency candidate scoring까지만 제공한다. 사용자는 단순 리서치가 아니라 적용과 구현 누락 방지를 요구했다. GitHub primary source inspection에서 agent lifecycle, state/check",
-        "path": "_history/plans/2026/2026-06-06-oss-pattern-adoption.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T09:12:49.077Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-oss-pattern-adoption-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "User Request Summary: OSS Pattern Adoption Gate",
-        "detail": "User Request Summary: OSS Pattern Adoption Gate 사용자는 현재 플랫폼의 근본, 사용성, 사용자 AI 능력을 기준으로 다른 언어의 오픈소스 구조 패턴까지 폭넓게 찾아 적용하라고 요청했다. 요청에는 현재 트렌딩/고스타 GitHub 레포 조사, 필요 시 clone과 기능 반입 고려, 직접 구현 누락 방지, 다른 언어 하이브리드 모듈과 별도 build 방식 고려가 포함됐다. 이번 결과는 직접 code copy가 아니라, 향후 그런 선택을 안전하게 할 수 있게 만드는 ",
-        "path": "_history/user-requests/2026/2026-06-06-oss-pattern-adoption.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T09:12:48.817Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-oss-pattern-adoption-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "Web Search Record: OSS Pattern Adoption Gate",
-        "detail": "Web Search Record: OSS Pattern Adoption Gate 작성일: 2026 06 06 Queries GitHub trending AI agent framework open source architecture 2026 LangGraph AutoGen CrewAI OpenHands Dify GitHub trending AI agent platform repository stars architecture 2026 best open source AI agent frameworks ",
-        "path": "_history/web-searches/2026/2026-06-06-oss-pattern-adoption.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T09:12:48.555Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23431,12 +23431,12 @@
       "project": "platform-desktop-app",
       "language": "rust",
       "extension": "rs",
-      "sizeBytes": 1052,
-      "lineCount": 28,
-      "updatedAt": "2026-06-06T13:25:12.162Z",
-      "truncated": false,
-      "preview": "use super::{command, NativeRuntimeFeatureGroupReport};\n\npub(super) fn group() -> NativeRuntimeFeatureGroupReport {\n    NativeRuntimeFeatureGroupReport {\n        group_id: \"agent-factory\",\n        label: \"Agent Factory\",\n        source_module: \"src-tauri/src/features/agent_factory.rs\",\n        role:\n            \"Owns proposal records for new agent capabilities and learning improvement decisions.\",\n        commands: vec![\n            command(\n                \"create_agent_factory_proposal\",\n                \"Create agent factory proposal\",\n                \"Writes proposal record under runtime data\",\n            ),\n            command(\n                \"record_learning_improvement_decision\",\n                \"Record learning improvement decision\",\n                \"Writes learning feedback record under runtime data\",\n            ),\n        ],\n        follow_up: vec![\n            \"Move proposal normalization into features/agent_factory/.\",\n            \"Keep generated proposal artifacts separate from direct source mutation.\",\n        ],\n    }\n}\n",
-      "previewBytes": 1052
+      "sizeBytes": 1270,
+      "lineCount": 33,
+      "updatedAt": "2026-06-06T14:24:46.126Z",
+      "truncated": true,
+      "preview": "use super::{command, NativeRuntimeFeatureGroupReport};\n\npub(super) fn group() -> NativeRuntimeFeatureGroupReport {\n    NativeRuntimeFeatureGroupReport {\n        group_id: \"agent-factory\",\n        label: \"Agent Factory\",\n        source_module: \"src-tauri/src/features/agent_factory.rs\",\n        role:\n            \"Owns proposal records for new agent capabilities and learning improvement decisions.\",\n        commands: vec![\n            command(\n                \"create_agent_factory_proposal\",\n                \"Create agent factory proposal\",\n                \"Writes proposal record under runtime data\",\n            ),\n            command(\n                \"record_learning_improvement_decision\",\n                \"Record learning improvement decision\",\n                \"Writes learning feedback record under runtime data\",\n            ),\n            command(\n                \"run_subagent_tool_plan\",\n                \"Run manager-as-tools subagent plan\",\n                \"Bounded agent-platform planner execution with task-run persistence\",\n            ),\n        ],\n        follow_up: vec![\n            \"Move proposal normalization into features/agent_factory/.\",\n            \"Keep generated proposal",
+      "previewBytes": 1200
     },
     {
       "id": "platform-desktop-app-src-tauri-src-features-app-shell-rs",
@@ -24248,7 +24248,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 80,
+        "documentCount": 81,
         "sourceFileCount": 14
       },
       {
@@ -24381,7 +24381,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-src-tauri-src-lib-rs",
         "label": "Large source surface",
-        "signal": "12,184 lines in platform-desktop-app/src-tauri/src/lib.rs",
+        "signal": "12,574 lines in platform-desktop-app/src-tauri/src/lib.rs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits.",
         "priority": "high",
@@ -24429,8 +24429,8 @@
         "path": "platform-desktop-app/src-tauri/src/lib.rs",
         "project": "platform-desktop-app",
         "language": "rust",
-        "lineCount": 12184,
-        "sizeBytes": 409039,
+        "lineCount": 12574,
+        "sizeBytes": 423174,
         "recommendation": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits."
       },
       {
@@ -28089,13 +28089,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 4035,
+      "sourceDocuments": 4049,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T14:07:16.091Z"
+      "latestInsightAt": "2026-06-06T14:38:03.668Z"
     },
     "inferenceStages": [
       {
@@ -28222,7 +28222,7 @@
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장"
         ],
-        "latestEvidenceAt": "2026-06-06T14:07:16.091Z"
+        "latestEvidenceAt": "2026-06-06T14:29:52.990Z"
       },
       {
         "id": "web-research-to-spec",
@@ -28236,7 +28236,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1815,
+        "signalCount": 1818,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -28244,11 +28244,11 @@
           },
           {
             "category": "evaluation",
-            "count": 484
+            "count": 485
           },
           {
             "category": "web-search",
-            "count": 438
+            "count": 439
           },
           {
             "category": "plan",
@@ -28256,7 +28256,7 @@
           },
           {
             "category": "request-trace",
-            "count": 122
+            "count": 123
           },
           {
             "category": "work-timing",
@@ -28287,7 +28287,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T14:07:16.088Z"
+        "latestEvidenceAt": "2026-06-06T14:38:03.668Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28301,15 +28301,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1033,
+        "signalCount": 1037,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 502
+            "count": 504
           },
           {
             "category": "plan",
-            "count": 302
+            "count": 303
           },
           {
             "category": "request-trace",
@@ -28321,7 +28321,7 @@
           },
           {
             "category": "work-summary",
-            "count": 24
+            "count": 25
           },
           {
             "category": "user-request",
@@ -28360,7 +28360,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T14:07:16.091Z"
+        "latestEvidenceAt": "2026-06-06T14:38:03.668Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28374,19 +28374,19 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 773,
+        "signalCount": 781,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 312
+            "count": 316
           },
           {
             "category": "evaluation",
-            "count": 252
+            "count": 254
           },
           {
             "category": "work-summary",
-            "count": 45
+            "count": 46
           },
           {
             "category": "web-search",
@@ -28402,7 +28402,7 @@
           },
           {
             "category": "user-request",
-            "count": 21
+            "count": 22
           },
           {
             "category": "project-doc",
@@ -28433,7 +28433,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "Requirement: Native Pipe Runtime Tools"
         ],
-        "latestEvidenceAt": "2026-06-06T14:07:16.091Z"
+        "latestEvidenceAt": "2026-06-06T14:38:03.668Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28447,7 +28447,7 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1592,
+        "signalCount": 1594,
         "sourceCategories": [
           {
             "category": "project-spec",
@@ -28459,11 +28459,11 @@
           },
           {
             "category": "user-request",
-            "count": 107
+            "count": 108
           },
           {
             "category": "work-summary",
-            "count": 68
+            "count": 69
           },
           {
             "category": "request-trace",
@@ -28506,7 +28506,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T14:07:16.090Z"
+        "latestEvidenceAt": "2026-06-06T14:38:03.668Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28582,14 +28582,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 4035,
+      "sourceDocuments": 4049,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T14:07:16.091Z"
+      "latestInsightAt": "2026-06-06T14:38:03.668Z"
     },
     "operatingModel": [
       {
@@ -28647,19 +28647,19 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3339,
+        "signalCount": 3346,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1815
+            "signalCount": 1818
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1033
+            "signalCount": 1037
           },
           {
             "id": "build-closeout-gate",
@@ -28693,7 +28693,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T14:07:16.091Z",
+        "latestEvidenceAt": "2026-06-06T14:38:03.668Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28722,13 +28722,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 892,
+        "signalCount": 900,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 773
+            "signalCount": 781
           },
           {
             "id": "release-blocker-gate",
@@ -28762,7 +28762,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T14:07:16.091Z",
+        "latestEvidenceAt": "2026-06-06T14:38:03.668Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28791,19 +28791,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2625,
+        "signalCount": 2631,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1592
+            "signalCount": 1594
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1033
+            "signalCount": 1037
           }
         ],
         "missingPatternIds": [],
@@ -28831,7 +28831,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T14:07:16.091Z",
+        "latestEvidenceAt": "2026-06-06T14:38:03.668Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28900,7 +28900,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T14:07:16.091Z",
+        "latestEvidenceAt": "2026-06-06T14:29:52.990Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28929,19 +28929,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2848,
+        "signalCount": 2855,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1033
+            "signalCount": 1037
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1815
+            "signalCount": 1818
           }
         ],
         "missingPatternIds": [],
@@ -28969,7 +28969,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T14:07:16.091Z",
+        "latestEvidenceAt": "2026-06-06T14:38:03.668Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28998,7 +28998,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1934,
+        "signalCount": 1937,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -29010,7 +29010,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1815
+            "signalCount": 1818
           }
         ],
         "missingPatternIds": [],
@@ -29038,7 +29038,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T14:07:16.088Z",
+        "latestEvidenceAt": "2026-06-06T14:38:03.668Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",
@@ -29283,13 +29283,13 @@
   "toolUsageIntegration": {
     "sourcePath": "platform-desktop-app/configs/tool-usage-integration-registry.json",
     "summary": {
-      "totalPatterns": 8,
-      "implementedPatterns": 8,
-      "p0Patterns": 8,
-      "verificationLadders": 4,
-      "validationCommands": 26,
+      "totalPatterns": 9,
+      "implementedPatterns": 9,
+      "p0Patterns": 9,
+      "verificationLadders": 5,
+      "validationCommands": 31,
       "adoptionBacklog": 2,
-      "referenceLinks": 3
+      "referenceLinks": 6
     },
     "referenceLinks": [
       {
@@ -29333,6 +29333,48 @@
         "lastChecked": "2026-06-06",
         "reliability": "high",
         "limitations": "Public macOS readiness still requires signing, hardened runtime, notarization, and installer policy gates."
+      },
+      {
+        "id": "openai_agents_handoffs",
+        "title": "OpenAI Agents SDK Handoffs",
+        "url": "https://openai.github.io/openai-agents-python/handoffs/",
+        "path": "",
+        "sourceType": "official_docs",
+        "usedFor": [
+          "agent-to-agent delegation and handoff contract comparison",
+          "manager-owned routing and final answer responsibility"
+        ],
+        "lastChecked": "2026-06-06",
+        "reliability": "high",
+        "limitations": "SDK-specific API behavior; the desktop platform keeps the pattern framework-neutral."
+      },
+      {
+        "id": "claude_code_subagents",
+        "title": "Claude Code Subagents",
+        "url": "https://docs.claude.com/ko/docs/claude-code/sub-agents",
+        "path": "",
+        "sourceType": "official_docs",
+        "usedFor": [
+          "specialized subagent definitions and bounded tool access",
+          "context isolation and reusable subagent behavior"
+        ],
+        "lastChecked": "2026-06-06",
+        "reliability": "high",
+        "limitations": "Claude Code-specific configuration; use as a reference pattern, not a platform dependency."
+      },
+      {
+        "id": "vscode_subagents",
+        "title": "VS Code Copilot Subagents",
+        "url": "https://code.visualstudio.com/docs/copilot/agents/subagents",
+        "path": "",
+        "sourceType": "official_docs",
+        "usedFor": [
+          "subagent invocation through prompt tools",
+          "explicit tool frontmatter and focused work delegation"
+        ],
+        "lastChecked": "2026-06-06",
+        "reliability": "high",
+        "limitations": "VS Code-specific prompt-file behavior; the platform records only reusable design constraints."
       }
     ],
     "patterns": [
@@ -29408,6 +29450,51 @@
           "Chaining shell output into unreadable logs."
         ],
         "platformApplication": "A future desktop source-intake lane can precompute read-only maps and expose them beside the code editor.",
+        "status": "implemented",
+        "priority": "p0"
+      },
+      {
+        "id": "subagent-delegation-loop",
+        "label": "Subagent delegation loop",
+        "labelKo": "서브에이전트 위임 루프",
+        "purpose": "Use a specialist subagent as a bounded tool while the main agent keeps routing, merge, validation, and final responsibility.",
+        "toolSurfaces": [
+          "tool_search",
+          "multi_agent_v1.spawn_agent",
+          "multi_agent_v1.wait_agent",
+          "multi_agent_v1.close_agent",
+          "agent-platform:plan-agent-orchestration"
+        ],
+        "triggerWhen": [
+          "The user explicitly asks for subagents, delegation, or parallel agent work.",
+          "A sidecar task can run independently without blocking the main agent's immediate local work.",
+          "The subtask has a concrete scope, output contract, and disjoint write set or read-only boundary."
+        ],
+        "sequence": [
+          "Search for available subagent tools and decide what remains on the main critical path.",
+          "Spawn only bounded explorer or worker subtasks with explicit scope, tool limits, and expected output.",
+          "Continue non-overlapping local work while the subagent runs.",
+          "Wait only when the result is needed, then merge findings and resolve contradictions.",
+          "Close unneeded subagents and record the route, output, validation, and residual risks."
+        ],
+        "evidenceOutputs": [
+          "subagent task prompt and agent id",
+          "routing and merge notes",
+          "_ops/coordination/status.json or request trace when durable",
+          "agent-platform orchestration plan output",
+          "validation and close-out evaluation records"
+        ],
+        "validationCommands": [
+          "PYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json",
+          "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json"
+        ],
+        "failureModes": [
+          "Spawning a subagent for the immediate blocking task and then waiting idly.",
+          "Giving overlapping write ownership to multiple agents.",
+          "Letting the subagent decide final product behavior without main-agent merge and evaluation.",
+          "Leaving completed or unnecessary subagents open."
+        ],
+        "platformApplication": "Tool Studio now exposes subagent delegation as a source-backed Agent Tool Playbook tied to the existing manager-as-tools planner.",
         "status": "implemented",
         "priority": "p0"
       },
@@ -29676,6 +29763,22 @@
           "Static tests cover collector, UI, and snapshot type contracts."
         ],
         "ownerFeatureId": "root_tool_management"
+      },
+      {
+        "id": "subagent-delegation-ladder",
+        "label": "Subagent delegation ladder",
+        "surface": "agents",
+        "commands": [
+          "PYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json",
+          "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json",
+          "PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents"
+        ],
+        "acceptance": [
+          "The plan reports ready_to_orchestrate.",
+          "Selected subagent tools include input/output/tool policy metadata.",
+          "The manager owns route, merge, evaluate, and final answer stages."
+        ],
+        "ownerFeatureId": "agent_orchestration"
       },
       {
         "id": "parallel-snapshot-ladder",

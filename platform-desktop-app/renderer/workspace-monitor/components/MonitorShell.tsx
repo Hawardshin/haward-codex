@@ -176,6 +176,7 @@ type DesktopActionFeedbackId =
   | "open-search-agent"
   | "open-terminal"
   | "start-terminal-agent-bridge"
+  | "plan-subagent-tools"
   | "reveal-workspace"
   | "open-workspace-path"
   | "open-external-terminal"
@@ -2125,6 +2126,33 @@ type CliTaskRunPruneReport = {
   removedCount: number;
   removedTaskRunIds: string[];
   errors: string[];
+};
+
+type SubagentToolSummary = {
+  toolName: string;
+  agentName: string;
+  allowedTools: string[];
+  outputContract: string;
+};
+
+type SubagentToolPlanReport = {
+  taskRunId: string;
+  requestId: string;
+  status: string;
+  planStatus: string;
+  command: string;
+  exitCode?: number | null;
+  durationMs: number;
+  workingDir: string;
+  subagentToolCount: number;
+  subagentTools: SubagentToolSummary[];
+  output: string;
+  stderr: string;
+  outputTruncated: boolean;
+  taskRecordPath?: string | null;
+  stdoutLogPath?: string | null;
+  stderrLogPath?: string | null;
+  persistenceError?: string | null;
 };
 
 type RuntimeDataRootReport = {
@@ -10923,6 +10951,7 @@ function DesktopRuntimePanel({
   const [taskRunDetail, setTaskRunDetail] = useState<CliTaskRunDetailReport | null>(null);
   const [taskRunBusy, setTaskRunBusy] = useState(false);
   const [taskRunPruneNotice, setTaskRunPruneNotice] = useState("");
+  const [lastSubagentToolPlan, setLastSubagentToolPlan] = useState<SubagentToolPlanReport | null>(null);
   const [runtimeDataBoundary, setRuntimeDataBoundary] = useState<RuntimeDataBoundaryReport | null>(null);
   const [payloadAudit, setPayloadAudit] = useState<InstallerPayloadAuditReport | null>(null);
   const [supportBundle, setSupportBundle] = useState<SupportDiagnosticBundleReport | null>(null);
@@ -13461,6 +13490,13 @@ function DesktopRuntimePanel({
             detail: uiLanguage === "ko" ? "네이티브 PTY 셸을 먼저 연결한 뒤, 같은 작업 폴더와 선택 모드로 에이전트 CLI 세션을 시작합니다." : "Connects the native PTY shell first, then starts the agent CLI session with the same working folder and selected mode.",
             next: uiLanguage === "ko" ? "하단 터미널의 PTY 탭과 출력 탭에서 연결과 에이전트 세션을 함께 확인하세요." : "Check the PTY and Output tabs in the bottom terminal together."
           };
+        case "plan-subagent-tools":
+          return {
+            label: uiLanguage === "ko" ? "서브에이전트 툴 계획" : "Subagent tool plan",
+            scope: "agent-platform:plan-agent-orchestration",
+            detail: uiLanguage === "ko" ? "agent-platform planner를 실행해 manager가 호출할 subagent tools를 만들고 task-run record로 저장합니다." : "Runs the agent-platform planner, builds manager-owned subagent tools, and stores the result as a task-run record.",
+            next: uiLanguage === "ko" ? "Task Runs에서 subagent_tool_plan 기록과 plan JSON을 확인하세요." : "Check the subagent_tool_plan record and plan JSON in Task Runs."
+          };
         case "reveal-workspace":
           return {
             label: uiLanguage === "ko" ? "Finder에서 보기" : "Reveal in file manager",
@@ -14090,6 +14126,36 @@ function DesktopRuntimePanel({
       runningId: "session",
       taskKind: selectedMode.id
     });
+  };
+  const planSubagentTools = async () => {
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setRuntimeState("unavailable");
+      throw new Error(runtimeUnavailableErrorMessage);
+    }
+    const goal = sessionPrompt.trim() || (uiLanguage === "ko"
+      ? `${selectedMode.label} 작업을 manager/subagent tool 구조로 계획`
+      : `Plan ${selectedMode.label} as manager/subagent tools`);
+    const context = [
+      uiLanguage === "ko" ? "Desktop Runtime에서 실행된 bounded subagent tool planning 요청입니다." : "Bounded subagent tool planning request from Desktop Runtime.",
+      `mode=${selectedMode.id}`,
+      `adapter=${selectedAdapter?.adapterId || selectedSessionAdapterId}`,
+      `workspace=${workingDir.trim() || workspacePathLabel}`
+    ].join("\n");
+    const report = await tauriInvoke<SubagentToolPlanReport>("run_subagent_tool_plan", {
+      input: {
+        goal,
+        context,
+        workingDir: workingDir.trim() || undefined,
+        preferredPattern: "supervisor_router",
+        requiredCapabilities: ["research", "spec planning", "evaluation"],
+        blockedTools: ["direct_private_file_access"],
+        maxSubagents: 5
+      }
+    });
+    setLastSubagentToolPlan(report);
+    setSelectedTaskRunId(report.taskRunId);
+    await refreshTaskRunRecords();
   };
 
   if (isFileWorkspaceSurface && !interactionContentReady) {
@@ -14842,6 +14908,34 @@ function DesktopRuntimePanel({
             <Settings size={15} aria-hidden="true" />
             <span>{uiLanguage === "ko" ? "연결 설정" : "Connection settings"}</span>
           </button>
+          <button
+            type="button"
+            className={desktopActionButtonClass("plan-subagent-tools")}
+            data-terminal-agent-action="plan-subagents"
+            data-desktop-action-feedback="plan-subagent-tools"
+            onClick={() =>
+              void runDesktopAction(
+                "plan-subagent-tools",
+                planSubagentTools,
+                uiLanguage === "ko" ? "서브에이전트 툴 계획을 만들고 Task Runs에 저장했습니다." : "Created a subagent tool plan and saved it to Task Runs."
+              )
+            }
+            disabled={!runtimeReady}
+          >
+            <Network size={15} aria-hidden="true" />
+            <span>{uiLanguage === "ko" ? "서브에이전트 툴 계획" : "Plan subagent tools"}</span>
+          </button>
+          {lastSubagentToolPlan && (
+            <div className="terminal-agent-plan-result" data-subagent-tool-plan-result>
+              <strong>
+                {lastSubagentToolPlan.subagentToolCount} {uiLanguage === "ko" ? "개 툴" : "tools"} · {lastSubagentToolPlan.planStatus}
+              </strong>
+              <span>
+                {lastSubagentToolPlan.subagentTools.map((tool) => tool.toolName).slice(0, 3).join(" · ") || lastSubagentToolPlan.command}
+              </span>
+              <code>{lastSubagentToolPlan.taskRunId}</code>
+            </div>
+          )}
         </div>
       </section>
 

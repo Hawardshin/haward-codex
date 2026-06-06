@@ -18,6 +18,11 @@ pub(super) fn group() -> NativeRuntimeFeatureGroupReport {
                 "Record learning improvement decision",
                 "Writes learning feedback record under runtime data",
             ),
+            command(
+                "run_subagent_tool_plan",
+                "Run manager-as-tools subagent plan",
+                "Bounded agent-platform planner execution with task-run persistence",
+            ),
         ],
         follow_up: vec![
             "Move proposal normalization into features/agent_factory/.",

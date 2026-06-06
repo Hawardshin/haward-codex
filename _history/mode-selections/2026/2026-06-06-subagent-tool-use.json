@@ -1,0 +1,14 @@
+{
+  "date": "2026-06-06",
+  "project": "platform-desktop-app",
+  "work_mode": "standard",
+  "selection_reason": "The request changes agent/subagent orchestration behavior, a desktop runtime command, Tool Studio registry, and UI, without installing dependencies or changing public release packaging.",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "enforcement_checks": [
+    "requirements and spec artifacts created",
+    "check-agent-orchestration included because multi-agent orchestration contract behavior changed",
+    "resource risk recorded because a bounded Python subprocess is launched by Tauri",
+    "browser smoke required for frontend-visible playbook and button"
+  ]
+}

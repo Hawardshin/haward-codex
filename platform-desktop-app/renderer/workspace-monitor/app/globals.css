@@ -8496,7 +8496,7 @@ h3 {
 .terminal-agent-bridge-actions {
   min-width: 0;
   display: grid;
-  grid-template-rows: repeat(3, minmax(var(--control-target-size), auto));
+  grid-template-rows: repeat(4, minmax(var(--control-target-size), auto));
   gap: 8px;
 }
 
@@ -8553,6 +8553,45 @@ h3 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.terminal-agent-plan-result {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+  border: 1px solid var(--status-success-border);
+  background: var(--status-success-bg);
+  border-radius: 8px;
+  padding: 9px;
+  color: var(--text);
+  box-shadow: var(--hairline-shadow);
+}
+
+.terminal-agent-plan-result strong,
+.terminal-agent-plan-result span,
+.terminal-agent-plan-result code {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.terminal-agent-plan-result strong {
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+}
+
+.terminal-agent-plan-result span {
+  color: var(--muted);
+  font-size: var(--font-size-caption);
+}
+
+.terminal-agent-plan-result code {
+  border: 1px solid var(--line);
+  background: var(--code-bg);
+  border-radius: 6px;
+  padding: 5px 6px;
+  font-size: var(--font-size-caption);
 }
 
 .agent-cli-cockpit {

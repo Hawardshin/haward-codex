@@ -108,6 +108,10 @@ const tauriLib = fs.readFileSync(path.resolve(projectRoot, "..", "..", "src-taur
 const tauriCargo = fs.readFileSync(path.resolve(projectRoot, "..", "..", "src-tauri", "Cargo.toml"), "utf8");
 const css = fs.readFileSync(path.join(projectRoot, "app", "globals.css"), "utf8");
 const packageJson = JSON.parse(fs.readFileSync(path.join(projectRoot, "package.json"), "utf8"));
+const toolUsageRegistry = JSON.parse(
+  fs.readFileSync(path.resolve(projectRoot, "..", "..", "configs", "tool-usage-integration-registry.json"), "utf8")
+);
+const toolUsageRegistryText = JSON.stringify(toolUsageRegistry);
 
 function readCssRule(selector) {
   const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -150,6 +154,12 @@ test("Tool Studio exposes source-backed agent tool usage playbooks", () => {
   assert.match(css, /\.tool-usage-playbook \{/);
   assert.match(css, /\.tool-usage-playbook-grid \{/);
   assert.match(css, /\.tool-usage-command-list code \{/);
+  assert.match(toolUsageRegistryText, /subagent-delegation-loop/);
+  assert.match(toolUsageRegistryText, /multi_agent_v1\.spawn_agent/);
+  assert.match(toolUsageRegistryText, /multi_agent_v1\.wait_agent/);
+  assert.match(toolUsageRegistryText, /multi_agent_v1\.close_agent/);
+  assert.match(toolUsageRegistryText, /agent-platform:plan-agent-orchestration/);
+  assert.match(toolUsageRegistryText, /subagent-delegation-ladder/);
 });
 
 test("Workspace snapshot collection uses bounded worker-thread parallelism", () => {
@@ -372,15 +382,21 @@ test("Native PTY terminal exposes search, clipboard, and quick command controls"
 
 test("Desktop Runtime exposes an open-source-informed Agent CLI cockpit", () => {
   assert.match(monitorShell, /"start-terminal-agent-bridge"/);
+  assert.match(monitorShell, /"plan-subagent-tools"/);
   assert.match(monitorShell, /createCliAdapterSession/);
   assert.match(monitorShell, /createNativePtySession/);
   assert.match(monitorShell, /startSelectedLaneAction/);
   assert.match(monitorShell, /startTerminalAgentBridge/);
+  assert.match(monitorShell, /planSubagentTools/);
+  assert.match(monitorShell, /run_subagent_tool_plan/);
   assert.match(monitorShell, /data-terminal-agent-bridge="pty-to-agent"/);
   assert.match(monitorShell, /data-terminal-agent-step=\{step\.id\}/);
   assert.match(monitorShell, /data-terminal-agent-action="connect-start"/);
   assert.match(monitorShell, /data-terminal-agent-action="open-terminal"/);
+  assert.match(monitorShell, /data-terminal-agent-action="plan-subagents"/);
+  assert.match(monitorShell, /data-subagent-tool-plan-result/);
   assert.match(monitorShell, /data-desktop-action-feedback="start-terminal-agent-bridge"/);
+  assert.match(monitorShell, /data-desktop-action-feedback="plan-subagent-tools"/);
   assert.match(monitorShell, /isActiveSessionStatus\(activePty\.status\)/);
   assert.match(monitorShell, /data-agent-cli-cockpit="open-source-control-plane"/);
   assert.match(monitorShell, /Agent CLI Cockpit/);
@@ -403,10 +419,14 @@ test("Desktop Runtime exposes an open-source-informed Agent CLI cockpit", () => 
   assert.match(tauriLib, /fn run_native_pipe_probe/);
   assert.match(tauriLib, /run_native_pipe_probe,/);
   assert.match(tauriLib, /pipe_kind: "os_pipe_stdout_to_stdin"/);
+  assert.match(tauriLib, /fn run_subagent_tool_plan/);
+  assert.match(tauriLib, /run_subagent_tool_plan,/);
+  assert.match(tauriLib, /plan-agent-orchestration/);
   assert.match(css, /\.terminal-agent-bridge \{/);
   assert.match(css, /\.terminal-agent-bridge-steps \{/);
   assert.match(css, /\.terminal-agent-bridge-steps article\.state-ready/);
   assert.match(css, /\.terminal-agent-bridge-actions button\.desktop-action-current\.status-failed/);
+  assert.match(css, /\.terminal-agent-plan-result \{/);
   assert.match(css, /\.agent-cli-cockpit \{/);
   assert.match(css, /\.agent-cli-pattern-strip \{/);
   assert.match(css, /\.agent-cli-cockpit-grid \{/);

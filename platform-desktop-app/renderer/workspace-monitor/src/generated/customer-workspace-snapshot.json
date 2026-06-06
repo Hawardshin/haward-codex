@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T14:08:49.082Z",
+  "generatedAt": "2026-06-06T14:38:49.894Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -40,8 +40,8 @@
     "fundamentalImprovementPrinciples": 0,
     "fundamentalImprovementPackages": 0,
     "fundamentalImprovementFitnessChecks": 0,
-    "toolUsagePatterns": 8,
-    "toolUsageValidationCommands": 26,
+    "toolUsagePatterns": 9,
+    "toolUsageValidationCommands": 31,
     "snapshotDocumentWorkers": 0,
     "snapshotSourceWorkers": 0,
     "structurePressurePoints": 0,
@@ -1550,7 +1550,7 @@
       "queuedPatterns": 0,
       "activeRecommendations": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-06T14:07:16.091Z"
+      "latestInsightAt": "2026-06-06T14:38:03.668Z"
     },
     "inferenceStages": [],
     "signalGroups": []
@@ -1565,7 +1565,7 @@
       "totalImprovementPackages": 0,
       "totalFitnessChecks": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-06T14:07:16.091Z"
+      "latestInsightAt": "2026-06-06T14:38:03.668Z"
     },
     "operatingModel": [],
     "structuralPrinciples": [],
@@ -1575,13 +1575,13 @@
   "toolUsageIntegration": {
     "sourcePath": "",
     "summary": {
-      "totalPatterns": 8,
-      "implementedPatterns": 8,
-      "p0Patterns": 8,
-      "verificationLadders": 4,
-      "validationCommands": 26,
+      "totalPatterns": 9,
+      "implementedPatterns": 9,
+      "p0Patterns": 9,
+      "verificationLadders": 5,
+      "validationCommands": 31,
       "adoptionBacklog": 2,
-      "referenceLinks": 3
+      "referenceLinks": 6
     },
     "referenceLinks": [
       {
@@ -1625,6 +1625,48 @@
         "lastChecked": "2026-06-06",
         "reliability": "high",
         "limitations": "Public macOS readiness still requires signing, hardened runtime, notarization, and installer policy gates."
+      },
+      {
+        "id": "openai_agents_handoffs",
+        "title": "OpenAI Agents SDK Handoffs",
+        "url": "https://openai.github.io/openai-agents-python/handoffs/",
+        "path": "",
+        "sourceType": "official_docs",
+        "usedFor": [
+          "agent-to-agent delegation and handoff contract comparison",
+          "manager-owned routing and final answer responsibility"
+        ],
+        "lastChecked": "2026-06-06",
+        "reliability": "high",
+        "limitations": "SDK-specific API behavior; the desktop platform keeps the pattern framework-neutral."
+      },
+      {
+        "id": "claude_code_subagents",
+        "title": "Claude Code Subagents",
+        "url": "https://docs.claude.com/ko/docs/claude-code/sub-agents",
+        "path": "",
+        "sourceType": "official_docs",
+        "usedFor": [
+          "specialized subagent definitions and bounded tool access",
+          "context isolation and reusable subagent behavior"
+        ],
+        "lastChecked": "2026-06-06",
+        "reliability": "high",
+        "limitations": "Claude Code-specific configuration; use as a reference pattern, not a platform dependency."
+      },
+      {
+        "id": "vscode_subagents",
+        "title": "VS Code Copilot Subagents",
+        "url": "https://code.visualstudio.com/docs/copilot/agents/subagents",
+        "path": "",
+        "sourceType": "official_docs",
+        "usedFor": [
+          "subagent invocation through prompt tools",
+          "explicit tool frontmatter and focused work delegation"
+        ],
+        "lastChecked": "2026-06-06",
+        "reliability": "high",
+        "limitations": "VS Code-specific prompt-file behavior; the platform records only reusable design constraints."
       }
     ],
     "patterns": [
@@ -1700,6 +1742,51 @@
           "Chaining shell output into unreadable logs."
         ],
         "platformApplication": "A future desktop source-intake lane can precompute read-only maps and expose them beside the code editor.",
+        "status": "implemented",
+        "priority": "p0"
+      },
+      {
+        "id": "subagent-delegation-loop",
+        "label": "Subagent delegation loop",
+        "labelKo": "서브에이전트 위임 루프",
+        "purpose": "Use a specialist subagent as a bounded tool while the main agent keeps routing, merge, validation, and final responsibility.",
+        "toolSurfaces": [
+          "tool_search",
+          "multi_agent_v1.spawn_agent",
+          "multi_agent_v1.wait_agent",
+          "multi_agent_v1.close_agent",
+          "agent-platform:plan-agent-orchestration"
+        ],
+        "triggerWhen": [
+          "The user explicitly asks for subagents, delegation, or parallel agent work.",
+          "A sidecar task can run independently without blocking the main agent's immediate local work.",
+          "The subtask has a concrete scope, output contract, and disjoint write set or read-only boundary."
+        ],
+        "sequence": [
+          "Search for available subagent tools and decide what remains on the main critical path.",
+          "Spawn only bounded explorer or worker subtasks with explicit scope, tool limits, and expected output.",
+          "Continue non-overlapping local work while the subagent runs.",
+          "Wait only when the result is needed, then merge findings and resolve contradictions.",
+          "Close unneeded subagents and record the route, output, validation, and residual risks."
+        ],
+        "evidenceOutputs": [
+          "subagent task prompt and agent id",
+          "routing and merge notes",
+          "_ops/coordination/status.json or request trace when durable",
+          "agent-platform orchestration plan output",
+          "validation and close-out evaluation records"
+        ],
+        "validationCommands": [
+          "PYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json",
+          "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json"
+        ],
+        "failureModes": [
+          "Spawning a subagent for the immediate blocking task and then waiting idly.",
+          "Giving overlapping write ownership to multiple agents.",
+          "Letting the subagent decide final product behavior without main-agent merge and evaluation.",
+          "Leaving completed or unnecessary subagents open."
+        ],
+        "platformApplication": "Tool Studio now exposes subagent delegation as a source-backed Agent Tool Playbook tied to the existing manager-as-tools planner.",
         "status": "implemented",
         "priority": "p0"
       },
@@ -1968,6 +2055,22 @@
           "Static tests cover collector, UI, and snapshot type contracts."
         ],
         "ownerFeatureId": "root_tool_management"
+      },
+      {
+        "id": "subagent-delegation-ladder",
+        "label": "Subagent delegation ladder",
+        "surface": "agents",
+        "commands": [
+          "PYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json",
+          "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json",
+          "PYTHONPATH=src python3 -m agent_platform.cli list-agents --registry configs/agents"
+        ],
+        "acceptance": [
+          "The plan reports ready_to_orchestrate.",
+          "Selected subagent tools include input/output/tool policy metadata.",
+          "The manager owns route, merge, evaluate, and final answer stages."
+        ],
+        "ownerFeatureId": "agent_orchestration"
       },
       {
         "id": "parallel-snapshot-ladder",

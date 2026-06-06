@@ -1,0 +1,103 @@
+{
+  "task": "Subagent Tool Use",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "subagent-playbook-visible",
+      "description": "Expose subagent delegation as a platform-visible tool usage playbook.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/tool-usage-integration-registry.json",
+        "Browser smoke subagent-delegation-loop visible"
+      ]
+    },
+    {
+      "item_id": "live-planner-command",
+      "description": "Provide an executable native path for creating a manager/subagent tool plan.",
+      "source": "subagent explorer gap",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "run_subagent_tool_plan",
+        "agent-platform:plan-agent-orchestration"
+      ]
+    },
+    {
+      "item_id": "task-run-persistence",
+      "description": "Persist plan result as task-run record instead of transient UI-only output.",
+      "source": "platform runtime rule",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "persist_subagent_tool_plan_task_run"
+      ]
+    },
+    {
+      "item_id": "no-autonomous-background-exec",
+      "description": "Do not silently start full autonomous subagent execution in this slice.",
+      "source": "safety boundary",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "spec non-scope",
+        "resource check"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-subagent-tool-use.ko.md",
+      "purpose": "Requirement record",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-06-subagent-tool-use/spec.ko.md",
+      "purpose": "Spec record",
+      "required": true
+    },
+    {
+      "path": "_history/resource-checks/2026/2026-06-06-subagent-tool-use.json",
+      "purpose": "Resource lifecycle record",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-contract",
+      "description": "Tool usage registry remains self-documenting.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-config-contract"
+      ]
+    },
+    {
+      "check_id": "agent-orchestration",
+      "description": "Shared agent orchestration registry and planner are valid.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-agent-orchestration",
+        "plan-agent-orchestration"
+      ]
+    },
+    {
+      "check_id": "rust-and-renderer",
+      "description": "Rust and renderer checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo check",
+        "workspace-monitor check/test"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "Browser preview cannot execute the live Tauri command; the static command path is compiled and visible, but a packaged runtime smoke is separate."
+  ],
+  "notes": [
+    "The subagent explorer was used and closed; no active subagents remain."
+  ]
+}

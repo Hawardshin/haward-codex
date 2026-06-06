@@ -1,0 +1,92 @@
+{
+  "initial_instruction": "에이전트 서브에이전트 사용 툴",
+  "result_summary": "Added a source-backed subagent delegation playbook plus a Desktop Runtime Tauri command that runs the agent-platform manager-as-tools planner and persists the result as a task-run record.",
+  "work_mode": "standard",
+  "changed_files": [
+    "platform-desktop-app/configs/tool-usage-integration-registry.json",
+    "platform-desktop-app/src-tauri/src/lib.rs",
+    "platform-desktop-app/src-tauri/src/features/agent_factory.rs",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "verification": [
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/tool-usage-integration-registry.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli plan-agent-orchestration configs/orchestration/manager-tool-plan-template.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-agent-orchestration configs/orchestration/agent-orchestration-registry.json",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort",
+    "corepack pnpm -w run desktop:renderer:build",
+    "corepack pnpm --dir platform-desktop-app run check",
+    "cargo check --manifest-path platform-desktop-app/src-tauri/Cargo.toml",
+    "cargo test --manifest-path platform-desktop-app/src-tauri/Cargo.toml runtime_feature_map_groups_commands_by_native_capability",
+    "Playwright smoke on http://127.0.0.1:3224/#section-tools and #section-desktop",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/resource-checks/2026/2026-06-06-subagent-tool-use.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/omission-checks/2026/2026-06-06-subagent-tool-use.json"
+  ],
+  "references_checked": [
+    "https://openai.github.io/openai-agents-python/handoffs/",
+    "https://openai.github.io/openai-agents-python/agents/",
+    "https://docs.claude.com/ko/docs/claude-code/sub-agents",
+    "https://code.visualstudio.com/docs/copilot/agents/subagents",
+    "agent-platform/configs/orchestration/manager-tool-plan-template.json",
+    "agent-platform/src/agent_platform/orchestration/manager_tool.py"
+  ],
+  "grounding_checks": [
+    "_history/web-searches/2026/2026-06-06-subagent-tool-use.ko.md"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-06-subagent-tool-use.ko.md",
+    "platform-desktop-app/specs/2026-06-06-subagent-tool-use/spec.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "platform-desktop-app/specs/2026-06-06-subagent-tool-use/plan.ko.md",
+    "_history/plans/2026/2026-06-06-subagent-tool-use.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-06-subagent-tool-use.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-06-subagent-tool-use.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-06-subagent-tool-use.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-06-subagent-tool-use.ko.md"
+  ],
+  "requirements_targets": [
+    "platform-desktop-app/docs/requirements/2026-06-06-subagent-tool-use.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-06-subagent-tool-use/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-06-subagent-tool-use/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-06-subagent-tool-use/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-06-subagent-tool-use/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-06-subagent-tool-use/traceability.ko.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-06-subagent-tool-use.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-06-subagent-tool-use.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-06-subagent-tool-use.ko.md"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-06-subagent-tool-use.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "known_gaps": [],
+  "deferred_improvement_targets": [
+    "platform-desktop-app/specs/2026-06-06-subagent-tool-use/validation.ko.md"
+  ],
+  "improvement_ideas": [
+    "Add packaged desktop smoke for run_subagent_tool_plan.",
+    "Add live autonomous subagent worker execution only after task ownership, permissions, and merge gates are explicit."
+  ]
+}
