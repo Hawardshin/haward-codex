@@ -6278,11 +6278,13 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             </header>
 
             <div className="settings-dialog-body">
-              <nav className="settings-tab-list" aria-label={uiLanguage === "ko" ? "설정 대분류" : "Settings categories"}>
+              <nav className="settings-tab-list" role="tablist" aria-label={uiLanguage === "ko" ? "설정 대분류" : "Settings categories"}>
                 {settingsTabs.map((item) => (
                   <button
                     key={item.id}
                     type="button"
+                    role="tab"
+                    aria-selected={settingsTab === item.id}
                     className={settingsTab === item.id ? "active" : ""}
                     onClick={() => setSettingsTab(item.id)}
                   >
@@ -13281,15 +13283,23 @@ function DesktopRuntimePanel({
           {sourceWorkbenchView === "editor" && (
           <div className="source-edit-workbench">
             {openDraftEntries.length > 0 && (
-              <div className="source-editor-tabs" aria-label={copy.openedDrafts}>
+              <div className="source-editor-tabs" role="tablist" aria-label={copy.openedDrafts}>
                 {openDraftEntries.map((entry) => {
                   const dirty = entry.content !== entry.baseContent;
+                  const activeDraft = sourceFile?.relativePath === entry.relativePath;
                   return (
                     <div
                       key={entry.relativePath}
-                      className={`source-editor-tab ${sourceFile?.relativePath === entry.relativePath ? "active" : ""} ${dirty ? "dirty" : "clean"}`}
+                      className={`source-editor-tab ${activeDraft ? "active" : ""} ${dirty ? "dirty" : "clean"}`}
+                      role="presentation"
                     >
-                      <button type="button" className="source-editor-tab-main" onClick={() => selectDraftEntry(entry.relativePath)}>
+                      <button
+                        type="button"
+                        className="source-editor-tab-main"
+                        role="tab"
+                        aria-selected={activeDraft}
+                        onClick={() => selectDraftEntry(entry.relativePath)}
+                      >
                         <span>{dirty ? copy.dirty : copy.clean}</span>
                         <strong>{entry.relativePath}</strong>
                       </button>

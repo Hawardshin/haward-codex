@@ -531,6 +531,23 @@ test("Desktop titlebar uses native Tauri drag regions without stealing controls"
   assert.match(css, /\.titlebar-actions,[\s\S]*?\.titlebar-search,[\s\S]*?-webkit-app-region: no-drag;/);
 });
 
+test("Tabs expose clear visual selected states and ARIA selection", () => {
+  assert.match(monitorShell, /<nav className="settings-tab-list" role="tablist"/);
+  assert.match(monitorShell, /role="tab"[\s\S]*?aria-selected=\{settingsTab === item\.id\}/);
+  assert.match(monitorShell, /<div className="source-editor-tabs" role="tablist"/);
+  assert.match(monitorShell, /className=\{`source-editor-tab \$\{activeDraft \? "active" : ""\}/);
+  assert.match(monitorShell, /role="tab"[\s\S]*?aria-selected=\{activeDraft\}/);
+  assert.match(css, /--tab-selected-indicator:/);
+  assert.match(css, /--tab-selected-border:/);
+  assert.match(css, /--tab-selected-shadow:/);
+  assert.match(css, /\.settings-tab-list button::before,[\s\S]*?\.tool-studio-mode-rail button::before \{[\s\S]*?background: var\(--tab-selected-indicator\);/);
+  assert.match(css, /\.settings-tab-list button\.active::before,[\s\S]*?\.tool-studio-mode-rail button\.active::before \{[\s\S]*?opacity: 1;[\s\S]*?transform: scaleX\(1\);/);
+  assert.match(css, /\.section-tabs button\.active \{[\s\S]*?border-color: var\(--tab-selected-border\);[\s\S]*?box-shadow: var\(--tab-selected-shadow\);/);
+  assert.match(css, /\.source-editor-tab::before \{[\s\S]*?width: 4px;[\s\S]*?background: var\(--tab-selected-indicator\);/);
+  assert.match(css, /\.source-editor-tab\.active::before \{[\s\S]*?transform: scaleY\(1\);/);
+  assert.match(css, /\.tool-studio-depth-rail button\.active,[\s\S]*?\.tool-studio-mode-rail button\.active \{[\s\S]*?box-shadow: var\(--tab-selected-shadow\);/);
+});
+
 test("Desktop shell separates IntelliJ-style tool window stripe and editor plane", () => {
   assert.match(monitorShell, /data-layout-model="intellij-tool-window-editor"/);
   assert.match(monitorShell, /data-intellij-zone="tool-window-stripe"/);
@@ -1408,8 +1425,8 @@ test("Desktop chrome uses elevated navigation and tab states", () => {
   assert.match(css, /\.activity-rail button\[aria-current="page"\]/);
   assert.match(css, /\.section-tab-group\.active::before \{/);
   assert.match(css, /\.section-tabs button,[\s\S]*?\.panel-heading button \{[\s\S]*?background: var\(--choice-bg\);[\s\S]*?box-shadow: var\(--section-tab-shadow\), var\(--surface-edge-highlight\);/);
-  assert.match(css, /\.section-tabs button\.active \{[\s\S]*?background: var\(--choice-selected-bg\);[\s\S]*?box-shadow: var\(--section-tab-active-shadow\);/);
+  assert.match(css, /\.section-tabs button\.active \{[\s\S]*?background: var\(--choice-selected-bg\);[\s\S]*?box-shadow: var\(--tab-selected-shadow\);/);
   assert.match(css, /\.panel \{[\s\S]*?background: var\(--surface-depth-0\);[\s\S]*?box-shadow: var\(--surface-shadow-low\), var\(--surface-edge-highlight\);/);
   assert.match(css, /\.tool-studio-actions button,[\s\S]*?\.tool-studio-mode-rail button \{[\s\S]*?background: var\(--choice-bg\);[\s\S]*?box-shadow: var\(--section-tab-shadow\), var\(--surface-edge-highlight\);/);
-  assert.match(css, /\.tool-studio-depth-rail button\.active,[\s\S]*?\.tool-studio-mode-rail button\.active \{[\s\S]*?background: var\(--choice-selected-bg\);[\s\S]*?box-shadow: var\(--section-tab-active-shadow\);/);
+  assert.match(css, /\.tool-studio-depth-rail button\.active,[\s\S]*?\.tool-studio-mode-rail button\.active \{[\s\S]*?background: var\(--choice-selected-bg\);[\s\S]*?box-shadow: var\(--tab-selected-shadow\);/);
 });

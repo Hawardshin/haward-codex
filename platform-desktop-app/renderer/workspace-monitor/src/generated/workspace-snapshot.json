@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T04:48:52.799Z",
+  "generatedAt": "2026-06-06T04:57:48.232Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -15,9 +15,9 @@
     "requirements": 519,
     "evaluations": 21,
     "webSearches": 13,
-    "timingRecords": 13,
+    "timingRecords": 12,
     "historyDays": 1,
-    "adminHistoryDocuments": 2666,
+    "adminHistoryDocuments": 2673,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -7793,6 +7793,214 @@
   ],
   "documents": [
     {
+      "id": "platform-desktop-app-specs-2026-06-06-clear-tab-discrimination-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-clear-tab-discrimination/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Clear Tab Discrimination",
+      "excerpt": "Validation: Clear Tab Discrimination 실행 결과 corepack pnpm filter workspace monitor test : 통과, 82 tests. corepack pnpm filter workspace monitor run check : 통과. Browser computed style check: 통과. Visible active tool studio tab에서 ::before opacity 1 , height 4px , inactive opacity 0 , ",
+      "html": "<h1>Validation: Clear Tab Discrimination</h1>\n<h2>실행 결과</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 82 tests.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과.</li>\n<li>Browser computed-style check: 통과. Visible active tool-studio tab에서 <code>::before</code> opacity <code>1</code>, height <code>4px</code>, inactive opacity <code>0</code>, selected shadow와 inactive shadow 차이를 확인했다.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과, 27 tests.</li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과. 기존 public release 경고는 signing/notarization/updater/clean-machine smoke test.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code>: 통과.</li>\n<li><code>git diff --check</code>: 통과.</li>\n</ul>\n<h2>패키지 산출물</h2>\n<ul>\n<li>macOS app: <code>platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li>DMG: <code>platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>\n<h2>최종 상태</h2>\n<ul>\n<li>내부 build/package와 repository diff 검사가 모두 통과했다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1047,
+      "updatedAt": "2026-06-06T04:57:40.589Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-clear-tab-discrimination-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-clear-tab-discrimination.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "Evaluation: Clear Tab Discrimination",
+      "excerpt": "Evaluation: Clear Tab Discrimination 평가 기준 활성 탭과 비활성 탭이 색상만이 아니라 형태/indicator로 구분되는가. 주요 tab like controls에 selected 상태 계약이 남는가. 실제 DOM/브라우저에서 selected indicator가 computed style로 확인되는가. 기존 기능, scroll 정책, build/package 흐름을 깨뜨리지 않는가. 평가 결과 selected tab token과 ::before indicator가 추가",
+      "html": "<p>Evaluation: Clear Tab Discrimination 평가 기준 활성 탭과 비활성 탭이 색상만이 아니라 형태/indicator로 구분되는가. 주요 tab like controls에 selected 상태 계약이 남는가. 실제 DOM/브라우저에서 selected indicator가 computed style로 확인되는가. 기존 기능, scroll 정책, build/package 흐름을 깨뜨리지 않는가. 평가 결과 selected tab token과 ::before indicator가 추가됐다. active tab은 opacity: 1 , 4px indicator, selected border, selected shadow를 갖는</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1169,
+      "updatedAt": "2026-06-06T04:57:09.119Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-clear-tab-discrimination-ko-md",
+      "path": "_history/work-timings/2026/2026-06-06-clear-tab-discrimination.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "Work Timing: Clear Tab Discrimination",
+      "excerpt": "Work Timing: Clear Tab Discrimination | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 4분 | JetBrains/WAI/WCAG 기준 확인 | | 로컬 구조 분석 | 7분 | 탭/탭형 CSS와 ARIA 위치 확인 | | 구현 | 12분 | CSS token, indicator, ARIA, tests | | 검증 | 18분 | renderer/desktop test/check, Browser computed style | | ",
+      "html": "<p>Work Timing: Clear Tab Discrimination | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 4분 | JetBrains/WAI/WCAG 기준 확인 | | 로컬 구조 분석 | 7분 | 탭/탭형 CSS와 ARIA 위치 확인 | | 구현 | 12분 | CSS token, indicator, ARIA, tests | | 검증 | 18분 | renderer/desktop test/check, Browser computed style | | 패키지 빌드 | 2분 | internal app/DMG 생성 및 검증 | | 문서화 | 7분 | 요구사항, 스펙, history, evaluat</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 490,
+      "updatedAt": "2026-06-06T04:57:09.119Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-plans-2026-2026-06-06-clear-tab-discrimination-ko-md",
+      "path": "_history/plans/2026/2026-06-06-clear-tab-discrimination.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "Plan Record: Clear Tab Discrimination",
+      "excerpt": "Plan Record: Clear Tab Discrimination Work Mode selected work mode: standard view mode: superadmin developer 이유: 데스크톱 UI 품질 개선이며 테스트와 빌드 검증이 필요한 중간 범위 작업이다. Plan 1. 공식 탭/접근성 기준을 확인한다. 2. 현재 tab like UI와 CSS 계약을 찾는다. 3. selected indicator token과 pseudo indicator를 추가한다. 4. settings",
+      "html": "<p>Plan Record: Clear Tab Discrimination Work Mode selected work mode: standard view mode: superadmin developer 이유: 데스크톱 UI 품질 개선이며 테스트와 빌드 검증이 필요한 중간 범위 작업이다. Plan 1. 공식 탭/접근성 기준을 확인한다. 2. 현재 tab like UI와 CSS 계약을 찾는다. 3. selected indicator token과 pseudo indicator를 추가한다. 4. settings/source tab ARIA 상태를 보강한다. 5. 정적 테스트와 브라우저 computed style 검증을 실행한다. 6. 내부 패키지 빌드</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 875,
+      "updatedAt": "2026-06-06T04:57:09.118Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-clear-tab-discrimination-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-clear-tab-discrimination.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "Request Trace: Clear Tab Discrimination",
+      "excerpt": "Request Trace: Clear Tab Discrimination 요청 탭 변별이 명확한지 확인하고 개선한다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 clear tab discrimination.ko.md 스펙: platform desktop app/specs/2026 06 06 clear tab discrimination/ 구현: MonitorShell.tsx , globals.css 테스트: workspace monito",
+      "html": "<p>Request Trace: Clear Tab Discrimination 요청 탭 변별이 명확한지 확인하고 개선한다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 clear tab discrimination.ko.md 스펙: platform desktop app/specs/2026 06 06 clear tab discrimination/ 구현: MonitorShell.tsx , globals.css 테스트: workspace monitor/tests/tool studio.test.mjs 검증 corepack pnpm filter workspace monitor test : 통과</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 866,
+      "updatedAt": "2026-06-06T04:57:09.118Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-clear-tab-discrimination-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-clear-tab-discrimination.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "Work Summary: Clear Tab Discrimination",
+      "excerpt": "Work Summary: Clear Tab Discrimination 완료 내용 탭 선택 상태 전용 token을 추가했다. settings tabs, subsection tabs, section tabs, app choice buttons, source editor tabs, tool studio rails에 selected indicator를 추가했다. selected tab은 indicator, border, shadow, selected background를 함께 사용하도록 했다. setti",
+      "html": "<p>Work Summary: Clear Tab Discrimination 완료 내용 탭 선택 상태 전용 token을 추가했다. settings tabs, subsection tabs, section tabs, app choice buttons, source editor tabs, tool studio rails에 selected indicator를 추가했다. selected tab은 indicator, border, shadow, selected background를 함께 사용하도록 했다. settings top tabs와 source editor draft tabs에 role=tablist , role=tab , aria selected </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 822,
+      "updatedAt": "2026-06-06T04:57:09.118Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-clear-tab-discrimination-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-clear-tab-discrimination.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "User Request: Clear Tab Discrimination",
+      "excerpt": "User Request: Clear Tab Discrimination 요약 사용자는 탭 변별이 명확한지 확인하고 개선해 달라고 요청했다. 해석 활성 탭과 비활성 탭이 색상 차이만으로 구분되면 부족하다. 탭형 UI에는 indicator, border, shadow, ARIA 상태가 필요하다. 구현 후 빌드/패키지 검증까지 자동 수행해야 한다. 소유 프로젝트 platform desktop app/",
+      "html": "<p>User Request: Clear Tab Discrimination 요약 사용자는 탭 변별이 명확한지 확인하고 개선해 달라고 요청했다. 해석 활성 탭과 비활성 탭이 색상 차이만으로 구분되면 부족하다. 탭형 UI에는 indicator, border, shadow, ARIA 상태가 필요하다. 구현 후 빌드/패키지 검증까지 자동 수행해야 한다. 소유 프로젝트 platform desktop app/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 431,
+      "updatedAt": "2026-06-06T04:57:09.117Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-clear-tab-discrimination-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-clear-tab-discrimination/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: Clear Tab Discrimination",
+      "excerpt": "Traceability: Clear Tab Discrimination | 항목 | 연결 | | | | | 요구사항 | platform desktop app/docs/requirements/2026 06 06 clear tab discrimination.ko.md | | 웹 검색 | history/web searches/2026/2026 06 06 clear tab discrimination.ko.md | | 스펙 | platform desktop app/specs/2026 06 06 clear t",
+      "html": "<h1>Traceability: Clear Tab Discrimination</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>요구사항</td><td><code>platform-desktop-app/docs/requirements/2026-06-06-clear-tab-discrimination.ko.md</code></td></tr><tr><td>웹 검색</td><td><code>_history/web-searches/2026/2026-06-06-clear-tab-discrimination.ko.md</code></td></tr><tr><td>스펙</td><td><code>platform-desktop-app/specs/2026-06-06-clear-tab-discrimination/spec.ko.md</code></td></tr><tr><td>구현</td><td><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code>, <code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></td></tr><tr><td>테스트</td><td><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></td></tr><tr><td>검증</td><td><code>platform-desktop-app/specs/2026-06-06-clear-tab-discrimination/validation.ko.md</code></td></tr><tr><td>평가</td><td><code>_history/evaluations/2026/2026-06-06-clear-tab-discrimination.ko.md</code></td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 784,
+      "updatedAt": "2026-06-06T04:57:09.117Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-clear-tab-discrimination-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-clear-tab-discrimination/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Tasks: Clear Tab Discrimination",
+      "excerpt": "Tasks: Clear Tab Discrimination x 웹 first intake 기록. x 요구사항과 스펙 작성. x selected tab token 추가. x 주요 탭 active indicator 강화. x settings/source tab ARIA 상태 보강. x 테스트 계약 추가. x 검증과 package build 실행. x close out history/evaluation 업데이트.",
+      "html": "<h1>Tasks: Clear Tab Discrimination</h1>\n<ul>\n<li>[x] 웹 first intake 기록.</li>\n<li>[x] 요구사항과 스펙 작성.</li>\n<li>[x] selected tab token 추가.</li>\n<li>[x] 주요 탭 active indicator 강화.</li>\n<li>[x] settings/source tab ARIA 상태 보강.</li>\n<li>[x] 테스트 계약 추가.</li>\n<li>[x] 검증과 package build 실행.</li>\n<li>[x] close-out history/evaluation 업데이트.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 342,
+      "updatedAt": "2026-06-06T04:57:09.116Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-clear-tab-discrimination-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-clear-tab-discrimination/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Plan: Clear Tab Discrimination",
+      "excerpt": "Plan: Clear Tab Discrimination 1. 공식 탭/접근성 기준을 확인한다. 2. 현재 tab like UI와 CSS 계약을 찾는다. 3. selected indicator token과 rule을 추가한다. 4. tablist semantics가 부족한 곳을 보강한다. 5. 회귀 방지 테스트를 추가한다. 6. 브라우저 검증과 package build를 실행한다.",
+      "html": "<h1>Plan: Clear Tab Discrimination</h1>\n<p>1. 공식 탭/접근성 기준을 확인한다.</p>\n<p>2. 현재 tab-like UI와 CSS 계약을 찾는다.</p>\n<p>3. selected indicator token과 rule을 추가한다.</p>\n<p>4. tablist semantics가 부족한 곳을 보강한다.</p>\n<p>5. 회귀 방지 테스트를 추가한다.</p>\n<p>6. 브라우저 검증과 package build를 실행한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 341,
+      "updatedAt": "2026-06-06T04:51:17.123Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-clear-tab-discrimination-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-clear-tab-discrimination/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Clear Tab Discrimination",
+      "excerpt": "Spec: Clear Tab Discrimination 결정 탭/탭형 선택 컨트롤에 공통 selected indicator token을 추가하고, 주요 탭 UI에 ::before indicator를 적용한다. 구현 기준 tab selected indicator , tab selected border , tab selected shadow , tab inactive bg token을 추가한다. settings top tabs, settings subsection tabs, section tabs, ",
+      "html": "<h1>Spec: Clear Tab Discrimination</h1>\n<h2>결정</h2>\n<p>탭/탭형 선택 컨트롤에 공통 selected indicator token을 추가하고, 주요 탭 UI에 <code>::before</code> indicator를 적용한다.</p>\n<h2>구현 기준</h2>\n<ul>\n<li><code>--tab-selected-indicator</code>, <code>--tab-selected-border</code>, <code>--tab-selected-shadow</code>, <code>--tab-inactive-bg</code> token을 추가한다.</li>\n<li>settings top tabs, settings subsection tabs, section tabs, app choice buttons, source editor tabs, tool studio rails에 selected indicator를 적용한다.</li>\n<li>settings top tabs와 source editor draft tabs에 ARIA tab semantics를 보강한다.</li>\n<li>테스트는 token, pseudo indicator, ARIA selected 계약을 확인한다.</li>\n</ul>\n<h2>검증 기준</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code></li>\n<li>Browser computed-style check</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app run package:internal</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 977,
+      "updatedAt": "2026-06-06T04:51:17.123Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-clear-tab-discrimination-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-clear-tab-discrimination.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "Web Search: Clear Tab Discrimination",
+      "excerpt": "Web Search: Clear Tab Discrimination 요청 요약 현재 화면에서 탭의 선택/비선택 상태가 명확히 구분되는지 확인하고 개선한다. 검색어 JetBrains IntelliJ Platform SDK Tabs UI guidelines active inactive tabs official WCAG 2.2 non text contrast user interface component states active tab indicator official W3C WAI tabs pattern",
+      "html": "<p>Web Search: Clear Tab Discrimination 요청 요약 현재 화면에서 탭의 선택/비선택 상태가 명확히 구분되는지 확인하고 개선한다. 검색어 JetBrains IntelliJ Platform SDK Tabs UI guidelines active inactive tabs official WCAG 2.2 non text contrast user interface component states active tab indicator official W3C WAI tabs pattern selected tab visual state official 확인한 출처 JetBrains IntelliJ Platform SDK, Tabs</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1549,
+      "updatedAt": "2026-06-06T04:51:17.122Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-clear-tab-discrimination-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-clear-tab-discrimination.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Requirements: Clear Tab Discrimination",
+      "excerpt": "Requirements: Clear Tab Discrimination 목적 사용자가 현재 선택된 탭과 선택되지 않은 탭을 한눈에 구분할 수 있도록 데스크톱 UI의 탭 상태 표현을 강화한다. 요구사항 주요 탭류 UI는 선택 상태를 색상만으로 구분하지 않는다. 선택 탭은 굵은 indicator, 강한 border, selected shadow, 텍스트 weight 차이를 가져야 한다. 비선택 탭은 hover와 active 상태가 혼동되지 않도록 절제된 표면으로 유지한다. 실제 tablist에 가까운 ",
+      "html": "<h1>Requirements: Clear Tab Discrimination</h1>\n<h2>목적</h2>\n<p>사용자가 현재 선택된 탭과 선택되지 않은 탭을 한눈에 구분할 수 있도록 데스크톱 UI의 탭 상태 표현을 강화한다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>주요 탭류 UI는 선택 상태를 색상만으로 구분하지 않는다.</li>\n<li>선택 탭은 굵은 indicator, 강한 border, selected shadow, 텍스트 weight 차이를 가져야 한다.</li>\n<li>비선택 탭은 hover와 active 상태가 혼동되지 않도록 절제된 표면으로 유지한다.</li>\n<li>실제 tablist에 가까운 설정 대분류와 소스 에디터 열린 파일 탭은 <code>role=tablist</code>, <code>role=tab</code>, <code>aria-selected</code> 상태를 가져야 한다.</li>\n<li>기존 no-mobile shell, bounded scroll, Tauri drag region, build/package 흐름을 깨뜨리지 않는다.</li>\n</ul>\n<h2>범위</h2>\n<ul>\n<li><code>platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/app/globals.css</code></li>\n<li><code>platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1026,
+      "updatedAt": "2026-06-06T04:51:17.122Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-work-timings-2026-2026-06-06-intellij-shell-separation-ko-md",
       "path": "_history/work-timings/2026/2026-06-06-intellij-shell-separation.ko.md",
       "category": "work-timing",
@@ -10577,38 +10785,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-evaluations-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "최종 평가",
-      "excerpt": "최종 평가 결과 요구사항 충족: 완료. 구현, renderer 검증, browser smoke, internal package build를 완료했다. 성능 결과: Static smoke: ready 3948ms, Agent switch 244ms. Dev smoke: ready 4702ms, Agent switch 219ms. Section audit under 6x CPU throttle: p95 1413.4ms, limit 1600ms. 판단 사용자 요구처럼 초기 로딩을 더 길게 써서 Agen",
-      "html": "<p>최종 평가 결과 요구사항 충족: 완료. 구현, renderer 검증, browser smoke, internal package build를 완료했다. 성능 결과: Static smoke: ready 3948ms, Agent switch 244ms. Dev smoke: ready 4702ms, Agent switch 219ms. Section audit under 6x CPU throttle: p95 1413.4ms, limit 1600ms. 판단 사용자 요구처럼 초기 로딩을 더 길게 써서 Agent 탭 첫 진입 비용을 줄였다. 모든 탭을 DOM resident로 유지하되, inactive heavy WebGL surface가 과하게 실행</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 942,
-      "updatedAt": "2026-06-06T02:03:14.739Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-agent-tab-startup-prewarm-json",
-      "path": "_history/work-timings/2026/2026-06-06-agent-tab-startup-prewarm.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Agent Tab Startup Prewarm",
-      "excerpt": "{ \"date\": \"2026 06 06\", \"work\": \"agent tab startup prewarm\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\" }, { \"phase\": \"local inspection\", \"status\": \"completed\" }, { \"phase\": \"implementation\", \"status\": \"completed\" }, { \"phase\": \"renderer validation\", \"status\":",
-      "html": "<p>{ &quot;date&quot;: &quot;2026 06 06&quot;, &quot;work&quot;: &quot;agent tab startup prewarm&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;local inspection&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;implementation&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;renderer validation&quot;, &quot;status&quot;: &quot;completed&quot; }, { &quot;phase&quot;: &quot;desktop packaging&quot;, &quot;status&quot;: &quot;completed&quot; } , &quot;obser</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 572,
-      "updatedAt": "2026-06-06T02:03:14.739Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-agent-tab-startup-prewarm-tasks-ko-md",
       "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-06-agent-tab-startup-prewarm/tasks.ko.md",
       "category": "project-spec",
@@ -10639,54 +10815,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 Trace",
-      "excerpt": "요청 결과 Trace 요청: Agent 탭 첫 진입 지연을 시작 로딩으로 이동. 결과: 초기 ready를 약 4초대로 늘리고 Agent 탭 전환을 약 0.22 0.24초로 낮춤. 주요 구현: MonitorShell.tsx SnapshotLoader.tsx MonitorShellBoundary.tsx SnapshotLoadingShell.tsx next.config.mjs 검증: workspace monitor check/test/build/perf static/dev Playwright smoke",
-      "html": "<p>요청 결과 Trace 요청: Agent 탭 첫 진입 지연을 시작 로딩으로 이동. 결과: 초기 ready를 약 4초대로 늘리고 Agent 탭 전환을 약 0.22 0.24초로 낮춤. 주요 구현: MonitorShell.tsx SnapshotLoader.tsx MonitorShellBoundary.tsx SnapshotLoadingShell.tsx next.config.mjs 검증: workspace monitor check/test/build/perf static/dev Playwright smoke in app Browser smoke 후속: internal package build와 commit/push.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 500,
-      "updatedAt": "2026-06-06T02:00:59.366Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약",
-      "excerpt": "사용자 요청 요약 시작할 때 Agent 탭 첫 로딩이 오래 걸리므로, 초기 로딩 시간을 조금 더 길게 잡고 모든 탭을 처음에 띄워 둔 것처럼 만들어 탭 이동 체감을 개선해 달라는 요청.",
-      "html": "<p>사용자 요청 요약 시작할 때 Agent 탭 첫 로딩이 오래 걸리므로, 초기 로딩 시간을 조금 더 길게 잡고 모든 탭을 처음에 띄워 둔 것처럼 만들어 탭 이동 체감을 개선해 달라는 요청.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 239,
-      "updatedAt": "2026-06-06T02:00:59.366Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약",
-      "excerpt": "작업 요약 SnapshotLoader 를 lightweight bootstrap으로 유지하고 heavy MonitorShell 을 별도 dynamic boundary로 분리했다. startup resident panel limit을 12로 늘려 모든 주요 section을 초기 resident set에 포함했다. 2.6초 shell warmup overlay를 추가해 사용자가 조작하기 전 탭 mount/prewarm 비용을 먼저 쓰게 했다. production static export 설정을 dev",
-      "html": "<p>작업 요약 SnapshotLoader 를 lightweight bootstrap으로 유지하고 heavy MonitorShell 을 별도 dynamic boundary로 분리했다. startup resident panel limit을 12로 늘려 모든 주요 section을 초기 resident set에 포함했다. 2.6초 shell warmup overlay를 추가해 사용자가 조작하기 전 탭 mount/prewarm 비용을 먼저 쓰게 했다. production static export 설정을 dev 경로와 분리해 next dev hydration 고착을 해결했다. static/dev/in app Browser smoke, check/tes</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 557,
-      "updatedAt": "2026-06-06T02:00:59.366Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
     },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-06-agent-tab-startup-prewarm-traceability-ko-md",
@@ -10753,22 +10881,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "history-web-searches-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "Agent 탭 시작 선로딩 웹 검색 기록",
-      "excerpt": "Agent 탭 시작 선로딩 웹 검색 기록 날짜: 2026 06 06 요청 요약: 시작 시점의 로딩 시간을 더 쓰더라도 Agent 탭을 포함한 주요 탭을 먼저 띄워 첫 탭 진입 지연을 줄인다. 검색 React lazy Suspense preload code splitting official docs preloading tabs Next.js app router dynamic import lazy loading official docs preload Tauri v2 webview performance",
-      "html": "<p>Agent 탭 시작 선로딩 웹 검색 기록 날짜: 2026 06 06 요청 요약: 시작 시점의 로딩 시간을 더 쓰더라도 Agent 탭을 포함한 주요 탭을 먼저 띄워 첫 탭 진입 지연을 줄인다. 검색 React lazy Suspense preload code splitting official docs preloading tabs Next.js app router dynamic import lazy loading official docs preload Tauri v2 webview performance preload app startup official docs 확인한 출처 React lazy : https://react.dev/referen</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1178,
-      "updatedAt": "2026-06-06T02:00:59.362Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-desktop-dev-run-fix-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-desktop-dev-run-fix/tasks.ko.md",
       "category": "project-spec",
@@ -10799,22 +10911,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-desktop-dev-run-fix-json",
-      "path": "_history/work-timings/2026/2026-06-06-desktop-dev-run-fix.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Desktop Dev Run Fix",
-      "excerpt": "{ \"task id\": \"2026 06 06 desktop dev run fix\", \"title\": \"desktop dev/run fix\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"reproduction\", \"label\": \"Failure reproduction\", \"status\": \"c",
-      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 desktop dev run fix&quot;, &quot;title&quot;: &quot;desktop dev/run fix&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;reproduction&quot;, &quot;label&quot;: &quot;Failure reproduction&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;observed&quot;, &quot;notes&quot;: &quot;Reproduced beforeDevCommand ENOE</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1277,
-      "updatedAt": "2026-06-06T01:28:41.483Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-desktop-dev-run-fix-traceability-ko-md",
@@ -18095,102 +18191,6 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-source-loading-performance-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-source-loading-performance/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성: Source Loading Performance",
-      "excerpt": "추적성: Source Loading Performance | Requirement | 구현 | 검증 | | | | | | REQ WM 029 | components/MonitorShell.tsx : Source surface에서만 catalog refresh, deferred filter, 중복 browser 렌더 제거 | pnpm run check , pnpm test , pnpm exec next build , pnpm run perf:budget | | REQ WM 029 | componen",
-      "html": "<h1>추적성: Source Loading Performance</h1>\n<table><thead><tr><th>Requirement</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-WM-029</td><td><code>components/MonitorShell.tsx</code>: Source surface에서만 catalog refresh, deferred filter, 중복 browser 렌더 제거</td><td><code>pnpm run check</code>, <code>pnpm test</code>, <code>pnpm exec next build</code>, <code>pnpm run perf:budget</code></td></tr><tr><td>REQ-WM-029</td><td><code>components/workbench/WorkspaceExplorerPane.tsx</code>: 하위 directory 기본 collapsed</td><td>localhost smoke</td></tr></tbody></table>\n<h2>기록</h2>\n<ul>\n<li>web_search_record: <code>_history/web-searches/2026/2026-06-05-source-loading-performance.ko.md</code></li>\n<li>user_request_summary: <code>_history/user-requests/2026/2026-06-05-source-loading-performance.ko.md</code></li>\n<li>request_trace: <code>_history/request-traces/2026/2026-06-05-source-loading-performance.ko.md</code></li>\n<li>evaluation_input: <code>_history/evaluations/2026/2026-06-05-source-loading-performance-evaluation-input.json</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 833,
-      "updatedAt": "2026-06-04T15:07:00.057Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-source-loading-performance-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-source-loading-performance/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증: Source Loading Performance",
-      "excerpt": "검증: Source Loading Performance 실행 결과 passed: pnpm run check TypeScript check 통과 check scroll containers : scroll contract ok check source control design : source control design ok passed: pnpm test Node tests 17개 통과 passed: pnpm exec next build Next 16.2.6 production build 통과 pas",
-      "html": "<h1>검증: Source Loading Performance</h1>\n<h2>실행 결과</h2>\n<ul>\n<li>passed: <code>pnpm run check</code></li>\n<li>TypeScript check 통과</li>\n<li><code>check-scroll-containers</code>: <code>scroll_contract_ok</code></li>\n<li><code>check-source-control-design</code>: <code>source_control_design_ok</code></li>\n<li>passed: <code>pnpm test</code></li>\n<li>Node tests 17개 통과</li>\n<li>passed: <code>pnpm exec next build</code></li>\n<li>Next 16.2.6 production build 통과</li>\n<li>passed: <code>pnpm run perf:budget</code></li>\n<li>status: <code>within_budget</code></li>\n<li>largest chunk: <code>361226</code> bytes</li>\n<li>max initial chunk budget: <code>1000000</code> bytes</li>\n<li>passed: localhost smoke</li>\n<li><code>pnpm exec next dev -p 3211</code></li>\n<li><code>/</code> returned HTTP 200</li>\n<li><code>/workspace-snapshot.json</code> returned schema <code>2026-06-03</code>, sourceFiles <code>0</code> in public snapshot</li>\n<li>dev server was stopped with Ctrl-C</li>\n</ul>\n<h2>검증 제한</h2>\n<ul>\n<li>Browser MCP callable tool이 현재 노출되지 않아 in-app Browser screenshot 검증은 실행하지 못했다.</li>\n<li>pre-existing generated snapshot 변경 3개는 이번 작업 범위가 아니므로 commit 대상에서 제외한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 966,
-      "updatedAt": "2026-06-04T15:07:00.057Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-source-loading-performance-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-source-loading-performance/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "계획: Source Loading Performance",
-      "excerpt": "계획: Source Loading Performance 작업 모드 selected work mode: ship first 이유: 사용자가 체감 성능 문제 해결을 요청했으므로 먼저 동작하는 성능 fix를 적용하고, 비파괴적 문서/검증 기록을 뒤따라 남긴다. view mode: superadmin developer install mode: developer Web first Intake 검색어: React large file viewer performance virtualized list code e",
-      "html": "<h1>계획: Source Loading Performance</h1>\n<h2>작업 모드</h2>\n<ul>\n<li>selected work_mode: ship_first</li>\n<li>이유: 사용자가 체감 성능 문제 해결을 요청했으므로 먼저 동작하는 성능 fix를 적용하고, 비파괴적 문서/검증 기록을 뒤따라 남긴다.</li>\n<li>view_mode: superadmin_developer</li>\n<li>install_mode: developer</li>\n</ul>\n<h2>Web-first Intake</h2>\n<ul>\n<li>검색어:</li>\n<li><code>React large file viewer performance virtualized list code editor lazy loading best practices</code></li>\n<li><code>Monaco editor large file performance load model lazy syntax highlighting</code></li>\n<li><code>web.dev virtualize large lists react-window official</code></li>\n<li>반영한 기준:</li>\n<li>large list는 visible window만 렌더링하거나 lazy load해야 한다.</li>\n<li>code editor/large file 경로는 불필요한 기능과 대량 DOM 렌더링을 줄여야 한다.</li>\n</ul>\n<h2>로컬 진단</h2>\n<ul>\n<li><code>DesktopRuntimePanel</code>은 runtime surface에서도 <code>refreshRuntimeSourceFiles()</code>를 호출했다.</li>\n<li><code>WorkspaceExplorerPane</code>와 <code>source-file-browser</code>가 같은 filtered file list를 동시에 렌더링했다.</li>\n<li><code>WorkspaceExplorerDirectoryView</code>는 모든 directory를 기본 expanded로 렌더링했다.</li>\n</ul>\n<h2>실행</h2>\n<p>1. Source surface가 아닌 경우 runtime source catalog 자동 scan을 생략한다.</p>\n<p>2. Source surface는 <code>editor</code> view를 기본으로 두고 파일 선택은 Explorer에 맡긴다.</p>\n<p>3. Source surface에서 오른쪽 flat file browser를 렌더링하지 않는다.</p>\n<p>4. file select option을 filtered list로 제한한다.</p>\n<p>5. source filter에 deferred value를 적용한다.</p>\n<p>6. Explorer tree 기본 전개를 최상위 directory로 제한한다.</p>\n<p>7. check, test, build, perf budget, localhost smoke를 실행한다.</p>\n<h2>비고</h2>\n<p>Browser MCP callable tool은 현재 검색되지 않아 in-app browser screenshot 검증은 실행하지 못했다. 대신 Next dev server와 HTTP smoke를 수행했다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1832,
-      "updatedAt": "2026-06-04T15:07:00.056Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-source-loading-performance-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-source-loading-performance/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "스펙: Source Loading Performance",
-      "excerpt": "스펙: Source Loading Performance 목표 Workspace Monitor의 코드 불러오기 경로에서 불필요한 파일 catalog scan과 중복 렌더링을 줄여 Source 화면 진입과 파일 목록 표시를 빠르게 만든다. 요구사항 REQ WM 029 문제 Desktop 런타임 surface가 열릴 때도 refreshAdapters 후 refreshRuntimeSourceFiles 를 실행해 source catalog scan이 따라붙었다. Source 화면에서는 왼쪽 Workspac",
-      "html": "<h1>스펙: Source Loading Performance</h1>\n<h2>목표</h2>\n<p>Workspace Monitor의 코드 불러오기 경로에서 불필요한 파일 catalog scan과 중복 렌더링을 줄여 Source 화면 진입과 파일 목록 표시를 빠르게 만든다.</p>\n<h2>요구사항</h2>\n<ul>\n<li><code>REQ-WM-029</code></li>\n</ul>\n<h2>문제</h2>\n<ul>\n<li>Desktop 런타임 surface가 열릴 때도 <code>refreshAdapters()</code> 후 <code>refreshRuntimeSourceFiles()</code>를 실행해 source catalog scan이 따라붙었다.</li>\n<li>Source 화면에서는 왼쪽 <code>WorkspaceExplorerPane</code>과 오른쪽 숨김 <code>source-file-browser</code>가 같은 파일 목록을 동시에 렌더링했다.</li>\n<li>Explorer tree는 모든 directory를 기본 expanded로 렌더링해 파일 수가 많을 때 초기 DOM이 커졌다.</li>\n<li>source filter 입력은 즉시 전체 파일 필터와 tree rebuild를 유발했다.</li>\n</ul>\n<h2>변경</h2>\n<ul>\n<li><code>DesktopRuntimePanel</code>의 source catalog refresh를 <code>surface=&quot;files&quot;</code>인 Source 화면에만 자동 실행한다.</li>\n<li>Source 화면의 기본 작업 view를 <code>editor</code>로 두고, 파일 선택은 왼쪽 Explorer가 담당한다.</li>\n<li>Source 화면에서는 오른쪽 flat file browser를 렌더링하지 않는다.</li>\n<li>파일 select option은 현재 표시 대상인 filtered list로 제한한다.</li>\n<li>source filter는 <code>useDeferredValue</code>를 적용해 입력 중 렌더 압박을 줄인다.</li>\n<li>Workspace Explorer directory는 최상위만 기본 expanded로 두고 하위 directory는 사용자가 펼칠 때 렌더링한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>Desktop 런타임 surface 진입이 source catalog scan을 자동으로 유발하지 않는다.</li>\n<li>Source 화면은 파일 목록을 두 번 만들지 않는다.</li>\n<li>Explorer tree는 전체 하위 directory를 기본 전개하지 않는다.</li>\n<li>기존 TypeScript, source control design, scroll container checks가 통과한다.</li>\n<li>Next build와 performance budget이 통과한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1814,
-      "updatedAt": "2026-06-04T15:07:00.056Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-04-single-feature-full-screen-ui-tasks-ko-md",
-      "path": "_specs/workspace-platform/2026-06-04-single-feature-full-screen-ui/tasks.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "작업 목록: 단일 주 기능 화면 공간 원칙",
-      "excerpt": "작업 목록: 단일 주 기능 화면 공간 원칙 x 웹 검색으로 단일 task/focus UI 원칙을 확인한다. x memory bootstrap과 work mode registry를 확인한다. x persistent instructions에 지속 원칙을 추가한다. x UI tone policy에 공간 배분 원칙과 검증 기준을 추가한다. x AGENTS.md 에 runtime adapter 문구를 추가한다. x memory bootstrap manifest의 UI tone anchor 설명을 갱신한다.",
-      "html": "<h1>작업 목록: 단일 주 기능 화면 공간 원칙</h1>\n<ul>\n<li>[x] 웹 검색으로 단일 task/focus UI 원칙을 확인한다.</li>\n<li>[x] memory bootstrap과 work mode registry를 확인한다.</li>\n<li>[x] persistent instructions에 지속 원칙을 추가한다.</li>\n<li>[x] UI tone policy에 공간 배분 원칙과 검증 기준을 추가한다.</li>\n<li>[x] <code>AGENTS.md</code>에 runtime adapter 문구를 추가한다.</li>\n<li>[x] memory bootstrap manifest의 UI tone anchor 설명을 갱신한다.</li>\n<li>[x] requirements change/review를 기록한다.</li>\n<li>[x] spec, plan, tasks, validation, traceability를 기록한다.</li>\n<li>[x] docs audit, JSON validation, diff review를 실행한다.</li>\n<li>[x] 평가와 request trace를 완료한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 693,
-      "updatedAt": "2026-06-04T14:58:38.820Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-04-single-feature-full-screen-ui-validation-ko-md",
-      "path": "_specs/workspace-platform/2026-06-04-single-feature-full-screen-ui/validation.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "검증: 단일 주 기능 화면 공간 원칙",
-      "excerpt": "검증: 단일 주 기능 화면 공간 원칙 검증 계획 docs/instructions/ 와 docs/policies/ 문서가 docs/registry.json 구조 규칙을 지키는지 확인한다. agent platform/configs/memory/bootstrap manifest.json 이 JSON으로 파싱되는지 확인한다. 변경 diff에서 기존 생성 snapshot 변경을 건드리지 않았는지 확인한다. 단일 주 기능 화면 원칙이 persistent instructions, UI policy, runti",
-      "html": "<h1>검증: 단일 주 기능 화면 공간 원칙</h1>\n<h2>검증 계획</h2>\n<ul>\n<li><code>_docs/instructions/</code>와 <code>_docs/policies/</code> 문서가 <code>_docs/registry.json</code> 구조 규칙을 지키는지 확인한다.</li>\n<li><code>agent-platform/configs/memory/bootstrap-manifest.json</code>이 JSON으로 파싱되는지 확인한다.</li>\n<li>변경 diff에서 기존 생성 snapshot 변경을 건드리지 않았는지 확인한다.</li>\n<li>단일 주 기능 화면 원칙이 persistent instructions, UI policy, runtime adapter, memory bootstrap에 연결됐는지 확인한다.</li>\n</ul>\n<h2>결과</h2>\n<ul>\n<li>passed: <code>python3 _tools/docs-audit/src/docs_audit.py --check</code></li>\n<li>passed: <code>python3 -m json.tool agent-platform/configs/memory/bootstrap-manifest.json &gt;/dev/null</code></li>\n<li>passed: <code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/memory/bootstrap-manifest.json</code></li>\n<li>passed: <code>git diff --check</code></li>\n<li>reviewed: <code>git diff --stat</code></li>\n</ul>\n<h2>주의</h2>\n<p><code>git diff --stat</code>에는 작업 전부터 존재하던 generated snapshot 변경 3개가 함께 표시됐다. 이 파일들은 이번 변경 범위가 아니므로 stage/commit 대상에서 제외한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1090,
-      "updatedAt": "2026-06-04T14:58:19.776Z",
-      "historyDate": "2026-06-04",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
     }
   ],
   "historyDays": [
@@ -18221,11 +18221,11 @@
         },
         {
           "category": "work-timing",
-          "count": 13
+          "count": 12
         },
         {
           "category": "plan",
-          "count": 9
+          "count": 10
         },
         {
           "category": "daily-history",
@@ -18244,13 +18244,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-evaluations-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+          "id": "history-evaluations-2026-2026-06-06-clear-tab-discrimination-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-clear-tab-discrimination.ko.md",
           "category": "evaluation",
           "language": "ko",
-          "title": "최종 평가",
-          "excerpt": "최종 평가 결과 요구사항 충족: 완료. 구현, renderer 검증, browser smoke, internal package build를 완료했다. 성능 결과: Static smoke: ready 3948ms, Agent switch 244ms. Dev smoke: ready 4702ms, Agent switch 219ms. Section audit under 6x CPU throttle: p95 1413.4ms, limit 1600ms. 판단 사용자 요구처럼 초기 로딩을 더 길게 써서 Agen",
-          "updatedAt": "2026-06-06T02:03:14.739Z",
+          "title": "Evaluation: Clear Tab Discrimination",
+          "excerpt": "Evaluation: Clear Tab Discrimination 평가 기준 활성 탭과 비활성 탭이 색상만이 아니라 형태/indicator로 구분되는가. 주요 tab like controls에 selected 상태 계약이 남는가. 실제 DOM/브라우저에서 selected indicator가 computed style로 확인되는가. 기존 기능, scroll 정책, build/package 흐름을 깨뜨리지 않는가. 평가 결과 selected tab token과 ::before indicator가 추가",
+          "updatedAt": "2026-06-06T04:57:09.119Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18454,6 +18454,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-plans-2026-2026-06-06-clear-tab-discrimination-ko-md",
+          "path": "_history/plans/2026/2026-06-06-clear-tab-discrimination.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "Plan Record: Clear Tab Discrimination",
+          "excerpt": "Plan Record: Clear Tab Discrimination Work Mode selected work mode: standard view mode: superadmin developer 이유: 데스크톱 UI 품질 개선이며 테스트와 빌드 검증이 필요한 중간 범위 작업이다. Plan 1. 공식 탭/접근성 기준을 확인한다. 2. 현재 tab like UI와 CSS 계약을 찾는다. 3. selected indicator token과 pseudo indicator를 추가한다. 4. settings",
+          "updatedAt": "2026-06-06T04:57:09.118Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-plans-2026-2026-06-06-cli-scroll-isolation-ko-md",
           "path": "_history/plans/2026/2026-06-06-cli-scroll-isolation.ko.md",
           "category": "plan",
@@ -18544,13 +18554,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-request-traces-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+          "id": "history-request-traces-2026-2026-06-06-clear-tab-discrimination-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-clear-tab-discrimination.ko.md",
           "category": "request-trace",
           "language": "ko",
-          "title": "요청 결과 Trace",
-          "excerpt": "요청 결과 Trace 요청: Agent 탭 첫 진입 지연을 시작 로딩으로 이동. 결과: 초기 ready를 약 4초대로 늘리고 Agent 탭 전환을 약 0.22 0.24초로 낮춤. 주요 구현: MonitorShell.tsx SnapshotLoader.tsx MonitorShellBoundary.tsx SnapshotLoadingShell.tsx next.config.mjs 검증: workspace monitor check/test/build/perf static/dev Playwright smoke",
-          "updatedAt": "2026-06-06T02:00:59.366Z",
+          "title": "Request Trace: Clear Tab Discrimination",
+          "excerpt": "Request Trace: Clear Tab Discrimination 요청 탭 변별이 명확한지 확인하고 개선한다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 clear tab discrimination.ko.md 스펙: platform desktop app/specs/2026 06 06 clear tab discrimination/ 구현: MonitorShell.tsx , globals.css 테스트: workspace monito",
+          "updatedAt": "2026-06-06T04:57:09.118Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18674,13 +18684,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-user-requests-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+          "id": "history-user-requests-2026-2026-06-06-clear-tab-discrimination-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-clear-tab-discrimination.ko.md",
           "category": "user-request",
           "language": "ko",
-          "title": "사용자 요청 요약",
-          "excerpt": "사용자 요청 요약 시작할 때 Agent 탭 첫 로딩이 오래 걸리므로, 초기 로딩 시간을 조금 더 길게 잡고 모든 탭을 처음에 띄워 둔 것처럼 만들어 탭 이동 체감을 개선해 달라는 요청.",
-          "updatedAt": "2026-06-06T02:00:59.366Z",
+          "title": "User Request: Clear Tab Discrimination",
+          "excerpt": "User Request: Clear Tab Discrimination 요약 사용자는 탭 변별이 명확한지 확인하고 개선해 달라고 요청했다. 해석 활성 탭과 비활성 탭이 색상 차이만으로 구분되면 부족하다. 탭형 UI에는 indicator, border, shadow, ARIA 상태가 필요하다. 구현 후 빌드/패키지 검증까지 자동 수행해야 한다. 소유 프로젝트 platform desktop app/",
+          "updatedAt": "2026-06-06T04:57:09.117Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18804,13 +18814,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-web-searches-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+          "id": "history-web-searches-2026-2026-06-06-clear-tab-discrimination-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-clear-tab-discrimination.ko.md",
           "category": "web-search",
           "language": "ko",
-          "title": "Agent 탭 시작 선로딩 웹 검색 기록",
-          "excerpt": "Agent 탭 시작 선로딩 웹 검색 기록 날짜: 2026 06 06 요청 요약: 시작 시점의 로딩 시간을 더 쓰더라도 Agent 탭을 포함한 주요 탭을 먼저 띄워 첫 탭 진입 지연을 줄인다. 검색 React lazy Suspense preload code splitting official docs preloading tabs Next.js app router dynamic import lazy loading official docs preload Tauri v2 webview performance",
-          "updatedAt": "2026-06-06T02:00:59.362Z",
+          "title": "Web Search: Clear Tab Discrimination",
+          "excerpt": "Web Search: Clear Tab Discrimination 요청 요약 현재 화면에서 탭의 선택/비선택 상태가 명확히 구분되는지 확인하고 개선한다. 검색어 JetBrains IntelliJ Platform SDK Tabs UI guidelines active inactive tabs official WCAG 2.2 non text contrast user interface component states active tab indicator official W3C WAI tabs pattern",
+          "updatedAt": "2026-06-06T04:51:17.122Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18934,13 +18944,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
+          "id": "history-work-summaries-2026-2026-06-06-clear-tab-discrimination-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-clear-tab-discrimination.ko.md",
           "category": "work-summary",
           "language": "ko",
-          "title": "작업 요약",
-          "excerpt": "작업 요약 SnapshotLoader 를 lightweight bootstrap으로 유지하고 heavy MonitorShell 을 별도 dynamic boundary로 분리했다. startup resident panel limit을 12로 늘려 모든 주요 section을 초기 resident set에 포함했다. 2.6초 shell warmup overlay를 추가해 사용자가 조작하기 전 탭 mount/prewarm 비용을 먼저 쓰게 했다. production static export 설정을 dev",
-          "updatedAt": "2026-06-06T02:00:59.366Z",
+          "title": "Work Summary: Clear Tab Discrimination",
+          "excerpt": "Work Summary: Clear Tab Discrimination 완료 내용 탭 선택 상태 전용 token을 추가했다. settings tabs, subsection tabs, section tabs, app choice buttons, source editor tabs, tool studio rails에 selected indicator를 추가했다. selected tab은 indicator, border, shadow, selected background를 함께 사용하도록 했다. setti",
+          "updatedAt": "2026-06-06T04:57:09.118Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19064,13 +19074,13 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-agent-tab-startup-prewarm-json",
-          "path": "_history/work-timings/2026/2026-06-06-agent-tab-startup-prewarm.json",
+          "id": "history-work-timings-2026-2026-06-06-clear-tab-discrimination-ko-md",
+          "path": "_history/work-timings/2026/2026-06-06-clear-tab-discrimination.ko.md",
           "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Agent Tab Startup Prewarm",
-          "excerpt": "{ \"date\": \"2026 06 06\", \"work\": \"agent tab startup prewarm\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\" }, { \"phase\": \"local inspection\", \"status\": \"completed\" }, { \"phase\": \"implementation\", \"status\": \"completed\" }, { \"phase\": \"renderer validation\", \"status\":",
-          "updatedAt": "2026-06-06T02:03:14.739Z",
+          "language": "ko",
+          "title": "Work Timing: Clear Tab Discrimination",
+          "excerpt": "Work Timing: Clear Tab Discrimination | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 4분 | JetBrains/WAI/WCAG 기준 확인 | | 로컬 구조 분석 | 7분 | 탭/탭형 CSS와 ARIA 위치 확인 | | 구현 | 12분 | CSS token, indicator, ARIA, tests | | 검증 | 18분 | renderer/desktop test/check, Browser computed style | | ",
+          "updatedAt": "2026-06-06T04:57:09.119Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19101,16 +19111,6 @@
           "title": "2026 06 06 Contextual Button Feedback",
           "excerpt": "{ \"id\": \"2026 06 06 contextual button feedback\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\", \"notes\": \"Checked Apple HIG, Microsoft Learn, and NN/g search signals.\" }, { \"phase\": \"implementation\", \"status\": \"completed\", \"notes\": \"Added contextual button feedba",
           "updatedAt": "2026-06-06T02:55:18.302Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-timings-2026-2026-06-06-desktop-dev-run-fix-json",
-          "path": "_history/work-timings/2026/2026-06-06-desktop-dev-run-fix.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Desktop Dev Run Fix",
-          "excerpt": "{ \"task id\": \"2026 06 06 desktop dev run fix\", \"title\": \"desktop dev/run fix\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"reproduction\", \"label\": \"Failure reproduction\", \"status\": \"c",
-          "updatedAt": "2026-06-06T01:28:41.483Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -19202,36 +19202,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2666,
+      "documents": 2673,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1025
+          "count": 1026
         },
         {
           "category": "web-search",
-          "count": 422
+          "count": 423
         },
         {
           "category": "plan",
-          "count": 353
+          "count": 354
         },
         {
           "category": "request-trace",
-          "count": 350
+          "count": 351
         },
         {
           "category": "work-timing",
-          "count": 270
+          "count": 271
         },
         {
           "category": "user-request",
-          "count": 135
+          "count": 136
         },
         {
           "category": "work-summary",
-          "count": 102
+          "count": 103
         },
         {
           "category": "daily-history",
@@ -19242,7 +19242,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6601912,
+      "totalSourceBytes": 6608114,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19269,9 +19269,9 @@
       "monitorEvents": 64,
       "evidenceEvents": 34,
       "decisionEvents": 0,
-      "openSignals": 20,
+      "openSignals": 19,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T04:48:46.696Z",
+      "latestEventAt": "2026-06-06T04:57:09.119Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19301,19 +19301,19 @@
         "count": 13
       },
       {
-        "id": "monitoring",
-        "label": "monitoring",
-        "count": 13
-      },
-      {
         "id": "traceability",
         "label": "traceability",
         "count": 13
       },
       {
+        "id": "monitoring",
+        "label": "monitoring",
+        "count": 12
+      },
+      {
         "id": "planning",
         "label": "planning",
-        "count": 9
+        "count": 10
       },
       {
         "id": "history",
@@ -19343,11 +19343,6 @@
         "count": 13
       },
       {
-        "id": "timing",
-        "label": "timing",
-        "count": 13
-      },
-      {
         "id": "trace",
         "label": "trace",
         "count": 13
@@ -19358,9 +19353,14 @@
         "count": 13
       },
       {
+        "id": "timing",
+        "label": "timing",
+        "count": 12
+      },
+      {
         "id": "plan",
         "label": "plan",
-        "count": 9
+        "count": 10
       },
       {
         "id": "history",
@@ -19381,6 +19381,111 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-clear-tab-discrimination-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "Evaluation: Clear Tab Discrimination",
+        "detail": "Evaluation: Clear Tab Discrimination 평가 기준 활성 탭과 비활성 탭이 색상만이 아니라 형태/indicator로 구분되는가. 주요 tab like controls에 selected 상태 계약이 남는가. 실제 DOM/브라우저에서 selected indicator가 computed style로 확인되는가. 기존 기능, scroll 정책, build/package 흐름을 깨뜨리지 않는가. 평가 결과 selected tab token과 ::before indicator가 추가",
+        "path": "_history/evaluations/2026/2026-06-06-clear-tab-discrimination.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:57:09.119Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-clear-tab-discrimination-ko-md",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "Work Timing: Clear Tab Discrimination",
+        "detail": "Work Timing: Clear Tab Discrimination | 단계 | 대략 소요 | 메모 | | | : | | | web first intake | 4분 | JetBrains/WAI/WCAG 기준 확인 | | 로컬 구조 분석 | 7분 | 탭/탭형 CSS와 ARIA 위치 확인 | | 구현 | 12분 | CSS token, indicator, ARIA, tests | | 검증 | 18분 | renderer/desktop test/check, Browser computed style | | ",
+        "path": "_history/work-timings/2026/2026-06-06-clear-tab-discrimination.ko.md",
+        "category": "work-timing",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:57:09.119Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-clear-tab-discrimination-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "Request Trace: Clear Tab Discrimination",
+        "detail": "Request Trace: Clear Tab Discrimination 요청 탭 변별이 명확한지 확인하고 개선한다. 산출물 요구사항: platform desktop app/docs/requirements/2026 06 06 clear tab discrimination.ko.md 스펙: platform desktop app/specs/2026 06 06 clear tab discrimination/ 구현: MonitorShell.tsx , globals.css 테스트: workspace monito",
+        "path": "_history/request-traces/2026/2026-06-06-clear-tab-discrimination.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:57:09.118Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-06-clear-tab-discrimination-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "Plan Record: Clear Tab Discrimination",
+        "detail": "Plan Record: Clear Tab Discrimination Work Mode selected work mode: standard view mode: superadmin developer 이유: 데스크톱 UI 품질 개선이며 테스트와 빌드 검증이 필요한 중간 범위 작업이다. Plan 1. 공식 탭/접근성 기준을 확인한다. 2. 현재 tab like UI와 CSS 계약을 찾는다. 3. selected indicator token과 pseudo indicator를 추가한다. 4. settings",
+        "path": "_history/plans/2026/2026-06-06-clear-tab-discrimination.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:57:09.118Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-clear-tab-discrimination-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "Work Summary: Clear Tab Discrimination",
+        "detail": "Work Summary: Clear Tab Discrimination 완료 내용 탭 선택 상태 전용 token을 추가했다. settings tabs, subsection tabs, section tabs, app choice buttons, source editor tabs, tool studio rails에 selected indicator를 추가했다. selected tab은 indicator, border, shadow, selected background를 함께 사용하도록 했다. setti",
+        "path": "_history/work-summaries/2026/2026-06-06-clear-tab-discrimination.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:57:09.118Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-clear-tab-discrimination-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "User Request: Clear Tab Discrimination",
+        "detail": "User Request: Clear Tab Discrimination 요약 사용자는 탭 변별이 명확한지 확인하고 개선해 달라고 요청했다. 해석 활성 탭과 비활성 탭이 색상 차이만으로 구분되면 부족하다. 탭형 UI에는 indicator, border, shadow, ARIA 상태가 필요하다. 구현 후 빌드/패키지 검증까지 자동 수행해야 한다. 소유 프로젝트 platform desktop app/",
+        "path": "_history/user-requests/2026/2026-06-06-clear-tab-discrimination.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:57:09.117Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-clear-tab-discrimination-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "Web Search: Clear Tab Discrimination",
+        "detail": "Web Search: Clear Tab Discrimination 요청 요약 현재 화면에서 탭의 선택/비선택 상태가 명확히 구분되는지 확인하고 개선한다. 검색어 JetBrains IntelliJ Platform SDK Tabs UI guidelines active inactive tabs official WCAG 2.2 non text contrast user interface component states active tab indicator official W3C WAI tabs pattern",
+        "path": "_history/web-searches/2026/2026-06-06-clear-tab-discrimination.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T04:51:17.122Z"
+      },
       {
         "id": "history-history-work-timings-2026-2026-06-06-intellij-shell-separation-ko-md",
         "sourceType": "history",
@@ -20715,111 +20820,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-06T02:13:24.566Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-agent-tab-startup-prewarm-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 Agent Tab Startup Prewarm",
-        "detail": "{ \"date\": \"2026 06 06\", \"work\": \"agent tab startup prewarm\", \"phases\": { \"phase\": \"web first intake\", \"status\": \"completed\" }, { \"phase\": \"local inspection\", \"status\": \"completed\" }, { \"phase\": \"implementation\", \"status\": \"completed\" }, { \"phase\": \"renderer validation\", \"status\":",
-        "path": "_history/work-timings/2026/2026-06-06-agent-tab-startup-prewarm.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:03:14.739Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "최종 평가",
-        "detail": "최종 평가 결과 요구사항 충족: 완료. 구현, renderer 검증, browser smoke, internal package build를 완료했다. 성능 결과: Static smoke: ready 3948ms, Agent switch 244ms. Dev smoke: ready 4702ms, Agent switch 219ms. Section audit under 6x CPU throttle: p95 1413.4ms, limit 1600ms. 판단 사용자 요구처럼 초기 로딩을 더 길게 써서 Agen",
-        "path": "_history/evaluations/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:03:14.739Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "ready",
-        "title": "요청 결과 Trace",
-        "detail": "요청 결과 Trace 요청: Agent 탭 첫 진입 지연을 시작 로딩으로 이동. 결과: 초기 ready를 약 4초대로 늘리고 Agent 탭 전환을 약 0.22 0.24초로 낮춤. 주요 구현: MonitorShell.tsx SnapshotLoader.tsx MonitorShellBoundary.tsx SnapshotLoadingShell.tsx next.config.mjs 검증: workspace monitor check/test/build/perf static/dev Playwright smoke",
-        "path": "_history/request-traces/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:00:59.366Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약",
-        "detail": "사용자 요청 요약 시작할 때 Agent 탭 첫 로딩이 오래 걸리므로, 초기 로딩 시간을 조금 더 길게 잡고 모든 탭을 처음에 띄워 둔 것처럼 만들어 탭 이동 체감을 개선해 달라는 요청.",
-        "path": "_history/user-requests/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:00:59.366Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약",
-        "detail": "작업 요약 SnapshotLoader 를 lightweight bootstrap으로 유지하고 heavy MonitorShell 을 별도 dynamic boundary로 분리했다. startup resident panel limit을 12로 늘려 모든 주요 section을 초기 resident set에 포함했다. 2.6초 shell warmup overlay를 추가해 사용자가 조작하기 전 탭 mount/prewarm 비용을 먼저 쓰게 했다. production static export 설정을 dev",
-        "path": "_history/work-summaries/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:00:59.366Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-agent-tab-startup-prewarm-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "Agent 탭 시작 선로딩 웹 검색 기록",
-        "detail": "Agent 탭 시작 선로딩 웹 검색 기록 날짜: 2026 06 06 요청 요약: 시작 시점의 로딩 시간을 더 쓰더라도 Agent 탭을 포함한 주요 탭을 먼저 띄워 첫 탭 진입 지연을 줄인다. 검색 React lazy Suspense preload code splitting official docs preloading tabs Next.js app router dynamic import lazy loading official docs preload Tauri v2 webview performance",
-        "path": "_history/web-searches/2026/2026-06-06-agent-tab-startup-prewarm.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T02:00:59.362Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-06-desktop-dev-run-fix-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "warning",
-        "status": "work-timing",
-        "title": "2026 06 06 Desktop Dev Run Fix",
-        "detail": "{ \"task id\": \"2026 06 06 desktop dev run fix\", \"title\": \"desktop dev/run fix\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"reproduction\", \"label\": \"Failure reproduction\", \"status\": \"c",
-        "path": "_history/work-timings/2026/2026-06-06-desktop-dev-run-fix.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-06T01:28:41.483Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23848,12 +23848,12 @@
       {
         "category": "work-timing",
         "root": "_history/work-timings",
-        "documentsCount": 13
+        "documentsCount": 12
       },
       {
         "category": "plan",
         "root": "_history/plans",
-        "documentsCount": 9
+        "documentsCount": 10
       },
       {
         "category": "evaluation",
@@ -23902,7 +23902,7 @@
           "transient tool output"
         ],
         "uiEntry": "Overview, History, Documents, Requirements",
-        "documentCount": 111,
+        "documentCount": 109,
         "sourceFileCount": 0
       },
       {
@@ -23952,7 +23952,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 70,
+        "documentCount": 71,
         "sourceFileCount": 5
       },
       {
@@ -27792,13 +27792,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3842,
+      "sourceDocuments": 3855,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T04:48:46.696Z"
+      "latestInsightAt": "2026-06-06T04:57:09.119Z"
     },
     "inferenceStages": [
       {
@@ -27866,15 +27866,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 462,
+        "signalCount": 467,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 150
+            "count": 151
           },
           {
             "category": "project-spec",
-            "count": 142
+            "count": 144
           },
           {
             "category": "request-trace",
@@ -27882,7 +27882,7 @@
           },
           {
             "category": "user-request",
-            "count": 45
+            "count": 46
           },
           {
             "category": "work-summary",
@@ -27890,7 +27890,7 @@
           },
           {
             "category": "plan",
-            "count": 11
+            "count": 12
           },
           {
             "category": "web-search",
@@ -27925,7 +27925,7 @@
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장"
         ],
-        "latestEvidenceAt": "2026-06-06T04:48:46.695Z"
+        "latestEvidenceAt": "2026-06-06T04:57:09.119Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27939,11 +27939,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1753,
+        "signalCount": 1757,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 498
+            "count": 500
           },
           {
             "category": "evaluation",
@@ -27951,7 +27951,7 @@
           },
           {
             "category": "web-search",
-            "count": 423
+            "count": 424
           },
           {
             "category": "plan",
@@ -27959,7 +27959,7 @@
           },
           {
             "category": "request-trace",
-            "count": 114
+            "count": 115
           },
           {
             "category": "work-timing",
@@ -27990,7 +27990,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-06T04:48:46.695Z"
+        "latestEvidenceAt": "2026-06-06T04:57:09.118Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28004,7 +28004,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1006,
+        "signalCount": 1007,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -28012,7 +28012,7 @@
           },
           {
             "category": "plan",
-            "count": 293
+            "count": 294
           },
           {
             "category": "request-trace",
@@ -28063,7 +28063,7 @@
           "작업 계획 기록: 사용자 의도 기반 기능 지도",
           "계획: 질문 보류 기능"
         ],
-        "latestEvidenceAt": "2026-06-06T04:48:46.694Z"
+        "latestEvidenceAt": "2026-06-06T04:57:09.118Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28150,39 +28150,39 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1511,
+        "signalCount": 1522,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 654
+            "count": 658
           },
           {
             "category": "evaluation",
-            "count": 522
+            "count": 523
           },
           {
             "category": "user-request",
-            "count": 99
+            "count": 100
           },
           {
             "category": "work-summary",
-            "count": 58
+            "count": 59
           },
           {
             "category": "request-trace",
-            "count": 55
+            "count": 56
           },
           {
             "category": "plan",
-            "count": 42
+            "count": 43
           },
           {
             "category": "web-search",
-            "count": 37
+            "count": 38
           },
           {
             "category": "project-doc",
-            "count": 31
+            "count": 32
           },
           {
             "category": "work-timing",
@@ -28209,7 +28209,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T04:48:46.696Z"
+        "latestEvidenceAt": "2026-06-06T04:57:09.119Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28285,14 +28285,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3842,
+      "sourceDocuments": 3855,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T04:48:46.696Z"
+      "latestInsightAt": "2026-06-06T04:57:09.119Z"
     },
     "operatingModel": [
       {
@@ -28350,25 +28350,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3221,
+        "signalCount": 3231,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1753
+            "signalCount": 1757
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1006
+            "signalCount": 1007
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 462
+            "signalCount": 467
           }
         ],
         "missingPatternIds": [],
@@ -28396,7 +28396,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T04:48:46.695Z",
+        "latestEvidenceAt": "2026-06-06T04:57:09.119Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28494,19 +28494,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2517,
+        "signalCount": 2529,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1511
+            "signalCount": 1522
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1006
+            "signalCount": 1007
           }
         ],
         "missingPatternIds": [],
@@ -28534,7 +28534,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T04:48:46.696Z",
+        "latestEvidenceAt": "2026-06-06T04:57:09.119Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28563,13 +28563,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 581,
+        "signalCount": 586,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 462
+            "signalCount": 467
           },
           {
             "id": "release-blocker-gate",
@@ -28603,7 +28603,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T04:48:46.695Z",
+        "latestEvidenceAt": "2026-06-06T04:57:09.119Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28632,19 +28632,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2759,
+        "signalCount": 2764,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1006
+            "signalCount": 1007
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1753
+            "signalCount": 1757
           }
         ],
         "missingPatternIds": [],
@@ -28672,7 +28672,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T04:48:46.695Z",
+        "latestEvidenceAt": "2026-06-06T04:57:09.118Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28701,7 +28701,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1872,
+        "signalCount": 1876,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -28713,7 +28713,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1753
+            "signalCount": 1757
           }
         ],
         "missingPatternIds": [],
@@ -28741,7 +28741,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T04:48:46.695Z",
+        "latestEvidenceAt": "2026-06-06T04:57:09.118Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

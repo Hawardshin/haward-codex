@@ -93,6 +93,10 @@
   --ide-titlebar-bg: color-mix(in srgb, var(--titlebar-bg) 88%, var(--surface) 12%);
   --section-tab-shadow: 0 1px 1px rgba(17, 24, 39, 0.045), 0 6px 18px rgba(17, 24, 39, 0.05);
   --section-tab-active-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 12px 28px rgba(0, 102, 204, 0.16), 0 4px 12px rgba(15, 138, 116, 0.1);
+  --tab-inactive-bg: color-mix(in srgb, var(--surface-depth-1) 82%, var(--surface-muted) 18%);
+  --tab-selected-indicator: linear-gradient(90deg, var(--accent-primary), color-mix(in srgb, var(--green) 72%, var(--accent-primary) 28%));
+  --tab-selected-border: color-mix(in srgb, var(--control-selected-border) 78%, var(--line-strong) 22%);
+  --tab-selected-shadow: var(--section-tab-active-shadow), inset 0 -3px 0 color-mix(in srgb, var(--text-inverse) 54%, transparent);
   --surface-edge-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.68);
   --choice-bg: linear-gradient(180deg, #ffffff 0%, #f6f8fb 100%);
   --choice-bg-hover: linear-gradient(180deg, #ffffff 0%, #eef5ff 100%);
@@ -1846,6 +1850,7 @@ main {
 }
 
 .settings-tab-list button {
+  position: relative;
   display: grid;
   grid-template-columns: 22px minmax(0, 1fr);
   gap: var(--space-2);
@@ -1859,12 +1864,52 @@ main {
   padding: var(--space-2);
   box-shadow: none;
   text-align: left;
+  overflow: hidden;
 }
 
 .settings-tab-list button.active {
-  border-color: var(--control-selected-border);
+  border-color: var(--tab-selected-border);
   background: var(--surface-depth-selected);
-  box-shadow: var(--choice-shadow);
+  box-shadow: var(--choice-active-shadow), inset 0 -3px 0 var(--accent-primary);
+}
+
+.settings-tab-list button::before,
+.settings-subsection-rail button::before,
+.section-tabs button::before,
+.app-choice-button-group button::before,
+.source-editor-tab::before,
+.tool-studio-depth-rail button::before,
+.tool-studio-mode-rail button::before {
+  content: "";
+  position: absolute;
+  opacity: 0;
+  transform: scaleX(0.7);
+  transform-origin: center;
+  transition:
+    opacity var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.settings-tab-list button::before,
+.settings-subsection-rail button::before,
+.section-tabs button::before,
+.app-choice-button-group button::before,
+.tool-studio-depth-rail button::before,
+.tool-studio-mode-rail button::before {
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--tab-selected-indicator);
+}
+
+.settings-tab-list button.active::before,
+.settings-subsection-rail button.active::before,
+.section-tabs button.active::before,
+.app-choice-button-group button.active::before,
+.source-editor-tab.active::before,
+.tool-studio-depth-rail button.active::before,
+.tool-studio-mode-rail button.active::before {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 .settings-tab-list button:hover:not(:disabled):not(.active) {
@@ -1925,6 +1970,7 @@ main {
 }
 
 .settings-subsection-rail button {
+  position: relative;
   display: inline-flex;
   min-width: 124px;
   max-width: 210px;
@@ -1938,12 +1984,13 @@ main {
   color: var(--text);
   box-shadow: var(--control-shadow);
   text-align: left;
+  overflow: hidden;
 }
 
 .settings-subsection-rail button.active {
-  border-color: var(--accent-primary-border);
-  background: var(--surface-depth-selected);
-  color: var(--text-inverse);
+  border-color: var(--tab-selected-border);
+  background: var(--choice-selected-bg);
+  color: var(--control-selected-fg);
   box-shadow: var(--choice-active-shadow);
 }
 
@@ -6068,6 +6115,7 @@ h3 {
 
 .section-tabs button,
 .panel-heading button {
+  position: relative;
   display: inline-flex;
   min-height: var(--control-target-size);
   align-items: center;
@@ -6078,6 +6126,7 @@ h3 {
   border-radius: var(--control-radius);
   padding: 8px calc(var(--control-padding-x) + 1px);
   box-shadow: var(--section-tab-shadow), var(--surface-edge-highlight);
+  overflow: hidden;
 }
 
 .section-tabs button {
@@ -6086,10 +6135,10 @@ h3 {
 }
 
 .section-tabs button.active {
-  border-color: var(--control-selected-border);
+  border-color: var(--tab-selected-border);
   background: var(--choice-selected-bg);
   color: var(--text-on-dark);
-  box-shadow: var(--section-tab-active-shadow);
+  box-shadow: var(--tab-selected-shadow);
 }
 
 .section-tabs button span {
@@ -6525,6 +6574,7 @@ h3 {
 }
 
 .app-choice-button-group button {
+  position: relative;
   display: grid;
   min-width: 0;
   min-height: 46px;
@@ -6538,6 +6588,7 @@ h3 {
   padding: 7px 9px;
   box-shadow: var(--control-shadow);
   text-align: left;
+  overflow: hidden;
 }
 
 .app-choice-button-group.compact button {
@@ -6546,10 +6597,10 @@ h3 {
 }
 
 .app-choice-button-group button.active {
-  border-color: var(--accent-primary-border);
+  border-color: var(--tab-selected-border);
   background: var(--choice-selected-bg);
   color: var(--text-inverse);
-  box-shadow: var(--choice-active-shadow);
+  box-shadow: var(--tab-selected-shadow);
 }
 
 .app-choice-button-group span,
@@ -14300,6 +14351,7 @@ h3 {
 }
 
 .source-editor-tab {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(120px, 1fr) auto;
   min-width: min(280px, 80vw);
@@ -14313,11 +14365,23 @@ h3 {
   box-shadow: inset 0 1px 0 color-mix(in srgb, #ffffff 48%, transparent);
 }
 
+.source-editor-tab::before {
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--tab-selected-indicator);
+  transform: scaleY(0.7);
+}
+
 .source-editor-tab.active {
-  border-color: var(--accent-primary-border);
+  border-color: var(--tab-selected-border);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--surface-raised) 82%, var(--blue) 10%), color-mix(in srgb, var(--surface) 92%, var(--blue) 6%)),
     var(--surface);
+  box-shadow: var(--tab-selected-shadow);
+}
+
+.source-editor-tab.active::before {
+  transform: scaleY(1);
 }
 
 .source-editor-tab.dirty {
@@ -17467,6 +17531,7 @@ h3 {
 .tool-pane-heading button,
 .tool-studio-depth-rail button,
 .tool-studio-mode-rail button {
+  position: relative;
   min-width: var(--control-target-size);
   min-height: var(--control-target-size);
   border: 1px solid var(--hierarchy-border);
@@ -17474,6 +17539,7 @@ h3 {
   color: var(--text);
   background: var(--choice-bg);
   box-shadow: var(--section-tab-shadow), var(--surface-edge-highlight);
+  overflow: hidden;
 }
 
 .tool-studio-actions button {
@@ -17632,10 +17698,10 @@ h3 {
 
 .tool-studio-depth-rail button.active,
 .tool-studio-mode-rail button.active {
-  border-color: var(--control-selected-border);
+  border-color: var(--tab-selected-border);
   color: var(--control-selected-fg);
   background: var(--choice-selected-bg);
-  box-shadow: var(--section-tab-active-shadow);
+  box-shadow: var(--tab-selected-shadow);
 }
 
 .tool-studio-depth-rail strong,
