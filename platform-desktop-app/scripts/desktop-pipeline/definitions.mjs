@@ -191,11 +191,14 @@ export const helpText = `Usage:
 
 Root shortcuts:
   corepack pnpm run desktop:setup
+  corepack pnpm run desktop:dev
   corepack pnpm run desktop:verify:quick
   corepack pnpm run desktop:setup:verify
   corepack pnpm run desktop:verify
   corepack pnpm run desktop:renderer:build
   corepack pnpm run desktop:package:internal
+  corepack pnpm run desktop:run:internal
+  corepack pnpm run desktop:package:run:internal
   corepack pnpm run desktop:package:public
   corepack pnpm run desktop:release:dev-env
   corepack pnpm run desktop:release:report

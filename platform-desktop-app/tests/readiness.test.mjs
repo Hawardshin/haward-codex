@@ -29,6 +29,7 @@ test("desktop product shell has the selected Tauri entry points", () => {
   const config = readJson("src-tauri/tauri.conf.json");
   assert.equal(config.productName, "Agent Workspace Platform");
   assert.equal(config.identifier, "com.personalagentplatform.desktop");
+  assert.equal(config.build.beforeDevCommand, "corepack pnpm --dir renderer/workspace-monitor run dev");
   assert.equal(config.build.frontendDist, "../renderer/workspace-monitor/out");
   assert.equal(config.app.withGlobalTauri, true);
   assert.equal(config.app.windows[0].width, 1440);
@@ -71,10 +72,13 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
   for (const scriptName of [
     "desktop:setup",
     "desktop:setup:verify",
+    "desktop:dev",
     "desktop:verify:quick",
     "desktop:verify",
     "desktop:renderer:build",
     "desktop:package:internal",
+    "desktop:run:internal",
+    "desktop:package:run:internal",
     "desktop:package:public",
     "desktop:release:dev-env",
     "desktop:release:report",
@@ -82,13 +86,16 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
   ]) {
     assert.ok(rootPkg.scripts[scriptName]);
   }
-  for (const scriptName of ["doctor", "setup", "verify:quick", "verify", "package:internal", "package:public", "deploy:public:report", "release:public:dev-env", "pipeline:dry-run"]) {
+  for (const scriptName of ["doctor", "setup", "verify:quick", "verify", "package:internal", "run:internal", "package:public", "deploy:public:report", "release:public:dev-env", "pipeline:dry-run"]) {
     assert.ok(pkg.scripts[scriptName]);
   }
   for (const command of [
     "corepack pnpm run desktop:setup:verify",
+    "corepack pnpm run desktop:dev",
     "corepack pnpm run desktop:verify",
     "corepack pnpm run desktop:package:internal",
+    "corepack pnpm run desktop:run:internal",
+    "corepack pnpm run desktop:package:run:internal",
     "corepack pnpm run desktop:package:public",
     "corepack pnpm run desktop:release:dev-env",
     "corepack pnpm run desktop:release:report",

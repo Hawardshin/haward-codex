@@ -1,0 +1,19 @@
+{
+  "schema_version": "2026-06-02",
+  "task_id": "2026-06-06-desktop-dev-run-fix",
+  "selected_mode": "standard",
+  "reason": "README build/run failure affects installable desktop app developer and internal user paths, and changes Tauri config, Rust startup, scripts, docs, and readiness contracts.",
+  "project": "platform-desktop-app",
+  "view_mode": "superadmin_developer",
+  "install_mode": "developer",
+  "resource_risk_occurred": true,
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-06-desktop-dev-run-fix.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-06-desktop-dev-run-fix.ko.md"
+  ],
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-06-desktop-dev-run-fix.ko.md"
+  ]
+}

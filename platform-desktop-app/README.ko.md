@@ -22,6 +22,12 @@ corepack pnpm run desktop:setup
 corepack pnpm run desktop:setup:verify
 ```
 
+개발 모드로 데스크톱 앱을 바로 실행하려면:
+
+```bash
+corepack pnpm run desktop:dev
+```
+
 반복 개발 중 빠른 검증만 하려면:
 
 ```bash
@@ -52,6 +58,18 @@ corepack pnpm run desktop:doctor
 corepack pnpm run desktop:package:internal
 ```
 
+이미 만든 내부 테스트용 `.app`을 실행하려면:
+
+```bash
+corepack pnpm run desktop:run:internal
+```
+
+내부 테스트용 `.app`/DMG를 만들고 바로 실행하려면:
+
+```bash
+corepack pnpm run desktop:package:run:internal
+```
+
 공개 배포 가능 여부를 report-only로 확인하려면:
 
 ```bash
@@ -80,6 +98,8 @@ corepack pnpm --filter platform-desktop-app run pipeline:dry-run
 
 `desktop:setup`은 desktop app 경로에 필요한 workspace dependency를 lockfile 기준으로 설치하고, Workspace Monitor Playwright Chromium headless shell을 설치합니다.
 
+`desktop:dev`는 Tauri 개발 모드로 앱을 실행하고 Workspace Monitor 개발 서버를 자동으로 띄웁니다.
+
 `desktop:verify:quick`은 renderer/Rust rebuild 없이 Workspace Monitor check/test와 desktop app test/check만 실행합니다.
 
 `desktop:doctor`는 Node, pnpm, Rust/Cargo, Tauri CLI, Playwright browser cache, customer bundle boundary, internal/public release gate 상태를 빠르게 점검합니다. public release signing/notarization/updater/clean-machine smoke는 warning으로 보고하고 local/internal 개발 검증 실패로 취급하지 않습니다.
@@ -94,6 +114,10 @@ corepack pnpm --filter platform-desktop-app run pipeline:dry-run
 - Rust `cargo test`
 
 `desktop:package:internal`은 `desktop:verify`를 통과한 뒤 Rust build, prepared-renderer Tauri build, macOS `codesign` verification, DMG `hdiutil verify`를 실행합니다. Tauri 직접 빌드(`corepack pnpm --filter platform-desktop-app run tauri:build`)는 여전히 renderer build를 먼저 실행하지만, pipeline 패키징은 이미 audit된 renderer output을 재사용해서 중복 Next.js build를 피합니다.
+
+`desktop:run:internal`은 `desktop:package:internal`로 만든 macOS `.app`을 엽니다. artifact가 없으면 먼저 `desktop:package:internal`을 실행하라고 실패 메시지를 냅니다.
+
+`desktop:package:run:internal`은 내부 `.app`/DMG를 만든 뒤 바로 `desktop:run:internal`을 실행합니다.
 
 `desktop:release:dev-env`는 Tauri updater dev key를 ignored `src-tauri/target/public-release/dev/` 아래에 만들고 `TAURI_SIGNING_PRIVATE_KEY_PATH`, `TAURI_UPDATER_PUBLIC_KEY`, `TAURI_UPDATER_ENDPOINTS`, `TAURI_RELEASE_ASSET_BASE_URL` export 파일을 생성합니다. 이 명령은 Apple Developer ID signing/notarization credential을 만들지 않으며 public-ready 상태를 의미하지 않습니다.
 

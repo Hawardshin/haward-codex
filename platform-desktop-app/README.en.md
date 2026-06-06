@@ -22,6 +22,12 @@ For first setup plus full verification:
 corepack pnpm run desktop:setup:verify
 ```
 
+To run the desktop app in development mode:
+
+```bash
+corepack pnpm run desktop:dev
+```
+
 For fast repeated development verification:
 
 ```bash
@@ -52,6 +58,18 @@ To build the local/internal `.app` and DMG in one command:
 corepack pnpm run desktop:package:internal
 ```
 
+To run an already built local/internal `.app`:
+
+```bash
+corepack pnpm run desktop:run:internal
+```
+
+To build the local/internal `.app` and DMG and then open the app:
+
+```bash
+corepack pnpm run desktop:package:run:internal
+```
+
 To check public distribution readiness in report-only mode:
 
 ```bash
@@ -80,6 +98,8 @@ corepack pnpm --filter platform-desktop-app run pipeline:dry-run
 
 `desktop:setup` installs the workspace dependencies needed for the desktop app path from the lockfile, then installs the Workspace Monitor Playwright Chromium headless shell.
 
+`desktop:dev` runs the app in Tauri development mode and starts the Workspace Monitor dev server automatically.
+
 `desktop:verify:quick` runs Workspace Monitor check/test and desktop app test/check without rebuilding the renderer or Rust app.
 
 `desktop:doctor` checks Node, pnpm, Rust/Cargo, Tauri CLI, the Playwright browser cache, customer bundle boundaries, and internal/public release gates. Public signing, notarization, updater, and clean-machine smoke gaps are reported as warnings rather than local/internal developer verification failures.
@@ -94,6 +114,10 @@ corepack pnpm --filter platform-desktop-app run pipeline:dry-run
 - Rust `cargo test`
 
 `desktop:package:internal` runs `desktop:verify`, then Rust build, prepared-renderer Tauri build, macOS `codesign` verification, and DMG `hdiutil verify`. Direct Tauri builds (`corepack pnpm --filter platform-desktop-app run tauri:build`) still run the renderer build first, but the packaging pipeline reuses the already audited renderer output to avoid a duplicate Next.js build.
+
+`desktop:run:internal` opens the macOS `.app` produced by `desktop:package:internal`. If the artifact is missing, it fails with the package command to run first.
+
+`desktop:package:run:internal` builds the local/internal `.app` and DMG, then runs `desktop:run:internal`.
 
 `desktop:release:dev-env` creates a Tauri updater dev key under ignored `src-tauri/target/public-release/dev/` and writes an export file for `TAURI_SIGNING_PRIVATE_KEY_PATH`, `TAURI_UPDATER_PUBLIC_KEY`, `TAURI_UPDATER_ENDPOINTS`, and `TAURI_RELEASE_ASSET_BASE_URL`. It does not create Apple Developer ID signing/notarization credentials and does not mean the app is public-ready.
 

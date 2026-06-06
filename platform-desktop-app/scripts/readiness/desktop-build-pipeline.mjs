@@ -11,7 +11,8 @@ export const desktopBuildPipelineRequiredFiles = [
   "scripts/public-release-dev-env.mjs",
   "scripts/public-release-build.mjs",
   "scripts/create-updater-manifest.mjs",
-  "scripts/desktop-doctor.mjs"
+  "scripts/desktop-doctor.mjs",
+  "scripts/open-internal-app.mjs"
 ];
 
 export function checkDesktopBuildPipeline({ root, readJson }) {
@@ -22,16 +23,19 @@ export function checkDesktopBuildPipeline({ root, readJson }) {
 
   requireScripts(pkg, ["check", "test", "verify", "tauri:dev", "tauri:build"], "package.json", failures);
   requireScripts(pkg, ["runtime:contract"], "package.json", failures);
-  requireScripts(pkg, ["setup", "verify:quick", "package:internal", "package:public", "deploy:public:report", "pipeline:dry-run"], "package.json", failures);
+  requireScripts(pkg, ["setup", "verify:quick", "package:internal", "run:internal", "package:public", "deploy:public:report", "pipeline:dry-run"], "package.json", failures);
   requireScripts(pkg, ["customer-bundle:audit", "release:preflight", "release:preflight:public", "release:preflight:public:report", "release:public:dev-env", "release:public:config", "release:manifest"], "package.json", failures);
   requireScripts(pkg, ["service:readiness", "service:readiness:public:report"], "package.json", failures);
   requireScripts(rootPkg, [
     "desktop:setup",
     "desktop:setup:verify",
+    "desktop:dev",
     "desktop:verify:quick",
     "desktop:verify",
     "desktop:renderer:build",
     "desktop:package:internal",
+    "desktop:run:internal",
+    "desktop:package:run:internal",
     "desktop:package:public",
     "desktop:release:dev-env",
     "desktop:release:report",
@@ -40,6 +44,7 @@ export function checkDesktopBuildPipeline({ root, readJson }) {
 
   requireScriptIncludes(pkg, "renderer:build", "build:customer", "platform-desktop-app renderer:build must use the customer Workspace Monitor build", failures);
   requireScriptIncludes(pkg, "renderer:build", "customer-bundle:audit", "platform-desktop-app renderer:build must audit the customer bundle after building", failures);
+  requireScriptIncludes(pkg, "run:internal", "open-internal-app.mjs", "platform-desktop-app run:internal must open the packaged internal app artifact", failures);
   requireScriptIncludes(pkg, "monitor:build", "renderer:build", "platform-desktop-app monitor:build must remain a compatibility alias for renderer:build", failures);
   requireScriptIncludes(pkg, "tauri:build:prepared", "tauri-build-prepared", "package.json must expose tauri:build:prepared for no-rebuild internal packaging", failures);
   requireScriptIncludes(workspaceMonitorPkg, "build:customer", "--snapshot-mode customer", "workspace-monitor package.json must expose build:customer with customer snapshot mode", failures);
@@ -79,6 +84,7 @@ function checkDocsAndPipelineStructure(root, failures) {
   const defaultReadme = readText(root, "README.md");
   const releaseRunbookKo = readText(root, "docs/release-runbook.ko.md");
   const releaseRunbookEn = readText(root, "docs/release-runbook.en.md");
+  const tauriConfig = readText(root, "src-tauri/tauri.conf.json");
   const desktopPipelineEntrypoint = readText(root, "scripts/desktop-pipeline.mjs");
   const desktopPipelineStructure = [
     desktopPipelineEntrypoint,
@@ -95,8 +101,11 @@ function checkDocsAndPipelineStructure(root, failures) {
 
   for (const requiredPhrase of [
     "corepack pnpm run desktop:setup:verify",
+    "corepack pnpm run desktop:dev",
     "corepack pnpm run desktop:verify",
     "corepack pnpm run desktop:package:internal",
+    "corepack pnpm run desktop:run:internal",
+    "corepack pnpm run desktop:package:run:internal",
     "corepack pnpm run desktop:package:public",
     "corepack pnpm run desktop:release:dev-env",
     "corepack pnpm run desktop:release:report",
@@ -111,6 +120,7 @@ function checkDocsAndPipelineStructure(root, failures) {
 
   for (const requiredPhrase of [
     "corepack pnpm run desktop:package:internal",
+    "corepack pnpm run desktop:run:internal",
     "Developer ID",
     "notarization",
     "clean-machine",
@@ -122,6 +132,10 @@ function checkDocsAndPipelineStructure(root, failures) {
     if (!readmeEn.includes(requiredPhrase) || !releaseRunbookEn.includes(requiredPhrase)) {
       failures.push(`English desktop docs must include ${requiredPhrase}`);
     }
+  }
+
+  if (!tauriConfig.includes('"beforeDevCommand": "corepack pnpm --dir renderer/workspace-monitor run dev"')) {
+    failures.push("tauri.conf.json beforeDevCommand must point to renderer/workspace-monitor from the platform-desktop-app cwd");
   }
 
   for (const requiredPhrase of [

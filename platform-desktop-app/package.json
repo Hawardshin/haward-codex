@@ -13,6 +13,7 @@
     "verify:quick": "node scripts/desktop-pipeline.mjs verify-quick",
     "verify": "node scripts/desktop-pipeline.mjs verify",
     "package:internal": "node scripts/desktop-pipeline.mjs package-internal",
+    "run:internal": "node scripts/open-internal-app.mjs",
     "package:public": "node scripts/desktop-pipeline.mjs package-public",
     "deploy:public:report": "node scripts/desktop-pipeline.mjs public-report",
     "pipeline:dry-run": "node scripts/desktop-pipeline.mjs package-internal --dry-run",

@@ -74,10 +74,13 @@ function checkPackageScripts() {
   const monitorPkg = readJson(path.join(projectRoot, "renderer/workspace-monitor/package.json"));
   const requiredRootScripts = [
     "desktop:setup",
+    "desktop:dev",
     "desktop:verify:quick",
     "desktop:verify",
     "desktop:renderer:build",
     "desktop:package:internal",
+    "desktop:run:internal",
+    "desktop:package:run:internal",
     "desktop:release:dev-env",
     "desktop:release:report",
     "desktop:doctor"
@@ -89,6 +92,7 @@ function checkPackageScripts() {
     "verify",
     "renderer:build",
     "package:internal",
+    "run:internal",
     "package:public",
     "deploy:public:report",
     "release:public:dev-env",
@@ -106,7 +110,7 @@ function checkPackageScripts() {
     id: "package_scripts",
     label: "Desktop package scripts",
     status: missing.length ? "failed" : "passed",
-    detail: missing.length ? `Missing scripts: ${missing.join(", ")}` : "Required setup, verify, renderer, package, release, browser, and doctor scripts are present."
+    detail: missing.length ? `Missing scripts: ${missing.join(", ")}` : "Required setup, dev, verify, renderer, package, run, release, browser, and doctor scripts are present."
   };
 }
 
@@ -192,9 +196,11 @@ function nextCommands(summary) {
     ];
   }
   return [
+    "corepack pnpm run desktop:dev",
     "corepack pnpm run desktop:verify:quick",
     "corepack pnpm run desktop:verify",
     "corepack pnpm run desktop:package:internal",
+    "corepack pnpm run desktop:run:internal",
     "corepack pnpm run desktop:release:report"
   ];
 }

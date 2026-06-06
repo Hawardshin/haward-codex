@@ -12,11 +12,14 @@ Run these from the repository root.
 | --- | --- |
 | First setup only | `corepack pnpm run desktop:setup` |
 | First setup plus developer verification | `corepack pnpm run desktop:setup:verify` |
+| Run in development mode | `corepack pnpm run desktop:dev` |
 | Fast repeated verification | `corepack pnpm run desktop:verify:quick` |
 | Full developer verification | `corepack pnpm run desktop:verify` |
 | Customer renderer build/audit only | `corepack pnpm run desktop:renderer:build` |
 | Quick setup/build diagnosis | `corepack pnpm run desktop:doctor` |
 | Build local/internal `.app` and DMG | `corepack pnpm run desktop:package:internal` |
+| Open the built internal `.app` | `corepack pnpm run desktop:run:internal` |
+| Build local/internal `.app` and DMG, then open it | `corepack pnpm run desktop:package:run:internal` |
 | Check public release gates in report-only mode | `corepack pnpm run desktop:release:report` |
 | Create local developer updater env scaffold | `corepack pnpm run desktop:release:dev-env` |
 | Build public signed updater artifacts | `corepack pnpm run desktop:package:public` |

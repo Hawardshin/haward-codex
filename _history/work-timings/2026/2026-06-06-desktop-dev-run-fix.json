@@ -1,0 +1,41 @@
+{
+  "task_id": "2026-06-06-desktop-dev-run-fix",
+  "title": "desktop dev/run fix",
+  "date": "2026-06-06",
+  "project": "platform-desktop-app",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "reproduction",
+      "label": "Failure reproduction",
+      "status": "completed",
+      "measurement": "observed",
+      "notes": "Reproduced beforeDevCommand ENOENT and updater plugin panic."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "measurement": "not_measured",
+      "notes": "Fixed Tauri dev path, conditional updater plugin registration, scripts, docs, and readiness contracts."
+    },
+    {
+      "phase_id": "dev_smoke",
+      "label": "Dev run smoke",
+      "status": "completed",
+      "measurement": "observed",
+      "notes": "desktop:dev reached GET / 200."
+    },
+    {
+      "phase_id": "full_verification",
+      "label": "Full verification",
+      "status": "completed",
+      "measurement": "observed",
+      "notes": "collect/check/test/build/package/internal run smoke completed; package phase took the longest and produced verified app and DMG artifacts."
+    }
+  ],
+  "slow_phase_candidates": [
+    "desktop:package:internal"
+  ]
+}

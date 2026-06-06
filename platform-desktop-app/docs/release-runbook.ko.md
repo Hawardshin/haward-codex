@@ -12,11 +12,14 @@ repository root에서 실행한다.
 | --- | --- |
 | 처음 설정만 실행 | `corepack pnpm run desktop:setup` |
 | 처음 설정 + 전체 개발 검증 | `corepack pnpm run desktop:setup:verify` |
+| 개발 모드 실행 | `corepack pnpm run desktop:dev` |
 | 빠른 반복 검증 | `corepack pnpm run desktop:verify:quick` |
 | 전체 개발 검증 | `corepack pnpm run desktop:verify` |
 | customer renderer build/audit만 실행 | `corepack pnpm run desktop:renderer:build` |
 | 설치/빌드 상태 빠른 진단 | `corepack pnpm run desktop:doctor` |
 | 내부 테스트용 `.app`/DMG 빌드 | `corepack pnpm run desktop:package:internal` |
+| 빌드된 내부 `.app` 실행 | `corepack pnpm run desktop:run:internal` |
+| 내부 `.app`/DMG 빌드 후 실행 | `corepack pnpm run desktop:package:run:internal` |
 | 공개 배포 gate report-only 확인 | `corepack pnpm run desktop:release:report` |
 | 로컬 개발자용 updater env scaffold 생성 | `corepack pnpm run desktop:release:dev-env` |
 | 공개 배포용 signed updater artifact 빌드 | `corepack pnpm run desktop:package:public` |

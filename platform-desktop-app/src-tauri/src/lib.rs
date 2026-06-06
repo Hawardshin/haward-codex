@@ -3463,12 +3463,24 @@ fn answer_and_resume_human_decision(
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    tauri::Builder::default()
+    let context = tauri::generate_context!();
+    let updater_configured = context
+        .config()
+        .plugins
+        .0
+        .get("updater")
+        .is_some_and(|value| value.is_object());
+    let mut builder = tauri::Builder::default()
         .manage(SessionStore::default())
         .manage(PtySessionStore::default())
         .manage(WorkspaceResourceStore::default())
-        .plugin(tauri_plugin_updater::Builder::new().build())
-        .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_dialog::init());
+
+    if updater_configured {
+        builder = builder.plugin(tauri_plugin_updater::Builder::new().build());
+    }
+
+    builder
         .setup(|app| {
             let handle = app.handle().clone();
             let cache_store = handle.state::<WorkspaceResourceStore>();
@@ -3533,7 +3545,7 @@ pub fn run() {
             answer_human_decision,
             answer_and_resume_human_decision
         ])
-        .run(tauri::generate_context!())
+        .run(context)
         .expect("error while running Agent Workspace Platform desktop shell");
 }
 

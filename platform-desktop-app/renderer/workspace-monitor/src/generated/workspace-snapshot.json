@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-06T01:13:41.047Z",
+  "generatedAt": "2026-06-06T01:30:54.126Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 4,
@@ -17,7 +17,7 @@
     "webSearches": 15,
     "timingRecords": 14,
     "historyDays": 1,
-    "adminHistoryDocuments": 2566,
+    "adminHistoryDocuments": 2572,
     "adminHistoryDays": 7,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -41,7 +41,7 @@
     "fundamentalImprovementPackages": 6,
     "fundamentalImprovementFitnessChecks": 4,
     "structurePressurePoints": 5,
-    "sourceFiles": 133,
+    "sourceFiles": 134,
     "rootFolders": 20
   },
   "projects": [
@@ -7603,6 +7603,230 @@
   ],
   "documents": [
     {
+      "id": "platform-desktop-app-specs-2026-06-06-desktop-dev-run-fix-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-desktop-dev-run-fix/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증: desktop dev/run fix",
+      "excerpt": "검증: desktop dev/run fix 현재 통과 실패 재현: 기존 corepack pnpm filter platform desktop app run tauri:dev 가 ../renderer/workspace monitor ENOENT로 실패. 1차 수정 후 재현: 경로는 해결됐지만 updater plugin panic 발생. corepack pnpm run desktop:dev : 통과. Next dev server ready, Rust dev build finished, app reque",
+      "html": "<h1>검증: desktop dev/run fix</h1>\n<h2>현재 통과</h2>\n<ul>\n<li>실패 재현: 기존 <code>corepack pnpm --filter platform-desktop-app run tauri:dev</code>가 <code>../renderer/workspace-monitor</code> ENOENT로 실패.</li>\n<li>1차 수정 후 재현: 경로는 해결됐지만 updater plugin panic 발생.</li>\n<li><code>corepack pnpm run desktop:dev</code>: 통과. Next dev server ready, Rust dev build finished, app request <code>GET / 200</code>.</li>\n<li>Dev process cleanup: Next dev server와 Tauri debug process 종료 확인.</li>\n<li><code>corepack pnpm run desktop:run:internal -- --dry-run</code>: 통과. <code>.app</code>/DMG artifact path 확인.</li>\n<li><code>corepack pnpm run desktop:doctor</code>: 통과. public release gates만 warning.</li>\n<li><code>cargo check</code> from <code>platform-desktop-app/src-tauri</code>: 통과.</li>\n<li><code>corepack pnpm --filter platform-desktop-app test</code>: 통과. tests 24개.</li>\n<li><code>corepack pnpm --filter workspace-monitor run collect</code>: 통과. developer/customer snapshot 갱신.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과. lazy boundary, scroll, source control design, comprehensive improvement, history payload contract 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과. tests 70개.</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code>: 통과. Next static build completed.</li>\n<li><code>corepack pnpm run desktop:package:internal</code>: 통과. <code>.app</code>와 DMG 생성, codesign verify, hdiutil verify 완료.</li>\n<li>post-package <code>corepack pnpm run desktop:run:internal -- --dry-run</code>: 통과. 내부 <code>.app</code>/DMG 경로와 open command 확인.</li>\n<li>post-package <code>corepack pnpm run desktop:run:internal</code>: 통과. 패키지 앱 프로세스가 실제 기동됨.</li>\n<li>post-package cleanup: app PIDs <code>85397</code>, <code>87155</code> 종료 후 <code>pgrep</code>과 port 3000 listener 없음 확인.</li>\n</ul>\n<h2>산출물</h2>\n<ul>\n<li><code>/Users/shinjoungeun/Desktop/Obsidian/brain/codex/platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app</code></li>\n<li><code>/Users/shinjoungeun/Desktop/Obsidian/brain/codex/platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg</code></li>\n</ul>\n<h2>남은 공개 배포 게이트</h2>\n<p>공개 배포는 Developer ID signing, Apple notarization, Tauri updater signing/public key/endpoints, clean-machine smoke가 없어서 아직 readiness warning 상태다. 이 경고는 local/internal build/run을 막지 않는다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2253,
+      "updatedAt": "2026-06-06T01:30:31.312Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-06-desktop-dev-run-fix-json",
+      "path": "_history/work-timings/2026/2026-06-06-desktop-dev-run-fix.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 06 Desktop Dev Run Fix",
+      "excerpt": "{ \"task id\": \"2026 06 06 desktop dev run fix\", \"title\": \"desktop dev/run fix\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"reproduction\", \"label\": \"Failure reproduction\", \"status\": \"c",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 06 desktop dev run fix&quot;, &quot;title&quot;: &quot;desktop dev/run fix&quot;, &quot;date&quot;: &quot;2026 06 06&quot;, &quot;project&quot;: &quot;platform desktop app&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;reproduction&quot;, &quot;label&quot;: &quot;Failure reproduction&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;measurement&quot;: &quot;observed&quot;, &quot;notes&quot;: &quot;Reproduced beforeDevCommand ENOE</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1277,
+      "updatedAt": "2026-06-06T01:28:41.483Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-06-desktop-dev-run-fix-ko-md",
+      "path": "_history/request-traces/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "2026 06 06 request to outcome trace",
+      "excerpt": "2026 06 06 request to outcome trace 요청 README대로 했는데 desktop app 빌드/실행이 되지 않는 문제 해결. 원인 Tauri beforeDevCommand 가 잘못된 상대 경로를 사용했다. updater plugin이 public updater config 없이도 항상 초기화되어 internal/dev 실행을 panic으로 막았다. README에 빌드 후 실행 명령이 없었다. 산출물 platform desktop app/src tauri/tauri.conf",
+      "html": "<p>2026 06 06 request to outcome trace 요청 README대로 했는데 desktop app 빌드/실행이 되지 않는 문제 해결. 원인 Tauri beforeDevCommand 가 잘못된 상대 경로를 사용했다. updater plugin이 public updater config 없이도 항상 초기화되어 internal/dev 실행을 panic으로 막았다. README에 빌드 후 실행 명령이 없었다. 산출물 platform desktop app/src tauri/tauri.conf.json platform desktop app/src tauri/src/lib.rs package.json platform desktop ap</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1145,
+      "updatedAt": "2026-06-06T01:28:41.482Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-06-desktop-dev-run-fix-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "2026 06 06 desktop dev/run fix 작업 요약",
+      "excerpt": "2026 06 06 desktop dev/run fix 작업 요약 구현 tauri.conf.json 의 dev renderer path를 수정했다. public updater config가 있을 때만 updater plugin을 초기화하도록 Rust startup을 바꿨다. desktop:dev , desktop:run:internal , desktop:package:run:internal root scripts를 추가했다. macOS internal .app open helper를 추가했다. R",
+      "html": "<p>2026 06 06 desktop dev/run fix 작업 요약 구현 tauri.conf.json 의 dev renderer path를 수정했다. public updater config가 있을 때만 updater plugin을 초기화하도록 Rust startup을 바꿨다. desktop:dev , desktop:run:internal , desktop:package:run:internal root scripts를 추가했다. macOS internal .app open helper를 추가했다. README, release runbook, doctor, readiness contract를 갱신했다. 현재 검증 desktop:dev 실행 s</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 859,
+      "updatedAt": "2026-06-06T01:28:41.482Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-06-desktop-dev-run-fix-ko-md",
+      "path": "_history/evaluations/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "2026 06 06 desktop dev/run fix 평가",
+      "excerpt": "2026 06 06 desktop dev/run fix 평가 평가 대상 README build/run failure fix. 완료 기준 desktop:dev 가 실제 app startup까지 진행한다. internal/dev 실행은 updater public release gate에 막히지 않는다. 빌드된 .app 을 여는 명령이 문서화되고 스크립트로 제공된다. 최종 package와 smoke가 통과한다. 현재 결과 desktop:dev : 통과. GET / 200 . desktop:run:int",
+      "html": "<p>2026 06 06 desktop dev/run fix 평가 평가 대상 README build/run failure fix. 완료 기준 desktop:dev 가 실제 app startup까지 진행한다. internal/dev 실행은 updater public release gate에 막히지 않는다. 빌드된 .app 을 여는 명령이 문서화되고 스크립트로 제공된다. 최종 package와 smoke가 통과한다. 현재 결과 desktop:dev : 통과. GET / 200 . desktop:run:internal dry run : 통과. desktop:doctor : 통과. public release warning만 남음. cargo check</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1213,
+      "updatedAt": "2026-06-06T01:28:41.481Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-desktop-dev-run-fix-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-desktop-dev-run-fix/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업: desktop dev/run fix",
+      "excerpt": "작업: desktop dev/run fix x Web first 공식 문서 확인 x memory bootstrap 확인 x README 실행 실패 재현 x beforeDevCommand 경로 수정 x updater plugin conditional registration 적용 x 실행 scripts와 open helper 추가 x README/runbook/doctor/readiness contract 갱신 x desktop:dev 실행 smoke x dev process cleanup x des",
+      "html": "<h1>작업: desktop dev/run fix</h1>\n<ul>\n<li>[x] Web-first 공식 문서 확인</li>\n<li>[x] memory bootstrap 확인</li>\n<li>[x] README 실행 실패 재현</li>\n<li>[x] <code>beforeDevCommand</code> 경로 수정</li>\n<li>[x] updater plugin conditional registration 적용</li>\n<li>[x] 실행 scripts와 open helper 추가</li>\n<li>[x] README/runbook/doctor/readiness contract 갱신</li>\n<li>[x] <code>desktop:dev</code> 실행 smoke</li>\n<li>[x] dev process cleanup</li>\n<li>[x] <code>desktop:run:internal -- --dry-run</code></li>\n<li>[x] doctor, Rust check, desktop tests</li>\n<li>[x] collect/check/workspace tests/build/package</li>\n<li>[x] post-package smoke</li>\n<li>[ ] commit and push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 559,
+      "updatedAt": "2026-06-06T01:28:41.480Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-06-desktop-dev-run-fix-ko-md",
+      "path": "_history/user-requests/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: desktop dev/run fix",
+      "excerpt": "사용자 요청 요약: desktop dev/run fix 사용자는 README에 있는 대로 빌드하고 실행했지만 되지 않는다고 보고했고, 해결을 요청했다. 적용 범위 desktop app README 명령 재현. Tauri dev 실행 실패 수정. internal/dev updater startup panic 수정. 빌드된 내부 .app 실행 명령 추가.",
+      "html": "<p>사용자 요청 요약: desktop dev/run fix 사용자는 README에 있는 대로 빌드하고 실행했지만 되지 않는다고 보고했고, 해결을 요청했다. 적용 범위 desktop app README 명령 재현. Tauri dev 실행 실패 수정. internal/dev updater startup panic 수정. 빌드된 내부 .app 실행 명령 추가.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 354,
+      "updatedAt": "2026-06-06T01:24:25.576Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-desktop-dev-run-fix-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-desktop-dev-run-fix/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적: desktop dev/run fix",
+      "excerpt": "추적: desktop dev/run fix | 요구 | 구현 | 검증 | | | | | | REQ DDR 001 dev 실행 | beforeDevCommand , desktop:dev | corepack pnpm run desktop:dev | | REQ DDR 002 internal/dev updater panic 방지 | conditional updater plugin registration | dev smoke | | REQ DDR 003 public updater 경로 유지 | plugin",
+      "html": "<h1>추적: desktop dev/run fix</h1>\n<table><thead><tr><th>요구</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-DDR-001 dev 실행</td><td><code>beforeDevCommand</code>, <code>desktop:dev</code></td><td><code>corepack pnpm run desktop:dev</code></td></tr><tr><td>REQ-DDR-002 internal/dev updater panic 방지</td><td>conditional updater plugin registration</td><td>dev smoke</td></tr><tr><td>REQ-DDR-003 public updater 경로 유지</td><td><code>plugins.updater</code> object check</td><td>readiness tests, public config tests</td></tr><tr><td>REQ-DDR-004 실행 문서화</td><td>README/runbook, root scripts</td><td>tests/readiness</td></tr><tr><td>REQ-DDR-005 빌드/실행 검증</td><td>validation commands</td><td>validation record</td></tr></tbody></table>\n<h2>연결 기록</h2>\n<ul>\n<li>요구사항: <code>platform-desktop-app/docs/requirements/2026-06-06-desktop-dev-run-fix.ko.md</code></li>\n<li>웹 검색: <code>_history/web-searches/2026/2026-06-06-desktop-dev-run-fix.ko.md</code></li>\n<li>평가: <code>_history/evaluations/2026/2026-06-06-desktop-dev-run-fix.ko.md</code></li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 827,
+      "updatedAt": "2026-06-06T01:24:25.576Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-desktop-dev-run-fix-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-desktop-dev-run-fix/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "계획: desktop dev/run fix",
+      "excerpt": "계획: desktop dev/run fix 1. 공식 Tauri/Next/updater 문서를 확인한다. 2. README 기준 명령을 재현한다. 3. beforeDevCommand 상대 경로를 수정한다. 4. updater plugin 초기화를 public updater config가 있을 때로 제한한다. 5. root/project 실행 scripts와 macOS internal app open script를 추가한다. 6. README, release runbook, doctor, readi",
+      "html": "<h1>계획: desktop dev/run fix</h1>\n<p>1. 공식 Tauri/Next/updater 문서를 확인한다.</p>\n<p>2. README 기준 명령을 재현한다.</p>\n<p>3. <code>beforeDevCommand</code> 상대 경로를 수정한다.</p>\n<p>4. updater plugin 초기화를 public updater config가 있을 때로 제한한다.</p>\n<p>5. root/project 실행 scripts와 macOS internal app open script를 추가한다.</p>\n<p>6. README, release runbook, doctor, readiness tests를 갱신한다.</p>\n<p>7. <code>desktop:dev</code>, <code>desktop:run:internal -- --dry-run</code>, doctor, tests, Rust check, build/package를 검증한다.</p>\n<p>8. resource cleanup, close-out 기록, commit/push를 완료한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 594,
+      "updatedAt": "2026-06-06T01:24:25.575Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-06-desktop-dev-run-fix-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-06-desktop-dev-run-fix/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "스펙: desktop dev/run fix",
+      "excerpt": "스펙: desktop dev/run fix 목표 README에 있는 desktop app 경로가 실제로 빌드와 실행까지 이어지도록 한다. 개발 실행과 내부 패키지 실행을 별도 명령으로 제공하고, public updater gate가 internal/dev 실행을 막지 않게 한다. 설계 결정 tauri.conf.json 의 beforeDevCommand 는 platform desktop app cwd 기준 renderer/workspace monitor 를 사용한다. root package.json",
+      "html": "<h1>스펙: desktop dev/run fix</h1>\n<h2>목표</h2>\n<p>README에 있는 desktop app 경로가 실제로 빌드와 실행까지 이어지도록 한다. 개발 실행과 내부 패키지 실행을 별도 명령으로 제공하고, public updater gate가 internal/dev 실행을 막지 않게 한다.</p>\n<h2>설계 결정</h2>\n<ul>\n<li><code>tauri.conf.json</code>의 <code>beforeDevCommand</code>는 <code>platform-desktop-app</code> cwd 기준 <code>renderer/workspace-monitor</code>를 사용한다.</li>\n<li>root <code>package.json</code>은 <code>desktop:dev</code>, <code>desktop:run:internal</code>, <code>desktop:package:run:internal</code>을 제공한다.</li>\n<li><code>open-internal-app.mjs</code>는 macOS internal <code>.app</code> artifact를 열고, <code>--dry-run</code>/<code>--check</code>로 CI-safe 확인도 지원한다.</li>\n<li>Rust <code>run()</code>은 내장 config의 <code>plugins.updater</code>가 object일 때만 updater plugin을 등록한다.</li>\n</ul>\n<h2>제외</h2>\n<ul>\n<li>public signing/notarization/updater credential 준비는 하지 않는다.</li>\n<li>Windows installer 실행 명령은 이번 macOS failure fix 범위 밖이다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>dev 실행 smoke가 <code>GET / 200</code>까지 도달한다.</li>\n<li>internal app open dry-run이 artifact path를 반환한다.</li>\n<li>readiness tests와 doctor가 새 명령을 검사한다.</li>\n<li>internal package와 post-package smoke가 통과한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1194,
+      "updatedAt": "2026-06-06T01:24:25.575Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-06-desktop-dev-run-fix-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-06-desktop-dev-run-fix.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "2026 06 06 desktop dev/run fix 요구사항",
+      "excerpt": "2026 06 06 desktop dev/run fix 요구사항 배경 README 명령대로 desktop app을 실행하면 tauri:dev 가 renderer 경로를 잘못 찾아 실패했고, 경로를 고친 뒤에도 updater plugin이 public updater config가 없는 dev/internal 실행을 막았다. 또한 README에는 빌드된 내부 앱을 여는 명령이 없었다. 요구사항 REQ DDR 001: desktop:dev 는 repository root에서 실행 가능해야 하며 Work",
+      "html": "<h1>2026-06-06 desktop dev/run fix 요구사항</h1>\n<h2>배경</h2>\n<p>README 명령대로 desktop app을 실행하면 <code>tauri:dev</code>가 renderer 경로를 잘못 찾아 실패했고, 경로를 고친 뒤에도 updater plugin이 public updater config가 없는 dev/internal 실행을 막았다. 또한 README에는 빌드된 내부 앱을 여는 명령이 없었다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>REQ-DDR-001: <code>desktop:dev</code>는 repository root에서 실행 가능해야 하며 Workspace Monitor dev server와 Tauri shell을 정상 기동해야 한다.</li>\n<li>REQ-DDR-002: internal/dev config에서는 public updater 설정이 없다는 이유로 앱 시작이 실패하면 안 된다.</li>\n<li>REQ-DDR-003: public generated config에 <code>plugins.updater</code>가 있을 때는 updater plugin 등록 경로가 유지되어야 한다.</li>\n<li>REQ-DDR-004: README와 release runbook은 개발 실행, 내부 앱 실행, 패키징 후 실행 명령을 명확히 제공해야 한다.</li>\n<li>REQ-DDR-005: 구현 후 doctor, tests, Rust check, build/package, 실행 smoke를 수행한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>corepack pnpm run desktop:dev</code>가 ENOENT와 updater panic 없이 앱을 시작한다.</li>\n<li><code>corepack pnpm run desktop:run:internal -- --dry-run</code>이 내부 <code>.app</code> artifact를 찾는다.</li>\n<li><code>desktop:package:internal</code>이 통과하고 <code>.app</code>/DMG가 생성된다.</li>\n<li>실행 중 띄운 dev server/process는 close-out 전에 종료된다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1374,
+      "updatedAt": "2026-06-06T01:24:25.574Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-06-desktop-dev-run-fix-ko-md",
+      "path": "_history/web-searches/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: desktop dev/run fix",
+      "excerpt": "웹 검색 기록: desktop dev/run fix 목적 README 명령대로 desktop app을 빌드하거나 실행할 때 실패하는 문제를 고치기 전에, Tauri v2와 Next static export의 공식 실행/빌드 전제를 확인했다. 검색어 Tauri v2 official docs development build beforeDevCommand frontendDist devUrl Next.js official docs output export static build Tauri plugin u",
+      "html": "<p>웹 검색 기록: desktop dev/run fix 목적 README 명령대로 desktop app을 빌드하거나 실행할 때 실패하는 문제를 고치기 전에, Tauri v2와 Next static export의 공식 실행/빌드 전제를 확인했다. 검색어 Tauri v2 official docs development build beforeDevCommand frontendDist devUrl Next.js official docs output export static build Tauri plugin updater v2 config pubkey endpoints official docs 확인한 주요 출처 Tauri Develop: https:/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1551,
+      "updatedAt": "2026-06-06T01:24:25.572Z",
+      "historyDate": "2026-06-06",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-docs-release-runbook-en-md",
+      "path": "platform-desktop-app/docs/release-runbook.en.md",
+      "category": "project-doc",
+      "language": "en",
+      "title": "Desktop App Build/Test/Release Runbook",
+      "excerpt": "Desktop App Build/Test/Release Runbook Purpose This document gives one command paths for verifying platform desktop app , building an internal .app /DMG, and checking public release gates. Quick Commands Run these from the repository root. | Purpose | Command | | | | | First setu",
+      "html": "<h1>Desktop App Build/Test/Release Runbook</h1>\n<h2>Purpose</h2>\n<p>This document gives one-command paths for verifying <code>platform-desktop-app</code>, building an internal <code>.app</code>/DMG, and checking public release gates.</p>\n<h2>Quick Commands</h2>\n<p>Run these from the repository root.</p>\n<table><thead><tr><th>Purpose</th><th>Command</th></tr></thead><tbody><tr><td>First setup only</td><td><code>corepack pnpm run desktop:setup</code></td></tr><tr><td>First setup plus developer verification</td><td><code>corepack pnpm run desktop:setup:verify</code></td></tr><tr><td>Run in development mode</td><td><code>corepack pnpm run desktop:dev</code></td></tr><tr><td>Fast repeated verification</td><td><code>corepack pnpm run desktop:verify:quick</code></td></tr><tr><td>Full developer verification</td><td><code>corepack pnpm run desktop:verify</code></td></tr><tr><td>Customer renderer build/audit only</td><td><code>corepack pnpm run desktop:renderer:build</code></td></tr><tr><td>Quick setup/build diagnosis</td><td><code>corepack pnpm run desktop:doctor</code></td></tr><tr><td>Build local/internal <code>.app</code> and DMG</td><td><code>corepack pnpm run desktop:package:internal</code></td></tr><tr><td>Open the built internal <code>.app</code></td><td><code>corepack pnpm run desktop:run:internal</code></td></tr><tr><td>Build local/internal <code>.app</code> and DMG, then open it</td><td><code>corepack pnpm run desktop:package:run:internal</code></td></tr><tr><td>Check public release gates in report-only mode</td><td><code>corepack pnpm run desktop:release:report</code></td></tr><tr><td>Create local developer updater env scaffold</td><td><code>corepack pnpm run desktop:release:dev-env</code></td></tr><tr><td>Build public signed updater artifacts</td><td><code>corepack pnpm run desktop:package:public</code></td></tr><tr><td>Preview the command sequence</td><td><code>corepack pnpm --filter platform-desktop-app run pipeline:dry-run</code></td></tr></tbody></table>\n<h2>Internal Test Build</h2>\n<p><code>desktop:package:internal</code> runs:</p>\n<p>1. Workspace Monitor typecheck, tests, and customer build.</p>\n<p>2. Customer bundle audit and developer/customer snapshot boundary checks.</p>\n<p>3. Desktop app Node tests and readiness checks.</p>\n<p>4. Rust <code>cargo test</code> and <code>cargo build</code>.</p>\n<p>5. Prepared-renderer Tauri build for the internal <code>.app</code>/DMG, reusing the already audited renderer output.</p>\n<p>6. On macOS, verify the <code>.app</code> signature with <code>codesign</code> and the DMG with <code>hdiutil verify</code>.</p>\n<p>Direct <code>corepack pnpm --filter platform-desktop-app run tauri:build</code> still runs the Tauri <code>beforeBuildCommand</code>, which builds and audits the customer renderer first. <code>desktop:package:internal</code> re-audits and reuses the renderer output produced by <code>desktop:verify</code>, avoiding a duplicate Next.js build in the package pipeline.</p>\n<p>Expected artifacts:</p>\n<pre><code>\nplatform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app\nplatform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg\n</code></pre>\n<p>These artifacts are for internal testing. The current macOS configuration uses ad-hoc signing, so do not describe them as public-ready.</p>\n<h2>Public Distribution</h2>\n<p>Before public distribution, run:</p>\n<pre><code>\ncorepack pnpm run desktop:release:report\n</code></pre>\n<p>To prepare the updater signing/env side locally before public credentials exist, run:</p>\n<pre><code>\ncorepack pnpm run desktop:release:dev-env\nsource platform-desktop-app/src-tauri/target/public-release/dev/public-release-dev.env.sh\n</code></pre>\n<p>This developer env scaffold creates a dev updater key under ignored <code>src-tauri/target/public-release/dev/</code> and exports <code>TAURI_SIGNING_PRIVATE_KEY_PATH</code> instead of private key content. It does not create Apple Developer ID signing/notarization credentials, so it does not make the app public-ready.</p>\n<p>Public distribution is ready only after these gates actually pass:</p>\n<ul>\n<li>Developer ID or equivalent OS signing identity.</li>\n<li>macOS hardened runtime, notarization, and stapling when applicable.</li>\n<li><code>src-tauri/Entitlements.plist</code> explicitly records public distribution entitlements and is referenced by the Tauri config.</li>\n<li>Windows code signing and SmartScreen handling.</li>\n<li>Signed updater channel and update rollback plan.</li>\n<li>Clean-machine install/open/update/uninstall smoke tests.</li>\n<li>Privacy, dependency, and license review.</li>\n<li>Installer payload review proving tokens, webhook URLs, browser cookies, <code>_private/</code> content, and platform source payloads are not bundled.</li>\n</ul>\n<p><code>desktop:package:public</code> requires these environment variables.</p>\n<table><thead><tr><th>Scope</th><th>Environment variables</th></tr></thead><tbody><tr><td>macOS signing</td><td><code>APPLE_SIGNING_IDENTITY</code> or <code>APPLE_CERTIFICATE</code> + <code>APPLE_CERTIFICATE_PASSWORD</code></td></tr><tr><td>notarization</td><td><code>APPLE_ID</code> + <code>APPLE_PASSWORD</code> + <code>APPLE_TEAM_ID</code> or <code>APPLE_API_KEY</code> + <code>APPLE_API_ISSUER</code> + <code>APPLE_API_KEY_PATH</code></td></tr><tr><td>updater verification</td><td><code>TAURI_UPDATER_PUBLIC_KEY</code></td></tr><tr><td>updater signing</td><td><code>TAURI_SIGNING_PRIVATE_KEY</code> or <code>TAURI_SIGNING_PRIVATE_KEY_PATH</code>, optional <code>TAURI_SIGNING_PRIVATE_KEY_PASSWORD</code></td></tr><tr><td>updater endpoint</td><td><code>TAURI_UPDATER_ENDPOINTS</code></td></tr><tr><td>static manifest asset URL</td><td><code>TAURI_RELEASE_ASSET_BASE_URL</code></td></tr><tr><td>release notes</td><td>optional <code>TAURI_RELEASE_NOTES</code></td></tr></tbody></table>\n<p>The public build generates temporary <code>src-tauri/target/public-release/tauri.public.generated.json</code> and <code>service-update-channel.json</code> files. They contain only public key hash, endpoint, and signing identity presence metadata; the private updater key and Apple credentials are never written. After the build, Tauri updater artifacts <code>.app.tar.gz</code>, <code>.sig</code>, and static <code>latest.json</code> are produced under <code>src-tauri/target/release/bundle/</code>.</p>\n<h2>External References</h2>\n<ul>\n<li>Tauri v2 distribution docs: https://v2.tauri.app/distribute/</li>\n<li>Tauri v2 macOS signing/notarization docs: https://v2.tauri.app/distribute/sign/m</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 6573,
+      "updatedAt": "2026-06-06T01:19:44.272Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-docs-release-runbook-ko-md",
+      "path": "platform-desktop-app/docs/release-runbook.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "데스크톱 앱 빌드/테스트/배포 Runbook",
+      "excerpt": "데스크톱 앱 빌드/테스트/배포 Runbook 목적 이 문서는 platform desktop app 를 직접 빌드하고 테스트하거나 내부 테스트용 .app /DMG를 만드는 절차를 한 번에 실행할 수 있게 정리한다. 빠른 명령 repository root에서 실행한다. | 목적 | 명령 | | | | | 처음 설정만 실행 | corepack pnpm run desktop:setup | | 처음 설정 + 전체 개발 검증 | corepack pnpm run desktop:setup:verify | | 개",
+      "html": "<h1>데스크톱 앱 빌드/테스트/배포 Runbook</h1>\n<h2>목적</h2>\n<p>이 문서는 <code>platform-desktop-app</code>를 직접 빌드하고 테스트하거나 내부 테스트용 <code>.app</code>/DMG를 만드는 절차를 한 번에 실행할 수 있게 정리한다.</p>\n<h2>빠른 명령</h2>\n<p>repository root에서 실행한다.</p>\n<table><thead><tr><th>목적</th><th>명령</th></tr></thead><tbody><tr><td>처음 설정만 실행</td><td><code>corepack pnpm run desktop:setup</code></td></tr><tr><td>처음 설정 + 전체 개발 검증</td><td><code>corepack pnpm run desktop:setup:verify</code></td></tr><tr><td>개발 모드 실행</td><td><code>corepack pnpm run desktop:dev</code></td></tr><tr><td>빠른 반복 검증</td><td><code>corepack pnpm run desktop:verify:quick</code></td></tr><tr><td>전체 개발 검증</td><td><code>corepack pnpm run desktop:verify</code></td></tr><tr><td>customer renderer build/audit만 실행</td><td><code>corepack pnpm run desktop:renderer:build</code></td></tr><tr><td>설치/빌드 상태 빠른 진단</td><td><code>corepack pnpm run desktop:doctor</code></td></tr><tr><td>내부 테스트용 <code>.app</code>/DMG 빌드</td><td><code>corepack pnpm run desktop:package:internal</code></td></tr><tr><td>빌드된 내부 <code>.app</code> 실행</td><td><code>corepack pnpm run desktop:run:internal</code></td></tr><tr><td>내부 <code>.app</code>/DMG 빌드 후 실행</td><td><code>corepack pnpm run desktop:package:run:internal</code></td></tr><tr><td>공개 배포 gate report-only 확인</td><td><code>corepack pnpm run desktop:release:report</code></td></tr><tr><td>로컬 개발자용 updater env scaffold 생성</td><td><code>corepack pnpm run desktop:release:dev-env</code></td></tr><tr><td>공개 배포용 signed updater artifact 빌드</td><td><code>corepack pnpm run desktop:package:public</code></td></tr><tr><td>실행될 명령 순서만 확인</td><td><code>corepack pnpm --filter platform-desktop-app run pipeline:dry-run</code></td></tr></tbody></table>\n<h2>내부 테스트 빌드 절차</h2>\n<p><code>desktop:package:internal</code>은 다음 순서로 실행된다.</p>\n<p>1. Workspace Monitor typecheck, test, customer build를 실행한다.</p>\n<p>2. customer bundle audit와 developer/customer snapshot boundary를 검사한다.</p>\n<p>3. Desktop app Node test와 readiness check를 실행한다.</p>\n<p>4. Rust <code>cargo test</code>와 <code>cargo build</code>를 실행한다.</p>\n<p>5. 이미 audit된 renderer output을 재사용하는 prepared-renderer Tauri build로 내부 테스트용 <code>.app</code>/DMG를 만든다.</p>\n<p>6. macOS에서는 <code>.app</code> signature를 <code>codesign</code>으로 검증하고 DMG를 <code>hdiutil verify</code>로 확인한다.</p>\n<p>직접 <code>corepack pnpm --filter platform-desktop-app run tauri:build</code>를 실행하면 Tauri <code>beforeBuildCommand</code>가 customer renderer build/audit를 먼저 실행한다. <code>desktop:package:internal</code>은 <code>desktop:verify</code>에서 만든 renderer output을 다시 감사한 뒤 재사용하므로 같은 Next.js build를 두 번 돌리지 않는다.</p>\n<p>생성 artifact:</p>\n<pre><code>\nplatform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app\nplatform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg\n</code></pre>\n<p>이 artifact는 내부 테스트용이다. 현재 설정은 macOS ad-hoc signing을 사용하므로 일반 사용자 공개 배포 준비 완료로 표현하지 않는다.</p>\n<h2>공개 배포 절차</h2>\n<p>공개 배포 전에 다음 command로 현재 gate를 확인한다.</p>\n<pre><code>\ncorepack pnpm run desktop:release:report\n</code></pre>\n<p>updater signing/env 쪽을 로컬에서 먼저 준비하려면 다음 command를 실행한다.</p>\n<pre><code>\ncorepack pnpm run desktop:release:dev-env\nsource platform-desktop-app/src-tauri/target/public-release/dev/public-release-dev.env.sh\n</code></pre>\n<p>이 developer env scaffold는 ignored <code>src-tauri/target/public-release/dev/</code> 아래에 dev updater key를 만들고 private key content 대신 <code>TAURI_SIGNING_PRIVATE_KEY_PATH</code>만 export한다. Apple Developer ID signing/notarization credential은 생성하지 않으므로 공개 배포 준비 완료로 간주하면 안 된다.</p>\n<p>공개 배포가 가능하려면 다음 gate가 실제로 통과해야 한다.</p>\n<ul>\n<li>Developer ID 또는 동등한 OS signing identity 준비</li>\n<li>macOS hardened runtime, notarization, 필요한 경우 stapling</li>\n<li><code>src-tauri/Entitlements.plist</code>에 공개 배포 entitlements가 명시되어 있고 Tauri config가 이를 참조</li>\n<li>Windows code signing과 SmartScreen 대응</li>\n<li>signed updater channel과 update rollback 계획</li>\n<li>clean-machine install/open/update/uninstall smoke test</li>\n<li>privacy, dependency, license review</li>\n<li>installer에 token, webhook URL, browser cookie, <code>_private/</code> 내용, platform source payload가 들어가지 않는지 확인</li>\n</ul>\n<p><code>desktop:package:public</code>은 다음 환경변수를 요구한다.</p>\n<table><thead><tr><th>범위</th><th>환경변수</th></tr></thead><tbody><tr><td>macOS signing</td><td><code>APPLE_SIGNING_IDENTITY</code> 또는 <code>APPLE_CERTIFICATE</code> + <code>APPLE_CERTIFICATE_PASSWORD</code></td></tr><tr><td>notarization</td><td><code>APPLE_ID</code> + <code>APPLE_PASSWORD</code> + <code>APPLE_TEAM_ID</code> 또는 <code>APPLE_API_KEY</code> + <code>APPLE_API_ISSUER</code> + <code>APPLE_API_KEY_PATH</code></td></tr><tr><td>updater verification</td><td><code>TAURI_UPDATER_PUBLIC_KEY</code></td></tr><tr><td>updater signing</td><td><code>TAURI_SIGNING_PRIVATE_KEY</code> 또는 <code>TAURI_SIGNING_PRIVATE_KEY_PATH</code>, 선택 <code>TAURI_SIGNING_PRIVATE_KEY_PASSWORD</code></td></tr><tr><td>updater endpoint</td><td><code>TAURI_UPDATER_ENDPOINTS</code></td></tr><tr><td>static manifest asset URL</td><td><code>TAURI_RELEASE_ASSET_BASE_URL</code></td></tr><tr><td>release notes</td><td>선택 <code>TAURI_RELEASE_NOTES</code></td></tr></tbody></table>\n<p>public build는 <code>src-tauri/target/public-release/tauri.public.generated.json</code>와 <code>service-update-channel.json</code>를 임시 생성한다. 이 파일에는 public key hash, endpoint, signing identity 존재 여부만 들어가며 private updater key와 Apple credential은 쓰지 않는다. build가 끝나면 Tauri updater artifact <code>.app.tar.gz</code>, <code>.sig</code>, static <code>latest.json</code>가 <code>src-tauri/target/release/bundle/</code> 아래에 생긴다.</p>\n<h2>외부 기준</h2>\n<ul>\n<li>Tauri v2 배포 문서: https://v2.tauri.app/distribute/</li>\n<li>Tauri v2 macOS signing/notarization 문서: https://v2.tauri.app/distribute/sign/macos/</li>\n<li>Tauri updater 문서: https://v2.tauri.app/plugin/updater/</li>\n<li>Apple macOS code signing/notarization 설명: https://support.apple.com/guide/security/app-code-signing-process-sec3ad8e6e53/web</li>\n</ul>\n<h2>실패했을 때</h2>\n<ul>\n<li><code>workspace-monitor</code> build 실패: <code>platform-desktop-app/renderer/workspace-monitor/</code>의 TypeScript, snapshot, customer boundary를 먼저 본다.</li>\n<li><code>check-customer-bundle</code> 실패: customer snapshot이나 <code>out/</code>에 내부 source/path/private content가 들어간 것이다.</li>\n<li><code>release:public:report</code>가 blocked: public signing/notarization/updater/clean-machine gate가 아직 남은 것이다. 이 상태는 정상이며 public-ready라고 말하면 안 된다.</li>\n<li><code>package:public</code>이 env blocker로 실패: 위 환경변수를 먼저 설정한다. 개발자는 <code>desktop:release:dev-env</code>로 updater key path env를 만들 수 있지만, Apple signing/notarization credential은 직접 준비해야 한다.</li>\n<li><code>cargo</code> 실패: <code>platform-desktop-app/src-tauri/</code>에서 Rust toolchain과 Tauri command compile error를 확인한다.</li>\n</ul>\n<h2>금지</h2>\n<ul>\n<li>signing/notar</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 6850,
+      "updatedAt": "2026-06-06T01:19:44.271Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-06-eval-report-catalog-structure-ko-md",
       "path": "_history/evaluations/2026/2026-06-06-eval-report-catalog-structure.ko.md",
       "category": "evaluation",
@@ -10211,70 +10435,6 @@
       "workspaceArea": "_history/request-traces"
     },
     {
-      "id": "history-work-summaries-2026-2026-06-06-open-source-agent-platform-landscape-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-06-open-source-agent-platform-landscape.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "작업 요약: 오픈소스 Agent Platform Landscape",
-      "excerpt": "작업 요약: 오픈소스 Agent Platform Landscape 현재 플랫폼 특징을 로컬 제품 레지스트리와 Tauri 설정에서 추출했다. 플랫폼을 \"local Agent Workspace OS / Agent Workbench\"로 볼 수 있다는 결론을 기록했다. coding agent, agent framework, workflow builder, local AI desktop, workflow orchestration, developer platform, observability/eval, sa",
-      "html": "<p>작업 요약: 오픈소스 Agent Platform Landscape 현재 플랫폼 특징을 로컬 제품 레지스트리와 Tauri 설정에서 추출했다. 플랫폼을 &quot;local Agent Workspace OS / Agent Workbench&quot;로 볼 수 있다는 결론을 기록했다. coding agent, agent framework, workflow builder, local AI desktop, workflow orchestration, developer platform, observability/eval, sandbox/runtime 계열 오픈소스를 넓게 조사했다. 직접 참고 우선순위를 OpenHands, Goose, Cline, Aider, open</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 873,
-      "updatedAt": "2026-06-05T21:47:17.741Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-06-open-source-agent-platform-landscape-json",
-      "path": "_history/work-timings/2026/2026-06-06-open-source-agent-platform-landscape.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 06 Open Source Agent Platform Landscape",
-      "excerpt": "{ \"id\": \"2026 06 06 open source agent platform landscape\", \"timezone\": \"Asia/Seoul\", \"measurement quality\": \"partial\", \"phases\": { \"name\": \"web first research\", \"status\": \"completed\", \"notes\": \"Searched broad open source agent platform, coding agent, desktop AI, workflow orchestr",
-      "html": "<p>{ &quot;id&quot;: &quot;2026 06 06 open source agent platform landscape&quot;, &quot;timezone&quot;: &quot;Asia/Seoul&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;name&quot;: &quot;web first research&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;notes&quot;: &quot;Searched broad open source agent platform, coding agent, desktop AI, workflow orchestration, developer platform, and LLM observability queries.&quot; }, { &quot;name&quot;: &quot;local p</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1218,
-      "updatedAt": "2026-06-05T21:47:17.741Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-06-open-source-agent-platform-landscape-ko-md",
-      "path": "_history/user-requests/2026/2026-06-06-open-source-agent-platform-landscape.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "사용자 요청 요약: 오픈소스 Agent Platform Landscape",
-      "excerpt": "사용자 요청 요약: 오픈소스 Agent Platform Landscape 요약 사용자는 현재 플랫폼의 특징을 뽑아내고, 유사한 오픈소스를 매우 많이 조사해 달라고 요청했다. 해석 로컬 플랫폼이 실제로 어떤 제품 포지션과 기능 구조를 갖는지 먼저 정리한다. 단순히 몇 개 경쟁 제품을 나열하지 않고, coding agent, agent framework, workflow builder, local desktop AI app, workflow orchestration, observability까지 넓게",
-      "html": "<p>사용자 요청 요약: 오픈소스 Agent Platform Landscape 요약 사용자는 현재 플랫폼의 특징을 뽑아내고, 유사한 오픈소스를 매우 많이 조사해 달라고 요청했다. 해석 로컬 플랫폼이 실제로 어떤 제품 포지션과 기능 구조를 갖는지 먼저 정리한다. 단순히 몇 개 경쟁 제품을 나열하지 않고, coding agent, agent framework, workflow builder, local desktop AI app, workflow orchestration, observability까지 넓게 조사한다. 조사 결과를 현재 플랫폼의 차별점, 참고할 구조, 다음 구현 후보로 연결한다. 범위 코드 구현 없음. 앱 빌드 없음. 이번 요청은 </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 842,
-      "updatedAt": "2026-06-05T21:47:17.740Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-06-open-source-agent-platform-landscape-ko-md",
-      "path": "_history/web-searches/2026/2026-06-06-open-source-agent-platform-landscape.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "웹 검색 기록: 오픈소스 Agent Platform Landscape",
-      "excerpt": "웹 검색 기록: 오픈소스 Agent Platform Landscape 목적 사용자가 현재 플랫폼의 특징을 뽑고 유사 오픈소스를 매우 많이 조사해 달라고 요청했다. 로컬 플랫폼 특징을 추출하기 전, 오픈소스/공식 문서 검색을 먼저 수행해 비교 축과 후보군을 넓혔다. 검색어 open source AI agent platform desktop app orchestration GitHub open source multi agent framework orchestration GitHub LangGraph ",
-      "html": "<p>웹 검색 기록: 오픈소스 Agent Platform Landscape 목적 사용자가 현재 플랫폼의 특징을 뽑고 유사 오픈소스를 매우 많이 조사해 달라고 요청했다. 로컬 플랫폼 특징을 추출하기 전, 오픈소스/공식 문서 검색을 먼저 수행해 비교 축과 후보군을 넓혔다. 검색어 open source AI agent platform desktop app orchestration GitHub open source multi agent framework orchestration GitHub LangGraph AutoGen CrewAI open source AI coding agent platform CLI desktop GitHub open sour</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 6160,
-      "updatedAt": "2026-06-05T21:47:17.739Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-06-fundamental-improvement-structure-tasks-ko-md",
       "path": "platform-desktop-app/specs/2026-06-06-fundamental-improvement-structure/tasks.ko.md",
       "category": "project-spec",
@@ -10289,38 +10449,6 @@
       "historyDate": "2026-06-06",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-      "path": "_history/evaluations/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "근본 개선 구조 적용 평가",
-      "excerpt": "근본 개선 구조 적용 평가 상태: 통과 요청 충족: 다양한 히스토리에서 반복 패턴을 상위 구조 원칙과 실행 패키지로 승격해 플랫폼 snapshot과 Product Structure UI에 적용했다. 핵심 결과: developer snapshot 기준 structural principles 6개, improvement packages 6개, fitness checks 4개. customer 안전성: customer snapshot의 fundamental improvement stats와 arrays",
-      "html": "<p>근본 개선 구조 적용 평가 상태: 통과 요청 충족: 다양한 히스토리에서 반복 패턴을 상위 구조 원칙과 실행 패키지로 승격해 플랫폼 snapshot과 Product Structure UI에 적용했다. 핵심 결과: developer snapshot 기준 structural principles 6개, improvement packages 6개, fitness checks 4개. customer 안전성: customer snapshot의 fundamental improvement stats와 arrays는 0/empty로 sanitize된다. 검증: workspace monitor test 65개, TypeScript, platform desk</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 816,
-      "updatedAt": "2026-06-05T21:38:05.813Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-      "path": "_history/request-traces/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적",
-      "excerpt": "요청 결과 추적 요청: 다양한 히스토리를 보고 근본적 개선 구조를 생각해 플랫폼에 적용. 결과: fundamentalImprovementStructure collector, snapshot schema, Product Structure UI, sanitizer, tests, registry, records를 추가했다. 주요 산출물: platform desktop app/renderer/workspace monitor/scripts/lib/fundamental improvement structure",
-      "html": "<p>요청 결과 추적 요청: 다양한 히스토리를 보고 근본적 개선 구조를 생각해 플랫폼에 적용. 결과: fundamentalImprovementStructure collector, snapshot schema, Product Structure UI, sanitizer, tests, registry, records를 추가했다. 주요 산출물: platform desktop app/renderer/workspace monitor/scripts/lib/fundamental improvement structure.mjs platform desktop app/renderer/workspace monitor/components/features/Product</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1154,
-      "updatedAt": "2026-06-05T21:38:05.813Z",
-      "historyDate": "2026-06-06",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
     },
     {
       "id": "platform-desktop-app-specs-2026-06-06-fundamental-improvement-structure-validation-ko-md",
@@ -11248,38 +11376,6 @@
       "updatedAt": "2026-06-05T19:38:20.182Z",
       "historyDate": "2026-06-06",
       "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-release-runbook-en-md",
-      "path": "platform-desktop-app/docs/release-runbook.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Desktop App Build/Test/Release Runbook",
-      "excerpt": "Desktop App Build/Test/Release Runbook Purpose This document gives one command paths for verifying platform desktop app , building an internal .app /DMG, and checking public release gates. Quick Commands Run these from the repository root. | Purpose | Command | | | | | First setu",
-      "html": "<h1>Desktop App Build/Test/Release Runbook</h1>\n<h2>Purpose</h2>\n<p>This document gives one-command paths for verifying <code>platform-desktop-app</code>, building an internal <code>.app</code>/DMG, and checking public release gates.</p>\n<h2>Quick Commands</h2>\n<p>Run these from the repository root.</p>\n<table><thead><tr><th>Purpose</th><th>Command</th></tr></thead><tbody><tr><td>First setup only</td><td><code>corepack pnpm run desktop:setup</code></td></tr><tr><td>First setup plus developer verification</td><td><code>corepack pnpm run desktop:setup:verify</code></td></tr><tr><td>Fast repeated verification</td><td><code>corepack pnpm run desktop:verify:quick</code></td></tr><tr><td>Full developer verification</td><td><code>corepack pnpm run desktop:verify</code></td></tr><tr><td>Customer renderer build/audit only</td><td><code>corepack pnpm run desktop:renderer:build</code></td></tr><tr><td>Quick setup/build diagnosis</td><td><code>corepack pnpm run desktop:doctor</code></td></tr><tr><td>Build local/internal <code>.app</code> and DMG</td><td><code>corepack pnpm run desktop:package:internal</code></td></tr><tr><td>Check public release gates in report-only mode</td><td><code>corepack pnpm run desktop:release:report</code></td></tr><tr><td>Create local developer updater env scaffold</td><td><code>corepack pnpm run desktop:release:dev-env</code></td></tr><tr><td>Build public signed updater artifacts</td><td><code>corepack pnpm run desktop:package:public</code></td></tr><tr><td>Preview the command sequence</td><td><code>corepack pnpm --filter platform-desktop-app run pipeline:dry-run</code></td></tr></tbody></table>\n<h2>Internal Test Build</h2>\n<p><code>desktop:package:internal</code> runs:</p>\n<p>1. Workspace Monitor typecheck, tests, and customer build.</p>\n<p>2. Customer bundle audit and developer/customer snapshot boundary checks.</p>\n<p>3. Desktop app Node tests and readiness checks.</p>\n<p>4. Rust <code>cargo test</code> and <code>cargo build</code>.</p>\n<p>5. Prepared-renderer Tauri build for the internal <code>.app</code>/DMG, reusing the already audited renderer output.</p>\n<p>6. On macOS, verify the <code>.app</code> signature with <code>codesign</code> and the DMG with <code>hdiutil verify</code>.</p>\n<p>Direct <code>corepack pnpm --filter platform-desktop-app run tauri:build</code> still runs the Tauri <code>beforeBuildCommand</code>, which builds and audits the customer renderer first. <code>desktop:package:internal</code> re-audits and reuses the renderer output produced by <code>desktop:verify</code>, avoiding a duplicate Next.js build in the package pipeline.</p>\n<p>Expected artifacts:</p>\n<pre><code>\nplatform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app\nplatform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg\n</code></pre>\n<p>These artifacts are for internal testing. The current macOS configuration uses ad-hoc signing, so do not describe them as public-ready.</p>\n<h2>Public Distribution</h2>\n<p>Before public distribution, run:</p>\n<pre><code>\ncorepack pnpm run desktop:release:report\n</code></pre>\n<p>To prepare the updater signing/env side locally before public credentials exist, run:</p>\n<pre><code>\ncorepack pnpm run desktop:release:dev-env\nsource platform-desktop-app/src-tauri/target/public-release/dev/public-release-dev.env.sh\n</code></pre>\n<p>This developer env scaffold creates a dev updater key under ignored <code>src-tauri/target/public-release/dev/</code> and exports <code>TAURI_SIGNING_PRIVATE_KEY_PATH</code> instead of private key content. It does not create Apple Developer ID signing/notarization credentials, so it does not make the app public-ready.</p>\n<p>Public distribution is ready only after these gates actually pass:</p>\n<ul>\n<li>Developer ID or equivalent OS signing identity.</li>\n<li>macOS hardened runtime, notarization, and stapling when applicable.</li>\n<li><code>src-tauri/Entitlements.plist</code> explicitly records public distribution entitlements and is referenced by the Tauri config.</li>\n<li>Windows code signing and SmartScreen handling.</li>\n<li>Signed updater channel and update rollback plan.</li>\n<li>Clean-machine install/open/update/uninstall smoke tests.</li>\n<li>Privacy, dependency, and license review.</li>\n<li>Installer payload review proving tokens, webhook URLs, browser cookies, <code>_private/</code> content, and platform source payloads are not bundled.</li>\n</ul>\n<p><code>desktop:package:public</code> requires these environment variables.</p>\n<table><thead><tr><th>Scope</th><th>Environment variables</th></tr></thead><tbody><tr><td>macOS signing</td><td><code>APPLE_SIGNING_IDENTITY</code> or <code>APPLE_CERTIFICATE</code> + <code>APPLE_CERTIFICATE_PASSWORD</code></td></tr><tr><td>notarization</td><td><code>APPLE_ID</code> + <code>APPLE_PASSWORD</code> + <code>APPLE_TEAM_ID</code> or <code>APPLE_API_KEY</code> + <code>APPLE_API_ISSUER</code> + <code>APPLE_API_KEY_PATH</code></td></tr><tr><td>updater verification</td><td><code>TAURI_UPDATER_PUBLIC_KEY</code></td></tr><tr><td>updater signing</td><td><code>TAURI_SIGNING_PRIVATE_KEY</code> or <code>TAURI_SIGNING_PRIVATE_KEY_PATH</code>, optional <code>TAURI_SIGNING_PRIVATE_KEY_PASSWORD</code></td></tr><tr><td>updater endpoint</td><td><code>TAURI_UPDATER_ENDPOINTS</code></td></tr><tr><td>static manifest asset URL</td><td><code>TAURI_RELEASE_ASSET_BASE_URL</code></td></tr><tr><td>release notes</td><td>optional <code>TAURI_RELEASE_NOTES</code></td></tr></tbody></table>\n<p>The public build generates temporary <code>src-tauri/target/public-release/tauri.public.generated.json</code> and <code>service-update-channel.json</code> files. They contain only public key hash, endpoint, and signing identity presence metadata; the private updater key and Apple credentials are never written. After the build, Tauri updater artifacts <code>.app.tar.gz</code>, <code>.sig</code>, and static <code>latest.json</code> are produced under <code>src-tauri/target/release/bundle/</code>.</p>\n<h2>External References</h2>\n<ul>\n<li>Tauri v2 distribution docs: https://v2.tauri.app/distribute/</li>\n<li>Tauri v2 macOS signing/notarization docs: https://v2.tauri.app/distribute/sign/macos/</li>\n<li>Tauri updater docs: https://v2.tauri.app/plugin/updater/</li>\n<li>Apple macOS code signing/notarization overview: https://support.apple.com/guide/security/app-code-signing-process-sec3ad8e6e53/web</li>\n</ul>\n<h2>Failure Notes</h2>\n<ul>\n<li>If <code>workspace-monitor</code> bui</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 6328,
-      "updatedAt": "2026-06-05T19:36:40.652Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-release-runbook-ko-md",
-      "path": "platform-desktop-app/docs/release-runbook.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "데스크톱 앱 빌드/테스트/배포 Runbook",
-      "excerpt": "데스크톱 앱 빌드/테스트/배포 Runbook 목적 이 문서는 platform desktop app 를 직접 빌드하고 테스트하거나 내부 테스트용 .app /DMG를 만드는 절차를 한 번에 실행할 수 있게 정리한다. 빠른 명령 repository root에서 실행한다. | 목적 | 명령 | | | | | 처음 설정만 실행 | corepack pnpm run desktop:setup | | 처음 설정 + 전체 개발 검증 | corepack pnpm run desktop:setup:verify | | 빠",
-      "html": "<h1>데스크톱 앱 빌드/테스트/배포 Runbook</h1>\n<h2>목적</h2>\n<p>이 문서는 <code>platform-desktop-app</code>를 직접 빌드하고 테스트하거나 내부 테스트용 <code>.app</code>/DMG를 만드는 절차를 한 번에 실행할 수 있게 정리한다.</p>\n<h2>빠른 명령</h2>\n<p>repository root에서 실행한다.</p>\n<table><thead><tr><th>목적</th><th>명령</th></tr></thead><tbody><tr><td>처음 설정만 실행</td><td><code>corepack pnpm run desktop:setup</code></td></tr><tr><td>처음 설정 + 전체 개발 검증</td><td><code>corepack pnpm run desktop:setup:verify</code></td></tr><tr><td>빠른 반복 검증</td><td><code>corepack pnpm run desktop:verify:quick</code></td></tr><tr><td>전체 개발 검증</td><td><code>corepack pnpm run desktop:verify</code></td></tr><tr><td>customer renderer build/audit만 실행</td><td><code>corepack pnpm run desktop:renderer:build</code></td></tr><tr><td>설치/빌드 상태 빠른 진단</td><td><code>corepack pnpm run desktop:doctor</code></td></tr><tr><td>내부 테스트용 <code>.app</code>/DMG 빌드</td><td><code>corepack pnpm run desktop:package:internal</code></td></tr><tr><td>공개 배포 gate report-only 확인</td><td><code>corepack pnpm run desktop:release:report</code></td></tr><tr><td>로컬 개발자용 updater env scaffold 생성</td><td><code>corepack pnpm run desktop:release:dev-env</code></td></tr><tr><td>공개 배포용 signed updater artifact 빌드</td><td><code>corepack pnpm run desktop:package:public</code></td></tr><tr><td>실행될 명령 순서만 확인</td><td><code>corepack pnpm --filter platform-desktop-app run pipeline:dry-run</code></td></tr></tbody></table>\n<h2>내부 테스트 빌드 절차</h2>\n<p><code>desktop:package:internal</code>은 다음 순서로 실행된다.</p>\n<p>1. Workspace Monitor typecheck, test, customer build를 실행한다.</p>\n<p>2. customer bundle audit와 developer/customer snapshot boundary를 검사한다.</p>\n<p>3. Desktop app Node test와 readiness check를 실행한다.</p>\n<p>4. Rust <code>cargo test</code>와 <code>cargo build</code>를 실행한다.</p>\n<p>5. 이미 audit된 renderer output을 재사용하는 prepared-renderer Tauri build로 내부 테스트용 <code>.app</code>/DMG를 만든다.</p>\n<p>6. macOS에서는 <code>.app</code> signature를 <code>codesign</code>으로 검증하고 DMG를 <code>hdiutil verify</code>로 확인한다.</p>\n<p>직접 <code>corepack pnpm --filter platform-desktop-app run tauri:build</code>를 실행하면 Tauri <code>beforeBuildCommand</code>가 customer renderer build/audit를 먼저 실행한다. <code>desktop:package:internal</code>은 <code>desktop:verify</code>에서 만든 renderer output을 다시 감사한 뒤 재사용하므로 같은 Next.js build를 두 번 돌리지 않는다.</p>\n<p>생성 artifact:</p>\n<pre><code>\nplatform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app\nplatform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg\n</code></pre>\n<p>이 artifact는 내부 테스트용이다. 현재 설정은 macOS ad-hoc signing을 사용하므로 일반 사용자 공개 배포 준비 완료로 표현하지 않는다.</p>\n<h2>공개 배포 절차</h2>\n<p>공개 배포 전에 다음 command로 현재 gate를 확인한다.</p>\n<pre><code>\ncorepack pnpm run desktop:release:report\n</code></pre>\n<p>updater signing/env 쪽을 로컬에서 먼저 준비하려면 다음 command를 실행한다.</p>\n<pre><code>\ncorepack pnpm run desktop:release:dev-env\nsource platform-desktop-app/src-tauri/target/public-release/dev/public-release-dev.env.sh\n</code></pre>\n<p>이 developer env scaffold는 ignored <code>src-tauri/target/public-release/dev/</code> 아래에 dev updater key를 만들고 private key content 대신 <code>TAURI_SIGNING_PRIVATE_KEY_PATH</code>만 export한다. Apple Developer ID signing/notarization credential은 생성하지 않으므로 공개 배포 준비 완료로 간주하면 안 된다.</p>\n<p>공개 배포가 가능하려면 다음 gate가 실제로 통과해야 한다.</p>\n<ul>\n<li>Developer ID 또는 동등한 OS signing identity 준비</li>\n<li>macOS hardened runtime, notarization, 필요한 경우 stapling</li>\n<li><code>src-tauri/Entitlements.plist</code>에 공개 배포 entitlements가 명시되어 있고 Tauri config가 이를 참조</li>\n<li>Windows code signing과 SmartScreen 대응</li>\n<li>signed updater channel과 update rollback 계획</li>\n<li>clean-machine install/open/update/uninstall smoke test</li>\n<li>privacy, dependency, license review</li>\n<li>installer에 token, webhook URL, browser cookie, <code>_private/</code> 내용, platform source payload가 들어가지 않는지 확인</li>\n</ul>\n<p><code>desktop:package:public</code>은 다음 환경변수를 요구한다.</p>\n<table><thead><tr><th>범위</th><th>환경변수</th></tr></thead><tbody><tr><td>macOS signing</td><td><code>APPLE_SIGNING_IDENTITY</code> 또는 <code>APPLE_CERTIFICATE</code> + <code>APPLE_CERTIFICATE_PASSWORD</code></td></tr><tr><td>notarization</td><td><code>APPLE_ID</code> + <code>APPLE_PASSWORD</code> + <code>APPLE_TEAM_ID</code> 또는 <code>APPLE_API_KEY</code> + <code>APPLE_API_ISSUER</code> + <code>APPLE_API_KEY_PATH</code></td></tr><tr><td>updater verification</td><td><code>TAURI_UPDATER_PUBLIC_KEY</code></td></tr><tr><td>updater signing</td><td><code>TAURI_SIGNING_PRIVATE_KEY</code> 또는 <code>TAURI_SIGNING_PRIVATE_KEY_PATH</code>, 선택 <code>TAURI_SIGNING_PRIVATE_KEY_PASSWORD</code></td></tr><tr><td>updater endpoint</td><td><code>TAURI_UPDATER_ENDPOINTS</code></td></tr><tr><td>static manifest asset URL</td><td><code>TAURI_RELEASE_ASSET_BASE_URL</code></td></tr><tr><td>release notes</td><td>선택 <code>TAURI_RELEASE_NOTES</code></td></tr></tbody></table>\n<p>public build는 <code>src-tauri/target/public-release/tauri.public.generated.json</code>와 <code>service-update-channel.json</code>를 임시 생성한다. 이 파일에는 public key hash, endpoint, signing identity 존재 여부만 들어가며 private updater key와 Apple credential은 쓰지 않는다. build가 끝나면 Tauri updater artifact <code>.app.tar.gz</code>, <code>.sig</code>, static <code>latest.json</code>가 <code>src-tauri/target/release/bundle/</code> 아래에 생긴다.</p>\n<h2>외부 기준</h2>\n<ul>\n<li>Tauri v2 배포 문서: https://v2.tauri.app/distribute/</li>\n<li>Tauri v2 macOS signing/notarization 문서: https://v2.tauri.app/distribute/sign/macos/</li>\n<li>Tauri updater 문서: https://v2.tauri.app/plugin/updater/</li>\n<li>Apple macOS code signing/notarization 설명: https://support.apple.com/guide/security/app-code-signing-process-sec3ad8e6e53/web</li>\n</ul>\n<h2>실패했을 때</h2>\n<ul>\n<li><code>workspace-monitor</code> build 실패: <code>platform-desktop-app/renderer/workspace-monitor/</code>의 TypeScript, snapshot, customer boundary를 먼저 본다.</li>\n<li><code>check-customer-bundle</code> 실패: customer snapshot이나 <code>out/</code>에 내부 source/path/private content가 들어간 것이다.</li>\n<li><code>release:public:report</code>가 blocked: public signing/notarization/updater/clean-machine gate가 아직 남은 것이다. 이 상태는 정상이며 public-ready라고 말하면 안 된다.</li>\n<li><code>package:public</code>이 env blocker로 실패: 위 환경변수를 먼저 설정한다. 개발자는 <code>desktop:release:dev-env</code>로 updater key path env를 만들 수 있지만, Apple signing/notarization credential은 직접 준비해야 한다.</li>\n<li><code>cargo</code> 실패: <code>platform-desktop-app/src-tauri/</code>에서 Rust toolchain과 Tauri command compile error를 확인한다.</li>\n</ul>\n<h2>금지</h2>\n<ul>\n<li>signing/notarization 없이 public-ready라고 표현하지 않는다.</li>\n<li>Apple signing key, updater private key, webhook token, browser cookie를 repository나 installer payload에 넣지 않는다.</li>\n<li>사용자가 선택하지 않은 workspace path를 runtime d</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 6622,
-      "updatedAt": "2026-06-05T19:36:40.652Z",
-      "historyDate": "",
-      "historyYear": "",
       "workspaceArea": "platform-desktop-app"
     },
     {
@@ -17905,102 +18001,6 @@
       "historyDate": "2026-06-02",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-02-multi-cli-orchestration-desktop-spec-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-02-multi-cli-orchestration-desktop/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "다중 CLI 오케스트레이션 데스크톱 스펙",
-      "excerpt": "다중 CLI 오케스트레이션 데스크톱 스펙 목표 설치형 데스크톱 앱이 Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, Claw Code를 선택형 capability로 설정하고, 여러 CLI를 동시에 감독하며, 질문/결정/출력/코드 편집/데이터 축적을 플랫폼 상태로 관리할 수 있는 제품 계약을 만든다. 요구사항 REQ WS 085 PDA REQ 013 PDA REQ 027 PDA UX 009 PDA UX 020 범위 cli adapter registry.jso",
-      "html": "<h1>다중 CLI 오케스트레이션 데스크톱 스펙</h1>\n<h2>목표</h2>\n<p>설치형 데스크톱 앱이 Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, Claw Code를 선택형 capability로 설정하고, 여러 CLI를 동시에 감독하며, 질문/결정/출력/코드 편집/데이터 축적을 플랫폼 상태로 관리할 수 있는 제품 계약을 만든다.</p>\n<h2>요구사항</h2>\n<ul>\n<li><code>REQ-WS-085</code></li>\n<li><code>PDA-REQ-013</code> - <code>PDA-REQ-027</code></li>\n<li><code>PDA-UX-009</code> - <code>PDA-UX-020</code></li>\n</ul>\n<h2>범위</h2>\n<ul>\n<li><code>cli-adapter-registry.json</code>의 concrete AI CLI adapter 후보</li>\n<li><code>user-flow-registry.json</code>의 AI CLI orchestration flow</li>\n<li><code>desktop-distribution-registry.json</code>의 multi-CLI supervisor release gate</li>\n<li>project-local architecture 문서</li>\n<li>readiness/test가 새 문서를 확인하도록 보강</li>\n<li>Tauri backend의 allowlist CLI 탐지와 bounded health/version check</li>\n<li>Tauri backend의 task pipe preset 조회와 task intake 기반 multi-CLI lane init command</li>\n<li>Workspace Monitor의 Desktop 탭과 browser fallback</li>\n<li>Tauri backend의 pipe 기반 CLI session start/poll/stdin/defer/cancel command와 defer 시 human decision inbox append</li>\n<li>Tauri backend의 human decision inbox 조회/답변 command</li>\n<li>Tauri backend의 linked active CLI session answer-and-resume command</li>\n<li>Tauri backend의 workspace-scoped source file read/write와 backup</li>\n<li>Workspace Monitor의 CLI setup guide, 작업 모드 프리셋, decision inbox answer UI, CLI session console, scoped source editor</li>\n<li>Workspace Monitor의 command palette, capability center card, run board, process graph, terminal event rail, grouped decision inbox, decision replay, source diff review, evidence/promotion surface</li>\n<li>Workspace Monitor의 multi-file source editing draft queue, direct path open, indexed file browser, dirty state, save current, save all, revert, close, backup result surface</li>\n<li>platform-first host runtime 계약: 플랫폼이 먼저 실행되고 외부 AI CLI는 guest adapter lane으로만 붙는 구조</li>\n<li>pipe-first task init 계약: 하나의 task intake가 여러 optional CLI lane의 stdin init, stdout/stderr capture, decision inbox pipe, merge gate edge를 만든다</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>Codex, Gemini CLI, Claude Code CLI, OpenCode, Cursor, Antigravity 같은 외부 AI 도구를 제품 host runtime으로 삼는 구조</li>\n<li>interactive PTY 실행과 autonomous source-affecting long-running task release</li>\n<li>Rust/Tauri, xterm.js, Monaco, PTY dependency 설치</li>\n<li>provider 인증 관리</li>\n<li>public installer 생성 또는 release-ready 주장</li>\n</ul>\n<h2>기능 계약</h2>\n<ul>\n<li>플랫폼은 먼저 실행되는 host runtime이며 task state, durable memory, decision inbox, artifact, validation, UI authority를 소유한다.</li>\n<li>네 CLI는 optional guest adapter lane으로 표시되고, 누락 시 <code>capability_missing</code>으로 해당 lane만 비활성화한다.</li>\n<li>첫 supervisor MVP는 allowlist된 CLI의 PATH 탐지와 stdin 없는 bounded version check를 실행한다.</li>\n<li>두 번째 supervisor MVP는 shell plugin 없이 allowlist된 CLI에 한해 pipe 기반 session start/poll/stdin/defer/cancel을 제공하고, defer 시 감지된 질문을 <code>_ops/coordination/human-decision-inbox.json</code>에 저장한다.</li>\n<li>세 번째 supervisor MVP는 task pipe preset을 통해 여러 optional CLI lane을 한 번에 init하고, 각 lane의 pipe edge와 merge gate를 platform-owned report로 반환한다.</li>\n<li>사용자는 Desktop 탭에서 CLI별 설치 힌트와 검증 명령을 확인하고, 작업 모드 프리셋으로 session prompt를 만들며, 보류된 decision item에 답변을 저장할 수 있다.</li>\n<li>session metadata가 있는 보류 decision은 사용자가 명시적으로 answer-and-resume을 선택했을 때만 answer 저장 후 linked active CLI session stdin으로 같은 답변을 보내고 session report를 갱신한다.</li>\n<li>Desktop 탭은 레퍼런스 UI 적용 결과로 quick action command, capability status, lane timeline, process graph, structured terminal event, grouped decision, replay metadata, source diff, evidence/promotion 후보를 함께 보여준다.</li>\n<li>여러 CLI의 autonomous source-affecting long-running 실행은 process graph와 merge gate를 가진 다음 supervisor 단계에서 구현한다.</li>\n<li>CLI 질문은 decision inbox로 route하고 dependent lane만 pause한다.</li>\n<li>터미널 output은 bounded/redacted raw log와 structured durable records를 분리한다.</li>\n<li>코드 편집은 현재 textarea 기반 scoped editor, multi-file draft queue, diff preview, backup save로 시작하고, Monaco Editor 같은 오픈소스 editor surface는 dependency audit 후 교체한다.</li>\n<li>데이터 축적은 파일 시스템 index와 structured records를 기본으로 하고, vector DB는 측정된 병목 이후 비교한다.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>JSON config가 문법과 self-documenting config contract를 통과한다.</li>\n<li>desktop readiness test가 multi-CLI architecture doc과 orchestration registry fields를 확인한다.</li>\n<li><code>workspace-monitor</code> Desktop 탭은 Tauri runtime이 있으면 CLI adapter 상태와 health check 결과를 표시하고, browser-only 환경에서는 unavailable fallback을 표시한다.</li>\n<li><code>workspace-monitor</code> Desktop 탭은 CLI session console과 scoped source editor를 표시한다.</li>\n<li><code>workspace-monitor</code> Desktop 탭은 CLI setup guide, 작업 모드 프리셋, human decision inbox 조회/답변 UI를 표시한다.</li>\n<li><code>workspace-monitor</code> Desktop 탭은 linked active CLI session이 있는 decision에 대해 <code>Answer</code>와 <code>Answer &amp; Resume</code>를 구분하고 resume 결과를 표시한다.</li>\n<li><code>workspace-monitor</code> Desktop 탭은 <code>Command Palette</code>, <code>Capability Center</code>, <code>Run Board</code>, process graph, terminal event, decision replay, <code>Source Review</code>, <code>Evidence / Promotion</code> 문자열과 관련 UI state를 포함한다.</li>\n<li><code>workspace-monitor</code> Desktop 탭은 <code>Multi-file scoped editor</code>, <code>File Edit Queue</code>, <code>Open Path</code>, <code>Save Current</code>, <code>Save All</code>, <code>Revert Draft</code>를 포함하고 열린/dirty 드래프트 수와 backup 저장 결과를 표시한다.</li>\n<li><code>workspace-monitor</code> Desktop 탭은 <code>Platform-first host</code>, <code>Guest adapters</code>, <code>Platform state owner</code> 문자열과 관련 UI state를 포함해 외부 AI CLI가 플랫폼 위의 guest lane임을 보여준다.</li>\n<li><code>workspace-monitor</code> Desktop 탭은 <code>Task Pipe Init</code>, <code>Init task pipe</code>, <code>Init Pipe</code>, <code>merge gate</code> 문자열과 관련 UI state를 포함해 task intake 기준 multi-CLI lane init을 보여준다.</li>\n<li>Tauri file command는 <code>_private/</code>, <code>outputs/</code>, workspace 밖 경로, symlink escape를 차단하고 backup을 만든다.</li>\n<li>요구사항, 스펙, traceability가 새 기능을 연결한다.</li>\n<li>평가 기록에 resource risk와 CLI pipeline risk가 현재 bounded health/session/file-edit 구현 범위와 후속 PTY supervisor 리스크를 구분해 기록된다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 6683,
-      "updatedAt": "2026-06-03T15:26:26.978Z",
-      "historyDate": "2026-06-02",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-architecture-multi-cli-orchestration-runtime-en-md",
-      "path": "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Multi CLI Orchestration Runtime",
-      "excerpt": "Multi CLI Orchestration Runtime Purpose This document defines the runtime shape for making platform desktop app a platform first host runtime that launches before Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, Claw Code, and future AI CLIs, then uses those tools as guest adapt",
-      "html": "<h1>Multi-CLI Orchestration Runtime</h1>\n<h2>Purpose</h2>\n<p>This document defines the runtime shape for making <code>platform-desktop-app</code> a platform-first host runtime that launches before Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, Claw Code, and future AI CLIs, then uses those tools as guest adapter lanes without depending on any single one.</p>\n<p>Core conclusions:</p>\n<ul>\n<li>The desktop app is not a CLI wrapper. It is the platform-first supervisor that owns workspace context, task state, decisions, artifacts, history, validation, and reusable data.</li>\n<li>CLIs are guest adapter-backed execution providers on top of the platform. If one is missing, the result is <code>capability_missing</code>, and the app still opens.</li>\n<li>Multi-CLI work is a supervised process graph with lane state, output bounds, cancellation, cleanup, and merge gates, not several unrelated terminal windows.</li>\n<li>If a CLI asks a user question while the user is absent, only the dependent lane pauses; the decision goes to the decision inbox and independent lanes continue.</li>\n<li>Terminal output is visible evidence, but durable platform state is stored as structured records.</li>\n</ul>\n<h2>Runtime Layers</h2>\n<pre><code>\nPlatform-first host runtime\n  -&gt; Tauri desktop shell\n  -&gt; platform-desktop-app/renderer/workspace-monitor / future desktop UI\n      -&gt; command center\n      -&gt; run timeline\n      -&gt; decision inbox\n      -&gt; terminal lane panels\n      -&gt; source editor\n  -&gt; platform supervisor boundary\n      -&gt; adapter registry\n      -&gt; process graph planner\n      -&gt; PTY/stream supervisor\n      -&gt; decision deferral router\n      -&gt; artifact/log/data retention manager\n      -&gt; validation and evaluation runner\n  -&gt; external AI CLI guest adapters\n      -&gt; Claude Code CLI\n      -&gt; Gemini CLI\n      -&gt; Codex CLI\n      -&gt; OpenCode\n</code></pre>\n<h2>Candidate Technology</h2>\n<table><thead><tr><th>Area</th><th>Preferred Candidate</th><th>Reason</th><th>Check Before Implementation</th></tr></thead><tbody><tr><td>Desktop shell</td><td>Tauri v2/Rust</td><td>The current product shell and macOS/Windows profiles are Tauri-first.</td><td>Rust/Tauri installation audit, shell permissions, sidecar, signing gates</td></tr><tr><td>Terminal UI</td><td>xterm.js</td><td>Standard web terminal emulator candidate for a browser-based UI.</td><td>addons, theme, accessibility, output bounding, mobile non-goal</td></tr><tr><td>PTY/process</td><td>Tauri shell plugin, sidecar, separate supervisor candidates</td><td>Tauri shell provides scoped process execution, and sidecars support packaged local services.</td><td>Real interactive PTY needs a separate release-grade spike. Node <code>node-pty</code> is an Electron/Node-supervisor candidate, not the default Tauri choice.</td></tr><tr><td>Code editing</td><td>Monaco Editor</td><td>Browser-based editor from VS Code; avoids custom editor work first.</td><td>file URIs, model lifecycle, disposal, workers, schema/LSP linkage, dependency audit</td></tr><tr><td>editor-agent protocol</td><td>Agent Client Protocol</td><td>Future candidate for decoupling editors and coding agents.</td><td>Defer until editor interoperability is a stronger bottleneck than CLI supervision</td></tr><tr><td>long-running supervisor</td><td>Go or Python sidecar</td><td>Go is a future process-supervisor candidate; Python owns current agent-platform policy and validation.</td><td>measured bottleneck, lifecycle cleanup, packaging, signing, rollback</td></tr></tbody></table>\n<h2>Multi-CLI Execution Contract</h2>\n<p>1. The user enters goal, project, and output type.</p>\n<p>2. Preflight checks Claude Code, Gemini CLI, Codex CLI, and OpenCode availability, version, auth/session, and permission scope.</p>\n<p>3. Each selected CLI becomes a process node.</p>\n<p>4. A task pipe preset creates stdin init pipes for several optional CLI lanes from one task intake.</p>\n<p>5. Fan-out/fan-in work declares merge gates.</p>\n<p>6. Each lane has cwd, env allowlist, timeout, output bound, cancellation, and cleanup policy.</p>\n<p>7. Terminal output is visible in lane panels, while meaningful events become structured records.</p>\n<p>8. If a CLI asks a question, the adapter sends a short defer message only when safe, then pauses only the dependent lane.</p>\n<p>9. The decision packet is stored in the decision inbox.</p>\n<p>10. After the user answers, work resumes from a checkpoint.</p>\n<p>11. Merge gates separate accepted, rejected, conflicting, and deferred evidence before releasing downstream results.</p>\n<h2>Data Accumulation</h2>\n<table><thead><tr><th>Data</th><th>Storage Direction</th><th>Durable Promotion Condition</th></tr></thead><tbody><tr><td>raw terminal scrollback</td><td>product-local runtime log, bounded retention</td><td>usually not promoted</td></tr><tr><td>terminal output summary</td><td>task run record</td><td>redaction, source lane, timestamp</td></tr><tr><td>CLI process event</td><td>process event record</td><td>adapter, version, cwd, exit, duration</td></tr><tr><td>artifact</td><td>owning project <code>artifacts/</code> or task artifact store</td><td>path boundary, provenance, validation</td></tr><tr><td>user question</td><td>decision inbox</td><td>decision impact, blocked/unblocked work, resume action</td></tr><tr><td>accepted learning</td><td>project docs, <code>_research/</code>, requirement/spec, reusable asset</td><td>provenance, freshness, validation, ambiguity handling</td></tr><tr><td>large historical corpus</td><td>packaged archive, index, optional vector DB</td><td>after volume, latency, and retrieval measurements</td></tr></tbody></table>\n<p>Vector DB is not the default. File-system indexes and structured JSON/Markdown come first. Packaging, vector DB, or hybrid search should be compared only after retrieval volume and latency become measured bottlenecks.</p>\n<h2>Permissions And Security</h2>\n<ul>\n<li>Local command executi</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 11799,
-      "updatedAt": "2026-06-03T15:26:22.703Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-architecture-multi-cli-orchestration-runtime-ko-md",
-      "path": "platform-desktop-app/docs/architecture/multi-cli-orchestration-runtime.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "다중 CLI 오케스트레이션 런타임",
-      "excerpt": "다중 CLI 오케스트레이션 런타임 목적 이 문서는 platform desktop app 이 먼저 실행되는 platform first host runtime이 되고, Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, Claw Code 같은 AI CLI를 그 위의 guest adapter lane으로 동시에 활용하되 어느 하나에도 종속되지 않는 설치형 데스크톱 플랫폼이 되기 위한 런타임 구조를 정의한다. 핵심 결론은 다음이다. 데스크톱 앱의 정체성은 CLI wr",
-      "html": "<h1>다중 CLI 오케스트레이션 런타임</h1>\n<h2>목적</h2>\n<p>이 문서는 <code>platform-desktop-app</code>이 먼저 실행되는 platform-first host runtime이 되고, Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, Claw Code 같은 AI CLI를 그 위의 guest adapter lane으로 동시에 활용하되 어느 하나에도 종속되지 않는 설치형 데스크톱 플랫폼이 되기 위한 런타임 구조를 정의한다.</p>\n<p>핵심 결론은 다음이다.</p>\n<ul>\n<li>데스크톱 앱의 정체성은 CLI wrapper가 아니라 workspace, task state, decision, artifact, history, validation, reusable data를 소유하는 platform-first supervisor다.</li>\n<li>CLI는 플랫폼 위에 올라오는 guest adapter-backed execution provider다. 없으면 <code>capability_missing</code>이 되고 앱 자체는 계속 열려야 한다.</li>\n<li>여러 CLI 실행은 터미널 창 여러 개가 아니라 process graph, lane status, output bound, cancellation, cleanup, merge gate가 있는 supervised run이다.</li>\n<li>CLI가 사용자 질문을 만들면 dependent lane만 멈추고, 질문은 decision inbox로 들어가며, 독립 lane은 계속 진행한다.</li>\n<li>터미널 output은 관찰 가능한 evidence지만 durable state는 구조화된 record로 저장한다.</li>\n</ul>\n<h2>런타임 레이어</h2>\n<pre><code>\nPlatform-first host runtime\n  -&gt; Tauri desktop shell\n  -&gt; platform-desktop-app/renderer/workspace-monitor / future desktop UI\n      -&gt; command center\n      -&gt; run timeline\n      -&gt; decision inbox\n      -&gt; terminal lane panels\n      -&gt; source editor\n  -&gt; platform supervisor boundary\n      -&gt; adapter registry\n      -&gt; process graph planner\n      -&gt; PTY/stream supervisor\n      -&gt; decision deferral router\n      -&gt; artifact/log/data retention manager\n      -&gt; validation and evaluation runner\n  -&gt; external AI CLI guest adapters\n      -&gt; Claude Code CLI\n      -&gt; Gemini CLI\n      -&gt; Codex CLI\n      -&gt; OpenCode\n</code></pre>\n<h2>후보 기술</h2>\n<table><thead><tr><th>영역</th><th>우선 후보</th><th>이유</th><th>구현 전 확인</th></tr></thead><tbody><tr><td>데스크톱 셸</td><td>Tauri v2/Rust</td><td>현재 제품 shell과 macOS/Windows 배포 프로파일이 Tauri-first다.</td><td>Rust/Tauri 설치 감사, shell permission, sidecar, signing gate</td></tr><tr><td>터미널 UI</td><td>xterm.js</td><td>브라우저 기반 terminal emulator 표준 후보이며 web UI에 붙이기 쉽다.</td><td>addon, theme, accessibility, output bounding, mobile 비목표</td></tr><tr><td>PTY/process</td><td>Tauri shell plugin, sidecar, 별도 supervisor 후보</td><td>Tauri shell은 scoped process execution을 제공한다. sidecar는 Python/service packaging 후보를 제공한다.</td><td>실제 interactive PTY에는 별도 release-grade spike가 필요하다. Node <code>node-pty</code>는 Electron/Node supervisor 후보이며 Tauri 기본 선택은 아니다.</td></tr><tr><td>코드 편집</td><td>Monaco Editor</td><td>VS Code에서 나온 browser-based editor이며 source editing을 처음부터 직접 만들지 않아도 된다.</td><td>file URI, model lifecycle, dispose, workers, schema/LSP 연결, dependency audit</td></tr><tr><td>editor-agent protocol</td><td>Agent Client Protocol</td><td>editor와 coding agent decoupling의 향후 후보이다.</td><td>지금은 CLI supervisor가 우선이며 ACP는 editor interoperability가 핵심 병목일 때 검토</td></tr><tr><td>장기 supervisor</td><td>Go 또는 Python sidecar</td><td>Go는 장기 실행 process supervisor 후보, Python은 기존 agent-platform 정책/검증 계층이다.</td><td>측정된 병목, lifecycle cleanup, packaging, signing, rollback</td></tr></tbody></table>\n<h2>다중 CLI 실행 계약</h2>\n<p>1. 사용자가 작업 목표, 프로젝트, output type을 입력한다.</p>\n<p>2. preflight가 Claude Code, Gemini CLI, Codex CLI, OpenCode의 availability, version, auth/session, permission scope를 확인한다.</p>\n<p>3. 선택된 CLI마다 process node를 만든다.</p>\n<p>4. task pipe preset은 하나의 task intake에서 여러 optional CLI lane의 stdin init pipe를 만든다.</p>\n<p>5. fan-out/fan-in이 있으면 merge gate를 명시한다.</p>\n<p>6. 각 lane은 cwd, env allowlist, timeout, output bound, cancellation, cleanup policy를 가진다.</p>\n<p>7. 실행 중 terminal output은 lane panel에 보이고, 의미 있는 event는 구조화 record가 된다.</p>\n<p>8. CLI가 질문하면 adapter가 가능한 경우 짧은 defer message를 보내고, dependent lane만 멈춘다.</p>\n<p>9. decision packet은 decision inbox에 저장된다.</p>\n<p>10. 사용자가 답하면 checkpoint에서 resume한다.</p>\n<p>11. merge gate는 accepted, rejected, conflicting, deferred evidence를 분리한 뒤 downstream 결과를 release한다.</p>\n<h2>데이터 축적 구조</h2>\n<table><thead><tr><th>데이터</th><th>저장 방향</th><th>durable 승격 조건</th></tr></thead><tbody><tr><td>raw terminal scrollback</td><td>product-local runtime log, bounded retention</td><td>보통 승격하지 않음</td></tr><tr><td>terminal output summary</td><td>task run record</td><td>redaction, source lane, timestamp</td></tr><tr><td>CLI process event</td><td>process event record</td><td>adapter, version, cwd, exit, duration</td></tr><tr><td>artifact</td><td>owning project <code>artifacts/</code> 또는 task artifact store</td><td>path boundary, provenance, validation</td></tr><tr><td>user question</td><td>decision inbox</td><td>decision impact, blocked/unblocked work, resume action</td></tr><tr><td>accepted learning</td><td>project docs, <code>_research/</code>, requirement/spec, reusable asset</td><td>provenance, freshness, validation, ambiguity handling</td></tr><tr><td>large historical corpus</td><td>packaged archive, index, optional vector DB</td><td>volume/latency/retrieval measurement 후 선택</td></tr></tbody></table>\n<p>벡터 DB는 기본값이 아니다. 파일 시스템 기반 index와 구조화 JSON/Markdown이 먼저이며, 검색량과 재사용량이 늘어 retrieval bottleneck이 측정될 때 packaging, vector DB, hybrid search를 비교한다.</p>\n<h2>권한과 보안</h2>\n<ul>\n<li>desktop shell이 local command를 실행하려면 command allowlist, args policy, workspace path scope, stdin write scope, timeout, kill permission이 명시되어야 한다.</li>\n<li>API key, token, browser cookie, provider session secret은 installer나 durable log에 들어가면 안 된다.</li>\n<li>interactive stdin write는 adapter별로 안전성이 기록된 경우에만 켠다.</li>\n<li>public macOS readiness는 Developer ID signing, hardened runtime, notarization, stapling, clean Mac smoke test 없이는 주장하지 않는다.</li>\n<li>CLI 출력의 raw 저장은 size, sensitivity, retention이 정해진 경우에만 허용한다.</li>\n</ul>\n<h2>제품 Slice 순서</h2>\n<p>1. Adapter status UI: 네 CLI의 availability/version/setup-later 상태를 보여준다.</p>\n<p>2. Run timeline model: process lane, artifact, decision, validation record를 UI 데이터 모델로 만든다.</p>\n<p>3. Single-CLI supervised slice: 한 CLI를 bounded output/cancel/cleanup으로 실행한다.</p>\n<p>4. Decision deferral slice: CLI 질문을 decision inbox로 보내고 dependent lane만 pause한다.</p>\n<p>5. Multi-CLI fan-out/fan-in: process graph validation과 merge gate를 붙인다.</p>\n<p>6. Source editor: Monaco 기반 read/write scope, diff/review, save</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 12403,
-      "updatedAt": "2026-06-03T15:26:18.758Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-02-installable-user-flow-en-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Installable App User Flow Requirements",
-      "excerpt": "Installable App User Flow Requirements Scope These requirements define first run, home, task execution, decision inbox, settings, and recovery flows for making the installable agent platform easy to start and use repeatedly. Requirements | ID | Requirement | Priority | Verificati",
-      "html": "<h1>Installable App User Flow Requirements</h1>\n<h2>Scope</h2>\n<p>These requirements define first-run, home, task execution, decision inbox, settings, and recovery flows for making the installable agent platform easy to start and use repeatedly.</p>\n<h2>Requirements</h2>\n<table><thead><tr><th>ID</th><th>Requirement</th><th>Priority</th><th>Verification</th></tr></thead><tbody><tr><td>PDA-UX-001</td><td>The installable app must provide <code>Open existing workspace</code>, <code>Create new workspace</code>, and <code>Try demo</code> paths during first run.</td><td>must</td><td>user-flow registry and onboarding docs</td></tr><tr><td>PDA-UX-002</td><td>The app must clearly show which files, settings, and snapshots will be read or generated for the selected workspace.</td><td>must</td><td>first-run onboarding docs</td></tr><tr><td>PDA-UX-003</td><td>The default user flow must reach the dashboard even when optional CLIs, notifications, browser automation, or advanced validators are not configured.</td><td>must</td><td>user-flow registry acceptance checks</td></tr><tr><td>PDA-UX-004</td><td><code>user</code>, <code>developer</code>, and <code>superadmin_developer</code> view modes must be selectable during first run and settings; user mode must hide complex internal tooling.</td><td>must</td><td>view mode registry linkage</td></tr><tr><td>PDA-UX-005</td><td>Task execution must show current phase, elapsed time, active agents/subprocesses, produced files, evidence, user decisions, verification, and commit/push state.</td><td>must</td><td>task_run_flow review</td></tr><tr><td>PDA-UX-006</td><td>User questions must be collected in a decision inbox, while independent work can continue.</td><td>must</td><td>decision_inbox_flow review</td></tr><tr><td>PDA-UX-007</td><td>Recovery flows must cover unreadable workspace, missing optional CLI, pending user decision, stale snapshot, and update failure.</td><td>must</td><td>failure_recovery_flows review</td></tr><tr><td>PDA-UX-008</td><td>Developer and superadmin modes should expose raw configs, validators, release gates, coordination, and source provenance.</td><td>should</td><td>developer_superadmin_flow review</td></tr><tr><td>PDA-UX-009</td><td>Task preflight shall show Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, and Claw Code as selectable CLI lanes with availability, version, auth, permission, and setup-later status.</td><td>must</td><td><code>ai_cli_orchestration_flow</code> review</td></tr><tr><td>PDA-UX-010</td><td>The run screen shall show terminal output for multiple CLI lanes while converting durable state into task events, artifacts, decisions, and validation records.</td><td>must</td><td>run timeline and data accumulation contract</td></tr><tr><td>PDA-UX-011</td><td>When a CLI asks a user question, the decision inbox handoff screen shall show the question, impact, default assumption, blocked lane, lanes that can continue, and resume action.</td><td>must</td><td>decision inbox flow and human decision inbox</td></tr><tr><td>PDA-UX-012</td><td>The source editing screen should prefer a validated editor surface such as Monaco Editor and center user mode on safe file scope plus change review.</td><td>should</td><td>source editor product acceptance</td></tr><tr><td>PDA-UX-013</td><td>The Desktop tab must show Tauri runtime connection state, CLI adapter availability/version, bounded health-check results, detected CLI questions, and source-editing readiness in one surface.</td><td>must</td><td>workspace-monitor Desktop tab</td></tr><tr><td>PDA-UX-014</td><td>The Desktop tab shall provide a pipe-based CLI session console and scoped source editor so the user can start, poll, write stdin, defer, cancel, see decision inbox item counts, open files, and see backup save status in one surface.</td><td>must</td><td>workspace-monitor Desktop tab, TypeScript check</td></tr><tr><td>PDA-UX-015</td><td>The Desktop tab shall show CLI setup guides, work-mode presets, deferred decision lists, answer type/text controls, and saved answer state in the same working surface.</td><td>must</td><td>workspace-monitor Desktop tab, Tauri decision commands</td></tr><tr><td>PDA-UX-016</td><td>The Desktop tab shall distinguish answer-only from answer-and-resume actions for decisions linked to an active CLI session, and show the linked session id/status plus resume result.</td><td>must</td><td>workspace-monitor Desktop tab, Tauri answer-and-resume command</td></tr><tr><td>PDA-UX-017</td><td>The Desktop tab shall apply selected VS Code, Raycast, Docker, GitHub Desktop, Warp, and Cursor reference patterns as quick actions, capability cards, run board, process graph, terminal event rail, grouped decisions, replay, diff review, and evidence/promotion information in a dense work surface.</td><td>must</td><td>workspace-monitor Desktop tab, build, readiness/test</td></tr><tr><td>PDA-UX-018</td><td>The Desktop tab source-editing surface shall let users keep multiple files open as drafts and perform search/direct path open, dirty file queue review, diff preview, current save, save all, revert, close, and backup-result inspection in one screen.</td><td>must</td><td>workspace-monitor Desktop tab, visual QA, readiness/test</td></tr><tr><td>PDA-UX-019</td><td>First run and the Desktop tab shall make clear that the user starts the platform first, then adds external AI CLIs as guest lanes. A missing CLI shall appear as setup-later/capability_missing for that lane, not as platform failure.</td><td>must</td><td>user-flow registry, Workspace Monitor Desktop tab, readiness/test</td></tr></tbody></table>\n<p>| PDA-UX-020 | The Desktop tab shall let users choose a task pipe preset and initialize several CLI lanes from one task intake. The UI shall show lane count, adapter list, stdin/stdout/stderr pipes, decision inbox pipe, merge gate, and missing-lane state in one surface. | must | Workspace Monitor Desktop tab, user-flow registry, readines</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 6952,
-      "updatedAt": "2026-06-03T15:26:07.388Z",
-      "historyDate": "2026-06-02",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-docs-requirements-2026-06-02-installable-user-flow-ko-md",
-      "path": "platform-desktop-app/docs/requirements/2026-06-02-installable-user-flow.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "설치형 앱 사용자 플로우 요구사항",
-      "excerpt": "설치형 앱 사용자 플로우 요구사항 범위 설치형 에이전트 플랫폼을 사용자가 쉽게 시작하고 반복적으로 사용할 수 있게 만드는 첫 실행, 홈, 작업 실행, 결정함, 설정, 복구 흐름을 정의한다. 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | PDA UX 001 | 설치형 앱은 첫 실행에서 기존 워크스페이스 열기 , 새 워크스페이스 만들기 , 데모로 둘러보기 경로를 제공해야 한다. | must | user flow registry와 온보딩 문서 | | PDA UX 002 |",
-      "html": "<h1>설치형 앱 사용자 플로우 요구사항</h1>\n<h2>범위</h2>\n<p>설치형 에이전트 플랫폼을 사용자가 쉽게 시작하고 반복적으로 사용할 수 있게 만드는 첫 실행, 홈, 작업 실행, 결정함, 설정, 복구 흐름을 정의한다.</p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>PDA-UX-001</td><td>설치형 앱은 첫 실행에서 <code>기존 워크스페이스 열기</code>, <code>새 워크스페이스 만들기</code>, <code>데모로 둘러보기</code> 경로를 제공해야 한다.</td><td>must</td><td>user-flow registry와 온보딩 문서</td></tr><tr><td>PDA-UX-002</td><td>사용자가 선택한 워크스페이스에서 어떤 파일, 설정, 스냅샷을 읽거나 생성하는지 명확히 보여야 한다.</td><td>must</td><td>first-run onboarding 문서</td></tr><tr><td>PDA-UX-003</td><td>기본 사용자 흐름은 선택 CLI, 알림, 브라우저 자동화, 고급 검증 설정이 없어도 대시보드에 도착해야 한다.</td><td>must</td><td>user-flow registry acceptance checks</td></tr><tr><td>PDA-UX-004</td><td><code>user</code>, <code>developer</code>, <code>superadmin_developer</code> 보기 모드는 첫 실행과 설정에서 선택 가능해야 하며 사용자 모드는 복잡한 내부 도구를 숨겨야 한다.</td><td>must</td><td>view mode registry 연결</td></tr><tr><td>PDA-UX-005</td><td>작업 실행 화면은 현재 단계, 경과 시간, 활성 에이전트/subprocess, 생성 파일, 근거, 사용자 결정, 검증, 커밋/푸시 상태를 보여야 한다.</td><td>must</td><td>task_run_flow 검토</td></tr><tr><td>PDA-UX-006</td><td>사용자 질문은 decision inbox에 모으고, 의존성이 없는 작업은 계속 진행할 수 있어야 한다.</td><td>must</td><td>decision_inbox_flow 검토</td></tr><tr><td>PDA-UX-007</td><td>실패 복구는 워크스페이스 읽기 실패, 선택 CLI 누락, 사용자 결정 대기, 오래된 스냅샷, 업데이트 실패를 포함해야 한다.</td><td>must</td><td>failure_recovery_flows 검토</td></tr><tr><td>PDA-UX-008</td><td>개발자/슈퍼어드민 모드는 raw config, validator, release gate, coordination, source provenance를 볼 수 있어야 한다.</td><td>should</td><td>developer_superadmin_flow 검토</td></tr><tr><td>PDA-UX-009</td><td>작업 preflight는 Claude Code CLI, Gemini CLI, Codex CLI, OpenCode, Claw Code를 선택 가능한 CLI lane으로 보여주고, availability/version/auth/permission/setup-later 상태를 표시해야 한다.</td><td>must</td><td><code>ai_cli_orchestration_flow</code> 검토</td></tr><tr><td>PDA-UX-010</td><td>실행 화면은 여러 CLI lane의 terminal output을 보여주되, durable state는 task event, artifact, decision, validation record로 구조화해야 한다.</td><td>must</td><td>run timeline과 data accumulation contract</td></tr><tr><td>PDA-UX-011</td><td>CLI가 사용자 질문을 만들면 decision inbox handoff 화면에서 질문, 영향, 기본 가정, 막힌 lane, 계속 가능한 lane, 재개 action을 보여야 한다.</td><td>must</td><td>decision inbox flow와 human decision inbox</td></tr><tr><td>PDA-UX-012</td><td>소스 편집 화면은 Monaco Editor 같은 검증된 editor surface를 우선 사용하고, 사용자 모드에서는 안전한 파일 범위와 변경 리뷰를 중심으로 보여야 한다.</td><td>should</td><td>source editor product acceptance</td></tr><tr><td>PDA-UX-013</td><td>Desktop 탭은 Tauri runtime 연결 상태, CLI adapter availability/version, bounded health check 결과, 감지된 CLI 질문, source editing 준비 상태를 한 화면에서 보여야 한다.</td><td>must</td><td>workspace-monitor Desktop tab</td></tr><tr><td>PDA-UX-014</td><td>Desktop 탭은 pipe 기반 CLI session console과 scoped source editor를 제공해 start/poll/stdin/defer/cancel, decision inbox 저장 수, 파일 열기, backup 저장 상태를 한 화면에서 조작할 수 있어야 한다.</td><td>must</td><td>workspace-monitor Desktop tab, TypeScript check</td></tr><tr><td>PDA-UX-015</td><td>Desktop 탭은 CLI setup guide, 작업 모드 프리셋, 보류 decision 목록, answer type/text 입력, 저장된 답변 상태를 같은 작업 표면에서 보여야 한다.</td><td>must</td><td>workspace-monitor Desktop tab, Tauri decision commands</td></tr><tr><td>PDA-UX-016</td><td>Desktop 탭은 linked active CLI session이 있는 decision에 대해 answer-only와 answer-and-resume action을 구분하고, 연결 session id/status와 resume 결과를 보여야 한다.</td><td>must</td><td>workspace-monitor Desktop tab, Tauri answer-and-resume command</td></tr><tr><td>PDA-UX-017</td><td>Desktop 탭은 VS Code/Raycast/Docker/GitHub Desktop/Warp/Cursor 레퍼런스에서 채택한 quick action, capability card, run board, process graph, terminal event rail, grouped decision, replay, diff review, evidence/promotion 정보를 조밀한 작업 화면으로 보여야 한다.</td><td>must</td><td>workspace-monitor Desktop tab, build, readiness/test</td></tr><tr><td>PDA-UX-018</td><td>Desktop 탭의 source editing 화면은 사용자가 여러 파일을 열린 드래프트로 유지하고, 검색/직접 경로 열기, dirty 파일 큐, diff preview, 현재 저장, 전체 저장, 되돌리기, 닫기, backup 결과 확인을 한 화면에서 수행할 수 있어야 한다.</td><td>must</td><td>workspace-monitor Desktop tab, visual QA, readiness/test</td></tr><tr><td>PDA-UX-019</td><td>첫 실행과 Desktop 탭은 사용자가 플랫폼을 먼저 실행한 뒤 외부 AI CLI를 guest lane으로 추가한다는 관계를 명확히 보여야 한다. 누락된 CLI는 플랫폼 실패가 아니라 해당 lane의 setup-later/capability_missing 상태로 보여야 한다.</td><td>must</td><td>user-flow registry, Workspace Monitor Desktop tab, readiness/test</td></tr><tr><td>PDA-UX-020</td><td>Desktop 탭은 사용자가 task pipe preset을 선택하고 하나의 task intake로 여러 CLI lane을 초기화하는 흐름을 제공해야 한다. UI는 lane 수, adapter 목록, stdin/stdout/stderr pipe, decision inbox pipe, merge gate, missing lane 상태를 한 화면에서 보여야 한다.</td><td>must</td><td>Workspace Monitor Desktop tab, user-flow registry, readiness/test</td></tr><tr><td>PDA-UX-021</td><td>Desktop 탭은 실행 중인 CLI output에서 사용자 질문을 감지하면 사용자가 자리를 비운 상태에서도 해당 lane에 defer 메시지를 보내고, 질문을 decision inbox에 보류 항목으로 저장하며, 사용자가 돌아오면 answer/resume으로 연결할 수 있어야 한다. 수동 보류와 전체 감지 질문 보류도 제공해야 한다.</td><td>must</td><td>Workspace Monitor Desktop tab, Tauri session commands, readiness/test</td></tr><tr><td>PDA-UX-022</td><td>CLI 질문 보류와 active session polling은 긴 terminal output과 다중 lane에서도 빠르게 유지되어야 한다. 질문 scan은 bounded tail 기준으로 제한하고, UI polling은 overlap 방지, inbox refresh throttle, session report 병합, idle elapsed update bucket을 적용해야 한다.</td><td>must</td><td>Workspace Monitor Desktop tab, Tauri session commands, readiness/test, performance budget</td></tr><tr><td>PDA-UX-023</td><td>Desktop 탭과 Tauri runtime은 CLI 세션과 task pipe lane 실행 결과를 filesystem-backed task-run record로 저장해야 한다. 각 record는 metadata <code>record.json</code>, <code>stdout.log</code>, <code>stderr.log</code>, pipeline/lane provenance, decision count, bounded output state를 포함하고 UI에서 최근 저장 기록을 확인할 수 있어야 한다.</td><td>must</td><td>Tauri task-run commands, Workspace Monitor Desktop tab, readiness/test</td></tr><tr><td>PDA-UX-024</td><td>Desktop 탭은 저장된 task-run record를 선택해 bounded <code>stdout.log</code>, <code>stderr.log</code>, <code>record.json</code> preview를 열람하고, 사용자가 오래된 task-run 저장소 항목을 명시적으로 정리할 수 있어야 한다.</td><td>must</td><td>Tauri task-run detail/prune commands, Workspace Monitor Desktop tab, readiness/test</td></tr></tbody></table>\n<h2>현재 상태</h2>\n<ul>\n<li>상태: baseline draft</li>\n<li>실제 desktop dependency 설치: 없음</li>\n<li>구현 전 필수 확인: `platform-desktop-app/configs/user-fl</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 7541,
-      "updatedAt": "2026-06-03T15:26:00.426Z",
-      "historyDate": "2026-06-02",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-configs-desktop-distribution-registry-json",
-      "path": "platform-desktop-app/configs/desktop-distribution-registry.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "Desktop Distribution Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 02\", \"name\": \"desktop distribution registry\", \"purpose\": \"Defines how the workspace platform should become installable desktop software without confusing repository setup modes with end user installer packaging.\", \"reader guide\": { \"summary\": \"Use thi",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-02&quot;,\n  &quot;name&quot;: &quot;desktop-distribution-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines how the workspace platform should become installable desktop software without confusing repository setup modes with end-user installer packaging.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before changing the selected desktop product runtime, adding packaging scripts, or preparing an installer release.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read product_boundary first so repository setup install_mode is not confused with end-user installers.&quot;,\n      &quot;Read selected_platform_architecture first to understand the current Tauri-first productization decision.&quot;,\n      &quot;Read candidate_frameworks to understand the fallback or comparison routes kept for recorded release blockers or maintenance evidence.&quot;,\n      &quot;Read packaging_targets to understand OS-specific installer and signing expectations.&quot;,\n      &quot;Read runtime_strategy and assistant_cli_capabilities before implementing multi-CLI orchestration.&quot;,\n      &quot;Read release_gates before claiming that a build is production-ready.&quot;,\n      &quot;Treat commands as planned future commands until dependencies are actually installed and audited.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-04&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The selected desktop product runtime changes.&quot;,\n      &quot;The installer target OS list changes.&quot;,\n      &quot;The platform runtime strategy changes between bundled, sidecar, local service, or remote service.&quot;,\n      &quot;Signing, notarization, update, uninstall, privacy, or dependency release gates change.&quot;,\n      &quot;A real packaging dependency is installed, upgraded, or removed.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;electron_application_distribution&quot;,\n      &quot;title&quot;: &quot;Electron: Application Packaging&quot;,\n      &quot;url&quot;: &quot;https://www.electronjs.org/docs/tutorial/application-distribution/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Electron application packaging and distribution concepts&quot;,\n        &quot;manual packaging versus tool-assisted packaging&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;electron_forge_makers&quot;,\n      &quot;title&quot;: &quot;Electron Forge: Makers&quot;,\n      &quot;url&quot;: &quot;https://www.electronforge.io/config/makers&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Electron installer maker options by platform&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_distribute&quot;,\n      &quot;title&quot;: &quot;Tauri: Distribute&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Tauri app distribution and bundling entry point&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_windows_installer&quot;,\n      &quot;title&quot;: &quot;Tauri: Windows Installer&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/windows-installer/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Windows MSI and setup executable packaging options for Tauri&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_sidecar&quot;,\n      &quot;title&quot;: &quot;Tauri: Embedding External Binaries&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/develop/sidecar/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;future Python sidecar or local service packaging pattern&quot;,\n        &quot;explicit external binary boundary&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_updater&quot;,\n      &quot;title&quot;: &quot;Tauri: Updater&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/plugin/updater/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;future signed updater artifact strategy&quot;,\n        &quot;macOS and Windows update release gates&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;tauri_windows_signing&quot;,\n      &quot;title&quot;: &quot;Tauri: Windows Code Signing&quot;,\n      &quot;url&quot;: &quot;https://v2.tauri.app/distribute/sign/windows/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Windows code-signing and SmartScreen release gate&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;go_docs&quot;,\n      &quot;title&quot;: &quot;Go Documentation&quot;,\n      &quot;url&quot;: &quot;https://go.dev/doc/docs.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Go as a compiled language and local service or CLI candidate&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;wails_introduction&quot;,\n      &quot;title&quot;: &quot;Wails Introduction&quot;,\n      &quot;url&quot;: &quot;https://wails.io/docs/next/introduction&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Wails as a Go backend plus web technology desktop app comparison candidate&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;language_decision_registry&quot;,\n      &quot;title&quot;: &quot;Language Decision Registry&quot;,\n      &quot;path&quot;: &quot;agent-platform/configs/runtime/language-decision-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;component-specific Rust, Go, Python, TypeScript, and Electron runtime placement&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;microsoft_msix&quot;,\n      &quot;title&quot;: &quot;Microsoft Learn: MSIX documentation&quot;,\n      &quot;url&quot;: &quot;https://learn.microsoft.com/en-us/wi</code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 33853,
-      "updatedAt": "2026-06-03T15:23:14.740Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
@@ -18084,6 +18084,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-evaluations-2026-2026-06-06-desktop-dev-run-fix-ko-md",
+          "path": "_history/evaluations/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+          "category": "evaluation",
+          "language": "ko",
+          "title": "2026 06 06 desktop dev/run fix 평가",
+          "excerpt": "2026 06 06 desktop dev/run fix 평가 평가 대상 README build/run failure fix. 완료 기준 desktop:dev 가 실제 app startup까지 진행한다. internal/dev 실행은 updater public release gate에 막히지 않는다. 빌드된 .app 을 여는 명령이 문서화되고 스크립트로 제공된다. 최종 package와 smoke가 통과한다. 현재 결과 desktop:dev : 통과. GET / 200 . desktop:run:int",
+          "updatedAt": "2026-06-06T01:28:41.481Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-evaluations-2026-2026-06-06-do-all-completion-standard-ko-md",
           "path": "_history/evaluations/2026/2026-06-06-do-all-completion-standard.ko.md",
           "category": "evaluation",
@@ -18141,16 +18151,6 @@
           "title": "평가: 기능별 오픈소스 맵",
           "excerpt": "평가: 기능별 오픈소스 맵 판정 요청 충족. 현재 플랫폼의 기능 layer별로 오픈소스 후보를 나누고, 각 후보에서 봐야 할 부분과 현재 플랫폼 적용 포인트를 기록했다. 산출물 검색 기록: history/web searches/2026/2026 06 06 feature by feature open source map.ko.md 연구 문서: research/topics/platform desktop app/2026 06 06 feature by feature open source map.ko.md ",
           "updatedAt": "2026-06-05T22:09:24.228Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-          "path": "_history/evaluations/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "근본 개선 구조 적용 평가",
-          "excerpt": "근본 개선 구조 적용 평가 상태: 통과 요청 충족: 다양한 히스토리에서 반복 패턴을 상위 구조 원칙과 실행 패키지로 승격해 플랫폼 snapshot과 Product Structure UI에 적용했다. 핵심 결과: developer snapshot 기준 structural principles 6개, improvement packages 6개, fitness checks 4개. customer 안전성: customer snapshot의 fundamental improvement stats와 arrays",
-          "updatedAt": "2026-06-05T21:38:05.813Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18284,6 +18284,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-request-traces-2026-2026-06-06-desktop-dev-run-fix-ko-md",
+          "path": "_history/request-traces/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "2026 06 06 request to outcome trace",
+          "excerpt": "2026 06 06 request to outcome trace 요청 README대로 했는데 desktop app 빌드/실행이 되지 않는 문제 해결. 원인 Tauri beforeDevCommand 가 잘못된 상대 경로를 사용했다. updater plugin이 public updater config 없이도 항상 초기화되어 internal/dev 실행을 panic으로 막았다. README에 빌드 후 실행 명령이 없었다. 산출물 platform desktop app/src tauri/tauri.conf",
+          "updatedAt": "2026-06-06T01:28:41.482Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-06-do-all-completion-standard-ko-md",
           "path": "_history/request-traces/2026/2026-06-06-do-all-completion-standard.ko.md",
           "category": "request-trace",
@@ -18341,16 +18351,6 @@
           "title": "요청 결과 추적: 기능별 오픈소스 맵",
           "excerpt": "요청 결과 추적: 기능별 오픈소스 맵 날짜: 2026 06 06 요청: 각각 기능별로도 오픈소스 찾아보기 프로젝트: platform desktop app/ 입력 앞선 유사 플랫폼 조사에서 전체적으로 비슷한 오픈소스를 봤으나, 사용자는 각 기능 단위로도 오픈소스를 찾으라고 요청했다. 결정 현재 제품의 feature layers 를 기준 분류로 사용했다. 기능 layer는 CLI Orchestration, Agent Work Environment, Agent Development Environment",
           "updatedAt": "2026-06-05T22:07:25.312Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-          "path": "_history/request-traces/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "요청 결과 추적",
-          "excerpt": "요청 결과 추적 요청: 다양한 히스토리를 보고 근본적 개선 구조를 생각해 플랫폼에 적용. 결과: fundamentalImprovementStructure collector, snapshot schema, Product Structure UI, sanitizer, tests, registry, records를 추가했다. 주요 산출물: platform desktop app/renderer/workspace monitor/scripts/lib/fundamental improvement structure",
-          "updatedAt": "2026-06-05T21:38:05.813Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18444,6 +18444,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-user-requests-2026-2026-06-06-desktop-dev-run-fix-ko-md",
+          "path": "_history/user-requests/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: desktop dev/run fix",
+          "excerpt": "사용자 요청 요약: desktop dev/run fix 사용자는 README에 있는 대로 빌드하고 실행했지만 되지 않는다고 보고했고, 해결을 요청했다. 적용 범위 desktop app README 명령 재현. Tauri dev 실행 실패 수정. internal/dev updater startup panic 수정. 빌드된 내부 .app 실행 명령 추가.",
+          "updatedAt": "2026-06-06T01:24:25.576Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-06-do-all-completion-standard-ko-md",
           "path": "_history/user-requests/2026/2026-06-06-do-all-completion-standard.ko.md",
           "category": "user-request",
@@ -18511,16 +18521,6 @@
           "title": "사용자 요청 요약: 큰 범위 작업 미루지 않기",
           "excerpt": "사용자 요청 요약: 큰 범위 작업 미루지 않기 사용자는 “범위가 크다고 미루지 않기”를 지시했다. 이 요청은 향후 큰 범위 작업을 회피, 보류, 사용자에게 되돌려 넘기는 방식이 아니라 실행 가능한 slice와 continuation path로 처리하라는 지속 운영 규칙으로 해석했다. 원문 전체는 저장하지 않고 요약만 보존한다.",
           "updatedAt": "2026-06-05T22:28:50.538Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-06-open-source-agent-platform-landscape-ko-md",
-          "path": "_history/user-requests/2026/2026-06-06-open-source-agent-platform-landscape.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "사용자 요청 요약: 오픈소스 Agent Platform Landscape",
-          "excerpt": "사용자 요청 요약: 오픈소스 Agent Platform Landscape 요약 사용자는 현재 플랫폼의 특징을 뽑아내고, 유사한 오픈소스를 매우 많이 조사해 달라고 요청했다. 해석 로컬 플랫폼이 실제로 어떤 제품 포지션과 기능 구조를 갖는지 먼저 정리한다. 단순히 몇 개 경쟁 제품을 나열하지 않고, coding agent, agent framework, workflow builder, local desktop AI app, workflow orchestration, observability까지 넓게",
-          "updatedAt": "2026-06-05T21:47:17.740Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18594,6 +18594,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-web-searches-2026-2026-06-06-desktop-dev-run-fix-ko-md",
+          "path": "_history/web-searches/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: desktop dev/run fix",
+          "excerpt": "웹 검색 기록: desktop dev/run fix 목적 README 명령대로 desktop app을 빌드하거나 실행할 때 실패하는 문제를 고치기 전에, Tauri v2와 Next static export의 공식 실행/빌드 전제를 확인했다. 검색어 Tauri v2 official docs development build beforeDevCommand frontendDist devUrl Next.js official docs output export static build Tauri plugin u",
+          "updatedAt": "2026-06-06T01:24:25.572Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-06-do-all-completion-standard-ko-md",
           "path": "_history/web-searches/2026/2026-06-06-do-all-completion-standard.ko.md",
           "category": "web-search",
@@ -18661,16 +18671,6 @@
           "title": "웹 검색 기록: 큰 범위 작업 미루지 않기",
           "excerpt": "웹 검색 기록: 큰 범위 작업 미루지 않기 검색 시각 2026 06 06 쿼리 large scope software engineering don't defer break down and deliver incrementally project management best practices large scope decomposition software engineering deliver incremental slices avoid postponing broad scope 확인한 내용 Incrementa",
           "updatedAt": "2026-06-05T22:28:28.756Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-06-open-source-agent-platform-landscape-ko-md",
-          "path": "_history/web-searches/2026/2026-06-06-open-source-agent-platform-landscape.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "웹 검색 기록: 오픈소스 Agent Platform Landscape",
-          "excerpt": "웹 검색 기록: 오픈소스 Agent Platform Landscape 목적 사용자가 현재 플랫폼의 특징을 뽑고 유사 오픈소스를 매우 많이 조사해 달라고 요청했다. 로컬 플랫폼 특징을 추출하기 전, 오픈소스/공식 문서 검색을 먼저 수행해 비교 축과 후보군을 넓혔다. 검색어 open source AI agent platform desktop app orchestration GitHub open source multi agent framework orchestration GitHub LangGraph ",
-          "updatedAt": "2026-06-05T21:47:17.739Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18744,6 +18744,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-06-desktop-dev-run-fix-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "2026 06 06 desktop dev/run fix 작업 요약",
+          "excerpt": "2026 06 06 desktop dev/run fix 작업 요약 구현 tauri.conf.json 의 dev renderer path를 수정했다. public updater config가 있을 때만 updater plugin을 초기화하도록 Rust startup을 바꿨다. desktop:dev , desktop:run:internal , desktop:package:run:internal root scripts를 추가했다. macOS internal .app open helper를 추가했다. R",
+          "updatedAt": "2026-06-06T01:28:41.482Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-06-do-all-completion-standard-ko-md",
           "path": "_history/work-summaries/2026/2026-06-06-do-all-completion-standard.ko.md",
           "category": "work-summary",
@@ -18811,16 +18821,6 @@
           "title": "작업 요약: 큰 범위 작업 미루지 않기",
           "excerpt": "작업 요약: 큰 범위 작업 미루지 않기 사용자 지시 “범위가 크다고 미루지 않기”를 지속 운영 규칙으로 반영했다. AGENTS.md , persistent instruction 문서 3종, large scope decomposition workflow를 갱신했다. 큰 범위 작업은 미루지 않고 첫 실행 slice, 검증 gate, continuation path로 전환하도록 명시했다. 웹 검색 기록과 당일 history log를 남겼다.",
           "updatedAt": "2026-06-05T22:28:28.756Z",
-          "historyDate": "2026-06-06"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-06-open-source-agent-platform-landscape-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-06-open-source-agent-platform-landscape.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "작업 요약: 오픈소스 Agent Platform Landscape",
-          "excerpt": "작업 요약: 오픈소스 Agent Platform Landscape 현재 플랫폼 특징을 로컬 제품 레지스트리와 Tauri 설정에서 추출했다. 플랫폼을 \"local Agent Workspace OS / Agent Workbench\"로 볼 수 있다는 결론을 기록했다. coding agent, agent framework, workflow builder, local AI desktop, workflow orchestration, developer platform, observability/eval, sa",
-          "updatedAt": "2026-06-05T21:47:17.741Z",
           "historyDate": "2026-06-06"
         },
         {
@@ -18894,6 +18894,16 @@
           "historyDate": "2026-06-06"
         },
         {
+          "id": "history-work-timings-2026-2026-06-06-desktop-dev-run-fix-json",
+          "path": "_history/work-timings/2026/2026-06-06-desktop-dev-run-fix.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 06 Desktop Dev Run Fix",
+          "excerpt": "{ \"task id\": \"2026 06 06 desktop dev run fix\", \"title\": \"desktop dev/run fix\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"reproduction\", \"label\": \"Failure reproduction\", \"status\": \"c",
+          "updatedAt": "2026-06-06T01:28:41.483Z",
+          "historyDate": "2026-06-06"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-06-do-all-completion-standard-json",
           "path": "_history/work-timings/2026/2026-06-06-do-all-completion-standard.json",
           "category": "work-timing",
@@ -18954,16 +18964,6 @@
           "historyDate": "2026-06-06"
         },
         {
-          "id": "history-work-timings-2026-2026-06-06-open-source-agent-platform-landscape-json",
-          "path": "_history/work-timings/2026/2026-06-06-open-source-agent-platform-landscape.json",
-          "category": "work-timing",
-          "language": "unknown",
-          "title": "2026 06 06 Open Source Agent Platform Landscape",
-          "excerpt": "{ \"id\": \"2026 06 06 open source agent platform landscape\", \"timezone\": \"Asia/Seoul\", \"measurement quality\": \"partial\", \"phases\": { \"name\": \"web first research\", \"status\": \"completed\", \"notes\": \"Searched broad open source agent platform, coding agent, desktop AI, workflow orchestr",
-          "updatedAt": "2026-06-05T21:47:17.741Z",
-          "historyDate": "2026-06-06"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-06-open-source-feature-radar-json",
           "path": "_history/work-timings/2026/2026-06-06-open-source-feature-radar.json",
           "category": "work-timing",
@@ -19012,16 +19012,16 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 2566,
+      "documents": 2572,
       "days": 7,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1003
+          "count": 1004
         },
         {
           "category": "web-search",
-          "count": 408
+          "count": 409
         },
         {
           "category": "plan",
@@ -19029,19 +19029,19 @@
         },
         {
           "category": "request-trace",
-          "count": 336
+          "count": 337
         },
         {
           "category": "work-timing",
-          "count": 257
+          "count": 258
         },
         {
           "category": "user-request",
-          "count": 121
+          "count": 122
         },
         {
           "category": "work-summary",
-          "count": 88
+          "count": 89
         },
         {
           "category": "daily-history",
@@ -19052,7 +19052,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 6479887,
+      "totalSourceBytes": 6486286,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19079,9 +19079,9 @@
       "monitorEvents": 64,
       "evidenceEvents": 31,
       "decisionEvents": 0,
-      "openSignals": 13,
+      "openSignals": 15,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-06T01:13:08.238Z",
+      "latestEventAt": "2026-06-06T01:28:41.483Z",
       "historyDays": 1
     },
     "lanes": [
@@ -19191,6 +19191,96 @@
       }
     ],
     "events": [
+      {
+        "id": "history-history-work-timings-2026-2026-06-06-desktop-dev-run-fix-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "warning",
+        "status": "work-timing",
+        "title": "2026 06 06 Desktop Dev Run Fix",
+        "detail": "{ \"task id\": \"2026 06 06 desktop dev run fix\", \"title\": \"desktop dev/run fix\", \"date\": \"2026 06 06\", \"project\": \"platform desktop app\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"reproduction\", \"label\": \"Failure reproduction\", \"status\": \"c",
+        "path": "_history/work-timings/2026/2026-06-06-desktop-dev-run-fix.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T01:28:41.483Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-06-desktop-dev-run-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "2026 06 06 request to outcome trace",
+        "detail": "2026 06 06 request to outcome trace 요청 README대로 했는데 desktop app 빌드/실행이 되지 않는 문제 해결. 원인 Tauri beforeDevCommand 가 잘못된 상대 경로를 사용했다. updater plugin이 public updater config 없이도 항상 초기화되어 internal/dev 실행을 panic으로 막았다. README에 빌드 후 실행 명령이 없었다. 산출물 platform desktop app/src tauri/tauri.conf",
+        "path": "_history/request-traces/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T01:28:41.482Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-06-desktop-dev-run-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "2026 06 06 desktop dev/run fix 작업 요약",
+        "detail": "2026 06 06 desktop dev/run fix 작업 요약 구현 tauri.conf.json 의 dev renderer path를 수정했다. public updater config가 있을 때만 updater plugin을 초기화하도록 Rust startup을 바꿨다. desktop:dev , desktop:run:internal , desktop:package:run:internal root scripts를 추가했다. macOS internal .app open helper를 추가했다. R",
+        "path": "_history/work-summaries/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T01:28:41.482Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-06-desktop-dev-run-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "warning",
+        "status": "ready",
+        "title": "2026 06 06 desktop dev/run fix 평가",
+        "detail": "2026 06 06 desktop dev/run fix 평가 평가 대상 README build/run failure fix. 완료 기준 desktop:dev 가 실제 app startup까지 진행한다. internal/dev 실행은 updater public release gate에 막히지 않는다. 빌드된 .app 을 여는 명령이 문서화되고 스크립트로 제공된다. 최종 package와 smoke가 통과한다. 현재 결과 desktop:dev : 통과. GET / 200 . desktop:run:int",
+        "path": "_history/evaluations/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+        "category": "evaluation",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T01:28:41.481Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-06-desktop-dev-run-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "needs_attention",
+        "title": "사용자 요청 요약: desktop dev/run fix",
+        "detail": "사용자 요청 요약: desktop dev/run fix 사용자는 README에 있는 대로 빌드하고 실행했지만 되지 않는다고 보고했고, 해결을 요청했다. 적용 범위 desktop app README 명령 재현. Tauri dev 실행 실패 수정. internal/dev updater startup panic 수정. 빌드된 내부 .app 실행 명령 추가.",
+        "path": "_history/user-requests/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T01:24:25.576Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-06-desktop-dev-run-fix-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "needs_attention",
+        "title": "웹 검색 기록: desktop dev/run fix",
+        "detail": "웹 검색 기록: desktop dev/run fix 목적 README 명령대로 desktop app을 빌드하거나 실행할 때 실패하는 문제를 고치기 전에, Tauri v2와 Next static export의 공식 실행/빌드 전제를 확인했다. 검색어 Tauri v2 official docs development build beforeDevCommand frontendDist devUrl Next.js official docs output export static build Tauri plugin u",
+        "path": "_history/web-searches/2026/2026-06-06-desktop-dev-run-fix.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-06",
+        "timestamp": "2026-06-06T01:24:25.572Z"
+      },
       {
         "id": "history-history-evaluations-2026-2026-06-06-eval-report-catalog-structure-ko-md",
         "sourceType": "history",
@@ -20512,21 +20602,6 @@
         "timestamp": "2026-06-05T21:59:44.773Z"
       },
       {
-        "id": "history-history-work-timings-2026-2026-06-06-open-source-agent-platform-landscape-json",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "ready",
-        "title": "2026 06 06 Open Source Agent Platform Landscape",
-        "detail": "{ \"id\": \"2026 06 06 open source agent platform landscape\", \"timezone\": \"Asia/Seoul\", \"measurement quality\": \"partial\", \"phases\": { \"name\": \"web first research\", \"status\": \"completed\", \"notes\": \"Searched broad open source agent platform, coding agent, desktop AI, workflow orchestr",
-        "path": "_history/work-timings/2026/2026-06-06-open-source-agent-platform-landscape.json",
-        "category": "work-timing",
-        "language": "unknown",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:47:17.741Z"
-      },
-      {
         "id": "history-history-evaluations-2026-2026-06-06-open-source-agent-platform-landscape-ko-md",
         "sourceType": "history",
         "signalType": "evaluation",
@@ -20555,81 +20630,6 @@
         "language": "ko",
         "date": "2026-06-06",
         "timestamp": "2026-06-05T21:47:17.741Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-06-open-source-agent-platform-landscape-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "작업 요약: 오픈소스 Agent Platform Landscape",
-        "detail": "작업 요약: 오픈소스 Agent Platform Landscape 현재 플랫폼 특징을 로컬 제품 레지스트리와 Tauri 설정에서 추출했다. 플랫폼을 \"local Agent Workspace OS / Agent Workbench\"로 볼 수 있다는 결론을 기록했다. coding agent, agent framework, workflow builder, local AI desktop, workflow orchestration, developer platform, observability/eval, sa",
-        "path": "_history/work-summaries/2026/2026-06-06-open-source-agent-platform-landscape.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:47:17.741Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-06-open-source-agent-platform-landscape-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "사용자 요청 요약: 오픈소스 Agent Platform Landscape",
-        "detail": "사용자 요청 요약: 오픈소스 Agent Platform Landscape 요약 사용자는 현재 플랫폼의 특징을 뽑아내고, 유사한 오픈소스를 매우 많이 조사해 달라고 요청했다. 해석 로컬 플랫폼이 실제로 어떤 제품 포지션과 기능 구조를 갖는지 먼저 정리한다. 단순히 몇 개 경쟁 제품을 나열하지 않고, coding agent, agent framework, workflow builder, local desktop AI app, workflow orchestration, observability까지 넓게",
-        "path": "_history/user-requests/2026/2026-06-06-open-source-agent-platform-landscape.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:47:17.740Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-06-open-source-agent-platform-landscape-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "웹 검색 기록: 오픈소스 Agent Platform Landscape",
-        "detail": "웹 검색 기록: 오픈소스 Agent Platform Landscape 목적 사용자가 현재 플랫폼의 특징을 뽑고 유사 오픈소스를 매우 많이 조사해 달라고 요청했다. 로컬 플랫폼 특징을 추출하기 전, 오픈소스/공식 문서 검색을 먼저 수행해 비교 축과 후보군을 넓혔다. 검색어 open source AI agent platform desktop app orchestration GitHub open source multi agent framework orchestration GitHub LangGraph ",
-        "path": "_history/web-searches/2026/2026-06-06-open-source-agent-platform-landscape.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:47:17.739Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "verified",
-        "status": "ready",
-        "title": "근본 개선 구조 적용 평가",
-        "detail": "근본 개선 구조 적용 평가 상태: 통과 요청 충족: 다양한 히스토리에서 반복 패턴을 상위 구조 원칙과 실행 패키지로 승격해 플랫폼 snapshot과 Product Structure UI에 적용했다. 핵심 결과: developer snapshot 기준 structural principles 6개, improvement packages 6개, fitness checks 4개. customer 안전성: customer snapshot의 fundamental improvement stats와 arrays",
-        "path": "_history/evaluations/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:38:05.813Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-06-fundamental-improvement-structure-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "요청 결과 추적",
-        "detail": "요청 결과 추적 요청: 다양한 히스토리를 보고 근본적 개선 구조를 생각해 플랫폼에 적용. 결과: fundamentalImprovementStructure collector, snapshot schema, Product Structure UI, sanitizer, tests, registry, records를 추가했다. 주요 산출물: platform desktop app/renderer/workspace monitor/scripts/lib/fundamental improvement structure",
-        "path": "_history/request-traces/2026/2026-06-06-fundamental-improvement-structure.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-06",
-        "timestamp": "2026-06-05T21:38:05.813Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -22939,9 +22939,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 8362,
-      "lineCount": 231,
-      "updatedAt": "2026-06-05T19:34:33.164Z",
+      "sizeBytes": 8558,
+      "lineCount": 237,
+      "updatedAt": "2026-06-06T01:18:26.798Z",
       "truncated": true,
       "preview": "import { spawnSync } from \"node:child_process\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport path from \"node:path\";\n\nimport { runCustomerBundleAudit } from \"./check-customer-bundle.mjs\";\nimport { checkReleaseReadiness } from \"./check-release-readiness.mjs\";\nimport { checkServiceReadiness } from \"./check-service-readiness.mjs\";\nimport { projectRoot, repoRoot, tauriRoot } from \"./desktop-pipeline/paths.mjs\";\n\nconst requiredFiles = [\n  \"package.json\",\n  \"src-tauri/tauri.conf.json\",\n  \"renderer/workspace-monitor/package.json\",\n  \"scripts/desktop-pipeline.mjs\",\n  \"scripts/desktop-pipeline/definitions.mjs\",\n  \"scripts/desktop-pipeline/runner.mjs\",\n  \"scripts/tauri-before-build-prepared.mjs\"\n];\n\nfunction main(argv = process.argv.slice(2)) {\n  const jsonOutput = argv.includes(\"--json\");\n  const report = buildDoctorReport();\n\n  if (jsonOutput) {\n    console.log(JSON.stringify(report, null, 2));\n  } else {\n    printHumanReport(report);\n  }\n\n  if (report.summary.failures > 0) {\n    process.exitCode = 1;\n  }\n}\n\nexport function buildDoctorReport() {\n  const checks = [\n    checkFile(\"Root pnpm lockfile\", path.join(repoRoot, \"pnpm-lock.yaml\")),\n    ...requiredFiles.map((relativePath",
       "previewBytes": 1200
@@ -22965,9 +22965,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 7437,
-      "lineCount": 203,
-      "updatedAt": "2026-06-06T00:43:06.213Z",
+      "sizeBytes": 7559,
+      "lineCount": 206,
+      "updatedAt": "2026-06-06T01:18:26.799Z",
       "truncated": true,
       "preview": "import {\n  macosAppArtifact,\n  macosDmgArtifact,\n  preparedTauriBuildConfig,\n  projectRoot,\n  repoRoot,\n  tauriRoot\n} from \"./paths.mjs\";\n\nexport function step(label, command, args, cwd, options = {}) {\n  return { label, command, args, cwd, ...options };\n}\n\nfunction pnpmWorkspaceStep(label, args, options = {}) {\n  return step(label, \"corepack\", [\"pnpm\", ...args], repoRoot, options);\n}\n\nconst developerSnapshotCollectStep = pnpmWorkspaceStep(\"Workspace Monitor developer snapshot collect\", [\n  \"--filter\",\n  \"workspace-monitor\",\n  \"run\",\n  \"collect\"\n]);\n\nconst macosDmgIntermediateCleanupStep = step(\n  \"Clean stale macOS DMG intermediates\",\n  \"node\",\n  [\"scripts/cleanup-macos-dmg-intermediates.mjs\"],\n  projectRoot\n);\n\nfunction tauriPreparedBuildStep(label) {\n  return pnpmWorkspaceStep(label, [\n    \"--filter\",\n    \"platform-desktop-app\",\n    \"exec\",\n    \"tauri\",\n    \"build\",\n    \"--config\",\n    preparedTauriBuildConfig\n  ]);\n}\n\nconst setupSteps = [\n  pnpmWorkspaceStep(\"Install desktop workspace dependencies\", [\n    \"--filter\",\n    \"platform-desktop-app\",\n    \"--filter\",\n    \"workspace-monitor\",\n    \"install\",\n    \"--frozen-lockfile\"\n  ]),\n  pnpmWorkspaceStep(\"Install Workspace Monitor Pl",
       "previewBytes": 1200
@@ -22996,6 +22996,19 @@
       "updatedAt": "2026-06-04T18:39:03.382Z",
       "truncated": true,
       "preview": "import { spawnSync } from \"node:child_process\";\nimport { existsSync } from \"node:fs\";\n\nimport { helpText, pipelines } from \"./definitions.mjs\";\nimport { tauriRoot } from \"./paths.mjs\";\n\nexport function main(argv = process.argv.slice(2)) {\n  const mode = argv.find((arg) => !arg.startsWith(\"--\")) ?? \"help\";\n  const dryRun = argv.includes(\"--dry-run\");\n\n  if (mode === \"help\" || mode === \"--help\" || mode === \"-h\") {\n    printHelp();\n    return;\n  }\n\n  const pipeline = pipelines[mode];\n  if (!pipeline) {\n    console.error(`[desktop-pipeline] Unknown pipeline: ${mode}`);\n    printHelp();\n    process.exit(1);\n  }\n\n  console.log(`[desktop-pipeline] ${pipeline.description}`);\n  console.log(`[desktop-pipeline] mode=${mode} dryRun=${dryRun ? \"true\" : \"false\"}`);\n\n  if (!existsSync(tauriRoot)) {\n    console.error(`[desktop-pipeline] Missing Tauri root: ${tauriRoot}`);\n    process.exit(1);\n  }\n\n  for (const currentStep of pipeline.steps) {\n    runStep(currentStep, dryRun);\n  }\n\n  if (pipeline.artifactHints?.length) {\n    console.log(\"[desktop-pipeline] Expected local/internal artifacts:\");\n    for (const artifact of pipeline.artifactHints) {\n      console.log(`  - ${artifact}`);\n    }\n  }\n\n  if",
+      "previewBytes": 1200
+    },
+    {
+      "id": "platform-desktop-app-scripts-open-internal-app-mjs",
+      "path": "platform-desktop-app/scripts/open-internal-app.mjs",
+      "project": "platform-desktop-app",
+      "language": "javascript",
+      "extension": "mjs",
+      "sizeBytes": 1530,
+      "lineCount": 52,
+      "updatedAt": "2026-06-06T01:18:26.797Z",
+      "truncated": true,
+      "preview": "import { spawnSync } from \"node:child_process\";\nimport { existsSync } from \"node:fs\";\n\nimport { macosAppArtifact, macosDmgArtifact, repoRoot } from \"./desktop-pipeline/paths.mjs\";\n\nconst dryRun = process.argv.includes(\"--dry-run\");\nconst checkOnly = process.argv.includes(\"--check\");\n\nfunction main() {\n  if (process.platform !== \"darwin\") {\n    fail(\"run:internal currently opens the macOS .app artifact only. Use the platform-specific bundle produced by package:internal on this OS.\");\n  }\n\n  if (!existsSync(macosAppArtifact)) {\n    fail(`Missing internal app artifact. Run \\`corepack pnpm run desktop:package:internal\\` first. Expected: ${macosAppArtifact}`);\n  }\n\n  const report = {\n    status: dryRun || checkOnly ? \"internal_app_open_ready\" : \"internal_app_opened\",\n    app: macosAppArtifact,\n    dmg: existsSync(macosDmgArtifact) ? macosDmgArtifact : null,\n    command: `open -n ${JSON.stringify(macosAppArtifact)}`\n  };\n\n  if (dryRun || checkOnly) {\n    console.log(JSON.stringify(report, null, 2));\n    return;\n  }\n\n  const result = spawnSync(\"open\", [\"-n\", macosAppArtifact], {\n    cwd: repoRoot,\n    encoding: \"utf8\",\n    shell: false\n  });\n\n  if (result.error) {\n    fail(`Failed to star",
       "previewBytes": 1200
     },
     {
@@ -23043,11 +23056,11 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 7380,
-      "lineCount": 159,
-      "updatedAt": "2026-06-05T22:47:17.005Z",
+      "sizeBytes": 8173,
+      "lineCount": 173,
+      "updatedAt": "2026-06-06T01:18:26.798Z",
       "truncated": true,
-      "preview": "import { readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\n\nexport const desktopBuildPipelineRequiredFiles = [\n  \"scripts/desktop-pipeline.mjs\",\n  \"scripts/desktop-pipeline/paths.mjs\",\n  \"scripts/desktop-pipeline/definitions.mjs\",\n  \"scripts/desktop-pipeline/runner.mjs\",\n  \"scripts/tauri-before-build-prepared.mjs\",\n  \"scripts/public-release-config.mjs\",\n  \"scripts/public-release-dev-env.mjs\",\n  \"scripts/public-release-build.mjs\",\n  \"scripts/create-updater-manifest.mjs\",\n  \"scripts/desktop-doctor.mjs\"\n];\n\nexport function checkDesktopBuildPipeline({ root, readJson }) {\n  const failures = [];\n  const pkg = readJson(\"package.json\");\n  const rootPkg = readJson(\"../package.json\");\n  const workspaceMonitorPkg = readJson(\"renderer/workspace-monitor/package.json\");\n\n  requireScripts(pkg, [\"check\", \"test\", \"verify\", \"tauri:dev\", \"tauri:build\"], \"package.json\", failures);\n  requireScripts(pkg, [\"runtime:contract\"], \"package.json\", failures);\n  requireScripts(pkg, [\"setup\", \"verify:quick\", \"package:internal\", \"package:public\", \"deploy:public:report\", \"pipeline:dry-run\"], \"package.json\", failures);\n  requireScripts(pkg, [\"customer-bundle:audit\", \"release:preflight\", \"release:pref",
+      "preview": "import { readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\n\nexport const desktopBuildPipelineRequiredFiles = [\n  \"scripts/desktop-pipeline.mjs\",\n  \"scripts/desktop-pipeline/paths.mjs\",\n  \"scripts/desktop-pipeline/definitions.mjs\",\n  \"scripts/desktop-pipeline/runner.mjs\",\n  \"scripts/tauri-before-build-prepared.mjs\",\n  \"scripts/public-release-config.mjs\",\n  \"scripts/public-release-dev-env.mjs\",\n  \"scripts/public-release-build.mjs\",\n  \"scripts/create-updater-manifest.mjs\",\n  \"scripts/desktop-doctor.mjs\",\n  \"scripts/open-internal-app.mjs\"\n];\n\nexport function checkDesktopBuildPipeline({ root, readJson }) {\n  const failures = [];\n  const pkg = readJson(\"package.json\");\n  const rootPkg = readJson(\"../package.json\");\n  const workspaceMonitorPkg = readJson(\"renderer/workspace-monitor/package.json\");\n\n  requireScripts(pkg, [\"check\", \"test\", \"verify\", \"tauri:dev\", \"tauri:build\"], \"package.json\", failures);\n  requireScripts(pkg, [\"runtime:contract\"], \"package.json\", failures);\n  requireScripts(pkg, [\"setup\", \"verify:quick\", \"package:internal\", \"run:internal\", \"package:public\", \"deploy:public:report\", \"pipeline:dry-run\"], \"package.json\", failures);\n  requireScripts(pkg, [\"custome",
       "previewBytes": 1200
     },
     {
@@ -23121,11 +23134,11 @@
       "project": "platform-desktop-app",
       "language": "json",
       "extension": "json",
-      "sizeBytes": 2007,
+      "sizeBytes": 2004,
       "lineCount": 66,
-      "updatedAt": "2026-06-05T20:50:34.317Z",
+      "updatedAt": "2026-06-06T01:18:26.796Z",
       "truncated": true,
-      "preview": "{\n  \"$schema\": \"https://schema.tauri.app/config/2\",\n  \"productName\": \"Agent Workspace Platform\",\n  \"version\": \"0.1.0\",\n  \"identifier\": \"com.personalagentplatform.desktop\",\n  \"build\": {\n    \"beforeBuildCommand\": \"corepack pnpm run renderer:build\",\n    \"beforeDevCommand\": \"corepack pnpm --dir ../renderer/workspace-monitor run dev\",\n    \"devUrl\": \"http://localhost:3000\",\n    \"frontendDist\": \"../renderer/workspace-monitor/out\"\n  },\n  \"app\": {\n    \"withGlobalTauri\": true,\n    \"windows\": [\n      {\n        \"label\": \"main\",\n        \"title\": \"Agent Workspace Platform\",\n        \"width\": 1440,\n        \"height\": 900,\n        \"minWidth\": 1280,\n        \"minHeight\": 800,\n        \"hiddenTitle\": true,\n        \"titleBarStyle\": \"Transparent\",\n        \"backgroundColor\": \"#0f1115\",\n        \"resizable\": true,\n        \"fullscreen\": false\n      }\n    ],\n    \"security\": {\n      \"csp\": null\n    }\n  },\n  \"bundle\": {\n    \"active\": true,\n    \"targets\": [\n      \"app\",\n      \"dmg\",\n      \"msi\",\n      \"nsis\"\n    ],\n    \"resources\": {\n      \"../runtime-contracts/installer-shell-runtime-contract.json\": \"runtime-contracts/installer-shell-runtime-contract.json\",\n      \"../runtime-contracts/installer-shell-bootstrap.k",
+      "preview": "{\n  \"$schema\": \"https://schema.tauri.app/config/2\",\n  \"productName\": \"Agent Workspace Platform\",\n  \"version\": \"0.1.0\",\n  \"identifier\": \"com.personalagentplatform.desktop\",\n  \"build\": {\n    \"beforeBuildCommand\": \"corepack pnpm run renderer:build\",\n    \"beforeDevCommand\": \"corepack pnpm --dir renderer/workspace-monitor run dev\",\n    \"devUrl\": \"http://localhost:3000\",\n    \"frontendDist\": \"../renderer/workspace-monitor/out\"\n  },\n  \"app\": {\n    \"withGlobalTauri\": true,\n    \"windows\": [\n      {\n        \"label\": \"main\",\n        \"title\": \"Agent Workspace Platform\",\n        \"width\": 1440,\n        \"height\": 900,\n        \"minWidth\": 1280,\n        \"minHeight\": 800,\n        \"hiddenTitle\": true,\n        \"titleBarStyle\": \"Transparent\",\n        \"backgroundColor\": \"#0f1115\",\n        \"resizable\": true,\n        \"fullscreen\": false\n      }\n    ],\n    \"security\": {\n      \"csp\": null\n    }\n  },\n  \"bundle\": {\n    \"active\": true,\n    \"targets\": [\n      \"app\",\n      \"dmg\",\n      \"msi\",\n      \"nsis\"\n    ],\n    \"resources\": {\n      \"../runtime-contracts/installer-shell-runtime-contract.json\": \"runtime-contracts/installer-shell-runtime-contract.json\",\n      \"../runtime-contracts/installer-shell-bootstrap.ko.m",
       "previewBytes": 1200
     },
     {
@@ -23160,9 +23173,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 57155,
-      "lineCount": 1268,
-      "updatedAt": "2026-06-06T01:07:38.765Z",
+      "sizeBytes": 57496,
+      "lineCount": 1275,
+      "updatedAt": "2026-06-06T01:18:26.800Z",
       "truncated": true,
       "preview": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/paths.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/definitions.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts/desktop-pipeline/runner.mjs\")), true);\n  assert.equal(existsSync(join(root, \"scripts",
       "previewBytes": 1200
@@ -23749,7 +23762,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 78,
+        "documentCount": 74,
         "sourceFileCount": 5
       },
       {
@@ -23881,7 +23894,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-src-tauri-src-lib-rs",
         "label": "Large source surface",
-        "signal": "10,300 lines in platform-desktop-app/src-tauri/src/lib.rs",
+        "signal": "10,312 lines in platform-desktop-app/src-tauri/src/lib.rs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits.",
         "priority": "high",
@@ -23890,7 +23903,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,268 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,275 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -23929,16 +23942,16 @@
         "path": "platform-desktop-app/src-tauri/src/lib.rs",
         "project": "platform-desktop-app",
         "language": "rust",
-        "lineCount": 10300,
-        "sizeBytes": 343625,
+        "lineCount": 10312,
+        "sizeBytes": 343893,
         "recommendation": "Move runtime bridge concerns into Rust modules for sessions, task runs, support bundles, and payload audits."
       },
       {
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1268,
-        "sizeBytes": 57155,
+        "lineCount": 1275,
+        "sizeBytes": 57496,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
@@ -27577,13 +27590,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 3658,
+      "sourceDocuments": 3670,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-06T01:13:08.238Z"
+      "latestInsightAt": "2026-06-06T01:30:31.312Z"
     },
     "inferenceStages": [
       {
@@ -27651,27 +27664,27 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 421,
+        "signalCount": 427,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 140
+            "count": 141
           },
           {
             "category": "project-spec",
-            "count": 129
+            "count": 130
           },
           {
             "category": "request-trace",
-            "count": 65
+            "count": 66
           },
           {
             "category": "user-request",
-            "count": 38
+            "count": 39
           },
           {
             "category": "work-summary",
-            "count": 27
+            "count": 28
           },
           {
             "category": "plan",
@@ -27679,7 +27692,7 @@
           },
           {
             "category": "web-search",
-            "count": 5
+            "count": 6
           },
           {
             "category": "daily-history",
@@ -27693,20 +27706,20 @@
         "evidencePaths": [
           "_history/evaluations/2026/2026-06-06-selectable-default-settings.ko.md",
           "_history/evaluations/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+          "_history/evaluations/2026/2026-06-06-desktop-dev-run-fix.ko.md",
           "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails.ko.md",
           "_history/request-traces/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-          "_history/evaluations/2026/2026-06-06-button-tonal-hierarchy.ko.md",
-          "_history/request-traces/2026/2026-06-05-source-workbench-control-primitives.ko.md"
+          "_history/evaluations/2026/2026-06-06-button-tonal-hierarchy.ko.md"
         ],
         "evidenceTitles": [
           "최종 평가",
           "평가: 소스 워크벤치 컨트롤 프리미티브",
+          "2026 06 06 desktop dev/run fix 평가",
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장",
-          "최종 평가",
-          "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브"
+          "최종 평가"
         ],
-        "latestEvidenceAt": "2026-06-06T01:13:08.238Z"
+        "latestEvidenceAt": "2026-06-06T01:30:31.312Z"
       },
       {
         "id": "web-research-to-spec",
@@ -27720,11 +27733,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1690,
+        "signalCount": 1692,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 471
+            "count": 472
           },
           {
             "category": "evaluation",
@@ -27732,7 +27745,7 @@
           },
           {
             "category": "web-search",
-            "count": 409
+            "count": 410
           },
           {
             "category": "plan",
@@ -27771,7 +27784,7 @@
           "2026 05 31 작업 모드 라우팅 계획 기록",
           "계획 히스토리: 코딩 조사 출처 다양성 강화"
         ],
-        "latestEvidenceAt": "2026-06-06T01:13:08.238Z"
+        "latestEvidenceAt": "2026-06-06T01:24:25.575Z"
       },
       {
         "id": "large-scope-slicing",
@@ -27858,11 +27871,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 647,
+        "signalCount": 652,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 258
+            "count": 262
           },
           {
             "category": "evaluation",
@@ -27874,7 +27887,7 @@
           },
           {
             "category": "work-summary",
-            "count": 32
+            "count": 33
           },
           {
             "category": "plan",
@@ -27917,7 +27930,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "계획 기록: 프로세스/파이프 누수 방지"
         ],
-        "latestEvidenceAt": "2026-06-06T01:13:08.236Z"
+        "latestEvidenceAt": "2026-06-06T01:30:31.312Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -27931,15 +27944,15 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1426,
+        "signalCount": 1428,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 611
+            "count": 612
           },
           {
             "category": "evaluation",
-            "count": 511
+            "count": 512
           },
           {
             "category": "user-request",
@@ -27990,7 +28003,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-06T01:09:26.208Z"
+        "latestEvidenceAt": "2026-06-06T01:30:31.312Z"
       },
       {
         "id": "release-blocker-gate",
@@ -28004,15 +28017,15 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 111,
+        "signalCount": 119,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 38
+            "count": 43
           },
           {
             "category": "evaluation",
-            "count": 27
+            "count": 28
           },
           {
             "category": "web-search",
@@ -28024,11 +28037,11 @@
           },
           {
             "category": "request-trace",
-            "count": 6
+            "count": 7
           },
           {
             "category": "work-summary",
-            "count": 6
+            "count": 7
           },
           {
             "category": "work-timing",
@@ -28059,21 +28072,21 @@
           "Public Release Updater Automation Spec",
           "2026 06 06 평가: Public Release Updater Automation"
         ],
-        "latestEvidenceAt": "2026-06-06T00:06:23.551Z"
+        "latestEvidenceAt": "2026-06-06T01:30:31.312Z"
       }
     ]
   },
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 3658,
+      "sourceDocuments": 3670,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-06T01:13:08.238Z"
+      "latestInsightAt": "2026-06-06T01:30:31.312Z"
     },
     "operatingModel": [
       {
@@ -28131,13 +28144,13 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3097,
+        "signalCount": 3105,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1690
+            "signalCount": 1692
           },
           {
             "id": "large-scope-slicing",
@@ -28149,7 +28162,7 @@
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 421
+            "signalCount": 427
           }
         ],
         "missingPatternIds": [],
@@ -28177,7 +28190,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T01:13:08.238Z",
+        "latestEvidenceAt": "2026-06-06T01:30:31.312Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -28206,19 +28219,19 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 758,
+        "signalCount": 771,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 647
+            "signalCount": 652
           },
           {
             "id": "release-blocker-gate",
             "label": "공개 릴리스 blocker를 fail-fast gate로 유지",
             "signalStrength": "high",
-            "signalCount": 111
+            "signalCount": 119
           }
         ],
         "missingPatternIds": [],
@@ -28246,7 +28259,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-06T01:13:08.236Z",
+        "latestEvidenceAt": "2026-06-06T01:30:31.312Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -28275,13 +28288,13 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2412,
+        "signalCount": 2414,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1426
+            "signalCount": 1428
           },
           {
             "id": "large-scope-slicing",
@@ -28315,7 +28328,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-06T01:13:08.238Z",
+        "latestEvidenceAt": "2026-06-06T01:30:31.312Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -28344,29 +28357,29 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 532,
+        "signalCount": 546,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 421
+            "signalCount": 427
           },
           {
             "id": "release-blocker-gate",
             "label": "공개 릴리스 blocker를 fail-fast gate로 유지",
             "signalStrength": "high",
-            "signalCount": 111
+            "signalCount": 119
           }
         ],
         "missingPatternIds": [],
         "evidencePaths": [
           "_history/evaluations/2026/2026-06-06-selectable-default-settings.ko.md",
           "_history/evaluations/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+          "_history/evaluations/2026/2026-06-06-desktop-dev-run-fix.ko.md",
           "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails.ko.md",
           "_history/request-traces/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
           "_history/evaluations/2026/2026-06-06-button-tonal-hierarchy.ko.md",
-          "_history/request-traces/2026/2026-06-05-source-workbench-control-primitives.ko.md",
           "_history/request-traces/2026/2026-06-06-public-release-repeat-retry.ko.md",
           "_history/work-summaries/2026/2026-06-06-public-release-developer-repatch.ko.md",
           "_history/request-traces/2026/2026-06-06-public-release-developer-repatch.ko.md",
@@ -28375,16 +28388,16 @@
         "evidenceTitles": [
           "최종 평가",
           "평가: 소스 워크벤치 컨트롤 프리미티브",
+          "2026 06 06 desktop dev/run fix 평가",
           "평가: Monitor 성능 가드레일 완성",
           "요청 결과 추적: Workbench lazy boundary 확장",
-          "요청 결과 추적: 소스 워크벤치 컨트롤 프리미티브",
           "2026 06 06 Request Trace: Public Release Repeat Retry",
           "2026 06 06 Work Summary: Public Release Developer Repatch",
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch",
           "Public Release Updater Automation Spec"
         ],
-        "latestEvidenceAt": "2026-06-06T01:13:08.238Z",
+        "latestEvidenceAt": "2026-06-06T01:30:31.312Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -28413,7 +28426,7 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 2676,
+        "signalCount": 2678,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
@@ -28425,7 +28438,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1690
+            "signalCount": 1692
           }
         ],
         "missingPatternIds": [],
@@ -28453,7 +28466,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T01:13:08.238Z",
+        "latestEvidenceAt": "2026-06-06T01:24:25.575Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -28482,19 +28495,19 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 1801,
+        "signalCount": 1811,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
             "label": "공개 릴리스 blocker를 fail-fast gate로 유지",
             "signalStrength": "high",
-            "signalCount": 111
+            "signalCount": 119
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1690
+            "signalCount": 1692
           }
         ],
         "missingPatternIds": [],
@@ -28522,7 +28535,7 @@
           "웹 검색 기록: 마케팅/설문/정량 근거 조사",
           "웹 검색 기록: 스택별 코딩 조사"
         ],
-        "latestEvidenceAt": "2026-06-06T01:13:08.238Z",
+        "latestEvidenceAt": "2026-06-06T01:30:31.312Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",
@@ -28652,10 +28665,10 @@
         "evidencePaths": [
           "_history/evaluations/2026/2026-06-06-selectable-default-settings.ko.md",
           "_history/evaluations/2026/2026-06-05-source-workbench-control-primitives.ko.md",
+          "_history/evaluations/2026/2026-06-06-desktop-dev-run-fix.ko.md",
           "_history/evaluations/2026/2026-06-06-monitor-performance-guardrails.ko.md",
           "_history/request-traces/2026/2026-06-06-workbench-lazy-boundary-expansion.ko.md",
-          "_history/evaluations/2026/2026-06-06-button-tonal-hierarchy.ko.md",
-          "_history/request-traces/2026/2026-06-05-source-workbench-control-primitives.ko.md"
+          "_history/evaluations/2026/2026-06-06-button-tonal-hierarchy.ko.md"
         ]
       },
       {
