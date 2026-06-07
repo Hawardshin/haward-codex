@@ -1,0 +1,22 @@
+{
+  "id": "2026-06-08-model-and-scene-split",
+  "date": "2026-06-08",
+  "resource_risk_occurred": true,
+  "touched_runtime_resources": [
+    "Next.js production build processes",
+    "customer static export audit",
+    "Three.js WebGL scene lifecycle source"
+  ],
+  "observations": [
+    "Running two Next.js builds in parallel caused a build lock collision.",
+    "The renderer build passed when retried serially.",
+    "The extracted Three.js hook keeps the existing cleanup and dispose lifecycle in one file."
+  ],
+  "validation": [
+    "corepack pnpm --filter workspace-monitor test",
+    "corepack pnpm --filter workspace-monitor run check",
+    "corepack pnpm --filter workspace-monitor run build",
+    "corepack pnpm --filter platform-desktop-app run renderer:build"
+  ],
+  "followup_rule": "Do not parallelize Next.js production builds that share renderer/workspace-monitor build state."
+}

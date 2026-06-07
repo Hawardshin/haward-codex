@@ -1,0 +1,43 @@
+{
+  "id": "2026-06-08-model-and-scene-split",
+  "date": "2026-06-08",
+  "request_summary": "Implement deferred structural cleanup for the desktop platform slice.",
+  "checked_items": [
+    {
+      "item": "web_first_intake",
+      "status": "done",
+      "evidence": "_history/web-searches/2026/2026-06-08-model-and-scene-split.ko.md"
+    },
+    {
+      "item": "requirements_and_spec_records",
+      "status": "done",
+      "evidence": "_requirements/changes/2026-06-08-model-and-scene-split.ko.md"
+    },
+    {
+      "item": "type_model_split",
+      "status": "done",
+      "evidence": "_specs/workspace-platform/2026-06-08-model-and-scene-split/validation.ko.md"
+    },
+    {
+      "item": "tool_scene_hook_split",
+      "status": "done",
+      "evidence": "platform-desktop-app/renderer/workspace-monitor/components/workbench/tool-studio/useToolAgentScene.ts"
+    },
+    {
+      "item": "validation",
+      "status": "done",
+      "evidence": "_specs/workspace-platform/2026-06-08-model-and-scene-split/validation.ko.md"
+    },
+    {
+      "item": "remaining_work_disclosure",
+      "status": "done",
+      "evidence": "MonitorShell.tsx and ToolStudioPanel.tsx remain oversized."
+    }
+  ],
+  "known_gaps": [
+    "MonitorShell.tsx remains above the 500-line target.",
+    "ToolStudioPanel.tsx remains above the 500-line target.",
+    "Public release readiness still needs external signing and clean-machine packaging gates."
+  ],
+  "closeout_status": "ready_for_commit"
+}
