@@ -1,0 +1,62 @@
+{
+  "task_id": "2026-06-08-product-domain-gap-clarity",
+  "title": "Product domain gap clarity",
+  "work_mode": "governance",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "duration_seconds": 360,
+      "notes": "Checked official/reference docs for desktop IA, GitHub Desktop, and VS Code workbench patterns."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "duration_seconds": 720,
+      "notes": "Created requirements, spec, plan, tasks, validation, and traceability artifacts."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "duration_seconds": 2400,
+      "notes": "Added product domain registry, collector/type/stats extensions, UI board, CSS, source map, and tests."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "duration_seconds": 1200,
+      "notes": "Ran config contract, check, tests, customer build, and Browser smoke; fixed the hidden-target verification path."
+    },
+    {
+      "phase_id": "close_out",
+      "label": "Close-out records",
+      "status": "completed",
+      "duration_seconds": 600,
+      "notes": "Updated task/validation/traceability and created omission/resource/evaluation history records."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "implementation",
+    "bottleneck_notes": "The cross-cutting cost came from adding a new product contract through config, collector, snapshot type, UI, CSS, generated snapshots, and readiness tests.",
+    "improvement_candidates": [
+      "Move more Product Structure boards into small domain components.",
+      "Create a typed registry-to-panel generator for future ownership maps.",
+      "Continue reducing MonitorShell domain mixing."
+    ]
+  },
+  "evidence": [
+    "platform-desktop-app/configs/product-domain-ownership-registry.json",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/product-architecture/DomainOwnershipBoard.tsx",
+    "platform-desktop-app/specs/2026-06-08-product-domain-gap-clarity/",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+    "corepack pnpm --dir platform-desktop-app test",
+    "corepack pnpm --dir platform-desktop-app run renderer:build",
+    "Browser smoke: http://127.0.0.1:3053/#home-depth-product-structure"
+  ]
+}
+

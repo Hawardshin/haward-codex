@@ -1,0 +1,109 @@
+{
+  "schema_version": "2026-06-08",
+  "work_mode": "governance",
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-08-product-domain-gap-clarity.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-08-product-domain-gap-clarity.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/changes/2026-06-08-product-domain-gap-clarity.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-08-product-domain-gap-clarity.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-08-product-domain-gap-clarity/"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-08-product-domain-gap-clarity.ko.md",
+    "_history/web-searches/2026/2026-06-08-product-domain-gap-clarity.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-08-product-domain-gap-clarity.ko.md",
+    "platform-desktop-app/specs/2026-06-08-product-domain-gap-clarity/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-08-product-domain-gap-clarity.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-08-product-domain-gap-clarity.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-08-product-domain-gap-clarity.json"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-08-product-domain-gap-clarity.json"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-08-product-domain-gap-clarity.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-08-product-domain-gap-clarity.ko.md"
+  ],
+  "installation_occurred": false,
+  "validation": {
+    "config_contract": "passed: PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-domain-ownership-registry.json",
+    "workspace_monitor_check": "passed: corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+    "targeted_node_tests": "passed: node --test renderer/workspace-monitor/tests/collector.test.mjs tests/readiness.test.mjs",
+    "platform_desktop_tests": "passed: corepack pnpm --dir platform-desktop-app test",
+    "platform_desktop_renderer_build": "passed: corepack pnpm --dir platform-desktop-app run renderer:build",
+    "browser_smoke": "passed: Browser opened http://127.0.0.1:3053/#home-depth-product-structure; domain board visible; gap board visible; 7 domain cards; 7 gap cards; console errors 0; mobile 390 width overflow 0",
+    "diff_check": "passed: git -C platform-desktop-app diff --check && git diff --check"
+  },
+  "initial_instruction": "구조적 개선점과 기획적 모든 허점을 찾아 각 기능이 명확한 영역에 들어가도록 하라는 요청.",
+  "result_summary": "Added a product domain ownership registry, planning gap audit snapshot fields, Product Structure domain/gap board, stats, generated snapshots, and readiness coverage so workspace tracker and agent/tool operations have explicit areas and open gaps remain visible.",
+  "changed_files": [
+    "platform-desktop-app/configs/product-domain-ownership-registry.json",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/lib/product-feature-architecture.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/product-architecture/DomainOwnershipBoard.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/scripts/readiness/source-structure.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs",
+    "platform-desktop-app/specs/2026-06-08-product-domain-gap-clarity/",
+    "_history/evaluations/2026/2026-06-08-product-domain-gap-clarity-evaluation-input.json"
+  ],
+  "verification": [
+    "passed: check-config-contract",
+    "passed: workspace-monitor check",
+    "passed: targeted node tests",
+    "passed: platform-desktop-app test",
+    "passed: renderer:build and customer-bundle audit",
+    "passed: Browser smoke desktop/mobile",
+    "passed: final git diff --check"
+  ],
+  "references_checked": [
+    "GitHub Desktop documentation: https://docs.github.com/en/desktop",
+    "Visual Studio Code UX Guidelines: https://code.visualstudio.com/api/ux-guidelines/overview",
+    "Local product feature registry",
+    "Local workspace tracker product split registry",
+    "Local product gap registry"
+  ],
+  "grounding_checks": [
+    "Web-first source record exists.",
+    "Self-documenting config contract passed.",
+    "Readiness tests assert registry, collector, and UI tokens.",
+    "Browser smoke verified visible target, console error count, and mobile overflow.",
+    "Open gaps remain explicit in registry and UI."
+  ],
+  "known_gaps": [],
+  "explicit_open_planning_gaps_recorded": [
+    "native_git_workbench_user_path",
+    "workspace_import_real_actions",
+    "agent_tool_peer_app_scaffold",
+    "terminal_adapter_first_run_recovery",
+    "tool_studio_legacy_file_boundary",
+    "monitor_shell_domain_boundary",
+    "current_work_report_data_contract"
+  ],
+  "improvement_ideas": [
+    "Implement real open/clone/create Git workspace actions.",
+    "Scaffold agent-tool-desktop-app as a separate Git-backed desktop product.",
+    "Add terminal first-run diagnostics that compare configured and actually runnable adapter state.",
+    "Continue splitting MonitorShell by product domain."
+  ]
+}

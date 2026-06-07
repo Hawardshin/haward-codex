@@ -1,0 +1,142 @@
+{
+  "task": "product domain gap clarity",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "clear-domain-ownership",
+      "description": "Every major desktop function must map to a clear area, owner product, section, core functions, and exclusions.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/product-domain-ownership-registry.json",
+        "platform-desktop-app/renderer/workspace-monitor/scripts/lib/product-feature-architecture.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts"
+      ]
+    },
+    {
+      "item_id": "planning-gaps-visible",
+      "description": "Structural and planning gaps must remain visible instead of being hidden behind completed feature cards.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/product-domain-ownership-registry.json",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/product-architecture/DomainOwnershipBoard.tsx",
+        "platform-desktop-app/tests/readiness.test.mjs"
+      ]
+    },
+    {
+      "item_id": "workspace-vs-agent-tool-boundary",
+      "description": "Workspace tracker functions and agent/tool operations must be separated into their owning areas.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/product-domain-ownership-registry.json",
+        "platform-desktop-app/configs/workspace-tracker-product-split-registry.json"
+      ]
+    },
+    {
+      "item_id": "ui-surface",
+      "description": "The Product Structure screen must show the domain ownership map and open planning gaps.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/features/product-architecture/DomainOwnershipBoard.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+        "Browser smoke: http://127.0.0.1:3053/#home-depth-product-structure"
+      ]
+    },
+    {
+      "item_id": "validation-and-records",
+      "description": "Meaningful product structure work must leave requirements, specs, validation, trace, summary, omission, resource, and evaluation records.",
+      "source": "AGENTS.md repository instructions",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/changes/2026-06-08-product-domain-gap-clarity.ko.md",
+        "platform-desktop-app/docs/requirements/2026-06-08-product-domain-gap-clarity.ko.md",
+        "platform-desktop-app/specs/2026-06-08-product-domain-gap-clarity/",
+        "_history/evaluations/2026/2026-06-08-product-domain-gap-clarity-evaluation-input.json"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/configs/product-domain-ownership-registry.json",
+      "purpose": "Self-documenting domain ownership and planning gap contract",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/features/product-architecture/DomainOwnershipBoard.tsx",
+      "purpose": "Visible Product Structure board",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-08-product-domain-gap-clarity/spec.ko.md",
+      "purpose": "Project spec",
+      "required": true
+    },
+    {
+      "path": "_history/web-searches/2026/2026-06-08-product-domain-gap-clarity.ko.md",
+      "purpose": "Web-first intake record",
+      "required": true
+    },
+    {
+      "path": "_history/evaluations/2026/2026-06-08-product-domain-gap-clarity-evaluation-input.json",
+      "purpose": "Close-out evaluator input",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-contract",
+      "description": "New config is self-documenting.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-domain-ownership-registry.json"
+      ]
+    },
+    {
+      "check_id": "workspace-monitor-check",
+      "description": "Workspace Monitor typecheck and UI contract checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check"
+      ]
+    },
+    {
+      "check_id": "desktop-tests-build",
+      "description": "Platform tests and customer renderer build pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app test",
+        "corepack pnpm --dir platform-desktop-app run renderer:build"
+      ]
+    },
+    {
+      "check_id": "browser-smoke",
+      "description": "Product Structure target visibly renders domain ownership and planning gap boards.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "desktop: domain board visible, gap board visible, domain cards 7, gap cards 7, console error 0",
+        "mobile 390x844: document width 390, overflow item 0"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "Open P0 gaps remain intentionally visible: native_git_workbench_user_path, workspace_import_real_actions, agent_tool_peer_app_scaffold, terminal_adapter_first_run_recovery.",
+    "MonitorShell component boundary remains a P1 structural gap.",
+    "This slice does not implement the separate agent-tool-desktop-app scaffold."
+  ],
+  "notes": [
+    "The omission guard covers domain ownership and planning gap visibility, not closure of every gap."
+  ]
+}
+
