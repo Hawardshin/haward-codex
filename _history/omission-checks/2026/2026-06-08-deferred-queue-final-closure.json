@@ -1,0 +1,55 @@
+{
+  "task": "deferred queue final closure",
+  "date": "2026-06-08",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "clarification-queue",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/ClarificationQueuePanel.tsx"
+      ]
+    },
+    {
+      "item_id": "monitor-shell-componentization",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/features/UnifiedOpsPanel.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+      ]
+    },
+    {
+      "item_id": "mode-tuning-backlog",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/mode-selections/2026/2026-06-08-work-mode-usage-tuning-review.ko.md",
+        "_ops/backlog/deferred-improvements.ko.md"
+      ]
+    },
+    {
+      "item_id": "external-release-gates",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_ops/backlog/deferred-improvements.ko.md",
+        "_specs/workspace-platform/2026-06-08-deferred-queue-final-closure/validation.ko.md"
+      ]
+    }
+  ],
+  "known_remaining_items": [
+    {
+      "item_id": "typescript-file-size-remediation",
+      "status": "structural_pressure",
+      "reason": "Several legacy TypeScript files remain above 500 lines; this is not falsely marked complete."
+    },
+    {
+      "item_id": "public-release-signing",
+      "status": "blocked_external_gate",
+      "reason": "Requires Developer ID/notarization credentials and external clean-machine or Windows host validation."
+    }
+  ]
+}

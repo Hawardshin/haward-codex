@@ -19,12 +19,15 @@
       "title": "Continue extracting MonitorShell sections into smaller files",
       "reason": "The user wants Rust and TypeScript files to stay under roughly 500 lines where feasible; this broader refactor needs separate safe slices.",
       "owner_project": "platform-desktop-app",
-      "status": "advanced",
+      "status": "completed_current_deferred_slice",
       "completed_artifacts": [
         "platform-desktop-app/renderer/workspace-monitor/tests/source-editor-templates.test.mjs",
-        "platform-desktop-app/renderer/workspace-monitor/tests/model-routing-controls.test.mjs"
+        "platform-desktop-app/renderer/workspace-monitor/tests/model-routing-controls.test.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/ClarificationQueuePanel.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/UnifiedOpsPanel.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
       ],
-      "remaining_note": "MonitorShell.tsx remains a legacy oversized shell; this slice aligned tests with already extracted provider/source-load modules and kept new workspace UI in small feature components."
+      "remaining_note": "MonitorShell.tsx remains a legacy oversized shell and is tracked as structural pressure, not as an open deferred feature queue. Rust lib_parts are currently below 500 lines; several TypeScript legacy files remain above 500 lines and require safe future refactor slices."
     },
     {
       "id": "agent-tool-desktop-app-internals",
