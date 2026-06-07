@@ -1,0 +1,36 @@
+{
+  "task": "terminal workspace continuation",
+  "date": "2026-06-08",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes_estimate": 5,
+      "notes": "Checked Git worktree, Tauri shell, and xterm.js official references before implementation."
+    },
+    {
+      "phase": "source_inventory_and_specs",
+      "duration_minutes_estimate": 20,
+      "notes": "Inspected changed surfaces, created project requirements/spec artifacts, and recorded request/search summaries."
+    },
+    {
+      "phase": "implementation_slices",
+      "duration_minutes_estimate": 95,
+      "notes": "Split terminal, Git, Rust provider/service readiness, AWP worktree diagnostics, AgentBuilder, and source editor controller surfaces."
+    },
+    {
+      "phase": "verification",
+      "duration_minutes_estimate": 35,
+      "notes": "Ran renderer check, platform tests, cargo check, renderer build, AWP doctor smoke, and Browser smoke."
+    },
+    {
+      "phase": "closeout_records",
+      "duration_minutes_estimate": 25,
+      "notes": "Updated validation/spec traces and generated omission/resource/evaluation records."
+    }
+  ],
+  "bottlenecks": [
+    "Existing MonitorShell and ToolStudioPanel remain large and need a separate decomposition loop.",
+    "Readiness source map must be updated whenever UI strings move to split files."
+  ]
+}

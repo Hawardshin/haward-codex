@@ -1,0 +1,104 @@
+{
+  "initial_instruction": "Continue implementing the desktop project-management platform split, fix terminal/CLI adapter first-run blockers, expose Git-separated workspaces, and split large Rust/TypeScript implementation files where safe.",
+  "result_summary": "Split terminal drawer views, native Git panels, AgentBuilder panels, source editor load actions, Rust provider/service readiness features, and AWP worktree diagnostics; updated readiness registries, snapshots, requirements/spec/history records, and verified with renderer checks, platform tests, cargo check, renderer build, AWP doctor smoke, and Browser smoke.",
+  "work_mode": "standard",
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/runtime-terminal/",
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/native-git/",
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/agent-builder/",
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/source-editor/useSourceWorkbenchController.ts",
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/source-editor/useSourceLoadActions.ts",
+    "platform-desktop-app/src-tauri/src/features/providers.rs",
+    "platform-desktop-app/src-tauri/src/features/providers_parts/",
+    "platform-desktop-app/src-tauri/src/features/service_readiness.rs",
+    "platform-desktop-app/src-tauri/src/features/service_readiness_parts/",
+    "platform-desktop-app/tools/awp/awp.py",
+    "platform-desktop-app/tools/awp/worktrees.py",
+    "platform-desktop-app/tests/awp-cli.test.mjs",
+    "platform-desktop-app/scripts/readiness/source-structure.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/public/workspace-snapshot.json",
+    "platform-desktop-app/docs/requirements/2026-06-08-terminal-workspace-continuation.ko.md",
+    "platform-desktop-app/specs/2026-06-08-terminal-workspace-continuation/",
+    "_history/omission-checks/2026/2026-06-08-terminal-workspace-continuation.json",
+    "_history/resource-checks/2026/2026-06-08-terminal-workspace-continuation.json"
+  ],
+  "verification": [
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check: passed",
+    "corepack pnpm --dir platform-desktop-app test: 30 tests passed",
+    "cargo check from platform-desktop-app/src-tauri: passed",
+    "corepack pnpm --dir platform-desktop-app run renderer:build: passed and customer_bundle_ready",
+    "python3 platform-desktop-app/tools/awp/awp.py doctor --json: ready, worktrees ready",
+    "Browser smoke at http://127.0.0.1:3052: terminal drawer open/sidebar/readiness true, project import and guest AI tool copy present, console errors 0"
+  ],
+  "references_checked": [
+    "Git worktree official documentation",
+    "Tauri v2 shell plugin official documentation",
+    "xterm.js addon official documentation",
+    "platform-desktop-app existing readiness source map and tests",
+    "platform-desktop-app existing runtime terminal, native Git, AgentBuilder, source editor, Rust provider, service readiness, and AWP CLI source"
+  ],
+  "grounding_checks": [
+    "Final factual claims limited to local validation outputs and cited official docs",
+    "No unsupported release-readiness claim added"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-08-terminal-workspace-continuation.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-08-terminal-workspace-continuation.ko.md",
+    "platform-desktop-app/specs/2026-06-08-terminal-workspace-continuation/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-08-terminal-workspace-continuation/validation.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-08-terminal-workspace-continuation.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-08-terminal-workspace-continuation.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-08-terminal-workspace-continuation.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-08-terminal-workspace-continuation.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/changes/2026-06-08-terminal-workspace-continuation.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-08-terminal-workspace-continuation.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-08-terminal-workspace-continuation/spec.ko.md",
+    "platform-desktop-app/specs/2026-06-08-terminal-workspace-continuation/plan.ko.md",
+    "platform-desktop-app/specs/2026-06-08-terminal-workspace-continuation/tasks.ko.md",
+    "platform-desktop-app/specs/2026-06-08-terminal-workspace-continuation/validation.ko.md",
+    "platform-desktop-app/specs/2026-06-08-terminal-workspace-continuation/traceability.ko.md"
+  ],
+  "skill_work_occurred": false,
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-08-terminal-workspace-continuation.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-08-terminal-workspace-continuation.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-08-terminal-workspace-continuation.json"
+  ],
+  "context_archiving_occurred": false,
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-08-terminal-workspace-continuation.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "deferred_improvement_targets": [
+    "_history/plans/2026/2026-06-08-terminal-workspace-continuation.ko.md"
+  ],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Split ToolStudioPanel.tsx into scene, controls, clipboard plan, and mode-specific panes.",
+    "Split MonitorShell.tsx by state domains and route surfaces in a dedicated large-scope decomposition loop.",
+    "Add a direct UI path or test fixture for Native Git workbench smoke in USER VIEW if the product intends to expose it outside developer/superadmin views."
+  ]
+}

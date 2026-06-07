@@ -1,0 +1,154 @@
+{
+  "task": "terminal workspace continuation",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "terminal-drawer-split",
+      "description": "Terminal drawer view rendering must be split into smaller runtime-terminal components without changing the user-facing drawer flow.",
+      "source": "REQ-TWC-001",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/workbench/runtime-terminal/RuntimeTerminalSidebar.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/workbench/runtime-terminal/RuntimeTerminalSessionViews.tsx"
+      ]
+    },
+    {
+      "item_id": "awp-worktree-doctor",
+      "description": "AWP doctor must expose Git worktree state for multi-repository and branch-oriented workspaces.",
+      "source": "REQ-TWC-002",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/tools/awp/awp.py",
+        "platform-desktop-app/tools/awp/worktrees.py",
+        "python3 tools/awp/awp.py doctor --json: status ready, worktrees ready"
+      ]
+    },
+    {
+      "item_id": "rust-feature-split",
+      "description": "Rust provider and service readiness feature files must be split into functionally named part files below 500 lines.",
+      "source": "REQ-TWC-003",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/features/providers_parts/",
+        "platform-desktop-app/src-tauri/src/features/service_readiness_parts/",
+        "cargo check"
+      ]
+    },
+    {
+      "item_id": "direct-ts-split",
+      "description": "Directly touched TypeScript workbench files should be split into smaller components/hooks where safe.",
+      "source": "REQ-TWC-005",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "NativeGitWorkbench.tsx 493 lines",
+        "AgentBuilderPanels.tsx 406 lines",
+        "useSourceWorkbenchController.ts 479 lines",
+        "corepack pnpm --dir renderer/workspace-monitor run check"
+      ]
+    },
+    {
+      "item_id": "verification-and-build",
+      "description": "Meaningful implementation must run tests, build, Browser smoke, and close-out records.",
+      "source": "AGENTS.md repository instructions",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "corepack pnpm test",
+        "corepack pnpm run renderer:build",
+        "Browser smoke finalBrowserSmoke terminalDrawerOpen=true errorLogCount=0",
+        "_history/resource-checks/2026/2026-06-08-terminal-workspace-continuation.json"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/workbench/runtime-terminal/RuntimeTerminalSidebar.tsx",
+      "purpose": "Terminal drawer sidebar split component",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/workbench/native-git/NativeGitActionsPanel.tsx",
+      "purpose": "Native Git actions panel split component",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/workbench/agent-builder/AgentFactoryWizard.tsx",
+      "purpose": "Agent factory wizard split component",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/workbench/source-editor/useSourceLoadActions.ts",
+      "purpose": "Source editor load and AGENTS.md preparation hook",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/tools/awp/worktrees.py",
+      "purpose": "AWP Git worktree diagnostics module",
+      "required": true
+    },
+    {
+      "path": "_history/evaluations/2026/2026-06-08-terminal-workspace-continuation-evaluation-input.json",
+      "purpose": "Close-out evaluator input",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "renderer-check",
+      "description": "Renderer type and contract checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir renderer/workspace-monitor run check"
+      ]
+    },
+    {
+      "check_id": "platform-tests",
+      "description": "Platform desktop tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm test: 30 tests passed"
+      ]
+    },
+    {
+      "check_id": "rust-check",
+      "description": "Rust Tauri crate compiles after feature file split.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "cargo check"
+      ]
+    },
+    {
+      "check_id": "renderer-build",
+      "description": "Renderer production build and customer bundle audit pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm run renderer:build"
+      ]
+    },
+    {
+      "check_id": "browser-smoke",
+      "description": "Browser confirms project import copy, guest AI tool copy, and terminal drawer readiness.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "finalBrowserSmoke terminalDrawerOpen=true terminalReadiness=true terminalSidebar=true errorOverlay=false errorLogCount=0"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "MonitorShell.tsx and ToolStudioPanel.tsx remain large legacy files and need a separate large-scope split.",
+    "The current Browser smoke focuses on user-view terminal drawer and project import copy; native Git workbench is not directly surfaced in the selected USER VIEW home path."
+  ],
+  "notes": [
+    "The slice prioritizes direct user blockers around terminal setup, Git worktree visibility, and files touched during the current implementation loop."
+  ]
+}

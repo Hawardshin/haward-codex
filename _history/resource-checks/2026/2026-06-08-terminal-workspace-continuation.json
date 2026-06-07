@@ -1,0 +1,103 @@
+{
+  "task": "terminal workspace continuation",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Next.js dev server for Browser smoke",
+    "Next.js production build",
+    "Node.js tests and snapshot collector",
+    "Rust cargo check",
+    "Python AWP doctor command",
+    "Browser in-app tab"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "dev-server-lifecycle",
+      "category": "process",
+      "description": "Browser smoke required a temporary Next.js dev server.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Started next dev on 127.0.0.1:3052, completed Browser smoke, then sent Ctrl-C and observed process exit.",
+      "evidence": [
+        "dev server session 31443 exited after Ctrl-C"
+      ]
+    },
+    {
+      "risk_id": "browser-tab-lifecycle",
+      "category": "browser_context",
+      "description": "Browser smoke opened a temporary in-app Browser tab.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Closed the browser smoke tab after collecting final smoke state.",
+      "evidence": [
+        "currentBrowserTab.close(): closed"
+      ]
+    },
+    {
+      "risk_id": "generated-snapshot-output",
+      "category": "large_data",
+      "description": "Renderer build regenerated customer snapshot and static output artifacts.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Ran the owning renderer build intentionally and kept generated files inside platform-desktop-app renderer output paths.",
+      "evidence": [
+        "corepack pnpm run renderer:build",
+        "customer_bundle_ready"
+      ]
+    },
+    {
+      "risk_id": "python-cache-output",
+      "category": "temporary_file",
+      "description": "Running AWP doctor can create Python __pycache__ output.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Removed tools/awp/__pycache__ before close-out.",
+      "evidence": [
+        "rm -rf tools/awp/__pycache__"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "validation-process-lifecycle",
+      "resource": "Node, Rust, and Python validation commands",
+      "create_path": "pnpm check/test/build, cargo check, awp doctor",
+      "cleanup_path": "non-watch commands exited",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "all non-watch validation commands returned exit code 0"
+      ]
+    },
+    {
+      "check_id": "browser-and-dev-server-lifecycle",
+      "resource": "Browser tab and Next dev server",
+      "create_path": "Browser tab plus corepack pnpm exec next dev --port 3052",
+      "cleanup_path": "tab.close() and Ctrl-C to dev server",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "currentBrowserTab.close(): closed",
+        "dev server exited"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "command-exit-status",
+      "metric": "validation command exit status",
+      "tool": "shell command exit code",
+      "threshold": "all required validation commands exit 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "renderer check passed",
+        "platform tests passed",
+        "cargo check passed",
+        "renderer build passed"
+      ]
+    }
+  ],
+  "notes": [
+    "No long-running server, browser tab, worker, stream, or external CLI process was intentionally left active."
+  ]
+}
