@@ -1,0 +1,102 @@
+{
+  "task": "section deeplink UX",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "direct-section-entry",
+      "description": "Direct section URLs must open the intended section without extra user clicks.",
+      "source": "REQ-SDU-001",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "MonitorShell initialSection effect",
+        "Playwright smoke activeSection=history"
+      ]
+    },
+    {
+      "item_id": "hidden-section-view-mode",
+      "description": "Direct links to sections hidden in the current view mode must switch to a mode that can show the section.",
+      "source": "REQ-SDU-002",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "currentViewMode.allowedSections check",
+        "superadmin_developer preferred mode lookup"
+      ]
+    },
+    {
+      "item_id": "shareable-url-sync",
+      "description": "Section changes must keep query and hash synchronized for copyable links.",
+      "source": "REQ-SDU-003",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "buildSectionLocationHref",
+        "section-location.test.mjs",
+        "Playwright smoke source URL"
+      ]
+    },
+    {
+      "item_id": "durable-records",
+      "description": "Meaningful UX implementation must leave requirements, spec, validation, trace, and evaluation records.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/docs/requirements/2026-06-08-section-deeplink-ux.ko.md",
+        "platform-desktop-app/specs/2026-06-08-section-deeplink-ux/",
+        "_history/request-traces/2026/2026-06-08-section-deeplink-ux.ko.md"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/lib/section-location.mjs",
+      "purpose": "Section URL parsing and building utility",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Direct section activation and URL normalization",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-08-section-deeplink-ux/spec.ko.md",
+      "purpose": "Project spec",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "section-location-tests",
+      "description": "Section location utility tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "node --test renderer/workspace-monitor/tests/section-location.test.mjs"
+      ]
+    },
+    {
+      "check_id": "workspace-monitor-check",
+      "description": "Renderer type and contract checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir renderer/workspace-monitor run check"
+      ]
+    },
+    {
+      "check_id": "playwright-smoke",
+      "description": "Direct history section URL and section switch URL sync pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "section_deeplink_smoke_ok"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "This slice does not redesign every advanced screen.",
+    "The direct-entry smoke remains a one-off validation command rather than a committed npm script."
+  ]
+}

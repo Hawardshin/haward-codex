@@ -1,0 +1,79 @@
+{
+  "task": "section deeplink UX",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Next.js dev server for Playwright smoke",
+    "Playwright Chromium browser process",
+    "Node.js tests",
+    "Next.js renderer build"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "dev-server-lifecycle",
+      "category": "process",
+      "description": "A temporary Next.js dev server was required for direct URL smoke verification.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Started dev server on 127.0.0.1:3055, ran smoke, then sent Ctrl-C and observed exit.",
+      "evidence": [
+        "dev server sessions 29079 and 36453 exited after Ctrl-C"
+      ]
+    },
+    {
+      "risk_id": "browser-process-lifecycle",
+      "category": "browser_context",
+      "description": "Playwright launched a headless Chromium process.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Smoke script closed the browser in a finally block.",
+      "evidence": [
+        "await browser.close() in Playwright smoke command"
+      ]
+    },
+    {
+      "risk_id": "generated-output",
+      "category": "large_data",
+      "description": "Renderer build regenerates customer snapshot and static output artifacts.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Run build intentionally and review git status before commit.",
+      "evidence": [
+        "corepack pnpm run renderer:build"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "validation-process-lifecycle",
+      "resource": "Node and Next validation commands",
+      "create_path": "pnpm check/test/build and Playwright smoke",
+      "cleanup_path": "non-watch commands exit; dev server stopped with Ctrl-C",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "all non-watch commands returned exit code 0",
+        "dev server sessions exited"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "command-exit-status",
+      "metric": "validation command exit status",
+      "tool": "shell exit code",
+      "threshold": "required validation commands exit 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "section-location tests passed",
+        "workspace-monitor check passed",
+        "platform tests passed",
+        "Playwright smoke passed"
+      ]
+    }
+  ],
+  "notes": [
+    "No dependency installation occurred.",
+    "No new external CLI or persistent process was added."
+  ]
+}
