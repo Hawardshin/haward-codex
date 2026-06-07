@@ -1,0 +1,35 @@
+{
+  "task": "workspace operating model implementation",
+  "date": "2026-06-08",
+  "timezone": "Asia/Seoul",
+  "phases": [
+    {
+      "phase": "web_first_and_inventory",
+      "approx_minutes": 10,
+      "notes": "Official Git/GitHub/Apple sources checked; root submodules and project registry inspected."
+    },
+    {
+      "phase": "implementation",
+      "approx_minutes": 35,
+      "notes": "Registry, collector, type, UI component, CSS, tests, and snapshot fallback implemented."
+    },
+    {
+      "phase": "records",
+      "approx_minutes": 25,
+      "notes": "Requirements, specs, web search, coding research, large-scope, provenance, and Git separation records created."
+    },
+    {
+      "phase": "validation",
+      "approx_minutes": 20,
+      "notes": "Config contract, coding research, targeted tests, check, build, and browser smoke executed."
+    }
+  ],
+  "bottlenecks": [
+    "Static export hydration required longer Playwright wait because workspace-snapshot.json is large.",
+    "Browser plugin was not exposed as a callable tool, so Playwright was used directly."
+  ],
+  "automation_candidates": [
+    "Create a reusable Playwright smoke helper that waits for Workspace Monitor hydration before tab assertions.",
+    "Add a deterministic script for checking current submodule separation against _ops/projects/registry.json."
+  ]
+}

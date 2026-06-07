@@ -1,0 +1,147 @@
+{
+  "task": "workspace operating model implementation",
+  "work_mode": "ship_first",
+  "expected_items": [
+    {
+      "item_id": "git-separated-project-model",
+      "description": "Desktop app must show that active projects are Git-separated and managed as separate repositories/submodules/imports.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/workspace-operating-model-registry.json",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/WorkspaceOperatingModelPanel.tsx",
+        "_history/git-separations/2026/2026-06-08-workspace-operating-model.json"
+      ]
+    },
+    {
+      "item_id": "work-order-evidence-first",
+      "description": "Project management screen must prioritize work order, documents, evidence, validation, and reports.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/workspace-operating-model-registry.json",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/WorkspaceOperatingModelPanel.tsx"
+      ]
+    },
+    {
+      "item_id": "decision-deferral",
+      "description": "User absence should defer important decisions without globally blocking safe work.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/workspace-operating-model-registry.json",
+        "Playwright smoke: data-decision-deferral-rule=defer_user_decisions_without_global_stop"
+      ]
+    },
+    {
+      "item_id": "beginner-conversation-parity",
+      "description": "Beginner conversational flow should preserve expert-quality output contracts.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/workspace-operating-model-registry.json",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/WorkspaceOperatingModelPanel.tsx"
+      ]
+    },
+    {
+      "item_id": "agent-tool-separation",
+      "description": "Agent factory, tool management, Ollama, provider direct run, and AgentCore-style operations move to agent-tool-desktop-app.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/workspace-operating-model-registry.json",
+        "platform-desktop-app/configs/workspace-tracker-product-split-registry.json",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/WorkspaceProductSplitPanel.tsx"
+      ]
+    },
+    {
+      "item_id": "validation-and-history",
+      "description": "Meaningful implementation must leave requirements, specs, traces, validation, and evaluation records.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-08-workspace-operating-model/",
+        "_history/request-traces/2026/2026-06-08-workspace-operating-model.ko.md",
+        "_history/evaluations/2026/2026-06-08-workspace-operating-model-evaluation-input.json"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/configs/workspace-operating-model-registry.json",
+      "purpose": "Self-documenting operating model contract",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/features/WorkspaceOperatingModelPanel.tsx",
+      "purpose": "User-facing operating model panel",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-08-workspace-operating-model/spec.ko.md",
+      "purpose": "Project spec",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-contract",
+      "description": "Operating model registry is self-documenting.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/workspace-operating-model-registry.json"
+      ]
+    },
+    {
+      "check_id": "workspace-monitor-check",
+      "description": "Workspace monitor type and contract checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir renderer/workspace-monitor run check"
+      ]
+    },
+    {
+      "check_id": "workspace-monitor-target-tests",
+      "description": "Collector and UI contract tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "node --test tests/collector.test.mjs tests/tool-studio.test.mjs"
+      ]
+    },
+    {
+      "check_id": "workspace-monitor-build",
+      "description": "Workspace monitor production static export builds.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir renderer/workspace-monitor run build"
+      ]
+    },
+    {
+      "check_id": "browser-smoke",
+      "description": "Projects tab renders operating model status in browser.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Playwright: status=separated, decision=defer_user_decisions_without_global_stop, targetHome=agent-tool-desktop-app/"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "Remote Git clone/create/import automation remains a follow-up runtime slice.",
+    "MonitorShell remains above the long-term target file size.",
+    "agent-tool-desktop-app internal implementation remains separate follow-up work."
+  ],
+  "notes": [
+    "The active root projects are already submodules; no destructive split was needed."
+  ]
+}

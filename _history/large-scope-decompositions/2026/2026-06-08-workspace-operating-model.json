@@ -1,0 +1,142 @@
+{
+  "task": "workspace operating model implementation",
+  "reason": "The user asked to fully lock the desktop app as a Git-separated project management and work-evidence tracker while moving agent/tool/Ollama/provider operations to a separate desktop app.",
+  "source_inventory": [
+    ".gitmodules",
+    "_ops/projects/registry.json",
+    "platform-desktop-app/configs/workspace-tracker-product-split-registry.json",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProjectManagementPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/WorkspaceProductSplitPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "exclusions": [
+    "No global CLI installation",
+    "No destructive Git split or history rewrite because active projects are already submodules",
+    "No secret, credential, or private folder inspection",
+    "No agent-tool-desktop-app internal feature implementation in this slice",
+    "No remote GitHub repository creation automation in this slice"
+  ],
+  "representative_samples": [
+    "Root submodule status",
+    "Project registry repository_model and submodule fields",
+    "Workspace monitor collector registry pattern",
+    "Project management UI component pattern",
+    "Existing collector and UI contract tests"
+  ],
+  "slices": [
+    {
+      "slice_id": "git-boundary-inventory",
+      "touch_paths": [
+        "_history/git-separations/2026/2026-06-08-workspace-operating-model.json"
+      ],
+      "dependencies": [
+        "git status",
+        ".gitmodules",
+        "_ops/projects/registry.json"
+      ],
+      "output_targets": [
+        "verified current Git-separated project inventory"
+      ],
+      "validation": [
+        "git submodule status --recursive"
+      ]
+    },
+    {
+      "slice_id": "operating-model-contract",
+      "touch_paths": [
+        "platform-desktop-app/configs/workspace-operating-model-registry.json",
+        "platform-desktop-app/configs/workspace-tracker-product-split-registry.json"
+      ],
+      "dependencies": [
+        "web-first official docs"
+      ],
+      "output_targets": [
+        "self-documenting operating model registry"
+      ],
+      "validation": [
+        "check-config-contract"
+      ]
+    },
+    {
+      "slice_id": "snapshot-data-contract",
+      "touch_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+        "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs"
+      ],
+      "dependencies": [
+        "operating-model-contract"
+      ],
+      "output_targets": [
+        "operatingModel in developer and customer snapshots"
+      ],
+      "validation": [
+        "collector tests",
+        "snapshot regeneration"
+      ]
+    },
+    {
+      "slice_id": "project-management-ui",
+      "touch_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/components/features/WorkspaceOperatingModelPanel.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/ProjectManagementPanel.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+        "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+      ],
+      "dependencies": [
+        "snapshot-data-contract"
+      ],
+      "output_targets": [
+        "project screen operating model panel"
+      ],
+      "validation": [
+        "TypeScript",
+        "UI contract tests",
+        "browser smoke"
+      ]
+    },
+    {
+      "slice_id": "closeout-records",
+      "touch_paths": [
+        "_requirements/changes/",
+        "platform-desktop-app/docs/requirements/",
+        "platform-desktop-app/specs/2026-06-08-workspace-operating-model/",
+        "_history/"
+      ],
+      "dependencies": [
+        "all implementation slices"
+      ],
+      "output_targets": [
+        "requirements",
+        "spec",
+        "traceability",
+        "omission/resource/evaluation records"
+      ],
+      "validation": [
+        "check-omissions",
+        "check-resources",
+        "evaluate-work"
+      ]
+    }
+  ],
+  "first_executable_slice": "operating-model-contract",
+  "merge_gates": [
+    "config contract checks",
+    "workspace monitor target tests",
+    "workspace monitor check/build",
+    "browser smoke",
+    "omission/resource/evaluation guards",
+    "git diff --check"
+  ],
+  "context_budget": "Use targeted source reads, registries, tests, and generated snapshot checks; do not read every renderer file.",
+  "source_provenance": [
+    "_history/web-searches/2026/2026-06-08-workspace-operating-model.ko.md",
+    "_history/coding-research/2026/2026-06-08-workspace-operating-model.json"
+  ],
+  "created_at": "2026-06-08"
+}

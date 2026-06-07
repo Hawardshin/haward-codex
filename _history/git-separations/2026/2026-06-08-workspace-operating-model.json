@@ -1,0 +1,54 @@
+{
+  "recorded_at": "2026-06-08",
+  "purpose": "Verify that active root projects are Git-separated before implementing workspace operating model UI.",
+  "source_commands": [
+    "git status --short",
+    "git submodule status --recursive",
+    "sed -n '1,220p' .gitmodules"
+  ],
+  "summary": {
+    "active_registered_projects": 6,
+    "submodule_projects": 6,
+    "registry_only_projects_detected": 0,
+    "all_active_projects_git_separated": true
+  },
+  "projects": [
+    {
+      "path": "agent-platform",
+      "repository_model": "git_submodule",
+      "remote": "https://github.com/Hawardshin/haward-codex-agent-platform.git",
+      "branch": "main"
+    },
+    {
+      "path": "agent-tool-desktop-app",
+      "repository_model": "git_submodule",
+      "remote": "https://github.com/Hawardshin/haward-codex-agent-tool-desktop-app.git",
+      "branch": "main"
+    },
+    {
+      "path": "design-asset-library",
+      "repository_model": "git_submodule",
+      "remote": "https://github.com/Hawardshin/haward-codex-design-asset-library.git",
+      "branch": "main"
+    },
+    {
+      "path": "platform-desktop-app",
+      "repository_model": "git_submodule",
+      "remote": "https://github.com/Hawardshin/haward-codex-platform-desktop-app.git",
+      "branch": "main"
+    },
+    {
+      "path": "presentation-agent",
+      "repository_model": "git_submodule",
+      "remote": "https://github.com/Hawardshin/haward-codex-presentation-agent.git",
+      "branch": "main"
+    },
+    {
+      "path": "vscode-agent-workbench",
+      "repository_model": "git_submodule",
+      "remote": "https://github.com/Hawardshin/haward-codex-vscode-agent-workbench.git",
+      "branch": "main"
+    }
+  ],
+  "decision": "No destructive split or history rewrite is needed in this slice because active projects are already separate Git submodules. The implementation exposes this verified state in the desktop project management UI and snapshot."
+}

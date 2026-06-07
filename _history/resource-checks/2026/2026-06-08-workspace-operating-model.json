@@ -1,0 +1,86 @@
+{
+  "task": "workspace operating model implementation",
+  "work_mode": "ship_first",
+  "runtime_context": [
+    "Node.js collector and tests",
+    "Next.js static build",
+    "Python static HTTP server for Playwright smoke",
+    "Playwright Chromium"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "static-server",
+      "category": "process",
+      "description": "Browser smoke starts a local static HTTP server.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Server was stopped with Ctrl-C after Playwright smoke.",
+      "evidence": [
+        "Python http.server session 55585 exited with code 0 after keyboard interrupt."
+      ]
+    },
+    {
+      "risk_id": "browser-process",
+      "category": "browser_context",
+      "description": "Playwright launches a Chromium browser.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Script calls browser.close() before exit.",
+      "evidence": [
+        "Playwright command exited 0 after assertions."
+      ]
+    },
+    {
+      "risk_id": "generated-snapshot-output",
+      "category": "cache",
+      "description": "Build regenerates workspace snapshots and static export output.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Snapshot regeneration is expected and reviewed before commit.",
+      "evidence": [
+        "prebuild collect completed",
+        "git status/diff reviewed before staging"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "node-validation-processes",
+      "resource": "Node test/check/build processes",
+      "create_path": "pnpm and node commands",
+      "cleanup_path": "process exits after command completion",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check, tests, and build exited 0"
+      ]
+    },
+    {
+      "check_id": "playwright-static-server",
+      "resource": "Python http.server",
+      "create_path": "python3 -m http.server 3052 --directory renderer/workspace-monitor/out",
+      "cleanup_path": "Ctrl-C sent to session 55585",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "server process exited 0"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "exit-status",
+      "metric": "validation exit codes",
+      "tool": "shell command exit status",
+      "threshold": "required validation commands exit 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "config contract, coding research, target tests, check, build, and Playwright smoke passed"
+      ]
+    }
+  ],
+  "notes": [
+    "No long-running server, watcher, browser, provider runtime, or CLI session remains active."
+  ]
+}

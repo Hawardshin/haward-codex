@@ -1,0 +1,203 @@
+{
+  "research_goal": "Decide how to implement a desktop workspace operating model that exposes Git-separated projects, work evidence order, decision deferral, beginner conversation flow, and separated agent/tool operations.",
+  "coding_context": "Existing Tauri/Next.js workspace monitor with TypeScript snapshot types, Node snapshot collector, React feature panels, CSS, and node:test contract tests.",
+  "research_types": [
+    "architecture",
+    "implementation_pattern",
+    "testing",
+    "migration"
+  ],
+  "search_channels": [
+    "web search",
+    "official documentation search",
+    "repository source search",
+    "local test search"
+  ],
+  "sources_checked": [
+    "https://git-scm.com/docs/gitsubmodules.html",
+    "https://git-scm.com/docs/git-worktree.html",
+    "https://docs.github.com/en/get-started/using-git/splitting-a-subfolder-out-into-a-new-repository",
+    "https://developer.apple.com/design/human-interface-guidelines/onboarding",
+    ".gitmodules",
+    "_ops/projects/registry.json",
+    "platform-desktop-app/configs/workspace-tracker-product-split-registry.json",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProjectManagementPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "source_types": [
+    "official",
+    "open_source",
+    "internal",
+    "community",
+    "analysis"
+  ],
+  "reference_config_paths": [
+    "agent-platform/configs/research/research-agent-profile.json",
+    "agent-platform/configs/research/coding-research-profile.json"
+  ],
+  "source_value_provenance": [
+    "Git official documentation supports Git-native separate project and worktree mental models.",
+    "GitHub official documentation provides the migration path if a durable folder must later be split into a new repository.",
+    "Apple HIG onboarding guidance supports keeping first-run interactions contextual and simple for beginners.",
+    "Local source and tests show the existing registry, snapshot, panel, and contract-test patterns to extend."
+  ],
+  "plan_evidence": [
+    "Root submodule inventory already proves all active registered projects are Git-separated.",
+    "Existing collector reads JSON registries and sanitizes customer snapshots, so operating model data belongs in the collector layer.",
+    "Existing project management panel is the correct user-facing surface for Git boundary and work evidence status."
+  ],
+  "technology_stack": [
+    "TypeScript",
+    "React",
+    "Next.js",
+    "Node.js",
+    "Rust",
+    "Tauri"
+  ],
+  "technology_official_docs": [
+    "https://www.typescriptlang.org/docs/",
+    "https://react.dev/reference/react",
+    "https://nextjs.org/docs",
+    "https://nodejs.org/en/docs",
+    "https://doc.rust-lang.org/book/",
+    "https://v2.tauri.app/"
+  ],
+  "stack_version_constraints": [
+    "Use existing workspace-monitor package versions.",
+    "Do not add dependencies for this slice.",
+    "Keep Rust/Tauri runtime unchanged because the change is data/UI contract work."
+  ],
+  "issue_discussion_sources": [
+    "explicit none-found discussion search record: no external GitHub issue, Stack Overflow answer, Reddit discussion, or forum thread was required for this registry/UI contract slice after official docs and local source search."
+  ],
+  "issue_discussion_notes": [
+    "This slice treats user-reported confusion as the strongest local usability signal.",
+    "No community source is used as factual proof for implementation claims."
+  ],
+  "community_signal_notes": [
+    "Community-style signals were not needed for factual claims because official docs and local source were sufficient.",
+    "The risk model still accounts for split-surface confusion by making the boundary explicit in UI and registry."
+  ],
+  "language_options": [
+    "TypeScript/React UI plus Node collector",
+    "Rust/Tauri backend",
+    "Python external generator"
+  ],
+  "selected_language": "TypeScript/React UI plus Node collector",
+  "language_decision_notes": [
+    "The feature needs snapshot shaping, UI rendering, and tests already located in TypeScript/React/Node.",
+    "Rust/Tauri changes would add runtime risk without improving the project management operating model in this slice.",
+    "Python generator would duplicate an existing Node collector pattern."
+  ],
+  "code_reference_sources": [
+    "platform-desktop-app/renderer/workspace-monitor/components/features/WorkspaceProductSplitPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProjectManagementPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+    "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "code_reference_notes": [
+    "Feature panels are small typed components using data attributes for contract tests.",
+    "Collector functions already expose registry-derived snapshot branches and customer snapshot sanitizers.",
+    "Tests assert both data model and UI string/data-attribute contracts."
+  ],
+  "architecture_reference_sources": [
+    "https://git-scm.com/docs/gitsubmodules.html",
+    "https://git-scm.com/docs/git-worktree.html",
+    "https://v2.tauri.app/concept/architecture/",
+    "platform-desktop-app/configs/workspace-tracker-product-split-registry.json"
+  ],
+  "architecture_theory_sources": [
+    "Git submodule/worktree official docs",
+    "Tauri architecture docs",
+    "Apple HIG onboarding guidance"
+  ],
+  "architecture_practitioner_sources": [
+    "Existing workspace monitor registry and panel implementation",
+    "Existing node:test contract tests",
+    "Local user request history"
+  ],
+  "architecture_options": [
+    "Only change UI copy in ProjectManagementPanel.",
+    "Add a first-class registry and snapshot operating model, then render it in project UI.",
+    "Move project tracking into agent-tool-desktop-app."
+  ],
+  "architecture_decision_notes": [
+    "Selected registry plus snapshot plus UI because it creates a durable testable contract.",
+    "Rejected copy-only changes because product confusion would return without data/tests.",
+    "Rejected moving project tracking away because the desktop tracker should own project/work evidence visibility."
+  ],
+  "architecture_tradeoff_notes": [
+    "The selected design adds one registry and one UI panel but avoids runtime changes.",
+    "It keeps beginner defaults simple while preserving advanced operations as a visible separated target.",
+    "Physical Git clone/create automation remains a later runtime slice."
+  ],
+  "folder_structure_options": [
+    "Put operating model config under agent-platform.",
+    "Put operating model config under platform-desktop-app/configs.",
+    "Embed the operating model directly in React component constants."
+  ],
+  "folder_structure_decision_notes": [
+    "Selected platform-desktop-app/configs because this model directly governs desktop UI and snapshot output.",
+    "Rejected agent-platform because the agent/tool engine is not the primary product owner for this user-facing project tracker.",
+    "Rejected component constants because the model must be visible to agents and validators without reading UI code."
+  ],
+  "folder_semantics_notes": [
+    "platform-desktop-app/configs contains desktop product contracts.",
+    "renderer/workspace-monitor/scripts owns snapshot collection.",
+    "renderer/workspace-monitor/components/features owns user-facing feature panels.",
+    "_history and _requirements contain cross-workspace evidence and evaluation records."
+  ],
+  "maintainability_notes": [
+    "The registry includes reader_guide, reference_links, structure_rules, and field_guide.",
+    "Customer sanitization prevents internal project lists from leaking into public installer snapshots.",
+    "UI tests assert data attributes rather than relying only on visual copy."
+  ],
+  "findings": [
+    "The root workspace already has active projects split as submodules.",
+    "The missing piece is visible operating-model evidence, not destructive Git splitting.",
+    "Decision deferral must be represented as a product rule, not just runtime behavior."
+  ],
+  "options": [
+    "UI copy only",
+    "Registry/snapshot/UI contract",
+    "Backend runtime change"
+  ],
+  "recommendation": "Implement a registry/snapshot/UI contract for the workspace operating model and verify it through collector and UI tests.",
+  "post_research_answers": {
+    "what_was_verified": "Git separation model, current submodule state, existing collector pattern, project panel insertion point, and test contract style.",
+    "best_option": "Registry/snapshot/UI contract.",
+    "why_this_option": "It fixes the root product confusion in a durable, testable way without unnecessary runtime risk.",
+    "alternatives_rejected": "Copy-only is fragile; backend runtime changes are not required for this slice.",
+    "implementation_impact": "Add registry, collector functions, snapshot type, React panel, CSS, tests, and close-out records.",
+    "risks_and_unknowns": "Remote clone/create UX and full component file-size cleanup remain follow-up work.",
+    "validation_plan": "Run config contract, collector/UI target tests, TypeScript check, build, browser smoke, omission/resource/evaluation guards, and diff check.",
+    "reusable_knowledge": "The operating model registry becomes the durable source for future project management UI changes.",
+    "next_action": "Commit and push after close-out verification."
+  },
+  "validation_steps": [
+    "PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research ../_history/coding-research/2026/2026-06-08-workspace-operating-model.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/workspace-operating-model-registry.json",
+    "node --test tests/collector.test.mjs tests/tool-studio.test.mjs",
+    "corepack pnpm --dir renderer/workspace-monitor run check",
+    "corepack pnpm --dir renderer/workspace-monitor run build"
+  ],
+  "risks_or_unknowns": [
+    "MonitorShell remains larger than the long-term file-size target.",
+    "Remote Git create/clone runtime automation is not completed in this slice.",
+    "Agent-tool desktop app internals are intentionally out of scope."
+  ],
+  "capture_targets": [
+    "_history/coding-research/2026/2026-06-08-workspace-operating-model.json",
+    "platform-desktop-app/configs/workspace-operating-model-registry.json"
+  ],
+  "plan_history_targets": [
+    "_history/plans/2026/2026-06-08-workspace-operating-model.ko.md",
+    "_history/large-scope-decompositions/2026/2026-06-08-workspace-operating-model.json"
+  ],
+  "knowledge_validation_status": "ready_to_reference"
+}
