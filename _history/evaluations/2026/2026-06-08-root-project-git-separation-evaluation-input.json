@@ -1,0 +1,99 @@
+{
+  "schema_version": "2026-06-08",
+  "work_mode": "governance",
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-08-root-project-git-separation.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-08-root-project-git-separation.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/changes/2026-06-08-root-project-git-separation.ko.md"
+  ],
+  "spec_targets": [
+    "_specs/workspace-platform/2026-06-08-root-project-git-separation/"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-08-root-project-git-separation.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-08-root-project-git-separation.ko.md",
+    "_history/large-scope-decompositions/2026/2026-06-08-root-project-git-separation.json"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-08-root-project-git-separation.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-08-root-project-git-separation.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-08-root-project-git-separation.json"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-08-root-project-git-separation.json"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-08-root-project-git-separation.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-08-root-project-git-separation.ko.md"
+  ],
+  "installation_occurred": false,
+  "initial_instruction": "프로젝트들이 모두 Git으로 실제 분리됐는지 묻고, 분리되지 않았다면 계속 구현하라는 요청.",
+  "result_summary": "여섯 registered root project를 private GitHub repositories로 분리하고 root workspace를 submodule superproject로 전환했다.",
+  "changed_files": [
+    ".gitmodules",
+    "_ops/projects/registry.json",
+    "_history/git-separations/2026/2026-06-08-root-project-git-separation.ko.md",
+    "_requirements/changes/2026-06-08-root-project-git-separation.ko.md",
+    "_specs/workspace-platform/2026-06-08-root-project-git-separation/",
+    "_history/evaluations/2026/2026-06-08-root-project-git-separation-evaluation-input.json"
+  ],
+  "validation": {
+    "remote_visibility": "passed: gh repo view showed all six repositories as PRIVATE",
+    "submodule_status": "passed: git submodule status --recursive showed six expected SHAs",
+    "submodule_clean": "passed: each submodule git status --short was empty",
+    "gitlink_mode": "passed: git ls-files -s showed mode 160000 for all six project paths",
+    "registry_json": "passed: python3 -m json.tool _ops/projects/registry.json",
+    "history_json": "passed: python3 -m json.tool on large-scope, omission, resource, timing, and evaluation records",
+    "config_contract": "passed: PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/projects/registry.json",
+    "omission_guard": "passed: PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/omission-checks/2026/2026-06-08-root-project-git-separation.json",
+    "resource_guard": "passed: PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/resource-checks/2026/2026-06-08-root-project-git-separation.json",
+    "evaluation": "passed: PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-08-root-project-git-separation-evaluation-input.json",
+    "docs_audit": "passed: python3 _tools/docs-audit/src/docs_audit.py --check",
+    "diff_check": "passed: git diff --check",
+    "root_commit_push": "pending"
+  },
+  "verification": [
+    "passed: gh repo view showed all six repositories as PRIVATE",
+    "passed: git submodule status --recursive showed six expected SHAs",
+    "passed: each submodule git status --short was empty",
+    "passed: git ls-files -s showed mode 160000 for all six project paths",
+    "passed: python3 -m json.tool _ops/projects/registry.json",
+    "passed: python3 -m json.tool on large-scope, omission, resource, timing, and evaluation records",
+    "passed: PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../_ops/projects/registry.json",
+    "passed: PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/omission-checks/2026/2026-06-08-root-project-git-separation.json",
+    "passed: PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/resource-checks/2026/2026-06-08-root-project-git-separation.json",
+    "passed: PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-08-root-project-git-separation-evaluation-input.json",
+    "passed: python3 _tools/docs-audit/src/docs_audit.py --check",
+    "passed: git diff --check"
+  ],
+  "references_checked": [
+    "Git submodule official docs: https://git-scm.com/docs/git-submodule",
+    "Git worktree official docs: https://git-scm.com/docs/git-worktree.html",
+    "_history/web-searches/2026/2026-06-08-root-project-git-separation.ko.md"
+  ],
+  "grounding_checks": [
+    "Remote repository visibility checked through GitHub CLI.",
+    "Submodule gitlink mode checked through Git index.",
+    "Submodule working trees checked before root close-out."
+  ],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Create a deterministic migration tool for future root project to submodule splits.",
+    "Add a desktop diagnostic that checks private submodule access and offers setup guidance.",
+    "Add per-project clone/import cards in platform-desktop-app using the new registry metadata.",
+    "Consider root history rewrite only if repository size, privacy, or distribution requirements make it necessary."
+  ]
+}

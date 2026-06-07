@@ -1,9 +1,0 @@
-node_modules/
-dist/
-.next/
-out/
-src-tauri/target/
-src-tauri/gen/
-artifacts/source-editor-backups/
-artifacts/task-runs/
-*.log

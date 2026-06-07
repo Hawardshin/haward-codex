@@ -1,0 +1,66 @@
+{
+  "task": "root project Git separation",
+  "work_mode": "governance",
+  "runtime_context": [
+    "Git subprocesses",
+    "GitHub CLI remote repository creation and push",
+    "Submodule metadata update"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "remote-repository-state",
+      "category": "network_connection",
+      "description": "Creating private GitHub repositories changes external state and must be verified before close-out.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Created private repositories only and verified visibility with gh repo view.",
+      "evidence": ["gh repo view Hawardshin/<repo> --json nameWithOwner,visibility,url"]
+    },
+    {
+      "risk_id": "submodule-working-tree-drift",
+      "category": "other",
+      "description": "Submodules can contain uncommitted files or point at unexpected commits.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Committed generated-output ignore files in child repos and verified each submodule status is clean.",
+      "evidence": ["git -C <project> status --short"]
+    },
+    {
+      "risk_id": "long-running-processes",
+      "category": "process",
+      "description": "Git and gh commands should exit before final response.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "All commands were synchronous shell commands; no watcher/server process was started.",
+      "evidence": ["No persistent session remains required for this work."]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "git-process-lifecycle",
+      "resource": "git and gh processes",
+      "create_path": "shell commands",
+      "cleanup_path": "process exit",
+      "required": true,
+      "status": "passed",
+      "evidence": ["Commands returned exit code 0 unless reported otherwise."]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "validation-command-exit-status",
+      "metric": "validation command exit status",
+      "tool": "shell exit code",
+      "threshold": "required validation commands exit 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "repo visibility, submodule status, submodule clean state, gitlink mode, JSON syntax, and config contract checks completed successfully before final diff check"
+      ]
+    }
+  ],
+  "notes": [
+    "No dependency installation occurred.",
+    "No destructive reset, checkout, or history rewrite was used."
+  ]
+}

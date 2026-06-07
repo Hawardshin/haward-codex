@@ -1,0 +1,39 @@
+{
+  "task": "root project Git separation",
+  "date": "2026-06-08",
+  "timing_method": "retrospective phase log after resumed implementation",
+  "phases": [
+    {
+      "phase": "web_first_intake_and_option_selection",
+      "status": "completed",
+      "notes": "Checked official Git submodule/worktree docs and subdirectory split alternatives."
+    },
+    {
+      "phase": "remote_repository_creation",
+      "status": "completed",
+      "notes": "Created six private GitHub repositories."
+    },
+    {
+      "phase": "history_split_and_push",
+      "status": "completed",
+      "notes": "Used git subtree split and pushed project main branches."
+    },
+    {
+      "phase": "submodule_conversion",
+      "status": "completed",
+      "notes": "Converted root project paths to submodule gitlinks."
+    },
+    {
+      "phase": "governance_records_and_validation",
+      "status": "completed",
+      "notes": "Registry, requirements, spec, trace, omission, resource, and evaluation records passed validation."
+    }
+  ],
+  "bottlenecks": [
+    "Large staged root diff is expected because tracked project files are replaced by gitlinks.",
+    "Submodule-generated local files required project-local ignore commits."
+  ],
+  "automation_candidates": [
+    "A reusable project-to-submodule migration script with repo creation, split, push, absorbgitdirs, and validation."
+  ]
+}

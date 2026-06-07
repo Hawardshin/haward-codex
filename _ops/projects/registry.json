@@ -7,15 +7,17 @@
     "how_to_read": [
       "Find the project by name or path.",
       "Read purpose and scope before placing files.",
+      "Check repository_model, repository_url, and submodule_path before changing project Git boundaries.",
       "Use project_specific_home to decide where project-local code, docs, configs, assets, tests, and artifacts belong.",
       "Use shared_dependencies and boundary_notes to avoid mixing project-specific and shared workspace assets."
     ],
     "owner": "workspace-operations",
-    "last_reviewed": "2026-06-03",
+    "last_reviewed": "2026-06-08",
     "update_triggers": [
       "A root project is created, archived, renamed, or removed.",
       "A project boundary changes.",
       "A project starts depending on a shared tool, template, skill, or asset library.",
+      "A project is split into or moved between standalone Git repositories.",
       "Structure audit or workspace map output shows an unregistered root project."
     ]
   },
@@ -42,6 +44,17 @@
         "preventing project-specific files from drifting into shared folders"
       ],
       "last_checked": "2026-06-02"
+    },
+    {
+      "id": "git-submodule-docs",
+      "title": "Git Submodule Documentation",
+      "url": "https://git-scm.com/docs/git-submodule",
+      "source_type": "official-docs",
+      "used_for": [
+        "root project Git separation model",
+        "superproject gitlink and submodule boundary verification"
+      ],
+      "last_checked": "2026-06-08"
     }
   ],
   "structure_rules": [
@@ -62,6 +75,12 @@
       "rule": "Boundary notes should explain what belongs in the project and what must stay in shared operations folders.",
       "reason": "This prevents domain-specific assets and shared platform assets from being mixed accidentally.",
       "applies_to": ["boundary_notes"]
+    },
+    {
+      "id": "registered-projects-are-submodules",
+      "rule": "Active root projects that have repository_model git_submodule are owned by their standalone repository; the workspace root tracks only the submodule gitlink.",
+      "reason": "This keeps each durable project independently cloneable, commit-able, and importable by Codex, Claude Code, Cursor, Antigravity, or another assistant runtime.",
+      "applies_to": ["projects", ".gitmodules"]
     }
   ],
   "field_guide": [
@@ -84,14 +103,33 @@
       "field": "boundary_notes",
       "meaning": "Operational notes for avoiding ownership drift.",
       "required": true
+    },
+    {
+      "field": "repository_model",
+      "meaning": "How the root workspace relates to the project's Git repository.",
+      "required": true
+    },
+    {
+      "field": "repository_url",
+      "meaning": "Canonical remote repository URL for the project when repository_model is git_submodule.",
+      "required": true
+    },
+    {
+      "field": "submodule_path",
+      "meaning": "Root workspace path tracked as a Git submodule gitlink.",
+      "required": true
     }
   ],
   "version": 1,
-  "updated": "2026-06-06",
+  "updated": "2026-06-08",
   "projects": [
     {
       "name": "agent-platform",
       "path": "agent-platform/",
+      "repository_model": "git_submodule",
+      "repository_url": "https://github.com/Hawardshin/haward-codex-agent-platform",
+      "submodule_path": "agent-platform",
+      "submodule_branch": "main",
       "status": "active",
       "type": "core-platform",
       "purpose": "Central Python-first engine project for reusable agents, tools, model/runtime adapters, evaluation, planning, policy, and AgentCore-style contracts used by desktop products.",
@@ -121,6 +159,10 @@
     {
       "name": "agent-tool-desktop-app",
       "path": "agent-tool-desktop-app/",
+      "repository_model": "git_submodule",
+      "repository_url": "https://github.com/Hawardshin/haward-codex-agent-tool-desktop-app",
+      "submodule_path": "agent-tool-desktop-app",
+      "submodule_branch": "main",
       "status": "active",
       "type": "installable-desktop-product",
       "purpose": "Separate desktop/installable software product for agent factory, tool management, Ollama/local model management, provider direct execution, and AgentCore-style runtime operations.",
@@ -151,6 +193,10 @@
     {
       "name": "presentation-agent",
       "path": "presentation-agent/",
+      "repository_model": "git_submodule",
+      "repository_url": "https://github.com/Hawardshin/haward-codex-presentation-agent",
+      "submodule_path": "presentation-agent",
+      "submodule_branch": "main",
       "status": "active",
       "type": "domain-agent-project",
       "purpose": "Presentation-focused agent project for collecting presentation design references, PPT/HTML sources, reusable assets, and script-flow evidence.",
@@ -178,6 +224,10 @@
     {
       "name": "design-asset-library",
       "path": "design-asset-library/",
+      "repository_model": "git_submodule",
+      "repository_url": "https://github.com/Hawardshin/haward-codex-design-asset-library",
+      "submodule_path": "design-asset-library",
+      "submodule_branch": "main",
       "status": "active",
       "type": "shared-design-asset-project",
       "purpose": "Reusable, legally cautious SVG design asset library for presentation decks, HTML artifacts, dashboards, prototypes, and platform visual systems.",
@@ -209,6 +259,10 @@
     {
       "name": "platform-desktop-app",
       "path": "platform-desktop-app/",
+      "repository_model": "git_submodule",
+      "repository_url": "https://github.com/Hawardshin/haward-codex-platform-desktop-app",
+      "submodule_path": "platform-desktop-app",
+      "submodule_branch": "main",
       "status": "active",
       "type": "installable-desktop-product",
       "purpose": "Desktop/installable software product for importing Git workspaces, launching guest AI coding tools, and showing current work timelines, reports, evidence, requirements, and terminal state.",
@@ -258,6 +312,10 @@
     {
       "name": "vscode-agent-workbench",
       "path": "vscode-agent-workbench/",
+      "repository_model": "git_submodule",
+      "repository_url": "https://github.com/Hawardshin/haward-codex-vscode-agent-workbench",
+      "submodule_path": "vscode-agent-workbench",
+      "submodule_branch": "main",
       "status": "active",
       "type": "source-hard-fork-workbench",
       "purpose": "Local hard-fork workbench for adapting the microsoft/vscode Code - OSS source into Agent Workspace Code.",

@@ -1,0 +1,66 @@
+{
+  "task": "root project Git separation",
+  "work_mode": "governance",
+  "source_inventory": [
+    "_ops/projects/registry.json",
+    ".gitmodules",
+    "agent-platform/",
+    "agent-tool-desktop-app/",
+    "platform-desktop-app/",
+    "presentation-agent/",
+    "design-asset-library/",
+    "vscode-agent-workbench/"
+  ],
+  "exclusions": [
+    "root repository history rewrite",
+    "public release or installer packaging",
+    "new user-facing clone wizard",
+    "global dependency installation"
+  ],
+  "slices": [
+    {
+      "slice_id": "inventory",
+      "touch_paths": ["_ops/projects/registry.json"],
+      "status": "completed",
+      "verification": ["project list matched registered root projects"]
+    },
+    {
+      "slice_id": "remote-repos",
+      "touch_paths": ["GitHub private repositories"],
+      "status": "completed",
+      "verification": ["gh repo view visibility PRIVATE"]
+    },
+    {
+      "slice_id": "submodule-conversion",
+      "touch_paths": [".gitmodules", "root project gitlinks"],
+      "status": "completed",
+      "verification": ["git submodule status --recursive", "git ls-files -s mode 160000"]
+    },
+    {
+      "slice_id": "governance-records",
+      "touch_paths": ["_requirements/", "_specs/", "_history/", "_ops/projects/registry.json"],
+      "status": "completed",
+      "verification": ["json syntax", "diff check"]
+    }
+  ],
+  "dependencies": [
+    "remote-repos depends on inventory",
+    "submodule-conversion depends on remote-repos",
+    "root commit depends on validation"
+  ],
+  "merge_gates": [
+    "submodules clean",
+    "registry JSON valid",
+    "root diff check passes",
+    "root push succeeds"
+  ],
+  "source_provenance": [
+    "_history/web-searches/2026/2026-06-08-root-project-git-separation.ko.md",
+    "_history/git-separations/2026/2026-06-08-root-project-git-separation.ko.md"
+  ],
+  "remaining_work_queue": [
+    "Add user-facing desktop clone/import flow for private submodules.",
+    "Add onboarding docs for private GitHub submodule credentials.",
+    "Consider history rewrite only if repository size or privacy requirements demand it."
+  ]
+}

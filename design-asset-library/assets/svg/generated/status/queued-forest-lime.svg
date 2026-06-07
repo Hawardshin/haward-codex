@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title-status-queued-forest-lime">
-  <title id="title-status-queued-forest-lime">Status Queued Forest Lime</title>
-  <rect width="256" height="256" rx="28" fill="#fbfff8"/>
-  <circle cx="128" cy="128" r="74" fill="#ebfbee" stroke="#163b2b" stroke-width="6"/>
-  <path d="M88 132l24 24 58-68" fill="none" stroke="#51cf66" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="184" cy="49" r="22" fill="#51cf66"/>
-  <path d="M76 72l16 16M180 176l16 16M72 184l18-12" stroke="#163b2b" stroke-width="6" stroke-linecap="round" opacity=".5"/>
-</svg>

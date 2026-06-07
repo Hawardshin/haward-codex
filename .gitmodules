@@ -1,0 +1,24 @@
+[submodule "agent-platform"]
+	path = agent-platform
+	url = https://github.com/Hawardshin/haward-codex-agent-platform.git
+	branch = main
+[submodule "agent-tool-desktop-app"]
+	path = agent-tool-desktop-app
+	url = https://github.com/Hawardshin/haward-codex-agent-tool-desktop-app.git
+	branch = main
+[submodule "platform-desktop-app"]
+	path = platform-desktop-app
+	url = https://github.com/Hawardshin/haward-codex-platform-desktop-app.git
+	branch = main
+[submodule "presentation-agent"]
+	path = presentation-agent
+	url = https://github.com/Hawardshin/haward-codex-presentation-agent.git
+	branch = main
+[submodule "design-asset-library"]
+	path = design-asset-library
+	url = https://github.com/Hawardshin/haward-codex-design-asset-library.git
+	branch = main
+[submodule "vscode-agent-workbench"]
+	path = vscode-agent-workbench
+	url = https://github.com/Hawardshin/haward-codex-vscode-agent-workbench.git
+	branch = main

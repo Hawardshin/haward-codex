@@ -1,0 +1,111 @@
+{
+  "task": "root project Git separation",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "separate-project-repositories",
+      "description": "Registered root projects must be actual separate Git repositories.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "Hawardshin/haward-codex-agent-platform",
+        "Hawardshin/haward-codex-agent-tool-desktop-app",
+        "Hawardshin/haward-codex-platform-desktop-app",
+        "Hawardshin/haward-codex-presentation-agent",
+        "Hawardshin/haward-codex-design-asset-library",
+        "Hawardshin/haward-codex-vscode-agent-workbench"
+      ]
+    },
+    {
+      "item_id": "root-superproject",
+      "description": "Root workspace must track projects through Git boundaries instead of direct file ownership.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [".gitmodules", "git ls-files -s <project> mode 160000"]
+    },
+    {
+      "item_id": "registry-updated",
+      "description": "Project registry must identify the repository URL and submodule model.",
+      "source": "repository instructions",
+      "required": true,
+      "status": "covered",
+      "evidence": ["_ops/projects/registry.json"]
+    },
+    {
+      "item_id": "durable-records",
+      "description": "Meaningful structural work must leave requirements, specs, validation, history, trace, and evaluation records.",
+      "source": "AGENTS.md repository instructions",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/changes/2026-06-08-root-project-git-separation.ko.md",
+        "_specs/workspace-platform/2026-06-08-root-project-git-separation/",
+        "_history/git-separations/2026/2026-06-08-root-project-git-separation.ko.md",
+        "_history/evaluations/2026/2026-06-08-root-project-git-separation-evaluation-input.json"
+      ]
+    },
+    {
+      "item_id": "commit-and-push",
+      "description": "Completed meaningful changes must be committed and pushed.",
+      "source": "repository instructions",
+      "required": true,
+      "status": "covered",
+      "evidence": ["root commit/push is the final close-out gate for this change set and will be reported with the final Git directive"]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": ".gitmodules",
+      "purpose": "Root superproject submodule mapping",
+      "required": true
+    },
+    {
+      "path": "_ops/projects/registry.json",
+      "purpose": "Project repository metadata registry",
+      "required": true
+    },
+    {
+      "path": "_history/git-separations/2026/2026-06-08-root-project-git-separation.ko.md",
+      "purpose": "Git separation audit record",
+      "required": true
+    },
+    {
+      "path": "_specs/workspace-platform/2026-06-08-root-project-git-separation/spec.ko.md",
+      "purpose": "Spec-driven root Git separation record",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "remote-private-repos",
+      "description": "All six project repositories are private GitHub repositories.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["gh repo view Hawardshin/<repo> --json nameWithOwner,visibility,url"]
+    },
+    {
+      "check_id": "submodule-gitlinks",
+      "description": "All six project paths are mode 160000 gitlinks in the root index.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["git ls-files -s <project>"]
+    },
+    {
+      "check_id": "submodule-clean",
+      "description": "All submodule working trees are clean before root close-out.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["git -C <project> status --short"]
+    }
+  ],
+  "known_omission_risks": [
+    "Root repository history was not rewritten, so old commits still contain project source snapshots.",
+    "Private repository access onboarding is not implemented as a desktop UI flow.",
+    "Submodule credentials must be available in new clone environments."
+  ],
+  "notes": [
+    "Final root commit/push cannot be embedded in the pre-commit evaluation file without a second bookkeeping commit; the actual final SHA is reported in the close-out response."
+  ]
+}
