@@ -1,0 +1,38 @@
+{
+  "task": "titlebar section link UI",
+  "date": "2026-06-08",
+  "work_mode": "standard",
+  "timings": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes": 7,
+      "notes": "Checked official toolbar and desktop UI action guidance."
+    },
+    {
+      "phase": "large_scope_decomposition",
+      "duration_minutes": 8,
+      "notes": "Inventory found 108 UI-related candidate files and selected a common titlebar slice."
+    },
+    {
+      "phase": "implementation",
+      "duration_minutes": 16,
+      "notes": "Added titlebar section link copy action, status pill, CSS, and static tests."
+    },
+    {
+      "phase": "validation",
+      "duration_minutes": 17,
+      "notes": "Ran check, targeted tests, Playwright smoke, and package tests."
+    },
+    {
+      "phase": "records_and_closeout",
+      "duration_minutes": 14,
+      "notes": "Created requirements, spec, plan, validation, trace, omission, resource, and evaluation records."
+    }
+  ],
+  "bottlenecks": [
+    "UI request was broad, so decomposition was required before implementation."
+  ],
+  "automation_candidates": [
+    "Promote current-section link smoke into a reusable titlebar smoke script."
+  ]
+}

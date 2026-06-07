@@ -1,0 +1,110 @@
+{
+  "task": "titlebar section link UI",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "large-scope-decomposition",
+      "description": "Broad UI improvement request must be decomposed into bounded slices.",
+      "source": "large-scope workflow",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/plans/2026/2026-06-08-titlebar-section-link-ui.ko.md"
+      ]
+    },
+    {
+      "item_id": "titlebar-link-button",
+      "description": "Common titlebar must expose a current section link copy button.",
+      "source": "REQ-TSL-001",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "data-titlebar-section-link",
+        "tool-studio.test.mjs"
+      ]
+    },
+    {
+      "item_id": "copy-feedback",
+      "description": "Copy result must be visible without opening a dialog.",
+      "source": "REQ-TSL-003",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "data-titlebar-share-status",
+        "Playwright statusText=섹션 링크 복사됨"
+      ]
+    },
+    {
+      "item_id": "responsive-titlebar",
+      "description": "New titlebar UI must not create narrow viewport overflow.",
+      "source": "REQ-TSL-004",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "Playwright narrow viewportOverflowX=0"
+      ]
+    },
+    {
+      "item_id": "durable-records",
+      "description": "Meaningful UI implementation must leave requirements, spec, validation, trace, and evaluation records.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/docs/requirements/2026-06-08-titlebar-section-link-ui.ko.md",
+        "platform-desktop-app/specs/2026-06-08-titlebar-section-link-ui/",
+        "_history/request-traces/2026/2026-06-08-titlebar-section-link-ui.ko.md"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+      "purpose": "Titlebar section link action",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+      "purpose": "Responsive titlebar link styling",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-08-titlebar-section-link-ui/spec.ko.md",
+      "purpose": "Project spec",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-check",
+      "description": "Renderer type and contract checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir renderer/workspace-monitor run check"
+      ]
+    },
+    {
+      "check_id": "targeted-tests",
+      "description": "Targeted titlebar and section tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "node --test renderer/workspace-monitor/tests/tool-studio.test.mjs renderer/workspace-monitor/tests/section-location.test.mjs"
+      ]
+    },
+    {
+      "check_id": "playwright-smoke",
+      "description": "Titlebar link button, status pill, and overflow checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "titlebar_section_link_smoke_ok"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "This first slice does not redesign every panel header.",
+    "The titlebar smoke remains a one-off Playwright command rather than a committed npm script."
+  ]
+}

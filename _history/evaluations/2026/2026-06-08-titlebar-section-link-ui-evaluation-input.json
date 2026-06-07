@@ -1,0 +1,88 @@
+{
+  "schema_version": "2026-06-08",
+  "work_mode": "standard",
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-08-titlebar-section-link-ui.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-08-titlebar-section-link-ui.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/changes/2026-06-08-titlebar-section-link-ui.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-08-titlebar-section-link-ui.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-08-titlebar-section-link-ui/"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-08-titlebar-section-link-ui.ko.md",
+    "_history/web-searches/2026/2026-06-08-titlebar-section-link-ui.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-08-titlebar-section-link-ui.ko.md",
+    "platform-desktop-app/specs/2026-06-08-titlebar-section-link-ui/plan.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-08-titlebar-section-link-ui.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-08-titlebar-section-link-ui.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-08-titlebar-section-link-ui.json"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-08-titlebar-section-link-ui.json"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-08-titlebar-section-link-ui.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-08-titlebar-section-link-ui.ko.md"
+  ],
+  "installation_occurred": false,
+  "validation": {
+    "workspace_monitor_check": "passed: corepack pnpm --dir renderer/workspace-monitor run check",
+    "targeted_node_tests": "passed: node --test renderer/workspace-monitor/tests/tool-studio.test.mjs renderer/workspace-monitor/tests/section-location.test.mjs",
+    "playwright_smoke": "passed: titlebar link button rendered, copy status visible, desktop/narrow overflow 0",
+    "platform_desktop_tests": "passed: corepack pnpm test",
+    "platform_desktop_renderer_build": "passed: corepack pnpm run renderer:build"
+  },
+  "initial_instruction": "UI개선",
+  "result_summary": "Added a common titlebar current-section link copy control with status feedback, preserving responsive layout and using existing Button, ActionGroup, clipboard, and section-location utilities.",
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+    "platform-desktop-app/docs/requirements/2026-06-08-titlebar-section-link-ui.ko.md",
+    "platform-desktop-app/specs/2026-06-08-titlebar-section-link-ui/",
+    "_history/evaluations/2026/2026-06-08-titlebar-section-link-ui-evaluation-input.json"
+  ],
+  "verification": [
+    "passed: workspace-monitor check",
+    "passed: targeted titlebar/section tests",
+    "passed: Playwright titlebar link smoke",
+    "passed: platform package tests",
+    "passed: renderer:build and customer-bundle audit"
+  ],
+  "references_checked": [
+    "Apple HIG Toolbars: https://developer.apple.com/design/human-interface-guidelines/toolbars",
+    "Visual Studio Code UX Guidelines: https://code.visualstudio.com/api/ux-guidelines/overview",
+    "Microsoft desktop UX checklist: https://learn.microsoft.com/en-us/windows/win32/uxguide/top-violations",
+    "Local desktop user flow registry",
+    "Local large-scope decomposition profile"
+  ],
+  "grounding_checks": [
+    "Web-first source record exists.",
+    "Large-scope decomposition record exists.",
+    "Local source provenance identifies titlebar, button, action group, section-location, and clipboard sources.",
+    "Playwright smoke verified rendered UI state, copy feedback, and narrow viewport overflow."
+  ],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Promote titlebar section-link smoke into a reusable npm script.",
+    "Add command palette support for copying the current section link.",
+    "Standardize report panel action strips after the titlebar action contract settles."
+  ]
+}

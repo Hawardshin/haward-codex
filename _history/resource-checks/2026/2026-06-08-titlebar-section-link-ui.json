@@ -1,0 +1,80 @@
+{
+  "task": "titlebar section link UI",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Next.js dev server for Playwright smoke",
+    "Playwright Chromium browser process",
+    "Clipboard API and fallback copy path",
+    "Next.js renderer build"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "dev-server-lifecycle",
+      "category": "process",
+      "description": "A temporary Next.js dev server was required for UI smoke verification.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Started dev server on 127.0.0.1:3056, ran smoke, then sent Ctrl-C and observed exit.",
+      "evidence": [
+        "dev server session 13188 exited after Ctrl-C"
+      ]
+    },
+    {
+      "risk_id": "browser-process-lifecycle",
+      "category": "browser_context",
+      "description": "Playwright launched a headless Chromium process and clipboard permission context.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Smoke script closed context and browser in a finally block.",
+      "evidence": [
+        "await context.close()",
+        "await browser.close()"
+      ]
+    },
+    {
+      "risk_id": "generated-output",
+      "category": "large_data",
+      "description": "Renderer build regenerates customer snapshot and static output artifacts.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Run build intentionally and review git status before commit.",
+      "evidence": [
+        "corepack pnpm run renderer:build"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "validation-process-lifecycle",
+      "resource": "Node, Next, and Playwright commands",
+      "create_path": "pnpm check/test/build and Playwright smoke",
+      "cleanup_path": "non-watch commands exit; dev server stopped with Ctrl-C",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "all non-watch commands returned exit code 0",
+        "dev server session exited"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "command-exit-status",
+      "metric": "validation command exit status",
+      "tool": "shell exit code",
+      "threshold": "required validation commands exit 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor check passed",
+        "targeted tests passed",
+        "Playwright smoke passed",
+        "platform tests passed"
+      ]
+    }
+  ],
+  "notes": [
+    "No dependency installation occurred.",
+    "No persistent browser tab, dev server, or external CLI process was intentionally left active."
+  ]
+}
