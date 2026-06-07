@@ -1,0 +1,8 @@
+{
+  "task": "터미널 탭 개혁",
+  "selected_work_mode": "standard",
+  "install_mode": "developer",
+  "view_mode": "user",
+  "rationale": "Meaningful desktop UI behavior changes require requirements, specs, tests, build, and close-out guards. No dependency installation is planned.",
+  "selected_at": "2026-06-08"
+}

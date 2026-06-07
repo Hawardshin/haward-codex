@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, ArrowRight, Inbox, ListFilter, ShieldCheck, SquareTerminal, X } from "lucide-react";
+import { Activity, AlertTriangle, ArrowRight, CheckCircle2, Inbox, ListFilter, ShieldCheck, SquareTerminal, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useOverlayFocus } from "@/components/ui/useOverlayFocus";
@@ -84,6 +84,41 @@ export function RuntimeTerminalDrawer({
     (selectedPromptIsCustomized || (selectedPromptDefaultValue !== "" && sessionPrompt.trim() !== selectedPromptDefaultValue.trim()));
   const terminalCwd = selectedSession?.workingDir || workingDir || "workspace root";
   const selectedSessionOutput = selectedSession ? formatSessionOutput(selectedSession, copy.noOutput) : copy.noSession;
+  const selectedAdapterAvailable = Boolean(selectedAdapter?.available);
+  const terminalReadinessState = runtimeAvailable && selectedAdapterAvailable ? "ready" : runtimeAvailable ? "adapter_blocked" : "runtime_offline";
+  const nativePtyWritable = Boolean(nativePtySession && isWritableSessionStatus(nativePtySession.status));
+  const startNativePtyFromDrawer = () => {
+    setTerminalDrawerView("native");
+    if (!nativePtyWritable) {
+      void onStartNativePtySession({ rows: nativePtySession?.rows || 28, cols: nativePtySession?.cols || 100 });
+    }
+  };
+  const readinessItems = [
+    {
+      id: "runtime",
+      label: copy.runtime,
+      value: runtimeAvailable ? copy.ready : copy.blocked,
+      ready: runtimeAvailable
+    },
+    {
+      id: "adapter",
+      label: copy.adapter,
+      value: selectedAdapter?.label || selectedSessionAdapterId,
+      ready: selectedAdapterAvailable
+    },
+    {
+      id: "native",
+      label: copy.native,
+      value: nativePtySession?.status || copy.idle,
+      ready: nativePtyWritable
+    },
+    {
+      id: "cwd",
+      label: copy.workingDir,
+      value: terminalCwd,
+      ready: true
+    }
+  ];
   useEffect(() => {
     setPortalTarget(document.querySelector<HTMLElement>(".desktop-app-root") || document.body);
   }, []);
@@ -211,6 +246,34 @@ export function RuntimeTerminalDrawer({
           </div>
         </div>
 
+        <section className="terminal-readiness-strip" data-terminal-readiness={terminalReadinessState} aria-label={copy.terminalReadiness}>
+          <div className="terminal-readiness-summary">
+            {terminalReadinessState === "ready" ? <CheckCircle2 size={16} aria-hidden="true" /> : <AlertTriangle size={16} aria-hidden="true" />}
+            <div>
+              <strong>{terminalReadinessState === "ready" ? copy.terminalReadyTitle : copy.terminalBlockedTitle}</strong>
+              <span>{terminalReadinessState === "ready" ? copy.terminalReadyDetail : copy.terminalBlockedDetail}</span>
+            </div>
+          </div>
+          <div className="terminal-readiness-facts">
+            {readinessItems.map((item) => (
+              <article key={item.id} className={item.ready ? "ready" : "blocked"} data-terminal-readiness-item={item.id}>
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </article>
+            ))}
+          </div>
+          <div className="terminal-readiness-actions">
+            <button type="button" onClick={startNativePtyFromDrawer} disabled={!runtimeAvailable}>
+              <SquareTerminal size={15} aria-hidden="true" />
+              <span>{copy.startNativePty}</span>
+            </button>
+            <button type="button" onClick={() => void onRunCliSetup?.()} disabled={!onRunCliSetup}>
+              <ShieldCheck size={15} aria-hidden="true" />
+              <span>{copy.terminalGuideCli}</span>
+            </button>
+          </div>
+        </section>
+
         <div className="terminal-drawer-workbench">
           <aside className="terminal-drawer-sidebar" aria-label={copy.rail} tabIndex={0}>
             <div className="run-board-strip">
@@ -276,11 +339,17 @@ export function RuntimeTerminalDrawer({
                 onSaveSessionPromptChoice={onSaveSessionPromptChoice}
                 onSelectSessionPromptChoice={onSelectSessionPromptChoice}
                 onSessionPromptChange={onSessionPromptChange}
+                onStartNativePty={startNativePtyFromDrawer}
                 onStartSession={onStartSession}
+                onSwitchToNative={() => setTerminalDrawerView("native")}
                 onSwitchToOutput={() => setTerminalDrawerView("output")}
                 onWorkingDirChange={onWorkingDirChange}
                 runningAdapterId={runningAdapterId}
+                runtimeAvailable={runtimeAvailable}
                 selectedMode={selectedMode}
+                selectedAdapterAvailable={selectedAdapterAvailable}
+                nativePtySessionCount={nativePtySessions.length}
+                nativePtyStatus={nativePtySession?.status || copy.idle}
                 selectedPromptCanReset={selectedPromptCanReset}
                 selectedPromptChoice={selectedPromptChoice}
                 selectedPromptIsCustomized={selectedPromptIsCustomized}
@@ -339,7 +408,7 @@ export function RuntimeTerminalDrawer({
                 <div className="desktop-actions native-pty-actions">
                   <button
                     type="button"
-                    onClick={() => void onStartNativePtySession({ rows: nativePtySession?.rows || 28, cols: nativePtySession?.cols || 100 })}
+                    onClick={startNativePtyFromDrawer}
                     disabled={!runtimeAvailable}
                   >
                     <SquareTerminal size={15} aria-hidden="true" />

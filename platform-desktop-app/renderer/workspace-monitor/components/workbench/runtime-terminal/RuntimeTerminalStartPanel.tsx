@@ -1,6 +1,6 @@
 "use client";
 
-import { Clipboard, Eraser, ListFilter, Settings, ShieldCheck, SquareTerminal } from "lucide-react";
+import { ArrowRight, Clipboard, Eraser, ListFilter, PlayCircle, Settings, ShieldCheck, SquareTerminal } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { RuntimeTerminalAdapter, RuntimeTerminalSessionMode, RuntimeTextChoice } from "./runtimeTerminalTypes";
 
@@ -15,11 +15,17 @@ type RuntimeTerminalStartPanelProps = {
   onSaveSessionPromptChoice?: () => void | Promise<void>;
   onSelectSessionPromptChoice?: (choice: RuntimeTextChoice) => void;
   onSessionPromptChange: (value: string) => void;
+  onStartNativePty: () => void | Promise<void>;
   onStartSession: () => void | Promise<void>;
+  onSwitchToNative: () => void;
   onSwitchToOutput: () => void;
   onWorkingDirChange: (value: string) => void;
   runningAdapterId: string;
+  runtimeAvailable: boolean;
   selectedMode: RuntimeTerminalSessionMode;
+  selectedAdapterAvailable: boolean;
+  nativePtySessionCount: number;
+  nativePtyStatus: string;
   selectedPromptCanReset: boolean;
   selectedPromptChoice: RuntimeTextChoice | null;
   selectedPromptIsCustomized: boolean;
@@ -52,11 +58,17 @@ export function RuntimeTerminalStartPanel({
   onSaveSessionPromptChoice,
   onSelectSessionPromptChoice,
   onSessionPromptChange,
+  onStartNativePty,
   onStartSession,
+  onSwitchToNative,
   onSwitchToOutput,
   onWorkingDirChange,
   runningAdapterId,
+  runtimeAvailable,
   selectedMode,
+  selectedAdapterAvailable,
+  nativePtySessionCount,
+  nativePtyStatus,
   selectedPromptCanReset,
   selectedPromptChoice,
   selectedPromptIsCustomized,
@@ -68,6 +80,8 @@ export function RuntimeTerminalStartPanel({
   workingDir,
   workingDirOptions
 }: RuntimeTerminalStartPanelProps) {
+  const runtimeReadyLabel = runtimeAvailable ? copy.ready : copy.blocked;
+  const adapterReadyLabel = selectedAdapterAvailable ? copy.ready : copy.blocked;
   const terminalUsageCards: TerminalUsageCard[] = [
     { id: "pty", icon: SquareTerminal, label: copy.terminalGuidePty, detail: copy.terminalGuidePtyDetail },
     { id: "cli", icon: ShieldCheck, label: copy.terminalGuideCli, detail: copy.terminalGuideCliDetail, onClick: onRunCliSetup },
@@ -77,6 +91,56 @@ export function RuntimeTerminalStartPanel({
 
   return (
     <div className="terminal-view-panel terminal-start-panel">
+      <section className="terminal-start-command-center" data-terminal-start-command-center aria-label={copy.terminalStartCommandCenter}>
+        <div className="terminal-start-primary-card">
+          <p className="eyebrow">{copy.terminalStartEyebrow}</p>
+          <h3>{copy.terminalStartTitle}</h3>
+          <p>{copy.terminalStartDetail}</p>
+          <div className="terminal-start-status-row">
+            <span>{copy.runtime}: <strong>{runtimeReadyLabel}</strong></span>
+            <span>{copy.adapter}: <strong>{adapterReadyLabel}</strong></span>
+            <span>{copy.native}: <strong>{nativePtySessionCount ? nativePtyStatus : copy.idle}</strong></span>
+          </div>
+          <button
+            type="button"
+            className="terminal-primary-action"
+            onClick={() => {
+              onSwitchToOutput();
+              void onStartSession();
+            }}
+            disabled={!canStartSession}
+            data-terminal-primary-action="start-session"
+          >
+            <PlayCircle size={16} aria-hidden="true" />
+            <span>{runningAdapterId === "session" ? copy.starting : copy.startSession}</span>
+          </button>
+        </div>
+        <div className="terminal-start-action-grid" data-terminal-recovery-actions>
+          <button
+            type="button"
+            onClick={() => {
+              onSwitchToNative();
+              void onStartNativePty();
+            }}
+            disabled={!runtimeAvailable}
+            data-terminal-primary-action="open-native-pty"
+          >
+            <SquareTerminal size={16} aria-hidden="true" />
+            <span>{copy.startNativePty}</span>
+            <small>{copy.terminalGuidePtyDetail}</small>
+          </button>
+          <button type="button" onClick={() => void onRunCliSetup?.()} disabled={!onRunCliSetup} data-terminal-primary-action="run-cli-setup">
+            <ShieldCheck size={16} aria-hidden="true" />
+            <span>{copy.terminalGuideCli}</span>
+            <small>{copy.terminalGuideCliDetail}</small>
+          </button>
+          <button type="button" onClick={onOpenSettings} data-terminal-primary-action="open-settings">
+            <Settings size={16} aria-hidden="true" />
+            <span>{copy.changeInit}</span>
+            <small>{copy.terminalGuideAccountDetail}</small>
+          </button>
+        </div>
+      </section>
       <div className="terminal-usage-guide" data-terminal-usage-guide>
         {terminalUsageCards.map((card) => (
           <article
@@ -96,6 +160,11 @@ export function RuntimeTerminalStartPanel({
           </article>
         ))}
       </div>
+      <details className="terminal-advanced-start">
+        <summary>
+          <span>{copy.advancedStart}</span>
+          <ArrowRight size={14} aria-hidden="true" />
+        </summary>
       <div className="session-launcher">
         <div className="settings-controlled-summary session-init-summary">
           <article>
@@ -191,6 +260,7 @@ export function RuntimeTerminalStartPanel({
           <span>{runningAdapterId === "session" ? copy.starting : copy.startSession}</span>
         </button>
       </div>
+      </details>
       <p className="session-mode-note">{selectedMode.intent}</p>
     </div>
   );

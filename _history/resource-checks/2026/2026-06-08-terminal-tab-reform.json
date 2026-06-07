@@ -1,0 +1,75 @@
+{
+  "task": "터미널 탭 개혁",
+  "work_mode": "standard",
+  "runtime_context": [
+    "React terminal drawer state",
+    "NativePtyTerminalSurface xterm lifecycle",
+    "Existing Tauri PTY commands",
+    "Next.js renderer build"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "duplicate-pty-session",
+      "category": "process",
+      "description": "A simplified open shell action could accidentally create duplicate PTY sessions.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "startNativePtyFromDrawer opens the native view and starts a PTY only when the current native session is not writable.",
+      "evidence": ["nativePtyWritable", "if (!nativePtyWritable)"]
+    },
+    {
+      "risk_id": "xterm-regression",
+      "category": "browser_context",
+      "description": "Changing the terminal drawer could regress existing xterm fit/search/clipboard controls.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "NativePtyTerminalSurface was left intact and static tests still check search, clipboard, clear, fit, and quick commands.",
+      "evidence": ["Native PTY terminal exposes search, clipboard, and quick command controls"]
+    },
+    {
+      "risk_id": "layout-overflow",
+      "category": "other",
+      "description": "New readiness and start grids could introduce horizontal overflow in the terminal drawer.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Responsive CSS collapses terminal readiness and action grids below 1080px.",
+      "evidence": ["terminal-readiness-strip responsive rule", "terminal-start-action-grid responsive rule"]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "native-pty-start-path",
+      "resource": "Native PTY session",
+      "create_path": "startNativePtyFromDrawer -> onStartNativePtySession",
+      "cleanup_path": "Existing cancel_native_pty_terminal and session retention cleanup paths",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "startNativePtyFromDrawer checks nativePtyWritable before starting a PTY.",
+        "Existing cancel_native_pty_terminal action remains wired in RuntimeTerminalDrawer.",
+        "Resource check preserves NativePtyTerminalSurface lifecycle and no new Rust command was added."
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "renderer-validation",
+      "metric": "Type, static contract, test, and production build",
+      "tool": "pnpm check/test/build",
+      "threshold": "exit code 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check -> exit code 0",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test -> exit code 0",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build -> exit code 0",
+        "corepack pnpm --dir platform-desktop-app run test -> exit code 0",
+        "corepack pnpm --dir platform-desktop-app run check -> exit code 0"
+      ]
+    }
+  ],
+  "notes": [
+    "No dependency installation occurred.",
+    "No new Rust PTY command was added; existing PTY lifecycle is reused."
+  ]
+}

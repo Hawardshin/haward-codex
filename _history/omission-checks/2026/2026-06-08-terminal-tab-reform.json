@@ -1,0 +1,86 @@
+{
+  "task": "터미널 탭 개혁",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "readiness-strip",
+      "description": "Terminal drawer shows runtime, adapter, live shell, and working directory readiness.",
+      "source": "REQ-WM-077",
+      "required": true,
+      "status": "covered",
+      "evidence": ["data-terminal-readiness", "terminal-readiness-facts"]
+    },
+    {
+      "item_id": "simple-start-hub",
+      "description": "Terminal start screen foregrounds start work, live shell, CLI check, and settings recovery actions.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": ["data-terminal-start-command-center", "data-terminal-primary-action"]
+    },
+    {
+      "item_id": "advanced-folded",
+      "description": "Advanced prompt and working directory tuning is folded by default.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": ["terminal-advanced-start"]
+    },
+    {
+      "item_id": "pty-controls-preserved",
+      "description": "Existing PTY search, clipboard, fit, and quick command controls remain.",
+      "source": "terminal regression risk",
+      "required": true,
+      "status": "covered",
+      "evidence": ["data-terminal-command-center", "data-terminal-quick-commands"]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/spec.ko.md",
+      "purpose": "Project spec",
+      "required": true
+    },
+    {
+      "path": "_requirements/changes/2026-06-08-terminal-tab-reform.ko.md",
+      "purpose": "Requirement change record",
+      "required": true
+    },
+    {
+      "path": "_history/web-searches/2026/2026-06-08-terminal-tab-reform.ko.md",
+      "purpose": "Web-first record",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-checks",
+      "description": "Workspace Monitor check/test/build pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check -> passed",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test -> 116 passed",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build -> passed",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build:customer -> passed",
+        "corepack pnpm --dir platform-desktop-app run test -> 30 passed",
+        "corepack pnpm --dir platform-desktop-app run check -> passed with non-blocking release/customer snapshot warnings"
+      ]
+    },
+    {
+      "check_id": "guards",
+      "description": "Omission, resource, and evaluation records pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-omissions target: _history/omission-checks/2026/2026-06-08-terminal-tab-reform.json",
+        "check-resources target: _history/resource-checks/2026/2026-06-08-terminal-tab-reform.json",
+        "evaluate-work target: _history/evaluations/2026/2026-06-08-terminal-tab-reform-input.json"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "No packaged native desktop click smoke was run in this slice.",
+    "Shell profile mutation and external CLI auto-install remain out of scope."
+  ]
+}

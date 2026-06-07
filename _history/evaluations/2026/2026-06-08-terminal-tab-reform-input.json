@@ -1,0 +1,119 @@
+{
+  "initial_instruction": "특히 터미널 탭 기능들 개혁이 필요",
+  "result_summary": "Changed the Terminal drawer into a run-and-recovery hub with readiness state, direct start/live-shell/CLI-check/settings actions, folded advanced options, updated copy, tests, requirements, specs, and history records.",
+  "work_mode": "standard",
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/runtime-terminal/RuntimeTerminalStartPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/runtime-terminal/runtimeTerminalCopy.ts",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-terminal-open-source-ui/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-terminal-open-source-ui/validation.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/plan.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/tasks.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/validation.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/traceability.ko.md",
+    "_requirements/changes/2026-06-08-terminal-tab-reform.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/customer-workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/admin-history-index.json",
+    "platform-desktop-app/renderer/workspace-monitor/public/workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/public/admin-history-index.json",
+    "_history/2026/2026-06-08.md",
+    "_history/web-searches/2026/2026-06-08-terminal-tab-reform.ko.md",
+    "_history/mode-selections/2026/2026-06-08-terminal-tab-reform.json",
+    "_history/large-scope-decompositions/2026/2026-06-08-terminal-tab-reform.json",
+    "_history/plans/2026/2026-06-08-terminal-tab-reform.ko.md",
+    "_history/user-requests/2026/2026-06-08-terminal-tab-reform.ko.md",
+    "_history/request-traces/2026/2026-06-08-terminal-tab-reform.ko.md",
+    "_history/work-summaries/2026/2026-06-08-terminal-tab-reform.ko.md",
+    "_history/work-timings/2026/2026-06-08-terminal-tab-reform.json",
+    "_history/omission-checks/2026/2026-06-08-terminal-tab-reform.json",
+    "_history/resource-checks/2026/2026-06-08-terminal-tab-reform.json",
+    "_history/evaluations/2026/2026-06-08-terminal-tab-reform-input.json"
+  ],
+  "verification": [
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check -> passed",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test -> 116 passed",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build -> passed",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build:customer -> passed",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort -> developer snapshot regenerated",
+    "corepack pnpm --dir platform-desktop-app run test -> 30 passed",
+    "corepack pnpm --dir platform-desktop-app run check -> passed with non-blocking release/customer snapshot warnings",
+    "python3 _tools/docs-audit/src/docs_audit.py --check -> docs_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/omission-checks/2026/2026-06-08-terminal-tab-reform.json -> coverage_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/resource-checks/2026/2026-06-08-terminal-tab-reform.json -> resource_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-08-terminal-tab-reform-input.json -> ready_to_close",
+    "git diff --check -> passed"
+  ],
+  "references_checked": [
+    "https://xtermjs.org/docs/",
+    "https://xtermjs.org/docs/guides/using-addons/",
+    "https://xtermjs.org/docs/guides/link-handling/",
+    "https://v2.tauri.app/reference/javascript/shell/",
+    "https://github.com/xtermjs/xterm.js/"
+  ],
+  "grounding_checks": [
+    "_history/web-searches/2026/2026-06-08-terminal-tab-reform.ko.md"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-08-terminal-tab-reform.ko.md",
+    "_history/large-scope-decompositions/2026/2026-06-08-terminal-tab-reform.json"
+  ],
+  "plan_evidence_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/plan.ko.md",
+    "_history/plans/2026/2026-06-08-terminal-tab-reform.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-08-terminal-tab-reform.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-08-terminal-tab-reform.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-08-terminal-tab-reform.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-08-terminal-tab-reform.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/changes/2026-06-08-terminal-tab-reform.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/plan.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/tasks.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/validation.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/traceability.ko.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-08-terminal-tab-reform.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-08-terminal-tab-reform.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-08-terminal-tab-reform.json"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-08-terminal-tab-reform.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "known_gaps": [],
+  "deferred_improvement_targets": [
+    "Packaged native desktop smoke that opens the Terminal drawer, starts a live shell, sends a command, and cancels the PTY."
+  ],
+  "improvement_ideas": [
+    "Split RuntimeTerminalDrawer into readiness, tabs, sidebar, and session panels to reduce future terminal changes.",
+    "Add native Tauri smoke coverage for PTY start/write/cancel from the UI."
+  ]
+}

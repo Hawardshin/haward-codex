@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-07T16:09:40.340Z",
+  "generatedAt": "2026-06-07T16:20:11.275Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 5,
@@ -12,12 +12,12 @@
     "tasks": 71,
     "completedTasks": 71,
     "documents": 650,
-    "requirements": 530,
+    "requirements": 532,
     "evaluations": 14,
     "webSearches": 13,
     "timingRecords": 14,
     "historyDays": 2,
-    "adminHistoryDocuments": 3199,
+    "adminHistoryDocuments": 3206,
     "adminHistoryDays": 9,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -5789,6 +5789,12 @@
       "sourcePath": "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md"
     },
     {
+      "id": "REQ-WM-077",
+      "requirement": "The Terminal tab shall act as a run and recovery hub instead of foregrounding advanced settings and raw session lists first. It shall show runtime, adapter, live shell, and working directory readiness, plus direct actions for starting work, opening a live shell, checking CLI connection/setup, and recovering through settings. Advanced prompt and working directory tuning shall stay folded.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md"
+    },
+    {
       "id": "REQ-WM-016",
       "requirement": "The web UI shall not embed the large workspace snapshot directly in the client JavaScript bundle, and shall provide a regression check that keeps initial JavaScript chunks within the performance budget.",
       "priority": "must",
@@ -6157,6 +6163,12 @@
     {
       "id": "REQ-WM-076",
       "requirement": "기본 사용자 보기는 작업 요청 입력, 자동 실행 시작, 실행 상태, 결과 확인만 전면에 두고 커스텀 에이전트/툴/소스/운영 기능은 developer 또는 superadmin 보기로 숨겨야 한다.",
+      "priority": "must",
+      "sourcePath": "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md"
+    },
+    {
+      "id": "REQ-WM-077",
+      "requirement": "터미널 탭은 고급 설정과 원시 세션 목록을 먼저 보여주는 화면이 아니라, 런타임/어댑터/실제 셸/작업 폴더 준비 상태, 바로 작업 시작, 실제 셸 열기, CLI 연결 점검, 설정 복구 액션을 한 화면에서 제공하는 실행 허브여야 한다. 고급 프롬프트/작업 폴더 세부 조정은 접힌 영역에 둔다.",
       "priority": "must",
       "sourcePath": "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md"
     },
@@ -7873,6 +7885,294 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-08-terminal-tab-reform-input-json",
+      "path": "_history/evaluations/2026/2026-06-08-terminal-tab-reform-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 08 Terminal Tab Reform Input",
+      "excerpt": "{ \"initial instruction\": \"특히 터미널 탭 기능들 개혁이 필요\", \"result summary\": \"Changed the Terminal drawer into a run and recovery hub with readiness state, direct start/live shell/CLI check/settings actions, folded advanced options, updated copy, tests, requirements, specs, and history reco",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;특히 터미널 탭 기능들 개혁이 필요&quot;, &quot;result summary&quot;: &quot;Changed the Terminal drawer into a run and recovery hub with readiness state, direct start/live shell/CLI check/settings actions, folded advanced options, updated copy, tests, requirements, specs, and history records.&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;changed files&quot;: &quot;platform desktop app/renderer/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 7494,
+      "updatedAt": "2026-06-07T16:19:55.752Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-08-terminal-tab-reform-validation-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: 터미널 탭 개혁",
+      "excerpt": "Validation: 터미널 탭 개혁 자동 검증 corepack pnpm dir platform desktop app/renderer/workspace monitor run check : 통과. corepack pnpm dir platform desktop app/renderer/workspace monitor test : 통과, 116개 테스트. corepack pnpm dir platform desktop app/renderer/workspace monitor run build : 통과. co",
+      "html": "<h1>Validation: 터미널 탭 개혁</h1>\n<h2>자동 검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code>: 통과.</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code>: 통과, 116개 테스트.</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build</code>: 통과.</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build:customer</code>: 통과.</li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort</code>: 통과, developer snapshot 복구.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run test</code>: 통과, 30개 테스트.</li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code>: 통과. 기존 public release/signing 및 customer snapshot stale 경고는 비차단 경고로 유지.</li>\n<li><code>python3 _tools/docs-audit/src/docs_audit.py --check</code>: 통과.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/omission-checks/2026/2026-06-08-terminal-tab-reform.json</code>: <code>coverage_ready</code>.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/resource-checks/2026/2026-06-08-terminal-tab-reform.json</code>: <code>resource_ready</code>.</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-08-terminal-tab-reform-input.json</code>: <code>ready_to_close</code>.</li>\n</ul>\n<h2>Browser 제한</h2>\n<ul>\n<li>현재 세션의 동적 도구 검색에서 인앱 브라우저 제어 도구가 노출되지 않으면 실제 클릭 smoke는 생략하고 정적 계약, TypeScript, Next build로 대체한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1558,
+      "updatedAt": "2026-06-07T16:19:45.133Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-08-terminal-tab-reform-tasks-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록: 터미널 탭 개혁",
+      "excerpt": "작업 목록: 터미널 탭 개혁 x 웹 우선 조사 기록 x 터미널 드로어/PTY/시작 패널 구조 파악 x readiness strip 추가 x 시작 화면 실행 허브 추가 x 고급 시작 옵션 접힘 처리 x 사용자 기본 용어를 실제 셸/연결 점검 중심으로 변경 x 정적 테스트 계약 추가 x check/test/build 검증 x omission/resource/evaluation 기록 검증 commit 및 push",
+      "html": "<h1>작업 목록: 터미널 탭 개혁</h1>\n<ul>\n<li>[x] 웹 우선 조사 기록</li>\n<li>[x] 터미널 드로어/PTY/시작 패널 구조 파악</li>\n<li>[x] readiness strip 추가</li>\n<li>[x] 시작 화면 실행 허브 추가</li>\n<li>[x] 고급 시작 옵션 접힘 처리</li>\n<li>[x] 사용자 기본 용어를 실제 셸/연결 점검 중심으로 변경</li>\n<li>[x] 정적 테스트 계약 추가</li>\n<li>[x] check/test/build 검증</li>\n<li>[x] omission/resource/evaluation 기록 검증</li>\n<li>[ ] commit 및 push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 455,
+      "updatedAt": "2026-06-07T16:19:20.455Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-08-terminal-tab-reform-json",
+      "path": "_history/work-timings/2026/2026-06-08-terminal-tab-reform.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 08 Terminal Tab Reform",
+      "excerpt": "{ \"task\": \"터미널 탭 개혁\", \"date\": \"2026 06 08\", \"phases\": { \"phase\": \"web first intake\", \"duration minutes\": 4, \"notes\": \"Checked xterm.js and Tauri shell references plus terminal UX signals.\" }, { \"phase\": \"local discovery\", \"duration minutes\": 15, \"notes\": \"Inspected RuntimeTermina",
+      "html": "<p>{ &quot;task&quot;: &quot;터미널 탭 개혁&quot;, &quot;date&quot;: &quot;2026 06 08&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;duration minutes&quot;: 4, &quot;notes&quot;: &quot;Checked xterm.js and Tauri shell references plus terminal UX signals.&quot; }, { &quot;phase&quot;: &quot;local discovery&quot;, &quot;duration minutes&quot;: 15, &quot;notes&quot;: &quot;Inspected RuntimeTerminalDrawer, RuntimeTerminalStartPanel, NativePtyTerminalSurface, PTY Rust runtime, </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1162,
+      "updatedAt": "2026-06-07T16:19:12.744Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-2026-2026-06-08-md",
+      "path": "_history/2026/2026-06-08.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 08 작업 기록",
+      "excerpt": "2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view ",
+      "html": "<p>2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view mode registry.json , AGENTS.md , Workspace Monitor 사용자 홈 화면, 관련 요구사항/스펙/검증 기록. 터</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1143,
+      "updatedAt": "2026-06-07T16:17:07.735Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-08-terminal-tab-reform-ko-md",
+      "path": "_history/request-traces/2026/2026-06-08-terminal-tab-reform.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: 터미널 탭 개혁",
+      "excerpt": "요청 결과 추적: 터미널 탭 개혁 요청 터미널 탭 기능을 개혁한다. 결과 대상 RuntimeTerminalDrawer.tsx RuntimeTerminalStartPanel.tsx runtimeTerminalCopy.ts globals.css tool studio.test.mjs REQ WM 077 platform desktop app/renderer/workspace monitor/specs/2026 06 08 terminal tab reform/ 검증 대상 corepack pnpm dir pla",
+      "html": "<p>요청 결과 추적: 터미널 탭 개혁 요청 터미널 탭 기능을 개혁한다. 결과 대상 RuntimeTerminalDrawer.tsx RuntimeTerminalStartPanel.tsx runtimeTerminalCopy.ts globals.css tool studio.test.mjs REQ WM 077 platform desktop app/renderer/workspace monitor/specs/2026 06 08 terminal tab reform/ 검증 대상 corepack pnpm dir platform desktop app/renderer/workspace monitor run check corepack pnpm dir platfor</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 630,
+      "updatedAt": "2026-06-07T16:16:59.383Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-08-terminal-tab-reform-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-08-terminal-tab-reform.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 터미널 탭 개혁",
+      "excerpt": "작업 요약: 터미널 탭 개혁 터미널 드로어 상단에 readiness strip을 추가해 런타임, 어댑터, 실제 셸, 작업 폴더 상태를 노출했다. 시작 패널에 작업 시작, 실제 셸 열기, CLI 연결 점검, 설정 복구 액션을 우선 배치했다. 프롬프트 선택과 작업 폴더 세부 조정은 terminal advanced start 접힘 영역으로 이동했다. 사용자 기본 용어를 PTY 중심에서 실제 셸 과 연결 점검 중심으로 바꿨다. 기존 xterm 기반 검색, 클립보드, 화면 맞춤, 빠른 명령 기능은 유지했다",
+      "html": "<p>작업 요약: 터미널 탭 개혁 터미널 드로어 상단에 readiness strip을 추가해 런타임, 어댑터, 실제 셸, 작업 폴더 상태를 노출했다. 시작 패널에 작업 시작, 실제 셸 열기, CLI 연결 점검, 설정 복구 액션을 우선 배치했다. 프롬프트 선택과 작업 폴더 세부 조정은 terminal advanced start 접힘 영역으로 이동했다. 사용자 기본 용어를 PTY 중심에서 실제 셸 과 연결 점검 중심으로 바꿨다. 기존 xterm 기반 검색, 클립보드, 화면 맞춤, 빠른 명령 기능은 유지했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 606,
+      "updatedAt": "2026-06-07T16:16:59.383Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-08-terminal-tab-reform-ko-md",
+      "path": "_history/user-requests/2026/2026-06-08-terminal-tab-reform.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 터미널 탭 개혁",
+      "excerpt": "사용자 요청 요약: 터미널 탭 개혁 사용자는 플랫폼의 터미널 탭 기능이 특히 문제라고 지적했다. 앞선 맥락에서 터미널/PTY/CLI 연결 상태가 보이는 것과 실제 사용 경로가 달라 첫 실행과 에이전트 실행이 어렵다는 문제가 있었다. 목표는 사용자에게 복잡한 설정을 먼저 보이지 않고, 실행 가능 상태와 바로 실행/복구 액션을 보여주는 것이다.",
+      "html": "<p>사용자 요청 요약: 터미널 탭 개혁 사용자는 플랫폼의 터미널 탭 기능이 특히 문제라고 지적했다. 앞선 맥락에서 터미널/PTY/CLI 연결 상태가 보이는 것과 실제 사용 경로가 달라 첫 실행과 에이전트 실행이 어렵다는 문제가 있었다. 목표는 사용자에게 복잡한 설정을 먼저 보이지 않고, 실행 가능 상태와 바로 실행/복구 액션을 보여주는 것이다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 463,
+      "updatedAt": "2026-06-07T16:16:59.382Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-plans-2026-2026-06-08-terminal-tab-reform-ko-md",
+      "path": "_history/plans/2026/2026-06-08-terminal-tab-reform.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "계획: 터미널 탭 개혁",
+      "excerpt": "계획: 터미널 탭 개혁 1. 터미널 드로어와 PTY surface의 현재 구조를 확인한다. 2. 시작 화면을 실행 허브로 바꾸고 고급 설정을 접는다. 3. 드로어 상단 readiness strip을 추가한다. 4. 기존 xterm 기반 검색/복사/붙여넣기/맞춤/빠른 명령 기능을 유지한다. 5. 요구사항, 스펙, 테스트, 생성 스냅샷, 평가 기록을 갱신한다. 6. check/test/build와 guard를 통과시킨 뒤 commit/push한다.",
+      "html": "<p>계획: 터미널 탭 개혁 1. 터미널 드로어와 PTY surface의 현재 구조를 확인한다. 2. 시작 화면을 실행 허브로 바꾸고 고급 설정을 접는다. 3. 드로어 상단 readiness strip을 추가한다. 4. 기존 xterm 기반 검색/복사/붙여넣기/맞춤/빠른 명령 기능을 유지한다. 5. 요구사항, 스펙, 테스트, 생성 스냅샷, 평가 기록을 갱신한다. 6. check/test/build와 guard를 통과시킨 뒤 commit/push한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 480,
+      "updatedAt": "2026-06-07T16:16:59.381Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-08-terminal-tab-reform-ko-md",
+      "path": "_history/web-searches/2026/2026-06-08-terminal-tab-reform.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: 터미널 탭 개혁",
+      "excerpt": "웹 검색 기록: 터미널 탭 개혁 쿼리 terminal UI UX tabs command palette terminal panes best practices official docs xterm.js documentation terminal addon fit attach web links official Tauri v2 shell plugin command sidecar pty terminal documentation node pty terminal emulator pseudoterminal best",
+      "html": "<p>웹 검색 기록: 터미널 탭 개혁 쿼리 terminal UI UX tabs command palette terminal panes best practices official docs xterm.js documentation terminal addon fit attach web links official Tauri v2 shell plugin command sidecar pty terminal documentation node pty terminal emulator pseudoterminal best practices official GitHub 확인한 출처 xterm.js Documentation: https://xtermjs.org/do</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1263,
+      "updatedAt": "2026-06-07T16:16:59.379Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-08-terminal-tab-reform-traceability-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Traceability: 터미널 탭 개혁",
+      "excerpt": "Traceability: 터미널 탭 개혁 | 요구사항 | 구현 | 검증 | | | | | | REQ WM 077 | RuntimeTerminalDrawer.tsx , RuntimeTerminalStartPanel.tsx , runtimeTerminalCopy.ts , globals.css | tool studio.test.mjs , pnpm run check , pnpm test , pnpm run build | | 터미널 PTY 기능 유지 | RuntimeNativePtyTerminalSurfa",
+      "html": "<h1>Traceability: 터미널 탭 개혁</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>REQ-WM-077</td><td><code>RuntimeTerminalDrawer.tsx</code>, <code>RuntimeTerminalStartPanel.tsx</code>, <code>runtimeTerminalCopy.ts</code>, <code>globals.css</code></td><td><code>tool-studio.test.mjs</code>, <code>pnpm run check</code>, <code>pnpm test</code>, <code>pnpm run build</code></td></tr><tr><td>터미널 PTY 기능 유지</td><td><code>RuntimeNativePtyTerminalSurface.tsx</code> 기존 search/copy/paste/fit/quick command 유지</td><td><code>Native PTY terminal exposes search, clipboard, and quick command controls</code></td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 486,
+      "updatedAt": "2026-06-07T16:15:49.928Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-08-terminal-tab-reform-plan-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "구현 계획: 터미널 탭 개혁",
+      "excerpt": "구현 계획: 터미널 탭 개혁 1. 현재 터미널 드로어, 시작 패널, PTY surface, copy, CSS, 테스트를 확인한다. 2. 시작 패널을 실행 허브로 재구성하고 고급 시작 옵션을 접는다. 3. 드로어 상단에 readiness strip을 추가해 런타임/어댑터/실제 셸/작업 폴더 상태를 표시한다. 4. 기존 PTY search/copy/paste/fit/quick command 기능이 유지되는지 정적 테스트로 묶는다. 5. 요구사항, 기존 터미널 스펙, 새 스펙, 이력, 평가 기록을 갱신",
+      "html": "<h1>구현 계획: 터미널 탭 개혁</h1>\n<p>1. 현재 터미널 드로어, 시작 패널, PTY surface, copy, CSS, 테스트를 확인한다.</p>\n<p>2. 시작 패널을 실행 허브로 재구성하고 고급 시작 옵션을 접는다.</p>\n<p>3. 드로어 상단에 readiness strip을 추가해 런타임/어댑터/실제 셸/작업 폴더 상태를 표시한다.</p>\n<p>4. 기존 PTY search/copy/paste/fit/quick command 기능이 유지되는지 정적 테스트로 묶는다.</p>\n<p>5. 요구사항, 기존 터미널 스펙, 새 스펙, 이력, 평가 기록을 갱신한다.</p>\n<p>6. check/test/build와 guard를 통과시킨 뒤 commit/push한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 613,
+      "updatedAt": "2026-06-07T16:15:49.927Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-08-terminal-tab-reform-spec-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: 터미널 탭 개혁",
+      "excerpt": "Spec: 터미널 탭 개혁 목표 터미널 탭을 사용자가 처음 열었을 때 “무엇을 눌러야 실행되는지, 왜 막혔는지, 실제 셸은 어디서 여는지”가 즉시 보이는 실행 허브로 바꾼다. 요구사항 REQ WM 077 : 터미널 탭은 런타임/어댑터/실제 셸/작업 폴더 준비 상태를 상단에 보여야 한다. 시작 화면은 작업 시작, 실제 셸 열기, CLI 연결 점검, 설정 복구 액션을 먼저 제공해야 한다. 프롬프트 선택, 작업 폴더 세부 입력, 프롬프트 저장/초기화 같은 고급 시작 옵션은 접힌 영역에 둔다. 기존 네이",
+      "html": "<h1>Spec: 터미널 탭 개혁</h1>\n<h2>목표</h2>\n<p>터미널 탭을 사용자가 처음 열었을 때 “무엇을 눌러야 실행되는지, 왜 막혔는지, 실제 셸은 어디서 여는지”가 즉시 보이는 실행 허브로 바꾼다.</p>\n<h2>요구사항</h2>\n<ul>\n<li><code>REQ-WM-077</code>: 터미널 탭은 런타임/어댑터/실제 셸/작업 폴더 준비 상태를 상단에 보여야 한다.</li>\n<li>시작 화면은 작업 시작, 실제 셸 열기, CLI 연결 점검, 설정 복구 액션을 먼저 제공해야 한다.</li>\n<li>프롬프트 선택, 작업 폴더 세부 입력, 프롬프트 저장/초기화 같은 고급 시작 옵션은 접힌 영역에 둔다.</li>\n<li>기존 네이티브 PTY xterm.js surface의 검색, 복사, 붙여넣기, 맞춤, 빠른 명령 기능은 유지한다.</li>\n<li>좁은 화면에서 readiness strip, start command center, action grid가 수평 overflow를 만들면 안 된다.</li>\n</ul>\n<h2>구현 범위</h2>\n<ul>\n<li><code>RuntimeTerminalDrawer.tsx</code>: readiness strip, 실행/복구 액션, 실제 셸 시작 동선.</li>\n<li><code>RuntimeTerminalStartPanel.tsx</code>: 사용자용 시작 허브와 접힌 고급 시작 옵션.</li>\n<li><code>runtimeTerminalCopy.ts</code>: 사용자 기본 용어를 <code>PTY</code> 중심에서 <code>실제 셸</code> 중심으로 변경.</li>\n<li><code>globals.css</code>: 터미널 readiness/start hub 반응형 레이아웃.</li>\n<li><code>tool-studio.test.mjs</code>: 터미널 실행 허브 정적 계약.</li>\n</ul>\n<h2>제외 범위</h2>\n<ul>\n<li>shell profile 자동 수정.</li>\n<li>외부 CLI 자동 설치.</li>\n<li>PTY escape sequence fidelity 확장.</li>\n<li>터미널 session persistence 저장소 변경.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li><code>data-terminal-readiness</code>가 터미널 드로어에 있어야 한다.</li>\n<li><code>data-terminal-start-command-center</code>와 <code>data-terminal-primary-action</code>들이 시작 화면에 있어야 한다.</li>\n<li><code>terminal-advanced-start</code>가 고급 입력 영역을 접어야 한다.</li>\n<li>기존 <code>data-terminal-command-center</code>, 검색, 클립보드, 빠른 명령 기능이 유지되어야 한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1886,
+      "updatedAt": "2026-06-07T16:15:49.927Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "requirements-changes-2026-06-08-terminal-tab-reform-ko-md",
+      "path": "_requirements/changes/2026-06-08-terminal-tab-reform.ko.md",
+      "category": "requirement",
+      "language": "ko",
+      "title": "요구사항 변경: 터미널 탭 개혁",
+      "excerpt": "요구사항 변경: 터미널 탭 개혁 변경 요약 REQ WM 077 : 터미널 탭은 고급 설정과 원시 세션 목록을 먼저 보여주는 화면이 아니라 실행/복구 허브로 동작해야 한다. 사용자 기본 흐름은 런타임 준비 상태 확인, 작업 시작, 실제 셸 열기, CLI 연결 점검, 설정 복구 액션을 먼저 보여준다. 고급 프롬프트와 작업 폴더 세부 조정은 접힌 영역에 둔다. 근거 사용자가 터미널 탭과 PTY/CLI 연결 상태가 실제 동작과 다르게 보이고, 첫 실행을 시작하기 어렵다고 지적했다. xterm.js 공식 ",
+      "html": "<h1>요구사항 변경: 터미널 탭 개혁</h1>\n<h2>변경 요약</h2>\n<ul>\n<li><code>REQ-WM-077</code>: 터미널 탭은 고급 설정과 원시 세션 목록을 먼저 보여주는 화면이 아니라 실행/복구 허브로 동작해야 한다.</li>\n<li>사용자 기본 흐름은 런타임 준비 상태 확인, 작업 시작, 실제 셸 열기, CLI 연결 점검, 설정 복구 액션을 먼저 보여준다.</li>\n<li>고급 프롬프트와 작업 폴더 세부 조정은 접힌 영역에 둔다.</li>\n</ul>\n<h2>근거</h2>\n<ul>\n<li>사용자가 터미널 탭과 PTY/CLI 연결 상태가 실제 동작과 다르게 보이고, 첫 실행을 시작하기 어렵다고 지적했다.</li>\n<li>xterm.js 공식 문서는 fit/search/link 같은 terminal addon 기반 상호작용을 터미널 surface에 붙이는 방식을 제공한다.</li>\n<li>Tauri shell/sidecar 문서는 외부 명령 실행이 명시적 권한과 상태 노출을 필요로 하는 런타임 경계임을 보여준다.</li>\n</ul>\n<h2>검증</h2>\n<ul>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build</code></li>\n<li>close-out omission/resource/evaluation guard</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1214,
+      "updatedAt": "2026-06-07T16:15:49.926Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_requirements/changes"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-terminal-open-source-ui-validation-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-terminal-open-source-ui/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Validation: Terminal Open Source UI",
+      "excerpt": "Validation: Terminal Open Source UI 자동 검증 corepack pnpm filter workspace monitor run check : 통과 TypeScript 통과 scroll contract ok source control design ok corepack pnpm filter workspace monitor test : 통과, 17개 테스트. corepack pnpm filter workspace monitor run build:customer : 통과. cor",
+      "html": "<h1>Validation: Terminal Open Source UI</h1>\n<h2>자동 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과</li>\n<li>TypeScript 통과</li>\n<li><code>scroll_contract_ok</code></li>\n<li><code>source_control_design_ok</code></li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 17개 테스트.</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: 통과.</li>\n<li>largest chunk: <code>13hno~t5sp9b..js</code></li>\n<li>bytes: <code>328833</code></li>\n<li>budget: <code>1000000</code></li>\n<li><code>corepack pnpm --filter platform-desktop-app run check</code>: 통과.</li>\n<li>기존 public release gate 경고는 유지: public signing/notarization, updater, clean-machine smoke.</li>\n</ul>\n<h2>Browser 검증</h2>\n<ul>\n<li>in-app Browser target: <code>http://127.0.0.1:3224/</code></li>\n<li>시작 화면: 핵심 홈.</li>\n<li>titlebar <code>터미널</code> 버튼 count: <code>1</code>.</li>\n<li>클릭 후 hash: <code>#section-desktop</code>.</li>\n<li>drawer class: <code>panel wide cli-session-panel terminal-drawer open</code>.</li>\n<li>terminal chrome visible: <code>true</code>.</li>\n<li>terminal tab count: <code>5</code>.</li>\n<li>tab texts: <code>시작확인 필요</code>, <code>세션0</code>, <code>실제 셸대기</code>, <code>출력대기</code>, <code>이벤트0</code>.</li>\n<li>terminal readiness strip: visible.</li>\n<li>terminal start command center: visible.</li>\n<li>computed background:</li>\n<li>drawer: <code>rgb(13, 17, 23)</code></li>\n<li>chrome: <code>rgb(13, 17, 23)</code></li>\n<li>main: <code>rgb(13, 17, 23)</code></li>\n<li>body horizontal overflow: <code>0</code>.</li>\n</ul>\n<h2>정적 export viewport 검증</h2>\n<p>기존 <code>presentation-agent</code>의 Playwright dependency를 설치 변경 없이 사용했다.</p>\n<table><thead><tr><th>Viewport</th><th>hash</th><th>drawer</th><th>chrome</th><th>tabs</th><th>body overflow</th><th>drawer overflow</th></tr></thead><tbody><tr><td>1280x820</td><td><code>#section-desktop</code></td><td>open</td><td>visible</td><td>5</td><td>0</td><td>0</td></tr><tr><td>900x720</td><td><code>#section-desktop</code></td><td>open</td><td>visible</td><td>5</td><td>0</td><td>0</td></tr><tr><td>390x720</td><td><code>#section-desktop</code></td><td>open</td><td>visible</td><td>5</td><td>0</td><td>0</td></tr></tbody></table>\n<h2>알려진 제한</h2>\n<ul>\n<li>이번 작업은 terminal UI surface와 시작 흐름의 구조 개선이다.</li>\n<li>shell profile 자동 수정과 terminal escape sequence fidelity 확장은 별도 제품 slice다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1943,
+      "updatedAt": "2026-06-07T16:15:20.922Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-terminal-open-source-ui-spec-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-terminal-open-source-ui/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "Spec: Terminal Open Source UI",
+      "excerpt": "Spec: Terminal Open Source UI 목표 Workspace Monitor의 터미널/CLI 실행 UI가 일반 웹 카드처럼 보이지 않고, 사용자가 이미 익숙한 개발 도구형 터미널 surface로 인지되게 한다. 요구사항 REQ WM 040 : 터미널은 terminal chrome, tab strip, dark emulator surface, monospace output, prompt input, status/cwd bar를 기본 구조로 사용한다. REQ WM 077 : 터미널 시작",
+      "html": "<h1>Spec: Terminal Open Source UI</h1>\n<h2>목표</h2>\n<p>Workspace Monitor의 터미널/CLI 실행 UI가 일반 웹 카드처럼 보이지 않고, 사용자가 이미 익숙한 개발 도구형 터미널 surface로 인지되게 한다.</p>\n<h2>요구사항</h2>\n<ul>\n<li><code>REQ-WM-040</code>: 터미널은 terminal chrome, tab strip, dark emulator surface, monospace output, prompt input, status/cwd bar를 기본 구조로 사용한다.</li>\n<li><code>REQ-WM-077</code>: 터미널 시작 화면은 런타임/어댑터/실제 셸/작업 폴더 준비 상태, 작업 시작, 실제 셸 열기, CLI 연결 점검을 먼저 보여주고 고급 프롬프트 조정은 접힌 영역에 둔다.</li>\n<li>전역 터미널 버튼은 현재 화면이 overview, agents, settings 등 터미널이 마운트되지 않은 화면이어도 실제 터미널이 존재하는 Desktop Runtime 화면으로 이동한 뒤 드로어를 연다.</li>\n<li>1280px, 900px, 390px 폭에서 root/body/drawer 수평 overflow가 없어야 한다.</li>\n<li>터미널 탭은 좁은 폭에서 2열 grid로 접히고, 클릭 target이 32px 아래로 줄어들면 안 된다.</li>\n</ul>\n<h2>구현 범위</h2>\n<ul>\n<li><code>RuntimeTerminalDrawer.tsx</code>: terminal chrome bar, tab strip relocation, cwd/status metadata, emulator meta row, prompt-style input row.</li>\n<li><code>RuntimeTerminalDrawer.tsx</code>: 터미널 준비 상태 strip, 사용자용 시작 허브, 실제 셸/CLI 점검 복구 액션.</li>\n<li><code>MonitorShell.tsx</code>: 전역 터미널 열기 동작을 터미널 마운트 화면 라우팅과 결합.</li>\n<li><code>globals.css</code>: dark terminal surface, white foreground, monospace output, compact tab strip, responsive terminal chrome.</li>\n</ul>\n<h2>제외 범위</h2>\n<ul>\n<li>추가 외부 CLI 자동 설치.</li>\n<li>shell profile 자동 수정, terminal escape sequence fidelity 확장.</li>\n<li>터미널 session persistence 구조 변경.</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>in-app Browser에서 overview titlebar 터미널 버튼을 누르면 <code>#section-desktop</code>으로 이동하고 <code>.terminal-drawer.open</code>과 <code>.terminal-chrome-bar</code>가 보여야 한다.</li>\n<li>terminal chrome은 시작, 세션, 실제 셸, 출력, 이벤트 탭을 보여야 한다.</li>\n<li>시작 화면에는 <code>data-terminal-readiness</code>, <code>data-terminal-start-command-center</code>, <code>data-terminal-primary-action</code>과 접힌 <code>terminal-advanced-start</code>가 있어야 한다.</li>\n<li>terminal drawer, chrome, main surface의 computed background는 어두운 terminal 계열이어야 한다.</li>\n<li>정적 export 1280/900/390px smoke에서 <code>bodyOverflowX=0</code>, <code>drawerOverflowX=0</code>이어야 한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2424,
+      "updatedAt": "2026-06-07T16:15:13.061Z",
+      "historyDate": "2026-06-05",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-docs-requirements-2026-06-01-workspace-monitor-en-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md",
+      "category": "project-doc",
+      "language": "en",
+      "title": "Requirements: Workspace Monitor",
+      "excerpt": "Requirements: Workspace Monitor Status Status: baseline Baseline date: 2026 06 01 Owning project: platform desktop app/renderer/workspace monitor/ Source request: UR 2026 06 01 008 Requirements | ID | Requirement | Priority | Verification | | | | | | | REQ WM 001 | The project sh",
+      "html": "<h1>Requirements: Workspace Monitor</h1>\n<h2>Status</h2>\n<ul>\n<li>Status: <code>baseline</code></li>\n<li>Baseline date: 2026-06-01</li>\n<li>Owning project: <code>platform-desktop-app/renderer/workspace-monitor/</code></li>\n<li>Source request: <code>UR-2026-06-01-008</code></li>\n</ul>\n<h2>Requirements</h2>\n<table><thead><tr><th>ID</th><th>Requirement</th><th>Priority</th><th>Verification</th></tr></thead><tbody><tr><td>REQ-WM-001</td><td>The project shall be a Vercel-deployable Next.js project.</td><td>must</td><td><code>pnpm run build</code> passes and <code>README.md</code> records Vercel setup</td></tr><tr><td>REQ-WM-002</td><td>The app shall let the user browse repository history, work summaries, request traces, projects, agent/task status, requirements, specs, and evaluations from one UI.</td><td>must</td><td>Generated snapshot and UI sections reviewed</td></tr><tr><td>REQ-WM-003</td><td>Markdown documents shall be viewable as readable HTML previews.</td><td>must</td><td>Snapshot documents include escaped HTML previews</td></tr><tr><td>REQ-WM-004</td><td>The app shall work locally while the repository is private and be deployable to Vercel after the repository is made public.</td><td>must</td><td>Static snapshot build and deployment docs reviewed</td></tr><tr><td>REQ-WM-005</td><td>The structure shall be extensible, separating document parsing, UI components, data models, and deployment settings.</td><td>should</td><td>Folder structure and types reviewed</td></tr><tr><td>REQ-WM-006</td><td>The project shall support pre-publication review for sensitive data in generated snapshots.</td><td>must</td><td>README and deployment docs include public-release checks</td></tr><tr><td>REQ-WM-007</td><td>The app shall collect work summaries, user requests, request traces, web searches, plans, evaluations, and daily history under <code>_history/</code> into a date-indexed web UI that can be filtered by date and type.</td><td>must</td><td><code>historyDays</code> in the snapshot and History UI date filter</td></tr><tr><td>REQ-WM-008</td><td>The web UI should show root folder structure, <code>_docs</code> categories, project top-level homes, and history source roots so folder boundaries and data provenance are understandable.</td><td>should</td><td><code>folderStructure</code> in the snapshot and Structure UI</td></tr><tr><td>REQ-WM-009</td><td>The UI shall combine agent definitions from <code>agent-platform/configs/agents/</code> with coordination runtime state so users can visually see which agents exist.</td><td>must</td><td>Check snapshot <code>agentCatalog</code> and the Agents inventory map</td></tr><tr><td>REQ-WM-010</td><td>The UI shall visualize <code>_history/</code> document density by date and distribution by history type.</td><td>must</td><td>Check the History density chart and category bars</td></tr><tr><td>REQ-WM-011</td><td>The UI shall read <code>agent-platform/configs/access/view-mode-registry.json</code> and allow selecting <code>user</code>, <code>developer</code>, and <code>superadmin_developer</code> view modes, with user view as the current default.</td><td>must</td><td>Check snapshot <code>viewModeCatalog</code>, the top view mode selector, and <code>check-view-modes</code></td></tr><tr><td>REQ-WM-012</td><td>The UI shall let developer and superadmin development views browse source code from key projects and tools as read-only content.</td><td>must</td><td>Check snapshot <code>sourceFiles</code>, the Source tab, and <code>pnpm run build</code></td></tr><tr><td>REQ-WM-013</td><td>The UI shall show which work lane each agent is moving through and which task/project each agent is connected to through a collaboration board and flow map.</td><td>must</td><td>Check snapshot <code>collaborationBoard</code>, Agents UI collaboration lanes/flow, and <code>pnpm run build</code></td></tr><tr><td>REQ-WM-014</td><td>The web UI should allow a subtly cute, quietly delightful visual tone while preserving operational density and trust.</td><td>should</td><td>Check UI tone policy, <code>globals.css</code>, and <code>pnpm run build</code></td></tr><tr><td>REQ-WM-015</td><td>The web UI shall read <code>agent-platform/configs/access/language-mode-registry.json</code> and allow selecting all-language, Korean-only, and English-only document views, applying the same language lens to documents, history, and summary counts.</td><td>must</td><td>Check snapshot <code>languageModeCatalog</code>, the language selector, <code>pnpm run collect</code>, <code>pnpm test</code>, <code>pnpm run check</code>, and <code>pnpm run build</code></td></tr><tr><td>REQ-WM-076</td><td>The default user view shall foreground only task intake, automatic run start, run status, and result review while hiding custom agents, tools, source, and operator functions behind developer or superadmin views.</td><td>must</td><td>Check <code>user</code> view mode allowed sections, home <code>data-simple-user-start</code>, activity rail, <code>pnpm test</code>, <code>pnpm run check</code>, and <code>pnpm run build</code></td></tr><tr><td>REQ-WM-077</td><td>The Terminal tab shall act as a run-and-recovery hub instead of foregrounding advanced settings and raw session lists first. It shall show runtime, adapter, live shell, and working-directory readiness, plus direct actions for starting work, opening a live shell, checking CLI connection/setup, and recovering through settings. Advanced prompt and working-directory tuning shall stay folded.</td><td>must</td><td>Check <code>data-terminal-readiness</code>, <code>data-terminal-start-command-center</code>, <code>data-terminal-primary-action</code>, <code>terminal-advanced-start</code>, <code>pnpm test</code>, <code>pnpm run check</code>, and <code>pnpm run build</code></td></tr><tr><td>REQ-WM-016</td><td>The web UI shall not embed the large workspace snapshot directly in the client JavaScript bundle, and shall provide a regression check that keeps initial JavaScript chunks within the performance budget.</td><td>must</td><td>Check <code>pnpm run build</code>, <code>pnpm run perf:budget</code>, and static Playwright smoke</td></tr></tbody></table>\n<p>| REQ-WM-017 | The static export shall render the main dashboard not only from an HTTP root, but also from desktop shell, file/subpath-like contexts, and repository subpath static serving by lo</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 32839,
+      "updatedAt": "2026-06-07T16:15:02.544Z",
+      "historyDate": "2026-06-01",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-docs-requirements-2026-06-01-workspace-monitor-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "요구사항: Workspace Monitor",
+      "excerpt": "요구사항: Workspace Monitor 상태 상태: baseline 기준일: 2026 06 01 소유 프로젝트: platform desktop app/renderer/workspace monitor/ 출처 요청: UR 2026 06 01 008 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | REQ WM 001 | Vercel에 배포 가능한 Next.js 프로젝트여야 한다. | must | pnpm run build 통과, README.md 에 Vercel 설정 기",
+      "html": "<h1>요구사항: Workspace Monitor</h1>\n<h2>상태</h2>\n<ul>\n<li>상태: <code>baseline</code></li>\n<li>기준일: 2026-06-01</li>\n<li>소유 프로젝트: <code>platform-desktop-app/renderer/workspace-monitor/</code></li>\n<li>출처 요청: <code>UR-2026-06-01-008</code></li>\n</ul>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-WM-001</td><td>Vercel에 배포 가능한 Next.js 프로젝트여야 한다.</td><td>must</td><td><code>pnpm run build</code> 통과, <code>README.md</code>에 Vercel 설정 기록</td></tr><tr><td>REQ-WM-002</td><td>저장소의 히스토리, 작업 요약, 요청 추적, 프로젝트, 에이전트/작업 상태, 요구사항, 스펙, 평가 문서를 한 화면에서 탐색할 수 있어야 한다.</td><td>must</td><td>생성된 snapshot과 UI 섹션 확인</td></tr><tr><td>REQ-WM-003</td><td>Markdown 문서를 읽기 편한 HTML preview로 보여줄 수 있어야 한다.</td><td>must</td><td>snapshot 문서에 escaped HTML preview 포함</td></tr><tr><td>REQ-WM-004</td><td>현재 private repository에서도 로컬로 쓸 수 있고, 나중에 public 전환 후 Vercel에 올릴 수 있어야 한다.</td><td>must</td><td>정적 snapshot 기반 build, 배포 문서 확인</td></tr><tr><td>REQ-WM-005</td><td>확장 가능한 구조여야 하며 문서 파싱, UI 컴포넌트, 데이터 모델, 배포 설정이 분리되어야 한다.</td><td>should</td><td>폴더 구조와 타입 분리 검토</td></tr><tr><td>REQ-WM-006</td><td>public 배포 전 민감 정보가 snapshot에 들어가는지 검토할 수 있어야 한다.</td><td>must</td><td>README와 deployment docs에 공개 전 점검 절차 기록</td></tr><tr><td>REQ-WM-007</td><td><code>_history/</code>의 작업 요약, 요청 요약, 요청 추적, 웹 검색, 계획, 평가, 일일 기록을 날짜별로 모아 웹 UI에서 날짜와 유형으로 탐색할 수 있어야 한다.</td><td>must</td><td>snapshot의 <code>historyDays</code>와 History UI 날짜 filter 확인</td></tr><tr><td>REQ-WM-008</td><td>웹 UI는 루트 폴더 구조, <code>_docs</code> 카테고리, 프로젝트별 top-level home, 히스토리 수집 위치를 보여줘 폴더 경계와 데이터 출처를 이해할 수 있어야 한다.</td><td>should</td><td>snapshot의 <code>folderStructure</code>와 Structure UI 확인</td></tr><tr><td>REQ-WM-009</td><td>웹 UI는 <code>agent-platform/configs/agents/</code>의 에이전트 정의와 coordination runtime 상태를 합쳐 어떤 에이전트가 있는지 시각적으로 보여줘야 한다.</td><td>must</td><td>snapshot의 <code>agentCatalog</code>와 Agents UI 구성 맵 확인</td></tr><tr><td>REQ-WM-010</td><td>웹 UI는 <code>_history/</code> 문서의 날짜별 밀도와 유형별 분포를 시각화해야 한다.</td><td>must</td><td>History UI의 밀도 차트와 유형 막대 확인</td></tr><tr><td>REQ-WM-011</td><td>웹 UI는 <code>agent-platform/configs/access/view-mode-registry.json</code>을 읽어 <code>user</code>, <code>developer</code>, <code>superadmin_developer</code> 보기 모드를 선택할 수 있어야 하며, 현재 기본값은 사용자 보기여야 한다.</td><td>must</td><td>snapshot의 <code>viewModeCatalog</code>, 상단 view mode selector, <code>check-view-modes</code> 확인</td></tr><tr><td>REQ-WM-012</td><td>웹 UI는 developer와 superadmin 개발 보기에서 주요 프로젝트와 도구의 소스 코드를 읽기 전용으로 탐색할 수 있어야 한다.</td><td>must</td><td>snapshot의 <code>sourceFiles</code>, Source 탭, <code>pnpm run build</code> 확인</td></tr><tr><td>REQ-WM-013</td><td>웹 UI는 에이전트들이 어떤 작업 lane에서 움직이고 어떤 task/project와 연결되어 있는지 협업 작업판과 흐름도로 보여줘야 한다.</td><td>must</td><td>snapshot의 <code>collaborationBoard</code>, Agents UI 협업 lane/flow, <code>pnpm run build</code> 확인</td></tr><tr><td>REQ-WM-014</td><td>웹 UI는 운영 대시보드의 밀도와 신뢰를 유지하면서 은근히 귀엽고 조용히 기분 좋은 visual tone을 허용해야 한다.</td><td>should</td><td>UI tone policy, <code>globals.css</code>, <code>pnpm run build</code> 확인</td></tr><tr><td>REQ-WM-015</td><td>웹 UI는 <code>agent-platform/configs/access/language-mode-registry.json</code>을 읽어 전체, 한국어만, 영어만 문서 보기 모드를 선택할 수 있어야 하며 문서/히스토리/요약 카운트에 동일한 언어 렌즈를 적용해야 한다.</td><td>must</td><td>snapshot의 <code>languageModeCatalog</code>, 언어 selector, <code>pnpm run collect</code>, <code>pnpm test</code>, <code>pnpm run check</code>, <code>pnpm run build</code> 확인</td></tr><tr><td>REQ-WM-076</td><td>기본 사용자 보기는 작업 요청 입력, 자동 실행 시작, 실행 상태, 결과 확인만 전면에 두고 커스텀 에이전트/툴/소스/운영 기능은 developer 또는 superadmin 보기로 숨겨야 한다.</td><td>must</td><td><code>user</code> view mode allowed sections, 홈 <code>data-simple-user-start</code>, 좌측 레일, <code>pnpm test</code>, <code>pnpm run check</code>, <code>pnpm run build</code> 확인</td></tr><tr><td>REQ-WM-077</td><td>터미널 탭은 고급 설정과 원시 세션 목록을 먼저 보여주는 화면이 아니라, 런타임/어댑터/실제 셸/작업 폴더 준비 상태, 바로 작업 시작, 실제 셸 열기, CLI 연결 점검, 설정 복구 액션을 한 화면에서 제공하는 실행 허브여야 한다. 고급 프롬프트/작업 폴더 세부 조정은 접힌 영역에 둔다.</td><td>must</td><td><code>data-terminal-readiness</code>, <code>data-terminal-start-command-center</code>, <code>data-terminal-primary-action</code>, <code>terminal-advanced-start</code>, <code>pnpm test</code>, <code>pnpm run check</code>, <code>pnpm run build</code> 확인</td></tr><tr><td>REQ-WM-016</td><td>웹 UI는 대용량 workspace snapshot을 client JavaScript bundle에 직접 포함하지 않아야 하며, 초기 JS chunk 크기가 성능 예산을 초과하지 않도록 회귀 검사를 제공해야 한다.</td><td>must</td><td><code>pnpm run build</code>, <code>pnpm run perf:budget</code>, 정적 Playwright smoke 확인</td></tr><tr><td>REQ-WM-017</td><td>정적 export는 HTTP root뿐 아니라 데스크톱 shell, file/subpath 유사 context, repository 서브패스 정적 serving에서도 <code>_next</code> asset과 <code>workspace-snapshot.json</code>을 상대 경로로 읽어 주요 대시보드를 렌더링해야 한다.</td><td>must</td><td><code>pnpm run build</code>, <code>pnpm run perf:budget</code>, repository-root 정적 서버의 <code>/workspace-monitor/out/index.html</code> Playwright smoke 확인</td></tr><tr><td>REQ-WM-018</td><td>웹 UI는 분리된 히스토리 기록, 평가, 웹 검색, 작업 시간, 요청 추적, 협업 task/blocker/next action을 <code>unifiedOps</code> 이벤트 stream으로 합쳐 한 화면에서 탐색할 수 있어야 한다.</td><td>must</td><td>snapshot의 <code>unifiedOps</code>, Overview/History <code>Unified Ops</code> UI, <code>pnpm run collect</code>, <code>pnpm test</code>, <code>pnpm run check</code>, <code>pnpm run build</code>, <code>pnpm run perf:budget</code> 확인</td></tr><tr><td>REQ-WM-019</td><td>웹 UI는 view/work/install/language/desktop session/task pipe/CLI adapter/monitor section 모드와 기능을 한 곳에서 명시적으로 보여주고, 각 항목을 어디에서 선택하거나 열 수 있는지 안내해야 한다.</td><td>must</td><td>snapshot의 <code>modeFunctionCatalog</code>, Overview <code>Mode &amp; Function Switchboard</code>, desktop readiness test, <code>pnpm run collect</code>, <code>pnpm test</code>, <code>pnpm run check</code>, <code>pnpm run build</code> 확인</td></tr><tr><td>REQ-WM-020</td><td>웹 UI는 Overview 상단에서 현재 섹션의 상태, 주의 수준, 다음 행동, 근거 카운트, runtime 바로가기를 한 줄 작업면으로 제공해야 한다.</td><td>should</td><td>section tab badge와 <code>operator-strip</code> 렌더링 확인, <code>pnpm test</code>, <code>pnpm run check</code>, <code>pnpm run build</code> 확인</td></tr><tr><td>REQ-WM-021</td><td>웹 UI는 히스토리의 최신 사용자 의도 기반 기능 지도를 읽어 의도 수, 기능 축, 구현된 기능, 다음 기능 후보, Now/Next/Later 로드맵, source freshness를 developer/superadmin 보기에서 탐색할 수 있어야 한다.</td><td>must</td><td>snapshot의 <code>intentFeatureMap</code>, <code>Intent Map</code> 탭, customer snapshot sanitization, <code>pnpm run collect</code>, <code>pnpm test</code>, <code>pnpm run check:intent-map</code>, <code>pnpm run check:intent-map:customer</code>, <code>pnpm run check</code>, <code>pnpm run build</code> 확인</td></tr></tbody></table>\n<p>| REQ-WM-022 | repository snapshot collector는 기능별 데이터 추출 로직을 명확한 모듈 경계로 분리해, 지속 리팩터링 중에도 동작 보존과 테스트 가능한 책임 경계를 유지해야 한다. | should | <code>intent-feature-map</code> collector 모듈 경계, 기존 collector export 호환성, <code>pnpm test</code>, <code>pnpm run collect</code>, <code>pnpm run check:intent-map</code>, `pnpm run</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 43267,
+      "updatedAt": "2026-06-07T16:14:55.848Z",
+      "historyDate": "2026-06-01",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-08-simple-user-interface-input-json",
       "path": "_history/evaluations/2026/2026-06-08-simple-user-interface-input.json",
       "category": "evaluation",
@@ -7882,27 +8182,27 @@
       "html": "<p>{ &quot;initial instruction&quot;: &quot;사용자 입장에서 플랫폼 사용법이 너무 복잡하므로 커스텀 기능은 뒤로 보내고 쉬운 인터페이스만 기본으로 보이게 화면 구성을 전반적으로 변경&quot;, &quot;result summary&quot;: &quot;Changed Workspace Monitor to default to user view, reduced default sections to start/run/results, added a simple task intake and auto start panel, hid operator rail controls in user view, and updated durable policy, requirements, specs,</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 9375,
-      "updatedAt": "2026-06-07T16:07:51.887Z",
+      "sourceBytes": 9409,
+      "updatedAt": "2026-06-07T16:10:07.406Z",
       "historyDate": "2026-06-08",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
     },
     {
-      "id": "history-2026-2026-06-08-md",
-      "path": "_history/2026/2026-06-08.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 08 작업 기록",
-      "excerpt": "2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view ",
-      "html": "<p>2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view mode registry.json , AGENTS.md , Workspace Monitor 사용자 홈 화면, 관련 요구사항/스펙/검증 기록.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 644,
-      "updatedAt": "2026-06-07T16:07:47.061Z",
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-08-simple-user-interface-tasks-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-simple-user-interface/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록: 기본 사용자 인터페이스 단순화",
+      "excerpt": "작업 목록: 기본 사용자 인터페이스 단순화 x 웹 우선 조사 기록 x user view mode 기본값 전환 x 사용자 기본 섹션 축소 x 홈 단순 작업 시작 패널 추가 x 사용자 보기에서 운영 센터 레일 숨김 x 정책/요구사항/스펙 기준 업데이트 x config, test, check, build 검증 x omission/resource/evaluation 기록 검증 x commit 및 push",
+      "html": "<h1>작업 목록: 기본 사용자 인터페이스 단순화</h1>\n<ul>\n<li>[x] 웹 우선 조사 기록</li>\n<li>[x] <code>user</code> view mode 기본값 전환</li>\n<li>[x] 사용자 기본 섹션 축소</li>\n<li>[x] 홈 단순 작업 시작 패널 추가</li>\n<li>[x] 사용자 보기에서 운영 센터 레일 숨김</li>\n<li>[x] 정책/요구사항/스펙 기준 업데이트</li>\n<li>[x] config, test, check, build 검증</li>\n<li>[x] omission/resource/evaluation 기록 검증</li>\n<li>[x] commit 및 push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 435,
+      "updatedAt": "2026-06-07T16:10:00.580Z",
       "historyDate": "2026-06-08",
       "historyYear": "2026",
-      "workspaceArea": "_history/2026"
+      "workspaceArea": "platform-desktop-app"
     },
     {
       "id": "agents-md",
@@ -7935,22 +8235,6 @@
       "historyDate": "2026-06-08",
       "historyYear": "2026",
       "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-08-simple-user-interface-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-simple-user-interface/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록: 기본 사용자 인터페이스 단순화",
-      "excerpt": "작업 목록: 기본 사용자 인터페이스 단순화 x 웹 우선 조사 기록 x user view mode 기본값 전환 x 사용자 기본 섹션 축소 x 홈 단순 작업 시작 패널 추가 x 사용자 보기에서 운영 센터 레일 숨김 x 정책/요구사항/스펙 기준 업데이트 x config, test, check, build 검증 x omission/resource/evaluation 기록 검증 commit 및 push",
-      "html": "<h1>작업 목록: 기본 사용자 인터페이스 단순화</h1>\n<ul>\n<li>[x] 웹 우선 조사 기록</li>\n<li>[x] <code>user</code> view mode 기본값 전환</li>\n<li>[x] 사용자 기본 섹션 축소</li>\n<li>[x] 홈 단순 작업 시작 패널 추가</li>\n<li>[x] 사용자 보기에서 운영 센터 레일 숨김</li>\n<li>[x] 정책/요구사항/스펙 기준 업데이트</li>\n<li>[x] config, test, check, build 검증</li>\n<li>[x] omission/resource/evaluation 기록 검증</li>\n<li>[ ] commit 및 push</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 435,
-      "updatedAt": "2026-06-07T16:06:02.056Z",
-      "historyDate": "2026-06-08",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     },
     {
       "id": "platform-desktop-app-configs-product-feature-registry-json",
@@ -8125,38 +8409,6 @@
       "sourceBytes": 967,
       "updatedAt": "2026-06-07T16:00:05.717Z",
       "historyDate": "2026-06-08",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-docs-requirements-2026-06-01-workspace-monitor-en-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md",
-      "category": "project-doc",
-      "language": "en",
-      "title": "Requirements: Workspace Monitor",
-      "excerpt": "Requirements: Workspace Monitor Status Status: baseline Baseline date: 2026 06 01 Owning project: platform desktop app/renderer/workspace monitor/ Source request: UR 2026 06 01 008 Requirements | ID | Requirement | Priority | Verification | | | | | | | REQ WM 001 | The project sh",
-      "html": "<h1>Requirements: Workspace Monitor</h1>\n<h2>Status</h2>\n<ul>\n<li>Status: <code>baseline</code></li>\n<li>Baseline date: 2026-06-01</li>\n<li>Owning project: <code>platform-desktop-app/renderer/workspace-monitor/</code></li>\n<li>Source request: <code>UR-2026-06-01-008</code></li>\n</ul>\n<h2>Requirements</h2>\n<table><thead><tr><th>ID</th><th>Requirement</th><th>Priority</th><th>Verification</th></tr></thead><tbody><tr><td>REQ-WM-001</td><td>The project shall be a Vercel-deployable Next.js project.</td><td>must</td><td><code>pnpm run build</code> passes and <code>README.md</code> records Vercel setup</td></tr><tr><td>REQ-WM-002</td><td>The app shall let the user browse repository history, work summaries, request traces, projects, agent/task status, requirements, specs, and evaluations from one UI.</td><td>must</td><td>Generated snapshot and UI sections reviewed</td></tr><tr><td>REQ-WM-003</td><td>Markdown documents shall be viewable as readable HTML previews.</td><td>must</td><td>Snapshot documents include escaped HTML previews</td></tr><tr><td>REQ-WM-004</td><td>The app shall work locally while the repository is private and be deployable to Vercel after the repository is made public.</td><td>must</td><td>Static snapshot build and deployment docs reviewed</td></tr><tr><td>REQ-WM-005</td><td>The structure shall be extensible, separating document parsing, UI components, data models, and deployment settings.</td><td>should</td><td>Folder structure and types reviewed</td></tr><tr><td>REQ-WM-006</td><td>The project shall support pre-publication review for sensitive data in generated snapshots.</td><td>must</td><td>README and deployment docs include public-release checks</td></tr><tr><td>REQ-WM-007</td><td>The app shall collect work summaries, user requests, request traces, web searches, plans, evaluations, and daily history under <code>_history/</code> into a date-indexed web UI that can be filtered by date and type.</td><td>must</td><td><code>historyDays</code> in the snapshot and History UI date filter</td></tr><tr><td>REQ-WM-008</td><td>The web UI should show root folder structure, <code>_docs</code> categories, project top-level homes, and history source roots so folder boundaries and data provenance are understandable.</td><td>should</td><td><code>folderStructure</code> in the snapshot and Structure UI</td></tr><tr><td>REQ-WM-009</td><td>The UI shall combine agent definitions from <code>agent-platform/configs/agents/</code> with coordination runtime state so users can visually see which agents exist.</td><td>must</td><td>Check snapshot <code>agentCatalog</code> and the Agents inventory map</td></tr><tr><td>REQ-WM-010</td><td>The UI shall visualize <code>_history/</code> document density by date and distribution by history type.</td><td>must</td><td>Check the History density chart and category bars</td></tr><tr><td>REQ-WM-011</td><td>The UI shall read <code>agent-platform/configs/access/view-mode-registry.json</code> and allow selecting <code>user</code>, <code>developer</code>, and <code>superadmin_developer</code> view modes, with user view as the current default.</td><td>must</td><td>Check snapshot <code>viewModeCatalog</code>, the top view mode selector, and <code>check-view-modes</code></td></tr><tr><td>REQ-WM-012</td><td>The UI shall let developer and superadmin development views browse source code from key projects and tools as read-only content.</td><td>must</td><td>Check snapshot <code>sourceFiles</code>, the Source tab, and <code>pnpm run build</code></td></tr><tr><td>REQ-WM-013</td><td>The UI shall show which work lane each agent is moving through and which task/project each agent is connected to through a collaboration board and flow map.</td><td>must</td><td>Check snapshot <code>collaborationBoard</code>, Agents UI collaboration lanes/flow, and <code>pnpm run build</code></td></tr><tr><td>REQ-WM-014</td><td>The web UI should allow a subtly cute, quietly delightful visual tone while preserving operational density and trust.</td><td>should</td><td>Check UI tone policy, <code>globals.css</code>, and <code>pnpm run build</code></td></tr><tr><td>REQ-WM-015</td><td>The web UI shall read <code>agent-platform/configs/access/language-mode-registry.json</code> and allow selecting all-language, Korean-only, and English-only document views, applying the same language lens to documents, history, and summary counts.</td><td>must</td><td>Check snapshot <code>languageModeCatalog</code>, the language selector, <code>pnpm run collect</code>, <code>pnpm test</code>, <code>pnpm run check</code>, and <code>pnpm run build</code></td></tr><tr><td>REQ-WM-076</td><td>The default user view shall foreground only task intake, automatic run start, run status, and result review while hiding custom agents, tools, source, and operator functions behind developer or superadmin views.</td><td>must</td><td>Check <code>user</code> view mode allowed sections, home <code>data-simple-user-start</code>, activity rail, <code>pnpm test</code>, <code>pnpm run check</code>, and <code>pnpm run build</code></td></tr><tr><td>REQ-WM-016</td><td>The web UI shall not embed the large workspace snapshot directly in the client JavaScript bundle, and shall provide a regression check that keeps initial JavaScript chunks within the performance budget.</td><td>must</td><td>Check <code>pnpm run build</code>, <code>pnpm run perf:budget</code>, and static Playwright smoke</td></tr><tr><td>REQ-WM-017</td><td>The static export shall render the main dashboard not only from an HTTP root, but also from desktop shell, file/subpath-like contexts, and repository subpath static serving by loading <code>_next</code> assets and <code>workspace-snapshot.json</code> through relative paths.</td><td>must</td><td>Check <code>pnpm run build</code>, <code>pnpm run perf:budget</code>, and Playwright smoke for <code>/workspace-monitor/out/index.html</code> from a repository-root static server</td></tr></tbody></table>\n<p>| REQ-WM-018 | The web UI shall merge separated history records, evaluations, web searches, work timings, request traces, collaboration tasks, blockers, and next actions into a single <code>unifiedOps</code> event stream that can be browsed from one screen. | must | Check snapshot <code>unifiedOps</code>, Overview/History <code>Unified Ops</code> UI, <code>pnpm run collect</code>, <code>pnpm test</code>, `pnpm run chec</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 32240,
-      "updatedAt": "2026-06-07T15:58:09.358Z",
-      "historyDate": "2026-06-01",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-docs-requirements-2026-06-01-workspace-monitor-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
-      "category": "project-doc",
-      "language": "ko",
-      "title": "요구사항: Workspace Monitor",
-      "excerpt": "요구사항: Workspace Monitor 상태 상태: baseline 기준일: 2026 06 01 소유 프로젝트: platform desktop app/renderer/workspace monitor/ 출처 요청: UR 2026 06 01 008 요구사항 | ID | 요구사항 | 우선순위 | 검증 | | | | | | | REQ WM 001 | Vercel에 배포 가능한 Next.js 프로젝트여야 한다. | must | pnpm run build 통과, README.md 에 Vercel 설정 기",
-      "html": "<h1>요구사항: Workspace Monitor</h1>\n<h2>상태</h2>\n<ul>\n<li>상태: <code>baseline</code></li>\n<li>기준일: 2026-06-01</li>\n<li>소유 프로젝트: <code>platform-desktop-app/renderer/workspace-monitor/</code></li>\n<li>출처 요청: <code>UR-2026-06-01-008</code></li>\n</ul>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>우선순위</th><th>검증</th></tr></thead><tbody><tr><td>REQ-WM-001</td><td>Vercel에 배포 가능한 Next.js 프로젝트여야 한다.</td><td>must</td><td><code>pnpm run build</code> 통과, <code>README.md</code>에 Vercel 설정 기록</td></tr><tr><td>REQ-WM-002</td><td>저장소의 히스토리, 작업 요약, 요청 추적, 프로젝트, 에이전트/작업 상태, 요구사항, 스펙, 평가 문서를 한 화면에서 탐색할 수 있어야 한다.</td><td>must</td><td>생성된 snapshot과 UI 섹션 확인</td></tr><tr><td>REQ-WM-003</td><td>Markdown 문서를 읽기 편한 HTML preview로 보여줄 수 있어야 한다.</td><td>must</td><td>snapshot 문서에 escaped HTML preview 포함</td></tr><tr><td>REQ-WM-004</td><td>현재 private repository에서도 로컬로 쓸 수 있고, 나중에 public 전환 후 Vercel에 올릴 수 있어야 한다.</td><td>must</td><td>정적 snapshot 기반 build, 배포 문서 확인</td></tr><tr><td>REQ-WM-005</td><td>확장 가능한 구조여야 하며 문서 파싱, UI 컴포넌트, 데이터 모델, 배포 설정이 분리되어야 한다.</td><td>should</td><td>폴더 구조와 타입 분리 검토</td></tr><tr><td>REQ-WM-006</td><td>public 배포 전 민감 정보가 snapshot에 들어가는지 검토할 수 있어야 한다.</td><td>must</td><td>README와 deployment docs에 공개 전 점검 절차 기록</td></tr><tr><td>REQ-WM-007</td><td><code>_history/</code>의 작업 요약, 요청 요약, 요청 추적, 웹 검색, 계획, 평가, 일일 기록을 날짜별로 모아 웹 UI에서 날짜와 유형으로 탐색할 수 있어야 한다.</td><td>must</td><td>snapshot의 <code>historyDays</code>와 History UI 날짜 filter 확인</td></tr><tr><td>REQ-WM-008</td><td>웹 UI는 루트 폴더 구조, <code>_docs</code> 카테고리, 프로젝트별 top-level home, 히스토리 수집 위치를 보여줘 폴더 경계와 데이터 출처를 이해할 수 있어야 한다.</td><td>should</td><td>snapshot의 <code>folderStructure</code>와 Structure UI 확인</td></tr><tr><td>REQ-WM-009</td><td>웹 UI는 <code>agent-platform/configs/agents/</code>의 에이전트 정의와 coordination runtime 상태를 합쳐 어떤 에이전트가 있는지 시각적으로 보여줘야 한다.</td><td>must</td><td>snapshot의 <code>agentCatalog</code>와 Agents UI 구성 맵 확인</td></tr><tr><td>REQ-WM-010</td><td>웹 UI는 <code>_history/</code> 문서의 날짜별 밀도와 유형별 분포를 시각화해야 한다.</td><td>must</td><td>History UI의 밀도 차트와 유형 막대 확인</td></tr><tr><td>REQ-WM-011</td><td>웹 UI는 <code>agent-platform/configs/access/view-mode-registry.json</code>을 읽어 <code>user</code>, <code>developer</code>, <code>superadmin_developer</code> 보기 모드를 선택할 수 있어야 하며, 현재 기본값은 사용자 보기여야 한다.</td><td>must</td><td>snapshot의 <code>viewModeCatalog</code>, 상단 view mode selector, <code>check-view-modes</code> 확인</td></tr><tr><td>REQ-WM-012</td><td>웹 UI는 developer와 superadmin 개발 보기에서 주요 프로젝트와 도구의 소스 코드를 읽기 전용으로 탐색할 수 있어야 한다.</td><td>must</td><td>snapshot의 <code>sourceFiles</code>, Source 탭, <code>pnpm run build</code> 확인</td></tr><tr><td>REQ-WM-013</td><td>웹 UI는 에이전트들이 어떤 작업 lane에서 움직이고 어떤 task/project와 연결되어 있는지 협업 작업판과 흐름도로 보여줘야 한다.</td><td>must</td><td>snapshot의 <code>collaborationBoard</code>, Agents UI 협업 lane/flow, <code>pnpm run build</code> 확인</td></tr><tr><td>REQ-WM-014</td><td>웹 UI는 운영 대시보드의 밀도와 신뢰를 유지하면서 은근히 귀엽고 조용히 기분 좋은 visual tone을 허용해야 한다.</td><td>should</td><td>UI tone policy, <code>globals.css</code>, <code>pnpm run build</code> 확인</td></tr><tr><td>REQ-WM-015</td><td>웹 UI는 <code>agent-platform/configs/access/language-mode-registry.json</code>을 읽어 전체, 한국어만, 영어만 문서 보기 모드를 선택할 수 있어야 하며 문서/히스토리/요약 카운트에 동일한 언어 렌즈를 적용해야 한다.</td><td>must</td><td>snapshot의 <code>languageModeCatalog</code>, 언어 selector, <code>pnpm run collect</code>, <code>pnpm test</code>, <code>pnpm run check</code>, <code>pnpm run build</code> 확인</td></tr><tr><td>REQ-WM-076</td><td>기본 사용자 보기는 작업 요청 입력, 자동 실행 시작, 실행 상태, 결과 확인만 전면에 두고 커스텀 에이전트/툴/소스/운영 기능은 developer 또는 superadmin 보기로 숨겨야 한다.</td><td>must</td><td><code>user</code> view mode allowed sections, 홈 <code>data-simple-user-start</code>, 좌측 레일, <code>pnpm test</code>, <code>pnpm run check</code>, <code>pnpm run build</code> 확인</td></tr><tr><td>REQ-WM-016</td><td>웹 UI는 대용량 workspace snapshot을 client JavaScript bundle에 직접 포함하지 않아야 하며, 초기 JS chunk 크기가 성능 예산을 초과하지 않도록 회귀 검사를 제공해야 한다.</td><td>must</td><td><code>pnpm run build</code>, <code>pnpm run perf:budget</code>, 정적 Playwright smoke 확인</td></tr><tr><td>REQ-WM-017</td><td>정적 export는 HTTP root뿐 아니라 데스크톱 shell, file/subpath 유사 context, repository 서브패스 정적 serving에서도 <code>_next</code> asset과 <code>workspace-snapshot.json</code>을 상대 경로로 읽어 주요 대시보드를 렌더링해야 한다.</td><td>must</td><td><code>pnpm run build</code>, <code>pnpm run perf:budget</code>, repository-root 정적 서버의 <code>/workspace-monitor/out/index.html</code> Playwright smoke 확인</td></tr><tr><td>REQ-WM-018</td><td>웹 UI는 분리된 히스토리 기록, 평가, 웹 검색, 작업 시간, 요청 추적, 협업 task/blocker/next action을 <code>unifiedOps</code> 이벤트 stream으로 합쳐 한 화면에서 탐색할 수 있어야 한다.</td><td>must</td><td>snapshot의 <code>unifiedOps</code>, Overview/History <code>Unified Ops</code> UI, <code>pnpm run collect</code>, <code>pnpm test</code>, <code>pnpm run check</code>, <code>pnpm run build</code>, <code>pnpm run perf:budget</code> 확인</td></tr><tr><td>REQ-WM-019</td><td>웹 UI는 view/work/install/language/desktop session/task pipe/CLI adapter/monitor section 모드와 기능을 한 곳에서 명시적으로 보여주고, 각 항목을 어디에서 선택하거나 열 수 있는지 안내해야 한다.</td><td>must</td><td>snapshot의 <code>modeFunctionCatalog</code>, Overview <code>Mode &amp; Function Switchboard</code>, desktop readiness test, <code>pnpm run collect</code>, <code>pnpm test</code>, <code>pnpm run check</code>, <code>pnpm run build</code> 확인</td></tr><tr><td>REQ-WM-020</td><td>웹 UI는 Overview 상단에서 현재 섹션의 상태, 주의 수준, 다음 행동, 근거 카운트, runtime 바로가기를 한 줄 작업면으로 제공해야 한다.</td><td>should</td><td>section tab badge와 <code>operator-strip</code> 렌더링 확인, <code>pnpm test</code>, <code>pnpm run check</code>, <code>pnpm run build</code> 확인</td></tr><tr><td>REQ-WM-021</td><td>웹 UI는 히스토리의 최신 사용자 의도 기반 기능 지도를 읽어 의도 수, 기능 축, 구현된 기능, 다음 기능 후보, Now/Next/Later 로드맵, source freshness를 developer/superadmin 보기에서 탐색할 수 있어야 한다.</td><td>must</td><td>snapshot의 <code>intentFeatureMap</code>, <code>Intent Map</code> 탭, customer snapshot sanitization, <code>pnpm run collect</code>, <code>pnpm test</code>, <code>pnpm run check:intent-map</code>, <code>pnpm run check:intent-map:customer</code>, <code>pnpm run check</code>, <code>pnpm run build</code> 확인</td></tr><tr><td>REQ-WM-022</td><td>repository snapshot collector는 기능별 데이터 추출 로직을 명확한 모듈 경계로 분리해, 지속 리팩터링 중에도 동작 보존과 테스트 가능한 책임 경계를 유지해야 한다.</td><td>should</td><td><code>intent-feature-map</code> collector 모듈 경계, 기존 collector export 호환성, <code>pnpm test</code>, <code>pnpm run collect</code>, <code>pnpm run check:intent-map</code>, <code>pnpm run check</code> 확인</td></tr></tbody></table>\n<p>| REQ-WM-023 | 웹 UI는 플랫폼의 운영 메모리, 플랫폼 코어, 데스크톱 제품, 모니터 UI, 도메인 프로젝트, 런타임/로컬 데이터 계층을 한눈에 보여주고 각 계층의 소유 경계, 주요 경로, 금지 경계, 복잡도 압력점을 표시해야 한다. | must | snapshot의 <code>structureOverview</code>, Structure 탭의 Architecture Backbone/Boundary Rules/Pressure, customer snapshot sanitization, <code>pnpm test</code>, <code>pnpm run check</code>, <code>pnpm run build</code>, `pnpm run check:intent-map:custom</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 42685,
-      "updatedAt": "2026-06-07T15:58:09.357Z",
-      "historyDate": "2026-06-01",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
     },
@@ -9820,118 +10072,6 @@
       "htmlTruncated": true,
       "sourceBytes": 1218,
       "updatedAt": "2026-06-07T13:05:05.178Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-      "path": "_history/web-searches/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "2026 06 07 소스 에디터 액션 상태 분리 웹 검색 기록",
-      "excerpt": "2026 06 07 소스 에디터 액션 상태 분리 웹 검색 기록 검색 쿼리 React official docs synchronizing with effects race conditions ignore stale responses custom hooks Tauri v2 updater plugin official documentation check install update TypeScript official docs modules type only imports exports 확인한 출처 React ",
-      "html": "<p>2026 06 07 소스 에디터 액션 상태 분리 웹 검색 기록 검색 쿼리 React official docs synchronizing with effects race conditions ignore stale responses custom hooks Tauri v2 updater plugin official documentation check install update TypeScript official docs modules type only imports exports 확인한 출처 React Reusing Logic with Custom Hooks: https://react.dev/learn/reusing logic with cust</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1461,
-      "updatedAt": "2026-06-07T13:05:05.177Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-      "path": "_history/user-requests/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "2026 06 07 소스 에디터 액션 상태 분리 요청",
-      "excerpt": "2026 06 07 소스 에디터 액션 상태 분리 요청 요청 요약 이전 히스토리를 기준으로 범위를 너무 좁게 잡지 말고 더 넓은 기능 흐름까지 구현한다. 큰 MonitorShell.tsx 의 중복 상태 전환과 소스 에디터 동작 로직을 계속 분리한다. 기능 이슈가 생기지 않도록 TypeScript와 Rust를 포함한 내부 패키징 흐름까지 확인한다. 적용 범위 소유 프로젝트: platform desktop app 주요 대상: Workspace Monitor source editor open/select",
-      "html": "<p>2026 06 07 소스 에디터 액션 상태 분리 요청 요청 요약 이전 히스토리를 기준으로 범위를 너무 좁게 잡지 말고 더 넓은 기능 흐름까지 구현한다. 큰 MonitorShell.tsx 의 중복 상태 전환과 소스 에디터 동작 로직을 계속 분리한다. 기능 이슈가 생기지 않도록 TypeScript와 Rust를 포함한 내부 패키징 흐름까지 확인한다. 적용 범위 소유 프로젝트: platform desktop app 주요 대상: Workspace Monitor source editor open/select/save/save all/revert/close 상태 전환 작업 모드: standard 수용 기준 소스 에디터의 draft 액션 상태 전환을 </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1059,
-      "updatedAt": "2026-06-07T13:05:05.176Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-07-source-load-request-hook-and-test-utility-ko-md",
-      "path": "_history/evaluations/2026/2026-06-07-source-load-request-hook-and-test-utility.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 평가",
-      "excerpt": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 평가 평가 입력 installation occurred : false resource risk occurred : true omission check targets : history/omission checks/2026/2026 06 07 source load request hook and test utility.ko.md resource check targets : history/resource checks/2026/2026 06 07",
-      "html": "<p>2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 평가 평가 입력 installation occurred : false resource risk occurred : true omission check targets : history/omission checks/2026/2026 06 07 source load request hook and test utility.ko.md resource check targets : history/resource checks/2026/2026 06 07 source load request hook and test utility.ko.md 결과 source load 요청 게이트가 source e</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 2310,
-      "updatedAt": "2026-06-07T12:57:29.657Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-07-source-load-request-hook-and-test-utility-ko-md",
-      "path": "_history/request-traces/2026/2026-06-07-source-load-request-hook-and-test-utility.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 요청 추적",
-      "excerpt": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 요청 추적 요청 미뤄둔 구현을 계속하고, 큰 소스와 중복 로직을 기능 이슈 없이 분리한다. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/source editor/useSourceLoadRequestGate.ts platform desktop app/renderer/workspace monitor/components/workbench/source edit",
-      "html": "<p>2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 요청 추적 요청 미뤄둔 구현을 계속하고, 큰 소스와 중복 로직을 기능 이슈 없이 분리한다. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/source editor/useSourceLoadRequestGate.ts platform desktop app/renderer/workspace monitor/components/workbench/source editor/index.ts platform desktop app/renderer/workspace monitor/components/MonitorSh</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1690,
-      "updatedAt": "2026-06-07T12:57:29.657Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-07-source-load-request-hook-and-test-utility-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-07-source-load-request-hook-and-test-utility.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 작업 요약",
-      "excerpt": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 작업 요약 변경 source editor의 stale async load 응답 방지 로직을 useSourceLoadRequestGate.ts 로 분리했다. MonitorShell.tsx 는 새 hook을 사용하도록 바꾸고 inline sequence ref를 제거했다. TypeScript helper 테스트의 모듈 로딩 shim을 tests/utils/import type script module.mjs 로 이동했다. source edi",
-      "html": "<p>2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 작업 요약 변경 source editor의 stale async load 응답 방지 로직을 useSourceLoadRequestGate.ts 로 분리했다. MonitorShell.tsx 는 새 hook을 사용하도록 바꾸고 inline sequence ref를 제거했다. TypeScript helper 테스트의 모듈 로딩 shim을 tests/utils/import type script module.mjs 로 이동했다. source editor 구조 테스트, Tool Studio 계약 테스트, readiness source structure 집계를 갱신했다. run:interna</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1581,
-      "updatedAt": "2026-06-07T12:57:29.657Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-07-source-load-request-hook-and-test-utility-ko-md",
-      "path": "_history/work-timings/2026/2026-06-07-source-load-request-hook-and-test-utility.ko.md",
-      "category": "work-timing",
-      "language": "ko",
-      "title": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 작업 타이밍",
-      "excerpt": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 작업 타이밍 기록 21:42 21:45 KST: 웹 검색, source editor request gate 위치 확인, 작업 범위 확정. 21:45 21:47 KST: useSourceLoadRequestGate.ts 와 테스트 import 유틸 추가. 21:47 21:49 KST: MonitorShell.tsx , source editor index, 구조 테스트, Tool Studio 테스트, readiness map 갱신. 21:4",
-      "html": "<p>2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 작업 타이밍 기록 21:42 21:45 KST: 웹 검색, source editor request gate 위치 확인, 작업 범위 확정. 21:45 21:47 KST: useSourceLoadRequestGate.ts 와 테스트 import 유틸 추가. 21:47 21:49 KST: MonitorShell.tsx , source editor index, 구조 테스트, Tool Studio 테스트, readiness map 갱신. 21:49 21:51 KST: 좁은 테스트, Workspace Monitor check/test, platform desktop app test 실행.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1197,
-      "updatedAt": "2026-06-07T12:57:29.657Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-plans-2026-2026-06-07-source-load-request-hook-and-test-utility-ko-md",
-      "path": "_history/plans/2026/2026-06-07-source-load-request-hook-and-test-utility.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 계획",
-      "excerpt": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 계획 목표 MonitorShell.tsx 의 비동기 source load 요청 순번 관리 코드를 source editor 모듈로 이동한다. 테스트 파일 간 반복되던 TypeScript 모듈 import shim을 공통 유틸로 이동한다. 실행 슬라이스 1. useSourceLoadRequestGate.ts 를 추가하고 source editor index에서 내보낸다. 2. MonitorShell.tsx 에서 inline request se",
-      "html": "<p>2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 계획 목표 MonitorShell.tsx 의 비동기 source load 요청 순번 관리 코드를 source editor 모듈로 이동한다. 테스트 파일 간 반복되던 TypeScript 모듈 import shim을 공통 유틸로 이동한다. 실행 슬라이스 1. useSourceLoadRequestGate.ts 를 추가하고 source editor index에서 내보낸다. 2. MonitorShell.tsx 에서 inline request sequence ref와 callback을 제거하고 새 훅을 사용한다. 3. 테스트용 import type script module.mjs 를 추가</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1290,
-      "updatedAt": "2026-06-07T12:57:29.656Z",
       "historyDate": "2026-06-07",
       "historyYear": "2026",
       "workspaceArea": "_history/plans"
@@ -18143,169 +18283,41 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-smooth-redesign-maintenance-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-smooth-redesign-maintenance/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "추적성: Smooth Redesign Maintenance",
-      "excerpt": "추적성: Smooth Redesign Maintenance | 요구사항 | 구현 | 검증 | | | | | | PDA REQ 040 | lib/motion.ts , MonitorShell.tsx , app/globals.css | static test, perf:buttons , tab audit, Playwright smoke | | PDA REQ 040 | Tool Studio icon button min width | Playwright smoke, check , test | | PDA RE",
-      "html": "<h1>추적성: Smooth Redesign Maintenance</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>검증</th></tr></thead><tbody><tr><td>PDA-REQ-040</td><td><code>lib/motion.ts</code>, <code>MonitorShell.tsx</code>, <code>app/globals.css</code></td><td>static test, <code>perf:buttons</code>, tab audit, Playwright smoke</td></tr><tr><td>PDA-REQ-040</td><td>Tool Studio icon button min width</td><td>Playwright smoke, <code>check</code>, <code>test</code></td></tr><tr><td>PDA-REQ-041</td><td><code>collect-workspace.mjs</code> bounded admin preview metadata</td><td><code>check-history-payload.mjs</code>, generated snapshot payload check</td></tr><tr><td>PDA-REQ-041</td><td><code>lib/snapshot.ts</code> document metadata type</td><td>TypeScript check</td></tr><tr><td>PDA-REQ-042</td><td><code>timeline-docs</code> bounded scroll pane CSS</td><td><code>check-scroll-containers.mjs</code>, <code>audit-monitor-surfaces.mjs</code></td></tr><tr><td>PDA-REQ-042</td><td>Agent chat context summary target size</td><td><code>audit-monitor-surfaces.mjs</code>, static test</td></tr><tr><td>PDA-REQ-042</td><td>Operator Center section browser audit</td><td><code>audit-monitor-surfaces.mjs</code>, package <code>audit:surfaces</code></td></tr><tr><td>Korean copy cleanup</td><td><code>OperatorCenterDialog.tsx</code>, <code>MonitorShell.tsx</code></td><td>static test, Playwright Operator Center smoke</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 987,
-      "updatedAt": "2026-06-05T06:55:45.435Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-smooth-redesign-maintenance-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-smooth-redesign-maintenance/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "검증: Smooth Redesign Maintenance",
-      "excerpt": "검증: Smooth Redesign Maintenance 명령 검증 corepack pnpm filter workspace monitor test : 통과, 49 tests. corepack pnpm filter workspace monitor run check : 통과. corepack pnpm filter workspace monitor run build : 통과. corepack pnpm filter workspace monitor run build:customer : 통과. corepack",
-      "html": "<h1>검증: Smooth Redesign Maintenance</h1>\n<h2>명령 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 49 tests.</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code>: 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과.</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: 통과, largest chunk 734386 bytes / 1000000 bytes.</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:buttons -- http://127.0.0.1:4181/#section-overview</code>: 통과, synthetic feedback p95 1.6ms, real click feedback p95 51.9ms.</li>\n<li><code>corepack pnpm --filter workspace-monitor exec node scripts/audit-tab-response.mjs http://127.0.0.1:4181/#section-overview</code>: 통과, 반복 측정 active p95 49.5ms, ready p95 235ms, 모든 target에서 transition shell 감지.</li>\n</ul>\n<h2>Playwright Smoke</h2>\n<ul>\n<li>Desktop 1440x920에서 <code>overview</code>, <code>agents</code>, <code>tools</code>, <code>desktop</code>, <code>source</code>, <code>intent</code> 탭을 열어 horizontal overflow 0, undersized buttons 0, clipped controls 0을 확인했다.</li>\n<li>Tool Studio action menu는 <code>workspace-menu-enter</code> animation을 사용하고 오른쪽 overflow 0이었다.</li>\n<li>Operator Center dialog는 한국어 aria label <code>운영 센터</code>로 열리고 overflow 0이었다.</li>\n<li>Mobile 390x844에서 Tools 탭 horizontal overflow 0, undersized buttons 0, clipped controls 0을 확인했다.</li>\n<li><code>corepack pnpm --filter workspace-monitor run audit:surfaces -- http://127.0.0.1:4182/#section-overview</code>: 통과, primary 6개 섹션, Operator Center 5개 섹션, mobile History 검사, failures 0.</li>\n</ul>\n<h2>발견 및 수정</h2>\n<ul>\n<li>Tools 탭의 <code>소스 열기</code>, <code>계정 설정</code> 아이콘 버튼이 29px 너비로 측정되어 <code>tool-pane-heading</code> 버튼 최소 너비를 <code>var(--control-target-size)</code>로 보정했다.</li>\n<li>첫 Playwright smoke에서 screenshot path가 package CWD 기준으로 잘못 생성되어 임시 출력 폴더를 삭제했다.</li>\n<li>History timeline 문서 묶음이 mobile에서 1500px 이상으로 한 페이지에 펼쳐져 <code>timeline-docs</code>를 max-height가 있는 내부 scroll pane으로 바꿨다.</li>\n<li>Agents 화면의 <code>컨텍스트와 실행 계약</code> summary가 17px 높이로 측정되어 <code>agent-chat-details summary</code>에 최소 클릭 타깃과 focus style을 적용했다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2260,
-      "updatedAt": "2026-06-05T06:55:45.434Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-smooth-redesign-maintenance-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-smooth-redesign-maintenance/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "스펙: Smooth Redesign Maintenance",
-      "excerpt": "스펙: Smooth Redesign Maintenance 목표 사용자가 여러 탭을 열었을 때 active 상태와 버튼 press feedback이 즉시 보이게 한다. 탭, 메뉴, 다이얼로그, 세부 작업면 전환을 하나의 motion token 체계로 통일한다. 누적 history와 관리자 기록이 초기 snapshot payload를 과도하게 키우지 않게 한다. 한국어 기본 UI에서 고노출 문구가 영어와 어색하게 섞이지 않게 한다. 요구사항 MonitorShell 의 즉시 피드백과 first pain",
-      "html": "<h1>스펙: Smooth Redesign Maintenance</h1>\n<h2>목표</h2>\n<ul>\n<li>사용자가 여러 탭을 열었을 때 active 상태와 버튼 press feedback이 즉시 보이게 한다.</li>\n<li>탭, 메뉴, 다이얼로그, 세부 작업면 전환을 하나의 motion token 체계로 통일한다.</li>\n<li>누적 history와 관리자 기록이 초기 snapshot payload를 과도하게 키우지 않게 한다.</li>\n<li>한국어 기본 UI에서 고노출 문구가 영어와 어색하게 섞이지 않게 한다.</li>\n</ul>\n<h2>요구사항</h2>\n<ul>\n<li><code>MonitorShell</code>의 즉시 피드백과 first-paint scheduling helper는 재사용 가능한 <code>lib/motion.ts</code>로 분리한다.</li>\n<li>전환 CSS는 <code>opacity</code>/<code>transform</code> 중심이어야 하며 <code>prefers-reduced-motion</code> 기존 정책을 유지한다.</li>\n<li>Tool Studio, command palette, Operator Center, agent detail workspace는 같은 motion token을 사용한다.</li>\n<li><code>_history</code> 계열 문서는 rendered markdown HTML 전체가 아니라 <code>admin-summary</code> preview만 snapshot에 포함한다.</li>\n<li>snapshot 문서에는 <code>previewMode</code>, <code>htmlTruncated</code>, <code>sourceBytes</code> metadata가 있어야 한다.</li>\n<li>일반 <code>check</code>에서 history payload 예산을 검증한다.</li>\n<li>한국어 모드의 Operator Center와 task run 로그 안내는 한국어 중심으로 표시한다.</li>\n<li>Operator Center 내부 섹션도 브라우저 audit 대상이어야 한다.</li>\n<li>History timeline 문서 목록은 날짜 카드 내부에서 bounded scroll pane으로 분리되어야 한다.</li>\n<li>disclosure/summary처럼 버튼 외 클릭 타깃도 최소 작업 타깃 크기를 만족해야 한다.</li>\n</ul>\n<h2>제외</h2>\n<ul>\n<li>Agent runtime 실행 속도 개선.</li>\n<li>public signing, notarization, updater, clean-machine installer smoke.</li>\n<li>모든 repo 문서의 전면 번역 교정.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1699,
-      "updatedAt": "2026-06-05T06:55:45.433Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-smooth-redesign-maintenance-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-smooth-redesign-maintenance/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업: Smooth Redesign Maintenance",
-      "excerpt": "작업: Smooth Redesign Maintenance x 웹 first intake와 대범위 분해 기준 정리 x lib/motion.ts 분리 x motion token/keyframes/dialog/menu/dropdown/detail transition 적용 x Operator Center/task run 한국어 문구 정리 x history admin preview payload 정책 적용 x check history payload.mjs 추가 및 check 연결 x 정적 테스트 업데이트 ",
-      "html": "<h1>작업: Smooth Redesign Maintenance</h1>\n<ul>\n<li>[x] 웹 first intake와 대범위 분해 기준 정리</li>\n<li>[x] <code>lib/motion.ts</code> 분리</li>\n<li>[x] motion token/keyframes/dialog/menu/dropdown/detail transition 적용</li>\n<li>[x] Operator Center/task run 한국어 문구 정리</li>\n<li>[x] history admin preview payload 정책 적용</li>\n<li>[x] <code>check-history-payload.mjs</code> 추가 및 <code>check</code> 연결</li>\n<li>[x] 정적 테스트 업데이트</li>\n<li>[x] Tools 탭 작은 아이콘 버튼 QA 발견 및 최소 너비 수정</li>\n<li>[x] <code>test</code>, <code>check</code>, <code>build</code>, <code>build:customer</code>, <code>perf:budget</code>, <code>perf:buttons</code>, tab audit, Playwright smoke 실행</li>\n<li>[x] Operator Center 내부 <code>projects</code>, <code>structure</code>, <code>history</code>, <code>documents</code>, <code>requirements</code> 화면 QA 추가 실행</li>\n<li>[x] History <code>timeline-docs</code>를 bounded scroll pane으로 수정</li>\n<li>[x] Agent chat context summary 클릭 타깃 높이 수정</li>\n<li>[x] <code>audit-monitor-surfaces.mjs</code> 추가</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 878,
-      "updatedAt": "2026-06-05T06:55:45.433Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-smooth-redesign-maintenance-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-smooth-redesign-maintenance/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "계획: Smooth Redesign Maintenance",
-      "excerpt": "계획: Smooth Redesign Maintenance 1. 공식 UI/performance 참고와 local 구조를 확인한다. 2. MonitorShell 에 누적된 motion helper를 분리하고 테스트 계약을 옮긴다. 3. motion token, keyframes, dialog/menu/dropdown/detail transition을 통일한다. 4. 여러 탭을 Playwright로 열어 작은 버튼, overflow, clipped text를 찾고 수정한다. 5. collector의 ",
-      "html": "<h1>계획: Smooth Redesign Maintenance</h1>\n<p>1. 공식 UI/performance 참고와 local 구조를 확인한다.</p>\n<p>2. <code>MonitorShell</code>에 누적된 motion helper를 분리하고 테스트 계약을 옮긴다.</p>\n<p>3. motion token, keyframes, dialog/menu/dropdown/detail transition을 통일한다.</p>\n<p>4. 여러 탭을 Playwright로 열어 작은 버튼, overflow, clipped text를 찾고 수정한다.</p>\n<p>5. collector의 history preview 정책을 bounded admin summary로 변경하고 payload check를 추가한다.</p>\n<p>6. 한국어 고노출 문구를 정리한다.</p>\n<p>7. test, check, build, customer build, perf, Playwright smoke로 검증한다.</p>\n<h2>결정</h2>\n<ul>\n<li>새 dependency는 추가하지 않는다. 기존 React/Next/Radix/Playwright와 로컬 Chrome만 사용한다.</li>\n<li>history 원문은 삭제하지 않고 path/source metadata로 추적한다.</li>\n<li>UI animation은 장식보다 반응 상태 확인에 집중한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 889,
-      "updatedAt": "2026-06-05T06:09:04.637Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-visual-design-foundation-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-visual-design-foundation/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Visual Design Foundation 추적",
-      "excerpt": "Visual Design Foundation 추적 | 항목 | 연결 | | | | | 사용자 요청 | \"최고의 디자인\" | | 요구사항 | REQ WM 058, REQ WM 075 | | 구현 | components/MonitorShell.tsx , app/globals.css | | 테스트 | tests/tool studio.test.mjs | | 검증 | test , check , build , build:customer , perf:budget , desktop/mobile Playwrigh",
-      "html": "<h1>Visual Design Foundation 추적</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>사용자 요청</td><td>&quot;최고의 디자인&quot;</td></tr><tr><td>요구사항</td><td>REQ-WM-058, REQ-WM-075</td></tr><tr><td>구현</td><td><code>components/MonitorShell.tsx</code>, <code>app/globals.css</code></td></tr><tr><td>테스트</td><td><code>tests/tool-studio.test.mjs</code></td></tr><tr><td>검증</td><td><code>test</code>, <code>check</code>, <code>build</code>, <code>build:customer</code>, <code>perf:budget</code>, desktop/mobile Playwright visual smoke</td></tr><tr><td>기록</td><td><code>_history/web-searches/2026/2026-06-05-visual-design-foundation.ko.md</code>, <code>_history/web-searches/2026/2026-06-05-premium-apple-design-system.ko.md</code>, <code>_history/evaluations/2026/2026-06-05-premium-apple-design-system.ko.md</code></td></tr></tbody></table>\n<h2>근거</h2>\n<ul>\n<li>Apple HIG: 명확한 visual hierarchy와 platform-consistent controls.</li>\n<li>Apple Design Resources / Fonts: 공식 UI kit, color guide, symbol/font resources는 design consistency를 검증하는 참조이며, SF Pro는 라이선스상 번들 대신 Pretendard 유지가 적합하다.</li>\n<li>Material/Carbon: color, typography, interaction state를 token으로 관리.</li>\n<li>NN/g: 미니멀한 디자인은 장식 제거가 아니라 primary goal을 방해하지 않는 정보 우선순위.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1100,
-      "updatedAt": "2026-06-05T05:39:28.383Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-visual-design-foundation-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-visual-design-foundation/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Visual Design Foundation 작업",
-      "excerpt": "Visual Design Foundation 작업 x 웹 검색과 로컬 UI 구조 확인 x REQ WM 058 추가 x Overview 디자인 설명 문구 제거 및 작업 목표 중심 카피 적용 x 전역 surface/line/shadow/type token 추가 x activity rail, titlebar, 공통 버튼, home focus surface, work dock 스타일 개선 x static test 계약 추가 x check/build/perf/visual smoke 검증 x 평가, 요청 추",
-      "html": "<h1>Visual Design Foundation 작업</h1>\n<ul>\n<li>[x] 웹 검색과 로컬 UI 구조 확인</li>\n<li>[x] REQ-WM-058 추가</li>\n<li>[x] Overview 디자인 설명 문구 제거 및 작업 목표 중심 카피 적용</li>\n<li>[x] 전역 surface/line/shadow/type token 추가</li>\n<li>[x] activity rail, titlebar, 공통 버튼, home focus surface, work dock 스타일 개선</li>\n<li>[x] static test 계약 추가</li>\n<li>[x] check/build/perf/visual smoke 검증</li>\n<li>[x] 평가, 요청 추적, 작업 요약 기록</li>\n<li>[x] Apple HIG 기반 hierarchy/harmony/consistency 검색과 대범위 분해 기록</li>\n<li>[x] light/dark token, chrome/glass surface, repeated panel, primary button, 3D/terminal dark surface premium pass 적용</li>\n<li>[x] desktop home, desktop Agents 3D, mobile Tool Studio screenshot smoke 검증</li>\n<li>[ ] 커밋 및 push</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 771,
-      "updatedAt": "2026-06-05T05:39:28.382Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-visual-design-foundation-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-visual-design-foundation/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Visual Design Foundation 검증",
-      "excerpt": "Visual Design Foundation 검증 계획 corepack pnpm filter workspace monitor test : 통과 corepack pnpm filter workspace monitor run check : 통과 corepack pnpm filter workspace monitor run build:customer : 통과 corepack pnpm filter workspace monitor run perf:budget : 통과, largest initial chunk ",
-      "html": "<h1>Visual Design Foundation 검증</h1>\n<h2>계획</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: 통과, largest initial chunk 723,490 bytes / budget 1,000,000 bytes</li>\n<li>desktop static export visual smoke: 통과, focus/card/dock/primary 렌더링, old meta-copy 없음, overflowX 0</li>\n<li>mobile 390px static export visual smoke: 통과, focus/card/dock/primary 렌더링, old meta-copy 없음, primary action 48px, overflowX 0</li>\n</ul>\n<h2>기대 기준</h2>\n<ul>\n<li>Overview에 이전 meta-copy <code>한 화면은 하나의 결정을 크게 보여줍니다</code>가 남지 않는다.</li>\n<li><code>home-focus-command</code>, <code>home-focus-card</code>, <code>home-navigation-dock</code>이 렌더링된다.</li>\n<li>desktop/mobile body horizontal overflow가 0이다.</li>\n<li>primary action은 48px 이상 클릭 높이를 유지한다.</li>\n</ul>\n<h2>산출물</h2>\n<ul>\n<li><code>artifacts/screenshots/2026-06-05-visual-design-foundation-desktop.png</code></li>\n<li><code>artifacts/screenshots/2026-06-05-visual-design-foundation-mobile.png</code></li>\n</ul>\n<h2>2026-06-05 Premium Apple Design System 추가 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 46개 테스트</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과, <code>scroll_contract_ok</code>, <code>source_control_design_ok</code></li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: 통과, largest initial chunk 734,386 bytes / 1,000,000 bytes</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과</li>\n<li>개발 snapshot 복구용 <code>corepack pnpm --filter workspace-monitor run build</code>: 통과</li>\n<li>Playwright static export smoke: desktop home, desktop Agents 3D, mobile Tool Studio 모두 <code>overflowX 0</code></li>\n<li>primary action height: home desktop 48px, Agents 3D desktop 44px, Tool Studio mobile 48px</li>\n<li>3D canvas nonblank QA: Agents 3D <code>canvasDataUrlLength 195910</code>, Tool Studio mobile <code>canvasDataUrlLength 10034</code></li>\n</ul>\n<h2>2026-06-05 Premium 산출물</h2>\n<ul>\n<li><code>artifacts/screenshots/2026-06-05-premium-design-home-desktop.png</code></li>\n<li><code>artifacts/screenshots/2026-06-05-premium-design-agents-3d-desktop.png</code></li>\n<li><code>artifacts/screenshots/2026-06-05-premium-design-tool-studio-mobile.png</code></li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 2278,
-      "updatedAt": "2026-06-05T05:39:28.382Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
       "date": "2026-06-08",
       "year": "2026",
-      "documentsCount": 15,
+      "documentsCount": 22,
       "categories": [
         {
           "category": "evaluation",
-          "count": 2
+          "count": 3
         },
         {
           "category": "plan",
-          "count": 2
+          "count": 3
         },
         {
           "category": "request-trace",
-          "count": 2
+          "count": 3
         },
         {
           "category": "user-request",
-          "count": 2
+          "count": 3
         },
         {
           "category": "web-search",
-          "count": 2
+          "count": 3
         },
         {
           "category": "work-summary",
-          "count": 2
+          "count": 3
         },
         {
           "category": "work-timing",
-          "count": 2
+          "count": 3
         },
         {
           "category": "daily-history",
@@ -18320,7 +18332,7 @@
           "language": "unknown",
           "title": "2026 06 08 작업 기록",
           "excerpt": "2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view ",
-          "updatedAt": "2026-06-07T16:07:47.061Z",
+          "updatedAt": "2026-06-07T16:17:07.735Z",
           "historyDate": "2026-06-08"
         },
         {
@@ -18340,7 +18352,17 @@
           "language": "unknown",
           "title": "2026 06 08 Simple User Interface Input",
           "excerpt": "{ \"initial instruction\": \"사용자 입장에서 플랫폼 사용법이 너무 복잡하므로 커스텀 기능은 뒤로 보내고 쉬운 인터페이스만 기본으로 보이게 화면 구성을 전반적으로 변경\", \"result summary\": \"Changed Workspace Monitor to default to user view, reduced default sections to start/run/results, added a simple task intake and auto start panel, hid opera",
-          "updatedAt": "2026-06-07T16:07:51.887Z",
+          "updatedAt": "2026-06-07T16:10:07.406Z",
+          "historyDate": "2026-06-08"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-08-terminal-tab-reform-input-json",
+          "path": "_history/evaluations/2026/2026-06-08-terminal-tab-reform-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 08 Terminal Tab Reform Input",
+          "excerpt": "{ \"initial instruction\": \"특히 터미널 탭 기능들 개혁이 필요\", \"result summary\": \"Changed the Terminal drawer into a run and recovery hub with readiness state, direct start/live shell/CLI check/settings actions, folded advanced options, updated copy, tests, requirements, specs, and history reco",
+          "updatedAt": "2026-06-07T16:19:55.752Z",
           "historyDate": "2026-06-08"
         },
         {
@@ -18364,6 +18386,16 @@
           "historyDate": "2026-06-08"
         },
         {
+          "id": "history-plans-2026-2026-06-08-terminal-tab-reform-ko-md",
+          "path": "_history/plans/2026/2026-06-08-terminal-tab-reform.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "계획: 터미널 탭 개혁",
+          "excerpt": "계획: 터미널 탭 개혁 1. 터미널 드로어와 PTY surface의 현재 구조를 확인한다. 2. 시작 화면을 실행 허브로 바꾸고 고급 설정을 접는다. 3. 드로어 상단 readiness strip을 추가한다. 4. 기존 xterm 기반 검색/복사/붙여넣기/맞춤/빠른 명령 기능을 유지한다. 5. 요구사항, 스펙, 테스트, 생성 스냅샷, 평가 기록을 갱신한다. 6. check/test/build와 guard를 통과시킨 뒤 commit/push한다.",
+          "updatedAt": "2026-06-07T16:16:59.381Z",
+          "historyDate": "2026-06-08"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
           "path": "_history/request-traces/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
           "category": "request-trace",
@@ -18381,6 +18413,16 @@
           "title": "요청 결과 추적: 기본 사용자 인터페이스 단순화",
           "excerpt": "요청 결과 추적: 기본 사용자 인터페이스 단순화 요청 사용자 기본 인터페이스를 단순화한다. 커스텀/고급 기능은 기본 사용자 화면 뒤로 보낸다. 사용자가 첫 실행을 쉽게 시작할 수 있게 한다. 결과 view mode registry.json 기본값을 user 로 변경했다. 사용자 기본 섹션을 overview , desktop , eval 로 줄였다. 홈에 data simple user start 작업 요청 입력과 자동 시작 액션을 추가했다. 사용자 보기에서 activity rail의 운영 센터 버튼",
           "updatedAt": "2026-06-07T16:00:05.723Z",
+          "historyDate": "2026-06-08"
+        },
+        {
+          "id": "history-request-traces-2026-2026-06-08-terminal-tab-reform-ko-md",
+          "path": "_history/request-traces/2026/2026-06-08-terminal-tab-reform.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: 터미널 탭 개혁",
+          "excerpt": "요청 결과 추적: 터미널 탭 개혁 요청 터미널 탭 기능을 개혁한다. 결과 대상 RuntimeTerminalDrawer.tsx RuntimeTerminalStartPanel.tsx runtimeTerminalCopy.ts globals.css tool studio.test.mjs REQ WM 077 platform desktop app/renderer/workspace monitor/specs/2026 06 08 terminal tab reform/ 검증 대상 corepack pnpm dir pla",
+          "updatedAt": "2026-06-07T16:16:59.383Z",
           "historyDate": "2026-06-08"
         },
         {
@@ -18404,6 +18446,16 @@
           "historyDate": "2026-06-08"
         },
         {
+          "id": "history-user-requests-2026-2026-06-08-terminal-tab-reform-ko-md",
+          "path": "_history/user-requests/2026/2026-06-08-terminal-tab-reform.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: 터미널 탭 개혁",
+          "excerpt": "사용자 요청 요약: 터미널 탭 개혁 사용자는 플랫폼의 터미널 탭 기능이 특히 문제라고 지적했다. 앞선 맥락에서 터미널/PTY/CLI 연결 상태가 보이는 것과 실제 사용 경로가 달라 첫 실행과 에이전트 실행이 어렵다는 문제가 있었다. 목표는 사용자에게 복잡한 설정을 먼저 보이지 않고, 실행 가능 상태와 바로 실행/복구 액션을 보여주는 것이다.",
+          "updatedAt": "2026-06-07T16:16:59.382Z",
+          "historyDate": "2026-06-08"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
           "path": "_history/web-searches/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
           "category": "web-search",
@@ -18421,6 +18473,16 @@
           "title": "웹 검색 기록: 기본 사용자 인터페이스 단순화",
           "excerpt": "웹 검색 기록: 기본 사용자 인터페이스 단순화 검색어 progressive disclosure UX complex software beginner interface advanced settings hidden by default desktop app UX simplify complex workflow primary task surface progressive disclosure settings agent workflow UI human in the loop simple interface advan",
           "updatedAt": "2026-06-07T16:00:05.719Z",
+          "historyDate": "2026-06-08"
+        },
+        {
+          "id": "history-web-searches-2026-2026-06-08-terminal-tab-reform-ko-md",
+          "path": "_history/web-searches/2026/2026-06-08-terminal-tab-reform.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: 터미널 탭 개혁",
+          "excerpt": "웹 검색 기록: 터미널 탭 개혁 쿼리 terminal UI UX tabs command palette terminal panes best practices official docs xterm.js documentation terminal addon fit attach web links official Tauri v2 shell plugin command sidecar pty terminal documentation node pty terminal emulator pseudoterminal best",
+          "updatedAt": "2026-06-07T16:16:59.379Z",
           "historyDate": "2026-06-08"
         },
         {
@@ -18444,6 +18506,16 @@
           "historyDate": "2026-06-08"
         },
         {
+          "id": "history-work-summaries-2026-2026-06-08-terminal-tab-reform-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-08-terminal-tab-reform.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: 터미널 탭 개혁",
+          "excerpt": "작업 요약: 터미널 탭 개혁 터미널 드로어 상단에 readiness strip을 추가해 런타임, 어댑터, 실제 셸, 작업 폴더 상태를 노출했다. 시작 패널에 작업 시작, 실제 셸 열기, CLI 연결 점검, 설정 복구 액션을 우선 배치했다. 프롬프트 선택과 작업 폴더 세부 조정은 terminal advanced start 접힘 영역으로 이동했다. 사용자 기본 용어를 PTY 중심에서 실제 셸 과 연결 점검 중심으로 바꿨다. 기존 xterm 기반 검색, 클립보드, 화면 맞춤, 빠른 명령 기능은 유지했다",
+          "updatedAt": "2026-06-07T16:16:59.383Z",
+          "historyDate": "2026-06-08"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
           "path": "_history/work-timings/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
           "category": "work-timing",
@@ -18462,41 +18534,51 @@
           "excerpt": "{ \"task\": \"기본 사용자 인터페이스 단순화\", \"date\": \"2026 06 08\", \"phases\": { \"phase\": \"web first intake\", \"duration minutes\": 5, \"notes\": \"Progressive disclosure and simple default surface references checked.\" }, { \"phase\": \"local discovery\", \"duration minutes\": 20, \"notes\": \"Inspected view m",
           "updatedAt": "2026-06-07T16:06:09.505Z",
           "historyDate": "2026-06-08"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-08-terminal-tab-reform-json",
+          "path": "_history/work-timings/2026/2026-06-08-terminal-tab-reform.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 08 Terminal Tab Reform",
+          "excerpt": "{ \"task\": \"터미널 탭 개혁\", \"date\": \"2026 06 08\", \"phases\": { \"phase\": \"web first intake\", \"duration minutes\": 4, \"notes\": \"Checked xterm.js and Tauri shell references plus terminal UX signals.\" }, { \"phase\": \"local discovery\", \"duration minutes\": 15, \"notes\": \"Inspected RuntimeTermina",
+          "updatedAt": "2026-06-07T16:19:12.744Z",
+          "historyDate": "2026-06-08"
         }
       ]
     },
     {
       "date": "2026-06-07",
       "year": "2026",
-      "documentsCount": 81,
+      "documentsCount": 74,
       "categories": [
         {
           "category": "evaluation",
-          "count": 12
+          "count": 11
         },
         {
           "category": "request-trace",
-          "count": 12
+          "count": 11
         },
         {
           "category": "work-summary",
-          "count": 12
+          "count": 11
         },
         {
           "category": "work-timing",
-          "count": 12
+          "count": 11
         },
         {
           "category": "user-request",
-          "count": 11
+          "count": 10
         },
         {
           "category": "web-search",
-          "count": 11
+          "count": 10
         },
         {
           "category": "plan",
-          "count": 10
+          "count": 9
         },
         {
           "category": "daily-history",
@@ -18572,16 +18654,6 @@
           "title": "2026 06 07 소스 에디터 세션 훅 분리 평가",
           "excerpt": "2026 06 07 소스 에디터 세션 훅 분리 평가 평가 입력 installation occurred : false resource risk occurred : true omission check targets : history/omission checks/2026/2026 06 07 source editor session hook refactor.ko.md resource check targets : history/resource checks/2026/2026 06 07 source editor",
           "updatedAt": "2026-06-07T13:14:35.144Z",
-          "historyDate": "2026-06-07"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-07-source-load-request-hook-and-test-utility-ko-md",
-          "path": "_history/evaluations/2026/2026-06-07-source-load-request-hook-and-test-utility.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 평가",
-          "excerpt": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 평가 평가 입력 installation occurred : false resource risk occurred : true omission check targets : history/omission checks/2026/2026 06 07 source load request hook and test utility.ko.md resource check targets : history/resource checks/2026/2026 06 07",
-          "updatedAt": "2026-06-07T12:57:29.657Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18685,16 +18757,6 @@
           "historyDate": "2026-06-07"
         },
         {
-          "id": "history-plans-2026-2026-06-07-source-load-request-hook-and-test-utility-ko-md",
-          "path": "_history/plans/2026/2026-06-07-source-load-request-hook-and-test-utility.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 계획",
-          "excerpt": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 계획 목표 MonitorShell.tsx 의 비동기 source load 요청 순번 관리 코드를 source editor 모듈로 이동한다. 테스트 파일 간 반복되던 TypeScript 모듈 import shim을 공통 유틸로 이동한다. 실행 슬라이스 1. useSourceLoadRequestGate.ts 를 추가하고 source editor index에서 내보낸다. 2. MonitorShell.tsx 에서 inline request se",
-          "updatedAt": "2026-06-07T12:57:29.656Z",
-          "historyDate": "2026-06-07"
-        },
-        {
           "id": "history-plans-2026-2026-06-07-source-workbench-controller-hook-ko-md",
           "path": "_history/plans/2026/2026-06-07-source-workbench-controller-hook.ko.md",
           "category": "plan",
@@ -18795,16 +18857,6 @@
           "historyDate": "2026-06-07"
         },
         {
-          "id": "history-request-traces-2026-2026-06-07-source-load-request-hook-and-test-utility-ko-md",
-          "path": "_history/request-traces/2026/2026-06-07-source-load-request-hook-and-test-utility.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 요청 추적",
-          "excerpt": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 요청 추적 요청 미뤄둔 구현을 계속하고, 큰 소스와 중복 로직을 기능 이슈 없이 분리한다. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/source editor/useSourceLoadRequestGate.ts platform desktop app/renderer/workspace monitor/components/workbench/source edit",
-          "updatedAt": "2026-06-07T12:57:29.657Z",
-          "historyDate": "2026-06-07"
-        },
-        {
           "id": "history-request-traces-2026-2026-06-07-source-workbench-controller-hook-ko-md",
           "path": "_history/request-traces/2026/2026-06-07-source-workbench-controller-hook.ko.md",
           "category": "request-trace",
@@ -18892,16 +18944,6 @@
           "title": "사용자 요청 요약",
           "excerpt": "사용자 요청 요약 날짜: 2026 06 07 요청: 계속 구현하고, 큰 소스와 중복 구조를 더 분리한다. 이번 실행 범위: MonitorShell 에 남아 있던 런타임 작업공간 문구와 세션/task pipe 기본 프리셋을 별도 모듈로 분리한다.",
           "updatedAt": "2026-06-07T14:02:01.940Z",
-          "historyDate": "2026-06-07"
-        },
-        {
-          "id": "history-user-requests-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-          "path": "_history/user-requests/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "2026 06 07 소스 에디터 액션 상태 분리 요청",
-          "excerpt": "2026 06 07 소스 에디터 액션 상태 분리 요청 요청 요약 이전 히스토리를 기준으로 범위를 너무 좁게 잡지 말고 더 넓은 기능 흐름까지 구현한다. 큰 MonitorShell.tsx 의 중복 상태 전환과 소스 에디터 동작 로직을 계속 분리한다. 기능 이슈가 생기지 않도록 TypeScript와 Rust를 포함한 내부 패키징 흐름까지 확인한다. 적용 범위 소유 프로젝트: platform desktop app 주요 대상: Workspace Monitor source editor open/select",
-          "updatedAt": "2026-06-07T13:05:05.176Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -19002,16 +19044,6 @@
           "title": "웹 우선 인테이크 기록",
           "excerpt": "웹 우선 인테이크 기록 날짜: 2026 06 07 검색 목적: React 상태/로직 분리와 TypeScript 모듈 export 기준 확인. 검색어: React official docs sharing state between components extracting state components React official docs reusing logic with custom hooks TypeScript official docs type aliases modules exports 확인한 주요 출처",
           "updatedAt": "2026-06-07T14:02:01.940Z",
-          "historyDate": "2026-06-07"
-        },
-        {
-          "id": "history-web-searches-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-          "path": "_history/web-searches/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "2026 06 07 소스 에디터 액션 상태 분리 웹 검색 기록",
-          "excerpt": "2026 06 07 소스 에디터 액션 상태 분리 웹 검색 기록 검색 쿼리 React official docs synchronizing with effects race conditions ignore stale responses custom hooks Tauri v2 updater plugin official documentation check install update TypeScript official docs modules type only imports exports 확인한 출처 React ",
-          "updatedAt": "2026-06-07T13:05:05.177Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -19135,16 +19167,6 @@
           "historyDate": "2026-06-07"
         },
         {
-          "id": "history-work-summaries-2026-2026-06-07-source-load-request-hook-and-test-utility-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-07-source-load-request-hook-and-test-utility.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 작업 요약",
-          "excerpt": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 작업 요약 변경 source editor의 stale async load 응답 방지 로직을 useSourceLoadRequestGate.ts 로 분리했다. MonitorShell.tsx 는 새 hook을 사용하도록 바꾸고 inline sequence ref를 제거했다. TypeScript helper 테스트의 모듈 로딩 shim을 tests/utils/import type script module.mjs 로 이동했다. source edi",
-          "updatedAt": "2026-06-07T12:57:29.657Z",
-          "historyDate": "2026-06-07"
-        },
-        {
           "id": "history-work-summaries-2026-2026-06-07-source-workbench-controller-hook-ko-md",
           "path": "_history/work-summaries/2026/2026-06-07-source-workbench-controller-hook.ko.md",
           "category": "work-summary",
@@ -19255,16 +19277,6 @@
           "historyDate": "2026-06-07"
         },
         {
-          "id": "history-work-timings-2026-2026-06-07-source-load-request-hook-and-test-utility-ko-md",
-          "path": "_history/work-timings/2026/2026-06-07-source-load-request-hook-and-test-utility.ko.md",
-          "category": "work-timing",
-          "language": "ko",
-          "title": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 작업 타이밍",
-          "excerpt": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 작업 타이밍 기록 21:42 21:45 KST: 웹 검색, source editor request gate 위치 확인, 작업 범위 확정. 21:45 21:47 KST: useSourceLoadRequestGate.ts 와 테스트 import 유틸 추가. 21:47 21:49 KST: MonitorShell.tsx , source editor index, 구조 테스트, Tool Studio 테스트, readiness map 갱신. 21:4",
-          "updatedAt": "2026-06-07T12:57:29.657Z",
-          "historyDate": "2026-06-07"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-07-source-workbench-controller-hook-ko-md",
           "path": "_history/work-timings/2026/2026-06-07-source-workbench-controller-hook.ko.md",
           "category": "work-timing",
@@ -19323,36 +19335,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 3199,
+      "documents": 3206,
       "days": 9,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1129
+          "count": 1130
         },
         {
           "category": "web-search",
-          "count": 496
+          "count": 497
         },
         {
           "category": "request-trace",
-          "count": 425
+          "count": 426
         },
         {
           "category": "plan",
-          "count": 407
+          "count": 408
         },
         {
           "category": "work-timing",
-          "count": 344
+          "count": 345
         },
         {
           "category": "user-request",
-          "count": 210
+          "count": 211
         },
         {
           "category": "work-summary",
-          "count": 177
+          "count": 178
         },
         {
           "category": "daily-history",
@@ -19363,7 +19375,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 7243837,
+      "totalSourceBytes": 7256468,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19390,9 +19402,9 @@
       "monitorEvents": 64,
       "evidenceEvents": 27,
       "decisionEvents": 0,
-      "openSignals": 19,
+      "openSignals": 18,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-07T16:07:51.887Z",
+      "latestEventAt": "2026-06-07T16:19:55.752Z",
       "historyDays": 2
     },
     "lanes": [
@@ -19503,19 +19515,34 @@
     ],
     "events": [
       {
-        "id": "history-history-evaluations-2026-2026-06-08-simple-user-interface-input-json",
+        "id": "history-history-evaluations-2026-2026-06-08-terminal-tab-reform-input-json",
         "sourceType": "history",
         "signalType": "evaluation",
         "lane": "verification",
         "severity": "verified",
         "status": "evaluation",
-        "title": "2026 06 08 Simple User Interface Input",
-        "detail": "{ \"initial instruction\": \"사용자 입장에서 플랫폼 사용법이 너무 복잡하므로 커스텀 기능은 뒤로 보내고 쉬운 인터페이스만 기본으로 보이게 화면 구성을 전반적으로 변경\", \"result summary\": \"Changed Workspace Monitor to default to user view, reduced default sections to start/run/results, added a simple task intake and auto start panel, hid opera",
-        "path": "_history/evaluations/2026/2026-06-08-simple-user-interface-input.json",
+        "title": "2026 06 08 Terminal Tab Reform Input",
+        "detail": "{ \"initial instruction\": \"특히 터미널 탭 기능들 개혁이 필요\", \"result summary\": \"Changed the Terminal drawer into a run and recovery hub with readiness state, direct start/live shell/CLI check/settings actions, folded advanced options, updated copy, tests, requirements, specs, and history reco",
+        "path": "_history/evaluations/2026/2026-06-08-terminal-tab-reform-input.json",
         "category": "evaluation",
         "language": "unknown",
         "date": "2026-06-08",
-        "timestamp": "2026-06-07T16:07:51.887Z"
+        "timestamp": "2026-06-07T16:19:55.752Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-08-terminal-tab-reform-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "work-timing",
+        "title": "2026 06 08 Terminal Tab Reform",
+        "detail": "{ \"task\": \"터미널 탭 개혁\", \"date\": \"2026 06 08\", \"phases\": { \"phase\": \"web first intake\", \"duration minutes\": 4, \"notes\": \"Checked xterm.js and Tauri shell references plus terminal UX signals.\" }, { \"phase\": \"local discovery\", \"duration minutes\": 15, \"notes\": \"Inspected RuntimeTermina",
+        "path": "_history/work-timings/2026/2026-06-08-terminal-tab-reform.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T16:19:12.744Z"
       },
       {
         "id": "history-history-2026-2026-06-08-md",
@@ -19530,7 +19557,97 @@
         "category": "daily-history",
         "language": "unknown",
         "date": "2026-06-08",
-        "timestamp": "2026-06-07T16:07:47.061Z"
+        "timestamp": "2026-06-07T16:17:07.735Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-08-terminal-tab-reform-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "request-trace",
+        "title": "요청 결과 추적: 터미널 탭 개혁",
+        "detail": "요청 결과 추적: 터미널 탭 개혁 요청 터미널 탭 기능을 개혁한다. 결과 대상 RuntimeTerminalDrawer.tsx RuntimeTerminalStartPanel.tsx runtimeTerminalCopy.ts globals.css tool studio.test.mjs REQ WM 077 platform desktop app/renderer/workspace monitor/specs/2026 06 08 terminal tab reform/ 검증 대상 corepack pnpm dir pla",
+        "path": "_history/request-traces/2026/2026-06-08-terminal-tab-reform.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T16:16:59.383Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-08-terminal-tab-reform-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약: 터미널 탭 개혁",
+        "detail": "작업 요약: 터미널 탭 개혁 터미널 드로어 상단에 readiness strip을 추가해 런타임, 어댑터, 실제 셸, 작업 폴더 상태를 노출했다. 시작 패널에 작업 시작, 실제 셸 열기, CLI 연결 점검, 설정 복구 액션을 우선 배치했다. 프롬프트 선택과 작업 폴더 세부 조정은 terminal advanced start 접힘 영역으로 이동했다. 사용자 기본 용어를 PTY 중심에서 실제 셸 과 연결 점검 중심으로 바꿨다. 기존 xterm 기반 검색, 클립보드, 화면 맞춤, 빠른 명령 기능은 유지했다",
+        "path": "_history/work-summaries/2026/2026-06-08-terminal-tab-reform.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T16:16:59.383Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-08-terminal-tab-reform-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: 터미널 탭 개혁",
+        "detail": "사용자 요청 요약: 터미널 탭 개혁 사용자는 플랫폼의 터미널 탭 기능이 특히 문제라고 지적했다. 앞선 맥락에서 터미널/PTY/CLI 연결 상태가 보이는 것과 실제 사용 경로가 달라 첫 실행과 에이전트 실행이 어렵다는 문제가 있었다. 목표는 사용자에게 복잡한 설정을 먼저 보이지 않고, 실행 가능 상태와 바로 실행/복구 액션을 보여주는 것이다.",
+        "path": "_history/user-requests/2026/2026-06-08-terminal-tab-reform.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T16:16:59.382Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-08-terminal-tab-reform-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "ready",
+        "title": "계획: 터미널 탭 개혁",
+        "detail": "계획: 터미널 탭 개혁 1. 터미널 드로어와 PTY surface의 현재 구조를 확인한다. 2. 시작 화면을 실행 허브로 바꾸고 고급 설정을 접는다. 3. 드로어 상단 readiness strip을 추가한다. 4. 기존 xterm 기반 검색/복사/붙여넣기/맞춤/빠른 명령 기능을 유지한다. 5. 요구사항, 스펙, 테스트, 생성 스냅샷, 평가 기록을 갱신한다. 6. check/test/build와 guard를 통과시킨 뒤 commit/push한다.",
+        "path": "_history/plans/2026/2026-06-08-terminal-tab-reform.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T16:16:59.381Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-08-terminal-tab-reform-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: 터미널 탭 개혁",
+        "detail": "웹 검색 기록: 터미널 탭 개혁 쿼리 terminal UI UX tabs command palette terminal panes best practices official docs xterm.js documentation terminal addon fit attach web links official Tauri v2 shell plugin command sidecar pty terminal documentation node pty terminal emulator pseudoterminal best",
+        "path": "_history/web-searches/2026/2026-06-08-terminal-tab-reform.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T16:16:59.379Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-08-simple-user-interface-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 08 Simple User Interface Input",
+        "detail": "{ \"initial instruction\": \"사용자 입장에서 플랫폼 사용법이 너무 복잡하므로 커스텀 기능은 뒤로 보내고 쉬운 인터페이스만 기본으로 보이게 화면 구성을 전반적으로 변경\", \"result summary\": \"Changed Workspace Monitor to default to user view, reduced default sections to start/run/results, added a simple task intake and auto start panel, hid opera",
+        "path": "_history/evaluations/2026/2026-06-08-simple-user-interface-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T16:10:07.406Z"
       },
       {
         "id": "history-history-work-timings-2026-2026-06-08-simple-user-interface-json",
@@ -20836,111 +20953,6 @@
         "language": "ko",
         "date": "2026-06-07",
         "timestamp": "2026-06-07T13:05:05.178Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "2026 06 07 소스 에디터 액션 상태 분리 웹 검색 기록",
-        "detail": "2026 06 07 소스 에디터 액션 상태 분리 웹 검색 기록 검색 쿼리 React official docs synchronizing with effects race conditions ignore stale responses custom hooks Tauri v2 updater plugin official documentation check install update TypeScript official docs modules type only imports exports 확인한 출처 React ",
-        "path": "_history/web-searches/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T13:05:05.177Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "2026 06 07 소스 에디터 액션 상태 분리 요청",
-        "detail": "2026 06 07 소스 에디터 액션 상태 분리 요청 요청 요약 이전 히스토리를 기준으로 범위를 너무 좁게 잡지 말고 더 넓은 기능 흐름까지 구현한다. 큰 MonitorShell.tsx 의 중복 상태 전환과 소스 에디터 동작 로직을 계속 분리한다. 기능 이슈가 생기지 않도록 TypeScript와 Rust를 포함한 내부 패키징 흐름까지 확인한다. 적용 범위 소유 프로젝트: platform desktop app 주요 대상: Workspace Monitor source editor open/select",
-        "path": "_history/user-requests/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T13:05:05.176Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-07-source-load-request-hook-and-test-utility-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "evaluation",
-        "title": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 평가",
-        "detail": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 평가 평가 입력 installation occurred : false resource risk occurred : true omission check targets : history/omission checks/2026/2026 06 07 source load request hook and test utility.ko.md resource check targets : history/resource checks/2026/2026 06 07",
-        "path": "_history/evaluations/2026/2026-06-07-source-load-request-hook-and-test-utility.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T12:57:29.657Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-07-source-load-request-hook-and-test-utility-ko-md",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 작업 타이밍",
-        "detail": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 작업 타이밍 기록 21:42 21:45 KST: 웹 검색, source editor request gate 위치 확인, 작업 범위 확정. 21:45 21:47 KST: useSourceLoadRequestGate.ts 와 테스트 import 유틸 추가. 21:47 21:49 KST: MonitorShell.tsx , source editor index, 구조 테스트, Tool Studio 테스트, readiness map 갱신. 21:4",
-        "path": "_history/work-timings/2026/2026-06-07-source-load-request-hook-and-test-utility.ko.md",
-        "category": "work-timing",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T12:57:29.657Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-07-source-load-request-hook-and-test-utility-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 요청 추적",
-        "detail": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 요청 추적 요청 미뤄둔 구현을 계속하고, 큰 소스와 중복 로직을 기능 이슈 없이 분리한다. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/source editor/useSourceLoadRequestGate.ts platform desktop app/renderer/workspace monitor/components/workbench/source edit",
-        "path": "_history/request-traces/2026/2026-06-07-source-load-request-hook-and-test-utility.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T12:57:29.657Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-07-source-load-request-hook-and-test-utility-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 작업 요약",
-        "detail": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 작업 요약 변경 source editor의 stale async load 응답 방지 로직을 useSourceLoadRequestGate.ts 로 분리했다. MonitorShell.tsx 는 새 hook을 사용하도록 바꾸고 inline sequence ref를 제거했다. TypeScript helper 테스트의 모듈 로딩 shim을 tests/utils/import type script module.mjs 로 이동했다. source edi",
-        "path": "_history/work-summaries/2026/2026-06-07-source-load-request-hook-and-test-utility.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T12:57:29.657Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-07-source-load-request-hook-and-test-utility-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 계획",
-        "detail": "2026 06 07 소스 로드 요청 훅 및 테스트 유틸 분리 계획 목표 MonitorShell.tsx 의 비동기 source load 요청 순번 관리 코드를 source editor 모듈로 이동한다. 테스트 파일 간 반복되던 TypeScript 모듈 import shim을 공통 유틸로 이동한다. 실행 슬라이스 1. useSourceLoadRequestGate.ts 를 추가하고 source editor index에서 내보낸다. 2. MonitorShell.tsx 에서 inline request se",
-        "path": "_history/plans/2026/2026-06-07-source-load-request-hook-and-test-utility.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T12:57:29.656Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -24147,9 +24159,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 58992,
-      "lineCount": 1338,
-      "updatedAt": "2026-06-07T16:03:27.920Z",
+      "sizeBytes": 59063,
+      "lineCount": 1340,
+      "updatedAt": "2026-06-07T16:18:25.033Z",
       "truncated": true,
       "preview": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nimport {\n  desktopReadinessSourcePaths,\n  joinSourceMap,\n  monitorWorkbenchSourceKeys,\n  readSourceMap,\n  tauriFeatureModuleNames,\n  tauriRuntimeSourceKeys\n} from \"../scripts/readiness/source-structure.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  for (const featureModule of tauriFeatureModuleNames) {\n    assert.equal(existsSync(join(root, \"src-tauri/src/features\", featureModule)), true);\n  }\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSy",
       "previewBytes": 1200
@@ -24732,7 +24744,7 @@
           "transient tool output"
         ],
         "uiEntry": "Overview, History, Documents, Requirements",
-        "documentCount": 119,
+        "documentCount": 120,
         "sourceFileCount": 0
       },
       {
@@ -24924,7 +24936,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,338 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,340 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -24971,8 +24983,8 @@
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1338,
-        "sizeBytes": 58992,
+        "lineCount": 1340,
+        "sizeBytes": 59063,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
@@ -28620,13 +28632,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 4530,
+      "sourceDocuments": 4542,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-07T16:07:47.061Z"
+      "latestInsightAt": "2026-06-07T16:19:55.752Z"
     },
     "inferenceStages": [
       {
@@ -28694,7 +28706,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 557,
+        "signalCount": 561,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -28702,11 +28714,11 @@
           },
           {
             "category": "project-spec",
-            "count": 150
+            "count": 153
           },
           {
             "category": "request-trace",
-            "count": 83
+            "count": 84
           },
           {
             "category": "user-request",
@@ -28753,7 +28765,7 @@
           "2026 06 06 desktop dev/run fix 평가",
           "평가: Monitor 성능 가드레일 완성"
         ],
-        "latestEvidenceAt": "2026-06-07T16:06:02.056Z"
+        "latestEvidenceAt": "2026-06-07T16:19:45.133Z"
       },
       {
         "id": "web-research-to-spec",
@@ -28767,11 +28779,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1964,
+        "signalCount": 1968,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 528
+            "count": 530
           },
           {
             "category": "evaluation",
@@ -28779,11 +28791,11 @@
           },
           {
             "category": "web-search",
-            "count": 494
+            "count": 495
           },
           {
             "category": "plan",
-            "count": 239
+            "count": 240
           },
           {
             "category": "request-trace",
@@ -28822,7 +28834,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-07T16:06:02.056Z"
+        "latestEvidenceAt": "2026-06-07T16:19:20.455Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28836,7 +28848,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1138,
+        "signalCount": 1139,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -28844,7 +28856,7 @@
           },
           {
             "category": "plan",
-            "count": 343
+            "count": 344
           },
           {
             "category": "request-trace",
@@ -28895,7 +28907,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-07T16:07:47.061Z"
+        "latestEvidenceAt": "2026-06-07T16:17:07.735Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28909,11 +28921,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 876,
+        "signalCount": 881,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 333
+            "count": 336
           },
           {
             "category": "evaluation",
@@ -28921,11 +28933,11 @@
           },
           {
             "category": "work-summary",
-            "count": 64
+            "count": 65
           },
           {
             "category": "web-search",
-            "count": 49
+            "count": 50
           },
           {
             "category": "plan",
@@ -28968,7 +28980,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "Requirement: Native Pipe Runtime Tools"
         ],
-        "latestEvidenceAt": "2026-06-07T15:50:04.717Z"
+        "latestEvidenceAt": "2026-06-07T16:19:20.455Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -28982,23 +28994,23 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1721,
+        "signalCount": 1731,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 715
+            "count": 720
           },
           {
             "category": "evaluation",
-            "count": 568
+            "count": 569
           },
           {
             "category": "user-request",
-            "count": 133
+            "count": 134
           },
           {
             "category": "work-summary",
-            "count": 89
+            "count": 90
           },
           {
             "category": "request-trace",
@@ -29006,11 +29018,11 @@
           },
           {
             "category": "plan",
-            "count": 48
+            "count": 49
           },
           {
             "category": "web-search",
-            "count": 44
+            "count": 45
           },
           {
             "category": "project-doc",
@@ -29041,7 +29053,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-07T16:06:02.056Z"
+        "latestEvidenceAt": "2026-06-07T16:19:55.752Z"
       },
       {
         "id": "release-blocker-gate",
@@ -29117,14 +29129,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 4530,
+      "sourceDocuments": 4542,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-07T16:07:47.061Z"
+      "latestInsightAt": "2026-06-07T16:19:55.752Z"
     },
     "operatingModel": [
       {
@@ -29182,25 +29194,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3659,
+        "signalCount": 3668,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1964
+            "signalCount": 1968
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1138
+            "signalCount": 1139
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 557
+            "signalCount": 561
           }
         ],
         "missingPatternIds": [],
@@ -29228,7 +29240,7 @@
           "Deep Feature Issue Review 계획",
           "Work Plan: Subagent Live Execution"
         ],
-        "latestEvidenceAt": "2026-06-07T16:07:47.061Z",
+        "latestEvidenceAt": "2026-06-07T16:19:45.133Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -29257,13 +29269,13 @@
         "platformChange": "구조 개선 모델이 native resource loop를 핵심 원칙으로 표시하고 package gate와 연결한다.",
         "targetSection": "desktop",
         "ownerFeatureId": "agent_orchestration",
-        "signalCount": 1011,
+        "signalCount": 1016,
         "supportingPatterns": [
           {
             "id": "desktop-native-resource-loop",
             "label": "데스크톱 네이티브 자원 활용 루프",
             "signalStrength": "high",
-            "signalCount": 876
+            "signalCount": 881
           },
           {
             "id": "release-blocker-gate",
@@ -29297,7 +29309,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-07T15:50:04.717Z",
+        "latestEvidenceAt": "2026-06-07T16:19:20.455Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -29326,19 +29338,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2859,
+        "signalCount": 2870,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1721
+            "signalCount": 1731
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1138
+            "signalCount": 1139
           }
         ],
         "missingPatternIds": [],
@@ -29366,7 +29378,7 @@
           "Deep Feature Issue Review 계획",
           "Work Plan: Subagent Live Execution"
         ],
-        "latestEvidenceAt": "2026-06-07T16:07:47.061Z",
+        "latestEvidenceAt": "2026-06-07T16:19:55.752Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -29395,13 +29407,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 692,
+        "signalCount": 696,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 557
+            "signalCount": 561
           },
           {
             "id": "release-blocker-gate",
@@ -29435,7 +29447,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-07T16:06:02.056Z",
+        "latestEvidenceAt": "2026-06-07T16:19:45.133Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -29464,19 +29476,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 3102,
+        "signalCount": 3107,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1138
+            "signalCount": 1139
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1964
+            "signalCount": 1968
           }
         ],
         "missingPatternIds": [],
@@ -29504,7 +29516,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-07T16:07:47.061Z",
+        "latestEvidenceAt": "2026-06-07T16:19:20.455Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -29533,7 +29545,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 2099,
+        "signalCount": 2103,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -29545,7 +29557,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1964
+            "signalCount": 1968
           }
         ],
         "missingPatternIds": [],
@@ -29573,7 +29585,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-07T16:06:02.056Z",
+        "latestEvidenceAt": "2026-06-07T16:19:20.455Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

@@ -1,0 +1,30 @@
+{
+  "task": "터미널 탭 개혁",
+  "date": "2026-06-08",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes": 4,
+      "notes": "Checked xterm.js and Tauri shell references plus terminal UX signals."
+    },
+    {
+      "phase": "local_discovery",
+      "duration_minutes": 15,
+      "notes": "Inspected RuntimeTerminalDrawer, RuntimeTerminalStartPanel, NativePtyTerminalSurface, PTY Rust runtime, CSS, tests, and prior terminal spec."
+    },
+    {
+      "phase": "implementation",
+      "duration_minutes": 25,
+      "notes": "Added readiness strip, start command center, recovery actions, folded advanced options, copy updates, and tests."
+    },
+    {
+      "phase": "validation",
+      "duration_minutes": 18,
+      "notes": "Ran Workspace Monitor check/test/build/customer build, desktop app test/check, docs audit, generated snapshot refresh, and prepared close-out guards."
+    }
+  ],
+  "bottleneck_candidates": [
+    "Terminal UX spans drawer, start panel, copy, CSS, tests, and Rust runtime terminology.",
+    "RuntimeTerminalDrawer still mixes tab routing, status summaries, and session rendering in one component."
+  ]
+}

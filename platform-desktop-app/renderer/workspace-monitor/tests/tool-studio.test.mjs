@@ -635,6 +635,12 @@ test("Native PTY terminal exposes search, clipboard, and quick command controls"
   assert.match(runtimeTerminalDrawer, /searchAddonRef\.current\.findNext/);
   assert.match(runtimeTerminalDrawer, /searchAddonRef\.current\.findPrevious/);
   assert.match(runtimeTerminalDrawer, /data-terminal-command-center/);
+  assert.match(runtimeTerminalDrawer, /data-terminal-readiness/);
+  assert.match(runtimeTerminalDrawer, /data-terminal-start-command-center/);
+  assert.match(runtimeTerminalDrawer, /data-terminal-primary-action="start-session"/);
+  assert.match(runtimeTerminalDrawer, /data-terminal-primary-action="open-native-pty"/);
+  assert.match(runtimeTerminalDrawer, /data-terminal-primary-action="run-cli-setup"/);
+  assert.match(runtimeTerminalDrawer, /terminal-advanced-start/);
   assert.match(runtimeTerminalDrawer, /data-terminal-usage-guide/);
   assert.match(runtimeTerminalDrawer, /terminalGuidePty/);
   assert.match(runtimeTerminalDrawer, /terminalGuideAccount/);
@@ -650,6 +656,10 @@ test("Native PTY terminal exposes search, clipboard, and quick command controls"
   assert.match(runtimeTerminalDrawer, /terminal\?\.clear\(\)/);
   assert.match(runtimeTerminalDrawer, /terminalCopySelection|copyTerminalSelection/);
   assert.match(css, /\.native-pty-command-center \{/);
+  assert.match(css, /\.terminal-readiness-strip \{/);
+  assert.match(css, /\.terminal-start-command-center \{/);
+  assert.match(css, /\.terminal-start-action-grid \{/);
+  assert.match(css, /\.terminal-advanced-start \{/);
   assert.match(css, /\.terminal-usage-guide \{/);
   assert.match(css, /\.native-pty-search-control \{/);
   assert.match(css, /\.native-pty-toolbar \{/);

@@ -14255,7 +14255,7 @@ h3 {
   bottom: 0;
   z-index: var(--overlay-drawer-z);
   display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr);
+  grid-template-rows: auto auto auto minmax(0, 1fr);
   min-height: 0;
   max-height: calc(100vh - 64px);
   max-height: calc(100dvh - 64px);
@@ -14638,6 +14638,116 @@ h3 {
   scrollbar-gutter: stable;
 }
 
+.terminal-readiness-strip {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr) auto;
+  gap: 10px;
+  align-items: stretch;
+  margin: 0 -12px;
+  border-bottom: 1px solid var(--terminal-border);
+  background: color-mix(in srgb, var(--terminal-surface) 88%, var(--terminal-bg) 12%);
+  padding: 9px 10px;
+}
+
+.terminal-readiness-summary {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid var(--terminal-border);
+  background: var(--terminal-bg);
+  color: var(--terminal-fg);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.terminal-readiness-summary svg {
+  color: var(--terminal-accent);
+  flex: 0 0 auto;
+}
+
+.terminal-readiness-summary div,
+.terminal-readiness-summary span {
+  min-width: 0;
+}
+
+.terminal-readiness-summary strong {
+  display: block;
+  color: var(--terminal-fg);
+  font-size: var(--font-size-body);
+}
+
+.terminal-readiness-summary span {
+  display: block;
+  color: var(--terminal-muted);
+  font-size: var(--font-size-caption);
+  line-height: 1.35;
+}
+
+.terminal-readiness-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  min-width: 0;
+}
+
+.terminal-readiness-facts article {
+  min-width: 0;
+  border: 1px solid var(--terminal-border);
+  background: var(--terminal-bg);
+  border-radius: 6px;
+  padding: 7px 8px;
+}
+
+.terminal-readiness-facts article.ready {
+  border-color: color-mix(in srgb, var(--terminal-accent) 54%, var(--terminal-border));
+}
+
+.terminal-readiness-facts span {
+  display: block;
+  color: var(--terminal-muted);
+  font-size: var(--font-size-overline);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.terminal-readiness-facts strong {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--terminal-fg);
+  font-family: var(--mono);
+  font-size: var(--font-size-caption);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.terminal-readiness-actions {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.terminal-readiness-actions button {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--terminal-border);
+  background: var(--terminal-surface-raised);
+  color: var(--terminal-fg);
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.terminal-readiness-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
 .terminal-view-switcher button {
   display: inline-flex;
   min-height: var(--control-target-size);
@@ -14693,6 +14803,139 @@ h3 {
   overscroll-behavior: contain;
   padding-right: 2px;
   scrollbar-gutter: stable;
+}
+
+.terminal-start-command-center {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.08fr);
+  gap: 10px;
+  min-width: 0;
+  margin-bottom: 10px;
+}
+
+.terminal-start-primary-card,
+.terminal-start-action-grid button,
+.terminal-advanced-start {
+  border: 1px solid var(--terminal-border);
+  background: linear-gradient(180deg, var(--terminal-surface-raised), var(--terminal-surface));
+  color: var(--terminal-fg);
+  border-radius: 6px;
+}
+
+.terminal-start-primary-card {
+  display: grid;
+  align-content: start;
+  gap: 9px;
+  min-width: 0;
+  padding: 12px;
+}
+
+.terminal-start-primary-card h3 {
+  margin: 0;
+  color: var(--terminal-fg);
+  font-size: var(--font-size-panel-title);
+  line-height: 1.25;
+}
+
+.terminal-start-primary-card p {
+  margin: 0;
+  color: var(--terminal-muted);
+  line-height: 1.45;
+}
+
+.terminal-start-status-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.terminal-start-status-row span {
+  border: 1px solid var(--terminal-border);
+  background: var(--terminal-bg);
+  border-radius: 6px;
+  color: var(--terminal-muted);
+  padding: 5px 8px;
+  font-size: var(--font-size-caption);
+}
+
+.terminal-start-status-row strong {
+  color: var(--terminal-fg);
+}
+
+.terminal-primary-action {
+  justify-self: start;
+  min-width: 180px;
+  border-color: color-mix(in srgb, var(--terminal-accent) 64%, var(--terminal-border)) !important;
+  background: color-mix(in srgb, var(--terminal-accent) 28%, var(--terminal-surface-raised)) !important;
+}
+
+.terminal-start-action-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.terminal-start-action-grid button {
+  display: grid;
+  min-height: 132px;
+  align-content: start;
+  justify-items: start;
+  gap: 7px;
+  padding: 12px;
+  text-align: left;
+}
+
+.terminal-start-action-grid button svg {
+  color: var(--terminal-accent);
+}
+
+.terminal-start-action-grid button span {
+  color: var(--terminal-fg);
+  font-weight: 900;
+}
+
+.terminal-start-action-grid button small {
+  color: var(--terminal-muted);
+  line-height: 1.35;
+}
+
+.terminal-start-action-grid button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.terminal-advanced-start {
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.terminal-advanced-start summary {
+  display: flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  cursor: pointer;
+  padding: 9px 11px;
+  color: var(--terminal-fg);
+  font-weight: 900;
+}
+
+.terminal-advanced-start summary::-webkit-details-marker {
+  display: none;
+}
+
+.terminal-advanced-start[open] summary {
+  border-bottom: 1px solid var(--terminal-border);
+}
+
+.terminal-advanced-start[open] summary svg {
+  transform: rotate(90deg);
+}
+
+.terminal-advanced-start .session-launcher {
+  padding: 10px;
 }
 
 .terminal-usage-guide {
@@ -18897,6 +19140,8 @@ h3 {
   .terminal-agent-bridge,
   .terminal-agent-bridge-copy,
   .terminal-agent-bridge-actions,
+  .terminal-readiness-strip,
+  .terminal-start-command-center,
   .ide-run-toolbar,
   .ide-tool-window-layout,
   .attention-layout,
@@ -19012,6 +19257,8 @@ h3 {
   .decision-resume-strip,
   .decision-replay-strip,
   .terminal-event-rail article,
+  .terminal-readiness-facts,
+  .terminal-start-action-grid,
   .decision-answer-controls,
   .session-input-row,
   .source-results-summary,

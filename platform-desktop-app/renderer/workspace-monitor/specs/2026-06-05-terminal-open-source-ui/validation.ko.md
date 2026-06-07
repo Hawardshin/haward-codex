@@ -23,8 +23,10 @@
 - 클릭 후 hash: `#section-desktop`.
 - drawer class: `panel wide cli-session-panel terminal-drawer open`.
 - terminal chrome visible: `true`.
-- terminal tab count: `4`.
-- tab texts: `시작막힘`, `세션0`, `출력대기`, `이벤트0`.
+- terminal tab count: `5`.
+- tab texts: `시작확인 필요`, `세션0`, `실제 셸대기`, `출력대기`, `이벤트0`.
+- terminal readiness strip: visible.
+- terminal start command center: visible.
 - computed background:
   - drawer: `rgb(13, 17, 23)`
   - chrome: `rgb(13, 17, 23)`
@@ -37,11 +39,11 @@
 
 | Viewport | hash | drawer | chrome | tabs | body overflow | drawer overflow |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1280x820 | `#section-desktop` | open | visible | 4 | 0 | 0 |
-| 900x720 | `#section-desktop` | open | visible | 4 | 0 | 0 |
-| 390x720 | `#section-desktop` | open | visible | 4 | 0 | 0 |
+| 1280x820 | `#section-desktop` | open | visible | 5 | 0 | 0 |
+| 900x720 | `#section-desktop` | open | visible | 5 | 0 | 0 |
+| 390x720 | `#section-desktop` | open | visible | 5 | 0 | 0 |
 
 ## 알려진 제한
 
-- 이번 작업은 terminal UI surface의 구조와 스타일 개선이다.
-- true PTY/xterm.js runtime, shell escape sequence, clipboard/scrollback fidelity는 별도 제품 slice다.
+- 이번 작업은 terminal UI surface와 시작 흐름의 구조 개선이다.
+- shell profile 자동 수정과 terminal escape sequence fidelity 확장은 별도 제품 slice다.
