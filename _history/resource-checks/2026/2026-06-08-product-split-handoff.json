@@ -1,0 +1,32 @@
+{
+  "schema_version": "resource-check.v1",
+  "date": "2026-06-08",
+  "request_id": "2026-06-08-product-split-handoff",
+  "resource_risk_occurred": true,
+  "touched_resources": [
+    "Tauri process spawn command for agent-tool-desktop-app",
+    "Next build processes",
+    "Electron developer shell snapshot renderer"
+  ],
+  "lifecycle_checks": [
+    {
+      "resource": "open_agent_tool_desktop_app",
+      "status": "bounded",
+      "evidence": "uses Command::new(corepack_path), args vector, null stdio, and returns capability_missing if corepack or app path is unavailable"
+    },
+    {
+      "resource": "Next build",
+      "status": "verified_after_serial_retry",
+      "evidence": "parallel build attempt hit Next lock; sequential workspace-monitor build and platform renderer build passed"
+    },
+    {
+      "resource": "Electron shell",
+      "status": "developer_shell_only",
+      "evidence": "agent-tool-desktop-app tests assert contextIsolation=true, nodeIntegration=false, sandbox=true"
+    }
+  ],
+  "cleanup_notes": [
+    "No long-running exec session was left active by this check.",
+    "The implemented Tauri command launches the peer app as a separate process by design; public installer lifecycle controls remain a release gate."
+  ]
+}

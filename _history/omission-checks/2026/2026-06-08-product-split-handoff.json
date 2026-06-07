@@ -1,0 +1,53 @@
+{
+  "schema_version": "omission-check.v1",
+  "date": "2026-06-08",
+  "request_id": "2026-06-08-product-split-handoff",
+  "checked_requirements": [
+    {
+      "requirement": "platform-desktop-app focuses on Git workspace/project tracking, reports, evidence, and guest AI coding tools",
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/features/SeparatedOperationsHandoffPanel.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+      ]
+    },
+    {
+      "requirement": "agent/tool/Ollama/provider/AgentCore operations move to a separate desktop app",
+      "status": "covered_as_developer_shell",
+      "evidence": [
+        "agent-tool-desktop-app/src/main.mjs",
+        "agent-tool-desktop-app/src/renderer/index.html",
+        "agent-tool-desktop-app/tests/desktop-shell.test.mjs"
+      ]
+    },
+    {
+      "requirement": "platform app can open the separated app without manual user setup inside the UI",
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib_parts/29_agent_tool_desktop_handoff.rs",
+        "platform-desktop-app/src-tauri/src/lib_parts/10_decision_commands_and_app_run.rs"
+      ]
+    },
+    {
+      "requirement": "do not silently keep direct Tool Studio/AgentCore rendering in the workspace monitor",
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/scripts/check-lazy-boundary-contract.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+      ]
+    }
+  ],
+  "remaining_gaps": [
+    {
+      "gap": "Public installer readiness for either desktop app still needs signing, notarization where applicable, updater, clean-machine smoke, and release-channel gates.",
+      "owner_project": "platform-desktop-app and agent-tool-desktop-app",
+      "classification": "release_gate"
+    },
+    {
+      "gap": "MonitorShell.tsx and legacy ToolStudioPanel.tsx remain oversized source files. Current slice removed runtime coupling but did not fully move or split all legacy source.",
+      "owner_project": "platform-desktop-app",
+      "classification": "structural_follow_up"
+    }
+  ],
+  "close_out_status": "implementation_covered_with_recorded_release_and_structure_gaps"
+}

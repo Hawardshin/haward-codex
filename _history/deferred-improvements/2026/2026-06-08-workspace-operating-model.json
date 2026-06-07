@@ -43,21 +43,26 @@
                 "platform-desktop-app/renderer/workspace-monitor/types/desktopCliTypes.ts",
                 "platform-desktop-app/renderer/workspace-monitor/types/desktopWorkspaceTypes.ts",
                 "platform-desktop-app/renderer/workspace-monitor/types/desktopInteractionTypes.ts",
-                "platform-desktop-app/renderer/workspace-monitor/components/workbench/tool-studio/useToolAgentScene.ts"
+                "platform-desktop-app/renderer/workspace-monitor/components/workbench/tool-studio/useToolAgentScene.ts",
+                "platform-desktop-app/renderer/workspace-monitor/components/features/SeparatedOperationsHandoffPanel.tsx",
+                "platform-desktop-app/renderer/workspace-monitor/scripts/check-lazy-boundary-contract.mjs"
             ],
-            "remaining_note": "SearchAgentWorkChatPanel.tsx, ProviderAccountsPanel.tsx, useProviderAccountSettings.ts, snapshot.ts, desktop.ts, and the newly split type/scene files are now below 500 lines. MonitorShell.tsx and ToolStudioPanel.tsx remain legacy oversized structural pressure, not an open deferred feature queue. Rust lib_parts are currently below 500 lines. Public macOS/Windows release readiness still depends on external signing, notarization, clean-machine smoke, and release-channel gates."
+            "remaining_note": "SearchAgentWorkChatPanel.tsx, ProviderAccountsPanel.tsx, useProviderAccountSettings.ts, snapshot.ts, desktop.ts, and the newly split type/scene files are now below 500 lines. MonitorShell.tsx and ToolStudioPanel.tsx remain legacy oversized structural pressure; the current slice removed ToolStudio/AgentCore/AgentDetail runtime rendering and preloading from MonitorShell, but a future structural slice should continue extracting remaining MonitorShell sections. Rust lib_parts are currently below 500 lines. Public macOS/Windows release readiness still depends on external signing, notarization, clean-machine smoke, and release-channel gates."
         },
     {
       "id": "agent-tool-desktop-app-internals",
       "title": "Implement separated agent/tool/Ollama/provider operations inside agent-tool-desktop-app",
       "reason": "This request split the product boundary; the peer app's internal implementation belongs to a separate project slice.",
       "owner_project": "agent-tool-desktop-app",
-      "status": "completed_developer_shell",
+      "status": "completed_developer_shell_with_platform_handoff",
       "completed_artifacts": [
         "agent-tool-desktop-app/package.json",
         "agent-tool-desktop-app/src/main.mjs",
         "agent-tool-desktop-app/src/renderer/index.html",
-        "agent-tool-desktop-app/tests/desktop-shell.test.mjs"
+        "agent-tool-desktop-app/src/renderer/renderer.js",
+        "agent-tool-desktop-app/src/renderer/styles.css",
+        "agent-tool-desktop-app/tests/desktop-shell.test.mjs",
+        "platform-desktop-app/src-tauri/src/lib_parts/29_agent_tool_desktop_handoff.rs"
       ]
     },
     {
