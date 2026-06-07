@@ -27,11 +27,12 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
   const {
     tauriCargo,
     tauriLib,
+    tauriAppUpdate,
     tauriProviders,
     monitorShell,
     agentBuilderPanels
   } = sources;
-  const tauriRuntimeSource = `${tauriLib}\n${tauriProviders}`;
+  const tauriRuntimeSource = `${tauriLib}\n${tauriAppUpdate}\n${tauriProviders}`;
   const monitorWorkbenchSource = joinSourceMap(sources, serviceReadinessMonitorSourceKeys);
   const workspacePersistenceReady = [
     "get_desktop_workspace_state",
@@ -63,7 +64,9 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
       check(
         "desktop_resource_snapshot_ui_visible",
         "Resource telemetry visible in app",
-        monitorShell.includes("DesktopResourceSnapshotReport") && monitorShell.includes("앱 RAM/CPU") && monitorShell.includes("desktopResourceSnapshot"),
+        monitorWorkbenchSource.includes("DesktopResourceSnapshotReport") &&
+          monitorWorkbenchSource.includes("앱 RAM/CPU") &&
+          monitorWorkbenchSource.includes("desktopResourceSnapshot"),
         "Workspace source surface exposes app RAM/CPU and native cache telemetry."
       )
     ]),
@@ -110,8 +113,8 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
       check(
         "updater_runtime_actions",
         "Updater runtime actions exposed",
-        tauriLib.includes("check_app_update") &&
-          tauriLib.includes("install_app_update") &&
+        tauriRuntimeSource.includes("check_app_update") &&
+          tauriRuntimeSource.includes("install_app_update") &&
           monitorWorkbenchSource.includes("check-app-update") &&
           monitorWorkbenchSource.includes("install-app-update"),
         "Desktop runtime must expose app update check and install actions."

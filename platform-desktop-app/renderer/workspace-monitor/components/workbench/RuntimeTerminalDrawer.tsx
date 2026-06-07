@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useOverlayFocus } from "@/components/ui/useOverlayFocus";
 import { readClipboardText, writeClipboardText } from "@/lib/clipboard.mjs";
+import { formatBytes, formatDuration, isActiveSessionStatus } from "@/lib/runtimeDisplay";
 
 type RuntimeTerminalLanguage = "ko" | "en";
 type TerminalDrawerView = "start" | "native" | "sessions" | "output" | "events";
@@ -1331,29 +1332,5 @@ function sessionStatusDetail(session: RuntimeTerminalSession) {
 }
 
 function isWritableSessionStatus(status: string) {
-  return ["running", "defer_message_sent"].includes(status);
-}
-
-function isActiveSessionStatus(status: string) {
-  return isWritableSessionStatus(status);
-}
-
-function formatDuration(ms: number) {
-  if (ms < 1000) {
-    return `${ms}ms`;
-  }
-  if (ms < 60_000) {
-    return `${Math.round(ms / 100) / 10}s`;
-  }
-  return `${Math.round(ms / 60_000)}m`;
-}
-
-function formatBytes(bytes: number) {
-  if (bytes < 1024) {
-    return `${bytes}B`;
-  }
-  if (bytes < 1024 * 1024) {
-    return `${Math.round(bytes / 1024)}KB`;
-  }
-  return `${Math.round((bytes / (1024 * 1024)) * 10) / 10}MB`;
+  return isActiveSessionStatus(status);
 }

@@ -42,19 +42,98 @@ export function RuntimeDataSupportPanel({
   formatBytes
 }: RuntimeDataSupportPanelProps) {
   const roots = runtimeDataBoundary?.roots || [];
+  const visibleRoots = roots.slice(0, 6);
+  const hiddenRootCount = Math.max(0, roots.length - visibleRoots.length);
   const stats = {
     roots: roots.length,
     created: roots.filter((root) => root.created).length,
     ready: roots.filter((root) => root.exists).length,
     highFindings: (payloadAudit?.findings || []).filter((finding) => finding.severity === "high").length
   };
+  const copy = uiLanguage === "ko"
+    ? {
+        title: "데이터 경계",
+        roots: "루트",
+        checking: "점검 중",
+        rootsAria: "런타임 데이터 루트 확인",
+        audit: "감사",
+        auditing: "감사 중",
+        auditAria: "설치 페이로드 감사",
+        bundle: "번들",
+        creating: "생성 중",
+        bundleAria: "지원 진단 번들 생성",
+        ready: "준비됨",
+        created: "생성됨",
+        payloadFindings: "발견",
+        high: "높음",
+        missing: "없음",
+        pathDetail: "경로",
+        notLoaded: "런타임 루트 상태가 아직 로드되지 않았습니다.",
+        moreRoots: (count: number) => `루트 ${count}개 더 있음`,
+        installerAudit: "페이로드 감사",
+        files: (count: number) => `${count}개 파일`,
+        noFiles: "0개 파일",
+        noAudit: "감사 보고서 없음",
+        noFindings: "페이로드 문제를 찾지 못했습니다.",
+        supportBundle: "진단 번들",
+        redacted: "민감정보 제거됨",
+        idle: "대기 중",
+        manifest: "매니페스트",
+        noManifest: "매니페스트 없음",
+        runtimeRoots: "런타임 루트",
+        noRuntimeRoots: "런타임 루트 내보내기 없음",
+        payloadAudit: "페이로드 감사",
+        noPayloadAudit: "페이로드 감사 내보내기 없음",
+        taskRunSummary: "실행 기록 요약",
+        noTaskRunSummary: "실행 기록 요약 없음",
+        recentEvents: "최근 이벤트",
+        noRecentEvents: "최근 이벤트 로그 없음"
+      }
+    : {
+        title: "Data Boundary",
+        roots: "Roots",
+        checking: "Checking",
+        rootsAria: "Check runtime data roots",
+        audit: "Audit",
+        auditing: "Auditing",
+        auditAria: "Audit installer payload",
+        bundle: "Bundle",
+        creating: "Creating",
+        bundleAria: "Create support diagnostic bundle",
+        ready: "ready",
+        created: "created",
+        payloadFindings: "findings",
+        high: "high",
+        missing: "missing",
+        pathDetail: "Path",
+        notLoaded: "Runtime root status has not loaded yet.",
+        moreRoots: (count: number) => `${count} more roots`,
+        installerAudit: "Payload Audit",
+        files: (count: number) => `${count} files`,
+        noFiles: "0 files",
+        noAudit: "No audit report yet",
+        noFindings: "No payload findings.",
+        supportBundle: "Diagnostic Bundle",
+        redacted: "redacted",
+        idle: "idle",
+        manifest: "Manifest",
+        noManifest: "No manifest yet",
+        runtimeRoots: "Runtime roots",
+        noRuntimeRoots: "No runtime roots export",
+        payloadAudit: "Payload audit",
+        noPayloadAudit: "No payload audit export",
+        taskRunSummary: "Task run summary",
+        noTaskRunSummary: "No task-run summary",
+        recentEvents: "Recent events",
+        noRecentEvents: "No recent events log"
+      };
 
   return (
     <section className="panel wide runtime-data-panel">
       <div className="panel-heading">
         <div>
           <p className="eyebrow">Runtime Data & Support</p>
-          <h2>설치형 데이터 경계</h2>
+          <h2>{copy.title}</h2>
         </div>
         <div className="desktop-actions">
           <button
@@ -63,9 +142,11 @@ export function RuntimeDataSupportPanel({
             data-desktop-action-feedback="refresh-runtime-roots"
             onClick={onRefreshRuntimeRoots}
             disabled={!invokeAvailable || runtimeDataBusy !== ""}
+            aria-label={copy.rootsAria}
+            title={copy.rootsAria}
           >
             <Activity size={15} aria-hidden="true" />
-            <span>{runtimeDataBusy === "roots" ? (uiLanguage === "ko" ? "점검 중" : "Checking") : uiLanguage === "ko" ? "루트 확인" : "Roots"}</span>
+            <span>{runtimeDataBusy === "roots" ? copy.checking : copy.roots}</span>
           </button>
           <button
             type="button"
@@ -73,9 +154,11 @@ export function RuntimeDataSupportPanel({
             data-desktop-action-feedback="audit-payload"
             onClick={onAuditPayload}
             disabled={!invokeAvailable || runtimeDataBusy !== ""}
+            aria-label={copy.auditAria}
+            title={copy.auditAria}
           >
             <ShieldCheck size={15} aria-hidden="true" />
-            <span>{runtimeDataBusy === "payload" ? (uiLanguage === "ko" ? "감사 중" : "Auditing") : uiLanguage === "ko" ? "페이로드 감사" : "Audit Payload"}</span>
+            <span>{runtimeDataBusy === "payload" ? copy.auditing : copy.audit}</span>
           </button>
           <button
             type="button"
@@ -83,49 +166,51 @@ export function RuntimeDataSupportPanel({
             data-desktop-action-feedback="create-support-bundle"
             onClick={onCreateSupportBundle}
             disabled={!invokeAvailable || runtimeDataBusy !== ""}
+            aria-label={copy.bundleAria}
+            title={copy.bundleAria}
           >
             <FileSearch size={15} aria-hidden="true" />
-            <span>{runtimeDataBusy === "support" ? (uiLanguage === "ko" ? "생성 중" : "Creating") : uiLanguage === "ko" ? "지원 번들" : "Support Bundle"}</span>
+            <span>{runtimeDataBusy === "support" ? copy.creating : copy.bundle}</span>
           </button>
         </div>
       </div>
       {runtimeDataNotice && <p className="decision-resume-notice">{runtimeDataNotice}</p>}
       <div className="task-run-summary-strip">
         <article>
-          <span>{uiLanguage === "ko" ? "루트" : "roots"}</span>
+          <span>{copy.roots}</span>
           <strong>{stats.roots}</strong>
         </article>
         <article>
-          <span>{uiLanguage === "ko" ? "준비됨" : "ready"}</span>
+          <span>{copy.ready}</span>
           <strong>{stats.ready}</strong>
         </article>
         <article>
-          <span>{uiLanguage === "ko" ? "생성됨" : "created"}</span>
+          <span>{copy.created}</span>
           <strong>{stats.created}</strong>
         </article>
         <article>
-          <span>{uiLanguage === "ko" ? "페이로드 발견" : "payload findings"}</span>
+          <span>{copy.payloadFindings}</span>
           <strong>{payloadAudit?.flaggedCount ?? 0}</strong>
         </article>
         <article>
-          <span>{uiLanguage === "ko" ? "높음" : "high"}</span>
+          <span>{copy.high}</span>
           <strong>{stats.highFindings}</strong>
         </article>
       </div>
 
       <div className="runtime-data-layout">
         <div className="runtime-root-grid">
-          {roots.slice(0, 10).map((root) => (
+          {visibleRoots.map((root) => (
             <article key={root.id} className={root.exists ? "ready" : "missing"}>
               <header>
                 <div>
                   <span>{root.plane}</span>
                   <h3>{root.label}</h3>
                 </div>
-                <strong>{root.created ? (uiLanguage === "ko" ? "생성됨" : "created") : root.exists ? (uiLanguage === "ko" ? "준비됨" : "ready") : uiLanguage === "ko" ? "없음" : "missing"}</strong>
+                <strong>{root.created ? copy.created : root.exists ? copy.ready : copy.missing}</strong>
               </header>
               <p>{root.purpose}</p>
-              <PathDisclosure label="세부 경로" value={root.path} />
+              <PathDisclosure label={copy.pathDetail} value={root.path} />
               <div className="adapter-report">
                 <span>{root.id}</span>
                 <span>{root.visibility}</span>
@@ -133,7 +218,10 @@ export function RuntimeDataSupportPanel({
             </article>
           ))}
           {!runtimeDataBoundary && (
-            <p className="empty-state">런타임 루트 상태가 아직 로드되지 않았습니다.</p>
+            <p className="empty-state">{copy.notLoaded}</p>
+          )}
+          {hiddenRootCount > 0 && (
+            <p className="empty-state compact">{copy.moreRoots(hiddenRootCount)}</p>
           )}
         </div>
 
@@ -141,16 +229,16 @@ export function RuntimeDataSupportPanel({
           <header>
             <div>
               <span>{payloadAudit?.status || "not-scanned"}</span>
-              <h3>{uiLanguage === "ko" ? "설치 페이로드 감사" : "Installer Payload Audit"}</h3>
+              <h3>{copy.installerAudit}</h3>
             </div>
             <strong>{payloadAudit?.flaggedCount ?? 0}</strong>
           </header>
           <div className="task-run-detail-meta">
-            <span>{payloadAudit ? (uiLanguage === "ko" ? `${payloadAudit.scannedFiles}개 파일` : `${payloadAudit.scannedFiles} files`) : uiLanguage === "ko" ? "0개 파일" : "0 files"}</span>
+            <span>{payloadAudit ? copy.files(payloadAudit.scannedFiles) : copy.noFiles}</span>
             <span>{payloadAudit ? formatBytes(payloadAudit.scannedBytes) : "0 B"}</span>
             <span>{payloadAudit?.maxScanFiles ?? 0} max</span>
           </div>
-          <PathDisclosure label="감사 보고서 경로" value={payloadAudit?.auditPath || (uiLanguage === "ko" ? "감사 보고서 없음" : "No audit report yet")} />
+          <PathDisclosure label={copy.pathDetail} value={payloadAudit?.auditPath || copy.noAudit} />
           <div className="payload-finding-list">
             {(payloadAudit?.findings || []).slice(0, 6).map((finding) => (
               <div key={`${finding.ruleId}-${finding.path}`}>
@@ -160,7 +248,7 @@ export function RuntimeDataSupportPanel({
                 <code>{finding.path}</code>
               </div>
             ))}
-            {payloadAudit && payloadAudit.findings.length === 0 && <p className="empty-state">{uiLanguage === "ko" ? "페이로드 문제를 찾지 못했습니다." : "No payload findings."}</p>}
+            {payloadAudit && payloadAudit.findings.length === 0 && <p className="empty-state">{copy.noFindings}</p>}
           </div>
         </article>
 
@@ -168,16 +256,16 @@ export function RuntimeDataSupportPanel({
           <header>
             <div>
               <span>{supportBundle?.status || "not-created"}</span>
-              <h3>{uiLanguage === "ko" ? "지원 진단 번들" : "Support Diagnostic Bundle"}</h3>
+              <h3>{copy.supportBundle}</h3>
             </div>
-            <strong>{supportBundle?.redacted ? (uiLanguage === "ko" ? "민감정보 제거됨" : "redacted") : uiLanguage === "ko" ? "대기 중" : "idle"}</strong>
+            <strong>{supportBundle?.redacted ? copy.redacted : copy.idle}</strong>
           </header>
           <div className="support-bundle-grid">
-            <PathDisclosure label={uiLanguage === "ko" ? "매니페스트" : "Manifest"} value={supportBundle?.manifestPath || (uiLanguage === "ko" ? "매니페스트 없음" : "No manifest yet")} />
-            <PathDisclosure label={uiLanguage === "ko" ? "런타임 루트" : "Runtime roots"} value={supportBundle?.runtimeRootsPath || (uiLanguage === "ko" ? "런타임 루트 내보내기 없음" : "No runtime roots export")} />
-            <PathDisclosure label={uiLanguage === "ko" ? "페이로드 감사" : "Payload audit"} value={supportBundle?.installerPayloadAuditPath || (uiLanguage === "ko" ? "페이로드 감사 내보내기 없음" : "No payload audit export")} />
-            <PathDisclosure label={uiLanguage === "ko" ? "실행 기록 요약" : "Task run summary"} value={supportBundle?.taskRunSummaryPath || (uiLanguage === "ko" ? "실행 기록 요약 없음" : "No task-run summary")} />
-            <PathDisclosure label={uiLanguage === "ko" ? "최근 이벤트" : "Recent events"} value={supportBundle?.recentEventsPath || (uiLanguage === "ko" ? "최근 이벤트 로그 없음" : "No recent events log")} />
+            <PathDisclosure label={copy.manifest} value={supportBundle?.manifestPath || copy.noManifest} />
+            <PathDisclosure label={copy.runtimeRoots} value={supportBundle?.runtimeRootsPath || copy.noRuntimeRoots} />
+            <PathDisclosure label={copy.payloadAudit} value={supportBundle?.installerPayloadAuditPath || copy.noPayloadAudit} />
+            <PathDisclosure label={copy.taskRunSummary} value={supportBundle?.taskRunSummaryPath || copy.noTaskRunSummary} />
+            <PathDisclosure label={copy.recentEvents} value={supportBundle?.recentEventsPath || copy.noRecentEvents} />
           </div>
         </article>
       </div>

@@ -20,63 +20,11 @@ use tauri::{AppHandle, Manager, State};
 use tauri_plugin_clipboard_manager::ClipboardExt;
 use tauri_plugin_dialog::DialogExt;
 use tauri_plugin_opener::OpenerExt;
-use tauri_plugin_updater::UpdaterExt;
 
+use features::app_update::PendingAppUpdate;
 use features::service_readiness::{service_readiness_report, ServiceReadinessReport};
 
 mod features;
-
-#[derive(Serialize)]
-struct HealthStatus {
-    status: &'static str,
-    shell: &'static str,
-    ui_source: &'static str,
-}
-
-#[derive(Default)]
-struct PendingAppUpdate(Mutex<Option<tauri_plugin_updater::Update>>);
-
-#[derive(Serialize)]
-#[serde(rename_all = "camelCase")]
-struct AppUpdateCheckReport {
-    status: String,
-    update_available: bool,
-    current_version: String,
-    version: String,
-    date: String,
-    body: String,
-    target: String,
-    download_url: String,
-    signature_present: bool,
-    raw_json: Value,
-    detail: String,
-}
-
-#[derive(Serialize)]
-#[serde(rename_all = "camelCase")]
-struct AppUpdateInstallReport {
-    status: String,
-    installed: bool,
-    restarted: bool,
-    downloaded_bytes: u64,
-    content_length: Option<u64>,
-    detail: String,
-}
-
-#[derive(Serialize)]
-#[serde(rename_all = "camelCase")]
-struct InstallerShellRuntimeContractReport {
-    status: String,
-    source: String,
-    contract_path: String,
-    schema_version: String,
-    name: String,
-    purpose: String,
-    boot_sequence_count: usize,
-    enforcement_gate_count: usize,
-    data_accumulation_target_count: usize,
-    contract: Value,
-}
 
 struct AdapterDefinition {
     adapter_id: &'static str,
@@ -2028,78 +1976,6 @@ static PIPELINE_PRESETS: &[PipelineTaskPreset] = &[
 ];
 
 #[tauri::command]
-fn app_health() -> HealthStatus {
-    HealthStatus {
-        status: "ok",
-        shell: "tauri",
-        ui_source: "workspace-monitor",
-    }
-}
-
-#[tauri::command]
-fn get_installer_shell_runtime_contract(
-    app: AppHandle,
-) -> Result<InstallerShellRuntimeContractReport, String> {
-    let (contract_path, source) = resolve_installer_shell_runtime_contract_path(&app)?;
-    let content = fs::read_to_string(&contract_path).map_err(|error| {
-        format!(
-            "Failed to read installer shell runtime contract at {}: {error}",
-            path_to_string(&contract_path)
-        )
-    })?;
-    let contract: Value = serde_json::from_str(&content)
-        .map_err(|error| format!("Installer shell runtime contract is invalid JSON: {error}"))?;
-    let schema_version = contract
-        .get("schema_version")
-        .and_then(Value::as_str)
-        .unwrap_or("unknown")
-        .to_string();
-    let name = contract
-        .get("name")
-        .and_then(Value::as_str)
-        .unwrap_or("installer-shell-runtime-contract")
-        .to_string();
-    let purpose = contract
-        .get("purpose")
-        .and_then(Value::as_str)
-        .unwrap_or("")
-        .to_string();
-    let boot_sequence_count = contract
-        .get("shell_boot_sequence")
-        .and_then(Value::as_array)
-        .map(Vec::len)
-        .unwrap_or(0);
-    let enforcement_gate_count = contract
-        .get("enforcement_gates")
-        .and_then(Value::as_array)
-        .map(Vec::len)
-        .unwrap_or(0);
-    let data_accumulation_target_count = contract
-        .get("data_accumulation_targets")
-        .and_then(Value::as_array)
-        .map(Vec::len)
-        .unwrap_or(0);
-
-    Ok(InstallerShellRuntimeContractReport {
-        status: "ready".to_string(),
-        source,
-        contract_path: path_to_string(&contract_path),
-        schema_version,
-        name,
-        purpose,
-        boot_sequence_count,
-        enforcement_gate_count,
-        data_accumulation_target_count,
-        contract,
-    })
-}
-
-#[tauri::command]
-fn get_rust_runtime_feature_map() -> features::NativeRuntimeFeatureMapReport {
-    features::feature_map_report()
-}
-
-#[tauri::command]
 fn list_cli_adapters() -> Vec<CliAdapterStatus> {
     ADAPTERS.iter().map(adapter_status).collect()
 }
@@ -2181,7 +2057,10 @@ async fn run_desktop_cli_setup(app: AppHandle) -> Result<String, String> {
     let path_script_path = root.join("platform-desktop-app/scripts/configure-awp-path.mjs");
 
     if !script_path.exists() {
-        return Err(format!("CLI setup script not found: {}", script_path.display()));
+        return Err(format!(
+            "CLI setup script not found: {}",
+            script_path.display()
+        ));
     }
 
     let output = Command::new("node")
@@ -2205,7 +2084,9 @@ async fn run_desktop_cli_setup(app: AppHandle) -> Result<String, String> {
         return Err(format!("Setup failed.\nStdout: {stdout}\nStderr: {stderr}\nPath Stdout: {path_stdout}\nPath Stderr: {path_stderr}"));
     }
 
-    Ok(format!("CLI setup completed successfully.\n{stdout}\n{path_stdout}"))
+    Ok(format!(
+        "CLI setup completed successfully.\n{stdout}\n{path_stdout}"
+    ))
 }
 
 #[tauri::command]
@@ -2393,165 +2274,6 @@ fn create_support_diagnostic_bundle(
 #[tauri::command]
 fn get_service_readiness_report(app: AppHandle) -> Result<ServiceReadinessReport, String> {
     service_readiness_report(&app)
-}
-
-#[tauri::command]
-async fn check_app_update(
-    app: AppHandle,
-    pending_update: State<'_, PendingAppUpdate>,
-) -> Result<AppUpdateCheckReport, String> {
-    match app.updater() {
-        Ok(updater) => match updater.check().await {
-            Ok(Some(update)) => {
-                let report = app_update_check_report("update_available", true, &update);
-                let mut pending = pending_update
-                    .0
-                    .lock()
-                    .map_err(|_| "pending update state is unavailable".to_string())?;
-                *pending = Some(update);
-                Ok(report)
-            }
-            Ok(None) => {
-                let package_version = app.package_info().version.to_string();
-                let mut pending = pending_update
-                    .0
-                    .lock()
-                    .map_err(|_| "pending update state is unavailable".to_string())?;
-                *pending = None;
-                Ok(AppUpdateCheckReport {
-                    status: "up_to_date".to_string(),
-                    update_available: false,
-                    current_version: package_version.clone(),
-                    version: package_version,
-                    date: String::new(),
-                    body: String::new(),
-                    target: String::new(),
-                    download_url: String::new(),
-                    signature_present: false,
-                    raw_json: Value::Null,
-                    detail: "No update is available from the configured updater endpoint.".to_string(),
-                })
-            }
-            Err(error) => {
-                let mut pending = pending_update
-                    .0
-                    .lock()
-                    .map_err(|_| "pending update state is unavailable".to_string())?;
-                *pending = None;
-                Ok(app_update_unavailable_report(&format!(
-                    "Updater check failed: {error}"
-                )))
-            }
-        },
-        Err(error) => Ok(app_update_unavailable_report(&format!(
-            "Updater is not configured for this build: {error}"
-        ))),
-    }
-}
-
-#[tauri::command]
-async fn install_app_update(
-    app: AppHandle,
-    pending_update: State<'_, PendingAppUpdate>,
-    restart: Option<bool>,
-) -> Result<AppUpdateInstallReport, String> {
-    let update = {
-        let mut pending = pending_update
-            .0
-            .lock()
-            .map_err(|_| "pending update state is unavailable".to_string())?;
-        pending.take()
-    };
-    let Some(update) = update else {
-        return Ok(AppUpdateInstallReport {
-            status: "no_pending_update".to_string(),
-            installed: false,
-            restarted: false,
-            downloaded_bytes: 0,
-            content_length: None,
-            detail: "Run an update check before installing.".to_string(),
-        });
-    };
-
-    let mut downloaded_bytes = 0_u64;
-    let mut content_length = None;
-    if let Err(error) = update
-        .download_and_install(
-            |chunk_length, next_content_length| {
-                downloaded_bytes = downloaded_bytes.saturating_add(chunk_length as u64);
-                if next_content_length.is_some() {
-                    content_length = next_content_length;
-                }
-            },
-            || {},
-        )
-        .await
-    {
-        return Ok(AppUpdateInstallReport {
-            status: "install_failed".to_string(),
-            installed: false,
-            restarted: false,
-            downloaded_bytes,
-            content_length,
-            detail: format!("Updater install failed: {error}"),
-        });
-    }
-
-    if restart.unwrap_or(false) {
-        app.restart();
-    }
-
-    Ok(AppUpdateInstallReport {
-        status: "installed".to_string(),
-        installed: true,
-        restarted: false,
-        downloaded_bytes,
-        content_length,
-        detail: "Update was downloaded and installed. Restart the app to finish applying it."
-            .to_string(),
-    })
-}
-
-fn app_update_check_report(
-    status: &str,
-    update_available: bool,
-    update: &tauri_plugin_updater::Update,
-) -> AppUpdateCheckReport {
-    AppUpdateCheckReport {
-        status: status.to_string(),
-        update_available,
-        current_version: update.current_version.clone(),
-        version: update.version.clone(),
-        date: update
-            .date
-            .map(|date| date.to_string())
-            .unwrap_or_default(),
-        body: update.body.clone().unwrap_or_default(),
-        target: update.target.clone(),
-        download_url: update.download_url.to_string(),
-        signature_present: !update.signature.trim().is_empty(),
-        raw_json: update.raw_json.clone(),
-        detail: format!(
-            "Update {} is available for target {}.",
-            update.version, update.target
-        ),
-    }
-}
-
-fn app_update_unavailable_report(detail: &str) -> AppUpdateCheckReport {
-    AppUpdateCheckReport {
-        status: "updater_unavailable".to_string(),
-        update_available: false,
-        current_version: String::new(),
-        version: String::new(),
-        date: String::new(),
-        body: String::new(),
-        target: String::new(),
-        download_url: String::new(),
-        signature_present: false,
-        raw_json: Value::Null,
-        detail: detail.to_string(),
-    }
 }
 
 #[tauri::command]
@@ -4350,9 +4072,9 @@ pub fn run() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
-            app_health,
-            get_installer_shell_runtime_contract,
-            get_rust_runtime_feature_map,
+            features::app_shell::app_health,
+            features::app_shell::get_installer_shell_runtime_contract,
+            features::app_shell::get_rust_runtime_feature_map,
             list_cli_adapters,
             run_cli_adapter_health,
             run_all_cli_adapter_health,
@@ -4368,8 +4090,8 @@ pub fn run() {
             run_installer_payload_audit,
             create_support_diagnostic_bundle,
             get_service_readiness_report,
-            check_app_update,
-            install_app_update,
+            features::app_update::check_app_update,
+            features::app_update::install_app_update,
             run_desktop_cli_setup,
             get_desktop_preferences,
             save_desktop_preferences,
@@ -6727,33 +6449,6 @@ where
                 .unwrap_or(false)
         })
         .count()
-}
-
-fn resolve_installer_shell_runtime_contract_path(
-    app: &AppHandle,
-) -> Result<(PathBuf, String), String> {
-    if let Ok(resource_dir) = app.path().resource_dir() {
-        let candidate = resource_dir
-            .join("runtime-contracts")
-            .join("installer-shell-runtime-contract.json");
-        if candidate.exists() {
-            return Ok((candidate, "bundle_resource".to_string()));
-        }
-    }
-
-    let root = workspace_root()?;
-    let candidate = root
-        .join("platform-desktop-app")
-        .join("runtime-contracts")
-        .join("installer-shell-runtime-contract.json");
-    if candidate.exists() {
-        return Ok((candidate, "workspace_source".to_string()));
-    }
-
-    Err(
-        "Installer shell runtime contract was not found in bundled resources or workspace source."
-            .to_string(),
-    )
 }
 
 fn runtime_data_store_base_path(app: &AppHandle) -> Result<PathBuf, String> {
@@ -11145,7 +10840,10 @@ mod tests {
     #[test]
     fn desktop_prompt_customization_keeps_only_allowed_prompt_keys() {
         let mut session_prompts = HashMap::new();
-        session_prompts.insert("user_task".to_string(), "  custom user prompt  ".to_string());
+        session_prompts.insert(
+            "user_task".to_string(),
+            "  custom user prompt  ".to_string(),
+        );
         session_prompts.insert("unknown".to_string(), "should be dropped".to_string());
         session_prompts.insert("review_verify".to_string(), "".to_string());
 
@@ -11162,7 +10860,10 @@ mod tests {
         });
 
         assert_eq!(
-            normalized.session_prompts.get("user_task").map(String::as_str),
+            normalized
+                .session_prompts
+                .get("user_task")
+                .map(String::as_str),
             Some("custom user prompt")
         );
         assert!(!normalized.session_prompts.contains_key("unknown"));

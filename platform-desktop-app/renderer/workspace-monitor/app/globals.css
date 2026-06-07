@@ -196,48 +196,48 @@
 
 .desktop-app-root.theme-dark {
   color-scheme: dark;
-  --bg: #0f1115;
-  --surface: #171a20;
-  --surface-muted: #222631;
-  --surface-raised: #1b2029;
-  --surface-panel: #151922;
-  --surface-elevated: #1d222b;
-  --surface-glass: rgba(27, 32, 41, 0.78);
-  --surface-chrome: rgba(22, 26, 34, 0.72);
-  --line: #343a46;
-  --line-subtle: #272d37;
-  --line-strong: #747d8c;
-  --line-accent: #58d5b6;
-  --text: #ffffff;
-  --text-secondary: #d7deea;
-  --text-tertiary: #b8c2d0;
+  --bg: #0d1117;
+  --surface: #151b23;
+  --surface-muted: #1f2630;
+  --surface-raised: #1b222c;
+  --surface-panel: #111820;
+  --surface-elevated: #202a36;
+  --surface-glass: rgba(27, 34, 44, 0.82);
+  --surface-chrome: rgba(17, 24, 32, 0.78);
+  --line: #303945;
+  --line-subtle: #242c36;
+  --line-strong: #667282;
+  --line-accent: #66d9b1;
+  --text: #eef4fb;
+  --text-secondary: #c8d2df;
+  --text-tertiary: #a5b1c0;
   --muted: var(--text-secondary);
-  --rail-bg: #0d131b;
+  --rail-bg: #0b1017;
   --rail-active: rgba(255, 255, 255, 0.12);
-  --titlebar-bg: rgba(15, 20, 27, 0.94);
+  --titlebar-bg: rgba(13, 17, 23, 0.94);
   --overlay: rgba(0, 0, 0, 0.54);
-  --green: #6ee7bf;
-  --blue: #0a84ff;
-  --amber: #ffd166;
-  --red: #ff8f8b;
-  --violet: #b8a6ff;
-  --slate: #d7deea;
-  --rose: #f6a7c7;
+  --green: #66d9b1;
+  --blue: #58a6ff;
+  --amber: #f7c66f;
+  --red: #ff9a96;
+  --violet: #c8b6ff;
+  --slate: #c8d2df;
+  --rose: #f5a3c7;
   --mint-soft: color-mix(in srgb, var(--surface-raised) 82%, var(--green) 12%);
   --peach-soft: color-mix(in srgb, var(--surface-raised) 82%, var(--amber) 12%);
   --accent-primary: var(--blue);
-  --accent-primary-strong: #b7d2ff;
-  --accent-primary-soft: #183052;
-  --accent-primary-border: #5476aa;
-  --accent-success-soft: #153c31;
+  --accent-primary-strong: #b8d8ff;
+  --accent-primary-soft: #163250;
+  --accent-primary-border: #3f77aa;
+  --accent-success-soft: #123b2f;
   --accent-warning-soft: #3a2d15;
   --accent-danger-soft: #452022;
-  --status-success-bg: #153c31;
-  --status-success-border: #3c846d;
-  --status-success-text: #8df0c6;
-  --status-info-bg: #183052;
-  --status-info-border: #5476aa;
-  --status-info-text: #b7d2ff;
+  --status-success-bg: #123b2f;
+  --status-success-border: #347b66;
+  --status-success-text: #bdf8df;
+  --status-info-bg: #163250;
+  --status-info-border: #3f77aa;
+  --status-info-text: #b8d8ff;
   --status-warning-bg: #3a2d15;
   --status-warning-border: #8a7135;
   --status-warning-text: #ffe09a;
@@ -252,8 +252,8 @@
   --action-primary-bg: #005db8;
   --action-primary-fg: #ffffff;
   --action-primary-border: #2e8bf0;
-  --focus-ring: #ffffff;
-  --focus-ring-inset: #ffffff;
+  --focus-ring: #8ecbff;
+  --focus-ring-inset: #b7dcff;
   --terminal-bg: #0d1117;
   --terminal-surface: #161b22;
   --terminal-surface-raised: #21262d;
@@ -306,48 +306,48 @@
 @media (prefers-color-scheme: dark) {
   .desktop-app-root.theme-system {
     color-scheme: dark;
-    --bg: #0f1115;
-    --surface: #171a20;
-    --surface-muted: #222631;
-    --surface-raised: #1b2029;
-    --surface-panel: #151922;
-    --surface-elevated: #1d222b;
-    --surface-glass: rgba(27, 32, 41, 0.78);
-    --surface-chrome: rgba(22, 26, 34, 0.72);
-    --line: #343a46;
-    --line-subtle: #272d37;
-    --line-strong: #747d8c;
-    --line-accent: #58d5b6;
-    --text: #ffffff;
-    --text-secondary: #d7deea;
-    --text-tertiary: #b8c2d0;
+    --bg: #0d1117;
+    --surface: #151b23;
+    --surface-muted: #1f2630;
+    --surface-raised: #1b222c;
+    --surface-panel: #111820;
+    --surface-elevated: #202a36;
+    --surface-glass: rgba(27, 34, 44, 0.82);
+    --surface-chrome: rgba(17, 24, 32, 0.78);
+    --line: #303945;
+    --line-subtle: #242c36;
+    --line-strong: #667282;
+    --line-accent: #66d9b1;
+    --text: #eef4fb;
+    --text-secondary: #c8d2df;
+    --text-tertiary: #a5b1c0;
     --muted: var(--text-secondary);
-    --rail-bg: #0d131b;
+    --rail-bg: #0b1017;
     --rail-active: rgba(255, 255, 255, 0.12);
-    --titlebar-bg: rgba(15, 20, 27, 0.94);
+    --titlebar-bg: rgba(13, 17, 23, 0.94);
     --overlay: rgba(0, 0, 0, 0.54);
-    --green: #6ee7bf;
-    --blue: #0a84ff;
-    --amber: #ffd166;
-    --red: #ff8f8b;
-    --violet: #b8a6ff;
-    --slate: #d7deea;
-    --rose: #f6a7c7;
+    --green: #66d9b1;
+    --blue: #58a6ff;
+    --amber: #f7c66f;
+    --red: #ff9a96;
+    --violet: #c8b6ff;
+    --slate: #c8d2df;
+    --rose: #f5a3c7;
     --mint-soft: color-mix(in srgb, var(--surface-raised) 82%, var(--green) 12%);
     --peach-soft: color-mix(in srgb, var(--surface-raised) 82%, var(--amber) 12%);
     --accent-primary: var(--blue);
-    --accent-primary-strong: #b7d2ff;
-    --accent-primary-soft: #183052;
-    --accent-primary-border: #5476aa;
-    --accent-success-soft: #153c31;
+    --accent-primary-strong: #b8d8ff;
+    --accent-primary-soft: #163250;
+    --accent-primary-border: #3f77aa;
+    --accent-success-soft: #123b2f;
     --accent-warning-soft: #3a2d15;
     --accent-danger-soft: #452022;
-    --status-success-bg: #153c31;
-    --status-success-border: #3c846d;
-    --status-success-text: #8df0c6;
-    --status-info-bg: #183052;
-    --status-info-border: #5476aa;
-    --status-info-text: #b7d2ff;
+    --status-success-bg: #123b2f;
+    --status-success-border: #347b66;
+    --status-success-text: #bdf8df;
+    --status-info-bg: #163250;
+    --status-info-border: #3f77aa;
+    --status-info-text: #b8d8ff;
     --status-warning-bg: #3a2d15;
     --status-warning-border: #8a7135;
     --status-warning-text: #ffe09a;
@@ -362,8 +362,8 @@
     --action-primary-bg: #005db8;
     --action-primary-fg: #ffffff;
     --action-primary-border: #2e8bf0;
-    --focus-ring: #ffffff;
-    --focus-ring-inset: #ffffff;
+    --focus-ring: #8ecbff;
+    --focus-ring-inset: #b7dcff;
     --terminal-bg: #0d1117;
     --terminal-surface: #161b22;
     --terminal-surface-raised: #21262d;
@@ -519,6 +519,23 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body:has(.desktop-app-root.theme-dark) {
+  background: #0d1117;
+  color: #eef4fb;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #0d1117;
+    color: #eef4fb;
+  }
+
+  body:has(.desktop-app-root.theme-light) {
+    background: #f5f5f7;
+    color: #1d1d1f;
+  }
 }
 
 button,
@@ -804,8 +821,18 @@ button:disabled {
   .cli-command-copy-row button,
   .provider-account-actions button,
   .provider-login-card-actions button,
+  .provider-fast-setup button,
+  .provider-text-action,
+  .provider-ghost-action,
+  .provider-model-choice,
   .provider-filter-choice button,
   .provider-model-chip-list button,
+  .desktop-actions button,
+  .adapter-card button,
+  .agent-chat-connection-actions button,
+  .agent-chat-actions button,
+  .agent-provider-choice-grid button,
+  .agent-model-choice-grid button,
   .source-command-toolbar button,
   .source-settings-dialog button,
   .source-workbench-switcher button,
@@ -843,8 +870,18 @@ button:disabled {
   .cli-command-copy-row button,
   .provider-account-actions button,
   .provider-login-card-actions button,
+  .provider-fast-setup button,
+  .provider-text-action,
+  .provider-ghost-action,
+  .provider-model-choice,
   .provider-filter-choice button,
   .provider-model-chip-list button,
+  .desktop-actions button,
+  .adapter-card button,
+  .agent-chat-connection-actions button,
+  .agent-chat-actions button,
+  .agent-provider-choice-grid button,
+  .agent-model-choice-grid button,
   .source-command-toolbar button,
   .source-settings-dialog button,
   .source-workbench-switcher button,
@@ -877,6 +914,12 @@ button:disabled {
   .runtime-quick-command-row > button,
   .cli-command-copy-row button,
   .provider-model-chip-list button,
+  .provider-fast-setup button,
+  .provider-text-action,
+  .desktop-actions button,
+  .adapter-card button,
+  .agent-chat-connection-actions button,
+  .agent-chat-actions button,
   .source-command-toolbar button,
   .source-settings-dialog button,
   .source-editor-primary-actions button,
@@ -2330,7 +2373,6 @@ main {
 
 .provider-login-guide {
   display: grid;
-  grid-template-columns: minmax(260px, 0.9fr) minmax(360px, 1.1fr);
   gap: 10px;
   min-width: 0;
   border: 1px solid var(--line);
@@ -2339,6 +2381,147 @@ main {
   border-radius: 8px;
   padding: 12px;
   box-shadow: var(--control-shadow);
+}
+
+.provider-login-guide > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 5px 10px;
+  align-items: center;
+  min-width: 0;
+  min-height: var(--control-target-size);
+  cursor: pointer;
+  list-style: none;
+}
+
+.provider-login-guide > summary::-webkit-details-marker {
+  display: none;
+}
+
+.provider-login-guide > summary .eyebrow,
+.provider-login-guide > summary strong,
+.provider-login-guide > summary small {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.provider-login-guide > summary .eyebrow {
+  grid-column: 1 / -1;
+}
+
+.provider-login-guide > summary strong {
+  color: var(--text);
+  font-size: var(--font-size-body-strong);
+}
+
+.provider-login-guide > summary small {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+}
+
+.provider-guide-body {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(320px, 1.2fr);
+  gap: 10px;
+  min-width: 0;
+}
+
+.provider-guide-header {
+  display: grid;
+  align-content: center;
+  min-width: 0;
+  gap: 5px;
+}
+
+.provider-guide-header h3,
+.provider-guide-header p {
+  margin: 0;
+}
+
+.provider-guide-header h3 {
+  color: var(--text);
+  font-size: var(--font-size-lg);
+  overflow-wrap: var(--text-long-token-wrap);
+}
+
+.provider-guide-header p {
+  color: var(--muted);
+  line-height: 1.45;
+  overflow-wrap: break-word;
+}
+
+.provider-guide-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+.provider-guide-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  min-width: 0;
+  align-items: start;
+  border: 1px solid color-mix(in srgb, var(--line) 78%, var(--accent-primary) 22%);
+  background: color-mix(in srgb, var(--surface-elevated) 90%, var(--surface-muted) 10%);
+  border-radius: 7px;
+  padding: 9px;
+}
+
+.provider-guide-icon {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 7px;
+  color: var(--accent-primary-strong);
+}
+
+.provider-guide-content {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.provider-guide-content strong,
+.provider-guide-content small {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.provider-guide-content strong {
+  color: var(--text);
+  font-size: var(--font-size-caption);
+  font-weight: 900;
+}
+
+.provider-guide-content small {
+  color: var(--muted);
+  font-size: var(--font-size-overline);
+  line-height: 1.3;
+}
+
+.provider-guide-arrow {
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  width: 8px;
+  border-top: 1px solid var(--line-strong);
+}
+
+.provider-guide-step:last-child .provider-guide-arrow {
+  display: none;
 }
 
 .provider-login-copy {
@@ -9772,6 +9955,7 @@ h3 {
   align-items: center;
   gap: 6px;
   min-height: var(--control-compact-target-size);
+  max-inline-size: 13ch;
   border: 1px solid var(--line);
   border-radius: 7px;
   background: var(--choice-bg);
@@ -9779,6 +9963,7 @@ h3 {
   padding: 7px 10px;
   font-size: var(--font-size-caption);
   font-weight: 850;
+  justify-content: center;
   box-shadow: var(--control-shadow);
 }
 
@@ -10161,6 +10346,7 @@ h3 {
 .runtime-init-status-actions button {
   display: inline-flex;
   min-height: 32px;
+  max-inline-size: 12ch;
   align-items: center;
   gap: 6px;
   border: 1px solid var(--line);
@@ -10170,6 +10356,13 @@ h3 {
   padding: 6px 9px;
   font-size: var(--font-size-caption);
   font-weight: 850;
+}
+
+.runtime-init-status-actions button span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .ops-summary-strip {
@@ -12070,8 +12263,16 @@ h3 {
 
 .desktop-actions button {
   min-height: var(--control-target-size);
-  min-width: max-content;
-  white-space: normal;
+  min-width: var(--control-target-size);
+  max-inline-size: 16ch;
+  white-space: nowrap;
+}
+
+.desktop-actions button > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .desktop-error {
@@ -12175,8 +12376,9 @@ h3 {
 .adapter-card button {
   display: inline-flex;
   min-height: var(--control-target-size);
-  width: fit-content;
+  max-width: 100%;
   align-items: center;
+  justify-content: center;
   gap: var(--control-gap);
   border: 1px solid var(--hierarchy-border-strong);
   background: var(--surface-depth-0);
@@ -12196,6 +12398,7 @@ h3 {
 
 .adapter-card-actions button {
   width: auto;
+  max-inline-size: 14ch;
 }
 
 .adapter-report {
@@ -12864,6 +13067,7 @@ h3 {
 .agent-chat-connection-actions button {
   display: inline-flex;
   min-height: var(--control-compact-target-size);
+  max-inline-size: 13ch;
   align-items: center;
   justify-content: center;
   gap: 6px;
@@ -12874,7 +13078,15 @@ h3 {
   padding: 6px 9px;
   font-size: var(--font-size-caption);
   font-weight: 800;
-  white-space: normal;
+  white-space: nowrap;
+}
+
+.agent-chat-connection-actions button > span,
+.agent-chat-actions button > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .agent-chat-connection-actions button:disabled {
@@ -13007,6 +13219,7 @@ h3 {
 .agent-chat-actions button {
   display: inline-flex;
   min-height: var(--control-target-size);
+  max-inline-size: 13ch;
   align-items: center;
   justify-content: center;
   gap: var(--control-gap);
@@ -13016,7 +13229,7 @@ h3 {
   border-radius: var(--control-radius);
   padding: 8px var(--control-padding-x);
   font-weight: 800;
-  white-space: normal;
+  white-space: nowrap;
 }
 
 .agent-chat-actions .primary-action-button {
@@ -18420,6 +18633,11 @@ h3 {
   .runtime-text-choice-grid button:hover,
   .agent-provider-choice-grid button:hover,
   .agent-model-choice-grid button:hover,
+  .provider-fast-setup button:hover,
+  .provider-text-action:hover,
+  .provider-ghost-action:hover,
+  .agent-chat-connection-actions button:hover,
+  .agent-chat-actions button:hover,
   .agent-detail-switcher button:hover,
   .search-agent-actions button:hover,
   .quick-start-flow button:hover,
@@ -18596,6 +18814,8 @@ h3 {
   .agent-factory-layout,
   .learning-feedback-layout,
   .provider-login-guide,
+  .provider-guide-body,
+  .provider-guide-steps,
   .provider-setup-toolbar,
   .provider-model-strip,
   .provider-account-fields,

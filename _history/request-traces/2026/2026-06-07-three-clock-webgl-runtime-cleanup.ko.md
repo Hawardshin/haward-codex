@@ -1,0 +1,21 @@
+# Three Clock WebGL Runtime Cleanup Request Trace
+
+- 날짜: 2026-06-07
+- 요청: 이어서 구현.
+- 해석: 직전 3D 에이전트 구현 검증에서 남은 런타임 경고와 성능 설정 문제를 우선 처리.
+- 입력 근거:
+  - Playwright console smoke에서 `THREE.Clock` deprecation warning 관측.
+  - 공식 Three.js 문서와 로컬 설치 패키지 확인.
+  - `@react-three/fiber@9.6.1` 내부 `new THREE.Clock()` 확인.
+- 변경 산출물:
+  - `AgentCollaborationScene.tsx`
+  - `ToolStudioPanel.tsx`
+  - `tool-studio.test.mjs`
+- 검증 산출물:
+  - 테스트 115개 통과.
+  - Workspace Monitor check 통과.
+  - Workspace Monitor build 통과.
+  - Playwright 3D 화면 smoke에서 `THREE.Clock` 경고 0건.
+  - `corepack pnpm run desktop:package:internal` 통과.
+- 남은 연결:
+  - 다음 continuation slice에서는 더 넓은 UI/기능 단순화 또는 packaging release readiness gap 중 하나를 선택해 이어간다.

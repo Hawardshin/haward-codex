@@ -86,6 +86,7 @@ export function AgentFirstRunGuideCard({
   });
   const currentStep = steps.find((step) => step.status === "next") || steps.find((step) => step.status === "pending") || steps[steps.length - 1];
   const completeCount = steps.filter((step) => step.status === "ready").length;
+  const firstRunActionLabel = ko ? "첫 작업 시작" : "Start the first task";
 
   return (
     <section className="agent-first-run-guide-card" data-agent-first-run-guide="true" aria-label={ko ? "에이전트 첫 실행 안내" : "Agent first-run guide"}>
@@ -126,37 +127,84 @@ export function AgentFirstRunGuideCard({
       </div>
 
       <div className="agent-first-run-actions" aria-label={ko ? "첫 실행 액션" : "First-run actions"}>
-        <button type="button" onClick={onChooseWorkspace} disabled={!runtimeAvailable}>
+        <button
+          type="button"
+          onClick={onChooseWorkspace}
+          disabled={!runtimeAvailable}
+          aria-label={ko ? "에이전트 작업공간 선택" : "Choose agent workspace"}
+          title={ko ? "에이전트가 읽고 수정할 작업공간 선택" : "Choose the workspace the agent can inspect and edit"}
+        >
           <FolderOpen size={15} aria-hidden="true" />
-          <span>{ko ? "작업공간 선택" : "Choose workspace"}</span>
+          <span>{ko ? "작업공간" : "Workspace"}</span>
         </button>
-        <button type="button" onClick={onOpenProviderSettings}>
+        <button
+          type="button"
+          onClick={onOpenProviderSettings}
+          aria-label={ko ? "모델 계정 설정 열기" : "Open model provider settings"}
+          title={ko ? "OpenAI, Gemini, 로컬 모델 계정 설정" : "Open OpenAI, Gemini, or local model account settings"}
+        >
           <KeyRound size={15} aria-hidden="true" />
-          <span>{ko ? "계정 설정" : "Provider settings"}</span>
+          <span>{ko ? "계정" : "Account"}</span>
         </button>
-        <button type="button" onClick={onCheckAdapters} disabled={!runtimeAvailable || running}>
+        <button
+          type="button"
+          onClick={onCheckAdapters}
+          disabled={!runtimeAvailable || running}
+          aria-label={ko ? "CLI 실행 가능 여부 확인" : "Check CLI run path"}
+          title={ko ? "설치된 CLI가 실제로 실행 가능한지 확인" : "Confirm that the installed CLI is runnable"}
+        >
           <Settings size={15} aria-hidden="true" />
-          <span>{ko ? "CLI 확인" : "Check CLIs"}</span>
+          <span>{ko ? "CLI" : "CLI"}</span>
         </button>
-        <button type="button" onClick={onSyncSettings} disabled={!runtimeAvailable || settingsSyncBusy}>
+        <button
+          type="button"
+          onClick={onSyncSettings}
+          disabled={!runtimeAvailable || settingsSyncBusy}
+          aria-label={ko ? "설정과 런타임 상태 동기화" : "Sync settings and runtime state"}
+          title={ko ? "계정, CLI, 서비스, 작업공간, 실행 기록 다시 읽기" : "Reload accounts, CLI, service readiness, workspace, and task runs"}
+        >
           <RefreshCw size={15} aria-hidden="true" />
-          <span>{settingsSyncBusy ? (ko ? "동기화 중" : "Syncing") : ko ? "설정 동기화" : "Sync settings"}</span>
+          <span>{settingsSyncBusy ? (ko ? "동기화 중" : "Syncing") : ko ? "동기화" : "Sync"}</span>
         </button>
-        <button type="button" onClick={onPrepareAgentsInstructions} disabled={!runtimeAvailable}>
+        <button
+          type="button"
+          onClick={onPrepareAgentsInstructions}
+          disabled={!runtimeAvailable}
+          aria-label={ko ? "AGENTS.md 만들기 또는 열기" : "Create or open AGENTS.md"}
+          title={ko ? "프로젝트 지시 파일인 AGENTS.md 만들기 또는 열기" : "Create or open the AGENTS.md project instruction file"}
+        >
           <FileText size={15} aria-hidden="true" />
-          <span>{ko ? "AGENTS.md 만들기/열기" : "Create/open AGENTS.md"}</span>
+          <span>AGENTS</span>
         </button>
-        <button type="button" className="primary" onClick={onOpenSearchAgent} disabled={!runtimeAvailable || running}>
+        <button
+          type="button"
+          className="primary"
+          onClick={onOpenSearchAgent}
+          disabled={!runtimeAvailable || running}
+          aria-label={firstRunActionLabel}
+          title={firstRunActionLabel}
+        >
           <Search size={15} aria-hidden="true" />
-          <span>{ko ? "검색 에이전트 시작" : "Start search agent"}</span>
+          <span>{ko ? "시작" : "Start"}</span>
         </button>
-        <button type="button" onClick={onOpenTerminal}>
+        <button
+          type="button"
+          onClick={onOpenTerminal}
+          aria-label={ko ? "터미널 열기" : "Open terminal"}
+          title={ko ? "하단 터미널 열기" : "Open the bottom terminal"}
+        >
           <SquareTerminal size={15} aria-hidden="true" />
-          <span>{ko ? "터미널 보기" : "Show terminal"}</span>
+          <span>{ko ? "터미널" : "Terminal"}</span>
         </button>
-        <button type="button" onClick={onRefreshTaskRuns} disabled={!runtimeAvailable}>
+        <button
+          type="button"
+          onClick={onRefreshTaskRuns}
+          disabled={!runtimeAvailable}
+          aria-label={ko ? "실행 기록 새로고침" : "Refresh task runs"}
+          title={ko ? "에이전트 실행 기록 새로고침" : "Refresh agent task-run records"}
+        >
           <History size={15} aria-hidden="true" />
-          <span>{ko ? "실행 기록" : "Task runs"}</span>
+          <span>{ko ? "기록" : "Runs"}</span>
         </button>
       </div>
     </section>
@@ -228,7 +276,7 @@ function buildAgentFirstRunSteps({
       id: "instructions",
       label: ko ? "AGENTS.md 지시 확인" : "Check AGENTS.md instructions",
       detail: ko ? "프로젝트 규칙은 AGENTS.md가 에이전트에게 전달합니다." : "Project rules are passed to the agent through AGENTS.md.",
-      value: agentsInstructionReady ? "AGENTS.md" : ko ? "없으면 /init 또는 템플릿으로 생성" : "Create with /init or a template",
+      value: agentsInstructionReady ? (ko ? "AGENTS 준비됨" : "AGENTS ready") : ko ? "AGENTS 필요" : "AGENTS needed",
       status: agentsInstructionReady || agentConfigCount > 0 ? "ready" : "pending"
     },
     {

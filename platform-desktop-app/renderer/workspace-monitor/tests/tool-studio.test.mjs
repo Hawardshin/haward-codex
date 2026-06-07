@@ -29,6 +29,15 @@ const runtimeCatalog = fs.readFileSync(
   path.join(projectRoot, "components", "features", "runtimeCatalog.ts"),
   "utf8"
 );
+const runtimeSessionPresets = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "runtimeSessionPresets.ts"),
+  "utf8"
+);
+const runtimeWorkspaceCopy = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "runtimeWorkspaceCopy.ts"),
+  "utf8"
+);
+const runtimeDisplay = fs.readFileSync(path.join(projectRoot, "lib", "runtimeDisplay.ts"), "utf8");
 const settingsRuntimeSyncHook = fs.readFileSync(
   path.join(projectRoot, "components", "features", "useSettingsRuntimeSync.ts"),
   "utf8"
@@ -65,7 +74,64 @@ const workspaceHostPanel = fs.readFileSync(
   path.join(projectRoot, "components", "features", "WorkspaceHostPanel.tsx"),
   "utf8"
 );
-const desktopRuntimeCopySource = `${monitorShell}\n${accumulatedDataPanel}\n${desktopControlPanel}\n${runtimeInitStatusCard}\n${taskRunStorePanel}\n${workspaceHostPanel}\n${settingsRuntimeSyncHook}\n${providerAccountSettingsHook}`;
+const runtimeDataSupportPanel = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "RuntimeDataSupportPanel.tsx"),
+  "utf8"
+);
+const monitorSummaryWidgets = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "MonitorSummaryWidgets.tsx"),
+  "utf8"
+);
+const sourceEditorMonacoConfig = fs.readFileSync(
+  path.join(projectRoot, "components", "workbench", "source-editor", "monacoConfig.ts"),
+  "utf8"
+);
+const sourceEditorIndex = fs.readFileSync(
+  path.join(projectRoot, "components", "workbench", "source-editor", "index.ts"),
+  "utf8"
+);
+const sourceEditorCatalog = fs.readFileSync(
+  path.join(projectRoot, "components", "workbench", "source-editor", "sourceCatalog.ts"),
+  "utf8"
+);
+const sourceEditorDrafts = fs.readFileSync(
+  path.join(projectRoot, "components", "workbench", "source-editor", "sourceDrafts.ts"),
+  "utf8"
+);
+const sourceEditorDraftActions = fs.readFileSync(
+  path.join(projectRoot, "components", "workbench", "source-editor", "sourceDraftActions.ts"),
+  "utf8"
+);
+const sourceEditorSession = fs.readFileSync(
+  path.join(projectRoot, "components", "workbench", "source-editor", "useSourceEditorSession.ts"),
+  "utf8"
+);
+const sourceWorkbenchController = fs.readFileSync(
+  path.join(projectRoot, "components", "workbench", "source-editor", "useSourceWorkbenchController.ts"),
+  "utf8"
+);
+const sourceWorkbenchPanel = fs.readFileSync(
+  path.join(projectRoot, "components", "workbench", "source-editor", "SourceWorkbenchPanel.tsx"),
+  "utf8"
+);
+const sourceWorkbenchVisualComponentNames = [
+  "SourceCommandToolbar.tsx",
+  "SourceEditorFrame.tsx",
+  "SourceEditorTabs.tsx",
+  "SourceFileBrowser.tsx",
+  "SourceFileControls.tsx",
+  "SourceSaveResultsPanel.tsx",
+  "SourceWorkbenchHeader.tsx",
+  "SourceWorkbenchSwitcher.tsx",
+  "SourceWorkspaceStatusStrip.tsx"
+];
+const sourceWorkbenchVisualSource = [
+  sourceWorkbenchPanel,
+  ...sourceWorkbenchVisualComponentNames.map((fileName) =>
+    fs.readFileSync(path.join(projectRoot, "components", "workbench", "source-editor", fileName), "utf8")
+  )
+].join("\n");
+const desktopRuntimeCopySource = `${monitorShell}\n${runtimeDisplay}\n${accumulatedDataPanel}\n${desktopControlPanel}\n${runtimeInitStatusCard}\n${taskRunStorePanel}\n${workspaceHostPanel}\n${settingsRuntimeSyncHook}\n${providerAccountSettingsHook}`;
 const motionHelpers = fs.readFileSync(path.join(projectRoot, "lib", "motion.ts"), "utf8");
 const operatorCenterDialog = fs.readFileSync(
   path.join(projectRoot, "components", "features", "OperatorCenterDialog.tsx"),
@@ -159,11 +225,15 @@ const lazyBoundaryCheck = fs.readFileSync(
 const historyPayloadCheck = fs.readFileSync(path.join(projectRoot, "scripts", "check-history-payload.mjs"), "utf8");
 const adminHistoryHook = fs.readFileSync(path.join(projectRoot, "components", "history", "useAdminHistoryIndex.ts"), "utf8");
 const tauriLib = fs.readFileSync(path.resolve(projectRoot, "..", "..", "src-tauri", "src", "lib.rs"), "utf8");
+const tauriAppShell = fs.readFileSync(
+  path.resolve(projectRoot, "..", "..", "src-tauri", "src", "features", "app_shell.rs"),
+  "utf8"
+);
 const tauriProviders = fs.readFileSync(
   path.resolve(projectRoot, "..", "..", "src-tauri", "src", "features", "providers.rs"),
   "utf8"
 );
-const tauriRuntimeSource = `${tauriLib}\n${tauriProviders}`;
+const tauriRuntimeSource = `${tauriLib}\n${tauriAppShell}\n${tauriProviders}`;
 const tauriCargo = fs.readFileSync(path.resolve(projectRoot, "..", "..", "src-tauri", "Cargo.toml"), "utf8");
 const css = fs.readFileSync(path.join(projectRoot, "app", "globals.css"), "utf8");
 const packageJson = JSON.parse(fs.readFileSync(path.join(projectRoot, "package.json"), "utf8"));
@@ -350,9 +420,14 @@ test("Action button labels stay single-line and truncate instead of stretching c
   assert.match(css, /--button-label-max-inline-size: 24ch;/);
   assert.match(css, /--button-compact-label-max-inline-size: 18ch;/);
   assert.match(css, /\.desktop-app-root :where\([\s\S]*?\.cli-command-copy-row button,[\s\S]*?\.provider-model-chip-list button,[\s\S]*?\.source-command-toolbar button,[\s\S]*?\.source-editor-primary-actions button[\s\S]*?\) \{[\s\S]*?overflow: hidden;[\s\S]*?text-overflow: ellipsis;[\s\S]*?white-space: nowrap;/);
+  assert.match(css, /\.desktop-app-root :where\([\s\S]*?\.desktop-actions button,[\s\S]*?\.adapter-card button,[\s\S]*?\.agent-chat-connection-actions button,[\s\S]*?\.agent-chat-actions button[\s\S]*?\) \{[\s\S]*?overflow: hidden;[\s\S]*?text-overflow: ellipsis;[\s\S]*?white-space: nowrap;/);
   assert.match(css, /\.desktop-app-root :where\([\s\S]*?\.cli-command-copy-row button,[\s\S]*?\.provider-model-chip-list button,[\s\S]*?\.source-command-toolbar button[\s\S]*?\) > :where\(span, strong, small, em, kbd\) \{[\s\S]*?max-inline-size: min\(100%, var\(--button-label-max-inline-size\)\);[\s\S]*?overflow: hidden;[\s\S]*?text-overflow: ellipsis;[\s\S]*?white-space: nowrap;[\s\S]*?overflow-wrap: normal;/);
-  assert.match(css, /\.desktop-app-root :where\([\s\S]*?\.runtime-quick-command-row > button,[\s\S]*?\.cli-command-copy-row button,[\s\S]*?\.source-command-toolbar button,[\s\S]*?\.agent-cli-command-stack button[\s\S]*?\) > :where\(span, strong, small, em, kbd\) \{[\s\S]*?max-inline-size: min\(100%, var\(--button-compact-label-max-inline-size\)\);/);
+  assert.match(css, /\.desktop-app-root :where\([\s\S]*?\.runtime-quick-command-row > button,[\s\S]*?\.cli-command-copy-row button,[\s\S]*?\.desktop-actions button,[\s\S]*?\.agent-chat-connection-actions button,[\s\S]*?\.source-command-toolbar button,[\s\S]*?\.agent-cli-command-stack button[\s\S]*?\) > :where\(span, strong, small, em, kbd\) \{[\s\S]*?max-inline-size: min\(100%, var\(--button-compact-label-max-inline-size\)\);/);
   assert.match(css, /\.command-palette-results \{[\s\S]*?\}\n\n\.command-palette-results button \{[\s\S]*?display: grid;[\s\S]*?overflow: hidden;[\s\S]*?text-overflow: ellipsis;[\s\S]*?white-space: nowrap;/);
+  assert.match(css, /\.desktop-actions button \{[\s\S]*?max-inline-size: 16ch;[\s\S]*?white-space: nowrap;/);
+  assert.match(css, /\.agent-chat-connection-actions button \{[\s\S]*?max-inline-size: 13ch;[\s\S]*?white-space: nowrap;/);
+  assert.match(css, /\.agent-first-run-actions button \{[\s\S]*?max-inline-size: 13ch;[\s\S]*?justify-content: center;/);
+  assert.match(css, /\.runtime-init-status-actions button \{[\s\S]*?max-inline-size: 12ch;/);
 
   for (const rule of [
     cliCopyButtonLabelRule,
@@ -367,6 +442,33 @@ test("Action button labels stay single-line and truncate instead of stretching c
     assert.doesNotMatch(rule, /white-space: normal;/);
     assert.doesNotMatch(rule, /overflow-wrap: anywhere;/);
   }
+});
+
+test("Runtime setup UI hides noisy guidance and keeps visible actions short", () => {
+  assert.match(providerPanelSource, /const \[guideOpen, setGuideOpen\] = useState/);
+  assert.match(providerPanelSource, /open=\{guideOpen\}/);
+  assert.match(providerPanelSource, /onToggle=\{\(event\) => setGuideOpen\(event\.currentTarget\.open\)\}/);
+  assert.match(providerPanelSource, /loginSetup: "키 발급"/);
+  assert.match(providerPanelSource, /refreshModels: "모델"/);
+  assert.match(providerPanelSource, /verifySubscription: "구독"/);
+  assert.match(workspaceHostPanel, /permission: "권한"/);
+  assert.match(workspaceHostPanel, /import: "가져오기"/);
+  assert.match(workspaceHostPanel, /clone: "복제"/);
+  assert.match(desktopControlPanel, /title: "실행 연결"/);
+  assert.match(desktopControlPanel, /runAll: "점검"/);
+  assert.match(searchAgentWorkChatPanel, /title: "작업 에이전트"/);
+  assert.match(searchAgentWorkChatPanel, /connection: "연결"/);
+  assert.match(searchAgentWorkChatPanel, /account: "계정"/);
+  assert.match(searchAgentWorkChatPanel, /models: "모델"/);
+  assert.match(css, /\.provider-guide-body \{[\s\S]*?grid-template-columns: minmax\(220px, 0\.8fr\) minmax\(320px, 1\.2fr\);/);
+  assert.match(css, /@media \(max-width: 1080px\)[\s\S]*?\.provider-guide-body,[\s\S]*?\.provider-guide-steps,[\s\S]*?\{[\s\S]*?grid-template-columns: 1fr;/);
+});
+
+test("Runtime data support limits dense root lists before showing support details", () => {
+  assert.match(runtimeDataSupportPanel, /const visibleRoots = roots\.slice\(0, 6\);/);
+  assert.match(runtimeDataSupportPanel, /const hiddenRootCount = Math\.max\(0, roots\.length - visibleRoots\.length\);/);
+  assert.match(runtimeDataSupportPanel, /\{hiddenRootCount > 0 && \(/);
+  assert.match(runtimeDataSupportPanel, /moreRoots: \(count: number\) => `루트 \$\{count\}개 더 있음`/);
 });
 
 test("Monitor groups repeated actions with shared action primitives", () => {
@@ -404,6 +506,24 @@ test("Monitor groups repeated actions with shared action primitives", () => {
   assert.match(css, /@media \(max-width: 860px\) \{[\s\S]*?\.tool-studio-actions \{[\s\S]*?width: 100%;/);
 });
 
+test("Runtime display and monitor summary logic are shared modules", () => {
+  assert.match(monitorShell, /from "@\/lib\/runtimeDisplay"/);
+  assert.match(runtimeTerminalDrawer, /from "@\/lib\/runtimeDisplay"/);
+  assert.match(workspaceExplorerPane, /from "@\/lib\/runtimeDisplay"/);
+  assert.match(monitorShell, /from "\.\/features\/MonitorSummaryWidgets"/);
+  assert.match(runtimeDisplay, /export function formatBytes/);
+  assert.match(runtimeDisplay, /export function formatDuration/);
+  assert.match(runtimeDisplay, /export function mergeSessionReports/);
+  assert.match(runtimeDisplay, /export function mergeNativePtyReports/);
+  assert.match(runtimeDisplay, /export function detectOutputEvents/);
+  assert.match(monitorSummaryWidgets, /export function Metric/);
+  assert.match(monitorSummaryWidgets, /export function HistoryTimeline/);
+  assert.doesNotMatch(monitorShell, /function formatBytes/);
+  assert.doesNotMatch(monitorShell, /function mergeSessionReports/);
+  assert.doesNotMatch(runtimeTerminalDrawer, /function formatDuration/);
+  assert.doesNotMatch(workspaceExplorerPane, /function formatBytes/);
+});
+
 test("Runtime text defaults expose selectable choices", () => {
   assert.match(runtimeTerminalDrawer, /export type RuntimeTextChoice/);
   assert.match(runtimeTerminalDrawer, /promptKey\?: string/);
@@ -427,7 +547,14 @@ test("Runtime text defaults expose selectable choices", () => {
   assert.match(monitorShell, /RuntimeTextChoice/);
   assert.match(desktopTypes, /export type RuntimePromptCustomization = \{/);
   assert.match(desktopTypes, /prompts: RuntimePromptCustomization/);
-  assert.match(monitorShell, /function taskPipePromptKeyForPreset\(taskKind: string\)/);
+  assert.match(runtimeSessionPresets, /export function taskPipePromptKeyForPreset\(taskKind: string\)/);
+  assert.match(runtimeSessionPresets, /export const sessionModePresets/);
+  assert.match(runtimeSessionPresets, /export const fallbackTaskPipePresets/);
+  assert.match(runtimeSessionPresets, /export const defaultRuntimeInitDefaults/);
+  assert.match(runtimeWorkspaceCopy, /export const nativeWorkspaceCopy/);
+  assert.match(monitorShell, /from "\.\/features\/runtimeSessionPresets"/);
+  assert.match(monitorShell, /from "\.\/features\/runtimeWorkspaceCopy"/);
+  assert.doesNotMatch(monitorShell, /const nativeWorkspaceCopy =/);
   assert.match(monitorShell, /function normalizeRuntimePromptCustomization/);
   assert.match(monitorShell, /const sessionPromptOverrides = runtimeCustomization\.prompts\.sessionPrompts/);
   assert.match(monitorShell, /const taskPipePromptOverrides = runtimeCustomization\.prompts\.taskPipePrompts/);
@@ -616,8 +743,8 @@ test("Desktop Runtime exposes feature-split Rust runtime map", () => {
   }
   const featureMap = fs.readFileSync(path.join(tauriSrcRoot, "features", "mod.rs"), "utf8");
   assert.match(tauriLib, /mod features/);
-  assert.match(tauriLib, /fn get_rust_runtime_feature_map/);
-  assert.match(tauriLib, /get_rust_runtime_feature_map,/);
+  assert.match(tauriRuntimeSource, /fn get_rust_runtime_feature_map/);
+  assert.match(tauriRuntimeSource, /get_rust_runtime_feature_map/);
   assert.match(featureMap, /NativeRuntimeFeatureMapReport/);
   assert.match(featureMap, /rust-runtime-feature-map\.v1/);
   assert.match(monitorShell, /RustRuntimeFeatureMapReport/);
@@ -676,7 +803,8 @@ test("Search agent provider and model settings use explicit choices", () => {
 test("Provider account settings expose guided login and model setup controls", () => {
   assert.match(providerPanelSource, /AI 로그인 설정/);
   assert.match(providerPanelSource, /provider-login-guide/);
-  assert.match(providerPanelSource, /로그인\/키 발급/);
+  assert.match(providerPanelSource, /loginSetup: "키 발급"/);
+  assert.match(providerPanelSource, /open=\{guideOpen\}/);
   assert.match(runtimeCatalog, /https:\/\/platform\.openai\.com\/api-keys/);
   assert.match(runtimeCatalog, /https:\/\/aistudio\.google\.com\/api-keys/);
   assert.match(providerPanelSource, /onOpenUrl\(provider, "setup"\)/);
@@ -684,6 +812,10 @@ test("Provider account settings expose guided login and model setup controls", (
   assert.match(providerAccountSettingsHook, /export function useProviderAccountSettings/);
   assert.match(providerAccountSettingsHook, /ProviderActionFeedback/);
   assert.match(providerAccountSettingsHook, /list_provider_credentials/);
+  assert.match(providerAccountSettingsHook, /providerModelRequestSeqRef/);
+  assert.match(providerAccountSettingsHook, /const isCurrentModelRequest = \(\) => providerModelRequestSeqRef\.current === requestSeq/);
+  assert.match(providerAccountSettingsHook, /if \(!isCurrentModelRequest\(\)\) \{\s*return;\s*\}/);
+  assert.match(providerAccountSettingsHook, /if \(isCurrentModelRequest\(\)\) \{[\s\S]*?setProviderModelBusy\(false\)/);
   assert.match(providerAccountSettingsHook, /requestRuntimeSettingsSync\("provider-save"\)/);
   assert.match(providerPanelSource, /providerPanelFeedbackId/);
   assert.match(monitorShell, /useProviderAccountSettings/);
@@ -827,9 +959,9 @@ test("Desktop titlebar uses native Tauri drag regions without stealing controls"
 test("Tabs expose clear visual selected states and ARIA selection", () => {
   assert.match(monitorShell, /<nav className="settings-tab-list" role="tablist"/);
   assert.match(monitorShell, /role="tab"[\s\S]*?aria-selected=\{settingsTab === item\.id\}/);
-  assert.match(monitorShell, /<div className="source-editor-tabs" role="tablist"/);
-  assert.match(monitorShell, /className=\{`source-editor-tab \$\{activeDraft \? "active" : ""\}/);
-  assert.match(monitorShell, /role="tab"[\s\S]*?aria-selected=\{activeDraft\}/);
+  assert.match(sourceWorkbenchVisualSource, /<div className="source-editor-tabs" role="tablist"/);
+  assert.match(sourceWorkbenchVisualSource, /className=\{`source-editor-tab \$\{activeDraft \? "active" : ""\}/);
+  assert.match(sourceWorkbenchVisualSource, /role="tab"[\s\S]*?aria-selected=\{activeDraft\}/);
   assert.match(css, /--tab-selected-indicator:/);
   assert.match(css, /--tab-selected-border:/);
   assert.match(css, /--tab-selected-shadow:/);
@@ -877,7 +1009,7 @@ test("Popup menus escape scroll panes and keep their own bounded scroll", () => 
   assert.match(css, /--popup-layer-z: 160;/);
   assert.match(css, /--popup-max-block-size: min\(420px, calc\(100dvh - \(var\(--popup-viewport-gap\) \* 2\)\)\);/);
   assert.match(monitorShell, /<DropdownMenu\.Portal>[\s\S]*?<DropdownMenu\.Content className="app-choice-menu"[\s\S]*?collisionPadding=\{16\}/);
-  assert.match(monitorShell, /<DropdownMenu\.Portal>[\s\S]*?<DropdownMenu\.Content className="source-file-picker-menu"[\s\S]*?collisionPadding=\{16\}/);
+  assert.match(sourceWorkbenchVisualSource, /<DropdownMenu\.Portal>[\s\S]*?<DropdownMenu\.Content className="source-file-picker-menu"[\s\S]*?collisionPadding=\{16\}/);
   assert.match(toolStudio, /<DropdownMenu\.Content className="tool-menu-content" sideOffset=\{8\} align="end" collisionPadding=\{16\}/);
   assert.match(toolStudio, /<ContextMenu\.Content className="tool-context-content" collisionPadding=\{16\}/);
   assert.match(appChoiceMenuRule, /--popup-available-block-size: var\(--radix-dropdown-menu-content-available-height, var\(--popup-max-block-size\)\);/);
@@ -960,7 +1092,7 @@ test("Overlay surfaces share focus containment and explicit layer ordering", () 
   );
 });
 
-test("Agents collaboration uses lazy open-source 3D character scene", () => {
+test("Agents collaboration uses lazy open-source 3D seal character scene", () => {
   assert.equal(packageJson.dependencies["@react-three/fiber"], "9.6.1");
   assert.equal(packageJson.dependencies["@react-three/drei"], "10.7.7");
   assert.match(monitorShell, /const AgentCollaborationScene = dynamic\(/);
@@ -970,27 +1102,48 @@ test("Agents collaboration uses lazy open-source 3D character scene", () => {
   assert.match(monitorShell, /<AgentCollaborationScene board=\{collaborationBoard\} language=\{uiLanguage\} \/>/);
   assert.match(agentCollaborationScene, /from "@react-three\/fiber"/);
   assert.match(agentCollaborationScene, /import \{ Float, Html, Line \} from "@react-three\/drei"/);
+  assert.match(agentCollaborationScene, /import \{ getConsoleFunction, setConsoleFunction \} from "three"/);
+  assert.match(agentCollaborationScene, /suppressedThreeWarnings/);
+  assert.match(agentCollaborationScene, /THREE\.Clock: This module has been deprecated\. Please use THREE\.Timer instead\./);
+  assert.match(agentCollaborationScene, /suppressedThreeWarnings\.has\(message\)/);
+  assert.match(agentCollaborationScene, /console\[type\]\(message, \.\.\.params\)/);
   assert.match(agentCollaborationScene, /useFrame/);
-  assert.match(agentCollaborationScene, /preserveDrawingBuffer: true/);
+  assert.match(agentCollaborationScene, /useFrame\(\(_, delta\) =>/);
+  assert.match(agentCollaborationScene, /elapsedRef\.current \+= Math\.min\(delta, 0\.08\)/);
+  assert.doesNotMatch(agentCollaborationScene, /useFrame\(\(\{ clock \}\) =>/);
+  assert.doesNotMatch(agentCollaborationScene, /clock\.getElapsedTime/);
+  assert.match(agentCollaborationScene, /preserveDrawingBuffer: false/);
   assert.match(agentCollaborationScene, /powerPreference: "high-performance"/);
   assert.match(agentCollaborationScene, /data-agent-collaboration-3d-ready/);
   assert.match(agentCollaborationScene, /function AgentCharacter/);
   assert.match(agentCollaborationScene, /function TaskLaneNode/);
-  assert.match(agentCollaborationScene, /visorPalette/);
-  assert.match(agentCollaborationScene, /agent-character-visor/);
-  assert.match(agentCollaborationScene, /agent-character-chest-panel/);
-  assert.match(agentCollaborationScene, /agent-character-status-light/);
-  assert.match(agentCollaborationScene, /agent-character-role-halo/);
-  assert.match(agentCollaborationScene, /agent-character-ear-left/);
-  assert.match(agentCollaborationScene, /agent-character-eye-left/);
-  assert.match(agentCollaborationScene, /agent-character-muzzle/);
-  assert.match(agentCollaborationScene, /agent-character-nose/);
-  assert.match(agentCollaborationScene, /agent-character-cheek-left/);
-  assert.match(agentCollaborationScene, /agent-character-tail/);
+  assert.match(agentCollaborationScene, /sealBodyPalette/);
+  assert.match(agentCollaborationScene, /sealBellyPalette/);
+  assert.match(agentCollaborationScene, /sealAccentPalette/);
+  assert.match(agentCollaborationScene, /agent-seal-body/);
+  assert.match(agentCollaborationScene, /agent-seal-belly/);
+  assert.match(agentCollaborationScene, /agent-seal-head/);
+  assert.match(agentCollaborationScene, /agent-seal-flipper-front-left/);
+  assert.match(agentCollaborationScene, /agent-seal-flipper-rear-left/);
+  assert.match(agentCollaborationScene, /agent-seal-whisker-left-top/);
+  assert.match(agentCollaborationScene, /agent-seal-eye-left/);
+  assert.match(agentCollaborationScene, /agent-seal-muzzle/);
+  assert.match(agentCollaborationScene, /agent-seal-nose/);
+  assert.match(agentCollaborationScene, /agent-seal-cheek-left/);
+  assert.match(agentCollaborationScene, /agent-seal-tail/);
+  assert.match(agentCollaborationScene, /agent-seal-collar-tag/);
+  assert.match(agentCollaborationScene, /agent-seal-status-light/);
+  assert.match(agentCollaborationScene, /agent-seal-role-halo/);
+  assert.doesNotMatch(agentCollaborationScene, /agent-character-visor/);
+  assert.doesNotMatch(agentCollaborationScene, /agent-character-chest-panel/);
+  assert.doesNotMatch(agentCollaborationScene, /agent-character-ear-left/);
+  assert.doesNotMatch(agentCollaborationScene, /agent-character-foot-left/);
+  assert.doesNotMatch(agentCollaborationScene, /agent-character-left-hand/);
+  assert.match(agentCollaborationScene, /3D 물개형 에이전트 협업 작업면/);
   assert.match(agentCollaborationScene, /const compactAgentName/);
   assert.match(agentCollaborationScene, /data-agent-character-identity/);
   assert.match(agentCollaborationScene, /agent-collaboration-identity-strip/);
-  assert.match(agentCollaborationScene, /const scale = node\.agent\.activeTaskCount > 0 \? 0\.86 : 0\.78/);
+  assert.match(agentCollaborationScene, /const scale = node\.agent\.activeTaskCount > 0 \? 0\.92 : 0\.84/);
   assert.match(css, /\.agent-collaboration-theater \{/);
   assert.match(css, /\.agent-collaboration-scene-shell,[\s\S]*?min-height: clamp\(280px, 42vh, 520px\);/);
   assert.match(css, /\.agent-collaboration-scene-hud \{/);
@@ -1032,21 +1185,21 @@ test("Agents details use one active workspace instead of stacking every feature"
 test("Three.js scene is lazy-loaded and cleans up WebGL resources", () => {
   assert.doesNotMatch(toolStudio, /^import\s+.*from "three";/m);
   assert.match(toolStudio, /await import\("three"\)/);
-  assert.match(toolStudio, /preserveDrawingBuffer: true/);
+  assert.match(toolStudio, /preserveDrawingBuffer: false/);
   assert.match(toolStudio, /renderer\.setClearColor\(0x101923, 1\)/);
   assert.match(toolStudio, /scene\.background = new THREE\.Color\(0x101923\)/);
   assert.match(toolStudio, /camera\.lookAt\(0, -0\.2, 0\)/);
-  assert.match(toolStudio, /const bodyGeometry = new THREE\.CapsuleGeometry\(0\.31, 0\.24, 8, 18\)/);
-  assert.match(toolStudio, /const flipperGeometry = new THREE\.SphereGeometry\(0\.115, 16, 10\)/);
+  assert.match(toolStudio, /const bodyGeometry = new THREE\.SphereGeometry\(0\.5, 32, 22\)/);
+  assert.match(toolStudio, /const bellyGeometry = new THREE\.SphereGeometry\(0\.42, 24, 14\)/);
+  assert.match(toolStudio, /const flipperGeometry = new THREE\.SphereGeometry\(0\.16, 18, 10\)/);
   assert.match(toolStudio, /const whiskerGeometry = new THREE\.BoxGeometry\(0\.18, 0\.008, 0\.008\)/);
   assert.match(toolStudio, /const eyeGeometry = new THREE\.SphereGeometry\(0\.024, 12, 8\)/);
   assert.match(toolStudio, /const noseGeometry = new THREE\.SphereGeometry\(0\.018, 10, 8\)/);
   assert.match(toolStudio, /const muzzleGeometry = new THREE\.SphereGeometry\(0\.115, 16, 10\)/);
-  assert.match(toolStudio, /const visorGeometry = new THREE\.BoxGeometry\(0\.18, 0\.034, 0\.04\)/);
-  assert.match(toolStudio, /const chestPanelGeometry = new THREE\.BoxGeometry\(0\.18, 0\.095, 0\.04\)/);
+  assert.match(toolStudio, /const collarTagGeometry = new THREE\.BoxGeometry\(0\.12, 0\.08, 0\.04\)/);
   assert.match(toolStudio, /const roleHaloGeometry = new THREE\.TorusGeometry\(0\.42, 0\.016, 8, 48\)/);
-  assert.match(toolStudio, /tool-agent-seal-visor/);
-  assert.match(toolStudio, /tool-agent-seal-chest-panel/);
+  assert.match(toolStudio, /tool-agent-seal-belly/);
+  assert.match(toolStudio, /tool-agent-seal-collar-tag/);
   assert.match(toolStudio, /tool-agent-seal-status-light/);
   assert.match(toolStudio, /tool-agent-seal-role-halo/);
   assert.match(toolStudio, /tool-agent-seal-flipper-front-left/);
@@ -1058,6 +1211,10 @@ test("Three.js scene is lazy-loaded and cleans up WebGL resources", () => {
   assert.match(toolStudio, /tool-agent-seal-cheek-left/);
   assert.match(toolStudio, /tool-agent-seal-tail/);
   assert.doesNotMatch(toolStudio, /tool-agent-character-ear-left/);
+  assert.doesNotMatch(toolStudio, /leftFoot/);
+  assert.doesNotMatch(toolStudio, /leftHand/);
+  assert.doesNotMatch(toolStudio, /tool-agent-seal-visor/);
+  assert.doesNotMatch(toolStudio, /tool-agent-seal-chest-panel/);
   assert.match(toolStudio, /toolModeSceneColors/);
   assert.match(toolStudio, /character\.scale\.setScalar\(0\.82\)/);
   assert.match(toolStudio, /물개형 협업 캐릭터 맵/);
@@ -1351,9 +1508,9 @@ test("Desktop source workbench prepares native OS workspace resources", () => {
   assert.match(monitorShell, /const \[workspaceWarmupReport, setWorkspaceWarmupReport\] = useState<WorkspaceResourceWarmupReport \| null>\(null\)/);
   assert.match(monitorShell, /const \[desktopResourceSnapshot, setDesktopResourceSnapshot\] = useState<DesktopResourceSnapshotReport \| null>\(null\)/);
   assert.match(monitorShell, /const workspaceWarmupPollRef = useRef<number \| null>\(null\)/);
-  assert.match(monitorShell, /const SOURCE_DRAFT_UI_SYNC_MS = 180/);
-  assert.match(monitorShell, /const sourceDraftRef = useRef\(""\)/);
-  assert.match(monitorShell, /const sourceDraftSyncTimerRef = useRef<number \| null>\(null\)/);
+  assert.match(sourceEditorSession, /const defaultSourceDraftUiSyncMs = 180/);
+  assert.match(sourceEditorSession, /const sourceDraftRef = useRef\(""\)/);
+  assert.match(sourceEditorSession, /const sourceDraftSyncTimerRef = useRef<number \| null>\(null\)/);
   assert.match(monitorShell, /const \[workspaceResourceBusy, setWorkspaceResourceBusy\] = useState\(false\)/);
   assert.match(monitorShell, /const warmWorkspaceOsResources = async/);
   assert.match(monitorShell, /"warm_workspace_os_resources"/);
@@ -1367,22 +1524,23 @@ test("Desktop source workbench prepares native OS workspace resources", () => {
   assert.match(monitorShell, /setWorkspaceResourceReport\(report\)/);
   assert.match(monitorShell, /setRuntimeSourceFiles\(report\.catalog\.files\)/);
   assert.match(monitorShell, /setSourceCatalogReport\(report\.catalog\)/);
-  assert.match(monitorShell, /workspaceResourceReport \? "native cache"/);
-  assert.match(monitorShell, /OS 캐시/);
-  assert.match(monitorShell, /메모리 예산/);
-  assert.match(monitorShell, /앱 RAM\/CPU/);
-  assert.match(monitorShell, /desktopResourceSnapshot\.processMemoryBytes/);
-  assert.match(monitorShell, /desktopResourceSnapshot\.processCpuUsage\.toFixed\(1\)/);
-  assert.match(monitorShell, /native warming/);
-  assert.match(monitorShell, /formatBytes\(workspaceResourceReport\.cachedBytes\)/);
-  assert.match(monitorShell, /workspaceWarmupReport\.cachedBytes/);
+  assert.match(monitorShell, /sourceCatalogLabelFor\(Boolean\(workspaceResourceReport\), runtimeSourceFiles\.length > 0\)/);
+  assert.match(sourceEditorCatalog, /return "native cache"/);
+  assert.match(sourceWorkbenchVisualSource, /OS 캐시/);
+  assert.match(sourceWorkbenchVisualSource, /메모리 예산/);
+  assert.match(sourceWorkbenchVisualSource, /앱 RAM\/CPU/);
+  assert.match(sourceWorkbenchVisualSource, /appResourceSnapshot\.processMemoryBytes/);
+  assert.match(sourceWorkbenchVisualSource, /appResourceSnapshot\.processCpuUsage\.toFixed\(1\)/);
+  assert.match(sourceWorkbenchVisualSource, /native warming/);
+  assert.match(sourceWorkbenchVisualSource, /formatBytes\(workspaceResourceReport\.cachedBytes\)/);
+  assert.match(sourceWorkbenchVisualSource, /workspaceWarmupReport\.cachedBytes/);
   assert.match(monitorShell, /await prepareWorkspaceOsResources\(\{ forceRefresh: true \}\)/);
   assert.match(monitorShell, /void warmWorkspaceOsResources\(\{ forceRefresh: true \}\)/);
   assert.match(desktopTypes, /memoryBudgetBytes: number/);
   assert.match(desktopTypes, /parallelWorkers: number/);
-  assert.match(monitorShell, /CPU 병렬/);
-  assert.match(monitorShell, /preloadStrategy/);
-  assert.match(monitorShell, /scanDurationMs \+ workspaceResourceReport\.preloadDurationMs/);
+  assert.match(sourceWorkbenchVisualSource, /CPU 병렬/);
+  assert.match(sourceWorkbenchVisualSource, /preloadStrategy/);
+  assert.match(sourceWorkbenchVisualSource, /scanDurationMs \+ workspaceResourceReport\.preloadDurationMs/);
   assert.match(tauriCargo, /rayon = "1\.12\.0"/);
   assert.match(tauriCargo, /sysinfo = \{ version = "0\.39\.3", default-features = false, features = \["system"\] \}/);
   assert.match(tauriLib, /use rayon::prelude::\*/);
@@ -1397,21 +1555,22 @@ test("Desktop source workbench prepares native OS workspace resources", () => {
   assert.match(tauriLib, /MAX_WORKSPACE_PRELOAD_WORKERS/);
   assert.match(tauriLib, /build_workspace_thread_pool/);
   assert.match(tauriLib, /selected[\s\S]*?par_iter\(\)[\s\S]*?filter_map\(read_workspace_preload_candidate\)/);
-  assert.match(monitorShell, /onChange=\{\(value\) => updateSourceDraft\(value \?\? "", \{ immediate: false \}\)\}/);
-  assert.match(monitorShell, /currentEditorDraftContent\(\)/);
-  assert.match(monitorShell, /effectiveSourceDrafts\(\)/);
+  assert.match(sourceWorkbenchVisualSource, /onChange=\{\(value\) => onUpdateSourceDraft\(value \?\? ""\)\}/);
+  assert.match(monitorShell, /onUpdateSourceDraft=\{\(nextContent\) => updateSourceDraft\(nextContent, \{ immediate: false \}\)\}/);
+  assert.match(sourceWorkbenchController, /currentEditorDraftContent\(\)/);
+  assert.match(sourceWorkbenchController, /effectiveSourceDrafts\(\)/);
   assert.match(collector, /MAX_SOURCE_PREVIEW_CHARS = 1200/);
   assert.match(collector, /previewBytes: Buffer\.byteLength\(preview, "utf8"\)/);
   assert.doesNotMatch(collector, /content: preview/);
 });
 
 test("Workspace monitor sidebar and source editor defaults avoid clipped editing controls", () => {
-  assert.match(monitorShell, /fontSize: 13/);
-  assert.match(monitorShell, /minimap: \{ enabled: false \}/);
-  assert.match(monitorShell, /wordWrap: "on"/);
+  assert.match(sourceEditorMonacoConfig, /fontSize: 13/);
+  assert.match(sourceEditorMonacoConfig, /minimap: \{ enabled: false \}/);
+  assert.match(sourceEditorMonacoConfig, /wordWrap: "on"/);
   assert.match(monitorShell, /const \[sourceWordWrap, setSourceWordWrap\] = useState\(true\)/);
   assert.match(monitorShell, /const \[sourceMinimapEnabled, setSourceMinimapEnabled\] = useState\(false\)/);
-  assert.match(monitorShell, /className="source-editor-primary-actions"/);
+  assert.match(sourceWorkbenchVisualSource, /className="source-editor-primary-actions"/);
   assert.match(css, /\.desktop-app-shell\.sidebar-expanded \{[\s\S]*?grid-template-columns: 148px minmax\(0, 1fr\);/);
   assert.match(css, /\.desktop-app-shell\.sidebar-expanded \.activity-rail button \{[\s\S]*?width: 132px;/);
   assert.match(css, /\.source-editor-primary-actions \{/);
@@ -1422,17 +1581,17 @@ test("Workspace monitor sidebar and source editor defaults avoid clipped editing
 
 test("Source workbench replaces native select and command buttons with app primitives", () => {
   assert.equal(packageJson.scripts["smoke:source-controls"], "node scripts/check-source-controls-playwright.mjs");
-  assert.match(monitorShell, /from "@radix-ui\/react-dropdown-menu"/);
-  assert.match(monitorShell, /ChevronDown/);
-  assert.match(monitorShell, /<DropdownMenu\.Root>/);
-  assert.match(monitorShell, /className="source-file-picker-trigger"/);
-  assert.match(monitorShell, /className="source-file-picker-menu"/);
+  assert.match(sourceWorkbenchVisualSource, /from "@radix-ui\/react-dropdown-menu"/);
+  assert.match(sourceWorkbenchVisualSource, /ChevronDown/);
+  assert.match(sourceWorkbenchVisualSource, /<DropdownMenu\.Root>/);
+  assert.match(sourceWorkbenchVisualSource, /className="source-file-picker-trigger"/);
+  assert.match(sourceWorkbenchVisualSource, /className="source-file-picker-menu"/);
   assert.doesNotMatch(monitorShell, /<select[\s\S]*?value=\{selectedSourcePath\}/);
-  assert.match(monitorShell, /<ActionGroup className="source-editor-action-group"[\s\S]*?density="compact">/);
-  assert.match(monitorShell, /<Button variant="primary" className="source-action-button primary"/);
-  assert.match(monitorShell, /<ActionGroup className="source-command-toolbar"[\s\S]*?asToolbar/);
-  assert.match(monitorShell, /className=\{`source-tool-button toggle \$\{sourceWordWrap \? "active" : ""\}`\}/);
-  assert.match(monitorShell, /<Button[\s\S]*?role="tab"[\s\S]*?aria-selected=\{sourceWorkbenchView === "editor"\}/);
+  assert.match(sourceWorkbenchVisualSource, /<ActionGroup className="source-editor-action-group"[\s\S]*?density="compact">/);
+  assert.match(sourceWorkbenchVisualSource, /<Button[\s\S]*?variant="primary"[\s\S]*?className="source-action-button primary"/);
+  assert.match(sourceWorkbenchVisualSource, /<ActionGroup className="source-command-toolbar"[\s\S]*?asToolbar/);
+  assert.match(sourceWorkbenchVisualSource, /className=\{`source-tool-button toggle \$\{sourceWordWrap \? "active" : ""\}`\}/);
+  assert.match(sourceWorkbenchVisualSource, /<Button[\s\S]*?role="tab"[\s\S]*?aria-selected=\{sourceWorkbenchView === "editor"\}/);
   assert.match(workspaceExplorerPane, /import \{ ActionGroup \} from "@\/components\/ui\/ActionGroup"/);
   assert.match(workspaceExplorerPane, /import \{ Button \} from "@\/components\/ui\/Button"/);
   assert.match(workspaceExplorerPane, /<Button[\s\S]*?variant="outline"[\s\S]*?className="workspace-dropzone"/);
@@ -1445,6 +1604,45 @@ test("Source workbench replaces native select and command buttons with app primi
   assert.match(sourceControlsSmoke, /data-section-content-ready="true"/);
   assert.match(sourceControlsSmoke, /await trigger\.click\(\)/);
   assert.match(sourceControlsSmoke, /source_controls_playwright_ok/);
+});
+
+test("Source workbench ignores stale async file load results", () => {
+  assert.match(sourceEditorIndex, /export \* from "\.\/useSourceLoadRequestGate"/);
+  assert.match(sourceEditorIndex, /export \* from "\.\/useSourceWorkbenchController"/);
+  assert.match(monitorShell, /useSourceLoadRequestGate\(\)/);
+  assert.match(monitorShell, /useSourceWorkbenchController\(\{/);
+  assert.match(sourceWorkbenchController, /const isCurrentSourceLoad = beginSourceLoadRequest\(\)/);
+  assert.match(sourceWorkbenchController, /const targetPath = relativePath\.trim\(\);[\s\S]*?if \(!targetPath\) \{[\s\S]*?const isCurrentSourceLoad = beginSourceLoadRequest\(\);/);
+  assert.match(sourceWorkbenchController, /if \(!isCurrentSourceLoad\(\)\) \{\s*return;\s*\}/);
+  assert.match(sourceWorkbenchController, /if \(isCurrentSourceLoad\(\)\) \{\s*setError\(sourceControllerErrorMessage\(caught\)\);/);
+  assert.match(sourceWorkbenchController, /if \(isCurrentSourceLoad\(\)\) \{\s*setEditorBusy\(false\);/);
+  assert.match(sourceWorkbenchController, /const selectDraftEntry = useCallback\([\s\S]*?cancelPendingSourceLoad\(\)/);
+  assert.match(sourceWorkbenchController, /const closeResult = buildCloseSourceDraftResult\(\{/);
+  assert.match(sourceWorkbenchController, /if \(closeResult\.closingActiveDraft\) \{[\s\S]*?cancelPendingSourceLoad\(\)/);
+  assert.match(sourceWorkbenchVisualSource, /className="source-editor-tab-main"[\s\S]*?disabled=\{sourceEditorLocked\}/);
+  assert.match(sourceWorkbenchVisualSource, /className="source-editor-tab-close"[\s\S]*?disabled=\{sourceEditorLocked\}/);
+});
+
+test("Source editor locks save-time mutations without discarding newer draft content", () => {
+  assert.match(monitorShell, /const sourceEditorLocked = editorBusy \|\| saveAllBusy/);
+  assert.match(monitorShell, /domReadOnly: sourceEditorLocked/);
+  assert.match(monitorShell, /readOnly: sourceEditorLocked/);
+  assert.match(monitorShell, /\[sourceEditorLocked, sourceMinimapEnabled, sourceWordWrap\]/);
+  assert.match(sourceWorkbenchController, /if \(sourceEditorLocked\) \{[\s\S]*?Editing commands are locked while saving\./);
+  assert.match(sourceWorkbenchController, /const fileToSave = sourceFile/);
+  assert.match(sourceWorkbenchController, /const savedContent = currentEditorDraftContent\(\)/);
+  assert.match(sourceWorkbenchController, /const activePathAfterSave = getActiveSourcePath\(\)/);
+  assert.match(sourceWorkbenchController, /const activeFileStillVisible = activePathAfterSave === fileToSave\.relativePath/);
+  assert.match(sourceWorkbenchController, /const nextDraftContent = activeFileStillVisible \? currentEditorDraftContent\(\) : savedContent/);
+  assert.match(sourceWorkbenchController, /const saveResult = buildSourceFileSaveResult\(\{/);
+  assert.match(sourceWorkbenchController, /buildSourceFileSaveDrafts\(current, \{/);
+  assert.match(sourceEditorDraftActions, /upsertSavedSourceDraft\(/);
+  assert.match(sourceEditorDraftActions, /args\.activeFileStillVisible \? args\.nextDraftContent : undefined/);
+  assert.match(sourceEditorDrafts, /baseContent: savedContent/);
+  assert.match(sourceEditorDrafts, /content: contentAfterSave \?\? existing\.content/);
+  assert.match(sourceEditorDraftActions, /if \(args\.activePathAfterSave && nextDrafts\[args\.activePathAfterSave\]\) \{[\s\S]*?content: args\.activeVisibleContent/);
+  assert.match(sourceWorkbenchVisualSource, /onClick=\{\(\) => onRunSourceEditorCommand\("format"\)\} disabled=\{!sourceFile \|\| sourceEditorLocked \|\| sourceEditorViewMode === "diff"\}/);
+  assert.match(sourceWorkbenchVisualSource, /className="source-action-button save-all"[\s\S]*?disabled=\{!invokeAvailable \|\| sourceEditorLocked \|\| dirtyDraftEntries\.length === 0\}/);
 });
 
 test("Monitor uses a shared motion system for smooth tab, dialog, and menu transitions", () => {
@@ -1469,6 +1667,8 @@ test("Monitor buttons expose instant press feedback before heavy click work", ()
   assert.match(motionHelpers, /export function scheduleAfterFirstPaint\(callback: \(\) => void, delayMs = 0\)/);
   assert.match(motionHelpers, /root\.addEventListener\("pointerdown", handlePointerDown, true\)/);
   assert.match(motionHelpers, /root\.addEventListener\("keydown", handleKeyDown, true\)/);
+  assert.match(motionHelpers, /const activeCleanups = new Set<\(\) => void>\(\)/);
+  assert.match(motionHelpers, /activeCleanups\.forEach\(\(cleanup\) => cleanup\(\)\)/);
   assert.match(motionHelpers, /data-instant-button-feedback", "active"/);
   assert.match(motionHelpers, /data-instant-button-painted", "true"/);
   assert.match(motionHelpers, /data-button-response-active", "true"/);
@@ -1490,14 +1690,17 @@ test("Desktop runtime buttons expose contextual action feedback", () => {
   assert.match(agentFirstRunGuideCard, /data-agent-first-run-guide="true"/);
   assert.match(agentFirstRunGuideCard, /에이전트는 이렇게 시작합니다/);
   assert.match(agentFirstRunGuideCard, /AGENTS\.md 지시 확인/);
-  assert.match(agentFirstRunGuideCard, /AGENTS\.md 만들기\/열기/);
-  assert.match(agentFirstRunGuideCard, /설정 동기화/);
-  assert.match(agentFirstRunGuideCard, /검색 에이전트 시작/);
+  assert.match(agentFirstRunGuideCard, /aria-label=\{ko \? "AGENTS\.md 만들기 또는 열기"/);
+  assert.match(agentFirstRunGuideCard, /ko \? "동기화" : "Sync"/);
+  assert.match(agentFirstRunGuideCard, /const firstRunActionLabel = ko \? "첫 작업 시작" : "Start the first task"/);
+  assert.doesNotMatch(agentFirstRunGuideCard, /<span>\{ko \? "검색 에이전트 시작"/);
   assert.match(desktopActionFeedbackCard, /"sync-settings"/);
   assert.match(desktopActionFeedbackCard, /"prepare-agents-md"/);
   assert.match(settingsRuntimeSyncHook, /export function useSettingsRuntimeSync/);
   assert.match(settingsRuntimeSyncHook, /export function createSettingsRuntimeSyncRequest/);
   assert.match(settingsRuntimeSyncHook, /const runManualSettingsSync = useCallback/);
+  assert.match(settingsRuntimeSyncHook, /const runQueuedSettingsSync = useCallback/);
+  assert.match(settingsRuntimeSyncHook, /syncSettingsAndRuntimeState\(syncOptions\)\.catch\(\(\) => undefined\)/);
   assert.match(monitorShell, /useSettingsRuntimeSync/);
   assert.match(monitorShell, /syncSettingsAndRuntimeState/);
   assert.match(monitorShell, /queueSettingsSync/);
@@ -1506,12 +1709,13 @@ test("Desktop runtime buttons expose contextual action feedback", () => {
   assert.doesNotMatch(monitorShell, /settingsSyncInFlightRef/);
   assert.doesNotMatch(monitorShell, /syncSettingsAndRuntimeState\(\{ reason: "manual"/);
   assert.match(monitorShell, /data-desktop-action-feedback="sync-settings"/);
-  assert.match(monitorShell, /renderAgentsMdStarter/);
+  assert.match(sourceWorkbenchController, /renderAgentsMdStarter/);
   assert.match(monitorShell, /prepareAgentsInstructions/);
   assert.match(monitorShell, /runDesktopAction\("prepare-agents-md", prepareAgentsInstructions\)/);
   assert.match(runtimeInitStatusCard, /export type RuntimeInitStatusReport/);
   assert.match(runtimeInitStatusCard, /data-runtime-init-status=\{status\}/);
-  assert.match(runtimeInitStatusCard, /Codex \/ CLI init/);
+  assert.match(runtimeInitStatusCard, /"init 전"/);
+  assert.match(runtimeInitStatusCard, /완료, 실패, 실행 기록이 여기 표시됩니다/);
   assert.match(runtimeInitStatusCard, /초기화 완료/);
   assert.match(css, /\.agent-first-run-guide-card \{/);
   assert.match(css, /\.agent-first-run-step-grid \{/);
@@ -1557,6 +1761,8 @@ test("History documents use bounded admin previews instead of loading full recor
   assert.doesNotMatch(monitorShell, /function fetchAdminHistoryIndex\(/);
   assert.match(adminHistoryHook, /let cachedAdminHistoryIndex: WorkspaceAdminHistoryIndex \| null = null;/);
   assert.match(adminHistoryHook, /let adminHistoryIndexPromise: Promise<WorkspaceAdminHistoryIndex> \| null = null;/);
+  assert.match(adminHistoryHook, /adminHistoryIndexPromise = null;/);
+  assert.match(adminHistoryHook, /throw error;/);
   assert.match(adminHistoryHook, /window\.requestIdleCallback\(load, \{ timeout: 5000 \}\)/);
   assert.match(adminHistoryHook, /new URL\("admin-history-index\.json", window\.location\.href\)/);
   assert.match(adminHistoryHook, /관리자용 기록/);

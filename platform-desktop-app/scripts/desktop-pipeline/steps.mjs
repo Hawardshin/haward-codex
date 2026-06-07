@@ -28,15 +28,12 @@ export const macosDmgIntermediateCleanupStep = step(
 );
 
 export function tauriPreparedBuildStep(label) {
-  return pnpmWorkspaceStep(label, [
-    "--filter",
-    "platform-desktop-app",
-    "exec",
-    "tauri",
-    "build",
+  // prepared build는 Tauri CLI를 감싸서 반복 DMG 생성 실패 시 내부 복구 경로를 사용할 수 있게 한다.
+  return step(label, "node", [
+    "scripts/tauri-build-with-dmg-recovery.mjs",
     "--config",
     preparedTauriBuildConfig
-  ]);
+  ], projectRoot);
 }
 
 export const setupSteps = [

@@ -1,0 +1,21 @@
+# 작업 요약
+
+- 날짜: 2026-06-07
+- 변경:
+  - `components/features/runtimeWorkspaceCopy.ts` 추가.
+  - `components/features/runtimeSessionPresets.ts` 추가.
+  - `MonitorShell.tsx`에서 런타임 문구/프리셋 로컬 정의 제거.
+  - readiness source map과 `tool-studio.test.mjs` 구조 계약 갱신.
+- 1차 검증:
+  - `corepack pnpm --filter workspace-monitor exec tsc --noEmit`: 통과
+  - `node --test tests/tool-studio.test.mjs`: 통과
+  - `node --test tests/readiness.test.mjs`: 통과
+- 통합 검증:
+  - `corepack pnpm run desktop:package:run:internal`: 통과
+  - workspace-monitor 전체 테스트: 113개 통과
+  - Rust 테스트: 8개 통과
+  - Tauri release build, ad-hoc codesign verify, DMG verify: 통과
+- 소스 크기:
+  - `MonitorShell.tsx`: 12,823줄
+  - `runtimeWorkspaceCopy.ts`: 92줄
+  - `runtimeSessionPresets.ts`: 99줄

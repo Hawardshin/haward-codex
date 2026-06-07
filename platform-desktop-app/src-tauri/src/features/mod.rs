@@ -1,7 +1,8 @@
 use serde::Serialize;
 
 mod agent_factory;
-mod app_shell;
+pub(crate) mod app_shell;
+pub(crate) mod app_update;
 mod cli;
 mod decisions;
 mod diagnostics;
@@ -69,6 +70,7 @@ pub(crate) fn feature_map_report() -> NativeRuntimeFeatureMapReport {
         native::group(),
         workspace::group(),
         providers::group(),
+        app_update::group(),
         diagnostics::group(),
         agent_factory::group(),
         decisions::group(),

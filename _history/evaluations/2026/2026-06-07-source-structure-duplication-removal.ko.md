@@ -1,0 +1,29 @@
+# 2026-06-07 source structure duplication removal evaluation
+
+- 평가 대상:
+  - duplicated source structure manifest cleanup.
+- 변경 파일:
+  - `platform-desktop-app/scripts/readiness/source-structure.mjs`
+  - `platform-desktop-app/scripts/check-readiness.mjs`
+  - `platform-desktop-app/scripts/check-service-readiness.mjs`
+  - `platform-desktop-app/tests/readiness.test.mjs`
+- acceptance:
+  - source file structure lists are centralized.
+  - readiness script, service readiness script, and readiness tests share the same source manifest.
+  - feature module existence tests use shared Tauri feature module names.
+  - runtime source bundles are assembled from shared source keys.
+- validation:
+  - `node --check platform-desktop-app/scripts/readiness/source-structure.mjs`: passed.
+  - `node --check platform-desktop-app/scripts/check-readiness.mjs`: passed.
+  - `node --check platform-desktop-app/scripts/check-service-readiness.mjs`: passed.
+  - `node --check platform-desktop-app/tests/readiness.test.mjs`: passed.
+  - `node platform-desktop-app/scripts/check-service-readiness.mjs --mode internal`: passed.
+  - `node platform-desktop-app/scripts/check-readiness.mjs`: passed.
+  - `node platform-desktop-app/tests/readiness.test.mjs`: passed.
+  - `corepack pnpm --filter platform-desktop-app run check`: passed.
+  - `corepack pnpm --filter platform-desktop-app test`: passed.
+  - `corepack pnpm --filter workspace-monitor run check`: passed.
+  - `corepack pnpm run desktop:package:run:internal`: passed; Rust tests/build passed, Tauri `.app`/DMG built, codesign verify passed, hdiutil verify reported VALID, app opened.
+- residual_risks:
+  - Public release remains blocked by signing/notarization/updater endpoint/clean-machine smoke gates.
+  - Current worktree contains many pre-existing unrelated dirty/untracked changes, so this evaluation does not claim clean git state.

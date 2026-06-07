@@ -29,7 +29,9 @@ pub(super) fn group() -> NativeRuntimeFeatureGroupReport {
     }
 }
 
-pub(crate) fn provider_credentials_report(app: &AppHandle) -> Result<ProviderCredentialReport, String> {
+pub(crate) fn provider_credentials_report(
+    app: &AppHandle,
+) -> Result<ProviderCredentialReport, String> {
     let path = provider_credentials_path(app)?;
     let store = read_provider_credential_store(app)?;
     let providers: Vec<ProviderCredentialSummary> = PROVIDER_CREDENTIALS

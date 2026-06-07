@@ -73,6 +73,7 @@
 - 범위가 넓다는 이유만으로 작업을 회피하거나 임의로 축소하지 않는다. 넓은 범위는 두려워할 대상이 아니라 분해, 순서화, 검증, rollback 경계의 문제로 다루며, bounded slice, 병렬 lane, merge gate를 통해 실제 사용자 목표가 처리될 때까지 진행한다.
 - 범위가 크다는 이유만으로 작업을 미루거나, defer하거나, 사용자에게 되돌려 넘기지 않는다. Large-scope decomposition은 지연 수단이 아니라 실행 수단이며, 구체적 blocker가 사용자 입력을 요구하지 않는 한 첫 실행 slice, 검증 gate, 이어서 진행할 continuation path를 반드시 만든다.
 - 사용자가 “다하기” 또는 “전부/모두 해”라고 지시하면 요청의 적용 가능한 모든 부분을 완료 기준으로 삼는다. 요구사항, 구현, 생성 산출물, 검증, 빌드/패키징, 기록, commit, push까지 처리하고, 구체적 blocker가 있으면 해당 항목만 격리해 기록하고 이어서 진행할 continuation path를 남긴다.
+- 사용자가 “계속 구현”, “이어서 구현”, “빼먹은거 구현”, “부족한 부분 구현”, “넓게 구현”, “계속 진행”, “continue implementation”, “keep going”처럼 후속 구현 명령을 보내면 이를 넓은 자율 multi-slice 구현 루프에 대한 허가로 해석한다. 가능한 경우 안전한 slice를 보통 3~5개 이상 큐로 잡고, source inventory, `touch_paths`, 의존성, 검증 gate, rollback 경계, 남은 작업 큐를 남긴 뒤 순차적으로 실행한다. 안전한 관련 작업이 남아 있는데 좁은 수정 하나로 멈추지 말고, 의미 있는 넓이 목표가 처리되거나 context/resource 한계로 context archive가 필요해지거나 구체적 blocker가 격리될 때까지 계속한다. blocker가 있어도 영향받지 않는 안전한 작업은 계속 진행한다.
 - 큰 범위 작업은 source inventory, 제외 기준, 대표 샘플, slice ID, `touch_paths`, 의존성, 산출물, merge gate, 검증, context budget, source provenance, plan evidence를 남겨야 한다. 기본적으로 모든 파일을 읽거나 큰 소스 묶음을 프롬프트에 넣지 말고, map/search/dependency graph/index/sampling/targeted verification으로 줄인다.
 - 작업 속도가 문제되거나 여러 lane으로 나눌 수 있으면 `parallel-work-planner-agent`로 의존성, `touch_paths`, 충돌 제어, coordination target, merge 전략을 먼저 확인한다.
 - 같은 파일, 설정, 생성 맵, git 상태 같은 공유 자원을 건드리는 작업은 명시적 dependency, lock, branch/worktree 규칙 없이 병렬 실행하지 않는다.

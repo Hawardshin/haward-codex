@@ -5,6 +5,7 @@ import { macosAppArtifact, macosDmgArtifact, repoRoot } from "./desktop-pipeline
 
 const dryRun = process.argv.includes("--dry-run");
 const checkOnly = process.argv.includes("--check");
+const newInstance = process.argv.includes("--new-instance");
 
 function main() {
   if (process.platform !== "darwin") {
@@ -15,11 +16,13 @@ function main() {
     fail(`Missing internal app artifact. Run \`corepack pnpm run desktop:package:internal\` first. Expected: ${macosAppArtifact}`);
   }
 
+  const openArgs = newInstance ? ["-n", macosAppArtifact] : [macosAppArtifact];
   const report = {
     status: dryRun || checkOnly ? "internal_app_open_ready" : "internal_app_opened",
     app: macosAppArtifact,
     dmg: existsSync(macosDmgArtifact) ? macosDmgArtifact : null,
-    command: `open -n ${JSON.stringify(macosAppArtifact)}`
+    mode: newInstance ? "new_instance" : "reuse_existing_instance",
+    command: `open ${newInstance ? "-n " : ""}${JSON.stringify(macosAppArtifact)}`
   };
 
   if (dryRun || checkOnly) {
@@ -27,7 +30,7 @@ function main() {
     return;
   }
 
-  const result = spawnSync("open", ["-n", macosAppArtifact], {
+  const result = spawnSync("open", openArgs, {
     cwd: repoRoot,
     encoding: "utf8",
     shell: false

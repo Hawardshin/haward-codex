@@ -42,13 +42,13 @@ export function RuntimeInitStatusCard({
   const title = report
     ? runtimeInitTitle(report, uiLanguage)
     : uiLanguage === "ko"
-      ? "Codex / CLI init 대기"
-      : "Codex / CLI init idle";
+      ? "init 전"
+      : "Before init";
   const detail = report
     ? runtimeInitDetail(report, uiLanguage)
     : uiLanguage === "ko"
-      ? "아직 시작된 게스트 실행 경로가 없습니다."
-      : "No guest execution lane has been started yet.";
+      ? "에이전트를 시작하면 완료, 실패, 실행 기록이 여기 표시됩니다."
+      : "When an agent starts, completion, failure, and task-run records appear here.";
   const facts = runtimeInitFacts(report, uiLanguage);
 
   return (
@@ -72,13 +72,23 @@ export function RuntimeInitStatusCard({
         ))}
       </div>
       <div className="runtime-init-status-actions">
-        <button type="button" onClick={onOpenTerminal}>
+        <button
+          type="button"
+          onClick={onOpenTerminal}
+          aria-label={uiLanguage === "ko" ? "터미널 열기" : "Open terminal"}
+          title={uiLanguage === "ko" ? "하단 터미널 열기" : "Open the bottom terminal"}
+        >
           <SquareTerminal size={14} aria-hidden="true" />
-          <span>{uiLanguage === "ko" ? "터미널 열기" : "Open terminal"}</span>
+          <span>{uiLanguage === "ko" ? "터미널" : "Terminal"}</span>
         </button>
-        <button type="button" onClick={onRefreshTaskRuns}>
+        <button
+          type="button"
+          onClick={onRefreshTaskRuns}
+          aria-label={uiLanguage === "ko" ? "실행 기록 확인" : "Check task runs"}
+          title={uiLanguage === "ko" ? "에이전트 실행 기록 새로고침" : "Refresh agent task-run records"}
+        >
           <FileSearch size={14} aria-hidden="true" />
-          <span>{uiLanguage === "ko" ? "실행 기록 확인" : "Check task runs"}</span>
+          <span>{uiLanguage === "ko" ? "기록" : "Runs"}</span>
         </button>
       </div>
     </article>

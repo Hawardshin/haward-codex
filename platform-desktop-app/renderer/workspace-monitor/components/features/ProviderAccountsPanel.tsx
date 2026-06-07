@@ -74,6 +74,7 @@ export function ProviderAccountsPanel({
   onVerifySubscription: (provider: ProviderCredentialSummary) => void | Promise<void>;
 }) {
   const [providerFilter, setProviderFilter] = useState<"all" | "needed" | "connected" | "local">("all");
+  const [guideOpen, setGuideOpen] = useState(report.providers.filter((provider) => provider.status === "connected").length === 0);
   const copy = uiLanguage === "ko"
     ? {
         title: "제공자 계정 연결",
@@ -83,42 +84,42 @@ export function ProviderAccountsPanel({
         nativeOnly: "네이티브 앱에서만 저장됩니다.",
         summary: "저장된 키는 모델 API 직접 작업과 CLI 실행 환경변수 주입에 사용됩니다.",
         guideEyebrow: "AI 로그인 설정",
-        guideTitle: "GPT와 Gemini는 로그인 후 키 발급 화면으로 바로 이동",
-        guideDetail: "OpenAI와 Gemini는 공식 API key 페이지에서 로그인하고 키를 만든 뒤 이 앱에 저장합니다. Ollama는 로컬 런타임 상태를 확인합니다.",
+        guideTitle: "키 저장 후 바로 실행",
+        guideDetail: "필요한 제공자만 고르고 공식 키 페이지에서 키를 만든 뒤 저장합니다. 로컬 런타임은 상태만 확인합니다.",
         fastLaneTitle: "빠른 AI 계정 설정",
         fastLaneDetail: "공식 계정으로 로그인한 뒤 키를 만들고 저장하면 작업 기본값으로 바로 사용할 수 있습니다.",
-        loginSetup: "로그인/키 발급",
+        loginSetup: "키 발급",
         loginSetupDetail: "공식 API key 페이지 열기",
-        configuredNow: "사용 가능",
-        notConfiguredYet: "설정 필요",
-        chooseProvider: "제공자 선택",
-        chooseProviderDetail: "연결 필요, 연결됨, 로컬 런타임을 바로 필터링",
-        openOfficial: "공식 로그인/키 발급",
-        openOfficialDetail: "제공자 계정으로 로그인한 공식 키 발급 페이지 열기",
-        saveKeyStep: "키 저장",
-        saveKeyDetail: "계정 메모와 API 키를 앱 설정 저장소에 기록",
-        verifyModel: "모델 확인",
-        verifyModelDetail: "로컬 모델 또는 기본 모델을 작업 기본값으로 선택",
+        configuredNow: "준비됨",
+        notConfiguredYet: "필요함",
+        chooseProvider: "고르기",
+        chooseProviderDetail: "필요한 제공자만 표시",
+        openOfficial: "키 페이지",
+        openOfficialDetail: "공식 키 발급 화면 열기",
+        saveKeyStep: "저장",
+        saveKeyDetail: "키를 로컬 설정에 저장",
+        verifyModel: "모델",
+        verifyModelDetail: "작업 기본 모델 선택",
         storage: "저장 위치",
-        refresh: "새로고침",
+        refresh: "갱신",
         allProviders: "전체",
-        neededProviders: "설정 필요",
+        neededProviders: "필요",
         connectedProviders: "연결됨",
         localProviders: "로컬",
         showCount: "표시",
         cloudAccounts: "클라우드 계정",
         localRuntimes: "로컬 런타임",
         setup: "키 발급",
-        login: "로그인 열기",
+        login: "로그인",
         docs: "공식 문서",
         save: "저장",
         saving: "저장 중",
         clear: "삭제",
         clearing: "삭제 중",
-        refreshModels: "모델 확인",
-        refreshingModels: "모델 확인 중",
-        verifySubscription: "구독 검증",
-        verifyingSubscription: "구독 검증 중",
+        refreshModels: "모델",
+        refreshingModels: "확인 중",
+        verifySubscription: "구독",
+        verifyingSubscription: "확인 중",
         verifySubscriptionHint: "API 키의 구독 사용 및 할당량 사용 가능 여부를 확인합니다.",
         subscriptionVerified: "구독 확인됨",
         subscriptionRequired: "구독 확인 필요",
@@ -138,7 +139,7 @@ export function ProviderAccountsPanel({
         authMethod: "인증 방식",
         envVar: "실행 변수",
         defaultModel: "기본 모델",
-        connectionSource: "인결 출처",
+        connectionSource: "연결 출처",
         appStored: "앱 저장",
         envDetected: "환경변수 감지",
         localReady: "로컬 준비",
@@ -172,42 +173,42 @@ export function ProviderAccountsPanel({
         nativeOnly: "Saving is available only in the native app.",
         summary: "Saved keys power direct model API work and provider-specific CLI environment injection.",
         guideEyebrow: "AI login setup",
-        guideTitle: "GPT and Gemini open straight to the signed-in key flow",
-        guideDetail: "OpenAI and Gemini use official API key pages. Sign in there, create a key, then save it in this app. Ollama checks the local runtime.",
+        guideTitle: "Save a key, then run",
+        guideDetail: "Pick the needed provider, create a key on the official page, and save it here. Local runtimes only need a status check.",
         fastLaneTitle: "Fast AI account setup",
         fastLaneDetail: "Sign in to the official account, create a key, save it here, then use it as the work default.",
-        loginSetup: "Login / get key",
+        loginSetup: "Get key",
         loginSetupDetail: "Open official API key page",
         configuredNow: "Ready",
-        notConfiguredYet: "Setup needed",
-        chooseProvider: "Choose provider",
-        chooseProviderDetail: "Filter setup needed, connected, and local runtime entries",
-        openOfficial: "Official login / key",
-        openOfficialDetail: "Open the signed-in provider key page",
-        saveKeyStep: "Save key",
-        saveKeyDetail: "Store an account note and API key in the app settings store",
-        verifyModel: "Verify model",
-        verifyModelDetail: "Select a local or default model for agent work",
+        notConfiguredYet: "Needed",
+        chooseProvider: "Pick",
+        chooseProviderDetail: "Show only the needed provider",
+        openOfficial: "Key page",
+        openOfficialDetail: "Open the official key flow",
+        saveKeyStep: "Save",
+        saveKeyDetail: "Store the key in local settings",
+        verifyModel: "Model",
+        verifyModelDetail: "Choose the work default",
         storage: "Storage path",
         refresh: "Refresh",
         allProviders: "All",
-        neededProviders: "Needs setup",
+        neededProviders: "Needed",
         connectedProviders: "Connected",
         localProviders: "Local",
         showCount: "Showing",
         cloudAccounts: "Cloud accounts",
         localRuntimes: "Local runtimes",
         setup: "Get key",
-        login: "Open login",
+        login: "Login",
         docs: "Docs",
         save: "Save",
         saving: "Saving",
         clear: "Clear",
         clearing: "Clearing",
-        refreshModels: "Check models",
-        refreshingModels: "Checking models",
-        verifySubscription: "Verify subscription",
-        verifyingSubscription: "Verifying",
+        refreshModels: "Models",
+        refreshingModels: "Checking",
+        verifySubscription: "Subscription",
+        verifyingSubscription: "Checking",
         verifySubscriptionHint: "Check whether the account can use paid AI features and quotas.",
         subscriptionVerified: "Subscription verified",
         subscriptionRequired: "Subscription required",
@@ -256,6 +257,7 @@ export function ProviderAccountsPanel({
   const connectedCount = report.providers.filter((provider) => provider.configured).length;
   const cloudCount = report.providers.filter((provider) => provider.authMethod !== "local_http").length;
   const localCount = report.providers.filter((provider) => provider.authMethod === "local_http").length;
+  const setupNeededCount = report.providers.length - connectedCount;
 
   const providerStatusLabel = report.status === copy.providerStatusReady
     ? copy.providerStatusReadyLabel
@@ -327,27 +329,38 @@ export function ProviderAccountsPanel({
         <p className="settings-section-summary">{copy.summary}</p>
       </header>
 
-      <section className="provider-login-guide">
-        <div className="provider-guide-header">
+      <details
+        className="provider-login-guide"
+        open={guideOpen}
+        onToggle={(event) => setGuideOpen(event.currentTarget.open)}
+      >
+        <summary>
           <span className="eyebrow">{copy.guideEyebrow}</span>
-          <h3>{copy.guideTitle}</h3>
-          <p>{copy.guideDetail}</p>
+          <strong>{copy.guideTitle}</strong>
+          <small>{setupNeededCount > 0 ? `${copy.notConfiguredYet} ${setupNeededCount}` : copy.configuredNow}</small>
+        </summary>
+        <div className="provider-guide-body">
+          <div className="provider-guide-header">
+            <span className="eyebrow">{copy.guideEyebrow}</span>
+            <h3>{copy.guideTitle}</h3>
+            <p>{copy.guideDetail}</p>
+          </div>
+          <div className="provider-guide-steps">
+            {guideSteps.map((step, idx) => (
+              <article key={idx} className="provider-guide-step">
+                <div className="provider-guide-icon">
+                  <step.icon size={16} aria-hidden="true" />
+                </div>
+                <div className="provider-guide-content">
+                  <strong>{step.label}</strong>
+                  <small>{step.detail}</small>
+                </div>
+                {idx < guideSteps.length - 1 && <div className="provider-guide-arrow" aria-hidden="true" />}
+              </article>
+            ))}
+          </div>
         </div>
-        <div className="provider-guide-steps">
-          {guideSteps.map((step, idx) => (
-            <article key={idx} className="provider-guide-step">
-              <div className="provider-guide-icon">
-                <step.icon size={16} aria-hidden="true" />
-              </div>
-              <div className="provider-guide-content">
-                <strong>{step.label}</strong>
-                <small>{step.detail}</small>
-              </div>
-              {idx < guideSteps.length - 1 && <div className="provider-guide-arrow" aria-hidden="true" />}
-            </article>
-          ))}
-        </div>
-      </section>
+      </details>
 
       <div className="settings-action-bar">
         <div className="settings-filter-strip">

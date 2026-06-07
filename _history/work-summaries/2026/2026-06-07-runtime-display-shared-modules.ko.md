@@ -1,0 +1,21 @@
+# 작업 요약
+
+- 날짜: 2026-06-07
+- 범위: workspace-monitor 런타임 표시 공통화와 모니터 요약 위젯 분리.
+- 변경:
+  - `lib/runtimeDisplay.ts` 추가.
+  - `components/features/MonitorSummaryWidgets.tsx` 추가.
+  - `MonitorShell.tsx`에서 로컬 표시/merge/helper/위젯 구현 제거.
+  - `RuntimeTerminalDrawer.tsx`와 `WorkspaceExplorerPane.tsx`가 공통 표시 유틸을 import하도록 변경.
+  - readiness source map과 `tool-studio.test.mjs` 구조 계약 갱신.
+- 1차 검증:
+  - `corepack pnpm --filter workspace-monitor exec tsc --noEmit`: 통과
+  - `node --test tests/tool-studio.test.mjs`: 통과
+  - `node --test tests/source-editor-templates.test.mjs`: 통과
+  - `node --test tests/readiness.test.mjs`: 통과
+- 통합 검증:
+  - `corepack pnpm run desktop:package:run:internal`: 통과
+  - workspace-monitor 전체 테스트: 113개 통과
+  - platform-desktop-app/Rust 검증: 통과
+  - Tauri release build, ad-hoc codesign verify, DMG verify: 통과
+  - public signing/notarization/updater 관련 warning은 공개 배포 입력값 부재로 인한 기존 release gate이며 이번 내부 패키징 범위에서는 blocker가 아니다.

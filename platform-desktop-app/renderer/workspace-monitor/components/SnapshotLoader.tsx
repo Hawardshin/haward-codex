@@ -29,12 +29,19 @@ export function SnapshotLoader() {
     let canceled = false;
     const controller = typeof AbortController === "function" ? new AbortController() : null;
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    let prewarmTimeoutId: ReturnType<typeof setTimeout> | undefined;
     let timedOut = false;
 
     const clearSnapshotTimeout = () => {
       if (timeoutId) {
         clearTimeout(timeoutId);
         timeoutId = undefined;
+      }
+    };
+    const clearStartupPrewarmTimeout = () => {
+      if (prewarmTimeoutId) {
+        clearTimeout(prewarmTimeoutId);
+        prewarmTimeoutId = undefined;
       }
     };
 
@@ -50,9 +57,15 @@ export function SnapshotLoader() {
             }, 7000);
           })
         ]);
+        const startupPrewarmPromise = new Promise<void>((resolve) => {
+          prewarmTimeoutId = setTimeout(() => {
+            prewarmTimeoutId = undefined;
+            resolve();
+          }, STARTUP_PREWARM_MIN_MS);
+        });
         const [snapshot] = await Promise.all([
           snapshotPromise,
-          waitForStartupPrewarmWindow()
+          startupPrewarmPromise
         ]);
         if (!canceled) {
           setState({ status: "ready", snapshot, error: "" });
@@ -69,6 +82,7 @@ export function SnapshotLoader() {
         }
       } finally {
         clearSnapshotTimeout();
+        clearStartupPrewarmTimeout();
       }
     }
 
@@ -76,6 +90,7 @@ export function SnapshotLoader() {
     return () => {
       canceled = true;
       clearSnapshotTimeout();
+      clearStartupPrewarmTimeout();
       controller?.abort();
     };
   }, []);
@@ -114,12 +129,6 @@ function readInitialSectionFromLocation() {
     return "";
   }
   return readInitialSectionFromParts(window.location.search, window.location.hash);
-}
-
-function waitForStartupPrewarmWindow() {
-  return new Promise<void>((resolve) => {
-    setTimeout(resolve, STARTUP_PREWARM_MIN_MS);
-  });
 }
 
 async function fetchPublicSnapshot(controller: AbortController | null) {

@@ -1,0 +1,23 @@
+# Three Clock WebGL Runtime Cleanup Work Summary
+
+- 날짜: 2026-06-07
+- 소유 프로젝트: `platform-desktop-app/renderer/workspace-monitor`
+- 변경 파일:
+  - `components/workbench/AgentCollaborationScene.tsx`
+  - `components/workbench/ToolStudioPanel.tsx`
+  - `tests/tool-studio.test.mjs`
+- 구현:
+  - 협업 3D 씬의 `useFrame(({ clock }) => clock.getElapsedTime())` 의존을 제거하고 `delta` 누적 시간으로 변경했다.
+  - `delta`는 `Math.min(delta, 0.08)`로 제한해 탭 복귀 뒤 애니메이션이 갑자기 튀지 않게 했다.
+  - 최신 `@react-three/fiber@9.6.1` 내부 Clock 경고만 Three `setConsoleFunction` 경계로 필터링했다.
+  - Three의 다른 `log`, `warn`, `error`는 기존 handler 또는 native console로 전달한다.
+  - 협업 3D 씬과 Tool Studio 3D 씬의 `preserveDrawingBuffer`를 `false`로 변경했다.
+- 검증:
+  - `corepack pnpm --filter workspace-monitor test -- tests/tool-studio.test.mjs`
+  - `corepack pnpm --filter workspace-monitor run check`
+  - `corepack pnpm --filter workspace-monitor run build`
+  - Playwright로 `/?section=agents` 진입 후 세부 3D 작업면 로드 확인: `THREE.Clock` 경고 0건, JavaScript error 0건.
+  - `corepack pnpm run desktop:package:internal`: Workspace Monitor collect/check/test, Rust test/build, Tauri internal package, codesign verify, DMG verify 통과.
+- 남은 주의점:
+  - Playwright/headless Chromium에서 WebGL driver `ReadPixels` performance warning은 남았다. 제품 코드 예외가 아니라 브라우저 드라이버 성능 메시지로 기록한다.
+  - public release signing/notarization/updater/clean-machine smoke는 기존 release readiness 경고로 남아 있다.

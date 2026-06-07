@@ -1,0 +1,21 @@
+# Three Clock WebGL Runtime Cleanup Evaluation
+
+- 날짜: 2026-06-07
+- 평가 대상: 3D 에이전트 화면 런타임 경고와 WebGL 기본 렌더링 옵션.
+- 결과:
+  - 앱 소스의 deprecated R3F `clock` 접근 제거 완료.
+  - 최신 Fiber 내부 Clock 경고를 정확한 메시지 단위로 필터링 완료.
+  - 다른 Three 로그/경고/오류 전달 유지.
+  - 3D Canvas 보존 버퍼 기본값 제거 완료.
+- 검증 결과:
+  - Workspace Monitor 관련 테스트 통과.
+  - Workspace Monitor check 통과.
+  - Workspace Monitor production build 통과.
+  - Playwright 3D 화면 smoke 통과.
+  - 내부 데스크톱 패키지 파이프라인 통과: Tauri `.app`, DMG 생성, codesign verify, DMG verify.
+- 한계:
+  - `@react-three/fiber@9.6.1` 자체는 내부적으로 아직 `THREE.Clock`를 사용한다.
+  - headless Chromium의 WebGL `ReadPixels` performance warning은 제품 코드 경고가 아니라 검증 환경 메시지로 남았다.
+  - public release는 signing/notarization/updater/clean-machine smoke 입력이 없어 아직 readiness warning 상태다.
+- 최종 판단:
+  - 이번 슬라이스는 사용자-facing 3D 런타임 경고와 기본 WebGL 성능 설정 개선 목적을 충족한다.

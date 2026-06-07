@@ -3,6 +3,7 @@
 import { Float, Html, Line } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
+import { getConsoleFunction, setConsoleFunction } from "three";
 import type * as THREE from "three";
 
 import type { WorkspaceSnapshot } from "@/lib/snapshot";
@@ -34,9 +35,33 @@ type SceneLink = {
   points: [[number, number, number], [number, number, number]];
 };
 
+const suppressedThreeWarnings = new Set([
+  "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead."
+]);
+
+function installThreeConsoleBoundary() {
+  const previousThreeConsoleFunction = getConsoleFunction();
+
+  setConsoleFunction((type, message, ...params) => {
+    // 최신 React Three Fiber가 내부 Clock을 Timer로 옮기기 전까지 알려진 의존성 경고만 숨긴다.
+    if (type === "warn" && suppressedThreeWarnings.has(message)) {
+      return;
+    }
+    if (previousThreeConsoleFunction) {
+      previousThreeConsoleFunction(type, message, ...params);
+      return;
+    }
+    console[type](message, ...params);
+  });
+}
+
+installThreeConsoleBoundary();
+
 const agentPalette = ["#66d9b1", "#8ab8ff", "#f7c66f", "#ff9a96", "#c4b5fd", "#67e8f9", "#f9a8d4", "#a7f3d0"];
 const lanePalette = ["#58a6ff", "#66d9b1", "#f7c66f", "#ff9a96", "#c4b5fd"];
-const visorPalette = ["#9fd4ff", "#b7f7d4", "#ffe29a", "#ffc4c1", "#ddd6fe", "#a5f3fc", "#fbcfe8", "#bbf7d0"];
+const sealBodyPalette = ["#d8e1ea", "#d4dde5", "#e4ddd3", "#dce7df", "#d5d8e8", "#d7e4e8", "#ead8e1", "#d8e8dc"];
+const sealBellyPalette = ["#f6f2ea", "#f2f5f8", "#f7eee2", "#f1f6ef", "#f0eff8", "#eef7f8", "#f8edf3", "#eff8f1"];
+const sealAccentPalette = ["#9fd4ff", "#b7f7d4", "#ffe29a", "#ffc4c1", "#ddd6fe", "#a5f3fc", "#fbcfe8", "#bbf7d0"];
 
 const statusColor = (status: string, fallback: string) => {
   const normalized = status.toLowerCase();
@@ -71,6 +96,7 @@ export function AgentCollaborationScene({ board, language }: { board: Collaborat
     const identityName = agent.name || agent.id;
     return {
       id: agent.id || identityName,
+      renderKey: `${agent.id || identityName}-${index}`,
       code: shortLabel(identityName, `A${index + 1}`),
       color: statusColor(agent.status, agentPalette[index % agentPalette.length]),
       name: compactAgentName(identityName, `A${index + 1}`),
@@ -84,7 +110,7 @@ export function AgentCollaborationScene({ board, language }: { board: Collaborat
   if (!agents.length) {
     return (
       <div className="agent-collaboration-scene-empty" data-agent-collaboration-scene>
-        {language === "ko" ? "표시할 에이전트 협업 캐릭터가 없습니다." : "No agent collaboration characters to show."}
+        {language === "ko" ? "표시할 물개형 에이전트가 없습니다." : "No seal-shaped agents to show."}
       </div>
     );
   }
@@ -94,15 +120,15 @@ export function AgentCollaborationScene({ board, language }: { board: Collaborat
       <Canvas
         camera={{ position: [0, 4.35, 8.25], fov: 42, near: 0.1, far: 80 }}
         dpr={[1, 1.75]}
-        gl={{ antialias: true, alpha: false, preserveDrawingBuffer: true, powerPreference: "high-performance" }}
+        gl={{ antialias: true, alpha: false, preserveDrawingBuffer: false, powerPreference: "high-performance" }}
         onCreated={({ gl }) => {
           gl.domElement.setAttribute("data-agent-collaboration-3d-ready", "true");
           gl.domElement.setAttribute("role", "img");
           gl.domElement.setAttribute(
             "aria-label",
             language === "ko"
-              ? `3D 에이전트 협업 작업면: ${agentIdentitySummary}`
-              : `3D agent collaboration workspace: ${agentIdentitySummary}`
+              ? `3D 물개형 에이전트 협업 작업면: ${agentIdentitySummary}`
+              : `3D seal agent collaboration workspace: ${agentIdentitySummary}`
           );
         }}
       >
@@ -115,7 +141,7 @@ export function AgentCollaborationScene({ board, language }: { board: Collaborat
         <AgentCollaborationWorld agents={agents} board={board} flows={board.flows.slice(0, 16)} lanes={lanes} />
       </Canvas>
       <div className="agent-collaboration-scene-hud">
-        <span>{language === "ko" ? "Agent mesh" : "Agent mesh"}</span>
+        <span>{language === "ko" ? "Seal agents" : "Seal agents"}</span>
         <strong>{board.summary.agents}</strong>
         <span>{language === "ko" ? "handoffs" : "handoffs"}</span>
         <strong>{board.summary.handoffs}</strong>
@@ -127,7 +153,7 @@ export function AgentCollaborationScene({ board, language }: { board: Collaborat
         aria-label={language === "ko" ? "에이전트 코드 식별" : "Agent code identity"}
       >
         {identityItems.map((item) => (
-          <span key={item.id} title={item.title}>
+          <span key={item.renderKey} title={item.title}>
             <i style={{ backgroundColor: item.color }} aria-hidden="true" />
             <b>{item.code}</b>
             <strong>{item.name}</strong>
@@ -151,6 +177,7 @@ function AgentCollaborationWorld({
 }) {
   const groupRef = useRef<THREE.Group>(null);
   const pulseRef = useRef<THREE.Group>(null);
+  const elapsedRef = useRef(0);
 
   const sceneAgents = useMemo<SceneAgent[]>(() => {
     const count = Math.max(agents.length, 1);
@@ -198,8 +225,9 @@ function AgentCollaborationWorld({
     });
   }, [flows, sceneAgents, sceneLanes]);
 
-  useFrame(({ clock }) => {
-    const elapsed = clock.getElapsedTime();
+  useFrame((_, delta) => {
+    elapsedRef.current += Math.min(delta, 0.08);
+    const elapsed = elapsedRef.current;
     if (groupRef.current) {
       groupRef.current.rotation.y = Math.sin(elapsed * 0.16) * 0.12;
     }
@@ -243,9 +271,12 @@ function AgentCollaborationWorld({
 }
 
 function AgentCharacter({ node, totalAgents }: { node: SceneAgent; totalAgents: number }) {
-  const scale = node.agent.activeTaskCount > 0 ? 0.86 : 0.78;
-  const workloadHeight = Math.min(0.56, 0.16 + node.agent.taskCount / Math.max(totalAgents, 1) * 0.42);
-  const visorColor = visorPalette[node.index % visorPalette.length];
+  const scale = node.agent.activeTaskCount > 0 ? 0.92 : 0.84;
+  const workloadHeight = Math.min(0.5, 0.12 + node.agent.taskCount / Math.max(totalAgents, 1) * 0.38);
+  const bodyColor = sealBodyPalette[node.index % sealBodyPalette.length];
+  const bellyColor = sealBellyPalette[node.index % sealBellyPalette.length];
+  const accentColor = sealAccentPalette[node.index % sealAccentPalette.length];
+  const spotColor = node.index % 2 === 0 ? "#aebbc6" : "#b9b0a8";
   const isActive = node.agent.activeTaskCount > 0;
   const isBlocked = node.agent.status.toLowerCase().includes("block");
   const signalColor = isBlocked ? "#ff9a96" : isActive ? "#66d9b1" : node.color;
@@ -255,7 +286,7 @@ function AgentCharacter({ node, totalAgents }: { node: SceneAgent; totalAgents: 
 
   return (
     <Float floatIntensity={0.2} rotationIntensity={0.12} speed={1.25 + node.index * 0.08}>
-      <group position={node.position} scale={[scale, scale, scale]}>
+      <group name="agent-seal-avatar" position={node.position} scale={[scale, scale, scale]}>
         <Html center className="agent-character-identity-anchor" position={[0, 1.46, 0]} zIndexRange={[30, 0]}>
           <div className="agent-character-identity" data-agent-character-identity title={identityTitle}>
             <span className="agent-character-identity-code" style={{ backgroundColor: node.color }}>
@@ -264,96 +295,100 @@ function AgentCharacter({ node, totalAgents }: { node: SceneAgent; totalAgents: 
             <strong>{displayName}</strong>
           </div>
         </Html>
-        <mesh name="agent-character-ground-shadow" position={[0, -0.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <circleGeometry args={[0.58, 42]} />
+        <mesh name="agent-seal-ground-shadow" position={[0, -0.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <circleGeometry args={[0.78, 48]} />
           <meshBasicMaterial color="#020617" transparent opacity={0.34} />
         </mesh>
-        <mesh name="agent-character-role-halo" position={[0, 0.02, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[0.38, 0.018, 10, 44]} />
+        <mesh name="agent-seal-role-halo" position={[0, 0.015, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <torusGeometry args={[0.52, 0.018, 10, 56]} />
           <meshStandardMaterial color={node.color} emissive={node.color} emissiveIntensity={0.32} />
         </mesh>
-        <mesh name="agent-character-foot-left" position={[-0.13, 0.085, 0.08]}>
-          <sphereGeometry args={[0.12, 14, 10]} />
-          <meshStandardMaterial color="#d7e0ea" roughness={0.5} metalness={0.06} />
+        <mesh name="agent-seal-body" position={[0, 0.42, -0.08]} scale={[0.84, 0.52, 1.08]} rotation={[-0.08, 0, 0]}>
+          <sphereGeometry args={[0.5, 32, 22]} />
+          <meshStandardMaterial color={bodyColor} roughness={0.58} metalness={0.04} />
         </mesh>
-        <mesh name="agent-character-foot-right" position={[0.13, 0.085, 0.08]}>
-          <sphereGeometry args={[0.12, 14, 10]} />
-          <meshStandardMaterial color="#d7e0ea" roughness={0.5} metalness={0.06} />
+        <mesh name="agent-seal-belly" position={[0, 0.34, 0.2]} scale={[0.56, 0.24, 0.7]} rotation={[-0.22, 0, 0]}>
+          <sphereGeometry args={[0.42, 24, 14]} />
+          <meshStandardMaterial color={bellyColor} roughness={0.62} metalness={0.02} />
         </mesh>
-        <mesh name="agent-character-tail" position={[0, 0.43, -0.29]}>
-          <sphereGeometry args={[0.11, 14, 10]} />
-          <meshStandardMaterial color="#d7e0ea" roughness={0.48} metalness={0.04} />
+        <mesh name="agent-seal-head" position={[0, 0.74, 0.78]} scale={[1.05, 0.96, 0.92]}>
+          <sphereGeometry args={[0.34, 30, 20]} />
+          <meshStandardMaterial color={bodyColor} roughness={0.56} metalness={0.04} />
         </mesh>
-        <mesh name="agent-character-torso" position={[0, 0.46, 0]}>
-          <capsuleGeometry args={[0.29, 0.24, 8, 18]} />
-          <meshStandardMaterial color={node.color} emissive={node.color} emissiveIntensity={0.08} roughness={0.34} metalness={0.22} />
+        <mesh name="agent-seal-spot-left-back" position={[-0.24, 0.64, -0.2]} scale={[0.94, 0.28, 0.5]} rotation={[-0.14, 0.08, 0.24]}>
+          <sphereGeometry args={[0.062, 12, 8]} />
+          <meshStandardMaterial color={spotColor} roughness={0.66} metalness={0.02} transparent opacity={0.62} />
         </mesh>
-        <mesh name="agent-character-chest-panel" position={[0, 0.54, 0.265]}>
-          <boxGeometry args={[0.18, 0.09, 0.035]} />
-          <meshStandardMaterial color="#0d1117" emissive={signalColor} emissiveIntensity={0.18} roughness={0.28} metalness={0.18} />
+        <mesh name="agent-seal-spot-right-back" position={[0.26, 0.58, -0.5]} scale={[1.12, 0.3, 0.58]} rotation={[-0.1, -0.16, -0.22]}>
+          <sphereGeometry args={[0.056, 12, 8]} />
+          <meshStandardMaterial color={spotColor} roughness={0.66} metalness={0.02} transparent opacity={0.58} />
         </mesh>
-        <mesh name="agent-character-ear-left" position={[-0.18, 1.17, 0.015]} scale={[0.88, 1.04, 0.72]}>
-          <sphereGeometry args={[0.115, 16, 12]} />
-          <meshStandardMaterial color="#e6edf3" roughness={0.52} metalness={0.08} />
+        <mesh name="agent-seal-flipper-front-left" position={[-0.54, 0.34, 0.34]} scale={[1.72, 0.32, 0.66]} rotation={[0.12, 0.18, -0.55]}>
+          <sphereGeometry args={[0.16, 18, 10]} />
+          <meshStandardMaterial color={bodyColor} roughness={0.6} metalness={0.03} />
         </mesh>
-        <mesh name="agent-character-ear-right" position={[0.18, 1.17, 0.015]} scale={[0.88, 1.04, 0.72]}>
-          <sphereGeometry args={[0.115, 16, 12]} />
-          <meshStandardMaterial color="#e6edf3" roughness={0.52} metalness={0.08} />
+        <mesh name="agent-seal-flipper-front-right" position={[0.54, 0.34, 0.34]} scale={[1.72, 0.32, 0.66]} rotation={[0.12, -0.18, 0.55]}>
+          <sphereGeometry args={[0.16, 18, 10]} />
+          <meshStandardMaterial color={bodyColor} roughness={0.6} metalness={0.03} />
         </mesh>
-        <mesh name="agent-character-inner-ear-left" position={[-0.18, 1.17, 0.08]} scale={[0.52, 0.68, 0.24]}>
-          <sphereGeometry args={[0.074, 12, 8]} />
-          <meshStandardMaterial color={visorColor} emissive={signalColor} emissiveIntensity={0.1} roughness={0.42} metalness={0.02} />
+        <mesh name="agent-seal-flipper-rear-left" position={[-0.2, 0.24, -0.86]} scale={[1.42, 0.28, 0.52]} rotation={[0.08, -0.22, -0.26]}>
+          <sphereGeometry args={[0.15, 16, 10]} />
+          <meshStandardMaterial color={bodyColor} roughness={0.62} metalness={0.03} />
         </mesh>
-        <mesh name="agent-character-inner-ear-right" position={[0.18, 1.17, 0.08]} scale={[0.52, 0.68, 0.24]}>
-          <sphereGeometry args={[0.074, 12, 8]} />
-          <meshStandardMaterial color={visorColor} emissive={signalColor} emissiveIntensity={0.1} roughness={0.42} metalness={0.02} />
+        <mesh name="agent-seal-flipper-rear-right" position={[0.2, 0.24, -0.86]} scale={[1.42, 0.28, 0.52]} rotation={[0.08, 0.22, 0.26]}>
+          <sphereGeometry args={[0.15, 16, 10]} />
+          <meshStandardMaterial color={bodyColor} roughness={0.62} metalness={0.03} />
         </mesh>
-        <mesh name="agent-character-head" position={[0, 0.94, 0]}>
-          <sphereGeometry args={[0.32, 24, 18]} />
-          <meshStandardMaterial color="#e6edf3" roughness={0.44} metalness={0.18} />
+        <mesh name="agent-seal-tail" position={[0, 0.28, -1.0]} scale={[0.74, 0.28, 0.42]} rotation={[0.12, 0, 0]}>
+          <sphereGeometry args={[0.18, 16, 10]} />
+          <meshStandardMaterial color={bodyColor} roughness={0.62} metalness={0.03} />
         </mesh>
-        <mesh name="agent-character-visor" position={[0, 1.045, 0.29]}>
-          <boxGeometry args={[0.16, 0.028, 0.026]} />
-          <meshStandardMaterial color={visorColor} emissive={signalColor} emissiveIntensity={0.28} roughness={0.2} metalness={0.1} />
-        </mesh>
-        <mesh name="agent-character-eye-left" position={[-0.075, 1.0, 0.306]}>
-          <sphereGeometry args={[0.026, 12, 8]} />
+        <mesh name="agent-seal-eye-left" position={[-0.108, 0.84, 1.065]}>
+          <sphereGeometry args={[0.028, 12, 8]} />
           <meshStandardMaterial color="#101923" roughness={0.38} metalness={0.04} />
         </mesh>
-        <mesh name="agent-character-eye-right" position={[0.075, 1.0, 0.306]}>
-          <sphereGeometry args={[0.026, 12, 8]} />
+        <mesh name="agent-seal-eye-right" position={[0.108, 0.84, 1.065]}>
+          <sphereGeometry args={[0.028, 12, 8]} />
           <meshStandardMaterial color="#101923" roughness={0.38} metalness={0.04} />
         </mesh>
-        <mesh name="agent-character-muzzle" position={[0, 0.895, 0.306]} scale={[1.22, 0.72, 0.5]}>
-          <sphereGeometry args={[0.115, 16, 10]} />
-          <meshStandardMaterial color="#f8fafc" roughness={0.5} metalness={0.04} />
+        <mesh name="agent-seal-muzzle" position={[0, 0.71, 1.07]} scale={[1.42, 0.78, 0.54]}>
+          <sphereGeometry args={[0.13, 18, 12]} />
+          <meshStandardMaterial color={bellyColor} roughness={0.62} metalness={0.02} />
         </mesh>
-        <mesh name="agent-character-nose" position={[0, 0.925, 0.362]}>
-          <sphereGeometry args={[0.018, 10, 8]} />
+        <mesh name="agent-seal-nose" position={[0, 0.75, 1.154]} scale={[1.1, 0.84, 0.72]}>
+          <sphereGeometry args={[0.024, 12, 8]} />
           <meshStandardMaterial color="#101923" roughness={0.42} metalness={0.02} />
         </mesh>
-        <mesh name="agent-character-cheek-left" position={[-0.145, 0.935, 0.31]} scale={[1, 0.66, 0.32]}>
+        <group name="agent-seal-whisker-left-top">
+          <Line points={[[-0.054, 0.73, 1.145], [-0.285, 0.78, 1.19]]} color="#243445" lineWidth={1.2} transparent opacity={0.84} />
+        </group>
+        <group name="agent-seal-whisker-left-bottom">
+          <Line points={[[-0.052, 0.7, 1.148], [-0.278, 0.68, 1.195]]} color="#243445" lineWidth={1.2} transparent opacity={0.78} />
+        </group>
+        <group name="agent-seal-whisker-right-top">
+          <Line points={[[0.054, 0.73, 1.145], [0.285, 0.78, 1.19]]} color="#243445" lineWidth={1.2} transparent opacity={0.84} />
+        </group>
+        <group name="agent-seal-whisker-right-bottom">
+          <Line points={[[0.052, 0.7, 1.148], [0.278, 0.68, 1.195]]} color="#243445" lineWidth={1.2} transparent opacity={0.78} />
+        </group>
+        <mesh name="agent-seal-cheek-left" position={[-0.16, 0.72, 1.07]} scale={[1.1, 0.66, 0.36]}>
           <sphereGeometry args={[0.046, 10, 8]} />
           <meshStandardMaterial color="#ffd3d0" emissive="#ff9a96" emissiveIntensity={0.12} roughness={0.36} />
         </mesh>
-        <mesh name="agent-character-cheek-right" position={[0.145, 0.935, 0.31]} scale={[1, 0.66, 0.32]}>
+        <mesh name="agent-seal-cheek-right" position={[0.16, 0.72, 1.07]} scale={[1.1, 0.66, 0.36]}>
           <sphereGeometry args={[0.046, 10, 8]} />
           <meshStandardMaterial color="#ffd3d0" emissive="#ff9a96" emissiveIntensity={0.12} roughness={0.36} />
         </mesh>
-        <mesh name="agent-character-status-light" position={[0, 1.235, 0.02]}>
-          <sphereGeometry args={[0.04, 12, 10]} />
+        <mesh name="agent-seal-collar-tag" position={[0, 0.56, 0.94]} scale={[1.08, 0.78, 0.28]}>
+          <boxGeometry args={[0.12, 0.08, 0.04]} />
+          <meshStandardMaterial color={accentColor} emissive={node.color} emissiveIntensity={0.14} roughness={0.28} metalness={0.1} />
+        </mesh>
+        <mesh name="agent-seal-status-light" position={[0, 0.56, 0.99]}>
+          <sphereGeometry args={[0.03, 12, 10]} />
           <meshStandardMaterial color={signalColor} emissive={signalColor} emissiveIntensity={0.58} roughness={0.22} />
         </mesh>
-        <mesh name="agent-character-left-hand" position={[-0.3, 0.49, 0.02]}>
-          <sphereGeometry args={[0.08, 12, 10]} />
-          <meshStandardMaterial color="#d7e0ea" roughness={0.45} />
-        </mesh>
-        <mesh name="agent-character-right-hand" position={[0.3, 0.49, 0.02]}>
-          <sphereGeometry args={[0.08, 12, 10]} />
-          <meshStandardMaterial color="#d7e0ea" roughness={0.45} />
-        </mesh>
-        <mesh name="agent-character-workload-meter" position={[0.36, 0.22 + workloadHeight / 2, -0.16]}>
-          <boxGeometry args={[0.08, workloadHeight, 0.08]} />
+        <mesh name="agent-seal-workload-buoy" position={[0.64, 0.2 + workloadHeight / 2, -0.22]}>
+          <boxGeometry args={[0.074, workloadHeight, 0.074]} />
           <meshStandardMaterial color={node.color} emissive={node.color} emissiveIntensity={0.24} />
         </mesh>
       </group>

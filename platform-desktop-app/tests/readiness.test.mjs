@@ -37,6 +37,7 @@ test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline/help.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline/runner.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/cleanup-macos-dmg-intermediates.mjs")), true);
+  assert.equal(existsSync(join(root, "scripts/tauri-build-with-dmg-recovery.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/readiness/desktop-build-pipeline.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/public-release-dev-env.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/desktop-doctor.mjs")), true);
@@ -79,7 +80,9 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
   const pipelinePipelines = readFileSync(join(root, "scripts/desktop-pipeline/pipelines.mjs"), "utf8");
   const pipelineHelp = readFileSync(join(root, "scripts/desktop-pipeline/help.mjs"), "utf8");
   const pipelineRunner = readFileSync(join(root, "scripts/desktop-pipeline/runner.mjs"), "utf8");
+  const openInternalApp = readFileSync(join(root, "scripts/open-internal-app.mjs"), "utf8");
   const dmgCleanupScript = readFileSync(join(root, "scripts/cleanup-macos-dmg-intermediates.mjs"), "utf8");
+  const dmgRecoveryScript = readFileSync(join(root, "scripts/tauri-build-with-dmg-recovery.mjs"), "utf8");
   const buildPipelineReadiness = readFileSync(join(root, "scripts/readiness/desktop-build-pipeline.mjs"), "utf8");
   const pipelineStructure = [
     pipelineEntrypoint,
@@ -89,7 +92,8 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
     pipelinePipelines,
     pipelineHelp,
     pipelineRunner,
-    dmgCleanupScript
+    dmgCleanupScript,
+    dmgRecoveryScript
   ].join("\n");
   const requirementsKo = readFileSync(join(root, "docs/requirements/2026-06-02-installable-desktop.ko.md"), "utf8");
   const requirementsEn = readFileSync(join(root, "docs/requirements/2026-06-02-installable-desktop.en.md"), "utf8");
@@ -144,7 +148,10 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
   assert.match(buildPipelineReadiness, /checkDesktopBuildPipeline/);
   assert.match(buildPipelineReadiness, /desktopBuildPipelineRequiredFiles/);
   assert.match(buildPipelineReadiness, /desktop:doctor/);
-  for (const token of ["steps.mjs", "package-artifacts.mjs", "pipelines.mjs", "help.mjs", "package-internal", "package-public", "public-report", "commonVerifySteps", "internalPackageArtifactHints", "publicPackageArtifactHints", "Workspace Monitor developer snapshot collect", "Clean stale macOS DMG intermediates", "cleanup-macos-dmg-intermediates", "staleDmgPattern", "rmSync", "Public release preflight", "Tauri internal package build", "Tauri public package build", "create-updater-manifest", "codesign", "hdiutil"]) {
+  assert.match(openInternalApp, /reuse_existing_instance/);
+  assert.match(openInternalApp, /--new-instance/);
+  assert.doesNotMatch(openInternalApp, /spawnSync\("open", \["-n", macosAppArtifact\]/);
+  for (const token of ["steps.mjs", "package-artifacts.mjs", "pipelines.mjs", "help.mjs", "package-internal", "package-public", "public-report", "commonVerifySteps", "internalPackageArtifactHints", "publicPackageArtifactHints", "Workspace Monitor developer snapshot collect", "Clean stale macOS DMG intermediates", "cleanup-macos-dmg-intermediates", "tauri-build-with-dmg-recovery", "--skip-jenkins", "bundle_dmg.sh", "staleDmgPattern", "staleFinalDmgPattern", "rmSync", "Public release preflight", "Tauri internal package build", "Tauri public package build", "create-updater-manifest", "codesign", "hdiutil"]) {
     assert.match(pipelineStructure, new RegExp(token));
   }
   const commonVerifyDefinition = pipelineSteps.slice(pipelineSteps.indexOf("const commonVerifySteps"));
@@ -426,8 +433,8 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   ]) {
     assert.match(serialized, new RegExp(target));
   }
-  assert.match(lib, /get_installer_shell_runtime_contract/);
-  assert.match(lib, /get_rust_runtime_feature_map/);
+  assert.match(runtimeSource, /get_installer_shell_runtime_contract/);
+  assert.match(runtimeSource, /get_rust_runtime_feature_map/);
   assert.equal(contract.runtime_command_surface.runtime_feature_map_command, "get_rust_runtime_feature_map");
   assert.match(lib, /get_accumulated_data_overview/);
   assert.equal(contract.runtime_command_surface.accumulated_data_command, "get_accumulated_data_overview");
@@ -493,9 +500,11 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   assert.match(lib, /DialogExt/);
   assert.match(lib, /tauri_plugin_dialog::init/);
   assert.match(lib, /tauri_plugin_updater::Builder/);
-  assert.match(lib, /UpdaterExt/);
+  assert.match(runtimeSource, /UpdaterExt/);
   assert.match(lib, /PendingAppUpdate/);
-  assert.match(lib, /download_and_install/);
+  assert.match(runtimeSource, /download_and_install/);
+  assert.match(runtimeSource, /restart_requested/);
+  assert.match(runtimeSource, /restarted: restart_requested/);
   assert.match(runtimeSource, /service-update-channel\.json/);
   assert.match(runtimeSource, /ServiceUpdateChannelReport/);
   assert.match(runtimeSource, /service_update_channel_report/);
@@ -531,8 +540,8 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   assert.equal(accumulatedIndexTarget.record_type, "runtime_data_index_manifest");
   assert.equal(accumulatedIndexTarget.directory, "app_data/runtime-data/indexes");
   assert.match(accumulatedIndexTarget.runtime_store, /accumulated-data-overview\.v1\.json/);
-  assert.match(lib, /resolve_installer_shell_runtime_contract_path/);
-  assert.match(lib, /InstallerShellRuntimeContractReport/);
+  assert.match(runtimeSource, /resolve_installer_shell_runtime_contract_path/);
+  assert.match(runtimeSource, /InstallerShellRuntimeContractReport/);
 });
 
 test("service readiness registry records production service blockers", () => {
@@ -589,154 +598,40 @@ test("shared CLI adapter registry defines concrete AI CLI targets", () => {
 });
 
 test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () => {
-  const lib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
-  const serviceReadiness = readFileSync(join(root, "src-tauri/src/features/service_readiness.rs"), "utf8");
-  const providers = readFileSync(join(root, "src-tauri/src/features/providers.rs"), "utf8");
-  const tauriRuntimeSource = `${lib}\n${serviceReadiness}\n${providers}`;
-  const monitorShell = readFileSync(join(root, "renderer/workspace-monitor/components/MonitorShell.tsx"), "utf8");
-  const desktopActivityRail = readFileSync(
-    join(root, "renderer/workspace-monitor/components/shell/DesktopActivityRail.tsx"),
-    "utf8"
-  );
-  const coreFeatureDrilldown = readFileSync(
-    join(root, "renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx"),
-    "utf8"
-  );
-  const nativeGitWorkbench = readFileSync(
-    join(root, "renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx"),
-    "utf8"
-  );
-  const pathDisclosure = readFileSync(
-    join(root, "renderer/workspace-monitor/components/workbench/PathDisclosure.tsx"),
-    "utf8"
-  );
-  const runtimeTerminalDrawer = readFileSync(
-    join(root, "renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx"),
-    "utf8"
-  );
-  const workspaceExplorerPane = readFileSync(
-    join(root, "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx"),
-    "utf8"
-  );
-  const agentBuilderPanels = readFileSync(
-    join(root, "renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx"),
-    "utf8"
-  );
-  const agentDetailPanels = readFileSync(
-    join(root, "renderer/workspace-monitor/components/workbench/AgentDetailPanels.tsx"),
-    "utf8"
-  );
-  const accumulatedDataPanel = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/AccumulatedDataPanel.tsx"),
-    "utf8"
-  );
-  const desktopActionFeedbackCard = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/DesktopActionFeedbackCard.tsx"),
-    "utf8"
-  );
-  const agentFirstRunGuideCard = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/AgentFirstRunGuideCard.tsx"),
-    "utf8"
-  );
-  const desktopControlPanel = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/DesktopControlPanel.tsx"),
-    "utf8"
-  );
-  const providerAccountsPanel = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/ProviderAccountsPanel.tsx"),
-    "utf8"
-  );
-  const providerAccountSettingsHook = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/useProviderAccountSettings.ts"),
-    "utf8"
-  );
-  const runtimeCustomizationPanel = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/RuntimeCustomizationPanel.tsx"),
-    "utf8"
-  );
-  const searchAgentWorkChatPanel = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/SearchAgentWorkChatPanel.tsx"),
-    "utf8"
-  );
-  const runtimeDataSupportPanel = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/RuntimeDataSupportPanel.tsx"),
-    "utf8"
-  );
-  const runtimeInitStatusCard = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/RuntimeInitStatusCard.tsx"),
-    "utf8"
-  );
-  const serviceReadinessPanel = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/ServiceReadinessPanel.tsx"),
-    "utf8"
-  );
-  const taskRunStorePanel = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/TaskRunStorePanel.tsx"),
-    "utf8"
-  );
-  const workspaceHostPanel = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/WorkspaceHostPanel.tsx"),
-    "utf8"
-  );
-  const runtimeCatalog = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/runtimeCatalog.ts"),
-    "utf8"
-  );
-  const runtimeEnvironmentRefreshHook = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/useRuntimeEnvironmentRefresh.ts"),
-    "utf8"
-  );
-  const settingsRuntimeSyncHook = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/useSettingsRuntimeSync.ts"),
-    "utf8"
-  );
-  const evaluationReportPanel = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/EvaluationReportPanel.tsx"),
-    "utf8"
-  );
-  const evaluationReportModel = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/evaluationReportModel.ts"),
-    "utf8"
-  );
-  const evaluationReportCatalog = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/evaluationReportCatalog.ts"),
-    "utf8"
-  );
-  const evaluationRuntimeTelemetry = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/evaluationRuntimeTelemetry.ts"),
-    "utf8"
-  );
-  const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureDrilldown}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}\n${agentBuilderPanels}\n${agentDetailPanels}\n${accumulatedDataPanel}\n${desktopActionFeedbackCard}\n${agentFirstRunGuideCard}\n${desktopControlPanel}\n${providerAccountsPanel}\n${providerAccountSettingsHook}\n${runtimeCustomizationPanel}\n${searchAgentWorkChatPanel}\n${runtimeDataSupportPanel}\n${runtimeInitStatusCard}\n${serviceReadinessPanel}\n${taskRunStorePanel}\n${workspaceHostPanel}\n${runtimeCatalog}\n${runtimeEnvironmentRefreshHook}\n${settingsRuntimeSyncHook}`;
-  const monitorStyles = readFileSync(join(root, "renderer/workspace-monitor/app/globals.css"), "utf8");
-  const clipboardUtility = readFileSync(join(root, "renderer/workspace-monitor/lib/clipboard.mjs"), "utf8");
-  const clipboardTest = readFileSync(join(root, "tests/clipboard.test.mjs"), "utf8");
-  const nativeGitWorkbenchKo = readFileSync(join(root, "docs/architecture/native-git-workbench.ko.md"), "utf8");
-  const nativeGitWorkbenchEn = readFileSync(join(root, "docs/architecture/native-git-workbench.en.md"), "utf8");
-  const ptyDecisionKo = readFileSync(join(root, "docs/architecture/pty-terminal-decision.ko.md"), "utf8");
-  const ptyDecisionEn = readFileSync(join(root, "docs/architecture/pty-terminal-decision.en.md"), "utf8");
-  const productFeaturePanel = readFileSync(
-    join(root, "renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"),
-    "utf8"
-  );
-  const monitorCollector = readFileSync(join(root, "renderer/workspace-monitor/scripts/collect-workspace.mjs"), "utf8");
-  const productFeatureCollector = readFileSync(
-    join(root, "renderer/workspace-monitor/scripts/lib/product-feature-architecture.mjs"),
-    "utf8"
-  );
-  const historyInsightCollector = readFileSync(
-    join(root, "renderer/workspace-monitor/scripts/lib/history-insight-loop.mjs"),
-    "utf8"
-  );
-  const fundamentalImprovementCollector = readFileSync(
-    join(root, "renderer/workspace-monitor/scripts/lib/fundamental-improvement-structure.mjs"),
-    "utf8"
-  );
-  const customerBundleCheck = readFileSync(join(root, "scripts/check-customer-bundle.mjs"), "utf8");
-  const releaseReadinessCheck = readFileSync(join(root, "scripts/check-release-readiness.mjs"), "utf8");
-  const lazyBoundaryCheck = readFileSync(
-    join(root, "renderer/workspace-monitor/scripts/check-lazy-boundary-contract.mjs"),
-    "utf8"
-  );
+  const sources = readSourceMap(root, desktopReadinessSourcePaths);
+  const {
+    tauriLib: lib,
+    monitorShell,
+    desktopActivityRail,
+    coreFeatureDrilldown,
+    nativeGitWorkbench,
+    pathDisclosure,
+    runtimeTerminalDrawer,
+    workspaceExplorerPane,
+    agentBuilderPanels,
+    agentDetailPanels,
+    monitorStyles,
+    clipboardUtility,
+    clipboardTest,
+    nativeGitWorkbenchKo,
+    nativeGitWorkbenchEn,
+    ptyDecisionKo,
+    ptyDecisionEn,
+    productFeaturePanel,
+    monitorCollector,
+    productFeatureCollector,
+    historyInsightCollector,
+    fundamentalImprovementCollector,
+    customerBundleCheck,
+    releaseReadinessCheck,
+    lazyBoundaryCheck,
+    evaluationReportPanel,
+    evaluationReportModel,
+    evaluationReportCatalog,
+    evaluationRuntimeTelemetry
+  } = sources;
+  const tauriRuntimeSource = joinSourceMap(sources, tauriRuntimeSourceKeys);
+  const monitorWorkbenchSource = joinSourceMap(sources, monitorWorkbenchSourceKeys);
   const platformPkg = readJson("package.json");
   const monitorPkg = readJson("renderer/workspace-monitor/package.json");
   const viewModes = readJson("../agent-platform/configs/access/view-mode-registry.json");
@@ -818,10 +713,12 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   for (const scriptToken of ["checkReleaseReadiness", "public_release_blocked", "hardenedRuntime", "notarization", "TAURI_SIGNING_PRIVATE_KEY", "TAURI_UPDATER_PUBLIC_KEY"]) {
     assert.match(releaseReadinessCheck, new RegExp(scriptToken));
   }
-  const publicReleaseConfig = readFileSync(join(root, "scripts/public-release-config.mjs"), "utf8");
-  const publicReleaseDevEnv = readFileSync(join(root, "scripts/public-release-dev-env.mjs"), "utf8");
-  const publicReleaseBuild = readFileSync(join(root, "scripts/public-release-build.mjs"), "utf8");
-  const updaterManifest = readFileSync(join(root, "scripts/create-updater-manifest.mjs"), "utf8");
+  const {
+    publicReleaseConfig,
+    publicReleaseDevEnv,
+    publicReleaseBuild,
+    updaterManifest
+  } = sources;
   for (const scriptToken of ["createUpdaterArtifacts", "TAURI_UPDATER_ENDPOINTS", "TAURI_RELEASE_ASSET_BASE_URL", "service-update-channel.json", "TAURI_SIGNING_PRIVATE_KEY", "TAURI_SIGNING_PRIVATE_KEY_PATH"]) {
     assert.match(publicReleaseConfig, new RegExp(scriptToken));
   }
@@ -834,7 +731,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   for (const scriptToken of ["latest.json", ".app.tar.gz", ".sig", "platforms", "signature"]) {
     assert.match(updaterManifest, new RegExp(scriptToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
-  const serviceReadinessCheck = readFileSync(join(root, "scripts/check-service-readiness.mjs"), "utf8");
+  const { serviceReadinessCheck } = sources;
   for (const scriptToken of [
     "checkServiceReadiness",
     "service_internal_ready_public_blocked",
@@ -1009,7 +906,8 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "RuntimeInitStatusCard",
     "runtimeInitStatus",
     "data-runtime-init-status",
-    "Codex / CLI init",
+    "init 전",
+    "완료, 실패, 실행 기록이 여기 표시됩니다",
     "초기화 완료",
     "Accumulated Data",
     "축적 데이터 인덱스",
@@ -1026,13 +924,13 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "publicKeySha256_16",
     "Update & Recovery",
     "Signed Distribution",
-    "설치형 데이터 경계",
+    "데이터 경계",
     "Installer Payload Audit",
     "Support Diagnostic Bundle",
     "Workspace Host",
-    "앱 워크스페이스",
-    "Import Workspace",
-    "Clone Workspace",
+    "작업공간",
+    "Import",
+    "Clone",
     "Refresh task runs",
     "Open Logs",
     "Prune Old",
@@ -1082,7 +980,6 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "Save All",
     "Platform-first host",
     "Guest adapters",
-    "Platform state owner",
     "Evidence / Promotion",
     "Mode & Function Switchboard",
     "모드와 기능 선택 위치",

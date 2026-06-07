@@ -44,6 +44,7 @@ function findInstantButtonTarget(root: HTMLElement, eventTarget: EventTarget | n
 
 export function installInstantButtonFeedback(root: HTMLElement) {
   const cleanupByElement = new WeakMap<HTMLElement, () => void>();
+  const activeCleanups = new Set<() => void>();
   let activeFeedbackCount = 0;
   root.setAttribute("data-button-feedback-ready", "true");
 
@@ -73,12 +74,14 @@ export function installInstantButtonFeedback(root: HTMLElement) {
       target.removeAttribute("data-instant-button-input");
       target.removeAttribute("data-instant-button-painted");
       cleanupByElement.delete(target);
+      activeCleanups.delete(cleanup);
       activeFeedbackCount = Math.max(0, activeFeedbackCount - 1);
       if (activeFeedbackCount === 0) {
         root.removeAttribute("data-button-response-active");
       }
     };
     cleanupByElement.set(target, cleanup);
+    activeCleanups.add(cleanup);
   };
 
   const handlePointerDown = (event: PointerEvent) => {
@@ -102,6 +105,8 @@ export function installInstantButtonFeedback(root: HTMLElement) {
   return () => {
     root.removeEventListener("pointerdown", handlePointerDown, true);
     root.removeEventListener("keydown", handleKeyDown, true);
+    activeCleanups.forEach((cleanup) => cleanup());
+    activeCleanups.clear();
     root.removeAttribute("data-button-response-active");
     root.removeAttribute("data-button-feedback-ready");
   };

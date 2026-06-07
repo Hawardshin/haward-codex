@@ -12,6 +12,7 @@ test("SnapshotLoader surfaces snapshot fetch failures instead of staying in load
   assert.match(source, /setState\(\{\s*status:\s*"error"/s);
   assert.match(source, /Snapshot request timed out\./);
   assert.match(source, /clearSnapshotTimeout\(\)/);
+  assert.match(source, /clearStartupPrewarmTimeout\(\)/);
   assert.match(source, /finally\s*\{/);
 });
 
@@ -19,8 +20,9 @@ test("SnapshotLoader keeps an intentional startup warmup window before showing t
   const source = readFileSync(path.join(root, "components", "SnapshotLoader.tsx"), "utf8");
 
   assert.match(source, /const STARTUP_PREWARM_MIN_MS = 850/);
-  assert.match(source, /waitForStartupPrewarmWindow\(\)/);
-  assert.match(source, /const \[snapshot\] = await Promise\.all\(\[[\s\S]*?snapshotPromise[\s\S]*?waitForStartupPrewarmWindow\(\)[\s\S]*?\]\)/);
+  assert.match(source, /const startupPrewarmPromise = new Promise<void>/);
+  assert.match(source, /prewarmTimeoutId = setTimeout/);
+  assert.match(source, /const \[snapshot\] = await Promise\.all\(\[[\s\S]*?snapshotPromise[\s\S]*?startupPrewarmPromise[\s\S]*?\]\)/);
   assert.match(source, /lazy\(\(\) =>[\s\S]*?import\("\.\/MonitorShellBoundary"\)/);
   assert.match(source, /<Suspense fallback=\{<SnapshotLoadingShell detail="Preparing warmed work surfaces" \/>\}>/);
   assert.doesNotMatch(source, /next\/dynamic/);

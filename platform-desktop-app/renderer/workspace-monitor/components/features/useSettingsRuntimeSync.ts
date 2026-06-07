@@ -229,6 +229,10 @@ export function useSettingsRuntimeSync(options: UseSettingsRuntimeSyncOptions) {
     }
   }, [runSettingsSyncPass]);
 
+  const runQueuedSettingsSync = useCallback((syncOptions: SettingsRuntimeSyncOptions) => {
+    void syncSettingsAndRuntimeState(syncOptions).catch(() => undefined);
+  }, [syncSettingsAndRuntimeState]);
+
   const queueSettingsSync = useCallback((
     reason: SettingsRuntimeSyncReason,
     queueOptions: Pick<SettingsRuntimeSyncOptions, "includeSourceCatalog" | "forceSourceRefresh"> = {}
@@ -245,16 +249,16 @@ export function useSettingsRuntimeSync(options: UseSettingsRuntimeSyncOptions) {
     if (typeof window === "undefined") {
       const queuedOptions = queuedOptionsRef.current || nextOptions;
       queuedOptionsRef.current = null;
-      void syncSettingsAndRuntimeState(queuedOptions);
+      runQueuedSettingsSync(queuedOptions);
       return;
     }
     timerRef.current = window.setTimeout(() => {
       timerRef.current = null;
       const queuedOptions = queuedOptionsRef.current || nextOptions;
       queuedOptionsRef.current = null;
-      void syncSettingsAndRuntimeState(queuedOptions);
+      runQueuedSettingsSync(queuedOptions);
     }, 350);
-  }, [syncSettingsAndRuntimeState]);
+  }, [runQueuedSettingsSync]);
 
   const runManualSettingsSync = useCallback(() => {
     return syncSettingsAndRuntimeState(manualSettingsSyncOptions);

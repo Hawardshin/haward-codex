@@ -45,12 +45,86 @@ export function WorkspaceHostPanel({
   onWorkspaceCloneUrlChange,
   onWorkspaceCloneFolderChange
 }: WorkspaceHostPanelProps) {
+  const copy = uiLanguage === "ko"
+    ? {
+        title: "작업공간",
+        permission: "권한",
+        permissionBusy: "요청 중",
+        permissionAria: "작업공간 접근 권한 요청",
+        refresh: "갱신",
+        refreshing: "갱신 중",
+        refreshAria: "작업공간 상태 새로고침",
+        status: "상태",
+        notLoaded: "불러오지 않음",
+        source: "출처",
+        pending: "대기 중",
+        missing: "없음",
+        operation: "최근 작업",
+        none: "없음",
+        lastStatus: "최근 상태",
+        unset: "미설정",
+        importPath: "가져올 경로",
+        import: "가져오기",
+        importing: "가져오는 중",
+        importAria: "기존 작업공간 가져오기",
+        repoUrl: "저장소 URL",
+        folderName: "폴더 이름",
+        clone: "복제",
+        cloning: "복제 중",
+        cloneAria: "저장소를 작업공간으로 복제",
+        activeWorkspace: "현재 작업공간",
+        runtimePending: "런타임 작업공간 대기 중",
+        managedRoot: "관리 루트",
+        managedPending: "앱 데이터 작업공간 루트 대기 중",
+        stateFile: "상태 파일",
+        statePending: "작업공간 상태 대기 중",
+        gitVersion: "Git 버전",
+        notChecked: "미점검",
+        available: "사용 가능"
+      }
+    : {
+        title: "Workspace",
+        permission: "Access",
+        permissionBusy: "Requesting",
+        permissionAria: "Request workspace access",
+        refresh: "Refresh",
+        refreshing: "Refreshing",
+        refreshAria: "Refresh workspace status",
+        status: "status",
+        notLoaded: "not-loaded",
+        source: "source",
+        pending: "pending",
+        missing: "missing",
+        operation: "operation",
+        none: "none",
+        lastStatus: "last status",
+        unset: "unset",
+        importPath: "Import path",
+        import: "Import",
+        importing: "Importing",
+        importAria: "Import an existing workspace",
+        repoUrl: "Repository URL",
+        folderName: "Folder name",
+        clone: "Clone",
+        cloning: "Cloning",
+        cloneAria: "Clone repository into a workspace",
+        activeWorkspace: "active workspace",
+        runtimePending: "runtime workspace pending",
+        managedRoot: "managed root",
+        managedPending: "app data workspace root pending",
+        stateFile: "state file",
+        statePending: "workspace state pending",
+        gitVersion: "git version",
+        notChecked: "not checked",
+        available: "available"
+      };
+
   return (
     <section className="panel wide desktop-workspace-panel">
       <div className="panel-heading">
         <div>
           <p className="eyebrow">Workspace Host</p>
-          <h2>앱 워크스페이스</h2>
+          <h2>{copy.title}</h2>
         </div>
         <div className="desktop-actions">
           <button
@@ -59,9 +133,11 @@ export function WorkspaceHostPanel({
             data-desktop-action-feedback="choose-workspace"
             onClick={onChooseWorkspace}
             disabled={!invokeAvailable || workspaceHostBusy !== ""}
+            aria-label={copy.permissionAria}
+            title={copy.permissionAria}
           >
             <FolderOpen size={16} aria-hidden="true" />
-            <span>{workspaceHostBusy === "choose" ? "권한 요청 중" : "작업공간 접근 권한 요청"}</span>
+            <span>{workspaceHostBusy === "choose" ? copy.permissionBusy : copy.permission}</span>
           </button>
           <button
             type="button"
@@ -69,9 +145,11 @@ export function WorkspaceHostPanel({
             data-desktop-action-feedback="refresh-workspace-host"
             onClick={onRefreshWorkspace}
             disabled={!invokeAvailable || workspaceHostBusy !== ""}
+            aria-label={copy.refreshAria}
+            title={copy.refreshAria}
           >
             <Activity size={16} aria-hidden="true" />
-            <span>{workspaceHostBusy === "refresh" ? (uiLanguage === "ko" ? "새로고침 중" : "Refreshing") : uiLanguage === "ko" ? "새로고침" : "Refresh"}</span>
+            <span>{workspaceHostBusy === "refresh" ? copy.refreshing : copy.refresh}</span>
           </button>
         </div>
       </div>
@@ -79,31 +157,31 @@ export function WorkspaceHostPanel({
 
       <div className="task-run-summary-strip">
         <article>
-          <span>{uiLanguage === "ko" ? "상태" : "status"}</span>
-          <strong>{desktopWorkspace?.status || (uiLanguage === "ko" ? "불러오지 않음" : "not-loaded")}</strong>
+          <span>{copy.status}</span>
+          <strong>{desktopWorkspace?.status || copy.notLoaded}</strong>
         </article>
         <article>
-          <span>{uiLanguage === "ko" ? "출처" : "source"}</span>
-          <strong>{desktopWorkspace?.activeWorkspaceSource || (uiLanguage === "ko" ? "대기 중" : "pending")}</strong>
+          <span>{copy.source}</span>
+          <strong>{desktopWorkspace?.activeWorkspaceSource || copy.pending}</strong>
         </article>
         <article>
           <span>git</span>
-          <strong>{desktopWorkspace?.gitAvailable ? (uiLanguage === "ko" ? "사용 가능" : "available") : uiLanguage === "ko" ? "없음" : "missing"}</strong>
+          <strong>{desktopWorkspace?.gitAvailable ? copy.available : copy.missing}</strong>
         </article>
         <article>
-          <span>{uiLanguage === "ko" ? "최근 작업" : "operation"}</span>
-          <strong>{desktopWorkspace?.lastOperation || (uiLanguage === "ko" ? "없음" : "none")}</strong>
+          <span>{copy.operation}</span>
+          <strong>{desktopWorkspace?.lastOperation || copy.none}</strong>
         </article>
         <article>
-          <span>{uiLanguage === "ko" ? "최근 상태" : "last status"}</span>
-          <strong>{desktopWorkspace?.lastStatus || (uiLanguage === "ko" ? "미설정" : "unset")}</strong>
+          <span>{copy.lastStatus}</span>
+          <strong>{desktopWorkspace?.lastStatus || copy.unset}</strong>
         </article>
       </div>
 
       <div className="task-pipe-layout">
         <div className="task-pipe-controls">
           <label>
-            <span>{uiLanguage === "ko" ? "가져올 경로" : "Import path"}</span>
+            <span>{copy.importPath}</span>
             <input
               value={workspaceImportPath}
               onChange={(event) => onWorkspaceImportPathChange(event.target.value)}
@@ -116,12 +194,14 @@ export function WorkspaceHostPanel({
             data-desktop-action-feedback="import-workspace"
             onClick={onImportWorkspace}
             disabled={!invokeAvailable || workspaceHostBusy !== "" || !workspaceImportPath.trim()}
+            aria-label={copy.importAria}
+            title={copy.importAria}
           >
             <FolderOpen size={16} aria-hidden="true" />
-            <span>{workspaceHostBusy === "import" ? (uiLanguage === "ko" ? "가져오는 중" : "Importing") : uiLanguage === "ko" ? "작업공간 가져오기" : "Import Workspace"}</span>
+            <span>{workspaceHostBusy === "import" ? copy.importing : copy.import}</span>
           </button>
           <label>
-            <span>{uiLanguage === "ko" ? "저장소 URL" : "Repository URL"}</span>
+            <span>{copy.repoUrl}</span>
             <input
               value={workspaceCloneUrl}
               onChange={(event) => onWorkspaceCloneUrlChange(event.target.value)}
@@ -129,7 +209,7 @@ export function WorkspaceHostPanel({
             />
           </label>
           <label>
-            <span>{uiLanguage === "ko" ? "폴더 이름" : "Folder name"}</span>
+            <span>{copy.folderName}</span>
             <input
               value={workspaceCloneFolder}
               onChange={(event) => onWorkspaceCloneFolderChange(event.target.value)}
@@ -142,28 +222,30 @@ export function WorkspaceHostPanel({
             data-desktop-action-feedback="clone-workspace"
             onClick={onCloneWorkspace}
             disabled={!invokeAvailable || workspaceHostBusy !== "" || !workspaceCloneUrl.trim()}
+            aria-label={copy.cloneAria}
+            title={copy.cloneAria}
           >
             <GitBranch size={16} aria-hidden="true" />
-            <span>{workspaceHostBusy === "clone" ? (uiLanguage === "ko" ? "복제 중" : "Cloning") : uiLanguage === "ko" ? "작업공간 복제" : "Clone Workspace"}</span>
+            <span>{workspaceHostBusy === "clone" ? copy.cloning : copy.clone}</span>
           </button>
         </div>
 
         <div className="task-pipe-summary">
           <article>
-            <span>{uiLanguage === "ko" ? "현재 작업공간" : "active workspace"}</span>
-            <code>{desktopWorkspace?.activeWorkspacePath || (uiLanguage === "ko" ? "런타임 작업공간 대기 중" : "runtime workspace pending")}</code>
+            <span>{copy.activeWorkspace}</span>
+            <code>{desktopWorkspace?.activeWorkspacePath || copy.runtimePending}</code>
           </article>
           <article>
-            <span>{uiLanguage === "ko" ? "관리 루트" : "managed root"}</span>
-            <code>{desktopWorkspace?.managedWorkspaceRoot || (uiLanguage === "ko" ? "앱 데이터 작업공간 루트 대기 중" : "app data workspace root pending")}</code>
+            <span>{copy.managedRoot}</span>
+            <code>{desktopWorkspace?.managedWorkspaceRoot || copy.managedPending}</code>
           </article>
           <article>
-            <span>{uiLanguage === "ko" ? "상태 파일" : "state file"}</span>
-            <code>{desktopWorkspace?.statePath || (uiLanguage === "ko" ? "작업공간 상태 대기 중" : "workspace state pending")}</code>
+            <span>{copy.stateFile}</span>
+            <code>{desktopWorkspace?.statePath || copy.statePending}</code>
           </article>
           <article>
-            <span>{uiLanguage === "ko" ? "Git 버전" : "git version"}</span>
-            <strong>{desktopWorkspace?.gitVersion || (uiLanguage === "ko" ? "미점검" : "not checked")}</strong>
+            <span>{copy.gitVersion}</span>
+            <strong>{desktopWorkspace?.gitVersion || copy.notChecked}</strong>
           </article>
         </div>
       </div>

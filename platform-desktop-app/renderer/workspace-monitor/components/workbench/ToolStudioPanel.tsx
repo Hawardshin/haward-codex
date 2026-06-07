@@ -281,7 +281,7 @@ export function ToolStudioPanel({
         alpha: false,
         antialias: true,
         powerPreference: "low-power",
-        preserveDrawingBuffer: true
+        preserveDrawingBuffer: false
       });
       renderer.setClearColor(0x101923, 1);
       const scene = new THREE.Scene();
@@ -302,24 +302,25 @@ export function ToolStudioPanel({
       scene.add(platform);
 
       const palette = toolModeSceneColors.map((color) => Number.parseInt(color.slice(1), 16));
+      const shellPalette = [0xd8e1ea, 0xd4dde5, 0xe4ddd3, 0xdce7df, 0xd5d8e8, 0xd7e4e8];
+      const bellyPalette = [0xf6f2ea, 0xf2f5f8, 0xf7eee2, 0xf1f6ef, 0xf0eff8, 0xeef7f8];
       const group = new THREE.Group();
-      const bodyGeometry = new THREE.CapsuleGeometry(0.31, 0.24, 8, 18);
-      const headGeometry = new THREE.SphereGeometry(0.33, 24, 16);
-      const flipperGeometry = new THREE.SphereGeometry(0.115, 16, 10);
+      const bodyGeometry = new THREE.SphereGeometry(0.5, 32, 22);
+      const bellyGeometry = new THREE.SphereGeometry(0.42, 24, 14);
+      const headGeometry = new THREE.SphereGeometry(0.34, 28, 18);
+      const flipperGeometry = new THREE.SphereGeometry(0.16, 18, 10);
       const whiskerGeometry = new THREE.BoxGeometry(0.18, 0.008, 0.008);
       const eyeGeometry = new THREE.SphereGeometry(0.024, 12, 8);
       const noseGeometry = new THREE.SphereGeometry(0.018, 10, 8);
       const muzzleGeometry = new THREE.SphereGeometry(0.115, 16, 10);
       const cheekGeometry = new THREE.SphereGeometry(0.046, 10, 8);
-      const visorGeometry = new THREE.BoxGeometry(0.18, 0.034, 0.04);
-      const chestPanelGeometry = new THREE.BoxGeometry(0.18, 0.095, 0.04);
-      const footGeometry = new THREE.SphereGeometry(0.115, 14, 10);
-      const handGeometry = new THREE.SphereGeometry(0.075, 12, 10);
+      const collarTagGeometry = new THREE.BoxGeometry(0.12, 0.08, 0.04);
       const statusLightGeometry = new THREE.SphereGeometry(0.045, 12, 10);
-      const tailGeometry = new THREE.SphereGeometry(0.105, 14, 10);
+      const tailGeometry = new THREE.SphereGeometry(0.18, 16, 10);
       const roleHaloGeometry = new THREE.TorusGeometry(0.42, 0.016, 8, 48);
       const templateGeometries = [
         bodyGeometry,
+        bellyGeometry,
         headGeometry,
         flipperGeometry,
         whiskerGeometry,
@@ -327,10 +328,7 @@ export function ToolStudioPanel({
         noseGeometry,
         muzzleGeometry,
         cheekGeometry,
-        visorGeometry,
-        chestPanelGeometry,
-        footGeometry,
-        handGeometry,
+        collarTagGeometry,
         statusLightGeometry,
         tailGeometry,
         roleHaloGeometry
@@ -347,35 +345,31 @@ export function ToolStudioPanel({
       toolModes.forEach((item, index) => {
         const angle = (index / toolModes.length) * Math.PI * 2 - Math.PI / 2;
         const accent = palette[index];
-        const material = new THREE.MeshStandardMaterial({
+        const shellMaterial = new THREE.MeshStandardMaterial({
+          color: shellPalette[index % shellPalette.length],
+          roughness: 0.58,
+          metalness: 0.04
+        });
+        const bellyMaterial = new THREE.MeshStandardMaterial({
+          color: bellyPalette[index % bellyPalette.length],
+          roughness: 0.62,
+          metalness: 0.02
+        });
+        const tagMaterial = new THREE.MeshStandardMaterial({
           color: accent,
           emissive: accent,
-          emissiveIntensity: 0.07,
-          roughness: 0.36,
-          metalness: 0.12
-        });
-        const shellMaterial = new THREE.MeshStandardMaterial({ color: 0xe6edf3, roughness: 0.44, metalness: 0.12 });
-        const visorMaterial = new THREE.MeshStandardMaterial({
-          color: 0x9fd4ff,
-          emissive: accent,
-          emissiveIntensity: 0.28,
-          roughness: 0.2,
-          metalness: 0.08
-        });
-        const panelMaterial = new THREE.MeshStandardMaterial({
-          color: 0x0d1117,
-          emissive: accent,
-          emissiveIntensity: 0.18,
+          emissiveIntensity: 0.14,
           roughness: 0.28,
-          metalness: 0.12
+          metalness: 0.1
         });
-        const body = new THREE.Mesh(bodyGeometry.clone(), material);
+        const body = new THREE.Mesh(bodyGeometry.clone(), shellMaterial.clone());
+        const belly = new THREE.Mesh(bellyGeometry.clone(), bellyMaterial);
         const head = new THREE.Mesh(headGeometry.clone(), shellMaterial.clone());
         const frontLeftFlipper = new THREE.Mesh(flipperGeometry.clone(), shellMaterial.clone());
         const frontRightFlipper = new THREE.Mesh(flipperGeometry.clone(), shellMaterial.clone());
         const rearLeftFlipper = new THREE.Mesh(flipperGeometry.clone(), shellMaterial.clone());
         const rearRightFlipper = new THREE.Mesh(flipperGeometry.clone(), shellMaterial.clone());
-        const visor = new THREE.Mesh(visorGeometry.clone(), visorMaterial);
+        const collarTag = new THREE.Mesh(collarTagGeometry.clone(), tagMaterial);
         const eyeMaterial = new THREE.MeshStandardMaterial({ color: 0x101923, roughness: 0.38, metalness: 0.04 });
         const leftEye = new THREE.Mesh(eyeGeometry.clone(), eyeMaterial);
         const rightEye = new THREE.Mesh(eyeGeometry.clone(), eyeMaterial.clone());
@@ -394,11 +388,6 @@ export function ToolStudioPanel({
         });
         const leftCheek = new THREE.Mesh(cheekGeometry.clone(), cheekMaterial);
         const rightCheek = new THREE.Mesh(cheekGeometry.clone(), cheekMaterial.clone());
-        const chestPanel = new THREE.Mesh(chestPanelGeometry.clone(), panelMaterial);
-        const leftFoot = new THREE.Mesh(footGeometry.clone(), shellMaterial.clone());
-        const rightFoot = new THREE.Mesh(footGeometry.clone(), shellMaterial.clone());
-        const leftHand = new THREE.Mesh(handGeometry.clone(), shellMaterial.clone());
-        const rightHand = new THREE.Mesh(handGeometry.clone(), shellMaterial.clone());
         const tail = new THREE.Mesh(tailGeometry.clone(), shellMaterial.clone());
         const statusLight = new THREE.Mesh(statusLightGeometry.clone(), new THREE.MeshStandardMaterial({
           color: accent,
@@ -418,12 +407,13 @@ export function ToolStudioPanel({
         character.userData = { mode: item.id };
         character.name = `tool-agent-seal-${item.id}`;
         body.name = "tool-agent-seal-body";
+        belly.name = "tool-agent-seal-belly";
         head.name = "tool-agent-seal-head";
         frontLeftFlipper.name = "tool-agent-seal-flipper-front-left";
         frontRightFlipper.name = "tool-agent-seal-flipper-front-right";
         rearLeftFlipper.name = "tool-agent-seal-flipper-rear-left";
         rearRightFlipper.name = "tool-agent-seal-flipper-rear-right";
-        visor.name = "tool-agent-seal-visor";
+        collarTag.name = "tool-agent-seal-collar-tag";
         leftEye.name = "tool-agent-seal-eye-left";
         rightEye.name = "tool-agent-seal-eye-right";
         muzzle.name = "tool-agent-seal-muzzle";
@@ -434,58 +424,62 @@ export function ToolStudioPanel({
         rightWhiskerBottom.name = "tool-agent-seal-whisker-right-bottom";
         leftCheek.name = "tool-agent-seal-cheek-left";
         rightCheek.name = "tool-agent-seal-cheek-right";
-        chestPanel.name = "tool-agent-seal-chest-panel";
         statusLight.name = "tool-agent-seal-status-light";
         tail.name = "tool-agent-seal-tail";
         roleHalo.name = "tool-agent-seal-role-halo";
-        body.position.y = -0.03;
-        head.position.y = 0.54;
-        visor.position.set(0, 0.64, 0.31);
-        leftEye.position.set(-0.08, 0.595, 0.325);
-        rightEye.position.set(0.08, 0.595, 0.325);
-        muzzle.position.set(0, 0.47, 0.32);
+        body.position.set(0, -0.04, -0.08);
+        body.scale.set(0.84, 0.52, 1.08);
+        body.rotation.x = -0.08;
+        belly.position.set(0, -0.13, 0.2);
+        belly.scale.set(0.56, 0.24, 0.7);
+        belly.rotation.x = -0.22;
+        head.position.set(0, 0.28, 0.78);
+        head.scale.set(1.05, 0.96, 0.92);
+        leftEye.position.set(-0.08, 0.38, 1.06);
+        rightEye.position.set(0.08, 0.38, 1.06);
+        muzzle.position.set(0, 0.25, 1.065);
         muzzle.scale.set(1.22, 0.72, 0.5);
-        nose.position.set(0, 0.5, 0.38);
-        leftWhiskerTop.position.set(-0.12, 0.51, 0.405);
+        nose.position.set(0, 0.29, 1.15);
+        leftWhiskerTop.position.set(-0.12, 0.3, 1.19);
         leftWhiskerTop.rotation.z = 0.16;
-        leftWhiskerBottom.position.set(-0.12, 0.47, 0.405);
+        leftWhiskerBottom.position.set(-0.12, 0.25, 1.19);
         leftWhiskerBottom.rotation.z = -0.14;
-        rightWhiskerTop.position.set(0.12, 0.51, 0.405);
+        rightWhiskerTop.position.set(0.12, 0.3, 1.19);
         rightWhiskerTop.rotation.z = -0.16;
-        rightWhiskerBottom.position.set(0.12, 0.47, 0.405);
+        rightWhiskerBottom.position.set(0.12, 0.25, 1.19);
         rightWhiskerBottom.rotation.z = 0.14;
-        leftCheek.position.set(-0.15, 0.515, 0.33);
-        rightCheek.position.set(0.15, 0.515, 0.33);
+        leftCheek.position.set(-0.15, 0.3, 1.07);
+        rightCheek.position.set(0.15, 0.3, 1.07);
         leftCheek.scale.set(1, 0.66, 0.32);
         rightCheek.scale.set(1, 0.66, 0.32);
-        chestPanel.position.set(0, 0.1, 0.32);
-        leftFoot.position.set(-0.14, -0.44, 0.08);
-        rightFoot.position.set(0.14, -0.44, 0.08);
-        leftHand.position.set(-0.3, 0.04, 0.02);
-        rightHand.position.set(0.3, 0.04, 0.02);
-        frontLeftFlipper.position.set(-0.36, -0.1, 0.12);
-        frontLeftFlipper.scale.set(1.45, 0.32, 0.72);
-        frontLeftFlipper.rotation.z = -0.58;
-        frontRightFlipper.position.set(0.36, -0.1, 0.12);
-        frontRightFlipper.scale.set(1.45, 0.32, 0.72);
-        frontRightFlipper.rotation.z = 0.58;
-        rearLeftFlipper.position.set(-0.18, -0.58, -0.02);
-        rearLeftFlipper.scale.set(1.2, 0.28, 0.58);
-        rearLeftFlipper.rotation.z = -0.22;
-        rearRightFlipper.position.set(0.18, -0.58, -0.02);
-        rearRightFlipper.scale.set(1.2, 0.28, 0.58);
-        rearRightFlipper.rotation.z = 0.22;
-        tail.position.set(0, -0.07, -0.33);
-        statusLight.position.set(0, 0.89, 0.03);
+        collarTag.position.set(0, 0.1, 0.94);
+        collarTag.scale.set(1.08, 0.78, 0.28);
+        frontLeftFlipper.position.set(-0.54, -0.13, 0.34);
+        frontLeftFlipper.scale.set(1.72, 0.32, 0.66);
+        frontLeftFlipper.rotation.set(0.12, 0.18, -0.55);
+        frontRightFlipper.position.set(0.54, -0.13, 0.34);
+        frontRightFlipper.scale.set(1.72, 0.32, 0.66);
+        frontRightFlipper.rotation.set(0.12, -0.18, 0.55);
+        rearLeftFlipper.position.set(-0.2, -0.23, -0.86);
+        rearLeftFlipper.scale.set(1.42, 0.28, 0.52);
+        rearLeftFlipper.rotation.set(0.08, -0.22, -0.26);
+        rearRightFlipper.position.set(0.2, -0.23, -0.86);
+        rearRightFlipper.scale.set(1.42, 0.28, 0.52);
+        rearRightFlipper.rotation.set(0.08, 0.22, 0.26);
+        tail.position.set(0, -0.18, -1);
+        tail.scale.set(0.74, 0.28, 0.42);
+        tail.rotation.x = 0.12;
+        statusLight.position.set(0, 0.1, 0.99);
         roleHalo.rotation.x = Math.PI / 2;
-        roleHalo.position.y = -0.48;
+        roleHalo.position.y = -0.42;
         character.add(body);
+        character.add(belly);
         character.add(head);
         character.add(frontLeftFlipper);
         character.add(frontRightFlipper);
         character.add(rearLeftFlipper);
         character.add(rearRightFlipper);
-        character.add(visor);
+        character.add(collarTag);
         character.add(leftEye);
         character.add(rightEye);
         character.add(muzzle);
@@ -496,11 +490,6 @@ export function ToolStudioPanel({
         character.add(rightWhiskerBottom);
         character.add(leftCheek);
         character.add(rightCheek);
-        character.add(chestPanel);
-        character.add(leftFoot);
-        character.add(rightFoot);
-        character.add(leftHand);
-        character.add(rightHand);
         character.add(tail);
         character.add(statusLight);
         character.add(roleHalo);

@@ -83,8 +83,8 @@ export function AgentCollaborationBoardPanel({ board }: AgentCollaborationBoardP
         ))}
       </div>
       <div className="agent-workload-strip">
-        {board.agents.slice(0, 10).map((agent) => (
-          <article key={agent.id}>
+        {board.agents.slice(0, 10).map((agent, index) => (
+          <article key={`${agent.id}-${index}`}>
             <div>
               <strong>{agent.name}</strong>
               <span>{agent.status}</span>

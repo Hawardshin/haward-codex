@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 
 import { ActionGroup } from "@/components/ui/ActionGroup";
 import { Button } from "@/components/ui/Button";
+import { formatBytes } from "@/lib/runtimeDisplay";
 import type { WorkspaceSourceFile } from "@/lib/snapshot";
 
 type WorkspaceExplorerCopy = {
@@ -336,14 +337,4 @@ function sortWorkspaceExplorerDirectory(directory: WorkspaceExplorerDirectory) {
 
 function countWorkspaceExplorerDirectories(directories: WorkspaceExplorerDirectory[]): number {
   return directories.reduce((total, directory) => total + 1 + countWorkspaceExplorerDirectories(directory.children), 0);
-}
-
-function formatBytes(bytes: number) {
-  if (bytes < 1024) {
-    return `${bytes}B`;
-  }
-  if (bytes < 1024 * 1024) {
-    return `${Math.round(bytes / 1024)}KB`;
-  }
-  return `${Math.round((bytes / (1024 * 1024)) * 10) / 10}MB`;
 }

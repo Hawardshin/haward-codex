@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState, type Dispatch, type SetStateAction } from "react";
+import { useCallback, useEffect, useRef, useState, type Dispatch, type SetStateAction } from "react";
 
 import type {
   ProviderActionFeedback,
@@ -69,6 +69,7 @@ export function useProviderAccountSettings({
   const [providerModelBusy, setProviderModelBusy] = useState(false);
   const [providerModelBusyProviderId, setProviderModelBusyProviderId] = useState("");
   const [providerModelError, setProviderModelError] = useState("");
+  const providerModelRequestSeqRef = useRef(0);
 
   const refreshProviderModels = useCallback(
     async (providerId = searchAgentRunForm.providerId, userInitiated = false) => {
@@ -91,6 +92,9 @@ export function useProviderAccountSettings({
       }
 
       const tauriInvoke = getTauriInvoke();
+      const requestSeq = providerModelRequestSeqRef.current + 1;
+      providerModelRequestSeqRef.current = requestSeq;
+      const isCurrentModelRequest = () => providerModelRequestSeqRef.current === requestSeq;
       setProviderModelBusy(true);
       setProviderModelBusyProviderId(provider.providerId);
       setProviderModelError("");
@@ -122,6 +126,9 @@ export function useProviderAccountSettings({
                 : "The installed app can read the Ollama model list. This preview shows only the default model."
               : null
         };
+        if (!isCurrentModelRequest()) {
+          return;
+        }
         setProviderModelCatalog(fallbackReport);
         setProviderModelError(fallbackReport.error || "");
         if (fallbackReport.error) {
@@ -142,8 +149,10 @@ export function useProviderAccountSettings({
                 : `${providerDisplayName(provider.providerId, provider.label, uiLanguage)} default model checked.`
           });
         }
-        setProviderModelBusy(false);
-        setProviderModelBusyProviderId("");
+        if (isCurrentModelRequest()) {
+          setProviderModelBusy(false);
+          setProviderModelBusyProviderId("");
+        }
         return;
       }
 
@@ -151,6 +160,9 @@ export function useProviderAccountSettings({
         const report = await tauriInvoke<ProviderModelCatalogReport>("list_provider_models", {
           providerId: provider.providerId
         });
+        if (!isCurrentModelRequest()) {
+          return;
+        }
         setProviderModelCatalog(report);
         setProviderModelError(report.error || "");
         if (report.error) {
@@ -180,6 +192,9 @@ export function useProviderAccountSettings({
           );
         }
       } catch (modelError) {
+        if (!isCurrentModelRequest()) {
+          return;
+        }
         const defaultModel = effectiveProviderModelFor(provider);
         setProviderModelCatalog({
           providerId: provider.providerId,
@@ -206,8 +221,10 @@ export function useProviderAccountSettings({
           message: String(modelError)
         });
       } finally {
-        setProviderModelBusy(false);
-        setProviderModelBusyProviderId("");
+        if (isCurrentModelRequest()) {
+          setProviderModelBusy(false);
+          setProviderModelBusyProviderId("");
+        }
       }
     },
     [

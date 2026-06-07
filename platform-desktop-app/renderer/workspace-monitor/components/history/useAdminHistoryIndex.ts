@@ -105,10 +105,16 @@ function loadAdminHistoryIndex(controller: AbortController | null) {
     return Promise.resolve(cachedAdminHistoryIndex);
   }
   if (!adminHistoryIndexPromise) {
-    adminHistoryIndexPromise = fetchAdminHistoryIndex(controller).then((index) => {
-      cachedAdminHistoryIndex = index;
-      return index;
-    });
+    adminHistoryIndexPromise = fetchAdminHistoryIndex(controller)
+      .then((index) => {
+        cachedAdminHistoryIndex = index;
+        return index;
+      })
+      .catch((error: unknown) => {
+        // 실패한 공유 promise를 남기면 이후 관리자 히스토리 재시도가 영구 실패한다.
+        adminHistoryIndexPromise = null;
+        throw error;
+      });
   }
   return adminHistoryIndexPromise;
 }

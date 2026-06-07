@@ -81,6 +81,31 @@ import type {
   RuntimeTerminalDrawerProps,
   RuntimeTextChoice
 } from "@/components/workbench/RuntimeTerminalDrawer";
+import {
+  buildDirtySourcePathSet,
+  buildSourceDiffSummary,
+  filterEditableSourceFiles,
+  findAgentsInstructionPath,
+  findCurrentSourceDraftEntry,
+  findSelectedSourceFileOption,
+  isCurrentSourceDraftDirty,
+  listEditableSourceFiles,
+  listDirtySourceDraftEntries,
+  listOpenSourceDraftEntries,
+  monacoEditorOptions,
+  selectSourceCatalogFiles,
+  SourceWorkbenchPanel,
+  sourceEditorProfileForPath,
+  sourceCatalogLabelFor,
+  sourceTemplateById,
+  sourceTemplates,
+  type SourceTemplateId,
+  type SourceWorkbenchView,
+  useSourceEditorSession,
+  useSourceWorkbenchController,
+  useSourceLoadRequestGate,
+  workspaceExplorerRootLabelFor
+} from "@/components/workbench/source-editor";
 import type { ToolStudioMode, ToolStudioModeRequest, ToolStudioPanelProps } from "@/components/workbench/ToolStudioPanel";
 import type { WorkspaceExplorerPaneProps } from "@/components/workbench/WorkspaceExplorerPane";
 import { writeClipboardText } from "@/lib/clipboard.mjs";
@@ -92,6 +117,16 @@ import {
   type WorkspaceSnapshot,
   type WorkspaceSourceFile
 } from "@/lib/snapshot";
+import {
+  detectOutputEvents,
+  formatBytes,
+  formatDuration,
+  groupDecisions,
+  isActiveSessionStatus,
+  isOpenDecisionStatus,
+  mergeNativePtyReports,
+  mergeSessionReports
+} from "@/lib/runtimeDisplay";
 
 import { ProviderAccountsPanel } from "./features/ProviderAccountsPanel";
 import { RuntimeCustomizationPanel } from "./features/RuntimeCustomizationPanel";
@@ -120,6 +155,22 @@ import { RuntimeInitStatusCard, type RuntimeInitStatusReport } from "./features/
 import { ServiceReadinessPanel } from "./features/ServiceReadinessPanel";
 import { TaskRunStorePanel } from "./features/TaskRunStorePanel";
 import { WorkspaceHostPanel } from "./features/WorkspaceHostPanel";
+import {
+  defaultRuntimeInitDefaults,
+  fallbackTaskPipePresets,
+  renderTaskPipePresetPrompt,
+  sessionModePresets,
+  taskPipePromptKeyForPreset
+} from "./features/runtimeSessionPresets";
+import { nativeWorkspaceCopy } from "./features/runtimeWorkspaceCopy";
+import {
+  AgentFlowMap,
+  DocumentList,
+  HistoryCategoryBars,
+  HistoryDensityChart,
+  HistoryTimeline,
+  Metric
+} from "./features/MonitorSummaryWidgets";
 import {
   adapterSetupGuides,
   defaultRuntimeCustomization,
@@ -157,7 +208,6 @@ import type {
   CliTaskRunDetailReport,
   CliTaskRunPruneReport,
   CliTaskRunRecordReport,
-  DecisionGroup,
   DecisionResumeReport,
   DesktopHealthStatus,
   DesktopPreferences,
@@ -165,10 +215,8 @@ import type {
   DesktopResourceSnapshotReport,
   DesktopWorkspaceStateReport,
   HumanDecisionInboxReport,
-  HumanDecisionItem,
   InstallerPayloadAuditReport,
   NativeOsActionReport,
-  OutputEvent,
   ProviderCredentialReport,
   ProviderCredentialSummary,
   RuntimeCustomization,
@@ -263,7 +311,6 @@ type SettingsSubsectionId =
   | "snapshot"
   | "store"
   | "operator";
-type SourceWorkbenchView = "files" | "editor" | "results";
 type AgentDetailViewId = "collaboration" | "blueprint" | "builder" | "learning" | "flow" | "inventory" | "runtime";
 
 type Section = {
@@ -645,16 +692,6 @@ const agentDetailViews: Array<{
   }
 ];
 
-const MonacoEditor = dynamic(() => import("@monaco-editor/react").then((module) => module.default), {
-  ssr: false,
-  loading: () => <div className="monaco-editor-loading">Loading Monaco editor</div>
-});
-
-const MonacoDiffEditor = dynamic(() => import("@monaco-editor/react").then((module) => module.DiffEditor), {
-  ssr: false,
-  loading: () => <div className="monaco-editor-loading">Loading Monaco diff</div>
-});
-
 const ToolStudioPanel = dynamic<ToolStudioPanelProps>(
   () => import("@/components/workbench/ToolStudioPanel").then((module) => module.ToolStudioPanel),
   {
@@ -837,212 +874,6 @@ const AgentCollaborationScene = dynamic(
     )
   }
 );
-
-const monacoEditorOptions: editor.IStandaloneEditorConstructionOptions = {
-  automaticLayout: true,
-  bracketPairColorization: { enabled: true },
-  copyWithSyntaxHighlighting: true,
-  cursorBlinking: "smooth",
-  formatOnPaste: true,
-  formatOnType: true,
-  fontFamily: "\"SFMono-Regular\", Consolas, \"Liberation Mono\", monospace",
-  fontSize: 13,
-  glyphMargin: true,
-  guides: { bracketPairs: true, indentation: true },
-  lineHeight: 22,
-  minimap: { enabled: false },
-  mouseWheelZoom: true,
-  padding: { bottom: 14, top: 12 },
-  renderLineHighlight: "all",
-  renderWhitespace: "selection",
-  rulers: [100, 120],
-  scrollBeyondLastLine: false,
-  smoothScrolling: true,
-  stickyScroll: { enabled: true },
-  tabSize: 2,
-  wordWrap: "on",
-  wordWrapColumn: 120,
-  wrappingIndent: "same"
-};
-
-const monacoReadOnlyOptions: editor.IStandaloneEditorConstructionOptions = {
-  ...monacoEditorOptions,
-  domReadOnly: true,
-  minimap: { enabled: false },
-  readOnly: true
-};
-
-const monacoDiffEditorOptions: editor.IStandaloneDiffEditorConstructionOptions = {
-  automaticLayout: true,
-  diffAlgorithm: "advanced",
-  enableSplitViewResizing: true,
-  originalEditable: false,
-  readOnly: true,
-  renderSideBySide: true,
-  scrollBeyondLastLine: false
-};
-
-const platformMonacoTheme = "agent-platform-workbench";
-
-const definePlatformMonacoTheme = (monaco: typeof import("monaco-editor")) => {
-  monaco.editor.defineTheme(platformMonacoTheme, {
-    base: "vs-dark",
-    inherit: true,
-    rules: [
-      { token: "comment", foreground: "8ea6b8" },
-      { token: "keyword", foreground: "7dd3fc" },
-      { token: "string", foreground: "b7e4c7" },
-      { token: "number", foreground: "f4a261" }
-    ],
-    colors: {
-      "editor.background": "#101923",
-      "editor.foreground": "#d7e0ea",
-      "editor.lineHighlightBackground": "#172435",
-      "editorLineNumber.foreground": "#637386",
-      "editorLineNumber.activeForeground": "#d7e0ea",
-      "editorCursor.foreground": "#9bd5ff",
-      "editor.selectionBackground": "#245173",
-      "editorIndentGuide.background1": "#263546",
-      "editorIndentGuide.activeBackground1": "#55677a",
-      "minimap.background": "#101923"
-    }
-  });
-};
-
-type SourceTemplateId =
-  | "requirement-row"
-  | "spec-section"
-  | "validation-record"
-  | "tauri-command"
-  | "agent-config"
-  | "decision-inbox-item";
-
-type SourceTemplate = {
-  id: SourceTemplateId;
-  label: string;
-  detail: string;
-  body: string;
-};
-
-type SourceEditorProfile = {
-  label: string;
-  detail: string;
-  accent: "governance" | "spec" | "runtime" | "config" | "source";
-  templateId: SourceTemplateId;
-};
-
-const sourceTemplates: SourceTemplate[] = [
-  {
-    id: "requirement-row",
-    label: "Requirement Row",
-    detail: "Baselined requirement table row",
-    body:
-      "| REQ-PLATFORM-000 | {{date}} | {{path}} | The platform shall ... | must | planned | spec: TBD | validation: TBD |\n"
-  },
-  {
-    id: "spec-section",
-    label: "Spec Section",
-    detail: "Scope, acceptance, trace",
-    body:
-      "## Goal\n\n- User outcome:\n- Owner surface:\n\n## Scope\n\n- Included:\n- Excluded:\n\n## Acceptance\n\n- [ ] Requirement linked\n- [ ] Implementation path named\n- [ ] Validation command recorded\n- [ ] Rollback or backup path clear\n"
-  },
-  {
-    id: "validation-record",
-    label: "Validation Record",
-    detail: "Command and browser evidence",
-    body:
-      "## Validation\n\n- Static check:\n- Build check:\n- Runtime smoke:\n- Browser viewport check:\n- Regression risk:\n- Evidence path:\n"
-  },
-  {
-    id: "tauri-command",
-    label: "Tauri Command",
-    detail: "Workspace-scoped command stub",
-    body:
-      "#[tauri::command]\nfn command_name() -> Result<(), String> {\n    Ok(())\n}\n"
-  },
-  {
-    id: "agent-config",
-    label: "Agent Config",
-    detail: "Bounded capability config",
-    body:
-      "{\n  \"id\": \"agent-id\",\n  \"label\": \"Agent Label\",\n  \"role\": \"bounded_capability\",\n  \"inputs\": [],\n  \"outputs\": [],\n  \"validation\": {\n    \"required_evidence\": [],\n    \"rollback\": \"\"\n  }\n}\n"
-  },
-  {
-    id: "decision-inbox-item",
-    label: "Decision Item",
-    detail: "Human arbitration packet",
-    body:
-      "{\n  \"id\": \"decision-id\",\n  \"status\": \"open\",\n  \"priority\": \"normal\",\n  \"question\": \"\",\n  \"impact\": \"\",\n  \"options\": [],\n  \"resume_action\": \"\"\n}\n"
-  }
-];
-
-const sourceTemplateById = sourceTemplates.reduce(
-  (lookup, template) => ({ ...lookup, [template.id]: template }),
-  {} as Record<SourceTemplateId, SourceTemplate>
-);
-
-function sourceEditorProfileForPath(relativePath: string): SourceEditorProfile {
-  const normalized = relativePath.toLowerCase();
-  if (normalized.includes("/docs/requirements/") || normalized.includes("_requirements/")) {
-    return {
-      label: "Requirements",
-      detail: "baseline, status, trace",
-      accent: "governance",
-      templateId: "requirement-row"
-    };
-  }
-  if (normalized.includes("/specs/") || normalized.includes("_specs/")) {
-    return {
-      label: "Spec Work",
-      detail: "scope, acceptance, validation",
-      accent: "spec",
-      templateId: "spec-section"
-    };
-  }
-  if (normalized.includes("src-tauri") || normalized.endsWith(".rs")) {
-    return {
-      label: "Runtime Command",
-      detail: "Tauri boundary, Result contract",
-      accent: "runtime",
-      templateId: "tauri-command"
-    };
-  }
-  if (normalized.includes("/configs/") || normalized.endsWith(".json")) {
-    return {
-      label: "Platform Config",
-      detail: "schema, validation, rollback",
-      accent: "config",
-      templateId: "agent-config"
-    };
-  }
-  if (normalized.includes("/validation") || normalized.includes("_history/evaluations/")) {
-    return {
-      label: "Validation",
-      detail: "commands, evidence, risk",
-      accent: "governance",
-      templateId: "validation-record"
-    };
-  }
-  return {
-    label: "Source Patch",
-    detail: "draft, diff, handoff",
-    accent: "source",
-    templateId: "spec-section"
-  };
-}
-
-function renderSourceTemplate(template: SourceTemplate, relativePath: string) {
-  return template.body
-    .split("{{date}}")
-    .join(new Date().toISOString().slice(0, 10))
-    .split("{{path}}")
-    .join(relativePath || "workspace-relative-path");
-}
-
-function appendSourceTemplate(content: string, templateBody: string) {
-  const separator = content.length === 0 ? "" : content.endsWith("\n") ? "\n" : "\n\n";
-  return `${content}${separator}${templateBody}`;
-}
 
 const DESKTOP_PREFERENCES_SCHEMA_VERSION = "desktop-preferences.v1";
 const defaultPinnedSections: SectionId[] = ["overview", "agents", "desktop", "eval", "source", "intent"];
@@ -1355,97 +1186,6 @@ const fallbackLanguageModes: MonitorLanguageMode[] = [
     documentRule: "Show documents tagged unknown."
   }
 ];
-
-const nativeWorkspaceCopy = {
-  ko: {
-    eyebrow: "작업공간 Explorer",
-    title: "파일시스템을 끌어와서 처리하기",
-    description:
-      "왼쪽 탐색기에서 실제 작업공간 파일 시스템을 확인하고, 오른쪽 편집기에서 파일을 열어 수정/저장합니다.",
-    chooseFolder: "작업공간 접근 권한 요청",
-    choosingFolder: "권한 요청 중",
-    permissionDetail: "네이티브 폴더 선택 창에서 허용하면 이 앱이 해당 작업공간을 바로 읽고 저장합니다.",
-    permissionGranted: "작업공간 접근 권한을 받았습니다.",
-    refreshWorkspace: "작업공간 새로고침",
-    refreshFiles: "파일 목록 새로고침",
-    openSelected: "선택 파일 열기",
-    saveCurrent: "현재 파일 저장",
-    saveAll: "열린 변경 모두 저장",
-    copyFile: "내용 복사",
-    activeWorkspace: "현재 작업공간",
-    workspaceState: "작업공간 상태",
-    folderSource: "선택 방식",
-    fileSearch: "파일명, 폴더, 언어 검색",
-    fileList: "파일 목록",
-    fileTree: "파일 트리",
-    uploadDropzone: "작업공간 접근 권한 요청",
-    uploadDropzoneDetail: "네이티브 폴더 선택 창에서 허용하면 탐색기가 실제 파일 시스템을 읽고 편집/저장에 바로 사용합니다.",
-    explorerHint: "탐색기에서 파일을 누르면 오른쪽 편집기에 열립니다.",
-    openedDrafts: "열린 파일",
-    editorSettings: "편집 설정",
-    wordWrap: "줄바꿈",
-    minimap: "미니맵",
-    foldAll: "코드 접기",
-    unfoldAll: "코드 펼치기",
-    diffMode: "변경 비교",
-    editMode: "편집",
-    noRuntime: "Tauri 런타임이 없어서 저장은 비활성화됩니다. 지금은 스냅샷 파일만 볼 수 있습니다.",
-    noFiles: "표시할 파일이 없습니다. 작업공간 폴더를 선택하거나 검색어를 바꿔보세요.",
-    noFileOpen: "왼쪽 파일 목록에서 파일을 클릭하세요.",
-    savedWithBackup: "저장 완료. 백업 파일을 만들었습니다.",
-    chooseCanceled: "폴더 선택을 취소했습니다.",
-    fallbackSource: "스냅샷 대체 데이터",
-    runtimeSource: "실제 작업공간",
-    dirty: "수정됨",
-    clean: "변경 없음",
-    loading: "불러오는 중",
-    saving: "저장 중"
-  },
-  en: {
-    eyebrow: "Workspace Explorer",
-    title: "Bring the filesystem into the platform",
-    description:
-      "Like VS Code, the left Explorer owns the real workspace filesystem and the editor on the right opens files for processing and saving.",
-    chooseFolder: "Request Workspace Access",
-    choosingFolder: "Requesting Access",
-    permissionDetail: "Use the native folder picker to grant this app access to the workspace for reading and saving.",
-    permissionGranted: "Workspace access granted.",
-    refreshWorkspace: "Refresh Workspace",
-    refreshFiles: "Refresh Files",
-    openSelected: "Open Selected",
-    saveCurrent: "Save Current",
-    saveAll: "Save All Open Changes",
-    copyFile: "Copy Content",
-    activeWorkspace: "Active Workspace",
-    workspaceState: "Workspace State",
-    folderSource: "Source",
-    fileSearch: "Search file, folder, or language",
-    fileList: "File List",
-    fileTree: "File Tree",
-    uploadDropzone: "Request workspace access",
-    uploadDropzoneDetail: "Grant access from the native folder picker, then the Explorer can read, edit, and save real workspace files.",
-    explorerHint: "Click a file in Explorer to open it in the editor.",
-    openedDrafts: "Open Files",
-    editorSettings: "Editor Settings",
-    wordWrap: "Word Wrap",
-    minimap: "Minimap",
-    foldAll: "Fold Code",
-    unfoldAll: "Unfold Code",
-    diffMode: "Diff",
-    editMode: "Edit",
-    noRuntime: "Tauri runtime is unavailable. Saving is disabled and snapshot files are shown as fallback.",
-    noFiles: "No files to show. Choose a workspace folder or change the search text.",
-    noFileOpen: "Click a file from the list on the left.",
-    savedWithBackup: "Saved with a backup file.",
-    chooseCanceled: "Folder selection was canceled.",
-    fallbackSource: "snapshot fallback",
-    runtimeSource: "real workspace",
-    dirty: "dirty",
-    clean: "clean",
-    loading: "loading",
-    saving: "saving"
-  }
-} satisfies Record<UiLanguage, Record<string, string>>;
 
 const emptyCollaborationBoard: CollaborationBoard = {
   summary: {
@@ -1900,11 +1640,8 @@ async function warmWorkspaceOsResourcesShared(
 
 const SESSION_POLL_INTERVAL_MS = 2000;
 const NATIVE_PTY_POLL_INTERVAL_MS = 500;
-const SESSION_POLL_IDLE_UPDATE_BUCKET_MS = 5000;
 const INBOX_REFRESH_THROTTLE_MS = 4000;
-const SESSION_OUTPUT_SIGNATURE_CHARS = 2048;
 const TASK_RUN_REFRESH_THROTTLE_MS = 5000;
-const SOURCE_DRAFT_UI_SYNC_MS = 180;
 const runtimePromptMaxChars = 4_000;
 
 const agentCoreSampleSourceUrl = "https://github.com/awslabs/agentcore-samples";
@@ -2143,91 +1880,6 @@ const agentCoreBlueprints: AgentCoreBlueprint[] = [
   }
 ];
 
-const sessionModePresets: SessionModePreset[] = [
-  {
-    id: "research_insight_agent",
-    label: "검색 에이전트",
-    intent: "Use the existing research-insight-planner-agent for grounded search, source ranking, and execution planning.",
-    prompt: renderSearchAgentPrompt(defaultSearchAgentRunForm, "ko")
-  },
-  {
-    id: "user_task",
-    label: "User Task",
-    intent: "Deliver the requested task with concise questions only when blocked.",
-    prompt:
-      "현재 사용자의 요청을 기준으로 작업을 진행해줘. 소스에 영향을 주는 결정이 필요하면 질문을 명확히 남기고, 사용자가 없으면 해당 결정만 보류해줘."
-  },
-  {
-    id: "platform_improvement",
-    label: "Platform Improvement",
-    intent: "Improve the platform while preserving requirements, specs, and validation.",
-    prompt:
-      "이 플랫폼 자체를 개선하는 관점으로 살펴보고, 요구사항/스펙/검증/히스토리와 충돌하지 않게 작은 개선 단위로 진행해줘."
-  },
-  {
-    id: "knowledge_accumulation",
-    label: "Knowledge Accumulation",
-    intent: "Turn messy output into durable structured knowledge.",
-    prompt:
-      "이번 작업에서 나온 로그, 질문, 결정, 근거를 구조화해 재사용 가능한 지식으로 정리해줘. 출처와 불확실성을 분리해서 기록해줘."
-  },
-  {
-    id: "review_verify",
-    label: "Review & Verify",
-    intent: "Check risks, missing tests, and unsupported claims before proceeding.",
-    prompt:
-      "현재 변경 또는 계획을 리뷰해줘. 버그, 누락된 검증, 리소스 누수, 사용자 결정이 필요한 지점을 우선순위로 정리해줘."
-  }
-];
-
-const fallbackTaskPipePresets: CliTaskPipelinePresetReport[] = [
-  {
-    taskKind: "research_insight_agent_pipe",
-    label: "Search Agent Pipe",
-    intent: "Existing research-insight-planner-agent, source ranking, and skeptic review lanes initialize from one question.",
-    laneCount: 3,
-    adapterIds: ["codex-cli", "gemini-cli", "claude-code-cli"],
-    mergeGate: "research_insight_merge_gate"
-  },
-  {
-    taskKind: "platform_improvement_pipe",
-    label: "Platform Improvement Pipe",
-    intent: "Implementation, review, research, orchestration, and fallback lanes initialize from one task intake.",
-    laneCount: 5,
-    adapterIds: ["codex-cli", "claude-code-cli", "gemini-cli", "claw-code-cli", "opencode-cli"],
-    mergeGate: "platform_merge_gate"
-  },
-  {
-    taskKind: "knowledge_accumulation_pipe",
-    label: "Knowledge Accumulation Pipe",
-    intent: "Structuring, skeptic, and durable record lanes initialize from messy output.",
-    laneCount: 3,
-    adapterIds: ["gemini-cli", "claude-code-cli", "codex-cli"],
-    mergeGate: "knowledge_merge_gate"
-  },
-  {
-    taskKind: "review_verify_pipe",
-    label: "Review & Verify Pipe",
-    intent: "Bug review, validation, and contrary lanes initialize before release.",
-    laneCount: 3,
-    adapterIds: ["claude-code-cli", "codex-cli", "gemini-cli"],
-    mergeGate: "validation_merge_gate"
-  }
-];
-
-function renderTaskPipePresetPrompt(preset: CliTaskPipelinePresetReport, language: UiLanguage) {
-  return language === "ko"
-    ? `${preset.label} 기준으로 작업을 분해하고 ${preset.laneCount}개 실행 경로를 초기화해줘. ${preset.mergeGate} 전에는 소스 영향 결정과 질문을 보류하고, 각 경로의 출력과 병합 조건을 기록해줘.`
-    : `Break down the task with the ${preset.label} preset and initialize ${preset.laneCount} run lanes. Hold source-impacting decisions and questions before ${preset.mergeGate}, then record lane output and merge conditions.`;
-}
-
-const defaultRuntimeInitDefaults: RuntimeInitDefaults = {
-  adapterId: "codex-cli",
-  sessionModeId: sessionModePresets[0].id,
-  taskPipeKind: fallbackTaskPipePresets[0].taskKind,
-  autoDeferQuestions: true
-};
-
 const defaultDesktopPreferences: DesktopPreferences = {
   schemaVersion: DESKTOP_PREFERENCES_SCHEMA_VERSION,
   uiLanguage: "ko",
@@ -2328,10 +1980,6 @@ function normalizePinnedSections(sectionsToNormalize: unknown): SectionId[] {
     ? sectionsToNormalize.filter((item): item is SectionId => sectionIds.has(item as SectionId))
     : [];
   return next.slice(0, 6);
-}
-
-function taskPipePromptKeyForPreset(taskKind: string) {
-  return `selected-preset:${taskKind}`;
 }
 
 function normalizeRuntimePromptOverrides(prompts: unknown, allowedKeys: string[]): Record<string, string> {
@@ -5722,9 +5370,14 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                         ))}
                       </div>
                       <div className="settings-action-row">
-                        <button type="button" onClick={() => setRuntimeInitDefaults(defaultRuntimeInitDefaults)}>
+                        <button
+                          type="button"
+                          onClick={() => setRuntimeInitDefaults(defaultRuntimeInitDefaults)}
+                          aria-label={uiLanguage === "ko" ? "추천 기본값 적용" : "Apply recommended defaults"}
+                          title={uiLanguage === "ko" ? "추천 기본값 적용" : "Apply recommended defaults"}
+                        >
                           <CheckCircle2 size={15} aria-hidden="true" />
-                          <span>{uiLanguage === "ko" ? "추천 기본값 적용" : "Apply recommended defaults"}</span>
+                          <span>{uiLanguage === "ko" ? "추천값" : "Defaults"}</span>
                         </button>
                         <button
                           type="button"
@@ -5733,9 +5386,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                             openTerminalDrawer();
                             setSettingsOpen(false);
                           }}
+                          aria-label={uiLanguage === "ko" ? "터미널로 바로 가기" : "Go to terminal"}
+                          title={uiLanguage === "ko" ? "터미널로 바로 가기" : "Go to terminal"}
                         >
                           <SquareTerminal size={15} aria-hidden="true" />
-                          <span>{uiLanguage === "ko" ? "터미널로 바로 가기" : "Go to terminal"}</span>
+                          <span>{uiLanguage === "ko" ? "터미널" : "Terminal"}</span>
                         </button>
                       </div>
                     </section>
@@ -5863,18 +5518,25 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
                             <span>{uiLanguage === "ko" ? `${step.label} 복사` : `Copy ${step.label}`}</span>
                           </button>
                         ))}
-                        <button type="button" onClick={() => openProviderSettings()}>
+                        <button
+                          type="button"
+                          onClick={() => openProviderSettings()}
+                          aria-label={uiLanguage === "ko" ? "계정 연결 설정으로 이동" : "Open provider accounts"}
+                          title={uiLanguage === "ko" ? "계정 연결 설정으로 이동" : "Open provider accounts"}
+                        >
                           <KeyRound size={14} aria-hidden="true" />
-                          <span>{uiLanguage === "ko" ? "계정 연결로 이동" : "Open provider accounts"}</span>
+                          <span>{uiLanguage === "ko" ? "계정" : "Accounts"}</span>
                         </button>
                         <button
                           type="button"
                           data-runtime-setup-check-action="settings"
                           onClick={() => void runRuntimeSetupCheck()}
                           disabled={runtimeSetupCheckBusy}
+                          aria-label={uiLanguage === "ko" ? "런타임 설정 점검" : "Check runtime setup"}
+                          title={uiLanguage === "ko" ? "런타임 설정 점검" : "Check runtime setup"}
                         >
                           <RefreshCw size={14} aria-hidden="true" />
-                          <span>{runtimeSetupCheckBusy ? uiLanguage === "ko" ? "점검 중" : "Checking" : uiLanguage === "ko" ? "설정 점검" : "Check setup"}</span>
+                          <span>{runtimeSetupCheckBusy ? uiLanguage === "ko" ? "점검 중" : "Checking" : uiLanguage === "ko" ? "점검" : "Check"}</span>
                         </button>
                       </div>
                       <div className="runtime-setup-check-panel" data-runtime-setup-check="settings" role="status" aria-live="polite">
@@ -8034,10 +7696,30 @@ function DesktopRuntimePanel({
   const [saveAllBusy, setSaveAllBusy] = useState(false);
   const [sourceCatalogBusy, setSourceCatalogBusy] = useState(false);
   const [workspaceResourceBusy, setWorkspaceResourceBusy] = useState(false);
-  const sourceEditorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
-  const sourceDraftRef = useRef("");
-  const activeSourcePathRef = useRef("");
-  const sourceDraftSyncTimerRef = useRef<number | null>(null);
+  const { beginSourceLoadRequest, cancelPendingSourceLoad } = useSourceLoadRequestGate();
+  const {
+    sourceEditorRef,
+    applySourceEditorVisibleState,
+    clearSourceDraftSyncTimer,
+    updateSourceDraft,
+    currentEditorDraftContent,
+    effectiveSourceDrafts,
+    handleSourceEditorMount,
+    getActiveSourcePath,
+    setVisibleSourceDraftContent
+  } = useSourceEditorSession({
+    sourceFile,
+    sourceDraft,
+    sourceDrafts,
+    setSourceFile,
+    setSourceDraft,
+    setSourceDrafts,
+    setSelectedSourcePath,
+    setSourcePathInput,
+    setSourceCopyNotice,
+    setWriteReport,
+    setSourceWorkbenchView
+  });
   const panelMountedRef = useRef(false);
   const activeSessionPollInFlightRef = useRef(false);
   const activeNativePtyPollInFlightRef = useRef(false);
@@ -8052,67 +7734,33 @@ function DesktopRuntimePanel({
 
   const availableCount = adapters.filter((adapter) => adapter.available).length;
   const shouldPrepareSourceWorkspace = isFileWorkspaceSurface || runtimeDiagnosticsOpen;
-  const sourceCatalogFiles = runtimeSourceFiles.length ? runtimeSourceFiles : sourceFiles;
+  const sourceCatalogFiles = selectSourceCatalogFiles(runtimeSourceFiles, sourceFiles);
   const sourceFileCount = sourceCatalogFiles.length;
-  const agentsInstructionPath =
-    sourceCatalogFiles.find((file) => file.path === "AGENTS.md")?.path ||
-    sourceCatalogFiles.find((file) => file.path.endsWith("/AGENTS.md"))?.path ||
-    "";
-  const sourceCatalogLabel = workspaceResourceReport ? "native cache" : runtimeSourceFiles.length ? "runtime" : "snapshot";
+  const agentsInstructionPath = findAgentsInstructionPath(sourceCatalogFiles);
+  const sourceCatalogLabel = sourceCatalogLabelFor(Boolean(workspaceResourceReport), runtimeSourceFiles.length > 0);
   const editableSourceFiles = useMemo(() => {
-    if (!shouldPrepareSourceWorkspace) {
-      return [];
-    }
-    return sourceCatalogFiles.filter((file) => !file.truncated).slice(0, 240);
+    return listEditableSourceFiles(shouldPrepareSourceWorkspace, sourceCatalogFiles);
   }, [shouldPrepareSourceWorkspace, sourceCatalogFiles]);
   const deferredSourceFilter = useDeferredValue(sourceFilter);
   const filteredEditableSourceFiles = useMemo(() => {
-    if (!shouldPrepareSourceWorkspace) {
-      return [];
-    }
-    const normalizedFilter = deferredSourceFilter.trim().toLowerCase();
-    if (!normalizedFilter) {
-      return editableSourceFiles.slice(0, 80);
-    }
-    return editableSourceFiles
-      .filter((file) =>
-        [file.path, file.project, file.language, file.extension]
-          .filter(Boolean)
-          .some((value) => value.toLowerCase().includes(normalizedFilter))
-      )
-      .slice(0, 80);
+    return filterEditableSourceFiles(shouldPrepareSourceWorkspace, editableSourceFiles, deferredSourceFilter);
   }, [deferredSourceFilter, editableSourceFiles, shouldPrepareSourceWorkspace]);
   const selectedSourceFileOption = useMemo(
-    () =>
-      filteredEditableSourceFiles.find((file) => file.path === selectedSourcePath) ||
-      sourceCatalogFiles.find((file) => file.path === selectedSourcePath) ||
-      null,
+    () => findSelectedSourceFileOption(filteredEditableSourceFiles, sourceCatalogFiles, selectedSourcePath),
     [filteredEditableSourceFiles, selectedSourcePath, sourceCatalogFiles]
   );
-  const workspaceExplorerRootLabel =
-    desktopWorkspace?.activeWorkspacePath?.split(/[\\/]/).filter(Boolean).pop() ||
-    desktopWorkspace?.fallbackWorkspacePath?.split(/[\\/]/).filter(Boolean).pop() ||
-    "workspace";
-  const openDraftEntries = useMemo(
-    () => Object.values(sourceDrafts).sort((left, right) => left.relativePath.localeCompare(right.relativePath)),
-    [sourceDrafts]
-  );
-  const dirtyDraftEntries = useMemo(
-    () => openDraftEntries.filter((entry) => entry.content !== entry.baseContent),
-    [openDraftEntries]
-  );
-  const dirtySourcePathSet = useMemo(() => new Set(dirtyDraftEntries.map((entry) => entry.relativePath)), [dirtyDraftEntries]);
+  const workspaceExplorerRootLabel = workspaceExplorerRootLabelFor(desktopWorkspace);
+  const openDraftEntries = useMemo(() => listOpenSourceDraftEntries(sourceDrafts), [sourceDrafts]);
+  const dirtyDraftEntries = useMemo(() => listDirtySourceDraftEntries(openDraftEntries), [openDraftEntries]);
+  const dirtySourcePathSet = useMemo(() => buildDirtySourcePathSet(dirtyDraftEntries), [dirtyDraftEntries]);
   const latestSourceSaveResult = sourceSaveResults[0] ?? null;
   const sourceSaveTotalBytes = useMemo(
     () => sourceSaveResults.reduce((total, report) => total + report.sizeBytes, 0),
     [sourceSaveResults]
   );
-  const currentDraftEntry = sourceFile ? sourceDrafts[sourceFile.relativePath] ?? null : null;
-  const currentSourceDirty = currentDraftEntry
-    ? currentDraftEntry.content !== currentDraftEntry.baseContent
-    : sourceFile
-      ? sourceDraft !== sourceFile.content
-      : false;
+  const currentDraftEntry = useMemo(() => findCurrentSourceDraftEntry(sourceDrafts, sourceFile), [sourceDrafts, sourceFile]);
+  const currentSourceDirty = isCurrentSourceDraftDirty(currentDraftEntry, sourceFile, sourceDraft);
+  const sourceEditorLocked = editorBusy || saveAllBusy;
   const openInboxDecisions = useMemo(
     () => (inboxReport?.decisions || []).filter((decision) => isOpenDecisionStatus(decision.status)),
     [inboxReport]
@@ -8516,10 +8164,12 @@ function DesktopRuntimePanel({
   const activeMonacoEditorOptions = useMemo<editor.IStandaloneEditorConstructionOptions>(
     () => ({
       ...monacoEditorOptions,
+      domReadOnly: sourceEditorLocked,
       minimap: { enabled: sourceMinimapEnabled },
+      readOnly: sourceEditorLocked,
       wordWrap: sourceWordWrap ? "on" : "off"
     }),
-    [sourceMinimapEnabled, sourceWordWrap]
+    [sourceEditorLocked, sourceMinimapEnabled, sourceWordWrap]
   );
   const evidenceItems = useMemo(() => {
     if (!runRecordsOpen) {
@@ -10105,539 +9755,6 @@ function DesktopRuntimePanel({
     }
   };
 
-  const openWorkspaceTextFileInEditor = (nextFile: WorkspaceTextFile) => {
-    const nextEntry: SourceDraftEntry = {
-      relativePath: nextFile.relativePath,
-      baseContent: nextFile.content,
-      content: nextFile.content,
-      sizeBytes: nextFile.sizeBytes,
-      maxSizeBytes: nextFile.maxSizeBytes,
-      loadedAt: new Date().toISOString()
-    };
-    setSourceFile(nextFile);
-    activeSourcePathRef.current = nextFile.relativePath;
-    sourceDraftRef.current = nextFile.content;
-    setSourceDraft(nextFile.content);
-    setSelectedSourcePath(nextFile.relativePath);
-    setSourcePathInput(nextFile.relativePath);
-    setSourceCopyNotice("");
-    setSourceDrafts((current) => ({ ...current, [nextFile.relativePath]: nextEntry }));
-    setSourceWorkbenchView("editor");
-  };
-
-  const loadSourceFileByPath = async (relativePath: string) => {
-    const tauriInvoke = getTauriInvoke();
-    const targetPath = relativePath.trim();
-    if (!tauriInvoke) {
-      setError(runtimeUnavailableErrorMessage);
-      return;
-    }
-    if (!targetPath) {
-      setError(workspaceRelativePathRequiredMessage);
-      return;
-    }
-
-    setEditorBusy(true);
-    setError("");
-    setWriteReport(null);
-    clearSourceDraftSyncTimer();
-    try {
-      const nextFile = await tauriInvoke<WorkspaceTextFile>("read_workspace_text_file", {
-        relativePath: targetPath
-      });
-      openWorkspaceTextFileInEditor(nextFile);
-    } catch (caught) {
-      setError(errorMessage(caught));
-    } finally {
-      setEditorBusy(false);
-    }
-  };
-
-  const loadSourceFile = async () => {
-    await loadSourceFileByPath(sourcePathInput || selectedSourcePath);
-  };
-
-  const selectDraftEntry = (relativePath: string) => {
-    const entry = sourceDrafts[relativePath];
-    if (!entry) {
-      return;
-    }
-    clearSourceDraftSyncTimer();
-    setSelectedSourcePath(entry.relativePath);
-    setSourcePathInput(entry.relativePath);
-    setSourceFile({
-      relativePath: entry.relativePath,
-      content: entry.baseContent,
-      sizeBytes: entry.sizeBytes,
-      maxSizeBytes: entry.maxSizeBytes
-    });
-    activeSourcePathRef.current = entry.relativePath;
-    sourceDraftRef.current = entry.content;
-    setSourceDraft(entry.content);
-    setSourceCopyNotice("");
-    setSourceWorkbenchView("editor");
-    setWriteReport(
-      entry.lastSavedBackupPath
-        ? {
-            relativePath: entry.relativePath,
-            sizeBytes: entry.sizeBytes,
-            backupPath: entry.lastSavedBackupPath,
-            status: entry.status || "saved"
-          }
-        : null
-    );
-  };
-
-  const openDraftOrLoad = async (relativePath: string) => {
-    if (sourceDrafts[relativePath]) {
-      selectDraftEntry(relativePath);
-      return;
-    }
-    await loadSourceFileByPath(relativePath);
-  };
-
-  const renderAgentsMdStarter = () => [
-    "# Repository Instructions",
-    "",
-    "## Project Context",
-    "",
-    `- Workspace: ${workspaceExplorerRootLabel}`,
-    "- Treat this folder as the active project unless the user chooses another workspace.",
-    "- Read the nearest relevant source, docs, and tests before changing code.",
-    "",
-    "## Agent Workflow",
-    "",
-    "- Keep changes scoped to the user request.",
-    "- Prefer existing project patterns and local helper APIs.",
-    "- Do not inspect secrets, private notes, or unrelated local-only folders.",
-    "- Before editing, state the specific files or surfaces you are changing.",
-    "",
-    "## Validation",
-    "",
-    "- Run the narrowest relevant check after code changes.",
-    "- If a check cannot run, explain the reason and the remaining risk.",
-    "- Summarize changed files and validation results before handing off.",
-    "",
-    "## First Task Prompt",
-    "",
-    "Use a concrete request, for example:",
-    "",
-    "```text",
-    "Inspect this project, explain what is ready, then make the smallest safe improvement and run the relevant check.",
-    "```",
-    ""
-  ].join("\n");
-
-  const prepareAgentsInstructions = async () => {
-    const tauriInvoke = getTauriInvoke();
-    if (!tauriInvoke) {
-      setRuntimeState("unavailable");
-      throw new Error(runtimeUnavailableErrorMessage);
-    }
-
-    const targetPath = agentsInstructionPath || "AGENTS.md";
-    if (sourceDrafts[targetPath]) {
-      selectDraftEntry(targetPath);
-      return;
-    }
-
-    setEditorBusy(true);
-    setError("");
-    setWriteReport(null);
-    clearSourceDraftSyncTimer();
-    try {
-      try {
-        const existingFile = await tauriInvoke<WorkspaceTextFile>("read_workspace_text_file", {
-          relativePath: targetPath
-        });
-        openWorkspaceTextFileInEditor(existingFile);
-        return;
-      } catch (caught) {
-        if (agentsInstructionPath) {
-          throw caught;
-        }
-      }
-
-      const content = renderAgentsMdStarter();
-      const report = await tauriInvoke<WorkspaceWriteReport>("write_workspace_text_file", {
-        relativePath: "AGENTS.md",
-        content
-      });
-      const nextFile: WorkspaceTextFile = {
-        relativePath: report.relativePath,
-        content,
-        sizeBytes: report.sizeBytes,
-        maxSizeBytes: Math.max(64_000, report.sizeBytes, content.length)
-      };
-      openWorkspaceTextFileInEditor(nextFile);
-      setWriteReport(report);
-      setSourceSaveResults((current) => [
-        report,
-        ...current.filter((item) => item.relativePath !== report.relativePath)
-      ].slice(0, 8));
-      queueSettingsSync("agents-md", { includeSourceCatalog: true, forceSourceRefresh: true });
-    } catch (caught) {
-      throw caught;
-    } finally {
-      setEditorBusy(false);
-    }
-  };
-
-  const clearSourceDraftSyncTimer = () => {
-    if (sourceDraftSyncTimerRef.current && typeof window !== "undefined") {
-      window.clearTimeout(sourceDraftSyncTimerRef.current);
-    }
-    sourceDraftSyncTimerRef.current = null;
-  };
-
-  const commitSourceDraftState = (nextContent: string, draftFile: WorkspaceTextFile | null, syncVisibleDraft = true) => {
-    if (syncVisibleDraft && (!draftFile || activeSourcePathRef.current === draftFile.relativePath)) {
-      setSourceDraft(nextContent);
-    }
-    if (!draftFile) {
-      return;
-    }
-    setSourceDrafts((current) => {
-      const existing = current[draftFile.relativePath] || {
-        relativePath: draftFile.relativePath,
-        baseContent: draftFile.content,
-        content: draftFile.content,
-        sizeBytes: draftFile.sizeBytes,
-        maxSizeBytes: draftFile.maxSizeBytes,
-        loadedAt: new Date().toISOString()
-      };
-      return {
-        ...current,
-        [draftFile.relativePath]: {
-          ...existing,
-          content: nextContent
-        }
-      };
-    });
-  };
-
-  const updateSourceDraft = (nextContent: string, options: { immediate?: boolean } = {}) => {
-    const draftFile = sourceFile;
-    const immediate = options.immediate ?? true;
-    sourceDraftRef.current = nextContent;
-    setSourceCopyNotice("");
-    if (!draftFile) {
-      return;
-    }
-    if (immediate || typeof window === "undefined") {
-      clearSourceDraftSyncTimer();
-      commitSourceDraftState(nextContent, draftFile);
-      return;
-    }
-    if (sourceDraftSyncTimerRef.current) {
-      return;
-    }
-    sourceDraftSyncTimerRef.current = window.setTimeout(() => {
-      sourceDraftSyncTimerRef.current = null;
-      commitSourceDraftState(sourceDraftRef.current, draftFile);
-    }, SOURCE_DRAFT_UI_SYNC_MS);
-  };
-
-  const currentEditorDraftContent = () => sourceEditorRef.current?.getValue() ?? (sourceDraftRef.current || sourceDraft);
-
-  const effectiveSourceDrafts = () => {
-    if (!sourceFile) {
-      return sourceDrafts;
-    }
-    const latestContent = currentEditorDraftContent();
-    const existing = sourceDrafts[sourceFile.relativePath] || {
-      relativePath: sourceFile.relativePath,
-      baseContent: sourceFile.content,
-      content: sourceFile.content,
-      sizeBytes: sourceFile.sizeBytes,
-      maxSizeBytes: sourceFile.maxSizeBytes,
-      loadedAt: new Date().toISOString()
-    };
-    return {
-      ...sourceDrafts,
-      [sourceFile.relativePath]: {
-        ...existing,
-        content: latestContent
-      }
-    };
-  };
-
-  const handleSourceEditorMount = (editorInstance: editor.IStandaloneCodeEditor) => {
-    sourceEditorRef.current = editorInstance;
-  };
-
-  const runSourceEditorCommand = async (command: "undo" | "redo" | "find" | "replace" | "format" | "foldAll" | "unfoldAll") => {
-    const editorInstance = sourceEditorRef.current;
-    if (!sourceFile || !editorInstance) {
-      setSourceCopyNotice("Open a source file before running editor commands");
-      return;
-    }
-
-    if (command === "undo" || command === "redo") {
-      editorInstance.trigger("platform-source-toolbar", command, null);
-      updateSourceDraft(editorInstance.getValue(), { immediate: true });
-      editorInstance.focus();
-      return;
-    }
-
-    const actionId =
-      command === "find"
-        ? "actions.find"
-        : command === "replace"
-          ? "editor.action.startFindReplaceAction"
-          : command === "foldAll"
-            ? "editor.foldAll"
-            : command === "unfoldAll"
-              ? "editor.unfoldAll"
-              : "editor.action.formatDocument";
-    const action = editorInstance.getAction(actionId);
-    if (!action) {
-      setSourceCopyNotice(`${command} is unavailable for this file`);
-      editorInstance.focus();
-      return;
-    }
-    await action.run();
-    if (command === "format") {
-      updateSourceDraft(editorInstance.getValue(), { immediate: true });
-    }
-    editorInstance.focus();
-  };
-
-  const insertSourceTemplate = () => {
-    if (!sourceFile) {
-      return;
-    }
-
-    const templateBody = renderSourceTemplate(selectedSourceTemplate, sourceFile.relativePath);
-    const editorInstance = sourceEditorRef.current;
-    const selection = editorInstance?.getSelection() || null;
-    if (editorInstance && selection) {
-      editorInstance.executeEdits("platform-source-template", [
-        {
-          range: selection,
-          text: templateBody,
-          forceMoveMarkers: true
-        }
-      ]);
-      updateSourceDraft(editorInstance.getValue(), { immediate: true });
-      editorInstance.focus();
-      setSourceCopyNotice(`${selectedSourceTemplate.label} inserted`);
-      return;
-    }
-
-    updateSourceDraft(appendSourceTemplate(currentEditorDraftContent(), templateBody), { immediate: true });
-    setSourceCopyNotice(`${selectedSourceTemplate.label} inserted`);
-  };
-
-  const copySourcePatchContext = async () => {
-    if (!sourceFile) {
-      return;
-    }
-
-    const diffLine = sourceDiff
-      ? `+${sourceDiff.addedLines} / -${sourceDiff.removedLines} / ${sourceDiff.changedLines} changed`
-      : "not computed";
-    const context = [
-      "Platform Source Patch Context",
-      `Path: ${sourceFile.relativePath}`,
-      `Profile: ${sourceEditorProfile.label}`,
-      `Template: ${selectedSourceTemplate.label}`,
-      `Dirty: ${currentSourceDirty ? "yes" : "no"}`,
-      `Diff: ${diffLine}`,
-      "Gate: workspace-scoped backup on save",
-      "",
-      "--- draft ---",
-      currentEditorDraftContent()
-    ].join("\n");
-    const copied = await writeClipboardText(context);
-    setSourceCopyNotice(copied ? `${sourceFile.relativePath} patch context copied` : "Clipboard unavailable");
-  };
-
-  const saveSourceFile = async () => {
-    const tauriInvoke = getTauriInvoke();
-    if (!tauriInvoke || !sourceFile) {
-      return;
-    }
-
-    setEditorBusy(true);
-    setError("");
-    try {
-      const latestContent = currentEditorDraftContent();
-      clearSourceDraftSyncTimer();
-      const report = await tauriInvoke<WorkspaceWriteReport>("write_workspace_text_file", {
-        relativePath: sourceFile.relativePath,
-        content: latestContent
-      });
-      setWriteReport(report);
-      setSourceFile({ ...sourceFile, content: latestContent, sizeBytes: report.sizeBytes });
-      sourceDraftRef.current = latestContent;
-      setSourceDraft(latestContent);
-      setSourceDrafts((current) => {
-        const existing = current[sourceFile.relativePath] || {
-          relativePath: sourceFile.relativePath,
-          baseContent: sourceFile.content,
-          content: latestContent,
-          sizeBytes: report.sizeBytes,
-          maxSizeBytes: sourceFile.maxSizeBytes,
-          loadedAt: new Date().toISOString()
-        };
-        return {
-          ...current,
-          [sourceFile.relativePath]: {
-            ...existing,
-            baseContent: latestContent,
-            content: latestContent,
-            sizeBytes: report.sizeBytes,
-            lastSavedBackupPath: report.backupPath,
-            status: report.status
-          }
-        };
-      });
-      setSourceSaveResults((current) => [
-        report,
-        ...current.filter((item) => item.relativePath !== report.relativePath)
-      ].slice(0, 8));
-      setSourceCopyNotice("");
-      setSourceWorkbenchView("results");
-      queueSettingsSync("source-save", { includeSourceCatalog: true, forceSourceRefresh: true });
-    } catch (caught) {
-      setError(errorMessage(caught));
-    } finally {
-      setEditorBusy(false);
-    }
-  };
-
-  const saveAllSourceDrafts = async () => {
-    const tauriInvoke = getTauriInvoke();
-    const draftSnapshot = effectiveSourceDrafts();
-    const dirtyEntries = Object.values(draftSnapshot)
-      .filter((entry) => entry.content !== entry.baseContent)
-      .sort((left, right) => left.relativePath.localeCompare(right.relativePath));
-    if (!tauriInvoke || dirtyEntries.length === 0) {
-      return;
-    }
-
-    setSaveAllBusy(true);
-    setError("");
-    try {
-      clearSourceDraftSyncTimer();
-      const reportsToAdd: WorkspaceWriteReport[] = [];
-      const nextDrafts: Record<string, SourceDraftEntry> = { ...draftSnapshot };
-      for (const entry of dirtyEntries) {
-        const report = await tauriInvoke<WorkspaceWriteReport>("write_workspace_text_file", {
-          relativePath: entry.relativePath,
-          content: entry.content
-        });
-        reportsToAdd.push(report);
-        nextDrafts[entry.relativePath] = {
-          ...entry,
-          baseContent: entry.content,
-          content: entry.content,
-          sizeBytes: report.sizeBytes,
-          lastSavedBackupPath: report.backupPath,
-          status: report.status
-        };
-      }
-      setSourceDrafts(nextDrafts);
-      setSourceSaveResults((current) => [
-        ...reportsToAdd,
-        ...current.filter((item) => !reportsToAdd.some((report) => report.relativePath === item.relativePath))
-      ].slice(0, 8));
-      if (sourceFile && nextDrafts[sourceFile.relativePath]) {
-        const currentEntry = nextDrafts[sourceFile.relativePath];
-        setSourceFile({
-          relativePath: currentEntry.relativePath,
-          content: currentEntry.baseContent,
-          sizeBytes: currentEntry.sizeBytes,
-          maxSizeBytes: currentEntry.maxSizeBytes
-        });
-        sourceDraftRef.current = currentEntry.content;
-        setSourceDraft(currentEntry.content);
-        setSourceCopyNotice("");
-      }
-      if (reportsToAdd[0]) {
-        setWriteReport(reportsToAdd[0]);
-        setSourceWorkbenchView("results");
-      }
-      queueSettingsSync("source-save", { includeSourceCatalog: true, forceSourceRefresh: true });
-    } catch (caught) {
-      setError(errorMessage(caught));
-    } finally {
-      setSaveAllBusy(false);
-    }
-  };
-
-  const revertCurrentDraft = () => {
-    if (!sourceFile || !currentDraftEntry) {
-      return;
-    }
-    clearSourceDraftSyncTimer();
-    sourceDraftRef.current = currentDraftEntry.baseContent;
-    setSourceDraft(currentDraftEntry.baseContent);
-    setSourceDrafts((current) => ({
-      ...current,
-      [sourceFile.relativePath]: {
-        ...currentDraftEntry,
-        content: currentDraftEntry.baseContent
-      }
-    }));
-    setWriteReport(null);
-  };
-
-  const closeDraftByPath = (relativePath: string) => {
-    const currentPath = relativePath.trim();
-    if (!currentPath) {
-      return;
-    }
-    clearSourceDraftSyncTimer();
-    const closingActiveDraft = sourceFile?.relativePath === currentPath;
-    const nextEntry = openDraftEntries.find((entry) => entry.relativePath !== currentPath) || null;
-    setSourceDrafts((current) => {
-      const next = { ...current };
-      delete next[currentPath];
-      return next;
-    });
-    if (!closingActiveDraft) {
-      return;
-    }
-    if (nextEntry) {
-      setSelectedSourcePath(nextEntry.relativePath);
-      setSourcePathInput(nextEntry.relativePath);
-      setSourceFile({
-        relativePath: nextEntry.relativePath,
-        content: nextEntry.baseContent,
-        sizeBytes: nextEntry.sizeBytes,
-        maxSizeBytes: nextEntry.maxSizeBytes
-      });
-      activeSourcePathRef.current = nextEntry.relativePath;
-      sourceDraftRef.current = nextEntry.content;
-      setSourceDraft(nextEntry.content);
-    } else {
-      setSourceFile(null);
-      activeSourcePathRef.current = "";
-      sourceDraftRef.current = "";
-      setSourceDraft("");
-      setSourceCopyNotice("");
-      setWriteReport(null);
-      setSourceWorkbenchView("files");
-    }
-  };
-
-  const closeCurrentDraft = () => {
-    if (!sourceFile) {
-      return;
-    }
-    closeDraftByPath(sourceFile.relativePath);
-  };
-
-  const copyCurrentSourceDraft = async () => {
-    if (!sourceFile) {
-      return;
-    }
-    const copied = await writeClipboardText(currentEditorDraftContent());
-    setSourceCopyNotice(copied ? `${sourceFile.relativePath} copied` : "Clipboard unavailable");
-  };
-
   useEffect(() => {
     setSourceTemplateId(sourceEditorProfile.templateId);
   }, [sourceEditorProfile.templateId, sourceFile?.relativePath]);
@@ -11127,6 +10244,61 @@ function DesktopRuntimePanel({
     refreshDesktopResourceSnapshot,
     prepareWorkspaceOsResources,
     warmWorkspaceOsResources
+  });
+  const {
+    loadSourceFileByPath,
+    loadSourceFile,
+    selectDraftEntry,
+    openDraftOrLoad,
+    prepareAgentsInstructions,
+    runSourceEditorCommand,
+    insertSourceTemplate,
+    copySourcePatchContext,
+    saveSourceFile,
+    saveAllSourceDrafts,
+    revertCurrentDraft,
+    closeDraftByPath,
+    closeCurrentDraft,
+    copyCurrentSourceDraft
+  } = useSourceWorkbenchController({
+    tauriInvoke: invoke,
+    uiLanguage,
+    runtimeUnavailableErrorMessage,
+    workspaceRelativePathRequiredMessage,
+    sourceFile,
+    sourceDrafts,
+    sourcePathInput,
+    selectedSourcePath,
+    sourceEditorLocked,
+    openDraftEntries,
+    currentDraftEntry,
+    agentsInstructionPath,
+    workspaceExplorerRootLabel,
+    selectedSourceTemplate,
+    sourceEditorProfile,
+    currentSourceDirty,
+    sourceDiff,
+    sourceEditorRef,
+    beginSourceLoadRequest,
+    cancelPendingSourceLoad,
+    applySourceEditorVisibleState,
+    clearSourceDraftSyncTimer,
+    updateSourceDraft,
+    currentEditorDraftContent,
+    effectiveSourceDrafts,
+    getActiveSourcePath,
+    setVisibleSourceDraftContent,
+    setRuntimeUnavailable: () => setRuntimeState("unavailable"),
+    setEditorBusy,
+    setSaveAllBusy,
+    setError,
+    setSourceFile,
+    setSourceDrafts,
+    setSourceCopyNotice,
+    setSourceSaveResults,
+    setSourceWorkbenchView,
+    setWriteReport,
+    queueSettingsSync
   });
   const runDesktopAction = async (id: DesktopActionFeedbackId, action: () => void | Promise<void>, doneResult?: string) => {
     setDesktopActionStatus(id, "running");
@@ -11792,523 +10964,63 @@ function DesktopRuntimePanel({
 
         <div className="filesystem-editor-pane">
 
-      <section className="native-workspace-state-strip" aria-label={copy.workspaceState}>
-        <article>
-          <span>{copy.activeWorkspace}</span>
-          <code>{desktopWorkspace?.activeWorkspacePath || desktopWorkspace?.fallbackWorkspacePath || "workspace pending"}</code>
-        </article>
-        <article>
-          <span>{copy.folderSource}</span>
-          <strong>{desktopWorkspace?.activeWorkspaceSource || (runtimeSourceFiles.length ? copy.runtimeSource : copy.fallbackSource)}</strong>
-        </article>
-        <article>
-          <span>{copy.fileList}</span>
-          <strong>
-            {filteredEditableSourceFiles.length.toLocaleString("ko-KR")} / {sourceCatalogReport?.totalCount ?? sourceCatalogFiles.length}
-          </strong>
-        </article>
-        <article>
-          <span>OS 캐시</span>
-          <strong>
-            {workspaceResourceReport
-              ? `${workspaceResourceReport.cachedTextFiles.toLocaleString("ko-KR")} / ${formatBytes(workspaceResourceReport.cachedBytes)} / ${workspaceResourceReport.parallelWorkers} workers`
-              : workspaceWarmupReport
-                ? `${workspaceWarmupReport.status} / ${workspaceWarmupReport.cachedTextFiles.toLocaleString("ko-KR")} / ${formatBytes(workspaceWarmupReport.cachedBytes)} / ${workspaceWarmupReport.parallelWorkers || "-"} workers`
-              : workspaceResourceBusy
-                ? copy.loading
-                : "not prepared"}
-          </strong>
-        </article>
-        <article>
-          <span>메모리 예산</span>
-          <strong>
-            {formatBytes(workspaceResourceReport?.memoryBudgetBytes ?? workspaceWarmupReport?.memoryBudgetBytes ?? 128_000_000)}
-            {workspaceResourceReport?.availableMemoryBytes ? ` / ${formatBytes(workspaceResourceReport.availableMemoryBytes)} free` : ""}
-          </strong>
-        </article>
-        <article>
-          <span>CPU 병렬</span>
-          <strong>
-            {workspaceResourceReport
-              ? `${workspaceResourceReport.parallelWorkers}/${workspaceResourceReport.cpuThreads} threads`
-              : workspaceWarmupReport?.cpuThreads
-                ? `${workspaceWarmupReport.parallelWorkers}/${workspaceWarmupReport.cpuThreads} threads`
-                : "runtime profile pending"}
-          </strong>
-        </article>
-        <article>
-          <span>앱 RAM/CPU</span>
-          <strong>
-            {desktopResourceSnapshot
-              ? `${formatBytes(desktopResourceSnapshot.processMemoryBytes)} / ${desktopResourceSnapshot.processCpuUsage.toFixed(1)}% / pid ${desktopResourceSnapshot.appPid || "-"}`
-              : invoke
-                ? "native telemetry pending"
-                : "browser preview"}
-          </strong>
-        </article>
-        <article>
-          <span>{copy.openedDrafts}</span>
-          <strong>
-            {dirtyDraftEntries.length.toLocaleString("ko-KR")} {copy.dirty} / {openDraftEntries.length.toLocaleString("ko-KR")} open
-          </strong>
-        </article>
-      </section>
-
-      <section className="panel wide desktop-source-panel native-source-workbench">
-        <div className="panel-heading">
-          <div>
-            <p className="eyebrow">{copy.runtimeSource}</p>
-            <h2>{copy.title}</h2>
-            <p>{copy.description}</p>
-          </div>
-          <div className="source-panel-stats">
-            <span>{openDraftEntries.length} open</span>
-            <strong>{dirtyDraftEntries.length} {copy.dirty}</strong>
-            <span>{sourceCatalogLabel}</span>
-            {workspaceResourceReport && <span>{formatBytes(workspaceResourceReport.cachedBytes)} cached</span>}
-            {workspaceResourceReport && <span>{workspaceResourceReport.preloadStrategy}</span>}
-            {workspaceResourceReport && <span>{workspaceResourceReport.scanDurationMs + workspaceResourceReport.preloadDurationMs} ms native</span>}
-            {workspaceWarmupReport?.status === "warming" && <span>native warming</span>}
-          </div>
-        </div>
-        <div className="source-editor-controls native-source-controls">
-          <label className="source-path-field">
-            <span>{copy.openSelected}</span>
-            <input
-              value={sourcePathInput}
-              onChange={(event) => {
-                setSourcePathInput(event.target.value);
-                setSelectedSourcePath(event.target.value);
-              }}
-              placeholder="workspace-relative/path.ts"
-            />
-          </label>
-          <div className="source-file-picker-field">
-            <span>{copy.fileList}</span>
-            <DropdownMenu.Root>
-              <DropdownMenu.Trigger asChild>
-                <Button
-                  variant="secondary"
-                  className="source-file-picker-trigger"
-                  disabled={filteredEditableSourceFiles.length === 0}
-                  aria-label={copy.fileList}
-                  title={selectedSourceFileOption?.path || sourcePathInput || copy.noFiles}
-                >
-                  <FileSearch size={15} aria-hidden="true" />
-                  <span className="source-file-picker-value">{selectedSourceFileOption?.path || sourcePathInput || copy.noFiles}</span>
-                  <ChevronDown size={15} aria-hidden="true" className="source-file-picker-caret" />
-                </Button>
-              </DropdownMenu.Trigger>
-              <DropdownMenu.Portal>
-                <DropdownMenu.Content className="source-file-picker-menu" align="start" sideOffset={6} collisionPadding={16}>
-                  <DropdownMenu.Label className="source-file-picker-label">
-                    <span>{copy.fileList}</span>
-                    <strong>
-                      {filteredEditableSourceFiles.length.toLocaleString("ko-KR")} / {sourceCatalogReport?.totalCount ?? sourceCatalogFiles.length}
-                    </strong>
-                  </DropdownMenu.Label>
-                  <DropdownMenu.Separator className="source-file-picker-separator" />
-                  {filteredEditableSourceFiles.length ? (
-                    filteredEditableSourceFiles.map((file) => (
-                      <DropdownMenu.Item
-                        key={file.id}
-                        className="source-file-picker-item"
-                        data-selected={file.path === selectedSourcePath ? "true" : "false"}
-                        onSelect={() => {
-                          setSelectedSourcePath(file.path);
-                          setSourcePathInput(file.path);
-                        }}
-                      >
-                        <FileSearch size={14} aria-hidden="true" />
-                        <span>
-                          <strong>{file.path}</strong>
-                          <small>
-                            {file.project} / {file.language || file.extension} / {formatBytes(file.sizeBytes)}
-                          </small>
-                        </span>
-                        {file.path === selectedSourcePath && <CheckCircle2 size={14} aria-hidden="true" />}
-                      </DropdownMenu.Item>
-                    ))
-                  ) : (
-                    <DropdownMenu.Item className="source-file-picker-item empty" disabled>
-                      <Search size={14} aria-hidden="true" />
-                      <span>
-                        <strong>{copy.noFiles}</strong>
-                        <small>{sourceFilter || sourceCatalogLabel}</small>
-                      </span>
-                    </DropdownMenu.Item>
-                  )}
-                </DropdownMenu.Content>
-              </DropdownMenu.Portal>
-            </DropdownMenu.Root>
-          </div>
-          <ActionGroup className="source-editor-action-group" align="stretch" density="compact">
-            <Button variant="primary" className="source-action-button primary" onClick={loadSourceFile} loading={editorBusy} disabled={!invoke || editorBusy || !sourcePathInput.trim()}>
-              <FileSearch size={15} aria-hidden="true" />
-              <span>{editorBusy ? copy.loading : copy.openSelected}</span>
-            </Button>
-            <Button variant="secondary" className="source-action-button save" onClick={saveSourceFile} loading={editorBusy} disabled={!invoke || editorBusy || !sourceFile || !currentSourceDirty}>
-              <CheckCircle2 size={15} aria-hidden="true" />
-              <span>{editorBusy ? copy.saving : copy.saveCurrent}</span>
-            </Button>
-            <Button variant="secondary" className="source-action-button save-all" onClick={saveAllSourceDrafts} loading={saveAllBusy} disabled={!invoke || editorBusy || saveAllBusy || dirtyDraftEntries.length === 0}>
-              <CheckCircle2 size={15} aria-hidden="true" />
-              <span>{saveAllBusy ? copy.saving : copy.saveAll}</span>
-            </Button>
-            <Button variant="secondary" className="source-action-button secondary" onClick={copyCurrentSourceDraft} disabled={!sourceFile}>
-              <Copy size={15} aria-hidden="true" />
-              <span>{copy.copyFile}</span>
-            </Button>
-          </ActionGroup>
-        </div>
-
-        <ActionGroup className="source-command-toolbar" asToolbar aria-label={copy.editorSettings} density="compact">
-          <Button variant="ghost" size="sm" className="source-tool-button" onClick={() => runSourceEditorCommand("undo")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
-            <History size={15} aria-hidden="true" />
-            <span>Undo</span>
-          </Button>
-          <Button variant="ghost" size="sm" className="source-tool-button" onClick={() => runSourceEditorCommand("redo")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
-            <History size={15} aria-hidden="true" />
-            <span>Redo</span>
-          </Button>
-          <Button variant="ghost" size="sm" className="source-tool-button" onClick={() => runSourceEditorCommand("find")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
-            <Search size={15} aria-hidden="true" />
-            <span>Find</span>
-          </Button>
-          <Button variant="ghost" size="sm" className="source-tool-button" onClick={() => runSourceEditorCommand("replace")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
-            <Search size={15} aria-hidden="true" />
-            <span>Replace</span>
-          </Button>
-          <Button variant="ghost" size="sm" className="source-tool-button" onClick={() => runSourceEditorCommand("format")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
-            <Code2 size={15} aria-hidden="true" />
-            <span>Format</span>
-          </Button>
-          <Button variant="ghost" size="sm" className="source-tool-button" onClick={() => runSourceEditorCommand("foldAll")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
-            <Code2 size={15} aria-hidden="true" />
-            <span>{copy.foldAll}</span>
-          </Button>
-          <Button variant="ghost" size="sm" className="source-tool-button" onClick={() => runSourceEditorCommand("unfoldAll")} disabled={!sourceFile || sourceEditorViewMode === "diff"}>
-            <Code2 size={15} aria-hidden="true" />
-            <span>{copy.unfoldAll}</span>
-          </Button>
-          <Button variant="ghost" size="sm" className="source-tool-button mode" onClick={() => setSourceEditorViewMode((current) => (current === "edit" ? "diff" : "edit"))} disabled={!sourceFile}>
-            <FileSearch size={15} aria-hidden="true" />
-            <span>{sourceEditorViewMode === "edit" ? copy.diffMode : copy.editMode}</span>
-          </Button>
-          <Button variant="ghost" size="sm" onClick={() => setSourceWordWrap((current) => !current)} className={`source-tool-button toggle ${sourceWordWrap ? "active" : ""}`} aria-pressed={sourceWordWrap}>
-            <Code2 size={15} aria-hidden="true" />
-            <span>{copy.wordWrap}</span>
-          </Button>
-          <Button variant="ghost" size="sm" onClick={() => setSourceMinimapEnabled((current) => !current)} className={`source-tool-button toggle ${sourceMinimapEnabled ? "active" : ""}`} aria-pressed={sourceMinimapEnabled}>
-            <LayoutDashboard size={15} aria-hidden="true" />
-            <span>{copy.minimap}</span>
-          </Button>
-        </ActionGroup>
-
-        <div className="source-workbench-switcher" role="tablist" aria-label={uiLanguage === "ko" ? "소스 작업 보기" : "Source workbench views"}>
-          {!isFileWorkspaceSurface && (
-            <Button
-              variant="ghost"
-              size="sm"
-              role="tab"
-              aria-selected={sourceWorkbenchView === "files"}
-              className={sourceWorkbenchView === "files" ? "active" : ""}
-              onClick={() => setSourceWorkbenchView("files")}
-            >
-              <FolderOpen size={15} aria-hidden="true" />
-              <span>{uiLanguage === "ko" ? "파일" : "Files"}</span>
-              <small>{filteredEditableSourceFiles.length.toLocaleString("ko-KR")}</small>
-            </Button>
-          )}
-          <Button
-            variant="ghost"
-            size="sm"
-            role="tab"
-            aria-selected={sourceWorkbenchView === "editor"}
-            className={sourceWorkbenchView === "editor" ? "active" : ""}
-            onClick={() => setSourceWorkbenchView("editor")}
-          >
-            <Code2 size={15} aria-hidden="true" />
-            <span>{uiLanguage === "ko" ? "편집" : "Editor"}</span>
-            <small>{openDraftEntries.length.toLocaleString("ko-KR")}</small>
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            role="tab"
-            aria-selected={sourceWorkbenchView === "results"}
-            className={sourceWorkbenchView === "results" ? "active" : ""}
-            onClick={() => setSourceWorkbenchView("results")}
-          >
-            <CheckCircle2 size={15} aria-hidden="true" />
-            <span>{uiLanguage === "ko" ? "저장 결과" : "Save results"}</span>
-            <small>{sourceSaveResults.length.toLocaleString("ko-KR")}</small>
-          </Button>
-        </div>
-
-        <div className={`source-review-grid native-source-grid source-workbench-view-${sourceWorkbenchView}`}>
-          {!isFileWorkspaceSurface && (sourceWorkbenchView === "files" || sourceWorkbenchView === "editor") && (
-          <aside className="source-file-browser">
-            <header>
-              <div>
-                <span>{runtimeSourceFiles.length ? copy.runtimeSource : copy.fallbackSource}</span>
-                <strong>{filteredEditableSourceFiles.length.toLocaleString("ko-KR")} shown</strong>
-              </div>
-              <Code2 size={16} aria-hidden="true" />
-            </header>
-            {sourceCatalogReport && (
-              <p className="source-catalog-note">
-                {sourceCatalogReport.returnedCount}/{sourceCatalogReport.totalCount} files
-                {sourceCatalogReport.truncated ? " / truncated" : ""}
-              </p>
-            )}
-            <input
-              value={sourceFilter}
-              onChange={(event) => setSourceFilter(event.target.value)}
-              placeholder={copy.fileSearch}
-            />
-            <div className="source-file-browser-list">
-              {filteredEditableSourceFiles.length ? (
-                filteredEditableSourceFiles.map((file) => (
-                  <button
-                    key={file.id}
-                    type="button"
-                    className={sourceFile?.relativePath === file.path ? "active" : ""}
-                    onClick={() => openDraftOrLoad(file.path)}
-                    disabled={!invoke || editorBusy}
-                  >
-                    <strong>{file.path}</strong>
-                    <span>
-                      {file.project} / {file.language || file.extension} / {formatBytes(file.sizeBytes)}
-                    </span>
-                  </button>
-                ))
-              ) : (
-                <p className="empty-state">{copy.noFiles}</p>
-              )}
-            </div>
-          </aside>
-          )}
-
-          {sourceWorkbenchView === "editor" && (
-          <div className="source-edit-workbench">
-            {openDraftEntries.length > 0 && (
-              <div className="source-editor-tabs" role="tablist" aria-label={copy.openedDrafts}>
-                {openDraftEntries.map((entry) => {
-                  const dirty = entry.content !== entry.baseContent;
-                  const activeDraft = sourceFile?.relativePath === entry.relativePath;
-                  return (
-                    <div
-                      key={entry.relativePath}
-                      className={`source-editor-tab ${activeDraft ? "active" : ""} ${dirty ? "dirty" : "clean"}`}
-                      role="presentation"
-                    >
-                      <button
-                        type="button"
-                        className="source-editor-tab-main"
-                        role="tab"
-                        aria-selected={activeDraft}
-                        onClick={() => selectDraftEntry(entry.relativePath)}
-                      >
-                        <span>{dirty ? copy.dirty : copy.clean}</span>
-                        <strong>{entry.relativePath}</strong>
-                      </button>
-                      <button
-                        type="button"
-                        className="source-editor-tab-close"
-                        onClick={() => closeDraftByPath(entry.relativePath)}
-                        aria-label={`Close ${entry.relativePath}`}
-                      >
-                        <X size={14} aria-hidden="true" />
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-
-            {sourceFile ? (
-              <div className="source-editor-frame" tabIndex={0} aria-label={uiLanguage === "ko" ? "소스 편집 스크롤 영역" : "Source editor scroll region"}>
-                <div className="source-editor-meta">
-                  <div>
-                    <span>{sourceFile.relativePath}</span>
-                    <strong>
-                      {formatBytes(sourceDraft.length)} / max {formatBytes(sourceFile.maxSizeBytes)}
-                    </strong>
-                  </div>
-                  <ActionGroup className="source-editor-primary-actions" asToolbar align="end" density="compact" aria-label={copy.editorSettings}>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      className="save"
-                      onClick={saveSourceFile}
-                      disabled={!invoke || editorBusy || !sourceFile || !currentSourceDirty}
-                    >
-                      <CheckCircle2 size={14} aria-hidden="true" />
-                      <span>{editorBusy ? copy.saving : copy.saveCurrent}</span>
-                    </Button>
-                    <Button variant="secondary" size="sm" onClick={() => setSourceEditorViewMode((current) => (current === "edit" ? "diff" : "edit"))}>
-                      <FileSearch size={14} aria-hidden="true" />
-                      <span>{sourceEditorViewMode === "edit" ? copy.diffMode : copy.editMode}</span>
-                    </Button>
-                    <Button variant="secondary" size="sm" onClick={copyCurrentSourceDraft}>
-                      <Copy size={14} aria-hidden="true" />
-                      <span>{copy.copyFile}</span>
-                    </Button>
-                  </ActionGroup>
-                </div>
-                {sourceDiff && (
-                  <div className={`source-diff-review ${sourceDiff.dirty ? "dirty" : "clean"}`}>
-                    <header>
-                      <div>
-                        <span>{sourceDiff.dirty ? copy.dirty : copy.clean}</span>
-                        <strong>
-                          +{sourceDiff.addedLines} / -{sourceDiff.removedLines} / {sourceDiff.changedLines} changed
-                        </strong>
-                      </div>
-                      <small>backup save gate</small>
-                    </header>
-                    {sourceDiff.preview.length > 0 && (
-                      <div className="source-diff-preview">
-                        {sourceDiff.preview.map((item) => (
-                          <article key={item.line}>
-                            <span>line {item.line}</span>
-                            <code>- {item.before || "<empty>"}</code>
-                            <code>+ {item.after || "<empty>"}</code>
-                          </article>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-                {sourceEditorViewMode === "diff" ? (
-                  <div className="monaco-editor-shell diff-shell">
-                    <MonacoDiffEditor
-                      beforeMount={definePlatformMonacoTheme}
-                      height="100%"
-                      language={monacoLanguageFromPath(sourceFile.relativePath)}
-                      loading={<div className="monaco-editor-loading">Loading Monaco diff</div>}
-                      modified={sourceDraft}
-                      options={monacoDiffEditorOptions}
-                      original={sourceFile.content}
-                      theme={platformMonacoTheme}
-                    />
-                  </div>
-                ) : (
-                  <div className="monaco-editor-shell">
-                    <MonacoEditor
-                      beforeMount={definePlatformMonacoTheme}
-                      height="100%"
-                      language={monacoLanguageFromPath(sourceFile.relativePath)}
-                      loading={<div className="monaco-editor-loading">Loading Monaco editor</div>}
-                      onMount={handleSourceEditorMount}
-                      onChange={(value) => updateSourceDraft(value ?? "", { immediate: false })}
-                      options={activeMonacoEditorOptions}
-                      path={`file:///${sourceFile.relativePath.replace(/^\/+/, "")}`}
-                      theme={platformMonacoTheme}
-                      value={sourceDraft}
-                    />
-                  </div>
-                )}
-                {sourceCopyNotice && <p className="source-copy-notice">{sourceCopyNotice}</p>}
-                {writeReport && (
-                  <div className="source-inline-save-receipt" role="status">
-                    <span className="source-result-status-mark">
-                      <CheckCircle2 size={16} aria-hidden="true" />
-                    </span>
-                    <div>
-                      <span>{uiLanguage === "ko" ? "저장 완료" : "Saved"}</span>
-                      <strong>{writeReport.relativePath}</strong>
-                      <code>{writeReport.backupPath}</code>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <p className="empty-state">{copy.noFileOpen}</p>
-            )}
-          </div>
-          )}
-
-          {sourceWorkbenchView === "results" && (
-            <div className="source-save-results source-results-panel">
-              <header className="source-results-hero">
-                <span className="source-results-hero-icon">
-                  <ClipboardCheck size={18} aria-hidden="true" />
-                </span>
-                <div>
-                  <span>{uiLanguage === "ko" ? "수정 결과" : "Edit results"}</span>
-                  <strong>
-                    {sourceSaveResults.length > 0
-                      ? uiLanguage === "ko"
-                        ? `${sourceSaveResults.length}개 저장됨`
-                        : `${sourceSaveResults.length} saved`
-                      : uiLanguage === "ko"
-                        ? "저장 기록 없음"
-                        : "No saved changes"}
-                  </strong>
-                  <small>
-                    {latestSourceSaveResult
-                      ? latestSourceSaveResult.relativePath
-                      : uiLanguage === "ko"
-                        ? "최근 저장 파일 없음"
-                        : "No recent saved file"}
-                  </small>
-                </div>
-              </header>
-              <div className="source-results-summary">
-                <article>
-                  <span>{uiLanguage === "ko" ? "최근 파일" : "Latest file"}</span>
-                  <strong>{latestSourceSaveResult?.relativePath || "-"}</strong>
-                </article>
-                <article>
-                  <span>{uiLanguage === "ko" ? "저장 용량" : "Saved size"}</span>
-                  <strong>{formatBytes(sourceSaveTotalBytes)}</strong>
-                </article>
-                <article>
-                  <span>{uiLanguage === "ko" ? "백업 상태" : "Backup state"}</span>
-                  <strong>{sourceSaveResults.length > 0 ? (uiLanguage === "ko" ? "생성됨" : "Created") : "-"}</strong>
-                </article>
-              </div>
-              <div className="source-results-list">
-                {sourceSaveResults.length > 0 ? (
-                  sourceSaveResults.map((report) => (
-                    <article className="source-save-result-card" key={`${report.relativePath}-${report.backupPath}`}>
-                      <span className="source-result-status-mark">
-                        <CheckCircle2 size={16} aria-hidden="true" />
-                      </span>
-                      <div className="source-result-content">
-                        <div className="source-result-titleline">
-                          <span className="source-result-lozenge">{report.status}</span>
-                          <strong>{report.relativePath}</strong>
-                        </div>
-                        <div className="source-result-meta">
-                          <span>
-                            <Database size={13} aria-hidden="true" />
-                            {formatBytes(report.sizeBytes)}
-                          </span>
-                          <span>
-                            <ShieldCheck size={13} aria-hidden="true" />
-                            {uiLanguage === "ko" ? "백업 생성" : "backup created"}
-                          </span>
-                        </div>
-                        <code className="source-result-backup-path">{report.backupPath}</code>
-                      </div>
-                    </article>
-                  ))
-                ) : (
-                  <div className="source-results-empty">
-                    <span className="source-result-status-mark muted">
-                      <ClipboardCheck size={16} aria-hidden="true" />
-                    </span>
-                    <strong>{uiLanguage === "ko" ? "아직 저장 결과가 없습니다." : "No save results yet."}</strong>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
+      <SourceWorkbenchPanel
+        activeMonacoEditorOptions={activeMonacoEditorOptions}
+        activeWorkspacePath={desktopWorkspace?.activeWorkspacePath || desktopWorkspace?.fallbackWorkspacePath || "workspace pending"}
+        appResourceSnapshot={desktopResourceSnapshot}
+        copy={copy}
+        currentSourceDirty={currentSourceDirty}
+        editorBusy={editorBusy}
+        filteredEditableSourceFiles={filteredEditableSourceFiles}
+        formatBytes={formatBytes}
+        invokeAvailable={Boolean(invoke)}
+        isFileWorkspaceSurface={isFileWorkspaceSurface}
+        latestSourceSaveResult={latestSourceSaveResult}
+        openDraftEntries={openDraftEntries}
+        runtimeSourceFileCount={runtimeSourceFiles.length}
+        saveAllBusy={saveAllBusy}
+        selectedSourceFileOption={selectedSourceFileOption}
+        selectedSourcePath={selectedSourcePath}
+        setSelectedSourcePath={setSelectedSourcePath}
+        setSourceEditorViewMode={setSourceEditorViewMode}
+        setSourceMinimapEnabled={setSourceMinimapEnabled}
+        setSourcePathInput={setSourcePathInput}
+        setSourceWorkbenchView={setSourceWorkbenchView}
+        setSourceWordWrap={setSourceWordWrap}
+        sourceCatalogFilesCount={sourceCatalogFiles.length}
+        sourceCatalogLabel={sourceCatalogLabel}
+        sourceCatalogReport={sourceCatalogReport}
+        sourceCopyNotice={sourceCopyNotice}
+        sourceDiff={sourceDiff}
+        sourceDraft={sourceDraft}
+        sourceEditorLocked={sourceEditorLocked}
+        sourceEditorViewMode={sourceEditorViewMode}
+        sourceFile={sourceFile}
+        sourceFilter={sourceFilter}
+        sourceMinimapEnabled={sourceMinimapEnabled}
+        sourcePathInput={sourcePathInput}
+        sourceSaveResults={sourceSaveResults}
+        sourceSaveTotalBytes={sourceSaveTotalBytes}
+        sourceWorkbenchView={sourceWorkbenchView}
+        sourceWordWrap={sourceWordWrap}
+        uiLanguage={uiLanguage}
+        workspaceResourceBusy={workspaceResourceBusy}
+        workspaceResourceReport={workspaceResourceReport}
+        workspaceSourceLabel={desktopWorkspace?.activeWorkspaceSource || (runtimeSourceFiles.length ? copy.runtimeSource : copy.fallbackSource)}
+        workspaceWarmupReport={workspaceWarmupReport}
+        writeReport={writeReport}
+        onCloseDraftByPath={closeDraftByPath}
+        onCopyCurrentSourceDraft={copyCurrentSourceDraft}
+        onHandleSourceEditorMount={handleSourceEditorMount}
+        onLoadSourceFile={loadSourceFile}
+        onOpenDraftOrLoad={openDraftOrLoad}
+        onRunSourceEditorCommand={runSourceEditorCommand}
+        onSaveAllSourceDrafts={saveAllSourceDrafts}
+        onSaveSourceFile={saveSourceFile}
+        onSelectDraftEntry={selectDraftEntry}
+        onSourceFilterChange={setSourceFilter}
+        onUpdateSourceDraft={(nextContent) => updateSourceDraft(nextContent, { immediate: false })}
+      />
         </div>
       </section>
     </div>
@@ -13829,120 +12541,6 @@ function DesktopRuntimePanel({
 
 const MemoizedDesktopRuntimePanel = memo(DesktopRuntimePanel);
 
-function mergeSessionReports(
-  current: CliSessionReport[],
-  reports: CliSessionReport[],
-  options: { promote?: boolean; replaceAll?: boolean } = {}
-) {
-  if (reports.length === 0) {
-    return current;
-  }
-
-  const currentById = new Map(current.map((session) => [session.sessionId, session]));
-  const reportsById = new Map(reports.map((report) => [report.sessionId, report]));
-  const reportIds = new Set(reports.map((report) => report.sessionId));
-
-  if (options.replaceAll) {
-    let changed = current.length !== reports.length;
-    const next = reports.map((report) => {
-      const existing = currentById.get(report.sessionId);
-      if (existing && areSessionReportsRenderEqual(existing, report)) {
-        return existing;
-      }
-      changed = true;
-      return report;
-    });
-    return changed ? next : current;
-  }
-
-  let changed = false;
-  const updated = current.map((session) => {
-    const report = reportsById.get(session.sessionId);
-    if (!report) {
-      return session;
-    }
-    if (areSessionReportsRenderEqual(session, report)) {
-      return session;
-    }
-    changed = true;
-    return report;
-  });
-  const newReports = reports.filter((report) => !currentById.has(report.sessionId));
-  if (newReports.length > 0) {
-    changed = true;
-  }
-  if (!changed) {
-    return current;
-  }
-
-  if (options.promote) {
-    const promoted = reports.map((report) => {
-      const existing = currentById.get(report.sessionId);
-      return existing && areSessionReportsRenderEqual(existing, report) ? existing : report;
-    });
-    return [...promoted, ...updated.filter((session) => !reportIds.has(session.sessionId))];
-  }
-
-  return [...updated, ...newReports];
-}
-
-function mergeNativePtyReports(
-  current: RuntimeNativePtySession[],
-  reports: RuntimeNativePtySession[],
-  options: { promote?: boolean; replaceAll?: boolean } = {}
-) {
-  if (reports.length === 0) {
-    return current;
-  }
-
-  const currentById = new Map(current.map((session) => [session.sessionId, session]));
-  const reportsById = new Map(reports.map((report) => [report.sessionId, report]));
-  const reportIds = new Set(reports.map((report) => report.sessionId));
-
-  if (options.replaceAll) {
-    let changed = current.length !== reports.length;
-    const next = reports.map((report) => {
-      const existing = currentById.get(report.sessionId);
-      if (existing && areNativePtyReportsRenderEqual(existing, report)) {
-        return existing;
-      }
-      changed = true;
-      return report;
-    });
-    return changed ? next : current;
-  }
-
-  let changed = false;
-  const updated = current.map((session) => {
-    const report = reportsById.get(session.sessionId);
-    if (!report) {
-      return session;
-    }
-    if (areNativePtyReportsRenderEqual(session, report)) {
-      return session;
-    }
-    changed = true;
-    return report;
-  });
-  const newReports = reports.filter((report) => !currentById.has(report.sessionId));
-  if (newReports.length > 0) {
-    changed = true;
-  }
-  if (!changed) {
-    return current;
-  }
-
-  if (options.promote) {
-    const promoted = reports.map((report) => {
-      const existing = currentById.get(report.sessionId);
-      return existing && areNativePtyReportsRenderEqual(existing, report) ? existing : report;
-    });
-    return [...promoted, ...updated.filter((session) => !reportIds.has(session.sessionId))];
-  }
-
-  return [...updated, ...newReports];
-}
-
 function linesFromText(value: string) {
   return value
     .split(/\r?\n/)
@@ -14107,63 +12705,6 @@ function safeUiSlug(value: string) {
   return slug || "candidate";
 }
 
-function areSessionReportsRenderEqual(left: CliSessionReport, right: CliSessionReport) {
-  return sessionReportRenderSignature(left) === sessionReportRenderSignature(right);
-}
-
-function sessionReportRenderSignature(session: CliSessionReport) {
-  return [
-    session.sessionId,
-    session.taskRunId,
-    session.taskKind,
-    session.pipelineId || "",
-    session.laneId || "",
-    session.status,
-    session.exitCode ?? "",
-    Math.floor(session.elapsedMs / SESSION_POLL_IDLE_UPDATE_BUCKET_MS),
-    session.stdout.length,
-    session.stdout.slice(-SESSION_OUTPUT_SIGNATURE_CHARS),
-    session.stderr.length,
-    session.stderr.slice(-SESSION_OUTPUT_SIGNATURE_CHARS),
-    session.decisionPrompts
-      .map((prompt) => `${prompt.lane}:${prompt.question}:${prompt.resumeAction}`)
-      .join("\u001e"),
-    session.outputTruncated ? "1" : "0",
-    session.deferMessageSent ? "1" : "0",
-    session.autoDeferQuestions ? "1" : "0",
-    session.autoDeferTriggered ? "1" : "0",
-    session.decisionInboxItems,
-    session.pendingDecisionPrompts,
-    session.deferredPromptCount,
-    session.decisionCaptureError || "",
-    session.taskRecordPath || "",
-    session.stdoutLogPath || "",
-    session.stderrLogPath || "",
-    session.persistenceError || ""
-  ].join("\u001f");
-}
-
-function areNativePtyReportsRenderEqual(left: RuntimeNativePtySession, right: RuntimeNativePtySession) {
-  return nativePtyReportRenderSignature(left) === nativePtyReportRenderSignature(right);
-}
-
-function nativePtyReportRenderSignature(session: RuntimeNativePtySession) {
-  return [
-    session.sessionId,
-    session.status,
-    session.exitCode ?? "",
-    Math.floor(session.elapsedMs / SESSION_POLL_IDLE_UPDATE_BUCKET_MS),
-    session.output.length,
-    session.output.slice(-SESSION_OUTPUT_SIGNATURE_CHARS),
-    session.outputTruncated ? "1" : "0",
-    session.workingDir,
-    session.rows,
-    session.cols,
-    session.pid ?? "",
-    session.terminalKind
-  ].join("\u001f");
-}
-
 function getTauriInvoke(): TauriInvoke | null {
   if (typeof window === "undefined") {
     return null;
@@ -14171,340 +12712,11 @@ function getTauriInvoke(): TauriInvoke | null {
   return window.__TAURI__?.core?.invoke ?? null;
 }
 
-function monacoLanguageFromPath(relativePath: string) {
-  const extension = relativePath.split(".").pop()?.toLowerCase() || "";
-  const languageByExtension: Record<string, string> = {
-    c: "c",
-    cc: "cpp",
-    cpp: "cpp",
-    cs: "csharp",
-    css: "css",
-    go: "go",
-    h: "cpp",
-    hpp: "cpp",
-    html: "html",
-    java: "java",
-    js: "javascript",
-    jsx: "javascript",
-    json: "json",
-    jsonc: "json",
-    kt: "kotlin",
-    md: "markdown",
-    mjs: "javascript",
-    py: "python",
-    rs: "rust",
-    scss: "scss",
-    sh: "shell",
-    sql: "sql",
-    ts: "typescript",
-    tsx: "typescript",
-    toml: "toml",
-    txt: "plaintext",
-    yaml: "yaml",
-    yml: "yaml"
-  };
-  return languageByExtension[extension] || "plaintext";
-}
-
 function errorMessage(caught: unknown) {
   if (caught instanceof Error) {
     return caught.message;
   }
   return String(caught);
-}
-
-function isOpenDecisionStatus(status: string) {
-  return ["open", "deferred", "resuming"].includes(status);
-}
-
-function isActiveSessionStatus(status: string) {
-  return ["running", "defer_message_sent"].includes(status);
-}
-
-function formatDuration(ms: number) {
-  if (ms < 1000) {
-    return `${ms}ms`;
-  }
-  if (ms < 60_000) {
-    return `${Math.round(ms / 100) / 10}s`;
-  }
-  return `${Math.round(ms / 60_000)}m`;
-}
-
-function formatBytes(bytes: number) {
-  if (bytes < 1024) {
-    return `${bytes}B`;
-  }
-  if (bytes < 1024 * 1024) {
-    return `${Math.round(bytes / 1024)}KB`;
-  }
-  return `${Math.round((bytes / (1024 * 1024)) * 10) / 10}MB`;
-}
-
-function detectOutputEvents(sourceId: string, lane: string, output: string): OutputEvent[] {
-  const lines = output
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter(Boolean);
-  const events: OutputEvent[] = [];
-
-  for (const [index, line] of lines.entries()) {
-    const lower = line.toLowerCase();
-    const id = `${sourceId}-${index}`;
-    if (events.length >= 8) {
-      break;
-    }
-    if (/[?？]|\b(confirm|approve|continue|proceed|choose|select|y\/n|yes\/no)\b|선택|확인|승인|진행|질문/.test(lower)) {
-      events.push({ id, type: "question", lane, label: "question candidate", detail: line.slice(0, 180) });
-      continue;
-    }
-    if (/\b(error|failed|failure|panic|exception)\b|오류|실패/.test(lower)) {
-      events.push({ id, type: "error", lane, label: "error signal", detail: line.slice(0, 180) });
-      continue;
-    }
-    if (/\b(warn|warning|deprecated|caution)\b|경고|주의/.test(lower)) {
-      events.push({ id, type: "warning", lane, label: "warning signal", detail: line.slice(0, 180) });
-      continue;
-    }
-    if (/\b(pass|passed|fail|failed|test|tests|build|lint|typecheck)\b/.test(lower)) {
-      events.push({ id, type: "test", lane, label: "validation signal", detail: line.slice(0, 180) });
-      continue;
-    }
-    if (/[./\w-]+\.(ts|tsx|js|jsx|mjs|json|md|rs|py|css|html)(:\d+)?/.test(line)) {
-      events.push({ id, type: "file", lane, label: "file reference", detail: line.slice(0, 180) });
-    }
-  }
-
-  if (events.length === 0 && lines.length > 0) {
-    events.push({
-      id: `${sourceId}-summary`,
-      type: "info",
-      lane,
-      label: "output captured",
-      detail: lines[0].slice(0, 180)
-    });
-  }
-
-  return events;
-}
-
-function groupDecisions(decisions: HumanDecisionItem[]): DecisionGroup[] {
-  const groups = new Map<string, DecisionGroup>();
-  for (const decision of decisions) {
-    const id = decision.sessionId || decision.source || "unlinked";
-    const group = groups.get(id) || {
-      id,
-      label: decision.sessionId ? `${decision.adapterId || "session"} / ${decision.sessionId}` : decision.source || "unlinked",
-      openCount: 0,
-      answeredCount: 0,
-      decisions: []
-    };
-    if (isOpenDecisionStatus(decision.status)) {
-      group.openCount += 1;
-    }
-    if (decision.status === "answered" || decision.answeredAt) {
-      group.answeredCount += 1;
-    }
-    group.decisions.push(decision);
-    groups.set(id, group);
-  }
-  return Array.from(groups.values()).sort((left, right) => right.openCount - left.openCount || left.label.localeCompare(right.label));
-}
-
-function buildSourceDiffSummary(original: string, draft: string): SourceDiffSummary {
-  const before = original.split(/\r?\n/);
-  const after = draft.split(/\r?\n/);
-  const max = Math.max(before.length, after.length);
-  const preview: SourceDiffSummary["preview"] = [];
-  let addedLines = 0;
-  let removedLines = 0;
-  let changedLines = 0;
-
-  for (let index = 0; index < max; index += 1) {
-    const beforeLine = before[index];
-    const afterLine = after[index];
-    if (beforeLine === afterLine) {
-      continue;
-    }
-    if (beforeLine === undefined) {
-      addedLines += 1;
-    } else if (afterLine === undefined) {
-      removedLines += 1;
-    } else {
-      changedLines += 1;
-    }
-    if (preview.length < 8) {
-      preview.push({
-        line: index + 1,
-        before: beforeLine ?? "",
-        after: afterLine ?? ""
-      });
-    }
-  }
-
-  return {
-    dirty: addedLines + removedLines + changedLines > 0,
-    addedLines,
-    removedLines,
-    changedLines,
-    preview
-  };
-}
-
-function Metric({ label, value, icon: Icon, tone }: { label: string; value: number; icon: LucideIcon; tone: string }) {
-  return (
-    <article className={`metric metric-${tone}`}>
-      <Icon size={18} aria-hidden="true" />
-      <span>{label}</span>
-      <strong>{value.toLocaleString("ko-KR")}</strong>
-    </article>
-  );
-}
-
-function AgentFlowMap({ flows }: { flows: CollaborationBoard["flows"] }) {
-  if (!flows.length) {
-    return <p className="empty-state">표시할 에이전트 작업 흐름이 없습니다.</p>;
-  }
-
-  return (
-    <div className="agent-flow-map">
-      {flows.slice(0, 18).map((flow) => (
-        <article key={flow.id} className={`flow-row flow-${flow.lane}`}>
-          <div className="flow-node agent-node">
-            <span>agent</span>
-            <strong>{flow.agent}</strong>
-          </div>
-          <div className="flow-arrow" aria-hidden="true">
-            →
-          </div>
-          <div className="flow-node task-node">
-            <span>{flow.status}</span>
-            <strong>{flow.task}</strong>
-            {flow.timingTotal && <small>{flow.timingTotal}</small>}
-          </div>
-          <div className="flow-arrow" aria-hidden="true">
-            →
-          </div>
-          <div className="flow-node project-node">
-            <span>project</span>
-            <strong>{flow.project}</strong>
-          </div>
-        </article>
-      ))}
-    </div>
-  );
-}
-
-function HistoryDensityChart({ days }: { days: WorkspaceSnapshot["historyDays"] }) {
-  if (!days.length) {
-    return <p className="empty-state">시각화할 히스토리 기록이 없습니다.</p>;
-  }
-  const maxCount = Math.max(...days.map((day) => day.documentsCount), 1);
-
-  return (
-    <div className="density-chart" aria-label="History density chart">
-      {days.map((day) => {
-        const height = Math.max(10, Math.round((day.documentsCount / maxCount) * 100));
-        return (
-          <article key={day.date}>
-            <div className="density-bar" style={{ height: `${height}%` }} title={`${day.date}: ${day.documentsCount}`} />
-            <span>{day.date.slice(5)}</span>
-          </article>
-        );
-      })}
-    </div>
-  );
-}
-
-function HistoryCategoryBars({ categories }: { categories: Array<{ category: string; count: number }> }) {
-  return <BarGroup title="히스토리 유형" items={categories.map((item) => ({ key: categoryLabel(item.category), count: item.count }))} />;
-}
-
-function BarGroup({ title, items }: { title: string; items: Array<{ key: string; count: number }> }) {
-  if (!items.length) {
-    return <p className="empty-state">{title} 데이터가 없습니다.</p>;
-  }
-  const maxCount = Math.max(...items.map((item) => item.count), 1);
-
-  return (
-    <div className="bar-group">
-      <h3>{title}</h3>
-      {items.map((item) => (
-        <article key={item.key}>
-          <div>
-            <span>{item.key}</span>
-            <strong>{item.count}</strong>
-          </div>
-          <div className="bar-track">
-            <span style={{ width: `${Math.max(8, Math.round((item.count / maxCount) * 100))}%` }} />
-          </div>
-        </article>
-      ))}
-    </div>
-  );
-}
-
-function DocumentList({
-  documents,
-  compact = false
-}: {
-  documents: WorkspaceSnapshot["documents"];
-  compact?: boolean;
-}) {
-  return (
-    <div className={compact ? "document-list compact" : "document-list"}>
-      {documents.map((document) => (
-        <article key={document.id}>
-          <div>
-            <span>{categoryLabel(document.category)}</span>
-            <h3>{document.title}</h3>
-            <p>{document.excerpt || document.path}</p>
-          </div>
-          <small>{document.path}</small>
-        </article>
-      ))}
-    </div>
-  );
-}
-
-function HistoryTimeline({ days }: { days: WorkspaceSnapshot["historyDays"] }) {
-  if (days.length === 0) {
-    return <p className="empty-state">검색 조건에 맞는 날짜별 작업 기록이 없습니다.</p>;
-  }
-
-  return (
-    <div className="timeline-list">
-      {days.map((day) => (
-        <article className="history-day" key={day.date}>
-          <header>
-            <div>
-              <span className="date-label">{day.date}</span>
-              <h3>{formatDay(day.date)}</h3>
-            </div>
-            <strong>{day.documentsCount}개 기록</strong>
-          </header>
-          <div className="chip-row">
-            {day.categories.map((item) => (
-              <span key={item.category}>
-                {categoryLabel(item.category)} {item.count}
-              </span>
-            ))}
-          </div>
-          <div className="timeline-docs">
-            {day.documents.slice(0, 14).map((document) => (
-              <article key={document.id}>
-                <span>{categoryLabel(document.category)}</span>
-                <div>
-                  <strong>{document.title}</strong>
-                  <p>{document.path}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </article>
-      ))}
-    </div>
-  );
 }
 
 function summarizeCategories(documents: WorkspaceSnapshot["historyDays"][number]["documents"]) {

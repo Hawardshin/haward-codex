@@ -12,7 +12,7 @@
       "Run default_command after changing durable rules, navigation, source configs, project boundaries, prompts, workflows, or maps."
     ],
     "owner": "agent-platform",
-    "last_reviewed": "2026-06-06",
+    "last_reviewed": "2026-06-07",
     "update_triggers": [
       "A durable user instruction becomes mandatory for future sessions.",
       "A new shared config, prompt, workflow, project registry, or map becomes part of startup context.",
@@ -41,6 +41,7 @@
       "The UI tone policy, main-tab scroll ownership rule, or bounded child scroll-surface contract changes.",
       "The omission prevention workflow, omission guard agent, or omission_check_targets contract changes.",
       "The do-all completion standard, acceptance coverage rule, or partial-closeout blocker policy changes.",
+      "The autonomous continuation implementation standard, continuation phrase interpretation, broad multi-slice loop, or remaining-work queue policy changes.",
       "The resource leak prevention workflow, resource guard agent, or resource_check_targets contract changes.",
       "The work timing, bottleneck visibility, or timing_summary_targets contract changes.",
       "The parallel work planning workflow, planner agent, research merge gate, or coordination lane contract changes.",
@@ -98,6 +99,7 @@
         "main-tab scroll ownership limit and bounded child scroll-surface rule",
         "do not postpone repeatedly needed setup prerequisites such as PATH registration, adapter checks, and validation when they are required for the real user workflow",
         "wide-scope work should not be avoided or prematurely shrunk only because it is wide",
+        "follow-up implementation commands such as continue, keep going, broad implementation, missing parts, or Korean equivalents default to a broad autonomous multi-slice implementation loop",
         "do-all requests must cover every applicable requirement, artifact, validation, build, record, commit, and push step",
         "post-implementation automatic build or package verification rule"
       ],

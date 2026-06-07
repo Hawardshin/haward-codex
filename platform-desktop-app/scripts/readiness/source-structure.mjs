@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { basename, join } from "node:path";
 
+// Rust feature module 목록은 실제 파일 존재 검사와 runtime source aggregate의 기준이다.
 export const tauriFeatureModuleFiles = [
   "src-tauri/src/features/mod.rs",
   "src-tauri/src/features/app_shell.rs",
@@ -8,6 +9,7 @@ export const tauriFeatureModuleFiles = [
   "src-tauri/src/features/native.rs",
   "src-tauri/src/features/workspace.rs",
   "src-tauri/src/features/providers.rs",
+  "src-tauri/src/features/app_update.rs",
   "src-tauri/src/features/diagnostics.rs",
   "src-tauri/src/features/service_readiness.rs",
   "src-tauri/src/features/agent_factory.rs",
@@ -16,25 +18,53 @@ export const tauriFeatureModuleFiles = [
 
 export const tauriFeatureModuleNames = tauriFeatureModuleFiles.map((file) => basename(file));
 
+// command 구현이 lib.rs 밖으로 이동해도 readiness 검사가 같은 런타임 표면을 보게 묶는다.
 export const tauriRuntimeSourcePaths = {
   tauriLib: "src-tauri/src/lib.rs",
+  tauriAppShell: "src-tauri/src/features/app_shell.rs",
+  tauriAppUpdate: "src-tauri/src/features/app_update.rs",
   tauriServiceReadiness: "src-tauri/src/features/service_readiness.rs",
   tauriProviders: "src-tauri/src/features/providers.rs"
 };
 
 export const tauriRuntimeSourceKeys = [
   "tauriLib",
+  "tauriAppShell",
+  "tauriAppUpdate",
   "tauriServiceReadiness",
   "tauriProviders"
 ];
 
 export const monitorWorkbenchSourcePaths = {
   monitorShell: "renderer/workspace-monitor/components/MonitorShell.tsx",
+  runtimeDisplay: "renderer/workspace-monitor/lib/runtimeDisplay.ts",
   desktopActivityRail: "renderer/workspace-monitor/components/shell/DesktopActivityRail.tsx",
   coreFeatureDrilldown: "renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx",
   nativeGitWorkbench: "renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx",
   pathDisclosure: "renderer/workspace-monitor/components/workbench/PathDisclosure.tsx",
   runtimeTerminalDrawer: "renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx",
+  sourceEditorCatalog: "renderer/workspace-monitor/components/workbench/source-editor/sourceCatalog.ts",
+  sourceEditorDraftActions: "renderer/workspace-monitor/components/workbench/source-editor/sourceDraftActions.ts",
+  sourceEditorDocuments: "renderer/workspace-monitor/components/workbench/source-editor/sourceDocuments.ts",
+  sourceEditorDrafts: "renderer/workspace-monitor/components/workbench/source-editor/sourceDrafts.ts",
+  sourceEditorDiff: "renderer/workspace-monitor/components/workbench/source-editor/sourceDiff.ts",
+  sourceEditorLanguage: "renderer/workspace-monitor/components/workbench/source-editor/sourceLanguage.ts",
+  sourceWorkbenchPanel: "renderer/workspace-monitor/components/workbench/source-editor/SourceWorkbenchPanel.tsx",
+  sourceCommandToolbar: "renderer/workspace-monitor/components/workbench/source-editor/SourceCommandToolbar.tsx",
+  sourceEditorFrame: "renderer/workspace-monitor/components/workbench/source-editor/SourceEditorFrame.tsx",
+  sourceEditorTabs: "renderer/workspace-monitor/components/workbench/source-editor/SourceEditorTabs.tsx",
+  sourceFileBrowser: "renderer/workspace-monitor/components/workbench/source-editor/SourceFileBrowser.tsx",
+  sourceFileControls: "renderer/workspace-monitor/components/workbench/source-editor/SourceFileControls.tsx",
+  sourceSaveResultsPanel: "renderer/workspace-monitor/components/workbench/source-editor/SourceSaveResultsPanel.tsx",
+  sourceWorkbenchHeader: "renderer/workspace-monitor/components/workbench/source-editor/SourceWorkbenchHeader.tsx",
+  sourceWorkbenchSwitcher: "renderer/workspace-monitor/components/workbench/source-editor/SourceWorkbenchSwitcher.tsx",
+  sourceWorkspaceStatusStrip: "renderer/workspace-monitor/components/workbench/source-editor/SourceWorkspaceStatusStrip.tsx",
+  sourceWorkbenchTypes: "renderer/workspace-monitor/components/workbench/source-editor/sourceWorkbenchTypes.ts",
+  sourceEditorSession: "renderer/workspace-monitor/components/workbench/source-editor/useSourceEditorSession.ts",
+  sourceWorkbenchController: "renderer/workspace-monitor/components/workbench/source-editor/useSourceWorkbenchController.ts",
+  sourceEditorLoadRequests: "renderer/workspace-monitor/components/workbench/source-editor/useSourceLoadRequestGate.ts",
+  sourceEditorMonacoConfig: "renderer/workspace-monitor/components/workbench/source-editor/monacoConfig.ts",
+  sourceEditorTemplates: "renderer/workspace-monitor/components/workbench/source-editor/sourceTemplates.ts",
   workspaceExplorerPane: "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx",
   agentBuilderPanels: "renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx",
   agentDetailPanels: "renderer/workspace-monitor/components/workbench/AgentDetailPanels.tsx",
@@ -44,6 +74,8 @@ export const monitorWorkbenchSourcePaths = {
   desktopControlPanel: "renderer/workspace-monitor/components/features/DesktopControlPanel.tsx",
   providerAccountsPanel: "renderer/workspace-monitor/components/features/ProviderAccountsPanel.tsx",
   providerAccountSettingsHook: "renderer/workspace-monitor/components/features/useProviderAccountSettings.ts",
+  runtimeSessionPresets: "renderer/workspace-monitor/components/features/runtimeSessionPresets.ts",
+  runtimeWorkspaceCopy: "renderer/workspace-monitor/components/features/runtimeWorkspaceCopy.ts",
   runtimeCustomizationPanel: "renderer/workspace-monitor/components/features/RuntimeCustomizationPanel.tsx",
   searchAgentWorkChatPanel: "renderer/workspace-monitor/components/features/SearchAgentWorkChatPanel.tsx",
   runtimeDataSupportPanel: "renderer/workspace-monitor/components/features/RuntimeDataSupportPanel.tsx",
@@ -51,6 +83,7 @@ export const monitorWorkbenchSourcePaths = {
   serviceReadinessPanel: "renderer/workspace-monitor/components/features/ServiceReadinessPanel.tsx",
   taskRunStorePanel: "renderer/workspace-monitor/components/features/TaskRunStorePanel.tsx",
   workspaceHostPanel: "renderer/workspace-monitor/components/features/WorkspaceHostPanel.tsx",
+  monitorSummaryWidgets: "renderer/workspace-monitor/components/features/MonitorSummaryWidgets.tsx",
   runtimeCatalog: "renderer/workspace-monitor/components/features/runtimeCatalog.ts",
   runtimeEnvironmentRefreshHook: "renderer/workspace-monitor/components/features/useRuntimeEnvironmentRefresh.ts",
   settingsRuntimeSyncHook: "renderer/workspace-monitor/components/features/useSettingsRuntimeSync.ts",
@@ -60,13 +93,37 @@ export const monitorWorkbenchSourcePaths = {
   evaluationRuntimeTelemetry: "renderer/workspace-monitor/components/features/evaluationRuntimeTelemetry.ts"
 };
 
+// 큰 테스트 파일에서 readFileSync 중복을 만들지 않도록 source map key를 한 곳에서 관리한다.
 export const monitorWorkbenchSourceKeys = [
   "monitorShell",
+  "runtimeDisplay",
   "desktopActivityRail",
   "coreFeatureDrilldown",
   "nativeGitWorkbench",
   "pathDisclosure",
   "runtimeTerminalDrawer",
+  "sourceEditorCatalog",
+  "sourceEditorDraftActions",
+  "sourceEditorDocuments",
+  "sourceEditorDrafts",
+  "sourceEditorDiff",
+  "sourceEditorLanguage",
+  "sourceWorkbenchPanel",
+  "sourceCommandToolbar",
+  "sourceEditorFrame",
+  "sourceEditorTabs",
+  "sourceFileBrowser",
+  "sourceFileControls",
+  "sourceSaveResultsPanel",
+  "sourceWorkbenchHeader",
+  "sourceWorkbenchSwitcher",
+  "sourceWorkspaceStatusStrip",
+  "sourceWorkbenchTypes",
+  "sourceEditorSession",
+  "sourceWorkbenchController",
+  "sourceEditorLoadRequests",
+  "sourceEditorMonacoConfig",
+  "sourceEditorTemplates",
   "workspaceExplorerPane",
   "agentBuilderPanels",
   "agentDetailPanels",
@@ -76,6 +133,8 @@ export const monitorWorkbenchSourceKeys = [
   "desktopControlPanel",
   "providerAccountsPanel",
   "providerAccountSettingsHook",
+  "runtimeSessionPresets",
+  "runtimeWorkspaceCopy",
   "runtimeCustomizationPanel",
   "searchAgentWorkChatPanel",
   "runtimeDataSupportPanel",
@@ -83,6 +142,7 @@ export const monitorWorkbenchSourceKeys = [
   "serviceReadinessPanel",
   "taskRunStorePanel",
   "workspaceHostPanel",
+  "monitorSummaryWidgets",
   "runtimeCatalog",
   "runtimeEnvironmentRefreshHook",
   "settingsRuntimeSyncHook"
@@ -90,14 +150,28 @@ export const monitorWorkbenchSourceKeys = [
 
 export const serviceReadinessMonitorSourceKeys = [
   "monitorShell",
+  "runtimeDisplay",
+  "sourceWorkbenchPanel",
+  "sourceCommandToolbar",
+  "sourceEditorFrame",
+  "sourceEditorTabs",
+  "sourceFileBrowser",
+  "sourceFileControls",
+  "sourceSaveResultsPanel",
+  "sourceWorkbenchHeader",
+  "sourceWorkbenchSwitcher",
+  "sourceWorkspaceStatusStrip",
   "agentBuilderPanels",
   "accumulatedDataPanel",
   "desktopControlPanel",
   "providerAccountSettingsHook",
+  "runtimeSessionPresets",
+  "runtimeWorkspaceCopy",
   "searchAgentWorkChatPanel",
   "runtimeDataSupportPanel",
   "serviceReadinessPanel",
-  "workspaceHostPanel"
+  "workspaceHostPanel",
+  "monitorSummaryWidgets"
 ];
 
 export const readinessSupportSourcePaths = {
@@ -131,22 +205,46 @@ export const desktopReadinessSourcePaths = {
   ...readinessSupportSourcePaths
 };
 
+// required file 목록은 source path registry에서 생성해 구조 변경 때 누락과 중복을 줄인다.
+export const desktopReadinessRequiredSourceFiles = Array.from(
+  new Set([
+    ...tauriFeatureModuleFiles,
+    ...Object.values(desktopReadinessSourcePaths)
+  ])
+);
+
 export const serviceReadinessSourcePaths = {
   tauriCargo: "src-tauri/Cargo.toml",
   tauriLib: "src-tauri/src/lib.rs",
+  tauriAppUpdate: "src-tauri/src/features/app_update.rs",
   tauriProviders: "src-tauri/src/features/providers.rs",
   monitorShell: monitorWorkbenchSourcePaths.monitorShell,
+  runtimeDisplay: monitorWorkbenchSourcePaths.runtimeDisplay,
+  sourceWorkbenchPanel: monitorWorkbenchSourcePaths.sourceWorkbenchPanel,
+  sourceCommandToolbar: monitorWorkbenchSourcePaths.sourceCommandToolbar,
+  sourceEditorFrame: monitorWorkbenchSourcePaths.sourceEditorFrame,
+  sourceEditorTabs: monitorWorkbenchSourcePaths.sourceEditorTabs,
+  sourceFileBrowser: monitorWorkbenchSourcePaths.sourceFileBrowser,
+  sourceFileControls: monitorWorkbenchSourcePaths.sourceFileControls,
+  sourceSaveResultsPanel: monitorWorkbenchSourcePaths.sourceSaveResultsPanel,
+  sourceWorkbenchHeader: monitorWorkbenchSourcePaths.sourceWorkbenchHeader,
+  sourceWorkbenchSwitcher: monitorWorkbenchSourcePaths.sourceWorkbenchSwitcher,
+  sourceWorkspaceStatusStrip: monitorWorkbenchSourcePaths.sourceWorkspaceStatusStrip,
   agentBuilderPanels: monitorWorkbenchSourcePaths.agentBuilderPanels,
   accumulatedDataPanel: monitorWorkbenchSourcePaths.accumulatedDataPanel,
   desktopControlPanel: monitorWorkbenchSourcePaths.desktopControlPanel,
   providerAccountSettingsHook: monitorWorkbenchSourcePaths.providerAccountSettingsHook,
+  runtimeSessionPresets: monitorWorkbenchSourcePaths.runtimeSessionPresets,
+  runtimeWorkspaceCopy: monitorWorkbenchSourcePaths.runtimeWorkspaceCopy,
   searchAgentWorkChatPanel: monitorWorkbenchSourcePaths.searchAgentWorkChatPanel,
   runtimeDataSupportPanel: monitorWorkbenchSourcePaths.runtimeDataSupportPanel,
   serviceReadinessPanel: monitorWorkbenchSourcePaths.serviceReadinessPanel,
-  workspaceHostPanel: monitorWorkbenchSourcePaths.workspaceHostPanel
+  workspaceHostPanel: monitorWorkbenchSourcePaths.workspaceHostPanel,
+  monitorSummaryWidgets: monitorWorkbenchSourcePaths.monitorSummaryWidgets
 };
 
 export function readSourceMap(root, sourcePaths) {
+  // 테스트와 readiness script가 동일한 파일 별칭을 쓰도록 key-value map으로 읽는다.
   return Object.fromEntries(
     Object.entries(sourcePaths).map(([key, relativePath]) => [
       key,
@@ -156,5 +254,6 @@ export function readSourceMap(root, sourcePaths) {
 }
 
 export function joinSourceMap(sourceMap, keys) {
+  // 모듈 분리 후에도 command 문자열 검사는 하나의 런타임 소스처럼 수행한다.
   return keys.map((key) => sourceMap[key]).join("\n");
 }

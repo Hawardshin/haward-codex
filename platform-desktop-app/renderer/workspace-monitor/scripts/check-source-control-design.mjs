@@ -5,7 +5,16 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
 const css = fs.readFileSync(path.join(projectRoot, "app", "globals.css"), "utf8");
-const monitorShell = fs.readFileSync(path.join(projectRoot, "components", "MonitorShell.tsx"), "utf8");
+const sourceWorkbenchVisualFiles = [
+  "SourceWorkbenchPanel.tsx",
+  "SourceCommandToolbar.tsx",
+  "SourceEditorFrame.tsx",
+  "SourceFileControls.tsx",
+  "SourceSaveResultsPanel.tsx"
+];
+const sourceWorkbenchVisualSource = sourceWorkbenchVisualFiles
+  .map((fileName) => fs.readFileSync(path.join(projectRoot, "components", "workbench", "source-editor", fileName), "utf8"))
+  .join("\n");
 
 function assertIncludes(source, label, tokens) {
   for (const token of tokens) {
@@ -15,7 +24,7 @@ function assertIncludes(source, label, tokens) {
   }
 }
 
-assertIncludes(monitorShell, "Source action button roles", [
+assertIncludes(sourceWorkbenchVisualSource, "Source action button roles", [
   'className="source-action-button primary"',
   'className="source-action-button save"',
   'className="source-action-button save-all"',

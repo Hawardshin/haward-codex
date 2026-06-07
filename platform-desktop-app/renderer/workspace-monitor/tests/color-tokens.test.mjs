@@ -118,6 +118,66 @@ test("dark color tokens keep readable foreground contrast", () => {
   assertContrast(tokens, "action-primary-fg", "action-primary-bg");
 });
 
+test("system dark mode uses the same core palette as explicit dark mode", () => {
+  const explicitDarkTokens = readTokens(".desktop-app-root.theme-dark");
+  const systemDarkTokens = readTokens(".desktop-app-root.theme-system");
+  const sharedDarkTokens = [
+    "bg",
+    "surface",
+    "surface-muted",
+    "surface-raised",
+    "surface-panel",
+    "surface-elevated",
+    "surface-glass",
+    "surface-chrome",
+    "line",
+    "line-subtle",
+    "line-strong",
+    "text",
+    "text-secondary",
+    "text-tertiary",
+    "focus-ring",
+    "focus-ring-inset",
+    "accent-primary",
+    "accent-primary-soft",
+    "accent-primary-border",
+    "control-bg",
+    "control-bg-hover",
+    "control-selected-bg",
+    "action-primary-bg",
+    "status-success-bg",
+    "status-success-text",
+    "status-info-bg",
+    "status-info-text"
+  ];
+
+  for (const tokenName of sharedDarkTokens) {
+    assert.equal(systemDarkTokens[tokenName], explicitDarkTokens[tokenName], `--${tokenName} differs between dark modes`);
+  }
+});
+
+test("dark mode avoids harsh pure-white base text and focus tokens", () => {
+  const tokens = readTokens(".desktop-app-root.theme-dark");
+
+  assert.equal(tokens.text, "#eef4fb");
+  assert.equal(tokens["text-secondary"], "#c8d2df");
+  assert.equal(tokens["text-tertiary"], "#a5b1c0");
+  assert.notEqual(tokens.text.toLowerCase(), "#ffffff");
+  assert.notEqual(tokens["focus-ring"].toLowerCase(), "#ffffff");
+  assert.notEqual(tokens["focus-ring-inset"].toLowerCase(), "#ffffff");
+});
+
+test("document background follows explicit and system dark rendering", () => {
+  const explicitDarkBodyBlock = readBlock("body:has(.desktop-app-root.theme-dark)");
+  const explicitLightBodyBlock = readBlock("body:has(.desktop-app-root.theme-light)");
+
+  assert.match(explicitDarkBodyBlock, /background:\s*#0d1117;/);
+  assert.match(explicitDarkBodyBlock, /color:\s*#eef4fb;/);
+  assert.match(explicitLightBodyBlock, /background:\s*#f5f5f7;/);
+  assert.match(explicitLightBodyBlock, /color:\s*#1d1d1f;/);
+  assert.match(css, /@media\s*\(prefers-color-scheme:\s*dark\)\s*{[\s\S]*?body\s*{[\s\S]*?background:\s*#0d1117;[\s\S]*?color:\s*#eef4fb;/);
+});
+
 test("scroll and surface color tokens keep scope boundaries understated", () => {
   const lightTokens = readTokens(":root");
   const darkTokens = {

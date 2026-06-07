@@ -166,6 +166,9 @@ export function ServiceReadinessPanel({
                   <span>{uiLanguage === "ko" ? "설치 결과" : "Install result"}</span>
                   <strong>{appUpdateInstall.status}</strong>
                   <p>{appUpdateInstall.detail}</p>
+                  {appUpdateInstall.restarted && (
+                    <small>{uiLanguage === "ko" ? "재시작 요청됨" : "restart requested"}</small>
+                  )}
                   <small>{formatBytes(appUpdateInstall.downloadedBytes)} / {appUpdateInstall.contentLength ? formatBytes(appUpdateInstall.contentLength) : "unknown"}</small>
                 </article>
               )}

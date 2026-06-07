@@ -132,6 +132,8 @@ const cliAdapterRegistry = readRepoJson("agent-platform/configs/integrations/cli
 failIf(cliAdapterRegistry.platform_principle?.host_runtime_model !== "platform_first", "CLI adapter registry must preserve platform_first host model");
 
 const tauriLib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
+const tauriAppShell = readFileSync(join(root, "src-tauri/src/features/app_shell.rs"), "utf8");
+const tauriRuntimeSource = `${tauriLib}\n${tauriAppShell}`;
 for (const commandName of [
   "get_installer_shell_runtime_contract",
   "get_rust_runtime_feature_map",
@@ -145,7 +147,7 @@ for (const commandName of [
   "DesktopPreferencesReport",
   "DESKTOP_PREFERENCES_SCHEMA_VERSION"
 ]) {
-  failIf(!tauriLib.includes(commandName), `src-tauri/src/lib.rs must include ${commandName}`);
+  failIf(!tauriRuntimeSource.includes(commandName), `src-tauri runtime source must include ${commandName}`);
 }
 
 failIf(
@@ -153,7 +155,7 @@ failIf(
   "runtime_command_surface.runtime_feature_map_command must be get_rust_runtime_feature_map"
 );
 failIf(!tauriLib.includes("mod features"), "src-tauri/src/lib.rs must include the Rust feature module tree");
-failIf(!tauriLib.includes("get_rust_runtime_feature_map"), "src-tauri/src/lib.rs must expose get_rust_runtime_feature_map");
+failIf(!tauriRuntimeSource.includes("get_rust_runtime_feature_map"), "src-tauri runtime source must expose get_rust_runtime_feature_map");
 
 failIf(
   contract.runtime_command_surface?.accumulated_data_command !== "get_accumulated_data_overview",

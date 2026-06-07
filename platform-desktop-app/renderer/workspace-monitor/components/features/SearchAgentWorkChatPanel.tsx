@@ -278,6 +278,47 @@ export function SearchAgentWorkChatPanel({
   onRefreshModels: (providerId?: string) => void | Promise<void>;
 }) {
   const ko = language === "ko";
+  const copy = ko
+    ? {
+        title: "작업 에이전트",
+        accountNeeded: "계정 필요",
+        connection: "연결",
+        setupNeeded: "설정 필요",
+        account: "계정",
+        accountAria: "제공자 계정 설정 열기",
+        terminal: "터미널",
+        terminalAria: "터미널 실행 경로 열기",
+        models: "모델",
+        modelsAria: "선택한 제공자 모델 목록 갱신",
+        ready: "준비",
+        connected: "연결됨",
+        needsSetup: "연결 필요",
+        connectKey: "API 키 연결",
+        terminalFallback: "터미널",
+        terminalFallbackDetail: "API 실패 시 CLI로 전환",
+        taskRuns: "기록",
+        taskRunsDetail: "응답과 로그 저장"
+      }
+    : {
+        title: "Work Agent",
+        accountNeeded: "Account needed",
+        connection: "Connection",
+        setupNeeded: "Setup needed",
+        account: "Account",
+        accountAria: "Open provider account settings",
+        terminal: "Terminal",
+        terminalAria: "Open terminal run path",
+        models: "Models",
+        modelsAria: "Refresh selected provider model list",
+        ready: "Ready",
+        connected: "Connected",
+        needsSetup: "Needs setup",
+        connectKey: "Connect an API key",
+        terminalFallback: "Terminal",
+        terminalFallbackDetail: "CLI fallback on API failure",
+        taskRuns: "Runs",
+        taskRunsDetail: "Responses and logs stored"
+      };
   const [contextOpen, setContextOpen] = useState(false);
   const statusLabel = agentAvailable ? (ko ? "준비됨" : "Ready") : ko ? "설정 확인" : "Check config";
   const connectedProviders = providerCredentialReport.providers.filter((provider) => provider.configured);
@@ -416,12 +457,10 @@ export function SearchAgentWorkChatPanel({
       {
         id: "provider-api",
         label: ko ? "모델 API" : "Model API",
-        status: selectedProviderConnected || selectedProviderLocal ? (ko ? "연결됨" : "Connected") : ko ? "연결 필요" : "Needs setup",
+        status: selectedProviderConnected || selectedProviderLocal ? copy.connected : copy.needsSetup,
         detail: selectedProviderConnected || selectedProviderLocal
           ? `${selectedProvider?.label || selectedProvider?.providerId || "provider"} / ${selectedProviderRuntimeSourceLabel}`
-          : ko
-            ? "계정 설정에서 API 키를 연결하세요."
-            : "Connect an API key in account settings.",
+          : copy.connectKey,
         state: selectedProviderConnected || selectedProviderLocal ? "ready" : "missing"
       },
       {
@@ -433,16 +472,16 @@ export function SearchAgentWorkChatPanel({
       },
       {
         id: "terminal-fallback",
-        label: ko ? "터미널 대체" : "Terminal fallback",
-        status: runtimeLaunchQueued ? (ko ? "대기 중" : "Queued") : ko ? "준비" : "Ready",
-        detail: ko ? "API가 없거나 실패하면 CLI 세션으로 이어집니다." : "Falls back to a CLI session when API is missing or fails.",
+        label: copy.terminalFallback,
+        status: runtimeLaunchQueued ? (ko ? "대기 중" : "Queued") : copy.ready,
+        detail: copy.terminalFallbackDetail,
         state: runtimeLaunchQueued ? "pending" : "ready"
       },
       {
         id: "task-run-store",
-        label: ko ? "작업 기록" : "Task runs",
+        label: copy.taskRuns,
         status: ko ? "저장" : "Stored",
-        detail: ko ? "응답과 로그는 작업 실행 저장소에 남습니다." : "Responses and logs are written to the task-run store.",
+        detail: copy.taskRunsDetail,
         state: "ready"
       }
     ],
@@ -456,7 +495,15 @@ export function SearchAgentWorkChatPanel({
       selectedProvider?.providerId,
       selectedProviderConnected,
       selectedProviderLocal,
-      selectedProviderRuntimeSourceLabel
+      selectedProviderRuntimeSourceLabel,
+      copy.connectKey,
+      copy.connected,
+      copy.needsSetup,
+      copy.ready,
+      copy.taskRuns,
+      copy.taskRunsDetail,
+      copy.terminalFallback,
+      copy.terminalFallbackDetail
     ]
   );
 
@@ -467,7 +514,7 @@ export function SearchAgentWorkChatPanel({
           <header className="agent-chat-conversation-header">
             <div>
               <span className="agent-chat-kicker">Agent Core</span>
-              <h2>{ko ? "에이전트 코어 채팅" : "Agent Core Chat"}</h2>
+              <h2>{copy.title}</h2>
             </div>
             <div className="agent-chat-header-meta" aria-label={ko ? "채팅 상태" : "Chat status"}>
               <span className={`agent-chat-status-pill ${selectedProviderConnected || selectedProviderLocal ? "ready" : "missing"}`}>
@@ -480,8 +527,8 @@ export function SearchAgentWorkChatPanel({
                   : selectedProviderConnected
                     ? selectedProvider?.label
                     : ko
-                      ? "계정 연결 필요"
-                      : "Account needed"}
+                      ? copy.accountNeeded
+                      : copy.accountNeeded}
               </span>
             </div>
           </header>
@@ -567,13 +614,11 @@ export function SearchAgentWorkChatPanel({
             </div>
             <div className="agent-chat-connection-strip" data-chatbot-connection="search-agent">
               <div className="agent-chat-connection-head">
-                <span>{ko ? "챗봇 연결" : "Chatbot connection"}</span>
+                <span>{copy.connection}</span>
                 <strong>
                   {selectedProviderConnected || selectedProviderLocal
                     ? selectedProviderRuntimeLabel
-                    : ko
-                      ? "설정 필요"
-                      : "Setup needed"}
+                    : copy.setupNeeded}
                 </strong>
               </div>
               <div className="agent-chat-connection-grid" aria-label={ko ? "챗봇 연결 상태" : "Chatbot connection status"}>
@@ -590,21 +635,23 @@ export function SearchAgentWorkChatPanel({
                 ))}
               </div>
               <div className="agent-chat-connection-actions">
-                <button type="button" onClick={onOpenProviderSettings}>
+                <button type="button" onClick={onOpenProviderSettings} aria-label={copy.accountAria} title={copy.accountAria}>
                   <KeyRound size={15} aria-hidden="true" />
-                  <span>{ko ? "계정 연결" : "Connect account"}</span>
+                  <span>{copy.account}</span>
                 </button>
-                <button type="button" onClick={onOpenTerminal}>
+                <button type="button" onClick={onOpenTerminal} aria-label={copy.terminalAria} title={copy.terminalAria}>
                   <SquareTerminal size={15} aria-hidden="true" />
-                  <span>{ko ? "터미널 연결" : "Connect terminal"}</span>
+                  <span>{copy.terminal}</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => onRefreshModels(selectedProvider?.providerId)}
                   disabled={providerModelBusy || !selectedProvider}
+                  aria-label={copy.modelsAria}
+                  title={copy.modelsAria}
                 >
                   <RefreshCw size={15} aria-hidden="true" />
-                  <span>{ko ? "모델 갱신" : "Refresh models"}</span>
+                  <span>{copy.models}</span>
                 </button>
               </div>
             </div>
