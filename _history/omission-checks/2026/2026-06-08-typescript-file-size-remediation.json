@@ -1,0 +1,38 @@
+{
+  "task": "typescript file-size remediation",
+  "date": "2026-06-08",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web_first_intake",
+      "required": true,
+      "status": "covered",
+      "evidence": ["_history/web-searches/2026/2026-06-08-typescript-file-size-remediation.ko.md"]
+    },
+    {
+      "item_id": "search_agent_split",
+      "required": true,
+      "status": "covered",
+      "evidence": ["platform-desktop-app/renderer/workspace-monitor/components/features/search-agent/"]
+    },
+    {
+      "item_id": "provider_accounts_split",
+      "required": true,
+      "status": "covered",
+      "evidence": ["platform-desktop-app/renderer/workspace-monitor/components/features/provider-accounts/"]
+    },
+    {
+      "item_id": "validation",
+      "required": true,
+      "status": "covered",
+      "evidence": ["_specs/workspace-platform/2026-06-08-typescript-file-size-remediation/validation.ko.md"]
+    }
+  ],
+  "known_remaining_items": [
+    {
+      "item_id": "legacy_oversized_files",
+      "status": "structural_pressure",
+      "reason": "MonitorShell.tsx, ToolStudioPanel.tsx, snapshot.ts, and desktop.ts still exceed 500 lines."
+    }
+  ]
+}

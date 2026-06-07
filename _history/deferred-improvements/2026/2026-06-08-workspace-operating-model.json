@@ -23,12 +23,17 @@
       "completed_artifacts": [
         "platform-desktop-app/renderer/workspace-monitor/tests/source-editor-templates.test.mjs",
         "platform-desktop-app/renderer/workspace-monitor/tests/model-routing-controls.test.mjs",
-        "platform-desktop-app/renderer/workspace-monitor/components/features/ClarificationQueuePanel.tsx",
-        "platform-desktop-app/renderer/workspace-monitor/components/features/UnifiedOpsPanel.tsx",
-        "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
-      ],
-      "remaining_note": "MonitorShell.tsx remains a legacy oversized shell and is tracked as structural pressure, not as an open deferred feature queue. Rust lib_parts are currently below 500 lines; several TypeScript legacy files remain above 500 lines and require safe future refactor slices."
-    },
+                "platform-desktop-app/renderer/workspace-monitor/components/features/ClarificationQueuePanel.tsx",
+                "platform-desktop-app/renderer/workspace-monitor/components/features/UnifiedOpsPanel.tsx",
+                "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+                "platform-desktop-app/renderer/workspace-monitor/components/features/SearchAgentWorkChatPanel.tsx",
+                "platform-desktop-app/renderer/workspace-monitor/components/features/search-agent/",
+                "platform-desktop-app/renderer/workspace-monitor/components/features/ProviderAccountsPanel.tsx",
+                "platform-desktop-app/renderer/workspace-monitor/components/features/useProviderAccountSettings.ts",
+                "platform-desktop-app/renderer/workspace-monitor/components/features/provider-accounts/"
+            ],
+            "remaining_note": "SearchAgentWorkChatPanel.tsx, ProviderAccountsPanel.tsx, and useProviderAccountSettings.ts are now below 500 lines. MonitorShell.tsx, ToolStudioPanel.tsx, snapshot.ts, and desktop.ts remain legacy oversized structural pressure, not an open deferred feature queue. Rust lib_parts are currently below 500 lines."
+        },
     {
       "id": "agent-tool-desktop-app-internals",
       "title": "Implement separated agent/tool/Ollama/provider operations inside agent-tool-desktop-app",
