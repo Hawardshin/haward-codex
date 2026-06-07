@@ -1,0 +1,100 @@
+{
+  "task": "repository deployment topology redesign",
+  "work_mode": "ship_first",
+  "expected_items": [
+    {
+      "item_id": "release-root-separation",
+      "description": "Desktop app release root must be platform-desktop-app repository, not the workspace control repo.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/repository-deployment-topology-registry.json",
+        "platform-desktop-app/docs/repository-deployment-topology.ko.md"
+      ]
+    },
+    {
+      "item_id": "history-boundary",
+      "description": "History should be project-local first with cross-project ledger/control-plane boundary.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/repository-deployment-topology-registry.json",
+        "workspace-history-ledger/",
+        "_history/deferred-improvements/2026/2026-06-08-repository-deployment-topology.json"
+      ]
+    },
+    {
+      "item_id": "standalone-build-support",
+      "description": "Customer build should not require root _history or unrelated submodule checkout.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "buildSnapshot supports standalone platform desktop app repository roots",
+        "corepack pnpm run renderer:build"
+      ]
+    },
+    {
+      "item_id": "user-visible-topology",
+      "description": "Project screen should expose release units, root control role, history strategy, and release flow.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "RepositoryDeploymentTopologyPanel.tsx",
+        "browser smoke data-repository-deployment-topology"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/configs/repository-deployment-topology-registry.json",
+      "purpose": "Repository topology contract",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/scripts/lib/repository-deployment-topology.mjs",
+      "purpose": "Snapshot collector",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/features/RepositoryDeploymentTopologyPanel.tsx",
+      "purpose": "User-visible topology panel",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-contract",
+      "description": "Topology registry is self-documenting.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-config-contract"
+      ]
+    },
+    {
+      "check_id": "target-tests",
+      "description": "Collector and UI source tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "node --test tests/collector.test.mjs tests/tool-studio.test.mjs"
+      ]
+    },
+    {
+      "check_id": "customer-build",
+      "description": "Customer renderer build and bundle audit pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm run renderer:build"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "Legacy _history records remain in the root control plane until compatibility index exists."
+  ]
+}

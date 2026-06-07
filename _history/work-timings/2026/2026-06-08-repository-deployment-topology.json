@@ -1,0 +1,26 @@
+{
+  "task": "repository deployment topology redesign",
+  "started_at": "2026-06-08T05:05:00+09:00",
+  "finished_at": "2026-06-08T05:35:00+09:00",
+  "phases": [
+    {
+      "phase": "web_first_and_local_inventory",
+      "duration_minutes": 5,
+      "notes": "Checked official Git/GitHub docs and local submodule/release/collector structure."
+    },
+    {
+      "phase": "implementation",
+      "duration_minutes": 15,
+      "notes": "Added topology registry, collector module, standalone root support, snapshot type, UI panel, CSS, docs, and tests."
+    },
+    {
+      "phase": "validation",
+      "duration_minutes": 10,
+      "notes": "Ran config/coding research validators, tests, check/build, customer build, browser smoke, app test/check."
+    }
+  ],
+  "bottlenecks": [
+    "Existing readiness test expected root workspace alias commands in release runbook.",
+    "Playwright import required @playwright/test instead of playwright package."
+  ]
+}

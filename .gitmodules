@@ -22,3 +22,7 @@
 	path = vscode-agent-workbench
 	url = https://github.com/Hawardshin/haward-codex-vscode-agent-workbench.git
 	branch = main
+[submodule "workspace-history-ledger"]
+	path = workspace-history-ledger
+	url = https://github.com/Hawardshin/haward-codex-workspace-history-ledger.git
+	branch = main

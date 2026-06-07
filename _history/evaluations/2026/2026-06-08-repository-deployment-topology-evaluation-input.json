@@ -1,0 +1,112 @@
+{
+  "schema_version": "2026-06-08",
+  "work_mode": "ship_first",
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-08-repository-deployment-topology.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-08-repository-deployment-topology.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/changes/2026-06-08-repository-deployment-topology.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-08-repository-deployment-topology.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-08-repository-deployment-topology/"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-08-repository-deployment-topology.ko.md",
+    "_history/coding-research/2026/2026-06-08-repository-deployment-topology.json",
+    "_history/git-separations/2026/2026-06-08-repository-deployment-topology.json"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-08-repository-deployment-topology.ko.md",
+    "_history/large-scope-decompositions/2026/2026-06-08-repository-deployment-topology.json"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-08-repository-deployment-topology.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-08-repository-deployment-topology.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-08-repository-deployment-topology.json"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-08-repository-deployment-topology.json"
+  ],
+  "deferred_improvement_targets": [
+    "_history/deferred-improvements/2026/2026-06-08-repository-deployment-topology.json"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-08-repository-deployment-topology.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-08-repository-deployment-topology.ko.md"
+  ],
+  "installation_occurred": false,
+  "validation": {
+    "coding_research": "passed: complete-coding-research",
+    "config_contract": "passed: check-config-contract",
+    "target_tests": "passed: node --test tests/collector.test.mjs tests/tool-studio.test.mjs",
+    "typescript": "passed: corepack pnpm --dir renderer/workspace-monitor exec tsc --noEmit",
+    "workspace_monitor_check": "passed: corepack pnpm --dir renderer/workspace-monitor run check",
+    "workspace_monitor_build": "passed: corepack pnpm --dir renderer/workspace-monitor run build",
+    "customer_build": "passed: corepack pnpm run renderer:build",
+    "browser_smoke": "passed: Projects tab data-repository-deployment-topology rendered with releaseUnits=2 and submoduleReleaseRequired=false",
+    "app_test": "passed: corepack pnpm run test",
+    "app_check": "passed: corepack pnpm run check"
+  },
+  "initial_instruction": "변경 히스토리를 따로 관리하고 프로젝트별 Git/히스토리 분리를 재설계해 배포가 어려워지지 않게 바꾸라는 요청.",
+  "result_summary": "앱 레포를 release root로, 루트 workspace를 control plane으로, 히스토리를 project-local first 및 별도 workspace-history-ledger로 분리하는 registry/docs/UI/collector/test를 구현하고 private ledger repo를 submodule로 연결했다.",
+  "changed_files": [
+    "platform-desktop-app/configs/repository-deployment-topology-registry.json",
+    "platform-desktop-app/docs/repository-deployment-topology.ko.md",
+    "platform-desktop-app/docs/release-runbook.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/lib/repository-deployment-topology.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/RepositoryDeploymentTopologyPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProjectManagementPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+    "platform-desktop-app/docs/requirements/2026-06-08-repository-deployment-topology.ko.md",
+    "platform-desktop-app/specs/2026-06-08-repository-deployment-topology/",
+    ".gitmodules",
+    "_ops/projects/registry.json",
+    "workspace-history-ledger/"
+  ],
+  "verification": [
+    "passed: check-config-contract",
+    "passed: complete-coding-research",
+    "passed: target tests",
+    "passed: TypeScript",
+    "passed: workspace monitor check/build",
+    "passed: browser smoke",
+    "passed: renderer:build customer bundle audit",
+    "passed: app test/check"
+  ],
+  "references_checked": [
+    "https://git-scm.com/docs/gitsubmodules.html",
+    "https://github.com/actions/checkout",
+    "https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases",
+    "https://docs.github.com/en/get-started/using-git/splitting-a-subfolder-out-into-a-new-repository",
+    "_history/web-searches/2026/2026-06-08-repository-deployment-topology.ko.md",
+    "_history/coding-research/2026/2026-06-08-repository-deployment-topology.json"
+  ],
+  "grounding_checks": [
+    "Web-first record created.",
+    "Coding research validator returned ready_to_implement.",
+    "Config contract validator returned self_documenting.",
+    "Browser smoke verified rendered topology attributes."
+  ],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Migrate eligible cross-project records into workspace-history-ledger after compatibility index is implemented.",
+    "Add compatibility index for legacy root _history before physical migration.",
+    "Add CI workflow examples for app repo release without unrelated submodule checkout."
+  ]
+}

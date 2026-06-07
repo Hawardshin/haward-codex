@@ -1,0 +1,79 @@
+{
+  "task": "repository deployment topology redesign",
+  "source_inventory": [
+    ".gitmodules",
+    "_ops/projects/registry.json",
+    "platform-desktop-app/package.json",
+    "platform-desktop-app/docs/release-runbook.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProjectManagementPanel.tsx"
+  ],
+  "exclusions": [
+    "No destructive move of existing _history records",
+    "No new remote history ledger repository creation in this slice",
+    "No public signing/notarization claim"
+  ],
+  "slices": [
+    {
+      "slice_id": "S1",
+      "touch_paths": [
+        "platform-desktop-app/configs/",
+        "platform-desktop-app/docs/",
+        "platform-desktop-app/specs/"
+      ],
+      "output_targets": [
+        "repository topology registry",
+        "deployment topology docs"
+      ],
+      "verification": [
+        "check-config-contract"
+      ],
+      "status": "done"
+    },
+    {
+      "slice_id": "S2",
+      "touch_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/scripts/",
+        "platform-desktop-app/renderer/workspace-monitor/lib/"
+      ],
+      "output_targets": [
+        "standalone snapshot root support",
+        "repositoryDeploymentTopology snapshot branch"
+      ],
+      "verification": [
+        "collector tests",
+        "TypeScript"
+      ],
+      "status": "done"
+    },
+    {
+      "slice_id": "S3",
+      "touch_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/components/",
+        "platform-desktop-app/renderer/workspace-monitor/app/globals.css"
+      ],
+      "output_targets": [
+        "Project Management topology panel"
+      ],
+      "verification": [
+        "UI source contract",
+        "browser smoke"
+      ],
+      "status": "in_progress"
+    }
+  ],
+  "dependencies": [
+    "S2 depends on S1 registry shape",
+    "S3 depends on S2 snapshot type"
+  ],
+  "merge_gates": [
+    "target tests pass",
+    "renderer check/build pass",
+    "customer bundle audit pass",
+    "evaluation ready_to_close"
+  ],
+  "remaining_work_queue": [
+    "Create actual workspace-history-ledger repository after migration scope is approved",
+    "Move legacy _history records only with compatibility index and validation"
+  ]
+}

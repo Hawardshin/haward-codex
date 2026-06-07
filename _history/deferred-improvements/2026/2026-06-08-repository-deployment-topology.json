@@ -1,0 +1,20 @@
+{
+  "task": "repository deployment topology redesign",
+  "deferred_items": [
+    {
+      "id": "create-workspace-history-ledger",
+      "reason": "The private repository now exists; physical migration of existing _history still requires compatibility index, validation, and rollback plan.",
+      "next_action": "Migrate cross-project records in batches after validators can read both root legacy history and workspace-history-ledger."
+    },
+    {
+      "id": "legacy-history-compatibility-index",
+      "reason": "Existing validators and snapshots read root _history paths.",
+      "next_action": "Add a compatibility index before moving legacy records."
+    },
+    {
+      "id": "public-release-signing",
+      "reason": "Developer ID signing, notarization, updater endpoint/signing, and clean-machine smoke remain public release gates.",
+      "next_action": "Run public release readiness work after credentials and distribution target are available."
+    }
+  ]
+}

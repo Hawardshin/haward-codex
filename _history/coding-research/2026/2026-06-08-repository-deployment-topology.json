@@ -1,0 +1,206 @@
+{
+  "research_goal": "Design and implement repository separation for deployable desktop apps, project-local history, cross-project control records, and standalone platform-desktop-app builds.",
+  "coding_context": "Existing Tauri/Next.js desktop app with Node snapshot collector, TypeScript snapshot model, React project management panel, CSS, and node:test contract tests.",
+  "research_types": [
+    "architecture",
+    "implementation_pattern",
+    "migration",
+    "testing"
+  ],
+  "search_channels": [
+    "web search",
+    "official documentation search",
+    "local repository search",
+    "test source inspection"
+  ],
+  "sources_checked": [
+    "https://git-scm.com/docs/gitsubmodules.html",
+    "https://github.com/actions/checkout",
+    "https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases",
+    "https://docs.github.com/en/get-started/using-git/splitting-a-subfolder-out-into-a-new-repository",
+    ".gitmodules",
+    "_ops/projects/registry.json",
+    "platform-desktop-app/package.json",
+    "platform-desktop-app/docs/release-runbook.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProjectManagementPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "source_types": [
+    "official",
+    "open_source",
+    "internal",
+    "community",
+    "analysis"
+  ],
+  "reference_config_paths": [
+    "agent-platform/configs/research/research-agent-profile.json",
+    "agent-platform/configs/research/coding-research-profile.json"
+  ],
+  "source_value_provenance": [
+    "Git official docs establish submodule control-plane behavior and the need to explicitly manage separate repository checkouts.",
+    "GitHub Actions checkout documentation shows submodule checkout is explicit CI behavior, not a default release assumption.",
+    "GitHub releases documentation supports release artifacts belonging to the deployable repository.",
+    "Local source shows Workspace Monitor currently has registry and snapshot patterns that can absorb repository topology without new dependencies."
+  ],
+  "plan_evidence": [
+    "All active root projects are already submodules, so the safer change is release-root and history-boundary separation rather than destructive folder splitting.",
+    "Existing customer snapshot sanitization provides the right boundary for excluding raw cross-project history.",
+    "The collector root fallback is the deployment risk because standalone app clones should not require the workspace control repository."
+  ],
+  "technology_stack": [
+    "TypeScript",
+    "React",
+    "Next.js",
+    "Node.js",
+    "Tauri",
+    "Rust"
+  ],
+  "technology_official_docs": [
+    "https://www.typescriptlang.org/docs/",
+    "https://react.dev/reference/react",
+    "https://nextjs.org/docs",
+    "https://nodejs.org/en/docs",
+    "https://v2.tauri.app/",
+    "https://doc.rust-lang.org/book/"
+  ],
+  "stack_version_constraints": [
+    "Use existing workspace-monitor and platform-desktop-app dependencies.",
+    "No new package install is needed.",
+    "Rust/Tauri runtime remains unchanged in this slice."
+  ],
+  "issue_discussion_sources": [
+    "explicit none-found discussion record: no external issue discussion is needed because this slice is grounded in official Git/GitHub docs and local deployment source."
+  ],
+  "issue_discussion_notes": [
+    "User-reported deployment difficulty is the primary local problem signal.",
+    "Community signals are not used as factual proof."
+  ],
+  "community_signal_notes": [
+    "No stars, votes, likes, or forum comments are used for claims.",
+    "CI/submodule risk is treated as a deployment design risk from official docs."
+  ],
+  "language_options": [
+    "TypeScript/React plus Node collector",
+    "Rust/Tauri backend",
+    "Shell release scripts only"
+  ],
+  "selected_language": "TypeScript/React plus Node collector",
+  "language_decision_notes": [
+    "The change is snapshot data, UI, and tests, all currently owned by TypeScript/React/Node.",
+    "Rust/Tauri changes would add runtime risk without solving repository topology visibility.",
+    "Shell-only changes would not give users a visible app contract."
+  ],
+  "architecture_reference_sources": [
+    "https://git-scm.com/docs/gitsubmodules.html",
+    "https://github.com/actions/checkout",
+    "https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases",
+    "platform-desktop-app/configs/workspace-operating-model-registry.json",
+    "platform-desktop-app/configs/storage-architecture-registry.json",
+    "platform-desktop-app/docs/macos-execution-structure.en.md"
+  ],
+  "architecture_theory_sources": [
+    "Git submodule official docs",
+    "GitHub Actions checkout documentation",
+    "GitHub releases documentation"
+  ],
+  "architecture_practitioner_sources": [
+    "Existing Workspace Monitor registry/snapshot implementation",
+    "Existing customer snapshot sanitization tests",
+    "Existing release runbook"
+  ],
+  "architecture_options": [
+    "Keep root workspace as deployment source and require submodule checkout.",
+    "Release each desktop app from its own repository and keep root as control plane.",
+    "Create a new history ledger immediately and move all _history records now."
+  ],
+  "architecture_decision_notes": [
+    "Selected app-repo release root plus root control plane because it reduces release blast radius without destructive migration.",
+    "Rejected root deployment because signing, updater, and customer snapshot review should not depend on every project submodule.",
+    "Rejected immediate full _history move because it requires compatibility indexing and could break current validators."
+  ],
+  "architecture_tradeoff_notes": [
+    "The selected design keeps current submodule visibility while making deployment independent.",
+    "History is split by policy first; physical ledger migration remains explicit and auditable.",
+    "Customer builds become easier, but developer snapshots can still opt into MONITOR_REPO_ROOT."
+  ],
+  "code_reference_sources": [
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/lib/workspace-operating-model.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/WorkspaceOperatingModelPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProjectManagementPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "code_reference_notes": [
+    "Existing collector modules read self-documenting registries and sanitize customer snapshots.",
+    "Existing project management UI uses feature panels with data attributes for tests.",
+    "Existing tests validate collector shape and UI source contracts."
+  ],
+  "folder_structure_options": [
+    "Put repository topology in root _ops only.",
+    "Put repository topology in platform-desktop-app/configs and expose via app snapshot.",
+    "Put repository topology inside release-runbook only."
+  ],
+  "folder_structure_decision_notes": [
+    "Selected platform-desktop-app/configs because release topology governs the desktop app's build and UI.",
+    "Root _ops alone would not be available in standalone app releases.",
+    "Runbook-only text would not be machine-checkable or visible in the app."
+  ],
+  "folder_semantics_notes": [
+    "platform-desktop-app/configs owns desktop product contracts.",
+    "platform-desktop-app/docs owns release and topology documentation.",
+    "renderer/workspace-monitor/scripts/lib owns snapshot registry collectors.",
+    "_history records cross-project work evidence until a ledger migration exists."
+  ],
+  "maintainability_notes": [
+    "The registry is self-documenting and validated.",
+    "Standalone root support is tested with a temp app repo fixture.",
+    "Customer sanitization is tested separately from developer topology output."
+  ],
+  "findings": [
+    "The current submodule separation is useful for portfolio tracking but should not be the app release root.",
+    "Deployment should default to app-local configs/docs/specs and use MONITOR_REPO_ROOT only for developer portfolio snapshots.",
+    "History should be project-local first, with future ledger migration for cross-project records."
+  ],
+  "options": [
+    "Root release repo",
+    "App release repo plus control-plane root",
+    "Immediate full history ledger split"
+  ],
+  "recommendation": "Implement app release repo plus control-plane root, add repository topology registry/UI, and keep physical history ledger migration as an explicit future migration.",
+  "post_research_answers": {
+    "what_was_verified": "Submodule docs, CI checkout behavior, release ownership, current submodule state, current collector root behavior, and UI/test extension points.",
+    "best_option": "App release repo plus control-plane root.",
+    "why_this_option": "It addresses deployment difficulty now without destructive history migration.",
+    "alternatives_rejected": "Root release repo keeps deployment too coupled; immediate full ledger split risks breaking history validators.",
+    "implementation_impact": "Add registry, collector module, snapshot type, UI panel, CSS, tests, docs, and close-out records.",
+    "risks_and_unknowns": "Actual new history ledger repository is still pending a migration plan.",
+    "validation_plan": "Config contract, target tests, TypeScript, check, build, customer bundle audit, browser smoke, omission/resource/evaluation guards.",
+    "reusable_knowledge": "The topology registry becomes the durable contract for future release and history moves.",
+    "next_action": "Finish validation, commit app repo, update control repo pointer, and push both."
+  },
+  "validation_steps": [
+    "PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research ../_history/coding-research/2026/2026-06-08-repository-deployment-topology.json",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/repository-deployment-topology-registry.json",
+    "node --test tests/collector.test.mjs tests/tool-studio.test.mjs",
+    "corepack pnpm --dir renderer/workspace-monitor run check",
+    "corepack pnpm run renderer:build"
+  ],
+  "risks_or_unknowns": [
+    "Future workspace-history-ledger repository is not created in this slice.",
+    "Existing legacy _history remains in the root control plane until a migration plan is validated.",
+    "Public signing/notarization remains a separate release readiness gate."
+  ],
+  "capture_targets": [
+    "_history/coding-research/2026/2026-06-08-repository-deployment-topology.json",
+    "platform-desktop-app/configs/repository-deployment-topology-registry.json"
+  ],
+  "plan_history_targets": [
+    "_history/plans/2026/2026-06-08-repository-deployment-topology.ko.md",
+    "_history/large-scope-decompositions/2026/2026-06-08-repository-deployment-topology.json"
+  ],
+  "knowledge_validation_status": "ready_to_reference"
+}

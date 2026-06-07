@@ -1,0 +1,25 @@
+{
+  "task": "repository deployment topology redesign",
+  "created_repositories": [
+    {
+      "name": "haward-codex-workspace-history-ledger",
+      "url": "https://github.com/Hawardshin/haward-codex-workspace-history-ledger",
+      "visibility": "private",
+      "purpose": "Cross-project workspace history ledger."
+    }
+  ],
+  "submodule_changes": [
+    {
+      "path": "workspace-history-ledger",
+      "url": "https://github.com/Hawardshin/haward-codex-workspace-history-ledger.git",
+      "branch": "main",
+      "role": "audit-ledger"
+    }
+  ],
+  "migration_status": "repository_created_legacy_history_not_moved",
+  "migration_notes": [
+    "Existing root _history remains in place until validators and compatibility indexes support the ledger.",
+    "Project-specific history should still prefer each project repository.",
+    "platform-desktop-app customer builds do not require this submodule."
+  ]
+}

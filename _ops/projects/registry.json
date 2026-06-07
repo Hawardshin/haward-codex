@@ -310,6 +310,38 @@
       ]
     },
     {
+      "name": "workspace-history-ledger",
+      "path": "workspace-history-ledger/",
+      "repository_model": "git_submodule",
+      "repository_url": "https://github.com/Hawardshin/haward-codex-workspace-history-ledger",
+      "submodule_path": "workspace-history-ledger",
+      "submodule_branch": "main",
+      "status": "active",
+      "type": "audit-ledger",
+      "purpose": "Separate Git repository for cross-project request traces, evaluations, work summaries, web search records, provenance, and migration indexes that should not be bundled into deployable desktop apps.",
+      "scope": "Cross-project history ledger records, compatibility indexes for legacy root _history records, project history manifests, migration plans, and audit summaries.",
+      "project_specific_home": [
+        "workspace-history-ledger/request-traces/",
+        "workspace-history-ledger/evaluations/",
+        "workspace-history-ledger/work-summaries/",
+        "workspace-history-ledger/web-searches/",
+        "workspace-history-ledger/source-provenance/",
+        "workspace-history-ledger/project-index/",
+        "workspace-history-ledger/migrations/"
+      ],
+      "shared_dependencies": [
+        "_history/",
+        "_ops/",
+        "platform-desktop-app/"
+      ],
+      "boundary_notes": [
+        "New project-specific records should still prefer the owning project repository.",
+        "Cross-project history can migrate here after compatibility indexes and validators are updated.",
+        "Do not move legacy _history records without a migration plan, trace update, and validation run.",
+        "This repository is not a deployable app and must not be required for platform-desktop-app customer builds."
+      ]
+    },
+    {
       "name": "vscode-agent-workbench",
       "path": "vscode-agent-workbench/",
       "repository_model": "git_submodule",
