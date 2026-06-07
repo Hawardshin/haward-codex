@@ -3521,6 +3521,21 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const openSourceSection = useCallback(() => {
     openSection("source");
   }, [openSection]);
+  const openProjectManagementTarget = useCallback((targetSection: string) => {
+    if (targetSection === "desktop") {
+      openTerminalDrawer();
+      return;
+    }
+    if (targetSection === "source") {
+      openSection("source", { intentId: "import-workspace", flowStepId: "workspace" });
+      return;
+    }
+    if (targetSection === "eval") {
+      openSection("eval", { intentId: "evaluate-work", flowStepId: "current" });
+      return;
+    }
+    openSection(targetSection as SectionId);
+  }, [openSection, openTerminalDrawer]);
   const openProviderSettings = useCallback(() => {
     openSettingsTab("execution", "providers");
   }, [openSettingsTab]);
@@ -6440,7 +6455,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           <ProjectManagementPanel
             language={uiLanguage}
             projectManagement={snapshot.projectManagement}
-            onOpenSection={(targetSection) => openSection(targetSection as SectionId)}
+            onOpenSection={openProjectManagementTarget}
           />
         </MountedSectionPanel>
       )}

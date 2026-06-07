@@ -1,0 +1,136 @@
+{
+  "task": "desktop project management sliced implementation",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "project-readiness-model",
+      "description": "Project management snapshot must include readiness, report readiness, progress, action queue, and report bundle.",
+      "source": "REQ-DPMS-001..003",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+        "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs"
+      ]
+    },
+    {
+      "item_id": "component-split",
+      "description": "Project management UI must be split by feature instead of expanding the monolithic panel.",
+      "source": "user request and REQ-DPMS-004",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/features/ProjectManagementPanel.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/project-management/"
+      ]
+    },
+    {
+      "item_id": "project-action-routing",
+      "description": "Project actions must route into source, terminal, evaluation, history, documents, and requirements surfaces.",
+      "source": "REQ-DPMS-002 and REQ-DPMS-005",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+        "Browser smoke: ready project run action opened desktop terminal drawer"
+      ]
+    },
+    {
+      "item_id": "customer-sanitization",
+      "description": "Customer snapshot must not expose internal project portfolio paths and report bundles.",
+      "source": "REQ-DPMS-006",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "sanitizeProjectManagementForCustomer",
+        "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs"
+      ]
+    },
+    {
+      "item_id": "validation-records",
+      "description": "Meaningful implementation must leave requirements, specs, traces, validation, and evaluation records.",
+      "source": "AGENTS.md repository instructions",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/changes/2026-06-08-desktop-project-management-sliced-implementation.ko.md",
+        "platform-desktop-app/specs/2026-06-08-desktop-project-management-sliced-implementation/",
+        "_history/web-searches/2026/2026-06-08-desktop-project-management-sliced-implementation.ko.md",
+        "_history/work-timings/2026/2026-06-08-desktop-project-management-sliced-implementation.json"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/features/project-management/ProjectDetailPanel.tsx",
+      "purpose": "Project detail, action queue, and report bundle UI",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/features/project-management/ProjectPortfolioList.tsx",
+      "purpose": "Project readiness and progress list",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/scripts/readiness/source-structure.mjs",
+      "purpose": "Readiness source map includes split project management files",
+      "required": true
+    },
+    {
+      "path": "_history/evaluations/2026/2026-06-08-desktop-project-management-sliced-implementation-evaluation-input.json",
+      "purpose": "Close-out evaluator input",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-collect",
+      "description": "Generated snapshot includes updated project management data.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect --best-effort"]
+    },
+    {
+      "check_id": "workspace-monitor-check-test-build",
+      "description": "Renderer typecheck, contracts, tests, and production build pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build"
+      ]
+    },
+    {
+      "check_id": "platform-desktop-test-check",
+      "description": "Platform desktop readiness tests and checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app run test",
+        "corepack pnpm --dir platform-desktop-app run check"
+      ]
+    },
+    {
+      "check_id": "browser-smoke",
+      "description": "Browser validates desktop/mobile project management UI and terminal action routing.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "desktop: panel/detail/queue/bundle true, lanes=4, cards=5, overflowX=false",
+        "terminal action: ready project run action opened desktop section and terminal drawer",
+        "mobile: active projects section, detail/queue/bundle true, overflowX=false"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "Remote Git hosting repository creation is not implemented in this slice.",
+    "Per-tool AI CLI auto-installation remains outside this project management slice.",
+    "Large existing files such as MonitorShell and snapshot collector still need continuing extraction."
+  ],
+  "notes": [
+    "The omission guard covers this project management implementation slice, building on the prior workspace tracker product split."
+  ]
+}

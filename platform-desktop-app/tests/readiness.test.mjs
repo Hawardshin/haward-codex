@@ -641,7 +641,15 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     evaluationRuntimeTelemetry
   } = sources;
   const workspaceProductSplitPanel = sources.workspaceProductSplitPanel || "";
-  const projectManagementPanelSource = projectManagementPanel || "";
+  const projectManagementPanelSource = joinSourceMap(sources, [
+    "projectManagementPanel",
+    "projectManagementCopy",
+    "projectManagementMetrics",
+    "projectManagementWorkflow",
+    "projectPortfolioList",
+    "projectDetailPanel",
+    "projectManagementSidePanel"
+  ]);
   const tauriRuntimeSource = joinSourceMap(sources, tauriRuntimeSourceKeys);
   const lib = tauriRuntimeSource;
   const monitorWorkbenchSource = joinSourceMap(sources, monitorWorkbenchSourceKeys);

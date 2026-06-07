@@ -1,0 +1,193 @@
+{
+  "research_goal": "Implement project management platform functionality in slices without adding dependencies or rewriting native runtime commands.",
+  "coding_context": "Existing Next.js/React workspace monitor, Node snapshot collector, TypeScript snapshot model, Tauri desktop shell, and static renderer tests.",
+  "research_types": ["architecture", "implementation_pattern", "testing"],
+  "search_channels": ["web search", "official documentation search", "local source search", "local test search"],
+  "sources_checked": [
+    "https://docs.github.com/desktop",
+    "https://git-scm.com/docs/git-worktree.html",
+    "https://v2.tauri.app/plugin/dialog/",
+    "https://linear.app/docs/project-overview",
+    "https://github.com/desktop/desktop/issues/14801",
+    "https://github.com/desktop/desktop/issues/11314",
+    "https://github.com/tauri-apps/tauri/discussions/11102",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProjectManagementPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "source_types": ["official", "internal", "open_source", "community"],
+  "reference_config_paths": [
+    "agent-platform/configs/research/research-agent-profile.json",
+    "agent-platform/configs/research/coding-research-profile.json"
+  ],
+  "source_value_provenance": [
+    "GitHub Desktop and Git docs confirm repository/workspace import is a primary project management flow.",
+    "Tauri dialog docs confirm folder selection should remain a native runtime responsibility.",
+    "Linear project overview informs the need for status, milestone, and connected document surfaces.",
+    "Local tests and components define the existing contracts for snapshot fields and UI markers."
+  ],
+  "plan_evidence": [
+    "GitHub Desktop docs and issues support routing clone/open actions to a dedicated workspace host rather than hiding them in project cards.",
+    "Git worktree docs support treating Git repository/worktree boundaries as first-class project units.",
+    "Tauri dialog docs and discussion support preserving native folder selection as a runtime command boundary.",
+    "Local collector tests are the best verification point for project readiness, report bundle, and customer sanitization contracts."
+  ],
+  "technology_stack": ["TypeScript", "React", "Next.js", "Node.js", "Tauri", "Rust"],
+  "technology_official_docs": [
+    "https://www.typescriptlang.org/docs/",
+    "https://react.dev/reference/react",
+    "https://nextjs.org/docs",
+    "https://nodejs.org/api/test.html",
+    "https://v2.tauri.app/",
+    "https://doc.rust-lang.org/book/"
+  ],
+  "stack_version_constraints": [
+    "Use existing pnpm workspace dependencies.",
+    "Do not add new package dependencies in this slice.",
+    "Keep native Tauri commands as existing workspace host capabilities."
+  ],
+  "issue_discussion_sources": [
+    "https://github.com/desktop/desktop/issues/14801",
+    "https://github.com/desktop/desktop/issues/11314",
+    "https://github.com/tauri-apps/tauri/discussions/11102",
+    "local user feedback in this thread",
+    "existing terminal/provider/action tests under workspace-monitor/tests"
+  ],
+  "issue_discussion_notes": [
+    "GitHub Desktop issues show clone/open workspace UX can fail or confuse users in environment-specific cases.",
+    "Tauri discussion shows folder picker implementation and permission details are platform-sensitive.",
+    "User feedback identifies terminal and first-run complexity as a product risk.",
+    "Existing tests show terminal drawer, workspace host, and evaluation surfaces are already available and should be reused."
+  ],
+  "community_signal_notes": [
+    "No community signal is used as standalone factual proof.",
+    "Official docs and local tests are the implementation basis."
+  ],
+  "language_options": [
+    "TypeScript/React plus Node collector",
+    "Rust/Tauri native command changes"
+  ],
+  "selected_language": "TypeScript/React plus Node collector",
+  "language_decision_notes": [
+    "The requested feature is primarily snapshot shaping, UI organization, and routing.",
+    "Existing Tauri workspace commands already cover folder selection, import, clone, and terminal execution surfaces.",
+    "Avoiding Rust changes reduces runtime risk while still making the user flow simpler."
+  ],
+  "architecture_reference_sources": [
+    "https://docs.github.com/desktop",
+    "https://git-scm.com/docs/git-worktree.html",
+    "https://v2.tauri.app/plugin/dialog/",
+    "https://c4model.com/",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/WorkspaceHostPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx"
+  ],
+  "architecture_theory_sources": [
+    "Git repository/worktree documentation",
+    "Tauri native dialog/plugin documentation",
+    "Project overview/product management documentation"
+  ],
+  "architecture_practitioner_sources": [
+    "GitHub Desktop project import/open/clone workflow",
+    "Linear project overview pattern for status and milestones",
+    "Existing workspace monitor surface tests"
+  ],
+  "architecture_options": [
+    "Add more controls to the existing monolithic ProjectManagementPanel.",
+    "Split ProjectManagementPanel into smaller feature components while keeping a single route.",
+    "Move project management into a separate app immediately."
+  ],
+  "architecture_decision_notes": [
+    "Selected feature-component split because it improves maintainability without breaking routing or deployment.",
+    "Rejected adding to the monolith because it worsens the exact complexity the user identified.",
+    "Rejected a separate app in this slice because project management is now the primary desktop product and existing runtime surfaces should be reused."
+  ],
+  "architecture_tradeoff_notes": [
+    "Splitting UI components creates more files but keeps each file small and testable.",
+    "Snapshot-level readiness avoids duplicating business logic in React components.",
+    "Native commands remain reusable but project action routing is now more direct."
+  ],
+  "code_reference_sources": [
+    "ProjectManagementPanel.tsx",
+    "WorkspaceHostPanel.tsx",
+    "MonitorShell.tsx",
+    "collect-workspace.mjs",
+    "collector.test.mjs",
+    "tool-studio.test.mjs"
+  ],
+  "code_reference_notes": [
+    "Feature panels already use data attributes for static and browser verification.",
+    "Collector tests can validate customer sanitization and snapshot shape without browser runtime.",
+    "MonitorShell already exposes openSection and openTerminalDrawer, so project routing can reuse those callbacks."
+  ],
+  "folder_structure_options": [
+    "Keep all project management UI in one feature file.",
+    "Create components/features/project-management/ for local subcomponents.",
+    "Move all project management code into a new top-level package."
+  ],
+  "folder_structure_decision_notes": [
+    "Selected local subcomponent folder because it keeps ownership near the feature route and keeps files under 500 lines.",
+    "The folder has copy/helpers plus metric/workflow/portfolio/detail/side panel components.",
+    "A new package would add build and ownership overhead without a current reuse need."
+  ],
+  "folder_semantics_notes": [
+    "components/features/ProjectManagementPanel.tsx composes the feature.",
+    "components/features/project-management/ owns project management subcomponents and copy helpers.",
+    "scripts/collect-workspace.mjs remains the snapshot source of truth.",
+    "lib/snapshot.ts documents the generated data contract."
+  ],
+  "maintainability_notes": [
+    "New project-management files are below 500 lines.",
+    "The collector remains larger than ideal but helper functions localize the new project state logic.",
+    "Future work can split snapshot type declarations and collector modules without changing the UI contract."
+  ],
+  "findings": [
+    "Project cards need actionable routing, not only status display.",
+    "Native workspace selection and clone should stay in the existing workspace host boundary.",
+    "Snapshot-derived readiness reduces duplicated UI heuristics.",
+    "Component splitting solves the immediate maintainability issue without destabilizing the entire monitor shell."
+  ],
+  "options": [
+    "Keep project management as status-only portfolio.",
+    "Implement snapshot-backed project actions and report bundles in the current desktop route.",
+    "Rewrite native workspace commands and terminal orchestration before improving the UI.",
+    "Extract a separate project management app immediately."
+  ],
+  "recommendation": "Implement snapshot-backed project actions and report bundles in the current desktop route, using existing workspace host and terminal surfaces.",
+  "validation_steps": [
+    "Run workspace monitor collect with best effort.",
+    "Run workspace monitor check.",
+    "Run workspace monitor node tests.",
+    "Run workspace monitor production build.",
+    "Run platform desktop test and check.",
+    "Run Browser desktop and mobile smoke checks.",
+    "Run omission, resource, and evaluation guards."
+  ],
+  "risks_or_unknowns": [
+    "Generated snapshot size may change as new history/spec records are added.",
+    "Actual remote clone failures still depend on existing native workspace host behavior.",
+    "MonitorShell and snapshot type files remain larger than the preferred long-term target.",
+    "Per-tool AI adapter installation automation is outside this slice."
+  ],
+  "capture_targets": [
+    "_history/coding-research/2026/2026-06-08-desktop-project-management-sliced-implementation.json",
+    "platform-desktop-app/specs/2026-06-08-desktop-project-management-sliced-implementation/",
+    "_history/request-traces/2026/"
+  ],
+  "plan_history_targets": [
+    "_history/plans/2026/2026-06-08-desktop-project-management-sliced-implementation.ko.md"
+  ],
+  "post_research_answers": {
+    "what_was_verified": "Official docs and local source confirm existing workspace host and terminal surfaces are sufficient for this slice.",
+    "best_option": "Extend snapshot state, split the project UI, and route actions into existing surfaces.",
+    "why_this_option": "It directly reduces user complexity and avoids risky runtime rewrites.",
+    "alternatives_rejected": "More monolithic UI increases complexity; native command rewrite is unnecessary; separate app extraction is a larger productization step.",
+    "implementation_impact": "Types, collector, ProjectManagementPanel, new subcomponents, CSS, MonitorShell routing, tests, records.",
+    "risks_and_unknowns": "Full repository creation automation and per-tool setup automation remain later runtime slices.",
+    "validation_plan": "Run renderer collect/check/test/build, platform test/check, Browser smoke, docs audit, omission/resource/evaluation guards.",
+    "reusable_knowledge": "This record defines project management as snapshot-backed UI plus existing runtime surface routing.",
+    "next_action": "Complete generated snapshot, full build, Browser smoke, close-out guards, commit, and push."
+  }
+}

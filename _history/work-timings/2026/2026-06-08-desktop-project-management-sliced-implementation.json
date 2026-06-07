@@ -1,0 +1,71 @@
+{
+  "task_id": "2026-06-08-desktop-project-management-sliced-implementation",
+  "title": "Desktop project management sliced implementation",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "duration_seconds": 420,
+      "notes": "Checked GitHub Desktop, Git worktree, Tauri dialog, Linear project docs, and issue/discussion signals."
+    },
+    {
+      "phase_id": "source_review_and_planning",
+      "label": "Source review and slice planning",
+      "status": "completed",
+      "duration_seconds": 900,
+      "notes": "Reviewed ProjectManagementPanel, collector, snapshot type, MonitorShell routing, tests, CSS, and source maps."
+    },
+    {
+      "phase_id": "requirements_spec",
+      "label": "Requirements and spec",
+      "status": "completed",
+      "duration_seconds": 720,
+      "notes": "Created request summary, requirements, spec, plan, tasks, validation, traceability, mode, large-scope, and coding research records."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "duration_seconds": 2100,
+      "notes": "Extended snapshot model and collector, split project UI into subcomponents, added detail/action/report UI, and wired project action routing."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "duration_seconds": 1500,
+      "notes": "Ran collector, check, tests, build, platform test/check, docs audit, diff check, and Browser desktop/mobile smoke."
+    },
+    {
+      "phase_id": "evaluation",
+      "label": "Evaluation and close-out",
+      "status": "completed",
+      "duration_seconds": 480,
+      "notes": "Completed omission/resource/evaluation records, customer renderer build verification, and final git preparation."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "implementation",
+    "bottleneck_notes": "The main cost was keeping snapshot data, UI split, route behavior, tests, source maps, and generated snapshot output aligned.",
+    "improvement_candidates": [
+      "Split the large snapshot type and collector into feature modules so future model changes do not touch oversized files.",
+      "Create a reusable readiness source aggregation helper for feature-split components.",
+      "Promote Browser smoke checks for project sections into a deterministic Playwright script."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-08-desktop-project-management-sliced-implementation.ko.md",
+    "platform-desktop-app/specs/2026-06-08-desktop-project-management-sliced-implementation/",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect --best-effort",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build",
+    "corepack pnpm --dir platform-desktop-app run renderer:build",
+    "corepack pnpm --dir platform-desktop-app run test",
+    "corepack pnpm --dir platform-desktop-app run check",
+    "Browser smoke: http://127.0.0.1:3123/#section-projects"
+  ]
+}

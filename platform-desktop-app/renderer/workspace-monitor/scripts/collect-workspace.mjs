@@ -796,7 +796,10 @@ export function emptyProjectManagement() {
       completedWorkItems: 0,
       milestoneCount: 0,
       evidenceDocuments: 0,
-      reportDocuments: 0
+      reportDocuments: 0,
+      readyToRunProjects: 0,
+      attentionProjects: 0,
+      projectReportsReady: 0
     },
     portfolio: [],
     milestones: [],
@@ -881,15 +884,17 @@ export function collectProjectManagement({
     const completedTaskCount = projectTasks.filter((task) => ["completed", "done"].includes(String(task.status || "").toLowerCase())).length;
     const evidenceDocs = projectDocuments.filter((document) => evidenceCategories.has(document.category));
     const reportDocs = projectDocuments.filter((document) => reportCategories.has(document.category));
+    const requirementResources = projectRequirements.slice(0, 4).map(requirementToProjectResource);
+    const recentResources = sortProjectResources(projectDocuments.map(documentToProjectResource)).slice(0, 6);
     const resources = [...reportDocs, ...evidenceDocs, ...projectDocuments]
       .filter((document, index, list) => list.findIndex((item) => item.path === document.path) === index)
       .slice(0, 4)
-      .map((document) => ({
-        title: document.title,
-        path: document.path,
-        category: document.category
-      }));
+      .map(documentToProjectResource);
+    const readiness = projectReadiness(project, projectRequirements);
+    const reportReadiness = projectReportReadiness(evidenceDocs, reportDocs);
     const nextAction = nextProjectAction({ project, activeTaskCount, evidenceDocs, reportDocs, projectRequirements });
+    const actionQueue = projectActionQueue({ readiness, reportReadiness, activeTaskCount, reportDocs, evidenceDocs });
+    const primarySection = actionQueue[0]?.targetSection || "source";
 
     return {
       id: slugify(project.name || project.path || "project"),
@@ -901,6 +906,19 @@ export function collectProjectManagement({
       scope: project.scope || "",
       gitBoundary: projectPath ? "separate_git_workspace" : "registry_only",
       health: projectHealth(project, activeTaskCount, completedTaskCount, reportDocs),
+      readiness,
+      reportReadiness,
+      progressPercent: projectProgressPercent({
+        project,
+        projectRequirements,
+        evidenceDocs,
+        reportDocs,
+        activeTaskCount,
+        completedTaskCount
+      }),
+      lastActivityDate: latestProjectActivityDate(projectDocuments),
+      activeRunLabel: projectActiveRunLabel(activeTaskCount, projectTasks.length, readiness),
+      primarySection,
       taskCount: projectTasks.length,
       activeTaskCount,
       completedTaskCount,
@@ -910,7 +928,17 @@ export function collectProjectManagement({
       documentCount: projectDocuments.length,
       nextAction,
       milestone: milestoneLabel(project, activeTaskCount, reportDocs),
-      resources
+      resources,
+      actionQueue,
+      reportBundle: {
+        requirements: requirementResources,
+        evidence: evidenceDocs.slice(0, 5).map(documentToProjectResource),
+        reports: reportDocs.slice(0, 5).map(documentToProjectResource),
+        recent: recentResources,
+        resources: [...resources, ...requirementResources]
+          .filter((resource, index, list) => list.findIndex((item) => item.path === resource.path) === index)
+          .slice(0, 8)
+      }
     };
   });
 
@@ -969,7 +997,10 @@ export function collectProjectManagement({
       completedWorkItems: portfolio.reduce((total, project) => total + project.completedTaskCount, 0),
       milestoneCount: milestones.length,
       evidenceDocuments: allEvidenceDocs.length,
-      reportDocuments: allReportDocs.length
+      reportDocuments: allReportDocs.length,
+      readyToRunProjects: portfolio.filter((project) => project.readiness === "ready_to_run").length,
+      attentionProjects: portfolio.filter((project) => project.health === "attention" || project.readiness !== "ready_to_run").length,
+      projectReportsReady: portfolio.filter((project) => project.reportReadiness === "ready").length
     },
     portfolio,
     milestones,
@@ -1015,6 +1046,28 @@ function documentBelongsToProject(document, project, projectPath) {
   return Boolean(project.name) && haystack.includes(project.name.toLowerCase());
 }
 
+function documentToProjectResource(document) {
+  return {
+    title: document.title,
+    path: document.path,
+    category: document.category
+  };
+}
+
+function requirementToProjectResource(requirement) {
+  return {
+    title: requirement.id || requirement.requirement || titleFromPath(requirement.sourcePath || "requirement"),
+    path: requirement.sourcePath || "",
+    category: "requirement"
+  };
+}
+
+function sortProjectResources(resources) {
+  return resources
+    .filter((resource) => resource.path)
+    .sort((left, right) => left.path.localeCompare(right.path));
+}
+
 function projectHealth(project, activeTaskCount, completedTaskCount, reportDocs) {
   const status = String(project.status || "").toLowerCase();
   if (/blocked|risk|attention|needs/.test(status)) {
@@ -1027,6 +1080,114 @@ function projectHealth(project, activeTaskCount, completedTaskCount, reportDocs)
     return "active";
   }
   return "idle";
+}
+
+function projectReadiness(project, projectRequirements) {
+  if (!project.path) {
+    return "needs_workspace";
+  }
+  if (projectRequirements.length === 0) {
+    return "needs_requirements";
+  }
+  return "ready_to_run";
+}
+
+function projectReportReadiness(evidenceDocs, reportDocs) {
+  if (reportDocs.length === 0) {
+    return "needs_report";
+  }
+  if (evidenceDocs.length === 0) {
+    return "needs_evidence";
+  }
+  return "ready";
+}
+
+function projectProgressPercent({ project, projectRequirements, evidenceDocs, reportDocs, activeTaskCount, completedTaskCount }) {
+  const taskTotal = activeTaskCount + completedTaskCount;
+  const taskScore = taskTotal > 0 ? Math.round((completedTaskCount / taskTotal) * 20) : 8;
+  const score =
+    (project.path ? 24 : 0) +
+    (projectRequirements.length > 0 ? 24 : 0) +
+    (evidenceDocs.length > 0 ? 18 : 0) +
+    (reportDocs.length > 0 ? 18 : 0) +
+    taskScore;
+  return Math.max(0, Math.min(100, score));
+}
+
+function latestProjectActivityDate(projectDocuments) {
+  return projectDocuments
+    .map((document) => document.historyDate || String(document.updatedAt || "").slice(0, 10))
+    .filter(Boolean)
+    .sort()
+    .at(-1) || "";
+}
+
+function projectActiveRunLabel(activeTaskCount, taskCount, readiness) {
+  if (activeTaskCount > 0) {
+    return `${activeTaskCount}/${taskCount || activeTaskCount} active`;
+  }
+  if (readiness === "ready_to_run") {
+    return "ready for terminal run";
+  }
+  if (readiness === "needs_requirements") {
+    return "requirements needed";
+  }
+  return "workspace needed";
+}
+
+function projectActionQueue({ readiness, reportReadiness, activeTaskCount, reportDocs, evidenceDocs }) {
+  const actions = [];
+  if (readiness === "needs_workspace") {
+    actions.push({
+      id: "import_project_workspace",
+      label: "Connect workspace",
+      targetSection: "source",
+      description: "Import or clone this project as a Git workspace.",
+      priority: "primary"
+    });
+  }
+  if (readiness === "needs_requirements") {
+    actions.push({
+      id: "review_project_requirements",
+      label: "Review requirements",
+      targetSection: "requirements",
+      description: "Attach requirements and acceptance criteria before execution.",
+      priority: "attention"
+    });
+  }
+  if (readiness === "ready_to_run" || activeTaskCount > 0) {
+    actions.push({
+      id: "run_project_workspace",
+      label: "Run in terminal",
+      targetSection: "desktop",
+      description: "Open the runtime surface for this project workspace.",
+      priority: "primary"
+    });
+  }
+  if (reportReadiness !== "ready" || reportDocs.length > 0 || evidenceDocs.length > 0) {
+    actions.push({
+      id: "review_project_reports",
+      label: "Review reports",
+      targetSection: "eval",
+      description: "Inspect validation reports, evidence, and work summaries.",
+      priority: reportReadiness === "ready" ? "secondary" : "attention"
+    });
+  }
+  actions.push({
+    id: "open_project_timeline",
+    label: "Open work trail",
+    targetSection: "history",
+    description: "Read recent work history in execution order.",
+    priority: "secondary"
+  });
+  actions.push({
+    id: "open_project_documents",
+    label: "Open documents",
+    targetSection: "documents",
+    description: "Review linked plans, specs, and project documents.",
+    priority: "secondary"
+  });
+  return actions.slice(0, 5);
 }
 
 function nextProjectAction({ project, activeTaskCount, evidenceDocs, reportDocs, projectRequirements }) {

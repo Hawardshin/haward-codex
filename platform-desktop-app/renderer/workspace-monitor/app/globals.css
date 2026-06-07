@@ -21875,15 +21875,17 @@ h3 {
 
 .project-management-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.75fr);
+  grid-template-columns: minmax(280px, 1.15fr) minmax(320px, 1fr) minmax(280px, 0.75fr);
   gap: 16px;
   min-height: 0;
 }
 
 .project-portfolio-list,
-.project-management-side {
+.project-management-side,
+.project-detail-panel {
   display: grid;
   gap: 12px;
+  align-content: start;
   min-width: 0;
 }
 
@@ -21909,7 +21911,7 @@ h3 {
 
 .project-portfolio-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(150px, auto);
+  grid-template-columns: minmax(0, 1fr) minmax(132px, auto);
   gap: 12px;
   padding: 14px;
   border: 1px solid var(--line);
@@ -21926,13 +21928,31 @@ h3 {
   border-color: var(--status-success-border);
 }
 
+.project-portfolio-card.selected {
+  border-color: var(--accent-line);
+  background: var(--surface-depth-focus);
+}
+
+.project-card-main {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  text-align: left;
+  background: transparent;
+  cursor: pointer;
+}
+
 .project-portfolio-card span,
 .project-portfolio-card small,
 .project-trail-list span,
 .project-trail-list small,
 .project-milestone-list span,
 .project-milestone-list small,
-.project-action-list small {
+.project-action-list small,
+.project-report-bundle small {
   color: var(--text-secondary);
   font-size: var(--font-size-caption);
 }
@@ -21947,6 +21967,7 @@ h3 {
 .project-portfolio-card p {
   margin: 5px 0 0;
   color: var(--text-secondary);
+  line-height: 1.45;
 }
 
 .project-portfolio-card dl {
@@ -21976,10 +21997,56 @@ h3 {
   color: var(--text-secondary);
 }
 
+.project-readiness-row {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.project-readiness-row span,
+.project-detail-status span {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  min-height: 26px;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text-secondary);
+  background: var(--surface-muted);
+  font-size: var(--font-size-caption);
+  font-weight: 800;
+}
+
+.project-progress-meter {
+  grid-column: 1 / -1;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--surface-muted);
+}
+
+.project-progress-meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+}
+
+.project-card-actions {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
 .project-portfolio-card button,
 .project-milestone-list button,
 .project-trail-list button,
-.project-action-list button {
+.project-action-list button,
+.project-action-queue button,
+.project-report-bundle button {
   display: grid;
   gap: 4px;
   min-height: 44px;
@@ -21987,12 +22054,19 @@ h3 {
   text-align: left;
 }
 
-.project-portfolio-card button {
-  grid-column: 1 / -1;
+.project-portfolio-card .project-card-main {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.project-card-actions button {
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
 }
 
+.project-detail-panel,
 .project-management-side section {
   display: grid;
   gap: 10px;
@@ -22000,6 +22074,80 @@ h3 {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
+}
+
+.project-detail-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.project-action-queue {
+  display: grid;
+  gap: 8px;
+}
+
+.project-action-queue button {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+}
+
+.project-action-queue button.primary {
+  border-color: var(--accent-line);
+  background: var(--control-selected-bg);
+}
+
+.project-action-queue button.attention {
+  border-color: var(--status-warning-border);
+  background: var(--status-warning-bg);
+}
+
+.project-action-queue small {
+  grid-column: 2 / -1;
+  color: var(--text-secondary);
+  white-space: normal;
+}
+
+.project-report-bundle {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.project-report-bundle article {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-muted);
+}
+
+.project-report-bundle article > div {
+  display: grid;
+  gap: 6px;
+}
+
+.project-report-bundle button {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  min-height: 34px;
+  padding: 7px 8px;
+  background: var(--surface);
+}
+
+.project-report-bundle button span,
+.project-card-main strong,
+.project-card-main p,
+.project-next-action span,
+.project-action-queue span,
+.project-action-list span,
+.project-trail-list strong,
+.project-milestone-list strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .project-milestone-list,
@@ -22046,7 +22194,9 @@ h3 {
   .project-management-hero,
   .project-management-metrics,
   .project-workflow-lanes,
-  .project-portfolio-card {
+  .project-portfolio-card,
+  .project-report-bundle,
+  .project-card-actions {
     grid-template-columns: minmax(0, 1fr);
   }
 

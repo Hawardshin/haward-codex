@@ -141,10 +141,7 @@ const productFeatureArchitecturePanel = fs.readFileSync(
   path.join(projectRoot, "components", "features", "ProductFeatureArchitecturePanel.tsx"),
   "utf8"
 );
-const projectManagementPanel = fs.readFileSync(
-  path.join(projectRoot, "components", "features", "ProjectManagementPanel.tsx"),
-  "utf8"
-);
+const projectManagementPanel = readProjectManagementPanelSource();
 const evaluationReportPanel = fs.readFileSync(
   path.join(projectRoot, "components", "features", "EvaluationReportPanel.tsx"),
   "utf8"
@@ -267,6 +264,21 @@ function readRuntimeTerminalDrawerSource() {
     : [];
   return [
     fs.readFileSync(path.join(drawerRoot, "RuntimeTerminalDrawer.tsx"), "utf8"),
+    ...splitSources
+  ].join("\n");
+}
+
+function readProjectManagementPanelSource() {
+  const panelRoot = path.join(projectRoot, "components", "features");
+  const splitRoot = path.join(panelRoot, "project-management");
+  const splitSources = fs.existsSync(splitRoot)
+    ? fs.readdirSync(splitRoot)
+      .filter((file) => /\.(ts|tsx)$/.test(file))
+      .sort()
+      .map((file) => fs.readFileSync(path.join(splitRoot, file), "utf8"))
+    : [];
+  return [
+    fs.readFileSync(path.join(panelRoot, "ProjectManagementPanel.tsx"), "utf8"),
     ...splitSources
   ].join("\n");
 }
@@ -416,16 +428,29 @@ test("Default user view exposes a simple workspace-tracker start surface", () =>
   assert.match(monitorShell, /data-simple-user-start/);
   assert.match(monitorShell, /<WorkspaceProductSplitPanel/);
   assert.match(monitorShell, /<ProjectManagementPanel/);
+  assert.match(monitorShell, /const openProjectManagementTarget = useCallback/);
+  assert.match(monitorShell, /targetSection === "desktop"[\s\S]*?openTerminalDrawer\(\)/);
+  assert.match(monitorShell, /intentId: "import-workspace", flowStepId: "workspace"/);
+  assert.match(monitorShell, /onOpenSection=\{openProjectManagementTarget\}/);
   assert.match(projectManagementPanel, /Project Management Platform/);
   assert.match(projectManagementPanel, /프로젝트 관리 플랫폼/);
   assert.match(projectManagementPanel, /data-project-management-panel/);
   assert.match(projectManagementPanel, /data-project-management-primary-action="import-workspace"/);
   assert.match(projectManagementPanel, /data-project-workflow-lanes/);
   assert.match(projectManagementPanel, /data-project-portfolio-list/);
+  assert.match(projectManagementPanel, /data-project-detail-panel/);
+  assert.match(projectManagementPanel, /data-project-action-queue/);
+  assert.match(projectManagementPanel, /data-project-report-bundle/);
+  assert.match(projectManagementPanel, /data-project-resource-link/);
+  assert.match(projectManagementPanel, /projectReadinessCopy/);
+  assert.match(projectManagementPanel, /projectReportReadinessCopy/);
   assert.match(css, /\.workspace-product-split-panel \{/);
   assert.match(css, /\.project-management-panel \{/);
   assert.match(css, /\.project-workflow-lanes \{/);
   assert.match(css, /\.project-portfolio-card \{/);
+  assert.match(css, /\.project-detail-panel,/);
+  assert.match(css, /\.project-action-queue \{/);
+  assert.match(css, /\.project-report-bundle \{/);
   assert.match(monitorShell, /startSimpleUserTask/);
   assert.match(monitorShell, /showOperatorCenter=\{currentViewMode\.id !== "user"\}/);
   assert.match(css, /\.simple-user-start-panel \{/);

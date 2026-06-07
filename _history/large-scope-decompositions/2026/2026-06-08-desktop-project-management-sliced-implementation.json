@@ -1,0 +1,87 @@
+{
+  "task": "desktop project management sliced implementation",
+  "reason": "The user asked to split implementation work into feature slices and complete project management platform functionality.",
+  "source_inventory": [
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProjectManagementPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/project-management/",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+    "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css"
+  ],
+  "exclusions": [
+    "No new dependency installation",
+    "No global CLI installation",
+    "No remote repository creation",
+    "No credential inspection",
+    "No destructive git operation",
+    "No full MonitorShell rewrite in this slice"
+  ],
+  "representative_samples": [
+    "Existing ProjectManagementPanel portfolio UI",
+    "collectProjectManagement snapshot collector",
+    "MonitorShell section routing callbacks",
+    "Renderer static UI contract tests"
+  ],
+  "slices": [
+    {
+      "slice_id": "snapshot-project-readiness",
+      "touch_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+        "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs"
+      ],
+      "dependencies": ["web-first intake", "local collector review"],
+      "output_targets": ["readiness fields", "actionQueue", "reportBundle"],
+      "validation": ["collector tests", "tsc"]
+    },
+    {
+      "slice_id": "project-management-component-split",
+      "touch_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/components/features/ProjectManagementPanel.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/project-management/",
+        "platform-desktop-app/renderer/workspace-monitor/app/globals.css"
+      ],
+      "dependencies": ["snapshot-project-readiness"],
+      "output_targets": ["metrics", "workflow", "portfolio", "detail", "side panel"],
+      "validation": ["tool-studio tests", "Browser smoke"]
+    },
+    {
+      "slice_id": "project-action-routing",
+      "touch_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+      ],
+      "dependencies": ["project-management-component-split"],
+      "output_targets": ["project action router", "terminal drawer routing"],
+      "validation": ["tool-studio tests", "Browser smoke"]
+    },
+    {
+      "slice_id": "closeout-validation-records",
+      "touch_paths": [
+        "_history/",
+        "_requirements/changes/",
+        "platform-desktop-app/docs/requirements/",
+        "platform-desktop-app/specs/2026-06-08-desktop-project-management-sliced-implementation/"
+      ],
+      "dependencies": ["all implementation slices"],
+      "output_targets": ["requirements", "specs", "validation records", "evaluation"],
+      "validation": ["omission/resource/evaluate-work", "git diff --check"]
+    }
+  ],
+  "first_executable_slice": "snapshot-project-readiness",
+  "merge_gates": [
+    "workspace monitor collect/check/test/build",
+    "platform desktop test/check",
+    "Browser desktop/mobile smoke",
+    "docs audit",
+    "omission/resource/evaluation guards"
+  ],
+  "context_budget": "Use targeted source reads and avoid reading generated snapshots manually.",
+  "source_provenance": [
+    "_history/web-searches/2026/2026-06-08-desktop-project-management-sliced-implementation.ko.md"
+  ],
+  "created_at": "2026-06-08"
+}

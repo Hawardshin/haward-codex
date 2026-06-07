@@ -105,6 +105,8 @@ test("buildSnapshot reads minimal repository shape", async () => {
   fs.mkdirSync(path.join(root, "_ops", "projects"), { recursive: true });
   fs.mkdirSync(path.join(root, "_ops", "coordination"), { recursive: true });
   fs.mkdirSync(path.join(root, "_history", "work-summaries", "2026"), { recursive: true });
+  fs.mkdirSync(path.join(root, "_history", "evaluations", "2026"), { recursive: true });
+  fs.mkdirSync(path.join(root, "_history", "web-searches", "2026"), { recursive: true });
   fs.mkdirSync(path.join(root, "_docs"), { recursive: true });
   fs.mkdirSync(path.join(root, "_requirements", "baselines"), { recursive: true });
   fs.mkdirSync(path.join(root, "agent-platform", "configs", "access"), { recursive: true });
@@ -314,6 +316,14 @@ test("buildSnapshot reads minimal repository shape", async () => {
     "# 오늘 요약\n\n- desktop:package:internal build 검증 완료"
   );
   fs.writeFileSync(
+    path.join(root, "_history", "evaluations", "2026", "2026-06-01-demo.ko.md"),
+    "# Demo 평가\n\n- demo 프로젝트 검증 완료"
+  );
+  fs.writeFileSync(
+    path.join(root, "_history", "web-searches", "2026", "2026-06-01-demo.ko.md"),
+    "# Demo 웹 검색\n\n- demo 프로젝트 근거 확인"
+  );
+  fs.writeFileSync(
     path.join(root, "_requirements", "baselines", "requirements.ko.md"),
     "| ID | 요구사항 | 우선순위 |\n| --- | --- | --- |\n| REQ-WM-001 | Build monitor | must |"
   );
@@ -326,10 +336,10 @@ test("buildSnapshot reads minimal repository shape", async () => {
   assert.equal(snapshot.stats.completedTasks, 1);
   assert.equal(snapshot.collaborationBoard.summary.completedTasks, 1);
   assert.equal(snapshot.collaborationBoard.flows.length, 1);
-  assert.equal(snapshot.documents.length, 9);
+  assert.equal(snapshot.documents.length, 11);
   assert.equal(snapshot.stats.sourceFiles, 1);
-  assert.equal(snapshot.adminHistory.summary.documents, 1);
-  assert.equal(snapshot.adminHistory.inlineHistoryDocuments, 1);
+  assert.equal(snapshot.adminHistory.summary.documents, 3);
+  assert.equal(snapshot.adminHistory.inlineHistoryDocuments, 3);
   assert.equal(snapshot.sourceFiles[0].language, "python");
   assert.equal(snapshot.sourceFiles[0].content, undefined);
   assert.match(snapshot.sourceFiles[0].preview, /hello/);
@@ -373,8 +383,17 @@ test("buildSnapshot reads minimal repository shape", async () => {
   assert.equal(snapshot.projectManagement.summary.managedProjects, 1);
   assert.equal(snapshot.projectManagement.summary.activeProjects, 1);
   assert.equal(snapshot.projectManagement.summary.repoBackedProjects, 1);
+  assert.equal(snapshot.projectManagement.summary.readyToRunProjects, 0);
+  assert.equal(snapshot.projectManagement.summary.attentionProjects, 1);
+  assert.equal(snapshot.projectManagement.summary.projectReportsReady, 1);
   assert.equal(snapshot.projectManagement.portfolio[0].name, "demo");
   assert.equal(snapshot.projectManagement.portfolio[0].gitBoundary, "separate_git_workspace");
+  assert.equal(snapshot.projectManagement.portfolio[0].readiness, "needs_requirements");
+  assert.equal(snapshot.projectManagement.portfolio[0].reportReadiness, "ready");
+  assert.equal(snapshot.projectManagement.portfolio[0].progressPercent > 0, true);
+  assert.equal(snapshot.projectManagement.portfolio[0].actionQueue.some((action) => action.id === "review_project_requirements"), true);
+  assert.equal(snapshot.projectManagement.portfolio[0].reportBundle.reports.length > 0, true);
+  assert.equal(snapshot.projectManagement.portfolio[0].reportBundle.evidence.length > 0, true);
   assert.equal(snapshot.projectManagement.workflowLanes.some((lane) => lane.id === "import" && lane.targetSection === "source"), true);
   assert.equal(snapshot.projectManagement.desktopActions.length > 0, true);
   assert.equal(snapshot.openSourceFeatureReferences.summary.totalLayers, 1);
@@ -454,7 +473,10 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
         completedWorkItems: 0,
         milestoneCount: 1,
         evidenceDocuments: 1,
-        reportDocuments: 1
+        reportDocuments: 1,
+        readyToRunProjects: 1,
+        attentionProjects: 0,
+        projectReportsReady: 1
       },
       portfolio: [
         {
@@ -467,6 +489,12 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
           scope: "internal",
           gitBoundary: "separate_git_workspace",
           health: "active",
+          readiness: "ready_to_run",
+          reportReadiness: "ready",
+          progressPercent: 100,
+          lastActivityDate: "2026-06-03",
+          activeRunLabel: "1/1 active",
+          primarySection: "desktop",
           taskCount: 1,
           activeTaskCount: 1,
           completedTaskCount: 0,
@@ -476,7 +504,23 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
           documentCount: 2,
           nextAction: "internal",
           milestone: "internal",
-          resources: [{ title: "internal", path: "_history/internal.md", category: "work-summary" }]
+          resources: [{ title: "internal", path: "_history/internal.md", category: "work-summary" }],
+          actionQueue: [
+            {
+              id: "run_project_workspace",
+              label: "Run in terminal",
+              targetSection: "desktop",
+              description: "internal",
+              priority: "primary"
+            }
+          ],
+          reportBundle: {
+            requirements: [{ title: "REQ", path: "_requirements/x.md", category: "requirement" }],
+            evidence: [{ title: "internal", path: "_history/evidence.md", category: "web-search" }],
+            reports: [{ title: "internal", path: "_history/internal.md", category: "work-summary" }],
+            recent: [{ title: "internal", path: "_history/internal.md", category: "work-summary" }],
+            resources: [{ title: "internal", path: "_history/internal.md", category: "work-summary" }]
+          }
         }
       ],
       milestones: [

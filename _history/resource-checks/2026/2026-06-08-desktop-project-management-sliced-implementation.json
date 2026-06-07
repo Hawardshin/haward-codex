@@ -1,0 +1,90 @@
+{
+  "task": "desktop project management sliced implementation",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Next.js dev server for Browser smoke",
+    "Next.js production build",
+    "Node.js tests and snapshot collector",
+    "Browser in-app tabs"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "dev-server-lifecycle",
+      "category": "process",
+      "description": "Browser smoke required a temporary Next.js dev server.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Started next dev on 127.0.0.1:3123, verified UI, then sent Ctrl-C and observed process exit.",
+      "evidence": [
+        "dev server session 77075 exited after Ctrl-C"
+      ]
+    },
+    {
+      "risk_id": "browser-tabs",
+      "category": "browser_context",
+      "description": "Browser smoke opened temporary in-app Browser tabs.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Closed smoke tabs and reset viewport after desktop/mobile checks.",
+      "evidence": [
+        "browser_smoke_cleanup_ok",
+        "viewport reset after mobile smoke"
+      ]
+    },
+    {
+      "risk_id": "generated-snapshot-output",
+      "category": "large_data",
+      "description": "Collector and build regenerate snapshot and static output artifacts.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Ran collector/build intentionally and kept generated output in the owning renderer project.",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect --best-effort",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "validation-process-lifecycle",
+      "resource": "Node/Next.js validation commands",
+      "create_path": "pnpm collect/check/test/build and platform test/check",
+      "cleanup_path": "non-watch commands exited",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "all non-watch validation commands returned exit code 0"
+      ]
+    },
+    {
+      "check_id": "browser-and-dev-server-lifecycle",
+      "resource": "Browser tabs and Next dev server",
+      "create_path": "Browser tabs plus corepack pnpm exec next dev --port 3123",
+      "cleanup_path": "tab.close(), viewport reset, Ctrl-C to dev server",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "browser_smoke_cleanup_ok",
+        "dev server exited"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "command-exit-status",
+      "metric": "validation command exit status",
+      "tool": "shell command exit code",
+      "threshold": "all required validation commands exit 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "renderer check/test/build passed",
+        "platform test/check passed",
+        "docs audit and git diff --check passed"
+      ]
+    }
+  ],
+  "notes": [
+    "No long-running server, browser tab, worker, or external CLI process was intentionally left active."
+  ]
+}

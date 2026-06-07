@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-07T17:27:59.264Z",
+  "generatedAt": "2026-06-07T17:49:03.165Z",
   "summary": {
-    "documents": 3220,
+    "documents": 3227,
     "days": 9,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1132
+        "count": 1133
       },
       {
         "category": "web-search",
-        "count": 499
+        "count": 500
       },
       {
         "category": "request-trace",
-        "count": 428
+        "count": 429
       },
       {
         "category": "plan",
-        "count": 410
+        "count": 411
       },
       {
         "category": "work-timing",
-        "count": 347
+        "count": 348
       },
       {
         "category": "user-request",
-        "count": 213
+        "count": 214
       },
       {
         "category": "work-summary",
-        "count": 180
+        "count": 181
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 7293642,
+    "totalSourceBytes": 7312389,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,118 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-work-summaries-2026-2026-06-08-desktop-project-management-sliced-implementation-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-08-desktop-project-management-sliced-implementation.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: desktop project management sliced implementation",
+      "excerpt": "작업 요약: desktop project management sliced implementation 날짜: 2026 06 08 범위: platform desktop app/ 프로젝트 관리 화면과 snapshot contract 구현 WorkspaceProjectManagement 에 준비도, 보고 준비도, 진행률, 액션 큐, 보고서 묶음을 추가했다. collectProjectManagement 가 프로젝트별 작업/요구사항/문서를 기반으로 다음 액션과 보고서 bundle을 생성한다. ProjectM",
+      "html": "<p>작업 요약: desktop project management sliced implementation 날짜: 2026 06 08 범위: platform desktop app/ 프로젝트 관리 화면과 snapshot contract 구현 WorkspaceProjectManagement 에 준비도, 보고 준비도, 진행률, 액션 큐, 보고서 묶음을 추가했다. collectProjectManagement 가 프로젝트별 작업/요구사항/문서를 기반으로 다음 액션과 보고서 bundle을 생성한다. ProjectManagementPanel 을 metric, workflow, portfolio, detail, side panel 컴포넌트로 분리했다. 프로젝</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1253,
+      "updatedAt": "2026-06-07T17:46:31.684Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-08-desktop-project-management-sliced-implementation-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-08-desktop-project-management-sliced-implementation-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 08 Desktop Project Management Sliced Implementation Evaluation Input",
+      "excerpt": "{ \"schema version\": \"2026 06 08\", \"work mode\": \"standard\", \"web search record targets\": \" history/web searches/2026/2026 06 08 desktop project management sliced implementation.ko.md\" , \"user request summary targets\": \" history/user requests/2026/2026 06 08 desktop project managem",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 08&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;web search record targets&quot;: &quot; history/web searches/2026/2026 06 08 desktop project management sliced implementation.ko.md&quot; , &quot;user request summary targets&quot;: &quot; history/user requests/2026/2026 06 08 desktop project management sliced implementation.ko.md&quot; , &quot;requirements targets&quot;: &quot; requirements/change</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 7118,
+      "updatedAt": "2026-06-07T17:46:31.683Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-08-desktop-project-management-sliced-implementation-ko-md",
+      "path": "_history/request-traces/2026/2026-06-08-desktop-project-management-sliced-implementation.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: desktop project management sliced implementation",
+      "excerpt": "요청 결과 추적: desktop project management sliced implementation 날짜: 2026 06 08 요청 요약: 프로젝트 관리 플랫폼 기능을 slice로 나누어 구현하고, 사용자가 Git 작업공간과 현재 작업 보고/근거를 쉽게 볼 수 있게 하라는 요청. 결과 프로젝트 관리 snapshot에 실행 준비도, 보고 준비도, 진행률, 액션 큐, 보고서 묶음을 추가했다. 프로젝트 관리 UI를 project management/ 하위 컴포넌트로 분리했다. 프로젝트 상세 패널에",
+      "html": "<p>요청 결과 추적: desktop project management sliced implementation 날짜: 2026 06 08 요청 요약: 프로젝트 관리 플랫폼 기능을 slice로 나누어 구현하고, 사용자가 Git 작업공간과 현재 작업 보고/근거를 쉽게 볼 수 있게 하라는 요청. 결과 프로젝트 관리 snapshot에 실행 준비도, 보고 준비도, 진행률, 액션 큐, 보고서 묶음을 추가했다. 프로젝트 관리 UI를 project management/ 하위 컴포넌트로 분리했다. 프로젝트 상세 패널에서 액션 큐와 요구사항/보고서/근거/최근 기록 묶음을 보여준다. 프로젝트 액션 라우터를 추가해 desktop 액션은 하단 터미널 drawer까지</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2256,
+      "updatedAt": "2026-06-07T17:46:31.683Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-08-desktop-project-management-sliced-implementation-json",
+      "path": "_history/work-timings/2026/2026-06-08-desktop-project-management-sliced-implementation.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 08 Desktop Project Management Sliced Implementation",
+      "excerpt": "{ \"task id\": \"2026 06 08 desktop project management sliced implementation\", \"title\": \"Desktop project management sliced implementation\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 08 desktop project management sliced implementation&quot;, &quot;title&quot;: &quot;Desktop project management sliced implementation&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;duration seconds&quot;: 420, &quot;notes&quot;: &quot;Checked GitHub Desktop, Git workt</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3222,
+      "updatedAt": "2026-06-07T17:45:04.540Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-08-desktop-project-management-sliced-implementation-ko-md",
+      "path": "_history/web-searches/2026/2026-06-08-desktop-project-management-sliced-implementation.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: desktop project management sliced implementation",
+      "excerpt": "웹 검색 기록: desktop project management sliced implementation 날짜: 2026 06 08 작업: 프로젝트 관리 플랫폼 기능을 slice별로 구현하고, Git 작업공간 import/run/report 흐름을 데스크톱 앱의 기본 사용자 경로에 연결한다. 검색 질의 official GitHub Desktop documentation clone create open repository desktop app official Git worktree documentat",
+      "html": "<p>웹 검색 기록: desktop project management sliced implementation 날짜: 2026 06 08 작업: 프로젝트 관리 플랫폼 기능을 slice별로 구현하고, Git 작업공간 import/run/report 흐름을 데스크톱 앱의 기본 사용자 경로에 연결한다. 검색 질의 official GitHub Desktop documentation clone create open repository desktop app official Git worktree documentation porcelain list multiple worktrees official Tauri v2 dialog plugin open direc</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3065,
+      "updatedAt": "2026-06-07T17:40:32.984Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "history-plans-2026-2026-06-08-desktop-project-management-sliced-implementation-ko-md",
+      "path": "_history/plans/2026/2026-06-08-desktop-project-management-sliced-implementation.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "계획 기록: desktop project management sliced implementation",
+      "excerpt": "계획 기록: desktop project management sliced implementation 완료한 사전 확인 공식 문서 기반 web first intake를 수행했다. 기존 ProjectManagementPanel , collectProjectManagement , WorkspaceProjectManagement , MonitorShell 라우팅을 확인했다. 이전 commit의 product split 구현을 기반으로 이번 slice의 범위를 정했다. 실행 계획 1. 프로젝트 관리 sna",
+      "html": "<p>계획 기록: desktop project management sliced implementation 완료한 사전 확인 공식 문서 기반 web first intake를 수행했다. 기존 ProjectManagementPanel , collectProjectManagement , WorkspaceProjectManagement , MonitorShell 라우팅을 확인했다. 이전 commit의 product split 구현을 기반으로 이번 slice의 범위를 정했다. 실행 계획 1. 프로젝트 관리 snapshot에 실행 준비도, 보고 준비도, 액션 큐, 보고서 묶음을 추가한다. 2. 프로젝트 관리 UI를 metric/workflow/portfo</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1019,
+      "updatedAt": "2026-06-07T17:39:40.745Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-08-desktop-project-management-sliced-implementation-ko-md",
+      "path": "_history/user-requests/2026/2026-06-08-desktop-project-management-sliced-implementation.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: desktop project management sliced implementation",
+      "excerpt": "사용자 요청 요약: desktop project management sliced implementation 날짜: 2026 06 08 요약: 사용자는 데스크톱 앱을 Ollama/툴/에이전트 관리보다 Git 프로젝트 관리 플랫폼으로 재정의하고, 기능 구현을 잘게 나누어 빠짐없이 진행하라고 요청했다. 핵심 요구: 프로젝트 관리 기능을 slice별로 구현한다. 사용자가 Git 작업공간, 현재 작업, 보고서, 근거, 작업 순서를 쉽게 볼 수 있게 한다. 고급 에이전트/툴 기능은 기본 사용자 흐름에서 분리",
+      "html": "<p>사용자 요청 요약: desktop project management sliced implementation 날짜: 2026 06 08 요약: 사용자는 데스크톱 앱을 Ollama/툴/에이전트 관리보다 Git 프로젝트 관리 플랫폼으로 재정의하고, 기능 구현을 잘게 나누어 빠짐없이 진행하라고 요청했다. 핵심 요구: 프로젝트 관리 기능을 slice별로 구현한다. 사용자가 Git 작업공간, 현재 작업, 보고서, 근거, 작업 순서를 쉽게 볼 수 있게 한다. 고급 에이전트/툴 기능은 기본 사용자 흐름에서 분리한다. 터미널 실행과 보고서 확인이 프로젝트 화면에서 바로 이어져야 한다. 보존 정책: 전체 원문은 중복/장문이라 저장하지 않고, 구현 가능한 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 814,
+      "updatedAt": "2026-06-07T17:39:40.741Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
     {
       "id": "history-evaluations-2026-2026-06-08-desktop-project-management-platform-evaluation-input-json",
       "path": "_history/evaluations/2026/2026-06-08-desktop-project-management-platform-evaluation-input.json",
@@ -51587,35 +51699,35 @@
     {
       "date": "2026-06-08",
       "year": "2026",
-      "documentsCount": 36,
+      "documentsCount": 43,
       "categories": [
         {
           "category": "evaluation",
-          "count": 5
+          "count": 6
         },
         {
           "category": "plan",
-          "count": 5
+          "count": 6
         },
         {
           "category": "request-trace",
-          "count": 5
+          "count": 6
         },
         {
           "category": "user-request",
-          "count": 5
+          "count": 6
         },
         {
           "category": "web-search",
-          "count": 5
+          "count": 6
         },
         {
           "category": "work-summary",
-          "count": 5
+          "count": 6
         },
         {
           "category": "work-timing",
-          "count": 5
+          "count": 6
         },
         {
           "category": "daily-history",

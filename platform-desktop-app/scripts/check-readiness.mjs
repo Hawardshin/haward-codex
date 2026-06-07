@@ -662,6 +662,12 @@ const {
   ptyDecisionEn,
   productFeaturePanel,
   projectManagementPanel,
+  projectManagementCopy,
+  projectManagementMetrics,
+  projectManagementWorkflow,
+  projectPortfolioList,
+  projectDetailPanel,
+  projectManagementSidePanel,
   workspaceProductSplitPanel,
   monitorCollector,
   productFeatureCollector,
@@ -673,6 +679,15 @@ const {
   updaterManifest,
   lazyBoundaryCheck
 } = sourceFiles;
+const projectManagementPanelSource = [
+  projectManagementPanel,
+  projectManagementCopy,
+  projectManagementMetrics,
+  projectManagementWorkflow,
+  projectPortfolioList,
+  projectDetailPanel,
+  projectManagementSidePanel
+].join("\n");
 const monitorWorkbenchSource = joinSourceMap(sourceFiles, monitorWorkbenchSourceKeys);
 for (const requiredPhrase of ["buildCustomerSnapshot", "customer_snapshot_sanitized", "--snapshot-mode", "sourceFiles: []"]) {
   if (!monitorCollector.includes(requiredPhrase)) {
@@ -726,7 +741,7 @@ for (const requiredPhrase of [
   if (
     !monitorCollector.includes(requiredPhrase) &&
     !monitorShell.includes(requiredPhrase) &&
-    !projectManagementPanel.includes(requiredPhrase)
+    !projectManagementPanelSource.includes(requiredPhrase)
   ) {
     failures.push(`workspace-monitor project management platform must include ${requiredPhrase}`);
   }

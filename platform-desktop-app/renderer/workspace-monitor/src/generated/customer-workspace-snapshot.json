@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-07T17:27:59.266Z",
+  "generatedAt": "2026-06-07T17:49:03.167Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -59,7 +59,10 @@
       "completedWorkItems": 0,
       "milestoneCount": 0,
       "evidenceDocuments": 0,
-      "reportDocuments": 0
+      "reportDocuments": 0,
+      "readyToRunProjects": 0,
+      "attentionProjects": 0,
+      "projectReportsReady": 0
     },
     "portfolio": [],
     "milestones": [],
@@ -74,7 +77,7 @@
       {
         "id": "plan",
         "label": "Plan",
-        "count": 975,
+        "count": 985,
         "description": "Review requirements, specs, plans, and project scope.",
         "targetSection": "requirements"
       },
@@ -88,7 +91,7 @@
       {
         "id": "verify",
         "label": "Report",
-        "count": 490,
+        "count": 489,
         "description": "Read reports, evidence, validation, and request traces.",
         "targetSection": "eval"
       }
@@ -1862,7 +1865,7 @@
       "queuedPatterns": 0,
       "activeRecommendations": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-07T17:26:59.791Z"
+      "latestInsightAt": "2026-06-07T17:46:31.684Z"
     },
     "inferenceStages": [],
     "signalGroups": []
@@ -1877,7 +1880,7 @@
       "totalImprovementPackages": 0,
       "totalFitnessChecks": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-07T17:26:59.791Z"
+      "latestInsightAt": "2026-06-07T17:46:31.684Z"
     },
     "operatingModel": [],
     "structuralPrinciples": [],

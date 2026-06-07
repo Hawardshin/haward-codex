@@ -66,6 +66,9 @@ export type WorkspaceProjectManagement = {
     milestoneCount: number;
     evidenceDocuments: number;
     reportDocuments: number;
+    readyToRunProjects: number;
+    attentionProjects: number;
+    projectReportsReady: number;
   };
   portfolio: Array<{
     id: string;
@@ -77,6 +80,12 @@ export type WorkspaceProjectManagement = {
     scope: string;
     gitBoundary: string;
     health: "active" | "attention" | "idle" | "done";
+    readiness: "ready_to_run" | "needs_workspace" | "needs_requirements";
+    reportReadiness: "ready" | "needs_evidence" | "needs_report";
+    progressPercent: number;
+    lastActivityDate: string;
+    activeRunLabel: string;
+    primarySection: string;
     taskCount: number;
     activeTaskCount: number;
     completedTaskCount: number;
@@ -91,6 +100,40 @@ export type WorkspaceProjectManagement = {
       path: string;
       category: string;
     }>;
+    actionQueue: Array<{
+      id: string;
+      label: string;
+      targetSection: string;
+      description: string;
+      priority: "primary" | "secondary" | "attention";
+    }>;
+    reportBundle: {
+      requirements: Array<{
+        title: string;
+        path: string;
+        category: string;
+      }>;
+      evidence: Array<{
+        title: string;
+        path: string;
+        category: string;
+      }>;
+      reports: Array<{
+        title: string;
+        path: string;
+        category: string;
+      }>;
+      recent: Array<{
+        title: string;
+        path: string;
+        category: string;
+      }>;
+      resources: Array<{
+        title: string;
+        path: string;
+        category: string;
+      }>;
+    };
   }>;
   milestones: Array<{
     id: string;
