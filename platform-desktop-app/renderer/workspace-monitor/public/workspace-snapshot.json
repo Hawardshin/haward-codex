@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-07T17:49:03.166Z",
+  "generatedAt": "2026-06-07T17:55:13.704Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -70,14 +70,14 @@
       {
         "id": "import",
         "label": "Import",
-        "count": 5,
+        "count": 6,
         "description": "Open, clone, or create Git-backed project workspaces.",
         "targetSection": "source"
       },
       {
         "id": "plan",
         "label": "Plan",
-        "count": 985,
+        "count": 983,
         "description": "Review requirements, specs, plans, and project scope.",
         "targetSection": "requirements"
       },
@@ -91,7 +91,7 @@
       {
         "id": "verify",
         "label": "Report",
-        "count": 489,
+        "count": 487,
         "description": "Read reports, evidence, validation, and request traces.",
         "targetSection": "eval"
       }
@@ -1720,9 +1720,9 @@
       },
       "agentToolPlatform": {
         "id": "agent_tool_operations",
-        "home": "agent-platform/",
-        "primaryClaim": "Build, evaluate, configure, and operate reusable agents, tools, provider connectors, model runtimes, skills, workflows, and promotion pipelines as a separate platform.",
-        "desktopRelationship": "advanced_operator_link_only"
+        "home": "agent-tool-desktop-app/",
+        "primaryClaim": "Build, evaluate, configure, and operate reusable agents, tools, provider connectors, model runtimes, skills, workflows, and promotion pipelines as a separate desktop app.",
+        "desktopRelationship": "peer_desktop_product_with_advanced_operator_link"
       }
     },
     "workspaceModel": {
@@ -1790,31 +1790,31 @@
       {
         "capabilityId": "agent_factory",
         "label": "Agent factory and subagent management",
-        "targetHome": "agent-platform/",
+        "targetHome": "agent-tool-desktop-app/",
         "desktopVisibility": "advanced_operator_only"
       },
       {
         "capabilityId": "tool_studio",
         "label": "Tool builder, tool registry, Python venv, and deployment workflow",
-        "targetHome": "agent-platform/",
+        "targetHome": "agent-tool-desktop-app/",
         "desktopVisibility": "advanced_operator_only"
       },
       {
         "capabilityId": "ollama_model_management",
         "label": "Ollama model lifecycle and local model catalog management",
-        "targetHome": "agent-platform/",
+        "targetHome": "agent-tool-desktop-app/",
         "desktopVisibility": "settings_reference_only"
       },
       {
         "capabilityId": "provider_direct_agent_run",
         "label": "Direct OpenAI, Anthropic, Gemini, or cloud-provider agent execution",
-        "targetHome": "agent-platform/",
+        "targetHome": "agent-tool-desktop-app/",
         "desktopVisibility": "settings_reference_only"
       },
       {
         "capabilityId": "aws_agentcore_style_runtime",
         "label": "AWS AgentCore/Bedrock-style agent runtime, memory, gateway, identity, observability, and evaluation lifecycle",
-        "targetHome": "agent-platform/",
+        "targetHome": "agent-tool-desktop-app/",
         "desktopVisibility": "advanced_operator_only"
       }
     ],
@@ -1865,7 +1865,7 @@
       "queuedPatterns": 0,
       "activeRecommendations": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-07T17:46:31.684Z"
+      "latestInsightAt": "2026-06-07T17:53:53.951Z"
     },
     "inferenceStages": [],
     "signalGroups": []
@@ -1880,7 +1880,7 @@
       "totalImprovementPackages": 0,
       "totalFitnessChecks": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-07T17:46:31.684Z"
+      "latestInsightAt": "2026-06-07T17:53:53.951Z"
     },
     "operatingModel": [],
     "structuralPrinciples": [],

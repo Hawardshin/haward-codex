@@ -1,0 +1,107 @@
+{
+  "task": "two desktop app product boundary",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "peer-desktop-products",
+      "description": "The repository must record platform-desktop-app and agent-tool-desktop-app as peer desktop app products.",
+      "source": "REQ-ATD-001",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_ops/projects/registry.json",
+        "platform-desktop-app/configs/workspace-tracker-product-split-registry.json"
+      ]
+    },
+    {
+      "item_id": "agent-tool-product-home",
+      "description": "Agent, tool, Ollama, provider, and AgentCore-style operations must have a separate desktop product home.",
+      "source": "REQ-ATD-002",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-tool-desktop-app/README.md",
+        "agent-tool-desktop-app/configs/product-boundary-registry.json"
+      ]
+    },
+    {
+      "item_id": "agent-platform-engine-boundary",
+      "description": "agent-platform must be represented as engine/policy/validator layer, not the second desktop app product home.",
+      "source": "REQ-ATD-003",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/README.md",
+        "_ops/projects/registry.json"
+      ]
+    },
+    {
+      "item_id": "workspace-tracker-stays-focused",
+      "description": "The project management desktop app must remain focused on Git workspaces, reports, evidence, and terminal state.",
+      "source": "REQ-ATD-004",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/product-feature-registry.json",
+        "platform-desktop-app/configs/workspace-tracker-product-split-registry.json"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "agent-tool-desktop-app/configs/product-boundary-registry.json",
+      "purpose": "Self-documenting second desktop app product boundary",
+      "required": true
+    },
+    {
+      "path": "_ops/projects/registry.json",
+      "purpose": "Root project registration for the second desktop app",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/configs/workspace-tracker-product-split-registry.json",
+      "purpose": "Peer desktop app split source",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-contract",
+      "description": "Changed shared config registries are self-documenting.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../agent-tool-desktop-app/configs/product-boundary-registry.json ../platform-desktop-app/configs/workspace-tracker-product-split-registry.json ../platform-desktop-app/configs/product-feature-registry.json"
+      ]
+    },
+    {
+      "check_id": "desktop-tests-checks",
+      "description": "Existing desktop app checks still pass after registry boundary changes.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app run test",
+        "corepack pnpm --dir platform-desktop-app run check",
+        "corepack pnpm --dir platform-desktop-app run renderer:build"
+      ]
+    },
+    {
+      "check_id": "json-docs-diff",
+      "description": "JSON syntax, docs audit, and whitespace checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "python3 -m json.tool _ops/projects/registry.json",
+        "python3 _tools/docs-audit/src/docs_audit.py --check",
+        "git diff --check"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "agent-tool-desktop-app does not yet have a runnable Tauri/Electron runtime shell.",
+    "Provider credential, Ollama process, model storage, and tool install safety gates are not implemented in this boundary clarification slice."
+  ],
+  "notes": [
+    "This close-out covers product boundary correction, not runtime implementation."
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "task_id": "2026-06-08-two-desktop-app-product-boundary",
+  "title": "Two desktop app product boundary",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "duration_seconds": 180,
+      "notes": "Checked Tauri and Electron desktop app process/window references."
+    },
+    {
+      "phase_id": "source_review",
+      "label": "Source and registry review",
+      "status": "completed",
+      "duration_seconds": 360,
+      "notes": "Reviewed workspace split registry, product feature registry, root project registry, and agent-platform README."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Boundary scaffold and registry update",
+      "status": "completed",
+      "duration_seconds": 900,
+      "notes": "Added agent-tool-desktop-app scaffold and updated registry/docs boundaries."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "duration_seconds": 720,
+      "notes": "Ran config contract, JSON checks, docs audit, desktop tests/checks, customer renderer build, and diff check."
+    },
+    {
+      "phase_id": "close_out",
+      "label": "Close-out",
+      "status": "completed",
+      "duration_seconds": 240,
+      "notes": "Recorded omission and evaluation inputs before commit."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "implementation",
+    "bottleneck_notes": "Main cost was correcting product ownership without overclaiming runnable desktop readiness.",
+    "improvement_candidates": [
+      "Implement the agent-tool desktop runtime shell in a separate slice.",
+      "Add a project-boundary readiness check that asserts peer desktop products directly."
+    ]
+  },
+  "evidence": [
+    "_history/web-searches/2026/2026-06-08-two-desktop-app-product-boundary.ko.md",
+    "agent-tool-desktop-app/configs/product-boundary-registry.json",
+    "corepack pnpm --dir platform-desktop-app run test",
+    "corepack pnpm --dir platform-desktop-app run check",
+    "corepack pnpm --dir platform-desktop-app run renderer:build"
+  ]
+}

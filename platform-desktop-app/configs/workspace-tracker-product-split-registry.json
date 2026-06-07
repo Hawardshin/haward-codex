@@ -1,14 +1,15 @@
 {
   "schema_version": "2026-06-08",
   "name": "workspace-tracker-product-split-registry",
-  "purpose": "Defines the split between the desktop workspace tracker product and the separate agent/tool operations platform.",
+  "purpose": "Defines the split between the desktop workspace tracker product and the separate agent/tool operations desktop app.",
   "reader_guide": {
     "summary": "Use this registry before changing desktop home, navigation, workspace import, CLI adapter, report, agent-builder, tool-builder, provider, or Ollama surfaces.",
     "how_to_read": [
       "Read product_boundary to decide whether a capability belongs in the desktop tracker or the separate agent/tool platform.",
       "Read workspace_model before adding project import, clone, Git, or multi-repository behavior.",
       "Read ui_policy before adding first-screen cards or navigation sections.",
-      "Read separated_platforms before exposing agent factory, tool studio, provider task execution, Ollama, or AWS AgentCore-style lifecycle functions."
+      "Read separated_platforms before exposing agent factory, tool studio, provider task execution, Ollama, or AWS AgentCore-style lifecycle functions.",
+      "Treat platform-desktop-app and agent-tool-desktop-app as peer installable desktop products; treat agent-platform as the shared engine and contract layer."
     ],
     "owner": "platform-desktop-app",
     "last_reviewed": "2026-06-08",
@@ -16,7 +17,7 @@
       "The desktop app first screen changes.",
       "A feature creates or manages agents, tools, models, providers, Ollama, or cloud agent runtime resources.",
       "A feature imports, clones, summarizes, reports on, or launches work inside a Git workspace.",
-      "A project boundary changes between platform-desktop-app and agent-platform."
+      "A project boundary changes between platform-desktop-app, agent-tool-desktop-app, and agent-platform."
     ]
   },
   "reference_links": [
@@ -84,6 +85,16 @@
   ],
   "structure_rules": [
     {
+      "id": "both_split_products_are_desktop_apps",
+      "rule": "The workspace tracker and the agent/tool operations product shall both be modeled as installable desktop apps.",
+      "reason": "The user clarified that both split products are desktop apps.",
+      "applies_to": [
+        "product_boundary",
+        "separated_platforms",
+        "ui_policy"
+      ]
+    },
+    {
       "id": "desktop_tracker_is_primary",
       "rule": "The installable desktop app shall be a workspace tracker and AI-coding surface host, not a general agent factory or tool runtime platform.",
       "reason": "The user wants a simpler app for importing Git workspaces, using Codex/Cursor/Claude Code/Antigravity-style tools, and seeing current work, evidence, and reports.",
@@ -118,8 +129,8 @@
     },
     {
       "id": "agent_and_tool_operations_are_separate",
-      "rule": "Agent builder, tool studio, direct provider task execution, Ollama model management, AWS AgentCore-style lifecycle, and reusable capability promotion shall belong to the separate agent-platform product unless a user explicitly opens the advanced operator area.",
-      "reason": "These functions make the user-facing desktop app too complex and belong in a distinct platform for agent/tool operations.",
+      "rule": "Agent builder, tool studio, direct provider task execution, Ollama model management, AWS AgentCore-style lifecycle, and reusable capability promotion shall belong to the separate agent-tool-desktop-app product unless a user explicitly opens the advanced operator area.",
+      "reason": "These functions make the project-management desktop app too complex and belong in a distinct desktop product for agent/tool operations.",
       "applies_to": [
         "separated_platforms",
         "advanced_sections",
@@ -188,9 +199,11 @@
     },
     "agent_tool_platform": {
       "id": "agent_tool_operations",
-      "home": "agent-platform/",
-      "primary_claim": "Build, evaluate, configure, and operate reusable agents, tools, provider connectors, model runtimes, skills, workflows, and promotion pipelines as a separate platform.",
-      "desktop_relationship": "advanced_operator_link_only"
+      "home": "agent-tool-desktop-app/",
+      "engine_home": "agent-platform/",
+      "product_form": "installable_desktop_app",
+      "primary_claim": "Build, evaluate, configure, and operate reusable agents, tools, provider connectors, model runtimes, skills, workflows, and promotion pipelines as a separate desktop app.",
+      "desktop_relationship": "peer_desktop_product_with_advanced_operator_link"
     }
   },
   "workspace_model": {
@@ -256,31 +269,36 @@
     {
       "capability_id": "agent_factory",
       "label": "Agent factory and subagent management",
-      "target_home": "agent-platform/",
+      "target_home": "agent-tool-desktop-app/",
+      "engine_home": "agent-platform/",
       "desktop_visibility": "advanced_operator_only"
     },
     {
       "capability_id": "tool_studio",
       "label": "Tool builder, tool registry, Python venv, and deployment workflow",
-      "target_home": "agent-platform/",
+      "target_home": "agent-tool-desktop-app/",
+      "engine_home": "agent-platform/",
       "desktop_visibility": "advanced_operator_only"
     },
     {
       "capability_id": "ollama_model_management",
       "label": "Ollama model lifecycle and local model catalog management",
-      "target_home": "agent-platform/",
+      "target_home": "agent-tool-desktop-app/",
+      "engine_home": "agent-platform/",
       "desktop_visibility": "settings_reference_only"
     },
     {
       "capability_id": "provider_direct_agent_run",
       "label": "Direct OpenAI, Anthropic, Gemini, or cloud-provider agent execution",
-      "target_home": "agent-platform/",
+      "target_home": "agent-tool-desktop-app/",
+      "engine_home": "agent-platform/",
       "desktop_visibility": "settings_reference_only"
     },
     {
       "capability_id": "aws_agentcore_style_runtime",
       "label": "AWS AgentCore/Bedrock-style agent runtime, memory, gateway, identity, observability, and evaluation lifecycle",
-      "target_home": "agent-platform/",
+      "target_home": "agent-tool-desktop-app/",
+      "engine_home": "agent-platform/",
       "desktop_visibility": "advanced_operator_only"
     }
   ],
@@ -328,5 +346,7 @@
     "home default task intents do not start with agent factory or tool studio",
     "product feature registry primary product is workspace_tracker",
     "readiness tests assert agent/tool operations are separate"
+    ,
+    "root project registry declares agent-tool-desktop-app as a peer installable desktop product"
   ]
 }

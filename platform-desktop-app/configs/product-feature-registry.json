@@ -1,7 +1,7 @@
 {
   "schema_version": "2026-06-03",
   "name": "product-feature-registry",
-  "purpose": "Defines the installable desktop product as a Git-backed AI workspace tracker whose primary value is importing many repositories, launching replaceable AI coding tools, and showing current work, evidence, validation, reports, and terminal state. Agent and tool operations are separated into agent-platform.",
+  "purpose": "Defines the installable desktop product as a Git-backed AI workspace tracker whose primary value is importing many repositories, launching replaceable AI coding tools, and showing current work, evidence, validation, reports, and terminal state. Agent and tool operations are separated into a peer agent-tool desktop app backed by agent-platform.",
   "reader_guide": {
     "summary": "Use this registry before changing the desktop home screen, snapshot schema, installer shell runtime, or platform feature navigation.",
     "how_to_read": [
@@ -17,7 +17,7 @@
       "The desktop home screen or first-run product promise changes.",
       "A feature is promoted from workflow, prompt, template, tool, skill, or agent into a desktop product surface.",
       "A new workspace import, CLI adapter, Git status, work report, evidence, learning, or observability capability is added.",
-      "Agent factory, tool studio, direct provider execution, or Ollama management starts to look like the main desktop product again.",
+      "Agent factory, tool studio, direct provider execution, or Ollama management starts to look like the workspace tracker desktop product again.",
       "The installer shell runtime contract changes how work state, decisions, evidence, validation, or evaluations are accumulated."
     ]
   },
@@ -237,12 +237,13 @@
     },
     {
       "id": "agent_tool_runtime_platform_is_separated",
-      "rule": "Agent factory, root tool management, provider direct agent execution, Ollama model management, and AWS AgentCore-style runtime lifecycle shall be treated as separated advanced platform capabilities.",
-      "reason": "The user asked to remove these from the default desktop app and build them as a separate platform.",
+      "rule": "Agent factory, root tool management, provider direct agent execution, Ollama model management, and AWS AgentCore-style runtime lifecycle shall be treated as capabilities of a separate agent-tool desktop app backed by agent-platform.",
+      "reason": "The user asked to remove these from the project-management desktop app and clarified that the separated product is also a desktop app.",
       "applies_to": [
         "product_position",
         "feature_layers",
         "desktop_home_surface",
+        "agent-tool-desktop-app",
         "agent-platform"
       ]
     },

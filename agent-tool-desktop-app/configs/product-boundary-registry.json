@@ -1,0 +1,193 @@
+{
+  "schema_version": "2026-06-08",
+  "name": "agent-tool-desktop-product-boundary",
+  "purpose": "Defines the second desktop app product boundary for agent, tool, Ollama, provider, and AgentCore-style operations.",
+  "reader_guide": {
+    "summary": "Use this registry before adding agent factory, tool studio, Ollama, provider direct execution, or cloud agent runtime features to either desktop app.",
+    "how_to_read": [
+      "Read product_identity to confirm this is a separate installable desktop app, not a hidden tab in the workspace tracker.",
+      "Read relationship_to_other_projects before moving code or UI between platform-desktop-app, agent-tool-desktop-app, and agent-platform.",
+      "Read feature_ownership to decide whether a capability belongs here or in the workspace tracker.",
+      "Read release_boundaries before claiming the app is runnable or distributable."
+    ],
+    "owner": "agent-tool-desktop-app",
+    "last_reviewed": "2026-06-08",
+    "update_triggers": [
+      "A feature touches agent creation, tool management, Ollama, provider execution, or cloud agent lifecycle.",
+      "A UI surface moves between project management and agent/tool operations.",
+      "A desktop runtime, installer, updater, or package command is introduced.",
+      "agent-platform engine responsibilities change."
+    ]
+  },
+  "reference_links": [
+    {
+      "id": "tauri_capabilities_windows",
+      "title": "Tauri capabilities for different windows and platforms",
+      "url": "https://tauri.app/learn/security/capabilities-for-windows-and-platforms/",
+      "source_type": "official_docs",
+      "used_for": [
+        "desktop window and permission boundary model",
+        "separating privileged operations by capability"
+      ],
+      "last_checked": "2026-06-08"
+    },
+    {
+      "id": "tauri_process_model",
+      "title": "Tauri process model",
+      "url": "https://tauri.app/concept/process-model/",
+      "source_type": "official_docs",
+      "used_for": [
+        "desktop app process and frontend/backend responsibility separation"
+      ],
+      "last_checked": "2026-06-08"
+    },
+    {
+      "id": "electron_process_model",
+      "title": "Electron process model",
+      "url": "https://www.electronjs.org/docs/latest/tutorial/process-model",
+      "source_type": "official_docs",
+      "used_for": [
+        "cross-framework desktop process separation reference"
+      ],
+      "last_checked": "2026-06-08"
+    },
+    {
+      "id": "workspace_split_registry",
+      "title": "Workspace tracker product split registry",
+      "path": "platform-desktop-app/configs/workspace-tracker-product-split-registry.json",
+      "source_type": "internal",
+      "used_for": [
+        "two-desktop-app product boundary",
+        "workspace tracker versus agent/tool operations ownership"
+      ],
+      "last_checked": "2026-06-08"
+    }
+  ],
+  "structure_rules": [
+    {
+      "id": "agent_tool_product_is_desktop_app",
+      "rule": "Agent/tool/Ollama operations shall be delivered as a separate installable desktop app product, not only as a Python project, hidden settings page, or optional tab in the workspace tracker.",
+      "reason": "The user clarified that both split products are desktop apps.",
+      "applies_to": [
+        "product_identity",
+        "feature_ownership",
+        "release_boundaries"
+      ]
+    },
+    {
+      "id": "agent_platform_is_engine",
+      "rule": "agent-platform shall provide reusable agent specs, policies, validators, and runtime contracts for this product, but it is not the user-facing desktop product home.",
+      "reason": "Keeping engine and product homes separate prevents the second app from becoming an internal config folder.",
+      "applies_to": [
+        "relationship_to_other_projects",
+        "engine_dependencies"
+      ]
+    },
+    {
+      "id": "workspace_tracker_stays_project_focused",
+      "rule": "Git workspace portfolio, task timeline, evidence, reports, and terminal state remain owned by platform-desktop-app.",
+      "reason": "The first desktop app must stay simple for project management and AI coding workspace tracking.",
+      "applies_to": [
+        "feature_ownership",
+        "navigation_policy"
+      ]
+    },
+    {
+      "id": "sensitive_runtime_setup_needs_gates",
+      "rule": "Provider credentials, local model management, installs, cloud runtime setup, and destructive tool operations require explicit privacy, rollback, and validation gates before runtime implementation.",
+      "reason": "The second desktop app will manage higher-risk operations than the workspace tracker.",
+      "applies_to": [
+        "release_boundaries",
+        "runtime_safety"
+      ]
+    }
+  ],
+  "field_guide": [
+    {
+      "field": "product_identity",
+      "meaning": "The installable desktop app identity and user-facing promise.",
+      "required": true
+    },
+    {
+      "field": "relationship_to_other_projects",
+      "meaning": "How this app relates to platform-desktop-app and agent-platform.",
+      "required": true
+    },
+    {
+      "field": "feature_ownership",
+      "meaning": "Which capabilities this app owns and which it must not absorb.",
+      "required": true
+    },
+    {
+      "field": "release_boundaries",
+      "meaning": "What must be true before claiming a runnable or distributable app.",
+      "required": true
+    }
+  ],
+  "product_identity": {
+    "id": "agent_tool_desktop_app",
+    "home": "agent-tool-desktop-app/",
+    "product_form": "installable_desktop_app",
+    "primary_claim": "Manage agents, tools, local models, providers, and advanced agent runtime operations in a separate desktop app.",
+    "default_user": "advanced_operator_or_builder",
+    "not_a_tab_inside": "platform-desktop-app/"
+  },
+  "relationship_to_other_projects": {
+    "workspace_tracker_desktop_app": {
+      "home": "platform-desktop-app/",
+      "relationship": "peer_desktop_product",
+      "owns": [
+        "Git workspace import",
+        "project portfolio",
+        "current work timeline",
+        "evidence and reports",
+        "guest AI coding tool launch"
+      ]
+    },
+    "agent_platform_engine": {
+      "home": "agent-platform/",
+      "relationship": "shared_engine_and_contract_layer",
+      "provides": [
+        "agent definitions",
+        "tool and runtime policies",
+        "evaluation guards",
+        "research and planning profiles",
+        "config contract validators"
+      ]
+    }
+  },
+  "feature_ownership": {
+    "owned_here": [
+      "agent factory",
+      "tool studio",
+      "Ollama and local model management",
+      "provider direct agent execution",
+      "AgentCore-style runtime lifecycle",
+      "capability promotion operations",
+      "advanced operator diagnostics for agent/tool runtimes"
+    ],
+    "not_owned_here": [
+      "Git workspace portfolio",
+      "project management report hub",
+      "task evidence review for coding workspaces",
+      "workspace tracker customer bundle"
+    ],
+    "workspace_tracker_visibility": "link_or_status_only"
+  },
+  "release_boundaries": {
+    "current_status": "boundary_scaffold_only",
+    "runnable_claim": "not_yet",
+    "runtime_shell_required": true,
+    "installer_required": true,
+    "minimum_future_gates": [
+      "desktop runtime selection",
+      "local sensitive data boundary",
+      "provider credential redaction",
+      "Ollama process and model storage policy",
+      "tool install audit workflow",
+      "customer/private payload audit",
+      "resource cleanup checks",
+      "internal app smoke test"
+    ]
+  }
+}

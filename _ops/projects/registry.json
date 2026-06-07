@@ -94,8 +94,8 @@
       "path": "agent-platform/",
       "status": "active",
       "type": "core-platform",
-      "purpose": "Central Python-first platform project for building, configuring, evaluating, improving, and operating reusable agents, tools, model/runtime adapters, and AgentCore-style capabilities.",
-      "scope": "Reusable platform models, agent specs, tool/platform runtime boundaries, Ollama/model management boundaries, provider direct agent execution boundaries, evaluation helpers, planning helpers, open-source evaluation, and platform docs.",
+      "purpose": "Central Python-first engine project for reusable agents, tools, model/runtime adapters, evaluation, planning, policy, and AgentCore-style contracts used by desktop products.",
+      "scope": "Reusable platform models, agent specs, tool/platform runtime boundaries, Ollama/model management boundaries, provider direct agent execution boundaries, evaluation helpers, planning helpers, open-source evaluation, and engine docs for agent-tool-desktop-app and other products.",
       "project_specific_home": [
         "agent-platform/src/",
         "agent-platform/tests/",
@@ -112,9 +112,40 @@
         "_tools/"
       ],
       "boundary_notes": [
-        "Platform-wide reusable capabilities can live here when they are part of the separated central agent/tool platform.",
-        "Agent factory, root tool management, Ollama model management, provider-direct agent execution, and AWS AgentCore-style runtime/gateway/identity capabilities belong here, not in the default desktop user flow.",
+        "Platform-wide reusable capabilities can live here when they are engine, policy, validator, or contract assets.",
+        "Agent factory, root tool management, Ollama model management, provider-direct agent execution, and AWS AgentCore-style runtime/gateway/identity user-facing product surfaces belong in agent-tool-desktop-app/; reusable definitions and validators can live here.",
+        "agent-platform/ is not the second desktop app product home.",
         "Domain-specific experiments should become separate root projects instead of being added to agent-platform by default."
+      ]
+    },
+    {
+      "name": "agent-tool-desktop-app",
+      "path": "agent-tool-desktop-app/",
+      "status": "active",
+      "type": "installable-desktop-product",
+      "purpose": "Separate desktop/installable software product for agent factory, tool management, Ollama/local model management, provider direct execution, and AgentCore-style runtime operations.",
+      "scope": "Agent/tool operations desktop product boundary, future desktop UI/runtime shell, agent and tool management UX, local model management UX, provider execution UX, runtime safety gates, and project-local requirements/specs.",
+      "project_specific_home": [
+        "agent-tool-desktop-app/artifacts/",
+        "agent-tool-desktop-app/configs/",
+        "agent-tool-desktop-app/docs/",
+        "agent-tool-desktop-app/docs/requirements/",
+        "agent-tool-desktop-app/specs/",
+        "agent-tool-desktop-app/src/",
+        "agent-tool-desktop-app/tests/"
+      ],
+      "shared_dependencies": [
+        "agent-platform/",
+        "_docs/",
+        "_ops/",
+        "_history/"
+      ],
+      "boundary_notes": [
+        "This is the second desktop app product, peer to platform-desktop-app/.",
+        "Use this project for user-facing agent factory, tool studio, Ollama/local model, provider-direct run, and AgentCore-style operation surfaces.",
+        "Use agent-platform/ for reusable engine, policy, validator, and contract assets that this app calls.",
+        "Do not put Git workspace portfolio, project report hub, or current work evidence review here; those belong in platform-desktop-app/.",
+        "Do not claim runnable or distributable desktop readiness until runtime shell, installer, credential privacy, model storage, tool install audit, resource cleanup, and smoke-test gates exist."
       ]
     },
     {
@@ -207,6 +238,7 @@
       ],
       "shared_dependencies": [
         "agent-platform/",
+        "agent-tool-desktop-app/",
         "_docs/",
         "_ops/",
         "_history/"
@@ -215,7 +247,7 @@
         "End-user installer packaging belongs here, not in agent-platform install_mode setup profiles.",
         "The default user surface is a Git workspace tracker, not an agent factory or all-in-one tool/model management console.",
         "Codex, Claude Code, Cursor, Antigravity, Gemini CLI, OpenCode, and similar tools are optional guest adapters attached to selected Git repositories.",
-        "Agent factory, root tool management, Ollama model management, provider-direct agent execution, and AWS AgentCore-style runtime lifecycle should stay in agent-platform/ or another separated project and appear here only as advanced links/status.",
+        "Agent factory, root tool management, Ollama model management, provider-direct agent execution, and AWS AgentCore-style runtime lifecycle belong in agent-tool-desktop-app/ and may use agent-platform/ as an engine layer; they should appear here only as advanced links/status.",
         "Each durable user project should be modeled as its own Git repository or imported Git workspace rather than hidden inside the desktop app project.",
         "Use the selected Tauri-first product runtime around the project-owned renderer workspace-monitor unless measured release blockers or maintenance evidence changes the decision.",
         "Keep the Next.js renderer under platform-desktop-app/renderer/workspace-monitor/ so the desktop product owns UI, runtime bridge, customer bundle, and installer boundaries together.",
