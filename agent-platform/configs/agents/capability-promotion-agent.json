@@ -43,7 +43,7 @@
       "_history/web-searches/",
       "_ops/coordination/status.json",
       "_ops/backlog/",
-      "workspace-monitor/src/generated/workspace-snapshot.json"
+      "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json"
     ],
     "capability_type_order": [
       "prompt",

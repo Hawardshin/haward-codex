@@ -121,6 +121,12 @@ test("release preflight distinguishes internal and public gates", () => {
   const publicReport = checkReleaseReadiness({ mode: "public", reportOnly: true });
   assert.equal(publicReport.mode, "public");
   assert.ok(publicReport.checks.some((check) => check.label.includes("public release enables hardenedRuntime")));
+  assert.ok(
+    publicReport.checks.some((check) =>
+      check.label === "Bundled service-update-channel marker is checked at runtime" && check.status === "passed"
+    )
+  );
+  assert.ok(!publicReport.blockers.includes("Bundled service-update-channel marker is checked at runtime"));
 });
 
 test("public release config accepts Tauri updater private key path env", () => {

@@ -1,0 +1,27 @@
+# 2026-06-07 provider account settings hook refactor evaluation
+
+- 평가 대상:
+  - provider account/model settings logic separation.
+- 변경 파일:
+  - `platform-desktop-app/renderer/workspace-monitor/components/features/useProviderAccountSettings.ts`
+  - `platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx`
+  - `platform-desktop-app/renderer/workspace-monitor/components/features/ProviderAccountsPanel.tsx`
+  - `platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs`
+  - `platform-desktop-app/tests/readiness.test.mjs`
+  - `platform-desktop-app/scripts/check-readiness.mjs`
+  - `platform-desktop-app/scripts/check-service-readiness.mjs`
+- acceptance:
+  - provider credential and model catalog state is no longer owned directly by `MonitorShell.tsx`.
+  - provider account actions retain runtime settings sync.
+  - provider panel uses the shared `runtimeCatalog.ts` display/feedback ids.
+  - readiness checks follow split feature source instead of requiring commands in shell.
+- validation:
+  - `git diff --check`: passed.
+  - `corepack pnpm --filter workspace-monitor run check`: passed.
+  - `corepack pnpm --filter workspace-monitor test`: passed.
+  - `corepack pnpm --filter platform-desktop-app run check`: passed.
+  - `corepack pnpm --filter platform-desktop-app test`: passed.
+  - `corepack pnpm run desktop:package:run:internal`: passed; app opened and DMG verified.
+- residual risks:
+  - The worktree contains many prior unrelated modifications/untracked files, so this evaluation does not claim a clean git state.
+  - Public release remains blocked by signing/notarization/updater endpoint/clean-machine smoke requirements.

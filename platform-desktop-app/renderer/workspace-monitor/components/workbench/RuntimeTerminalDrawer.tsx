@@ -134,6 +134,7 @@ export type RuntimeTerminalDrawerProps = {
   onSaveSessionPromptChoice?: () => void | Promise<void>;
   onStartNativePtySession: (size: { rows: number; cols: number }) => void | Promise<void>;
   onStartSession: () => void | Promise<void>;
+  onRunCliSetup?: () => void | Promise<void>;
   onResetSessionPromptChoice?: () => void | Promise<void>;
   onWorkingDirChange: (value: string) => void;
   onWriteNativePtyInput: (sessionId: string, input: string) => void | Promise<void>;
@@ -196,6 +197,8 @@ const terminalCopy = {
     terminalGuideControlsDetail: "Cmd/Ctrl+F, Shift+C/V, 화면 정리",
     terminalGuideAccount: "AI 계정",
     terminalGuideAccountDetail: "설정에서 GPT/Gemini 키 연결",
+    terminalGuideCli: "CLI 자동 설정",
+    terminalGuideCliDetail: "원클릭으로 awp CLI 설치와 PATH 등록",
     blocked: "막힘",
     ready: "준비됨",
     adapter: "어댑터",
@@ -285,6 +288,8 @@ const terminalCopy = {
     terminalGuideControlsDetail: "Cmd/Ctrl+F, Shift+C/V, clear screen",
     terminalGuideAccount: "AI accounts",
     terminalGuideAccountDetail: "Connect GPT/Gemini keys in Settings",
+    terminalGuideCli: "CLI Auto Setup",
+    terminalGuideCliDetail: "One-click install AWP CLI and PATH",
     blocked: "blocked",
     ready: "ready",
     adapter: "Adapter",
@@ -376,6 +381,7 @@ export function RuntimeTerminalDrawer({
   onSaveSessionPromptChoice,
   onStartNativePtySession,
   onStartSession,
+  onRunCliSetup,
   onResetSessionPromptChoice,
   onWorkingDirChange,
   onWriteNativePtyInput,
@@ -406,8 +412,8 @@ export function RuntimeTerminalDrawer({
   const selectedSessionOutput = selectedSession ? formatSessionOutput(selectedSession, copy.noOutput) : copy.noSession;
   const terminalUsageCards = [
     { id: "pty", icon: SquareTerminal, label: copy.terminalGuidePty, detail: copy.terminalGuidePtyDetail },
+    { id: "cli", icon: ShieldCheck, label: copy.terminalGuideCli, detail: copy.terminalGuideCliDetail, onClick: onRunCliSetup },
     { id: "cwd", icon: ListFilter, label: copy.terminalGuideCwd, detail: copy.terminalGuideCwdDetail },
-    { id: "controls", icon: Search, label: copy.terminalGuideControls, detail: copy.terminalGuideControlsDetail },
     { id: "account", icon: Settings, label: copy.terminalGuideAccount, detail: copy.terminalGuideAccountDetail }
   ];
 
@@ -595,10 +601,16 @@ export function RuntimeTerminalDrawer({
             <div className="terminal-view-panel terminal-start-panel">
         <div className="terminal-usage-guide" data-terminal-usage-guide>
           {terminalUsageCards.map((card) => (
-            <article key={card.id} data-terminal-usage-card={card.id}>
+            <article
+              key={card.id}
+              data-terminal-usage-card={card.id}
+              onClick={card.onClick}
+              style={card.onClick ? { cursor: "pointer", border: "1px solid var(--primary-accent)" } : undefined}
+            >
               <card.icon size={15} aria-hidden="true" />
               <strong>{card.label}</strong>
               <small>{card.detail}</small>
+              {card.id === "cli" && <em style={{ fontStyle: "normal", fontSize: "10px", color: "var(--primary-accent)" }}>{uiLanguage === "ko" ? "지금 실행" : "Run now"}</em>}
             </article>
           ))}
         </div>

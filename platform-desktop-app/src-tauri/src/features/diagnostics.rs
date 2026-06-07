@@ -19,7 +19,7 @@ pub(super) fn group() -> NativeRuntimeFeatureGroupReport {
             command("prune_cli_task_run_records", "Prune task-run records", "Retention limit"),
         ],
         follow_up: vec![
-            "Move support bundle and readiness reports into features/diagnostics/.",
+            "Keep service readiness implementation in features/service_readiness.rs while support bundle export remains in lib.rs.",
             "Keep diagnostic export redacted and bounded.",
         ],
     }

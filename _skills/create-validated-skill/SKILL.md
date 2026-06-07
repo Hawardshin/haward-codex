@@ -16,7 +16,10 @@ description: Create, update, validate, activate, and improve repository-managed 
 7. Run the system skill validator when available:
 
 ```bash
+# For Codex
 python3 /Users/shinjoungeun/.codex/skills/.system/skill-creator/scripts/quick_validate.py _skills/<skill-name>
+# For Gemini
+# (Gemini-specific validation command if applicable)
 ```
 
 8. Run the repository validator with a skill validation input:
@@ -26,7 +29,7 @@ PYTHONPATH=agent-platform/src python3 -m agent_platform.cli validate-skill <inpu
 ```
 
 9. Record at least two trigger examples, one validation step, one forward-test scenario, and one improvement idea or explicit "no immediate improvement found" note.
-10. If the skill should be active in Codex, plan installation into `$CODEX_HOME/skills` only after checking permissions and creating an installation audit record.
+10. If the skill should be active, plan installation into the agent's home directory (e.g., `$CODEX_HOME/skills` or `.gemini/skills/`) only after checking permissions and creating an installation audit record.
 11. Link skill source and validation targets from the work evaluation input when skill work occurred.
 
 ## Quality Gate

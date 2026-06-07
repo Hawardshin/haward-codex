@@ -6,29 +6,34 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
-const monitorShell = fs.readFileSync(path.join(projectRoot, "components", "MonitorShell.tsx"), "utf8");
+const searchAgentWorkChatPanel = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "SearchAgentWorkChatPanel.tsx"),
+  "utf8"
+);
 const css = fs.readFileSync(path.join(projectRoot, "app", "globals.css"), "utf8");
 const tauriLib = fs.readFileSync(path.resolve(projectRoot, "..", "..", "src-tauri", "src", "lib.rs"), "utf8");
+const tauriProviders = fs.readFileSync(path.resolve(projectRoot, "..", "..", "src-tauri", "src", "features", "providers.rs"), "utf8");
+const tauriRuntimeSource = `${tauriLib}\n${tauriProviders}`;
 
 test("agent chat exposes user-selectable model routing and constraints", () => {
-  assert.match(monitorShell, /modelRouteOptions/);
-  assert.match(monitorShell, /constraintProfileOptions/);
-  assert.match(monitorShell, /connectorPolicyOptions/);
-  assert.match(monitorShell, /agent-routing-control-strip/);
-  assert.match(monitorShell, /data-model-route-summary="true"/);
-  assert.match(monitorShell, /resolveModelRouteDecision/);
-  assert.match(monitorShell, /recommendedModelForTier/);
+  assert.match(searchAgentWorkChatPanel, /modelRouteOptions/);
+  assert.match(searchAgentWorkChatPanel, /constraintProfileOptions/);
+  assert.match(searchAgentWorkChatPanel, /connectorPolicyOptions/);
+  assert.match(searchAgentWorkChatPanel, /agent-routing-control-strip/);
+  assert.match(searchAgentWorkChatPanel, /data-model-route-summary="true"/);
+  assert.match(searchAgentWorkChatPanel, /resolveModelRouteDecision/);
+  assert.match(searchAgentWorkChatPanel, /recommendedModelForTier/);
 });
 
 test("provider API runs persist routing and token controls", () => {
-  assert.match(tauriLib, /model_route_id: String/);
-  assert.match(tauriLib, /constraint_profile_id: String/);
-  assert.match(tauriLib, /connector_policy_id: String/);
-  assert.match(tauriLib, /max_output_tokens: Option<u64>/);
-  assert.match(tauriLib, /normalize_provider_task_output_tokens/);
-  assert.match(tauriLib, /estimate_text_tokens/);
-  assert.match(tauriLib, /"model_route_id": report\.model_route_id\.clone\(\)/);
-  assert.match(tauriLib, /"max_output_tokens": report\.max_output_tokens/);
+  assert.match(tauriRuntimeSource, /model_route_id: String/);
+  assert.match(tauriRuntimeSource, /constraint_profile_id: String/);
+  assert.match(tauriRuntimeSource, /connector_policy_id: String/);
+  assert.match(tauriRuntimeSource, /max_output_tokens: Option<u64>/);
+  assert.match(tauriRuntimeSource, /normalize_provider_task_output_tokens/);
+  assert.match(tauriRuntimeSource, /estimate_text_tokens/);
+  assert.match(tauriRuntimeSource, /"model_route_id": report\.model_route_id\.clone\(\)/);
+  assert.match(tauriRuntimeSource, /"max_output_tokens": report\.max_output_tokens/);
 });
 
 test("routing controls have responsive layout rules", () => {

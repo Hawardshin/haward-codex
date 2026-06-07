@@ -562,6 +562,10 @@
     "accumulated_data_command": "get_accumulated_data_overview",
     "payload_audit_command": "run_installer_payload_audit",
     "support_bundle_command": "create_support_diagnostic_bundle",
+    "app_update_commands": [
+      "check_app_update",
+      "install_app_update"
+    ],
     "preferences_commands": [
       "get_desktop_preferences",
       "save_desktop_preferences"

@@ -166,6 +166,13 @@ for (const preferencesCommand of ["get_desktop_preferences", "save_desktop_prefe
   );
   failIf(!tauriLib.includes(preferencesCommand), `src-tauri/src/lib.rs must include ${preferencesCommand}`);
 }
+for (const appUpdateCommand of ["check_app_update", "install_app_update"]) {
+  failIf(
+    !(contract.runtime_command_surface?.app_update_commands ?? []).includes(appUpdateCommand),
+    `runtime_command_surface.app_update_commands must include ${appUpdateCommand}`
+  );
+  failIf(!tauriLib.includes(appUpdateCommand), `src-tauri/src/lib.rs must include ${appUpdateCommand}`);
+}
 for (const agentFactoryCommand of ["create_agent_factory_proposal"]) {
   failIf(
     !(contract.runtime_command_surface?.agent_factory_commands ?? []).includes(agentFactoryCommand),

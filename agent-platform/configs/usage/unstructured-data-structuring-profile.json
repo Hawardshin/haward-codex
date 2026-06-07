@@ -352,7 +352,7 @@
     "_history/request-traces/",
     "_history/evaluations/",
     "_research/",
-    "workspace-monitor/src/generated/workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json",
     "project-specific docs or data folders"
   ]
 }

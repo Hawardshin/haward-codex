@@ -1,0 +1,30 @@
+# 2026-06-07 provider account settings hook refactor plan
+
+- 작업 모드: `standard`
+- large-scope decomposition 적용: 요청은 전체 구조 리팩토링이지만, 현재 턴에서는 충돌과 회귀 위험을 줄이기 위해 provider account/model settings를 첫 실행 슬라이스로 선정했다.
+- source inventory:
+  - `platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx`
+  - `platform-desktop-app/renderer/workspace-monitor/components/features/ProviderAccountsPanel.tsx`
+  - `platform-desktop-app/renderer/workspace-monitor/components/features/runtimeCatalog.ts`
+  - `platform-desktop-app/renderer/workspace-monitor/components/features/SearchAgentWorkChatPanel.tsx`
+  - `platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs`
+  - `platform-desktop-app/tests/readiness.test.mjs`
+  - `platform-desktop-app/scripts/check-readiness.mjs`
+  - `platform-desktop-app/scripts/check-service-readiness.mjs`
+- slice id: `provider-account-settings-hook`
+- touch paths:
+  - `components/features/useProviderAccountSettings.ts`
+  - `components/MonitorShell.tsx`
+  - `components/features/ProviderAccountsPanel.tsx`
+  - provider/readiness tests and readiness scripts
+- dependencies:
+  - `useProviderAccountSettings` depends on `runtimeCatalog` provider defaults and display labels.
+  - `MonitorShell` provides effective provider model selection and runtime settings sync request creation.
+- validation gates:
+  - workspace monitor check/test
+  - desktop app check/test
+  - service readiness
+  - internal package/run
+  - `git diff --check`
+- continuation path:
+  - 다음 리팩토링 후보는 runtime setup check, desktop resource/support bundle action, or search agent launch orchestration이다.

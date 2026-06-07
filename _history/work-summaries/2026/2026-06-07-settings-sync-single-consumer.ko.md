@@ -1,0 +1,23 @@
+# 2026-06-07 작업 요약: 설정 동기화 단일 소비자
+
+- 변경:
+  - `DesktopRuntimePanel`에 `settingsSyncRequestConsumer` prop 추가.
+  - desktop runtime panel은 top-level settings/provider sync request를 항상 소비.
+  - source runtime panel은 top-level sync request를 소비하지 않도록 명시.
+  - sync request effect 조건을 `surfaceActive`가 아니라 `settingsSyncRequestConsumer`로 변경.
+  - regression test와 readiness token에 `settingsSyncRequestConsumer` 추가.
+- 의도:
+  - provider 저장/삭제/검증이 overview, agents, settings overlay 등 어느 위치에서 발생해도 runtime refresh가 뒤로 밀리지 않게 한다.
+  - 동시에 desktop/source 두 패널이 같은 request를 중복 실행하지 않게 한다.
+- 검증:
+  - `corepack pnpm --filter workspace-monitor exec tsc --noEmit`
+  - `node platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs`
+  - `node platform-desktop-app/tests/readiness.test.mjs`
+  - `corepack pnpm --filter workspace-monitor run check`
+  - `corepack pnpm --filter workspace-monitor test`
+  - `corepack pnpm --filter platform-desktop-app run check`
+  - `corepack pnpm --filter platform-desktop-app test`
+  - `corepack pnpm run desktop:package:run:internal`
+- 내부 산출물:
+  - `platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app`
+  - `platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg`

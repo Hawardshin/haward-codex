@@ -270,7 +270,7 @@
       "rule": "Do not index local_only_dirs from root-structure-policy into the file index."
     },
     {
-      "tool": "workspace-monitor/scripts/collect-workspace.mjs",
+      "tool": "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
       "rule": "Do not traverse _private or outputs; do not include them in document/source snapshots."
     },
     {

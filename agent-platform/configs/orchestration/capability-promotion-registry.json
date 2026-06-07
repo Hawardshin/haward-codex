@@ -452,7 +452,7 @@
     },
     {
       "id": "workspace_monitor_snapshot",
-      "path": "workspace-monitor/src/generated/workspace-snapshot.json",
+      "path": "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json",
       "signals": [
         "project growth",
         "agent inventory changes",

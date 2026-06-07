@@ -1,0 +1,23 @@
+# 2026-06-07 평가: 설정 동기화 공통 훅
+
+- 결과:
+  - `MonitorShell.tsx`의 설정/런타임 동기화 구현을 `useSettingsRuntimeSync.ts`로 분리했다.
+  - provider 저장/삭제/검증, 설정 저장소 수동 요청, workspace/source/AGENTS.md 이후 동기화가 동일한 request/queue/execution 규칙을 쓴다.
+  - 사용자에게 보이는 busy/notice/action feedback은 유지된다.
+- 품질 판단:
+  - 기능 변경은 기존 refresh task 목록을 유지하면서 구현 위치만 공통화했다.
+  - 수동 동기화 옵션 반복을 제거해 향후 동작 차이를 만들 가능성을 줄였다.
+  - readiness/test 문자열 계약이 새 훅을 포함해 회귀 감시가 가능하다.
+- 검증 완료:
+  - `corepack pnpm --filter workspace-monitor exec tsc --noEmit`
+  - `node platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs`
+  - `corepack pnpm --filter workspace-monitor run check`
+  - `corepack pnpm --filter workspace-monitor test`
+  - `corepack pnpm --filter platform-desktop-app run check`
+  - `corepack pnpm --filter platform-desktop-app test`
+  - 내부 패키징과 실행: `corepack pnpm run desktop:package:run:internal`
+- 내부 패키징 산출물:
+  - `.app`: `platform-desktop-app/src-tauri/target/release/bundle/macos/Agent Workspace Platform.app`
+  - `.dmg`: `platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platform_0.1.0_aarch64.dmg`
+- 공개 배포 잔여 리스크:
+  - Developer ID signing, notarization, updater public/private key, HTTPS updater endpoint, clean-machine smoke는 기존 public release gate로 남아 있다.

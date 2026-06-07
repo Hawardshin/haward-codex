@@ -3,6 +3,12 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { checkReleaseReadiness } from "./check-release-readiness.mjs";
+import {
+  joinSourceMap,
+  readSourceMap,
+  serviceReadinessMonitorSourceKeys,
+  serviceReadinessSourcePaths
+} from "./readiness/source-structure.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -17,11 +23,16 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
   const serializedRuntimeBoundary = JSON.stringify(runtimeBoundary);
   const serializedUserFlow = JSON.stringify(userFlow);
   const serializedRegistry = JSON.stringify(registry);
-  const tauriCargo = readText("src-tauri/Cargo.toml");
-  const tauriLib = readText("src-tauri/src/lib.rs");
-  const monitorShell = readText("renderer/workspace-monitor/components/MonitorShell.tsx");
-  const agentBuilderPanels = readText("renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx");
-  const monitorWorkbenchSource = `${monitorShell}\n${agentBuilderPanels}`;
+  const sources = readSourceMap(root, serviceReadinessSourcePaths);
+  const {
+    tauriCargo,
+    tauriLib,
+    tauriProviders,
+    monitorShell,
+    agentBuilderPanels
+  } = sources;
+  const tauriRuntimeSource = `${tauriLib}\n${tauriProviders}`;
+  const monitorWorkbenchSource = joinSourceMap(sources, serviceReadinessMonitorSourceKeys);
   const workspacePersistenceReady = [
     "get_desktop_workspace_state",
     "set_desktop_workspace_path",
@@ -64,13 +75,13 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
     group("support_diagnostics", "Support Diagnostics", [
       check("support_bundle_command", "Support diagnostic command exposed", tauriLib.includes("create_support_diagnostic_bundle"), "Runtime can create support diagnostic bundles."),
       check("redacted_support_export", "Support export is redacted", tauriLib.includes("redacted") && tauriLib.includes("task-run-summary.redacted.json"), "Support bundle uses redacted bounded summaries."),
-      check("support_ui_surface", "Support controls visible in app", monitorShell.includes("Support Diagnostic Bundle"), "Desktop UI exposes support bundle controls.")
+      check("support_ui_surface", "Support controls visible in app", monitorWorkbenchSource.includes("Support Diagnostic Bundle"), "Desktop UI exposes support bundle controls.")
     ]),
     group("provider_accounts", "Provider Accounts", [
-      check("provider_credentials_redacted", "Provider credential reports are redacted", tauriLib.includes("secret_preview") && tauriLib.includes("credential_secret_preview"), "Credential reports expose only preview/status metadata."),
-      check("provider_direct_task_command", "Direct provider task command exposed", tauriLib.includes("run_provider_agent_task") && tauriLib.includes("ProviderAgentTaskReport"), "Connected provider accounts can run model tasks without a shell command."),
-      check("local_model_catalog_command", "Local model catalog command exposed", tauriLib.includes("list_provider_models") && tauriLib.includes("ProviderModelCatalogReport") && tauriLib.includes("Ollama / Local"), "The native runtime can list local Ollama models without an API key."),
-      check("provider_direct_task_ui", "Direct provider task UI visible", monitorShell.includes("agent-provider-run-controls") && monitorShell.includes("agent-model-picker") && monitorShell.includes("list_provider_models") && monitorShell.includes("run_provider_agent_task"), "Search Agent Work Chat exposes provider account and model controls.")
+      check("provider_credentials_redacted", "Provider credential reports are redacted", tauriRuntimeSource.includes("secret_preview") && tauriRuntimeSource.includes("credential_secret_preview"), "Credential reports expose only preview/status metadata."),
+      check("provider_direct_task_command", "Direct provider task command exposed", tauriRuntimeSource.includes("run_provider_agent_task") && tauriRuntimeSource.includes("ProviderAgentTaskReport"), "Connected provider accounts can run model tasks without a shell command."),
+      check("local_model_catalog_command", "Local model catalog command exposed", tauriRuntimeSource.includes("list_provider_models") && tauriRuntimeSource.includes("ProviderModelCatalogReport") && tauriRuntimeSource.includes("Ollama / Local"), "The native runtime can list local Ollama models without an API key."),
+      check("provider_direct_task_ui", "Direct provider task UI visible", monitorWorkbenchSource.includes("agent-provider-run-controls") && monitorWorkbenchSource.includes("agent-model-picker") && monitorWorkbenchSource.includes("list_provider_models") && monitorWorkbenchSource.includes("run_provider_agent_task"), "Search Agent Work Chat exposes provider account and model controls.")
     ]),
     group("production_agent_blueprints", "Production Agent Blueprints", [
       check("agentcore_blueprint_ui", "AgentCore-style blueprint UI visible", monitorWorkbenchSource.includes("AgentCoreBlueprintPanel") && monitorWorkbenchSource.includes("agentcore-blueprint-panel"), "Agents screen exposes production blueprints derived from public AgentCore references."),
@@ -96,6 +107,15 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
     ]),
     group("update_recovery", "Update & Recovery", [
       check("updater_policy_registry", "Updater is a release gate", serializedRegistry.includes("updater_is_a_release_gate"), "Service readiness registry treats updater as a public release gate."),
+      check(
+        "updater_runtime_actions",
+        "Updater runtime actions exposed",
+        tauriLib.includes("check_app_update") &&
+          tauriLib.includes("install_app_update") &&
+          monitorWorkbenchSource.includes("check-app-update") &&
+          monitorWorkbenchSource.includes("install-app-update"),
+        "Desktop runtime must expose app update check and install actions."
+      ),
       check("tauri_updater_configured", "Signed updater channel configured", updaterConfigured({ pkg, tauriConfig, tauriCargo, tauriLib, releasePublic }), "Tauri updater plugin, generated public config, endpoint, and signing key are not configured yet.", mode === "public" ? "blocked" : "warning"),
       check("clean_machine_smoke_recorded", "Clean-machine smoke recorded", false, "Clean-machine install/open/update smoke is still pending.", mode === "public" ? "blocked" : "warning")
     ])

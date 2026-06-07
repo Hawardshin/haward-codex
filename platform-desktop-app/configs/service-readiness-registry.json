@@ -12,7 +12,7 @@
       "Treat updater, signing, notarization, privacy, support, and first-run items as release gates rather than optional notes."
     ],
     "owner": "platform-desktop-app",
-    "last_reviewed": "2026-06-06",
+    "last_reviewed": "2026-06-07",
     "update_triggers": [
       "A release channel, updater, signing, notarization, support, privacy, or onboarding behavior changes.",
       "The app starts collecting additional logs, workspace data, or diagnostics.",
@@ -275,6 +275,10 @@
   "runtime_surface_contract": {
     "desktop_panel": "Workspace Monitor Desktop shall show Service Readiness with grouped status, score, blockers, warnings, and next actions.",
     "tauri_command": "get_service_readiness_report",
+    "tauri_update_commands": [
+      "check_app_update",
+      "install_app_update"
+    ],
     "script_command": "corepack pnpm --filter platform-desktop-app run service:readiness",
     "public_report_command": "corepack pnpm --filter platform-desktop-app run service:readiness:public:report"
   },

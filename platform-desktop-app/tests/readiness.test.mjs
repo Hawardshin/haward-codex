@@ -3,6 +3,15 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { test } from "node:test";
 
+import {
+  desktopReadinessSourcePaths,
+  joinSourceMap,
+  monitorWorkbenchSourceKeys,
+  readSourceMap,
+  tauriFeatureModuleNames,
+  tauriRuntimeSourceKeys
+} from "../scripts/readiness/source-structure.mjs";
+
 const root = new URL("..", import.meta.url).pathname;
 
 function readJson(relativePath) {
@@ -12,17 +21,7 @@ function readJson(relativePath) {
 test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(existsSync(join(root, "src-tauri/tauri.conf.json")), true);
   assert.equal(existsSync(join(root, "src-tauri/src/lib.rs")), true);
-  for (const featureModule of [
-    "mod.rs",
-    "app_shell.rs",
-    "cli.rs",
-    "native.rs",
-    "workspace.rs",
-    "providers.rs",
-    "diagnostics.rs",
-    "agent_factory.rs",
-    "decisions.rs"
-  ]) {
+  for (const featureModule of tauriFeatureModuleNames) {
     assert.equal(existsSync(join(root, "src-tauri/src/features", featureModule)), true);
   }
   assert.equal(existsSync(join(root, "README.ko.md")), true);
@@ -32,6 +31,10 @@ test("desktop product shell has the selected Tauri entry points", () => {
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline/paths.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline/definitions.mjs")), true);
+  assert.equal(existsSync(join(root, "scripts/desktop-pipeline/steps.mjs")), true);
+  assert.equal(existsSync(join(root, "scripts/desktop-pipeline/package-artifacts.mjs")), true);
+  assert.equal(existsSync(join(root, "scripts/desktop-pipeline/pipelines.mjs")), true);
+  assert.equal(existsSync(join(root, "scripts/desktop-pipeline/help.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/desktop-pipeline/runner.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/cleanup-macos-dmg-intermediates.mjs")), true);
   assert.equal(existsSync(join(root, "scripts/readiness/desktop-build-pipeline.mjs")), true);
@@ -71,10 +74,23 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
   const releaseEn = readFileSync(join(root, "docs/release-runbook.en.md"), "utf8");
   const pipelineEntrypoint = readFileSync(join(root, "scripts/desktop-pipeline.mjs"), "utf8");
   const pipelineDefinitions = readFileSync(join(root, "scripts/desktop-pipeline/definitions.mjs"), "utf8");
+  const pipelineSteps = readFileSync(join(root, "scripts/desktop-pipeline/steps.mjs"), "utf8");
+  const pipelineArtifacts = readFileSync(join(root, "scripts/desktop-pipeline/package-artifacts.mjs"), "utf8");
+  const pipelinePipelines = readFileSync(join(root, "scripts/desktop-pipeline/pipelines.mjs"), "utf8");
+  const pipelineHelp = readFileSync(join(root, "scripts/desktop-pipeline/help.mjs"), "utf8");
   const pipelineRunner = readFileSync(join(root, "scripts/desktop-pipeline/runner.mjs"), "utf8");
   const dmgCleanupScript = readFileSync(join(root, "scripts/cleanup-macos-dmg-intermediates.mjs"), "utf8");
   const buildPipelineReadiness = readFileSync(join(root, "scripts/readiness/desktop-build-pipeline.mjs"), "utf8");
-  const pipelineStructure = `${pipelineEntrypoint}\n${pipelineDefinitions}\n${pipelineRunner}\n${dmgCleanupScript}`;
+  const pipelineStructure = [
+    pipelineEntrypoint,
+    pipelineDefinitions,
+    pipelineSteps,
+    pipelineArtifacts,
+    pipelinePipelines,
+    pipelineHelp,
+    pipelineRunner,
+    dmgCleanupScript
+  ].join("\n");
   const requirementsKo = readFileSync(join(root, "docs/requirements/2026-06-02-installable-desktop.ko.md"), "utf8");
   const requirementsEn = readFileSync(join(root, "docs/requirements/2026-06-02-installable-desktop.en.md"), "utf8");
 
@@ -122,13 +138,16 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
     assert.match(releaseEn, pattern);
   }
   assert.match(pipelineEntrypoint, /desktop-pipeline\/runner\.mjs/);
+  assert.match(pipelineDefinitions, /export \{ pipelines \} from "\.\/pipelines\.mjs"/);
+  assert.match(pipelineDefinitions, /export \{ helpText \} from "\.\/help\.mjs"/);
+  assert.doesNotMatch(pipelineDefinitions, /const pipelines =/);
   assert.match(buildPipelineReadiness, /checkDesktopBuildPipeline/);
   assert.match(buildPipelineReadiness, /desktopBuildPipelineRequiredFiles/);
   assert.match(buildPipelineReadiness, /desktop:doctor/);
-  for (const token of ["package-internal", "package-public", "public-report", "commonVerifySteps", "Workspace Monitor developer snapshot collect", "Clean stale macOS DMG intermediates", "cleanup-macos-dmg-intermediates", "staleDmgPattern", "rmSync", "Public release preflight", "Tauri internal package build", "Tauri public package build", "create-updater-manifest", "codesign", "hdiutil"]) {
+  for (const token of ["steps.mjs", "package-artifacts.mjs", "pipelines.mjs", "help.mjs", "package-internal", "package-public", "public-report", "commonVerifySteps", "internalPackageArtifactHints", "publicPackageArtifactHints", "Workspace Monitor developer snapshot collect", "Clean stale macOS DMG intermediates", "cleanup-macos-dmg-intermediates", "staleDmgPattern", "rmSync", "Public release preflight", "Tauri internal package build", "Tauri public package build", "create-updater-manifest", "codesign", "hdiutil"]) {
     assert.match(pipelineStructure, new RegExp(token));
   }
-  const commonVerifyDefinition = pipelineDefinitions.slice(pipelineDefinitions.indexOf("const commonVerifySteps"));
+  const commonVerifyDefinition = pipelineSteps.slice(pipelineSteps.indexOf("const commonVerifySteps"));
   const developerCollectIndex = commonVerifyDefinition.indexOf("developerSnapshotCollectStep");
   const workspaceCheckIndex = commonVerifyDefinition.indexOf("Workspace Monitor type check");
   assert.notEqual(developerCollectIndex, -1);
@@ -137,7 +156,7 @@ test("desktop docs expose bilingual one-command build and release paths", () => 
     developerCollectIndex < workspaceCheckIndex,
     "common verification must regenerate the developer snapshot before checking history payload contracts"
   );
-  const packagePublicDefinition = pipelineDefinitions.slice(pipelineDefinitions.indexOf('"package-public"'));
+  const packagePublicDefinition = pipelinePipelines.slice(pipelinePipelines.indexOf('"package-public"'));
   const packagePublicPreflightIndex = packagePublicDefinition.indexOf("Public release preflight");
   const packagePublicVerifyIndex = packagePublicDefinition.indexOf("...commonVerifySteps");
   assert.notEqual(packagePublicPreflightIndex, -1);
@@ -365,9 +384,13 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   const contract = readJson("runtime-contracts/installer-shell-runtime-contract.json");
   const serialized = JSON.stringify(contract);
   const pkg = readJson("package.json");
-  const lib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
-  const cargoToml = readFileSync(join(root, "src-tauri/Cargo.toml"), "utf8");
-  const defaultCapability = readFileSync(join(root, "src-tauri/capabilities/default.json"), "utf8");
+  const sources = readSourceMap(root, desktopReadinessSourcePaths);
+  const {
+    tauriLib: lib,
+    tauriCargo: cargoToml,
+    tauriDefaultCapability: defaultCapability
+  } = sources;
+  const runtimeSource = joinSourceMap(sources, tauriRuntimeSourceKeys);
 
   assert.equal(contract.installer_shell_contract.launch_model, "installed_app_owns_shell_runtime");
   assert.equal(contract.installer_shell_contract.shell_role, "primary_platform_host");
@@ -422,6 +445,10 @@ test("installer shell runtime contract is bundled and enforceable", () => {
     assert.match(lib, new RegExp(preferencesCommand));
     assert.ok(contract.runtime_command_surface.preferences_commands.includes(preferencesCommand));
   }
+  for (const appUpdateCommand of ["check_app_update", "install_app_update"]) {
+    assert.match(lib, new RegExp(appUpdateCommand));
+    assert.ok(contract.runtime_command_surface.app_update_commands.includes(appUpdateCommand));
+  }
   for (const providerCredentialCommand of [
     "list_provider_credentials",
     "save_provider_credential",
@@ -466,7 +493,13 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   assert.match(lib, /DialogExt/);
   assert.match(lib, /tauri_plugin_dialog::init/);
   assert.match(lib, /tauri_plugin_updater::Builder/);
-  assert.match(lib, /service-update-channel\.json/);
+  assert.match(lib, /UpdaterExt/);
+  assert.match(lib, /PendingAppUpdate/);
+  assert.match(lib, /download_and_install/);
+  assert.match(runtimeSource, /service-update-channel\.json/);
+  assert.match(runtimeSource, /ServiceUpdateChannelReport/);
+  assert.match(runtimeSource, /service_update_channel_report/);
+  assert.match(runtimeSource, /json_array_len/);
   assert.match(lib, /blocking_pick_folder/);
   assert.match(lib, /WorkspaceResourceWarmupReport/);
   assert.match(lib, /start_background_warmup/);
@@ -557,6 +590,9 @@ test("shared CLI adapter registry defines concrete AI CLI targets", () => {
 
 test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () => {
   const lib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
+  const serviceReadiness = readFileSync(join(root, "src-tauri/src/features/service_readiness.rs"), "utf8");
+  const providers = readFileSync(join(root, "src-tauri/src/features/providers.rs"), "utf8");
+  const tauriRuntimeSource = `${lib}\n${serviceReadiness}\n${providers}`;
   const monitorShell = readFileSync(join(root, "renderer/workspace-monitor/components/MonitorShell.tsx"), "utf8");
   const desktopActivityRail = readFileSync(
     join(root, "renderer/workspace-monitor/components/shell/DesktopActivityRail.tsx"),
@@ -590,6 +626,70 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     join(root, "renderer/workspace-monitor/components/workbench/AgentDetailPanels.tsx"),
     "utf8"
   );
+  const accumulatedDataPanel = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/AccumulatedDataPanel.tsx"),
+    "utf8"
+  );
+  const desktopActionFeedbackCard = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/DesktopActionFeedbackCard.tsx"),
+    "utf8"
+  );
+  const agentFirstRunGuideCard = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/AgentFirstRunGuideCard.tsx"),
+    "utf8"
+  );
+  const desktopControlPanel = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/DesktopControlPanel.tsx"),
+    "utf8"
+  );
+  const providerAccountsPanel = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/ProviderAccountsPanel.tsx"),
+    "utf8"
+  );
+  const providerAccountSettingsHook = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/useProviderAccountSettings.ts"),
+    "utf8"
+  );
+  const runtimeCustomizationPanel = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/RuntimeCustomizationPanel.tsx"),
+    "utf8"
+  );
+  const searchAgentWorkChatPanel = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/SearchAgentWorkChatPanel.tsx"),
+    "utf8"
+  );
+  const runtimeDataSupportPanel = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/RuntimeDataSupportPanel.tsx"),
+    "utf8"
+  );
+  const runtimeInitStatusCard = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/RuntimeInitStatusCard.tsx"),
+    "utf8"
+  );
+  const serviceReadinessPanel = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/ServiceReadinessPanel.tsx"),
+    "utf8"
+  );
+  const taskRunStorePanel = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/TaskRunStorePanel.tsx"),
+    "utf8"
+  );
+  const workspaceHostPanel = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/WorkspaceHostPanel.tsx"),
+    "utf8"
+  );
+  const runtimeCatalog = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/runtimeCatalog.ts"),
+    "utf8"
+  );
+  const runtimeEnvironmentRefreshHook = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/useRuntimeEnvironmentRefresh.ts"),
+    "utf8"
+  );
+  const settingsRuntimeSyncHook = readFileSync(
+    join(root, "renderer/workspace-monitor/components/features/useSettingsRuntimeSync.ts"),
+    "utf8"
+  );
   const evaluationReportPanel = readFileSync(
     join(root, "renderer/workspace-monitor/components/features/EvaluationReportPanel.tsx"),
     "utf8"
@@ -606,7 +706,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     join(root, "renderer/workspace-monitor/components/features/evaluationRuntimeTelemetry.ts"),
     "utf8"
   );
-  const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureDrilldown}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}\n${agentBuilderPanels}\n${agentDetailPanels}`;
+  const monitorWorkbenchSource = `${monitorShell}\n${coreFeatureDrilldown}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}\n${agentBuilderPanels}\n${agentDetailPanels}\n${accumulatedDataPanel}\n${desktopActionFeedbackCard}\n${agentFirstRunGuideCard}\n${desktopControlPanel}\n${providerAccountsPanel}\n${providerAccountSettingsHook}\n${runtimeCustomizationPanel}\n${searchAgentWorkChatPanel}\n${runtimeDataSupportPanel}\n${runtimeInitStatusCard}\n${serviceReadinessPanel}\n${taskRunStorePanel}\n${workspaceHostPanel}\n${runtimeCatalog}\n${runtimeEnvironmentRefreshHook}\n${settingsRuntimeSyncHook}`;
   const monitorStyles = readFileSync(join(root, "renderer/workspace-monitor/app/globals.css"), "utf8");
   const clipboardUtility = readFileSync(join(root, "renderer/workspace-monitor/lib/clipboard.mjs"), "utf8");
   const clipboardTest = readFileSync(join(root, "tests/clipboard.test.mjs"), "utf8");
@@ -739,6 +839,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "checkServiceReadiness",
     "service_internal_ready_public_blocked",
     "Signed updater channel",
+    "Updater runtime actions exposed",
     "Workspace Onboarding",
     "Direct provider task command exposed",
     "Native Resource Telemetry",
@@ -798,6 +899,8 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "run_installer_payload_audit",
     "create_support_diagnostic_bundle",
     "get_service_readiness_report",
+    "check_app_update",
+    "install_app_update",
     "get_desktop_preferences",
     "save_desktop_preferences",
     "list_provider_credentials",
@@ -835,7 +938,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "answer_and_resume_human_decision"
   ]) {
     assert.match(lib, new RegExp(commandName));
-    assert.match(monitorShell, new RegExp(commandName));
+    assert.match(monitorWorkbenchSource, new RegExp(commandName));
   }
   assert.match(monitorShell, /DesktopRuntimePanel/);
   assert.match(monitorShell, /<DesktopActivityRail/);
@@ -888,11 +991,39 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "Run Timeline",
     "작업 실행 타임라인",
     "Runtime Data & Support",
+    "AgentFirstRunGuideCard",
+    "data-agent-first-run-guide",
+    "에이전트는 이렇게 시작합니다",
+    "AGENTS.md 지시 확인",
+    "AGENTS.md 만들기/열기",
+    "설정 동기화",
+    "sync-settings",
+    "useSettingsRuntimeSync",
+    "createSettingsRuntimeSyncRequest",
+    "runManualSettingsSync",
+    "settingsSyncRequestConsumer",
+    "syncSettingsAndRuntimeState",
+    "queueSettingsSync",
+    "prepare-agents-md",
+    "renderAgentsMdStarter",
+    "RuntimeInitStatusCard",
+    "runtimeInitStatus",
+    "data-runtime-init-status",
+    "Codex / CLI init",
+    "초기화 완료",
     "Accumulated Data",
     "축적 데이터 인덱스",
     "Service Readiness",
     "서비스 출시 준비도",
     "Public blockers",
+    "Update Channel",
+    "service-update-channel-card",
+    "check-app-update",
+    "install-app-update",
+    "Check Update",
+    "Install & Restart",
+    "endpointCount",
+    "publicKeySha256_16",
     "Update & Recovery",
     "Signed Distribution",
     "설치형 데이터 경계",
@@ -1068,6 +1199,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "앱 설정 저장소",
     "native-preferences-pane",
     "ProviderAccountsPanel",
+    "useProviderAccountSettings",
     "제공자 계정 연결",
     "AI 로그인 설정",
     "provider-login-guide",

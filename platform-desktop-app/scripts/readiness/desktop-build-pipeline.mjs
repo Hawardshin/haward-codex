@@ -5,6 +5,10 @@ export const desktopBuildPipelineRequiredFiles = [
   "scripts/desktop-pipeline.mjs",
   "scripts/desktop-pipeline/paths.mjs",
   "scripts/desktop-pipeline/definitions.mjs",
+  "scripts/desktop-pipeline/steps.mjs",
+  "scripts/desktop-pipeline/package-artifacts.mjs",
+  "scripts/desktop-pipeline/pipelines.mjs",
+  "scripts/desktop-pipeline/help.mjs",
   "scripts/desktop-pipeline/runner.mjs",
   "scripts/tauri-before-build-prepared.mjs",
   "scripts/public-release-config.mjs",
@@ -86,10 +90,20 @@ function checkDocsAndPipelineStructure(root, failures) {
   const releaseRunbookEn = readText(root, "docs/release-runbook.en.md");
   const tauriConfig = readText(root, "src-tauri/tauri.conf.json");
   const desktopPipelineEntrypoint = readText(root, "scripts/desktop-pipeline.mjs");
+  const desktopPipelineDefinitions = readText(root, "scripts/desktop-pipeline/definitions.mjs");
+  const desktopPipelineSteps = readText(root, "scripts/desktop-pipeline/steps.mjs");
+  const desktopPipelineArtifacts = readText(root, "scripts/desktop-pipeline/package-artifacts.mjs");
+  const desktopPipelinePipelines = readText(root, "scripts/desktop-pipeline/pipelines.mjs");
+  const desktopPipelineHelp = readText(root, "scripts/desktop-pipeline/help.mjs");
+  const desktopPipelineRunner = readText(root, "scripts/desktop-pipeline/runner.mjs");
   const desktopPipelineStructure = [
     desktopPipelineEntrypoint,
-    readText(root, "scripts/desktop-pipeline/definitions.mjs"),
-    readText(root, "scripts/desktop-pipeline/runner.mjs")
+    desktopPipelineDefinitions,
+    desktopPipelineSteps,
+    desktopPipelineArtifacts,
+    desktopPipelinePipelines,
+    desktopPipelineHelp,
+    desktopPipelineRunner
   ].join("\n");
 
   if (!installableRequirementsKo.includes("PDA-REQ-038") || !installableRequirementsEn.includes("PDA-REQ-038")) {
@@ -139,10 +153,16 @@ function checkDocsAndPipelineStructure(root, failures) {
   }
 
   for (const requiredPhrase of [
+    "package-artifacts.mjs",
+    "pipelines.mjs",
+    "steps.mjs",
+    "help.mjs",
     "package-internal",
     "package-public",
     "public-report",
     "commonVerifySteps",
+    "internalPackageArtifactHints",
+    "publicPackageArtifactHints",
     "Workspace Monitor developer snapshot collect",
     "Public release preflight",
     "Tauri internal package build",
@@ -164,6 +184,9 @@ function checkDocsAndPipelineStructure(root, failures) {
   }
   if (!desktopPipelineEntrypoint.includes("./desktop-pipeline/runner.mjs")) {
     failures.push("desktop-pipeline.mjs must remain a thin entrypoint to scripts/desktop-pipeline/runner.mjs");
+  }
+  if (!desktopPipelineDefinitions.includes('export { pipelines } from "./pipelines.mjs"') || !desktopPipelineDefinitions.includes('export { helpText } from "./help.mjs"')) {
+    failures.push("desktop-pipeline/definitions.mjs must remain a compatibility facade over split pipeline modules");
   }
 }
 

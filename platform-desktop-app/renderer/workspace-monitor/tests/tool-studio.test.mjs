@@ -8,14 +8,64 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
 
 const monitorShell = fs.readFileSync(path.join(projectRoot, "components", "MonitorShell.tsx"), "utf8");
+const desktopTypes = fs.readFileSync(path.join(projectRoot, "types", "desktop.ts"), "utf8");
 const desktopActivityRail = fs.readFileSync(
   path.join(projectRoot, "components", "shell", "DesktopActivityRail.tsx"),
   "utf8"
 );
-const providerPanelSource = monitorShell.slice(
-  monitorShell.indexOf("function ProviderAccountsPanel"),
-  monitorShell.indexOf("function DesktopRuntimePanel")
+const providerPanelSource = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "ProviderAccountsPanel.tsx"),
+  "utf8"
 );
+const providerAccountSettingsHook = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "useProviderAccountSettings.ts"),
+  "utf8"
+);
+const runtimeCustomizationPanel = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "RuntimeCustomizationPanel.tsx"),
+  "utf8"
+);
+const runtimeCatalog = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "runtimeCatalog.ts"),
+  "utf8"
+);
+const settingsRuntimeSyncHook = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "useSettingsRuntimeSync.ts"),
+  "utf8"
+);
+const searchAgentWorkChatPanel = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "SearchAgentWorkChatPanel.tsx"),
+  "utf8"
+);
+const desktopActionFeedbackCard = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "DesktopActionFeedbackCard.tsx"),
+  "utf8"
+);
+const agentFirstRunGuideCard = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "AgentFirstRunGuideCard.tsx"),
+  "utf8"
+);
+const runtimeInitStatusCard = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "RuntimeInitStatusCard.tsx"),
+  "utf8"
+);
+const accumulatedDataPanel = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "AccumulatedDataPanel.tsx"),
+  "utf8"
+);
+const desktopControlPanel = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "DesktopControlPanel.tsx"),
+  "utf8"
+);
+const taskRunStorePanel = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "TaskRunStorePanel.tsx"),
+  "utf8"
+);
+const workspaceHostPanel = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "WorkspaceHostPanel.tsx"),
+  "utf8"
+);
+const desktopRuntimeCopySource = `${monitorShell}\n${accumulatedDataPanel}\n${desktopControlPanel}\n${runtimeInitStatusCard}\n${taskRunStorePanel}\n${workspaceHostPanel}\n${settingsRuntimeSyncHook}\n${providerAccountSettingsHook}`;
 const motionHelpers = fs.readFileSync(path.join(projectRoot, "lib", "motion.ts"), "utf8");
 const operatorCenterDialog = fs.readFileSync(
   path.join(projectRoot, "components", "features", "OperatorCenterDialog.tsx"),
@@ -109,6 +159,11 @@ const lazyBoundaryCheck = fs.readFileSync(
 const historyPayloadCheck = fs.readFileSync(path.join(projectRoot, "scripts", "check-history-payload.mjs"), "utf8");
 const adminHistoryHook = fs.readFileSync(path.join(projectRoot, "components", "history", "useAdminHistoryIndex.ts"), "utf8");
 const tauriLib = fs.readFileSync(path.resolve(projectRoot, "..", "..", "src-tauri", "src", "lib.rs"), "utf8");
+const tauriProviders = fs.readFileSync(
+  path.resolve(projectRoot, "..", "..", "src-tauri", "src", "features", "providers.rs"),
+  "utf8"
+);
+const tauriRuntimeSource = `${tauriLib}\n${tauriProviders}`;
 const tauriCargo = fs.readFileSync(path.resolve(projectRoot, "..", "..", "src-tauri", "Cargo.toml"), "utf8");
 const css = fs.readFileSync(path.join(projectRoot, "app", "globals.css"), "utf8");
 const packageJson = JSON.parse(fs.readFileSync(path.join(projectRoot, "package.json"), "utf8"));
@@ -125,7 +180,7 @@ function readCssRule(selector) {
 }
 
 test("Tool Studio is a first-class monitor section", () => {
-  assert.match(monitorShell, /\|\s*"tools"/);
+  assert.match(desktopTypes, /\|\s*"tools"/);
   assert.match(monitorShell, /id:\s*"tools"[\s\S]*?label:\s*"툴 스튜디오"/);
   assert.match(monitorShell, /allowedSections:\s*\["overview", "agents", "desktop", "eval", "source", "intent"\]/);
   assert.match(monitorShell, /defaultPinnedSections:\s*SectionId\[\]\s*=\s*\["overview", "agents", "desktop", "eval", "source", "intent"\]/);
@@ -183,7 +238,7 @@ test("Workspace snapshot collection uses bounded worker-thread parallelism", () 
 });
 
 test("AI Eval is a first-class resident workbench section", () => {
-  assert.match(monitorShell, /\|\s*"eval"/);
+  assert.match(desktopTypes, /\|\s*"eval"/);
   assert.match(monitorShell, /id:\s*"eval"[\s\S]*?label:\s*"AI 평가"/);
   assert.match(monitorShell, /const maxResidentSectionPanels = 12/);
   assert.match(monitorShell, /retainedResidentSections: SectionId\[\] = \["agents", "desktop", "eval", "source", "tools"\]/);
@@ -200,7 +255,7 @@ test("AI Eval is a first-class resident workbench section", () => {
   assert.match(monitorShell, /handleDesktopResourceSnapshotChange/);
   assert.match(monitorShell, /onDesktopResourceSnapshotChange=\{handleDesktopResourceSnapshotChange\}/);
   assert.match(monitorShell, /runtimeTelemetry=\{sharedDesktopResourceSnapshot\}/);
-  assert.match(monitorShell, /semanticMetrics: Array<\{/);
+  assert.match(desktopTypes, /semanticMetrics: Array<\{/);
   assert.match(evaluationReportPanel, /data-eval-workbench="open-source-eval-cockpit"/);
   assert.match(evaluationReportPanel, /data-eval-comprehensive-improvement="all-signal-cockpit"/);
   assert.match(evaluationReportPanel, /data-eval-runtime-telemetry/);
@@ -370,8 +425,8 @@ test("Runtime text defaults expose selectable choices", () => {
   assert.match(runtimeTerminalDrawer, /copy\.resetPrompt/);
   assert.match(runtimeTerminalDrawer, /onWorkingDirChange\(choice\.value\)/);
   assert.match(monitorShell, /RuntimeTextChoice/);
-  assert.match(monitorShell, /type RuntimePromptCustomization = \{/);
-  assert.match(monitorShell, /prompts: RuntimePromptCustomization/);
+  assert.match(desktopTypes, /export type RuntimePromptCustomization = \{/);
+  assert.match(desktopTypes, /prompts: RuntimePromptCustomization/);
   assert.match(monitorShell, /function taskPipePromptKeyForPreset\(taskKind: string\)/);
   assert.match(monitorShell, /function normalizeRuntimePromptCustomization/);
   assert.match(monitorShell, /const sessionPromptOverrides = runtimeCustomization\.prompts\.sessionPrompts/);
@@ -597,19 +652,19 @@ test("CLI setup keeps settings scroll ownership isolated", () => {
 });
 
 test("Search agent provider and model settings use explicit choices", () => {
-  assert.match(monitorShell, /const modelChoiceOptions = useMemo/);
-  assert.match(monitorShell, /const chatbotConnectionItems = useMemo/);
+  assert.match(searchAgentWorkChatPanel, /const modelChoiceOptions = useMemo/);
+  assert.match(searchAgentWorkChatPanel, /const chatbotConnectionItems = useMemo/);
   assert.match(monitorShell, /id: "connect-chatbot"/);
   assert.match(monitorShell, /label: uiLanguage === "ko" \? "챗봇 연결" : "Connect Chatbot"/);
-  assert.match(monitorShell, /agent-provider-choice-grid/);
-  assert.match(monitorShell, /agent-model-choice-grid/);
-  assert.match(monitorShell, /data-chatbot-connection="search-agent"/);
-  assert.match(monitorShell, /data-chatbot-connection-item=\{item\.id\}/);
+  assert.match(searchAgentWorkChatPanel, /agent-provider-choice-grid/);
+  assert.match(searchAgentWorkChatPanel, /agent-model-choice-grid/);
+  assert.match(searchAgentWorkChatPanel, /data-chatbot-connection="search-agent"/);
+  assert.match(searchAgentWorkChatPanel, /data-chatbot-connection-item=\{item\.id\}/);
   assert.match(monitorShell, /onOpenProviderSettings=\{openProviderSettings\}/);
-  assert.match(monitorShell, /onClick=\{\(\) => onChange\("providerId", provider\.providerId\)\}/);
-  assert.match(monitorShell, /onClick=\{\(\) => onChange\("model", choice\.value\)\}/);
-  assert.doesNotMatch(monitorShell, /<datalist id="search-agent-model-options">/);
-  assert.doesNotMatch(monitorShell, /list="search-agent-model-options"/);
+  assert.match(searchAgentWorkChatPanel, /onClick=\{\(\) => onChange\("providerId", provider\.providerId\)\}/);
+  assert.match(searchAgentWorkChatPanel, /onClick=\{\(\) => onChange\("model", choice\.value\)\}/);
+  assert.doesNotMatch(searchAgentWorkChatPanel, /<datalist id="search-agent-model-options">/);
+  assert.doesNotMatch(searchAgentWorkChatPanel, /list="search-agent-model-options"/);
   assert.match(css, /\.agent-provider-choice-grid,/);
   assert.match(css, /\.agent-model-choice-grid button\.active/);
   assert.match(css, /\.agent-chat-connection-strip \{/);
@@ -619,29 +674,32 @@ test("Search agent provider and model settings use explicit choices", () => {
 });
 
 test("Provider account settings expose guided login and model setup controls", () => {
-  assert.match(monitorShell, /AI 로그인 설정/);
-  assert.match(monitorShell, /provider-login-guide/);
-  assert.match(monitorShell, /provider-login-fast-lane/);
-  assert.match(monitorShell, /data-provider-login-card=\{provider\.providerId\}/);
-  assert.match(monitorShell, /로그인\/키 발급/);
-  assert.match(monitorShell, /https:\/\/platform\.openai\.com\/api-keys/);
-  assert.match(monitorShell, /https:\/\/aistudio\.google\.com\/api-keys/);
-  assert.match(monitorShell, /onOpenUrl\(provider, localRuntime \? "setup" : "login"\)/);
-  assert.match(monitorShell, /provider-filter-choice/);
-  assert.match(monitorShell, /ProviderActionFeedback/);
+  assert.match(providerPanelSource, /AI 로그인 설정/);
+  assert.match(providerPanelSource, /provider-login-guide/);
+  assert.match(providerPanelSource, /로그인\/키 발급/);
+  assert.match(runtimeCatalog, /https:\/\/platform\.openai\.com\/api-keys/);
+  assert.match(runtimeCatalog, /https:\/\/aistudio\.google\.com\/api-keys/);
+  assert.match(providerPanelSource, /onOpenUrl\(provider, "setup"\)/);
+  assert.match(providerPanelSource, /provider-filter-choice/);
+  assert.match(providerAccountSettingsHook, /export function useProviderAccountSettings/);
+  assert.match(providerAccountSettingsHook, /ProviderActionFeedback/);
+  assert.match(providerAccountSettingsHook, /list_provider_credentials/);
+  assert.match(providerAccountSettingsHook, /requestRuntimeSettingsSync\("provider-save"\)/);
+  assert.match(providerPanelSource, /providerPanelFeedbackId/);
+  assert.match(monitorShell, /useProviderAccountSettings/);
   assert.match(monitorShell, /actionFeedback=\{providerActionFeedback\}/);
+  assert.doesNotMatch(monitorShell, /const \[providerCredentials, setProviderCredentials\]/);
+  assert.doesNotMatch(monitorShell, /async function refreshProviderModels/);
   assert.match(providerPanelSource, /feedbackBadge/);
   assert.match(providerPanelSource, /provider-button-status/);
   assert.match(providerPanelSource, /provider-action-live-region/);
   assert.match(providerPanelSource, /has-provider-status/);
-  assert.match(monitorShell, /onRefreshModels\(provider\.providerId\)/);
-  assert.match(monitorShell, /onUseProvider\(provider, preferredModel\)/);
+  assert.match(providerPanelSource, /onRefreshModels\(provider\.providerId\)/);
+  assert.match(providerPanelSource, /onUseProvider\(provider, model\.id\)/);
   assert.match(css, /\.provider-login-guide \{/);
-  assert.match(css, /\.provider-login-fast-lane \{/);
-  assert.match(css, /\.provider-login-card-actions \{/);
   assert.match(css, /\.provider-filter-choice button\.active,/);
   assert.match(css, /\.provider-model-strip \{/);
-  assert.match(css, /\.provider-model-chip-list button\.active/);
+  assert.match(css, /\.provider-model-choice/);
   assert.match(css, /\.provider-button-status \{[\s\S]*?position: absolute;/);
   assert.match(css, /\.provider-action-live-region \{[\s\S]*?position: absolute;[\s\S]*?width: 1px;/);
   assert.doesNotMatch(providerPanelSource, /\{error && <p className="desktop-error">\{error\}<\/p>\}/);
@@ -649,22 +707,22 @@ test("Provider account settings expose guided login and model setup controls", (
 });
 
 test("Runtime customization settings persist and drive native execution", () => {
-  assert.match(monitorShell, /type RuntimeCustomization = \{/);
+  assert.match(desktopTypes, /export type RuntimeCustomization = \{/);
   assert.match(monitorShell, /runtimeCustomization: RuntimeCustomization/);
-  assert.match(monitorShell, /const defaultRuntimeCustomization: RuntimeCustomization = \{/);
-  assert.match(monitorShell, /prompts:\s*\{[\s\S]*?sessionPrompts: \{\},[\s\S]*?taskPipePrompts: \{\}/);
-  assert.match(monitorShell, /runtimeProviderDefaultBaseUrls/);
+  assert.match(runtimeCatalog, /export const defaultRuntimeCustomization: RuntimeCustomization = \{/);
+  assert.match(runtimeCatalog, /prompts:\s*\{[\s\S]*?sessionPrompts: \{\},[\s\S]*?taskPipePrompts: \{\}/);
+  assert.match(runtimeCatalog, /runtimeProviderDefaultBaseUrls/);
   assert.match(monitorShell, /function normalizeRuntimeCustomization/);
   assert.match(monitorShell, /prompts: normalizeRuntimePromptCustomization\(customization\?\.prompts\)/);
   assert.match(monitorShell, /setRuntimeCustomization\(preferences\.runtimeCustomization\)/);
   assert.match(monitorShell, /runtimeCustomization,\n\s+pinnedSections/);
   assert.match(monitorShell, /id: "customization"/);
-  assert.match(monitorShell, /data-runtime-customization-panel/);
-  assert.match(monitorShell, /data-runtime-provider-model=\{provider\.providerId\}/);
-  assert.match(monitorShell, /data-runtime-provider-base-url=\{provider\.providerId\}/);
-  assert.match(monitorShell, /data-runtime-terminal-shell/);
-  assert.match(monitorShell, /data-runtime-terminal-startup-command/);
-  assert.match(monitorShell, /data-runtime-quick-command-input=\{index\}/);
+  assert.match(runtimeCustomizationPanel, /data-runtime-customization-panel/);
+  assert.match(runtimeCustomizationPanel, /data-runtime-provider-model=\{provider\.providerId\}/);
+  assert.match(runtimeCustomizationPanel, /data-runtime-provider-base-url=\{provider\.providerId\}/);
+  assert.match(runtimeCustomizationPanel, /data-runtime-terminal-shell/);
+  assert.match(runtimeCustomizationPanel, /data-runtime-terminal-startup-command/);
+  assert.match(runtimeCustomizationPanel, /data-runtime-quick-command-input=\{index\}/);
   assert.match(monitorShell, /effectiveDefaultModelForProvider=\{effectiveProviderModelFor\}/);
   assert.match(monitorShell, /model: modelId \|\| effectiveProviderModelFor\(provider\)/);
   assert.match(monitorShell, /args\.command = shellCommand/);
@@ -684,19 +742,19 @@ test("Runtime customization settings persist and drive native execution", () => 
   assert.match(tauriLib, /fn normalize_runtime_customization/);
   assert.match(tauriLib, /fn normalize_prompt_customization/);
   assert.match(tauriLib, /fn desktop_prompt_customization_keeps_only_allowed_prompt_keys/);
-  assert.match(tauriLib, /provider_base_url_is_valid/);
-  assert.match(tauriLib, /provider_default_base_url/);
-  assert.match(tauriLib, /list_provider_models_report\(&app, &provider_id\)/);
-  assert.match(tauriLib, /call_provider_api\([\s\S]*?definition,[\s\S]*?&secret,[\s\S]*?&model,[\s\S]*?&base_url/);
-  assert.match(tauriLib, /fn provider_endpoint\(base_url: &str, endpoint_path: &str\)/);
-  assert.match(tauriLib, /\.post\(provider_endpoint\(base_url, "\/responses"\)\)/);
+  assert.match(tauriRuntimeSource, /provider_base_url_is_valid/);
+  assert.match(tauriRuntimeSource, /provider_default_base_url/);
+  assert.match(tauriRuntimeSource, /list_provider_models_report\(&app, &provider_id\)/);
+  assert.match(tauriRuntimeSource, /call_provider_api\([\s\S]*?definition,[\s\S]*?&secret,[\s\S]*?&model,[\s\S]*?&base_url/);
+  assert.match(tauriRuntimeSource, /fn provider_endpoint\(base_url: &str, endpoint_path: &str\)/);
+  assert.match(tauriRuntimeSource, /\.post\(provider_endpoint\(base_url, "\/responses"\)\)/);
 });
 
 test("CLI adapter settings expose beginner setup steps and copyable commands", () => {
-  assert.match(monitorShell, /authHint: LocalizedText;/);
-  assert.match(monitorShell, /firstRunCommand: LocalizedText;/);
-  assert.match(monitorShell, /expectedResult: LocalizedText;/);
-  assert.match(monitorShell, /type RuntimeTerminalSetupCheckReport = \{/);
+  assert.match(desktopTypes, /authHint: LocalizedText;/);
+  assert.match(desktopTypes, /firstRunCommand: LocalizedText;/);
+  assert.match(desktopTypes, /expectedResult: LocalizedText;/);
+  assert.match(desktopTypes, /export type RuntimeTerminalSetupCheckReport = \{/);
   assert.match(monitorShell, /const runRuntimeSetupCheck = async \(\) => \{/);
   assert.match(monitorShell, /check_runtime_terminal_setup/);
   assert.match(monitorShell, /data-runtime-setup-check-action="settings"/);
@@ -1214,6 +1272,8 @@ test("Monitor section switches prewarm heavy surfaces and preserve source editor
   assert.match(monitorShell, /launchRequest=\{section === "desktop" \? runtimeLaunchRequest : null\}/);
   assert.match(monitorShell, /onLaunchRequestConsumed=\{consumeRuntimeLaunchRequest\}/);
   assert.match(monitorShell, /onOpenSettings=\{openExecutionSettings\}/);
+  assert.match(monitorShell, /settingsSyncRequestConsumer=\{true\}/);
+  assert.match(monitorShell, /settingsSyncRequestConsumer=\{false\}/);
   assert.match(monitorShell, /surfaceActive=\{section === "source"\}/);
   assert.match(monitorShell, /if \(!surfaceActive \|\| !launchRequest/);
   assert.match(monitorShell, /SharedWorkspaceRequestInFlight/);
@@ -1284,9 +1344,9 @@ test("Product feature surface exposes open-source feature radar and install poli
 });
 
 test("Desktop source workbench prepares native OS workspace resources", () => {
-  assert.match(monitorShell, /type WorkspaceResourcePrepareReport = \{/);
-  assert.match(monitorShell, /type WorkspaceResourceWarmupReport = \{/);
-  assert.match(monitorShell, /type DesktopResourceSnapshotReport = \{/);
+  assert.match(desktopTypes, /export type WorkspaceResourcePrepareReport = \{/);
+  assert.match(desktopTypes, /export type WorkspaceResourceWarmupReport = \{/);
+  assert.match(desktopTypes, /export type DesktopResourceSnapshotReport = \{/);
   assert.match(monitorShell, /const \[workspaceResourceReport, setWorkspaceResourceReport\] = useState<WorkspaceResourcePrepareReport \| null>\(null\)/);
   assert.match(monitorShell, /const \[workspaceWarmupReport, setWorkspaceWarmupReport\] = useState<WorkspaceResourceWarmupReport \| null>\(null\)/);
   assert.match(monitorShell, /const \[desktopResourceSnapshot, setDesktopResourceSnapshot\] = useState<DesktopResourceSnapshotReport \| null>\(null\)/);
@@ -1318,8 +1378,8 @@ test("Desktop source workbench prepares native OS workspace resources", () => {
   assert.match(monitorShell, /workspaceWarmupReport\.cachedBytes/);
   assert.match(monitorShell, /await prepareWorkspaceOsResources\(\{ forceRefresh: true \}\)/);
   assert.match(monitorShell, /void warmWorkspaceOsResources\(\{ forceRefresh: true \}\)/);
-  assert.match(monitorShell, /memoryBudgetBytes: number/);
-  assert.match(monitorShell, /parallelWorkers: number/);
+  assert.match(desktopTypes, /memoryBudgetBytes: number/);
+  assert.match(desktopTypes, /parallelWorkers: number/);
   assert.match(monitorShell, /CPU 병렬/);
   assert.match(monitorShell, /preloadStrategy/);
   assert.match(monitorShell, /scanDurationMs \+ workspaceResourceReport\.preloadDurationMs/);
@@ -1418,14 +1478,48 @@ test("Monitor buttons expose instant press feedback before heavy click work", ()
 });
 
 test("Desktop runtime buttons expose contextual action feedback", () => {
-  assert.match(monitorShell, /type DesktopActionFeedbackStatus = "running" \| "done" \| "failed"/);
-  assert.match(monitorShell, /type DesktopActionFeedbackId =[\s\S]*?"check-adapters"[\s\S]*?"create-support-bundle"[\s\S]*?"open-source-review"/);
+  assert.match(desktopActionFeedbackCard, /export type DesktopActionFeedbackStatus = "running" \| "done" \| "failed"/);
+  assert.match(desktopActionFeedbackCard, /export type DesktopActionFeedbackId =[\s\S]*?"check-adapters"[\s\S]*?"create-support-bundle"[\s\S]*?"open-source-review"/);
+  assert.match(monitorShell, /DesktopActionFeedbackCard/);
   assert.match(monitorShell, /const \[desktopActionFeedback, setDesktopActionFeedback\] = useState<DesktopActionFeedback \| null>\(null\)/);
+  assert.match(monitorShell, /const \[runtimeInitStatus, setRuntimeInitStatus\] = useState<RuntimeInitStatusReport \| null>\(null\)/);
   assert.match(monitorShell, /const runDesktopAction = async \(id: DesktopActionFeedbackId/);
   assert.match(monitorShell, /data-desktop-action-feedback="check-adapters"/);
   assert.match(monitorShell, /data-desktop-action-feedback="create-support-bundle"/);
-  assert.match(monitorShell, /data-desktop-action-feedback-card=\{placement\}/);
-  assert.match(monitorShell, /role="status"[\s\S]*?aria-live="polite"/);
+  assert.match(monitorShell, /AgentFirstRunGuideCard/);
+  assert.match(agentFirstRunGuideCard, /data-agent-first-run-guide="true"/);
+  assert.match(agentFirstRunGuideCard, /에이전트는 이렇게 시작합니다/);
+  assert.match(agentFirstRunGuideCard, /AGENTS\.md 지시 확인/);
+  assert.match(agentFirstRunGuideCard, /AGENTS\.md 만들기\/열기/);
+  assert.match(agentFirstRunGuideCard, /설정 동기화/);
+  assert.match(agentFirstRunGuideCard, /검색 에이전트 시작/);
+  assert.match(desktopActionFeedbackCard, /"sync-settings"/);
+  assert.match(desktopActionFeedbackCard, /"prepare-agents-md"/);
+  assert.match(settingsRuntimeSyncHook, /export function useSettingsRuntimeSync/);
+  assert.match(settingsRuntimeSyncHook, /export function createSettingsRuntimeSyncRequest/);
+  assert.match(settingsRuntimeSyncHook, /const runManualSettingsSync = useCallback/);
+  assert.match(monitorShell, /useSettingsRuntimeSync/);
+  assert.match(monitorShell, /syncSettingsAndRuntimeState/);
+  assert.match(monitorShell, /queueSettingsSync/);
+  assert.match(monitorShell, /settingsSyncRequestConsumer = surfaceActive/);
+  assert.match(monitorShell, /if \(!settingsSyncRequest \|\| !settingsSyncRequestConsumer\)/);
+  assert.doesNotMatch(monitorShell, /settingsSyncInFlightRef/);
+  assert.doesNotMatch(monitorShell, /syncSettingsAndRuntimeState\(\{ reason: "manual"/);
+  assert.match(monitorShell, /data-desktop-action-feedback="sync-settings"/);
+  assert.match(monitorShell, /renderAgentsMdStarter/);
+  assert.match(monitorShell, /prepareAgentsInstructions/);
+  assert.match(monitorShell, /runDesktopAction\("prepare-agents-md", prepareAgentsInstructions\)/);
+  assert.match(runtimeInitStatusCard, /export type RuntimeInitStatusReport/);
+  assert.match(runtimeInitStatusCard, /data-runtime-init-status=\{status\}/);
+  assert.match(runtimeInitStatusCard, /Codex \/ CLI init/);
+  assert.match(runtimeInitStatusCard, /초기화 완료/);
+  assert.match(css, /\.agent-first-run-guide-card \{/);
+  assert.match(css, /\.agent-first-run-step-grid \{/);
+  assert.match(desktopActionFeedbackCard, /data-desktop-action-feedback-card=\{placement\}/);
+  assert.match(desktopActionFeedbackCard, /role="status"[\s\S]*?aria-live="polite"/);
+  assert.match(css, /\.runtime-init-status-card \{/);
+  assert.match(css, /\.runtime-init-status-card\.status-ready \{/);
+  assert.match(css, /\.runtime-init-status-card\.status-failed \{/);
   assert.match(css, /\.desktop-action-feedback-card \{/);
   assert.match(css, /\.desktop-action-feedback-card\.status-running \{/);
   assert.match(css, /\.desktop-action-feedback-card\.status-failed \{/);
@@ -1482,13 +1576,13 @@ test("Operator Center and task run copy localize high-visibility Korean UI", () 
   assert.match(operatorCenterDialog, /운영 도구는 주 작업면과 분리됩니다/);
   assert.match(operatorCenterDialog, /\$\{section\.shortLabel\} 열기/);
   assert.match(monitorShell, /질문 자동 보류는 초기화 설정에서만 바꿉니다/);
-  assert.match(monitorShell, /로그 열기/);
-  assert.match(monitorShell, /제한된 표준 출력\/오류 미리보기와 실행 기록 JSON/);
+  assert.match(desktopRuntimeCopySource, /로그 열기/);
+  assert.match(desktopRuntimeCopySource, /제한된 표준 출력\/오류 미리보기와 실행 기록 JSON/);
   assert.match(monitorShell, /label="기록 날짜"/);
   assert.match(monitorShell, /label="기록 문서"/);
   assert.match(monitorShell, /작업 기록과 모니터링 신호/);
   assert.match(monitorShell, /모든 기록 유형/);
-  assert.match(monitorShell, /작업 실행 저장소/);
+  assert.match(desktopRuntimeCopySource, /작업 실행 저장소/);
   assert.match(monitorShell, /CLI 실행 경로/);
   assert.match(monitorShell, /공개 배포 차단 요소/);
   assert.match(toolStudioData, /표준 출력\/오류와 작업 실행 기록/);

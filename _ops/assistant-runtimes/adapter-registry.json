@@ -274,6 +274,23 @@
       ]
     },
     {
+      "id": "gemini",
+      "name": "Gemini CLI",
+      "primary_instruction_targets": [
+        "GEMINI.md"
+      ],
+      "adapter_paths": [
+        "GEMINI.md"
+      ],
+      "setup_notes": [
+        "Use GEMINI.md as the primary instruction source for Gemini CLI.",
+        "Ensure GEMINI_API_KEY is configured in the environment or app settings."
+      ],
+      "caveats": [
+        "Gemini CLI behavior and tool availability should be verified with '@gemini setup cli'."
+      ]
+    },
+    {
       "id": "generic_ai_assistant",
       "name": "Generic AI coding assistant",
       "primary_instruction_targets": [

@@ -68,7 +68,7 @@
     {
       "id": "workspace_monitor_requirements",
       "title": "Workspace Monitor Requirements",
-      "path": "workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
       "source_type": "internal",
       "used_for": [
         "linking language view behavior to monitor product requirements"

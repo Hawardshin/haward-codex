@@ -14,6 +14,8 @@ export function checkReleaseReadiness({ mode = "internal", reportOnly = false } 
   const tauriConfig = readJson(path.join(root, "src-tauri", "tauri.conf.json"));
   const tauriCargo = readFileSync(path.join(root, "src-tauri", "Cargo.toml"), "utf8");
   const tauriLib = readFileSync(path.join(root, "src-tauri", "src", "lib.rs"), "utf8");
+  const tauriServiceReadiness = readFileSync(path.join(root, "src-tauri", "src", "features", "service_readiness.rs"), "utf8");
+  const tauriRuntimeSource = `${tauriLib}\n${tauriServiceReadiness}`;
   const macos = tauriConfig.bundle?.macOS || {};
   const targets = tauriConfig.bundle?.targets || [];
 
@@ -57,7 +59,12 @@ export function checkReleaseReadiness({ mode = "internal", reportOnly = false } 
     );
     requireCheck(checks, tauriCargo.includes("tauri-plugin-updater"), "Tauri updater Rust plugin dependency is installed", blockers);
     requireCheck(checks, tauriLib.includes("tauri_plugin_updater::Builder"), "Tauri updater Rust plugin is initialized", blockers);
-    requireCheck(checks, tauriLib.includes("service-update-channel.json"), "Bundled service-update-channel marker is checked at runtime", blockers);
+    requireCheck(
+      checks,
+      tauriRuntimeSource.includes("service-update-channel.json") && publicUpdateChannelMarkerBundled(publicConfig.config),
+      "Bundled service-update-channel marker is checked at runtime",
+      blockers
+    );
     requireCheck(checks, publicConfig.envSummary.updaterPrivateKeyPresent, "TAURI_SIGNING_PRIVATE_KEY or TAURI_SIGNING_PRIVATE_KEY_PATH is present for updater artifact signing", blockers);
     requireCheck(checks, Boolean(publicConfig.envSummary.updaterPublicKeySha25616), "TAURI_UPDATER_PUBLIC_KEY is present for updater verification", blockers);
     requireCheck(checks, publicConfig.envSummary.updaterEndpointCount > 0, "TAURI_UPDATER_ENDPOINTS has at least one endpoint", blockers);
@@ -116,6 +123,11 @@ function commandExists(command) {
 
 function readJson(filePath) {
   return JSON.parse(readFileSync(filePath, "utf8"));
+}
+
+function publicUpdateChannelMarkerBundled(config) {
+  const resources = config.bundle?.resources || {};
+  return resources["target/public-release/service-update-channel.json"] === "service-update-channel.json";
 }
 
 function parseArgs(argv) {

@@ -1,0 +1,21 @@
+# 2026-06-07 provider account settings hook refactor web-first record
+
+- 요청: 데스크톱 모니터 전반 구조 리팩토링과 코드 분리를 계속 진행한다.
+- 검색 시각: 2026-06-07
+- 쿼리:
+  - `React custom hooks refactor component logic official docs`
+  - `React extracting state logic into reducer official docs`
+  - `React useCallback custom hook stable dependencies official docs`
+- 확인한 출처:
+  - React 공식 문서: Reusing Logic with Custom Hooks, https://react.dev/learn/reusing-logic-with-custom-hooks
+  - React 공식 문서: Extracting State Logic into a Reducer, https://react.dev/learn/extracting-state-logic-into-a-reducer
+  - React 공식 문서: useCallback, https://react.dev/reference/react/useCallback
+- 약한 출처: 블로그/커뮤니티 글은 이번 구현 결정에 필요하지 않아 사용하지 않았다.
+- 계획 영향:
+  - provider 계정/모델 상태와 side effect를 `useProviderAccountSettings` 훅으로 분리한다.
+  - panel과 shell에는 UI 연결과 props 전달만 남긴다.
+  - event handler identity가 runtime sync/refresh 흐름에서 불필요하게 흔들리지 않도록 `useCallback`으로 묶는다.
+- 불확실성:
+  - 장기적으로 reducer 전환도 가능하지만, 이번 슬라이스는 기존 `useState` 기반 동작을 유지하는 좁은 훅 분리가 더 안전하다.
+- 공개 결정 요약:
+  - 대형 shell 분리의 다음 단위로 provider credential/model catalog 로직을 독립 훅으로 이동했다.

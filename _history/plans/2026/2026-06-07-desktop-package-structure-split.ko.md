@@ -1,0 +1,26 @@
+# 2026-06-07 desktop package structure split plan
+
+- work_mode: standard
+- view_mode: superadmin_developer
+- install_mode: developer
+- large_scope_slice:
+  - slice_id: desktop-package-pipeline-structure
+  - touch_paths:
+    - `platform-desktop-app/scripts/desktop-pipeline/`
+    - `platform-desktop-app/scripts/readiness/desktop-build-pipeline.mjs`
+    - `platform-desktop-app/tests/readiness.test.mjs`
+    - `_history/`
+  - exclusions:
+    - public release credentials and actual public updater endpoints.
+    - unrelated dirty worktree changes.
+- implementation_plan:
+  - `definitions.mjs` responsibility inventory.
+  - package pipeline steps/artifact hints/pipeline map/help text split into separate modules.
+  - keep `definitions.mjs` as a compatibility re-export façade.
+  - update readiness and tests to assert the split modules exist and keep public preflight ordering.
+  - run dry-run, readiness tests, TypeScript checks, Rust checks, and internal package/run.
+- validation_gate:
+  - desktop pipeline help and package-internal dry-run pass.
+  - `platform-desktop-app` check/test pass.
+  - `workspace-monitor` check passes.
+  - `desktop:package:run:internal` passes with DMG verification and app open.

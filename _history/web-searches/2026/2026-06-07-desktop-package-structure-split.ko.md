@@ -1,0 +1,22 @@
+# 2026-06-07 desktop package structure split web-first record
+
+- 요청: 데스크톱 앱 패키지 구조 분리를 계속 진행한다.
+- 검색 시각: 2026-06-07
+- 쿼리:
+  - `Tauri v2 packaging bundle configuration official docs macOS DMG app bundle`
+  - `Tauri v2 build bundle beforeBuildCommand official docs`
+  - `pnpm workspace filter run scripts official docs`
+- 확인한 출처:
+  - Tauri 공식 문서: Distribute, https://v2.tauri.app/distribute/
+  - Tauri 공식 문서: Configuration build beforeBuildCommand, https://v2.tauri.app/reference/config/#buildconfig
+  - pnpm 공식 문서: Filtering, https://pnpm.io/filtering
+- 약한 출처:
+  - 블로그/커뮤니티 글은 이번 구현 결정에 필요하지 않아 사용하지 않았다.
+- 계획 영향:
+  - Tauri 패키징은 기존 `tauri build`/DMG 검증 계약을 유지하고, 로컬 파이프라인 JS 구조만 역할별 모듈로 분리한다.
+  - `beforeBuildCommand` override를 쓰는 prepared renderer build 경로는 그대로 유지한다.
+  - pnpm `--filter` 기반 workspace step 생성은 공통 step 모듈에 둔다.
+- 불확실성:
+  - 공개 배포 구조는 Developer ID signing, notarization, updater endpoint, clean-machine smoke가 남아 있어 internal packaging 범위에서만 검증한다.
+- 공개 결정 요약:
+  - `definitions.mjs`는 호환 façade로 유지하고, 실제 구현은 steps/artifacts/pipelines/help로 분리한다.

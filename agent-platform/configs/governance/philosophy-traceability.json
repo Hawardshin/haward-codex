@@ -597,7 +597,7 @@
           "role": "Keeps scan-friendly summaries for future sessions."
         },
         {
-          "path": "workspace-monitor",
+          "path": "platform-desktop-app/renderer/workspace-monitor",
           "target_type": "dashboard",
           "role": "Visualizes history, specs, projects, agents, and documents."
         },

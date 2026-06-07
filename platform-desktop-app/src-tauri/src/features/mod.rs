@@ -6,7 +6,8 @@ mod cli;
 mod decisions;
 mod diagnostics;
 mod native;
-mod providers;
+pub(crate) mod providers;
+pub(crate) mod service_readiness;
 mod workspace;
 
 #[derive(Serialize)]

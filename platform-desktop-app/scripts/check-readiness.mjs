@@ -6,6 +6,13 @@ import {
   checkDesktopBuildPipeline,
   desktopBuildPipelineRequiredFiles
 } from "./readiness/desktop-build-pipeline.mjs";
+import {
+  desktopReadinessSourcePaths,
+  joinSourceMap,
+  monitorWorkbenchSourceKeys,
+  readSourceMap,
+  tauriRuntimeSourceKeys
+} from "./readiness/source-structure.mjs";
 
 const root = new URL("..", import.meta.url).pathname;
 
@@ -68,15 +75,31 @@ const requiredFiles = [
   "src-tauri/src/features/workspace.rs",
   "src-tauri/src/features/providers.rs",
   "src-tauri/src/features/diagnostics.rs",
+  "src-tauri/src/features/service_readiness.rs",
   "src-tauri/src/features/agent_factory.rs",
   "src-tauri/src/features/decisions.rs",
   "src-tauri/capabilities/default.json",
   "renderer/workspace-monitor/lib/clipboard.mjs",
+  "renderer/workspace-monitor/components/features/AccumulatedDataPanel.tsx",
+  "renderer/workspace-monitor/components/features/DesktopActionFeedbackCard.tsx",
+  "renderer/workspace-monitor/components/features/DesktopControlPanel.tsx",
+  "renderer/workspace-monitor/components/features/ProviderAccountsPanel.tsx",
+  "renderer/workspace-monitor/components/features/useProviderAccountSettings.ts",
+  "renderer/workspace-monitor/components/features/RuntimeCustomizationPanel.tsx",
+  "renderer/workspace-monitor/components/features/SearchAgentWorkChatPanel.tsx",
+  "renderer/workspace-monitor/components/features/RuntimeDataSupportPanel.tsx",
+  "renderer/workspace-monitor/components/features/ServiceReadinessPanel.tsx",
+  "renderer/workspace-monitor/components/features/TaskRunStorePanel.tsx",
+  "renderer/workspace-monitor/components/features/WorkspaceHostPanel.tsx",
+  "renderer/workspace-monitor/components/features/runtimeCatalog.ts",
+  "renderer/workspace-monitor/components/features/useRuntimeEnvironmentRefresh.ts",
+  "renderer/workspace-monitor/components/features/useSettingsRuntimeSync.ts",
   "tests/clipboard.test.mjs",
   "scripts/check-runtime-contract.mjs",
   "scripts/check-customer-bundle.mjs",
   "scripts/check-release-readiness.mjs",
   "scripts/check-service-readiness.mjs",
+  "scripts/readiness/source-structure.mjs",
   "scripts/public-release-config.mjs",
   "scripts/public-release-build.mjs",
   "scripts/create-updater-manifest.mjs",
@@ -189,9 +212,13 @@ for (const [source, destination] of [
   }
 }
 
-const tauriLib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
-const tauriCargo = readFileSync(join(root, "src-tauri/Cargo.toml"), "utf8");
-const tauriDefaultCapability = readFileSync(join(root, "src-tauri/capabilities/default.json"), "utf8");
+const sourceFiles = readSourceMap(root, desktopReadinessSourcePaths);
+const {
+  tauriLib,
+  tauriCargo,
+  tauriDefaultCapability
+} = sourceFiles;
+const tauriRuntimeSource = joinSourceMap(sourceFiles, tauriRuntimeSourceKeys);
 for (const commandName of [
   "get_installer_shell_runtime_contract",
   "get_rust_runtime_feature_map",
@@ -206,6 +233,8 @@ for (const commandName of [
   "get_accumulated_data_overview",
   "run_installer_payload_audit",
   "create_support_diagnostic_bundle",
+  "check_app_update",
+  "install_app_update",
   "get_desktop_preferences",
   "save_desktop_preferences",
   "list_provider_credentials",
@@ -263,9 +292,9 @@ for (const requiredPhrase of ["DialogExt", "tauri_plugin_dialog::init", "blockin
     failures.push(`src-tauri/src/lib.rs must include native dialog token ${requiredPhrase}`);
   }
 }
-for (const requiredPhrase of ["tauri_plugin_updater::Builder", "service-update-channel.json", "Signed updater channel"]) {
-  if (!tauriLib.includes(requiredPhrase)) {
-    failures.push(`src-tauri/src/lib.rs must include updater runtime token ${requiredPhrase}`);
+for (const requiredPhrase of ["tauri_plugin_updater::Builder", "UpdaterExt", "check_app_update", "install_app_update", "service-update-channel.json", "Signed updater channel"]) {
+  if (!tauriRuntimeSource.includes(requiredPhrase)) {
+    failures.push(`src-tauri runtime source must include updater runtime token ${requiredPhrase}`);
   }
 }
 if (!tauriLib.includes("_ops") || !tauriLib.includes("human-decision-inbox.json")) {
@@ -362,8 +391,8 @@ for (const requiredPhrase of [
   "stdout.log",
   "stderr.log"
 ]) {
-  if (!tauriLib.includes(requiredPhrase)) {
-    failures.push(`src-tauri/src/lib.rs must include task run store token ${requiredPhrase}`);
+  if (!tauriRuntimeSource.includes(requiredPhrase)) {
+    failures.push(`src-tauri native runtime source must include task run store token ${requiredPhrase}`);
   }
 }
 
@@ -636,6 +665,8 @@ for (const requiredPhrase of [
   "native_resource_telemetry",
   "Signed Distribution",
   "Update & Recovery",
+  "check_app_update",
+  "install_app_update",
   "Workspace Onboarding"
 ]) {
   if (!serviceReadinessSerialized.includes(requiredPhrase)) {
@@ -657,66 +688,35 @@ for (const operatorSection of expectedOperatorCenterSections) {
   }
 }
 
-const monitorShell = readFileSync(join(root, "renderer/workspace-monitor/components/MonitorShell.tsx"), "utf8");
-const desktopActivityRail = readFileSync(
-  join(root, "renderer/workspace-monitor/components/shell/DesktopActivityRail.tsx"),
-  "utf8"
-);
-const coreFeatureDrilldown = readFileSync(
-  join(root, "renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx"),
-  "utf8"
-);
-const nativeGitWorkbench = readFileSync(
-  join(root, "renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx"),
-  "utf8"
-);
-const pathDisclosure = readFileSync(
-  join(root, "renderer/workspace-monitor/components/workbench/PathDisclosure.tsx"),
-  "utf8"
-);
-const runtimeTerminalDrawer = readFileSync(
-  join(root, "renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx"),
-  "utf8"
-);
-const workspaceExplorerPane = readFileSync(
-  join(root, "renderer/workspace-monitor/components/workbench/WorkspaceExplorerPane.tsx"),
-  "utf8"
-);
-const agentBuilderPanels = readFileSync(
-  join(root, "renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx"),
-  "utf8"
-);
-const agentDetailPanels = readFileSync(
-  join(root, "renderer/workspace-monitor/components/workbench/AgentDetailPanels.tsx"),
-  "utf8"
-);
-const monitorWorkbenchSource = `${monitorShell}\n${desktopActivityRail}\n${coreFeatureDrilldown}\n${nativeGitWorkbench}\n${pathDisclosure}\n${runtimeTerminalDrawer}\n${workspaceExplorerPane}\n${agentBuilderPanels}\n${agentDetailPanels}`;
-const monitorStyles = readFileSync(join(root, "renderer/workspace-monitor/app/globals.css"), "utf8");
-const clipboardUtility = readFileSync(join(root, "renderer/workspace-monitor/lib/clipboard.mjs"), "utf8");
-const clipboardTest = readFileSync(join(root, "tests/clipboard.test.mjs"), "utf8");
-const nativeGitWorkbenchKo = readFileSync(join(root, "docs/architecture/native-git-workbench.ko.md"), "utf8");
-const nativeGitWorkbenchEn = readFileSync(join(root, "docs/architecture/native-git-workbench.en.md"), "utf8");
-const ptyDecisionKo = readFileSync(join(root, "docs/architecture/pty-terminal-decision.ko.md"), "utf8");
-const ptyDecisionEn = readFileSync(join(root, "docs/architecture/pty-terminal-decision.en.md"), "utf8");
-const productFeaturePanel = readFileSync(
-  join(root, "renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx"),
-  "utf8"
-);
-const monitorCollector = readFileSync(join(root, "renderer/workspace-monitor/scripts/collect-workspace.mjs"), "utf8");
-const productFeatureCollector = readFileSync(
-  join(root, "renderer/workspace-monitor/scripts/lib/product-feature-architecture.mjs"),
-  "utf8"
-);
-const customerBundleCheck = readFileSync(join(root, "scripts/check-customer-bundle.mjs"), "utf8");
-const releaseReadinessCheck = readFileSync(join(root, "scripts/check-release-readiness.mjs"), "utf8");
-const serviceReadinessCheck = readFileSync(join(root, "scripts/check-service-readiness.mjs"), "utf8");
-const publicReleaseConfig = readFileSync(join(root, "scripts/public-release-config.mjs"), "utf8");
-const publicReleaseBuild = readFileSync(join(root, "scripts/public-release-build.mjs"), "utf8");
-const updaterManifest = readFileSync(join(root, "scripts/create-updater-manifest.mjs"), "utf8");
-const lazyBoundaryCheck = readFileSync(
-  join(root, "renderer/workspace-monitor/scripts/check-lazy-boundary-contract.mjs"),
-  "utf8"
-);
+const {
+  monitorShell,
+  desktopActivityRail,
+  coreFeatureDrilldown,
+  nativeGitWorkbench,
+  pathDisclosure,
+  runtimeTerminalDrawer,
+  workspaceExplorerPane,
+  agentBuilderPanels,
+  agentDetailPanels,
+  monitorStyles,
+  clipboardUtility,
+  clipboardTest,
+  nativeGitWorkbenchKo,
+  nativeGitWorkbenchEn,
+  ptyDecisionKo,
+  ptyDecisionEn,
+  productFeaturePanel,
+  monitorCollector,
+  productFeatureCollector,
+  customerBundleCheck,
+  releaseReadinessCheck,
+  serviceReadinessCheck,
+  publicReleaseConfig,
+  publicReleaseBuild,
+  updaterManifest,
+  lazyBoundaryCheck
+} = sourceFiles;
+const monitorWorkbenchSource = joinSourceMap(sourceFiles, monitorWorkbenchSourceKeys);
 for (const requiredPhrase of ["buildCustomerSnapshot", "customer_snapshot_sanitized", "--snapshot-mode", "sourceFiles: []"]) {
   if (!monitorCollector.includes(requiredPhrase)) {
     failures.push(`workspace-monitor collector must include customer snapshot token ${requiredPhrase}`);
@@ -761,7 +761,7 @@ for (const requiredPhrase of ["auditCustomerSnapshot", "scanCustomerDist", "cust
     failures.push(`check-customer-bundle.mjs must include ${requiredPhrase}`);
   }
 }
-for (const requiredPhrase of ["checkReleaseReadiness", "public_release_blocked", "hardenedRuntime", "Developer ID", "notarization", "TAURI_SIGNING_PRIVATE_KEY", "TAURI_UPDATER_PUBLIC_KEY"]) {
+for (const requiredPhrase of ["checkReleaseReadiness", "public_release_blocked", "hardenedRuntime", "Developer ID", "notarization", "TAURI_SIGNING_PRIVATE_KEY", "TAURI_UPDATER_PUBLIC_KEY", "publicUpdateChannelMarkerBundled"]) {
   if (!releaseReadinessCheck.includes(requiredPhrase)) {
     failures.push(`check-release-readiness.mjs must include ${requiredPhrase}`);
   }
@@ -792,6 +792,7 @@ for (const requiredPhrase of [
   "checkServiceReadiness",
   "service_internal_ready_public_blocked",
   "Signed updater channel",
+  "Updater runtime actions exposed",
   "Workspace Onboarding",
   "Production Agent Blueprints",
   "Native Resource Telemetry",
@@ -799,6 +800,16 @@ for (const requiredPhrase of [
 ]) {
   if (!serviceReadinessCheck.includes(requiredPhrase)) {
     failures.push(`check-service-readiness.mjs must include ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of ["ServiceUpdateChannelReport", "service_update_channel_report", "json_array_len"]) {
+  if (!tauriRuntimeSource.includes(requiredPhrase)) {
+    failures.push(`src-tauri runtime source must include update-channel report token ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of ["service-update-channel-card", "updateChannel", "endpointCount", "publicKeySha256_16"]) {
+  if (!monitorWorkbenchSource.includes(requiredPhrase) && !monitorStyles.includes(requiredPhrase)) {
+    failures.push(`workspace monitor service readiness UI must include update-channel token ${requiredPhrase}`);
   }
 }
 for (const requiredPhrase of ["writeClipboardText", "clipboard.writeText", "textarea copy path", "execCommand", "setSelectionRange"]) {
@@ -838,6 +849,8 @@ for (const requiredPhrase of [
   "run_installer_payload_audit",
   "create_support_diagnostic_bundle",
   "get_service_readiness_report",
+  "check_app_update",
+  "install_app_update",
   "start_cli_adapter_session",
   "start_cli_task_pipeline",
   "start_native_pty_terminal",
@@ -955,6 +968,28 @@ for (const requiredPhrase of [
   "loadTaskRunDetail",
   "pruneTaskRunRecords",
   "refreshTaskRunRecords",
+  "AgentFirstRunGuideCard",
+  "data-agent-first-run-guide",
+  "에이전트는 이렇게 시작합니다",
+  "AGENTS.md 지시 확인",
+  "AGENTS.md 만들기/열기",
+  "설정 동기화",
+  "sync-settings",
+  "useSettingsRuntimeSync",
+  "createSettingsRuntimeSyncRequest",
+  "runManualSettingsSync",
+  "settingsSyncRequestConsumer",
+  "syncSettingsAndRuntimeState",
+  "queueSettingsSync",
+  "prepare-agents-md",
+  "renderAgentsMdStarter",
+  "write_workspace_text_file",
+  "research-insight-planner-agent",
+  "RuntimeInitStatusCard",
+  "runtimeInitStatus",
+  "data-runtime-init-status",
+  "Codex / CLI init",
+  "초기화 완료",
   "task-run-panel",
   "Runtime Data & Support",
   "Accumulated Data",
@@ -962,6 +997,17 @@ for (const requiredPhrase of [
   "get_accumulated_data_overview",
   "accumulated-data-panel",
   "accumulated-store-grid",
+  "Service Readiness",
+  "서비스 출시 준비도",
+  "Public blockers",
+  "Update Channel",
+  "service-update-channel-card",
+  "check-app-update",
+  "install-app-update",
+  "Check Update",
+  "Install & Restart",
+  "endpointCount",
+  "publicKeySha256_16",
   "설치형 데이터 경계",
   "Installer Payload Audit",
   "Support Diagnostic Bundle",
@@ -1010,6 +1056,7 @@ for (const requiredPhrase of [
   "앱 설정 저장소",
   "native-preferences-pane",
   "ProviderAccountsPanel",
+  "useProviderAccountSettings",
   "제공자 계정 연결",
   "AI 로그인 설정",
   "provider-login-guide",

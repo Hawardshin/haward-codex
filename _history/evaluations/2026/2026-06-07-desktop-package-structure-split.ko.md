@@ -1,0 +1,29 @@
+# 2026-06-07 desktop package structure split evaluation
+
+- 평가 대상:
+  - desktop package pipeline module split.
+- 변경 파일:
+  - `platform-desktop-app/scripts/desktop-pipeline/definitions.mjs`
+  - `platform-desktop-app/scripts/desktop-pipeline/steps.mjs`
+  - `platform-desktop-app/scripts/desktop-pipeline/package-artifacts.mjs`
+  - `platform-desktop-app/scripts/desktop-pipeline/pipelines.mjs`
+  - `platform-desktop-app/scripts/desktop-pipeline/help.mjs`
+  - `platform-desktop-app/scripts/readiness/desktop-build-pipeline.mjs`
+  - `platform-desktop-app/tests/readiness.test.mjs`
+- acceptance:
+  - package pipeline implementation is split by responsibility.
+  - `definitions.mjs` remains a stable compatibility façade.
+  - `package-public` still runs public preflight before common verification.
+  - internal package/run still verifies TypeScript, Rust, Tauri package, codesign, DMG, and app open path.
+- validation:
+  - `node platform-desktop-app/scripts/desktop-pipeline.mjs --help`: passed.
+  - `node platform-desktop-app/scripts/desktop-pipeline.mjs package-internal --dry-run`: passed.
+  - `node platform-desktop-app/scripts/check-readiness.mjs`: passed.
+  - `node platform-desktop-app/tests/readiness.test.mjs`: passed.
+  - `corepack pnpm --filter platform-desktop-app run check`: passed.
+  - `corepack pnpm --filter platform-desktop-app test`: passed.
+  - `corepack pnpm --filter workspace-monitor run check`: passed.
+  - `corepack pnpm run desktop:package:run:internal`: passed; Rust tests/build passed, Tauri `.app`/DMG built, codesign verify passed, hdiutil verify reported VALID, app opened.
+- residual_risks:
+  - Public release remains blocked by missing public signing/notarization/updater endpoint/clean-machine smoke gates.
+  - The worktree contains many prior unrelated modifications/untracked files, so this evaluation does not claim a clean git state.

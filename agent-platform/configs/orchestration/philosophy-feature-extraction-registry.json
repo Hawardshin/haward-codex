@@ -437,7 +437,7 @@
         "_philosophy/agent-operating-philosophy.ko.md",
         "agent-platform/configs/governance/philosophy-traceability.json",
         "_ops/workflows/75-capability-promotion.md",
-        "workspace-monitor/src/generated/workspace-snapshot.json"
+        "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json"
       ],
       "target_paths": [
         "agent-platform/configs/orchestration/philosophy-feature-extraction-registry.json",
@@ -445,7 +445,7 @@
         "_ops/workflows/79-philosophy-feature-extraction.md",
         "_ops/prompts/109-philosophy-feature-extraction.md",
         "agent-platform/configs/agents/philosophy-feature-extractor-agent.json",
-        "workspace-monitor/components/MonitorShell.tsx"
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
       ],
       "validation_targets": [
         {
@@ -565,11 +565,11 @@
       "status": "queued",
       "risk_tier": "medium",
       "evidence_inputs": [
-        "workspace-monitor/src/generated/workspace-snapshot.json",
+        "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json",
         "agent-platform/configs/usage/unstructured-data-structuring-profile.json"
       ],
       "target_paths": [
-        "workspace-monitor/components/MonitorShell.tsx"
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
       ],
       "validation_targets": [
         {
