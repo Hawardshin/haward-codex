@@ -12,6 +12,7 @@ pub(super) fn group() -> NativeRuntimeFeatureGroupReport {
             command("run_all_cli_adapter_health", "Run all adapter health probes", "Bounded process execution"),
             command("list_cli_task_pipeline_presets", "List task pipeline presets", "Static preset metadata"),
             command("start_cli_adapter_session", "Start one interactive CLI lane", "Workspace cwd, bounded output, process group cleanup"),
+            command("start_cli_adapter_pty_session", "Start one interactive CLI lane in a native PTY", "TTY/TUI fidelity for Codex and similar guest CLIs"),
             command("start_cli_task_pipeline", "Start a multi-lane CLI task graph", "Lane fan-out with merge-gate metadata"),
             command("poll_cli_adapter_session", "Poll one active CLI session", "Bounded output snapshot"),
             command("list_cli_adapter_sessions", "Poll all active CLI sessions", "Bounded output snapshots"),

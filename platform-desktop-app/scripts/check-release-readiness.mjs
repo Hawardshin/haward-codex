@@ -4,6 +4,12 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { buildPublicReleaseConfigReport } from "./public-release-config.mjs";
+import {
+  joinSourceMap,
+  readSourceMap,
+  tauriRuntimeSourceKeys,
+  tauriRuntimeSourcePaths
+} from "./readiness/source-structure.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -13,9 +19,9 @@ export function checkReleaseReadiness({ mode = "internal", reportOnly = false } 
   const checks = [];
   const tauriConfig = readJson(path.join(root, "src-tauri", "tauri.conf.json"));
   const tauriCargo = readFileSync(path.join(root, "src-tauri", "Cargo.toml"), "utf8");
-  const tauriLib = readFileSync(path.join(root, "src-tauri", "src", "lib.rs"), "utf8");
-  const tauriServiceReadiness = readFileSync(path.join(root, "src-tauri", "src", "features", "service_readiness.rs"), "utf8");
-  const tauriRuntimeSource = `${tauriLib}\n${tauriServiceReadiness}`;
+  const runtimeSources = readSourceMap(root, tauriRuntimeSourcePaths);
+  const tauriLib = joinSourceMap(runtimeSources, tauriRuntimeSourceKeys);
+  const tauriRuntimeSource = tauriLib;
   const macos = tauriConfig.bundle?.macOS || {};
   const targets = tauriConfig.bundle?.targets || [];
 

@@ -6,12 +6,26 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
+const tauriSrcRoot = path.resolve(projectRoot, "..", "..", "src-tauri", "src");
+
+function readTauriRuntimeSource() {
+  const lib = fs.readFileSync(path.join(tauriSrcRoot, "lib.rs"), "utf8");
+  const partsRoot = path.join(tauriSrcRoot, "lib_parts");
+  const parts = fs.existsSync(partsRoot)
+    ? fs.readdirSync(partsRoot)
+      .filter((file) => file.endsWith(".rs"))
+      .sort()
+      .map((file) => fs.readFileSync(path.join(partsRoot, file), "utf8"))
+    : [];
+  return [lib, ...parts].join("\n");
+}
+
 const searchAgentWorkChatPanel = fs.readFileSync(
   path.join(projectRoot, "components", "features", "SearchAgentWorkChatPanel.tsx"),
   "utf8"
 );
 const css = fs.readFileSync(path.join(projectRoot, "app", "globals.css"), "utf8");
-const tauriLib = fs.readFileSync(path.resolve(projectRoot, "..", "..", "src-tauri", "src", "lib.rs"), "utf8");
+const tauriLib = readTauriRuntimeSource();
 const tauriProviders = fs.readFileSync(path.resolve(projectRoot, "..", "..", "src-tauri", "src", "features", "providers.rs"), "utf8");
 const tauriRuntimeSource = `${tauriLib}\n${tauriProviders}`;
 

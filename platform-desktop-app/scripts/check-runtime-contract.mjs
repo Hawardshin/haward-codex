@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = new URL("..", import.meta.url).pathname;
@@ -24,6 +24,23 @@ function failIf(condition, message) {
 
 function pathExists(relativePath) {
   return existsSync(join(repoRoot, relativePath));
+}
+
+function readTextIfExists(relativePath) {
+  const path = join(root, relativePath);
+  return existsSync(path) ? readFileSync(path, "utf8") : "";
+}
+
+function readRuntimeSourceBundle() {
+  const libSource = readTextIfExists("src-tauri/src/lib.rs");
+  const partsDir = join(root, "src-tauri/src/lib_parts");
+  const partSources = existsSync(partsDir)
+    ? readdirSync(partsDir)
+        .filter((name) => name.endsWith(".rs"))
+        .sort()
+        .map((name) => readFileSync(join(partsDir, name), "utf8"))
+    : [];
+  return [libSource, ...partSources].join("\n");
 }
 
 function requireObject(field) {
@@ -131,7 +148,8 @@ failIf(!JSON.stringify(runtimeBoundary).includes("installer_shell_runtime_contra
 const cliAdapterRegistry = readRepoJson("agent-platform/configs/integrations/cli-adapter-registry.json");
 failIf(cliAdapterRegistry.platform_principle?.host_runtime_model !== "platform_first", "CLI adapter registry must preserve platform_first host model");
 
-const tauriLib = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
+const tauriLibEntrypoint = readFileSync(join(root, "src-tauri/src/lib.rs"), "utf8");
+const tauriLib = readRuntimeSourceBundle();
 const tauriAppShell = readFileSync(join(root, "src-tauri/src/features/app_shell.rs"), "utf8");
 const tauriRuntimeSource = `${tauriLib}\n${tauriAppShell}`;
 for (const commandName of [
@@ -154,7 +172,7 @@ failIf(
   contract.runtime_command_surface?.runtime_feature_map_command !== "get_rust_runtime_feature_map",
   "runtime_command_surface.runtime_feature_map_command must be get_rust_runtime_feature_map"
 );
-failIf(!tauriLib.includes("mod features"), "src-tauri/src/lib.rs must include the Rust feature module tree");
+failIf(!tauriLibEntrypoint.includes("mod features"), "src-tauri/src/lib.rs must include the Rust feature module tree");
 failIf(!tauriRuntimeSource.includes("get_rust_runtime_feature_map"), "src-tauri runtime source must expose get_rust_runtime_feature_map");
 
 failIf(

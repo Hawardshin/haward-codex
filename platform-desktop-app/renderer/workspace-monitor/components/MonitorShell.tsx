@@ -136,6 +136,15 @@ import {
   type DesktopActionFeedbackId,
   type DesktopActionFeedbackStatus
 } from "./features/DesktopActionFeedbackCard";
+
+type CliAdapterPtyLaunchReport = {
+  adapterId: string;
+  label: string;
+  command: string;
+  resolvedPath: string;
+  startupInput: string;
+  terminal: RuntimeNativePtySession;
+};
 import { AgentFirstRunGuideCard } from "./features/AgentFirstRunGuideCard";
 import {
   SearchAgentWorkChatPanel,
@@ -9392,8 +9401,101 @@ function DesktopRuntimePanel({
     }
   };
 
+  const createCliAdapterPtySession = async ({
+    adapterId,
+    prompt,
+    runningId,
+    taskKind
+  }: {
+    adapterId: string;
+    prompt: string;
+    runningId: string;
+    taskKind?: string;
+  }) => {
+    // TUI형 게스트 CLI는 stdout pipe가 아니라 PTY에서 시작해야 실제 터미널과 같은 입력/화면 제어가 된다.
+    const adapterLabel = adapters.find((adapter) => adapter.adapterId === adapterId)?.label || adapterId;
+    const requestedWorkingDir = workingDir.trim();
+    const tauriInvoke = getTauriInvoke();
+    if (!tauriInvoke) {
+      setRuntimeState("unavailable");
+      setRuntimeInitStatus({
+        kind: "session",
+        status: "failed",
+        adapterId,
+        adapterLabel,
+        modeLabel: selectedMode.label,
+        workingDir: requestedWorkingDir,
+        error: runtimeUnavailableErrorMessage,
+        updatedAt: new Date().toISOString()
+      });
+      throw new Error(runtimeUnavailableErrorMessage);
+    }
+
+    setRunningAdapterId(runningId);
+    setError("");
+    setRuntimeInitStatus({
+      kind: "session",
+      status: "initializing",
+      adapterId,
+      adapterLabel,
+      modeLabel: selectedMode.label,
+      workingDir: requestedWorkingDir,
+      updatedAt: new Date().toISOString()
+    });
+
+    const args: Record<string, unknown> = {
+      adapterId,
+      prompt,
+      rows: selectedNativePtySession?.rows || 28,
+      cols: selectedNativePtySession?.cols || 100
+    };
+    if (requestedWorkingDir) {
+      args.workingDir = requestedWorkingDir;
+    }
+
+    try {
+      const launch = await tauriInvoke<CliAdapterPtyLaunchReport>("start_cli_adapter_pty_session", args);
+      upsertNativePtySession(launch.terminal);
+      setTerminalDrawerOpen(true);
+      setRuntimeInitStatus({
+        kind: "session",
+        status: "ready",
+        adapterId: launch.adapterId,
+        adapterLabel: launch.label || adapterLabel,
+        modeLabel: selectedMode.label,
+        sessionId: launch.terminal.sessionId,
+        taskKind: taskKind || "interactive_pty_session",
+        workingDir: launch.terminal.workingDir,
+        updatedAt: new Date().toISOString()
+      });
+      return launch.terminal;
+    } catch (caught) {
+      setRuntimeInitStatus({
+        kind: "session",
+        status: "failed",
+        adapterId,
+        adapterLabel,
+        modeLabel: selectedMode.label,
+        workingDir: requestedWorkingDir,
+        error: errorMessage(caught),
+        updatedAt: new Date().toISOString()
+      });
+      throw caught;
+    } finally {
+      setRunningAdapterId("");
+    }
+  };
+
   const startSelectedLaneAction = async () => {
     setTerminalDrawerOpen(true);
+    if (shouldLaunchAdapterInNativePty(selectedSessionAdapterId)) {
+      await createCliAdapterPtySession({
+        adapterId: selectedSessionAdapterId,
+        prompt: sessionPrompt,
+        runningId: "native-pty-session"
+      });
+      return;
+    }
     await createCliAdapterSession({
       adapterId: selectedSessionAdapterId,
       prompt: sessionPrompt,
@@ -9418,6 +9520,15 @@ function DesktopRuntimePanel({
     const adapterId = availableRequestedAdapter?.adapterId || adapters.find((adapter) => adapter.available)?.adapterId || request.adapterId;
     setSelectedSessionAdapterId(adapterId);
     try {
+      if (shouldLaunchAdapterInNativePty(adapterId)) {
+        await createCliAdapterPtySession({
+          adapterId,
+          prompt: request.prompt,
+          runningId: request.taskKind,
+          taskKind: request.taskKind
+        });
+        return;
+      }
       await createCliAdapterSession({
         adapterId,
         prompt: request.prompt,
@@ -12823,6 +12934,11 @@ function parseTimeMs(value?: string | null) {
   const date = Number.isFinite(numericValue) && value.trim() !== "" ? new Date(numericValue) : new Date(value);
   const timeMs = date.getTime();
   return Number.isNaN(timeMs) ? 0 : timeMs;
+}
+
+function shouldLaunchAdapterInNativePty(adapterId: string) {
+  // pipe 세션은 기록/자동화용으로 유지하고, 사람이 직접 쓰는 AI CLI는 PTY를 기본 실행면으로 둔다.
+  return new Set(["codex-cli", "claude-code-cli", "gemini-cli", "opencode-cli", "claw-code-cli"]).has(adapterId);
 }
 
 function countBy<T>(items: T[], getKey: (item: T) => string) {

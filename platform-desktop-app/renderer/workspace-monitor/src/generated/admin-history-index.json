@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-07T15:22:14.089Z",
+  "generatedAt": "2026-06-07T15:48:51.072Z",
   "summary": {
-    "documents": 3184,
-    "days": 8,
+    "documents": 3191,
+    "days": 9,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1127
+        "count": 1128
       },
       {
         "category": "web-search",
-        "count": 494
+        "count": 495
       },
       {
         "category": "request-trace",
-        "count": 423
+        "count": 424
       },
       {
         "category": "plan",
-        "count": 405
+        "count": 406
       },
       {
         "category": "work-timing",
-        "count": 342
+        "count": 343
       },
       {
         "category": "user-request",
-        "count": 208
+        "count": 209
       },
       {
         "category": "work-summary",
-        "count": 175
+        "count": 176
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 7221133,
+    "totalSourceBytes": 7226731,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,118 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-work-timings-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
+      "path": "_history/work-timings/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "2026 06 08 Codex CLI PTY first run 작업 타이밍",
+      "excerpt": "2026 06 08 Codex CLI PTY first run 작업 타이밍 단계별 기록 웹/공식 문서 확인: 약 5분 로컬 원인 분석과 구현: 약 35분 Rust/TypeScript 분리: 약 35분 readiness/test/build 보정: 약 25분 기록/평가/커밋 준비: 약 15분 병목 기존 검증 스크립트와 테스트가 lib.rs 단일 파일 전제를 여러 곳에 갖고 있어 source aggregation 갱신이 필요했다. 기존 TypeScript 대형 파일 전체 분리는 별도 구조 리팩터링이 필",
+      "html": "<p>2026 06 08 Codex CLI PTY first run 작업 타이밍 단계별 기록 웹/공식 문서 확인: 약 5분 로컬 원인 분석과 구현: 약 35분 Rust/TypeScript 분리: 약 35분 readiness/test/build 보정: 약 25분 기록/평가/커밋 준비: 약 15분 병목 기존 검증 스크립트와 테스트가 lib.rs 단일 파일 전제를 여러 곳에 갖고 있어 source aggregation 갱신이 필요했다. 기존 TypeScript 대형 파일 전체 분리는 별도 구조 리팩터링이 필요하다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 532,
+      "updatedAt": "2026-06-07T15:48:36.763Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
+      "path": "_history/evaluations/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "2026 06 08 Codex CLI PTY first run 평가",
+      "excerpt": "2026 06 08 Codex CLI PTY first run 평가 평가 요구 충족: 부분 통과. Codex CLI 첫 실행/PTY 실행/어댑터 PATH 문제는 해결했다. 기존 모든 대형 TypeScript 파일 분리는 후속 범위가 남는다. 기능 보존: 통과. pipe session은 유지하고 TUI CLI만 PTY 경로로 라우팅했다. 구조 개선: 통과. Rust lib.rs 는 31줄, lib parts 최대 495줄이다. RuntimeTerminalDrawer와 하위 터미널 파일은 최대 498",
+      "html": "<p>2026 06 08 Codex CLI PTY first run 평가 평가 요구 충족: 부분 통과. Codex CLI 첫 실행/PTY 실행/어댑터 PATH 문제는 해결했다. 기존 모든 대형 TypeScript 파일 분리는 후속 범위가 남는다. 기능 보존: 통과. pipe session은 유지하고 TUI CLI만 PTY 경로로 라우팅했다. 구조 개선: 통과. Rust lib.rs 는 31줄, lib parts 최대 495줄이다. RuntimeTerminalDrawer와 하위 터미널 파일은 최대 498줄이다. 검증: 통과. Rust, Node, TypeScript, readiness, customer build 검증을 통과했다. 공개 배포: </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 960,
+      "updatedAt": "2026-06-07T15:48:36.762Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
+      "path": "_history/request-traces/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "2026 06 08 request trace",
+      "excerpt": "2026 06 08 request trace 요청 Codex CLI/PTY/CLI 탭 첫 실행 차단 문제 해결 어댑터 설정 불일치 해결 Rust lib.rs 와 관련 TypeScript 파일 분리 결과 Codex류 AI CLI 어댑터를 네이티브 PTY 세션으로 시작하는 경로를 추가했다. GUI PATH와 로그인 셸 PATH 차이를 흡수하는 resolver를 추가했다. Rust lib.rs 를 31줄 진입점과 28개 lib parts 파일로 분리했다. RuntimeTerminalDrawer를 하위 ",
+      "html": "<p>2026 06 08 request trace 요청 Codex CLI/PTY/CLI 탭 첫 실행 차단 문제 해결 어댑터 설정 불일치 해결 Rust lib.rs 와 관련 TypeScript 파일 분리 결과 Codex류 AI CLI 어댑터를 네이티브 PTY 세션으로 시작하는 경로를 추가했다. GUI PATH와 로그인 셸 PATH 차이를 흡수하는 resolver를 추가했다. Rust lib.rs 를 31줄 진입점과 28개 lib parts 파일로 분리했다. RuntimeTerminalDrawer를 하위 모듈로 분리했다. readiness/check/test aggregation을 새 구조에 맞췄다. 산출물 platform desktop app/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1008,
+      "updatedAt": "2026-06-07T15:48:36.761Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
+      "path": "_history/user-requests/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "2026 06 08 사용자 요청 요약",
+      "excerpt": "2026 06 08 사용자 요청 요약 사용자는 플랫폼 CLI 탭에서 Codex CLI 연결 설정과 PTY 기반 실행이 제대로 되지 않아 첫 작업 시작 자체가 막힌다고 보고했다. 플랫폼이 사용자를 대신해 첫 실행 경로를 자동으로 복구해야 하며, 이후 Rust lib.rs 와 TypeScript 대형 파일을 기능별로 분리하고 한국어 주석을 추가해 달라고 요청했다.",
+      "html": "<p>2026 06 08 사용자 요청 요약 사용자는 플랫폼 CLI 탭에서 Codex CLI 연결 설정과 PTY 기반 실행이 제대로 되지 않아 첫 작업 시작 자체가 막힌다고 보고했다. 플랫폼이 사용자를 대신해 첫 실행 경로를 자동으로 복구해야 하며, 이후 Rust lib.rs 와 TypeScript 대형 파일을 기능별로 분리하고 한국어 주석을 추가해 달라고 요청했다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 426,
+      "updatedAt": "2026-06-07T15:48:36.761Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "2026 06 08 Codex CLI PTY first run 작업 요약",
+      "excerpt": "2026 06 08 Codex CLI PTY first run 작업 요약 Codex CLI가 터미널에서는 보이지만 플랫폼 CLI 탭에서는 어댑터가 설정되지 않았다고 보이는 문제를 해결했다. 원인은 GUI 앱 PATH와 로그인 셸 PATH 차이, 그리고 TUI CLI를 pipe only session으로 시작하는 구조였다. 이번 변경은 AI CLI 어댑터용 PTY launch command를 추가하고, MonitorShell에서 Codex/Claude/Gemini/OpenCode/Claw Code를",
+      "html": "<p>2026 06 08 Codex CLI PTY first run 작업 요약 Codex CLI가 터미널에서는 보이지만 플랫폼 CLI 탭에서는 어댑터가 설정되지 않았다고 보이는 문제를 해결했다. 원인은 GUI 앱 PATH와 로그인 셸 PATH 차이, 그리고 TUI CLI를 pipe only session으로 시작하는 구조였다. 이번 변경은 AI CLI 어댑터용 PTY launch command를 추가하고, MonitorShell에서 Codex/Claude/Gemini/OpenCode/Claw Code를 PTY로 시작하도록 연결한다. Rust 런타임 command resolver는 일반 설치 위치와 로그인 셸 fallback을 확인한다. 구조적</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 784,
+      "updatedAt": "2026-06-07T15:48:36.761Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-plans-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
+      "path": "_history/plans/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "2026 06 08 Codex CLI PTY first run 계획",
+      "excerpt": "2026 06 08 Codex CLI PTY first run 계획 1. 웹 검색과 공식 문서 확인으로 CLI/TUI/PTY 전제를 검증한다. 2. 로컬 codex 설치와 PATH 상태를 확인한다. 3. Tauri Rust runtime에 어댑터 PTY command를 추가한다. 4. GUI PATH와 로그인 셸 PATH 차이를 흡수하는 resolver를 구현한다. 5. MonitorShell에서 Codex류 AI CLI를 PTY로 시작하도록 라우팅한다. 6. Rust와 터미널 TypeScript",
+      "html": "<p>2026 06 08 Codex CLI PTY first run 계획 1. 웹 검색과 공식 문서 확인으로 CLI/TUI/PTY 전제를 검증한다. 2. 로컬 codex 설치와 PATH 상태를 확인한다. 3. Tauri Rust runtime에 어댑터 PTY command를 추가한다. 4. GUI PATH와 로그인 셸 PATH 차이를 흡수하는 resolver를 구현한다. 5. MonitorShell에서 Codex류 AI CLI를 PTY로 시작하도록 라우팅한다. 6. Rust와 터미널 TypeScript 파일을 500줄 이하 구조로 분리한다. 7. readiness/test/build를 새 구조에 맞춘다. 8. 검증 기록, 평가, 누락/리소스 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 610,
+      "updatedAt": "2026-06-07T15:48:36.760Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
+      "path": "_history/web-searches/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "2026 06 08 Codex CLI PTY first run 웹 검색 기록",
+      "excerpt": "2026 06 08 Codex CLI PTY first run 웹 검색 기록 검색어 OpenAI Codex CLI install official docs codex install.sh Tauri shell execute command documentation PTY xterm terminal portable pty Rust crate documentation native pty system CommandBuilder xterm.js addons fit search documentation 확인한 ",
+      "html": "<p>2026 06 08 Codex CLI PTY first run 웹 검색 기록 검색어 OpenAI Codex CLI install official docs codex install.sh Tauri shell execute command documentation PTY xterm terminal portable pty Rust crate documentation native pty system CommandBuilder xterm.js addons fit search documentation 확인한 주요 출처 OpenAI Help Center, Codex CLI getting started: https://help.openai.com/en/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1278,
+      "updatedAt": "2026-06-07T15:48:36.759Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-2026-2026-06-07-md",
       "path": "_history/2026/2026-06-07.md",
@@ -51008,6 +51120,42 @@
     }
   ],
   "historyDays": [
+    {
+      "date": "2026-06-08",
+      "year": "2026",
+      "documentsCount": 7,
+      "categories": [
+        {
+          "category": "evaluation",
+          "count": 1
+        },
+        {
+          "category": "plan",
+          "count": 1
+        },
+        {
+          "category": "request-trace",
+          "count": 1
+        },
+        {
+          "category": "user-request",
+          "count": 1
+        },
+        {
+          "category": "web-search",
+          "count": 1
+        },
+        {
+          "category": "work-summary",
+          "count": 1
+        },
+        {
+          "category": "work-timing",
+          "count": 1
+        }
+      ],
+      "documents": []
+    },
     {
       "date": "2026-06-07",
       "year": "2026",

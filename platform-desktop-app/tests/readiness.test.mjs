@@ -393,11 +393,11 @@ test("installer shell runtime contract is bundled and enforceable", () => {
   const pkg = readJson("package.json");
   const sources = readSourceMap(root, desktopReadinessSourcePaths);
   const {
-    tauriLib: lib,
     tauriCargo: cargoToml,
     tauriDefaultCapability: defaultCapability
   } = sources;
   const runtimeSource = joinSourceMap(sources, tauriRuntimeSourceKeys);
+  const lib = runtimeSource;
 
   assert.equal(contract.installer_shell_contract.launch_model, "installed_app_owns_shell_runtime");
   assert.equal(contract.installer_shell_contract.shell_role, "primary_platform_host");
@@ -600,7 +600,6 @@ test("shared CLI adapter registry defines concrete AI CLI targets", () => {
 test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () => {
   const sources = readSourceMap(root, desktopReadinessSourcePaths);
   const {
-    tauriLib: lib,
     monitorShell,
     desktopActivityRail,
     coreFeatureDrilldown,
@@ -631,6 +630,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     evaluationRuntimeTelemetry
   } = sources;
   const tauriRuntimeSource = joinSourceMap(sources, tauriRuntimeSourceKeys);
+  const lib = tauriRuntimeSource;
   const monitorWorkbenchSource = joinSourceMap(sources, monitorWorkbenchSourceKeys);
   const platformPkg = readJson("package.json");
   const monitorPkg = readJson("renderer/workspace-monitor/package.json");

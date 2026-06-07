@@ -165,10 +165,7 @@ const workspaceExplorerPane = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "WorkspaceExplorerPane.tsx"),
   "utf8"
 );
-const runtimeTerminalDrawer = fs.readFileSync(
-  path.join(projectRoot, "components", "workbench", "RuntimeTerminalDrawer.tsx"),
-  "utf8"
-);
+const runtimeTerminalDrawer = readRuntimeTerminalDrawerSource();
 const nativeGitWorkbench = fs.readFileSync(
   path.join(projectRoot, "components", "workbench", "NativeGitWorkbench.tsx"),
   "utf8"
@@ -224,7 +221,8 @@ const lazyBoundaryCheck = fs.readFileSync(
 );
 const historyPayloadCheck = fs.readFileSync(path.join(projectRoot, "scripts", "check-history-payload.mjs"), "utf8");
 const adminHistoryHook = fs.readFileSync(path.join(projectRoot, "components", "history", "useAdminHistoryIndex.ts"), "utf8");
-const tauriLib = fs.readFileSync(path.resolve(projectRoot, "..", "..", "src-tauri", "src", "lib.rs"), "utf8");
+const tauriSrcRoot = path.resolve(projectRoot, "..", "..", "src-tauri", "src");
+const tauriLib = readTauriRuntimeSource();
 const tauriAppShell = fs.readFileSync(
   path.resolve(projectRoot, "..", "..", "src-tauri", "src", "features", "app_shell.rs"),
   "utf8"
@@ -241,6 +239,33 @@ const toolUsageRegistry = JSON.parse(
   fs.readFileSync(path.resolve(projectRoot, "..", "..", "configs", "tool-usage-integration-registry.json"), "utf8")
 );
 const toolUsageRegistryText = JSON.stringify(toolUsageRegistry);
+
+function readTauriRuntimeSource() {
+  const lib = fs.readFileSync(path.join(tauriSrcRoot, "lib.rs"), "utf8");
+  const partsRoot = path.join(tauriSrcRoot, "lib_parts");
+  const parts = fs.existsSync(partsRoot)
+    ? fs.readdirSync(partsRoot)
+      .filter((file) => file.endsWith(".rs"))
+      .sort()
+      .map((file) => fs.readFileSync(path.join(partsRoot, file), "utf8"))
+    : [];
+  return [lib, ...parts].join("\n");
+}
+
+function readRuntimeTerminalDrawerSource() {
+  const drawerRoot = path.join(projectRoot, "components", "workbench");
+  const splitRoot = path.join(drawerRoot, "runtime-terminal");
+  const splitSources = fs.existsSync(splitRoot)
+    ? fs.readdirSync(splitRoot)
+      .filter((file) => /\.(ts|tsx)$/.test(file))
+      .sort()
+      .map((file) => fs.readFileSync(path.join(splitRoot, file), "utf8"))
+    : [];
+  return [
+    fs.readFileSync(path.join(drawerRoot, "RuntimeTerminalDrawer.tsx"), "utf8"),
+    ...splitSources
+  ].join("\n");
+}
 
 function readCssRule(selector) {
   const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

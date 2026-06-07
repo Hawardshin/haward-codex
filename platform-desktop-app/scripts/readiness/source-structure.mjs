@@ -18,9 +18,45 @@ export const tauriFeatureModuleFiles = [
 
 export const tauriFeatureModuleNames = tauriFeatureModuleFiles.map((file) => basename(file));
 
+export const tauriLibPartFiles = [
+  "src-tauri/src/lib_parts/01_imports_and_core_types.rs",
+  "src-tauri/src/lib_parts/02_native_reports_and_preferences.rs",
+  "src-tauri/src/lib_parts/03_provider_and_git_types.rs",
+  "src-tauri/src/lib_parts/04_decision_types_and_constants.rs",
+  "src-tauri/src/lib_parts/05_adapter_catalog_and_probe_commands.rs",
+  "src-tauri/src/lib_parts/06_task_records_and_front_commands.rs",
+  "src-tauri/src/lib_parts/07_cli_session_runtime.rs",
+  "src-tauri/src/lib_parts/08_session_io_and_workspace_commands.rs",
+  "src-tauri/src/lib_parts/09_workspace_resource_cache.rs",
+  "src-tauri/src/lib_parts/10_decision_commands_and_app_run.rs",
+  "src-tauri/src/lib_parts/11_adapter_health_and_processes.rs",
+  "src-tauri/src/lib_parts/12_native_process_actions.rs",
+  "src-tauri/src/lib_parts/13_pty_runtime_and_output.rs",
+  "src-tauri/src/lib_parts/14_task_run_persistence.rs",
+  "src-tauri/src/lib_parts/15_runtime_data_overview.rs",
+  "src-tauri/src/lib_parts/16_data_stats_and_factory.rs",
+  "src-tauri/src/lib_parts/17_payload_support_and_utilities.rs",
+  "src-tauri/src/lib_parts/18_source_and_decision_detection.rs",
+  "src-tauri/src/lib_parts/19_decision_inbox_helpers.rs",
+  "src-tauri/src/lib_parts/20_preferences_and_clipboard_helpers.rs",
+  "src-tauri/src/lib_parts/21_subagent_plan_runtime.rs",
+  "src-tauri/src/lib_parts/22_subagent_fanout_runtime.rs",
+  "src-tauri/src/lib_parts/23_workspace_state_and_git_status.rs",
+  "src-tauri/src/lib_parts/24_git_actions_and_workspace_state.rs",
+  "src-tauri/src/lib_parts/25_git_reports_and_paths.rs",
+  "src-tauri/src/lib_parts/26_git_mutation_helpers.rs",
+  "src-tauri/src/lib_parts/27_workspace_paths_and_command_resolution.rs",
+  "src-tauri/src/lib_parts/28_tests.rs"
+];
+
+export const tauriLibPartSourcePaths = Object.fromEntries(
+  tauriLibPartFiles.map((file, index) => [`tauriLibPart${String(index + 1).padStart(2, "0")}`, file])
+);
+
 // command 구현이 lib.rs 밖으로 이동해도 readiness 검사가 같은 런타임 표면을 보게 묶는다.
 export const tauriRuntimeSourcePaths = {
   tauriLib: "src-tauri/src/lib.rs",
+  ...tauriLibPartSourcePaths,
   tauriAppShell: "src-tauri/src/features/app_shell.rs",
   tauriAppUpdate: "src-tauri/src/features/app_update.rs",
   tauriServiceReadiness: "src-tauri/src/features/service_readiness.rs",
@@ -29,6 +65,7 @@ export const tauriRuntimeSourcePaths = {
 
 export const tauriRuntimeSourceKeys = [
   "tauriLib",
+  ...Object.keys(tauriLibPartSourcePaths),
   "tauriAppShell",
   "tauriAppUpdate",
   "tauriServiceReadiness",
@@ -43,6 +80,11 @@ export const monitorWorkbenchSourcePaths = {
   nativeGitWorkbench: "renderer/workspace-monitor/components/workbench/NativeGitWorkbench.tsx",
   pathDisclosure: "renderer/workspace-monitor/components/workbench/PathDisclosure.tsx",
   runtimeTerminalDrawer: "renderer/workspace-monitor/components/workbench/RuntimeTerminalDrawer.tsx",
+  runtimeNativePtySurface: "renderer/workspace-monitor/components/workbench/runtime-terminal/RuntimeNativePtyTerminalSurface.tsx",
+  runtimeTerminalStartPanel: "renderer/workspace-monitor/components/workbench/runtime-terminal/RuntimeTerminalStartPanel.tsx",
+  runtimeTerminalCopy: "renderer/workspace-monitor/components/workbench/runtime-terminal/runtimeTerminalCopy.ts",
+  runtimeTerminalTypes: "renderer/workspace-monitor/components/workbench/runtime-terminal/runtimeTerminalTypes.ts",
+  runtimeTerminalUtils: "renderer/workspace-monitor/components/workbench/runtime-terminal/runtimeTerminalUtils.ts",
   sourceEditorCatalog: "renderer/workspace-monitor/components/workbench/source-editor/sourceCatalog.ts",
   sourceEditorDraftActions: "renderer/workspace-monitor/components/workbench/source-editor/sourceDraftActions.ts",
   sourceEditorDocuments: "renderer/workspace-monitor/components/workbench/source-editor/sourceDocuments.ts",
@@ -102,6 +144,11 @@ export const monitorWorkbenchSourceKeys = [
   "nativeGitWorkbench",
   "pathDisclosure",
   "runtimeTerminalDrawer",
+  "runtimeNativePtySurface",
+  "runtimeTerminalStartPanel",
+  "runtimeTerminalCopy",
+  "runtimeTerminalTypes",
+  "runtimeTerminalUtils",
   "sourceEditorCatalog",
   "sourceEditorDraftActions",
   "sourceEditorDocuments",
@@ -215,9 +262,7 @@ export const desktopReadinessRequiredSourceFiles = Array.from(
 
 export const serviceReadinessSourcePaths = {
   tauriCargo: "src-tauri/Cargo.toml",
-  tauriLib: "src-tauri/src/lib.rs",
-  tauriAppUpdate: "src-tauri/src/features/app_update.rs",
-  tauriProviders: "src-tauri/src/features/providers.rs",
+  ...tauriRuntimeSourcePaths,
   monitorShell: monitorWorkbenchSourcePaths.monitorShell,
   runtimeDisplay: monitorWorkbenchSourcePaths.runtimeDisplay,
   sourceWorkbenchPanel: monitorWorkbenchSourcePaths.sourceWorkbenchPanel,

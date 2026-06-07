@@ -104,8 +104,8 @@ export const adapterSetupGuides: Record<string, AdapterSetupGuide> = {
   },
   "codex-cli": {
     installHint: {
-      ko: "npm install -g @openai/codex",
-      en: "npm install -g @openai/codex"
+      ko: "curl -fsSL https://chatgpt.com/codex/install.sh | sh",
+      en: "curl -fsSL https://chatgpt.com/codex/install.sh | sh"
     },
     authHint: {
       ko: "codex login",
@@ -321,6 +321,7 @@ const runtimeProviderDefaultBaseUrls: Record<string, string> = {
 };
 
 export const defaultTerminalQuickCommands: NativePtyQuickCommand[] = [
+  { id: "codex", label: "Codex", detail: "codex", input: "codex\n" },
   { id: "pwd", label: "현재 위치", detail: "pwd", input: "pwd\n" },
   { id: "list", label: "파일 목록", detail: "ls -la", input: "ls -la\n" },
   { id: "git", label: "Git 상태", detail: "git status --short", input: "git status --short\n" }

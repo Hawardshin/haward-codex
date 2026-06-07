@@ -7,7 +7,8 @@ import {
   joinSourceMap,
   readSourceMap,
   serviceReadinessMonitorSourceKeys,
-  serviceReadinessSourcePaths
+  serviceReadinessSourcePaths,
+  tauriRuntimeSourceKeys
 } from "./readiness/source-structure.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -26,12 +27,12 @@ export function checkServiceReadiness({ mode = "internal", reportOnly = false } 
   const sources = readSourceMap(root, serviceReadinessSourcePaths);
   const {
     tauriCargo,
-    tauriLib,
     tauriAppUpdate,
     tauriProviders,
     monitorShell,
     agentBuilderPanels
   } = sources;
+  const tauriLib = joinSourceMap(sources, tauriRuntimeSourceKeys);
   const tauriRuntimeSource = `${tauriLib}\n${tauriAppUpdate}\n${tauriProviders}`;
   const monitorWorkbenchSource = joinSourceMap(sources, serviceReadinessMonitorSourceKeys);
   const workspacePersistenceReady = [

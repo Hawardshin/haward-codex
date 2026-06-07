@@ -243,7 +243,7 @@ if (!tauriDefaultCapability.includes("core:window:allow-start-dragging")) {
   failures.push("src-tauri/capabilities/default.json must allow native window dragging from the desktop titlebar");
 }
 for (const requiredPhrase of ["DialogExt", "tauri_plugin_dialog::init", "blocking_pick_folder"]) {
-  if (!tauriLib.includes(requiredPhrase)) {
+  if (!tauriRuntimeSource.includes(requiredPhrase)) {
     failures.push(`src-tauri/src/lib.rs must include native dialog token ${requiredPhrase}`);
   }
 }
@@ -252,7 +252,7 @@ for (const requiredPhrase of ["tauri_plugin_updater::Builder", "UpdaterExt", "ch
     failures.push(`src-tauri runtime source must include updater runtime token ${requiredPhrase}`);
   }
 }
-if (!tauriLib.includes("_ops") || !tauriLib.includes("human-decision-inbox.json")) {
+if (!tauriRuntimeSource.includes("_ops") || !tauriRuntimeSource.includes("human-decision-inbox.json")) {
   failures.push("src-tauri/src/lib.rs must persist deferred CLI questions to the human decision inbox");
 }
 for (const requiredPhrase of [
@@ -276,7 +276,7 @@ for (const requiredPhrase of [
   "impl Drop for NativePtySession",
   "master: Option<Box<dyn MasterPty + Send>>"
 ]) {
-  if (!tauriLib.includes(requiredPhrase)) {
+  if (!tauriRuntimeSource.includes(requiredPhrase)) {
     failures.push(`src-tauri/src/lib.rs must include performance token ${requiredPhrase}`);
   }
 }
