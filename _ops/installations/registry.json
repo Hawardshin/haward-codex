@@ -925,6 +925,32 @@
       "rollback_path": "Remove vscode-agent-workbench/source/node_modules and build outputs; delete vscode-agent-workbench/source if the local clone is no longer needed; optionally run nvm uninstall 24.15.0 if no other project depends on that Node runtime.",
       "installation_record_path": "_history/installations/2026/2026-06-06-vscode-hard-fork-node-and-deps.ko.md",
       "commit": "pending"
+    },
+    {
+      "id": "2026-06-08-agent-tool-desktop-electron",
+      "date": "2026-06-08",
+      "status": "installed",
+      "name": "agent-tool-desktop-app Electron runtime",
+      "scope": "project",
+      "owning_project": "agent-tool-desktop-app",
+      "package_manager": "npm",
+      "install_command": "npm install",
+      "environment_path": "agent-tool-desktop-app/node_modules/",
+      "dependency_record_paths": [
+        "agent-tool-desktop-app/package.json",
+        "agent-tool-desktop-app/package-lock.json"
+      ],
+      "version_or_lock_status": "electron@42.3.3 recorded in package.json and package-lock.json.",
+      "security_review": "Project-local devDependency only. Runtime shell uses contextIsolation true, nodeIntegration false, and sandbox true. Provider credentials, Ollama process control, and tool installs remain behind explicit runtime gates.",
+      "license_review": "npm metadata reports Electron license MIT.",
+      "verification": [
+        "npm ls --depth=0: electron@42.3.3",
+        "npm audit --audit-level=moderate: found 0 vulnerabilities",
+        "npm test: 2 tests passed"
+      ],
+      "rollback_path": "rm -rf agent-tool-desktop-app/node_modules agent-tool-desktop-app/package-lock.json; remove electron from agent-tool-desktop-app/package.json and rerun npm test/check.",
+      "installation_record_path": "_history/installations/2026/2026-06-08-agent-tool-desktop-electron.ko.md",
+      "commit": "pending"
     }
   ]
 }

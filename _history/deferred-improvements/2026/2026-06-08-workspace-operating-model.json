@@ -7,28 +7,48 @@
       "title": "Implement runtime-backed Git clone/create/import flows",
       "reason": "The current slice exposes the operating model and verified submodule state but does not automate every remote Git path.",
       "owner_project": "platform-desktop-app",
-      "status": "queued"
+      "status": "completed",
+      "completed_artifacts": [
+        "platform-desktop-app/src-tauri/src/lib_parts/23_workspace_state_and_git_status.rs",
+        "platform-desktop-app/src-tauri/src/lib_parts/06_task_records_and_front_commands.rs",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/WorkspaceHostPanel.tsx"
+      ]
     },
     {
       "id": "monitor-shell-componentization",
       "title": "Continue extracting MonitorShell sections into smaller files",
       "reason": "The user wants Rust and TypeScript files to stay under roughly 500 lines where feasible; this broader refactor needs separate safe slices.",
       "owner_project": "platform-desktop-app",
-      "status": "queued"
+      "status": "advanced",
+      "completed_artifacts": [
+        "platform-desktop-app/renderer/workspace-monitor/tests/source-editor-templates.test.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/tests/model-routing-controls.test.mjs"
+      ],
+      "remaining_note": "MonitorShell.tsx remains a legacy oversized shell; this slice aligned tests with already extracted provider/source-load modules and kept new workspace UI in small feature components."
     },
     {
       "id": "agent-tool-desktop-app-internals",
       "title": "Implement separated agent/tool/Ollama/provider operations inside agent-tool-desktop-app",
       "reason": "This request split the product boundary; the peer app's internal implementation belongs to a separate project slice.",
       "owner_project": "agent-tool-desktop-app",
-      "status": "queued"
+      "status": "completed_developer_shell",
+      "completed_artifacts": [
+        "agent-tool-desktop-app/package.json",
+        "agent-tool-desktop-app/src/main.mjs",
+        "agent-tool-desktop-app/src/renderer/index.html",
+        "agent-tool-desktop-app/tests/desktop-shell.test.mjs"
+      ]
     },
     {
       "id": "workspace-monitor-smoke-helper",
       "title": "Add reusable hydration-aware Playwright smoke helper",
       "reason": "Static export hydration takes time because the workspace snapshot is large; future UI slices should use a standard wait helper.",
       "owner_project": "platform-desktop-app",
-      "status": "queued"
+      "status": "completed",
+      "completed_artifacts": [
+        "platform-desktop-app/renderer/workspace-monitor/scripts/lib/static-monitor-smoke.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/scripts/smoke-projects-topology.mjs"
+      ]
     }
   ]
 }

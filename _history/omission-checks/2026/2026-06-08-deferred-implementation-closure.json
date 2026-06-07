@@ -1,0 +1,85 @@
+{
+  "task": "deferred implementation closure",
+  "date": "2026-06-08",
+  "work_mode": "ship_first",
+  "expected_items": [
+    {
+      "item_id": "managed-workspace-create",
+      "description": "Project management desktop app supports creating a new managed Git workspace.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/src-tauri/src/lib_parts/23_workspace_state_and_git_status.rs",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/WorkspaceHostPanel.tsx"
+      ]
+    },
+    {
+      "item_id": "projects-topology-smoke",
+      "description": "Projects topology user surface has a smoke test.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/scripts/smoke-projects-topology.mjs"
+      ]
+    },
+    {
+      "item_id": "history-ledger-compatibility",
+      "description": "Workspace history ledger can index legacy history and keep a first shadow copy batch.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "workspace-history-ledger/tools/build_compat_index.py",
+        "workspace-history-ledger/project-index/compatibility-index.json",
+        "workspace-history-ledger/migrations/2026-06-08-initial-ledger-sync.json"
+      ]
+    },
+    {
+      "item_id": "agent-tool-desktop-shell",
+      "description": "Agent/tool/Ollama/provider management is separated into its own developer desktop app shell.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-tool-desktop-app/src/main.mjs",
+        "agent-tool-desktop-app/src/renderer/index.html",
+        "agent-tool-desktop-app/tests/desktop-shell.test.mjs"
+      ]
+    },
+    {
+      "item_id": "installation-audit",
+      "description": "Open-source install is recorded with lockfile, audit, and registry entry.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-tool-desktop-app/package-lock.json",
+        "_history/installations/2026/2026-06-08-agent-tool-desktop-electron.ko.md",
+        "_ops/installations/registry.json"
+      ]
+    },
+    {
+      "item_id": "public-release-gate",
+      "description": "Public release signing/notarization is not falsely marked complete.",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/deferred-improvements/2026/2026-06-08-repository-deployment-topology.json",
+        "_specs/workspace-platform/2026-06-08-deferred-implementation-closure/validation.ko.md"
+      ]
+    },
+    {
+      "item_id": "commit-and-push",
+      "description": "Completed meaningful changes are committed and pushed in each owning repository.",
+      "required": true,
+      "status": "close_out_pending",
+      "evidence": [
+        "final Git directives after successful pushes"
+      ]
+    }
+  ],
+  "known_remaining_items": [
+    {
+      "item_id": "public-release-signing",
+      "status": "blocked_external_gate",
+      "reason": "Developer ID certificate, notarization credentials, release signing key, and update channel validation are external release prerequisites."
+    }
+  ]
+}
