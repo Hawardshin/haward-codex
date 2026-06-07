@@ -14,7 +14,7 @@ Workspace Monitor reads the platform `view-mode-registry.json` and allows select
 - Add `viewModeCatalog` to the snapshot
 - Add a top-level view mode selector
 - Filter sections and documents by the selected mode
-- Keep superadmin development mode as the default
+- Keep user view as the default and move developer/superadmin functions behind explicit selection
 
 ## Non-Goals
 

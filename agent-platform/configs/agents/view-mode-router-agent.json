@@ -14,7 +14,7 @@
     "input_schema": "agent-platform/configs/access/view-mode-registry.json",
     "output_contract": "selected view_mode, reason, visible sections, hidden/collapsed surfaces, security interpretation, verification commands, and publication/authz follow-up",
     "work_mode_registry": "agent-platform/configs/workflows/work-mode-registry.json",
-    "policy": "Use view_mode only as an audience and UI lens. Do not treat client-side hiding as a security boundary. Keep view_mode separate from install_mode and work_mode. Use superadmin_developer as the current default until the repository owner changes the operating default.",
+    "policy": "Use view_mode only as an audience and UI lens. Do not treat client-side hiding as a security boundary. Keep view_mode separate from install_mode and work_mode. Use user as the current default so first-run users get the simplified task-first interface, while developer and superadmin_developer remain explicit advanced lenses.",
     "docs_targets": [
       "agent-platform/docs/view-mode-router-agent.ko.md",
       "agent-platform/docs/view-mode-router-agent.en.md"

@@ -17,6 +17,7 @@ type DesktopActivityRailProps<TSectionId extends string = string> = {
   activeSectionId: TSectionId;
   homeSectionId: TSectionId;
   sections: Array<DesktopActivityRailSection<TSectionId>>;
+  showOperatorCenter?: boolean;
   onPrimeSection: (sectionId: TSectionId) => void;
   onOpenSection: (sectionId: TSectionId) => void;
   onOpenOperatorCenter: () => void;
@@ -28,6 +29,7 @@ export function DesktopActivityRail<TSectionId extends string = string>({
   activeSectionId,
   homeSectionId,
   sections,
+  showOperatorCenter = true,
   onPrimeSection,
   onOpenSection,
   onOpenOperatorCenter,
@@ -73,15 +75,17 @@ export function DesktopActivityRail<TSectionId extends string = string>({
           </button>
         ))}
       </nav>
-      <button
-        className="activity-settings"
-        type="button"
-        onClick={onOpenOperatorCenter}
-        title={operatorLabel}
-        aria-label={operatorLabel}
-      >
-        <ShieldCheck size={19} aria-hidden="true" />
-      </button>
+      {showOperatorCenter && (
+        <button
+          className="activity-settings"
+          type="button"
+          onClick={onOpenOperatorCenter}
+          title={operatorLabel}
+          aria-label={operatorLabel}
+        >
+          <ShieldCheck size={19} aria-hidden="true" />
+        </button>
+      )}
       <button
         className="activity-settings"
         type="button"

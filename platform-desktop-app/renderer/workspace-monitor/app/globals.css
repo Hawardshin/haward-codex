@@ -4621,6 +4621,103 @@ main {
   padding: 0;
 }
 
+.simple-user-start-panel {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 0.85fr) minmax(340px, 1.15fr);
+  gap: var(--space-4);
+  align-items: stretch;
+  min-width: 0;
+  border: 1px solid var(--hierarchy-border-strong);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--surface-panel) 86%, var(--green) 8%), color-mix(in srgb, var(--surface-panel) 86%, var(--blue) 8%)),
+    var(--surface-panel);
+  box-shadow: var(--surface-shadow-high), var(--hairline-shadow);
+  padding: var(--space-5);
+}
+
+.simple-user-start-copy,
+.simple-user-task-card {
+  display: grid;
+  align-content: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.simple-user-start-copy h2 {
+  max-width: 660px;
+  margin: 0;
+  color: var(--text);
+  font-size: var(--font-size-work-title);
+  line-height: var(--line-height-tight);
+}
+
+.simple-user-status-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.simple-user-status-row span {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface-raised) 88%, transparent);
+  color: var(--text-secondary);
+  padding: 5px 10px;
+  font-size: var(--font-size-caption);
+  font-weight: 850;
+}
+
+.simple-user-task-card textarea {
+  width: 100%;
+  min-height: 142px;
+  resize: vertical;
+  border: 1px solid var(--hierarchy-border-strong);
+  border-radius: 8px;
+  background: var(--surface-raised);
+  color: var(--text);
+  padding: 14px;
+  font: inherit;
+  line-height: var(--line-height-copy);
+  outline: none;
+}
+
+.simple-user-task-card textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 22%, transparent);
+}
+
+.simple-user-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.simple-user-actions button {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 9px 13px;
+  font-weight: 850;
+}
+
+.simple-user-actions button.primary {
+  border-color: color-mix(in srgb, var(--green) 42%, var(--line));
+  background: var(--green);
+  color: white;
+}
+
 .home-focus-command {
   position: relative;
   display: grid;
@@ -18992,6 +19089,8 @@ h3 {
   .titlebar-context-strip,
   .titlebar-actions,
   .desktop-toolbar,
+  .simple-user-start-panel,
+  .simple-user-actions,
   .home-focus-command,
   .home-focus-flow,
   .home-start-flow header,

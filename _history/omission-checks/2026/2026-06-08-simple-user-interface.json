@@ -1,0 +1,105 @@
+{
+  "task": "기본 사용자 인터페이스 단순화",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "default-user-mode",
+      "description": "Make user view the default platform and monitor lens.",
+      "source": "user request and REQ-WS-061",
+      "required": true,
+      "status": "covered",
+      "evidence": ["default_mode: user", "MonitorShell default viewMode fallback user", "check_view_mode_registry default expectation user"]
+    },
+    {
+      "item_id": "simple-first-screen",
+      "description": "Provide an easy first screen for task intake and start.",
+      "source": "user request and REQ-WM-076",
+      "required": true,
+      "status": "covered",
+      "evidence": ["data-simple-user-start", "homeTaskPrompt", "startSimpleUserTask"]
+    },
+    {
+      "item_id": "hide-advanced-customization",
+      "description": "Hide custom/tools/source/operator surfaces from default user view.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": ["user allowedSections overview/desktop/eval", "showOperatorCenter={currentViewMode.id !== \"user\"}"]
+    },
+    {
+      "item_id": "advanced-mode-preserved",
+      "description": "Keep developer and superadmin access to advanced sections.",
+      "source": "view mode policy",
+      "required": true,
+      "status": "covered",
+      "evidence": ["developer allowed sections unchanged", "superadmin_developer allowed sections unchanged"]
+    },
+    {
+      "item_id": "durable-records",
+      "description": "Update requirements, specs, policy, tests, web search, and evaluation records.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": ["REQ-WM-076", "2026-06-08-simple-user-interface spec", "web search record", "evaluation input"]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-simple-user-interface/spec.ko.md",
+      "purpose": "Project spec",
+      "required": true
+    },
+    {
+      "path": "_requirements/changes/2026-06-08-simple-user-interface.ko.md",
+      "purpose": "Requirement change record",
+      "required": true
+    },
+    {
+      "path": "_history/web-searches/2026/2026-06-08-simple-user-interface.ko.md",
+      "purpose": "Web-first record",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-checks",
+      "description": "View mode registry and config contract pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "PYTHONPATH=src python3 -m agent_platform.cli check-view-modes configs/access/view-mode-registry.json -> ready",
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/access/view-mode-registry.json -> self_documenting",
+        "PYTHONPATH=src python3 -m unittest tests.test_view_modes -> OK"
+      ]
+    },
+    {
+      "check_id": "renderer-checks",
+      "description": "Workspace Monitor test/check/build pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test -> 116 passed",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check -> passed",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build -> passed",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build:customer -> passed",
+        "corepack pnpm --dir platform-desktop-app run test -> 30 passed",
+        "corepack pnpm --dir platform-desktop-app run check -> passed"
+      ]
+    },
+    {
+      "check_id": "guards",
+      "description": "Omission, resource, and evaluation records pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-omissions target: _history/omission-checks/2026/2026-06-08-simple-user-interface.json",
+        "check-resources target: _history/resource-checks/2026/2026-06-08-simple-user-interface.json",
+        "evaluate-work target: _history/evaluations/2026/2026-06-08-simple-user-interface-input.json"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "Packaged native desktop auto-start smoke is not covered by static renderer checks in this slice.",
+    "Existing advanced panels remain complex; this slice changes default exposure rather than fully redesigning every advanced surface."
+  ]
+}

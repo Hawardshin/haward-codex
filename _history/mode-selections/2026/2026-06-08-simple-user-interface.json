@@ -1,0 +1,24 @@
+{
+  "task": "기본 사용자 인터페이스 단순화",
+  "selected_work_mode": "standard",
+  "view_mode": "superadmin_developer",
+  "target_default_view_mode": "user",
+  "install_mode": "developer",
+  "reason": "Workspace Monitor의 기본 보기 정책, 사용자 진입 UI, 테스트, 요구사항과 스펙을 함께 바꾸는 의미 있는 UI/정책 변경이다.",
+  "web_first_intake": true,
+  "memory_bootstrap": "simulated from AGENTS.md, view mode registry, Workspace Monitor requirements, and existing view-mode specs",
+  "non_quick_required_targets": [
+    "requirements",
+    "spec",
+    "plan",
+    "tasks",
+    "validation",
+    "traceability",
+    "omission_check",
+    "resource_check",
+    "evaluation",
+    "request_trace",
+    "work_summary",
+    "timing_summary"
+  ]
+}

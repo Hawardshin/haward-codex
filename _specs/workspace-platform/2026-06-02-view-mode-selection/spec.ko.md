@@ -25,5 +25,5 @@
 ## 설계 결정
 
 - 모드 ID는 `user`, `developer`, `superadmin_developer`만 허용한다.
-- 현재 기본값은 `superadmin_developer`다.
+- 현재 기본값은 `user`다.
 - 보안 해석은 명확히 제한한다. UI 숨김은 보안 경계가 아니며, 향후 public/multi-user 배포는 snapshot collector나 server authz에서 강제해야 한다.

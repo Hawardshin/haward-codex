@@ -225,7 +225,7 @@ test("product feature registry makes agent platform primary", () => {
   assert.match(serialized, /agentcore_blueprint_gate/);
   assert.match(serialized, /supporting observability/);
   assert.match(serialized, /operator_surfaces_are_separate/);
-  assert.deepEqual(registry.desktop_home_surface.primary_navigation_sections, ["overview", "agents", "desktop", "eval", "source", "intent"]);
+  assert.deepEqual(registry.desktop_home_surface.primary_navigation_sections, ["overview", "desktop", "eval"]);
   assert.deepEqual(registry.desktop_home_surface.operator_center_sections, [
     "projects",
     "history",
@@ -1330,7 +1330,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   assert.ok(viewModes.modes.every((mode) => mode.allowed_sections.includes("desktop")));
   assert.ok(viewModes.modes.every((mode) => mode.allowed_sections.includes("eval")));
   const userMode = viewModes.modes.find((mode) => mode.id === "user");
-  assert.deepEqual(userMode.allowed_sections, ["overview", "agents", "desktop", "eval", "source", "intent"]);
+  assert.deepEqual(userMode.allowed_sections, ["overview", "desktop", "eval"]);
   for (const operatorSection of ["projects", "history", "structure", "documents", "requirements"]) {
     assert.ok(!userMode.allowed_sections.includes(operatorSection));
   }

@@ -885,7 +885,7 @@ const AgentCollaborationScene = dynamic(
 );
 
 const DESKTOP_PREFERENCES_SCHEMA_VERSION = "desktop-preferences.v1";
-const defaultPinnedSections: SectionId[] = ["overview", "agents", "desktop", "eval", "source", "intent"];
+const defaultPinnedSections: SectionId[] = ["overview", "desktop", "eval"];
 type OperatorCenterSection = OperatorCenterDialogProps["sections"][number];
 type OperatorCenterSectionId = OperatorCenterSection["id"];
 const operatorSectionIds = new Set<OperatorCenterSectionId>(["projects", "history", "structure", "documents", "requirements"]);
@@ -938,14 +938,14 @@ const featureGroups: Array<{
 const sections: Section[] = [
   {
     id: "overview",
-    label: "핵심 홈",
-    labelEn: "Core Home",
-    shortLabel: "홈",
+    label: "작업 시작",
+    labelEn: "Start Work",
+    shortLabel: "시작",
     shortLabelEn: "Home",
     icon: Activity,
     group: "core",
-    purpose: "핵심 2가지, 설정 상태, 현재 작업량을 한눈에 봅니다.",
-    purposeEn: "See the two core capabilities, setup state, and current workload at a glance."
+    purpose: "요청 입력, 자동 실행, 결과 확인으로 이어지는 사용자 기본 화면입니다.",
+    purposeEn: "The default user surface for task intake, automatic launch, and result review."
   },
   {
     id: "agents",
@@ -960,25 +960,25 @@ const sections: Section[] = [
   },
   {
     id: "desktop",
-    label: "CLI 오케스트레이션",
-    labelEn: "CLI Orchestration",
-    shortLabel: "CLI",
-    shortLabelEn: "CLI",
+    label: "작업 실행",
+    labelEn: "Run Work",
+    shortLabel: "실행",
+    shortLabelEn: "Run",
     icon: Network,
     group: "core",
-    purpose: "Claude Code 같은 게스트 CLI 실행 경로, 결정 보류, 연속 실행을 조율합니다.",
-    purposeEn: "Coordinate guest CLI lanes, deferred decisions, and continuous runs."
+    purpose: "선택된 에이전트/CLI 실행 경로와 터미널 상태를 확인합니다.",
+    purposeEn: "Check the selected agent/CLI run lane and terminal state."
   },
   {
     id: "eval",
-    label: "AI 평가",
-    labelEn: "AI Eval",
-    shortLabel: "EVAL",
-    shortLabelEn: "EVAL",
+    label: "결과 확인",
+    labelEn: "Results",
+    shortLabel: "결과",
+    shortLabelEn: "Result",
     icon: ClipboardCheck,
     group: "core",
-    purpose: "현재 작업, 히스토리, 토큰/툴 사용, 오픈소스 EVAL 후보를 비교합니다.",
-    purposeEn: "Compare current work, history, token/tool usage, and open-source eval candidates."
+    purpose: "작업 결과, 검증 근거, 평가 신호를 확인합니다.",
+    purposeEn: "Review work results, validation evidence, and evaluation signals."
   },
   {
     id: "tools",
@@ -1112,8 +1112,8 @@ const fallbackViewModes: MonitorViewMode[] = [
   {
     id: "user",
     label: "User View",
-    intent: "Work-first desktop view for running, editing, creating, and improving agents.",
-    allowedSections: ["overview", "agents", "desktop", "eval", "source", "intent"],
+    intent: "Simple task-first view that hides customization and repository internals by default.",
+    allowedSections: ["overview", "desktop", "eval"],
     visibilityRules: {},
     securityNotes: []
   },
@@ -2132,8 +2132,10 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
   const [commandQuery, setCommandQuery] = useState("");
   const [buttonFeedbackReady, setButtonFeedbackReady] = useState(false);
   const [startupSurfaceReady, setStartupSurfaceReady] = useState(false);
+  const [homeTaskPrompt, setHomeTaskPrompt] = useState("");
   const titlebarSectionLabelRef = useRef<HTMLElement>(null);
   const commandInputRef = useRef<HTMLInputElement>(null);
+  const homeTaskPromptRef = useRef<HTMLTextAreaElement>(null);
   const commandPaletteDialogRef = useRef<HTMLElement | null>(null);
   const settingsDialogRef = useRef<HTMLElement | null>(null);
   const settingsCloseButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -2197,7 +2199,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     }
     return Array.from(merged.values());
   }, [snapshot.languageModeCatalog?.modes]);
-  const [viewMode, setViewMode] = useState(snapshot.viewModeCatalog?.defaultMode || "superadmin_developer");
+  const [viewMode, setViewMode] = useState(snapshot.viewModeCatalog?.defaultMode || "user");
   const [languageMode, setLanguageMode] = useState(snapshot.languageModeCatalog?.defaultMode || "all");
   const modeFunctionCatalog = snapshot.modeFunctionCatalog ?? emptyModeFunctionCatalog;
   const claudeCodeDesignTransfer = snapshot.claudeCodeDesignTransfer ?? emptyClaudeCodeDesignTransfer;
@@ -2487,7 +2489,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
   const currentViewMode = useMemo(() => {
-    return viewModes.find((mode) => mode.id === viewMode) || viewModes[0] || fallbackViewModes[2];
+    return viewModes.find((mode) => mode.id === viewMode) || viewModes[0] || fallbackViewModes[0];
   }, [viewMode, viewModes]);
   const currentLanguageMode = useMemo(() => {
     return languageModes.find((mode) => mode.id === languageMode) || languageModes[0] || fallbackLanguageModes[0];
@@ -2990,6 +2992,24 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
       window.history.replaceState(null, "", `#section-${targetSection}`);
     }
   }, [activateSection, currentViewMode.allowedSections, primeSectionActivation, viewModes]);
+  const startSimpleUserTask = useCallback(() => {
+    const prompt = homeTaskPrompt.trim();
+    if (!prompt) {
+      homeTaskPromptRef.current?.focus();
+      return;
+    }
+    setRuntimeLaunchRequest({
+      id: `simple-user-task-${Date.now()}`,
+      label: uiLanguage === "ko" ? "사용자 작업" : "User task",
+      adapterId: runtimeInitDefaults.adapterId || defaultRuntimeInitDefaults.adapterId,
+      modeId: "user_task",
+      taskKind: "user_task",
+      prompt,
+      openTerminal: true,
+      autoStart: true
+    });
+    openSection("desktop", { intentId: "run-work", flowStepId: "lane" });
+  }, [homeTaskPrompt, openSection, runtimeInitDefaults.adapterId, uiLanguage]);
   const selectIntentStep = useCallback(
     (intentId: string, targetSection: SectionId, flowStepId: string) => () => {
       openSection(targetSection, { intentId, flowStepId });
@@ -4866,6 +4886,7 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
           activeSectionId={section}
           homeSectionId="overview"
           sections={workVisibleSections}
+          showOperatorCenter={currentViewMode.id !== "user"}
           onPrimeSection={primeSectionActivation}
           onOpenSection={openSection}
           onOpenOperatorCenter={() => setOperatorCenterOpen(true)}
@@ -5872,6 +5893,50 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
             <MountedSectionPanel id="overview" active={section === "overview"}>
               <div className="desktop-home-grid">
               <span id="overview-home" className="home-route-anchor" aria-hidden="true" />
+              <section className="simple-user-start-panel" data-simple-user-start aria-label={uiLanguage === "ko" ? "작업 시작" : "Start work"}>
+                <div className="simple-user-start-copy">
+                  <p className="eyebrow">{uiLanguage === "ko" ? "작업 시작" : "Start"}</p>
+                  <h2>{uiLanguage === "ko" ? "요청만 남기면 실행 준비까지 이어집니다" : "Enter the task and continue straight to a run"}</h2>
+                  <div className="simple-user-status-row" aria-label={uiLanguage === "ko" ? "현재 상태" : "Current state"}>
+                    <span>
+                      <CheckCircle2 size={14} aria-hidden="true" />
+                      {coreReadinessCount}/{coreSetupSteps.length}
+                    </span>
+                    <span>
+                      <SquareTerminal size={14} aria-hidden="true" />
+                      {runtimeInitDefaults.adapterId}
+                    </span>
+                    <span>
+                      <Inbox size={14} aria-hidden="true" />
+                      {(attentionItems.length + collaborationBoard.summary.blockedTasks).toLocaleString("ko-KR")}
+                    </span>
+                  </div>
+                </div>
+                <div className="simple-user-task-card">
+                  <textarea
+                    ref={homeTaskPromptRef}
+                    value={homeTaskPrompt}
+                    onChange={(event) => setHomeTaskPrompt(event.target.value)}
+                    placeholder={uiLanguage === "ko" ? "지금 처리할 작업을 입력하세요" : "Type the task to run now"}
+                    aria-label={uiLanguage === "ko" ? "작업 요청" : "Task request"}
+                    rows={4}
+                  />
+                  <div className="simple-user-actions">
+                    <button type="button" className="primary" onClick={startSimpleUserTask}>
+                      <PlayCircle size={16} aria-hidden="true" />
+                      <span>{uiLanguage === "ko" ? "자동 시작" : "Start"}</span>
+                    </button>
+                    <button type="button" onClick={() => openSection("desktop", { intentId: "run-work", flowStepId: "lane" })}>
+                      <SquareTerminal size={16} aria-hidden="true" />
+                      <span>{uiLanguage === "ko" ? "실행 상태" : "Runtime"}</span>
+                    </button>
+                    <button type="button" onClick={() => openSection("eval", { intentId: "evaluate-work", flowStepId: "current" })}>
+                      <ClipboardCheck size={16} aria-hidden="true" />
+                      <span>{uiLanguage === "ko" ? "결과 확인" : "Results"}</span>
+                    </button>
+                  </div>
+                </div>
+              </section>
               <div className="home-menu-surface">
                 <section className={`workspace-home-panel core-home-panel home-${attentionState.tone}`} aria-label="Workspace home">
                   <section className="home-focus-command" data-home-focus-command aria-label={uiLanguage === "ko" ? "집중 작업 선택" : "Focused work command"}>

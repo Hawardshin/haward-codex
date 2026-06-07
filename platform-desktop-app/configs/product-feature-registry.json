@@ -310,11 +310,8 @@
     ],
     "primary_navigation_sections": [
       "overview",
-      "agents",
       "desktop",
-      "eval",
-      "source",
-      "intent"
+      "eval"
     ],
     "operator_center_sections": [
       "projects",

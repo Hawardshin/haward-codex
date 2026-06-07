@@ -1,0 +1,30 @@
+{
+  "task": "기본 사용자 인터페이스 단순화",
+  "date": "2026-06-08",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "duration_minutes": 5,
+      "notes": "Progressive disclosure and simple default surface references checked."
+    },
+    {
+      "phase": "local_discovery",
+      "duration_minutes": 20,
+      "notes": "Inspected view mode registry, MonitorShell, activity rail, tests, and docs."
+    },
+    {
+      "phase": "implementation",
+      "duration_minutes": 35,
+      "notes": "Changed default view mode, user sections, simple home start panel, activity rail, docs, and tests."
+    },
+    {
+      "phase": "validation",
+      "duration_minutes": 25,
+      "notes": "Ran agent-platform config/unit checks, workspace-monitor check/test/build/customer build, desktop app test/check, docs audit, and guard records."
+    }
+  ],
+  "bottleneck_candidates": [
+    "MonitorShell remains large, making targeted UI changes slower and more fragile.",
+    "View mode default is referenced across policy, requirements, specs, tests, and generated snapshots."
+  ]
+}

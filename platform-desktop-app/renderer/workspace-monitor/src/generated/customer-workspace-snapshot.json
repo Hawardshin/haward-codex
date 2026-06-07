@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-07T15:48:51.073Z",
+  "generatedAt": "2026-06-07T16:09:40.344Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -97,18 +97,15 @@
       {
         "id": "user",
         "label": "User View",
-        "intent": "Installed customer workbench for running, editing, creating, and improving agents.",
+        "intent": "Installed customer workbench for task intake, run status, and result review.",
         "allowedSections": [
           "overview",
-          "agents",
-          "tools",
           "desktop",
-          "source",
-          "intent"
+          "eval"
         ],
         "visibilityRules": {},
         "securityNotes": [
-          "Platform source tree is excluded from the customer bundle snapshot."
+          "Platform source tree and advanced customization surfaces are excluded from the customer bundle snapshot."
         ]
       }
     ]
@@ -1550,7 +1547,7 @@
       "queuedPatterns": 0,
       "activeRecommendations": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-07T15:48:36.763Z"
+      "latestInsightAt": "2026-06-07T16:07:47.061Z"
     },
     "inferenceStages": [],
     "signalGroups": []
@@ -1565,7 +1562,7 @@
       "totalImprovementPackages": 0,
       "totalFitnessChecks": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-07T15:48:36.763Z"
+      "latestInsightAt": "2026-06-07T16:07:47.061Z"
     },
     "operatingModel": [],
     "structuralPrinciples": [],

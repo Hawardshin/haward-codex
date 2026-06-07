@@ -1,0 +1,60 @@
+{
+  "task": "기본 사용자 인터페이스 단순화",
+  "reason": "사용자가 화면 구성 전반 변경을 요청했으므로 전체 UI를 한 번에 무제한 수정하지 않고 첫 실행을 막는 기본 진입 복잡도부터 줄인다.",
+  "source_inventory": [
+    "agent-platform/configs/access/view-mode-registry.json",
+    "agent-platform/src/agent_platform/view_modes.py",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/shell/DesktopActivityRail.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "Workspace Monitor requirements and view-mode specs",
+    "_docs view-mode and persistent instruction policies"
+  ],
+  "exclusions": [
+    "Do not remove advanced developer/superadmin functionality.",
+    "Do not implement authentication or public snapshot redaction in this slice.",
+    "Do not install new open-source dependencies."
+  ],
+  "slices": [
+    {
+      "slice_id": "S1-default-user-lens",
+      "touch_paths": [
+        "agent-platform/configs/access/view-mode-registry.json",
+        "agent-platform/src/agent_platform/view_modes.py",
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+      ],
+      "status": "implemented",
+      "verification": ["check-view-modes", "collector tests", "renderer tests"]
+    },
+    {
+      "slice_id": "S2-simple-start-surface",
+      "touch_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+        "platform-desktop-app/renderer/workspace-monitor/components/shell/DesktopActivityRail.tsx"
+      ],
+      "status": "implemented",
+      "verification": ["tsc", "renderer build", "static test markers"]
+    },
+    {
+      "slice_id": "S3-durable-policy-and-trace",
+      "touch_paths": [
+        "_docs/",
+        "_requirements/",
+        "platform-desktop-app/renderer/workspace-monitor/docs/requirements/",
+        "platform-desktop-app/renderer/workspace-monitor/specs/"
+      ],
+      "status": "implemented",
+      "verification": ["docs audit", "evaluation record"]
+    }
+  ],
+  "merge_gates": [
+    "config validation passes",
+    "renderer tests/check/build pass",
+    "omission/resource/evaluation records pass"
+  ],
+  "remaining_work_queue": [
+    "Packaged desktop native smoke for auto-start from user view",
+    "Deeper redesign of developer/superadmin advanced panes into explicit drill-down workspaces"
+  ]
+}

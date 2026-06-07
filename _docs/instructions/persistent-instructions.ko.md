@@ -56,7 +56,7 @@
 - 위험도와 지속성에 맞는 가장 가벼운 작업 모드를 사용하고, 선택한 모드가 비차단으로 둔 요구사항, 스펙, 요청 추적, 전체 종료 target을 매번 강제로 만들지 않는다.
 - 작업 모드는 프롬프트 안내만으로는 충분하지 않다. `quick`이 아닌 작업은 모드 선택 이유와 override, enforcement check를 파일로 남기고 `mode_selection_record_targets`를 평가 입력에 포함한다.
 - UI, dashboard, monitor, admin surface, generated snapshot에서 사용자가 보는 것, 개발자가 보는 것, 슈퍼어드민이 보는 것을 나눠야 하면 `agent-platform/configs/access/view-mode-registry.json`에서 `view_mode`를 선택한다.
-- 현재 기본 `view_mode`는 `superadmin_developer`다. `view_mode`는 화면/운영 렌즈이고, 환경 준비 범위인 `install_mode`나 작업 평가 강도인 `work_mode`와 섞지 않는다.
+- 현재 기본 `view_mode`는 `user`다. `view_mode`는 화면/운영 렌즈이고, 환경 준비 범위인 `install_mode`나 작업 평가 강도인 `work_mode`와 섞지 않는다.
 - client-side hiding은 보안 경계가 아니다. public 또는 multi-user 배포에서는 snapshot collector, server authorization, 인증/인가, 테스트로 강제해야 한다.
 - 플랫폼 UI는 명확성, 훑어보기, 접근성, 운영 신뢰를 해치지 않는 선에서 은근히 귀엽고 조용히 기분 좋은 톤을 사용할 수 있다. 작은 색상 accent, 상태 신호, 친근한 empty state, 절제된 micro-interaction을 우선하고 장식 과잉, emoji 남용, 시각적 소음은 피한다.
 - 한 화면의 주 기능이 하나라면 그 기능이 화면 대부분을 차지하는 것이 기본값이다. 보조 navigation, 상태, action은 주 기능을 돕는 수준으로만 두고, 빈 panel, 장식, 무관한 module로 화면을 쪼개지 않는다. 분할 화면은 비교, monitoring, 다중 주 작업처럼 동시에 봐야 할 명확한 이유가 있을 때만 사용한다.

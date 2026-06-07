@@ -1,0 +1,74 @@
+{
+  "task": "기본 사용자 인터페이스 단순화",
+  "work_mode": "standard",
+  "runtime_context": [
+    "React state for home task prompt",
+    "RuntimeLaunchRequest passed to DesktopRuntimePanel",
+    "Existing CLI adapter session lifecycle",
+    "Next.js renderer build and static tests"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "empty-auto-start",
+      "category": "process",
+      "description": "A default auto-start button could launch an empty CLI session.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "startSimpleUserTask focuses the prompt field and returns when the trimmed prompt is empty.",
+      "evidence": ["if (!prompt) { homeTaskPromptRef.current?.focus(); return; }"]
+    },
+    {
+      "risk_id": "new-cli-lifecycle",
+      "category": "process",
+      "description": "The simple start surface could create a separate untracked CLI lifecycle.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "The new surface uses the existing RuntimeLaunchRequest and DesktopRuntimePanel session path instead of a new process API.",
+      "evidence": ["setRuntimeLaunchRequest", "launchRequest={section === \"desktop\" ? runtimeLaunchRequest : null}"]
+    },
+    {
+      "risk_id": "advanced-surface-loss",
+      "category": "other",
+      "description": "Reducing default user sections could make advanced surfaces unreachable.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Developer and superadmin view modes keep the full advanced section list.",
+      "evidence": ["developer allowed_sections", "superadmin_developer allowed_sections"]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "simple-start-request",
+      "resource": "RuntimeLaunchRequest",
+      "create_path": "startSimpleUserTask -> setRuntimeLaunchRequest",
+      "cleanup_path": "DesktopRuntimePanel consumes request via onLaunchRequestConsumed",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "MonitorShell uses RuntimeLaunchRequest instead of a new process API.",
+        "DesktopRuntimePanel receives launchRequest and onLaunchRequestConsumed.",
+        "tool-studio test checks startSimpleUserTask, data-simple-user-start, and user-mode operator center hiding."
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "renderer-build",
+      "metric": "Type and production build",
+      "tool": "pnpm check/build",
+      "threshold": "exit code 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check -> exit code 0",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build -> exit code 0",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build:customer -> exit code 0",
+        "corepack pnpm --dir platform-desktop-app run check -> exit code 0"
+      ]
+    }
+  ],
+  "notes": [
+    "No new dependency installation occurred.",
+    "No new CLI adapter or subprocess command was added; existing adapter lifecycle is reused."
+  ]
+}

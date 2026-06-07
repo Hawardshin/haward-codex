@@ -12,6 +12,6 @@
 ## Acceptance Criteria
 
 - All three view modes exist.
-- Default is `superadmin_developer`.
+- Default is `user`.
 - `view_mode` is documented separately from `install_mode` and `work_mode`.
 - Security docs state the limits of client-side hiding.

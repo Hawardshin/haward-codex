@@ -25,5 +25,5 @@ Separate user, developer, and superadmin development views across the platform t
 ## Decisions
 
 - Allowed mode IDs are `user`, `developer`, and `superadmin_developer`.
-- Current default is `superadmin_developer`.
+- Current default is `user`.
 - UI hiding is not a security boundary; public or multi-user deployments need collector or server authorization enforcement.

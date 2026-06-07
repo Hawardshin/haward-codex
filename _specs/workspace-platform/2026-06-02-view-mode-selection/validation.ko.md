@@ -12,6 +12,6 @@
 ## 수용 기준
 
 - 세 가지 view mode가 모두 존재한다.
-- 기본값이 `superadmin_developer`다.
+- 기본값이 `user`다.
 - `view_mode`가 `install_mode`, `work_mode`와 분리되어 문서화된다.
 - 보안 문서에 client-side hiding 한계가 명시된다.

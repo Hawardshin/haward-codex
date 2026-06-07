@@ -6,12 +6,12 @@
     "summary": "Use this registry when choosing what the platform UI or an operator should show. It does not install dependencies and it does not change work close-out strictness.",
     "how_to_read": [
       "Read mode_boundary first so view_mode is not confused with install_mode or work_mode.",
-      "Use default_mode for current workspace-monitor behavior unless the user explicitly asks for a simpler lens.",
+      "Use default_mode for current workspace-monitor behavior unless the user explicitly switches to a developer or superadmin lens.",
       "Read modes[].visibility_rules to understand which surfaces are foregrounded, collapsed, or hidden.",
       "Treat security_notes as design constraints for future authenticated deployments, not as proof that access control already exists."
     ],
     "owner": "agent-platform",
-    "last_reviewed": "2026-06-06",
+    "last_reviewed": "2026-06-08",
     "update_triggers": [
       "A new UI or dashboard role is added.",
       "workspace-monitor changes how documents, operations, agents, or governance records are displayed.",
@@ -96,12 +96,12 @@
       ]
     },
     {
-      "id": "superadmin_developer_is_current_default",
-      "rule": "The current default view_mode is superadmin_developer because the repository is still being built by the owner and needs governance, agent, history, config, and implementation surfaces visible together.",
-      "reason": "The latest user request asked for a superadmin-oriented development mode selector for now.",
+      "id": "user_is_current_default",
+      "rule": "The current default view_mode is user so first-run users see a simple task-first interface while customization and repository internals stay behind developer or superadmin lenses.",
+      "reason": "The latest user request asked to reduce interface complexity and keep customization automatic or behind the scenes.",
       "applies_to": [
         "default_mode",
-        "modes[superadmin_developer]"
+        "modes[user]"
       ]
     },
     {
@@ -152,12 +152,12 @@
     "work_mode": "Task execution and close-out strictness profile such as quick, standard, ship_first, research, or governance.",
     "rule": "Choose view_mode when deciding what to display. Choose install_mode when setting up dependencies. Choose work_mode for each task after web-first intake and memory bootstrap."
   },
-  "default_mode": "superadmin_developer",
+  "default_mode": "user",
   "modes": [
     {
       "id": "user",
       "label": "User View",
-      "intent": "Show the work-first desktop surfaces for someone running, editing, creating, and improving agents without foregrounding operator or repository-monitoring internals.",
+      "intent": "Show the task-first surfaces for someone starting work without foregrounding customization, operator, or repository-monitoring internals.",
       "audience": [
         "workspace owner running agent work",
         "user creating or improving agents",
@@ -166,16 +166,16 @@
       ],
       "visibility_rules": {
         "foreground": [
-          "agent core",
-          "tool studio",
-          "CLI orchestration continuity",
-          "root tool setup",
-          "work visibility",
-          "AI evaluation report",
+          "task intake",
+          "automatic run launch",
           "desktop runtime status",
+          "result review",
           "decision inbox"
         ],
         "collapse": [
+          "agent customization",
+          "tool studio",
+          "root tool setup",
           "projects",
           "selected history",
           "published artifacts",
@@ -199,11 +199,8 @@
       },
       "allowed_sections": [
         "overview",
-        "agents",
         "desktop",
-        "eval",
-        "source",
-        "intent"
+        "eval"
       ],
       "must_not": [
         "Treat a simplified UI lens as security enforcement.",
@@ -337,15 +334,15 @@
         "Weaken install_mode, work_mode, omission, resource, or evaluation gates."
       ],
       "security_notes": [
-        "This is the current default because the platform is still under owner-led development.",
+        "This mode is available for owner-led development but is not the default user landing lens.",
         "Before public multi-user use, implement server-side authorization or static snapshot filtering and tests."
       ]
     }
   ],
   "selection_rules": [
-    "Use superadmin_developer by default while the repository is private and the owner is actively building platform governance.",
+    "Use user by default so first-run users see task intake, execution status, and result review before advanced configuration.",
     "Use developer when the operator improves a project or platform feature but does not need owner-level governance or publication decisions.",
-    "Use user when the operator only needs stable outputs, project summaries, and readable history.",
+    "Use superadmin_developer when the owner needs governance, publication, cross-project, or raw repository internals.",
     "Do not confuse view_mode with install_mode or work_mode.",
     "For public deployment, view_mode must be paired with collector-level publication filters before relying on it for privacy."
   ]

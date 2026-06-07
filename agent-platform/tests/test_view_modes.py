@@ -23,7 +23,7 @@ class ViewModeRegistryTests(unittest.TestCase):
         self.assertEqual(report["status"], "ready")
         self.assertFalse(report["requires_rework"])
         self.assertEqual(report["gaps"], [])
-        self.assertEqual(report["checks"]["default_mode"], "superadmin_developer")
+        self.assertEqual(report["checks"]["default_mode"], "user")
 
     def test_requires_all_three_mode_ids(self) -> None:
         registry = self.load_registry()

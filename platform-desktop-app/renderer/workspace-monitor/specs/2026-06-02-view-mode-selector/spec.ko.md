@@ -14,7 +14,7 @@ Workspace Monitor가 플랫폼의 `view-mode-registry.json`을 읽어 사용자 
 - snapshot에 `viewModeCatalog` 추가
 - 상단 view mode selector 추가
 - 선택 모드에 따른 섹션과 문서 필터링
-- 슈퍼어드민 개발 모드를 기본값으로 유지
+- 사용자 보기를 기본값으로 유지하고 개발자/슈퍼어드민 기능은 명시 선택으로 이동
 
 ## 비범위
 

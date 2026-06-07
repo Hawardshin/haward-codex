@@ -36,7 +36,7 @@ REQUIRED_MODE_FIELDS = {
 
 REQUIRED_VISIBILITY_FIELDS = {"foreground", "collapse", "hide_by_default", "guard"}
 REQUIRED_MODE_BOUNDARY_FIELDS = {"view_mode", "install_mode", "work_mode", "rule"}
-USER_REQUIRED_SECTIONS = {"overview", "agents", "desktop", "source", "intent"}
+USER_REQUIRED_SECTIONS = {"overview", "desktop", "eval"}
 SUPERADMIN_REQUIRED_SECTIONS = {
     "overview",
     "projects",
@@ -126,8 +126,8 @@ def check_view_mode_registry(registry: dict[str, Any]) -> dict[str, Any]:
     default_mode = registry.get("default_mode")
     if default_mode not in mode_ids:
         gaps.append("default_mode must match one modes[].id.")
-    if default_mode != "superadmin_developer":
-        warnings.append("Current default_mode should stay superadmin_developer until the owner changes the operating default.")
+    if default_mode != "user":
+        warnings.append("Current default_mode should stay user unless the owner explicitly changes the operating default.")
 
     selection_rules = registry.get("selection_rules")
     if not isinstance(selection_rules, list) or not selection_rules:

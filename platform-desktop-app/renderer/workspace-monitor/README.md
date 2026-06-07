@@ -14,7 +14,7 @@
 - 히스토리 문서의 날짜별 밀도와 유형별 분포를 CSS 기반 차트로 본다.
 - 루트 폴더, `_docs` 카테고리, 프로젝트 홈, 히스토리 수집 위치를 구조 지도에서 확인한다.
 - Structure 탭에서 운영 메모리, 플랫폼 코어, 데스크톱 제품, 모니터 UI, 도메인 프로젝트, 런타임/로컬 데이터 계층과 각 계층의 소유 경계, 주요 경로, 복잡도 압력점을 먼저 확인한다.
-- `agent-platform/configs/access/view-mode-registry.json`을 읽어 사용자 보기, 개발자 보기, 슈퍼어드민 개발 보기를 전환한다. 현재 기본값은 `superadmin_developer`다.
+- `agent-platform/configs/access/view-mode-registry.json`을 읽어 사용자 보기, 개발자 보기, 슈퍼어드민 개발 보기를 전환한다. 현재 기본값은 `user`다.
 - `agent-platform/configs/access/language-mode-registry.json`을 읽어 전체, 한국어만, 영어만 문서 보기 모드를 전환한다.
 - 개발자 보기와 슈퍼어드민 개발 보기에서는 주요 프로젝트와 `_tools`의 소스 코드를 읽기 전용으로 탐색한다.
 - 운영 도구의 밀도와 신뢰를 유지하면서도 작은 색상 신호와 micro-interaction으로 은근히 귀여운 톤을 허용한다.

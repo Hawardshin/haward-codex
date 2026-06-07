@@ -421,10 +421,10 @@ for (const requiredPhrase of ["awslabs_agentcore_samples", "Production Agent Blu
     failures.push(`product-feature-registry must include AgentCore production blueprint token ${requiredPhrase}`);
   }
 }
-const expectedPrimaryNavigationSections = ["overview", "agents", "desktop", "eval", "source", "intent"];
+const expectedPrimaryNavigationSections = ["overview", "desktop", "eval"];
 const expectedOperatorCenterSections = ["projects", "history", "structure", "documents", "requirements"];
 if (JSON.stringify(productFeatureRegistry.desktop_home_surface?.primary_navigation_sections) !== JSON.stringify(expectedPrimaryNavigationSections)) {
-  failures.push("product-feature-registry desktop_home_surface must keep work-first primary navigation sections");
+  failures.push("product-feature-registry desktop_home_surface must keep task-first user navigation sections");
 }
 if (JSON.stringify(productFeatureRegistry.desktop_home_surface?.operator_center_sections) !== JSON.stringify(expectedOperatorCenterSections)) {
   failures.push("product-feature-registry desktop_home_surface must keep operator center sections separated");
@@ -635,7 +635,7 @@ if (!JSON.stringify(viewModeRegistry).includes("desktop")) {
 }
 const userViewMode = viewModeRegistry.modes?.find((mode) => mode.id === "user");
 if (JSON.stringify(userViewMode?.allowed_sections) !== JSON.stringify(expectedPrimaryNavigationSections)) {
-  failures.push("user view mode must expose work-first sections only");
+  failures.push("user view mode must expose task-first sections only");
 }
 for (const operatorSection of expectedOperatorCenterSections) {
   if (userViewMode?.allowed_sections?.includes(operatorSection)) {

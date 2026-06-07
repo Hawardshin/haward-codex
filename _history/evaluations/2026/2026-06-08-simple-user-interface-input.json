@@ -1,0 +1,142 @@
+{
+  "initial_instruction": "사용자 입장에서 플랫폼 사용법이 너무 복잡하므로 커스텀 기능은 뒤로 보내고 쉬운 인터페이스만 기본으로 보이게 화면 구성을 전반적으로 변경",
+  "result_summary": "Changed Workspace Monitor to default to user view, reduced default sections to start/run/results, added a simple task intake and auto-start panel, hid operator rail controls in user view, and updated durable policy, requirements, specs, and tests.",
+  "work_mode": "standard",
+  "changed_files": [
+    "AGENTS.md",
+    "agent-platform/configs/access/view-mode-registry.json",
+    "agent-platform/configs/agents/view-mode-router-agent.json",
+    "agent-platform/src/agent_platform/view_modes.py",
+    "agent-platform/tests/test_view_modes.py",
+    "platform-desktop-app/configs/product-feature-registry.json",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/shell/DesktopActivityRail.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/renderer/workspace-monitor/README.md",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "_docs/policies/view-mode-policy.ko.md",
+    "_docs/policies/view-mode-policy.en.md",
+    "_docs/instructions/persistent-instructions.ko.md",
+    "_docs/instructions/persistent-instructions.en.md",
+    "_docs/instructions/persistent-instructions.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.ko.md",
+    "_requirements/baselines/2026-05-31-workspace-platform.en.md",
+    "_requirements/changes/2026-06-08-simple-user-interface.ko.md",
+    "_specs/workspace-platform/2026-06-02-view-mode-selection/spec.ko.md",
+    "_specs/workspace-platform/2026-06-02-view-mode-selection/spec.en.md",
+    "_specs/workspace-platform/2026-06-02-view-mode-selection/validation.ko.md",
+    "_specs/workspace-platform/2026-06-02-view-mode-selection/validation.en.md",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.en.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-02-view-mode-selector/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-02-view-mode-selector/spec.en.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-02-view-mode-selector/validation.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-02-view-mode-selector/validation.en.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-simple-user-interface/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-simple-user-interface/plan.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-simple-user-interface/tasks.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-simple-user-interface/validation.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-simple-user-interface/traceability.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/customer-workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/src/generated/admin-history-index.json",
+    "platform-desktop-app/renderer/workspace-monitor/public/workspace-snapshot.json",
+    "platform-desktop-app/renderer/workspace-monitor/public/admin-history-index.json",
+    "_history/web-searches/2026/2026-06-08-simple-user-interface.ko.md",
+    "_history/2026/2026-06-08.md",
+    "_history/mode-selections/2026/2026-06-08-simple-user-interface.json",
+    "_history/large-scope-decompositions/2026/2026-06-08-simple-user-interface.json",
+    "_history/plans/2026/2026-06-08-simple-user-interface.ko.md",
+    "_history/user-requests/2026/2026-06-08-simple-user-interface.ko.md",
+    "_history/request-traces/2026/2026-06-08-simple-user-interface.ko.md",
+    "_history/work-summaries/2026/2026-06-08-simple-user-interface.ko.md",
+    "_history/work-timings/2026/2026-06-08-simple-user-interface.json",
+    "_history/omission-checks/2026/2026-06-08-simple-user-interface.json",
+    "_history/resource-checks/2026/2026-06-08-simple-user-interface.json",
+    "_history/evaluations/2026/2026-06-08-simple-user-interface-input.json"
+  ],
+  "verification": [
+    "PYTHONPATH=src python3 -m agent_platform.cli check-view-modes configs/access/view-mode-registry.json -> ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract configs/access/view-mode-registry.json -> self_documenting",
+    "PYTHONPATH=src python3 -m unittest tests.test_view_modes -> OK",
+    "python3 _tools/docs-audit/src/docs_audit.py --check -> docs_ready",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check -> passed",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test -> 116 passed",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build -> passed",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build:customer -> passed",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect -- --best-effort -> developer snapshot regenerated",
+    "corepack pnpm --dir platform-desktop-app run test -> 30 passed",
+    "corepack pnpm --dir platform-desktop-app run check -> passed",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/omission-checks/2026/2026-06-08-simple-user-interface.json -> coverage_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/resource-checks/2026/2026-06-08-simple-user-interface.json -> resource_ready",
+    "PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-08-simple-user-interface-input.json -> ready_to_close",
+    "git diff --check -> passed"
+  ],
+  "references_checked": [
+    "https://developer.apple.com/design/human-interface-guidelines/disclosure-controls",
+    "https://learn.microsoft.com/en-us/windows/win32/uxguide/ctrl-progressive-disclosure-controls",
+    "https://www.ibm.com/docs/en/technical-content?topic=practices-progressive-disclosure"
+  ],
+  "grounding_checks": [
+    "_history/web-searches/2026/2026-06-08-simple-user-interface.ko.md"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-08-simple-user-interface.ko.md",
+    "_history/large-scope-decompositions/2026/2026-06-08-simple-user-interface.json"
+  ],
+  "plan_evidence_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-simple-user-interface/plan.ko.md",
+    "_history/plans/2026/2026-06-08-simple-user-interface.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-08-simple-user-interface.json"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-08-simple-user-interface.json"
+  ],
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-08-simple-user-interface.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-08-simple-user-interface.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/changes/2026-06-08-simple-user-interface.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/docs/requirements/2026-06-01-workspace-monitor.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-simple-user-interface/spec.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-simple-user-interface/plan.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-simple-user-interface/tasks.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-simple-user-interface/validation.ko.md",
+    "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-simple-user-interface/traceability.ko.md"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-08-simple-user-interface.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-08-simple-user-interface.ko.md"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-08-simple-user-interface.json"
+  ],
+  "installation_occurred": false,
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-08-simple-user-interface.json"
+  ],
+  "cli_pipeline_occurred": false,
+  "cli_pipeline_targets": [],
+  "known_gaps": [],
+  "deferred_improvement_targets": [
+    "Packaged native desktop smoke that types into the simple user panel and verifies adapter cleanup."
+  ],
+  "improvement_ideas": [
+    "Turn advanced developer panes into explicit drill-down workspaces so developer mode is also less crowded.",
+    "Add packaged desktop smoke that enters a task in the simple user panel and verifies native adapter lifecycle cleanup."
+  ]
+}

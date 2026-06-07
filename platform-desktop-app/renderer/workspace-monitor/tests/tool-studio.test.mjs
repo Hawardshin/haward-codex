@@ -277,8 +277,8 @@ function readCssRule(selector) {
 test("Tool Studio is a first-class monitor section", () => {
   assert.match(desktopTypes, /\|\s*"tools"/);
   assert.match(monitorShell, /id:\s*"tools"[\s\S]*?label:\s*"툴 스튜디오"/);
-  assert.match(monitorShell, /allowedSections:\s*\["overview", "agents", "desktop", "eval", "source", "intent"\]/);
-  assert.match(monitorShell, /defaultPinnedSections:\s*SectionId\[\]\s*=\s*\["overview", "agents", "desktop", "eval", "source", "intent"\]/);
+  assert.match(monitorShell, /allowedSections:\s*\["overview", "desktop", "eval"\]/);
+  assert.match(monitorShell, /defaultPinnedSections:\s*SectionId\[\]\s*=\s*\["overview", "desktop", "eval"\]/);
   assert.doesNotMatch(monitorShell, /hasLegacyDefault && !next\.includes\("tools"\)/);
   assert.doesNotMatch(monitorShell, /next\.splice\(insertAt, 0, "tools"\)/);
   assert.match(monitorShell, /tools:\s*"Studio"/);
@@ -334,7 +334,7 @@ test("Workspace snapshot collection uses bounded worker-thread parallelism", () 
 
 test("AI Eval is a first-class resident workbench section", () => {
   assert.match(desktopTypes, /\|\s*"eval"/);
-  assert.match(monitorShell, /id:\s*"eval"[\s\S]*?label:\s*"AI 평가"/);
+  assert.match(monitorShell, /id:\s*"eval"[\s\S]*?label:\s*"결과 확인"/);
   assert.match(monitorShell, /const maxResidentSectionPanels = 12/);
   assert.match(monitorShell, /retainedResidentSections: SectionId\[\] = \["agents", "desktop", "eval", "source", "tools"\]/);
   assert.match(monitorShell, /startupResidentPreloadSections: SectionId\[\] = \[[\s\S]*?"agents"[\s\S]*?"requirements"[\s\S]*?"overview"[\s\S]*?\]/);
@@ -403,6 +403,17 @@ test("AI Eval is a first-class resident workbench section", () => {
   assert.match(css, /\.eval-open-source-grid \{/);
   assert.match(packageJson.scripts.check, /check-comprehensive-improvement-contract\.mjs/);
   assert.equal(packageJson.scripts["check:comprehensive-improvement"], "node scripts/check-comprehensive-improvement-contract.mjs");
+});
+
+test("Default user view exposes a simple task-first start surface", () => {
+  assert.match(monitorShell, /const defaultPinnedSections:\s*SectionId\[\]\s*=\s*\["overview", "desktop", "eval"\]/);
+  assert.match(monitorShell, /allowedSections:\s*\["overview", "desktop", "eval"\]/);
+  assert.match(monitorShell, /const \[viewMode, setViewMode\] = useState\(snapshot\.viewModeCatalog\?\.defaultMode \|\| "user"\)/);
+  assert.match(monitorShell, /data-simple-user-start/);
+  assert.match(monitorShell, /startSimpleUserTask/);
+  assert.match(monitorShell, /showOperatorCenter=\{currentViewMode\.id !== "user"\}/);
+  assert.match(css, /\.simple-user-start-panel \{/);
+  assert.match(css, /\.simple-user-actions button\.primary \{/);
 });
 
 test("Tool Studio uses open-source menu primitives and exact dependencies", () => {

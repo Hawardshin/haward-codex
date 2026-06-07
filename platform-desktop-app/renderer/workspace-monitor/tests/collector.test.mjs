@@ -346,7 +346,7 @@ test("buildSnapshot reads minimal repository shape", async () => {
   assert.equal(snapshot.folderStructure.rootFolders.some((folder) => folder.path === "demo/"), true);
   assert.equal(snapshot.folderStructure.docsCategories[0].path, "_docs/instructions");
   assert.equal(snapshot.requirements[0].id, "REQ-WM-001");
-  assert.equal(snapshot.viewModeCatalog.defaultMode, "superadmin_developer");
+  assert.equal(snapshot.viewModeCatalog.defaultMode, "user");
   assert.equal(snapshot.languageModeCatalog.defaultMode, "all");
   assert.equal(snapshot.languageModeCatalog.modes[1].id, "ko");
   assert.equal(snapshot.modeFunctionCatalog.summary.totalGroups >= 8, true);
@@ -796,11 +796,8 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.viewModeCatalog.defaultMode, "user");
   assert.deepEqual(customer.viewModeCatalog.modes[0].allowedSections, [
     "overview",
-    "agents",
-    "tools",
     "desktop",
-    "source",
-    "intent"
+    "eval"
   ]);
 });
 

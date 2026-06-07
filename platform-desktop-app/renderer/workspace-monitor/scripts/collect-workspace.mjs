@@ -405,10 +405,10 @@ export function buildCustomerSnapshot(snapshot) {
         {
           id: "user",
           label: "User View",
-          intent: "Installed customer workbench for running, editing, creating, and improving agents.",
-          allowedSections: ["overview", "agents", "tools", "desktop", "source", "intent"],
+          intent: "Installed customer workbench for task intake, run status, and result review.",
+          allowedSections: ["overview", "desktop", "eval"],
           visibilityRules: {},
-          securityNotes: ["Platform source tree is excluded from the customer bundle snapshot."]
+          securityNotes: ["Platform source tree and advanced customization surfaces are excluded from the customer bundle snapshot."]
         }
       ]
     },
@@ -1036,7 +1036,7 @@ function collectSourceFileCandidates(repoRoot, projects = []) {
 
 export function collectViewModeCatalog(repoRoot) {
   const registry = readJson(path.join(repoRoot, "agent-platform", "configs", "access", "view-mode-registry.json"), {
-    default_mode: "superadmin_developer",
+    default_mode: "user",
     modes: []
   });
   const modes = Array.isArray(registry.modes)
@@ -1054,7 +1054,7 @@ export function collectViewModeCatalog(repoRoot) {
     : [];
 
   return {
-    defaultMode: registry.default_mode || "superadmin_developer",
+    defaultMode: registry.default_mode || "user",
     modes
   };
 }

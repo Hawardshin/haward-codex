@@ -1,48 +1,48 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-07T15:48:51.072Z",
+  "generatedAt": "2026-06-07T16:09:40.343Z",
   "summary": {
-    "documents": 3191,
+    "documents": 3199,
     "days": 9,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1128
+        "count": 1129
       },
       {
         "category": "web-search",
-        "count": 495
+        "count": 496
       },
       {
         "category": "request-trace",
-        "count": 424
+        "count": 425
       },
       {
         "category": "plan",
-        "count": 406
+        "count": 407
       },
       {
         "category": "work-timing",
-        "count": 343
+        "count": 344
       },
       {
         "category": "user-request",
-        "count": 209
+        "count": 210
       },
       {
         "category": "work-summary",
-        "count": 176
+        "count": 177
       },
       {
         "category": "daily-history",
-        "count": 8
+        "count": 9
       },
       {
         "category": "intent-feature-map",
         "count": 2
       }
     ],
-    "totalSourceBytes": 7226731,
+    "totalSourceBytes": 7243837,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -63,52 +63,132 @@
   },
   "documents": [
     {
-      "id": "history-work-timings-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
-      "path": "_history/work-timings/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
-      "category": "work-timing",
-      "language": "ko",
-      "title": "2026 06 08 Codex CLI PTY first run 작업 타이밍",
-      "excerpt": "2026 06 08 Codex CLI PTY first run 작업 타이밍 단계별 기록 웹/공식 문서 확인: 약 5분 로컬 원인 분석과 구현: 약 35분 Rust/TypeScript 분리: 약 35분 readiness/test/build 보정: 약 25분 기록/평가/커밋 준비: 약 15분 병목 기존 검증 스크립트와 테스트가 lib.rs 단일 파일 전제를 여러 곳에 갖고 있어 source aggregation 갱신이 필요했다. 기존 TypeScript 대형 파일 전체 분리는 별도 구조 리팩터링이 필",
-      "html": "<p>2026 06 08 Codex CLI PTY first run 작업 타이밍 단계별 기록 웹/공식 문서 확인: 약 5분 로컬 원인 분석과 구현: 약 35분 Rust/TypeScript 분리: 약 35분 readiness/test/build 보정: 약 25분 기록/평가/커밋 준비: 약 15분 병목 기존 검증 스크립트와 테스트가 lib.rs 단일 파일 전제를 여러 곳에 갖고 있어 source aggregation 갱신이 필요했다. 기존 TypeScript 대형 파일 전체 분리는 별도 구조 리팩터링이 필요하다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": false,
-      "sourceBytes": 532,
-      "updatedAt": "2026-06-07T15:48:36.763Z",
-      "historyDate": "2026-06-08",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
-      "path": "_history/evaluations/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
+      "id": "history-evaluations-2026-2026-06-08-simple-user-interface-input-json",
+      "path": "_history/evaluations/2026/2026-06-08-simple-user-interface-input.json",
       "category": "evaluation",
-      "language": "ko",
-      "title": "2026 06 08 Codex CLI PTY first run 평가",
-      "excerpt": "2026 06 08 Codex CLI PTY first run 평가 평가 요구 충족: 부분 통과. Codex CLI 첫 실행/PTY 실행/어댑터 PATH 문제는 해결했다. 기존 모든 대형 TypeScript 파일 분리는 후속 범위가 남는다. 기능 보존: 통과. pipe session은 유지하고 TUI CLI만 PTY 경로로 라우팅했다. 구조 개선: 통과. Rust lib.rs 는 31줄, lib parts 최대 495줄이다. RuntimeTerminalDrawer와 하위 터미널 파일은 최대 498",
-      "html": "<p>2026 06 08 Codex CLI PTY first run 평가 평가 요구 충족: 부분 통과. Codex CLI 첫 실행/PTY 실행/어댑터 PATH 문제는 해결했다. 기존 모든 대형 TypeScript 파일 분리는 후속 범위가 남는다. 기능 보존: 통과. pipe session은 유지하고 TUI CLI만 PTY 경로로 라우팅했다. 구조 개선: 통과. Rust lib.rs 는 31줄, lib parts 최대 495줄이다. RuntimeTerminalDrawer와 하위 터미널 파일은 최대 498줄이다. 검증: 통과. Rust, Node, TypeScript, readiness, customer build 검증을 통과했다. 공개 배포: </p>",
+      "language": "unknown",
+      "title": "2026 06 08 Simple User Interface Input",
+      "excerpt": "{ \"initial instruction\": \"사용자 입장에서 플랫폼 사용법이 너무 복잡하므로 커스텀 기능은 뒤로 보내고 쉬운 인터페이스만 기본으로 보이게 화면 구성을 전반적으로 변경\", \"result summary\": \"Changed Workspace Monitor to default to user view, reduced default sections to start/run/results, added a simple task intake and auto start panel, hid opera",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;사용자 입장에서 플랫폼 사용법이 너무 복잡하므로 커스텀 기능은 뒤로 보내고 쉬운 인터페이스만 기본으로 보이게 화면 구성을 전반적으로 변경&quot;, &quot;result summary&quot;: &quot;Changed Workspace Monitor to default to user view, reduced default sections to start/run/results, added a simple task intake and auto start panel, hid operator rail controls in user view, and updated durable policy, requirements, specs,</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 960,
-      "updatedAt": "2026-06-07T15:48:36.762Z",
+      "sourceBytes": 9375,
+      "updatedAt": "2026-06-07T16:07:51.887Z",
       "historyDate": "2026-06-08",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
     },
     {
-      "id": "history-request-traces-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
-      "path": "_history/request-traces/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "2026 06 08 request trace",
-      "excerpt": "2026 06 08 request trace 요청 Codex CLI/PTY/CLI 탭 첫 실행 차단 문제 해결 어댑터 설정 불일치 해결 Rust lib.rs 와 관련 TypeScript 파일 분리 결과 Codex류 AI CLI 어댑터를 네이티브 PTY 세션으로 시작하는 경로를 추가했다. GUI PATH와 로그인 셸 PATH 차이를 흡수하는 resolver를 추가했다. Rust lib.rs 를 31줄 진입점과 28개 lib parts 파일로 분리했다. RuntimeTerminalDrawer를 하위 ",
-      "html": "<p>2026 06 08 request trace 요청 Codex CLI/PTY/CLI 탭 첫 실행 차단 문제 해결 어댑터 설정 불일치 해결 Rust lib.rs 와 관련 TypeScript 파일 분리 결과 Codex류 AI CLI 어댑터를 네이티브 PTY 세션으로 시작하는 경로를 추가했다. GUI PATH와 로그인 셸 PATH 차이를 흡수하는 resolver를 추가했다. Rust lib.rs 를 31줄 진입점과 28개 lib parts 파일로 분리했다. RuntimeTerminalDrawer를 하위 모듈로 분리했다. readiness/check/test aggregation을 새 구조에 맞췄다. 산출물 platform desktop app/</p>",
+      "id": "history-2026-2026-06-08-md",
+      "path": "_history/2026/2026-06-08.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 08 작업 기록",
+      "excerpt": "2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view ",
+      "html": "<p>2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view mode registry.json , AGENTS.md , Workspace Monitor 사용자 홈 화면, 관련 요구사항/스펙/검증 기록.</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 1008,
-      "updatedAt": "2026-06-07T15:48:36.761Z",
+      "sourceBytes": 644,
+      "updatedAt": "2026-06-07T16:07:47.061Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-08-simple-user-interface-json",
+      "path": "_history/work-timings/2026/2026-06-08-simple-user-interface.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 08 Simple User Interface",
+      "excerpt": "{ \"task\": \"기본 사용자 인터페이스 단순화\", \"date\": \"2026 06 08\", \"phases\": { \"phase\": \"web first intake\", \"duration minutes\": 5, \"notes\": \"Progressive disclosure and simple default surface references checked.\" }, { \"phase\": \"local discovery\", \"duration minutes\": 20, \"notes\": \"Inspected view m",
+      "html": "<p>{ &quot;task&quot;: &quot;기본 사용자 인터페이스 단순화&quot;, &quot;date&quot;: &quot;2026 06 08&quot;, &quot;phases&quot;: { &quot;phase&quot;: &quot;web first intake&quot;, &quot;duration minutes&quot;: 5, &quot;notes&quot;: &quot;Progressive disclosure and simple default surface references checked.&quot; }, { &quot;phase&quot;: &quot;local discovery&quot;, &quot;duration minutes&quot;: 20, &quot;notes&quot;: &quot;Inspected view mode registry, MonitorShell, activity rail, tests, and docs.&quot; }, { &quot;phase&quot;: &quot;impl</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1088,
+      "updatedAt": "2026-06-07T16:06:09.505Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-08-simple-user-interface-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-08-simple-user-interface.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: 기본 사용자 인터페이스 단순화",
+      "excerpt": "작업 요약: 기본 사용자 인터페이스 단순화 변경 Workspace Monitor 기본 보기 모드를 user 로 변경했다. 사용자 기본 탭을 시작, 실행, 결과로 줄였다. Overview 최상단에 작업 요청 입력과 자동 시작 버튼을 추가했다. 사용자 보기에서는 운영 센터 버튼을 activity rail에서 숨겼다. view mode 정책, persistent instructions, 요구사항, 스펙, 테스트 기대값을 갱신했다. 검증 예정 agent platform view mode/config 검증",
+      "html": "<p>작업 요약: 기본 사용자 인터페이스 단순화 변경 Workspace Monitor 기본 보기 모드를 user 로 변경했다. 사용자 기본 탭을 시작, 실행, 결과로 줄였다. Overview 최상단에 작업 요청 입력과 자동 시작 버튼을 추가했다. 사용자 보기에서는 운영 센터 버튼을 activity rail에서 숨겼다. view mode 정책, persistent instructions, 요구사항, 스펙, 테스트 기대값을 갱신했다. 검증 예정 agent platform view mode/config 검증 Workspace Monitor test/check/build docs audit omission/resource/evaluation guar</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 623,
+      "updatedAt": "2026-06-07T16:00:05.724Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-08-simple-user-interface-ko-md",
+      "path": "_history/request-traces/2026/2026-06-08-simple-user-interface.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: 기본 사용자 인터페이스 단순화",
+      "excerpt": "요청 결과 추적: 기본 사용자 인터페이스 단순화 요청 사용자 기본 인터페이스를 단순화한다. 커스텀/고급 기능은 기본 사용자 화면 뒤로 보낸다. 사용자가 첫 실행을 쉽게 시작할 수 있게 한다. 결과 view mode registry.json 기본값을 user 로 변경했다. 사용자 기본 섹션을 overview , desktop , eval 로 줄였다. 홈에 data simple user start 작업 요청 입력과 자동 시작 액션을 추가했다. 사용자 보기에서 activity rail의 운영 센터 버튼",
+      "html": "<p>요청 결과 추적: 기본 사용자 인터페이스 단순화 요청 사용자 기본 인터페이스를 단순화한다. 커스텀/고급 기능은 기본 사용자 화면 뒤로 보낸다. 사용자가 첫 실행을 쉽게 시작할 수 있게 한다. 결과 view mode registry.json 기본값을 user 로 변경했다. 사용자 기본 섹션을 overview , desktop , eval 로 줄였다. 홈에 data simple user start 작업 요청 입력과 자동 시작 액션을 추가했다. 사용자 보기에서 activity rail의 운영 센터 버튼을 숨겼다. 정책, 요구사항, 스펙, 테스트 기대값을 새 기본값으로 맞췄다. 산출물 platform desktop app/renderer/wor</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1252,
+      "updatedAt": "2026-06-07T16:00:05.723Z",
       "historyDate": "2026-06-08",
       "historyYear": "2026",
       "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-plans-2026-2026-06-08-simple-user-interface-ko-md",
+      "path": "_history/plans/2026/2026-06-08-simple-user-interface.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "계획 기록: 기본 사용자 인터페이스 단순화",
+      "excerpt": "계획 기록: 기본 사용자 인터페이스 단순화 소유 경계 owning project: platform desktop app/renderer/workspace monitor shared policy/config: agent platform/configs/access/view mode registry.json , docs/policies/view mode policy. 언어/런타임 선택 옵션 A: 기존 Next.js/React renderer와 Python config validator를 유지한다. 옵션",
+      "html": "<p>계획 기록: 기본 사용자 인터페이스 단순화 소유 경계 owning project: platform desktop app/renderer/workspace monitor shared policy/config: agent platform/configs/access/view mode registry.json , docs/policies/view mode policy. 언어/런타임 선택 옵션 A: 기존 Next.js/React renderer와 Python config validator를 유지한다. 옵션 B: Tauri/Rust 레벨에서 새 first run shell을 만든다. 선택: 옵션 A. 사용자의 복잡도 문제는 기본 UI lens와 r</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1614,
+      "updatedAt": "2026-06-07T16:00:05.722Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-08-simple-user-interface-ko-md",
+      "path": "_history/user-requests/2026/2026-06-08-simple-user-interface.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: 기본 사용자 인터페이스 단순화",
+      "excerpt": "사용자 요청 요약: 기본 사용자 인터페이스 단순화 요약 사용자는 플랫폼 사용법이 너무 복잡하고 커스텀 기능이 전면에 있어 첫 실행과 기본 사용이 어렵다고 말했다. 커스텀/고급 기능은 뒤에서 자동화되거나 고급 보기로 숨기고, 사용자는 쉬운 인터페이스만 보게 화면 구성을 전반적으로 바꾸라고 요청했다. 요구 후보 기본 view mode는 사용자 보기여야 한다. 첫 화면은 작업 요청 입력과 실행 시작 중심이어야 한다. 커스텀 에이전트, 툴, 소스, 운영 기능은 기본 사용자 화면에서 숨겨야 한다. 고급 기",
+      "html": "<p>사용자 요청 요약: 기본 사용자 인터페이스 단순화 요약 사용자는 플랫폼 사용법이 너무 복잡하고 커스텀 기능이 전면에 있어 첫 실행과 기본 사용이 어렵다고 말했다. 커스텀/고급 기능은 뒤에서 자동화되거나 고급 보기로 숨기고, 사용자는 쉬운 인터페이스만 보게 화면 구성을 전반적으로 바꾸라고 요청했다. 요구 후보 기본 view mode는 사용자 보기여야 한다. 첫 화면은 작업 요청 입력과 실행 시작 중심이어야 한다. 커스텀 에이전트, 툴, 소스, 운영 기능은 기본 사용자 화면에서 숨겨야 한다. 고급 기능은 삭제하지 않고 developer/superadmin 보기에서 접근 가능해야 한다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 775,
+      "updatedAt": "2026-06-07T16:00:05.722Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-08-simple-user-interface-ko-md",
+      "path": "_history/web-searches/2026/2026-06-08-simple-user-interface.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: 기본 사용자 인터페이스 단순화",
+      "excerpt": "웹 검색 기록: 기본 사용자 인터페이스 단순화 검색어 progressive disclosure UX complex software beginner interface advanced settings hidden by default desktop app UX simplify complex workflow primary task surface progressive disclosure settings agent workflow UI human in the loop simple interface advan",
+      "html": "<p>웹 검색 기록: 기본 사용자 인터페이스 단순화 검색어 progressive disclosure UX complex software beginner interface advanced settings hidden by default desktop app UX simplify complex workflow primary task surface progressive disclosure settings agent workflow UI human in the loop simple interface advanced automation hidden Nielsen Norman progressive disclosure user interface compl</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1742,
+      "updatedAt": "2026-06-07T16:00:05.719Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
     },
     {
       "id": "history-user-requests-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
@@ -120,43 +200,11 @@
       "html": "<p>2026 06 08 사용자 요청 요약 사용자는 플랫폼 CLI 탭에서 Codex CLI 연결 설정과 PTY 기반 실행이 제대로 되지 않아 첫 작업 시작 자체가 막힌다고 보고했다. 플랫폼이 사용자를 대신해 첫 실행 경로를 자동으로 복구해야 하며, 이후 Rust lib.rs 와 TypeScript 대형 파일을 기능별로 분리하고 한국어 주석을 추가해 달라고 요청했다.</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": false,
-      "sourceBytes": 426,
-      "updatedAt": "2026-06-07T15:48:36.761Z",
+      "sourceBytes": 425,
+      "updatedAt": "2026-06-07T15:50:04.715Z",
       "historyDate": "2026-06-08",
       "historyYear": "2026",
       "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "2026 06 08 Codex CLI PTY first run 작업 요약",
-      "excerpt": "2026 06 08 Codex CLI PTY first run 작업 요약 Codex CLI가 터미널에서는 보이지만 플랫폼 CLI 탭에서는 어댑터가 설정되지 않았다고 보이는 문제를 해결했다. 원인은 GUI 앱 PATH와 로그인 셸 PATH 차이, 그리고 TUI CLI를 pipe only session으로 시작하는 구조였다. 이번 변경은 AI CLI 어댑터용 PTY launch command를 추가하고, MonitorShell에서 Codex/Claude/Gemini/OpenCode/Claw Code를",
-      "html": "<p>2026 06 08 Codex CLI PTY first run 작업 요약 Codex CLI가 터미널에서는 보이지만 플랫폼 CLI 탭에서는 어댑터가 설정되지 않았다고 보이는 문제를 해결했다. 원인은 GUI 앱 PATH와 로그인 셸 PATH 차이, 그리고 TUI CLI를 pipe only session으로 시작하는 구조였다. 이번 변경은 AI CLI 어댑터용 PTY launch command를 추가하고, MonitorShell에서 Codex/Claude/Gemini/OpenCode/Claw Code를 PTY로 시작하도록 연결한다. Rust 런타임 command resolver는 일반 설치 위치와 로그인 셸 fallback을 확인한다. 구조적</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 784,
-      "updatedAt": "2026-06-07T15:48:36.761Z",
-      "historyDate": "2026-06-08",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-plans-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
-      "path": "_history/plans/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "2026 06 08 Codex CLI PTY first run 계획",
-      "excerpt": "2026 06 08 Codex CLI PTY first run 계획 1. 웹 검색과 공식 문서 확인으로 CLI/TUI/PTY 전제를 검증한다. 2. 로컬 codex 설치와 PATH 상태를 확인한다. 3. Tauri Rust runtime에 어댑터 PTY command를 추가한다. 4. GUI PATH와 로그인 셸 PATH 차이를 흡수하는 resolver를 구현한다. 5. MonitorShell에서 Codex류 AI CLI를 PTY로 시작하도록 라우팅한다. 6. Rust와 터미널 TypeScript",
-      "html": "<p>2026 06 08 Codex CLI PTY first run 계획 1. 웹 검색과 공식 문서 확인으로 CLI/TUI/PTY 전제를 검증한다. 2. 로컬 codex 설치와 PATH 상태를 확인한다. 3. Tauri Rust runtime에 어댑터 PTY command를 추가한다. 4. GUI PATH와 로그인 셸 PATH 차이를 흡수하는 resolver를 구현한다. 5. MonitorShell에서 Codex류 AI CLI를 PTY로 시작하도록 라우팅한다. 6. Rust와 터미널 TypeScript 파일을 500줄 이하 구조로 분리한다. 7. readiness/test/build를 새 구조에 맞춘다. 8. 검증 기록, 평가, 누락/리소스 </p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 610,
-      "updatedAt": "2026-06-07T15:48:36.760Z",
-      "historyDate": "2026-06-08",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
     },
     {
       "id": "history-web-searches-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
@@ -168,11 +216,91 @@
       "html": "<p>2026 06 08 Codex CLI PTY first run 웹 검색 기록 검색어 OpenAI Codex CLI install official docs codex install.sh Tauri shell execute command documentation PTY xterm terminal portable pty Rust crate documentation native pty system CommandBuilder xterm.js addons fit search documentation 확인한 주요 출처 OpenAI Help Center, Codex CLI getting started: https://help.openai.com/en/</p>",
       "previewMode": "admin-summary",
       "htmlTruncated": true,
-      "sourceBytes": 1278,
-      "updatedAt": "2026-06-07T15:48:36.759Z",
+      "sourceBytes": 1277,
+      "updatedAt": "2026-06-07T15:50:04.715Z",
       "historyDate": "2026-06-08",
       "historyYear": "2026",
       "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "2026 06 08 Codex CLI PTY first run 작업 요약",
+      "excerpt": "2026 06 08 Codex CLI PTY first run 작업 요약 Codex CLI가 터미널에서는 보이지만 플랫폼 CLI 탭에서는 어댑터가 설정되지 않았다고 보이는 문제를 해결했다. 원인은 GUI 앱 PATH와 로그인 셸 PATH 차이, 그리고 TUI CLI를 pipe only session으로 시작하는 구조였다. 이번 변경은 AI CLI 어댑터용 PTY launch command를 추가하고, MonitorShell에서 Codex/Claude/Gemini/OpenCode/Claw Code를",
+      "html": "<p>2026 06 08 Codex CLI PTY first run 작업 요약 Codex CLI가 터미널에서는 보이지만 플랫폼 CLI 탭에서는 어댑터가 설정되지 않았다고 보이는 문제를 해결했다. 원인은 GUI 앱 PATH와 로그인 셸 PATH 차이, 그리고 TUI CLI를 pipe only session으로 시작하는 구조였다. 이번 변경은 AI CLI 어댑터용 PTY launch command를 추가하고, MonitorShell에서 Codex/Claude/Gemini/OpenCode/Claw Code를 PTY로 시작하도록 연결한다. Rust 런타임 command resolver는 일반 설치 위치와 로그인 셸 fallback을 확인한다. 구조적</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 783,
+      "updatedAt": "2026-06-07T15:50:04.715Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
+      "path": "_history/work-timings/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
+      "category": "work-timing",
+      "language": "ko",
+      "title": "2026 06 08 Codex CLI PTY first run 작업 타이밍",
+      "excerpt": "2026 06 08 Codex CLI PTY first run 작업 타이밍 단계별 기록 웹/공식 문서 확인: 약 5분 로컬 원인 분석과 구현: 약 35분 Rust/TypeScript 분리: 약 35분 readiness/test/build 보정: 약 25분 기록/평가/커밋 준비: 약 15분 병목 기존 검증 스크립트와 테스트가 lib.rs 단일 파일 전제를 여러 곳에 갖고 있어 source aggregation 갱신이 필요했다. 기존 TypeScript 대형 파일 전체 분리는 별도 구조 리팩터링이 필",
+      "html": "<p>2026 06 08 Codex CLI PTY first run 작업 타이밍 단계별 기록 웹/공식 문서 확인: 약 5분 로컬 원인 분석과 구현: 약 35분 Rust/TypeScript 분리: 약 35분 readiness/test/build 보정: 약 25분 기록/평가/커밋 준비: 약 15분 병목 기존 검증 스크립트와 테스트가 lib.rs 단일 파일 전제를 여러 곳에 갖고 있어 source aggregation 갱신이 필요했다. 기존 TypeScript 대형 파일 전체 분리는 별도 구조 리팩터링이 필요하다.</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": false,
+      "sourceBytes": 531,
+      "updatedAt": "2026-06-07T15:50:04.715Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-plans-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
+      "path": "_history/plans/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "2026 06 08 Codex CLI PTY first run 계획",
+      "excerpt": "2026 06 08 Codex CLI PTY first run 계획 1. 웹 검색과 공식 문서 확인으로 CLI/TUI/PTY 전제를 검증한다. 2. 로컬 codex 설치와 PATH 상태를 확인한다. 3. Tauri Rust runtime에 어댑터 PTY command를 추가한다. 4. GUI PATH와 로그인 셸 PATH 차이를 흡수하는 resolver를 구현한다. 5. MonitorShell에서 Codex류 AI CLI를 PTY로 시작하도록 라우팅한다. 6. Rust와 터미널 TypeScript",
+      "html": "<p>2026 06 08 Codex CLI PTY first run 계획 1. 웹 검색과 공식 문서 확인으로 CLI/TUI/PTY 전제를 검증한다. 2. 로컬 codex 설치와 PATH 상태를 확인한다. 3. Tauri Rust runtime에 어댑터 PTY command를 추가한다. 4. GUI PATH와 로그인 셸 PATH 차이를 흡수하는 resolver를 구현한다. 5. MonitorShell에서 Codex류 AI CLI를 PTY로 시작하도록 라우팅한다. 6. Rust와 터미널 TypeScript 파일을 500줄 이하 구조로 분리한다. 7. readiness/test/build를 새 구조에 맞춘다. 8. 검증 기록, 평가, 누락/리소스 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 609,
+      "updatedAt": "2026-06-07T15:50:04.714Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
+      "path": "_history/request-traces/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "2026 06 08 request trace",
+      "excerpt": "2026 06 08 request trace 요청 Codex CLI/PTY/CLI 탭 첫 실행 차단 문제 해결 어댑터 설정 불일치 해결 Rust lib.rs 와 관련 TypeScript 파일 분리 결과 Codex류 AI CLI 어댑터를 네이티브 PTY 세션으로 시작하는 경로를 추가했다. GUI PATH와 로그인 셸 PATH 차이를 흡수하는 resolver를 추가했다. Rust lib.rs 를 31줄 진입점과 28개 lib parts 파일로 분리했다. RuntimeTerminalDrawer를 하위 ",
+      "html": "<p>2026 06 08 request trace 요청 Codex CLI/PTY/CLI 탭 첫 실행 차단 문제 해결 어댑터 설정 불일치 해결 Rust lib.rs 와 관련 TypeScript 파일 분리 결과 Codex류 AI CLI 어댑터를 네이티브 PTY 세션으로 시작하는 경로를 추가했다. GUI PATH와 로그인 셸 PATH 차이를 흡수하는 resolver를 추가했다. Rust lib.rs 를 31줄 진입점과 28개 lib parts 파일로 분리했다. RuntimeTerminalDrawer를 하위 모듈로 분리했다. readiness/check/test aggregation을 새 구조에 맞췄다. 산출물 platform desktop app/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1007,
+      "updatedAt": "2026-06-07T15:50:04.714Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-evaluations-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
+      "path": "_history/evaluations/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
+      "category": "evaluation",
+      "language": "ko",
+      "title": "2026 06 08 Codex CLI PTY first run 평가",
+      "excerpt": "2026 06 08 Codex CLI PTY first run 평가 평가 요구 충족: 부분 통과. Codex CLI 첫 실행/PTY 실행/어댑터 PATH 문제는 해결했다. 기존 모든 대형 TypeScript 파일 분리는 후속 범위가 남는다. 기능 보존: 통과. pipe session은 유지하고 TUI CLI만 PTY 경로로 라우팅했다. 구조 개선: 통과. Rust lib.rs 는 31줄, lib parts 최대 495줄이다. RuntimeTerminalDrawer와 하위 터미널 파일은 최대 498",
+      "html": "<p>2026 06 08 Codex CLI PTY first run 평가 평가 요구 충족: 부분 통과. Codex CLI 첫 실행/PTY 실행/어댑터 PATH 문제는 해결했다. 기존 모든 대형 TypeScript 파일 분리는 후속 범위가 남는다. 기능 보존: 통과. pipe session은 유지하고 TUI CLI만 PTY 경로로 라우팅했다. 구조 개선: 통과. Rust lib.rs 는 31줄, lib parts 최대 495줄이다. RuntimeTerminalDrawer와 하위 터미널 파일은 최대 498줄이다. 검증: 통과. Rust, Node, TypeScript, readiness, customer build 검증을 통과했다. 공개 배포: </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 959,
+      "updatedAt": "2026-06-07T15:50:04.713Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
     },
     {
       "id": "history-2026-2026-06-07-md",
@@ -51123,34 +51251,38 @@
     {
       "date": "2026-06-08",
       "year": "2026",
-      "documentsCount": 7,
+      "documentsCount": 15,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1
+          "count": 2
         },
         {
           "category": "plan",
-          "count": 1
+          "count": 2
         },
         {
           "category": "request-trace",
-          "count": 1
+          "count": 2
         },
         {
           "category": "user-request",
-          "count": 1
+          "count": 2
         },
         {
           "category": "web-search",
-          "count": 1
+          "count": 2
         },
         {
           "category": "work-summary",
-          "count": 1
+          "count": 2
         },
         {
           "category": "work-timing",
+          "count": 2
+        },
+        {
+          "category": "daily-history",
           "count": 1
         }
       ],

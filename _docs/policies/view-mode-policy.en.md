@@ -12,10 +12,10 @@ This repository separates what a user sees, what a developer sees, and what the 
 
 ### `user`
 
-User view focuses on stable projects, history, documentation, and artifacts.
+User view is the current default and focuses on task intake, run status, and result review.
 
-- Prioritize projects and work summaries.
-- Hide or collapse requirements, internal settings, governance docs, and test/verification details by default.
+- Prioritize entering a request and continuing into an automatic run flow.
+- Hide or collapse custom agents, Tool Studio, source, requirements, internal settings, governance docs, and test/verification details by default.
 - Before public deployment, sensitive data must be removed at snapshot generation time.
 
 ### `developer`
@@ -28,7 +28,7 @@ Developer view is for people improving a project or platform feature.
 
 ### `superadmin_developer`
 
-Superadmin development view is the current default.
+Superadmin development view is an explicitly selected advanced owner/operator lens.
 
 - Because the repository owner is still building the platform itself, projects, history, requirements, specs, agents, operations settings, and public-readiness checks should be visible together.
 - This mode is an owner/operator lens. It does not mean authentication or authorization is implemented.
@@ -56,5 +56,5 @@ Superadmin development view is the current default.
 - Choose `view_mode` when a screen or dashboard needs a user, developer, or superadmin lens.
 - Choose `install_mode` for installation, running, deployment, or development environment setup.
 - Let `work_mode` decide work artifacts and evaluation strictness.
-- The current default view mode is `superadmin_developer`.
+- The current default view mode is `user`.
 - When a public user view becomes necessary, design collector-level publication filters before adding only UI filters.
