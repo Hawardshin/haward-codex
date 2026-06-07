@@ -1,0 +1,121 @@
+{
+  "task": "desktop project management platform",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "separate-ollama-tools",
+      "description": "Ollama, tool, and agent operations remain separate from the desktop project management surface.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/workspace-tracker-product-split-registry.json",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/ProjectManagementPanel.tsx"
+      ]
+    },
+    {
+      "item_id": "project-management-ui",
+      "description": "Desktop projects section becomes a project management platform surface.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/features/ProjectManagementPanel.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+      ]
+    },
+    {
+      "item_id": "snapshot-model",
+      "description": "Snapshot exposes project portfolio, milestones, workflow lanes, and report/evidence counts.",
+      "source": "requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+        "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs"
+      ]
+    },
+    {
+      "item_id": "customer-sanitization",
+      "description": "Customer snapshot must not expose internal project portfolio resources.",
+      "source": "requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs"
+      ]
+    },
+    {
+      "item_id": "verification",
+      "description": "Run build/test/check/browser verification before close-out.",
+      "source": "AGENTS.md",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/specs/2026-06-08-desktop-project-management-platform/validation.ko.md",
+        "_history/work-summaries/2026/2026-06-08-desktop-project-management-platform.ko.md"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/features/ProjectManagementPanel.tsx",
+      "purpose": "Project management UI panel",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-08-desktop-project-management-platform/spec.ko.md",
+      "purpose": "Spec artifact",
+      "required": true
+    },
+    {
+      "path": "_history/web-searches/2026/2026-06-08-desktop-project-management-platform.ko.md",
+      "purpose": "Web-first intake record",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "renderer-check-test-build",
+      "description": "Renderer collect/check/test/build passed.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect --best-effort",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test",
+        "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build"
+      ]
+    },
+    {
+      "check_id": "platform-check-test",
+      "description": "Platform desktop app test/check passed.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir platform-desktop-app run test",
+        "corepack pnpm --dir platform-desktop-app run check"
+      ]
+    },
+    {
+      "check_id": "browser-smoke",
+      "description": "Browser verified desktop and mobile projects tab.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "desktop: hasPanel=true, laneCount=4, projectCardCount=5",
+        "mobile: hasPanel=true, laneCount=4, cardCount=5, overflowX=false"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "Actual remote Git repository creation is outside this slice.",
+    "Guest AI CLI installation is outside this slice.",
+    "Full large-file componentization remains a separate continuation path."
+  ],
+  "notes": [
+    "This omission check covers the desktop project-management slice on top of the earlier product split."
+  ]
+}

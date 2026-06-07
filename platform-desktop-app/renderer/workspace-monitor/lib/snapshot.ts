@@ -55,6 +55,73 @@ export type WorkspaceProject = {
   boundaryNotes: string[];
 };
 
+export type WorkspaceProjectManagement = {
+  sourcePath: string;
+  summary: {
+    managedProjects: number;
+    activeProjects: number;
+    repoBackedProjects: number;
+    openWorkItems: number;
+    completedWorkItems: number;
+    milestoneCount: number;
+    evidenceDocuments: number;
+    reportDocuments: number;
+  };
+  portfolio: Array<{
+    id: string;
+    name: string;
+    path: string;
+    status: string;
+    type: string;
+    purpose: string;
+    scope: string;
+    gitBoundary: string;
+    health: "active" | "attention" | "idle" | "done";
+    taskCount: number;
+    activeTaskCount: number;
+    completedTaskCount: number;
+    requirementCount: number;
+    evidenceCount: number;
+    reportCount: number;
+    documentCount: number;
+    nextAction: string;
+    milestone: string;
+    resources: Array<{
+      title: string;
+      path: string;
+      category: string;
+    }>;
+  }>;
+  milestones: Array<{
+    id: string;
+    label: string;
+    status: string;
+    project: string;
+    evidenceCount: number;
+    reportCount: number;
+    nextAction: string;
+  }>;
+  workflowLanes: Array<{
+    id: string;
+    label: string;
+    count: number;
+    description: string;
+    targetSection: string;
+  }>;
+  recentTrail: Array<{
+    date: string;
+    title: string;
+    category: string;
+    path: string;
+  }>;
+  desktopActions: Array<{
+    id: string;
+    label: string;
+    targetSection: string;
+    description: string;
+  }>;
+};
+
 export type WorkspaceAgent = {
   id: string;
   name?: string;
@@ -910,6 +977,7 @@ export type WorkspaceProductSplit = {
     advancedOperatorSections: string[];
     homeCopyRule: string;
     configurationRule: string;
+    projectManagementRule?: string;
   };
   validationGates: string[];
 };
@@ -920,6 +988,7 @@ export type WorkspaceSnapshot = {
   repoRootName: string;
   stats: WorkspaceStats;
   projects: WorkspaceProject[];
+  projectManagement?: WorkspaceProjectManagement;
   agents: WorkspaceAgent[];
   agentCatalog?: WorkspaceAgentDefinition[];
   collaborationBoard?: WorkspaceCollaborationBoard;

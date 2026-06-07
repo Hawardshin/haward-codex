@@ -212,6 +212,8 @@
       }
     ],
     "tracked_outputs": [
+      "project_portfolio",
+      "project_milestone_status",
       "current_task_summary",
       "plan",
       "task_sequence",
@@ -285,6 +287,8 @@
   "ui_policy": {
     "home_priority": [
       "workspace_import",
+      "project_portfolio",
+      "project_milestone_status",
       "current_work_timeline",
       "terminal_cli_run",
       "evidence_and_reports",
@@ -313,10 +317,13 @@
       "structure"
     ],
     "home_copy_rule": "Home copy shall talk about Git workspaces, current work, task reports, evidence, terminal runs, and AI coding tools as guest surfaces.",
-    "configuration_rule": "Customization, provider credentials, direct model execution, Ollama, agent factory, and tool builder controls shall not be the default first-screen path."
+    "configuration_rule": "Customization, provider credentials, direct model execution, Ollama, agent factory, and tool builder controls shall not be the default first-screen path.",
+    "project_management_rule": "The projects section shall behave like the desktop project management hub: import Git repositories, show portfolio health, expose milestone status, and link reports, evidence, task order, and terminal run state before advanced operator controls."
   },
   "validation_gates": [
     "workspace snapshot exposes productSplit",
+    "workspace snapshot exposes projectManagement",
+    "projects section renders ProjectManagementPanel",
     "home screen includes a product split panel",
     "home default task intents do not start with agent factory or tool studio",
     "product feature registry primary product is workspace_tracker",

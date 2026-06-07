@@ -661,6 +661,7 @@ const {
   ptyDecisionKo,
   ptyDecisionEn,
   productFeaturePanel,
+  projectManagementPanel,
   workspaceProductSplitPanel,
   monitorCollector,
   productFeatureCollector,
@@ -710,6 +711,29 @@ for (const requiredPhrase of [
 ]) {
   if (!monitorCollector.includes(requiredPhrase)) {
     failures.push(`workspace-monitor reference advantage collector must include ${requiredPhrase}`);
+  }
+}
+for (const requiredPhrase of [
+  "collectProjectManagement",
+  "projectManagement",
+  "sanitizeProjectManagementForCustomer",
+  "Project Management Platform",
+  "프로젝트 관리 플랫폼",
+  "data-project-management-panel",
+  "data-project-workflow-lanes",
+  "data-project-portfolio-list"
+]) {
+  if (
+    !monitorCollector.includes(requiredPhrase) &&
+    !monitorShell.includes(requiredPhrase) &&
+    !projectManagementPanel.includes(requiredPhrase)
+  ) {
+    failures.push(`workspace-monitor project management platform must include ${requiredPhrase}`);
+  }
+}
+for (const requiredStyle of [".project-management-panel", ".project-workflow-lanes", ".project-portfolio-card"]) {
+  if (!monitorStyles.includes(requiredStyle)) {
+    failures.push(`workspace-monitor project management CSS must include ${requiredStyle}`);
   }
 }
 for (const requiredPhrase of ["auditCustomerSnapshot", "scanCustomerDist", "customer_bundle_ready", "MAX_DIST_SCAN_FILES", "frontendDist"]) {

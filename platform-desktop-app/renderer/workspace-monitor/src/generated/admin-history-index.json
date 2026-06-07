@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-07T17:06:38.772Z",
+  "generatedAt": "2026-06-07T17:27:59.264Z",
   "summary": {
-    "documents": 3213,
+    "documents": 3220,
     "days": 9,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1131
+        "count": 1132
       },
       {
         "category": "web-search",
-        "count": 498
+        "count": 499
       },
       {
         "category": "request-trace",
-        "count": 427
+        "count": 428
       },
       {
         "category": "plan",
-        "count": 409
+        "count": 410
       },
       {
         "category": "work-timing",
-        "count": 346
+        "count": 347
       },
       {
         "category": "user-request",
-        "count": 212
+        "count": 213
       },
       {
         "category": "work-summary",
-        "count": 179
+        "count": 180
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 7276226,
+    "totalSourceBytes": 7293642,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -63,6 +63,150 @@
   },
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-08-desktop-project-management-platform-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-08-desktop-project-management-platform-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 08 Desktop Project Management Platform Evaluation Input",
+      "excerpt": "{ \"initial instruction\": \"Ollama, tools, and agent operations remain separate, while the desktop app should be implemented as a project management platform for Git workspaces, current work, plans, reports, and evidence.\", \"result summary\": \"Added a projectManagement snapshot mode",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;Ollama, tools, and agent operations remain separate, while the desktop app should be implemented as a project management platform for Git workspaces, current work, plans, reports, and evidence.&quot;, &quot;result summary&quot;: &quot;Added a projectManagement snapshot model and collector, sanitized customer project management output, implemented a Pro</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 7573,
+      "updatedAt": "2026-06-07T17:26:59.791Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-08-desktop-project-management-platform-json",
+      "path": "_history/work-timings/2026/2026-06-08-desktop-project-management-platform.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 08 Desktop Project Management Platform",
+      "excerpt": "{ \"task id\": \"2026 06 08 desktop project management platform\", \"title\": \"Desktop project management platform\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seco",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 08 desktop project management platform&quot;, &quot;title&quot;: &quot;Desktop project management platform&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;duration seconds&quot;: 360, &quot;notes&quot;: &quot;Checked official Git, GitHub Desktop, Linear, and Tauri doc</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2023,
+      "updatedAt": "2026-06-07T17:26:41.653Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-plans-2026-2026-06-08-desktop-project-management-platform-ko-md",
+      "path": "_history/plans/2026/2026-06-08-desktop-project-management-platform.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "작업 계획: desktop project management platform",
+      "excerpt": "작업 계획: desktop project management platform 목표 데스크톱 앱의 프로젝트 탭을 Git 작업공간 기반 프로젝트 관리 허브로 구현하고, Ollama/툴/에이전트 운영은 분리 플랫폼/고급 기능으로 유지한다. 실행 순서 1. 공식 문서 검색 기록을 남긴다. 2. 제품 분리 registry에 프로젝트 포트폴리오/마일스톤 산출물을 추가한다. 3. snapshot 타입과 collector에 project management model을 추가한다. 4. customer snaps",
+      "html": "<p>작업 계획: desktop project management platform 목표 데스크톱 앱의 프로젝트 탭을 Git 작업공간 기반 프로젝트 관리 허브로 구현하고, Ollama/툴/에이전트 운영은 분리 플랫폼/고급 기능으로 유지한다. 실행 순서 1. 공식 문서 검색 기록을 남긴다. 2. 제품 분리 registry에 프로젝트 포트폴리오/마일스톤 산출물을 추가한다. 3. snapshot 타입과 collector에 project management model을 추가한다. 4. customer snapshot에서 내부 프로젝트 세부 정보를 제거한다. 5. 프로젝트 관리 패널을 만들고 projects section에 연결한다. 6. tests/r</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1157,
+      "updatedAt": "2026-06-07T17:25:46.782Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-08-desktop-project-management-platform-ko-md",
+      "path": "_history/request-traces/2026/2026-06-08-desktop-project-management-platform.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: desktop project management platform",
+      "excerpt": "요청 결과 추적: desktop project management platform 날짜: 2026 06 08 요청 요약: 분리된 agent/tool/Ollama 플랫폼과 별개로 데스크톱 앱을 프로젝트 관리 플랫폼으로 구현 결과 상태: 구현 및 검증 완료 산출물 요구사항: requirements/changes/2026 06 08 desktop project management platform.ko.md 프로젝트 요구사항: platform desktop app/docs/requirements/2026",
+      "html": "<p>요청 결과 추적: desktop project management platform 날짜: 2026 06 08 요청 요약: 분리된 agent/tool/Ollama 플랫폼과 별개로 데스크톱 앱을 프로젝트 관리 플랫폼으로 구현 결과 상태: 구현 및 검증 완료 산출물 요구사항: requirements/changes/2026 06 08 desktop project management platform.ko.md 프로젝트 요구사항: platform desktop app/docs/requirements/2026 06 08 desktop project management platform.ko.md 스펙: platform desktop app/specs/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1398,
+      "updatedAt": "2026-06-07T17:25:46.782Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-08-desktop-project-management-platform-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-08-desktop-project-management-platform.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: desktop project management platform",
+      "excerpt": "작업 요약: desktop project management platform 날짜: 2026 06 08 범위: platform desktop app/ 완료한 작업 프로젝트 관리 snapshot model을 추가했다. collector가 프로젝트 registry, requirements, documents, history, tasks를 결합해 portfolio/milestone/workflow/recent trail을 만든다. 고객용 snapshot에서 내부 project portfolio/reso",
+      "html": "<p>작업 요약: desktop project management platform 날짜: 2026 06 08 범위: platform desktop app/ 완료한 작업 프로젝트 관리 snapshot model을 추가했다. collector가 프로젝트 registry, requirements, documents, history, tasks를 결합해 portfolio/milestone/workflow/recent trail을 만든다. 고객용 snapshot에서 내부 project portfolio/resource/recent trail을 제거한다. projects section을 ProjectManagementPanel 로 교체했다. 패널은 Gi</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1740,
+      "updatedAt": "2026-06-07T17:25:46.782Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-08-desktop-project-management-platform-ko-md",
+      "path": "_history/user-requests/2026/2026-06-08-desktop-project-management-platform.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: desktop project management platform",
+      "excerpt": "사용자 요청 요약: desktop project management platform 날짜: 2026 06 08 범위: platform desktop app/ 원문 보존 여부: 전체 원문은 보존하지 않음 요약 사용자는 이미 desktop workspace tracker와 agent/tool/Ollama 운영 플랫폼이 크게 분리된 상태에서, 데스크톱 앱 쪽을 프로젝트 관리 플랫폼으로 완성하라고 요청했다. Ollama, 툴, 에이전트 관리류는 별도 플랫폼으로 두고, 데스크톱은 Git 작업공간 가져오기,",
+      "html": "<p>사용자 요청 요약: desktop project management platform 날짜: 2026 06 08 범위: platform desktop app/ 원문 보존 여부: 전체 원문은 보존하지 않음 요약 사용자는 이미 desktop workspace tracker와 agent/tool/Ollama 운영 플랫폼이 크게 분리된 상태에서, 데스크톱 앱 쪽을 프로젝트 관리 플랫폼으로 완성하라고 요청했다. Ollama, 툴, 에이전트 관리류는 별도 플랫폼으로 두고, 데스크톱은 Git 작업공간 가져오기, 프로젝트별 작업 상태, 계획, 마일스톤, 보고서, 근거, 실행 흐름 확인에 집중해야 한다. 핵심 요구 데스크톱 앱은 프로젝트 관리/작업 추적 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1006,
+      "updatedAt": "2026-06-07T17:24:54.095Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-08-desktop-project-management-platform-ko-md",
+      "path": "_history/web-searches/2026/2026-06-08-desktop-project-management-platform.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: desktop project management platform",
+      "excerpt": "웹 검색 기록: desktop project management platform 날짜: 2026 06 08 작업: 데스크톱 앱을 Ollama/툴/에이전트 운영과 분리된 프로젝트 관리 플랫폼으로 구현 검색 방식: 공식 문서 우선, 로컬 구현 전 확인 확인한 출처 | 출처 | URL | 신뢰도 | 이번 계획 영향 | | | | | | | Git worktree 공식 문서 | https://git scm.com/docs/git worktree.html | 높음 | durable 작업 단위를 Git 경계",
+      "html": "<p>웹 검색 기록: desktop project management platform 날짜: 2026 06 08 작업: 데스크톱 앱을 Ollama/툴/에이전트 운영과 분리된 프로젝트 관리 플랫폼으로 구현 검색 방식: 공식 문서 우선, 로컬 구현 전 확인 확인한 출처 | 출처 | URL | 신뢰도 | 이번 계획 영향 | | | | | | | Git worktree 공식 문서 | https://git scm.com/docs/git worktree.html | 높음 | durable 작업 단위를 Git 경계와 worktree/repository 중심으로 보게 함 | | GitHub Desktop 공식 문서 | https://docs.github.c</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2525,
+      "updatedAt": "2026-06-07T17:24:54.095Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-08-workspace-tracker-product-split-json",
+      "path": "_history/work-timings/2026/2026-06-08-workspace-tracker-product-split.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 08 Workspace Tracker Product Split",
+      "excerpt": "{ \"task id\": \"2026 06 08 workspace tracker product split\", \"title\": \"Workspace tracker product split\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seconds\": ",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 08 workspace tracker product split&quot;, &quot;title&quot;: &quot;Workspace tracker product split&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;duration seconds&quot;: 900, &quot;notes&quot;: &quot;Official docs for Git, AI coding tools, and AgentCore style platf</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3030,
+      "updatedAt": "2026-06-07T17:07:34.968Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+      "path": "_history/request-traces/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: workspace tracker product split",
+      "excerpt": "요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현, 검증, 커밋, 푸시 완료 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: his",
+      "html": "<p>요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현, 검증, 커밋, 푸시 완료 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: history/web searches/2026/2026 06 08 workspace tracker product split.ko.md coding r</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1822,
+      "updatedAt": "2026-06-07T17:07:28.129Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-08-workspace-tracker-product-split-evaluation-input-json",
       "path": "_history/evaluations/2026/2026-06-08-workspace-tracker-product-split-evaluation-input.json",
       "category": "evaluation",
@@ -77,38 +221,6 @@
       "historyDate": "2026-06-08",
       "historyYear": "2026",
       "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-08-workspace-tracker-product-split-json",
-      "path": "_history/work-timings/2026/2026-06-08-workspace-tracker-product-split.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 08 Workspace Tracker Product Split",
-      "excerpt": "{ \"task id\": \"2026 06 08 workspace tracker product split\", \"title\": \"Workspace tracker product split\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seconds\": ",
-      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 08 workspace tracker product split&quot;, &quot;title&quot;: &quot;Workspace tracker product split&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;duration seconds&quot;: 900, &quot;notes&quot;: &quot;Official docs for Git, AI coding tools, and AgentCore style platf</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 3027,
-      "updatedAt": "2026-06-07T17:05:23.467Z",
-      "historyDate": "2026-06-08",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-08-workspace-tracker-product-split-ko-md",
-      "path": "_history/request-traces/2026/2026-06-08-workspace-tracker-product-split.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: workspace tracker product split",
-      "excerpt": "요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현 및 검증 완료, 커밋/푸시 대기 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: ",
-      "html": "<p>요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현 및 검증 완료, 커밋/푸시 대기 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: history/web searches/2026/2026 06 08 workspace tracker product split.ko.md codin</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1831,
-      "updatedAt": "2026-06-07T17:05:04.830Z",
-      "historyDate": "2026-06-08",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
     },
     {
       "id": "history-2026-2026-06-08-md",
@@ -51475,35 +51587,35 @@
     {
       "date": "2026-06-08",
       "year": "2026",
-      "documentsCount": 29,
+      "documentsCount": 36,
       "categories": [
         {
           "category": "evaluation",
-          "count": 4
+          "count": 5
         },
         {
           "category": "plan",
-          "count": 4
+          "count": 5
         },
         {
           "category": "request-trace",
-          "count": 4
+          "count": 5
         },
         {
           "category": "user-request",
-          "count": 4
+          "count": 5
         },
         {
           "category": "web-search",
-          "count": 4
+          "count": 5
         },
         {
           "category": "work-summary",
-          "count": 4
+          "count": 5
         },
         {
           "category": "work-timing",
-          "count": 4
+          "count": 5
         },
         {
           "category": "daily-history",

@@ -163,6 +163,7 @@ import { RuntimeDataSupportPanel } from "./features/RuntimeDataSupportPanel";
 import { RuntimeInitStatusCard, type RuntimeInitStatusReport } from "./features/RuntimeInitStatusCard";
 import { ServiceReadinessPanel } from "./features/ServiceReadinessPanel";
 import { TaskRunStorePanel } from "./features/TaskRunStorePanel";
+import { ProjectManagementPanel } from "./features/ProjectManagementPanel";
 import { WorkspaceHostPanel } from "./features/WorkspaceHostPanel";
 import { WorkspaceProductSplitPanel } from "./features/WorkspaceProductSplitPanel";
 import {
@@ -6436,28 +6437,11 @@ export function MonitorShell({ snapshot, initialSection }: { snapshot: Workspace
 
       {shouldRenderSection("projects") && (
         <MountedSectionPanel id="projects" active={section === "projects"}>
-          <section className="records-grid">
-            {snapshot.projects.map((project) => (
-              <article className="record-card" key={project.name}>
-                <div className="record-header">
-                  <FolderKanban size={18} aria-hidden="true" />
-                  <div>
-                    <h2>{project.name}</h2>
-                    <p>{project.path}</p>
-                  </div>
-                </div>
-                <p>{project.purpose}</p>
-                <dl>
-                  <dt>Status</dt>
-                  <dd>{project.status}</dd>
-                  <dt>Type</dt>
-                  <dd>{project.type}</dd>
-                  <dt>Scope</dt>
-                  <dd>{project.scope}</dd>
-                </dl>
-              </article>
-            ))}
-          </section>
+          <ProjectManagementPanel
+            language={uiLanguage}
+            projectManagement={snapshot.projectManagement}
+            onOpenSection={(targetSection) => openSection(targetSection as SectionId)}
+          />
         </MountedSectionPanel>
       )}
 

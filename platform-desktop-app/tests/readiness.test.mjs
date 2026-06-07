@@ -627,6 +627,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     ptyDecisionKo,
     ptyDecisionEn,
     productFeaturePanel,
+    projectManagementPanel,
     monitorCollector,
     productFeatureCollector,
     historyInsightCollector,
@@ -640,6 +641,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     evaluationRuntimeTelemetry
   } = sources;
   const workspaceProductSplitPanel = sources.workspaceProductSplitPanel || "";
+  const projectManagementPanelSource = projectManagementPanel || "";
   const tauriRuntimeSource = joinSourceMap(sources, tauriRuntimeSourceKeys);
   const lib = tauriRuntimeSource;
   const monitorWorkbenchSource = joinSourceMap(sources, monitorWorkbenchSourceKeys);
@@ -667,6 +669,26 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   }
   for (const collectorToken of ["buildCustomerSnapshot", "customer_snapshot_sanitized", "--snapshot-mode", "sourceFiles: []"]) {
     assert.match(monitorCollector, new RegExp(collectorToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+  for (const collectorToken of [
+    "collectProjectManagement",
+    "projectManagement",
+    "sanitizeProjectManagementForCustomer"
+  ]) {
+    assert.match(monitorCollector, new RegExp(collectorToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+  for (const uiToken of [
+    "ProjectManagementPanel",
+    "Project Management Platform",
+    "프로젝트 관리 플랫폼",
+    "data-project-management-panel",
+    "data-project-workflow-lanes",
+    "data-project-portfolio-list"
+  ]) {
+    assert.match(`${monitorShell}\n${projectManagementPanelSource}`, new RegExp(uiToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+  for (const cssToken of [".project-management-panel", ".project-workflow-lanes", ".project-portfolio-card"]) {
+    assert.match(monitorStyles, new RegExp(cssToken.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
   for (const collectorToken of [
     "collectProductFeatureArchitecture",

@@ -1,0 +1,86 @@
+{
+  "task": "desktop project management platform",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Next.js dev server for Browser smoke",
+    "Node.js collector/tests",
+    "Next.js production build",
+    "in-app Browser tab"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "next-dev-server",
+      "category": "process",
+      "description": "Browser smoke starts a Next.js dev server that must not be left running.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Stopped session 17633 with Ctrl-C after Browser checks.",
+      "evidence": [
+        "dev server session 17633 exited with code 0 after Ctrl-C"
+      ]
+    },
+    {
+      "risk_id": "browser-tab",
+      "category": "browser_context",
+      "description": "Browser smoke opens a local tab.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Closed the Browser tab after desktop/mobile checks.",
+      "evidence": [
+        "tab.close() returned closed"
+      ]
+    },
+    {
+      "risk_id": "generated-snapshots",
+      "category": "cache",
+      "description": "Collector and build regenerate snapshot JSON files.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Regenerated snapshots intentionally and reviewed git status before close-out.",
+      "evidence": [
+        "workspace-monitor collect wrote 650 inline documents and 3220 admin history records"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "dev-server-cleanup",
+      "resource": "Next.js dev server",
+      "create_path": "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor dev --hostname 127.0.0.1 --port 3068",
+      "cleanup_path": "Ctrl-C to exec session 17633",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Process exited with code 0"
+      ]
+    },
+    {
+      "check_id": "browser-tab-cleanup",
+      "resource": "in-app Browser tab",
+      "create_path": "browser.tabs.new()",
+      "cleanup_path": "tab.close()",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "closed"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "validation-exit-status",
+      "metric": "command exit status",
+      "tool": "shell exit code",
+      "threshold": "all validation commands exit 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "renderer check/test/build exited 0",
+        "platform test/check exited 0"
+      ]
+    }
+  ],
+  "notes": [
+    "No long-running watcher, server, browser tab, provider runtime, or agent process was intentionally left active."
+  ]
+}

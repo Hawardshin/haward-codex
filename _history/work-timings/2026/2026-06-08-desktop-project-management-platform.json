@@ -1,0 +1,51 @@
+{
+  "task_id": "2026-06-08-desktop-project-management-platform",
+  "title": "Desktop project management platform",
+  "work_mode": "standard",
+  "measurement_quality": "partial",
+  "phases": [
+    {
+      "phase_id": "web_first_intake",
+      "label": "Web-first intake",
+      "status": "completed",
+      "duration_seconds": 360,
+      "notes": "Checked official Git, GitHub Desktop, Linear, and Tauri documentation."
+    },
+    {
+      "phase_id": "implementation",
+      "label": "Implementation",
+      "status": "completed",
+      "duration_seconds": 3540,
+      "notes": "Added projectManagement snapshot model, collector, UI panel, CSS, and tests."
+    },
+    {
+      "phase_id": "verification",
+      "label": "Verification",
+      "status": "completed",
+      "duration_seconds": 1380,
+      "notes": "Ran collect/check/test/build/platform check and Browser desktop/mobile smoke."
+    },
+    {
+      "phase_id": "records_closeout",
+      "label": "Records and close-out",
+      "status": "completed",
+      "duration_seconds": 1020,
+      "notes": "Added requirements, specs, traces, omission/resource/evaluation records."
+    }
+  ],
+  "bottleneck_analysis": {
+    "slowest_phase": "implementation",
+    "bottleneck_notes": "The largest cost was adding a cross-cutting snapshot contract, generated artifacts, UI, and readiness tests together.",
+    "improvement_candidates": [
+      "Continue componentizing MonitorShell so future project-management changes touch smaller files.",
+      "Extract reusable project-management copy/model helpers when native Git import actions become runtime-backed."
+    ]
+  },
+  "evidence": [
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProjectManagementPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build",
+    "corepack pnpm --dir platform-desktop-app run check",
+    "Browser smoke: http://127.0.0.1:3068/#projects"
+  ]
+}

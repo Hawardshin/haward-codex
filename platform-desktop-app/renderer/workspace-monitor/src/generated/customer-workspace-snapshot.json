@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-07T17:06:38.773Z",
+  "generatedAt": "2026-06-07T17:27:59.266Z",
   "repoRootName": "customer-workspace",
   "stats": {
     "projects": 0,
@@ -49,6 +49,72 @@
     "rootFolders": 0
   },
   "projects": [],
+  "projectManagement": {
+    "sourcePath": "",
+    "summary": {
+      "managedProjects": 0,
+      "activeProjects": 0,
+      "repoBackedProjects": 0,
+      "openWorkItems": 0,
+      "completedWorkItems": 0,
+      "milestoneCount": 0,
+      "evidenceDocuments": 0,
+      "reportDocuments": 0
+    },
+    "portfolio": [],
+    "milestones": [],
+    "workflowLanes": [
+      {
+        "id": "import",
+        "label": "Import",
+        "count": 5,
+        "description": "Open, clone, or create Git-backed project workspaces.",
+        "targetSection": "source"
+      },
+      {
+        "id": "plan",
+        "label": "Plan",
+        "count": 975,
+        "description": "Review requirements, specs, plans, and project scope.",
+        "targetSection": "requirements"
+      },
+      {
+        "id": "execute",
+        "label": "Run",
+        "count": 71,
+        "description": "Run work in the selected workspace with a guest AI tool or terminal.",
+        "targetSection": "desktop"
+      },
+      {
+        "id": "verify",
+        "label": "Report",
+        "count": 490,
+        "description": "Read reports, evidence, validation, and request traces.",
+        "targetSection": "eval"
+      }
+    ],
+    "recentTrail": [],
+    "desktopActions": [
+      {
+        "id": "open_existing_git_repo",
+        "label": "Open existing Git repository",
+        "targetSection": "source",
+        "description": "Default workspace intake action."
+      },
+      {
+        "id": "clone_remote_repo",
+        "label": "Clone remote repository",
+        "targetSection": "source",
+        "description": "Available workspace intake action."
+      },
+      {
+        "id": "create_new_repo",
+        "label": "Create new Git repository",
+        "targetSection": "source",
+        "description": "Available workspace intake action."
+      }
+    ]
+  },
   "agents": [],
   "agentCatalog": [],
   "tasks": [],
@@ -1677,6 +1743,8 @@
         }
       ],
       "trackedOutputs": [
+        "project_portfolio",
+        "project_milestone_status",
         "current_task_summary",
         "plan",
         "task_sequence",
@@ -1750,6 +1818,8 @@
     "uiPolicy": {
       "homePriority": [
         "workspace_import",
+        "project_portfolio",
+        "project_milestone_status",
         "current_work_timeline",
         "terminal_cli_run",
         "evidence_and_reports",
@@ -1778,7 +1848,8 @@
         "structure"
       ],
       "homeCopyRule": "Home copy shall talk about Git workspaces, current work, task reports, evidence, terminal runs, and AI coding tools as guest surfaces.",
-      "configurationRule": "Customization, provider credentials, direct model execution, Ollama, agent factory, and tool builder controls shall not be the default first-screen path."
+      "configurationRule": "Customization, provider credentials, direct model execution, Ollama, agent factory, and tool builder controls shall not be the default first-screen path.",
+      "projectManagementRule": "The projects section shall behave like the desktop project management hub: import Git repositories, show portfolio health, expose milestone status, and link reports, evidence, task order, and terminal run state before advanced operator controls."
     },
     "validationGates": []
   },
@@ -1791,7 +1862,7 @@
       "queuedPatterns": 0,
       "activeRecommendations": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-07T17:06:09.975Z"
+      "latestInsightAt": "2026-06-07T17:26:59.791Z"
     },
     "inferenceStages": [],
     "signalGroups": []
@@ -1806,7 +1877,7 @@
       "totalImprovementPackages": 0,
       "totalFitnessChecks": 0,
       "totalEvidenceLinks": 0,
-      "latestInsightAt": "2026-06-07T17:06:09.975Z"
+      "latestInsightAt": "2026-06-07T17:26:59.791Z"
     },
     "operatingModel": [],
     "structuralPrinciples": [],

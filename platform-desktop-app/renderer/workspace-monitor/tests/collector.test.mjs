@@ -367,7 +367,16 @@ test("buildSnapshot reads minimal repository shape", async () => {
   assert.equal(snapshot.stats.supportingProductFeatures, 4);
   assert.equal(snapshot.productSplit.productBoundary.desktopTracker.id, "workspace_tracker");
   assert.equal(snapshot.productSplit.workspaceModel.defaultUnit, "git_repository");
+  assert.equal(snapshot.productSplit.workspaceModel.trackedOutputs.includes("project_portfolio"), true);
+  assert.match(snapshot.productSplit.uiPolicy.projectManagementRule, /projects section imports|desktop project management hub/);
   assert.equal(snapshot.productSplit.separatedPlatforms.some((platform) => platform.capabilityId === "agent_factory"), true);
+  assert.equal(snapshot.projectManagement.summary.managedProjects, 1);
+  assert.equal(snapshot.projectManagement.summary.activeProjects, 1);
+  assert.equal(snapshot.projectManagement.summary.repoBackedProjects, 1);
+  assert.equal(snapshot.projectManagement.portfolio[0].name, "demo");
+  assert.equal(snapshot.projectManagement.portfolio[0].gitBoundary, "separate_git_workspace");
+  assert.equal(snapshot.projectManagement.workflowLanes.some((lane) => lane.id === "import" && lane.targetSection === "source"), true);
+  assert.equal(snapshot.projectManagement.desktopActions.length > 0, true);
   assert.equal(snapshot.openSourceFeatureReferences.summary.totalLayers, 1);
   assert.equal(snapshot.openSourceFeatureReferences.featureReferenceLayers.some((layer) => layer.featureId === "agent_orchestration"), true);
   assert.equal(snapshot.stats.openSourceReferenceLayers, snapshot.openSourceFeatureReferences.summary.totalLayers);
@@ -435,6 +444,71 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
       rootFolders: 1
     },
     projects: [{ name: "platform", path: "platform-desktop-app/", status: "active" }],
+    projectManagement: {
+      sourcePath: "_ops/projects/registry.json",
+      summary: {
+        managedProjects: 1,
+        activeProjects: 1,
+        repoBackedProjects: 1,
+        openWorkItems: 1,
+        completedWorkItems: 0,
+        milestoneCount: 1,
+        evidenceDocuments: 1,
+        reportDocuments: 1
+      },
+      portfolio: [
+        {
+          id: "platform",
+          name: "platform",
+          path: "platform-desktop-app/",
+          status: "active",
+          type: "desktop",
+          purpose: "internal",
+          scope: "internal",
+          gitBoundary: "separate_git_workspace",
+          health: "active",
+          taskCount: 1,
+          activeTaskCount: 1,
+          completedTaskCount: 0,
+          requirementCount: 1,
+          evidenceCount: 1,
+          reportCount: 1,
+          documentCount: 2,
+          nextAction: "internal",
+          milestone: "internal",
+          resources: [{ title: "internal", path: "_history/internal.md", category: "work-summary" }]
+        }
+      ],
+      milestones: [
+        {
+          id: "platform-current",
+          label: "internal",
+          status: "active",
+          project: "platform",
+          evidenceCount: 1,
+          reportCount: 1,
+          nextAction: "internal"
+        }
+      ],
+      workflowLanes: [
+        {
+          id: "import",
+          label: "Import",
+          count: 1,
+          description: "Open workspace",
+          targetSection: "source"
+        }
+      ],
+      recentTrail: [{ date: "2026-06-03", title: "internal", category: "work-summary", path: "_history/internal.md" }],
+      desktopActions: [
+        {
+          id: "open_existing_git_repo",
+          label: "Open existing Git repository",
+          targetSection: "source",
+          description: "Import a local Git workspace."
+        }
+      ]
+    },
     agents: [{ id: "agent", status: "active" }],
     agentCatalog: [{ id: "agent" }],
     tasks: [{ id: "task", status: "completed" }],
@@ -795,6 +869,13 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.toolUsageIntegration.adoptionBacklog[0].targetPaths.length, 0);
   assert.equal(customer.historyDays.length, 0);
   assert.equal(customer.projects.length, 0);
+  assert.equal(customer.projectManagement.sourcePath, "");
+  assert.equal(customer.projectManagement.portfolio.length, 0);
+  assert.equal(customer.projectManagement.recentTrail.length, 0);
+  assert.equal(customer.projectManagement.summary.managedProjects, 0);
+  assert.equal(customer.projectManagement.summary.milestoneCount, 0);
+  assert.equal(customer.projectManagement.workflowLanes[0].id, "import");
+  assert.equal(customer.projectManagement.desktopActions[0].id, "open_existing_git_repo");
   assert.equal(customer.publicReview.status, "customer_snapshot_sanitized");
   assert.equal(customer.viewModeCatalog.defaultMode, "user");
   assert.deepEqual(customer.viewModeCatalog.modes[0].allowedSections, [

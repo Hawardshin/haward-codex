@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-07T17:06:38.769Z",
+  "generatedAt": "2026-06-07T17:27:59.261Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 5,
@@ -12,12 +12,12 @@
     "tasks": 71,
     "completedTasks": 71,
     "documents": 650,
-    "requirements": 545,
+    "requirements": 556,
     "evaluations": 14,
     "webSearches": 13,
     "timingRecords": 14,
     "historyDays": 2,
-    "adminHistoryDocuments": 3213,
+    "adminHistoryDocuments": 3220,
     "adminHistoryDays": 9,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -124,6 +124,315 @@
       ]
     }
   ],
+  "projectManagement": {
+    "sourcePath": "_ops/projects/registry.json",
+    "summary": {
+      "managedProjects": 5,
+      "activeProjects": 5,
+      "repoBackedProjects": 5,
+      "openWorkItems": 0,
+      "completedWorkItems": 40,
+      "milestoneCount": 5,
+      "evidenceDocuments": 448,
+      "reportDocuments": 42
+    },
+    "portfolio": [
+      {
+        "id": "agent-platform",
+        "name": "agent-platform",
+        "path": "agent-platform/",
+        "status": "active",
+        "type": "core-platform",
+        "purpose": "Central Python-first platform project for building, configuring, evaluating, improving, and operating reusable agents, tools, model/runtime adapters, and AgentCore-style capabilities.",
+        "scope": "Reusable platform models, agent specs, tool/platform runtime boundaries, Ollama/model management boundaries, provider direct agent execution boundaries, evaluation helpers, planning helpers, open-source evaluation, and platform docs.",
+        "gitBoundary": "separate_git_workspace",
+        "health": "active",
+        "taskCount": 32,
+        "activeTaskCount": 0,
+        "completedTaskCount": 32,
+        "requirementCount": 0,
+        "evidenceCount": 5,
+        "reportCount": 0,
+        "documentCount": 38,
+        "nextAction": "요구사항과 성공 기준 연결",
+        "milestone": "agent-platform workspace setup",
+        "resources": [
+          {
+            "title": "Traceability: OSS Pattern Adoption Gate",
+            "path": "agent-platform/specs/2026-06-06-oss-pattern-adoption/traceability.ko.md",
+            "category": "project-spec"
+          },
+          {
+            "title": "Validation: OSS Pattern Adoption Gate",
+            "path": "agent-platform/specs/2026-06-06-oss-pattern-adoption/validation.ko.md",
+            "category": "project-spec"
+          },
+          {
+            "title": "Tasks: OSS Pattern Adoption Gate",
+            "path": "agent-platform/specs/2026-06-06-oss-pattern-adoption/tasks.ko.md",
+            "category": "project-spec"
+          },
+          {
+            "title": "Plan: OSS Pattern Adoption Gate",
+            "path": "agent-platform/specs/2026-06-06-oss-pattern-adoption/plan.ko.md",
+            "category": "project-spec"
+          }
+        ]
+      },
+      {
+        "id": "presentation-agent",
+        "name": "presentation-agent",
+        "path": "presentation-agent/",
+        "status": "active",
+        "type": "domain-agent-project",
+        "purpose": "Presentation-focused agent project for collecting presentation design references, PPT/HTML sources, reusable assets, and script-flow evidence.",
+        "scope": "Presentation reference catalogs, project-specific presentation research, PPTX-to-HTML conversion helpers, presentation asset storage policy, and future presentation script/flow agents.",
+        "gitBoundary": "separate_git_workspace",
+        "health": "active",
+        "taskCount": 5,
+        "activeTaskCount": 0,
+        "completedTaskCount": 5,
+        "requirementCount": 0,
+        "evidenceCount": 0,
+        "reportCount": 0,
+        "documentCount": 0,
+        "nextAction": "요구사항과 성공 기준 연결",
+        "milestone": "presentation-agent workspace setup",
+        "resources": []
+      },
+      {
+        "id": "design-asset-library",
+        "name": "design-asset-library",
+        "path": "design-asset-library/",
+        "status": "active",
+        "type": "shared-design-asset-project",
+        "purpose": "Reusable, legally cautious SVG design asset library for presentation decks, HTML artifacts, dashboards, prototypes, and platform visual systems.",
+        "scope": "Internally generated SVG packs, asset registry, source provenance, license guidance, usage guidance, generator scripts, and asset validation tests.",
+        "gitBoundary": "separate_git_workspace",
+        "health": "active",
+        "taskCount": 0,
+        "activeTaskCount": 0,
+        "completedTaskCount": 0,
+        "requirementCount": 0,
+        "evidenceCount": 0,
+        "reportCount": 0,
+        "documentCount": 0,
+        "nextAction": "요구사항과 성공 기준 연결",
+        "milestone": "design-asset-library workspace setup",
+        "resources": []
+      },
+      {
+        "id": "platform-desktop-app",
+        "name": "platform-desktop-app",
+        "path": "platform-desktop-app/",
+        "status": "active",
+        "type": "installable-desktop-product",
+        "purpose": "Desktop/installable software product for importing Git workspaces, launching guest AI coding tools, and showing current work timelines, reports, evidence, requirements, and terminal state.",
+        "scope": "Workspace tracker product boundary, selected Tauri product shell, distribution registry, packaging strategy, installer release gates, Git workspace import/open/clone/create flows, guest AI tool launch surfaces, and project-local requirements/specs.",
+        "gitBoundary": "separate_git_workspace",
+        "health": "active",
+        "taskCount": 3,
+        "activeTaskCount": 0,
+        "completedTaskCount": 3,
+        "requirementCount": 376,
+        "evidenceCount": 396,
+        "reportCount": 0,
+        "documentCount": 494,
+        "nextAction": "검증 보고서 생성",
+        "milestone": "platform-desktop-app workspace setup",
+        "resources": [
+          {
+            "title": "추적성: desktop project management platform",
+            "path": "platform-desktop-app/specs/2026-06-08-desktop-project-management-platform/traceability.ko.md",
+            "category": "project-spec"
+          },
+          {
+            "title": "구현 계획: desktop project management platform",
+            "path": "platform-desktop-app/specs/2026-06-08-desktop-project-management-platform/plan.ko.md",
+            "category": "project-spec"
+          },
+          {
+            "title": "스펙: desktop project management platform",
+            "path": "platform-desktop-app/specs/2026-06-08-desktop-project-management-platform/spec.ko.md",
+            "category": "project-spec"
+          },
+          {
+            "title": "작업 목록: desktop project management platform",
+            "path": "platform-desktop-app/specs/2026-06-08-desktop-project-management-platform/tasks.ko.md",
+            "category": "project-spec"
+          }
+        ]
+      },
+      {
+        "id": "vscode-agent-workbench",
+        "name": "vscode-agent-workbench",
+        "path": "vscode-agent-workbench/",
+        "status": "active",
+        "type": "source-hard-fork-workbench",
+        "purpose": "Local hard-fork workbench for adapting the microsoft/vscode Code - OSS source into Agent Workspace Code.",
+        "scope": "VS Code source clone boundary, hard-fork patches, product identity experiments, built-in Agent Workspace extensions, source validation scripts, and fork planning records.",
+        "gitBoundary": "separate_git_workspace",
+        "health": "active",
+        "taskCount": 0,
+        "activeTaskCount": 0,
+        "completedTaskCount": 0,
+        "requirementCount": 0,
+        "evidenceCount": 0,
+        "reportCount": 0,
+        "documentCount": 0,
+        "nextAction": "요구사항과 성공 기준 연결",
+        "milestone": "vscode-agent-workbench workspace setup",
+        "resources": []
+      }
+    ],
+    "milestones": [
+      {
+        "id": "agent-platform-current",
+        "label": "agent-platform workspace setup",
+        "status": "active",
+        "project": "agent-platform",
+        "evidenceCount": 5,
+        "reportCount": 0,
+        "nextAction": "요구사항과 성공 기준 연결"
+      },
+      {
+        "id": "presentation-agent-current",
+        "label": "presentation-agent workspace setup",
+        "status": "active",
+        "project": "presentation-agent",
+        "evidenceCount": 0,
+        "reportCount": 0,
+        "nextAction": "요구사항과 성공 기준 연결"
+      },
+      {
+        "id": "design-asset-library-current",
+        "label": "design-asset-library workspace setup",
+        "status": "active",
+        "project": "design-asset-library",
+        "evidenceCount": 0,
+        "reportCount": 0,
+        "nextAction": "요구사항과 성공 기준 연결"
+      },
+      {
+        "id": "platform-desktop-app-current",
+        "label": "platform-desktop-app workspace setup",
+        "status": "active",
+        "project": "platform-desktop-app",
+        "evidenceCount": 396,
+        "reportCount": 0,
+        "nextAction": "검증 보고서 생성"
+      },
+      {
+        "id": "vscode-agent-workbench-current",
+        "label": "vscode-agent-workbench workspace setup",
+        "status": "active",
+        "project": "vscode-agent-workbench",
+        "evidenceCount": 0,
+        "reportCount": 0,
+        "nextAction": "요구사항과 성공 기준 연결"
+      }
+    ],
+    "workflowLanes": [
+      {
+        "id": "import",
+        "label": "Import",
+        "count": 5,
+        "description": "Open, clone, or create Git-backed project workspaces.",
+        "targetSection": "source"
+      },
+      {
+        "id": "plan",
+        "label": "Plan",
+        "count": 975,
+        "description": "Review requirements, specs, plans, and project scope.",
+        "targetSection": "requirements"
+      },
+      {
+        "id": "execute",
+        "label": "Run",
+        "count": 71,
+        "description": "Run work in the selected workspace with a guest AI tool or terminal.",
+        "targetSection": "desktop"
+      },
+      {
+        "id": "verify",
+        "label": "Report",
+        "count": 490,
+        "description": "Read reports, evidence, validation, and request traces.",
+        "targetSection": "eval"
+      }
+    ],
+    "recentTrail": [
+      {
+        "date": "2026-06-08",
+        "title": "2026 06 08 작업 기록",
+        "category": "daily-history",
+        "path": "_history/2026/2026-06-08.md"
+      },
+      {
+        "date": "2026-06-08",
+        "title": "2026 06 08 Codex CLI PTY first run 평가",
+        "category": "evaluation",
+        "path": "_history/evaluations/2026/2026-06-08-codex-cli-pty-first-run.ko.md"
+      },
+      {
+        "date": "2026-06-08",
+        "title": "2026 06 08 Desktop Project Management Platform Evaluation Input",
+        "category": "evaluation",
+        "path": "_history/evaluations/2026/2026-06-08-desktop-project-management-platform-evaluation-input.json"
+      },
+      {
+        "date": "2026-06-08",
+        "title": "2026 06 08 Simple User Interface Input",
+        "category": "evaluation",
+        "path": "_history/evaluations/2026/2026-06-08-simple-user-interface-input.json"
+      },
+      {
+        "date": "2026-06-07",
+        "title": "2026 06 07",
+        "category": "daily-history",
+        "path": "_history/2026/2026-06-07.md"
+      },
+      {
+        "date": "2026-06-07",
+        "title": "2026 06 07 평가: 물개형 3D 에이전트",
+        "category": "evaluation",
+        "path": "_history/evaluations/2026/2026-06-07-agent-seal-3d-redesign.ko.md"
+      },
+      {
+        "date": "2026-06-07",
+        "title": "평가: 자율 넓은 구현 기본값",
+        "category": "evaluation",
+        "path": "_history/evaluations/2026/2026-06-07-autonomous-broad-implementation-default.ko.md"
+      },
+      {
+        "date": "2026-06-07",
+        "title": "작업 평가",
+        "category": "evaluation",
+        "path": "_history/evaluations/2026/2026-06-07-runtime-display-shared-modules.ko.md"
+      }
+    ],
+    "desktopActions": [
+      {
+        "id": "open_existing_git_repo",
+        "label": "Open existing Git repository",
+        "targetSection": "source",
+        "description": "Default workspace intake action."
+      },
+      {
+        "id": "clone_remote_repo",
+        "label": "Clone remote repository",
+        "targetSection": "source",
+        "description": "Available workspace intake action."
+      },
+      {
+        "id": "create_new_repo",
+        "label": "Create new Git repository",
+        "targetSection": "source",
+        "description": "Available workspace intake action."
+      }
+    ]
+  },
   "agents": [
     {
       "id": "codex-primary",
@@ -4738,6 +5047,42 @@
       "sourcePath": "_requirements/changes/2026-06-03-pnpm-workspace-migration.ko.md"
     },
     {
+      "id": "REQ-DPMP-001",
+      "requirement": "프로젝트 탭은 프로젝트 registry 목록이 아니라 프로젝트 관리 허브여야 한다.",
+      "priority": "`ProjectManagementPanel`이 portfolio, workflow lanes, milestones, recent trail, default actions를 렌더링한다.",
+      "sourcePath": "_requirements/changes/2026-06-08-desktop-project-management-platform.ko.md"
+    },
+    {
+      "id": "REQ-DPMP-002",
+      "requirement": "workspace snapshot은 프로젝트 관리 모델을 포함해야 한다.",
+      "priority": "`WorkspaceProjectManagement` 타입과 `projectManagement` snapshot 필드가 있고 collector가 값을 생성한다.",
+      "sourcePath": "_requirements/changes/2026-06-08-desktop-project-management-platform.ko.md"
+    },
+    {
+      "id": "REQ-DPMP-003",
+      "requirement": "고객용 snapshot은 내부 포트폴리오와 resource path를 제거해야 한다.",
+      "priority": "`buildCustomerSnapshot`이 project portfolio/recent trail을 비우고 workflow/action 요약만 남긴다.",
+      "sourcePath": "_requirements/changes/2026-06-08-desktop-project-management-platform.ko.md"
+    },
+    {
+      "id": "REQ-DPMP-004",
+      "requirement": "제품 분리 registry는 프로젝트 포트폴리오와 마일스톤을 home priority/tracked output에 포함해야 한다.",
+      "priority": "`workspace-tracker-product-split-registry.json`과 collector fallback이 `project_portfolio`, `project_milestone_status`를 포함한다.",
+      "sourcePath": "_requirements/changes/2026-06-08-desktop-project-management-platform.ko.md"
+    },
+    {
+      "id": "REQ-DPMP-005",
+      "requirement": "한국어 UI에서는 사용자가 보는 기본 작업 흐름이 한국어로 표시되어야 한다.",
+      "priority": "workflow lane/action labels가 한국어 모드에서 가져오기/계획/실행/보고 중심으로 표시된다.",
+      "sourcePath": "_requirements/changes/2026-06-08-desktop-project-management-platform.ko.md"
+    },
+    {
+      "id": "REQ-DPMP-006",
+      "requirement": "프로젝트 관리 UI는 desktop/mobile에서 깨지지 않아야 한다.",
+      "priority": "Browser smoke가 desktop 및 모바일 폭에서 panel/lane/card 표시와 가로 overflow 없음을 확인한다.",
+      "sourcePath": "_requirements/changes/2026-06-08-desktop-project-management-platform.ko.md"
+    },
+    {
       "id": "REQ-WTPS-001",
       "requirement": "데스크톱 앱의 기본 제품 역할은 workspace tracker 여야 한다.",
       "priority": "`product-feature-registry.json`, fallback architecture, README, tests가 `workspace_tracker`를 기준으로 한다.",
@@ -7930,6 +8275,36 @@
       "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-tool-usage-integration.ko.md"
     },
     {
+      "id": "REQ-WM-084",
+      "requirement": "프로젝트 탭은 Git repository 기반 프로젝트 관리 허브여야 한다.",
+      "priority": "`ProjectManagementPanel.tsx`, `MonitorShell.tsx`",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-08-desktop-project-management-platform.ko.md"
+    },
+    {
+      "id": "REQ-WM-085",
+      "requirement": "프로젝트별 portfolio health, task count, requirement/report/evidence count를 보여야 한다.",
+      "priority": "`collectProjectManagement`, `WorkspaceProjectManagement`",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-08-desktop-project-management-platform.ko.md"
+    },
+    {
+      "id": "REQ-WM-086",
+      "requirement": "프로젝트 작업 흐름은 가져오기, 계획, 실행, 보고 순서로 보여야 한다.",
+      "priority": "`workflowLanes`, `ProjectManagementPanel`",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-08-desktop-project-management-platform.ko.md"
+    },
+    {
+      "id": "REQ-WM-087",
+      "requirement": "고객용 snapshot에서는 내부 project resource가 제거되어야 한다.",
+      "priority": "`sanitizeProjectManagementForCustomer`",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-08-desktop-project-management-platform.ko.md"
+    },
+    {
+      "id": "REQ-WM-088",
+      "requirement": "제품 분리 registry는 프로젝트 포트폴리오/마일스톤을 desktop tracker 핵심 산출물로 기록해야 한다.",
+      "priority": "`workspace-tracker-product-split-registry.json`",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-08-desktop-project-management-platform.ko.md"
+    },
+    {
       "id": "REQ-WM-078",
       "requirement": "홈 화면은 사용자가 Git 작업공간을 고르고 현재 작업을 추적하는 흐름을 첫 화면으로 보여야 한다.",
       "priority": "`MonitorShell.tsx`, `WorkspaceProductSplitPanel.tsx`",
@@ -7968,6 +8343,294 @@
   ],
   "documents": [
     {
+      "id": "history-evaluations-2026-2026-06-08-desktop-project-management-platform-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-08-desktop-project-management-platform-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 08 Desktop Project Management Platform Evaluation Input",
+      "excerpt": "{ \"initial instruction\": \"Ollama, tools, and agent operations remain separate, while the desktop app should be implemented as a project management platform for Git workspaces, current work, plans, reports, and evidence.\", \"result summary\": \"Added a projectManagement snapshot mode",
+      "html": "<p>{ &quot;initial instruction&quot;: &quot;Ollama, tools, and agent operations remain separate, while the desktop app should be implemented as a project management platform for Git workspaces, current work, plans, reports, and evidence.&quot;, &quot;result summary&quot;: &quot;Added a projectManagement snapshot model and collector, sanitized customer project management output, implemented a Pro</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 7573,
+      "updatedAt": "2026-06-07T17:26:59.791Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-08-desktop-project-management-platform-json",
+      "path": "_history/work-timings/2026/2026-06-08-desktop-project-management-platform.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 08 Desktop Project Management Platform",
+      "excerpt": "{ \"task id\": \"2026 06 08 desktop project management platform\", \"title\": \"Desktop project management platform\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seco",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 08 desktop project management platform&quot;, &quot;title&quot;: &quot;Desktop project management platform&quot;, &quot;work mode&quot;: &quot;standard&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;duration seconds&quot;: 360, &quot;notes&quot;: &quot;Checked official Git, GitHub Desktop, Linear, and Tauri doc</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2023,
+      "updatedAt": "2026-06-07T17:26:41.653Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-plans-2026-2026-06-08-desktop-project-management-platform-ko-md",
+      "path": "_history/plans/2026/2026-06-08-desktop-project-management-platform.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "작업 계획: desktop project management platform",
+      "excerpt": "작업 계획: desktop project management platform 목표 데스크톱 앱의 프로젝트 탭을 Git 작업공간 기반 프로젝트 관리 허브로 구현하고, Ollama/툴/에이전트 운영은 분리 플랫폼/고급 기능으로 유지한다. 실행 순서 1. 공식 문서 검색 기록을 남긴다. 2. 제품 분리 registry에 프로젝트 포트폴리오/마일스톤 산출물을 추가한다. 3. snapshot 타입과 collector에 project management model을 추가한다. 4. customer snaps",
+      "html": "<p>작업 계획: desktop project management platform 목표 데스크톱 앱의 프로젝트 탭을 Git 작업공간 기반 프로젝트 관리 허브로 구현하고, Ollama/툴/에이전트 운영은 분리 플랫폼/고급 기능으로 유지한다. 실행 순서 1. 공식 문서 검색 기록을 남긴다. 2. 제품 분리 registry에 프로젝트 포트폴리오/마일스톤 산출물을 추가한다. 3. snapshot 타입과 collector에 project management model을 추가한다. 4. customer snapshot에서 내부 프로젝트 세부 정보를 제거한다. 5. 프로젝트 관리 패널을 만들고 projects section에 연결한다. 6. tests/r</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1157,
+      "updatedAt": "2026-06-07T17:25:46.782Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-08-desktop-project-management-platform-ko-md",
+      "path": "_history/request-traces/2026/2026-06-08-desktop-project-management-platform.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: desktop project management platform",
+      "excerpt": "요청 결과 추적: desktop project management platform 날짜: 2026 06 08 요청 요약: 분리된 agent/tool/Ollama 플랫폼과 별개로 데스크톱 앱을 프로젝트 관리 플랫폼으로 구현 결과 상태: 구현 및 검증 완료 산출물 요구사항: requirements/changes/2026 06 08 desktop project management platform.ko.md 프로젝트 요구사항: platform desktop app/docs/requirements/2026",
+      "html": "<p>요청 결과 추적: desktop project management platform 날짜: 2026 06 08 요청 요약: 분리된 agent/tool/Ollama 플랫폼과 별개로 데스크톱 앱을 프로젝트 관리 플랫폼으로 구현 결과 상태: 구현 및 검증 완료 산출물 요구사항: requirements/changes/2026 06 08 desktop project management platform.ko.md 프로젝트 요구사항: platform desktop app/docs/requirements/2026 06 08 desktop project management platform.ko.md 스펙: platform desktop app/specs/</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1398,
+      "updatedAt": "2026-06-07T17:25:46.782Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-08-desktop-project-management-platform-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-08-desktop-project-management-platform.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: desktop project management platform",
+      "excerpt": "작업 요약: desktop project management platform 날짜: 2026 06 08 범위: platform desktop app/ 완료한 작업 프로젝트 관리 snapshot model을 추가했다. collector가 프로젝트 registry, requirements, documents, history, tasks를 결합해 portfolio/milestone/workflow/recent trail을 만든다. 고객용 snapshot에서 내부 project portfolio/reso",
+      "html": "<p>작업 요약: desktop project management platform 날짜: 2026 06 08 범위: platform desktop app/ 완료한 작업 프로젝트 관리 snapshot model을 추가했다. collector가 프로젝트 registry, requirements, documents, history, tasks를 결합해 portfolio/milestone/workflow/recent trail을 만든다. 고객용 snapshot에서 내부 project portfolio/resource/recent trail을 제거한다. projects section을 ProjectManagementPanel 로 교체했다. 패널은 Gi</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1740,
+      "updatedAt": "2026-06-07T17:25:46.782Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-08-desktop-project-management-platform-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-08-desktop-project-management-platform/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적성: desktop project management platform",
+      "excerpt": "추적성: desktop project management platform | 요구사항 | 구현 | 테스트/검증 | | | | | | REQ DPMP 001, REQ WM 084 | ProjectManagementPanel.tsx , MonitorShell.tsx | tool studio.test.mjs , Browser smoke | | REQ DPMP 002, REQ WM 085 | snapshot.ts , collect workspace.mjs | collector.test.mjs , gene",
+      "html": "<h1>추적성: desktop project management platform</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>테스트/검증</th></tr></thead><tbody><tr><td>REQ-DPMP-001, REQ-WM-084</td><td><code>ProjectManagementPanel.tsx</code>, <code>MonitorShell.tsx</code></td><td><code>tool-studio.test.mjs</code>, Browser smoke</td></tr><tr><td>REQ-DPMP-002, REQ-WM-085</td><td><code>snapshot.ts</code>, <code>collect-workspace.mjs</code></td><td><code>collector.test.mjs</code>, generated snapshots</td></tr><tr><td>REQ-DPMP-003, REQ-WM-087</td><td><code>sanitizeProjectManagementForCustomer</code></td><td><code>collector.test.mjs</code>, customer bundle check</td></tr><tr><td>REQ-DPMP-004, REQ-WM-088</td><td><code>workspace-tracker-product-split-registry.json</code>, collector fallback</td><td><code>check-config-contract</code>, <code>collector.test.mjs</code></td></tr><tr><td>REQ-DPMP-005, REQ-WM-086</td><td>localized lane/action copy in <code>ProjectManagementPanel.tsx</code></td><td>Browser smoke DOM check</td></tr><tr><td>REQ-DPMP-006</td><td>responsive CSS and mobile Browser smoke</td><td>Browser mobile viewport check</td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 819,
+      "updatedAt": "2026-06-07T17:24:54.098Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-08-desktop-project-management-platform-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-08-desktop-project-management-platform/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "구현 계획: desktop project management platform",
+      "excerpt": "구현 계획: desktop project management platform 1. 웹 검색으로 Git/project/milestone/desktop import 기준을 확인한다. 2. 제품 분리 registry에 project portfolio와 milestone 산출물을 추가한다. 3. snapshot 타입과 collector에 project management model을 추가한다. 4. customer snapshot에서 내부 프로젝트 세부 정보를 제거한다. 5. 프로젝트 관리 패널을 만들고",
+      "html": "<h1>구현 계획: desktop project management platform</h1>\n<p>1. 웹 검색으로 Git/project/milestone/desktop import 기준을 확인한다.</p>\n<p>2. 제품 분리 registry에 project portfolio와 milestone 산출물을 추가한다.</p>\n<p>3. snapshot 타입과 collector에 project management model을 추가한다.</p>\n<p>4. customer snapshot에서 내부 프로젝트 세부 정보를 제거한다.</p>\n<p>5. 프로젝트 관리 패널을 만들고 <code>projects</code> section에 연결한다.</p>\n<p>6. renderer/unit/readiness tests를 추가한다.</p>\n<p>7. collector/check/test/build/platform check/Browser smoke를 실행한다.</p>\n<p>8. 요구사항, spec, trace, 평가 기록을 남기고 commit/push한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 658,
+      "updatedAt": "2026-06-07T17:24:54.097Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-08-desktop-project-management-platform-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-08-desktop-project-management-platform/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "스펙: desktop project management platform",
+      "excerpt": "스펙: desktop project management platform 목표 platform desktop app/ 의 프로젝트 탭을 실제 프로젝트 관리 허브로 구현한다. 사용자는 Git 작업공간을 가져오고, 프로젝트별 상태와 마일스톤을 보고, 계획/실행/보고/근거 흐름으로 현재 작업을 확인한다. Ollama, tool builder, agent operations는 기본 사용자 흐름에서 분리한다. 범위 WorkspaceProjectManagement snapshot model 추가 collect",
+      "html": "<h1>스펙: desktop project management platform</h1>\n<h2>목표</h2>\n<p><code>platform-desktop-app/</code>의 프로젝트 탭을 실제 프로젝트 관리 허브로 구현한다. 사용자는 Git 작업공간을 가져오고, 프로젝트별 상태와 마일스톤을 보고, 계획/실행/보고/근거 흐름으로 현재 작업을 확인한다. Ollama, tool builder, agent operations는 기본 사용자 흐름에서 분리한다.</p>\n<h2>범위</h2>\n<ul>\n<li><code>WorkspaceProjectManagement</code> snapshot model 추가</li>\n<li>collector의 프로젝트별 portfolio/milestone/workflow/recent trail 생성</li>\n<li>customer snapshot sanitization</li>\n<li><code>ProjectManagementPanel</code> 추가</li>\n<li><code>MonitorShell</code> projects section 연결</li>\n<li>product split registry의 project portfolio/milestone tracked outputs 보강</li>\n<li>readiness/test/build/Browser smoke 검증</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>GitHub/GitLab remote repository 생성</li>\n<li>CLI 자동 설치</li>\n<li>Ollama/provider/cloud agent runtime 실행</li>\n<li>기존 대형 파일 전체 분해</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>프로젝트 탭이 <code>data-project-management-panel</code>을 렌더링한다.</li>\n<li>프로젝트 관리 summary가 managed/repo-backed/milestone/report/evidence 수치를 제공한다.</li>\n<li>workflow lanes는 import/plan/execute/verify를 포함한다.</li>\n<li>customer snapshot은 project portfolio와 recent trail을 제거한다.</li>\n<li>renderer check/test/build와 platform desktop test/check가 통과한다.</li>\n<li>Browser smoke가 desktop/mobile 프로젝트 탭을 확인한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1423,
+      "updatedAt": "2026-06-07T17:24:54.097Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-08-desktop-project-management-platform-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-08-desktop-project-management-platform/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록: desktop project management platform",
+      "excerpt": "작업 목록: desktop project management platform x 웹 검색 기록 생성 x requirements/spec/plan/task/trace artifact 생성 x workspace tracker product split registry.json project management 산출물 보강 x WorkspaceProjectManagement 타입 추가 x collectProjectManagement collector 추가 x customer snapshot sanitiz",
+      "html": "<h1>작업 목록: desktop project management platform</h1>\n<ul>\n<li>[x] 웹 검색 기록 생성</li>\n<li>[x] requirements/spec/plan/task/trace artifact 생성</li>\n<li>[x] <code>workspace-tracker-product-split-registry.json</code> project management 산출물 보강</li>\n<li>[x] <code>WorkspaceProjectManagement</code> 타입 추가</li>\n<li>[x] <code>collectProjectManagement</code> collector 추가</li>\n<li>[x] customer snapshot sanitization 추가</li>\n<li>[x] <code>ProjectManagementPanel.tsx</code> 추가</li>\n<li>[x] <code>MonitorShell.tsx</code> projects section 연결</li>\n<li>[x] CSS responsive layout 추가</li>\n<li>[x] renderer collector/tool-studio tests 보강</li>\n<li>[x] readiness source map/check/tests 보강</li>\n<li>[x] collector/check/test/build 실행</li>\n<li>[x] platform desktop test/check 실행</li>\n<li>[x] Browser desktop/mobile smoke 실행</li>\n<li>[x] omission/resource/evaluation close-out</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 764,
+      "updatedAt": "2026-06-07T17:24:54.097Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-08-desktop-project-management-platform-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-08-desktop-project-management-platform/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증 계획: desktop project management platform",
+      "excerpt": "검증 계획: desktop project management platform 실행 검증 PYTHONPATH=src python3 m agent platform.cli check config contract ../platform desktop app/configs/workspace tracker product split registry.json corepack pnpm dir platform desktop app/renderer/workspace monitor run collect best effo",
+      "html": "<h1>검증 계획: desktop project management platform</h1>\n<h2>실행 검증</h2>\n<ul>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/workspace-tracker-product-split-registry.json</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect --best-effort</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app run test</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code></li>\n<li>Browser smoke: <code>http://127.0.0.1:3068/#projects</code></li>\n<li><code>python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-08-desktop-project-management-platform.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/omission-checks/2026/2026-06-08-desktop-project-management-platform.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/resource-checks/2026/2026-06-08-desktop-project-management-platform.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-08-desktop-project-management-platform-evaluation-input.json</code></li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>통과 기준</h2>\n<ul>\n<li>모든 필수 명령이 exit code 0으로 끝난다.</li>\n<li>Browser smoke는 프로젝트 패널, primary import action, 4개 workflow lane, 프로젝트 카드, 모바일 overflow 없음까지 확인한다.</li>\n<li>통합 check의 public release warning은 기존 signing/updater/clean-machine gate로만 남아야 한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1669,
+      "updatedAt": "2026-06-07T17:24:54.097Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "requirements-changes-2026-06-08-desktop-project-management-platform-ko-md",
+      "path": "_requirements/changes/2026-06-08-desktop-project-management-platform.ko.md",
+      "category": "requirement",
+      "language": "ko",
+      "title": "요구사항 변경: desktop project management platform",
+      "excerpt": "요구사항 변경: desktop project management platform 날짜: 2026 06 08 상태: baseline 관련 이전 요구사항: requirements/changes/2026 06 08 workspace tracker product split.ko.md 변경 이유 제품 경계가 platform desktop app/ 과 agent platform/ 으로 나뉜 뒤, 데스크톱 앱의 프로젝트 관리 기능이 실제 사용자 화면과 snapshot model에 구현되어야 한다. 사용자는 a",
+      "html": "<h1>요구사항 변경: desktop project management platform</h1>\n<ul>\n<li>날짜: 2026-06-08</li>\n<li>상태: baseline</li>\n<li>관련 이전 요구사항: <code>_requirements/changes/2026-06-08-workspace-tracker-product-split.ko.md</code></li>\n</ul>\n<h2>변경 이유</h2>\n<p>제품 경계가 <code>platform-desktop-app/</code>과 <code>agent-platform/</code>으로 나뉜 뒤, 데스크톱 앱의 프로젝트 관리 기능이 실제 사용자 화면과 snapshot model에 구현되어야 한다. 사용자는 agent/tool/Ollama 설정보다 Git 작업공간, 현재 작업, 계획, 마일스톤, 보고서, 근거를 먼저 봐야 한다.</p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>수용 기준</th></tr></thead><tbody><tr><td>REQ-DPMP-001</td><td>프로젝트 탭은 프로젝트 registry 목록이 아니라 프로젝트 관리 허브여야 한다.</td><td><code>ProjectManagementPanel</code>이 portfolio, workflow lanes, milestones, recent trail, default actions를 렌더링한다.</td></tr><tr><td>REQ-DPMP-002</td><td>workspace snapshot은 프로젝트 관리 모델을 포함해야 한다.</td><td><code>WorkspaceProjectManagement</code> 타입과 <code>projectManagement</code> snapshot 필드가 있고 collector가 값을 생성한다.</td></tr><tr><td>REQ-DPMP-003</td><td>고객용 snapshot은 내부 포트폴리오와 resource path를 제거해야 한다.</td><td><code>buildCustomerSnapshot</code>이 project portfolio/recent trail을 비우고 workflow/action 요약만 남긴다.</td></tr><tr><td>REQ-DPMP-004</td><td>제품 분리 registry는 프로젝트 포트폴리오와 마일스톤을 home priority/tracked output에 포함해야 한다.</td><td><code>workspace-tracker-product-split-registry.json</code>과 collector fallback이 <code>project_portfolio</code>, <code>project_milestone_status</code>를 포함한다.</td></tr><tr><td>REQ-DPMP-005</td><td>한국어 UI에서는 사용자가 보는 기본 작업 흐름이 한국어로 표시되어야 한다.</td><td>workflow lane/action labels가 한국어 모드에서 가져오기/계획/실행/보고 중심으로 표시된다.</td></tr><tr><td>REQ-DPMP-006</td><td>프로젝트 관리 UI는 desktop/mobile에서 깨지지 않아야 한다.</td><td>Browser smoke가 desktop 및 모바일 폭에서 panel/lane/card 표시와 가로 overflow 없음을 확인한다.</td></tr></tbody></table>\n<h2>비범위</h2>\n<ul>\n<li>실제 원격 Git hosting repository 생성</li>\n<li>새 CLI/도구/모델 설치</li>\n<li>Ollama 또는 provider 리소스 변경</li>\n<li>전체 MonitorShell/CSS 파일 분해</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2218,
+      "updatedAt": "2026-06-07T17:24:54.096Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_requirements/changes"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-08-desktop-project-management-platform-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-08-desktop-project-management-platform.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Desktop 요구사항: desktop project management platform",
+      "excerpt": "Desktop 요구사항: desktop project management platform 날짜: 2026 06 08 소유 프로젝트: platform desktop app/ 관련 shared requirement: requirements/changes/2026 06 08 desktop project management platform.ko.md 제품 요구사항 | ID | 요구사항 | 구현 표면 | 검증 | | | | | | | REQ WM 084 | 프로젝트 탭은 Git repository 기반 프",
+      "html": "<h1>Desktop 요구사항: desktop project management platform</h1>\n<ul>\n<li>날짜: 2026-06-08</li>\n<li>소유 프로젝트: <code>platform-desktop-app/</code></li>\n<li>관련 shared requirement: <code>_requirements/changes/2026-06-08-desktop-project-management-platform.ko.md</code></li>\n</ul>\n<h2>제품 요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>구현 표면</th><th>검증</th></tr></thead><tbody><tr><td>REQ-WM-084</td><td>프로젝트 탭은 Git repository 기반 프로젝트 관리 허브여야 한다.</td><td><code>ProjectManagementPanel.tsx</code>, <code>MonitorShell.tsx</code></td><td>renderer tests, Browser smoke</td></tr><tr><td>REQ-WM-085</td><td>프로젝트별 portfolio health, task count, requirement/report/evidence count를 보여야 한다.</td><td><code>collectProjectManagement</code>, <code>WorkspaceProjectManagement</code></td><td>collector tests</td></tr><tr><td>REQ-WM-086</td><td>프로젝트 작업 흐름은 가져오기, 계획, 실행, 보고 순서로 보여야 한다.</td><td><code>workflowLanes</code>, <code>ProjectManagementPanel</code></td><td>tool-studio tests, readiness tests</td></tr><tr><td>REQ-WM-087</td><td>고객용 snapshot에서는 내부 project resource가 제거되어야 한다.</td><td><code>sanitizeProjectManagementForCustomer</code></td><td>collector tests</td></tr><tr><td>REQ-WM-088</td><td>제품 분리 registry는 프로젝트 포트폴리오/마일스톤을 desktop tracker 핵심 산출물로 기록해야 한다.</td><td><code>workspace-tracker-product-split-registry.json</code></td><td>config contract, collector tests</td></tr></tbody></table>\n<h2>설계 원칙</h2>\n<ul>\n<li>프로젝트 관리는 기본 사용자 UI의 중심이다.</li>\n<li>agent/tool/Ollama 운영은 분리 플랫폼 또는 고급 영역으로만 연결한다.</li>\n<li>화면은 설정 설명보다 바로 실행 가능한 프로젝트 흐름을 먼저 보여준다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1561,
+      "updatedAt": "2026-06-07T17:24:54.096Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-08-desktop-project-management-platform-ko-md",
+      "path": "_history/user-requests/2026/2026-06-08-desktop-project-management-platform.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: desktop project management platform",
+      "excerpt": "사용자 요청 요약: desktop project management platform 날짜: 2026 06 08 범위: platform desktop app/ 원문 보존 여부: 전체 원문은 보존하지 않음 요약 사용자는 이미 desktop workspace tracker와 agent/tool/Ollama 운영 플랫폼이 크게 분리된 상태에서, 데스크톱 앱 쪽을 프로젝트 관리 플랫폼으로 완성하라고 요청했다. Ollama, 툴, 에이전트 관리류는 별도 플랫폼으로 두고, 데스크톱은 Git 작업공간 가져오기,",
+      "html": "<p>사용자 요청 요약: desktop project management platform 날짜: 2026 06 08 범위: platform desktop app/ 원문 보존 여부: 전체 원문은 보존하지 않음 요약 사용자는 이미 desktop workspace tracker와 agent/tool/Ollama 운영 플랫폼이 크게 분리된 상태에서, 데스크톱 앱 쪽을 프로젝트 관리 플랫폼으로 완성하라고 요청했다. Ollama, 툴, 에이전트 관리류는 별도 플랫폼으로 두고, 데스크톱은 Git 작업공간 가져오기, 프로젝트별 작업 상태, 계획, 마일스톤, 보고서, 근거, 실행 흐름 확인에 집중해야 한다. 핵심 요구 데스크톱 앱은 프로젝트 관리/작업 추적 </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1006,
+      "updatedAt": "2026-06-07T17:24:54.095Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-08-desktop-project-management-platform-ko-md",
+      "path": "_history/web-searches/2026/2026-06-08-desktop-project-management-platform.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: desktop project management platform",
+      "excerpt": "웹 검색 기록: desktop project management platform 날짜: 2026 06 08 작업: 데스크톱 앱을 Ollama/툴/에이전트 운영과 분리된 프로젝트 관리 플랫폼으로 구현 검색 방식: 공식 문서 우선, 로컬 구현 전 확인 확인한 출처 | 출처 | URL | 신뢰도 | 이번 계획 영향 | | | | | | | Git worktree 공식 문서 | https://git scm.com/docs/git worktree.html | 높음 | durable 작업 단위를 Git 경계",
+      "html": "<p>웹 검색 기록: desktop project management platform 날짜: 2026 06 08 작업: 데스크톱 앱을 Ollama/툴/에이전트 운영과 분리된 프로젝트 관리 플랫폼으로 구현 검색 방식: 공식 문서 우선, 로컬 구현 전 확인 확인한 출처 | 출처 | URL | 신뢰도 | 이번 계획 영향 | | | | | | | Git worktree 공식 문서 | https://git scm.com/docs/git worktree.html | 높음 | durable 작업 단위를 Git 경계와 worktree/repository 중심으로 보게 함 | | GitHub Desktop 공식 문서 | https://docs.github.c</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 2525,
+      "updatedAt": "2026-06-07T17:24:54.095Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "platform-desktop-app-configs-workspace-tracker-product-split-registry-json",
+      "path": "platform-desktop-app/configs/workspace-tracker-product-split-registry.json",
+      "category": "project-config",
+      "language": "unknown",
+      "title": "Workspace Tracker Product Split Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 08\", \"name\": \"workspace tracker product split registry\", \"purpose\": \"Defines the split between the desktop workspace tracker product and the separate agent/tool operations platform.\", \"reader guide\": { \"summary\": \"Use this registry before changing des",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-08&quot;,\n  &quot;name&quot;: &quot;workspace-tracker-product-split-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines the split between the desktop workspace tracker product and the separate agent/tool operations platform.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before changing desktop home, navigation, workspace import, CLI adapter, report, agent-builder, tool-builder, provider, or Ollama surfaces.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read product_boundary to decide whether a capability belongs in the desktop tracker or the separate agent/tool platform.&quot;,\n      &quot;Read workspace_model before adding project import, clone, Git, or multi-repository behavior.&quot;,\n      &quot;Read ui_policy before adding first-screen cards or navigation sections.&quot;,\n      &quot;Read separated_platforms before exposing agent factory, tool studio, provider task execution, Ollama, or AWS AgentCore-style lifecycle functions.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-08&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The desktop app first screen changes.&quot;,\n      &quot;A feature creates or manages agents, tools, models, providers, Ollama, or cloud agent runtime resources.&quot;,\n      &quot;A feature imports, clones, summarizes, reports on, or launches work inside a Git workspace.&quot;,\n      &quot;A project boundary changes between platform-desktop-app and agent-platform.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;git_worktree_docs&quot;,\n      &quot;title&quot;: &quot;Git worktree documentation&quot;,\n      &quot;url&quot;: &quot;https://git-scm.com/docs/git-worktree.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;multi-working-tree and repository boundary model&quot;,\n        &quot;keeping workspace state Git-native instead of hidden inside one app database&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    },\n    {\n      &quot;id&quot;: &quot;codex_help&quot;,\n      &quot;title&quot;: &quot;Using Codex with your ChatGPT plan&quot;,\n      &quot;url&quot;: &quot;https://help.openai.com/en/articles/11369540-codex-in-chatgpt&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating Codex as one optional AI coding surface rather than the only platform runtime&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    },\n    {\n      &quot;id&quot;: &quot;claude_code_cli&quot;,\n      &quot;title&quot;: &quot;Claude Code CLI reference&quot;,\n      &quot;url&quot;: &quot;https://docs.claude.com/en/docs/claude-code/cli-reference&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating Claude Code as an optional CLI adapter imported into a selected Git workspace&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    },\n    {\n      &quot;id&quot;: &quot;cursor_installation&quot;,\n      &quot;title&quot;: &quot;Cursor installation and project opening&quot;,\n      &quot;url&quot;: &quot;https://docs.cursor.com/get-started/installation&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating Cursor as an external editor surface that opens Git projects&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    },\n    {\n      &quot;id&quot;: &quot;google_antigravity_docs&quot;,\n      &quot;title&quot;: &quot;Google Antigravity documentation&quot;,\n      &quot;url&quot;: &quot;https://antigravity.google/docs/home&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;multi-agent IDE reference and imported workspace surface comparison&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    },\n    {\n      &quot;id&quot;: &quot;aws_bedrock_agents&quot;,\n      &quot;title&quot;: &quot;Amazon Bedrock Agents documentation&quot;,\n      &quot;url&quot;: &quot;https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;separating agent/tool runtime management from the desktop workspace tracker&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;desktop_tracker_is_primary&quot;,\n      &quot;rule&quot;: &quot;The installable desktop app shall be a workspace tracker and AI-coding surface host, not a general agent factory or tool runtime platform.&quot;,\n      &quot;reason&quot;: &quot;The user wants a simpler app for importing Git workspaces, using Codex/Cursor/Claude Code/Antigravity-style tools, and seeing current work, evidence, and reports.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;product_boundary&quot;,\n        &quot;desktop_home_surface&quot;,\n        &quot;navigation&quot;,\n        &quot;customer_snapshot&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;every_work_unit_is_git_backed&quot;,\n      &quot;rule&quot;: &quot;New durable user workspaces shall be represented as separate Git repositories or imported existing Git repositories.&quot;,\n      &quot;reason&quot;: &quot;The user wants multi-project work split by Git, not hidden under one monorepo workspace.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;workspace_model&quot;,\n        &quot;project_import&quot;,\n        &quot;task_reports&quot;,\n        &quot;runtime_launch&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;ai_tools_are_guest_surfaces&quot;,\n      &quot;rule&quot;: &quot;Codex, Claude Code, Cursor, Antigravity, Gemini CLI, and similar tools shall be launched or documented as replaceable guest adapters over the selected Git workspace.&quot;,\n      &quot;reason&quot;: &quot;The platform should help the user use many AI coding tools well instead of becoming a wrapper around one tool.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;cli_adapters&quot;,\n        &quot;terminal&quot;,\n        &quot;workspace_import&quot;,\n        &quot;settings&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;agent_and_tool_operations_are_separate&quot;,\n      &quot;rule&quot;: &quot;Agent builder, tool studio, direct provider task execution, Ollama m</code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 12420,
+      "updatedAt": "2026-06-07T17:18:20.592Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-08-workspace-tracker-product-split-json",
+      "path": "_history/work-timings/2026/2026-06-08-workspace-tracker-product-split.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 08 Workspace Tracker Product Split",
+      "excerpt": "{ \"task id\": \"2026 06 08 workspace tracker product split\", \"title\": \"Workspace tracker product split\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seconds\": ",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 08 workspace tracker product split&quot;, &quot;title&quot;: &quot;Workspace tracker product split&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;duration seconds&quot;: 900, &quot;notes&quot;: &quot;Official docs for Git, AI coding tools, and AgentCore style platf</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3030,
+      "updatedAt": "2026-06-07T17:07:34.968Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+      "path": "_history/request-traces/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: workspace tracker product split",
+      "excerpt": "요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현, 검증, 커밋, 푸시 완료 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: his",
+      "html": "<p>요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현, 검증, 커밋, 푸시 완료 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: history/web searches/2026/2026 06 08 workspace tracker product split.ko.md coding r</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1822,
+      "updatedAt": "2026-06-07T17:07:28.129Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-08-workspace-tracker-product-split-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-08-workspace-tracker-product-split/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록: workspace tracker product split",
+      "excerpt": "작업 목록: workspace tracker product split x 웹 검색과 공식 문서 기반 근거 기록 x large scope decomposition 기록 x coding research 기록 x workspace tracker product split registry.json 추가 x product feature registry.json 역할 변경 x view mode registry.json user surface 변경 x snapshot.ts product split 타입 추가 x",
+      "html": "<h1>작업 목록: workspace tracker product split</h1>\n<ul>\n<li>[x] 웹 검색과 공식 문서 기반 근거 기록</li>\n<li>[x] large scope decomposition 기록</li>\n<li>[x] coding research 기록</li>\n<li>[x] <code>workspace-tracker-product-split-registry.json</code> 추가</li>\n<li>[x] <code>product-feature-registry.json</code> 역할 변경</li>\n<li>[x] <code>view-mode-registry.json</code> user surface 변경</li>\n<li>[x] <code>snapshot.ts</code> product split 타입 추가</li>\n<li>[x] collector product split 수집/sanitization 추가</li>\n<li>[x] workspace product split panel 추가</li>\n<li>[x] 홈/네비게이션/command palette/task intent copy 변경</li>\n<li>[x] tests 업데이트</li>\n<li>[x] README와 프로젝트 registry 경계 업데이트</li>\n<li>[x] config contract/check/test/build 검증</li>\n<li>[x] Browser 기반 local renderer smoke 확인</li>\n<li>[x] omission/resource/evaluation close-out</li>\n<li>[x] commit/push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 793,
+      "updatedAt": "2026-06-07T17:07:23.605Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
       "id": "history-evaluations-2026-2026-06-08-workspace-tracker-product-split-evaluation-input-json",
       "path": "_history/evaluations/2026/2026-06-08-workspace-tracker-product-split-evaluation-input.json",
       "category": "evaluation",
@@ -7984,38 +8647,6 @@
       "workspaceArea": "_history/evaluations"
     },
     {
-      "id": "history-work-timings-2026-2026-06-08-workspace-tracker-product-split-json",
-      "path": "_history/work-timings/2026/2026-06-08-workspace-tracker-product-split.json",
-      "category": "work-timing",
-      "language": "unknown",
-      "title": "2026 06 08 Workspace Tracker Product Split",
-      "excerpt": "{ \"task id\": \"2026 06 08 workspace tracker product split\", \"title\": \"Workspace tracker product split\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seconds\": ",
-      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 08 workspace tracker product split&quot;, &quot;title&quot;: &quot;Workspace tracker product split&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;duration seconds&quot;: 900, &quot;notes&quot;: &quot;Official docs for Git, AI coding tools, and AgentCore style platf</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 3027,
-      "updatedAt": "2026-06-07T17:05:23.467Z",
-      "historyDate": "2026-06-08",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-08-workspace-tracker-product-split-ko-md",
-      "path": "_history/request-traces/2026/2026-06-08-workspace-tracker-product-split.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "요청 결과 추적: workspace tracker product split",
-      "excerpt": "요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현 및 검증 완료, 커밋/푸시 대기 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: ",
-      "html": "<p>요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현 및 검증 완료, 커밋/푸시 대기 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: history/web searches/2026/2026 06 08 workspace tracker product split.ko.md codin</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1831,
-      "updatedAt": "2026-06-07T17:05:04.830Z",
-      "historyDate": "2026-06-08",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
       "id": "platform-desktop-app-specs-2026-06-08-workspace-tracker-product-split-validation-ko-md",
       "path": "platform-desktop-app/specs/2026-06-08-workspace-tracker-product-split/validation.ko.md",
       "category": "project-spec",
@@ -8027,22 +8658,6 @@
       "htmlTruncated": false,
       "sourceBytes": 1730,
       "updatedAt": "2026-06-07T17:04:58.322Z",
-      "historyDate": "2026-06-08",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-specs-2026-06-08-workspace-tracker-product-split-tasks-ko-md",
-      "path": "platform-desktop-app/specs/2026-06-08-workspace-tracker-product-split/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록: workspace tracker product split",
-      "excerpt": "작업 목록: workspace tracker product split x 웹 검색과 공식 문서 기반 근거 기록 x large scope decomposition 기록 x coding research 기록 x workspace tracker product split registry.json 추가 x product feature registry.json 역할 변경 x view mode registry.json user surface 변경 x snapshot.ts product split 타입 추가 x",
-      "html": "<h1>작업 목록: workspace tracker product split</h1>\n<ul>\n<li>[x] 웹 검색과 공식 문서 기반 근거 기록</li>\n<li>[x] large scope decomposition 기록</li>\n<li>[x] coding research 기록</li>\n<li>[x] <code>workspace-tracker-product-split-registry.json</code> 추가</li>\n<li>[x] <code>product-feature-registry.json</code> 역할 변경</li>\n<li>[x] <code>view-mode-registry.json</code> user surface 변경</li>\n<li>[x] <code>snapshot.ts</code> product split 타입 추가</li>\n<li>[x] collector product split 수집/sanitization 추가</li>\n<li>[x] workspace product split panel 추가</li>\n<li>[x] 홈/네비게이션/command palette/task intent copy 변경</li>\n<li>[x] tests 업데이트</li>\n<li>[x] README와 프로젝트 registry 경계 업데이트</li>\n<li>[x] config contract/check/test/build 검증</li>\n<li>[x] Browser 기반 local renderer smoke 확인</li>\n<li>[x] omission/resource/evaluation close-out</li>\n<li>[ ] commit/push</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 793,
-      "updatedAt": "2026-06-07T17:04:51.826Z",
       "historyDate": "2026-06-08",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
@@ -8238,22 +8853,6 @@
       "historyDate": "",
       "historyYear": "",
       "workspaceArea": "agent-platform"
-    },
-    {
-      "id": "platform-desktop-app-configs-workspace-tracker-product-split-registry-json",
-      "path": "platform-desktop-app/configs/workspace-tracker-product-split-registry.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "Workspace Tracker Product Split Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 08\", \"name\": \"workspace tracker product split registry\", \"purpose\": \"Defines the split between the desktop workspace tracker product and the separate agent/tool operations platform.\", \"reader guide\": { \"summary\": \"Use this registry before changing des",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-08&quot;,\n  &quot;name&quot;: &quot;workspace-tracker-product-split-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines the split between the desktop workspace tracker product and the separate agent/tool operations platform.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before changing desktop home, navigation, workspace import, CLI adapter, report, agent-builder, tool-builder, provider, or Ollama surfaces.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read product_boundary to decide whether a capability belongs in the desktop tracker or the separate agent/tool platform.&quot;,\n      &quot;Read workspace_model before adding project import, clone, Git, or multi-repository behavior.&quot;,\n      &quot;Read ui_policy before adding first-screen cards or navigation sections.&quot;,\n      &quot;Read separated_platforms before exposing agent factory, tool studio, provider task execution, Ollama, or AWS AgentCore-style lifecycle functions.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-08&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The desktop app first screen changes.&quot;,\n      &quot;A feature creates or manages agents, tools, models, providers, Ollama, or cloud agent runtime resources.&quot;,\n      &quot;A feature imports, clones, summarizes, reports on, or launches work inside a Git workspace.&quot;,\n      &quot;A project boundary changes between platform-desktop-app and agent-platform.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;git_worktree_docs&quot;,\n      &quot;title&quot;: &quot;Git worktree documentation&quot;,\n      &quot;url&quot;: &quot;https://git-scm.com/docs/git-worktree.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;multi-working-tree and repository boundary model&quot;,\n        &quot;keeping workspace state Git-native instead of hidden inside one app database&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    },\n    {\n      &quot;id&quot;: &quot;codex_help&quot;,\n      &quot;title&quot;: &quot;Using Codex with your ChatGPT plan&quot;,\n      &quot;url&quot;: &quot;https://help.openai.com/en/articles/11369540-codex-in-chatgpt&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating Codex as one optional AI coding surface rather than the only platform runtime&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    },\n    {\n      &quot;id&quot;: &quot;claude_code_cli&quot;,\n      &quot;title&quot;: &quot;Claude Code CLI reference&quot;,\n      &quot;url&quot;: &quot;https://docs.claude.com/en/docs/claude-code/cli-reference&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating Claude Code as an optional CLI adapter imported into a selected Git workspace&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    },\n    {\n      &quot;id&quot;: &quot;cursor_installation&quot;,\n      &quot;title&quot;: &quot;Cursor installation and project opening&quot;,\n      &quot;url&quot;: &quot;https://docs.cursor.com/get-started/installation&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating Cursor as an external editor surface that opens Git projects&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    },\n    {\n      &quot;id&quot;: &quot;google_antigravity_docs&quot;,\n      &quot;title&quot;: &quot;Google Antigravity documentation&quot;,\n      &quot;url&quot;: &quot;https://antigravity.google/docs/home&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;multi-agent IDE reference and imported workspace surface comparison&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    },\n    {\n      &quot;id&quot;: &quot;aws_bedrock_agents&quot;,\n      &quot;title&quot;: &quot;Amazon Bedrock Agents documentation&quot;,\n      &quot;url&quot;: &quot;https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;separating agent/tool runtime management from the desktop workspace tracker&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;desktop_tracker_is_primary&quot;,\n      &quot;rule&quot;: &quot;The installable desktop app shall be a workspace tracker and AI-coding surface host, not a general agent factory or tool runtime platform.&quot;,\n      &quot;reason&quot;: &quot;The user wants a simpler app for importing Git workspaces, using Codex/Cursor/Claude Code/Antigravity-style tools, and seeing current work, evidence, and reports.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;product_boundary&quot;,\n        &quot;desktop_home_surface&quot;,\n        &quot;navigation&quot;,\n        &quot;customer_snapshot&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;every_work_unit_is_git_backed&quot;,\n      &quot;rule&quot;: &quot;New durable user workspaces shall be represented as separate Git repositories or imported existing Git repositories.&quot;,\n      &quot;reason&quot;: &quot;The user wants multi-project work split by Git, not hidden under one monorepo workspace.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;workspace_model&quot;,\n        &quot;project_import&quot;,\n        &quot;task_reports&quot;,\n        &quot;runtime_launch&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;ai_tools_are_guest_surfaces&quot;,\n      &quot;rule&quot;: &quot;Codex, Claude Code, Cursor, Antigravity, Gemini CLI, and similar tools shall be launched or documented as replaceable guest adapters over the selected Git workspace.&quot;,\n      &quot;reason&quot;: &quot;The platform should help the user use many AI coding tools well instead of becoming a wrapper around one tool.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;cli_adapters&quot;,\n        &quot;terminal&quot;,\n        &quot;workspace_import&quot;,\n        &quot;settings&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;agent_and_tool_operations_are_separate&quot;,\n      &quot;rule&quot;: &quot;Agent builder, tool studio, direct provider task execution, Ollama m</code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 11911,
-      "updatedAt": "2026-06-07T16:25:35.284Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
     },
     {
       "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-08-terminal-tab-reform-tasks-ko-md",
@@ -10171,118 +10770,6 @@
       "htmlTruncated": true,
       "sourceBytes": 1064,
       "updatedAt": "2026-06-07T13:23:46.984Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-07-source-workbench-controller-hook-ko-md",
-      "path": "_history/user-requests/2026/2026-06-07-source-workbench-controller-hook.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "2026 06 07 source workbench controller hook 요청",
-      "excerpt": "2026 06 07 source workbench controller hook 요청 요약 사용자는 좁은 수정이 아니라 넓은 부분도 계획을 세워 계속 구현하라고 요청했다. 앞선 source editor 세션 훅 분리 다음 후보였던 native invoke 기반 source workbench handler 분리를 진행 대상으로 삼았다. 작업 범위 MonitorShell.tsx 에 남은 source file load/save, AGENTS.md 준비, template insert, patch conte",
-      "html": "<p>2026 06 07 source workbench controller hook 요청 요약 사용자는 좁은 수정이 아니라 넓은 부분도 계획을 세워 계속 구현하라고 요청했다. 앞선 source editor 세션 훅 분리 다음 후보였던 native invoke 기반 source workbench handler 분리를 진행 대상으로 삼았다. 작업 범위 MonitorShell.tsx 에 남은 source file load/save, AGENTS.md 준비, template insert, patch context copy, draft close/revert handler를 controller hook으로 이동한다. 구조 계약과 readiness so</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 717,
-      "updatedAt": "2026-06-07T13:23:46.983Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-07-source-workbench-controller-hook-ko-md",
-      "path": "_history/web-searches/2026/2026-06-07-source-workbench-controller-hook.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "2026 06 07 source workbench controller hook 웹 검색 기록",
-      "excerpt": "2026 06 07 source workbench controller hook 웹 검색 기록 검색 쿼리 React official docs custom hooks reusing logic extracting event handlers useCallback React official docs useCallback custom hook returning functions TypeScript official docs type only imports exports modules 확인한 출처 React R",
-      "html": "<p>2026 06 07 source workbench controller hook 웹 검색 기록 검색 쿼리 React official docs custom hooks reusing logic extracting event handlers useCallback React official docs useCallback custom hook returning functions TypeScript official docs type only imports exports modules 확인한 출처 React Reusing Logic with Custom Hooks: https://react.dev/learn/reusing logic with custo</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1304,
-      "updatedAt": "2026-06-07T13:23:46.983Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-      "path": "_history/evaluations/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "2026 06 07 소스 에디터 세션 훅 분리 평가",
-      "excerpt": "2026 06 07 소스 에디터 세션 훅 분리 평가 평가 입력 installation occurred : false resource risk occurred : true omission check targets : history/omission checks/2026/2026 06 07 source editor session hook refactor.ko.md resource check targets : history/resource checks/2026/2026 06 07 source editor",
-      "html": "<p>2026 06 07 소스 에디터 세션 훅 분리 평가 평가 입력 installation occurred : false resource risk occurred : true omission check targets : history/omission checks/2026/2026 06 07 source editor session hook refactor.ko.md resource check targets : history/resource checks/2026/2026 06 07 source editor session hook refactor.ko.md 결과 source editor 상태 전환 helper 다음 단계로 세션 ref/timer l</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1979,
-      "updatedAt": "2026-06-07T13:14:35.144Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "2026 06 07 소스 에디터 세션 훅 분리 작업 요약",
-      "excerpt": "2026 06 07 소스 에디터 세션 훅 분리 작업 요약 변경 useSourceEditorSession.ts 를 추가해 source editor의 Monaco ref, active path ref, draft ref, draft sync timer를 한 hook으로 묶었다. MonitorShell.tsx 에서 inline applySourceEditorVisibleState , updateSourceDraft , currentEditorDraftContent , effectiveSourceDraf",
-      "html": "<p>2026 06 07 소스 에디터 세션 훅 분리 작업 요약 변경 useSourceEditorSession.ts 를 추가해 source editor의 Monaco ref, active path ref, draft ref, draft sync timer를 한 hook으로 묶었다. MonitorShell.tsx 에서 inline applySourceEditorVisibleState , updateSourceDraft , currentEditorDraftContent , effectiveSourceDrafts , draft sync timer 관리 코드를 제거했다. 저장, 전체 저장, 되돌리기 경로가 hook의 getActiveSourcePath</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1690,
-      "updatedAt": "2026-06-07T13:14:35.144Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-      "path": "_history/request-traces/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "2026 06 07 소스 에디터 세션 훅 분리 요청 추적",
-      "excerpt": "2026 06 07 소스 에디터 세션 훅 분리 요청 추적 요청 이전보다 넓은 범위로 계속 구현한다. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/source editor/useSourceEditorSession.ts platform desktop app/renderer/workspace monitor/components/workbench/source editor/index.ts platform desktop ap",
-      "html": "<p>2026 06 07 소스 에디터 세션 훅 분리 요청 추적 요청 이전보다 넓은 범위로 계속 구현한다. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/source editor/useSourceEditorSession.ts platform desktop app/renderer/workspace monitor/components/workbench/source editor/index.ts platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx platform desktop app/re</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1324,
-      "updatedAt": "2026-06-07T13:14:03.983Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-      "path": "_history/work-timings/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-      "category": "work-timing",
-      "language": "ko",
-      "title": "2026 06 07 소스 에디터 세션 훅 분리 작업 타이밍",
-      "excerpt": "2026 06 07 소스 에디터 세션 훅 분리 작업 타이밍 기록 22:08 22:09 KST: 웹 검색, 이전 source editor 분리 상태 확인, hook 경계 결정. 22:09 22:10 KST: useSourceEditorSession.ts , MonitorShell.tsx , source editor export, readiness source map 수정. 22:10 22:11 KST: 구조 계약 테스트와 Tool Studio 계약 테스트 갱신. 22:11 KST: 좁은 테스트와 W",
-      "html": "<p>2026 06 07 소스 에디터 세션 훅 분리 작업 타이밍 기록 22:08 22:09 KST: 웹 검색, 이전 source editor 분리 상태 확인, hook 경계 결정. 22:09 22:10 KST: useSourceEditorSession.ts , MonitorShell.tsx , source editor export, readiness source map 수정. 22:10 22:11 KST: 구조 계약 테스트와 Tool Studio 계약 테스트 갱신. 22:11 KST: 좁은 테스트와 Workspace Monitor check 통과 확인. 22:11 22:12 KST: 히스토리 기록, collect, Workspace Monit</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1155,
-      "updatedAt": "2026-06-07T13:14:03.983Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-plans-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-      "path": "_history/plans/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "2026 06 07 소스 에디터 세션 훅 분리 계획",
-      "excerpt": "2026 06 07 소스 에디터 세션 훅 분리 계획 목표 source editor의 상태 전환 helper 다음 단계로, editor session ref와 draft sync lifecycle을 MonitorShell.tsx 밖으로 이동한다. MonitorShell.tsx 는 UI event handler와 native invoke 흐름을 유지하되, 세션 상태의 직접 ref/timer 관리는 hook에 위임한다. 실행 슬라이스 1. useSourceEditorSession.ts 를 추가한다. 2",
-      "html": "<p>2026 06 07 소스 에디터 세션 훅 분리 계획 목표 source editor의 상태 전환 helper 다음 단계로, editor session ref와 draft sync lifecycle을 MonitorShell.tsx 밖으로 이동한다. MonitorShell.tsx 는 UI event handler와 native invoke 흐름을 유지하되, 세션 상태의 직접 ref/timer 관리는 hook에 위임한다. 실행 슬라이스 1. useSourceEditorSession.ts 를 추가한다. 2. hook에 Monaco editor ref, visible draft ref, active path ref, draft sync timer,</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1226,
-      "updatedAt": "2026-06-07T13:12:32.527Z",
       "historyDate": "2026-06-07",
       "historyYear": "2026",
       "workspaceArea": "_history/plans"
@@ -18254,153 +18741,41 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-05-auto-build-after-implementation-traceability-ko-md",
-      "path": "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/traceability.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "추적성: 구현 완료 후 자동 빌드 규칙",
-      "excerpt": "추적성: 구현 완료 후 자동 빌드 규칙 | 항목 | 연결 | | | | | 사용자 요청 | history/user requests/2026/2026 06 05 auto build after implementation.ko.md | | 요구사항 | REQ WS 091 | | 변경 기록 | requirements/changes/2026 06 05 auto build after implementation.ko.md | | 검토 기록 | requirements/reviews/2026 06 05 auto ",
-      "html": "<h1>추적성: 구현 완료 후 자동 빌드 규칙</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>사용자 요청</td><td><code>_history/user-requests/2026/2026-06-05-auto-build-after-implementation.ko.md</code></td></tr><tr><td>요구사항</td><td><code>REQ-WS-091</code></td></tr><tr><td>변경 기록</td><td><code>_requirements/changes/2026-06-05-auto-build-after-implementation.ko.md</code></td></tr><tr><td>검토 기록</td><td><code>_requirements/reviews/2026-06-05-auto-build-after-implementation.ko.md</code></td></tr><tr><td>스펙</td><td><code>_specs/workspace-platform/2026-06-05-auto-build-after-implementation/spec.ko.md</code></td></tr><tr><td>구현 문서</td><td><code>AGENTS.md</code>, <code>_docs/instructions/persistent-instructions*.md</code></td></tr><tr><td>메모리 anchor</td><td><code>agent-platform/configs/memory/bootstrap-manifest.json</code></td></tr><tr><td>평가</td><td><code>_history/evaluations/2026/2026-06-05-auto-build-after-implementation.ko.md</code></td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 753,
-      "updatedAt": "2026-06-05T12:53:58.422Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-05-auto-build-after-implementation-plan-ko-md",
-      "path": "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/plan.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "계획: 구현 완료 후 자동 빌드 규칙",
-      "excerpt": "계획: 구현 완료 후 자동 빌드 규칙 1. 웹 우선 확인과 memory bootstrap을 수행한다. 2. work mode를 governance 로 선택하고 이유를 기록한다. 3. persistent instruction, Codex adapter, memory bootstrap manifest를 갱신한다. 4. 요구사항 변경/검토와 스펙 산출물을 남긴다. 5. omission guard, docs audit, memory/config 검증, evaluator, diff check를 실행한다. ",
-      "html": "<h1>계획: 구현 완료 후 자동 빌드 규칙</h1>\n<p>1. 웹 우선 확인과 memory bootstrap을 수행한다.</p>\n<p>2. work_mode를 <code>governance</code>로 선택하고 이유를 기록한다.</p>\n<p>3. persistent instruction, Codex adapter, memory bootstrap manifest를 갱신한다.</p>\n<p>4. 요구사항 변경/검토와 스펙 산출물을 남긴다.</p>\n<p>5. omission guard, docs audit, memory/config 검증, evaluator, diff check를 실행한다.</p>\n<p>6. 커밋하고 <code>origin/main</code>에 푸시한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 465,
-      "updatedAt": "2026-06-05T12:53:58.421Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "specs-workspace-platform-2026-06-05-auto-build-after-implementation-spec-ko-md",
-      "path": "_specs/workspace-platform/2026-06-05-auto-build-after-implementation/spec.ko.md",
-      "category": "shared-spec",
-      "language": "ko",
-      "title": "스펙: 구현 완료 후 자동 빌드 규칙",
-      "excerpt": "스펙: 구현 완료 후 자동 빌드 규칙 목표 사용자가 직접 빌드하지 않아도 되도록, 에이전트가 의미 있는 구현 작업을 끝낼 때 담당 프로젝트의 build 또는 package 검증까지 수행한다. 요구사항 REQ WS 091 범위 durable instruction에 build/package close out rule 추가 Codex adapter인 AGENTS.md 에 실행 규칙 추가 memory bootstrap에서 해당 규칙을 hot persistent instruction anchor로 유지 요",
-      "html": "<h1>스펙: 구현 완료 후 자동 빌드 규칙</h1>\n<h2>목표</h2>\n<p>사용자가 직접 빌드하지 않아도 되도록, 에이전트가 의미 있는 구현 작업을 끝낼 때 담당 프로젝트의 build 또는 package 검증까지 수행한다.</p>\n<h2>요구사항</h2>\n<ul>\n<li><code>REQ-WS-091</code></li>\n</ul>\n<h2>범위</h2>\n<ul>\n<li>durable instruction에 build/package close-out rule 추가</li>\n<li>Codex adapter인 <code>AGENTS.md</code>에 실행 규칙 추가</li>\n<li>memory bootstrap에서 해당 규칙을 hot persistent instruction anchor로 유지</li>\n<li>요청, 계획, 검증, 평가 기록 생성</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>CI/CD pipeline 변경</li>\n<li>새 build runner 구현</li>\n<li>특정 프로젝트의 build script 변경</li>\n<li>docs-only 작업에 전체 제품 빌드 강제</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>향후 의미 있는 구현 작업은 최종 응답 전에 owning project build/package 명령을 실행한다.</li>\n<li>build가 불가능하거나 부적절하면 이유와 대체 검증을 기록한다.</li>\n<li>이번 governance 변경은 docs/config/evaluator 검증을 통과한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 994,
-      "updatedAt": "2026-06-05T12:53:58.421Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_specs/workspace-platform"
-    },
-    {
-      "id": "requirements-changes-2026-06-05-auto-build-after-implementation-ko-md",
-      "path": "_requirements/changes/2026-06-05-auto-build-after-implementation.ko.md",
-      "category": "requirement",
-      "language": "ko",
-      "title": "요구사항 변경: 구현 완료 후 자동 빌드",
-      "excerpt": "요구사항 변경: 구현 완료 후 자동 빌드 사용자 지시 구현이 끝날 때마다 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동으로 실행해야 한다. 변경 REQ WS 091 을 추가한다. 의미 있는 구현 작업은 최종 응답 전에 담당 프로젝트의 build 또는 package 명령을 실행해야 한다. build 명령이 없거나, 안전하지 않거나, 비용이 과도하거나, 변경 범위 밖이면 이유와 대체 검증을 기록해야 한다. 영향 범위 AGENTS.md docs/instructions/persistent ins",
-      "html": "<h1>요구사항 변경: 구현 완료 후 자동 빌드</h1>\n<h2>사용자 지시</h2>\n<ul>\n<li>구현이 끝날 때마다 사용자가 직접 빌드하지 않도록 에이전트가 빌드까지 자동으로 실행해야 한다.</li>\n</ul>\n<h2>변경</h2>\n<ul>\n<li><code>REQ-WS-091</code>을 추가한다.</li>\n<li>의미 있는 구현 작업은 최종 응답 전에 담당 프로젝트의 build 또는 package 명령을 실행해야 한다.</li>\n<li>build 명령이 없거나, 안전하지 않거나, 비용이 과도하거나, 변경 범위 밖이면 이유와 대체 검증을 기록해야 한다.</li>\n</ul>\n<h2>영향 범위</h2>\n<ul>\n<li><code>AGENTS.md</code></li>\n<li><code>_docs/instructions/persistent-instructions.md</code></li>\n<li><code>_docs/instructions/persistent-instructions.ko.md</code></li>\n<li><code>_docs/instructions/persistent-instructions.en.md</code></li>\n<li><code>agent-platform/configs/memory/bootstrap-manifest.json</code></li>\n</ul>\n<h2>검증 기준</h2>\n<ul>\n<li>향후 구현 작업 close-out에서 build/package 실행 결과가 최종 응답 또는 평가 기록에 포함되어야 한다.</li>\n<li>docs-only 또는 build 대상이 없는 작업은 예외 사유와 대체 검증을 기록해야 한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1042,
-      "updatedAt": "2026-06-05T12:53:35.043Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_requirements/changes"
-    },
-    {
-      "id": "requirements-reviews-2026-06-05-auto-build-after-implementation-ko-md",
-      "path": "_requirements/reviews/2026-06-05-auto-build-after-implementation.ko.md",
-      "category": "requirement",
-      "language": "ko",
-      "title": "요구사항 검토: 구현 완료 후 자동 빌드",
-      "excerpt": "요구사항 검토: 구현 완료 후 자동 빌드 결정 승인: REQ WS 091 은 workspace/platform 공통 운영 요구사항으로 적합하다. 이유 사용자의 반복 수동 빌드 작업을 줄이는 명확한 지속 지시다. 기존 close out gate와 검증 중심 운영 원칙에 부합한다. 프로젝트별 build command가 서로 다를 수 있으므로 특정 명령을 고정하지 않고 owning project의 build/package 명령을 찾는 방식이 유지보수에 맞다. 비범위 모든 docs only 작업에 무조건",
-      "html": "<h1>요구사항 검토: 구현 완료 후 자동 빌드</h1>\n<h2>결정</h2>\n<ul>\n<li>승인: <code>REQ-WS-091</code>은 workspace/platform 공통 운영 요구사항으로 적합하다.</li>\n</ul>\n<h2>이유</h2>\n<ul>\n<li>사용자의 반복 수동 빌드 작업을 줄이는 명확한 지속 지시다.</li>\n<li>기존 close-out gate와 검증 중심 운영 원칙에 부합한다.</li>\n<li>프로젝트별 build command가 서로 다를 수 있으므로 특정 명령을 고정하지 않고 owning project의 build/package 명령을 찾는 방식이 유지보수에 맞다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>모든 docs-only 작업에 무조건 전체 제품 빌드를 강제하지 않는다.</li>\n<li>CI/CD 시스템이나 새 빌드 자동화 도구 구현은 이번 범위가 아니다.</li>\n</ul>\n<h2>후속 검증</h2>\n<ul>\n<li>향후 구현 작업 close-out 기록은 build/package 결과 또는 명시적 예외 사유를 포함해야 한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 843,
-      "updatedAt": "2026-06-05T12:53:35.043Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "_requirements/reviews"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-local-history-hook-componentization-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-local-history-hook-componentization/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Local History Hook Componentization Tasks",
-      "excerpt": "Local History Hook Componentization Tasks | ID | 작업 | 상태 | | | | | | T1 | web first intake와 로컬 gap 확인 | done | | T2 | 관리자 기록 로딩 hook 생성 | done | | T3 | MonitorShell.tsx 에서 로딩/병합 helper 제거 | done | | T4 | History 화면 한국어 문구 정리 | done | | T5 | product gap registry와 요구사항 업데이트 | done ",
-      "html": "<h1>Local History Hook Componentization Tasks</h1>\n<table><thead><tr><th>ID</th><th>작업</th><th>상태</th></tr></thead><tbody><tr><td>T1</td><td>web-first intake와 로컬 gap 확인</td><td>done</td></tr><tr><td>T2</td><td>관리자 기록 로딩 hook 생성</td><td>done</td></tr><tr><td>T3</td><td><code>MonitorShell.tsx</code>에서 로딩/병합 helper 제거</td><td>done</td></tr><tr><td>T4</td><td>History 화면 한국어 문구 정리</td><td>done</td></tr><tr><td>T5</td><td>product gap registry와 요구사항 업데이트</td><td>done</td></tr><tr><td>T6</td><td>테스트/타입/빌드 검증</td><td>done</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 433,
-      "updatedAt": "2026-06-05T12:12:07.013Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-local-history-hook-componentization-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-local-history-hook-componentization/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Local History Hook Componentization Validation",
-      "excerpt": "Local History Hook Componentization Validation 초기 검증 corepack pnpm filter workspace monitor test : 통과, 52 tests corepack pnpm filter workspace monitor run check : 통과 python3 m json.tool platform desktop app/configs/product gap registry.json : 통과 PYTHONPATH=src python3 m agent pla",
-      "html": "<h1>Local History Hook Componentization Validation</h1>\n<h2>초기 검증</h2>\n<ul>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 52 tests</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과</li>\n<li><code>python3 -m json.tool platform-desktop-app/configs/product-gap-registry.json</code>: 통과</li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/product-gap-registry.json</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor collect</code>: 통과, inline documents 650개와 admin history records 2,227개 생성</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run audit:surfaces -- http://127.0.0.1:4185/#section-overview</code>: 통과, failures 없음</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: 통과, largest chunk 734,386 bytes</li>\n<li><code>corepack pnpm --filter workspace-monitor run check:history-payload</code>: 통과, documentJsonBytes 1,652,532 bytes</li>\n<li><code>git diff --check</code>: 통과</li>\n</ul>\n<h2>측정</h2>\n<ul>\n<li><code>MonitorShell.tsx</code>: 13,108 lines에서 12,970 lines로 감소</li>\n<li>신규 hook: <code>components/history/useAdminHistoryIndex.ts</code>, 207 lines</li>\n<li>관리자 기록 index는 module cache와 idle preload 경로를 가진다.</li>\n</ul>\n<h2>남은 검증</h2>\n<ul>\n<li>없음</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1312,
-      "updatedAt": "2026-06-05T12:12:07.013Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
       "date": "2026-06-08",
       "year": "2026",
-      "documentsCount": 29,
+      "documentsCount": 36,
       "categories": [
         {
           "category": "evaluation",
-          "count": 4
+          "count": 5
         },
         {
           "category": "plan",
-          "count": 4
+          "count": 5
         },
         {
           "category": "request-trace",
-          "count": 4
+          "count": 5
         },
         {
           "category": "user-request",
-          "count": 4
+          "count": 5
         },
         {
           "category": "web-search",
-          "count": 4
+          "count": 5
         },
         {
           "category": "work-summary",
-          "count": 4
+          "count": 5
         },
         {
           "category": "work-timing",
-          "count": 4
+          "count": 5
         },
         {
           "category": "daily-history",
@@ -18426,6 +18801,16 @@
           "title": "2026 06 08 Codex CLI PTY first run 평가",
           "excerpt": "2026 06 08 Codex CLI PTY first run 평가 평가 요구 충족: 부분 통과. Codex CLI 첫 실행/PTY 실행/어댑터 PATH 문제는 해결했다. 기존 모든 대형 TypeScript 파일 분리는 후속 범위가 남는다. 기능 보존: 통과. pipe session은 유지하고 TUI CLI만 PTY 경로로 라우팅했다. 구조 개선: 통과. Rust lib.rs 는 31줄, lib parts 최대 495줄이다. RuntimeTerminalDrawer와 하위 터미널 파일은 최대 498",
           "updatedAt": "2026-06-07T15:50:04.713Z",
+          "historyDate": "2026-06-08"
+        },
+        {
+          "id": "history-evaluations-2026-2026-06-08-desktop-project-management-platform-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-08-desktop-project-management-platform-evaluation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 08 Desktop Project Management Platform Evaluation Input",
+          "excerpt": "{ \"initial instruction\": \"Ollama, tools, and agent operations remain separate, while the desktop app should be implemented as a project management platform for Git workspaces, current work, plans, reports, and evidence.\", \"result summary\": \"Added a projectManagement snapshot mode",
+          "updatedAt": "2026-06-07T17:26:59.791Z",
           "historyDate": "2026-06-08"
         },
         {
@@ -18469,6 +18854,16 @@
           "historyDate": "2026-06-08"
         },
         {
+          "id": "history-plans-2026-2026-06-08-desktop-project-management-platform-ko-md",
+          "path": "_history/plans/2026/2026-06-08-desktop-project-management-platform.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "작업 계획: desktop project management platform",
+          "excerpt": "작업 계획: desktop project management platform 목표 데스크톱 앱의 프로젝트 탭을 Git 작업공간 기반 프로젝트 관리 허브로 구현하고, Ollama/툴/에이전트 운영은 분리 플랫폼/고급 기능으로 유지한다. 실행 순서 1. 공식 문서 검색 기록을 남긴다. 2. 제품 분리 registry에 프로젝트 포트폴리오/마일스톤 산출물을 추가한다. 3. snapshot 타입과 collector에 project management model을 추가한다. 4. customer snaps",
+          "updatedAt": "2026-06-07T17:25:46.782Z",
+          "historyDate": "2026-06-08"
+        },
+        {
           "id": "history-plans-2026-2026-06-08-simple-user-interface-ko-md",
           "path": "_history/plans/2026/2026-06-08-simple-user-interface.ko.md",
           "category": "plan",
@@ -18509,6 +18904,16 @@
           "historyDate": "2026-06-08"
         },
         {
+          "id": "history-request-traces-2026-2026-06-08-desktop-project-management-platform-ko-md",
+          "path": "_history/request-traces/2026/2026-06-08-desktop-project-management-platform.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: desktop project management platform",
+          "excerpt": "요청 결과 추적: desktop project management platform 날짜: 2026 06 08 요청 요약: 분리된 agent/tool/Ollama 플랫폼과 별개로 데스크톱 앱을 프로젝트 관리 플랫폼으로 구현 결과 상태: 구현 및 검증 완료 산출물 요구사항: requirements/changes/2026 06 08 desktop project management platform.ko.md 프로젝트 요구사항: platform desktop app/docs/requirements/2026",
+          "updatedAt": "2026-06-07T17:25:46.782Z",
+          "historyDate": "2026-06-08"
+        },
+        {
           "id": "history-request-traces-2026-2026-06-08-simple-user-interface-ko-md",
           "path": "_history/request-traces/2026/2026-06-08-simple-user-interface.ko.md",
           "category": "request-trace",
@@ -18534,8 +18939,8 @@
           "category": "request-trace",
           "language": "ko",
           "title": "요청 결과 추적: workspace tracker product split",
-          "excerpt": "요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현 및 검증 완료, 커밋/푸시 대기 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: ",
-          "updatedAt": "2026-06-07T17:05:04.830Z",
+          "excerpt": "요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현, 검증, 커밋, 푸시 완료 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: his",
+          "updatedAt": "2026-06-07T17:07:28.129Z",
           "historyDate": "2026-06-08"
         },
         {
@@ -18546,6 +18951,16 @@
           "title": "2026 06 08 사용자 요청 요약",
           "excerpt": "2026 06 08 사용자 요청 요약 사용자는 플랫폼 CLI 탭에서 Codex CLI 연결 설정과 PTY 기반 실행이 제대로 되지 않아 첫 작업 시작 자체가 막힌다고 보고했다. 플랫폼이 사용자를 대신해 첫 실행 경로를 자동으로 복구해야 하며, 이후 Rust lib.rs 와 TypeScript 대형 파일을 기능별로 분리하고 한국어 주석을 추가해 달라고 요청했다.",
           "updatedAt": "2026-06-07T15:50:04.715Z",
+          "historyDate": "2026-06-08"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-08-desktop-project-management-platform-ko-md",
+          "path": "_history/user-requests/2026/2026-06-08-desktop-project-management-platform.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: desktop project management platform",
+          "excerpt": "사용자 요청 요약: desktop project management platform 날짜: 2026 06 08 범위: platform desktop app/ 원문 보존 여부: 전체 원문은 보존하지 않음 요약 사용자는 이미 desktop workspace tracker와 agent/tool/Ollama 운영 플랫폼이 크게 분리된 상태에서, 데스크톱 앱 쪽을 프로젝트 관리 플랫폼으로 완성하라고 요청했다. Ollama, 툴, 에이전트 관리류는 별도 플랫폼으로 두고, 데스크톱은 Git 작업공간 가져오기,",
+          "updatedAt": "2026-06-07T17:24:54.095Z",
           "historyDate": "2026-06-08"
         },
         {
@@ -18589,6 +19004,16 @@
           "historyDate": "2026-06-08"
         },
         {
+          "id": "history-web-searches-2026-2026-06-08-desktop-project-management-platform-ko-md",
+          "path": "_history/web-searches/2026/2026-06-08-desktop-project-management-platform.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: desktop project management platform",
+          "excerpt": "웹 검색 기록: desktop project management platform 날짜: 2026 06 08 작업: 데스크톱 앱을 Ollama/툴/에이전트 운영과 분리된 프로젝트 관리 플랫폼으로 구현 검색 방식: 공식 문서 우선, 로컬 구현 전 확인 확인한 출처 | 출처 | URL | 신뢰도 | 이번 계획 영향 | | | | | | | Git worktree 공식 문서 | https://git scm.com/docs/git worktree.html | 높음 | durable 작업 단위를 Git 경계",
+          "updatedAt": "2026-06-07T17:24:54.095Z",
+          "historyDate": "2026-06-08"
+        },
+        {
           "id": "history-web-searches-2026-2026-06-08-simple-user-interface-ko-md",
           "path": "_history/web-searches/2026/2026-06-08-simple-user-interface.ko.md",
           "category": "web-search",
@@ -18626,6 +19051,16 @@
           "title": "2026 06 08 Codex CLI PTY first run 작업 요약",
           "excerpt": "2026 06 08 Codex CLI PTY first run 작업 요약 Codex CLI가 터미널에서는 보이지만 플랫폼 CLI 탭에서는 어댑터가 설정되지 않았다고 보이는 문제를 해결했다. 원인은 GUI 앱 PATH와 로그인 셸 PATH 차이, 그리고 TUI CLI를 pipe only session으로 시작하는 구조였다. 이번 변경은 AI CLI 어댑터용 PTY launch command를 추가하고, MonitorShell에서 Codex/Claude/Gemini/OpenCode/Claw Code를",
           "updatedAt": "2026-06-07T15:50:04.715Z",
+          "historyDate": "2026-06-08"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-08-desktop-project-management-platform-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-08-desktop-project-management-platform.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: desktop project management platform",
+          "excerpt": "작업 요약: desktop project management platform 날짜: 2026 06 08 범위: platform desktop app/ 완료한 작업 프로젝트 관리 snapshot model을 추가했다. collector가 프로젝트 registry, requirements, documents, history, tasks를 결합해 portfolio/milestone/workflow/recent trail을 만든다. 고객용 snapshot에서 내부 project portfolio/reso",
+          "updatedAt": "2026-06-07T17:25:46.782Z",
           "historyDate": "2026-06-08"
         },
         {
@@ -18669,6 +19104,16 @@
           "historyDate": "2026-06-08"
         },
         {
+          "id": "history-work-timings-2026-2026-06-08-desktop-project-management-platform-json",
+          "path": "_history/work-timings/2026/2026-06-08-desktop-project-management-platform.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 08 Desktop Project Management Platform",
+          "excerpt": "{ \"task id\": \"2026 06 08 desktop project management platform\", \"title\": \"Desktop project management platform\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seco",
+          "updatedAt": "2026-06-07T17:26:41.653Z",
+          "historyDate": "2026-06-08"
+        },
+        {
           "id": "history-work-timings-2026-2026-06-08-simple-user-interface-json",
           "path": "_history/work-timings/2026/2026-06-08-simple-user-interface.json",
           "category": "work-timing",
@@ -18695,7 +19140,7 @@
           "language": "unknown",
           "title": "2026 06 08 Workspace Tracker Product Split",
           "excerpt": "{ \"task id\": \"2026 06 08 workspace tracker product split\", \"title\": \"Workspace tracker product split\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seconds\": ",
-          "updatedAt": "2026-06-07T17:05:23.467Z",
+          "updatedAt": "2026-06-07T17:07:34.968Z",
           "historyDate": "2026-06-08"
         }
       ]
@@ -18703,35 +19148,35 @@
     {
       "date": "2026-06-07",
       "year": "2026",
-      "documentsCount": 67,
+      "documentsCount": 60,
       "categories": [
         {
           "category": "evaluation",
-          "count": 10
+          "count": 9
         },
         {
           "category": "request-trace",
-          "count": 10
+          "count": 9
         },
         {
           "category": "work-summary",
-          "count": 10
+          "count": 9
         },
         {
           "category": "work-timing",
-          "count": 10
+          "count": 9
         },
         {
           "category": "user-request",
-          "count": 9
+          "count": 8
         },
         {
           "category": "web-search",
-          "count": 9
+          "count": 8
         },
         {
           "category": "plan",
-          "count": 8
+          "count": 7
         },
         {
           "category": "daily-history",
@@ -18787,16 +19232,6 @@
           "title": "작업 평가",
           "excerpt": "작업 평가 날짜: 2026 06 07 평가 대상: 런타임 프리셋/문구 모듈 분리. 기준: 동작 계약 유지 MonitorShell 대형 파일 축소 readiness/test 계약 갱신 결과: nativeWorkspaceCopy 는 runtimeWorkspaceCopy.ts 로 이동했다. 세션 모드, task pipe 프리셋, task pipe prompt key/prompt renderer, runtime init 기본값은 runtimeSessionPresets.ts 로 이동했다. 기존 호출부는 같",
           "updatedAt": "2026-06-07T14:03:59.055Z",
-          "historyDate": "2026-06-07"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-          "path": "_history/evaluations/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "2026 06 07 소스 에디터 세션 훅 분리 평가",
-          "excerpt": "2026 06 07 소스 에디터 세션 훅 분리 평가 평가 입력 installation occurred : false resource risk occurred : true omission check targets : history/omission checks/2026/2026 06 07 source editor session hook refactor.ko.md resource check targets : history/resource checks/2026/2026 06 07 source editor",
-          "updatedAt": "2026-06-07T13:14:35.144Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18880,16 +19315,6 @@
           "historyDate": "2026-06-07"
         },
         {
-          "id": "history-plans-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-          "path": "_history/plans/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "2026 06 07 소스 에디터 세션 훅 분리 계획",
-          "excerpt": "2026 06 07 소스 에디터 세션 훅 분리 계획 목표 source editor의 상태 전환 helper 다음 단계로, editor session ref와 draft sync lifecycle을 MonitorShell.tsx 밖으로 이동한다. MonitorShell.tsx 는 UI event handler와 native invoke 흐름을 유지하되, 세션 상태의 직접 ref/timer 관리는 hook에 위임한다. 실행 슬라이스 1. useSourceEditorSession.ts 를 추가한다. 2",
-          "updatedAt": "2026-06-07T13:12:32.527Z",
-          "historyDate": "2026-06-07"
-        },
-        {
           "id": "history-plans-2026-2026-06-07-source-workbench-controller-hook-ko-md",
           "path": "_history/plans/2026/2026-06-07-source-workbench-controller-hook.ko.md",
           "category": "plan",
@@ -18967,16 +19392,6 @@
           "title": "요청 결과 추적",
           "excerpt": "요청 결과 추적 날짜: 2026 06 07 요청 요약: 계속 구현하며 큰 소스와 중복 구조를 줄인다. 실행 범위: 런타임 작업공간 문구 모듈화 세션/task pipe 프리셋 모듈화 readiness/test 계약 갱신 산출물: platform desktop app/renderer/workspace monitor/components/features/runtimeWorkspaceCopy.ts platform desktop app/renderer/workspace monitor/components/fe",
           "updatedAt": "2026-06-07T14:03:59.055Z",
-          "historyDate": "2026-06-07"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-          "path": "_history/request-traces/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "2026 06 07 소스 에디터 세션 훅 분리 요청 추적",
-          "excerpt": "2026 06 07 소스 에디터 세션 훅 분리 요청 추적 요청 이전보다 넓은 범위로 계속 구현한다. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/source editor/useSourceEditorSession.ts platform desktop app/renderer/workspace monitor/components/workbench/source editor/index.ts platform desktop ap",
-          "updatedAt": "2026-06-07T13:14:03.983Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -19070,16 +19485,6 @@
           "historyDate": "2026-06-07"
         },
         {
-          "id": "history-user-requests-2026-2026-06-07-source-workbench-controller-hook-ko-md",
-          "path": "_history/user-requests/2026/2026-06-07-source-workbench-controller-hook.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "2026 06 07 source workbench controller hook 요청",
-          "excerpt": "2026 06 07 source workbench controller hook 요청 요약 사용자는 좁은 수정이 아니라 넓은 부분도 계획을 세워 계속 구현하라고 요청했다. 앞선 source editor 세션 훅 분리 다음 후보였던 native invoke 기반 source workbench handler 분리를 진행 대상으로 삼았다. 작업 범위 MonitorShell.tsx 에 남은 source file load/save, AGENTS.md 준비, template insert, patch conte",
-          "updatedAt": "2026-06-07T13:23:46.983Z",
-          "historyDate": "2026-06-07"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-07-source-workbench-panel-split-ko-md",
           "path": "_history/user-requests/2026/2026-06-07-source-workbench-panel-split.ko.md",
           "category": "user-request",
@@ -19160,16 +19565,6 @@
           "historyDate": "2026-06-07"
         },
         {
-          "id": "history-web-searches-2026-2026-06-07-source-workbench-controller-hook-ko-md",
-          "path": "_history/web-searches/2026/2026-06-07-source-workbench-controller-hook.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "2026 06 07 source workbench controller hook 웹 검색 기록",
-          "excerpt": "2026 06 07 source workbench controller hook 웹 검색 기록 검색 쿼리 React official docs custom hooks reusing logic extracting event handlers useCallback React official docs useCallback custom hook returning functions TypeScript official docs type only imports exports modules 확인한 출처 React R",
-          "updatedAt": "2026-06-07T13:23:46.983Z",
-          "historyDate": "2026-06-07"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-07-source-workbench-panel-split-ko-md",
           "path": "_history/web-searches/2026/2026-06-07-source-workbench-panel-split.ko.md",
           "category": "web-search",
@@ -19247,16 +19642,6 @@
           "title": "작업 요약",
           "excerpt": "작업 요약 날짜: 2026 06 07 변경: components/features/runtimeWorkspaceCopy.ts 추가. components/features/runtimeSessionPresets.ts 추가. MonitorShell.tsx 에서 런타임 문구/프리셋 로컬 정의 제거. readiness source map과 tool studio.test.mjs 구조 계약 갱신. 1차 검증: corepack pnpm filter workspace monitor exec tsc noEmit : ",
           "updatedAt": "2026-06-07T14:03:59.054Z",
-          "historyDate": "2026-06-07"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "2026 06 07 소스 에디터 세션 훅 분리 작업 요약",
-          "excerpt": "2026 06 07 소스 에디터 세션 훅 분리 작업 요약 변경 useSourceEditorSession.ts 를 추가해 source editor의 Monaco ref, active path ref, draft ref, draft sync timer를 한 hook으로 묶었다. MonitorShell.tsx 에서 inline applySourceEditorVisibleState , updateSourceDraft , currentEditorDraftContent , effectiveSourceDraf",
-          "updatedAt": "2026-06-07T13:14:35.144Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -19350,16 +19735,6 @@
           "historyDate": "2026-06-07"
         },
         {
-          "id": "history-work-timings-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-          "path": "_history/work-timings/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-          "category": "work-timing",
-          "language": "ko",
-          "title": "2026 06 07 소스 에디터 세션 훅 분리 작업 타이밍",
-          "excerpt": "2026 06 07 소스 에디터 세션 훅 분리 작업 타이밍 기록 22:08 22:09 KST: 웹 검색, 이전 source editor 분리 상태 확인, hook 경계 결정. 22:09 22:10 KST: useSourceEditorSession.ts , MonitorShell.tsx , source editor export, readiness source map 수정. 22:10 22:11 KST: 구조 계약 테스트와 Tool Studio 계약 테스트 갱신. 22:11 KST: 좁은 테스트와 W",
-          "updatedAt": "2026-06-07T13:14:03.983Z",
-          "historyDate": "2026-06-07"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-07-source-workbench-controller-hook-ko-md",
           "path": "_history/work-timings/2026/2026-06-07-source-workbench-controller-hook.ko.md",
           "category": "work-timing",
@@ -19418,36 +19793,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 3213,
+      "documents": 3220,
       "days": 9,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1131
+          "count": 1132
         },
         {
           "category": "web-search",
-          "count": 498
+          "count": 499
         },
         {
           "category": "request-trace",
-          "count": 427
+          "count": 428
         },
         {
           "category": "plan",
-          "count": 409
+          "count": 410
         },
         {
           "category": "work-timing",
-          "count": 346
+          "count": 347
         },
         {
           "category": "user-request",
-          "count": 212
+          "count": 213
         },
         {
           "category": "work-summary",
-          "count": 179
+          "count": 180
         },
         {
           "category": "daily-history",
@@ -19458,7 +19833,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 7276226,
+      "totalSourceBytes": 7293642,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19485,9 +19860,9 @@
       "monitorEvents": 64,
       "evidenceEvents": 27,
       "decisionEvents": 0,
-      "openSignals": 17,
+      "openSignals": 16,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-07T17:06:09.975Z",
+      "latestEventAt": "2026-06-07T17:26:59.791Z",
       "historyDays": 2
     },
     "lanes": [
@@ -19598,19 +19973,109 @@
     ],
     "events": [
       {
-        "id": "history-history-evaluations-2026-2026-06-08-workspace-tracker-product-split-evaluation-input-json",
+        "id": "history-history-evaluations-2026-2026-06-08-desktop-project-management-platform-evaluation-input-json",
         "sourceType": "history",
         "signalType": "evaluation",
         "lane": "verification",
         "severity": "verified",
         "status": "evaluation",
-        "title": "2026 06 08 Workspace Tracker Product Split Evaluation Input",
-        "detail": "{ \"schema version\": \"2026 06 08\", \"work mode\": \"governance\", \"web search record targets\": \" history/web searches/2026/2026 06 08 workspace tracker product split.ko.md\" , \"user request summary targets\": \" history/user requests/2026/2026 06 08 workspace tracker product split.ko.md\"",
-        "path": "_history/evaluations/2026/2026-06-08-workspace-tracker-product-split-evaluation-input.json",
+        "title": "2026 06 08 Desktop Project Management Platform Evaluation Input",
+        "detail": "{ \"initial instruction\": \"Ollama, tools, and agent operations remain separate, while the desktop app should be implemented as a project management platform for Git workspaces, current work, plans, reports, and evidence.\", \"result summary\": \"Added a projectManagement snapshot mode",
+        "path": "_history/evaluations/2026/2026-06-08-desktop-project-management-platform-evaluation-input.json",
         "category": "evaluation",
         "language": "unknown",
         "date": "2026-06-08",
-        "timestamp": "2026-06-07T17:06:09.975Z"
+        "timestamp": "2026-06-07T17:26:59.791Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-08-desktop-project-management-platform-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 08 Desktop Project Management Platform",
+        "detail": "{ \"task id\": \"2026 06 08 desktop project management platform\", \"title\": \"Desktop project management platform\", \"work mode\": \"standard\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seco",
+        "path": "_history/work-timings/2026/2026-06-08-desktop-project-management-platform.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T17:26:41.653Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-08-desktop-project-management-platform-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "요청 결과 추적: desktop project management platform",
+        "detail": "요청 결과 추적: desktop project management platform 날짜: 2026 06 08 요청 요약: 분리된 agent/tool/Ollama 플랫폼과 별개로 데스크톱 앱을 프로젝트 관리 플랫폼으로 구현 결과 상태: 구현 및 검증 완료 산출물 요구사항: requirements/changes/2026 06 08 desktop project management platform.ko.md 프로젝트 요구사항: platform desktop app/docs/requirements/2026",
+        "path": "_history/request-traces/2026/2026-06-08-desktop-project-management-platform.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T17:25:46.782Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-08-desktop-project-management-platform-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "작업 계획: desktop project management platform",
+        "detail": "작업 계획: desktop project management platform 목표 데스크톱 앱의 프로젝트 탭을 Git 작업공간 기반 프로젝트 관리 허브로 구현하고, Ollama/툴/에이전트 운영은 분리 플랫폼/고급 기능으로 유지한다. 실행 순서 1. 공식 문서 검색 기록을 남긴다. 2. 제품 분리 registry에 프로젝트 포트폴리오/마일스톤 산출물을 추가한다. 3. snapshot 타입과 collector에 project management model을 추가한다. 4. customer snaps",
+        "path": "_history/plans/2026/2026-06-08-desktop-project-management-platform.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T17:25:46.782Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-08-desktop-project-management-platform-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "ready",
+        "title": "작업 요약: desktop project management platform",
+        "detail": "작업 요약: desktop project management platform 날짜: 2026 06 08 범위: platform desktop app/ 완료한 작업 프로젝트 관리 snapshot model을 추가했다. collector가 프로젝트 registry, requirements, documents, history, tasks를 결합해 portfolio/milestone/workflow/recent trail을 만든다. 고객용 snapshot에서 내부 project portfolio/reso",
+        "path": "_history/work-summaries/2026/2026-06-08-desktop-project-management-platform.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T17:25:46.782Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-08-desktop-project-management-platform-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: desktop project management platform",
+        "detail": "웹 검색 기록: desktop project management platform 날짜: 2026 06 08 작업: 데스크톱 앱을 Ollama/툴/에이전트 운영과 분리된 프로젝트 관리 플랫폼으로 구현 검색 방식: 공식 문서 우선, 로컬 구현 전 확인 확인한 출처 | 출처 | URL | 신뢰도 | 이번 계획 영향 | | | | | | | Git worktree 공식 문서 | https://git scm.com/docs/git worktree.html | 높음 | durable 작업 단위를 Git 경계",
+        "path": "_history/web-searches/2026/2026-06-08-desktop-project-management-platform.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T17:24:54.095Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-08-desktop-project-management-platform-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: desktop project management platform",
+        "detail": "사용자 요청 요약: desktop project management platform 날짜: 2026 06 08 범위: platform desktop app/ 원문 보존 여부: 전체 원문은 보존하지 않음 요약 사용자는 이미 desktop workspace tracker와 agent/tool/Ollama 운영 플랫폼이 크게 분리된 상태에서, 데스크톱 앱 쪽을 프로젝트 관리 플랫폼으로 완성하라고 요청했다. Ollama, 툴, 에이전트 관리류는 별도 플랫폼으로 두고, 데스크톱은 Git 작업공간 가져오기,",
+        "path": "_history/user-requests/2026/2026-06-08-desktop-project-management-platform.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T17:24:54.095Z"
       },
       {
         "id": "history-history-work-timings-2026-2026-06-08-workspace-tracker-product-split-json",
@@ -19625,7 +20090,7 @@
         "category": "work-timing",
         "language": "unknown",
         "date": "2026-06-08",
-        "timestamp": "2026-06-07T17:05:23.467Z"
+        "timestamp": "2026-06-07T17:07:34.968Z"
       },
       {
         "id": "history-history-request-traces-2026-2026-06-08-workspace-tracker-product-split-ko-md",
@@ -19635,12 +20100,27 @@
         "severity": "evidence",
         "status": "ready",
         "title": "요청 결과 추적: workspace tracker product split",
-        "detail": "요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현 및 검증 완료, 커밋/푸시 대기 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: ",
+        "detail": "요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현, 검증, 커밋, 푸시 완료 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: his",
         "path": "_history/request-traces/2026/2026-06-08-workspace-tracker-product-split.ko.md",
         "category": "request-trace",
         "language": "ko",
         "date": "2026-06-08",
-        "timestamp": "2026-06-07T17:05:04.830Z"
+        "timestamp": "2026-06-07T17:07:28.129Z"
+      },
+      {
+        "id": "history-history-evaluations-2026-2026-06-08-workspace-tracker-product-split-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 08 Workspace Tracker Product Split Evaluation Input",
+        "detail": "{ \"schema version\": \"2026 06 08\", \"work mode\": \"governance\", \"web search record targets\": \" history/web searches/2026/2026 06 08 workspace tracker product split.ko.md\" , \"user request summary targets\": \" history/user requests/2026/2026 06 08 workspace tracker product split.ko.md\"",
+        "path": "_history/evaluations/2026/2026-06-08-workspace-tracker-product-split-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T17:06:09.975Z"
       },
       {
         "id": "history-history-2026-2026-06-08-md",
@@ -20931,111 +21411,6 @@
         "language": "ko",
         "date": "2026-06-07",
         "timestamp": "2026-06-07T13:23:46.984Z"
-      },
-      {
-        "id": "history-history-web-searches-2026-2026-06-07-source-workbench-controller-hook-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "2026 06 07 source workbench controller hook 웹 검색 기록",
-        "detail": "2026 06 07 source workbench controller hook 웹 검색 기록 검색 쿼리 React official docs custom hooks reusing logic extracting event handlers useCallback React official docs useCallback custom hook returning functions TypeScript official docs type only imports exports modules 확인한 출처 React R",
-        "path": "_history/web-searches/2026/2026-06-07-source-workbench-controller-hook.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T13:23:46.983Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-07-source-workbench-controller-hook-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "2026 06 07 source workbench controller hook 요청",
-        "detail": "2026 06 07 source workbench controller hook 요청 요약 사용자는 좁은 수정이 아니라 넓은 부분도 계획을 세워 계속 구현하라고 요청했다. 앞선 source editor 세션 훅 분리 다음 후보였던 native invoke 기반 source workbench handler 분리를 진행 대상으로 삼았다. 작업 범위 MonitorShell.tsx 에 남은 source file load/save, AGENTS.md 준비, template insert, patch conte",
-        "path": "_history/user-requests/2026/2026-06-07-source-workbench-controller-hook.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T13:23:46.983Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "evaluation",
-        "title": "2026 06 07 소스 에디터 세션 훅 분리 평가",
-        "detail": "2026 06 07 소스 에디터 세션 훅 분리 평가 평가 입력 installation occurred : false resource risk occurred : true omission check targets : history/omission checks/2026/2026 06 07 source editor session hook refactor.ko.md resource check targets : history/resource checks/2026/2026 06 07 source editor",
-        "path": "_history/evaluations/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T13:14:35.144Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "2026 06 07 소스 에디터 세션 훅 분리 작업 요약",
-        "detail": "2026 06 07 소스 에디터 세션 훅 분리 작업 요약 변경 useSourceEditorSession.ts 를 추가해 source editor의 Monaco ref, active path ref, draft ref, draft sync timer를 한 hook으로 묶었다. MonitorShell.tsx 에서 inline applySourceEditorVisibleState , updateSourceDraft , currentEditorDraftContent , effectiveSourceDraf",
-        "path": "_history/work-summaries/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T13:14:35.144Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 07 소스 에디터 세션 훅 분리 작업 타이밍",
-        "detail": "2026 06 07 소스 에디터 세션 훅 분리 작업 타이밍 기록 22:08 22:09 KST: 웹 검색, 이전 source editor 분리 상태 확인, hook 경계 결정. 22:09 22:10 KST: useSourceEditorSession.ts , MonitorShell.tsx , source editor export, readiness source map 수정. 22:10 22:11 KST: 구조 계약 테스트와 Tool Studio 계약 테스트 갱신. 22:11 KST: 좁은 테스트와 W",
-        "path": "_history/work-timings/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-        "category": "work-timing",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T13:14:03.983Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "2026 06 07 소스 에디터 세션 훅 분리 요청 추적",
-        "detail": "2026 06 07 소스 에디터 세션 훅 분리 요청 추적 요청 이전보다 넓은 범위로 계속 구현한다. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/source editor/useSourceEditorSession.ts platform desktop app/renderer/workspace monitor/components/workbench/source editor/index.ts platform desktop ap",
-        "path": "_history/request-traces/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T13:14:03.983Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "2026 06 07 소스 에디터 세션 훅 분리 계획",
-        "detail": "2026 06 07 소스 에디터 세션 훅 분리 계획 목표 source editor의 상태 전환 helper 다음 단계로, editor session ref와 draft sync lifecycle을 MonitorShell.tsx 밖으로 이동한다. MonitorShell.tsx 는 UI event handler와 native invoke 흐름을 유지하되, 세션 상태의 직접 ref/timer 관리는 hook에 위임한다. 실행 슬라이스 1. useSourceEditorSession.ts 를 추가한다. 2",
-        "path": "_history/plans/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T13:12:32.527Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23293,9 +23668,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 47905,
-      "lineCount": 1261,
-      "updatedAt": "2026-06-07T17:03:21.287Z",
+      "sizeBytes": 48759,
+      "lineCount": 1285,
+      "updatedAt": "2026-06-07T17:21:37.396Z",
       "truncated": true,
       "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { execFileSync } from \"node:child_process\";\n\nimport {\n  checkDesktopBuildPipeline,\n  desktopBuildPipelineRequiredFiles\n} from \"./readiness/desktop-build-pipeline.mjs\";\nimport {\n  desktopReadinessRequiredSourceFiles,\n  desktopReadinessSourcePaths,\n  joinSourceMap,\n  monitorWorkbenchSourceKeys,\n  readSourceMap,\n  tauriRuntimeSourceKeys\n} from \"./readiness/source-structure.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nconst requiredFiles = [\n  \"README.md\",\n  \"README.ko.md\",\n  \"README.en.md\",\n  \"package.json\",\n  \"configs/desktop-distribution-registry.json\",\n  \"configs/product-feature-registry.json\",\n  \"configs/product-gap-registry.json\",\n  \"configs/claude-code-design-transfer-registry.json\",\n  \"configs/reference-platform-advantage-registry.json\",\n  \"configs/runtime-data-boundary-registry.json\",\n  \"configs/service-readiness-registry.json\",\n  \"configs/macos-execution-profile.json\",\n  \"configs/windows-execution-profile.json\",\n  \"configs/user-flow-registry.json\",\n  \"runtime-contracts/installer-shell-runtime-contract.json\",\n  \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n  \"ru",
       "previewBytes": 1200
@@ -23579,9 +23954,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 16696,
-      "lineCount": 309,
-      "updatedAt": "2026-06-07T16:52:37.897Z",
+      "sizeBytes": 16933,
+      "lineCount": 313,
+      "updatedAt": "2026-06-07T17:16:27.057Z",
       "truncated": true,
       "preview": "import { readFileSync } from \"node:fs\";\nimport { basename, join } from \"node:path\";\n\n// Rust feature module 목록은 실제 파일 존재 검사와 runtime source aggregate의 기준이다.\nexport const tauriFeatureModuleFiles = [\n  \"src-tauri/src/features/mod.rs\",\n  \"src-tauri/src/features/app_shell.rs\",\n  \"src-tauri/src/features/cli.rs\",\n  \"src-tauri/src/features/native.rs\",\n  \"src-tauri/src/features/workspace.rs\",\n  \"src-tauri/src/features/providers.rs\",\n  \"src-tauri/src/features/app_update.rs\",\n  \"src-tauri/src/features/diagnostics.rs\",\n  \"src-tauri/src/features/service_readiness.rs\",\n  \"src-tauri/src/features/agent_factory.rs\",\n  \"src-tauri/src/features/decisions.rs\"\n];\n\nexport const tauriFeatureModuleNames = tauriFeatureModuleFiles.map((file) => basename(file));\n\nexport const tauriLibPartFiles = [\n  \"src-tauri/src/lib_parts/01_imports_and_core_types.rs\",\n  \"src-tauri/src/lib_parts/02_native_reports_and_preferences.rs\",\n  \"src-tauri/src/lib_parts/03_provider_and_git_types.rs\",\n  \"src-tauri/src/lib_parts/04_decision_types_and_constants.rs\",\n  \"src-tauri/src/lib_parts/05_adapter_catalog_and_probe_commands.rs\",\n  \"src-tauri/src/lib_parts/06_task_records_and_front_commands.rs\",\n  \"src-tauri/src/lib_parts/07_cli_s",
       "previewBytes": 1234
@@ -24242,9 +24617,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 59617,
-      "lineCount": 1356,
-      "updatedAt": "2026-06-07T16:55:20.238Z",
+      "sizeBytes": 60546,
+      "lineCount": 1378,
+      "updatedAt": "2026-06-07T17:16:55.206Z",
       "truncated": true,
       "preview": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nimport {\n  desktopReadinessSourcePaths,\n  joinSourceMap,\n  monitorWorkbenchSourceKeys,\n  readSourceMap,\n  tauriFeatureModuleNames,\n  tauriRuntimeSourceKeys\n} from \"../scripts/readiness/source-structure.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  for (const featureModule of tauriFeatureModuleNames) {\n    assert.equal(existsSync(join(root, \"src-tauri/src/features\", featureModule)), true);\n  }\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSy",
       "previewBytes": 1200
@@ -24832,7 +25207,7 @@
           "transient tool output"
         ],
         "uiEntry": "Overview, History, Documents, Requirements",
-        "documentCount": 121,
+        "documentCount": 117,
         "sourceFileCount": 0
       },
       {
@@ -24882,7 +25257,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 95,
+        "documentCount": 96,
         "sourceFileCount": 45
       },
       {
@@ -25024,7 +25399,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,356 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,378 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -25033,7 +25408,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-scripts-check-readiness-mjs",
         "label": "Large source surface",
-        "signal": "1,261 lines in platform-desktop-app/scripts/check-readiness.mjs",
+        "signal": "1,285 lines in platform-desktop-app/scripts/check-readiness.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -25071,16 +25446,16 @@
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1356,
-        "sizeBytes": 59617,
+        "lineCount": 1378,
+        "sizeBytes": 60546,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
         "path": "platform-desktop-app/scripts/check-readiness.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1261,
-        "sizeBytes": 47905,
+        "lineCount": 1285,
+        "sizeBytes": 48759,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       }
     ]
@@ -27129,6 +27504,8 @@
         }
       ],
       "trackedOutputs": [
+        "project_portfolio",
+        "project_milestone_status",
         "current_task_summary",
         "plan",
         "task_sequence",
@@ -27202,6 +27579,8 @@
     "uiPolicy": {
       "homePriority": [
         "workspace_import",
+        "project_portfolio",
+        "project_milestone_status",
         "current_work_timeline",
         "terminal_cli_run",
         "evidence_and_reports",
@@ -27230,10 +27609,13 @@
         "structure"
       ],
       "homeCopyRule": "Home copy shall talk about Git workspaces, current work, task reports, evidence, terminal runs, and AI coding tools as guest surfaces.",
-      "configurationRule": "Customization, provider credentials, direct model execution, Ollama, agent factory, and tool builder controls shall not be the default first-screen path."
+      "configurationRule": "Customization, provider credentials, direct model execution, Ollama, agent factory, and tool builder controls shall not be the default first-screen path.",
+      "projectManagementRule": "The projects section shall behave like the desktop project management hub: import Git repositories, show portfolio health, expose milestone status, and link reports, evidence, task order, and terminal run state before advanced operator controls."
     },
     "validationGates": [
       "workspace snapshot exposes productSplit",
+      "workspace snapshot exposes projectManagement",
+      "projects section renders ProjectManagementPanel",
       "home screen includes a product split panel",
       "home default task intents do not start with agent factory or tool studio",
       "product feature registry primary product is workspace_tracker",
@@ -28993,13 +29375,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 4555,
+      "sourceDocuments": 4568,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-07T17:06:09.975Z"
+      "latestInsightAt": "2026-06-07T17:26:59.791Z"
     },
     "inferenceStages": [
       {
@@ -29067,7 +29449,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 562,
+        "signalCount": 563,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -29079,7 +29461,7 @@
           },
           {
             "category": "request-trace",
-            "count": 85
+            "count": 86
           },
           {
             "category": "user-request",
@@ -29126,7 +29508,7 @@
           "2026 06 06 desktop dev/run fix 평가",
           "평가: Monitor 성능 가드레일 완성"
         ],
-        "latestEvidenceAt": "2026-06-07T17:05:04.830Z"
+        "latestEvidenceAt": "2026-06-07T17:25:46.782Z"
       },
       {
         "id": "web-research-to-spec",
@@ -29140,11 +29522,11 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1974,
+        "signalCount": 1978,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 533
+            "count": 536
           },
           {
             "category": "evaluation",
@@ -29152,7 +29534,7 @@
           },
           {
             "category": "web-search",
-            "count": 496
+            "count": 497
           },
           {
             "category": "plan",
@@ -29195,7 +29577,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-07T17:06:09.975Z"
+        "latestEvidenceAt": "2026-06-07T17:24:54.097Z"
       },
       {
         "id": "large-scope-slicing",
@@ -29209,15 +29591,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1144,
+        "signalCount": 1149,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 525
+            "count": 526
           },
           {
             "category": "plan",
-            "count": 345
+            "count": 346
           },
           {
             "category": "request-trace",
@@ -29225,11 +29607,11 @@
           },
           {
             "category": "project-spec",
-            "count": 87
+            "count": 89
           },
           {
             "category": "work-summary",
-            "count": 36
+            "count": 37
           },
           {
             "category": "user-request",
@@ -29268,7 +29650,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-07T17:06:09.975Z"
+        "latestEvidenceAt": "2026-06-07T17:26:59.791Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -29355,11 +29737,11 @@
         "status": "applied",
         "priority": "p1",
         "signalStrength": "high",
-        "signalCount": 1731,
+        "signalCount": 1735,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 720
+            "count": 722
           },
           {
             "category": "evaluation",
@@ -29371,7 +29753,7 @@
           },
           {
             "category": "work-summary",
-            "count": 90
+            "count": 91
           },
           {
             "category": "request-trace",
@@ -29387,7 +29769,7 @@
           },
           {
             "category": "project-doc",
-            "count": 43
+            "count": 44
           },
           {
             "category": "work-timing",
@@ -29414,7 +29796,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-07T16:21:27.742Z"
+        "latestEvidenceAt": "2026-06-07T17:25:46.782Z"
       },
       {
         "id": "release-blocker-gate",
@@ -29490,14 +29872,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 4555,
+      "sourceDocuments": 4568,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-07T17:06:09.975Z"
+      "latestInsightAt": "2026-06-07T17:26:59.791Z"
     },
     "operatingModel": [
       {
@@ -29555,25 +29937,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3680,
+        "signalCount": 3690,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1974
+            "signalCount": 1978
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1144
+            "signalCount": 1149
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 562
+            "signalCount": 563
           }
         ],
         "missingPatternIds": [],
@@ -29601,7 +29983,7 @@
           "Deep Feature Issue Review 계획",
           "Work Plan: Subagent Live Execution"
         ],
-        "latestEvidenceAt": "2026-06-07T17:06:09.975Z",
+        "latestEvidenceAt": "2026-06-07T17:26:59.791Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -29699,19 +30081,19 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2875,
+        "signalCount": 2884,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
             "label": "UI 피드백을 디자인 계약으로 바꾸는 루프",
             "signalStrength": "high",
-            "signalCount": 1731
+            "signalCount": 1735
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1144
+            "signalCount": 1149
           }
         ],
         "missingPatternIds": [],
@@ -29739,7 +30121,7 @@
           "Deep Feature Issue Review 계획",
           "Work Plan: Subagent Live Execution"
         ],
-        "latestEvidenceAt": "2026-06-07T17:06:09.975Z",
+        "latestEvidenceAt": "2026-06-07T17:26:59.791Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -29768,13 +30150,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 697,
+        "signalCount": 698,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 562
+            "signalCount": 563
           },
           {
             "id": "release-blocker-gate",
@@ -29808,7 +30190,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-07T17:05:04.830Z",
+        "latestEvidenceAt": "2026-06-07T17:25:46.782Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -29837,19 +30219,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 3118,
+        "signalCount": 3127,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1144
+            "signalCount": 1149
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1974
+            "signalCount": 1978
           }
         ],
         "missingPatternIds": [],
@@ -29877,7 +30259,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-07T17:06:09.975Z",
+        "latestEvidenceAt": "2026-06-07T17:26:59.791Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -29906,7 +30288,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 2109,
+        "signalCount": 2113,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -29918,7 +30300,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1974
+            "signalCount": 1978
           }
         ],
         "missingPatternIds": [],
@@ -29946,7 +30328,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-07T17:06:09.975Z",
+        "latestEvidenceAt": "2026-06-07T17:24:54.097Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

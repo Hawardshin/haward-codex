@@ -199,8 +199,17 @@ export async function buildSnapshot(repoRoot) {
   const structureOverview = buildStructureOverview(repoRoot, projects, documents, folderStructure, sourceFiles);
   const categories = Array.from(new Set(documents.map((document) => document.category))).sort();
   const tasks = (coordination.tasks || []).map((task) => attachTaskTiming(repoRoot, task));
+  const normalizedProjects = projects.map(normalizeProject);
   const agentCatalog = collectAgentCatalog(repoRoot, coordination.agents || [], tasks);
   const collaborationBoard = buildAgentCollaborationBoard(coordination.agents || [], agentCatalog, tasks);
+  const projectManagement = collectProjectManagement({
+    projects: normalizedProjects,
+    requirements,
+    documents,
+    historyDays,
+    tasks,
+    productSplit
+  });
   const unifiedOps = buildUnifiedOps({
     documents,
     historyDays,
@@ -260,7 +269,8 @@ export async function buildSnapshot(repoRoot) {
       sourceFiles: sourceFiles.length,
       rootFolders: folderStructure.rootFolders.length
     },
-    projects: projects.map(normalizeProject),
+    projects: normalizedProjects,
+    projectManagement,
     agents: coordination.agents || [],
     agentCatalog,
     collaborationBoard,
@@ -360,6 +370,9 @@ export function buildCustomerSnapshot(snapshot) {
       rootFolders: 0
     },
     projects: [],
+    projectManagement: sanitizeProjectManagementForCustomer(
+      snapshot.projectManagement || emptyProjectManagement()
+    ),
     agents: [],
     agentCatalog: [],
     tasks: [],
@@ -772,6 +785,279 @@ export function buildAgentCollaborationBoard(runtimeAgents = [], agentCatalog = 
   };
 }
 
+export function emptyProjectManagement() {
+  return {
+    sourcePath: "_ops/projects/registry.json",
+    summary: {
+      managedProjects: 0,
+      activeProjects: 0,
+      repoBackedProjects: 0,
+      openWorkItems: 0,
+      completedWorkItems: 0,
+      milestoneCount: 0,
+      evidenceDocuments: 0,
+      reportDocuments: 0
+    },
+    portfolio: [],
+    milestones: [],
+    workflowLanes: [
+      {
+        id: "import",
+        label: "Import",
+        count: 0,
+        description: "Open, clone, or create a Git-backed workspace.",
+        targetSection: "source"
+      },
+      {
+        id: "plan",
+        label: "Plan",
+        count: 0,
+        description: "Review requirements, specs, and current project plans.",
+        targetSection: "requirements"
+      },
+      {
+        id: "execute",
+        label: "Run",
+        count: 0,
+        description: "Launch the selected guest AI tool or terminal lane.",
+        targetSection: "desktop"
+      },
+      {
+        id: "verify",
+        label: "Report",
+        count: 0,
+        description: "Review validation, evidence, and work reports.",
+        targetSection: "eval"
+      }
+    ],
+    recentTrail: [],
+    desktopActions: [
+      {
+        id: "open_existing_git_repo",
+        label: "Open existing Git repository",
+        targetSection: "source",
+        description: "Import a local Git workspace."
+      },
+      {
+        id: "clone_remote_repo",
+        label: "Clone remote repository",
+        targetSection: "source",
+        description: "Create a managed workspace from a remote repository."
+      },
+      {
+        id: "review_reports",
+        label: "Review project reports",
+        targetSection: "eval",
+        description: "Open current work summaries, validation, and evidence."
+      }
+    ]
+  };
+}
+
+export function collectProjectManagement({
+  projects = [],
+  requirements = [],
+  documents = [],
+  historyDays = [],
+  tasks = [],
+  productSplit = emptyProductSplit()
+} = {}) {
+  const evidenceCategories = new Set(["web-search", "request-trace", "plan", "project-spec", "shared-spec", "daily-history"]);
+  const reportCategories = new Set(["evaluation", "work-summary", "work-timing", "resource-check", "omission-check"]);
+  const portfolio = projects.map((project) => {
+    const projectPath = normalizeProjectPath(project.path);
+    const projectName = String(project.name || "").toLowerCase();
+    const projectDocuments = documents.filter((document) => documentBelongsToProject(document, project, projectPath));
+    const projectRequirements = requirements.filter((requirement) =>
+      projectPath ? normalizeProjectPath(requirement.sourcePath || "").startsWith(projectPath) : false
+    );
+    const projectTasks = projectName
+      ? tasks.filter((task) =>
+        String(task.project || "").toLowerCase() === projectName ||
+        String(task.id || "").toLowerCase().includes(projectName)
+      )
+      : [];
+    const activeTaskCount = projectTasks.filter((task) => !["completed", "done"].includes(String(task.status || "").toLowerCase())).length;
+    const completedTaskCount = projectTasks.filter((task) => ["completed", "done"].includes(String(task.status || "").toLowerCase())).length;
+    const evidenceDocs = projectDocuments.filter((document) => evidenceCategories.has(document.category));
+    const reportDocs = projectDocuments.filter((document) => reportCategories.has(document.category));
+    const resources = [...reportDocs, ...evidenceDocs, ...projectDocuments]
+      .filter((document, index, list) => list.findIndex((item) => item.path === document.path) === index)
+      .slice(0, 4)
+      .map((document) => ({
+        title: document.title,
+        path: document.path,
+        category: document.category
+      }));
+    const nextAction = nextProjectAction({ project, activeTaskCount, evidenceDocs, reportDocs, projectRequirements });
+
+    return {
+      id: slugify(project.name || project.path || "project"),
+      name: project.name || titleFromPath(project.path || "project"),
+      path: project.path || "",
+      status: project.status || "unknown",
+      type: project.type || "project",
+      purpose: project.purpose || "",
+      scope: project.scope || "",
+      gitBoundary: projectPath ? "separate_git_workspace" : "registry_only",
+      health: projectHealth(project, activeTaskCount, completedTaskCount, reportDocs),
+      taskCount: projectTasks.length,
+      activeTaskCount,
+      completedTaskCount,
+      requirementCount: projectRequirements.length,
+      evidenceCount: evidenceDocs.length,
+      reportCount: reportDocs.length,
+      documentCount: projectDocuments.length,
+      nextAction,
+      milestone: milestoneLabel(project, activeTaskCount, reportDocs),
+      resources
+    };
+  });
+
+  const allEvidenceDocs = documents.filter((document) => evidenceCategories.has(document.category));
+  const allReportDocs = documents.filter((document) => reportCategories.has(document.category));
+  const milestones = portfolio.map((project) => ({
+    id: `${project.id}-current`,
+    label: project.milestone,
+    status: project.health === "done" ? "complete" : project.health === "attention" ? "needs_attention" : "active",
+    project: project.name,
+    evidenceCount: project.evidenceCount,
+    reportCount: project.reportCount,
+    nextAction: project.nextAction
+  }));
+  const workflowLanes = [
+    {
+      id: "import",
+      label: "Import",
+      count: portfolio.length,
+      description: "Open, clone, or create Git-backed project workspaces.",
+      targetSection: "source"
+    },
+    {
+      id: "plan",
+      label: "Plan",
+      count: requirements.length + documents.filter((document) => ["plan", "project-spec", "shared-spec"].includes(document.category)).length,
+      description: "Review requirements, specs, plans, and project scope.",
+      targetSection: "requirements"
+    },
+    {
+      id: "execute",
+      label: "Run",
+      count: tasks.length,
+      description: "Run work in the selected workspace with a guest AI tool or terminal.",
+      targetSection: "desktop"
+    },
+    {
+      id: "verify",
+      label: "Report",
+      count: allReportDocs.length + allEvidenceDocs.length,
+      description: "Read reports, evidence, validation, and request traces.",
+      targetSection: "eval"
+    }
+  ];
+  const importModes = productSplit.workspaceModel?.importModes?.length
+    ? productSplit.workspaceModel.importModes
+    : emptyProjectManagement().desktopActions;
+
+  return {
+    sourcePath: "_ops/projects/registry.json",
+    summary: {
+      managedProjects: portfolio.length,
+      activeProjects: portfolio.filter((project) => project.health === "active" || project.health === "attention").length,
+      repoBackedProjects: portfolio.filter((project) => project.gitBoundary === "separate_git_workspace").length,
+      openWorkItems: portfolio.reduce((total, project) => total + project.activeTaskCount, 0),
+      completedWorkItems: portfolio.reduce((total, project) => total + project.completedTaskCount, 0),
+      milestoneCount: milestones.length,
+      evidenceDocuments: allEvidenceDocs.length,
+      reportDocuments: allReportDocs.length
+    },
+    portfolio,
+    milestones,
+    workflowLanes,
+    recentTrail: historyDays
+      .flatMap((day) => day.documents.slice(0, 4).map((document) => ({
+        date: day.date,
+        title: document.title,
+        category: document.category,
+        path: document.path
+      })))
+      .slice(0, 12),
+    desktopActions: importModes.slice(0, 3).map((mode) => ({
+      id: mode.id,
+      label: mode.label,
+      targetSection: "source",
+      description: mode.default ? "Default workspace intake action." : "Available workspace intake action."
+    }))
+  };
+}
+
+function sanitizeProjectManagementForCustomer(projectManagement) {
+  const fallback = emptyProjectManagement();
+  return {
+    ...fallback,
+    sourcePath: "",
+    summary: fallback.summary,
+    workflowLanes: projectManagement.workflowLanes || fallback.workflowLanes,
+    desktopActions: projectManagement.desktopActions || fallback.desktopActions
+  };
+}
+
+function normalizeProjectPath(value) {
+  const normalized = toPosix(String(value || "").replace(/^\/+/, "")).replace(/^\.\/+/, "");
+  return normalized ? normalized.replace(/\/?$/, "/") : "";
+}
+
+function documentBelongsToProject(document, project, projectPath) {
+  if (projectPath && normalizeProjectPath(document.path || "").startsWith(projectPath)) {
+    return true;
+  }
+  const haystack = `${document.title || ""} ${document.path || ""} ${document.excerpt || ""}`.toLowerCase();
+  return Boolean(project.name) && haystack.includes(project.name.toLowerCase());
+}
+
+function projectHealth(project, activeTaskCount, completedTaskCount, reportDocs) {
+  const status = String(project.status || "").toLowerCase();
+  if (/blocked|risk|attention|needs/.test(status)) {
+    return "attention";
+  }
+  if (/done|complete|retired|archived/.test(status) || (completedTaskCount > 0 && activeTaskCount === 0 && reportDocs.length > 0)) {
+    return "done";
+  }
+  if (/active|current|in_progress/.test(status) || activeTaskCount > 0) {
+    return "active";
+  }
+  return "idle";
+}
+
+function nextProjectAction({ project, activeTaskCount, evidenceDocs, reportDocs, projectRequirements }) {
+  if (!project.path) {
+    return "등록 경로를 Git 작업공간으로 연결";
+  }
+  if (projectRequirements.length === 0) {
+    return "요구사항과 성공 기준 연결";
+  }
+  if (activeTaskCount > 0) {
+    return "진행 중 작업을 터미널/AI 실행에서 확인";
+  }
+  if (reportDocs.length === 0) {
+    return "검증 보고서 생성";
+  }
+  if (evidenceDocs.length === 0) {
+    return "근거 문서 연결";
+  }
+  return "현재 보고서 검토";
+}
+
+function milestoneLabel(project, activeTaskCount, reportDocs) {
+  if (activeTaskCount > 0) {
+    return `${project.name} active work`;
+  }
+  if (reportDocs.length > 0) {
+    return `${project.name} report review`;
+  }
+  return `${project.name} workspace setup`;
+}
+
 export function emptyProductSplit() {
   return {
     sourcePath: "",
@@ -799,7 +1085,17 @@ export function emptyProductSplit() {
         { id: "clone_remote_repo", label: "Clone remote repository", default: false },
         { id: "create_new_repo", label: "Create new Git repository", default: false }
       ],
-      trackedOutputs: ["current_task_summary", "plan", "task_sequence", "evidence_documents", "validation_report", "terminal_session_state", "git_status"]
+      trackedOutputs: [
+        "project_portfolio",
+        "project_milestone_status",
+        "current_task_summary",
+        "plan",
+        "task_sequence",
+        "evidence_documents",
+        "validation_report",
+        "terminal_session_state",
+        "git_status"
+      ]
     },
     guestAiSurfaces: [
       { id: "codex", label: "Codex", adapterRole: "terminal_or_cli_guest" },
@@ -822,12 +1118,22 @@ export function emptyProductSplit() {
       }
     ],
     uiPolicy: {
-      homePriority: ["workspace_import", "current_work_timeline", "terminal_cli_run", "evidence_and_reports", "git_project_boundaries"],
+      homePriority: [
+        "workspace_import",
+        "project_portfolio",
+        "project_milestone_status",
+        "current_work_timeline",
+        "terminal_cli_run",
+        "evidence_and_reports",
+        "git_project_boundaries"
+      ],
       deemphasizedSections: ["agents", "tools", "provider_direct_run", "ollama_management"],
       primaryNavigationSections: ["overview", "source", "desktop", "eval", "projects", "history", "documents", "requirements"],
       advancedOperatorSections: ["agents", "tools", "intent", "structure"],
       homeCopyRule: "Home copy talks about Git workspaces, current work, task reports, evidence, terminal runs, and guest AI coding tools.",
-      configurationRule: "Customization, direct model execution, Ollama, agent factory, and tool builder controls are not the default first-screen path."
+      configurationRule: "Customization, direct model execution, Ollama, agent factory, and tool builder controls are not the default first-screen path.",
+      projectManagementRule:
+        "The projects section imports Git repositories, shows portfolio health, exposes milestone status, and links reports, evidence, task order, and terminal run state before advanced operator controls."
     },
     validationGates: []
   };
@@ -895,7 +1201,8 @@ export function collectProductSplit(repoRoot) {
       primaryNavigationSections: arrayOfStrings(uiPolicy.primary_navigation_sections),
       advancedOperatorSections: arrayOfStrings(uiPolicy.advanced_operator_sections),
       homeCopyRule: uiPolicy.home_copy_rule || fallback.uiPolicy.homeCopyRule,
-      configurationRule: uiPolicy.configuration_rule || fallback.uiPolicy.configurationRule
+      configurationRule: uiPolicy.configuration_rule || fallback.uiPolicy.configurationRule,
+      projectManagementRule: uiPolicy.project_management_rule || fallback.uiPolicy.projectManagementRule
     },
     validationGates: arrayOfStrings(registry.validation_gates)
   };

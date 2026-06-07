@@ -141,6 +141,10 @@ const productFeatureArchitecturePanel = fs.readFileSync(
   path.join(projectRoot, "components", "features", "ProductFeatureArchitecturePanel.tsx"),
   "utf8"
 );
+const projectManagementPanel = fs.readFileSync(
+  path.join(projectRoot, "components", "features", "ProjectManagementPanel.tsx"),
+  "utf8"
+);
 const evaluationReportPanel = fs.readFileSync(
   path.join(projectRoot, "components", "features", "EvaluationReportPanel.tsx"),
   "utf8"
@@ -411,7 +415,17 @@ test("Default user view exposes a simple workspace-tracker start surface", () =>
   assert.match(monitorShell, /const \[viewMode, setViewMode\] = useState\(snapshot\.viewModeCatalog\?\.defaultMode \|\| "user"\)/);
   assert.match(monitorShell, /data-simple-user-start/);
   assert.match(monitorShell, /<WorkspaceProductSplitPanel/);
+  assert.match(monitorShell, /<ProjectManagementPanel/);
+  assert.match(projectManagementPanel, /Project Management Platform/);
+  assert.match(projectManagementPanel, /프로젝트 관리 플랫폼/);
+  assert.match(projectManagementPanel, /data-project-management-panel/);
+  assert.match(projectManagementPanel, /data-project-management-primary-action="import-workspace"/);
+  assert.match(projectManagementPanel, /data-project-workflow-lanes/);
+  assert.match(projectManagementPanel, /data-project-portfolio-list/);
   assert.match(css, /\.workspace-product-split-panel \{/);
+  assert.match(css, /\.project-management-panel \{/);
+  assert.match(css, /\.project-workflow-lanes \{/);
+  assert.match(css, /\.project-portfolio-card \{/);
   assert.match(monitorShell, /startSimpleUserTask/);
   assert.match(monitorShell, /showOperatorCenter=\{currentViewMode\.id !== "user"\}/);
   assert.match(css, /\.simple-user-start-panel \{/);
