@@ -4718,6 +4718,134 @@ main {
   color: white;
 }
 
+.workspace-product-split-panel {
+  display: grid;
+  gap: var(--space-3);
+  border: 1px solid var(--hierarchy-border);
+  border-radius: 8px;
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--surface-panel) 90%, var(--blue) 5%);
+  box-shadow: var(--surface-shadow), var(--hairline-shadow);
+}
+
+.workspace-product-split-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.workspace-product-split-hero h2 {
+  margin: 0;
+  font-size: var(--font-size-section-title);
+  line-height: var(--line-height-heading);
+}
+
+.workspace-product-split-hero p {
+  max-inline-size: 78ch;
+  margin: 6px 0 0;
+  color: var(--text-secondary);
+  line-height: var(--line-height-copy);
+}
+
+.workspace-product-split-hero button,
+.workspace-product-split-card button,
+.workspace-product-chip-row button {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 12px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.workspace-product-split-hero button {
+  border-color: color-mix(in srgb, var(--blue) 44%, var(--line));
+  background: var(--blue);
+  color: white;
+}
+
+.workspace-product-split-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.workspace-product-split-card {
+  display: grid;
+  min-width: 0;
+  gap: 8px;
+  align-content: start;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: var(--space-3);
+  background: color-mix(in srgb, var(--surface) 90%, var(--surface-panel) 10%);
+}
+
+.workspace-product-split-card.primary {
+  background: color-mix(in srgb, var(--surface) 84%, var(--blue) 9%);
+}
+
+.workspace-product-split-card.status {
+  background: color-mix(in srgb, var(--surface) 85%, var(--green) 9%);
+}
+
+.workspace-product-split-card header {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.workspace-product-split-card strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--font-size-body);
+}
+
+.workspace-product-split-card p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: var(--line-height-copy);
+}
+
+.workspace-product-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.workspace-product-chip-row.compact {
+  max-height: 82px;
+  overflow: auto;
+}
+
+.workspace-product-chip-row span {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0 9px;
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  font-weight: 800;
+}
+
 .home-focus-command {
   position: relative;
   display: grid;
@@ -19011,6 +19139,15 @@ h3 {
 }
 
 @media (max-width: 1080px) {
+  .workspace-product-split-hero,
+  .workspace-product-split-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .workspace-product-split-hero button {
+    justify-self: start;
+  }
+
   .desktop-app-shell {
     grid-template-columns: 58px minmax(0, 1fr);
   }
@@ -21652,6 +21789,11 @@ h3 {
 }
 
 @media (max-width: 860px) {
+  .workspace-product-split-hero,
+  .workspace-product-split-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .tool-studio-shell {
     height: auto;
     overflow: visible;

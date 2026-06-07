@@ -360,11 +360,14 @@ test("buildSnapshot reads minimal repository shape", async () => {
   assert.equal(snapshot.structureOverview.planes.some((plane) => plane.id === "monitor-ui"), true);
   assert.equal(snapshot.structureOverview.boundaryRules.some((rule) => rule.id === "project-boundary-first"), true);
   assert.equal(snapshot.stats.structurePressurePoints, snapshot.structureOverview.summary.totalPressurePoints);
-  assert.equal(snapshot.productFeatureArchitecture.productPosition.primaryProduct, "agent_capability_platform");
-  assert.equal(snapshot.productFeatureArchitecture.productPosition.monitoringRole, "supporting_observability");
+  assert.equal(snapshot.productFeatureArchitecture.productPosition.primaryProduct, "workspace_tracker");
+  assert.equal(snapshot.productFeatureArchitecture.productPosition.monitoringRole, "primary_work_visibility");
   assert.equal(snapshot.stats.productFeatures, 8);
-  assert.equal(snapshot.stats.primaryProductFeatures, 2);
-  assert.equal(snapshot.stats.supportingProductFeatures, 6);
+  assert.equal(snapshot.stats.primaryProductFeatures, 4);
+  assert.equal(snapshot.stats.supportingProductFeatures, 4);
+  assert.equal(snapshot.productSplit.productBoundary.desktopTracker.id, "workspace_tracker");
+  assert.equal(snapshot.productSplit.workspaceModel.defaultUnit, "git_repository");
+  assert.equal(snapshot.productSplit.separatedPlatforms.some((platform) => platform.capabilityId === "agent_factory"), true);
   assert.equal(snapshot.openSourceFeatureReferences.summary.totalLayers, 1);
   assert.equal(snapshot.openSourceFeatureReferences.featureReferenceLayers.some((layer) => layer.featureId === "agent_orchestration"), true);
   assert.equal(snapshot.stats.openSourceReferenceLayers, snapshot.openSourceFeatureReferences.summary.totalLayers);
@@ -796,9 +799,16 @@ test("buildCustomerSnapshot strips internal source and documents", () => {
   assert.equal(customer.viewModeCatalog.defaultMode, "user");
   assert.deepEqual(customer.viewModeCatalog.modes[0].allowedSections, [
     "overview",
+    "source",
     "desktop",
-    "eval"
+    "eval",
+    "projects",
+    "history",
+    "documents",
+    "requirements"
   ]);
+  assert.equal(customer.productSplit.sourcePath, "");
+  assert.equal(customer.productSplit.productBoundary.desktopTracker.id, "workspace_tracker");
 });
 
 test("collectToolUsageIntegration maps agent tool loops to validation ladders", () => {

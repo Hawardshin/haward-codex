@@ -7,11 +7,11 @@ export function emptyProductFeatureArchitecture() {
   const featureLayers = [
     {
       id: "agent_orchestration",
-      label: "CLI Orchestration",
+      label: "Guest AI Tool Orchestration",
       role: "primary",
       status: "fallback",
-      purpose: "Coordinate agents and optional CLI lanes as supervised work.",
-      userOutcome: "Start one task and let the platform coordinate specialist lanes.",
+      purpose: "Launch replaceable AI coding tools over the selected Git workspace as supervised guest lanes.",
+      userOutcome: "Start work with Codex, Claude Code, Cursor, Antigravity, or another guest surface without locking the app to one tool.",
       primarySection: "desktop",
       primarySurfaces: ["Desktop Runtime", "Task Pipe", "Decision Inbox"],
       currentAssets: [],
@@ -22,7 +22,7 @@ export function emptyProductFeatureArchitecture() {
     {
       id: "agent_work_environment",
       label: "Agent Work Environment",
-      role: "supporting",
+      role: "primary",
       status: "fallback",
       purpose: "Host selected workspaces, runtime data, decisions, task runs, and support diagnostics.",
       userOutcome: "Use an app-owned workspace and accumulated data plane instead of a terminal-first clone.",
@@ -50,7 +50,7 @@ export function emptyProductFeatureArchitecture() {
     {
       id: "agent_factory",
       label: "Agent Core",
-      role: "primary",
+      role: "separated",
       status: "fallback",
       purpose: "Promote repeated work into prompts, workflows, templates, tools, skills, agents, and features.",
       userOutcome: "Create reusable agents and capabilities without repeating the same instructions.",
@@ -64,7 +64,7 @@ export function emptyProductFeatureArchitecture() {
     {
       id: "learning_improvement_loop",
       label: "Learning & Evaluation Loop",
-      role: "supporting",
+      role: "primary",
       status: "fallback",
       purpose: "Accumulate requests, evidence, timings, evaluations, and intent maps into improvement loops.",
       userOutcome: "See why the platform improved and what should improve next.",
@@ -78,7 +78,7 @@ export function emptyProductFeatureArchitecture() {
     {
       id: "root_tool_management",
       label: "Root Tool Management",
-      role: "supporting",
+      role: "separated",
       status: "fallback",
       purpose: "Keep shared provider accounts, CLI adapters, workspace files, source tools, and decision defaults outside individual tasks.",
       userOutcome: "Configure root tools once so custom agents and guest CLI lanes can reuse the same base.",
@@ -92,7 +92,7 @@ export function emptyProductFeatureArchitecture() {
     {
       id: "work_visibility",
       label: "Work Visibility",
-      role: "supporting",
+      role: "primary",
       status: "fallback",
       purpose: "Show active work, deferred decisions, task-run records, and available agents at a glance.",
       userOutcome: "Immediately see what is running, blocked, recorded, and ready to resume.",
@@ -121,16 +121,16 @@ export function emptyProductFeatureArchitecture() {
   return buildArchitecture({
     sourcePath: "",
     productPosition: {
-      primaryProduct: "agent_capability_platform",
+      primaryProduct: "workspace_tracker",
       productClaim:
-        "Agent Core makes custom agents easy to create, and CLI orchestration keeps long-running guest CLI work continuous through deferred decisions and task-run records. Root tools, workbench, learning, and observability support those two core capabilities.",
-      monitoringRole: "supporting_observability"
+        "The desktop app imports Git workspaces, launches replaceable AI coding tools, and shows current work, evidence, validation, reports, and terminal state.",
+      monitoringRole: "primary_work_visibility"
     },
     desktopHomeSurface: {
-      firstViewPriority: ["agent_factory", "agent_orchestration", "root_tool_management", "work_visibility"],
-      supportingSurfaces: ["observability_monitoring"],
-      homeCopyRule: "Show Agent Core, CLI orchestration continuity, root tool setup, and current workload before monitoring details.",
-      configurationRule: "Expose core setup for accounts, CLI adapters, root tools, and question deferral in dedicated settings."
+      firstViewPriority: ["agent_work_environment", "agent_orchestration", "learning_improvement_loop", "work_visibility"],
+      supportingSurfaces: ["agent_factory", "root_tool_management", "observability_monitoring"],
+      homeCopyRule: "Show Git workspace import, current work, terminal run state, evidence, validation, and reports before advanced agent/tool operations.",
+      configurationRule: "Expose guest AI tool adapters and workspace settings without making provider direct execution or tool building the default path."
     },
     featureLayers,
     promotionLoop: {
@@ -140,10 +140,10 @@ export function emptyProductFeatureArchitecture() {
       assetOrder: ["prompt", "workflow", "template", "tool", "skill", "agent", "project_feature"]
     },
     qualitySignals: [
-      "The first screen names Agent Core and CLI orchestration before root tools, workbench, learning, or observability.",
-      "Root tools are visually separate from task-specific agent creation and CLI orchestration surfaces.",
-      "Current work volume, deferred decisions, task-run records, and agent count are visible at a glance.",
-      "Readiness tests fail if monitoring becomes the primary product."
+      "The first screen names Git workspaces, current work, terminal run state, evidence, validation, and reports before agent/tool operations.",
+      "Agent factory and Tool Studio are visually separate from the default user path.",
+      "Current work volume, deferred decisions, task-run records, reports, and Git status are visible at a glance.",
+      "Readiness tests fail if the desktop product becomes a general agent factory again."
     ],
     validationGates: []
   });

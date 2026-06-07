@@ -1,0 +1,185 @@
+{
+  "research_goal": "Decide how to implement a product split that turns the desktop app into a Git workspace tracker while moving agent/tool/runtime platform capabilities to agent-platform.",
+  "coding_context": "Existing Tauri/Next.js workspace monitor with TypeScript snapshot collector, React UI, product/view registries, and Node-based readiness tests.",
+  "research_types": ["architecture", "implementation_pattern", "migration", "testing"],
+  "search_channels": ["web search", "official documentation search", "repository source search", "local test search"],
+  "sources_checked": [
+    "https://git-scm.com/docs/git-worktree.html",
+    "https://git-scm.com/docs/git-submodule.html",
+    "https://help.openai.com/en/articles/11369540-codex-in-chatgpt",
+    "https://docs.anthropic.com/en/docs/claude-code/getting-started",
+    "https://docs.anthropic.com/en/docs/claude-code/cli-usage",
+    "https://docs.cursor.com/get-started/installation",
+    "https://docs.cursor.com/en/cli/installation",
+    "https://www.antigravity.google/docs/overview",
+    "https://www.antigravity.google/product/antigravity-cli",
+    "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/",
+    "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-how-it-works.html",
+    "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/gateway.html",
+    "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/identity.html",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs"
+  ],
+  "source_types": ["official", "open_source", "internal", "community", "analysis"],
+  "reference_config_paths": [
+    "agent-platform/configs/research/research-agent-profile.json",
+    "agent-platform/configs/research/coding-research-profile.json"
+  ],
+  "source_value_provenance": [
+    "Git official docs establish repository/worktree/submodule boundaries.",
+    "Codex, Claude Code, Cursor, and Antigravity official docs establish that AI coding tools can attach through CLI, IDE, or agent-manager surfaces.",
+    "AWS AgentCore official docs establish that runtime, gateway, identity, and tool management are a separate agent platform capability.",
+    "Local registries and tests establish how the current desktop app exposes product features and view modes."
+  ],
+  "plan_evidence": [
+    "The product split registry maps primary desktop responsibilities to Git workspace import/open/clone/create and current work reports.",
+    "The view mode registry hides agent/tool/runtime management from the default user mode.",
+    "Workspace monitor tests assert the new navigation, command recommendations, snapshot fields, and separated advanced sections."
+  ],
+  "technology_stack": ["TypeScript", "React", "Next.js", "Node.js", "Rust", "Tauri"],
+  "technology_official_docs": [
+    "https://www.typescriptlang.org/docs/",
+    "https://react.dev/reference/react",
+    "https://nextjs.org/docs",
+    "https://nodejs.org/en/docs",
+    "https://doc.rust-lang.org/book/",
+    "https://v2.tauri.app/"
+  ],
+  "stack_version_constraints": [
+    "Use existing package-lock/pnpm workspace versions in platform-desktop-app.",
+    "Do not add new dependencies in this slice.",
+    "Keep Tauri v2/Rust desktop shell unchanged."
+  ],
+  "issue_discussion_sources": [
+    "https://www.reddit.com/r/google_antigravity/comments/1rk2l3e/the_terminal_usage_inside_the_antigravity_is/",
+    "https://www.reddit.com/r/google_antigravity/comments/1tws7pt/why_does_it_have_to_be_so_complicated_agent/"
+  ],
+  "issue_discussion_notes": [
+    "Community posts were treated as weak usability/risk signals only: users can be confused when IDE, agent manager, and terminal surfaces are split or malfunctioning.",
+    "No product decision relies on Reddit as factual proof; official docs and local tests drive the implemented boundary."
+  ],
+  "community_signal_notes": [
+    "Comments and activity indicate discovery of terminal and split-surface confusion, but they are not proof of product behavior.",
+    "The practical mitigation is to make separated surfaces explicit in UI labels and registries."
+  ],
+  "language_options": [
+    "TypeScript/React renderer and Node collector changes",
+    "Rust/Tauri backend changes"
+  ],
+  "selected_language": "TypeScript/React renderer and Node collector changes",
+  "language_decision_notes": [
+    "The change is primarily product classification, snapshot shaping, and renderer navigation, all already owned by TypeScript/React and Node collector code.",
+    "Rust/Tauri changes would add runtime risk without solving the product boundary problem in this slice.",
+    "Keeping existing languages avoids new dependencies and keeps tests close to existing workspace monitor coverage."
+  ],
+  "code_reference_sources": [
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs"
+  ],
+  "code_reference_notes": [
+    "Existing feature panels use compact typed props and data attributes that tests can assert.",
+    "Collector already reads JSON registries and sanitizes customer snapshot data, so product split data belongs there.",
+    "Readiness tests protect product copy and registry roles, so they should be updated with the boundary change."
+  ],
+  "architecture_reference_sources": [
+    "https://v2.tauri.app/concept/architecture/",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/lib/product-feature-architecture.mjs",
+    "platform-desktop-app/configs/product-feature-registry.json",
+    "agent-platform/configs/integrations/cli-adapter-registry.json"
+  ],
+  "architecture_theory_sources": [
+    "Git repository/worktree/submodule official docs",
+    "Tauri architecture docs",
+    "AWS AgentCore modular runtime/gateway/identity docs"
+  ],
+  "architecture_practitioner_sources": [
+    "Cursor shell command and CLI docs as practical adapter examples",
+    "Claude Code CLI docs as terminal-first practical adapter example",
+    "Antigravity docs and community split-surface discussions as practical UX risk signals"
+  ],
+  "architecture_options": [
+    "All-in-one desktop app owns workspaces, agents, tools, model runtime, and provider execution.",
+    "Split architecture: desktop app owns Git workspace tracking and guest AI tool launch; agent-platform owns agent/tool/model/runtime capabilities.",
+    "Hard fork a full IDE/workbench and make it the main host."
+  ],
+  "architecture_decision_notes": [
+    "Selected the split architecture because the user's stated goal is easy use of many AI coding tools over Git workspaces, not a single all-in-one agent runtime console.",
+    "Rejected all-in-one because it keeps first-run UI complex and mixes user task tracking with platform/tool construction.",
+    "Rejected hard-fork IDE work for this slice because it is a separate project boundary and does not immediately fix the current desktop app's product confusion."
+  ],
+  "architecture_tradeoff_notes": [
+    "Theory and official docs support modular boundaries: Git repositories are durable work units, while AgentCore-like services are runtime/tool/identity infrastructure.",
+    "Practitioner signals show that split surfaces can confuse users unless labels and default navigation make the split explicit.",
+    "The selected design keeps advanced capability links visible but removes them from the default user path."
+  ],
+  "folder_structure_options": [
+    "Keep all new split contracts inside platform-desktop-app only.",
+    "Put desktop tracker contracts in platform-desktop-app and separated agent/tool platform contracts in agent-platform and project registry.",
+    "Create a brand-new root project immediately for every separated capability."
+  ],
+  "folder_structure_decision_notes": [
+    "Selected a two-project boundary using existing root projects: platform-desktop-app for workspace tracker, agent-platform for reusable agent/tool/runtime platform.",
+    "A new root repository per user workspace is a product behavior to model and import, not a source folder to add to this monorepo in this slice.",
+    "The split registry lives under platform-desktop-app/configs because it drives desktop UI and snapshot output."
+  ],
+  "folder_semantics_notes": [
+    "platform-desktop-app/configs defines desktop product contracts.",
+    "platform-desktop-app/renderer/workspace-monitor contains the user-facing tracker UI and collector.",
+    "agent-platform/configs owns reusable platform, view, workflow, agent, tool, and runtime governance.",
+    "_history and _requirements retain cross-project evidence and close-out records."
+  ],
+  "maintainability_notes": [
+    "A self-documenting registry makes the split inspectable without reading React code.",
+    "Snapshot-level split data prevents duplicated product-boundary logic across UI components.",
+    "Tests assert labels, navigation, and snapshot fields so future agent/tool features cannot silently return to the default user surface."
+  ],
+  "findings": [
+    "Users need Git workspace visibility and report/evidence ordering more than a first-run agent factory.",
+    "AI coding tools should attach as optional adapters because Codex, Claude Code, Cursor, and Antigravity expose different local surfaces.",
+    "AgentCore-style functionality is infrastructure/platform work and belongs outside the default desktop tracker path."
+  ],
+  "options": [
+    "Keep current agent capability platform direction.",
+    "Switch desktop app to workspace tracker and separate agent/tool runtime features.",
+    "Create a new desktop app from scratch."
+  ],
+  "recommendation": "Switch desktop app to workspace_tracker now, keep agent/tool/model/runtime functions in agent-platform, and encode the split in registries, snapshot data, UI, and tests.",
+  "post_research_answers": {
+    "what_was_verified": "Official docs and local source confirmed that Git workspaces and AI coding tools can be represented as separate import/guest adapter boundaries, while AgentCore-like capabilities are runtime/tool infrastructure.",
+    "best_option": "Split desktop tracker and agent/tool runtime platform.",
+    "why_this_option": "It reduces first-run complexity and matches the user's core workflow: choose a Git repo, run a tool, and inspect current work outputs.",
+    "alternatives_rejected": "All-in-one keeps the confusion; a new app from scratch delays visible repair; a hard-fork IDE is a separate project with larger risk.",
+    "implementation_impact": "Update product/view registries, collector snapshot schema, home/navigation/task-intent UI, feature panels, tests, README, requirements, and specs.",
+    "risks_and_unknowns": "Physical remote repository creation/import flows and per-tool installation automation remain deeper runtime work.",
+    "validation_plan": "Run config contract checks, workspace monitor check/test/build, platform desktop test/check, collector, omission/resource/evaluator, and diff checks.",
+    "reusable_knowledge": "Product split registry and coding research record document the boundary for future slices.",
+    "next_action": "Implement registry, snapshot, UI, tests, and close-out records."
+  },
+  "validation_steps": [
+    "PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research ../_history/coding-research/2026/2026-06-08-workspace-tracker-product-split.json",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test",
+    "corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build",
+    "corepack pnpm --dir platform-desktop-app run test",
+    "corepack pnpm --dir platform-desktop-app run check"
+  ],
+  "risks_or_unknowns": [
+    "MonitorShell remains large and should continue to be componentized in follow-up slices.",
+    "Actual clone/create remote repository UX is not fully implemented in this slice.",
+    "Guest AI tool adapters still depend on each tool's local installation and account state."
+  ],
+  "capture_targets": [
+    "_history/coding-research/2026/2026-06-08-workspace-tracker-product-split.json",
+    "platform-desktop-app/configs/workspace-tracker-product-split-registry.json"
+  ],
+  "plan_history_targets": [
+    "_history/plans/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+    "_history/large-scope-decompositions/2026/2026-06-08-workspace-tracker-product-split.json"
+  ],
+  "knowledge_validation_status": "ready_to_reference"
+}

@@ -125,6 +125,7 @@ export const monitorWorkbenchSourcePaths = {
   serviceReadinessPanel: "renderer/workspace-monitor/components/features/ServiceReadinessPanel.tsx",
   taskRunStorePanel: "renderer/workspace-monitor/components/features/TaskRunStorePanel.tsx",
   workspaceHostPanel: "renderer/workspace-monitor/components/features/WorkspaceHostPanel.tsx",
+  workspaceProductSplitPanel: "renderer/workspace-monitor/components/features/WorkspaceProductSplitPanel.tsx",
   monitorSummaryWidgets: "renderer/workspace-monitor/components/features/MonitorSummaryWidgets.tsx",
   runtimeCatalog: "renderer/workspace-monitor/components/features/runtimeCatalog.ts",
   runtimeEnvironmentRefreshHook: "renderer/workspace-monitor/components/features/useRuntimeEnvironmentRefresh.ts",
@@ -189,6 +190,7 @@ export const monitorWorkbenchSourceKeys = [
   "serviceReadinessPanel",
   "taskRunStorePanel",
   "workspaceHostPanel",
+  "workspaceProductSplitPanel",
   "monitorSummaryWidgets",
   "runtimeCatalog",
   "runtimeEnvironmentRefreshHook",
@@ -218,6 +220,7 @@ export const serviceReadinessMonitorSourceKeys = [
   "runtimeDataSupportPanel",
   "serviceReadinessPanel",
   "workspaceHostPanel",
+  "workspaceProductSplitPanel",
   "monitorSummaryWidgets"
 ];
 
@@ -285,6 +288,7 @@ export const serviceReadinessSourcePaths = {
   runtimeDataSupportPanel: monitorWorkbenchSourcePaths.runtimeDataSupportPanel,
   serviceReadinessPanel: monitorWorkbenchSourcePaths.serviceReadinessPanel,
   workspaceHostPanel: monitorWorkbenchSourcePaths.workspaceHostPanel,
+  workspaceProductSplitPanel: monitorWorkbenchSourcePaths.workspaceProductSplitPanel,
   monitorSummaryWidgets: monitorWorkbenchSourcePaths.monitorSummaryWidgets
 };
 

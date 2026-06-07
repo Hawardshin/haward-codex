@@ -1,0 +1,102 @@
+{
+  "task": "workspace tracker product split",
+  "reason": "The user asked to split an all-in-one desktop/agent platform into a Git workspace tracking desktop app and a separated agent/tool/runtime platform.",
+  "source_inventory": [
+    "platform-desktop-app/configs/product-feature-registry.json",
+    "platform-desktop-app/configs/workspace-tracker-product-split-registry.json",
+    "agent-platform/configs/access/view-mode-registry.json",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+    "platform-desktop-app/renderer/workspace-monitor/tests/",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "agent-platform/README.md",
+    "platform-desktop-app/README.md"
+  ],
+  "exclusions": [
+    "No global CLI installation",
+    "No new open-source dependency installation",
+    "No destructive Git history rewrite",
+    "No physical extraction into a new remote repository in this slice",
+    "No Ollama runtime mutation",
+    "No provider credential inspection"
+  ],
+  "representative_samples": [
+    "Product feature registry for product role classification",
+    "View mode registry for user/developer/superadmin visibility",
+    "MonitorShell home/navigation/task-intent surfaces",
+    "Collector snapshot schema and customer sanitization",
+    "Readiness and workspace monitor tests"
+  ],
+  "slices": [
+    {
+      "slice_id": "product-boundary-contract",
+      "touch_paths": [
+        "platform-desktop-app/configs/product-feature-registry.json",
+        "platform-desktop-app/configs/workspace-tracker-product-split-registry.json",
+        "agent-platform/configs/access/view-mode-registry.json",
+        "_ops/projects/registry.json",
+        "agent-platform/README.md",
+        "platform-desktop-app/README.md",
+        "platform-desktop-app/README.ko.md",
+        "platform-desktop-app/README.en.md"
+      ],
+      "dependencies": ["web-first intake", "project boundary review"],
+      "output_targets": ["self-documenting product split registry", "updated project boundaries"],
+      "validation": ["check-config-contract", "readiness tests"]
+    },
+    {
+      "slice_id": "snapshot-model-contract",
+      "touch_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+        "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/scripts/lib/product-feature-architecture.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs"
+      ],
+      "dependencies": ["product-boundary-contract"],
+      "output_targets": ["workspace product split snapshot", "customer-safe split data"],
+      "validation": ["workspace monitor check", "workspace monitor test"]
+    },
+    {
+      "slice_id": "default-user-ui",
+      "touch_paths": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/WorkspaceProductSplitPanel.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/ProductFeatureArchitecturePanel.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/workbench/CoreFeatureDrilldown.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+        "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+      ],
+      "dependencies": ["product-boundary-contract", "snapshot-model-contract"],
+      "output_targets": ["workspace-first home", "separated advanced agent/tool surfaces"],
+      "validation": ["workspace monitor check", "workspace monitor test", "workspace monitor build"]
+    },
+    {
+      "slice_id": "closeout-records",
+      "touch_paths": [
+        "_history/",
+        "_requirements/changes/",
+        "platform-desktop-app/docs/requirements/",
+        "platform-desktop-app/specs/2026-06-08-workspace-tracker-product-split/"
+      ],
+      "dependencies": ["all implementation slices"],
+      "output_targets": ["requirements", "spec", "traceability", "evaluation", "omission/resource checks"],
+      "validation": ["work-timer check", "check-omissions", "check-resources", "evaluate-work"]
+    }
+  ],
+  "first_executable_slice": "product-boundary-contract",
+  "merge_gates": [
+    "config contract checks",
+    "workspace monitor check/test/build",
+    "platform desktop test/check",
+    "omission/resource/evaluation guards",
+    "git diff --check"
+  ],
+  "context_budget": "Use targeted registry/component/test reads and avoid reading every renderer file.",
+  "source_provenance": [
+    "_history/web-searches/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+    "_history/coding-research/2026/2026-06-08-workspace-tracker-product-split.json"
+  ],
+  "created_at": "2026-06-08"
+}

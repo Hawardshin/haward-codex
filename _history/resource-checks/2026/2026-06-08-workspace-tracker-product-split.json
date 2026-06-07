@@ -1,0 +1,89 @@
+{
+  "task": "workspace tracker product split",
+  "work_mode": "governance",
+  "runtime_context": [
+    "Next.js static build",
+    "Node.js tests and collector",
+    "Tauri desktop project checks"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "build-test-processes",
+      "category": "process",
+      "description": "Validation commands spawn Node/Next.js processes that must complete before close-out.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Run commands synchronously and wait for exit before final response.",
+      "evidence": [
+        "workspace monitor check/test/build completed before close-out",
+        "platform desktop test/check completed before close-out"
+      ]
+    },
+    {
+      "risk_id": "snapshot-cache-output",
+      "category": "cache",
+      "description": "Collector regeneration may update generated snapshot artifacts.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Run collector in best-effort mode and review git status/diff before commit.",
+      "evidence": [
+        "git status reviewed before commit",
+        "git diff --check run before commit"
+      ]
+    },
+    {
+      "risk_id": "browser-smoke",
+      "category": "browser_context",
+      "description": "Frontend UI changes normally benefit from Browser smoke verification.",
+      "required": false,
+      "status": "mitigated",
+      "rationale": "Browser plugin was available. Opened the local renderer, verified the product split panel and default workspace-tracker labels, closed the tab, and stopped the dev server.",
+      "evidence": [
+        "Browser opened http://localhost:3050",
+        "Verified product boundary panel, Git workspace, terminal/AI run, reports/evidence, connection state",
+        "Closed Browser tab and stopped Next dev server session 70114"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "validation-process-lifecycle",
+      "resource": "Node/Next.js validation processes",
+      "create_path": "pnpm check/test/build commands",
+      "cleanup_path": "process exits after command completion",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Commands are non-watch validation commands."
+      ]
+    },
+    {
+      "check_id": "browser-and-dev-server-lifecycle",
+      "resource": "Browser tab and Next dev server",
+      "create_path": "Browser tab plus corepack pnpm exec next dev --port 3050",
+      "cleanup_path": "tab.close() and Ctrl-C to dev server session 70114",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "browser-tab-closed",
+        "dev server process exited after Ctrl-C"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "build-exit-status",
+      "metric": "validation command exit status",
+      "tool": "shell command exit code",
+      "threshold": "all required validation commands exit 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "Validation commands completed with exit code 0 or are reported explicitly if they fail."
+      ]
+    }
+  ],
+  "notes": [
+    "No new long-running server, watcher, browser tab, or provider runtime was intentionally left active."
+  ]
+}

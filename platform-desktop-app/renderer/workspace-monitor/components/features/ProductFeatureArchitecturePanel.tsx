@@ -102,17 +102,17 @@ export function ProductFeatureArchitecturePanel({
     <section className="product-feature-panel" aria-label="Product feature architecture">
       <div className="product-feature-summary">
         <div className="product-feature-position">
-          <p className="eyebrow">Agent Capability Platform</p>
-          <h2>Agent Core and CLI Orchestration</h2>
+          <p className="eyebrow">Workspace Tracker</p>
+          <h2>Git workspaces, guest AI tools, and reports</h2>
           <p>{architecture.productPosition.productClaim}</p>
           <div className="product-feature-actions">
             <button type="button" onClick={() => onOpenSection("desktop")}>
               <Network size={15} aria-hidden="true" />
-              <span>Open CLI Orchestration</span>
+              <span>Open Terminal Run</span>
             </button>
             <button type="button" onClick={() => onOpenSection("agents")}>
               <Bot size={15} aria-hidden="true" />
-              <span>Open Agent Core</span>
+              <span>Open Separate Agent Platform</span>
             </button>
           </div>
         </div>

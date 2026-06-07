@@ -1,0 +1,115 @@
+{
+  "schema_version": "2026-06-08",
+  "work_mode": "governance",
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-08-workspace-tracker-product-split.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-08-workspace-tracker-product-split.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/changes/2026-06-08-workspace-tracker-product-split.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-08-workspace-tracker-product-split.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-08-workspace-tracker-product-split/"
+  ],
+  "source_provenance_targets": [
+    "_history/web-searches/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+    "_history/coding-research/2026/2026-06-08-workspace-tracker-product-split.json"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+    "_history/large-scope-decompositions/2026/2026-06-08-workspace-tracker-product-split.json"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-08-workspace-tracker-product-split.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-08-workspace-tracker-product-split.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-08-workspace-tracker-product-split.json"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-08-workspace-tracker-product-split.json"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-08-workspace-tracker-product-split.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-08-workspace-tracker-product-split.ko.md"
+  ],
+  "installation_occurred": false,
+  "validation": {
+    "coding_research": "passed: PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research ../_history/coding-research/2026/2026-06-08-workspace-tracker-product-split.json",
+    "config_contract": "passed: PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/workspace-tracker-product-split-registry.json ../platform-desktop-app/configs/product-feature-registry.json configs/access/view-mode-registry.json",
+    "collector": "passed: corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect --best-effort",
+    "workspace_monitor_check": "passed: corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+    "workspace_monitor_tests": "passed: corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test",
+    "workspace_monitor_build": "passed: corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build",
+    "platform_desktop_tests": "passed: corepack pnpm --dir platform-desktop-app run test",
+    "platform_desktop_check": "passed: corepack pnpm --dir platform-desktop-app run check",
+    "browser_smoke": "passed: Browser opened http://localhost:3050 and verified product boundary, Git workspace, terminal/AI run, reports/evidence, connection state, and no default Korean legacy Root Tools label",
+    "diff_check": "passed: git diff --check"
+  },
+  "initial_instruction": "데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 요약, 계획, 보고서, 근거를 보는 제품으로 재정의하고, Ollama/agent/tool/AgentCore류 기능은 별도 agent-platform으로 분리하라는 요청.",
+  "result_summary": "workspace_tracker 제품 경계와 Git repository 기반 작업공간 모델을 추가하고, 기본 사용자 네비게이션/홈/스냅샷/README/레지스트리를 작업 추적 중심으로 개편했으며, agent/tool/Ollama/provider direct/AgentCore-style 기능은 분리된 advanced platform 역할로 이동했다.",
+  "changed_files": [
+    "platform-desktop-app/configs/workspace-tracker-product-split-registry.json",
+    "platform-desktop-app/configs/product-feature-registry.json",
+    "agent-platform/configs/access/view-mode-registry.json",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/WorkspaceProductSplitPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts",
+    "platform-desktop-app/scripts/check-readiness.mjs",
+    "platform-desktop-app/tests/readiness.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+    "platform-desktop-app/README.md",
+    "agent-platform/README.md",
+    "_ops/projects/registry.json",
+    "platform-desktop-app/specs/2026-06-08-workspace-tracker-product-split/",
+    "_requirements/changes/2026-06-08-workspace-tracker-product-split.ko.md",
+    "_history/evaluations/2026/2026-06-08-workspace-tracker-product-split-evaluation-input.json"
+  ],
+  "verification": [
+    "passed: PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research ../_history/coding-research/2026/2026-06-08-workspace-tracker-product-split.json",
+    "passed: PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/workspace-tracker-product-split-registry.json ../platform-desktop-app/configs/product-feature-registry.json configs/access/view-mode-registry.json",
+    "passed: corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect --best-effort",
+    "passed: corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check",
+    "passed: corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test",
+    "passed: corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build",
+    "passed: corepack pnpm --dir platform-desktop-app run test",
+    "passed: corepack pnpm --dir platform-desktop-app run check",
+    "passed: Browser opened http://localhost:3050 and verified product boundary, Git workspace, terminal/AI run, reports/evidence, connection state, and no default Korean legacy Root Tools label",
+    "passed: git diff --check"
+  ],
+  "references_checked": [
+    "Git official worktree documentation: https://git-scm.com/docs/git-worktree.html",
+    "OpenAI Codex official help: https://help.openai.com/en/articles/11369540-codex-in-chatgpt",
+    "Claude Code CLI reference: https://docs.claude.com/en/docs/claude-code/cli-reference",
+    "Cursor installation docs: https://docs.cursor.com/get-started/installation",
+    "Google Antigravity docs: https://antigravity.google/docs/home",
+    "AWS Bedrock Agents docs: https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html",
+    "_history/web-searches/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+    "_history/coding-research/2026/2026-06-08-workspace-tracker-product-split.json"
+  ],
+  "grounding_checks": [
+    "Web-first official-source record created before implementation.",
+    "Coding research record completed before implementation.",
+    "Browser smoke verified actual local UI text and product split panel.",
+    "check-omissions returned coverage_ready.",
+    "check-resources returned resource_ready.",
+    "git diff --check passed."
+  ],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Continue componentizing MonitorShell so future product-boundary work touches smaller files.",
+    "Add runtime-backed remote Git clone/create/import flows where the UI currently records the product contract.",
+    "Add per-tool guided diagnostics for Codex, Claude Code, Cursor, Antigravity, Gemini CLI, and OpenCode.",
+    "Public release remains gated by Developer ID signing, notarization, updater endpoint/signing, and clean-machine smoke tests."
+  ]
+}

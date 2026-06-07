@@ -94,8 +94,8 @@
       "path": "agent-platform/",
       "status": "active",
       "type": "core-platform",
-      "purpose": "Central Python-first platform project for building, configuring, evaluating, and improving agents.",
-      "scope": "Reusable platform models, agent specs, evaluation helpers, planning helpers, open-source evaluation, and platform docs.",
+      "purpose": "Central Python-first platform project for building, configuring, evaluating, improving, and operating reusable agents, tools, model/runtime adapters, and AgentCore-style capabilities.",
+      "scope": "Reusable platform models, agent specs, tool/platform runtime boundaries, Ollama/model management boundaries, provider direct agent execution boundaries, evaluation helpers, planning helpers, open-source evaluation, and platform docs.",
       "project_specific_home": [
         "agent-platform/src/",
         "agent-platform/tests/",
@@ -112,7 +112,8 @@
         "_tools/"
       ],
       "boundary_notes": [
-        "Platform-wide reusable capabilities can live here when they are part of the central agent platform.",
+        "Platform-wide reusable capabilities can live here when they are part of the separated central agent/tool platform.",
+        "Agent factory, root tool management, Ollama model management, provider-direct agent execution, and AWS AgentCore-style runtime/gateway/identity capabilities belong here, not in the default desktop user flow.",
         "Domain-specific experiments should become separate root projects instead of being added to agent-platform by default."
       ]
     },
@@ -179,8 +180,8 @@
       "path": "platform-desktop-app/",
       "status": "active",
       "type": "installable-desktop-product",
-      "purpose": "Desktop/installable software productization project for turning the workspace platform into an end-user application with OS-specific installer, release, privacy, and update gates.",
-      "scope": "Desktop product boundary, selected Tauri product shell, distribution registry, packaging strategy, installer release gates, and project-local requirements/specs.",
+      "purpose": "Desktop/installable software product for importing Git workspaces, launching guest AI coding tools, and showing current work timelines, reports, evidence, requirements, and terminal state.",
+      "scope": "Workspace tracker product boundary, selected Tauri product shell, distribution registry, packaging strategy, installer release gates, Git workspace import/open/clone/create flows, guest AI tool launch surfaces, and project-local requirements/specs.",
       "project_specific_home": [
         "platform-desktop-app/artifacts/",
         "platform-desktop-app/configs/",
@@ -212,6 +213,10 @@
       ],
       "boundary_notes": [
         "End-user installer packaging belongs here, not in agent-platform install_mode setup profiles.",
+        "The default user surface is a Git workspace tracker, not an agent factory or all-in-one tool/model management console.",
+        "Codex, Claude Code, Cursor, Antigravity, Gemini CLI, OpenCode, and similar tools are optional guest adapters attached to selected Git repositories.",
+        "Agent factory, root tool management, Ollama model management, provider-direct agent execution, and AWS AgentCore-style runtime lifecycle should stay in agent-platform/ or another separated project and appear here only as advanced links/status.",
+        "Each durable user project should be modeled as its own Git repository or imported Git workspace rather than hidden inside the desktop app project.",
         "Use the selected Tauri-first product runtime around the project-owned renderer workspace-monitor unless measured release blockers or maintenance evidence changes the decision.",
         "Keep the Next.js renderer under platform-desktop-app/renderer/workspace-monitor/ so the desktop product owns UI, runtime bridge, customer bundle, and installer boundaries together.",
         "Do not bundle real secrets, private snapshots, or environment-specific tokens in installers.",

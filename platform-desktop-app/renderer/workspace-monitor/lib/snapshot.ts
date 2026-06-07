@@ -865,6 +865,55 @@ export type WorkspaceToolUsageIntegration = {
   }>;
 };
 
+export type WorkspaceProductSplit = {
+  sourcePath: string;
+  productBoundary: {
+    desktopTracker: {
+      id: string;
+      home: string;
+      primaryClaim: string;
+      primarySections: string[];
+      notOwned: string[];
+    };
+    agentToolPlatform: {
+      id: string;
+      home: string;
+      primaryClaim: string;
+      desktopRelationship: string;
+    };
+  };
+  workspaceModel: {
+    defaultUnit: string;
+    rootCollectionPolicy: string;
+    importModes: Array<{
+      id: string;
+      label: string;
+      default: boolean;
+    }>;
+    trackedOutputs: string[];
+  };
+  guestAiSurfaces: Array<{
+    id: string;
+    label: string;
+    adapterRole: string;
+  }>;
+  separatedPlatforms: Array<{
+    capabilityId: string;
+    label: string;
+    targetHome: string;
+    desktopVisibility: string;
+  }>;
+  uiPolicy: {
+    homePriority: string[];
+    deemphasizedSections: string[];
+    primaryNavigationSections: string[];
+    advancedOperatorSections: string[];
+    homeCopyRule: string;
+    configurationRule: string;
+  };
+  validationGates: string[];
+};
+
 export type WorkspaceSnapshot = {
   schemaVersion: string;
   generatedAt: string;
@@ -901,6 +950,7 @@ export type WorkspaceSnapshot = {
   historyInsightLoop?: WorkspaceHistoryInsightLoop;
   fundamentalImprovementStructure?: WorkspaceFundamentalImprovementStructure;
   toolUsageIntegration?: WorkspaceToolUsageIntegration;
+  productSplit?: WorkspaceProductSplit;
   categories: string[];
   publicReview: {
     status: string;

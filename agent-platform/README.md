@@ -29,14 +29,18 @@
   - declarative agent specs and platform-level configs
   - evaluation and planning helpers used by the platform
   - open-source evaluation helpers
+  - agent factory, tool platform, Ollama/model runtime management, provider direct agent execution, and AWS AgentCore-style runtime/gateway/identity patterns
   - platform docs and artifacts
 - Does not belong here by default:
   - domain-specific experiments
   - one-off product apps
+  - the default desktop user flow for importing Git repositories, launching guest AI coding tools, and reading current work reports
   - project-specific tools or artifacts for another interest
   - data, UI, or workflows with an independent lifecycle
 
 Create a separate root project for domain-specific interests that can be run, tested, archived, or resumed independently.
+
+`platform-desktop-app/` is the user-facing workspace tracker. It may call this project for reusable agent/tool capabilities, but it should not expose agent factory, root tool management, Ollama, provider-direct agent execution, or AgentCore-style runtime lifecycle as first-run user surfaces. Those remain advanced separated platform capabilities here.
 
 ## Initial Direction
 

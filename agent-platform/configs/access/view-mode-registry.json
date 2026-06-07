@@ -157,35 +157,38 @@
     {
       "id": "user",
       "label": "User View",
-      "intent": "Show the task-first surfaces for someone starting work without foregrounding customization, operator, or repository-monitoring internals.",
+      "intent": "Show the Git workspace tracker surfaces for someone importing projects, launching AI coding tools, and reviewing current work without foregrounding customization, agent factory, tool studio, or repository-monitoring internals.",
       "audience": [
         "workspace owner running agent work",
-        "user creating or improving agents",
+        "user importing or reviewing Git-backed workspaces",
         "future public repository visitor",
         "reviewer who should not need implementation or governance internals"
       ],
       "visibility_rules": {
         "foreground": [
-          "task intake",
-          "automatic run launch",
+          "workspace import",
+          "current work summary",
+          "terminal and guest AI tool launch",
           "desktop runtime status",
           "result review",
+          "work timeline",
+          "evidence documents",
+          "requirements",
           "decision inbox"
         ],
         "collapse": [
           "agent customization",
           "tool studio",
           "root tool setup",
-          "projects",
-          "selected history",
-          "published artifacts",
-          "high-level documentation",
-          "requirements",
-          "operator observability"
+          "operator observability",
+          "repository structure browser"
         ],
         "hide_by_default": [
           "operator monitoring",
-          "repository structure browser",
+          "agent factory",
+          "tool builder",
+          "Ollama model management",
+          "direct provider agent execution",
           "raw configs",
           "internal governance records",
           "implementation tests",
@@ -199,8 +202,13 @@
       },
       "allowed_sections": [
         "overview",
+        "source",
         "desktop",
-        "eval"
+        "eval",
+        "projects",
+        "history",
+        "documents",
+        "requirements"
       ],
       "must_not": [
         "Treat a simplified UI lens as security enforcement.",

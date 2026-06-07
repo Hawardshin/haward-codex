@@ -1,0 +1,122 @@
+{
+  "task": "workspace tracker product split",
+  "work_mode": "governance",
+  "expected_items": [
+    {
+      "item_id": "split-desktop-purpose",
+      "description": "Desktop app must focus on Git workspaces, guest AI coding tools, current work summaries, reports, and evidence.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/product-feature-registry.json",
+        "platform-desktop-app/configs/workspace-tracker-product-split-registry.json",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/WorkspaceProductSplitPanel.tsx"
+      ]
+    },
+    {
+      "item_id": "separate-agent-tool-platform",
+      "description": "Ollama, agent management, tool management, and AWS AgentCore-style functions must be separated from the default desktop user flow.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/README.md",
+        "_ops/projects/registry.json",
+        "platform-desktop-app/configs/product-feature-registry.json"
+      ]
+    },
+    {
+      "item_id": "git-workspace-model",
+      "description": "New user projects should be treated as separate Git repositories or imported Git workspaces.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/workspace-tracker-product-split-registry.json",
+        "_ops/projects/registry.json"
+      ]
+    },
+    {
+      "item_id": "easy-default-interface",
+      "description": "Default user surface should be simpler and hide advanced platform customization.",
+      "source": "prior user request and latest request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "agent-platform/configs/access/view-mode-registry.json",
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
+      ]
+    },
+    {
+      "item_id": "validation-and-records",
+      "description": "Meaningful broad implementation must leave requirements, specs, traces, validation, and evaluation records.",
+      "source": "AGENTS.md repository instructions",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_requirements/changes/2026-06-08-workspace-tracker-product-split.ko.md",
+        "platform-desktop-app/specs/2026-06-08-workspace-tracker-product-split/",
+        "_history/request-traces/2026/2026-06-08-workspace-tracker-product-split.ko.md"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/configs/workspace-tracker-product-split-registry.json",
+      "purpose": "Self-documenting product split contract",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/features/WorkspaceProductSplitPanel.tsx",
+      "purpose": "User-facing product split panel",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-08-workspace-tracker-product-split/spec.ko.md",
+      "purpose": "Project spec",
+      "required": true
+    },
+    {
+      "path": "_history/web-searches/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+      "purpose": "Web-first intake record",
+      "required": true
+    },
+    {
+      "path": "_history/evaluations/2026/2026-06-08-workspace-tracker-product-split-evaluation-input.json",
+      "purpose": "Close-out evaluator input",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "workspace-monitor-check",
+      "description": "Workspace Monitor typecheck passes.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check"]
+    },
+    {
+      "check_id": "workspace-monitor-tests",
+      "description": "Workspace Monitor tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test"]
+    },
+    {
+      "check_id": "desktop-tests-check",
+      "description": "Platform desktop app tests/check pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["corepack pnpm --dir platform-desktop-app run test", "corepack pnpm --dir platform-desktop-app run check"]
+    }
+  ],
+  "known_omission_risks": [
+    "This slice does not implement real remote Git repository creation.",
+    "This slice does not auto-install every guest AI CLI.",
+    "MonitorShell remains larger than the desired long-term file size and needs continuing component extraction."
+  ],
+  "notes": [
+    "The omission guard covers the product split slice, not every later runtime adapter capability."
+  ]
+}

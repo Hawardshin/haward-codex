@@ -274,14 +274,14 @@ function readCssRule(selector) {
   return match[1];
 }
 
-test("Tool Studio is a first-class monitor section", () => {
+test("Tool Studio remains available as a separated advanced section", () => {
   assert.match(desktopTypes, /\|\s*"tools"/);
-  assert.match(monitorShell, /id:\s*"tools"[\s\S]*?label:\s*"툴 스튜디오"/);
-  assert.match(monitorShell, /allowedSections:\s*\["overview", "desktop", "eval"\]/);
-  assert.match(monitorShell, /defaultPinnedSections:\s*SectionId\[\]\s*=\s*\["overview", "desktop", "eval"\]/);
+  assert.match(monitorShell, /id:\s*"tools"[\s\S]*?label:\s*"분리된 툴 플랫폼"/);
+  assert.match(monitorShell, /allowedSections:\s*\["overview", "source", "desktop", "eval", "projects", "history", "documents", "requirements"\]/);
+  assert.match(monitorShell, /defaultPinnedSections:\s*SectionId\[\]\s*=\s*\["overview", "source", "desktop", "eval"\]/);
   assert.doesNotMatch(monitorShell, /hasLegacyDefault && !next\.includes\("tools"\)/);
   assert.doesNotMatch(monitorShell, /next\.splice\(insertAt, 0, "tools"\)/);
-  assert.match(monitorShell, /tools:\s*"Studio"/);
+  assert.match(monitorShell, /tools:\s*"Separate"/);
   assert.match(monitorShell, /section === "tools"[\s\S]*?<MemoizedToolStudioPanel/);
   assert.match(monitorShell, /toolUsageIntegration=\{snapshot\.toolUsageIntegration\}/);
   assert.match(monitorShell, /import type \{ ToolStudioMode, ToolStudioModeRequest, ToolStudioPanelProps \} from "@\/components\/workbench\/ToolStudioPanel"/);
@@ -290,7 +290,7 @@ test("Tool Studio is a first-class monitor section", () => {
   assert.match(monitorShell, /const MemoizedToolStudioPanel = memo\(ToolStudioPanel\)/);
   assert.match(toolStudio, /export type ToolStudioPanelProps = \{/);
   assert.match(toolStudio, /toolUsageIntegration\?: WorkspaceToolUsageIntegration/);
-  assert.match(coreDrilldown, /"files" \| "agents" \| "tools" \| "run" \| "eval" \| "learn"/);
+  assert.match(coreDrilldown, /"workspace" \| "run" \| "timeline" \| "eval" \| "projects"/);
 });
 
 test("Tool Studio exposes source-backed agent tool usage playbooks", () => {
@@ -334,17 +334,17 @@ test("Workspace snapshot collection uses bounded worker-thread parallelism", () 
 
 test("AI Eval is a first-class resident workbench section", () => {
   assert.match(desktopTypes, /\|\s*"eval"/);
-  assert.match(monitorShell, /id:\s*"eval"[\s\S]*?label:\s*"결과 확인"/);
+  assert.match(monitorShell, /id:\s*"eval"[\s\S]*?label:\s*"보고서\/근거"/);
   assert.match(monitorShell, /const maxResidentSectionPanels = 12/);
-  assert.match(monitorShell, /retainedResidentSections: SectionId\[\] = \["agents", "desktop", "eval", "source", "tools"\]/);
-  assert.match(monitorShell, /startupResidentPreloadSections: SectionId\[\] = \[[\s\S]*?"agents"[\s\S]*?"requirements"[\s\S]*?"overview"[\s\S]*?\]/);
+  assert.match(monitorShell, /retainedResidentSections: SectionId\[\] = \["overview", "source", "desktop", "eval"\]/);
+  assert.match(monitorShell, /startupResidentPreloadSections: SectionId\[\] = \[[\s\S]*?"source"[\s\S]*?"requirements"[\s\S]*?"structure"[\s\S]*?\]/);
   assert.match(monitorShell, /const EvaluationReportPanel = dynamic<EvaluationReportPanelProps>/);
   assert.match(monitorShell, /import\("@\/components\/features\/EvaluationReportPanel"\)/);
   assert.match(monitorShell, /void import\("@\/components\/features\/EvaluationReportPanel"\)/);
-  assert.match(monitorShell, /eval:\s*`\$\{visibleEvaluations\.toLocaleString\("ko-KR"\)\} evals`/);
-  assert.match(monitorShell, /section === "agents" \|\| section === "tools" \|\| section === "eval"/);
+  assert.match(monitorShell, /eval:\s*`\$\{visibleEvaluations\.toLocaleString\("ko-KR"\)\} reports`/);
+  assert.match(monitorShell, /section === "source" \|\| section === "desktop" \|\| section === "eval"/);
   assert.match(monitorShell, /id:\s*"evaluate-work"[\s\S]*?targetSection:\s*"eval"/);
-  assert.match(monitorShell, /id:\s*"eval"[\s\S]*?cta:\s*uiLanguage === "ko" \? "AI 평가 열기" : "Open AI Eval"/);
+  assert.match(monitorShell, /id:\s*"eval"[\s\S]*?cta:\s*uiLanguage === "ko" \? "보고서 열기" : "Open Reports"/);
   assert.match(monitorShell, /section === "eval"[\s\S]*?<EvaluationReportPanel/);
   assert.match(monitorShell, /const \[sharedDesktopResourceSnapshot, setSharedDesktopResourceSnapshot\] = useState<DesktopResourceSnapshotReport \| null>\(null\)/);
   assert.match(monitorShell, /handleDesktopResourceSnapshotChange/);
@@ -405,11 +405,13 @@ test("AI Eval is a first-class resident workbench section", () => {
   assert.equal(packageJson.scripts["check:comprehensive-improvement"], "node scripts/check-comprehensive-improvement-contract.mjs");
 });
 
-test("Default user view exposes a simple task-first start surface", () => {
-  assert.match(monitorShell, /const defaultPinnedSections:\s*SectionId\[\]\s*=\s*\["overview", "desktop", "eval"\]/);
-  assert.match(monitorShell, /allowedSections:\s*\["overview", "desktop", "eval"\]/);
+test("Default user view exposes a simple workspace-tracker start surface", () => {
+  assert.match(monitorShell, /const defaultPinnedSections:\s*SectionId\[\]\s*=\s*\["overview", "source", "desktop", "eval"\]/);
+  assert.match(monitorShell, /allowedSections:\s*\["overview", "source", "desktop", "eval", "projects", "history", "documents", "requirements"\]/);
   assert.match(monitorShell, /const \[viewMode, setViewMode\] = useState\(snapshot\.viewModeCatalog\?\.defaultMode \|\| "user"\)/);
   assert.match(monitorShell, /data-simple-user-start/);
+  assert.match(monitorShell, /<WorkspaceProductSplitPanel/);
+  assert.match(css, /\.workspace-product-split-panel \{/);
   assert.match(monitorShell, /startSimpleUserTask/);
   assert.match(monitorShell, /showOperatorCenter=\{currentViewMode\.id !== "user"\}/);
   assert.match(css, /\.simple-user-start-panel \{/);
@@ -526,7 +528,7 @@ test("Monitor groups repeated actions with shared action primitives", () => {
   assert.match(monitorShell, /<Button variant="secondary" size="sm" onClick=\{\(\) => setCommandPaletteOpen\(false\)\}>/);
   assert.match(monitorShell, /<Button key=\{item\.id\} variant="ghost" className="command-palette-result" onClick=\{\(\) => runCommandItem\(item\)\}>/);
   assert.match(monitorShell, /const recommendedCommandItems = useMemo/);
-  assert.match(monitorShell, /"connect-chatbot", "provider-accounts", "terminal-drawer-open", "settings-execution"/);
+  assert.match(monitorShell, /"intent-import-workspace", "terminal-drawer-open", "action-evidence", "settings-execution"/);
   assert.match(monitorShell, /const commandResultStatusText =/);
   assert.match(monitorShell, /role="status" aria-live="polite" className="command-palette-live-status"/);
   assert.match(monitorShell, /data-command-palette-recommendation=\{item\.id\}/);
@@ -828,7 +830,7 @@ test("Search agent provider and model settings use explicit choices", () => {
   assert.match(searchAgentWorkChatPanel, /const modelChoiceOptions = useMemo/);
   assert.match(searchAgentWorkChatPanel, /const chatbotConnectionItems = useMemo/);
   assert.match(monitorShell, /id: "connect-chatbot"/);
-  assert.match(monitorShell, /label: uiLanguage === "ko" \? "챗봇 연결" : "Connect Chatbot"/);
+  assert.match(monitorShell, /label: uiLanguage === "ko" \? "고급 에이전트 채팅" : "Advanced Agent Chat"/);
   assert.match(searchAgentWorkChatPanel, /agent-provider-choice-grid/);
   assert.match(searchAgentWorkChatPanel, /agent-model-choice-grid/);
   assert.match(searchAgentWorkChatPanel, /data-chatbot-connection="search-agent"/);
@@ -1406,9 +1408,9 @@ test("Monitor section switches prewarm heavy surfaces and preserve source editor
   assert.match(monitorShell, /<SnapshotLoadingShell detail="Warming resident tabs" \/>/);
   assert.match(monitorShell, /data-section-content-ready=\{sectionContentReady \? "true" : "false"\}/);
   assert.match(monitorShell, /const maxResidentSectionPanels = 12/);
-  assert.match(monitorShell, /const retainedResidentSections: SectionId\[\] = \["agents", "desktop", "eval", "source", "tools"\]/);
+  assert.match(monitorShell, /const retainedResidentSections: SectionId\[\] = \["overview", "source", "desktop", "eval"\]/);
   assert.match(monitorShell, /const nonRetainedResidentSections: SectionId\[\] = \[\]/);
-  assert.match(monitorShell, /const startupResidentPreloadSections: SectionId\[\] = \[[\s\S]*?"agents"[\s\S]*?"requirements"[\s\S]*?"overview"[\s\S]*?\]/);
+  assert.match(monitorShell, /const startupResidentPreloadSections: SectionId\[\] = \[[\s\S]*?"source"[\s\S]*?"requirements"[\s\S]*?"structure"[\s\S]*?\]/);
   assert.match(monitorShell, /function normalizeResidentSectionIds\(candidates: SectionId\[\], activeSection: SectionId\)/);
   assert.match(monitorShell, /candidate !== activeSection && nonRetained\.has\(candidate\)/);
   assert.match(monitorShell, /const residentStartupPreloadDoneRef = useRef\(false\)/);
@@ -2012,26 +2014,26 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(monitorShell, /const \[activeTaskFlowStepId, setActiveTaskFlowStepId\] = useState\(""\)/);
   assert.match(monitorShell, /const \[requestedToolMode, setRequestedToolMode\] = useState<ToolStudioModeRequest \| null>\(null\)/);
   assert.match(monitorShell, /const taskIntentItems = useMemo<TaskIntentItem\[\]>/);
-  assert.match(monitorShell, /targetSection:\s*"tools"/);
-  assert.match(monitorShell, /nextStep:\s*uiLanguage === "ko" \? "빌드 모드에서 Python 소스와 입력 스키마부터 선택합니다\."/);
-  assert.match(monitorShell, /id: "source", label: "소스 선택", actionLabel: "툴 만들기", run: selectToolStep\("build", "source"\)/);
-  assert.match(monitorShell, /id: "venv", label: "입력과 가상 환경 확인", actionLabel: "파이썬 환경", run: selectToolStep\("environment", "venv"\)/);
+  assert.match(monitorShell, /id:\s*"import-workspace"[\s\S]*?targetSection:\s*"source"/);
+  assert.match(monitorShell, /nextStep:\s*uiLanguage === "ko" \? "작업할 Git 레포를 선택하고 현재 작업 파일과 상태를 엽니다\."/);
+  assert.match(monitorShell, /id: "open", label: "기존 Git 레포 열기", actionLabel: "가져오기", run: selectIntentStep\("import-workspace", "source", "open"\)/);
+  assert.match(monitorShell, /id: "clone", label: "원격 레포 clone", actionLabel: "Clone", run: selectIntentStep\("import-workspace", "source", "clone"\)/);
   assert.match(monitorShell, /setRequestedToolMode\(\(previous\) => \(\{ mode, requestId: \(previous\?\.requestId \|\| 0\) \+ 1 \}\)\)/);
   assert.match(monitorShell, /openSection\("tools", \{ intentId: "build-tool", flowStepId \}\)/);
   assert.match(monitorShell, /const selectIntentStep = useCallback/);
   assert.match(monitorShell, /const selectToolStep = useCallback/);
-  assert.match(monitorShell, /id:\s*"build-tool"[\s\S]*?label:\s*uiLanguage === "ko" \? "툴 만들기"/);
-  assert.match(monitorShell, /run: selectIntentStep\("create-agent", "agents", "role"\)/);
-  assert.match(monitorShell, /run: selectToolStep\("build", "source"\)/);
+  assert.doesNotMatch(monitorShell, /id:\s*"build-tool"[\s\S]*?targetSection:\s*"tools"/);
+  assert.doesNotMatch(monitorShell, /run: selectIntentStep\("create-agent", "agents", "role"\)/);
+  assert.doesNotMatch(monitorShell, /run: selectToolStep\("build", "source"\)/);
   assert.match(monitorShell, /run: selectIntentStep\("run-work", "desktop", "lane"\)/);
   assert.match(monitorShell, /run: selectIntentStep\("evaluate-work", "eval", "current"\)/);
   assert.match(monitorShell, /run: selectIntentStep\("open-files", "source", "file"\)/);
-  assert.match(monitorShell, /id: "agent-role"/);
-  assert.match(monitorShell, /id: "tool-source"/);
+  assert.match(monitorShell, /id: "timeline-summary"/);
+  assert.match(monitorShell, /id: "workspace-open"/);
   assert.match(monitorShell, /id: "run-lane"/);
   assert.match(monitorShell, /id: "eval-current"/);
-  assert.match(monitorShell, /id: "files-file"/);
-  assert.match(monitorShell, /id: "visibility-decisions"/);
+  assert.match(monitorShell, /id: "project-registry"/);
+  assert.match(monitorShell, /id: "questions", label: "보류 질문 확인", actionLabel: "결정함", run: selectIntentStep\("resolve-decisions", "eval", "questions"\)/);
   assert.match(coreDrilldown, /connections\?: Array/);
   assert.match(coreDrilldown, /data-core-feature-connections=\{feature\.id\}/);
   assert.match(coreDrilldown, /data-core-feature-action=\{connection\.id\}/);
@@ -2042,7 +2044,7 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.match(monitorShell, /aria-current=\{step\.id === activeTaskFlowStep\?\.id \? "step" : undefined\}/);
   assert.match(monitorShell, /className="task-flow-rail"/);
   assert.match(monitorShell, /const primaryHomeIntent = useMemo/);
-  assert.match(monitorShell, /taskIntentItems\.find\(\(item\) => item\.id === "build-tool"\)/);
+  assert.match(monitorShell, /taskIntentItems\.find\(\(item\) => item\.id === "import-workspace"\)/);
   assert.match(monitorShell, /const primaryHomeFlowStep = useMemo/);
   assert.match(monitorShell, /const homeStartFlow = useMemo<HomeStartFlowStep\[\]>/);
   assert.match(monitorShell, /id: "prepare"[\s\S]*?id: "choose"[\s\S]*?id: "run"[\s\S]*?id: "evaluate"/);
@@ -2070,7 +2072,7 @@ test("Monitor home exposes task-intent routes before section names", () => {
   assert.ok(focusCommandIndex < taskIntentIndex);
   assert.ok(taskIntentIndex < statusRowIndex);
   assert.match(monitorShell, /group:\s*uiLanguage === "ko" \? "하고 싶은 일" : "Goal"/);
-  assert.match(monitorShell, /placeholder=\{uiLanguage === "ko" \? "하고 싶은 일 검색: 툴, 에이전트, 실행, 파일, 설정"/);
+  assert.match(monitorShell, /placeholder=\{uiLanguage === "ko" \? "하고 싶은 일 검색: 작업공간, 실행, 보고서, 파일, 설정"/);
   assert.match(css, /\.core-home-panel \{[\s\S]*?background: transparent;/);
   assert.match(css, /--surface-panel:/);
   assert.match(css, /--font-size-work-title:/);

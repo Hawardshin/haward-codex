@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2026-06-03",
-  "generatedAt": "2026-06-07T16:20:11.275Z",
+  "generatedAt": "2026-06-07T17:06:38.769Z",
   "repoRootName": "codex",
   "stats": {
     "projects": 5,
@@ -12,12 +12,12 @@
     "tasks": 71,
     "completedTasks": 71,
     "documents": 650,
-    "requirements": 532,
+    "requirements": 545,
     "evaluations": 14,
     "webSearches": 13,
     "timingRecords": 14,
     "historyDays": 2,
-    "adminHistoryDocuments": 3206,
+    "adminHistoryDocuments": 3213,
     "adminHistoryDays": 9,
     "unifiedOpsEvents": 160,
     "modeGroups": 8,
@@ -28,9 +28,9 @@
     "intentFeatureNow": 4,
     "intentFeatureNext": 5,
     "intentFeatureLater": 4,
-    "productFeatures": 8,
-    "primaryProductFeatures": 2,
-    "supportingProductFeatures": 6,
+    "productFeatures": 11,
+    "primaryProductFeatures": 4,
+    "supportingProductFeatures": 7,
     "referencePlatforms": 5,
     "referenceTransferPatterns": 19,
     "openSourceReferenceLayers": 7,
@@ -54,10 +54,11 @@
       "path": "agent-platform/",
       "status": "active",
       "type": "core-platform",
-      "purpose": "Central Python-first platform project for building, configuring, evaluating, and improving agents.",
-      "scope": "Reusable platform models, agent specs, evaluation helpers, planning helpers, open-source evaluation, and platform docs.",
+      "purpose": "Central Python-first platform project for building, configuring, evaluating, improving, and operating reusable agents, tools, model/runtime adapters, and AgentCore-style capabilities.",
+      "scope": "Reusable platform models, agent specs, tool/platform runtime boundaries, Ollama/model management boundaries, provider direct agent execution boundaries, evaluation helpers, planning helpers, open-source evaluation, and platform docs.",
       "boundaryNotes": [
-        "Platform-wide reusable capabilities can live here when they are part of the central agent platform.",
+        "Platform-wide reusable capabilities can live here when they are part of the separated central agent/tool platform.",
+        "Agent factory, root tool management, Ollama model management, provider-direct agent execution, and AWS AgentCore-style runtime/gateway/identity capabilities belong here, not in the default desktop user flow.",
         "Domain-specific experiments should become separate root projects instead of being added to agent-platform by default."
       ]
     },
@@ -94,10 +95,14 @@
       "path": "platform-desktop-app/",
       "status": "active",
       "type": "installable-desktop-product",
-      "purpose": "Desktop/installable software productization project for turning the workspace platform into an end-user application with OS-specific installer, release, privacy, and update gates.",
-      "scope": "Desktop product boundary, selected Tauri product shell, distribution registry, packaging strategy, installer release gates, and project-local requirements/specs.",
+      "purpose": "Desktop/installable software product for importing Git workspaces, launching guest AI coding tools, and showing current work timelines, reports, evidence, requirements, and terminal state.",
+      "scope": "Workspace tracker product boundary, selected Tauri product shell, distribution registry, packaging strategy, installer release gates, Git workspace import/open/clone/create flows, guest AI tool launch surfaces, and project-local requirements/specs.",
       "boundaryNotes": [
         "End-user installer packaging belongs here, not in agent-platform install_mode setup profiles.",
+        "The default user surface is a Git workspace tracker, not an agent factory or all-in-one tool/model management console.",
+        "Codex, Claude Code, Cursor, Antigravity, Gemini CLI, OpenCode, and similar tools are optional guest adapters attached to selected Git repositories.",
+        "Agent factory, root tool management, Ollama model management, provider-direct agent execution, and AWS AgentCore-style runtime lifecycle should stay in agent-platform/ or another separated project and appear here only as advanced links/status.",
+        "Each durable user project should be modeled as its own Git repository or imported Git workspace rather than hidden inside the desktop app project.",
         "Use the selected Tauri-first product runtime around the project-owned renderer workspace-monitor unless measured release blockers or maintenance evidence changes the decision.",
         "Keep the Next.js renderer under platform-desktop-app/renderer/workspace-monitor/ so the desktop product owns UI, runtime bridge, customer bundle, and installer boundaries together.",
         "Do not bundle real secrets, private snapshots, or environment-specific tokens in installers.",
@@ -4733,6 +4738,48 @@
       "sourcePath": "_requirements/changes/2026-06-03-pnpm-workspace-migration.ko.md"
     },
     {
+      "id": "REQ-WTPS-001",
+      "requirement": "데스크톱 앱의 기본 제품 역할은 workspace tracker 여야 한다.",
+      "priority": "`product-feature-registry.json`, fallback architecture, README, tests가 `workspace_tracker`를 기준으로 한다.",
+      "sourcePath": "_requirements/changes/2026-06-08-workspace-tracker-product-split.ko.md"
+    },
+    {
+      "id": "REQ-WTPS-002",
+      "requirement": "사용자의 기본 화면은 Git 작업공간, 터미널/AI 실행, 작업 타임라인, 보고서/근거, 문서/요구사항을 우선해야 한다.",
+      "priority": "user view allowed sections가 `overview/source/desktop/eval/projects/history/documents/requirements`를 포함하고 agent/tool 고급 기능은 기본에서 빠진다.",
+      "sourcePath": "_requirements/changes/2026-06-08-workspace-tracker-product-split.ko.md"
+    },
+    {
+      "id": "REQ-WTPS-003",
+      "requirement": "Codex, Claude Code, Cursor, Antigravity 등은 내장 필수 런타임이 아니라 선택형 guest AI 도구로 모델링해야 한다.",
+      "priority": "product split snapshot과 UI가 guest AI tools를 별도 목록으로 표시한다.",
+      "sourcePath": "_requirements/changes/2026-06-08-workspace-tracker-product-split.ko.md"
+    },
+    {
+      "id": "REQ-WTPS-004",
+      "requirement": "agent factory, root tool management, Ollama, provider direct agent run, AWS AgentCore식 runtime lifecycle은 agent platform/ 또는 분리 프로젝트가 소유해야 한다.",
+      "priority": "product registry와 README가 해당 기능을 separated/advanced로 표시한다.",
+      "sourcePath": "_requirements/changes/2026-06-08-workspace-tracker-product-split.ko.md"
+    },
+    {
+      "id": "REQ-WTPS-005",
+      "requirement": "새 사용자 프로젝트는 데스크톱 앱 내부 기능 묶음이 아니라 별도 Git repository/imported workspace로 취급해야 한다.",
+      "priority": "product split registry의 workspace model이 `git_repository`를 기본 단위로 둔다.",
+      "sourcePath": "_requirements/changes/2026-06-08-workspace-tracker-product-split.ko.md"
+    },
+    {
+      "id": "REQ-WTPS-006",
+      "requirement": "제품 분리 결정은 스냅샷과 customer snapshot에도 안전하게 나타나야 한다.",
+      "priority": "collector가 product split registry를 읽고 customer snapshot에 비민감 필드만 포함한다.",
+      "sourcePath": "_requirements/changes/2026-06-08-workspace-tracker-product-split.ko.md"
+    },
+    {
+      "id": "REQ-WTPS-007",
+      "requirement": "기본 UI는 분리 플랫폼 기능을 숨기기만 하지 말고, 필요한 경우 고급/분리 플랫폼 링크로 이해 가능하게 표시해야 한다.",
+      "priority": "WorkspaceProductSplitPanel과 ProductFeatureArchitecturePanel이 separated platform action/copy를 제공한다.",
+      "sourcePath": "_requirements/changes/2026-06-08-workspace-tracker-product-split.ko.md"
+    },
+    {
       "id": "REQ-WS-001",
       "requirement": "The repository shall operate as a long lived monorepo for a personal agent building platform and multiple projects.",
       "priority": "UR-2026-05-31-001, 002",
@@ -7881,9 +7928,349 @@
       "requirement": "제품 기능 레지스트리는 이 기능을 Root Tool Management의 현재 자산과 검증 gate로 연결해야 한다.",
       "priority": "should",
       "sourcePath": "platform-desktop-app/docs/requirements/2026-06-06-tool-usage-integration.ko.md"
+    },
+    {
+      "id": "REQ-WM-078",
+      "requirement": "홈 화면은 사용자가 Git 작업공간을 고르고 현재 작업을 추적하는 흐름을 첫 화면으로 보여야 한다.",
+      "priority": "`MonitorShell.tsx`, `WorkspaceProductSplitPanel.tsx`",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-08-workspace-tracker-product-split.ko.md"
+    },
+    {
+      "id": "REQ-WM-079",
+      "requirement": "사용자 기본 네비게이션은 작업 추적에 필요한 섹션만 노출해야 한다.",
+      "priority": "`view-mode-registry.json`, `MonitorShell.tsx`",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-08-workspace-tracker-product-split.ko.md"
+    },
+    {
+      "id": "REQ-WM-080",
+      "requirement": "에이전트/툴/모델/AgentCore류 기능은 기본 사용자 기능이 아니라 분리 플랫폼/고급 기능으로 표시해야 한다.",
+      "priority": "`product-feature-registry.json`, `ProductFeatureArchitecturePanel.tsx`",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-08-workspace-tracker-product-split.ko.md"
+    },
+    {
+      "id": "REQ-WM-081",
+      "requirement": "product split은 collector snapshot과 customer snapshot에 포함되어야 한다.",
+      "priority": "`snapshot.ts`, `collect-workspace.mjs`",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-08-workspace-tracker-product-split.ko.md"
+    },
+    {
+      "id": "REQ-WM-082",
+      "requirement": "import/open/clone/create repository intent는 기본 추천 작업이어야 한다.",
+      "priority": "`MonitorShell.tsx`",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-08-workspace-tracker-product-split.ko.md"
+    },
+    {
+      "id": "REQ-WM-083",
+      "requirement": "보고서/근거, 작업 타임라인, 문서/요구사항은 기본 사용자 경로에서 접근 가능해야 한다.",
+      "priority": "navigation, command palette, home drilldown",
+      "sourcePath": "platform-desktop-app/docs/requirements/2026-06-08-workspace-tracker-product-split.ko.md"
     }
   ],
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-08-workspace-tracker-product-split-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-08-workspace-tracker-product-split-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 08 Workspace Tracker Product Split Evaluation Input",
+      "excerpt": "{ \"schema version\": \"2026 06 08\", \"work mode\": \"governance\", \"web search record targets\": \" history/web searches/2026/2026 06 08 workspace tracker product split.ko.md\" , \"user request summary targets\": \" history/user requests/2026/2026 06 08 workspace tracker product split.ko.md\"",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 08&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;web search record targets&quot;: &quot; history/web searches/2026/2026 06 08 workspace tracker product split.ko.md&quot; , &quot;user request summary targets&quot;: &quot; history/user requests/2026/2026 06 08 workspace tracker product split.ko.md&quot; , &quot;requirements targets&quot;: &quot; requirements/changes/2026 06 08 workspace tracker p</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 7851,
+      "updatedAt": "2026-06-07T17:06:09.975Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-08-workspace-tracker-product-split-json",
+      "path": "_history/work-timings/2026/2026-06-08-workspace-tracker-product-split.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 08 Workspace Tracker Product Split",
+      "excerpt": "{ \"task id\": \"2026 06 08 workspace tracker product split\", \"title\": \"Workspace tracker product split\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seconds\": ",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 08 workspace tracker product split&quot;, &quot;title&quot;: &quot;Workspace tracker product split&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;duration seconds&quot;: 900, &quot;notes&quot;: &quot;Official docs for Git, AI coding tools, and AgentCore style platf</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3027,
+      "updatedAt": "2026-06-07T17:05:23.467Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+      "path": "_history/request-traces/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: workspace tracker product split",
+      "excerpt": "요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현 및 검증 완료, 커밋/푸시 대기 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: ",
+      "html": "<p>요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현 및 검증 완료, 커밋/푸시 대기 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: history/web searches/2026/2026 06 08 workspace tracker product split.ko.md codin</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1831,
+      "updatedAt": "2026-06-07T17:05:04.830Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-08-workspace-tracker-product-split-validation-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-08-workspace-tracker-product-split/validation.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "검증 계획: workspace tracker product split",
+      "excerpt": "검증 계획: workspace tracker product split 필수 검증 PYTHONPATH=src python3 m agent platform.cli complete coding research ../ history/coding research/2026/2026 06 08 workspace tracker product split.json PYTHONPATH=src python3 m agent platform.cli check config contract ../platform desktop",
+      "html": "<h1>검증 계획: workspace tracker product split</h1>\n<h2>필수 검증</h2>\n<ul>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli complete-coding-research ../_history/coding-research/2026/2026-06-08-workspace-tracker-product-split.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/workspace-tracker-product-split-registry.json ../platform-desktop-app/configs/product-feature-registry.json configs/access/view-mode-registry.json</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run collect --best-effort</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run check</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor test</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app/renderer/workspace-monitor run build</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app run test</code></li>\n<li><code>corepack pnpm --dir platform-desktop-app run check</code></li>\n<li><code>python3 _tools/work-timer/src/work_timer.py check _history/work-timings/2026/2026-06-08-workspace-tracker-product-split.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-omissions ../_history/omission-checks/2026/2026-06-08-workspace-tracker-product-split.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli check-resources ../_history/resource-checks/2026/2026-06-08-workspace-tracker-product-split.json</code></li>\n<li><code>PYTHONPATH=src python3 -m agent_platform.cli evaluate-work ../_history/evaluations/2026/2026-06-08-workspace-tracker-product-split-evaluation-input.json</code></li>\n<li><code>git diff --check</code></li>\n</ul>\n<h2>시각 검증</h2>\n<p>Browser plugin으로 <code>http://localhost:3050</code> local renderer를 열고 home/product split panel, Git 작업공간, 터미널/AI 실행, 보고서/근거, 연결 상태 표시를 확인한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1730,
+      "updatedAt": "2026-06-07T17:04:58.322Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-08-workspace-tracker-product-split-tasks-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-08-workspace-tracker-product-split/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록: workspace tracker product split",
+      "excerpt": "작업 목록: workspace tracker product split x 웹 검색과 공식 문서 기반 근거 기록 x large scope decomposition 기록 x coding research 기록 x workspace tracker product split registry.json 추가 x product feature registry.json 역할 변경 x view mode registry.json user surface 변경 x snapshot.ts product split 타입 추가 x",
+      "html": "<h1>작업 목록: workspace tracker product split</h1>\n<ul>\n<li>[x] 웹 검색과 공식 문서 기반 근거 기록</li>\n<li>[x] large scope decomposition 기록</li>\n<li>[x] coding research 기록</li>\n<li>[x] <code>workspace-tracker-product-split-registry.json</code> 추가</li>\n<li>[x] <code>product-feature-registry.json</code> 역할 변경</li>\n<li>[x] <code>view-mode-registry.json</code> user surface 변경</li>\n<li>[x] <code>snapshot.ts</code> product split 타입 추가</li>\n<li>[x] collector product split 수집/sanitization 추가</li>\n<li>[x] workspace product split panel 추가</li>\n<li>[x] 홈/네비게이션/command palette/task intent copy 변경</li>\n<li>[x] tests 업데이트</li>\n<li>[x] README와 프로젝트 registry 경계 업데이트</li>\n<li>[x] config contract/check/test/build 검증</li>\n<li>[x] Browser 기반 local renderer smoke 확인</li>\n<li>[x] omission/resource/evaluation close-out</li>\n<li>[ ] commit/push</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 793,
+      "updatedAt": "2026-06-07T17:04:51.826Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-configs-product-feature-registry-json",
+      "path": "platform-desktop-app/configs/product-feature-registry.json",
+      "category": "project-config",
+      "language": "unknown",
+      "title": "Product Feature Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"product feature registry\", \"purpose\": \"Defines the installable desktop product as a Git backed AI workspace tracker whose primary value is importing many repositories, launching replaceable AI coding tools, and showing current work, evid",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;product-feature-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines the installable desktop product as a Git-backed AI workspace tracker whose primary value is importing many repositories, launching replaceable AI coding tools, and showing current work, evidence, validation, reports, and terminal state. Agent and tool operations are separated into agent-platform.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before changing the desktop home screen, snapshot schema, installer shell runtime, or platform feature navigation.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read product_position first to understand what the product is and what it is not.&quot;,\n      &quot;Read feature_layers to see which capabilities are primary product features and which capabilities are supporting surfaces.&quot;,\n      &quot;Read promotion_loop before adding workflow, prompt, tool, skill, or agent creation features.&quot;,\n      &quot;Read structure_rules before naming a feature, tab, data store, or installer shell behavior as monitoring.&quot;,\n      &quot;Use validation_gates as the acceptance checklist when making a UI, data, or runtime change around these features.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The desktop home screen or first-run product promise changes.&quot;,\n      &quot;A feature is promoted from workflow, prompt, template, tool, skill, or agent into a desktop product surface.&quot;,\n      &quot;A new workspace import, CLI adapter, Git status, work report, evidence, learning, or observability capability is added.&quot;,\n      &quot;Agent factory, tool studio, direct provider execution, or Ollama management starts to look like the main desktop product again.&quot;,\n      &quot;The installer shell runtime contract changes how work state, decisions, evidence, validation, or evaluations are accumulated.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;openai_agents_sdk&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;agent loop, tools, guardrails, handoffs, sessions, and tracing as product-level agent platform primitives&quot;,\n        &quot;workspace and resumable multi-step execution as desktop product capabilities&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;openai_agents_tracing&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK Tracing&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/tracing/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating traces and monitoring as debugging, evaluation, and improvement support rather than the whole product&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;autogen_docs&quot;,\n      &quot;title&quot;: &quot;Microsoft AutoGen&quot;,\n      &quot;url&quot;: &quot;https://microsoft.github.io/autogen/stable/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;multi-agent applications, event-driven multi-agent systems, and no-code prototyping surfaces as platform references&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;langgraph_multi_agent&quot;,\n      &quot;title&quot;: &quot;LangGraph Multi-agent Patterns&quot;,\n      &quot;url&quot;: &quot;https://langchain-ai.github.io/langgraph/tutorials/multi_agent/multi-agent-collaboration/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;subagents, handoffs, skills, routers, custom workflows, context management, and parallel execution trade-offs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;crewai_docs&quot;,\n      &quot;title&quot;: &quot;CrewAI Documentation&quot;,\n      &quot;url&quot;: &quot;https://docs.crewai.com/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;crew-style agent orchestration, flow, knowledge, and task abstractions as product reference points&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_hig_settings&quot;,\n      &quot;title&quot;: &quot;Apple Human Interface Guidelines: Settings&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/design/human-interface-guidelines/settings&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;keeping broad configuration in a dedicated settings area instead of mixing it into the core work surface&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;microsoft_navigation_view&quot;,\n      &quot;title&quot;: &quot;Microsoft Learn: NavigationView&quot;,\n      &quot;url&quot;: &quot;https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop-style navigation with main items and a separated settings item&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_platform_ui_overview&quot;,\n      &quot;title&quot;: &quot;IntelliJ Platform UI Overview&quot;,\n      &quot;url&quot;: &quot;https://plugins.jetbrains.com/docs/intellij/ui-overview.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;IDE-style separation of main editor/work surfaces, tool windows, settings, and modal dialogs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_tool_windows&quot;,\n      &quot;title&quot;: &quot;IntelliJ IDEA Tool Windows&quot;,\n      &quot;url&quot;: &quot;https://www.jetbrains.com/help/idea/tool-windows.html&quot;,\n      &quot;source_type&quot;: &quot;</code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 42017,
+      "updatedAt": "2026-06-07T16:58:19.606Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-2026-2026-06-08-md",
+      "path": "_history/2026/2026-06-08.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 08 작업 기록",
+      "excerpt": "2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view ",
+      "html": "<p>2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view mode registry.json , AGENTS.md , Workspace Monitor 사용자 홈 화면, 관련 요구사항/스펙/검증 기록. 터</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1951,
+      "updatedAt": "2026-06-07T16:49:10.880Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: workspace tracker product split",
+      "excerpt": "작업 요약: workspace tracker product split 데스크톱 앱의 제품 중심을 agent capability platform 에서 workspace tracker 로 바꿨다. 기본 사용자 화면은 Git 작업공간, 터미널/AI 실행, 작업 타임라인, 보고서/근거, 문서/요구사항을 우선하도록 바꿨다. Codex, Claude Code, Cursor, Antigravity 등은 선택형 guest AI 도구로 모델링했다. agent factory, root tool management,",
+      "html": "<p>작업 요약: workspace tracker product split 데스크톱 앱의 제품 중심을 agent capability platform 에서 workspace tracker 로 바꿨다. 기본 사용자 화면은 Git 작업공간, 터미널/AI 실행, 작업 타임라인, 보고서/근거, 문서/요구사항을 우선하도록 바꿨다. Codex, Claude Code, Cursor, Antigravity 등은 선택형 guest AI 도구로 모델링했다. agent factory, root tool management, Ollama, provider direct agent run, AWS AgentCore식 runtime lifecycle은 separated </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1118,
+      "updatedAt": "2026-06-07T16:49:10.876Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+      "path": "_history/user-requests/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: workspace tracker product split",
+      "excerpt": "사용자 요청 요약: workspace tracker product split 사용자는 데스크톱 앱의 근본 목적이 AntiGravity, Cursor, Codex, Claude Code 등 여러 AI 코딩 도구를 Git 작업공간 위에서 잘 쓰도록 돕고, 현재 작업 중인 계획/요약/보고서/근거를 쉽게 확인하는 것이라고 정리했다. 또한 Ollama, 에이전트 관리, 툴 관리, AWS Agent Platform/AgentCore류 기능은 기본 데스크톱 앱에서 덜어내 별도 플랫폼/프로젝트로 분리해야 한다고",
+      "html": "<p>사용자 요청 요약: workspace tracker product split 사용자는 데스크톱 앱의 근본 목적이 AntiGravity, Cursor, Codex, Claude Code 등 여러 AI 코딩 도구를 Git 작업공간 위에서 잘 쓰도록 돕고, 현재 작업 중인 계획/요약/보고서/근거를 쉽게 확인하는 것이라고 정리했다. 또한 Ollama, 에이전트 관리, 툴 관리, AWS Agent Platform/AgentCore류 기능은 기본 데스크톱 앱에서 덜어내 별도 플랫폼/프로젝트로 분리해야 한다고 요청했다. 새 사용자 프로젝트는 하나의 큰 앱 내부에 섞지 말고 별도 Git repository/workspace로 다루는 방향을 요구했다. </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 808,
+      "updatedAt": "2026-06-07T16:49:10.875Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-plans-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+      "path": "_history/plans/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "계획: workspace tracker product split",
+      "excerpt": "계획: workspace tracker product split 1. 공식 문서로 Git 작업공간, AI 코딩 도구, AgentCore류 런타임/툴 플랫폼의 역할을 확인한다. 2. platform desktop app/ 와 agent platform/ 의 소유 경계를 다시 정의한다. 3. 데스크톱 앱 제품 레지스트리를 workspace tracker 중심으로 바꾼다. 4. user view mode와 홈 화면을 Git 작업공간/current work/report 중심으로 바꾼다. 5. 스냅샷 co",
+      "html": "<p>계획: workspace tracker product split 1. 공식 문서로 Git 작업공간, AI 코딩 도구, AgentCore류 런타임/툴 플랫폼의 역할을 확인한다. 2. platform desktop app/ 와 agent platform/ 의 소유 경계를 다시 정의한다. 3. 데스크톱 앱 제품 레지스트리를 workspace tracker 중심으로 바꾼다. 4. user view mode와 홈 화면을 Git 작업공간/current work/report 중심으로 바꾼다. 5. 스냅샷 collector와 customer snapshot에 product split 데이터를 추가한다. 6. agent/tool/Ollama/AgentC</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 784,
+      "updatedAt": "2026-06-07T16:49:10.874Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-08-workspace-tracker-product-split-plan-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-08-workspace-tracker-product-split/plan.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "구현 계획: workspace tracker product split",
+      "excerpt": "구현 계획: workspace tracker product split 1. 공식 문서와 로컬 코드로 제품 경계를 확인한다. 2. self documenting product split registry를 추가한다. 3. product feature registry와 view mode registry를 workspace first로 바꾼다. 4. collector snapshot 타입과 customer snapshot sanitization에 product split을 추가한다. 5. 홈 화면, na",
+      "html": "<h1>구현 계획: workspace tracker product split</h1>\n<p>1. 공식 문서와 로컬 코드로 제품 경계를 확인한다.</p>\n<p>2. self-documenting product split registry를 추가한다.</p>\n<p>3. product feature registry와 view mode registry를 workspace-first로 바꾼다.</p>\n<p>4. collector snapshot 타입과 customer snapshot sanitization에 product split을 추가한다.</p>\n<p>5. 홈 화면, navigation, command recommendations, task intent를 Git workspace/current work 중심으로 변경한다.</p>\n<p>6. agent/tool surfaces를 separated advanced 영역으로 명명한다.</p>\n<p>7. README, 프로젝트 registry, 요구사항, spec, trace, evaluation records를 업데이트한다.</p>\n<p>8. config contract, workspace monitor check/test/build, platform desktop test/check, omission/resource/evaluator를 실행한다.</p>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 784,
+      "updatedAt": "2026-06-07T16:49:10.872Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-08-workspace-tracker-product-split-spec-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-08-workspace-tracker-product-split/spec.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "스펙: workspace tracker product split",
+      "excerpt": "스펙: workspace tracker product split 목표 데스크톱 앱을 workspace tracker 로 재정의한다. 사용자는 여러 Git 작업공간을 가져오고, Codex/Claude Code/Cursor/Antigravity 같은 도구를 선택형 guest adapter로 실행하고, 현재 작업의 요약/계획/보고서/근거/터미널 상태를 순서대로 확인한다. 범위 product feature registry의 primary/supporting/separated 역할 변경 view mode의",
+      "html": "<h1>스펙: workspace tracker product split</h1>\n<h2>목표</h2>\n<p>데스크톱 앱을 <code>workspace_tracker</code>로 재정의한다. 사용자는 여러 Git 작업공간을 가져오고, Codex/Claude Code/Cursor/Antigravity 같은 도구를 선택형 guest adapter로 실행하고, 현재 작업의 요약/계획/보고서/근거/터미널 상태를 순서대로 확인한다.</p>\n<h2>범위</h2>\n<ul>\n<li>product feature registry의 primary/supporting/separated 역할 변경</li>\n<li>view mode의 기본 사용자 섹션 변경</li>\n<li>product split self-documenting registry 추가</li>\n<li>snapshot/customer snapshot에 product split 포함</li>\n<li>홈 화면, navigation, command palette, intent copy 변경</li>\n<li>agent/tool runtime surfaces를 separated/advanced로 표시</li>\n<li>테스트와 README 업데이트</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>외부 Git 호스팅에 repository 생성</li>\n<li>CLI 자동 설치 또는 provider credential 변경</li>\n<li>Ollama/AWS 리소스 생성</li>\n<li>MonitorShell 전체 파일 분해</li>\n</ul>\n<h2>제품 경계</h2>\n<ul>\n<li><code>platform-desktop-app/</code>: Git workspace tracker, terminal/guest AI launch, current work timeline, reports/evidence, requirements/docs, installer shell</li>\n<li><code>agent-platform/</code>: agent factory, tool management, model/runtime adapters, Ollama/model management, AgentCore-style runtime/gateway/identity, reusable governance/evaluation/planning agents</li>\n</ul>\n<h2>수용 기준</h2>\n<ul>\n<li>기본 사용자 view mode에서 <code>agents</code>와 <code>tools</code>가 빠진다.</li>\n<li>product feature registry에서 <code>agent_factory</code>, <code>root_tool_management</code>, <code>ollama_model_management</code>, <code>provider_direct_agent_run</code>, <code>agentcore_runtime_lifecycle</code>가 separated로 식별된다.</li>\n<li>home screen에 workspace import/open/clone/create 방향이 드러난다.</li>\n<li>collector와 tests가 <code>productSplit</code>을 인식한다.</li>\n<li>workspace monitor check/test/build와 platform desktop test/check가 통과한다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1786,
+      "updatedAt": "2026-06-07T16:49:10.872Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-specs-2026-06-08-workspace-tracker-product-split-traceability-ko-md",
+      "path": "platform-desktop-app/specs/2026-06-08-workspace-tracker-product-split/traceability.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "추적성: workspace tracker product split",
+      "excerpt": "추적성: workspace tracker product split | 요구사항 | 구현 | 테스트/검증 | | | | | | REQ WTPS 001, REQ WM 078 | product feature registry.json , product feature architecture.mjs , README | readiness tests, config contract | | REQ WTPS 002, REQ WM 079 | view mode registry.json , MonitorShell.tsx ",
+      "html": "<h1>추적성: workspace tracker product split</h1>\n<table><thead><tr><th>요구사항</th><th>구현</th><th>테스트/검증</th></tr></thead><tbody><tr><td>REQ-WTPS-001, REQ-WM-078</td><td><code>product-feature-registry.json</code>, <code>product-feature-architecture.mjs</code>, README</td><td>readiness tests, config contract</td></tr><tr><td>REQ-WTPS-002, REQ-WM-079</td><td><code>view-mode-registry.json</code>, <code>MonitorShell.tsx</code></td><td><code>tool-studio.test.mjs</code>, readiness tests</td></tr><tr><td>REQ-WTPS-003, REQ-WM-082</td><td><code>workspace-tracker-product-split-registry.json</code>, <code>WorkspaceProductSplitPanel.tsx</code>, task intents</td><td><code>collector.test.mjs</code>, <code>tool-studio.test.mjs</code></td></tr><tr><td>REQ-WTPS-004, REQ-WM-080</td><td><code>product-feature-registry.json</code>, <code>ProductFeatureArchitecturePanel.tsx</code>, <code>agent-platform/README.md</code></td><td>readiness tests</td></tr><tr><td>REQ-WTPS-005</td><td><code>workspace-tracker-product-split-registry.json</code>, <code>_ops/projects/registry.json</code></td><td>config contract, README review</td></tr><tr><td>REQ-WTPS-006, REQ-WM-081</td><td><code>snapshot.ts</code>, <code>collect-workspace.mjs</code></td><td><code>collector.test.mjs</code></td></tr><tr><td>REQ-WTPS-007, REQ-WM-083</td><td><code>WorkspaceProductSplitPanel.tsx</code>, navigation labels, command recommendations</td><td><code>tool-studio.test.mjs</code>, build</td></tr></tbody></table>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1058,
+      "updatedAt": "2026-06-07T16:49:10.872Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "requirements-changes-2026-06-08-workspace-tracker-product-split-ko-md",
+      "path": "_requirements/changes/2026-06-08-workspace-tracker-product-split.ko.md",
+      "category": "requirement",
+      "language": "ko",
+      "title": "요구사항 변경: workspace tracker product split",
+      "excerpt": "요구사항 변경: workspace tracker product split 날짜: 2026 06 08 범위: platform desktop app/ , agent platform/ , 프로젝트 경계 레지스트리 상태: baseline 변경 이유 사용자가 원하는 핵심 가치는 한 플랫폼에서 모든 에이전트/툴/모델을 직접 만드는 것이 아니라, Codex, Claude Code, Cursor, Antigravity 같은 다양한 AI 코딩 도구를 여러 Git 작업공간 위에서 쉽게 사용하고 현재 작업의 계획, ",
+      "html": "<h1>요구사항 변경: workspace tracker product split</h1>\n<ul>\n<li>날짜: 2026-06-08</li>\n<li>범위: <code>platform-desktop-app/</code>, <code>agent-platform/</code>, 프로젝트 경계 레지스트리</li>\n<li>상태: baseline</li>\n</ul>\n<h2>변경 이유</h2>\n<p>사용자가 원하는 핵심 가치는 한 플랫폼에서 모든 에이전트/툴/모델을 직접 만드는 것이 아니라, Codex, Claude Code, Cursor, Antigravity 같은 다양한 AI 코딩 도구를 여러 Git 작업공간 위에서 쉽게 사용하고 현재 작업의 계획, 보고서, 근거, 터미널 상태를 순서대로 확인하는 것이다.</p>\n<h2>요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>수용 기준</th></tr></thead><tbody><tr><td>REQ-WTPS-001</td><td>데스크톱 앱의 기본 제품 역할은 <code>workspace_tracker</code>여야 한다.</td><td><code>product-feature-registry.json</code>, fallback architecture, README, tests가 <code>workspace_tracker</code>를 기준으로 한다.</td></tr><tr><td>REQ-WTPS-002</td><td>사용자의 기본 화면은 Git 작업공간, 터미널/AI 실행, 작업 타임라인, 보고서/근거, 문서/요구사항을 우선해야 한다.</td><td>user view allowed sections가 <code>overview/source/desktop/eval/projects/history/documents/requirements</code>를 포함하고 agent/tool 고급 기능은 기본에서 빠진다.</td></tr><tr><td>REQ-WTPS-003</td><td>Codex, Claude Code, Cursor, Antigravity 등은 내장 필수 런타임이 아니라 선택형 guest AI 도구로 모델링해야 한다.</td><td>product split snapshot과 UI가 guest AI tools를 별도 목록으로 표시한다.</td></tr><tr><td>REQ-WTPS-004</td><td>agent factory, root tool management, Ollama, provider direct agent run, AWS AgentCore식 runtime lifecycle은 <code>agent-platform/</code> 또는 분리 프로젝트가 소유해야 한다.</td><td>product registry와 README가 해당 기능을 separated/advanced로 표시한다.</td></tr><tr><td>REQ-WTPS-005</td><td>새 사용자 프로젝트는 데스크톱 앱 내부 기능 묶음이 아니라 별도 Git repository/imported workspace로 취급해야 한다.</td><td>product split registry의 workspace model이 <code>git_repository</code>를 기본 단위로 둔다.</td></tr><tr><td>REQ-WTPS-006</td><td>제품 분리 결정은 스냅샷과 customer snapshot에도 안전하게 나타나야 한다.</td><td>collector가 product split registry를 읽고 customer snapshot에 비민감 필드만 포함한다.</td></tr><tr><td>REQ-WTPS-007</td><td>기본 UI는 분리 플랫폼 기능을 숨기기만 하지 말고, 필요한 경우 고급/분리 플랫폼 링크로 이해 가능하게 표시해야 한다.</td><td>WorkspaceProductSplitPanel과 ProductFeatureArchitecturePanel이 separated platform action/copy를 제공한다.</td></tr></tbody></table>\n<h2>비범위</h2>\n<ul>\n<li>이번 변경은 실제 원격 Git 호스팅에 새 repository를 생성하지 않는다.</li>\n<li>이번 변경은 Codex/Claude/Cursor/Antigravity CLI를 자동 설치하지 않는다.</li>\n<li>이번 변경은 Ollama 또는 AWS 계정/리소스를 변경하지 않는다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 2770,
+      "updatedAt": "2026-06-07T16:49:10.871Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_requirements/changes"
+    },
+    {
+      "id": "platform-desktop-app-docs-requirements-2026-06-08-workspace-tracker-product-split-ko-md",
+      "path": "platform-desktop-app/docs/requirements/2026-06-08-workspace-tracker-product-split.ko.md",
+      "category": "project-doc",
+      "language": "ko",
+      "title": "Desktop 요구사항: workspace tracker product split",
+      "excerpt": "Desktop 요구사항: workspace tracker product split 날짜: 2026 06 08 소유 프로젝트: platform desktop app/ 관련 shared requirement: requirements/changes/2026 06 08 workspace tracker product split.ko.md 제품 요구사항 | ID | 요구사항 | 구현 표면 | 검증 | | | | | | | REQ WM 078 | 홈 화면은 사용자가 Git 작업공간을 고르고 현재 작업을 추적하",
+      "html": "<h1>Desktop 요구사항: workspace tracker product split</h1>\n<ul>\n<li>날짜: 2026-06-08</li>\n<li>소유 프로젝트: <code>platform-desktop-app/</code></li>\n<li>관련 shared requirement: <code>_requirements/changes/2026-06-08-workspace-tracker-product-split.ko.md</code></li>\n</ul>\n<h2>제품 요구사항</h2>\n<table><thead><tr><th>ID</th><th>요구사항</th><th>구현 표면</th><th>검증</th></tr></thead><tbody><tr><td>REQ-WM-078</td><td>홈 화면은 사용자가 Git 작업공간을 고르고 현재 작업을 추적하는 흐름을 첫 화면으로 보여야 한다.</td><td><code>MonitorShell.tsx</code>, <code>WorkspaceProductSplitPanel.tsx</code></td><td>workspace monitor tests</td></tr><tr><td>REQ-WM-079</td><td>사용자 기본 네비게이션은 작업 추적에 필요한 섹션만 노출해야 한다.</td><td><code>view-mode-registry.json</code>, <code>MonitorShell.tsx</code></td><td>readiness tests</td></tr><tr><td>REQ-WM-080</td><td>에이전트/툴/모델/AgentCore류 기능은 기본 사용자 기능이 아니라 분리 플랫폼/고급 기능으로 표시해야 한다.</td><td><code>product-feature-registry.json</code>, <code>ProductFeatureArchitecturePanel.tsx</code></td><td>readiness tests</td></tr><tr><td>REQ-WM-081</td><td>product split은 collector snapshot과 customer snapshot에 포함되어야 한다.</td><td><code>snapshot.ts</code>, <code>collect-workspace.mjs</code></td><td>collector tests</td></tr><tr><td>REQ-WM-082</td><td>import/open/clone/create repository intent는 기본 추천 작업이어야 한다.</td><td><code>MonitorShell.tsx</code></td><td>tool-studio tests</td></tr><tr><td>REQ-WM-083</td><td>보고서/근거, 작업 타임라인, 문서/요구사항은 기본 사용자 경로에서 접근 가능해야 한다.</td><td>navigation, command palette, home drilldown</td><td>tool-studio tests</td></tr></tbody></table>\n<h2>설계 원칙</h2>\n<ul>\n<li>기본 화면은 “현재 작업을 시작하고 이해하는 것”에 집중한다.</li>\n<li>고급 플랫폼 기능은 숨겨진 것이 아니라 명확히 분리된 대상으로 표시한다.</li>\n<li>모든 durable user project는 Git 경계를 가진 작업공간으로 가져오거나 생성하는 방향을 따른다.</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 1821,
+      "updatedAt": "2026-06-07T16:49:10.871Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+      "path": "_history/web-searches/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: workspace tracker product split",
+      "excerpt": "웹 검색 기록: workspace tracker product split 날짜: 2026 06 08 작업: 데스크톱 앱을 Git 작업공간/게스트 AI 도구/작업 추적 허브로 재정의하고, 에이전트/툴/Ollama/AgentCore류 기능을 agent platform/ 으로 분리한다. 검색 목적: 제품 경계가 현재 AI 코딩 도구와 Git 작업공간 구조에 맞는지 확인한다. 확인한 공식/고신뢰 출처 Git worktree 공식 문서: https://git scm.com/docs/git worktree.",
+      "html": "<p>웹 검색 기록: workspace tracker product split 날짜: 2026 06 08 작업: 데스크톱 앱을 Git 작업공간/게스트 AI 도구/작업 추적 허브로 재정의하고, 에이전트/툴/Ollama/AgentCore류 기능을 agent platform/ 으로 분리한다. 검색 목적: 제품 경계가 현재 AI 코딩 도구와 Git 작업공간 구조에 맞는지 확인한다. 확인한 공식/고신뢰 출처 Git worktree 공식 문서: https://git scm.com/docs/git worktree.html 영향: 여러 작업 트리를 한 저장소에서 다룰 수 있지만, 사용자 프로젝트의 기본 단위는 여전히 Git repository/worktre</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3531,
+      "updatedAt": "2026-06-07T16:49:10.869Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
+    {
+      "id": "agent-platform-configs-access-view-mode-registry-json",
+      "path": "agent-platform/configs/access/view-mode-registry.json",
+      "category": "agent-config",
+      "language": "unknown",
+      "title": "View Mode Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 02\", \"name\": \"view mode registry\", \"purpose\": \"Defines selectable repository and platform viewing modes so user, developer, and superadmin development surfaces stay distinct from install and work modes.\", \"reader guide\": { \"summary\": \"Use this registr",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-02&quot;,\n  &quot;name&quot;: &quot;view-mode-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines selectable repository and platform viewing modes so user, developer, and superadmin development surfaces stay distinct from install and work modes.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry when choosing what the platform UI or an operator should show. It does not install dependencies and it does not change work close-out strictness.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read mode_boundary first so view_mode is not confused with install_mode or work_mode.&quot;,\n      &quot;Use default_mode for current workspace-monitor behavior unless the user explicitly switches to a developer or superadmin lens.&quot;,\n      &quot;Read modes[].visibility_rules to understand which surfaces are foregrounded, collapsed, or hidden.&quot;,\n      &quot;Treat security_notes as design constraints for future authenticated deployments, not as proof that access control already exists.&quot;\n    ],\n    &quot;owner&quot;: &quot;agent-platform&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-08&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;A new UI or dashboard role is added.&quot;,\n      &quot;workspace-monitor changes how documents, operations, agents, or governance records are displayed.&quot;,\n      &quot;The platform adds real authentication, authorization, or per-user publishing rules.&quot;,\n      &quot;The distinction between user, developer, and superadmin operator responsibilities changes.&quot;,\n      &quot;Install mode or work mode rules change in a way that could confuse operators.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;owasp_authorization&quot;,\n      &quot;title&quot;: &quot;OWASP Authorization Cheat Sheet&quot;,\n      &quot;url&quot;: &quot;https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html&quot;,\n      &quot;source_type&quot;: &quot;security_guidance&quot;,\n      &quot;used_for&quot;: [\n        &quot;least privilege&quot;,\n        &quot;deny-by-default future access control design&quot;,\n        &quot;authorization tests as a future gate&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;nist_rbac&quot;,\n      &quot;title&quot;: &quot;NIST Role Based Access Control&quot;,\n      &quot;url&quot;: &quot;https://csrc.nist.gov/projects/role-based-access-control&quot;,\n      &quot;source_type&quot;: &quot;standard_reference&quot;,\n      &quot;used_for&quot;: [\n        &quot;role and permission vocabulary&quot;,\n        &quot;RBAC and ABAC trade-off awareness&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;nextjs_proxy&quot;,\n      &quot;title&quot;: &quot;Next.js Proxy File Convention&quot;,\n      &quot;url&quot;: &quot;https://nextjs.org/docs/app/api-reference/file-conventions/proxy&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;future route or request boundary planning when authenticated monitor deployment is added&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;install_mode_registry&quot;,\n      &quot;title&quot;: &quot;Install Mode Registry&quot;,\n      &quot;path&quot;: &quot;agent-platform/configs/installations/install-mode-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;separating setup profile from viewing profile&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;work_mode_registry&quot;,\n      &quot;title&quot;: &quot;Work Mode Registry&quot;,\n      &quot;path&quot;: &quot;agent-platform/configs/workflows/work-mode-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;separating task governance strictness from viewing profile&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;view_mode_is_not_install_mode&quot;,\n      &quot;rule&quot;: &quot;view_mode controls what a person or UI sees; install_mode controls dependency and environment setup.&quot;,\n      &quot;reason&quot;: &quot;The user/developer installation split already exists and should not be overloaded with UI visibility semantics.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;mode_boundary&quot;,\n        &quot;modes&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;view_mode_is_not_work_mode&quot;,\n      &quot;rule&quot;: &quot;view_mode controls audience lens; work_mode still controls task planning, evidence, evaluation, and close-out strictness.&quot;,\n      &quot;reason&quot;: &quot;A superadmin development view must not weaken governance requirements or replace evaluator gates.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;mode_boundary&quot;,\n        &quot;modes&quot;,\n        &quot;selection_rules&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;user_is_current_default&quot;,\n      &quot;rule&quot;: &quot;The current default view_mode is user so first-run users see a simple task-first interface while customization and repository internals stay behind developer or superadmin lenses.&quot;,\n      &quot;reason&quot;: &quot;The latest user request asked to reduce interface complexity and keep customization automatic or behind the scenes.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;default_mode&quot;,\n        &quot;modes[user]&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;security_is_future_enforcement&quot;,\n      &quot;rule&quot;: &quot;View mode filtering is an operator/UI lens until real authentication and authorization are implemented; do not treat hidden UI elements as a security boundary.&quot;,\n      &quot;reason&quot;: &quot;Static repository snapshots can still contain data unless the collector and deployment publication rules enforce removal.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;modes[].security_notes&quot;,\n        &quot;workspace-monitor&quot;\n      ]\n    }\n  ],\n  &quot;field_guide&quot;: [\n    {\n      &quot;field&quot;: &quot;mode_boundary&quot;,\n      &quot;meaning&quot;: &quot;Explains the difference between view_mode, install_mode, and work_mode.&quot;,\n</code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 13878,
+      "updatedAt": "2026-06-07T16:29:19.816Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "agent-platform"
+    },
+    {
+      "id": "platform-desktop-app-configs-workspace-tracker-product-split-registry-json",
+      "path": "platform-desktop-app/configs/workspace-tracker-product-split-registry.json",
+      "category": "project-config",
+      "language": "unknown",
+      "title": "Workspace Tracker Product Split Registry",
+      "excerpt": "{ \"schema version\": \"2026 06 08\", \"name\": \"workspace tracker product split registry\", \"purpose\": \"Defines the split between the desktop workspace tracker product and the separate agent/tool operations platform.\", \"reader guide\": { \"summary\": \"Use this registry before changing des",
+      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-08&quot;,\n  &quot;name&quot;: &quot;workspace-tracker-product-split-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines the split between the desktop workspace tracker product and the separate agent/tool operations platform.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before changing desktop home, navigation, workspace import, CLI adapter, report, agent-builder, tool-builder, provider, or Ollama surfaces.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read product_boundary to decide whether a capability belongs in the desktop tracker or the separate agent/tool platform.&quot;,\n      &quot;Read workspace_model before adding project import, clone, Git, or multi-repository behavior.&quot;,\n      &quot;Read ui_policy before adding first-screen cards or navigation sections.&quot;,\n      &quot;Read separated_platforms before exposing agent factory, tool studio, provider task execution, Ollama, or AWS AgentCore-style lifecycle functions.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-08&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The desktop app first screen changes.&quot;,\n      &quot;A feature creates or manages agents, tools, models, providers, Ollama, or cloud agent runtime resources.&quot;,\n      &quot;A feature imports, clones, summarizes, reports on, or launches work inside a Git workspace.&quot;,\n      &quot;A project boundary changes between platform-desktop-app and agent-platform.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;git_worktree_docs&quot;,\n      &quot;title&quot;: &quot;Git worktree documentation&quot;,\n      &quot;url&quot;: &quot;https://git-scm.com/docs/git-worktree.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;multi-working-tree and repository boundary model&quot;,\n        &quot;keeping workspace state Git-native instead of hidden inside one app database&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    },\n    {\n      &quot;id&quot;: &quot;codex_help&quot;,\n      &quot;title&quot;: &quot;Using Codex with your ChatGPT plan&quot;,\n      &quot;url&quot;: &quot;https://help.openai.com/en/articles/11369540-codex-in-chatgpt&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating Codex as one optional AI coding surface rather than the only platform runtime&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    },\n    {\n      &quot;id&quot;: &quot;claude_code_cli&quot;,\n      &quot;title&quot;: &quot;Claude Code CLI reference&quot;,\n      &quot;url&quot;: &quot;https://docs.claude.com/en/docs/claude-code/cli-reference&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating Claude Code as an optional CLI adapter imported into a selected Git workspace&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    },\n    {\n      &quot;id&quot;: &quot;cursor_installation&quot;,\n      &quot;title&quot;: &quot;Cursor installation and project opening&quot;,\n      &quot;url&quot;: &quot;https://docs.cursor.com/get-started/installation&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating Cursor as an external editor surface that opens Git projects&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    },\n    {\n      &quot;id&quot;: &quot;google_antigravity_docs&quot;,\n      &quot;title&quot;: &quot;Google Antigravity documentation&quot;,\n      &quot;url&quot;: &quot;https://antigravity.google/docs/home&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;multi-agent IDE reference and imported workspace surface comparison&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    },\n    {\n      &quot;id&quot;: &quot;aws_bedrock_agents&quot;,\n      &quot;title&quot;: &quot;Amazon Bedrock Agents documentation&quot;,\n      &quot;url&quot;: &quot;https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;separating agent/tool runtime management from the desktop workspace tracker&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-08&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;desktop_tracker_is_primary&quot;,\n      &quot;rule&quot;: &quot;The installable desktop app shall be a workspace tracker and AI-coding surface host, not a general agent factory or tool runtime platform.&quot;,\n      &quot;reason&quot;: &quot;The user wants a simpler app for importing Git workspaces, using Codex/Cursor/Claude Code/Antigravity-style tools, and seeing current work, evidence, and reports.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;product_boundary&quot;,\n        &quot;desktop_home_surface&quot;,\n        &quot;navigation&quot;,\n        &quot;customer_snapshot&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;every_work_unit_is_git_backed&quot;,\n      &quot;rule&quot;: &quot;New durable user workspaces shall be represented as separate Git repositories or imported existing Git repositories.&quot;,\n      &quot;reason&quot;: &quot;The user wants multi-project work split by Git, not hidden under one monorepo workspace.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;workspace_model&quot;,\n        &quot;project_import&quot;,\n        &quot;task_reports&quot;,\n        &quot;runtime_launch&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;ai_tools_are_guest_surfaces&quot;,\n      &quot;rule&quot;: &quot;Codex, Claude Code, Cursor, Antigravity, Gemini CLI, and similar tools shall be launched or documented as replaceable guest adapters over the selected Git workspace.&quot;,\n      &quot;reason&quot;: &quot;The platform should help the user use many AI coding tools well instead of becoming a wrapper around one tool.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;cli_adapters&quot;,\n        &quot;terminal&quot;,\n        &quot;workspace_import&quot;,\n        &quot;settings&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;agent_and_tool_operations_are_separate&quot;,\n      &quot;rule&quot;: &quot;Agent builder, tool studio, direct provider task execution, Ollama m</code></pre>",
+      "previewMode": "document-preview",
+      "htmlTruncated": true,
+      "sourceBytes": 11911,
+      "updatedAt": "2026-06-07T16:25:35.284Z",
+      "historyDate": "",
+      "historyYear": "",
+      "workspaceArea": "platform-desktop-app"
+    },
+    {
+      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-08-terminal-tab-reform-tasks-ko-md",
+      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/tasks.ko.md",
+      "category": "project-spec",
+      "language": "ko",
+      "title": "작업 목록: 터미널 탭 개혁",
+      "excerpt": "작업 목록: 터미널 탭 개혁 x 웹 우선 조사 기록 x 터미널 드로어/PTY/시작 패널 구조 파악 x readiness strip 추가 x 시작 화면 실행 허브 추가 x 고급 시작 옵션 접힘 처리 x 사용자 기본 용어를 실제 셸/연결 점검 중심으로 변경 x 정적 테스트 계약 추가 x check/test/build 검증 x omission/resource/evaluation 기록 검증 x commit 및 push 완료",
+      "html": "<h1>작업 목록: 터미널 탭 개혁</h1>\n<ul>\n<li>[x] 웹 우선 조사 기록</li>\n<li>[x] 터미널 드로어/PTY/시작 패널 구조 파악</li>\n<li>[x] readiness strip 추가</li>\n<li>[x] 시작 화면 실행 허브 추가</li>\n<li>[x] 고급 시작 옵션 접힘 처리</li>\n<li>[x] 사용자 기본 용어를 실제 셸/연결 점검 중심으로 변경</li>\n<li>[x] 정적 테스트 계약 추가</li>\n<li>[x] check/test/build 검증</li>\n<li>[x] omission/resource/evaluation 기록 검증</li>\n<li>[x] commit 및 push 완료</li>\n</ul>",
+      "previewMode": "document-preview",
+      "htmlTruncated": false,
+      "sourceBytes": 462,
+      "updatedAt": "2026-06-07T16:21:27.742Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "platform-desktop-app"
+    },
     {
       "id": "history-evaluations-2026-2026-06-08-terminal-tab-reform-input-json",
       "path": "_history/evaluations/2026/2026-06-08-terminal-tab-reform-input.json",
@@ -7917,22 +8304,6 @@
       "workspaceArea": "platform-desktop-app"
     },
     {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-08-terminal-tab-reform-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-08-terminal-tab-reform/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "작업 목록: 터미널 탭 개혁",
-      "excerpt": "작업 목록: 터미널 탭 개혁 x 웹 우선 조사 기록 x 터미널 드로어/PTY/시작 패널 구조 파악 x readiness strip 추가 x 시작 화면 실행 허브 추가 x 고급 시작 옵션 접힘 처리 x 사용자 기본 용어를 실제 셸/연결 점검 중심으로 변경 x 정적 테스트 계약 추가 x check/test/build 검증 x omission/resource/evaluation 기록 검증 commit 및 push",
-      "html": "<h1>작업 목록: 터미널 탭 개혁</h1>\n<ul>\n<li>[x] 웹 우선 조사 기록</li>\n<li>[x] 터미널 드로어/PTY/시작 패널 구조 파악</li>\n<li>[x] readiness strip 추가</li>\n<li>[x] 시작 화면 실행 허브 추가</li>\n<li>[x] 고급 시작 옵션 접힘 처리</li>\n<li>[x] 사용자 기본 용어를 실제 셸/연결 점검 중심으로 변경</li>\n<li>[x] 정적 테스트 계약 추가</li>\n<li>[x] check/test/build 검증</li>\n<li>[x] omission/resource/evaluation 기록 검증</li>\n<li>[ ] commit 및 push</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 455,
-      "updatedAt": "2026-06-07T16:19:20.455Z",
-      "historyDate": "2026-06-08",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
       "id": "history-work-timings-2026-2026-06-08-terminal-tab-reform-json",
       "path": "_history/work-timings/2026/2026-06-08-terminal-tab-reform.json",
       "category": "work-timing",
@@ -7947,22 +8318,6 @@
       "historyDate": "2026-06-08",
       "historyYear": "2026",
       "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-2026-2026-06-08-md",
-      "path": "_history/2026/2026-06-08.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 08 작업 기록",
-      "excerpt": "2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view ",
-      "html": "<p>2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view mode registry.json , AGENTS.md , Workspace Monitor 사용자 홈 화면, 관련 요구사항/스펙/검증 기록. 터</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1143,
-      "updatedAt": "2026-06-07T16:17:07.735Z",
-      "historyDate": "2026-06-08",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-request-traces-2026-2026-06-08-terminal-tab-reform-ko-md",
@@ -8235,22 +8590,6 @@
       "historyDate": "2026-06-08",
       "historyYear": "2026",
       "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "platform-desktop-app-configs-product-feature-registry-json",
-      "path": "platform-desktop-app/configs/product-feature-registry.json",
-      "category": "project-config",
-      "language": "unknown",
-      "title": "Product Feature Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 03\", \"name\": \"product feature registry\", \"purpose\": \"Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, ",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-03&quot;,\n  &quot;name&quot;: &quot;product-feature-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, workbench, learning, and monitoring are supporting layers.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry before changing the desktop home screen, snapshot schema, installer shell runtime, or platform feature navigation.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read product_position first to understand what the product is and what it is not.&quot;,\n      &quot;Read feature_layers to see which capabilities are primary product features and which capabilities are supporting surfaces.&quot;,\n      &quot;Read promotion_loop before adding workflow, prompt, tool, skill, or agent creation features.&quot;,\n      &quot;Read structure_rules before naming a feature, tab, data store, or installer shell behavior as monitoring.&quot;,\n      &quot;Use validation_gates as the acceptance checklist when making a UI, data, or runtime change around these features.&quot;\n    ],\n    &quot;owner&quot;: &quot;platform-desktop-app&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-06&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;The desktop home screen or first-run product promise changes.&quot;,\n      &quot;A feature is promoted from workflow, prompt, template, tool, skill, or agent into a desktop product surface.&quot;,\n      &quot;A new Agent Core, CLI orchestration, root tool, workbench, learning, or observability capability is added.&quot;,\n      &quot;Monitoring starts to look like the main product again instead of a support layer.&quot;,\n      &quot;The installer shell runtime contract changes how work state, decisions, evidence, validation, or evaluations are accumulated.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;openai_agents_sdk&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;agent loop, tools, guardrails, handoffs, sessions, and tracing as product-level agent platform primitives&quot;,\n        &quot;workspace and resumable multi-step execution as desktop product capabilities&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;openai_agents_tracing&quot;,\n      &quot;title&quot;: &quot;OpenAI Agents SDK Tracing&quot;,\n      &quot;url&quot;: &quot;https://openai.github.io/openai-agents-python/tracing/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;treating traces and monitoring as debugging, evaluation, and improvement support rather than the whole product&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;autogen_docs&quot;,\n      &quot;title&quot;: &quot;Microsoft AutoGen&quot;,\n      &quot;url&quot;: &quot;https://microsoft.github.io/autogen/stable/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;multi-agent applications, event-driven multi-agent systems, and no-code prototyping surfaces as platform references&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;langgraph_multi_agent&quot;,\n      &quot;title&quot;: &quot;LangGraph Multi-agent Patterns&quot;,\n      &quot;url&quot;: &quot;https://langchain-ai.github.io/langgraph/tutorials/multi_agent/multi-agent-collaboration/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;subagents, handoffs, skills, routers, custom workflows, context management, and parallel execution trade-offs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;crewai_docs&quot;,\n      &quot;title&quot;: &quot;CrewAI Documentation&quot;,\n      &quot;url&quot;: &quot;https://docs.crewai.com/&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;crew-style agent orchestration, flow, knowledge, and task abstractions as product reference points&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;apple_hig_settings&quot;,\n      &quot;title&quot;: &quot;Apple Human Interface Guidelines: Settings&quot;,\n      &quot;url&quot;: &quot;https://developer.apple.com/design/human-interface-guidelines/settings&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;keeping broad configuration in a dedicated settings area instead of mixing it into the core work surface&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;microsoft_navigation_view&quot;,\n      &quot;title&quot;: &quot;Microsoft Learn: NavigationView&quot;,\n      &quot;url&quot;: &quot;https://learn.microsoft.com/en-us/windows/apps/design/controls/navigationview&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;desktop-style navigation with main items and a separated settings item&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_platform_ui_overview&quot;,\n      &quot;title&quot;: &quot;IntelliJ Platform UI Overview&quot;,\n      &quot;url&quot;: &quot;https://plugins.jetbrains.com/docs/intellij/ui-overview.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;IDE-style separation of main editor/work surfaces, tool windows, settings, and modal dialogs&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-03&quot;\n    },\n    {\n      &quot;id&quot;: &quot;intellij_tool_windows&quot;,\n      &quot;title&quot;: &quot;IntelliJ IDEA Tool Windows&quot;,\n      &quot;url&quot;: &quot;https://www.jetbrains.com/help/idea/tool-windows.html&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;Run, Services, Problems, and status-oriented tool-window model </code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 36435,
-      "updatedAt": "2026-06-07T16:03:27.919Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "platform-desktop-app"
     },
     {
       "id": "history-work-summaries-2026-2026-06-08-simple-user-interface-ko-md",
@@ -8651,22 +8990,6 @@
       "historyDate": "",
       "historyYear": "",
       "workspaceArea": "_docs/policies"
-    },
-    {
-      "id": "agent-platform-configs-access-view-mode-registry-json",
-      "path": "agent-platform/configs/access/view-mode-registry.json",
-      "category": "agent-config",
-      "language": "unknown",
-      "title": "View Mode Registry",
-      "excerpt": "{ \"schema version\": \"2026 06 02\", \"name\": \"view mode registry\", \"purpose\": \"Defines selectable repository and platform viewing modes so user, developer, and superadmin development surfaces stay distinct from install and work modes.\", \"reader guide\": { \"summary\": \"Use this registr",
-      "html": "<pre><code>{\n  &quot;schema_version&quot;: &quot;2026-06-02&quot;,\n  &quot;name&quot;: &quot;view-mode-registry&quot;,\n  &quot;purpose&quot;: &quot;Defines selectable repository and platform viewing modes so user, developer, and superadmin development surfaces stay distinct from install and work modes.&quot;,\n  &quot;reader_guide&quot;: {\n    &quot;summary&quot;: &quot;Use this registry when choosing what the platform UI or an operator should show. It does not install dependencies and it does not change work close-out strictness.&quot;,\n    &quot;how_to_read&quot;: [\n      &quot;Read mode_boundary first so view_mode is not confused with install_mode or work_mode.&quot;,\n      &quot;Use default_mode for current workspace-monitor behavior unless the user explicitly switches to a developer or superadmin lens.&quot;,\n      &quot;Read modes[].visibility_rules to understand which surfaces are foregrounded, collapsed, or hidden.&quot;,\n      &quot;Treat security_notes as design constraints for future authenticated deployments, not as proof that access control already exists.&quot;\n    ],\n    &quot;owner&quot;: &quot;agent-platform&quot;,\n    &quot;last_reviewed&quot;: &quot;2026-06-08&quot;,\n    &quot;update_triggers&quot;: [\n      &quot;A new UI or dashboard role is added.&quot;,\n      &quot;workspace-monitor changes how documents, operations, agents, or governance records are displayed.&quot;,\n      &quot;The platform adds real authentication, authorization, or per-user publishing rules.&quot;,\n      &quot;The distinction between user, developer, and superadmin operator responsibilities changes.&quot;,\n      &quot;Install mode or work mode rules change in a way that could confuse operators.&quot;\n    ]\n  },\n  &quot;reference_links&quot;: [\n    {\n      &quot;id&quot;: &quot;owasp_authorization&quot;,\n      &quot;title&quot;: &quot;OWASP Authorization Cheat Sheet&quot;,\n      &quot;url&quot;: &quot;https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html&quot;,\n      &quot;source_type&quot;: &quot;security_guidance&quot;,\n      &quot;used_for&quot;: [\n        &quot;least privilege&quot;,\n        &quot;deny-by-default future access control design&quot;,\n        &quot;authorization tests as a future gate&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;nist_rbac&quot;,\n      &quot;title&quot;: &quot;NIST Role Based Access Control&quot;,\n      &quot;url&quot;: &quot;https://csrc.nist.gov/projects/role-based-access-control&quot;,\n      &quot;source_type&quot;: &quot;standard_reference&quot;,\n      &quot;used_for&quot;: [\n        &quot;role and permission vocabulary&quot;,\n        &quot;RBAC and ABAC trade-off awareness&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;nextjs_proxy&quot;,\n      &quot;title&quot;: &quot;Next.js Proxy File Convention&quot;,\n      &quot;url&quot;: &quot;https://nextjs.org/docs/app/api-reference/file-conventions/proxy&quot;,\n      &quot;source_type&quot;: &quot;official_docs&quot;,\n      &quot;used_for&quot;: [\n        &quot;future route or request boundary planning when authenticated monitor deployment is added&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;install_mode_registry&quot;,\n      &quot;title&quot;: &quot;Install Mode Registry&quot;,\n      &quot;path&quot;: &quot;agent-platform/configs/installations/install-mode-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;separating setup profile from viewing profile&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    },\n    {\n      &quot;id&quot;: &quot;work_mode_registry&quot;,\n      &quot;title&quot;: &quot;Work Mode Registry&quot;,\n      &quot;path&quot;: &quot;agent-platform/configs/workflows/work-mode-registry.json&quot;,\n      &quot;source_type&quot;: &quot;internal&quot;,\n      &quot;used_for&quot;: [\n        &quot;separating task governance strictness from viewing profile&quot;\n      ],\n      &quot;last_checked&quot;: &quot;2026-06-02&quot;\n    }\n  ],\n  &quot;structure_rules&quot;: [\n    {\n      &quot;id&quot;: &quot;view_mode_is_not_install_mode&quot;,\n      &quot;rule&quot;: &quot;view_mode controls what a person or UI sees; install_mode controls dependency and environment setup.&quot;,\n      &quot;reason&quot;: &quot;The user/developer installation split already exists and should not be overloaded with UI visibility semantics.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;mode_boundary&quot;,\n        &quot;modes&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;view_mode_is_not_work_mode&quot;,\n      &quot;rule&quot;: &quot;view_mode controls audience lens; work_mode still controls task planning, evidence, evaluation, and close-out strictness.&quot;,\n      &quot;reason&quot;: &quot;A superadmin development view must not weaken governance requirements or replace evaluator gates.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;mode_boundary&quot;,\n        &quot;modes&quot;,\n        &quot;selection_rules&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;user_is_current_default&quot;,\n      &quot;rule&quot;: &quot;The current default view_mode is user so first-run users see a simple task-first interface while customization and repository internals stay behind developer or superadmin lenses.&quot;,\n      &quot;reason&quot;: &quot;The latest user request asked to reduce interface complexity and keep customization automatic or behind the scenes.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;default_mode&quot;,\n        &quot;modes[user]&quot;\n      ]\n    },\n    {\n      &quot;id&quot;: &quot;security_is_future_enforcement&quot;,\n      &quot;rule&quot;: &quot;View mode filtering is an operator/UI lens until real authentication and authorization are implemented; do not treat hidden UI elements as a security boundary.&quot;,\n      &quot;reason&quot;: &quot;Static repository snapshots can still contain data unless the collector and deployment publication rules enforce removal.&quot;,\n      &quot;applies_to&quot;: [\n        &quot;modes[].security_notes&quot;,\n        &quot;workspace-monitor&quot;\n      ]\n    }\n  ],\n  &quot;field_guide&quot;: [\n    {\n      &quot;field&quot;: &quot;mode_boundary&quot;,\n      &quot;meaning&quot;: &quot;Explains the difference between view_mode, install_mode, and work_mode.&quot;,\n</code></pre>",
-      "previewMode": "document-preview",
-      "htmlTruncated": true,
-      "sourceBytes": 13548,
-      "updatedAt": "2026-06-07T15:57:42.059Z",
-      "historyDate": "",
-      "historyYear": "",
-      "workspaceArea": "agent-platform"
     },
     {
       "id": "agent-platform-configs-agents-view-mode-router-agent-json",
@@ -9960,118 +10283,6 @@
       "htmlTruncated": true,
       "sourceBytes": 1226,
       "updatedAt": "2026-06-07T13:12:32.527Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/plans"
-    },
-    {
-      "id": "history-web-searches-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-      "path": "_history/web-searches/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-      "category": "web-search",
-      "language": "ko",
-      "title": "2026 06 07 소스 에디터 세션 훅 분리 웹 검색 기록",
-      "excerpt": "2026 06 07 소스 에디터 세션 훅 분리 웹 검색 기록 검색 쿼리 React official docs useReducer extracting state logic into reducer custom hook React official docs reusing logic with custom hooks effects race conditions ignore stale responses TypeScript official docs module exports type imports reference",
-      "html": "<p>2026 06 07 소스 에디터 세션 훅 분리 웹 검색 기록 검색 쿼리 React official docs useReducer extracting state logic into reducer custom hook React official docs reusing logic with custom hooks effects race conditions ignore stale responses TypeScript official docs module exports type imports reference 확인한 출처 React useReducer : https://react.dev/reference/react/useReducer React Re</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1388,
-      "updatedAt": "2026-06-07T13:12:32.527Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/web-searches"
-    },
-    {
-      "id": "history-user-requests-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-      "path": "_history/user-requests/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-      "category": "user-request",
-      "language": "ko",
-      "title": "2026 06 07 소스 에디터 세션 훅 분리 요청",
-      "excerpt": "2026 06 07 소스 에디터 세션 훅 분리 요청 요청 요약 이전 구현보다 더 넓은 범위로 계속 구현한다. 큰 MonitorShell.tsx 에 남아 있는 source editor 세션 상태, ref, timer 로직을 더 분리한다. 기능 이슈가 생기지 않도록 구조 계약, TypeScript, Rust/Tauri 패키징까지 확인한다. 적용 범위 소유 프로젝트: platform desktop app 주요 대상: Workspace Monitor source editor 세션 상태 경계 작업 모드: ",
-      "html": "<p>2026 06 07 소스 에디터 세션 훅 분리 요청 요청 요약 이전 구현보다 더 넓은 범위로 계속 구현한다. 큰 MonitorShell.tsx 에 남아 있는 source editor 세션 상태, ref, timer 로직을 더 분리한다. 기능 이슈가 생기지 않도록 구조 계약, TypeScript, Rust/Tauri 패키징까지 확인한다. 적용 범위 소유 프로젝트: platform desktop app 주요 대상: Workspace Monitor source editor 세션 상태 경계 작업 모드: standard 수용 기준 Monaco editor instance ref, active source path ref, visible draft</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1013,
-      "updatedAt": "2026-06-07T13:12:32.526Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/user-requests"
-    },
-    {
-      "id": "history-work-timings-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-      "path": "_history/work-timings/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-      "category": "work-timing",
-      "language": "ko",
-      "title": "2026 06 07 소스 에디터 액션 상태 분리 작업 타이밍",
-      "excerpt": "2026 06 07 소스 에디터 액션 상태 분리 작업 타이밍 기록 22:00 22:02 KST: 웹 검색, 이전 히스토리 확인, 넓은 source editor 액션 상태 분리 범위 확정. 22:02 22:04 KST: sourceDraftActions.ts , MonitorShell.tsx , source editor export, readiness map, 테스트 importer, 관련 테스트 갱신. 22:04 KST: source editor helper 테스트, 구조 계약 테스트, Tool ",
-      "html": "<p>2026 06 07 소스 에디터 액션 상태 분리 작업 타이밍 기록 22:00 22:02 KST: 웹 검색, 이전 히스토리 확인, 넓은 source editor 액션 상태 분리 범위 확정. 22:02 22:04 KST: sourceDraftActions.ts , MonitorShell.tsx , source editor export, readiness map, 테스트 importer, 관련 테스트 갱신. 22:04 KST: source editor helper 테스트, 구조 계약 테스트, Tool Studio 테스트, Workspace Monitor check/test, platform desktop app test 통과 확인. 22:04</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1152,
-      "updatedAt": "2026-06-07T13:06:38.508Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-evaluations-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-      "path": "_history/evaluations/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-      "category": "evaluation",
-      "language": "ko",
-      "title": "2026 06 07 소스 에디터 액션 상태 분리 평가",
-      "excerpt": "2026 06 07 소스 에디터 액션 상태 분리 평가 평가 입력 installation occurred : false resource risk occurred : true omission check targets : history/omission checks/2026/2026 06 07 source editor action state refactor.ko.md resource check targets : history/resource checks/2026/2026 06 07 source edito",
-      "html": "<p>2026 06 07 소스 에디터 액션 상태 분리 평가 평가 입력 installation occurred : false resource risk occurred : true omission check targets : history/omission checks/2026/2026 06 07 source editor action state refactor.ko.md resource check targets : history/resource checks/2026/2026 06 07 source editor action state refactor.ko.md 결과 이전 히스토리의 좁은 source load hook 분리에서 범위를 넓혀 source</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1959,
-      "updatedAt": "2026-06-07T13:06:38.507Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/evaluations"
-    },
-    {
-      "id": "history-request-traces-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-      "path": "_history/request-traces/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-      "category": "request-trace",
-      "language": "ko",
-      "title": "2026 06 07 소스 에디터 액션 상태 분리 요청 추적",
-      "excerpt": "2026 06 07 소스 에디터 액션 상태 분리 요청 추적 요청 히스토리를 보고 좁게 잡힌 이전 작업보다 넓은 범위로 구현한다. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/source editor/sourceDraftActions.ts platform desktop app/renderer/workspace monitor/components/workbench/source editor/index.ts platfor",
-      "html": "<p>2026 06 07 소스 에디터 액션 상태 분리 요청 추적 요청 히스토리를 보고 좁게 잡힌 이전 작업보다 넓은 범위로 구현한다. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/source editor/sourceDraftActions.ts platform desktop app/renderer/workspace monitor/components/workbench/source editor/index.ts platform desktop app/renderer/workspace monitor/components/MonitorShell.tsx platform de</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1416,
-      "updatedAt": "2026-06-07T13:06:38.507Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/request-traces"
-    },
-    {
-      "id": "history-work-summaries-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-      "path": "_history/work-summaries/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-      "category": "work-summary",
-      "language": "ko",
-      "title": "2026 06 07 소스 에디터 액션 상태 분리 작업 요약",
-      "excerpt": "2026 06 07 소스 에디터 액션 상태 분리 작업 요약 변경 source editor의 open/select/save/save all/revert/close 상태 전환을 sourceDraftActions.ts 로 분리했다. MonitorShell.tsx 는 새 helper 결과를 React state setter에 반영하는 역할로 줄였다. 저장 대상 생성, 저장 결과 계산, 저장 report 병합 로직을 공통 helper로 통일했다. 테스트용 import type script module.mj",
-      "html": "<p>2026 06 07 소스 에디터 액션 상태 분리 작업 요약 변경 source editor의 open/select/save/save all/revert/close 상태 전환을 sourceDraftActions.ts 로 분리했다. MonitorShell.tsx 는 새 helper 결과를 React state setter에 반영하는 역할로 줄였다. 저장 대상 생성, 저장 결과 계산, 저장 report 병합 로직을 공통 helper로 통일했다. 테스트용 import type script module.mjs 가 상대 TS/TSX import/export를 재귀적으로 처리하도록 확장했다. source editor 구조 테스트, helper beha</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1434,
-      "updatedAt": "2026-06-07T13:06:38.506Z",
-      "historyDate": "2026-06-07",
-      "historyYear": "2026",
-      "workspaceArea": "_history/work-summaries"
-    },
-    {
-      "id": "history-plans-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-      "path": "_history/plans/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-      "category": "plan",
-      "language": "ko",
-      "title": "2026 06 07 소스 에디터 액션 상태 분리 계획",
-      "excerpt": "2026 06 07 소스 에디터 액션 상태 분리 계획 목표 이전 source load hook 분리보다 넓게 잡아 source editor의 주요 사용자 액션 상태 전환까지 source editor 모듈로 이동한다. MonitorShell.tsx 는 UI 이벤트와 Tauri invoke 조합을 담당하고, draft 상태 계산은 순수 helper가 맡도록 줄인다. 실행 슬라이스 1. sourceDraftActions.ts 를 추가해 open/select/save/save all/revert/clos",
-      "html": "<p>2026 06 07 소스 에디터 액션 상태 분리 계획 목표 이전 source load hook 분리보다 넓게 잡아 source editor의 주요 사용자 액션 상태 전환까지 source editor 모듈로 이동한다. MonitorShell.tsx 는 UI 이벤트와 Tauri invoke 조합을 담당하고, draft 상태 계산은 순수 helper가 맡도록 줄인다. 실행 슬라이스 1. sourceDraftActions.ts 를 추가해 open/select/save/save all/revert/close 상태 전환 helper를 만든다. 2. MonitorShell.tsx 의 inline draft 상태 계산을 새 helper 호출로 바꾼다.</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1218,
-      "updatedAt": "2026-06-07T13:05:05.178Z",
       "historyDate": "2026-06-07",
       "historyYear": "2026",
       "workspaceArea": "_history/plans"
@@ -18155,169 +18366,41 @@
       "historyDate": "2026-06-05",
       "historyYear": "2026",
       "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-local-history-hook-componentization-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-local-history-hook-componentization/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Local History Hook Componentization Traceability",
-      "excerpt": "Local History Hook Componentization Traceability | 항목 | 연결 | | | | | 요구사항 | PDA REQ 044 | | 제품 gap | platform desktop app/configs/product gap registry.json componentized desktop ui architecture | | 웹 검색 | history/web searches/2026/2026 06 05 local history hook componentization.ko",
-      "html": "<h1>Local History Hook Componentization Traceability</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>요구사항</td><td>PDA-REQ-044</td></tr><tr><td>제품 gap</td><td><code>platform-desktop-app/configs/product-gap-registry.json</code> <code>componentized_desktop_ui_architecture</code></td></tr><tr><td>웹 검색</td><td><code>_history/web-searches/2026/2026-06-05-local-history-hook-componentization.ko.md</code></td></tr><tr><td>구현</td><td><code>components/history/useAdminHistoryIndex.ts</code>, <code>components/MonitorShell.tsx</code></td></tr><tr><td>테스트</td><td><code>tests/tool-studio.test.mjs</code></td></tr><tr><td>평가</td><td><code>_history/evaluations/2026/2026-06-05-local-history-hook-componentization.ko.md</code></td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 558,
-      "updatedAt": "2026-06-05T12:10:43.429Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-local-history-hook-componentization-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-local-history-hook-componentization/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Local History Hook Componentization Plan",
-      "excerpt": "Local History Hook Componentization Plan 결정 | 옵션 | 장점 | 단점 | 결정 | | | | | | | MonitorShell.tsx 안에서 memo만 추가 | 작다 | 유지보수 부채가 계속 쌓인다 | 기각 | | History 화면 전체를 새 컴포넌트로 분리 | 더 크고 명확하다 | 현재 turn에서 회귀 범위가 크다 | 보류 | | 관리자 기록 로딩/병합 hook부터 분리 | 성능과 구조 부채를 동시에 줄이고 위험이 낮다 | 전체 componentizatio",
-      "html": "<h1>Local History Hook Componentization Plan</h1>\n<h2>결정</h2>\n<table><thead><tr><th>옵션</th><th>장점</th><th>단점</th><th>결정</th></tr></thead><tbody><tr><td><code>MonitorShell.tsx</code> 안에서 memo만 추가</td><td>작다</td><td>유지보수 부채가 계속 쌓인다</td><td>기각</td></tr><tr><td>History 화면 전체를 새 컴포넌트로 분리</td><td>더 크고 명확하다</td><td>현재 turn에서 회귀 범위가 크다</td><td>보류</td></tr><tr><td>관리자 기록 로딩/병합 hook부터 분리</td><td>성능과 구조 부채를 동시에 줄이고 위험이 낮다</td><td>전체 componentization은 남는다</td><td>선택</td></tr></tbody></table>\n<h2>실행</h2>\n<p>1. <code>components/history/useAdminHistoryIndex.ts</code>를 만든다.</p>\n<p>2. hook이 local <code>admin-history-index.json</code> fetch, module cache, idle preload, document merge, day grouping, status copy를 소유한다.</p>\n<p>3. <code>MonitorShell.tsx</code>에서 해당 상태/effect/helper를 제거하고 hook 결과만 사용한다.</p>\n<p>4. History 화면의 한국어 지표와 상태 문구를 자연스럽게 바꾼다.</p>\n<p>5. 테스트와 payload/build 검증을 실행한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 981,
-      "updatedAt": "2026-06-05T12:10:43.428Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-local-history-hook-componentization-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-local-history-hook-componentization/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "Local History Hook Componentization Spec",
-      "excerpt": "Local History Hook Componentization Spec 목적 Workspace Monitor에 누적된 로컬 기록 데이터 처리와 UI 문구가 MonitorShell.tsx 에 계속 쌓이는 문제를 줄인다. 로컬 generated resource는 필요한 시점과 idle 시점에 캐시해 탭 진입 지연을 낮추고, 핵심 History 화면의 한국어 문구를 자연스럽게 정리한다. 요구사항 관리자 기록 색인 fetch, 모듈 캐시, idle preload, 문서 병합, 날짜별 그룹 생성은 Mon",
-      "html": "<h1>Local History Hook Componentization Spec</h1>\n<h2>목적</h2>\n<p>Workspace Monitor에 누적된 로컬 기록 데이터 처리와 UI 문구가 <code>MonitorShell.tsx</code>에 계속 쌓이는 문제를 줄인다. 로컬 generated resource는 필요한 시점과 idle 시점에 캐시해 탭 진입 지연을 낮추고, 핵심 History 화면의 한국어 문구를 자연스럽게 정리한다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>관리자 기록 색인 fetch, 모듈 캐시, idle preload, 문서 병합, 날짜별 그룹 생성은 <code>MonitorShell.tsx</code> 밖의 전용 hook/module이 소유한다.</li>\n<li>History/Documents 섹션 진입 시 즉시 로드하고, 그 전에는 브라우저 idle 시간에 local <code>admin-history-index.json</code>을 미리 캐시할 수 있어야 한다.</li>\n<li><code>MonitorShell.tsx</code>는 관리자 기록 로딩 구현 세부사항 대신 hook 결과만 사용한다.</li>\n<li>History 핵심 화면의 한국어 기본 UI는 <code>History Days</code>, <code>History Docs</code>, <code>Unified Ops</code>, <code>stream</code>, <code>docs</code> 같은 불필요한 영어식 표현을 피한다.</li>\n<li>회귀 테스트는 분리된 hook, 로컬 캐시, idle preload, 한국어 문구를 검증해야 한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li><code>MonitorShell.tsx</code> 전체 componentization 완료는 이번 slice의 범위가 아니다.</li>\n<li>public distribution gate, signing/notarization, external smoke test는 다루지 않는다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1312,
-      "updatedAt": "2026-06-05T12:10:43.428Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-history-payload-migration-traceability-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-history-payload-migration/traceability.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "History Payload Migration Traceability",
-      "excerpt": "History Payload Migration Traceability | 항목 | 연결 | | | | | 요구사항 | platform desktop app/docs/requirements/2026 06 02 installable desktop.ko.md PDA REQ 043 | | 웹 검색 | history/web searches/2026/2026 06 05 history payload migration.ko.md | | 구현 | scripts/collect workspace.mjs , compo",
-      "html": "<h1>History Payload Migration Traceability</h1>\n<table><thead><tr><th>항목</th><th>연결</th></tr></thead><tbody><tr><td>요구사항</td><td><code>platform-desktop-app/docs/requirements/2026-06-02-installable-desktop.ko.md</code> PDA-REQ-043</td></tr><tr><td>웹 검색</td><td><code>_history/web-searches/2026/2026-06-05-history-payload-migration.ko.md</code></td></tr><tr><td>구현</td><td><code>scripts/collect-workspace.mjs</code>, <code>components/MonitorShell.tsx</code>, <code>lib/snapshot.ts</code>, <code>scripts/check-history-payload.mjs</code></td></tr><tr><td>생성물</td><td><code>public/admin-history-index.json</code></td></tr><tr><td>테스트</td><td><code>tests/collector.test.mjs</code>, <code>tests/tool-studio.test.mjs</code></td></tr><tr><td>평가</td><td><code>_history/evaluations/2026/2026-06-05-history-payload-migration.ko.md</code></td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 613,
-      "updatedAt": "2026-06-05T12:03:53.283Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-history-payload-migration-validation-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-history-payload-migration/validation.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "History Payload Migration Validation",
-      "excerpt": "History Payload Migration Validation 실행한 검증 node check platform desktop app/renderer/workspace monitor/scripts/collect workspace.mjs : 통과 node check platform desktop app/renderer/workspace monitor/scripts/check history payload.mjs : 통과 corepack pnpm filter workspace monitor colle",
-      "html": "<h1>History Payload Migration Validation</h1>\n<h2>실행한 검증</h2>\n<ul>\n<li><code>node --check platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs</code>: 통과</li>\n<li><code>node --check platform-desktop-app/renderer/workspace-monitor/scripts/check-history-payload.mjs</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor collect</code>: 통과, inline documents 650개와 admin history records 2,220개 생성</li>\n<li><code>corepack pnpm --filter workspace-monitor run check:history-payload</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor test</code>: 통과, 51 tests</li>\n<li><code>corepack pnpm --filter workspace-monitor run check</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run build</code>: 통과</li>\n<li><code>corepack pnpm --filter workspace-monitor run audit:surfaces -- http://127.0.0.1:4184/#section-overview</code>: 통과, failures 없음</li>\n<li><code>corepack pnpm --filter workspace-monitor run build:customer</code>: 통과, public admin history index empty 확인</li>\n<li><code>corepack pnpm --filter workspace-monitor run perf:budget</code>: 통과, largest chunk 734,386 bytes</li>\n</ul>\n<h2>측정</h2>\n<ul>\n<li>기본 snapshot documents: 1200개 상한에서 650개 상한으로 감소</li>\n<li>기본 snapshot <code>documents</code> JSON: 1,651,769 bytes</li>\n<li>inline history documents: 96개</li>\n<li><code>admin-history-index.json</code>: 2,220 records, 3,207,045 bytes</li>\n</ul>\n<h2>남은 검증</h2>\n<ul>\n<li>최종 close-out 전에 <code>git diff --check</code>를 실행한다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1331,
-      "updatedAt": "2026-06-05T12:02:03.225Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-history-payload-migration-plan-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-history-payload-migration/plan.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "History Payload Migration Plan",
-      "excerpt": "History Payload Migration Plan 옵션 비교 | 옵션 | 장점 | 단점 | 결정 | | | | | | | 기본 snapshot에 history preview만 계속 축소 | 변경이 작다 | 중복 색인과 초기 JSON parse 비용이 계속 증가한다 | 기각 | | JSONL/SQLite로 원본 기록까지 즉시 이동 | 장기적으로 좋다 | 기존 durable history 경로를 크게 흔들고 검증 범위가 커진다 | 보류 | | 기본 snapshot + lazy admin hist",
-      "html": "<h1>History Payload Migration Plan</h1>\n<h2>옵션 비교</h2>\n<table><thead><tr><th>옵션</th><th>장점</th><th>단점</th><th>결정</th></tr></thead><tbody><tr><td>기본 snapshot에 history preview만 계속 축소</td><td>변경이 작다</td><td>중복 색인과 초기 JSON parse 비용이 계속 증가한다</td><td>기각</td></tr><tr><td>JSONL/SQLite로 원본 기록까지 즉시 이동</td><td>장기적으로 좋다</td><td>기존 durable history 경로를 크게 흔들고 검증 범위가 커진다</td><td>보류</td></tr><tr><td>기본 snapshot + lazy admin history index 분리</td><td>원본 보존, 초기 payload 절감, static app과 호환</td><td>관리자 진입 시 추가 fetch가 필요하다</td><td>선택</td></tr></tbody></table>\n<h2>실행</h2>\n<p>1. collector가 full history document index를 <code>admin-history-index.json</code>으로 생성한다.</p>\n<p>2. 기본 snapshot은 non-history 문서와 최근 히스토리 96개만 포함한다.</p>\n<p>3. Monitor UI는 <code>history</code> 또는 <code>documents</code> 섹션 진입 시 admin index를 한 번 lazy fetch한다.</p>\n<p>4. History/Documents 계산은 기본 snapshot과 admin index를 병합하되 중복 ID는 admin index가 우선한다.</p>\n<p>5. <code>check-history-payload.mjs</code>가 payload budget과 migration contract를 검증한다.</p>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1116,
-      "updatedAt": "2026-06-05T11:57:51.490Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-history-payload-migration-spec-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-history-payload-migration/spec.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "History Payload Migration Spec",
-      "excerpt": "History Payload Migration Spec 목적 누적 history 기록이 Workspace Monitor 기본 snapshot과 LLM context를 계속 비대하게 만들지 않도록, 기본 UI payload와 관리자 히스토리 색인을 분리한다. 요구사항 기본 workspace snapshot.json 은 최근 히스토리 요약만 포함하고 전체 history 기록 목록을 중복 적재하지 않는다. 전체 히스토리 기록은 생성된 admin history index.json 에 저장하고, Histo",
-      "html": "<h1>History Payload Migration Spec</h1>\n<h2>목적</h2>\n<p>누적 <code>_history</code> 기록이 Workspace Monitor 기본 snapshot과 LLM context를 계속 비대하게 만들지 않도록, 기본 UI payload와 관리자 히스토리 색인을 분리한다.</p>\n<h2>요구사항</h2>\n<ul>\n<li>기본 <code>workspace-snapshot.json</code>은 최근 히스토리 요약만 포함하고 전체 <code>_history</code> 기록 목록을 중복 적재하지 않는다.</li>\n<li>전체 히스토리 기록은 생성된 <code>admin-history-index.json</code>에 저장하고, History/Documents 같은 관리자 표면에서만 lazy load한다.</li>\n<li>기존 durable <code>_history</code> 원본 파일은 이동하거나 삭제하지 않는다. 이번 마이그레이션은 표시/색인 레이어 변경이다.</li>\n<li>customer snapshot 빌드에서는 내부 히스토리 색인을 빈 <code>admin-history-index.json</code>으로 대체한다.</li>\n<li>검증은 기본 documents JSON byte budget, inline history 제한, admin index bounded preview, snapshot summary와 index count 일치를 확인해야 한다.</li>\n</ul>\n<h2>비범위</h2>\n<ul>\n<li>SQLite/DB 영구 저장소 전환은 이번 slice에서 하지 않는다.</li>\n<li>기존 <code>_history</code> 경로 rename/delete는 migration plan과 별도 검증 전까지 하지 않는다.</li>\n</ul>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 1179,
-      "updatedAt": "2026-06-05T11:57:51.490Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
-    },
-    {
-      "id": "platform-desktop-app-renderer-workspace-monitor-specs-2026-06-05-history-payload-migration-tasks-ko-md",
-      "path": "platform-desktop-app/renderer/workspace-monitor/specs/2026-06-05-history-payload-migration/tasks.ko.md",
-      "category": "project-spec",
-      "language": "ko",
-      "title": "History Payload Migration Tasks",
-      "excerpt": "History Payload Migration Tasks | ID | 작업 | 상태 | | | | | | T1 | web first intake와 payload 병목 측정 | done | | T2 | 관리자 히스토리 색인 생성물 추가 | done | | T3 | 기본 snapshot inline history 제한 적용 | done | | T4 | History/Documents lazy load UI 연결 | done | | T5 | payload 검증 스크립트와 단위 테스트 업데이트 | don",
-      "html": "<h1>History Payload Migration Tasks</h1>\n<table><thead><tr><th>ID</th><th>작업</th><th>상태</th></tr></thead><tbody><tr><td>T1</td><td>web-first intake와 payload 병목 측정</td><td>done</td></tr><tr><td>T2</td><td>관리자 히스토리 색인 생성물 추가</td><td>done</td></tr><tr><td>T3</td><td>기본 snapshot inline history 제한 적용</td><td>done</td></tr><tr><td>T4</td><td>History/Documents lazy load UI 연결</td><td>done</td></tr><tr><td>T5</td><td>payload 검증 스크립트와 단위 테스트 업데이트</td><td>done</td></tr><tr><td>T6</td><td>요구사항, 스펙, 히스토리 기록 업데이트</td><td>done</td></tr></tbody></table>",
-      "previewMode": "document-preview",
-      "htmlTruncated": false,
-      "sourceBytes": 464,
-      "updatedAt": "2026-06-05T11:57:51.490Z",
-      "historyDate": "2026-06-05",
-      "historyYear": "2026",
-      "workspaceArea": "platform-desktop-app"
     }
   ],
   "historyDays": [
     {
       "date": "2026-06-08",
       "year": "2026",
-      "documentsCount": 22,
+      "documentsCount": 29,
       "categories": [
         {
           "category": "evaluation",
-          "count": 3
+          "count": 4
         },
         {
           "category": "plan",
-          "count": 3
+          "count": 4
         },
         {
           "category": "request-trace",
-          "count": 3
+          "count": 4
         },
         {
           "category": "user-request",
-          "count": 3
+          "count": 4
         },
         {
           "category": "web-search",
-          "count": 3
+          "count": 4
         },
         {
           "category": "work-summary",
-          "count": 3
+          "count": 4
         },
         {
           "category": "work-timing",
-          "count": 3
+          "count": 4
         },
         {
           "category": "daily-history",
@@ -18332,7 +18415,7 @@
           "language": "unknown",
           "title": "2026 06 08 작업 기록",
           "excerpt": "2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view ",
-          "updatedAt": "2026-06-07T16:17:07.735Z",
+          "updatedAt": "2026-06-07T16:49:10.880Z",
           "historyDate": "2026-06-08"
         },
         {
@@ -18366,6 +18449,16 @@
           "historyDate": "2026-06-08"
         },
         {
+          "id": "history-evaluations-2026-2026-06-08-workspace-tracker-product-split-evaluation-input-json",
+          "path": "_history/evaluations/2026/2026-06-08-workspace-tracker-product-split-evaluation-input.json",
+          "category": "evaluation",
+          "language": "unknown",
+          "title": "2026 06 08 Workspace Tracker Product Split Evaluation Input",
+          "excerpt": "{ \"schema version\": \"2026 06 08\", \"work mode\": \"governance\", \"web search record targets\": \" history/web searches/2026/2026 06 08 workspace tracker product split.ko.md\" , \"user request summary targets\": \" history/user requests/2026/2026 06 08 workspace tracker product split.ko.md\"",
+          "updatedAt": "2026-06-07T17:06:09.975Z",
+          "historyDate": "2026-06-08"
+        },
+        {
           "id": "history-plans-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
           "path": "_history/plans/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
           "category": "plan",
@@ -18393,6 +18486,16 @@
           "title": "계획: 터미널 탭 개혁",
           "excerpt": "계획: 터미널 탭 개혁 1. 터미널 드로어와 PTY surface의 현재 구조를 확인한다. 2. 시작 화면을 실행 허브로 바꾸고 고급 설정을 접는다. 3. 드로어 상단 readiness strip을 추가한다. 4. 기존 xterm 기반 검색/복사/붙여넣기/맞춤/빠른 명령 기능을 유지한다. 5. 요구사항, 스펙, 테스트, 생성 스냅샷, 평가 기록을 갱신한다. 6. check/test/build와 guard를 통과시킨 뒤 commit/push한다.",
           "updatedAt": "2026-06-07T16:16:59.381Z",
+          "historyDate": "2026-06-08"
+        },
+        {
+          "id": "history-plans-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+          "path": "_history/plans/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+          "category": "plan",
+          "language": "ko",
+          "title": "계획: workspace tracker product split",
+          "excerpt": "계획: workspace tracker product split 1. 공식 문서로 Git 작업공간, AI 코딩 도구, AgentCore류 런타임/툴 플랫폼의 역할을 확인한다. 2. platform desktop app/ 와 agent platform/ 의 소유 경계를 다시 정의한다. 3. 데스크톱 앱 제품 레지스트리를 workspace tracker 중심으로 바꾼다. 4. user view mode와 홈 화면을 Git 작업공간/current work/report 중심으로 바꾼다. 5. 스냅샷 co",
+          "updatedAt": "2026-06-07T16:49:10.874Z",
           "historyDate": "2026-06-08"
         },
         {
@@ -18426,6 +18529,16 @@
           "historyDate": "2026-06-08"
         },
         {
+          "id": "history-request-traces-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+          "path": "_history/request-traces/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+          "category": "request-trace",
+          "language": "ko",
+          "title": "요청 결과 추적: workspace tracker product split",
+          "excerpt": "요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현 및 검증 완료, 커밋/푸시 대기 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: ",
+          "updatedAt": "2026-06-07T17:05:04.830Z",
+          "historyDate": "2026-06-08"
+        },
+        {
           "id": "history-user-requests-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
           "path": "_history/user-requests/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
           "category": "user-request",
@@ -18453,6 +18566,16 @@
           "title": "사용자 요청 요약: 터미널 탭 개혁",
           "excerpt": "사용자 요청 요약: 터미널 탭 개혁 사용자는 플랫폼의 터미널 탭 기능이 특히 문제라고 지적했다. 앞선 맥락에서 터미널/PTY/CLI 연결 상태가 보이는 것과 실제 사용 경로가 달라 첫 실행과 에이전트 실행이 어렵다는 문제가 있었다. 목표는 사용자에게 복잡한 설정을 먼저 보이지 않고, 실행 가능 상태와 바로 실행/복구 액션을 보여주는 것이다.",
           "updatedAt": "2026-06-07T16:16:59.382Z",
+          "historyDate": "2026-06-08"
+        },
+        {
+          "id": "history-user-requests-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+          "path": "_history/user-requests/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+          "category": "user-request",
+          "language": "ko",
+          "title": "사용자 요청 요약: workspace tracker product split",
+          "excerpt": "사용자 요청 요약: workspace tracker product split 사용자는 데스크톱 앱의 근본 목적이 AntiGravity, Cursor, Codex, Claude Code 등 여러 AI 코딩 도구를 Git 작업공간 위에서 잘 쓰도록 돕고, 현재 작업 중인 계획/요약/보고서/근거를 쉽게 확인하는 것이라고 정리했다. 또한 Ollama, 에이전트 관리, 툴 관리, AWS Agent Platform/AgentCore류 기능은 기본 데스크톱 앱에서 덜어내 별도 플랫폼/프로젝트로 분리해야 한다고",
+          "updatedAt": "2026-06-07T16:49:10.875Z",
           "historyDate": "2026-06-08"
         },
         {
@@ -18486,6 +18609,16 @@
           "historyDate": "2026-06-08"
         },
         {
+          "id": "history-web-searches-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+          "path": "_history/web-searches/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+          "category": "web-search",
+          "language": "ko",
+          "title": "웹 검색 기록: workspace tracker product split",
+          "excerpt": "웹 검색 기록: workspace tracker product split 날짜: 2026 06 08 작업: 데스크톱 앱을 Git 작업공간/게스트 AI 도구/작업 추적 허브로 재정의하고, 에이전트/툴/Ollama/AgentCore류 기능을 agent platform/ 으로 분리한다. 검색 목적: 제품 경계가 현재 AI 코딩 도구와 Git 작업공간 구조에 맞는지 확인한다. 확인한 공식/고신뢰 출처 Git worktree 공식 문서: https://git scm.com/docs/git worktree.",
+          "updatedAt": "2026-06-07T16:49:10.869Z",
+          "historyDate": "2026-06-08"
+        },
+        {
           "id": "history-work-summaries-2026-2026-06-08-codex-cli-pty-first-run-ko-md",
           "path": "_history/work-summaries/2026/2026-06-08-codex-cli-pty-first-run.ko.md",
           "category": "work-summary",
@@ -18513,6 +18646,16 @@
           "title": "작업 요약: 터미널 탭 개혁",
           "excerpt": "작업 요약: 터미널 탭 개혁 터미널 드로어 상단에 readiness strip을 추가해 런타임, 어댑터, 실제 셸, 작업 폴더 상태를 노출했다. 시작 패널에 작업 시작, 실제 셸 열기, CLI 연결 점검, 설정 복구 액션을 우선 배치했다. 프롬프트 선택과 작업 폴더 세부 조정은 terminal advanced start 접힘 영역으로 이동했다. 사용자 기본 용어를 PTY 중심에서 실제 셸 과 연결 점검 중심으로 바꿨다. 기존 xterm 기반 검색, 클립보드, 화면 맞춤, 빠른 명령 기능은 유지했다",
           "updatedAt": "2026-06-07T16:16:59.383Z",
+          "historyDate": "2026-06-08"
+        },
+        {
+          "id": "history-work-summaries-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+          "path": "_history/work-summaries/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+          "category": "work-summary",
+          "language": "ko",
+          "title": "작업 요약: workspace tracker product split",
+          "excerpt": "작업 요약: workspace tracker product split 데스크톱 앱의 제품 중심을 agent capability platform 에서 workspace tracker 로 바꿨다. 기본 사용자 화면은 Git 작업공간, 터미널/AI 실행, 작업 타임라인, 보고서/근거, 문서/요구사항을 우선하도록 바꿨다. Codex, Claude Code, Cursor, Antigravity 등은 선택형 guest AI 도구로 모델링했다. agent factory, root tool management,",
+          "updatedAt": "2026-06-07T16:49:10.876Z",
           "historyDate": "2026-06-08"
         },
         {
@@ -18544,41 +18687,51 @@
           "excerpt": "{ \"task\": \"터미널 탭 개혁\", \"date\": \"2026 06 08\", \"phases\": { \"phase\": \"web first intake\", \"duration minutes\": 4, \"notes\": \"Checked xterm.js and Tauri shell references plus terminal UX signals.\" }, { \"phase\": \"local discovery\", \"duration minutes\": 15, \"notes\": \"Inspected RuntimeTermina",
           "updatedAt": "2026-06-07T16:19:12.744Z",
           "historyDate": "2026-06-08"
+        },
+        {
+          "id": "history-work-timings-2026-2026-06-08-workspace-tracker-product-split-json",
+          "path": "_history/work-timings/2026/2026-06-08-workspace-tracker-product-split.json",
+          "category": "work-timing",
+          "language": "unknown",
+          "title": "2026 06 08 Workspace Tracker Product Split",
+          "excerpt": "{ \"task id\": \"2026 06 08 workspace tracker product split\", \"title\": \"Workspace tracker product split\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seconds\": ",
+          "updatedAt": "2026-06-07T17:05:23.467Z",
+          "historyDate": "2026-06-08"
         }
       ]
     },
     {
       "date": "2026-06-07",
       "year": "2026",
-      "documentsCount": 74,
+      "documentsCount": 67,
       "categories": [
         {
           "category": "evaluation",
-          "count": 11
+          "count": 10
         },
         {
           "category": "request-trace",
-          "count": 11
+          "count": 10
         },
         {
           "category": "work-summary",
-          "count": 11
+          "count": 10
         },
         {
           "category": "work-timing",
-          "count": 11
+          "count": 10
         },
         {
           "category": "user-request",
-          "count": 10
+          "count": 9
         },
         {
           "category": "web-search",
-          "count": 10
+          "count": 9
         },
         {
           "category": "plan",
-          "count": 9
+          "count": 8
         },
         {
           "category": "daily-history",
@@ -18634,16 +18787,6 @@
           "title": "작업 평가",
           "excerpt": "작업 평가 날짜: 2026 06 07 평가 대상: 런타임 프리셋/문구 모듈 분리. 기준: 동작 계약 유지 MonitorShell 대형 파일 축소 readiness/test 계약 갱신 결과: nativeWorkspaceCopy 는 runtimeWorkspaceCopy.ts 로 이동했다. 세션 모드, task pipe 프리셋, task pipe prompt key/prompt renderer, runtime init 기본값은 runtimeSessionPresets.ts 로 이동했다. 기존 호출부는 같",
           "updatedAt": "2026-06-07T14:03:59.055Z",
-          "historyDate": "2026-06-07"
-        },
-        {
-          "id": "history-evaluations-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-          "path": "_history/evaluations/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-          "category": "evaluation",
-          "language": "ko",
-          "title": "2026 06 07 소스 에디터 액션 상태 분리 평가",
-          "excerpt": "2026 06 07 소스 에디터 액션 상태 분리 평가 평가 입력 installation occurred : false resource risk occurred : true omission check targets : history/omission checks/2026/2026 06 07 source editor action state refactor.ko.md resource check targets : history/resource checks/2026/2026 06 07 source edito",
-          "updatedAt": "2026-06-07T13:06:38.507Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18737,16 +18880,6 @@
           "historyDate": "2026-06-07"
         },
         {
-          "id": "history-plans-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-          "path": "_history/plans/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-          "category": "plan",
-          "language": "ko",
-          "title": "2026 06 07 소스 에디터 액션 상태 분리 계획",
-          "excerpt": "2026 06 07 소스 에디터 액션 상태 분리 계획 목표 이전 source load hook 분리보다 넓게 잡아 source editor의 주요 사용자 액션 상태 전환까지 source editor 모듈로 이동한다. MonitorShell.tsx 는 UI 이벤트와 Tauri invoke 조합을 담당하고, draft 상태 계산은 순수 helper가 맡도록 줄인다. 실행 슬라이스 1. sourceDraftActions.ts 를 추가해 open/select/save/save all/revert/clos",
-          "updatedAt": "2026-06-07T13:05:05.178Z",
-          "historyDate": "2026-06-07"
-        },
-        {
           "id": "history-plans-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
           "path": "_history/plans/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
           "category": "plan",
@@ -18834,16 +18967,6 @@
           "title": "요청 결과 추적",
           "excerpt": "요청 결과 추적 날짜: 2026 06 07 요청 요약: 계속 구현하며 큰 소스와 중복 구조를 줄인다. 실행 범위: 런타임 작업공간 문구 모듈화 세션/task pipe 프리셋 모듈화 readiness/test 계약 갱신 산출물: platform desktop app/renderer/workspace monitor/components/features/runtimeWorkspaceCopy.ts platform desktop app/renderer/workspace monitor/components/fe",
           "updatedAt": "2026-06-07T14:03:59.055Z",
-          "historyDate": "2026-06-07"
-        },
-        {
-          "id": "history-request-traces-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-          "path": "_history/request-traces/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-          "category": "request-trace",
-          "language": "ko",
-          "title": "2026 06 07 소스 에디터 액션 상태 분리 요청 추적",
-          "excerpt": "2026 06 07 소스 에디터 액션 상태 분리 요청 추적 요청 히스토리를 보고 좁게 잡힌 이전 작업보다 넓은 범위로 구현한다. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/source editor/sourceDraftActions.ts platform desktop app/renderer/workspace monitor/components/workbench/source editor/index.ts platfor",
-          "updatedAt": "2026-06-07T13:06:38.507Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -18947,16 +19070,6 @@
           "historyDate": "2026-06-07"
         },
         {
-          "id": "history-user-requests-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-          "path": "_history/user-requests/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-          "category": "user-request",
-          "language": "ko",
-          "title": "2026 06 07 소스 에디터 세션 훅 분리 요청",
-          "excerpt": "2026 06 07 소스 에디터 세션 훅 분리 요청 요청 요약 이전 구현보다 더 넓은 범위로 계속 구현한다. 큰 MonitorShell.tsx 에 남아 있는 source editor 세션 상태, ref, timer 로직을 더 분리한다. 기능 이슈가 생기지 않도록 구조 계약, TypeScript, Rust/Tauri 패키징까지 확인한다. 적용 범위 소유 프로젝트: platform desktop app 주요 대상: Workspace Monitor source editor 세션 상태 경계 작업 모드: ",
-          "updatedAt": "2026-06-07T13:12:32.526Z",
-          "historyDate": "2026-06-07"
-        },
-        {
           "id": "history-user-requests-2026-2026-06-07-source-workbench-controller-hook-ko-md",
           "path": "_history/user-requests/2026/2026-06-07-source-workbench-controller-hook.ko.md",
           "category": "user-request",
@@ -19047,16 +19160,6 @@
           "historyDate": "2026-06-07"
         },
         {
-          "id": "history-web-searches-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-          "path": "_history/web-searches/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-          "category": "web-search",
-          "language": "ko",
-          "title": "2026 06 07 소스 에디터 세션 훅 분리 웹 검색 기록",
-          "excerpt": "2026 06 07 소스 에디터 세션 훅 분리 웹 검색 기록 검색 쿼리 React official docs useReducer extracting state logic into reducer custom hook React official docs reusing logic with custom hooks effects race conditions ignore stale responses TypeScript official docs module exports type imports reference",
-          "updatedAt": "2026-06-07T13:12:32.527Z",
-          "historyDate": "2026-06-07"
-        },
-        {
           "id": "history-web-searches-2026-2026-06-07-source-workbench-controller-hook-ko-md",
           "path": "_history/web-searches/2026/2026-06-07-source-workbench-controller-hook.ko.md",
           "category": "web-search",
@@ -19144,16 +19247,6 @@
           "title": "작업 요약",
           "excerpt": "작업 요약 날짜: 2026 06 07 변경: components/features/runtimeWorkspaceCopy.ts 추가. components/features/runtimeSessionPresets.ts 추가. MonitorShell.tsx 에서 런타임 문구/프리셋 로컬 정의 제거. readiness source map과 tool studio.test.mjs 구조 계약 갱신. 1차 검증: corepack pnpm filter workspace monitor exec tsc noEmit : ",
           "updatedAt": "2026-06-07T14:03:59.054Z",
-          "historyDate": "2026-06-07"
-        },
-        {
-          "id": "history-work-summaries-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-          "path": "_history/work-summaries/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-          "category": "work-summary",
-          "language": "ko",
-          "title": "2026 06 07 소스 에디터 액션 상태 분리 작업 요약",
-          "excerpt": "2026 06 07 소스 에디터 액션 상태 분리 작업 요약 변경 source editor의 open/select/save/save all/revert/close 상태 전환을 sourceDraftActions.ts 로 분리했다. MonitorShell.tsx 는 새 helper 결과를 React state setter에 반영하는 역할로 줄였다. 저장 대상 생성, 저장 결과 계산, 저장 report 병합 로직을 공통 helper로 통일했다. 테스트용 import type script module.mj",
-          "updatedAt": "2026-06-07T13:06:38.506Z",
           "historyDate": "2026-06-07"
         },
         {
@@ -19257,16 +19350,6 @@
           "historyDate": "2026-06-07"
         },
         {
-          "id": "history-work-timings-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-          "path": "_history/work-timings/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-          "category": "work-timing",
-          "language": "ko",
-          "title": "2026 06 07 소스 에디터 액션 상태 분리 작업 타이밍",
-          "excerpt": "2026 06 07 소스 에디터 액션 상태 분리 작업 타이밍 기록 22:00 22:02 KST: 웹 검색, 이전 히스토리 확인, 넓은 source editor 액션 상태 분리 범위 확정. 22:02 22:04 KST: sourceDraftActions.ts , MonitorShell.tsx , source editor export, readiness map, 테스트 importer, 관련 테스트 갱신. 22:04 KST: source editor helper 테스트, 구조 계약 테스트, Tool ",
-          "updatedAt": "2026-06-07T13:06:38.508Z",
-          "historyDate": "2026-06-07"
-        },
-        {
           "id": "history-work-timings-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
           "path": "_history/work-timings/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
           "category": "work-timing",
@@ -19335,36 +19418,36 @@
     "loadMode": "lazy-admin-surface",
     "inlineHistoryDocuments": 96,
     "summary": {
-      "documents": 3206,
+      "documents": 3213,
       "days": 9,
       "categories": [
         {
           "category": "evaluation",
-          "count": 1130
+          "count": 1131
         },
         {
           "category": "web-search",
-          "count": 497
+          "count": 498
         },
         {
           "category": "request-trace",
-          "count": 426
+          "count": 427
         },
         {
           "category": "plan",
-          "count": 408
+          "count": 409
         },
         {
           "category": "work-timing",
-          "count": 345
+          "count": 346
         },
         {
           "category": "user-request",
-          "count": 211
+          "count": 212
         },
         {
           "category": "work-summary",
-          "count": 178
+          "count": 179
         },
         {
           "category": "daily-history",
@@ -19375,7 +19458,7 @@
           "count": 2
         }
       ],
-      "totalSourceBytes": 7256468,
+      "totalSourceBytes": 7276226,
       "generatedFrom": [
         "_history/2026",
         "_history/evaluations",
@@ -19402,9 +19485,9 @@
       "monitorEvents": 64,
       "evidenceEvents": 27,
       "decisionEvents": 0,
-      "openSignals": 18,
+      "openSignals": 17,
       "criticalSignals": 13,
-      "latestEventAt": "2026-06-07T16:19:55.752Z",
+      "latestEventAt": "2026-06-07T17:06:09.975Z",
       "historyDays": 2
     },
     "lanes": [
@@ -19515,6 +19598,126 @@
     ],
     "events": [
       {
+        "id": "history-history-evaluations-2026-2026-06-08-workspace-tracker-product-split-evaluation-input-json",
+        "sourceType": "history",
+        "signalType": "evaluation",
+        "lane": "verification",
+        "severity": "verified",
+        "status": "evaluation",
+        "title": "2026 06 08 Workspace Tracker Product Split Evaluation Input",
+        "detail": "{ \"schema version\": \"2026 06 08\", \"work mode\": \"governance\", \"web search record targets\": \" history/web searches/2026/2026 06 08 workspace tracker product split.ko.md\" , \"user request summary targets\": \" history/user requests/2026/2026 06 08 workspace tracker product split.ko.md\"",
+        "path": "_history/evaluations/2026/2026-06-08-workspace-tracker-product-split-evaluation-input.json",
+        "category": "evaluation",
+        "language": "unknown",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T17:06:09.975Z"
+      },
+      {
+        "id": "history-history-work-timings-2026-2026-06-08-workspace-tracker-product-split-json",
+        "sourceType": "history",
+        "signalType": "timing",
+        "lane": "monitoring",
+        "severity": "verified",
+        "status": "ready",
+        "title": "2026 06 08 Workspace Tracker Product Split",
+        "detail": "{ \"task id\": \"2026 06 08 workspace tracker product split\", \"title\": \"Workspace tracker product split\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seconds\": ",
+        "path": "_history/work-timings/2026/2026-06-08-workspace-tracker-product-split.json",
+        "category": "work-timing",
+        "language": "unknown",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T17:05:23.467Z"
+      },
+      {
+        "id": "history-history-request-traces-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+        "sourceType": "history",
+        "signalType": "trace",
+        "lane": "traceability",
+        "severity": "evidence",
+        "status": "ready",
+        "title": "요청 결과 추적: workspace tracker product split",
+        "detail": "요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현 및 검증 완료, 커밋/푸시 대기 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: ",
+        "path": "_history/request-traces/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+        "category": "request-trace",
+        "language": "ko",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T17:05:04.830Z"
+      },
+      {
+        "id": "history-history-2026-2026-06-08-md",
+        "sourceType": "history",
+        "signalType": "history",
+        "lane": "history",
+        "severity": "info",
+        "status": "daily-history",
+        "title": "2026 06 08 작업 기록",
+        "detail": "2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view ",
+        "path": "_history/2026/2026-06-08.md",
+        "category": "daily-history",
+        "language": "unknown",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T16:49:10.880Z"
+      },
+      {
+        "id": "history-history-work-summaries-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+        "sourceType": "history",
+        "signalType": "summary",
+        "lane": "delivery",
+        "severity": "info",
+        "status": "work-summary",
+        "title": "작업 요약: workspace tracker product split",
+        "detail": "작업 요약: workspace tracker product split 데스크톱 앱의 제품 중심을 agent capability platform 에서 workspace tracker 로 바꿨다. 기본 사용자 화면은 Git 작업공간, 터미널/AI 실행, 작업 타임라인, 보고서/근거, 문서/요구사항을 우선하도록 바꿨다. Codex, Claude Code, Cursor, Antigravity 등은 선택형 guest AI 도구로 모델링했다. agent factory, root tool management,",
+        "path": "_history/work-summaries/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+        "category": "work-summary",
+        "language": "ko",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T16:49:10.876Z"
+      },
+      {
+        "id": "history-history-user-requests-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+        "sourceType": "history",
+        "signalType": "intake",
+        "lane": "intake",
+        "severity": "info",
+        "status": "user-request",
+        "title": "사용자 요청 요약: workspace tracker product split",
+        "detail": "사용자 요청 요약: workspace tracker product split 사용자는 데스크톱 앱의 근본 목적이 AntiGravity, Cursor, Codex, Claude Code 등 여러 AI 코딩 도구를 Git 작업공간 위에서 잘 쓰도록 돕고, 현재 작업 중인 계획/요약/보고서/근거를 쉽게 확인하는 것이라고 정리했다. 또한 Ollama, 에이전트 관리, 툴 관리, AWS Agent Platform/AgentCore류 기능은 기본 데스크톱 앱에서 덜어내 별도 플랫폼/프로젝트로 분리해야 한다고",
+        "path": "_history/user-requests/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+        "category": "user-request",
+        "language": "ko",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T16:49:10.875Z"
+      },
+      {
+        "id": "history-history-plans-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+        "sourceType": "history",
+        "signalType": "plan",
+        "lane": "planning",
+        "severity": "info",
+        "status": "plan",
+        "title": "계획: workspace tracker product split",
+        "detail": "계획: workspace tracker product split 1. 공식 문서로 Git 작업공간, AI 코딩 도구, AgentCore류 런타임/툴 플랫폼의 역할을 확인한다. 2. platform desktop app/ 와 agent platform/ 의 소유 경계를 다시 정의한다. 3. 데스크톱 앱 제품 레지스트리를 workspace tracker 중심으로 바꾼다. 4. user view mode와 홈 화면을 Git 작업공간/current work/report 중심으로 바꾼다. 5. 스냅샷 co",
+        "path": "_history/plans/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+        "category": "plan",
+        "language": "ko",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T16:49:10.874Z"
+      },
+      {
+        "id": "history-history-web-searches-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+        "sourceType": "history",
+        "signalType": "web-search",
+        "lane": "evidence",
+        "severity": "evidence",
+        "status": "web-search",
+        "title": "웹 검색 기록: workspace tracker product split",
+        "detail": "웹 검색 기록: workspace tracker product split 날짜: 2026 06 08 작업: 데스크톱 앱을 Git 작업공간/게스트 AI 도구/작업 추적 허브로 재정의하고, 에이전트/툴/Ollama/AgentCore류 기능을 agent platform/ 으로 분리한다. 검색 목적: 제품 경계가 현재 AI 코딩 도구와 Git 작업공간 구조에 맞는지 확인한다. 확인한 공식/고신뢰 출처 Git worktree 공식 문서: https://git scm.com/docs/git worktree.",
+        "path": "_history/web-searches/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+        "category": "web-search",
+        "language": "ko",
+        "date": "2026-06-08",
+        "timestamp": "2026-06-07T16:49:10.869Z"
+      },
+      {
         "id": "history-history-evaluations-2026-2026-06-08-terminal-tab-reform-input-json",
         "sourceType": "history",
         "signalType": "evaluation",
@@ -19543,21 +19746,6 @@
         "language": "unknown",
         "date": "2026-06-08",
         "timestamp": "2026-06-07T16:19:12.744Z"
-      },
-      {
-        "id": "history-history-2026-2026-06-08-md",
-        "sourceType": "history",
-        "signalType": "history",
-        "lane": "history",
-        "severity": "info",
-        "status": "daily-history",
-        "title": "2026 06 08 작업 기록",
-        "detail": "2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view ",
-        "path": "_history/2026/2026-06-08.md",
-        "category": "daily-history",
-        "language": "unknown",
-        "date": "2026-06-08",
-        "timestamp": "2026-06-07T16:17:07.735Z"
       },
       {
         "id": "history-history-request-traces-2026-2026-06-08-terminal-tab-reform-ko-md",
@@ -20835,21 +21023,6 @@
         "timestamp": "2026-06-07T13:14:03.983Z"
       },
       {
-        "id": "history-history-web-searches-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "web-search",
-        "lane": "evidence",
-        "severity": "evidence",
-        "status": "web-search",
-        "title": "2026 06 07 소스 에디터 세션 훅 분리 웹 검색 기록",
-        "detail": "2026 06 07 소스 에디터 세션 훅 분리 웹 검색 기록 검색 쿼리 React official docs useReducer extracting state logic into reducer custom hook React official docs reusing logic with custom hooks effects race conditions ignore stale responses TypeScript official docs module exports type imports reference",
-        "path": "_history/web-searches/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-        "category": "web-search",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T13:12:32.527Z"
-      },
-      {
         "id": "history-history-plans-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
         "sourceType": "history",
         "signalType": "plan",
@@ -20863,96 +21036,6 @@
         "language": "ko",
         "date": "2026-06-07",
         "timestamp": "2026-06-07T13:12:32.527Z"
-      },
-      {
-        "id": "history-history-user-requests-2026-2026-06-07-source-editor-session-hook-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "intake",
-        "lane": "intake",
-        "severity": "info",
-        "status": "user-request",
-        "title": "2026 06 07 소스 에디터 세션 훅 분리 요청",
-        "detail": "2026 06 07 소스 에디터 세션 훅 분리 요청 요청 요약 이전 구현보다 더 넓은 범위로 계속 구현한다. 큰 MonitorShell.tsx 에 남아 있는 source editor 세션 상태, ref, timer 로직을 더 분리한다. 기능 이슈가 생기지 않도록 구조 계약, TypeScript, Rust/Tauri 패키징까지 확인한다. 적용 범위 소유 프로젝트: platform desktop app 주요 대상: Workspace Monitor source editor 세션 상태 경계 작업 모드: ",
-        "path": "_history/user-requests/2026/2026-06-07-source-editor-session-hook-refactor.ko.md",
-        "category": "user-request",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T13:12:32.526Z"
-      },
-      {
-        "id": "history-history-work-timings-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "timing",
-        "lane": "monitoring",
-        "severity": "verified",
-        "status": "work-timing",
-        "title": "2026 06 07 소스 에디터 액션 상태 분리 작업 타이밍",
-        "detail": "2026 06 07 소스 에디터 액션 상태 분리 작업 타이밍 기록 22:00 22:02 KST: 웹 검색, 이전 히스토리 확인, 넓은 source editor 액션 상태 분리 범위 확정. 22:02 22:04 KST: sourceDraftActions.ts , MonitorShell.tsx , source editor export, readiness map, 테스트 importer, 관련 테스트 갱신. 22:04 KST: source editor helper 테스트, 구조 계약 테스트, Tool ",
-        "path": "_history/work-timings/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-        "category": "work-timing",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T13:06:38.508Z"
-      },
-      {
-        "id": "history-history-evaluations-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "evaluation",
-        "lane": "verification",
-        "severity": "warning",
-        "status": "evaluation",
-        "title": "2026 06 07 소스 에디터 액션 상태 분리 평가",
-        "detail": "2026 06 07 소스 에디터 액션 상태 분리 평가 평가 입력 installation occurred : false resource risk occurred : true omission check targets : history/omission checks/2026/2026 06 07 source editor action state refactor.ko.md resource check targets : history/resource checks/2026/2026 06 07 source edito",
-        "path": "_history/evaluations/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-        "category": "evaluation",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T13:06:38.507Z"
-      },
-      {
-        "id": "history-history-request-traces-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "trace",
-        "lane": "traceability",
-        "severity": "evidence",
-        "status": "request-trace",
-        "title": "2026 06 07 소스 에디터 액션 상태 분리 요청 추적",
-        "detail": "2026 06 07 소스 에디터 액션 상태 분리 요청 추적 요청 히스토리를 보고 좁게 잡힌 이전 작업보다 넓은 범위로 구현한다. 산출물 platform desktop app/renderer/workspace monitor/components/workbench/source editor/sourceDraftActions.ts platform desktop app/renderer/workspace monitor/components/workbench/source editor/index.ts platfor",
-        "path": "_history/request-traces/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-        "category": "request-trace",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T13:06:38.507Z"
-      },
-      {
-        "id": "history-history-work-summaries-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "summary",
-        "lane": "delivery",
-        "severity": "info",
-        "status": "work-summary",
-        "title": "2026 06 07 소스 에디터 액션 상태 분리 작업 요약",
-        "detail": "2026 06 07 소스 에디터 액션 상태 분리 작업 요약 변경 source editor의 open/select/save/save all/revert/close 상태 전환을 sourceDraftActions.ts 로 분리했다. MonitorShell.tsx 는 새 helper 결과를 React state setter에 반영하는 역할로 줄였다. 저장 대상 생성, 저장 결과 계산, 저장 report 병합 로직을 공통 helper로 통일했다. 테스트용 import type script module.mj",
-        "path": "_history/work-summaries/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-        "category": "work-summary",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T13:06:38.506Z"
-      },
-      {
-        "id": "history-history-plans-2026-2026-06-07-source-editor-action-state-refactor-ko-md",
-        "sourceType": "history",
-        "signalType": "plan",
-        "lane": "planning",
-        "severity": "info",
-        "status": "plan",
-        "title": "2026 06 07 소스 에디터 액션 상태 분리 계획",
-        "detail": "2026 06 07 소스 에디터 액션 상태 분리 계획 목표 이전 source load hook 분리보다 넓게 잡아 source editor의 주요 사용자 액션 상태 전환까지 source editor 모듈로 이동한다. MonitorShell.tsx 는 UI 이벤트와 Tauri invoke 조합을 담당하고, draft 상태 계산은 순수 helper가 맡도록 줄인다. 실행 슬라이스 1. sourceDraftActions.ts 를 추가해 open/select/save/save all/revert/clos",
-        "path": "_history/plans/2026/2026-06-07-source-editor-action-state-refactor.ko.md",
-        "category": "plan",
-        "language": "ko",
-        "date": "2026-06-07",
-        "timestamp": "2026-06-07T13:05:05.178Z"
       },
       {
         "id": "monitor-task-2026-06-02-capability-promotion-agent",
@@ -23210,9 +23293,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 47496,
-      "lineCount": 1260,
-      "updatedAt": "2026-06-07T16:04:47.958Z",
+      "sizeBytes": 47905,
+      "lineCount": 1261,
+      "updatedAt": "2026-06-07T17:03:21.287Z",
       "truncated": true,
       "preview": "import { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { execFileSync } from \"node:child_process\";\n\nimport {\n  checkDesktopBuildPipeline,\n  desktopBuildPipelineRequiredFiles\n} from \"./readiness/desktop-build-pipeline.mjs\";\nimport {\n  desktopReadinessRequiredSourceFiles,\n  desktopReadinessSourcePaths,\n  joinSourceMap,\n  monitorWorkbenchSourceKeys,\n  readSourceMap,\n  tauriRuntimeSourceKeys\n} from \"./readiness/source-structure.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nconst requiredFiles = [\n  \"README.md\",\n  \"README.ko.md\",\n  \"README.en.md\",\n  \"package.json\",\n  \"configs/desktop-distribution-registry.json\",\n  \"configs/product-feature-registry.json\",\n  \"configs/product-gap-registry.json\",\n  \"configs/claude-code-design-transfer-registry.json\",\n  \"configs/reference-platform-advantage-registry.json\",\n  \"configs/runtime-data-boundary-registry.json\",\n  \"configs/service-readiness-registry.json\",\n  \"configs/macos-execution-profile.json\",\n  \"configs/windows-execution-profile.json\",\n  \"configs/user-flow-registry.json\",\n  \"runtime-contracts/installer-shell-runtime-contract.json\",\n  \"runtime-contracts/installer-shell-bootstrap.ko.md\",\n  \"ru",
       "previewBytes": 1200
@@ -23496,9 +23579,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 16435,
-      "lineCount": 305,
-      "updatedAt": "2026-06-07T15:43:22.808Z",
+      "sizeBytes": 16696,
+      "lineCount": 309,
+      "updatedAt": "2026-06-07T16:52:37.897Z",
       "truncated": true,
       "preview": "import { readFileSync } from \"node:fs\";\nimport { basename, join } from \"node:path\";\n\n// Rust feature module 목록은 실제 파일 존재 검사와 runtime source aggregate의 기준이다.\nexport const tauriFeatureModuleFiles = [\n  \"src-tauri/src/features/mod.rs\",\n  \"src-tauri/src/features/app_shell.rs\",\n  \"src-tauri/src/features/cli.rs\",\n  \"src-tauri/src/features/native.rs\",\n  \"src-tauri/src/features/workspace.rs\",\n  \"src-tauri/src/features/providers.rs\",\n  \"src-tauri/src/features/app_update.rs\",\n  \"src-tauri/src/features/diagnostics.rs\",\n  \"src-tauri/src/features/service_readiness.rs\",\n  \"src-tauri/src/features/agent_factory.rs\",\n  \"src-tauri/src/features/decisions.rs\"\n];\n\nexport const tauriFeatureModuleNames = tauriFeatureModuleFiles.map((file) => basename(file));\n\nexport const tauriLibPartFiles = [\n  \"src-tauri/src/lib_parts/01_imports_and_core_types.rs\",\n  \"src-tauri/src/lib_parts/02_native_reports_and_preferences.rs\",\n  \"src-tauri/src/lib_parts/03_provider_and_git_types.rs\",\n  \"src-tauri/src/lib_parts/04_decision_types_and_constants.rs\",\n  \"src-tauri/src/lib_parts/05_adapter_catalog_and_probe_commands.rs\",\n  \"src-tauri/src/lib_parts/06_task_records_and_front_commands.rs\",\n  \"src-tauri/src/lib_parts/07_cli_s",
       "previewBytes": 1234
@@ -24159,9 +24242,9 @@
       "project": "platform-desktop-app",
       "language": "javascript",
       "extension": "mjs",
-      "sizeBytes": 59063,
-      "lineCount": 1340,
-      "updatedAt": "2026-06-07T16:18:25.033Z",
+      "sizeBytes": 59617,
+      "lineCount": 1356,
+      "updatedAt": "2026-06-07T16:55:20.238Z",
       "truncated": true,
       "preview": "import assert from \"node:assert/strict\";\nimport { existsSync, readFileSync } from \"node:fs\";\nimport { join } from \"node:path\";\nimport { test } from \"node:test\";\n\nimport {\n  desktopReadinessSourcePaths,\n  joinSourceMap,\n  monitorWorkbenchSourceKeys,\n  readSourceMap,\n  tauriFeatureModuleNames,\n  tauriRuntimeSourceKeys\n} from \"../scripts/readiness/source-structure.mjs\";\n\nconst root = new URL(\"..\", import.meta.url).pathname;\n\nfunction readJson(relativePath) {\n  return JSON.parse(readFileSync(join(root, relativePath), \"utf8\"));\n}\n\ntest(\"desktop product shell has the selected Tauri entry points\", () => {\n  assert.equal(existsSync(join(root, \"src-tauri/tauri.conf.json\")), true);\n  assert.equal(existsSync(join(root, \"src-tauri/src/lib.rs\")), true);\n  for (const featureModule of tauriFeatureModuleNames) {\n    assert.equal(existsSync(join(root, \"src-tauri/src/features\", featureModule)), true);\n  }\n  assert.equal(existsSync(join(root, \"README.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"README.en.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.ko.md\")), true);\n  assert.equal(existsSync(join(root, \"docs/release-runbook.en.md\")), true);\n  assert.equal(existsSy",
       "previewBytes": 1200
@@ -24356,7 +24439,7 @@
         "name": "agent-platform",
         "path": "agent-platform/",
         "className": "registered_project",
-        "purpose": "Central Python-first platform project for building, configuring, evaluating, and improving agents.",
+        "purpose": "Central Python-first platform project for building, configuring, evaluating, improving, and operating reusable agents, tools, model/runtime adapters, and AgentCore-style capabilities.",
         "source": "_ops/projects/registry.json"
       },
       {
@@ -24370,7 +24453,7 @@
         "name": "platform-desktop-app",
         "path": "platform-desktop-app/",
         "className": "registered_project",
-        "purpose": "Desktop/installable software productization project for turning the workspace platform into an end-user application with OS-specific installer, release, privacy, and update gates.",
+        "purpose": "Desktop/installable software product for importing Git workspaces, launching guest AI coding tools, and showing current work timelines, reports, evidence, requirements, and terminal state.",
         "source": "_ops/projects/registry.json"
       },
       {
@@ -24520,7 +24603,7 @@
       {
         "name": "agent-platform",
         "path": "agent-platform/",
-        "purpose": "Central Python-first platform project for building, configuring, evaluating, and improving agents.",
+        "purpose": "Central Python-first platform project for building, configuring, evaluating, improving, and operating reusable agents, tools, model/runtime adapters, and AgentCore-style capabilities.",
         "topLevelDirs": [
           "agent-platform/src/",
           "agent-platform/tests/",
@@ -24537,7 +24620,8 @@
           "_tools/"
         ],
         "boundaryNotes": [
-          "Platform-wide reusable capabilities can live here when they are part of the central agent platform.",
+          "Platform-wide reusable capabilities can live here when they are part of the separated central agent/tool platform.",
+          "Agent factory, root tool management, Ollama model management, provider-direct agent execution, and AWS AgentCore-style runtime/gateway/identity capabilities belong here, not in the default desktop user flow.",
           "Domain-specific experiments should become separate root projects instead of being added to agent-platform by default."
         ]
       },
@@ -24596,7 +24680,7 @@
       {
         "name": "platform-desktop-app",
         "path": "platform-desktop-app/",
-        "purpose": "Desktop/installable software productization project for turning the workspace platform into an end-user application with OS-specific installer, release, privacy, and update gates.",
+        "purpose": "Desktop/installable software product for importing Git workspaces, launching guest AI coding tools, and showing current work timelines, reports, evidence, requirements, and terminal state.",
         "topLevelDirs": [
           "platform-desktop-app/artifacts/",
           "platform-desktop-app/configs/",
@@ -24628,6 +24712,10 @@
         ],
         "boundaryNotes": [
           "End-user installer packaging belongs here, not in agent-platform install_mode setup profiles.",
+          "The default user surface is a Git workspace tracker, not an agent factory or all-in-one tool/model management console.",
+          "Codex, Claude Code, Cursor, Antigravity, Gemini CLI, OpenCode, and similar tools are optional guest adapters attached to selected Git repositories.",
+          "Agent factory, root tool management, Ollama model management, provider-direct agent execution, and AWS AgentCore-style runtime lifecycle should stay in agent-platform/ or another separated project and appear here only as advanced links/status.",
+          "Each durable user project should be modeled as its own Git repository or imported Git workspace rather than hidden inside the desktop app project.",
           "Use the selected Tauri-first product runtime around the project-owned renderer workspace-monitor unless measured release blockers or maintenance evidence changes the decision.",
           "Keep the Next.js renderer under platform-desktop-app/renderer/workspace-monitor/ so the desktop product owns UI, runtime bridge, customer bundle, and installer boundaries together.",
           "Do not bundle real secrets, private snapshots, or environment-specific tokens in installers.",
@@ -24744,7 +24832,7 @@
           "transient tool output"
         ],
         "uiEntry": "Overview, History, Documents, Requirements",
-        "documentCount": 120,
+        "documentCount": 121,
         "sourceFileCount": 0
       },
       {
@@ -24794,7 +24882,7 @@
           "raw repository source as installed payload"
         ],
         "uiEntry": "Desktop, Structure",
-        "documentCount": 93,
+        "documentCount": 95,
         "sourceFileCount": 45
       },
       {
@@ -24936,7 +25024,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-tests-readiness-test-mjs",
         "label": "Large source surface",
-        "signal": "1,340 lines in platform-desktop-app/tests/readiness.test.mjs",
+        "signal": "1,356 lines in platform-desktop-app/tests/readiness.test.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -24945,7 +25033,7 @@
       {
         "id": "source-hotspot-platform-desktop-app-scripts-check-readiness-mjs",
         "label": "Large source surface",
-        "signal": "1,260 lines in platform-desktop-app/scripts/check-readiness.mjs",
+        "signal": "1,261 lines in platform-desktop-app/scripts/check-readiness.mjs",
         "reason": "Large files make ownership and local reasoning harder even when behavior is correct.",
         "nextAction": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning.",
         "priority": "medium",
@@ -24983,16 +25071,16 @@
         "path": "platform-desktop-app/tests/readiness.test.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1340,
-        "sizeBytes": 59063,
+        "lineCount": 1356,
+        "sizeBytes": 59617,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       },
       {
         "path": "platform-desktop-app/scripts/check-readiness.mjs",
         "project": "platform-desktop-app",
         "language": "javascript",
-        "lineCount": 1260,
-        "sizeBytes": 47496,
+        "lineCount": 1261,
+        "sizeBytes": 47905,
         "recommendation": "Keep as a tracked hotspot and split only when an adjacent change needs local reasoning."
       }
     ]
@@ -25003,34 +25091,42 @@
       {
         "id": "user",
         "label": "User View",
-        "intent": "Show the task-first surfaces for someone starting work without foregrounding customization, operator, or repository-monitoring internals.",
+        "intent": "Show the Git workspace tracker surfaces for someone importing projects, launching AI coding tools, and reviewing current work without foregrounding customization, agent factory, tool studio, or repository-monitoring internals.",
         "allowedSections": [
           "overview",
+          "source",
           "desktop",
-          "eval"
+          "eval",
+          "projects",
+          "history",
+          "documents",
+          "requirements"
         ],
         "visibilityRules": {
           "foreground": [
-            "task intake",
-            "automatic run launch",
+            "workspace import",
+            "current work summary",
+            "terminal and guest AI tool launch",
             "desktop runtime status",
             "result review",
+            "work timeline",
+            "evidence documents",
+            "requirements",
             "decision inbox"
           ],
           "collapse": [
             "agent customization",
             "tool studio",
             "root tool setup",
-            "projects",
-            "selected history",
-            "published artifacts",
-            "high-level documentation",
-            "requirements",
-            "operator observability"
+            "operator observability",
+            "repository structure browser"
           ],
           "hide_by_default": [
             "operator monitoring",
-            "repository structure browser",
+            "agent factory",
+            "tool builder",
+            "Ollama model management",
+            "direct provider agent execution",
             "raw configs",
             "internal governance records",
             "implementation tests",
@@ -25213,8 +25309,8 @@
           {
             "id": "user",
             "label": "User View",
-            "description": "Show the task-first surfaces for someone starting work without foregrounding customization, operator, or repository-monitoring internals.",
-            "location": "Shows: overview, desktop, eval",
+            "description": "Show the Git workspace tracker surfaces for someone importing projects, launching AI coding tools, and reviewing current work without foregrounding customization, agent factory, tool studio, or repository-monitoring internals.",
+            "location": "Shows: overview, source, desktop, eval, projects, history, documents, requirements",
             "status": "default",
             "sourcePath": "agent-platform/configs/access/view-mode-registry.json"
           },
@@ -26371,39 +26467,40 @@
   "productFeatureArchitecture": {
     "sourcePath": "platform-desktop-app/configs/product-feature-registry.json",
     "productPosition": {
-      "primaryProduct": "agent_capability_platform",
-      "productClaim": "A desktop platform whose core is Agent Core for easy custom agent and subagent creation plus CLI orchestration for continuous Codex, Claude Code, Gemini, OpenCode, and other guest CLI work with deferred decisions and task-run records. Root tools, workspace workbench, learning, and observability support those two core capabilities.",
-      "monitoringRole": "supporting_observability"
+      "primaryProduct": "workspace_tracker",
+      "productClaim": "A desktop workspace tracker for importing or creating Git-backed projects, launching Codex, Claude Code, Cursor, Antigravity, Gemini CLI, OpenCode, and other replaceable guest AI coding tools, then showing current work, task order, evidence, validation, reports, terminal state, and Git boundaries in one simple app.",
+      "monitoringRole": "primary_work_visibility"
     },
     "desktopHomeSurface": {
       "firstViewPriority": [
-        "agent_factory",
+        "agent_work_environment",
         "agent_orchestration",
-        "root_tool_management",
         "learning_improvement_loop",
-        "work_visibility"
+        "work_visibility",
+        "observability_monitoring"
       ],
       "supportingSurfaces": [
-        "observability_monitoring",
+        "agent_factory",
+        "root_tool_management",
         "open_source_eval_cockpit"
       ],
-      "homeCopyRule": "The first screen shall emphasize Agent Core, CLI orchestration continuity, Tool Studio for shared root tools, EVAL for current work quality, and at-a-glance work visibility before deeper observability details.",
-      "configurationRule": "Core setup for provider accounts, CLI adapters, root tools, workspace access, and question deferral shall be visible from Home and collected in the execution settings surface."
+      "homeCopyRule": "The first screen shall emphasize Git workspace import, current work timeline, CLI/terminal launch, evidence, validation, reports, and Git project boundaries. Agent factory and Tool Studio shall be advanced/operator surfaces.",
+      "configurationRule": "Execution settings shall focus on workspace path, Git repository state, and guest AI tool adapters. Provider direct execution, Ollama, agent factory, and tool builder controls are separated from the default user path."
     },
     "summary": {
-      "totalFeatures": 8,
-      "primaryFeatures": 2,
-      "supportingFeatures": 6,
+      "totalFeatures": 11,
+      "primaryFeatures": 4,
+      "supportingFeatures": 7,
       "automationLoops": 1
     },
     "featureLayers": [
       {
         "id": "agent_orchestration",
-        "label": "CLI Orchestration",
+        "label": "Guest AI Tool Orchestration",
         "role": "primary",
         "status": "implemented_slice",
-        "purpose": "Coordinate local/provider model tasks and optional CLI lanes as a supervised task graph with bounded IO, decision routing, merge gates, and cleanup.",
-        "userOutcome": "The user starts one task from chat and the platform runs the selected local/provider model or specialized lanes, pauses only dependent decisions, and keeps independent work moving.",
+        "purpose": "Launch and track replaceable guest AI coding surfaces such as Codex, Claude Code, Gemini CLI, Cursor, Antigravity, and OpenCode over the selected Git workspace with bounded IO, decision routing, merge gates, and cleanup.",
+        "userOutcome": "The user chooses the workspace and preferred AI tool, starts the work from one place, and sees terminal state, decisions, evidence, and reports without being locked to one assistant.",
         "primarySection": "desktop",
         "primarySurfaces": [
           "Desktop Runtime",
@@ -26432,9 +26529,9 @@
           "platform-desktop-app/configs/reference-platform-advantage-registry.json"
         ],
         "automationTargets": [
-          "direct model task execution from local Ollama models or connected OpenAI, Anthropic, or Gemini accounts",
-          "native local model catalog refresh through list_provider_models",
-          "provider credential injection into guest CLI sessions",
+          "guest AI tool adapter selection",
+          "terminal and external editor launch from the selected Git workspace",
+          "provider credential references only when a guest adapter needs them",
           "existing search agent work-chat",
           "task intake to multi-lane plan",
           "top-level run configuration selection for search agent, CLI session, task pipe, and workspace readiness",
@@ -26475,10 +26572,10 @@
       {
         "id": "agent_work_environment",
         "label": "Agent Work Environment",
-        "role": "supporting",
+        "role": "primary",
         "status": "implemented_slice",
-        "purpose": "Host app-selected workspaces, runtime data stores, task-run records, decisions, support diagnostics, and agent work planes.",
-        "userOutcome": "The user no longer has to manually clone and work from a terminal-first folder; the app owns workspace selection and accumulated data access.",
+        "purpose": "Host imported and newly created Git repositories, runtime data stores, task-run records, decisions, support diagnostics, and workspace-scoped reports.",
+        "userOutcome": "The user can open many Git-backed workspaces, see which repository is active, and keep summaries, plans, reports, terminal sessions, and evidence attached to the right project.",
         "primarySection": "desktop",
         "primarySurfaces": [
           "Workspace Host",
@@ -26495,8 +26592,9 @@
           "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
         ],
         "automationTargets": [
-          "workspace import",
-          "repository clone",
+          "open existing Git repository",
+          "clone remote Git repository",
+          "create new Git repository",
           "shared native workspace warmup",
           "workspace state persistence",
           "data store indexing",
@@ -26561,10 +26659,10 @@
       {
         "id": "agent_factory",
         "label": "Agent Core",
-        "role": "primary",
+        "role": "separated",
         "status": "implemented_slice",
-        "purpose": "Turn repeated work into prompts, workflows, templates, tools, skills, agents, and finally platform features with traceable decisions.",
-        "userOutcome": "The user can create agents and reusable capabilities without repeatedly telling the assistant the same process.",
+        "purpose": "Turn repeated work into prompts, workflows, templates, tools, skills, agents, and platform features inside the separate agent-platform product.",
+        "userOutcome": "Advanced users can still create agents and reusable capabilities, but this no longer dominates the default desktop tracker experience.",
         "primarySection": "agents",
         "primarySurfaces": [
           "Agents",
@@ -26615,10 +26713,10 @@
       {
         "id": "learning_improvement_loop",
         "label": "Learning & Evaluation Loop",
-        "role": "supporting",
+        "role": "primary",
         "status": "implemented_slice",
-        "purpose": "Accumulate work history, timing, evaluations, web searches, intent maps, evidence, and improvement records so platform behavior gets better over time.",
-        "userOutcome": "The user can see why the platform improved, what evidence drove changes, and which gaps remain.",
+        "purpose": "Accumulate work history, timing, evaluations, web searches, summaries, request traces, evidence, and reports so every workspace shows what happened and why.",
+        "userOutcome": "The user can see the current work summary, ordered plan, evidence, validation result, report trail, and remaining gaps without reading raw folders first.",
         "primarySection": "eval",
         "primarySurfaces": [
           "AI Eval",
@@ -26673,10 +26771,10 @@
       {
         "id": "root_tool_management",
         "label": "Root Tool Management",
-        "role": "supporting",
+        "role": "separated",
         "status": "implemented_slice",
-        "purpose": "Keep shared provider accounts, CLI adapters, workspace files, source tools, and decision-routing defaults outside individual tasks so every custom agent and guest CLI lane can reuse the same root tool base.",
-        "userOutcome": "The user configures root tools once, then task-specific agents, subagents, and CLI lanes can share them without duplicated setup.",
+        "purpose": "Keep tool building, Python venvs, deployment, provider direct execution, and advanced tool registry work in the separate agent-platform product while the desktop tracker keeps only simple guest-adapter setup.",
+        "userOutcome": "The default desktop app stays focused on workspaces and reports; advanced tool operations remain available in their own platform.",
         "primarySection": "tools",
         "primarySurfaces": [
           "Tool Studio",
@@ -26711,18 +26809,116 @@
           "tool usage pattern count"
         ],
         "validationGates": [
-          "Home and execution settings expose root tools separately from Agent Core and CLI orchestration",
+          "Home and execution settings expose root tools separately from the workspace tracker default flow",
           "root tools stay reusable across task-specific agents and guest CLI lanes",
           "Tool Studio renders source-backed agent tool usage playbooks"
         ]
       },
       {
+        "id": "provider_direct_agent_run",
+        "label": "Provider Direct Agent Run",
+        "role": "separated",
+        "status": "advanced_platform_boundary",
+        "purpose": "Keep direct provider API execution, model-task runs, and provider account experiments in the separated agent platform instead of the default workspace tracker path.",
+        "userOutcome": "The default user can launch guest coding tools without being forced to configure raw provider execution first.",
+        "primarySection": "agents",
+        "primarySurfaces": [
+          "Provider Accounts",
+          "Search Agent Work Chat",
+          "Advanced Agent Platform"
+        ],
+        "currentAssets": [
+          "platform-desktop-app/renderer/workspace-monitor/components/features/ProviderAccountsPanel.tsx",
+          "platform-desktop-app/renderer/workspace-monitor/components/features/SearchAgentWorkChatPanel.tsx",
+          "agent-platform/configs/integrations/cli-adapter-registry.json"
+        ],
+        "automationTargets": [
+          "provider account status",
+          "provider model catalog",
+          "direct agent task execution"
+        ],
+        "learningSignals": [
+          "configured provider count",
+          "direct run readiness",
+          "model catalog status"
+        ],
+        "validationGates": [
+          "provider direct run is not part of default user navigation",
+          "provider account state remains available as advanced setup"
+        ]
+      },
+      {
+        "id": "ollama_model_management",
+        "label": "Ollama Model Management",
+        "role": "separated",
+        "status": "advanced_platform_boundary",
+        "purpose": "Keep local model runtime selection, Ollama endpoint management, and model install decisions in the separated agent/tool platform.",
+        "userOutcome": "The default desktop tracker does not block first use on local model setup while advanced users can still connect local model runtimes.",
+        "primarySection": "tools",
+        "primarySurfaces": [
+          "Tool Studio",
+          "Provider Accounts",
+          "Advanced Runtime Settings"
+        ],
+        "currentAssets": [
+          "platform-desktop-app/renderer/workspace-monitor/components/features/runtimeCatalog.ts",
+          "platform-desktop-app/renderer/workspace-monitor/components/features/RuntimeCustomizationPanel.tsx"
+        ],
+        "automationTargets": [
+          "Ollama base URL reference",
+          "local model default selection",
+          "runtime setting sync"
+        ],
+        "learningSignals": [
+          "local runtime configured",
+          "model default changed",
+          "runtime sync result"
+        ],
+        "validationGates": [
+          "Ollama remains optional and advanced",
+          "workspace tracker works without local model installation"
+        ]
+      },
+      {
+        "id": "agentcore_runtime_lifecycle",
+        "label": "AgentCore Runtime Lifecycle",
+        "role": "separated",
+        "status": "advanced_platform_boundary",
+        "purpose": "Keep AWS AgentCore-style runtime, gateway, identity, memory, tool, browser/code tool, evaluation, and policy lifecycle as separated platform infrastructure.",
+        "userOutcome": "The desktop app can reference production agent blueprints without becoming an AWS runtime console.",
+        "primarySection": "agents",
+        "primarySurfaces": [
+          "Production Agent Blueprints",
+          "AgentCore Quick Builder",
+          "Advanced Agent Platform"
+        ],
+        "currentAssets": [
+          "platform-desktop-app/configs/reference-platform-advantage-registry.json",
+          "platform-desktop-app/renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx",
+          "agent-platform/configs/orchestration/agent-orchestration-registry.json"
+        ],
+        "automationTargets": [
+          "production blueprint reference",
+          "runtime lifecycle proposal",
+          "gateway and identity planning"
+        ],
+        "learningSignals": [
+          "selected production blueprint",
+          "proposal created",
+          "lifecycle gate coverage"
+        ],
+        "validationGates": [
+          "AgentCore-style lifecycle is separated from default user navigation",
+          "AWS deployment remains optional and explicit"
+        ]
+      },
+      {
         "id": "work_visibility",
         "label": "Work Visibility",
-        "role": "supporting",
+        "role": "primary",
         "status": "implemented_slice",
-        "purpose": "Show the amount of active work, deferred decisions, task-run records, and available agents at a glance so work is not forgotten while long-running agent or CLI tasks continue.",
-        "userOutcome": "The user can immediately see what is running, what is blocked, what was recorded, and where to resume.",
+        "purpose": "Show active work, current repository, deferred decisions, task-run records, report status, evidence status, and terminal state at a glance so work is not forgotten.",
+        "userOutcome": "The user can immediately see what is running, what is blocked, what was planned, what was validated, and where to resume.",
         "primarySection": "overview",
         "primarySurfaces": [
           "Core Home Workload Strip",
@@ -26834,12 +27030,12 @@
       ]
     },
     "qualitySignals": [
-      "The first screen names Agent Core and CLI orchestration before root tools, workbench, learning, or observability.",
-      "Tool Studio gives root tools, Python runtime setup, and deployment their own work-first surface separate from task-specific agent creation and CLI orchestration surfaces.",
+      "The first screen names Git workspaces, guest AI tool launch, current work timeline, reports, evidence, and requirements before agent/tool runtime internals.",
+      "Tool Studio gives root tools, Python runtime setup, provider direct run, Ollama, and deployment their own separated platform surface.",
       "Current work volume, deferred decisions, task-run records, and agent count are visible at a glance.",
       "Snapshot data includes product feature architecture for developer and customer builds.",
       "Customer snapshot preserves sellable feature structure but removes internal source paths and validation internals.",
-      "Readiness tests fail if monitoring is positioned as the primary product.",
+      "Readiness tests fail if the desktop product drifts away from workspace_tracker or if separated platform functions return to default user navigation.",
       "New feature work updates requirements, specs, validation, history, and request traces.",
       "AgentCore-style blueprint choices map reference samples to runnable local product flows.",
       "Desktop Runtime starts from run configurations and tool-window status instead of making the user scan a web dashboard.",
@@ -26850,7 +27046,7 @@
       {
         "id": "product_identity_gate",
         "command": "corepack pnpm --filter platform-desktop-app test",
-        "validates": "Product feature registry keeps agent capability platform as the primary product and monitoring as supporting observability."
+        "validates": "Product feature registry keeps workspace_tracker as the primary product and separated agent/tool/runtime capabilities out of the default user path."
       },
       {
         "id": "renderer_contract_gate",
@@ -26877,6 +27073,171 @@
         "command": "corepack pnpm --filter platform-desktop-app test",
         "validates": "Desktop Runtime keeps the IntelliJ-style run configuration, Services, Problems, and status bar surface wired into real actions."
       }
+    ]
+  },
+  "productSplit": {
+    "sourcePath": "platform-desktop-app/configs/workspace-tracker-product-split-registry.json",
+    "productBoundary": {
+      "desktopTracker": {
+        "id": "workspace_tracker",
+        "home": "platform-desktop-app/",
+        "primaryClaim": "Import or create Git workspaces, launch the user's preferred AI coding surface, and show current work, timeline, evidence, validation, reports, and terminal state in one simple desktop app.",
+        "primarySections": [
+          "overview",
+          "source",
+          "desktop",
+          "eval",
+          "projects",
+          "history",
+          "documents",
+          "requirements"
+        ],
+        "notOwned": [
+          "agent factory",
+          "tool studio",
+          "Ollama model management",
+          "direct provider agent execution",
+          "AWS AgentCore-style runtime lifecycle",
+          "capability promotion operations"
+        ]
+      },
+      "agentToolPlatform": {
+        "id": "agent_tool_operations",
+        "home": "agent-platform/",
+        "primaryClaim": "Build, evaluate, configure, and operate reusable agents, tools, provider connectors, model runtimes, skills, workflows, and promotion pipelines as a separate platform.",
+        "desktopRelationship": "advanced_operator_link_only"
+      }
+    },
+    "workspaceModel": {
+      "defaultUnit": "git_repository",
+      "rootCollectionPolicy": "A desktop collection can remember many Git repositories, but each durable project remains its own Git repository.",
+      "importModes": [
+        {
+          "id": "open_existing_git_repo",
+          "label": "Open existing Git repository",
+          "default": true
+        },
+        {
+          "id": "clone_remote_repo",
+          "label": "Clone remote repository",
+          "default": false
+        },
+        {
+          "id": "create_new_repo",
+          "label": "Create new Git repository",
+          "default": false
+        }
+      ],
+      "trackedOutputs": [
+        "current_task_summary",
+        "plan",
+        "task_sequence",
+        "evidence_documents",
+        "validation_report",
+        "work_summary",
+        "request_trace",
+        "terminal_session_state",
+        "git_status"
+      ]
+    },
+    "guestAiSurfaces": [
+      {
+        "id": "codex",
+        "label": "Codex",
+        "adapterRole": "terminal_or_cli_guest"
+      },
+      {
+        "id": "claude_code",
+        "label": "Claude Code",
+        "adapterRole": "terminal_or_cli_guest"
+      },
+      {
+        "id": "cursor",
+        "label": "Cursor",
+        "adapterRole": "external_editor_guest"
+      },
+      {
+        "id": "antigravity",
+        "label": "Antigravity",
+        "adapterRole": "external_agentic_ide_guest"
+      },
+      {
+        "id": "gemini_cli",
+        "label": "Gemini CLI",
+        "adapterRole": "terminal_or_cli_guest"
+      }
+    ],
+    "separatedPlatforms": [
+      {
+        "capabilityId": "agent_factory",
+        "label": "Agent factory and subagent management",
+        "targetHome": "agent-platform/",
+        "desktopVisibility": "advanced_operator_only"
+      },
+      {
+        "capabilityId": "tool_studio",
+        "label": "Tool builder, tool registry, Python venv, and deployment workflow",
+        "targetHome": "agent-platform/",
+        "desktopVisibility": "advanced_operator_only"
+      },
+      {
+        "capabilityId": "ollama_model_management",
+        "label": "Ollama model lifecycle and local model catalog management",
+        "targetHome": "agent-platform/",
+        "desktopVisibility": "settings_reference_only"
+      },
+      {
+        "capabilityId": "provider_direct_agent_run",
+        "label": "Direct OpenAI, Anthropic, Gemini, or cloud-provider agent execution",
+        "targetHome": "agent-platform/",
+        "desktopVisibility": "settings_reference_only"
+      },
+      {
+        "capabilityId": "aws_agentcore_style_runtime",
+        "label": "AWS AgentCore/Bedrock-style agent runtime, memory, gateway, identity, observability, and evaluation lifecycle",
+        "targetHome": "agent-platform/",
+        "desktopVisibility": "advanced_operator_only"
+      }
+    ],
+    "uiPolicy": {
+      "homePriority": [
+        "workspace_import",
+        "current_work_timeline",
+        "terminal_cli_run",
+        "evidence_and_reports",
+        "git_project_boundaries"
+      ],
+      "deemphasizedSections": [
+        "agents",
+        "tools",
+        "provider_direct_run",
+        "ollama_management"
+      ],
+      "primaryNavigationSections": [
+        "overview",
+        "source",
+        "desktop",
+        "eval",
+        "projects",
+        "history",
+        "documents",
+        "requirements"
+      ],
+      "advancedOperatorSections": [
+        "agents",
+        "tools",
+        "intent",
+        "structure"
+      ],
+      "homeCopyRule": "Home copy shall talk about Git workspaces, current work, task reports, evidence, terminal runs, and AI coding tools as guest surfaces.",
+      "configurationRule": "Customization, provider credentials, direct model execution, Ollama, agent factory, and tool builder controls shall not be the default first-screen path."
+    },
+    "validationGates": [
+      "workspace snapshot exposes productSplit",
+      "home screen includes a product split panel",
+      "home default task intents do not start with agent factory or tool studio",
+      "product feature registry primary product is workspace_tracker",
+      "readiness tests assert agent/tool operations are separate"
     ]
   },
   "referencePlatformAdvantages": {
@@ -28632,13 +28993,13 @@
   "historyInsightLoop": {
     "sourcePath": "_history/",
     "summary": {
-      "sourceDocuments": 4542,
+      "sourceDocuments": 4555,
       "totalPatterns": 6,
       "appliedPatterns": 6,
       "queuedPatterns": 0,
       "activeRecommendations": 6,
       "totalEvidenceLinks": 36,
-      "latestInsightAt": "2026-06-07T16:19:55.752Z"
+      "latestInsightAt": "2026-06-07T17:06:09.975Z"
     },
     "inferenceStages": [
       {
@@ -28706,7 +29067,7 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 561,
+        "signalCount": 562,
         "sourceCategories": [
           {
             "category": "evaluation",
@@ -28718,7 +29079,7 @@
           },
           {
             "category": "request-trace",
-            "count": 84
+            "count": 85
           },
           {
             "category": "user-request",
@@ -28765,7 +29126,7 @@
           "2026 06 06 desktop dev/run fix 평가",
           "평가: Monitor 성능 가드레일 완성"
         ],
-        "latestEvidenceAt": "2026-06-07T16:19:45.133Z"
+        "latestEvidenceAt": "2026-06-07T17:05:04.830Z"
       },
       {
         "id": "web-research-to-spec",
@@ -28779,19 +29140,19 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1968,
+        "signalCount": 1974,
         "sourceCategories": [
           {
             "category": "project-spec",
-            "count": 530
+            "count": 533
           },
           {
             "category": "evaluation",
-            "count": 510
+            "count": 511
           },
           {
             "category": "web-search",
-            "count": 495
+            "count": 496
           },
           {
             "category": "plan",
@@ -28799,7 +29160,7 @@
           },
           {
             "category": "request-trace",
-            "count": 144
+            "count": 145
           },
           {
             "category": "work-timing",
@@ -28834,7 +29195,7 @@
           "웹 검색 기록: 스택별 코딩 조사",
           "2026 05 31 작업 모드 라우팅 계획 기록"
         ],
-        "latestEvidenceAt": "2026-06-07T16:19:20.455Z"
+        "latestEvidenceAt": "2026-06-07T17:06:09.975Z"
       },
       {
         "id": "large-scope-slicing",
@@ -28848,15 +29209,15 @@
         "status": "applied",
         "priority": "p0",
         "signalStrength": "high",
-        "signalCount": 1139,
+        "signalCount": 1144,
         "sourceCategories": [
           {
             "category": "evaluation",
-            "count": 524
+            "count": 525
           },
           {
             "category": "plan",
-            "count": 344
+            "count": 345
           },
           {
             "category": "request-trace",
@@ -28864,7 +29225,7 @@
           },
           {
             "category": "project-spec",
-            "count": 84
+            "count": 87
           },
           {
             "category": "work-summary",
@@ -28907,7 +29268,7 @@
           "요청 결과 추적: 큰 범위 작업 미루지 않기",
           "작업 요약: 큰 범위 작업 미루지 않기"
         ],
-        "latestEvidenceAt": "2026-06-07T16:17:07.735Z"
+        "latestEvidenceAt": "2026-06-07T17:06:09.975Z"
       },
       {
         "id": "desktop-native-resource-loop",
@@ -28980,7 +29341,7 @@
           "요구사항: Rust 데스크톱 자원 최적화",
           "Requirement: Native Pipe Runtime Tools"
         ],
-        "latestEvidenceAt": "2026-06-07T16:19:20.455Z"
+        "latestEvidenceAt": "2026-06-07T16:21:27.742Z"
       },
       {
         "id": "ui-feedback-to-design-contract",
@@ -29053,7 +29414,7 @@
           "데스크톱 크롬 디자인 개선 스펙",
           "사용자 요청 요약: Agent CLI Cockpit"
         ],
-        "latestEvidenceAt": "2026-06-07T16:19:55.752Z"
+        "latestEvidenceAt": "2026-06-07T16:21:27.742Z"
       },
       {
         "id": "release-blocker-gate",
@@ -29129,14 +29490,14 @@
   "fundamentalImprovementStructure": {
     "sourcePath": "historyInsightLoop",
     "summary": {
-      "sourceDocuments": 4542,
+      "sourceDocuments": 4555,
       "sourcePatterns": 6,
       "totalStructuralPrinciples": 6,
       "highPriorityPrinciples": 4,
       "totalImprovementPackages": 6,
       "totalFitnessChecks": 4,
       "totalEvidenceLinks": 60,
-      "latestInsightAt": "2026-06-07T16:19:55.752Z"
+      "latestInsightAt": "2026-06-07T17:06:09.975Z"
     },
     "operatingModel": [
       {
@@ -29194,25 +29555,25 @@
         "platformChange": "Workspace snapshot이 반복 패턴을 구조 원칙과 실행 패키지로 승격한다.",
         "targetSection": "intent",
         "ownerFeatureId": "learning_improvement_loop",
-        "signalCount": 3668,
+        "signalCount": 3680,
         "supportingPatterns": [
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1968
+            "signalCount": 1974
           },
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1139
+            "signalCount": 1144
           },
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 561
+            "signalCount": 562
           }
         ],
         "missingPatternIds": [],
@@ -29240,7 +29601,7 @@
           "Deep Feature Issue Review 계획",
           "Work Plan: Subagent Live Execution"
         ],
-        "latestEvidenceAt": "2026-06-07T16:19:45.133Z",
+        "latestEvidenceAt": "2026-06-07T17:06:09.975Z",
         "packageBlueprint": {
           "id": "operating-memory-snapshot-plane",
           "title": "운영 메모리 snapshot plane",
@@ -29309,7 +29670,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-07T16:19:20.455Z",
+        "latestEvidenceAt": "2026-06-07T16:21:27.742Z",
         "packageBlueprint": {
           "id": "native-resource-contract-plane",
           "title": "네이티브 자원 계약 plane",
@@ -29338,7 +29699,7 @@
         "platformChange": "Product Structure가 history feedback을 UI primitive와 validation gate로 연결한다.",
         "targetSection": "overview",
         "ownerFeatureId": "work_visibility",
-        "signalCount": 2870,
+        "signalCount": 2875,
         "supportingPatterns": [
           {
             "id": "ui-feedback-to-design-contract",
@@ -29350,7 +29711,7 @@
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1139
+            "signalCount": 1144
           }
         ],
         "missingPatternIds": [],
@@ -29378,7 +29739,7 @@
           "Deep Feature Issue Review 계획",
           "Work Plan: Subagent Live Execution"
         ],
-        "latestEvidenceAt": "2026-06-07T16:19:55.752Z",
+        "latestEvidenceAt": "2026-06-07T17:06:09.975Z",
         "packageBlueprint": {
           "id": "design-contract-control-plane",
           "title": "디자인 계약 control plane",
@@ -29407,13 +29768,13 @@
         "platformChange": "개선 구조가 build/package fitness check를 최종 구조 gate로 유지한다.",
         "targetSection": "structure",
         "ownerFeatureId": "observability_monitoring",
-        "signalCount": 696,
+        "signalCount": 697,
         "supportingPatterns": [
           {
             "id": "build-closeout-gate",
             "label": "구현 후 자동 빌드 게이트",
             "signalStrength": "high",
-            "signalCount": 561
+            "signalCount": 562
           },
           {
             "id": "release-blocker-gate",
@@ -29447,7 +29808,7 @@
           "2026 06 06 Request Trace: Public Release Developer Repatch",
           "2026 06 06 User Request: Public Release Developer Repatch"
         ],
-        "latestEvidenceAt": "2026-06-07T16:19:45.133Z",
+        "latestEvidenceAt": "2026-06-07T17:05:04.830Z",
         "packageBlueprint": {
           "id": "artifact-closeout-gate",
           "title": "산출물 기반 close-out gate",
@@ -29476,19 +29837,19 @@
         "platformChange": "개선 구조가 large-scope decomposition을 platform operating model stage로 고정한다.",
         "targetSection": "agents",
         "ownerFeatureId": "agent_factory",
-        "signalCount": 3107,
+        "signalCount": 3118,
         "supportingPatterns": [
           {
             "id": "large-scope-slicing",
             "label": "큰 요청을 bounded slice로 나누는 실행 루프",
             "signalStrength": "high",
-            "signalCount": 1139
+            "signalCount": 1144
           },
           {
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1968
+            "signalCount": 1974
           }
         ],
         "missingPatternIds": [],
@@ -29516,7 +29877,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-07T16:19:20.455Z",
+        "latestEvidenceAt": "2026-06-07T17:06:09.975Z",
         "packageBlueprint": {
           "id": "large-scope-slice-gate",
           "title": "Large-scope slice gate",
@@ -29545,7 +29906,7 @@
         "platformChange": "근본 개선 구조도 customer snapshot에서 완전히 sanitize한다.",
         "targetSection": "structure",
         "ownerFeatureId": "agent_work_environment",
-        "signalCount": 2103,
+        "signalCount": 2109,
         "supportingPatterns": [
           {
             "id": "release-blocker-gate",
@@ -29557,7 +29918,7 @@
             "id": "web-research-to-spec",
             "label": "웹 근거에서 스펙으로 이어지는 조사 루프",
             "signalStrength": "high",
-            "signalCount": 1968
+            "signalCount": 1974
           }
         ],
         "missingPatternIds": [],
@@ -29585,7 +29946,7 @@
           "Source Code Viewer 계획",
           "웹 검색 기록: 마케팅/설문/정량 근거 조사"
         ],
-        "latestEvidenceAt": "2026-06-07T16:19:20.455Z",
+        "latestEvidenceAt": "2026-06-07T17:06:09.975Z",
         "packageBlueprint": {
           "id": "customer-snapshot-sanitizer-gate",
           "title": "Customer snapshot sanitizer gate",

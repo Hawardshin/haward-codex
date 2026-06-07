@@ -43,6 +43,7 @@ const customerFallbackSnapshotPath = path.join(projectRoot, "src", "generated", 
 const generatedAdminHistoryIndexPath = path.join(projectRoot, "src", "generated", "admin-history-index.json");
 const publicSnapshotPath = path.join(projectRoot, "public", "workspace-snapshot.json");
 const publicAdminHistoryIndexPath = path.join(projectRoot, "public", "admin-history-index.json");
+const PRODUCT_SPLIT_REGISTRY_PATH = "platform-desktop-app/configs/workspace-tracker-product-split-registry.json";
 
 const IGNORE_DIRS = new Set([".git", ".next", "node_modules", "out", "target", "__pycache__", ".pytest_cache", "_private", "outputs"]);
 const MAX_DOCUMENTS = 650;
@@ -186,6 +187,7 @@ export async function buildSnapshot(repoRoot) {
   const philosophyFeatureExtraction = collectPhilosophyFeatureExtraction(repoRoot);
   const intentFeatureMap = collectIntentFeatureMap(repoRoot);
   const productFeatureArchitecture = collectProductFeatureArchitecture(repoRoot);
+  const productSplit = collectProductSplit(repoRoot);
   const referencePlatformAdvantages = collectReferencePlatformAdvantages(repoRoot);
   const openSourceFeatureReferences = collectOpenSourceFeatureReferences(repoRoot);
   const historyInsightLoop = collectHistoryInsightLoop(allDocuments);
@@ -286,6 +288,7 @@ export async function buildSnapshot(repoRoot) {
     philosophyFeatureExtraction,
     intentFeatureMap,
     productFeatureArchitecture,
+    productSplit,
     referencePlatformAdvantages,
     openSourceFeatureReferences,
     historyInsightLoop,
@@ -405,8 +408,8 @@ export function buildCustomerSnapshot(snapshot) {
         {
           id: "user",
           label: "User View",
-          intent: "Installed customer workbench for task intake, run status, and result review.",
-          allowedSections: ["overview", "desktop", "eval"],
+          intent: "Installed customer workspace tracker for Git import, run status, reports, timeline, and evidence review.",
+          allowedSections: ["overview", "source", "desktop", "eval", "projects", "history", "documents", "requirements"],
           visibilityRules: {},
           securityNotes: ["Platform source tree and advanced customization surfaces are excluded from the customer bundle snapshot."]
         }
@@ -454,6 +457,7 @@ export function buildCustomerSnapshot(snapshot) {
     openSourceFeatureReferences: sanitizeOpenSourceFeatureReferencesForCustomer(
       snapshot.openSourceFeatureReferences || emptyOpenSourceFeatureReferences()
     ),
+    productSplit: sanitizeProductSplitForCustomer(snapshot.productSplit || emptyProductSplit()),
     historyInsightLoop: sanitizeHistoryInsightLoopForCustomer(snapshot.historyInsightLoop || emptyHistoryInsightLoop()),
     fundamentalImprovementStructure: sanitizeFundamentalImprovementStructureForCustomer(
       snapshot.fundamentalImprovementStructure || emptyFundamentalImprovementStructure()
@@ -765,6 +769,143 @@ export function buildAgentCollaborationBoard(runtimeAgents = [], agentCatalog = 
     flows: flows.slice(0, 40),
     blockers: blockers.slice(0, 20),
     nextActions: nextActions.slice(0, 20)
+  };
+}
+
+export function emptyProductSplit() {
+  return {
+    sourcePath: "",
+    productBoundary: {
+      desktopTracker: {
+        id: "workspace_tracker",
+        home: "platform-desktop-app/",
+        primaryClaim:
+          "Import Git workspaces, launch guest AI coding tools, and review current work, evidence, validation, reports, and terminal state.",
+        primarySections: ["overview", "source", "desktop", "eval", "projects", "history", "documents", "requirements"],
+        notOwned: ["agent factory", "tool studio", "Ollama model management", "direct provider agent execution"]
+      },
+      agentToolPlatform: {
+        id: "agent_tool_operations",
+        home: "agent-platform/",
+        primaryClaim: "Build and operate reusable agents, tools, provider connectors, model runtimes, skills, and workflows.",
+        desktopRelationship: "advanced_operator_link_only"
+      }
+    },
+    workspaceModel: {
+      defaultUnit: "git_repository",
+      rootCollectionPolicy: "A desktop collection can remember many Git repositories, but each durable project remains its own Git repository.",
+      importModes: [
+        { id: "open_existing_git_repo", label: "Open existing Git repository", default: true },
+        { id: "clone_remote_repo", label: "Clone remote repository", default: false },
+        { id: "create_new_repo", label: "Create new Git repository", default: false }
+      ],
+      trackedOutputs: ["current_task_summary", "plan", "task_sequence", "evidence_documents", "validation_report", "terminal_session_state", "git_status"]
+    },
+    guestAiSurfaces: [
+      { id: "codex", label: "Codex", adapterRole: "terminal_or_cli_guest" },
+      { id: "claude_code", label: "Claude Code", adapterRole: "terminal_or_cli_guest" },
+      { id: "cursor", label: "Cursor", adapterRole: "external_editor_guest" },
+      { id: "antigravity", label: "Antigravity", adapterRole: "external_agentic_ide_guest" }
+    ],
+    separatedPlatforms: [
+      {
+        capabilityId: "agent_factory",
+        label: "Agent factory and subagent management",
+        targetHome: "agent-platform/",
+        desktopVisibility: "advanced_operator_only"
+      },
+      {
+        capabilityId: "tool_studio",
+        label: "Tool builder, registry, Python venv, and deployment workflow",
+        targetHome: "agent-platform/",
+        desktopVisibility: "advanced_operator_only"
+      }
+    ],
+    uiPolicy: {
+      homePriority: ["workspace_import", "current_work_timeline", "terminal_cli_run", "evidence_and_reports", "git_project_boundaries"],
+      deemphasizedSections: ["agents", "tools", "provider_direct_run", "ollama_management"],
+      primaryNavigationSections: ["overview", "source", "desktop", "eval", "projects", "history", "documents", "requirements"],
+      advancedOperatorSections: ["agents", "tools", "intent", "structure"],
+      homeCopyRule: "Home copy talks about Git workspaces, current work, task reports, evidence, terminal runs, and guest AI coding tools.",
+      configurationRule: "Customization, direct model execution, Ollama, agent factory, and tool builder controls are not the default first-screen path."
+    },
+    validationGates: []
+  };
+}
+
+export function collectProductSplit(repoRoot) {
+  const fallback = emptyProductSplit();
+  const registry = readJson(path.join(repoRoot, PRODUCT_SPLIT_REGISTRY_PATH), null);
+  if (!registry || typeof registry !== "object") {
+    return fallback;
+  }
+  const productBoundary = registry.product_boundary || {};
+  const desktopTracker = productBoundary.desktop_tracker_product || {};
+  const agentToolPlatform = productBoundary.agent_tool_platform || {};
+  const workspaceModel = registry.workspace_model || {};
+  const uiPolicy = registry.ui_policy || {};
+
+  return {
+    sourcePath: PRODUCT_SPLIT_REGISTRY_PATH,
+    productBoundary: {
+      desktopTracker: {
+        id: desktopTracker.id || fallback.productBoundary.desktopTracker.id,
+        home: desktopTracker.home || fallback.productBoundary.desktopTracker.home,
+        primaryClaim: desktopTracker.primary_claim || fallback.productBoundary.desktopTracker.primaryClaim,
+        primarySections: arrayOfStrings(desktopTracker.primary_sections),
+        notOwned: arrayOfStrings(desktopTracker.not_owned)
+      },
+      agentToolPlatform: {
+        id: agentToolPlatform.id || fallback.productBoundary.agentToolPlatform.id,
+        home: agentToolPlatform.home || fallback.productBoundary.agentToolPlatform.home,
+        primaryClaim: agentToolPlatform.primary_claim || fallback.productBoundary.agentToolPlatform.primaryClaim,
+        desktopRelationship: agentToolPlatform.desktop_relationship || fallback.productBoundary.agentToolPlatform.desktopRelationship
+      }
+    },
+    workspaceModel: {
+      defaultUnit: workspaceModel.default_unit || fallback.workspaceModel.defaultUnit,
+      rootCollectionPolicy: workspaceModel.root_collection_policy || fallback.workspaceModel.rootCollectionPolicy,
+      importModes: Array.isArray(workspaceModel.import_modes)
+        ? workspaceModel.import_modes.map((mode) => ({
+            id: mode.id || "",
+            label: mode.label || "",
+            default: Boolean(mode.default)
+          })).filter((mode) => mode.id)
+        : fallback.workspaceModel.importModes,
+      trackedOutputs: arrayOfStrings(workspaceModel.tracked_outputs)
+    },
+    guestAiSurfaces: Array.isArray(registry.guest_ai_surfaces)
+      ? registry.guest_ai_surfaces.map((surface) => ({
+          id: surface.id || "",
+          label: surface.label || "",
+          adapterRole: surface.adapter_role || ""
+        })).filter((surface) => surface.id)
+      : fallback.guestAiSurfaces,
+    separatedPlatforms: Array.isArray(registry.separated_platforms)
+      ? registry.separated_platforms.map((platform) => ({
+          capabilityId: platform.capability_id || "",
+          label: platform.label || "",
+          targetHome: platform.target_home || "",
+          desktopVisibility: platform.desktop_visibility || ""
+        })).filter((platform) => platform.capabilityId)
+      : fallback.separatedPlatforms,
+    uiPolicy: {
+      homePriority: arrayOfStrings(uiPolicy.home_priority),
+      deemphasizedSections: arrayOfStrings(uiPolicy.deemphasized_sections),
+      primaryNavigationSections: arrayOfStrings(uiPolicy.primary_navigation_sections),
+      advancedOperatorSections: arrayOfStrings(uiPolicy.advanced_operator_sections),
+      homeCopyRule: uiPolicy.home_copy_rule || fallback.uiPolicy.homeCopyRule,
+      configurationRule: uiPolicy.configuration_rule || fallback.uiPolicy.configurationRule
+    },
+    validationGates: arrayOfStrings(registry.validation_gates)
+  };
+}
+
+export function sanitizeProductSplitForCustomer(productSplit) {
+  return {
+    ...productSplit,
+    sourcePath: "",
+    validationGates: []
   };
 }
 
@@ -2347,6 +2488,10 @@ function readJson(filePath, fallback) {
     return fallback;
   }
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
+
+function arrayOfStrings(value) {
+  return Array.isArray(value) ? value.filter((item) => typeof item === "string") : [];
 }
 
 function writeJson(filePath, value) {

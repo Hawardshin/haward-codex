@@ -4,9 +4,11 @@
 
 ## 이 프로젝트의 목적
 
-`platform-desktop-app/`는 개인 에이전트 빌딩 플랫폼을 사용자가 설치해서 실행하는 데스크톱 앱으로 제품화하는 프로젝트입니다.
+`platform-desktop-app/`는 여러 Git 작업공간과 AI 코딩 도구를 한곳에서 가져와 보고, 실행하고, 현재 작업 흐름을 추적하는 데스크톱 앱입니다.
 
-이 앱은 단순히 한 CLI를 감싸는 wrapper가 아닙니다. 앱이 먼저 실행되고 workspace state, task state, decision inbox, artifact, validation, accumulated data, UI authority를 소유합니다. Codex CLI, Claude Code CLI, Gemini CLI, OpenCode 같은 외부 도구는 앱 위에 붙는 선택형 guest adapter입니다.
+이 앱은 단순히 한 CLI를 감싸는 wrapper가 아닙니다. 앱이 먼저 실행되고 Git workspace state, task timeline, terminal run state, decision inbox, evidence, report, validation, UI authority를 소유합니다. Codex CLI, Claude Code CLI, Cursor, Antigravity, Gemini CLI, OpenCode 같은 외부 도구는 선택형 guest adapter로 붙습니다.
+
+에이전트 생성, 툴 플랫폼, Ollama 모델 관리, AWS AgentCore식 런타임/게이트웨이/아이덴티티 구현은 이 앱의 기본 사용자 화면이 아닙니다. 그런 기능은 `agent-platform/`이 소유하는 분리 플랫폼으로 다루고, 데스크톱 앱은 사용자가 현재 작업 중인 Git 레포지토리, 터미널 실행, 계획, 보고서, 근거 문서를 작업 순서대로 확인하는 흐름에 집중합니다.
 
 ## 바로 쓰는 명령
 
@@ -164,14 +166,16 @@ platform-desktop-app/src-tauri/target/release/bundle/dmg/Agent Workspace Platfor
 
 ## 제품 방향
 
-- 제품의 중심은 monitoring dashboard가 아니라 `agent_capability_platform`입니다.
-- primary feature는 agent orchestration, agent work environment, agent development environment, agent factory, learning/evaluation loop입니다.
-- monitoring/history/requirements/structure는 Operator Center 또는 supporting observability로 분리합니다.
+- 제품의 중심은 `workspace_tracker`입니다.
+- 기본 사용자는 Git 작업공간 가져오기, 터미널/AI 도구 실행, 작업 타임라인, 보고서/근거, 요구사항/문서를 먼저 봅니다.
+- Codex, Claude Code, Cursor, Antigravity 등은 선택형 guest AI 도구이며 앱 자체의 단일 종속성이 아닙니다.
+- agent factory, root tool management, Ollama model management, provider direct agent run, AWS AgentCore식 runtime lifecycle은 `agent-platform/`으로 분리합니다.
 - 남은 P0 제품 gap은 [configs/product-gap-registry.json](./configs/product-gap-registry.json)에 고정되어 있습니다.
 
 ## 주요 파일
 
 - 제품 기능 구조: [configs/product-feature-registry.json](./configs/product-feature-registry.json)
+- 작업공간 제품 분리 구조: [configs/workspace-tracker-product-split-registry.json](./configs/workspace-tracker-product-split-registry.json)
 - 남은 제품 gap: [configs/product-gap-registry.json](./configs/product-gap-registry.json)
 - 설치 shell runtime contract: [runtime-contracts/installer-shell-runtime-contract.json](./runtime-contracts/installer-shell-runtime-contract.json)
 - macOS 실행 profile: [configs/macos-execution-profile.json](./configs/macos-execution-profile.json)

@@ -1,37 +1,37 @@
 {
   "schemaVersion": "2026-06-05.admin-history-index",
-  "generatedAt": "2026-06-07T16:20:11.278Z",
+  "generatedAt": "2026-06-07T17:06:38.772Z",
   "summary": {
-    "documents": 3206,
+    "documents": 3213,
     "days": 9,
     "categories": [
       {
         "category": "evaluation",
-        "count": 1130
+        "count": 1131
       },
       {
         "category": "web-search",
-        "count": 497
+        "count": 498
       },
       {
         "category": "request-trace",
-        "count": 426
+        "count": 427
       },
       {
         "category": "plan",
-        "count": 408
+        "count": 409
       },
       {
         "category": "work-timing",
-        "count": 345
+        "count": 346
       },
       {
         "category": "user-request",
-        "count": 211
+        "count": 212
       },
       {
         "category": "work-summary",
-        "count": 178
+        "count": 179
       },
       {
         "category": "daily-history",
@@ -42,7 +42,7 @@
         "count": 2
       }
     ],
-    "totalSourceBytes": 7256468,
+    "totalSourceBytes": 7276226,
     "generatedFrom": [
       "_history/2026",
       "_history/evaluations",
@@ -62,6 +62,134 @@
     "detailPolicy": "Generated entries contain bounded admin previews and file pointers; day groups avoid duplicating document lists."
   },
   "documents": [
+    {
+      "id": "history-evaluations-2026-2026-06-08-workspace-tracker-product-split-evaluation-input-json",
+      "path": "_history/evaluations/2026/2026-06-08-workspace-tracker-product-split-evaluation-input.json",
+      "category": "evaluation",
+      "language": "unknown",
+      "title": "2026 06 08 Workspace Tracker Product Split Evaluation Input",
+      "excerpt": "{ \"schema version\": \"2026 06 08\", \"work mode\": \"governance\", \"web search record targets\": \" history/web searches/2026/2026 06 08 workspace tracker product split.ko.md\" , \"user request summary targets\": \" history/user requests/2026/2026 06 08 workspace tracker product split.ko.md\"",
+      "html": "<p>{ &quot;schema version&quot;: &quot;2026 06 08&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;web search record targets&quot;: &quot; history/web searches/2026/2026 06 08 workspace tracker product split.ko.md&quot; , &quot;user request summary targets&quot;: &quot; history/user requests/2026/2026 06 08 workspace tracker product split.ko.md&quot; , &quot;requirements targets&quot;: &quot; requirements/changes/2026 06 08 workspace tracker p</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 7851,
+      "updatedAt": "2026-06-07T17:06:09.975Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/evaluations"
+    },
+    {
+      "id": "history-work-timings-2026-2026-06-08-workspace-tracker-product-split-json",
+      "path": "_history/work-timings/2026/2026-06-08-workspace-tracker-product-split.json",
+      "category": "work-timing",
+      "language": "unknown",
+      "title": "2026 06 08 Workspace Tracker Product Split",
+      "excerpt": "{ \"task id\": \"2026 06 08 workspace tracker product split\", \"title\": \"Workspace tracker product split\", \"work mode\": \"governance\", \"measurement quality\": \"partial\", \"phases\": { \"phase id\": \"web first intake\", \"label\": \"Web first intake\", \"status\": \"completed\", \"duration seconds\": ",
+      "html": "<p>{ &quot;task id&quot;: &quot;2026 06 08 workspace tracker product split&quot;, &quot;title&quot;: &quot;Workspace tracker product split&quot;, &quot;work mode&quot;: &quot;governance&quot;, &quot;measurement quality&quot;: &quot;partial&quot;, &quot;phases&quot;: { &quot;phase id&quot;: &quot;web first intake&quot;, &quot;label&quot;: &quot;Web first intake&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;duration seconds&quot;: 900, &quot;notes&quot;: &quot;Official docs for Git, AI coding tools, and AgentCore style platf</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3027,
+      "updatedAt": "2026-06-07T17:05:23.467Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-timings"
+    },
+    {
+      "id": "history-request-traces-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+      "path": "_history/request-traces/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+      "category": "request-trace",
+      "language": "ko",
+      "title": "요청 결과 추적: workspace tracker product split",
+      "excerpt": "요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현 및 검증 완료, 커밋/푸시 대기 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: ",
+      "html": "<p>요청 결과 추적: workspace tracker product split 요청 요약: 데스크톱 앱을 여러 AI 코딩 도구와 Git 작업공간을 쉽게 쓰고 현재 작업 보고/근거를 보는 제품으로 재정의하며, agent/tool/Ollama/AgentCore류 기능은 분리한다. 결과 상태: 구현 및 검증 완료, 커밋/푸시 대기 입력 사용자 요청 요약: history/user requests/2026/2026 06 08 workspace tracker product split.ko.md 웹 검색 기록: history/web searches/2026/2026 06 08 workspace tracker product split.ko.md codin</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1831,
+      "updatedAt": "2026-06-07T17:05:04.830Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/request-traces"
+    },
+    {
+      "id": "history-2026-2026-06-08-md",
+      "path": "_history/2026/2026-06-08.md",
+      "category": "daily-history",
+      "language": "unknown",
+      "title": "2026 06 08 작업 기록",
+      "excerpt": "2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view ",
+      "html": "<p>2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view mode registry.json , AGENTS.md , Workspace Monitor 사용자 홈 화면, 관련 요구사항/스펙/검증 기록. 터</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1951,
+      "updatedAt": "2026-06-07T16:49:10.880Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/2026"
+    },
+    {
+      "id": "history-work-summaries-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+      "path": "_history/work-summaries/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+      "category": "work-summary",
+      "language": "ko",
+      "title": "작업 요약: workspace tracker product split",
+      "excerpt": "작업 요약: workspace tracker product split 데스크톱 앱의 제품 중심을 agent capability platform 에서 workspace tracker 로 바꿨다. 기본 사용자 화면은 Git 작업공간, 터미널/AI 실행, 작업 타임라인, 보고서/근거, 문서/요구사항을 우선하도록 바꿨다. Codex, Claude Code, Cursor, Antigravity 등은 선택형 guest AI 도구로 모델링했다. agent factory, root tool management,",
+      "html": "<p>작업 요약: workspace tracker product split 데스크톱 앱의 제품 중심을 agent capability platform 에서 workspace tracker 로 바꿨다. 기본 사용자 화면은 Git 작업공간, 터미널/AI 실행, 작업 타임라인, 보고서/근거, 문서/요구사항을 우선하도록 바꿨다. Codex, Claude Code, Cursor, Antigravity 등은 선택형 guest AI 도구로 모델링했다. agent factory, root tool management, Ollama, provider direct agent run, AWS AgentCore식 runtime lifecycle은 separated </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 1118,
+      "updatedAt": "2026-06-07T16:49:10.876Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/work-summaries"
+    },
+    {
+      "id": "history-user-requests-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+      "path": "_history/user-requests/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+      "category": "user-request",
+      "language": "ko",
+      "title": "사용자 요청 요약: workspace tracker product split",
+      "excerpt": "사용자 요청 요약: workspace tracker product split 사용자는 데스크톱 앱의 근본 목적이 AntiGravity, Cursor, Codex, Claude Code 등 여러 AI 코딩 도구를 Git 작업공간 위에서 잘 쓰도록 돕고, 현재 작업 중인 계획/요약/보고서/근거를 쉽게 확인하는 것이라고 정리했다. 또한 Ollama, 에이전트 관리, 툴 관리, AWS Agent Platform/AgentCore류 기능은 기본 데스크톱 앱에서 덜어내 별도 플랫폼/프로젝트로 분리해야 한다고",
+      "html": "<p>사용자 요청 요약: workspace tracker product split 사용자는 데스크톱 앱의 근본 목적이 AntiGravity, Cursor, Codex, Claude Code 등 여러 AI 코딩 도구를 Git 작업공간 위에서 잘 쓰도록 돕고, 현재 작업 중인 계획/요약/보고서/근거를 쉽게 확인하는 것이라고 정리했다. 또한 Ollama, 에이전트 관리, 툴 관리, AWS Agent Platform/AgentCore류 기능은 기본 데스크톱 앱에서 덜어내 별도 플랫폼/프로젝트로 분리해야 한다고 요청했다. 새 사용자 프로젝트는 하나의 큰 앱 내부에 섞지 말고 별도 Git repository/workspace로 다루는 방향을 요구했다. </p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 808,
+      "updatedAt": "2026-06-07T16:49:10.875Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/user-requests"
+    },
+    {
+      "id": "history-plans-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+      "path": "_history/plans/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+      "category": "plan",
+      "language": "ko",
+      "title": "계획: workspace tracker product split",
+      "excerpt": "계획: workspace tracker product split 1. 공식 문서로 Git 작업공간, AI 코딩 도구, AgentCore류 런타임/툴 플랫폼의 역할을 확인한다. 2. platform desktop app/ 와 agent platform/ 의 소유 경계를 다시 정의한다. 3. 데스크톱 앱 제품 레지스트리를 workspace tracker 중심으로 바꾼다. 4. user view mode와 홈 화면을 Git 작업공간/current work/report 중심으로 바꾼다. 5. 스냅샷 co",
+      "html": "<p>계획: workspace tracker product split 1. 공식 문서로 Git 작업공간, AI 코딩 도구, AgentCore류 런타임/툴 플랫폼의 역할을 확인한다. 2. platform desktop app/ 와 agent platform/ 의 소유 경계를 다시 정의한다. 3. 데스크톱 앱 제품 레지스트리를 workspace tracker 중심으로 바꾼다. 4. user view mode와 홈 화면을 Git 작업공간/current work/report 중심으로 바꾼다. 5. 스냅샷 collector와 customer snapshot에 product split 데이터를 추가한다. 6. agent/tool/Ollama/AgentC</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 784,
+      "updatedAt": "2026-06-07T16:49:10.874Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/plans"
+    },
+    {
+      "id": "history-web-searches-2026-2026-06-08-workspace-tracker-product-split-ko-md",
+      "path": "_history/web-searches/2026/2026-06-08-workspace-tracker-product-split.ko.md",
+      "category": "web-search",
+      "language": "ko",
+      "title": "웹 검색 기록: workspace tracker product split",
+      "excerpt": "웹 검색 기록: workspace tracker product split 날짜: 2026 06 08 작업: 데스크톱 앱을 Git 작업공간/게스트 AI 도구/작업 추적 허브로 재정의하고, 에이전트/툴/Ollama/AgentCore류 기능을 agent platform/ 으로 분리한다. 검색 목적: 제품 경계가 현재 AI 코딩 도구와 Git 작업공간 구조에 맞는지 확인한다. 확인한 공식/고신뢰 출처 Git worktree 공식 문서: https://git scm.com/docs/git worktree.",
+      "html": "<p>웹 검색 기록: workspace tracker product split 날짜: 2026 06 08 작업: 데스크톱 앱을 Git 작업공간/게스트 AI 도구/작업 추적 허브로 재정의하고, 에이전트/툴/Ollama/AgentCore류 기능을 agent platform/ 으로 분리한다. 검색 목적: 제품 경계가 현재 AI 코딩 도구와 Git 작업공간 구조에 맞는지 확인한다. 확인한 공식/고신뢰 출처 Git worktree 공식 문서: https://git scm.com/docs/git worktree.html 영향: 여러 작업 트리를 한 저장소에서 다룰 수 있지만, 사용자 프로젝트의 기본 단위는 여전히 Git repository/worktre</p>",
+      "previewMode": "admin-summary",
+      "htmlTruncated": true,
+      "sourceBytes": 3531,
+      "updatedAt": "2026-06-07T16:49:10.869Z",
+      "historyDate": "2026-06-08",
+      "historyYear": "2026",
+      "workspaceArea": "_history/web-searches"
+    },
     {
       "id": "history-evaluations-2026-2026-06-08-terminal-tab-reform-input-json",
       "path": "_history/evaluations/2026/2026-06-08-terminal-tab-reform-input.json",
@@ -93,22 +221,6 @@
       "historyDate": "2026-06-08",
       "historyYear": "2026",
       "workspaceArea": "_history/work-timings"
-    },
-    {
-      "id": "history-2026-2026-06-08-md",
-      "path": "_history/2026/2026-06-08.md",
-      "category": "daily-history",
-      "language": "unknown",
-      "title": "2026 06 08 작업 기록",
-      "excerpt": "2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view ",
-      "html": "<p>2026 06 08 작업 기록 기본 사용자 인터페이스 단순화 사용자 요청: 플랫폼 첫 사용 화면이 너무 복잡하므로 커스텀/운영/개발 기능은 기본 화면 뒤로 숨기고, 사용자는 쉬운 작업 시작 인터페이스만 보게 한다. 지속 지침 변경: 현재 기본 view mode 를 superadmin developer 에서 user 로 바꾸고, developer 및 superadmin developer 는 명시적 고급 렌즈로만 사용한다. 주요 산출물: agent platform/configs/access/view mode registry.json , AGENTS.md , Workspace Monitor 사용자 홈 화면, 관련 요구사항/스펙/검증 기록. 터</p>",
-      "previewMode": "admin-summary",
-      "htmlTruncated": true,
-      "sourceBytes": 1143,
-      "updatedAt": "2026-06-07T16:17:07.735Z",
-      "historyDate": "2026-06-08",
-      "historyYear": "2026",
-      "workspaceArea": "_history/2026"
     },
     {
       "id": "history-request-traces-2026-2026-06-08-terminal-tab-reform-ko-md",
@@ -51363,35 +51475,35 @@
     {
       "date": "2026-06-08",
       "year": "2026",
-      "documentsCount": 22,
+      "documentsCount": 29,
       "categories": [
         {
           "category": "evaluation",
-          "count": 3
+          "count": 4
         },
         {
           "category": "plan",
-          "count": 3
+          "count": 4
         },
         {
           "category": "request-trace",
-          "count": 3
+          "count": 4
         },
         {
           "category": "user-request",
-          "count": 3
+          "count": 4
         },
         {
           "category": "web-search",
-          "count": 3
+          "count": 4
         },
         {
           "category": "work-summary",
-          "count": 3
+          "count": 4
         },
         {
           "category": "work-timing",
-          "count": 3
+          "count": 4
         },
         {
           "category": "daily-history",

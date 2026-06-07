@@ -4,9 +4,11 @@ This is the English README. The default Korean README is [README.md](./README.md
 
 ## Purpose
 
-`platform-desktop-app/` productizes the personal agent-building platform as installable desktop software.
+`platform-desktop-app/` is the desktop app for importing, opening, running, and tracking work across multiple Git workspaces and AI coding tools.
 
-The app is not a thin wrapper around one CLI. The app launches first and owns workspace state, task state, decision inbox, artifacts, validation, accumulated data, and UI authority. Codex CLI, Claude Code CLI, Gemini CLI, OpenCode, and similar tools attach as optional guest adapters.
+The app is not a thin wrapper around one CLI. The app launches first and owns Git workspace state, task timeline, terminal run state, decision inbox, evidence, reports, validation, and UI authority. Codex CLI, Claude Code CLI, Cursor, Antigravity, Gemini CLI, OpenCode, and similar tools attach as optional guest adapters.
+
+Agent creation, tool-platform management, Ollama model management, and AWS AgentCore-style runtime, gateway, and identity capabilities are not default user-facing desktop surfaces. Those capabilities belong to the separated `agent-platform/` project. The desktop app focuses on helping the user see current Git repositories, terminal runs, plans, reports, and evidence in work order.
 
 ## One-Shot Commands
 
@@ -162,14 +164,16 @@ Public distribution remains blocked until these gates pass:
 
 ## Product Direction
 
-- The product is an `agent_capability_platform`, not a monitoring dashboard.
-- Primary features are agent orchestration, agent work environment, agent development environment, agent factory, and the learning/evaluation loop.
-- Monitoring, history, requirements, and structure surfaces stay in Operator Center or supporting observability.
+- The product center is `workspace_tracker`.
+- Default users see Git workspace import, terminal and AI tool execution, work timeline, reports/evidence, requirements, and documents first.
+- Codex, Claude Code, Cursor, Antigravity, and similar tools are guest AI tools, not a single hard dependency for the app.
+- Agent factory, root tool management, Ollama model management, provider direct agent run, and AWS AgentCore-style runtime lifecycle move to `agent-platform/`.
 - Remaining P0 product gaps are tracked in [configs/product-gap-registry.json](./configs/product-gap-registry.json).
 
 ## Key Files
 
 - Product feature structure: [configs/product-feature-registry.json](./configs/product-feature-registry.json)
+- Workspace product split structure: [configs/workspace-tracker-product-split-registry.json](./configs/workspace-tracker-product-split-registry.json)
 - Remaining product gaps: [configs/product-gap-registry.json](./configs/product-gap-registry.json)
 - Installer shell runtime contract: [runtime-contracts/installer-shell-runtime-contract.json](./runtime-contracts/installer-shell-runtime-contract.json)
 - macOS execution profile: [configs/macos-execution-profile.json](./configs/macos-execution-profile.json)

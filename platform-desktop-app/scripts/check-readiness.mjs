@@ -368,11 +368,11 @@ if (!companionPaths.includes("configs/product-feature-registry.json")) {
 
 const productFeatureRegistry = readJson("configs/product-feature-registry.json");
 const productFeatureSerialized = JSON.stringify(productFeatureRegistry);
-if (productFeatureRegistry.product_position?.primary_product !== "agent_capability_platform") {
-  failures.push("product-feature-registry must keep agent_capability_platform as the primary product");
+if (productFeatureRegistry.product_position?.primary_product !== "workspace_tracker") {
+  failures.push("product-feature-registry must keep workspace_tracker as the primary product");
 }
-if (productFeatureRegistry.product_position?.monitoring_role !== "supporting_observability") {
-  failures.push("product-feature-registry must keep monitoring as supporting_observability");
+if (productFeatureRegistry.product_position?.monitoring_role !== "primary_work_visibility") {
+  failures.push("product-feature-registry must keep monitoring as primary_work_visibility");
 }
 for (const requiredFeatureId of [
   "agent_orchestration",
@@ -398,33 +398,33 @@ const observabilityFeature = productFeatureRegistry.feature_layers?.find((item) 
 if (observabilityFeature?.role !== "supporting") {
   failures.push("observability_monitoring must be a supporting feature");
 }
-for (const requiredSupportingId of [
-  "root_tool_management",
-  "work_visibility",
-  "agent_work_environment",
-  "agent_development_environment",
-  "learning_improvement_loop"
-]) {
+for (const requiredSupportingId of productFeatureRegistry.product_position?.supporting_feature_ids ?? []) {
   const feature = productFeatureRegistry.feature_layers?.find((item) => item.id === requiredSupportingId);
   if (feature?.role !== "supporting") {
     failures.push(`product feature ${requiredSupportingId} must be supporting`);
   }
 }
+for (const requiredSeparatedId of productFeatureRegistry.product_position?.separated_feature_ids ?? []) {
+  const feature = productFeatureRegistry.feature_layers?.find((item) => item.id === requiredSeparatedId);
+  if (feature?.role !== "separated") {
+    failures.push(`product feature ${requiredSeparatedId} must be separated`);
+  }
+}
 if (!productFeatureSerialized.includes("operator_surfaces_are_separate")) {
   failures.push("product-feature-registry must require operator surfaces to stay separate");
 }
-if (!productFeatureSerialized.includes("two_core_features_are_first")) {
-  failures.push("product-feature-registry must keep the two core features first");
+if (!productFeatureSerialized.includes("workspace_workflow_features_are_first")) {
+  failures.push("product-feature-registry must keep workspace workflow features first");
 }
 for (const requiredPhrase of ["awslabs_agentcore_samples", "Production Agent Blueprints", "agentcore_blueprint_gate"]) {
   if (!productFeatureSerialized.includes(requiredPhrase)) {
     failures.push(`product-feature-registry must include AgentCore production blueprint token ${requiredPhrase}`);
   }
 }
-const expectedPrimaryNavigationSections = ["overview", "desktop", "eval"];
-const expectedOperatorCenterSections = ["projects", "history", "structure", "documents", "requirements"];
+const expectedPrimaryNavigationSections = ["overview", "source", "desktop", "eval", "projects", "history", "documents", "requirements"];
+const expectedOperatorCenterSections = ["structure", "intent", "agents", "tools"];
 if (JSON.stringify(productFeatureRegistry.desktop_home_surface?.primary_navigation_sections) !== JSON.stringify(expectedPrimaryNavigationSections)) {
-  failures.push("product-feature-registry desktop_home_surface must keep task-first user navigation sections");
+  failures.push("product-feature-registry desktop_home_surface must keep workspace-tracker user navigation sections");
 }
 if (JSON.stringify(productFeatureRegistry.desktop_home_surface?.operator_center_sections) !== JSON.stringify(expectedOperatorCenterSections)) {
   failures.push("product-feature-registry desktop_home_surface must keep operator center sections separated");
@@ -635,7 +635,7 @@ if (!JSON.stringify(viewModeRegistry).includes("desktop")) {
 }
 const userViewMode = viewModeRegistry.modes?.find((mode) => mode.id === "user");
 if (JSON.stringify(userViewMode?.allowed_sections) !== JSON.stringify(expectedPrimaryNavigationSections)) {
-  failures.push("user view mode must expose task-first sections only");
+  failures.push("user view mode must expose workspace-tracker sections only");
 }
 for (const operatorSection of expectedOperatorCenterSections) {
   if (userViewMode?.allowed_sections?.includes(operatorSection)) {
@@ -661,6 +661,7 @@ const {
   ptyDecisionKo,
   ptyDecisionEn,
   productFeaturePanel,
+  workspaceProductSplitPanel,
   monitorCollector,
   productFeatureCollector,
   customerBundleCheck,
@@ -895,10 +896,10 @@ for (const requiredPhrase of [
   "바로 쓰기",
   "핵심 기능",
   "지금 할 일 하나를 고릅니다",
-  "에이전트 코어",
-  "CLI 오케스트레이션",
-  "루트 툴",
-  "작업 가시성",
+  "Git 작업공간",
+  "터미널/AI 실행",
+  "보고서/근거",
+  "작업 타임라인",
   "main-workbench-panel",
   "home-depth-menu",
   "main-feature-detail",
@@ -1040,7 +1041,7 @@ for (const requiredPhrase of [
   "ANTHROPIC_API_KEY",
   "GEMINI_API_KEY",
   "화면 언어",
-  "파일/코드",
+  "Git 작업공간",
   "현재 작업공간",
   "refreshRuntimeDataBoundary",
   "runInstallerPayloadAudit",
@@ -1128,7 +1129,7 @@ for (const requiredPhrase of [
   "Public sources only",
   "transfer-pattern-grid",
   "핵심 기능",
-  "루트 툴",
+  "연결 상태",
   "Operator Center",
   "operatorSectionIds",
   "Open Operator Center"
@@ -1203,16 +1204,16 @@ if (/\.desktop-app-root button > span[\s\S]*?{[^}]*overflow-wrap:\s*anywhere/s.t
 }
 for (const requiredPhrase of [
   "ProductFeatureArchitecturePanel",
-  "CLI Orchestration",
   "Agent Core",
-  "Open CLI Orchestration",
-  "Open Agent Core",
-  "Observability is support",
-  "Agent Capability Platform",
+  "Open Terminal Run",
+  "Open Separate Agent Platform",
+  "Workspace Tracker",
+  "Product Boundary",
+  "workspace-product-split-panel",
   "Operator tools are separate",
   "Open Operator Center"
 ]) {
-  if (!monitorShell.includes(requiredPhrase) && !productFeaturePanel.includes(requiredPhrase)) {
+  if (!monitorShell.includes(requiredPhrase) && !productFeaturePanel.includes(requiredPhrase) && !workspaceProductSplitPanel.includes(requiredPhrase)) {
     failures.push(`workspace-monitor product feature panel must include ${requiredPhrase}`);
   }
 }

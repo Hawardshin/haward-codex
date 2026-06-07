@@ -188,31 +188,33 @@ test("desktop registry points to macOS and Windows execution profiles", () => {
   assert.match(serialized, /configs\/product-feature-registry\.json/);
 });
 
-test("product feature registry makes agent platform primary", () => {
+test("product feature registry makes workspace tracker primary and separates agent tools", () => {
   const registry = readJson("configs/product-feature-registry.json");
   const serialized = JSON.stringify(registry);
 
-  assert.equal(registry.product_position.primary_product, "agent_capability_platform");
-  assert.equal(registry.product_position.monitoring_role, "supporting_observability");
+  assert.equal(registry.product_position.primary_product, "workspace_tracker");
+  assert.equal(registry.product_position.monitoring_role, "primary_work_visibility");
   for (const featureId of [
     "agent_orchestration",
-    "agent_factory"
+    "agent_work_environment",
+    "work_visibility",
+    "learning_improvement_loop"
   ]) {
     assert.ok(registry.product_position.primary_feature_ids.includes(featureId));
     assert.equal(registry.feature_layers.find((feature) => feature.id === featureId)?.role, "primary");
   }
   for (const featureId of [
-    "root_tool_management",
-    "work_visibility",
-    "agent_work_environment",
     "agent_development_environment",
-    "learning_improvement_loop"
+    "observability_monitoring"
   ]) {
     assert.ok(registry.product_position.supporting_feature_ids.includes(featureId));
     assert.equal(registry.feature_layers.find((feature) => feature.id === featureId)?.role, "supporting");
   }
-  assert.equal(registry.feature_layers.find((feature) => feature.id === "observability_monitoring")?.role, "supporting");
-  assert.match(serialized, /CLI Orchestration/);
+  for (const featureId of ["agent_factory", "root_tool_management"]) {
+    assert.ok(registry.product_position.separated_feature_ids.includes(featureId));
+    assert.equal(registry.feature_layers.find((feature) => feature.id === featureId)?.role, "separated");
+  }
+  assert.match(serialized, /Guest AI Tool Orchestration/);
   assert.match(serialized, /Agent Core/);
   assert.match(serialized, /Root Tool Management/);
   assert.match(serialized, /Work Visibility/);
@@ -223,15 +225,23 @@ test("product feature registry makes agent platform primary", () => {
   assert.match(serialized, /shared native workspace warmup/);
   assert.match(serialized, /awslabs_agentcore_samples/);
   assert.match(serialized, /agentcore_blueprint_gate/);
-  assert.match(serialized, /supporting observability/);
+  assert.match(serialized, /primary_work_visibility/);
   assert.match(serialized, /operator_surfaces_are_separate/);
-  assert.deepEqual(registry.desktop_home_surface.primary_navigation_sections, ["overview", "desktop", "eval"]);
-  assert.deepEqual(registry.desktop_home_surface.operator_center_sections, [
+  assert.deepEqual(registry.desktop_home_surface.primary_navigation_sections, [
+    "overview",
+    "source",
+    "desktop",
+    "eval",
     "projects",
     "history",
-    "structure",
     "documents",
     "requirements"
+  ]);
+  assert.deepEqual(registry.desktop_home_surface.operator_center_sections, [
+    "structure",
+    "intent",
+    "agents",
+    "tools"
   ]);
 });
 
@@ -629,6 +639,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     evaluationReportCatalog,
     evaluationRuntimeTelemetry
   } = sources;
+  const workspaceProductSplitPanel = sources.workspaceProductSplitPanel || "";
   const tauriRuntimeSource = joinSourceMap(sources, tauriRuntimeSourceKeys);
   const lib = tauriRuntimeSource;
   const monitorWorkbenchSource = joinSourceMap(sources, monitorWorkbenchSourceKeys);
@@ -670,8 +681,11 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "collectFundamentalImprovementStructure",
     "fundamentalImprovementStructure",
     "sanitizeFundamentalImprovementStructureForCustomer",
-    "agent_capability_platform",
-    "supporting_observability"
+    "collectProductSplit",
+    "productSplit",
+    "sanitizeProductSplitForCustomer",
+    "workspace_tracker",
+    "primary_work_visibility"
   ]) {
     assert.match(
       `${monitorCollector}\n${productFeatureCollector}\n${historyInsightCollector}\n${fundamentalImprovementCollector}`,
@@ -948,13 +962,15 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "Auto-defer questions",
     "하단 다중 CLI 터미널",
     "바로 쓰기",
-    "핵심 기능",
+    "제품 경계",
+    "Git 작업공간",
+    "보고서/근거",
     "지금 할 일 하나를 고릅니다",
-    "에이전트 코어",
-    "CLI 오케스트레이션",
-    "루트 툴",
-    "작업 가시성",
+    "터미널/AI 실행",
+    "작업 타임라인",
+    "레포지토리 경계",
     "main-workbench-panel",
+    "workspace-product-split-panel",
     "home-depth-menu",
     "main-feature-detail",
     "path-disclosure",
@@ -993,7 +1009,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "선택/위치 열기",
     "ProductFeatureArchitecturePanel",
     "핵심 기능",
-    "루트 툴",
+    "Git 작업공간",
     "Operator Center",
     "operatorSectionIds",
     "Open Operator Center"
@@ -1002,16 +1018,16 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   }
   assert.doesNotMatch(monitorShell, /localStorage/);
   for (const uiString of [
-    "CLI Orchestration",
     "Agent Core",
-    "Open CLI Orchestration",
-    "Open Agent Core",
-    "Observability is support",
-    "Agent Capability Platform",
+    "Open Terminal Run",
+    "Open Separate Agent Platform",
+    "Workspace Tracker",
+    "Product Boundary",
+    "workspace-product-split-panel",
     "Operator tools are separate",
     "Open Operator Center"
   ]) {
-    assert.match(productFeaturePanel, new RegExp(uiString));
+    assert.match(`${monitorShell}\n${productFeaturePanel}\n${workspaceProductSplitPanel}`, new RegExp(uiString));
   }
   for (const implementationToken of [
     "detectOutputEvents",
@@ -1123,7 +1139,7 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
     "ANTHROPIC_API_KEY",
     "GEMINI_API_KEY",
     "화면 언어",
-    "파일/코드",
+    "Git 작업공간",
     "현재 작업공간",
     "schemaVersion",
     "storageFormatVersion",
@@ -1332,8 +1348,8 @@ test("desktop runtime bridge exposes CLI adapter commands and monitor tab", () =
   assert.ok(viewModes.modes.every((mode) => mode.allowed_sections.includes("desktop")));
   assert.ok(viewModes.modes.every((mode) => mode.allowed_sections.includes("eval")));
   const userMode = viewModes.modes.find((mode) => mode.id === "user");
-  assert.deepEqual(userMode.allowed_sections, ["overview", "desktop", "eval"]);
-  for (const operatorSection of ["projects", "history", "structure", "documents", "requirements"]) {
+  assert.deepEqual(userMode.allowed_sections, ["overview", "source", "desktop", "eval", "projects", "history", "documents", "requirements"]);
+  for (const operatorSection of ["structure", "intent", "agents", "tools"]) {
     assert.ok(!userMode.allowed_sections.includes(operatorSection));
   }
 });

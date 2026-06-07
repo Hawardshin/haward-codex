@@ -1,7 +1,7 @@
 {
   "schema_version": "2026-06-03",
   "name": "product-feature-registry",
-  "purpose": "Defines the installable desktop product as an agent capability platform whose two primary values are easy custom agent creation through Agent Core and continuous CLI work orchestration. Root tools, workbench, learning, and monitoring are supporting layers.",
+  "purpose": "Defines the installable desktop product as a Git-backed AI workspace tracker whose primary value is importing many repositories, launching replaceable AI coding tools, and showing current work, evidence, validation, reports, and terminal state. Agent and tool operations are separated into agent-platform.",
   "reader_guide": {
     "summary": "Use this registry before changing the desktop home screen, snapshot schema, installer shell runtime, or platform feature navigation.",
     "how_to_read": [
@@ -16,8 +16,8 @@
     "update_triggers": [
       "The desktop home screen or first-run product promise changes.",
       "A feature is promoted from workflow, prompt, template, tool, skill, or agent into a desktop product surface.",
-      "A new Agent Core, CLI orchestration, root tool, workbench, learning, or observability capability is added.",
-      "Monitoring starts to look like the main product again instead of a support layer.",
+      "A new workspace import, CLI adapter, Git status, work report, evidence, learning, or observability capability is added.",
+      "Agent factory, tool studio, direct provider execution, or Ollama management starts to look like the main desktop product again.",
       "The installer shell runtime contract changes how work state, decisions, evidence, validation, or evaluations are accumulated."
     ]
   },
@@ -163,9 +163,9 @@
   ],
   "structure_rules": [
     {
-      "id": "agent_capability_platform_is_primary",
-      "rule": "The desktop product shall be positioned as an agent capability platform, not as a monitoring dashboard.",
-      "reason": "The user explicitly rejected a UI that keeps behaving like a web monitor or PoC.",
+      "id": "workspace_tracker_is_primary",
+      "rule": "The desktop product shall be positioned as a Git workspace tracker for guest AI coding tools and current work reports, not as an all-in-one agent factory, tool runtime, model manager, or monitoring dashboard.",
+      "reason": "The user explicitly said the main purpose is helping people use many AI coding tools over Git workspaces and inspect current work outputs.",
       "applies_to": [
         "product_position",
         "feature_layers",
@@ -174,9 +174,9 @@
       ]
     },
     {
-      "id": "two_core_features_are_first",
-      "rule": "The first product surface shall foreground exactly two primary capabilities: Agent Core for easy custom agent and subagent creation, and CLI orchestration for continuous guest CLI work with deferred decisions.",
-      "reason": "The user identified these as the platform's two core functions and asked non-core functions to be visually de-emphasized.",
+      "id": "workspace_workflow_features_are_first",
+      "rule": "The first product surface shall foreground Git workspace import/open/clone/create, terminal and guest AI tool launch, work timeline, reports, evidence, and requirements.",
+      "reason": "The user asked for a simple interface that starts work instead of making them configure platform internals first.",
       "applies_to": [
         "product_position",
         "desktop_home_surface",
@@ -195,9 +195,9 @@
       ]
     },
     {
-      "id": "monitoring_is_supporting_observability",
-      "rule": "Monitoring, history browsing, structure browsing, document browsing, requirements browsing, and diagnostic views shall support orchestration, workbench, development, factory, and learning features; they shall not become the product's main promise.",
-      "reason": "The user said monitoring is not the main function and current UI choices were blocking correct product decisions.",
+      "id": "visibility_is_primary_work_tracking",
+      "rule": "Current work visibility, history, reports, documents, requirements, and diagnostics shall support the workspace tracker's main promise: understanding what is happening now and why.",
+      "reason": "The user said current work summaries, plans, reports, and evidence are central to the desktop app after the product split.",
       "applies_to": [
         "product_position",
         "observability_monitoring",
@@ -233,6 +233,17 @@
         "desktop_home_surface",
         "agent_development_environment",
         "observability_monitoring"
+      ]
+    },
+    {
+      "id": "agent_tool_runtime_platform_is_separated",
+      "rule": "Agent factory, root tool management, provider direct agent execution, Ollama model management, and AWS AgentCore-style runtime lifecycle shall be treated as separated advanced platform capabilities.",
+      "reason": "The user asked to remove these from the default desktop app and build them as a separate platform.",
+      "applies_to": [
+        "product_position",
+        "feature_layers",
+        "desktop_home_surface",
+        "agent-platform"
       ]
     },
     {
@@ -274,63 +285,75 @@
     }
   ],
   "product_position": {
-    "primary_product": "agent_capability_platform",
-    "primary_claim": "A desktop platform whose core is Agent Core for easy custom agent and subagent creation plus CLI orchestration for continuous Codex, Claude Code, Gemini, OpenCode, and other guest CLI work with deferred decisions and task-run records. Root tools, workspace workbench, learning, and observability support those two core capabilities.",
-    "monitoring_role": "supporting_observability",
+    "primary_product": "workspace_tracker",
+    "primary_claim": "A desktop workspace tracker for importing or creating Git-backed projects, launching Codex, Claude Code, Cursor, Antigravity, Gemini CLI, OpenCode, and other replaceable guest AI coding tools, then showing current work, task order, evidence, validation, reports, terminal state, and Git boundaries in one simple app.",
+    "monitoring_role": "primary_work_visibility",
     "not_primary_claims": [
-      "workspace monitoring dashboard",
-      "static repository browser",
+      "single all-in-one agent factory",
+      "tool runtime control plane",
+      "Ollama model manager",
+      "AWS AgentCore runtime console",
       "PoC validation surface",
       "single external CLI wrapper"
     ],
     "primary_feature_ids": [
-      "agent_factory",
-      "agent_orchestration"
+      "agent_work_environment",
+      "agent_orchestration",
+      "work_visibility",
+      "learning_improvement_loop"
     ],
     "supporting_feature_ids": [
-      "root_tool_management",
-      "work_visibility",
-      "agent_work_environment",
       "agent_development_environment",
-      "learning_improvement_loop",
       "observability_monitoring"
+    ],
+    "separated_feature_ids": [
+      "agent_factory",
+      "root_tool_management",
+      "provider_direct_agent_run",
+      "ollama_model_management",
+      "agentcore_runtime_lifecycle"
     ]
   },
   "desktop_home_surface": {
     "first_view_priority": [
-      "agent_factory",
+      "agent_work_environment",
       "agent_orchestration",
-      "root_tool_management",
       "learning_improvement_loop",
-      "work_visibility"
+      "work_visibility",
+      "observability_monitoring"
     ],
     "supporting_surfaces": [
-      "observability_monitoring",
+      "agent_factory",
+      "root_tool_management",
       "open_source_eval_cockpit"
     ],
     "primary_navigation_sections": [
       "overview",
+      "source",
       "desktop",
-      "eval"
-    ],
-    "operator_center_sections": [
+      "eval",
       "projects",
       "history",
-      "structure",
       "documents",
       "requirements"
     ],
-      "home_copy_rule": "The first screen shall emphasize Agent Core, CLI orchestration continuity, Tool Studio for shared root tools, EVAL for current work quality, and at-a-glance work visibility before deeper observability details.",
-    "configuration_rule": "Core setup for provider accounts, CLI adapters, root tools, workspace access, and question deferral shall be visible from Home and collected in the execution settings surface."
+    "operator_center_sections": [
+      "structure",
+      "intent",
+      "agents",
+      "tools"
+    ],
+    "home_copy_rule": "The first screen shall emphasize Git workspace import, current work timeline, CLI/terminal launch, evidence, validation, reports, and Git project boundaries. Agent factory and Tool Studio shall be advanced/operator surfaces.",
+    "configuration_rule": "Execution settings shall focus on workspace path, Git repository state, and guest AI tool adapters. Provider direct execution, Ollama, agent factory, and tool builder controls are separated from the default user path."
   },
   "feature_layers": [
     {
       "id": "agent_orchestration",
-      "label": "CLI Orchestration",
+      "label": "Guest AI Tool Orchestration",
       "role": "primary",
       "status": "implemented_slice",
-      "purpose": "Coordinate local/provider model tasks and optional CLI lanes as a supervised task graph with bounded IO, decision routing, merge gates, and cleanup.",
-      "user_outcome": "The user starts one task from chat and the platform runs the selected local/provider model or specialized lanes, pauses only dependent decisions, and keeps independent work moving.",
+      "purpose": "Launch and track replaceable guest AI coding surfaces such as Codex, Claude Code, Gemini CLI, Cursor, Antigravity, and OpenCode over the selected Git workspace with bounded IO, decision routing, merge gates, and cleanup.",
+      "user_outcome": "The user chooses the workspace and preferred AI tool, starts the work from one place, and sees terminal state, decisions, evidence, and reports without being locked to one assistant.",
       "primary_section": "desktop",
       "primary_surfaces": [
         "Desktop Runtime",
@@ -359,9 +382,9 @@
         "platform-desktop-app/configs/reference-platform-advantage-registry.json"
       ],
       "automation_targets": [
-        "direct model task execution from local Ollama models or connected OpenAI, Anthropic, or Gemini accounts",
-        "native local model catalog refresh through list_provider_models",
-        "provider credential injection into guest CLI sessions",
+        "guest AI tool adapter selection",
+        "terminal and external editor launch from the selected Git workspace",
+        "provider credential references only when a guest adapter needs them",
         "existing search agent work-chat",
         "task intake to multi-lane plan",
         "top-level run configuration selection for search agent, CLI session, task pipe, and workspace readiness",
@@ -402,10 +425,10 @@
     {
       "id": "agent_work_environment",
       "label": "Agent Work Environment",
-      "role": "supporting",
+      "role": "primary",
       "status": "implemented_slice",
-      "purpose": "Host app-selected workspaces, runtime data stores, task-run records, decisions, support diagnostics, and agent work planes.",
-      "user_outcome": "The user no longer has to manually clone and work from a terminal-first folder; the app owns workspace selection and accumulated data access.",
+      "purpose": "Host imported and newly created Git repositories, runtime data stores, task-run records, decisions, support diagnostics, and workspace-scoped reports.",
+      "user_outcome": "The user can open many Git-backed workspaces, see which repository is active, and keep summaries, plans, reports, terminal sessions, and evidence attached to the right project.",
       "primary_section": "desktop",
       "primary_surfaces": [
         "Workspace Host",
@@ -422,8 +445,9 @@
         "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx"
       ],
       "automation_targets": [
-        "workspace import",
-        "repository clone",
+        "open existing Git repository",
+        "clone remote Git repository",
+        "create new Git repository",
         "shared native workspace warmup",
         "workspace state persistence",
         "data store indexing",
@@ -488,10 +512,10 @@
     {
       "id": "agent_factory",
       "label": "Agent Core",
-      "role": "primary",
+      "role": "separated",
       "status": "implemented_slice",
-      "purpose": "Turn repeated work into prompts, workflows, templates, tools, skills, agents, and finally platform features with traceable decisions.",
-      "user_outcome": "The user can create agents and reusable capabilities without repeatedly telling the assistant the same process.",
+      "purpose": "Turn repeated work into prompts, workflows, templates, tools, skills, agents, and platform features inside the separate agent-platform product.",
+      "user_outcome": "Advanced users can still create agents and reusable capabilities, but this no longer dominates the default desktop tracker experience.",
       "primary_section": "agents",
       "primary_surfaces": [
         "Agents",
@@ -542,10 +566,10 @@
     {
       "id": "learning_improvement_loop",
       "label": "Learning & Evaluation Loop",
-      "role": "supporting",
+      "role": "primary",
       "status": "implemented_slice",
-      "purpose": "Accumulate work history, timing, evaluations, web searches, intent maps, evidence, and improvement records so platform behavior gets better over time.",
-      "user_outcome": "The user can see why the platform improved, what evidence drove changes, and which gaps remain.",
+      "purpose": "Accumulate work history, timing, evaluations, web searches, summaries, request traces, evidence, and reports so every workspace shows what happened and why.",
+      "user_outcome": "The user can see the current work summary, ordered plan, evidence, validation result, report trail, and remaining gaps without reading raw folders first.",
       "primary_section": "eval",
       "primary_surfaces": [
         "AI Eval",
@@ -600,10 +624,10 @@
     {
       "id": "root_tool_management",
       "label": "Root Tool Management",
-      "role": "supporting",
+      "role": "separated",
       "status": "implemented_slice",
-      "purpose": "Keep shared provider accounts, CLI adapters, workspace files, source tools, and decision-routing defaults outside individual tasks so every custom agent and guest CLI lane can reuse the same root tool base.",
-      "user_outcome": "The user configures root tools once, then task-specific agents, subagents, and CLI lanes can share them without duplicated setup.",
+      "purpose": "Keep tool building, Python venvs, deployment, provider direct execution, and advanced tool registry work in the separate agent-platform product while the desktop tracker keeps only simple guest-adapter setup.",
+      "user_outcome": "The default desktop app stays focused on workspaces and reports; advanced tool operations remain available in their own platform.",
       "primary_section": "tools",
       "primary_surfaces": [
         "Tool Studio",
@@ -638,18 +662,116 @@
         "tool usage pattern count"
       ],
       "validation_gates": [
-        "Home and execution settings expose root tools separately from Agent Core and CLI orchestration",
+        "Home and execution settings expose root tools separately from the workspace tracker default flow",
         "root tools stay reusable across task-specific agents and guest CLI lanes",
         "Tool Studio renders source-backed agent tool usage playbooks"
       ]
     },
     {
+      "id": "provider_direct_agent_run",
+      "label": "Provider Direct Agent Run",
+      "role": "separated",
+      "status": "advanced_platform_boundary",
+      "purpose": "Keep direct provider API execution, model-task runs, and provider account experiments in the separated agent platform instead of the default workspace tracker path.",
+      "user_outcome": "The default user can launch guest coding tools without being forced to configure raw provider execution first.",
+      "primary_section": "agents",
+      "primary_surfaces": [
+        "Provider Accounts",
+        "Search Agent Work Chat",
+        "Advanced Agent Platform"
+      ],
+      "current_assets": [
+        "platform-desktop-app/renderer/workspace-monitor/components/features/ProviderAccountsPanel.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/SearchAgentWorkChatPanel.tsx",
+        "agent-platform/configs/integrations/cli-adapter-registry.json"
+      ],
+      "automation_targets": [
+        "provider account status",
+        "provider model catalog",
+        "direct agent task execution"
+      ],
+      "learning_signals": [
+        "configured provider count",
+        "direct run readiness",
+        "model catalog status"
+      ],
+      "validation_gates": [
+        "provider direct run is not part of default user navigation",
+        "provider account state remains available as advanced setup"
+      ]
+    },
+    {
+      "id": "ollama_model_management",
+      "label": "Ollama Model Management",
+      "role": "separated",
+      "status": "advanced_platform_boundary",
+      "purpose": "Keep local model runtime selection, Ollama endpoint management, and model install decisions in the separated agent/tool platform.",
+      "user_outcome": "The default desktop tracker does not block first use on local model setup while advanced users can still connect local model runtimes.",
+      "primary_section": "tools",
+      "primary_surfaces": [
+        "Tool Studio",
+        "Provider Accounts",
+        "Advanced Runtime Settings"
+      ],
+      "current_assets": [
+        "platform-desktop-app/renderer/workspace-monitor/components/features/runtimeCatalog.ts",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/RuntimeCustomizationPanel.tsx"
+      ],
+      "automation_targets": [
+        "Ollama base URL reference",
+        "local model default selection",
+        "runtime setting sync"
+      ],
+      "learning_signals": [
+        "local runtime configured",
+        "model default changed",
+        "runtime sync result"
+      ],
+      "validation_gates": [
+        "Ollama remains optional and advanced",
+        "workspace tracker works without local model installation"
+      ]
+    },
+    {
+      "id": "agentcore_runtime_lifecycle",
+      "label": "AgentCore Runtime Lifecycle",
+      "role": "separated",
+      "status": "advanced_platform_boundary",
+      "purpose": "Keep AWS AgentCore-style runtime, gateway, identity, memory, tool, browser/code tool, evaluation, and policy lifecycle as separated platform infrastructure.",
+      "user_outcome": "The desktop app can reference production agent blueprints without becoming an AWS runtime console.",
+      "primary_section": "agents",
+      "primary_surfaces": [
+        "Production Agent Blueprints",
+        "AgentCore Quick Builder",
+        "Advanced Agent Platform"
+      ],
+      "current_assets": [
+        "platform-desktop-app/configs/reference-platform-advantage-registry.json",
+        "platform-desktop-app/renderer/workspace-monitor/components/workbench/AgentBuilderPanels.tsx",
+        "agent-platform/configs/orchestration/agent-orchestration-registry.json"
+      ],
+      "automation_targets": [
+        "production blueprint reference",
+        "runtime lifecycle proposal",
+        "gateway and identity planning"
+      ],
+      "learning_signals": [
+        "selected production blueprint",
+        "proposal created",
+        "lifecycle gate coverage"
+      ],
+      "validation_gates": [
+        "AgentCore-style lifecycle is separated from default user navigation",
+        "AWS deployment remains optional and explicit"
+      ]
+    },
+    {
       "id": "work_visibility",
       "label": "Work Visibility",
-      "role": "supporting",
+      "role": "primary",
       "status": "implemented_slice",
-      "purpose": "Show the amount of active work, deferred decisions, task-run records, and available agents at a glance so work is not forgotten while long-running agent or CLI tasks continue.",
-      "user_outcome": "The user can immediately see what is running, what is blocked, what was recorded, and where to resume.",
+      "purpose": "Show active work, current repository, deferred decisions, task-run records, report status, evidence status, and terminal state at a glance so work is not forgotten.",
+      "user_outcome": "The user can immediately see what is running, what is blocked, what was planned, what was validated, and where to resume.",
       "primary_section": "overview",
       "primary_surfaces": [
         "Core Home Workload Strip",
@@ -761,12 +883,12 @@
     ]
   },
   "quality_signals": [
-    "The first screen names Agent Core and CLI orchestration before root tools, workbench, learning, or observability.",
-    "Tool Studio gives root tools, Python runtime setup, and deployment their own work-first surface separate from task-specific agent creation and CLI orchestration surfaces.",
+    "The first screen names Git workspaces, guest AI tool launch, current work timeline, reports, evidence, and requirements before agent/tool runtime internals.",
+    "Tool Studio gives root tools, Python runtime setup, provider direct run, Ollama, and deployment their own separated platform surface.",
     "Current work volume, deferred decisions, task-run records, and agent count are visible at a glance.",
     "Snapshot data includes product feature architecture for developer and customer builds.",
     "Customer snapshot preserves sellable feature structure but removes internal source paths and validation internals.",
-    "Readiness tests fail if monitoring is positioned as the primary product.",
+    "Readiness tests fail if the desktop product drifts away from workspace_tracker or if separated platform functions return to default user navigation.",
     "New feature work updates requirements, specs, validation, history, and request traces.",
     "AgentCore-style blueprint choices map reference samples to runnable local product flows.",
     "Desktop Runtime starts from run configurations and tool-window status instead of making the user scan a web dashboard.",
@@ -777,7 +899,7 @@
     {
       "id": "product_identity_gate",
       "command": "corepack pnpm --filter platform-desktop-app test",
-      "validates": "Product feature registry keeps agent capability platform as the primary product and monitoring as supporting observability."
+      "validates": "Product feature registry keeps workspace_tracker as the primary product and separated agent/tool/runtime capabilities out of the default user path."
     },
     {
       "id": "renderer_contract_gate",
