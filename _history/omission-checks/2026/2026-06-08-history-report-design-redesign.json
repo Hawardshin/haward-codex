@@ -1,0 +1,159 @@
+{
+  "task": "history report design redesign",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "web-first-intake",
+      "description": "Run web search before local planning and record the source impact.",
+      "source": "AGENTS.md repository instructions",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "_history/web-searches/2026/2026-06-08-history-report-design-redesign.ko.md"
+      ]
+    },
+    {
+      "item_id": "design-standard-registry",
+      "description": "Persist the history report design criteria as a self-documenting registry.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/configs/history-report-design-registry.json",
+        "PYTHONPATH=src python3 -m agent_platform.cli check-config-contract ../platform-desktop-app/configs/history-report-design-registry.json"
+      ]
+    },
+    {
+      "item_id": "history-report-ui",
+      "description": "Redesign the history tab so users first see a current-work report surface.",
+      "source": "user request",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/history/HistoryReportDesignPanel.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "Browser smoke: panel visible, lane count 4, criteria count 4"
+      ]
+    },
+    {
+      "item_id": "dated-archive-preserved",
+      "description": "Keep the existing dated history archive and filters as evidence below the report.",
+      "source": "requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/renderer/workspace-monitor/components/MonitorShell.tsx",
+        "platform-desktop-app/renderer/workspace-monitor/components/features/MonitorSummaryWidgets.tsx"
+      ]
+    },
+    {
+      "item_id": "test-coverage",
+      "description": "Readiness tests must cover registry, UI, CSS, and current source split structure.",
+      "source": "requirements",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "platform-desktop-app/tests/readiness.test.mjs",
+        "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs",
+        "node --test tests/readiness.test.mjs renderer/workspace-monitor/tests/tool-studio.test.mjs"
+      ]
+    },
+    {
+      "item_id": "validation-build",
+      "description": "Run the owning project's strongest available checks and build.",
+      "source": "AGENTS.md repository instructions",
+      "required": true,
+      "status": "covered",
+      "evidence": [
+        "corepack pnpm --dir renderer/workspace-monitor run check",
+        "corepack pnpm test",
+        "corepack pnpm run renderer:build"
+      ]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/configs/history-report-design-registry.json",
+      "purpose": "Design standard registry",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/renderer/workspace-monitor/components/history/HistoryReportDesignPanel.tsx",
+      "purpose": "History report UI",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-08-history-report-design-redesign.ko.md",
+      "purpose": "Project requirements",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-08-history-report-design-redesign/",
+      "purpose": "Project spec artifacts",
+      "required": true
+    },
+    {
+      "path": "_history/evaluations/2026/2026-06-08-history-report-design-redesign-evaluation-input.json",
+      "purpose": "Close-out evaluator input",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "config-contract",
+      "description": "New config is self-documenting.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "check-config-contract exited 0"
+      ]
+    },
+    {
+      "check_id": "workspace-monitor-check",
+      "description": "Typecheck and monitor UI contracts pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "workspace-monitor check exited 0"
+      ]
+    },
+    {
+      "check_id": "node-tests",
+      "description": "Readiness/tool tests and platform tests pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "75 targeted tests passed",
+        "32 package tests passed"
+      ]
+    },
+    {
+      "check_id": "browser-smoke",
+      "description": "History report panel renders and has no visible overflow or console errors.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "desktop: panel visible, lanes 4, criteria 4, scrollWidth 1280, bodyWidth 1280",
+        "narrow 390px: panel visible, panel overflow 0, document scrollWidth 390",
+        "console errors 0"
+      ]
+    },
+    {
+      "check_id": "renderer-build",
+      "description": "Customer renderer build and bundle audit pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "renderer:build exited 0",
+        "customer_bundle_ready"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "The report readiness score is category-presence based rather than a separate semantic scoring model.",
+    "The dated archive remains available but has not been fully redesigned beyond being placed below the report surface."
+  ],
+  "notes": [
+    "This omission check focuses on the history report redesign slice."
+  ]
+}

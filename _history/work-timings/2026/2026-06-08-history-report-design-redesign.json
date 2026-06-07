@@ -1,0 +1,42 @@
+{
+  "task": "history report design redesign",
+  "date": "2026-06-08",
+  "timezone": "Asia/Seoul",
+  "mode": "standard",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "approx_minutes": 3,
+      "notes": "Checked official GitHub Desktop, VS Code UX, Apple HIG, and Fluent references."
+    },
+    {
+      "phase": "local_inventory_and_design_standard",
+      "status": "completed",
+      "approx_minutes": 8,
+      "notes": "Inspected existing history tab, summary widgets, admin history hook, snapshot types, CSS, and readiness tests."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "approx_minutes": 24,
+      "notes": "Added registry, HistoryReportDesignPanel, MonitorShell integration, CSS, source map, tests, and documentation records."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "approx_minutes": 16,
+      "notes": "Ran config contract, typecheck, readiness/tool tests, full package tests, Browser smoke, and renderer build."
+    },
+    {
+      "phase": "closeout",
+      "status": "completed",
+      "approx_minutes": 8,
+      "notes": "Recorded omission/resource/evaluation artifacts and prepared Git commits."
+    }
+  ],
+  "bottleneck_notes": [
+    "The Browser tab session had stale handles, requiring reconnection to the current tab.",
+    "Existing tool-studio tests needed source aggregation updates after prior module splits."
+  ]
+}

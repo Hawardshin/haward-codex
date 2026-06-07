@@ -1,0 +1,92 @@
+{
+  "task": "history report design redesign",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Next.js renderer check/build",
+    "Node.js tests and snapshot collector",
+    "Browser smoke with temporary dev server"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "validation-processes",
+      "category": "process",
+      "description": "Validation commands spawn Node/Next.js processes.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Ran commands synchronously and waited for exit codes.",
+      "evidence": [
+        "workspace-monitor check exited 0",
+        "targeted node tests exited 0",
+        "platform package tests exited 0",
+        "renderer build exited 0"
+      ]
+    },
+    {
+      "risk_id": "browser-dev-server",
+      "category": "browser_context",
+      "description": "Browser smoke starts a local Next dev server and opens an in-app browser tab.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Closed Browser tab and stopped the dev server with Ctrl-C after smoke.",
+      "evidence": [
+        "Browser tab closed",
+        "Next dev server session 97888 exited after Ctrl-C"
+      ]
+    },
+    {
+      "risk_id": "snapshot-output",
+      "category": "cache",
+      "description": "Developer smoke regenerates public snapshot files.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Ran customer renderer build after smoke to restore customer snapshot mode and audit the bundle.",
+      "evidence": [
+        "node renderer/workspace-monitor/scripts/collect-workspace.mjs --best-effort",
+        "corepack pnpm run renderer:build",
+        "customer_bundle_ready"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "dev-server-cleanup",
+      "resource": "Next dev server",
+      "create_path": "corepack pnpm run dev --hostname 127.0.0.1 --port 3054",
+      "cleanup_path": "Ctrl-C to session 97888",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "session exited with code 0 after Ctrl-C"
+      ]
+    },
+    {
+      "check_id": "browser-tab-cleanup",
+      "resource": "In-app browser tab",
+      "create_path": "Browser tab id 15 opened local renderer",
+      "cleanup_path": "tab.close()",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "close returned closed"
+      ]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "history-panel-layout",
+      "metric": "desktop and narrow viewport rendering",
+      "tool": "Browser Playwright DOM checks",
+      "threshold": "panel visible, lane count 4, criteria count 4, console error 0, narrow overflow 0",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "desktop panel visible",
+        "narrow panel overflow 0",
+        "console error count 0"
+      ]
+    }
+  ],
+  "notes": [
+    "No long-running process, browser tab, or external install was intentionally left active."
+  ]
+}
