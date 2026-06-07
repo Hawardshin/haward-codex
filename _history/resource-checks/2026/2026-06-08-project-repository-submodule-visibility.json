@@ -1,0 +1,78 @@
+{
+  "task": "project repository submodule visibility",
+  "work_mode": "standard",
+  "runtime_context": [
+    "Node.js renderer tests and collector",
+    "Python awp doctor CLI",
+    "Git submodule status subprocess",
+    "Temporary Next.js dev server for Browser smoke"
+  ],
+  "resource_risks": [
+    {
+      "risk_id": "git-submodule-status-process",
+      "category": "process",
+      "description": "awp doctor spawns a bounded git submodule status process.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Use subprocess timeout, no stdin, bounded output, and no mutation command.",
+      "evidence": ["SUBMODULE_TIMEOUT_SECONDS", "git submodule status --recursive"]
+    },
+    {
+      "risk_id": "generated-snapshot-output",
+      "category": "cache",
+      "description": "Collector regenerates snapshot JSON files.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Regenerate deterministically and validate with renderer check/test.",
+      "evidence": ["corepack pnpm --dir renderer/workspace-monitor run collect --best-effort"]
+    },
+    {
+      "risk_id": "browser-smoke-dev-server",
+      "category": "process",
+      "description": "Browser smoke starts a temporary Next.js dev server and temporarily serves a developer snapshot for UI verification.",
+      "required": true,
+      "status": "mitigated",
+      "mitigation": "Use a fixed local port, close the browser tab, stop the server with SIGINT, and restore the customer public snapshot through renderer build before commit.",
+      "evidence": [
+        "corepack pnpm --dir renderer/workspace-monitor exec next dev --port 3051 --hostname 127.0.0.1",
+        "Browser smoke confirmed #section-projects repository strips",
+        "server stopped before close-out"
+      ]
+    }
+  ],
+  "lifecycle_checks": [
+    {
+      "check_id": "subprocess-lifecycle",
+      "resource": "git and node/python subprocesses",
+      "create_path": "validation commands and awp doctor",
+      "cleanup_path": "process exits before close-out",
+      "required": true,
+      "status": "passed",
+      "evidence": ["Commands completed before final response."]
+    },
+    {
+      "check_id": "browser-server-lifecycle",
+      "resource": "Next.js dev server and in-app Browser tab",
+      "create_path": "Browser smoke validation",
+      "cleanup_path": "Browser tab closed and dev server interrupted",
+      "required": true,
+      "status": "passed",
+      "evidence": ["tab.close() completed", "dev server session exited after SIGINT"]
+    }
+  ],
+  "measurement_checks": [
+    {
+      "check_id": "command-exit-status",
+      "metric": "validation command exit status",
+      "tool": "shell exit code",
+      "threshold": "required commands exit 0",
+      "required": true,
+      "status": "passed",
+      "evidence": ["Recorded validation commands passed or will be rerun before commit."]
+    }
+  ],
+  "notes": [
+    "No server, watcher, browser tab, or credential process is left running.",
+    "The temporary developer public snapshot used for browser smoke is restored by the final customer renderer build."
+  ]
+}

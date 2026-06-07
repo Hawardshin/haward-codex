@@ -1,0 +1,86 @@
+{
+  "schema_version": "2026-06-08",
+  "work_mode": "standard",
+  "web_search_record_targets": [
+    "_history/web-searches/2026/2026-06-08-project-repository-submodule-visibility.ko.md"
+  ],
+  "user_request_summary_targets": [
+    "_history/user-requests/2026/2026-06-08-project-repository-submodule-visibility.ko.md"
+  ],
+  "requirements_targets": [
+    "_requirements/changes/2026-06-08-project-repository-submodule-visibility.ko.md",
+    "platform-desktop-app/docs/requirements/2026-06-08-project-repository-submodule-visibility.ko.md"
+  ],
+  "spec_targets": [
+    "platform-desktop-app/specs/2026-06-08-project-repository-submodule-visibility/"
+  ],
+  "source_provenance_targets": [
+    "_history/source-provenance/2026/2026-06-08-project-repository-submodule-visibility.ko.md"
+  ],
+  "plan_evidence_targets": [
+    "_history/plans/2026/2026-06-08-project-repository-submodule-visibility.ko.md"
+  ],
+  "mode_selection_record_targets": [
+    "_history/mode-selections/2026/2026-06-08-project-repository-submodule-visibility.ko.md"
+  ],
+  "omission_check_targets": [
+    "_history/omission-checks/2026/2026-06-08-project-repository-submodule-visibility.json"
+  ],
+  "resource_risk_occurred": true,
+  "resource_check_targets": [
+    "_history/resource-checks/2026/2026-06-08-project-repository-submodule-visibility.json"
+  ],
+  "timing_summary_targets": [
+    "_history/work-timings/2026/2026-06-08-project-repository-submodule-visibility.json"
+  ],
+  "request_trace_targets": [
+    "_history/request-traces/2026/2026-06-08-project-repository-submodule-visibility.ko.md"
+  ],
+  "work_summary_targets": [
+    "_history/work-summaries/2026/2026-06-08-project-repository-submodule-visibility.ko.md"
+  ],
+  "installation_occurred": false,
+  "initial_instruction": "계속 구현: Git으로 분리된 project들을 사용자가 쉽게 확인하고 작업을 이어갈 수 있게 구현.",
+  "result_summary": "Added repository/submodule metadata to project management snapshot/UI and added awp doctor submodule readiness reporting.",
+  "changed_files": [
+    "platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/project-management/ProjectPortfolioList.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/project-management/ProjectDetailPanel.tsx",
+    "platform-desktop-app/renderer/workspace-monitor/components/features/project-management/projectManagementCopy.ts",
+    "platform-desktop-app/renderer/workspace-monitor/app/globals.css",
+    "platform-desktop-app/tools/awp/awp.py",
+    "platform-desktop-app/tests/awp-cli.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/collector.test.mjs",
+    "platform-desktop-app/renderer/workspace-monitor/tests/tool-studio.test.mjs"
+  ],
+  "verification": [
+    "passed: corepack pnpm --dir renderer/workspace-monitor run check",
+    "passed: corepack pnpm --dir renderer/workspace-monitor test -- --test-name-pattern buildSnapshot/Default user view",
+    "passed: corepack pnpm --dir renderer/workspace-monitor test",
+    "passed: corepack pnpm test -- --test-name-pattern awp CLI exposes",
+    "passed: corepack pnpm run test",
+    "passed: corepack pnpm run renderer:build",
+    "passed: corepack pnpm run check",
+    "passed: python3 platform-desktop-app/tools/awp/awp.py doctor --json",
+    "passed: generated snapshot inspection showed six git_submodule projects",
+    "passed: Browser smoke confirmed user import/create actions and six developer repository strips",
+    "passed: git diff --check"
+  ],
+  "references_checked": [
+    "Git submodule docs: https://git-scm.com/docs/git-submodule",
+    "GitHub CLI repo clone manual: https://cli.github.com/manual/gh_repo_clone",
+    "Tauri dialog plugin docs: https://v2.tauri.app/plugin/dialog/"
+  ],
+  "grounding_checks": [
+    "Implementation reads local registry and git submodule output.",
+    "No credential or private token content is read or stored.",
+    "Generated snapshot was inspected for six git_submodule projects.",
+    "Browser smoke used a temporary developer public snapshot and final customer snapshot restore is required before commit."
+  ],
+  "known_gaps": [],
+  "improvement_ideas": [
+    "Add a guided credential diagnostic for private GitHub submodules.",
+    "Add an explicit desktop button that runs a dry-run submodule access check.",
+    "Add a new workspace creation wizard for project-local repository creation."
+  ]
+}

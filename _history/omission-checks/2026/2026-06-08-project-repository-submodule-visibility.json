@@ -1,0 +1,93 @@
+{
+  "task": "project repository submodule visibility",
+  "work_mode": "standard",
+  "expected_items": [
+    {
+      "item_id": "repository-metadata-snapshot",
+      "description": "Snapshot must expose project repository URL, model, submodule path, and branch.",
+      "source": "user request continuation",
+      "required": true,
+      "status": "covered",
+      "evidence": ["platform-desktop-app/renderer/workspace-monitor/scripts/collect-workspace.mjs", "platform-desktop-app/renderer/workspace-monitor/lib/snapshot.ts"]
+    },
+    {
+      "item_id": "repository-ui",
+      "description": "Project management UI must show repository/submodule status without breaking layout.",
+      "source": "user request continuation",
+      "required": true,
+      "status": "covered",
+      "evidence": ["platform-desktop-app/renderer/workspace-monitor/components/features/project-management/ProjectPortfolioList.tsx", "platform-desktop-app/renderer/workspace-monitor/components/features/project-management/ProjectDetailPanel.tsx"]
+    },
+    {
+      "item_id": "submodule-doctor",
+      "description": "Terminal companion CLI must report project repositories and submodule readiness.",
+      "source": "previous Git separation follow-up",
+      "required": true,
+      "status": "covered",
+      "evidence": ["platform-desktop-app/tools/awp/awp.py", "platform-desktop-app/tests/awp-cli.test.mjs"]
+    },
+    {
+      "item_id": "no-secret-storage",
+      "description": "Do not store tokens or auto-manage private GitHub credentials in this slice.",
+      "source": "security boundary",
+      "required": true,
+      "status": "covered",
+      "evidence": ["Implementation only reads registry and git submodule status."]
+    }
+  ],
+  "artifact_checks": [
+    {
+      "path": "platform-desktop-app/docs/requirements/2026-06-08-project-repository-submodule-visibility.ko.md",
+      "purpose": "Project-local requirements",
+      "required": true
+    },
+    {
+      "path": "platform-desktop-app/specs/2026-06-08-project-repository-submodule-visibility/spec.ko.md",
+      "purpose": "Project-local spec",
+      "required": true
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "renderer-check",
+      "description": "Renderer type and contract checks pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["corepack pnpm --dir renderer/workspace-monitor run check"]
+    },
+    {
+      "check_id": "awp-doctor",
+      "description": "AWP doctor reports submodule readiness.",
+      "required": true,
+      "status": "passed",
+      "evidence": ["python3 platform-desktop-app/tools/awp/awp.py doctor --json"]
+    },
+    {
+      "check_id": "browser-smoke",
+      "description": "Browser smoke confirms user import/create actions and developer snapshot repository strips.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "customer snapshot displayed Git workspace import/create actions",
+        "developer snapshot displayed six data-project-repository-status=git_submodule strips"
+      ]
+    },
+    {
+      "check_id": "full-platform-validation",
+      "description": "Project-level test, build, check, and diff validation pass.",
+      "required": true,
+      "status": "passed",
+      "evidence": [
+        "corepack pnpm --dir renderer/workspace-monitor test",
+        "corepack pnpm run test",
+        "corepack pnpm run renderer:build",
+        "corepack pnpm run check",
+        "git diff --check"
+      ]
+    }
+  ],
+  "known_omission_risks": [
+    "Automatic credential setup remains out of scope.",
+    "Automatic submodule update execution remains out of scope."
+  ]
+}

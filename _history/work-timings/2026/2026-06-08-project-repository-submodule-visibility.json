@@ -1,0 +1,34 @@
+{
+  "task": "project repository submodule visibility",
+  "date": "2026-06-08",
+  "timing_method": "phase-level retrospective",
+  "phases": [
+    {
+      "phase": "web_first_intake",
+      "status": "completed",
+      "notes": "Checked Git submodule, GitHub clone, and Tauri dialog references."
+    },
+    {
+      "phase": "source_inventory",
+      "status": "completed",
+      "notes": "Inspected collector, ProjectManagement UI, awp CLI, and tests."
+    },
+    {
+      "phase": "implementation",
+      "status": "completed",
+      "notes": "Added repository metadata, UI strips, awp submodule doctor."
+    },
+    {
+      "phase": "validation",
+      "status": "completed",
+      "notes": "Renderer tests, platform tests, renderer build, platform check, git diff check, awp doctor, and Browser smoke passed. Final customer snapshot restore runs again before commit."
+    }
+  ],
+  "bottlenecks": [
+    "Generated snapshot output is large and must be checked carefully.",
+    "awp doctor parsing needed to tolerate stripped first-line submodule status."
+  ],
+  "automation_candidates": [
+    "Add a reusable submodule health contract test fixture."
+  ]
+}
